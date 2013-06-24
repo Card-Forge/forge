@@ -11,40 +11,27 @@ import forge.GameEntity;
  * TODO: Write javadoc for this type.
  *
  */
-public class AttackingBand implements Comparable<AttackingBand> {
-    
+public class AttackingBand {
     private List<Card> attackers = new ArrayList<Card>();
-    private List<Card> blockers = new ArrayList<Card>();
-    private GameEntity defender = null;
-    private Boolean blocked = null;
+//    private GameEntity defender = null;
+    private boolean blocked = false; // even if all blockers were killed before FS or CD, band remains blocked
     
     public AttackingBand(List<Card> band, GameEntity def) {
         attackers.addAll(band);
-        this.defender = def;
+//        this.defender = def;
     }
     
     public AttackingBand(Card card, GameEntity def) {
         attackers.add(card);
-        this.defender = def;
+//        this.defender = def;
     }
     
     public List<Card> getAttackers() { return this.attackers; }
-    public List<Card> getBlockers() { return this.blockers; }
-    public GameEntity getDefender() { return this.defender; }
+//    public GameEntity getDefender() { return this.defender; }
     
     public void addAttacker(Card card) { attackers.add(card); }
     public void removeAttacker(Card card) { attackers.remove(card); }
     
-    public void addBlocker(Card card) { blockers.add(card); }
-    public void removeBlocker(Card card) { blockers.remove(card); }
-    public void setBlockers(List<Card> blockers) { this.blockers = blockers; }
-    
-    public void setDefender(GameEntity def) { this.defender = def; }
-
-    public void setBlocked(boolean blocked) { this.blocked = blocked; }
-    public boolean getBlocked() { return this.blocked != null && this.blocked.booleanValue();  }
-    
-    public void calculateBlockedState() { this.blocked = !this.blockers.isEmpty(); }
 
     public static boolean isValidBand(List<Card> band, boolean shareDamage) {
         if (band.isEmpty()) {
@@ -92,26 +79,29 @@ public class AttackingBand implements Comparable<AttackingBand> {
         return isValidBand(newBand, false);
     }
     
+
+    public boolean contains(Card c) {
+        return attackers.contains(c);
+    }
+
+    public boolean isBlocked() { return blocked; }
+    public void setBlocked(boolean value) { blocked = value; }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public boolean isEmpty() {
+        // TODO Auto-generated method stub
+        return attackers.isEmpty();
+    }
+    
     /* (non-Javadoc)
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     * @see java.lang.Object#toString()
      */
     @Override
-    public int compareTo(AttackingBand o) {
-        if (o == null) {
-            return -1;
-        }
-        
-        List<Card> compareAttackers = o.getAttackers();
-        
-        int sizeDiff = this.attackers.size() - compareAttackers.size();
-        if (sizeDiff > 0) {
-            return 1;
-        } else if (sizeDiff < 0) {
-            return -1;
-        } else if (sizeDiff == 0 && this.attackers.isEmpty()) {
-            return 0;
-        }
-        
-        return this.attackers.get(0).compareTo(compareAttackers.get(0));
+    public String toString() {
+        return String.format("%s %s", attackers.toString(), blocked ? ">||" : ">>>" );
     }
+    
 }

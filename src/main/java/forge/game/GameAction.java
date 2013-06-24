@@ -222,7 +222,7 @@ public class GameAction {
         }
 
         if (zoneFrom != null) {
-            if (zoneFrom.is(ZoneType.Battlefield) && c.isCreature()) {
+            if (zoneFrom.is(ZoneType.Battlefield) && c.isCreature() && game.getCombat() != null) {
                 game.getCombat().removeFromCombat(c);
             }
             zoneFrom.remove(c);
@@ -1348,7 +1348,8 @@ public class GameAction {
         final boolean persist = (c.hasKeyword("Persist") && (c.getCounters(CounterType.M1M1) == 0)) && !c.isToken();
         final boolean undying = (c.hasKeyword("Undying") && (c.getCounters(CounterType.P1P1) == 0)) && !c.isToken();
 
-        game.getCombat().removeFromCombat(c);
+        if (game.getPhaseHandler().inCombat())
+            game.getPhaseHandler().getCombat().removeFromCombat(c);
 
         final Card newCard = this.moveToGraveyard(c);
 

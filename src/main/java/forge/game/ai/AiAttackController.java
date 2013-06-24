@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
@@ -29,7 +30,6 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.game.Game;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -58,11 +58,10 @@ public class AiAttackController {
     private List<Card> myList; // holds computer creatures
     
     private final Player ai;
-    private final Player opponent;
     
     private int aiAggression = 0; // added by Masher, how aggressive the ai is
                                   // attack will be depending on circumstances
-    
+
 
     /**
      * <p>
@@ -74,11 +73,12 @@ public class AiAttackController {
      * @param possibleBlockers
      *            a {@link forge.CardList} object.
      */
-    public AiAttackController(final Player ai, final Player opponent) {
+    public AiAttackController(final Player ai) {
         this.ai = ai;
-        this.opponent = opponent;
+        Player opponent = ai.getOpponent();
         
-        this.oppList = opponent.getCreaturesInPlay();
+        this.oppList = Lists.newArrayList();
+        this.oppList.addAll(opponent.getCreaturesInPlay());
         this.myList = ai.getCreaturesInPlay();
         
 
@@ -342,7 +342,7 @@ public class AiAttackController {
             if (!CombatUtil.canAttackNextTurn(attacker)) {
                 continue;
             }
-            if (blockersLeft > 0 && CombatUtil.canBeBlocked(attacker)) {
+            if (blockersLeft > 0 && CombatUtil.canBeBlocked(attacker, ai)) {
                 blockersLeft--;
                 continue;
             }
@@ -442,7 +442,7 @@ public class AiAttackController {
      * @param bAssault
      *            a boolean.
      */
-    public final GameEntity chooseDefender(final Combat c, final Combat gameCombat, final boolean bAssault) {
+    private final GameEntity chooseDefender(final Combat c, final boolean bAssault) {
         final List<GameEntity> defs = c.getDefenders();
         if (defs.size() == 1) {
             return defs.get(0);
@@ -450,8 +450,7 @@ public class AiAttackController {
 
         final GameEntity entity = ai.getMustAttackEntity();
         if (null != entity) {
-            final List<GameEntity> defenders = gameCombat.getDefenders();
-            int n = defenders.indexOf(entity);
+            int n = defs.indexOf(entity);
             if (-1 == n) {
                 System.out.println("getMustAttackEntity() returned something not in defenders.");
                 return defs.get(0);
@@ -483,29 +482,22 @@ public class AiAttackController {
      * 
      * @return a {@link forge.game.phase.Combat} object.
      */
-    public final Combat getAttackers() {
+    public final void declareAttackers(final Combat combat) {
         // if this method is called multiple times during a turn,
         // it will always return the same value
         // randomInt is used so that the computer doesn't always
         // do the same thing on turn 3 if he had the same creatures in play
         // I know this is a little confusing
-        Game game = ai.getGame();
-
-        random.setSeed(game.getPhaseHandler().getTurn() + AiAttackController.randomInt);
-
-        final Combat combat = new Combat();
-        combat.setAttackingPlayer(game.getCombat().getAttackingPlayer());
-
-        game.getCombat().initiatePossibleDefenders(opponent);
-        combat.setDefenders(game.getCombat().getDefenders());
+        
+        random.setSeed(ai.getGame().getPhaseHandler().getTurn() + AiAttackController.randomInt);
 
         if (this.attackers.isEmpty()) {
-            return combat;
+            return;
         }
 
         final boolean bAssault = this.doAssault(ai);
         // Determine who will be attacked
-        GameEntity defender = this.chooseDefender(combat, game.getCombat(), bAssault);
+        GameEntity defender = this.chooseDefender(combat, bAssault);
         List<Card> attackersLeft = new ArrayList<Card>(this.attackers);
         // Attackers that don't really have a choice
         for (final Card attacker : this.attackers) {
@@ -529,7 +521,7 @@ public class AiAttackController {
             }
         }
         if (attackersLeft.isEmpty()) {
-            return combat;
+            return;
         }
         if (bAssault) {
             if ( LOG_AI_ATTACKS )
@@ -540,7 +532,7 @@ public class AiAttackController {
                     combat.addAttacker(attacker, defender);
                 }
             }
-            return combat;
+            return;
         }
 
         // Exalted
@@ -552,8 +544,7 @@ public class AiAttackController {
                     exalted = true;
                     break;
                 }
-                if (c.getName().equals("Finest Hour")
-                        && game.getPhaseHandler().isFirstCombat()) {
+                if (c.getName().equals("Finest Hour") && ai.getGame().getPhaseHandler().isFirstCombat()) {
                     exalted = true;
                     break;
                 }
@@ -573,7 +564,7 @@ public class AiAttackController {
                 for (Card attacker : this.attackers) {
                     if (CombatUtil.canAttack(attacker, defender, combat) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
                         combat.addAttacker(attacker, defender);
-                        return combat;
+                        return;
                     }
                 }
             }
@@ -821,8 +812,6 @@ public class AiAttackController {
                 }
             }
         }
-
-        return combat;
     } // getAttackers()
 
     /**

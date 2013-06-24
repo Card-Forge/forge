@@ -34,6 +34,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -61,6 +62,7 @@ public class RegenerateAi extends SpellAbilityAi {
         final Card hostCard = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
         final Game game = ai.getGame();
+        final Combat combat = game.getCombat();
 
         boolean chance = false;
         if (abCost != null) {
@@ -98,7 +100,7 @@ public class RegenerateAi extends SpellAbilityAi {
 
                     for (final Card c : list) {
                         if (c.getShield() == 0) {
-                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(ai, c);
+                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat);
                         }
                     }
 
@@ -142,7 +144,7 @@ public class RegenerateAi extends SpellAbilityAi {
                     CardLists.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
+                        if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
                             sa.getTargets().add(c);
                             chance = true;
                             break;
@@ -196,8 +198,9 @@ public class RegenerateAi extends SpellAbilityAi {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardLists.sortByEvaluateCreature(combatants);
             if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                Combat combat = game.getCombat();
                 for (final Card c : combatants) {
-                    if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
+                    if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
                         sa.getTargets().add(c);
                         return true;
                     }

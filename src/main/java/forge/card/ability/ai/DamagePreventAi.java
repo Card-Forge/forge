@@ -17,6 +17,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -28,6 +29,7 @@ public class DamagePreventAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
         final Game game = ai.getGame();
+        final Combat combat = game.getCombat();
         boolean chance = false;
 
         final Cost cost = sa.getPayCosts();
@@ -69,14 +71,13 @@ public class DamagePreventAi extends SpellAbilityAi {
                     boolean flag = false;
                     for (final Object o : objects) {
                         if (o instanceof Card) {
-                            final Card c = (Card) o;
-                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(ai, c);
+                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(ai, (Card) o, combat);
                         } else if (o instanceof Player) {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
                             if (!handler.isPlayerTurn(p)) {
-                                flag |= (p == ai && ((ComputerUtilCombat.wouldLoseLife(ai, game.getCombat()) && sa
-                                        .isAbility()) || ComputerUtilCombat.lifeInDanger(ai, game.getCombat())));
+                                flag |= (p == ai && ((ComputerUtilCombat.wouldLoseLife(ai, combat) && sa
+                                        .isAbility()) || ComputerUtilCombat.lifeInDanger(ai, combat)));
                             }
                         }
                     }
@@ -120,8 +121,8 @@ public class DamagePreventAi extends SpellAbilityAi {
 
         } // Protect combatants
         else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, game.getCombat())
-                    && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || sa.isAbility())
+            if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, combat)
+                    && (ComputerUtilCombat.lifeInDanger(ai, combat) || sa.isAbility())
                     && game.getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
                 sa.getTargets().add(ai);
                 chance = true;
@@ -138,7 +139,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                 CardLists.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
-                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
                         sa.getTargets().add(c);
                         chance = true;
                         break;
@@ -177,8 +178,7 @@ public class DamagePreventAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean preventDamageMandatoryTarget(final Player ai, final SpellAbility sa,
-            final boolean mandatory) {
+    private boolean preventDamageMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
         // filter AIs battlefield by what I can target
@@ -199,8 +199,9 @@ public class DamagePreventAi extends SpellAbilityAi {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardLists.sortByEvaluateCreature(combatants);
             if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                Combat combat = game.getCombat();
                 for (final Card c : combatants) {
-                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
                         sa.getTargets().add(c);
                         return true;
                     }

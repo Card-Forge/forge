@@ -28,6 +28,7 @@ import forge.card.spellability.SpellAbility;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.phase.Combat;
 import forge.game.player.Player;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
@@ -614,9 +615,10 @@ public class ComputerUtilCard {
      * @return a boolean.
      */
     public static boolean doesCreatureAttackAI(final Player ai, final Card card) {
-        final List<Card> att = new AiAttackController(ai, ai.getOpponent()).getAttackers().getAttackers();
-    
-        return att.contains(card);
+        AiAttackController aiAtk = new AiAttackController(ai);
+        Combat combat = new Combat(ai);
+        aiAtk.declareAttackers(combat);
+        return combat.isAttacking(card);
     }
 
     /**

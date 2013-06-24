@@ -28,7 +28,7 @@ public class EnumMapOfLists<K extends Enum<K>, V> extends EnumMap<K, Collection<
         this.factory = factory;
     }
 
-    private Collection<V> ensureCollectionFor(K key) {
+    public Collection<V> ensureCollectionFor(K key) {
         Collection<V> value = get(key);
         if ( value == null ) {
             value = factory.get();

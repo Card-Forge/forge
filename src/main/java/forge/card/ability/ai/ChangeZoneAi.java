@@ -32,7 +32,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
-import forge.game.ai.ComputerUtilBlock;
+import forge.game.ai.AiBlockController;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
@@ -500,13 +500,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     private static Card chooseCreature(final Player ai, List<Card> list) {
         // Creating a new combat for testing purposes. 
-        Combat combat = new Combat();
-        combat.initiatePossibleDefenders(ai);
-        List<Card> attackers = ai.getOpponent().getCreaturesInPlay();
-        for (Card att : attackers) {
+        Combat combat = new Combat(ai.getOpponent());
+        for (Card att : ai.getOpponent().getCreaturesInPlay()) {
             combat.addAttacker(att, ai);
         }
-        combat = ComputerUtilBlock.getBlockers(ai, combat, ai.getCreaturesInPlay());
+        AiBlockController block = new AiBlockController(ai);
+        block.assignBlockers(combat);
 
         if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
             // need something AI can cast now
@@ -523,10 +522,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
     }
 
     // *************************************************************************************
-    // **************** Known Origin (Battlefield/Graveyard/Exile)
-    // *************************
-    // ******* Known origin cards are chosen during casting of the spell
-    // (target) **********
+    // **************** Known Origin (Battlefield/Graveyard/Exile) *************************
+    // ******* Known origin cards are chosen during casting of the spell (target) **********
     // *************************************************************************************
 
     /**
@@ -690,6 +687,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final Game game = ai.getGame();
 
         final AbilitySub abSub = sa.getSubAbility();
         ApiType subApi = null;
@@ -702,7 +700,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         sa.resetTargets();
-        List<Card> list = CardLists.getValidCards(ai.getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
+        List<Card> list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), ai, source);
         list = CardLists.getTargetableCards(list, sa);
         if (sa.hasParam("AITgts")) {
             list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
@@ -730,7 +728,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                 // check stack for something on the stack that will kill
                 // anything i control
-                if (!ai.getGame().getStack().isEmpty()) {
+                if (!game.getStack().isEmpty()) {
                     final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
 
                     final List<Card> threatenedTargets = new ArrayList<Card>();
@@ -748,12 +746,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
                 // Save combatants
-                else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                    Combat combat = game.getCombat();
                     final List<Card> combatants = CardLists.filter(aiPermanents, CardPredicates.Presets.CREATURES);
                     CardLists.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c) && c.getOwner() == ai && !c.isToken()) {
+                        if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && c.getOwner() == ai && !c.isToken()) {
                             sa.getTargets().add(c);
                             return true;
                         }

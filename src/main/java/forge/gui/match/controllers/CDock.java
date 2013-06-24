@@ -35,6 +35,7 @@ import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.deck.Deck;
 import forge.game.Game;
+import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -184,17 +185,19 @@ public enum CDock implements ICDoc {
     public void alphaStrike() {
         final PhaseHandler ph = game.getPhaseHandler();
 
-        Player p = findAffectedPlayer();
-        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, p)) { // ph.is(...) includes null check
+        final Player p = findAffectedPlayer();
+        final Game game = p.getGame();
+        Combat combat = game.getCombat();
+        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, p) && combat!= null) { // ph.is(...) includes null check
             List<Player> defenders = p.getOpponents();
             
             for (Card c : CardLists.filter(p.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
-                if (c.isAttacking())
+                if (combat.isAttacking(c))
                     continue;
                 
                 for(Player defender : defenders)
-                    if( CombatUtil.canAttack(c, defender, game.getCombat())) {
-                        game.getCombat().addAttacker(c, defender);
+                    if( CombatUtil.canAttack(c, defender, combat)) {
+                        combat.addAttacker(c, defender);
                         break;
                     }
             }

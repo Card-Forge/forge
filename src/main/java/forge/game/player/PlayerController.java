@@ -20,6 +20,7 @@ import forge.card.spellability.TargetChoices;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameType;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 
@@ -143,8 +144,8 @@ public abstract class PlayerController {
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
     public abstract List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer);
 
-    public abstract void declareAttackers(Player attacker);
-    public abstract void declareBlockers(Player defender);
+    public abstract void declareAttackers(Player attacker, Combat combat);
+    public abstract void declareBlockers(Player defender, Combat combat);
     public abstract void takePriority();
     
     public abstract List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard);

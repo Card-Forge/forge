@@ -17,16 +17,15 @@
  */
 package forge.gui.input;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import forge.Card;
+import forge.Singletons;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 import forge.gui.match.CMatchUI;
+import forge.sound.SoundEffectType;
 import forge.view.ButtonUtil;
 
 /**
@@ -42,7 +41,7 @@ public class InputBlock extends InputSyncronizedBase {
     private static final long serialVersionUID = 6120743598368928128L;
 
     private Card currentAttacker = null;
-    private final HashMap<Card, List<Card>> allBlocking = new HashMap<Card, List<Card>>();
+    // some cards may block several creatures at a time. (ex:  Two-Headed Dragon, Vanguard's Shield)
     private final Combat combat;
     private final Player defender;
     private final Player declarer;
@@ -55,10 +54,6 @@ public class InputBlock extends InputSyncronizedBase {
         defender = whoDefends;
         declarer = whoDeclares;
         this.combat = combat;
-    }
-
-    private  final void removeFromAllBlocking(final Card c) {
-        this.allBlocking.remove(c);
     }
 
     /** {@inheritDoc} */
@@ -90,14 +85,14 @@ public class InputBlock extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void onOk() {
-        if (CombatUtil.finishedMandatoryBlocks(combat, defender)) {
+        String blockErrors = CombatUtil.validateBlocks(combat, defender);
+        if( null == blockErrors ) {
             // Done blocking
             ButtonUtil.reset();
-            CombatUtil.orderMultipleCombatants(combat);
-            currentAttacker = null;
-            allBlocking.clear();
-
+            setCurrentAttacker(null);
             stop();
+        } else {
+            GuiDialog.message(blockErrors);
         }
     }
 
@@ -105,43 +100,48 @@ public class InputBlock extends InputSyncronizedBase {
     @Override
     public final void onCardSelected(final Card card, boolean isMetaDown) {
 
-        if (isMetaDown) {
-            if (card.getController() == defender ) {
-                combat.removeFromCombat(card);
-            }
-            removeFromAllBlocking(card);
+        if (isMetaDown && card.getController() == defender) {
+            combat.removeFromCombat(card);
             CMatchUI.SINGLETON_INSTANCE.showCombat();
             return;
         }
         
         // is attacking?
-        boolean reminder = true;
+        boolean isCorrectAction = false;
 
-        if (combat.getAttackers().contains(card)) {
-            this.currentAttacker = card;
-            reminder = false;
+        if (combat.isAttacking(card)) {
+            setCurrentAttacker(card);
+            isCorrectAction = true;
         } else {
             // Make sure this card is valid to even be a blocker
             if (this.currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
-                // Create a new blockedBy list if it doesn't exist
-                if (!this.allBlocking.containsKey(card)) {
-                    this.allBlocking.put(card, new ArrayList<Card>());
-                }
-
-                List<Card> attackersBlocked = this.allBlocking.get(card);
-                if (!attackersBlocked.contains(this.currentAttacker)
-                        && CombatUtil.canBlock(this.currentAttacker, card, combat)) {
-                    attackersBlocked.add(this.currentAttacker);
+                isCorrectAction = CombatUtil.canBlock(this.currentAttacker, card, combat);
+                if ( isCorrectAction ) {
                     combat.addBlocker(this.currentAttacker, card);
-                    reminder = false;
+                    // This call is performed from GUI and is not intended to propagate to log or net. 
+                    // No need to use event bus then 
+                    Singletons.getControl().getSoundSystem().play(SoundEffectType.Block);
                 }
             }
         }
 
-        if (reminder) {
+        if (!isCorrectAction) {
             flashIncorrectAction();
         }
 
         this.showMessage();
     } // selectCard()
+
+
+    private void setCurrentAttacker(Card card) {
+        currentAttacker = card;
+        Player attacker = null;
+        for(Card c : combat.getAttackers()) {
+            c.setUsedToPay(card == c);
+            if ( attacker == null )
+                attacker = c.getController();
+        }
+        // request redraw from here
+        attacker.getZone(ZoneType.Battlefield).updateObservers();
+    }
 }

@@ -3,7 +3,6 @@ package forge.sound;
 import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
-import forge.game.event.GameEventBlockerAssigned;
 import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDestroyed;
@@ -32,8 +31,6 @@ import forge.game.zone.ZoneType;
  */
 public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
 
-
-    public SoundEffectType visit(GameEventBlockerAssigned event) { return SoundEffectType.Block; }
     public SoundEffectType visit(GameEventCardDamaged event) { return SoundEffectType.Damage; }
     public SoundEffectType visit(GameEventCardDestroyed event) { return SoundEffectType.Destroy; }
     public SoundEffectType visit(GameEventCardEquipped event) { return SoundEffectType.Equip; }

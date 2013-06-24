@@ -527,13 +527,13 @@ public class ComputerUtilCombat {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean combatantWouldBeDestroyed(Player ai, final Card combatant) {
+    public static boolean combatantWouldBeDestroyed(Player ai, final Card combatant, Combat combat) {
 
-        if (combatant.isAttacking()) {
-            return ComputerUtilCombat.attackerWouldBeDestroyed(ai, combatant);
+        if (combat.isAttacking(combatant)) {
+            return ComputerUtilCombat.attackerWouldBeDestroyed(ai, combatant, combat);
         }
-        if (combatant.isBlocking()) {
-            return ComputerUtilCombat.blockerWouldBeDestroyed(ai, combatant);
+        if (combat.isBlocking(combatant)) {
+            return ComputerUtilCombat.blockerWouldBeDestroyed(ai, combatant, combat);
         }
         return false;
     }
@@ -549,13 +549,11 @@ public class ComputerUtilCombat {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean attackerWouldBeDestroyed(Player ai, final Card attacker) {
-        final Game game = ai.getGame();
-        final Combat combat = game.getCombat();
+    public static boolean attackerWouldBeDestroyed(Player ai, final Card attacker, Combat combat) {
         final List<Card> blockers = combat.getBlockers(attacker);
 
         for (final Card defender : blockers) {
-            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, game.getCombat(), true)
+            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, combat, true)
                     && !(defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))) {
                 return true;
             }
@@ -600,7 +598,7 @@ public class ComputerUtilCombat {
         TriggerType mode = trigger.getMode();
         if (mode == TriggerType.Attacks) {
             willTrigger = true;
-            if (attacker.isAttacking()) {
+            if (combat.isAttacking(attacker)) {
                 return false; // The trigger should have triggered already
             }
             if (trigParams.containsKey("ValidCard")) {
@@ -1510,14 +1508,13 @@ public class ComputerUtilCombat {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean blockerWouldBeDestroyed(Player ai, final Card blocker) {
-        final Game game = ai.getGame();
+    public static boolean blockerWouldBeDestroyed(Player ai, final Card blocker, Combat combat) {
         // TODO THis function only checks if a single attacker at a time would destroy a blocker
         // This needs to expand to tally up damage
-        final List<Card> attackers = game.getCombat().getAttackersBlockedBy(blocker);
+        final List<Card> attackers = combat.getAttackersBlockedBy(blocker);
 
         for (Card attacker : attackers) {
-            if (ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, game.getCombat(), true)
+            if (ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, combat, true)
                     && !(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))) {
                 return true;
             }

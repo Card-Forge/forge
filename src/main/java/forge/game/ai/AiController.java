@@ -17,7 +17,6 @@
  */
 package forge.game.ai;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -46,7 +45,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.game.GameActionUtil;
 import forge.game.Game;
-import forge.game.phase.CombatUtil;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -647,7 +646,7 @@ public class AiController {
             }
 
             String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (api is null).", mode);
-            throw new InvalidParameterException(exMsg);
+            throw new IllegalArgumentException(exMsg);
 
         } else 
             return api.getAi().confirmAction(player, sa, mode, message);
@@ -741,19 +740,20 @@ public class AiController {
         }
     }
 
-    public void declateBlockers(Player defender) {
-        final List<Card> blockers = defender.getCreaturesInPlay();
+    // declares blockers for given defender in a given combat
+    public void declareBlockersFor(Player defender, Combat combat) {
+        AiBlockController block = new AiBlockController(defender);
         // When player != defender, AI should declare blockers for its benefit.
-        game.setCombat(ComputerUtilBlock.getBlockers(defender, game.getCombat(), blockers));
-        CombatUtil.orderMultipleCombatants(game.getCombat());
+        block.assignBlockers(combat);
     }
     
 
-    public void declareAttackers(Player attacker) {
+    public Combat declareAttackers(Player attacker, Combat combat) {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
-        game.setCombat(new AiAttackController(attacker, attacker.getOpponent()).getAttackers());
+        AiAttackController aiAtk = new AiAttackController(attacker); 
+        aiAtk.declareAttackers(combat);
 
-        for (final Card element : game.getCombat().getAttackers()) {
+        for (final Card element : combat.getAttackers()) {
             // tapping of attackers happens after Propaganda is paid for
             final StringBuilder sb = new StringBuilder();
             sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");
@@ -766,6 +766,7 @@ public class AiController {
         for (Player p : game.getPlayers()) {
             p.getController().autoPassCancel();
         }
+        return combat;
     }
 
     private void playLands() {

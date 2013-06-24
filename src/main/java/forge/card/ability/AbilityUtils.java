@@ -896,7 +896,7 @@ public class AbilityUtils {
                 players.add(p);
             }
         } else if (defined.equals("DefendingPlayer")) {
-            players.addAll(game.getCombat().getDefendingPlayerRelatedTo(card));
+            players.add(game.getCombat().getDefendingPlayerRelatedTo(card));
         } else if (defined.equals("ChosenPlayer")) {
             final Player p = card.getChosenPlayer();
             if (!players.contains(p)) {

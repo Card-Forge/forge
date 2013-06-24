@@ -42,6 +42,7 @@ import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
+import forge.game.phase.Combat;
 import forge.gui.CardContainer;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.properties.ForgePreferences.FPref;
@@ -407,10 +408,12 @@ public class CardPanel extends JPanel implements CardContainer {
         final int stateXSymbols = (this.cardXOffset + (this.cardWidth / 2)) - 16;
         final int ySymbols = (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16; 
         // int yOff = (cardHeight/4) + 2;
-        if (card.isAttacking()) {
-            CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols);
-        } else if (card.isBlocking()) {
-            CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols);
+        Combat combat = card.getGame().getCombat();
+        if( combat != null ) {
+            if ( combat.isAttacking(card)) 
+                CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols);
+            if ( combat.isBlocking(card))
+                CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols);
         }
 
         if (card.isSick() && card.isInPlay()) {

@@ -30,7 +30,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
         game.getStack().clear();
 
         // 2) All attacking and blocking creatures are removed from combat.
-        game.getCombat().reset(game.getPhaseHandler().getPlayerTurn());
+        game.getPhaseHandler().endCombat();
 
         // 3) State-based actions are checked. No player gets priority, and no
         // triggered abilities are put onto the stack.

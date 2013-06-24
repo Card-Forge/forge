@@ -23,6 +23,7 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
+import forge.game.phase.Combat;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -499,7 +500,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         List<GameEntity> defenders = game.getCombat().getDefenders();
                         if (!defenders.isEmpty()) { 
                             // Blockeres are already declared, set this to unblocked
-                            game.getCombat().addAttacker(tgtC, defenders.get(0), false);
+                            game.getCombat().addAttacker(tgtC, defenders.get(0));
                         }
                     }
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
@@ -840,9 +841,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("Attacking")) {
-                        final List<GameEntity> e = c.getController().getGame().getCombat().getDefenders();
-                        final GameEntity defender = e.size() == 1 ? e.get(0) : GuiChoose.one("Declare " + c, e);
-                        game.getCombat().addAttacker(c, defender);
+                        final Combat combat = game.getCombat();
+                        if ( null != combat ) {
+                            final List<GameEntity> e = combat.getDefenders();
+                            final GameEntity defender = e.size() == 1 ? e.get(0) : GuiChoose.one("Declare " + c, e);
+                            combat.addAttacker(c, defender);
+                        }
                     }
 
                     movedCard = game.getAction().moveTo(c.getController().getZone(destination), c);

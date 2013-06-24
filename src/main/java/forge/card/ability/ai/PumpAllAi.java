@@ -15,6 +15,7 @@ import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
+import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -30,6 +31,7 @@ public class PumpAllAi extends PumpAiBase {
         String valid = "";
         final Card source = sa.getSourceCard();
         final Game game = ai.getGame();
+        final Combat combat = game.getCombat();
 
         final int power = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
         final int defense = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
@@ -86,13 +88,12 @@ public class PumpAllAi extends PumpAiBase {
                 }
                 int totalPower = 0;
                 for (Card c : human) {
-                    if (!c.isAttacking()) {
+                    if (combat == null || !combat.isAttacking(c)) {
                         continue;
                     }
                     totalPower += Math.min(c.getNetAttack(), power * -1);
-                    if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS
-                            && game.getCombat().isUnblocked(c)) {
-                        if (ComputerUtilCombat.lifeInDanger(sa.getActivatingPlayer(), game.getCombat())) {
+                    if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS && combat.isUnblocked(c)) {
+                        if (ComputerUtilCombat.lifeInDanger(sa.getActivatingPlayer(), combat)) {
                             return true;
                         }
                         totalPower += Math.min(c.getNetAttack(), power * -1);
@@ -124,7 +125,7 @@ public class PumpAllAi extends PumpAiBase {
                 if (power <= 0 && !containsUsefulKeyword(ai, keywords, c, sa, power)) {
                     return false;
                 }
-                if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS) && c.isAttacking()) {
+                if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS && combat.isAttacking(c)) {
                     return true;
                 }
                 if (phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && CombatUtil.canAttack(c, opp)) {

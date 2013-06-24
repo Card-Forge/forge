@@ -31,11 +31,10 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
 
-
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         for (final Card c : getTargetCards(sa)) {
-            if ((tgt == null) || c.canBeTargetedBy(sa)) {
-                game.getCombat().removeFromCombat(c);
+            if ((tgt == null) || c.canBeTargetedBy(sa) && game.getPhaseHandler().inCombat()) {
+                game.getPhaseHandler().getCombat().removeFromCombat(c);
             }
         }
 

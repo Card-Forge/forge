@@ -5357,6 +5357,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source) {
+        final Game game = getGame();
+        final Combat combat = game.getCombat();
         // by name can also have color names, so needs to happen before colors.
         if (property.startsWith("named")) {
             if (!this.getName().equals(property.substring(5))) {
@@ -5438,10 +5440,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("DefenderCtrl")) {
-            if (!getGame().getPhaseHandler().inCombat()) {
+            if (!game.getPhaseHandler().inCombat()) {
                 return false;
             }
-            if (!getGame().getCombat().getDefendingPlayerRelatedTo(source).contains(this.getController())) {
+            if (getGame().getCombat().getDefendingPlayerRelatedTo(source) != this.getController()) {
                 return false;
             }
         } else if (property.startsWith("EnchantedPlayerCtrl")) {
@@ -5455,7 +5457,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("RememberedPlayerCtrl")) {
             if (source.getRemembered().isEmpty()) {
-                final Card newCard = getGame().getCardState(source);
+                final Card newCard = game.getCardState(source);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Player) {
                         if (!this.getController().equals(o)) {
@@ -5501,11 +5503,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("ActivePlayerCtrl")) {
-            if (!getGame().getPhaseHandler().isPlayerTurn(this.getController())) {
+            if (!game.getPhaseHandler().isPlayerTurn(this.getController())) {
                 return false;
             }
         } else if (property.startsWith("NonActivePlayerCtrl")) {
-            if (getGame().getPhaseHandler().isPlayerTurn(this.getController())) {
+            if (game.getPhaseHandler().isPlayerTurn(this.getController())) {
                 return false;
             }
         } else if (property.startsWith("YouOwn")) {
@@ -5845,11 +5847,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                         return false;
                     }
                 } else if (restriction.equals("MostProminentColor")) {
-                    byte mask = CardFactoryUtil.getMostProminentColors(getGame().getCardsIn(ZoneType.Battlefield));
+                    byte mask = CardFactoryUtil.getMostProminentColors(game.getCardsIn(ZoneType.Battlefield));
                     if( !CardUtil.getColors(this).hasAnyColor(mask))
                         return false;
                 } else if (restriction.equals("LastCastThisTurn")) {
-                    final List<Card> c = source.getGame().getStack().getCardsCastThisTurn();
+                    final List<Card> c = game.getStack().getCardsCastThisTurn();
                     if (c.isEmpty() || !this.sharesColorWith(c.get(c.size() - 1))) {
                         return false;
                     }
@@ -5872,7 +5874,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             String color = props[1];
 
-            byte mostProm = CardFactoryUtil.getMostProminentColors(getGame().getCardsIn(ZoneType.Battlefield));
+            byte mostProm = CardFactoryUtil.getMostProminentColors(game.getCardsIn(ZoneType.Battlefield));
             return ColorSet.fromMask(mostProm).hasAnyColor(MagicColor.fromName(color));
         } else if (property.startsWith("notSharesColorWith")) {
             if (property.equals("notSharesColorWith")) {
@@ -5971,7 +5973,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 } else if (restriction.equals("EachTopLibrary")) {
                     final List<Card> list = new ArrayList<Card>();
-                    for (Player p : getGame().getPlayers()) {
+                    for (Player p : game.getPlayers()) {
                         final Card top = p.getCardsIn(ZoneType.Library).get(0);
                         list.add(top);
                     }
@@ -5998,14 +6000,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                     return false;
                 } else if (restriction.equals(ZoneType.Graveyard.toString())) {
-                    for (final Card card : getGame().getCardsIn(ZoneType.Graveyard)) {
+                    for (final Card card : game.getCardsIn(ZoneType.Graveyard)) {
                         if (this.getName().equals(card.getName())) {
                             return true;
                         }
                     }
                     return false;
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
-                    for (final Card card : getGame().getCardsIn(ZoneType.Battlefield)) {
+                    for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
                         if (this.getName().equals(card.getName())) {
                             return true;
                         }
@@ -6050,7 +6052,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                     return false;
                 } else if (restriction.equals("NonToken")) {
-                    final List<Card> list = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield),
+                    final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
                             Presets.NON_TOKEN);
                     for (final Card card : list) {
                         if (this.getName().equals(card.getName())) {
@@ -6208,11 +6210,11 @@ public class Card extends GameEntity implements Comparable<Card> {
               return false;
           }
         } else if (property.startsWith("enteredBattlefieldThisTurn")) {
-            if (!(this.getTurnInZone() == getGame().getPhaseHandler().getTurn())) {
+            if (!(this.getTurnInZone() == game.getPhaseHandler().getTurn())) {
                 return false;
             }
         } else if (property.startsWith("notEnteredBattlefieldThisTurn")) {
-            if (this.getTurnInZone() == getGame().getPhaseHandler().getTurn()) {
+            if (this.getTurnInZone() == game.getPhaseHandler().getTurn()) {
                 return false;
             }
         } else if (property.startsWith("firstTurnControlled")) {
@@ -6288,7 +6290,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("greatestPower")) {
-            final List<Card> list = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             for (final Card crd : list) {
                 if (crd.getNetAttack() > this.getNetAttack()) {
                     return false;
@@ -6302,21 +6304,21 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("leastPower")) {
-            final List<Card> list = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             for (final Card crd : list) {
                 if (crd.getNetAttack() < this.getNetAttack()) {
                     return false;
                 }
             }
         } else if (property.startsWith("leastToughness")) {
-            final List<Card> list = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             for (final Card crd : list) {
                 if (crd.getNetDefense() < this.getNetDefense()) {
                     return false;
                 }
             }
         } else if (property.startsWith("greatestCMC")) {
-            final List<Card> list = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             for (final Card crd : list) {
                 if (crd.isSplitCard()) {
                     if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > this.getCMC() || crd.getCMC(Card.SplitCMCMode.RightSplitCMC) > this.getCMC()) {
@@ -6332,7 +6334,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             List<Card> list = new ArrayList<Card>();
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Card) {
-                    list.add(getGame().getCardState((Card) o));
+                    list.add(game.getCardState((Card) o));
                 }
             }
             if (!list.contains(this)) {
@@ -6343,7 +6345,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("lowestCMC")) {
-            final List<Card> list = getGame().getCardsIn(ZoneType.Battlefield);
+            final List<Card> list = game.getCardsIn(ZoneType.Battlefield);
             for (final Card crd : list) {
                 if (!crd.isLand() && !crd.isImmutable()) {
                     if (crd.isSplitCard()) {
@@ -6395,7 +6397,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("suspended")) {
-            if (!this.hasSuspend() || !getGame().isCardExiled(this)
+            if (!this.hasSuspend() || !game.isCardExiled(this)
                     || !(this.getCounters(CounterType.getType("TIME")) >= 1)) {
                 return false;
             }
@@ -6478,60 +6480,54 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!Expressions.compare(actualnumber, comparator, number)) {
                 return false;
             }
-        } else if (property.startsWith("attacking")) {
-            if (property.equals("attacking")) {
-                if (!this.isAttacking()) {
-                    return false;
-                }
-            } else if (property.equals("attackingYou")) {
-                if (!this.isAttacking(sourceController)) {
-                    return false;
-                }
-            }
+        }
+        // These predicated refer to ongoing combat. If no combat happens, they'll return false (meaning not attacking/blocking ATM)
+        else if (property.startsWith("attacking")) {
+            if ( null == combat ) return false;
+            if (property.equals("attacking"))    return combat.isAttacking(this);
+            if (property.equals("attackingYou")) return combat.isAttacking(this, sourceController);
         } else if (property.startsWith("notattacking")) {
-            if (this.isAttacking()) {
-                return false;
-            }
+            return null == combat || !combat.isAttacking(this);
         } else if (property.equals("attackedBySourceThisCombat")) {
-            final GameEntity defender = getGame().getCombat().getDefenderByAttacker(source);
+            final GameEntity defender = game.getCombat().getDefenderByAttacker(source);
             if (defender instanceof Card) {
                 if (!this.equals((Card) defender)) {
                     return false;
                 }
             }
-        } else if (property.equals("blocking")) {
-            if (!this.isBlocking()) {
+        } else if (property.startsWith("blocking")) {
+            if ( null == combat ) return false;
+            String what = property.substring("blocking".length());
+            
+            if( StringUtils.isEmpty(what)) return combat.isBlocking(this);
+            if (what.startsWith("Source")) return combat.isBlocking(this, source) ;
+            if (what.startsWith("CreatureYouCtrl")) {
+                for (final Card c : CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), Presets.CREATURES))
+                    if (combat.isBlocking(this, c))
+                        return true;
                 return false;
             }
-        } else if (property.startsWith("blockingSource")) {
-            if (!this.isBlocking(source)) {
-                return false;
-            }
-        } else if (property.startsWith("blockingCreatureYouCtrl")) {
-            final List<Card> list = CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-            for (final Card c : list) {
-                if (this.isBlocking(c)) {
-                    return true;
-                }
-            return false;
-            }
-        } else if (property.startsWith("blockingRemembered")) {
-            for (final Object o : source.getRemembered()) {
-                if (o instanceof Card) {
-                    final Card card = (Card) o;
-                    if (this.isBlocking(card)) {
+            if (what.startsWith("Remembered")) {
+                for (final Object o : source.getRemembered()) {
+                    if (o instanceof Card && combat.isBlocking(this, (Card) o)) {
                         return true;
                     }
                 }
+                return false;
             }
-            return false;
+        } else if (property.startsWith("notblocking")) {
+            return null == combat || !combat.isBlocking(this);
+        }
+        // Nex predicates refer to past combat and don't need a reference to actual combat
+        else if (property.equals("blocked")) {
+            return null != combat && combat.isBlocked(this);
+        } else if (property.startsWith("blockedBySource")) {
+            return null != combat && combat.isBlocking(source, this);
         } else if (property.startsWith("isBlockedByRemembered")) {
+            if ( null == combat ) return false;
             for (final Object o : source.getRemembered()) {
-                if (o instanceof Card) {
-                    final Card crd = (Card) o;
-                    if (this.isBlockedBy(crd)) {
-                        return true;
-                    }
+                if (o instanceof Card && combat.isBlocking((Card) o, this)) {
+                    return true;
                 }
             }
             return false;
@@ -6555,20 +6551,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
-        } else if (property.startsWith("notblocking")) {
-            if (this.isBlocking()) {
-                return false;
-            }
-        } else if (property.equals("blocked")) {
-            if (!this.isBlocked()) {
-                return false;
-            }
-        } else if (property.startsWith("blockedBySource")) {
-            if (!this.isBlockedBy(source)) {
-                return false;
-            }
         } else if (property.startsWith("unblocked")) {
-            if (!getGame().getCombat().isUnblocked(this)) {
+            if (!game.getCombat().isUnblocked(this)) {
                 return false;
             }
         } else if (property.equals("attackersBandedWith")) {
@@ -6576,9 +6560,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 // You don't band with yourself
                 return false;
             }
-            
-            Combat combat = getGame().getCombat();
-            AttackingBand band = combat.getBandByAttacker(source);
+            AttackingBand band = combat == null ? null : combat.getBandOfAttacker(source);
             if (band == null || !band.getAttackers().contains(this)) {
                 return false;
             }
@@ -6887,82 +6869,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setUsedToPay(final boolean b) {
         this.usedToPayCost = b;
-    }
-
-    /**
-     * <p>
-     * isAttacking.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isAttacking() {
-        return getGame().getCombat().isAttacking(this);
-    }
-
-    /**
-     * <p>
-     * isAttacking.
-     * </p>
-     * @param ge    the GameEntity to check
-     * @return a boolean.
-     */
-    public final boolean isAttacking(GameEntity ge) {
-        Combat combat = getGame().getCombat();
-        GameEntity defender = combat.getDefenderByAttacker(this);
-        if (!combat.isAttacking(this) || defender == null) {
-            return false;
-        }
-        return defender.equals(ge);
-    }
-
-    /**
-     * <p>
-     * isBlocking.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isBlocking() {
-        final List<Card> blockers = getGame().getCombat().getAllBlockers();
-        return blockers.contains(this);
-    }
-
-    /**
-     * <p>
-     * isBlocked.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isBlocked() {
-        return getGame().getCombat().isBlocked(this);
-    }
-
-    /**
-     * <p>
-     * isBlocking.
-     * </p>
-     * 
-     * @param attacker
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public final boolean isBlocking(final Card attacker) {
-        return getGame().getCombat().getAttackersBlockedBy(this).contains(attacker);
-    }
-
-    /**
-     * <p>
-     * isBlockedBy.
-     * </p>
-     * 
-     * @param blocker
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public final boolean isBlockedBy(final Card blocker) {
-        return getGame().getCombat().getAttackersBlockedBy(blocker).contains(this);
     }
 
     // /////////////////////////

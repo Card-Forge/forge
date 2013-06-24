@@ -817,7 +817,12 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return containsUsefulKeyword(keywords, c, sa, pow);
+                    for (final String keyword : keywords) {
+                        if (isUsefulAttachKeyword(keyword, c, sa, pow)) {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
             });
         }
@@ -992,25 +997,6 @@ public class AttachAi extends SpellAbilityAi {
     }
 
     /**
-     * Contains useful keyword.
-     * 
-     * @param keywords
-     *            the keywords
-     * @param card
-     *            the card
-     * @param sa SpellAbility
-     * @return true, if successful
-     */
-    private static boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card, final SpellAbility sa, final int powerBonus) {
-        for (final String keyword : keywords) {
-            if (isUsefulAttachKeyword(keyword, card, sa, powerBonus)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Contains useful curse keyword.
      * 
      * @param keywords
@@ -1040,7 +1026,10 @@ public class AttachAi extends SpellAbilityAi {
      * @return true, if is useful keyword
      */
     private static boolean isUsefulAttachKeyword(final String keyword, final Card card, final SpellAbility sa, final int powerBonus) {
-        final PhaseHandler ph = sa.getActivatingPlayer().getGame().getPhaseHandler();
+        final Player ai = sa.getActivatingPlayer();
+        final Player opponent = ai.getOpponent();
+        final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
@@ -1053,7 +1042,7 @@ public class AttachAi extends SpellAbilityAi {
         if (evasive) {
             if (card.getNetCombatDamage() + powerBonus <= 0
                     || !CombatUtil.canAttackNextTurn(card)
-                    || !CombatUtil.canBeBlocked(card)) {
+                    || !CombatUtil.canBeBlocked(card, opponent)) {
                 return false;
             }
         } else if (keyword.equals("Haste")) {
@@ -1068,7 +1057,7 @@ public class AttachAi extends SpellAbilityAi {
             return true;
         } else if (keyword.endsWith("Deathtouch") || keyword.endsWith("Wither")) {
             if (card.getNetCombatDamage() + powerBonus <= 0
-                    || ((!CombatUtil.canBeBlocked(card) || !CombatUtil.canAttackNextTurn(card))
+                    || ((!CombatUtil.canBeBlocked(card, opponent) || !CombatUtil.canAttackNextTurn(card))
                             && !CombatUtil.canBlock(card, true))) {
                 return false;
             }
@@ -1084,17 +1073,17 @@ public class AttachAi extends SpellAbilityAi {
         } else if (keyword.startsWith("Flanking")) {
             if (card.getNetCombatDamage() + powerBonus <= 0
                     || !CombatUtil.canAttackNextTurn(card)
-                    || !CombatUtil.canBeBlocked(card)) {
+                    || !CombatUtil.canBeBlocked(card, opponent)) {
                 return false;
             }
         } else if (keyword.startsWith("Bushido")) {
-            if ((!CombatUtil.canBeBlocked(card) || !CombatUtil.canAttackNextTurn(card))
+            if ((!CombatUtil.canBeBlocked(card, opponent) || !CombatUtil.canAttackNextTurn(card))
                     && !CombatUtil.canBlock(card, true)) {
                 return false;
             }
         } else if (keyword.equals("Trample")) {
             if (card.getNetCombatDamage() + powerBonus <= 1
-                    || !CombatUtil.canBeBlocked(card)
+                    || !CombatUtil.canBeBlocked(card, opponent)
                     || !CombatUtil.canAttackNextTurn(card)) {
                 return false;
             }

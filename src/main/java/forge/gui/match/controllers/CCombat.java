@@ -9,7 +9,6 @@ import forge.game.Game;
 import forge.game.combat.AttackingBand;
 import forge.game.phase.Combat;
 import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VCombat;
@@ -42,20 +41,14 @@ public enum CCombat implements ICDoc {
     public void initialize() {
     }
 
-    public final boolean hasCombatToShow() {
-        PhaseHandler pH = game.getPhaseHandler();
-        PhaseType ph = pH.getPhase();
-
-        return game.getCombat().isCombat() && ph.isAfter(PhaseType.COMBAT_BEGIN) && ph.isBefore(PhaseType.END_OF_TURN);
-    }
-    
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#update()
      */
     @Override
     public void update() {
-        if (hasCombatToShow()) // display combat
-            VCombat.SINGLETON_INSTANCE.updateCombat(game.getCombat().getAttackers().size(), getCombatDescription(game.getCombat()));
+        PhaseHandler pH = game.getPhaseHandler();
+        if (pH.inCombat()) // display combat
+            VCombat.SINGLETON_INSTANCE.updateCombat(pH.getCombat().getAttackers().size(), getCombatDescription(pH.getCombat()));
         else
             VCombat.SINGLETON_INSTANCE.updateCombat(0, "");
     }
@@ -99,7 +92,7 @@ public enum CCombat implements ICDoc {
                 if (isBand) {
                     // Only print Band data if it's actually a band
                     display.append(" > BAND");
-                    if (band.getBlocked()) {
+                    if (band.isBlocked()) {
                         display.append(" (blocked)");
                     }
                     display.append("\n");
@@ -110,14 +103,14 @@ public enum CCombat implements ICDoc {
                     display.append(combatantToString(c)).append("\n");
                 }
 
-                if (!isBand && band.getBlockers().isEmpty()) {
+                List<Card> blockers = combat.getBlockers(band);
+                if (!isBand && blockers.isEmpty()) {
                     // if single creature is blocked, but no longer has blockers, tell the user!
-                    if (band.getBlocked()) {
-                        display.append("     (blocked) ");
-                    }
+                    if (band.isBlocked())
+                        display.append("     (blocked)\n");
                 }
 
-                for (final Card element : band.getBlockers()) {
+                for (final Card element : blockers) {
                     display.append("     < ").append(combatantToString(element)).append("\n");
                 }
                 previousBand = isBand;

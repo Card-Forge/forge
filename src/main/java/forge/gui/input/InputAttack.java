@@ -129,10 +129,10 @@ public class InputAttack extends InputSyncronizedBase {
             return;
         }
 
-        if (card.isAttacking(currentDefender)) {
+        if (combat.isAttacking(card, currentDefender)) {
             // Activate band by selecting/deselecting a band member
             if (this.activeBand == null) {
-                this.activateBand(combat.getBandByAttacker(card));
+                this.activateBand(combat.getBandOfAttacker(card));
             } else if (this.activeBand.getAttackers().contains(card)) {
                 this.activateBand(null);
             } else { // Join a band by selecting a non-active band member after activating a band 

@@ -71,7 +71,6 @@ public class Game {
     private final StaticEffects staticEffects = new StaticEffects();
     private final TriggerHandler triggerHandler = new TriggerHandler(this);
     private final ReplacementHandler replacementHandler = new ReplacementHandler(this);
-    private Combat combat = new Combat();
     private final EventBus events = new EventBus();
     private final GameLog gameLog = new GameLog();
     private final ColorChanger colorChanger = new ColorChanger();
@@ -228,18 +227,10 @@ public class Game {
      * @return the combat
      */
     public final Combat getCombat() {
-        return this.combat;
+        return this.getPhaseHandler().getCombat();
     }
 
-    /**
-     * Sets the combat.
-     * 
-     * @param combat0
-     *            the combat to set
-     */
-    public final void setCombat(final Combat combat0) {
-        this.combat = combat0;
-    }
+
 
     /**
      * Gets the game log.

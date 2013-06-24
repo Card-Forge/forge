@@ -339,12 +339,12 @@ public enum TargetingOverlay {
             if (overlaystate == 0) { return; }
 
             // Arc drawing
-            assembleArcs(combat);
+            if( null != combat )
+                assembleArcs(combat);
             if (arcs.isEmpty()) { return; }
 
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             Color color = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
 
             for (Point[] p : arcs) {

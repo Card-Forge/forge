@@ -13,6 +13,7 @@ import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -67,9 +68,9 @@ public class RegenerateAllAi extends SpellAbilityAi {
         } else {
             if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 final List<Card> combatants = CardLists.filter(list, CardPredicates.Presets.CREATURES);
-
+                final Combat combat = game.getCombat();
                 for (final Card c : combatants) {
-                    if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
+                    if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
                         numSaved++;
                     }
                 }

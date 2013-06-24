@@ -71,30 +71,30 @@ public final class EncodeAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(final Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
         Card choice = null;
-        final String logic = sa.getParam("AILogic");
-        if (logic == null) {
-            final List<Card> attackers = CardLists.filter(options, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return CombatUtil.canAttackNextTurn(c);
-                }
-            });
-            final List<Card> unblockables = CardLists.filter(attackers, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return !CombatUtil.canBeBlocked(c);
-                }
-            });
-            if (!unblockables.isEmpty()) {
-                choice = ComputerUtilCard.getBestAI(unblockables);
-            } else if (!attackers.isEmpty()) {
-                choice = ComputerUtilCard.getBestAI(attackers);
-            } else {
-                choice = ComputerUtilCard.getBestAI(options);
+//        final String logic = sa.getParam("AILogic");
+//        if (logic == null) {
+        final List<Card> attackers = CardLists.filter(options, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return CombatUtil.canAttackNextTurn(c);
             }
+        });
+        final List<Card> unblockables = CardLists.filter(attackers, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return !CombatUtil.canBeBlocked(c, ai.getOpponent());
+            }
+        });
+        if (!unblockables.isEmpty()) {
+            choice = ComputerUtilCard.getBestAI(unblockables);
+        } else if (!attackers.isEmpty()) {
+            choice = ComputerUtilCard.getBestAI(attackers);
+        } else {
+            choice = ComputerUtilCard.getBestAI(options);
         }
+//        }
         return choice;
     }
 }

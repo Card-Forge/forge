@@ -678,21 +678,6 @@ public class ComputerUtil {
 
     /**
      * <p>
-     * getBlockers.
-     * </p>
-     * 
-     * @return a {@link forge.game.phase.Combat} object.
-     */
-    public static Combat getBlockers(final Player ai) {
-        final List<Card> blockers = ai.getCardsIn(ZoneType.Battlefield);
-
-        return ComputerUtilBlock.getBlockers(ai, ai.getGame().getCombat(), blockers);
-    }
-
-
-
-    /**
-     * <p>
      * sacrificePermanents.
      * </p>
      * @param amount
@@ -993,17 +978,18 @@ public class ComputerUtil {
         boolean ret = true;
         if (source.getManaCost().countX() > 0) {
             // If TargetMax is MaxTgts (i.e., an "X" cost), this is fine because AI is limited by mana available.
+            return ret;
         } else {
             // Otherwise, if life is possibly in danger, then this is fine.
-            Combat combat = new Combat();
-            combat.initiatePossibleDefenders(ai);
+            Combat combat = new Combat(ai.getOpponent());
             List<Card> attackers = ai.getOpponent().getCreaturesInPlay();
             for (Card att : attackers) {
                 if (CombatUtil.canAttackNextTurn(att)) {
                     combat.addAttacker(att, att.getController().getOpponent());
                 }
             }
-            combat = ComputerUtilBlock.getBlockers(ai, combat, ai.getCreaturesInPlay());
+            AiBlockController aiBlock = new AiBlockController(ai);
+            aiBlock.assignBlockers(combat);
             if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
                 // Otherwise, return false. Do not play now.
                 ret = false;

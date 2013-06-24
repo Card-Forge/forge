@@ -33,7 +33,7 @@ public class TreeMapOfLists<K, V> extends TreeMap<K, Collection<V>> implements M
         this.factory = factory;
     }
 
-    private Collection<V> ensureCollectionFor(K key) {
+    public Collection<V> ensureCollectionFor(K key) {
         Collection<V> value = get(key);
         if ( value == null ) {
             value = factory.get();

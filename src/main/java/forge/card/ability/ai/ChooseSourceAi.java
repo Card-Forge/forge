@@ -16,6 +16,7 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -100,13 +101,14 @@ public class ChooseSourceAi extends SpellAbilityAi {
                 if (sa.hasParam("Choices")) {
                     choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
                 }
+                final Combat combat = game.getCombat();
                 choices = CardLists.filter(choices, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (!c.isAttacking(ai) || !game.getCombat().isUnblocked(c)) {
+                        if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                             return false;
                         }
-                        return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 0;
+                        return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > 0;
                     }
                 });
                 if (choices.isEmpty()) {

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
@@ -14,8 +16,10 @@ import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -30,6 +34,7 @@ public class DebuffAi extends SpellAbilityAi {
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getSourceCard();
+        final Game game = ai.getGame(); 
         if ((sa.getTargetRestrictions() == null) && !source.isInPlay()) {
             return false;
         }
@@ -50,12 +55,12 @@ public class DebuffAi extends SpellAbilityAi {
         }
 
         final SpellAbilityRestriction restrict = sa.getRestrictions();
-        final PhaseHandler ph =  ai.getGame().getPhaseHandler();
+        final PhaseHandler ph =  game.getPhaseHandler();
 
         // Phase Restrictions
         if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                || !ai.getGame().getStack().isEmpty()) {
+                || !game.getStack().isEmpty()) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!SpellAbilityAi.isSorcerySpeed(sa)) {
@@ -70,29 +75,28 @@ public class DebuffAi extends SpellAbilityAi {
             return false;
         }
 
-        if ((sa.getTargetRestrictions() == null) || !sa.getTargetRestrictions().doesTarget()) {
+        if (!sa.usesTargeting() || !sa.getTargetRestrictions().doesTarget()) {
             List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
-            if (!cards.isEmpty()) {
-                cards = CardLists.filter(cards, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        if ((c.getController().equals(sa.getActivatingPlayer())) || (!c.isBlocking() && !c.isAttacking())) {
-                            return false;
-                        }
-                        // don't add duplicate negative keywords
-                        return sa.hasParam("Keywords") && c.hasAnyKeyword(Arrays.asList(sa.getParam("Keywords").split(" & ")));
-                    }
-                });
-            }
-            if (cards.isEmpty()) {
-                return false;
-            }
-        } else {
-            return debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>(), false);
-        }
 
-        return true;
+            final Combat combat = game.getCombat();
+            return Iterables.any(cards, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+
+                    if (c.getController().equals(sa.getActivatingPlayer()) || combat == null)
+                        return false;
+
+                    if (!combat.isBlocking(c) && !combat.isAttacking(c)) {
+                        return false;
+                    }
+                    // don't add duplicate negative keywords
+                    return sa.hasParam("Keywords") && c.hasAnyKeyword(Arrays.asList(sa.getParam("Keywords").split(" & ")));
+                }
+            });
+        } else {
+            return debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : null, false);
+        }
     }
 
     @Override
@@ -101,7 +105,7 @@ public class DebuffAi extends SpellAbilityAi {
             // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be
             // here?
         } else {
-            return debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>(), false);
+            return debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : null, false);
         }
 
         return true;
@@ -130,7 +134,7 @@ public class DebuffAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
-        List<Card> list = getCurseCreatures(ai, sa, kws);
+        List<Card> list = getCurseCreatures(ai, sa, kws == null ? Lists.<String>newArrayList() : kws);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         // several uses here:

@@ -32,7 +32,7 @@ public class HashMapOfLists<K, V> extends HashMap<K, Collection<V>> implements M
 
     private static final long serialVersionUID = 3029089910183132930L;
 
-    private Collection<V> ensureCollectionFor(K key) {
+    public Collection<V> ensureCollectionFor(K key) {
         Collection<V> value = get(key);
         if ( value == null ) {
             value = factory.get();

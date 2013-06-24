@@ -36,7 +36,7 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         for (final Card c : getTargetCards(sa)) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
-                game.getCombat().setBlocked(c);
+                game.getCombat().setBlocked(c, true);
                 if (!c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
                     runParams.put("Attacker", c);

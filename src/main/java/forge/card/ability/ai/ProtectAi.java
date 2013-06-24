@@ -91,19 +91,20 @@ public class ProtectAi extends SpellAbilityAi {
                     return true;
                 }
 
-                // is the creature blocking and unable to destroy the attacker
-                // or would be destroyed itself?
-                if (c.isBlocking()
-                        && (ComputerUtilCombat.blockerWouldBeDestroyed(ai, c))) {
-                    return true;
-                }
-
-                // is the creature in blocked and the blocker would survive
-                // TODO Potential NPE here if no blockers are actually left
-                if (game.getPhaseHandler().getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && combat.isAttacking(c) && game.getCombat().isBlocked(c)
-                        && ComputerUtilCombat.blockerWouldBeDestroyed(ai, combat.getBlockers(c).get(0))) {
-                    return true;
+                if( combat != null ) {
+                    // is the creature blocking and unable to destroy the attacker
+                    // or would be destroyed itself?
+                    if (combat.isBlocking(c) && ComputerUtilCombat.blockerWouldBeDestroyed(ai, c, combat)) {
+                        return true;
+                    }
+    
+                    // is the creature in blocked and the blocker would survive
+                    // TODO Potential NPE here if no blockers are actually left
+                    if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                            && combat.isAttacking(c) && combat.isBlocked(c)
+                            && ComputerUtilCombat.blockerWouldBeDestroyed(ai, combat.getBlockers(c).get(0), combat)) {
+                        return true;
+                    }
                 }
 
                 return false;

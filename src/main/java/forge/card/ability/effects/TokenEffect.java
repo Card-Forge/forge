@@ -32,6 +32,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
 import forge.game.event.GameEventTokenCreated;
+import forge.game.phase.Combat;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 import forge.item.PaperToken;
@@ -281,14 +282,16 @@ public class TokenEffect extends SpellAbilityEffect {
                     if (this.tokenTapped) {
                         c.setTapped(true);
                     }
-                    if (this.tokenAttacking) {
-                        final List<GameEntity> defs = c.getController().getGame().getCombat().getDefenders();
+                    if (this.tokenAttacking && game.getPhaseHandler().inCombat()) {
+                        Combat combat = game.getPhaseHandler().getCombat();
+                        final List<GameEntity> defs = combat.getDefenders();
+                        final GameEntity defender;
                         if (c.getController().isHuman()) {
-                            final GameEntity defender = defs.size() == 1 ? defs.get(0) : GuiChoose.one("Declare " + c, defs);
-                            game.getCombat().addAttacker(c, defender);
+                            defender = defs.size() == 1 ? defs.get(0) : GuiChoose.one("Declare " + c, defs);
                         } else {
-                            game.getCombat().addAttacker(c, defs.get(0));
+                            defender = defs.get(0);
                         }
+                        combat.addAttacker(c, defender);
                     }
                     if (remember != null) {
                         game.getCardState(sa.getSourceCard()).addRemembered(c);

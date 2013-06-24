@@ -261,7 +261,7 @@ public enum CMatchUI {
     
 
     public void showCombat() {
-        if ( CCombat.SINGLETON_INSTANCE.hasCombatToShow() ) {
+        if (Singletons.getControl().getObservedGame().getPhaseHandler().inCombat()) {
             SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
         }
         CCombat.SINGLETON_INSTANCE.update();

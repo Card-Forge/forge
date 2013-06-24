@@ -33,6 +33,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameType;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -45,7 +46,6 @@ import forge.gui.input.InputPassPriority;
 import forge.gui.input.InputPlayOrDraw;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
-import forge.gui.input.InputSynchronized;
 import forge.gui.match.CMatchUI;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
@@ -525,21 +525,19 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public void declareAttackers(Player attacker) {
-        game.getCombat().initiatePossibleDefenders(attacker.getOpponents());
+    public void declareAttackers(Player attacker, Combat combat) {
         // This input should not modify combat object itself, but should return user choice
-        InputSynchronized inpAttack = new InputAttack(attacker, player, game.getCombat());
+        InputAttack inpAttack = new InputAttack(attacker, player, combat);
         Singletons.getControl().getInputQueue().setInputAndWait(inpAttack);
     }
 
     @Override
-    public void declareBlockers(Player defender) {
+    public void declareBlockers(Player defender, Combat combat) {
         // This input should not modify combat object itself, but should return user choice
-        InputSynchronized inpBlock = new InputBlock(player, defender, game.getCombat());
+        InputBlock inpBlock = new InputBlock(player, defender, combat);
         Singletons.getControl().getInputQueue().setInputAndWait(inpBlock);
     }
 
-    
     @Override
     public void takePriority() {
         PhaseType phase = game.getPhaseHandler().getPhase();

@@ -13,6 +13,7 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -64,19 +65,18 @@ public class ChooseCardAi extends SpellAbilityAi {
             } else if (sa.getParam("AILogic").equals("Never")) {
                 return false;
             } else if (sa.getParam("AILogic").equals("NeedsPrevention")) {
-                if (!game.getPhaseHandler().getPhase() .equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     return false;
                 }
+                final Combat combat = game.getCombat();
                 choices = CardLists.filter(choices, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (!c.isAttacking(ai) || !game.getCombat().isUnblocked(c)) {
+                        if (!combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                             return false;
                         }
-                        if (host.getName().equals("Forcefield")) {
-                            return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 1;
-                        }
-                        return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 0;
+                        int ref = host.getName().equals("Forcefield") ? 1 : 0;
+                        return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > ref;
                     }
                 });
                 if (choices.isEmpty()) {
@@ -122,17 +122,16 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
             choice = ComputerUtilCard.getBestAI(options);
         } else if (logic.equals("NeedsPrevention")) {
+            final Game game = ai.getGame();
+            final Combat combat = game.getCombat();
             List<Card> better =  CardLists.filter(options, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    final Game game = ai.getGame();
-                    if (!c.isAttacking(ai) || !game.getCombat().isUnblocked(c)) {
+                    if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                         return false;
                     }
-                    if (host.getName().equals("Forcefield")) {
-                        return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 1;
-                    }
-                    return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 0;
+                    int ref = host.getName().equals("Forcefield") ? 1 : 0; 
+                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > ref;
                 }
             });
             if (!better.isEmpty()) {

@@ -32,9 +32,10 @@ import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ai.AiController;
 import forge.game.ai.ComputerUtil;
-import forge.game.ai.ComputerUtilBlock;
+import forge.game.ai.AiBlockController;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.phase.Combat;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -166,12 +167,12 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<Card> orderBlockers(Card attacker, List<Card> blockers) {
-        return ComputerUtilBlock.orderBlockers(attacker, blockers);
+        return AiBlockController.orderBlockers(attacker, blockers);
     }
 
     @Override
     public List<Card> orderAttackers(Card blocker, List<Card> attackers) {
-        return ComputerUtilBlock.orderAttackers(blocker, attackers);
+        return AiBlockController.orderAttackers(blocker, attackers);
     }
 
     /* (non-Javadoc)
@@ -322,14 +323,14 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void declareAttackers(Player attacker) {
-        brains.declareAttackers(attacker);
+    public void declareAttackers(Player attacker, Combat combat) {
+        brains.declareAttackers(attacker, combat);
     }
 
    
     @Override
-    public void declareBlockers(Player defender) {
-        brains.declateBlockers(defender);
+    public void declareBlockers(Player defender, Combat combat) {
+        brains.declareBlockersFor(defender, combat);
     }
 
     @Override

@@ -100,7 +100,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                             final List<Card> list = game.getCardsIn(ZoneType.Battlefield);
                             chosen.add(ComputerUtilCard.getMostProminentColor(list));
                         }
-                        else if (logic.equals("MostProminentAttackers")) {
+                        else if (logic.equals("MostProminentAttackers") && game.getPhaseHandler().inCombat()) {
                             chosen.add(ComputerUtilCard.getMostProminentColor(game.getCombat().getAttackers()));
                         }
                         else if (logic.equals("MostProminentKeywordInComputerDeck")) {

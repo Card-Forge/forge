@@ -18,6 +18,7 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
+import forge.game.phase.Combat;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -138,7 +139,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                         sourcesToChooseFrom.remove(o);
 
                     } else {
-                        if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("NeedsPrevention")) {
+                        if ("NeedsPrevention".equals(sa.getParam("AILogic"))) {
                             final Player ai = sa.getActivatingPlayer();
                             if (!game.getStack().isEmpty()) {
                                 Card choseCard = ChooseCardOnStack(sa, ai, game);
@@ -147,14 +148,15 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                                 }
                             }
 
+                            final Combat combat = game.getCombat();
                             if (chosen.isEmpty()) {
                                 permanentSources = CardLists.filter(permanentSources, new Predicate<Card>() {
                                     @Override
                                     public boolean apply(final Card c) {
-                                        if (!c.isAttacking(ai) || !game.getCombat().isUnblocked(c)) {
+                                        if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                                             return false;
                                         }
-                                        return ComputerUtilCombat.damageIfUnblocked(c, ai, game.getCombat()) > 0;
+                                        return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > 0;
                                     }
                                 });
                                 chosen.add(ComputerUtilCard.getBestCreatureAI(permanentSources));
