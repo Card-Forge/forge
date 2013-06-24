@@ -527,8 +527,9 @@ public class PhaseHandler implements java.io.Serializable {
             if ( game.isGameOver() ) // they just like to close window at any moment
                 return;
         } while(p != playerTurn);
-        CombatUtil.orderMultipleBlockers(combat);
-        CombatUtil.orderBlockingMultipleAttackers(combat);
+        
+        combat.orderBlockersForDamageAssignment();
+        combat.orderAttackersForDamageAssignment();
 
         combat.removeAbsentCombatants();
         

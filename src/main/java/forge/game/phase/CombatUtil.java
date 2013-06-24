@@ -401,46 +401,6 @@ public class CombatUtil {
         return null;
     }
 
-    public static void orderMultipleBlockers(final Combat combat) {
-        // If there are multiple blockers, the Attacker declares the Assignment Order
-        final Player player = combat.getAttackingPlayer();
-        for (final AttackingBand band : combat.getAttackingBands()) {
-            List<Card> attackers = band.getAttackers();
-            if (attackers.isEmpty()) {
-                continue;
-            }
-
-            List<Card> blockers = combat.getBlockers(band);
-            for(Card attacker : attackers) {
-                List<Card> orderedBlockers = null;
-                if (blockers.size() <= 1) {
-                    orderedBlockers = blockers;
-                } else {
-                    // Damage Ordering needs to take cards like Melee into account, is that happening?
-                    orderedBlockers = player.getController().orderBlockers(attacker, blockers);
-                }
-                combat.setAttackerDamageAssignmentOrder(attacker, orderedBlockers);
-            }
-        }
-    }
-
-    public static void orderBlockingMultipleAttackers(final Combat combat) {
-        // If there are multiple blockers, the Attacker declares the Assignment Order
-        for (final Card blocker : combat.getAllBlockers()) {
-            List<Card> attackers = combat.getAttackersBlockedBy(blocker);
-            List<Card> orderedAttacker = null;
-
-            if (attackers.size() <= 1) {
-                orderedAttacker = attackers;
-            } else {
-                // Damage Ordering needs to take cards like Melee into account, is that happening?
-                orderedAttacker = blocker.getController().getController().orderAttackers(blocker, attackers);
-            }
-
-            combat.setBlockerDamageAssignmentOrder(blocker, orderedAttacker);
-        }
-    }
-
     // can the blocker block an attacker with a lure effect?
     /**
      * <p>

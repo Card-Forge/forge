@@ -460,7 +460,7 @@ public class AiAttackController {
         } else {
             // 1. assault the opponent if you can kill him
             if (bAssault) {
-                return c.getDefendingPlayers().get(0);
+                return getDefendingPlayers(c).get(0);
             }
             // 2. attack planeswalkers
             List<Card> pwDefending = c.getDefendingPlaneswalkers();
@@ -475,6 +475,17 @@ public class AiAttackController {
     final boolean LOG_AI_ATTACKS = false;
 
 
+    public final List<Player> getDefendingPlayers(Combat combat) {
+        final List<Player> defending = new ArrayList<Player>();
+        for (final GameEntity o : combat.getDefenders()) {
+            if (o instanceof Player) {
+                defending.add((Player) o);
+            }
+        }
+        return defending;
+    }
+
+    
     /**
      * <p>
      * Getter for the field <code>attackers</code>.
@@ -806,7 +817,7 @@ public class AiAttackController {
                             }
                         }
                         if (!found) {
-                            defender = combat.getDefendingPlayers().get(0);
+                            defender = getDefendingPlayers(combat).get(0);
                         }
                     }
                 }

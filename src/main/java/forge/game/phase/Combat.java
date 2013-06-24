@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.Lists;
 
 import forge.Card;
@@ -46,7 +49,7 @@ import forge.util.maps.MapOfLists;
  * @version $Id$
  */
 public class Combat {
-    private final Player attackerPlayer;
+    private final Player playerWhoAttacks;
     // Defenders, as they are attacked by hostile forces
     private final MapOfLists<GameEntity, AttackingBand> attackedEntities = new HashMapOfLists<GameEntity, AttackingBand>(CollectionSuppliers.<AttackingBand>arrayLists());
     // Blockers to stop the hostile invaders
@@ -55,15 +58,15 @@ public class Combat {
     private final HashMap<Card, Integer> defendingDamageMap = new HashMap<Card, Integer>();
     
     
-    private Map<Card, List<Card>> orderBlockerDamageAssignment = new HashMap<Card, List<Card>>();
-    private Map<Card, List<Card>> orderAttackerDamageAssignment = new HashMap<Card, List<Card>>();
+    private Map<Card, List<Card>> attackersOrderedForDamageAssignment = new HashMap<Card, List<Card>>();
+    private Map<Card, List<Card>> blockersOrderedForDamageAssignment = new HashMap<Card, List<Card>>();
 
 
     public Combat(Player attacker) {
-        attackerPlayer = attacker;
+        playerWhoAttacks = attacker;
 
         // Create keys for all possible attack targets
-        for (Player defender : attackerPlayer.getOpponents()) {
+        for (Player defender : playerWhoAttacks.getOpponents()) {
             this.attackedEntities.ensureCollectionFor(defender);
             List<Card> planeswalkers = CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
             for (final Card pw : planeswalkers) {
@@ -73,29 +76,11 @@ public class Combat {
     }
     
     public final Player getAttackingPlayer() {
-        return this.attackerPlayer;
-    }
-
-    public final boolean isCombat() {
-        for(Collection<AttackingBand> abs : attackedEntities.values()) {
-            if(!abs.isEmpty())
-                return true;
-        }
-        return false;
+        return this.playerWhoAttacks;
     }
 
     public final List<GameEntity> getDefenders() {
         return Lists.newArrayList(attackedEntities.keySet());
-    }
-
-    public final List<Player> getDefendingPlayers() {
-        final List<Player> defending = new ArrayList<Player>();
-        for (final GameEntity o : attackedEntities.keySet()) {
-            if (o instanceof Player) {
-                defending.add((Player) o);
-            }
-        }
-        return defending;
     }
 
     public final List<Card> getDefendingPlaneswalkers() {
@@ -106,24 +91,6 @@ public class Combat {
             }
         }
         return pwDefending;
-    }
-
-    // Damage to whatever was protected there. 
-    public final void addDefendingDamage(final int n, final Card source) {
-        final GameEntity ge = this.getDefenderByAttacker(source);
-
-        if (ge instanceof Card) {
-            final Card planeswalker = (Card) ge;
-            planeswalker.addAssignedDamage(n, source);
-
-            return;
-        }
-
-        if (!this.defendingDamageMap.containsKey(source)) {
-            this.defendingDamageMap.put(source, n);
-        } else {
-            this.defendingDamageMap.put(source, this.defendingDamageMap.get(source) + n);
-        }
     }
 
     public final List<AttackingBand> getAttackingBandsOf(GameEntity defender) {
@@ -149,9 +116,7 @@ public class Combat {
             System.out.println("Trying to add Attacker " + c + " to missing defender " + defender);
             return;
         }
-        
-        
-        
+
         if (band == null || !attackersOfDefender.contains(band)) {
             band = new AttackingBand(c, defender);
             attackersOfDefender.add(band);
@@ -170,7 +135,7 @@ public class Combat {
         return null;
     }
     
-    private final GameEntity getDefenderByAttacker(final AttackingBand c) {
+    public final GameEntity getDefenderByAttacker(final AttackingBand c) {
         for(Entry<GameEntity, Collection<AttackingBand>> e : attackedEntities.entrySet()) {
             for(AttackingBand ab : e.getValue()) {
                 if ( ab == c )
@@ -217,12 +182,6 @@ public class Combat {
         return ab != null;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     * @param currentDefender
-     * @return
-     */
     public boolean isAttacking(Card card, GameEntity defender) {
         for(Entry<GameEntity, Collection<AttackingBand>> ee : attackedEntities.entrySet()) 
             for(AttackingBand ab : ee.getValue())
@@ -252,6 +211,7 @@ public class Combat {
         
     }
 
+    // Some cards in Alpha may UNBLOCK an attacker, so second parameter is not always-true
     public final void setBlocked(final Card attacker, boolean value) {
         getBandOfAttacker(attacker).setBlocked(value); // called by Curtain of Light, Dazzling Beauty, Trap Runner
     }
@@ -314,24 +274,51 @@ public class Combat {
         return getDefenderPlayerByAttacker(attacker);
     }
 
-    public void setAttackerDamageAssignmentOrder(final Card attacker, final List<Card> blockers) {
-        this.orderAttackerDamageAssignment.put(attacker, blockers);
-    }
+    /** If there are multiple blockers, the Attacker declares the Assignment Order */
+    public void orderBlockersForDamageAssignment() {
 
-    public void setBlockerDamageAssignmentOrder(final Card blocker, final List<Card> attackers) {
-        this.orderBlockerDamageAssignment.put(blocker, attackers);
-    }
+        for(Collection<AttackingBand> abs : attackedEntities.values())
+            for (final AttackingBand band : abs) {
+                if (band.isEmpty()) continue; // there should not be empty bands
 
+                Collection<Card> blockers = blockedBands.get(band);
+                if ( blockers == null || blockers.isEmpty() )
+                    continue;
+
+                for(Card attacker : band.getAttackers()) {
+                    List<Card> orderedBlockers = blockers.size() <= 1 
+                            ? Lists.newArrayList(blockers) 
+                            : playerWhoAttacks.getController().orderBlockers(attacker, (List<Card>)blockers); // we know there's a list
+                    // Damage Ordering needs to take cards like Melee into account, is that happening?
+                    blockersOrderedForDamageAssignment.put(attacker, orderedBlockers);
+                }
+            }
+    }
+    
+    public void orderAttackersForDamageAssignment() {
+        // If there are multiple blockers, the Attacker declares the Assignment Order
+        for (final Card blocker : getAllBlockers()) {
+            List<Card> attackers = getAttackersBlockedBy(blocker);
+            // They need a reverse map here: Blocker => List<Attacker>
+            
+            Player blockerCtrl = blocker.getController();
+            List<Card> orderedAttacker = attackers.size() <= 1 ? attackers : blockerCtrl.getController().orderAttackers(blocker, attackers);
+
+            // Damage Ordering needs to take cards like Melee into account, is that happening?
+            attackersOrderedForDamageAssignment.put(blocker, orderedAttacker);
+        }
+    }
+    
     // removes references to this attacker from all indices and orders
     private void unregisterAttacker(final Card c, AttackingBand ab) {
-        orderAttackerDamageAssignment.remove(c);
+        blockersOrderedForDamageAssignment.remove(c);
         
         Collection<Card> blockers = blockedBands.get(ab);
         if ( blockers != null ) {
             for (Card b : blockers) {
                 // Clear removed attacker from assignment order 
-                if (this.orderBlockerDamageAssignment.containsKey(b)) {
-                    this.orderBlockerDamageAssignment.get(b).remove(c);
+                if (this.attackersOrderedForDamageAssignment.containsKey(b)) {
+                    this.attackersOrderedForDamageAssignment.get(b).remove(c);
                 }
             }
         }
@@ -340,11 +327,22 @@ public class Combat {
 
     // removes references to this defender from all indices and orders
     private void unregisterDefender(final Card c, AttackingBand bandBeingBlocked) {
-        this.orderBlockerDamageAssignment.remove(c);
+        this.attackersOrderedForDamageAssignment.remove(c);
         for(Card atk : bandBeingBlocked.getAttackers()) {
-            if (this.orderAttackerDamageAssignment.containsKey(atk)) {
-                this.orderAttackerDamageAssignment.get(atk).remove(c);
+            if (this.blockersOrderedForDamageAssignment.containsKey(atk)) {
+                this.blockersOrderedForDamageAssignment.get(atk).remove(c);
             }
+        }
+    }
+    
+    private void removeAttackerFromBand(AttackingBand ab, Card c) {
+        ab.removeAttacker(c);
+
+        // removed
+        if (ab.isEmpty()) {
+            blockedBands.remove(ab);
+            for(Collection<AttackingBand> abs: attackedEntities.values())
+                abs.remove(ab);
         }
     }
 
@@ -353,8 +351,7 @@ public class Combat {
         AttackingBand ab = getBandOfAttacker(c);
         if (ab != null) {
             unregisterAttacker(c, ab);
-            ab.removeAttacker(c);
-            // no need to remove empty bands
+            removeAttackerFromBand(ab, c);
         }
 
         // if not found in attackers, look for this card in blockers
@@ -369,6 +366,7 @@ public class Combat {
 
     public final void removeAbsentCombatants() {
         // iterate all attackers and remove them
+        List<Pair<AttackingBand, Card>> toRemoveAtk = new ArrayList<>();
         for(Entry<GameEntity, Collection<AttackingBand>> ee : attackedEntities.entrySet()) {
             for(AttackingBand ab : ee.getValue()) {
                 List<Card> atk = ab.getAttackers();
@@ -376,10 +374,14 @@ public class Combat {
                     Card c = atk.get(i);
                     if ( !c.isInPlay() ) {
                         unregisterAttacker(c, ab);
-                        ab.removeAttacker(c);
+                        toRemoveAtk.add(Pair.of(ab, c));
                     }
                 }
             }
+        }
+        // remove as a separate step to avoid modifications with iterator open in for-loop
+        for(Pair<AttackingBand, Card> pair : toRemoveAtk) {
+            removeAttackerFromBand(pair.getKey(), pair.getValue());
         }
 
         Collection<Card> toRemove = Lists.newArrayList();
@@ -423,7 +425,7 @@ public class Combat {
 
         for (final Card blocker : blockers) {
             if (blocker.hasDoubleStrike() || blocker.hasFirstStrike() == firstStrikeDamage) {
-                List<Card> attackers = this.orderBlockerDamageAssignment.get(blocker);
+                List<Card> attackers = this.attackersOrderedForDamageAssignment.get(blocker);
 
                 final int damage = blocker.getNetCombatDamage();
 
@@ -450,7 +452,7 @@ public class Combat {
     private final boolean assignAttackersDamage(boolean firstStrikeDamage) {
      // Assign damage by Attackers
         this.defendingDamageMap.clear(); // this should really happen in deal damage
-        List<Card> blockers = null;
+        List<Card> orderedBlockers = null;
         final List<Card> attackers = this.getAttackers();
         boolean assignedDamage = false;
         for (final Card attacker : attackers) {
@@ -468,10 +470,10 @@ public class Combat {
             AttackingBand band = this.getBandOfAttacker(attacker);
 
             boolean trampler = attacker.hasKeyword("Trample");
-            blockers = this.orderAttackerDamageAssignment.get(attacker);
+            orderedBlockers = this.blockersOrderedForDamageAssignment.get(attacker);
             assignedDamage = true;
             // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender
-            if (blockers == null || blockers.isEmpty()) {
+            if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                 if (trampler || !band.isBlocked()) {
                     this.addDefendingDamage(damageDealt, attacker);
                 } // No damage happens if blocked but no blockers left
@@ -482,11 +484,11 @@ public class Combat {
                 // It allows the defending player to assign damage instead of the attacking player
                 if (defender instanceof Player && defender.hasKeyword("You assign combat damage of each creature attacking you.")) {
                     assigningPlayer = (Player)defender;
-                } else if ( AttackingBand.isValidBand(blockers, true)){
-                    assigningPlayer = blockers.get(0).getController();
+                } else if ( AttackingBand.isValidBand(orderedBlockers, true)){
+                    assigningPlayer = orderedBlockers.get(0).getController();
                 }
 
-                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(attacker, blockers, damageDealt, defender, this.getAttackingPlayer() != assigningPlayer);
+                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(attacker, orderedBlockers, damageDealt, defender, this.getAttackingPlayer() != assigningPlayer);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
                     if( dt.getKey() == null) {
                         if (dt.getValue() > 0) 
@@ -500,6 +502,24 @@ public class Combat {
             } // if !hasFirstStrike ...
         } // for
         return assignedDamage;
+    }
+
+    // Damage to whatever was protected there. 
+    private final void addDefendingDamage(final int n, final Card source) {
+        final GameEntity ge = this.getDefenderByAttacker(source);
+    
+        if (ge instanceof Card) {
+            final Card planeswalker = (Card) ge;
+            planeswalker.addAssignedDamage(n, source);
+    
+            return;
+        }
+    
+        if (!this.defendingDamageMap.containsKey(source)) {
+            this.defendingDamageMap.put(source, n);
+        } else {
+            this.defendingDamageMap.put(source, this.defendingDamageMap.get(source) + n);
+        }
     }
 
     public final boolean assignCombatDamage(boolean firstStrikeDamage) {
