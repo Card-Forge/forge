@@ -252,21 +252,21 @@ public class Upkeep extends Phase {
                     if (ability.startsWith("At the beginning of your upkeep, sacrifice")) {
                         final String[] k = ability.split(" pay ");
                         cost = k[1].toString();
-                        sb.append("Sacrifice upkeep for ").append(c).append("\n");
+                        sb.append("Sacrifice upkeep for " + c);
                     }
 
                     if (ability.startsWith("Cumulative upkeep")) {
                         final String[] k = ability.split(":");
                         c.addCounter(CounterType.AGE, 1, true);
                         cost = CardFactoryUtil.multiplyCost(k[1], c.getCounters(CounterType.AGE));
-                        sb.append("Cumulative upkeep for ").append(c).append("\n");
+                        sb.append("Cumulative upkeep for " + c);
                     }
 
                     final Cost upkeepCost = new Cost(cost, true);
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
-                            boolean isPaid = controller.getController().payManaOptional(c, upkeepCost, this, "Cumulative upkeep for " + c, ManaPaymentPurpose.CumulativeUpkeep);
+                            boolean isPaid = controller.getController().payManaOptional(c, upkeepCost, this, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
                             final HashMap<String, Object> runParams = new HashMap<String, Object>();
                             runParams.put("CumulativeUpkeepPaid", (Boolean) isPaid);
                             runParams.put("Card", this.getSourceCard());
@@ -275,6 +275,7 @@ public class Upkeep extends Phase {
                                 game.getAction().sacrifice(c, null);
                         }
                     };
+                    sb.append("\n");
                     upkeepAbility.setActivatingPlayer(controller);
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
