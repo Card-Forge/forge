@@ -11,7 +11,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
-import forge.gui.GuiDialog;
 
 public class ChooseNumberEffect extends SpellAbilityEffect {
 
@@ -51,11 +50,11 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 if (random) {
                     final Random randomGen = new Random();
                     chosen = randomGen.nextInt(max - min) + min;
-                    final String message = "Randomly chosen number: " + chosen;
-                    GuiDialog.message(message, card.toString());
+                    p.getGame().getAction().nofityOfValue(sa, p, Integer.toString(chosen), null);
                 } else {
                     String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : "Choose a number";
                     chosen = p.getController().chooseNumber(sa, title, min, max);
+                    // don't notify here, because most scripts I've seen don't store that number in a long term
                 }
                 card.setChosenNumber(chosen);
             }

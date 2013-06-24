@@ -124,6 +124,8 @@ public abstract class PlayerController {
 
     /** Shows the card to this player*/
     public abstract void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner);
+    /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
+    public abstract void notifyOfValue(SpellAbility saSource, ITargetable realtedTarget, String value);
     public abstract ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN);
     public abstract boolean willPutCardOnTop(Card c);
     public abstract List<Card> orderMoveToZoneList(List<Card> cards, ZoneType destinationZone);
@@ -153,6 +155,10 @@ public abstract class PlayerController {
 
     public abstract int chooseNumber(SpellAbility sa, String title, int min, int max);
 
-    public abstract String chooseFilpResult(Card source, Player flipper, String[] results, boolean call);
+    public abstract boolean chooseBinary(SpellAbility sa, String question, boolean isCoin);
+    public abstract boolean chooseFilpResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
+
+
+
 
 }

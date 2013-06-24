@@ -49,6 +49,7 @@ import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.match.CMatchUI;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 
@@ -621,13 +622,23 @@ public class PlayerControllerHuman extends PlayerController {
         return result;
     }
 
-
+    // end of not related candidates for move.
+    
+    
     /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#chooseFilpResult(forge.game.player.Player, java.lang.String[], boolean)
+     * @see forge.game.player.PlayerController#chooseBinary(java.lang.String, boolean)
      */
     @Override
-    public String chooseFilpResult(Card source, Player flipper, String[] results, boolean call) {
-        return GuiChoose.one(source.getName() + " - Choose a result", results);
+    public boolean chooseBinary(SpellAbility sa, String question, boolean isCoin) {
+        String[] labels = isCoin ? new String[]{"Heads", "Tails"} : new String[]{"Odds", "Evens"};
+        return GuiDialog.confirm(sa.getSourceCard(), question, labels);
+    }
+
+
+    @Override
+    public boolean chooseFilpResult(SpellAbility sa, Player flipper, boolean[] results, boolean call) {
+        String[] labels = call ? new String[]{"heads", "tails"} : new String[]{"win the flip", "lose the flip"}; 
+        return GuiChoose.one(sa.getSourceCard().getName() + " - Choose a result", labels) == labels[0];
     }
 
 
@@ -646,4 +657,32 @@ public class PlayerControllerHuman extends PlayerController {
         List<Pair<SpellAbilityStackInstance, ITargetable>> chosen = GuiChoose.getChoices(saSpellskite.getSourceCard().getName(), 1, 1, allTargets, null, fnToString);
         return Iterables.getFirst(chosen, null);
     }
+
+    @Override
+    public void notifyOfValue(SpellAbility sa, ITargetable realtedTarget, String value) {
+        String message = formatNotificationMessage(sa, realtedTarget, value); 
+        GuiDialog.message(message, sa.getSourceCard().getName());
+    }
+
+
+    // These are not much related to PlayerController
+    private String formatNotificationMessage(SpellAbility sa, ITargetable target, String value) {
+        switch(sa.getApi()) {
+            case ChooseNumber:
+                final boolean random = sa.hasParam("Random");
+                return String.format(random ? "Randomly chosen number for %s is %s" : "%s choses number: %s", mayBeYou(target, player), value);
+            case FlipACoin:
+                String flipper = StringUtils.capitalize(mayBeYou(target, player));
+                return sa.hasParam("NoCall") 
+                        ? String.format("%s flip comes up %s", Lang.getPossesive(flipper), value) 
+                        : String.format("%s %s the flip", flipper, Lang.joinVerb(flipper, value));
+            default:
+                return String.format("%s effect's value for %s is %s", sa.getSourceCard().getName(), mayBeYou(target, player), value);
+        }
+    }
+    
+    private String mayBeYou(ITargetable what, Player you) {
+        return what == you ? "you" : what.toString();
+    }
+    // end of not related candidates for move.
 }

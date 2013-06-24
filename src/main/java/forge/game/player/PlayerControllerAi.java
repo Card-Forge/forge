@@ -377,19 +377,19 @@ public class PlayerControllerAi extends PlayerController {
      * @see forge.game.player.PlayerController#chooseFilpResult(forge.Card, forge.game.player.Player, java.lang.String[], boolean)
      */
     @Override
-    public String chooseFilpResult(Card source, Player flipper, String[] results, boolean call) {
+    public boolean chooseFilpResult(SpellAbility sa, Player flipper, boolean[] results, boolean call) {
         if (call) {
-			// Win if possible
-            String result = " loses flip.";
-            for (String s : results) {
-                if (s.equals(" wins flip.")) {
+            // Win if possible
+            boolean result = false;
+            for (boolean s : results) {
+                if (s) {
                     result = s;
                     break;
                 }
             }
             return result;
         } else {
-			// heads or tails, AI doesn't know which is better now
+            // heads or tails, AI doesn't know which is better now
             int i = MyRandom.getRandom().nextInt(results.length);
             return results[i];
         }
@@ -399,5 +399,16 @@ public class PlayerControllerAi extends PlayerController {
     public Pair<SpellAbilityStackInstance, ITargetable> chooseTarget(SpellAbility saSrc, List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets) {
         // TODO Teach AI how to use Spellskite
         return allTargets.get(0);
+    }
+
+
+    @Override
+    public void notifyOfValue(SpellAbility saSource, ITargetable realtedTarget, String value) {
+        // AI should take into consideration creature types, numbers and other information (mostly choices) arriving through this channel
+    }
+
+    @Override
+    public boolean chooseBinary(SpellAbility sa, String question, boolean isCoin) {
+        return MyRandom.getRandom().nextBoolean();
     }
 }

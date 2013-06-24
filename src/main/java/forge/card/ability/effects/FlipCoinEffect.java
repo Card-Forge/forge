@@ -11,8 +11,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.player.Player;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 import forge.util.MyRandom;
 
 public class FlipCoinEffect extends SpellAbilityEffect {
@@ -54,7 +52,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         boolean victory = false;
         if (!noCall) {
             flipMultiplier = getFilpMultiplier(caller.get(0));
-            victory = flipCoinCall(caller.get(0), host, flipMultiplier);
+            victory = flipCoinCall(caller.get(0), sa, flipMultiplier);
         }
 
         // Run triggers
@@ -68,7 +66,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         for (final Player flipper : playersToFlip) {
             if (noCall) {
                 flipMultiplier = getFilpMultiplier(flipper);
-                final boolean resultIsHeads = FlipCoinEffect.flipCoinNoCall(sa.getSourceCard(), flipper, flipMultiplier);
+                final boolean resultIsHeads = flipCoinNoCall(sa, flipper, flipMultiplier);
                 if (rememberResult) {
                     host.addFlipResult(flipper, resultIsHeads ? "Heads" : "Tails");
                 }
@@ -132,25 +130,17 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * @param multiplier
      * @return a boolean.
      */
-    public static boolean flipCoinNoCall(final Card source, final Player flipper, final int multiplier) {
-        String[] results = new String[multiplier];
-        String result;
+    public boolean flipCoinNoCall(final SpellAbility sa, final Player flipper, final int multiplier) {
+        boolean[] results = new boolean[multiplier];
         for (int i = 0; i < multiplier; i++) {
             final boolean resultIsHeads = MyRandom.getRandom().nextBoolean();
             flipper.getGame().fireEvent(new GameEventFlipCoin());
-            results[i] = resultIsHeads ? " heads." : " tails.";
+            results[i] = resultIsHeads;
         }
-        if (multiplier == 1) {
-            result = results[0];
-        } else {
-            result = flipper.getController().chooseFilpResult(source, flipper, results, false);
-        }
-        final StringBuilder sb = new StringBuilder();
-        sb.append(flipper.getName());
-        sb.append("'s flip comes up");
-        sb.append(result);
-        GuiDialog.message(sb.toString(), source + " Flip result:");
-        return result.equals(" heads.");
+        boolean result = multiplier == 1 ? results[0] : flipper.getController().chooseFilpResult(sa, flipper, results, false);
+        
+        flipper.getGame().getAction().nofityOfValue(sa, flipper, result ? "heads" : "tails", null);
+        return result;
     }
 
     /**
@@ -165,36 +155,22 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * @param multiplier
      * @return a boolean.
      */
-    public static boolean flipCoinCall(final Player caller, final Card source, final int multiplier) {
-        String choice;
-        final String[] choices = { "heads", "tails" };
-        String[] results = new String[multiplier];
+    public boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier) {
+        boolean [] results = new boolean [multiplier];
         for (int i = 0; i < multiplier; i++) {
+            final boolean choice = caller.getController().chooseBinary(sa, sa.getSourceCard().getName() + " - Call coin flip", true);
             // Play the Flip A Coin sound
             caller.getGame().fireEvent(new GameEventFlipCoin());
             final boolean flip = MyRandom.getRandom().nextBoolean();
-            if (caller.isHuman()) {
-                choice = GuiChoose.one(source.getName() + " - Call coin flip", choices);
-            } else {
-                choice = choices[MyRandom.getRandom().nextInt(2)];
-            }
-            final boolean winFlip = flip == choice.equals(choices[0]);
-            final String winMsg = winFlip ? " wins flip." : " loses flip.";
-            results[i] = winMsg;
+            results[i] = flip == choice;
         }
-        String result;
-        if (multiplier == 1) {
-            result = results[0];
-        } else {
-            result = caller.getController().chooseFilpResult(source, caller, results, true);
-        }
+        boolean result = multiplier == 1 ? results[0] : caller.getController().chooseFilpResult(sa, caller, results, true);
         
-        GuiDialog.message(source.getName() + " - " + caller + result, source.getName());
-        
-        return result.equals(" wins flip.");
+        caller.getGame().getAction().nofityOfValue(sa, caller, result ? "win" : "lose", null);
+        return result;
     }
 
-    public static int getFilpMultiplier(final Player flipper) {
+    public int getFilpMultiplier(final Player flipper) {
         int i = 0;
         for (String kw : flipper.getKeywords()) {
             if (kw.startsWith("If you would flip a coin")) {

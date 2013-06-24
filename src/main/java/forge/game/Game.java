@@ -106,8 +106,6 @@ public class Game {
             pl.setTeam(psc.getTeamNumber());
         }
 
-        
-        
         action = new GameAction(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);

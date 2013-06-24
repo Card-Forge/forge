@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -57,8 +58,21 @@ public class Lang {
     
     
     public static <T> String joinVerb(List<T> subjects, String verb) {
+        return subjects.size() > 1 || !subjectIsSingle3rdPerson(Iterables.getFirst(subjects, "it").toString()) ? verb : verbs3rdPersonSingular(verb);
+    }
+    
+    public static String joinVerb(String subject, String verb) {
+        return !Lang.subjectIsSingle3rdPerson(subject) ? verb : verbs3rdPersonSingular(verb);
+    }
+    
+    public static boolean subjectIsSingle3rdPerson(String subject) {
+        // Will be most simple
+        return !"You".equalsIgnoreCase(subject);
+    }
+
+    public static String verbs3rdPersonSingular(String verb) {
         // English is simple - just add (s) for multiple objects. 
-        return subjects.size() > 1 ? verb : verb + "s";
+        return verb + "s"; 
     }
 
     public static String getPlural(String noun) {
@@ -79,12 +93,9 @@ public class Lang {
         String countedForm = cnt <= 1 ? noun : getPlural(noun);
         return getNumeral(cnt) + " " + countedForm;
     }        
-    /**
-     * TODO: Write javadoc for this method.
-     * @param name
-     * @return
-     */
+
     public static String getPossesive(String name) {
+        if ("You".equalsIgnoreCase(name)) return name + "r"; // to get "your"
         return name.endsWith("s") ? name + "'" : name + "'s";
     }
     
