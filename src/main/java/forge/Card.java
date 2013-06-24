@@ -2159,7 +2159,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String getTextForKwCantBeBlockedByAmount(String keyword) {
         String restriction = keyword.split(" ", 2)[1];
         boolean isLT = "LT".equals(restriction.substring(0,2));
-        final String byClause = isLT ? "except by " : "by more than";
+        final String byClause = isLT ? "except by " : "by more than ";
         int cnt = Integer.parseInt(restriction.substring(2));
         return byClause + Lang.nounWithNumeral(cnt, isLT ? "or more creature" : "creature");
     }
