@@ -85,6 +85,10 @@ Tolaria
 Unholy Citadel
 Gaea's Touch
 Dark Sphere
+Urza's Engine
+Icatian Skirmishers
+Camel
+Nalathni Dragon
 
 
 --------------------
