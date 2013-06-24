@@ -439,7 +439,8 @@ public class GameAction {
         if (c.hasStartOfKeyword("Echo")) {
             c.addExtrinsicKeyword("(Echo unpaid)");
         }
-        game.getCombat().removeFromCombat(c);
+        if ( game.getPhaseHandler().inCombat() )
+            game.getCombat().removeFromCombat(c);
 
         c.setTurnInZone(tiz);
 
