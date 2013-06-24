@@ -26,7 +26,7 @@ import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCard;
-import forge.game.phase.CombatUtil;
+import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 

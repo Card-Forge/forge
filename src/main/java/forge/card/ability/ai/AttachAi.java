@@ -27,7 +27,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
-import forge.game.phase.CombatUtil;
+import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;

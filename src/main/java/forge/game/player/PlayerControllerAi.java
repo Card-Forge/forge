@@ -35,7 +35,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.AiBlockController;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.phase.Combat;
+import forge.game.combat.Combat;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;

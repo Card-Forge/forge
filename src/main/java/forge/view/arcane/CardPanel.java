@@ -42,7 +42,7 @@ import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
-import forge.game.phase.Combat;
+import forge.game.combat.Combat;
 import forge.gui.CardContainer;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.properties.ForgePreferences.FPref;

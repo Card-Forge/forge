@@ -36,7 +36,7 @@ import javax.swing.JPanel;
 import forge.Card;
 import forge.Singletons;
 import forge.control.FControl;
-import forge.game.phase.Combat;
+import forge.game.combat.Combat;
 import forge.gui.match.controllers.CDock;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.toolbox.FSkin;

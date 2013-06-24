@@ -39,6 +39,8 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameAge;
 import forge.game.Game;
 import forge.game.GameType;
+import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockerAssigned;
 import forge.game.event.GameEventBlockersDeclared;

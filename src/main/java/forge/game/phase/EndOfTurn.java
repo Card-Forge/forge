@@ -39,7 +39,11 @@ public class EndOfTurn extends Phase {
     /** Constant <code>serialVersionUID=-3656715295379727275L</code>. */
     private static final long serialVersionUID = -3656715295379727275L;
 
-    public EndOfTurn(final Game game) { super(game); }
+    protected final Game game;
+    public EndOfTurn(final Game game) { 
+        super(PhaseType.END_OF_TURN);
+        this.game = game;
+    }
     /**
      * <p>
      * Handles all the hardcoded events that happen "at end of turn".

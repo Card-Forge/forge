@@ -42,8 +42,8 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
-import forge.game.phase.Combat;
-import forge.game.phase.CombatUtil;
+import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -116,7 +116,7 @@ public class ComputerUtilCombat {
      * @param attacked
      *            a {@link forge.game.player.Player} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
     public static int damageIfUnblocked(final Card attacker, final Player attacked, final Combat combat) {
@@ -146,7 +146,7 @@ public class ComputerUtilCombat {
      * @param attacked
      *            a {@link forge.game.player.Player} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
     public static int poisonIfUnblocked(final Card attacker, final Player attacked) {
@@ -212,7 +212,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
     public static int lifeThatWouldRemain(final Player ai, final Combat combat) {
@@ -254,7 +254,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
     public static int resultingPoison(final Player ai, final Combat combat) {
@@ -295,7 +295,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public static boolean lifeInDanger(final Player ai, final Combat combat) {
@@ -333,7 +333,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public static boolean wouldLoseLife(final Player ai, final Combat combat) {
@@ -348,7 +348,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public static boolean lifeInSeriousDanger(final Player ai, final Combat combat) {
@@ -575,7 +575,7 @@ public class ComputerUtilCombat {
      * @param trigger
      *            a {@link forge.card.trigger.Trigger} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public static boolean combatTriggerWillTrigger(final Card attacker, final Card defender, final Trigger trigger,
@@ -937,7 +937,7 @@ public class ComputerUtilCombat {
      * @param defender
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
     public static int predictPowerBonusOfAttacker(final Card attacker, final Card defender, final Combat combat
@@ -1098,7 +1098,7 @@ public class ComputerUtilCombat {
      * @param defender
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
     public static int predictToughnessBonusOfAttacker(final Card attacker, final Card defender, final Combat combat
@@ -1377,7 +1377,7 @@ public class ComputerUtilCombat {
      * @param defender
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @param withoutAbilities
      *            a boolean.
      * @return a boolean.
@@ -1534,7 +1534,7 @@ public class ComputerUtilCombat {
      * @param attacker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @param withoutAbilities
      *            a boolean.
      * @return a boolean.

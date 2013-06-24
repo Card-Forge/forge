@@ -35,13 +35,13 @@ import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.combat.Combat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventGameOutcome;
-import forge.game.phase.Cleanup;
-import forge.game.phase.Combat;
-import forge.game.phase.EndOfCombat;
 import forge.game.phase.EndOfTurn;
+import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
 import forge.game.player.Player;
@@ -61,9 +61,9 @@ public class Game {
     
     private List<Card> activePlanes = null;
     
-    public final Cleanup cleanup;
+    public final Phase cleanup;
     public final EndOfTurn endOfTurn;
-    public final EndOfCombat endOfCombat;
+    public final Phase endOfCombat;
     public final Untap untap;
     public final Upkeep upkeep;
     private final PhaseHandler phaseHandler;
@@ -114,9 +114,9 @@ public class Game {
 
         untap = new Untap(this);
         upkeep = new Upkeep(this);
-        cleanup = new Cleanup(this);
+        cleanup = new Phase(PhaseType.CLEANUP);
         endOfTurn = new EndOfTurn(this);
-        endOfCombat = new EndOfCombat(this);
+        endOfCombat = new Phase(PhaseType.COMBAT_END);
         
         subscribeToEvents(gameLog.getEventVisitor());
     }
@@ -145,7 +145,7 @@ public class Game {
      * 
      * @return the cleanup step
      */
-    public final Cleanup getCleanup() {
+    public final Phase getCleanup() {
         return this.cleanup;
     }
 
@@ -163,7 +163,7 @@ public class Game {
      * 
      * @return the endOfCombat
      */
-    public final EndOfCombat getEndOfCombat() {
+    public final Phase getEndOfCombat() {
         return this.endOfCombat;
     }
 

@@ -50,9 +50,11 @@ import forge.gui.input.InputSelectCardsFromList;
  */
 public class Untap extends Phase {
     private static final long serialVersionUID = 4515266331266259123L;
-
+    protected final Game game;
+    
     public Untap(final Game game0) {
-        super(game0);
+        super(PhaseType.UNTAP);
+        game = game0;
     }
     
     /**

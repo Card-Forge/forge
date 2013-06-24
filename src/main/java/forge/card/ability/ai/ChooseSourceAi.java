@@ -16,7 +16,7 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.phase.Combat;
+import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;

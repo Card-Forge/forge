@@ -14475,6 +14475,8 @@ src/main/java/forge/game/ai/ComputerUtilCombat.java -text
 src/main/java/forge/game/ai/ComputerUtilCost.java -text
 src/main/java/forge/game/ai/ComputerUtilMana.java -text
 src/main/java/forge/game/combat/AttackingBand.java -text
+src/main/java/forge/game/combat/Combat.java svneol=native#text/plain
+src/main/java/forge/game/combat/CombatUtil.java svneol=native#text/plain
 src/main/java/forge/game/event/GameEvent.java -text
 src/main/java/forge/game/event/GameEventAnteCardsSelected.java -text
 src/main/java/forge/game/event/GameEventAttackersDeclared.java -text
@@ -14528,10 +14530,6 @@ src/main/java/forge/game/limited/SealedCardPoolGenerator.java svneol=native#text
 src/main/java/forge/game/limited/SealedDeckBuilder.java svneol=native#text/plain
 src/main/java/forge/game/limited/package-info.java svneol=native#text/plain
 src/main/java/forge/game/package-info.java -text
-src/main/java/forge/game/phase/Cleanup.java -text
-src/main/java/forge/game/phase/Combat.java svneol=native#text/plain
-src/main/java/forge/game/phase/CombatUtil.java svneol=native#text/plain
-src/main/java/forge/game/phase/EndOfCombat.java svneol=native#text/plain
 src/main/java/forge/game/phase/EndOfTurn.java svneol=native#text/plain
 src/main/java/forge/game/phase/ExtraTurn.java -text
 src/main/java/forge/game/phase/Phase.java svneol=native#text/plain

@@ -28,8 +28,8 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.game.phase.Combat;
-import forge.game.phase.CombatUtil;
+import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 
 
@@ -239,8 +239,8 @@ public class AiBlockController {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
-     * @return a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
+     * @return a {@link forge.game.combat.Combat} object.
      */
     static final Predicate<Card> rampagesOrNeedsManyToBlock = Predicates.or(CardPredicates.containsKeyword("Rampage"), CardPredicates.containsKeyword("CantBeBlockedByAmount GT"));
 
@@ -362,8 +362,8 @@ public class AiBlockController {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
-     * @return a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
+     * @return a {@link forge.game.combat.Combat} object.
      */
     private void makeTradeBlocks(final Combat combat) {
 

@@ -23,7 +23,7 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
-import forge.game.phase.Combat;
+import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;

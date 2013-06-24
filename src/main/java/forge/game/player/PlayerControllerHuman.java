@@ -33,7 +33,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameType;
-import forge.game.phase.Combat;
+import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;

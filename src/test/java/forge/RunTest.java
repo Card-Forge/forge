@@ -2,7 +2,7 @@ package forge;
 
 import org.testng.annotations.Test;
 
-import forge.game.phase.CombatUtil;
+import forge.game.combat.CombatUtil;
 
 /**
  * <p>

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.phase;
+package forge.game.combat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +47,8 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
-import forge.game.combat.AttackingBand;
+import forge.game.phase.PhaseType;
+import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
@@ -74,7 +75,7 @@ public class CombatUtil {
      * @param blocker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public static boolean canBlock(final Card blocker, final Combat combat) {
@@ -173,7 +174,7 @@ public class CombatUtil {
      * @param attacker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public static boolean canBeBlocked(final Card attacker, final Combat combat, Player defendingPlayer) {
@@ -355,7 +356,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public static String validateBlocks(final Combat combat, final Player defending) {
@@ -410,7 +411,7 @@ public class CombatUtil {
      * @param blocker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public static boolean mustBlockAnAttacker(final Card blocker, final Combat combat) {
@@ -484,7 +485,7 @@ public class CombatUtil {
      * @param blocker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public static boolean canBlock(final Card attacker, final Card blocker, final Combat combat) {
@@ -655,7 +656,7 @@ public class CombatUtil {
      * @param c
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public static boolean canAttack(final Card c, final GameEntity def, final Combat combat) {

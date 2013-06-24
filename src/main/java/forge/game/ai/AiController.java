@@ -45,7 +45,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.game.GameActionUtil;
 import forge.game.Game;
-import forge.game.phase.Combat;
+import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;

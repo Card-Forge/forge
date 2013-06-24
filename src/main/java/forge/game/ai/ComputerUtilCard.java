@@ -28,7 +28,7 @@ import forge.card.spellability.SpellAbility;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.phase.Combat;
+import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.item.PaperCard;
 import forge.util.Aggregates;

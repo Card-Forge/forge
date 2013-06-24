@@ -24,7 +24,6 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.Command;
-import forge.game.Game;
 import forge.game.player.Player;
 
 
@@ -36,14 +35,14 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-public abstract class Phase implements java.io.Serializable {
+public class Phase implements java.io.Serializable {
 
     private static final long serialVersionUID = 4665309652476851977L;
 
-    protected final Game game;
+    protected final PhaseType type; // mostly decorative field - it's never used
 
-    public Phase(final Game game0) {
-        game = game0;
+    public Phase(PhaseType type) {
+        this.type = type;
     }
 
     /** The at. */
@@ -102,10 +101,6 @@ public abstract class Phase implements java.io.Serializable {
      * Use cleanup phase to terminate an effect with "until <Player's> next turn"
      */
     public final void addUntil(Player p, final Command c) {
-        if (null == p) {
-            p = game.getPhaseHandler().getPlayerTurn();
-        }
-    
         if (this.untilMap.containsKey(p)) {
             this.untilMap.get(p).add(0, c);
         } else {

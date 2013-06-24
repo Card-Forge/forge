@@ -24,7 +24,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.card.spellability.SpellAbility;
-import forge.game.phase.CombatUtil;
+import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.util.PredicateString;
 

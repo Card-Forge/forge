@@ -68,7 +68,11 @@ import forge.gui.input.InputSelectCardsFromList;
 public class Upkeep extends Phase {
     private static final long serialVersionUID = 6906459482978819354L;
 
-    public Upkeep(final Game game) { super(game); }
+    protected final Game game;
+    public Upkeep(final Game game) { 
+        super(PhaseType.UPKEEP);
+        this.game = game;
+    }
     
     /**
      * <p>

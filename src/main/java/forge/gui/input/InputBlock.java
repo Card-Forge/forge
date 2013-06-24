@@ -19,8 +19,8 @@ package forge.gui.input;
 
 import forge.Card;
 import forge.Singletons;
-import forge.game.phase.Combat;
-import forge.game.phase.CombatUtil;
+import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;

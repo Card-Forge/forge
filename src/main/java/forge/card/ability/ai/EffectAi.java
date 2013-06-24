@@ -13,7 +13,7 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
-import forge.game.phase.CombatUtil;
+import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;

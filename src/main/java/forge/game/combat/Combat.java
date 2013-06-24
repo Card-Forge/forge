@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.phase;
+package forge.game.combat;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,7 +33,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;
 import forge.card.trigger.TriggerType;
-import forge.game.combat.AttackingBand;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.maps.CollectionSuppliers;

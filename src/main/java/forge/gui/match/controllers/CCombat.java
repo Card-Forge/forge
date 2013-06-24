@@ -7,7 +7,7 @@ import forge.Command;
 import forge.GameEntity;
 import forge.game.Game;
 import forge.game.combat.AttackingBand;
-import forge.game.phase.Combat;
+import forge.game.combat.Combat;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.gui.framework.ICDoc;

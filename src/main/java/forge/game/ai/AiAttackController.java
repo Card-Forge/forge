@@ -30,8 +30,8 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.game.phase.Combat;
-import forge.game.phase.CombatUtil;
+import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -130,7 +130,7 @@ public class AiAttackController {
      * @param attacker
      *            a {@link forge.Card} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public final boolean isEffectiveAttacker(final Player ai, final Card attacker, final Combat combat) {
@@ -220,7 +220,7 @@ public class AiAttackController {
      * @param attackers
      *            a {@link forge.CardList} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a {@link forge.CardList} object.
      */
     public final List<Card> notNeededAsBlockers(final Player ai, final List<Card> attackers) {
@@ -438,7 +438,7 @@ public class AiAttackController {
      * </p>
      * 
      * @param c
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @param bAssault
      *            a boolean.
      */
@@ -491,7 +491,7 @@ public class AiAttackController {
      * Getter for the field <code>attackers</code>.
      * </p>
      * 
-     * @return a {@link forge.game.phase.Combat} object.
+     * @return a {@link forge.game.combat.Combat} object.
      */
     public final void declareAttackers(final Combat combat) {
         // if this method is called multiple times during a turn,
@@ -872,7 +872,7 @@ public class AiAttackController {
      * @param defenders
      *            a {@link forge.CardList} object.
      * @param combat
-     *            a {@link forge.game.phase.Combat} object.
+     *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
      */
     public final boolean shouldAttack(final Player ai, final Card attacker, final List<Card> defenders, final Combat combat) {
