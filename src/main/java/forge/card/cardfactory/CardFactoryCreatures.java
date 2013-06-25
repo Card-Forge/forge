@@ -193,10 +193,19 @@ public class CardFactoryCreatures {
                 }
 
                 if (target.getController().isHuman()) { // Human choose spread damage
+                    final Predicate<Card> stillInPlay = new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c){
+                            return c.isInPlay();
+                        }
+                    };
                     final int netAttack = target.getNetAttack();
-                    for (int x = 0; x < netAttack; x++) {
+                    
+                    for (int points = netAttack; points > 0; points--) {
+                        if (!Iterables.any(wolves, stillInPlay)) break;
                         InputSelectCards inp = new InputSelectCardsFromList(1,1,wolves);
-                        inp.setMessage("Select target wolf to damage for " + getSourceCard());
+                        inp.setMessage(String.format("Select target wolf to damage for %s (%d point%s to allocate)", 
+                                target, points, points > 1? "s": ""));
                         Singletons.getControl().getInputQueue().setInputAndWait(inp);
                         inp.getSelected().get(0).addDamage(1, target);
                     }
