@@ -6,3 +6,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_mourncaller.jpg
+Oracle:Whenever an attacking Kithkin or Elf is put into your graveyard from the battlefield, you may draw a card.
