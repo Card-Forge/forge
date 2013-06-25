@@ -1,0 +1,11 @@
+Name:Joven's Ferrets
+ManaCost:G
+Types:Creature Ferret
+PT:1/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +0/+2 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumDef$ 2
+T:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ At end of combat, tap all creatures that blocked CARDNAME this turn. They don't untap during their controller's next untap step.
+SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidCards$ Creature.blockedSource | SubAbility$ TrigPump
+SVar:TrigPump:DB$ PumpAll | Cost$ 0 | ValidCards$ Creature.blockedSource | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jovens_ferrets.jpg
+Oracle:Whenever Joven's Ferrets attacks, it gets +0/+2 until end of turn.\nAt end of combat, tap all creatures that blocked Joven's Ferrets this turn. They don't untap during their controller's next untap step.

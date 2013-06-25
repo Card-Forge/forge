@@ -6523,6 +6523,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             return null != combat && combat.isBlocked(this);
         } else if (property.startsWith("blockedBySource")) {
             return null != combat && combat.isBlocking(source, this);
+        } else if (property.startsWith("blockedSource")) {
+            return null != combat && combat.isBlocking(this, source);
         } else if (property.startsWith("isBlockedByRemembered")) {
             if ( null == combat ) return false;
             for (final Object o : source.getRemembered()) {
