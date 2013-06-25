@@ -13989,10 +13989,12 @@ res/sound/white_land.wav -text
 res/sound/win_duel.wav -text
 src/main/config/Forge.icns -text
 src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
+src/main/config/builder/create-dmg.builder -text
 src/main/config/create-dmg -text
 src/main/config/forge.ico -text svneol=unset#image/ico
 src/main/config/forge.sh svneol=native#text/x-sh
 src/main/config/forge_checks.xml svneol=native#text/xml
+src/main/config/support/dmg-license.py svneol=native#text/x-python
 src/main/config/support/template.applescript -text
 src/main/html/connectionTest.html -text
 src/main/html/css/core.css -text
