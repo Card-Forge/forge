@@ -14,7 +14,7 @@ import forge.GameEntity;
 public class AttackingBand {
     private List<Card> attackers = new ArrayList<Card>();
 //    private GameEntity defender = null;
-    private boolean blocked = false; // even if all blockers were killed before FS or CD, band remains blocked
+    private Boolean blocked = null; // even if all blockers were killed before FS or CD, band remains blocked
     
     public AttackingBand(List<Card> band, GameEntity def) {
         attackers.addAll(band);
@@ -84,7 +84,7 @@ public class AttackingBand {
         return attackers.contains(c);
     }
 
-    public boolean isBlocked() { return blocked; }
+    public Boolean isBlocked() { return blocked; }
     public void setBlocked(boolean value) { blocked = value; }
 
     /**
@@ -101,7 +101,7 @@ public class AttackingBand {
      */
     @Override
     public String toString() {
-        return String.format("%s %s", attackers.toString(), blocked ? ">||" : ">>>" );
+        return String.format("%s %s", attackers.toString(), blocked == null ? " ? " : blocked.booleanValue() ? ">||" : ">>>" );
     }
     
 }

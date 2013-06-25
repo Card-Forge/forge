@@ -88,13 +88,15 @@ public enum CCombat implements ICDoc {
                     display.append("\n");
                 }
                 
+                Boolean blocked = band.isBlocked();
                 boolean isBand = band.getAttackers().size() > 1;
                 if (isBand) {
                     // Only print Band data if it's actually a band
                     display.append(" > BAND");
-                    if (band.isBlocked()) {
-                        display.append(" (blocked)");
-                    }
+                    
+                    if( blocked != null )
+                        display.append(blocked.booleanValue() ? " (blocked)" : " >>>");
+                    
                     display.append("\n");
                 }
                 
@@ -106,8 +108,8 @@ public enum CCombat implements ICDoc {
                 List<Card> blockers = combat.getBlockers(band);
                 if (!isBand && blockers.isEmpty()) {
                     // if single creature is blocked, but no longer has blockers, tell the user!
-                    if (band.isBlocked())
-                        display.append("     (blocked)\n");
+                    if (blocked != null)
+                        display.append(blocked.booleanValue() ? "     (blocked)\n" : "     >>>\n");
                 }
 
                 for (final Card element : blockers) {

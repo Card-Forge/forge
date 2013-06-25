@@ -206,7 +206,7 @@ public class Combat {
 
     public final boolean isBlocked(final Card attacker) {
         AttackingBand band = getBandOfAttacker(attacker);
-        return band == null ? false : band.isBlocked();
+        return band == null ? false : Boolean.TRUE.equals(band.isBlocked());
         
     }
 
@@ -403,9 +403,9 @@ public class Combat {
             for(AttackingBand ab : abs) {
                 Collection<Card> blockers = blockedBands.get(ab);
                 boolean isBlocked = blockers != null && !blockers.isEmpty();
-                if (isBlocked)
-                    ab.setBlocked(true);
-                else
+                ab.setBlocked(isBlocked);
+
+                if (!isBlocked )
                     for (Card attacker : ab.getAttackers()) {
                         // Run Unblocked Trigger
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -473,7 +473,7 @@ public class Combat {
             assignedDamage = true;
             // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender
             if (orderedBlockers == null || orderedBlockers.isEmpty()) {
-                if (trampler || !band.isBlocked()) {
+                if (trampler || !band.isBlocked()) { // this is called after declare blockers, no worries 'bout nulls in isBlocked
                     this.addDefendingDamage(damageDealt, attacker);
                 } // No damage happens if blocked but no blockers left
             } else {
@@ -615,7 +615,8 @@ public class Combat {
      * @return a boolean.
      */
     public final boolean isUnblocked(final Card att) {
-        return !isBlocked(att);
+        AttackingBand band = getBandOfAttacker(att);
+        return band == null ? false : Boolean.FALSE.equals(band.isBlocked());
     }
 
     /**
@@ -629,7 +630,7 @@ public class Combat {
         List<Card> unblocked = new ArrayList<Card>();
         for (Collection<AttackingBand> abs : attackedEntities.values())
             for (AttackingBand ab : abs)
-                if ( ab.isBlocked() )
+                if ( Boolean.TRUE.equals(ab.isBlocked()) )
                     unblocked.addAll(ab.getAttackers());
 
         return unblocked;
