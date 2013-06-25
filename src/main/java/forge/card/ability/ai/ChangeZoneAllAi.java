@@ -28,7 +28,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
+        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
 
         if (abCost != null) {
             // AI currently disabled for these costs
