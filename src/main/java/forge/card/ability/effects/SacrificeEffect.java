@@ -5,6 +5,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.CardUtil;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -67,11 +68,12 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 }
                 
                 for(Card sac : choosenToSacrifice) {
+                    final Card lKICopy = CardUtil.getLKICopy(sac);
                     boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa);
                     boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa);
                     
                     if ( remSacrificed && (wasDestroyed || wasSacrificed) ) {
-                        card.addRemembered(sac);
+                        card.addRemembered(lKICopy);
                     }
                 }
             }
