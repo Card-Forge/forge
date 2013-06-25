@@ -13991,6 +13991,7 @@ src/main/config/Forge.icns -text
 src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
 src/main/config/builder/create-dmg.builder -text
 src/main/config/create-dmg -text
+src/main/config/forge.command svneol=native#text/x-sh
 src/main/config/forge.ico -text svneol=unset#image/ico
 src/main/config/forge.sh svneol=native#text/x-sh
 src/main/config/forge_checks.xml svneol=native#text/xml

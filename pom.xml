@@ -263,8 +263,8 @@
             </plugin>
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>maven-replacer-plugin</artifactId>
-                <version>1.4.1</version>
+                <artifactId>replacer</artifactId>
+                <version>1.5.2</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -274,8 +274,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <file>${configSourceDirectory}/forge.sh</file>
-                    <outputFile>${project.build.directory}/forge.sh</outputFile>
+                    <basedir>${configSourceDirectory}</basedir>
+                    <filesToInclude>forge.sh, forge.command</filesToInclude>
+                    <outputBasedir>${project.build.directory}</outputBasedir>
+                    <outputDir>.</outputDir>
                     <regex>false</regex>
                     <replacements>
                         <replacement>
@@ -876,6 +878,7 @@
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}" />
                                         <copy todir="${project.build.directory}/${project.build.finalName}">
                                             <fileset dir="${project.build.directory}" includes="forge.sh" />
+                                            <fileset dir="${project.build.directory}" includes="forge.command" />
                                             <fileset dir="${basedir}" includes="forge.profile.properties.example" />
                                             <fileset dir="${basedir}" includes="LICENSE.txt" />
                                             <fileset dir="${basedir}" includes="README.txt" />
@@ -890,15 +893,18 @@
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
                                         <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/res/cardsfolder" level="1" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.command" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
                                         <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" compression="bzip2">
                                             <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />
+                                                <include name="forge.command" />
                                                 <include name="forge.exe" />
                                             </tarfileset>
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
                                                 <exclude name="forge.sh" />
+                                                <exclude name="forge.command" />
                                                 <exclude name="forge.exe" />
                                             </tarfileset>
                                         </tar>
