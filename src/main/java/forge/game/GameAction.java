@@ -224,7 +224,10 @@ public class GameAction {
 
         if (zoneFrom != null) {
             if (zoneFrom.is(ZoneType.Battlefield) && c.isCreature() && game.getCombat() != null) {
+                if ( !zoneTo.is(ZoneType.Battlefield) )
+                    game.getCombat().saveLKI(lastKnownInfo);
                 game.getCombat().removeFromCombat(c);
+                
             }
             zoneFrom.remove(c);
         }
@@ -233,11 +236,7 @@ public class GameAction {
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", lastKnownInfo);
-        if (zoneFrom != null) {
-            runParams.put("Origin", zoneFrom.getZoneType().name());
-        } else {
-            runParams.put("Origin", null);
-        }
+        runParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType().name() : null);
         runParams.put("Destination", zoneTo.getZoneType().name());
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
         // AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
@@ -1349,9 +1348,6 @@ public class GameAction {
 
         final boolean persist = (c.hasKeyword("Persist") && (c.getCounters(CounterType.M1M1) == 0)) && !c.isToken();
         final boolean undying = (c.hasKeyword("Undying") && (c.getCounters(CounterType.P1P1) == 0)) && !c.isToken();
-
-        if (game.getPhaseHandler().inCombat())
-            game.getPhaseHandler().getCombat().removeFromCombat(c);
 
         final Card newCard = this.moveToGraveyard(c);
 

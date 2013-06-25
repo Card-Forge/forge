@@ -14477,6 +14477,7 @@ src/main/java/forge/game/ai/ComputerUtilCost.java -text
 src/main/java/forge/game/ai/ComputerUtilMana.java -text
 src/main/java/forge/game/combat/AttackingBand.java -text
 src/main/java/forge/game/combat/Combat.java svneol=native#text/plain
+src/main/java/forge/game/combat/CombatLki.java -text
 src/main/java/forge/game/combat/CombatUtil.java svneol=native#text/plain
 src/main/java/forge/game/event/GameEvent.java -text
 src/main/java/forge/game/event/GameEventAnteCardsSelected.java -text
