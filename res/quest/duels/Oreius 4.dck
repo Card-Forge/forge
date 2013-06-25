@@ -9,10 +9,10 @@ Deck Type=constructed
 [main]
 4 Tropical Island
 1 Forest|ODY
-1 Island|ODY
+2 Island|ODY
 4 Misty Rainforest
 3 Scalding Tarn
-3 Flooded Strand
+2 Flooded Strand
 3 Polluted Delta
 1 Mox Emerald
 1 Mox Sapphire
@@ -22,12 +22,14 @@ Deck Type=constructed
 4 Delver of Secrets
 4 Mental Note
 4 Spell Snare
-3 Visions of Beyond
+1 Daze
+1 Visions of Beyond
 1 Time Walk
 3 Mulch
-4 Tracker's Instincts
+3 Tracker's Instincts
 2 Werebear|ODY
 4 Tarmogoyf
 1 Deep Analysis
 3 Fact or Fiction
+2 Dismember
 [sideboard]
