@@ -89,6 +89,7 @@ Urza's Engine
 Icatian Skirmishers
 Camel
 Nalathni Dragon
+Joven's Ferrets
 
 
 --------------------
@@ -161,6 +162,8 @@ Warden of Evos Isle
 Burning Earth
 Goblin Diplomats
 Seismic Stomp
+Garruk, Caller of Beasts
+Rumbling Baloth
 
 
 ------------
