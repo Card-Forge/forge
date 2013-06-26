@@ -16,8 +16,8 @@ public class ReplaceGameLoss extends ReplacementEffect {
      * @param map the map
      * @param host the host
      */
-    public ReplaceGameLoss(Map<String, String> map, Card host) {
-        super(map, host);
+    public ReplaceGameLoss(Map<String, String> map, Card host, boolean intrinsic) {
+        super(map, host, intrinsic);
     }
 
     /* (non-Javadoc)

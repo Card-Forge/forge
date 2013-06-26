@@ -8147,7 +8147,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void setReplacementEffects(final List<ReplacementEffect> res) {
         this.getCharacteristics().getReplacementEffects().clear();
         for (final ReplacementEffect replacementEffect : res) {
-            if (!replacementEffect.isTemporary()) {
+            if (replacementEffect.isIntrinsic()) {
                 this.addReplacementEffect(replacementEffect);
             }
         }

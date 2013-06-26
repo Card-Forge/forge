@@ -340,7 +340,7 @@ public class CardFactory {
         //Planeswalker damage redirection
         card.addReplacementEffect(ReplacementHandler.parseReplacement("Event$ DamageDone | ActiveZones$ Battlefield | IsCombat$ False | ValidSource$ Card.YouDontCtrl"
                 + " | ValidTarget$ You | Optional$ True | OptionalDecider$ Opponent | ReplaceWith$ DamagePW | Secondary$ True"
-                + " | AICheckSVar$ DamagePWAI | AISVarCompare$ GT4 | Description$ Redirect damage to " + card.toString(), card));
+                + " | AICheckSVar$ DamagePWAI | AISVarCompare$ GT4 | Description$ Redirect damage to " + card.toString(), card, true));
         card.setSVar("DamagePW", "AB$DealDamage | Cost$ 0 | Defined$ Self | NumDmg$ DamagePWX | DamageSource$ ReplacedSource | References$ DamagePWX,DamagePWAI");
         card.setSVar("DamagePWX", "ReplaceCount$DamageAmount");
         card.setSVar("DamagePWAI", "ReplaceCount$DamageAmount/NMinus.DamagePWY");
@@ -400,7 +400,7 @@ public class CardFactory {
     private static void readCardFace(Card c, ICardFace face) {
         for(String a : face.getAbilities())                 c.addIntrinsicAbility(a);
         for(String k : face.getKeywords())                  c.addIntrinsicKeyword(k);
-        for(String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c));
+        for(String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true));
         for(String s : face.getStaticAbilities())           c.addStaticAbilityString(s);
         for(String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
         for(Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());

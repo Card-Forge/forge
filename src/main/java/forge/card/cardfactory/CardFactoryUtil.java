@@ -2649,7 +2649,7 @@ public class CardFactoryUtil {
                     }
                 }
 
-                ReplacementEffect re = ReplacementHandler.parseReplacement(repEffsb.toString(), card);
+                ReplacementEffect re = ReplacementHandler.parseReplacement(repEffsb.toString(), card, true);
                 re.setLayer(layer);
                 re.setOverridingAbility(repAb);
 
@@ -2687,7 +2687,7 @@ public class CardFactoryUtil {
                 String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
                         + "| ReplaceWith$ ETBCounterSVar | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
 
-                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
+                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
                 re.setLayer(ReplacementLayer.Other);
 
                 card.addReplacementEffect(re);
@@ -2705,7 +2705,7 @@ public class CardFactoryUtil {
                 String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
                         + "| ReplaceWith$ ETBTappedSVar | Description$ CARDNAME enters the battlefield tapped.";
 
-                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
+                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
                 re.setLayer(ReplacementLayer.Other);
 
                 card.addReplacementEffect(re);
@@ -3318,7 +3318,7 @@ public class CardFactoryUtil {
         }
 
         if( hasKw ) { 
-            ReplacementEffect re = ReplacementHandler.parseReplacement("Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | ReplaceWith$ RegenTA | Secondary$ True | TotemArmor$ True | Description$ Totem armor - " + c, c);
+            ReplacementEffect re = ReplacementHandler.parseReplacement("Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | ReplaceWith$ RegenTA | Secondary$ True | TotemArmor$ True | Description$ Totem armor - " + c, c, true);
             c.getSVars().put("RegenTA", "AB$ DealDamage | Cost$ 0 | Defined$ ReplacedCard | Remove$ All | SubAbility$ DestroyMe");
             c.getSVars().put("DestroyMe", "DB$ Destroy | Defined$ Self");
             c.getReplacementEffects().add(re);

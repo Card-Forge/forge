@@ -18,8 +18,8 @@ public class ReplaceMoved extends ReplacementEffect {
      * @param mapParams &emsp; HashMap<String, String>
      * @param host &emsp; Card
      */
-    public ReplaceMoved(final Map<String, String> mapParams, final Card host) {
-        super(mapParams, host);
+    public ReplaceMoved(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
+        super(mapParams, host, intrinsic);
     }
 
     /* (non-Javadoc)

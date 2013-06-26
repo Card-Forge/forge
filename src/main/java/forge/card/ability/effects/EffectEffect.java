@@ -146,7 +146,7 @@ public class EffectEffect extends SpellAbilityEffect {
             for (final String s : effectReplacementEffects) {
                 final String actualReplacement = hostCard.getSVar(s);
 
-                final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff);
+                final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, eff, true);
                 eff.addReplacementEffect(parsedReplacement);
             }
         }

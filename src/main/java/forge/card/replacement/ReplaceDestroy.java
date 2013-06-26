@@ -34,8 +34,8 @@ public class ReplaceDestroy extends ReplacementEffect {
      * @param params the params
      * @param host the host
      */
-    public ReplaceDestroy(final Map<String, String> params, final Card host) {
-        super(params, host);
+    public ReplaceDestroy(final Map<String, String> params, final Card host, final boolean intrinsic) {
+        super(params, host, intrinsic);
     }
 
     /* (non-Javadoc)

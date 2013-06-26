@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
@@ -134,7 +135,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
      */
     void doUnanimate(final Card c, SpellAbility sa, final String colorDesc,
             final ArrayList<String> hiddenKeywords, final ArrayList<SpellAbility> addedAbilities,
-            final ArrayList<Trigger> addedTriggers, final long colorTimestamp, final boolean givesStAbs,
+            final ArrayList<Trigger> addedTriggers, final ArrayList<ReplacementEffect> addedReplacements, 
+            final long colorTimestamp, final boolean givesStAbs,
             final ArrayList<SpellAbility> removedAbilities, final long timestamp) {
 
         c.removeNewPT(timestamp);
@@ -167,6 +169,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         for (final Trigger t : addedTriggers) {
             c.removeTrigger(t);
+        }
+
+        for (final ReplacementEffect rep : addedReplacements) {
+            c.getReplacementEffects().remove(rep);
         }
 
         // any other unanimate cleanup

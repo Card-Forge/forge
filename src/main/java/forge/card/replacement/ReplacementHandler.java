@@ -261,10 +261,10 @@ public class ReplacementHandler {
      *            The cards that hosts the replacement effect.
      * @return A finished instance
      */
-    public static ReplacementEffect parseReplacement(final String repParse, final Card host) {
+    public static ReplacementEffect parseReplacement(final String repParse, final Card host, final boolean intrinsic) {
         
         final Map<String, String> mapParams = FileSection.parseToMap(repParse, "$", "|");
-        return ReplacementHandler.parseReplacement(mapParams, host);
+        return ReplacementHandler.parseReplacement(mapParams, host, intrinsic);
     }
 
     /**
@@ -278,9 +278,9 @@ public class ReplacementHandler {
      *            The card that hosts the replacement effect
      * @return The finished instance
      */
-    private static ReplacementEffect parseReplacement(final Map<String, String> mapParams, final Card host) {
+    private static ReplacementEffect parseReplacement(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
         final ReplacementType rt = ReplacementType.smartValueOf(mapParams.get("Event"));
-        ReplacementEffect ret = rt.createReplacement(mapParams, host);
+        ReplacementEffect ret = rt.createReplacement(mapParams, host, intrinsic);
 
         String activeZones = mapParams.get("ActiveZones");
         if (null != activeZones) {

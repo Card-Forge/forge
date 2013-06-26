@@ -13,6 +13,7 @@ import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.replacement.ReplacementEffect;
+import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
@@ -100,7 +101,11 @@ public class AnimateAllEffect extends AnimateEffectBase {
         if (sa.hasParam("Abilities")) {
             abilities.addAll(Arrays.asList(sa.getParam("Abilities").split(",")));
         }
-
+        // replacement effects to add to the animated being
+        final ArrayList<String> replacements = new ArrayList<String>();
+        if (sa.hasParam("Replacements")) {
+            replacements.addAll(Arrays.asList(sa.getParam("Replacements").split(",")));
+        }
         // triggers to add to the animated being
         final ArrayList<String> triggers = new ArrayList<String>();
         if (sa.hasParam("Triggers")) {
@@ -156,7 +161,15 @@ public class AnimateAllEffect extends AnimateEffectBase {
                     }
                 }
             }
-
+            // give replacement effects
+            final ArrayList<ReplacementEffect> addedReplacements = new ArrayList<ReplacementEffect>();
+            if (replacements.size() > 0) {
+                for (final String s : replacements) {
+                    final String actualReplacement = host.getSVar(s);
+                    final ReplacementEffect parsedReplacement = ReplacementHandler.parseReplacement(actualReplacement, c, false);
+                    addedReplacements.add(c.addReplacementEffect(parsedReplacement));
+                }
+            }
             // Grant triggers
             final ArrayList<Trigger> addedTriggers = new ArrayList<Trigger>();
             if (triggers.size() > 0) {
@@ -210,7 +223,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
                 @Override
                 public void run() {
-                    doUnanimate(c, sa, finalDesc, hiddenKeywords, addedAbilities, addedTriggers,
+                    doUnanimate(c, sa, finalDesc, hiddenKeywords, addedAbilities, addedTriggers, addedReplacements,
                             colorTimestamp, false, removedAbilities, timestamp);
 
                     // give back suppressed triggers

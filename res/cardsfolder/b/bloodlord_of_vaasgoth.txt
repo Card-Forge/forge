@@ -1,0 +1,13 @@
+Name:Bloodlord of Vaasgoth
+ManaCost:3 B B
+Types:Creature Vampire Warrior
+PT:3/3
+K:Bloodthirst 3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Creature.Vampire | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ BloodPump | TriggerDescription$ Whenever you cast a Vampire creature spell, it gains bloodthirst 3.
+SVar:BloodPump:AB$ Animate | Cost$ 0 | Defined$ TriggeredCard | Replacements$ etbBloodthirst | sVars$ VaasgothETB,BloodthirstCounters | Permanent$ True
+SVar:etbBloodthirst:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Bloodthirst$ True | ReplaceWith$ VaasgothETB | Description$ Bloodthirst 3 (If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)
+SVar:VaasgothETB:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | SubAbility$ BloodthirstCounters
+SVar:BloodthirstCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodlord_of_vaasgoth.jpg
+Oracle:Bloodthirst 3 (If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)\nFlying\nWhenever you cast a Vampire creature spell, it gains bloodthirst 3.

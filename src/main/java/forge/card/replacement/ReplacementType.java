@@ -54,14 +54,14 @@ public enum ReplacementType {
      * @param intrinsic
      * @return
      */
-    public ReplacementEffect createReplacement(Map<String, String> mapParams, Card host) {
+    public ReplacementEffect createReplacement(Map<String, String> mapParams, Card host, boolean intrinsic) {
         @SuppressWarnings("unchecked")
         Constructor<? extends ReplacementEffect>[] cc = (Constructor<? extends ReplacementEffect>[]) clasz.getDeclaredConstructors();
         for (Constructor<? extends ReplacementEffect> c : cc) {
             Class<?>[] pp = c.getParameterTypes();
             if (pp[0].isAssignableFrom(Map.class)) {
                 try {
-                    ReplacementEffect res = c.newInstance(mapParams, host);
+                    ReplacementEffect res = c.newInstance(mapParams, host, intrinsic);
                     return res;
                 } catch (IllegalArgumentException e) {
                     // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.

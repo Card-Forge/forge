@@ -34,8 +34,8 @@ public class ReplaceGainLife extends ReplacementEffect {
      * @param map the map
      * @param host the host
      */
-    public ReplaceGainLife(Map<String, String> map, Card host) {
-        super(map, host);
+    public ReplaceGainLife(Map<String, String> map, Card host, boolean intrinsic) {
+        super(map, host, intrinsic);
     }
 
     /* (non-Javadoc)

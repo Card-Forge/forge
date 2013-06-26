@@ -41,6 +41,9 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     /** The has run. */
     private boolean hasRun = false;
 
+    /** The is intrinsic. */
+    private final boolean intrinsic;
+
     /**
      * Checks for run.
      * 
@@ -61,9 +64,10 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @param host
      *            the host
      */
-    public ReplacementEffect(final Map<String, String> map, final Card host) {
+    public ReplacementEffect(final Map<String, String> map, final Card host, final boolean intrinsic) {
         mapParams = map;
         this.setHostCard(host);
+        this.intrinsic = intrinsic;
     }
 
     /**
@@ -200,10 +204,11 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     public final ReplacementEffect getCopy() {
         ReplacementType rt = ReplacementType.getTypeFor(this);
-        ReplacementEffect res = rt.createReplacement(mapParams, hostCard); 
+        ReplacementEffect res = rt.createReplacement(mapParams, hostCard, intrinsic); 
         res.setOverridingAbility(this.getOverridingAbility());
         res.setActiveZone(validHostZones);
         res.setLayer(getLayer());
+        res.setTemporary(isTemporary());
         return res;
 
     }
@@ -269,5 +274,13 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      */
     public final boolean isTemporary() {
         return this.temporary;
+    }
+    /**
+     * Checks if is intrinsic.
+     * 
+     * @return the isIntrinsic
+     */
+    public boolean isIntrinsic() {
+        return this.intrinsic;
     }
 }

@@ -34,8 +34,8 @@ public class ReplaceCounter extends ReplacementEffect {
      * @param map the map
      * @param host the host
      */
-    public ReplaceCounter(Map<String, String> map, Card host) {
-        super(map, host);
+    public ReplaceCounter(Map<String, String> map, Card host, boolean intrinsic) {
+        super(map, host, intrinsic);
     }
 
     /* (non-Javadoc)

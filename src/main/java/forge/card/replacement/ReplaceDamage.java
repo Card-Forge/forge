@@ -36,8 +36,8 @@ public class ReplaceDamage extends ReplacementEffect {
      * @param map the map
      * @param host the host
      */
-    public ReplaceDamage(Map<String, String> map, Card host) {
-        super(map, host);
+    public ReplaceDamage(Map<String, String> map, Card host, boolean intrinsic) {
+        super(map, host, intrinsic);
     }
 
     /* (non-Javadoc)
