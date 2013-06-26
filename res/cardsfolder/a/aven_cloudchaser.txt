@@ -4,6 +4,6 @@ Types:Creature Bird Soldier
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target enchantment.
-SVar:TrigDestroy:DB$Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_cloudchaser.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Aven Cloudchaser enters the battlefield, destroy target enchantment.

@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Secondary$ True | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy all other creatures.
 SVar:TrigDestroy:DB$DestroyAll | Cost$ 0 | ValidCards$ Creature.Other+YouCtrl
 SVar:TrigKicker:DB$DestroyAll | Cost$ 0 | ValidCards$ Creature.Other
-SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
 DeckNeeds:Color$white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolation_giant.jpg
 Oracle:Kicker {W}{W} (You may pay an additional {W}{W} as you cast this spell.)\nWhen Desolation Giant enters the battlefield, destroy all other creatures you control. If it was kicked, destroy all other creatures instead.

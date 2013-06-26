@@ -2,6 +2,6 @@ Name:Stormbind
 ManaCost:1 R G
 Types:Enchantment
 A:AB$ DealDamage | Cost$ 2 Discard<1/Random> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
-SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormbind.jpg
 Oracle:{2}, Discard a card at random: Stormbind deals 2 damage to target creature or player.

@@ -3,8 +3,8 @@ ManaCost:1 G W
 Types:Creature Frog Beast
 PT:3/4
 A:AB$ ChangeZone | Cost$ Discard<2/Card> | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | SpellDescription$ Exile CARDNAME. Return it to the battlefield under its owner's control at the beginning of the next end step.
-SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield.
-SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Self
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anurid_brushhopper.jpg
 Oracle:Discard two cards: Exile Anurid Brushhopper. Return it to the battlefield under its owner's control at the beginning of the next end step.
