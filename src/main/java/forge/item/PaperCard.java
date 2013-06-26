@@ -129,10 +129,6 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         this.rarity = rare;
     }
 
-    public static PaperCard makeFoiled(final PaperCard c) {
-        return new PaperCard(c.card, c.edition, c.rarity, c.artIndex, true);
-    }
-    
     // Want this class to be a key for HashTable
     @Override
     public boolean equals(final Object obj) {

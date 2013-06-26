@@ -47,8 +47,8 @@ import forge.util.maps.TreeMapOfLists;
 public final class CardDb implements ICardDatabase {
     private static volatile CardDb commonCards = null; // 'volatile' keyword makes this working
     private static volatile CardDb variantCards = null; // 'volatile' keyword makes this working
-    public final static String foilSuffix = " foil";
-    private final static int foilSuffixLength = foilSuffix.length(); 
+    public final static String foilSuffix = "+";
+    private final static int foilSuffixLength = foilSuffix.length();
 
     public static ICardDatabase instance() {
         if (CardDb.commonCards == null) {
@@ -122,7 +122,7 @@ public final class CardDb implements ICardDatabase {
                     System.out.println(" ... 100% ");
                 else {
                     int missing = (e.getCards().length - missingCards.size()) * 10000 / e.getCards().length;
-                    System.out.printf(" ... %.2f%% (%s missing: %s)%n", missing * 0.01f, Lang.nounWithAmount(missingCards.size(), "card"), StringUtils.join(missingCards, " | ") );
+                    System.out.printf(" ... %.2f%% (%s missing: %s )%n", missing * 0.01f, Lang.nounWithAmount(missingCards.size(), "card"), StringUtils.join(missingCards, " | ") );
                 }
                 missingCards.clear();
             }
@@ -171,7 +171,7 @@ public final class CardDb implements ICardDatabase {
     }
 
     private boolean isFoil(final String cardName) {
-        return cardName.toLowerCase().endsWith(CardDb.foilSuffix) && (cardName.length() > CardDb.foilSuffixLength);
+        return cardName.toLowerCase().endsWith(CardDb.foilSuffix);
     }
 
     /**
@@ -181,7 +181,7 @@ public final class CardDb implements ICardDatabase {
      * @return the string
      */
     public String removeFoilSuffix(final String cardName) {
-        return cardName.substring(0, cardName.length() - CardDb.foilSuffixLength);
+        return cardName.toLowerCase().endsWith(CardDb.foilSuffix) ? cardName.substring(0, cardName.length() - CardDb.foilSuffixLength) : cardName;
     }
 
     
@@ -202,12 +202,13 @@ public final class CardDb implements ICardDatabase {
 
         final boolean isFoil = this.isFoil(cardName0);
         final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
+        
         final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(cardName);
         
         final PaperCard res = nameWithSet.right == null 
                 ? ( fromLastSet ? this.uniqueCardsByName.get(nameWithSet.left) : Aggregates.random(this.allCardsByName.get(nameWithSet.left)) ) 
                 : tryGetCard(nameWithSet.left, nameWithSet.right);
-        return null != res && isFoil ? PaperCard.makeFoiled(res) : res;
+        return null != res && isFoil ? getFoiled(res) : res;
     }
 
     @Override
@@ -215,6 +216,41 @@ public final class CardDb implements ICardDatabase {
         return tryGetCard(cardName, setName, -1);
     }
     
+    @Override
+    public PaperCard tryGetCard(final String cardName0, String setName, int index) {
+        final boolean isFoil = this.isFoil(cardName0);
+        final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
+        
+        Collection<PaperCard> cards = allCardsByName.get(cardName);
+        if ( null == cards ) return null;
+    
+        PaperCard result = null;
+        if ( index < 0 ) { // this stands for 'random art'
+            PaperCard[] candidates = new PaperCard[9]; // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
+            int cnt = 0;
+            for( PaperCard pc : cards ) {
+                if( pc.getEdition().equals(setName) )
+                    candidates[cnt++] = pc;
+            }
+    
+            if (cnt == 0 ) return null;
+            result = cnt == 1  ? candidates[0] : candidates[MyRandom.getRandom().nextInt(cnt)];
+        } else 
+            for( PaperCard pc : cards ) {
+                if( pc.getEdition().equals(setName) && index == pc.getArtIndex() ) {
+                    result = pc;
+                    break;
+                }
+            }
+        if ( result == null ) return null;
+        return isFoil ? getFoiled(result) : result;
+    }
+    
+    public PaperCard getFoiled(PaperCard card0) {
+        // Here - I am still unsure if there should be a cache Card->Card from unfoiled to foiled, to avoid creation of N instances of single plains
+        return new PaperCard(card0.getRules(), card0.getEdition(), card0.getRarity(), card0.getArtIndex(), true);
+    }
+
     @Override
     public int getPrintCount(String cardName, String edition) {
         int cnt = 0;
@@ -235,30 +271,6 @@ public final class CardDb implements ICardDatabase {
         return max + 1;
     }    
     
-    @Override
-    public PaperCard tryGetCard(final String cardName, String setName, int index) {
-        Collection<PaperCard> cards = allCardsByName.get(cardName);
-        if ( null == cards ) return null;
-
-        if ( index < 0 ) { // this stands for 'random art'
-            PaperCard[] candidates = new PaperCard[9]; // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
-            int cnt = 0;
-            for( PaperCard pc : cards ) {
-                if( pc.getEdition().equals(setName) )
-                    candidates[cnt++] = pc;
-            }
-
-            if (cnt == 0 ) return null;
-            if (cnt == 1 ) return candidates[0];
-            return candidates[MyRandom.getRandom().nextInt(cnt)];
-        } else 
-            for( PaperCard pc : cards ) {
-                if( pc.getEdition().equals(setName) && index == pc.getArtIndex() )
-                    return pc;
-            }
-        return null;
-    }
-
     // Single fetch
     @Override
     public PaperCard getCard(final String name) {

@@ -124,7 +124,7 @@ public class GameNew {
                 if (preferences.getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
                     cpi = CardDb.instance().getCard(cp.getName(), cp.getEdition(), -1);
                     if ( cp.isFoil() )
-                        cpi = PaperCard.makeFoiled(cpi);
+                        cpi = CardDb.instance().getFoiled(cpi);
                 }
 
                 final Card card = cpi.toForgeCard(player);

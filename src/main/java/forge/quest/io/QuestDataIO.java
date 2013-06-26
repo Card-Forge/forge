@@ -684,7 +684,7 @@ public class QuestDataIO {
             final boolean foil = "1".equals(reader.getAttribute("foil"));
             PaperCard c = CardDb.instance().tryGetCard(name, set, index);
             if ( null == c ) c = CardDb.instance().getCard(name);
-            return foil ? PaperCard.makeFoiled(c) : c;
+            return foil ? CardDb.instance().getFoiled(c) : c;
         }
     }
 }

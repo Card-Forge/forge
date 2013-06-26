@@ -429,7 +429,7 @@ public class CardPanel extends JPanel implements CardContainer {
                     (this.cardYOffset + (this.cardHeight / 2)) - 20);
         }
 
-        if (this.getGameCard().getFoil() > 0) {
+        if (card.getFoil() > 0) {
             final String fl = String.format("foil%02d", card.getFoil());
             final int z = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
             CardFaceSymbols.drawOther(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),

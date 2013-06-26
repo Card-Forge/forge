@@ -184,7 +184,7 @@ public class GauntletIO {
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
             final PaperCard card = CardDb.instance().getCard(name, set, index);
-            return foil ? PaperCard.makeFoiled(card) : card;
+            return foil ? CardDb.instance().getFoiled(card) : card;
         }
     }
 }
