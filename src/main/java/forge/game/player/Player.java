@@ -2328,7 +2328,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         } else if (property.equals("attackedBySourceThisCombat")) {
-            if (!this.equals(game.getCombat().getDefenderPlayerByAttacker(source))) {
+            if (game.getCombat() == null || !this.equals(game.getCombat().getDefenderPlayerByAttacker(source))) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {

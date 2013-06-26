@@ -1228,7 +1228,8 @@ public class GameAction {
             c.setDamage(0);
             c.tap();
             c.addRegeneratedThisTurn();
-            game.getCombat().removeFromCombat(c);
+            if (game.getCombat() != null)
+                game.getCombat().removeFromCombat(c);
 
             // Play the Regen sound
             game.fireEvent(new GameEventCardRegenerated());

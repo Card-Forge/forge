@@ -188,7 +188,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return true;
             }
             Predicate<Card> flyingOrReach = Predicates.or(CardPredicates.hasKeyword("Flying"), CardPredicates.hasKeyword("Reach"));
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || card.getNetCombatDamage() <= 0
                     || !Iterables.any(CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)),
@@ -203,7 +203,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && ComputerUtilCombat.lifeInDanger(ai, game.getCombat())) {
                 return true;
             }
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getNotKeyword(CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)),
@@ -241,33 +241,33 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
             return false;
         } else if (combatRelevant) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                     || (opp.getCreaturesInPlay().size() < 1)
                     || CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Double Strike")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || card.getNetCombatDamage() <= 0
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return false;
             }
         } else if (keyword.startsWith("Rampage")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).size() < 2) {
                 return false;
             }
         } else if (keyword.startsWith("Flanking")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || CardLists.getNotKeyword(CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)),
                             "Flanking").isEmpty()) {
                 return false;
             }
         } else if (keyword.startsWith("Trample")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || !CombatUtil.canBeBlocked(card, opp)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || card.getNetCombatDamage() + attack <= 1
@@ -282,7 +282,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return true;
             }
             if ((ph.isPlayerTurn(opp))
-                    || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+                    || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return false;
             }
@@ -290,7 +290,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (card.getNetCombatDamage() <= 0) {
                 return false;
             }
-            return combat != null && ( combat.isBlocking(card) || combat.isAttacking(card) && combat.isBlocked(card) );
+            return combat != null && ( combat.isBlocking(card) || (combat.isAttacking(card) && combat.isBlocked(card)) );
         } else if (keyword.equals("Lifelink")) {
             if (card.getNetCombatDamage() <= 0) {
                 return false;
@@ -333,7 +333,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("Islandwalk")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getType(opp.getLandsInPlay(), "Island").isEmpty()
@@ -341,7 +341,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("Swampwalk")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getType(opp.getLandsInPlay(), "Swamp").isEmpty()
@@ -349,7 +349,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("Mountainwalk")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getType(opp.getLandsInPlay(), "Mountain").isEmpty()
@@ -357,7 +357,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("Forestwalk")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getType(opp.getLandsInPlay(), "Forest").isEmpty()

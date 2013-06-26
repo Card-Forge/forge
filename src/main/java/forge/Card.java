@@ -6489,7 +6489,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("notattacking")) {
             return null == combat || !combat.isAttacking(this);
         } else if (property.equals("attackedBySourceThisCombat")) {
-            final GameEntity defender = game.getCombat().getDefenderByAttacker(source);
+            if ( null == combat ) return false;
+            final GameEntity defender = combat.getDefenderByAttacker(source);
             if (defender instanceof Card) {
                 if (!this.equals((Card) defender)) {
                     return false;
@@ -6554,7 +6555,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("unblocked")) {
-            if (!game.getCombat().isUnblocked(this)) {
+            if (game.getCombat() == null || !game.getCombat().isUnblocked(this)) {
                 return false;
             }
         } else if (property.equals("attackersBandedWith")) {
