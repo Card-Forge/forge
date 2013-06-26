@@ -78,9 +78,6 @@ public enum TargetingOverlay {
     // positions have changed or not.  Could perform better if
     // it checked for a state change.  Doublestrike 28-09-12
     private void assembleArcs(Combat combat) {
-        arcs.clear();
-        cardPanels.clear();
-
         //List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
         switch (CDock.SINGLETON_INSTANCE.getArcState()) {
@@ -201,14 +198,16 @@ public enum TargetingOverlay {
                 });
             }
 
-            for (Card attackingCard : combat.getAttackers()) {
-                temp = combat.getBlockers(attackingCard);
-                for (Card blockingCard : temp) {
-                    if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
-                    arcs.add(new Point[] {
-                        endpoints.get(attackingCard.getUniqueNumber()),
-                        endpoints.get(blockingCard.getUniqueNumber())
-                    });
+            if ( null != combat ) { 
+                for (Card attackingCard : combat.getAttackers()) {
+                    temp = combat.getBlockers(attackingCard);
+                    for (Card blockingCard : temp) {
+                        if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
+                        arcs.add(new Point[] {
+                            endpoints.get(attackingCard.getUniqueNumber()),
+                            endpoints.get(blockingCard.getUniqueNumber())
+                        });
+                    }
                 }
             }
         } else {
@@ -235,15 +234,16 @@ public enum TargetingOverlay {
             }
 
             // Combat cards
-            for (Card attackingCard : combat.getAttackers()) {
-                temp = combat.getBlockers(attackingCard);
-                for (Card blockingCard : temp) {
-                    arcs.add(new Point[]{
-                                endpoints.get(attackingCard.getUniqueNumber()),
-                                endpoints.get(blockingCard.getUniqueNumber())
-                            });
+            if ( null != combat ) 
+                for (Card attackingCard : combat.getAttackers()) {
+                    temp = combat.getBlockers(attackingCard);
+                    for (Card blockingCard : temp) {
+                        arcs.add(new Point[]{
+                            endpoints.get(attackingCard.getUniqueNumber()),
+                            endpoints.get(blockingCard.getUniqueNumber())
+                        });
+                    }
                 }
-            }
         }
 
         temp.clear();
@@ -339,8 +339,10 @@ public enum TargetingOverlay {
             if (overlaystate == 0) { return; }
 
             // Arc drawing
-            if( null != combat )
-                assembleArcs(combat);
+            arcs.clear();
+            cardPanels.clear();
+            
+            assembleArcs(combat);
             if (arcs.isEmpty()) { return; }
 
             Graphics2D g2d = (Graphics2D) g;
