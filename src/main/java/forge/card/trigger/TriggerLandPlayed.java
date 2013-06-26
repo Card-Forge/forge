@@ -57,9 +57,15 @@ public class TriggerLandPlayed extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
+        Card land = (Card) runParams2.get("Card");
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Card"), this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard())) {
+            if (!matchesValid(land, this.mapParams.get("ValidCard").split(","), this.getHostCard())) {
+                return false;
+            }
+        }
+        
+        if (this.mapParams.containsKey("NotFirstLand")) {
+            if (land.getController().getNumLandsPlayed() < 1) {
                 return false;
             }
         }

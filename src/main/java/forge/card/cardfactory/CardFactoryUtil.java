@@ -2141,37 +2141,6 @@ public class CardFactoryUtil {
         return neededDamage;
     }
 
-
-    /**
-     * <p>
-     * playLandEffects.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public static void playLandEffects(final Card c) {
-        final Player player = c.getController();
-
-        // > 0 because land amount isn't incremented until after playLandEffects
-        final boolean extraLand = player.getNumLandsPlayed() > 0;
-
-        if (extraLand) {
-            final List<Card> fastbonds = player.getCardsIn(ZoneType.Battlefield, "Fastbond");
-            for (final Card f : fastbonds) {
-                final SpellAbility ability = new Ability(f, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        f.getController().addDamage(1, f);
-                    }
-                };
-                ability.setStackDescription("Fastbond - Deals 1 damage to you.");
-                c.getGame().getStack().addSimultaneousStackEntry(ability);
-            }
-        }
-    }
-
-
     public static void correctAbilityChainSourceCard(final SpellAbility sa, final Card card) {
 
         sa.setSourceCard(card);
@@ -2208,13 +2177,6 @@ public class CardFactoryUtil {
         // a spell goes through the factory
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
-
-        // TODO - certain cards have two different kicker types, kicker will
-        // need
-        // to be written differently to handle this
-        // TODO - kicker costs can only be mana right now i think?
-        // TODO - this kicker only works for pemanents. maybe we can create an
-        // optional cost class for buyback, kicker, that type of thing
 
         if (hasKeyword(card, "Multikicker") != -1) {
             final int n = hasKeyword(card, "Multikicker");
@@ -2356,7 +2318,6 @@ public class CardFactoryUtil {
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-
         } // echo
 
         if (hasKeyword(card, "Suspend") != -1) {

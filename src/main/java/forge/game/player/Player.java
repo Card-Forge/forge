@@ -43,7 +43,6 @@ import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.replacement.ReplacementResult;
@@ -1747,11 +1746,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (this.canPlayLand(land, ignoreTiming)) {
             land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
-            CardFactoryUtil.playLandEffects(land);
-            this.numLandsPlayed++;
-            if (land.isBasicLand() && land.isType("Forest")) {
-                this.numBasicForestsPlayed++;
-            }
 
             // check state effects for static animate (Living Lands, Conversion,
             // etc...)
@@ -1765,6 +1759,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             runParams.put("Card", land);
             game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
             game.getStack().unfreezeStack();
+            this.numLandsPlayed++;
+            if (land.isBasicLand() && land.isType("Forest")) {
+                this.numBasicForestsPlayed++;
+            }
             return true;
         }
 
