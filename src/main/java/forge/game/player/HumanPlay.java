@@ -25,6 +25,7 @@ import forge.card.cost.CostDamage;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostDraw;
 import forge.card.cost.CostExile;
+import forge.card.cost.CostGainControl;
 import forge.card.cost.CostGainLife;
 import forge.card.cost.CostMill;
 import forge.card.cost.CostPart;
@@ -562,6 +563,11 @@ public class HumanPlay {
                 int amount = Integer.parseInt(((CostSacrifice)part).getAmount());
                 List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
                 boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "sacrifice." + orString);
+                if(!hasPaid) return false;
+            } else if (part instanceof CostGainControl) {
+                int amount = Integer.parseInt(((CostGainControl)part).getAmount());
+                List<Card> list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield), part.getType(), p, source);
+                boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "gain control." + orString);
                 if(!hasPaid) return false;
             } else if (part instanceof CostReturn) {
                 List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source);

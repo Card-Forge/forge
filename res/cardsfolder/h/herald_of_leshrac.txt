@@ -1,0 +1,13 @@
+Name:Herald of Leshrac
+ManaCost:6 B
+Types:Creature Avatar
+PT:2/4
+K:Flying
+K:Cumulative upkeep:GainControl<1/Land.YouDontCtrl/land you don't control>:Gain control of a land you don't control.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each land you control but don't own.
+SVar:X:Count$Valid Land.YouCtrl+YouDontOwn
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME leaves the battlefield, each player gains control of each land he or she owns that you control.
+SVar:TrigRepeat:AB$ RepeatEach | Cost$ 0 | RepeatSubAbility$ DBGainControl | RepeatCards$ Land.YouCtrl
+SVar:DBGainControl:DB$ GainControl | Defined$ Remembered | NewController$ RememberedOwner
+SVar:Picture:http://www.wizards.com/global/images/magic/general/herald_of_leshrac.jpg
+Oracle:Flying\nCumulative upkeep-Gain control of a land you don't control. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nHerald of Leshrac gets +1/+1 for each land you control but don't own.\nWhen Herald of Leshrac leaves the battlefield, each player gains control of each land he or she owns that you control.

@@ -230,6 +230,12 @@ public class Cost {
             return new CostGainLife(splitStr[0], splitStr[1], cnt);
         }
 
+        if (parse.startsWith("GainControl<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostGainControl(splitStr[0], splitStr[1], description);
+        }
+
         if (parse.startsWith("Unattach<")) {
             // Unattach<Type/Desc>
             final String[] splitStr = abCostParse(parse, 2);

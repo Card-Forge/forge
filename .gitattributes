@@ -5002,6 +5002,7 @@ res/cardsfolder/h/hematite_talisman.txt svneol=native#text/plain
 res/cardsfolder/h/henchfiend_of_ukor.txt svneol=native#text/plain
 res/cardsfolder/h/henge_guardian.txt svneol=native#text/plain
 res/cardsfolder/h/henge_of_ramos.txt svneol=native#text/plain
+res/cardsfolder/h/herald_of_leshrac.txt -text
 res/cardsfolder/h/herald_of_serra.txt svneol=native#text/plain
 res/cardsfolder/h/herald_of_war.txt -text
 res/cardsfolder/h/herbal_poultice.txt svneol=native#text/plain
@@ -14293,6 +14294,7 @@ src/main/java/forge/card/cost/CostDraw.java -text
 src/main/java/forge/card/cost/CostExile.java -text
 src/main/java/forge/card/cost/CostExileAndPay.java -text
 src/main/java/forge/card/cost/CostExiledMoveToGrave.java -text
+src/main/java/forge/card/cost/CostGainControl.java -text
 src/main/java/forge/card/cost/CostGainLife.java -text
 src/main/java/forge/card/cost/CostMill.java -text
 src/main/java/forge/card/cost/CostPart.java -text
