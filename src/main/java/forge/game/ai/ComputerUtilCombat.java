@@ -586,6 +586,9 @@ public class ComputerUtilCombat {
         final Card source = trigger.getHostCard();
         if (combat == null) {
             combat = game.getCombat();
+            if (combat == null) {
+                return false;
+            }
         }
 
         if (!trigger.zonesCheck(game.getZoneOf(trigger.getHostCard()))) {
