@@ -90,6 +90,9 @@ Icatian Skirmishers
 Camel
 Nalathni Dragon
 Joven's Ferrets
+Kithkin Mourncaller
+Urborg Panther
+Herald of Leshrac
 
 
 --------------------
