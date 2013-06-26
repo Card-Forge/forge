@@ -93,6 +93,7 @@ g_1_1_spike.jpg                        http://www.cardforge.org/fpics/tokens/g_1
 g_1_1_splinter.jpg                     http://www.cardforge.org/fpics/tokens/g_1_1_splinter.jpg
 g_1_1_squirrel.jpg                     http://www.cardforge.org/fpics/tokens/g_1_1_squirrel.jpg
 g_1_1_wolf.jpg                         http://www.cardforge.org/fpics/tokens/g_1_1_wolf.jpg
+g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg
 g_1_2_spider.jpg                       http://www.cardforge.org/fpics/tokens/g_1_2_spider.jpg
 g_2_2_ape.jpg                          http://www.cardforge.org/fpics/tokens/g_2_2_ape.jpg
 g_2_2_bear.jpg                         http://www.cardforge.org/fpics/tokens/g_2_2_bear.jpg
@@ -237,5 +238,4 @@ venser_the_sojourner_emblem.jpg        http://www.cardforge.org/fpics/effects/ve
 morph.jpg                              http://www.cardforge.org/fpics/effects/morph.jpg
 
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
-# //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt
 # //rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg              [SHM] Wort, the Raidmother
