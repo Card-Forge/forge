@@ -24,6 +24,14 @@ Sometimes people will decide that they do not like the changes that they made an
 Also use the mentioned measure if your match or deckeditor won't start - it would help in 90% of the cases.
 
 
+- The Mac OS X application -
+At this time Forge now requires Java 7 and will no longer run under Java 6.
+
+Unfortunately, the Mac OS X builder that we were using does not support Java 7. We hope to find and to use a different Mac OS X builder in order to continue releasing a Mac OS bundled application like we have in the past.
+
+Currently, the windows/unix release of Forge includes a launcher file named "forge.command". Double click on the "forge.command" launcher command file and this will in turn launch the Forge jar file via the terminal application while increasing the Java heap space. This should be a temporary inconvenience.
+
+
 ---------
 New Cards
 ---------
