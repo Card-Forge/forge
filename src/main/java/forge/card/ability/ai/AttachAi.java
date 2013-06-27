@@ -744,6 +744,14 @@ public class AttachAi extends SpellAbilityAi {
                     return sVar.equals("Multiple") || (sVar.equals("Once") && !c.isEquipped());
                 }
             });
+        } else if (attachSource.isFortification()) {
+            stCheck = "FortifiedBy";
+            magnetList = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return c.isCreature();
+                }
+            });
         }
 
         if (magnetList != null && !magnetList.isEmpty()) {
