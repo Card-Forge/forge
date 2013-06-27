@@ -79,7 +79,7 @@ public class InputBlock extends InputSyncronizedBase {
             showMessage(sb.toString());
         }
 
-        CMatchUI.SINGLETON_INSTANCE.showCombat();
+        CMatchUI.SINGLETON_INSTANCE.showCombat(combat);
     }
 
     /** {@inheritDoc} */
@@ -102,7 +102,7 @@ public class InputBlock extends InputSyncronizedBase {
 
         if (isMetaDown && card.getController() == defender) {
             combat.removeFromCombat(card);
-            CMatchUI.SINGLETON_INSTANCE.showCombat();
+            CMatchUI.SINGLETON_INSTANCE.showCombat(combat);
             return;
         }
         

@@ -5,10 +5,8 @@ import java.util.List;
 import forge.Card;
 import forge.Command;
 import forge.GameEntity;
-import forge.game.Game;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VCombat;
@@ -24,7 +22,7 @@ public enum CCombat implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
     
-    private Game game;
+    private Combat combat;
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -46,16 +44,16 @@ public enum CCombat implements ICDoc {
      */
     @Override
     public void update() {
-        PhaseHandler pH = game.getPhaseHandler();
-        if (pH.inCombat()) // display combat
-            VCombat.SINGLETON_INSTANCE.updateCombat(pH.getCombat().getAttackers().size(), getCombatDescription(pH.getCombat()));
+        Combat localCombat = this.combat; // noone will re-assign this from other thread. 
+        if (localCombat != null )
+            VCombat.SINGLETON_INSTANCE.updateCombat(localCombat.getAttackers().size(), getCombatDescription(localCombat));
         else
             VCombat.SINGLETON_INSTANCE.updateCombat(0, "");
     }
     
-    public void setModel(Game game)
+    public void setModel(Combat combat)
     {
-        this.game = game;
+        this.combat = combat;
 
     }
     
@@ -83,6 +81,9 @@ public enum CCombat implements ICDoc {
             // Associate Bands, Attackers Blockers
             boolean previousBand = false;
             for(AttackingBand band : bands) {
+                if (band.isEmpty())
+                    continue;
+                
                 // Space out band blocks from non-band blocks
                 if (previousBand) {
                     display.append("\n");

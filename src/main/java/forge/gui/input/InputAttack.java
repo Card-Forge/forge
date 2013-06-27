@@ -93,7 +93,7 @@ public class InputAttack extends InputSyncronizedBase {
     
     private void showCombat() {
         playerAttacks.getZone(ZoneType.Battlefield).updateObservers(); // redraw sword icons
-        CMatchUI.SINGLETON_INSTANCE.showCombat();
+        CMatchUI.SINGLETON_INSTANCE.showCombat(combat);
     }
     
     /** {@inheritDoc} */

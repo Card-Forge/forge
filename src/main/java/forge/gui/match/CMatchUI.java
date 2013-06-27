@@ -31,6 +31,7 @@ import forge.FThreads;
 import forge.GameEntity;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -260,10 +261,11 @@ public enum CMatchUI {
     }    
     
 
-    public void showCombat() {
-        if (Singletons.getControl().getObservedGame().getPhaseHandler().inCombat()) {
+    public void showCombat(Combat combat) {
+        if (combat != null) {
             SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
         }
+        CCombat.SINGLETON_INSTANCE.setModel(combat);
         CCombat.SINGLETON_INSTANCE.update();
     } // showBlockers()
 

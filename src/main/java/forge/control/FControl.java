@@ -56,7 +56,6 @@ import forge.gui.home.CHomeUI;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
-import forge.gui.match.controllers.CCombat;
 import forge.gui.match.controllers.CDock;
 import forge.gui.match.controllers.CLog;
 import forge.gui.match.controllers.CMessage;
@@ -415,7 +414,6 @@ public enum FControl {
         CDock.SINGLETON_INSTANCE.setModel(game, humanLobbyPlayer);
         CStack.SINGLETON_INSTANCE.setModel(game.getStack(), humanLobbyPlayer);
         CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
-        CCombat.SINGLETON_INSTANCE.setModel(game);
         CMessage.SINGLETON_INSTANCE.setModel(game);
     
     

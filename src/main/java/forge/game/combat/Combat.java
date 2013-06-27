@@ -280,11 +280,11 @@ public class Combat {
     }
 
     /** If there are multiple blockers, the Attacker declares the Assignment Order */
-    public void orderBlockersForDamageAssignment() {
+    public void orderBlockersForDamageAssignment() { // this method performs controller's role 
 
         for(Collection<AttackingBand> abs : attackedEntities.values())
             for (final AttackingBand band : abs) {
-                if (band.isEmpty()) continue; // there should not be empty bands
+                if (band.isEmpty()) continue;
 
                 Collection<Card> blockers = blockedBands.get(band);
                 if ( blockers == null || blockers.isEmpty() )
@@ -300,7 +300,7 @@ public class Combat {
             }
     }
     
-    public void orderAttackersForDamageAssignment() {
+    public void orderAttackersForDamageAssignment() { // this method performs controller's role
         // If there are multiple blockers, the Attacker declares the Assignment Order
         for (final Card blocker : getAllBlockers()) {
             List<Card> attackers = getAttackersBlockedBy(blocker);

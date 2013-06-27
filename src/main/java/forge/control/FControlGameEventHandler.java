@@ -74,7 +74,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         if ( combatUpdPlanned.getAndSet(true) ) return null;
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
             combatUpdPlanned.set(false);
-            CMatchUI.SINGLETON_INSTANCE.showCombat();
+            CMatchUI.SINGLETON_INSTANCE.showCombat(fc.getObservedGame().getCombat());
         } });
         return null;
     }
