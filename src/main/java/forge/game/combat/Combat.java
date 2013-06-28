@@ -455,6 +455,9 @@ public class Combat {
             }
             
             AttackingBand band = this.getBandOfAttacker(attacker);
+            if (band == null) {
+                continue;
+            }
 
             boolean trampler = attacker.hasKeyword("Trample");
             orderedBlockers = this.blockersOrderedForDamageAssignment.get(attacker);
