@@ -102,6 +102,7 @@ Kithkin Mourncaller
 Urborg Panther
 Herald of Leshrac
 Bloodlord of Vaasgoth
+Quicksilver Sea
 
 
 --------------------
