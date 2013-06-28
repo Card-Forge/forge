@@ -1,7 +1,7 @@
-Forge Beta: 06-##-2013 ver 1.4.2
+Forge Beta: 06-28-2013 ver 1.4.2
 
 
-12### cards in total.
+12886 cards in total.
 
 
 -------------
@@ -36,21 +36,34 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-Benalish Hero
-Mindlock Orb
-Shadow of Doubt
+Adventurers' Guildhouse
 Baton of Morale
 Battering Ram
 Beast Walkers
+Benalish Hero
 Benalish Infantry
+Bloodlord of Vaasgoth
+Camel
+Cathedral of Serra
 Cooperation
+Dark Sphere
+Darksteel Garrison
 Dire Wolves
+Djinn Illuminatus
 Errand of Duty
 Formation
 Fortified Area
+Gaea's Touch
+Goblin Flectomancer
+Gorilla Berserkers
+Guile
 Helm of Chatzuk
+Herald of Leshrac
 Icatian Infantry
 Icatian Phalanx
+Icatian Skirmishers
+Joven's Ferrets
+Kithkin Mourncaller
 Kjeldoran Escort
 Kjeldoran Knight
 Kjeldoran Phalanx
@@ -58,51 +71,38 @@ Kjeldoran Skycaptain
 Kjeldoran Skyknight
 Kjeldoran Warrior
 Knights of Thorn
+Master of the Hunt
 Mesa Pegasus
+Mindlock Orb
+Mountain Stronghold
+Nalathni Dragon
 Nature's Blessing
 Noble Elephant
+Pathrazer of Ulamog
+Phyrexian Colossus
 Pikemen
+Pulmonic Sliver
+Quicksilver Sea
+Redirect
+Restore Balance
+Seafarer's Quay
+Shadow of Doubt
+Shelkin Brownie
 Shield Bearer
 Soraya the Falconer
+Spellskite
 Teremko Griffin
 Timber Wolves
-Volunteer Reserves
-Wall of Shields
-War Elephant
-Urza's Avenger
-Darksteel Garrison
-Pulmonic Sliver
-Djinn Illuminatus
-Wall of Shards
-Restore Balance
-Spellskite
-Redirect
-Gorilla Berserkers
-Pathrazer of Ulamog
-Goblin Flectomancer
-Wild Ricochet
-Phyrexian Colossus
-Guile
-Adventurers' Guildhouse
-Cathedral of Serra
-Master of the Hunt
-Mountain Stronghold
-Seafarer's Quay
-Shelkin Brownie
 Tolaria
 Unholy Citadel
-Gaea's Touch
-Dark Sphere
-Urza's Engine
-Icatian Skirmishers
-Camel
-Nalathni Dragon
-Joven's Ferrets
-Kithkin Mourncaller
 Urborg Panther
-Herald of Leshrac
-Bloodlord of Vaasgoth
-Quicksilver Sea
+Urza's Avenger
+Urza's Engine
+Volunteer Reserves
+Wall of Shards
+Wall of Shields
+War Elephant
+Wild Ricochet
 
 
 --------------------
@@ -117,6 +117,7 @@ Awaken the Ancient
 Battle Sliver
 Blur Sliver
 Bonescythe Sliver
+Burning Earth
 Charging Grffin
 Corpse Hauler
 Dawnstrike Paladin
@@ -125,7 +126,9 @@ Devout Invocation
 Elvish Mystic
 Enlarge
 Fleshpulper Giant
+Garruk, Caller of Beasts
 Glimpse the Future
+Goblin Diplomats
 Grim Return
 Groundshaker Sliver
 Guardian of the Ages
@@ -138,6 +141,7 @@ Liliana's Reaver
 Marauding Maulhorn
 Master of Diversion
 Megantic Sliver
+Messenger Drake
 Molten Birth
 Ogre Battledriver
 Predatory Sliver
@@ -145,7 +149,10 @@ Primeval Bounty
 Regathan Firecat
 Ring of Three Wishes
 Rise of the Dark Realms
+Rumbling Baloth
 Scourge of Valkas
+Seacoast Drake
+Seismic Stomp
 Sentinel Sliver
 Seraph of the Sword
 Shadowborn Apostle
@@ -165,18 +172,10 @@ Undead Minotaur
 Vampire Warlord
 Vastwood Hydra
 Vial of Poison
+Warden of Evos Isle
 Windreader Sphinx
 Woodborn Behemoth
 Young Pyromancer
-
-Messenger Drake
-Seacoast Drake
-Warden of Evos Isle
-Burning Earth
-Goblin Diplomats
-Seismic Stomp
-Garruk, Caller of Beasts
-Rumbling Baloth
 
 
 ------------
@@ -201,7 +200,19 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+Asepetci
+Dave
+Gos
+jsv
+Marc
+Max
+Nordos
+Sloth
+Sol
+squee1968
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
