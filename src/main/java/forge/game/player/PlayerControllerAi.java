@@ -347,7 +347,8 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<Card> chooseCardsToRevealFromHand(int min, int max, List<Card> valid) {
-        return max == 0 ? Lists.<Card>newArrayList() : valid.subList(0, max);
+        int numCardsToReveal = Math.min(max, valid.size());
+        return numCardsToReveal == 0 ? Lists.<Card>newArrayList() : valid.subList(0, numCardsToReveal);
     }
 
     @Override
