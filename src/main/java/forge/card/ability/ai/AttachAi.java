@@ -777,7 +777,7 @@ public class AttachAi extends SpellAbilityAi {
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
             final Map<String, String> stabMap = stAbility.getMapParams();
 
-            if (!stabMap.get("Mode").equals("Continuous")) {
+            if (!"Continuous".equals(stabMap.get("Mode"))) {
                 continue;
             }
 
