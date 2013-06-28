@@ -1,0 +1,7 @@
+Name:Test of Faith
+ManaCost:1 W
+Types:Instant
+A:SP$ PreventDamage | Cost$ 1 W | ValidTgts$ Creature | Amount$ 3 | PreventionSubAbility$ FaithsReward | ShieldEffectTarget$ Targeted | TgtPrompt$ Select target creature | SpellDescription$ Prevent the next 3 damage that would be dealt to target creature this turn, and put a +1/+1 counter on that creature for each 1 damage prevented this way.
+SVar:FaithsReward:AB$ PutCounter | Cost$ 0 | Defined$ ShieldEffectTarget | CounterType$ P1P1 | CounterNum$ PreventedDamage | SpellDescription$ Put a +1/+1 counter on this creature for each 1 damage prevented this way.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/test_of_faith.jpg
+Oracle:Prevent the next 3 damage that would be dealt to target creature this turn, and put a +1/+1 counter on that creature for each 1 damage prevented this way.

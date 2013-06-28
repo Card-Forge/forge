@@ -96,6 +96,7 @@ public abstract class PlayerController {
     //public abstract void playFromSuspend(Card c);
     public abstract boolean playCascade(Card cascadedCard, Card sourceCard);
     public abstract void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets);
+    public abstract void playSpellAbilityNoStack(Player player, SpellAbility effectSA);
 
     public abstract Deck sideboard(final Deck deck, GameType gameType);
 
@@ -157,5 +158,6 @@ public abstract class PlayerController {
 
     public abstract boolean chooseBinary(SpellAbility sa, String question, boolean isCoin);
     public abstract boolean chooseFilpResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
+    public abstract Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap);
 
 }

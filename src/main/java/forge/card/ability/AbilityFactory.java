@@ -166,6 +166,10 @@ public final class AbilityFactory {
             }
         }
 
+        if (mapParams.containsKey("PreventionSubAbility")) {
+            spellAbility.setSVar(mapParams.get("PreventionSubAbility"), hostCard.getSVar(mapParams.get("PreventionSubAbility")));
+        }
+
         if (mapParams.containsKey("SubAbility")) {
             spellAbility.setSubAbility(getSubAbility(hostCard, hostCard.getSVar(mapParams.get("SubAbility"))));
         }

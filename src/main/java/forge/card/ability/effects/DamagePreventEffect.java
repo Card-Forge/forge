@@ -2,6 +2,7 @@ package forge.card.ability.effects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import forge.Card;
 import forge.CardUtil;
@@ -86,19 +87,62 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         }
 
         final boolean targeted = (sa.usesTargeting());
+        final boolean preventionWithEffect = sa.hasParam("PreventionSubAbility");
 
         for (final Object o : tgts) {
             numDam = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : numDam;
             if (o instanceof Card) {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                    c.addPreventNextDamage(numDam);
+                    if (preventionWithEffect) {
+                        TreeMap<String, String> effectMap = new TreeMap<String, String>();
+                        effectMap.put("EffectString", sa.getSVar(sa.getParam("PreventionSubAbility")));
+                        effectMap.put("ShieldAmount", String.valueOf(numDam));
+                        if (sa.hasParam("ShieldEffectTarget")) {
+                            String effTgtString = "";
+                            List<ITargetable> effTgts = new ArrayList<ITargetable>();
+                            effTgts = AbilityUtils.getDefinedObjects(host, sa.getParam("ShieldEffectTarget"), sa);
+                            for (final Object effTgt : effTgts) {
+                                if (effTgt instanceof Card) {
+                                    effTgtString = String.valueOf(((Card) effTgt).getUniqueNumber());
+                                    effectMap.put("ShieldEffectTarget", "CardUID_" + effTgtString);
+                                } else if (effTgt instanceof Player) {
+                                    effTgtString = ((Player) effTgt).getName();
+                                    effectMap.put("ShieldEffectTarget", "PlayerNamed_" + effTgtString);
+                                }
+                            }
+                        }
+                        c.addPreventNextDamageWithEffect(host, effectMap);
+                    } else {
+                        c.addPreventNextDamage(numDam);
+                    }
                 }
 
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
                 if (!targeted || p.canBeTargetedBy(sa)) {
-                    p.addPreventNextDamage(numDam);
+                    if (preventionWithEffect) {
+                        TreeMap<String, String> effectMap = new TreeMap<String, String>();
+                        effectMap.put("EffectString", sa.getSVar(sa.getParam("PreventionSubAbility")));
+                        effectMap.put("ShieldAmount", String.valueOf(numDam));
+                        if (sa.hasParam("ShieldEffectTarget")) {
+                            String effTgtString = "";
+                            List<ITargetable> effTgts = new ArrayList<ITargetable>();
+                            effTgts = AbilityUtils.getDefinedObjects(host, sa.getParam("ShieldEffectTarget"), sa);
+                            for (final Object effTgt : effTgts) {
+                                if (effTgt instanceof Card) {
+                                    effTgtString = String.valueOf(((Card) effTgt).getUniqueNumber());
+                                    effectMap.put("ShieldEffectTarget", "CardUID_" + effTgtString);
+                                } else if (effTgt instanceof Player) {
+                                    effTgtString = ((Player) effTgt).getName();
+                                    effectMap.put("ShieldEffectTarget", "PlayerNamed_" + effTgtString);
+                                }
+                            }
+                        }
+                        p.addPreventNextDamageWithEffect(host, effectMap);
+                    } else {
+                        p.addPreventNextDamage(numDam);
+                    }
                 }
             }
         }

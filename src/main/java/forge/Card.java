@@ -48,6 +48,7 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -7341,6 +7342,66 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         int restDamage = damage;
 
+        boolean DEBUGShieldsWithEffects = false;
+        while (!this.getPreventNextDamageWithEffect().isEmpty() && restDamage != 0) {
+            TreeMap<Card, Map<String, String>> shieldMap = this.getPreventNextDamageWithEffect();
+            List<Card> preventionEffectSources = new ArrayList<Card>(shieldMap.keySet());
+            Card shieldSource = preventionEffectSources.get(0);
+            if (preventionEffectSources.size() > 1) {
+                Map<String, Card> choiceMap = new TreeMap<String, Card>();
+                List<String> choices = new ArrayList<String>();
+                for (final Card key : preventionEffectSources) {
+                    String effDesc = shieldMap.get(key).get("EffectString");
+                    int descIndex = effDesc.indexOf("SpellDescription");
+                    effDesc = effDesc.substring(descIndex + 18);
+                    String shieldDescription = key.toString() + " - " + shieldMap.get(key).get("ShieldAmount")
+                            + " shields - " + effDesc;
+                    choices.add(shieldDescription);
+                    choiceMap.put(shieldDescription, key);
+                }
+                shieldSource = this.getController().getController().chooseProtectionShield(this, choices, choiceMap);
+            }
+            if (DEBUGShieldsWithEffects) {
+                System.out.println("Prevention shield source: " + shieldSource);
+            }
+
+            int shieldAmount = Integer.valueOf(shieldMap.get(shieldSource).get("ShieldAmount"));
+            int dmgToBePrevented = Math.min(restDamage, shieldAmount);
+            if (DEBUGShieldsWithEffects) {
+                System.out.println("Selected source initial shield amount: " + shieldAmount);
+                System.out.println("Incoming damage: " + restDamage);
+                System.out.println("Damage to be prevented: " + dmgToBePrevented);
+            }
+
+            //Set up ability
+            SpellAbility shieldSA = null;
+            String effectAbString = shieldMap.get(shieldSource).get("EffectString");
+            effectAbString = effectAbString.replace("PreventedDamage", Integer.toString(dmgToBePrevented));
+            effectAbString = effectAbString.replace("ShieldEffectTarget", shieldMap.get(shieldSource).get("ShieldEffectTarget"));
+            if (DEBUGShieldsWithEffects) {
+                System.out.println("Final shield ability string: " + effectAbString);
+            }
+            shieldSA = AbilityFactory.getAbility(effectAbString, shieldSource);
+            if (shieldSA.usesTargeting()) {
+                System.err.println(shieldSource + " - Targeting for prevention shield's effect should be done with initial spell");
+            }
+
+            if (restDamage >= shieldAmount) {
+                this.getController().getController().playSpellAbilityNoStack(this.getController(), shieldSA);
+                this.subtractPreventNextDamageWithEffect(shieldSource, restDamage);
+                restDamage = restDamage - shieldAmount;
+            } else {
+                this.subtractPreventNextDamageWithEffect(shieldSource, restDamage);
+                this.getController().getController().playSpellAbilityNoStack(this.getController(), shieldSA);
+                restDamage = 0;
+            }
+            if (DEBUGShieldsWithEffects) {
+                System.out.println("Remaining shields: "
+                    + (shieldMap.containsKey(shieldSource) ? shieldMap.get(shieldSource).get("ShieldAmount") : "all shields used"));
+                System.out.println("Remaining damage: " + restDamage);
+            }
+        }
+
         if (this.getName().equals("Swans of Bryn Argoll")) {
             source.getController().drawCards(restDamage);
             return 0;
@@ -8228,6 +8289,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void onCleanupPhase(final Player turn) {
         setDamage(0);
         resetPreventNextDamage();
+        resetPreventNextDamageWithEffect();
         resetReceivedDamageFromThisTurn();
         resetDealtDamageToThisTurn();
         resetDealtDamageToPlayerThisTurn();

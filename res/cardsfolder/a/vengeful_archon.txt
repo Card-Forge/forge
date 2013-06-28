@@ -1,0 +1,13 @@
+Name:Vengeful Archon
+ManaCost:4 W W W
+Types:Creature Archon
+PT:7/7
+K:Flying
+A:AB$ Pump | Cost$ X | ValidTgts$ Player | TgtPrompt$ Select target player damaged by shield effect | IsCurse$ True | References$ X | RememberObjects$ Targeted | SubAbility$ ArchonPrevention | StackDescription$ none | SpellDescription$ Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, CARDNAME deals that much damage to target player.
+SVar:ArchonPrevention:DB$ PreventDamage | Defined$ You | Amount$ X | References$ X | PreventionSubAbility$ ArchonsVengeance | ShieldEffectTarget$ Remembered | SubAbility$ DBCleanup
+SVar:ArchonsVengeance:AB$ DealDamage | Cost$ 0 | Defined$ ShieldEffectTarget | NumDmg$ PreventedDamage | SpellDescription$ CARDNAME deals damage to target player for each damage prevented this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_archon.jpg
+Oracle:Flying\n{X}: Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player.

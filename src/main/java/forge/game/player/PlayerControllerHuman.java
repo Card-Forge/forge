@@ -121,6 +121,11 @@ public class PlayerControllerHuman extends PlayerController {
         HumanPlay.playSaWithoutPayingManaCost(player.getGame(), copySA, mayChoseNewTargets);
     }
 
+    @Override
+    public void playSpellAbilityNoStack(Player player, SpellAbility effectSA) {
+        HumanPlay.playSpellAbilityNoStack(player, effectSA);
+    }
+
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#sideboard(forge.deck.Deck)
      */
@@ -643,6 +648,12 @@ public class PlayerControllerHuman extends PlayerController {
             strResults[i] = labelsSrc[results[i] ? 0 : 1];
         }
         return GuiChoose.one(sa.getSourceCard().getName() + " - Choose a result", strResults) == labelsSrc[0];
+    }
+
+    @Override
+    public Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap) {
+        String title = entityBeingDamaged + " - select which prevention shield to use";
+        return choiceMap.get(GuiChoose.one(title, options));
     }
 
 

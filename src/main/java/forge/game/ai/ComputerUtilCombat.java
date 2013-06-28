@@ -1828,10 +1828,10 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public final static int getDamageToKill(final Card c) {
-        int killDamage = c.getLethalDamage() + c.getPreventNextDamage();
-        if ((killDamage > c.getPreventNextDamage())
+        int killDamage = c.getLethalDamage() + c.getPreventNextDamageTotalShields();
+        if ((killDamage > c.getPreventNextDamageTotalShields())
                 && c.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
-            killDamage = 1 + c.getPreventNextDamage();
+            killDamage = 1 + c.getPreventNextDamageTotalShields();
         }
 
         return killDamage;

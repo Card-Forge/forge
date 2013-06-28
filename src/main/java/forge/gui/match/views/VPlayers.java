@@ -152,7 +152,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
                     + String.valueOf(p0.getPoisonCounters()));
             temp[2].setText("Maximum hand size: " + String.valueOf(p0.getMaxHandSize()));
             temp[3].setText("Cards drawn this turn: " + String.valueOf(p0.getNumDrawnThisTurn()));
-            temp[4].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamage()));
+            temp[4].setText("Damage Prevention: " + String.valueOf(p0.getPreventNextDamageTotalShields()));
             if (!p0.getKeywords().isEmpty()) {
                 temp[5].setText(p0.getKeywords().toString());
             } else {

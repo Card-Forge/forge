@@ -18,6 +18,8 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import forge.game.Game;
 import forge.game.player.Player;
@@ -34,6 +36,7 @@ import forge.util.MyObservable;
 public abstract class GameEntity extends MyObservable implements ITargetable {
     private String name = "";
     private int preventNextDamage = 0;
+    private TreeMap<Card, Map<String, String>> preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
 
     /** The enchanted by. */
     private ArrayList<Card> enchantedBy = new ArrayList<Card>();
@@ -253,6 +256,78 @@ public abstract class GameEntity extends MyObservable implements ITargetable {
      */
     public void resetPreventNextDamage() {
         this.preventNextDamage = 0;
+    }
+
+    // PreventNextDamageWithEffect
+    /**
+     * <p>
+     * Gets the map of damage prevention shields with effects.
+     * </p>
+     * 
+     * @return the map of damage prevention shields with effects.
+     */
+    public TreeMap<Card, Map<String, String>> getPreventNextDamageWithEffect() {
+        return this.preventionShieldsWithEffects;
+    }
+
+    /**
+     * <p>
+     * Adds a damage prevention shield with an effect that happens at time of prevention.
+     * </p>
+     * 
+     * @param shieldSource    The source card which generated the shield
+     * @param effectMap       A map of the effect occurring with the damage prevention
+     */
+    public void addPreventNextDamageWithEffect(final Card shieldSource, TreeMap<String, String> effectMap) {
+        if (this.preventionShieldsWithEffects.containsKey(shieldSource)) {
+            int currentShields = Integer.valueOf(this.preventionShieldsWithEffects.get(shieldSource).get("ShieldAmount"));
+            currentShields += Integer.valueOf(effectMap.get("ShieldAmount"));
+            effectMap.put("ShieldAmount", Integer.toString(currentShields));
+            this.preventionShieldsWithEffects.put(shieldSource, effectMap);
+        } else {
+            this.preventionShieldsWithEffects.put(shieldSource, effectMap);
+        }
+    }
+
+    /**
+     * <p>
+     * subtractPreventNextDamageWithEffect.
+     * </p>
+     * 
+     * @param shieldSource    The source card which generated the shield
+     * @param n               The number of shields to remove originating from shieldSource
+     */
+    public void subtractPreventNextDamageWithEffect(final Card shieldSource, final int n) {
+        int currentShields = Integer.valueOf(this.preventionShieldsWithEffects.get(shieldSource).get("ShieldAmount"));
+        if (currentShields > n) {
+            this.preventionShieldsWithEffects.get(shieldSource).put("ShieldAmount", String.valueOf(currentShields - n));
+        } else {
+            this.preventionShieldsWithEffects.remove(shieldSource);
+        }
+    }
+
+    /**
+     * <p>
+     * resetPreventNextDamageWithEffect.
+     * </p>
+     */
+    public void resetPreventNextDamageWithEffect() {
+        this.preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
+    }
+
+    /**
+     * <p>
+     * Gets the total amount of damage prevention shields.
+     * </p>
+     * 
+     * @return the number of damage prevention shields with and without effects.
+     */
+    public int getPreventNextDamageTotalShields() {
+        int shields = this.preventNextDamage;
+        for (final Map<String, String> value : this.preventionShieldsWithEffects.values()) {
+            shields += Integer.valueOf(value.get("ShieldAmount"));
+        }
+        return shields;
     }
 
     /**

@@ -204,6 +204,14 @@ public class AbilityUtils {
             for (final Card chosen : hostCard.getChosenCard()) {
                 cards.add(game.getCardState(chosen));
             }
+        }
+        else if (defined.startsWith("CardUID_")) {
+            String idString = defined.substring(8);
+            for (final Card cardByID : game.getCardsInGame()) {
+                if (cardByID.getUniqueNumber() == Integer.valueOf(idString)) {
+                    cards.add(game.getCardState(cardByID));
+                }
+            }
         } else {
             List<Card> list = null;
             if (defined.startsWith("Sacrificed")) {
@@ -904,6 +912,13 @@ public class AbilityUtils {
             final Player p = sa.getSourceCard().getController();
             if (!players.contains(p)) {
                 players.add(p);
+            }
+        } else if (defined.startsWith("PlayerNamed_")) {
+            for (Player p : game.getPlayers()) {
+                System.out.println("Named player " + defined.substring(12));
+                if (p.getName().equals(defined.substring(12))) {
+                    players.add(p);
+                }
             }
         } else if (defined.startsWith("Flipped")) {
             for (Player p : game.getPlayers()) {

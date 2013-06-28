@@ -249,6 +249,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public void playSpellAbilityNoStack(Player player, SpellAbility effectSA) {
+        ComputerUtil.playNoStack(player, effectSA, game);
+    }
+
+    @Override
     public void playMiracle(SpellAbility miracle, Card card) {
         getAi().chooseAndPlaySa(false, false, miracle);
     }
@@ -411,5 +416,11 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, boolean isCoin) {
         return MyRandom.getRandom().nextBoolean();
+    }
+
+    @Override
+    public Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap) {
+        int i = MyRandom.getRandom().nextInt(options.size());
+        return choiceMap.get(options.get(i));
     }
 }

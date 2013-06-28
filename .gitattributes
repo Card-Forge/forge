@@ -707,6 +707,7 @@ res/cardsfolder/a/azors_elocutors.txt -text
 res/cardsfolder/a/azure_drake.txt svneol=native#text/plain
 res/cardsfolder/a/azure_mage.txt svneol=native#text/plain
 res/cardsfolder/a/azusa_lost_but_seeking.txt svneol=native#text/plain
+res/cardsfolder/a/vengeful_archon.txt -text
 res/cardsfolder/b/back_from_the_brink.txt -text
 res/cardsfolder/b/back_to_basics.txt svneol=native#text/plain
 res/cardsfolder/b/back_to_nature.txt svneol=native#text/plain
@@ -1496,6 +1497,7 @@ res/cardsfolder/c/caltrops.txt svneol=native#text/plain
 res/cardsfolder/c/camel.txt -text
 res/cardsfolder/c/cancel.txt svneol=native#text/plain
 res/cardsfolder/c/candelabra_of_tawnos.txt svneol=native#text/plain
+res/cardsfolder/c/candles_glow.txt -text
 res/cardsfolder/c/candles_of_leng.txt -text svneol=unset#text/plain
 res/cardsfolder/c/canker_abomination.txt svneol=native#text/plain
 res/cardsfolder/c/cankerous_thirst.txt -text
@@ -11142,6 +11144,7 @@ res/cardsfolder/t/telimtors_edict.txt svneol=native#text/plain
 res/cardsfolder/t/teller_of_tales.txt svneol=native#text/plain
 res/cardsfolder/t/telling_time.txt svneol=native#text/plain
 res/cardsfolder/t/tember_city.txt -text
+res/cardsfolder/t/temper.txt -text
 res/cardsfolder/t/tempered_steel.txt svneol=native#text/plain
 res/cardsfolder/t/tempest_drake.txt svneol=native#text/plain
 res/cardsfolder/t/tempest_of_light.txt svneol=native#text/plain
@@ -11197,6 +11200,7 @@ res/cardsfolder/t/territorial_dispute.txt -text
 res/cardsfolder/t/terror.txt svneol=native#text/plain
 res/cardsfolder/t/terrus_wurm.txt -text
 res/cardsfolder/t/test_of_endurance.txt svneol=native#text/plain
+res/cardsfolder/t/test_of_faith.txt -text
 res/cardsfolder/t/testament_of_faith.txt svneol=native#text/plain
 res/cardsfolder/t/tethered_griffin.txt svneol=native#text/plain
 res/cardsfolder/t/tethered_skirge.txt svneol=native#text/plain

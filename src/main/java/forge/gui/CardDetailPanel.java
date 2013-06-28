@@ -400,7 +400,7 @@ public class CardDetailPanel extends FPanel {
         }
 
         // Damage Prevention
-        final int preventNextDamage = card.getPreventNextDamage();
+        final int preventNextDamage = card.getPreventNextDamageTotalShields();
         if (preventNextDamage > 0) {
             area.append("\n");
             area.append("Prevent the next ").append(preventNextDamage).append(" damage that would be dealt to ");
