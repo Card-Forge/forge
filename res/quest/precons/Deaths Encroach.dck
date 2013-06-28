@@ -1,6 +1,6 @@
 [shop]
 WinsToUnlock=20
-Credits=2000
+Credits=2500
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
@@ -27,3 +27,11 @@ Image=deaths_encroach.jpg
 3 Go for the Throat|MBS
 3 Despise|NPH
 [sideboard]
+2 Appetite for Brains|AVR
+2 Crypt Creeper|AVR
+3 Deathmark|M12
+1 Despise|NPH
+2 Distress|M12
+1 Ghoulraiser|ISD
+1 Surgical Extraction|NPH
+3 Triumph of Cruelty|AVR
