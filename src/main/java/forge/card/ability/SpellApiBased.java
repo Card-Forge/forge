@@ -59,8 +59,9 @@ public class SpellApiBased extends Spell {
         boolean chance = false;
         if (withOutManaCost) {
             chance = ai.doTriggerNoCostWithSubs(this.getActivatingPlayer(), this, mandatory);
+        } else {
+            chance = ai.doTriggerAI(this.getActivatingPlayer(), this, mandatory);
         }
-        chance = ai.doTriggerAI(this.getActivatingPlayer(), this, mandatory);
         return chance && super.canPlayAI();
     }
 }
