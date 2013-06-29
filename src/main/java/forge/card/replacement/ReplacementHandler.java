@@ -31,8 +31,6 @@ import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
-import forge.game.ai.ComputerUtil;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;

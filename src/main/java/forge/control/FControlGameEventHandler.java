@@ -8,6 +8,7 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.Card;
 import forge.FThreads;
+import forge.game.Game;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventGameFinished;
@@ -85,11 +86,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(GameEventTurnBegan event) {
         if ( turnUpdPlanned.getAndSet(true) ) return null;
 
+        final Game game = fc.getObservedGame(); // to make sure control gets a correct game instance
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
                 turnUpdPlanned.set(false);
-                CMessage.SINGLETON_INSTANCE.updateText();
+                CMessage.SINGLETON_INSTANCE.updateText(game);
             }
         });
         return null;

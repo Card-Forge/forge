@@ -414,7 +414,6 @@ public enum FControl {
         CDock.SINGLETON_INSTANCE.setModel(game, humanLobbyPlayer);
         CStack.SINGLETON_INSTANCE.setModel(game.getStack(), humanLobbyPlayer);
         CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
-        CMessage.SINGLETON_INSTANCE.setModel(game);
     
     
         Singletons.getModel().getPreferences().actuateMatchPreferences();

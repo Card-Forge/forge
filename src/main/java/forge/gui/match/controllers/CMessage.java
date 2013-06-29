@@ -69,7 +69,6 @@ public enum CMessage implements ICDoc {
             }
         }
     };
-    private Game game;
 
     private void _initButton(JButton button, ActionListener onClick) {
         // remove to ensure listeners don't accumulate over many initializations
@@ -116,10 +115,10 @@ public enum CMessage implements ICDoc {
      * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
      */
 
-    public void updateText() {
+    public void updateText(Game game) {
         FThreads.assertExecutedByEdt(true);
-        Match match = game.getMatch();
-        String text = String.format("%s: Game #%d of %d, turn %d", match.getGameType(), match.getPlayedGames().size() + 1, match.getGamesPerMatch(), game.getPhaseHandler().getTurn());
+        final Match match = game.getMatch();
+        final String text = String.format("%s: Game #%d of %d, turn %d", match.getGameType(), match.getPlayedGames().size() + 1, match.getGamesPerMatch(), game.getPhaseHandler().getTurn());
         view.getLblGames().setText(text);
     }
 
@@ -129,15 +128,5 @@ public enum CMessage implements ICDoc {
         if (null != lastFocusedButton) {
             lastFocusedButton.requestFocusInWindow();
         }
-    }
-
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param match
-     */
-    public void setModel(Game game0) {
-        game = game0;
-        update();
     }
 }

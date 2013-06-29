@@ -23,7 +23,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.ITargetable;
 import forge.card.CardType;
 import forge.card.ability.AbilityUtils;
