@@ -1,0 +1,8 @@
+Name:Sideswipe
+ManaCost:1 R
+Types:Instant
+A:SP$ ChangeTargets | Cost$ 1 R | TargetType$ Spell | Optional$ True | ValidTgts$ Card.Arcane | SpellDescription$ You may change any targets of target Arcane spell.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sideswipe.jpg
+Oracle:You may change any targets of target Arcane spell.
