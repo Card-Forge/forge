@@ -317,8 +317,7 @@ public class CardFactoryUtil {
 
             @Override
             public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityTransmute(getSourceCard(),
-                        getPayCosts(), getTargetRestrictions() == null ? null : new TargetRestrictions(getTargetRestrictions()));
+                AbilityActivated res = new AbilityTransmute(getSourceCard(), getPayCosts(), getTargetRestrictions());
                 CardFactory.copySpellAbility(this, res);
                 res.getRestrictions().setZone(ZoneType.Hand);
                 return res;
@@ -353,7 +352,7 @@ public class CardFactoryUtil {
                     }
                 }
 
-                if (sameCost.size() == 0) {
+                if (sameCost.isEmpty()) {
                     return;
                 }
 
