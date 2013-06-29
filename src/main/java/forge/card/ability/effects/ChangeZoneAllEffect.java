@@ -51,23 +51,24 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = game.getCardsIn(origin);
-        } else if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
-            // Search library using changezoneall effect need a param "Search"
-            if (sa.getActivatingPlayer().hasKeyword("LimitSearchLibrary")) {
-                for (final Player p : tgtPlayers) {
-                    cards.addAll(p.getCardsIn(origin));
-                    cards.removeAll(p.getCardsIn(ZoneType.Library));
-                    int fetchNum = Math.min(p.getCardsIn(ZoneType.Library).size(), 4);
-                    cards.addAll(p.getCardsIn(ZoneType.Library, fetchNum));
-                }
-            }
-            if (sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
-                // all these cards have "then that player shuffles", mandatory shuffle
-                cards.removeAll(game.getCardsIn(ZoneType.Library));
-            }
         } else {
             for (final Player p : tgtPlayers) {
                 cards.addAll(p.getCardsIn(origin));
+            }
+            if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
+                // Search library using changezoneall effect need a param "Search"
+                if (sa.getActivatingPlayer().hasKeyword("LimitSearchLibrary")) {
+                    for (final Player p : tgtPlayers) {
+                        cards.addAll(p.getCardsIn(origin));
+                        cards.removeAll(p.getCardsIn(ZoneType.Library));
+                        int fetchNum = Math.min(p.getCardsIn(ZoneType.Library).size(), 4);
+                        cards.addAll(p.getCardsIn(ZoneType.Library, fetchNum));
+                    }
+                }
+                if (sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
+                    // all these cards have "then that player shuffles", mandatory shuffle
+                    cards.removeAll(game.getCardsIn(ZoneType.Library));
+                }
             }
         }
         
