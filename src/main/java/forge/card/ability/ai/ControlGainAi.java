@@ -108,7 +108,8 @@ public class ControlGainAi extends SpellAbilityAi {
             @Override
             public boolean apply(final Card c) {
                 final Map<String, String> vars = c.getSVars();
-                return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa) && CombatUtil.canAttackNextTurn(c, ai.getOpponent());
+                return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa) && CombatUtil.canAttackNextTurn(c, ai.getOpponent())
+                        && c.getNetCombatDamage() > 0;
             }
         });
 
