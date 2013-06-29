@@ -19,6 +19,7 @@ package forge.game.ai;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -1191,6 +1192,19 @@ public class ComputerUtil {
      */
     public static boolean hasACardGivingHaste(final Player ai) {
         final List<Card> all = new ArrayList<Card>(ai.getCardsIn(ZoneType.Battlefield));
+        
+        for (final Card c : all) {
+            if (c.isEquipment()) {
+                for (StaticAbility stAb : c.getStaticAbilities()) {
+                    HashMap<String, String> params = stAb.getMapParams();
+                    if ("Continuous".equals(params.get("Mode")) && params.containsKey("AddKeyword")
+                            && params.get("AddKeyword").contains("Haste") && c.getEquippingCard() == null) {
+                        return true;
+                    }
+                }
+            }
+        }
+        
         all.addAll(CardFactoryUtil.getExternalZoneActivationCards(ai));
         all.addAll(ai.getCardsIn(ZoneType.Hand));
     
