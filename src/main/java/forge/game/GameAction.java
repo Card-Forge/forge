@@ -1487,6 +1487,12 @@ public class GameAction {
                 }
             }
         }
+        
+        if ( goesFirst == null ) { 
+            // This happens in hotseat matches when 2 equal lobbyplayers play. 
+            // Noone of them has lost, so cannot decide who goes first .
+            goesFirst = game.getPlayers().get(0); // does not really matter who plays first - it's controlled from the same computer.
+        }
     
         boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(isFirstGame);
         goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
