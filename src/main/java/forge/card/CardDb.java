@@ -229,7 +229,7 @@ public final class CardDb implements ICardDatabase {
             PaperCard[] candidates = new PaperCard[9]; // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
             int cnt = 0;
             for( PaperCard pc : cards ) {
-                if( pc.getEdition().equals(setName) )
+                if( pc.getEdition().equalsIgnoreCase(setName) )
                     candidates[cnt++] = pc;
             }
     
@@ -237,7 +237,7 @@ public final class CardDb implements ICardDatabase {
             result = cnt == 1  ? candidates[0] : candidates[MyRandom.getRandom().nextInt(cnt)];
         } else 
             for( PaperCard pc : cards ) {
-                if( pc.getEdition().equals(setName) && index == pc.getArtIndex() ) {
+                if( pc.getEdition().equalsIgnoreCase(setName) && index == pc.getArtIndex() ) {
                     result = pc;
                     break;
                 }
