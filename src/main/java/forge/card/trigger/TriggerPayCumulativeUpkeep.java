@@ -69,5 +69,6 @@ public class TriggerPayCumulativeUpkeep extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
+        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
     }
 }
