@@ -146,17 +146,16 @@ public class GameAction {
         Card copied = null;
         Card lastKnownInfo = null;
 
+        if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack)) {
+            c.setState(CardCharacteristicName.Original);
+        }
+
         // Don't copy Tokens, copy only cards leaving the battlefield
         if (c.isToken() || suppress || zoneTo.is(ZoneType.Battlefield) || zoneFrom == null
                 || !zoneFrom.is(ZoneType.Battlefield)) {
             lastKnownInfo = c;
             copied = c;
         } else {
-            if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack)) {
-                c.setState(CardCharacteristicName.Original);
-            }
-
-            
             lastKnownInfo = CardUtil.getLKICopy(c);
 
             if (c.isCloned()) {
@@ -365,11 +364,6 @@ public class GameAction {
     public final Card moveTo(final Zone zoneTo, Card c) {
        // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT, 
                                              // use FThreads.invokeInNewThread to run code in a pooled thread
-
-        // if a split card is moved, convert it back to its full form before moving (unless moving to stack)
-        if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack)) {
-            c.setState(CardCharacteristicName.Original);
-        }
 
         return moveTo(zoneTo, c, null);
     }
