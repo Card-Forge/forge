@@ -9226,6 +9226,7 @@ res/cardsfolder/s/sabretooth_tiger.txt svneol=native#text/plain
 res/cardsfolder/s/sacellum_archers.txt svneol=native#text/plain
 res/cardsfolder/s/sacellum_godspeaker.txt -text
 res/cardsfolder/s/sachi_daughter_of_seshiro.txt svneol=native#text/plain
+res/cardsfolder/s/sacred_boon.txt -text
 res/cardsfolder/s/sacred_foundry.txt svneol=native#text/plain
 res/cardsfolder/s/sacred_guide.txt -text
 res/cardsfolder/s/sacred_knight.txt svneol=native#text/plain
@@ -9388,6 +9389,7 @@ res/cardsfolder/s/scarecrone.txt svneol=native#text/plain
 res/cardsfolder/s/scarecrow.txt -text
 res/cardsfolder/s/scarland_thrinax.txt svneol=native#text/plain
 res/cardsfolder/s/scarred_vinebreeder.txt svneol=native#text/plain
+res/cardsfolder/s/scars_of_the_veteran.txt -text
 res/cardsfolder/s/scarscale_ritual.txt svneol=native#text/plain
 res/cardsfolder/s/scarwood_bandits.txt svneol=native#text/plain
 res/cardsfolder/s/scarwood_goblins.txt svneol=native#text/plain

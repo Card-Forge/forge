@@ -1,0 +1,11 @@
+Name:Sacred Boon
+ManaCost:1 W
+Types:Instant
+A:SP$ PreventDamage | Cost$ 1 W | ValidTgts$ Creature | Amount$ 3 | PreventionSubAbility$ BoonEffect | ShieldEffectTarget$ Targeted | TgtPrompt$ Select target creature | SpellDescription$ Prevent the next 3 damage that would be dealt to target creature this turn. At the beginning of the next end step, put a +0/+1 counter on that creature for each 1 damage prevented this way.
+SVar:BoonEffect:AB$ Effect | Cost$ 0 | RememberObjects$ ShieldEffectTarget | Triggers$ DelTrig,OutOfSight | SVars$ DelayedBoon,ExileEffect | SpellDescription$ At the beginning of the next end step, put a +0/+1 counter on the targeted creature for each 1 damage prevented this way.
+SVar:DelTrig:Mode$ Phase | Phase$ End of Turn | Execute$ DelayedBoon | TriggerDescription$ Put a +0/+1 counter on the targeted creature for each 1 damage prevented this way.
+SVar:DelayedBoon:AB$ PutCounter | Cost$ 0 | Defined$ Remembered | CounterType$ P0P1 | CounterNum$ PreventedDamage | SubAbility$  ExileEffect
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ ExileEffect | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_boon.jpg
+Oracle:Prevent the next 3 damage that would be dealt to target creature this turn. At the beginning of the next end step, put a +0/+1 counter on that creature for each 1 damage prevented this way.

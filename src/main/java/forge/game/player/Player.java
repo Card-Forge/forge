@@ -44,6 +44,7 @@ import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
+import forge.card.ability.ApiType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.replacement.ReplacementResult;
@@ -932,15 +933,21 @@ public class Player extends GameEntity implements Comparable<Player> {
                 System.err.println(shieldSource + " - Targeting for prevention shield's effect should be done with initial spell");
             }
 
-            if (restDamage >= shieldAmount) {
-                this.getController().playSpellAbilityNoStack(this, shieldSA);
-                this.subtractPreventNextDamageWithEffect(shieldSource, restDamage);
-                restDamage = restDamage - shieldAmount;
-            } else {
-                this.subtractPreventNextDamageWithEffect(shieldSource, restDamage);
-                this.getController().playSpellAbilityNoStack(this, shieldSA);
-                restDamage = 0;
+            boolean apiIsEffect = (shieldSA.getApi() == ApiType.Effect);
+            List<Card> cardsInCommand = null;
+            if (apiIsEffect) {
+                cardsInCommand = this.getGame().getCardsIn(ZoneType.Command);
             }
+
+            this.getController().playSpellAbilityNoStack(this, shieldSA);
+            if (apiIsEffect) {
+                List<Card> newCardsInCommand = this.getGame().getCardsIn(ZoneType.Command);
+                newCardsInCommand.removeAll(cardsInCommand);
+                newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + Integer.toString(dmgToBePrevented));
+            }
+            this.subtractPreventNextDamageWithEffect(shieldSource, restDamage);
+            restDamage = restDamage - dmgToBePrevented;
+
             if (DEBUGShieldsWithEffects) {
                 System.out.println("Remaining shields: "
                     + (shieldMap.containsKey(shieldSource) ? shieldMap.get(shieldSource).get("ShieldAmount") : "all shields used"));

@@ -7386,15 +7386,23 @@ public class Card extends GameEntity implements Comparable<Card> {
                 System.err.println(shieldSource + " - Targeting for prevention shield's effect should be done with initial spell");
             }
 
-            if (restDamage >= shieldAmount) {
-                this.getController().getController().playSpellAbilityNoStack(this.getController(), shieldSA);
-                this.subtractPreventNextDamageWithEffect(shieldSource, restDamage);
-                restDamage = restDamage - shieldAmount;
-            } else {
-                this.subtractPreventNextDamageWithEffect(shieldSource, restDamage);
-                this.getController().getController().playSpellAbilityNoStack(this.getController(), shieldSA);
-                restDamage = 0;
+            boolean apiIsEffect = (shieldSA.getApi() == ApiType.Effect);
+            List<Card> cardsInCommand = null;
+            if (apiIsEffect) {
+                cardsInCommand = this.getGame().getCardsIn(ZoneType.Command);
             }
+
+            this.getController().getController().playSpellAbilityNoStack(this.getController(), shieldSA);
+            if (apiIsEffect) {
+                List<Card> newCardsInCommand = this.getGame().getCardsIn(ZoneType.Command);
+                newCardsInCommand.removeAll(cardsInCommand);
+                if (newCardsInCommand != null && !newCardsInCommand.isEmpty()) {
+                    newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + Integer.toString(dmgToBePrevented));
+                }
+            }
+            this.subtractPreventNextDamageWithEffect(shieldSource, restDamage);
+            restDamage = restDamage - dmgToBePrevented;
+
             if (DEBUGShieldsWithEffects) {
                 System.out.println("Remaining shields: "
                     + (shieldMap.containsKey(shieldSource) ? shieldMap.get(shieldSource).get("ShieldAmount") : "all shields used"));
