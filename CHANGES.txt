@@ -1,7 +1,7 @@
-Forge Beta: 06-28-2013 ver 1.4.2
+Forge Beta: 07-##-2013 ver 1.4.3
 
 
-12886 cards in total.
+12### cards in total.
 
 
 -------------
@@ -36,73 +36,12 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-Adventurers' Guildhouse
-Baton of Morale
-Battering Ram
-Beast Walkers
-Benalish Hero
-Benalish Infantry
-Bloodlord of Vaasgoth
-Camel
-Cathedral of Serra
-Cooperation
-Dark Sphere
-Darksteel Garrison
-Dire Wolves
-Djinn Illuminatus
-Errand of Duty
-Formation
-Fortified Area
-Gaea's Touch
-Goblin Flectomancer
-Gorilla Berserkers
-Guile
-Helm of Chatzuk
-Herald of Leshrac
-Icatian Infantry
-Icatian Phalanx
-Icatian Skirmishers
-Joven's Ferrets
-Kithkin Mourncaller
-Kjeldoran Escort
-Kjeldoran Knight
-Kjeldoran Phalanx
-Kjeldoran Skycaptain
-Kjeldoran Skyknight
-Kjeldoran Warrior
-Knights of Thorn
-Master of the Hunt
-Mesa Pegasus
-Mindlock Orb
-Mountain Stronghold
-Nalathni Dragon
-Nature's Blessing
-Noble Elephant
-Pathrazer of Ulamog
-Phyrexian Colossus
-Pikemen
-Pulmonic Sliver
-Quicksilver Sea
-Redirect
-Restore Balance
-Seafarer's Quay
-Shadow of Doubt
-Shelkin Brownie
-Shield Bearer
-Soraya the Falconer
-Spellskite
-Teremko Griffin
-Timber Wolves
-Tolaria
-Unholy Citadel
-Urborg Panther
-Urza's Avenger
-Urza's Engine
-Volunteer Reserves
-Wall of Shards
-Wall of Shields
-War Elephant
-Wild Ricochet
+Candles' Glow
+Temper
+Test of Faith
+Vengeful Archon
+Heart of Bogardan
+Sideswipe
 
 
 --------------------
@@ -200,19 +139,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-Asepetci
-Dave
-Gos
-jsv
-Marc
-Max
-Nordos
-Sloth
-Sol
-squee1968
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
