@@ -152,6 +152,11 @@ public class GameAction {
             lastKnownInfo = c;
             copied = c;
         } else {
+            if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack)) {
+                c.setState(CardCharacteristicName.Original);
+            }
+
+            
             lastKnownInfo = CardUtil.getLKICopy(c);
 
             if (c.isCloned()) {

@@ -50,7 +50,7 @@ public class HumanPlaySpellAbility {
     }
 
 
-    public final void fillRequirements(boolean isAlreadyTargeted, boolean isFree, boolean skipStack) {
+    public final void playAbility(boolean mayChoseTargets, boolean isFree, boolean skipStack) {
         final Game game = ability.getActivatingPlayer().getGame();
 
         // used to rollback
@@ -71,7 +71,7 @@ public class HumanPlaySpellAbility {
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         boolean prerequisitesMet = this.announceValuesLikeX()
                 && this.announceType()
-                && ( isAlreadyTargeted || setupTargets() ) 
+                && ( !mayChoseTargets || setupTargets() ) // if you can choose targets, then do choose them.
                 && ( isFree || this.payment.payCost(game) );
 
 
@@ -93,7 +93,7 @@ public class HumanPlaySpellAbility {
     
             // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
             // Triggers haven't resolved yet ??
-            if (!isAlreadyTargeted) {
+            if (mayChoseTargets) {
                 clearTargets(ability);
             }
         }
@@ -130,11 +130,6 @@ public class HumanPlaySpellAbility {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
         final Card c = ability.getSourceCard();
-
-        // split cards transform back to full form if targeting is canceled
-        if (c.isSplitCard()) {
-            c.setState(CardCharacteristicName.Original);
-        }
 
         if (fromZone != null) { // and not a copy
             // add back to where it came from

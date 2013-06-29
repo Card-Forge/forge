@@ -118,15 +118,11 @@ public class HumanPlay {
     
         // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getSourceCard() +  " new = " + newAbility);
         if (newAbility) {
-            CostPayment payment = null;
-            if (sa.getPayCosts() == null) {
-                payment = new CostPayment(new Cost("0", sa.isAbility()), sa);
-            } else {
-                payment = new CostPayment(sa.getPayCosts(), sa);
-            }
+            Cost abCost = sa.getPayCosts() == null ? new Cost("0", sa.isAbility()) : sa.getPayCosts();
+            CostPayment payment = new CostPayment(abCost, sa);
     
             final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
-            req.fillRequirements(false, false, false);
+            req.playAbility(true, false, false);
         } else {
             if (payManaCostIfNeeded(p, sa)) {
                 if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -210,7 +206,7 @@ public class HumanPlay {
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
     
             final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, payment);
-            req.fillRequirements(!mayChooseNewTargets, true, false);
+            req.playAbility(mayChooseNewTargets, true, false);
         } else {
             if (sa.isSpell()) {
                 final Card c = sa.getSourceCard();
@@ -242,7 +238,7 @@ public class HumanPlay {
         if (sa.getPayCosts() != null) {
             final HumanPlaySpellAbility req = new HumanPlaySpellAbility(sa, new CostPayment(sa.getPayCosts(), sa));
             
-            req.fillRequirements(useOldTargets, false, true);
+            req.playAbility(!useOldTargets, false, true);
         } else {
             if (payManaCostIfNeeded(player, sa)) {
                 AbilityUtils.resolve(sa);
