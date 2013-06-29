@@ -169,7 +169,7 @@ public class AiController {
     private ArrayList<SpellAbility> getSpellAbilities(final List<Card> l) {
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : l) {
-            for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
+            for (final SpellAbility sa : c.getAllSpellAbilities()) {
                 spellAbilities.add(sa);
             }
         }

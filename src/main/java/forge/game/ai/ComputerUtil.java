@@ -1164,6 +1164,9 @@ public class ComputerUtil {
                 final String type = sac.getType();
     
                 if (type.equals("CARDNAME")) {
+                    if (source.getSVar("SacMe").equals("6")) {
+                        return true;
+                    }
                     continue;
                 }
     
