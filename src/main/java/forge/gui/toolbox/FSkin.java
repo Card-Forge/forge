@@ -530,7 +530,7 @@ public enum FSkin {
         // Everything OK?
         
         final FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
-        setProgessBarMessage("Processing image sprites: ", 4);
+        setProgessBarMessage("Processing image sprites: ", 5);
 
 
         // Grab and test various sprite files.
