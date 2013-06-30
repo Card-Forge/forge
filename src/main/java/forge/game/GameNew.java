@@ -19,7 +19,9 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameLogEntryType;
+import forge.Singletons;
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.deck.CardPool;
@@ -113,9 +115,9 @@ public class GameNew {
         return myRemovedAnteCards;
     }
 
-    private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool secion, boolean canRandomFoil, Random generator) {
+    private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil, Random generator) {
         PlayerZone library = player.getZone(zoneType);
-        for (final Entry<PaperCard, Integer> stackOfCards : secion) {
+        for (final Entry<PaperCard, Integer> stackOfCards : section) {
             final PaperCard cp = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
@@ -129,9 +131,22 @@ public class GameNew {
 
                 final Card card = cpi.toForgeCard(player);
                 
-                // Assign random foiling on approximately 1:20 cards
-                if (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
-                    final int iFoil = generator.nextInt(9) + 1;
+                // Assign card-specific foiling or random foiling on approximately 1:20 cards if enabled
+                CardEdition.FoilType foilType = Singletons.getModel().getEditions().get(card.getCurSetCode()).getFoilType();
+                if (foilType != CardEdition.FoilType.NOT_SUPPORTED && (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5)))) {
+                    int iFoil = 0;
+
+                    switch(foilType) {
+                        case MODERN:
+                            iFoil = generator.nextInt(9) + 1; // modern foils in slots 1-10
+                            break; 
+                        case OLD_STYLE:
+                            iFoil = generator.nextInt(9) + 11; // old style foils in slots 11-20
+                            break;
+                        default:
+                            System.out.println(String.format("Unexpected foil type for card %s in edition %s.", card.getName(), card.getCurSetCode()));
+                    }
+
                     card.setFoil(iFoil);
                 }
 

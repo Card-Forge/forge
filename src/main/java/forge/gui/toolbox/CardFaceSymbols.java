@@ -116,6 +116,17 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("foil08", FSkin.getImage(FSkin.Foils.FOIL_08));
         MANA_IMAGES.put("foil09", FSkin.getImage(FSkin.Foils.FOIL_09));
         MANA_IMAGES.put("foil10", FSkin.getImage(FSkin.Foils.FOIL_10));
+
+        MANA_IMAGES.put("foil11", FSkin.getImage(FSkin.OldFoils.FOIL_11));
+        MANA_IMAGES.put("foil12", FSkin.getImage(FSkin.OldFoils.FOIL_12));
+        MANA_IMAGES.put("foil13", FSkin.getImage(FSkin.OldFoils.FOIL_13));
+        MANA_IMAGES.put("foil14", FSkin.getImage(FSkin.OldFoils.FOIL_14));
+        MANA_IMAGES.put("foil15", FSkin.getImage(FSkin.OldFoils.FOIL_15));
+        MANA_IMAGES.put("foil16", FSkin.getImage(FSkin.OldFoils.FOIL_16));
+        MANA_IMAGES.put("foil17", FSkin.getImage(FSkin.OldFoils.FOIL_17));
+        MANA_IMAGES.put("foil18", FSkin.getImage(FSkin.OldFoils.FOIL_18));
+        MANA_IMAGES.put("foil19", FSkin.getImage(FSkin.OldFoils.FOIL_19));
+        MANA_IMAGES.put("foil20", FSkin.getImage(FSkin.OldFoils.FOIL_20));
     }
 
     /**

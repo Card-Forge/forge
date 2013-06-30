@@ -208,11 +208,31 @@ public enum FSkin {
         FOIL_07     (new int[] {0, 1710, 400, 570}), /** */
         FOIL_08     (new int[] {400, 1710, 400, 570}), /** */
         FOIL_09     (new int[] {0, 2280, 400, 570}), /** */
-        FOIL_10     (new int[] {400, 2280, 400, 570});
+        FOIL_10     (new int[] {400, 2280, 400, 570}); /** */
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
         Foils(final int[] xy) { this.coords = xy; }
+        /** @return int[] */
+        @Override
+        public int[] getCoords() { return coords; }
+    }
+
+    public enum OldFoils implements SkinProp { /** */
+        FOIL_11     (new int[] {0, 0, 400, 570}), /** */
+        FOIL_12     (new int[] {400, 0, 400, 570}), /** */
+        FOIL_13     (new int[] {0, 570, 400, 570}), /** */
+        FOIL_14     (new int[] {400, 570, 400, 570}), /** */
+        FOIL_15     (new int[] {0, 1140, 400, 570}), /** */
+        FOIL_16     (new int[] {400, 1140, 400, 570}), /** */
+        FOIL_17     (new int[] {0, 1710, 400, 570}), /** */
+        FOIL_18     (new int[] {400, 1710, 400, 570}), /** */
+        FOIL_19     (new int[] {0, 2280, 400, 570}), /** */
+        FOIL_20     (new int[] {400, 2280, 400, 570}); /** */
+
+        private int[] coords;
+        /** @param xy &emsp; int[] coordinates */
+        OldFoils(final int[] xy) { this.coords = xy; }
         /** @return int[] */
         @Override
         public int[] getCoords() { return coords; }
@@ -395,6 +415,7 @@ public enum FSkin {
         FILE_SKINS_DIR = "res/skins/",
         FILE_ICON_SPRITE = "sprite_icons.png",
         FILE_FOIL_SPRITE = "sprite_foils.png",
+        FILE_OLD_FOIL_SPRITE = "sprite_old_foils.png",
         FILE_AVATAR_SPRITE = "sprite_avatars.png",
         FILE_FONT = "font1.ttf",
         FILE_SPLASH = "bg_splash.png",
@@ -406,7 +427,7 @@ public enum FSkin {
     private static String preferredName;
     private static Font font;
     private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils,
-        bimDefaultAvatars, bimPreferredAvatars;
+        bimOldFoils, bimDefaultAvatars, bimPreferredAvatars;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
 
@@ -518,6 +539,7 @@ public enum FSkin {
         final File f3 = new File(DEFAULT_DIR + FILE_FOIL_SPRITE);
         final File f4 = new File(DEFAULT_DIR + FILE_AVATAR_SPRITE);
         final File f5 = new File(preferredDir + FILE_AVATAR_SPRITE);
+        final File f6 = new File(DEFAULT_DIR + FILE_OLD_FOIL_SPRITE);
 
         try {
             bimDefaultSprite = ImageIO.read(f1);
@@ -525,6 +547,8 @@ public enum FSkin {
             bimPreferredSprite = ImageIO.read(f2);
             barProgress.increment();
             bimFoils = ImageIO.read(f3);
+            barProgress.increment();
+            bimOldFoils = f6.exists() ? ImageIO.read(f6) : ImageIO.read(f3);
             barProgress.increment();
             bimDefaultAvatars = ImageIO.read(f4);
 
@@ -571,7 +595,8 @@ public enum FSkin {
         for (final LayoutImages e : LayoutImages.values())                { FSkin.setImage(e); }
 
         // Foils have a separate sprite, so uses a specific method.
-        for (final Foils e : Foils.values()) { FSkin.setFoil(e); }
+        for (final Foils e : Foils.values()) { FSkin.setFoil(e, false); }
+        for (final OldFoils e : OldFoils.values()) { FSkin.setFoil(e, true); }
 
         // Assemble avatar images
         FSkin.assembleAvatars();
@@ -585,6 +610,7 @@ public enum FSkin {
         // Clear references to buffered images
         FSkin.bimDefaultSprite.flush();
         FSkin.bimFoils.flush();
+        FSkin.bimOldFoils.flush();
         FSkin.bimPreferredSprite.flush();
         FSkin.bimDefaultAvatars.flush();
 
@@ -592,6 +618,7 @@ public enum FSkin {
 
         FSkin.bimDefaultSprite = null;
         FSkin.bimFoils = null;
+        FSkin.bimOldFoils = null;
         FSkin.bimPreferredSprite = null;
         FSkin.bimDefaultAvatars = null;
         FSkin.bimPreferredAvatars = null;
@@ -867,14 +894,14 @@ public enum FSkin {
         }
     }
 
-    private static void setFoil(final SkinProp s0) {
+    private static void setFoil(final SkinProp s0, boolean isOldStyle) {
         tempCoords = s0.getCoords();
         x0 = tempCoords[0];
         y0 = tempCoords[1];
         w0 = tempCoords[2];
         h0 = tempCoords[3];
 
-        FSkin.images.put(s0, bimFoils.getSubimage(x0, y0, w0, h0));
+        FSkin.images.put(s0, isOldStyle ? bimOldFoils.getSubimage(x0, y0, w0, h0) : bimFoils.getSubimage(x0, y0, w0, h0));
     }
 
     private static void setColor(final SkinProp s0) {
