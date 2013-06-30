@@ -281,20 +281,30 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final void add(final SpellAbility sp) {
         FThreads.assertExecutedByEdt(false);
         SpellAbilityStackInstance si = null;
+        final Card source = sp.getSourceCard();
+        Player activator = sp.getActivatingPlayer();
+
+        // if activating player slips through the cracks, assign activating
+        // Player to the controller here
+        if (null == activator) {
+            sp.setActivatingPlayer(source.getController());
+            activator = sp.getActivatingPlayer();
+            System.out.println(source.getName() + " - activatingPlayer not set before adding to stack.");
+        }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
             AbilityUtils.resolve(sp);
             //sp.resolve();
             sp.resetOnceResolved();
-            game.getGameLog().add(GameLogEntryType.MANA, sp.getSourceCard() + " - " + sp.getDescription());
+            game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
             return;
         }
 
         if (sp.isSpell()) {
-            sp.getSourceCard().setController(sp.getActivatingPlayer(), 0);
+            source.setController(activator, 0);
             Spell spell = (Spell) sp;
             if (spell.isCastFaceDown()) {
-                sp.getSourceCard().turnFaceDown();
+                source.turnFaceDown();
             }
         }
 
@@ -304,14 +314,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        
-        // if activating player slips through the cracks, assign activating
-        // Player to the controller here
-        if (null == sp.getActivatingPlayer()) {
-            sp.setActivatingPlayer(sp.getSourceCard().getController());
-            System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
-        }
-
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
             // TODO: make working triggered ability
             sp.resolve();
@@ -319,49 +321,47 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             //GuiDisplayUtil.updateGUI();
         } else {
             for (OptionalCost s : sp.getOptionalCosts()) {
-                sp.getSourceCard().addOptionalCostPaid(s);
+                source.addOptionalCostPaid(s);
             }
             if (sp.isCopied()) {
                 si = this.push(sp);
             } else {
                 if (sp.isMultiKicker()) {
-                    final Player activating = sp.getActivatingPlayer();
                     final Cost costMultikicker = new Cost(sp.getMultiKickerManaCost(), false);
                     
                     boolean hasPaid = false;
                     do {
-                        int mkMagnitude = sp.getSourceCard().getKickerMagnitude();
-                        String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sp.getSourceCard(), mkMagnitude );
-                        hasPaid = activating.getController().payManaOptional(sp.getSourceCard(), costMultikicker, sp, prompt, ManaPaymentPurpose.Multikicker);
+                        int mkMagnitude = source.getKickerMagnitude();
+                        String prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", source, mkMagnitude );
+                        hasPaid = activator.getController().payManaOptional(source, costMultikicker, sp, prompt, ManaPaymentPurpose.Multikicker);
                         if( hasPaid )
-                            sp.getSourceCard().addMultiKickerMagnitude(1);
+                            source.addMultiKickerMagnitude(1);
                     } while( hasPaid );
                 }
                 
                 // The ability is added to stack HERE
                 si = this.push(sp);
                 
-                if (sp.isSpell() && (sp.getSourceCard().hasStartOfKeyword("Replicate")
-                        || Iterables.any(sp.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
-                                CardPredicates.hasKeyword("Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost.")))) {
+                if (sp.isSpell() && (source.hasStartOfKeyword("Replicate")
+                        || ((source.isInstant() || source.isSorcery()) && Iterables.any(activator.getCardsIn(ZoneType.Battlefield),
+                                CardPredicates.hasKeyword("Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost."))))) {
                     int magnitude = 0;
                     // TODO: convert multikicker/replicate support in abCost so this
                     // doesn't happen here
                     
-                    final Player activating = sp.getActivatingPlayer();
                     final Cost costReplicate = new Cost(sp.getPayCosts().getTotalMana(), false);
                     boolean hasPaid = false;
                     
                     do {
-                        String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sp.getSourceCard(), magnitude);
-                        hasPaid = activating.getController().payManaOptional(sp.getSourceCard(), costReplicate, sp, prompt, ManaPaymentPurpose.Replicate);
+                        String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", source, magnitude);
+                        hasPaid = activator.getController().payManaOptional(source, costReplicate, sp, prompt, ManaPaymentPurpose.Replicate);
                         if( hasPaid )
                             magnitude++;
                     } while( hasPaid );
 
                     for (int i = 0; i < magnitude; i++) {
-                        SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(sp.getSourceCard(), sp.getSourceCard(), sp, false);
-                        activating.getController().playSpellAbilityForFree(copy, true);
+                        SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(source, sp.getSourceCard(), sp, false);
+                        activator.getController().playSpellAbilityForFree(copy, true);
                     }
                 }
 
