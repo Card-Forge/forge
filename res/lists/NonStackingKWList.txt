@@ -1,5 +1,6 @@
 All creatures able to block CARDNAME do so.
 CARDNAME attacks each turn if able.
+CARDNAME can attack as though it didn't have defender.
 CARDNAME can't be regenerated.
 CARDNAME must be blocked if able.
 CantBeBlockedByAmount LT2

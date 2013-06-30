@@ -749,7 +749,7 @@ public class AttachAi extends SpellAbilityAi {
             magnetList = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.isCreature();
+                    return c.isCreature() && !c.isFortified();
                 }
             });
         }
@@ -876,6 +876,11 @@ public class AttachAi extends SpellAbilityAi {
             }
             c = ComputerUtilCard.getBestAI(prefList);
         } else {
+            for (Card pref : prefList) {
+                if (pref.isLand() && pref.isUntapped()) {
+                    return pref;
+                }
+            }
             // If we grant abilities, we may want to put it on something Weak?
             // Possibly more defensive?
             c = ComputerUtilCard.getWorstPermanentAI(prefList, false, false, false, false);
@@ -1115,7 +1120,7 @@ public class AttachAi extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.equals("CARDNAME can attack as though it didn't have defender.")) {
-            if (!card.hasKeyword("Defender") || card.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
+            if (!card.hasKeyword("Defender") || card.getNetCombatDamage() + powerBonus <= 0) {
                 return false;
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
