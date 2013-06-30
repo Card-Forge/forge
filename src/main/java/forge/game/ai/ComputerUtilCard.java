@@ -267,7 +267,7 @@ public class ComputerUtilCard {
      * @return a {@link forge.Card} object.
      */
     public static Card getBestCreatureToBounceAI(final List<Card> list) {
-        final int tokenBonus = 40;
+        final int tokenBonus = 60;
         Card biggest = null;
         int biggestvalue = -1;
 
