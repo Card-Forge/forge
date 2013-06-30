@@ -4,5 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ PreventDamage | Source$ Creature.EnchantedBy | Description$ Prevent all damage that would be dealt by enchanted creature.
+SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defang.jpg
 Oracle:Enchant creature\nPrevent all damage that would be dealt by enchanted creature.

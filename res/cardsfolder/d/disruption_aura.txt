@@ -6,5 +6,6 @@ A:SP$ Attach | Cost$ 2 U | ValidTgts$ Artifact | TgtPrompt$ Select target artifa
 S:Mode$ Continuous | Affected$ Artifact.EnchantedBy | AddTrigger$ TrigPhase | AddSVar$ TrigPendrellFlux | Description$ Enchanted artifact has "At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost."
 SVar:TrigPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPendrellFlux | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost.
 SVar:TrigPendrellFlux:DB$ Sacrifice | Defined$ Self | UnlessCost$ CardManaCost | UnlessPayer$ You
+SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disruption_aura.jpg
 Oracle:Enchant artifact\nEnchanted artifact has "At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost."

@@ -1,10 +1,12 @@
 All creatures able to block CARDNAME do so.
-CARDNAME attacks each turn if able.
-CARDNAME can attack as though it didn't have defender.
-CARDNAME can't be regenerated.
-CARDNAME must be blocked if able.
 CantBeBlockedByAmount LT2
 CantBeBlockedByAmount LT3
+CARDNAME's activated abilities can't be activated.
+CARDNAME attacks each turn if able.
+CARDNAME can attack as though it didn't have defender.
+CARDNAME can block any number of creatures.
+CARDNAME can't be regenerated.
+CARDNAME must be blocked if able.
 CARDNAME doesn't untap during your untap step.
 Changeling
 Convoke

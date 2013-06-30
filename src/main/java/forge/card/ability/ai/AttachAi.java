@@ -561,7 +561,7 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         Card c = null;
-        if ((prefList == null) || prefList.isEmpty()) {
+        if (prefList == null || prefList.isEmpty()) {
             prefList = new ArrayList<Card>(list);
         } else {
             c = ComputerUtilCard.getBestAI(prefList);
@@ -582,6 +582,20 @@ public class AttachAi extends SpellAbilityAi {
                 @Override
                 public boolean apply(final Card c) {
                     return CombatUtil.canAttackNextTurn(c) && c.getNetAttack() > 0;
+                }
+            });
+        }
+
+        //some auras aren't useful in multiples
+        if (attachSource.hasSVar("NonStackingAttachEffect")) {
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    for (Card aura : c.getEnchantedBy()) {
+                        if (aura.getName().equals(attachSource.getName()))
+                            return false;
+                    }
+                    return true;
                 }
             });
         }
@@ -835,13 +849,17 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
-        //some equipments aren't useful in multiples
+        //some auras/equipments aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     for (Card equipment : c.getEquippedBy()) {
                         if (equipment.getName().equals(attachSource.getName()))
+                            return false;
+                    }
+                    for (Card aura : c.getEnchantedBy()) {
+                        if (aura.getName().equals(attachSource.getName()))
                             return false;
                     }
                     return true;

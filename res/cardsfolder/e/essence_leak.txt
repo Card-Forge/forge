@@ -7,5 +7,6 @@ S:Mode$ Continuous | Affected$ Permanent.AttachedBy+Red,Permanent.AttachedBy+Gre
 SVar:TrigEssencePhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigEssenceLeak | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost.
 SVar:TrigEssenceLeak:DB$ Sacrifice | Defined$ Self | UnlessCost$ CardManaCost | UnlessPayer$ You
 SVar:RemRandomDeck:True
+SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_leak.jpg
 Oracle:Enchant permanent\nAs long as enchanted permanent is red or green, it has "At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost."
