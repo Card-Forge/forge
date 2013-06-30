@@ -1410,7 +1410,10 @@ public class GameAction {
     }
 
     public void reveal(List<Card> cards, Player cardOwner, boolean dontRevealToOwner) {
-        ZoneType zt = cards.isEmpty() ? ZoneType.Hand : game.getZoneOf(cards.get(0)).getZoneType();
+        ZoneType zt = ZoneType.Hand;
+        if (!cards.isEmpty() && game.getZoneOf(cards.get(0)) != null) {
+            zt = game.getZoneOf(cards.get(0)).getZoneType();
+        }
         reveal(cardOwner + " reveals card from " + zt, cards, zt, cardOwner, dontRevealToOwner);
     }
     
