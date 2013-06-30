@@ -17,7 +17,14 @@
  */
 package forge.game.zone;
 
+import java.util.List;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
 /**
@@ -29,6 +36,48 @@ import forge.game.player.Player;
  * @version $Id$
  */
 public class PlayerZone extends Zone {
+
+    // the this is not the owner of the card
+    private final class AlienCardsActivationFilter implements Predicate<Card> {
+        @Override
+        public boolean apply(final Card c) {
+   
+            if (c.hasStartOfKeyword("May be played by your opponent")
+                    || c.hasKeyword("Your opponent may look at this card.")) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    private final class OwnCardsActivationFilter implements Predicate<Card> {
+        @Override
+        public boolean apply(final Card c) {
+            if (c.hasKeyword("You may look at this card.")) {
+                return true;
+            }
+   
+            if (c.isLand() && (c.hasKeyword("May be played") || c.hasKeyword("May be played without paying its mana cost"))) {
+                return true;
+            }
+   
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                final ZoneType restrictZone = sa.getRestrictions().getZone();
+                if (PlayerZone.this.is(restrictZone)) {
+                    return true;
+                }
+   
+                if (sa.isSpell()
+                        && (c.hasKeyword("May be played") || c.hasKeyword("May be played without paying its mana cost")
+                                || (c.hasStartOfKeyword("Flashback") && PlayerZone.this.is(ZoneType.Graveyard)))
+                        && restrictZone.equals(ZoneType.Hand)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
     /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
     private static final long serialVersionUID = -5687652485777639176L;
 
@@ -141,6 +190,24 @@ public class PlayerZone extends Zone {
     @Override
     public void updateLabelObservers() {
         getPlayer().updateLabelObservers();
+    }
+
+    public List<Card> getCardsPlayerCanActivate(Player who) {
+    
+        Iterable<Card> cl = roCardList; // copy to new AL won't help here
+    
+        // Only check the top card of the library
+        if (is(ZoneType.Library)) {
+            cl = Iterables.limit(cl, 1);
+        }
+        
+        boolean checkingForOwner = who == this.player;
+
+        if (checkingForOwner && (this.is(ZoneType.Battlefield) || this.is(ZoneType.Hand)))
+            return roCardList;
+
+        final Predicate<Card> filterPredicate = checkingForOwner ? new OwnCardsActivationFilter() : new AlienCardsActivationFilter();
+        return Lists.newArrayList(cl = Iterables.filter(cl, filterPredicate));
     }
 
 

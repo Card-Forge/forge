@@ -1536,6 +1536,28 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardLists.filter(this.getCardsIn(zone), CardPredicates.nameEquals(cardName));
     }
 
+    
+    public List<Card> getCardsActivableInExternalZones() {
+        final List<Card> cl = new ArrayList<Card>();
+
+        cl.addAll(this.getZone(ZoneType.Graveyard).getCardsPlayerCanActivate(this));
+        cl.addAll(this.getZone(ZoneType.Exile).getCardsPlayerCanActivate(this));
+        cl.addAll(this.getZone(ZoneType.Library).getCardsPlayerCanActivate(this));
+        cl.addAll(this.getZone(ZoneType.Command).getCardsPlayerCanActivate(this));
+
+        //External activatables from all opponents
+        for (final Player opponent : this.getOpponents()) {
+            cl.addAll(opponent.getZone(ZoneType.Exile).getCardsPlayerCanActivate(this));
+            cl.addAll(opponent.getZone(ZoneType.Graveyard).getCardsPlayerCanActivate(this));
+            cl.addAll(opponent.getZone(ZoneType.Library).getCardsPlayerCanActivate(this));
+            if (opponent.hasKeyword("Play with your hand revealed.")) {
+                cl.addAll(opponent.getZone(ZoneType.Hand).getCardsPlayerCanActivate(this));
+            }
+        }
+
+        return cl;
+    }
+
     /**
      * Gets the all cards.
      * 

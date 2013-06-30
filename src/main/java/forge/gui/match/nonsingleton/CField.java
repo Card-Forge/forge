@@ -33,7 +33,6 @@ import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
 import forge.Constant.Preferences;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.player.HumanPlay;
@@ -141,7 +140,7 @@ public class CField implements ICDoc {
         flashBackAction = new ZoneAction(player.getZone(ZoneType.Graveyard), MatchConstants.HUMANFLASHBACK) {
             @Override
             protected List<Card> getCardsAsIterable() {
-                return CardFactoryUtil.getExternalZoneActivationCards(player);
+                return player.getCardsActivableInExternalZones();
             }
 
             @Override

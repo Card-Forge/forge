@@ -22,9 +22,6 @@ import java.util.*;
 import org.apache.commons.lang.StringUtils;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
@@ -67,7 +64,6 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -775,102 +771,6 @@ public class CardFactoryUtil {
         //TODO: Add code for Autumn's Veil here
 
         return true;
-    }
-
-    /**
-     * <p>
-     * getExternalZoneActivationCards.
-     * </p>
-     * 
-     * @param activator
-     *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> getExternalZoneActivationCards(final Player activator) {
-        final List<Card> cl = new ArrayList<Card>();
-
-        cl.addAll(getActivateablesFromZone(activator.getZone(ZoneType.Graveyard), activator));
-        cl.addAll(getActivateablesFromZone(activator.getZone(ZoneType.Exile), activator));
-        cl.addAll(getActivateablesFromZone(activator.getZone(ZoneType.Library), activator));
-        cl.addAll(getActivateablesFromZone(activator.getZone(ZoneType.Command), activator));
-
-        //External activatables from all opponents
-        for (final Player opponent : activator.getOpponents()) {
-            cl.addAll(getActivateablesFromZone(opponent.getZone(ZoneType.Exile), activator));
-            cl.addAll(getActivateablesFromZone(opponent.getZone(ZoneType.Graveyard), activator));
-            cl.addAll(getActivateablesFromZone(opponent.getZone(ZoneType.Library), activator));
-            if (opponent.hasKeyword("Play with your hand revealed.")) {
-                cl.addAll(getActivateablesFromZone(opponent.getZone(ZoneType.Hand), activator));
-            }
-        }
-
-        return cl;
-    }
-
-    /**
-     * <p>
-     * getActivateablesFromZone.
-     * </p>
-     * 
-     * @param zone
-     *            a PlayerZone object.
-     * @param activator
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    public static List<Card> getActivateablesFromZone(final PlayerZone zone, final Player activator) {
-
-        Iterable<Card> cl = zone.getCards(); // copy to new AL won't help here
-
-        // Only check the top card of the library
-        if (zone.is(ZoneType.Library)) {
-            cl = Iterables.limit(cl, 1);
-        }
-
-        if (activator.equals(zone.getPlayer())) {
-            cl = Iterables.filter(cl, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (c.hasKeyword("You may look at this card.")) {
-                        return true;
-                    }
-
-                    if (c.isLand()
-                            && (c.hasKeyword("May be played") || c.hasKeyword("May be played without paying its mana cost"))) {
-                        return true;
-                    }
-
-                    for (final SpellAbility sa : c.getSpellAbilities()) {
-                        final ZoneType restrictZone = sa.getRestrictions().getZone();
-                        if (zone.is(restrictZone)) {
-                            return true;
-                        }
-
-                        if (sa.isSpell()
-                                && (c.hasKeyword("May be played") || c.hasKeyword("May be played without paying its mana cost")
-                                        || (c.hasStartOfKeyword("Flashback") && zone.is(ZoneType.Graveyard)))
-                                && restrictZone.equals(ZoneType.Hand)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-            });
-        } else {
-            // the activator is not the owner of the card
-            cl = Iterables.filter(cl, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-
-                    if (c.hasStartOfKeyword("May be played by your opponent")
-                            || c.hasKeyword("Your opponent may look at this card.")) {
-                        return true;
-                    }
-                    return false;
-                }
-            });
-        }
-        return Lists.newArrayList(cl);
     }
 
     /**

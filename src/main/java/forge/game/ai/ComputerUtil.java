@@ -41,7 +41,6 @@ import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
@@ -1205,7 +1204,7 @@ public class ComputerUtil {
             }
         }
         
-        all.addAll(CardFactoryUtil.getExternalZoneActivationCards(ai));
+        all.addAll(ai.getCardsActivableInExternalZones());
         all.addAll(ai.getCardsIn(ZoneType.Hand));
     
         for (final Card c : all) {
@@ -1226,7 +1225,7 @@ public class ComputerUtil {
     public static int possibleNonCombatDamage(Player ai) {
         int damage = 0;
         final List<Card> all = new ArrayList<Card>(ai.getCardsIn(ZoneType.Battlefield));
-        all.addAll(CardFactoryUtil.getExternalZoneActivationCards(ai));
+        all.addAll(ai.getCardsActivableInExternalZones());
         all.addAll(ai.getCardsIn(ZoneType.Hand));
     
         for (final Card c : all) {

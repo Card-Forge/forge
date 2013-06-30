@@ -36,7 +36,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import net.miginfocom.swing.MigLayout;
 import forge.card.MagicColor;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -285,7 +284,7 @@ public class VField implements IVDoc<CField> {
         this.getLblHand().setToolTipText("Cards in hand (max: " + handMaxToolTip + ")");
         this.getLblGraveyard().setText("" + p0.getZone(ZoneType.Graveyard).size());
         this.getLblLibrary().setText("" + p0.getZone(ZoneType.Library).size());
-        this.getLblFlashback().setText("" + CardFactoryUtil.getExternalZoneActivationCards(p0).size());
+        this.getLblFlashback().setText("" + p0.getCardsActivableInExternalZones().size());
         this.getLblExile().setText("" + p0.getZone(ZoneType.Exile).size());
     }
 
