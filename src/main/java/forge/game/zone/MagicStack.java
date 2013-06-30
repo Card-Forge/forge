@@ -559,7 +559,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         if (!creats.isEmpty()) {
             haunterDiesWork.setDescription("");
-
+            haunterDiesWork.setTargetRestrictions(new TargetRestrictions("", "Creature".split(" "), "1", "1"));
             if (source.getController().isHuman()) {
                 final InputSelectCards targetHaunted = new InputSelectCardsFromList(1,1, creats);
                 targetHaunted.setMessage("Choose target creature to haunt.");
