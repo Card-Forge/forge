@@ -110,7 +110,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final CardDamageHistory damageHistory = new CardDamageHistory();
     private Map<CounterType, Integer> counters = new TreeMap<CounterType, Integer>();
     private Map<Card, Map<CounterType, Integer>> countersAddedBy = new TreeMap<Card, Map<CounterType, Integer>>();
-    private final Map<String, Object> triggeringObjects = new TreeMap<String, Object>();
     private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
     // Hidden keywords won't be displayed on the card
     private final ArrayList<String> hiddenExtrinsicKeyword = new ArrayList<String>();
@@ -821,7 +820,17 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.Object} object.
      */
     public final Object getTriggeringObject(final String typeIn) {
-        return this.triggeringObjects.get(typeIn);
+        Object triggered = null;
+        if (!this.getCharacteristics().getTriggers().isEmpty()) {
+            for (final Trigger t : this.getCharacteristics().getTriggers()) {
+                final SpellAbility sa = t.getTriggeredSA();
+                triggered = sa.getTriggeringObject(typeIn);
+                if (triggered != null) {
+                    break;
+                }
+            }
+        }
+        return triggered;
     }
 
     /**

@@ -1,0 +1,11 @@
+Name:Skyfire Kirin
+ManaCost:2 R R
+Types:Legendary Creature Kirin Spirit
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.
+SVar:TrigChange:AB$ GainControl | Cost$ 0 | ValidTgts$ Creature.cmcEQX | TgtPrompt$ Select target creature | LoseControl$ EOT | NewController$ You | References$ X
+SVar:X:Count$TriggeredCardManaCost
+DeckHints:Type$Spirit|Arcane
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyfire_kirin.jpg
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.

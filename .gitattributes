@@ -8404,6 +8404,7 @@ res/cardsfolder/p/punish_ignorance.txt svneol=native#text/plain
 res/cardsfolder/p/punish_the_enemy.txt -text
 res/cardsfolder/p/punishing_fire.txt svneol=native#text/plain
 res/cardsfolder/p/puppet_conjurer.txt svneol=native#text/plain
+res/cardsfolder/p/puppet_master.txt -text
 res/cardsfolder/p/puppet_strings.txt svneol=native#text/plain
 res/cardsfolder/p/puppeteer.txt svneol=native#text/plain
 res/cardsfolder/p/puppeteer_clique.txt svneol=native#text/plain
@@ -10056,6 +10057,7 @@ res/cardsfolder/s/skybreen.txt -text
 res/cardsfolder/s/skyclaw_thrash.txt -text
 res/cardsfolder/s/skycloud_egg.txt svneol=native#text/plain
 res/cardsfolder/s/skycloud_expanse.txt svneol=native#text/plain
+res/cardsfolder/s/skyfire_kirin.txt -text
 res/cardsfolder/s/skygames.txt -text
 res/cardsfolder/s/skyhunter_cub.txt svneol=native#text/plain
 res/cardsfolder/s/skyhunter_patrol.txt svneol=native#text/plain

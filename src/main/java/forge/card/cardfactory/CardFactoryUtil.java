@@ -1288,7 +1288,7 @@ public class CardFactoryUtil {
         if (sq[0].equals("RegeneratedThisTurn")) return doXMath(c.getRegeneratedThisTurn(), m, c);
         
         // TriggeringObjects
-        if (sq[0].startsWith("Triggered"))      return doXMath((Integer) c.getTriggeringObject(sq[0].substring(9)), m, c);
+        if (sq[0].startsWith("Triggered"))      return doXMath(xCount((Card) c.getTriggeringObject("Card"), sq[0].substring(9)), m, c);
 
         if (sq[0].contains("YourStartingLife"))     return doXMath(cc.getStartingLife(), m, c);
         //if (sq[0].contains("OppStartingLife"))    return doXMath(oppController.getStartingLife(), m, c); // found no cards using it

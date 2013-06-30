@@ -1,0 +1,10 @@
+Name:Puppet Master
+ManaCost:U U U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ U U U | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.EnchantedBy | Execute$ TrigChange | TriggerDescription$ When enchanted creature dies, return that card to its owner's hand. If that card is returned to its owner's hand this way, you may pay U U U. If you do, return CARDNAME to its owner's hand.
+SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard | RememberChanged$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | UnlessCost$ U U U | UnlessPayer$ You | UnlessSwitched$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/puppet_master.jpg
+Oracle:Enchant creature\nWhen enchanted creature dies, return that card to its owner's hand. If that card is returned to its owner's hand this way, you may pay {U}{U}{U}. If you do, return Puppet Master to its owner's hand.
