@@ -490,7 +490,7 @@ public enum FSkin {
             public void run() {
                 if ( cnt > 0 ) {
                     barProgress.reset();
-                    barProgress.setMaximum(4);
+                    barProgress.setMaximum(cnt);
                 }
                 barProgress.setShowETA(false);
                 barProgress.setShowCount(cnt > 0);
