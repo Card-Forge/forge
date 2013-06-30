@@ -97,6 +97,9 @@ public class Combat {
     
     public final List<Card> getAttackersOf(GameEntity defender) {
         List<Card> result = new ArrayList<Card>();
+        if (!attackedEntities.containsKey(defender)) {
+            return result;
+        }
         for(AttackingBand v : attackedEntities.get(defender)) {
             result.addAll(v.getAttackers());
         }
