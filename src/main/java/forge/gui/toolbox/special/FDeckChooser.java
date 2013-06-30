@@ -1,4 +1,4 @@
-package forge.gui.toolbox;
+package forge.gui.toolbox.special;
 
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -25,6 +25,11 @@ import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.RegisteredPlayer;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FList;
+import forge.gui.toolbox.FRadioButton;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.JXButtonPanel;
 import forge.item.PreconDeck;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;

@@ -45,10 +45,10 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.match.nonsingleton.VCommand;
 import forge.gui.match.nonsingleton.VField;
-import forge.gui.match.nonsingleton.VField.PhaseLabel;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.views.VPlayers;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.special.PhaseLabel;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
 
@@ -179,7 +179,7 @@ public enum CMatchUI {
     // (not just one).
     public void resetAllPhaseButtons() {
         for (final VField v : view.getFieldViews()) {
-            v.resetPhaseButtons();
+            v.getPhaseInidicator().resetPhaseButtons();
         }
     }
 
@@ -237,7 +237,7 @@ public enum CMatchUI {
      */
     public final boolean stopAtPhase(final Player turn, final PhaseType phase) {
         VField vf = getFieldViewFor(turn);
-        PhaseLabel label = vf.getLabelFor(phase);
+        PhaseLabel label = vf.getPhaseInidicator().getLabelFor(phase);
         return label == null || label.getEnabled(); 
     }
 

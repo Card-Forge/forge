@@ -25,12 +25,12 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.DeckLister;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.special.DeckLister;
 
 /** 
  * Assembles Swing components of sealed submenu singleton.
@@ -143,7 +143,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         return this.btnStart;
     }
 
-    /** @return {@link forge.gui.toolbox.DeckLister} */
+    /** @return {@link forge.gui.toolbox.special.DeckLister} */
     public DeckLister getLstDecks() {
         return lstDecks;
     }

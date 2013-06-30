@@ -75,7 +75,6 @@ public abstract class CardPanelContainer extends JPanel {
     private int mouseDragOffsetX, mouseDragOffsetY;
     private int intialMouseDragX = -1, intialMouseDragY;
     private boolean dragEnabled;
-    private int zoneID;
 
     /**
      * <p>
@@ -583,28 +582,6 @@ public abstract class CardPanelContainer extends JPanel {
         return (null == p || p != hoveredPanel) ? null : p.getGameCard();
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>zoneID</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getZoneID() {
-        return this.zoneID;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>zoneID</code>.
-     * </p>
-     * 
-     * @param zoneID
-     *            a int.
-     */
-    public final void setZoneID(final int zoneID) {
-        this.zoneID = zoneID;
-    }
 
     /**
      * Gets the card panels.

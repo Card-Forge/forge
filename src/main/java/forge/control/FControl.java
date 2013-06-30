@@ -62,7 +62,6 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
-import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FSkin;
 import forge.net.NetServer;
 import forge.properties.NewConstants;
@@ -171,9 +170,6 @@ public enum FControl {
         UIManager.put("TabbedPane.selected", FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
         UIManager.put("TabbedPane.contentOpaque", FSkin.getColor(FSkin.Colors.CLR_THEME));
         UIManager.put("TabbedPane.unselectedBackground", FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
-        // Does not use progress bar, due to be deprecated with battlefield refactoring.
-        CardFaceSymbols.loadImages();
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();

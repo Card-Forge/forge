@@ -14790,11 +14790,8 @@ src/main/java/forge/gui/match/views/VStack.java -text
 src/main/java/forge/gui/match/views/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
-src/main/java/forge/gui/toolbox/CardViewer.java -text
-src/main/java/forge/gui/toolbox/DeckLister.java -text
 src/main/java/forge/gui/toolbox/FButton.java -text
 src/main/java/forge/gui/toolbox/FCheckBox.java -text
-src/main/java/forge/gui/toolbox/FDeckChooser.java -text
 src/main/java/forge/gui/toolbox/FLabel.java -text
 src/main/java/forge/gui/toolbox/FList.java -text
 src/main/java/forge/gui/toolbox/FOverlay.java -text
@@ -14808,6 +14805,12 @@ src/main/java/forge/gui/toolbox/FTextArea.java -text
 src/main/java/forge/gui/toolbox/FTextField.java -text
 src/main/java/forge/gui/toolbox/SaveOpenDialog.java -text
 src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/toolbox/special/CardViewer.java -text
+src/main/java/forge/gui/toolbox/special/DeckLister.java -text
+src/main/java/forge/gui/toolbox/special/FDeckChooser.java -text
+src/main/java/forge/gui/toolbox/special/PhaseIndicator.java -text
+src/main/java/forge/gui/toolbox/special/PhaseLabel.java -text
+src/main/java/forge/gui/toolbox/special/package-info.java -text
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/FatPack.java -text
 src/main/java/forge/item/IPaperCard.java -text

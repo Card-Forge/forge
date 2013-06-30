@@ -26,6 +26,7 @@ import forge.gui.home.EMenuItem;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VDev;
+import forge.gui.toolbox.special.PhaseIndicator;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /** 
@@ -151,7 +152,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         final List<VField> fieldViews = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
         // AI field is at index [1]
-        VField fvAi = fieldViews.get(1);
+        PhaseIndicator fvAi = fieldViews.get(1).getPhaseInidicator();
         this.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fvAi.getLblUpkeep().getEnabled()));
         this.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fvAi.getLblDraw().getEnabled()));
         this.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fvAi.getLblMain1().getEnabled()));
@@ -166,7 +167,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         this.setPref(FPref.PHASE_AI_CLEANUP, String.valueOf(fvAi.getLblCleanup().getEnabled()));
 
         // Human field is at index [0]
-        VField fvHuman = fieldViews.get(0);
+        PhaseIndicator fvHuman = fieldViews.get(0).getPhaseInidicator();
         this.setPref(FPref.PHASE_HUMAN_UPKEEP, String.valueOf(fvHuman.getLblUpkeep().getEnabled()));
         this.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fvHuman.getLblDraw().getEnabled()));
         this.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fvHuman.getLblMain1().getEnabled()));
@@ -197,7 +198,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         Preferences.UPLOAD_DRAFT = Constant.Runtime.NET_CONN && this.getPrefBoolean(FPref.UI_UPLOAD_DRAFT);
 
         // AI field is at index [0]
-        VField fvAi = fieldViews.get(1);
+        PhaseIndicator fvAi = fieldViews.get(1).getPhaseInidicator();
         fvAi.getLblUpkeep().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
         fvAi.getLblDraw().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_DRAW));
         fvAi.getLblMain1().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_MAIN1));
@@ -212,7 +213,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         fvAi.getLblCleanup().setEnabled(this.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
 
         // Human field is at index [1]
-        VField fvHuman = fieldViews.get(0);
+        PhaseIndicator fvHuman = fieldViews.get(0).getPhaseInidicator();
         fvHuman.getLblUpkeep().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
         fvHuman.getLblDraw().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
         fvHuman.getLblMain1().setEnabled(this.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));

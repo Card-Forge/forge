@@ -10,10 +10,10 @@ import forge.gui.framework.EDocID;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.DeckLister;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.special.DeckLister;
 
 /** 
  * Assembles Swing components of quest decks submenu singleton.
@@ -90,7 +90,7 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
         return EDocID.HOME_QUESTDECKS;
     }
 
-    /** @return {@link forge.gui.toolbox.DeckLister} */
+    /** @return {@link forge.gui.toolbox.special.DeckLister} */
     public DeckLister getLstDecks() {
         return this.lstDecks;
     }

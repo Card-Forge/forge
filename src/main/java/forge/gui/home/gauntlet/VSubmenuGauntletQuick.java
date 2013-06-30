@@ -19,10 +19,10 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.special.FDeckChooser;
 
 /** 
  * Assembles Swing components of "quick gauntlet" submenu singleton.

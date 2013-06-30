@@ -23,7 +23,7 @@ import forge.game.player.LobbyPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.gui.toolbox.FDeckChooser;
+import forge.gui.toolbox.special.FDeckChooser;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;

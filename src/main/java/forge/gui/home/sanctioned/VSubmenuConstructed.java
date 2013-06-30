@@ -14,8 +14,8 @@ import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.special.FDeckChooser;
 
 /** 
  * Assembles Swing components of constructed submenu singleton.

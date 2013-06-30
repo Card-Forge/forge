@@ -17,7 +17,7 @@ ram is free software: you can redistribute it and/or modify
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.toolbox;
+package forge.gui.toolbox.special;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -50,6 +50,8 @@ import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.deckeditor.controllers.CEditorQuest;
 import forge.gui.framework.ILocalRepaint;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 
 /**

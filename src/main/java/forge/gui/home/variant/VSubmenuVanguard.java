@@ -28,7 +28,6 @@ import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FPanel;
@@ -36,6 +35,7 @@ import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTabbedPane;
+import forge.gui.toolbox.special.FDeckChooser;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 

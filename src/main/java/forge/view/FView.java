@@ -45,6 +45,7 @@ import forge.gui.framework.SLayoutConstants;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.TargetingOverlay;
 import forge.gui.match.VMatchUI;
+import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
@@ -123,6 +124,9 @@ public enum FView {
 
         // Populate all drag tab components.
         this.cacheUIStates();
+
+        // Does not use progress bar, due to be deprecated with battlefield refactoring.
+        CardFaceSymbols.loadImages();
 
         // Initialize actions on all drag tab components (which should
         // be realized / populated already).

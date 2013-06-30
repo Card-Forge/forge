@@ -18,9 +18,7 @@
 package forge.gui.match.nonsingleton;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -40,7 +38,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.card.MagicColor;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
-import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -52,6 +49,7 @@ import forge.gui.match.controllers.CPlayers;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
+import forge.gui.toolbox.special.PhaseIndicator;
 import forge.view.arcane.PlayArea;
 
 /** 
@@ -73,14 +71,12 @@ public class VField implements IVDoc<CField> {
     private final JScrollPane scroller = new JScrollPane();
     private final PlayArea tabletop;
     private final JPanel avatarArea = new JPanel();
-    private final JPanel phaseArea  = new JPanel();
+
     private final JPanel pnlDetails = new JPanel();
 
     // Avatar area
-    private final FLabel lblAvatar = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-            .iconScaleFactor(1.0f).build();
-    private final FLabel lblLife = new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-            .fontStyle(Font.BOLD).build();
+    private final FLabel lblAvatar = new FLabel.Builder().fontAlign(SwingConstants.CENTER).iconScaleFactor(1.0f).build();
+    private final FLabel lblLife = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).build();
 
     // Info labels
     private FLabel lblHand = getBuiltFLabel(FSkin.ZoneImages.ICO_HAND, "99", "Cards in hand");
@@ -91,19 +87,7 @@ public class VField implements IVDoc<CField> {
     private FLabel lblPoison = getBuiltFLabel(FSkin.ZoneImages.ICO_POISON, "99", "Poison counters");
     private final List<Pair<FLabel, Byte>> manaLabels = new ArrayList<Pair<FLabel,Byte>>();
 
-    // Phase labels
-    private PhaseLabel lblUpkeep = new PhaseLabel("UP");
-    private PhaseLabel lblDraw = new PhaseLabel("DR");
-    private PhaseLabel lblMain1 = new PhaseLabel("M1");
-    private PhaseLabel lblBeginCombat = new PhaseLabel("BC");
-    private PhaseLabel lblDeclareAttackers = new PhaseLabel("DA");
-    private PhaseLabel lblDeclareBlockers = new PhaseLabel("DB");
-    private PhaseLabel lblFirstStrike = new PhaseLabel("FS");
-    private PhaseLabel lblCombatDamage = new PhaseLabel("CD");
-    private PhaseLabel lblEndCombat = new PhaseLabel("EC");
-    private PhaseLabel lblMain2 = new PhaseLabel("M2");
-    private PhaseLabel lblEndTurn = new PhaseLabel("ET");
-    private PhaseLabel lblCleanup = new PhaseLabel("CL");
+    private final PhaseIndicator phaseInidicator = new PhaseIndicator();
 
     private final Border borderAvatarSimple = new LineBorder(new Color(0, 0, 0, 0), 1);
     private final Border borderAvatarHover = new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1);
@@ -161,10 +145,6 @@ public class VField implements IVDoc<CField> {
             }
         });
 
-        phaseArea.setOpaque(false);
-        phaseArea.setLayout(new MigLayout("insets 0 0 1% 0, gap 0, wrap"));
-        populatePhase();
-
         tabletop.setBorder(new MatteBorder(0, 1, 0, 0,
                 FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         tabletop.setOpaque(false);
@@ -190,7 +170,7 @@ public class VField implements IVDoc<CField> {
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
 
         pnl.add(avatarArea, "w 10%!, h 30%!");
-        pnl.add(phaseArea, "w 5%!, h 100%!, span 1 2");
+        pnl.add(phaseInidicator, "w 5%!, h 100%!, span 1 2");
         pnl.add(scroller, "w 85%!, h 100%!, span 1 2, wrap");
         pnl.add(pnlDetails, "w 10%!, h 69%!, gapleft 1px");
     }
@@ -237,47 +217,7 @@ public class VField implements IVDoc<CField> {
 
     //========= Populate helper methods
 
-    /** Adds phase indicator labels to phase area JPanel container. */
-    private void populatePhase() {
-        // Constraints string, set once
-        final String constraints = "w 94%!, h 7.2%, gaptop 1%, gapleft 3%";
 
-        VField.this.lblUpkeep.setToolTipText("<html>Phase: Upkeep<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblUpkeep, constraints);
-
-        VField.this.lblDraw.setToolTipText("<html>Phase: Draw<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblDraw, constraints);
-
-        VField.this.lblMain1.setToolTipText("<html>Phase: Main 1<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblMain1, constraints);
-
-        VField.this.lblBeginCombat.setToolTipText("<html>Phase: Begin Combat<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblBeginCombat, constraints);
-
-        VField.this.lblDeclareAttackers.setToolTipText("<html>Phase: Declare Attackers<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblDeclareAttackers, constraints);
-
-        VField.this.lblDeclareBlockers.setToolTipText("<html>Phase: Declare Blockers<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblDeclareBlockers, constraints);
-
-        VField.this.lblFirstStrike.setToolTipText("<html>Phase: First Strike Damage<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblFirstStrike, constraints);
-
-        VField.this.lblCombatDamage.setToolTipText("<html>Phase: Combat Damage<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblCombatDamage, constraints);
-
-        VField.this.lblEndCombat.setToolTipText("<html>Phase: End Combat<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblEndCombat, constraints);
-
-        VField.this.lblMain2.setToolTipText("<html>Phase: Main 2<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblMain2, constraints);
-
-        VField.this.lblEndTurn.setToolTipText("<html>Phase: End Turn<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblEndTurn, constraints);
-
-        VField.this.lblCleanup.setToolTipText("<html>Phase: Cleanup<br>Click to toggle.</html>");
-        phaseArea.add(VField.this.lblCleanup, constraints);
-    }
 
     /** Adds various labels to pool area JPanel container. */
     private void populateDetails() {
@@ -458,242 +398,13 @@ public class VField implements IVDoc<CField> {
         return this.lblPoison;
     }
 
-    // Phases
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblUpkeep() {
-        return this.lblUpkeep;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblDraw() {
-        return this.lblDraw;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblMain1() {
-        return this.lblMain1;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblBeginCombat() {
-        return this.lblBeginCombat;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblDeclareAttackers() {
-        return this.lblDeclareAttackers;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblDeclareBlockers() {
-        return this.lblDeclareBlockers;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblCombatDamage() {
-        return this.lblCombatDamage;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblFirstStrike() {
-        return this.lblFirstStrike;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblEndCombat() {
-        return this.lblEndCombat;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblMain2() {
-        return this.lblMain2;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblEndTurn() {
-        return this.lblEndTurn;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public PhaseLabel getLblCleanup() {
-        return this.lblCleanup;
-    }
-
-    //========== Custom class handling
-
-    public PhaseLabel getLabelFor(final PhaseType s) {
-        switch (s) {
-        case UPKEEP:
-            return this.getLblUpkeep();
-        case DRAW:
-            return this.getLblDraw();
-        case MAIN1:
-            return this.getLblMain1();
-        case COMBAT_BEGIN:
-            return this.getLblBeginCombat();
-        case COMBAT_DECLARE_ATTACKERS:
-            return this.getLblDeclareAttackers();
-        case COMBAT_DECLARE_BLOCKERS:
-            return this.getLblDeclareBlockers();
-        case COMBAT_DAMAGE:
-            return this.getLblCombatDamage();
-        case COMBAT_FIRST_STRIKE_DAMAGE:
-            return this.getLblFirstStrike();
-        case COMBAT_END:
-            return this.getLblEndCombat();
-        case MAIN2:
-            return this.getLblMain2();
-        case END_OF_TURN:
-            return this.getLblEndTurn();
-        case CLEANUP:
-            return this.getLblCleanup();
-        default:
-            return null;
-        }
-    }
-
     /**
-     * Resets all phase buttons to "inactive", so highlight won't be drawn on
-     * them. "Enabled" state remains the same.
+     * TODO: Write javadoc for this method.
+     * @return
      */
-    public void resetPhaseButtons() {
-        getLblUpkeep().setActive(false);
-        getLblDraw().setActive(false);
-        getLblMain1().setActive(false);
-        getLblBeginCombat().setActive(false);
-        getLblDeclareAttackers().setActive(false);
-        getLblDeclareBlockers().setActive(false);
-        getLblFirstStrike().setActive(false);
-        getLblCombatDamage().setActive(false);
-        getLblEndCombat().setActive(false);
-        getLblMain2().setActive(false);
-        getLblEndTurn().setActive(false);
-        getLblCleanup().setActive(false);
+    public PhaseIndicator getPhaseInidicator() {
+        return phaseInidicator;
     }
 
-    /**
-     * Shows phase labels, handles repainting and on/off states. A PhaseLabel
-     * has "skip" and "active" states, meaning "this phase is (not) skipped" and
-     * "this is the current phase".
-     */
-    @SuppressWarnings("serial")
-    public class PhaseLabel extends JLabel {
-        private boolean enabled = true;
-        private boolean active = false;
-        private boolean hover = false;
 
-
-        /**
-         * Shows phase labels, handles repainting and on/off states. A
-         * PhaseLabel has "skip" and "active" states, meaning
-         * "this phase is (not) skipped" and "this is the current phase".
-         * 
-         * @param txt
-         *            &emsp; Label text
-         */
-        public PhaseLabel(final String txt) {
-            super(txt);
-            this.setHorizontalTextPosition(SwingConstants.CENTER);
-            this.setHorizontalAlignment(SwingConstants.CENTER);
-
-            this.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(final MouseEvent e) {
-                    if (PhaseLabel.this.enabled) {
-                        PhaseLabel.this.enabled = false;
-                    } else {
-                        PhaseLabel.this.enabled = true;
-                    }
-                }
-
-                @Override
-                public void mouseEntered(final MouseEvent e) {
-                    PhaseLabel.this.hover = true;
-                    PhaseLabel.this.repaintOnlyThisLabel();
-                }
-
-                @Override
-                public void mouseExited(final MouseEvent e) {
-                    PhaseLabel.this.hover = false;
-                    PhaseLabel.this.repaintOnlyThisLabel();
-                }
-            });
-        }
-
-        /**
-         * Determines whether play pauses at this phase or not.
-         * 
-         * @param b
-         *            &emsp; boolean, true if play pauses
-         */
-        @Override
-        public void setEnabled(final boolean b) {
-            this.enabled = b;
-        }
-
-        /**
-         * Determines whether play pauses at this phase or not.
-         * 
-         * @return boolean
-         */
-        public boolean getEnabled() {
-            return this.enabled;
-        }
-
-        /**
-         * Makes this phase the current phase (or not).
-         * 
-         * @param b
-         *            &emsp; boolean, true if phase is current
-         */
-        public void setActive(final boolean b) {
-            this.active = b;
-            this.repaintOnlyThisLabel();
-        }
-
-        /**
-         * Determines if this phase is the current phase (or not).
-         * 
-         * @return boolean
-         */
-        public boolean getActive() {
-            return this.active;
-        }
-
-        /** Prevent label from repainting the whole screen. */
-        public void repaintOnlyThisLabel() {
-            final Dimension d = PhaseLabel.this.getSize();
-            repaint(0, 0, d.width, d.height);
-        }
-
-        /*
-         * (non-Javadoc)
-         * 
-         * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-         */
-        @Override
-        public void paintComponent(final Graphics g) {
-            final int w = this.getWidth();
-            final int h = this.getHeight();
-            Color c;
-
-            // Set color according to skip or active or hover state of label
-            if (this.hover) {
-                c = FSkin.getColor(FSkin.Colors.CLR_HOVER);
-            } else if (this.active && this.enabled) {
-                c = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_ENABLED);
-            } else if (!this.active && this.enabled) {
-                c = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_ENABLED);
-            } else if (this.active && !this.enabled) {
-                c = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_DISABLED);
-            } else {
-                c = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_DISABLED);
-            }
-
-            // Center vertically and horizontally. Show border if active.
-            g.setColor(c);
-            g.fillRoundRect(1, 1, w - 2, h - 2, 5, 5);
-            super.paintComponent(g);
-        }
-    }
 }

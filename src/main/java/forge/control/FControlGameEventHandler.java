@@ -32,7 +32,7 @@ import forge.gui.match.ViewWinLose;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VHand;
-import forge.gui.match.nonsingleton.VField.PhaseLabel;
+import forge.gui.toolbox.special.PhaseLabel;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final FControl fc;
@@ -56,7 +56,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             phaseUpdPlanned.set(false);
             
             final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
-            PhaseLabel lbl = matchUi.getFieldViewFor(p).getLabelFor(ph);
+            PhaseLabel lbl = matchUi.getFieldViewFor(p).getPhaseInidicator().getLabelFor(ph);
 
             matchUi.resetAllPhaseButtons();
             if (lbl != null) lbl.setActive(true);

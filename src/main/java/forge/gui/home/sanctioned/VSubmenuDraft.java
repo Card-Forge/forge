@@ -20,13 +20,13 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.DeckLister;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.JXButtonPanel;
+import forge.gui.toolbox.special.DeckLister;
 
 /** 
  * Assembles Swing components of draft submenu singleton.
@@ -131,7 +131,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         return radSingle.isSelected();
     }
 
-    /** @return {@link forge.gui.toolbox.DeckLister} */
+    /** @return {@link forge.gui.toolbox.special.DeckLister} */
     public DeckLister getLstDecks() {
         return lstDecks;
     }
