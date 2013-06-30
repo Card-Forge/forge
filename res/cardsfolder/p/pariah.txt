@@ -8,5 +8,6 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$
 SVar:DmgEnchanted:AB$ DealDamage | Cost$ 0 | Defined$ Enchanted | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:DmgEnchantedCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Enchanted | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
+SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pariah.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nAll damage that would be dealt to you is dealt to enchanted creature instead.

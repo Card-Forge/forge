@@ -5,6 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ AnyMana | Description$ Enchanted creature has "Tap: Add one mana of any color to your mana pool."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:NonStackingAttachEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_harmony.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: Add one mana of any color to your mana pool."
