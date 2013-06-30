@@ -67,6 +67,12 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         OTHER,
         THIRDPARTY // custom sets
     }
+
+    public enum FoilType {
+        NOT_SUPPORTED, // sets before Urza's Legacy
+        OLD_STYLE, // sets between Urza's Legacy and 8th Edition
+        MODERN // 8th Edition and newer
+    }
     
     public static class CardInSet {
         public final CardRarity rarity;
@@ -82,7 +88,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     /** The Constant unknown. */
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     
-    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "??", "???", Type.UNKNOWN, "Undefined", new CardInSet[]{});
+    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "??", "???", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new CardInSet[]{});
 
     private Date date;
     private String code2;
@@ -91,6 +97,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private String name;
     private String alias = null;
     private boolean whiteBorder = false;
+    private FoilType foilType = FoilType.NOT_SUPPORTED;
     private final CardInSet[] cards;
     
     
@@ -114,13 +121,14 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
      * @param name the name of the set
      * @param an optional secondary code alias for the set
      */
-    private CardEdition(String date, String code2, String code, Type type, String name, CardInSet[] cards) {
+    private CardEdition(String date, String code2, String code, Type type, String name, FoilType foil, CardInSet[] cards) {
         this(cards);
         this.code2 = code2;
         this.code  = code;
         this.type  = type;
         this.name  = name;
         this.date = parseDate(date);
+        this.foilType = foil;
 
     }
     
@@ -312,6 +320,24 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 }
             }
             res.type = enumType;
+
+            switch(section.get("foil", "notsupported").toLowerCase()) {
+                case "notsupported":
+                    res.foilType = FoilType.NOT_SUPPORTED;
+                    break;
+                case "oldstyle":
+                case "classic":
+                    res.foilType = FoilType.OLD_STYLE;
+                    break;
+                case "newstyle":
+                case "modern":
+                    res.foilType = FoilType.MODERN;
+                    break;
+                default:
+                    res.foilType = FoilType.NOT_SUPPORTED;
+                    break;
+            }
+            
             return res;
         }
 
@@ -337,8 +363,11 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         return boosterArts;
     }
 
-
     public SealedProductTemplate getBoosterTemplate() {
         return boosterTpl;
+    }
+
+    public FoilType getFoilType() {
+        return foilType;
     }
 }
