@@ -46,7 +46,7 @@ public class CloneAi extends SpellAbilityAi {
 
         // don't use instant speed clone abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if (!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS) && !phase.isPlayerTurn(ai) || game.getCombat().getAttackers().isEmpty()) {
+        if (!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS) || phase.isPlayerTurn(ai) || game.getCombat().getAttackers().isEmpty()) {
             return false;
         }
 
