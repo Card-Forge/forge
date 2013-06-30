@@ -560,18 +560,19 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (!creats.isEmpty()) {
             haunterDiesWork.setDescription("");
             haunterDiesWork.setTargetRestrictions(new TargetRestrictions("", "Creature".split(" "), "1", "1"));
+            final Card targetCard;
             if (source.getController().isHuman()) {
                 final InputSelectCards targetHaunted = new InputSelectCardsFromList(1,1, creats);
                 targetHaunted.setMessage("Choose target creature to haunt.");
                 Singletons.getControl().getInputQueue().setInputAndWait(targetHaunted);
-                haunterDiesWork.setTargetCard(targetHaunted.getSelected().get(0));
-                MagicStack.this.add(haunterDiesWork);
+                targetCard = targetHaunted.getSelected().get(0);
             } else {
                 // AI choosing what to haunt
                 final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponents());
-                haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(oppCreats.isEmpty() ? creats : oppCreats));
-                this.add(haunterDiesWork);
+                targetCard = ComputerUtilCard.getWorstCreatureAI(oppCreats.isEmpty() ? creats : oppCreats);
             }
+            haunterDiesWork.setTargetCard(targetCard);
+            this.add(haunterDiesWork);
         }
     }
 
