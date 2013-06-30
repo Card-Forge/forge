@@ -6,6 +6,7 @@ Code2=IN
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
+Foil=OldStyle
 
 [cards]
 R AEther Rift

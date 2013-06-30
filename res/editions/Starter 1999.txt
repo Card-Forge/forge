@@ -5,6 +5,7 @@ Name=Starter 1999
 Border=White
 Code2=ST
 Type=Starter
+Foil=OldStyle
 
 [cards]
 R Abyssal Horror

@@ -4,6 +4,7 @@ Date=1997-08
 Name=Vanguard
 Code2=VAN
 Type=Other
+Foil=NotSupported
 
 [cards]
 S Akroma, Angel of Wrath Avatar

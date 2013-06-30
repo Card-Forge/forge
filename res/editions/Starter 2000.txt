@@ -5,6 +5,7 @@ Name=Starter 2000
 Border=White
 Code2=S2K
 Type=Starter
+Foil=OldStyle
 
 [cards]
 C Angelic Blessing

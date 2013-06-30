@@ -6,6 +6,7 @@ Code2=DK
 Type=Expansion
 BoosterCovers=1
 Booster=6 Common, 2 UncommonRare
+Foil=NotSupported
 
 [cards]
 U Amnesia

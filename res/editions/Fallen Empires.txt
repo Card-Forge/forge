@@ -6,6 +6,7 @@ Code2=FE
 Type=Expansion
 BoosterCovers=1
 Booster=5 Common, 2 Uncommon, 1 Rare
+Foil=NotSupported
 
 [cards]
 R Aeolipile

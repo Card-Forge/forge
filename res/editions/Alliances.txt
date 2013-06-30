@@ -6,6 +6,7 @@ Code2=AL
 Type=Expansion
 BoosterCovers=1
 Booster=8 Common, 3 Uncommon, 1 Rare
+Foil=NotSupported
 
 [cards]
 C Aesthir Glider

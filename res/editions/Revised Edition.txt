@@ -7,6 +7,7 @@ Type=Core
 Border=White
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
+Foil=NotSupported
 
 [cards]
 U Air Elemental
