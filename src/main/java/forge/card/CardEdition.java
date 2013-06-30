@@ -321,7 +321,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
             res.type = enumType;
 
-            switch(section.get("foil", "notsupported").toLowerCase()) {
+            switch(section.get("foil", "newstyle").toLowerCase()) {
                 case "notsupported":
                     res.foilType = FoilType.NOT_SUPPORTED;
                     break;
