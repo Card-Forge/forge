@@ -49,7 +49,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected void onCardSelected(Card card, boolean isRmb) {
-        if (card.getManaAbility().isEmpty() || card.isInZone(ZoneType.Hand)) {
+        if (card.getManaAbility().isEmpty()) {
             flashIncorrectAction();
             return;
         }
