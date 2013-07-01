@@ -99,7 +99,7 @@ public final class CardPicturePanel extends JPanel {
             foilIndex = ((Card)this.displayed).getFoil();
         }
 
-        if (image != this.currentImage) {
+        if (image != null && image != this.currentImage) {
             if (foilIndex == 0) {
                 this.currentImage = image;
                 this.panel.setImage(image);
