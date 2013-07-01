@@ -389,7 +389,11 @@ public class WrappedAbility extends Ability implements ISpellAbility {
                 buildQuestion.append("[Attacker: " + tos.get("Attacker") + "]");
             }
             if (tos.containsKey("Card")) {
-                buildQuestion.append("[Triggering card: " + tos.get("Card") + "]");
+                Card card = (Card) tos.get("Card");
+                if (card != null && (card.getController() == decider || decider.getGame().getZoneOf(card) == null 
+                        || decider.getGame().getZoneOf(card).getZoneType().isKnown())) {
+                    buildQuestion.append("[Triggering card: " + tos.get("Card") + "]");
+                }
             }
             if (!GuiDialog.confirm(regtrig.getHostCard(), buildQuestion.toString())) {
                 return false;
