@@ -30,11 +30,8 @@ import forge.Card;
 import forge.ImageCache;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.item.InventoryItem;
-import forge.view.arcane.CardPanel;
 import forge.view.arcane.ScaledImagePanel;
 import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
-import javax.imageio.ImageIO;
 
 /**
  * The class CardPicturePanel. Shows the full-sized image in a label. if there's
@@ -105,15 +102,11 @@ public final class CardPicturePanel extends JPanel {
                 this.panel.setImage(image);
             } else {
                 ColorModel cm = image.getColorModel();
-                boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-                WritableRaster raster = image.copyData(null);
-                BufferedImage foilImage = new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+                BufferedImage foilImage = new BufferedImage(cm, image.copyData(null), cm.isAlphaPremultiplied(), null);
 
                 final String fl = String.format("foil%02d", foilIndex);
-                final int z = Math.round(this.getWidth() * CardPanel.getBorderSize());
-                CardFaceSymbols.drawOther(foilImage.getGraphics(), fl, z, z, this.panel.getWidth() - (2 * z),
-                        this.panel.getHeight() - (2 * z));
-
+                CardFaceSymbols.drawOther(foilImage.getGraphics(), fl, 0, 0, foilImage.getWidth(), foilImage.getHeight());
+                
                 this.currentImage = foilImage;
                 this.panel.setImage(foilImage);
             }
