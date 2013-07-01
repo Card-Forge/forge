@@ -108,6 +108,7 @@ public class AiAttackController {
             for (final Trigger trigger : attacker.getTriggers()) {
                 if (trigger.getMode() == TriggerType.Attacks) {
                     list.add(attacker);
+                    break;
                 }
             }
         }
@@ -778,6 +779,9 @@ public class AiAttackController {
 
         attackersLeft = this.notNeededAsBlockers(ai, attackersLeft);
         attackersLeft = this.sortAttackers(attackersLeft);
+
+        if ( LOG_AI_ATTACKS )
+            System.out.println("attackersLeft = " + attackersLeft);
 
         for (int i = 0; i < attackersLeft.size(); i++) {
             final Card attacker = attackersLeft.get(i);
