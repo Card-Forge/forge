@@ -28,8 +28,13 @@ import javax.swing.JPanel;
 
 import forge.Card;
 import forge.ImageCache;
+import forge.gui.toolbox.CardFaceSymbols;
 import forge.item.InventoryItem;
+import forge.view.arcane.CardPanel;
 import forge.view.arcane.ScaledImagePanel;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
+import javax.imageio.ImageIO;
 
 /**
  * The class CardPicturePanel. Shows the full-sized image in a label. if there's
@@ -83,17 +88,35 @@ public final class CardPicturePanel extends JPanel {
     public void setImage() {
         final Insets i = this.getInsets();
         BufferedImage image = null;
+        int foilIndex = 0;
+        
         if (displayed instanceof InventoryItem) {
             image = ImageCache.getImage((InventoryItem)this.displayed, this.getWidth() - i.left - i.right, this.getHeight()
                     - i.top - i.bottom);
         } else if ( displayed instanceof Card ) {
             image = ImageCache.getImage((Card)this.displayed, this.getWidth() - i.left - i.right - 2, this.getHeight() - i.top
                     - i.bottom - 2);
+            foilIndex = ((Card)this.displayed).getFoil();
         }
 
         if (image != this.currentImage) {
-            this.currentImage = image;
-            this.panel.setImage(image);
+            if (foilIndex == 0) {
+                this.currentImage = image;
+                this.panel.setImage(image);
+            } else {
+                ColorModel cm = image.getColorModel();
+                boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+                WritableRaster raster = image.copyData(null);
+                BufferedImage foilImage = new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+
+                final String fl = String.format("foil%02d", foilIndex);
+                final int z = Math.round(this.getWidth() * CardPanel.getBorderSize());
+                CardFaceSymbols.drawOther(foilImage.getGraphics(), fl, z, z, this.panel.getWidth() - (2 * z),
+                        this.panel.getHeight() - (2 * z));
+
+                this.currentImage = foilImage;
+                this.panel.setImage(foilImage);
+            }
             this.panel.repaint();
         }
     }

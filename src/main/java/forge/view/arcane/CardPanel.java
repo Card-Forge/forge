@@ -765,4 +765,13 @@ public class CardPanel extends JPanel implements CardContainer {
     public final void setTappedAngle(final double tappedAngle0) {
         this.tappedAngle = tappedAngle0;
     }
+
+    /**
+     * Gets the border size constant.
+     * 
+     * @return BLACK_BORDER_SIZE
+     */
+    public static final float getBorderSize() {
+        return BLACK_BORDER_SIZE;
+    }
 }
