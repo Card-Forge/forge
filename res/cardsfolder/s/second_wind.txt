@@ -6,5 +6,6 @@ A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Tap | Cost$ T | Defined$ Enchanted | SpellDescription$ Tap enchanted creature.
 A:AB$ Untap | Cost$ T | Defined$ Enchanted | SpellDescription$ Untap enchanted creature.
 SVar:RemAIDeck:True
+SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_wind.jpg
 Oracle:Enchant creature\n{T}: Tap enchanted creature.\n{T}: Untap enchanted creature.

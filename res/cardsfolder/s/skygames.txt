@@ -5,5 +5,6 @@ K:Enchant land
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ DPTapCreature | Description$ Enchanted land has "Tap: Target creature gains flying until end of turn. Activate this ability only any time you could cast a sorcery."
 SVar:DPTapCreature:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Choose target creature. | KW$ Flying | SorcerySpeed$ True | SpellDescription$ Target creature gains flying until end of turn. Activate this ability only any time you could cast a sorcery.
+SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skygames.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Target creature gains flying until end of turn. Activate this ability only any time you could cast a sorcery."

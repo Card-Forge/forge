@@ -5,5 +5,6 @@ K:Enchant nonbasic land
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted land becomes tapped, destroy it.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredCard
+SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uncontrolled_infestation.jpg
 Oracle:Enchant nonbasic land\nWhen enchanted land becomes tapped, destroy it.
