@@ -98,7 +98,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private String alias = null;
     private boolean whiteBorder = false;
     private FoilType foilType = FoilType.NOT_SUPPORTED;
-    private boolean foilInBoosters = true;
+    private int foilRateInBooster = 0;
     private final CardInSet[] cards;
     
     
@@ -148,7 +148,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public Type   getType()  { return type;  }
     public String getName()  { return name;  }
     public String getAlias() { return alias; }
-    public boolean getFoilInBoosters() { return foilInBoosters; }
+    public int getFoilRateInBooster() { return foilRateInBooster; }
     public CardInSet[] getCards() { return cards; }
 
     /** The Constant fnGetName. */
@@ -338,7 +338,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                     res.foilType = FoilType.NOT_SUPPORTED;
                     break;
             }
-            res.foilInBoosters = section.getBoolean("FoilInBoosters", true);
+            res.foilRateInBooster = section.getInt("FoilRateInBooster", 0);
             
             return res;
         }
