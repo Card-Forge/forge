@@ -640,10 +640,6 @@ public class GameAction {
             return this.moveTo(removed, c);
         }
 
-        if (p != null) {
-            p.remove(c);
-        }
-
         if (c.isToken()) {
             return c;
         }
@@ -664,6 +660,14 @@ public class GameAction {
         } else {
             c.clearCounters(); // remove all counters
             library.add(c, libPosition);
+        }
+
+        if (p != null) {
+            if (p.is(ZoneType.Battlefield) && c.isCreature() && game.getCombat() != null) {
+                game.getCombat().saveLKI(lastKnownInfo);
+                game.getCombat().removeFromCombat(c); 
+            }
+            p.remove(c);
         }
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
