@@ -32,6 +32,23 @@ Unfortunately, the Mac OS X builder that we were using does not support Java 7. 
 Currently, the windows/unix release of Forge includes a launcher file named "forge.command". Double click on the "forge.command" launcher command file and this will in turn launch the Forge jar file via the terminal application while increasing the Java heap space. This should be a temporary inconvenience.
 
 
+- Adding additional opponent decks to your /res/quest/duels/ directory -
+Some people are adding additional opponent decks to their /res/quest/duels/ directory in an attempt to increase the number of opponents they will face while playing a quest.
+
+The decks located in your /res/quest/duels/ directory are text files that have a file extension of ".dck" rather than the file extension ".txt". These deck files can be loaded into a basic text editor. You can view the contents of the deck files this way.
+
+There is a metadata line for the deck's difficulty setting. Normal decks do not contain this metadata line for the deck's difficulty setting. Starting with Forge version 1.4.3 any deck file that does not include the deck's difficulty setting will be automatically assigned a value of "medium".
+
+You can add a line for the deck's difficulty setting using a text editor and then saving the deck file. Currently, Forge will recognize the following settings:
+
+Difficulty=easy
+Difficulty=medium
+Difficulty=hard
+Difficulty=very hard
+
+At the start of a new quest you will only face opponent decks that have an easy difficulty setting. After you have won a number of matches you will then face the opponent decks that have a medium difficulty setting. After you have won an additional number of matches you will then face the opponent decks that have a hard difficulty setting. Opponent decks that have a very hard difficulty setting may occassionally appear as a possible opponent instead of a opponent deck that has a hard difficulty setting.
+
+
 ---------
 New Cards
 ---------
