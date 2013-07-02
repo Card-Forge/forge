@@ -48,6 +48,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         List<Player> tgtPlayers = getTargetPlayers(sa);
         final Game game = sa.getActivatingPlayer().getGame();
+        final Card source = sa.getSourceCard();
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = game.getCardsIn(origin);
@@ -73,7 +74,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
         
         if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
-            List<Card> libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), sa.getSourceCard());
+            List<Card> libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source);
             List<Card> libCardsYouOwn = CardLists.filterControlledBy(libCards, sa.getActivatingPlayer());
             if (!libCardsYouOwn.isEmpty()) { // Only searching one's own library would fire Archive Trap's altcost
                 sa.getActivatingPlayer().incLibrarySearched();
@@ -115,12 +116,12 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     c.setTapped(true);
                 }
             }
-
+            Card movedCard = null;
             if (sa.hasParam("GainControl")) {
                 c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                game.getAction().moveToPlay(c, sa.getActivatingPlayer());
+                movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer());
             } else {
-                final Card movedCard = game.getAction().moveTo(destination, c, libraryPos);
+                movedCard = game.getAction().moveTo(destination, c, libraryPos);
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.setState(CardCharacteristicName.FaceDown);
                 }
@@ -130,13 +131,15 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             if (remember != null) {
-                game.getCardState(sa.getSourceCard()).addRemembered(c);
+                source.addRemembered(movedCard);
+                game.getCardState(source).addRemembered(movedCard);
             }
             if (forget != null) {
-                game.getCardState(sa.getSourceCard()).removeRemembered(c);
+                game.getCardState(source).removeRemembered(c);
             }
             if (imprint != null) {
-                game.getCardState(sa.getSourceCard()).addImprinted(c);
+                source.addImprinted(movedCard);
+                game.getCardState(source).addImprinted(movedCard);
             }
         }
 
