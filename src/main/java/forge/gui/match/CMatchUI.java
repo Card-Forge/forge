@@ -19,8 +19,10 @@ package forge.gui.match;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 
@@ -91,7 +93,6 @@ public enum CMatchUI {
      */
     public void initMatch(final List<Player> players, LobbyPlayer localPlayer) {
         view = VMatchUI.SINGLETON_INSTANCE;
-        
         // TODO fix for use with multiplayer
 
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
@@ -130,15 +131,9 @@ public enum CMatchUI {
 
     public void initHandViews(LobbyPlayer localPlayer) { 
         final List<VHand> hands = new ArrayList<VHand>();
-        final Iterable<VHand> oldHands = view.getHands();
-        
+       
         int i = 0;
         for (Player p : sortedPlayers) {
-            
-            PlayerZone hand = p.getZone(ZoneType.Hand);
-            for(VHand vh : oldHands)
-                hand.deleteObserver(vh.getLayoutControl());
-            
             if (p.getLobbyPlayer() == localPlayer) {
                 VHand newHand = new VHand(EDocID.Hands[i], p);
                 newHand.getLayoutControl().initialize();
@@ -193,6 +188,17 @@ public enum CMatchUI {
         return idx < 0 ? null :view.getFieldViews().get(idx);
     }
 
+    public VCommand getCommandFor(Player p) {
+        int idx = getPlayerIndex(p);
+        return idx < 0 ? null :view.getCommandViews().get(idx);
+    }
+
+    public VHand getHandFor(Player p) {
+        int idx = getPlayerIndex(p);
+        List<VHand> allHands = view.getHands();
+        return idx < 0 || idx >= allHands.size() ? null : allHands.get(idx);
+    }
+    
     /**
      * 
      * Fires up trample dialog.  Very old code, due for refactoring with new UI.
@@ -268,5 +274,71 @@ public enum CMatchUI {
         CCombat.SINGLETON_INSTANCE.setModel(combat);
         CCombat.SINGLETON_INSTANCE.update();
     } // showBlockers()
+
+
+    Set<Player> highlitedPlayers = new HashSet<Player>();
+    public void setHighLited(Player ge, boolean b) {
+        if (b) highlitedPlayers.add(ge);
+        else highlitedPlayers.remove(ge);
+    }
+
+    public boolean isHighlited(Player player) {
+        return highlitedPlayers.contains(player);
+    }
+
+
+    Set<Card> highlitedCards = new HashSet<Card>();
+    // used to highlight cards in UI
+    public void setUsedToPay(Card card, boolean value) {
+        if (value) highlitedCards.add(card);
+        else highlitedCards.remove(card);
+    }
+
+    public boolean isUsedToPay(Card card) {
+        return highlitedCards.contains(card);
+    }
+
+    public void updateZones(List<PlayerZone> zonesToUpdate) {
+        //System.out.println("updateZones " + zonesToUpdate);
+        for(PlayerZone z : zonesToUpdate) {
+            Player owner = z.getPlayer();
+            
+            if ( z.is(ZoneType.Command) )
+                getCommandFor(owner).getTabletop().setupPlayZone();
+            else if ( z.is(ZoneType.Hand) ) {
+                VHand vHand = getHandFor(owner); 
+                if (null != vHand)
+                    vHand.getLayoutControl().updateHand();
+                getFieldViewFor(owner).getDetailsPanel().updateZones();
+            } else if ( z.is(ZoneType.Battlefield) ) 
+                getFieldViewFor(owner).getTabletop().setupPlayZone();
+            else 
+                getFieldViewFor(owner).getDetailsPanel().updateZones();
+        }
+    }
+
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param manaPoolUpdate
+     */
+    public void updateManaPool(List<Player> manaPoolUpdate) {
+        for(Player p : manaPoolUpdate) {
+            getFieldViewFor(p).getDetailsPanel().updateManaPool();
+        }
+        
+    }
+
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param livesUpdate
+     */
+    public void updateLives(List<Player> livesUpdate) {
+        for(Player p : livesUpdate) {
+            getFieldViewFor(p).updateDetails();
+        }
+        
+    }
 
 }

@@ -20,7 +20,6 @@ package forge.gui.input;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 /**
@@ -45,9 +44,6 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        for (Player p : player.getGame().getRegisteredPlayers()) {
-            p.getZone(ZoneType.Battlefield).updateObservers();
-        }
         showMessage(getTurnPhasePriorityMessage(player.getGame()));
         chosenSa = null;
         ButtonUtil.enableOnlyOk();

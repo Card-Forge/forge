@@ -532,7 +532,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         
         this.finishResolving(sa, thisHasFizzled);
-
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature() && game.getZoneOf(source).is(ZoneType.Graveyard)) {

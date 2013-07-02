@@ -23,9 +23,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
-import java.util.Observable;
-import java.util.Observer;
-
 import forge.Card;
 import forge.Command;
 import forge.game.player.Player;
@@ -49,14 +46,6 @@ public class CCommand implements ICDoc {
         public void mousePressed(final MouseEvent e) {
             cardclickAction(e); } };
 
-     // Card play area, attached to battlefield zone.
-    private final Observer observerPlay = new Observer() {
-        @Override
-        public void update(final Observable a, final Object b) {
-            CCommand.this.view.getTabletop().setupPlayZone();
-        }
-    };
-
     /**
      * Controls Swing components of a player's command instance.
      * 
@@ -72,9 +61,6 @@ public class CCommand implements ICDoc {
     public void initialize() {
         if (initializedAlready) { return; }
         initializedAlready = true;
-
-        // Observers
-        CCommand.this.player.getZone(ZoneType.Command).addObserver(observerPlay);
 
         // Listeners
         // Battlefield card clicks

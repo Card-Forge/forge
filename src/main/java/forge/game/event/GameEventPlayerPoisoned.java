@@ -10,16 +10,14 @@ import forge.game.player.Player;
 public class GameEventPlayerPoisoned extends GameEvent {
     public final Player receiver;
     public final Card source;
+    public final int oldValue;
     public final int amount;
 
-    public GameEventPlayerPoisoned(Player recv, Card src, int n) {
+    public GameEventPlayerPoisoned(Player recv, Card src, int old, int num) {
         receiver = recv;
         source = src;
-        amount = n;
-    }
-
-    public GameEventPlayerPoisoned(Player recv, Card src) {
-        this(recv, src, 1);
+        oldValue = old;
+        amount = num;
     }
     
     

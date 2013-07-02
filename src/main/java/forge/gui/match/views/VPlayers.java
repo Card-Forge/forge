@@ -143,7 +143,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
     /** @param p0 {@link forge.game.player.Player} */
     public void update() {
         // No need to update if this panel isn't showing
-        if (!this.equals(parentCell.getSelected())) { return; }
+        if (parentCell == null || !this.equals(parentCell.getSelected())) { return; }
 
         for(Entry<Player, JLabel[]> rr : infoLBLs.entrySet()) {
             Player p0 = rr.getKey();

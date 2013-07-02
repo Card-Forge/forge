@@ -73,10 +73,10 @@ import forge.game.GlobalRuleChange;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCardDamaged;
+import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
-import forge.game.event.GameEventCardEquipped;
-import forge.game.event.GameEventCounterAdded;
-import forge.game.event.GameEventCounterRemoved;
+import forge.game.event.GameEventCardAttachment;
+import forge.game.event.GameEventCardCounters;
 import forge.game.event.GameEventCardTapped;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -1134,6 +1134,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         int newValue = addAmount + (oldValue == null ? 0 : oldValue.intValue());
         this.counters.put(counterType, Integer.valueOf(newValue));
 
+        // play the Add Counter sound
+        getGame().fireEvent(new GameEventCardCounters(this, counterType, oldValue == null ? 0 : oldValue.intValue(), newValue));
+
         // Run triggers
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Card", this);
@@ -1141,11 +1144,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (int i = 0; i < addAmount; i++) {
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams, false);
         }
-
-        // play the Add Counter sound
-        getGame().fireEvent(new GameEventCounterAdded(addAmount));
-
-        this.updateObservers();
     }
 
     /**
@@ -1205,6 +1203,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             this.counters.remove(counterName);
         }
 
+        // Play the Subtract Counter sound
+        getGame().fireEvent(new GameEventCardCounters(this, counterName, oldValue == null ? 0 : oldValue.intValue(), newValue));
+
         // Run triggers
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Card", this);
@@ -1223,10 +1224,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         }
 
-        // Play the Subtract Counter sound
-        getGame().fireEvent(new GameEventCounterRemoved(delta));
-
-        this.updateObservers();
     }
 
     /**
@@ -3298,112 +3295,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * addEquippedBy.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void addEquippedBy(final Card c) {
-        this.equippedBy.add(c);
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * addFortifiedBy.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void addFortifiedBy(final Card c) {
-        this.fortifiedBy.add(c);
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * removeEquippedBy.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void removeEquippedBy(final Card c) {
-        this.equippedBy.remove(c);
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * removeFortifiedBy.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void removeFortifiedBy(final Card c) {
-        this.fortifiedBy.remove(c);
-        this.updateObservers();
-    }
- 
-    /**
-     * <p>
-     * addEquipping.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void addEquipping(final Card c) {
-        this.equipping.add(c);
-        this.setTimestamp(getGame().getNextTimestamp());
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * addFortifying.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void addFortifying(final Card c) {
-        this.fortifying.add(c);
-        this.setTimestamp(getGame().getNextTimestamp());
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * removeFortifying.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void removeFortifying(final Card c) {
-        this.fortifying.remove(c);
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * removeEquipping.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void removeEquipping(final Card c) {
-        this.equipping.remove(c);
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
      * equipCard.
      * </p>
      * equipment.equipCard(cardToBeEquipped)
@@ -3426,14 +3317,21 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return;
             }
         }
+        
+        Card oldTarget = null;
         if (this.isEquipping()) {
-            this.unEquipCard(this.getEquipping().get(0));
+            oldTarget = this.getEquipping().get(0);
+            this.unEquipCard(oldTarget);
         }
-        this.addEquipping(c);
-        c.addEquippedBy(this);
+        
+        // They use double links... it's doubtful
+        this.equipping.add(c);
+        this.setTimestamp(this.getGame().getNextTimestamp());
+        c.equippedBy.add(this);
 
         // Play the Equip sound
-        getGame().fireEvent(new GameEventCardEquipped());
+        getGame().fireEvent(new GameEventCardAttachment(this, oldTarget, c, AttachMethod.Equip));
+        
         // run trigger
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("AttachSource", this);
@@ -3451,14 +3349,18 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.Card} object.
      */
     public final void fortifyCard(final Card c) {
+        Card oldTarget = null;
         if (this.isFortifying()) {
-            this.unFortifyCard(this.getFortifying().get(0));
+            oldTarget = this.getFortifying().get(0);
+            this.unFortifyCard(oldTarget);
         }
-        this.addFortifying(c);
-        c.addFortifiedBy(this);
+        
+        this.fortifying.add(c);
+        this.setTimestamp(this.getGame().getNextTimestamp());
+        c.fortifiedBy.add(this);
 
         // Play the Equip sound
-        getGame().fireEvent(new GameEventCardEquipped());
+        getGame().fireEvent(new GameEventCardAttachment(this, oldTarget, c, AttachMethod.Fortify));
         // run trigger
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("AttachSource", this);
@@ -3477,8 +3379,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void unEquipCard(final Card c) // equipment.unEquipCard(equippedCard);
     {
         this.equipping.remove(c);
-        c.removeEquippedBy(this);
+        c.equippedBy.remove(this);
 
+        getGame().fireEvent(new GameEventCardAttachment(this, c, null, AttachMethod.Equip));
+        
         // Run triggers
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Equipment", this);
@@ -3496,7 +3400,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void unFortifyCard(final Card c) { // fortification.unEquipCard(fortifiedCard);
         this.fortifying.remove(c);
-        c.removeFortifiedBy(this);
+        c.fortifiedBy.remove(this);
+        
+        getGame().fireEvent(new GameEventCardAttachment(this, c, null, AttachMethod.Fortify));
     }
 
     /**
@@ -3615,20 +3521,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * addEnchanting.
-     * </p>
-     * 
-     * @param e
-     *            a {@link forge.GameEntity} object.
-     */
-    public final void addEnchanting(final GameEntity e) {
-        this.enchanting = e;
-        this.setTimestamp(getGame().getNextTimestamp());
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
      * removeEnchanting.
      * </p>
      * 
@@ -3638,7 +3530,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void removeEnchanting(final GameEntity e) {
         if (this.enchanting.equals(e)) {
             this.enchanting = null;
-            this.updateObservers();
         }
     }
 
@@ -3656,8 +3547,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             + " but it can't be enchanted.");
             return;
         }
-        this.addEnchanting(entity);
+        this.enchanting = entity;
+        this.setTimestamp(this.getGame().getNextTimestamp());
         entity.addEnchantedBy(this);
+        
+        getGame().fireEvent(new GameEventCardAttachment(this, null, entity, AttachMethod.Enchant));
+
         // run trigger
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("AttachSource", this);
@@ -3673,12 +3568,15 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param gameEntity
      *            a {@link forge.GameEntity} object.
      */
-    public final void unEnchantEntity(final GameEntity gameEntity) {
-        if ((this.enchanting != null) && this.enchanting.equals(gameEntity)) {
-            this.enchanting = null;
-            gameEntity.removeEnchantedBy(this);
-        }
+    public final void unEnchantEntity(final GameEntity entity) {
+        if (this.enchanting == null || !this.enchanting.equals(entity))
+            return;
+
+        this.enchanting = null;
+        entity.removeEnchantedBy(this);
+        getGame().fireEvent(new GameEventCardAttachment(this, entity, null, AttachMethod.Enchant));
     }
+
     /**
      * <p>
      * Setter for the field <code>type</code>.
@@ -4313,7 +4211,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setTapped(final boolean b) {
         this.tapped = b;
-        this.updateObservers();
     }
 
     /**
@@ -4322,15 +4219,15 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      */
     public final void tap() {
-        if (this.isUntapped()) {
-            // Run triggers
-            final Map<String, Object> runParams = new TreeMap<String, Object>();
-            runParams.put("Card", this);
-            getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
-        }
-        this.setTapped(true);
+        if (this.isTapped())
+            return;
+        
+        // Run triggers
+        final Map<String, Object> runParams = new TreeMap<String, Object>();
+        runParams.put("Card", this);
+        getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
 
-        // Play the Tap sound
+        this.setTapped(true);
         getGame().fireEvent(new GameEventCardTapped(this, true));
     }
 
@@ -4340,21 +4237,19 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      */
     public final void untap() {
-        if (this.isTapped()) {
-            // Run triggers
-            final Map<String, Object> runParams = new TreeMap<String, Object>();
-            runParams.put("Card", this);
-            getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams, false);
+        if (this.isUntapped())
+            return;
 
-            // Play the Untap sound
-            getGame().fireEvent(new GameEventCardTapped(this, false));
-        }
+        // Run triggers
+        final Map<String, Object> runParams = new TreeMap<String, Object>();
+        runParams.put("Card", this);
+        getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams, false);
 
         for (final Command var : this.untapCommandList) {
             var.run();
         }
-
         this.setTapped(false);
+        getGame().fireEvent(new GameEventCardTapped(this, false));
     }
 
     // keywords are like flying, fear, first strike, etc...

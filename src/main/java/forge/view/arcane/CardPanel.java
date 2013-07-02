@@ -44,6 +44,7 @@ import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
 import forge.game.combat.Combat;
 import forge.gui.CardContainer;
+import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.arcane.util.OutlinedLabel;
@@ -321,7 +322,7 @@ public class CardPanel extends JPanel implements CardContainer {
         final int offset = this.isTapped() ? 1 : 0;
 
         // Magenta outline for when card was chosen to pay
-        if (this.getCard().isUsedToPay()) {
+        if (CMatchUI.SINGLETON_INSTANCE.isUsedToPay(this.getCard())) {
             g2d.setColor(Color.magenta);
             final int n2 = Math.max(1, Math.round(2 * this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(this.cardXOffset - n2, (this.cardYOffset - n2) + offset, this.cardWidth + (n2 * 2), this.cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
@@ -424,7 +425,7 @@ public class CardPanel extends JPanel implements CardContainer {
             CardFaceSymbols.drawSymbol("phasing", g, stateXSymbols, ySymbols);
         }
 
-        if (card.isUsedToPay()) {
+        if (CMatchUI.SINGLETON_INSTANCE.isUsedToPay(card)) {
             CardFaceSymbols.drawSymbol("sacrifice", g, (this.cardXOffset + (this.cardWidth / 2)) - 20,
                     (this.cardYOffset + (this.cardHeight / 2)) - 20);
         }

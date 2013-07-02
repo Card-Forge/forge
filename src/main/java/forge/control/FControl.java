@@ -32,8 +32,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-
-
 import forge.Card;
 import forge.Constant.Preferences;
 import forge.Singletons;
@@ -433,12 +431,10 @@ public enum FControl {
             game.subscribeToEvents(playbackControl);
         }
 
-        
-        
         VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
     
         for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-            field.getLblLibrary().setHoverable(Preferences.DEV_MODE);
+            field.getDetailsPanel().getLblLibrary().setHoverable(Preferences.DEV_MODE);
         }
     
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
@@ -446,7 +442,5 @@ public enum FControl {
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(game.getPlayers().get(0));
         SDisplayUtil.showTab(nextField);
     }
-    
-    
 }
 

@@ -17,20 +17,17 @@
  */
 package forge.gui.match.nonsingleton;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
-import org.apache.commons.lang3.tuple.Pair;
+import com.google.common.base.Function;
 
 import forge.Card;
 import forge.Command;
-import forge.FThreads;
 import forge.Singletons;
 import forge.Constant.Preferences;
 import forge.card.spellability.SpellAbility;
@@ -45,7 +42,6 @@ import forge.gui.input.Input;
 import forge.gui.input.InputPayMana;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
-import forge.gui.toolbox.FLabel;
 
 /**
  * Controls Swing components of a player's field instance.
@@ -62,63 +58,13 @@ public class CField implements ICDoc {
         public void mouseMoved(final MouseEvent e) {
             cardoverAction(e); } };
 
-    private final MouseListener madHand = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            handClicked(); } };
 
     private final MouseListener madAvatar = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             CMessage.SINGLETON_INSTANCE.getInputControl().selectPlayer(player); } };
 
-    private final MouseListener madExiled = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) { exileAction.actionPerformed(null); } };
-
-    private final MouseListener madLibrary = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) { if (Preferences.DEV_MODE) libraryAction.actionPerformed(null); } };
-
-    private final MouseListener madGraveyard = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) { graveAction.actionPerformed(null); } };
-
-    private final MouseListener madFlashback = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) { flashBackAction.actionPerformed(null); } };
-
     private final MouseListener madCardClick = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) { cardclickAction(e); } };
-
-
-
-    private final Runnable updateZonesRunnable = new Runnable() { @Override public void run() { CField.this.view.updateZones(CField.this.player); } };
-    private final Runnable updateDetailsRunnable = new Runnable() { @Override public void run() { CField.this.view.updateDetails(CField.this.player); } };
-    
-    // Life total, poison total, and keywords, attached directly to Player.
-    private final Observer observerDetails = new Observer() {
-        @Override
-        public void update(final Observable a, final Object b) {
-            FThreads.invokeInEdtNowOrLater(updateDetailsRunnable);
-        }
-    };
-    // Hand, Graveyard, Library, Flashback, Exile zones, attached to hand.
-    private final Observer observerZones = new Observer() {
-        @Override
-        public void update(final Observable a, final Object b) {
-            FThreads.invokeInEdtNowOrLater(updateZonesRunnable);
-        }
-    };
-    
-    // Card play area, attached to battlefield zone.
-    private final Observer observerPlay = new Observer() {
-        @Override
-        public void update(final Observable a, final Object b) {
-            //FThreads.checkEDT("observerPlay.update", true);
-            CField.this.view.getTabletop().setupPlayZone();
-        }
-    };
-
-    private final ZoneAction handAction;
-    private final ZoneAction libraryAction;
-    private final ZoneAction exileAction;
-    private final ZoneAction graveAction;
-    private final ZoneAction flashBackAction;
 
     /**
      * Controls Swing components of a player's field instance.
@@ -133,11 +79,25 @@ public class CField implements ICDoc {
         this.viewer = playerViewer;
         this.view = v0;
 
-        handAction = new ZoneAction(player.getZone(ZoneType.Hand), MatchConstants.HUMANHAND);
-        libraryAction = new ZoneAction(player.getZone(ZoneType.Library), MatchConstants.HUMANLIBRARY);
-        exileAction = new ZoneAction(player.getZone(ZoneType.Exile), MatchConstants.HUMANEXILED);
-        graveAction = new ZoneAction(player.getZone(ZoneType.Graveyard), MatchConstants.HUMANGRAVEYARD);
-        flashBackAction = new ZoneAction(player.getZone(ZoneType.Graveyard), MatchConstants.HUMANFLASHBACK) {
+        ZoneAction handAction = new ZoneAction(player.getZone(ZoneType.Hand), MatchConstants.HUMANHAND) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ( player.getLobbyPlayer() == viewer || Preferences.DEV_MODE || player.hasKeyword("Play with your hand revealed."))
+                    super.actionPerformed(e);
+            }
+        };
+        
+        ZoneAction libraryAction = new ZoneAction(player.getZone(ZoneType.Library), MatchConstants.HUMANLIBRARY) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (Preferences.DEV_MODE)
+                    super.actionPerformed(e);
+            }
+        };
+        
+        ZoneAction exileAction = new ZoneAction(player.getZone(ZoneType.Exile), MatchConstants.HUMANEXILED);
+        ZoneAction graveAction = new ZoneAction(player.getZone(ZoneType.Graveyard), MatchConstants.HUMANGRAVEYARD);
+        ZoneAction flashBackAction = new ZoneAction(player.getZone(ZoneType.Graveyard), MatchConstants.HUMANFLASHBACK) {
             @Override
             protected List<Card> getCardsAsIterable() {
                 return player.getCardsActivableInExternalZones();
@@ -161,12 +121,24 @@ public class CField implements ICDoc {
                 }
             }
         };
-    }
 
-    private void handClicked() {
-        if ( player.getLobbyPlayer() == viewer || Preferences.DEV_MODE || player.hasKeyword("Play with your hand revealed.")) {
-            handAction.actionPerformed(null);
-        }
+
+        Function<Byte, Void> manaAction = new Function<Byte, Void>() {
+            public Void apply(Byte colorCode) {
+                if (CField.this.player.getLobbyPlayer() == CField.this.viewer) {
+                    final Input in = Singletons.getControl().getInputQueue().getInput();
+                    if (in instanceof InputPayMana) {
+                        // Do something
+                        ((InputPayMana) in).selectManaPool(colorCode);
+                    }
+                }
+                return null;
+            }
+        };
+
+        
+        view.getDetailsPanel().setupMouseActions(handAction, libraryAction, exileAction, graveAction, flashBackAction, manaAction);
+        
     }
 
     /** */
@@ -192,26 +164,15 @@ public class CField implements ICDoc {
         CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, e.isMetaDown());
     }
 
-    /** */
-    private void manaAction(byte colorCode) {
-        if (CField.this.player.getLobbyPlayer() == CField.this.viewer) {
-            final Input in = Singletons.getControl().getInputQueue().getInput();
-            if (in instanceof InputPayMana) {
-                // Do something
-                ((InputPayMana) in).selectManaPool(colorCode);
-            }
-        }
-    }
-
     @Override
     public void initialize() {
         if (initializedAlready) { return; }
         initializedAlready = true;
     
         // Observers
-        CField.this.player.getZone(ZoneType.Hand).addObserver(observerZones);
-        CField.this.player.getZone(ZoneType.Battlefield).addObserver(observerPlay);
-        CField.this.player.addObserver(observerDetails);
+//        CField.this.player.getZone(ZoneType.Hand).addObserver(observerZones);
+//        CField.this.player.getZone(ZoneType.Battlefield).addObserver(observerPlay);
+//        CField.this.player.addObserver(observerDetails);
     
         // Listeners
         // Battlefield card clicks
@@ -223,31 +184,6 @@ public class CField implements ICDoc {
         // Player select
         this.view.getAvatarArea().addMouseListener(madAvatar);
     
-        // Detail label listeners
-        ((FLabel) this.view.getLblGraveyard()).setHoverable(true);
-        this.view.getLblGraveyard().addMouseListener(madGraveyard);
-    
-        ((FLabel) this.view.getLblExile()).setHoverable(true);
-        this.view.getLblExile().addMouseListener(madExiled);
-    
-        if (Preferences.DEV_MODE) {
-            ((FLabel) this.view.getLblLibrary()).setHoverable(true);
-        }
-        this.view.getLblLibrary().addMouseListener(madLibrary);
-    
-        ((FLabel) this.view.getLblHand()).setHoverable(true);
-        this.view.getLblHand().addMouseListener(madHand);
-    
-        ((FLabel) this.view.getLblFlashback()).setHoverable(true);
-        this.view.getLblFlashback().addMouseListener(madFlashback);
-    
-        for(final Pair<FLabel, Byte> labelPair : this.view.getManaLabels()) {
-            labelPair.getLeft().setHoverable(true);
-            labelPair.getLeft().addMouseListener(new MouseAdapter() { @Override
-                public void mousePressed(final MouseEvent e) {
-                manaAction(labelPair.getRight()); } }
-            );
-        }
     }
 
     @Override

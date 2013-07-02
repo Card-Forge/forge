@@ -18,7 +18,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.view.ButtonUtil;
 
@@ -235,8 +234,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             player.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
 
         onManaAbilityPaid();
-        if ( saPaymentSrc != null )
-            player.getZone(ZoneType.Battlefield).updateObservers();
     }
     
     protected boolean isAlreadyPaid() {

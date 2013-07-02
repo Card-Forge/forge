@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
-
 import forge.Card;
 import forge.Singletons;
 import forge.game.event.GameEventAnteCardsSelected;
@@ -95,13 +94,11 @@ public class Match {
         currentGame.getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                
                 if (useAnte) {  // Deciding which cards go to ante
                     List<Pair<Player, Card>> list = GameNew.chooseCardsForAnte(currentGame);
                     GameNew.moveCardsToAnte(list);
                     currentGame.fireEvent(new GameEventAnteCardsSelected(list));
                 }
-                
                 currentGame.getAction().startGame();
             }
         });

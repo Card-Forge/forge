@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.base.Predicate;
@@ -30,7 +28,6 @@ import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.game.player.Player;
-import forge.util.MyObservable;
 
 /**
  * <p>
@@ -40,15 +37,14 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id: PlayerZone.java 17582 2012-10-19 22:39:09Z Max mtg $
  */
-public class Zone extends MyObservable implements IZone, Observer, java.io.Serializable, Iterable<Card> {
+public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
     /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
     private static final long serialVersionUID = -5687652485777639176L;
 
     /** The cards. */
     protected final transient List<Card> cardList = new CopyOnWriteArrayList<Card>();
     protected final transient List<Card> roCardList;
-    protected final ZoneType zoneName;
-    protected boolean update = true;
+    protected final ZoneType zoneType;
 
     protected final transient List<Card> cardsAddedThisTurn = new ArrayList<Card>();
     protected final ArrayList<ZoneType> cardsAddedThisTurnSource = new ArrayList<ZoneType>();
@@ -66,13 +62,11 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
      *            a {@link forge.game.player.Player} object.
      */
     public Zone(final ZoneType zone) {
-        this.zoneName = zone;
+        this.zoneType = zone;
         this.roCardList = Collections.unmodifiableList(cardList);
         
         //System.out.println(zoneName + " (ct) " + Integer.toHexString(System.identityHashCode(roCardList)));
     }
-
-    // ************ BEGIN - these methods fire updateObservers() *************
 
     @Override
     public void add(final Object o, boolean update) {
@@ -90,15 +84,10 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
             }
         }
 
-        c.addObserver(this);
         c.setTurnInZone(c.getGame().getPhaseHandler().getTurn());
         c.setTapped(false);
 
         this.cardList.add(c);
-
-        if (update) {
-            this.update();
-        }
     }
 
 
@@ -111,19 +100,6 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
     @Override
     public void add(final Object o) {
         this.add(o, true);
-    }
-
-    /**
-     * Update.
-     * 
-     * @param ob
-     *            an Observable
-     * @param object
-     *            an Object
-     */
-    @Override
-    public final void update(final Observable ob, final Object object) {
-        this.update();
     }
 
     /**
@@ -154,7 +130,6 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
 
         this.cardList.add(index, c);
         c.setTurnInZone(c.getGame().getPhaseHandler().getTurn());
-        this.update();
     }
 
     /*
@@ -191,7 +166,6 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
     @Override
     public void remove(final Card c) {
         this.cardList.remove(c);
-        this.update();
     }
 
     /**
@@ -208,7 +182,6 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         for (Card c : cards) {
             cardList.add(c);
         }
-        this.update();
     }
 
     // ************ END - these methods fire updateObservers() *************
@@ -222,7 +195,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
      */
     @Override
     public final boolean is(final ZoneType zone) {
-        return zone == this.zoneName;
+        return zone == this.zoneType;
     }
 
     // PlayerZone should override it with a correct implementation
@@ -237,7 +210,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
      */
     @Override
     public final boolean is(final List<ZoneType> zones) {
-        return zones.contains(this.zoneName);
+        return zones.contains(this.zoneType);
     }
 
     /**
@@ -249,7 +222,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
      */
     @Override
     public final ZoneType getZoneType() {
-        return this.zoneName;
+        return this.zoneType;
     }
 
     /**
@@ -312,17 +285,6 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
 
     /**
      * <p>
-     * update.
-     * </p>
-     */
-    public final void update() {
-        if (this.update) {
-            this.updateObservers();
-        }
-    }
-
-    /**
-     * <p>
      * toString.
      * </p>
      * 
@@ -330,7 +292,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
      */
     @Override
     public String toString() {
-        return this.zoneName.toString();
+        return this.zoneType.toString();
     }
 
     /**
@@ -373,14 +335,10 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         return roCardList.iterator();
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    public void updateLabelObservers() {
-    }
-
     public void shuffle()
     {
         Collections.shuffle(cardList);
     }
+    
+    
 }

@@ -160,10 +160,6 @@ public final class GuiDisplayUtil {
                 game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
               
                 game.getAction().checkStateEffects();
-
-                for (Player p : game.getRegisteredPlayers()) {
-                    p.getZone(ZoneType.Battlefield).updateObservers();
-                }
             }
         });
     }

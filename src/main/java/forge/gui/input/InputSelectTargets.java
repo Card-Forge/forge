@@ -12,6 +12,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /** 
@@ -202,7 +203,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private void addTarget(GameEntity ge) {
         sa.getTargets().add(ge);
         if(ge instanceof Card) {
-            ((Card) ge).setUsedToPay(true);
+            CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card) ge, true);
         }
         Integer val = targetDepth.get(ge);
         targetDepth.put(ge, val == null ? Integer.valueOf(1) : Integer.valueOf(val.intValue() + 1) );
@@ -218,7 +219,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private void done() {
         for(GameEntity c : targetDepth.keySet())
             if( c instanceof Card)
-                ((Card)c).setUsedToPay(false);
+                CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card)c, false);
         
         this.stop();
     }

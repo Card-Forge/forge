@@ -137,7 +137,7 @@ public class GameAction {
                 zoneTo.add(c, position);
             }
 
-            zoneTo.updateLabelObservers();
+            game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
             return c;
         }
 
@@ -198,9 +198,6 @@ public class GameAction {
                 return c;
             }
         }
-        
-        // play the change zone sound
-        game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
 
         copied.getOwner().removeInboundToken(copied);
 
@@ -235,8 +232,9 @@ public class GameAction {
             }
             zoneFrom.remove(c);
         }
-
-        zoneTo.updateLabelObservers();
+        
+        // play the change zone sound
+        game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", lastKnownInfo);
@@ -672,17 +670,11 @@ public class GameAction {
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", lastKnownInfo);
-        if (p != null) {
-            runParams.put("Origin", p.getZoneType().name());
-        } else {
-            runParams.put("Origin", null);
-        }
+        runParams.put("Origin", p == null ? null : p.getZoneType().name());
         runParams.put("Destination", ZoneType.Library.name());
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
 
-        if (p != null) {
-            p.updateLabelObservers();
-        }
+        game.fireEvent(new GameEventCardChangeZone(c, p, library));
 
         // Soulbond unpairing
         if (c.isPaired()) {
@@ -1445,7 +1437,7 @@ public class GameAction {
             
             // FControl should determine now if there are any human players. 
             // Where there are none, it should bring up speed controls
-            game.fireEvent(new GameEventGameStarted(first, game.getPlayers()));
+            game.fireEvent(new GameEventGameStarted(game.getType(), first, game.getPlayers()));
 
             game.setAge(GameAge.Mulligan);
             for (final Player p1 : game.getPlayers())

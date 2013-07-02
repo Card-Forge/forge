@@ -5,26 +5,26 @@ package forge.game.event;
  *
  */
 public interface IGameEventVisitor<T> {
+    T visit(GameEventAnteCardsSelected event);
     T visit(GameEventAttackersDeclared event);
     T visit(GameEventBlockersDeclared event);
-    T visit(GameEventBlockerAssigned event);
     T visit(GameEventCardDamaged event);
     T visit(GameEventCardDestroyed event);
-    T visit(GameEventCardEquipped event);
+    T visit(GameEventCardAttachment event);
     T visit(GameEventCardChangeZone event);
     T visit(GameEventCardRegenerated event);
     T visit(GameEventCardSacrificed event);
-    T visit(GameEventAnteCardsSelected event);
     T visit(GameEventCardTapped event);
-    T visit(GameEventCounterAdded event);
-    T visit(GameEventCounterRemoved event);
+    T visit(GameEventCardStatsChanged event);
+    T visit(GameEventCardCounters event);
     T visit(GameEventGameFinished event);
     T visit(GameEventGameOutcome event);
     T visit(GameEventFlipCoin event);
     T visit(GameEventGameStarted event);
     T visit(GameEventGameRestarted event);
     T visit(GameEventLandPlayed event);
-    T visit(GameEventLifeLoss event);
+    T visit(GameEventPlayerLivesChanged event);
+    T visit(GameEventManaPool event);
     T visit(GameEventManaBurn event);
     T visit(GameEventMulligan event);
     T visit(GameEventPlayerControl event);
@@ -43,26 +43,26 @@ public interface IGameEventVisitor<T> {
     
     // This is base class for all visitors.
     public static class Base<T> implements IGameEventVisitor<T>{
+        public T visit(GameEventAnteCardsSelected event) { return null; }
         public T visit(GameEventAttackersDeclared event) { return null; }
         public T visit(GameEventBlockersDeclared event) { return null; }
-        public T visit(GameEventBlockerAssigned event) { return null; }
         public T visit(GameEventCardDamaged event) { return null; }
         public T visit(GameEventCardDestroyed event) { return null; }
-        public T visit(GameEventCardEquipped event) { return null; }
+        public T visit(GameEventCardAttachment event) { return null; }
         public T visit(GameEventCardChangeZone event) { return null; }
         public T visit(GameEventCardRegenerated event) { return null; }
         public T visit(GameEventCardSacrificed event) { return null; }
-        public T visit(GameEventAnteCardsSelected event) { return null; }
         public T visit(GameEventCardTapped event) { return null; }
-        public T visit(GameEventCounterAdded event) { return null; }
-        public T visit(GameEventCounterRemoved event) { return null; }
+        public T visit(GameEventCardStatsChanged event) { return null; }
+        public T visit(GameEventCardCounters event) { return null; }
         public T visit(GameEventGameFinished event) { return null; }
         public T visit(GameEventGameOutcome event) { return null; }
         public T visit(GameEventFlipCoin event) { return null; }
         public T visit(GameEventGameStarted event) { return null; }
         public T visit(GameEventGameRestarted event) { return null; }
         public T visit(GameEventLandPlayed event) { return null; }
-        public T visit(GameEventLifeLoss event) { return null; }
+        public T visit(GameEventPlayerLivesChanged event) { return null; }
+        public T visit(GameEventManaPool event) { return null; }
         public T visit(GameEventManaBurn event) { return null; }
         public T visit(GameEventMulligan event) { return null; }
         public T visit(GameEventPlayerControl event) { return null; }
@@ -78,6 +78,9 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventTurnPhase event) { return null; }
         public T visit(GameEventPlayerDamaged event) { return null; }
     }
+
+
+
 
 }
 

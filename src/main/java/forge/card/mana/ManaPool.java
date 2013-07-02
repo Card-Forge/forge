@@ -30,6 +30,8 @@ import forge.card.MagicColor;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.GlobalRuleChange;
+import forge.game.event.EventValueChangeType;
+import forge.game.event.GameEventManaPool;
 import forge.game.player.Player;
 import forge.util.maps.MapOfLists;
 import forge.util.maps.TreeMapOfLists;
@@ -72,7 +74,7 @@ public class ManaPool {
 
     private void addMana(final Mana mana) {
         floatingMana.add(mana.getColorCode(), mana);
-        owner.updateObservers();
+        owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Added, mana));
     }
 
     /**
@@ -87,8 +89,9 @@ public class ManaPool {
         for (final Mana m : manaList) {
             this.addMana(m);
         }
-        owner.getGame().getAction().checkStateEffects();
-        owner.updateObservers();
+
+        // check state effects replaced by checkStaticAbilities
+        owner.getGame().getAction().checkStaticAbilities();
     }
 
     /**
@@ -117,6 +120,7 @@ public class ManaPool {
             numRemoved += floatingMana.get(b).size();
             floatingMana.get(b).clear();
         }
+        owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Cleared, null));
         return numRemoved;
     }
 
@@ -228,7 +232,7 @@ public class ManaPool {
     private void removeMana(final Mana mana) {
         Collection<Mana> cm = floatingMana.get(mana.getColorCode());
         if (cm.remove(mana)) {
-            owner.updateObservers();
+            owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
         }
     }
 
@@ -319,9 +323,9 @@ public class ManaPool {
                 this.addMana(m);
             }
         }
-
         manaPaid.clear();
-        this.owner.updateObservers();
+        
+        owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.ComplexUpdate, null));
     }
 
 

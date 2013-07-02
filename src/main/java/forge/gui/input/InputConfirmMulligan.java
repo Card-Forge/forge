@@ -25,6 +25,7 @@ import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
+import forge.gui.match.CMatchUI;
 import forge.util.Lang;
 import forge.view.ButtonUtil;
  /**
@@ -120,10 +121,10 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
         if ( isCommander ) { // allow to choose cards for partial paris
             if(selected.contains(c0)) {
-                c0.setUsedToPay(false);
+                CMatchUI.SINGLETON_INSTANCE.setUsedToPay(c0, false);
                 selected.remove(c0);
             } else { 
-                c0.setUsedToPay(true);
+                CMatchUI.SINGLETON_INSTANCE.setUsedToPay(c0, true);
                 selected.add(c0);
             }
             if( selected.isEmpty())

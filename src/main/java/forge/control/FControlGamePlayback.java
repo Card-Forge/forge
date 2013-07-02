@@ -8,7 +8,7 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.FThreads;
 import forge.game.event.GameEvent;
-import forge.game.event.GameEventBlockerAssigned;
+import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventGameStarted;
 import forge.game.event.GameEventLandPlayed;
@@ -53,7 +53,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
 
     @Override
-    public Void visit(GameEventBlockerAssigned event) {
+    public Void visit(GameEventBlockersDeclared event) {
         pauseForEvent(combatDelay);
         return super.visit(event);
     }

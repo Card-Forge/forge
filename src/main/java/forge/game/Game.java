@@ -66,8 +66,8 @@ public class Game {
     public final Phase endOfCombat;
     public final Untap untap;
     public final Upkeep upkeep;
-    private final PhaseHandler phaseHandler;
     public final MagicStack stack;
+    private final PhaseHandler phaseHandler;
     private final StaticEffects staticEffects = new StaticEffects();
     private final TriggerHandler triggerHandler = new TriggerHandler(this);
     private final ReplacementHandler replacementHandler = new ReplacementHandler(this);

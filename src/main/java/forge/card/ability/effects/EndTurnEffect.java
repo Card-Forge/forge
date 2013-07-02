@@ -5,7 +5,6 @@ import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
-import forge.game.player.Player;
 
 public class EndTurnEffect extends SpellAbilityEffect {
 
@@ -39,12 +38,6 @@ public class EndTurnEffect extends SpellAbilityEffect {
         // 4) The current phase and/or step ends. The game skips straight to the
         // cleanup step. The cleanup step happens in its entirety.
         game.getPhaseHandler().endTurnByEffect();
-
-        // Update observers
-        for (Player p : game.getPlayers()) {
-            p.updateObservers();
-            p.updateLabelObservers();
-        }
     }
 
 

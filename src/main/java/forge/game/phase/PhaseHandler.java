@@ -42,7 +42,6 @@ import forge.game.GameType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventAttackersDeclared;
-import forge.game.event.GameEventBlockerAssigned;
 import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventPlayerPriority;
 import forge.game.event.GameEventTurnBegan;
@@ -431,13 +430,14 @@ public class PhaseHandler implements java.io.Serializable {
     
         for (Player p : game.getPlayers()) {
             int burn = p.getManaPool().clearPool(true);
-            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
+            boolean dealDamage = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN);
+            
+            if (dealDamage) {
                 p.loseLife(burn);
-    
-                // Play the Mana Burn sound
-                game.fireEvent(new GameEventManaBurn());
             }
-            p.updateObservers();
+            // Play the Mana Burn sound
+            if ( burn > 0 )
+                game.fireEvent(new GameEventManaBurn(burn, dealDamage));
         }
 
         switch (this.phase) {
@@ -523,7 +523,6 @@ public class PhaseHandler implements java.io.Serializable {
             Player whoDeclaresBlockers = playerDeclaresBlockers == null || playerDeclaresBlockers.hasLost() ? p : playerDeclaresBlockers;
             if ( combat.isPlayerAttacked(p) ) {
                 whoDeclaresBlockers.getController().declareBlockers(p, combat);
-                game.fireEvent(new GameEventBlockerAssigned()); // 
             }
             
             if ( game.isGameOver() ) // they just like to close window at any moment
@@ -843,6 +842,7 @@ public class PhaseHandler implements java.io.Serializable {
                 if( DEBUG_PHASES )
                     sw.start();
                 
+                game.getAction().checkStateEffects();
                 game.fireEvent(new GameEventPlayerPriority(getPlayerTurn(), getPhase(), getPriorityPlayer()));
                 pPlayerPriority.getController().takePriority();
                 

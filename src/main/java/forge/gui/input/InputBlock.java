@@ -137,11 +137,10 @@ public class InputBlock extends InputSyncronizedBase {
         currentAttacker = card;
         Player attacker = null;
         for(Card c : combat.getAttackers()) {
-            c.setUsedToPay(card == c);
+            CMatchUI.SINGLETON_INSTANCE.setUsedToPay(c, card == c);
             if ( attacker == null )
                 attacker = c.getController();
         }
         // request redraw from here
-        attacker.getZone(ZoneType.Battlefield).updateObservers();
     }
 }

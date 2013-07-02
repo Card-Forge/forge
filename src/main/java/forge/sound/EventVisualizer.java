@@ -6,17 +6,16 @@ import forge.card.spellability.SpellAbility;
 import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDestroyed;
-import forge.game.event.GameEventCardEquipped;
+import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
-import forge.game.event.GameEventCounterAdded;
-import forge.game.event.GameEventCounterRemoved;
+import forge.game.event.GameEventCardCounters;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventLifeLoss;
+import forge.game.event.GameEventPlayerLivesChanged;
 import forge.game.event.GameEventPlayerPoisoned;
 import forge.game.event.GameEventCardTapped;
 import forge.game.event.GameEventShuffle;
@@ -33,7 +32,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
 
     public SoundEffectType visit(GameEventCardDamaged event) { return SoundEffectType.Damage; }
     public SoundEffectType visit(GameEventCardDestroyed event) { return SoundEffectType.Destroy; }
-    public SoundEffectType visit(GameEventCardEquipped event) { return SoundEffectType.Equip; }
+    public SoundEffectType visit(GameEventCardAttachment event) { return SoundEffectType.Equip; }
     public SoundEffectType visit(GameEventCardChangeZone event) {
         ZoneType from = event.from == null ? null : event.from.getZoneType();
         ZoneType to = event.to.getZoneType();
@@ -46,11 +45,10 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
     }
     public SoundEffectType visit(GameEventCardRegenerated event) { return SoundEffectType.Regen; }
     public SoundEffectType visit(GameEventCardSacrificed event) { return SoundEffectType.Sacrifice; }
-    public SoundEffectType visit(GameEventCounterAdded event) { return event.Amount > 0 ? SoundEffectType.AddCounter : null; }
-    public SoundEffectType visit(GameEventCounterRemoved event) { return event.Amount > 0 ? SoundEffectType.RemoveCounter : null; }
+    public SoundEffectType visit(GameEventCardCounters event) { return event.newValue > event.oldValue ? SoundEffectType.AddCounter : event.newValue < event.oldValue ? SoundEffectType.RemoveCounter : null; }
     public SoundEffectType visit(GameEventTurnEnded event) { return SoundEffectType.EndOfTurn; }
     public SoundEffectType visit(GameEventFlipCoin event) { return SoundEffectType.FlipCoin; }
-    public SoundEffectType visit(GameEventLifeLoss event) { return SoundEffectType.LifeLoss; }
+    public SoundEffectType visit(GameEventPlayerLivesChanged event) { return SoundEffectType.LifeLoss; }
     public SoundEffectType visit(GameEventPlayerPoisoned event) { return SoundEffectType.Poison; }
     public SoundEffectType visit(GameEventShuffle event) { return SoundEffectType.Shuffle; }
     public SoundEffectType visit(GameEventTokenCreated event) { return SoundEffectType.Token; }

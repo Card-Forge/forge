@@ -430,7 +430,6 @@ public class Combat {
                     Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, damage, null, assigningPlayer != blocker.getController());
                     for (Entry<Card, Integer> dt : map.entrySet()) {
                         dt.getKey().addAssignedDamage(dt.getValue(), blocker);
-                        dt.getKey().updateObservers();
                     }
                 }
             }
@@ -488,7 +487,6 @@ public class Combat {
                             addDefendingDamage(dt.getValue(), attacker);
                     } else {
                         dt.getKey().addAssignedDamage(dt.getValue(), attacker);
-                        dt.getKey().updateObservers();
                     }
                 }
 

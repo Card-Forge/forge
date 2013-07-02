@@ -209,16 +209,19 @@ public class Untap extends Phase {
             final List<Card> landList = CardLists.filter(player.getLandsInPlay(), tappedCanUntap);
             
             if (!landList.isEmpty()) {
+                Card toUntap = null; 
                 if (player.isComputer()) {
                     // search for lands the computer has and only untap 1
-                    landList.get(0).untap();
+                    toUntap = landList.get(0);
                 } else {
                     final InputSelectCards target = new InputSelectCardsFromList(1,1, landList);
                     target.setMessage("Select one tapped land to untap");
                     Singletons.getControl().getInputQueue().setInputAndWait(target);
                     if( !target.hasCancelled() && !target.getSelected().isEmpty())
-                        target.getSelected().get(0).untap();
+                        toUntap = target.getSelected().get(0);
                 }
+                if ( toUntap != null )
+                    toUntap.untap();
             }
         }
         if (game.isCardInPlay("Damping Field") || game.isCardInPlay("Imi Statue")) {

@@ -17,6 +17,7 @@
  */
 package forge.control;
 
+import java.util.Observable;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -24,7 +25,6 @@ import forge.game.Game;
 import forge.gui.input.Input;
 import forge.gui.input.InputLockUI;
 import forge.gui.input.InputSynchronized;
-import forge.util.MyObservable;
 
 /**
  * <p>
@@ -34,7 +34,7 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id$
  */
-public class InputQueue extends MyObservable {
+public class InputQueue extends Observable {
 
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
     private final InputLockUI inputLock;
@@ -44,6 +44,12 @@ public class InputQueue extends MyObservable {
         inputLock = new InputLockUI(this);
     }
 
+    
+    public final void updateObservers() {
+        this.setChanged();
+        this.notifyObservers();
+    }
+    
     public final Input getInput() {
         return inputStack.isEmpty() ? null : this.inputStack.peek();
     }

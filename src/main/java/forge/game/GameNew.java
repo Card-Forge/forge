@@ -285,12 +285,6 @@ public class GameNew {
                 rAICards.addAll(getCardsAiCantPlayWell(myDeck));
             }
 
-            player.updateObservers();
-            player.getZone(ZoneType.Battlefield).updateObservers();
-            player.getZone(ZoneType.Hand).updateObservers();
-            player.getZone(ZoneType.Command).updateObservers();
-            player.getZone(ZoneType.Battlefield).updateObservers();
-            
             if( myRemovedAnteCards != null && !myRemovedAnteCards.isEmpty() )
                 removedAnteCards.addAll(player, myRemovedAnteCards);
         }

@@ -324,8 +324,6 @@ public class CardFactoryCreatures {
                             intermSumToughness += c.getBaseDefense();
                             game.getAction().exile(c);
                         }
-                        // is this needed?
-                        card.getController().getZone(ZoneType.Battlefield).updateObservers();
                     }
                 }
                 card.setBaseAttack(intermSumPower);

@@ -17,10 +17,7 @@
  */
 package forge.gui.input;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import com.google.common.collect.Iterables;
 
 import forge.Card;
@@ -32,7 +29,6 @@ import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
-import forge.util.MyObservable;
 import forge.view.ButtonUtil;
 
 /**
@@ -92,7 +88,7 @@ public class InputAttack extends InputSyncronizedBase {
     }
     
     private void showCombat() {
-        playerAttacks.getZone(ZoneType.Battlefield).updateObservers(); // redraw sword icons
+        // redraw sword icons
         CMatchUI.SINGLETON_INSTANCE.showCombat(combat);
     }
     
@@ -121,7 +117,7 @@ public class InputAttack extends InputSyncronizedBase {
         if (isMetaDown && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")) {
             // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
             combat.removeFromCombat(card);
-            card.setUsedToPay(false);
+            CMatchUI.SINGLETON_INSTANCE.setUsedToPay(card, false);
             showCombat();
             // When removing an attacker clear the attacking band
             this.activateBand(null);
@@ -180,48 +176,36 @@ public class InputAttack extends InputSyncronizedBase {
     } // selectCard()
 
     private final void setCurrentDefender(GameEntity def) {
-        Set<MyObservable> toUpdate = new HashSet<MyObservable>();
         currentDefender = def; 
         for( GameEntity ge: defenders ) {
             if ( ge instanceof Card) {
-                ((Card) ge).setUsedToPay(ge == def);
-                toUpdate.add(((Card) ge).getController().getZone(ZoneType.Battlefield));
+                CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card)ge, ge == def);
             }
             else if (ge instanceof Player) {
-                ((Player) ge).setHighlited(ge == def);
-                toUpdate.add(ge);
+                CMatchUI.SINGLETON_INSTANCE.setHighLited((Player) ge, ge == def);
             }
         }
 
         updateMessage();
 
-        // This will instantly highlight targets
-        for(MyObservable updateable : toUpdate) {
-            updateable.updateObservers();
-        }
+        // update UI
     }
     
     private final void activateBand(AttackingBand band) {
-        Set<MyObservable> toUpdate = new HashSet<MyObservable>();
         if (this.activeBand != null) {
             for(Card card : this.activeBand.getAttackers()) {
-                card.setUsedToPay(false);
-                toUpdate.add(card.getController().getZone(ZoneType.Battlefield));
+                CMatchUI.SINGLETON_INSTANCE.setUsedToPay(card, false);
             }
         }
         this.activeBand = band;
         
         if (this.activeBand != null) {
             for(Card card : this.activeBand.getAttackers()) {
-                card.setUsedToPay(true);
-                toUpdate.add(card.getController().getZone(ZoneType.Battlefield));
+                CMatchUI.SINGLETON_INSTANCE.setUsedToPay(card, true);
             }
         }
         
-        // This will instantly highlight targets
-        for(MyObservable updateable : toUpdate) {
-            updateable.updateObservers();
-        }
+        // update UI
     }
     
     private void updateMessage() {

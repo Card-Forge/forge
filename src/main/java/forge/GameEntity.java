@@ -22,8 +22,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import forge.game.Game;
+import forge.game.event.GameEventCardAttachment;
+import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.player.Player;
-import forge.util.MyObservable;
 
 /**
  * <p>
@@ -33,7 +34,7 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id: Player.java 10091 2011-08-30 16:11:21Z Sloth $
  */
-public abstract class GameEntity extends MyObservable implements ITargetable {
+public abstract class GameEntity implements ITargetable {
     private String name = "";
     private int preventNextDamage = 0;
     private TreeMap<Card, Map<String, String>> preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
@@ -438,7 +439,7 @@ public abstract class GameEntity extends MyObservable implements ITargetable {
      */
     public final void addEnchantedBy(final Card c) {
         this.enchantedBy.add(c);
-        this.updateObservers();
+        getGame().fireEvent(new GameEventCardAttachment(c, null, this, AttachMethod.Enchant));
     }
 
     /**
@@ -451,7 +452,7 @@ public abstract class GameEntity extends MyObservable implements ITargetable {
      */
     public final void removeEnchantedBy(final Card c) {
         this.enchantedBy.remove(c);
-        this.updateObservers();
+        getGame().fireEvent(new GameEventCardAttachment(c, this, null, AttachMethod.Enchant));
     }
 
     /**

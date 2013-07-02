@@ -74,7 +74,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             RegisteredPlayer psc = game.getMatch().getPlayers().get(i);
             
             player.setStartingLife(psc.getStartingLife());
-            player.setPoisonCounters(0);
+            player.setPoisonCounters(0, sa.getSourceCard());
             player.setNumLandsPlayed(0);
             player.setNumBasicForestsPlayed(0);
             GameNew.putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
@@ -86,9 +86,6 @@ public class RestartGameEffect extends SpellAbilityEffect {
             }
     
             player.shuffle();
-            player.getZone(ZoneType.Battlefield).updateObservers();
-            player.updateObservers();
-            player.getZone(ZoneType.Hand).updateObservers();
         }
     
         trigHandler.clearSuppression(TriggerType.ChangesZone);

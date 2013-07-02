@@ -5,6 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.GameEntity;
+import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase implements InputSelectMany<T> {
@@ -118,14 +119,14 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
 
     protected void onSelectStateChanged(T c, boolean newState) {
         if( c instanceof Card )
-            ((Card)c).setUsedToPay(newState); // UI supports card highlighting though this abstraction-breaking mechanism
+            CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card)c, newState); // UI supports card highlighting though this abstraction-breaking mechanism
     } 
 
 
     protected void afterStop() {
         for(T c : selected)
             if( c instanceof Card)
-                ((Card)c).setUsedToPay(false);
+                CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card)c, false);
    }
 
 

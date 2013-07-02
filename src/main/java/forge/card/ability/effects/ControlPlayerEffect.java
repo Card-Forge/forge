@@ -36,7 +36,7 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
             game.getUntap().addUntil(pTarget, new Command() {
                 @Override
                 public void run() {
-                    pTarget.obeyNewMaster(activator.getLobbyPlayer().createControllerFor(pTarget));
+                    pTarget.setControllingPlayerController(activator.getLobbyPlayer().createControllerFor(pTarget));
                     
                     // on following cleanup release control
                     game.getEndOfTurn().addUntil(new Command() {

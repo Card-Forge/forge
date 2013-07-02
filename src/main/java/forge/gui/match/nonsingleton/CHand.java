@@ -25,8 +25,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
@@ -47,7 +45,7 @@ import forge.view.arcane.util.Animation;
  * Controls Swing components of a player's hand instance.
  * 
  */
-public class CHand implements ICDoc, Observer {
+public class CHand implements ICDoc {
     private final Player player;
     private final VHand view;
     private boolean initializedAlready = false;
@@ -73,8 +71,8 @@ public class CHand implements ICDoc, Observer {
         if (initializedAlready) { return; }
         initializedAlready = true;
 
-        if (player != null)
-            player.getZone(ZoneType.Hand).addObserver(this);
+//        if (player != null)
+//            player.getZone(ZoneType.Hand).addObserver(this);
 
         HandArea area = view.getHandArea();
         area.addMouseListener(madCardClick);
@@ -134,7 +132,7 @@ public class CHand implements ICDoc, Observer {
         final HandArea p = view.getHandArea();
 
         VField vf = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(player);
-        final Rectangle rctLibraryLabel = vf.getLblLibrary().getBounds();
+        final Rectangle rctLibraryLabel = vf.getDetailsPanel().getLblLibrary().getBounds();
         final List<Card> cc = player.getZone(ZoneType.Hand).getCards();
 
         // Animation starts from the library label and runs to the hand panel.
@@ -164,7 +162,7 @@ public class CHand implements ICDoc, Observer {
         JLayeredPane layeredPane = Singletons.getView().getFrame().getLayeredPane();
         int fromZoneX = 0, fromZoneY = 0;
 
-        final Point zoneLocation = SwingUtilities.convertPoint(vf.getLblLibrary(),
+        final Point zoneLocation = SwingUtilities.convertPoint(vf.getDetailsPanel().getLblLibrary(),
                 Math.round(rctLibraryLabel.width / 2.0f), Math.round(rctLibraryLabel.height / 2.0f), layeredPane);
         fromZoneX = zoneLocation.x;
         fromZoneY = zoneLocation.y;
@@ -200,10 +198,8 @@ public class CHand implements ICDoc, Observer {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#update()
-     */
     @Override
     public void update() {
+        updateHand();
     }
 }

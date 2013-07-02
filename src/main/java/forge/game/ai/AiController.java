@@ -760,8 +760,6 @@ public class AiController {
             Log.debug(sb.toString());
         }
 
-        attacker.getZone(ZoneType.Battlefield).updateObservers();
-
         // ai is about to attack, cancel all phase skipping
         for (Player p : game.getPlayers()) {
             p.getController().autoPassCancel();

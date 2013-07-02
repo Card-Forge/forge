@@ -24,8 +24,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.swing.JScrollPane;
 
 import forge.Card;
@@ -499,17 +497,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * @param newList
      *            an array of {@link forge.Card} objects.
      */
-    private final AtomicBoolean wantRedraw = new AtomicBoolean(false);
     public void setupPlayZone() {
-        boolean wasSet = wantRedraw.getAndSet(true);
-        if(wasSet) return;
-        FThreads.delayInEDT(50, new Runnable() { // postpone play area update per 50ms
-            @Override
-            public void run() {
-                wantRedraw.set(false);
-                setupPlayZone(model);
-            }
-        });
+        FThreads.assertExecutedByEdt(true);
+        setupPlayZone(model);
     }
     
     

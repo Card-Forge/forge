@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -37,6 +38,7 @@ public class Lang {
         return has1 ? (has2 ? s1 + " and " + s2 : s1) : (has2 ? s2 : "");
     }
     
+    public static <T> String joinHomogenous(Iterable<T> objects) { return joinHomogenous(Lists.newArrayList(objects)); }
     public static <T> String joinHomogenous(Collection<T> objects) { return joinHomogenous(objects, null, "and"); }
     public static <T> String joinHomogenous(Collection<T> objects, Function<T, String> accessor) {
         return joinHomogenous(objects, accessor, "and");

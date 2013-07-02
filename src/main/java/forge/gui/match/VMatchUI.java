@@ -163,11 +163,7 @@ public enum VMatchUI implements IVTopLevelUI {
         this.lstCommands = lstCommands0;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public Iterable<VHand> getHands() {
+    public List<VHand> getHands() {
         return lstHands;
     }
 }

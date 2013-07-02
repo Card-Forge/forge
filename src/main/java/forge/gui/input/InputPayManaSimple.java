@@ -22,7 +22,6 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
 
 //pays the cost of a card played from the player's hand
@@ -96,7 +95,7 @@ public class InputPayManaSimple extends InputPayMana {
     @Override
     protected final void onCancel() {
         player.getManaPool().refundManaPaid(this.saPaidFor, true);
-        player.getZone(ZoneType.Battlefield).updateObservers(); // DO
+        // Update UI
 
         this.stop();
     }

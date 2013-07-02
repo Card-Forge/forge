@@ -55,7 +55,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.game.ai.AiController;
 import forge.game.player.HumanPlay;
-import forge.game.event.GameEventLifeLoss;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerControllerAi;
@@ -422,9 +421,6 @@ public final class GameActionUtil {
         }
 
         c.getDamageHistory().registerCombatDamage(player);
-
-        // Play the Life Loss sound
-        player.getGame().fireEvent(new GameEventLifeLoss());
     } // executeCombatDamageToPlayerEffects
 
     /**

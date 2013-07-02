@@ -57,7 +57,7 @@ import forge.game.Game;
 import forge.game.GameAge;
 import forge.game.GlobalRuleChange;
 import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventLifeLoss;
+import forge.game.event.GameEventPlayerLivesChanged;
 import forge.game.event.GameEventMulligan;
 import forge.game.event.GameEventPlayerControl;
 import forge.game.event.GameEventPlayerDamaged;
@@ -379,7 +379,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             // life == newLife
             change = false;
         }
-        this.updateObservers();
         return change;
     }
 
@@ -419,19 +418,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     /**
      * <p>
-     * addLife.
-     * </p>
-     * 
-     * @param toAdd
-     *            a int.
-     */
-    private void addLife(final int toAdd) {
-        this.life += toAdd;
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
      * gainLife.
      * </p>
      * 
@@ -460,9 +446,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         final int lifeGain = toGain;
 
         if (lifeGain > 0) {
-            this.addLife(lifeGain);
+            int oldLife = life;
+            this.life += lifeGain;
             newLifeSet = true;
-            this.updateObservers();
             this.lifeGainedThisTurn += lifeGain;
 
             // Run triggers
@@ -470,6 +456,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             runParams.put("Player", this);
             runParams.put("LifeAmount", lifeGain);
             game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
+            
+            game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
         } else {
             System.out.println("Player - trying to gain negative or 0 life");
         }
@@ -506,10 +494,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
         if (toLose > 0) {
-            this.subtractLife(toLose);
+            int oldLife = life;
+            this.life -= toLose;
             lifeLost = toLose;
-            game.fireEvent(new GameEventLifeLoss());
-            this.updateObservers();
+            game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
         } else if (toLose == 0) {
             // Rule 118.4
             // this is for players being able to pay 0 life
@@ -542,19 +530,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
         return true;
-    }
-
-    /**
-     * <p>
-     * subtractLife.
-     * </p>
-     * 
-     * @param toSub
-     *            a int.
-     */
-    private void subtractLife(final int toSub) {
-        this.life -= toSub;
-        this.updateObservers();
     }
 
     /**
@@ -651,7 +626,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             source.getController().gainLife(amount, source);
         }
         source.getDamageHistory().registerDamage(this);
-        this.getGame().fireEvent(new GameEventLifeLoss());
 
         if (isCombat) {
             final ArrayList<String> types = source.getType();
@@ -1079,10 +1053,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public final void addPoisonCounters(final int num, final Card source) {
         if (!this.hasKeyword("You can't get poison counters")) {
-            this.poisonCounters += num;
-
-            game.fireEvent(new GameEventPlayerPoisoned(this, source, num));
-            this.updateObservers();
+            setPoisonCounters(poisonCounters + num, source);
         }
     }
 
@@ -1093,10 +1064,12 @@ public class Player extends GameEntity implements Comparable<Player> {
      * 
      * @param num
      *            a int.
+     * @param source 
      */
-    public final void setPoisonCounters(final int num) {
+    public final void setPoisonCounters(final int num, Card source) {
+        int oldPoison = poisonCounters;
         this.poisonCounters = num;
-        this.updateObservers();
+        game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
     }
 
     /**
@@ -1108,19 +1081,6 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public final int getPoisonCounters() {
         return this.poisonCounters;
-    }
-
-    /**
-     * <p>
-     * subtractPoisonCounters.
-     * </p>
-     * 
-     * @param num
-     *            a int.
-     */
-    public final void subtractPoisonCounters(final int num) {
-        this.poisonCounters -= num;
-        this.updateObservers();
     }
 
     /**
@@ -1814,7 +1774,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams, false);
 
         // Play the shuffle sound
-        game.fireEvent(new GameEventShuffle());
+        game.fireEvent(new GameEventShuffle(this));
     } // shuffle
       // //////////////////////////////
 
@@ -2671,13 +2631,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return this.mustAttackEntity;
     }
 
-    /**
-     * Update label observers.
-     */
-    public final void updateLabelObservers() {
-        this.getZone(ZoneType.Hand).updateObservers();
-    }
-
     // //////////////////////////////
     //
     // generic Object overrides
@@ -2766,11 +2719,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     
     public final void releaseControl() {
+        if ( controller == controllerCreator )
+            return;
+
         controller = controllerCreator;
         game.fireEvent(new GameEventPlayerControl(this, getLobbyPlayer(), null));
     }
 
-    public final void obeyNewMaster(PlayerController pc) {
+    public final void setControllingPlayerController(PlayerController pc) {
         LobbyPlayer oldController = getLobbyPlayer();
         controller = pc;
         game.fireEvent(new GameEventPlayerControl(this, oldController, pc.getLobbyPlayer()));
@@ -3165,12 +3121,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             getSourceCard().getOwner().getController().playMiracle(miracle, getSourceCard());
         }
     }
-
-    // These are used by UI to mark the player currently being attacked or targeted
-    // Very bad practice! Someone blame on me.
-    private boolean highlited = false; 
-    public final void setHighlited(boolean value) { highlited = value; }
-    public final boolean isHighlited() { return highlited; }
 
     /**
      * TODO: Write javadoc for this method.

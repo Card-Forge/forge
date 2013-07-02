@@ -18,8 +18,6 @@
 package forge.gui.match.views;
 
 import java.awt.Dimension;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -45,7 +43,7 @@ import forge.gui.toolbox.FLabel;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VAntes implements IVDoc<CAntes>, Observer {
+public enum VAntes implements IVDoc<CAntes> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -80,10 +78,7 @@ public enum VAntes implements IVDoc<CAntes>, Observer {
     
     public final void setModel(Iterable<Player> playerz) {
         players = playerz;
-        for(Player p: players) {
-            p.getZone(ZoneType.Ante).addObserver(this);
-        }
-        update(null, null);
+        update();
     }
 
     /* (non-Javadoc)
@@ -126,9 +121,7 @@ public enum VAntes implements IVDoc<CAntes>, Observer {
         return CAntes.SINGLETON_INSTANCE;
     }
 
-    //========== Setters / getters
-    @Override
-    public void update(Observable o, Object arg) {
+    public void update() {
         allAntes.clear();
         pnl.removeAll();
 

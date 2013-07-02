@@ -26,6 +26,7 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
+import forge.util.Lang;
 
 /**
  * <p>
@@ -98,8 +99,9 @@ public class PlayerZone extends Zone {
      */
     public PlayerZone(final ZoneType zone, final Player inPlayer) {
         super(zone);
+        if ( inPlayer == null )
+            throw new IllegalArgumentException("Player zone must be initialized with correct player");
         this.player = inPlayer;
-
     }
 
     // ************ BEGIN - these methods fire updateObservers() *************
@@ -135,14 +137,11 @@ public class PlayerZone extends Zone {
             return;
         }
 
-        c.addObserver(this);
         c.setTurnInZone(c.getGame().getPhaseHandler().getTurn());
         this.cardList.add(c);
         
         if (!this.is(ZoneType.Battlefield)) {
             c.setTapped(false);
-        } else if (update) { // setTapped has already called update once
-            this.update();
         }
     }
 
@@ -157,7 +156,7 @@ public class PlayerZone extends Zone {
      * @return a boolean
      */
     public final boolean is(final ZoneType zone, final Player player) {
-        return (zone == this.zoneName && this.player.equals(player));
+        return (zone == this.zoneType && this.player.equals(player));
     }
 
     /**
@@ -180,16 +179,7 @@ public class PlayerZone extends Zone {
      */
     @Override
     public final String toString() {
-        return this.player != null ? String.format("%s %s", this.player, this.zoneName) : this.zoneName.toString();
-    }
-
-
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    @Override
-    public void updateLabelObservers() {
-        getPlayer().updateLabelObservers();
+        return  String.format("%s %s", Lang.getPossesive(this.player.toString()), this.zoneType);
     }
 
     public List<Card> getCardsPlayerCanActivate(Player who) {

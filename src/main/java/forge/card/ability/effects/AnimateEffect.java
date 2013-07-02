@@ -18,6 +18,9 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
+import forge.game.event.GameEvent;
+import forge.game.event.GameEventCardStatsChanged;
+import forge.game.event.IGameEventVisitor;
 
 public class AnimateEffect extends AnimateEffectBase {
 
@@ -291,6 +294,8 @@ public class AnimateEffect extends AnimateEffectBase {
                     game.getEndOfTurn().addUntil(unanimate);
                 }
             }
+            
+            game.fireEvent(new GameEventCardStatsChanged(c));
         }
     } // animateResolve extends SpellEffect {
 
