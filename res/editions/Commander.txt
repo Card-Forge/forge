@@ -5,6 +5,7 @@ Name=Commander
 Code2=COM
 Alias=CMD
 Type=Other
+FoilAlwaysInCommonSlot=True
 
 [cards]
 C AEthersnipe

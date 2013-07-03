@@ -6,6 +6,7 @@ Code2=DGM
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!land, 3 Uncommon, 1 RareMythic:!land, 1 fromSheet("DGM Lands")
+FoilAlwaysInCommonSlot=True
 
 [cards]
 C Boros Mastiff

@@ -4,6 +4,7 @@ Date=2010-06-18
 Name=Archenemy
 Code2=ARC
 Type=Other
+FoilAlwaysInCommonSlot=True
 
 [cards]
 C A Display of My Dark Power

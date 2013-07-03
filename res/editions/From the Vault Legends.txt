@@ -4,6 +4,7 @@ Date=2011-08-26
 Name=From the Vault: Legends
 Type=From_the_Vault
 Alias=V11
+FoilAlwaysInCommonSlot=True
 
 [cards]
 M Cao Cao, Lord of Wei

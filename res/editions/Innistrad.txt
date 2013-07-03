@@ -6,6 +6,7 @@ Code2=ISD
 Type=Expansion
 BoosterCovers=5
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc, 1 BasicLand
+FoilAlwaysInCommonSlot=True
 
 [cards]
 U Abattoir Ghoul

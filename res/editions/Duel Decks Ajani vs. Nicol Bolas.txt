@@ -3,6 +3,7 @@ Code=DDH
 Date=2011-09-02
 Name=Duel Decks: Ajani vs. Nicol Bolas
 Type=Duel_Decks
+FoilAlwaysInCommonSlot=True
 
 [cards]
 R Ageless Entity

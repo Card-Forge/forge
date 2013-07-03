@@ -3,6 +3,7 @@ Code=DDD
 Date=2009-10-30
 Name=Duel Decks: Garruk vs. Liliana
 Type=Duel_Decks
+FoilAlwaysInCommonSlot=True
 
 [cards]
 U Albino Troll

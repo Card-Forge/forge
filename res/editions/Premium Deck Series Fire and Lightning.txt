@@ -4,6 +4,7 @@ Date=2010-11-19
 Name=Premium Deck Series: Fire and Lightning
 Code2=PD2
 Type=Premium_Deck_Series
+FoilAlwaysInCommonSlot=True
 
 [cards]
 R Ball Lightning

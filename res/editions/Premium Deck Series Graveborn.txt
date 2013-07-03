@@ -3,6 +3,7 @@ Code=PD3
 Date=2011-11-18
 Name=Premium Deck Series: Graveborn
 Type=Premium_Deck_Series
+FoilAlwaysInCommonSlot=True
 
 [cards]
 U Animate Dead

@@ -3,6 +3,7 @@ Code=DDE
 Date=2010-03-19
 Name=Duel Decks: Phyrexia vs. the Coalition
 Type=Duel_Decks
+FoilAlwaysInCommonSlot=True
 
 [cards]
 U Allied Strategies

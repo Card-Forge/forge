@@ -3,6 +3,7 @@ Code=V12
 Date=2012-08-31
 Name=From the Vault: Realms
 Type=From_the_Vault
+FoilAlwaysInCommonSlot=True
 
 [cards]
 M Ancient Tomb

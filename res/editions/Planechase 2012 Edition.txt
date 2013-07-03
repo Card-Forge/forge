@@ -4,6 +4,7 @@ Date=2012-06-01
 Name=Planechase 2012 Edition
 Code2=PC2
 Type=Other
+FoilAlwaysInCommonSlot=True
 
 [cards]
 C Akoum

@@ -4,6 +4,7 @@ Date=2007-11-16
 Name=Duel Decks: Elves vs. Goblins
 Code2=EVG
 Type=Duel_Decks
+FoilAlwaysInCommonSlot=True
 
 [cards]
 U Akki Coalflinger

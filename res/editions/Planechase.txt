@@ -5,6 +5,7 @@ Name=Planechase
 Alias=PCH
 Code2=HOP
 Type=Other
+FoilAlwaysInCommonSlot=True
 
 [cards]
 C Academy at Tolaria West
