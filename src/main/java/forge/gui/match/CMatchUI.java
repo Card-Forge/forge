@@ -39,6 +39,7 @@ import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
@@ -54,6 +55,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.special.PhaseLabel;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
+import forge.view.arcane.PlayArea;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -320,10 +322,7 @@ public enum CMatchUI {
     }
 
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param manaPoolUpdate
-     */
+    // Player's mana pool changes
     public void updateManaPool(List<Player> manaPoolUpdate) {
         for(Player p : manaPoolUpdate) {
             getFieldViewFor(p).getDetailsPanel().updateManaPool();
@@ -331,16 +330,25 @@ public enum CMatchUI {
         
     }
 
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param livesUpdate
-     */
+    // Player's lives and poison counters
     public void updateLives(List<Player> livesUpdate) {
         for(Player p : livesUpdate) {
             getFieldViewFor(p).updateDetails();
         }
         
+    }
+
+    public void updateCards(List<Card> cardsToUpdate) {
+        for(Card c : cardsToUpdate) {
+            Zone zone = c.getGame().getZoneOf(c);
+            ZoneType zt = zone.getZoneType();
+            Player p = zone.getPlayer();
+            
+            if ( zt == ZoneType.Battlefield ) {
+                PlayArea pa = getFieldViewFor(p).getTabletop(); 
+                pa.updateSingleCard(c);
+            }
+        }
     }
 
 }

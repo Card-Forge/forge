@@ -4,13 +4,13 @@ import forge.Card;
 import forge.CounterType;
 
 public class GameEventCardCounters extends GameEvent {
-    public final Card target;
+    public final Card card;
     public final CounterType type;
     public final int oldValue;
     public final int newValue;
 
     public GameEventCardCounters(Card card, CounterType counterType, int old, int newValue) {
-        target = card;
+        this.card = card;
         type = counterType;
         this.oldValue = old;
         this.newValue = newValue;

@@ -18,12 +18,10 @@
 package forge.view.arcane;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +31,7 @@ import javax.swing.SwingUtilities;
 
 import forge.Card;
 import forge.Constant;
+import forge.FThreads;
 import forge.gui.match.CMatchUI;
 import forge.view.arcane.util.CardPanelMouseListener;
 
@@ -296,23 +295,21 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link forge.view.arcane.CardPanel} object.
      */
     public final void removeCardPanel(final CardPanel fromPanel) {
-        CardPanelContainer.invokeAndWait(new Runnable() {
-            @Override
-            public void run() {
-                if (CardPanelContainer.this.getMouseDragPanel() != null) {
-                    CardPanel.getDragAnimationPanel().setVisible(false);
-                    CardPanel.getDragAnimationPanel().repaint();
-                    CardPanelContainer.this.getCardPanels().remove(CardPanel.getDragAnimationPanel());
-                    CardPanelContainer.this.remove(CardPanel.getDragAnimationPanel());
-                    CardPanelContainer.this.setMouseDragPanel(null);
-                }
-                CardPanelContainer.this.hoveredPanel = null;
-                CardPanelContainer.this.getCardPanels().remove(fromPanel);
-                CardPanelContainer.this.remove(fromPanel);
-                CardPanelContainer.this.invalidate();
-                CardPanelContainer.this.repaint();
-            }
-        });
+        FThreads.assertExecutedByEdt(true);
+        if (CardPanelContainer.this.getMouseDragPanel() != null) {
+            CardPanel.getDragAnimationPanel().setVisible(false);
+            CardPanel.getDragAnimationPanel().repaint();
+            CardPanelContainer.this.getCardPanels().remove(CardPanel.getDragAnimationPanel());
+            CardPanelContainer.this.remove(CardPanel.getDragAnimationPanel());
+            CardPanelContainer.this.setMouseDragPanel(null);
+        }
+        CardPanelContainer.this.hoveredPanel = null;
+        CardPanelContainer.this.getCardPanels().remove(fromPanel);
+        CardPanelContainer.this.remove(fromPanel);
+        CardPanelContainer.this.invalidate();
+        CardPanelContainer.this.repaint();
+
+
     }
 
     /**
@@ -321,17 +318,13 @@ public abstract class CardPanelContainer extends JPanel {
      * </p>
      */
     public final void clear() {
-        CardPanelContainer.invokeAndWait(new Runnable() {
-            @Override
-            public void run() {
-                CardPanelContainer.this.getCardPanels().clear();
-                CardPanelContainer.this.removeAll();
-                CardPanelContainer.this.setPreferredSize(new Dimension(0, 0));
-                CardPanelContainer.this.invalidate();
-                CardPanelContainer.this.getParent().validate();
-                CardPanelContainer.this.repaint();
-            }
-        });
+        FThreads.assertExecutedByEdt(true);
+        CardPanelContainer.this.getCardPanels().clear();
+        CardPanelContainer.this.removeAll();
+        CardPanelContainer.this.setPreferredSize(new Dimension(0, 0));
+        CardPanelContainer.this.invalidate();
+        CardPanelContainer.this.getParent().validate();
+        CardPanelContainer.this.repaint();
     }
 
     /**
@@ -609,26 +602,5 @@ public abstract class CardPanelContainer extends JPanel {
      */
     public void setMouseDragPanel(final CardPanel mouseDragPanel0) {
         this.mouseDragPanel = mouseDragPanel0;
-    }
-
-    /**
-     * <p>
-     * invokeAndWait.
-     * </p>
-     * 
-     * @param runnable
-     *            a {@link java.lang.Runnable} object.
-     */
-    public static void invokeAndWait(final Runnable runnable) {
-        if (EventQueue.isDispatchThread()) {
-            runnable.run();
-            return;
-        }
-        try {
-            EventQueue.invokeAndWait(runnable);
-        } catch (InterruptedException ex) {
-        } catch (InvocationTargetException ex) {
-            throw new RuntimeException(ex);
-        }
     }
 }

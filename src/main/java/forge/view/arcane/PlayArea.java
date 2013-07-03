@@ -290,6 +290,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
     }
 
+    /**
+     * TODO: Write javadoc for this method.
+     * @param c
+     */
+    public void updateSingleCard(Card c) {
+        updateCard(c);
+    }
+
     private List<CardStackRow> tryArrangePilesOfWidth(final CardStackRow lands, final CardStackRow tokens, final CardStackRow creatures, CardStackRow others) {
         List<CardStackRow> template = new ArrayList<PlayArea.CardStackRow>();
         
@@ -550,60 +558,69 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
     
         for (final Card card : model) {
-            final CardPanel toPanel = getCardPanel(card.getUniqueNumber());
-            if (null == toPanel) continue; // although, wth it's null?
-            if (card.isTapped()) {
-                toPanel.setTapped(true);
-                toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
-            } else {
-                toPanel.setTapped(false);
-                toPanel.setTappedAngle(0);
-            }
-            toPanel.getAttachedPanels().clear();
-            if (card.isEnchanted()) {
-                final ArrayList<Card> enchants = card.getEnchantedBy();
-                for (final Card e : enchants) {
-                    final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
-                    if (cardE != null) {
-                        toPanel.getAttachedPanels().add(cardE);
-                    }
-                }
-            }
-    
-            if (card.isEquipped()) {
-                final ArrayList<Card> enchants = card.getEquippedBy();
-                for (final Card e : enchants) {
-                    final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
-                    if (cardE != null) {
-                        toPanel.getAttachedPanels().add(cardE);
-                    }
-                }
-            }
-
-            if (card.isFortified()) {
-                final ArrayList<Card> fortifications = card.getFortifiedBy();
-                for (final Card e : fortifications) {
-                    final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
-                    if (cardE != null) {
-                        toPanel.getAttachedPanels().add(cardE);
-                    }
-                }
-            }
-
-            if (card.isEnchantingCard()) {
-                toPanel.setAttachedToPanel(getCardPanel(card.getEnchantingCard().getUniqueNumber()));
-            } else if (card.isEquipping()) {
-                toPanel.setAttachedToPanel(getCardPanel(card.getEquipping().get(0).getUniqueNumber()));
-            } else if (card.isFortifying()) {
-                toPanel.setAttachedToPanel(getCardPanel(card.getFortifying().get(0).getUniqueNumber()));
-            } else {
-                toPanel.setAttachedToPanel(null);
-            }
-    
-            toPanel.setCard(toPanel.getGameCard());
+            updateCard(card);
         }
         invalidate();
         repaint();
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     */
+    private void updateCard(final Card card) {
+        final CardPanel toPanel = getCardPanel(card.getUniqueNumber());
+        if (null == toPanel)
+         return;
+        if (card.isTapped()) {
+            toPanel.setTapped(true);
+            toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
+        } else {
+            toPanel.setTapped(false);
+            toPanel.setTappedAngle(0);
+        }
+        toPanel.getAttachedPanels().clear();
+        if (card.isEnchanted()) {
+            final ArrayList<Card> enchants = card.getEnchantedBy();
+            for (final Card e : enchants) {
+                final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
+                if (cardE != null) {
+                    toPanel.getAttachedPanels().add(cardE);
+                }
+            }
+        }
+   
+        if (card.isEquipped()) {
+            final ArrayList<Card> enchants = card.getEquippedBy();
+            for (final Card e : enchants) {
+                final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
+                if (cardE != null) {
+                    toPanel.getAttachedPanels().add(cardE);
+                }
+            }
+        }
+
+        if (card.isFortified()) {
+            final ArrayList<Card> fortifications = card.getFortifiedBy();
+            for (final Card e : fortifications) {
+                final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
+                if (cardE != null) {
+                    toPanel.getAttachedPanels().add(cardE);
+                }
+            }
+        }
+
+        if (card.isEnchantingCard()) {
+            toPanel.setAttachedToPanel(getCardPanel(card.getEnchantingCard().getUniqueNumber()));
+        } else if (card.isEquipping()) {
+            toPanel.setAttachedToPanel(getCardPanel(card.getEquipping().get(0).getUniqueNumber()));
+        } else if (card.isFortifying()) {
+            toPanel.setAttachedToPanel(getCardPanel(card.getFortifying().get(0).getUniqueNumber()));
+        } else {
+            toPanel.setAttachedToPanel(null);
+        }
+   
+        toPanel.setCard(toPanel.getGameCard());
     }
 
     private static enum RowType {
@@ -714,5 +731,5 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.cardSpacingY = Math.round(this.cardHeight * PlayArea.CARD_SPACING_Y);
         this.stackSpacingX = Math.round(this.cardWidth * PlayArea.STACK_SPACING_X);
         this.stackSpacingY = Math.round(this.cardHeight * PlayArea.STACK_SPACING_Y);
-    }    
+    }
 }

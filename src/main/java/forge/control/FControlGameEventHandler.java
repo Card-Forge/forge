@@ -215,32 +215,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         // TODO Auto-generated method stub
         Game game = event.equipment.getGame();
         PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
-        Zone z1 = event.oldEntiy instanceof Card ? game.getZoneOf((Card)event.oldEntiy) : null;
-        Zone z2 = event.newTarget instanceof Card ? game.getZoneOf((Card)event.newTarget) : null;
-        if ( z1 instanceof PlayerZone ) updateZone((PlayerZone) z1);
-        if ( z2 instanceof PlayerZone ) updateZone((PlayerZone) z2);
+        if( event.oldEntiy instanceof Card )
+            updateZone(game.getZoneOf((Card)event.oldEntiy));
+        if( event.newTarget instanceof Card )
+            updateZone(game.getZoneOf((Card)event.newTarget));
         return updateZone(zEq);
     }
 
-    @Override
-    public Void visit(GameEventCardTapped event) {
-        // TODO Smart partial updates
-        return updateZone((PlayerZone) event.card.getGame().getZoneOf(event.card));
-    }
-
-    @Override
-    public Void visit(GameEventCardDamaged event) {
-        // TODO Smart partial updates
-        return updateZone((PlayerZone) event.damaged.getGame().getZoneOf(event.damaged));
-    }
-
-    @Override
-    public Void visit(GameEventCardCounters event) {
-        // TODO Smart partial updates
-        return updateZone((PlayerZone) event.target.getGame().getZoneOf(event.target));
-    }
-
-    private Void updateZone(PlayerZone z) {
+    private Void updateZone(Zone z) {
         return updateZone(Pair.of(z.getPlayer(), z.getZoneType()));
     }
 
@@ -257,6 +239,45 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
     
+    
+    private final List<Card> cardsToUpdate = new Vector<Card>();
+    private final Runnable updCards = new Runnable() { 
+        @Override public void run() { 
+            synchronized (cardsToUpdate) {
+                CMatchUI.SINGLETON_INSTANCE.updateCards(cardsToUpdate);
+                cardsToUpdate.clear();
+            }
+        }
+    };
+    
+    
+    @Override
+    public Void visit(GameEventCardTapped event) {
+        return updateSingleCard(event.card);
+    }
+
+    @Override
+    public Void visit(GameEventCardDamaged event) {
+        return updateSingleCard(event.damaged);
+    }
+
+    @Override
+    public Void visit(GameEventCardCounters event) {
+        return updateSingleCard(event.card);
+    }
+
+    private Void updateSingleCard(Card c) {
+        boolean needUpdate = false;
+        synchronized (cardsToUpdate) {
+            needUpdate = cardsToUpdate.isEmpty();
+            if ( !cardsToUpdate.contains(c) ) {
+                cardsToUpdate.add(c);
+            }
+        }
+        if( needUpdate )
+            FThreads.invokeInEdtNowOrLater(updCards);
+        return null;
+    }
     
     /* (non-Javadoc)
      * @see forge.game.event.IGameEventVisitor.Base#visit(forge.game.event.GameEventCardStatsChanged)
