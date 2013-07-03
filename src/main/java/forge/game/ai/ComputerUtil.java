@@ -47,7 +47,6 @@ import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
 import forge.card.cost.CostSacrifice;
 import forge.card.spellability.AbilityManaPart;
-import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetRestrictions;
@@ -86,27 +85,6 @@ public class ComputerUtil {
      * @return a boolean.
      */
     public static boolean handlePlayingSpellAbility(final Player ai, final SpellAbility sa, final Game game) {
-        
-        if (sa instanceof AbilityStatic) {
-            final Cost cost = sa.getPayCosts();
-            if (cost == null) {
-                if (ComputerUtilMana.payManaCost(ai, sa)) {
-                    sa.resolve();
-                } else {
-                    return false;
-                }
-            } else {
-                final CostPayment pay = new CostPayment(cost, sa);
-                if (pay.payComputerCosts(ai, game)) {
-                    sa.resolve();
-                } else {
-                    return false;
-                }
-            }
-            // Why?
-            game.getPhaseHandler().setPriority(ai);
-            return true;
-        }
 
         game.getStack().freezeStack();
         final Card source = sa.getSourceCard();
@@ -122,9 +100,10 @@ public class ComputerUtil {
         final Cost cost = sa.getPayCosts();
 
         if (cost == null) {
-            ComputerUtilMana.payManaCost(ai, sa);
-            game.getStack().addAndUnfreeze(sa);
-            return true;
+            if (ComputerUtilMana.payManaCost(ai, sa)) {
+                game.getStack().addAndUnfreeze(sa);
+                return true;
+            }
         } else {
             final CostPayment pay = new CostPayment(cost, sa);
             if (pay.payComputerCosts(ai, game)) {

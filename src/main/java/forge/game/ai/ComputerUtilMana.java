@@ -191,7 +191,7 @@ public class ComputerUtilMana {
                     saPayment.getSourceCard().tap();
                 }
 
-                AbilityUtils.resolve(saPayment);
+                ai.getGame().getStack().addAndUnfreeze(saPayment);
                 // subtract mana from mana pool
                 manapool.payManaFromAbility(sa, cost, saPayment);
 
