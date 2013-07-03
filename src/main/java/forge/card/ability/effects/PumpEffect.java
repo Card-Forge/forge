@@ -14,6 +14,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -85,6 +86,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 game.getEndOfTurn().addUntil(untilEOT);
             }
         }
+        sa.getActivatingPlayer().getGame().fireEvent(new GameEventCardStatsChanged(applyTo));
     }
 
     private void applyPump(final SpellAbility sa, final Player p, final List<String> keywords) {

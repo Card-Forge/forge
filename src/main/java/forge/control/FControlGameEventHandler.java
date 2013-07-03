@@ -13,6 +13,7 @@ import forge.FThreads;
 import forge.game.Game;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
+import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardCounters;
 import forge.game.event.GameEventCardDamaged;
@@ -35,6 +36,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.match.CMatchUI;
@@ -200,39 +202,52 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     
     @Override
     public Void visit(GameEventCardChangeZone event) {
+        updateTwoZones(event.from, event.to);
+        return null;
+    }
+
+    private void updateTwoZones(Zone z1, Zone z2) {
         boolean needUpdate = false;
         synchronized (zonesToUpdate) {
             needUpdate = zonesToUpdate.isEmpty();
-            if ( event.from instanceof PlayerZone && !zonesToUpdate.contains(event.from) ) {
-                zonesToUpdate.add((PlayerZone)event.from);
+            if ( z1 instanceof PlayerZone && !zonesToUpdate.contains(z1) ) {
+                zonesToUpdate.add((PlayerZone)z1);
             }
-            if ( event.to instanceof PlayerZone && !zonesToUpdate.contains(event.to) ) {
-                zonesToUpdate.add((PlayerZone)event.to);
+            if ( z2 instanceof PlayerZone && !zonesToUpdate.contains(z2) ) {
+                zonesToUpdate.add((PlayerZone)z2);
             }
         }
         if( needUpdate )
             FThreads.invokeInEdtNowOrLater(updZones);
-        return null;
+    }
+    
+    @Override
+    public Void visit(GameEventCardAttachment event) {
+        // TODO Auto-generated method stub
+        Game game = event.equipment.getGame();
+        PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
+        Zone z1 = event.oldEntiy instanceof Card ? game.getZoneOf((Card)event.oldEntiy) : null;
+        Zone z2 = event.newTarget instanceof Card ? game.getZoneOf((Card)event.newTarget) : null;
+        updateTwoZones(z1, z2);
+        return updateZone(zEq);
     }
 
     @Override
     public Void visit(GameEventCardTapped event) {
         // TODO Smart partial updates
-        PlayerZone z = (PlayerZone) event.card.getGame().getZoneOf(event.card);
-        return updateZone(z);
+        return updateZone((PlayerZone) event.card.getGame().getZoneOf(event.card));
     }
 
     @Override
     public Void visit(GameEventCardDamaged event) {
-        PlayerZone z = (PlayerZone) event.damaged.getGame().getZoneOf(event.damaged);
-        return updateZone(z);
+        // TODO Smart partial updates
+        return updateZone((PlayerZone) event.damaged.getGame().getZoneOf(event.damaged));
     }
-
 
     @Override
     public Void visit(GameEventCardCounters event) {
-        PlayerZone z = (PlayerZone) event.target.getGame().getZoneOf(event.target);
-        return updateZone(z);
+        // TODO Smart partial updates
+        return updateZone((PlayerZone) event.target.getGame().getZoneOf(event.target));
     }
 
     private Void updateZone(PlayerZone z) {

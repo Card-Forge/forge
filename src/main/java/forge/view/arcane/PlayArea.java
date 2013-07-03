@@ -499,11 +499,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      */
     public void setupPlayZone() {
         FThreads.assertExecutedByEdt(true);
-        setupPlayZone(model);
+        recalculateCardPanels(model);
     }
     
     
-    public void setupPlayZone(final List<Card> model) {
+    private void recalculateCardPanels(final List<Card> model) {
         List<Card> oldCards, toDelete;
         oldCards = new ArrayList<Card>();
         for (final CardPanel cpa : getCardPanels()) {

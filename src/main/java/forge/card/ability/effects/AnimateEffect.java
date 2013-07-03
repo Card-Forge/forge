@@ -18,9 +18,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
-import forge.game.event.GameEvent;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.IGameEventVisitor;
 
 public class AnimateEffect extends AnimateEffectBase {
 
