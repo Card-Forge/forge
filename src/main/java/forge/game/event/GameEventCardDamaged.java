@@ -11,13 +11,13 @@ public class GameEventCardDamaged extends GameEvent {
         LoyaltyLoss;
     }
 
-    public final Card damaged;
+    public final Card card;
     public final Card source;
     public final int amount;
     public final DamageType type;
 
     public GameEventCardDamaged(Card card, Card src, int damageToAdd, DamageType damageType) {
-        damaged = card;
+        this.card = card;
         source = src;
         amount = damageToAdd;
         type = damageType;

@@ -341,6 +341,8 @@ public enum CMatchUI {
     public void updateCards(List<Card> cardsToUpdate) {
         for(Card c : cardsToUpdate) {
             Zone zone = c.getGame().getZoneOf(c);
+            if ( null == zone )
+                continue;
             ZoneType zt = zone.getZoneType();
             Player p = zone.getPlayer();
             

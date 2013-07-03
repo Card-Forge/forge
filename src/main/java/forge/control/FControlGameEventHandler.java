@@ -258,7 +258,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventCardDamaged event) {
-        return updateSingleCard(event.damaged);
+        return updateSingleCard(event.card);
     }
 
     @Override

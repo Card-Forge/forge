@@ -141,7 +141,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         if( event.type == DamageType.M1M1Counters ) additionalLog = "(As -1/-1 Counters)";
         if( event.type == DamageType.LoyaltyLoss ) additionalLog = "(Removing " + Lang.nounWithAmount(event.amount, "loyalty counter") + ")";
         
-        String message = String.format("%s deals %d damage %s to %s.", event.source, event.amount, additionalLog, event.damaged);
+        String message = String.format("%s deals %d damage %s to %s.", event.source, event.amount, additionalLog, event.card);
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
