@@ -18,6 +18,7 @@
 package forge.game.zone;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -25,9 +26,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Card;
+import forge.game.Game;
+import forge.game.event.EventValueChangeType;
+import forge.game.event.GameEventZone;
 import forge.game.player.Player;
+import forge.util.maps.CollectionSuppliers;
+import forge.util.maps.EnumMapOfLists;
+import forge.util.maps.MapOfLists;
 
 /**
  * <p>
@@ -42,108 +50,63 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
     private static final long serialVersionUID = -5687652485777639176L;
 
     /** The cards. */
-    protected final transient List<Card> cardList = new CopyOnWriteArrayList<Card>();
+    private final transient List<Card> cardList = new CopyOnWriteArrayList<Card>();
     protected final transient List<Card> roCardList;
     protected final ZoneType zoneType;
+    protected final Game game;
 
-    protected final transient List<Card> cardsAddedThisTurn = new ArrayList<Card>();
-    protected final ArrayList<ZoneType> cardsAddedThisTurnSource = new ArrayList<ZoneType>();
+    protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
 
 
-
-    /**
-     * <p>
-     * Constructor for DefaultPlayerZone.
-     * </p>
-     * 
-     * @param zone
-     *            a {@link java.lang.String} object.
-     * @param inPlayer
-     *            a {@link forge.game.player.Player} object.
-     */
-    public Zone(final ZoneType zone) {
+    public Zone(final ZoneType zone, Game game) {
         this.zoneType = zone;
+        this.game = game;
         this.roCardList = Collections.unmodifiableList(cardList);
         
         //System.out.println(zoneName + " (ct) " + Integer.toHexString(System.identityHashCode(roCardList)));
     }
 
     @Override
-    public void add(final Object o, boolean update) {
-        final Card c = (Card) o;
-
-        // Immutable cards are usually emblems,effects and the mana pool and we
-        // don't want to log those.
-        if (!c.isImmutable()) {
-            this.cardsAddedThisTurn.add(c);
-            final Zone zone = c.getGame().getZoneOf(c);
-            if (zone != null) {
-                this.cardsAddedThisTurnSource.add(zone.getZoneType());
-            } else {
-                this.cardsAddedThisTurnSource.add(null);
-            }
-        }
-
-        c.setTurnInZone(c.getGame().getPhaseHandler().getTurn());
-        c.setTapped(false);
-
-        this.cardList.add(c);
+    public Player getPlayer() { // generic zones like stack have no player associated
+        return null;
     }
-
-
-    /**
-     * Adds the.
-     * 
-     * @param o
-     *            a {@link java.lang.Object} object.
-     */
+    
     @Override
-    public void add(final Object o) {
-        this.add(o, true);
+    public void add(final Card c) {
+        logCardAdded(c);
+        updateCardState(c);
+        this.cardList.add(c);
+        game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
     }
 
-    /**
-     * Adds the.
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param index
-     *            a int.
-     */
+
     @Override
     public final void add(final Card c, final int index) {
-        // Immutable cards are usually emblems,effects and the mana pool and we
-        // don't want to log those.
-        if (!c.isImmutable()) {
-            this.cardsAddedThisTurn.add(c);
-            final Zone zone = c.getGame().getZoneOf(c);
-            if (zone != null) {
-                this.cardsAddedThisTurnSource.add(zone.getZoneType());
-            } else {
-                this.cardsAddedThisTurnSource.add(null);
-            }
-        }
-
-        if (!this.is(ZoneType.Battlefield)) {
-            c.setTapped(false);
-        }
-
+        logCardAdded(c);
+        updateCardState(c);
         this.cardList.add(index, c);
-        c.setTurnInZone(c.getGame().getPhaseHandler().getTurn());
+        game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.IPlayerZone#contains(forge.Card)
-     */
-    /**
-     * Contains.
-     * 
-     * @param c
-     *            Card
-     * @return boolean
-     */
+    // Sets turn in zone... why not to add current zone reference into the card itself?
+    private void updateCardState(final Card c) {
+        c.setTurnInZone(game.getPhaseHandler().getTurn());
+        if (zoneType != ZoneType.Battlefield) {
+            c.setTapped(false);
+        }
+    }
+
+    private void logCardAdded(final Card c) {
+        // Immutable cards are usually emblems,effects and the mana pool and we
+        // don't want to log those.
+        if (c.isImmutable()) return;
+    
+        final Zone oldZone = game.getZoneOf(c);
+        // if any tokens come to battlefield, consider they are from stack. Plain "null" cannot be a key of EnumMap
+        final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType(); 
+        cardsAddedThisTurn.add(zt, c);
+    }
+
     @Override
     public final boolean contains(final Card c) {
         return this.cardList.contains(c);
@@ -153,120 +116,54 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
         return Iterables.any(this.cardList, condition);
     }
 
-    public final int getPosition(final Card c) {
-        return this.cardList.indexOf(c);
-    }
-
-    /**
-     * Removes the.
-     * 
-     * @param c
-     *            an Object
-     */
     @Override
     public void remove(final Card c) {
         this.cardList.remove(c);
+        game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Removed, c));
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>cards</code>.
-     * </p>
-     * 
-     * @param c
-     *            an array of {@link forge.Card} objects.
-     */
     @Override
     public final void setCards(final Iterable<Card> cards) {
         cardList.clear();
         for (Card c : cards) {
             cardList.add(c);
         }
+        game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.ComplexUpdate, null));
+        
     }
 
-    // ************ END - these methods fire updateObservers() *************
-
-    /**
-     * Checks if is.
-     * 
-     * @param zone
-     *            a {@link java.lang.String} object.
-     * @return a boolean
-     */
     @Override
     public final boolean is(final ZoneType zone) {
         return zone == this.zoneType;
     }
 
     // PlayerZone should override it with a correct implementation
-    public boolean is(final ZoneType zone, final Player player) {
-        return false;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.IPlayerZone#is(java.util.List)
-     */
     @Override
-    public final boolean is(final List<ZoneType> zones) {
-        return zones.contains(this.zoneType);
+    public final boolean is(final ZoneType zone, final Player player) {
+        return zoneType == zone && player == getPlayer();
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>zoneName</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     public final ZoneType getZoneType() {
         return this.zoneType;
     }
 
-    /**
-     * <p>
-     * size.
-     * </p>
-     * 
-     * @return a int.
-     */
     @Override
     public final int size() {
         return this.cardList.size();
     }
 
-    /**
-     * Gets the.
-     * 
-     * @param index
-     *            a int.
-     * @return a int
-     */
     @Override
     public final Card get(final int index) {
         return this.cardList.get(index);
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>cards</code>.
-     * </p>
-     * 
-     * @return an array of {@link forge.Card} objects.
-     */
     @Override
     public final List<Card> getCards() {
         //System.out.println(zoneName + ": " + Integer.toHexString(System.identityHashCode(roCardList)));
         return this.getCards(true);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.IPlayerZone#getCards(boolean)
-     */
     @Override
     public List<Card> getCards(final boolean filter) {
         // Non-Battlefield PlayerZones don't care about the filter
@@ -285,18 +182,6 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
 
     /**
      * <p>
-     * toString.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    @Override
-    public String toString() {
-        return this.zoneType.toString();
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>cardsAddedThisTurn</code>.
      * </p>
      * 
@@ -306,13 +191,13 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
      */
     public final List<Card> getCardsAddedThisTurn(final ZoneType origin) {
         //System.out.print("Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
+        if (origin != null)
+            return Lists.newArrayList(cardsAddedThisTurn.get(origin));
+        
+        // all cards if key == null
         final List<Card> ret = new ArrayList<Card>();
-        for (int i = 0; i < this.cardsAddedThisTurn.size(); i++) {
-            if ((this.cardsAddedThisTurnSource.get(i) == origin) || (origin == null)) {
-                ret.add(this.cardsAddedThisTurn.get(i));
-            }
-        }
-        //System.out.println(ret.size());
+        for(Collection<Card> kv : cardsAddedThisTurn.values()) 
+            ret.addAll(kv);
         return ret;
     }
 
@@ -324,7 +209,6 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
     @Override
     public final void resetCardsAddedThisTurn() {
         this.cardsAddedThisTurn.clear();
-        this.cardsAddedThisTurnSource.clear();
     }
 
     /* (non-Javadoc)
@@ -338,6 +222,18 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
     public void shuffle()
     {
         Collections.shuffle(cardList);
+    }
+
+    /**
+     * <p>
+     * toString.
+     * </p>
+     * 
+     * @return a {@link java.lang.String} object.
+     */
+    @Override
+    public String toString() {
+        return this.zoneType.toString();
     }
     
     

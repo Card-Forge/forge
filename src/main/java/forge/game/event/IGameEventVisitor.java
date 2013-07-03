@@ -39,8 +39,9 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventTurnBegan gameEventTurnBegan);
     T visit(GameEventTurnEnded event);
     T visit(GameEventTurnPhase event);
-    
-    
+    T visit(GameEventZone event);
+
+
     // This is base class for all visitors.
     public static class Base<T> implements IGameEventVisitor<T>{
         public T visit(GameEventAnteCardsSelected event) { return null; }
@@ -77,6 +78,7 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventTurnEnded event) { return null; }
         public T visit(GameEventTurnPhase event) { return null; }
         public T visit(GameEventPlayerDamaged event) { return null; }
+        public T visit(GameEventZone event) { return null; }
     }
 
 

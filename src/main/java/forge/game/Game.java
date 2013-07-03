@@ -75,7 +75,7 @@ public class Game {
     private final GameLog gameLog = new GameLog();
     private final ColorChanger colorChanger = new ColorChanger();
 
-    private final Zone stackZone = new Zone(ZoneType.Stack);
+    private final Zone stackZone = new Zone(ZoneType.Stack, this);
 
     private long timestamp = 0;
     public final GameAction action;

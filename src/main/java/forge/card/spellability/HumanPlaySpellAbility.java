@@ -59,7 +59,7 @@ public class HumanPlaySpellAbility {
         final Card c = this.ability.getSourceCard();
         if (this.ability instanceof Spell && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
-            zonePosition = fromZone.getPosition(c);
+            zonePosition = fromZone.getCards().indexOf(c);
             this.ability.setSourceCard(game.getAction().moveToStack(c));
         }
 

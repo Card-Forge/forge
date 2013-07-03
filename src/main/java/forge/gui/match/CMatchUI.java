@@ -26,6 +26,8 @@ import java.util.Set;
 
 import javax.swing.ImageIcon;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.Lists;
 
 import forge.Card;
@@ -37,7 +39,6 @@ import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
@@ -298,19 +299,20 @@ public enum CMatchUI {
         return highlitedCards.contains(card);
     }
 
-    public void updateZones(List<PlayerZone> zonesToUpdate) {
+    public void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate) {
         //System.out.println("updateZones " + zonesToUpdate);
-        for(PlayerZone z : zonesToUpdate) {
-            Player owner = z.getPlayer();
+        for(Pair<Player, ZoneType> kv : zonesToUpdate) {
+            Player owner = kv.getKey();
+            ZoneType zt = kv.getValue();
             
-            if ( z.is(ZoneType.Command) )
+            if ( zt == ZoneType.Command )
                 getCommandFor(owner).getTabletop().setupPlayZone();
-            else if ( z.is(ZoneType.Hand) ) {
+            else if ( zt == ZoneType.Hand ) {
                 VHand vHand = getHandFor(owner); 
                 if (null != vHand)
                     vHand.getLayoutControl().updateHand();
                 getFieldViewFor(owner).getDetailsPanel().updateZones();
-            } else if ( z.is(ZoneType.Battlefield) ) 
+            } else if ( zt == ZoneType.Battlefield ) 
                 getFieldViewFor(owner).getTabletop().setupPlayZone();
             else 
                 getFieldViewFor(owner).getDetailsPanel().updateZones();

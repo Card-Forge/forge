@@ -87,40 +87,15 @@ public class PlayerZone extends Zone {
 
 
 
-    /**
-     * <p>
-     * Constructor for DefaultPlayerZone.
-     * </p>
-     * 
-     * @param zone
-     *            a {@link java.lang.String} object.
-     * @param inPlayer
-     *            a {@link forge.game.player.Player} object.
-     */
     public PlayerZone(final ZoneType zone, final Player inPlayer) {
-        super(zone);
-        if ( inPlayer == null )
-            throw new IllegalArgumentException("Player zone must be initialized with correct player");
+        super(zone, inPlayer.getGame());
         this.player = inPlayer;
     }
 
-    // ************ BEGIN - these methods fire updateObservers() *************
-
     @Override
-    public void add(final Object o, boolean update) {
-        final Card c = (Card) o;
-
-        // Immutable cards are usually emblems and effects - we don't want to log those.
-        if (!c.isImmutable()) {
-            this.cardsAddedThisTurn.add(c);
-            final Zone zone = c.getGame().getZoneOf(c);
-            if (zone != null) {
-                this.cardsAddedThisTurnSource.add(zone.getZoneType());
-            } else {
-                this.cardsAddedThisTurnSource.add(null);
-            }
-        }
-
+    public void add(final Card c) {
+        // WTF IS THIS? Replacement effects in zone.add code!
+        
         if (this.is(ZoneType.Graveyard)
                 && c.hasKeyword("If CARDNAME would be put into a graveyard "
                         + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
@@ -137,26 +112,7 @@ public class PlayerZone extends Zone {
             return;
         }
 
-        c.setTurnInZone(c.getGame().getPhaseHandler().getTurn());
-        this.cardList.add(c);
-        
-        if (!this.is(ZoneType.Battlefield)) {
-            c.setTapped(false);
-        }
-    }
-
-
-    /**
-     * Checks if is.
-     * 
-     * @param zone
-     *            a {@link java.lang.String} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean
-     */
-    public final boolean is(final ZoneType zone, final Player player) {
-        return (zone == this.zoneType && this.player.equals(player));
+        super.add(c);
     }
 
     /**

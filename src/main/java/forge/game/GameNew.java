@@ -57,7 +57,7 @@ public class GameNew {
             for (final IPaperCard cp : cards) {
                 Card c = cp.toForgeCard(player);
                 c.setOwner(player);
-                bf.add(c, false);
+                bf.add(c);
                 c.setSickness(true);
                 c.setStartsGameInPlay(true);
                 c.refreshUniqueNumber();
@@ -71,7 +71,7 @@ public class GameNew {
     
         // Mainly for avatar, but might find something else here
         for (final IPaperCard c : psc.getCardsInCommand(player)) {
-            com.add(c.toForgeCard(player), false);
+            com.add(c.toForgeCard(player));
         }
     
         // Schemes

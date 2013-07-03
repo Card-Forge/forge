@@ -699,9 +699,8 @@ public class CardFactoryUtil {
                 return false;
             }
 
-            // Check if the target is in the zone it needs to be in to be
-            // targeted
-            if (!zone.is(tgt.getZone())) {
+            // Check if the target is in the zone it needs to be in to be targeted
+            if (!tgt.getZone().contains(zone.getZoneType())) {
                 return false;
             }
         } else {

@@ -53,30 +53,18 @@ public class PlayerZoneBattlefield extends PlayerZone {
     private boolean trigger = true;
     private boolean leavesTrigger = true;
 
-    /**
-     * <p>
-     * Constructor for PlayerZoneComesIntoPlay.
-     * </p>
-     * 
-     * @param zone
-     *            a {@link java.lang.String} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     */
     public PlayerZoneBattlefield(final ZoneType zone, final Player player) {
         super(zone, player);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void add(final Object o) {
-        if (o == null) {
+    public final void add(final Card c) {
+        if (c == null) {
             throw new RuntimeException("PlayerZoneComesInto Play : add() object is null");
         }
 
-        super.add(o);
-
-        final Card c = (Card) o;
+        super.add(c);
 
         if (this.trigger) {
             if (c.hasKeyword("Hideaway")) {
@@ -85,7 +73,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 c.setTapped(true);
             } else {
                 // ETBTapped static abilities
-                for (final Card ca : c.getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
+                for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
                     for (final StaticAbility stAb : ca.getStaticAbilities()) {
                         if (stAb.applyAbility("ETBTapped", c)) {
                             // it enters the battlefield this way, and should
@@ -97,25 +85,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
             }
         }
 
-        // cannot use addComesIntoPlayCommand - trigger might be set to false;
-        // Keep track of max lands can play per turn
-        /*int addMax = 0;
-
-        for (String keyword : c.getKeyword()) {
-            if (keyword.startsWith("AdjustLandPlays")) {
-                final String[] k = keyword.split(":");
-                addMax = Integer.valueOf(k[2]);
-                if (k[1].equals("Each")) {
-                    for( Player p : game.getPlayers() ){
-                        p.addMaxLandsToPlay(addMax);
-                    }
-                } else {
-                    c.getController().addMaxLandsToPlay(addMax);
-                }
-            }
-        }*/
-
-        final Game game = c.getGame();
         if (this.trigger) {
             c.setSickness(true); // summoning sickness
             c.executeTrigger(ZCTrigger.ENTERFIELD);
@@ -168,54 +137,9 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
     /** {@inheritDoc} */
     @Override
-    public final void remove(final Card o) {
+    public final void remove(final Card c) {
+        super.remove(c);
 
-        super.remove(o);
-
-        final Card c = (Card) o;
-
-        // Keep track of max lands can play per turn
-        // int addMax = 0;
-
-        /*boolean adjustLandPlays = false;
-        boolean eachPlayer = false;
-
-        if (c.getName().equals("Exploration") || c.getName().equals("Oracle of Mul Daya")) {
-            addMax = -1;
-            adjustLandPlays = true;
-        } else if (c.getName().equals("Azusa, Lost but Seeking")) {
-            addMax = -2;
-            adjustLandPlays = true;
-        } else if (c.getName().equals("Storm Cauldron") || c.getName().equals("Rites of Flourishing")) {
-            adjustLandPlays = true;
-            eachPlayer = true;
-            addMax = -1;
-        }
-
-        if (adjustLandPlays) {
-            if (eachPlayer) {
-                AllZone.getHumanPlayer().addMaxLandsToPlay(addMax);
-                AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
-            } else {
-                c.getController().addMaxLandsToPlay(addMax);
-            }
-        }*/
-
-        /*for (String keyword : c.getKeyword()) {
-            if (keyword.startsWith("AdjustLandPlays")) {
-                final String[] k = keyword.split(":");
-                addMax = -Integer.valueOf(k[2]);
-                if (k[1].equals("Each")) {
-                    for(Player p: game.getPlayers())
-                        p.addMaxLandsToPlay(addMax);
-                } else {
-                    c.getController().addMaxLandsToPlay(addMax);
-                }
-            }
-        }*/
-
-        final Game game = c.getGame();
-        
         if (this.leavesTrigger) {
             c.executeTrigger(ZCTrigger.LEAVEFIELD);
         }
@@ -233,14 +157,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
         }
     }
 
-    /**
-     * <p>
-     * setTriggers.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
+
     public final void setTriggers(final boolean b) {
         this.trigger = b;
         this.leavesTrigger = b;
@@ -251,14 +168,9 @@ public class PlayerZoneBattlefield extends PlayerZone {
         public boolean apply(Card crd) {
             return !crd.isPhasedOut();
         }
-
     };
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.DefaultPlayerZone#getCards(boolean)
-     */
+
     @Override
     public final List<Card> getCards(final boolean filter) {
         // Battlefield filters out Phased Out cards by default. Needs to call
@@ -267,7 +179,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
         if (!filter) {
             return super.getCards(false);
         }
-        return Lists.newArrayList(Iterables.filter(cardList, isNotPhased));
+        return Lists.newArrayList(Iterables.filter(roCardList, isNotPhased));
 
     }
 }

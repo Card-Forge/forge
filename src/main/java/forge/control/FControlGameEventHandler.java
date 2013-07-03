@@ -14,7 +14,6 @@ import forge.game.Game;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventCardAttachment;
-import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardCounters;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardStatsChanged;
@@ -31,12 +30,14 @@ import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnPhase;
+import forge.game.event.GameEventZone;
 import forge.game.event.IGameEventVisitor;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.match.CMatchUI;
@@ -190,7 +191,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     
 
 
-    private final List<PlayerZone> zonesToUpdate = new Vector<PlayerZone>();
+    private final List<Pair<Player, ZoneType>> zonesToUpdate = new Vector<Pair<Player, ZoneType>>();
     private final Runnable updZones = new Runnable() { 
         @Override public void run() { 
             synchronized (zonesToUpdate) {
@@ -201,24 +202,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     };
     
     @Override
-    public Void visit(GameEventCardChangeZone event) {
-        updateTwoZones(event.from, event.to);
+    public Void visit(GameEventZone event) {
+        if ( event.player != null ) {
+            // anything except stack will get here
+            updateZone(Pair.of(event.player, event.zoneType));
+        } 
         return null;
-    }
-
-    private void updateTwoZones(Zone z1, Zone z2) {
-        boolean needUpdate = false;
-        synchronized (zonesToUpdate) {
-            needUpdate = zonesToUpdate.isEmpty();
-            if ( z1 instanceof PlayerZone && !zonesToUpdate.contains(z1) ) {
-                zonesToUpdate.add((PlayerZone)z1);
-            }
-            if ( z2 instanceof PlayerZone && !zonesToUpdate.contains(z2) ) {
-                zonesToUpdate.add((PlayerZone)z2);
-            }
-        }
-        if( needUpdate )
-            FThreads.invokeInEdtNowOrLater(updZones);
     }
     
     @Override
@@ -228,7 +217,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
         Zone z1 = event.oldEntiy instanceof Card ? game.getZoneOf((Card)event.oldEntiy) : null;
         Zone z2 = event.newTarget instanceof Card ? game.getZoneOf((Card)event.newTarget) : null;
-        updateTwoZones(z1, z2);
+        if ( z1 instanceof PlayerZone ) updateZone((PlayerZone) z1);
+        if ( z2 instanceof PlayerZone ) updateZone((PlayerZone) z2);
         return updateZone(zEq);
     }
 
@@ -251,11 +241,15 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     private Void updateZone(PlayerZone z) {
+        return updateZone(Pair.of(z.getPlayer(), z.getZoneType()));
+    }
+
+    private Void updateZone(Pair<Player, ZoneType> kv) {
         boolean needUpdate = false;
         synchronized (zonesToUpdate) {
             needUpdate = zonesToUpdate.isEmpty();
-            if ( !zonesToUpdate.contains(z) ) {
-                zonesToUpdate.add(z);
+            if ( !zonesToUpdate.contains(kv) ) {
+                zonesToUpdate.add(kv);
             }
         }
         if( needUpdate )

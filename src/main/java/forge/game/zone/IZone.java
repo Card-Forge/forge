@@ -22,6 +22,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.Card;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -33,146 +34,26 @@ import forge.Card;
  */
 interface IZone {
 
-    /**
-     * <p>
-     * size.
-     * </p>
-     * 
-     * @return a int.
-     */
     int size();
-
-    /**
-     * <p>
-     * add.
-     * </p>
-     * 
-     * @param o
-     *            a {@link java.lang.Object} object.
-     */
-    void add(Object o);
-
-    void add(Object o, boolean b);
-
-    /**
-     * <p>
-     * add.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param index
-     *            a int.
-     */
-    void add(Card c, int index);
-
-    /**
-     * <p>
-     * get.
-     * </p>
-     * 
-     * @param index
-     *            a int.
-     * @return a {@link forge.Card} object.
-     */
-    Card get(int index);
-
-    /**
-     * <p>
-     * remove.
-     * </p>
-     * 
-     * @param o
-     *            a {@link java.lang.Object} object.
-     */
-    void remove(Card o);
-
-    /**
-     * <p>
-     * setCards.
-     * </p>
-     * 
-     * @param c
-     *            an array of {@link forge.Card} objects.
-     */
-    void setCards(Iterable<Card> c);
-
-    /**
-     * <p>
-     * getCards.
-     * </p>
-     * 
-     * @param filter
-     *            the filter
-     * @return an array of {@link forge.Card} objects.
-     */
-    List<Card> getCards(boolean filter);
-
-    /**
-     * Gets the cards.
-     * 
-     * @return the cards
-     */
-    List<Card> getCards();
-
-    /**
-     * Contains.
-     * 
-     * @param c
-     *            the c
-     * @return true, if successful
-     */
-    boolean contains(Card c);
-    boolean contains(final Predicate<Card> condition);
-    /**
-     * isEmpty returns true if given zone contains no cards.
-     * 
-     * @return true, if is empty
-     */
     boolean isEmpty();
 
+    boolean contains(Card c);
+    boolean contains(final Predicate<Card> condition);
 
-    /**
-     * <p>
-     * is.
-     * </p>
-     * 
-     * @param zone
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
+    void add(Card o);
+    void add(Card c, int index);
+    void remove(Card o);
+    void setCards(Iterable<Card> c);
+
+    Card get(int index);
+    List<Card> getCards(boolean filter);
+    List<Card> getCards();
+
+    ZoneType getZoneType();
+    Player getPlayer();
     boolean is(ZoneType zone);
+    boolean is(ZoneType zone, Player player);
+    
 
-    /**
-     * Checks if is.
-     * 
-     * @param zones
-     *            the zones
-     * @return true, if successful
-     */
-    boolean is(List<ZoneType> zones);
-
-    /**
-     * <p>
-     * getZoneName.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    ZoneType getZoneType(); // returns the Zone's name like Graveyard
-
-    /**
-     * <p>
-     * toString.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    @Override
-    String toString();
-
-    /**
-     * Reset cards added this turn.
-     */
     void resetCardsAddedThisTurn();
 }
