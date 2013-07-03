@@ -137,6 +137,10 @@ Windreader Sphinx
 Woodborn Behemoth
 Young Pyromancer
 
+Minotaur Abomination
+Staff of the Sun Magus
+Trained Condor
+
 
 ------------
 Known Issues
