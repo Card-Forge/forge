@@ -1,6 +1,8 @@
 package forge.gui.toolbox.special;
 
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -12,9 +14,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -95,12 +94,11 @@ public class FDeckChooser extends JPanel {
     }
 
     private void _listen(final JRadioButton btn, final Runnable onSelect) {
-        btn.addChangeListener(new ChangeListener() {
+        btn.addItemListener(new ItemListener() {
             @Override
-            public void stateChanged(ChangeEvent arg0) {
+            public void itemStateChanged(ItemEvent e) {
                 if (btn.isSelected()) { onSelect.run(); }
-            }
-        });
+        }});
     }
     
     public void initialize() {
