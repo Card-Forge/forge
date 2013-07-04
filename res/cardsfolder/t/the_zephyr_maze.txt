@@ -7,4 +7,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_zephyr_maze.jpg
 SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieMinTurn:3
 Oracle:Creatures with flying get +2/+0.\nCreatures without flying get -2/-0.\nWhenever you roll {C}, target creature gains flying until end of turn.

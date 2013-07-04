@@ -9,4 +9,5 @@ SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | De
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodhill_bastion.jpg
 SVar:AIRollPlanarDie:Always
 SVar:AIRollPlanarDieInMain1:True
+SVar:AIRollPlanarDieMinTurn:3
 Oracle:Whenever a creature enters the battlefield, it gains double strike and haste until end of turn.\nWhenever you roll {C}, exile target nontoken creature you control, then return it to the battlefield under your control.

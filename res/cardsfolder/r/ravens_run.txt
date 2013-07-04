@@ -8,5 +8,6 @@ SVar:RolledChaos2:DB$ PutCounter | ValidTgts$ Creature.IsNotRemembered | Counter
 SVar:RolledChaos3:DB$ PutCounter | ValidTgts$ Creature.IsNotRemembered | CounterType$ M1M1 | CounterNum$ 3 | SubAbility$ RolledChaosCleanup
 SVar:RolledChaosCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.cardforge.org/fpics/lq_planes_promos/ravens_run.jpg
-SVar:AIRollPlanarDie:Random
+SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieMinTurn:5
 Oracle:All creatures have wither. (They deal damage to creatures in the form of -1/-1 counters.)\nWhenever you roll {C}, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.

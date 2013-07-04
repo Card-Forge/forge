@@ -7,4 +7,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | KW$ HIDDEN Unblockable
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_colony.jpg
 SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieMinTurn:3
 Oracle:Whenever a creature you control deals combat damage to a player, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.\nWhenever you roll {C}, target creature is unblockable this turn.

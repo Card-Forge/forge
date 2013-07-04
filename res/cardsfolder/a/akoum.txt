@@ -6,4 +6,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature.unenchanted | TgtPrompt$ Select target creature that isn't enchanted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum.jpg
 SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieMinTurn:3
 Oracle:Players may cast enchantment cards as though they had flash.\nWhenever you roll {C}, destroy target creature that isn't enchanted.
