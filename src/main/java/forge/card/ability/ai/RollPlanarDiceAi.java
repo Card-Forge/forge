@@ -23,6 +23,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         boolean decideToRoll = false;
         int maxActivations = aic.getIntProperty(AiProps.DEFAULT_MAX_PLANAR_DIE_ROLLS_PER_TURN);
         int chance = aic.getIntProperty(AiProps.DEFAULT_PLANAR_DIE_ROLL_CHANCE);
+        int hesitationChance = aic.getIntProperty(AiProps.PLANAR_DIE_ROLL_HESITATION_CHANCE);
         
         if (!plane.hasSVar("AIRollPlanarDieInMain1") && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
             return false;
@@ -39,7 +40,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                     if (plane.hasSVar("AIRollPlanarDieChance")) {
                         chance = Integer.parseInt(plane.getSVar("AIRollPlanarDieChance"));
                     }
-                    if (MyRandom.getRandom().nextInt(100) >= chance) {
+                    if (MyRandom.getRandom().nextInt(100) < chance) {
                         decideToRoll = true;
                     }
                     break;
@@ -56,6 +57,11 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
             decideToRoll = false;
         }
         
+        // check if the AI hesitates
+        if (MyRandom.getRandom().nextInt(100) < hesitationChance) {
+            decideToRoll = false; // hesitate
+        }
+
         return decideToRoll ? true : false;
     }
 
