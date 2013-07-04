@@ -410,8 +410,8 @@ public class CardDetailPanel extends FPanel {
         // top revealed
         if ((card.hasKeyword("Play with the top card of your library revealed.") || card
                 .hasKeyword("Players play with the top card of their libraries revealed."))
-                && (card.getController() != null)
-                && (card.isInZone(ZoneType.Battlefield) || ((card.isType("Vanguard") || card.isType("Plane")) && card.isInZone(ZoneType.Command)))
+                && card.getController() != null
+                && (card.isInZone(ZoneType.Battlefield) || card.isInZone(ZoneType.Command))
                 && !card.getController().getZone(ZoneType.Library).isEmpty()) {
             area.append("\r\nTop card of your library: ");
             area.append(card.getController().getCardsIn(ZoneType.Library, 1));
@@ -450,6 +450,14 @@ public class CardDetailPanel extends FPanel {
             area.append(")");
         }
 
+        // chosen player
+        if (card.getChosenPlayer() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("(chosen player: " + card.getChosenPlayer() + ")");
+        }
+
         // named card
         if (!card.getNamedCard().equals("")) {
             if (area.length() != 0) {
@@ -461,7 +469,7 @@ public class CardDetailPanel extends FPanel {
         }
 
         // equipping
-        if (card.getEquipping().size() > 0) {
+        if (!card.getEquipping().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -471,7 +479,7 @@ public class CardDetailPanel extends FPanel {
         }
 
         // equipped by
-        if (card.getEquippedBy().size() > 0) {
+        if (!card.getEquippedBy().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -509,7 +517,7 @@ public class CardDetailPanel extends FPanel {
         }
 
         // enchanted by
-        if (card.getEnchantedBy().size() > 0) {
+        if (!card.getEnchantedBy().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
@@ -553,14 +561,33 @@ public class CardDetailPanel extends FPanel {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("^Imprinting: ");
+            area.append("Imprinting: ");
             for (final Iterator<Card> it = card.getImprinted().iterator(); it.hasNext();) {
                 area.append(it.next());
                 if (it.hasNext()) {
                     area.append(", ");
                 }
             }
-            area.append("^");
+        }
+
+        // Haunt
+        if (!card.getHauntedBy().isEmpty()) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Haunted by: ");
+            for (final Iterator<Card> it = card.getHauntedBy().iterator(); it.hasNext();) {
+                area.append(it.next());
+                if (it.hasNext()) {
+                    area.append(", ");
+                }
+            }
+        }
+        if (card.getHaunting() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Haunting " + card.getHaunting());
         }
 
         // must block
