@@ -117,6 +117,7 @@ public class GameNew {
 
     private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil, Random generator) {
         PlayerZone library = player.getZone(zoneType);
+        List<Card> newLibrary = new ArrayList<Card>();
         for (final Entry<PaperCard, Integer> stackOfCards : section) {
             final PaperCard cp = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
@@ -149,10 +150,10 @@ public class GameNew {
 
                     card.setFoil(iFoil);
                 }
-
-                library.add(card);
+                newLibrary.add(card);
             }
         }
+        library.setCards(newLibrary);
     }
 
     // this is where the computer cheats
