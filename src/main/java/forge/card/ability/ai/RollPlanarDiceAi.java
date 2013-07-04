@@ -47,7 +47,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         if (plane.hasSVar("AIHintRollDieMaxPerTurn")) {
             maxActivations = Integer.parseInt(plane.getSVar("AIHintRollDieMaxPerTurn"));
         }
-        if (sa.getActivationsThisTurn() >= maxActivations) {
+        if (ai.getGame().getPhaseHandler().getPlanarDiceRolledthisTurn() >= maxActivations) {
             decideToRoll = false;
         }
         
