@@ -85,6 +85,7 @@ import forge.card.ability.ai.RepeatEachAi;
 import forge.card.ability.ai.RestartGameAi;
 import forge.card.ability.ai.RevealAi;
 import forge.card.ability.ai.RevealHandAi;
+import forge.card.ability.ai.RollPlanarDiceAi;
 import forge.card.ability.ai.SacrificeAi;
 import forge.card.ability.ai.SacrificeAllAi;
 import forge.card.ability.ai.ScryAi;
@@ -198,7 +199,7 @@ public enum ApiType {
     RestartGame (RestartGameEffect.class, RestartGameAi.class),
     Reveal (RevealEffect.class, RevealAi.class),
     RevealHand (RevealHandEffect.class, RevealHandAi.class),
-    RollPlanarDice (RollPlanarDiceEffect.class, CannotPlayAi.class),
+    RollPlanarDice (RollPlanarDiceEffect.class, RollPlanarDiceAi.class),
     Sacrifice (SacrificeEffect.class, SacrificeAi.class),
     SacrificeAll (SacrificeAllEffect.class, SacrificeAllAi.class),
     Scry (ScryEffect.class, ScryAi.class),

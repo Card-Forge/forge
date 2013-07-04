@@ -14169,6 +14169,7 @@ src/main/java/forge/card/ability/ai/RestartGameAi.java -text
 src/main/java/forge/card/ability/ai/RevealAi.java -text
 src/main/java/forge/card/ability/ai/RevealAiBase.java -text
 src/main/java/forge/card/ability/ai/RevealHandAi.java -text
+src/main/java/forge/card/ability/ai/RollPlanarDiceAi.java -text
 src/main/java/forge/card/ability/ai/SacrificeAi.java -text
 src/main/java/forge/card/ability/ai/SacrificeAllAi.java -text
 src/main/java/forge/card/ability/ai/ScryAi.java -text
