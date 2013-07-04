@@ -6,4 +6,5 @@ SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Permanent.nonLand | Vali
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | OptionalDecider$ You | TriggerDescription$ Whenever you roll Chaos, you may have your life total become 20.
 SVar:RolledChaos:AB$ SetLife | Cost$ 0 | Defined$ You | LifeAmount$ 20
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_of_serra.jpg
+SVar:AIRollPlanarDie:Always
 Oracle:When you planeswalk away from Sanctum of Serra, destroy all nonland permanents.\nWhenever you roll {C}, you may have your life total become 20.

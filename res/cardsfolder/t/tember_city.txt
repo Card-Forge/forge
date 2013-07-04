@@ -6,4 +6,5 @@ SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDm
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, each other player sacrifices a nonland permanent.
 SVar:RolledChaos:AB$ Sacrifice | Cost$ 0 | Defined$ Player.Other | SacValid$ Permanent.nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tember_city.jpg
+SVar:AIRollPlanarDie:Always
 Oracle:Whenever a player taps a land for mana, Tember City deals 1 damage to that player.\nWhenever you roll {C}, each other player sacrifices a nonland permanent.

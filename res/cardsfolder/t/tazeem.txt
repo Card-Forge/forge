@@ -6,4 +6,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ Draw | Cost$ 0 | NumCards$ Y | Defined$ You
 SVar:Y:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tazeem.jpg
+SVar:AIRollPlanarDie:Always
 Oracle:Creatures can't block.\nWhenever you roll {C}, draw a card for each land you control.

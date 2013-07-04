@@ -6,4 +6,5 @@ SVar:FourthSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature.nonBl
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, put a 2/2 black zombie token onto the battlefield.
 SVar:RolledChaos:AB$Token | Cost$ 0 | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_fourth_sphere.jpg
+SVar:AIRollPlanarDie:Always
 Oracle:At the beginning of your upkeep, sacrifice a nonblack creature.\nWhenever you roll {C}, put a 2/2 black Zombie creature token onto the battlefield.

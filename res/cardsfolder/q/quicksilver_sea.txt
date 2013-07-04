@@ -9,4 +9,5 @@ SVar:RolledChaos:AB$ PeekAndReveal | Cost$ 0 | RememberRevealed$ True | SubAbili
 SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_sea.jpg
+SVar:AIRollPlanarDie:Always
 Oracle:When you planeswalk to Quicksilver Sea or at the beginning of your upkeep, scry 4. (To scry 4, look at the top four cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\nWhenever you roll {C}, reveal the top card of your library. You may play it without paying its mana cost.

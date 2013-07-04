@@ -6,4 +6,5 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.withoutFlying | Ad
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, target creature gains flying until end of turn.
 SVar:RolledChaos:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_zephyr_maze.jpg
+SVar:AIRollPlanarDie:Always
 Oracle:Creatures with flying get +2/+0.\nCreatures without flying get -2/-0.\nWhenever you roll {C}, target creature gains flying until end of turn.

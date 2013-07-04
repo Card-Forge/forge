@@ -5,4 +5,5 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent | AddHiddenKeywor
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ DBFetch | TriggerDescription$ Whenever you roll Chaos, you may search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.
 SVar:DBFetch:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 3
 SVar:Picture:http://www.cardforge.org/fpics/lq_planes_promos/horizon_boughs.jpg
+SVar:AIRollPlanarDie:Always
 Oracle:All permanents untap during each player's untap step.\nWhenever you roll {C}, you may search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.

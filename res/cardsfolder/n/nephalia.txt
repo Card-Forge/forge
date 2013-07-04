@@ -8,4 +8,5 @@ SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ 
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, return target card from your graveyard to your hand.
 SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouOwn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nephalia.jpg
+SVar:AIRollPlanarDie:Always
 Oracle:At the beginning of your end step, put the top seven cards of your library into your graveyard. Then return a card at random from your graveyard to your hand.\nWhenever you roll {C}, return target card from your graveyard to your hand.

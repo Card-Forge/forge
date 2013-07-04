@@ -6,4 +6,5 @@ T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Comman
 SVar:RolledChaos:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature | ConditionCheckSVar$ TgtPow | ConditionCompareSVar$ EQ1 | AITgts$ Creature.OpponentCtrl+powerLE0
 SVar:TgtPow:Targeted$Valid Creature.powerLE0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_hippodrome.jpg
+SVar:AIRollPlanarDie:Always
 Oracle:All creatures get -5/-0.\nWhenever you roll {C}, you may destroy target creature if its power is 0 or less.
