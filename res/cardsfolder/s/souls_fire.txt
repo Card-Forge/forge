@@ -2,8 +2,8 @@ Name:Soul's Fire
 ManaCost:2 R
 Types:Instant
 A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | SpellDescription$ Target creature you control on the battlefield deals damage equal to its power to target creature or player.
-SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | DamageSource$ Targeted
-SVar:X:Targeted$CardPower
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | DamageSource$ Targeted
+SVar:X:ParentTargeted$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_fire.jpg
 Oracle:Target creature you control on the battlefield deals damage equal to its power to target creature or player.

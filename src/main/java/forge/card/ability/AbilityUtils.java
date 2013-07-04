@@ -534,6 +534,11 @@ public class AbilityUtils {
             list = ability.getRootAbility().getPaidList("Revealed");
         } else if (calcX[0].startsWith("Targeted")) {
             list = ability.findTargetedCards();
+        } else if (calcX[0].startsWith("ParentTargeted")) {
+            SpellAbility parent = ability.getParentTargetingCard();
+            if (null != parent) {
+                list = parent.findTargetedCards();
+            }
         } else if (calcX[0].startsWith("Triggered")) {
             final SpellAbility root = ability.getRootAbility();
             list = new ArrayList<Card>();
