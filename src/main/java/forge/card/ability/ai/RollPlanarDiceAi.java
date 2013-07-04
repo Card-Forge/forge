@@ -4,6 +4,7 @@ package forge.card.ability.ai;
 import forge.Card;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -12,10 +13,17 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         Card plane = sa.getSourceCard();
         boolean decideToRoll = false;
+        int maxActivations = 1;
         
+        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !plane.hasSVar("AIHintRollDieInMain1")) {
+            return false;
+        } else if (plane.hasSVar("AIHintRollDieInMain1") && (plane.getSVar("AIHintRollDieInMain1").toLowerCase().equals("false"))) {
+            return false;
+        }
+
         if (plane.hasSVar("AIHintRollDie")) {
             switch (plane.getSVar("AIHintRollDie")) {
                 case "Always":
@@ -37,11 +45,13 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         }
 
         if (plane.hasSVar("AIHintRollDieMaxPerTurn")) {
-            if (sa.getActivationsThisTurn() > Integer.parseInt(plane.getSVar("AIHintRollDieMaxPerTurn"))) {
-                decideToRoll = false;
-            }
+            maxActivations = Integer.parseInt(plane.getSVar("AIHintRollDieMaxPerTurn"));
         }
-
+        System.out.println("Activations so far: " + sa.getActivationsThisTurn());
+        if (sa.getActivationsThisTurn() >= maxActivations) {
+            decideToRoll = false;
+        }
+        
         return decideToRoll ? true : false;
     }
 
