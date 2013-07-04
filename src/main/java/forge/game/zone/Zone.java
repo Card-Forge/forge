@@ -190,16 +190,14 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
      * @return a {@link forge.CardList} object.
      */
     public final List<Card> getCardsAddedThisTurn(final ZoneType origin) {
-        final List<Card> ret = new ArrayList<Card>();
         //System.out.print("Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
         if (origin != null) {
-            if (!cardsAddedThisTurn.containsKey(origin)) {
-                return ret;
-            }
-            return Lists.newArrayList(cardsAddedThisTurn.get(origin));
+            Collection<Card> cards = cardsAddedThisTurn.get(origin);
+            return cards == null ? Lists.<Card>newArrayList() : Lists.newArrayList(cards);
         }
         
         // all cards if key == null
+        final List<Card> ret = new ArrayList<Card>();
         for(Collection<Card> kv : cardsAddedThisTurn.values()) 
             ret.addAll(kv);
         return ret;
