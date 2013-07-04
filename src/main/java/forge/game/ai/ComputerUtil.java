@@ -1428,7 +1428,7 @@ public class ComputerUtil {
         final List<Card> handList = ai.getCardsIn(ZoneType.Hand);
         final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        return (handList.size() > aic.getIntProperty(AiProps.AI_MULLIGAN_THRESHOLD)) && hasLittleCmc0Cards;
+        return (handList.size() > aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) && hasLittleCmc0Cards;
 
     }
     

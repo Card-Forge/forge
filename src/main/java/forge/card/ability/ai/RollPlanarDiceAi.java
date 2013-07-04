@@ -4,8 +4,11 @@ package forge.card.ability.ai;
 import forge.Card;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.AiController;
+import forge.game.ai.AiProps;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerControllerAi;
 import forge.util.MyRandom;
 
 public class RollPlanarDiceAi extends SpellAbilityAi {
@@ -14,25 +17,27 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         Card plane = sa.getSourceCard();
+
         boolean decideToRoll = false;
-        int maxActivations = 1;
-        int chance = 50;
+        int maxActivations = aic.getIntProperty(AiProps.DEFAULT_MAX_PLANAR_DIE_ROLLS_PER_TURN);
+        int chance = aic.getIntProperty(AiProps.DEFAULT_PLANAR_DIE_ROLL_CHANCE);
         
-        if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !plane.hasSVar("AIHintRollDieInMain1")) {
+        if (!plane.hasSVar("AIRollPlanarDieInMain1") && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
             return false;
-        } else if (plane.hasSVar("AIHintRollDieInMain1") && (plane.getSVar("AIHintRollDieInMain1").toLowerCase().equals("false"))) {
+        } else if (plane.hasSVar("AIRollPlanarDieInMain1") && plane.getSVar("AIRollPlanarDieInMain1").toLowerCase().equals("false")) {
             return false;
         }
 
-        if (plane.hasSVar("AIHintRollDie")) {
-            switch (plane.getSVar("AIHintRollDie")) {
+        if (plane.hasSVar("AIRollPlanarDie")) {
+            switch (plane.getSVar("AIRollPlanarDie")) {
                 case "Always":
                     decideToRoll = true;
                     break;
                 case "Random":
-                    if (plane.hasSVar("AIHintRollDieChance")) {
-                        chance = Integer.parseInt(plane.getSVar("AIHintRollDieChance"));
+                    if (plane.hasSVar("AIRollPlanarDieChance")) {
+                        chance = Integer.parseInt(plane.getSVar("AIRollPlanarDieChance"));
                     }
                     if (MyRandom.getRandom().nextInt(100) >= chance) {
                         decideToRoll = true;
@@ -44,8 +49,8 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
             }
         }
 
-        if (plane.hasSVar("AIHintRollDieMaxPerTurn")) {
-            maxActivations = Integer.parseInt(plane.getSVar("AIHintRollDieMaxPerTurn"));
+        if (plane.hasSVar("AIRollPlanarDieMaxPerTurn")) {
+            maxActivations = Integer.parseInt(plane.getSVar("AIRollPlanarDieMaxPerTurn"));
         }
         if (ai.getGame().getPhaseHandler().getPlanarDiceRolledthisTurn() >= maxActivations) {
             decideToRoll = false;

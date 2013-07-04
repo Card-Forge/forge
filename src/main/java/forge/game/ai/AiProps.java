@@ -24,7 +24,9 @@ package forge.game.ai;
  * from the text file.
  */
 public enum AiProps { /** */
-    AI_MULLIGAN_THRESHOLD ("5"); /** */
+    DEFAULT_MAX_PLANAR_DIE_ROLLS_PER_TURN ("1"), /** */
+    DEFAULT_PLANAR_DIE_ROLL_CHANCE ("50"), /** */
+    MULLIGAN_THRESHOLD ("5"); /** */
 
     private final String strDefaultVal;
 
