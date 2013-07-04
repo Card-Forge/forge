@@ -34,7 +34,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                     if (plane.hasSVar("AIHintRollDieChance")) {
                         chance = Integer.parseInt(plane.getSVar("AIHintRollDieChance"));
                     }
-                    if (MyRandom.getRandom().nextInt(chance) >= chance) {
+                    if (MyRandom.getRandom().nextInt(100) >= chance) {
                         decideToRoll = true;
                     }
                     break;
@@ -47,7 +47,6 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         if (plane.hasSVar("AIHintRollDieMaxPerTurn")) {
             maxActivations = Integer.parseInt(plane.getSVar("AIHintRollDieMaxPerTurn"));
         }
-        System.out.println("Activations so far: " + sa.getActivationsThisTurn());
         if (sa.getActivationsThisTurn() >= maxActivations) {
             decideToRoll = false;
         }
