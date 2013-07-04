@@ -260,6 +260,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     doUnanimate(c, sa, finalDesc, hiddenKeywords, addedAbilities, addedTriggers, addedReplacements,
                             colorTimestamp, givesStAbs, removedAbilities, timestamp);
 
+                    game.fireEvent(new GameEventCardStatsChanged(c));
                     // give back suppressed triggers
                     for (final Trigger t : removedTriggers) {
                         t.setSuppressed(false);
