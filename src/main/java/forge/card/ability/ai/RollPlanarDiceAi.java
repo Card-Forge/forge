@@ -17,6 +17,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         Card plane = sa.getSourceCard();
         boolean decideToRoll = false;
         int maxActivations = 1;
+        int chance = 50;
         
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !plane.hasSVar("AIHintRollDieInMain1")) {
             return false;
@@ -30,7 +31,6 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                     decideToRoll = true;
                     break;
                 case "Random":
-                    int chance = 50;
                     if (plane.hasSVar("AIHintRollDieChance")) {
                         chance = Integer.parseInt(plane.getSVar("AIHintRollDieChance"));
                     }
