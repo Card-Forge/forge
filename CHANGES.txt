@@ -63,6 +63,7 @@ Scars of the Veteran
 Sacred Boon
 Skyfire Kirin
 Puppet Master
+Fractured Powerstone
 
 
 --------------------
@@ -140,6 +141,14 @@ Young Pyromancer
 Minotaur Abomination
 Staff of the Sun Magus
 Trained Condor
+Fiendslayer Paladin
+Manaweft Sliver
+Bogbrew Witch
+Bubbling Cauldron
+Festering Newt
+Kalonian Hydra
+Syphon Sliver
+Galerider Sliver
 
 
 ------------
