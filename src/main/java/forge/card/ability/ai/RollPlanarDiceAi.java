@@ -45,6 +45,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                     }
                     break;
                 case "Never":
+                    break;
                 default:
                     break;
             }
