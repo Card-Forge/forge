@@ -48,7 +48,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
     public SoundEffectType visit(GameEventCardCounters event) { return event.newValue > event.oldValue ? SoundEffectType.AddCounter : event.newValue < event.oldValue ? SoundEffectType.RemoveCounter : null; }
     public SoundEffectType visit(GameEventTurnEnded event) { return SoundEffectType.EndOfTurn; }
     public SoundEffectType visit(GameEventFlipCoin event) { return SoundEffectType.FlipCoin; }
-    public SoundEffectType visit(GameEventPlayerLivesChanged event) { return SoundEffectType.LifeLoss; }
+    public SoundEffectType visit(GameEventPlayerLivesChanged event) { return event.newLives < event.oldLives ? SoundEffectType.LifeLoss : SoundEffectType.LifeGain; }
     public SoundEffectType visit(GameEventPlayerPoisoned event) { return SoundEffectType.Poison; }
     public SoundEffectType visit(GameEventShuffle event) { return SoundEffectType.Shuffle; }
     public SoundEffectType visit(GameEventTokenCreated event) { return SoundEffectType.Token; }

@@ -54,6 +54,7 @@ public enum SoundEffectType {
     FlipCoin("flip_coin.wav", false),
     GreenLand("green_land.wav", false),
     Instant("instant.wav", false),
+    LifeGain("life_gain.wav", true),
     LifeLoss("life_loss.wav", true),
     LoseDuel("lose_duel.wav", false),
     ManaBurn("mana_burn.wav", false),
