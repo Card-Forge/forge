@@ -16,15 +16,15 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         Card plane = sa.getSourceCard();
         boolean decideToRoll = false;
         
-        if (plane.hasSVar("AIRollHint")) {
-            switch (plane.getSVar("AIRollHint")) {
+        if (plane.hasSVar("AIHintRollDie")) {
+            switch (plane.getSVar("AIHintRollDie")) {
                 case "Always":
                     decideToRoll = true;
                     break;
                 case "Random":
                     int chance = 50;
-                    if (plane.hasSVar("AIRollHintParam")) {
-                        chance = Integer.parseInt(plane.getSVar("AIRollHintParam"));
+                    if (plane.hasSVar("AIHintRollDieChance")) {
+                        chance = Integer.parseInt(plane.getSVar("AIHintRollDieChance"));
                     }
                     if (MyRandom.getRandom().nextInt(chance) >= chance) {
                         decideToRoll = true;
@@ -33,6 +33,12 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                 case "Never":
                 default:
                     break;
+            }
+        }
+
+        if (plane.hasSVar("AIHintRollMaxPerTurn")) {
+            if (sa.getActivationsThisTurn() > Integer.parseInt(plane.getSVar("AIHintRollMaxPerTurn"))) {
+                decideToRoll = false;
             }
         }
 
