@@ -338,9 +338,9 @@ public class ComputerUtil {
                 }
             }
         }
-        if (pref.contains("SacCost")) { // search for permanents with SacMe
-            for (int ip = 0; ip < 6; ip++) { // priority 1 is the lowest,
-                                             // priority 5 the highest
+        if (pref.contains("SacCost")) {
+            // search for permanents with SacMe. priority 1 is the lowest, priority 5 the highest
+            for (int ip = 0; ip < 6; ip++) {
                 final int priority = 6 - ip;
                 final List<Card> sacMeList = CardLists.filter(typeList, new Predicate<Card>() {
                     @Override
@@ -352,17 +352,18 @@ public class ComputerUtil {
                     CardLists.shuffle(sacMeList);
                     return sacMeList.get(0);
                 }
+            }
 
-                // Sac lands
-                final List<Card> landsInPlay = CardLists.getType(typeList, "Land");
-                if (!landsInPlay.isEmpty()) {
-                    final List<Card> landsInHand = CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Land");
-                    final List<Card> nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
-                    final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
-                    if (landsInPlay.size() + landsInHand.size() >= highestCMC) {
-                        // Don't need more land.
-                        return ComputerUtilCard.getWorstLand(landsInPlay);
-                    }
+            // Sac lands
+            final List<Card> landsInPlay = CardLists.getType(typeList, "Land");
+            if (!landsInPlay.isEmpty()) {
+                final List<Card> landsInHand = CardLists.getType(ai.getCardsIn(ZoneType.Hand), "Land");
+                final List<Card> nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
+                nonLandsInHand.addAll(ai.getCardsIn(ZoneType.Library));
+                final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
+                if (landsInPlay.size() + landsInHand.size() >= highestCMC) {
+                    // Don't need more land.
+                    return ComputerUtilCard.getWorstLand(landsInPlay);
                 }
             }
         }
