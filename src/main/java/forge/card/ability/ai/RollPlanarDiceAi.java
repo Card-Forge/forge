@@ -44,5 +44,14 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
 
         return decideToRoll ? true : false;
     }
+
+    /* (non-Javadoc)
+     * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
+     */
+    @Override
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        // for potential implementation of drawback checks?
+        return canPlayAI(aiPlayer, sa);
+    }
 }
 
