@@ -155,7 +155,6 @@ public class AiController {
             sa.setActivatingPlayer(player);
             result.addAll(GameActionUtil.getOptionalCosts(sa));
         }
-        result.addAll(newAbilities);
         return result;
     }
 
