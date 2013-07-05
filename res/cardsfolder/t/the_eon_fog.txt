@@ -5,5 +5,5 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Player | AddKeyword$ Skip y
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, untap all permanents you control.
 SVar:RolledChaos:AB$ UntapAll | Cost$ 0 | ValidCards$ Permanent.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_eon_fog.jpg
-SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:Players skip their untap steps.\nWhenever you roll {C}, untap all permanents you control.

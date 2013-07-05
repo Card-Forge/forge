@@ -21,43 +21,66 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         Card plane = sa.getSourceCard();
 
         boolean decideToRoll = false;
+        boolean rollInMain1 = false;
+        String modeName = "never";
         int maxActivations = aic.getIntProperty(AiProps.DEFAULT_MAX_PLANAR_DIE_ROLLS_PER_TURN);
         int chance = aic.getIntProperty(AiProps.DEFAULT_PLANAR_DIE_ROLL_CHANCE);
         int hesitationChance = aic.getIntProperty(AiProps.PLANAR_DIE_ROLL_HESITATION_CHANCE);
         int minTurnToRoll = aic.getIntProperty(AiProps.DEFAULT_MIN_TURN_TO_ROLL_PLANAR_DIE);
         
-        if (plane.hasSVar("AIRollPlanarDie")) {
-            switch (plane.getSVar("AIRollPlanarDie")) {
-                case "Always":
+        if (plane.hasSVar("AIRollPlanarDieParams")) {
+            String[] params = plane.getSVar("AIRollPlanarDieParams").toLowerCase().trim().split("\\|");
+            for (String param : params) {
+                String[] paramData = param.split("\\$");
+                String paramName = paramData[0].trim();
+                String paramValue = paramData[1].trim();
+                //boolean matchesCriteria = true; // to be used later
+
+                switch (paramName) {
+                    case "mode":
+                        modeName = paramValue;
+                        break;
+                    case "chance":
+                        chance = Integer.parseInt(paramValue);
+                        break;
+                    case "minturn":
+                        minTurnToRoll = Integer.parseInt(paramValue);
+                        break;
+                    case "maxrollsperturn":
+                        maxActivations = Integer.parseInt(paramValue);
+                        break;
+                    case "rollinmain1":
+                        if (paramValue.equals("true")) {
+                            rollInMain1 = true;
+                        }
+                        break;
+                    default:
+                        System.out.println(String.format("Unexpected AI hint parameter in card %s in RollPlanarDiceAi: %s.", plane.getName(), paramName));
+                        break;
+                }
+            }
+            
+            switch (modeName) {
+                case "always":
                     decideToRoll = true;
                     break;
-                case "Random":
-                    if (plane.hasSVar("AIRollPlanarDieChance")) {
-                        chance = Integer.parseInt(plane.getSVar("AIRollPlanarDieChance"));
-                    }
+                case "random":
                     if (MyRandom.getRandom().nextInt(100) < chance) {
                         decideToRoll = true;
                     }
                     break;
-                case "Never":
+                case "never":
                     return false;
                 default:
                     return false;
             }
 
-            if (!plane.hasSVar("AIRollPlanarDieMinTurn") && ai.getGame().getPhaseHandler().getTurn() < minTurnToRoll) {
+            if (ai.getGame().getPhaseHandler().getTurn() < minTurnToRoll) {
                 decideToRoll = false;
-            } else if (plane.hasSVar("AIRollPlanarDieMinTurn") && ai.getGame().getPhaseHandler().getTurn() < Integer.parseInt(plane.getSVar("AIRollPlanarDieMinTurn"))) {
-                decideToRoll = false;
-            } else if (!plane.hasSVar("AIRollPlanarDieInMain1") && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-                decideToRoll = false;
-            } else if (plane.hasSVar("AIRollPlanarDieInMain1") && plane.getSVar("AIRollPlanarDieInMain1").toLowerCase().equals("false")) {
+            } else if (!rollInMain1 && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
                 decideToRoll = false;
             }
 
-            if (plane.hasSVar("AIRollPlanarDieMaxPerTurn")) {
-                maxActivations = Integer.parseInt(plane.getSVar("AIRollPlanarDieMaxPerTurn"));
-            }
             if (ai.getGame().getPhaseHandler().getPlanarDiceRolledthisTurn() >= maxActivations) {
                 decideToRoll = false;
             }

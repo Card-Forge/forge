@@ -7,6 +7,5 @@ S:Mode$ Continuous | Affected$ Card.OppOwn+TopLibrary | EffectZone$ Command | Af
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, each player puts the top card of his or her library into his or her graveyard.
 SVar:RolledChaos:AB$ Mill | Cost$ 0 | NumCards$ 1 | Defined$ Each
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windriddle_palaces.jpg
-SVar:AIRollPlanarDie:Random
-SVar:AIRollPlanarDieChance:30
+SVar:AIRollPlanarDieParams:Mode$ Random | Chance$ 30
 Oracle:Players play with the top card of their libraries revealed.\nYou may play the top card of any player's library.\nWhenever you roll {C}, each player puts the top card of his or her library into his or her graveyard.

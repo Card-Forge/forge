@@ -6,5 +6,5 @@ SVar:TripleGoat:AB$ Token | Cost$ 0 | TokenName$ Goat | TokenTypes$ Creature,Goa
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, put a 0/1 white Goat creature token onto the battlefield.
 SVar:RolledChaos:AB$ Token | Cost$ 0 | TokenName$ Goat | TokenTypes$ Creature,Goat | TokenPower$ 0 | TokenToughness$ 1 | TokenColors$ White | TokenOwner$ TriggeredPlayer | TokenImage$ W 0 1 Goat | TokenAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldmeadow.jpg
-SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:Whenever a land enters the battlefield, that land's controller puts three 0/1 white Goat creature tokens onto the battlefield.\nWhenever you roll {C}, put a 0/1 white Goat creature token onto the battlefield.

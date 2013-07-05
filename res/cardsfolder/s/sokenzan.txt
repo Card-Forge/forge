@@ -6,5 +6,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.attackedThisTurn | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | FollowedBy$ ThisPhase | ConditionPhases$ Main1,Main2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sokenzan.jpg
-SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:All creatures get +1/+1 and have haste.\nWhenever you roll {C}, untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.

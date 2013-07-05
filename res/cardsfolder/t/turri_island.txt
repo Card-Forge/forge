@@ -5,5 +5,5 @@ S:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Creature | Type$ Spell | A
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard.
 SVar:RolledChaos:AB$ Dig | Cost$ 0 | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | DestinationZone2$ Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turri_island.jpg
-SVar:AIRollPlanarDie:Random
+SVar:AIRollPlanarDieParams:Mode$ Random
 Oracle:Creature spells cost {2} less to cast.\nWhenever you roll {C}, reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard.

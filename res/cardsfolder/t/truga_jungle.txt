@@ -6,6 +6,5 @@ SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ 
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.
 SVar:RolledChaos:DB$ Dig | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/truga_jungle.jpg
-SVar:AIRollPlanarDie:Random
-SVar:AIRollPlanarDieChance:20
+SVar:AIRollPlanarDieParams:Mode$ Random | Chance$ 20
 Oracle:All lands have "{T}: Add one mana of any color to your mana pool."\nWhenever you roll {C}, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.

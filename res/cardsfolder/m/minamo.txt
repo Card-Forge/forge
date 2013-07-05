@@ -9,6 +9,5 @@ SVar:DBChoose:DB$ ChooseCard | Choices$ Card.RememberedPlayerCtrl+Blue | ChoiceZ
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo.jpg
-SVar:AIRollPlanarDie:Always
-SVar:AIRollPlanarDieMinTurn:5
+SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 5
 Oracle:Whenever a player casts a spell, that player may draw a card.\nWhenever you roll {C}, each player may return a blue card from his or her graveyard to his or her hand.

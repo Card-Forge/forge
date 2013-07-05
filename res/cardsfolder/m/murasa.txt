@@ -6,5 +6,5 @@ SVar:TrigRamp:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefi
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, target land becomes a 4/4 creature that's still a land.
 SVar:RolledChaos:AB$ Animate | Cost$ 0 | ValidTgts$ Land | Power$ 4 | Toughness$ 4 | Types$ Creature | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murasa.jpg
-SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:Whenever a nontoken creature enters the battlefield, its controller may search his or her library for a basic land card, put it onto the battlefield tapped, then shuffle his or her library.\nWhenever you roll {C}, target land becomes a 4/4 creature that's still a land.

@@ -6,5 +6,5 @@ T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | Execute$ PanopticonDraw | Trigg
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ PanopticonDraw | TriggerDescription$ Whenever you roll Chaos, draw a card.
 SVar:PanopticonDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panopticon.jpg
-SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:When you planeswalk to Panopticon, draw a card.\nAt the beginning of your draw step, draw an additional card.\nWhenever you roll {C}, draw a card.

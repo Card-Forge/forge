@@ -6,5 +6,5 @@ SVar:LetheMill:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 10
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, target player puts the top 10 cards of his or her library into his or her graveyard.
 SVar:RolledChaos:AB$ Mill | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Choose target player to mill. | NumCards$ 10
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lethe_lake.jpg
-SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:At the beginning of your upkeep, put the top ten cards of your library into your graveyard.\nWhenever you roll {C}, target player puts the top ten cards of his or her library into his or her graveyard.
