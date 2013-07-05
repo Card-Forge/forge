@@ -46,7 +46,6 @@ import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
 import forge.game.player.Player;
 import forge.game.zone.MagicStack;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
@@ -305,37 +304,8 @@ public class Game {
         fireEvent(new GameEventGameOutcome(result, match.getPlayedGames()));
     }
 
-    public Zone getZoneOf(final Card c) {
-        if (getStackZone().contains(c)) {
-            return getStackZone();
-        }
-
-        for (final Player p : getPlayers()) {
-            for (final ZoneType z : Player.ALL_ZONES) {
-                final PlayerZone pz = p.getZone(z);
-                if (pz.contains(c)) {
-                    return pz;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    public boolean isCardInZone(final Card c, final ZoneType zone) {
-         if (zone.equals(ZoneType.Stack)) {
-            if (getStackZone().contains(c)) {
-                return true;
-            }
-        } else {
-            for (final Player p : getPlayers()) {
-                if (p.getZone(zone).contains(c)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+    public Zone getZoneOf(final Card card) {
+        return card.getZone();
     }
 
     public List<Card> getCardsIn(final ZoneType zone) {

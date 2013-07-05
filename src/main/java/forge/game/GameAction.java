@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -831,6 +832,14 @@ public class GameAction {
         }
 
         GameActionUtil.grantBasicLandsManaAbilities(game);
+
+        // Exclude cards in hidden zones from update
+        Iterator<Card> it = affectedCards.iterator();
+        while ( it.hasNext() ) {
+            Card c = it.next();
+            if ( c.isInZone(ZoneType.Library) )
+                it.remove();
+        }
         
         if ( !affectedCards.isEmpty() )
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
@@ -991,7 +1000,7 @@ public class GameAction {
                     // Soulbond unpairing
                     if (c.isPaired()) {
                         Card partner = c.getPairedWith();
-                        if (!partner.isCreature() || c.getController() != partner.getController() || !game.isCardInZone(c, ZoneType.Battlefield)) {
+                        if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInZone(ZoneType.Battlefield)) {
                             c.setPairedWith(null);
                             partner.setPairedWith(null);
                         }

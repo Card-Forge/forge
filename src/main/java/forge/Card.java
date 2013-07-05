@@ -238,6 +238,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     // Soulbond pairing card
     private Card pairedWith = null;
     
+    // Zone-changing spells should store card's zone here
+    private Zone currentZone = null;
+
     // Enumeration for CMC request types
     public enum SplitCMCMode {
         CurrentSideCMC,
@@ -7940,7 +7943,16 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return boolean
      */
     public boolean isInZone(final ZoneType zone) {
-        return getGame().isCardInZone(this, zone);
+        Zone z = this.getZone();
+        return z != null && z.getZoneType() == zone;
+    }
+
+    public Zone getZone() {
+        return currentZone;
+    }
+    
+    public void setZone(Zone zone) {
+        currentZone = zone;
     }
 
     public final boolean canBeDestroyed() { 

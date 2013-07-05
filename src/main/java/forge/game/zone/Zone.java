@@ -76,6 +76,7 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
         logCardAdded(c);
         updateCardState(c);
         this.cardList.add(c);
+        c.setZone(this);
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
     }
 
@@ -85,6 +86,7 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
         logCardAdded(c);
         updateCardState(c);
         this.cardList.add(index, c);
+        c.setZone(this);
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
     }
 
@@ -126,6 +128,7 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
     public final void setCards(final Iterable<Card> cards) {
         cardList.clear();
         for (Card c : cards) {
+            c.setZone(this);
             cardList.add(c);
         }
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.ComplexUpdate, null));

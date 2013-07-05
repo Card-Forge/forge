@@ -249,7 +249,7 @@ public class CostExile extends CostPartWithList {
         }
 
         if (this.payCostFromSource())
-            return activator.getZone(from).contains(source) && GuiDialog.confirm(source, source.getName() + " - Exile?") && executePayment(ability, source);
+            return source.getZone() == activator.getZone(from) && GuiDialog.confirm(source, source.getName() + " - Exile?") && executePayment(ability, source);
 
         List<Card> validCards = CardLists.getValidCards(activator.getCardsIn(from), type.split(";"), activator, source);
         if (this.from == ZoneType.Battlefield || this.from == ZoneType.Hand) {
