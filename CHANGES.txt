@@ -12,6 +12,9 @@ Release Notes
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
 
 
+- Planechase AI -
+This version of Forge includes basic support for AI opponents making use of the planar die in Planechase game mode. The AI will be able to use the "Roll the planar die" ability for most of the planes currently supported by Forge. Please note that this AI is currently in its infant stage, so don't expect it to utilize the planar die in a very smart fashion.
+
 - New M14 cards -
 We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
