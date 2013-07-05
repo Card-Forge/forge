@@ -67,6 +67,8 @@ public class PumpEffect extends SpellAbilityEffect {
                         }
                         applyTo.removeChangedCardKeywords(timestamp);
                     }
+                    
+                    game.fireEvent(new GameEventCardStatsChanged(applyTo));
                 }
             };
             if (sa.hasParam("UntilEndOfCombat")) {

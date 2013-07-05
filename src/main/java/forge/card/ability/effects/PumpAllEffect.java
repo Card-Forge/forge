@@ -11,6 +11,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -80,6 +81,8 @@ public class PumpAllEffect extends SpellAbilityEffect {
                         for (String kw : hiddenkws) {
                             tgtC.removeHiddenExtrinsicKeyword(kw);
                         }
+
+                        game.fireEvent(new GameEventCardStatsChanged(tgtC));
                     }
                 };
                 if (sa.hasParam("UntilUntaps")) {
@@ -92,6 +95,8 @@ public class PumpAllEffect extends SpellAbilityEffect {
                     game.getEndOfTurn().addUntil(untilEOT);
                 }
             }
+
+            game.fireEvent(new GameEventCardStatsChanged(tgtC));
         }
     }
     @Override

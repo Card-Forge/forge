@@ -54,12 +54,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         this.fc = fc;
     }
 
-    private final boolean LOG_EVENTS = false;
-    
     @Subscribe
     public void receiveGameEvent(final GameEvent ev) {
-        if ( LOG_EVENTS )
-            System.out.println("GE: " + ev.toString());
         ev.visit(this);
     }
 

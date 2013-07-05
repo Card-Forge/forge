@@ -1,5 +1,7 @@
 package forge.game.event;
 
+import org.apache.commons.lang.StringUtils;
+
 import forge.Card;
 
 /**
@@ -19,6 +21,11 @@ public class GameEventCardStatsChanged extends GameEvent {
     public <T> T visit(IGameEventVisitor<T> visitor) {
         // TODO Auto-generated method stub
         return visitor.visit(this);
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("Card state changes: %s (%s) %d/%d", card.getName(), StringUtils.join(card.getType(), ' '), card.getNetAttack(), card.getNetDefense() );
     }
 
 }
