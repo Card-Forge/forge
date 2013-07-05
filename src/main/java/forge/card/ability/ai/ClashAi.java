@@ -24,7 +24,7 @@ public class ClashAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = ai.getOpponent();
         if (tgt != null) {
-            if (!opp.canBeTargetedBy(sa)) {
+            if (!sa.canTarget(opp)) {
                 return false;
             }
             sa.resetTargets();
