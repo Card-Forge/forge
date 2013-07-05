@@ -53,8 +53,7 @@ public class EndOfTurn extends Phase {
     public final void executeAt() {
         // reset mustAttackEntity for me
         game.getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
-
-        game.getStaticEffects().rePopulateStateBasedList(game);
+        game.getStaticEffects().rePopulateStateBasedList();
 
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {

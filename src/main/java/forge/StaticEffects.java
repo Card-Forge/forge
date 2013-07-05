@@ -51,7 +51,8 @@ public class StaticEffects {
 
     //Global rule changes
     private final EnumSet<GlobalRuleChange> ruleChanges;
-
+    private final Game game; 
+    
     /**
      * clearStaticEffect. TODO Write javadoc for this method.
      */
@@ -279,7 +280,8 @@ public class StaticEffects {
      * Constructor for StaticEffects.
      * </p>
      */
-    public StaticEffects() {
+    public StaticEffects(Game game) {
+        this.game = game;
         this.initStateBasedEffectsList();
         this.staticEffects = new ArrayList<StaticEffect>();
         this.ruleChanges = EnumSet.noneOf(GlobalRuleChange.class);
@@ -370,7 +372,7 @@ public class StaticEffects {
      * </p>
      * @param game 
      */
-    public final void rePopulateStateBasedList(Game game) {
+    public final void rePopulateStateBasedList() {
         this.reset();
 
         final List<Card> cards = game.getCardsIn(ZoneType.Battlefield);

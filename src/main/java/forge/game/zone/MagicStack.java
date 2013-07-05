@@ -317,8 +317,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
             // TODO: make working triggered ability
             sp.resolve();
-            game.getAction().checkStateEffects();
-            //GuiDisplayUtil.updateGUI();
         } else {
             for (OptionalCost s : sp.getOptionalCosts()) {
                 source.addOptionalCostPaid(s);

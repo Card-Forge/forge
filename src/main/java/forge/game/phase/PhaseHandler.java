@@ -331,7 +331,6 @@ public class PhaseHandler implements java.io.Serializable {
                         this.givePriorityToPlayer = false;
                     } else {
                         combat.dealAssignedDamage();
-                        game.getAction().checkStateEffects();
                     }
                     break;
     
@@ -342,7 +341,6 @@ public class PhaseHandler implements java.io.Serializable {
                         this.givePriorityToPlayer = false;
                     } else {
                         combat.dealAssignedDamage();
-                        game.getAction().checkStateEffects();
                     }
                     break;
     

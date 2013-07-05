@@ -68,7 +68,7 @@ public class Game {
     public final Upkeep upkeep;
     public final MagicStack stack;
     private final PhaseHandler phaseHandler;
-    private final StaticEffects staticEffects = new StaticEffects();
+    private final StaticEffects staticEffects = new StaticEffects(this);
     private final TriggerHandler triggerHandler = new TriggerHandler(this);
     private final ReplacementHandler replacementHandler = new ReplacementHandler(this);
     private final EventBus events = new EventBus();
