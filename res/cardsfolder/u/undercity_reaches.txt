@@ -7,5 +7,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ Effect | Cost$ 0 | Effect | Name$ Undercity Reaches Effect | StaticAbilities$ STHandSize | Duration$ Permanent
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undercity_reaches.jpg
-SVar:AIRollPlanarDieParams:Mode$ Always
+SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:Whenever a creature deals combat damage to a player, its controller may draw a card.\nWhenever you roll {C}, you have no maximum hand size for the rest of the game.

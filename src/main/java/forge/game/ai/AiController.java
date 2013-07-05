@@ -483,7 +483,7 @@ public class AiController {
     }
     
     // not sure "playing biggest spell" matters?
-     private final static Comparator<SpellAbility> saComparator = new Comparator<SpellAbility>() {
+    private final static Comparator<SpellAbility> saComparator = new Comparator<SpellAbility>() {
         @Override
         public int compare(final SpellAbility a, final SpellAbility b) {
             // sort from highest cost to lowest
@@ -491,6 +491,13 @@ public class AiController {
             int a1 = a.getPayCosts() == null ? 0 : a.getPayCosts().getTotalMana().getCMC();
             int b1 = b.getPayCosts() == null ? 0 : b.getPayCosts().getTotalMana().getCMC();
 
+            // deprioritize planar die roll marked with AIRollPlanarDieParams:LowPriority$ True
+            if (ApiType.RollPlanarDice == a.getApi() && a.getSourceCard().hasSVar("AIRollPlanarDieParams") && a.getSourceCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
+                return 1;
+            } else if (ApiType.RollPlanarDice == b.getApi() && b.getSourceCard().hasSVar("AIRollPlanarDieParams") && b.getSourceCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
+                return -1;
+            }
+    
             // cast 0 mana cost spells first (might be a Mox)
             if (a1 == 0) {
                 return -1;
@@ -529,7 +536,7 @@ public class AiController {
             if (ApiType.DestroyAll == sa.getApi()) {
                 p += 4;
             }
-    
+
             return p;
         }
     }; // Comparator

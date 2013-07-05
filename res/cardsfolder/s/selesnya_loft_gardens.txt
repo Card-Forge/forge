@@ -7,5 +7,5 @@ SVar:RolledChaos:AB$ Effect | Cost$ 0 | AILogic$ Always | Triggers$ TrigTapForMa
 SVar:TrigTapForMana:Mode$ TapsForMana | TriggerZones$ Command | ValidCard$ Land.YouCtrl | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
 SVar:TrigMana:AB$ ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredPlayer
 YouSVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_loft_gardens.jpg
-SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 1
+SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 1 | RollInMain1$ True
 Oracle:If an effect would put one or more tokens onto the battlefield, it puts twice that many of those tokens onto the battlefield instead.\nIf an effect would place one or more counters on a permanent, it places twice that many of those counters on that permanent instead.\nWhenever you roll {C}, until end of turn, whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.

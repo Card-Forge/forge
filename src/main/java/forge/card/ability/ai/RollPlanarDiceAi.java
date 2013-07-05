@@ -54,6 +54,9 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                             rollInMain1 = true;
                         }
                         break;
+                    case "lowpriority":
+                        // this is handled in AiController.saComparator at the moment
+                        break;
                     default:
                         System.out.println(String.format("Unexpected AI hint parameter in card %s in RollPlanarDiceAi: %s.", plane.getName(), paramName));
                         break;

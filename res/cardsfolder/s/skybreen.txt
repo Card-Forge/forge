@@ -7,5 +7,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | LifeAmount$ Y | References$ Y
 SVar:Y:TargetedPlayer$CardsInHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skybreen.jpg
-SVar:AIRollPlanarDieParams:Mode$ Always
+SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:Players play with the top card of their libraries revealed.\nSpells that share a card type with the top card of a library can't be cast.\nWhenever you roll {C}, target player loses life equal to the number of cards in his or her hand.

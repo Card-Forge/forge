@@ -5,5 +5,5 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddPower$ 2 | Ad
 T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, you may add W U B R G to your mana pool.
 SVar:RolledChaos:AB$ Mana | Cost$ 0 | Produced$ W U B R G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosa.jpg
-SVar:AIRollPlanarDieParams:Mode$ Always
+SVar:AIRollPlanarDieParams:Mode$ Always | RollInMain1$ True
 Oracle:All creatures get +2/+2.\nWhenever you roll {C}, you may add {W}{U}{B}{R}{G} to your mana pool.
