@@ -6,5 +6,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.Red+YouCtrl,Creature.Green+YouCtrl,Creature.White+YouCtrl | TgtPrompt$ Select target red, green, or white creature you control | NumAtt$ Y | NumDef$ Y | References$ Y
 SVar:Y:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya.jpg
-SVar:AIRollPlanarDie:Always
+SVar:AIRollPlanarDieParams:Mode$ Always | HasColorCreatureInPlay$ RGW
 Oracle:You may play any number of additional lands on each of your turns.\nWhenever you roll {C}, target red, green, or white creature you control gets +1/+1 until end of turn for each land you control.

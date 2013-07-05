@@ -9,7 +9,9 @@ import forge.game.ai.AiProps;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import java.util.List;
 
 public class RollPlanarDiceAi extends SpellAbilityAi {
     /* (non-Javadoc)
@@ -34,7 +36,6 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                 String[] paramData = param.split("\\$");
                 String paramName = paramData[0].trim();
                 String paramValue = paramData[1].trim();
-                //boolean matchesCriteria = true; // to be used later
 
                 switch (paramName) {
                     case "mode":
@@ -56,6 +57,56 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                         break;
                     case "lowpriority":
                         // this is handled in AiController.saComparator at the moment
+                        break;
+                    case "cardsinhandle": // num of cards in hand less than or equal to N
+                        if (ai.getCardsIn(ZoneType.Hand).size() > Integer.parseInt(paramValue)) {
+                            return false;
+                        }
+                        break;
+                    case "cardsinhandge": // num of cards in hand greater than or equal to N
+                        if (ai.getCardsIn(ZoneType.Hand).size() < Integer.parseInt(paramValue)) {
+                            return false;
+                        }
+                        break;
+                    case "cardsingraveyardle":
+                        if (ai.getCardsIn(ZoneType.Graveyard).size() > Integer.parseInt(paramValue)) {
+                            return false;
+                        }
+                        break;
+                    case "cardsingraveyardge":
+                        if (ai.getCardsIn(ZoneType.Graveyard).size() < Integer.parseInt(paramValue)) {
+                            return false;
+                        }
+                        break;
+                    case "hascreatureinplay": // TODO: All abilities below only test for "True". The "False" condition is not implemented/parsed.
+                        if (!detectCreatureInZone(ai, ZoneType.Battlefield)) {
+                            return false;
+                        }
+                        break;
+                    case "opphascreatureinplay":
+                        List<Player> otherPlayers = ai.getOpponents();
+                        boolean oppHasCreature = false;
+                        for (Player op : otherPlayers) {
+                            oppHasCreature |= detectCreatureInZone(op, ZoneType.Battlefield);
+                        }
+                        if (!oppHasCreature) {
+                            return false;
+                        }
+                        break;
+                    case "hascolorcreatureinplay":
+                        if (!detectColorCreatureInZone(ai, paramValue, ZoneType.Battlefield)) {
+                            return false;
+                        }
+                        break;
+                    case "hascolorinplay":
+                        if (!detectColorInZone(ai, paramValue, ZoneType.Battlefield)) {
+                            return false;
+                        }
+                        break;
+                    case "hascoloringraveyard":
+                        if (!detectColorInZone(ai, paramValue, ZoneType.Graveyard)) {
+                            return false;
+                        }
                         break;
                     default:
                         System.out.println(String.format("Unexpected AI hint parameter in card %s in RollPlanarDiceAi: %s.", plane.getName(), paramName));
@@ -105,5 +156,69 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         // for potential implementation of drawback checks?
         return canPlayAI(aiPlayer, sa);
     }
-}
 
+    private boolean detectColorInZone(Player p, String paramValue, ZoneType zone) {
+        boolean hasColorInPlay = false;
+        for (Card c : p.getCardsIn(zone)) {
+            if (paramValue.contains("u") && c.isBlue()) {
+                hasColorInPlay = true;
+                break;
+            }
+            if (paramValue.contains("g") && c.isGreen()) {
+                hasColorInPlay = true;
+                break;
+            }
+            if (paramValue.contains("r") && c.isRed()) {
+                hasColorInPlay = true;
+                break;
+            }
+            if (paramValue.contains("w") && c.isWhite()) {
+                hasColorInPlay = true;
+                break;
+            }
+            if (paramValue.contains("b") && c.isBlack()) {
+                hasColorInPlay = true;
+                break;
+            }
+        }
+        return hasColorInPlay;
+    }
+
+    private boolean detectCreatureInZone(Player p, ZoneType zone) {
+        boolean hasCreatureInPlay = false;
+        for (Card c : p.getCardsIn(zone)) {
+            if (c.isCreature()) {
+                hasCreatureInPlay = true;
+                break;
+            }
+        }
+        return hasCreatureInPlay;
+    }
+
+    private boolean detectColorCreatureInZone(Player p, String paramValue, ZoneType zone) {
+        boolean hasColorInPlay = false;
+        for (Card c : p.getCardsIn(zone)) {
+            if (paramValue.contains("u") && c.isBlue() && c.isCreature()) {
+                hasColorInPlay = true;
+                break;
+            }
+            if (paramValue.contains("g") && c.isGreen() && c.isCreature()) {
+                hasColorInPlay = true;
+                break;
+            }
+            if (paramValue.contains("r") && c.isRed() && c.isCreature()) {
+                hasColorInPlay = true;
+                break;
+            }
+            if (paramValue.contains("w") && c.isWhite() && c.isCreature()) {
+                hasColorInPlay = true;
+                break;
+            }
+            if (paramValue.contains("b") && c.isBlack() && c.isCreature()) {
+                hasColorInPlay = true;
+                break;
+            }
+        }
+        return hasColorInPlay;
+    }
+}

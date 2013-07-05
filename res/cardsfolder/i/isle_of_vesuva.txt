@@ -7,4 +7,5 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChao
 SVar:RolledChaos:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature | SubAbility$ DestroyOtherAll
 SVar:DestroyOtherAll:DB$ DestroyAll | ValidCards$ Targeted.sameName+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isle_of_vesuva.jpg
+SVar:AIRollPlanarDieParams:Mode$ Always | OppHasCreatureInPlay$ True
 Oracle:Whenever a nontoken creature enters the battlefield, its controller puts a token onto the battlefield that's a copy of that creature.\nWhenever you roll {C}, destroy target creature and all other creatures with the same name as that creature.
