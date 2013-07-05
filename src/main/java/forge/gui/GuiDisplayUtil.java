@@ -159,7 +159,7 @@ public final class GuiDisplayUtil {
               
                 game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
               
-                game.getAction().checkStateEffects();
+                game.getAction().checkStaticAbilities();
             }
         });
     }

@@ -897,137 +897,39 @@ public class GameAction {
             }
 
             for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-                if (c.isEquipped()) {
-                    final List<Card> equipments = new ArrayList<Card>(c.getEquippedBy());
-                    for (final Card equipment : equipments) {
-                        if (!equipment.isInPlay()) {
-                            equipment.unEquipCard(c);
-                            checkAgain = true;
-                        }
-                    }
-                } // if isEquipped()
 
-                if (c.isFortified()) {
-                    final List<Card> fortifications = new ArrayList<Card>(c.getFortifiedBy());
-                    for (final Card f : fortifications) {
-                        if (!f.isInPlay()) {
-                            f.unFortifyCard(c);
-                            checkAgain = true;
-                        }
+                if (c.isCreature() && c.isPaired()) { // Soulbond unpairing (702.93e) - should not be here
+                    Card partner = c.getPairedWith();
+                    if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInZone(ZoneType.Battlefield)) {
+                        c.setPairedWith(null);
+                        partner.setPairedWith(null);
                     }
-                } // if isFortified()
+                }
 
-                if (c.isEquipping()) {
-                    final Card equippedCreature = c.getEquipping().get(0);
-                    if (!equippedCreature.isCreature() || !equippedCreature.isInPlay()
-                            || !equippedCreature.canBeEquippedBy(c)) {
-                        c.unEquipCard(equippedCreature);
+                if (c.isCreature() ) {
+                    // Rule 704.5f - Destroy (no regeneration) for toughness <= 0
+                    if( c.getNetDefense() <= 0 ) { 
+                        this.destroyNoRegeneration(c, null);
                         checkAgain = true;
-                    }
-                    // make sure any equipment that has become a creature stops equipping
-                    if (c.isCreature()) {
-                        c.unEquipCard(equippedCreature);
-                        checkAgain = true;
-                    }
-                } // if isEquipping()
+                    } else
 
-                if (c.isFortifying()) {
-                    final Card fortifiedLand = c.getFortifying().get(0);
-                    if (!fortifiedLand.isLand() || !fortifiedLand.isInPlay()) {
-                        c.unFortifyCard(fortifiedLand);
-                        checkAgain = true;
-                    }
-                    // make sure any fortification that has become a creature stops fortifying
-                    if (c.isCreature()) {
-                        c.unFortifyCard(fortifiedLand);
-                        checkAgain = true;
-                    }
-                } // if isFortifying()
-
-                if (c.isAura()) {
-                    // Check if Card Aura is attached to is a legal target
-                    final GameEntity entity = c.getEnchanting();
-                    final SpellAbility sa = c.getSpells().get(0);
-
-                    TargetRestrictions tgt = null;
-                    if (sa != null) {
-                        tgt = sa.getTargetRestrictions();
-                    }
-
-                    if (entity instanceof Card) {
-                        final Card perm = (Card) entity;
-                        ZoneType tgtZone = tgt.getZone().get(0);
-
-                        if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c)) {
-                            c.unEnchantEntity(perm);
-                            this.moveToGraveyard(c);
-                            checkAgain = true;
-                        }
-                    } else if (entity instanceof Player) {
-                        final Player pl = (Player) entity;
-                        boolean invalid = false;
-
-                        if (tgt.canOnlyTgtOpponent() && !c.getController().getOpponent().equals(pl)) {
-                            invalid = true;
-                        } else {
-                            if (pl.hasProtectionFrom(c)) {
-                                invalid = true;
-                            }
-                        }
-                        if (invalid) {
-                            c.unEnchantEntity(pl);
-                            this.moveToGraveyard(c);
-                            checkAgain = true;
-                        }
-                    }
-
-                    if (c.isInPlay() && !c.isEnchanting()) {
-                        this.moveToGraveyard(c);
-                        checkAgain = true;
-                    }
-
-                } // if isAura
-
-                if (c.isCreature()) {
-                    if (c.isEnchanting()) {
-                        c.unEnchantEntity(c.getEnchanting());
-                        checkAgain = true;
-                    }
-                    if (c.getNetDefense() <= 0 || c.getNetDefense() <= c.getDamage()) {
+                    // Rule 704.5g - Destroy due to lethal damage    
+                    if ( c.getNetDefense() <= c.getDamage() ) { 
                         this.destroy(c, null);
                         checkAgain = true;
                     }
-                    // Soulbond unpairing
-                    if (c.isPaired()) {
-                        Card partner = c.getPairedWith();
-                        if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInZone(ZoneType.Battlefield)) {
-                            c.setPairedWith(null);
-                            partner.setPairedWith(null);
-                        }
-                    }
                 }
+                
+                checkAgain |= stateBasedAction704_5n(c); // Auras attached to illegal or not attached go to graveyard
+                checkAgain |= stateBasedAction704_5p(c); // Equipment and Fortifications
 
-                // +1/+1 counters should erase -1/-1 counters
-                if (c.getCounters(CounterType.P1P1) > 0 && c.getCounters(CounterType.M1M1) > 0) {
-
-                    final CounterType p1Counter = CounterType.P1P1;
-                    final CounterType m1Counter = CounterType.M1M1;
-                    int plusOneCounters = c.getCounters(CounterType.P1P1);
-                    int minusOneCounters = c.getCounters(CounterType.M1M1);
-
-                    if (plusOneCounters == minusOneCounters) {
-                        c.getCounters().remove(m1Counter);
-                        c.getCounters().remove(p1Counter);
-                    }
-                    if (plusOneCounters > minusOneCounters) {
-                        c.getCounters().remove(m1Counter);
-                        c.getCounters().put(p1Counter, (plusOneCounters - minusOneCounters));
-                    } else {
-                        c.getCounters().put(m1Counter, (minusOneCounters - plusOneCounters));
-                        c.getCounters().remove(p1Counter);
-                    }
+                
+                if (c.isCreature() && c.isEnchanting()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
+                    c.unEnchantEntity(c.getEnchanting());
                     checkAgain = true;
                 }
+                
+                checkAgain |= stateBasedAction704_5r(c); // annihilatie +1/+1 counters with -1/-1 ones
             }
 
             if (game.getTriggerHandler().runWaitingTriggers()) {
@@ -1055,6 +957,143 @@ public class GameAction {
             game.getStack().unfreezeStack();
         }
     } // checkStateEffects()
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param checkAgain
+     * @param c
+     * @return
+     */
+    private boolean stateBasedAction704_5n(Card c) {
+        boolean checkAgain = false;
+        if (!c.isAura()) 
+            return false;
+    
+        // Check if Card Aura is attached to is a legal target
+        final GameEntity entity = c.getEnchanting();
+        final SpellAbility sa = c.getSpells().get(0);
+
+        TargetRestrictions tgt = null;
+        if (sa != null) {
+            tgt = sa.getTargetRestrictions();
+        }
+
+        if (entity instanceof Card) {
+            final Card perm = (Card) entity;
+            ZoneType tgtZone = tgt.getZone().get(0);
+
+            if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c)) {
+                c.unEnchantEntity(perm);
+                this.moveToGraveyard(c);
+                checkAgain = true;
+            }
+        } else if (entity instanceof Player) {
+            final Player pl = (Player) entity;
+            boolean invalid = false;
+
+            if (tgt.canOnlyTgtOpponent() && !c.getController().getOpponent().equals(pl)) {
+                invalid = true;
+            } else {
+                if (pl.hasProtectionFrom(c)) {
+                    invalid = true;
+                }
+            }
+            if (invalid) {
+                c.unEnchantEntity(pl);
+                this.moveToGraveyard(c);
+                checkAgain = true;
+            }
+        }
+
+        if (c.isInPlay() && !c.isEnchanting()) {
+            this.moveToGraveyard(c);
+            checkAgain = true;
+        }
+        return checkAgain;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param checkAgain
+     * @param c
+     * @return
+     */
+    private boolean stateBasedAction704_5p(Card c) {
+        boolean checkAgain = false;
+        if (c.isEquipped()) {
+            final List<Card> equipments = new ArrayList<Card>(c.getEquippedBy());
+            for (final Card equipment : equipments) {
+                if (!equipment.isInPlay()) {
+                    equipment.unEquipCard(c);
+                    checkAgain = true;
+                }
+            }
+        } // if isEquipped()
+
+        if (c.isFortified()) {
+            final List<Card> fortifications = new ArrayList<Card>(c.getFortifiedBy());
+            for (final Card f : fortifications) {
+                if (!f.isInPlay()) {
+                    f.unFortifyCard(c);
+                    checkAgain = true;
+                }
+            }
+        } // if isFortified()
+
+        if (c.isEquipping()) {
+            final Card equippedCreature = c.getEquipping().get(0);
+            if (!equippedCreature.isCreature() || !equippedCreature.isInPlay()
+                    || !equippedCreature.canBeEquippedBy(c)) {
+                c.unEquipCard(equippedCreature);
+                checkAgain = true;
+            }
+            // make sure any equipment that has become a creature stops equipping
+            if (c.isCreature()) {
+                c.unEquipCard(equippedCreature);
+                checkAgain = true;
+            }
+        } // if isEquipping()
+
+        if (c.isFortifying()) {
+            final Card fortifiedLand = c.getFortifying().get(0);
+            if (!fortifiedLand.isLand() || !fortifiedLand.isInPlay()) {
+                c.unFortifyCard(fortifiedLand);
+                checkAgain = true;
+            }
+            // make sure any fortification that has become a creature stops fortifying
+            if (c.isCreature()) {
+                c.unFortifyCard(fortifiedLand);
+                checkAgain = true;
+            }
+        } // if isFortifying()
+        return checkAgain;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param checkAgain
+     * @param c
+     * @return
+     */
+    private boolean stateBasedAction704_5r(Card c) {
+        boolean checkAgain = false;
+        // +1/+1 counters should erase -1/-1 counters
+        if (c.getCounters(CounterType.P1P1) > 0 && c.getCounters(CounterType.M1M1) > 0) {
+            int plusOneCounters = c.getCounters(CounterType.P1P1);
+            int minusOneCounters = c.getCounters(CounterType.M1M1);
+    
+            if ( plusOneCounters >= minusOneCounters ) c.getCounters().remove(CounterType.M1M1);
+            if ( plusOneCounters <= minusOneCounters)  c.getCounters().remove(CounterType.P1P1);
+            
+            int diff = plusOneCounters - minusOneCounters;
+            if ( diff != 0 ) {
+                CounterType ct = diff > 0 ? CounterType.P1P1 : CounterType.M1M1;
+                c.getCounters().put(ct, Math.abs(diff));
+            }
+            checkAgain = true;
+        }
+        return checkAgain;
+    }
 
     public void checkGameOverCondition() {
         GameEndReason reason = this.eliminateLosingPlayers();
@@ -1469,7 +1508,7 @@ public class GameAction {
                     first.initPlane();
     
                 runOpeningHandActions(first);
-                checkStateEffects();
+                checkStateEffects(); // why?
     
                 // Run Trigger beginning of the game
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();

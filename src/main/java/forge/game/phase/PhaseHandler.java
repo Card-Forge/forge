@@ -391,15 +391,16 @@ public class PhaseHandler implements java.io.Serializable {
                     
                     // Rule 514.3
                     givePriorityToPlayer = false;
+                    
+                    // Rule 514.3a - state-based actions
+                    game.getAction().checkStateEffects();
                     break;
-    
+                    
                 default:
                     break;
             }
         }
     
-        // Handle effects that happen at the beginning of phases
-        game.getAction().checkStateEffects();
     
         if (!skipped) {
             // Run triggers if phase isn't being skipped

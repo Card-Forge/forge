@@ -269,7 +269,6 @@ public class CardFactoryCreatures {
                         }
                     }
                 }
-                target.getController().getGame().getAction().checkStateEffects();
             } // resolve()
 
             @Override

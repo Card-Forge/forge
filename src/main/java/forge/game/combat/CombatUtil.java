@@ -25,7 +25,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -1079,43 +1078,16 @@ public class CombatUtil {
                         flankingMagnitude++;
                     }
                 }
-                final int mag = flankingMagnitude;
-                final Card blocker = b;
-                final Ability ability2 = new Ability(b, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-    
-                        final Command untilEOT = new Command() {
-    
-                            private static final long serialVersionUID = 7662543891117427727L;
-    
-                            @Override
-                            public void run() {
-                                if (blocker.isInPlay()) {
-                                    blocker.addTempAttackBoost(mag);
-                                    blocker.addTempDefenseBoost(mag);
-                                }
-                            }
-                        }; // Command
-    
-                        if (blocker.isInPlay()) {
-                            blocker.addTempAttackBoost(-mag);
-                            blocker.addTempDefenseBoost(-mag);
-    
-                            game.getEndOfTurn().addUntil(untilEOT);
-                            System.out.println("Flanking!");
-                        }
-                    } // resolve
-    
-                }; // ability
-    
-                final StringBuilder sb2 = new StringBuilder();
-                sb2.append(b.getName()).append(" - gets -").append(mag).append("/-").append(mag).append(" until EOT.");
-                ability2.setStackDescription(sb2.toString());
-                ability2.setDescription(sb2.toString());
-    
-                game.getStack().add(ability2);
-                Log.debug("Adding Flanking!");
+
+                // Rule 702.23b:  If a creature has multiple instances of flanking, each triggers separately.
+                for( int i = 0; i < flankingMagnitude; i++ ) {
+                    String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ -1 | NumDef$ -1 | ", b.getUniqueNumber());
+                    String desc = String.format("StackDescription$ Flanking (The blocking %s gets -1/-1 until end of turn)", b.getName());
+                    
+                    SpellAbility ability = AbilityFactory.getAbility(effect + desc, a);
+                    ability.setTrigger(true);
+                    game.getStack().add(ability);
+                }
             } // flanking
 
             b.addBlockedThisTurn(a);

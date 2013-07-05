@@ -173,6 +173,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     protected final Game game;
 
+    private boolean triedToDrawFromEmptyLibrary = false;
+
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
     }
@@ -1388,10 +1390,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // lose:
         else if (!Preferences.DEV_MODE || Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MILLING_LOSS)) {
             // if devMode is off, or canLoseByDecking is Enabled, run Lose condition
-            if (!this.cantLose()) {
-                this.loseConditionMet(GameLossReason.Milled, null);
-                game.getAction().checkStateEffects();
-            }
+            this.triedToDrawFromEmptyLibrary = true;
         }
         return drawn;
     }
@@ -1799,7 +1798,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             // check state effects for static animate (Living Lands, Conversion,
             // etc...)
-            game.getAction().checkStateEffects();
+            game.getAction().checkStaticAbilities();
 
             // play a sound
             game.fireEvent(new GameEventLandPlayed(this, land));
@@ -2149,18 +2148,29 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public final boolean checkLoseCondition() {
 
+        // Just in case player already lost
         if (this.getOutcome() != null) {
             return this.getOutcome().lossState != null;
         }
 
-        if (this.poisonCounters >= 10) {
-            return this.loseConditionMet(GameLossReason.Poisoned, null);
-        }
-
+        // Rule 704.5a -  If a player has 0 or less life, he or she loses the game. 
         final boolean hasNoLife = this.getLife() <= 0;
         if (hasNoLife && !this.cantLoseForZeroOrLessLife()) {
             return this.loseConditionMet(GameLossReason.LifeReachedZero, null);
         }
+        
+        // Rule 704.5b - If a player attempted to draw a card from a library with no cards in it
+        //               since the last time state-based actions were checked, he or she loses the game. 
+        if (triedToDrawFromEmptyLibrary) {
+            triedToDrawFromEmptyLibrary = false; // one-shot check
+            return this.loseConditionMet(GameLossReason.Milled, null);
+        }
+
+        // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
+        if (this.poisonCounters >= 10) {
+            return this.loseConditionMet(GameLossReason.Poisoned, null);
+        }
+
 
         return false;
     }

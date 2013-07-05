@@ -303,10 +303,9 @@ public class PumpEffect extends SpellAbilityEffect {
             this.applyPump(sa, tgtC, a, d, keywords);
         }
 
-        for (int i = 0; i < untargetedCards.size(); i++) {
-            final Card tgtC = untargetedCards.get(i);
+        for (final Card tgtC : untargetedCards) {
             // only pump things in PumpZone
-            if (!game.getCardsIn(pumpZone).contains(tgtC)) {
+            if (!tgtC.isInZone(pumpZone)) {
                 continue;
             }
 
