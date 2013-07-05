@@ -100,8 +100,12 @@ public class DestroyEffect extends SpellAbilityEffect {
                     destroyed = game.getAction().destroyNoRegeneration(tgtC, sa);
                 } else {
                     destroyed = game.getAction().destroy(tgtC, sa);
-                } if (destroyed  && remDestroyed) {
+                }
+                if (destroyed  && remDestroyed) {
                     card.addRemembered(tgtC);
+                }
+                if (sa.hasParam("RememberLKI")) {
+                    card.addRemembered(CardUtil.getLKICopy(tgtC));
                 }
             }
         }
