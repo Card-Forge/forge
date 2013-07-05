@@ -173,7 +173,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         final boolean combatRelevant = (keyword.endsWith("First Strike") || keyword.contains("Bushido"));
         // give evasive keywords to creatures that can or do attack
         if (evasive) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || combat != null && combat.isAttacking(card))
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || newPower <= 0
                     || CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty()) {
