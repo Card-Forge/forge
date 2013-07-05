@@ -132,6 +132,8 @@ public class CHand implements ICDoc {
         final HandArea p = view.getHandArea();
 
         VField vf = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(player);
+        if ( null == vf ) 
+            return;
         final Rectangle rctLibraryLabel = vf.getDetailsPanel().getLblLibrary().getBounds();
         final List<Card> cc = player.getZone(ZoneType.Hand).getCards();
 
