@@ -91,7 +91,7 @@ public class ManaPool {
         }
 
         // check state effects replaced by checkStaticAbilities
-        owner.getGame().getAction().checkStaticAbilities();
+        //owner.getGame().getAction().checkStaticAbilities();
     }
 
     /**
@@ -324,8 +324,6 @@ public class ManaPool {
             }
         }
         manaPaid.clear();
-        
-        owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.ComplexUpdate, null));
     }
 
 

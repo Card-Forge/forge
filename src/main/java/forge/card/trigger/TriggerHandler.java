@@ -176,8 +176,6 @@ public class TriggerHandler {
         if (waiting.isEmpty()) {
             return false;
         }
-        
-        game.getAction().checkStaticAbilities();
 
         boolean haveWaiting = false;
         for (TriggerWaiting wt : waiting) {

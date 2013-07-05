@@ -213,7 +213,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (!simultaneousStackEntryList.isEmpty()) {
             this.chooseOrderOfSimultaneousStackEntryAll();
-            game.getAction().checkStaticAbilities();
+            //game.getAction().checkStaticAbilities();
         }
     }
 
@@ -591,7 +591,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         this.unfreezeStack();
         sa.resetOnceResolved();
 
-        game.getAction().checkStaticAbilities();
+        //game.getAction().checkStaticAbilities();
         game.getPhaseHandler().onStackResolved();
 
         this.curResolvingCard = null;
