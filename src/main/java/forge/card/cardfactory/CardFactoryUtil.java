@@ -1970,47 +1970,18 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Ability> getBushidoEffects(final Card c) {
-        final ArrayList<Ability> list = new ArrayList<Ability>();
-
-
+    public static ArrayList<SpellAbility> getBushidoEffects(final Card c) {
+        final ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
         for (final String kw : c.getKeyword()) {
             if (kw.contains("Bushido")) {
                 final String[] parse = kw.split(" ");
                 final String s = parse[1];
                 final int magnitude = Integer.parseInt(s);
 
-                final Ability ability = new Ability(c, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final Command untilEOT = new Command() {
-
-                            private static final long serialVersionUID = 3014846051064254493L;
-
-                            @Override
-                            public void run() {
-                                if (c.isInPlay()) {
-                                    c.addTempAttackBoost(-1 * magnitude);
-                                    c.addTempDefenseBoost(-1 * magnitude);
-                                }
-                            }
-                        };
-
-                        c.getGame().getEndOfTurn().addUntil(untilEOT);
-
-                        c.addTempAttackBoost(magnitude);
-                        c.addTempDefenseBoost(magnitude);
-                    }
-                };
-                final StringBuilder sb = new StringBuilder();
-                sb.append(c);
-                sb.append(" - (Bushido) gets +");
-                sb.append(magnitude);
-                sb.append("/+");
-                sb.append(magnitude);
-                sb.append(" until end of turn.");
-                ability.setStackDescription(sb.toString());
-
+                String description = String.format("Bushido %d (When this blocks or becomes blocked, it gets +%d/+%d until end of turn).", magnitude, magnitude, magnitude);
+                String regularPart = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +%d | NumDef$ +%d | StackDescription$ %s", c.getUniqueNumber(), magnitude, magnitude, description);
+                
+                SpellAbility ability = AbilityFactory.getAbility( regularPart, c);
                 list.add(ability);
             }
         }

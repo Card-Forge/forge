@@ -30,6 +30,6 @@ public class GameEventPlayerPriority extends GameEvent {
      */
     @Override
     public String toString() {
-        return String.format("%s gains priority", priority.getName());
+        return String.format("Priority - %s", priority.getName());
     }
 }

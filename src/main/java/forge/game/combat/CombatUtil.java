@@ -1008,7 +1008,7 @@ public class CombatUtil {
     public static void checkDeclareBlockers(Game game, final List<Card> cl, Combat combat) {
         for (final Card c : cl) {
             if (!c.getDamageHistory().getCreatureBlockedThisCombat()) {
-                for (final Ability ab : CardFactoryUtil.getBushidoEffects(c)) {
+                for (final SpellAbility ab : CardFactoryUtil.getBushidoEffects(c)) {
                     game.getStack().add(ab);
                 }
                 // Run triggers
@@ -1049,7 +1049,7 @@ public class CombatUtil {
 
         if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
             // Bushido
-            for (final Ability ab : CardFactoryUtil.getBushidoEffects(a)) {
+            for (final SpellAbility ab : CardFactoryUtil.getBushidoEffects(a)) {
                 game.getStack().add(ab);
             }
 

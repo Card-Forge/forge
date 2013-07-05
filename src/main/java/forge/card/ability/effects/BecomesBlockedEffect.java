@@ -45,7 +45,7 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
                     game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
 
                     // Bushido
-                    for (final Ability ab : CardFactoryUtil.getBushidoEffects(c)) {
+                    for (final SpellAbility ab : CardFactoryUtil.getBushidoEffects(c)) {
                         game.getStack().add(ab);
                     }
                 }
