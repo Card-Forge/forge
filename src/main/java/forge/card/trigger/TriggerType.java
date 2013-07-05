@@ -108,16 +108,7 @@ public enum TriggerType {
                     Trigger res = c.newInstance(mapParams, host, intrinsic);
                     res.setMode(this);
                     return res;
-                } catch (IllegalArgumentException e) {
-                    // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
+                } catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
                     // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
                     e.printStackTrace();
                 }

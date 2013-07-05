@@ -955,41 +955,6 @@ public class CombatUtil {
         } // creatureAttacked
           // Annihilator
 
-
-        if (c.getName().equals("Witch-Maw Nephilim") && !c.getDamageHistory().getCreatureAttackedThisCombat()
-                && (c.getNetAttack() >= 10)) {
-            final Card charger = c;
-            final Ability ability2 = new Ability(c, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = -1703473800920781454L;
-
-                        @Override
-                        public void run() {
-                            if (charger.isInPlay()) {
-                                charger.removeIntrinsicKeyword("Trample");
-                            }
-                        }
-                    }; // Command
-
-                    if (charger.isInPlay()) {
-                        charger.addIntrinsicKeyword("Trample");
-
-                        game.getEndOfTurn().addUntil(untilEOT);
-                    }
-                } // resolve
-            }; // ability
-
-            final StringBuilder sb2 = new StringBuilder();
-            sb2.append(c.getName()).append(" - gains trample until end of turn if its power is 10 or greater.");
-            ability2.setStackDescription(sb2.toString());
-
-            game.getStack().add(ability2);
-
-        } // Witch-Maw Nephilim
-
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getController().setAttackedWithCreatureThisTurn(true);
         c.getController().incrementAttackersDeclaredThisTurn();
@@ -1085,8 +1050,11 @@ public class CombatUtil {
                     String desc = String.format("StackDescription$ Flanking (The blocking %s gets -1/-1 until end of turn)", b.getName());
                     
                     SpellAbility ability = AbilityFactory.getAbility(effect + desc, a);
+                    ability.setActivatingPlayer(a.getController());
+                    ability.setDescription(ability.getStackDescription());
                     ability.setTrigger(true);
-                    game.getStack().add(ability);
+
+                    game.getStack().addSimultaneousStackEntry(ability);
                 }
             } // flanking
 
@@ -1136,42 +1104,17 @@ public class CombatUtil {
      *            - the number of creatures blocking this rampaging creature
      */
     private static void executeRampageAbility(final Game game, final Card c, final int magnitude, final int numBlockers) {
-        final Card crd = c;
-        final int pump = magnitude;
-        Ability ability;
+        // numBlockers starts with 1 since it is for every creature beyond the first
+        for (int i = 1; i < numBlockers; i++) {
+            String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +%d | NumDef$ +%d | ", c.getUniqueNumber(), magnitude, magnitude);
+            String desc = String.format("StackDescription$ Rampage %d (Whenever CARDNAME becomes blocked, it gets +%d/+%d until end of turn for each creature blocking it beyond the first.)", magnitude, magnitude );
 
-        // numBlockers -1 since it is for every creature beyond the first
-        for (int i = 0; i < (numBlockers - 1); i++) {
-            ability = new Ability(c, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = -3215615538474963181L;
+            SpellAbility ability = AbilityFactory.getAbility(effect + desc, c);
+            ability.setActivatingPlayer(c.getController());
+            ability.setDescription(ability.getStackDescription());
+            ability.setTrigger(true);
 
-                        @Override
-                        public void run() {
-                            if (crd.isInPlay()) {
-                                crd.addTempAttackBoost(-pump);
-                                crd.addTempDefenseBoost(-pump);
-                            }
-                        }
-                    }; // Command
-
-                    if (crd.isInPlay()) {
-                        crd.addTempAttackBoost(pump);
-                        crd.addTempDefenseBoost(pump);
-
-                        game.getEndOfTurn().addUntil(untilEOT);
-                    }
-                } // resolve
-
-            }; // ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(c).append(" - (Rampage) gets +").append(pump).append("/+").append(pump).append(" until EOT.");
-            ability.setStackDescription(sb.toString());
-
-            game.getStack().add(ability);
+            game.getStack().addSimultaneousStackEntry(ability);
         }
     }
 
