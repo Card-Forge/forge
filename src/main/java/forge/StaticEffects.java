@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -44,26 +46,23 @@ import forge.game.zone.ZoneType;
 public class StaticEffects {
 
     // **************** StaticAbility system **************************
-    /**
-     * staticEffects.
-     */
-    private ArrayList<StaticEffect> staticEffects;
-
+    private final ArrayList<StaticEffect> staticEffects = new ArrayList<StaticEffect>();
     //Global rule changes
-    private final EnumSet<GlobalRuleChange> ruleChanges;
+    private final EnumSet<GlobalRuleChange> ruleChanges = EnumSet.noneOf(GlobalRuleChange.class);
+
     private final Game game; 
     
-    /**
-     * clearStaticEffect. TODO Write javadoc for this method.
-     */
-    public final void clearStaticEffects() {
+    public final Set<Card> clearStaticEffects() {
         ruleChanges.clear();
+        Set<Card> clearedCards = new HashSet<Card>();
 
         // remove all static effects
-        for (int i = 0; i < this.staticEffects.size(); i++) {
-            this.removeStaticEffect(this.staticEffects.get(i));
+        for (StaticEffect se : staticEffects) {
+            clearedCards.addAll(this.removeStaticEffect(se));
         }
-        this.staticEffects = new ArrayList<StaticEffect>();
+        this.staticEffects.clear();
+        
+        return clearedCards;
     }
 
     public void setGlobalRuleChange(GlobalRuleChange change) {
@@ -85,19 +84,12 @@ public class StaticEffects {
     }
 
     /**
-     * @return the staticEffects
-     */
-    public ArrayList<StaticEffect> getStaticEffects() {
-        return staticEffects;
-    }
-
-    /**
      * removeStaticEffect TODO Write javadoc for this method.
      * 
      * @param se
      *            a StaticEffect
      */
-    final void removeStaticEffect(final StaticEffect se) {
+    private final List<Card> removeStaticEffect(final StaticEffect se) {
         final List<Card> affectedCards = se.getAffectedCards();
         final ArrayList<Player> affectedPlayers = se.getAffectedPlayers();
         final HashMap<String, String> params = se.getParams();
@@ -189,9 +181,7 @@ public class StaticEffects {
         }
 
         // modify the affected card
-        for (int i = 0; i < affectedCards.size(); i++) {
-            final Card affectedCard = affectedCards.get(i);
-            
+        for (final Card affectedCard : affectedCards) {
             // Gain control
             if (params.containsKey("GainControl")) {
                 affectedCard.removeTempController(se.getTimestamp());
@@ -262,6 +252,7 @@ public class StaticEffects {
             }
         }
         se.clearTimestamps();
+        return affectedCards;
     }
 
     // **************** End StaticAbility system **************************
@@ -283,8 +274,6 @@ public class StaticEffects {
     public StaticEffects(Game game) {
         this.game = game;
         this.initStateBasedEffectsList();
-        this.staticEffects = new ArrayList<StaticEffect>();
-        this.ruleChanges = EnumSet.noneOf(GlobalRuleChange.class);
     }
 
     /**

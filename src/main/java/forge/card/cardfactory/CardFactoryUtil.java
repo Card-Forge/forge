@@ -1982,6 +1982,7 @@ public class CardFactoryUtil {
                 String regularPart = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +%d | NumDef$ +%d | StackDescription$ %s", c.getUniqueNumber(), magnitude, magnitude, description);
                 
                 SpellAbility ability = AbilityFactory.getAbility( regularPart, c);
+                ability.setDescription(ability.getStackDescription());
                 list.add(ability);
             }
         }

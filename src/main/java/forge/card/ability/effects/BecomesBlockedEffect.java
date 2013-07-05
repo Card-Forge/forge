@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.TriggerType;

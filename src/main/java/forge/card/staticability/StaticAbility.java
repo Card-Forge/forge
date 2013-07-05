@@ -227,21 +227,24 @@ public class StaticAbility {
      * 
      * @param mode
      *            the mode
+     * @return 
      */
-    public final void applyAbility(final String mode) {
+    public final List<Card> applyAbility(final String mode) {
 
         // don't apply the ability if it hasn't got the right mode
         if (!this.params.get("Mode").equals(mode)) {
-            return;
+            return null;
         }
 
         if (this.isSuppressed() || !this.checkConditions()) {
-            return;
+            return null;
         }
 
         if (mode.equals("Continuous")) {
-            StaticAbilityContinuous.applyContinuousAbility(this);
+            return StaticAbilityContinuous.applyContinuousAbility(this);
         }
+        
+        return null;
     }
 
     // apply the ability if it has the right mode

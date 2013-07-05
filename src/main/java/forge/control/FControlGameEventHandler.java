@@ -1,6 +1,9 @@
 package forge.control;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -236,7 +239,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
     
     
-    private final List<Card> cardsToUpdate = new Vector<Card>();
+    private final Set<Card> cardsToUpdate = new HashSet<Card>();
     private final Runnable updCards = new Runnable() { 
         @Override public void run() { 
             synchronized (cardsToUpdate) {
@@ -275,14 +278,24 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return null;
     }
     
+    private Void updateManyCards(Collection<Card> cc) {
+        boolean needUpdate = false;
+        synchronized (cardsToUpdate) {
+            needUpdate = cardsToUpdate.isEmpty();
+            cardsToUpdate.addAll(cc);
+        }
+        if( needUpdate )
+            FThreads.invokeInEdtNowOrLater(updCards);
+        return null;
+    }    
+    
     /* (non-Javadoc)
      * @see forge.game.event.IGameEventVisitor.Base#visit(forge.game.event.GameEventCardStatsChanged)
      */
     @Override
     public Void visit(GameEventCardStatsChanged event) {
         // TODO Smart partial updates
-        PlayerZone z = (PlayerZone) event.card.getGame().getZoneOf(event.card);
-        return updateZone(z);
+        return updateManyCards(event.cards);
     }
     
     // Update manapool

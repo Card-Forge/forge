@@ -56,9 +56,10 @@ public class StaticAbilityContinuous {
      * 
      * @param stAb
      *            a StaticAbility
+     * @return 
      * 
      */
-    public static void applyContinuousAbility(final StaticAbility stAb) {
+    public static List<Card> applyContinuousAbility(final StaticAbility stAb) {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
@@ -476,6 +477,8 @@ public class StaticAbilityContinuous {
                 }
             }
         }
+        
+        return affectedCards;
     }
 
     private static ArrayList<Player> getAffectedPlayers(final StaticAbility stAb) {

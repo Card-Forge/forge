@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -63,6 +64,7 @@ import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameStarted;
@@ -790,7 +792,7 @@ public class GameAction {
             return;
 
         // remove old effects
-        game.getStaticEffects().clearStaticEffects();
+        Set<Card> affectedCards = game.getStaticEffects().clearStaticEffects();
         game.getTriggerHandler().cleanUpTemporaryTriggers();
         game.getReplacementHandler().cleanUpTemporaryReplacements();
 
@@ -817,7 +819,9 @@ public class GameAction {
         };
         Collections.sort(staticAbilities, comp);
         for (final StaticAbility stAb : staticAbilities) {
-            stAb.applyAbility("Continuous");
+            List<Card> affectedHere = stAb.applyAbility("Continuous");
+            if ( null != affectedHere )
+                affectedCards.addAll(affectedHere);
         }
 
         // card state effects like Glorious Anthem
@@ -827,6 +831,9 @@ public class GameAction {
         }
 
         GameActionUtil.grantBasicLandsManaAbilities(game);
+        
+        if ( !affectedCards.isEmpty() )
+            game.fireEvent(new GameEventCardStatsChanged(affectedCards));
     }
 
     /**

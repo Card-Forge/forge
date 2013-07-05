@@ -1,6 +1,10 @@
 package forge.game.event;
 
+import java.util.Arrays;
+import java.util.Collection;
 import org.apache.commons.lang.StringUtils;
+
+import com.google.common.collect.Iterables;
 
 import forge.Card;
 
@@ -9,9 +13,13 @@ import forge.Card;
  */
 public class GameEventCardStatsChanged extends GameEvent {
 
-    public final Card card;
+    public final Collection<Card> cards;
     public GameEventCardStatsChanged(Card affected) {
-        card = affected;
+        cards = Arrays.asList(affected);
+    }
+    
+    public GameEventCardStatsChanged(Collection<Card> affected) {
+        cards = affected;
     }
 
     /* (non-Javadoc)
@@ -25,7 +33,13 @@ public class GameEventCardStatsChanged extends GameEvent {
     
     @Override
     public String toString() {
-        return String.format("Card state changes: %s (%s) %d/%d", card.getName(), StringUtils.join(card.getType(), ' '), card.getNetAttack(), card.getNetDefense() );
+        Card card = Iterables.getFirst(cards, null);
+        if ( null == card )
+            return "Card state changes: (empty list)";
+        if( cards.size() == 1) 
+            return String.format("Card state changes: %s (%s) %d/%d", card.getName(), StringUtils.join(card.getType(), ' '), card.getNetAttack(), card.getNetDefense() );
+        else
+            return String.format("Card state changes: %s (%s) %d/%d and %d more", card.getName(), StringUtils.join(card.getType(), ' '), card.getNetAttack(), card.getNetDefense(), cards.size() - 1 );
     }
 
 }

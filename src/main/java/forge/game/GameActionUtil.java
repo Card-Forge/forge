@@ -42,7 +42,6 @@ import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityFactory.AbilityRecordType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
@@ -533,23 +532,6 @@ public final class GameActionUtil {
         }
     }
 
-    /** stores the Command. */
-    private static Function<Game, ?> umbraStalker = new Function<Game, Object>() {
-        @Override
-        public Object apply(Game game) {
-            // get all creatures
-            final List<Card> cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Umbra Stalker"));
-            for (final Card c : cards) {
-                final Player player = c.getController();
-                final List<Card> grave = player.getCardsIn(ZoneType.Graveyard);
-                final int pt = CardFactoryUtil.getNumberOfManaSymbolsByColor("B", grave);
-                c.setBaseAttack(pt);
-                c.setBaseDefense(pt);
-            }
-            return null;
-        } // execute()
-    };
-
     /** Constant <code>oldManOfTheSea</code>. */
     private static Function<Game, ?> oldManOfTheSea = new Function<Game, Object>() {
 
@@ -614,7 +596,6 @@ public final class GameActionUtil {
 
         GameActionUtil.getCommands().put("Liu_Bei", GameActionUtil.liuBei);
         GameActionUtil.getCommands().put("Old_Man_of_the_Sea", GameActionUtil.oldManOfTheSea);
-        GameActionUtil.getCommands().put("Umbra_Stalker", GameActionUtil.umbraStalker);
 
         // The commands above are in alphabetical order by cardname.
     }
