@@ -22,6 +22,8 @@ import java.util.*;
 import org.apache.commons.lang.StringUtils;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
@@ -538,22 +540,6 @@ public class CardFactoryUtil {
     public static Command vanishing(final Card sourceCard, final int power) {
         return entersBattleFieldWithCounters(sourceCard, CounterType.TIME, power);
     } // vanishing
-
-    /**
-     * <p>
-     * getNumberOfManaSymbolsControlledByColor.
-     * </p>
-     * 
-     * @param colorAbb
-     *            a {@link java.lang.String} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a int.
-     */
-    public static int getNumberOfManaSymbolsControlledByColor(final String colorAbb, final Player player) {
-        final List<Card> cards = player.getCardsIn(ZoneType.Battlefield);
-        return getNumberOfManaSymbolsByColor(colorAbb, cards);
-    }
 
     /**
      * <p>
@@ -1277,14 +1263,14 @@ public class CardFactoryUtil {
 
         // Count$Chroma.<mana letter>
         if (sq[0].contains("Chroma")) {
-            if (sq[0].contains("ChromaSource")) {
-                // Runs Chroma for passed in Source card
-                List<Card> chromaList = CardLists.createCardList(c);
-                return doXMath(getNumberOfManaSymbolsByColor(sq[1], chromaList), m, c);
+            ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
+            final List<Card> cards;
+            if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
+                cards = Lists.newArrayList(c);
+            } else {
+                cards = cc.getCardsIn(sourceZone);
             }
-            else {
-                return doXMath(getNumberOfManaSymbolsControlledByColor(sq[1], cc), m, c);
-            }
+            return doXMath(getNumberOfManaSymbolsByColor(sq[1], cards), m, c);
         }
 
         if (sq[0].contains("Hellbent"))         return doXMath(Integer.parseInt(sq[cc.hasHellbent() ? 1 : 2]), m, c);

@@ -236,10 +236,6 @@ public class CardLists {
         return Lists.newArrayList(Iterables.filter(Iterables.filter(cardList, f1), f2));
     }    
     
-    public static List<Card> createCardList(Card c) {
-        return Lists.newArrayList(c);
-    }
-
     /**
      * Given a List<Card> cardList, return a List<Card> that are tied for having the highest CMC.
      * 

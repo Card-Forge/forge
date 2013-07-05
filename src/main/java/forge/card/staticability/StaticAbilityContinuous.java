@@ -24,6 +24,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
@@ -510,7 +512,7 @@ public class StaticAbilityContinuous {
         final Player controller = hostCard.getController();
 
         if (params.containsKey("CharacteristicDefining")) {
-            return CardLists.createCardList(hostCard); // will always be the card itself
+            return Lists.newArrayList(hostCard); // will always be the card itself
         }
 
         // non - CharacteristicDefining
@@ -524,11 +526,11 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {
             if (params.get("Affected").contains("Self")) {
-                affectedCards = CardLists.createCardList(hostCard);
+                affectedCards = Lists.newArrayList(hostCard);
             } else if (params.get("Affected").contains("EnchantedBy")) {
-                affectedCards = CardLists.createCardList(hostCard.getEnchantingCard());
+                affectedCards = Lists.newArrayList(hostCard.getEnchantingCard());
             } else if (params.get("Affected").contains("EquippedBy")) {
-                affectedCards = CardLists.createCardList(hostCard.getEquippingCard());
+                affectedCards = Lists.newArrayList(hostCard.getEquippingCard());
             } else if (params.get("Affected").equals("EffectSource")) {
                 affectedCards = new ArrayList<Card>(AbilityUtils.getDefinedCards(hostCard, params.get("Affected"), null));
                 return affectedCards;

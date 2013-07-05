@@ -287,8 +287,6 @@ public class StaticEffects {
 
         StaticEffects.cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] { "Liu_Bei" });
         StaticEffects.cardToEffectsList.put("Old Man of the Sea", new String[] { "Old_Man_of_the_Sea" });
-        StaticEffects.cardToEffectsList.put("Umbra Stalker", new String[] { "Umbra_Stalker" });
-
     }
 
     /**
