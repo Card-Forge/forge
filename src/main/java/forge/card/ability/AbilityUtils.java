@@ -1037,8 +1037,8 @@ public class AbilityUtils {
             return;
         }
 
-        // This is doubtful now: since most updates are done in changeZone - what would need this call? 
-        //game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
+        // Needed - Equip an untapped creature with Sword of the Paruns then cast Deadshot on it. Should deal 2 more damage.
+        game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
         AbilityUtils.resolveApiAbility(abSub, game);
     }
 
