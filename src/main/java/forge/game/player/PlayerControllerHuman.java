@@ -122,7 +122,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public void playSpellAbilityNoStack(Player player, SpellAbility effectSA) {
+    public void playSpellAbilityNoStack(SpellAbility effectSA) {
         HumanPlay.playSpellAbilityNoStack(player, effectSA);
     }
 

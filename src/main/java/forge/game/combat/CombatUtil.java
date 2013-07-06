@@ -32,7 +32,6 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Command;
 import forge.Constant;
 import forge.GameEntity;
 import forge.card.CardType;

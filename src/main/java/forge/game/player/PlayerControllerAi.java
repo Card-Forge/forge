@@ -249,7 +249,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void playSpellAbilityNoStack(Player player, SpellAbility effectSA) {
+    public void playSpellAbilityNoStack(SpellAbility effectSA) {
         ComputerUtil.playNoStack(player, effectSA, game);
     }
 

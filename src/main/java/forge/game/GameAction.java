@@ -60,7 +60,6 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
-import forge.game.ai.ComputerUtil;
 import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardRegenerated;
@@ -70,7 +69,6 @@ import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameStarted;
 import forge.game.player.GameLossReason;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.PlayerZone;
@@ -1658,11 +1656,8 @@ public class GameAction {
             for(final SpellAbility sa : usableFromOpeningHand ) {
                 if (!takesAction.getZone(ZoneType.Hand).contains(sa.getSourceCard()))
                     continue;
-                    
-                if (takesAction.isHuman())
-                    HumanPlay.playSpellAbilityNoStack(takesAction, sa);
-                else
-                    ComputerUtil.playNoStack(takesAction, sa, game);
+                
+                takesAction.getController().playSpellAbilityNoStack(sa);
             }
             takesAction = game.getNextPlayerAfter(takesAction);
         } while( takesAction != first );
