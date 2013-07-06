@@ -29,6 +29,7 @@ import com.google.common.eventbus.EventBus;
 import forge.Card;
 import forge.CardLists;
 import forge.ColorChanger;
+import forge.FThreads;
 import forge.GameLog;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
@@ -93,7 +94,7 @@ public class Game {
         List<Player> players = new ArrayList<Player>();
         allPlayers = Collections.unmodifiableList(players);
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
-        
+
         for (RegisteredPlayer psc : players0) {
             Player pl = psc.getPlayer().getPlayer(this);
             players.add(pl);
@@ -503,7 +504,7 @@ public class Game {
      */
     public void fireEvent(GameEvent event) {
         if ( LOG_EVENTS )
-            System.out.println("GE: " + event.toString());
+            System.out.println("GE: " + event.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(4, true));
 
         events.post(event);
     }

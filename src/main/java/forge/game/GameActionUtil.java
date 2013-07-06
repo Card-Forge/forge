@@ -886,8 +886,6 @@ public final class GameActionUtil {
             }
         }
         abilities.addAll(newAbilities);
-        
-
         return abilities;
     }
 
