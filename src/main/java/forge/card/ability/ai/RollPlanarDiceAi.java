@@ -77,7 +77,7 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                             return false;
                         }
                         break;
-                    case "hascreatureinplay": // TODO: All abilities below only test for "True". The "False" condition is not implemented/parsed.
+                    case "hascreatureinplay": // TODO: All abilities below only test the presence of the option. The value (true/false) is not yet tested.
                         if (!detectCreatureInZone(ai, ZoneType.Battlefield)) {
                             return false;
                         }
