@@ -12,6 +12,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.CardUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
@@ -409,6 +410,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         for (final Card tgtC : tgtCards) {
             if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
+            }
+            if (sa.hasParam("RememberLKI")) {
+                hostCard.addRemembered(CardUtil.getLKICopy(tgtC));
             }
 
             final String prompt = String.format("Do you want to move %s from %s to %s?", tgtC, origin, destination);

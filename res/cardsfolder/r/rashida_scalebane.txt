@@ -2,9 +2,9 @@ Name:Rashida Scalebane
 ManaCost:3 W W
 Types:Legendary Creature Human Soldier
 PT:3/4
-A:AB$ Destroy | Cost$ T | ValidTgts$ Dragon.attacking,Dragon.blocking | NoRegen$ True | TgtPrompt$ Select target attacking or blocking Dragon | SubAbility$ DBGainLife | SpellDescription$ Destroy target attacking or blocking Dragon. It can't be regenerated. You gain life equal to its power.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
-SVar:X:Targeted$CardPower
-SVar:RemRandomDeck:True
+A:AB$ Destroy | Cost$ T | ValidTgts$ Dragon.attacking,Dragon.blocking | NoRegen$ True | TgtPrompt$ Select target attacking or blocking Dragon | RememberLKI$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy target attacking or blocking Dragon. It can't be regenerated. You gain life equal to its power.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rashida_scalebane.jpg
 Oracle:{T}: Destroy target attacking or blocking Dragon. It can't be regenerated. You gain life equal to its power.
