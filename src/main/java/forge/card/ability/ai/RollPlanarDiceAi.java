@@ -11,7 +11,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-import java.util.List;
 
 public class RollPlanarDiceAi extends SpellAbilityAi {
     /* (non-Javadoc)
@@ -84,9 +83,8 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                         }
                         break;
                     case "opphascreatureinplay":
-                        List<Player> otherPlayers = ai.getOpponents();
                         boolean oppHasCreature = false;
-                        for (Player op : otherPlayers) {
+                        for (Player op : ai.getOpponents()) {
                             oppHasCreature |= detectCreatureInZone(op, ZoneType.Battlefield);
                         }
                         if (!oppHasCreature) {
@@ -94,17 +92,17 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
                         }
                         break;
                     case "hascolorcreatureinplay":
-                        if (!detectColorCreatureInZone(ai, paramValue, ZoneType.Battlefield)) {
+                        if (!detectColorInZone(ai, paramValue, ZoneType.Battlefield, true)) {
                             return false;
                         }
                         break;
                     case "hascolorinplay":
-                        if (!detectColorInZone(ai, paramValue, ZoneType.Battlefield)) {
+                        if (!detectColorInZone(ai, paramValue, ZoneType.Battlefield, false)) {
                             return false;
                         }
                         break;
                     case "hascoloringraveyard":
-                        if (!detectColorInZone(ai, paramValue, ZoneType.Graveyard)) {
+                        if (!detectColorInZone(ai, paramValue, ZoneType.Graveyard, false)) {
                             return false;
                         }
                         break;
@@ -157,28 +155,30 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
         return canPlayAI(aiPlayer, sa);
     }
 
-    private boolean detectColorInZone(Player p, String paramValue, ZoneType zone) {
+    private boolean detectColorInZone(Player p, String paramValue, ZoneType zone, boolean creaturesOnly) {
         boolean hasColorInPlay = false;
         for (Card c : p.getCardsIn(zone)) {
-            if (paramValue.contains("u") && c.isBlue()) {
-                hasColorInPlay = true;
-                break;
-            }
-            if (paramValue.contains("g") && c.isGreen()) {
-                hasColorInPlay = true;
-                break;
-            }
-            if (paramValue.contains("r") && c.isRed()) {
-                hasColorInPlay = true;
-                break;
-            }
-            if (paramValue.contains("w") && c.isWhite()) {
-                hasColorInPlay = true;
-                break;
-            }
-            if (paramValue.contains("b") && c.isBlack()) {
-                hasColorInPlay = true;
-                break;
+            if (!creaturesOnly || c.isCreature()) {
+                if (paramValue.contains("u") && c.isBlue()) {
+                    hasColorInPlay = true;
+                    break;
+                }
+                if (paramValue.contains("g") && c.isGreen()) {
+                    hasColorInPlay = true;
+                    break;
+                }
+                if (paramValue.contains("r") && c.isRed()) {
+                    hasColorInPlay = true;
+                    break;
+                }
+                if (paramValue.contains("w") && c.isWhite()) {
+                    hasColorInPlay = true;
+                    break;
+                }
+                if (paramValue.contains("b") && c.isBlack()) {
+                    hasColorInPlay = true;
+                    break;
+                }
             }
         }
         return hasColorInPlay;
@@ -193,32 +193,5 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
             }
         }
         return hasCreatureInPlay;
-    }
-
-    private boolean detectColorCreatureInZone(Player p, String paramValue, ZoneType zone) {
-        boolean hasColorInPlay = false;
-        for (Card c : p.getCardsIn(zone)) {
-            if (paramValue.contains("u") && c.isBlue() && c.isCreature()) {
-                hasColorInPlay = true;
-                break;
-            }
-            if (paramValue.contains("g") && c.isGreen() && c.isCreature()) {
-                hasColorInPlay = true;
-                break;
-            }
-            if (paramValue.contains("r") && c.isRed() && c.isCreature()) {
-                hasColorInPlay = true;
-                break;
-            }
-            if (paramValue.contains("w") && c.isWhite() && c.isCreature()) {
-                hasColorInPlay = true;
-                break;
-            }
-            if (paramValue.contains("b") && c.isBlack() && c.isCreature()) {
-                hasColorInPlay = true;
-                break;
-            }
-        }
-        return hasColorInPlay;
     }
 }
