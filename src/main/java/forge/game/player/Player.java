@@ -1796,10 +1796,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
 
-            // check state effects for static animate (Living Lands, Conversion,
-            // etc...)
-            game.getAction().checkStaticAbilities();
-
             // play a sound
             game.fireEvent(new GameEventLandPlayed(this, land));
 

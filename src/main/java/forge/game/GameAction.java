@@ -196,7 +196,7 @@ public class GameAction {
             ReplacementResult repres = game.getReplacementHandler().run(repParams);
             if (repres != ReplacementResult.NotReplaced) {
                 if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
-                    return GameAction.this.moveToGraveyard(c);
+                    return this.moveToGraveyard(c);
                 }
                 return c;
             }
@@ -235,6 +235,9 @@ public class GameAction {
             }
             zoneFrom.remove(c);
         }
+        
+        // Need to apply any static effects to produce correct triggers
+        checkStaticAbilities();
         
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
@@ -841,7 +844,7 @@ public class GameAction {
                 it.remove();
         }
         
-        if ( !affectedCards.isEmpty() )
+        //if ( !affectedCards.isEmpty() )
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
     }
 

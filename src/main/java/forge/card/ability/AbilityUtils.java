@@ -1037,7 +1037,8 @@ public class AbilityUtils {
             return;
         }
 
-        game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
+        // This is doubtful now: since most updates are done in changeZone - what would need this call? 
+        //game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
         AbilityUtils.resolveApiAbility(abSub, game);
     }
 
