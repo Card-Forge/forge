@@ -392,9 +392,6 @@ public class PlayerControllerHuman extends PlayerController {
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
         if ( p != player ) {
             int cntToKeepInHand =  min == 0 ? -1 : valid.size() - min;
-            if (cntToKeepInHand < 0) {
-                cntToKeepInHand = 0; // FIXME: This is an experimental dirty hack!
-            }
             return GuiChoose.order("Choose cards to Discard", "Discarded", cntToKeepInHand, valid, null, null);
         }
 

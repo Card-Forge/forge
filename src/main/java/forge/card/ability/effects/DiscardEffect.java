@@ -210,7 +210,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     if (mode.startsWith("Reveal") && p != chooser)
                         chooser.getGame().getAction().reveal(dPHand, p);
                     
-                    int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : numCards;
+                    int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : Math.min(validCards.size(), numCards);
                     int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
 
                     List<Card> toBeDiscarded = validCards.isEmpty() ? CardLists.emptyList : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
