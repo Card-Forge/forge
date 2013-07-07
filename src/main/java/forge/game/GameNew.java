@@ -134,7 +134,7 @@ public class GameNew {
                 
                 // Assign card-specific foiling or random foiling on approximately 1:20 cards if enabled
                 CardEdition.FoilType foilType = CardEdition.FoilType.NOT_SUPPORTED;
-                if (card.getCurSetCode() != null) {
+                if (card.getCurSetCode() != null && Singletons.getModel().getEditions().get(card.getCurSetCode()) != null) {
                     Singletons.getModel().getEditions().get(card.getCurSetCode()).getFoilType();
                 }
                 if (foilType != CardEdition.FoilType.NOT_SUPPORTED && (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5)))) {
