@@ -59,12 +59,12 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
     /** {@inheritDoc} */
     @Override
-    public final void add(final Card c) {
+    public final void add(final Card c, final Integer position) {
         if (c == null) {
             throw new RuntimeException("PlayerZoneComesInto Play : add() object is null");
         }
 
-        super.add(c);
+        super.add(c, position);
 
         if (this.trigger) {
             if (c.hasKeyword("Hideaway")) {

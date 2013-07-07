@@ -93,26 +93,26 @@ public class PlayerZone extends Zone {
     }
 
     @Override
-    public void add(final Card c) {
+    public void add(final Card c, Integer position) {
         // WTF IS THIS? Replacement effects in zone.add code!
         
         if (this.is(ZoneType.Graveyard)
                 && c.hasKeyword("If CARDNAME would be put into a graveyard "
                         + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
             final PlayerZone lib = c.getOwner().getZone(ZoneType.Library);
-            lib.add(c);
+            lib.add(c, position);
             c.getOwner().shuffle();
             return;
         }
 
         if (c.isUnearthed() && (this.is(ZoneType.Graveyard) || this.is(ZoneType.Hand) || this.is(ZoneType.Library))) {
             final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
-            removed.add(c);
+            removed.add(c, position);
             c.setUnearthed(false);
             return;
         }
 
-        super.add(c);
+        super.add(c, position);
     }
 
     /**

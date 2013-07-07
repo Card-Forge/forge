@@ -132,12 +132,7 @@ public class GameAction {
             return c;
         }
         if (zoneFrom == null && !c.isToken()) {
-            if (position == null) {
-                zoneTo.add(c);
-            } else {
-                zoneTo.add(c, position);
-            }
-
+            zoneTo.add(c, position);
             game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
             return c;
         }
@@ -219,11 +214,7 @@ public class GameAction {
         
         // "enter the battlefield as a copy" - apply code here
         // but how to query for input here and continue later while the callers assume synchronous result?
-        if (position == null) {
-            zoneTo.add(copied);
-        } else {
-            zoneTo.add(copied, position);
-        }
+        zoneTo.add(copied, position);
 
         if (zoneFrom != null) {
             if (fromBattlefield && c.isCreature() && game.getCombat() != null) {

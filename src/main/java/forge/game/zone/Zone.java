@@ -72,19 +72,18 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
     }
     
     @Override
-    public void add(final Card c) {
-        logCardAdded(c);
-        updateCardState(c);
-        this.cardList.add(c);
-        game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
+    public final void add(final Card c) {
+        add(c, null);
     }
 
-
     @Override
-    public final void add(final Card c, final int index) {
+    public void add(final Card c, final Integer index) {
         logCardAdded(c);
         updateCardState(c);
-        this.cardList.add(index, c);
+        if ( index == null )
+            this.cardList.add(c);
+        else
+            this.cardList.add(index.intValue(), c);
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
     }
 

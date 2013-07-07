@@ -41,7 +41,7 @@ interface IZone {
     boolean contains(final Predicate<Card> condition);
 
     void add(Card o);
-    void add(Card c, int index);
+    void add(Card c, Integer index);
     void remove(Card o);
     void setCards(Iterable<Card> c);
 
