@@ -141,16 +141,12 @@ public class SoundSystem {
         }
     }
     
-    public final UiEventReceiver uiEventsSubscriber = new UiEventReceiver();
-    public class UiEventReceiver {
-        @Subscribe
-        public void receiveEvent(UiEvent evt) {
-            SoundEffectType effect = evt.visit(visualizer);
-            if (null == effect) {
-                return;
-            }
-
+    @Subscribe
+    public void receiveEvent(UiEvent evt) {
+        SoundEffectType effect = evt.visit(visualizer);
+        if (null != effect) {
             play(effect, effect.isSynced());
         }
     }
+
 }

@@ -27,9 +27,9 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 
 import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
 import forge.Card;
 import forge.FThreads;
@@ -42,7 +42,10 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEvent;
+import forge.gui.events.UiEventAttackerDeclared;
+import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.controllers.CCombat;
@@ -74,10 +77,12 @@ public enum CMatchUI {
     private VMatchUI view;
     
     private EventBus uiEvents;
+    private MatchUiEventVisitor visitor = new MatchUiEventVisitor();
     
     private CMatchUI() {
         uiEvents = new EventBus("ui events");
-        uiEvents.register(Singletons.getControl().getSoundSystem().uiEventsSubscriber);
+        uiEvents.register(Singletons.getControl().getSoundSystem());
+        uiEvents.register(visitor);
     }
 
     private ImageIcon getPlayerAvatar(final Player p, final int defaultIndex) {
@@ -368,6 +373,25 @@ public enum CMatchUI {
     // UI-related events should arrive here
     public void fireEvent(UiEvent uiEvent) {
         uiEvents.post(uiEvent);
+    }
+    
+    public class MatchUiEventVisitor implements IUiEventVisitor<Void> {
+        @Override
+        public Void visit(UiEventBlockerAssigned event) {
+            updateSingleCard(event.blocker);
+            return null;
+        }
+
+        @Override
+        public Void visit(UiEventAttackerDeclared event) {
+            updateSingleCard(event.attacker);
+            return null;
+        }
+        
+        @Subscribe
+        public void receiveEvent(UiEvent evt) { 
+            evt.visit(this);
+        }
     }
 
 }
