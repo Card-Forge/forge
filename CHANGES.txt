@@ -154,6 +154,13 @@ Kalonian Hydra
 Syphon Sliver
 Galerider Sliver
 Chandra, Pyromaster
+Imposing Sovereign
+Blightcaster
+Dark Prophecy
+Lifebane Zombie
+Pyromancer's Gauntlet
+Illusionary Armor
+Encroaching Wastes
 
 
 ------------
