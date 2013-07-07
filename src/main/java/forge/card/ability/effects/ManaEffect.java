@@ -85,12 +85,18 @@ public class ManaEffect extends SpellAbilityEffect {
                         // TODO: Add some logic for AI choice (ArsenalNut 2012/09/16)
                         if (!sa.hasParam("AILogic") || sa.getParam("AILogic").equals("MostProminentInComputerHand")) {
                             String chosen = Constant.Color.BLACK;
-                            chosen = ComputerUtilCard.getMostProminentColor(activator.getCardsIn(ZoneType.Hand));
+                            List<Card> hand = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
+                            hand.addAll(activator.getCardsIn(ZoneType.Stack));
+                            chosen = ComputerUtilCard.getMostProminentColor(hand);
                             if (chosen.equals("")) {
                                 chosen = Constant.Color.BLACK;
                             }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
-                            abMana.setExpressChoice(MagicColor.toShortString(chosen));
+                            String manaString = "";
+                            for (int i = 0; i < amount; i++) {
+                                manaString = manaString + MagicColor.toShortString(chosen) + " ";
+                            }
+                            abMana.setExpressChoice(manaString);
                         }
                         if (abMana.getExpressChoice().isEmpty()) {
                             final StringBuilder sb = new StringBuilder();
