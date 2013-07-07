@@ -1,6 +1,6 @@
 Name:Boseiju, Who Shelters All
 ManaCost:no cost
-Types:Legandary Land
+Types:Legendary Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T PayLife<2> | Produced$ 1 | AddsNoCounter$ !Permanent | SpellDescription$ Add 1 to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boseiju_who_shelters_all.jpg
