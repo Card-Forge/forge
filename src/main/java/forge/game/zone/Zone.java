@@ -78,33 +78,26 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
 
     @Override
     public void add(final Card c, final Integer index) {
-        logCardAdded(c);
-        updateCardState(c);
-        if ( index == null )
-            this.cardList.add(c);
-        else
-            this.cardList.add(index.intValue(), c);
-        game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
-    }
-
-    // Sets turn in zone... why not to add current zone reference into the card itself?
-    private void updateCardState(final Card c) {
+        // Immutable cards are usually emblems,effects and the mana pool and we
+        // don't want to log those.
+        if (!c.isImmutable()) {
+            final Zone oldZone = game.getZoneOf(c);
+            // if any tokens come to battlefield, consider they are from stack. Plain "null" cannot be a key of EnumMap
+            final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType(); 
+            cardsAddedThisTurn.add(zt, c);
+        }
+        
         c.setTurnInZone(game.getPhaseHandler().getTurn());
         if (zoneType != ZoneType.Battlefield) {
             c.setTapped(false);
         }
         c.setZone(this);
-    }
-
-    private void logCardAdded(final Card c) {
-        // Immutable cards are usually emblems,effects and the mana pool and we
-        // don't want to log those.
-        if (c.isImmutable()) return;
-    
-        final Zone oldZone = game.getZoneOf(c);
-        // if any tokens come to battlefield, consider they are from stack. Plain "null" cannot be a key of EnumMap
-        final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType(); 
-        cardsAddedThisTurn.add(zt, c);
+        
+        if ( index == null )
+            this.cardList.add(c);
+        else
+            this.cardList.add(index.intValue(), c);
+        game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
     }
 
     @Override

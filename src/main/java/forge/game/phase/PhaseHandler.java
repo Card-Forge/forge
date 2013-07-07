@@ -872,8 +872,13 @@ public class PhaseHandler implements java.io.Serializable {
                 if( DEBUG_PHASES )
                     sw.start();
                 
+                // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
                 game.getAction().checkStateEffects();
                 game.fireEvent(new GameEventPlayerPriority(getPlayerTurn(), getPhase(), getPriorityPlayer()));
+                
+                // SBA could lead to game over
+                if ( game.isGameOver() ) return;
+                
                 pPlayerPriority.getController().takePriority();
                 
                 if( DEBUG_PHASES ) {

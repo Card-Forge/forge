@@ -1117,9 +1117,51 @@ public class GameAction {
     }
     
     public void checkGameOverCondition() {
-        GameEndReason reason = this.eliminateLosingPlayers();
+        // award loses as SBE
+        List<Player> losers = null;
+        for (Player p : this.game.getPlayers()) {
+            if (p.checkLoseCondition()) { // this will set appropriate outcomes
+                // Run triggers
+                if (losers == null) {
+                    losers = new ArrayList<Player>(3);
+                }
+                losers.add(p);
+            }
+        }
         
-        // still unclear why this has not caught me conceding
+        GameEndReason reason = null;
+        // Has anyone won by spelleffect?
+        for (Player p : this.game.getPlayers()) {
+            if (!p.hasWon()) {
+                continue;
+            }
+        
+            // then the rest have lost!
+            reason = GameEndReason.WinsGameSpellEffect;
+            for (Player pl : this.game.getPlayers()) {
+                if (pl.equals(p)) {
+                    continue;
+                }
+        
+                if (!pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName)) {
+                    reason = null; // they cannot lose!
+                } else {
+                    if (losers == null) {
+                        losers = new ArrayList<Player>(3);
+                    }
+                    losers.add(p);
+                }
+            }
+            break;
+        }
+        
+        // need a separate loop here, otherwise ConcurrentModificationException is raised
+        if (losers != null) {
+            for (Player p : losers) {
+                this.game.onPlayerLost(p);
+            }
+        }
+        
         if (reason == null )
         {
             int cntNotLost = Iterables.size(Iterables.filter(game.getPlayers(), Player.Predicates.NOT_LOST));
@@ -1134,54 +1176,6 @@ public class GameAction {
         // Clear Simultaneous triggers at the end of the game
         game.setGameOver(reason);
         game.getStack().clearSimultaneousStack();
-    }
-
-    private GameEndReason eliminateLosingPlayers() {
-        // award loses as SBE
-        List<Player> losers = null;
-        for (Player p : game.getPlayers()) {
-            if (p.checkLoseCondition()) { // this will set appropriate outcomes
-                // Run triggers
-                if (losers == null) {
-                    losers = new ArrayList<Player>(3);
-                }
-                losers.add(p);
-            }
-        }
-    
-        GameEndReason reason = null;
-        // Has anyone won by spelleffect?
-        for (Player p : game.getPlayers()) {
-            if (!p.hasWon()) {
-                continue;
-            }
-    
-            // then the rest have lost!
-            reason = GameEndReason.WinsGameSpellEffect;
-            for (Player pl : game.getPlayers()) {
-                if (pl.equals(p)) {
-                    continue;
-                }
-    
-                if (!pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName)) {
-                    reason = null; // they cannot lose!
-                } else {
-                    if (losers == null) {
-                        losers = new ArrayList<Player>(3);
-                    }
-                    losers.add(p);
-                }
-            }
-            break;
-        }
-    
-        // need a separate loop here, otherwise ConcurrentModificationException is raised
-        if (losers != null) {
-            for (Player p : losers) {
-                game.onPlayerLost(p);
-            }
-        }
-        return reason;
     }
 
     /**
