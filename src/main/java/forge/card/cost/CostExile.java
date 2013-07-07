@@ -505,7 +505,7 @@ public class CostExile extends CostPartWithList {
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
+    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         for (final Card c : decision.cards) {
             executePayment(ability, c);
             if (this.from.equals(ZoneType.Stack)) {
@@ -518,5 +518,6 @@ public class CostExile extends CostPartWithList {
                 }
             }
         }
+        return true;
     }
 }

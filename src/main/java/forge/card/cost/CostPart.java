@@ -177,8 +177,9 @@ public abstract class CostPart {
      * @param payment
      *            {@link forge.card.cost.CostPayment}
      * @param game
+     * @return 
      */
-    public abstract void payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source);
+    public abstract boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source);
 
     /**
      * Pay human.

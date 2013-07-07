@@ -180,8 +180,8 @@ public class CostPartMana extends CostPart {
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
-        ComputerUtilMana.payManaCost(ai, ability);
+    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
+        return ComputerUtilMana.payManaCost(ai, ability);
     }
 
 

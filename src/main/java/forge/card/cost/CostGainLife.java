@@ -98,7 +98,7 @@ public class CostGainLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
+    public final boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
         int playersLeft = cntPlayers;
         for (final Player opp : getPotentialTargets(ai, source)) {
             if (opp.canGainLife() && playersLeft > 0) {
@@ -106,6 +106,7 @@ public class CostGainLife extends CostPart {
                 opp.gainLife(decision.c, null);
             }
         }
+        return true;
     }
 
     /*

@@ -121,9 +121,10 @@ public abstract class CostPartWithList extends CostPart {
     public abstract String getHashForList();
     
     @Override
-    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
+    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         executePayment(ability, decision.cards);
         reportPaidCardsTo(ability);
+        return true;
     }
 
 }

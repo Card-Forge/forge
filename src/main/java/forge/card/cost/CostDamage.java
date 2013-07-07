@@ -64,8 +64,8 @@ public class CostDamage extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
-        ai.addDamage(decision.c, source);
+    public final boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
+        return ai.addDamage(decision.c, source);
     }
 
     /*

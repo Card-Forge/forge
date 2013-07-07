@@ -305,8 +305,8 @@ public class CostDiscard extends CostPartWithList {
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
-        executePayment(ability, decision.cards);
+    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
+        return executePayment(ability, decision.cards);
     }
 
     // Inputs

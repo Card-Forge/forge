@@ -187,7 +187,9 @@ public class CostPayment {
         }
 
         for (final CostPart part : parts) {
-            part.payAI(decisions.get(part.getClass()), ai, this.ability, this.ability.getSourceCard());
+            if (!part.payAI(decisions.get(part.getClass()), ai, this.ability, this.ability.getSourceCard())) {
+                return false;
+            }
             // abilities care what was used to pay for them
             if( part instanceof CostPartWithList ) {
                 ((CostPartWithList) part).reportPaidCardsTo(ability);

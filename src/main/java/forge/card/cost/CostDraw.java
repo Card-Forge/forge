@@ -89,10 +89,11 @@ public class CostDraw extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
+    public final boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
         for (final Player p : getPotentialPlayers(ai, ability.getSourceCard())) {
             p.drawCards(decision.c);
         }
+        return true;
     }
 
     /*

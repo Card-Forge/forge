@@ -229,7 +229,7 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
+    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         Integer c = getNumberOfCounters(ability);
 
         if (this.payCostFromSource()) {
@@ -238,6 +238,7 @@ public class CostPutCounter extends CostPartWithList {
             // Put counter on chosen card
             executePayment(ability, decision.cards);
         }
+        return true;
     }
 
     /*

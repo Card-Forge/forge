@@ -176,7 +176,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public void payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
+    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
@@ -193,6 +193,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
             executePayment(ability, valid);
         }
         source.setSVar("CostCountersRemoved", Integer.toString(c));
+        return true;
     }
 
     @Override

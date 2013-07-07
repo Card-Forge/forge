@@ -210,7 +210,9 @@ public class ComputerUtilMana {
             if( test )
                 return false;
             else 
-                throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName() + ". Didn't find what to pay for " + toPay);
+                System.out.println("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName() + ". Didn't find what to pay for " + toPay);
+                return false;
+                
         }
                 
         
