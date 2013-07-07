@@ -63,7 +63,6 @@ public class GameNew {
                 c.refreshUniqueNumber();
             }
         }
-    
     }
 
     private static void initVariantsZones(final Player player, final RegisteredPlayer psc) {

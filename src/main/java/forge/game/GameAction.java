@@ -151,9 +151,11 @@ public class GameAction {
             c.setState(CardCharacteristicName.Original);
         }
 
+        boolean toBattlefield = zoneTo.is(ZoneType.Battlefield);
+        boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
+
         // Don't copy Tokens, copy only cards leaving the battlefield
-        if (c.isToken() || suppress || zoneTo.is(ZoneType.Battlefield) || zoneFrom == null
-                || !zoneFrom.is(ZoneType.Battlefield)) {
+        if (c.isToken() || suppress || toBattlefield || !fromBattlefield) {
             lastKnownInfo = c;
             copied = c;
         } else {
@@ -218,15 +220,15 @@ public class GameAction {
             zoneTo.add(copied, position);
         }
 
+        boolean isEffectGoingToCommand = (copied.isType("Emblem") || copied.isType("Effect")) && zoneTo.is(ZoneType.Command);
         // Tokens outside the battlefield disappear immediately.
-        if ((copied.isToken() && !zoneTo.is(ZoneType.Battlefield)
-            && !((copied.isType("Emblem") || copied.isType("Effect")) && zoneTo.is(ZoneType.Command)))) {
+        if ((copied.isToken() && !toBattlefield && !isEffectGoingToCommand)) {
             zoneTo.remove(copied);
         }
 
         if (zoneFrom != null) {
-            if (zoneFrom.is(ZoneType.Battlefield) && c.isCreature() && game.getCombat() != null) {
-                if ( !zoneTo.is(ZoneType.Battlefield) )
+            if (fromBattlefield && c.isCreature() && game.getCombat() != null) {
+                if ( !toBattlefield )
                     game.getCombat().saveLKI(lastKnownInfo);
                 game.getCombat().removeFromCombat(c);
                 
@@ -258,15 +260,15 @@ public class GameAction {
         // remove all counters from the card if destination is not the battlefield
         // UNLESS we're dealing with Skullbriar, the Walking Grave
         if (!c.isToken() && (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) || 
-                (!zoneTo.is(ZoneType.Battlefield) && !c.getName().equals("Skullbriar, the Walking Grave")))) {
+                (!toBattlefield && !c.getName().equals("Skullbriar, the Walking Grave")))) {
             copied.clearCounters();
         }
 
-        if (!c.isToken() && !zoneTo.is(ZoneType.Battlefield)) {
+        if (!c.isToken() && !toBattlefield) {
             copied.getCharacteristics().resetCardColor();
         }
 
-        if (zoneFrom.is(ZoneType.Battlefield) && !c.isToken()) {
+        if (fromBattlefield && !c.isToken()) {
             copied.setSuspendCast(false);
             copied.setState(CardCharacteristicName.Original);
             // Soulbond unpairing
@@ -274,56 +276,14 @@ public class GameAction {
                 c.getPairedWith().setPairedWith(null);
                 c.setPairedWith(null);
             }
-            // Handle unequipping creatures
-            if (copied.isEquipped()) {
-                final List<Card> equipments = new ArrayList<Card>(copied.getEquippedBy());
-                for (final Card equipment : equipments) {
-                    if (equipment.isInPlay()) {
-                        equipment.unEquipCard(copied);
-                    }
-                }
-            }
-            // Handle unfortifying lands
-            if (copied.isFortified()) {
-                final List<Card> fortifications = new ArrayList<Card>(copied.getFortifiedBy());
-                for (final Card f : fortifications) {
-                    if (f.isInPlay()) {
-                        f.unFortifyCard(copied);
-                    }
-                }
-            }
-            // equipment moving off battlefield
-            if (copied.isEquipping()) {
-                final Card equippedCreature = copied.getEquipping().get(0);
-                if (equippedCreature.isInPlay()) {
-                    copied.unEquipCard(equippedCreature);
-                }
-            }
-            // fortifications moving off battlefield
-            if (copied.isFortifying()) {
-                final Card fortifiedLand = copied.getFortifying().get(0);
-                if (fortifiedLand.isInPlay()) {
-                    copied.unFortifyCard(fortifiedLand);
-                }
-            }
-            // remove enchantments from creatures
-            if (copied.isEnchanted()) {
-                final List<Card> auras = new ArrayList<Card>(copied.getEnchantedBy());
-                for (final Card aura : auras) {
-                    aura.unEnchantEntity(copied);
-                }
-            }
-            // unenchant creature if moving aura
-            if (copied.isEnchanting()) {
-                copied.unEnchantEntity(copied.getEnchanting());
-            }
-        } else if (zoneFrom.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Battlefield)) {
+            unattachCardLeavingBattlefield(copied);
+        } else if (zoneFrom.is(ZoneType.Exile) && !toBattlefield) {
             // Pull from Eternity used on a suspended card
             copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
                 copied.turnFaceUp();
             }
-        } else if (zoneTo.is(ZoneType.Battlefield)) {
+        } else if (toBattlefield) {
             copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeyword()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
@@ -350,6 +310,57 @@ public class GameAction {
         }
 
         return copied;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param c
+     * @param copied
+     */
+    private void unattachCardLeavingBattlefield(Card copied) {
+        // Handle unequipping creatures
+        if (copied.isEquipped()) {
+            final List<Card> equipments = new ArrayList<Card>(copied.getEquippedBy());
+            for (final Card equipment : equipments) {
+                if (equipment.isInPlay()) {
+                    equipment.unEquipCard(copied);
+                }
+            }
+        }
+        // Handle unfortifying lands
+        if (copied.isFortified()) {
+            final List<Card> fortifications = new ArrayList<Card>(copied.getFortifiedBy());
+            for (final Card f : fortifications) {
+                if (f.isInPlay()) {
+                    f.unFortifyCard(copied);
+                }
+            }
+        }
+        // equipment moving off battlefield
+        if (copied.isEquipping()) {
+            final Card equippedCreature = copied.getEquipping().get(0);
+            if (equippedCreature.isInPlay()) {
+                copied.unEquipCard(equippedCreature);
+            }
+        }
+        // fortifications moving off battlefield
+        if (copied.isFortifying()) {
+            final Card fortifiedLand = copied.getFortifying().get(0);
+            if (fortifiedLand.isInPlay()) {
+                copied.unFortifyCard(fortifiedLand);
+            }
+        }
+        // remove enchantments from creatures
+        if (copied.isEnchanted()) {
+            final List<Card> auras = new ArrayList<Card>(copied.getEnchantedBy());
+            for (final Card aura : auras) {
+                aura.unEnchantEntity(copied);
+            }
+        }
+        // unenchant creature if moving aura
+        if (copied.isEnchanting()) {
+            copied.unEnchantEntity(copied.getEnchanting());
+        }
     }
 
     /**
