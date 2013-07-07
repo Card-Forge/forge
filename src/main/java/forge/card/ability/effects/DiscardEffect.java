@@ -17,7 +17,6 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 
 public class DiscardEffect extends SpellAbilityEffect {
