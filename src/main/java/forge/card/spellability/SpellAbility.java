@@ -130,8 +130,9 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
         // Check whether spell or ability first
         if (this.isSpell()) 
             return false;
-
-        if(getRestrictions() != null && getRestrictions().getPlaneswalker()) 
+        // without a target
+        if (this.usesTargeting()) return false;
+        if (getRestrictions() != null && getRestrictions().getPlaneswalker()) 
             return false; //Loyalty ability, not a mana ability.
 
         return getManaPartRecursive() != null;
