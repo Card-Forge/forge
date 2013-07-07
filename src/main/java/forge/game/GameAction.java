@@ -642,10 +642,6 @@ public class GameAction {
             return this.moveTo(removed, c);
         }
 
-        if (c.isToken()) {
-            return c;
-        }
-
         if (c.isInAlternateState()) {
             c.setState(CardCharacteristicName.Original);
         }
@@ -658,7 +654,9 @@ public class GameAction {
         if (p != null && p.is(ZoneType.Battlefield)) {
             lastKnownInfo = CardUtil.getLKICopy(c);
             c.clearCounters(); // remove all counters
-            library.add(CardFactory.copyCard(c), libPosition);
+            if (!c.isToken()) {
+                library.add(CardFactory.copyCard(c), libPosition);
+            }
         } else {
             c.clearCounters(); // remove all counters
             library.add(c, libPosition);
