@@ -17,6 +17,7 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 
 public class DiscardEffect extends SpellAbilityEffect {
@@ -210,7 +211,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         chooser.getGame().getAction().reveal(dPHand, p);
                     
                     int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : numCards;
-                    int max = Math.min(validCards.size(), numCards);
+                    int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
 
                     List<Card> toBeDiscarded = validCards.isEmpty() ? CardLists.emptyList : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
 
