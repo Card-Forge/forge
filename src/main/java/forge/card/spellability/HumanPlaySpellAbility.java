@@ -75,7 +75,9 @@ public class HumanPlaySpellAbility {
 
 
         if (!prerequisitesMet) {
-            rollbackAbility(fromZone, zonePosition);
+            if (!ability.isTrigger()) {
+                rollbackAbility(fromZone, zonePosition);
+            }
             return;
         }
 
