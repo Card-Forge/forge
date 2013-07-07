@@ -142,6 +142,14 @@ public class GameAction {
             return c;
         }
 
+        boolean toBattlefield = zoneTo.is(ZoneType.Battlefield);
+        boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
+
+        //Rule 110.5g: A token that has left the battlefield can't move to another zone
+        if (c.isToken() && zoneFrom != null && !fromBattlefield) {
+            return c; 
+        }
+
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
 
         Card copied = null;
@@ -150,9 +158,6 @@ public class GameAction {
         if (c.isSplitCard() && !zoneTo.is(ZoneType.Stack)) {
             c.setState(CardCharacteristicName.Original);
         }
-
-        boolean toBattlefield = zoneTo.is(ZoneType.Battlefield);
-        boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
 
         // Don't copy Tokens, copy only cards leaving the battlefield
         if (c.isToken() || suppress || toBattlefield || !fromBattlefield) {
@@ -211,19 +216,13 @@ public class GameAction {
         if (suppress) {
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         }
-
+        
         // "enter the battlefield as a copy" - apply code here
         // but how to query for input here and continue later while the callers assume synchronous result?
         if (position == null) {
             zoneTo.add(copied);
         } else {
             zoneTo.add(copied, position);
-        }
-
-        boolean isEffectGoingToCommand = (copied.isType("Emblem") || copied.isType("Effect")) && zoneTo.is(ZoneType.Command);
-        // Tokens outside the battlefield disappear immediately.
-        if ((copied.isToken() && !toBattlefield && !isEffectGoingToCommand)) {
-            zoneTo.remove(copied);
         }
 
         if (zoneFrom != null) {
@@ -904,6 +903,15 @@ public class GameAction {
                         checkAgain = true;
                     }
                 }
+                for (ZoneType zt : ZoneType.values()) {
+                    if (zt == ZoneType.Battlefield) {
+                        continue;
+                    }
+                    for (Card c : p.getCardsIn(zt)) {
+                        // If a token is in a zone other than the battlefield, it ceases to exist.
+                        checkAgain |= stateBasedAction704_5d(c);
+                    }
+                }
             }
 
             for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
@@ -932,7 +940,6 @@ public class GameAction {
                 
                 checkAgain |= stateBasedAction704_5n(c); // Auras attached to illegal or not attached go to graveyard
                 checkAgain |= stateBasedAction704_5p(c); // Equipment and Fortifications
-
                 
                 if (c.isCreature() && c.isEnchanting()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
                     c.unEnchantEntity(c.getEnchanting());
@@ -1105,6 +1112,19 @@ public class GameAction {
         return checkAgain;
     }
 
+    // If a token is in a zone other than the battlefield, it ceases to exist.
+    private boolean stateBasedAction704_5d(Card c) {
+        boolean checkAgain = false;
+        if (c.isToken()) {
+            final Zone zoneFrom = game.getZoneOf(c);
+            if (!zoneFrom.is(ZoneType.Battlefield) && !zoneFrom.is(ZoneType.Command)) {
+                zoneFrom.remove(c);
+                checkAgain = true;
+            }
+        }
+        return checkAgain;
+    }
+    
     public void checkGameOverCondition() {
         GameEndReason reason = this.eliminateLosingPlayers();
         
