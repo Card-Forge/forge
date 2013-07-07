@@ -16,6 +16,7 @@ import forge.FThreads;
 import forge.game.Game;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
+import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardCounters;
 import forge.game.event.GameEventCardDamaged;
@@ -50,6 +51,7 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.toolbox.special.PhaseLabel;
+import forge.util.maps.MapOfLists;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final FControl fc;
@@ -220,7 +222,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             updateZone(game.getZoneOf((Card)event.newTarget));
         return updateZone(zEq);
     }
-
+    
     private Void updateZone(Zone z) {
         return updateZone(Pair.of(z.getPlayer(), z.getZoneType()));
     }
@@ -263,6 +265,16 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventCardCounters event) {
         return updateSingleCard(event.card);
+    }
+
+    @Override
+    public Void visit(GameEventBlockersDeclared event) { // This is to draw icons on blockers declared by AI 
+        for(MapOfLists<Card, Card> kv : event.blockers.values()) {
+            for(Collection<Card> blockers : kv.values()) {
+                updateManyCards(blockers);
+            }
+        }
+        return super.visit(event);
     }
 
     private Void updateSingleCard(Card c) {
