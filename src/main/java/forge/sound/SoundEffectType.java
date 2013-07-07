@@ -76,7 +76,7 @@ public enum SoundEffectType {
 
 
     private final String resourceFileName;
-    private final boolean isSynced;
+    private final boolean isSync;
 
     /**
      * @return the resourceFileName
@@ -94,7 +94,7 @@ public enum SoundEffectType {
      */
     SoundEffectType(final String filename, final boolean isSoundSynced) {
         resourceFileName = filename;
-        isSynced = isSoundSynced;
+        isSync = isSoundSynced;
     }
 
     /**
@@ -104,7 +104,7 @@ public enum SoundEffectType {
      * @return true if the sound effect can only be played if no other sound
      * of the same kind is already playing.
      */
-    public boolean getIsSynced() {
-        return isSynced;
+    public boolean isSynced() {
+        return isSync;
     }
 }

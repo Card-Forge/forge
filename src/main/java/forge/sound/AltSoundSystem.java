@@ -59,12 +59,12 @@ public class AltSoundSystem extends Thread {
     } 
  
     public void run() { 
-	if (isSync && AsyncSoundRegistry.getNumIterations(filename) >= 1) {
-	    return;
-	}
-	if (AsyncSoundRegistry.getNumIterations(filename) >= MAX_SOUND_ITERATIONS) {
-	    return;
-	}
+        if (isSync && AsyncSoundRegistry.getNumIterations(filename) >= 1) {
+            return;
+        }
+        if (AsyncSoundRegistry.getNumIterations(filename) >= MAX_SOUND_ITERATIONS) {
+            return;
+        }
 	
         File soundFile = new File(filename);
         if (!soundFile.exists()) { 

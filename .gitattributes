@@ -14655,6 +14655,7 @@ src/main/java/forge/gui/download/GuiDownloader.java -text
 src/main/java/forge/gui/download/package-info.java -text
 src/main/java/forge/gui/events/IUiEventVisitor.java -text
 src/main/java/forge/gui/events/UiEvent.java -text
+src/main/java/forge/gui/events/UiEventAttackerDeclared.java -text
 src/main/java/forge/gui/events/UiEventBlockerAssigned.java -text
 src/main/java/forge/gui/framework/DragCell.java -text
 src/main/java/forge/gui/framework/DragTab.java -text

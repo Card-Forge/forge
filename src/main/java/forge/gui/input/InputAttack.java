@@ -28,6 +28,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
@@ -134,9 +135,7 @@ public class InputAttack extends InputSyncronizedBase {
             } else { // Join a band by selecting a non-active band member after activating a band 
                 if (this.activeBand.canJoinBand(card)) {
                     combat.removeFromCombat(card);
-                    combat.addAttacker(card, currentDefender, this.activeBand);
-                    this.activateBand(this.activeBand);
-                    updateMessage();
+                    declareAttacker(card);
                 } else {
                     flashIncorrectAction();
                 }
@@ -165,15 +164,26 @@ public class InputAttack extends InputSyncronizedBase {
                 combat.removeFromCombat(card);
             } 
             
-            combat.addAttacker(card, currentDefender, this.activeBand);
-            this.activateBand(this.activeBand);
-            updateMessage();
+            declareAttacker(card);
             showCombat();
         }
         else {
             flashIncorrectAction();
         }
     } // selectCard()
+
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     */
+    private void declareAttacker(final Card card) {
+        combat.addAttacker(card, currentDefender, this.activeBand);
+        this.activateBand(this.activeBand);
+        updateMessage();
+        
+        CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventAttackerDeclared(card, currentDefender));
+    }
 
     private final void setCurrentDefender(GameEntity def) {
         currentDefender = def; 

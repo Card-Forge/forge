@@ -23,12 +23,15 @@ import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.event.IGameEventVisitor;
 import forge.game.zone.ZoneType;
+import forge.gui.events.IUiEventVisitor;
+import forge.gui.events.UiEventAttackerDeclared;
+import forge.gui.events.UiEventBlockerAssigned;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
  *
  */
-public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
+public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> implements IUiEventVisitor<SoundEffectType> {
 
     public SoundEffectType visit(GameEventCardDamaged event) { return SoundEffectType.Damage; }
     public SoundEffectType visit(GameEventCardDestroyed event) { return SoundEffectType.Destroy; }
@@ -174,5 +177,15 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> {
         }
 
         return c != null ? c.getSVar("SoundEffect") : "";
+    }
+
+
+    @Override
+    public SoundEffectType visit(UiEventBlockerAssigned event) {
+        return event.attackerBeingBlocked == null ? null : SoundEffectType.Block;
+    }
+    @Override
+    public SoundEffectType visit(UiEventAttackerDeclared event) {
+        return null;
     }
 }

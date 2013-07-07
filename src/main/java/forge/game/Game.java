@@ -71,7 +71,7 @@ public class Game {
     private final StaticEffects staticEffects = new StaticEffects(this);
     private final TriggerHandler triggerHandler = new TriggerHandler(this);
     private final ReplacementHandler replacementHandler = new ReplacementHandler(this);
-    private final EventBus events = new EventBus();
+    private final EventBus events = new EventBus("game events");
     private final GameLog gameLog = new GameLog();
     private final ColorChanger colorChanger = new ColorChanger();
 

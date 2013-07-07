@@ -29,6 +29,7 @@ import javax.swing.ImageIcon;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
+import com.google.common.eventbus.EventBus;
 
 import forge.Card;
 import forge.FThreads;
@@ -41,6 +42,7 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gui.events.UiEvent;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.controllers.CCombat;
@@ -70,6 +72,13 @@ public enum CMatchUI {
 
     private List<Player> sortedPlayers;
     private VMatchUI view;
+    
+    private EventBus uiEvents;
+    
+    private CMatchUI() {
+        uiEvents = new EventBus("ui events");
+        uiEvents.register(Singletons.getControl().getSoundSystem().uiEventsSubscriber);
+    }
 
     private ImageIcon getPlayerAvatar(final Player p, final int defaultIndex) {
         LobbyPlayer lp = p.getLobbyPlayer();
@@ -293,8 +302,11 @@ public enum CMatchUI {
     Set<Card> highlitedCards = new HashSet<Card>();
     // used to highlight cards in UI
     public void setUsedToPay(Card card, boolean value) {
-        if (value) highlitedCards.add(card);
-        else highlitedCards.remove(card);
+        FThreads.assertExecutedByEdt(true);
+
+        boolean hasChanged = value ? highlitedCards.add(card) : highlitedCards.remove(card);
+        if ( hasChanged ) // since we are in UI thread, may redraw the card right now
+            updateSingleCard(card);
     }
 
     public boolean isUsedToPay(Card card) {
@@ -340,17 +352,23 @@ public enum CMatchUI {
 
     public void updateCards(Set<Card> cardsToUpdate) {
         for(Card c : cardsToUpdate) {
-            Zone zone = c.getGame().getZoneOf(c);
-            if ( null == zone )
-                continue;
-            ZoneType zt = zone.getZoneType();
-            Player p = zone.getPlayer();
-            
-            if ( zt == ZoneType.Battlefield ) {
-                PlayArea pa = getFieldViewFor(p).getTabletop(); 
-                pa.updateSingleCard(c);
-            }
+            updateSingleCard(c);
+        }
+    }
+    
+    public void updateSingleCard(Card c) {
+        Zone zone = c.getZone();
+        if ( null != zone && zone.getZoneType() == ZoneType.Battlefield ) {
+            PlayArea pa = getFieldViewFor(zone.getPlayer()).getTabletop(); 
+            pa.updateSingleCard(c);
         }
     }
 
+
+    // UI-related events should arrive here
+    public void fireEvent(UiEvent uiEvent) {
+        uiEvents.post(uiEvent);
+    }
+
 }
+ 

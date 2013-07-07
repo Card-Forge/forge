@@ -18,14 +18,13 @@
 package forge.gui.input;
 
 import forge.Card;
-import forge.Singletons;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
+import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.match.CMatchUI;
-import forge.sound.SoundEffectType;
 import forge.view.ButtonUtil;
 
 /**
@@ -102,45 +101,37 @@ public class InputBlock extends InputSyncronizedBase {
 
         if (isMetaDown && card.getController() == defender) {
             combat.removeFromCombat(card);
-            CMatchUI.SINGLETON_INSTANCE.showCombat(combat);
-            return;
-        }
-        
-        // is attacking?
-        boolean isCorrectAction = false;
-
-        if (combat.isAttacking(card)) {
-            setCurrentAttacker(card);
-            isCorrectAction = true;
-        } else {
-            // Make sure this card is valid to even be a blocker
-            if (this.currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
-                isCorrectAction = CombatUtil.canBlock(this.currentAttacker, card, combat);
-                if ( isCorrectAction ) {
-                    combat.addBlocker(this.currentAttacker, card);
-                    // This call is performed from GUI and is not intended to propagate to log or net. 
-                    // No need to use event bus then 
-                    Singletons.getControl().getSoundSystem().play(SoundEffectType.Block);
+            CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventBlockerAssigned(card, (Card)null));
+        } else { 
+            // is attacking?
+            boolean isCorrectAction = false;
+    
+            if (combat.isAttacking(card)) {
+                setCurrentAttacker(card);
+                isCorrectAction = true;
+            } else {
+                // Make sure this card is valid to even be a blocker
+                if (this.currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
+                    isCorrectAction = CombatUtil.canBlock(this.currentAttacker, card, combat);
+                    if ( isCorrectAction ) {
+                        combat.addBlocker(this.currentAttacker, card);
+                        CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventBlockerAssigned(card, currentAttacker));
+                    }
                 }
             }
+    
+            if (!isCorrectAction) {
+                flashIncorrectAction();
+            }
         }
-
-        if (!isCorrectAction) {
-            flashIncorrectAction();
-        }
-
         this.showMessage();
     } // selectCard()
 
 
     private void setCurrentAttacker(Card card) {
         currentAttacker = card;
-        Player attacker = null;
         for(Card c : combat.getAttackers()) {
             CMatchUI.SINGLETON_INSTANCE.setUsedToPay(c, card == c);
-            if ( attacker == null )
-                attacker = c.getController();
         }
-        // request redraw from here
     }
 }

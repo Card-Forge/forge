@@ -8,6 +8,7 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.Singletons;
 import forge.game.event.GameEvent;
+import forge.gui.events.UiEvent;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -68,57 +69,32 @@ public class SoundSystem {
     }
 
     /**
+     * Play the sound associated with the resource specified by the file name
+     * ("synchronized" with other sounds of the same kind means: only one can play at a time).
+     */
+    public void play(String resourceFileName, boolean isSynchronized) {
+        if (isUsingAltSystem()) {
+            new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, resourceFileName), isSynchronized).start();
+        } else {
+            IAudioClip snd = fetchResource(resourceFileName);
+            if (!isSynchronized || snd.isDone()) {
+                snd.play();
+            }
+        }
+    }
+
+    /**
      * Play the sound associated with the Sounds enumeration element.
      */
-    public void play(SoundEffectType type) {
-	if (isUsingAltSystem()) {
-	    new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, type.getResourceFileName()), false).start();
-	} else {
-	   fetchResource(type).play();
-	}
-    }
-
-    /**
-     * Play the sound associated with a specific resource file.
-     */
-    public void play(String resourceFileName) {
-	if (isUsingAltSystem()) {
-	    new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, resourceFileName), false).start();
-	} else {
-	    fetchResource(resourceFileName).play();
-	}
-    }
-
-    /**
-     * Play the sound associated with the resource specified by the file name
-     * (synchronized with other sounds of the same kind, so only one can play at
-     * the same time).
-     */
-    public void playSync(String resourceFileName) {
-	if (isUsingAltSystem()) {
-	    new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, resourceFileName), true).start();
-	} else {
-	    IAudioClip snd = fetchResource(resourceFileName);
-	    if (snd.isDone()) {
-		snd.play();
-	    }
-	}
-    }
-
-    /**
-     * Play the sound associated with the Sounds enumeration element
-     * (synchronized with other sounds of the same kind, so only one can play at
-     * the same time).
-     */
-    public void playSync(SoundEffectType type) {
-	if (isUsingAltSystem()) {
-	    new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, type.getResourceFileName()), true).start();
-	} else {
-	    IAudioClip snd = fetchResource(type);
-	    if (snd.isDone()) {
-		snd.play();
-	    }
-	}
+    public void play(SoundEffectType type, boolean isSynchronized) {
+        if (isUsingAltSystem()) {
+            new AltSoundSystem(String.format("%s/%s", IAudioClip.PathToSound, type.getResourceFileName()), isSynchronized).start();
+        } else {
+            IAudioClip snd = fetchResource(type);
+            if (!isSynchronized || snd.isDone()) {
+                snd.play();
+            }
+        }
     }
 
     /**
@@ -158,15 +134,23 @@ public class SoundSystem {
         if (effect == SoundEffectType.ScriptedEffect) {
             String resourceName = visualizer.getScriptedSoundEffectName(evt);
             if (!resourceName.isEmpty()) {
-                play(resourceName);
+                play(resourceName, false);
             }
         } else {
-            boolean isSync = effect.getIsSynced();
-            if (isSync) {
-                playSync(effect);
-            } else {
-                play(effect);
+            play(effect, effect.isSynced());
+        }
+    }
+    
+    public final UiEventReceiver uiEventsSubscriber = new UiEventReceiver();
+    public class UiEventReceiver {
+        @Subscribe
+        public void receiveEvent(UiEvent evt) {
+            SoundEffectType effect = evt.visit(visualizer);
+            if (null == effect) {
+                return;
             }
+
+            play(effect, effect.isSynced());
         }
     }
 }
