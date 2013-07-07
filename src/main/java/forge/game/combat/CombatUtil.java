@@ -20,9 +20,6 @@ package forge.game.combat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -959,85 +956,27 @@ public class CombatUtil {
         c.getController().incrementAttackersDeclaredThisTurn();
     } // checkDeclareAttackers
 
-    /**
-     * <p>
-     * checkDeclareBlockers.
-     * </p>
-     * @param game 
-     * 
-     * @param cl
-     *            a {@link forge.CardList} object.
-     */
-    public static void checkDeclareBlockers(Game game, final List<Card> cl, Combat combat) {
-        for (final Card c : cl) {
-            if (!c.getDamageHistory().getCreatureBlockedThisCombat()) {
-                for (final SpellAbility ab : CardFactoryUtil.getBushidoEffects(c)) {
-                    game.getStack().add(ab);
-                }
-                // Run triggers
-                final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                runParams.put("Blocker", c);
-                final Card attacker = combat.getAttackersBlockedBy(c).get(0);
-                runParams.put("Attacker", attacker);
-                game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
+
+    public static void handleRampage(final Game game, final Card a, final List<Card> blockers) {
+        for (final String keyword : a.getKeyword()) {
+            int idx = keyword.indexOf("Rampage ");
+            if ( idx < 0)
+                continue;
+            
+            final int numBlockers = blockers.size();
+            if (numBlockers > 1) {
+                final int magnitude = Integer.valueOf(keyword.substring(idx + "Rampage ".length()));
+                CombatUtil.executeRampageAbility(game, a, magnitude, numBlockers);
             }
+        } // end Rampage
+    }
 
-            c.getDamageHistory().setCreatureBlockedThisCombat(true);
-        } // for
-
-    } // checkDeclareBlockers
-
-    /**
-     * <p>
-     * checkBlockedAttackers.
-     * </p>
-     * @param game 
-     * 
-     * @param a
-     *            a {@link forge.Card} object.
-     * @param b
-     *            a {@link forge.Card} object.
-     */
-    public static void checkBlockedAttackers(final Game game, final Card a, final List<Card> blockers) {
-        if (blockers.isEmpty()) {
-            return;
-        }
-
-        // Run triggers
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Attacker", a);
-        runParams.put("Blockers", blockers);
-        runParams.put("NumBlockers", blockers.size());
-        game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
-
-        if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
-            // Bushido
-            for (final SpellAbility ab : CardFactoryUtil.getBushidoEffects(a)) {
-                game.getStack().add(ab);
-            }
-
-            // Rampage
-            final List<String> keywords = a.getKeyword();
-            final Pattern p = Pattern.compile("Rampage [0-9]+");
-            Matcher m;
-            for (final String keyword : keywords) {
-                m = p.matcher(keyword);
-                if (m.find()) {
-                    final String[] k = keyword.split(" ");
-                    final int magnitude = Integer.valueOf(k[1]);
-                    final int numBlockers = blockers.size();
-                    if (numBlockers > 1) {
-                        CombatUtil.executeRampageAbility(game, a, magnitude, numBlockers);
-                    }
-                } // find
-            } // end Rampage
-        }
-
-        for (Card b : blockers) {
-            if (a.hasKeyword("Flanking") && !b.hasKeyword("Flanking")) {
+    public static void handleFlankingKeyword(final Game game, final Card attacker, final List<Card> blockers) {
+        for (Card blocker : blockers) {
+            if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
                 int flankingMagnitude = 0;
     
-                for (String kw : a.getKeyword()) {
+                for (String kw : attacker.getKeyword()) {
                     if (kw.equals("Flanking")) {
                         flankingMagnitude++;
                     }
@@ -1045,11 +984,11 @@ public class CombatUtil {
 
                 // Rule 702.23b:  If a creature has multiple instances of flanking, each triggers separately.
                 for( int i = 0; i < flankingMagnitude; i++ ) {
-                    String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ -1 | NumDef$ -1 | ", b.getUniqueNumber());
-                    String desc = String.format("StackDescription$ Flanking (The blocking %s gets -1/-1 until end of turn)", b.getName());
+                    String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ -1 | NumDef$ -1 | ", blocker.getUniqueNumber());
+                    String desc = String.format("StackDescription$ Flanking (The blocking %s gets -1/-1 until end of turn)", blocker.getName());
                     
-                    SpellAbility ability = AbilityFactory.getAbility(effect + desc, a);
-                    ability.setActivatingPlayer(a.getController());
+                    SpellAbility ability = AbilityFactory.getAbility(effect + desc, attacker);
+                    ability.setActivatingPlayer(attacker.getController());
                     ability.setDescription(ability.getStackDescription());
                     ability.setTrigger(true);
 
@@ -1057,11 +996,9 @@ public class CombatUtil {
                 }
             } // flanking
 
-            b.addBlockedThisTurn(a);
-            a.addBlockedByThisTurn(b);
+            blocker.addBlockedThisTurn(attacker);
+            attacker.addBlockedByThisTurn(blocker);
         }
-
-        a.getDamageHistory().setCreatureGotBlockedThisCombat(true);
     }
 
     /**

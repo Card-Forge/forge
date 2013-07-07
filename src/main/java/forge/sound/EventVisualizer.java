@@ -1,8 +1,11 @@
 package forge.sound;
 
+import java.util.Collection;
+
 import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
+import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDestroyed;
@@ -26,6 +29,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
+import forge.util.maps.MapOfLists;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
@@ -55,7 +59,22 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     public SoundEffectType visit(GameEventPlayerPoisoned event) { return SoundEffectType.Poison; }
     public SoundEffectType visit(GameEventShuffle event) { return SoundEffectType.Shuffle; }
     public SoundEffectType visit(GameEventTokenCreated event) { return SoundEffectType.Token; }
-
+    public SoundEffectType visit(GameEventBlockersDeclared event) {
+        boolean isLocalHuman = event.defendingPlayer.getLobbyPlayer() == Singletons.getControl().getLobby().getGuiPlayer();
+        if (isLocalHuman)
+            return null; // already played sounds in interactive mode
+        
+        for(MapOfLists<Card, Card> ab : event.blockers.values()) {
+            for(Collection<Card> bb : ab.values()) {
+                if ( !bb.isEmpty() ) {
+                    // hasAnyBlocker = true;
+                    return SoundEffectType.Block;
+                }
+            }
+        }
+        return null; 
+    }
+    
     /**
      * Plays the sound corresponding to the outcome of the duel.
      */

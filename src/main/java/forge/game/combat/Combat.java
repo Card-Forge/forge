@@ -81,6 +81,16 @@ public class Combat {
         return Lists.newArrayList(attackedEntities.keySet());
     }
 
+    public final List<GameEntity> getDefendersControlledBy(Player who) {
+        List<GameEntity> res = Lists.newArrayList();
+        for(GameEntity ge : attackedEntities.keySet()) {
+            // if defender is the player himself or his cards
+            if (ge == who || ge instanceof Card && ((Card) ge).getController() == who)
+                res.add(ge);
+        }
+        return res;
+    }
+    
     public final List<Card> getDefendingPlaneswalkers() {
         final List<Card> pwDefending = new ArrayList<Card>();
         for (final GameEntity o : attackedEntities.keySet()) {
@@ -389,7 +399,7 @@ public class Combat {
 
     
     // Call this method right after turn-based action of declare blockers has been performed
-    public final void onBlockersDeclared() {
+    public final void fireTriggersForUnblockedAttackers() {
         for(Collection<AttackingBand> abs : attackedEntities.values()) {
             for(AttackingBand ab : abs) {
                 Collection<Card> blockers = blockedBands.get(ab);

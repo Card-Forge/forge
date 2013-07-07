@@ -24,16 +24,16 @@ import java.util.Map;
 import java.util.Stack;
 import org.apache.commons.lang.time.StopWatch;
 
-import com.google.common.base.Predicate;
-
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
+import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameAge;
@@ -522,66 +522,97 @@ public class PhaseHandler implements java.io.Serializable {
             Player whoDeclaresBlockers = playerDeclaresBlockers == null || playerDeclaresBlockers.hasLost() ? p : playerDeclaresBlockers;
             if ( combat.isPlayerAttacked(p) ) {
                 whoDeclaresBlockers.getController().declareBlockers(p, combat);
-            }
+            } else
+                continue;
             
             if ( game.isGameOver() ) // they just like to close window at any moment
                 return;
-        } while(p != playerTurn);
-        
-        combat.orderBlockersForDamageAssignment();
-        combat.orderAttackersForDamageAssignment();
-
-        combat.removeAbsentCombatants();
-        
-        
-        // Handles removing cards like Mogg Flunkies from combat if group block
-        // didn't occur
-        final List<Card> filterList = combat.getAllBlockers();
-        for (Card blocker : filterList) {
-            final List<Card> attackers = new ArrayList<Card>(combat.getAttackersBlockedBy(blocker));
-            for (Card attacker : attackers) {
-                boolean hasPaid = payRequiredBlockCosts(game, blocker, attacker);
-        
-                if ( !hasPaid ) {
-                    combat.removeBlockAssignment(attacker, blocker);
+            
+            // Handles removing cards like Mogg Flunkies from combat if group block
+            // didn't occur
+            for (Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), p)) {
+                final List<Card> attackers = new ArrayList<Card>(combat.getAttackersBlockedBy(blocker));
+                for (Card attacker : attackers) {
+                    boolean hasPaid = payRequiredBlockCosts(game, blocker, attacker);
+            
+                    if ( !hasPaid ) {
+                        combat.removeBlockAssignment(attacker, blocker);
+                    }
                 }
             }
-        }
-        for (Card c : filterList) {
-            if (c.hasKeyword("CARDNAME can't attack or block alone.") && combat.isBlocking(c)) {
-                if (combat.getAllBlockers().size() < 2) {
+            
+            List<Card> remainingBlockers = CardLists.filterControlledBy(combat.getAllBlockers(), p);
+            for (Card c : remainingBlockers) {
+                if ( remainingBlockers.size() < 2 && c.hasKeyword("CARDNAME can't attack or block alone.") ) {
                     combat.undoBlockingAssignment(c);
                 }
             }
-        }
-        
-        combat.onBlockersDeclared();
-        
-        List<Card> list = combat.getAllBlockers();
-        
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return !c.getDamageHistory().getCreatureBlockedThisCombat();
+            
+            // Player is done declaring blockers - redraw UI at this point
+
+            // map: defender => (many) attacker => (many) blocker  
+            Map<GameEntity, MapOfLists<Card, Card>> blockers = new HashMap<GameEntity, MapOfLists<Card,Card>>();
+            for(GameEntity ge : combat.getDefendersControlledBy(p)) {
+                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<Card, Card>(CollectionSuppliers.<Card>arrayLists());
+                for(Card att : combat.getAttackersOf(ge)) {
+                    protectThisDefender.addAll(att, combat.getBlockers(att));
+                }
+                blockers.put(ge, protectThisDefender);
             }
-        });
+            game.fireEvent(new GameEventBlockersDeclared(p, blockers));
+        } while(p != playerTurn);
         
-        CombatUtil.checkDeclareBlockers(game, list, combat);
+        combat.orderBlockersForDamageAssignment(); // 509.2
+        combat.orderAttackersForDamageAssignment(); // 509.3
+
+        combat.removeAbsentCombatants();
+
+        combat.fireTriggersForUnblockedAttackers();
+        
+        for (final Card c1 : combat.getAllBlockers()) {
+            if ( c1.getDamageHistory().getCreatureBlockedThisCombat() )
+                continue;
+            
+            if (!c1.getDamageHistory().getCreatureBlockedThisCombat()) {
+                for (final SpellAbility ab : CardFactoryUtil.getBushidoEffects(c1)) {
+                    game.getStack().add(ab);
+                }
+                // Run triggers
+                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                runParams.put("Blocker", c1);
+                runParams.put("Attacker", combat.getAttackersBlockedBy(c1).get(0));
+                game.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
+            }
+        
+            c1.getDamageHistory().setCreatureBlockedThisCombat(true);
+        }
         
         for (final Card a : combat.getAttackers()) {
-            CombatUtil.checkBlockedAttackers(game, a, combat.getBlockers(a));
-        }
-        
-        // map: defender => (many) attacker => (many) blocker  
-        Map<GameEntity, MapOfLists<Card, Card>> blockers = new HashMap<GameEntity, MapOfLists<Card,Card>>();
-        for(GameEntity ge : combat.getDefenders()) {
-            MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<Card, Card>(CollectionSuppliers.<Card>arrayLists());
-            for(Card att : combat.getAttackersOf(ge)) {
-                protectThisDefender.addAll(att, combat.getBlockers(att));
+            List<Card> blockers = combat.getBlockers(a);
+            if ( blockers.isEmpty() )
+                continue;
+            
+            // Run triggers
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Attacker", a);
+            runParams.put("Blockers", blockers);
+            runParams.put("NumBlockers", blockers.size());
+            game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
+            
+            if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
+                // Bushido
+                for (final SpellAbility ab : CardFactoryUtil.getBushidoEffects(a)) {
+                    game.getStack().add(ab);
+                }
+            
+                // Rampage
+                CombatUtil.handleRampage(game, a, blockers);
             }
-            blockers.put(ge, protectThisDefender);
+            
+            CombatUtil.handleFlankingKeyword(game, a, blockers);
+            
+            a.getDamageHistory().setCreatureGotBlockedThisCombat(true);
         }
-        game.fireEvent(new GameEventBlockersDeclared(blockers));
     }
 
 
