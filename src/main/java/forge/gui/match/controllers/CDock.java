@@ -51,7 +51,6 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.SaveOpenDialog;
 import forge.gui.toolbox.SaveOpenDialog.Filetypes;
 import forge.item.PaperCard;
-import forge.model.FModel;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
 
@@ -176,7 +175,7 @@ public enum CDock implements ICDoc {
                 break;
         }
 
-        FModel.SINGLETON_INSTANCE.getPreferences()
+        Singletons.getModel().getPreferences()
             .setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState));
         //FModel.SINGLETON_INSTANCE.getPreferences().save();
     }
@@ -284,7 +283,7 @@ public enum CDock implements ICDoc {
      */
     @Override
     public void initialize() {
-        final String temp = FModel.SINGLETON_INSTANCE.getPreferences()
+        final String temp = Singletons.getModel().getPreferences()
                 .getPref(FPref.UI_TARGETING_OVERLAY);
 
         // Old preference used boolean; new preference needs 0-1-2

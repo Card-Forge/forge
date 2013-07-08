@@ -32,13 +32,22 @@ public final class Main {
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 
+        boolean isHeadlessMode = false;
+        
         // Start splash screen first, then data models, then controller.
-        Singletons.setView(FView.SINGLETON_INSTANCE);
-        Singletons.setModel(FModel.SINGLETON_INSTANCE);
+        if(!isHeadlessMode) 
+            Singletons.setView(FView.SINGLETON_INSTANCE);
+        Singletons.setModel(FModel.getInstance(!isHeadlessMode));
         Singletons.setControl(FControl.instance);
 
-        // Controller can now step in and take over.
-        Singletons.getControl().initialize();
+        if (!isHeadlessMode) {
+            // Controller can now step in and take over.
+            Singletons.getControl().initialize();
+            return;
+        }
+        
+        // ok, done with possible interactive startup 
+        
     }
 
     @Override

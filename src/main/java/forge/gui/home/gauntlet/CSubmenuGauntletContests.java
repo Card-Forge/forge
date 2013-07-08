@@ -24,7 +24,6 @@ import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.model.FModel;
 
 /** 
  * Controls the "gauntlet contests" submenu in the home UI.
@@ -106,7 +105,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
         }
 
         gd.stamp();
-        FModel.SINGLETON_INSTANCE.setGauntletData(gd);
+        Singletons.getModel().setGauntletData(gd);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

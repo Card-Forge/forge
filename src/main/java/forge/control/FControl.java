@@ -37,7 +37,6 @@ import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.Game;
-import forge.game.ai.AiProfileUtil;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
@@ -158,7 +157,8 @@ public enum FControl {
          };
     }
 
-    /** After view and model have been initialized, control can start. */
+    /** After view and model have been initialized, control can start. 
+     * @param isHeadlessMode */
     public void initialize() {
         // Preloads skin components (using progress bar).
         FSkin.loadFull();
@@ -180,10 +180,6 @@ public enum FControl {
         if (data.exists()) {
             Singletons.getModel().getQuest().load(QuestDataIO.loadData(data));
         }
-
-        FSkin.setProgessBarMessage("Will load AI profiles now.");
-        // Preload AI profiles
-        AiProfileUtil.loadAllProfiles();
 
         // Handles resizing in null layouts of layers in JLayeredPane.
         Singletons.getView().getFrame().addComponentListener(new ComponentAdapter() {

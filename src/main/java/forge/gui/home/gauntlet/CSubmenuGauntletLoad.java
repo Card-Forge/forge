@@ -22,7 +22,6 @@ import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.VHomeUI;
-import forge.model.FModel;
 
 /** 
  * Controls the "quick gauntlet" submenu in the home UI.
@@ -95,7 +94,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
     }
 
     private void startGame() {
-        FModel.SINGLETON_INSTANCE.setGauntletData(
+        Singletons.getModel().setGauntletData(
                 GauntletIO.loadGauntlet(view.getGauntletLister().getSelectedGauntletFile()));
 
         // Start game
@@ -107,7 +106,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
             }
         });
 
-        final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
+        final GauntletData gd = Singletons.getModel().getGauntletData();
         final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();

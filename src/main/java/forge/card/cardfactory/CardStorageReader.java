@@ -45,7 +45,6 @@ import forge.card.CardRulesReader;
 import forge.error.BugReporter;
 import forge.gui.toolbox.FProgressBar;
 import forge.util.FileUtil;
-import forge.view.FView;
 
 /**
  * <p>
@@ -66,7 +65,7 @@ public class CardStorageReader {
     final private int NUMBER_OF_PARTS = 25;
     
     final private CountDownLatch cdl = new CountDownLatch(NUMBER_OF_PARTS);
-    final private FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
+    final private FProgressBar barProgress;
     
     private transient File cardsfolder;
 
@@ -88,8 +87,9 @@ public class CardStorageReader {
      *            if true, attempts to load cards from a zip file, if one
      *            exists.
      */
-    public CardStorageReader(String cardDataDir, final boolean useZip) {
-
+    public CardStorageReader(String cardDataDir, final boolean useZip, FProgressBar barProgress) {
+        this.barProgress = barProgress; 
+        
         // These read data for lightweight classes.
         File theCardsFolder = new File(cardDataDir);
 
@@ -200,7 +200,8 @@ public class CardStorageReader {
         sw.stop();
         final long timeOnParse = sw.getTime();
         System.out.printf("Read cards: %s %s in %d ms (%d parts) %s%n", estimatedFilesRemaining, zip == null? "files" : "archived files", timeOnParse, NUMBER_OF_PARTS, useThreadPool ? "using thread pool" : "in same thread");
-        barProgress.setPercentMode(false);
+        if ( null != barProgress )
+            barProgress.setPercentMode(false);
         return res;
     } // loadCardsUntilYouFind(String)
 
@@ -243,7 +244,8 @@ public class CardStorageReader {
                 @Override
                 public List<CardRules> call() throws Exception{
                     List<CardRules> res = loadCardsInRangeFromZip(entries, from, till);
-                    barProgress.increment();
+                    if ( null != barProgress )
+                        barProgress.increment();
                     cdl.countDown();
                     return res;
                 }
@@ -263,7 +265,8 @@ public class CardStorageReader {
                 @Override
                 public List<CardRules> call() throws Exception{
                     List<CardRules> res = loadCardsInRange(allFiles, from, till);
-                    barProgress.increment();
+                    if ( null != barProgress )
+                        barProgress.increment();
                     cdl.countDown();
                     return res;
                 }

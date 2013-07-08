@@ -39,7 +39,6 @@ import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.model.FModel;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -64,7 +63,7 @@ public class GauntletWinLose extends ControlWinLose {
      */
     @Override
     public final boolean populateCustomPanel() {
-        final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
+        final GauntletData gd = Singletons.getModel().getGauntletData();
         final List<String> lstEventNames = gd.getEventNames();
         final List<Deck> lstDecks = gd.getDecks();
         final List<String> lstEventRecords = gd.getEventRecords();
@@ -196,7 +195,7 @@ public class GauntletWinLose extends ControlWinLose {
     public void actionOnContinue() {
         if (match.isMatchOver()) {
             // To change the AI deck, we have to create a new match.
-            GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
+            GauntletData gd = Singletons.getModel().getGauntletData();
             Deck aiDeck = gd.getDecks().get(gd.getCompleted());
             List<RegisteredPlayer> players = Lists.newArrayList();
             Lobby lobby = Singletons.getControl().getLobby();

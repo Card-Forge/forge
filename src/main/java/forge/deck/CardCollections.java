@@ -24,7 +24,6 @@ import org.apache.commons.lang.time.StopWatch;
 import forge.deck.io.DeckGroupSerializer;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.OldDeckParser;
-import forge.gui.toolbox.FSkin;
 import forge.properties.NewConstants;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
@@ -48,7 +47,6 @@ public class CardCollections {
      * @param file the file
      */
     public CardCollections() {
-        FSkin.setProgessBarMessage("Loading decks");
         StopWatch sw = new StopWatch();
         sw.start();
         this.constructed = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_CONSTRUCTED_DIR), true));

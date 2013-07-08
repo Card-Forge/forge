@@ -24,7 +24,6 @@ import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.model.FModel;
 
 /** 
  * Controls the "quick gauntlet" submenu in the home UI.
@@ -94,7 +93,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
 
         int num = 1;
         while (setNames.contains(GauntletIO.PREFIX_QUICK + num + GauntletIO.SUFFIX_DATA)) { num++; }
-        FModel.SINGLETON_INSTANCE.getGauntletData().setName(GauntletIO.PREFIX_QUICK + num);
+        Singletons.getModel().getGauntletData().setName(GauntletIO.PREFIX_QUICK + num);
 
         // Pull user deck
         final Deck userDeck = view.getLstDecks().getDeck().getOriginalDeck(); 
@@ -134,7 +133,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
             lstGauntletDecks.add(tempDeck);
         }
 
-        final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
+        final GauntletData gd = Singletons.getModel().getGauntletData();
         gd.setDecks(lstGauntletDecks);
         gd.setEventNames(lstEventNames);
 

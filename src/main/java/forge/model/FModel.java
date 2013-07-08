@@ -37,8 +37,10 @@ import forge.card.SealedProductTemplate;
 import forge.card.cardfactory.CardStorageReader;
 import forge.deck.CardCollections;
 import forge.error.ExceptionHandler;
+import forge.game.ai.AiProfileUtil;
 import forge.game.limited.GauntletMini;
 import forge.gauntlet.GauntletData;
+import forge.gui.toolbox.FSkin;
 import forge.item.PrintSheet;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -50,6 +52,7 @@ import forge.util.FileUtil;
 import forge.util.MultiplexOutputStream;
 import forge.util.storage.IStorageView;
 import forge.util.storage.StorageView;
+import forge.view.FView;
 
 /**
  * The default Model implementation for Forge.
@@ -60,8 +63,7 @@ import forge.util.storage.StorageView;
  * In case we need to convert it into an interface in the future, all fields of
  * this class must be either private or public static final.
  */
-public enum FModel {
-    SINGLETON_INSTANCE;
+public class FModel {
 
     private final PrintStream oldSystemOut;
     private final PrintStream oldSystemErr;
@@ -88,13 +90,21 @@ public enum FModel {
     private final IStorageView<QuestWorld> worlds;
     private final IStorageView<PrintSheet> printSheets;
 
+    
+    private static FModel instance = null;
+    public synchronized final static FModel getInstance(boolean initWithUi) {
+        if (instance == null)
+            instance = new FModel(initWithUi);
+        return instance;
+    }
+    
     /**
      * Constructor.
      * 
      * @throws FileNotFoundException
      *             if we could not find or write to the log file.
      */
-    private FModel() {
+    private FModel(boolean initWithUi) {
         // install our error reporter
         ExceptionHandler.registerErrorHandling();
 
@@ -144,7 +154,7 @@ public enum FModel {
         
         // Loads all cards (using progress bar).
         FThreads.assertExecutedByEdt(false);
-        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true);
+        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true, initWithUi ? FView.SINGLETON_INSTANCE.getSplash().getProgressBar() : null);
         // this fills in our map of card names to Card instances.
         CardDb.setup(reader.loadCards(), editions.getOrderedEditions());
 
@@ -162,11 +172,16 @@ public enum FModel {
 
         this.loadDynamicGamedata();
 
+        if(initWithUi)
+            FSkin.setProgessBarMessage("Loading decks");
 
         this.decks = new CardCollections();
         this.quest = new QuestController();
         
         this.printSheets = new StorageView<PrintSheet>(new PrintSheet.Reader("res/blockdata/printsheets.txt"));
+        
+        // Preload AI profiles
+        AiProfileUtil.loadAllProfiles();
     }
 
     public final QuestController getQuest() {
