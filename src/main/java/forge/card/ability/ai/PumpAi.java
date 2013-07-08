@@ -181,6 +181,7 @@ public class PumpAi extends PumpAiBase {
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final Game game = ai.getGame();
+        final Card source = sa.getSourceCard();
 
         if (!mandatory
                 && !sa.isTrigger()
@@ -197,7 +198,7 @@ public class PumpAi extends PumpAiBase {
         List<Card> list = new ArrayList<Card>();
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("HighestPower")) {
-                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source);
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
                 if (!list.isEmpty()) {
@@ -226,7 +227,7 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source);
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare
             // attack/block
@@ -251,12 +252,12 @@ public class PumpAi extends PumpAiBase {
             list = ComputerUtil.getSafeTargets(ai, sa, list);
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card t = null;
             // boolean goodt = false;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (sa.getTargets().getNumTargeted() == 0)) {
+                if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (mandatory) {
                         return this.pumpMandatoryTarget(ai, sa, mandatory);
                     }
@@ -313,7 +314,7 @@ public class PumpAi extends PumpAiBase {
             }
 
             Card c;
-            if (CardLists.getNotType(pref, "Creature").size() == 0) {
+            if (CardLists.getNotType(pref, "Creature").isEmpty()) {
                 c = ComputerUtilCard.getBestCreatureAI(pref);
             } else {
                 c = ComputerUtilCard.getMostExpensivePermanentAI(pref, sa, true);
@@ -324,13 +325,13 @@ public class PumpAi extends PumpAiBase {
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) {
             if (forced.isEmpty()) {
                 break;
             }
 
             Card c;
-            if (CardLists.getNotType(forced, "Creature").size() == 0) {
+            if (CardLists.getNotType(forced, "Creature").isEmpty()) {
                 c = ComputerUtilCard.getWorstCreatureAI(forced);
             } else {
                 c = ComputerUtilCard.getCheapestPermanentAI(forced, sa, true);
@@ -341,7 +342,7 @@ public class PumpAi extends PumpAiBase {
             sa.getTargets().add(c);
         }
 
-        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
+        if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) {
             sa.resetTargets();
             return false;
         }
