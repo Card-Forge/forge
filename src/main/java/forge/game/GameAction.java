@@ -633,59 +633,12 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToLibrary(Card c, int libPosition) {
-        final Zone p = game.getZoneOf(c);
         final PlayerZone library = c.getOwner().getZone(ZoneType.Library);
 
-        if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")) {
-            final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
-            c.removeAllExtrinsicKeyword("If CARDNAME would leave the battlefield, "
-                    + "exile it instead of putting it anywhere else.");
-            return this.moveTo(removed, c);
-        }
-
-        if (c.isInAlternateState()) {
-            c.setState(CardCharacteristicName.Original);
-        }
-
-        Card lastKnownInfo = p != null && p.is(ZoneType.Battlefield) ? CardUtil.getLKICopy(c) : c;
-        // Remove first to avoid bugs when searching a card in library and put it on the top
-        if (p != null) {
-            if (p.is(ZoneType.Battlefield) && c.isCreature() && game.getCombat() != null) {
-                game.getCombat().saveLKI(lastKnownInfo);
-                game.getCombat().removeFromCombat(c); 
-            }
-            p.remove(c);
-        }
-        c.clearCounters(); // remove all counters
-
-        if ((libPosition == -1) || (libPosition > library.size())) {
+        if (libPosition == -1 || libPosition > library.size()) {
             libPosition = library.size();
         }
-
-        if (p != null && p.is(ZoneType.Battlefield)) {
-            if (!c.isToken()) {
-                library.add(CardFactory.copyCard(c), libPosition);
-            }
-        } else {
-            library.add(c, libPosition);
-        }
-
-
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Card", lastKnownInfo);
-        runParams.put("Origin", p == null ? null : p.getZoneType().name());
-        runParams.put("Destination", ZoneType.Library.name());
-        game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
-
-        game.fireEvent(new GameEventCardChangeZone(c, p, library));
-
-        // Soulbond unpairing
-        if (c.isPaired()) {
-            c.getPairedWith().setPairedWith(null);
-            c.setPairedWith(null);
-        }
-
-        return c;
+        return this.changeZone(game.getZoneOf(c), library, c, libPosition);
     }
 
     /**
