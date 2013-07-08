@@ -841,7 +841,7 @@ public class GameAction {
                 it.remove();
         }
         
-        //if ( !affectedCards.isEmpty() )
+        if ( !affectedCards.isEmpty() )
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
     }
 

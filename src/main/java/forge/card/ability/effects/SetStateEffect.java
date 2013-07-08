@@ -7,6 +7,8 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.Game;
+import forge.game.event.GameEventCardStatsChanged;
 
 public class SetStateEffect extends SpellAbilityEffect {
 
@@ -43,6 +45,7 @@ public class SetStateEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
 
         final Card host = sa.getSourceCard();
+        final Game game = host.getGame();
         final List<Card> tgtCards = getTargetCards(sa);
 
         final boolean remChanged = sa.hasParam("RememberChanged");
@@ -53,6 +56,9 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             boolean hasTransformed = changeCardState(tgt, sa.getParam("Mode"), sa.getParam("NewState"));
+            if ( hasTransformed ) {
+                game.fireEvent(new GameEventCardStatsChanged(tgt));
+            }
             if ( hasTransformed && remChanged) {
                 host.addRemembered(tgt);
             }
