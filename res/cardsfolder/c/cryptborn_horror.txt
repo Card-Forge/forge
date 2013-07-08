@@ -3,7 +3,7 @@ ManaCost:1 BR BR
 Types:Creature Horror
 PT:0/0
 K:Trample
-K:etbCounter:P1P1:X:no Condition:Cryptborn Horror enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn.
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn.
 SVar:X:Count$LifeOppsLostThisTurn
 SVar:NeedsToPlayVar:X GE3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptborn_horror.jpg
