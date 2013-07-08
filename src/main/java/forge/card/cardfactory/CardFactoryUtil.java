@@ -1195,6 +1195,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("LifeYouLostThisTurn"))  return doXMath(cc.getLifeLostThisTurn(), m, c);
+        if (sq[0].contains("LifeYouGainedThisTurn"))  return doXMath(cc.getLifeGainedThisTurn(), m, c);
         if (sq[0].contains("LifeOppsLostThisTurn")) {
             int lost = 0;
             for (Player opp : cc.getOpponents()) {
