@@ -80,7 +80,7 @@ public class TriggerAttackerBlocked extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
-        sa.setTriggeringObject("Blocker", this.getRunParams().get("Blocker"));
+        sa.setTriggeringObject("Blockers", this.getRunParams().get("Blockers"));
         sa.setTriggeringObject("NumBlockers", this.getRunParams().get("NumBlockers"));
     }
 }
