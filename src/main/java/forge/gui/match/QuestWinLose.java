@@ -125,7 +125,6 @@ public class QuestWinLose extends ControlWinLose {
     @Override
     public final boolean populateCustomPanel() {
         this.getView().getBtnRestart().setVisible(false);
-        qData.getCards().resetNewList();
         QuestController qc = Singletons.getModel().getQuest();
 
         LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
@@ -159,7 +158,7 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         if (!match.isMatchOver()) {
-            this.getView().getBtnQuit().setText("Quit (15 Credits)");
+            this.getView().getBtnQuit().setText("Quit (-15 Credits)");
             return isAnte;
         } else {
             this.getView().getBtnContinue().setVisible(false);
