@@ -161,6 +161,21 @@ Lifebane Zombie
 Pyromancer's Gauntlet
 Illusionary Armor
 Encroaching Wastes
+Mindsparker
+Witchstalker
+Angelic Accord
+Voracious Wurm
+Celestial Flare
+Blood Bairn
+Gnawing Zombie
+Liturgy of Blood
+Haunted Plate Mail
+Oath of the Ancient Wood
+Path of Bravery
+Academy Raider
+Dragon Egg
+Cyclops Tyrant
+Barrage of Expendables
 
 
 ------------
