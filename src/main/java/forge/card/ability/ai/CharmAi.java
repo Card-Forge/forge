@@ -22,8 +22,8 @@ public class CharmAi extends SpellAbilityAi {
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
 
-        List<AbilitySub> chooseFrom = CharmEffect.makePossibleOptions(sa);
-        List<AbilitySub> chosenList = chooseOptionsAi(ai, timingRight, chooseFrom, num, min, false);
+        
+        List<AbilitySub> chosenList = chooseOptionsAi(sa, ai, timingRight, num, min, false);
 
         if (chosenList.isEmpty()) {
             return false;
@@ -33,7 +33,8 @@ public class CharmAi extends SpellAbilityAi {
         return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
-    public static List<AbilitySub> chooseOptionsAi(final Player ai, boolean playNow, List<AbilitySub> choices, int num, int min, boolean opponentChoser) {
+    public static List<AbilitySub> chooseOptionsAi(SpellAbility sa, final Player ai, boolean playNow, int num, int min, boolean opponentChoser) {
+        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
 
         if (opponentChoser) {

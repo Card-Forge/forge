@@ -161,6 +161,6 @@ public abstract class PlayerController {
     public abstract boolean chooseFilpResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
     public abstract Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap);
 
-    public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> choices, int min, int num);
+    public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num);
 
 }

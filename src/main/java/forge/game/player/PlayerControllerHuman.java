@@ -21,6 +21,7 @@ import forge.Card;
 import forge.GameEntity;
 import forge.ITargetable;
 import forge.Singletons;
+import forge.card.ability.effects.CharmEffect;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
@@ -710,7 +711,8 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#chooseModeForAbility(forge.card.spellability.SpellAbility, java.util.List, int, int)
      */
     @Override
-    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> choices, int min, int num) {
+    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num) {
+        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
         String modeTitle = String.format("%s activated %s - Choose a mode", sa.getActivatingPlayer(), sa.getSourceCard());
         List<AbilitySub> chosen = new ArrayList<AbilitySub>();
         for (int i = 0; i < num; i++) {

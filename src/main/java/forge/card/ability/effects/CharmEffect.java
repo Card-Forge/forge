@@ -35,10 +35,7 @@ public class CharmEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-        // nothing stack specific for Charm
-
-        return sb.toString();
+        return "";
     }
 
     public static void makeChoices(SpellAbility sa) {
@@ -47,7 +44,6 @@ public class CharmEffect extends SpellAbilityEffect {
 
         final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
-        final List<AbilitySub> choices = makePossibleOptions(sa);
 
         Card source = sa.getSourceCard();
         Player activator = sa.getActivatingPlayer();
@@ -63,7 +59,7 @@ public class CharmEffect extends SpellAbilityEffect {
             source.setChosenPlayer(chooser);
         }
         
-        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, choices, min, num);
+        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, min, num);
         chainAbilities(sa, chosen);
     }
 
