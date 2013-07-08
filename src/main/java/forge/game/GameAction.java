@@ -141,7 +141,7 @@ public class GameAction {
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
 
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
-        if (c.isToken() && zoneFrom != null && !fromBattlefield) {
+        if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Command)) {
             return c; 
         }
 
