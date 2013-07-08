@@ -25,7 +25,7 @@ public class CharmAi extends SpellAbilityAi {
         List<AbilitySub> chooseFrom = CharmEffect.makePossibleOptions(sa);
         List<AbilitySub> chosenList = chooseOptionsAi(ai, timingRight, chooseFrom, num, min, false);
 
-        if (chosenList == null || chosenList.isEmpty()) {
+        if (chosenList.isEmpty()) {
             return false;
         }
 
@@ -64,7 +64,23 @@ public class CharmAi extends SpellAbilityAi {
                 chosenList.add(thisPick);
             }
         }
-        return chosenList.size() >= min ? chosenList : null;
+        if (playNow && chosenList.size() < min) {
+            for (int i = 0; i < min; i++) {
+                AbilitySub thisPick = null;
+                for (SpellAbility sub : choices) {
+                    sub.setActivatingPlayer(ai);
+                    if (sub.doTrigger(true, ai)) {
+                        thisPick = (AbilitySub) sub;
+                        choices.remove(sub);
+                        break;
+                    }
+                }
+                if (thisPick != null) {
+                    chosenList.add(thisPick);
+                }
+            }
+        }
+        return chosenList;
     }
     
     /* (non-Javadoc)
