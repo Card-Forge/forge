@@ -647,22 +647,8 @@ public class GameAction {
             c.setState(CardCharacteristicName.Original);
         }
 
-        if ((libPosition == -1) || (libPosition > library.size())) {
-            libPosition = library.size();
-        }
-
-        Card lastKnownInfo = c;
-        if (p != null && p.is(ZoneType.Battlefield)) {
-            lastKnownInfo = CardUtil.getLKICopy(c);
-            c.clearCounters(); // remove all counters
-            if (!c.isToken()) {
-                library.add(CardFactory.copyCard(c), libPosition);
-            }
-        } else {
-            c.clearCounters(); // remove all counters
-            library.add(c, libPosition);
-        }
-
+        Card lastKnownInfo = p != null && p.is(ZoneType.Battlefield) ? CardUtil.getLKICopy(c) : c;
+        // Remove first to avoid bugs when searching a card in library and put it on the top
         if (p != null) {
             if (p.is(ZoneType.Battlefield) && c.isCreature() && game.getCombat() != null) {
                 game.getCombat().saveLKI(lastKnownInfo);
@@ -670,6 +656,20 @@ public class GameAction {
             }
             p.remove(c);
         }
+        c.clearCounters(); // remove all counters
+
+        if ((libPosition == -1) || (libPosition > library.size())) {
+            libPosition = library.size();
+        }
+
+        if (p != null && p.is(ZoneType.Battlefield)) {
+            if (!c.isToken()) {
+                library.add(CardFactory.copyCard(c), libPosition);
+            }
+        } else {
+            library.add(c, libPosition);
+        }
+
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", lastKnownInfo);
