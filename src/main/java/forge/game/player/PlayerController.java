@@ -14,6 +14,7 @@ import forge.ITargetable;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetChoices;
@@ -159,5 +160,7 @@ public abstract class PlayerController {
     public abstract boolean chooseBinary(SpellAbility sa, String question, boolean isCoin);
     public abstract boolean chooseFilpResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
     public abstract Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap);
+
+    public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> choices, int min, int num);
 
 }

@@ -24,6 +24,7 @@ import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetSelection;
@@ -703,4 +704,29 @@ public class PlayerControllerHuman extends PlayerController {
         return what == you ? "you" : what.toString();
     }
     // end of not related candidates for move.
+
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseModeForAbility(forge.card.spellability.SpellAbility, java.util.List, int, int)
+     */
+    @Override
+    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> choices, int min, int num) {
+        String modeTitle = String.format("%s activated %s - Choose a mode", sa.getActivatingPlayer(), sa.getSourceCard());
+        List<AbilitySub> chosen = new ArrayList<AbilitySub>();
+        for (int i = 0; i < num; i++) {
+            AbilitySub a;
+            if (i < min) {
+                a = GuiChoose.one(modeTitle, choices);
+            } else {
+                a = GuiChoose.oneOrNone(modeTitle, choices);
+            }
+            if (null == a) {
+                break;
+            }
+
+            choices.remove(a);
+            chosen.add(a);
+        }
+        return chosen;
+    }
 }

@@ -6,11 +6,9 @@ import java.util.List;
 import forge.Card;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.ability.ai.CharmAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.gui.GuiChoose;
 
 public class CharmEffect extends SpellAbilityEffect {
 
@@ -51,7 +49,6 @@ public class CharmEffect extends SpellAbilityEffect {
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
         final List<AbilitySub> choices = makePossibleOptions(sa);
 
-        List<AbilitySub> chosen = null;
         Card source = sa.getSourceCard();
         Player activator = sa.getActivatingPlayer();
         Player chooser = sa.getActivatingPlayer();
@@ -65,28 +62,8 @@ public class CharmEffect extends SpellAbilityEffect {
             chooser = activator.getController().chooseSinglePlayerForEffect(opponents, sa, "Choose an opponent");
             source.setChosenPlayer(chooser);
         }
-
-        if (chooser.isHuman()) {
-            String modeTitle = String.format("%s activated %s - Choose a mode", activator, source);
-            chosen = new ArrayList<AbilitySub>();
-            for (int i = 0; i < num; i++) {
-                AbilitySub a;
-                if (i < min) {
-                    a = GuiChoose.one(modeTitle, choices);
-                } else {
-                    a = GuiChoose.oneOrNone(modeTitle, choices);
-                }
-                if (null == a) {
-                    break;
-                }
-
-                choices.remove(a);
-                chosen.add(a);
-            }
-        } else {
-            chosen = CharmAi.chooseOptionsAi(chooser, sa.isTrigger(), choices, num, min, !chooser.equals(activator));
-        }
-
+        
+        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, choices, min, num);
         chainAbilities(sa, chosen);
     }
 

@@ -18,11 +18,13 @@ import forge.CardPredicates;
 import forge.GameEntity;
 import forge.ITargetable;
 import forge.card.ability.ApiType;
+import forge.card.ability.ai.CharmAi;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
@@ -422,5 +424,13 @@ public class PlayerControllerAi extends PlayerController {
     public Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap) {
         int i = MyRandom.getRandom().nextInt(options.size());
         return choiceMap.get(options.get(i));
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseModeForAbility(forge.card.spellability.SpellAbility, java.util.List, int, int)
+     */
+    @Override
+    public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> choices, int min, int num) {
+        return CharmAi.chooseOptionsAi(player, sa.isTrigger(), choices, num, min, !player.equals(sa.getActivatingPlayer()));
     }
 }
