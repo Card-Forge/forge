@@ -17,8 +17,6 @@ import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.spellability.TargetChoices;
 import forge.game.Game;
-import forge.game.ai.ComputerUtil;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 
@@ -354,14 +352,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         if (decider != null && !confirmTrigger(decider, triggerParams)) 
             return;
 
-        if (getActivatingPlayer().isHuman()) {
-            HumanPlay.playSpellAbilityNoStack(getActivatingPlayer(), sa, true);
-        } else {
-            // commented out because i don't think this should be called
-            // again here
-            // sa.doTrigger(isMandatory);
-            ComputerUtil.playNoStack(getActivatingPlayer(), sa, game);
-        }
+        getActivatingPlayer().getController().playSpellAbilityNoStack(sa);
 
         // Add eventual delayed trigger.
         if (triggerParams.containsKey("DelayedTrigger")) {
