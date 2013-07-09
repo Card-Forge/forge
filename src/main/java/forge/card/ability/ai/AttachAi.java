@@ -929,7 +929,7 @@ public class AttachAi extends SpellAbilityAi {
         // at some point can support attaching a different card
 
         // Don't equip if already equipping
-        if (attachSource.getEquippingCard() != null && attachSource.getEquippingCard().getController() == aiPlayer) {
+        if (attachSource.getEquippingCard() != null && attachSource.getEquippingCard().getController() == aiPlayer || attachSource.hasSVar("DontEquip")) {
             return null;
         }
 
