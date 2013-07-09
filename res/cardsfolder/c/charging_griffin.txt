@@ -1,4 +1,4 @@
-Name:Charging Grffin
+Name:Charging Griffin
 ManaCost:3 W
 Types:Creature Griffin
 PT:2/2
