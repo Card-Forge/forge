@@ -211,10 +211,6 @@ public class GameAction {
         if (suppress) {
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         }
-        
-        // "enter the battlefield as a copy" - apply code here
-        // but how to query for input here and continue later while the callers assume synchronous result?
-        zoneTo.add(copied, position);
 
         if (zoneFrom != null) {
             if (fromBattlefield && c.isCreature() && game.getCombat() != null) {
@@ -223,9 +219,16 @@ public class GameAction {
                 game.getCombat().removeFromCombat(c);
                 
             }
+            if (zoneFrom.is(ZoneType.Library) && zoneFrom == zoneTo && position.equals(zoneFrom.size()) && position != 0) {
+                position--;
+            }
             zoneFrom.remove(c);
         }
-        
+
+        // "enter the battlefield as a copy" - apply code here
+        // but how to query for input here and continue later while the callers assume synchronous result?
+        zoneTo.add(copied, position);
+
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
         
