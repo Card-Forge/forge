@@ -1499,6 +1499,15 @@ public class GameAction {
         // Only cut/coin toss if it's the first game of the match
         Player goesFirst = null;
     
+        // 904.6: in Archenemy games the Archenemy goes first
+        if (game != null && game.getType() == GameType.Archenemy) {
+            for (Player p : game.getPlayers()) {
+                if (p.isArchenemy()) {
+                    return p;
+                }
+            }
+        }
+        
         boolean isFirstGame = lastGameOutcome == null;
         if (isFirstGame) {
             game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
