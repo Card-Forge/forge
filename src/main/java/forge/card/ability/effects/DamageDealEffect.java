@@ -1,7 +1,10 @@
 package forge.card.ability.effects;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import forge.Card;
 import forge.CardUtil;
@@ -72,6 +75,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean combatDmg = sa.hasParam("CombatDamage");
         final boolean removeDamage = sa.hasParam("Remove");
+        final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
         List<ITargetable> tgts = getTargets(sa);
 
@@ -110,6 +114,31 @@ public class DamageDealEffect extends SpellAbilityEffect {
         }
         final Card source = definedSources.get(0);
 
+        if (divideOnResolution) {
+            // Dividing Damage up to multiple targets using combat damage box
+            // Currently only used for Master of the Wild Hutn
+            List<Player> players = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DividerOnResolution"), sa);
+            if (players.isEmpty()) {
+                return;
+            }
+            
+            List<Card> assigneeCards = new ArrayList<Card>();
+            // Do we have a way of doing this in a better fashion?
+            for(ITargetable obj : tgts) {
+                if (obj instanceof Card) {
+                    assigneeCards.add((Card)obj);
+                }
+            }
+            
+            Player assigningPlayer = players.get(0);
+            Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(source, assigneeCards, dmg, null, true);
+            for (Entry<Card, Integer> dt : map.entrySet()) {
+                dt.getKey().addDamage(dt.getValue(), source);
+            }
+            
+            return;
+        }
+        
         for (final Object o : tgts) {
             dmg = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(o) : dmg;
             if (o instanceof Card) {
@@ -158,5 +187,4 @@ public class DamageDealEffect extends SpellAbilityEffect {
             }
         }
     }
-
 }

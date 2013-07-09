@@ -744,6 +744,22 @@ public class AbilityUtils {
                 Iterables.addAll(players, saTargeting.getTargets().getTargetPlayers());
                 players.add(sa.getActivatingPlayer());
             }
+        } else if (defined.equals("ParentTargetedController")) {
+            final List<Card> list = getDefinedCards(card, "ParentTarget", sa);
+            final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(card, "Targeted", sa);
+
+            for (final Card c : list) {
+                final Player p = c.getController();
+                if (!players.contains(p)) {
+                    players.add(p);
+                }
+            }
+            for (final SpellAbility s : sas) {
+                final Player p = s.getActivatingPlayer();
+                if (!players.contains(p)) {
+                    players.add(p);
+                }
+            } 
         } else if (defined.equals("Remembered")) {
             for (final Object rem : card.getRemembered()) {
                 if (rem instanceof Player) {

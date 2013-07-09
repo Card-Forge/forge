@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardPredicates;
 import forge.ITargetable;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
@@ -25,6 +27,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 public class DamageDealAi extends DamageAiBase {
@@ -60,8 +63,14 @@ public class DamageDealAi extends DamageAiBase {
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         }
-        if ("DiscardLands".equals(sa.getParam("AILogic"))) {
+        String logic = sa.getParam("AILogic");
+        
+        if ("DiscardLands".equals(logic)) {
             dmg = 2;
+        } else if ("WildHunt".equals(logic)) {
+            // This dummy ability will just deal 0 damage, but holds the logic for the AI for Master of Wild Hunt
+            List<Card> wolves = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.Wolf+untapped+YouCtrl+Other", ai, source);
+            dmg = Aggregates.sum(wolves, CardPredicates.Accessors.fnGetNetAttack);
         }
 
         if (dmg <= 0) {
@@ -499,5 +508,4 @@ public class DamageDealAi extends DamageAiBase {
 
         return true;
     }
-
 }

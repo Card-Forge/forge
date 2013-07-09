@@ -4,5 +4,12 @@ Types:Creature Human Shaman
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, put a 2/2 green Wolf creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2
+A:AB$ DealDamage | Cost$ T | SubAbility$ TapWolves | ValidTgts$ Creature | NumDmg$ 0 | AILogic$ WildHunt | SpellDescription$ Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves. | StackDescription$ Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to {c:Targeted}. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.
+SVar:TapWolves:DB$ TapAll | ValidCards$ Creature.Wolf+YouCtrl+untapped | RememberTapped$ True | SubAbility$ WildHuntDamage  | StackDescription$ None
+SVar:WildHuntDamage:DB$ RepeatEach | RepeatSubAbility$ WolfStrike | UseImprinted$ True | RepeatCards$ Card.IsRemembered | SubAbility$ HuntedDamage | StackDescription$ None
+SVar:WolfStrike:DB$ DealDamage | DamageSource$ Imprinted | NumDmg$ X | References$ X | Defined$ ParentTarget | StackDescription$ None
+SVar:HuntedDamage:DB$ DealDamage | DamageSource$ ParentTarget | NumDmg$ Y | References$ Y | DividerOnResolution$ ParentTargetedController | Defined$ Remembered | StackDescription$ None
+SVar:X:Imprinted$CardPower
+SVar:Y:Targeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_the_wild_hunt.jpg
 Oracle:At the beginning of your upkeep, put a 2/2 green Wolf creature token onto the battlefield.\n{T}: Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.
