@@ -1,0 +1,10 @@
+Name:Illusionary Armor 
+ManaCost:4 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 4 U | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 4 | AddToughness$ 4 | Description$ Enchanted creature gets +4/+4.
+T:Mode$ BecomesTarget | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When enchanted creature becomes the target of a spell or ability, sacrifice CARDNAME.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_armor.jpg

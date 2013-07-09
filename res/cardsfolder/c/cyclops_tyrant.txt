@@ -1,0 +1,8 @@
+Name:Cyclops Tyrant
+ManaCost:5 R
+Types:Creature Cyclops
+Text:CARDNAME can't block creatures with power 2 or less.
+PT:3/4
+K:CantBlock Creature.powerLE2
+K:Intimidate
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclops_tyrant.jpg

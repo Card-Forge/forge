@@ -1,0 +1,7 @@
+Name:Fleshpulper Giant
+ManaCost:5 R R
+Types:Creature Giant
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target creature with toughness 2 or less.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature.toughnessLE2 | TgtPrompt$ Select target creature with toughness 2 or less.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fleshpulper_giant.jpg

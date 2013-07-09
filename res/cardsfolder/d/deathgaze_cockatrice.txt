@@ -1,0 +1,7 @@
+Name:Deathgaze Cockatrice
+ManaCost:2 B B
+Types:Creature Cockatrice
+PT:2/2
+K:Flying
+K:Deathtouch
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgaze_cockatrice.jpg

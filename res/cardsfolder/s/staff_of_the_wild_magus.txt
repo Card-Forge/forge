@@ -1,0 +1,8 @@
+Name:Staff of the Wild Magus
+ManaCost:3
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a green spell or a Forest enters the battlefield under your control, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Forest.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | Secondary$ True | TriggerDescription$ Whenever you cast a green spell or a Forest enters the battlefield under your control, you gain 1 life.
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
+DeckNeeds:Color$Green
+SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_the_wild_magus.jpg

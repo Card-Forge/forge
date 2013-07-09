@@ -1,0 +1,8 @@
+Name:Angelic Accord
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE4 | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if you gained 4 or more life this turn, put a 4/4 white Angel creature token with flying onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying
+SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_accord.jpg

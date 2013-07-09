@@ -1,0 +1,8 @@
+Name:Groundshaker Sliver
+ManaCost:6 G
+Types:Creature Sliver
+PT:5/5
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Trample | Description$ Sliver creatures you control have trample.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+SVar:Picture:http://www.wizards.com/global/images/magic/general/groundshaker_sliver.jpg

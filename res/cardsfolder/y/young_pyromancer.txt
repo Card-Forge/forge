@@ -1,0 +1,7 @@
+Name:Young Pyromancer
+ManaCost:1 R
+Types: Creature Human Shaman
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a 1/1 red Elemental creature token onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You
+SVar:Picture:http://www.wizards.com/global/images/magic/general/young_pyromancer.jpg

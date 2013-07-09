@@ -1,0 +1,11 @@
+Name:Devout Invocation
+ManaCost:6 W
+Types:Sorcery
+A:SP$ ChooseCard | Cost$ 6 W | Defined$ You | Amount$ X | References$ X | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigTap | SpellDescription$ Tap any number of untapped creatures you control. Put a 4/4 white Angel creature token with flying onto the battlefield for each creature tapped this way. 
+SVar:TrigTap:DB$ Tap | Defined$ Remembered | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | References$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:Y:Remembered$Amount
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_invocation.jpg

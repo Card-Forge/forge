@@ -1,0 +1,10 @@
+Name:Shadowborn Demon
+ManaCost:3 B B
+Types:Creature Demon
+PT:5/6
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target non-Demon creature.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonDemon | TgtPrompt$ TgtPrompt$ Select target non-demon creature
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl | PresentZone$ Graveyard | PresentCompare$ LT6 | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, if there are fewer than six creatures in your graveyard, sacrifice a creature.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowborn_demon.jpg

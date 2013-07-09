@@ -1,0 +1,11 @@
+Name:Artificer's Hex
+ManaCost:B
+Types:Enchantment Aura
+K:Enchant Equipment
+A:SP$ Attach | Cost$ B | ValidTgts$ Equipment | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddSVar$ SVarDontEquip
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.EnchantedBy+AttachedTo Creature | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your upkeep, if enchanted Equipment is attached to a creature, destroy that creature.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ Valid Card.EquippedByEnchanted
+SVar:SVarDontEquip:SVar:DontEquip:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/artificers_hex.jpg

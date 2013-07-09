@@ -1,0 +1,10 @@
+Name:Vastwood Hydra
+ManaCost:X G G
+Types:Creature Hydra Beast
+PT:0/0
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ DeathCounterDistro | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may distribute a number of +1/+1 counters equal to the number of +1/+1 counters on CARDNAME among any number of creatures you control.
+SVar:DeathCounterDistro:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ VastwoodX | TargetMin$ 1 | TargetMax$ VastwoodX | DividedAsYouChoose$ VastwoodX | References$ VastwoodX
+SVar:VastwoodX:TriggeredCard$CardCounters.P1P1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vastwood_hydra.jpg

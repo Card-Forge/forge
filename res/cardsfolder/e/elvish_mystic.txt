@@ -1,0 +1,6 @@
+Name:Elvish Mystic
+ManaCost:G
+Types:Creature Elf Druid
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_mystic.jpg

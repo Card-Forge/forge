@@ -1,0 +1,8 @@
+Name:Charging Grffin
+ManaCost:3 W
+Types:Creature Griffin
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_griffin.jpg

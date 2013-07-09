@@ -1,0 +1,7 @@
+Name:Dawnstrike Paladin
+ManaCost:3 W W
+Types:Creature Human Knight
+PT:2/4
+K:Vigilance
+K:Lifelink
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnstrike_paladin.jpg

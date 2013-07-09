@@ -1,0 +1,7 @@
+Name:Vampire Warlord
+ManaCost:4 B
+Types:Creature Vampire Warrior
+PT:4/2
+A:AB$ Regenerate | Cost$ Sac<1/Creature.Other/another creature> | SpellDescription$ Regenerate CARDNAME.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_warlord.jpg

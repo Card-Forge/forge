@@ -1,0 +1,8 @@
+Name:Fiendslayer Paladin
+ManaCost:1 W W
+Types:Creature Human Knight
+PT:2/2
+K:First Strike
+K:Lifelink
+S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.Black,Card.Red | Spell$ True | Activator$ Opponent | Description$ CARDNAME can't be the target of black or red spells your opponents control.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fiendslayer_paladin.jpg

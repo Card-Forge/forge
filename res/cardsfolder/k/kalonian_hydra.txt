@@ -1,0 +1,11 @@
+Name:Kalonian Hydra
+ManaCost:3 G G
+Types:Creature Hydra
+PT:0/0
+K:Trample
+K:etbCounter:P1P1:4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDoubleCounters | TriggerDescription$ Whenever CARDNAME attacks, double the number of +1/+1 counters on each creature you control.
+SVar:TrigDoubleCounters:AB$ RepeatEach | Cost$ 0 | RepeatCards$ Creature.YouCtrl | RepeatSubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | References$ X
+SVar:X:Remembered$CardCounters.P1P1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kalonian_hydra.jpg

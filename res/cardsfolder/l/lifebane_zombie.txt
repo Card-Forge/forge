@@ -1,0 +1,8 @@
+Name:Lifebane Zombie
+ManaCost:1 B B
+Types:Creature Zombie Warrior
+PT:3/1
+K:Intimidate
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals his or her hand. You choose a green or white creature card from it and exile that card.
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Creature.Green,Creature.White | ChangeNum$ 1 | IsCurse$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lifebane_zombie.jpg

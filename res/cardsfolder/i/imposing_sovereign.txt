@@ -1,0 +1,6 @@
+Name:Imposing Sovereign
+ManaCost:1 W
+Types:Creature Human
+PT:2/1
+S:Mode$ ETBTapped | ValidCard$ Creature.OppCtrl | Description$ Creatures your opponents control enter the battlefield tapped.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/imposing_sovereign.jpg

@@ -1,0 +1,8 @@
+Name:Goblin Diplomats
+ManaCost:1 R
+Types:Creature Goblin
+PT:2/1
+A:AB$ Effect | Cost$ T | Name$ Goblin Diplomats Effect | StaticAbilities$ KWPump | SpellDescription$ Each creature attacks this turn if able.
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Each creature attacks this turn if able.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_diplomats.jpg
