@@ -32,7 +32,9 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GlobalRuleChange;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventManaPool;
+import forge.game.event.GameEventZone;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.util.maps.MapOfLists;
 import forge.util.maps.TreeMapOfLists;
 
@@ -385,5 +387,8 @@ public class ManaPool {
     
         // move leftover pay back to floating
         this.clearManaPaid(sa, true);
+        // update battlefield of activating player - to redraw cards used to pay mana as untapped
+        Player p = sa.getActivatingPlayer();
+        p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
     }
 }
