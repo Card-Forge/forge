@@ -176,6 +176,14 @@ Academy Raider
 Dragon Egg
 Cyclops Tyrant
 Barrage of Expendables
+Dismiss into Dream
+Elite Arcanist
+Tidebinder Mage
+Zephyr Charge
+Tenacious Dead
+Xathrid Necromance
+Savage Summoning
+Artificer's Hex
 
 
 ------------
