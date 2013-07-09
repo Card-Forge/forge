@@ -39,6 +39,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -280,7 +281,14 @@ public class CardFactoryCreatures {
 
             @Override
             public boolean canPlayAI() {
-                // Todo: Improve Level up code
+                // creatures enchanted by curse auras have low priority
+                if (card.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                    for (Card aura : card.getEnchantedBy()) {
+                        if (aura.getController().isOpponentOf(card.getController())) {
+                            return false;
+                        }
+                    }
+                }
                 return card.getCounters(CounterType.LEVEL) < maxLevel;
             }
 
