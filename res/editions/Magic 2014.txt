@@ -1,0 +1,260 @@
+[metadata]
+Code=M14
+Date=2013-07-19
+Name=Magic 2014
+Code2=M14
+Type=Core
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+FoilAlwaysInCommonSlot=True
+
+[cards]
+M Ajani, Caller of the Pride
+R Ajani's Chosen
+U Angelic Accord
+C Angelic Wall
+M Archangel of Thune
+C Auramancer
+U Banisher Priest
+U Blessing
+R Bonescythe Sliver
+U Brave the Elements
+C Capashen Knight
+C Celestial Flare
+C Charging Griffin
+U Congregate
+C Dawnstrike Paladin
+M Devout Invocation
+C Divine Favor
+R Fiendslayer Paladin
+C Fortify
+C Griffin Sentinel
+C Hive Stirrings
+R Imposing Sovereign
+R Indestructibility
+C Master of Diversion
+C Pacifism
+R Path of Bravery
+C Pay No Heed
+C Pillarfield Ox
+R Planar Cleansing
+C Sentinel Sliver
+R Seraph of the Sword
+U Serra Angel
+C Show of Valor
+C Siege Mastodon
+R Silence
+C Solemn Offering
+C Soulmender
+U Steelform Sliver
+U Stonehorn Chanter
+C Suntail Hawk
+U Wall of Swords
+U Air Servant
+C Archaeomancer
+C Armored Cancrix
+C Cancel
+C Claustrophobia
+R Clone
+R Colossal Whale
+C Coral Merfolk
+R Dismiss into Dream
+C Disperse
+C Divination
+R Domestication
+R Elite Arcanist
+C Essence Scatter
+C Frost Breath
+R Galerider Sliver
+U Glimpse the Future
+U Illusionary Armor
+M Jace, Memory Adept
+R Jace's Mindseeker
+C Merfolk Spy
+C Messenger Drake
+C Negate
+C Nephalia Seakite
+U Opportunity
+U Phantom Warrior
+R Quicken
+C Scroll Thief
+C Seacoast Drake
+C Sensory Deprivation
+U Spell Blast
+R Tidebinder Mage
+C Time Ebb
+C Tome Scour
+C Trained Condor
+R Traumatize
+U Wall of Frost
+U Warden of Evos Isle
+U Water Servant
+M Windreader Sphinx
+C Zephyr Charge
+C Accursed Spirit
+C Altar's Reap
+U Artificer's Hex
+U Blightcaster
+C Blood Bairn
+R Bogbrew Witch
+C Child of Night
+C Corpse Hauler
+U Corrupt
+C Dark Favor
+R Dark Prophecy
+C Deathgaze Cockatrice
+U Diabolic Tutor
+U Doom Blade
+C Duress
+C Festering Newt
+U Gnawing Zombie
+R Grim Return
+R Lifebane Zombie
+M Liliana of the Dark Realms
+R Liliana's Reaver
+C Liturgy of Blood
+C Mark of the Vampire
+C Mind Rot
+C Minotaur Abomination
+R Nightmare
+C Nightwing Shade
+C Quag Sickness
+M Rise of the Dark Realms
+R Sanguine Bond
+U Sengir Vampire
+C Shadowborn Apostle
+M Shadowborn Demon
+C Shrivel
+R Syphon Sliver
+U Tenacious Dead
+C Undead Minotaur
+U Vampire Warlord
+C Vile Rebirth
+C Wring Flesh
+R Xathrid Necromancer
+C Academy Raider
+C Act of Treason
+R Awaken the Ancient
+U Barrage of Expendables
+U Battle Sliver
+C Blur Sliver
+R Burning Earth
+C Canyon Minotaur
+M Chandra, Pyromaster
+C Chandra's Outrage
+R Chandra's Phoenix
+C Cyclops Tyrant
+C Demolish
+U Dragon Egg
+C Dragon Hatchling
+U Flames of the Firebrand
+U Fleshpulper Giant
+R Goblin Diplomats
+C Goblin Shortcutter
+C Lava Axe
+C Lightning Talons
+C Marauding Maulhorn
+R Mindsparker
+U Molten Birth
+R Ogre Battledriver
+C Pitchburn Devils
+C Regathan Firecat
+M Scourge of Valkas
+C Seismic Stomp
+U Shiv's Embrace
+R Shivan Dragon
+C Shock
+C Smelt
+C Striking Sliver
+R Thorncaster Sliver
+C Thunder Strike
+U Volcanic Geyser
+C Wild Guess
+R Wild Ricochet
+U Young Pyromancer
+C Advocate of the Beast
+U Bramblecrush
+U Briarpack Alpha
+C Brindle Boar
+C Deadly Recluse
+C Elvish Mystic
+U Enlarge
+C Fog
+M Garruk, Caller of Beasts
+R Garruk's Horde
+C Giant Growth
+C Giant Spider
+C Gladecover Scout
+C Groundshaker Sliver
+U Howl of the Night Pack
+C Hunt the Weak
+R Into the Wilds
+M Kalonian Hydra
+U Kalonian Tusker
+C Lay of the Land
+U Manaweft Sliver
+R Megantic Sliver
+C Naturalize
+R Oath of the Ancient Wood
+C Plummet
+C Predatory Sliver
+M Primeval Bounty
+C Ranger's Guile
+C Rootwalla
+C Rumbling Baloth
+R Savage Summoning
+R Scavenging Ooze
+C Sporemound
+C Trollhide
+R Vastwood Hydra
+C Verdant Haven
+U Voracious Wurm
+U Windstorm
+R Witchstalker
+U Woodborn Behemoth
+U Accorder's Shield
+U Bubbling Cauldron
+M Darksteel Forge
+U Darksteel Ingot
+R Door of Destinies
+U Elixir of Immortality
+U Fireshrieker
+R Guardian of the Ages
+R Haunted Plate Mail
+U Millstone
+R Pyromancer's Gauntlet
+R Ratchet Bomb
+M Ring of Three Wishes
+U Rod of Ruin
+C Sliver Construct
+U Staff of the Death Magus
+U Staff of the Flame Magus
+U Staff of the Mind Magus
+U Staff of the Sun Magus
+U Staff of the Wild Magus
+R Strionic Resonator
+R Trading Post
+U Vial of Poison
+U Encroaching Wastes
+R Mutavault
+U Shimmering Grotto
+L Plains
+L Plains
+L Plains
+L Plains
+L Island
+L Island
+L Island
+L Island
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Forest
+L Forest
+L Forest
+L Forest
