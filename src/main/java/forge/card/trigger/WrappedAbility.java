@@ -352,7 +352,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         if (decider != null && !confirmTrigger(decider, triggerParams)) 
             return;
 
-        getActivatingPlayer().getController().playSpellAbilityNoStack(sa);
+        getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
 
         // Add eventual delayed trigger.
         if (triggerParams.containsKey("DelayedTrigger")) {

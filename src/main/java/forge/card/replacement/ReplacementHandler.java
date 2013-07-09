@@ -238,7 +238,7 @@ public class ReplacementHandler {
         }
 
         Player player = replacementEffect.getHostCard().getController();
-        player.getController().playSpellAbilityNoStack(effectSA);
+        player.getController().playSpellAbilityNoStack(effectSA, true);
 
         return ReplacementResult.Replaced;
     }

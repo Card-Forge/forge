@@ -97,7 +97,7 @@ public abstract class PlayerController {
     //public abstract void playFromSuspend(Card c);
     public abstract boolean playCascade(Card cascadedCard, Card sourceCard);
     public abstract void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets);
-    public abstract void playSpellAbilityNoStack(SpellAbility effectSA);
+    public abstract void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets);
 
     public abstract Deck sideboard(final Deck deck, GameType gameType);
 

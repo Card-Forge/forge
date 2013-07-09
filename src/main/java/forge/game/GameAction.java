@@ -1624,7 +1624,7 @@ public class GameAction {
                 if (!takesAction.getZone(ZoneType.Hand).contains(sa.getSourceCard()))
                     continue;
                 
-                takesAction.getController().playSpellAbilityNoStack(sa);
+                takesAction.getController().playSpellAbilityNoStack(sa, true);
             }
             takesAction = game.getNextPlayerAfter(takesAction);
         } while( takesAction != first );

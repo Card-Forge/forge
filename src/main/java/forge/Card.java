@@ -7299,7 +7299,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 cardsInCommand = this.getGame().getCardsIn(ZoneType.Command);
             }
 
-            this.getController().getController().playSpellAbilityNoStack(shieldSA);
+            this.getController().getController().playSpellAbilityNoStack(shieldSA, true);
             if (apiIsEffect) {
                 List<Card> newCardsInCommand = this.getGame().getCardsIn(ZoneType.Command);
                 newCardsInCommand.removeAll(cardsInCommand);

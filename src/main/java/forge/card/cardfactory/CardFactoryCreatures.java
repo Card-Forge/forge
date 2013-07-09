@@ -21,12 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardPredicates;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.Command;
@@ -38,19 +36,14 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
-import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
-import forge.game.ai.ComputerUtilCard;
-import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.input.InputSelectCards;
-import forge.gui.input.InputSelectCardsFromList;
-import forge.util.Aggregates;
 
 /**
  * <p>
