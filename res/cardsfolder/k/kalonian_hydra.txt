@@ -8,4 +8,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDoubleCounters | TriggerDe
 SVar:TrigDoubleCounters:AB$ RepeatEach | Cost$ 0 | RepeatCards$ Creature.YouCtrl | RepeatSubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | References$ X
 SVar:X:Remembered$CardCounters.P1P1
+SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kalonian_hydra.jpg
