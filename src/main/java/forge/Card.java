@@ -77,6 +77,7 @@ import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardCounters;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventCardTapped;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -6957,7 +6958,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a int.
      */
     public final void setDamage(final int n) {
+        int oldDamae = damage;
         this.damage = n;
+        if( n != oldDamae )
+            getGame().fireEvent(new GameEventCardStatsChanged(this));
     }
 
     /**
