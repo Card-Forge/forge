@@ -7,4 +7,5 @@ T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | E
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 3 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 3 life. 
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 3
+SVar:BuffedBy:nonCreature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_bounty.jpg

@@ -4,5 +4,6 @@ Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a white spell or a Plains enters the battlefield under your control, you gain 1 life.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Plains.YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a white spell or a Plains enters the battlefield under your control, you gain 1 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
+SVar:RemRandomDeck:True
 DeckNeeds:Color$White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_the_sun_magus.jpg

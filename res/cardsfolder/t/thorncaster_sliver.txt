@@ -2,7 +2,8 @@ Name:Thorncaster Sliver
 ManaCost:4 R
 Types:Creature Sliver
 PT:2/2
-S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddTrigger$ SliverThornAttack | AddSVar$ ThornyDamage | Description$ Sliver creatures you control have "Whenever this creature attacks, it deals 1 damage to target creature or player."
-SVar:SliverThornAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ ThornyDamage | TriggerDescription$ Whenever this creature attacks, it deals 1 damage to target creature or player.
-SVar:ThornyDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to damage | NumDmg$ 1
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddTrigger$ SliverThornAttack | AddSVar$ ThorncasterSliverDamage,HasAttackEffect | Description$ Sliver creatures you control have "Whenever this creature attacks, it deals 1 damage to target creature or player."
+SVar:SliverThornAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ ThorncasterSliverDamage | TriggerDescription$ Whenever this creature attacks, it deals 1 damage to target creature or player.
+SVar:ThorncasterSliverDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to damage | NumDmg$ 1
+SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thorncaster_sliver.jpg

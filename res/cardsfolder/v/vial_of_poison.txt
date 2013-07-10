@@ -2,4 +2,5 @@ Name:Vial of Poison
 ManaCost:1
 Types:Artifact
 A:AB$ Pump | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SpellDescription$ Target creature gains deathtouch until end of turn.
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vial_of_poison.jpg
