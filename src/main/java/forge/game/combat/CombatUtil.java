@@ -1002,32 +1002,6 @@ public class CombatUtil {
     }
 
     /**
-     * <p>
-     * executeExaltedAbility.
-     * </p>
-     * @param game 
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param magnitude
-     *            a int.
-     */
-    public static void executeExaltedAbility(final Game game, final Card c, final int magnitude, final Card host) {
-        //final Card crd = c;
-        //Ability ability;
-        // This really should be a trigger on the stack
-
-        for (int i = 0; i < magnitude; i++) {
-            SpellAbility ability = AbilityFactory.getAbility("AB$ Pump | Cost$ 0 | Defined$ CardUID_"+c.getUniqueNumber()+" | NumAtt$ +1 | NumDef$ +1 | StackDescription$ Exalted for attacker {c:CardUID_"+c.getUniqueNumber()+"} (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn).", host);
-            ability.setActivatingPlayer(host.getController());
-            ability.setDescription(ability.getStackDescription());
-            ability.setTrigger(true);
-
-            game.getStack().addSimultaneousStackEntry(ability);
-        }
-    }
-
-    /**
      * executes Rampage abilities for a given card.
      * @param game 
      * 

@@ -16,12 +16,14 @@ import forge.FThreads;
 import forge.game.Game;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
+import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardCounters;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventCardTapped;
+import forge.game.event.GameEventCombatEnded;
 import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventManaPool;
@@ -275,6 +277,28 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
         }
         return super.visit(event);
+    }
+    
+    @Override
+    public Void visit(GameEventAttackersDeclared event) {
+        // Skip redraw for GUI player?
+        if ( event.player.getLobbyPlayer() == fc.getLobby().getGuiPlayer() )
+            return null;
+
+        // Update all attackers. 
+        // Although they might have been updated when they were apped, there could be someone with vigilance, not redrawn yet.
+        for(Collection<Card> cc : event.attackersMap.values()) {
+            updateManyCards(cc);
+        }
+        return super.visit(event);
+    }
+    
+    @Override
+    public Void visit(GameEventCombatEnded event) {
+        // This should remove sword/shield icons from combatants by the time game moves to M2
+        updateManyCards(event.attackers);
+        updateManyCards(event.blockers);
+        return null;
     }
 
     private Void updateSingleCard(Card c) {

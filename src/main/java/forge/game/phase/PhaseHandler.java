@@ -30,6 +30,7 @@ import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
+import forge.card.ability.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -43,6 +44,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;
+import forge.game.event.GameEventCombatEnded;
 import forge.game.event.GameEventPlayerPriority;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnEnded;
@@ -445,8 +447,17 @@ public class PhaseHandler implements java.io.Serializable {
                 break;
 
             case COMBAT_END:
+                GameEventCombatEnded eventEndCombat = null;
+                if( combat != null ) {
+                    List<Card> attackers = combat.getAttackers();
+                    List<Card> blockers = combat.getAllBlockers();
+                    eventEndCombat = new GameEventCombatEnded(attackers, blockers);
+                }
                 combat = null;
                 this.getPlayerTurn().resetAttackedThisCombat();
+
+                if ( eventEndCombat != null )
+                    game.fireEvent(eventEndCombat);
                 break;
     
             case CLEANUP:
@@ -494,8 +505,15 @@ public class PhaseHandler implements java.io.Serializable {
             final Card attacker = combat.getAttackers().get(0);
             for (Card card : attackingPlayer.getCardsIn(ZoneType.Battlefield)) {
                 int exaltedMagnitude = card.getKeywordAmount("Exalted");
-                if (exaltedMagnitude > 0) {
-                    CombatUtil.executeExaltedAbility(game, attacker, exaltedMagnitude, card);
+
+                for (int i = 0; i < exaltedMagnitude; i++) {
+                    String abScript = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +1 | NumDef$ +1 | StackDescription$ Exalted for attacker {c:CardUID_%d} (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn).", attacker.getUniqueNumber(), attacker.getUniqueNumber());
+                    SpellAbility ability = AbilityFactory.getAbility(abScript, card);
+                    ability.setActivatingPlayer(card.getController());
+                    ability.setDescription(ability.getStackDescription());
+                    ability.setTrigger(true);
+                
+                    game.getStack().addSimultaneousStackEntry(ability);
                 }
             }
         }

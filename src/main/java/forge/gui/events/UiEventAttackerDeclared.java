@@ -27,6 +27,6 @@ public class UiEventAttackerDeclared extends UiEvent {
      */
     @Override
     public String toString() {
-        return attacker.toString() + ( defender == null ? " removed from combat" : "declared to attack " + defender.getName() ); 
+        return attacker.toString() + ( defender == null ? " removed from combat" : " declared to attack " + defender.getName() ); 
     }
 }
