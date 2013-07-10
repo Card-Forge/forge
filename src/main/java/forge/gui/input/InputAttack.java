@@ -123,6 +123,7 @@ public class InputAttack extends InputSyncronizedBase {
             // When removing an attacker clear the attacking band
             this.activateBand(null);
             
+            CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventAttackerDeclared(card, null));
             return;
         }
 
