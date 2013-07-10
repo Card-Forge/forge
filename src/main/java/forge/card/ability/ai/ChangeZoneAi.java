@@ -1,6 +1,7 @@
 package forge.card.ability.ai;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -1402,7 +1403,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     
 
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional) {
         // Called when looking for creature to attach aura or equipment
         return ComputerUtilCard.getBestAI(options);
     }

@@ -1,15 +1,14 @@
 package forge.gui.input;
 
-import java.util.List;
-
+import java.util.Collection;
 import forge.Card;
 
 public class InputSelectCardsFromList extends InputSelectCards {
     private static final long serialVersionUID = 6230360322294805986L;
     
-    private final List<Card> validChoices;
+    private final Collection<Card> validChoices;
 
-    public InputSelectCardsFromList(int min, int max, List<Card> validCards) {
+    public InputSelectCardsFromList(int min, int max, Collection<Card> validCards) {
         super(Math.min(min, validCards.size()), Math.min(max, validCards.size())); // to avoid hangs
         this.validChoices = validCards;
 

@@ -112,8 +112,8 @@ public abstract class PlayerController {
     // Specify a target of a spell (Spellskite)
     public abstract Pair<SpellAbilityStackInstance, ITargetable> chooseTarget(SpellAbility sa, List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets);
 
-    public Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
-    public abstract Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title, boolean isOptional);
+    public Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
+    public abstract Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title, boolean isOptional);
     public abstract Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title);
     public abstract SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title);
 

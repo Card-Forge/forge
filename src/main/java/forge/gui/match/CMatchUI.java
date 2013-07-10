@@ -369,9 +369,12 @@ public enum CMatchUI {
         }
     }
 
+    private final static boolean LOG_UIEVENTS = false;
 
     // UI-related events should arrive here
     public void fireEvent(UiEvent uiEvent) {
+        if ( LOG_UIEVENTS )
+            System.out.println("UI: " + uiEvent.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(4, true));
         uiEvents.post(uiEvent);
     }
     

@@ -37,6 +37,7 @@ import forge.game.Game;
 import forge.game.GameType;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
@@ -272,17 +273,33 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public Card chooseSingleCardForEffect(List<Card> options, SpellAbility sa, String title, boolean isOptional) {
+    public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional) {
         // Human is supposed to read the message and understand from it what to choose
         if (options.isEmpty())
             return null;
+        if ( !isOptional && options.size() == 1 )
+            return Iterables.getFirst(options, null);
+        
+        boolean canUseSelectCardsInput = true;
+        for(Card c : options) {
+            Zone cz = c.getZone();
+            // can point at cards in own hand and anyone's battlefield
+            boolean canUiPointAtCards = cz != null && ( cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
+            if ( !canUiPointAtCards ) {
+                canUseSelectCardsInput = false;
+                break;
+            }
+        }
 
-        if ( isOptional )
-            return GuiChoose.oneOrNone(title, options);
-        else if ( options.size() > 1 )
-            return GuiChoose.one(title, options);
-        else 
-            return options.get(0);
+        if ( canUseSelectCardsInput ) {
+            InputSelectCardsFromList input = new InputSelectCardsFromList(isOptional ? 0 : 1, 1, options);
+            input.setCancelAllowed(isOptional);
+            input.setMessage(title);
+            Singletons.getControl().getInputQueue().setInputAndWait(input);
+            return Iterables.getFirst(input.getSelected(), null);
+        }
+        
+        return isOptional ? GuiChoose.oneOrNone(title, options) : GuiChoose.one(title, options);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package forge.card.ability.ai;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -1208,7 +1209,7 @@ public class AttachAi extends SpellAbilityAi {
     }
     
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional) {
         return attachToCardAIPreferences(ai, sa, true);
     }
     

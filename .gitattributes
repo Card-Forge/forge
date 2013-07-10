@@ -14251,6 +14251,7 @@ src/main/java/forge/card/ability/ai/FlipACoinAi.java -text
 src/main/java/forge/card/ability/ai/FogAi.java -text
 src/main/java/forge/card/ability/ai/GameLossAi.java -text
 src/main/java/forge/card/ability/ai/GameWinAi.java -text
+src/main/java/forge/card/ability/ai/LegendaryRuleAi.java -text
 src/main/java/forge/card/ability/ai/LifeExchangeAi.java -text
 src/main/java/forge/card/ability/ai/LifeGainAi.java -text
 src/main/java/forge/card/ability/ai/LifeLoseAi.java -text

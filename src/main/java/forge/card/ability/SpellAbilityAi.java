@@ -1,7 +1,10 @@
 package forge.card.ability;
 
 
+import java.util.Collection;
 import java.util.List;
+
+import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.card.spellability.AbilitySub;
@@ -113,9 +116,9 @@ public abstract class SpellAbilityAi extends SaTargetRountines {
         return true;
     }
 
-    public Card chooseSingleCard(Player ai, SpellAbility sa, List<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleCard is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
-        return options.get(0);
+        return Iterables.getFirst(options, null);
     }
     
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, List<Player> options) {

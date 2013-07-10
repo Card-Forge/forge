@@ -28,9 +28,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -46,6 +47,7 @@ import forge.ITargetable;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
+import forge.card.ability.ApiType;
 import forge.card.ability.effects.AttachEffect;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -54,6 +56,7 @@ import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.staticability.StaticAbility;
@@ -902,12 +905,14 @@ public class GameAction {
                 game.getStack().chooseOrderOfSimultaneousStackEntryAll();
             }
 
-            if (this.handleLegendRule()) {
-                checkAgain = true;
-            }
-
-            if (this.handlePlaneswalkerRule()) {
-                checkAgain = true;
+            for(Player p : game.getPlayers() ) {
+                if (this.handleLegendRule(p)) {
+                    checkAgain = true;
+                }
+    
+                if (this.handlePlaneswalkerRule(p)) {
+                    checkAgain = true;
+                }
             }
 
             if (!checkAgain) {
@@ -1139,15 +1144,13 @@ public class GameAction {
      * destroyPlaneswalkers.
      * </p>
      */
-    private boolean handlePlaneswalkerRule() {
+    private boolean handlePlaneswalkerRule(Player p) {
         // get all Planeswalkers
-        final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
+        final List<Card> list = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
 
         boolean recheck = false;
-        Card c;
-        for (int i = 0; i < list.size(); i++) {
-            c = list.get(i);
-
+        final Multimap<String, Card> uniqueWalkers = ArrayListMultimap.create();
+        for (Card c : list) {
             if (c.getCounters(CounterType.LOYALTY) <= 0) {
                 moveToGraveyard(c);
                 // Play the Destroy sound
@@ -1155,21 +1158,28 @@ public class GameAction {
                 recheck = true;
             }
 
-            final ArrayList<String> types = c.getType();
-            for (final String type : types) {
-                if (!CardType.isAPlaneswalkerType(type)) {
-                    continue;
-                }
 
-                final List<Card> cl = CardLists.getType(list, type);
-
-                if (cl.size() > 1) {
-                    for (final Card crd : cl) {
-                        moveToGraveyard(crd);
-                    }
-                    recheck = true;
+            for (final String type : c.getType()) {
+                if (CardType.isAPlaneswalkerType(type)) {
+                    uniqueWalkers.put(type, c);
                 }
             }
+        }
+        
+        for(String key : uniqueWalkers.keySet())
+        {
+            Collection<Card> duplicates = uniqueWalkers.get(key);
+            if ( duplicates.size() < 2)
+                continue;
+            
+            recheck = true;
+            
+            Card toKeep = p.getController().chooseSingleCardForEffect(duplicates, new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple planeswalkers of type \""+key+"\"in play.\n\nChoose one to stay on battlefield (the rest will be moved to graveyard)");
+            for(Card c: duplicates) {
+                if ( c != toKeep )
+                    moveToGraveyard(c);
+            }
+            
         }
         return recheck;
     }
@@ -1179,8 +1189,8 @@ public class GameAction {
      * destroyLegendaryCreatures.
      * </p>
      */
-    private boolean handleLegendRule() {
-        final List<Card> a = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "Legendary");
+    private boolean handleLegendRule(Player p) {
+        final List<Card> a = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Legendary");
         if (a.isEmpty() || game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
             return false;
         }
@@ -1189,24 +1199,26 @@ public class GameAction {
         if (yamazaki.size() == 2) {
             a.removeAll(yamazaki);
         }
-        while (!a.isEmpty()) {
-            List<Card> b = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(a.get(0).getName()));
-            b = CardLists.getType(b, "Legendary");
-            b = CardLists.filter(b, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return !c.isFaceDown();
-                }
-            });
-            a.remove(0);
-            if (1 < b.size()) {
-                for (int i = 0; i < b.size(); i++) {
-                    sacrificeDestroy(b.get(i));
-                }
-                recheck = true;
-                // Play the Destroy sound
-                game.fireEvent(new GameEventCardDestroyed());
+        
+        Multimap<String, Card> uniqueLegends = ArrayListMultimap.create();
+        for(Card c : a) {
+            if ( !c.isFaceDown() )
+                uniqueLegends.put(c.getName(), c);
+        }
+        
+        for(String name : uniqueLegends.keySet()) {
+            Collection<Card> cc = uniqueLegends.get(name);
+            if ( cc.size() < 2 )
+                continue;
+
+            recheck = true;
+
+            Card toKeep = p.getController().chooseSingleCardForEffect(cc, new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple legendary creatures named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)");
+            for(Card c: cc) {
+                if ( c != toKeep )
+                    sacrificeDestroy(c);
             }
+            game.fireEvent(new GameEventCardDestroyed());
         }
 
         return recheck;

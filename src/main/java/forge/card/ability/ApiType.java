@@ -58,6 +58,7 @@ import forge.card.ability.ai.FlipACoinAi;
 import forge.card.ability.ai.FogAi;
 import forge.card.ability.ai.GameLossAi;
 import forge.card.ability.ai.GameWinAi;
+import forge.card.ability.ai.LegendaryRuleAi;
 import forge.card.ability.ai.LifeExchangeAi;
 import forge.card.ability.ai.LifeGainAi;
 import forge.card.ability.ai.LifeLoseAi;
@@ -220,8 +221,8 @@ public enum ApiType {
     WinsGame (GameWinEffect.class, GameWinAi.class), 
     
     
-    
-    InternalEtbReplacement(ETBReplacementEffect.class, CanPlayAsDrawbackAi.class);
+    InternalEtbReplacement(ETBReplacementEffect.class, CanPlayAsDrawbackAi.class),
+    InternalLegendaryRule(CharmEffect.class, LegendaryRuleAi.class); // Charm has empty resolve blocks, may act as a dummy
 
     private final Class<? extends SpellAbilityEffect> clsEffect;
     private final Class<? extends SpellAbilityAi> clsAi;

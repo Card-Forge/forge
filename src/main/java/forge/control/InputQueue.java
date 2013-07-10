@@ -90,7 +90,7 @@ public class InputQueue extends Observable {
         input.awaitLatchRelease();
     }
     
-    public void setInput(InputSynchronized input) {
+    void setInput(InputSynchronized input) {
         this.inputStack.push(input);
         syncPoint();
         this.updateObservers();

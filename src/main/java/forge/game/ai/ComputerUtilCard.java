@@ -1,6 +1,7 @@
 package forge.game.ai;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -124,7 +125,7 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getBestLandAI(final List<Card> list) {
+    public static Card getBestLandAI(final Collection<Card> list) {
         final List<Card> land = CardLists.filter(list, CardPredicates.Presets.LANDS);
         if (land.isEmpty()) {
             return null;
@@ -180,8 +181,7 @@ public class ComputerUtilCard {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCheapestPermanentAI(final List<Card> list, final SpellAbility spell, final boolean targeted) {
-        List<Card> all = list;
+    public static Card getCheapestPermanentAI(Collection<Card> all, final SpellAbility spell, final boolean targeted) {
         if (targeted) {
             all = CardLists.filter(all, new Predicate<Card>() {
                 @Override
@@ -190,17 +190,16 @@ public class ComputerUtilCard {
                 }
             });
         }
-        if (all.size() == 0) {
+        if (all.isEmpty()) {
             return null;
         }
     
         // get cheapest card:
         Card cheapest = null;
-        cheapest = all.get(0);
     
-        for (int i = 0; i < all.size(); i++) {
-            if (cheapest.getManaCost().getCMC() <= cheapest.getManaCost().getCMC()) {
-                cheapest = all.get(i);
+        for (Card c : all) {
+            if (cheapest == null || cheapest.getManaCost().getCMC() <= cheapest.getManaCost().getCMC()) {
+                cheapest = c;
             }
         }
     
@@ -218,7 +217,7 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getBestAI(final List<Card> list) {
+    public static Card getBestAI(final Collection<Card> list) {
         // Get Best will filter by appropriate getBest list if ALL of the list
         // is of that type
         if (Iterables.all(list, CardPredicates.Presets.CREATURES))
@@ -239,7 +238,7 @@ public class ComputerUtilCard {
      *            the list
      * @return the card
      */
-    public static Card getBestCreatureAI(final List<Card> list) {
+    public static Card getBestCreatureAI(final Collection<Card> list) {
         return Aggregates.itemWithMax(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.fnEvaluateCreature);
     }
 
@@ -292,7 +291,7 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getWorstAI(final List<Card> list) {
+    public static Card getWorstAI(final Collection<Card> list) {
         return ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
     }
 
@@ -313,7 +312,7 @@ public class ComputerUtilCard {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    public static Card getWorstPermanentAI(final List<Card> list, final boolean biasEnch, final boolean biasLand,
+    public static Card getWorstPermanentAI(final Collection<Card> list, final boolean biasEnch, final boolean biasLand,
             final boolean biasArt, final boolean biasCreature) {
         if (list.size() == 0) {
             return null;
@@ -628,7 +627,7 @@ public class ComputerUtilCard {
      *            the all
      * @return the card
      */
-    public static Card getMostExpensivePermanentAI(final List<Card> all) {
+    public static Card getMostExpensivePermanentAI(final Collection<Card> all) {
         Card biggest = null;
     
         int bigCMC = -1;
