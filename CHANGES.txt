@@ -17,7 +17,7 @@ This version of Forge includes basic support for AI opponents making use of the 
 
 
 - New M14 cards -
-We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+Forge now includes most of the new M14 cards. It may take a few days before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient.
 
 
 - Match and Deck Editor Layout problems -
@@ -68,12 +68,6 @@ Sacred Boon
 Skyfire Kirin
 Puppet Master
 Fractured Powerstone
-
-
---------------------
-New M14 branch Cards
---------------------
-
 Accursed Spirit
 Advocate of the Beast
 Ajani's Chosen
@@ -141,7 +135,6 @@ Warden of Evos Isle
 Windreader Sphinx
 Woodborn Behemoth
 Young Pyromancer
-
 Minotaur Abomination
 Staff of the Sun Magus
 Trained Condor
