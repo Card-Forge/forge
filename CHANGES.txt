@@ -177,6 +177,8 @@ Tenacious Dead
 Xathrid Necromance
 Savage Summoning
 Artificer's Hex
+Colossal Whale
+Banisher Priest
 
 
 ------------
