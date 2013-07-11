@@ -22,8 +22,11 @@ import forge.properties.ForgePreferences.FPref;
  */
 @SuppressWarnings("serial")
 public class LblGroup extends JLabel implements ILocalRepaint {
+    
+    private static final boolean isCompactMenu = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_COMPACT_MAIN_MENU);
+    private static EMenuGroup activeMenuGroup = null;
+        
     private boolean hovered = false;
-    private boolean collapsed = true;
 
     private final Color clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
     private final Color l20 = FSkin.stepColor(clrTheme, 20);
@@ -39,7 +42,9 @@ public class LblGroup extends JLabel implements ILocalRepaint {
      * @param e0 {@link forge.gui.home.EMenuGroup}
      */
     public LblGroup(final EMenuGroup e0) {
-        super("    + " + e0.getTitle());
+        
+        super("  " + e0.getTitle());
+               
         this.setFont(FSkin.getBoldFont(14));
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
@@ -65,9 +70,28 @@ public class LblGroup extends JLabel implements ILocalRepaint {
 
     /**
      * Handler for click on group title.
-     * @param e0 {@link forge.gui.home.EMenuGroup}
+     * @param menuGroup {@link forge.gui.home.EMenuGroup}
      */
-    public void groupClick(final EMenuGroup e0) {
+    public void groupClick(final EMenuGroup menuGroup) {
+        toggleMenuGroupCollapseState(menuGroup);
+    }
+    
+    private void toggleMenuGroupCollapseState(final EMenuGroup menuGroup) {
+        if (isCompactMenu) {
+            if (menuGroup != activeMenuGroup) {
+                if (activeMenuGroup != null) {
+                    setMenuGroupCollapseState(activeMenuGroup);
+                }
+                setMenuGroupCollapseState(menuGroup);       
+                activeMenuGroup = menuGroup;
+            }
+        } else {
+            setMenuGroupCollapseState(menuGroup);
+            activeMenuGroup = menuGroup;
+        }        
+    }
+    
+    private void setMenuGroupCollapseState(final EMenuGroup e0) {
         final Component[] menuObjects = this.getParent().getComponents();
 
         // Toggle label items in this group
@@ -87,15 +111,6 @@ public class LblGroup extends JLabel implements ILocalRepaint {
                 Singletons.getModel().getPreferences().save();
                 break;
             }
-        }
-
-        if (this.collapsed) {
-            this.collapsed = false;
-            this.setText("    - " + e0.getTitle());
-        }
-        else {
-            this.collapsed = true;
-            this.setText("    + " + e0.getTitle());
         }
     }
 

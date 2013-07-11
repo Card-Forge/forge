@@ -98,6 +98,8 @@ public enum VHomeUI implements IVTopLevelUI {
     private VHomeUI() {
         pnlMenu.add(lblLogo, "w 150px!, h 150px!, gap 0 0 5px 10px, ax center");
 
+        layoutMainMenuButtons();
+        
         // Add new menu items here (order doesn't matter).
         allSubmenus.add(VSubmenuConstructed.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuDraft.SINGLETON_INSTANCE);
@@ -152,7 +154,10 @@ public enum VHomeUI implements IVTopLevelUI {
                 allGroupLabels.get(e).groupClick(e);
             }
         }
-
+        pnlDisplay.setBackground(FSkin.alphaColor(l00, 100));
+    }
+    
+    private void layoutMainMenuButtons() {
         JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, wrap 3"));
         pnlButtons.setOpaque(false);
 
@@ -163,10 +168,8 @@ public enum VHomeUI implements IVTopLevelUI {
             pnlButtons.add(lblStartServer, "w 170px!, h 25px!, gap 0 10px 10px 0, sx 2 ");
             pnlButtons.add(lblStopServer, "w 50px!, h 25px!, gap 0 0 10px 0");
             lblStopServer.setEnabled(false);
-        }
-        
+        }        
         pnlMenu.add(pnlButtons, "w 230px!, gap 10px 0 10px 10px");
-        pnlDisplay.setBackground(FSkin.alphaColor(l00, 100));
     }
 
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */

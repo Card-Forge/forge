@@ -33,6 +33,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
      * Preference identifiers, and their default values.
      */
     public static enum FPref {
+        UI_COMPACT_MAIN_MENU ("false"),
         UI_USE_OLD ("false"),
         UI_RANDOM_FOIL ("false"),
         UI_SMOOTH_LAND ("false"),
@@ -59,7 +60,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_FOR_TOUCHSCREN("false"),
 
         SUBMENU_CURRENTMENU (EMenuItem.CONSTRUCTED.toString()),
-        SUBMENU_SANCTIONED ("false"),
+        SUBMENU_SANCTIONED ("true"),
         SUBMENU_GAUNTLET ("false"),
         SUBMENU_VARIANT ("false"),
         SUBMENU_QUEST ("false"),

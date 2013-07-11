@@ -83,6 +83,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             .fontAlign(SwingConstants.LEFT).build();
     private final JScrollPane scrChooseAIProfile = new FScrollPane(lstChooseAIProfile);
 
+    private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
     private final JCheckBox cbSingletons = new OptionsCheckBox("Singleton Mode");
     private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
@@ -113,7 +114,13 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         // Spacing between components is defined here.
         final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
         final String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
-
+        
+        // ======== General Configuration Options ========
+        pnlPrefs.add(new SectionLabel("General Configuration"), sectionConstraints + ", gaptop 2%");
+        
+        pnlPrefs.add(cbCompactMainMenu, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Enable for a space efficient sidebar that displays only one menu group at a time (RESTART REQUIRED)."), regularConstraints);
+                
         // Deck building options
         pnlPrefs.add(new SectionLabel("Random Deck Generation Options"), sectionConstraints + ", gaptop 2%");
 
@@ -404,6 +411,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public final JScrollPane getScrChooseAIProfile() {
         return scrChooseAIProfile;
     }
+    
+    /** @return {@link javax.swing.JCheckBox} */
+    public final JCheckBox getCbCompactMainMenu() {
+        return cbCompactMainMenu;
+    }    
 
     /** @return {@link javax.swing.JCheckBox} */
     public final JCheckBox getCbRemoveSmall() {
