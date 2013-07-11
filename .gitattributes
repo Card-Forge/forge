@@ -771,6 +771,7 @@ res/cardsfolder/b/banefire.txt -text
 res/cardsfolder/b/baneful_omen.txt -text
 res/cardsfolder/b/baneslayer_angel.txt svneol=native#text/plain
 res/cardsfolder/b/banewasp_affliction.txt -text svneol=unset#text/plain
+res/cardsfolder/b/banisher_priest.txt -text
 res/cardsfolder/b/banishing_knack.txt svneol=native#text/plain
 res/cardsfolder/b/banishing_stroke.txt -text
 res/cardsfolder/b/banishment_decree.txt svneol=native#text/plain
@@ -1989,6 +1990,7 @@ res/cardsfolder/c/collective_restraint.txt svneol=native#text/plain
 res/cardsfolder/c/collective_unconscious.txt svneol=native#text/plain
 res/cardsfolder/c/colos_yearling.txt svneol=native#text/plain
 res/cardsfolder/c/colossal_might.txt svneol=native#text/plain
+res/cardsfolder/c/colossal_whale.txt -text
 res/cardsfolder/c/colossus_of_sardia.txt svneol=native#text/plain
 res/cardsfolder/c/coma_veil.txt svneol=native#text/plain
 res/cardsfolder/c/combat_medic.txt svneol=native#text/plain
