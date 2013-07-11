@@ -94,7 +94,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones use original card art");
-    private final JCheckBox cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
+    private final JCheckBox cbOverlayCardName = new OptionsCheckBox("Card Name");
+    private final JCheckBox cbOverlayCardPower = new OptionsCheckBox("Power/Toughness");
+    private final JCheckBox cbOverlayCardManaCost = new OptionsCheckBox("Mana Cost");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
     private final JCheckBox cbRandomizeArt = new OptionsCheckBox("Randomize Card Art");
@@ -189,8 +191,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbUiForTouchScreen, regularConstraints);
         pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), regularConstraints);
 
-        pnlPrefs.add(cbTextMana, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Overlays each card with basic card-specific information."), regularConstraints);
+        // Overlay options
+        pnlPrefs.add(new SectionLabel("Card Overlay Options"), sectionConstraints);
+        pnlPrefs.add(new NoteLabel("Show text overlays which are easier to read when cards are reduced in size to fit the play area."), regularConstraints);
+        pnlPrefs.add(cbOverlayCardName, regularConstraints);
+        pnlPrefs.add(cbOverlayCardPower, regularConstraints);
+        pnlPrefs.add(cbOverlayCardManaCost, regularConstraints);
 
         // Sound options
         pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints);
@@ -443,10 +449,20 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbTextMana() {
-        return cbTextMana;
+    public JCheckBox getCbOverlayCardName() {
+        return cbOverlayCardName;
     }
 
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbOverlayCardPower() {
+        return cbOverlayCardPower;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbOverlayCardManaCost() {
+        return cbOverlayCardManaCost;
+    }
+    
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbRandomFoil() {
         return cbRandomFoil;

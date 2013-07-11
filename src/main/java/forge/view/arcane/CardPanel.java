@@ -125,7 +125,6 @@ public class CardPanel extends JPanel implements CardContainer {
     private boolean isAnimationPanel;
     private int cardXOffset, cardYOffset, cardWidth, cardHeight;
     private boolean isSelected;
-    private boolean showCastingCost;
 
     /**
      * <p>
@@ -281,18 +280,6 @@ public class CardPanel extends JPanel implements CardContainer {
         return this.isSelected;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>showCastingCost</code>.
-     * </p>
-     * 
-     * @param showCastingCost
-     *            a boolean.
-     */
-    public final void setShowCastingCost(final boolean showCastingCost) {
-        this.showCastingCost = showCastingCost;
-    }
-
     /** {@inheritDoc} */
     @Override
     public final void paint(final Graphics g) {
@@ -361,7 +348,7 @@ public class CardPanel extends JPanel implements CardContainer {
         int height = CardFaceSymbols.getHeight();
         CardFaceSymbols.draw(g, cost, (this.cardXOffset + (this.cardWidth / 2)) - (width / 2), deltaY + this.cardYOffset + (this.cardHeight / 2) - height/2);
     }
-
+            
     /** {@inheritDoc} */
     @Override
     protected final void paintChildren(final Graphics g) {
@@ -371,7 +358,7 @@ public class CardPanel extends JPanel implements CardContainer {
             return;
         }
 
-        if (this.showCastingCost && this.cardWidth < 200) {
+        if (showCardManaCostOverlay() && this.cardWidth < 200) {
             Card gameCard = this.getGameCard();
             boolean showSplitMana = gameCard.isSplitCard() && gameCard.getCurState() == CardCharacteristicName.Original;
             if ( !showSplitMana ) {
@@ -593,34 +580,37 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public final void setText(final Card card) {
-        if ((card == null) || !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CARD_OVERLAY)) {
+                
+        if ((card == null)) {
             return;
         }
-
+        
         if (card.isFaceDown()) {
             this.titleText.setText("");
-            this.showCastingCost = false;
         } else {
-            this.titleText.setText(card.getName());
-            this.showCastingCost = true;
+            if (showCardNameOverlay()) {
+                this.titleText.setText(card.getName());   
+            }
+        }
+        
+        if (showCardPowerOverlay()) {
+            String sPt = "";
+            if (card.isCreature() && card.isPlaneswalker()) {
+                sPt = String.format("%d/%d (%d)", card.getNetAttack(), card.getNetDefense(), card.getCounters(CounterType.LOYALTY));
+            } else if (card.isCreature()) {
+                sPt = String.format("%d/%d", card.getNetAttack(), card.getNetDefense());
+            } else if (card.isPlaneswalker()) {
+                int loyalty = card.getCounters(CounterType.LOYALTY);
+                sPt = String.valueOf(loyalty == 0 ? card.getBaseLoyalty() : loyalty);
+            }
+            this.ptText.setText(sPt);            
         }
 
-        String sPt = "";
-        if (card.isCreature() && card.isPlaneswalker()) {
-            sPt = String.format("%d/%d (%d)", card.getNetAttack(), card.getNetDefense(), card.getCounters(CounterType.LOYALTY));
-        } else if (card.isCreature()) {
-            sPt = String.format("%d/%d", card.getNetAttack(), card.getNetDefense());
-        } else if (card.isPlaneswalker()) {
-            int loyalty = card.getCounters(CounterType.LOYALTY);
-            sPt = String.valueOf(loyalty == 0 ? card.getBaseLoyalty() : loyalty);
-        }
-        this.ptText.setText(sPt);
-        
         int damage = card.getDamage();
         this.damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
 
     }
-
+            
     /**
      * <p>
      * getCard.
@@ -646,13 +636,11 @@ public class CardPanel extends JPanel implements CardContainer {
         }
 
         final BufferedImage image = card == null ? null : ImageCache.getImage(card, imagePanel.getWidth(), imagePanel.getHeight());
-        if ((this.getGameCard() != null) && Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CARD_OVERLAY)) {
-            this.setText(this.getGameCard());
-        }
+        this.setText(this.getGameCard());
 
         this.setImage(image);
     }
-
+    
     /**
      * Gets the game card.
      * 
@@ -775,4 +763,22 @@ public class CardPanel extends JPanel implements CardContainer {
     public static final float getBorderSize() {
         return BLACK_BORDER_SIZE;
     }
+    
+    private boolean isPreferenceEnabled(FPref preferenceName) {
+        return Singletons.getModel().getPreferences().getPrefBoolean(preferenceName);
+    }    
+
+    private boolean showCardNameOverlay() {
+        return isPreferenceEnabled(FPref.UI_OVERLAY_CARD_NAME);
+    }
+
+    private boolean showCardPowerOverlay() {
+        return isPreferenceEnabled(FPref.UI_OVERLAY_CARD_POWER);
+    }
+
+    private boolean showCardManaCostOverlay() {
+        return isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST) && !this.getCard().isFaceDown();
+    }
+    
+    
 }

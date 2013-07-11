@@ -86,8 +86,10 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbSingletons(), FPref.DECKGEN_SINGLETONS));
         lstControls.add(Pair.of(view.getCbUploadDraft(), FPref.UI_UPLOAD_DRAFT));
         lstControls.add(Pair.of(view.getCbStackLand(), FPref.UI_SMOOTH_LAND));
-        lstControls.add(Pair.of(view.getCbRandomFoil(), FPref.UI_RANDOM_FOIL));
-        lstControls.add(Pair.of(view.getCbTextMana(), FPref.UI_CARD_OVERLAY));
+        lstControls.add(Pair.of(view.getCbRandomFoil(), FPref.UI_RANDOM_FOIL));        
+        lstControls.add(Pair.of(view.getCbOverlayCardName(), FPref.UI_OVERLAY_CARD_NAME));
+        lstControls.add(Pair.of(view.getCbOverlayCardPower(), FPref.UI_OVERLAY_CARD_POWER));
+        lstControls.add(Pair.of(view.getCbOverlayCardManaCost(), FPref.UI_OVERLAY_CARD_MANA_COST));
         lstControls.add(Pair.of(view.getCbRandomizeArt(), FPref.UI_RANDOM_CARD_ART));
         lstControls.add(Pair.of(view.getCbEnableSounds(), FPref.UI_ENABLE_SOUNDS));
         lstControls.add(Pair.of(view.getCbAltSoundSystem(), FPref.UI_ALT_SOUND_SYSTEM));
