@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
+import forge.FThreads;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -99,23 +100,31 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         stop();
     }
 
+    volatile boolean cardSelectLocked = false;
+    
     @Override
-    protected void onCardSelected(Card c0, boolean isRmb) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities 
+    protected void onCardSelected(final Card c0, boolean isRmb) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities 
         
         boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
         boolean isSerumPowder = c0.getName().equals("Serum Powder");
         boolean isLegalChoice = fromHand && (isCommander || isSerumPowder);
-        if ( !isLegalChoice ) {
+        if ( !isLegalChoice || cardSelectLocked ) {
             flashIncorrectAction();
             return;
         }
         
-        if (isSerumPowder && GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
-            List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
-            for (Card c : hand) {
-                player.getGame().getAction().exile(c);
-            }
-            c0.getController().drawCards(hand.size());
+        if ( isSerumPowder && GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
+            cardSelectLocked = true;
+            FThreads.invokeInGameThread(new Runnable() { 
+                public void run() {
+                    List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
+                    for (Card c : hand) {
+                        player.getGame().getAction().exile(c);
+                    }
+                    c0.getController().drawCards(hand.size());
+                    cardSelectLocked = false;
+                }
+            });
             return;
         }
 
