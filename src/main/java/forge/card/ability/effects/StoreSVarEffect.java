@@ -52,6 +52,8 @@ public class StoreSVarEffect extends SpellAbilityEffect {
         }
         else if (type.equals("Targeted")) {
             value = CardFactoryUtil.handlePaid(sa.findTargetedCards(), expr, source);
+        } else if (type.equals("Calculate")) {
+            value = AbilityUtils.calculateAmount(source, expr, sa);
         }
         //TODO For other types call a different function
 

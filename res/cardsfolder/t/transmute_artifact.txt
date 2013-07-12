@@ -1,7 +1,19 @@
 Name:Transmute Artifact
 ManaCost:U U
 Types:Sorcery
-Text:Sacrifice an artifact. If you do, search your library for an artifact card. If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield. If it's greater, you may pay X, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle your library.
+A:SP$ Sacrifice | Cost$ U U | SacValid$ Artifact | RememberSacrificed$ True | SpellDescription$ Sacrifice an artifact. If you do, search your library for an artifact card. If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield. If it's greater, you may pay X, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle your library. | SubAbility$ StoreCanSearch | StackDescription$ SpellDescription
+SVar:StoreCanSearch:DB$ StoreSVar | SVar$ SackedCMC | Type$ Number | Expression$ -1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ StoreCMC
+SVar:StoreCMC:DB$ StoreSVar | SVar$ SackedCMC | Type$ Calculate | Expression$ Y | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBClear
+SVar:DBClear:DB$ Cleanup | ClearRemembered$ True | SubAbility$ SearchLibrary
+SVar:SearchLibrary:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Artifact | ChangeNum$ 1 | SubAbility$ EqualTransmute | StackDescription$ None | RememberChanged$ True | ConditionCheckSVar$ SackedCMC | ConditionSVarCompare$ GE0
+SVar:EqualTransmute:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | NoLooking$ True | Mandatory$ True | Defined$ Remembered | ChangeNum$ 1 | ConditionCheckSVar$ SackedCMC | ConditionSVarCompare$ GEY | SubAbility$ PayForTransmute | StackDescription$ None
+SVar:PayForTransmute:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | NoLooking$ True | Mandatory$ True | Defined$ Remembered | ChangeNum$ 1 | ConditionCheckSVar$ SackedCMC | ConditionSVarCompare$ LTY | UnlessCost$ X | UnlessPayer$ You | UnlessSwitched$ True | StackDescription$ None | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+# Everything working but when no artifact is sacrificed
+# SackedCMC to be overridden to see if a sacrifice actually happened
+SVar:Y:Remembered$CardManaCost
+SVar:SackedCMC:Number$0
+SVar:X:SVar$Y/Minus.SackedCMC
 SVar:RemAIDeck:True
+#ChangeType$ Card.IsRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transmute_artifact.jpg
 Oracle:Sacrifice an artifact. If you do, search your library for an artifact card. If that card's converted mana cost is less than or equal to the sacrificed artifact's converted mana cost, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle your library.

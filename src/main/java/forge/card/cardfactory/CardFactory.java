@@ -303,8 +303,6 @@ public class CardFactory {
             CardFactoryCreatures.buildCard(card, cardName);
         } else if (card.isPlaneswalker()) {
             buildPlaneswalkerAbilities(card);
-        } else if (card.isSorcery()) {
-            CardFactorySorceries.buildCard(card, cardName);
         } else if (card.isType("Plane")) {
             buildPlaneAbilities(card);
         }
