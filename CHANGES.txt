@@ -1,7 +1,7 @@
-Forge Beta: 07-##-2013 ver 1.4.3
+Forge Beta: 07-12-2013 ver 1.4.3
 
 
-12### cards in total.
+13008 cards in total.
 
 
 -------------
@@ -57,58 +57,88 @@ At the start of a new quest you will only face opponent decks that have an easy 
 New Cards
 ---------
 
-Candles' Glow
-Temper
-Test of Faith
-Vengeful Archon
-Heart of Bogardan
-Sideswipe
-Scars of the Veteran
-Sacred Boon
-Skyfire Kirin
-Puppet Master
-Fractured Powerstone
+Academy Raider
 Accursed Spirit
 Advocate of the Beast
 Ajani's Chosen
+Angelic Accord
 Archangel of Thune
+Artificer's Hex
 Awaken the Ancient
+Banisher Priest
+Barrage of Expendables
 Battle Sliver
+Blightcaster
+Blood Bairn
 Blur Sliver
+Bogbrew Witch
 Bonescythe Sliver
+Bubbling Cauldron
 Burning Earth
+Candles' Glow
+Celestial Flare
+Chandra, Pyromaster
 Charging Grffin
+Colossal Whale
 Corpse Hauler
+Cyclops Tyrant
+Dark Prophecy
 Dawnstrike Paladin
 Deathgaze Cockatrice
 Devout Invocation
+Dismiss into Dream
+Dragon Egg
+Elite Arcanist
 Elvish Mystic
+Encroaching Wastes
 Enlarge
+Festering Newt
+Fiendslayer Paladin
 Fleshpulper Giant
+Fractured Powerstone
+Galerider Sliver
 Garruk, Caller of Beasts
 Glimpse the Future
+Gnawing Zombie
 Goblin Diplomats
 Grim Return
 Groundshaker Sliver
 Guardian of the Ages
+Haunted Plate Mail
+Heart of Bogardan
 Hive Stirrings
 Hunt the Weak
+Illusionary Armor
+Imposing Sovereign
 Into the Wilds
 Jace's Mindseeker
+Kalonian Hydra
 Kalonian Tusker
+Lifebane Zombie
 Liliana's Reaver
+Liturgy of Blood
+Manaweft Sliver
 Marauding Maulhorn
 Master of Diversion
 Megantic Sliver
 Messenger Drake
+Mindsparker
+Minotaur Abomination
 Molten Birth
+Oath of the Ancient Wood
 Ogre Battledriver
+Path of Bravery
 Predatory Sliver
 Primeval Bounty
+Puppet Master
+Pyromancer's Gauntlet
 Regathan Firecat
 Ring of Three Wishes
 Rise of the Dark Realms
 Rumbling Baloth
+Sacred Boon
+Savage Summoning
+Scars of the Veteran
 Scourge of Valkas
 Seacoast Drake
 Seismic Stomp
@@ -116,69 +146,39 @@ Sentinel Sliver
 Seraph of the Sword
 Shadowborn Apostle
 Shadowborn Demon
+Sideswipe
+Skyfire Kirin
 Sliver Construct
 Soulmender
 Sporemound
 Staff of the Death Magus
 Staff of the Flame Magus
 Staff of the Mind Magus
+Staff of the Sun Magus
 Staff of the Wild Magus
 Steelform Sliver
 Stonehorn Chanter
 Striking Sliver
+Syphon Sliver
+Temper
+Tenacious Dead
+Test of Faith
 Thorncaster Sliver
+Tidebinder Mage
+Trained Condor
 Undead Minotaur
 Vampire Warlord
 Vastwood Hydra
+Vengeful Archon
 Vial of Poison
+Voracious Wurm
 Warden of Evos Isle
 Windreader Sphinx
-Woodborn Behemoth
-Young Pyromancer
-Minotaur Abomination
-Staff of the Sun Magus
-Trained Condor
-Fiendslayer Paladin
-Manaweft Sliver
-Bogbrew Witch
-Bubbling Cauldron
-Festering Newt
-Kalonian Hydra
-Syphon Sliver
-Galerider Sliver
-Chandra, Pyromaster
-Imposing Sovereign
-Blightcaster
-Dark Prophecy
-Lifebane Zombie
-Pyromancer's Gauntlet
-Illusionary Armor
-Encroaching Wastes
-Mindsparker
 Witchstalker
-Angelic Accord
-Voracious Wurm
-Celestial Flare
-Blood Bairn
-Gnawing Zombie
-Liturgy of Blood
-Haunted Plate Mail
-Oath of the Ancient Wood
-Path of Bravery
-Academy Raider
-Dragon Egg
-Cyclops Tyrant
-Barrage of Expendables
-Dismiss into Dream
-Elite Arcanist
-Tidebinder Mage
-Zephyr Charge
-Tenacious Dead
+Woodborn Behemoth
 Xathrid Necromance
-Savage Summoning
-Artificer's Hex
-Colossal Whale
-Banisher Priest
+Young Pyromancer
+Zephyr Charge
 
 
 ------------
@@ -203,7 +203,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+Dave
+Gos
+jsv
+Marc
+Max
+Sloth
+Sol
+spr
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
