@@ -78,14 +78,6 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
 
     @Override
     public void add(final Card c, final Integer index) {
-        // Immutable cards are usually emblems,effects and the mana pool and we
-        // don't want to log those.
-        if (!c.isImmutable()) {
-            final Zone oldZone = game.getZoneOf(c);
-            // if any tokens come to battlefield, consider they are from stack. Plain "null" cannot be a key of EnumMap
-            final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType(); 
-            cardsAddedThisTurn.add(zt, c);
-        }
         
         c.setTurnInZone(game.getPhaseHandler().getTurn());
         if (zoneType != ZoneType.Battlefield) {
@@ -172,6 +164,15 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
     @Override
     public final boolean isEmpty() {
         return this.cardList.isEmpty();
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>cardsAddedThisTurn</code>.
+     * </p>
+     */
+    public final MapOfLists<ZoneType, Card> getCardsAddedThisTurn() {
+        return cardsAddedThisTurn;
     }
 
     /**
