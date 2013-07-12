@@ -905,9 +905,9 @@ public class GameAction {
                 // Place triggers on stack
                 game.getStack().chooseOrderOfSimultaneousStackEntryAll();
             }
-
+            boolean yamazaki = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Brothers Yamazaki")).size() ==  2;
             for(Player p : game.getPlayers() ) {
-                if (this.handleLegendRule(p)) {
+                if (this.handleLegendRule(p, yamazaki)) {
                     checkAgain = true;
                 }
     
@@ -1190,14 +1190,14 @@ public class GameAction {
      * destroyLegendaryCreatures.
      * </p>
      */
-    private boolean handleLegendRule(Player p) {
+    private boolean handleLegendRule(Player p, boolean yama) {
         final List<Card> a = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Legendary");
         if (a.isEmpty() || game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
             return false;
         }
         boolean recheck = false;
-        final List<Card> yamazaki = CardLists.filter(a, CardPredicates.nameEquals("Brothers Yamazaki"));
-        if (yamazaki.size() == 2) {
+        if (yama) {
+            List<Card> yamazaki = CardLists.filter(a, CardPredicates.nameEquals("Brothers Yamazaki"));
             a.removeAll(yamazaki);
         }
         
