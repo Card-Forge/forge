@@ -5,7 +5,7 @@
     <artifactId>forge</artifactId>
     <packaging>jar</packaging>
     <name>Forge</name>
-    <version>1.4.3-SNAPSHOT</version>
+    <version>1.4.3</version>
     <description>
         Forge lets you play the card game Magic: The Gathering against a computer opponent
         using all of the rules.
@@ -153,9 +153,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:svn:http://svn.slightlymagic.net/forge/trunk</connection>
-        <developerConnection>scm:svn:http://svn.slightlymagic.net/forge/trunk</developerConnection>
-        <url>http://svn.slightlymagic.net/websvn/listing.php?repname=forge</url>
+        <connection>scm:svn:http://svn.slightlymagic.net/forge/tags/forge-1.4.3</connection>
+        <developerConnection>scm:svn:http://svn.slightlymagic.net/forge/tags/forge-1.4.3</developerConnection>
+        <url>http://svn.slightlymagic.net/websvn/listing.php/tags/forge-1.4.3?repname=forge</url>
     </scm>
 
     <prerequisites>
@@ -1109,25 +1109,18 @@
                                         <mkdir dir="${project.build.directory}/res/cardsfolder" />
                                         <zip destfile="${project.build.directory}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/res/cardsfolder" level="1" />
                                         <taskdef name="bundleapp" classpathref="maven.runtime.classpath" classname="com.oracle.appbundler.AppBundlerTask" />
-                                        <bundleapp outputdirectory="${project.build.directory}/${project.build.finalName}-osx"
-                                                    name="${project.name}"
-                                                    displayname="${project.name}"
-                                                    shortversion="${project.version}"
-                                                    identifier="forge.view.Main"
-                                                    icon="${basedir}/${configSourceDirectory}/Forge.icns"
-                                                    applicationCategory="public.app-category.games"
-                                                    mainclassname="forge.view.Main">
-                                                    <classpath file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar"/>
-                                                    <classpath file="${basedir}/res/cardsfolder"/>
-                                                    <classpath file="${project.build.directory}/res/cardsfolder/cardsfolder.zip"/>
-                                                    <classpath file="${basedir}/forge.profile.properties.example"/>
+                                        <bundleapp outputdirectory="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" displayname="${project.name}" shortversion="${project.version}" identifier="forge.view.Main" icon="${basedir}/${configSourceDirectory}/Forge.icns" applicationCategory="public.app-category.games" mainclassname="forge.view.Main">
+                                                    <classpath file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar" />
+                                                    <classpath file="${basedir}/res/cardsfolder" />
+                                                    <classpath file="${project.build.directory}/res/cardsfolder/cardsfolder.zip" />
+                                                    <classpath file="${basedir}/forge.profile.properties.example" />
                                                     <option value="-Dapple.laf.useScreenMenuBar=true" />
-                                                    <option value="-Dcom.apple.macos.use-file-dialog-packages=true"/>
-                                                    <option value="-Dcom.apple.macos.useScreenMenuBar=true"/>
-                                                    <option value="-Dcom.apple.mrj.application.apple.menu.about.name=Forge"/>
-                                                    <option value="-Dcom.apple.smallTabs=true"/>
-                                                    <option value="-Xmx1024M"/>
-                                                    <option value="-Duser.dir=Contents/Resources"/>
+                                                    <option value="-Dcom.apple.macos.use-file-dialog-packages=true" />
+                                                    <option value="-Dcom.apple.macos.useScreenMenuBar=true" />
+                                                    <option value="-Dcom.apple.mrj.application.apple.menu.about.name=Forge" />
+                                                    <option value="-Dcom.apple.smallTabs=true" />
+                                                    <option value="-Xmx1024M" />
+                                                    <option value="-Duser.dir=Contents/Resources" />
                                         </bundleapp>
                                         <symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" resource="/Applications" />
                                         <exec executable="${basedir}/${configSourceDirectory}/create-dmg" failonerror="false">
