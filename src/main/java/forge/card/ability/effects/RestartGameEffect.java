@@ -79,10 +79,9 @@ public class RestartGameEffect extends SpellAbilityEffect {
             player.setNumBasicForestsPlayed(0);
             GameNew.putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
     
-            PlayerZone library = player.getZone(ZoneType.Library);
             List<Card> newLibrary = playerLibraries.get(player);
             for (Card c : newLibrary) {
-                action.moveTo(library, c);
+                action.moveToLibrary(c, 0);
             }
     
             player.shuffle();
