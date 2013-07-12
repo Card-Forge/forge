@@ -127,7 +127,7 @@ public class GameAction {
      * @param position TODO
      * @return a {@link forge.Card} object.
      */
-    public Card changeZone(final Zone zoneFrom, final Zone zoneTo, final Card c, Integer position) {
+    public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position) {
         if (c.isCopiedSpell()) {
             if ((zoneFrom != null)) {
                 zoneFrom.remove(c);
@@ -202,6 +202,11 @@ public class GameAction {
                     return this.moveToGraveyard(c);
                 }
                 return c;
+            }
+
+            if (c.isUnearthed() && (zoneTo.is(ZoneType.Graveyard) || zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library))) {
+                zoneTo = c.getOwner().getZone(ZoneType.Exile);
+                c.setUnearthed(false);
             }
         }
 

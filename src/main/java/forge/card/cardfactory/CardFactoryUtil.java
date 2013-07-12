@@ -2156,6 +2156,16 @@ public class CardFactoryUtil {
             card.setSVar("ChampionReturn", returnChampion);
             card.setSVar("DBSacrifice", subAb.toString());
         }
+        
+        if (card.hasKeyword("If CARDNAME would be put into a graveyard "
+                + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
+
+            String replacement = "Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ GraveyardToLibrary";
+            String ab =  "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | Reveal$ True | Shuffle$ True";
+
+            card.addReplacementEffect(ReplacementHandler.parseReplacement(replacement, card, true));
+            card.setSVar("GraveyardToLibrary", ab);
+        }
 
         final int echoPos = hasKeyword(card, "Echo");
         if (echoPos != -1) {
