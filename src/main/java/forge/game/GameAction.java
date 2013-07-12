@@ -227,8 +227,7 @@ public class GameAction {
             }
             zoneFrom.remove(c);
         }
-        ZoneType fromZoneType = zoneFrom == null ? ZoneType.Stack : zoneFrom.getZoneType();
-        zoneTo.getCardsAddedThisTurn().add(fromZoneType, c);
+
         // "enter the battlefield as a copy" - apply code here
         // but how to query for input here and continue later while the callers assume synchronous result?
         zoneTo.add(copied, position);

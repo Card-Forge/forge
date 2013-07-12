@@ -112,6 +112,7 @@ public class CardFactory {
         out.setEnchantedBy(in.getEnchantedBy());
         out.setEnchanting(in.getEnchanting());
         out.setClones(in.getClones());
+        out.setZone(in.getZone());
         for (final Object o : in.getRemembered()) {
             out.addRemembered(o);
         }

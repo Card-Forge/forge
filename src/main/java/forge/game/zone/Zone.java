@@ -79,6 +79,13 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
     @Override
     public void add(final Card c, final Integer index) {
         
+        // Immutable cards are usually emblems and effects
+        if (!c.isImmutable()) {
+            final Zone oldZone = game.getZoneOf(c);
+            final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType(); 
+            cardsAddedThisTurn.add(zt, c);
+        }
+        
         c.setTurnInZone(game.getPhaseHandler().getTurn());
         if (zoneType != ZoneType.Battlefield) {
             c.setTapped(false);
