@@ -2,10 +2,10 @@ Name:Jodah's Avenger
 ManaCost:5 U
 Types:Creature Shapeshifter
 PT:4/4
-A:AB$ Pump | Cost$ 0 | NumAtt$ -1 | NumDef$ -1 | KW$ Double Strike | SpellDescription$ CARDNAME gets -1/-1 and gains double strike until end of turn.
-A:AB$ Pump | Cost$ 0 | NumAtt$ -1 | NumDef$ -1 | SubAbility$ ProtectRed | SpellDescription$ CARDNAME gets -1/-1 and gains protection from red until end of turn.
-SVar:ProtectRed:DB$ Protection | Defined$ Self | Gains$ red
-A:AB$ Pump | Cost$ 0 | NumAtt$ -1 | NumDef$ -1 | KW$ Vigilance | SpellDescription$ CARDNAME gets -1/-1 and gains vigilance until end of turn.
-A:AB$ Pump | Cost$ 0 | NumAtt$ -1 | NumDef$ -1 | KW$ Shadow | SpellDescription$ CARDNAME gets -1/-1 and gains shadow until end of turn.
+A:AB$ GenericChoice | Cost$ 0 | Choices$ DBDoubleStrike,DBProtection,DBVigilance,DBShadow | SpellDescription$ Until end of turn, CARDNAME gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow.
+SVar:DBDoubleStrike:DB$ Pump | NumAtt$ -1 | NumDef$ -1 | KW$ Double Strike | ChoiceDescription$ CARDNAME gets -1/-1 and gains double strike until end of turn.
+SVar:DBProtection:DB$ Pump | NumAtt$ -1 | NumDef$ -1 | KW$ Protection from red | ChoiceDescription$ CARDNAME gets -1/-1 and gains protection from red until end of turn.
+SVar:DBVigilance:DB$ Pump | NumAtt$ -1 | NumDef$ -1 | KW$ Vigilance | ChoiceDescription$ CARDNAME gets -1/-1 and gains vigilance until end of turn.
+SVar:DBShadow:DB$ Pump | NumAtt$ -1 | NumDef$ -1 | KW$ Shadow | ChoiceDescription$ CARDNAME gets -1/-1 and gains shadow until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jodahs_avenger.jpg
 Oracle:{0}: Until end of turn, Jodah's Avenger gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow. (A creature with shadow can block or be blocked by only creatures with shadow.)
