@@ -112,7 +112,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     /** The num lands played. */
     private int numLandsPlayed = 0;
-    private int numBasicForestsPlayed = 0;
 
     /** The max hand size. */
     private int maxHandSize = 7;
@@ -1810,9 +1809,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
             game.getStack().unfreezeStack();
             this.numLandsPlayed++;
-            if (land.isBasicLand() && land.isType("Forest")) {
-                this.numBasicForestsPlayed++;
-            }
             return true;
         }
 
@@ -1875,23 +1871,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         if (this.numLandsPlayed < adjMax) {
-            return true;
-        }
-
-        //Gaea's Touch
-        int adjMaxForests = 0;
-        int forestsPlayed = this.numBasicForestsPlayed;
-        if (land != null && land.isBasicLand() && land.isType("Forest")) 
-            forestsPlayed++;
-
-        for (String keyword : this.getKeywords()) {
-            if (keyword.startsWith("AdjustBasicForestPlays")) {
-                final String[] k = keyword.split(":");
-                adjMaxForests += Integer.valueOf(k[1]);
-            }
-        }
-        adjMaxForests = Math.min(adjMaxForests, forestsPlayed);
-        if (this.numLandsPlayed < adjMax + adjMaxForests) {
             return true;
         }
 
@@ -2570,18 +2549,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int getLifeGainedThisTurn() {
         return this.lifeGainedThisTurn;
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>numBasicForestsPlayed</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void setNumBasicForestsPlayed(final int n) {
-        this.numBasicForestsPlayed = n;
-    }
     
     /**
      * <p>
@@ -2819,7 +2786,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumDiscardedThisTurn();
         setAttackedWithCreatureThisTurn(false);
         setNumLandsPlayed(0);
-        setNumBasicForestsPlayed(0);
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
     }
