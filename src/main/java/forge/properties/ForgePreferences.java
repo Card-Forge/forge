@@ -21,6 +21,7 @@ import java.util.List;
 
 import forge.Constant;
 import forge.Constant.Preferences;
+import forge.GameLogEntryType;
 import forge.game.ai.AiProfileUtil;
 import forge.gui.home.EMenuItem;
 import forge.gui.match.VMatchUI;
@@ -74,6 +75,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         DEV_MODE_ENABLED ("false"),
         DEV_MILLING_LOSS ("true"),
         DEV_UNLIMITED_LAND ("false"),
+        DEV_LOG_ENTRY_TYPE (GameLogEntryType.DAMAGE.toString()),
 
         DECKGEN_SINGLETONS ("false"),
         DECKGEN_ARTIFACTS ("false"),

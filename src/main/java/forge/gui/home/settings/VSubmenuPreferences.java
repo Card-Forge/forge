@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -26,6 +27,7 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
@@ -36,6 +38,7 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
+import forge.gui.toolbox.FComboBoxPanel;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FScrollPane;
@@ -92,6 +95,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbStackLand = new OptionsCheckBox("Stack AI Land");
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
+    private final FComboBoxPanel<GameLogEntryType> cbpLogEntryType = 
+            new FComboBoxPanel<GameLogEntryType>(GameLogEntryType.values(), "Game Log Verbosity:");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones use original card art");
     private final JCheckBox cbOverlayCardName = new OptionsCheckBox("Card Name");
@@ -152,6 +157,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbDevMode, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enables menu with functions for testing during development."), regularConstraints);
+
+        pnlPrefs.add(cbpLogEntryType, "w 80%!, gap 10% 0 0 10px, span 2 1");
+        pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), regularConstraints);
 
         pnlPrefs.add(cbEnforceDeckLegality, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)"), regularConstraints);
@@ -227,7 +235,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         scrContent.setBorder(null);
     }
-
+    
     public void reloadShortcuts() {
         for (Map.Entry<FPref, KeyboardShortcutField> e : shortcutFields.entrySet()) {
             e.getValue().reload(e.getKey());
@@ -491,6 +499,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbDevMode() {
         return cbDevMode;
+    }
+    
+    /** @return {@link javax.swing.JComboBox} */
+    public JComboBox<GameLogEntryType> getCboLogEntryType() {
+        return cbpLogEntryType.getJComboBox();
     }
 
     /** @return {@link javax.swing.JCheckBox} */

@@ -15,6 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Command;
 import forge.Constant.Preferences;
+import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.control.FControl.Screens;
 import forge.control.RestartUtil;
@@ -70,6 +71,15 @@ public enum CSubmenuPreferences implements ICDoc {
                 final boolean toggle = view.getCbDevMode().isSelected();
                 prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
                 Preferences.DEV_MODE = toggle;
+                prefs.save();
+            }
+        });
+        
+        view.getCboLogEntryType().addItemListener(new ItemListener() {            
+            @Override
+            public void itemStateChanged(final ItemEvent e) {
+                GameLogEntryType selectedType = (GameLogEntryType) view.getCboLogEntryType().getSelectedItem();
+                prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, selectedType.toString());
                 prefs.save();
             }
         });
@@ -145,6 +155,7 @@ public enum CSubmenuPreferences implements ICDoc {
         updateAIProfiles();
 
         view.getCbDevMode().setSelected(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
+        view.getCboLogEntryType().setSelectedItem(GameLogEntryType.valueOf(prefs.getPref(FPref.DEV_LOG_ENTRY_TYPE)));
         
         for(Pair<JCheckBox, FPref> kv: lstControls) {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));

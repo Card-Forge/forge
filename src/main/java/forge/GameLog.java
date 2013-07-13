@@ -24,6 +24,7 @@ import java.util.Observable;
 
 import org.apache.commons.lang3.StringUtils;
 import forge.game.event.IGameEventVisitor;
+import forge.properties.ForgePreferences.FPref;
 
 
 /**
@@ -102,6 +103,11 @@ public class GameLog extends Observable {
                 result.add(le);
         }
         return result;
+    }
+    
+    public GameLogEntryType getGameLogEntryTypeSetting() {
+        String logEntryType = Singletons.getModel().getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE);
+        return GameLogEntryType.valueOf(logEntryType);
     }
 
     public IGameEventVisitor<?> getEventVisitor() {
