@@ -1,7 +1,7 @@
-Forge Beta: 07-12-2013 ver 1.4.3
+Forge Beta: 07-##-2013 ver 1.4.4
 
 
-13008 cards in total.
+13### cards in total.
 
 
 -------------
@@ -10,10 +10,6 @@ Release Notes
 
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
-
-
-- Planechase AI -
-This version of Forge includes basic support for AI opponents making use of the planar die in Planechase game mode. The AI will be able to use the "Roll the planar die" ability for most of the planes currently supported by Forge. Please note that this AI is currently in its infant stage, so don't expect it to utilize the planar die in a very smart fashion.
 
 
 - New M14 cards -
@@ -36,149 +32,11 @@ Unfortunately, the Mac OS X builder that we were using does not support Java 7. 
 Currently, the windows/unix release of Forge includes a launcher file named "forge.command". Double click on the "forge.command" launcher command file and this will in turn launch the Forge jar file via the terminal application while increasing the Java heap space. This should be a temporary inconvenience.
 
 
-- Adding additional opponent decks to your /res/quest/duels/ directory -
-Some people are adding additional opponent decks to their /res/quest/duels/ directory in an attempt to increase the number of opponents they will face while playing a quest.
-
-The decks located in your /res/quest/duels/ directory are text files that have a file extension of ".dck" rather than the file extension ".txt". These deck files can be loaded into a basic text editor. You can view the contents of the deck files this way.
-
-There is a metadata line for the deck's difficulty setting. Normal decks do not contain this metadata line for the deck's difficulty setting. Starting with Forge version 1.4.3 any deck file that does not include the deck's difficulty setting will be automatically assigned a value of "medium".
-
-You can add a line for the deck's difficulty setting using a text editor and then saving the deck file. Currently, Forge will recognize the following settings:
-
-Difficulty=easy
-Difficulty=medium
-Difficulty=hard
-Difficulty=very hard
-
-At the start of a new quest you will only face opponent decks that have an easy difficulty setting. After you have won a number of matches you will then face the opponent decks that have a medium difficulty setting. After you have won an additional number of matches you will then face the opponent decks that have a hard difficulty setting. Opponent decks that have a very hard difficulty setting may occassionally appear as a possible opponent instead of a opponent deck that has a hard difficulty setting.
-
-
 ---------
 New Cards
 ---------
 
-Academy Raider
-Accursed Spirit
-Advocate of the Beast
-Ajani's Chosen
-Angelic Accord
-Archangel of Thune
-Artificer's Hex
-Awaken the Ancient
-Banisher Priest
-Barrage of Expendables
-Battle Sliver
-Blightcaster
-Blood Bairn
-Blur Sliver
-Bogbrew Witch
-Bonescythe Sliver
-Bubbling Cauldron
-Burning Earth
-Candles' Glow
-Celestial Flare
-Chandra, Pyromaster
-Charging Grffin
-Colossal Whale
-Corpse Hauler
-Cyclops Tyrant
-Dark Prophecy
-Dawnstrike Paladin
-Deathgaze Cockatrice
-Devout Invocation
-Dismiss into Dream
-Dragon Egg
-Elite Arcanist
-Elvish Mystic
-Encroaching Wastes
-Enlarge
-Festering Newt
-Fiendslayer Paladin
-Fleshpulper Giant
-Fractured Powerstone
-Galerider Sliver
-Garruk, Caller of Beasts
-Glimpse the Future
-Gnawing Zombie
-Goblin Diplomats
-Grim Return
-Groundshaker Sliver
-Guardian of the Ages
-Haunted Plate Mail
-Heart of Bogardan
-Hive Stirrings
-Hunt the Weak
-Illusionary Armor
-Imposing Sovereign
-Into the Wilds
-Jace's Mindseeker
-Kalonian Hydra
-Kalonian Tusker
-Lifebane Zombie
-Liliana's Reaver
-Liturgy of Blood
-Manaweft Sliver
-Marauding Maulhorn
-Master of Diversion
-Megantic Sliver
-Messenger Drake
-Mindsparker
-Minotaur Abomination
-Molten Birth
-Oath of the Ancient Wood
-Ogre Battledriver
-Path of Bravery
-Predatory Sliver
-Primeval Bounty
-Puppet Master
-Pyromancer's Gauntlet
-Regathan Firecat
-Ring of Three Wishes
-Rise of the Dark Realms
-Rumbling Baloth
-Sacred Boon
-Savage Summoning
-Scars of the Veteran
-Scourge of Valkas
-Seacoast Drake
-Seismic Stomp
-Sentinel Sliver
-Seraph of the Sword
-Shadowborn Apostle
-Shadowborn Demon
-Sideswipe
-Skyfire Kirin
-Sliver Construct
-Soulmender
-Sporemound
-Staff of the Death Magus
-Staff of the Flame Magus
-Staff of the Mind Magus
-Staff of the Sun Magus
-Staff of the Wild Magus
-Steelform Sliver
-Stonehorn Chanter
-Striking Sliver
-Syphon Sliver
-Temper
-Tenacious Dead
-Test of Faith
-Thorncaster Sliver
-Tidebinder Mage
-Trained Condor
-Undead Minotaur
-Vampire Warlord
-Vastwood Hydra
-Vengeful Archon
-Vial of Poison
-Voracious Wurm
-Warden of Evos Isle
-Windreader Sphinx
-Witchstalker
-Woodborn Behemoth
-Xathrid Necromance
-Young Pyromancer
-Zephyr Charge
+
 
 
 ------------
@@ -203,17 +61,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-Dave
-Gos
-jsv
-Marc
-Max
-Sloth
-Sol
-spr
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)

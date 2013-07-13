@@ -695,8 +695,35 @@ Targeting Overlay:
 Targeting arrows will now be shown for equipments equipping permanents currently under opponent's control (for those rare cases when e.g. an equipped creature gets Switcheroo'd for something else).
 
 
-- The AI Drafting has been improved -
+The AI Drafting has been improved:
+----------------------------------
+
 The AI evaluated the basic lands higher than anything else. Fixed. The AI would pick cards with RemAIDeck but only at a much lowered pick rate. For example the best pick in a 250 card set would become the 75th best pick, the 20th best pick would become the 95th and so on. Divided this factor by 3 (so the first pick would become the 25th pick). Please test whether this has improved the draft experience.
+
+
+Planechase AI:
+--------------
+
+This version of Forge includes basic support for AI opponents making use of the planar die in Planechase game mode. The AI will be able to use the "Roll the planar die" ability for most of the planes currently supported by Forge. Please note that this AI is currently in its infant stage, so don't expect it to utilize the planar die in a very smart fashion.
+
+
+Adding additional opponent decks to your /res/quest/duels/ directory:
+---------------------------------------------------------------------
+
+Some people are adding additional opponent decks to their /res/quest/duels/ directory in an attempt to increase the number of opponents they will face while playing a quest.
+
+The decks located in your /res/quest/duels/ directory are text files that have a file extension of ".dck" rather than the file extension ".txt". These deck files can be loaded into a basic text editor. You can view the contents of the deck files this way.
+
+There is a metadata line for the deck's difficulty setting. Normal decks do not contain this metadata line for the deck's difficulty setting. Starting with Forge version 1.4.3 any deck file that does not include the deck's difficulty setting will be automatically assigned a value of "medium".
+
+You can add a line for the deck's difficulty setting using a text editor and then saving the deck file. Currently, Forge will recognize the following settings:
+
+Difficulty=easy
+Difficulty=medium
+Difficulty=hard
+Difficulty=very hard
+
+At the start of a new quest you will only face opponent decks that have an easy difficulty setting. After you have won a number of matches you will then face the opponent decks that have a medium difficulty setting. After you have won an additional number of matches you will then face the opponent decks that have a hard difficulty setting. Opponent decks that have a very hard difficulty setting may occassionally appear as a possible opponent instead of a opponent deck that has a hard difficulty setting.
 
 
 Our Lawyers Made Us Do This:
