@@ -165,17 +165,14 @@ public class Combat {
     }
 
     public final AttackingBand getBandOfAttacker(final Card c) {
-        if ( !c.isInPlay() ) {
-            CombatLki lki = lkiCache.get(c); 
-            return lki == null ? null : lki.getFirstBand();
-        }
         for(Collection<AttackingBand> abs : attackedEntities.values()) {
             for(AttackingBand ab : abs) {
                 if ( ab.contains(c) )
                     return ab;
             }
         }
-        return null;
+        CombatLki lki = lkiCache.get(c); 
+        return lki == null ? null : lki.getFirstBand();
     }
 
     public final List<AttackingBand> getAttackingBands() {
