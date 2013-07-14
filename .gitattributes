@@ -3355,6 +3355,7 @@ res/cardsfolder/e/engulfing_flames.txt svneol=native#text/plain
 res/cardsfolder/e/engulfing_slagwurm.txt svneol=native#text/plain
 res/cardsfolder/e/enigma_eidolon.txt svneol=native#text/plain
 res/cardsfolder/e/enigma_sphinx.txt svneol=native#text/plain
+res/cardsfolder/e/enigma_sphinx_avatar.txt -text
 res/cardsfolder/e/enlarge.txt -text
 res/cardsfolder/e/enlightened_tutor.txt svneol=native#text/plain
 res/cardsfolder/e/enlisted_wurm.txt svneol=native#text/plain
