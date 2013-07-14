@@ -1,0 +1,10 @@
+Name:Autumn's Veil
+ManaCost:G
+Types:Instant
+A:SP$ Effect | Cost$ G | Name$ Autumn's Veil Effect | StaticAbilities$ AntiBlueBlack,STCantBeTarget | SpellDescription$ Spells you control can't be countered by blue or black spells this turn, and creatures you control can't be the targets of blue or black spells this turn.
+SVar:AntiBlueBlack:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ Stack | EffectZone$ Command | AddHiddenKeyword$ CARDNAME can't be countered by blue or black spells. | Description$ Spells you control can't be countered by blue or black spells this turn.
+SVar:STCantBeTarget:Mode$ CantTarget | ValidCard$ Creature.YouCtrl | ValidSource$ Card.Blue,Card.Black | Spell$ True | EffectZone$ Command | Description$ Creatures you control can't be the targets of blue or black spells this turn.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/autumns_veil.jpg
+Oracle:Spells you control can't be countered by blue or black spells this turn, and creatures you control can't be the targets of blue or black spells this turn.

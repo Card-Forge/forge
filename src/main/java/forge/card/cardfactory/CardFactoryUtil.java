@@ -753,8 +753,11 @@ public class CardFactoryUtil {
         if (!isCounterable(c)) {
             return false;
         }
-        //TODO: Add code for Autumn's Veil here
-
+        // Autumn's Veil
+        if (c.hasKeyword("CARDNAME can't be countered by blue or black spells.") && sa.isSpell() 
+                && (sa.getSourceCard().isBlack() || sa.getSourceCard().isBlue())) {
+            return false;
+        }
         return true;
     }
 
