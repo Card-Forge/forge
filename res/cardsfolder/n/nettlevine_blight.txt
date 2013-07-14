@@ -1,0 +1,15 @@
+Name:Nettlevine Blight
+ManaCost:4 B B
+Types:Enchantment Aura
+K:Enchant creature or land
+A:SP$ Attach | Cost$ 4 B B | ValidTgts$ Creature,Land | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Card.AttachedBy | AddTrigger$ NettlevineTrig | AddSVar$ NettlevineRemember & NettlevineSac & NettlevineChoose & NettlevineAttach | Description$ Enchanted permanent has "At the beginning of your end step, sacrifice this permanent and attach CARDNAME to a creature or land you control."
+SVar:NettlevineTrig:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ NettlevineRemember | TriggerDescription$ At the beginning of your end step, sacrifice CARDNAME and attach the aura to a creature or land you control.
+SVar:NettlevineRemember:DB$ Pump | ImprintCards$ Valid Card.Enchanted | SubAbility$ NettlevineSac
+SVar:NettlevineSac:DB$ Sacrifice | Defined$ Self | SubAbility$ NettlevineChoose
+SVar:NettlevineChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature.YouCtrl,Land.YouCtrl | AILogic$ WorstCard | Mandatory$ True | SubAbility$ NettlevineAttach
+SVar:NettlevineAttach:DB$ Attach | Defined$ ChosenCard | Object$ Valid Card.IsImprinted+namedNettlevine Blight | SubAbility$ NettlevineCleanup
+SVar:NettlevineCleanup:DB$ Pump | ForgetLastImprinted$ True
+SVar:NonStackingAttachEffect:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nettlevine_blight.jpg
+Oracle:Enchant creature or land\nEnchanted permanent has "At the beginning of your end step, sacrifice this permanent and attach Nettlevine Blight to a creature or land you control."
