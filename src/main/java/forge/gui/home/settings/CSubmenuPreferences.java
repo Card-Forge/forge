@@ -2,8 +2,6 @@ package forge.gui.home.settings;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.swing.JCheckBox;
@@ -11,7 +9,6 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Command;
@@ -55,13 +52,6 @@ public enum CSubmenuPreferences implements ICDoc {
         this.view = VSubmenuPreferences.SINGLETON_INSTANCE;
         this.prefs = Singletons.getModel().getPreferences();
 
-        view.getLstChooseAIProfile().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(final MouseEvent e) {
-                updateAIProfile();
-            }
-        });
-
         // This updates variable right now and is not standard 
         view.getCbDevMode().addItemListener(new ItemListener() {
             @Override
@@ -73,9 +63,7 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
         
-
-        lstControls.clear(); // just in case
-        lstControls.add(Pair.of(view.getCbCompactMainMenu(), FPref.UI_COMPACT_MAIN_MENU));        
+        lstControls.clear(); // just in case        
         lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
         lstControls.add(Pair.of(view.getCbManaBurn(), FPref.UI_MANABURN));
         lstControls.add(Pair.of(view.getCbScaleLarger(), FPref.UI_SCALE_LARGER));
@@ -87,13 +75,14 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbUploadDraft(), FPref.UI_UPLOAD_DRAFT));
         lstControls.add(Pair.of(view.getCbStackLand(), FPref.UI_SMOOTH_LAND));
         lstControls.add(Pair.of(view.getCbRandomFoil(), FPref.UI_RANDOM_FOIL));        
-        lstControls.add(Pair.of(view.getCbOverlayCardName(), FPref.UI_OVERLAY_CARD_NAME));
-        lstControls.add(Pair.of(view.getCbOverlayCardPower(), FPref.UI_OVERLAY_CARD_POWER));
-        lstControls.add(Pair.of(view.getCbOverlayCardManaCost(), FPref.UI_OVERLAY_CARD_MANA_COST));
         lstControls.add(Pair.of(view.getCbRandomizeArt(), FPref.UI_RANDOM_CARD_ART));
         lstControls.add(Pair.of(view.getCbEnableSounds(), FPref.UI_ENABLE_SOUNDS));
         lstControls.add(Pair.of(view.getCbAltSoundSystem(), FPref.UI_ALT_SOUND_SYSTEM));
         lstControls.add(Pair.of(view.getCbUiForTouchScreen(), FPref.UI_FOR_TOUCHSCREN));
+        lstControls.add(Pair.of(view.getCbCompactMainMenu(), FPref.UI_COMPACT_MAIN_MENU));        
+        lstControls.add(Pair.of(view.getCbOverlayCardName(), FPref.UI_OVERLAY_CARD_NAME));
+        lstControls.add(Pair.of(view.getCbOverlayCardPower(), FPref.UI_OVERLAY_CARD_POWER));
+        lstControls.add(Pair.of(view.getCbOverlayCardManaCost(), FPref.UI_OVERLAY_CARD_MANA_COST));        
 
         for(final Pair<JCheckBox, FPref> kv : lstControls) {
             kv.getKey().addItemListener(new ItemListener() {
@@ -127,6 +116,7 @@ public enum CSubmenuPreferences implements ICDoc {
         }); 
         
         initializeGameLogVerbosityComboBox();
+        initializeAiProfilesComboBox();
         initializeSkinsComboBox();        
         
     }
@@ -138,8 +128,7 @@ public enum CSubmenuPreferences implements ICDoc {
     public void update() {
         this.view = VSubmenuPreferences.SINGLETON_INSTANCE;
         this.prefs = Singletons.getModel().getPreferences();
-        updateAIProfiles();
-
+                
         view.getCbDevMode().setSelected(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
         
         for(Pair<JCheckBox, FPref> kv: lstControls) {
@@ -151,7 +140,15 @@ public enum CSubmenuPreferences implements ICDoc {
             @Override public void run() { view.getCbRemoveSmall().requestFocusInWindow(); }
         });
     }
-
+                
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
+     */
+    @Override
+    public Command getCommandOnSelect() {
+        return null;
+    }
+    
     private void resetForgeSettingsToDefault() {
         String userPrompt = 
                 "This will reset all preferences to their defaults and restart Forge.\n\n" +
@@ -196,14 +193,23 @@ public enum CSubmenuPreferences implements ICDoc {
         File f = new File(fd);
         f.delete();      
     }
-    	
+                        
     private void initializeGameLogVerbosityComboBox() {
         FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
         FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();
         JComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
         GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
         panel.setComboBox(comboBox, selectedItem);
+    }  
+    
+    private void initializeAiProfilesComboBox() {
+        FPref userSetting = FPref.UI_CURRENT_AI_PROFILE;        
+        FComboBoxPanel<String> panel = this.view.getAiProfilesComboBoxPanel();
+        JComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
+        String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);                
     }
+    
     private void initializeSkinsComboBox() {
         FPref userSetting = FPref.UI_SKIN;
         FComboBoxPanel<String> panel = this.view.getSkinsComboBoxPanel();
@@ -229,37 +235,5 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });                
     }
-    	  	
-    private void updateAIProfiles() {
-        final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
-        final List<String> profileNames = AiProfileUtil.getProfilesDisplayList();
-        final String currentName = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
-        int currentIndex = 0;
-
-        for (int i = 0; i < profileNames.size(); i++) {
-            if (currentName.equalsIgnoreCase(profileNames.get(i))) { currentIndex = i; }
-        }
-
-        view.getLstChooseAIProfile().setListData(profileNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
-        view.getLstChooseAIProfile().setSelectedIndex(currentIndex);
-        view.getLstChooseAIProfile().ensureIndexIsVisible(view.getLstChooseAIProfile().getSelectedIndex());
-    }
-    
-    private void updateAIProfile() {
-        final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
-        final String name = view.getLstChooseAIProfile().getSelectedValue().toString();
-        final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        if (name.equals(prefs.getPref(FPref.UI_CURRENT_AI_PROFILE))) { return; }
-
-        prefs.setPref(FPref.UI_CURRENT_AI_PROFILE, name);
-        prefs.save();
-    }    
         
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
-    @Override
-    public Command getCommandOnSelect() {
-        return null;
-    }
 }

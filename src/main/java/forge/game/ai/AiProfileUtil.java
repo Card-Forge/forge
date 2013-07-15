@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
+import org.apache.commons.lang.ArrayUtils;
+
 /**
  * Holds default AI personality profile values in an enum.
  * Loads profile from the given text file when setProfile is called.
@@ -148,6 +150,10 @@ public class AiProfileUtil {
         availableProfiles.addAll(getAvailableProfiles());
 
         return availableProfiles;
+    }
+    
+    public static String[] getProfilesArray() {
+        return getProfilesDisplayList().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     /**

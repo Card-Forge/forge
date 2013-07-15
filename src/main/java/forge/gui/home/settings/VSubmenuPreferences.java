@@ -1,7 +1,6 @@
 package forge.gui.home.settings;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -14,9 +13,7 @@ import java.util.Map;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
@@ -39,7 +36,6 @@ import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FComboBoxPanel;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences.FPref;
@@ -65,17 +61,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to Default Settings").build();
     private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Match Layout").build();
     private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Editor Layout").build();
-
-    private final FLabel lblTitleAIProfile = new FLabel.Builder()
-            .text("Choose AI Personality").fontStyle(Font.BOLD).fontSize(14).build();
-
-    private final JList<String> lstChooseAIProfile = new FList<String>();
-    private final FLabel lblChooseAIProfile = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC)
-            .text("AI Opponent Personality.")
-            .fontAlign(SwingConstants.LEFT).build();
-    private final JScrollPane scrChooseAIProfile = new FScrollPane(lstChooseAIProfile);
-
-    private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
+    
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
     private final JCheckBox cbSingletons = new OptionsCheckBox("Singleton Mode");
     private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
@@ -86,21 +72,23 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones use original card art");
-    private final JCheckBox cbOverlayCardName = new OptionsCheckBox("Card Name");
-    private final JCheckBox cbOverlayCardPower = new OptionsCheckBox("Power/Toughness");
-    private final JCheckBox cbOverlayCardManaCost = new OptionsCheckBox("Mana Cost");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
     private final JCheckBox cbRandomizeArt = new OptionsCheckBox("Randomize Card Art");
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for touchscreens");
+    private final JCheckBox cbOverlayCardName = new OptionsCheckBox("Card Name");
+    private final JCheckBox cbOverlayCardPower = new OptionsCheckBox("Power/Toughness");
+    private final JCheckBox cbOverlayCardManaCost = new OptionsCheckBox("Mana Cost");
+    private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
+    // ComboBox items are added in CSubmenuPreferences since this is just the View.
     private final FComboBoxPanel<String> cbpSkin = new FComboBoxPanel<String>("Choose Skin:");    
-    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = 
-            new FComboBoxPanel<GameLogEntryType>("Game Log Verbosity:");
+    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<GameLogEntryType>("Game Log Verbosity:");
+    private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<String>("AI Personality:");
     
     /**
      * Constructor.
@@ -113,7 +101,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         // Spacing between components is defined here.
         final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
         final String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
-                
+        
+        
         // Troubleshooting
         pnlPrefs.add(new SectionLabel("Troubleshooting"), sectionConstraints);
         
@@ -126,26 +115,18 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         // Reset button
 
           
-        // ======== General Configuration Options ========
+        // General Configuration
         pnlPrefs.add(new SectionLabel("General Configuration"), sectionConstraints + ", gaptop 2%");
         
         pnlPrefs.add(cbCompactMainMenu, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enable for a space efficient sidebar that displays only one menu group at a time (RESTART REQUIRED)."), regularConstraints);
-                
-        // Deck building options
-        pnlPrefs.add(new SectionLabel("Random Deck Generation Options"), sectionConstraints + ", gaptop 2%");
-
-        pnlPrefs.add(cbRemoveSmall, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Disables 1/1 and 0/X creatures in generated decks."), regularConstraints);
-
-        pnlPrefs.add(cbSingletons, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Disables non-land duplicates in generated decks."), regularConstraints);
-
-        pnlPrefs.add(cbRemoveArtifacts, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Disables artifact cards in generated decks."), regularConstraints);
-
+        
+                 
         // Gameplay Options
-        pnlPrefs.add(new SectionLabel("Gameplay Options"), sectionConstraints);
+        pnlPrefs.add(new SectionLabel("Gameplay"), sectionConstraints + ", gaptop 2%");
+        
+        pnlPrefs.add(cbpAiProfiles, "w 80%!, gap 10% 0 0 10px, span 2 1");
+        pnlPrefs.add(new NoteLabel("Choose your AI opponent."), regularConstraints);        
 
         pnlPrefs.add(cbAnte, regularConstraints);
         pnlPrefs.add(new NoteLabel("Determines whether or not the game is played for ante."), regularConstraints);
@@ -164,7 +145,19 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbCloneImgSource, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art"), regularConstraints);
+        
+        // Deck building options
+        pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);
 
+        pnlPrefs.add(cbRemoveSmall, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Disables 1/1 and 0/X creatures in generated decks."), regularConstraints);
+
+        pnlPrefs.add(cbSingletons, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Disables non-land duplicates in generated decks."), regularConstraints);
+
+        pnlPrefs.add(cbRemoveArtifacts, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Disables artifact cards in generated decks."), regularConstraints);
+        
         // Advanced
         pnlPrefs.add(new SectionLabel("Advanced Settings"), sectionConstraints);
 
@@ -179,17 +172,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         
         pnlPrefs.add(cbpSkin, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Change the overall look and feel of Forge (RESTART REQUIRED)."), regularConstraints);
-        
-		// AI Personality Profile Options
-        pnlPrefs.add(new SectionLabel("AI Options"), sectionConstraints + ", gaptop 2%");
-
-        pnlPrefs.add(lblTitleAIProfile, regularConstraints);	  
-	    pnlPrefs.add(lblChooseAIProfile, regularConstraints);
-        pnlPrefs.add(scrChooseAIProfile, "h 200px!, w 200px!, gap 10% 0 0 2%, wrap");
 
         // Graphic Options
-        pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints);
-
+        pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
 
         pnlPrefs.add(cbRandomFoil, regularConstraints);
         pnlPrefs.add(new NoteLabel("Adds foiled effects to random cards."), regularConstraints);
@@ -211,7 +196,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbOverlayCardManaCost, regularConstraints);
 
         // Sound options
-        pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints);
+        pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");
 
         pnlPrefs.add(cbEnableSounds, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enable sound effects during the game."), regularConstraints);
@@ -221,7 +206,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 	
         // Keyboard shortcuts
         final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
-        pnlPrefs.add(lblShortcuts, sectionConstraints);
+        pnlPrefs.add(lblShortcuts, sectionConstraints + ", gaptop 2%");
 
         final List<Shortcut> shortcuts = Singletons.getControl().getShortcuts();
 
@@ -395,21 +380,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             this.setText(StringUtils.join(displayText, ' '));
         }
     }
-
-    /** @return {@link javax.swing.JList} */
-    public final JList<String> getLstChooseAIProfile() {
-        return lstChooseAIProfile;
-    }
-
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public final FLabel getLblChooseAIProfile() {
-        return lblChooseAIProfile;
-    }
-
-    /** @return {@link javax.swing.JScrollPane} */
-    public final JScrollPane getScrChooseAIProfile() {
-        return scrChooseAIProfile;
-    }
     
     /** @return {@link javax.swing.JCheckBox} */
     public final JCheckBox getCbCompactMainMenu() {
@@ -485,7 +455,18 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public JCheckBox getCbDevMode() {
         return cbDevMode;
     }
-    
+        
+    public FComboBoxPanel<String> getAiProfilesComboBoxPanel() {
+        return cbpAiProfiles;
+    }
+
+    public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
+        return cbpGameLogEntryType;
+    }
+  
+    public FComboBoxPanel<String> getSkinsComboBoxPanel() {
+        return cbpSkin;
+    }
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnforceDeckLegality() {
         return cbEnforceDeckLegality;
@@ -515,13 +496,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return btnReset;
     }
     
-    public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
-        return cbpGameLogEntryType;
-    }
-    
-    public FComboBoxPanel<String> getSkinsComboBoxPanel() {
-        return cbpSkin;
-    }
+
     
     
     //========== Overridden from IVDoc
