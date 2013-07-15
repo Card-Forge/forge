@@ -50,7 +50,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             if (sa.hasParam("TargetControls")) {
                 choices = CardLists.filterControlledBy(choices, ai.getOpponent());
             }
-            if (sa.getParam("AILogic").equals("AtLeast1")) {
+            if (sa.getParam("AILogic").equals("AtLeast1") || sa.getParam("AILogic").equals("OppPreferred")) {
                 if (choices.isEmpty()) {
                     return false;
                 }
@@ -139,6 +139,14 @@ public class ChooseCardAi extends SpellAbilityAi {
                 choice = ComputerUtilCard.getBestAI(better);
             } else {
                 choice = ComputerUtilCard.getBestAI(options);
+            }
+        } else if ("OppPreferred".equals(logic)) {
+            List<Card> oppControlled = CardLists.filterControlledBy(options, ai.getOpponents());
+            if (!oppControlled.isEmpty()) {
+                choice = ComputerUtilCard.getBestAI(oppControlled);
+            } else {
+                List<Card> aiControlled = CardLists.filterControlledBy(options, ai);
+                choice = ComputerUtilCard.getWorstAI(aiControlled);
             }
         } else {
             choice = ComputerUtilCard.getBestAI(options);

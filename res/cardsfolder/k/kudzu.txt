@@ -1,0 +1,12 @@
+Name:Kudzu
+ManaCost:1 G G
+Types:Enchantment Aura
+K:Enchant land
+A:SP$ Attach | Cost$ 1 G G | ValidTgts$ Land | AILogic$ Curse
+T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted land becomes tapped, destroy it. That land's controller attaches CARDNAME to a land of his or her choice.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredCard | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | Defined$ TriggeredCardController | Choices$ Land | Mandatory$ True | AILogic$ OppPreferred | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ ChosenCard
+SVar:NonStackingAttachEffect:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kudzu.jpg
+Oracle:Enchant land\nWhen enchanted land becomes tapped, destroy it. That land's controller attaches Kudzu to a land of his or her choice.
