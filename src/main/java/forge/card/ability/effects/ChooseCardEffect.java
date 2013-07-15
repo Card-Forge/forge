@@ -35,7 +35,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Game game = sa.getActivatingPlayer().getGame();
-        final ArrayList<Card> chosen = new ArrayList<Card>();
+        final List<Card> chosen = new ArrayList<Card>();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
@@ -77,21 +77,19 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     }
                 }
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                for (int i = 0; i < validAmount; i++) {
-                    
-                    Card c;
-                    if (sa.hasParam("AtRandom")) {
-                        c = Aggregates.random(choices);
-                    } else {
-                        c = p.getController().chooseSingleCardForEffect(choices, sa, sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ", !sa.hasParam("Mandatory"));
+                if (sa.hasParam("AtRandom")) {
+                    for (int i = 0; i < validAmount; i++) {
+                        Card c = Aggregates.random(choices);
+                        if (c != null) {
+                            chosen.add(c);
+                            choices.remove(c);
+                        } else {
+                            break;
+                        }
                     }
-                
-                    if (c != null) {
-                        chosen.add(c);
-                        choices.remove(c);
-                    } else {
-                        break;
-                    }
+                } else {
+                    chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, sa.hasParam("ChoiceTitle") ? 
+                            sa.getParam("ChoiceTitle") : "Choose a card ", validAmount, !sa.hasParam("Mandatory")));
                 }
             }
         }
@@ -107,5 +105,4 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             }
         }
     }
-
 }

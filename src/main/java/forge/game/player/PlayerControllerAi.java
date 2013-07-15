@@ -124,6 +124,21 @@ public class PlayerControllerAi extends PlayerController {
         return ComputerUtil.choosePermanentsToSacrifice(player, validTargets, max, sa, true, min == 0);
     }
 
+    @Override
+    public List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int amount,
+            boolean isOptional) {
+        List<Card> chosen = new ArrayList<Card>();
+        for (int i = 0; i < amount; i++) {
+            Card c = this.chooseSingleCardForEffect(sourceList, sa, title, isOptional);
+            if (c != null) {
+                chosen.add(c);
+                sourceList.remove(c);
+            } else {
+                break;
+            }
+        }
+        return chosen;
+    }
     
     @Override
     public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional) {

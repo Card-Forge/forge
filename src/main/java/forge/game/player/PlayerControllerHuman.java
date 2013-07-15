@@ -272,6 +272,24 @@ public class PlayerControllerHuman extends PlayerController {
         return inp.hasCancelled() ? Lists.<Card>newArrayList() : inp.getSelected();
     }
 
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseCardsForEffect(java.util.Collection, forge.card.spellability.SpellAbility, java.lang.String, int, boolean)
+     */
+    @Override
+    public List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int amount,
+            boolean isOptional) {
+        // If only one card to choose, use a dialog box. 
+        // Otherwise, use the order dialog to be able to grab multiple cards in one shot 
+        if (amount == 1) {
+            return Lists.newArrayList(chooseSingleCardForEffect(sourceList, sa, title, isOptional));
+        }
+        
+        GuiUtils.setPanelSelection(sa.getSourceCard());
+        int remaining = isOptional ? -1 : Math.max(sourceList.size() - amount, 0);
+        return GuiChoose.order(title, "Chosen Cards", remaining, sourceList, null, sa.getSourceCard());
+    }
+    
     @Override
     public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional) {
         // Human is supposed to read the message and understand from it what to choose

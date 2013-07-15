@@ -1,9 +1,14 @@
 Name:Phyrexian Dreadnought
 ManaCost:1
 Types:Artifact Creature Dreadnought
-Text:When CARDNAME enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.
 PT:12/12
 K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCreatures | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.
+SVar:ChooseCreatures:DB$ ChooseCard | Defined$ You | Amount$ X | Choices$ Creature.YouCtrl | ChoiceTitle$ Sacrifice any number of creatures with total power 12 or greater. | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ SacrificeSelf
+SVar:SacrificeSelf:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ TotalPower | ConditionSVarCompare$ LT12 | SubAbility$ SacrificeCreatures | References$ TotalPower
+SVar:SacrificeCreatures:DB$ SacrificeAll | Defined$ Remembered | ConditionCheckSVar$ TotalPower | ConditionSVarCompare$ GE12 | SubAbility$ DBCleanup | References$ TotalPower
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TotalPower:Remembered$CardPower
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_dreadnought.jpg
 Oracle:Trample\nWhen Phyrexian Dreadnought enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.
