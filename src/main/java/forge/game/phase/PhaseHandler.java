@@ -314,7 +314,6 @@ public class PhaseHandler implements java.io.Serializable {
                         combat = null;
 
                     givePriorityToPlayer = inCombat();
-                    this.nCombatsThisTurn++;
                     
                     break;
                     
@@ -493,6 +492,8 @@ public class PhaseHandler implements java.io.Serializable {
                 combat.removeFromCombat(c2);
             }
         }
+        
+        this.nCombatsThisTurn++;
 
         // Prepare and fire event 'attackers declared'
         MapOfLists<GameEntity, Card> attackersMap = new HashMapOfLists<GameEntity, Card>(CollectionSuppliers.<Card>arrayLists());
