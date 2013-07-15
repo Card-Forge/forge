@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang.ArrayUtils;
@@ -118,28 +119,21 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getBtnReset().setCommand(new Command() {
             @Override
             public void run() {
-                ForgePreferences prefs = Singletons.getModel().getPreferences();
-                prefs.reset();
-                prefs.save();
-                update();
+                CSubmenuPreferences.this.resetForgeSettingsToDefault();
             }
         });
         
         view.getBtnDeleteEditorUI().setCommand(new Command() {
             @Override
             public void run() {
-                String fd = SLayoutIO.getFilePreferred(Screens.DECK_EDITOR_CONSTRUCTED);
-                File f = new File(fd);
-                f.delete();
+                CSubmenuPreferences.this.resetDeckEditorLayout();
             }
         });
         
         view.getBtnDeleteMatchUI().setCommand(new Command() {
             @Override
             public void run() {
-                String fd = SLayoutIO.getFilePreferred(Screens.MATCH_SCREEN);
-                File f = new File(fd);
-                f.delete();
+                CSubmenuPreferences.this.resetMatchScreenLayout();
             }
         });        
     }
@@ -167,6 +161,50 @@ public enum CSubmenuPreferences implements ICDoc {
         });
     }
 
+    private void resetForgeSettingsToDefault() {
+        String userPrompt = 
+                "This will reset all preferences to their defaults and restart Forge.\n\n" +
+                "Reset and restart Forge?";               
+        int reply = JOptionPane.showConfirmDialog(null, userPrompt, "Reset Settings", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            ForgePreferences prefs = Singletons.getModel().getPreferences();
+            prefs.reset();
+            prefs.save();
+            update();                
+            RestartUtil.restartApplication(null);                    
+        }        
+    }
+    private void resetDeckEditorLayout() {
+        String userPrompt = 
+                "This will reset the Deck Editor screen layout.\n" +
+                "All tabbed views will be restored to their default positions.\n\n" + 
+                "Reset layout?";
+        int reply = JOptionPane.showConfirmDialog(null, userPrompt, "Reset Deck Editor Layout", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            deleteScreenLayoutFile(Screens.DECK_EDITOR_CONSTRUCTED);
+            JOptionPane.showMessageDialog(null, "Deck Editor layout has been reset.");
+        }        
+    }
+    
+    private void resetMatchScreenLayout() {
+        String userPrompt = 
+                "This will reset the layout of the Match screen.\n" +
+                "If you want to save the current layout first, please use " +
+                "the Dock tab -> Save Layout option in the Match screen.\n\n" +
+                "Reset layout?";
+        int reply = JOptionPane.showConfirmDialog(null, userPrompt, "Reset Match Screen Layout", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            deleteScreenLayoutFile(Screens.MATCH_SCREEN);
+            JOptionPane.showMessageDialog(null, "Match Screen layout has been reset.");            
+        }        
+    }
+        
+    private void deleteScreenLayoutFile(Screens screen) {
+        String fd = SLayoutIO.getFilePreferred(screen);
+        File f = new File(fd);
+        f.delete();      
+    }
+    	
     private void updateSkinNames() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
         final String[] uglyNames = FSkin.getSkins().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
@@ -183,7 +221,7 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getLstChooseSkin().setSelectedIndex(currentIndex);
         view.getLstChooseSkin().ensureIndexIsVisible(view.getLstChooseSkin().getSelectedIndex());
     }
-
+	
     private void updateAIProfiles() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
         final List<String> profileNames = AiProfileUtil.getProfilesDisplayList();

@@ -63,8 +63,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FScrollPane scrContent = new FScrollPane(pnlPrefs,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-    private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to defaults").build();
-    
+    private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to Default Settings").build();
     private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Match Layout").build();
     private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Editor Layout").build();
 
@@ -122,6 +121,19 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
         final String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
         
+        
+        // Troubleshooting
+        pnlPrefs.add(new SectionLabel("Troubleshooting"), sectionConstraints);
+        
+        //pnlPrefs.add(new SectionLabel(" "), sectionConstraints);
+        pnlPrefs.add(btnReset, regularConstraints + ", h 30px!");
+                
+        final String twoButtonConstraints = "w 38%!, h 30px!, gap 10% 0 0 10px";
+        pnlPrefs.add(btnDeleteMatchUI, twoButtonConstraints);
+        pnlPrefs.add(btnDeleteEditorUI, "w 38%!, h 30px!, gap 0 0 0 10px");
+        // Reset button
+
+          
         // ======== General Configuration Options ========
         pnlPrefs.add(new SectionLabel("General Configuration"), sectionConstraints + ", gaptop 2%");
         
@@ -167,11 +179,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbCloneImgSource, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art"), regularConstraints);
 
-        // Troubleshooting
-        pnlPrefs.add(new SectionLabel("Troubleshooting"), sectionConstraints);
-        final String twoButtonConstraints = "w 38%!, h 30px!, gap 10% 0 0 10px";
-        pnlPrefs.add(btnDeleteMatchUI, twoButtonConstraints);
-        pnlPrefs.add(btnDeleteEditorUI, "w 38%!, h 30px!, gap 0 0 0 10px");
 
         // AI Personality Profile Options
         pnlPrefs.add(new SectionLabel("AI Options"), sectionConstraints);
@@ -228,10 +235,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             pnlPrefs.add(field, "w 25%!");
             shortcutFields.put(s.getPrefKey(), field);
         }
-
-        // Reset button
-        pnlPrefs.add(new SectionLabel(" "), sectionConstraints);
-        pnlPrefs.add(btnReset, sectionConstraints);
 
         scrContent.setBorder(null);
     }
