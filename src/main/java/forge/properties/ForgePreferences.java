@@ -51,7 +51,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_BUGZ_PWD (""),
         UI_ANTE ("false"),
         UI_MANABURN("false"),
-        UI_SKIN ("default"),
+        UI_SKIN ("Default"),
         UI_PREFERRED_AVATARS_ONLY ("false"),
         UI_TARGETING_OVERLAY ("false"),
         UI_ENABLE_SOUNDS ("true"),
