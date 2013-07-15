@@ -18,26 +18,42 @@ import javax.swing.border.EmptyBorder;
 public class FComboBoxPanel<E> extends JPanel {
     
     private String comboBoxCaption = "";
-    private final JComboBox<E> comboBox;
-            
-    public FComboBoxPanel(E[] comboBoxItems, String comboBoxCaption) {
+    private JComboBox<E> comboBox = null;
+    
+    public FComboBoxPanel(String comboBoxCaption) {
         super();
-        this.comboBox = new JComboBox<E>(comboBoxItems);
         this.comboBoxCaption = comboBoxCaption;
-        applyLayoutAndSkin();
+        applyLayoutAndSkin();        
     }
-        
-    public final JComboBox<E> getJComboBox() {
-        return this.comboBox;
+            
+    public void setComboBox(JComboBox<E> comboBox, E selectedItem) {
+        removeExistingComboBox();
+        this.comboBox = comboBox;
+        this.comboBox.setSelectedItem(selectedItem);        
+        setComboBoxLayout();      
     }
-
+    
+    private void removeExistingComboBox() {
+        if (this.comboBox != null) {
+            this.remove(this.comboBox);
+            this.comboBox = null;
+        }        
+    }
+    
     private void applyLayoutAndSkin() {        
-                
+        setPanelLayout();
+        setLabelLayout();        
+        setComboBoxLayout();        
+    }
+    
+    private void setPanelLayout() {
         FlowLayout panelLayout = new FlowLayout(FlowLayout.LEFT);
         panelLayout.setVgap(0);
         this.setLayout(panelLayout);
-        this.setOpaque(false);
-
+        this.setOpaque(false);        
+    }
+    
+    private void setLabelLayout() {
         if (this.comboBoxCaption != "") {
             JLabel comboLabel;
             comboLabel = new JLabel(this.comboBoxCaption);
@@ -45,16 +61,19 @@ public class FComboBoxPanel<E> extends JPanel {
             comboLabel.setFont(FSkin.getBoldFont(12));
             this.add(comboLabel);            
         }
-                
-        this.comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        this.comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.comboBox.setFont(FSkin.getFont(12));
-        this.comboBox.setEditable(false);
-        this.comboBox.setFocusable(true);
-        this.comboBox.setOpaque(true);       
-        this.comboBox.setRenderer(new ComplexCellRenderer<E>());         
-        this.add(this.comboBox);
-        
+    }
+    
+    private void setComboBoxLayout() {
+        if (this.comboBox != null) {
+            this.comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+            this.comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            this.comboBox.setFont(FSkin.getFont(12));
+            this.comboBox.setEditable(false);
+            this.comboBox.setFocusable(true);
+            this.comboBox.setOpaque(true);       
+            this.comboBox.setRenderer(new ComplexCellRenderer<E>());         
+            this.add(this.comboBox);
+        }
     }
             
     private class ComplexCellRenderer<E1> implements ListCellRenderer<E1> {

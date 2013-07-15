@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -23,6 +24,7 @@ import forge.control.RestartUtil;
 import forge.game.ai.AiProfileUtil;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
+import forge.gui.toolbox.FComboBoxPanel;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -39,7 +41,9 @@ public enum CSubmenuPreferences implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
     
-
+    private VSubmenuPreferences view;
+    private ForgePreferences prefs;
+        
     private final List<Pair<JCheckBox, FPref>> lstControls = new ArrayList<Pair<JCheckBox,FPref>>();
 
     /* (non-Javadoc)
@@ -48,8 +52,9 @@ public enum CSubmenuPreferences implements ICDoc {
     @SuppressWarnings("serial")
     @Override
     public void initialize() {
-        final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
-        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        
+        this.view = VSubmenuPreferences.SINGLETON_INSTANCE;
+        this.prefs = Singletons.getModel().getPreferences();
 
         view.getLstChooseSkin().addMouseListener(new MouseAdapter() {
             @Override
@@ -76,14 +81,6 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
         
-        view.getCboLogEntryType().addItemListener(new ItemListener() {            
-            @Override
-            public void itemStateChanged(final ItemEvent e) {
-                GameLogEntryType selectedType = (GameLogEntryType) view.getCboLogEntryType().getSelectedItem();
-                prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, selectedType.toString());
-                prefs.save();
-            }
-        });
 
         lstControls.clear(); // just in case
         lstControls.add(Pair.of(view.getCbCompactMainMenu(), FPref.UI_COMPACT_MAIN_MENU));        
@@ -135,7 +132,10 @@ public enum CSubmenuPreferences implements ICDoc {
             public void run() {
                 CSubmenuPreferences.this.resetMatchScreenLayout();
             }
-        });        
+        }); 
+        
+        initializeGameLogVerbosityComboBox();
+        
     }
 
     /* (non-Javadoc)
@@ -143,13 +143,12 @@ public enum CSubmenuPreferences implements ICDoc {
      */
     @Override
     public void update() {
-        final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
-        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        this.view = VSubmenuPreferences.SINGLETON_INSTANCE;
+        this.prefs = Singletons.getModel().getPreferences();
         updateSkinNames();
         updateAIProfiles();
 
         view.getCbDevMode().setSelected(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
-        view.getCboLogEntryType().setSelectedItem(GameLogEntryType.valueOf(prefs.getPref(FPref.DEV_LOG_ENTRY_TYPE)));
         
         for(Pair<JCheckBox, FPref> kv: lstControls) {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));
@@ -174,6 +173,7 @@ public enum CSubmenuPreferences implements ICDoc {
             RestartUtil.restartApplication(null);                    
         }        
     }
+    
     private void resetDeckEditorLayout() {
         String userPrompt = 
                 "This will reset the Deck Editor screen layout.\n" +
@@ -205,6 +205,32 @@ public enum CSubmenuPreferences implements ICDoc {
         f.delete();      
     }
     	
+    private void initializeGameLogVerbosityComboBox() {
+        FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
+        FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();
+        JComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
+        GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
+        panel.setComboBox(comboBox, selectedItem);
+    }
+    
+    private <E> JComboBox<E> createComboBox(E[] items, final ForgePreferences.FPref setting) {
+        final JComboBox<E> comboBox = new JComboBox<E>(items);
+        addComboBoxListener(comboBox, setting);
+        return comboBox;
+    }
+    
+    private <E> void addComboBoxListener(final JComboBox<E> comboBox, final ForgePreferences.FPref setting) {
+        comboBox.addItemListener(new ItemListener() {            
+            @SuppressWarnings("unchecked")
+            @Override
+            public void itemStateChanged(final ItemEvent e) {
+                E selectedType = (E) comboBox.getSelectedItem();
+                CSubmenuPreferences.this.prefs.setPref(setting, selectedType.toString());
+                CSubmenuPreferences.this.prefs.save();
+            }
+        });                
+    }
+    	  
     private void updateSkinNames() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
         final String[] uglyNames = FSkin.getSkins().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
@@ -253,7 +279,7 @@ public enum CSubmenuPreferences implements ICDoc {
         prefs.setPref(FPref.UI_SKIN, name);
         prefs.save();
     }
-
+    
     private void updateAIProfile() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
         final String name = view.getLstChooseAIProfile().getSelectedValue().toString();
@@ -262,7 +288,8 @@ public enum CSubmenuPreferences implements ICDoc {
 
         prefs.setPref(FPref.UI_CURRENT_AI_PROFILE, name);
         prefs.save();
-    }
+    }    
+        
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */

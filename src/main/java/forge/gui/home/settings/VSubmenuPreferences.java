@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -94,8 +93,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbStackLand = new OptionsCheckBox("Stack AI Land");
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
-    private final FComboBoxPanel<GameLogEntryType> cbpLogEntryType = 
-            new FComboBoxPanel<GameLogEntryType>(GameLogEntryType.values(), "Game Log Verbosity:");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones use original card art");
     private final JCheckBox cbOverlayCardName = new OptionsCheckBox("Card Name");
@@ -110,18 +107,21 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
+    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = 
+            new FComboBoxPanel<GameLogEntryType>("Game Log Verbosity:");
+    
     /**
      * Constructor.
      */
     private VSubmenuPreferences() {
+        
         pnlPrefs.setOpaque(false);
         pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         // Spacing between components is defined here.
         final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
         final String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
-        
-        
+                
         // Troubleshooting
         pnlPrefs.add(new SectionLabel("Troubleshooting"), sectionConstraints);
         
@@ -167,24 +167,26 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbManaBurn, regularConstraints);
         pnlPrefs.add(new NoteLabel("Play with mana burn (from pre-Magic 2010 rules)."), regularConstraints);
 
-        pnlPrefs.add(cbDevMode, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Enables menu with functions for testing during development."), regularConstraints);
-
-        pnlPrefs.add(cbpLogEntryType, "w 80%!, gap 10% 0 0 10px, span 2 1");
-        pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), regularConstraints);
-
         pnlPrefs.add(cbEnforceDeckLegality, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)"), regularConstraints);
 
         pnlPrefs.add(cbCloneImgSource, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art"), regularConstraints);
 
+        // Advanced
+        pnlPrefs.add(new SectionLabel("Advanced Settings"), sectionConstraints);
+
+        pnlPrefs.add(cbDevMode, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Enables menu with functions for testing during development."), regularConstraints);
+
+        pnlPrefs.add(cbpGameLogEntryType, "w 80%!, gap 10% 0 0 10px, span 2 1");
+        pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), regularConstraints);
 
         // AI Personality Profile Options
-        pnlPrefs.add(new SectionLabel("AI Options"), sectionConstraints);
+        pnlPrefs.add(new SectionLabel("AI Options"), sectionConstraints + ", gaptop 2%");
 
-        pnlPrefs.add(lblTitleAIProfile, regularConstraints);
-        pnlPrefs.add(lblChooseAIProfile, regularConstraints);
+        pnlPrefs.add(lblTitleAIProfile, regularConstraints);	  
+	    pnlPrefs.add(lblChooseAIProfile, regularConstraints);
         pnlPrefs.add(scrChooseAIProfile, "h 200px!, w 200px!, gap 10% 0 0 2%, wrap");
 
         // Graphic Options
@@ -504,11 +506,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbDevMode;
     }
     
-    /** @return {@link javax.swing.JComboBox} */
-    public JComboBox<GameLogEntryType> getCboLogEntryType() {
-        return cbpLogEntryType.getJComboBox();
-    }
-
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnforceDeckLegality() {
         return cbEnforceDeckLegality;
@@ -537,7 +534,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public FLabel getBtnReset() {
         return btnReset;
     }
-
+    
+    public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
+        return cbpGameLogEntryType;
+    }
+    
     //========== Overridden from IVDoc
 
     public final FLabel getBtnDeleteMatchUI() {
