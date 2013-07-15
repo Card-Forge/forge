@@ -51,7 +51,7 @@ public enum CSubmenuPreferences implements ICDoc {
         
         this.view = VSubmenuPreferences.SINGLETON_INSTANCE;
         this.prefs = Singletons.getModel().getPreferences();
-
+               
         // This updates variable right now and is not standard 
         view.getCbDevMode().addItemListener(new ItemListener() {
             @Override
@@ -83,6 +83,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbOverlayCardName(), FPref.UI_OVERLAY_CARD_NAME));
         lstControls.add(Pair.of(view.getCbOverlayCardPower(), FPref.UI_OVERLAY_CARD_POWER));
         lstControls.add(Pair.of(view.getCbOverlayCardManaCost(), FPref.UI_OVERLAY_CARD_MANA_COST));        
+        lstControls.add(Pair.of(view.getCbShowMatchBackgroundImage(), FPref.UI_MATCH_IMAGE_VISIBLE));
 
         for(final Pair<JCheckBox, FPref> kv : lstControls) {
             kv.getKey().addItemListener(new ItemListener() {
@@ -113,19 +114,21 @@ public enum CSubmenuPreferences implements ICDoc {
             public void run() {
                 CSubmenuPreferences.this.resetMatchScreenLayout();
             }
-        }); 
-        
+        });
+                
         initializeGameLogVerbosityComboBox();
         initializeAiProfilesComboBox();
         initializeSkinsComboBox();        
         
     }
-
+    
+    
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
     @Override
     public void update() {
+        
         this.view = VSubmenuPreferences.SINGLETON_INSTANCE;
         this.prefs = Singletons.getModel().getPreferences();
                 

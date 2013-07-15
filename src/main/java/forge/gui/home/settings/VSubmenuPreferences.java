@@ -22,7 +22,6 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
-
 import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts;
@@ -82,6 +81,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOverlayCardPower = new OptionsCheckBox("Power/Toughness");
     private final JCheckBox cbOverlayCardManaCost = new OptionsCheckBox("Mana Cost");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
+    private final JCheckBox cbShowMatchBackgroundImage = new OptionsCheckBox("Show Background Image on Match Screen");    
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
@@ -166,12 +166,17 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpGameLogEntryType, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), regularConstraints);
+
         
         // Themes
         pnlPrefs.add(new SectionLabel("Visual Themes"), sectionConstraints + ", gaptop 2%");
         
         pnlPrefs.add(cbpSkin, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Change the overall look and feel of Forge (RESTART REQUIRED)."), regularConstraints);
+
+        pnlPrefs.add(cbShowMatchBackgroundImage, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Toggle the visibility of the background image on the match screen."), regularConstraints);
+
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
@@ -188,13 +193,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbUiForTouchScreen, regularConstraints);
         pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), regularConstraints);
 
-        // Overlay options
+        // Card Overlay options
         pnlPrefs.add(new SectionLabel("Card Overlay Options"), sectionConstraints);
         pnlPrefs.add(new NoteLabel("Show text overlays which are easier to read when cards are reduced in size to fit the play area."), regularConstraints);
         pnlPrefs.add(cbOverlayCardName, regularConstraints);
         pnlPrefs.add(cbOverlayCardPower, regularConstraints);
         pnlPrefs.add(cbOverlayCardManaCost, regularConstraints);
 
+        
         // Sound options
         pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");
 
@@ -204,6 +210,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbAltSoundSystem, regularConstraints);
         pnlPrefs.add(new NoteLabel("Use the alternate sound system (only use in case your have issues with sound not playing or disappearing)"), regularConstraints);
 	
+        
         // Keyboard shortcuts
         final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
         pnlPrefs.add(lblShortcuts, sectionConstraints + ", gaptop 2%");
@@ -467,6 +474,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public FComboBoxPanel<String> getSkinsComboBoxPanel() {
         return cbpSkin;
     }
+               
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnforceDeckLegality() {
         return cbEnforceDeckLegality;
@@ -496,9 +504,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return btnReset;
     }
     
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbShowMatchBackgroundImage() {
+        return cbShowMatchBackgroundImage;
+    }    
 
-    
-    
     //========== Overridden from IVDoc
 
     public final FLabel getBtnDeleteMatchUI() {

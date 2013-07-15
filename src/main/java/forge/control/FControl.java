@@ -61,6 +61,7 @@ import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.gui.toolbox.FSkin;
 import forge.net.NetServer;
+import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
@@ -223,7 +224,7 @@ public enum FControl {
             case MATCH_SCREEN:
                 VMatchUI.SINGLETON_INSTANCE.populate();
                 FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
-                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
+                showMatchBackgroundImage();
                 Singletons.getView().getFrame().addWindowListener(waConcede);
                 SOverlayUtils.showTargetingOverlay();
                 break;
@@ -251,6 +252,16 @@ public enum FControl {
             default:
                 throw new RuntimeException("unhandled screen: " + screen);
         }
+    }
+    
+    private void showMatchBackgroundImage() {
+        if (isMatchBackgroundImageVisible()) {
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));                    
+        }        
+    }
+    
+    private boolean isMatchBackgroundImageVisible() {
+        return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE);
     }
     
     public void changeStateAutoFixLayout(Screens newState, String stateName)  {
