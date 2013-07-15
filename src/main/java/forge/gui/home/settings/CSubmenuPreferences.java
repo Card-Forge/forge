@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang3.text.WordUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Command;
@@ -55,13 +54,6 @@ public enum CSubmenuPreferences implements ICDoc {
         
         this.view = VSubmenuPreferences.SINGLETON_INSTANCE;
         this.prefs = Singletons.getModel().getPreferences();
-
-        view.getLstChooseSkin().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(final MouseEvent e) {
-                updateSkin();
-            }
-        });
 
         view.getLstChooseAIProfile().addMouseListener(new MouseAdapter() {
             @Override
@@ -135,6 +127,7 @@ public enum CSubmenuPreferences implements ICDoc {
         }); 
         
         initializeGameLogVerbosityComboBox();
+        initializeSkinsComboBox();        
         
     }
 
@@ -145,7 +138,6 @@ public enum CSubmenuPreferences implements ICDoc {
     public void update() {
         this.view = VSubmenuPreferences.SINGLETON_INSTANCE;
         this.prefs = Singletons.getModel().getPreferences();
-        updateSkinNames();
         updateAIProfiles();
 
         view.getCbDevMode().setSelected(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
@@ -212,6 +204,13 @@ public enum CSubmenuPreferences implements ICDoc {
         GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
         panel.setComboBox(comboBox, selectedItem);
     }
+    private void initializeSkinsComboBox() {
+        FPref userSetting = FPref.UI_SKIN;
+        FComboBoxPanel<String> panel = this.view.getSkinsComboBoxPanel();
+        JComboBox<String> comboBox = createComboBox(FSkin.getSkinNamesArray(), userSetting);        
+        String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);         
+    } 
     
     private <E> JComboBox<E> createComboBox(E[] items, final ForgePreferences.FPref setting) {
         final JComboBox<E> comboBox = new JComboBox<E>(items);
@@ -230,24 +229,7 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });                
     }
-    	  
-    private void updateSkinNames() {
-        final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
-        final String[] uglyNames = FSkin.getSkins().toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-        final String[] prettyNames = new String[uglyNames.length];
-        final String currentName = Singletons.getModel().getPreferences().getPref(FPref.UI_SKIN);
-        int currentIndex = 0;
-
-        for (int i = 0; i < uglyNames.length; i++) {
-            prettyNames[i] = WordUtils.capitalize(uglyNames[i].replace('_', ' '));
-            if (currentName.equalsIgnoreCase(prettyNames[i])) { currentIndex = i; }
-        }
-
-        view.getLstChooseSkin().setListData(prettyNames);
-        view.getLstChooseSkin().setSelectedIndex(currentIndex);
-        view.getLstChooseSkin().ensureIndexIsVisible(view.getLstChooseSkin().getSelectedIndex());
-    }
-	
+    	  	
     private void updateAIProfiles() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
         final List<String> profileNames = AiProfileUtil.getProfilesDisplayList();
@@ -261,23 +243,6 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getLstChooseAIProfile().setListData(profileNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         view.getLstChooseAIProfile().setSelectedIndex(currentIndex);
         view.getLstChooseAIProfile().ensureIndexIsVisible(view.getLstChooseAIProfile().getSelectedIndex());
-    }
-
-    @SuppressWarnings("serial")
-    private void updateSkin() {
-        final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
-        final String name = view.getLstChooseSkin().getSelectedValue().toString();
-        final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        if (name.equals(prefs.getPref(FPref.UI_SKIN))) { return; }
-
-        view.getScrChooseSkin().setVisible(false);
-        view.getLblChooseSkin().setText("Please restart Forge (click here to close).");
-        view.getLblChooseSkin().setHoverable(true);
-        view.getLblChooseSkin().setCommand(new Command() { @Override
-            public void run() { RestartUtil.restartApplication(null); } });
-
-        prefs.setPref(FPref.UI_SKIN, name);
-        prefs.save();
     }
     
     private void updateAIProfile() {

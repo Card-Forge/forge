@@ -37,6 +37,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
+import org.apache.commons.lang.WordUtils;
+
 import forge.FThreads;
 import forge.gui.GuiUtils;
 import forge.view.FView;
@@ -739,7 +741,7 @@ public enum FSkin {
      *
      * @return the skins
      */
-    public static ArrayList<String> getSkins() {
+    public static ArrayList<String> getSkinDirectoryNames() {
         final ArrayList<String> mySkins = new ArrayList<String>();
 
         final File dir = new File(FILE_SKINS_DIR);
@@ -756,6 +758,15 @@ public enum FSkin {
 
         return mySkins;
     }
+    
+    public static String[] getSkinNamesArray() {
+        ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
+        String[] prettySkinNames = new String[skinDirectoryNames.size()];
+        for (int i = 0; i < skinDirectoryNames.size(); i++) {
+            prettySkinNames[i] = WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' '));          
+        }
+        return prettySkinNames;
+    }    
 
     /** @return Map<Integer, Image> */
     public static Map<Integer, Image> getAvatars() {
