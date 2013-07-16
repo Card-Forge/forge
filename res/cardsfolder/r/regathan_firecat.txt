@@ -4,3 +4,4 @@ Types:Creature Elemental Cat
 PT:4/1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/regathan_firecat.jpg
 SetInfo:M14 Common
+Oracle:

@@ -3,3 +3,4 @@ ManaCost:2 B
 Types:Creature Zombie Minotaur
 PT:2/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_minotaur.jpg
+Oracle:

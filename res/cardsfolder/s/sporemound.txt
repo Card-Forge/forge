@@ -6,3 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:BuffedBy:Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sporemound.jpg
+Oracle:Whenever a land enters the battlefield under your control, put a 1/1 green Saproling creature token onto the battlefield.

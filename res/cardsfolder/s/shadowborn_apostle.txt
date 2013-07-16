@@ -5,3 +5,4 @@ Text:A deck can have any number of cards named Shadowborn Apostle.
 PT:1/1
 A:AB$ ChangeZone | Cost$ B Sac<6/Creature.namedShadowborn Apostle/creatures named Shadowborn Apostle> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Demon | ChangeNum$ 1 | SpellDescription$ Search your library for a Demon creature and put it onto the battlefield. Then shuffle your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowborn_apostle.jpg
+Oracle:A deck can have any number of cards named Shadowborn Apostle.\n{B}, Sacrifice six creatures named Shadowborn Apostle: Search your library for a Demon creature card and put it onto the battlefield. Then shuffle your library.

@@ -7,3 +7,4 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_the_death_magus.jpg
+Oracle:Whenever you cast a black spell or a Swamp enters the battlefield under your control, you gain 1 life.

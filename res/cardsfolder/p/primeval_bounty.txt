@@ -5,7 +5,8 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ 
 SVar:BountysGift:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 3 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 3 life. 
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 3 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 3
 SVar:BuffedBy:nonCreature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_bounty.jpg
+Oracle:Whenever you cast a creature spell, put a 3/3 green Beast creature token onto the battlefield.\nWhenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.\nWhenever a land enters the battlefield under your control, you gain 3 life.

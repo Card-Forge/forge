@@ -8,3 +8,4 @@ SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonDemon | TgtPrompt$ TgtProm
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl | PresentZone$ Graveyard | PresentCompare$ LT6 | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, if there are fewer than six creatures in your graveyard, sacrifice a creature.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowborn_demon.jpg
+Oracle:Flying\nWhen Shadowborn Demon enters the battlefield, destroy target non-Demon creature.\nAt the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature.

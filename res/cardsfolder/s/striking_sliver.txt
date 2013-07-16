@@ -6,3 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ First Strik
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/striking_sliver.jpg
+Oracle:Sliver creatures you control have first strike. (They deal combat damage before creatures without first strike.)

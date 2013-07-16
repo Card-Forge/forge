@@ -5,3 +5,4 @@ PT:3/3
 K:Flying
 K:Prevent all combat damage that would be dealt to CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seraph_of_the_sword.jpg
+Oracle:Flying\nPrevent all combat damage that would be dealt to Seraph of the Sword.
