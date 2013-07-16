@@ -9359,6 +9359,7 @@ res/cardsfolder/s/salvage_titan.txt svneol=native#text/plain
 res/cardsfolder/s/salvaging_station.txt svneol=native#text/plain
 res/cardsfolder/s/samite_alchemist.txt -text
 res/cardsfolder/s/samite_archer.txt svneol=native#text/plain
+res/cardsfolder/s/samite_blessing.txt -text
 res/cardsfolder/s/samite_censer_bearer.txt -text
 res/cardsfolder/s/samite_elder.txt -text
 res/cardsfolder/s/samite_healer.txt svneol=native#text/plain
