@@ -10,3 +10,4 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | Cou
 SVar:X:Remembered$CardCounters.P1P1
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kalonian_hydra.jpg
+Oracle:Trample\nKalonian Hydra enters the battlefield with four +1/+1 counters on it.\nWhenever Kalonian Hydra attacks, double the number of +1/+1 counters on each creature you control.

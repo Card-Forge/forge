@@ -10,3 +10,4 @@ SVar:TrigReturn:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Exile | Destination$ Battl
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banisher_priest.jpg
+Oracle:When Banisher Priest enters the battlefield, exile target creature an opponent controls until Banisher Priest leaves the battlefield. (That creature returns under its owner's control.)

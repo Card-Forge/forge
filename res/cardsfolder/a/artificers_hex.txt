@@ -9,3 +9,4 @@ SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ Valid Card.EquippedByEnchanted
 SVar:SVarDontEquip:SVar:DontEquip:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artificers_hex.jpg
+Oracle:Enchant Equipment\nAt the beginning of your upkeep, if enchanted Equipment is attached to a creature, destroy that creature.

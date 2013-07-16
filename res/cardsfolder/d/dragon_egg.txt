@@ -8,3 +8,4 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Dragon | TokenT
 SVar:DragonPump:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:SacMe:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_egg.jpg
+Oracle:Defender (This creature can't attack.)\nWhen Dragon Egg dies, put a 2/2 red Dragon creature token with flying onto the battlefield. It has "{R}: This creature gets +1/+0 until end of turn."

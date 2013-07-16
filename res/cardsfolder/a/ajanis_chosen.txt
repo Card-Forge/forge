@@ -7,3 +7,4 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ W 2 2 Cat | TokenName$ Cat | To
 SVar:DBAttach:DB$ Attach | Object$ TriggeredCard | Defined$ Remembered | Optional$ True | ConditionDefined$ TriggeredCard | ConditionPresent$ Aura | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_chosen.jpg
+Oracle:Whenever an enchantment enters the battlefield under your control, put a 2/2 white Cat creature token onto the battlefield. If that enchantment is an Aura, you may attach it to the token.

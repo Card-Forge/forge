@@ -3,3 +3,4 @@ ManaCost:2 W
 Types:Sorcery
 A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenName$ Sliver | TokenTypes$ Creature,Sliver | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 colorless Sliver creature tokens onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hive_stirrings.jpg
+Oracle:Put two 1/1 colorless Sliver creature tokens onto the battlefield.

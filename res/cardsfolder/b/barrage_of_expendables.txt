@@ -4,3 +4,4 @@ Types:Enchantment
 A:AB$ DealDamage | Cost$ R Sac<1/Creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrage_of_expendables.jpg
+Oracle:{R}, Sacrifice a creature: Barrage of Expendables deals 1 damage to target creature or player.

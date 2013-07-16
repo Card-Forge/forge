@@ -5,3 +5,4 @@ T:Mode$ TapsForMana | ValidCard$ Land.nonBasic | Execute$ TrigDmg | TriggerZones
 SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_earth.jpg
+Oracle:Whenever a player taps a nonbasic land for mana, Burning Earth deals 1 damage to that player.

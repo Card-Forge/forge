@@ -6,3 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddKeyword$ Haste | Des
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blur_sliver.jpg
+Oracle:Sliver creatures you control have haste. (They can attack and {T} as soon as they come under your control.)

@@ -4,3 +4,4 @@ Types:Creature Vampire
 PT:2/2
 A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_bairn.jpg
+Oracle:Sacrifice another creature: Blood Bairn gets +2/+2 until end of turn.

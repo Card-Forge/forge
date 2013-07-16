@@ -2,9 +2,10 @@ Name:Bubbling Cauldron
 ManaCost:2
 Types:Artifact
 A:AB$ GainLife | Cost$ 1 T Sac<1/Creature> | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
-A:AB$ LoseLife | Cost$ 1 T Sac<1/Creature.namedFestering Newt/creature named Festering Newt> | Defined$ Player.Opponent | LifeAmount$ 4 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 4 life. You gain life equal to the life lost this way. 
+A:AB$ LoseLife | Cost$ 1 T Sac<1/Creature.namedFestering Newt/creature named Festering Newt> | Defined$ Player.Opponent | LifeAmount$ 4 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 4 life. You gain life equal to the life lost this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
 DeckNeeds:Name$Festering Newt|Bogbrew Witch
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bubbling_cauldron.jpg
+Oracle:{1}, {T}, Sacrifice a creature: You gain 4 life.\n{1}, {T}, Sacrifice a creature named Festering Newt: Each opponent loses 4 life. You gain life equal to the life lost this way.

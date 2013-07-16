@@ -8,3 +8,4 @@ SVar:MindFishing:AB$ Mill | Cost$ 0 | NumCards$ 5 | ValidTgts$ Opponent | TgtPro
 SVar:FishyCast:DB$ Play | ValidZone$ Graveyard | Valid$ Instant.IsRemembered,Sorcery.IsRemembered | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_mindseeker.jpg
+Oracle:Flying\nWhen Jace's Mindseeker enters the battlefield, target opponent puts the top five cards of his or her library into his or her graveyard. You may cast an instant or sorcery card from among them without paying its mana cost.

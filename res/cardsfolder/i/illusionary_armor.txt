@@ -1,4 +1,4 @@
-Name:Illusionary Armor 
+Name:Illusionary Armor
 ManaCost:4 U
 Types:Enchantment Aura
 K:Enchant creature
@@ -8,3 +8,4 @@ T:Mode$ BecomesTarget | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_armor.jpg
+Oracle:Enchant creature\nEnchanted creature gets +4/+4.\nWhen enchanted creature becomes the target of a spell or ability, sacrifice Illusionary Armor.

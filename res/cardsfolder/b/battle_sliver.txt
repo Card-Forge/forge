@@ -6,3 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddPower$ 2 | Descripti
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_sliver.jpg
+Oracle:Sliver creatures you control get +2/+0.

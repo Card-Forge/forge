@@ -5,3 +5,4 @@ PT:2/1
 A:AB$ ChangeZone | Cost$ 2 B Sac<1/CARDNAME> | TgtPrompt$ Choose another target creature card in your graveyard | ValidTgts$ Creature.Other+YouOwn | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return another target creature card from your graveyard to your hand.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_hauler.jpg
+Oracle:{2}{B}, Sacrifice Corpse Hauler: Return another target creature card from your graveyard to your hand.

@@ -11,3 +11,4 @@ SVar:TrigReturn:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Exile | Destination$ Battl
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colossal_whale.jpg
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhenever Colossal Whale attacks, you may exile target creature defending player controls until Colossal Whale leaves the battlefield. (That creature returns under its owner's control.)
