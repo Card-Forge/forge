@@ -389,35 +389,45 @@ public class WrappedAbility extends Ability implements ISpellAbility {
             if (!GuiDialog.confirm(regtrig.getHostCard(), buildQuestion.toString())) {
                 return false;
             }
-        } else {
-            if (triggerParams.containsKey("DelayedTrigger")) {
-                //TODO: The only card with an optional delayed trigger is Shirei, Shizo's Caretaker, 
-                //      needs to be expanded when a more difficult cards comes up
-            } else {
-                // Store/replace target choices more properly to get this SA cleared.
-                TargetChoices tc = null;
-                boolean storeChoices = sa.getTargetRestrictions() != null;
+            return true;
+        } // human end
 
-                if (storeChoices) {
-                    tc = sa.getTargets();
-                    sa.resetTargets();
-                }
-                // There is no way this doTrigger here will have the same target as stored above
-                // So it's possible it's making a different decision here than will actually happen
-                if (!sa.doTrigger(this.isMandatory(), decider)) {
-                    if (storeChoices) {
-                        sa.resetTargets();
-                        sa.setTargets(tc);
-                    }
-                    return false;
-                }
-                if (storeChoices) {
-                    sa.resetTargets();
-                    sa.setTargets(tc);
-                }
-            }
+        if (triggerParams.containsKey("DelayedTrigger")) {
+            //TODO: The only card with an optional delayed trigger is Shirei, Shizo's Caretaker, 
+            //      needs to be expanded when a more difficult cards comes up
+            return true;
         }
-        return true;
+        // Store/replace target choices more properly to get this SA cleared.
+        TargetChoices tc = null;
+        TargetChoices subtc = null;
+        boolean storeChoices = sa.getTargetRestrictions() != null;
+        final SpellAbility sub = sa.getSubAbility();
+        boolean storeSubChoices = sub != null && sub.getTargetRestrictions() != null;
+        boolean ret = true;
+
+        if (storeChoices) {
+            tc = sa.getTargets();
+            sa.resetTargets();
+        }
+        if (storeSubChoices) {
+            subtc = sub.getTargets();
+            sub.resetTargets();
+        }
+        // There is no way this doTrigger here will have the same target as stored above
+        // So it's possible it's making a different decision here than will actually happen
+        if (!sa.doTrigger(this.isMandatory(), decider)) {
+            ret = false;
+        }
+        if (storeChoices) {
+            sa.resetTargets();
+            sa.setTargets(tc);
+        }
+        if (storeSubChoices) {
+            sub.resetTargets();
+            sub.setTargets(subtc);
+        }
+
+        return ret;
     }
 
 }
