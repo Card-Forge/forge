@@ -141,22 +141,22 @@ public class CostGainLife extends CostPart {
             }
         }
 
-        if(cntPlayers == Integer.MAX_VALUE) { // applied to all players who can gain
+        if (cntPlayers == Integer.MAX_VALUE) { // applied to all players who can gain
             for(Player opp: oppsThatCanGainLife)
                 opp.gainLife(c, null);
-        }
-            
-        final StringBuilder sb = new StringBuilder();
-        sb.append(source.getName()).append(" - Choose an opponent to gain ").append(c).append(" life:");
+        } else {
+            final StringBuilder sb = new StringBuilder();
+            sb.append(source.getName()).append(" - Choose an opponent to gain ").append(c).append(" life:");
 
-        
-        for(int playersLeft = cntPlayers; playersLeft > 0; playersLeft--) {
-            final Player chosenToGain = GuiChoose.oneOrNone(sb.toString(), oppsThatCanGainLife);
-            if (null == chosenToGain) {
-                return false;
-            } else {
-                final Player chosen = chosenToGain;
-                chosen.gainLife(c, null);
+
+            for(int playersLeft = cntPlayers; playersLeft > 0; playersLeft--) {
+                final Player chosenToGain = GuiChoose.oneOrNone(sb.toString(), oppsThatCanGainLife);
+                if (null == chosenToGain) {
+                    return false;
+                } else {
+                    final Player chosen = chosenToGain;
+                    chosen.gainLife(c, null);
+                }
             }
         }
         return true;
