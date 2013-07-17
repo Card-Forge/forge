@@ -73,6 +73,14 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
+        if (this.mapParams.containsKey("ExcludedDestinations")) {
+            for (final String notTo : this.mapParams.get("ExcludedDestinations").split(",")) {
+                if (notTo.equals(runParams2.get("Destination"))) {
+                    return false;
+                }
+            }
+        }
+
         if (this.mapParams.containsKey("ValidCard")) {
             final Card moved = (Card) runParams2.get("Card");
             if (!moved.isValid(this.mapParams.get("ValidCard").split(","), this.getHostCard().getController(),
