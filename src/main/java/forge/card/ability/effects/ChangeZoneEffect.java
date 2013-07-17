@@ -507,6 +507,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (!defenders.isEmpty()) { 
                             // Blockeres are already declared, set this to unblocked
                             game.getCombat().addAttacker(tgtC, defenders.get(0));
+                            game.getCombat().getBandOfAttacker(tgtC).setBlocked(false);
                         }
                     }
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
