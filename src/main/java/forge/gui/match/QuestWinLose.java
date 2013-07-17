@@ -212,7 +212,8 @@ public class QuestWinLose extends ControlWinLose {
         // Grant booster on a win, or on a loss in easy mode
         if (this.wonMatch || difficulty == 0) {
             final int outcome = this.wonMatch ? wins : qData.getAchievements().getLost();
-            if ((outcome % Singletons.getModel().getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_BOOSTER, qData.getAchievements().getDifficulty())) == 0) {
+            int winsPerBooster = Singletons.getModel().getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_BOOSTER, qData.getAchievements().getDifficulty());
+            if (winsPerBooster > 0 && outcome % winsPerBooster == 0) {
                 this.awardBooster();
             }
         }
