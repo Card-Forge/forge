@@ -2327,7 +2327,7 @@ public class CardFactoryUtil {
                     + "each opponent loses 1 life and you gain that much life.)";
             final String abString = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | "
                     + "LifeAmount$ 1 | SubAbility$ DBGainLife";
-            final String dbString = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost";
+            final String dbString = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | References$ AFLifeLost";
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(extortTrigger, card, true);
             card.addTrigger(parsedTrigger);
             card.setSVar("ExtortOpps", abString);
