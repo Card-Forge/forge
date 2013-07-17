@@ -183,6 +183,12 @@ public class CombatUtil {
         if (attacker.hasStartOfKeyword("CantBeBlockedByAmount GT") && !combat.getBlockers(attacker).isEmpty()) {
             return false;
         }
+        
+        // Rule 802.4a: A player can block only creatures attacking him or a planeswalker he controls
+        Player attacked = combat.getDefendingPlayerRelatedTo(attacker);
+        if (attacked != null && attacked != defendingPlayer) {
+            return false;
+        }
         return CombatUtil.canBeBlocked(attacker, defendingPlayer);
     }
 
