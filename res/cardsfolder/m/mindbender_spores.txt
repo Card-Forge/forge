@@ -1,0 +1,15 @@
+Name:Mindbender Spores
+ManaCost:2 G
+Types:Creature Fungus Wall
+PT:0/1
+K:Defender
+K:Flying
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ AddSpores | TriggerDescription$ Whenever CARDNAME blocks a creature, put four fungus counters on that creature. The creature gains "This creature doesn't untap during your untap step if it has a fungus counter on it" and "At the beginning of your upkeep, remove a fungus counter from this creature."
+SVar:AddSpores:AB$ PutCounter | Cost$ 0 | CounterType$ FUNGUS | CounterNum$ 4 | Defined$ TriggeredAttacker | SubAbility$ AddFungalEffects
+SVar:AddFungalEffects:DB$ Animate | Defined$ TriggeredAttacker | staticAbilities$ FungalFunk | Triggers$ TrigSporeUpkeep | sVars$ LoseSpores | Permanent$ True
+SVar:FungalFunk:Mode$ Continuous | Affected$ Card.Self+counters_GE1_FUNGUS | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ CARDNAME doesn't untap during your untap step if it has a fungus counter on it.
+SVar:TrigSporeUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ LoseSpores | TriggerDescription$ At the beginning of your upkeep, remove a fungus counter from CARDNAME.
+SVar:LoseSpores:AB$ RemoveCounter | Cost$ 0 | CounterType$ FUNGUS | CounterNum$ 1
+SVar:HasCombatEffect:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mindbender_spores.jpg
+Oracle:Defender (This creature can't attack.)\nFlying\nWhenever Mindbender Spores blocks a creature, put four fungus counters on that creature. The creature gains "This creature doesn't untap during your untap step if it has a fungus counter on it" and "At the beginning of your upkeep, remove a fungus counter from this creature."
