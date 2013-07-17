@@ -84,6 +84,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbOverlayCardPower(), FPref.UI_OVERLAY_CARD_POWER));
         lstControls.add(Pair.of(view.getCbOverlayCardManaCost(), FPref.UI_OVERLAY_CARD_MANA_COST));        
         lstControls.add(Pair.of(view.getCbShowMatchBackgroundImage(), FPref.UI_MATCH_IMAGE_VISIBLE));
+        lstControls.add(Pair.of(view.getCbUseThemedComboBox(), FPref.UI_THEMED_COMBOBOX));
 
         for(final Pair<JCheckBox, FPref> kv : lstControls) {
             kv.getKey().addItemListener(new ItemListener() {

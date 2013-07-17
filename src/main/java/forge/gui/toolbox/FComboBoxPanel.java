@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 
+import forge.Singletons;
+import forge.properties.ForgePreferences.FPref;
+
 /** 
  * TODO: Write javadoc for this type.
  *
@@ -42,8 +45,8 @@ public class FComboBoxPanel<E> extends JPanel {
     
     private void applyLayoutAndSkin() {        
         setPanelLayout();
-        setLabelLayout();        
-        setComboBoxLayout();        
+        setLabelLayout();
+        setComboBoxLayout();
     }
     
     private void setPanelLayout() {
@@ -65,13 +68,15 @@ public class FComboBoxPanel<E> extends JPanel {
     
     private void setComboBoxLayout() {
         if (this.comboBox != null) {
-            this.comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-            this.comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            this.comboBox.setFont(FSkin.getFont(12));
+            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX)) {
+                this.comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+                this.comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+                this.comboBox.setFont(FSkin.getFont(12));
+                this.comboBox.setRenderer(new ComplexCellRenderer<E>());
+            }
             this.comboBox.setEditable(false);
             this.comboBox.setFocusable(true);
-            this.comboBox.setOpaque(true);       
-            this.comboBox.setRenderer(new ComplexCellRenderer<E>());         
+            this.comboBox.setOpaque(true);                
             this.add(this.comboBox);
         }
     }

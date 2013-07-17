@@ -60,6 +60,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CURRENT_AI_PROFILE (AiProfileUtil.AI_PROFILE_RANDOM_MATCH),
         UI_CLONE_MODE_SOURCE ("false"), /** */
         UI_MATCH_IMAGE_VISIBLE ("true"),
+        UI_THEMED_COMBOBOX ("true"),
         
         UI_FOR_TOUCHSCREN("false"),
 

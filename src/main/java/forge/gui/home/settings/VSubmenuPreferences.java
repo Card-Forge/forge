@@ -82,6 +82,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOverlayCardManaCost = new OptionsCheckBox("Mana Cost");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbShowMatchBackgroundImage = new OptionsCheckBox("Show Background Image on Match Screen");    
+    private final JCheckBox cbUseThemedComboBox = new OptionsCheckBox("Themed ComboBox");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
@@ -166,6 +167,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpGameLogEntryType, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), regularConstraints);
+
+        pnlPrefs.add(cbUseThemedComboBox, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Turn off if you are having combo-box color clash (RESTART REQUIRED)."), regularConstraints);
 
         
         // Themes
@@ -507,8 +511,13 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbShowMatchBackgroundImage() {
         return cbShowMatchBackgroundImage;
+    }
+    
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbUseThemedComboBox() {
+        return cbUseThemedComboBox;
     }    
-
+    
     //========== Overridden from IVDoc
 
     public final FLabel getBtnDeleteMatchUI() {
