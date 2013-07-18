@@ -956,7 +956,7 @@ public class GameAction {
             final Card perm = (Card) entity;
             ZoneType tgtZone = tgt.getZone().get(0);
 
-            if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c)) {
+            if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c) || (perm.isPhasedOut() && !c.isPhasedOut())) {
                 c.unEnchantEntity(perm);
                 this.moveToGraveyard(c);
                 checkAgain = true;
@@ -1017,7 +1017,8 @@ public class GameAction {
         if (c.isEquipping()) {
             final Card equippedCreature = c.getEquipping().get(0);
             if (!equippedCreature.isCreature() || !equippedCreature.isInPlay()
-                    || !equippedCreature.canBeEquippedBy(c)) {
+                    || !equippedCreature.canBeEquippedBy(c)
+                    || (equippedCreature.isPhasedOut() && !c.isPhasedOut())) {
                 c.unEquipCard(equippedCreature);
                 checkAgain = true;
             }
@@ -1030,7 +1031,8 @@ public class GameAction {
 
         if (c.isFortifying()) {
             final Card fortifiedLand = c.getFortifying().get(0);
-            if (!fortifiedLand.isLand() || !fortifiedLand.isInPlay()) {
+            if (!fortifiedLand.isLand() || !fortifiedLand.isInPlay()
+                    || (fortifiedLand.isPhasedOut() && !c.isPhasedOut())) {
                 c.unFortifyCard(fortifiedLand);
                 checkAgain = true;
             }
