@@ -25,6 +25,7 @@ import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /** 
@@ -216,11 +217,26 @@ public enum CSubmenuPreferences implements ICDoc {
     
     private void initializeSkinsComboBox() {
         FPref userSetting = FPref.UI_SKIN;
-        FComboBoxPanel<String> panel = this.view.getSkinsComboBoxPanel();
-        JComboBox<String> comboBox = createComboBox(FSkin.getSkinNamesArray(), userSetting);        
+        FComboBoxPanel<String> panel = this.view.getSkinsComboBoxPanel();        
+        String[] installedSkins = getSortedListOfInstalledSkins();
+        validatePreferredSkinName(installedSkins);        
+        JComboBox<String> comboBox = createComboBox(installedSkins, userSetting);        
         String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);         
-    } 
+    }
+    
+    private String[] getSortedListOfInstalledSkins() {
+        String[] skins = FSkin.getSkinNamesArray();
+        java.util.Arrays.sort(skins);
+        return skins;
+    }
+    
+    private void validatePreferredSkinName(String[] installedSkins) {
+        String preferredSkin = this.prefs.getPref(FPref.UI_SKIN);
+        if (!Arrays.asList(installedSkins).contains(preferredSkin)) {
+            this.prefs.setPref(FPref.UI_SKIN, "Default");
+        }
+    }
     
     private <E> JComboBox<E> createComboBox(E[] items, final ForgePreferences.FPref setting) {
         final JComboBox<E> comboBox = new JComboBox<E>(items);
