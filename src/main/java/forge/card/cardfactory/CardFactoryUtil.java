@@ -63,6 +63,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -206,6 +207,7 @@ public class CardFactoryUtil {
                 if (sourceCard.turnFaceUp()) {
                     String sb = this.getActivatingPlayer() + " has unmorphed " + sourceCard.getName();
                     sourceCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    sourceCard.getGame().fireEvent(new GameEventCardStatsChanged(sourceCard));
                 }
             }
 
