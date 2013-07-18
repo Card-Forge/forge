@@ -1,0 +1,10 @@
+Name:Thought Dissector
+ManaCost:4
+Types:Artifact
+A:AB$ DigUntil | Cost$ X T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | References$ X | MaxRevealed$ X | Valid$ Artifact | ValidDescription$ artifact | RevealedDestination$ Graveyard | FoundDestination$ Battlefield | GainControl$ True | RememberFound$ True | SubAbility$ SacThought | SpellDescription$ Target opponent reveals cards from the top of his or her library until an artifact card or X cards are revealed, whichever comes first. If an artifact card is revealed this way, put it onto the battlefield under your control and sacrifice CARDNAME. Put the rest of the revealed cards into that player's graveyard.
+SVar:SacThought:DB$ Sacrifice | ConditionCheckSVar$ Found | ConditionSVarCompare$ EQ1 | References$ Found | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Found:Remembered$Amount
+SVar:X:Count$xPaid
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_dissector.jpg
+Oracle:{X}, {T}: Target opponent reveals cards from the top of his or her library until an artifact card or X cards are revealed, whichever comes first. If an artifact card is revealed this way, put it onto the battlefield under your control and sacrifice Thought Dissector. Put the rest of the revealed cards into that player's graveyard.

@@ -46,6 +46,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
         if (untilAmount != 1) {
             sb.append("s");
         }
+        if (sa.hasParam("MaxRevealed")) {
+            untilAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("MaxRevealed"), sa);
+            sb.append(" or ").append(untilAmount).append(" card/s");
+        }
         sb.append(". Put ");
 
         final ZoneType found = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
