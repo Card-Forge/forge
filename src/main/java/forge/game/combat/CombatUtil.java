@@ -958,6 +958,7 @@ public class CombatUtil {
           // Annihilator
 
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
+        c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
         c.getController().setAttackedWithCreatureThisTurn(true);
         c.getController().incrementAttackersDeclaredThisTurn();
     } // checkDeclareAttackers

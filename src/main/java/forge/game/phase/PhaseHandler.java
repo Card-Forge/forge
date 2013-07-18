@@ -445,6 +445,13 @@ public class PhaseHandler implements java.io.Serializable {
                 this.nCombatsThisTurn = 0;
                 break;
 
+            case UPKEEP:
+                for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                    c.getDamageHistory().setNotAttackedSinceLastUpkeepOf(this.getPlayerTurn());
+                    c.getDamageHistory().setNotBlockedSinceLastUpkeepOf(this.getPlayerTurn());
+                }
+                break;
+
             case COMBAT_END:
                 GameEventCombatEnded eventEndCombat = null;
                 if( combat != null ) {
@@ -621,6 +628,7 @@ public class PhaseHandler implements java.io.Serializable {
             }
         
             c1.getDamageHistory().setCreatureBlockedThisCombat(true);
+            c1.getDamageHistory().clearNotBlockedSinceLastUpkeepOf();
         }
         
         for (final Card a : combat.getAttackers()) {

@@ -9806,6 +9806,7 @@ res/cardsfolder/s/shambling_strider.txt svneol=native#text/plain
 res/cardsfolder/s/shambling_swarm.txt -text
 res/cardsfolder/s/shanodin_dryads.txt svneol=native#text/plain
 res/cardsfolder/s/shape_anew.txt -text
+res/cardsfolder/s/shape_of_the_wiitigo.txt -text
 res/cardsfolder/s/shape_stealer.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shaper_guildmage.txt svneol=native#text/plain
 res/cardsfolder/s/shaper_parasite.txt -text

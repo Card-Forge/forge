@@ -6137,6 +6137,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (this.isFirstTurnControlled()) {
                 return false;
             }
+        } else if (property.equals("attackedOrBlockedSinceYourLastUpkeep")) {
+            if (!this.getDamageHistory().hasAttackedSinceLastUpkeepOf(sourceController)
+                    && !this.getDamageHistory().hasBlockedSinceLastUpkeepOf(sourceController)) {
+                return false;
+            }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {
             if (!this.getDamageHistory().getThisTurnDamaged().contains(sourceController)) {
                 return false;
