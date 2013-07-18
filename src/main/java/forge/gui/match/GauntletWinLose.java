@@ -202,11 +202,12 @@ public class GauntletWinLose extends ControlWinLose {
             players.add(RegisteredPlayer.fromDeck(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
             players.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
            
-            Match newMatch = new Match(GameType.Gauntlet, players);
+            Match mc = new Match(GameType.Gauntlet, players);
 
             SOverlayUtils.hideOverlay();
             saveOptions();
-            newMatch.startRound();
+            Singletons.getControl().attachToGame(mc.createGame());
+            mc.startGame();
         } else {
             super.actionOnContinue();
         }

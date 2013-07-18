@@ -19,7 +19,6 @@ import forge.game.GameNew;
 import forge.game.Game;
 import forge.game.RegisteredPlayer;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 
 public class RestartGameEffect extends SpellAbilityEffect {

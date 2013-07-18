@@ -140,7 +140,8 @@ public enum CSubmenuDraft implements ICDoc {
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {
-                mc.startRound();
+                Singletons.getControl().attachToGame(mc.createGame());
+                mc.startGame();
                 SOverlayUtils.hideOverlay();
             }
         });

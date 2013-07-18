@@ -37,6 +37,7 @@ import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
@@ -63,6 +64,7 @@ import forge.gui.toolbox.FSkin;
 import forge.net.NetServer;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
+import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.sound.SoundSystem;
@@ -403,6 +405,16 @@ public enum FControl {
     private final FControlGamePlayback playbackControl = new FControlGamePlayback(this);
     public void attachToGame(Game game0) {
         // TODO: Detach from other game we might be looking at
+        
+        
+        if ( game0.getType() == GameType.Quest) {
+            QuestController qc = Singletons.getModel().getQuest();
+            // Reset new list when the Match round starts, not when each game starts
+            if (game0.getMatch().getPlayedGames().isEmpty()) {
+                qc.getCards().resetNewList();
+            }
+            game0.subscribeToEvents(qc); // this one listens to player's mulligans ATM
+        }
         
         inputQueue = new InputQueue();
         

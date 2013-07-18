@@ -32,7 +32,7 @@ public final class Main {
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 
-        boolean isHeadlessMode = false;
+        boolean isHeadlessMode = !true;
         
         // Start splash screen first, then data models, then controller.
         if(!isHeadlessMode) 
@@ -47,6 +47,8 @@ public final class Main {
         }
         
         // ok, done with possible interactive startup 
+        
+        
         
     }
 

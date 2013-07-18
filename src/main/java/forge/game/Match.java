@@ -12,7 +12,6 @@ import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestController;
 
 /**
  * TODO: Write javadoc for this type.
@@ -79,21 +78,16 @@ public class Match {
     /**
      * TODO: Write javadoc for this method.
      */
-    public void startRound() {
-
+    public Game createGame() {
         currentGame = new Game(players, gameType, this);
+        return currentGame;
 
-        if ( getGameType() == GameType.Quest) {
-            QuestController qc = Singletons.getModel().getQuest();
-            // Reset new list when the Match round starts, not when each game starts
-            if (this.getPlayedGames().isEmpty()) {
-                qc.getCards().resetNewList();
-            }
-            currentGame.subscribeToEvents(qc); // this one listens to player's mulligans ATM
-        }
+    }
 
-        Singletons.getControl().attachToGame(currentGame);
-
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void startGame() {
         final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
         GameNew.newGame(currentGame, canRandomFoil, this.useAnte);
 
