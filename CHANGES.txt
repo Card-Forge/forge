@@ -42,6 +42,9 @@ Kudzu
 Samite Blessing
 Mindbender Spores
 Hallow
+Tide of War
+Spatial Binding
+Thought Dissector
 
 
 --------------------
