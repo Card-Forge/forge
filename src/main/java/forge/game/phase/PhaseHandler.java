@@ -587,6 +587,23 @@ public class PhaseHandler implements java.io.Serializable {
         combat.removeAbsentCombatants();
 
         combat.fireTriggersForUnblockedAttackers();
+
+        final List<Card> declaredBlockers = combat.getAllBlockers();
+        if (!declaredBlockers.isEmpty()) {
+            final List<Card> blockedAttackers = new ArrayList<Card>();
+            for (final Card blocker : declaredBlockers) {
+                for (final Card blockedAttacker : combat.getAttackersBlockedBy(blocker)) {
+                    if (!blockedAttackers.contains(blockedAttacker)) {
+                        blockedAttackers.add(blockedAttacker);
+                    }
+                }
+            }
+            // fire blockers declared trigger
+            final HashMap<String, Object> bdRunParams = new HashMap<String, Object>();
+            bdRunParams.put("Blockers", declaredBlockers);
+            bdRunParams.put("Attackers", blockedAttackers);
+            game.getTriggerHandler().runTrigger(TriggerType.BlockersDeclared, bdRunParams, false);
+        }
         
         for (final Card c1 : combat.getAllBlockers()) {
             if ( c1.getDamageHistory().getCreatureBlockedThisCombat() )

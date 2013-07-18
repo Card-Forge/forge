@@ -1,0 +1,10 @@
+Name:Tide of War
+ManaCost:4 R R
+Types:Enchantment
+T:Mode$ BlockersDeclared | Execute$ WarFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures block, flip a coin. If you win the flip, each blocking creature is sacrificed by its controller. If you lose the flip, each blocked creature is sacrificed by its controller.
+SVar:WarFlip:AB$ FlipACoin | Cost$ 0 | Caller$ You | WinSubAbility$ SacBlockers | LoseSubAbility$ SacAttackers
+SVar:SacBlockers:DB$ SacrificeAll | Defined$ TriggeredBlockers
+SVar:SacAttackers:DB$ SacrificeAll | Defined$ TriggeredAttackers
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tide_of_war.jpg
+Oracle:Whenever one or more creatures block, flip a coin. If you win the flip, each blocking creature is sacrificed by its controller. If you lose the flip, each blocked creature is sacrificed by its controller.

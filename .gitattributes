@@ -11515,6 +11515,7 @@ res/cardsfolder/t/tidal_surge.txt svneol=native#text/plain
 res/cardsfolder/t/tidal_visionary.txt -text
 res/cardsfolder/t/tidal_warrior.txt -text
 res/cardsfolder/t/tidal_wave.txt svneol=native#text/plain
+res/cardsfolder/t/tide_of_war.txt -text
 res/cardsfolder/t/tidebinder_mage.txt -text
 res/cardsfolder/t/tideforce_elemental.txt svneol=native#text/plain
 res/cardsfolder/t/tidehollow_sculler.txt svneol=native#text/plain
@@ -14515,6 +14516,7 @@ src/main/java/forge/card/trigger/TriggerAttackerUnblocked.java svneol=native#tex
 src/main/java/forge/card/trigger/TriggerAttackersDeclared.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerAttacks.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerBecomesTarget.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerBlockersDeclared.java -text
 src/main/java/forge/card/trigger/TriggerBlocks.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerChampioned.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerChangesController.java -text
