@@ -295,7 +295,7 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
     
                 case MAIN1:
-                    if (this.getPlayerTurn().isArchenemy()) {
+                    if (this.getPlayerTurn().isArchenemy() && this.isPreCombatMain()) {
                         this.getPlayerTurn().setSchemeInMotion();
                     }
                     break;
@@ -886,6 +886,17 @@ public class PhaseHandler implements java.io.Serializable {
      */
     public final boolean isFirstUpkeep() {
         return (this.nUpkeepsThisTurn == 1);
+    }
+
+    /**
+     * <p>
+     * isPreCombatMain.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isPreCombatMain() {
+        return (this.nCombatsThisTurn == 0);
     }
 
     private final static boolean DEBUG_PHASES = false;
