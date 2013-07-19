@@ -294,6 +294,10 @@ public class GameAction {
                     copied.removeHiddenExtrinsicKeyword(s);
                 }
             }
+            for (Player p : game.getPlayers()) {
+                copied.getDamageHistory().setNotAttackedSinceLastUpkeepOf(p);
+                copied.getDamageHistory().setNotBlockedSinceLastUpkeepOf(p);
+            }
         } else if (zoneTo.is(ZoneType.Graveyard)) {
             copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeyword()) {
