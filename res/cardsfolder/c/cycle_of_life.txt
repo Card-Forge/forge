@@ -1,0 +1,11 @@
+Name:Cycle of Life
+ManaCost:1 G G
+Types:Enchantment
+A:AB$ Animate | Cost$ Return<1/CARDNAME> | ValidTgts$ Creature.ThisTurnCast+YouOwn | TgtPrompt$ Select target creature you cast this turn | Power$ 0 | Toughness$ 1 | UntilYourNextUpkeep$ True | SubAbility$ LifeCycleEffect | SpellDescription$ Target creature you cast this turn becomes 0/1 until your next upkeep. At the beginning of your next upkeep, put a +1/+1 counter on that creature.
+SVar:LifeCycleEffect:DB$ Effect | RememberObjects$ Targeted | Duration$ Permanent | Triggers$ LifeCycleTrig | SVars$ TrigGrowth,ExileEffect | References$ LifeCycleTrig,TrigGrowth,ExileEffect
+SVar:LifeCycleTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGrowth | TriggerDescription$ At the beginning of your next upkeep, put a +1/+1 counter on that creature.
+SVar:TrigGrowth:AB$ PutCounter | Cost$ 0 | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cycle_of_life.jpg
+Oracle:Return Cycle of Life to its owner's hand: Target creature you cast this turn becomes 0/1 until your next upkeep. At the beginning of your next upkeep, put a +1/+1 counter on that creature.
