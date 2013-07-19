@@ -169,8 +169,10 @@ public class EffectEffect extends SpellAbilityEffect {
 
         // Set Remembered
         if (effectRemembered != null) {
-            for (final Object o : AbilityUtils.getDefinedObjects(hostCard, effectRemembered, sa)) {
-                eff.addRemembered(o);
+            for (final String rem : effectRemembered.split(",")) {
+                for (final Object o : AbilityUtils.getDefinedObjects(hostCard, rem, sa)) {
+                    eff.addRemembered(o);
+                }
             }
         }
 

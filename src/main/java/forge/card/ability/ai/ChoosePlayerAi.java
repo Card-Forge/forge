@@ -4,6 +4,7 @@ import java.util.List;
 
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 
 public class ChoosePlayerAi extends SpellAbilityAi {
@@ -45,6 +46,16 @@ public class ChoosePlayerAi extends SpellAbilityAi {
             }
         } else if ("Pump".equals(sa.getParam("AILogic"))) {
             chosen = choices.contains(ai) ? ai : choices.get(0);
+        } else if ("BestAllyBoardPosition".equals(sa.getParam("AILogic"))) {
+            List<Player> prefChoices = choices;
+            prefChoices.removeAll(ai.getOpponents());
+            if (!prefChoices.isEmpty()) {
+                chosen = ComputerUtilCard.evaluateBoardPosition(prefChoices);
+            }
+            if (chosen == null) {
+                System.out.println("No good curse choices. Picking first available: " + choices.get(0));
+                chosen = choices.get(0);
+            }
         } else {
             System.out.println("Default player choice logic.");
             chosen = choices.contains(ai) ? ai : choices.get(0);

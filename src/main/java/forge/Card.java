@@ -5386,6 +5386,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                       }
                 }
             }
+        } else if (property.startsWith("nonRememberedPlayerCtrl")) {
+            if (source.getRemembered().isEmpty()) {
+                final Card newCard = game.getCardState(source);
+                if (newCard.getRemembered().contains(this.getController())) {
+                    return false;
+                }
+            }
+
+            if (source.getRemembered().contains(this.getController())) {
+                return false;
+            }
         } else if (property.equals("TargetedPlayerCtrl")) {
             for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
