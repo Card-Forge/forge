@@ -32,7 +32,6 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 
@@ -821,41 +820,5 @@ public class ComputerUtilCard {
             return true;
         }
     };
-
-    /**
-     * <p>
-     * evaluateBoardPosition.
-     * </p>
-     * 
-     * @param listToEvaluate
-     *            a  list of players to evaluate.
-     * @return a Player.
-     */
-    public static Player evaluateBoardPosition(final List<Player> listToEvaluate) {
-        Player bestBoardPosition = listToEvaluate.get(0);
-        int bestBoardRating = 0;
-
-        for (final Player p : listToEvaluate) {
-            int pRating = p.getLife() * 3;
-            pRating += p.getLandsInPlay().size() * 2;
-
-            for (final Card c : p.getCardsIn(ZoneType.Battlefield)) {
-                pRating += ComputerUtilCard.evaluateCreature(c) / 3;
-            }
-
-            if (p.getCardsIn(ZoneType.Library).size() < 3) {
-                pRating /= 5;
-            }
-
-            System.out.println("Board position evaluation for " + p + ": " + pRating);
-
-            if (pRating > bestBoardRating) {
-                bestBoardRating = pRating;
-                bestBoardPosition = p;
-            }
-        }
-
-        return bestBoardPosition;
-    }
 
 }

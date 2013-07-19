@@ -4,7 +4,7 @@ import java.util.List;
 
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.game.ai.ComputerUtilCard;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 
 public class ChoosePlayerAi extends SpellAbilityAi {
@@ -50,7 +50,7 @@ public class ChoosePlayerAi extends SpellAbilityAi {
             List<Player> prefChoices = choices;
             prefChoices.removeAll(ai.getOpponents());
             if (!prefChoices.isEmpty()) {
-                chosen = ComputerUtilCard.evaluateBoardPosition(prefChoices);
+                chosen = ComputerUtil.evaluateBoardPosition(prefChoices);
             }
             if (chosen == null) {
                 System.out.println("No good curse choices. Picking first available: " + choices.get(0));
