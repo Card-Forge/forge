@@ -122,10 +122,10 @@ public class DamagePreventAi extends SpellAbilityAi {
         } // Protect combatants
         else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, combat)
-                    && (ComputerUtilCombat.lifeInDanger(ai, combat) || sa.isAbility())
-                    && game.getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
+                    && (ComputerUtilCombat.lifeInDanger(ai, combat) || sa.isAbility() || sa.isTrigger())
+                    && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
                 sa.getTargets().add(ai);
-                chance = true;
+                return true;
             } else {
                 // filter AIs battlefield by what I can target
                 List<Card> targetables = ai.getCardsIn(ZoneType.Battlefield);
@@ -141,8 +141,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                 for (final Card c : combatants) {
                     if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
                         sa.getTargets().add(c);
-                        chance = true;
-                        break;
+                        return true;
                     }
                 }
             }
@@ -186,36 +185,38 @@ public class DamagePreventAi extends SpellAbilityAi {
         List<Card> targetables = game.getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getSourceCard());
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
+        Card target = null;
 
-        if (targetables.size() == 0) {
+        if (targetables.isEmpty()) {
             return false;
         }
 
-        if (!mandatory && (compTargetables.size() == 0)) {
+        if (!mandatory && compTargetables.isEmpty()) {
             return false;
         }
 
-        if (compTargetables.size() > 0) {
+        if (!compTargetables.isEmpty()) {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardLists.sortByEvaluateCreature(combatants);
             if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 Combat combat = game.getCombat();
                 for (final Card c : combatants) {
                     if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
-                        sa.getTargets().add(c);
-                        return true;
+                        target = c;
+                        break;
                     }
                 }
             }
-
-            // TODO see if something on the stack is about to kill something I
-            // can target
-
-            sa.getTargets().add(combatants.get(0));
-            return true;
+            if (target == null) {
+                target = combatants.get(0);
+            }
+        } else {
+            target = ComputerUtilCard.getCheapestPermanentAI(targetables, sa, true);
         }
-
-        sa.getTargets().add(ComputerUtilCard.getCheapestPermanentAI(targetables, sa, true));
+        sa.getTargets().add(target);
+        if (sa.hasParam("DividedAsYouChoose")) {
+            tgt.addDividedAllocation(target, AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa));
+        }
         return true;
     }
 
