@@ -22,7 +22,7 @@ public class SaTargetRountines {
 
     private List<Card> getCards(boolean definedFirst, String definedParam, SpellAbility sa) {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam))
-                && sa.getTargets() != null && sa.getTargets().isTargetingAnyCard();
+                && sa.getTargets() != null && (sa.getTargets().isTargetingAnyCard() || sa.getTargets().getTargets().isEmpty());
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargetCards()) 
                 : AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam(definedParam), sa);
     }
