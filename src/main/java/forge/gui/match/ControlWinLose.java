@@ -78,8 +78,7 @@ public class ControlWinLose {
             executeAnte();
         }
 
-        Singletons.getControl().attachToGame(match.createGame());
-        match.startGame();
+        Singletons.getControl().startGameWithUi(match);
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
@@ -87,8 +86,7 @@ public class ControlWinLose {
         SOverlayUtils.hideOverlay();
         saveOptions();
         match.clearGamesPlayed();
-        Singletons.getControl().attachToGame(match.createGame());
-        match.startGame();
+        Singletons.getControl().startGameWithUi(match);
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */

@@ -206,8 +206,7 @@ public class GauntletWinLose extends ControlWinLose {
 
             SOverlayUtils.hideOverlay();
             saveOptions();
-            Singletons.getControl().attachToGame(mc.createGame());
-            mc.startGame();
+            Singletons.getControl().startGameWithUi(mc);
         } else {
             super.actionOnContinue();
         }

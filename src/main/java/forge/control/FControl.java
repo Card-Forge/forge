@@ -38,6 +38,7 @@ import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.Game;
 import forge.game.GameType;
+import forge.game.Match;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
@@ -401,9 +402,14 @@ public enum FControl {
     }
 
     
+    public final void startGameWithUi(Match match) {
+        attachToGame(match.createGame());
+        match.startGame();
+    }
+    
     private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler(this);
     private final FControlGamePlayback playbackControl = new FControlGamePlayback(this);
-    public void attachToGame(Game game0) {
+    private void attachToGame(Game game0) {
         // TODO: Detach from other game we might be looking at
         
         

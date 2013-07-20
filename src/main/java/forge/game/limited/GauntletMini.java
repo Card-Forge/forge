@@ -169,8 +169,7 @@ public class GauntletMini {
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {
-                Singletons.getControl().attachToGame(mc.createGame());
-                mc.startGame();
+                Singletons.getControl().startGameWithUi(mc);
                 SOverlayUtils.hideOverlay();
             }
         });
