@@ -11,6 +11,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -34,6 +35,7 @@ public class AnimateAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final Game game = aiPlayer.getGame();
+        final PhaseHandler ph = game.getPhaseHandler();
         
         // TODO - add some kind of check to answer
         // "Am I going to attack with this?"
@@ -42,8 +44,8 @@ public class AnimateAi extends SpellAbilityAi {
 
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
-        if (!game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN)
-                && game.getPhaseHandler().isPlayerTurn(aiPlayer)
+        if (!ph.is(PhaseType.COMBAT_BEGIN)
+                && ph.isPlayerTurn(aiPlayer)
                 && !SpellAbilityAi.isSorcerySpeed(sa)
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
             return false;
@@ -51,7 +53,7 @@ public class AnimateAi extends SpellAbilityAi {
 
         Player opponent = aiPlayer.getWeakestOpponent();
         // don't animate if the AI won't attack anyway
-        if (game.getPhaseHandler().isPlayerTurn(aiPlayer)
+        if (ph.isPlayerTurn(aiPlayer)
                 && aiPlayer.getLife() < 6
                 && opponent.getLife() > 6
                 && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
@@ -60,7 +62,8 @@ public class AnimateAi extends SpellAbilityAi {
 
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, opponent) && game.getCombat().getAttackers().isEmpty()) {
+        if (ph.getPlayerTurn().isOpponentOf(aiPlayer) &&
+                (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, opponent) || game.getCombat().getAttackersOf(aiPlayer).isEmpty())) {
             return false;
         }
 
