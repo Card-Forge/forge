@@ -247,7 +247,7 @@ public class TriggerHandler {
             Card card = (Card) runParams.get("Card");
             if (card.getController() == player) {
                 for (final Trigger t : card.getTriggers()) {
-                    if (!t.isStatic() && (card.isCloned() || card.isToken() || !t.isIntrinsic()) 
+                    if (!t.isStatic() && (card.isCloned() || !t.isIntrinsic()) 
                             && canRunTrigger(t, mode, runParams)) {
                         this.runSingleTrigger(t, runParams);
                         checkStatics = true;
