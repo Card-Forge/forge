@@ -1478,8 +1478,8 @@ public class GameAction {
         
     }
 
-    public void startGame() {
-        Player first = determineFirstTurnPlayer(game.getMatch().getLastGameOutcome());
+    public void startGame(GameOutcome lastGameOutcome) {
+        Player first = determineFirstTurnPlayer(lastGameOutcome);
 
         do { 
             if ( game.isGameOver() ) break; // conceded during "play or draw"

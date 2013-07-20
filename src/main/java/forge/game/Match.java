@@ -28,8 +28,6 @@ public class Match {
     
     private boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
-    private Game currentGame = null;
-
     private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
     private final List<GameOutcome> gamesPlayedRo;
 
@@ -67,11 +65,11 @@ public class Match {
         return gamesToWinMatch;
     }
 
-    public void addGamePlayed(GameOutcome outcome) {
-        if (!currentGame.isGameOver()) {
+    public void addGamePlayed(Game finished) {
+        if (!finished.isGameOver()) {
             throw new IllegalStateException("Game is not over yet.");
         }
-        gamesPlayed.add(outcome);
+        gamesPlayed.add(finished.getOutcome());
     }
     
 
@@ -79,28 +77,28 @@ public class Match {
      * TODO: Write javadoc for this method.
      */
     public Game createGame() {
-        currentGame = new Game(players, gameType, this);
-        return currentGame;
-
+        return new Game(players, gameType, this);
     }
 
     /**
      * TODO: Write javadoc for this method.
      */
-    public void startGame() {
+    public void startGame(final Game game) {
         final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
-        GameNew.newGame(currentGame, canRandomFoil, this.useAnte);
+        GameNew.newGame(game, canRandomFoil, this.useAnte);
 
-        // This code was run from EDT.
-        currentGame.getAction().invoke(new Runnable() {
+        // This code could be run run from EDT.
+        game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 if (useAnte) {  // Deciding which cards go to ante
-                    List<Pair<Player, Card>> list = GameNew.chooseCardsForAnte(currentGame);
+                    List<Pair<Player, Card>> list = GameNew.chooseCardsForAnte(game);
                     GameNew.moveCardsToAnte(list);
-                    currentGame.fireEvent(new GameEventAnteCardsSelected(list));
+                    game.fireEvent(new GameEventAnteCardsSelected(list));
                 }
-                currentGame.getAction().startGame();
+                
+                GameOutcome lastOutcome = gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
+                game.getAction().startGame(lastOutcome);
             }
         });
     }
@@ -122,21 +120,8 @@ public class Match {
         return gameType;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * 
-     * @return
-     */
-    public GameOutcome getLastGameOutcome() {
-        return gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
-    }
-    
     public Iterable<GameOutcome> getOutcomes() {
         return gamesPlayedRo;
-    }
-
-    public Game getCurrentGame() {
-        return currentGame;
     }
 
     /**

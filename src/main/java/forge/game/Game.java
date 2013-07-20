@@ -81,6 +81,7 @@ public class Game {
     public final GameAction action;
     private final Match match;
     private GameAge age = GameAge.BeforeMulligan;
+    private GameOutcome outcome;
 
     /**
      * Constructor.
@@ -266,6 +267,10 @@ public class Game {
     public final long getTimestamp() {
         return this.timestamp;
     }
+    
+    public final GameOutcome getOutcome() { 
+        return this.outcome;
+    }
 
     /**
      * @return the replacementHandler
@@ -299,7 +304,8 @@ public class Game {
         final GameOutcome result = new GameOutcome(reason, getRegisteredPlayers());
         result.setTurnsPlayed(getPhaseHandler().getTurn());
 
-        match.addGamePlayed(result);
+        this.outcome = result;
+        match.addGamePlayed(this);
         
         // The log shall listen to events and generate text internally
         fireEvent(new GameEventGameOutcome(result, match.getPlayedGames()));

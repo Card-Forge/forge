@@ -12,6 +12,7 @@ import forge.Singletons;
 import forge.card.CardDb;
 import forge.control.FControl;
 import forge.deck.Deck;
+import forge.game.Game;
 import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.Match;
@@ -31,13 +32,13 @@ import forge.properties.ForgePreferences.FPref;
  */
 public class ControlWinLose {
     private final ViewWinLose view;
-    protected final Match match;
+    protected final Game lastGame;
 
     /** @param v &emsp; ViewWinLose
      * @param match */
-    public ControlWinLose(final ViewWinLose v, Match match) {
+    public ControlWinLose(final ViewWinLose v, Game game) {
         this.view = v;
-        this.match = match;
+        this.lastGame = game;
         addListeners();
     }
 
@@ -74,17 +75,17 @@ public class ControlWinLose {
         boolean isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
         //This is called from QuestWinLose also.  If we're in a quest, this is already handled elsewhere
-        if (isAnte && match.getGameType() != GameType.Quest) {
+        if (isAnte && lastGame.getType() != GameType.Quest) {
             executeAnte();
         }
-
-        Singletons.getControl().startGameWithUi(match);
+        Singletons.getControl().startGameWithUi(lastGame.getMatch());
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
         SOverlayUtils.hideOverlay();
         saveOptions();
+        final Match match = lastGame.getMatch();
         match.clearGamesPlayed();
         Singletons.getControl().startGameWithUi(match);
     }
@@ -112,6 +113,7 @@ public class ControlWinLose {
      * @param cDeck
      */
     private void executeAnte() {
+        final Match match = lastGame.getMatch();
         List<GameOutcome> games = match.getPlayedGames();
 
         if (games.isEmpty()) {
@@ -122,7 +124,7 @@ public class ControlWinLose {
         List<PaperCard> losses = new ArrayList<PaperCard>();
         int cntPlayers = match.getPlayers().size();
         for (int i = 0; i < cntPlayers; i++ ) {
-            Player fromGame = match.getCurrentGame().getRegisteredPlayers().get(i);
+            Player fromGame = lastGame.getRegisteredPlayers().get(i);
             if( !fromGame.hasLost()) continue; // not a loser
             
 
@@ -141,7 +143,7 @@ public class ControlWinLose {
         }
 
         for (int i = 0; i < cntPlayers; i++ ) {
-            Player fromGame = match.getCurrentGame().getRegisteredPlayers().get(i);
+            Player fromGame = lastGame.getRegisteredPlayers().get(i);
             if( !fromGame.hasWon()) continue; // not a loser
             
             // offer to winner, if he is local human

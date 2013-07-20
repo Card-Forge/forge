@@ -25,7 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import forge.Singletons;
-import forge.game.Match;
+import forge.game.Game;
 import forge.game.limited.GauntletMini;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FSkin;
@@ -54,11 +54,11 @@ public class LimitedWinLose extends ControlWinLose {
      * @param view0 {@link forge.gui.match.ViewWinLose}
      * @param match {@link forge.game.Match}
      */
-    public LimitedWinLose(final ViewWinLose view0, Match match) {
-        super(view0, match);
+    public LimitedWinLose(final ViewWinLose view0, Game lastGame) {
+        super(view0, lastGame);
         this.view = view0;
         gauntlet = Singletons.getModel().getGauntletMini();
-        this.wonMatch = match.isWonBy(Singletons.getControl().getLobby().getGuiPlayer());
+        this.wonMatch = lastGame.getMatch().isWonBy(Singletons.getControl().getLobby().getGuiPlayer());
     }
 
 
@@ -79,8 +79,7 @@ public class LimitedWinLose extends ControlWinLose {
         resetView();
         nextRound = false;
 
-
-        if (match.getLastGameOutcome().isWinner(Singletons.getControl().getLobby().getGuiPlayer())) {
+        if (lastGame.getOutcome().isWinner(Singletons.getControl().getLobby().getGuiPlayer())) {
             gauntlet.addWin();
         } else {
             gauntlet.addLoss();
@@ -88,7 +87,7 @@ public class LimitedWinLose extends ControlWinLose {
 
         view.getBtnRestart().setText("Restart Round");
 
-        if (!match.isMatchOver()) {
+        if (!lastGame.getMatch().isMatchOver()) {
             showTournamentInfo("Tournament Info");
             return true;
         } else {

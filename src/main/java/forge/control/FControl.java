@@ -403,8 +403,9 @@ public enum FControl {
 
     
     public final void startGameWithUi(Match match) {
-        attachToGame(match.createGame());
-        match.startGame();
+        Game newGame = match.createGame();
+        attachToGame(newGame);
+        match.startGame(newGame);
     }
     
     private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler(this);

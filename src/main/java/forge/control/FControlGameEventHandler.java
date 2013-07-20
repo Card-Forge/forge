@@ -160,7 +160,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventGameFinished ev) {
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            new ViewWinLose(fc.getObservedGame().getMatch());
+            new ViewWinLose(fc.getObservedGame());
             SOverlayUtils.showOverlay();
         } });
         return null;

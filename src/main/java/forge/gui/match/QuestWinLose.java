@@ -40,10 +40,10 @@ import forge.card.IUnOpenedProduct;
 import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
 import forge.control.FControl;
+import forge.game.Game;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameOutcome;
-import forge.game.Match;
 import forge.game.player.GameLossReason;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -103,12 +103,12 @@ public class QuestWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2
      */
-    public QuestWinLose(final ViewWinLose view0, Match match2) {
-        super(view0, match2);
+    public QuestWinLose(final ViewWinLose view0, Game lastGame) {
+        super(view0, lastGame);
         this.view = view0;
         qData = Singletons.getModel().getQuest();
         qEvent = qData.getCurrentEvent();
-        this.wonMatch = match.isWonBy(Singletons.getControl().getLobby().getQuestPlayer());
+        this.wonMatch = lastGame.getMatch().isWonBy(Singletons.getControl().getLobby().getQuestPlayer());
         this.isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
@@ -130,13 +130,13 @@ public class QuestWinLose extends ControlWinLose {
         LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
         if (isAnte) {
             //do per-game actions
-            GameOutcome outcome = match.getLastGameOutcome();
+            GameOutcome outcome = lastGame.getOutcome();
 
             // Ante returns to owners in a draw
             if (!outcome.isDraw()) {
                 boolean isHumanWinner = outcome.getWinner().equals(questPlayer);
                 final List<PaperCard> anteCards = new ArrayList<PaperCard>();
-                for (Player p : match.getCurrentGame().getRegisteredPlayers()) {
+                for (Player p : lastGame.getRegisteredPlayers()) {
                     if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) {
                         continue;
                     }
@@ -157,7 +157,7 @@ public class QuestWinLose extends ControlWinLose {
             }
         }
 
-        if (!match.isMatchOver()) {
+        if (!lastGame.getMatch().isMatchOver()) {
             this.getView().getBtnQuit().setText("Quit (-15 Credits)");
             return isAnte;
         } else {
@@ -343,7 +343,7 @@ public class QuestWinLose extends ControlWinLose {
         boolean hasNeverLost = true;
 
         LobbyPlayer localHuman = Singletons.getControl().getLobby().getQuestPlayer();
-        for (final GameOutcome game : match.getPlayedGames()) {
+        for (final GameOutcome game : lastGame.getMatch().getPlayedGames()) {
             if (!game.isWinner(localHuman)) {
                 hasNeverLost = false;
                 continue; // no rewards for losing a game

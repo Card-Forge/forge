@@ -19,7 +19,8 @@ import forge.GameLog;
 import forge.GameLogEntry;
 import forge.GameLogEntryType;
 import forge.Singletons;
-import forge.game.Match;
+import forge.game.Game;
+import forge.game.GameOutcome;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerStatistics;
 import forge.gui.toolbox.FButton;
@@ -42,7 +43,7 @@ public class ViewWinLose {
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
     
     @SuppressWarnings("serial")
-    public ViewWinLose(Match match) {
+    public ViewWinLose(final Game game) {
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 
         final JPanel pnlLeft = new JPanel();
@@ -56,25 +57,25 @@ public class ViewWinLose {
 
         // Control of the win/lose is handled differently for various game modes.
         ControlWinLose control = null;
-        switch (match.getGameType()) {
+        switch (game.getType()) {
             case Quest:
-                control = new QuestWinLose(this, match);
+                control = new QuestWinLose(this, game);
                 break;
             case Draft:
                 if (!Singletons.getModel().getGauntletMini().isGauntletDraft()) {
                     break;
                 }
             case Sealed:
-                control = new LimitedWinLose(this, match);
+                control = new LimitedWinLose(this, game);
                 break;
             case Gauntlet:
-                control = new GauntletWinLose(this, match);
+                control = new GauntletWinLose(this, game);
                 break;
             default: // will catch it after switch
                 break;
         }
         if (null == control) {
-            control = new ControlWinLose(this, match);
+            control = new ControlWinLose(this, game);
         }
 
 
@@ -101,11 +102,11 @@ public class ViewWinLose {
         btnRestart.setFont(FSkin.getFont(22));
         btnQuit.setText("Quit");
         btnQuit.setFont(FSkin.getFont(22));
-        btnContinue.setEnabled(!match.isMatchOver());
+        btnContinue.setEnabled(!game.getMatch().isMatchOver());
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
-        txtLog.setText(match.getCurrentGame().getGameLog().getLogText(null));
+        txtLog.setText(game.getGameLog().getLogText(null));
         txtLog.setFont(FSkin.getFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
         
@@ -179,9 +180,9 @@ public class ViewWinLose {
             }
         });
         
-        lblTitle.setText(composeTitle(match));
+        lblTitle.setText(composeTitle(game.getOutcome()));
 
-        GameLog log = match.getCurrentGame().getGameLog();
+        GameLog log = game.getGameLog();
 
         for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME)) 
             pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
@@ -190,14 +191,14 @@ public class ViewWinLose {
             lblStats.setText(o.message);
     }
 
-    private String composeTitle(Match match) {
+    private String composeTitle(GameOutcome outcome) {
         LobbyPlayer guiPlayer = Singletons.getControl().getLobby().getGuiPlayer();
         int nHumansInGame = 0;
-        for(Pair<LobbyPlayer, PlayerStatistics> pps : match.getLastGameOutcome()) {
+        for(Pair<LobbyPlayer, PlayerStatistics> pps : outcome) {
             if( pps.getKey() == guiPlayer )
                 nHumansInGame++;
         }
-        LobbyPlayer winner = match.getLastGameOutcome().getWinner();
+        LobbyPlayer winner = outcome.getWinner();
         if ( winner == null )
             return "It's a draw!";
 

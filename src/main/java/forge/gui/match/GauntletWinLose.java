@@ -30,6 +30,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
+import forge.game.Game;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.RegisteredPlayer;
@@ -51,8 +52,8 @@ public class GauntletWinLose extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match
      */
-    public GauntletWinLose(final ViewWinLose view0, Match match) {
-        super(view0, match);
+    public GauntletWinLose(final ViewWinLose view0, Game lastGame) {
+        super(view0, lastGame);
     }
 
     /**
@@ -79,6 +80,8 @@ public class GauntletWinLose extends ControlWinLose {
         // Generic event record.
         lstEventRecords.set(gd.getCompleted(), "Ongoing");
 
+        final Match match = lastGame.getMatch();
+        
         // Match won't be saved until it is over. This opens up a cheat
         // or failsafe mechanism (depending on your perspective) in which
         // the player can restart Forge to replay a match.
@@ -193,7 +196,7 @@ public class GauntletWinLose extends ControlWinLose {
     
     @Override
     public void actionOnContinue() {
-        if (match.isMatchOver()) {
+        if (lastGame.getMatch().isMatchOver()) {
             // To change the AI deck, we have to create a new match.
             GauntletData gd = Singletons.getModel().getGauntletData();
             Deck aiDeck = gd.getDecks().get(gd.getCompleted());
