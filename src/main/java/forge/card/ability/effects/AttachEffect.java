@@ -89,9 +89,14 @@ public class AttachEffect extends SpellAbilityEffect {
                 // Spellweaver Volute, Dance of the Dead, Animate Dead
                 // Although honestly, I'm not sure if the three of those could
                 // handle being scripted
-                handleAura(card, c);
+                // 303.4h: If the card can't be enchanted, the aura doesn't move
+                if (c.canBeEnchantedBy(card)) {
+                    handleAura(card, c);
+                }
             } else if (card.isEquipment()) {
-                card.equipCard(c);
+                if(c.canBeEquippedBy(card)) {
+                    card.equipCard(c);
+                }
             } else if (card.isFortification()) {
                 card.fortifyCard(c);
             }
