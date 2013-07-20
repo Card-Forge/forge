@@ -29,7 +29,6 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -86,14 +85,6 @@ public final class CardDb implements ICardDatabase {
     private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards); 
     private final Collection<PaperCard> roUniqueCards = Collections.unmodifiableCollection(uniqueCardsByName.values());
     
-    // Lambda to get rules for selects from list of printed cards
-    /** The Constant fnGetCardPrintedByForgeCard. */
-    public static final Function<Card, PaperCard> FN_GET_CARD_PRINTED_BY_FORGE_CARD = new Function<Card, PaperCard>() {
-        @Override
-        public PaperCard apply(final Card from) {
-            return CardDb.instance().getCard(from.getName());
-        }
-    };
 
     private CardDb(Map<String, CardRules> rules, Iterable<CardEdition> editions, boolean logMissingCards) {
         this.rulesByName = rules;
