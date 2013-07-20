@@ -790,7 +790,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (activePlayer.isComputer()) {
             for (final SpellAbility sa : activePlayerSAs) {
-                sa.doTrigger(sa.isMandatory(), activePlayer);
+                sa.doTrigger(true, activePlayer);
                 ComputerUtil.playStack(sa, activePlayer, game);
             }
         } else {
