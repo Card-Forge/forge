@@ -170,7 +170,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
                 || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow")
                 || keyword.startsWith("CantBeBlockedBy"));
-        final boolean combatRelevant = (keyword.endsWith("First Strike") || keyword.contains("Bushido"));
         // give evasive keywords to creatures that can or do attack
         if (evasive) {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
@@ -241,13 +240,30 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             }
             return false;
-        } else if (combatRelevant) {
+        } else if (keyword.equals("Bushido")) {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                    || opp.getCreaturesInPlay().size() < 1
+                    || opp.getCreaturesInPlay().isEmpty()
                     || CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty()) {
                 return false;
             }
+        } else if (keyword.equals("First Strike")) {
+            if (ph.isPlayerTurn(ai) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
+                    && newPower > 0
+                    && ph.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
+                    && !CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)).isEmpty()) {
+                return true;
+            }
+            if (combat != null && combat.isBlocking(card) && !combat.getAttackersBlockedBy(card).isEmpty()) {
+                Card attacker = combat.getAttackersBlockedBy(card).get(0);
+                if (!ComputerUtilCombat.canDestroyAttacker(ai, attacker, card, combat, true) 
+                        && ComputerUtilCombat.canDestroyAttacker(ai, attacker, card, combat, false))
+                return true;
+                if (ComputerUtilCombat.canDestroyBlocker(ai, card, attacker, combat, true) 
+                        && !ComputerUtilCombat.canDestroyBlocker(ai, card, attacker, combat, false))
+                return true;
+            }
+            return false;
         } else if (keyword.equals("Double Strike")) {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
                     || newPower <= 0
