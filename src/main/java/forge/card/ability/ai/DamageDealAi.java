@@ -292,9 +292,18 @@ public class DamageDealAi extends DamageAiBase {
                 // TODO: add check here if card is about to die from something
                 // on the stack
                 // or from taking combat damage
-                final boolean freePing = isTrigger || sa.getPayCosts() == null || sa.getTargets().getNumTargeted() > 0
-                        || (phase.is(PhaseType.END_OF_TURN) && sa.isAbility() && phase.getNextTurn().equals(ai))
-                            || (phase.is(PhaseType.MAIN2) && sa.getRestrictions().getPlaneswalker());
+                boolean freePing = isTrigger || sa.getPayCosts() == null || sa.getTargets().getNumTargeted() > 0;
+
+                if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility()) {
+                    if (phase.getNextTurn().equals(ai))
+                        freePing = true;
+                }
+
+                if (phase.is(PhaseType.MAIN2) && sa.isAbility()) {
+                    if (sa.getRestrictions().getPlaneswalker() || source.hasKeyword("At the beginning of the end step, exile CARDNAME.")
+                            || source.hasKeyword("At the beginning of the end step, sacrifice CARDNAME."))
+                        freePing = true;
+                }
 
                 if (freePing && sa.canTarget(enemy)) {
                     sa.getTargets().add(enemy);

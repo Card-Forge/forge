@@ -518,10 +518,14 @@ public class AiAttackController {
             }
             boolean mustAttack = false;
             for (String s : attacker.getKeyword()) {
-                if (s.equals("CARDNAME attacks each turn if able.")
-                        || s.equals("At the beginning of the end step, destroy CARDNAME.")
+                if (s.equals("CARDNAME attacks each turn if able.")) {
+                    mustAttack = true;
+                    break;
+                }
+                if ((s.equals("At the beginning of the end step, destroy CARDNAME.")
                         || s.equals("At the beginning of the end step, exile CARDNAME.")
-                        || s.equals("At the beginning of the end step, sacrifice CARDNAME.")) {
+                        || s.equals("At the beginning of the end step, sacrifice CARDNAME."))
+                        && isEffectiveAttacker(ai, attacker, combat)) {
                     mustAttack = true;
                     break;
                 }
