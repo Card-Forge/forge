@@ -302,7 +302,7 @@ public class CardDetailPanel extends FPanel {
 
         this.powerToughnessLabel.setText(ptText.toString());
 
-        this.idLabel.setText("Card ID  " + card.getUniqueNumber());
+        this.idLabel.setText(card.getUniqueNumber() > 0 ? "Card ID  " + card.getUniqueNumber() : null);
 
         // fill the card text
         this.cdArea.setText(composeCardText(card, canShowThis));
@@ -613,11 +613,6 @@ public class CardDetailPanel extends FPanel {
     /** @return JLabel */
     public JLabel getPowerToughnessLabel() {
         return this.powerToughnessLabel;
-    }
-
-    /** @return JLabel */
-    public JLabel getIDLabel() {
-        return this.idLabel;
     }
 
     /** @return JLabel */
