@@ -477,6 +477,11 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
+        // Remove all damage
+        if (sa.hasParam("Remove")) {
+            return true;
+        }
+
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
