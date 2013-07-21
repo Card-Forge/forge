@@ -109,13 +109,13 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         }
 
         Card divPermanentSources = new Card();
-        divPermanentSources.setName("--PERMANENT SOURCES:--");
+        divPermanentSources.setName("--PERMANENTS:--");
         Card divStackSources = new Card();
-        divStackSources.setName("--SOURCES ON STACK:--");
+        divStackSources.setName("--SPELLS ON THE STACK:--");
         Card divReferencedSources = new Card();
-        divReferencedSources.setName("--SOURCES REFERENCED ON STACK:--");
+        divReferencedSources.setName("--OBJECTS REFERRED TO ON THE STACK:--");
         Card divCommandZoneSources = new Card();
-        divCommandZoneSources.setName("--SOURCES IN COMMAND ZONE:--");
+        divCommandZoneSources.setName("--CARDS IN THE COMMAND ZONE:--");
 
         if (permanentSources.size() > 0) {
             sourcesToChooseFrom.add(divPermanentSources);
