@@ -57,7 +57,7 @@ public class FComboBoxPanel<E> extends JPanel {
     }
     
     private void setLabelLayout() {
-        if (this.comboBoxCaption != "") {
+        if (this.comboBoxCaption != null && !this.comboBoxCaption.isEmpty()) {
             JLabel comboLabel;
             comboLabel = new JLabel(this.comboBoxCaption);
             comboLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
