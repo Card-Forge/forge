@@ -110,7 +110,7 @@ public class DigEffect extends SpellAbilityEffect {
             }
 
             if (top.size() > 0) {
-                final Card dummy = new Card();
+                final Card dummy = new Card(-1);
                 dummy.setName("[No valid cards]");
 
                 boolean hasRevealed = true;

@@ -188,12 +188,12 @@ public class TwoPilesEffect extends SpellAbilityEffect {
         } else {
             if (chooser.isHuman()) {
                 final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
-                disp[0] = new Card();
+                disp[0] = new Card(-1);
                 disp[0].setName("Pile 1");
                 for (int i = 0; i < pile1.size(); i++) {
                     disp[1 + i] = pile1.get(i);
                 }
-                disp[pile1.size() + 1] = new Card();
+                disp[pile1.size() + 1] = new Card(-2);
                 disp[pile1.size() + 1].setName("Pile 2");
                 for (int i = 0; i < pile2.size(); i++) {
                     disp[pile1.size() + i + 2] = pile2.get(i);

@@ -33,7 +33,7 @@ import forge.game.player.Player;
  * @version $Id$
  */
 public class StaticEffect {
-    private Card source = new Card();
+    private final Card source;
     private int keywordNumber = 0;
     private List<Card> affectedCards = new ArrayList<Card>();
     private ArrayList<Player> affectedPlayers = new ArrayList<Player>();
@@ -68,6 +68,10 @@ public class StaticEffect {
     private boolean overwriteColors = false;
     private final HashMap<Card, Long> timestamps = new HashMap<Card, Long>();
 
+    public StaticEffect(Card source) {
+        this.source = source;
+    }
+    
     /**
      * setTimestamp TODO Write javadoc for this method.
      * 
@@ -688,17 +692,6 @@ public class StaticEffect {
         this.timestamps.clear();
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>source</code>.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     */
-    public final void setSource(final Card card) {
-        this.source = card;
-    }
 
     /**
      * <p>

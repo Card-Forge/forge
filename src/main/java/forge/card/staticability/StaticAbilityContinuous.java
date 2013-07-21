@@ -65,7 +65,7 @@ public class StaticAbilityContinuous {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
-        final StaticEffect se = new StaticEffect();
+        final StaticEffect se = new StaticEffect(hostCard);
         final List<Card> affectedCards = StaticAbilityContinuous.getAffectedCards(stAb);
         final ArrayList<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
         final Game game = hostCard.getGame();
@@ -74,7 +74,6 @@ public class StaticAbilityContinuous {
         se.setAffectedPlayers(affectedPlayers);
         se.setParams(params);
         se.setTimestamp(hostCard.getTimestamp());
-        se.setSource(hostCard);
         game.getStaticEffects().addStaticEffect(se);
 
         String addP = "";

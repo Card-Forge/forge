@@ -55,10 +55,10 @@ class ZoneAction extends ForgeAction {
             Card toAdd = crd;
             if (crd.isFaceDown()) {
                 if (Singletons.getControl().mayShowCard(crd)) {
-                    toAdd = CardFactory.copyCard(crd);
+                    toAdd = CardFactory.copyCard(crd, false);
                     toAdd.setState(CardCharacteristicName.Original);
                 } else {
-                    toAdd = new Card();
+                    toAdd = new Card(0);
                     toAdd.setName("Face Down");
                 }
             } 

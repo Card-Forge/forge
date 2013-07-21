@@ -115,8 +115,7 @@ public final class CardUtil {
             return in;
         }
 
-        final Card newCopy = new Card();
-        newCopy.setUniqueNumber(in.getUniqueNumber());
+        final Card newCopy = new Card(in.getUniqueNumber());
         newCopy.setCurSetCode(in.getCurSetCode());
         newCopy.setOwner(in.getOwner());
         newCopy.setController(in.getController(), 0);

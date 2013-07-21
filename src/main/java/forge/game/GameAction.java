@@ -172,7 +172,7 @@ public class GameAction {
                     c.clearStates(CardCharacteristicName.Flipped);
                 }
             }
-            copied = CardFactory.copyCard(c);
+            copied = CardFactory.copyCard(c, false);
             copied.setUnearthed(c.isUnearthed());
             copied.setTapped(false);
             for (final Trigger trigger : copied.getTriggers()) {

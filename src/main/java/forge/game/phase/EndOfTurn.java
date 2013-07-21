@@ -158,7 +158,7 @@ public class EndOfTurn extends Phase {
         }
         Player activePlayer = game.getPhaseHandler().getPlayerTurn();
         if (activePlayer.hasKeyword("At the beginning of this turn's end step, you lose the game.")) {
-            final Card source = new Card();
+            final Card source = new Card(game.nextCardId());
             final SpellAbility change = new Ability(source, ManaCost.ZERO) {
                 @Override
                 public void resolve() {

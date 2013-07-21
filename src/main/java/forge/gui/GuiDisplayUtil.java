@@ -62,7 +62,7 @@ public final class GuiDisplayUtil {
     }
 
     public static void devModeGenerateMana() {
-        final Card dummy = new Card();
+        final Card dummy = new Card(-777777);
         dummy.setOwner(getGame().getPhaseHandler().getPriorityPlayer());
         Map<String, String> produced = new HashMap<String, String>();
         produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");

@@ -159,12 +159,11 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy.setToken(true);
                         copy.setCopiedToken(true);
                     } else { // isToken()
-                        copy = CardFactory.copyStats(c);
+                        copy = CardFactory.copyStats(c, controller);
 
                         copy.setName(c.getName());
                         copy.setImageKey(c.getImageKey());
 
-                        copy.setOwner(controller);
                         copy.setController(controller, 0);
 
                         copy.setManaCost(c.getManaCost());

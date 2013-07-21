@@ -78,15 +78,17 @@ public class CardFactory {
      *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public final static Card copyCard(final Card in) {
+    public final static Card copyCard(final Card in, boolean assignNewId) {
         final CardCharacteristicName curState = in.getCurState();
         boolean alternate = false;
         if (in.isInAlternateState()) {
             alternate = true;
             in.setState(CardCharacteristicName.Original);
         }
-        final Card out = getCard(CardDb.getCard(in), in.getOwner());
-        out.setUniqueNumber(in.getUniqueNumber());
+        final Card out = assignNewId
+                ? getCard(CardDb.getCard(in), in.getOwner())
+                : getCard(CardDb.getCard(in), in.getOwner(), in.getUniqueNumber());
+
 
         CardFactory.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
@@ -141,7 +143,7 @@ public class CardFactory {
     public final static SpellAbility copySpellAbilityAndSrcCard(final Card source, final Card original, final SpellAbility sa, final boolean bCopyDetails) {
         //Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
-        final Card c = copyCard(original);
+        final Card c = copyCard(original, true);
 
         // change the color of the copy (eg: Fork)
         final SpellAbility sourceSA = source.getFirstSpellAbility();
@@ -161,7 +163,6 @@ public class CardFactory {
         c.clearControllers();
         c.setOwner(controller);
         c.setCopiedSpell(true);
-        c.refreshUniqueNumber();
 
         final SpellAbility copySA;
         if(sa instanceof AbilityActivated)
@@ -218,11 +219,14 @@ public class CardFactory {
      * @return a {@link forge.Card} instance, owned by owner; or the special
      *         blankCard
      */
+    
     public final static Card getCard(final IPaperCard cp, final Player owner) {
-
+        return getCard(cp, owner, owner == null ? 0 : owner.getGame().nextCardId());
+    }
+    public final static Card getCard(final IPaperCard cp, final Player owner, final int cardId) {
         //System.out.println(cardName);
         CardRules cardRules = cp.getRules();
-        final Card c = readCard(cardRules);
+        final Card c = readCard(cardRules, cardId);
         c.setRules(cardRules);
         c.setOwner(owner);
         buildAbilities(c);
@@ -346,9 +350,9 @@ public class CardFactory {
         card.setSVar("DamagePWY", "Count$YourLifeTotal");
     }
 
-    private static Card readCard(final CardRules rules) {
+    private static Card readCard(final CardRules rules, int cardId) {
 
-        final Card card = new Card();
+        final Card card = new Card(cardId);
 
         // 1. The states we may have:
         CardSplitType st = rules.getSplitType();
@@ -437,11 +441,14 @@ public class CardFactory {
      * 
      * @param sim
      *            a {@link java.lang.Object} object.
+     * @param newOwner 
      * @return a {@link forge.Card} object.
      */
-    public static Card copyStats(final Card sim) {
-        final Card c = new Card();
+    public static Card copyStats(final Card sim, Player newOwner) {
+        int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
+        final Card c = new Card(id);
     
+        c.setOwner(newOwner);
         c.setCurSetCode(sim.getCurSetCode());
     
         final CardCharacteristicName origState = sim.getCurState();
@@ -537,7 +544,7 @@ public class CardFactory {
             final String manaCost, final String[] types, final int baseAttack, final int baseDefense,
             final String[] intrinsicKeywords) {
         final List<Card> list = new ArrayList<Card>();
-        final Card c = new Card();
+        final Card c = new Card(controller.getGame().nextCardId());
         c.setName(name);
         c.setImageKey(ImageCache.TOKEN_PREFIX + imageName);
     
@@ -555,7 +562,7 @@ public class CardFactory {
     
         final int multiplier = controller.getTokenDoublersMagnitude();
         for (int i = 0; i < multiplier; i++) {
-            Card temp = copyStats(c);
+            Card temp = copyStats(c, controller);
     
             for (final String kw : intrinsicKeywords) {
                 temp.addIntrinsicKeyword(kw);

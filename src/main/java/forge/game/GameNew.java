@@ -60,7 +60,6 @@ public class GameNew {
                 bf.add(c);
                 c.setSickness(true);
                 c.setStartsGameInPlay(true);
-                c.refreshUniqueNumber();
             }
         }
     }
@@ -235,8 +234,6 @@ public class GameNew {
      * @param forceAnte Forces ante on or off no matter what your preferences
      */
     public static void newGame(final Game game, final boolean canRandomFoil, boolean useAnte) {
-
-        Card.resetUniqueNumber();
         // need this code here, otherwise observables fail
         Trigger.resetIDs();
         TriggerHandler trigHandler = game.getTriggerHandler();

@@ -580,4 +580,11 @@ public class Game {
     public void setAge(GameAge value) {
         age = value;
     }
+
+
+    private int cardIdCounter;
+    public int nextCardId() {
+        // TODO Auto-generated method stub
+        return ++cardIdCounter;
+    }
 }

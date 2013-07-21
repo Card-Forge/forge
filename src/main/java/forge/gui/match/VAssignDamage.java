@@ -194,13 +194,13 @@ public class VAssignDamage {
             if (defender instanceof Card) 
                 fakeCard = (Card)defender;
             else if (defender instanceof Player) { 
-                fakeCard = new Card();
+                fakeCard = new Card(-1);
                 fakeCard.setName(this.defender.getName());
                 fakeCard.setOwner((Player)defender);
                 Player p = (Player)defender;
                 fakeCard.setImageKey(p.getLobbyPlayer().getIconImageKey());
             } else {
-                fakeCard = new Card();
+                fakeCard = new Card(-2);
                 fakeCard.setName(this.defender.getName());
             }
             addPanelForDefender(pnlDefenders, fakeCard);

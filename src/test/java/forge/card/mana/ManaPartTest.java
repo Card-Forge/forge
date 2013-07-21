@@ -424,7 +424,7 @@ public class ManaPartTest {
         final ManaCostBeingPaid p29 = new ManaCostBeingPaid("2/W 2/B 2/U 2/R 2/G");
         this.check(46, !p29.isPaid());
 
-        final Card c = new Card();
+        final Card c = new Card(0);
 
         p29.payMana(new Mana(MagicColor.BLACK, c, null));
         p29.payMana(new Mana(MagicColor.RED, c, null));

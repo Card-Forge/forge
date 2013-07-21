@@ -98,8 +98,7 @@ import forge.util.TextUtil;
  * @version $Id$
  */
 public class Card extends GameEntity implements Comparable<Card> {
-    private static int nextUniqueNumber = 1;
-    private int uniqueNumber;
+    private final int uniqueNumber;
 
     private final Map<CardCharacteristicName, CardCharacteristics> characteristicsMap
         = new EnumMap<CardCharacteristicName, CardCharacteristics>(CardCharacteristicName.class);
@@ -253,14 +252,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     /**
      * Instantiates a new card.
      */
-    public Card() {
-        refreshUniqueNumber();
+    public Card(int id) {
+        this.uniqueNumber = id;
         this.characteristicsMap.put(CardCharacteristicName.Original, new CardCharacteristics());
         this.characteristicsMap.put(CardCharacteristicName.FaceDown, CardUtil.getFaceDownCharacteristic());
-    }
-
-    public void refreshUniqueNumber() {
-        this.setUniqueNumber(Card.nextUniqueNumber++);
     }
 
     /**
@@ -500,14 +495,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public static List<String> getStorableSVars() {
         return Card.storableSVars;
-    }
-
-    /**
-     * 
-     * Resets the unique number for this Card to 1.
-     */
-    public static void resetUniqueNumber() {
-        Card.nextUniqueNumber = 1;
     }
 
     /**
@@ -4704,19 +4691,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         return false;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>uniqueNumber</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void setUniqueNumber(final int n) {
-        //System.out.println("Card _ " + n);
-        this.uniqueNumber = n;
     }
 
     /**
