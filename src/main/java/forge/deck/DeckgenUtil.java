@@ -217,6 +217,9 @@ public class DeckgenUtil {
      * @param lst0 {@link javax.swing.JList}
      */
     public static void showDecklist(final JList<String> lst0) {
+        
+        if (lst0.getSelectedValue() == null) { return; }
+        
         final String deckName = lst0.getSelectedValue().toString();
         final Deck deck;
 

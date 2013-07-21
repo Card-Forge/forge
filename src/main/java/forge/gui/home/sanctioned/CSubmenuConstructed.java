@@ -100,6 +100,11 @@ public enum CSubmenuConstructed implements ICDoc {
         RegisteredPlayer pscLeft = view.getDcLeft().getDeck();
         RegisteredPlayer pscRight = view.getDcRight().getDeck();
         
+        if (pscLeft == null || pscRight == null) {
+            JOptionPane.showMessageDialog(null, "Please specify an AI deck and Player deck first.");
+            return; 
+        }
+        
         String humanDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscRight.getOriginalDeck());
         if (null != humanDeckErrorMessage) {
             JOptionPane.showMessageDialog(null, "Right-side deck " + humanDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
