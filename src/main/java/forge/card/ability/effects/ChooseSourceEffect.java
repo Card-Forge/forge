@@ -48,11 +48,19 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         List<Card> permanentSources = new ArrayList<Card>();
         List<Card> stackSources = new ArrayList<Card>();
         List<Card> referencedSources = new ArrayList<Card>();
+        List<Card> commandZoneSources = new ArrayList<Card>();
 
         List<Card> sourcesToChooseFrom = new ArrayList<Card>();
 
         // Get the list of permanent cards
         permanentSources = game.getCardsIn(ZoneType.Battlefield);
+        // A source can be a face-up card in the command zone
+        commandZoneSources = new ArrayList<Card>();
+        for (Card c : game.getCardsIn(ZoneType.Command)) {
+            if (!c.isFaceDown()) {
+                commandZoneSources.add(c);
+            }
+        }
 
         // Get the list of cards that produce effects on the stack
 
@@ -91,31 +99,39 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
 
             stackSources = CardLists.getValidCards(stackSources, sa.getParam("Choices"), host.getController(), host);
             referencedSources = CardLists.getValidCards(referencedSources, sa.getParam("Choices"), host.getController(), host);
+            commandZoneSources = CardLists.getValidCards(commandZoneSources, sa.getParam("Choices"), host.getController(), host);
         }
         if (sa.hasParam("TargetControls")) {
             permanentSources = CardLists.filterControlledBy(permanentSources, tgtPlayers.get(0));
             stackSources = CardLists.filterControlledBy(stackSources, tgtPlayers.get(0));
             referencedSources = CardLists.filterControlledBy(referencedSources, tgtPlayers.get(0));
+            commandZoneSources = CardLists.filterControlledBy(commandZoneSources, tgtPlayers.get(0));
         }
 
-        Card divPermanentCards = new Card();
-        divPermanentCards.setName("--PERMANENT SOURCES:--");
-        Card divStackCards = new Card();
-        divStackCards.setName("--SOURCES ON STACK:--");
-        Card divReferencedCards = new Card();
-        divReferencedCards.setName("--SOURCES REFERENCED ON STACK:--");
+        Card divPermanentSources = new Card();
+        divPermanentSources.setName("--PERMANENT SOURCES:--");
+        Card divStackSources = new Card();
+        divStackSources.setName("--SOURCES ON STACK:--");
+        Card divReferencedSources = new Card();
+        divReferencedSources.setName("--SOURCES REFERENCED ON STACK:--");
+        Card divCommandZoneSources = new Card();
+        divCommandZoneSources.setName("--SOURCES IN COMMAND ZONE:--");
 
         if (permanentSources.size() > 0) {
-            sourcesToChooseFrom.add(divPermanentCards);
+            sourcesToChooseFrom.add(divPermanentSources);
             sourcesToChooseFrom.addAll(permanentSources);
         }
         if (stackSources.size() > 0) {
-            sourcesToChooseFrom.add(divStackCards);
+            sourcesToChooseFrom.add(divStackSources);
             sourcesToChooseFrom.addAll(stackSources);
         }
         if (referencedSources.size() > 0) {
-            sourcesToChooseFrom.add(divReferencedCards);
+            sourcesToChooseFrom.add(divReferencedSources);
             sourcesToChooseFrom.addAll(referencedSources);
+        }
+        if (commandZoneSources.size() > 0) {
+            sourcesToChooseFrom.add(divCommandZoneSources);
+            sourcesToChooseFrom.addAll(commandZoneSources);
         }
 
         if (sourcesToChooseFrom.size() == 0) {
@@ -134,7 +150,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                         Card o = null;
                         do {
                             o = GuiChoose.one(choiceTitle, sourcesToChooseFrom);
-                        } while (o.equals(divPermanentCards) || o.equals(divStackCards) || o.equals(divReferencedCards));
+                        } while (o.equals(divPermanentSources) || o.equals(divStackSources) || o.equals(divReferencedSources) || o.equals(divCommandZoneSources));
                         chosen.add(o);
                         sourcesToChooseFrom.remove(o);
 
