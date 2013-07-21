@@ -1023,8 +1023,9 @@ public class CombatUtil {
     private static void executeRampageAbility(final Game game, final Card c, final int magnitude, final int numBlockers) {
         // numBlockers starts with 1 since it is for every creature beyond the first
         for (int i = 1; i < numBlockers; i++) {
-            String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ +%d | NumDef$ +%d | ", c.getUniqueNumber(), magnitude, magnitude);
-            String desc = String.format("StackDescription$ Rampage %d (Whenever CARDNAME becomes blocked, it gets +%d/+%d until end of turn for each creature blocking it beyond the first.)", magnitude, magnitude );
+            String effect = "AB$ Pump | Cost$ 0 | " + c.getUniqueNumber() + " | NumAtt$ " + magnitude + " | NumDef$ " + magnitude + " | ";
+            String desc = "StackDescription$ Rampage " + magnitude + " (Whenever CARDNAME becomes blocked, it gets +" + magnitude + "/+" 
+                    + magnitude + " until end of turn for each creature blocking it beyond the first.)";
 
             SpellAbility ability = AbilityFactory.getAbility(effect + desc, c);
             ability.setActivatingPlayer(c.getController());
