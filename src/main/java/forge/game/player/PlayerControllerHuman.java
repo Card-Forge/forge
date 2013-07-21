@@ -678,7 +678,7 @@ public class PlayerControllerHuman extends PlayerController {
 
 
     @Override
-    public boolean chooseFilpResult(SpellAbility sa, Player flipper, boolean[] results, boolean call) {
+    public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call) {
         String[] labelsSrc = call ? new String[]{"heads", "tails"} : new String[]{"win the flip", "lose the flip"};
         String[] strResults = new String[results.length];
         for(int i = 0; i < results.length; i++) {

@@ -7326,7 +7326,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (apiIsEffect) {
                 List<Card> newCardsInCommand = this.getGame().getCardsIn(ZoneType.Command);
                 newCardsInCommand.removeAll(cardsInCommand);
-                if (newCardsInCommand != null && !newCardsInCommand.isEmpty()) {
+                if (!newCardsInCommand.isEmpty()) {
                     newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + Integer.toString(dmgToBePrevented));
                 }
             }

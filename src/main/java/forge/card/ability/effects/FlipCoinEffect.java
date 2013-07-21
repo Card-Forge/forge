@@ -137,7 +137,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             flipper.getGame().fireEvent(new GameEventFlipCoin());
             results[i] = resultIsHeads;
         }
-        boolean result = multiplier == 1 ? results[0] : flipper.getController().chooseFilpResult(sa, flipper, results, false);
+        boolean result = multiplier == 1 ? results[0] : flipper.getController().chooseFlipResult(sa, flipper, results, false);
         
         flipper.getGame().getAction().nofityOfValue(sa, flipper, result ? "heads" : "tails", null);
         return result;
@@ -164,7 +164,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             final boolean flip = MyRandom.getRandom().nextBoolean();
             results[i] = flip == choice;
         }
-        boolean result = multiplier == 1 ? results[0] : caller.getController().chooseFilpResult(sa, caller, results, true);
+        boolean result = multiplier == 1 ? results[0] : caller.getController().chooseFlipResult(sa, caller, results, true);
         
         caller.getGame().getAction().nofityOfValue(sa, caller, result ? "win" : "lose", null);
         return result;

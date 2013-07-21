@@ -186,7 +186,7 @@ public class PumpAi extends PumpAiBase {
         if (!mandatory
                 && !sa.isTrigger()
                 && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                && !(sa.isCurse() && (defense < 0))
+                && !(sa.isCurse() && defense < 0)
                 && !this.containsNonCombatKeyword(keywords)
                 && !sa.hasParam("UntilYourNextTurn")) {
             return false;
@@ -231,7 +231,7 @@ public class PumpAi extends PumpAiBase {
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare
             // attack/block
-            if ((sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
+            if (sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && game.getPhaseHandler().isPlayerTurn(ai)) {
                     list.remove(sa.getSourceCard());

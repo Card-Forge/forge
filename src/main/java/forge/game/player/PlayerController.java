@@ -159,7 +159,7 @@ public abstract class PlayerController {
     public abstract int chooseNumber(SpellAbility sa, String title, int min, int max);
 
     public abstract boolean chooseBinary(SpellAbility sa, String question, boolean isCoin);
-    public abstract boolean chooseFilpResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
+    public abstract boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
     public abstract Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap);
 
     public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num);

@@ -63,12 +63,12 @@ public class AnimateAi extends SpellAbilityAi {
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
         if (ph.getPlayerTurn().isOpponentOf(aiPlayer) &&
-                (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, opponent) || game.getCombat().getAttackersOf(aiPlayer).isEmpty())) {
+                (!ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, opponent) || game.getCombat().getAttackersOf(aiPlayer).isEmpty())) {
             return false;
         }
 
         // don't activate during main2 unless this effect is permanent
-        if (game.getPhaseHandler().is(PhaseType.MAIN2) && !sa.hasParam("Permanent") && !sa.hasParam("UntilYourNextTurn")) {
+        if (ph.is(PhaseType.MAIN2) && !sa.hasParam("Permanent") && !sa.hasParam("UntilYourNextTurn")) {
             return false;
         }
 
@@ -78,7 +78,7 @@ public class AnimateAi extends SpellAbilityAi {
             boolean bFlag = false;
             if (sa.hasParam("AILogic")) {
                 if ("EOT".equals(sa.getParam("AILogic"))) {
-                    if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                    if (ph.getPhase().isBefore(PhaseType.MAIN2)) {
                         return false;
                     } else {
                         bFlag = true;
