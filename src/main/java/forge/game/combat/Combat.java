@@ -245,8 +245,10 @@ public class Combat {
     public final List<Card> getAllBlockers() {
         List<Card> result = new ArrayList<Card>();
         for(Collection<Card> blockers : blockedBands.values()) {
-            if(!result.contains(blockers))
-                result.addAll(blockers);
+            for (Card blocker : blockers) {
+                if(!result.contains(blocker))
+                    result.add(blocker);
+            }
         }
         return result;
     }
