@@ -2145,7 +2145,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 else
                     sbLong.append(getTextForKwCantBeBlockedByType(keyword));
             } else if (keyword.equals("Unblockable")) {
-                sbLong.append(this.getName()).append(" can't be blocked.");
+                sbLong.append(this.getName()).append(" can't be blocked.\r\n");
             }
             
             else {

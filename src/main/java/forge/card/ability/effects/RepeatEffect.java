@@ -35,6 +35,7 @@ public class RepeatEffect extends SpellAbilityEffect {
         Integer maxRepeat = null;
         if (sa.hasParam("MaxRepeat")) {
             maxRepeat = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("MaxRepeat"), sa);
+            if (maxRepeat.intValue() == 0) return;
         }
 
         //execute repeat ability at least once

@@ -1,0 +1,18 @@
+Name:Rogue Skycaptain
+ManaCost:2 R
+Types:Creature Human Rogue Mercenary
+PT:3/4
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a wage counter on CARDNAME. You may pay 2 for each wage counter on it. If you don't, remove all wage counters from CARDNAME and an opponent gains control of it.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ WAGE | CounterNum$ 1 | SubAbility$ DBStoreSVar
+SVar:DBStoreSVar:DB$ StoreSVar | SVar$ CheckPaid | Type$ Number | Expression$ 1 | UnlessCost$ X | UnlessPayer$ You | References$ X,CheckPaid | StackDescription$ remove all wage counters from this card and an opponent gains control of it. | SubAbility$ DBRemoveCounter
+SVar:DBRemoveCounter:DB$ RemoveCounter | CounterNum$ All | CounterType$ WAGE | Defined$ Self | SubAbility$ DBChooseOpp | ConditionCheckSVar$ CheckPaid | ConditionSVarCompare$ EQ1 | References$ CheckPaid
+SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ DBDonate | ConditionCheckSVar$ CheckPaid | ConditionSVarCompare$ EQ1 | References$ CheckPaid
+SVar:DBDonate:DB$ GainControl | Defined$ Self | NewController$ Player.Chosen | ConditionCheckSVar$ CheckPaid | ConditionSVarCompare$ EQ1 | References$ CheckPaid | SubAbility$ DBReset
+SVar:DBReset:DB$ StoreSVar | SVar$ CheckPaid | Type$ Number | Expression$ 0
+SVar:CheckPaid:Number$0
+SVar:X:Count$CardCounters.WAGE/Twice
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rogue_skycaptain.jpg
+Oracle:Flying\nAt the beginning of your upkeep, put a wage counter on Rogue Skycaptain. You may pay {2} for each wage counter on it. If you don't, remove all wage counters from Rogue Skycaptain and an opponent gains control of it.
