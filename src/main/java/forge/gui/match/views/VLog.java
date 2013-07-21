@@ -27,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.GameLog;
 import forge.GameLogEntry;
+import forge.GameLogEntryType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -129,6 +130,9 @@ public enum VLog implements IVDoc<CLog> {
             tar.setBorder(new EmptyBorder(2, 2, 2, 2));
             tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
+            boolean isNewTurn = (data.get(i).type == GameLogEntryType.TURN);
+            tar.setFont(isNewTurn ? FSkin.getBoldFont() : FSkin.getFont());
+            
             tar.setFocusable(false);
             tar.setEditable(false);
             tar.setLineWrap(true);

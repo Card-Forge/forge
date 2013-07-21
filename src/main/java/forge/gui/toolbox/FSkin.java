@@ -431,7 +431,8 @@ public enum FSkin {
     private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils,
         bimOldFoils, bimDefaultAvatars, bimPreferredAvatars;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
-    private static int[] tempCoords;
+    private static int[] tempCoords;    
+    private static int defaultFontSize = 12;
 
     /**
      * Loads a "light" version of FSkin, just enough for the splash screen:
@@ -569,6 +570,7 @@ public enum FSkin {
 
         // Pre-derive most fonts (plain, bold, and italic).
         // Exceptions handled inside method.
+        FSkin.setDefaultFontSize();
         FSkin.font = GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT);
         plainFonts = new HashMap<Integer, Font>();
         boldFonts = new HashMap<Integer, Font>();
@@ -625,10 +627,17 @@ public enum FSkin {
         FSkin.bimDefaultAvatars = null;
         FSkin.bimPreferredAvatars = null;
     }
+    
+    private static void setDefaultFontSize() {
+        Font f = UIManager.getDefaults().getFont("Label.font");
+        if (f != null) {
+            FSkin.defaultFontSize = f.getSize();    
+        }
+    }
 
     /** @return {@link java.awt.font} font */
     public static Font getFont() {
-        return FSkin.font;
+        return FSkin.getFont(FSkin.defaultFontSize);
     }
 
     /**
@@ -641,6 +650,10 @@ public enum FSkin {
         }
         return plainFonts.get(size);
     }
+    
+    public static Font getBoldFont() {
+        return FSkin.getBoldFont(FSkin.defaultFontSize);
+    }        
 
     /**
      * @param size - integer, pixel size
@@ -652,7 +665,11 @@ public enum FSkin {
         }
         return boldFonts.get(size);
     }
-
+    
+    public static Font getItalicFont() {
+        return FSkin.getItalicFont(FSkin.defaultFontSize);
+    }            
+    
     /**
      * @param size - integer, pixel size
      * @return {@link java.awt.font} font1
