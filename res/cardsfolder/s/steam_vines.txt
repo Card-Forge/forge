@@ -1,0 +1,13 @@
+Name:Steam Vines
+ManaCost:1 R R
+Types:Enchantment Aura
+K:Enchant land
+A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Land | AILogic$ Curse
+T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted land becomes tapped, destroy it and CARDNAME deals 1 damage to that land's controller. That player attaches CARDNAME to a land of his or her choice.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredCard | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 1 | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | Defined$ TriggeredCardController | Choices$ Land | AILogic$ OppPreferred | Mandatory$ True | Amount$ 1 | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ Self | Defined$ ChosenCard
+SVar:NonStackingAttachEffect:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steam_vines.jpg
+Oracle:Enchant land\nWhen enchanted land becomes tapped, destroy it and Steam Vines deals 1 damage to that land's controller. That player attaches Steam Vines to a land of his or her choice.
