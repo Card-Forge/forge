@@ -8235,6 +8235,7 @@ res/cardsfolder/p/planar_collapse.txt svneol=native#text/plain
 res/cardsfolder/p/planar_despair.txt svneol=native#text/plain
 res/cardsfolder/p/planar_gate.txt svneol=native#text/plain
 res/cardsfolder/p/planar_guide.txt svneol=native#text/plain
+res/cardsfolder/p/planar_overlay.txt -text
 res/cardsfolder/p/planar_portal.txt svneol=native#text/plain
 res/cardsfolder/p/planar_void.txt svneol=native#text/plain
 res/cardsfolder/p/planeswalkers_favor.txt -text

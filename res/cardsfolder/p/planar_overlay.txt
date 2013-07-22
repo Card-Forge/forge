@@ -1,0 +1,15 @@
+Name:Planar Overlay
+ManaCost:2 U
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ 2 U | RepeatPlayers$ Player | RepeatSubAbility$ ChooseMountain | StackDescription$ SpellDescription | SubAbility$ DBChangeZone | SpellDescription$ Each player chooses a land he or she controls of each basic land type. Return those lands to their owners' hands.
+SVar:ChooseMountain:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Mountain.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | SubAbility$ ChooseSwamp | AILogic$ WorstCard
+SVar:ChooseSwamp:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Swamp.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | SubAbility$ ChooseIsland | AILogic$ WorstCard
+SVar:ChooseIsland:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Island.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | SubAbility$ ChoosePlains | AILogic$ WorstCard
+SVar:ChoosePlains:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Plains.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | SubAbility$ ChooseForest | AILogic$ WorstCard
+SVar:ChooseForest:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Forest.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | AILogic$ WorstCard
+SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Battlefield | Destination$ Hand | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_overlay.jpg
+Oracle:Each player chooses a land he or she controls of each basic land type. Return those lands to their owners' hands.
