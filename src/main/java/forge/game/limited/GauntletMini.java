@@ -24,12 +24,13 @@ import javax.swing.SwingUtilities;
 
 import forge.FThreads;
 import forge.Singletons;
-import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.RegisteredPlayer;
 import forge.gui.SOverlayUtils;
+import forge.net.FServer;
+import forge.net.Lobby;
 
 /**
  * <p>
@@ -162,7 +163,7 @@ public class GauntletMini {
         });
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        Lobby lobby = Singletons.getControl().getLobby();
+        Lobby lobby = FServer.instance.getLobby();
         starter.add(RegisteredPlayer.fromDeck(humanDeck).setPlayer(lobby.getGuiPlayer()));
         starter.add(aiOpponents.get(currentRound - 1).setPlayer(lobby.getAiPlayer()));
         final Match mc = new Match(gauntletType, starter);

@@ -62,7 +62,7 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.gui.toolbox.FSkin;
-import forge.net.NetServer;
+import forge.net.FServer;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -316,27 +316,16 @@ public enum FControl {
         if (children.length != 0) { children[0].setSize(display.getSize()); }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    private Lobby lobby = null;
-    public Lobby getLobby() {
-        if (lobby == null) {
-            lobby = new Lobby();
-        }
-        return lobby;
-    }
-    
+
     public Player getCurrentPlayer() { 
         // try current priority
         Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
-        if( null != currentPriority && currentPriority.getLobbyPlayer() == getLobby().getGuiPlayer() ) 
+        if( null != currentPriority && currentPriority.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() ) 
             return currentPriority;
         
         // otherwise find just any player, belonging to this lobbyplayer
         for(Player p : game.getPlayers())
-            if(p.getLobbyPlayer() == getLobby().getGuiPlayer() )
+            if(p.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
                 return p;
         
         return null;
@@ -354,16 +343,6 @@ public enum FControl {
         return soundSystem;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    private final NetServer server = new NetServer();
-    public NetServer getServer() {
-        // TODO Auto-generated method stub
-        return server;
-    }
-
     private Game game;
     private boolean gameHasHumanPlayer;
 
@@ -374,7 +353,7 @@ public enum FControl {
     public final void stopGame() {
         List<Player> pp = new ArrayList<Player>();
         for(Player p : game.getPlayers()) {
-            if ( p.getOriginalLobbyPlayer() == getLobby().getGuiPlayer() )
+            if ( p.getOriginalLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
                 pp.add(p);
         }
         boolean hasHuman = !pp.isEmpty();
@@ -386,7 +365,7 @@ public enum FControl {
             p.concede();
         
         Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
-        boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == getLobby().getGuiPlayer(); 
+        boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer(); 
 
         if ( hasHuman && humanHasPriority ) 
             game.getAction().checkGameOverCondition();
@@ -428,7 +407,7 @@ public enum FControl {
         this.game = game0;
         game.subscribeToEvents(Singletons.getControl().getSoundSystem());
         
-        LobbyPlayer humanLobbyPlayer = getLobby().getGuiPlayer();
+        LobbyPlayer humanLobbyPlayer = FServer.instance.getLobby().getGuiPlayer();
         // The UI controls should use these game data as models
         CMatchUI.SINGLETON_INSTANCE.initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
         CDock.SINGLETON_INSTANCE.setModel(game, humanLobbyPlayer);
@@ -449,7 +428,7 @@ public enum FControl {
         // Add playback controls to match if needed
         gameHasHumanPlayer = false;
         for(Player p :  game.getPlayers()) {
-            if ( p.getController().getLobbyPlayer() == getLobby().getGuiPlayer() )
+            if ( p.getController().getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
                 gameHasHumanPlayer = true;
         }
 

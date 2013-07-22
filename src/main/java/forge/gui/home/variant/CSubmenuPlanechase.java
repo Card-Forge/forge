@@ -14,7 +14,6 @@ import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl;
-import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
@@ -31,6 +30,8 @@ import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.special.FDeckChooser;
 import forge.item.PaperCard;
+import forge.net.FServer;
+import forge.net.Lobby;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
@@ -149,7 +150,7 @@ public enum CSubmenuPlanechase implements ICDoc {
 
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame() {
-        Lobby lobby = Singletons.getControl().getLobby();
+        Lobby lobby = FServer.instance.getLobby();
         List<RegisteredPlayer> helper = new ArrayList<RegisteredPlayer>();
         List<Deck> playerDecks = new ArrayList<Deck>();
         for (int i = 0; i < view.getNumPlayers(); i++) {

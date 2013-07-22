@@ -13,7 +13,6 @@ import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl;
-import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
@@ -26,6 +25,8 @@ import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorDraftingProcess;
 import forge.gui.framework.ICDoc;
+import forge.net.FServer;
+import forge.net.Lobby;
 
 /** 
  * Controls the draft submenu in the home UI.
@@ -132,7 +133,7 @@ public enum CSubmenuDraft implements ICDoc {
         }
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        Lobby lobby = Singletons.getControl().getLobby();
+        Lobby lobby = FServer.instance.getLobby();
         starter.add(RegisteredPlayer.fromDeck(humanDeck).setPlayer(lobby.getGuiPlayer()));
         starter.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
 

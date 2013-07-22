@@ -29,6 +29,7 @@ import forge.game.Game;
 import forge.game.limited.GauntletMini;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FSkin;
+import forge.net.FServer;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -58,7 +59,7 @@ public class LimitedWinLose extends ControlWinLose {
         super(view0, lastGame);
         this.view = view0;
         gauntlet = Singletons.getModel().getGauntletMini();
-        this.wonMatch = lastGame.getMatch().isWonBy(Singletons.getControl().getLobby().getGuiPlayer());
+        this.wonMatch = lastGame.getMatch().isWonBy(FServer.instance.getLobby().getGuiPlayer());
     }
 
 
@@ -79,7 +80,7 @@ public class LimitedWinLose extends ControlWinLose {
         resetView();
         nextRound = false;
 
-        if (lastGame.getOutcome().isWinner(Singletons.getControl().getLobby().getGuiPlayer())) {
+        if (lastGame.getOutcome().isWinner(FServer.instance.getLobby().getGuiPlayer())) {
             gauntlet.addWin();
         } else {
             gauntlet.addLoss();

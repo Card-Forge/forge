@@ -29,6 +29,7 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
 import forge.game.zone.ZoneType;
+import forge.net.FServer;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
 
@@ -42,7 +43,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     @Override
     public GameLogEntry visit(GameEventGameOutcome ev) {
         // add result entries to the game log
-        final LobbyPlayer human = Singletons.getControl().getLobby().getGuiPlayer();
+        final LobbyPlayer human = FServer.instance.getLobby().getGuiPlayer();
         
         // This adds some extra entries to log
         final List<String> outcomes = new ArrayList<String>();

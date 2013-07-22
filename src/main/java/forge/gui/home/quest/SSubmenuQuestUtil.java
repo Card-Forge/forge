@@ -14,7 +14,6 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.control.FControl;
-import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.Match;
@@ -25,6 +24,8 @@ import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorQuestCardShop;
 import forge.gui.toolbox.FSkin;
+import forge.net.FServer;
+import forge.net.Lobby;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -433,10 +434,9 @@ public class SSubmenuQuestUtil {
         }
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        Lobby lobby = Singletons.getControl().getLobby();
+        Lobby lobby = FServer.instance.getLobby();
         starter.add(humanStart.setPlayer(lobby.getQuestPlayer()));
-
-        LobbyPlayer aiPlayer = Singletons.getControl().getLobby().getAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
+        LobbyPlayer aiPlayer = FServer.instance.getLobby().getAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
         aiPlayer.setIconImageKey(event.getIconImageKey());
         starter.add(aiStart.setPlayer(aiPlayer));
 

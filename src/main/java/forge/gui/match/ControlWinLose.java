@@ -22,6 +22,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.item.PaperCard;
+import forge.net.FServer;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -144,10 +145,10 @@ public class ControlWinLose {
 
         for (int i = 0; i < cntPlayers; i++ ) {
             Player fromGame = lastGame.getRegisteredPlayers().get(i);
-            if( !fromGame.hasWon()) continue; // not a loser
+            if( !fromGame.hasWon()) continue;
             
             // offer to winner, if he is local human
-            if (fromGame.getController().getLobbyPlayer() == Singletons.getControl().getLobby().getGuiPlayer()) {
+            if (fromGame.getController().getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer()) {
                 List<PaperCard> chosen = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
                 if (null != chosen) {
                     RegisteredPlayer psc = match.getPlayers().get(i);

@@ -28,7 +28,6 @@ import com.google.common.collect.Lists;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
-import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameType;
@@ -40,6 +39,8 @@ import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.net.FServer;
+import forge.net.Lobby;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -81,13 +82,13 @@ public class GauntletWinLose extends ControlWinLose {
         lstEventRecords.set(gd.getCompleted(), "Ongoing");
 
         final Match match = lastGame.getMatch();
-        
+
         // Match won't be saved until it is over. This opens up a cheat
         // or failsafe mechanism (depending on your perspective) in which
         // the player can restart Forge to replay a match.
         // Pretty sure this can't be fixed until in-game states can be
         // saved. Doublestrike 07-10-12
-        LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
+        LobbyPlayer questPlayer = FServer.instance.getLobby().getQuestPlayer();
 
         // In all cases, update stats.
         lstEventRecords.set(gd.getCompleted(), match.getGamesWonBy(questPlayer) + " - "
@@ -201,7 +202,7 @@ public class GauntletWinLose extends ControlWinLose {
             GauntletData gd = Singletons.getModel().getGauntletData();
             Deck aiDeck = gd.getDecks().get(gd.getCompleted());
             List<RegisteredPlayer> players = Lists.newArrayList();
-            Lobby lobby = Singletons.getControl().getLobby();
+            Lobby lobby = FServer.instance.getLobby();
             players.add(RegisteredPlayer.fromDeck(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
             players.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
            

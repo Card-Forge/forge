@@ -33,6 +33,7 @@ import forge.game.event.GameEvent;
 import forge.game.event.GameEventMulligan;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
+import forge.net.FServer;
 import forge.properties.NewConstants;
 import forge.quest.bazaar.QuestBazaarManager;
 import forge.quest.bazaar.QuestItemType;
@@ -430,7 +431,7 @@ public class QuestController {
         if ( ev instanceof GameEventMulligan ) {
             GameEventMulligan mev = (GameEventMulligan)ev;
             // First mulligan is free
-            if (mev.player.getLobbyPlayer() == Singletons.getControl().getLobby().getQuestPlayer() 
+            if (mev.player.getLobbyPlayer() == FServer.instance.getLobby().getQuestPlayer() 
                     && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() == 0) {
                 mev.player.drawCard();
             }

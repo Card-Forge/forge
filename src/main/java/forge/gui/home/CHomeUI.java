@@ -9,6 +9,7 @@ import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
+import forge.net.FServer;
 import forge.net.NetServer;
 import forge.properties.ForgePreferences;
 import forge.properties.NewConstants;
@@ -81,7 +82,7 @@ public enum CHomeUI implements ICDoc {
         VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setCommand(new Runnable() {
             @Override
             public void run() {
-                NetServer srv = Singletons.getControl().getServer(); 
+                NetServer srv = FServer.instance.getServer(); 
                 srv.listen(NewConstants.SERVER_PORT_NUMBER);
 
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(true);
@@ -94,7 +95,7 @@ public enum CHomeUI implements ICDoc {
         VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setCommand(new Runnable() {
             @Override
             public void run() {
-                Singletons.getControl().getServer().stop();
+                FServer.instance.getServer().stop();
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(false);
                 VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setEnabled(true);
 

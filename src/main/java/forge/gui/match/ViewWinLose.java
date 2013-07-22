@@ -29,6 +29,7 @@ import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
+import forge.net.FServer;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -192,7 +193,7 @@ public class ViewWinLose {
     }
 
     private String composeTitle(GameOutcome outcome) {
-        LobbyPlayer guiPlayer = Singletons.getControl().getLobby().getGuiPlayer();
+        LobbyPlayer guiPlayer = FServer.instance.getLobby().getGuiPlayer();
         int nHumansInGame = 0;
         for(Pair<LobbyPlayer, PlayerStatistics> pps : outcome) {
             if( pps.getKey() == guiPlayer )

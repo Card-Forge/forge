@@ -17,14 +17,14 @@ import javax.swing.ScrollPaneConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.control.ChatArea;
-import forge.control.Lobby;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.SmartScroller;
+import forge.net.FServer;
+import forge.net.Lobby;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -57,7 +57,7 @@ public enum FNetOverlay {
             if ( StringUtils.isBlank(message) )
                 return;
 
-            Lobby lobby = Singletons.getControl().getLobby(); 
+            Lobby lobby = FServer.instance.getLobby(); 
             lobby.speak(ChatArea.Room, lobby.getGuiPlayer(), message);
         }
     };

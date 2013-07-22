@@ -14579,7 +14579,6 @@ src/main/java/forge/control/FControlGameEventHandler.java -text
 src/main/java/forge/control/FControlGamePlayback.java -text
 src/main/java/forge/control/InputQueue.java svneol=native#text/plain
 src/main/java/forge/control/KeyboardShortcuts.java -text
-src/main/java/forge/control/Lobby.java -text
 src/main/java/forge/control/RestartUtil.java -text
 src/main/java/forge/control/package-info.java -text
 src/main/java/forge/deck/CardCollections.java -text
@@ -14975,8 +14974,10 @@ src/main/java/forge/model/BuildInfo.java -text
 src/main/java/forge/model/FModel.java svneol=native#text/plain
 src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
 src/main/java/forge/model/package-info.java svneol=native#text/plain
+src/main/java/forge/net/FServer.java -text
 src/main/java/forge/net/IClientSocket.java -text
 src/main/java/forge/net/IConnectionObserver.java -text
+src/main/java/forge/net/Lobby.java -text
 src/main/java/forge/net/NetServer.java -text
 src/main/java/forge/net/client/INetClient.java -text
 src/main/java/forge/net/client/InvalidFieldInPacketException.java -text

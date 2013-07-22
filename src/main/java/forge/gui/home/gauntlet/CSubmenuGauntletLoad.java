@@ -12,7 +12,6 @@ import javax.swing.SwingUtilities;
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
-import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.Match;
@@ -22,6 +21,8 @@ import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.VHomeUI;
+import forge.net.FServer;
+import forge.net.Lobby;
 
 /** 
  * Controls the "quick gauntlet" submenu in the home UI.
@@ -110,7 +111,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
-        Lobby lobby = Singletons.getControl().getLobby();
+        Lobby lobby = FServer.instance.getLobby();
         starter.add(RegisteredPlayer.fromDeck(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
         starter.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
         

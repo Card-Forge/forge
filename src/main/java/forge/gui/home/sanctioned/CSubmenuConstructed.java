@@ -10,13 +10,14 @@ import javax.swing.SwingUtilities;
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
-import forge.control.Lobby;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
+import forge.net.FServer;
+import forge.net.Lobby;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -116,8 +117,7 @@ public enum CSubmenuConstructed implements ICDoc {
             JOptionPane.showMessageDialog(null, "Left-side deck " + aiDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        Lobby lobby = Singletons.getControl().getLobby();
+        Lobby lobby = FServer.instance.getLobby();
         LobbyPlayer rightPlayer = view.isRightPlayerAi() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
         LobbyPlayer leftPlayer = view.isLeftPlayerAi() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
         

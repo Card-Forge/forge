@@ -53,6 +53,7 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.toolbox.special.PhaseLabel;
+import forge.net.FServer;
 import forge.util.maps.MapOfLists;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
@@ -138,7 +139,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             return null;
 
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            CMatchUI.SINGLETON_INSTANCE.initHandViews(fc.getLobby().getGuiPlayer());
+            CMatchUI.SINGLETON_INSTANCE.initHandViews(FServer.instance.getLobby().getGuiPlayer());
             VMatchUI.SINGLETON_INSTANCE.populate();
             for(VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
                 h.getLayoutControl().updateHand();
@@ -282,7 +283,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventAttackersDeclared event) {
         // Skip redraw for GUI player?
-        if ( event.player.getLobbyPlayer() == fc.getLobby().getGuiPlayer() )
+        if ( event.player.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
             return null;
 
         // Update all attackers. 

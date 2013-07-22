@@ -1,9 +1,10 @@
-package forge.control;
+package forge.net;
 
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+import forge.control.ChatArea;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerAi;
 import forge.game.player.LobbyPlayerHuman;

@@ -60,6 +60,7 @@ import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.OpenablePack;
 import forge.item.TournamentPack;
+import forge.net.FServer;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.IQuestRewardCard;
 import forge.quest.QuestController;
@@ -108,7 +109,7 @@ public class QuestWinLose extends ControlWinLose {
         this.view = view0;
         qData = Singletons.getModel().getQuest();
         qEvent = qData.getCurrentEvent();
-        this.wonMatch = lastGame.getMatch().isWonBy(Singletons.getControl().getLobby().getQuestPlayer());
+        this.wonMatch = lastGame.getMatch().isWonBy(FServer.instance.getLobby().getQuestPlayer());
         this.isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
@@ -127,7 +128,7 @@ public class QuestWinLose extends ControlWinLose {
         this.getView().getBtnRestart().setVisible(false);
         QuestController qc = Singletons.getModel().getQuest();
 
-        LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
+        LobbyPlayer questPlayer = FServer.instance.getLobby().getQuestPlayer();
         if (isAnte) {
             //do per-game actions
             GameOutcome outcome = lastGame.getOutcome();
@@ -342,7 +343,7 @@ public class QuestWinLose extends ControlWinLose {
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
 
-        LobbyPlayer localHuman = Singletons.getControl().getLobby().getQuestPlayer();
+        LobbyPlayer localHuman = FServer.instance.getLobby().getQuestPlayer();
         for (final GameOutcome game : lastGame.getMatch().getPlayedGames()) {
             if (!game.isWinner(localHuman)) {
                 hasNeverLost = false;

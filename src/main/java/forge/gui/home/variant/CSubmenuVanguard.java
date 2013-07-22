@@ -13,7 +13,6 @@ import com.google.common.collect.Iterables;
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
-import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
@@ -25,6 +24,8 @@ import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.special.FDeckChooser;
 import forge.item.PaperCard;
+import forge.net.FServer;
+import forge.net.Lobby;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -171,7 +172,7 @@ public enum CSubmenuVanguard implements ICDoc {
             GuiDialog.message(defaultAvatarInfo.toString());
         }
 
-        Lobby lobby = Singletons.getControl().getLobby();
+        Lobby lobby = FServer.instance.getLobby();
         List<RegisteredPlayer> helper = new ArrayList<RegisteredPlayer>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
             LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
