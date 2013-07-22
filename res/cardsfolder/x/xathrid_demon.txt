@@ -10,7 +10,7 @@ SVar:DBLoseLifeOpp:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | Ref
 SVar:DBLoseLifeYou:DB$ LoseLife | Defined$ You | LifeAmount$ 7 | ConditionCheckSVar$ Y | References$ Y | ConditionSVarCompare$ LT1 | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | Defined$ Self | ConditionCheckSVar$ Y | References$ Y | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$CardPower
+SVar:X:RememberedLKI$CardPower
 SVar:Y:Remembered$Amount
 SVar:NeedsToPlayVar:Z GE6
 SVar:Z:Count$Valid Creature.YouCtrl

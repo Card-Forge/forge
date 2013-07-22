@@ -7,7 +7,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature | SacMessage$ Creature | RememberSacrificed$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$GainLife | LifeAmount$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$CardToughness
+SVar:X:RememberedLKI$CardToughness
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doomgape.jpg
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice a creature. You gain life equal to that creature's toughness.

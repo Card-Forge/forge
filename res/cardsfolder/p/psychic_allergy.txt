@@ -4,8 +4,7 @@ Types:Enchantment
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDamageOpp | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals X damage to that player, where X is the number of nontoken permanents of the chosen color he or she controls
-SVar:TrigDamageOpp:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X
-SVar:X:TriggeredPlayer$
+SVar:TrigDamageOpp:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
 SVar:X:Count$Valid Permanent.ActivePlayerCtrl+ChosenColor+nonToken
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of your upkeep, destroy CARDNAME unless you sacrifice two Islands.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Optional$ True | SacValid$ Card.Island | Amount$ 2 | RememberSacrificed$ True | SubAbility$ DBDestroyMe
