@@ -11875,6 +11875,7 @@ res/cardsfolder/t/twinblade_slasher.txt svneol=native#text/plain
 res/cardsfolder/t/twincast.txt svneol=native#text/plain
 res/cardsfolder/t/twinning_glass.txt -text svneol=unset#text/plain
 res/cardsfolder/t/twinstrike.txt -text
+res/cardsfolder/t/twist_allegiance.txt -text
 res/cardsfolder/t/twisted_abomination.txt svneol=native#text/plain
 res/cardsfolder/t/twisted_experiment.txt svneol=native#text/plain
 res/cardsfolder/t/twisted_image.txt svneol=native#text/plain

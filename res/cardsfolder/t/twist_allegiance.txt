@@ -1,0 +1,9 @@
+Name:Twist Allegiance
+ManaCost:6 R
+Types:Sorcery
+A:SP$ GainControl | Cost$ 6 R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | AllValid$ Creature.TargetedPlayerCtrl | RememberTargets$ True | AddKWs$ Haste | Untap$ True | NewController$ You | LoseControl$ EOT | RememberControlled$ True | StackDescription$ SpellDescription | SubAbility$ DBGainCtrlOpp | SpellDescription$ You and target opponent each gain control of all creatures the other controls until end of turn. Untap those creatures. Those creatures gain haste until end of turn.
+SVar:DBGainCtrlOpp:DB$ GainControl | AllValid$ Creature.IsNotRemembered+YouCtrl | AddKWs$ Haste | NewController$ Player.IsRemembered | Untap$ True | LoseControl$ EOT | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/twist_allegiance.jpg
+Oracle:You and target opponent each gain control of all creatures the other controls until end of turn. Untap those creatures. Those creatures gain haste until end of turn.
