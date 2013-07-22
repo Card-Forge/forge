@@ -47,7 +47,7 @@ public class RevealEffect extends SpellAbilityEffect {
                     }
                     
                 } else if (sa.hasParam("RevealDefined")) {
-                    revealed.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
+                    revealed.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("RevealDefined"), sa));
                 } else {
                     List<Card> valid = new ArrayList<Card>(cardsInHand);
 

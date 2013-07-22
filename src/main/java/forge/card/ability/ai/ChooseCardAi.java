@@ -1,10 +1,10 @@
 package forge.card.ability.ai;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
@@ -40,6 +40,7 @@ public class ChooseCardAi extends SpellAbilityAi {
         }
         if (sa.hasParam("AILogic")) {
             ZoneType choiceZone = ZoneType.Battlefield;
+            String logic = sa.getParam("AILogic");
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
             }
@@ -50,22 +51,22 @@ public class ChooseCardAi extends SpellAbilityAi {
             if (sa.hasParam("TargetControls")) {
                 choices = CardLists.filterControlledBy(choices, ai.getOpponent());
             }
-            if (sa.getParam("AILogic").equals("AtLeast1") || sa.getParam("AILogic").equals("OppPreferred")) {
+            if (logic.equals("AtLeast1") || logic.equals("OppPreferred")) {
                 if (choices.isEmpty()) {
                     return false;
                 }
-            } else if (sa.getParam("AILogic").equals("AtLeast2") || sa.getParam("AILogic").equals("BestBlocker")) {
+            } else if (logic.equals("AtLeast2") || logic.equals("BestBlocker")) {
                 if (choices.size() < 2) {
                     return false;
                 }
-            } else if (sa.getParam("AILogic").equals("Clone")) {
+            } else if (logic.equals("Clone")) {
                 choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
                 if (choices.isEmpty()) {
                     return false;
                 }
-            } else if (sa.getParam("AILogic").equals("Never")) {
+            } else if (logic.equals("Never")) {
                 return false;
-            } else if (sa.getParam("AILogic").equals("NeedsPrevention")) {
+            } else if (logic.equals("NeedsPrevention")) {
                 if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     return false;
                 }
@@ -147,6 +148,16 @@ public class ChooseCardAi extends SpellAbilityAi {
             } else {
                 List<Card> aiControlled = CardLists.filterControlledBy(options, ai);
                 choice = ComputerUtilCard.getWorstAI(aiControlled);
+            }
+        } else if ("LowestCMCCreature".equals(logic)) {
+            List<Card> creats = CardLists.filter(options, Presets.CREATURES);
+            creats = CardLists.filterToughness(creats, 1);
+            if (creats.isEmpty()) {
+                choice = ComputerUtilCard.getWorstAI(options);
+            } else {
+                CardLists.sortByCmcDesc(creats);
+                Collections.reverse(creats);
+                choice = creats.get(0);
             }
         } else {
             choice = ComputerUtilCard.getBestAI(options);

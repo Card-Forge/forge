@@ -258,4 +258,27 @@ public class CardLists {
         }
         return tiedForHighest;
     }
+
+    /**
+     * Given a List<Card> cardList, return a List<Card> that are tied for having the lowest CMC.
+     * 
+     * @param cardList          the Card List to be filtered.
+     * @return the list of Cards sharing the lowest CMC.
+     */
+    public static List<Card> getCardsWithLowestCMC(Iterable<Card> cardList) {
+        final List<Card> tiedForLowest = new ArrayList<Card>();
+        int lowest = 25;
+        for (final Card crd : cardList) {
+            int curCmc = crd.isSplitCard() ? Math.min(crd.getCMC(Card.SplitCMCMode.LeftSplitCMC), crd.getCMC(Card.SplitCMCMode.RightSplitCMC)) : crd.getCMC();
+
+            if (curCmc < lowest) {
+                lowest = curCmc;
+                tiedForLowest.clear();
+            }
+            if (curCmc <= lowest) {
+                tiedForLowest.add(crd);
+            }
+        }
+        return tiedForLowest;
+    }
 }

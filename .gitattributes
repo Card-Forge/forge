@@ -10904,6 +10904,7 @@ res/cardsfolder/s/stronghold_assassin.txt svneol=native#text/plain
 res/cardsfolder/s/stronghold_biologist.txt svneol=native#text/plain
 res/cardsfolder/s/stronghold_discipline.txt svneol=native#text/plain
 res/cardsfolder/s/stronghold_furnace.txt -text
+res/cardsfolder/s/stronghold_gambit.txt -text
 res/cardsfolder/s/stronghold_machinist.txt svneol=native#text/plain
 res/cardsfolder/s/stronghold_overseer.txt svneol=native#text/plain
 res/cardsfolder/s/stronghold_rats.txt svneol=native#text/plain

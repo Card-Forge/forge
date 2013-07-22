@@ -6246,6 +6246,20 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!list.contains(this)) {
                 return false;
             }
+        } else if (property.startsWith("lowestRememberedCMC")) {
+            List<Card> list = new ArrayList<Card>();
+            for (final Object o : source.getRemembered()) {
+                if (o instanceof Card) {
+                    list.add(game.getCardState((Card) o));
+                }
+            }
+            if (!list.contains(this)) {
+                return false;
+            }
+            list = CardLists.getCardsWithLowestCMC(list);
+            if (!list.contains(this)) {
+                return false;
+            }
         } else if (property.startsWith("lowestCMC")) {
             final List<Card> list = game.getCardsIn(ZoneType.Battlefield);
             for (final Card crd : list) {
