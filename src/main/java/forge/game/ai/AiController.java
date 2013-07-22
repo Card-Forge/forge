@@ -208,7 +208,8 @@ public class AiController {
      */
     public List<Card> getLandsToPlay() {
     
-        final List<Card> hand = player.getCardsIn(ZoneType.Hand);
+        final List<Card> hand = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
+        hand.addAll(player.getCardsIn(ZoneType.Exile));
         List<Card> landList = CardLists.filter(hand, Presets.LANDS);
         List<Card> nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
         

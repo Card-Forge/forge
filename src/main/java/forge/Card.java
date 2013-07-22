@@ -8476,10 +8476,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     
         if (isLand() && player.canPlayLand(this)) {
-            if (zone.is(ZoneType.Hand) || (!zone.is(ZoneType.Battlefield) && hasStartOfKeyword("May be played"))) {
-                Ability.PLAY_LAND_SURROGATE.setSourceCard(this);
-                abilities.add(Ability.PLAY_LAND_SURROGATE);
-            }
+            Ability.PLAY_LAND_SURROGATE.setSourceCard(this);
+            abilities.add(Ability.PLAY_LAND_SURROGATE);
         }
     
         return abilities;

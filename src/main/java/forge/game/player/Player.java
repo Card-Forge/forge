@@ -67,6 +67,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
@@ -1849,8 +1850,15 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         
-        if( land != null && land.getOwner() != this && !land.hasKeyword("May be played by your opponent"))
-            return false;
+        if( land != null) {
+            if (land.getOwner() != this && !land.hasKeyword("May be played by your opponent"))
+                return false;
+
+            final Zone zone = game.getZoneOf(land);
+            if(zone.is(ZoneType.Battlefield) || (!zone.is(ZoneType.Hand) && !land.hasStartOfKeyword("May be played"))) {
+                return false;
+            }
+        }
 
         // **** Check for land play limit per turn ****
         // Dev Mode
