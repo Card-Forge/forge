@@ -37,10 +37,8 @@ public class ManaEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
 
-        if (optional) {
-            if (!GuiDialog.confirm(sa.getSourceCard(), "Do you want to add mana to your mana pool?")) {
-                return;
-            }
+        if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, "Do you want to add mana to your mana pool?")) {
+            return;
         }
         if (abMana.isComboMana()) {
             for (Player p : tgtPlayers) {
