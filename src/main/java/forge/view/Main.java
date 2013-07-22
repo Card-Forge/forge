@@ -20,6 +20,7 @@ package forge.view;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.model.FModel;
+import forge.net.FServer;
 
 /**
  * Main class for Forge's swing application view.
@@ -32,24 +33,37 @@ public final class Main {
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 
-        boolean isHeadlessMode = !true;
-        
         // Start splash screen first, then data models, then controller.
-        if(!isHeadlessMode) 
+        if(args.length == 0) {
             Singletons.setView(FView.SINGLETON_INSTANCE);
-        Singletons.setModel(FModel.getInstance(!isHeadlessMode));
-        Singletons.setControl(FControl.instance);
+            Singletons.setModel(FModel.getInstance(true));
+            Singletons.setControl(FControl.instance);
 
-        if (!isHeadlessMode) {
             // Controller can now step in and take over.
             Singletons.getControl().initialize();
             return;
         }
         
-        // ok, done with possible interactive startup 
         
+        // command line startup here
+        Singletons.setModel(FModel.getInstance(false));
+        String mode = args[0].toLowerCase();
         
+        switch(mode) {
+            case "sim":
+                FServer.instance.simulateMatches(args);
+                break;
+                
+            case "server":
+                System.out.println("Dedicated server mode.\nNot implemented.");
+                break;
+            
+            default:
+                System.out.println("Unknown mode.\nKnown mode is 'sim' ");
+                break;
+        }
         
+        System.exit(0);
     }
 
     @Override

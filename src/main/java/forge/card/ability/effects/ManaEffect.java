@@ -18,7 +18,6 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 
 public class ManaEffect extends SpellAbilityEffect {
 

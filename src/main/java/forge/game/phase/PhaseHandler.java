@@ -54,9 +54,6 @@ import forge.game.event.GameEventTurnPhase;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.CMatchUI;
-import forge.gui.match.nonsingleton.VField;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
@@ -717,8 +714,6 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         Player next = getNextActivePlayer();
-        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(next);
-        SDisplayUtil.showTab(nextField);
 
         if (game.getType() == GameType.Planechase) {
             for(Card p :game.getActivePlanes())

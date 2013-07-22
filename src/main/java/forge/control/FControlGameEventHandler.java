@@ -46,11 +46,13 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
+import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.ViewWinLose;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
+import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.toolbox.special.PhaseLabel;
 import forge.net.FServer;
@@ -107,13 +109,16 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     private final AtomicBoolean turnUpdPlanned = new AtomicBoolean(false);
     @Override
-    public Void visit(GameEventTurnBegan event) {
+    public Void visit(final GameEventTurnBegan event) {
         if ( turnUpdPlanned.getAndSet(true) ) return null;
 
         final Game game = fc.getObservedGame(); // to make sure control gets a correct game instance
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
+                VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(event.turnOwner);
+                SDisplayUtil.showTab(nextField);
+                
                 turnUpdPlanned.set(false);
                 CMessage.SINGLETON_INSTANCE.updateText(game);
             }

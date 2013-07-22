@@ -72,7 +72,8 @@ public class Lobby {
     public final LobbyPlayer getAiPlayer() { return getAiPlayer(getRandomName()); }
     public final LobbyPlayer getAiPlayer(String name) {
         LobbyPlayer player = new LobbyPlayerAi(name);
-        player.setAvatarIndex(MyRandom.getRandom().nextInt(FSkin.getAvatars().size()));
+        if(FSkin.isLoaded())
+            player.setAvatarIndex(MyRandom.getRandom().nextInt(FSkin.getAvatars().size()));
         return player;
     }
 

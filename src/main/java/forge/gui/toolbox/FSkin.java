@@ -433,6 +433,7 @@ public enum FSkin {
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;    
     private static int defaultFontSize = 12;
+    private static boolean loaded = false;
 
     /**
      * Loads a "light" version of FSkin, just enough for the splash screen:
@@ -481,6 +482,7 @@ public enum FSkin {
                 e.printStackTrace();
             }
         }
+        loaded = true;
     }
     
     public static void setProgessBarMessage(final String message) { 
@@ -610,6 +612,7 @@ public enum FSkin {
 
         // Images loaded; can start UI init.
         setProgessBarMessage("Creating display components.");
+        loaded = true;
 
         // Clear references to buffered images
         FSkin.bimDefaultSprite.flush();
@@ -817,6 +820,8 @@ public enum FSkin {
 
         return new Color(r, g, b);
     }
+    
+    public static boolean isLoaded() { return loaded; }
 
     /** Returns RGB components of a color, with a new
      * value for alpha. 0 = transparent, 255 = opaque.

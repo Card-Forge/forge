@@ -3,6 +3,8 @@ package forge.game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
@@ -83,7 +85,7 @@ public class Match {
     /**
      * TODO: Write javadoc for this method.
      */
-    public void startGame(final Game game) {
+    public void startGame(final Game game, final CountDownLatch latch) {
         final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
         GameNew.newGame(game, canRandomFoil, this.useAnte);
 
@@ -99,6 +101,9 @@ public class Match {
                 
                 GameOutcome lastOutcome = gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
                 game.getAction().startGame(lastOutcome);
+                
+                if( null != latch )
+                    latch.countDown();
             }
         });
     }

@@ -52,7 +52,7 @@ import freemarker.template.TemplateException;
  */
 public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSerializer<Deck> {
     private final boolean moveWronglyNamedDecks;
-    private static final String FILE_EXTENSION = ".dck";
+    public static final String FILE_EXTENSION = ".dck";
 
     public DeckSerializer(final File deckDir0) {
         this(deckDir0, false);
@@ -67,14 +67,14 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
     public static final FilenameFilter DCK_FILE_FILTER = new FilenameFilter() {
         @Override
         public boolean accept(final File dir, final String name) {
-            return name.endsWith(".dck");
+            return name.endsWith(FILE_EXTENSION);
         }
     };
     /** The Constant DCK_FILTER. */
     public static final FileFilter DCK_FILTER = new FileFilter() {
         @Override
         public boolean accept(final File f) {
-            return f.getName().endsWith(".dck") || f.isDirectory();
+            return f.getName().endsWith(FILE_EXTENSION) || f.isDirectory();
         }
 
         @Override
