@@ -7,6 +7,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.ExtraTurn;
 import forge.game.player.Player;
+import forge.gui.GuiDialog;
 
 public class AddTurnEffect extends SpellAbilityEffect {
 
@@ -52,6 +53,9 @@ public class AddTurnEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("NoSchemes")) {
                         extra.setCantSetSchemesInMotion(true);
+                    }
+                    if (sa.hasParam("ShowMessage")) {
+                        GuiDialog.message(p + " takes an extra turn.");
                     }
                 }
             }

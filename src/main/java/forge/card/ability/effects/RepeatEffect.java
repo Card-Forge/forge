@@ -40,21 +40,20 @@ public class RepeatEffect extends SpellAbilityEffect {
 
         //execute repeat ability at least once
         int count = 0;
-        do {
-             AbilityUtils.resolve(repeat);
-             count++;
-             if (maxRepeat != null && maxRepeat <= count) {
-                 // TODO Replace Infinite Loop Break with a game draw. Here are the scenarios that can cause this:
-                 // Helm of Obedience vs Graveyard to Library replacement effect
-                 StringBuilder infLoop = new StringBuilder(sa.getSourceCard().toString());
-                 infLoop.append(" - To avoid an infinite loop, this repeat has been broken ");
-                 infLoop.append(" and the game will now continue in the current state, ending the loop early. ");
-                 infLoop.append("Once Draws are available this probably should change to a Draw.");
-                 System.out.println(infLoop.toString());
-                 break;
-             }
-       } while (checkRepeatConditions(sa));
-
+        while (checkRepeatConditions(sa)) {
+            AbilityUtils.resolve(repeat);
+            count++;
+            if (maxRepeat != null && maxRepeat <= count) {
+                // TODO Replace Infinite Loop Break with a game draw. Here are the scenarios that can cause this:
+                // Helm of Obedience vs Graveyard to Library replacement effect
+                StringBuilder infLoop = new StringBuilder(sa.getSourceCard().toString());
+                infLoop.append(" - To avoid an infinite loop, this repeat has been broken ");
+                infLoop.append(" and the game will now continue in the current state, ending the loop early. ");
+                infLoop.append("Once Draws are available this probably should change to a Draw.");
+                System.out.println(infLoop.toString());
+                break;
+            }
+        }
     }
 // end class AbilityFactory_Repeat
 
