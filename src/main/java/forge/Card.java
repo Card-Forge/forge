@@ -4233,6 +4233,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void untap() {
         if (this.isUntapped())
             return;
+        // Run Replacement effects
+        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+        repRunParams.put("Event", "Untap");
+        repRunParams.put("Affected", this);
+        
+        if (getGame().getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+            return;
+        }
 
         // Run triggers
         final Map<String, Object> runParams = new TreeMap<String, Object>();

@@ -20,7 +20,8 @@ public enum ReplacementType {
     GameLoss(ReplaceGameLoss.class),
     Moved(ReplaceMoved.class),
     SetInMotion(ReplaceSetInMotion.class),
-    TurnFaceUp(ReplaceTurnFaceUp.class);
+    TurnFaceUp(ReplaceTurnFaceUp.class),
+    Untap(ReplaceUntap.class);
     
     Class<? extends ReplacementEffect> clasz;
     private ReplacementType(Class<? extends ReplacementEffect> cls) {
