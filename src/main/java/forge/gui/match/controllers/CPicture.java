@@ -18,6 +18,8 @@
 package forge.gui.match.controllers;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -25,6 +27,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
+import forge.gui.toolbox.special.CardZoomer;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 
@@ -52,10 +55,11 @@ public enum CPicture implements ICDoc {
         canFlip = c.isDoubleFaced() || c.isFlipCard() || cameFaceDown;
         currentCard = c;
         flipped = canFlip && (c.getCurState() == CardCharacteristicName.Transformed ||
-                              c.getCurState() == CardCharacteristicName.Flipped || c.getCurState() == CardCharacteristicName.FaceDown); 
+                              c.getCurState() == CardCharacteristicName.Flipped || 
+                              c.getCurState() == CardCharacteristicName.FaceDown); 
         VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(canFlip);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(c);
-        
+                
         if ( showFlipped && canFlip )
             flipCard();
     }
@@ -84,6 +88,16 @@ public enum CPicture implements ICDoc {
 
     @Override
     public void initialize() {
+        
+        VPicture.SINGLETON_INSTANCE.getPnlPicture().addMouseWheelListener(new MouseWheelListener() {            
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent arg0) {
+              if (arg0.getWheelRotation() < 0) {
+                  CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(currentCard);
+              }                
+            }
+        });
+                
         VPicture.SINGLETON_INSTANCE.getPnlPicture().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
