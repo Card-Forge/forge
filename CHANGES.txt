@@ -8,6 +8,23 @@ Forge Beta: 07-##-2013 ver 1.4.4
 Release Notes
 -------------
 
+- Card Zoomer -
+Now you can gaze at your HQ images in all their glory with just a flick of the mousewheel. This feature will also increase the size of low quality pics up to the size used be the high quality pics, but the image will not be very clear.
+
+Instructions:
+- Works on any card image in the Deck Editor or Duel screen.
+- Move your mouse over the card you want to zoom and mouse-wheel forward.
+- Mouse-wheel back, mouse click or pressing ESC closes the zoomed image.
+
+Limitations:
+- Only works with the mouse wheel at the moment.
+- Does not show the other side of double-sided cards yet.
+
+WIP:
+- Press and hold the CTRL key while mousing over a card to see zoomed image.
+- Flipping double-sided card.
+
+
 - AI vs AI games can be run from command line -
 usage: forge.exe sim <deck1> <deck2>
 
