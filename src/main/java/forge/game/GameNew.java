@@ -34,6 +34,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.net.FServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
@@ -289,9 +290,9 @@ public class GameNew {
                 removedAnteCards.addAll(player, myRemovedAnteCards);
         }
 
-        if (!rAICards.isEmpty()) {
+        if (!rAICards.isEmpty() ) {
             String message = TextUtil.buildFourColumnList("AI deck contains the following cards that it can't play or may be buggy:", rAICards);
-            if (GameType.Quest == game.getType() || GameType.Sealed == game.getType() || GameType.Draft == game.getType()) {
+            if (!FServer.instance.isInteractiveMode() || GameType.Quest == game.getType() || GameType.Sealed == game.getType() || GameType.Draft == game.getType()) {
                 // log, but do not visually warn.  quest decks are supposedly already vetted by the quest creator,
                 // sealed and draft decks do not get any AI-unplayable picks but may contain several
                 // received/picked but unplayable cards in the sideboard.

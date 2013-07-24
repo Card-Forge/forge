@@ -2,7 +2,6 @@ package forge.net;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -10,14 +9,13 @@ import java.util.concurrent.CountDownLatch;
 import org.apache.commons.lang.time.StopWatch;
 
 import forge.GameLogEntry;
-import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.deck.io.DeckSerializer;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.RegisteredPlayer;
+import forge.util.Lang;
 
 
 /** 
@@ -27,6 +25,7 @@ import forge.game.RegisteredPlayer;
 public enum FServer {
     instance();
     
+    private boolean interactiveMode = true;
     private Lobby lobby = null;
     
     public Lobby getLobby() {
@@ -45,34 +44,20 @@ public enum FServer {
         // TODO Auto-generated method stub
         return server;
     }
-    /**
-     * TODO: Write javadoc for this method.
-     * @param args
-     */
-    public void startFromCommandLine(String[] args) {
-        String mode = args[0].toLowerCase();
-        
-        switch(mode) {
-            case "sim":
 
-                
-            case "server":
-                System.out.println("Dedicated server mode.\nNot implemented.");
-                break;
-            
-            default:
-                System.out.println("Unknown mode.\nKnown mode is 'sim' ");
-                break;
-        }
-    }
     /**
      * TODO: Write javadoc for this method.
      * @param args
      */
     public void simulateMatches(String[] args) {
+        interactiveMode = false;
         System.out.println("Simulation mode");
         if(args.length < 3 ) {
-            System.out.println("Syntax: forge.exe sim deck1.dck deck2.dck");
+            System.out.println("Syntax: forge.exe sim <deck1[.dck]> <deck2[.dck]> [N]");
+            System.out.println("\tsim - stands for simulation mode");
+            System.out.println("\tdeck1 (or deck2) - constructed deck name or filename (has to be quoted when contains multiple words)");
+            System.out.println("\tdeck is treated as file if it ends with a dot followed by three numbers or letters");
+            System.out.println("\tN - number of games, defaults to 1");
             return;
         }
         Deck d1 = deckFromCommandLineParameter(args[1]);
@@ -82,17 +67,30 @@ public enum FServer {
             return;
         }
         
-        System.out.println(String.format("%s vs %s", d1.getName(), d2.getName()));
+        int nGames = args.length >= 4 ? Integer.parseInt(args[3]) : 1;
         
-        StopWatch sw = new StopWatch();
-        sw.start();
+        System.out.println(String.format("Ai-%s vs Ai_%s - %s", d1.getName(), d2.getName(), Lang.nounWithNumeral(nGames, "game")));
         
         List<RegisteredPlayer> pp = new ArrayList<RegisteredPlayer>();
         pp.add(RegisteredPlayer.fromDeck(d1).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai-" + d1.getName())));
         pp.add(RegisteredPlayer.fromDeck(d2).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai_" + d2.getName())));
-        Match mc = new Match(GameType.Constructed, pp);
         
+        Match mc = new Match(GameType.Constructed, pp);
+        for(int iGame = 0; iGame < nGames; iGame++)
+            simulateSingleMatch(mc, iGame);
+        System.out.flush();
+    }
+    /**
+     * TODO: Write javadoc for this method.
+     * @param sw
+     * @param pp
+     */
+    private void simulateSingleMatch(Match mc, int iGame) {
+        StopWatch sw = new StopWatch();
+        sw.start();
+
         CountDownLatch cdl = new CountDownLatch(1);
+        
         Game g1 = mc.createGame();
         mc.startGame(g1, cdl);
         try {
@@ -109,17 +107,22 @@ public enum FServer {
         for(GameLogEntry l : log)
             System.out.println(l);
 
-        System.out.println(String.format("\nGame ended in %d ms", sw.getTime() ));
-        System.out.println(g1.getOutcome().getWinner().getName() + " has won!");
-        
-        System.out.flush();
+        System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinner().getName()));
     }
 
 
     private Deck deckFromCommandLineParameter(String deckname) {
-        if(deckname.endsWith(DeckSerializer.FILE_EXTENSION))
+        int dotpos = deckname.lastIndexOf('.');
+        if(dotpos > 0 && dotpos == deckname.length()-4)
             return Deck.fromFile(new File(deckname));
         return Singletons.getModel().getDecks().getConstructed().get(deckname);
+    }
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public boolean isInteractiveMode() {
+        return interactiveMode;
     }
 
     

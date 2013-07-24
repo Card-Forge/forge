@@ -8465,7 +8465,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public List<SpellAbility> getAllPossibleAbilites(Player player) {
         // this can only be called by the Human
-        final Zone zone = player.getGame().getZoneOf(this);
     
         final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : getSpellAbilities()) {
