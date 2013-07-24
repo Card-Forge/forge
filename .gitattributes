@@ -718,7 +718,6 @@ res/cardsfolder/a/azors_elocutors.txt -text
 res/cardsfolder/a/azure_drake.txt svneol=native#text/plain
 res/cardsfolder/a/azure_mage.txt svneol=native#text/plain
 res/cardsfolder/a/azusa_lost_but_seeking.txt svneol=native#text/plain
-res/cardsfolder/a/vengeful_archon.txt -text
 res/cardsfolder/b/back_from_the_brink.txt -text
 res/cardsfolder/b/back_to_basics.txt svneol=native#text/plain
 res/cardsfolder/b/back_to_nature.txt svneol=native#text/plain
@@ -12150,6 +12149,7 @@ res/cardsfolder/v/venerable_kumo.txt svneol=native#text/plain
 res/cardsfolder/v/venerable_monk.txt svneol=native#text/plain
 res/cardsfolder/v/venerated_teacher.txt svneol=native#text/plain
 res/cardsfolder/v/vengeance.txt svneol=native#text/plain
+res/cardsfolder/v/vengeful_archon.txt -text
 res/cardsfolder/v/vengeful_dead.txt svneol=native#text/plain
 res/cardsfolder/v/vengeful_dreams.txt svneol=native#text/plain
 res/cardsfolder/v/vengeful_firebrand.txt svneol=native#text/plain

@@ -207,6 +207,8 @@ public class PumpAi extends PumpAiBase {
                 } else {
                     return false;
                 }
+            } else {
+                return false;
             }
         } else if (sa.isCurse()) {
             if (sa.canTarget(opp)) {
