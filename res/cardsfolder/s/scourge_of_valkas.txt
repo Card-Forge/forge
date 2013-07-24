@@ -2,6 +2,7 @@ Name:Scourge of Valkas
 ManaCost:2 R R R
 Types:Creature Dragon
 PT:4/4
+K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | NumDmg$ NumDragons | References$ NumDragons | TgtPrompt$ Select a target creature or player | DamageSource$ TriggeredCard
