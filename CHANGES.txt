@@ -25,17 +25,6 @@ WIP:
 - Flipping double-sided card.
 
 
-- AI vs AI games can be run from command line -
-usage: forge.exe sim <deck1> <deck2>
-
-sim - game mode
-deck1/2 - either names of constructed decks created in game or paths to deck files.
-
-Note:
-filenames must end with .dck
-deck names are case-sensitive, must be quoted if contain multiple words. (ex: "Tempered Steel")
-
-
 - Preferences updates -
 All reset buttons now appear under Troubleshooting section. Increased visibility of Troubleshooting section by moving to the top of the preferences screen. Added confirmation dialogs to all reset buttons.
 
@@ -93,6 +82,7 @@ Twist Allegiance
 Planar Overlay
 Edge of Malacol
 Frankenstein's Monster
+Vengeful Archon
 
 
 ----------
