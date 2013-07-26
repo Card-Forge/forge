@@ -306,7 +306,9 @@ public class CostPutCounter extends CostPartWithList {
             targetCard.getCounters().put(counterType, Integer.valueOf(newValue));
         }
         // added c - 1 without firing triggers, the last counter added should fire trigger.
-        executePayment(ability, targetCard);
+        if (c > 0) {
+            executePayment(ability, targetCard);
+        }
     }
 
 
