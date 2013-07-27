@@ -276,6 +276,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
 
     private class RowPanel extends JPanel {
         private boolean selected = false;
+        private boolean hovered = false;
         private final Deck deck;
 
         public RowPanel(final Deck d0) {
@@ -289,6 +290,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
+                    RowPanel.this.hovered = true;
                     if (!RowPanel.this.selected) {
                         ((RowPanel) e.getSource()).setBackground(DeckLister.this.clrHover);
                         ((RowPanel) e.getSource()).setOpaque(true);
@@ -297,6 +299,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
+                    RowPanel.this.hovered = false;
                     if (!RowPanel.this.selected) {
                         ((RowPanel) e.getSource()).setBackground(DeckLister.this.clrDefault);
                         ((RowPanel) e.getSource()).setOpaque(false);
@@ -305,7 +308,12 @@ public class DeckLister extends JPanel implements ILocalRepaint {
 
                 @Override
                 public void mousePressed(final MouseEvent e) {
-                    DeckLister.this.selectHandler((RowPanel) e.getSource());
+                    if (e.getClickCount() == 1) {
+                        DeckLister.this.selectHandler((RowPanel) e.getSource());
+                    }
+                    else { //edit deck on double click
+                        DeckLister.this.editDeck(RowPanel.this.deck);
+                    }
                 }
             });
         }
@@ -313,7 +321,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         public void setSelected(final boolean b0) {
             this.selected = b0;
             this.setOpaque(b0);
-            this.setBackground(b0 ? DeckLister.this.clrActive : DeckLister.this.clrHover);
+            this.setBackground(b0 ? DeckLister.this.clrActive : (this.hovered ? DeckLister.this.clrHover : DeckLister.this.clrDefault));
         }
 
         public boolean isSelected() {
