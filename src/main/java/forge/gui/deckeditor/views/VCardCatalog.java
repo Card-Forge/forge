@@ -264,10 +264,17 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     
     //========== Other methods
     private FLabel buildToggleLabel(SEditorUtil.StatTypes s, boolean selectable) {
+        String tooltip;
+        if (selectable) { //construct tooltip for selectable toggle labels, indicating click and right-click behavior
+            String labelString = s.toLabelString();
+            tooltip = labelString + " (click to toggle the filter, right-click to show only " + labelString.toLowerCase() + ")";
+        }
+        else { tooltip = ""; }
+
         FLabel label = new FLabel.Builder()
                 .icon(s.img).iconScaleAuto(false)
                 .fontSize(11)
-                .tooltip(s.toLabelString() + " (click to toggle the filter)")
+                .tooltip(tooltip)
                 .hoverable().selectable(selectable).selected(selectable)
                 .build();
         

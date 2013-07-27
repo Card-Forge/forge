@@ -267,7 +267,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
     // Various variables used in image rendering.
     private Image img;
 
-    private Runnable cmdClick;
+    private Runnable cmdClick, cmdRightClick;
 
     private double iar;
 
@@ -310,6 +310,14 @@ public class FLabel extends JLabel implements ILocalRepaint {
         }
     }
     
+    private void _doRightClickAction() {
+        if (cmdRightClick != null && isEnabled()) {
+            hovered = false;
+            repaintSelf();
+            cmdRightClick.run();
+        }
+    }
+
     // Mouse event handler
     private final MouseAdapter madEvents = new MouseAdapter() {
         @Override
@@ -334,15 +342,21 @@ public class FLabel extends JLabel implements ILocalRepaint {
         
         @Override
         public void mousePressed(MouseEvent e) {
-            if (reactOnMouseDown) {
+            if (reactOnMouseDown && e.getButton() == 1) { //left mouse button
                 _doMouseAction();
             }
         }
         
         @Override
-        public void mouseClicked(MouseEvent e) {
-            if (!reactOnMouseDown) {
-                _doMouseAction();
+        public void mouseReleased(MouseEvent e) {
+            int button = e.getButton();
+            if (button == 1) { //left mouse button
+                if (!reactOnMouseDown) {
+                    _doMouseAction();
+                }
+            }
+            else if (button == 3) { //right mouse button
+                _doRightClickAction();
             }
         }
     };
@@ -420,6 +434,11 @@ public class FLabel extends JLabel implements ILocalRepaint {
         return this.cmdClick;
     }
 
+	/** @return {@link forge.Command} */
+    public Runnable getRightClickCommand() {
+        return this.cmdRightClick;
+    }
+
     @Override
     // Must be public.
     public void setIcon(final Icon i0) {
@@ -441,6 +460,11 @@ public class FLabel extends JLabel implements ILocalRepaint {
     /** @param c0 &emsp; {@link forge.Command} on click */
     public void setCommand(final Runnable c0) {
         this.cmdClick = c0;
+    }
+
+	/** @param c0 &emsp; {@link forge.Command} on right-click */
+    public void setRightClickCommand(final Runnable c0) {
+        this.cmdRightClick = c0;
     }
 
     public void setReactOnMouseDown(boolean b0) {

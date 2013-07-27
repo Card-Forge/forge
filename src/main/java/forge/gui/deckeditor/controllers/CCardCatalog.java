@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JComponent;
@@ -106,8 +107,31 @@ public enum CCardCatalog implements ICDoc {
             }
         };
 
-        for (FLabel statLabel : VCardCatalog.SINGLETON_INSTANCE.getStatLabels().values()) {
+        for (Map.Entry<SEditorUtil.StatTypes, FLabel> entry : VCardCatalog.SINGLETON_INSTANCE.getStatLabels().entrySet()) {
+            final FLabel statLabel = entry.getValue();
             statLabel.setCommand(updateFilterCommand);
+
+            //hook so right-clicking a filter in a group toggles itself off and toggles on all other filters in group
+            final SEditorUtil.StatTypes st = entry.getKey();
+            final int group = st.group;
+            if (group > 0) {
+                statLabel.setRightClickCommand(new Command() {
+                    @Override
+                    public void run() {
+                        if (!disableFiltering) {
+                            disableFiltering = true;
+                            for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
+                                if (s.group == group && s != st) {
+                                    VCardCatalog.SINGLETON_INSTANCE.getStatLabel(s).setSelected(false);
+                                }
+                            }
+                            statLabel.setSelected(true);
+                            disableFiltering = false;
+                            applyCurrentFilter();
+                        }
+                    }
+                });
+            }
         }
 
         VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SEditorUtil.StatTypes.TOTAL).setCommand(new Command() {
@@ -128,7 +152,7 @@ public enum CCardCatalog implements ICDoc {
         });
         
         // assemble add restriction menu
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction().setCommand(new Command() {
+        final Command addRestrictionCommand = new Command() {
             @Override
             public void run() {
                 JPopupMenu popup = new JPopupMenu("RestrictionPopupMenu");
@@ -217,7 +241,10 @@ public enum CCardCatalog implements ICDoc {
                 popup.show(VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction(), 0,
                         VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction().getHeight());
             }
-        });
+        };
+        FLabel btnAddRestriction = VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction();
+        btnAddRestriction.setCommand(addRestrictionCommand);
+        btnAddRestriction.setRightClickCommand(addRestrictionCommand); //show menu on right-click too
         
         VCardCatalog.SINGLETON_INSTANCE.getCbSearchMode().addItemListener(new ItemListener() {
             @Override

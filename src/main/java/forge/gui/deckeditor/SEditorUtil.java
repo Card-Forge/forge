@@ -33,30 +33,32 @@ import forge.util.TextUtil;
 public final class SEditorUtil  {
     /** An enum to encapsulate metadata for the stats/filter objects. */
     public static enum StatTypes {
-        TOTAL      (FSkin.ZoneImages.ICO_HAND,      null),
-        WHITE      (FSkin.ManaImages.IMG_WHITE,     CardRulesPredicates.Presets.IS_WHITE),
-        BLUE       (FSkin.ManaImages.IMG_BLUE,      CardRulesPredicates.Presets.IS_BLUE),
-        BLACK      (FSkin.ManaImages.IMG_BLACK,     CardRulesPredicates.Presets.IS_BLACK),
-        RED        (FSkin.ManaImages.IMG_RED,       CardRulesPredicates.Presets.IS_RED),
-        GREEN      (FSkin.ManaImages.IMG_GREEN,     CardRulesPredicates.Presets.IS_GREEN),
-        COLORLESS  (FSkin.ManaImages.IMG_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS),
-        MULTICOLOR (FSkin.EditorImages.IMG_MULTI,   CardRulesPredicates.Presets.IS_MULTICOLOR),
+        TOTAL      (FSkin.ZoneImages.ICO_HAND,      null, 0),
+        WHITE      (FSkin.ManaImages.IMG_WHITE,     CardRulesPredicates.Presets.IS_WHITE, 1),
+        BLUE       (FSkin.ManaImages.IMG_BLUE,      CardRulesPredicates.Presets.IS_BLUE, 1),
+        BLACK      (FSkin.ManaImages.IMG_BLACK,     CardRulesPredicates.Presets.IS_BLACK, 1),
+        RED        (FSkin.ManaImages.IMG_RED,       CardRulesPredicates.Presets.IS_RED, 1),
+        GREEN      (FSkin.ManaImages.IMG_GREEN,     CardRulesPredicates.Presets.IS_GREEN, 1),
+        COLORLESS  (FSkin.ManaImages.IMG_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS, 1),
+        MULTICOLOR (FSkin.EditorImages.IMG_MULTI,   CardRulesPredicates.Presets.IS_MULTICOLOR, 1),
 
-        PACK         (FSkin.EditorImages.IMG_PACK,         null),
-        LAND         (FSkin.EditorImages.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND),
-        ARTIFACT     (FSkin.EditorImages.IMG_ARTIFACT,     CardRulesPredicates.Presets.IS_ARTIFACT),
-        CREATURE     (FSkin.EditorImages.IMG_CREATURE,     CardRulesPredicates.Presets.IS_CREATURE),
-        ENCHANTMENT  (FSkin.EditorImages.IMG_ENCHANTMENT,  CardRulesPredicates.Presets.IS_ENCHANTMENT),
-        PLANESWALKER (FSkin.EditorImages.IMG_PLANESWALKER, CardRulesPredicates.Presets.IS_PLANESWALKER),
-        INSTANT      (FSkin.EditorImages.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT),
-        SORCERY      (FSkin.EditorImages.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY);
+        PACK         (FSkin.EditorImages.IMG_PACK,         null, 2),
+        LAND         (FSkin.EditorImages.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND, 2),
+        ARTIFACT     (FSkin.EditorImages.IMG_ARTIFACT,     CardRulesPredicates.Presets.IS_ARTIFACT, 2),
+        CREATURE     (FSkin.EditorImages.IMG_CREATURE,     CardRulesPredicates.Presets.IS_CREATURE, 2),
+        ENCHANTMENT  (FSkin.EditorImages.IMG_ENCHANTMENT,  CardRulesPredicates.Presets.IS_ENCHANTMENT, 2),
+        PLANESWALKER (FSkin.EditorImages.IMG_PLANESWALKER, CardRulesPredicates.Presets.IS_PLANESWALKER, 2),
+        INSTANT      (FSkin.EditorImages.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT, 2),
+        SORCERY      (FSkin.EditorImages.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY, 2);
 
         public final ImageIcon img;
         public final Predicate<CardRules> predicate;
+        public final int group;
 
-        StatTypes(FSkin.SkinProp prop, Predicate<CardRules> pred) {
+        StatTypes(FSkin.SkinProp prop, Predicate<CardRules> pred, int grp) {
             img = new ImageIcon(FSkin.getImage(prop, 18, 18));
             predicate = pred;
+            group = grp;
         }
 
         public String toLabelString() {
