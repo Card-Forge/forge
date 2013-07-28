@@ -32,6 +32,10 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
+        if (!ComputerUtilCost.checkDiscardCost(ai, cost, sa.getSourceCard())) {
+            return false;
+        }
+
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
 
