@@ -933,6 +933,10 @@ public class AttachAi extends SpellAbilityAi {
         if (attachSource.getEquippingCard() != null && attachSource.getEquippingCard().getController() == aiPlayer || attachSource.hasSVar("DontEquip")) {
             return null;
         }
+        // Don't fortify if already fortifying
+        if (attachSource.getFortifyingCard() != null && attachSource.getFortifyingCard().getController() == aiPlayer) {
+            return null;
+        }
 
         List<Card> list = aiPlayer.getGame().getCardsIn(tgt.getZone());
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
