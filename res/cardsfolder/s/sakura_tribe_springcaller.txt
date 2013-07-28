@@ -1,0 +1,8 @@
+Name:Sakura-Tribe Springcaller
+ManaCost:3 G
+Types:Creature Snake Shaman
+PT:2/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ SakuraManaSingle | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, add G to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.
+SVar:SakuraManaSingle:AB$ Mana | Cost$ 0 | Produced$ G | PersistentMana$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sakura_tribe_springcaller.jpg
+Oracle:At the beginning of your upkeep, add {G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.

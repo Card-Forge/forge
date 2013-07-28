@@ -20,6 +20,7 @@ package forge.card.mana;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -33,6 +34,7 @@ import forge.game.GlobalRuleChange;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventManaPool;
 import forge.game.event.GameEventZone;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.maps.MapOfLists;
@@ -115,12 +117,25 @@ public class ManaPool {
         boolean keepGreenMana = isEndOfPhase && this.owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end."); 
 
         List<Byte> keys = Lists.newArrayList(floatingMana.keySet());
-        if ( keepGreenMana )
+        if (keepGreenMana) {
             keys.remove(Byte.valueOf(MagicColor.GREEN));
-        
-        for(Byte b : keys) {
-            numRemoved += floatingMana.get(b).size();
-            floatingMana.get(b).clear();
+        }
+
+        for (Byte b : keys) {
+            if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
+                final List<Mana> pMana = new ArrayList<Mana>();
+                for (final Mana mana : this.floatingMana.get(b)) {
+                    if (mana.getManaAbility().isPersistentMana()) {
+                        pMana.add(mana);
+                    }
+                }
+                numRemoved += floatingMana.get(b).size() - pMana.size();
+                floatingMana.get(b).clear();
+                floatingMana.addAll(b, pMana);
+            } else {
+                numRemoved += floatingMana.get(b).size();
+                floatingMana.get(b).clear();
+            }
         }
         owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Cleared, null));
         return numRemoved;
@@ -188,7 +203,7 @@ public class ManaPool {
         for (final Byte manaKey : this.floatingMana.keySet()) {
             if(!shard.canBePaidWithManaOfColor(manaKey.byteValue()))
                 continue;
-            
+
             for(final Mana thisMana : this.floatingMana.get(manaKey)) {
                 if (!thisMana.getManaAbility().meetsManaRestrictions(saBeingPaidFor)) {
                     continue;

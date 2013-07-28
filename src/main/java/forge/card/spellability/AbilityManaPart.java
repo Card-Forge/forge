@@ -48,6 +48,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private String lastExpressChoice = "";
     private final String manaRestrictions;
     private final String cannotCounterSpell;
+    private final boolean persistentMana;
     
     private transient ArrayList<Mana> lastManaProduced = new ArrayList<Mana>();
 
@@ -76,6 +77,8 @@ public class AbilityManaPart implements java.io.Serializable {
         origProduced = params.containsKey("Produced") ? params.get("Produced") : "1";
         this.manaRestrictions = params.containsKey("RestrictValid") ? params.get("RestrictValid") : "";
         this.cannotCounterSpell = params.get("AddsNoCounter");
+        this.persistentMana = (null == params.get("PersistentMana")) ? false :
+            "True".equalsIgnoreCase(params.get("PersistentMana"));
     }
 
     /**
@@ -390,6 +393,17 @@ public class AbilityManaPart implements java.io.Serializable {
 
     public Card getSourceCard() {
         return sourceCard;
+    }
+
+    /**
+     * <p>
+     * isPersistentMana.
+     * </p>
+     *
+     * @return a boolean.
+     */
+    public boolean isPersistentMana() {
+        return this.persistentMana;
     }
 
 } // end class AbilityMana
