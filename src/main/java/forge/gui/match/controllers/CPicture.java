@@ -92,16 +92,55 @@ public enum CPicture implements ICDoc {
         VPicture.SINGLETON_INSTANCE.getPnlPicture().addMouseWheelListener(new MouseWheelListener() {            
             @Override
             public void mouseWheelMoved(MouseWheelEvent arg0) {
-              if (arg0.getWheelRotation() < 0) {
-                  CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(currentCard);
-              }                
+                if (arg0.getWheelRotation() < 0) {
+                    CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(currentCard);
+                }
             }
         });
-                
+
         VPicture.SINGLETON_INSTANCE.getPnlPicture().addMouseListener(new MouseAdapter() {
+            private final boolean[] buttonsDown = new boolean[4];
+            private boolean zoomed;
+
             @Override
-            public void mouseClicked(final MouseEvent e) {
-                flipCard();
+            public void mousePressed(final MouseEvent e) {
+                final int button = e.getButton();
+                if (button < 1 || button > 3) {
+                    return;
+                }
+                this.buttonsDown[button] = true;
+
+                if (!this.zoomed && (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3]))) {
+                    //zoom card when middle mouse button down or both left and right mouse buttons down
+                    if (CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(currentCard, true)) {
+                        this.zoomed = true;
+                    }
+                }
+            }
+
+            @Override
+            public void mouseReleased(final MouseEvent e) {
+                final int button = e.getButton();
+                if (button < 1 || button > 3) {
+                    return;
+                }
+                if (!this.buttonsDown[button]) {
+                    return;
+                }
+                this.buttonsDown[button] = false;
+
+                if (this.zoomed) {
+                    if (!this.buttonsDown[1] && !this.buttonsDown[2] && !this.buttonsDown[3]) {
+                        //don't stop zooming until all mouse buttons released
+                        CardZoomer.SINGLETON_INSTANCE.closeZoomer();
+                        this.zoomed = false;
+                    }
+                    return; //don't handle click event below if zoom was open
+                }
+
+                if (button == 1) {
+                    flipCard();
+                }
             }
         });
     }

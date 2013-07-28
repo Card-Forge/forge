@@ -76,7 +76,7 @@ public abstract class CardPanelContainer extends JPanel {
     private final List<CardPanelMouseListener> listeners = new ArrayList<CardPanelMouseListener>(2);
     private int mouseDragOffsetX, mouseDragOffsetY;
     private int intialMouseDragX = -1, intialMouseDragY;
-    private boolean dragEnabled;
+    private boolean dragEnabled, zoomed;
 
     /**
      * <p>
@@ -111,7 +111,7 @@ public abstract class CardPanelContainer extends JPanel {
             }            
         });         
     }
-            
+
     private void setupMouseListener(final MouseMotionListener mml) {
 
         this.addMouseListener(new MouseAdapter() {
@@ -120,21 +120,30 @@ public abstract class CardPanelContainer extends JPanel {
             @Override
             public void mousePressed(final MouseEvent evt) {
                 final int button = evt.getButton();
-                if ((button < 1) || (button > 3)) {
+                if (button < 1 || button > 3) {
                     return;
                 }
                 this.buttonsDown[button] = true;
                 CardPanelContainer.this.mouseDownPanel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
+
+                if (!CardPanelContainer.this.zoomed && CardPanelContainer.this.mouseDownPanel != null &&
+                        CardPanelContainer.this.getMouseDragPanel() == null &&
+                        (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3]))) {
+                    //zoom card when middle mouse button down or both left and right mouse buttons down
+                    if (CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(CardPanelContainer.this.mouseDownPanel.getCard(), true)) {
+                        CardPanelContainer.this.zoomed = true;
+                    }
+                }
             }
 
             @Override
             public void mouseReleased(final MouseEvent evt) {
                 final int button = evt.getButton();
-                if ((button < 1) || (button > 3)) {
+                if (button < 1 || button > 3) {
                     return;
                 }
 
-                if (CardPanelContainer.this.dragEnabled) {
+                if (!CardPanelContainer.this.zoomed && CardPanelContainer.this.dragEnabled) {
                     CardPanelContainer.this.intialMouseDragX = -1;
                     if (CardPanelContainer.this.getMouseDragPanel() != null) {
                         final CardPanel panel = CardPanelContainer.this.getMouseDragPanel();
@@ -148,23 +157,21 @@ public abstract class CardPanelContainer extends JPanel {
                 }
                 this.buttonsDown[button] = false;
 
-                final CardPanel panel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
-                if ((panel != null) && (CardPanelContainer.this.mouseDownPanel == panel)) {
-                    int downCount = 0;
-                    for (int i = 1; i < this.buttonsDown.length; i++) {
-                        if (this.buttonsDown[i]) {
-                            this.buttonsDown[i] = false;
-                            downCount++;
-                        }
+                if (CardPanelContainer.this.zoomed) {
+                    if (!this.buttonsDown[1] && !this.buttonsDown[2] && !this.buttonsDown[3]) {
+                        //don't stop zooming until all mouse buttons released
+                        CardZoomer.SINGLETON_INSTANCE.closeZoomer();
+                        CardPanelContainer.this.zoomed = false;
                     }
-                    if (downCount > 0) {
-                        CardPanelContainer.this.mouseMiddleClicked(panel, evt);
-                    } else if (SwingUtilities.isLeftMouseButton(evt)) {
+                    return; //don't raise click events if zoom was open
+                }
+
+                final CardPanel panel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
+                if (panel != null && CardPanelContainer.this.mouseDownPanel == panel) {
+                    if (SwingUtilities.isLeftMouseButton(evt)) {
                         CardPanelContainer.this.mouseLeftClicked(panel, evt);
                     } else if (SwingUtilities.isRightMouseButton(evt)) {
                         CardPanelContainer.this.mouseRightClicked(panel, evt);
-                    } else if (SwingUtilities.isMiddleMouseButton(evt)) {
-                        CardPanelContainer.this.mouseMiddleClicked(panel, evt);
                     }
                 } else {
                     // reeval cursor hover
@@ -186,6 +193,9 @@ public abstract class CardPanelContainer extends JPanel {
             
             @Override
             public void mouseDragged(final MouseEvent evt) {
+                if (CardPanelContainer.this.zoomed || !SwingUtilities.isLeftMouseButton(evt)) {
+                    return; //don't support dragging while zoomed or with mouse button besides left
+                }
                 if (!CardPanelContainer.this.dragEnabled) {
                     CardPanelContainer.this.mouseOutPanel(evt);
                     return;
@@ -486,22 +496,6 @@ public abstract class CardPanelContainer extends JPanel {
 
     /**
      * <p>
-     * mouseMiddleClicked.
-     * </p>
-     * 
-     * @param panel
-     *            a {@link forge.view.arcane.CardPanel} object.
-     * @param evt
-     *            a {@link java.awt.event.MouseEvent} object.
-     */
-    public final void mouseMiddleClicked(final CardPanel panel, final MouseEvent evt) {
-        for (final CardPanelMouseListener listener : this.listeners) {
-            listener.mouseMiddleClicked(panel, evt);
-        }
-    }
-
-    /**
-     * <p>
      * mouseDragEnd.
      * </p>
      * 
@@ -579,7 +573,7 @@ public abstract class CardPanelContainer extends JPanel {
      * @param evt
      *            a {@link java.awt.event.MouseEvent} object.
      */
-    public final void mouseOver(final CardPanel panel, final MouseEvent evt) {
+    public void mouseOver(final CardPanel panel, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseOver(panel, evt);
         }

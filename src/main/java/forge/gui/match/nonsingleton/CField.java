@@ -21,8 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
 import java.util.List;
 import com.google.common.base.Function;
 
@@ -40,7 +38,6 @@ import forge.gui.ForgeAction.MatchConstants;
 import forge.gui.framework.ICDoc;
 import forge.gui.input.Input;
 import forge.gui.input.InputPayMana;
-import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
 
 /**
@@ -54,17 +51,9 @@ public class CField implements ICDoc {
     private final VField view;
     private boolean initializedAlready = false;
 
-    private MouseMotionListener mmlCardOver = new MouseMotionAdapter() { @Override
-        public void mouseMoved(final MouseEvent e) {
-            cardoverAction(e); } };
-
-
     private final MouseListener madAvatar = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             CMessage.SINGLETON_INSTANCE.getInputControl().selectPlayer(player); } };
-
-    private final MouseListener madCardClick = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) { cardclickAction(e); } };
 
     /**
      * Controls Swing components of a player's field instance.
@@ -141,29 +130,6 @@ public class CField implements ICDoc {
         
     }
 
-    /** */
-    private void cardoverAction(MouseEvent e) {
-        final Card c = CField.this.view.getTabletop().getHoveredCard(e);
-        if (c != null) {
-            CMatchUI.SINGLETON_INSTANCE.setCard(c, e.isShiftDown());
-        }
-    }
-
-    /** */
-    private void cardclickAction(final MouseEvent e) {
-        // original version:
-        // final Card c = t.getDetailController().getCurrentCard();
-        // Roujin's bug fix version dated 2-12-2012
-        final Card c = CField.this.view.getTabletop().getHoveredCard(e);
-
-
-        if (c == null || !c.isInZone(ZoneType.Battlefield)) {
-            return;
-        }
-
-        CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, e.isMetaDown());
-    }
-
     @Override
     public void initialize() {
         if (initializedAlready) { return; }
@@ -175,15 +141,8 @@ public class CField implements ICDoc {
 //        CField.this.player.addObserver(observerDetails);
     
         // Listeners
-        // Battlefield card clicks
-        this.view.getTabletop().addMouseListener(madCardClick);
-    
-        // Battlefield card mouseover
-        this.view.getTabletop().addMouseMotionListener(mmlCardOver);
-    
         // Player select
         this.view.getAvatarArea().addMouseListener(madAvatar);
-    
     }
 
     @Override

@@ -19,12 +19,10 @@ package forge.gui.match.nonsingleton;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
@@ -36,7 +34,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
-import forge.gui.match.controllers.CMessage;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.HandArea;
 import forge.view.arcane.util.Animation;
@@ -49,11 +46,6 @@ public class CHand implements ICDoc {
     private final Player player;
     private final VHand view;
     private boolean initializedAlready = false;
-
-    private final MouseListener madCardClick = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            cardclickAction(e); } };
-
 
     /**
      * Controls Swing components of a player's hand instance.
@@ -73,49 +65,6 @@ public class CHand implements ICDoc {
 
 //        if (player != null)
 //            player.getZone(ZoneType.Hand).addObserver(this);
-
-        HandArea area = view.getHandArea();
-        area.addMouseListener(madCardClick);
-    }
-
-    /**
-     * Adds various listeners for cards in hand. Uses CardPanel instance from
-     * ViewHand.
-     * 
-     * @param c
-     *            &emsp; CardPanel object
-     */
-    public void addCardPanelListeners(final CardPanel c) {
-        // Grab top level controller to facilitate interaction between children
-        final Card cardobj = c.getCard();
-
-        // Sidebar pic/detail on card hover
-        c.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(final MouseEvent e) {
-                CMatchUI.SINGLETON_INSTANCE.setCard(cardobj);
-            }
-        });
-
-        // Mouse press
-        c.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                if (e.getButton() != MouseEvent.BUTTON1) { return; }
-
-                CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(cardobj, e.isMetaDown());
-            }
-        });
-    }
-
-    private void cardclickAction(final MouseEvent e) {
-        if (e.getButton() != MouseEvent.BUTTON1) {
-            return;
-        }
-        final Card c = view.getHandArea().getHoveredCard(e);
-        if (c != null) {
-            CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, e.isMetaDown());
-        }
     }
 
     public void update(final Observable a, final Object b) {

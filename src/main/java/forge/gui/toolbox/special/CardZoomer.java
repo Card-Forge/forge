@@ -23,6 +23,8 @@ public enum CardZoomer {
     private final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
     private Card thisCard;
     private JPanel pnlMain;
+    private boolean temporary, zoomed;
+    private long lastClosedTime;
     
     private CardZoomer() {        
         setupMouseListeners();
@@ -30,54 +32,59 @@ public enum CardZoomer {
     }
     
     private void setupKeyListeners() {
-        
         overlay.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                if (!temporary && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     closeZoomer();                   
                 }                
             }        
         });
-
     }
 
     private void setupMouseListeners() {
-
         overlay.addMouseListener(new MouseAdapter() {            
             @Override
-            public void mouseClicked(MouseEvent e) {
-                closeZoomer();
+            public void mouseReleased(MouseEvent e) {
+                if (!temporary) {
+                    closeZoomer();
+                }
             }
         });
-        
+
         overlay.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                if (e.getWheelRotation() > 0) {
+                if (!temporary && e.getWheelRotation() > 0) {
                     closeZoomer();
                 } 
             }
         });
-                
     }
-        
-    public void displayZoomedCard(Card card) {
-        
+
+    public boolean displayZoomedCard(Card card) {
+        return displayZoomedCard(card, false);
+    }
+
+    public boolean displayZoomedCard(Card card, boolean temp) {
+        if (System.currentTimeMillis() - lastClosedTime < 250) {
+            return false; //don't display zoom if just closed zoom (handles mouse wheeling while middle clicking)
+        }
         thisCard = card;
+        temporary = temp;
         setLayout();
 
         CardPicturePanel picturePanel = new CardPicturePanel(); 
         picturePanel.setCard(thisCard);        
         picturePanel.setOpaque(false);
         pnlMain.add(picturePanel, "w 40%!, h 80%!");
-        
-        SOverlayUtils.showOverlay();        
-                      
+
+        SOverlayUtils.showOverlay();
+        zoomed = true;
+        return true;
     }
-    
+
     private void setLayout() {
-        
         overlay.removeAll();
 
         pnlMain = new JPanel();
@@ -87,11 +94,12 @@ public enum CardZoomer {
         pnlMain.setLayout(new MigLayout("insets 0, wrap, align center"));
 
         overlay.add(pnlMain, "w 100%!, h 100%!");
+    }
 
-    }
-    
-    private void closeZoomer() {
+    public void closeZoomer() {
+        if (!zoomed) { return; }
+        zoomed = false;
         SOverlayUtils.hideOverlay();
+        lastClosedTime = System.currentTimeMillis();
     }
-              
 }

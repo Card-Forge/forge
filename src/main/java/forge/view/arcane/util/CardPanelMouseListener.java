@@ -54,14 +54,6 @@ public interface CardPanelMouseListener {
     void mouseLeftClicked(CardPanel panel, MouseEvent evt);
 
     /**
-     * <p>mouseMiddleClicked.</p>
-     *
-     * @param panel a {@link forge.view.arcane.CardPanel} object.
-     * @param evt a {@link java.awt.event.MouseEvent} object.
-     */
-    void mouseMiddleClicked(CardPanel panel, MouseEvent evt);
-
-    /**
      * <p>mouseRightClicked.</p>
      *
      * @param panel a {@link forge.view.arcane.CardPanel} object.

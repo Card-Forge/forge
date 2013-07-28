@@ -24,10 +24,13 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import javax.swing.JScrollPane;
 
 import forge.Card;
 import forge.FThreads;
+import forge.gui.match.CMatchUI;
+import forge.gui.match.controllers.CMessage;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
 
@@ -490,7 +493,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     /** {@inheritDoc} */
     @Override
+    public final void mouseOver(final CardPanel panel, final MouseEvent evt) {
+        CMatchUI.SINGLETON_INSTANCE.setCard(panel.getCard(), evt.isShiftDown());
+        super.mouseOver(panel, evt);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
+        CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt.isMetaDown());
         if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
             return;
         }

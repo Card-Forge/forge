@@ -15,10 +15,11 @@ The selected tab on each draggable pane will now be remembered between sessions
 Fixed bug where hover effect didn't work the first time hovering over a row that had just been deselected
 Fixed bug where middle and right clicking buttons did the same behavior as left clicking, and fixed bug where clicking multiple buttons quickly (such as filters) while moving the mouse around would result in clicks not registering sometimes.
 Fixed bug where entire Deck Editor would refresh when opening a deck (causing Card Catalog to flicker)
+Fix so cards are "selected" on mouse up instead of mouse down, allowing things like drag drop and zoom to work if the card is currently actionable
 
 
 - Card Zoomer -
-Now you can gaze at your HQ images in all their glory with just a flick of the mousewheel. This feature will also increase the size of low quality pics up to the size used be the high quality pics, but the image will not be very clear.
+Now you can gaze at your HQ images in all their glory with just a flick of the mousewheel, holding the middle mouse button down, or holding the left and right mouse buttons down at the same time. This feature will also increase the size of low quality pics up to the size used for high quality pics, but the image will not be very clear.
 
 Instructions:
 - Works on any card image in the Deck Editor or Duel screen.
