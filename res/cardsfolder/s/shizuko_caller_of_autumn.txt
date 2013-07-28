@@ -5,3 +5,4 @@ PT:2/3
 T:Mode$ Phase | Phase$ Upkeep | Execute$ SakuraManaTriple | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player adds G G G to his or her mana pool. Until end of turn, this mana doesn't empty from that player's mana pool as steps and phases end.
 SVar:SakuraManaTriple:AB$ Mana | Cost$ 0 | Produced$ G | Amount$ 3 | PersistentMana$ True | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shizuko_caller_of_autumn.jpg
+Oracle:At the beginning of each player's upkeep, that player adds {G}{G}{G} to his or her mana pool. Until end of turn, this mana doesn't empty from that player's mana pool as steps and phases end.
