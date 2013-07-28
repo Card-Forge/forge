@@ -46,6 +46,7 @@ public final class SLayoutIO {
         public final static String y = "y";
         public final static String w = "w";
         public final static String h = "h";
+        public final static String sel = "sel";
         public final static String doc = "doc";
     }
 
@@ -113,10 +114,13 @@ public final class SLayoutIO {
                 
                 writer.add(TAB);
                 writer.add(EF.createStartElement("", "", "cell"));
-                writer.add(EF.createAttribute(Property.x.toString(), String.valueOf(Math.rint(bounds.getX() * 100000) / 100000)));
-                writer.add(EF.createAttribute(Property.y.toString(), String.valueOf(Math.rint(bounds.getY() * 100000) / 100000)));
-                writer.add(EF.createAttribute(Property.w.toString(), String.valueOf(Math.rint(bounds.getW() * 100000) / 100000)));
-                writer.add(EF.createAttribute(Property.h.toString(), String.valueOf(Math.rint(bounds.getH() * 100000) / 100000)));
+                writer.add(EF.createAttribute(Property.x, String.valueOf(Math.rint(bounds.getX() * 100000) / 100000)));
+                writer.add(EF.createAttribute(Property.y, String.valueOf(Math.rint(bounds.getY() * 100000) / 100000)));
+                writer.add(EF.createAttribute(Property.w, String.valueOf(Math.rint(bounds.getW() * 100000) / 100000)));
+                writer.add(EF.createAttribute(Property.h, String.valueOf(Math.rint(bounds.getH() * 100000) / 100000)));
+                if (cell.getSelected() != null) {
+                    writer.add(EF.createAttribute(Property.sel, cell.getSelected().getDocumentID().toString()));
+                }
                 writer.add(NEWLINE);
 
                 for (final IVDoc<? extends ICDoc> vDoc : cell.getDocs()) {
@@ -157,7 +161,7 @@ public final class SLayoutIO {
         view.removeAllDragCells();
         
         // Read a model for new layout
-        MapOfLists<RectangleOfDouble, EDocID> model = null;
+        MapOfLists<LayoutInfo, EDocID> model = null;
         
         boolean usedCustomPrefsFile = false;
         
@@ -206,38 +210,60 @@ public final class SLayoutIO {
 
         
         // Apply new layout
-        DragCell cell = null;
-        for(Entry<RectangleOfDouble, Collection<EDocID>> kv : model.entrySet()) {
-            cell = new DragCell();
-            cell.setRoughBounds(kv.getKey());
+        for(Entry<LayoutInfo, Collection<EDocID>> kv : model.entrySet()) {
+            LayoutInfo layoutInfo = kv.getKey();
+            DragCell cell = new DragCell();
+            cell.setRoughBounds(layoutInfo.getBounds());
             FView.SINGLETON_INSTANCE.addDragCell(cell); 
             for(EDocID edoc : kv.getValue()) {
                 try {
-//                    System.out.println(String.format("adding doc %s -> %s",  edoc, edoc.getDoc()));
+                    //System.out.println(String.format("adding doc %s -> %s",  edoc, edoc.getDoc()));
                     cell.addDoc(edoc.getDoc());
-                } catch (IllegalArgumentException e) {
+                }
+                catch (IllegalArgumentException e) {
                     System.err.println("Failed to get doc for " + edoc); 
                 }
-                
             }
-            
+            if (layoutInfo.getSelectedId() != null) {
+                cell.setSelected(layoutInfo.getSelectedId().getDoc());
+            }
         }
 
         // Rough bounds are all in place; resize the window.
         SResizingUtil.resizeWindow();
     }
 
-    private static MapOfLists<RectangleOfDouble, EDocID> readLayout(final XMLEventReader reader) throws XMLStreamException
+    private static class LayoutInfo
+    {
+        private final RectangleOfDouble bounds;
+        private final EDocID selectedId;
+
+        public LayoutInfo(RectangleOfDouble bounds0, EDocID selectedId0) {
+            this.bounds = bounds0;
+            this.selectedId = selectedId0;
+        }
+        
+        public RectangleOfDouble getBounds() {
+            return this.bounds;
+        }
+        
+        public EDocID getSelectedId() {
+            return this.selectedId;
+        }
+    }
+
+    private static MapOfLists<LayoutInfo, EDocID> readLayout(final XMLEventReader reader) throws XMLStreamException
     {
         XMLEvent event;
         StartElement element;
         Iterator<?> attributes;
         Attribute attribute;
+        EDocID selectedId = null;
         double x0 = 0, y0 = 0, w0 = 0, h0 = 0;
         
-        MapOfLists<RectangleOfDouble, EDocID> model = new HashMapOfLists<RectangleOfDouble, EDocID>(CollectionSuppliers.<EDocID>arrayLists());
+        MapOfLists<LayoutInfo, EDocID> model = new HashMapOfLists<LayoutInfo, EDocID>(CollectionSuppliers.<EDocID>arrayLists());
         
-        RectangleOfDouble currentKey = null;
+        LayoutInfo currentKey = null;
         while (null != reader && reader.hasNext()) {
             event = reader.nextEvent();
 
@@ -248,15 +274,15 @@ public final class SLayoutIO {
                     attributes = element.getAttributes();
                     while (attributes.hasNext()) {
                         attribute = (Attribute) attributes.next();
-                        double val = Double.parseDouble(attribute.getValue());
                         String atrName = attribute.getName().toString();
 
-                        if (atrName.equals(Property.x))      x0 = val;
-                        else if (atrName.equals(Property.y)) y0 = val;
-                        else if (atrName.equals(Property.w)) w0 = val;
-                        else if (atrName.equals(Property.h)) h0 = val;
+                        if (atrName.equals(Property.x))      x0 = Double.parseDouble(attribute.getValue());
+                        else if (atrName.equals(Property.y)) y0 = Double.parseDouble(attribute.getValue());
+                        else if (atrName.equals(Property.w)) w0 = Double.parseDouble(attribute.getValue());
+                        else if (atrName.equals(Property.h)) h0 = Double.parseDouble(attribute.getValue());
+                        else if (atrName.equals(Property.sel)) selectedId = EDocID.valueOf(attribute.getValue());
                     }
-                    currentKey = new RectangleOfDouble(x0, y0, w0, h0);
+                    currentKey = new LayoutInfo(new RectangleOfDouble(x0, y0, w0, h0), selectedId);
                 }
                 else if (element.getName().getLocalPart().equals(Property.doc)) {
                     event = reader.nextEvent();

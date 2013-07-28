@@ -205,6 +205,8 @@ public enum FControl {
      * Switches between display states in top level JFrame.
      */
     public void changeState(Screens screen) {
+        if (this.state == screen) { return; }
+
         clearChildren(JLayeredPane.DEFAULT_LAYER);
         this.state = screen;
 

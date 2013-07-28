@@ -229,8 +229,15 @@ public final class SRearrangingUtil {
         pnlPreview.setBounds(0, 0, 0, 0);
 
         // Source and target are the same?
-        if (dropzone.equals(Dropzone.NONE)) { return; }
-        if (cellTarget.equals(cellSrc) && cellSrc.getDocs().size() == 1) { return; }
+        if (dropzone.equals(Dropzone.NONE) || (cellTarget.equals(cellSrc) && cellSrc.getDocs().size() == 1))
+        {
+            if (srcSelectedDoc != cellSrc.getSelected())
+            {
+                SLayoutIO.saveLayout(null); //still need to save layout if selection changed
+            }
+            srcSelectedDoc = null;
+            return;
+        }
 
         // Prep vals for possible resize
         tempX = cellTarget.getX();
@@ -300,6 +307,7 @@ public final class SRearrangingUtil {
         cellTarget.updateRoughBounds();
 
         cellSrc.setSelected(srcSelectedDoc);
+        srcSelectedDoc = null;
         cellSrc.refresh();
         cellTarget.refresh();
         cellNew.validate();

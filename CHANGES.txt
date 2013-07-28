@@ -8,14 +8,13 @@ Forge Beta: 07-##-2013 ver 1.4.4
 Release Notes
 -------------
 
--All Decks updates-
-Can double click row for deck to open it (in addition to clicking edit icon)
-Fixed bug where hover effect didn't work the first time hovering over a row that had just been deselected
-
-
--Improvements to color/card Type filters
+- Deck Editor and General UI improvements -
 You can now right-click on a color filter button to show only cards of that color, filtering out all other colors. Similar with card type filter buttons.
+Can double click row for deck to open it (in addition to clicking edit icon)
+The selected tab on each draggable pane will now be remembered between sessions
+Fixed bug where hover effect didn't work the first time hovering over a row that had just been deselected
 Fixed bug where middle and right clicking buttons did the same behavior as left clicking, and fixed bug where clicking multiple buttons quickly (such as filters) while moving the mouse around would result in clicks not registering sometimes.
+Fixed bug where entire Deck Editor would refresh when opening a deck (causing Card Catalog to flicker)
 
 
 - Card Zoomer -
