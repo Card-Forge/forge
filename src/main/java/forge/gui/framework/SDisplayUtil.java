@@ -92,15 +92,17 @@ public class SDisplayUtil {
         Runnable showTabRoutine = new Runnable() {
             @Override
             public void run() {
-                FThreads.assertExecutedByEdt(true);
+                // FThreads.assertExecutedByEdt(true); - always true
                 Component c = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
-                tab0.getParentCell().setSelected(tab0);
+                DragCell dc = tab0.getParentCell();
+                if (dc != null)
+                    dc.setSelected(tab0);
                 // set focus back to previous owner, if any
                 if (null != c) {
                     c.requestFocusInWindow();
                 }
             }
         };
-        FThreads.invokeInEdtNowOrLater(showTabRoutine);
+        FThreads.invokeInEdtLater(showTabRoutine);
     }
 }
