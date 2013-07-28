@@ -88,8 +88,13 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         }
                     }
                 } else {
-                    chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, sa.hasParam("ChoiceTitle") ? 
-                            sa.getParam("ChoiceTitle") : "Choose a card ", validAmount, !sa.hasParam("Mandatory")));
+                    final List<Card> choice = p.getController().chooseCardsForEffect(choices, sa, sa.hasParam("ChoiceTitle") ? 
+                            sa.getParam("ChoiceTitle") : "Choose a card ", validAmount, !sa.hasParam("Mandatory"));
+                    for (Card c : choice) {
+                        if (c != null) {
+                            chosen.add(c);
+                        }
+                    }
                 }
             }
         }
