@@ -6692,6 +6692,7 @@ res/cardsfolder/m/mark_of_asylum.txt svneol=native#text/plain
 res/cardsfolder/m/mark_of_eviction.txt -text
 res/cardsfolder/m/mark_of_fury.txt svneol=native#text/plain
 res/cardsfolder/m/mark_of_mutiny.txt svneol=native#text/plain
+res/cardsfolder/m/mark_of_sakiko.txt -text
 res/cardsfolder/m/mark_of_the_oni.txt svneol=native#text/plain
 res/cardsfolder/m/mark_of_the_vampire.txt -text
 res/cardsfolder/m/marker_beetles.txt svneol=native#text/plain
