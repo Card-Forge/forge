@@ -262,8 +262,12 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     /** Removes a document from the layout and tabs.
      * @param doc0 &emsp; {@link forge.gui.framework.IVDoc} */
     public void removeDoc(final IVDoc<? extends ICDoc> doc0) {
+        boolean wasSelected = (docSelected == doc0);
         allDocs.remove(doc0);
         pnlHead.remove(doc0.getTabLabel());
+        if (wasSelected) { //after removing selected doc, select most recent doc if possible
+            setSelected(null);
+        }
     }
 
     /** - Deselects previous selection, if there is one<br>
