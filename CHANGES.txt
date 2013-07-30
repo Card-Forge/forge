@@ -14,7 +14,6 @@ Can double click row for deck to open it (in addition to clicking edit icon)
 The selected tab on each draggable pane will now be remembered between sessions
 Fixed bug where hover effect didn't work the first time hovering over a row that had just been deselected
 Fixed bug where middle and right clicking buttons did the same behavior as left clicking, and fixed bug where clicking multiple buttons quickly (such as filters) while moving the mouse around would result in clicks not registering sometimes.
-Fixed bug where entire Deck Editor would refresh when opening a deck (causing Card Catalog to flicker)
 Fixed so cards are "selected" on mouse up instead of mouse down, allowing things like drag drop and zoom to work if the card is currently actionable
 Fixed so, after dragging a pane tab to a new location, the pane it was in before selects its most recent remaining tab instead of being blank
 
