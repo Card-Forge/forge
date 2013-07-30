@@ -200,7 +200,7 @@ public class HumanPlay {
         source.setSplitStateToPlayAbility(sa);
     
         if (sa.getPayCosts() != null) {
-            if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
+            if (sa.getApi() == ApiType.Charm && !sa.isWrapper() && !sa.isCopied()) {
                 CharmEffect.makeChoices(sa);
             }
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
