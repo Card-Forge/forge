@@ -269,13 +269,16 @@ public class GameAction {
             copied.getCharacteristics().resetCardColor();
         }
 
-        if (fromBattlefield && !c.isToken()) {
-            copied.setSuspendCast(false);
-            copied.setState(CardCharacteristicName.Original);
+        if (fromBattlefield) {
+            if (!c.isToken()) {
+                copied.setSuspendCast(false);
+                copied.setState(CardCharacteristicName.Original);
+            }
             // Soulbond unpairing
             if (c.isPaired()) {
                 c.getPairedWith().setPairedWith(null);
-                c.setPairedWith(null);
+                if (!c.isToken())
+                    c.setPairedWith(null);
             }
             unattachCardLeavingBattlefield(copied);
         } else if (zoneFrom.is(ZoneType.Exile) && !toBattlefield) {
