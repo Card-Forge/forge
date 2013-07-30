@@ -1,7 +1,7 @@
-Forge Beta: 07-##-2013 ver 1.4.4
+Forge Beta: 07-30-2013 ver 1.4.4
 
 
-13### cards in total.
+13039 cards in total.
 
 
 -------------
@@ -71,30 +71,30 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-Nettlevine Blight
 Autumn's Veil
-Kudzu
-Samite Blessing
-Mindbender Spores
-Hallow
-Tide of War
-Spatial Binding
-Thought Dissector
-Shape of the Wiitigo
 Cycle of Life
-Sporogenesis
+Frankenstein's Monster
+Hallow
+Kudzu
+Mark of Sakiko
+Mindbender Spores
+Nettlevine Blight
+Planar Overlay
 Rogue Skycaptain
-Suffocation
+Sakiko, Mother of Summer
+Sakura-Tribe Springcaller
+Samite Blessing
+Shape of the Wiitigo
+Shizuko, Caller of Autumn
+Spatial Binding
+Sporogenesis
 Steam Vines
 Stronghold Gambit
+Suffocation
+Thought Dissector
+Tide of War
 Timesifter
 Twist Allegiance
-Planar Overlay
-Frankenstein's Monster
-Sakura-Tribe Springcaller
-Shizuko, Caller of Autumn
-Sakiko, Mother of Summer
-Mark of Sakiko
 
 
 ----------
@@ -143,7 +143,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+Asepetci
+DrDev
+Gos
+Marc
+Max
+Sloth
+Sol
+spr
+squee1968
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
