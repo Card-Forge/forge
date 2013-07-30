@@ -1,0 +1,11 @@
+Name:Aegis of Honor
+ManaCost:W
+Types:Enchantment
+A:AB$ Effect | Cost$ 1 | ReplacementEffects$ AegisRedirect | SVars$ AegisDmg,ExileEffect,AegisX | References$ AegisRedirect,AegisDmg,ExileEffect,AegisX | AILogic$ RedirectSpellDamageFromPlayer | Stackable$ False | SpellDescription$ The next time an instant or sorcery spell would deal damage to you this turn, that spell deals that damage to its controller instead.
+SVar:AegisRedirect:Event$ DamageDone | ValidTarget$ You | ValidSource$ Instant,Sorcery | IsCombat$ False | ReplaceWith$ AegisDmg | Description$ The next time an instant or sorcery spell would deal damage to you this turn, that spell deals that damage to its controller instead.
+SVar:AegisDmg:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedSourceController | DamageSource$ ReplacedSource | NumDmg$ AegisX | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:AegisX:ReplaceCount$DamageAmount
+SVar:NonStackingEffect:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aegis_of_honor.jpg
+Oracle:{1}: The next time an instant or sorcery spell would deal damage to you this turn, that spell deals that damage to its controller instead.

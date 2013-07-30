@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
+import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
@@ -93,6 +96,20 @@ public class EffectAi extends SpellAbilityAi {
                 if (comp.size() < 2 || human.size() < 1) {
                     randomReturn = false;
                 }
+            } else if (logic.equals("RedirectSpellDamageFromPlayer")) {
+                if (game.getStack().isEmpty()) {
+                    return false;
+                }
+                boolean threatened = false;
+                for (final SpellAbilityStackInstance stackSA : game.getStack()) {
+                    if (stackSA.getSpellAbility().getApi() == ApiType.DealDamage) {
+                        final SpellAbility saTargeting = stackSA.getSpellAbility().getSATargetingPlayer();
+                        if (saTargeting != null) {
+                            threatened = Iterables.contains(saTargeting.getTargets().getTargetPlayers(), ai);
+                        }
+                    }
+                }
+                randomReturn = threatened;
             }
         } else { //no AILogic
             return false;
