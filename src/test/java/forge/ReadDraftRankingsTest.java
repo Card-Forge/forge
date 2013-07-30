@@ -23,7 +23,7 @@ public class ReadDraftRankingsTest {
     /**
      * Card test.
      */
-    @Test(enabled = true)
+    @Test(enabled = false)
     void test() {
         ReadDraftRankings rdr = new ReadDraftRankings();
         Assert.assertNotNull(rdr);
