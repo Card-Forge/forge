@@ -1,12 +1,16 @@
-Forge Beta: 07-30-2013 ver 1.4.4
+Forge Beta: 07-31-2013 ver 1.4.5
 
 
-13039 cards in total.
+13050 cards in total.
 
 
 -------------
 Release Notes
 -------------
+
+- version 1.4.4 -
+We were not able to release version 1.4.4 and are releasing 1.4.5 instead. Enjoy.
+
 
 - Deck Editor and General UI improvements -
 You can now right-click on a color filter button to show only cards of that color, filtering out all other colors. Similar with card type filter buttons.
@@ -72,18 +76,25 @@ New Cards
 ---------
 
 Autumn's Veil
+Circling Vultures
 Cycle of Life
 Frankenstein's Monster
+Gilded Drake
 Hallow
 Kudzu
 Mark of Sakiko
+Mercadias Downfall
 Mindbender Spores
+Mishra's War Machine
+Nefarious Lich
 Nettlevine Blight
 Planar Overlay
+Rocket Launcher
 Rogue Skycaptain
 Sakiko, Mother of Summer
 Sakura-Tribe Springcaller
 Samite Blessing
+Sea Troll
 Shape of the Wiitigo
 Shizuko, Caller of Autumn
 Spatial Binding
@@ -97,6 +108,13 @@ Timesifter
 Twist Allegiance
 
 
+---------------
+New Phenomenons
+---------------
+
+Reality Shaping
+
+
 ----------
 New Planes
 ----------
@@ -104,6 +122,9 @@ New Planes
 Agyrem
 Celestine Reef
 Edge of Malacol
+Eloren Wilds
+Norn's Dominion
+Prahv
 
 
 -----------
