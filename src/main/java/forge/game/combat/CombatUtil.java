@@ -180,14 +180,16 @@ public class CombatUtil {
             return true;
         }
 
-        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount GT") && !combat.getBlockers(attacker).isEmpty()) {
-            return false;
-        }
-        
-        // Rule 802.4a: A player can block only creatures attacking him or a planeswalker he controls
-        Player attacked = combat.getDefendingPlayerRelatedTo(attacker);
-        if (attacked != null && attacked != defendingPlayer) {
-            return false;
+        if ( combat != null ) {
+            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount GT") && !combat.getBlockers(attacker).isEmpty()) {
+                return false;
+            }
+            
+            // Rule 802.4a: A player can block only creatures attacking him or a planeswalker he controls
+            Player attacked = combat.getDefendingPlayerRelatedTo(attacker);
+            if (attacked != null && attacked != defendingPlayer) {
+                return false;
+            }
         }
         return CombatUtil.canBeBlocked(attacker, defendingPlayer);
     }
@@ -493,7 +495,7 @@ public class CombatUtil {
      */
     public static boolean canBlock(final Card attacker, final Card blocker, final Combat combat) {
 
-        if ((attacker == null) || (blocker == null)) {
+        if (attacker == null || blocker == null) {
             return false;
         }
 
