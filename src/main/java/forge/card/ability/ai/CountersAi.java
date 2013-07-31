@@ -89,11 +89,12 @@ public abstract class CountersAi {
         Card choice;
         if (type.equals("P1P1")) {
             choice = ComputerUtilCard.getBestCreatureAI(list);
-        } else if (type.equals("DIVINITY")) {
+        } else if (type.equals("DIVINITY") || type.equals("FATE")) {
             final List<Card> boon = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.getCounters(CounterType.DIVINITY) == 0;
+                    return c.getCounters(CounterType.DIVINITY) == 0  
+                            && c.getCounters(CounterType.FATE) == 0;
                 }
             });
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon, null, false);

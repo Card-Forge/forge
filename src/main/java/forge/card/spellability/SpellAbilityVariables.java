@@ -74,6 +74,8 @@ public class SpellAbilityVariables {
         this.isPresent = sav.getIsPresent();
         this.presentCompare = sav.getPresentCompare();
         this.presentDefined = sav.getPresentDefined();
+        this.playerDefined = sav.getPlayerDefined();
+        this.playerContains = sav.getPlayerContains();
         this.presentZone = sav.getPresentZone();
         this.sVarToCheck = sav.getsVarToCheck();
         this.sVarOperator = sav.getsVarOperator();
@@ -147,6 +149,12 @@ public class SpellAbilityVariables {
 
     /** The present defined. */
     private String presentDefined = null;
+
+    /** The player defined. */
+    private String playerDefined = null;
+
+    /** The player contains. */
+    private String playerContains = null;
 
     /** The present zone. */
     private ZoneType presentZone = ZoneType.Battlefield;
@@ -764,6 +772,41 @@ public class SpellAbilityVariables {
     public final String getPresentDefined() {
         return this.presentDefined;
     }
+
+    /**
+     * Set the player defined.
+     * 
+     */
+    public final void setPlayerDefined(final String b) {
+        this.playerDefined = b;
+    }
+
+    /**
+     * Gets the player defined.
+     * 
+     * @return the playerDefined
+     */
+    public final String getPlayerDefined() {
+        return this.playerDefined;
+    }
+
+    /**
+     * Gets the player contains.
+     * 
+     * @return the playerContains
+     */
+    public final String getPlayerContains() {
+        return this.playerContains;
+    }
+
+    /**
+     * Set the player contains.
+     * 
+     */
+    public final void setPlayerContains(final String contains) {
+        this.playerContains = contains;
+    }
+
     /**
      * Gets the s var operand.
      * 

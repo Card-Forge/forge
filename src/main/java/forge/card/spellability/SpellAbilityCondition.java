@@ -132,6 +132,14 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setPresentDefined(params.get("ConditionDefined"));
         }
 
+        if (params.containsKey("ConditionPlayerDefined")) {
+            this.setPlayerDefined(params.get("ConditionPlayerDefined"));
+        }
+
+        if (params.containsKey("ConditionPlayerContains")) {
+            this.setPlayerContains(params.get("ConditionPlayerContains"));
+        }
+
         if (params.containsKey("ConditionNotPresent")) {
             this.setIsPresent(params.get("ConditionNotPresent"));
             this.setPresentCompare("EQ0");
@@ -262,6 +270,17 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             final int left = list.size();
 
             if (!Expressions.compare(left, this.getPresentCompare(), right)) {
+                return false;
+            }
+        }
+
+        if (this.getPlayerContains() != null) {
+            List<Player> list = new ArrayList<Player>();
+            if (this.getPlayerDefined() != null) {
+                list.addAll(AbilityUtils.getDefinedPlayers(sa.getSourceCard(), this.getPlayerDefined(), sa));
+            }
+            List<Player> contains = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), this.getPlayerContains(), sa);
+            if (!list.containsAll(contains)) {
                 return false;
             }
         }

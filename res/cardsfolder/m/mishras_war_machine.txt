@@ -1,0 +1,11 @@
+Name:Mishra's War Machine
+ManaCost:7
+Types:Artifact Creature Juggernaut
+PT:5/5
+K:Banding
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 3 damage to you unless you discard a card. If CARDNAME deals damage to you this way, tap it.
+SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 3 | UnlessPayer$ You | UnlessCost$ Discard<1/Card> | RememberDamaged$ True | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | ConditionPlayerDefined$ Remembered | ConditionPlayerContains$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mishras_war_machine.jpg
+Oracle:Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)\nAt the beginning of your upkeep, Mishra's War Machine deals 3 damage to you unless you discard a card. If Mishra's War Machine deals damage to you this way, tap it.
