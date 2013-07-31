@@ -488,7 +488,7 @@ public abstract class CardPanelContainer extends JPanel {
      * @param evt
      *            a {@link java.awt.event.MouseEvent} object.
      */
-    public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
+    public void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseRightClicked(panel, evt);
         }

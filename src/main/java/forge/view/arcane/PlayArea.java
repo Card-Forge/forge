@@ -501,11 +501,18 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     /** {@inheritDoc} */
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt.isMetaDown());
+        CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), false);
         if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
             return;
         }
         super.mouseLeftClicked(panel, evt);
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
+        CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), true);
+        super.mouseRightClicked(panel, evt);
     }
 
     /**

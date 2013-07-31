@@ -36,15 +36,6 @@ import forge.gui.match.controllers.CMessage;
 public class CCommand implements ICDoc {
     private final Player player;
     private final VCommand view;
-    private boolean initializedAlready = false;
-
-    private MouseMotionListener mmlCardOver = new MouseMotionAdapter() { @Override
-        public void mouseMoved(final MouseEvent e) {
-            cardoverAction(e); } };
-
-    private final MouseListener madCardClick = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            cardclickAction(e); } };
 
     /**
      * Controls Swing components of a player's command instance.
@@ -59,15 +50,6 @@ public class CCommand implements ICDoc {
 
     @Override
     public void initialize() {
-        if (initializedAlready) { return; }
-        initializedAlready = true;
-
-        // Listeners
-        // Battlefield card clicks
-        this.view.getTabletop().addMouseListener(madCardClick);
-
-        // Battlefield card mouseover
-        this.view.getTabletop().addMouseMotionListener(mmlCardOver);
     }
 
     @Override
@@ -82,28 +64,6 @@ public class CCommand implements ICDoc {
     /** @return {@link forge.gui.nonsingleton.VField} */
     public VCommand getView() {
         return this.view;
-    }
-
-    /** */
-    private void cardoverAction(MouseEvent e) {
-        boolean isShiftDown = (e.getModifiers() & Event.SHIFT_MASK) != 0;
-        final Card c = CCommand.this.view.getTabletop().getHoveredCard(e);
-        if (c != null) {
-            CMatchUI.SINGLETON_INSTANCE.setCard(c, isShiftDown);
-        }
-    }
-
-    /** */
-    private void cardclickAction(final MouseEvent e) {
-        // original version:
-        // final Card c = t.getDetailController().getCurrentCard();
-        // Roujin's bug fix version dated 2-12-2012
-        final Card c = CCommand.this.view.getTabletop().getHoveredCard(e);
-
-        if (c != null && c.isInZone(ZoneType.Command)) {
-            //TODO: Cast commander/activate avatar/roll planar dice here.
-            CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, e.isMetaDown());
-        }
     }
 
     /* (non-Javadoc)
