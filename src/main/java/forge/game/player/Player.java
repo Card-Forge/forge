@@ -832,18 +832,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        if (game.isCardInPlay("Crumbling Sanctuary")) {
-            for (int i = 0; i < damage; i++) {
-                final List<Card> lib = this.getCardsIn(ZoneType.Library);
-                if (lib.size() > 0) {
-                    game.getAction().exile(lib.get(0));
-                }
-            }
-            // return so things like Lifelink, etc do not trigger. This is a
-            // replacement effect I think.
-            return 0;
-        }
-
         return damage;
     }
 
