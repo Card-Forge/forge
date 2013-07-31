@@ -14092,6 +14092,7 @@ res/skins/default/loader.gif -text
 res/skins/default/sprite_avatars.png -text
 res/skins/default/sprite_foils.png -text
 res/skins/default/sprite_icons.png -text
+res/skins/default/sprite_old_foils.png -text
 res/skins/firebloom/bg_match.jpg -text
 res/skins/firebloom/bg_splash.png -text
 res/skins/firebloom/bg_texture.jpg -text
