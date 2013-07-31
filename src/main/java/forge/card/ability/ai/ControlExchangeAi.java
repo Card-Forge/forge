@@ -63,6 +63,13 @@ public class ControlExchangeAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return false;
+        if (sa.getTargetRestrictions() == null) {
+            if (mandatory) {
+                return true;
+            }
+        } else {
+            return canPlayAI(aiPlayer, sa);
+        }
+        return true;
     }
 }

@@ -1,0 +1,14 @@
+Name:Sea Troll
+ManaCost:2 U
+Types:Creature Troll
+PT:2/1
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.Blue | Execute$ TrigRemember | Static$ True
+T:Mode$ AttackerBlocked | ValidCard$ Creature.Blue | ValidBlocker$ Card.Self  | Execute$ TrigRemember | Static$ True
+SVar:TrigRemember:DB$ StoreSVar | SVar$ CheckActivation | Type$ Number | Expression$ 1
+A:AB$ Regenerate | Cost$ U | CheckSVar$ CheckActivation | SpellDescription$ Regenerate CARDNAME. Activate this ability only if CARDNAME blocked or was blocked by a blue creature this turn.
+SVar:CheckSVar:Number$0
+T:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ StoreSVar | SVar$ CheckActivation | Type$ Number | Expression$ 0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_troll.jpg
+Oracle:{U}: Regenerate Sea Troll. Activate this ability only if Sea Troll blocked or was blocked by a blue creature this turn.
