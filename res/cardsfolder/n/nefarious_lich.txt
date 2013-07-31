@@ -1,0 +1,19 @@
+Name:Nefarious Lich
+ManaCost:B B B B
+Types:Enchantment
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ ExileCards | Description$ If damage would be dealt to you, exile that many cards from your graveyard instead. If you can't, you lose the game.
+SVar:ExileCards:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Card | ChangeNum$ X | DefinedPlayer$ ReplacedTarget | Origin$ Graveyard | Destination$ Exile | References$ CheckYard,X | ConditionCheckSVar$ CheckYard | ConditionSVarCompare$ GEX | SubAbility$ DBLose | RememberChanged$ True
+SVar:DBLose:DB$ LosesGame | Defined$ You | ConditionCheckSVar$ CheckExile | ConditionSVarCompare$ LTX | References$ CheckExile,X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:CheckYard:Count$ValidGraveyard Card.YouOwn
+SVar:CheckExile:Count$ValidExile Card.IsRemembered
+SVar:X:ReplaceCount$DamageAmount
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
+SVar:Draw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ Y | References$ Y
+SVar:Y:ReplaceCount$LifeGained
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigLose | TriggerDescription$ When CARDNAME leaves the battlefield, you lose the game.
+SVar:TrigLose:AB$ LosesGame | Cost$ 0 | Defined$ You
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nefarious_lich.jpg
+Oracle:If damage would be dealt to you, exile that many cards from your graveyard instead. If you can't, you lose the game.\nIf you would gain life, draw that many cards instead.\nWhen Nefarious Lich leaves the battlefield, you lose the game.

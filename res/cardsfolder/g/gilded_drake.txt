@@ -1,0 +1,11 @@
+Name:Gilded Drake
+ManaCost:1 U
+Types:Creature Drake
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExchange | TriggerDescription$ When CARDNAME enters the battlefield, exchange control of CARDNAME and up to one target creature an opponent controls. If you don't make an exchange, sacrifice CARDNAME. This ability can't be countered except by spells and abilities. (This effect lasts indefinitely.)
+SVar:TrigExchange:AB$ ExchangeControl | Cost$ 0 | Defined$ Self | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | TargetMin$ 0 | TargetMax$ 1 | CantFizzle$ True | SubAbility$ DBSacSelf
+SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | ConditionDefined$ Self | ConditionPresent$ Card.YouCtrl
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gilded_drake.jpg
+Oracle:Flying\nWhen Gilded Drake enters the battlefield, exchange control of Gilded Drake and up to one target creature an opponent controls. If you don't make an exchange, sacrifice Gilded Drake. This ability can't be countered except by spells and abilities. (This effect lasts indefinitely.)

@@ -4339,6 +4339,7 @@ res/cardsfolder/g/gigadrowse.txt svneol=native#text/plain
 res/cardsfolder/g/gigantiform.txt -text
 res/cardsfolder/g/gigantomancer.txt svneol=native#text/plain
 res/cardsfolder/g/gigapede.txt svneol=native#text/plain
+res/cardsfolder/g/gilded_drake.txt -text
 res/cardsfolder/g/gilded_light.txt -text
 res/cardsfolder/g/gilded_lotus.txt svneol=native#text/plain
 res/cardsfolder/g/gilder_bairn.txt svneol=native#text/plain
@@ -7464,6 +7465,7 @@ res/cardsfolder/n/needlebite_trap.txt -text
 res/cardsfolder/n/needlebug.txt svneol=native#text/plain
 res/cardsfolder/n/needlepeak_spider.txt svneol=native#text/plain
 res/cardsfolder/n/needleshot_gourna.txt svneol=native#text/plain
+res/cardsfolder/n/nefarious_lich.txt -text
 res/cardsfolder/n/nefarox_overlord_of_grixis.txt -text
 res/cardsfolder/n/nefashu.txt svneol=native#text/plain
 res/cardsfolder/n/negate.txt svneol=native#text/plain
@@ -9153,6 +9155,7 @@ res/cardsfolder/r/rock_badger.txt svneol=native#text/plain
 res/cardsfolder/r/rock_basilisk.txt svneol=native#text/plain
 res/cardsfolder/r/rock_slide.txt -text
 res/cardsfolder/r/rockcaster_platoon.txt svneol=native#text/plain
+res/cardsfolder/r/rocket_launcher.txt -text
 res/cardsfolder/r/rockshard_elemental.txt svneol=native#text/plain
 res/cardsfolder/r/rockslide_ambush.txt svneol=native#text/plain
 res/cardsfolder/r/rockslide_elemental.txt svneol=native#text/plain

@@ -696,6 +696,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     }
 
                     fizzle &= invalidTarget;
+
+                    if (sa.hasParam("CantFizzle")) {
+                        // Gilded Drake cannot be countered by rules if the
+                        // targeted card is not valid
+                        fizzle = false;
+                    }
                 }
             }
         }
