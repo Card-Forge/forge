@@ -178,6 +178,7 @@ public class ImageCache {
         }
         
         BufferedImage original = getOriginalImage(key, useDefaultImage);
+        if (original == null) { return null; }
         
         // Calculate the scale required to best fit the image into the requested
         // (width x height) dimensions whilst retaining aspect ratio.
