@@ -25,11 +25,13 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.Command;
 import forge.Singletons;
+import forge.card.CardEdition;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.util.MyRandom;
 
 /**
  * Controls the card picture panel in the match UI.
@@ -66,7 +68,17 @@ public enum CPicture implements ICDoc {
 
     public void showCard(final InventoryItem item) {
         if (item instanceof IPaperCard) {
-            showCard(((IPaperCard)item).getMatchingForgeCard(), false);
+            Card c = ((IPaperCard)item).getMatchingForgeCard();
+            if (((IPaperCard)item).isFoil() && c.getFoil() == 0) {
+                CardEdition.FoilType foilType = CardEdition.FoilType.NOT_SUPPORTED;
+                if (c.getCurSetCode() != null && Singletons.getModel().getEditions().get(c.getCurSetCode()) != null) {
+                    foilType = Singletons.getModel().getEditions().get(c.getCurSetCode()).getFoilType();
+                }
+                if (foilType != CardEdition.FoilType.NOT_SUPPORTED) {
+                    c.setFoil(foilType == CardEdition.FoilType.MODERN ? MyRandom.getRandom().nextInt(9) + 1 : MyRandom.getRandom().nextInt(9) + 11);
+                }
+            }
+            showCard(c, false);
             return;
         }
         
