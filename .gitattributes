@@ -1860,6 +1860,7 @@ res/cardsfolder/c/circle_of_protection_red.txt -text
 res/cardsfolder/c/circle_of_protection_shadow.txt -text
 res/cardsfolder/c/circle_of_protection_white.txt -text
 res/cardsfolder/c/circle_of_solace.txt -text
+res/cardsfolder/c/circling_vultures.txt -text
 res/cardsfolder/c/circu_dimir_lobotomist.txt -text
 res/cardsfolder/c/circular_logic.txt svneol=native#text/plain
 res/cardsfolder/c/citanul_centaurs.txt svneol=native#text/plain
@@ -6842,6 +6843,7 @@ res/cardsfolder/m/mephidross_vampire.txt svneol=native#text/plain
 res/cardsfolder/m/mephitic_ooze.txt svneol=native#text/plain
 res/cardsfolder/m/mercadian_atlas.txt -text
 res/cardsfolder/m/mercadian_lift.txt -text
+res/cardsfolder/m/mercadias_downfall.txt -text
 res/cardsfolder/m/mercenary_informer.txt svneol=native#text/plain
 res/cardsfolder/m/mercenary_knight.txt -text
 res/cardsfolder/m/merchant_of_secrets.txt svneol=native#text/plain

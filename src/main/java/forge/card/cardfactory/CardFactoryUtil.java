@@ -2959,6 +2959,10 @@ public class CardFactoryUtil {
             }
         } // Morph
 
+        if (hasKeyword(card, "MayDiscardFromHand") != -1) {
+            card.addSpellAbility(abilityDiscardSource(card)); // Circling Vultures
+        }
+
         if (hasKeyword(card, "Unearth") != -1) {
             final int n = hasKeyword(card, "Unearth");
             if (n != -1) {
@@ -3138,6 +3142,43 @@ public class CardFactoryUtil {
         } // Storm
     }
     
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     * @return
+     */
+    public static AbilityStatic abilityDiscardSource(final Card sourceCard) {
+        final AbilityStatic discard = new AbilityStatic(sourceCard, new Cost("0", true), null) {
+            @Override
+            public void resolve() {
+                if (this.getActivatingPlayer().getController().confirmAction(this, null, "Discard this card?")) {
+                    this.getActivatingPlayer().discard(sourceCard, this);
+                }
+            }
+
+            @Override
+            public boolean canPlay() {
+                return sourceCard.isInZone(ZoneType.Hand) 
+                        && sourceCard.getController().equals(this.getActivatingPlayer());
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return false;
+            }
+
+        };
+        final StringBuilder sb = new StringBuilder();
+        sb.append("You may discard ").append(sourceCard.getName());
+        sb.append(" any time you could cast an instant.");
+        discard.setDescription(sb.toString());
+
+        final StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard.getName()).append(" - discard this card.");
+        discard.setStackDescription(sbStack.toString());
+        return discard;
+    }
+
     public final static void refreshTotemArmor(Card c) {
         boolean hasKw = c.hasKeyword("Totem armor");
 

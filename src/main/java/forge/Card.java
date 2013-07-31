@@ -1983,7 +1983,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("PreventAllDamageBy")
                     || keyword.startsWith("CantBlock")
                     || keyword.startsWith("CantEquip")
-                    || keyword.startsWith("SpellCantTarget")) {
+                    || keyword.startsWith("SpellCantTarget")
+                    || keyword.equals("MayDiscardFromHand")) {
                 continue;
             }
             if (keyword.startsWith("etbCounter")) {
@@ -5337,8 +5338,18 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!game.getPhaseHandler().inCombat()) {
                 return false;
             }
-            if (getGame().getCombat().getDefendingPlayerRelatedTo(source) != this.getController()) {
-                return false;
+            if (property.endsWith("ForRemembered")) {
+                if (source.getRemembered().isEmpty()) {
+                    return false;
+                }
+                if (getGame().getCombat().getDefendingPlayerRelatedTo((Card) source.getRemembered().get(0))
+                        != this.getController()) {
+                    return false;
+                }
+            } else {
+                if (getGame().getCombat().getDefendingPlayerRelatedTo(source) != this.getController()) {
+                    return false;
+                }
             }
         } else if (property.startsWith("EnchantedPlayerCtrl")) {
             final Object o = source.getEnchanting();

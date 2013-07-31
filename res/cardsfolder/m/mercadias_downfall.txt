@@ -1,0 +1,10 @@
+Name:Mercadia's Downfall
+ManaCost:2 R
+Types:Instant
+A:SP$ RepeatEach | Cost$ 2 R | RepeatCards$ Creature.attacking | RepeatSubAbility$ DBPump | SpellDescription$ Each attacking creature gets +1/+0 until end of turn for each nonbasic land defending player controls.
+SVar:DBPump:DB$ Pump | Defined$ Remembered | References$ X | NumAtt$ X
+SVar:X:Count$Valid Land.nonBasic+DefenderCtrlForRemembered
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mercadias_downfall.jpg
+Oracle:Each attacking creature gets +1/+0 until end of turn for each nonbasic land defending player controls.
