@@ -162,31 +162,26 @@ public class ImageCache {
         }
 
         boolean mayEnlarge = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
-        double scale = Math.min(
-                -1 == width ? 1 : (double)width / original.getWidth(),
-                -1 == height? 1 : (double)height / original.getHeight());
-        if ((scale > 1) && !mayEnlarge) {
-            scale = 1;
+        
+        // Calculate the scale required to best fit the image into the requested
+        // (width x height) dimensions whilst retaining aspect ratio.
+        double scaleX = (-1 == width ? 1 : (double)width / original.getWidth());
+        double scaleY = (-1 == height? 1 : (double)height / original.getHeight());
+        double bestFitScale = Math.min(scaleX, scaleY);
+        if ((bestFitScale > 1) && !mayEnlarge) {
+            bestFitScale = 1;
         }
 
         BufferedImage result;
-        if (1 == scale) { 
+        if (1 == bestFitScale) { 
             result = original;
         } else {
-            int destWidth  = (int)(original.getWidth()  * scale);
-            int destHeight = (int)(original.getHeight() * scale);
             
-            // if this scale has been used before, get the cached version instead of rescaling
-            String effectiveResizedKey = String.format("%s#%dx%d", key, destWidth, destHeight);
-            result = _CACHE.getIfPresent(effectiveResizedKey);
-            if (null == result) {
-                ResampleOp resampler = new ResampleOp(destWidth, destHeight);
-                result = resampler.filter(original, null);
-                //System.out.println("caching resized image: " + effectiveResizedKey);
-                _CACHE.put(effectiveResizedKey, result);
-            //} else {
-            //    System.out.println("retrieved resized image: " + effectiveResizedKey);
-            }
+            int destWidth  = (int)(original.getWidth()  * bestFitScale);
+            int destHeight = (int)(original.getHeight() * bestFitScale);
+                         
+            ResampleOp resampler = new ResampleOp(destWidth, destHeight);
+            result = resampler.filter(original, null);
         }
         
         //System.out.println("caching image: " + resizedKey);
