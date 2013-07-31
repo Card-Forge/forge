@@ -135,6 +135,33 @@ public class ImageCache {
         }
         return new ImageIcon(i);
     }
+    
+    /**
+     * This requests the original unscaled image from the cache for the given key.
+     * If the image does not exist then it can return a default image if desired.
+     * <p>
+     * If the requested image is not present in the cache then it attempts to load
+     * the image from file (slower) and then add it to the cache for fast future access. 
+     * </p>
+     */
+    public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound) {
+
+        // Load from file and add to cache if not found in cache initially. 
+        BufferedImage original = getImage(imageKey);
+        
+        // No image file exists for the given key so optionally associate with
+        // a default "not available" image and add to cache for given key.
+        if (original == null) {
+            if (useDefaultIfNotFound) { 
+                original = _defaultImage;
+                _CACHE.put(imageKey, _defaultImage);                
+            } else {
+                original = null;
+            }            
+        }
+                
+        return original;
+    }
 
     private static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage) {
         if (StringUtils.isEmpty(key) || (3 > width && -1 != width) || (3 > height && -1 != height)) {
@@ -150,25 +177,14 @@ public class ImageCache {
             return cached;
         }
         
-        BufferedImage original = getImage(key);
-        if (null == original) {
-            if (!useDefaultImage) {
-                return null;
-            }
-            
-            // henceforth use a default picture for this key if image not found
-            original = _defaultImage;
-            _CACHE.put(key, _defaultImage);
-        }
-
-        boolean mayEnlarge = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
+        BufferedImage original = getOriginalImage(key, useDefaultImage);
         
         // Calculate the scale required to best fit the image into the requested
         // (width x height) dimensions whilst retaining aspect ratio.
         double scaleX = (-1 == width ? 1 : (double)width / original.getWidth());
         double scaleY = (-1 == height? 1 : (double)height / original.getHeight());
         double bestFitScale = Math.min(scaleX, scaleY);
-        if ((bestFitScale > 1) && !mayEnlarge) {
+        if ((bestFitScale > 1) && !mayEnlarge()) {
             bestFitScale = 1;
         }
 
@@ -187,6 +203,10 @@ public class ImageCache {
         //System.out.println("caching image: " + resizedKey);
         _CACHE.put(resizedKey, result);
         return result;
+    }
+    
+    private static boolean mayEnlarge() {
+        return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);        
     }
 
     /**
