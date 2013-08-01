@@ -332,10 +332,7 @@ public class AbilityUtils {
             if (amount.startsWith("Cost")) {
                 return 0;
             }
-        }
-
-        // Nothing to do here if value is missing or blank
-        if (StringUtils.isBlank(svarval)) {
+            // Nothing to do here if value is missing or blank
             System.err.printf("SVar '%s' not defined in Card (%s)%n", amount, card.getName());
             return 0;
         }
@@ -349,7 +346,7 @@ public class AbilityUtils {
         final String[] calcX = svarval.split("\\$", 2);
 
         // Incorrect parses mean zero.
-        if ((calcX.length == 1) || calcX[1].equals("none")) {
+        if (calcX.length == 1 || calcX[1].equals("none")) {
             return 0;
         }
 
@@ -408,6 +405,7 @@ public class AbilityUtils {
                         list.add((Card) o);
                     }
                 }
+                System.out.println("RememberedLKI " + ability + list);
             } else {
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Card) {
