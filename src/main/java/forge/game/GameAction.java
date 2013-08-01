@@ -300,6 +300,7 @@ public class GameAction {
             for (Player p : game.getPlayers()) {
                 copied.getDamageHistory().setNotAttackedSinceLastUpkeepOf(p);
                 copied.getDamageHistory().setNotBlockedSinceLastUpkeepOf(p);
+                copied.getDamageHistory().setNotBeenBlockedSinceLastUpkeepOf(p);
             }
         } else if (zoneTo.is(ZoneType.Graveyard)) {
             copied.setTimestamp(game.getNextTimestamp());

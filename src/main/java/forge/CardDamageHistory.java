@@ -22,6 +22,7 @@ public class CardDamageHistory {
     private final List<Player> creatureAttackedLastTurnOf = new ArrayList<Player>();
     private final List<Player> NotAttackedSinceLastUpkeepOf = new ArrayList<Player>();
     private final List<Player> NotBlockedSinceLastUpkeepOf = new ArrayList<Player>();
+    private final List<Player> NotBeenBlockedSinceLastUpkeepOf = new ArrayList<Player>();
     private final List<Player> damagedThisTurn = new ArrayList<Player>();
     private final List<Player> damagedThisTurnInCombat = new ArrayList<Player>();
     private final List<Player> damagedThisGame = new ArrayList<Player>();
@@ -168,6 +169,31 @@ public class CardDamageHistory {
      */
     public final boolean hasBlockedSinceLastUpkeepOf(final Player p) {
         return !NotBlockedSinceLastUpkeepOf.contains(p);
+    }
+    /**
+     * <p>
+     * Setter for the field <code>NotAttackedSinceLastUpkeepOf</code>.
+     * </p>
+     * 
+     * @param value
+     *            a boolean.
+     */
+    public final void setNotBeenBlockedSinceLastUpkeepOf(final Player p) {
+        NotBeenBlockedSinceLastUpkeepOf.add(p);
+    }
+
+    public final void clearNotBeenBlockedSinceLastUpkeepOf() {
+        NotBeenBlockedSinceLastUpkeepOf.clear();
+    }
+    /**
+     * <p>
+     * Getter for the field <code>NotAttackedSinceLastUpkeepOf</code>.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean hasBeenBlockedSinceLastUpkeepOf(final Player p) {
+        return !NotBeenBlockedSinceLastUpkeepOf.contains(p);
     }
     /**
      * <p>
