@@ -395,7 +395,8 @@ public class ComputerUtilCost {
             }
         } else if (shockland) {
             if (payer.getLife() > 3 && payer.canPayLife(2)) {
-                final int landsize = payer.getLandsInPlay().size();
+                // If the new land size would equal the CMC of a card in AIs hand, play it untapped
+                final int landsize = payer.getLandsInPlay().size() + 1;
                 for (Card c : payer.getCardsIn(ZoneType.Hand)) {
                     if (landsize == c.getCMC()) {
                         return true;
