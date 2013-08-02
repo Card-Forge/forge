@@ -58,6 +58,8 @@ public class Combat {
     private Map<Card, List<Card>> attackersOrderedForDamageAssignment = new HashMap<Card, List<Card>>();
     private Map<Card, List<Card>> blockersOrderedForDamageAssignment = new HashMap<Card, List<Card>>();
     private Map<GameEntity, CombatLki> lkiCache = new HashMap<GameEntity, CombatLki>();
+    
+    private List<Card> combatantDealtFirstStrikeDamage = Lists.newArrayList();
 
 
     public Combat(Player attacker) {
@@ -423,23 +425,29 @@ public class Combat {
         boolean assignedDamage = false;
 
         for (final Card blocker : blockers) {
-            if (blocker.hasDoubleStrike() || blocker.hasFirstStrike() == firstStrikeDamage) {
-                List<Card> attackers = this.attackersOrderedForDamageAssignment.get(blocker);
+            if (!dealDamageThisPhase(blocker, firstStrikeDamage)) {
+                continue;
+            }
+            
+            if (firstStrikeDamage) {
+                this.combatantDealtFirstStrikeDamage.add(blocker);
+            }
+            
+            List<Card> attackers = this.attackersOrderedForDamageAssignment.get(blocker);
 
-                final int damage = blocker.getNetCombatDamage();
+            final int damage = blocker.getNetCombatDamage();
 
-                if (!attackers.isEmpty()) {
-                    Player attackingPlayer = this.getAttackingPlayer();
-                    Player assigningPlayer = blocker.getController();
+            if (!attackers.isEmpty()) {
+                Player attackingPlayer = this.getAttackingPlayer();
+                Player assigningPlayer = blocker.getController();
 
-                    if (AttackingBand.isValidBand(attackers, true))
-                        assigningPlayer = attackingPlayer;
+                if (AttackingBand.isValidBand(attackers, true))
+                    assigningPlayer = attackingPlayer;
 
-                    assignedDamage = true;
-                    Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, damage, null, assigningPlayer != blocker.getController());
-                    for (Entry<Card, Integer> dt : map.entrySet()) {
-                        dt.getKey().addAssignedDamage(dt.getValue(), blocker);
-                    }
+                assignedDamage = true;
+                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, damage, null, assigningPlayer != blocker.getController());
+                for (Entry<Card, Integer> dt : map.entrySet()) {
+                    dt.getKey().addAssignedDamage(dt.getValue(), blocker);
                 }
             }
         }
@@ -454,11 +462,14 @@ public class Combat {
         final List<Card> attackers = this.getAttackers();
         boolean assignedDamage = false;
         for (final Card attacker : attackers) {
-            // If attacker isn't in the right first/regular strike section, continue along
-            if (!(attacker.hasDoubleStrike() || attacker.hasFirstStrike() == firstStrikeDamage)) {
+            if (!dealDamageThisPhase(attacker, firstStrikeDamage)) {
                 continue;
             }
-
+            
+            if (firstStrikeDamage) {
+                this.combatantDealtFirstStrikeDamage.add(attacker);
+            }
+            
             // If potential damage is 0, continue along
             final int damageDealt = attacker.getNetCombatDamage();
             if (damageDealt <= 0) {
@@ -503,6 +514,18 @@ public class Combat {
         } // for
         return assignedDamage;
     }
+    
+    private final boolean dealDamageThisPhase(Card combatant, boolean firstStrikeDamage) {
+        // During first strike damage, double strike and first strike deal damage
+        // During regular strike damage, double strike and anyone who hasn't dealt damage deal damage
+        if (combatant.hasDoubleStrike())
+            return true;
+        
+        if (firstStrikeDamage && combatant.hasFirstStrike()) 
+            return true;
+        
+        return !firstStrikeDamage && !this.combatantDealtFirstStrikeDamage.contains(combatant);
+    }
 
     // Damage to whatever was protected there. 
     private final void addDefendingDamage(final int n, final Card source) {
@@ -525,6 +548,10 @@ public class Combat {
     public final boolean assignCombatDamage(boolean firstStrikeDamage) {
         boolean assignedDamage = assignAttackersDamage(firstStrikeDamage);
         assignedDamage |= assignBlockersDamage(firstStrikeDamage);
+        if (!firstStrikeDamage) {
+            // Clear first strike damage list since it doesn't matter anymore
+            this.combatantDealtFirstStrikeDamage.clear();
+        }
         return assignedDamage;
     }
 
