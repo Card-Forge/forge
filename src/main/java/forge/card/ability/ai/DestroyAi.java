@@ -167,21 +167,20 @@ public class DestroyAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
         final boolean noRegen = sa.hasParam("NoRegen");
-        final Player opp = ai.getOpponent();
         if (tgt != null) {
             List<Card> list;
             list = ai.getGame().getCardsIn(ZoneType.Battlefield);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 
-            if ((list.size() == 0) || (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
+            if (list.isEmpty() || list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
                 return false;
             }
 
             sa.resetTargets();
 
             List<Card> preferred = CardLists.getNotKeyword(list, "Indestructible");
-            preferred = CardLists.filterControlledBy(preferred, opp);
+            preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
 
             // If NoRegen is not set, filter out creatures that have a
             // regeneration shield
@@ -201,7 +200,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
-                if (preferred.size() == 0) {
+                if (preferred.isEmpty()) {
                     if ((sa.getTargets().getNumTargeted() == 0)
                             || (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
                         if (!mandatory) {
@@ -215,9 +214,9 @@ public class DestroyAi extends SpellAbilityAi {
                     }
                 } else {
                     Card c;
-                    if (CardLists.getNotType(preferred, "Creature").size() == 0) {
+                    if (CardLists.getNotType(preferred, "Creature").isEmpty()) {
                         c = ComputerUtilCard.getBestCreatureAI(preferred);
-                    } else if (CardLists.getNotType(preferred, "Land").size() == 0) {
+                    } else if (CardLists.getNotType(preferred, "Land").isEmpty()) {
                         c = ComputerUtilCard.getBestLandAI(preferred);
                     } else {
                         c = ComputerUtilCard.getMostExpensivePermanentAI(preferred, sa, false);
@@ -228,11 +227,11 @@ public class DestroyAi extends SpellAbilityAi {
             }
 
             while (sa.getTargets().getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
-                if (list.size() == 0) {
+                if (list.isEmpty()) {
                     break;
                 } else {
                     Card c;
-                    if (CardLists.getNotType(list, "Creature").size() == 0) {
+                    if (CardLists.getNotType(list, "Creature").isEmpty()) {
                         c = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
                         c = ComputerUtilCard.getCheapestPermanentAI(list, sa, false);

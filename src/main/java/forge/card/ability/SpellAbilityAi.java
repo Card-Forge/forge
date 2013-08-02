@@ -77,8 +77,8 @@ public abstract class SpellAbilityAi extends SaTargetRountines {
      */
     protected static boolean playReusable(final Player ai, final SpellAbility sa) {
         // TODO probably also consider if winter orb or similar are out
-    
-        if (sa.getPayCosts() == null) {
+
+        if (sa.getPayCosts() == null || sa instanceof AbilitySub) {
             return true; // This is only true for Drawbacks and triggers
         }
     
