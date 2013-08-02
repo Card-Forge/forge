@@ -35,7 +35,7 @@ public enum CardZoomer {
         overlay.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (!temporary && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     closeZoomer();                   
                 }                
             }        
@@ -55,7 +55,7 @@ public enum CardZoomer {
         overlay.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                if (!temporary && e.getWheelRotation() > 0) {
+                if (e.getWheelRotation() > 0) {
                     closeZoomer();
                 } 
             }
