@@ -51,15 +51,33 @@ public class TriggerBlocks extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final Map<String, Object> runParams2) {
+        Card blocker = (Card) runParams2.get("Blocker");
+        Card attacker = (Card) runParams2.get("Attacker");
         if (this.mapParams.containsKey("ValidCard")) {
-            if (!matchesValid(runParams2.get("Blocker"), this.mapParams.get("ValidCard").split(","),
-                    this.getHostCard())) {
+            String validBlocker = this.mapParams.get("ValidCard");
+            if (validBlocker.contains(".withLesserPower")) {
+                // Have to check this here as triggering objects aren't set yet for AI combat trigger checks
+                // so ValidCard$Creature.powerLTX where X:TriggeredAttacker$CardPower crashes with NPE
+                validBlocker = validBlocker.replace(".withLesserPower", "");
+                if (blocker.getCurrentPower() >= attacker.getCurrentPower()) {
+                    return false;
+                }
+            }
+            if (!matchesValid(runParams2.get("Blocker"), validBlocker.split(","), this.getHostCard())) {
                 return false;
             }
         }
         if (this.mapParams.containsKey("ValidBlocked")) {
-            if (!matchesValid(runParams2.get("Attacker"), this.mapParams.get("ValidBlocked").split(","),
-                    this.getHostCard())) {
+            String validBlocked = this.mapParams.get("ValidBlocked");
+            if (validBlocked.contains(".withLesserPower")) {
+                // Have to check this here as triggering objects aren't set yet for AI combat trigger checks
+                // so ValidBlocked$Creature.powerLTX where X:TriggeredBlocker$CardPower crashes with NPE
+                validBlocked = validBlocked.replace(".withLesserPower", "");
+                if (blocker.getCurrentPower() <= attacker.getCurrentPower()) {
+                    return false;
+                }
+            }
+            if (!matchesValid(runParams2.get("Attacker"), validBlocked.split(","), this.getHostCard())) {
                 return false;
             }
         }

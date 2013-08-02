@@ -631,12 +631,30 @@ public class ComputerUtilCombat {
         if (mode == TriggerType.Blocks) {
             willTrigger = true;
             if (trigParams.containsKey("ValidBlocked")) {
-                if (!TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), source)) {
+                String validBlocked = trigParams.get("ValidBlocked");
+                if (validBlocked.contains(".withLesserPower")) {
+                    // Have to check this restriction here as triggering objects aren't set yet, so
+                    // ValidBlocked$Creature.powerLTX where X:TriggeredBlocker$CardPower crashes with NPE
+                    validBlocked = validBlocked.replace(".withLesserPower", "");
+                    if (defender.getCurrentPower() <= attacker.getCurrentPower()) {
+                        return false;
+                    }
+                }
+                if (!TriggerReplacementBase.matchesValid(attacker, validBlocked.split(","), source)) {
                     return false;
                 }
             }
             if (trigParams.containsKey("ValidCard")) {
-                if (!TriggerReplacementBase.matchesValid(defender, trigParams.get("ValidCard").split(","), source)) {
+                String validBlocker = trigParams.get("ValidCard");
+                if (validBlocker.contains(".withLesserPower")) {
+                    // Have to check this restriction here as triggering objects aren't set yet, so
+                    // ValidCard$Creature.powerLTX where X:TriggeredAttacker$CardPower crashes with NPE
+                    validBlocker = validBlocker.replace(".withLesserPower", "");
+                    if (defender.getCurrentPower() >= attacker.getCurrentPower()) {
+                        return false;
+                    }
+                }
+                if (!TriggerReplacementBase.matchesValid(defender, validBlocker.split(","), source)) {
                     return false;
                 }
             }
