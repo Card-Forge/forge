@@ -726,6 +726,45 @@ Difficulty=very hard
 At the start of a new quest you will only face opponent decks that have an easy difficulty setting. After you have won a number of matches you will then face the opponent decks that have a medium difficulty setting. After you have won an additional number of matches you will then face the opponent decks that have a hard difficulty setting. Opponent decks that have a very hard difficulty setting may occassionally appear as a possible opponent instead of a opponent deck that has a hard difficulty setting.
 
 
+- version 1.4.4 -
+We were not able to release version 1.4.4 and are releasing 1.4.5 instead. Enjoy.
+
+
+- Deck Editor and General UI improvements -
+You can now right-click on a color filter button to show only cards of that color, filtering out all other colors. Similar with card type filter buttons.
+Can double click row for deck to open it (in addition to clicking edit icon)
+The selected tab on each draggable pane will now be remembered between sessions
+Fixed bug where hover effect didn't work the first time hovering over a row that had just been deselected
+Fixed bug where middle and right clicking buttons did the same behavior as left clicking, and fixed bug where clicking multiple buttons quickly (such as filters) while moving the mouse around would result in clicks not registering sometimes.
+Fixed so cards are "selected" on mouse up instead of mouse down, allowing things like drag drop and zoom to work if the card is currently actionable
+Fixed so, after dragging a pane tab to a new location, the pane it was in before selects its most recent remaining tab instead of being blank
+
+
+- Card Zoomer -
+Now you can gaze at your HQ images in all their glory with just a flick of the mousewheel, holding the middle mouse button down, or holding the left and right mouse buttons down at the same time. This feature will also increase the size of low quality pics up to the size used for high quality pics, but the image will not be very clear.
+
+Instructions:
+- Works on any card image in the Deck Editor or Duel screen.
+- Move your mouse over the card you want to zoom and mouse-wheel forward.
+- Mouse-wheel back, mouse click or pressing ESC closes the zoomed image.
+
+Limitations:
+- Only works with the mouse wheel at the moment.
+- Does not show the other side of double-sided cards yet.
+
+WIP:
+- Press and hold the CTRL key while mousing over a card to see zoomed image.
+- Flipping double-sided card.
+
+
+- Preferences updates -
+All reset buttons now appear under Troubleshooting section. Increased visibility of Troubleshooting section by moving to the top of the preferences screen. Added confirmation dialogs to all reset buttons.
+
+Converted Skins list to themed combo and added to new Visual Themes section. Converted AI Profile list to themed combo and moved to top of GamePlay section. New Visual Themes setting to hide or show background image on match screen. Default show.
+
+These new themed combo boxes when used with a theme which uses white colored text will cause readability problems for people using Mac OS X. A new "Themed ComboBox" setting is now available in the preferences section which will enable/disable themed combos should you be having readability problems with the new themed combo used in the preferences page.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

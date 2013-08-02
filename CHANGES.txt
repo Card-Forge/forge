@@ -1,51 +1,12 @@
-Forge Beta: 07-31-2013 ver 1.4.5
+Forge Beta: 0#-##-2013 ver 1.4.6
 
 
-13050 cards in total.
+13### cards in total.
 
 
 -------------
 Release Notes
 -------------
-
-- version 1.4.4 -
-We were not able to release version 1.4.4 and are releasing 1.4.5 instead. Enjoy.
-
-
-- Deck Editor and General UI improvements -
-You can now right-click on a color filter button to show only cards of that color, filtering out all other colors. Similar with card type filter buttons.
-Can double click row for deck to open it (in addition to clicking edit icon)
-The selected tab on each draggable pane will now be remembered between sessions
-Fixed bug where hover effect didn't work the first time hovering over a row that had just been deselected
-Fixed bug where middle and right clicking buttons did the same behavior as left clicking, and fixed bug where clicking multiple buttons quickly (such as filters) while moving the mouse around would result in clicks not registering sometimes.
-Fixed so cards are "selected" on mouse up instead of mouse down, allowing things like drag drop and zoom to work if the card is currently actionable
-Fixed so, after dragging a pane tab to a new location, the pane it was in before selects its most recent remaining tab instead of being blank
-
-
-- Card Zoomer -
-Now you can gaze at your HQ images in all their glory with just a flick of the mousewheel, holding the middle mouse button down, or holding the left and right mouse buttons down at the same time. This feature will also increase the size of low quality pics up to the size used for high quality pics, but the image will not be very clear.
-
-Instructions:
-- Works on any card image in the Deck Editor or Duel screen.
-- Move your mouse over the card you want to zoom and mouse-wheel forward.
-- Mouse-wheel back, mouse click or pressing ESC closes the zoomed image.
-
-Limitations:
-- Only works with the mouse wheel at the moment.
-- Does not show the other side of double-sided cards yet.
-
-WIP:
-- Press and hold the CTRL key while mousing over a card to see zoomed image.
-- Flipping double-sided card.
-
-
-- Preferences updates -
-All reset buttons now appear under Troubleshooting section. Increased visibility of Troubleshooting section by moving to the top of the preferences screen. Added confirmation dialogs to all reset buttons.
-
-Converted Skins list to themed combo and added to new Visual Themes section. Converted AI Profile list to themed combo and moved to top of GamePlay section. New Visual Themes setting to hide or show background image on match screen. Default show.
-
-These new themed combo boxes when used with a theme which uses white colored text will cause readability problems for people using Mac OS X. A new "Themed ComboBox" setting is now available in the preferences section which will enable/disable themed combos should you be having readability problems with the new themed combo used in the preferences page.
-
 
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
@@ -75,71 +36,7 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-Autumn's Veil
-Circling Vultures
-Cycle of Life
-Frankenstein's Monster
-Gilded Drake
-Hallow
-Kudzu
-Mark of Sakiko
-Mercadias Downfall
-Mindbender Spores
-Mishra's War Machine
-Nefarious Lich
-Nettlevine Blight
-Planar Overlay
-Rocket Launcher
-Rogue Skycaptain
-Sakiko, Mother of Summer
-Sakura-Tribe Springcaller
-Samite Blessing
-Sea Troll
-Shape of the Wiitigo
-Shizuko, Caller of Autumn
-Spatial Binding
-Sporogenesis
-Steam Vines
-Stronghold Gambit
-Suffocation
-Thought Dissector
-Tide of War
-Timesifter
-Twist Allegiance
 
-
----------------
-New Phenomenons
----------------
-
-Reality Shaping
-
-
-----------
-New Planes
-----------
-
-Agyrem
-Celestine Reef
-Edge of Malacol
-Eloren Wilds
-Norn's Dominion
-Prahv
-
-
------------
-New Schemes
------------
-
-Choose Your Champion
-Drench the Soil in Their Blood
-
-
---------------------
-New Vanguard Avatars
---------------------
-
-Enigma Sphinx Avatar
 
 
 ------------
@@ -164,18 +61,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-Asepetci
-DrDev
-Gos
-Marc
-Max
-Sloth
-Sol
-spr
-squee1968
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
