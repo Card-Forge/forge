@@ -36,7 +36,15 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
+Wiitigo
+No Quarter
 
+
+----------
+New Planes
+----------
+
+Mount Keralia
 
 
 ------------
