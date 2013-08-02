@@ -70,13 +70,7 @@ public enum CPicture implements ICDoc {
         if (item instanceof IPaperCard) {
             Card c = ((IPaperCard)item).getMatchingForgeCard();
             if (((IPaperCard)item).isFoil() && c.getFoil() == 0) {
-                CardEdition.FoilType foilType = CardEdition.FoilType.NOT_SUPPORTED;
-                if (c.getCurSetCode() != null && Singletons.getModel().getEditions().get(c.getCurSetCode()) != null) {
-                    foilType = Singletons.getModel().getEditions().get(c.getCurSetCode()).getFoilType();
-                }
-                if (foilType != CardEdition.FoilType.NOT_SUPPORTED) {
-                    c.setFoil(foilType == CardEdition.FoilType.MODERN ? MyRandom.getRandom().nextInt(9) + 1 : MyRandom.getRandom().nextInt(9) + 11);
-                }
+                c.setRandomFoil();
             }
             showCard(c, false);
             return;

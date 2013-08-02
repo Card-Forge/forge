@@ -132,25 +132,8 @@ public class GameNew {
                 final Card card = cpi.toForgeCard(player);
                 
                 // Assign card-specific foiling or random foiling on approximately 1:20 cards if enabled
-                CardEdition.FoilType foilType = CardEdition.FoilType.NOT_SUPPORTED;
-                if (card.getCurSetCode() != null && Singletons.getModel().getEditions().get(card.getCurSetCode()) != null) {
-                    foilType = Singletons.getModel().getEditions().get(card.getCurSetCode()).getFoilType();
-                }
-                if (foilType != CardEdition.FoilType.NOT_SUPPORTED && (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5)))) {
-                    int iFoil = 0;
-
-                    switch(foilType) {
-                        case MODERN:
-                            iFoil = generator.nextInt(9) + 1; // modern foils in slots 1-10
-                            break; 
-                        case OLD_STYLE:
-                            iFoil = generator.nextInt(9) + 11; // old style foils in slots 11-20
-                            break;
-                        default:
-                            System.out.println(String.format("Unexpected foil type for card %s in edition %s.", card.getName(), card.getCurSetCode()));
-                    }
-
-                    card.setFoil(iFoil);
+                if (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
+                    card.setRandomFoil();
                 }
                 newLibrary.add(card);
             }

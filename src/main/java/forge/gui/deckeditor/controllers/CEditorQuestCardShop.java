@@ -237,39 +237,76 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
     private Integer getCardValue(final InventoryItem card) {
         String ns = null;
+        int value = 1337; // previously this was the returned default
+        boolean foil = false;
+        int foilMultiplier = 1;
+
         if (card instanceof PaperCard) {
             ns = card.getName() + "|" + ((PaperCard) card).getEdition();
+            foil = ((PaperCard) card).isFoil();
         } else {
             ns = card.getName();
         }
 
         if (this.mapPrices.containsKey(ns)) {
-            return this.mapPrices.get(ns);
+            value = this.mapPrices.get(ns);
         } else if (card instanceof PaperCard) {
             switch (((IPaperCard) card).getRarity()) {
-            case BasicLand:
-                return Integer.valueOf(4);
-            case Common:
-                return Integer.valueOf(6);
-            case Uncommon:
-                return Integer.valueOf(40);
-            case Rare:
-                return Integer.valueOf(120);
-            case MythicRare:
-                return Integer.valueOf(600);
-            default:
-                return Integer.valueOf(15);
+                case BasicLand:
+                    value = 4;
+                    break;
+                case Common:
+                    value = 6;
+                    break;
+                case Uncommon:
+                    value = 40;
+                    break;
+                case Rare:
+                    value = 120;
+                    break;
+                case MythicRare:
+                    value = 600;
+                    break;
+                default:
+                    value = 15;
+                    break;
             }
         } else if (card instanceof BoosterPack) {
-            return 395;
+            value = 395;
         } else if (card instanceof TournamentPack) {
-            return 995;
+            value = 995;
         } else if (card instanceof FatPack) {
-            return 2365;
+            value = 2365;
         } else if (card instanceof PreconDeck) {
-            return ((PreconDeck) card).getRecommendedDeals().getCost();
+            value = ((PreconDeck) card).getRecommendedDeals().getCost();
         }
-        return 1337;
+
+        // TODO: make this changeable via a user-definable property?
+        if (foil) {
+            switch (((IPaperCard) card).getRarity()) {
+                case BasicLand:
+                    foilMultiplier = 2;
+                    break;
+                case Common:
+                    foilMultiplier = 2;
+                    break;
+                case Uncommon:
+                    foilMultiplier = 2;
+                    break;
+                case Rare:
+                    foilMultiplier = 3;
+                    break;
+                case MythicRare:
+                    foilMultiplier = 3;
+                    break;
+                default:
+                    foilMultiplier = 2;
+                    break;
+            }
+            value *= foilMultiplier;
+        }
+        
+        return Integer.valueOf(value);
     }
 
     private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnPriceCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {

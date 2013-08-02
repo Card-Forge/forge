@@ -44,6 +44,7 @@ import com.google.common.collect.Lists;
 import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
@@ -84,6 +85,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.Lang;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
 
 /**
@@ -7724,11 +7726,26 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * 
+     * Assign a random foil finish depending on the card edition.
+     *
+     * @param remove if true, a random foil is assigned, otherwise it is
+     * removed.
+     */
+    public final void setRandomFoil() {
+        CardEdition.FoilType foilType = CardEdition.FoilType.NOT_SUPPORTED;
+        if (this.getCurSetCode() != null && Singletons.getModel().getEditions().get(this.getCurSetCode()) != null) {
+            foilType = Singletons.getModel().getEditions().get(this.getCurSetCode()).getFoilType();
+        }
+        if (foilType != CardEdition.FoilType.NOT_SUPPORTED) {
+            this.setFoil(foilType == CardEdition.FoilType.MODERN ? MyRandom.getRandom().nextInt(9) + 1 : MyRandom.getRandom().nextInt(9) + 11);
+        }
+    }
+
+    /**
+     *
      * TODO Write javadoc for this method.
-     * 
-     * @param f
-     *            an int
+     *
+     * @param f an int
      */
     public final void setFoil(final int f) {
         this.getCharacteristics().setSVar("Foil", Integer.toString(f));
