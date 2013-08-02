@@ -1360,7 +1360,7 @@ public class ComputerUtil {
             // Destroy => regeneration/bounce/shroud
             else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
                     && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll)
-                    && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump)) {
+                            && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump)) {
                 for (final Object o : objects) {
                     if (o instanceof Card) {
                         final Card c = (Card) o;

@@ -88,20 +88,18 @@ public class DamagePreventAi extends SpellAbilityAi {
                     return false;
                 }
             }
-        } // targeted
+        } // non-targeted
 
         // react to threats on the stack
         else if (!game.getStack().isEmpty()) {
             sa.resetTargets();
-            // check stack for something on the stack will kill anything i
-            // control
-            final ArrayList<Object> objects = new ArrayList<Object>();
-            // AbilityFactory.predictThreatenedObjects(af);
+            // check stack for something on the stack will kill anything i control
+            final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
             if (objects.contains(ai)) {
                 sa.getTargets().add(ai);
+                chance = true;
             }
-
             final List<Card> threatenedTargets = new ArrayList<Card>();
             // filter AIs battlefield by what I can target
             List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, hostCard);
@@ -125,7 +123,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                     && (ComputerUtilCombat.lifeInDanger(ai, combat) || sa.isAbility() || sa.isTrigger())
                     && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
                 sa.getTargets().add(ai);
-                return true;
+                chance = true;
             } else {
                 // filter AIs battlefield by what I can target
                 List<Card> targetables = ai.getCardsIn(ZoneType.Battlefield);
@@ -141,10 +139,13 @@ public class DamagePreventAi extends SpellAbilityAi {
                 for (final Card c : combatants) {
                     if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
                         sa.getTargets().add(c);
-                        return true;
+                        chance = true;
                     }
                 }
             }
+        }
+        if (sa.hasParam("DividedAsYouChoose") && sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
+            tgt.addDividedAllocation(sa.getTargets().getTargets().get(0), AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa));
         }
 
         return chance;
