@@ -1,5 +1,5 @@
 Name:Gorilla Berserkers 
-Cost: 3 G G
+ManaCost:3 G G
 Types:Creature Ape Berserker
 PT:2/3
 K:Trample
