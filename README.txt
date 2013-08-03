@@ -405,6 +405,7 @@ Exile - exile.wav - triggered when a card is exiled.
 FlipCoin [*] - flip_coin.wav - triggered when a coin is flipped.
 GreenLand [*] - green_land.wav - triggered when a land with the "G" mana ability is played.
 Instant [*] - instant.wav - triggered when an instant is played.
+LifeGain - life_gain.wav - triggered when a player gains life.
 LifeLoss [*] - life_loss.wav - triggered when a player loses life.
 LoseDuel[*] - lose_duel.wav - triggered when a player loses a duel.
 ManaBurn - mana_burn.wav - triggered during a mana burn if the appropriate rule is enabled.
