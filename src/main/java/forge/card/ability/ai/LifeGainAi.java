@@ -58,10 +58,7 @@ public class LifeGainAi extends SpellAbilityAi {
                 return false;
             }
         }
-        if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                && !sa.hasParam("ActivationPhases")) {
-            return false;
-        }
+
         boolean lifeCritical = life <= 5;
         lifeCritical |= game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DAMAGE) && ComputerUtilCombat.lifeInDanger(ai, game.getCombat());
 
@@ -87,13 +84,21 @@ public class LifeGainAi extends SpellAbilityAi {
             return false;
         }
 
-        // Don't use lifegain before main 2 if possible
-        if (!lifeCritical && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !sa.hasParam("ActivationPhases")) {
+        // prevent run-away activations - first time will always return true
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }
 
+        if (ComputerUtil.playImmediately(ai, sa)) {
+            return true;
+        }
+        
         // Don't use lifegain before main 2 if possible
+        if (!lifeCritical && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+                && !sa.hasParam("ActivationPhases") && !ComputerUtil.castSpellInMain1(ai, sa)) {
+            return false;
+        }
+
         if (!lifeCritical && (!game.getPhaseHandler().getNextTurn().equals(ai)
                 || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
@@ -103,11 +108,6 @@ public class LifeGainAi extends SpellAbilityAi {
 
         // Don't tap creatures that may be able to block
         if (ComputerUtil.waitForBlocking(sa)) {
-            return false;
-        }
-
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }
 

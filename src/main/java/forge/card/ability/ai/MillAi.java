@@ -15,7 +15,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 public class MillAi extends SpellAbilityAi {
 
@@ -49,7 +48,7 @@ public class MillAi extends SpellAbilityAi {
         }
 
         // prevent run-away activations - first time will always return true
-        if (MyRandom.getRandom().nextFloat() > Math.pow(0.9, sa.getActivationsThisTurn())) {
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }
 

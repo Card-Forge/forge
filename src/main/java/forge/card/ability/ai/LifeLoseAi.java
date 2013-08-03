@@ -105,6 +105,10 @@ public class LifeLoseAi extends SpellAbilityAi {
             return true; // killing the human should be done asap
         }
 
+        if (ComputerUtil.playImmediately(ai, sa)) {
+            return true;
+        }
+
         // Don't use loselife before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases")
