@@ -106,7 +106,6 @@ public enum CPicture implements ICDoc {
 
         VPicture.SINGLETON_INSTANCE.getPnlPicture().addMouseListener(new MouseAdapter() {
             private final boolean[] buttonsDown = new boolean[4];
-            private boolean zoomed;
 
             @Override
             public void mousePressed(final MouseEvent e) {
@@ -116,11 +115,9 @@ public enum CPicture implements ICDoc {
                 }
                 this.buttonsDown[button] = true;
 
-                if (!this.zoomed && (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3]))) {
+                if (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3])) {
                     //zoom card when middle mouse button down or both left and right mouse buttons down
-                    if (CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(currentCard, true)) {
-                        this.zoomed = true;
-                    }
+                    CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(currentCard, true);
                 }
             }
 
@@ -135,11 +132,10 @@ public enum CPicture implements ICDoc {
                 }
                 this.buttonsDown[button] = false;
 
-                if (this.zoomed) {
+                if (CardZoomer.SINGLETON_INSTANCE.isZoomed()) {
                     if (!this.buttonsDown[1] && !this.buttonsDown[2] && !this.buttonsDown[3]) {
                         //don't stop zooming until all mouse buttons released
                         CardZoomer.SINGLETON_INSTANCE.closeZoomer();
-                        this.zoomed = false;
                     }
                     return; //don't handle click event below if zoom was open
                 }

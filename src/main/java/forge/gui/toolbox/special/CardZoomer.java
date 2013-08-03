@@ -35,7 +35,7 @@ public enum CardZoomer {
         overlay.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                if (!temporary && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     closeZoomer();                   
                 }                
             }        
@@ -46,29 +46,31 @@ public enum CardZoomer {
         overlay.addMouseListener(new MouseAdapter() {            
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (!temporary) {
-                    closeZoomer();
-                }
+                closeZoomer(); //NOTE: Needed even if temporary to prevent Zoom getting stuck open on certain systems
             }
         });
 
         overlay.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                if (e.getWheelRotation() > 0) {
+                if (!temporary && e.getWheelRotation() > 0) {
                     closeZoomer();
                 } 
             }
         });
     }
 
-    public boolean displayZoomedCard(Card card) {
-        return displayZoomedCard(card, false);
+    public boolean isZoomed() {
+        return zoomed;
     }
 
-    public boolean displayZoomedCard(Card card, boolean temp) {
-        if (System.currentTimeMillis() - lastClosedTime < 250) {
-            return false; //don't display zoom if just closed zoom (handles mouse wheeling while middle clicking)
+    public void displayZoomedCard(Card card) {
+        displayZoomedCard(card, false);
+    }
+
+    public void displayZoomedCard(Card card, boolean temp) {
+        if (zoomed || System.currentTimeMillis() - lastClosedTime < 250) {
+            return; //don't display zoom if already zoomed or just closed zoom (handles mouse wheeling while middle clicking)
         }
         thisCard = card;
         temporary = temp;
@@ -81,7 +83,6 @@ public enum CardZoomer {
 
         SOverlayUtils.showOverlay();
         zoomed = true;
-        return true;
     }
 
     private void setLayout() {

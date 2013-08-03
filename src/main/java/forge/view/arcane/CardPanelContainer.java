@@ -76,7 +76,7 @@ public abstract class CardPanelContainer extends JPanel {
     private final List<CardPanelMouseListener> listeners = new ArrayList<CardPanelMouseListener>(2);
     private int mouseDragOffsetX, mouseDragOffsetY;
     private int intialMouseDragX = -1, intialMouseDragY;
-    private boolean dragEnabled, zoomed;
+    private boolean dragEnabled;
 
     /**
      * <p>
@@ -126,13 +126,10 @@ public abstract class CardPanelContainer extends JPanel {
                 this.buttonsDown[button] = true;
                 CardPanelContainer.this.mouseDownPanel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
 
-                if (!CardPanelContainer.this.zoomed && CardPanelContainer.this.mouseDownPanel != null &&
-                        CardPanelContainer.this.getMouseDragPanel() == null &&
+                if (CardPanelContainer.this.mouseDownPanel != null && CardPanelContainer.this.getMouseDragPanel() == null &&
                         (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3]))) {
                     //zoom card when middle mouse button down or both left and right mouse buttons down
-                    if (CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(CardPanelContainer.this.mouseDownPanel.getCard(), true)) {
-                        CardPanelContainer.this.zoomed = true;
-                    }
+                    CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(CardPanelContainer.this.mouseDownPanel.getCard(), true);
                 }
             }
 
@@ -143,7 +140,8 @@ public abstract class CardPanelContainer extends JPanel {
                     return;
                 }
 
-                if (!CardPanelContainer.this.zoomed && CardPanelContainer.this.dragEnabled) {
+                boolean zoomed = CardZoomer.SINGLETON_INSTANCE.isZoomed();
+                if (!zoomed && CardPanelContainer.this.dragEnabled) {
                     CardPanelContainer.this.intialMouseDragX = -1;
                     if (CardPanelContainer.this.getMouseDragPanel() != null) {
                         final CardPanel panel = CardPanelContainer.this.getMouseDragPanel();
@@ -157,11 +155,10 @@ public abstract class CardPanelContainer extends JPanel {
                 }
                 this.buttonsDown[button] = false;
 
-                if (CardPanelContainer.this.zoomed) {
+                if (zoomed) {
                     if (!this.buttonsDown[1] && !this.buttonsDown[2] && !this.buttonsDown[3]) {
                         //don't stop zooming until all mouse buttons released
                         CardZoomer.SINGLETON_INSTANCE.closeZoomer();
-                        CardPanelContainer.this.zoomed = false;
                     }
                     return; //don't raise click events if zoom was open
                 }
@@ -193,7 +190,7 @@ public abstract class CardPanelContainer extends JPanel {
             
             @Override
             public void mouseDragged(final MouseEvent evt) {
-                if (CardPanelContainer.this.zoomed || !SwingUtilities.isLeftMouseButton(evt)) {
+                if (CardZoomer.SINGLETON_INSTANCE.isZoomed() || !SwingUtilities.isLeftMouseButton(evt)) {
                     return; //don't support dragging while zoomed or with mouse button besides left
                 }
                 if (!CardPanelContainer.this.dragEnabled) {

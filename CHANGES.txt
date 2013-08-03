@@ -19,7 +19,7 @@ Forge now includes most of the new M14 cards. It may take a few days before thes
 - Match and Deck Editor Layout problems -
 The match and deck editor windows contain panels that can be moved and/or resized. The changes that you make are saved to files that are named "editor.xml" and "match.xml". These files can be found in your userDir/preferences/ directory.
 
-Sometimes people will decide that they do not like the changes that they made and wish to go back to the original layout. To reset layouts to deafult, go to the Game Settings -> Preferences -> Troubleshooting section. You will find at this location two buttons that will reset the match layout and the deck editor layouts.
+Sometimes people will decide that they do not like the changes that they made and wish to go back to the original layout. To reset layouts to default, go to the Game Settings -> Preferences -> Troubleshooting section. You will find at this location two buttons that will reset the match layout and the deck editor layouts.
 
 Also use the mentioned measure if your match or deckeditor won't start - it would help in 90% of the cases.
 
