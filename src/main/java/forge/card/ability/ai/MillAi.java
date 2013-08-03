@@ -1,7 +1,6 @@
 package forge.card.ability.ai;
 
 import java.util.List;
-import java.util.Random;
 
 import forge.Card;
 import forge.card.ability.AbilityUtils;
@@ -49,6 +48,15 @@ public class MillAi extends SpellAbilityAi {
             return false;
         }
 
+        // prevent run-away activations - first time will always return true
+        if (MyRandom.getRandom().nextFloat() > Math.pow(0.9, sa.getActivationsThisTurn())) {
+            return false;
+        }
+
+        if (ComputerUtil.playImmediately(ai, sa)) {
+            return true;
+        }
+
         // Don't use draw abilities before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
                 && !ComputerUtil.castSpellInMain1(ai, sa)) {
@@ -60,19 +68,6 @@ public class MillAi extends SpellAbilityAi {
             return false;
         }
 
-        double chance = .4; // 40 percent chance of milling with instant speed
-                            // stuff
-        if (SpellAbilityAi.isSorcerySpeed(sa)) {
-            chance = .667; // 66.7% chance for sorcery speed
-        }
-
-        if ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai))) {
-            chance = .95; // 90% for end of opponents turn
-        }
-
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn());
-
         if ((sa.getParam("NumCards").equals("X") || sa.getParam("NumCards").equals("Z")) && source.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int cardsToDiscard =
@@ -83,12 +78,7 @@ public class MillAi extends SpellAbilityAi {
             }
         }
 
-        if (SpellAbilityAi.playReusable(ai, sa)) {
-            randomReturn = true;
-            // some other variables here, like deck size, and phase and other fun stuff
-        }
-
-        return randomReturn;
+        return true;
     }
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
@@ -109,7 +99,7 @@ public class MillAi extends SpellAbilityAi {
 
             final List<Card> pLibrary = opp.getCardsIn(ZoneType.Library);
 
-            if (pLibrary.size() == 0) { // deck already empty, no need to mill
+            if (pLibrary.isEmpty()) { // deck already empty, no need to mill
                 if (!mandatory) {
                     return false;
                 }

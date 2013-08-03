@@ -18,8 +18,6 @@
  */
 package forge.card.ability.ai;
 
-import java.util.Random;
-
 import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
@@ -100,6 +98,15 @@ public class DrawAi extends SpellAbilityAi {
             }
         }
 
+        // prevent run-away activations - first time will always return true
+        if (MyRandom.getRandom().nextFloat() > Math.pow(0.9, sa.getActivationsThisTurn())) {
+            return false;
+        }
+
+        if (ComputerUtil.playImmediately(ai, sa)) {
+            return true;
+        }
+
         // Don't use draw abilities before main 2 if possible
         if (game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases") && !ComputerUtil.castSpellInMain1(ai, sa)) {
@@ -118,23 +125,7 @@ public class DrawAi extends SpellAbilityAi {
             return false;
         }
 
-        double chance = .4; // 40 percent chance of drawing with instant speed
-                            // stuff
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
-        if (SpellAbilityAi.isSorcerySpeed(sa)) {
-            randomReturn = true;
-        }
-        if ((game.getPhaseHandler().is(PhaseType.END_OF_TURN)
-                && game.getPhaseHandler().getNextTurn().equals(ai))) {
-            randomReturn = true;
-        }
-
-        if (SpellAbilityAi.playReusable(ai, sa)) {
-            randomReturn = true;
-        }
-
-        return randomReturn;
+        return true;
     }
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
