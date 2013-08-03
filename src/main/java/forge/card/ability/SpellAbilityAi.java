@@ -9,6 +9,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -80,6 +81,10 @@ public abstract class SpellAbilityAi extends SaTargetRountines {
 
         if (sa.getPayCosts() == null || sa instanceof AbilitySub) {
             return true; // This is only true for Drawbacks and triggers
+        }
+        
+        if (ComputerUtil.playImmediately(ai, sa)) {
+            return true;
         }
     
         if (!sa.getPayCosts().isReusuableResource()) {

@@ -93,12 +93,6 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        if (source.getName().equals("Stuffy Doll")) {
-            // Now stuffy sits around for blocking
-            // TODO(sol): this should also happen if Stuffy is going to die
-            return ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai.getOpponent());
-        }
-
         if (sa.isAbility()) {
             final Random r = MyRandom.getRandom(); // prevent run-away
                                                    // activations
@@ -384,14 +378,14 @@ public class DamageDealAi extends DamageAiBase {
             if (o instanceof Card) {
                 Card c = (Card) o;
                 final int restDamage = ComputerUtilCombat.predictDamageTo(c, dmg, saMe.getSourceCard(), false);
-                if (c.getLethalDamage() <= restDamage) {
+                if (!c.hasKeyword("Indestructible") && ComputerUtilCombat.getDamageToKill(c) <= restDamage) {
                     if (c.getController().equals(ai)) {
                         return false;
                     } else {
                         urgent = true;
                     }
                 }
-                if (c.getController().isOpponentOf(ai)) {
+                if (c.getController().isOpponentOf(ai) ^ c.getName().equals("Stuffy Doll")) {
                     positive = true;
                 }
             } else if (o instanceof Player) {

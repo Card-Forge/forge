@@ -59,6 +59,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.Aggregates;
@@ -1277,7 +1278,7 @@ public class ComputerUtil {
             final SpellAbility topStack) {
         Iterable<? extends ITargetable> objects = new ArrayList<ITargetable>();
         final List<ITargetable> threatened = new ArrayList<ITargetable>();
-        ApiType saviourApi = saviour.getApi();
+        ApiType saviourApi = saviour == null ? null : saviour.getApi();
     
         if (topStack == null) {
             return objects;
@@ -1287,142 +1288,156 @@ public class ComputerUtil {
         final ApiType threatApi = topStack.getApi();
     
         // Can only Predict things from AFs
-        if (threatApi != null) {
-            final TargetRestrictions tgt = topStack.getTargetRestrictions();
-    
-            if (tgt == null) {
-                if (topStack.hasParam("Defined")) {
-                    objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
-                } else if (topStack.hasParam("ValidCards")) {
-                    List<Card> battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
-                    objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source);
-                }
-            } else {
-                objects = topStack.getTargets().getTargets();
+        if (threatApi == null) {
+            return threatened;
+        }
+        final TargetRestrictions tgt = topStack.getTargetRestrictions();
+
+        if (tgt == null) {
+            if (topStack.hasParam("Defined")) {
+                objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
+            } else if (topStack.hasParam("ValidCards")) {
+                List<Card> battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
+                objects = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source);
             }
-    
-            // Determine if Defined Objects are "threatened" will be destroyed
-            // due to this SA
-    
-            // Lethal Damage => prevent damage/regeneration/bounce/shroud
-            if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll) {
-                // If PredictDamage is >= Lethal Damage
-                final int dmg = AbilityUtils.calculateAmount(topStack.getSourceCard(),
-                        topStack.getParam("NumDmg"), topStack);
-                for (final Object o : objects) {
-                    if (o instanceof Card) {
-                        final Card c = (Card) o;
-    
-                        // indestructible
-                        if (c.hasKeyword("Indestructible")) {
-                            continue;
-                        }
-    
-                        // already regenerated
-                        if (c.getShield() > 0) {
-                            continue;
-                        }
-    
-                        // don't use it on creatures that can't be regenerated
-                        if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll) && !c.canBeShielded()) {
-                            continue;
-                        }
-    
-                        // give Shroud to targeted creatures
-                        if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
-                                && (saviour.getParam("KW").endsWith("Shroud")
-                                        || saviour.getParam("KW").endsWith("Hexproof"))) {
-                            continue;
-                        }
-    
-                        // don't bounce or blink a permanent that the human
-                        // player owns or is a token
-                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isOpponentOf(aiPlayer) || c.isToken())) {
-                            continue;
-                        }
-    
-                        if (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c)) {
-                            threatened.add(c);
-                        }
-                    } else if (o instanceof Player) {
-                        final Player p = (Player) o;
-    
-                        if (source.hasKeyword("Infect")) {
-                            if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getPoisonCounters()) {
-                                threatened.add(p);
-                            }
-                        } else if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getLife()) {
+        } else {
+            objects = topStack.getTargets().getTargets();
+        }
+
+        // Determine if Defined Objects are "threatened" will be destroyed
+        // due to this SA
+
+        // Lethal Damage => prevent damage/regeneration/bounce/shroud
+        if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll) {
+            // If PredictDamage is >= Lethal Damage
+            final int dmg = AbilityUtils.calculateAmount(topStack.getSourceCard(),
+                    topStack.getParam("NumDmg"), topStack);
+            for (final Object o : objects) {
+                if (o instanceof Card) {
+                    final Card c = (Card) o;
+
+                    // indestructible
+                    if (c.hasKeyword("Indestructible")) {
+                        continue;
+                    }
+
+                    // already regenerated
+                    if (c.getShield() > 0) {
+                        continue;
+                    }
+
+                    // don't use it on creatures that can't be regenerated
+                    if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll) && !c.canBeShielded()) {
+                        continue;
+                    }
+
+                    // give Shroud to targeted creatures
+                    if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
+                            && (saviour.getParam("KW").endsWith("Shroud")
+                                    || saviour.getParam("KW").endsWith("Hexproof"))) {
+                        continue;
+                    }
+
+                    // don't bounce or blink a permanent that the human
+                    // player owns or is a token
+                    if (saviourApi == ApiType.ChangeZone && (c.getOwner().isOpponentOf(aiPlayer) || c.isToken())) {
+                        continue;
+                    }
+
+                    if (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c)) {
+                        threatened.add(c);
+                    }
+                } else if (o instanceof Player) {
+                    final Player p = (Player) o;
+
+                    if (source.hasKeyword("Infect")) {
+                        if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getPoisonCounters()) {
                             threatened.add(p);
                         }
+                    } else if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getLife()) {
+                        threatened.add(p);
                     }
                 }
             }
-            // Destroy => regeneration/bounce/shroud
-            else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
-                    && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll)
-                            && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump)) {
-                for (final Object o : objects) {
-                    if (o instanceof Card) {
-                        final Card c = (Card) o;
-                        // indestructible
-                        if (c.hasKeyword("Indestructible")) {
-                            continue;
-                        }
-    
-                        // already regenerated
-                        if (c.getShield() > 0) {
-                            continue;
-                        }
-    
-                        // give Shroud to targeted creatures
-                        if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
-                                && (saviour.getParam("KW").endsWith("Shroud")
-                                        || saviour.getParam("KW").endsWith("Hexproof"))) {
-                            continue;
-                        }
-    
-                        // don't bounce or blink a permanent that the human
-                        // player owns or is a token
-                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isOpponentOf(aiPlayer) || c.isToken())) {
-                            continue;
-                        }
-    
-                        // don't use it on creatures that can't be regenerated
-                        if (saviourApi == ApiType.Regenerate && !c.canBeShielded()) {
-                            continue;
-                        }
-                        threatened.add(c);
+        }
+        // Destroy => regeneration/bounce/shroud
+        else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
+                && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll)
+                        && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump
+                        || saviourApi == null)) {
+            for (final Object o : objects) {
+                if (o instanceof Card) {
+                    final Card c = (Card) o;
+                    // indestructible
+                    if (c.hasKeyword("Indestructible")) {
+                        continue;
                     }
+
+                    // already regenerated
+                    if (c.getShield() > 0) {
+                        continue;
+                    }
+
+                    // give Shroud to targeted creatures
+                    if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
+                            && (saviour.getParam("KW").endsWith("Shroud")
+                                    || saviour.getParam("KW").endsWith("Hexproof"))) {
+                        continue;
+                    }
+
+                    // don't bounce or blink a permanent that the human
+                    // player owns or is a token
+                    if (saviourApi == ApiType.ChangeZone && (c.getOwner().isOpponentOf(aiPlayer) || c.isToken())) {
+                        continue;
+                    }
+
+                    // don't use it on creatures that can't be regenerated
+                    if (saviourApi == ApiType.Regenerate && !c.canBeShielded()) {
+                        continue;
+                    }
+                    threatened.add(c);
                 }
             }
-            // Exiling => bounce/shroud
-            else if ((threatApi == ApiType.ChangeZone || threatApi == ApiType.ChangeZoneAll)
-                    && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump)
-                    && topStack.hasParam("Destination")
-                    && topStack.getParam("Destination").equals("Exile")) {
-                for (final Object o : objects) {
-                    if (o instanceof Card) {
-                        final Card c = (Card) o;
-                        // give Shroud to targeted creatures
-                        if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
-                                && (saviour.getParam("KW").endsWith("Shroud") || saviour.getParam("KW").endsWith("Hexproof"))) {
-                            continue;
-                        }
-    
-                        // don't bounce or blink a permanent that the human
-                        // player owns or is a token
-                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isOpponentOf(aiPlayer) || c.isToken())) {
-                            continue;
-                        }
-    
-                        threatened.add(c);
+        }
+        // Exiling => bounce/shroud
+        else if ((threatApi == ApiType.ChangeZone || threatApi == ApiType.ChangeZoneAll)
+                && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == null)
+                && topStack.hasParam("Destination")
+                && topStack.getParam("Destination").equals("Exile")) {
+            for (final Object o : objects) {
+                if (o instanceof Card) {
+                    final Card c = (Card) o;
+                    // give Shroud to targeted creatures
+                    if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
+                            && (saviour.getParam("KW").endsWith("Shroud") || saviour.getParam("KW").endsWith("Hexproof"))) {
+                        continue;
                     }
+
+                    // don't bounce or blink a permanent that the human
+                    // player owns or is a token
+                    if (saviourApi == ApiType.ChangeZone && (c.getOwner().isOpponentOf(aiPlayer) || c.isToken())) {
+                        continue;
+                    }
+
+                    threatened.add(c);
                 }
             }
         }
     
         Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
         return threatened;
+    }
+    
+    public static boolean playImmediately(Player ai, SpellAbility sa) {
+        final Card source = sa.getSourceCard();
+        final Zone zone = source.getZone();
+ 
+        if (zone.getZoneType() == ZoneType.Battlefield) {
+            if (predictThreatenedObjects(ai, null).contains(source)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Computer mulligans if there are no cards with converted mana cost of
@@ -1432,7 +1447,6 @@ public class ComputerUtil {
         final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         return (handList.size() > aic.getIntProperty(AiProps.MULLIGAN_THRESHOLD)) && hasLittleCmc0Cards;
-
     }
     
     public static List<Card> getPartialParisCandidates(Player ai) {
