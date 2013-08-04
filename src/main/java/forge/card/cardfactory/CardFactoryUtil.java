@@ -60,6 +60,7 @@ import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
+import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.event.GameEventCardStatsChanged;
@@ -2744,6 +2745,7 @@ public class CardFactoryUtil {
     private static SpellAbility makeEvokeSpell(final Card card, final String evokeKeyword) {
         final String[] k = evokeKeyword.split(":");
         final Cost evokedCost = new Cost(k[1], false);
+        final Game game = card.getGame();
         
         final SpellAbility evokedSpell = new Spell(card, evokedCost) {
             private static final long serialVersionUID = -1598664196463358630L;
@@ -2751,14 +2753,23 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 card.setEvoked(true);
-                card.getGame().getAction().moveToPlay(card);
+                game.getAction().moveToPlay(card);
             }
 
             @Override
             public boolean canPlayAI() {
+                final Player ai = getActivatingPlayer();
                 if (!SpellPermanent.checkETBEffects(card, this.getActivatingPlayer())) {
                     return false;
                 }
+                // Wait for Main2 if possible
+                if (game.getPhaseHandler().is(PhaseType.MAIN1)
+                        && game.getPhaseHandler().isPlayerTurn(ai)
+                        && ai.getManaPool().totalMana() <= 0
+                        && !ComputerUtil.castPermanentInMain1(ai, this)) {
+                    return false;
+                }
+
                 return super.canPlayAI();
             }
         };
