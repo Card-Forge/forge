@@ -96,7 +96,8 @@ public class ControlGainAi extends SpellAbilityAi {
         // Don't steal something if I can't Attack without, or prevent it from
         // blocking at least
         if (lose != null && lose.contains("EOT")
-                && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && !sa.isTrigger()) {
             return false;
         }
 
@@ -108,8 +109,16 @@ public class ControlGainAi extends SpellAbilityAi {
             @Override
             public boolean apply(final Card c) {
                 final Map<String, String> vars = c.getSVars();
-                return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa) && CombatUtil.canAttackNextTurn(c, ai.getOpponent())
-                        && c.getNetCombatDamage() > 0;
+                if (!c.canBeTargetedBy(sa)) {
+                    return false;
+                }
+                if (sa.isTrigger()) {
+                    return true;
+                }
+                if (c.isCreature() && (!CombatUtil.canAttackNextTurn(c, ai.getOpponent()) || c.getNetCombatDamage() == 0)) {
+                    return false;
+                }
+                return !vars.containsKey("RemAIDeck");
             }
         });
 
