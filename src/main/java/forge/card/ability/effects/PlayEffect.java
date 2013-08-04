@@ -153,6 +153,7 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ForgetRemembered")) {
                 source.clearRemembered();
             }
+            Card original = tgtCard;
             if (sa.hasParam("CopyCard")) {
                 tgtCard = CardDb.getCard(tgtCard).toForgeCard(sa.getActivatingPlayer());
 
@@ -196,6 +197,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 return;
             }
             tgtCards.remove(tgtCard);
+            // play copied cards with linked abilities, e.g. Elite Arcanist
+            if (sa.hasParam("CopyOnce")) {
+                tgtCards.remove(original);
+            }
             SpellAbility tgtSA = null;
             // only one mode can be used
             tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(sas);
