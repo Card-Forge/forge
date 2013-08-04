@@ -34,11 +34,9 @@ import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
-import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
@@ -925,39 +923,25 @@ public class CombatUtil {
         runParams.put("Attacked", combat.getDefenderByAttacker(c));
         game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
 
-        // Annihilator:
+        // Annihilator: can be copied by Strionic Resonator now
         if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
             for (final String key : c.getKeyword()) {
-                if( !key.startsWith("Annihilator ") ) continue;
+                if (!key.startsWith("Annihilator ")) continue;
                 final String[] k = key.split(" ", 2);
-                final int a = Integer.valueOf(k[1]);
 
-                final Ability ability = new Ability(c, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        this.api = ApiType.Sacrifice;
-                        final Player opponent = combat.getDefendingPlayerRelatedTo(c);
-                        //List<Card> list = AbilityUtils.filterListByType(opponent.getCardsIn(ZoneType.Battlefield), "Permanent", this);
-                        final List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);
-                        List<Card> toSac = opponent.getController().choosePermanentsToSacrifice(this, a, a, list, "Card");
+                String sb = "Annihilator - Defending player sacrifices " + k[1] + " permanents.";
+                String effect = "AB$ Sacrifice | Cost$ 0 | Defined$ DefendingPlayer | SacValid$ Permanent | Amount$ " + k[1];
 
-                        for(Card sacd : toSac) {
-                            game.getAction().sacrifice(sacd, this);
-                        }
-                        
-                    }
-                };
-                String sb = String.format("Annihilator - Defending player sacrifices %d permanents.", a);
-                ability.setStackDescription(sb);
-                ability.setDescription(sb);
+                SpellAbility ability = AbilityFactory.getAbility(effect, c);
                 ability.setActivatingPlayer(c.getController());
+                ability.setDescription(sb);
+                ability.setStackDescription(sb);
                 ability.setTrigger(true);
 
-                game.getStack().add(ability);
+                game.getStack().addSimultaneousStackEntry(ability);
 
-            } // for
-        } // creatureAttacked
-          // Annihilator
+            }
+        } 
 
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
