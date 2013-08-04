@@ -1,17 +1,16 @@
 package forge.card.ability.ai;
 
 import java.util.List;
-import java.util.Random;
 
 import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.util.MyRandom;
 
 public class TapAi extends TapAiBase {
     @Override
@@ -26,16 +25,18 @@ public class TapAi extends TapAiBase {
             // Tap creatures down if in combat -- handled in tapPrefTargeting().
         } else if (SpellAbilityAi.isSorcerySpeed(sa)) {
             // Cast it if it's a sorcery.
-        } else {
+        } else if (!SpellAbilityAi.playReusable(ai, sa)){
             // Generally don't want to tap things with an Instant during AI turn outside of combat
             return false;
         }
-        
+
+        // prevent run-away activations - first time will always return true
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
+
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getSourceCard();
-
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         if (tgt == null) {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
@@ -55,7 +56,7 @@ public class TapAi extends TapAiBase {
             }
         }
 
-        return randomReturn;
+        return true;
     }
 
 }

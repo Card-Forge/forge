@@ -158,10 +158,15 @@ public class CountersPutAi extends SpellAbilityAi {
             }
         }
 
+        if (ComputerUtil.playImmediately(ai, sa)) {
+            return true;
+        }
+
         // Don't use non P1P1/M1M1 counters before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases")
-                && !(type.equals("P1P1") || type.equals("M1M1"))) {
+                && !(type.equals("P1P1") || type.equals("M1M1"))
+                && !ComputerUtil.castSpellInMain1(ai, sa)) {
             return false;
         }
 
