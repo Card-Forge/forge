@@ -35,12 +35,12 @@ public class RepeatEffect extends SpellAbilityEffect {
         Integer maxRepeat = null;
         if (sa.hasParam("MaxRepeat")) {
             maxRepeat = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("MaxRepeat"), sa);
-            if (maxRepeat.intValue() == 0) return;
+            if (maxRepeat.intValue() == 0) return; // do nothing if maxRepeat is 0. the next loop will execute at least once
         }
 
         //execute repeat ability at least once
         int count = 0;
-        while (checkRepeatConditions(sa)) {
+        do {
             AbilityUtils.resolve(repeat);
             count++;
             if (maxRepeat != null && maxRepeat <= count) {
@@ -53,7 +53,7 @@ public class RepeatEffect extends SpellAbilityEffect {
                 System.out.println(infLoop.toString());
                 break;
             }
-        }
+        } while (checkRepeatConditions(sa));
     }
 // end class AbilityFactory_Repeat
 

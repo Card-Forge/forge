@@ -1,8 +1,7 @@
 Name:Grindstone
 ManaCost:1
 Types:Artifact
-A:AB$ Mill | Cost$ 3 T | ValidTgts$ Player | NumCards$ 2 | SubAbility$ DBRepeat | RememberMilled$ True | SpellDescription$ Put the top two cards of target player's library into that player's graveyard. If both cards share a color, repeat this process. | StackDescription$ SpellDescription
-SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBCleanAndGrind | MaxRepeat$ MaxRepeats | RepeatCheckSVar$ MilledSharesColor | RepeatSVarCompare$ EQ2 | SubAbility$ DBCleanup | References$ MaxRepeats,MilledSharesColor | StackDescription$ None
+A:AB$ Repeat | Cost$ 3 T | ValidTgts$ Player | RepeatSubAbility$ DBCleanAndGrind | MaxRepeat$ MaxRepeats | RepeatCheckSVar$ MilledSharesColor | References$ MilledSharesColor | RepeatSVarCompare$ EQ2 | SubAbility$ DBCleanup | SpellDescription$ Put the top two cards of target player's library into that player's graveyard. If both cards share a color, repeat this process. | StackDescription$ SpellDescription
 SVar:DBCleanAndGrind:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBPeek
 SVar:DBPeek:DB$ PeekAndReveal | Defined$ Targeted | PeekAmount$ 2 | NoPeek$ True | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBGrind
 SVar:DBGrind:DB$ Mill | NumCards$ 2 | Defined$ Targeted
