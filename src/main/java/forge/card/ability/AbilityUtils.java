@@ -22,6 +22,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbilityStackInstance;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
@@ -989,7 +990,15 @@ public class AbilityUtils {
         } else if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingSA();
             if (saTargeting != null) {
-                Iterables.addAll(sas, saTargeting.getTargets().getTargetSpells());
+                for (SpellAbility targetSpell : saTargeting.getTargets().getTargetSpells()) {
+                    SpellAbilityStackInstance stackInstance = game.getStack().getInstanceFromSpellAbility(targetSpell);
+                    if (stackInstance != null) {
+                        SpellAbility instanceSA = stackInstance.getSpellAbility();
+                        if (instanceSA != null) {
+                            sas.add(instanceSA);
+                        }
+                    }
+                }
             }
         } else if (defined.startsWith("Triggered")) {
             final SpellAbility root = sa.getRootAbility();
