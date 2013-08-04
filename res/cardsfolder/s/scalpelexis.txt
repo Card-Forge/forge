@@ -1,8 +1,14 @@
 Name:Scalpelexis
 ManaCost:4 U
 Types:Creature Beast
-Text:Whenever CARDNAME deals combat damage to a player, that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process.
 PT:1/5
 K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process.
+SVar:TrigMill:AB$ Repeat | Cost$ 0 | RepeatSubAbility$ DBMillClean | RepeatCheckSVar$ X | References$ X,Y | RepeatSVarCompare$ LTY | SubAbility$ DBCleanup
+SVar:DBMillClean:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMill
+SVar:DBMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ 4 | RememberMilled$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$DifferentCardNames_Card.IsRemembered
+SVar:Y:Count$RememberedSize
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scalpelexis.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Scalpelexis deals combat damage to a player, that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process.

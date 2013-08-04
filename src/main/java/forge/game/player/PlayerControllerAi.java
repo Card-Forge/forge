@@ -83,11 +83,11 @@ public class PlayerControllerAi extends PlayerController {
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#playCascade(java.util.List, forge.Card)
      */
-    @Override
+    /*@Override
     public boolean playCascade(Card cascadedCard, Card source) {
         final List<SpellAbility> choices = cascadedCard.getBasicSpells();
         return null != getAi().chooseAndPlaySa(choices, false, true);
-    }
+    }*/
 
     /**
      * TODO: Write javadoc for this method.

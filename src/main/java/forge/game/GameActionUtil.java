@@ -73,114 +73,114 @@ import forge.util.TextUtil;
  */
 public final class GameActionUtil {
     
-    public static final class CascadeAbility extends Ability {
-        private final Player controller;
-        private final Card cascCard;
+//    public static final class CascadeAbility extends Ability {
+//        private final Player controller;
+//        private final Card cascCard;
+//
+//        /**
+//         * TODO: Write javadoc for Constructor.
+//         * @param sourceCard
+//         * @param manaCost
+//         * @param controller
+//         * @param cascCard
+//         */
+//        private CascadeAbility(Card sourceCard, ManaCost manaCost, Player controller, Card cascCard) {
+//            super(sourceCard, manaCost);
+//            this.controller = controller;
+//            this.cascCard = cascCard;
+//        }
+//
+//        @Override
+//        public void resolve() {
+//            final Game game =controller.getGame(); 
+//            final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
+//            final List<Card> revealed = new ArrayList<Card>();
+//
+//            if (topOfLibrary.size() == 0) {
+//                return;
+//            }
+//
+//            Card cascadedCard = null;
+//            Card crd;
+//            int count = 0;
+//            while (cascadedCard == null) {
+//                crd = topOfLibrary.get(count++);
+//                revealed.add(crd);
+//                if ((!crd.isLand() && (crd.getManaCost().getCMC() < cascCard.getManaCost().getCMC()))) {
+//                    cascadedCard = crd;
+//                }
+//
+//                if (count == topOfLibrary.size()) {
+//                    break;
+//                }
+//
+//            } // while
+//
+//            game.getAction().reveal("Revealed Cascade Cards:", revealed, ZoneType.Library, controller, false);
+//
+//            if (cascadedCard != null) {
+//                Player p = cascadedCard.getController();
+//                // returns boolean, but spell resolution stays inside the method anyway (for now)
+//                if ( p.getController().playCascade(cascadedCard, cascCard) )
+//                    revealed.remove(cascadedCard);
+//            }
+//            CardLists.shuffle(revealed);
+//            for (final Card bottom : revealed) {
+//                game.getAction().moveToBottomOfLibrary(bottom);
+//            }
+//        }
+//    }
 
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param sourceCard
-         * @param manaCost
-         * @param controller
-         * @param cascCard
-         */
-        private CascadeAbility(Card sourceCard, ManaCost manaCost, Player controller, Card cascCard) {
-            super(sourceCard, manaCost);
-            this.controller = controller;
-            this.cascCard = cascCard;
-        }
-
-        @Override
-        public void resolve() {
-            final Game game =controller.getGame(); 
-            final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
-            final List<Card> revealed = new ArrayList<Card>();
-
-            if (topOfLibrary.size() == 0) {
-                return;
-            }
-
-            Card cascadedCard = null;
-            Card crd;
-            int count = 0;
-            while (cascadedCard == null) {
-                crd = topOfLibrary.get(count++);
-                revealed.add(crd);
-                if ((!crd.isLand() && (crd.getManaCost().getCMC() < cascCard.getManaCost().getCMC()))) {
-                    cascadedCard = crd;
-                }
-
-                if (count == topOfLibrary.size()) {
-                    break;
-                }
-
-            } // while
-
-            game.getAction().reveal("Revealed Cascade Cards:", revealed, ZoneType.Library, controller, false);
-
-            if (cascadedCard != null) {
-                Player p = cascadedCard.getController();
-                // returns boolean, but spell resolution stays inside the method anyway (for now)
-                if ( p.getController().playCascade(cascadedCard, cascCard) )
-                    revealed.remove(cascadedCard);
-            }
-            CardLists.shuffle(revealed);
-            for (final Card bottom : revealed) {
-                game.getAction().moveToBottomOfLibrary(bottom);
-            }
-        }
-    }
-
-    public static final class CascadeExecutor implements Command {
-        private final Card c;
-        private final Game game;
-        private final Player controller;
-        
-        private static final long serialVersionUID = -845154812215847505L;
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param controller
-         * @param c
-         */
-        public CascadeExecutor(Player controller, Card c, final Game game) {
-            this.controller = controller;
-            this.c = c;
-            this.game = game;
-        }
-
-        @Override
-        public void run() {
-            if (!c.isCopiedSpell()) {
-                final List<Card> maelstromNexii = CardLists.filter(controller.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Maelstrom Nexus"));
-
-                for (final Card nexus : maelstromNexii) {
-                    if (CardUtil.getThisTurnCast("Card.YouCtrl", nexus).size() == 1) {
-                        this.doCascade(c, controller);
-                    }
-                }
-            }
-
-            for (String keyword : c.getKeyword()) {
-                if (keyword.equals("Cascade")) {
-                    this.doCascade(c, controller);
-                }
-            }
-        } // execute()
-
-        void doCascade(final Card c, final Player controller) {
-            final Card cascCard = c;
-
-            final Ability ability = new CascadeAbility(c, ManaCost.ZERO, controller, cascCard);
-            final StringBuilder sb = new StringBuilder();
-            sb.append(c).append(" - Cascade.");
-            ability.setStackDescription(sb.toString());
-            ability.setActivatingPlayer(controller);
-
-            game.getStack().addSimultaneousStackEntry(ability);
-
-        }
-    }
+//    public static final class CascadeExecutor implements Command {
+//        private final Card c;
+//        private final Game game;
+//        private final Player controller;
+//        
+//        private static final long serialVersionUID = -845154812215847505L;
+//
+//        /**
+//         * TODO: Write javadoc for Constructor.
+//         * @param controller
+//         * @param c
+//         */
+//        public CascadeExecutor(Player controller, Card c, final Game game) {
+//            this.controller = controller;
+//            this.c = c;
+//            this.game = game;
+//        }
+//
+//        @Override
+//        public void run() {
+//            if (!c.isCopiedSpell()) {
+//                final List<Card> maelstromNexii = CardLists.filter(controller.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Maelstrom Nexus"));
+//
+//                for (final Card nexus : maelstromNexii) {
+//                    if (CardUtil.getThisTurnCast("Card.YouCtrl", nexus).size() == 1) {
+//                        this.doCascade(c, controller);
+//                    }
+//                }
+//            }
+//
+//            for (String keyword : c.getKeyword()) {
+//                if (keyword.equals("Cascade")) {
+//                    this.doCascade(c, controller);
+//                }
+//            }
+//        } // execute()
+//
+//        void doCascade(final Card c, final Player controller) {
+//            final Card cascCard = c;
+//
+//            final Ability ability = new CascadeAbility(c, ManaCost.ZERO, controller, cascCard);
+//            final StringBuilder sb = new StringBuilder();
+//            sb.append(c).append(" - Cascade.");
+//            ability.setStackDescription(sb.toString());
+//            ability.setActivatingPlayer(controller);
+//
+//            game.getStack().addSimultaneousStackEntry(ability);
+//
+//        }
+//    }
     
     /** 
      * TODO: Write javadoc for this type.
@@ -380,157 +380,35 @@ public final class GameActionUtil {
             return;
         }
 
-        if (c.hasStartOfKeyword("Poisonous")) {
-            final int keywordPosition = c.getKeywordPosition("Poisonous");
-            final String parse = c.getKeyword().get(keywordPosition).toString();
-            final String[] k = parse.split(" ");
+        for (final String key : c.getKeyword()) {
+            if (!key.startsWith("Poisonous ")) continue;
+            final String[] k = key.split(" ", 2);
             final int poison = Integer.parseInt(k[1]);
-
-            final Ability ability = new Ability(c, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    player.addPoisonCounters(poison, c);
-                }
-            };
-
+            // Now can be copied by Strionic Resonator
+            String effect = "AB$ Poison | Cost$ 0 | Defined$ PlayerNamed_" + player.getName() + " | Num$ " + k[1];
+            SpellAbility ability = AbilityFactory.getAbility(effect, c);
+            
             final StringBuilder sb = new StringBuilder();
             sb.append(c);
             sb.append(" - Poisonous: ");
-            sb.append(c.getController().getOpponent());
+            sb.append(player);
             sb.append(" gets ").append(poison).append(" poison counter");
             if (poison != 1) {
                 sb.append("s");
             }
             sb.append(".");
 
+            ability.setActivatingPlayer(c.getController());
+            ability.setDescription(sb.toString());
             ability.setStackDescription(sb.toString());
+            ability.setTrigger(true);
 
-            for (String kw : c.getKeyword()) {
-                if (kw.startsWith("Poisonous")) {
-                    player.getGame().getStack().addSimultaneousStackEntry(ability);
-                }
-            }
-        }
+            player.getGame().getStack().addSimultaneousStackEntry(ability);
 
-        if (c.getName().equals("Scalpelexis")) {
-            GameActionUtil.playerCombatDamageScalpelexis(c);
-        }
-        if (c.isEnchantedBy("Celestial Mantle")) {
-            GameActionUtil.executeCelestialMantle(c);
         }
 
         c.getDamageHistory().registerCombatDamage(player);
     } // executeCombatDamageToPlayerEffects
-
-    /**
-     * <p>
-     * executeCelestialMantle.
-     * </p>
-     * 
-     * @param enchanted
-     *            a {@link forge.Card} object.
-     */
-    private static void executeCelestialMantle(final Card enchanted) {
-        final ArrayList<Card> auras = enchanted.getEnchantedBy();
-        for (final Card aura : auras) {
-            if (aura.getName().equals("Celestial Mantle")) {
-                final Ability doubleLife = new Ability(aura, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final int life = enchanted.getController().getLife();
-                        enchanted.getController().setLife(life * 2, aura);
-                    }
-                };
-                doubleLife.setStackDescription(aura.getName() + " - " + enchanted.getController()
-                        + " doubles his or her life total.");
-
-                enchanted.getGame().getStack().addSimultaneousStackEntry(doubleLife);
-
-            }
-        }
-    }
-
-    /**
-     * <p>
-     * playerCombatDamageScalpelexis.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    private static void playerCombatDamageScalpelexis(final Card c) {
-        final Player player = c.getController();
-        final Player opponent = player.getOpponent();
-        final Game game = player.getGame();
-
-        if (c.getNetAttack() > 0) {
-            final Ability ability = new Ability(c, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-
-                    final List<Card> libList = new ArrayList<Card>(opponent.getCardsIn(ZoneType.Library));
-                    int count = 0;
-                    int broken = 0;
-                    for (int i = 0; i < libList.size(); i = i + 4) {
-                        Card c1 = null;
-                        Card c2 = null;
-                        Card c3 = null;
-                        Card c4 = null;
-                        if (i < libList.size()) {
-                            c1 = libList.get(i);
-                        } else {
-                            broken = 1;
-                        }
-                        if ((i + 1) < libList.size()) {
-                            c2 = libList.get(i + 1);
-                        } else {
-                            broken = 1;
-                        }
-                        if ((i + 2) < libList.size()) {
-                            c3 = libList.get(i + 2);
-                        } else {
-                            broken = 1;
-                        }
-                        if ((i + 3) < libList.size()) {
-                            c4 = libList.get(i + 3);
-                        } else {
-                            broken = 1;
-                        }
-                        if (broken == 0) {
-                            if ((c1.getName().contains(c2.getName()) || c1.getName().contains(c3.getName())
-                                    || c1.getName().contains(c4.getName()) || c2.getName().contains(c3.getName())
-                                    || c2.getName().contains(c4.getName()) || c3.getName().contains(c4.getName()))) {
-                                count = count + 1;
-                            } else {
-                                broken = 1;
-                            }
-                        }
-
-                    }
-                    count = (count * 4) + 4;
-                    int max = count;
-                    if (libList.size() < count) {
-                        max = libList.size();
-                    }
-
-                    for (int j = 0; j < max; j++) {
-                        final Card c = libList.get(j);
-                        game.getAction().exile(c);
-                    }
-                }
-            }; // ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Scalpelexis - ").append(opponent);
-            sb.append(" exiles the top four cards of his or her library. ");
-            sb.append("If two or more of those cards have the same name, repeat this process.");
-            ability.setStackDescription(sb.toString());
-            ability.setDescription(sb.toString());
-
-            game.getStack().addSimultaneousStackEntry(ability);
-
-        }
-    }
 
     /** Constant <code>oldManOfTheSea</code>. */
     private static Function<Game, ?> oldManOfTheSea = new Function<Game, Object>() {

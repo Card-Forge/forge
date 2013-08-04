@@ -59,7 +59,6 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
@@ -1975,6 +1974,7 @@ public class CardFactoryUtil {
                 
                 SpellAbility ability = AbilityFactory.getAbility( regularPart, c);
                 ability.setDescription(ability.getStackDescription());
+                ability.setTrigger(true); // can be copied by Strionic Resonator
                 list.add(ability);
             }
         }
@@ -2328,12 +2328,12 @@ public class CardFactoryUtil {
                     + " | TriggerDescription$ Extort (Whenever you cast a spell, you may pay WB. If you do, "
                     + "each opponent loses 1 life and you gain that much life.)";
             final String abString = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | "
-                    + "LifeAmount$ 1 | SubAbility$ DBGainLife";
+                    + "LifeAmount$ 1 | SubAbility$ ExtortGainLife";
             final String dbString = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | References$ AFLifeLost";
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(extortTrigger, card, true);
             card.addTrigger(parsedTrigger);
             card.setSVar("ExtortOpps", abString);
-            card.setSVar("DBGainLife", dbString);
+            card.setSVar("ExtortGainLife", dbString);
             card.setSVar("AFLifeLost", "Number$0");
         }
 
@@ -3009,54 +3009,28 @@ public class CardFactoryUtil {
                 final String[] k = parse.split(":");
                 final String magnitude = k[1];
 
-                // final String player = card.getController();
+                String abStr = "AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | "
+                        + "Destination$ Battlefield | Defined$ ReplacedCard | SubAbility$ DevourSac";
+                String dbStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | "
+                        + "References$ DevourSacX | SacValid$ Creature.Other | SacMessage$ creature (Devour "
+                        + magnitude + ") | RememberSacrificed$ True | Optional$ True | "
+                        + "Devour$ True | SubAbility$ DevourCounters";
+                String counterStr = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ DevourX"
+                        + " | References$ DevourX,DevourSize | SubAbility$ DevourCleanup";
 
-                final Command intoPlay = new Command() {
-                    private static final long serialVersionUID = -7530312713496897814L;
+                card.setSVar("DevourETB", abStr);
+                card.setSVar("DevourSac", dbStr);
+                card.setSVar("DevourSacX", "Count$Valid Creature.YouCtrl+Other");
+                card.setSVar("DevourCounters", counterStr);
+                card.setSVar("DevourX", "SVar$DevourSize/Times." + magnitude);
+                card.setSVar("DevourSize", "Count$RememberedSize");
+                card.setSVar("DevourCleanup", "DB$ Cleanup | ClearRemembered$ True");
 
+                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DevourETB";
 
-                    private void devour(Card eater, Card dinner) {
-                        final Game game = eater.getGame();
-                        eater.addDevoured(dinner);
-                        game.getAction().sacrifice(dinner, null);
-                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                        runParams.put("Devoured", dinner);
-                        game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
-                    }
-                    
-                    @Override
-                    public void run() {
-                        final List<Card> creats = card.getController().getCreaturesInPlay();
-
-                        creats.remove(card);
-                        card.clearDevoured();
-                        // System.out.println("Creats size: " + creats.size());
-
-                        List<Card> selection = new ArrayList<Card>();
-
-                        if (card.getController().isHuman()) {
-                            if (creats.size() > 0) {
-                                selection = GuiChoose.order("Devour", "Devouring", -1, creats, null, card);
-                            }
-                        } else {
-                            for(Card c : creats) {
-                                if ((c.getNetAttack() <= 1) && ((c.getNetAttack() + c.getNetDefense()) <= 3))
-                                    selection.add(c);
-                            }
-                        }
-
-                        for (Card dinner : selection) {
-                            devour(card, dinner);
-                        }
-                        final int multiplier = magnitude.equals("X") ? AbilityUtils.calculateAmount(card, magnitude, null)
-                                : Integer.parseInt(magnitude);
-                        final int totalCounters = selection.size() * multiplier;
-
-                        card.addCounter(CounterType.P1P1, totalCounters, true);
-
-                    }
-                };
-                card.addComesIntoPlayCommand(intoPlay);
+                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
+                re.setLayer(ReplacementLayer.Other);
+                card.addReplacementEffect(re);
             }
         } // Devour
 
@@ -3140,6 +3114,30 @@ public class CardFactoryUtil {
 
             card.addTrigger(stormTrigger);
         } // Storm
+        final int cascade = card.getKeywordAmount("Cascade");
+        for (int i = 0; i < cascade; i++) {
+            final StringBuilder trigScript = new StringBuilder(
+                    "Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCascade | Secondary$ " +
+                    "True | TriggerDescription$ Cascade - CARDNAME");
+
+            final String abString = "AB$ DigUntil | Cost$ 0 | Defined$ You | Amount$ 1 | Valid$ "
+                    + "Card.nonLand+cmcLTCascadeX | FoundDestination$ Exile | RevealedDestination$"
+                    + " Exile | References$ CascadeX | ImprintRevealed$ True | RememberFound$ True"
+                    + " | SubAbility$ CascadeCast";
+            final String dbCascadeCast = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | "
+                    + "Optional$ True | SubAbility$ CascadeMoveToLib";
+            final String dbMoveToLib = "DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted"
+                    + " | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1"
+                    + " | SubAbility$ CascadeCleanup";
+            card.setSVar("TrigCascade", abString);
+            card.setSVar("CascadeCast", dbCascadeCast);
+            card.setSVar("CascadeMoveToLib", dbMoveToLib);
+            card.setSVar("CascadeX", "Count$CardManaCost");
+            card.setSVar("CascadeCleanup", "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True");
+            final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, true);
+
+            card.addTrigger(cascadeTrigger);;
+        } // Cascade
     }
     
     /**

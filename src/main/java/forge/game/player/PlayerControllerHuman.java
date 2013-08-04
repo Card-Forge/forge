@@ -100,7 +100,7 @@ public class PlayerControllerHuman extends PlayerController {
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#playCascade(java.util.List, forge.Card)
      */
-    @Override
+    /*@Override
     public boolean playCascade(Card cascadedCard, Card sourceCard) {
 
         final StringBuilder title = new StringBuilder();
@@ -114,7 +114,7 @@ public class PlayerControllerHuman extends PlayerController {
         if ( result )
             HumanPlay.playCardWithoutPayingManaCost(player, cascadedCard);
         return result;
-    }
+    }*/
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#mayPlaySpellAbilityForFree(forge.card.spellability.SpellAbility)

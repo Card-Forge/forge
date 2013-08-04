@@ -267,6 +267,7 @@ public class GameAction {
 
         if (!c.isToken() && !toBattlefield) {
             copied.getCharacteristics().resetCardColor();
+            copied.clearDevoured();
         }
 
         if (fromBattlefield) {
@@ -1431,6 +1432,13 @@ public class GameAction {
                     }
                 }
             };
+            // TODO : convert Persist for Strionic Resonator
+            /*String effect = String.format("AB$ ChangeZone | Cost$ 0 | Defined$ CardUID_%d | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCounter",
+                    persistCard.getUniqueNumber());
+            String dbString = String.format("DB$ PutCounter | Defined$ CardUID_%d | CounterNum$ 1 | CounterType$ M1M1", persistCard.getUniqueNumber());
+            SpellAbility persistAb = AbilityFactory.getAbility(effect, c);
+            persistAb.setSubAbility(AbilityFactory.getSubAbility(persistCard, dbString));
+            persistAb.setTrigger(true);*/
             persistAb.setStackDescription(newCard.getName() + " - Returning from Persist");
             persistAb.setDescription(newCard.getName() + " - Returning from Persist");
             persistAb.setActivatingPlayer(c.getController());
@@ -1451,6 +1459,13 @@ public class GameAction {
                     }
                 }
             };
+            // TODO : convert Undying for Strionic Resonator
+            /*String effect = String.format("AB$ ChangeZone | Cost$ 0 | Defined$ CardUID_%d | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCounter",
+                    undyingCard.getUniqueNumber());
+            String dbString = String.format("DB$ PutCounter | Defined$ CardUID_%d | CounterNum$ 1 | CounterType$ P1P1", undyingCard.getUniqueNumber());
+            SpellAbility undyingAb = AbilityFactory.getAbility(effect, c);
+            undyingAb.setSubAbility(AbilityFactory.getSubAbility(undyingCard, dbString));
+            undyingAb.setTrigger(true);*/
             undyingAb.setStackDescription(newCard.getName() + " - Returning from Undying");
             undyingAb.setDescription(newCard.getName() + " - Returning from Undying");
             undyingAb.setActivatingPlayer(c.getController());
