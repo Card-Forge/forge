@@ -59,7 +59,8 @@ public class Combat {
     private Map<Card, List<Card>> blockersOrderedForDamageAssignment = new HashMap<Card, List<Card>>();
     private Map<GameEntity, CombatLki> lkiCache = new HashMap<GameEntity, CombatLki>();
     
-    private List<Card> combatantDealtFirstStrikeDamage = Lists.newArrayList();
+    // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW) 
+    private List<Card> combatantsThatDealtFirstStrikeDamage = Lists.newArrayList();
 
 
     public Combat(Player attacker) {
@@ -430,7 +431,7 @@ public class Combat {
             }
             
             if (firstStrikeDamage) {
-                this.combatantDealtFirstStrikeDamage.add(blocker);
+                this.combatantsThatDealtFirstStrikeDamage.add(blocker);
             }
             
             List<Card> attackers = this.attackersOrderedForDamageAssignment.get(blocker);
@@ -467,7 +468,7 @@ public class Combat {
             }
             
             if (firstStrikeDamage) {
-                this.combatantDealtFirstStrikeDamage.add(attacker);
+                this.combatantsThatDealtFirstStrikeDamage.add(attacker);
             }
             
             // If potential damage is 0, continue along
@@ -524,7 +525,7 @@ public class Combat {
         if (firstStrikeDamage && combatant.hasFirstStrike()) 
             return true;
         
-        return !firstStrikeDamage && !this.combatantDealtFirstStrikeDamage.contains(combatant);
+        return !firstStrikeDamage && !this.combatantsThatDealtFirstStrikeDamage.contains(combatant);
     }
 
     // Damage to whatever was protected there. 
@@ -550,7 +551,7 @@ public class Combat {
         assignedDamage |= assignBlockersDamage(firstStrikeDamage);
         if (!firstStrikeDamage) {
             // Clear first strike damage list since it doesn't matter anymore
-            this.combatantDealtFirstStrikeDamage.clear();
+            this.combatantsThatDealtFirstStrikeDamage.clear();
         }
         return assignedDamage;
     }
