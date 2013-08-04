@@ -5,7 +5,7 @@ T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Exe
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ TriggeredPlayer | NumCards$ 2 | SubAbility$ ChooseDrawn
 SVar:ChooseDrawn:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.YouOwn+DrawnThisTurn | Amount$ 2 | RememberChosen$ True | Mandatory$ True | AILogic$ Worst | SubAbility$ DBPayOrReturn
 SVar:DBPayOrReturn:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | Zone$ Hand | RepeatSubAbility$ DBReplace | SubAbility$ DBCleanup
-SVar:DBReplace:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card.IsImprinted | UnlessCost$ PayLife<4> | UnlessPayer$ TriggeredPlayer | SubAbility$ DBCleanup
+SVar:DBReplace:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card.IsImprinted | UnlessCost$ PayLife<4> | Mandatory$ True | StackDescription$ Put {c:Imprinted} on top of your library | UnlessPayer$ TriggeredPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_library.jpg
