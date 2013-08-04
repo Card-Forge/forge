@@ -47,6 +47,13 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         return true;
     }
 
+    public Trigger getTrigger(){
+        return regtrig;
+    }
+
+    public Player getDecider() {
+        return decider;
+    }
 
     public final void setMandatory(final boolean mand) {
         this.mandatory = mand;

@@ -1,0 +1,8 @@
+Name:Strionic Resonator
+ManaCost:2
+Types:Artifact
+A:AB$ CopySpellAbility | Cost$ 2 T | TargetType$ Triggered | ValidTgts$ Card.YouCtrl | SpellDescription$ Copy target triggered ability you control. You may choose new targets for the copy.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/strionic_resonator.jpg
+Oracle:{2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy. (A triggered ability uses the words "when," "whenever," or "at.")

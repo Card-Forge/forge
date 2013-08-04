@@ -35,6 +35,9 @@ import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
 import forge.card.ability.AbilityFactory;
+import forge.card.ability.AbilityUtils;
+import forge.card.ability.ApiType;
+import forge.card.ability.effects.CharmEffect;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementHandler;
@@ -46,6 +49,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.card.trigger.WrappedAbility;
 import forge.game.player.Player;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
@@ -170,6 +174,9 @@ public class CardFactory {
             copySA = ((AbilityActivated)sa).getCopy();
             copySA.setSourceCard(original);
         }
+        else if (sa.isTrigger()) {
+            copySA = getCopiedTriggeredAbility(sa);
+        }
         else
         {
             copySA = sa.copy();
@@ -188,7 +195,9 @@ public class CardFactory {
         }
         copySA.setCopied(true);
         //remove all costs
-        copySA.setPayCosts(new Cost("", sa.isAbility()));
+        if (!copySA.isTrigger()) {
+            copySA.setPayCosts(new Cost("", sa.isAbility()));
+        }
         if (sa.getTargetRestrictions() != null) {
             TargetRestrictions target = new TargetRestrictions(sa.getTargetRestrictions());
             copySA.setTargetRestrictions(target);
@@ -322,7 +331,7 @@ public class CardFactory {
         triggerSB.append("that planar deck and turn it face up");
 
         StringBuilder saSB = new StringBuilder();
-        saSB.append("AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | AnyPlayer$ True | ActivationZone$ Command | ");
+        saSB.append("AB$ RollPlanarDice | Cost$ X | References$ X | SorcerySpeed$ True | AnyPlayer$ True | ActivationZone$ Command | ");
         saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");        
 
         card.setSVar("RolledWalk", "DB$ Planeswalk | Cost$ 0");
@@ -574,6 +583,54 @@ public class CardFactory {
             list.add(temp);
         }
         return list;
+    }
+    /**
+     * Copy triggered ability
+     * 
+     * return a wrapped ability
+     */
+    public static SpellAbility getCopiedTriggeredAbility(final SpellAbility sa) {
+        if (!sa.isTrigger()) {
+            return null;
+        }
+        // Find trigger
+        Trigger t = null;
+        if (sa.isWrapper()) {
+            // copy trigger?
+            t = ((WrappedAbility) sa).getTrigger();
+        } else { // some keyword ability, e.g. Exalted, Annihilator
+            return sa.copy();
+        }
+        // set up copied wrapped ability
+        SpellAbility trig = t.getOverridingAbility();
+        if (trig == null) {
+            trig = AbilityFactory.getAbility(sa.getSourceCard().getSVar(t.getMapParams().get("Execute")), sa.getSourceCard());
+        }
+        trig.setSourceCard(sa.getSourceCard());
+        trig.setTrigger(true);
+        trig.setSourceTrigger(t.getId());
+        t.setTriggeringObjects(trig);
+        if (t.getStoredTriggeredObjects() != null) {
+            trig.setAllTriggeringObjects(t.getStoredTriggeredObjects());
+        }
+
+        trig.setActivatingPlayer(sa.getActivatingPlayer());
+        if (t.getMapParams().containsKey("TriggerController")) {
+            Player p = AbilityUtils.getDefinedPlayers(t.getHostCard(), t.getMapParams().get("TriggerController"), trig).get(0);
+            trig.setActivatingPlayer(p);
+        }
+
+        trig.setStackDescription(trig.toString());
+        if (trig.getApi() == ApiType.Charm && !trig.isWrapper()) {
+            CharmEffect.makeChoices(trig);
+        }
+
+        WrappedAbility wrapperAbility = new WrappedAbility(t, trig, ((WrappedAbility) sa).getDecider());
+        wrapperAbility.setTrigger(true);
+        wrapperAbility.setMandatory(((WrappedAbility) sa).isMandatory());
+        wrapperAbility.setDescription(wrapperAbility.getStackDescription());
+        t.setTriggeredSA(wrapperAbility);
+        return wrapperAbility;
     }
 
 } // end class AbstractCardFactory
