@@ -1,5 +1,6 @@
 package forge.card.ability.effects;
 
+import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
@@ -9,6 +10,7 @@ import forge.CardUtil;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -26,6 +28,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
         final int amount = AbilityUtils.calculateAmount(card, num, sa);
         final List<Player> tgts = getTargetPlayers(sa);
+        final boolean devour = sa.hasParam("Devour");
 
         String valid = sa.getParam("SacValid");
         if (valid == null) {
@@ -36,8 +39,6 @@ public class SacrificeEffect extends SpellAbilityEffect {
         if (msg == null) {
             msg = valid;
         }
-
-        msg = "Sacrifice a " + msg;
 
         final boolean destroy = sa.hasParam("Destroy");
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
@@ -63,15 +64,21 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 } else {
                     boolean isOptional = sa.hasParam("Optional");
                     choosenToSacrifice = destroy ? 
-                        p.getController().choosePermanentsToDestroy(sa, isOptional ? 0 : amount, amount, validTargets, valid) :
-                        p.getController().choosePermanentsToSacrifice(sa, isOptional ? 0 : amount, amount, validTargets, valid);
+                        p.getController().choosePermanentsToDestroy(sa, isOptional ? 0 : amount, amount, validTargets, msg) :
+                        p.getController().choosePermanentsToSacrifice(sa, isOptional ? 0 : amount, amount, validTargets, msg);
                 }
                 
                 for(Card sac : choosenToSacrifice) {
                     final Card lKICopy = CardUtil.getLKICopy(sac);
                     boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa);
                     boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa);
-                    
+                    // Run Devour Trigger
+                    if (devour) {
+                        card.addDevoured(lKICopy);
+                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                        runParams.put("Devoured", sac);
+                        game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
+                    }
                     if ( remSacrificed && (wasDestroyed || wasSacrificed) ) {
                         card.addRemembered(lKICopy);
                     }

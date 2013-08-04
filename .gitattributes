@@ -5733,6 +5733,7 @@ res/cardsfolder/j/juggernaut.txt svneol=native#text/plain
 res/cardsfolder/j/juju_bubble.txt svneol=native#text/plain
 res/cardsfolder/j/jukai_messenger.txt svneol=native#text/plain
 res/cardsfolder/j/jump.txt svneol=native#text/plain
+res/cardsfolder/j/jund.txt -text
 res/cardsfolder/j/jund_battlemage.txt svneol=native#text/plain
 res/cardsfolder/j/jund_charm.txt svneol=native#text/plain
 res/cardsfolder/j/jund_hackblade.txt svneol=native#text/plain

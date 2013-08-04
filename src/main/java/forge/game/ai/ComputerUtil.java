@@ -674,13 +674,24 @@ public class ComputerUtil {
      */
     public static List<Card> choosePermanentsToSacrifice(final Player ai, final List<Card> cardlist, final int amount, SpellAbility source, 
             final boolean destroy, final boolean isOptional) {
-        final List<Card> remaining = new ArrayList<Card>(cardlist);
+        List<Card> remaining = new ArrayList<Card>(cardlist);
         final List<Card> sacrificed = new ArrayList<Card>();
 
         if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) { 
             return sacrificed; // sacrifice none 
         }
-        
+        if (isOptional && source.hasParam("Devour")) {
+            remaining = CardLists.filter(remaining, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    if ((c.getCMC() <= 1 && c.getNetAttack() < 3)
+                            || c.getNetAttack() + c.getNetDefense() <= 3) {
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }
         CardLists.sortByCmcDesc(remaining);
         Collections.reverse(remaining);
 
