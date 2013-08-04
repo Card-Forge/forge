@@ -1,10 +1,7 @@
 package forge.card.ability.effects;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Iterables;
 
 import forge.Card;
@@ -17,7 +14,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
@@ -99,8 +95,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
 
         if (destination.equals(ZoneType.Library) && random) {
-            final Random ran = MyRandom.getRandom();
-            Collections.shuffle(cards, ran);
+            CardLists.shuffle(cards);
         }
 
         for (final Card c : cards) {

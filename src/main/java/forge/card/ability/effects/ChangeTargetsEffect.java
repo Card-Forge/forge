@@ -15,6 +15,7 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetChoices;
 import forge.game.player.Player;
 import forge.game.zone.MagicStack;
+import forge.util.Aggregates;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -29,7 +30,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final List<SpellAbility> sas = getTargetSpells(sa);
         final boolean remember = sa.hasParam("RememberTargetedCard");
-        
+        final boolean random = sa.hasParam("RandomTarget");
+
         final MagicStack stack = sa.getActivatingPlayer().getGame().getStack();
         for (final SpellAbility tgtSA : sas) {
             SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(tgtSA);
@@ -37,7 +39,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 // If there isn't a Stack Instance, there isn't really a target
                 continue;
             }
-            
+
             boolean changesOneTarget = sa.hasParam("ChangeSingleTarget"); // The only card known to replace targets with self is Spellskite
             // There is also Muck Drubb but it replaces ALL occurences of a single target with itself (unlike Spellskite that has to be activated for each).
 
@@ -48,7 +50,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             boolean isOptional = sa.hasParam("Optional");
             if( isOptional && !chooser.getController().confirmAction(sa, null, "Do you want to change targets of " + tgtSA.getSourceCard() + "?"))
                  continue;
-            
+
             if( changesOneTarget ) {
                 // 1. choose a target of target spell
                 List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets = new ArrayList<>();
@@ -65,7 +67,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     System.err.println("Player managed to target a spell without targets with Spellskite's ability.");
                     return;
                 }
-                
+
                 Pair<SpellAbilityStackInstance, ITargetable> chosenTarget = chooser.getController().chooseTarget(sa, allTargets);
                 // 2. prepare new target choices
                 SpellAbilityStackInstance replaceIn = chosenTarget.getKey();
@@ -81,16 +83,25 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     replaceIn.updateTarget(newTargetBlock);
                 } else
                     replaceIn.updateTarget(oldTargetBlock);
-            } else 
+            } else {
                 while(changingTgtSI != null) {
-                    // Update targets, with a potential new target
                     SpellAbility changingTgtSA = changingTgtSI.getSpellAbility();
-                    TargetChoices newTarget = sa.getActivatingPlayer().getController().chooseNewTargetsFor(changingTgtSA);
-                    if (null != newTarget)
-                        changingTgtSI.updateTarget(newTarget);
+                    if (!random) {
+                        // Update targets, with a potential new target
+                        TargetChoices newTarget = sa.getActivatingPlayer().getController().chooseNewTargetsFor(changingTgtSA);
+                        if (null != newTarget) {
+                            changingTgtSI.updateTarget(newTarget);
+                        }
+                    } else {
+                        changingTgtSA.resetTargets();
+                        List<ITargetable> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
+                        ITargetable choice = Aggregates.random(candidates);
+                        changingTgtSA.getTargets().add(choice);
+                        changingTgtSI.updateTarget(changingTgtSA.getTargets());
+                    }
                     changingTgtSI = changingTgtSI.getSubInstace();
                 }
-
+            }
             if (remember) {
                 sa.getSourceCard().addRemembered(tgtSA.getSourceCard());
             }

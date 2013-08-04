@@ -430,6 +430,7 @@ res/cardsfolder/a/arcane_spyglass.txt svneol=native#text/plain
 res/cardsfolder/a/arcane_teachings.txt svneol=native#text/plain
 res/cardsfolder/a/arcanis_the_omnipotent.txt svneol=native#text/plain
 res/cardsfolder/a/arcanis_the_omnipotent_avatar.txt -text
+res/cardsfolder/a/arcanum_wings.txt -text
 res/cardsfolder/a/arcbound_bruiser.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_crusher.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_fiend.txt -text
@@ -4746,6 +4747,7 @@ res/cardsfolder/g/grinning_demon.txt svneol=native#text/plain
 res/cardsfolder/g/grinning_demon_avatar.txt -text
 res/cardsfolder/g/grinning_ignus.txt svneol=native#text/plain
 res/cardsfolder/g/grip_of_amnesia.txt -text
+res/cardsfolder/g/grip_of_chaos.txt -text
 res/cardsfolder/g/griptide.txt -text
 res/cardsfolder/g/griselbrand.txt -text
 res/cardsfolder/g/grisly_salvage.txt -text
@@ -14259,6 +14261,7 @@ src/main/java/forge/card/ability/ai/BecomesBlockedAi.java -text
 src/main/java/forge/card/ability/ai/BondAi.java -text
 src/main/java/forge/card/ability/ai/CanPlayAsDrawbackAi.java -text
 src/main/java/forge/card/ability/ai/CannotPlayAi.java -text
+src/main/java/forge/card/ability/ai/ChangeTargetsAi.java -text
 src/main/java/forge/card/ability/ai/ChangeZoneAi.java -text
 src/main/java/forge/card/ability/ai/ChangeZoneAllAi.java -text
 src/main/java/forge/card/ability/ai/CharmAi.java -text
@@ -14351,6 +14354,7 @@ src/main/java/forge/card/ability/ai/TwoPilesAi.java -text
 src/main/java/forge/card/ability/ai/UnattachAllAi.java -text
 src/main/java/forge/card/ability/ai/UntapAi.java -text
 src/main/java/forge/card/ability/ai/UntapAllAi.java -text
+src/main/java/forge/card/ability/ai/ZoneExchangeAi.java -text
 src/main/java/forge/card/ability/effects/AbandonEffect.java -text
 src/main/java/forge/card/ability/effects/AddPhaseEffect.java -text
 src/main/java/forge/card/ability/effects/AddTurnEffect.java -text
@@ -14460,6 +14464,7 @@ src/main/java/forge/card/ability/effects/TwoPilesEffect.java -text
 src/main/java/forge/card/ability/effects/UnattachAllEffect.java -text
 src/main/java/forge/card/ability/effects/UntapAllEffect.java -text
 src/main/java/forge/card/ability/effects/UntapEffect.java -text
+src/main/java/forge/card/ability/effects/ZoneExchangeEffect.java -text
 src/main/java/forge/card/ability/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactory.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryCreatures.java svneol=native#text/plain

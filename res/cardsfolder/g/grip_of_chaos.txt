@@ -1,0 +1,9 @@
+Name:Grip of Chaos
+ManaCost:4 R R
+Types:Enchantment
+T:Mode$ SpellAbilityCast | IsSingleTarget$ True | TriggerZones$ Battlefield | Execute$ TrigChangeTarget | TriggerDescription$ Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random. (Select from among all legal targets.)
+SVar:TrigChangeTarget:AB$ ChangeTargets | Cost$ 0 | Defined$ TriggeredSpellAbility | RandomTarget$ True
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grip_of_chaos.jpg
+Oracle:Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random. (Select from among all legal targets.)
