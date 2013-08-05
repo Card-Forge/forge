@@ -1,9 +1,8 @@
 package forge.card.ability.effects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import com.google.common.collect.ImmutableList;
 
 import forge.Card;
 import forge.CardLists;
@@ -40,6 +39,12 @@ public class ChooseColorEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
 
+        List<String> colorChoices = new ArrayList<String>(Constant.Color.ONLY_COLORS);
+        if (sa.hasParam("Choices")) {
+            String[] restrictedChoices = sa.getParam("Choices").split(",");
+            colorChoices = Arrays.asList(restrictedChoices);
+        }
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -48,14 +53,13 @@ public class ChooseColorEffect extends SpellAbilityEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (p.isHuman()) {
                     if (sa.hasParam("OrColors")) {
-                        ImmutableList<String> choices = Constant.Color.ONLY_COLORS;
-                        final List<String> o = GuiChoose.getChoices("Choose a color or colors", 1, choices.size(), choices);
+                        final List<String> o = GuiChoose.getChoices("Choose a color or colors", 1, colorChoices.size(), colorChoices);
                         card.setChosenColor(new ArrayList<String>(o));
                     } else if (sa.hasParam("TwoColors")) {
-                        final List<String> o = GuiChoose.getChoices("Choose two colors", 2, 2, Constant.Color.ONLY_COLORS);
+                        final List<String> o = GuiChoose.getChoices("Choose two colors", 2, 2, colorChoices);
                         card.setChosenColor(new ArrayList<String>(o));
                     } else {
-                        final Object o = GuiChoose.one("Choose a color", Constant.Color.ONLY_COLORS);
+                        final Object o = GuiChoose.one("Choose a color", colorChoices);
                         if (null == o) {
                             return;
                         }
@@ -72,36 +76,38 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                     if (sa.hasParam("AILogic")) {
                         final String logic = sa.getParam("AILogic");
                         if (logic.equals("MostProminentInHumanDeck")) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), opp)));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(),
+                                    opp), colorChoices));
                         } else if (logic.equals("MostProminentInComputerDeck")) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), ai)));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(),
+                                    ai), colorChoices));
                         } else if (logic.equals("MostProminentDualInComputerDeck")) {
                             List<String> prominence = ComputerUtilCard.getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
                             chosen.add(prominence.get(0));
                             chosen.add(prominence.get(1));
                         }
                         else if (logic.equals("MostProminentInGame")) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(game.getCardsInGame()));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(game.getCardsInGame(), colorChoices));
                         }
                         else if (logic.equals("MostProminentHumanCreatures")) {
                             List<Card> list = opp.getCreaturesInPlay();
                             if (list.isEmpty()) {
                                 list = CardLists.filter(CardLists.filterControlledBy(game.getCardsInGame(), opp), CardPredicates.Presets.CREATURES);
                             }
-                            chosen.add(ComputerUtilCard.getMostProminentColor(list));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(list, colorChoices));
                         }
                         else if (logic.equals("MostProminentComputerControls")) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield)));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield), colorChoices));
                         }
                         else if (logic.equals("MostProminentHumanControls")) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(ai.getOpponent().getCardsIn(ZoneType.Battlefield)));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(ai.getOpponent().getCardsIn(ZoneType.Battlefield), colorChoices));
                         }
                         else if (logic.equals("MostProminentPermanent")) {
                             final List<Card> list = game.getCardsIn(ZoneType.Battlefield);
-                            chosen.add(ComputerUtilCard.getMostProminentColor(list));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(list, colorChoices));
                         }
                         else if (logic.equals("MostProminentAttackers") && game.getPhaseHandler().inCombat()) {
-                            chosen.add(ComputerUtilCard.getMostProminentColor(game.getCombat().getAttackers()));
+                            chosen.add(ComputerUtilCard.getMostProminentColor(game.getCombat().getAttackers(), colorChoices));
                         }
                         else if (logic.equals("MostProminentKeywordInComputerDeck")) {
                             List<Card> list = ai.getAllCards();

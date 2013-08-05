@@ -1843,6 +1843,49 @@ public class CardFactoryUtil {
         }
         return mask;
     }
+
+    /**
+     * <p>
+     * getMostProminentColorsFromList.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @return a boolean.
+     */
+    public static byte getMostProminentColorsFromList(final List<Card> list, final List<String> restrictedToColors) {
+        List<Byte> colorRestrictions = new ArrayList<Byte>();
+        for (final String col : restrictedToColors) {
+            colorRestrictions.add(MagicColor.fromName(col));
+        }
+        int cntColors = colorRestrictions.size();
+        final Integer[] map = new Integer[cntColors];
+        for(int i = 0; i < cntColors; i++) {
+            map[i] = 0;
+        }
+
+        for (final Card crd : list) {
+            ColorSet color = CardUtil.getColors(crd);
+            for (int i = 0; i < cntColors; i++) {
+                if (color.hasAnyColor(colorRestrictions.get(i))) {
+                    map[i]++;
+                }
+            }
+        }
+
+        byte mask = 0;
+        int nMax = -1;
+        for(int i = 0; i < cntColors; i++) { 
+            if ( map[i] > nMax )
+                mask = colorRestrictions.get(i);
+            else if ( map[i] == nMax )
+                mask |= colorRestrictions.get(i);
+            else 
+                continue;
+            nMax = map[i];
+        }
+        return mask;
+    }
     
     /**
      * <p>

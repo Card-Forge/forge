@@ -751,6 +751,16 @@ public class ComputerUtilCard {
         return Constant.Color.WHITE; // no difference, there was no prominent color
     }
 
+    public static String getMostProminentColor(final List<Card> list, final List<String> restrictedToColors) {
+        byte colors = CardFactoryUtil.getMostProminentColorsFromList(list, restrictedToColors);
+        for (byte c : MagicColor.WUBRG) {
+            if ((colors & c) != 0) {
+                return MagicColor.toLongString(c);
+            }
+        }
+        return restrictedToColors.get(0); // no difference, there was no prominent color
+    }
+
     public static List<String> getColorByProminence(final List<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
         final List<Pair<Byte,Integer>> map = new ArrayList<Pair<Byte,Integer>>();
