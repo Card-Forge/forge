@@ -6458,6 +6458,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 return false;
             }
+        } else if (property.startsWith("sharesBlockingAssignmentWith")) {
+            if (null == combat) { return false; }
+            if (null == combat.getAttackersBlockedBy(source) || null == combat.getAttackersBlockedBy(this)) { return false; }
+
+            List<Card> sourceBlocking = new ArrayList<Card>(combat.getAttackersBlockedBy(source));
+            List<Card> thisBlocking = new ArrayList<Card>(combat.getAttackersBlockedBy(this));
+            if (Collections.disjoint(sourceBlocking, thisBlocking)) {
+                return false;
+            }
         } else if (property.startsWith("notblocking")) {
             return null == combat || !combat.isBlocking(this);
         }
