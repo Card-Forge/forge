@@ -3,6 +3,7 @@ ManaCost:2 G G G G
 Types:Creature Elemental
 PT:8/8
 K:Trample
-K:At the beginning of your upkeep, CARDNAME deals 8 damage to you unless you pay G G G G
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 2 damage to you unless you pay G G G G.
+SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 8 | UnlessCost$ G G G G | UnlessPayer$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_of_nature.jpg
 Oracle:Trample (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)\nAt the beginning of your upkeep, Force of Nature deals 8 damage to you unless you pay {G}{G}{G}{G}.

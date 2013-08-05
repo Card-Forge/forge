@@ -249,42 +249,6 @@ public class Upkeep extends Phase {
 
                     game.getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // Cumulative upkeep
-
-                // destroy
-                if (ability.startsWith("At the beginning of your upkeep, CARDNAME deals ")) {
-                    final String[] k = ability.split("deals ");
-                    final String s1 = k[1].substring(0, 2);
-                    final int upkeepDamage = Integer.parseInt(s1.trim());
-                    final String[] l = k[1].split(" pay ");
-                    final ManaCost upkeepCost = new ManaCost(new ManaCostParser(l[1]));
-
-                    final String sb = "Damage upkeep for " + c;
-                    final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
-                        @Override
-                        public void resolve() {
-                            boolean isUpkeepPaid = false;
-                            if (controller.isHuman()) {
-                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(controller, sb, upkeepCost);
-                                Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                                isUpkeepPaid = inp.isPaid();
-                            } else { // computers
-                                final Ability aiPaid = Upkeep.getBlankAbility(c, new Cost(upkeepCost, true));
-                                if (ComputerUtilCost.canPayCost(aiPaid, controller) && ComputerUtilCombat.predictDamageTo(controller, upkeepDamage, c, false) > 0) {
-                                    ComputerUtil.playNoStack(controller, aiPaid, game);
-                                    isUpkeepPaid = true;
-                                }
-                            }
-                            if (!isUpkeepPaid) {
-                                controller.addDamage(upkeepDamage, c);
-                            }
-                        }
-                    };
-                    upkeepAbility.setActivatingPlayer(controller);
-                    upkeepAbility.setStackDescription(sb.toString());
-                    upkeepAbility.setDescription(sb.toString());
-
-                    game.getStack().addSimultaneousStackEntry(upkeepAbility);
-                } // destroy
             }
 
         } // for
