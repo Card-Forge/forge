@@ -13,6 +13,7 @@ The menu on the Home Screen is now scrollable using either a mouse wheel or arro
 The Deck Editor and Exit Forge buttons are now laid out vertically to make it easier to add launch buttons for new screens coming down the pipeline (hint, hint...)
 The menu on the Home Screen has been made narrower and the logo size increased to decrease whitespace and increase the width of the main panel
 
+
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
 
@@ -47,6 +48,9 @@ Arcanum Wings
 Grip of Chaos
 Strionic Resonator
 Ayesha Tanaka
+Awesome Presence
+Mangara's Equity
+Wall of Caltrops
 
 
 ----------
@@ -54,6 +58,7 @@ New Planes
 ----------
 
 Jund
+Lair of the Ashen Idol
 Mount Keralia
 
 
