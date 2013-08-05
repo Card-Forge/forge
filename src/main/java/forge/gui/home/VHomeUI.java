@@ -31,8 +31,8 @@ import java.util.TreeMap;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
@@ -58,6 +58,7 @@ import forge.gui.home.variant.VSubmenuArchenemy;
 import forge.gui.home.variant.VSubmenuPlanechase;
 import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
 import forge.properties.NewConstants;
 import forge.properties.ForgePreferences.FPref;
@@ -84,22 +85,51 @@ public enum VHomeUI implements IVTopLevelUI {
 
     private final PnlMenu pnlMenu = new PnlMenu();
     private final PnlDisplay pnlDisplay = new PnlDisplay();
+    private final FScrollPanel pnlSubmenus;
 
     private JLabel lblLogo = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_LOGO))
         .iconAlignX(SwingConstants.CENTER)
         .iconInBackground(true).iconScaleFactor(1.0).build();
 
-    private final FLabel lblExit = new FLabel.ButtonBuilder().text("Exit Forge").fontSize(14).build();
     private final FLabel lblEditor = new FLabel.ButtonBuilder().text("Deck Editor").fontSize(14).build();
     private final FLabel lblStartServer = new FLabel.ButtonBuilder().text("Start Server").fontSize(14).build();
-    private final FLabel lblStopServer = new FLabel.ButtonBuilder().text("Stop").fontSize(14).build();
+    private final FLabel lblStopServer = new FLabel.ButtonBuilder().text("Stop Server").fontSize(14).build();
+    private final FLabel lblExit = new FLabel.ButtonBuilder().text("Exit Forge").fontSize(14).build();
 
     private VHomeUI() {
-        pnlMenu.add(lblLogo, "w 150px!, h 150px!, gap 0 0 5px 10px, ax center");
+        // Add main menu containing logo and menu buttons
+        final JPanel pnlMainMenu = new JPanel(new MigLayout("w 200px!, ax center, insets 0, gap 0, wrap"));
+        pnlMainMenu.setOpaque(false);
 
-        layoutMainMenuButtons();
+        final List<FLabel> mainMenuButtons = new ArrayList<FLabel>();
+        mainMenuButtons.add(lblEditor);
+        if (NewConstants.SERVER_PORT_NUMBER >= 80) {
+            mainMenuButtons.add(lblStartServer);
+            mainMenuButtons.add(lblStopServer);
+            lblStopServer.setEnabled(false);
+        }
+        mainMenuButtons.add(lblExit);
+
+        final int logoSize = 170;
+        final int logoBottomGap = 4;
+        final int buttonHeight = 30;
+        final int buttonBottomGap = 8;
+        final int pnlMainMenuHeight = logoSize + logoBottomGap +
+                mainMenuButtons.size() * (buttonHeight + buttonBottomGap);
+
+        pnlMainMenu.add(lblLogo, "w " + logoSize + "px!, h " + logoSize +
+                "px!, gap 0 4px 0 " + logoBottomGap + "px");
+        String buttonLayout = "w 170px!, h " + buttonHeight +
+                "px!, gap 0 0 0 " + buttonBottomGap + "px";
+        for (FLabel button : mainMenuButtons) {
+            pnlMainMenu.add(button, buttonLayout);
+        }
+        pnlMenu.add(pnlMainMenu);
         
+        pnlSubmenus = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"), true,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         // Add new menu items here (order doesn't matter).
         allSubmenus.add(VSubmenuConstructed.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuDraft.SINGLETON_INSTANCE);
@@ -146,30 +176,17 @@ public enum VHomeUI implements IVTopLevelUI {
         // For each group: add its title, then its panel, then "click" if necessary.
         for (final EMenuGroup e : allGroupPanels.keySet()) {
             allGroupLabels.put(e, new LblGroup(e));
-            pnlMenu.add(allGroupLabels.get(e), "w 100%!, h 30px!, gap 0 0 10px 3px");
-            pnlMenu.add(allGroupPanels.get(e), "w 100%!, gap 0 0 0 0");
+            pnlSubmenus.add(allGroupLabels.get(e), "w 100%!, h 30px!, gap 0 0 3px 3px");
+            pnlSubmenus.add(allGroupPanels.get(e), "w 100%!, gap 0 0 0 0");
 
             // Expand groups expanded from previous session
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.valueOf("SUBMENU_" + e.toString()))) {
                 allGroupLabels.get(e).groupClick(e);
             }
         }
-        pnlDisplay.setBackground(FSkin.alphaColor(l00, 100));
-    }
-    
-    private void layoutMainMenuButtons() {
-        JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, wrap 3"));
-        pnlButtons.setOpaque(false);
 
-        pnlButtons.add(lblExit, "w 110px!, h 30px!, gap 0 10px 0 0");
-        pnlButtons.add(lblEditor, "w 110px!, h 30px!, sx 2");
-        
-        if ( NewConstants.SERVER_PORT_NUMBER >= 80 ) {
-            pnlButtons.add(lblStartServer, "w 170px!, h 25px!, gap 0 10px 10px 0, sx 2 ");
-            pnlButtons.add(lblStopServer, "w 50px!, h 25px!, gap 0 0 10px 0");
-            lblStopServer.setEnabled(false);
-        }        
-        pnlMenu.add(pnlButtons, "w 230px!, gap 10px 0 10px 10px");
+        pnlMenu.add(pnlSubmenus, "w 100%!, h 100% - " + pnlMainMenuHeight + "px!");
+        pnlDisplay.setBackground(FSkin.alphaColor(l00, 100));
     }
 
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
@@ -200,6 +217,11 @@ public enum VHomeUI implements IVTopLevelUI {
         return pnlDisplay;
     }
 
+    /** @return {@link forge.gui.toolbox.FScrollPanel} */
+    public FScrollPanel getPnlSubmenus() {
+        return pnlSubmenus;
+    }
+
     /**
      * 
      * @return Map<EMenuItem, FLabel>
@@ -225,8 +247,8 @@ public enum VHomeUI implements IVTopLevelUI {
         pnl.setBorder(null);
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
 
-        pnl.add(pnlMenu, "w 250px!, h 100%!");
-        pnl.add(pnlDisplay, "w 100% - 250px!, h 100%!");
+        pnl.add(pnlMenu, "w 205px!, h 100%!");
+        pnl.add(pnlDisplay, "w 100% - 205px!, h 100%!");
     }
 
     /** */
@@ -264,31 +286,43 @@ public enum VHomeUI implements IVTopLevelUI {
 
         @Override
         public void paintComponent(Graphics g) {
+            super.paintComponent(g);
             final LblMenuItem lblSelected = CHomeUI.SINGLETON_INSTANCE.getLblSelected();
+            final FScrollPanel scrollPanel = VHomeUI.SINGLETON_INSTANCE.getPnlSubmenus();
             final Graphics2D g2d = (Graphics2D) g.create();
             final int w = getWidth();
-            final int h = getHeight();
-
+            int y1 = 0;
+            int y2 = 0;
+            int h1 = getHeight();
+            int h2 = 0;
+            
             if (lblSelected.isShowing()) {
-                int yTop = lblSelected.getY() + lblSelected.getParent().getY();
-                int yBottom = yTop + lblSelected.getHeight();
+                int scrollPanelTop = scrollPanel.getY();
+                int labelTop = lblSelected.getY() + lblSelected.getParent().getY() + scrollPanelTop - scrollPanel.getVerticalScrollBar().getValue();
+                y2 = labelTop + lblSelected.getHeight();
 
-                g2d.setColor(l00);
-                g2d.fillRect(0, 0, w, yTop);
-                g2d.fillRect(0, yBottom, w, h);
-
-                GradientPaint edge = new GradientPaint(w - 8, 0, l00, w, 0, d80, false);
-                g2d.setPaint(edge);
-                g2d.fillRect(w - 8, 0, w, yTop);
-                g2d.fillRect(w - 8, yBottom, w, h);
+                //ensure clipped to scroll panel
+                if (y2 > scrollPanelTop) {
+                    if (labelTop < scrollPanelTop) {
+                        labelTop = scrollPanelTop;
+                    }
+                    h2 = h1 - y2;
+                    h1 = labelTop - y1;
+                }
             }
-            else {
-                g2d.setColor(l00);
-                g2d.fillRect(0, 0, w, h);
 
-                GradientPaint edge = new GradientPaint(w - 8, 0, l00, w, 0, d80, false);
-                g2d.setPaint(edge);
-                g2d.fillRect(w - 8, 0, w, h);
+            g2d.setColor(l00);
+            g2d.fillRect(0, y1, w, h1);
+            if (h2 > 0) {
+                g2d.fillRect(0, y2, w, h2);
+            }
+            
+            int x = w - 8;
+            GradientPaint edge = new GradientPaint(x, 0, l00, w, 0, d80, false);
+            g2d.setPaint(edge);
+            g2d.fillRect(x, y1, w, h1);
+            if (h2 > 0) {
+                g2d.fillRect(x, y2, w, h2);
             }
 
             g2d.dispose();

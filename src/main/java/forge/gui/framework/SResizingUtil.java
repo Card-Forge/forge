@@ -20,6 +20,7 @@ import java.util.Set;
 import javax.swing.JPanel;
 
 import forge.gui.FNetOverlay;
+import forge.gui.toolbox.FAbsolutePositioner;
 import forge.gui.toolbox.FOverlay;
 import forge.view.FView;
 
@@ -117,10 +118,11 @@ public final class SResizingUtil {
         final JPanel pnlInsets = FView.SINGLETON_INSTANCE.getPnlInsets();
 
         Rectangle mainBounds = FView.SINGLETON_INSTANCE.getFrame().getContentPane().getBounds();
+        FAbsolutePositioner.SINGLETON_INSTANCE.containerResized(mainBounds);
         FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
         FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
         
-        pnlInsets.setBounds(FView.SINGLETON_INSTANCE.getFrame().getContentPane().getBounds());
+        pnlInsets.setBounds(mainBounds);
         pnlInsets.validate();
 
         final int w = pnlContent.getWidth();

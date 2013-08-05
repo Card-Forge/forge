@@ -14972,6 +14972,7 @@ src/main/java/forge/gui/match/views/VStack.java -text
 src/main/java/forge/gui/match/views/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
+src/main/java/forge/gui/toolbox/FAbsolutePositioner.java -text
 src/main/java/forge/gui/toolbox/FButton.java -text
 src/main/java/forge/gui/toolbox/FCheckBox.java -text
 src/main/java/forge/gui/toolbox/FComboBoxPanel.java -text
@@ -14982,6 +14983,7 @@ src/main/java/forge/gui/toolbox/FPanel.java -text
 src/main/java/forge/gui/toolbox/FProgressBar.java -text
 src/main/java/forge/gui/toolbox/FRadioButton.java -text
 src/main/java/forge/gui/toolbox/FScrollPane.java -text
+src/main/java/forge/gui/toolbox/FScrollPanel.java -text
 src/main/java/forge/gui/toolbox/FSkin.java -text
 src/main/java/forge/gui/toolbox/FTabbedPane.java -text
 src/main/java/forge/gui/toolbox/FTextArea.java -text

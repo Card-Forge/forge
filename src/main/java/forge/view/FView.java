@@ -46,6 +46,7 @@ import forge.gui.home.VHomeUI;
 import forge.gui.match.TargetingOverlay;
 import forge.gui.match.VMatchUI;
 import forge.gui.toolbox.CardFaceSymbols;
+import forge.gui.toolbox.FAbsolutePositioner;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
@@ -102,8 +103,9 @@ public enum FView {
         // Frame components
         frmDocument.setContentPane(lpnDocument);
         lpnDocument.add(pnlInsets, (Integer) 1);
-        lpnDocument.add(pnlPreview, (Integer) 2);
-        lpnDocument.add(pnlTabOverflow, (Integer) 3);
+        FAbsolutePositioner.SINGLETON_INSTANCE.initialize(lpnDocument, (Integer) 2);
+        lpnDocument.add(pnlPreview, (Integer) 3);
+        lpnDocument.add(pnlTabOverflow, (Integer) 4);
         lpnDocument.add(FOverlay.SINGLETON_INSTANCE.getPanel(), JLayeredPane.MODAL_LAYER);
         // Note: when adding new panels here, keep in mind that the layered pane
         // has a null layout, so new components will be W0 x H0 pixels - gotcha!

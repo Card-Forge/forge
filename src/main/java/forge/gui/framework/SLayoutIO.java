@@ -26,6 +26,7 @@ import javax.xml.stream.events.XMLEvent;
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl.Screens;
+import forge.gui.toolbox.FAbsolutePositioner;
 import forge.properties.FileLocation;
 import forge.properties.NewConstants;
 import forge.util.maps.CollectionSuppliers;
@@ -153,6 +154,7 @@ public final class SLayoutIO {
         final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         FileLocation file = SLayoutIO.getFileForState(Singletons.getControl().getState());
 
+        FAbsolutePositioner.SINGLETON_INSTANCE.hideAll();
         view.getPnlInsets().removeAll();
         view.getPnlInsets().setLayout(new BorderLayout());
         view.getPnlInsets().add(view.getPnlContent(), BorderLayout.CENTER);
@@ -311,6 +313,7 @@ public final class SLayoutIO {
         switch(state) {
             case HOME_SCREEN:
                 return NewConstants.HOME_LAYOUT_FILE;
+
             case MATCH_SCREEN:
                 return NewConstants.MATCH_LAYOUT_FILE;
 
