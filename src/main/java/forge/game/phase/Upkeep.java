@@ -202,40 +202,6 @@ public class Upkeep extends Phase {
             final Player controller = c.getController();
             for (String ability : c.getKeyword()) {
 
-                // destroy
-                if (ability.startsWith("At the beginning of your upkeep, destroy CARDNAME")) {
-                    final String[] k = ability.split(" pay ");
-                    final ManaCost upkeepCost = new ManaCost(new ManaCostParser(k[1]));
-
-                    final String sb = "Upkeep for " + c;
-                    final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
-                        @Override
-                        public void resolve() {
-                            final boolean isUpkeepPaid;
-                            if (controller.isHuman()) {
-                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(controller, sb, upkeepCost);
-                                Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                                isUpkeepPaid = inp.isPaid();
-                            } else { // computer
-                                Ability aiPaid = Upkeep.getBlankAbility(c, new Cost(upkeepCost, true));
-                                isUpkeepPaid = ComputerUtilCost.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible"); 
-                                if (isUpkeepPaid) {
-                                    ComputerUtil.playNoStack(controller, aiPaid, game);
-                                }
-                            }
-                            if( !isUpkeepPaid ) {
-                                game.getAction().destroy(c, this);
-                            }
-                            
-                        }
-                    };
-                    upkeepAbility.setActivatingPlayer(controller);
-                    upkeepAbility.setStackDescription(sb);
-                    upkeepAbility.setDescription(sb);
-
-                    game.getStack().addSimultaneousStackEntry(upkeepAbility);
-                } // destroy
-
                 // sacrifice
                 if (ability.startsWith("At the beginning of your upkeep, sacrifice")
                         || ability.startsWith("Cumulative upkeep")) {

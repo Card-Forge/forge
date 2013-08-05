@@ -6,10 +6,8 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME 
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDamageOpp | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals X damage to that player, where X is the number of nontoken permanents of the chosen color he or she controls
 SVar:TrigDamageOpp:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
 SVar:X:Count$Valid Permanent.ActivePlayerCtrl+ChosenColor+nonToken
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of your upkeep, destroy CARDNAME unless you sacrifice two Islands.
-SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Optional$ True | SacValid$ Card.Island | Amount$ 2 | RememberSacrificed$ True | SubAbility$ DBDestroyMe
-SVar:DBDestroyMe:DB$ Destroy | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your upkeep, destroy CARDNAME unless you sacrifice two Islands.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ Self | UnlessPayer$ You | UnlessCost$ Sac<2/Island>
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_allergy.jpg
 Oracle:As Psychic Allergy enters the battlefield, choose a color.\nAt the beginning of each opponent's upkeep, Psychic Allergy deals X damage to that player, where X is the number of nontoken permanents of the chosen color he or she controls.\nAt the beginning of your upkeep, destroy Psychic Allergy unless you sacrifice two Islands.
