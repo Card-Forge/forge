@@ -3,9 +3,9 @@ package forge.gui.match.controllers;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import forge.Command;
 import forge.Singletons;
+import forge.gui.GuiChoose;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VDev;
@@ -84,6 +84,18 @@ public enum CDev implements ICDoc {
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModePlaneswalkTo(); } };
 
+    private final MouseListener madSetWindowSize = new MouseAdapter() { @Override
+        public void mousePressed(final MouseEvent e) {
+            String[] options = {"800x600", "1024x768", "1280x720"};
+            final String choice = GuiChoose.oneOrNone("Choose new window size", options);
+            if (choice != null)
+            {
+                String[] dims = choice.split("x");
+                Singletons.getView().getFrame().setSize(Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
+            }
+        }
+    };
+
     //========== End mouse listener inits
 
     /* (non-Javadoc)
@@ -112,6 +124,7 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
         VDev.SINGLETON_INSTANCE.getLblRiggedRoll().addMouseListener(madRiggedRoll);
         VDev.SINGLETON_INSTANCE.getLblWalkTo().addMouseListener(madWalkToPlane);
+        VDev.SINGLETON_INSTANCE.getLblSetWindowSize().addMouseListener(madSetWindowSize);
         
         ForgePreferences prefs = Singletons.getModel().getPreferences();
 
