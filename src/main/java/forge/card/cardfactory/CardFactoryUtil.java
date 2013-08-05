@@ -2788,19 +2788,20 @@ public class CardFactoryUtil {
     private static SpellAbility makeEvokeSpell(final Card card, final String evokeKeyword) {
         final String[] k = evokeKeyword.split(":");
         final Cost evokedCost = new Cost(k[1], false);
-        final Game game = card.getGame();
         
         final SpellAbility evokedSpell = new Spell(card, evokedCost) {
             private static final long serialVersionUID = -1598664196463358630L;
 
             @Override
             public void resolve() {
+                final Game game = card.getGame();
                 card.setEvoked(true);
                 game.getAction().moveToPlay(card);
             }
 
             @Override
             public boolean canPlayAI() {
+                final Game game = card.getGame();
                 final Player ai = getActivatingPlayer();
                 if (!SpellPermanent.checkETBEffects(card, this.getActivatingPlayer())) {
                     return false;

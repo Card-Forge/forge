@@ -7,5 +7,6 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 W
 T:Mode$ DamageDone | ValidSource$ Creature.ChosenColor | ValidTarget$ Creature.White+YouCtrl,You | TriggerZones$ Battlefield | Execute$ MangarasRetribution | TriggerDescription$ Whenever a creature of the chosen color deals damage to you or a white creature you control, CARDNAME deals that much damage to that creature.
 SVar:MangarasRetribution:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredSource | NumDmg$ MangaraX | References$ MangaraX
 SVar:MangaraX:TriggerCount$DamageAmount
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mangaras_equity.jpg
 Oracle:As Mangara's Equity enters the battlefield, choose black or red.\nAt the beginning of your upkeep, sacrifice Mangara's Equity unless you pay {1}{W}.\nWhenever a creature of the chosen color deals damage to you or a white creature you control, Mangara's Equity deals that much damage to that creature.
