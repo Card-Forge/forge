@@ -69,7 +69,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     final List<Card> cl = CardLists.getType(land, type);
                     if (!cl.isEmpty()) {
                         final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
-                        Card c = p.getController().chooseSingleCardForEffect(cl, sa, prompt, true);
+                        Card c = p.getController().chooseSingleCardForEffect(cl, sa, prompt, false);
                         
                         if (null != c) {
                             chosen.add(c);
