@@ -529,8 +529,7 @@ public class ComputerUtilCard {
             value -= 50;
         } else if (c.hasStartOfKeyword("Cumulative upkeep")) {
             value -= 30;
-        } else if (c.hasStartOfKeyword("At the beginning of your upkeep, destroy CARDNAME unless you pay")
-                || c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")
+        } else if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")
                 || c.hasStartOfKeyword("Upkeep:")) {
             value -= 20;
         } else if (c.hasStartOfKeyword("(Echo unpaid)")) {

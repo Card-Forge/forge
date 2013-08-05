@@ -203,28 +203,36 @@ public class Upkeep extends Phase {
             for (String ability : c.getKeyword()) {
 
                 // sacrifice
-                if (ability.startsWith("At the beginning of your upkeep, sacrifice")
-                        || ability.startsWith("Cumulative upkeep")) {
-                    String cost = "0";
+                if (ability.startsWith("At the beginning of your upkeep, sacrifice")) {
+
+                    final StringBuilder sb = new StringBuilder("Sacrifice upkeep for " + c);
+                    final String[] k = ability.split(" pay ");
+
+                    String effect = "AB$ Sacrifice | Cost$ 0 | SacValid$ Self"
+                            + "| UnlessPayer$ You | UnlessCost$ " + k[1];
+
+                    SpellAbility upkeepAbility = AbilityFactory.getAbility(effect, c);
+                    upkeepAbility.setActivatingPlayer(controller);
+                    upkeepAbility.setStackDescription(sb.toString());
+                    upkeepAbility.setDescription(sb.toString());
+                    upkeepAbility.setTrigger(true);
+
+                    game.getStack().addSimultaneousStackEntry(upkeepAbility);
+                } // sacrifice
+
+                // Cumulative upkeep
+                if (ability.startsWith("Cumulative upkeep")) {
+                    
                     final StringBuilder sb = new StringBuilder();
+                    final String[] k = ability.split(":");
+                    sb.append("Cumulative upkeep for " + c);
 
-                    if (ability.startsWith("At the beginning of your upkeep, sacrifice")) {
-                        final String[] k = ability.split(" pay ");
-                        cost = k[1].toString();
-                        sb.append("Sacrifice upkeep for " + c);
-                    }
-
-                    if (ability.startsWith("Cumulative upkeep")) {
-                        final String[] k = ability.split(":");
-                        c.addCounter(CounterType.AGE, 1, true);
-                        cost = CardFactoryUtil.multiplyCost(k[1], c.getCounters(CounterType.AGE));
-                        sb.append("Cumulative upkeep for " + c);
-                    }
-
-                    final Cost upkeepCost = new Cost(cost, true);
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
+                            c.addCounter(CounterType.AGE, 1, true);
+                            String cost = CardFactoryUtil.multiplyCost(k[1], c.getCounters(CounterType.AGE));
+                            final Cost upkeepCost = new Cost(cost, true);
                             boolean isPaid = controller.getController().payManaOptional(c, upkeepCost, this, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
                             final HashMap<String, Object> runParams = new HashMap<String, Object>();
                             runParams.put("CumulativeUpkeepPaid", (Boolean) isPaid);
@@ -240,7 +248,7 @@ public class Upkeep extends Phase {
                     upkeepAbility.setDescription(sb.toString());
 
                     game.getStack().addSimultaneousStackEntry(upkeepAbility);
-                } // sacrifice
+                } // Cumulative upkeep
 
                 // destroy
                 if (ability.startsWith("At the beginning of your upkeep, CARDNAME deals ")) {
