@@ -2222,7 +2222,7 @@ public class CardFactoryUtil {
             final String[] k = card.getKeyword().get(echoPos).split(":");
             final String manacost = k[1];
 
-            card.setEchoCost(new Cost(manacost, false));
+            card.setEchoCost(manacost);
 
             final Command intoPlay = new Command() {
 
@@ -3190,7 +3190,7 @@ public class CardFactoryUtil {
             card.setSVar("CascadeCleanup", "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True");
             final Trigger cascadeTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, true);
 
-            card.addTrigger(cascadeTrigger);;
+            card.addTrigger(cascadeTrigger);
         } // Cascade
     }
     

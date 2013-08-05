@@ -29,6 +29,7 @@ import forge.CardPredicates;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.CounterType;
+import forge.card.ability.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -170,17 +171,12 @@ public class Upkeep extends Phase {
             if (c.hasStartOfKeyword("(Echo unpaid)")) {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Echo for ").append(c).append("\n");
+                
+                String effect = "AB$ Sacrifice | Cost$ 0 | SacValid$ Self | "
+                        + "UnlessPayer$ You | UnlessCost$ " + c.getEchoCost();
 
-                final Ability sacAbility = new Ability(c, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        Cost cost = c.getEchoCost();
-                        boolean hasPaid = c.getController().getController().payManaOptional(c, cost, this, "Echo for " + c, ManaPaymentPurpose.Echo);
-                        
-                        if (!hasPaid)
-                            game.getAction().sacrifice(c, this);;
-                    }
-                };
+                SpellAbility sacAbility = AbilityFactory.getAbility(effect, c);
+                sacAbility.setTrigger(true);
                 sacAbility.setActivatingPlayer(c.getController());
                 sacAbility.setStackDescription(sb.toString());
                 sacAbility.setDescription(sb.toString());

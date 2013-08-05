@@ -212,7 +212,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private TreeMap<Long, Player> tempControllers = new TreeMap<Long, Player>();
 
     private String text = "";
-    private Cost echoCost = null;
+    private String echoCost = "";
     private Cost madnessCost = null;
     private Cost miracleCost = null;
     private String chosenType = "";
@@ -1413,11 +1413,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s
      *            a {@link java.lang.String} object.
      */
-    public final void setEchoCost(final Cost s) {
+    public final void setEchoCost(final String s) {
         this.echoCost = s;
     }
 
-    public final Cost getEchoCost() {
+    public final String getEchoCost() {
         return this.echoCost;
     }
 

@@ -886,7 +886,7 @@ public class AbilityUtils {
                     }
                 }
             }
-        } else if (defined.startsWith("NonReplaced")) {
+        } else if (defined.startsWith("Non")) {
             players.addAll(game.getPlayers());
             players.removeAll(getDefinedPlayers(card, defined.substring(3), sa));
         } else if (defined.equals("EnchantedController")) {
