@@ -271,10 +271,13 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
         
-        if (sa.hasParam("ForgetLastImprinted")) {
-            final int size = sa.getSourceCard().getImprinted().size();
-            sa.getSourceCard().getImprinted().remove(size - 1);
-        }   // Used in a SubAbility to clear the root imprinted card (Archery Training)
+        if (sa.hasParam("ForgetImprinted")) {
+            for (final Card c : AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("ForgetImprinted"), sa)) {
+                if (sa.getSourceCard().getImprinted().contains(c)) {
+                    sa.getSourceCard().removeImprinted(c);
+                }
+            }
+        }
         
         if (sa.hasParam("Radiance")) {
             for (final Card c : CardUtil.getRadiance(sa.getSourceCard(), tgtCards.get(0), sa.getParam("ValidTgts")

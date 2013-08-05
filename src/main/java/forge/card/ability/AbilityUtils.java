@@ -90,7 +90,7 @@ public class AbilityUtils {
         }
 
         else if (defined.equals("OriginalHost")) {
-            c = sa.getOriginalHost();
+            c = sa.getRootAbility().getOriginalHost();
         }
 
         else if (defined.equals("EffectSource")) {
