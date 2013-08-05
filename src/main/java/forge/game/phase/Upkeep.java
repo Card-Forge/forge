@@ -224,9 +224,6 @@ public class Upkeep extends Phase {
                                 }
                             }
                             if( !isUpkeepPaid ) {
-                                if (c.getName().equals("Cosmic Horror")) {
-                                    controller.addDamage(7, c);
-                                }
                                 game.getAction().destroy(c, this);
                             }
                             
