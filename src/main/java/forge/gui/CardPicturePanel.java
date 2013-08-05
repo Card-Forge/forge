@@ -82,35 +82,48 @@ public final class CardPicturePanel extends JPanel {
         update();
     }
 
-    public void setImage() {
+    public void setImage() {        
+        BufferedImage image = getImage();
+        if (image != null && image != this.currentImage) {
+            this.currentImage = image;
+            this.panel.setImage(image);
+            this.panel.repaint();
+        }        
+    }
+    
+    public BufferedImage getImage() {
+
         final Insets i = this.getInsets();
         BufferedImage image = null;
         int foilIndex = 0;
         
         if (displayed instanceof InventoryItem) {
-            image = ImageCache.getImage((InventoryItem)this.displayed, this.getWidth() - i.left - i.right, this.getHeight()
-                    - i.top - i.bottom);
+            image = ImageCache.getImage(
+                        (InventoryItem)this.displayed, 
+                        this.getWidth() - i.left - i.right, 
+                        this.getHeight() - i.top - i.bottom);
+        
         } else if ( displayed instanceof Card ) {
-            image = ImageCache.getImage((Card)this.displayed, this.getWidth() - i.left - i.right - 2, this.getHeight() - i.top
-                    - i.bottom - 2);
+            image = ImageCache.getImage(
+                        (Card)this.displayed, 
+                        this.getWidth() - i.left - i.right - 2, 
+                        this.getHeight() - i.top - i.bottom - 2);
             foilIndex = ((Card)this.displayed).getFoil();
         }
 
-        if (image != null && image != this.currentImage) {
-            if (foilIndex == 0) {
-                this.currentImage = image;
-                this.panel.setImage(image);
-            } else {
-                ColorModel cm = image.getColorModel();
-                BufferedImage foilImage = new BufferedImage(cm, image.copyData(null), cm.isAlphaPremultiplied(), null);
-
-                final String fl = String.format("foil%02d", foilIndex);
-                CardFaceSymbols.drawOther(foilImage.getGraphics(), fl, 0, 0, foilImage.getWidth(), foilImage.getHeight());
-                
-                this.currentImage = foilImage;
-                this.panel.setImage(foilImage);
-            }
-            this.panel.repaint();
+        if (image != null && foilIndex > 0) { 
+            image = getFoiledImage(image, foilIndex);
         }
+        
+        return image;
     }
+    
+    private BufferedImage getFoiledImage(BufferedImage plainImage, int foilIndex) {
+        ColorModel cm = plainImage.getColorModel();
+        BufferedImage foilImage = new BufferedImage(cm, plainImage.copyData(null), cm.isAlphaPremultiplied(), null);
+        final String fl = String.format("foil%02d", foilIndex);
+        CardFaceSymbols.drawOther(foilImage.getGraphics(), fl, 0, 0, foilImage.getWidth(), foilImage.getHeight());
+        return foilImage;                
+    }
+    
 }
