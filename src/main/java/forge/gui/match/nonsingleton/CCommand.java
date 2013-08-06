@@ -17,19 +17,9 @@
  */
 package forge.gui.match.nonsingleton;
 
-import java.awt.Event;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
-import forge.Card;
 import forge.Command;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
-import forge.gui.match.CMatchUI;
-import forge.gui.match.controllers.CMessage;
 /**
  * Controls Swing components of a player's command instance.
  */

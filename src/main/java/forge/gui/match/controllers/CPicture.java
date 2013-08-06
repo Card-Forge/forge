@@ -25,13 +25,11 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.Command;
 import forge.Singletons;
-import forge.card.CardEdition;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.util.MyRandom;
 
 /**
  * Controls the card picture panel in the match UI.

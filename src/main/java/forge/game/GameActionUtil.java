@@ -32,7 +32,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
-import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.CounterType;
