@@ -64,6 +64,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         
         UI_FOR_TOUCHSCREN("false"),
 
+        MATCHPREF_PROMPT_FREE_BLOCKS("false"),
+
         SUBMENU_CURRENTMENU (EMenuItem.CONSTRUCTED.toString()),
         SUBMENU_SANCTIONED ("true"),
         SUBMENU_GAUNTLET ("false"),

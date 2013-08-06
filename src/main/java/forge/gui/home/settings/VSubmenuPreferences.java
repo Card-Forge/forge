@@ -81,8 +81,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOverlayCardPower = new OptionsCheckBox("Power/Toughness");
     private final JCheckBox cbOverlayCardManaCost = new OptionsCheckBox("Mana Cost");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
-    private final JCheckBox cbShowMatchBackgroundImage = new OptionsCheckBox("Show Background Image on Match Screen");    
+    private final JCheckBox cbShowMatchBackgroundImage = new OptionsCheckBox("Show Background Image on Match Screen");
     private final JCheckBox cbUseThemedComboBox = new OptionsCheckBox("Themed ComboBox");
+    private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
@@ -146,7 +147,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbCloneImgSource, regularConstraints);
         pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art"), regularConstraints);
-        
+
+        pnlPrefs.add(cbPromptFreeBlocks, regularConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled, if you would have to pay 0 to block, pay automatically without prompt"), regularConstraints);
+
         // Deck building options
         pnlPrefs.add(new SectionLabel("Random Deck Generation"), sectionConstraints);
 
@@ -487,6 +491,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbCloneImgSource() {
         return cbCloneImgSource;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbPromptFreeBlocks() {
+        return cbPromptFreeBlocks;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

@@ -302,9 +302,15 @@ public class HumanPlay {
             costPart = parts.get(0);
         }
         final String orString = prompt != null ? "" : " (or: " + sourceAbility.getStackDescription() + ")";
-        
+
         if (parts.isEmpty() || costPart.getAmount().equals("0")) {
             return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
+        }
+        // 0 mana costs were slipping through because CostPart.getAmount returns 1
+        else if (costPart instanceof CostPartMana ) {
+            if (((CostPartMana) costPart).getManaToPay().isZero()) {
+                return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
+            }
         }
 
         //the following costs do not need inputs

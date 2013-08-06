@@ -12542,6 +12542,7 @@ res/cardsfolder/w/wanderwine_hub.txt svneol=native#text/plain
 res/cardsfolder/w/wanderwine_prophets.txt svneol=native#text/plain
 res/cardsfolder/w/waning_wurm.txt svneol=native#text/plain
 res/cardsfolder/w/war_barge.txt -text svneol=unset#text/plain
+res/cardsfolder/w/war_cadence.txt -text
 res/cardsfolder/w/war_chariot.txt svneol=native#text/plain
 res/cardsfolder/w/war_dance.txt svneol=native#text/plain
 res/cardsfolder/w/war_elemental.txt -text

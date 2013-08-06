@@ -664,19 +664,25 @@ public class PhaseHandler implements java.io.Serializable {
 
     private static boolean payRequiredBlockCosts(Game game, Card blocker, Card attacker) {
         Cost blockCost = new Cost(ManaCost.ZERO, true);
+        boolean hasBlockCost = false;
         // Sort abilities to apply them in proper order
-        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+        List<ZoneType> checkZones = ZoneType.listValueOf("Battlefield,Command");
+        for (Card card : game.getCardsIn(checkZones)) {
             final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 Cost c1 = stAb.getBlockCost(blocker, attacker);
-                if ( c1 != null )
+                if ( c1 != null ) {
                     blockCost.add(c1);
+                    hasBlockCost = true;
+                }
             }
         }
-        
-        boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost(); // true if needless to pay
+
+        boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost() && (!hasBlockCost
+                || Singletons.getModel().getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS)); // true if needless to pay
+
         if (!hasPaid) { 
-            hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, null, "Pay cost to declare " + blocker + " a blocker", ManaPaymentPurpose.DeclareBlocker);
+            hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, null, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
         }
         return hasPaid;
     }
