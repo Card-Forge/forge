@@ -407,7 +407,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         boolean optional = sa.hasParam("Optional");
 
 
-        for (final Card tgtC : tgtCards) {
+        for (Card tgtC : tgtCards) {
             if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }
@@ -419,6 +419,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (optional && false == player.getController().confirmAction(sa, null, prompt) )
                 continue;
 
+            tgtC = game.getCardState(tgtC);
             final Zone originZone = game.getZoneOf(tgtC);
 
             // if Target isn't in the expected Zone, continue

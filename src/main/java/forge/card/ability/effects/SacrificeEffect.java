@@ -20,9 +20,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getSourceCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
+        final Card card = game.getCardState(sa.getSourceCard());
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
