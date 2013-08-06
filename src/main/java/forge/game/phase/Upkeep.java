@@ -166,9 +166,10 @@ public class Upkeep extends Phase {
             if (c.hasStartOfKeyword("(Echo unpaid)")) {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Echo for ").append(c).append("\n");
-                
+                String ref = "X".equals(c.getEchoCost()) ? " | References$ X" : "";
                 String effect = "AB$ Sacrifice | Cost$ 0 | SacValid$ Self | "
-                        + "UnlessPayer$ You | UnlessCost$ " + c.getEchoCost();
+                        + "UnlessPayer$ You | UnlessCost$ " + c.getEchoCost()
+                        + ref;
 
                 SpellAbility sacAbility = AbilityFactory.getAbility(effect, c);
                 sacAbility.setTrigger(true);

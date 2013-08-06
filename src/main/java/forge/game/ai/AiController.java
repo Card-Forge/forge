@@ -900,6 +900,9 @@ public class AiController {
                 return min;
             }
         }
+        if ("Min".equals(sa.getParam("AILogic"))) {
+            return min;
+        }
         return max;
     }
 }

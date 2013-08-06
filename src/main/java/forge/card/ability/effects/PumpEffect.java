@@ -31,7 +31,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final Game game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
         final ArrayList<String> kws = new ArrayList<String>();
-        
+
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
                 applyTo.addHiddenExtrinsicKeyword(kw);
@@ -67,7 +67,7 @@ public class PumpEffect extends SpellAbilityEffect {
                         }
                         applyTo.removeChangedCardKeywords(timestamp);
                     }
-                    
+
                     game.fireEvent(new GameEventCardStatsChanged(applyTo));
                 }
             };
@@ -179,18 +179,19 @@ public class PumpEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        
+
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Game game = sa.getActivatingPlayer().getGame();
-        
+        final Card host = sa.getSourceCard();
+
         String pumpRemembered = null;
         String pumpForget = null;
         String pumpImprint = null;
-        
+
         List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-        final int a = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
-        final int d = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
+        final int a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa);
+        final int d = AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa);
 
         List<GameEntity> tgts = new ArrayList<GameEntity>();
         List<Card> tgtCards = getTargetCards(sa);
@@ -200,7 +201,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("DefinedChosenKW")) {
             if (sa.getParam("DefinedChosenKW").equals("Type")) {
-                final String t = sa.getSourceCard().getChosenType();
+                final String t = host.getChosenType();
                 for (int i = 0; i < keywords.size(); i++) {
                     keywords.set(i, keywords.get(i).replaceAll("ChosenType", t));
                 }
@@ -208,7 +209,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("RandomKeyword")) {
             final String num = sa.hasParam("RandomKWNum") ? sa.getParam("RandomKWNum") : "1";
-            final int numkw = AbilityUtils.calculateAmount(sa.getSourceCard(), num, sa);
+            final int numkw = AbilityUtils.calculateAmount(host, num, sa);
             List<String> choice = new ArrayList<String>();
             List<String> total = new ArrayList<String>(keywords);
             if (sa.hasParam("NoRepetition")) {
@@ -227,7 +228,7 @@ public class PumpEffect extends SpellAbilityEffect {
             }
             keywords = choice;
         }
-        
+
         if (sa.hasParam("Optional")) {
             final String targets = Lang.joinHomogenous(tgtCards);
             final String message = sa.hasParam("OptionQuestion") ? sa.getParam("OptionQuestion").replace("TARGETS", targets) : "Apply pump to " + targets + "?";
@@ -241,9 +242,9 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (pumpRemembered != null) {
-            for (final Object o : AbilityUtils.getDefinedObjects(sa.getSourceCard(), pumpRemembered, sa)) {
-                if (!sa.getSourceCard().getRemembered().contains(o)) {
-                    sa.getSourceCard().addRemembered(o);
+            for (final Object o : AbilityUtils.getDefinedObjects(host, pumpRemembered, sa)) {
+                if (!host.getRemembered().contains(o)) {
+                    host.addRemembered(o);
                 }
             }
         }
@@ -253,9 +254,9 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (pumpForget != null) {
-            for (final Object o : AbilityUtils.getDefinedObjects(sa.getSourceCard(), pumpForget, sa)) {
-                if (sa.getSourceCard().getRemembered().contains(o)) {
-                    sa.getSourceCard().removeRemembered(o);
+            for (final Object o : AbilityUtils.getDefinedObjects(host, pumpForget, sa)) {
+                if (host.getRemembered().contains(o)) {
+                    host.removeRemembered(o);
                 }
             }
         }
@@ -264,23 +265,23 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (pumpImprint != null) {
-            for (final Card c : AbilityUtils.getDefinedCards(sa.getSourceCard(), pumpImprint, sa)) {
-                if (!sa.getSourceCard().getImprinted().contains(c)) {
-                    sa.getSourceCard().addImprinted(c);
+            for (final Card c : AbilityUtils.getDefinedCards(host, pumpImprint, sa)) {
+                if (!host.getImprinted().contains(c)) {
+                    host.addImprinted(c);
                 }
             }
         }
-        
+
         if (sa.hasParam("ForgetImprinted")) {
-            for (final Card c : AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("ForgetImprinted"), sa)) {
-                if (sa.getSourceCard().getImprinted().contains(c)) {
-                    sa.getSourceCard().removeImprinted(c);
+            for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("ForgetImprinted"), sa)) {
+                if (host.getImprinted().contains(c)) {
+                    host.removeImprinted(c);
                 }
             }
         }
-        
+
         if (sa.hasParam("Radiance")) {
-            for (final Card c : CardUtil.getRadiance(sa.getSourceCard(), tgtCards.get(0), sa.getParam("ValidTgts")
+            for (final Card c : CardUtil.getRadiance(host, tgtCards.get(0), sa.getParam("ValidTgts")
                     .split(","))) {
                 untargetedCards.add(c);
             }
