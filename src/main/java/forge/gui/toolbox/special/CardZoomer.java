@@ -27,14 +27,17 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
-import forge.gui.CardPicturePanel;
+import forge.card.CardSplitType;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.imaging.FImagePanel;
+import forge.gui.toolbox.imaging.FImageUtil;
+import forge.gui.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 
 /** 
- * Displays card image BIG.
+ * Displays card image at its original size.
  *
- * @version $Id$
+ * @version $Id:
  * 
  */
 public enum CardZoomer {
@@ -95,16 +98,26 @@ public enum CardZoomer {
         thisCard = card;
         temporary = temp;
         setLayout();
-
-        CardPicturePanel picturePanel = new CardPicturePanel(); 
-        picturePanel.setCard(thisCard);        
-        picturePanel.setOpaque(false);
-        pnlMain.add(picturePanel, "w 80%!, h 80%!");        
-
+        setImage();        
         SOverlayUtils.showOverlay();
         zoomed = true;
     }
-
+    
+    private void setImage() {
+        FImagePanel imagePanel = new FImagePanel();
+        imagePanel.setImage(FImageUtil.getImage(thisCard), getInitialRotation(), AutoSizeImageMode.SOURCE);
+        pnlMain.add(imagePanel, "w 80%!, h 80%!");
+    }
+        
+    private int getInitialRotation() {
+        return (this.isSplitCardImage() ? 90 : 0);
+    }   
+    
+    private boolean isSplitCardImage() {
+        return (thisCard.getRules().getSplitType() == CardSplitType.Split);
+    }    
+        
+    
     private void setLayout() {
         overlay.removeAll();
 

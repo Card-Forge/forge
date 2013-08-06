@@ -25,10 +25,9 @@ import javax.swing.JPanel;
 
 import forge.Card;
 import forge.ImageCache;
-import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.imaging.FImagePanel;
+import forge.gui.toolbox.imaging.FImageUtil;
 import forge.item.InventoryItem;
-import java.awt.image.ColorModel;
 
 /**
  * Displays image associated with a card or inventory item.
@@ -78,31 +77,16 @@ public final class CardPicturePanel extends JPanel {
     public BufferedImage getImage() {
 
         BufferedImage image = null;
-        int foilIndex = 0;
         
         if (displayed instanceof InventoryItem) {
             InventoryItem item = (InventoryItem) displayed;
             image = ImageCache.getOriginalImage(ImageCache.getImageKey(item, false), true);
         
         } else if (displayed instanceof Card) {
-            Card item = (Card) displayed;
-            image = ImageCache.getOriginalImage(item.getImageKey(), true);
-            foilIndex = ((Card)this.displayed).getFoil();
+            image = FImageUtil.getImage((Card)displayed);            
         }
 
-        if (image != null && foilIndex > 0) { 
-            image = getFoiledImage(image, foilIndex);
-        }
-        
         return image;
     }
-    
-    private BufferedImage getFoiledImage(BufferedImage plainImage, int foilIndex) {
-        ColorModel cm = plainImage.getColorModel();
-        BufferedImage foilImage = new BufferedImage(cm, plainImage.copyData(null), cm.isAlphaPremultiplied(), null);
-        final String fl = String.format("foil%02d", foilIndex);
-        CardFaceSymbols.drawOther(foilImage.getGraphics(), fl, 0, 0, foilImage.getWidth(), foilImage.getHeight());
-        return foilImage;                
-    }
-    
+        
 }

@@ -14998,6 +14998,7 @@ src/main/java/forge/gui/toolbox/FTextArea.java -text
 src/main/java/forge/gui/toolbox/FTextField.java -text
 src/main/java/forge/gui/toolbox/SaveOpenDialog.java -text
 src/main/java/forge/gui/toolbox/imaging/FImagePanel.java -text
+src/main/java/forge/gui/toolbox/imaging/FImageUtil.java -text
 src/main/java/forge/gui/toolbox/imaging/ImageUtil.java -text
 src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/special/CardViewer.java -text

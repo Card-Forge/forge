@@ -8,6 +8,9 @@ Forge Beta: 0#-##-2013 ver 1.4.6
 Release Notes
 -------------
 
+- Zoomer Updates -
+Split cards (name contains "//") are now rotated 90 degrees for easier viewing.
+
 - Home Screen UI Improvements -
 The menu on the Home Screen is now scrollable using either a mouse wheel or arrow buttons that will appear at the top or bottom if scrolling can occur in that direction
 The Deck Editor and Exit Forge buttons are now laid out vertically to make it easier to add launch buttons for new screens coming down the pipeline (hint, hint...)

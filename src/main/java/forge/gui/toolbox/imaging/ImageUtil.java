@@ -21,9 +21,9 @@ package forge.gui.toolbox.imaging;
 import java.awt.Dimension;
 
 /**
- * Useful imaging routines. 
+ * Useful general imaging routines. 
  * 
- * @version $Id$
+ * @version $Id:
  * 
  */
 public final class ImageUtil {  
