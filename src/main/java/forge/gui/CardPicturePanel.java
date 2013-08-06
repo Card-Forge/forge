@@ -19,9 +19,6 @@
 package forge.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Insets;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -29,16 +26,15 @@ import javax.swing.JPanel;
 import forge.Card;
 import forge.ImageCache;
 import forge.gui.toolbox.CardFaceSymbols;
+import forge.gui.toolbox.imaging.FImagePanel;
 import forge.item.InventoryItem;
-import forge.view.arcane.ScaledImagePanel;
 import java.awt.image.ColorModel;
 
 /**
- * The class CardPicturePanel. Shows the full-sized image in a label. if there's
- * no picture, the cardname is displayed instead.
+ * Displays image associated with a card or inventory item.
  * 
- * @author Clemens Koza
- * @version V0.0 17.02.2010
+ * @version $Id$
+ * 
  */
 public final class CardPicturePanel extends JPanel {
     /** Constant <code>serialVersionUID=-3160874016387273383L</code>. */
@@ -46,25 +42,14 @@ public final class CardPicturePanel extends JPanel {
 
     private Object displayed;
 
-    private final ScaledImagePanel panel;
+    private final FImagePanel panel;
     private BufferedImage currentImage;
 
     public CardPicturePanel() {
         super(new BorderLayout());
 
-        this.panel = new ScaledImagePanel();
+        this.panel = new FImagePanel();
         this.add(this.panel);
-        this.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(final ComponentEvent e) {
-                CardPicturePanel.this.update();
-            }
-
-            @Override
-            public void componentResized(final ComponentEvent e) {
-                CardPicturePanel.this.update();
-            }
-        });
     }
 
     public void update() {
@@ -87,27 +72,21 @@ public final class CardPicturePanel extends JPanel {
         if (image != null && image != this.currentImage) {
             this.currentImage = image;
             this.panel.setImage(image);
-            this.panel.repaint();
         }        
     }
     
     public BufferedImage getImage() {
 
-        final Insets i = this.getInsets();
         BufferedImage image = null;
         int foilIndex = 0;
         
         if (displayed instanceof InventoryItem) {
-            image = ImageCache.getImage(
-                        (InventoryItem)this.displayed, 
-                        this.getWidth() - i.left - i.right, 
-                        this.getHeight() - i.top - i.bottom);
+            InventoryItem item = (InventoryItem) displayed;
+            image = ImageCache.getOriginalImage(ImageCache.getImageKey(item, false), true);
         
-        } else if ( displayed instanceof Card ) {
-            image = ImageCache.getImage(
-                        (Card)this.displayed, 
-                        this.getWidth() - i.left - i.right - 2, 
-                        this.getHeight() - i.top - i.bottom - 2);
+        } else if (displayed instanceof Card) {
+            Card item = (Card) displayed;
+            image = ImageCache.getOriginalImage(item.getImageKey(), true);
             foilIndex = ((Card)this.displayed).getFoil();
         }
 
