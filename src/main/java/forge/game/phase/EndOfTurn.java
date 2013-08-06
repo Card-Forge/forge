@@ -61,8 +61,9 @@ public class EndOfTurn extends Phase {
                 final SpellAbility sac = new Ability(card, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-                        if (card.isInPlay()) {
-                            card.getGame().getAction().sacrifice(card, null);
+                        final Card current = game.getCardState(card);
+                        if (current.isInPlay()) {
+                            game.getAction().sacrifice(current, null);
                         }
                     }
                 };
@@ -79,8 +80,9 @@ public class EndOfTurn extends Phase {
                 final SpellAbility exile = new Ability(card, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-                        if (card.isInPlay()) {
-                            card.getGame().getAction().exile(card);
+                        final Card current = game.getCardState(card);
+                        if (current.isInPlay()) {
+                            game.getAction().exile(current);
                         }
                     }
                 };
@@ -97,8 +99,9 @@ public class EndOfTurn extends Phase {
                 final SpellAbility destroy = new Ability(card, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-                        if (card.isInPlay()) {
-                            game.getAction().destroy(card, this);
+                        final Card current = game.getCardState(card);
+                        if (current.isInPlay()) {
+                            game.getAction().destroy(current, this);
                         }
                     }
                 };
@@ -117,8 +120,9 @@ public class EndOfTurn extends Phase {
                     final SpellAbility sac = new Ability(card, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
-                            if (card.isInPlay()) {
-                                game.getAction().destroy(card, this);
+                            final Card current = game.getCardState(card);
+                            if (current.isInPlay()) {
+                                game.getAction().destroy(current, this);
                             }
                         }
                     };
@@ -141,8 +145,9 @@ public class EndOfTurn extends Phase {
                 final SpellAbility change = new Ability(source, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
-                        if (source.isInPlay()) {
-                            game.getAction().moveToHand(source);
+                        final Card current = game.getCardState(source);
+                        if (current.isInPlay()) {
+                            game.getAction().moveToHand(current);
                         }
                     }
                 };
