@@ -17,6 +17,8 @@ The Deck Editor and Exit Forge buttons are now laid out vertically to make it ea
 The menu on the Home Screen has been made narrower and the logo size increased to decrease whitespace and increase the width of the main panel
 Release notes added to Games Settings section.
 
+- User Preferences -
+There's a new user preference that lets you choose whether a 0-cost block should prompt you to pay or to pay it automatically. This only affects blocking situations where you would have to actually pay 0, (e.g. War Cadence with X = 0). By default you'll be prompted for payment, allowing you to, for instance, prevent forced blocks by activating War Cadence for 0 then not paying the block cost.
 
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
