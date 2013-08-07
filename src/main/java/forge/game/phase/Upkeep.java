@@ -95,7 +95,6 @@ public class Upkeep extends Phase {
         Upkeep.upkeepOathOfDruids(game);
         Upkeep.upkeepOathOfGhouls(game);
         Upkeep.upkeepVanishing(game);
-        Upkeep.upkeepFading(game);
         Upkeep.upkeepBlazeCounters(game);
         Upkeep.upkeepPowerSurge(game);
 
@@ -414,49 +413,6 @@ public class Upkeep extends Phase {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(card.getName()).append(" - Vanishing - remove a time counter from it. ");
                 sb.append("When the last is removed, sacrifice it.)");
-                ability.setStackDescription(sb.toString());
-                ability.setDescription(sb.toString());
-                ability.setActivatingPlayer(card.getController());
-
-                game.getStack().addSimultaneousStackEntry(ability);
-
-            }
-        }
-    }
-
-    /**
-     * <p>
-     * upkeepFading.
-     * </p>
-     */
-    private static void upkeepFading(final Game game) {
-
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-        List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return CardFactoryUtil.hasKeyword(c, "Fading") != -1;
-            }
-        });
-        if (list.size() > 0) {
-            for (int i = 0; i < list.size(); i++) {
-                final Card card = list.get(i);
-                final Ability ability = new Ability(card, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final int fadeCounters = card.getCounters(CounterType.FADE);
-                        if (fadeCounters <= 0) {
-                            game.getAction().sacrifice(card, null);
-                        } else {
-                            card.subtractCounter(CounterType.FADE, 1);
-                        }
-                    }
-                }; // ability
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append(card.getName()).append(" - Fading - remove a fade counter from it. ");
-                sb.append("If you can't, sacrifice it.)");
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
                 ability.setActivatingPlayer(card.getController());

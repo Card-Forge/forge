@@ -2206,6 +2206,19 @@ public class CardFactoryUtil {
                 final String[] k = card.getKeyword().get(n).split(":");
 
                 card.addIntrinsicKeyword("etbCounter:FADE:" + k[1] + ":no Condition:no desc");
+
+                String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield " +
+                        " | Execute$ TrigUpkeepFading | Secondary$ True | TriggerDescription$ At the beginning of " +
+                        "your upkeep, remove a fade counter from CARDNAME. If you can't, sacrifice CARDNAME.";
+
+                card.setSVar("TrigUpkeepFading", "AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ FADE" +
+                		" | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBUpkeepFadingSac");
+                card.setSVar("DBUpkeepFadingSac","DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ FadingCheckSVar" +
+                		" | ConditionSVarCompare$ EQ0 | References$ FadingCheckSVar | SubAbility$ FadingCleanup");
+                card.setSVar("FadingCleanup","DB$ Cleanup | ClearRemembered$ True");
+                card.setSVar("FadingCheckSVar","Count$RememberedSize");
+                final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, true);
+                card.addTrigger(parsedUpkeepTrig);
             }
         } // Fading
 
