@@ -58,6 +58,8 @@ Wall of Caltrops
 Volcano Hellion
 Cocoon
 Traveling Plague
+War Cadence
+Heat Wave
 
 
 ----------
