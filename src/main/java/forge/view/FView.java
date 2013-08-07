@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,6 +41,7 @@ import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SLayoutConstants;
+import forge.gui.framework.SLayoutIO;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.TargetingOverlay;
 import forge.gui.match.VMatchUI;
@@ -95,7 +95,6 @@ public enum FView {
         // Frame styling
         frmDocument.setMinimumSize(new Dimension(800, 600));
         frmDocument.setLocationRelativeTo(null);
-        frmDocument.setExtendedState(frmDocument.getExtendedState() | Frame.MAXIMIZED_BOTH);
         frmDocument.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frmDocument.setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON).getImage());
         frmDocument.setTitle("Forge: " + BuildInfo.getVersionString());
@@ -141,9 +140,8 @@ public enum FView {
 
         FView.this.frmSplash.dispose();
         FView.this.frmSplash = null;
-         
-        // Allow OS to set location. Hopefully this doesn't cause issues
-        frmDocument.setLocationByPlatform(true);
+
+        SLayoutIO.loadWindowLayout();
         frmDocument.setVisible(true);
         
         // remove this once our userbase has been migrated to the profile layout

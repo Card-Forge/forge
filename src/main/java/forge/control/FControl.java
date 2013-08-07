@@ -185,12 +185,18 @@ public enum FControl {
             Singletons.getModel().getQuest().load(QuestDataIO.loadData(data));
         }
 
-        // Handles resizing in null layouts of layers in JLayeredPane.
+        // Handles resizing in null layouts of layers in JLayeredPane as well as saving window layout
         Singletons.getView().getFrame().addComponentListener(new ComponentAdapter() {
-           @Override
-           public void componentResized(final ComponentEvent e) {
-               sizeChildren();
-           }
+            @Override
+            public void componentResized(final ComponentEvent e) {
+                sizeChildren();
+                SLayoutIO.saveWindowLayout();
+            }
+           
+            @Override
+            public void componentMoved(final ComponentEvent e) {
+                SLayoutIO.saveWindowLayout();
+            }
         });
 
         FView.SINGLETON_INSTANCE.getLpnDocument().addMouseListener(SOverflowUtil.getHideOverflowListener());

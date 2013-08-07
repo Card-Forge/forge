@@ -2,7 +2,12 @@ package forge.gui.framework;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.KeyboardFocusManager;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -104,5 +109,19 @@ public class SDisplayUtil {
             }
         };
         FThreads.invokeInEdtLater(showTabRoutine);
+    }
+    
+    public static Rectangle getScreenBoundsForPoint(Point point) {
+        Rectangle bounds;
+        for (GraphicsDevice device : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
+            for (GraphicsConfiguration config : device.getConfigurations()) {
+                bounds = config.getBounds();
+                if (bounds.contains(point)) {
+                    return bounds;
+                }
+            }
+        }
+        //return bounds of default monitor if point not on any screen
+        return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
     }
 }

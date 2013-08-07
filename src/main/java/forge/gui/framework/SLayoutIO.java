@@ -1,6 +1,10 @@
 package forge.gui.framework;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,6 +16,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;
@@ -41,7 +46,6 @@ import forge.view.FView;
  * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
  */
 public final class SLayoutIO {
-    /** Each cell must save these elements of its display. */
     private static class Property {
         public final static String x = "x"; 
         public final static String y = "y";
@@ -49,11 +53,203 @@ public final class SLayoutIO {
         public final static String h = "h";
         public final static String sel = "sel";
         public final static String doc = "doc";
+        public final static String state = "state";
     }
 
     private static final XMLEventFactory EF = XMLEventFactory.newInstance();
     private static final XMLEvent NEWLINE = EF.createDTD("\n");
     private static final XMLEvent TAB = EF.createDTD("\t");
+    
+    private static int normalWindowWidth, normalWindowHeight;
+    private final static AtomicBoolean saveWindowRequested = new AtomicBoolean(false);
+
+    public static void saveWindowLayout() {
+        if (saveWindowRequested.getAndSet(true)) { return; }
+        FThreads.delay(500, new Runnable() {
+            @Override
+            public void run() {
+                finishSaveWindowLayout();
+                saveWindowRequested.set(false);
+            }
+        });
+    }
+    
+    private synchronized static void finishSaveWindowLayout() {
+        final JFrame window = FView.SINGLETON_INSTANCE.getFrame();
+        final int state = window.getExtendedState();
+        if (state == Frame.ICONIFIED) { return; } //don't update saved layout if minimized
+
+        final Rectangle bounds = window.getBounds();
+        final int x = bounds.x;
+        final int y = bounds.y;
+        if ((state & Frame.MAXIMIZED_HORIZ) != Frame.MAXIMIZED_HORIZ) { //only modify saved width if not maximized horizontally
+            normalWindowWidth = bounds.width;
+        }
+        else if (normalWindowWidth == 0) {
+            normalWindowWidth = window.getMinimumSize().width;
+        }
+        if ((state & Frame.MAXIMIZED_VERT) != Frame.MAXIMIZED_VERT) { //only modify saved width if not maximized vertically
+            normalWindowHeight = bounds.height;
+        }
+        else if (normalWindowHeight == 0) {
+            normalWindowHeight = window.getMinimumSize().height;
+        }
+        
+        final FileLocation file = NewConstants.WINDOW_LAYOUT_FILE;
+        final String fWriteTo = file.userPrefLoc;
+        final XMLOutputFactory out = XMLOutputFactory.newInstance();
+        FileOutputStream fos = null;
+        XMLEventWriter writer = null;
+        try {
+            fos = new FileOutputStream(fWriteTo);
+            writer = out.createXMLEventWriter(fos);
+
+            writer.add(EF.createStartDocument());
+            writer.add(NEWLINE);
+            writer.add(EF.createStartElement("", "", "layout"));
+            writer.add(EF.createAttribute(Property.x, String.valueOf(x)));
+            writer.add(EF.createAttribute(Property.y, String.valueOf(y)));
+            writer.add(EF.createAttribute(Property.w, String.valueOf(normalWindowWidth)));
+            writer.add(EF.createAttribute(Property.h, String.valueOf(normalWindowHeight)));
+            writer.add(EF.createAttribute(Property.state, String.valueOf(state)));
+            writer.add(EF.createEndElement("", "", "layout"));
+            writer.flush(); 
+            writer.add(EF.createEndDocument());
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+            e.printStackTrace();
+        } catch (XMLStreamException e) {
+            // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+            e.printStackTrace();
+        } finally {
+            if (writer != null ) {
+                try { writer.close(); } catch (XMLStreamException e) {}
+            }
+            if ( fos != null ) {
+                try { fos.close(); } catch (IOException e) {}
+            }
+        }
+    }
+    
+    public static void loadWindowLayout() {
+        final JFrame window = FView.SINGLETON_INSTANCE.getFrame();
+        final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+        final FileLocation file = NewConstants.WINDOW_LAYOUT_FILE;
+        boolean usedCustomPrefsFile = false;
+        FileInputStream fis = null;
+        try {
+            File userSetting = new File(file.userPrefLoc);
+            if (userSetting.exists()) {
+                usedCustomPrefsFile = true;
+                fis = new FileInputStream(userSetting);
+            }
+            else {
+                fis = new FileInputStream(file.defaultLoc);
+            }
+
+            XMLEventReader reader = null;
+            try {
+                XMLEvent event;
+                StartElement element;
+                Iterator<?> attributes;
+                Attribute attribute;
+                reader = inputFactory.createXMLEventReader(fis);
+
+                while (reader != null && reader.hasNext()) {
+                    event = reader.nextEvent();
+
+                    if (event.isStartElement()) {
+                        element = event.asStartElement();
+
+                        if (element.getName().getLocalPart().equals("layout")) {
+                            attributes = element.getAttributes();
+                            Dimension minSize = window.getMinimumSize();
+                            int x = 0, y = 0, w = minSize.width, h = minSize.height, state = Frame.MAXIMIZED_BOTH;
+                            while (attributes.hasNext()) {
+                                attribute = (Attribute) attributes.next();
+                                switch (attribute.getName().toString()) {
+                                    case Property.x:     x =     Integer.parseInt(attribute.getValue()); break;                                        
+                                    case Property.y:     y =     Integer.parseInt(attribute.getValue()); break;
+                                    case Property.w:     w =     Integer.parseInt(attribute.getValue()); break;
+                                    case Property.h:     h =     Integer.parseInt(attribute.getValue()); break;
+                                    case Property.state: state = Integer.parseInt(attribute.getValue()); break;
+                                }
+                            }
+
+                            //set normal size to loaded size
+                            normalWindowWidth = w;
+                            normalWindowHeight = h;
+                            
+                            //update x and y if needed such that window is centered on that axis
+                            //when un-maximized if starting out maximized on that axis
+                            int centerX = x + w / 2;
+                            int centerY = y + h / 2;
+                            Rectangle screenBounds = SDisplayUtil.getScreenBoundsForPoint(new Point(centerX, centerY)); 
+                            if ((state & Frame.MAXIMIZED_HORIZ) == Frame.MAXIMIZED_HORIZ) {
+                                x = screenBounds.x + (screenBounds.width - w) / 2;
+                            }
+                            else { //ensure the window is accessible
+                                if (centerX < screenBounds.x) {
+                                    x = screenBounds.x;
+                                }
+                                else if (centerX > screenBounds.x + screenBounds.width) {
+                                    x = screenBounds.x + screenBounds.width - w;
+                                    if (x < screenBounds.x) {
+                                        x = screenBounds.x;
+                                    }
+                                }
+                            }
+                            if ((state & Frame.MAXIMIZED_VERT) == Frame.MAXIMIZED_VERT) {
+                                y = screenBounds.y + (screenBounds.height - h) / 2;
+                            }
+                            else { //ensure the window is accessible
+                                if (centerY < screenBounds.y) {
+                                    y = screenBounds.y;
+                                }
+                                else if (centerY > screenBounds.y + screenBounds.height) {
+                                    y = screenBounds.y + screenBounds.height - h;
+                                    if (y < screenBounds.y) {
+                                        y = screenBounds.y;
+                                    }
+                                }
+                            }
+                            
+                            window.setBounds(x, y, w, h);
+                            window.setExtendedState(state);
+                        }
+                    }
+                }
+            }
+            catch (final Exception e) {
+                try {
+                    if (reader != null) { reader.close(); };
+                }
+                catch (final XMLStreamException x) {
+                    e.printStackTrace();
+                }
+                e.printStackTrace();
+                if (usedCustomPrefsFile) {
+                    throw new InvalidLayoutFileException();
+                }
+                else {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        finally {
+            if (fis != null ) {
+                try {
+                    fis.close();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     /**
      * Gets preferred layout file corresponding to current state of UI.

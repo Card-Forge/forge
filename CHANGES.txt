@@ -8,6 +8,12 @@ Forge Beta: 0#-##-2013 ver 1.4.6
 Release Notes
 -------------
 
+- Window size/position now remembered between sessions -
+Works with multiple monitors.
+Remembers whether the window was maximized or un-maximized.
+Remembers last un-maximized size even if the window is currently maximized such that, if you un-maximize the window, it will restore to that size at the center of the current monitor.
+Window will be made accessible even if monitor setup or screen resolution is different between sessions.
+
 - Zoomer Updates -
 Split cards (name contains "//") are now rotated 90 degrees for easier viewing.
 
