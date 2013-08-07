@@ -1152,9 +1152,9 @@ public class ComputerUtil {
             return false;
         }
         if (abCost.hasTapCost()) {
-            for (Card c : ai.getOpponent().getCardsIn(ZoneType.Battlefield)) {
+            for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
                 if (c.hasSVar("AITapDown")) {
-                    if (source.isValid(c.getSVar("AITapDown"), ai, source)) {
+                    if (source.isValid(c.getSVar("AITapDown"), c.getController(), c)) {
                         return true;
                     }
                 }

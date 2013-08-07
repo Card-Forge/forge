@@ -1,0 +1,10 @@
+Name:Stoneshaker Shaman
+ManaCost:2 R
+Types:Creature Human Shaman
+PT:1/1
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's end step, that player sacrifices an untapped land.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land.untapped | Defined$ TriggeredPlayer | SpellDescription$ Sacrifice an untapped land.
+SVar:AITapDown:Land
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stoneshaker_shaman.jpg
+Oracle:At the beginning of each player's end step, that player sacrifices an untapped land.
