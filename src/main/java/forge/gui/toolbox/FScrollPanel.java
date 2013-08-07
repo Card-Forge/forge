@@ -308,11 +308,16 @@ public class FScrollPanel extends JScrollPane {
         
         @Override
         protected void drawArrow(final Graphics g) {
-            int centerX = getWidth() / 2;
-            int centerY = getHeight() / 2;
-            int halfSize = arrowSize / 2;
-            g.fillPolygon(new int[] { centerX - halfSize, centerX + halfSize, centerX + halfSize },
-                    new int[] { centerY, centerY + arrowSize, centerY - arrowSize }, 3);
+            int x = (getWidth() - arrowSize) / 2;
+            int y2 = getHeight() / 2;
+            int y1 = y2 - 1;
+            for (int i = 0; i < arrowSize; i++)
+            {
+                g.drawLine(x, y1, x, y2);
+                x++;
+                y1--;
+                y2++;
+            }
         }
     }
     
@@ -323,11 +328,16 @@ public class FScrollPanel extends JScrollPane {
         
         @Override
         protected void drawArrow(final Graphics g) {
-            int centerX = getWidth() / 2;
-            int centerY = getHeight() / 2;
-            int halfSize = arrowSize / 2;
-            g.fillPolygon(new int[] { centerX + halfSize, centerX - halfSize, centerX - halfSize },
-                    new int[] { centerY, centerY + arrowSize, centerY - arrowSize }, 3);
+            int x = (getWidth() + arrowSize) / 2;
+            int y2 = getHeight() / 2;
+            int y1 = y2 - 1;
+            for (int i = 0; i < arrowSize; i++)
+            {
+                g.drawLine(x, y1, x, y2);
+                x--;
+                y1--;
+                y2++;
+            }
         }
     }
     
@@ -338,11 +348,16 @@ public class FScrollPanel extends JScrollPane {
         
         @Override
         protected void drawArrow(final Graphics g) {
-            int centerX = getWidth() / 2;
-            int centerY = getHeight() / 2;
-            int halfSize = arrowSize / 2;
-            g.fillPolygon(new int[] { centerX, centerX + arrowSize, centerX - arrowSize },
-                    new int[] { centerY - halfSize, centerY + halfSize, centerY + halfSize }, 3);
+            int x2 = getWidth() / 2;
+            int x1 = x2 - 1;
+            int y = (getHeight() - arrowSize) / 2;
+            for (int i = 0; i < arrowSize; i++)
+            {
+                g.drawLine(x1, y, x2, y);
+                x1--;
+                x2++;
+                y++;
+            }
         }
     }
     
@@ -353,11 +368,16 @@ public class FScrollPanel extends JScrollPane {
         
         @Override
         protected void drawArrow(final Graphics g) {
-            int centerX = getWidth() / 2;
-            int centerY = getHeight() / 2;
-            int halfSize = arrowSize / 2;
-            g.fillPolygon(new int[] { centerX, centerX + arrowSize, centerX - arrowSize },
-                    new int[] { centerY + halfSize, centerY - halfSize, centerY - halfSize }, 3);
+            int x2 = getWidth() / 2;
+            int x1 = x2 - 1;
+            int y = (getHeight() + arrowSize) / 2;
+            for (int i = 0; i < arrowSize; i++)
+            {
+                g.drawLine(x1, y, x2, y);
+                x1--;
+                x2++;
+                y--;
+            }
         }
     }
     
