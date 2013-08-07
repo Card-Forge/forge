@@ -11,6 +11,7 @@ Release Notes
 - Window size/position now remembered between sessions -
 Works with multiple monitors.
 Remembers whether the window was maximized or un-maximized.
+The first time you launch Forge after this update, the window will be maximized on default monitor, with 800x600 centered being used if you un-maximize. This matches how it worked before.
 Remembers last un-maximized size even if the window is currently maximized such that, if you un-maximize the window, it will restore to that size at the center of the current monitor.
 Window will be made accessible even if monitor setup or screen resolution is different between sessions.
 
