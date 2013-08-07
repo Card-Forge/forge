@@ -9171,6 +9171,7 @@ res/cardsfolder/r/roc_hatchling.txt svneol=native#text/plain
 res/cardsfolder/r/roc_of_kher_ridges.txt svneol=native#text/plain
 res/cardsfolder/r/rock_badger.txt svneol=native#text/plain
 res/cardsfolder/r/rock_basilisk.txt svneol=native#text/plain
+res/cardsfolder/r/rock_jockey.txt -text
 res/cardsfolder/r/rock_slide.txt -text
 res/cardsfolder/r/rockcaster_platoon.txt svneol=native#text/plain
 res/cardsfolder/r/rocket_launcher.txt -text
