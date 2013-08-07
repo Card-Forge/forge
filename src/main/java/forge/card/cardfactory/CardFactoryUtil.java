@@ -488,60 +488,7 @@ public class CardFactoryUtil {
         card.setSVar(playSvar.toString(),playWithoutCost.toString());
     }
 
-    /**
-     * <p>
-     * entersBattleFieldWithCounters.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param type
-     *            a {@link forge.CounterType} object.
-     * @param n
-     *            a int.
-     * @return a {@link forge.Command} object.
-     */
-    public static Command entersBattleFieldWithCounters(final Card c, final CounterType type, final int n) {
-        final Command addCounters = new Command() {
-            private static final long serialVersionUID = 4825430555490333062L;
 
-            @Override
-            public void run() {
-                c.addCounter(type, n, true);
-            }
-        };
-        return addCounters;
-    }
-
-    /**
-     * <p>
-     * fading.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param power
-     *            a int.
-     * @return a {@link forge.Command} object.
-     */
-    public static Command fading(final Card sourceCard, final int power) {
-        return entersBattleFieldWithCounters(sourceCard, CounterType.FADE, power);
-    } // fading
-
-    /**
-     * <p>
-     * vanishing.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param power
-     *            a int.
-     * @return a {@link forge.Command} object.
-     */
-    public static Command vanishing(final Card sourceCard, final int power) {
-        return entersBattleFieldWithCounters(sourceCard, CounterType.TIME, power);
-    } // vanishing
 
     /**
      * <p>
@@ -2257,9 +2204,8 @@ public class CardFactoryUtil {
             final int n = hasKeyword(card, "Fading");
             if (n != -1) {
                 final String[] k = card.getKeyword().get(n).split(":");
-                final int power = Integer.parseInt(k[1]);
 
-                card.addComesIntoPlayCommand(fading(card, power));
+                card.addIntrinsicKeyword("etbCounter:FADE:" + k[1] + ":no Condition:no desc");
             }
         } // Fading
 
@@ -2267,9 +2213,9 @@ public class CardFactoryUtil {
             final int n = hasKeyword(card, "Vanishing");
             if (n != -1) {
                 final String[] k = card.getKeyword().get(n).split(":");
-                final int power = Integer.parseInt(k[1]);
 
-                card.addComesIntoPlayCommand(vanishing(card, power));
+                card.addIntrinsicKeyword("etbCounter:TIME:" + k[1] + ":no Condition:no desc");
+
             }
         } // Vanishing
 

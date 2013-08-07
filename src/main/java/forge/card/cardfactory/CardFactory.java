@@ -26,8 +26,6 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardUtil;
-import forge.Command;
-import forge.CounterType;
 import forge.ImageCache;
 import forge.card.CardCharacteristics;
 import forge.card.CardDb;
@@ -345,8 +343,8 @@ public class CardFactory {
 
     private static void buildPlaneswalkerAbilities(Card card) {
         if (card.getBaseLoyalty() > 0) {
-            Command cmd = CardFactoryUtil.entersBattleFieldWithCounters(card, CounterType.LOYALTY, card.getBaseLoyalty());
-            card.addComesIntoPlayCommand(cmd);
+            final String loyalty = Integer.toString(card.getBaseLoyalty());
+            card.addIntrinsicKeyword("etbCounter:LOYALTY:" + loyalty + ":no Condition:no desc");
         }
 
         //Planeswalker damage redirection
