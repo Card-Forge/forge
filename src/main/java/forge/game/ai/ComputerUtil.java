@@ -1145,11 +1145,20 @@ public class ComputerUtil {
      * @param sa
      * @return
      */
-    public static boolean ActivateForSacCost(SpellAbility sa, final Player ai) {
+    public static boolean activateForCost(SpellAbility sa, final Player ai) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         if (abCost == null) {
             return false;
+        }
+        if (abCost.hasTapCost()) {
+            for (Card c : ai.getOpponent().getCardsIn(ZoneType.Battlefield)) {
+                if (c.hasSVar("AITapDown")) {
+                    if (source.isValid(c.getSVar("AITapDown"), ai, source)) {
+                        return true;
+                    }
+                }
+            }
         }
         for (final CostPart part : abCost.getCostParts()) {
             if (part instanceof CostSacrifice) {

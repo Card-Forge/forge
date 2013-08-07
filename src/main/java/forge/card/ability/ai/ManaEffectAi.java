@@ -11,7 +11,7 @@ public class ManaEffectAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        if (ai.getGame().getPhaseHandler().is(PhaseType.MAIN2) && ComputerUtil.ActivateForSacCost(sa, ai)) {
+        if (ai.getGame().getPhaseHandler().is(PhaseType.MAIN2) && ComputerUtil.activateForCost(sa, ai)) {
             return true;
         }
         return false;

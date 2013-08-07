@@ -2092,6 +2092,7 @@ res/cardsfolder/c/copper_gnomes.txt svneol=native#text/plain
 res/cardsfolder/c/copper_leaf_angel.txt svneol=native#text/plain
 res/cardsfolder/c/copper_myr.txt svneol=native#text/plain
 res/cardsfolder/c/copper_tablet.txt svneol=native#text/plain
+res/cardsfolder/c/copperhoof_vorrac.txt -text
 res/cardsfolder/c/copperhorn_scout.txt svneol=native#text/plain
 res/cardsfolder/c/copperline_gorge.txt svneol=native#text/plain
 res/cardsfolder/c/copy_artifact.txt svneol=native#text/plain

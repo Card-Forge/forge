@@ -102,7 +102,7 @@ public class LifeGainAi extends SpellAbilityAi {
         if (!lifeCritical && (!game.getPhaseHandler().getNextTurn().equals(ai)
                 || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
-                && !ComputerUtil.ActivateForSacCost(sa, ai)) {
+                && !ComputerUtil.activateForCost(sa, ai)) {
             return false;
         }
 
