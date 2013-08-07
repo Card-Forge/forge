@@ -237,6 +237,9 @@ public class GameAction {
         // but how to query for input here and continue later while the callers assume synchronous result?
         zoneTo.add(copied, position);
 
+        if (fromBattlefield)
+            c.setZone(zoneTo);
+
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
         
