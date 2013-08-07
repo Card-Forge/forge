@@ -406,6 +406,7 @@ public enum FSkin {
     private static Map<SkinProp, Image> images;
     private static Map<SkinProp, Color> colors;
 
+    private static Map<Integer, Font> fixedFonts;
     private static Map<Integer, Font> plainFonts;
     private static Map<Integer, Font> boldFonts;
     private static Map<Integer, Font> italicFonts;
@@ -572,6 +573,7 @@ public enum FSkin {
         // Exceptions handled inside method.
         FSkin.setDefaultFontSize();
         FSkin.font = GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT);
+        fixedFonts = new HashMap<Integer, Font>();
         plainFonts = new HashMap<Integer, Font>();
         boldFonts = new HashMap<Integer, Font>();
         italicFonts = new HashMap<Integer, Font>();
@@ -650,6 +652,13 @@ public enum FSkin {
             plainFonts.put(size, getFont().deriveFont(Font.PLAIN, size));
         }
         return plainFonts.get(size);
+    }
+    
+    public static Font getFixedFont(final int size) {
+        if (fixedFonts.get(size) == null) {
+            fixedFonts.put(size, new Font("Monospaced", Font.PLAIN, size));
+        }
+        return fixedFonts.get(size);
     }
     
     public static Font getBoldFont() {

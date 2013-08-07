@@ -14903,9 +14903,11 @@ src/main/java/forge/gui/home/sanctioned/package-info.java svneol=native#text/pla
 src/main/java/forge/gui/home/settings/CSubmenuAvatars.java -text
 src/main/java/forge/gui/home/settings/CSubmenuDownloaders.java -text
 src/main/java/forge/gui/home/settings/CSubmenuPreferences.java -text
+src/main/java/forge/gui/home/settings/CSubmenuReleaseNotes.java -text
 src/main/java/forge/gui/home/settings/VSubmenuAvatars.java -text
 src/main/java/forge/gui/home/settings/VSubmenuDownloaders.java -text
 src/main/java/forge/gui/home/settings/VSubmenuPreferences.java -text
+src/main/java/forge/gui/home/settings/VSubmenuReleaseNotes.java -text
 src/main/java/forge/gui/home/settings/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/variant/CSubmenuArchenemy.java -text
 src/main/java/forge/gui/home/variant/CSubmenuPlanechase.java -text

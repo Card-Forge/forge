@@ -54,6 +54,7 @@ import forge.gui.home.sanctioned.VSubmenuSealed;
 import forge.gui.home.settings.VSubmenuAvatars;
 import forge.gui.home.settings.VSubmenuDownloaders;
 import forge.gui.home.settings.VSubmenuPreferences;
+import forge.gui.home.settings.VSubmenuReleaseNotes;
 import forge.gui.home.variant.VSubmenuArchenemy;
 import forge.gui.home.variant.VSubmenuPlanechase;
 import forge.gui.home.variant.VSubmenuVanguard;
@@ -149,7 +150,8 @@ public enum VHomeUI implements IVTopLevelUI {
         allSubmenus.add(VSubmenuPreferences.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuAvatars.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuDownloaders.SINGLETON_INSTANCE);
-
+        allSubmenus.add(VSubmenuReleaseNotes.SINGLETON_INSTANCE);
+        
         //allSubmenus.add(VSubmenuDeckEditor.SINGLETON_INSTANCE);
         //allSubmenus.add(VSubmenuExit.SINGLETON_INSTANCE);
 

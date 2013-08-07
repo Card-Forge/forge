@@ -15,6 +15,7 @@ Split cards (name contains "//") are now rotated 90 degrees for easier viewing.
 The menu on the Home Screen is now scrollable using either a mouse wheel or arrow buttons that will appear at the top or bottom if scrolling can occur in that direction
 The Deck Editor and Exit Forge buttons are now laid out vertically to make it easier to add launch buttons for new screens coming down the pipeline (hint, hint...)
 The menu on the Home Screen has been made narrower and the logo size increased to decrease whitespace and increase the width of the main panel
+Release notes added to Games Settings section.
 
 
 - Forge now requires Java 7 -
