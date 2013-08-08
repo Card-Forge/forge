@@ -36,7 +36,6 @@ public abstract class PlayerController {
     public static enum ManaPaymentPurpose {
         DeclareAttacker,
         DeclareBlocker,
-        Recover,
         Echo,
         Multikicker,
         Replicate, 

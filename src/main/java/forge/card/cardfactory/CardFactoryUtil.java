@@ -3170,6 +3170,28 @@ public class CardFactoryUtil {
 
             card.addTrigger(cascadeTrigger);
         } // Cascade
+
+        final int recover = hasKeyword(card, "Recover");
+        if (recover != -1) {
+            final String recoverCost = card.getKeyword().get(card.getKeywordPosition("Recover")).split(":")[1];
+            final String abStr = "AB$ ChangeZone | Cost$ 0 | Defined$ Self" +
+            		" | Origin$ Graveyard | Destination$ Hand | UnlessCost$ " +
+                    recoverCost + " | UnlessPayer$ You | UnlessSwitched$ True" +
+                    " | UnlessResolveSubs$ WhenNotPaid | SubAbility$ RecoverExile";
+            card.setSVar("RecoverTrig", abStr);
+            card.setSVar("RecoverExile", "DB$ ChangeZone | Defined$ Self" +
+            		" | Origin$ Graveyard | Destination$ Exile");
+            String trigStr = "Mode$ ChangesZone | ValidCard$ Creature.YouOwn | " +
+            		"Origin$ Battlefield | Destination$ Graveyard | " +
+            		"TriggerZones$ Graveyard | Execute$ RecoverTrig | " +
+            		"TriggerDescription$ When a creature a creature is " +
+            		"put into your graveyard from the battlefield, you " +
+            		"may pay " + recoverCost + ". If you do, return " +
+            		"CARDNAME from your graveyard to your hand. Otherwise," +
+            		" exile CARDNAME. | Secondary$ True";
+            final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
+            card.addTrigger(myTrigger);
+        } // Recover
     }
     
     /**

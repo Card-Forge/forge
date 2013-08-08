@@ -51,11 +51,9 @@ import forge.card.ability.ApiType;
 import forge.card.ability.effects.AttachEffect;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
@@ -73,7 +71,6 @@ import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameStarted;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
-import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
@@ -502,7 +499,6 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToGraveyard(Card c) {
-        final Zone origZone = game.getZoneOf(c);
         final Player owner = c.getOwner();
         final PlayerZone grave = owner.getZone(ZoneType.Graveyard);
         final PlayerZone exile = owner.getZone(ZoneType.Exile);
@@ -518,60 +514,9 @@ public class GameAction {
         // must put card in OWNER's graveyard not controller's
         c = this.moveTo(grave, c);
 
-        // Recover keyword
-        if (c.isCreature() && origZone.is(ZoneType.Battlefield)) {
-            for (final Card recoverable : grave) {
-                if (recoverable.hasStartOfKeyword("Recover") && !recoverable.equals(c)) {
-                    handleRecoverAbility(recoverable);
-                }
-            }
-        }
         return c;
     }
 
-    private void handleRecoverAbility(final Card recoverable) {
-        final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover")).split(":")[1];
-        final Cost cost = new Cost(recoverCost, true);
-
-        final SpellAbility abRecover = new AbilityActivated(recoverable, cost, null) {
-            private static final long serialVersionUID = 8858061639236920054L;
-
-            @Override
-            public void resolve() {}
-
-            @Override
-            public String getStackDescription() {
-                final StringBuilder sd = new StringBuilder(recoverable.getName());
-                sd.append(" - Recover.");
-
-                return sd.toString();
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                return null;
-            }
-        };
-        abRecover.setActivatingPlayer(recoverable.getController());
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Recover ").append(recoverable).append("\n");
-
-        final Ability recoverAbility = new Ability(recoverable, ManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                boolean hasPaid = recoverable.getController().getController().payManaOptional(recoverable, cost, this, sb.toString(), ManaPaymentPurpose.Recover);
-                
-                if (hasPaid)
-                    moveToHand(recoverable);
-                else
-                    exile(recoverable);
-                
-            }
-        };
-        recoverAbility.setStackDescription(sb.toString());
-
-        game.getStack().addSimultaneousStackEntry(recoverAbility);
-    }
 
     /**
      * <p>

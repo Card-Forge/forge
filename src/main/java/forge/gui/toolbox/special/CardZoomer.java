@@ -27,8 +27,6 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.imaging.FImagePanel;
