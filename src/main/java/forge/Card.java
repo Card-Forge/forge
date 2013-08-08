@@ -7248,9 +7248,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // specific Cards
         if (this.isCreature()) { // and not a planeswalker
-            if (this.getName().equals("Swans of Bryn Argoll")) {
-                return 0;
-            }
 
             if (source.isCreature() && getGame().isCardInPlay("Well-Laid Plans")
                     && source.sharesColorWith(this)) {
@@ -7353,10 +7350,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        if (this.getName().equals("Swans of Bryn Argoll")) {
-            source.getController().drawCards(restDamage);
-            return 0;
-        }
 
         final HashMap<String, Object> repParams = new HashMap<String, Object>();
         repParams.put("Event", "DamageDone");
