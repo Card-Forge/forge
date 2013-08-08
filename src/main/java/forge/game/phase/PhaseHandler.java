@@ -751,6 +751,9 @@ public class PhaseHandler implements java.io.Serializable {
         if (!this.extraTurns.isEmpty()) {
             ExtraTurn extraTurn = this.extraTurns.pop();
             nextTurn = extraTurn.getPlayer();
+            if (nextTurn.hasKeyword("If you would begin an extra turn, skip that turn instead.")) {
+                return getNextActivePlayer();
+            }            
             if (nextTurn.hasKeyword("Skip your next turn.")) {
                 nextTurn.removeKeyword("Skip your next turn.");
                 return getNextActivePlayer();
