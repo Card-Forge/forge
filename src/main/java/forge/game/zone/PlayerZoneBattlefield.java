@@ -90,28 +90,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
             c.executeTrigger(ZCTrigger.ENTERFIELD);
             
             if (c.isLand()) {
-                // Tectonic Instability
-                final List<Card> tis =
-                        CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tectonic Instability"));
-                final Card tisLand = c;
-                for (final Card ti : tis) {
-                    final Card source = ti;
-                    final SpellAbility ability = new Ability(source, ManaCost.NO_COST) {
-                        @Override
-                        public void resolve() {
-                            List<Card> lands = CardLists.filter(tisLand.getController().getCardsIn(ZoneType.Battlefield), Presets.LANDS);
-                            for (final Card land : lands) {
-                                land.tap();
-                            }
-                        }
-                    };
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(source).append(" - tap all lands ");
-                    sb.append(tisLand.getController()).append(" controls.");
-                    ability.setStackDescription(sb.toString());
-                    game.getStack().addSimultaneousStackEntry(ability);
-
-                }
 
 
                 for( Player opp : c.getOwner().getOpponents())

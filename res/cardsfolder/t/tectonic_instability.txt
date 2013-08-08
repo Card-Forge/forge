@@ -1,7 +1,8 @@
 Name:Tectonic Instability
 ManaCost:2 R
 Types:Enchantment
-Text:Whenever a land enters the battlefield, tap all lands its controller controls.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever a land enters the battlefield, tap all lands its controller controls.
+SVar:TrigTap:AB$ TapAll | Cost$ 0 | ValidCards$ TriggeredCard.sharesControllerWith+Land
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_instability.jpg
 Oracle:Whenever a land enters the battlefield, tap all lands its controller controls.
