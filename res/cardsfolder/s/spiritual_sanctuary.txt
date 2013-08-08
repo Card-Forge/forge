@@ -1,9 +1,7 @@
 Name:Spiritual Sanctuary
 ManaCost:2 W W
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Plains.YouCtrl | PresentCompare$ GE1 | Execute$ TrigGainLifeYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, if that player controls a Plains, he or she gains 1 life.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | IsPresent$ Plains.YouDontCtrl | PresentCompare$ GE1 | Execute$ TrigGainLifeOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, if that player controls a Plains, he or she gains 1 life.
-SVar:TrigGainLifeYou:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:TrigGainLifeOpp:AB$GainLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | IsPresent$ Plains.ActivePlayerCtrl | PresentCompare$ GE1 | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, if that player controls a Plains, he or she gains 1 life.
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritual_sanctuary.jpg
 Oracle:At the beginning of each player's upkeep, if that player controls a Plains, he or she gains 1 life.
