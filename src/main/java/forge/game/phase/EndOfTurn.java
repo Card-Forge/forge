@@ -18,6 +18,7 @@
 package forge.game.phase;
 
 import forge.Card;
+import forge.card.ability.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
@@ -58,21 +59,18 @@ public class EndOfTurn extends Phase {
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
                 final Card card = c;
-                final SpellAbility sac = new Ability(card, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final Card current = game.getCardState(card);
-                        if (current.isInPlay()) {
-                            game.getAction().sacrifice(current, null);
-                        }
-                    }
-                };
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Sacrifice ").append(card);
-                sac.setStackDescription(sb.toString());
-                sac.setDescription(sb.toString());
+                String sb = "At the beginning of the end step, sacrifice CARDNAME.";
+                String effect = "AB$ Sacrifice | Cost$ 0 | SacValid$ Self";
 
-                game.getStack().addSimultaneousStackEntry(sac);
+                SpellAbility ability = AbilityFactory.getAbility(effect, card);
+                ability.setActivatingPlayer(card.getController());
+                ability.setDescription(sb);
+                ability.setStackDescription(sb);
+                ability.setTrigger(true);
+                final int amount = card.getKeywordAmount("At the beginning of the end step, sacrifice CARDNAME.");
+                for (int i = 0; i < amount; i++) {
+                    game.getStack().addSimultaneousStackEntry(ability);
+                }
 
             }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
