@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Card;
+import forge.CounterType;
 import forge.GameEntity;
 import forge.ITargetable;
 import forge.card.cost.Cost;
@@ -142,8 +143,9 @@ public abstract class PlayerController {
     public abstract List<Card> chooseCardsToDiscardUnlessType(int min, List<Card> hand, String param, SpellAbility sa);
     public abstract List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand);
     public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
-    
+
     public abstract String chooseSomeType(String kindOfType, String aiLogic, List<String> validTypes, List<String> invalidTypes);
+    public abstract Pair<CounterType,String> chooseAndRemoveOrPutCounter(Card cardWithCounter);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question);
     public abstract List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer);
 

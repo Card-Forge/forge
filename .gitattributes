@@ -1914,6 +1914,7 @@ res/cardsfolder/c/cloak_of_feathers.txt svneol=native#text/plain
 res/cardsfolder/c/cloak_of_invisibility.txt -text
 res/cardsfolder/c/cloak_of_mists.txt svneol=native#text/plain
 res/cardsfolder/c/clock_of_omens.txt svneol=native#text/plain
+res/cardsfolder/c/clockspinning.txt -text
 res/cardsfolder/c/clockwork_avian.txt -text
 res/cardsfolder/c/clockwork_beast.txt -text
 res/cardsfolder/c/clockwork_beetle.txt svneol=native#text/plain
@@ -14300,6 +14301,7 @@ src/main/java/forge/card/ability/ai/CountersMoveAi.java -text
 src/main/java/forge/card/ability/ai/CountersProliferateAi.java -text
 src/main/java/forge/card/ability/ai/CountersPutAi.java -text
 src/main/java/forge/card/ability/ai/CountersPutAllAi.java -text
+src/main/java/forge/card/ability/ai/CountersPutOrRemoveAi.java -text
 src/main/java/forge/card/ability/ai/CountersRemoveAi.java -text
 src/main/java/forge/card/ability/ai/DamageAiBase.java -text
 src/main/java/forge/card/ability/ai/DamageAllAi.java -text
@@ -14408,6 +14410,7 @@ src/main/java/forge/card/ability/effects/CountersMoveEffect.java -text
 src/main/java/forge/card/ability/effects/CountersProliferateEffect.java -text
 src/main/java/forge/card/ability/effects/CountersPutAllEffect.java -text
 src/main/java/forge/card/ability/effects/CountersPutEffect.java -text
+src/main/java/forge/card/ability/effects/CountersPutOrRemoveEffect.java -text
 src/main/java/forge/card/ability/effects/CountersRemoveAllEffect.java -text
 src/main/java/forge/card/ability/effects/CountersRemoveEffect.java -text
 src/main/java/forge/card/ability/effects/DamageAllEffect.java -text

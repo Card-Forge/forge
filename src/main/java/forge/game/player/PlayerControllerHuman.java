@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.JOptionPane;
 
 import org.apache.commons.lang.math.IntRange;
@@ -18,6 +17,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
+import forge.CounterType;
 import forge.GameEntity;
 import forge.ITargetable;
 import forge.Singletons;
@@ -673,6 +673,24 @@ public class PlayerControllerHuman extends PlayerController {
     public Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap) {
         String title = entityBeingDamaged + " - select which prevention shield to use";
         return choiceMap.get(GuiChoose.one(title, options));
+    }
+
+    @Override
+    public Pair<CounterType,String> chooseAndRemoveOrPutCounter(Card cardWithCounter) {
+        if (!cardWithCounter.hasCounters()) {
+            System.out.println("chooseCounterType was reached with a card with no counters on it. Consider filtering this card out earlier");
+            return null;
+        }
+
+        String counterChoiceTitle = "Choose a counter type on " + cardWithCounter;
+        final CounterType chosen = GuiChoose.one(counterChoiceTitle, cardWithCounter.getCounters().keySet());
+
+        String putOrRemoveTitle = "Do what with counter " + chosen.getName() + "counter ";
+        final String putString = "Put another " + chosen.getName() + " counter on " + cardWithCounter;
+        final String removeString = "Remove a " + chosen.getName() + " counter from " + cardWithCounter;
+        final String addOrRemove = GuiChoose.one(putOrRemoveTitle, new String[]{putString,removeString});
+
+        return new ImmutablePair<CounterType,String>(chosen,addOrRemove);
     }
 
 

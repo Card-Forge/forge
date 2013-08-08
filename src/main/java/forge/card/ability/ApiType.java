@@ -15,6 +15,7 @@ import forge.util.ReflectionUtil;
 public enum ApiType {
 
     Abandon (AbandonEffect.class, AlwaysPlayAi.class),
+    AddOrRemoveCounter (CountersPutOrRemoveEffect.class, CountersPutOrRemoveAi.class),
     AddPhase (AddPhaseEffect.class, AddPhaseAi.class),
     AddTurn (AddTurnEffect.class, AddTurnAi.class),
     Animate (AnimateEffect.class, AnimateAi.class),
