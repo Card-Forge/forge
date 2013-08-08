@@ -519,7 +519,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Fizzle")) {
                         ArrayList<SpellAbility> spells = tgtC.getSpellAbilities();
                         for (SpellAbility spell : spells) {
-                            if (tgtC.isInZone(ZoneType.Exile)) {
+                            if (tgtC.isInZone(ZoneType.Exile) || tgtC.isInZone(ZoneType.Hand)) {
                                 final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
                                 if (si != null) { 
                                     game.getStack().remove(si);
