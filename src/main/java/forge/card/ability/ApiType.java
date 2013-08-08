@@ -112,6 +112,7 @@ public enum ApiType {
     SetLife (LifeSetEffect.class, LifeSetAi.class),
     SetState (SetStateEffect.class, SetStateAi.class),
     Shuffle (ShuffleEffect.class, ShuffleAi.class),
+    SkipTurn (SkipTurnEffect.class, CannotPlayAi.class),
     StoreSVar (StoreSVarEffect.class, StoreSVarAi.class),
     Tap (TapEffect.class, TapAi.class),
     TapAll (TapAllEffect.class, TapAllAi.class),

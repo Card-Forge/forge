@@ -14470,6 +14470,7 @@ src/main/java/forge/card/ability/effects/ScryEffect.java -text
 src/main/java/forge/card/ability/effects/SetInMotionEffect.java -text
 src/main/java/forge/card/ability/effects/SetStateEffect.java -text
 src/main/java/forge/card/ability/effects/ShuffleEffect.java -text
+src/main/java/forge/card/ability/effects/SkipTurnEffect.java -text
 src/main/java/forge/card/ability/effects/StoreSVarEffect.java -text
 src/main/java/forge/card/ability/effects/TapAllEffect.java -text
 src/main/java/forge/card/ability/effects/TapEffect.java -text

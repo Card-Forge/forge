@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Atog
 PT:1/2
 A:AB$ Pump | Cost$ 0 | NumAtt$ +3 | NumDef$ +3 | ActivationLimit$ 1 | SubAbility$ DBSkipTurn | SpellDescription$ CARDNAME gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn.
-SVar:DBSkipTurn:DB$AddTurn | NumTurns$ 1 | Defined$ Opponent
+SVar:DBSkipTurn:DB$ SkipTurn | NumTurns$ 1 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chronatog.jpg
 Oracle:{0}: Chronatog gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn.

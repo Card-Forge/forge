@@ -751,6 +751,10 @@ public class PhaseHandler implements java.io.Serializable {
         if (!this.extraTurns.isEmpty()) {
             ExtraTurn extraTurn = this.extraTurns.pop();
             nextTurn = extraTurn.getPlayer();
+            if (nextTurn.hasKeyword("Skip your next turn.")) {
+                nextTurn.removeKeyword("Skip your next turn.");
+                return getNextActivePlayer();
+            }            
             if (nextTurn.skipTurnTimeVault()) {
                 return getNextActivePlayer();
             }
@@ -765,6 +769,11 @@ public class PhaseHandler implements java.io.Serializable {
             }
             return nextTurn;
         }
+        if (nextTurn.hasKeyword("Skip your next turn.")) {
+            nextTurn.removeKeyword("Skip your next turn.");
+            this.setPlayerTurn(nextTurn);
+            return getNextActivePlayer();
+        }   
         if (nextTurn.skipTurnTimeVault()) {
             this.setPlayerTurn(nextTurn);
             return getNextActivePlayer();
