@@ -1,0 +1,28 @@
+[metadata]
+Code=V20
+Date=2013-08-23
+Name=From the Vault: Twenty
+Type=From_the_Vault
+FoilAlwaysInCommonSlot=True
+
+[cards]
+M Akroma's Vengeance
+M Chainer's Edict
+M Chameleon Colossus
+M Char
+M Cruel Ultimatum
+M Dark Ritual
+M Fact or Fiction
+M Fyndhorn Elves
+M Gilded Lotus
+M Green Sun's Zenith
+M Hymn to Tourach
+M Impulse
+M Ink-Eyes, Servant of Oni
+M Jace, the Mind Sculptor
+M Kessig Wolf Run
+M Swords to Plowshares
+M Tangle Wire
+M Thran Dynamo
+M Venser, Shaper Savant
+M Wall of Blossoms
