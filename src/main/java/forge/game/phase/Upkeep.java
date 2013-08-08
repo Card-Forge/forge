@@ -94,7 +94,6 @@ public class Upkeep extends Phase {
 
         Upkeep.upkeepOathOfDruids(game);
         Upkeep.upkeepOathOfGhouls(game);
-        Upkeep.upkeepBlazeCounters(game);
         Upkeep.upkeepPowerSurge(game);
 
         game.getStack().unfreezeStack();
@@ -612,41 +611,4 @@ public class Upkeep extends Phase {
 
         } // foreach(wire)
     } // upkeepTangleWire()
-
-    /**
-     * <p>
-     * upkeepBlazeCounters.
-     * </p>
-     */
-    private static void upkeepBlazeCounters(final Game game) {
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-
-        List<Card> blaze = player.getCardsIn(ZoneType.Battlefield);
-        blaze = CardLists.filter(blaze, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isLand() && (c.getCounters(CounterType.BLAZE) > 0);
-            }
-        });
-
-        for (int i = 0; i < blaze.size(); i++) {
-            final Card source = blaze.get(i);
-            final Ability ability = new Ability(blaze.get(i),ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    player.addDamage(1, source);
-                }
-            }; // ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(blaze.get(i)).append(" - has a blaze counter and deals 1 damage to ");
-            sb.append(player).append(".");
-            ability.setStackDescription(sb.toString());
-            ability.setDescription(sb.toString());
-            ability.setActivatingPlayer(source.getController());
-
-            game.getStack().addSimultaneousStackEntry(ability);
-
-        }
-    }
 } // end class Upkeep

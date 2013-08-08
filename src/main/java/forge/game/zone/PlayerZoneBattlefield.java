@@ -25,12 +25,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.CardPredicates.Presets;
 import forge.card.ability.AbilityFactory;
-import forge.card.mana.ManaCost;
-import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.ZCTrigger;
