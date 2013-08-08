@@ -97,24 +97,6 @@ public class PlayerControllerHuman extends PlayerController {
         HumanPlay.playCardWithoutPayingManaCost(player, c);
     }**/
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#playCascade(java.util.List, forge.Card)
-     */
-    /*@Override
-    public boolean playCascade(Card cascadedCard, Card sourceCard) {
-
-        final StringBuilder title = new StringBuilder();
-        title.append(sourceCard.getName()).append(" - Cascade Ability");
-        final StringBuilder question = new StringBuilder();
-        question.append("Cast ").append(cascadedCard.getName());
-        question.append(" without paying its mana cost?");
-
-
-        boolean result = GuiDialog.confirm(cascadedCard, question.toString());
-        if ( result )
-            HumanPlay.playCardWithoutPayingManaCost(player, cascadedCard);
-        return result;
-    }*/
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#mayPlaySpellAbilityForFree(forge.card.spellability.SpellAbility)

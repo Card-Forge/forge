@@ -483,9 +483,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (sp.isSpell() && !sp.isCopied()) {
             this.thisTurnCast.add(sp.getSourceCard());
 
-            /*final Game game = sp.getActivatingPlayer().getGame(); 
-            final Command cascade = new CascadeExecutor(sp.getActivatingPlayer(), sp.getSourceCard(), game);
-            cascade.run();*/
             final Command ripple = new RippleExecutor(sp.getActivatingPlayer(), sp.getSourceCard());
             ripple.run();
         }

@@ -59,7 +59,7 @@ public class EndOfTurn extends Phase {
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
                 final Card card = c;
-                String sb = "At the beginning of the end step, sacrifice CARDNAME.";
+                String sb = "Sacrifice CARDNAME.";
                 String effect = "AB$ Sacrifice | Cost$ 0 | SacValid$ Self";
 
                 SpellAbility ability = AbilityFactory.getAbility(effect, card);
