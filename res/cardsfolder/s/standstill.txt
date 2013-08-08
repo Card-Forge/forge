@@ -1,15 +1,14 @@
 Name:Standstill
 ManaCost:1 U
 Types:Enchantment
-A:SP$ PermanentNoncreature | Cost$ 1 U | AILogic$ MoreCreatures
-T:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacYou | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME. If you do, each of that player's opponents draws three cards.
-T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSacOpp | Secondary$ True | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME. If you do, each of that player's opponents draws three cards.
-#Must use SacrificeAll since regular sacrifice can't remember the sac'd cards atm.
-SVar:TrigSacYou:AB$SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DrawOpp
-SVar:TrigSacOpp:AB$SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DrawYou
-SVar:DrawOpp:DB$ Draw | NumCards$ 3 | Defined$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
-SVar:DrawYou:DB$ Draw | NumCards$ 3 | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME. If you do, each of that player's opponents draws three cards.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Self | RememberSacrificed$ True | SubAbility$ DrawOpp
+SVar:DrawOpp:DB$ Draw | NumCards$ 3 | Defined$ TriggeredCardOpponent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
+SVar:Y:Count$Valid Creature.YouCtrl
+SVar:Z:Count$Valid Creature.OppCtrl
+SVar:NeedsToPlayVar:Y GTZ
 Svar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/standstill.jpg
 Oracle:When a player casts a spell, sacrifice Standstill. If you do, each of that player's opponents draws three cards.

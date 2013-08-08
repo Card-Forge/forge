@@ -21,8 +21,6 @@ public class PermanentNoncreatureAi extends SpellAbilityAi {
 
         if ("DontCast".equals(logic)) {
             return false;
-        } else if ("MoreCreatures".equals(logic)) {
-            return (aiPlayer.getCreaturesInPlay().size() > aiPlayer.getOpponent().getCreaturesInPlay().size());
         }
 
         // Wait for Main2 if possible
