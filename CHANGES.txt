@@ -15,8 +15,10 @@ The first time you launch Forge after this update, the window will be maximized 
 Remembers last un-maximized size even if the window is currently maximized such that, if you un-maximize the window, it will restore to that size at the center of the current monitor.
 Window will be made accessible even if monitor setup or screen resolution is different between sessions.
 
-- Zoomer Updates -
+
+- Card Zoomer Updates -
 Split cards (name contains "//") are now rotated 90 degrees for easier viewing.
+
 
 - Home Screen UI Improvements -
 The menu on the Home Screen is now scrollable using either a mouse wheel or arrow buttons that will appear at the top or bottom if scrolling can occur in that direction
@@ -24,8 +26,10 @@ The Deck Editor and Exit Forge buttons are now laid out vertically to make it ea
 The menu on the Home Screen has been made narrower and the logo size increased to decrease whitespace and increase the width of the main panel
 Release notes added to Games Settings section.
 
+
 - User Preferences -
 There's a new user preference that lets you choose whether a 0-cost block should prompt you to pay or to pay it automatically. This only affects blocking situations where you would have to actually pay 0, (e.g. War Cadence with X = 0). By default you'll be prompted for payment, allowing you to, for instance, prevent forced blocks by activating War Cadence for 0 then not paying the block cost.
+
 
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
@@ -69,6 +73,10 @@ Cocoon
 Traveling Plague
 War Cadence
 Heat Wave
+Rock Jockey
+Copperhoof Vorrac
+Stoneshaker Shaman
+Stranglehold
 
 
 ----------
