@@ -66,9 +66,14 @@ public class DigAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        final Player opp = ai.getOpponent();
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            sa.getTargets().add(ai);
+            if (mandatory && sa.canTarget(opp)) {
+                sa.getTargets().add(opp);
+            } else if (mandatory && sa.canTarget(ai)) {
+                sa.getTargets().add(ai);
+            }
         }
 
         return true;
