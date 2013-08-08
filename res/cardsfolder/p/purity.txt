@@ -1,7 +1,6 @@
 Name:Purity
 ManaCost:3 W W W
 Types:Creature Elemental Incarnation
-Text:
 PT:6/6
 K:Flying
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ GainLife | PreventionEffect$ True | IsCombat$ False | Description$ If noncombat damage would be dealt to you, prevent that damage. You gain life equal to the damage prevented this way.

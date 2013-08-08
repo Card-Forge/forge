@@ -15,7 +15,6 @@ Name:Convulsing Licid
 ManaCost:2 R
 Colors:red
 Types:Enchantment Aura
-Text:Enchanted creature can't block.
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature can't block.

@@ -1,7 +1,6 @@
 Name:Nightveil Specter
 ManaCost:UB UB UB
 Types:Creature Specter
-Text:
 PT:2/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles the top card of his or her library.

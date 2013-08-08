@@ -1,8 +1,7 @@
 Name:Join the Ranks
 ManaCost:3 W
 Types:Instant
-Text:Put two 1/1 white Soldier Ally creature tokens onto the battlefield.
-A:SP$ Token | Cost$ 3 W | TokenAmount$ 2 | TokenName$ Soldier Ally | TokenTypes$ Creature,Soldier,Ally | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
+A:SP$ Token | Cost$ 3 W | TokenAmount$ 2 | TokenName$ Soldier Ally | TokenTypes$ Creature,Soldier,Ally | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 white Soldier Ally creature tokens onto the battlefield.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/join_the_ranks.jpg
 Oracle:Put two 1/1 white Soldier Ally creature tokens onto the battlefield.

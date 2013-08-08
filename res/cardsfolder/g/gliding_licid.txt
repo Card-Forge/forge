@@ -16,7 +16,6 @@ Name:Gliding Licid
 ManaCost:2 U
 Colors:blue
 Types:Enchantment Aura
-Text:Enchanted creature has flying.
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.

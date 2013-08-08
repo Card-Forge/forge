@@ -1,7 +1,6 @@
 Name:Drekavac
 ManaCost:1 B
 Types:Creature Beast
-Text:
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacSelf | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a noncreature card.
 SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ Discard<1/Card.nonCreature> | UnlessPayer$ You

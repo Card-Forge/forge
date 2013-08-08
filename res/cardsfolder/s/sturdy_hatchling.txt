@@ -1,7 +1,6 @@
 Name:Sturdy Hatchling
 ManaCost:3 GU
 Types:Creature Elemental
-Text:
 PT:6/6
 K:etbCounter:M1M1:4
 A:AB$ Pump | Cost$ GU | KW$ Shroud | SpellDescription$ CARDNAME gains shroud until end of turn.

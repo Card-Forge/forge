@@ -1,7 +1,6 @@
 Name:Deep Spawn
 ManaCost:5 U U U
 Types:Creature Homarid
-Text:no text
 PT:6/6
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you put the top two cards of your library into your graveyard.

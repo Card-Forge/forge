@@ -16,7 +16,6 @@ Name:Enraging Licid
 ManaCost:1 R
 Colors:red
 Types:Enchantment Aura
-Text:Enchanted creature has haste.
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Haste | Description$ Enchanted creature has haste.

@@ -1,7 +1,6 @@
 Name:Bane Alley Broker
 ManaCost:1 U B
 Types:Creature Human Rogue
-Text:no text
 PT:0/3
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBExile | SpellDescription$ Draw a card, then exile a card from your hand face down.
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | ExileFaceDown$ True | Mandatory$ True | RememberChanged$ True

@@ -15,7 +15,6 @@ Name:Corrupting Licid
 ManaCost:2 B
 Colors:black
 Types:Enchantment Aura
-Text:Enchanted creature has fear.
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Fear | Description$ Enchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)

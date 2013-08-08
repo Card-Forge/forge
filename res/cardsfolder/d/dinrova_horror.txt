@@ -1,7 +1,6 @@
 Name:Dinrova Horror
 ManaCost:4 U B
 Types:Creature Horror
-Text:
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, return target permanent to its owner's hand, then that player discards a card.
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDiscard

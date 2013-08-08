@@ -1,7 +1,6 @@
 Name:Surging AEther
 ManaCost:3 U
 Types:Instant
-Text:
 K:Ripple:4
 A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_aether.jpg

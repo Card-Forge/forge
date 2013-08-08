@@ -1,7 +1,6 @@
 Name:AEthersnipe
 ManaCost:5 U
 Types:Creature Elemental
-Text:
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, return target nonland permanent to its owner's hand.
 K:Evoke:1 U U

@@ -16,7 +16,6 @@ Name:Quickening Licid
 ManaCost:1 W
 Colors:white
 Types:Enchantment Aura
-Text:Enchanted creature has first strike.
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.

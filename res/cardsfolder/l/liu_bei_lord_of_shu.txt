@@ -1,7 +1,7 @@
 Name:Liu Bei, Lord of Shu
 ManaCost:3 W W
 Types:Legendary Creature Human Soldier
-Text:Liu Bei, Lord of Shu gets +2/+2 as long as you control a permanent named Guan Yu, Sainted Warrior or a permanent named Zhang Fei, Fierce Warrior.
+Text:CARDNAME gets +2/+2 as long as you control a permanent named Guan Yu, Sainted Warrior or a permanent named Zhang Fei, Fierce Warrior.
 PT:2/4
 K:Horsemanship
 SVar:BuffedBy:Permanent.named

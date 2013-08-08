@@ -1,7 +1,7 @@
 Name:Time Vault
 ManaCost:2
 Types:Artifact
-Text:If you would begin your turn while Time Vault is tapped, you may skip that turn instead. If you do, untap Time Vault.
+Text:If you would begin your turn while CARDNAME is tapped, you may skip that turn instead. If you do, untap CARDNAME.
 K:CARDNAME doesn't untap during your untap step.
 K:CARDNAME enters the battlefield tapped.
 A:AB$ AddTurn | Cost$ T | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.

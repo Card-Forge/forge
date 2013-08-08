@@ -1,7 +1,6 @@
 Name:Taoist Hermit
 ManaCost:2 G
 Types:Creature Human Mystic
-Text:
 PT:2/2
 K:Hexproof
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taoist_hermit.jpg
