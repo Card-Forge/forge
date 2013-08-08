@@ -2,7 +2,8 @@ Name:Through the Breach
 ManaCost:4 R
 Types:Instant Arcane
 A:SP$ ChangeZone | Cost$ 4 R | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | SubAbility$ DBPump | RememberChanged$ True | ForgetOtherRemembered$ True | SpellDescription$ You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | KW$ Haste & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | KW$ Haste | Defined$ Remembered | Permanent$ True | SubAbility$ DBPump2
+SVar:DBPump2:DB$ Pump | Defined$ Remembered | KW$ HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Splice onto Arcane 2 R R
 SVar:RemAIDeck:True
