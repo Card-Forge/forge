@@ -1208,16 +1208,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             runParams.put("NewCounterAmount", --curCounters);
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
         }
-
-        if (counterName.equals(CounterType.TIME) && (newValue == 0)) {
-            final boolean hasVanish = CardFactoryUtil.hasKeyword(this, "Vanishing") != -1;
-
-            if (hasVanish && this.isInPlay()) {
-                getGame().getAction().sacrifice(this, null);
-            }
-
-        }
-
     }
 
     /**

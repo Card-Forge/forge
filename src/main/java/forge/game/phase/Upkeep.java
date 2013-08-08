@@ -94,7 +94,6 @@ public class Upkeep extends Phase {
 
         Upkeep.upkeepOathOfDruids(game);
         Upkeep.upkeepOathOfGhouls(game);
-        Upkeep.upkeepVanishing(game);
         Upkeep.upkeepBlazeCounters(game);
         Upkeep.upkeepPowerSurge(game);
 
@@ -383,45 +382,6 @@ public class Upkeep extends Phase {
 
         } // end for
     } // upkeepDropOfHoney()
-
-
-    /**
-     * <p>
-     * upkeepVanishing.
-     * </p>
-     */
-    private static void upkeepVanishing(final Game game) {
-
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-        List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return CardFactoryUtil.hasKeyword(c, "Vanishing") != -1;
-            }
-        });
-        if (list.size() > 0) {
-            for (int i = 0; i < list.size(); i++) {
-                final Card card = list.get(i);
-                final Ability ability = new Ability(card, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        card.subtractCounter(CounterType.TIME, 1);
-                    }
-                }; // ability
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append(card.getName()).append(" - Vanishing - remove a time counter from it. ");
-                sb.append("When the last is removed, sacrifice it.)");
-                ability.setStackDescription(sb.toString());
-                ability.setDescription(sb.toString());
-                ability.setActivatingPlayer(card.getController());
-
-                game.getStack().addSimultaneousStackEntry(ability);
-
-            }
-        }
-    }
 
     /**
      * <p>
