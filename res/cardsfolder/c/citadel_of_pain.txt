@@ -1,0 +1,10 @@
+Name:Citadel of Pain
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's end step, CARDNAME deals X damage to that player, where X is the number of untapped lands he or she controls.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
+SVar:X:Count$Valid Land.untapped+ActivePlayerCtrl
+SVar:AITapDown:Land
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/citadel_of_pain.jpg
+Oracle:At the beginning of each player's end step, Citadel of Pain deals X damage to that player, where X is the number of untapped lands he or she controls.
