@@ -27,6 +27,7 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
+import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FOverlay;
@@ -110,14 +111,9 @@ public enum CardZoomer {
     }
         
     private int getInitialRotation() {
-        return (this.isSplitCardImage() ? 90 : 0);
+        return (thisCard.isSplitCard() ? 90 : 0);
     }   
-    
-    private boolean isSplitCardImage() {
-        return (thisCard.getRules().getSplitType() == CardSplitType.Split);
-    }    
         
-    
     private void setLayout() {
         overlay.removeAll();
 
