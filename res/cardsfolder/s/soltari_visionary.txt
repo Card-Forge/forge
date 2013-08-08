@@ -3,9 +3,7 @@ ManaCost:1 W W
 Types:Creature Soltari Cleric
 PT:2/2
 K:Shadow
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ You | Execute$ TrigDestroyOwn | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, destroy target enchantment that player controls.
-SVar:TrigDestroyOwn:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment.YouCtrl | TgtPrompt$ Select an enchantment that you control.
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDestroyOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME deals damage to a player, destroy target enchantment that player controls.
-SVar:TrigDestroyOpp:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment.OppCtrl | TgtPrompt$ Select an enchantment your opponent controls.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, destroy target enchantment that player controls.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Enchantment | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select an enchantment that player controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_visionary.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Soltari Visionary deals damage to a player, destroy target enchantment that player controls.
