@@ -3,9 +3,9 @@ ManaCost:2 W
 Types:Sorcery
 A:SP$ GainLife | Cost$ 2 W | LifeAmount$ 6 | ConditionLifeTotal$ You | ConditionLifeAmount$ LTX | References$ X | SubAbility$ DBToken | SpellDescription$ If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield.
 SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | ConditionCheckSVar$ CreatureYouControl | ConditionSVarCompare$ LTCreatureOppControl | References$ CreatureYouControl,CreatureOppControl
-SVar:X:Count$OppLifeTotal
+SVar:X:PlayerCountOpponents$HighestLifeTotal
 SVar:CreatureYouControl:Count$Valid Creature.YouCtrl
-SVar:CreatureOppControl:Count$Valid Creature.YouDontCtrl
+SVar:CreatureOppControl:PlayerCountOpponents$HighestValid Creature.YouCtrl
 SVar:AIPlayForSub:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timely_reinforcements.jpg
 Oracle:If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield.
