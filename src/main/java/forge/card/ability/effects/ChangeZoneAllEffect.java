@@ -35,10 +35,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
-        
-        if(origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
-            sa.getActivatingPlayer().incLibrarySearched();
-        }
 
         List<Card> cards = new ArrayList<Card>();
 
@@ -56,7 +52,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 // Search library using changezoneall effect need a param "Search"
                 if (sa.getActivatingPlayer().hasKeyword("LimitSearchLibrary")) {
                     for (final Player p : tgtPlayers) {
-                        cards.addAll(p.getCardsIn(origin));
                         cards.removeAll(p.getCardsIn(ZoneType.Library));
                         int fetchNum = Math.min(p.getCardsIn(ZoneType.Library).size(), 4);
                         cards.addAll(p.getCardsIn(ZoneType.Library, fetchNum));
@@ -68,7 +63,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
             }
         }
-        
+
         if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().hasKeyword("CantSearchLibrary")) {
             List<Card> libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source);
             List<Card> libCardsYouOwn = CardLists.filterControlledBy(libCards, sa.getActivatingPlayer());

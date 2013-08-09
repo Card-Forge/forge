@@ -997,6 +997,8 @@ public class AbilityUtils {
                         if (instanceSA != null) {
                             sas.add(instanceSA);
                         }
+                    } else {
+                        sas.add(targetSpell);
                     }
                 }
             }
