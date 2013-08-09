@@ -1,11 +1,8 @@
 Name:Repercussion
 ManaCost:1 R R
 Types:Enchantment
-T:Mode$ DamageDone | ValidTarget$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamageYou | TriggerDescription$ Whenever a creature is dealt damage, CARDNAME deals that much damage to that creature's controller.
-T:Mode$ DamageDone | ValidTarget$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigDamageOpp | Secondary$ True | TriggerDescription$ Whenever a creature is dealt damage, CARDNAME deals that much damage to that creature's controller.
-SVar:TrigDamageYou:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ X | References$ X
-SVar:TrigDamageOpp:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ Y | References$ X
+T:Mode$ DamageDone | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature is dealt damage, CARDNAME deals that much damage to that creature's controller.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredTargetController | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Y:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repercussion.jpg
 Oracle:Whenever a creature is dealt damage, Repercussion deals that much damage to that creature's controller.

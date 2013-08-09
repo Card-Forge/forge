@@ -183,7 +183,9 @@ public abstract class TriggerReplacementBase {
             if (player.equals("Opponent")) {
                 life = hostController.getOpponent().getLife();
             }
-
+            if (player.equals("ActivePlayer")) {
+                life = game.getPhaseHandler().getPlayerTurn().getLife();
+            }
             if (params.containsKey("LifeAmount")) {
                 lifeCompare = params.get("LifeAmount");
             }
