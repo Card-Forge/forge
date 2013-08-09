@@ -153,6 +153,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
     private boolean becameTargetThisTurn = false;
+    private boolean startedTheTurnUntapped = false;
     private boolean tapped = false;
     private boolean sickness = true; // summoning sickness
     private boolean token = false;
@@ -1106,6 +1107,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (type == CounterType.DREAM) {
+            if (this.hasKeyword("CARDNAME can't have more than seven dream counters on it.") && this.getCounters(CounterType.DREAM) > 6) {
+                return false;
+            }
         }
         return true;
     }
@@ -1113,7 +1118,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int getTotalCountersToAdd(final CounterType counterType, final int baseAmount, final boolean applyMultiplier) {
         if (this.canReceiveCounters(counterType)) {
             final int multiplier = applyMultiplier ? this.getController().getCounterDoublersMagnitude(counterType) : 1;
-            return multiplier * baseAmount;
+            int result = multiplier * baseAmount;
+            if (counterType == CounterType.DREAM && this.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
+                result = Math.min(7 - this.getCounters(CounterType.DREAM), result);
+            }
+            return result;
         }
         return 0;
     }
@@ -3047,6 +3056,21 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public void setBecameTargetThisTurn(boolean becameTargetThisTurn) {
         this.becameTargetThisTurn = becameTargetThisTurn;
+    }
+    
+
+    /**
+     * @return the startedTheTurnUntapped
+     */
+    public boolean hasStartedTheTurnUntapped() {
+        return startedTheTurnUntapped;
+    }
+
+    /**
+     * @param startedTheTurnUntapped0 the startedTheTurnUntapped to set
+     */
+    public void setStartedTheTurnUntapped(boolean untapped) {
+        this.startedTheTurnUntapped = untapped;
     }
     
 
@@ -6131,6 +6155,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("notFirstTurnControlled")) {
             if (this.isFirstTurnControlled()) {
+                return false;
+            }
+        } else if (property.startsWith("startedTheTurnUntapped")) {
+            if (!this.hasStartedTheTurnUntapped()) {
                 return false;
             }
         } else if (property.equals("attackedOrBlockedSinceYourLastUpkeep")) {

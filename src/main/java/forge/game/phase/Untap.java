@@ -124,6 +124,9 @@ public class Untap extends Phase {
         final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, CANUNTAP);
 
         List<Card> list = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
+        for (Card c : list) {
+            c.setStartedTheTurnUntapped(c.isUntapped());
+        }
 
         List<Card> bounceList = CardLists.getKeyword(list, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
         for (final Card c : bounceList) {

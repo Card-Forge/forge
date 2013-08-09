@@ -858,7 +858,12 @@ public class GameAction {
                     checkAgain = true;
                 }
                 
-                checkAgain |= stateBasedAction704_5r(c); // annihilatie +1/+1 counters with -1/-1 ones
+                checkAgain |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
+                
+                if (c.getCounters(CounterType.DREAM) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
+                    c.subtractCounter(CounterType.DREAM,  c.getCounters(CounterType.DREAM) - 7);
+                    checkAgain = true;
+                }
             }
 
             if (game.getTriggerHandler().runWaitingTriggers()) {
