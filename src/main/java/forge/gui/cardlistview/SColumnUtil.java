@@ -39,7 +39,7 @@ import forge.card.mana.ManaCost;
 import forge.deck.DeckBase;
 import forge.game.limited.DraftRankCache;
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.controllers.ACEditorBase;
+import forge.gui.cardlistview.ACEditorBase;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -217,7 +217,7 @@ public final class SColumnUtil {
     public static <TItem extends InventoryItem, TModel extends DeckBase>
         void toggleColumn(final TableColumnInfo<InventoryItem> col0) {
 
-        final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
+        /*final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
         final JTable tbl = (col0.getEnumValue().substring(0, 4).equals("DECK"))
@@ -247,13 +247,13 @@ public final class SColumnUtil {
             else {
                 col0.setModelIndex(colmodel.getColumnCount());
             }
-        }
+        }*/
     }
 
     /**
      * Retrieve a custom column (uses identical method in SEditorIO).
      * 
-     * @param id0 &emsp; {@link forge.gui.deckeditor.SCardListViewUtil.CatalogColumnName}
+     * @param id0 &emsp; {@link forge.gui.cardlistview.SCardListViewUtil.CatalogColumnName}
      * @return TableColumnInfo<InventoryItem>
      */
     public static TableColumnInfo<InventoryItem> getColumn(final ColumnName id0) {
@@ -264,7 +264,7 @@ public final class SColumnUtil {
      * Convenience method to get a column's index in the view (that is,
      * in the TableColumnModel).
      * 
-     * @param id0 &emsp; {@link forge.gui.deckeditor.SCardListViewUtil.CatalogColumnName}
+     * @param id0 &emsp; {@link forge.gui.cardlistview.SCardListViewUtil.CatalogColumnName}
      * @return int
      * @param <TItem> extends InventoryItem
      * @param <TModel> extends InventoryItem
@@ -273,7 +273,7 @@ public final class SColumnUtil {
     public static <TItem extends InventoryItem, TModel extends DeckBase>
                                     int getColumnViewIndex(final ColumnName id0) {
 
-        final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
+        /*final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
         final JTable tbl = (id0.toString().substring(0, 4).equals("DECK"))
@@ -287,14 +287,14 @@ public final class SColumnUtil {
         }
         catch (final Exception e) { }
 
-        return index;
+        return index;*/return -1;
     }
 
     /**
      * Convenience method to get a column's index in the model (that is,
      * in the EditorTableModel, NOT the TableColumnModel).
      * 
-     * @param id0 &emsp; {@link forge.gui.deckeditor.SCardListViewUtil.CatalogColumnName}
+     * @param id0 &emsp; {@link forge.gui.cardlistview.SCardListViewUtil.CatalogColumnName}
      * @return int
      * @param <TItem> extends InventoryItem
      * @param <TModel> extends InventoryItem
@@ -303,14 +303,14 @@ public final class SColumnUtil {
     public static <TItem extends InventoryItem, TModel extends DeckBase>
                                     int getColumnModelIndex(final ColumnName id0) {
 
-        final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
+        /*final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
+                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();*/
 
-        final JTable tbl = (id0.toString().substring(0, 4).equals("DECK"))
+        /*final JTable tbl = (id0.toString().substring(0, 4).equals("DECK"))
                 ? ed.getTableDeck().getTable()
                 : ed.getTableCatalog().getTable();
 
-        return tbl.getColumn(SColumnUtil.getColumn(id0).getIdentifier()).getModelIndex();
+        return tbl.getColumn(SColumnUtil.getColumn(id0).getIdentifier()).getModelIndex();*/return -1;
     }
 
     //========== Display functions

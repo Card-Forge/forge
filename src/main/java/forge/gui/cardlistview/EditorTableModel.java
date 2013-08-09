@@ -1,8 +1,6 @@
 /*
  * Forge: Play Magic: the Gathering.
  * Copyright (C) 2011
-import forge.gui.deckeditor.views.VDeckEditorUI;
-Forge Team
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

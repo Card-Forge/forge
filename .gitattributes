@@ -14794,6 +14794,7 @@ src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/SOverlayUtils.java -text
 src/main/java/forge/gui/UnsortedListModel.java -text
 src/main/java/forge/gui/WrapLayout.java -text
+src/main/java/forge/gui/cardlistview/ACEditorBase.java -text
 src/main/java/forge/gui/cardlistview/AlwaysShowToolTip.java -text
 src/main/java/forge/gui/cardlistview/EditorTableModel.java -text
 src/main/java/forge/gui/cardlistview/EditorTableView.java -text

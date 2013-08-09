@@ -45,8 +45,8 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.gui.deckeditor.SEditorUtil;
-import forge.gui.deckeditor.views.ITableContainer;
+import forge.gui.cardlistview.SCardListViewUtil;
+import forge.gui.cardlistview.ITableContainer;
 import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -230,7 +230,7 @@ public final class EditorTableView<T extends InventoryItem> {
     /**
      * Applies a EditorTableModel and a model listener to this instance's JTable.
      * 
-     * @param view0 &emsp; the {@link javax.gui.deckeditor.views.ITableCOntainer}
+     * @param view0 &emsp; the {@link forge.gui.cardlistview.ITableCOntainer}
      * @param cols0 &emsp; List<TableColumnInfo<InventoryItem>> of additional columns for this
      */
     public void setup(final ITableContainer view0, final List<TableColumnInfo<InventoryItem>> cols0) {
@@ -255,7 +255,7 @@ public final class EditorTableView<T extends InventoryItem> {
         this.model.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(final TableModelEvent ev) {
-                SEditorUtil.setStats(EditorTableView.this.model.getCards(), view0);
+                SCardListViewUtil.setStats(EditorTableView.this.model.getCards(), view0);
             }
         });
     }
