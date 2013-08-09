@@ -128,7 +128,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             abilities.add(ma);
 
             // skip express mana if the ability is not undoable or reusable
-            if (!ma.isUndoable() || !ma.getPayCosts().isRenewableResource())
+            if (!ma.isUndoable() || !ma.getPayCosts().isRenewableResource() || ma.getSubAbility() != null)
                 guessAbilityWithRequiredColors = false;
         }
         
@@ -168,6 +168,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     
             if (colorMatches.isEmpty()) {
                 // can only match colorless just grab the first and move on.
+                // This is wrong. Sometimes all abilities aren't created equal
                 choice = false;
             } else if (colorMatches.size() < abilities.size()) {
                 // leave behind only color matches
