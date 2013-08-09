@@ -21,10 +21,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+import javax.swing.JLabel;
+
 import forge.Card;
 import forge.CardCharacteristicName;
+import forge.CardUtil;
 import forge.Command;
-import forge.Singletons;
+import forge.gui.CardPicturePanel;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
 import forge.gui.toolbox.special.CardZoomer;
@@ -32,53 +35,59 @@ import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 
 /**
- * Controls the card picture panel in the match UI.
+ * Singleton controller for VPicture.
+ * <p>
+ * Can be used to display images associated with a {@code Card} or 
+ * {@code InventoryItem} in {@code CardPicturePanel}.<br>
+ * <br>
+ * Can also be used to display details associated with a {@code Card}.
  * 
- * <br><br><i>(C at beginning of class name denotes a control class.)</i>
+ * @version: $Id:$
+ * 
  */
 public enum CPicture implements ICDoc {
     SINGLETON_INSTANCE;
+    
+    // For brevity, local shortcuts to singletons & child controls...
+    private final VPicture view = VPicture.SINGLETON_INSTANCE;
+    private final CardPicturePanel picturePanel = this.view.getPnlPicture();
+    private final JLabel flipIndicator = this.view.getLblFlipcard();
+    private final CardZoomer zoomer = CardZoomer.SINGLETON_INSTANCE;
 
     private Card currentCard = null;
-    private boolean flipped = false;
-    private boolean canFlip = false;
-    private boolean cameFaceDown = false; 
+    private CardCharacteristicName displayedState = CardCharacteristicName.Original;
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
-     * @param c
-     *            &emsp; Card object
      */
-    public void showCard(final Card c, boolean showFlipped) {
-        cameFaceDown = c.isFaceDown() && Singletons.getControl().mayShowCard(c);
-        canFlip = c.isDoubleFaced() || c.isFlipCard() || cameFaceDown;
-        currentCard = c;
-        flipped = canFlip && (c.getCurState() == CardCharacteristicName.Transformed ||
-                              c.getCurState() == CardCharacteristicName.Flipped || 
-                              c.getCurState() == CardCharacteristicName.FaceDown); 
-        VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(canFlip);
-        VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(c);
-                
-        if ( showFlipped && canFlip )
-            flipCard();
+    public void showCard(final Card c, boolean showFlipped) {       
+        currentCard = c; 
+        displayedState = c.getCurState();
+        flipIndicator.setVisible(isCurrentCardFlippable());
+        picturePanel.setCard(c);                
+        if (showFlipped && isCurrentCardFlippable()) { 
+            flipCard(); 
+        }
     }
-
-    public void showCard(final InventoryItem item) {
+    
+    /**
+     * Displays image associated with either a {@code Card} 
+     * or {@code InventoryItem} instance.
+     */
+    public void showImage(final InventoryItem item) {       
         if (item instanceof IPaperCard) {
-            Card c = ((IPaperCard)item).getMatchingForgeCard();
-            if (((IPaperCard)item).isFoil() && c.getFoil() == 0) {
+            IPaperCard paperCard = ((IPaperCard)item);
+            Card c = paperCard.getMatchingForgeCard();
+            if (paperCard.isFoil() && c.getFoil() == 0) {
                 c.setRandomFoil();
             }
             showCard(c, false);
-            return;
+        } else {
+            currentCard = null;
+            flipIndicator.setVisible(false);
+            picturePanel.setCard(item);
         }
-        
-        canFlip = false;
-        flipped = false;
-        currentCard = null;
-        VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(false);
-        VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(item);
     }
 
     public Card getCurrentCard() {
@@ -92,94 +101,124 @@ public enum CPicture implements ICDoc {
 
     @Override
     public void initialize() {
+        setMouseWheelListener();
+        setMouseButtonListener();
+    }
+    
+    /**
+     * Adds a mouse button listener to CardPicturePanel.
+     * <p><ul>
+     * <li>Shows the displayed card in the zoomer while the middle mouse button or
+     * both left and right buttons are held down simultaneously.
+     * <li>Displays the alternate image for applicable cards on mouse click.
+     */
+    private void setMouseButtonListener() {
         
-        VPicture.SINGLETON_INSTANCE.getPnlPicture().addMouseWheelListener(new MouseWheelListener() {            
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent arg0) {
-                if (arg0.getWheelRotation() < 0) {
-                    CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(currentCard);
-                }
-            }
-        });
-
-        VPicture.SINGLETON_INSTANCE.getPnlPicture().addMouseListener(new MouseAdapter() {
+        this.picturePanel.addMouseListener(new MouseAdapter() {
             private final boolean[] buttonsDown = new boolean[4];
 
             @Override
-            public void mousePressed(final MouseEvent e) {
-                final int button = e.getButton();
-                if (button < 1 || button > 3) {
-                    return;
-                }
-                this.buttonsDown[button] = true;
-
-                if (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3])) {
-                    //zoom card when middle mouse button down or both left and right mouse buttons down
-                    CardZoomer.SINGLETON_INSTANCE.displayZoomedCard(currentCard, true);
-                }
+            public void mousePressed(final MouseEvent e) {                
+                if (isCardDisplayed()) {
+                    final int button = e.getButton();
+                    if (button < 1 || button > 3) {
+                        return;
+                    }
+                    this.buttonsDown[button] = true;
+                    if (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3])) {
+                        zoomer.doMouseButtonZoom(currentCard, displayedState);                        
+                    }                    
+                }                
             }
 
             @Override
-            public void mouseReleased(final MouseEvent e) {
-                final int button = e.getButton();
-                if (button < 1 || button > 3) {
-                    return;
-                }
-                if (!this.buttonsDown[button]) {
-                    return;
-                }
-                this.buttonsDown[button] = false;
-
-                if (CardZoomer.SINGLETON_INSTANCE.isZoomed()) {
-                    if (!this.buttonsDown[1] && !this.buttonsDown[2] && !this.buttonsDown[3]) {
-                        //don't stop zooming until all mouse buttons released
-                        CardZoomer.SINGLETON_INSTANCE.closeZoomer();
+            public void mouseReleased(final MouseEvent e) {                
+                if (isCardDisplayed()) {
+                    final int button = e.getButton();
+                    if (button < 1 || button > 3) {
+                        return;
                     }
-                    return; //don't handle click event below if zoom was open
-                }
+                    if (!this.buttonsDown[button]) {
+                        return;
+                    }
+                    this.buttonsDown[button] = false;
 
-                if (button == 1) {
-                    flipCard();
+                    if (zoomer.isZoomerOpen()) {
+                        if (!this.buttonsDown[1] && !this.buttonsDown[2] && !this.buttonsDown[3]) {
+                            //don't stop zooming until all mouse buttons released
+                            zoomer.closeZoomer();
+                        }
+                        return; //don't handle click event below if zoom was open
+                    }
+
+                    if (button == 1) {
+                        flipCard();
+                    }                    
+                }                
+            }
+        });
+    }
+
+    /**
+     * Adds a mouse wheel listener to CardPicturePanel.
+     * <p>
+     * Shows the displayed card in the zoomer if the mouse wheel is rotated
+     * while the mouse pointer is hovering over the image.
+     */
+    private void setMouseWheelListener() {
+        picturePanel.addMouseWheelListener(new MouseWheelListener() {            
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent arg0) {                
+                if (isCardDisplayed()) {
+                    if (arg0.getWheelRotation() < 0) {                        
+                        zoomer.doMouseWheelZoom(currentCard, displayedState);
+                    }
                 }
             }
         });
+    }
+
+    private boolean isCardDisplayed() {
+        return (currentCard != null);
     }
 
     @Override
     public void update() {
     }
-
+ 
     public void flipCard() {
-        if (!canFlip || null == currentCard) { return; }
-        
-        flipped = !flipped;
-        
-        final CardCharacteristicName newState;
-        if (flipped) {
-            if (currentCard.isDoubleFaced()) {
-                newState = CardCharacteristicName.Transformed;
-            } else if (currentCard.isFlipCard()) {
-                newState = CardCharacteristicName.Flipped;
-            } else if ( cameFaceDown ) { 
-                newState = CardCharacteristicName.FaceDown;
-            } else {
-                // if this is hit, then then showCard has been modified to handle additional types, but
-                // this function is missing an else if statement above
-                throw new RuntimeException("unhandled flippable card");
-            }
-        } else {
-            newState = CardCharacteristicName.Original;
-        }
-
-        CardCharacteristicName oldState = currentCard.getCurState();
-        if (oldState != newState) { 
-            currentCard.setState(newState);
-        }
-        
-        CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
-        VPicture.SINGLETON_INSTANCE.getPnlPicture().setImage();
-        if (oldState != newState) {
-            currentCard.setState(oldState);
+        if (isCurrentCardFlippable()) {
+            displayedState = CardUtil.getAlternateState(currentCard, displayedState);
+            picturePanel.setCardImage(displayedState);            
+            setCardDetailPanel();
         }
     }
+    
+    /**
+     * Displays details about the current card state in appropriate GUI panel.
+     * <p>
+     * It does this by temporarily setting the {@code CardCharacteristicName} state
+     * of the card, extracting the details and then setting the card back to its
+     * original state.
+     * <p>
+     * TODO: at the moment setting the state of {@code Card} does not appear to
+     * trigger any significant functionality but potentially this could cause
+     * unforeseen consequences. Recommend that a read-only mechanism is implemented
+     * to get card details for a given {@code CardCharacteristicName} state that does
+     * not require temporarily setting state of {@code Card} instance. 
+     */
+    private void setCardDetailPanel() {
+        CardCharacteristicName temp = currentCard.getCurState();
+        currentCard.setState(displayedState);
+        CDetail.SINGLETON_INSTANCE.showCard(currentCard);
+        currentCard.setState(temp);
+    }
+    
+    private boolean isCurrentCardFlippable() {
+        boolean isFlippableMorph = 
+                currentCard.isFaceDown() && CardUtil.isAuthorizedToViewFaceDownCard(currentCard);
+        return (currentCard != null) & 
+               (currentCard.isDoubleFaced() || currentCard.isFlipCard() || isFlippableMorph);
+    }
+        
 }

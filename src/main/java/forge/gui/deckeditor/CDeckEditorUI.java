@@ -85,7 +85,7 @@ public enum CDeckEditorUI {
      */
     public void setCard(final InventoryItem item) {
         CDetail.SINGLETON_INSTANCE.showCard(item);
-        CPicture.SINGLETON_INSTANCE.showCard(item);
+        CPicture.SINGLETON_INSTANCE.showImage(item);
     }
 
     //========= Accessor/mutator methods

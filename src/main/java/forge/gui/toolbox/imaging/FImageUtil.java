@@ -22,17 +22,27 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 
 import forge.Card;
+import forge.CardCharacteristicName;
 import forge.ImageCache;
 import forge.gui.toolbox.CardFaceSymbols;
 
 /**
  * Common image-related routines specific to Forge images. 
  * 
- * @version $Id:$
+ * @version $Id$
  * 
  */
 public final class FImageUtil {  
     private FImageUtil() {}
+    
+    public static BufferedImage getImage(Card card, CardCharacteristicName state) {       
+        BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(state), true);
+        int foilIndex = card.getFoil();
+        if (image != null && foilIndex > 0) { 
+            image = getImageWithFoilEffect(image, foilIndex);
+        }
+        return image;
+    }
     
     /**
      * Gets the image associated with a card.

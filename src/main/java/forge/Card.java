@@ -480,7 +480,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isSplitCard() { 
         return characteristicsMap.containsKey(CardCharacteristicName.LeftSplit);
     }
-
+        
     /**
      * Checks if is cloned.
      * 
@@ -7686,6 +7686,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final String getImageKey() {
         return this.getCharacteristics().getImageKey();
     }
+    
+    public String getImageKey(CardCharacteristicName state) {
+        CardCharacteristics c = this.characteristicsMap.get(state);
+        return (c != null ? c.getImageKey() : "");
+    }    
 
     /**
      * <p>

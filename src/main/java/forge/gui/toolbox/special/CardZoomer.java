@@ -18,116 +18,329 @@
 
 package forge.gui.toolbox.special;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
+import forge.CardCharacteristicName;
+import forge.CardUtil;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.imaging.FImagePanel;
 import forge.gui.toolbox.imaging.FImageUtil;
 import forge.gui.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 
 /** 
- * Displays card image at its original size.
+ * Displays card image at its original size and correct orientation.
+ * <p>
+ * Supports split, flip and double-sided cards as well as cards that
+ * can be played face-down (eg. morph).
  *
- * @version $Id:
+ * @version $Id$
  * 
  */
 public enum CardZoomer {
     SINGLETON_INSTANCE;    
 
+    // Gui controls
     private final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
-    private Card thisCard;
     private JPanel pnlMain;
-    private boolean temporary, zoomed;
+    private FImagePanel imagePanel;
+    private JLabel lblFlipcard = new JLabel(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));    
+        
+    // Details about the current card being displayed.
+    private Card thisCard;
+    private CardCharacteristicName cardState = CardCharacteristicName.Original;
+    private boolean isImageFlipped = false;
+    private boolean isFaceDownCard = false;
+     
+    // The zoomer is in button mode when it is activated by holding down the
+    // middle mouse button or left and right mouse buttons simultaneously.
+    private boolean isButtonMode = false;    
+    private boolean isOpen = false;
     private long lastClosedTime;
+                           
+    // Used to ignore mouse wheel rotation for a short period of time.
+    private Timer mouseWheelCoolDownTimer;
+    private boolean isMouseWheelEnabled = false;    
     
+    // ctr
     private CardZoomer() {        
-        setupMouseListeners();
-        setupKeyListeners();
+        setMouseButtonListener();
+        setMouseWheelListener();
+        setKeyListeners();
     }
     
-    private void setupKeyListeners() {
+    /**
+     * Creates listener for keys that are recognised by zoomer.
+     * <p><ul>
+     * <li>ESC will close zoomer in mouse-wheel mode only.
+     * <li>CTRL will flip or transform card in either mode if applicable.
+     */
+    private void setKeyListeners() {
         overlay.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (!temporary && e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                    closeZoomer();                   
-                }                
+                if (!isButtonMode) {
+                    if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                        closeZoomer();
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
+                    toggleCardImage();
+                }
             }        
         });
     }
 
-    private void setupMouseListeners() {
+    /**
+     * Creates listener for mouse button events.
+     * <p>
+     *  NOTE: Needed even if ButtonMode to prevent Zoom getting stuck open on certain systems.
+     */
+    private void setMouseButtonListener() {
         overlay.addMouseListener(new MouseAdapter() {            
             @Override
             public void mouseReleased(MouseEvent e) {
-                closeZoomer(); //NOTE: Needed even if temporary to prevent Zoom getting stuck open on certain systems
+                closeZoomer();
             }
         });
-
-        overlay.addMouseWheelListener(new MouseWheelListener() {
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent e) {
-                if (!temporary && e.getWheelRotation() > 0) {
-                    closeZoomer();
-                } 
-            }
-        });
-    }
-
-    public boolean isZoomed() {
-        return zoomed;
-    }
-
-    public void displayZoomedCard(Card card) {
-        displayZoomedCard(card, false);
-    }
-
-    public void displayZoomedCard(Card card, boolean temp) {
-        if (zoomed || System.currentTimeMillis() - lastClosedTime < 250) {
-            return; //don't display zoom if already zoomed or just closed zoom (handles mouse wheeling while middle clicking)
-        }
-        thisCard = card;
-        temporary = temp;
-        setLayout();
-        setImage();        
-        SOverlayUtils.showOverlay();
-        zoomed = true;
     }
     
+    /**
+     * Creates listener for mouse wheel events.
+     * <p>
+     * If the zoomer is opened using the mouse wheel then additional
+     * actions can be performed dependent on the card type -
+     * <p><ul>
+     * <li>If mouse wheel is rotated back then close zoomer.
+     * <li>If mouse wheel is rotated forward and...<ul>
+     *   <li>if image is a flip card then rotate 180 degrees.
+     *   <li>if image is a double-sided card then show other side. 
+     */
+    private void setMouseWheelListener() {
+        overlay.addMouseWheelListener(new MouseWheelListener() {                        
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                if (!isButtonMode) {
+                    if (isMouseWheelEnabled) {
+                        isMouseWheelEnabled = false;
+                        if (e.getWheelRotation() > 0) {
+                            closeZoomer();
+                        } else {
+                            toggleCardImage();
+                            startMouseWheelCoolDownTimer(250);                        
+                        }                                                        
+                    }                                    
+                }
+            }                                    
+        });
+    }
+    
+    /**
+     * Opens zoomer in mouse wheel mode and displays the image associated with
+     * the given card based on its current {@code CardCharacteristicName} state.
+     * <p>
+     * This method should be called if the zoomer is activated by rotating the mouse wheel.
+     */
+    public void doMouseWheelZoom(Card newCard) {
+        doMouseWheelZoom(newCard, newCard.getCurState());
+    }
+    
+    /**
+     * Opens zoomer in mouse wheel mode and displays the image associated with
+     * the given card based on the specified {@code CardCharacteristicName} state.
+     * <p>
+     * This method should be called if the zoomer is activated by rotating the mouse wheel. 
+     */
+    public void doMouseWheelZoom(Card newCard, CardCharacteristicName state) {
+        isButtonMode = false;
+        isFaceDownCard = (state == CardCharacteristicName.FaceDown);
+        cardState = state;
+        displayCard(newCard);
+        startMouseWheelCoolDownTimer(200);          
+    }
+
+    /**
+     * Opens zoomer in mouse button mode and displays the image associated with
+     * the given card based on its current {@code CardCharacteristicName} state.
+     * <p>
+     * This method should be called if the zoomer is activated by holding down
+     * the middle mouse button or left and right mouse buttons simultaneously.
+     */
+    public void doMouseButtonZoom(Card newCard) {
+        doMouseButtonZoom(newCard, newCard.getCurState());
+    }
+    
+    /**
+     * Opens zoomer in mouse button mode and displays the image associated with
+     * the given card based on the specified {@code CardCharacteristicName} state.
+     * <p>
+     * This method should be called if the zoomer is activated by holding down
+     * the middle mouse button or left and right mouse buttons simultaneously.
+     */    
+    public void doMouseButtonZoom(Card newCard, CardCharacteristicName state) {        
+        
+        // don't display zoom if already zoomed or just closed zoom 
+        // (handles mouse wheeling while middle clicking)
+        if (isOpen || System.currentTimeMillis() - lastClosedTime < 250) {
+            return;
+        }        
+        
+        isButtonMode = true;        
+        isFaceDownCard = (state == CardCharacteristicName.FaceDown);
+        cardState = state;                
+        displayCard(newCard);        
+    }
+    
+    public boolean isZoomerOpen() {
+        return isOpen;
+    }
+    
+    private void displayCard(Card card) {
+        isMouseWheelEnabled = false;
+        isImageFlipped = false;       
+        thisCard = card;
+        setLayout();
+        setImage();         
+        SOverlayUtils.showOverlay();
+        isOpen = true;
+    }
+    
+    /**
+     * Displays a graphical indicator that shows whether the current card can be flipped or transformed.
+     */
+    private void setFlipIndicator() {
+        boolean isFaceDownFlippable = (isFaceDownCard && CardUtil.isAuthorizedToViewFaceDownCard(thisCard)); 
+        if (thisCard.isFlipCard() || thisCard.isDoubleFaced() || isFaceDownFlippable ) {
+            imagePanel.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));        
+            imagePanel.add(lblFlipcard, "pos (100% - 100px) 0");
+        }                    
+    }
+    
+    /**
+     * Needs to be called whenever the source image changes.
+     */
     private void setImage() {
-        FImagePanel imagePanel = new FImagePanel();
-        imagePanel.setImage(FImageUtil.getImage(thisCard), getInitialRotation(), AutoSizeImageMode.SOURCE);
-        pnlMain.add(imagePanel, "w 80%!, h 80%!");
+        imagePanel = new FImagePanel();
+        imagePanel.setImage(getImageFromCache(), getInitialRotation(), AutoSizeImageMode.SOURCE);
+        pnlMain.removeAll();
+        pnlMain.add(imagePanel, "w 80%!, h 80%!");        
+        pnlMain.validate();
+        setFlipIndicator();        
+    }
+    
+    private BufferedImage getImageFromCache() {        
+        return FImageUtil.getImage(thisCard, cardState); 
     }
         
     private int getInitialRotation() {
         return (thisCard.isSplitCard() ? 90 : 0);
     }   
-        
+    
     private void setLayout() {
         overlay.removeAll();
-
         pnlMain = new JPanel();
         pnlMain.setOpaque(false);
-               
         overlay.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));
         pnlMain.setLayout(new MigLayout("insets 0, wrap, align center"));
-
         overlay.add(pnlMain, "w 100%!, h 100%!");
     }
 
     public void closeZoomer() {
-        if (!zoomed) { return; }
-        zoomed = false;
+        if (!isOpen) { return; }
+        stopMouseWheelCoolDownTimer();        
+        isOpen = false;
         SOverlayUtils.hideOverlay();
         lastClosedTime = System.currentTimeMillis();
     }
+    
+    /**
+     * If the zoomer is ativated using the mouse wheel then ignore
+     * wheel for a short period of time after opening. This will 
+     * prevent flip and double side cards from immediately flipping.
+     */
+    private void startMouseWheelCoolDownTimer(int millisecsDelay) {        
+        isMouseWheelEnabled = false;
+        createMouseWheelCoolDownTimer(millisecsDelay);
+        mouseWheelCoolDownTimer.setInitialDelay(millisecsDelay);
+        mouseWheelCoolDownTimer.restart();           
+    }
+    
+    /**
+     * Used to ignore mouse wheel rotation for {@code millisecsDelay} milliseconds.
+     */
+    private void createMouseWheelCoolDownTimer(int millisecsDelay) {
+        if (mouseWheelCoolDownTimer == null) {           
+            mouseWheelCoolDownTimer = new Timer(millisecsDelay, new ActionListener() {                
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    isMouseWheelEnabled = true;                
+                }
+            });
+        }
+    }
+    
+    private void stopMouseWheelCoolDownTimer() {
+        if (mouseWheelCoolDownTimer != null && mouseWheelCoolDownTimer.isRunning()) {
+            mouseWheelCoolDownTimer.stop();
+        }        
+    }
+        
+    /**
+     * Toggles between primary and alternate image associated with card if applicable.
+     */
+    private void toggleCardImage() {
+        if (thisCard.isFlipCard()) {
+            toggleFlipCard();
+        } else if (thisCard.isDoubleFaced()) {
+            toggleDoubleFacedCard();
+        } else if (isFaceDownCard) {                           
+            toggleFaceDownCard();
+        }
+    }
+            
+    /**
+     * Flips image by rotating 180 degrees each time.
+     * <p>
+     * No need to get the alternate card image from cache.
+     * Can simply rotate current card image in situ to get same effect.
+     */
+    private void toggleFlipCard() {                
+        isImageFlipped = !isImageFlipped;               
+        imagePanel.setRotation(isImageFlipped ? 180 : 0);        
+    }
+    
+    /**
+     * Toggles between the front and back image of a card that can be
+     * played face-down (eg. morph).
+     * <p>
+     * Uses constraint that prevents a player from identifying opponent's face-down cards.
+     */
+    private void toggleFaceDownCard() {
+        cardState = CardUtil.getAlternateState(thisCard, cardState);        
+        setImage();
+    }
+            
+    /**
+     * Toggles between the front and back image of a double-sided card.
+     */
+    private void toggleDoubleFacedCard() {
+        cardState = CardUtil.getAlternateState(thisCard, cardState);
+        setImage();
+    }
+       
 }

@@ -17,7 +17,12 @@ Window will be made accessible even if monitor setup or screen resolution is dif
 
 
 - Card Zoomer Updates -
-Split cards (name contains "//") are now rotated 90 degrees for easier viewing.
+- The Card Zoomer/Preview now supports split, flip and double-sided cards including cards played face down (eg. morph).
+- Split cards (name contains "//") are now rotated 90 degrees for easier viewing.
+- If a card is a flip- or double-sided card then you can easily view the alternate image using...
+  - wheel mode : flick wheel forward or tap CTRL key.
+  - button mode : tap CTRL key.
+- The standard flip graphic (the two rotated arrows) is displayed if the card can be flipped or transformed.
 
 
 - Home Screen UI Improvements -

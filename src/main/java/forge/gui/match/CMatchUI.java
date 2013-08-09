@@ -276,7 +276,7 @@ public enum CMatchUI {
 
     public void setCard(final InventoryItem c) {
         CDetail.SINGLETON_INSTANCE.showCard(c);
-        CPicture.SINGLETON_INSTANCE.showCard(c);
+        CPicture.SINGLETON_INSTANCE.showImage(c);
     }
     
     private int getPlayerIndex(Player player) {

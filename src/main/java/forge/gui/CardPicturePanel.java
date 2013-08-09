@@ -24,6 +24,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import forge.Card;
+import forge.CardCharacteristicName;
 import forge.ImageCache;
 import forge.gui.toolbox.imaging.FImagePanel;
 import forge.gui.toolbox.imaging.FImageUtil;
@@ -51,22 +52,30 @@ public final class CardPicturePanel extends JPanel {
         this.add(this.panel);
     }
 
-    public void update() {
-        this.setImage();
-    }
-
     public void setCard(final InventoryItem cp) {
         this.displayed = cp;
-        update();
+        this.setImage();
     }
 
     //@Override
     public void setCard(final Card c) {
         this.displayed = c;
-        update();
+        this.setImage();
+    }
+    
+//    public Card getCard() {
+//        return (Card)displayed;
+//    }
+    
+    public void setCardImage(CardCharacteristicName flipState) {        
+        BufferedImage image = FImageUtil.getImage((Card)displayed, flipState);
+        if (image != null && image != this.currentImage) {
+            this.currentImage = image;
+            this.panel.setImage(image);
+        }              
     }
 
-    public void setImage() {        
+    public void setImage() {                
         BufferedImage image = getImage();
         if (image != null && image != this.currentImage) {
             this.currentImage = image;
