@@ -44,7 +44,6 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.listview.SColumnUtil.ColumnName;
 import forge.gui.listview.SColumnUtil.SortState;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 
 /**
@@ -110,57 +109,14 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
             }
         }
     }
-
+    
     /**
-     * Clears all data in the model.
-     */
-    public void clear() {
-        this.model.clear();
-    }
-
-    /**
-     * Gets all cards in the model.
+     * Gets all items in the model.
      * 
-     * @return the cards
+     * @return ItemPoolView<T>
      */
-    public ItemPoolView<T> getCards() {
-        return this.model.getView();
-    }
-
-    /**
-     * Removes a card from the model.
-     * 
-     * @param card0 &emsp; {@link forge.Card} object
-     */
-    public void removeCard(final T card0, int qty) {
-        if ( isInfinite() ) 
-            return;
-
-        final boolean wasThere = this.model.count(card0) > 0;
-        if (wasThere) {
-            this.model.remove(card0, qty);
-            this.fireTableDataChanged();
-        }
-    }
-
-    /**
-     * Adds a card to the model.
-     * 
-     * @param card0 &emsp; {@link forge.Card} object.
-     */
-    public void addCard(final T card0, int qty) {
-        this.model.add(card0, qty);
-        this.fireTableDataChanged();
-    }
-
-    /**
-     * Adds multiple copies of multiple cards to the model.
-     * 
-     * @param cards0 &emsp; {@link java.lang.Iterable}<Entry<T, Integer>>
-     */
-    public void addCards(final Iterable<Entry<T, Integer>> cards0) {
-        this.model.addAll(cards0);
-        this.fireTableDataChanged();
+    public ItemPoolView<T> getItems() {
+        return this.model.getItems();
     }
 
     /**
@@ -170,7 +126,7 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
      *            the row
      * @return the entry
      */
-    public Entry<T, Integer> rowToCard(final int row) {
+    public Entry<T, Integer> rowToItem(final int row) {
         final List<Entry<T, Integer>> model = this.model.getOrderedList();
         return (row >= 0) && (row < model.size()) ? model.get(row) : null;
     }
@@ -181,10 +137,10 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
      * @param table
      *            the table
      */
-    public void showSelectedCard(final JTable table) {
+    public void showSelectedItem(final JTable table) {
         final int row = table.getSelectedRow();
         if (row != -1) {
-            Entry<T, Integer> card = this.rowToCard(row);
+            Entry<T, Integer> card = this.rowToItem(row);
             CDeckEditorUI.SINGLETON_INSTANCE.setCard(null != card ? card.getKey() : null);
         }
     }
@@ -200,7 +156,7 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
             @Override
             public void valueChanged(final ListSelectionEvent arg0) {
                 if (table.isFocusOwner()) {
-                    ListViewTableModel.this.showSelectedCard(table);
+                    ListViewTableModel.this.showSelectedItem(table);
                 }
             }
         });
@@ -208,7 +164,7 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
         table.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(final FocusEvent e) {
-                ListViewTableModel.this.showSelectedCard(table);
+                ListViewTableModel.this.showSelectedItem(table);
             }
         });
 
@@ -223,10 +179,10 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                SListViewIO.savePreferences();
+                SListViewIO.savePreferences(ListViewTableModel.this.table);
             }
         });
-    } // addCardListener()
+    } // addItemListener()
 
     /**
      * Resort.
@@ -257,7 +213,7 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
         if (ListViewTableModel.this.table.getRowCount() > 0) {
             ListViewTableModel.this.table.setRowSelectionInterval(0, 0);
         }
-        SListViewIO.savePreferences();
+        SListViewIO.savePreferences(ListViewTableModel.this.table);
     }
 
     //========== Overridden from AbstractTableModel
@@ -289,7 +245,7 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
     @Override
     @SuppressWarnings("unchecked")
     public Object getValueAt(int iRow, int iCol) {
-        Entry<T, Integer> card = this.rowToCard(iRow);
+        Entry<T, Integer> card = this.rowToItem(iRow);
         if (null == card) {
             return null;
         }
@@ -382,16 +338,4 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
                     (Entry<InventoryItem, Integer>) o1, (Entry<InventoryItem, Integer>) o2);
         }
     }
-
-    /**
-     * Sets whether this table's pool of cards is in infinite supply.  If false, cards in the
-     * table have a limited number of copies.
-     */
-    public void setInfinite(boolean infinite) {
-        this.infiniteSupply = infinite;
-    }
-
-    public boolean isInfinite() {
-        return infiniteSupply;
-    }
-} // CardTableModel
+} // ListViewTableModel

@@ -14943,7 +14943,6 @@ src/main/java/forge/gui/input/InputSelectTargets.java -text
 src/main/java/forge/gui/input/InputSynchronized.java -text
 src/main/java/forge/gui/input/InputSyncronizedBase.java -text
 src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
-src/main/java/forge/gui/listview/ACEditorBase.java -text
 src/main/java/forge/gui/listview/AlwaysShowToolTip.java -text
 src/main/java/forge/gui/listview/IListItemView.java -text
 src/main/java/forge/gui/listview/ITableContainer.java -text

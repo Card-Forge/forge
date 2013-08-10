@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.swing.JTable;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
@@ -87,8 +88,8 @@ public class SListViewIO {
     }
 
     /** Publicly-accessible save method, to neatly handle exception handling. */
-    public static void savePreferences() {
-        try { save(); }
+    public static void savePreferences(JTable table) {
+        try { save(table); }
         catch (final Exception e) { e.printStackTrace(); }
     }
 
@@ -100,12 +101,11 @@ public class SListViewIO {
 
     /**
      * 
-     * TODO: Write javadoc for this method.
+     * Save list view
      * 
-     * @param <TItem> extends InventoryItem
-     * @param <TModel> extends DeckBase
+     * @param table
      */
-    private static void save() throws Exception {
+    private static void save(JTable table) throws Exception {
         final XMLOutputFactory out = XMLOutputFactory.newInstance();
         final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(NewConstants.EDITOR_PREFERENCES_FILE.userPrefLoc));
 
@@ -129,7 +129,7 @@ public class SListViewIO {
         for (final ColumnName c : COLS.keySet()) {
             // If column is not in view, retain previous model index for the next time
             // that the column will be in the view.
-            int index = SColumnUtil.getColumnViewIndex(c);
+            int index = SColumnUtil.getColumnViewIndex(table, c);
             if (index == -1) {
                 index = COLS.get(c).getModelIndex();
             }

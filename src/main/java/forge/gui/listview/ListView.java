@@ -17,38 +17,20 @@
  */
 package forge.gui.listview;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.KeyboardFocusManager;
-import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JViewport;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-
 import com.google.common.base.Predicate;
+
+
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.gui.listview.ITableContainer;
-import forge.gui.listview.SListViewUtil;
-import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -62,11 +44,14 @@ import forge.util.Aggregates;
  *            the generic type
  */
 @SuppressWarnings("serial")
-public final class ListView<T extends InventoryItem> extends JPanel {
+public final class ListView<T extends InventoryItem> extends JViewport {
+    private ItemPool<T> pool;
     private ListViewModel<T> model;
-    private final JTable table;
+    private final ListViewTable<T> table;
+    private Predicate<T> filter = null;
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
+    private final Class<T> genericType;
 
     /**
      * 
@@ -83,8 +68,8 @@ public final class ListView<T extends InventoryItem> extends JPanel {
      * 
      * @param type0 the class of item that this table will contain
      */
-    public ListView(final Class<T> type0) {
-        this(false, type0);
+    public ListView(final Class<T> genericType0) {
+        this(genericType0, false);
     }
 
     /**
@@ -93,278 +78,65 @@ public final class ListView<T extends InventoryItem> extends JPanel {
      * @param forceUnique whether this table should display only one item with the same name
      * @param type0 the class of item that this table will contain
      */
-    @SuppressWarnings("serial")
-    public ListView(final boolean forceUnique, final Class<T> genericType) {
-        this.model = new ListViewModel<T>(genericType);
-        this.wantUnique = forceUnique;
-
-        // subclass JTable to show tooltips when hovering over column headers
-        // and cell data that are truncated due to too-small column widths
-        table = new JTable() {
-            private String _getCellTooltip(
-                    TableCellRenderer renderer, int row, int col, Object val) {
-                Component cell = renderer.getTableCellRendererComponent(
-                                        table, val, false, false, row, col);
-                
-                // if we're conditionally showing the tooltip, check to see
-                // if we shouldn't show it
-                if (!(cell instanceof AlwaysShowToolTip))
-                {
-                    // if there's enough room (or there's no value), no tooltip
-                    // we use '>' here instead of '>=' since that seems to be the
-                    // threshold for where the ellipses appear for the default
-                    // JTable renderer
-                    int requiredWidth = cell.getPreferredSize().width;
-                    TableColumn tableColumn = columnModel.getColumn(col);
-                    if (null == val || tableColumn.getWidth() > requiredWidth) {
-                        return null;
-                    }
-                }
-
-                // use a pre-set tooltip if it exists
-                if (cell instanceof JComponent)
-                {
-                    JComponent jcell = (JComponent)cell;
-                    String tip = jcell.getToolTipText();
-                    if (null != tip)
-                    {
-                        return tip;
-                    }
-                }
-
-                // otherwise, show the full text in the tooltip
-                return String.valueOf(val);
-            }
-            
-            // column headers
-            @Override
-            protected JTableHeader createDefaultTableHeader() {
-                return new JTableHeader(columnModel) {
-                    public String getToolTipText(MouseEvent e) {
-                        int col = columnModel.getColumnIndexAtX(e.getPoint().x);
-                        TableColumn tableColumn = columnModel.getColumn(col);
-                        TableCellRenderer headerRenderer = tableColumn.getHeaderRenderer();
-                        if (null == headerRenderer) {
-                            headerRenderer = getDefaultRenderer();
-                        }
-                        
-                        return _getCellTooltip(
-                                headerRenderer, -1, col, tableColumn.getHeaderValue());
-                    }
-                };
-            }
-            
-            // cell data
-            @Override
-            public String getToolTipText(MouseEvent e) {
-                Point p = e.getPoint();
-                int row = rowAtPoint(p);
-                int col = columnAtPoint(p);
-                
-                if (col >= table.getColumnCount() || row >= table.getRowCount()) {
-                    return null;
-                }
-                
-                Object val = table.getValueAt(row, col);
-                if (null == val) {
-                    return null;
-                }
-                
-                return _getCellTooltip(getCellRenderer(row, col), row, col, val);
-            }
-            
-            private int   lastTooltipRow = -1;
-            private int   lastTooltipCol = -1;
-            private Point lastTooltipPt;
-            
-            @Override
-            public Point getToolTipLocation(MouseEvent e) {
-                Point p = e.getPoint();
-                final int row = rowAtPoint(p);
-                final int col = columnAtPoint(p);
-                if (row == lastTooltipRow && col == lastTooltipCol) {
-                    p = lastTooltipPt;
-                } else {
-                    lastTooltipRow = row;
-                    lastTooltipCol = col;
-                    lastTooltipPt  = p;
-                }
-                return new Point(p.x + 10, p.y + 20);
-            }
-        };
-
-        // use different selection highlight colors for focused vs. unfocused tables
-        table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
-        table.setSelectionForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        table.addFocusListener(new FocusListener() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (!e.isTemporary()) {
-                    table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
-                }
-            }
-            
-            @Override
-            public void focusGained(FocusEvent e) {
-                table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
-                // if nothing selected when we gain focus, select the first row (if exists)
-                if (-1 == table.getSelectedRow() && 0 < table.getRowCount()) {
-                    table.setRowSelectionInterval(0, 0);
-                }
-            }
-        });
-        
-        table.setFont(FSkin.getFont(12));
-        table.setBorder(null);
-        table.getTableHeader().setBorder(null);
-        table.setRowHeight(18);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
-        
-        // prevent tables from intercepting tab focus traversals
-        table.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
-        table.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
-    }
-
-    /**
-     * Applies a EditorTableModel and a model listener to this instance's JTable.
-     * 
-     * @param view0 &emsp; the {@link forge.gui.cardlistview.ITableCOntainer}
-     * @param cols0 &emsp; List<TableColumnInfo<InventoryItem>> of additional columns for this
-     */
-    public void setup(final ITableContainer view0, final List<TableColumnInfo<InventoryItem>> cols0) {
-        final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
-
-        for (TableColumnInfo<InventoryItem> item : cols0) {
-            item.setModelIndex(colmodel.getColumnCount());
-            if (item.isShowing()) { colmodel.addColumn(item); }
-        }
-
-        this.model = new ListViewTableModel<T>(this.table, this.genericType);
-        this.model.addListeners();
-        this.table.setModel(this.model);
-        this.table.setColumnModel(colmodel);
-
-        this.model.setup();
-        this.model.refreshSort();
-
-        this.table.getTableHeader().setBackground(new Color(200, 200, 200));
-
-        // Update stats each time table changes
-        this.model.addTableModelListener(new TableModelListener() {
-            @Override
-            public void tableChanged(final TableModelEvent ev) {
-                SListViewUtil.setStats(ListView.this.model.getCards(), view0);
-            }
-        });
-    }
-
-    public void setAvailableColumns(final List<TableColumnInfo<InventoryItem>> cols0) {
-        final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
-
-        for (TableColumnInfo<InventoryItem> item : cols0) {
-            item.setModelIndex(colmodel.getColumnCount());
-            if (item.isShowing()) { colmodel.addColumn(item); }
-        }
-
-        this.table.setColumnModel(colmodel);
+    public ListView(final Class<T> genericType0, final boolean wantUnique0) {
+        this.genericType = genericType0;
+        this.wantUnique = wantUnique0;
+        this.table = new ListViewTable<T>(this.model);
     }
 
     /**
      * 
-     * fixSelection. Call this after deleting an item from table.
+     * Sets the item pool.
      * 
-     * @param rowLastSelected
-     *            an int
+     * @param items
      */
-    public void fixSelection(final int rowLastSelected) {
-        if (0 > rowLastSelected) {
-            return;
-        }
-        
-        // 3 cases: 0 cards left, select the same row, select prev row
-        int numRows = model.getRowCount();
-        if (numRows == 0) {
-            return;
-        }
-        
-        int newRow = rowLastSelected;
-        if (numRows <= newRow) {
-            // move selection away from the last, already missing, option
-            newRow = numRows - 1;
-        }
-        
-        selectAndScrollTo(newRow);
+    public void setPool(final Iterable<InventoryItem> items) {
+        this.setPool(ItemPool.createFrom(items, this.genericType), false);
     }
 
     /**
      * 
-     * setDeck.
+     * Sets the item pool.
      * 
-     * @param cards
-     *            an Iterable<InventoryITem>
+     * @param pool0
      */
-    public void setDeck(final Iterable<InventoryItem> cards) {
-        this.setDeckImpl(ItemPool.createFrom(cards, this.genericType), false);
-    }
-
-    /**
-     * setDeck.
-     * 
-     * @param poolView
-     *            an ItemPoolView
-     */
-    public void setDeck(final ItemPoolView<T> poolView, boolean infinite) {
-        this.setDeckImpl(ItemPool.createFrom(poolView, this.genericType), infinite);
-
-    }
-    public void setDeck(final ItemPoolView<T> poolView) {
-        this.setDeck(poolView, false);
-    }
-    /**
-     * Sets the deck.
-     * 
-     * @param pool
-     *            the new deck
-     */
-    public void setDeck(final ItemPool<T> pool) {
-        this.setDeckImpl(pool, false);
+    public void setPool(final ItemPool<T> pool0) {
+        this.setPool(pool0, false);
     }
 
     /**
      * 
-     * setDeckImpl.
+     * Sets the item pool.
      * 
-     * @param thePool
-     *            an ItemPool
+     * @param pool0
+     * @param infinite
      */
-    protected void setDeckImpl(final ItemPool<T> thePool, boolean infinite) {
+    protected void setPool(final ItemPool<T> pool0, boolean infinite) {
         this.model.clear();
-        this.pool = thePool;
-        this.model.addCards(this.pool);
+        this.pool = pool0;
+        this.model.addItems(this.pool);
         this.model.setInfinite(infinite);
         this.updateView(true);
     }
 
     /**
      * 
-     * getSelectedCard.
+     * getSelectedItem.
      * 
      * @return InventoryItem
      */
-    public InventoryItem getSelectedCard() {
-        final int iRow = this.table.getSelectedRow();
-        return iRow >= 0 ? this.model.rowToCard(iRow).getKey() : null;
+    public InventoryItem getSelectedItem() {
+        return this.table.getSelectedItem();
     }
     
     /**
-     * returns all selected cards
+     * 
+     * getSelectedItems.
+     * 
+     * @return List<InventoryItem>
      */
-    public List<InventoryItem> getSelectedCards() {
-        List<InventoryItem> items = new ArrayList<InventoryItem>();
-        for (int row : table.getSelectedRows()) {
-            items.add(model.rowToCard(row).getKey());
-        }
-        return items;
+    public List<InventoryItem> getSelectedItems() {
+        return this.table.getSelectedItems();
     }
 
     private boolean isUnfiltered() {
@@ -376,7 +148,6 @@ public final class ListView<T extends InventoryItem> extends JPanel {
      * setFilter.
      * 
      * @param filterToSet
-     *            a Predicate
      */
     public void setFilter(final Predicate<T> filterToSet) {
         this.filter = filterToSet;
@@ -387,76 +158,76 @@ public final class ListView<T extends InventoryItem> extends JPanel {
 
     /**
      * 
-     * addCard.
+     * addItem.
      * 
-     * @param card
-     *            an InventoryItem
+     * @param item
+     * @param qty
      */
-    public void addCard(final T card, int qty) {
+    public void addItem(final T item, int qty) {
         final int n = this.table.getSelectedRow();
-        this.pool.add(card, qty);
+        this.pool.add(item, qty);
         if (this.isUnfiltered()) {
-            this.model.addCard(card, qty);
+            this.model.addItem(item, qty);
        }
         this.updateView(false);
-        this.fixSelection(n);
+        this.table.fixSelection(n);
     }
 
-    public void addCards(Iterable<Map.Entry<T, Integer>> cardsToAdd) {
+    public void addItems(Iterable<Map.Entry<T, Integer>> itemsToAdd) {
         final int n = this.table.getSelectedRow();
-        for (Map.Entry<T, Integer> item : cardsToAdd) {
+        for (Map.Entry<T, Integer> item : itemsToAdd) {
             this.pool.add(item.getKey(), item.getValue());
             if (this.isUnfiltered()) {
-                this.model.addCard(item.getKey(), item.getValue());
+                this.model.addItem(item.getKey(), item.getValue());
             }
         }
         this.updateView(false);
-        this.fixSelection(n);
+        this.table.fixSelection(n);
     }
     
-    public void addCards(Collection<T> cardsToAdd) {
+    public void addItems(Collection<T> itemsToAdd) {
         final int n = this.table.getSelectedRow();
-        for (T item : cardsToAdd) {
+        for (T item : itemsToAdd) {
             this.pool.add(item, 1);
             if (this.isUnfiltered()) {
-                this.model.addCard(item, 1);
+                this.model.addItem(item, 1);
             }
         }
         this.updateView(false);
-        this.fixSelection(n);
+        this.table.fixSelection(n);
     }
 
     /**
      * 
-     * removeCard.
+     * removeItem.
      * 
-     * @param card
+     * @param item
      *            an InventoryItem
      */
-    public void removeCard(final T card, int qty) {
+    public void removeItem(final T item, int qty) {
         final int n = this.table.getSelectedRow();
-        this.pool.remove(card, qty);
+        this.pool.remove(item, qty);
         if (this.isUnfiltered()) {
-            this.model.removeCard(card, qty);
+            this.model.removeItem(item, qty);
         }
         this.updateView(false);
-        this.fixSelection(n);
+        this.table.fixSelection(n);
     }
 
-    public void removeCards(List<Map.Entry<T, Integer>> cardsToRemove) {
+    public void removeItems(List<Map.Entry<T, Integer>> itemsToRemove) {
         final int n = this.table.getSelectedRow();
-        for (Map.Entry<T, Integer> item : cardsToRemove) {
+        for (Map.Entry<T, Integer> item : itemsToRemove) {
             this.pool.remove(item.getKey(), item.getValue());
             if (this.isUnfiltered()) {
-                this.model.removeCard(item.getKey(), item.getValue());
+                this.model.removeItem(item.getKey(), item.getValue());
             }
         }
         this.updateView(false);
-        this.fixSelection(n);
+        this.table.fixSelection(n);
     }
     
-    public int getCardCount(final T card) {
-        return model.isInfinite() ? Integer.MAX_VALUE : this.pool.count(card);
+    public int getItemCount(final T item) {
+        return model.isInfinite() ? Integer.MAX_VALUE : this.pool.count(item);
     }
     
     public Predicate<T> getFilter() {
@@ -479,28 +250,28 @@ public final class ListView<T extends InventoryItem> extends JPanel {
 
         if (useFilter && this.wantUnique) {
             Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filter, this.pool.FN_GET_KEY);
-            Iterable<Entry<T, Integer>> cards = Aggregates.uniqueByLast(Iterables.filter(this.pool, filterForPool), this.pool.FN_GET_NAME);
-            this.model.addCards(cards);
+            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(Iterables.filter(this.pool, filterForPool), this.pool.FN_GET_NAME);
+            this.model.addItems(items);
         } else if (useFilter) {
             Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filter, this.pool.FN_GET_KEY);
-            this.model.addCards(Iterables.filter(this.pool, pred));
+            this.model.addItems(Iterables.filter(this.pool, pred));
         } else if (this.wantUnique) {
-            Iterable<Entry<T, Integer>> cards = Aggregates.uniqueByLast(this.pool, this.pool.FN_GET_NAME);
-            this.model.addCards(cards);
+            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, this.pool.FN_GET_NAME);
+            this.model.addItems(items);
         } else if (!useFilter && bForceFilter) {
-            this.model.addCards(this.pool);
+            this.model.addItems(this.pool);
         }
 
-        this.model.refreshSort();
+        this.table.getTableModel().refreshSort();
     }
 
     /**
      * 
-     * getCards.
+     * getItems.
      * 
      * @return ItemPoolView
      */
-    public ItemPoolView<T> getCards() {
+    public ItemPoolView<T> getItems() {
         return this.pool;
     }
 
@@ -508,7 +279,7 @@ public final class ListView<T extends InventoryItem> extends JPanel {
      * 
      * getWantUnique.
      * 
-     * @return true if the editor is in "unique card names only" mode.
+     * @return true if the editor is in "unique item names only" mode.
      */
     public boolean getWantUnique() {
         return this.wantUnique;
@@ -518,7 +289,7 @@ public final class ListView<T extends InventoryItem> extends JPanel {
      * 
      * setWantUnique.
      * 
-     * @param unique if true, the editor will be set to the "unique card names only" mode.
+     * @param unique if true, the editor will be set to the "unique item names only" mode.
      */
     public void setWantUnique(boolean unique) {
         this.wantUnique = this.alwaysNonUnique ? false : unique;
@@ -528,7 +299,7 @@ public final class ListView<T extends InventoryItem> extends JPanel {
      * 
      * getAlwaysNonUnique.
      * 
-     * @return if ture, this editor must always show non-unique cards (e.g. quest editor).
+     * @return if ture, this editor must always show non-unique items (e.g. quest editor).
      */
     public boolean getAlwaysNonUnique() {
         return this.alwaysNonUnique;
@@ -538,7 +309,7 @@ public final class ListView<T extends InventoryItem> extends JPanel {
      * 
      * setAlwaysNonUnique.
      * 
-     * @param nonUniqueOnly if true, this editor must always show non-unique cards (e.g. quest editor).
+     * @param nonUniqueOnly if true, this editor must always show non-unique items (e.g. quest editor).
      */
     public void setAlwaysNonUnique(boolean nonUniqueOnly) {
         this.alwaysNonUnique = nonUniqueOnly;

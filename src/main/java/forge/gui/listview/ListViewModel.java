@@ -17,9 +17,8 @@
  */
 package forge.gui.listview;
 
+import java.util.List;
 import java.util.Map.Entry;
-
-import com.google.common.base.Predicate;
 
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -36,78 +35,96 @@ import forge.item.ItemPoolView;
  * @version $Id: ListViewModel.java 19857 2013-02-24 08:49:52Z Max mtg $
  */
 public final class ListViewModel<T extends InventoryItem> {
-    private final ItemPool<T> pool;
-    private Predicate<T> filter = null;
-    private final Class<T> genericType;
+    private final ItemPool<T> data;
+    private final ListViewTable<T> table;
     private boolean infiniteSupply;
 
     /**
-     * Instantiates a new list view model,
+     * Instantiates a new table model, using a JTable,
      * a column set, and a data set of generic type <T>.
      * 
-     * @param genericType &emsp; Generic type <T>
+     * @param table0 &emsp; {@link javax.swing.JTable}
+     * @param class0 &emsp; Generic type <T>
      */
-    public ListViewModel(final Class<T> genericType) {
-        this.genericType = genericType;
-        this.pool = new ItemPool<T>(genericType);
+    public ListViewModel(final ListViewTable<T> table0, final Class<T> class0) {
+        this.table = table0;
+        this.data = new ItemPool<T>(class0);
     }
 
     /**
      * Clears all data in the model.
      */
     public void clear() {
-        this.pool.clear();
+        this.data.clear();
+    }
+    
+    /**
+     * 
+     * getOrderedList.
+     * 
+     * @return List<Entry<T, Integer>>
+     */
+    public final List<Entry<T, Integer>> getOrderedList() {
+        return this.data.getOrderedList();
+    }
+    
+    /**
+     * 
+     * countDistinct.
+     * 
+     * @return int
+     */
+    public final int countDistinct() {
+        return this.data.countDistinct();
     }
 
     /**
      * Gets all items in the model.
      * 
-     * @return the cards
+     * @return ItemPoolView<T>
      */
     public ItemPoolView<T> getItems() {
-        return this.pool.getView();
+        return this.data.getView();
     }
 
     /**
-     * Removes an item from the model.
+     * Removes a item from the model.
      * 
-     * @param item
-     *            a T
-     * @param qty
-     *            a int
+     * @param item0 &emsp; {@link forge.Item} object
      */
-    public void removeItem(final T item, int qty) {
-        if (this.infiniteSupply) { return; }
+    public void removeItem(final T item0, int qty) {
+        if (isInfinite()) 
+            return;
 
-        if (this.pool.count(item) > 0) {
-            this.pool.remove(item, qty);
+        final boolean wasThere = this.data.count(item0) > 0;
+        if (wasThere) {
+            this.data.remove(item0, qty);
+            this.table.getTableModel().fireTableDataChanged();
         }
     }
 
     /**
-     * Adds an item to the model.
+     * Adds a item to the model.
      * 
-     * @param item
-     *            a T
-     * @param qty
-     *            a int
+     * @param item0 &emsp; {@link forge.Item} object.
      */
-    public void addItem(final T item, int qty) {
-        this.pool.add(item, qty);
+    public void addItem(final T item0, int qty) {
+        this.data.add(item0, qty);
+        this.table.getTableModel().fireTableDataChanged();
     }
 
     /**
      * Adds multiple copies of multiple items to the model.
      * 
-     * @param items
+     * @param items0 &emsp; {@link java.lang.Iterable}<Entry<T, Integer>>
      */
-    public void addItems(final Iterable<Entry<T, Integer>> items) {
-        this.pool.addAll(items);
+    public void addItems(final Iterable<Entry<T, Integer>> items0) {
+        this.data.addAll(items0);
+        this.table.getTableModel().fireTableDataChanged();
     }
-
     /**
-     * Sets whether this pool of items is in infinite supply.  If false, items in the
-     * list view have a limited number of copies.
+     * Sets whether this table's pool of items is in infinite supply.  If false, items in the
+     * table have a limited number of copies.
      */
     public void setInfinite(boolean infinite) {
         this.infiniteSupply = infinite;
