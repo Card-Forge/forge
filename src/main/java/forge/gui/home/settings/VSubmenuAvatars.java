@@ -34,9 +34,6 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
     private final DragTab tab = new DragTab("Avatars");
 
     private final JPanel pnlAvatars = new JPanel();
-    private final FScrollPane scrContent = new FScrollPane(pnlAvatars,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final FLabel lblAvatarHuman = new FLabel.Builder().hoverable(true).selectable(true)
             .iconScaleFactor(0.99f).iconInBackground(true).build();
@@ -45,7 +42,6 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
 
     private VSubmenuAvatars() {
         populateAvatars();
-        scrContent.setBorder(null);
     }
 
     public void focusHuman() {
@@ -57,7 +53,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0"));
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrContent, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlAvatars, "w 98%!, h 98%!, gap 1% 0 1% 0");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
@@ -103,9 +99,9 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         pnlAvatars.removeAll();
         pnlAvatars.setLayout(new MigLayout("insets 0, gap 0"));
         pnlAvatars.add(pnlAvatarUsers, "w 90%!, h 150px!, wrap");
-        pnlAvatars.add(new FScrollPane(pnlAvatarPics,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER),
-                "w 90%!, pushy, growy, gap 5% 0 0 0");
+        FScrollPane scroller = new FScrollPane(pnlAvatarPics);
+        scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        pnlAvatars.add(scroller, "w 90%!, pushy, growy, gap 5% 0 0 0");
 
         final Command cmdHuman = new Command() { @Override
             public void run() { lblAvatarAI.setSelected(false); lblAvatarHuman.requestFocusInWindow(); } };
