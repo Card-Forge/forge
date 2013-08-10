@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Cohen the Barbarian 1
+Title=Cohen the Barbarian
+Difficulty=easy
+Description=GW Legends Deck with Day of Destiny, Champion's Helm and Reki, the History of Kamigawa
+Icon=Cohen the Barbarian.jpg
+Deck Type=constructed
+[main]
+11 Forest
+11 Plains
+1 Karakas
+1 Eiganjo Castle
+2 Reki, the History of Kamigawa
+2 Captain Sisay
+2 Champion's Helm
+1 Day of Destiny
+2 Sword of the Chosen
+1 Yomiji, Who Bars the Way
+1 Loyal Retainers
+1 Asmira, Holy Avenger
+1 Azusa, Lost but Seeking
+1 Darien, King of Kjeldor
+1 Dosan the Falling Leaf
+1 Huang Zhong, Shu General
+1 Jasmine Boreal
+1 Kaysa
+1 Kongming, "Sleeping Dragon"
+1 Lord Magnus
+1 Masako the Humorless
+1 Melira, Sylvok Outcast
+1 Meng Huo, Barbarian King
+1 Rashka the Slayer
+1 Rofellos, Llanowar Emissary
+1 Shizuko, Caller of Autumn
+1 Sidar Jabari
+1 Sir Shandlar of Eberyn
+1 Torsten Von Ursus
+1 Zuo Ci, the Mocking Sage
+1 Desert Twister
+1 Rampant Growth
+1 Heroes' Reunion
+1 Captured Sunlight
+1 Reknit
+1 Tigereye Cameo
+[sideboard]
