@@ -84,7 +84,7 @@ public class TableColumnInfo<T> extends TableColumn {
         this.sortPriority = position0;
     }
 
-    /** @return {@link forge.gui.listview.EditorTableModel.SortState} */
+    /** @return {@link forge.gui.listview.ListViewTableModel.SortState} */
     public SortState getSortState() {
         return this.sortstate;
     }

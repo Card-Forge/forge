@@ -27,7 +27,7 @@ import forge.util.TextUtil;
  * <i>(S at beginning of class name denotes a static factory.)</i>
  *
  */
-public final class SCardListViewUtil  {
+public final class SListViewUtil  {
     /** An enum to encapsulate metadata for the stats/filter objects. */
     public static enum StatTypes {
         TOTAL      (FSkin.ZoneImages.ICO_HAND,      null, 0),

@@ -12,7 +12,7 @@ import forge.gui.toolbox.FLabel;
  * <br><br><i>(I at beginning of class name denotes an interface.)</i>
  * 
  */
-public interface ITableContainer {
+public interface IListItemView {
     /**
      * Sets the table used for displaying cards in this
      * deck editor container.

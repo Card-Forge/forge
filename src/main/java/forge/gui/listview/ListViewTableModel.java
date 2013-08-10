@@ -49,32 +49,30 @@ import forge.item.ItemPoolView;
 
 /**
  * <p>
- * EditorTableModel class.
+ * ListViewTableModel class.
  * </p>
  * 
  * @param <T>
  *            the generic type
  * @author Forge
- * @version $Id: EditorTableModel.java 19857 2013-02-24 08:49:52Z Max mtg $
+ * @version $Id: ListViewTableModel.java 19857 2013-02-24 08:49:52Z Max mtg $
  */
 @SuppressWarnings("serial")
-public final class EditorTableModel<T extends InventoryItem> extends AbstractTableModel {
-    private final ItemPool<T> data;
-    private final JTable table;
+public final class ListViewTableModel<T extends InventoryItem> extends AbstractTableModel {
+    private final ListViewTable<T> table;
+    private final ListViewModel<T> model;
     private final CascadeManager cascadeManager = new CascadeManager();
     private final int maxSortDepth = 3;
-    private boolean infiniteSupply;
 
     /**
-     * Instantiates a new table model, using a JTable,
-     * a column set, and a data set of generic type <T>.
+     * Instantiates a new table model.
      * 
-     * @param table0 &emsp; {@link javax.swing.JTable}
-     * @param class0 &emsp; Generic type <T>
+     * @param table0 &emsp; {@link forge.gui.listview.ListViewTable<T>}
+     * @param model0 &emsp; {@link forge.gui.listview.ListViewModel<T>}
      */
-    public EditorTableModel(final JTable table0, final Class<T> class0) {
+    public ListViewTableModel(final ListViewTable<T> table0, final ListViewModel<T> model0) {
         this.table = table0;
-        this.data = new ItemPool<T>(class0);
+        this.model = model0;
     }
 
     /** */
@@ -117,7 +115,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
      * Clears all data in the model.
      */
     public void clear() {
-        this.data.clear();
+        this.model.clear();
     }
 
     /**
@@ -126,7 +124,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
      * @return the cards
      */
     public ItemPoolView<T> getCards() {
-        return this.data.getView();
+        return this.model.getView();
     }
 
     /**
@@ -138,9 +136,9 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         if ( isInfinite() ) 
             return;
 
-        final boolean wasThere = this.data.count(card0) > 0;
+        final boolean wasThere = this.model.count(card0) > 0;
         if (wasThere) {
-            this.data.remove(card0, qty);
+            this.model.remove(card0, qty);
             this.fireTableDataChanged();
         }
     }
@@ -151,7 +149,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
      * @param card0 &emsp; {@link forge.Card} object.
      */
     public void addCard(final T card0, int qty) {
-        this.data.add(card0, qty);
+        this.model.add(card0, qty);
         this.fireTableDataChanged();
     }
 
@@ -161,7 +159,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
      * @param cards0 &emsp; {@link java.lang.Iterable}<Entry<T, Integer>>
      */
     public void addCards(final Iterable<Entry<T, Integer>> cards0) {
-        this.data.addAll(cards0);
+        this.model.addAll(cards0);
         this.fireTableDataChanged();
     }
 
@@ -173,7 +171,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
      * @return the entry
      */
     public Entry<T, Integer> rowToCard(final int row) {
-        final List<Entry<T, Integer>> model = this.data.getOrderedList();
+        final List<Entry<T, Integer>> model = this.model.getOrderedList();
         return (row >= 0) && (row < model.size()) ? model.get(row) : null;
     }
 
@@ -202,7 +200,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
             @Override
             public void valueChanged(final ListSelectionEvent arg0) {
                 if (table.isFocusOwner()) {
-                    EditorTableModel.this.showSelectedCard(table);
+                    ListViewTableModel.this.showSelectedCard(table);
                 }
             }
         });
@@ -210,7 +208,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         table.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(final FocusEvent e) {
-                EditorTableModel.this.showSelectedCard(table);
+                ListViewTableModel.this.showSelectedCard(table);
             }
         });
 
@@ -225,7 +223,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                SCardListViewIO.savePreferences();
+                SListViewIO.savePreferences();
             }
         });
     } // addCardListener()
@@ -234,14 +232,14 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
      * Resort.
      */
     public void refreshSort() {
-        if (this.data.getOrderedList().size() == 0) { return; }
+        if (this.model.getOrderedList().size() == 0) { return; }
 
-        Collections.sort(this.data.getOrderedList(), new MyComparator());
+        Collections.sort(this.model.getOrderedList(), new MyComparator());
     }
 
     @SuppressWarnings("unchecked")
     private void headerClicked(final MouseEvent e) {
-        final TableColumnModel colModel = EditorTableModel.this.table.getColumnModel();
+        final TableColumnModel colModel = ListViewTableModel.this.table.getColumnModel();
         final int columnModelIndex = colModel.getColumnIndexAtX(e.getX());
         final int modelIndex = colModel.getColumn(columnModelIndex).getModelIndex();
 
@@ -252,14 +250,14 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         // This will invert if needed
         // 2012/07/21 - Changed from modelIndex to ColumnModelIndex due to a crash
         // Crash was: Hide 2 columns, then search by last column.
-        EditorTableModel.this.cascadeManager.add((TableColumnInfo<T>) this.table.getColumnModel().getColumn(columnModelIndex));
-        EditorTableModel.this.refreshSort();
-        EditorTableModel.this.table.tableChanged(new TableModelEvent(EditorTableModel.this));
-        EditorTableModel.this.table.repaint();
-        if (EditorTableModel.this.table.getRowCount() > 0) {
-            EditorTableModel.this.table.setRowSelectionInterval(0, 0);
+        ListViewTableModel.this.cascadeManager.add((TableColumnInfo<T>) this.table.getColumnModel().getColumn(columnModelIndex));
+        ListViewTableModel.this.refreshSort();
+        ListViewTableModel.this.table.tableChanged(new TableModelEvent(ListViewTableModel.this));
+        ListViewTableModel.this.table.repaint();
+        if (ListViewTableModel.this.table.getRowCount() > 0) {
+            ListViewTableModel.this.table.setRowSelectionInterval(0, 0);
         }
-        SCardListViewIO.savePreferences();
+        SListViewIO.savePreferences();
     }
 
     //========== Overridden from AbstractTableModel
@@ -282,7 +280,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
      */
     @Override
     public int getRowCount() {
-        return this.data.countDistinct();
+        return this.model.countDistinct();
     }
 
     /* (non-Javadoc)
@@ -380,7 +378,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         @SuppressWarnings("unchecked")
         @Override
         public int compare(Entry<T, Integer> o1, Entry<T, Integer> o2) {
-            return EditorTableModel.this.cascadeManager.getSorter().compare(
+            return ListViewTableModel.this.cascadeManager.getSorter().compare(
                     (Entry<InventoryItem, Integer>) o1, (Entry<InventoryItem, Integer>) o2);
         }
     }

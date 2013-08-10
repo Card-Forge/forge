@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.event.TableModelEvent;
@@ -46,7 +47,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.gui.listview.ITableContainer;
-import forge.gui.listview.SCardListViewUtil;
+import forge.gui.listview.SListViewUtil;
 import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -55,20 +56,17 @@ import forge.util.Aggregates;
 
 
 /**
- * TableWithCards.
+ * ListView.
  * 
  * @param <T>
  *            the generic type
  */
-public final class EditorTableView<T extends InventoryItem> {
-    private ItemPool<T> pool;
-    private EditorTableModel<T> model;
+@SuppressWarnings("serial")
+public final class ListView<T extends InventoryItem> extends JPanel {
+    private ListViewModel<T> model;
     private final JTable table;
-    private Predicate<T> filter = null;
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
-
-    private final Class<T> genericType;
 
     /**
      * 
@@ -81,23 +79,23 @@ public final class EditorTableView<T extends InventoryItem> {
     }
 
     /**
-     * TableWithCards.
+     * ListView.
      * 
      * @param type0 the class of item that this table will contain
      */
-    public EditorTableView(final Class<T> type0) {
+    public ListView(final Class<T> type0) {
         this(false, type0);
     }
 
     /**
-     * TableWithCards Constructor.
+     * ListView Constructor.
      * 
      * @param forceUnique whether this table should display only one item with the same name
      * @param type0 the class of item that this table will contain
      */
     @SuppressWarnings("serial")
-    public EditorTableView(final boolean forceUnique, final Class<T> type0) {
-        this.genericType = type0;
+    public ListView(final boolean forceUnique, final Class<T> genericType) {
+        this.model = new ListViewModel<T>(genericType);
         this.wantUnique = forceUnique;
 
         // subclass JTable to show tooltips when hovering over column headers
@@ -241,7 +239,7 @@ public final class EditorTableView<T extends InventoryItem> {
             if (item.isShowing()) { colmodel.addColumn(item); }
         }
 
-        this.model = new EditorTableModel<T>(this.table, this.genericType);
+        this.model = new ListViewTableModel<T>(this.table, this.genericType);
         this.model.addListeners();
         this.table.setModel(this.model);
         this.table.setColumnModel(colmodel);
@@ -255,7 +253,7 @@ public final class EditorTableView<T extends InventoryItem> {
         this.model.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(final TableModelEvent ev) {
-                SCardListViewUtil.setStats(EditorTableView.this.model.getCards(), view0);
+                SListViewUtil.setStats(ListView.this.model.getCards(), view0);
             }
         });
     }

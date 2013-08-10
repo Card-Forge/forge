@@ -25,7 +25,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SRearrangingUtil;
-import forge.gui.listview.EditorTableView;
+import forge.gui.listview.ListView;
 import forge.item.InventoryItem;
 import forge.view.FView;
 
@@ -59,8 +59,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         public void addTextFilterItem ();
     }
     
-    private EditorTableView<TItem> tblCatalog;
-    private EditorTableView<TItem> tblDeck;
+    private ListView<TItem> tblCatalog;
+    private ListView<TItem> tblDeck;
     
     /** 
      * Operation to add one of selected card to current deck.
@@ -103,36 +103,36 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /**
      * Gets the EditorTableView holding the cards in the current deck.
      * 
-     * @return {@link forge.gui.listview.EditorTableView}
+     * @return {@link forge.gui.listview.ListView}
      */
-    public EditorTableView<TItem> getTableDeck() {
+    public ListView<TItem> getTableDeck() {
         return this.tblDeck;
     }
 
     /**
      * Sets the EditorTableView holding the cards in the current deck.
      * 
-     * @param table0 &emsp; {@link forge.gui.listview.EditorTableView}
+     * @param table0 &emsp; {@link forge.gui.listview.ListView}
      */
-    public void setTableDeck(final EditorTableView<TItem> table0) {
+    public void setTableDeck(final ListView<TItem> table0) {
         this.tblDeck = table0;
     }
 
     /**
      * Gets the EditorTableView holding the cards in the current catalog.
      * 
-     * @return {@link forge.gui.listview.EditorTableView}
+     * @return {@link forge.gui.listview.ListView}
      */
-    public EditorTableView<TItem> getTableCatalog() {
+    public ListView<TItem> getTableCatalog() {
         return this.tblCatalog;
     }
 
     /**
      * Sets the EditorTableView holding the cards in the current catalog.
      * 
-     * @param table0 &emsp; {@link forge.gui.listview.EditorTableView}
+     * @param table0 &emsp; {@link forge.gui.listview.ListView}
      */
-    public void setTableCatalog(final EditorTableView<TItem> table0) {
+    public void setTableCatalog(final ListView<TItem> table0) {
         this.tblCatalog = table0;
     }
 

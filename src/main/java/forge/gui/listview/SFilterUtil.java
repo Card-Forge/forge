@@ -31,13 +31,13 @@ public class SFilterUtil {
      * <br><br>
      * Handles "multicolor" label, which is quite tricky.
      */
-    public static Predicate<PaperCard> buildColorAndTypeFilter(Map<SCardListViewUtil.StatTypes, FLabel> statLabels) {
+    public static Predicate<PaperCard> buildColorAndTypeFilter(Map<SListViewUtil.StatTypes, FLabel> statLabels) {
         final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
         final List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
         
         boolean wantMulticolor = false;
         Predicate<CardRules> preExceptMulti = null;
-        for (SCardListViewUtil.StatTypes s : SCardListViewUtil.StatTypes.values()) {
+        for (SListViewUtil.StatTypes s : SListViewUtil.StatTypes.values()) {
             switch (s) {
             case WHITE: case BLUE: case BLACK: case RED: case GREEN: case COLORLESS:
                 if (statLabels.get(s).getSelected()) { colors.add(s.predicate); }

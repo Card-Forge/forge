@@ -28,7 +28,7 @@ import forge.properties.NewConstants;
  * 
  * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
  */
-public class SCardListViewIO {
+public class SListViewIO {
     /** Used in the XML IO to extract properties from PREFS file. */
     private enum ColumnProperty { /** */
         enumval, /** */
@@ -59,7 +59,7 @@ public class SCardListViewIO {
     /**
      * Retrieve a preference from the editor preference map.
      * 
-     * @param name0 &emsp; {@link forge.gui.listview.SCardListViewUtil.EditorPreference}
+     * @param name0 &emsp; {@link forge.gui.listview.SListViewUtil.EditorPreference}
      * @return TableColumnInfo<InventoryItem>
      */
     public static boolean getPref(final EditorPreference name0) {
@@ -69,7 +69,7 @@ public class SCardListViewIO {
     /**
      * Set a preference in the editor preference map.
      * 
-     * @param name0 &emsp; {@link forge.gui.listview.SCardListViewUtil.EditorPreference}
+     * @param name0 &emsp; {@link forge.gui.listview.SListViewUtil.EditorPreference}
      * @param val0 &emsp; boolean
      */
     public static void setPref(final EditorPreference name0, final boolean val0) {
@@ -79,7 +79,7 @@ public class SCardListViewIO {
     /**
      * Retrieve a custom column.
      * 
-     * @param name0 &emsp; {@link forge.gui.listview.SCardListViewUtil.CatalogColumnName}
+     * @param name0 &emsp; {@link forge.gui.listview.SListViewUtil.CatalogColumnName}
      * @return TableColumnInfo<InventoryItem>
      */
     public static TableColumnInfo<InventoryItem> getColumn(final ColumnName name0) {
