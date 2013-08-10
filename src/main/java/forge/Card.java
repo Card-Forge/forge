@@ -6398,7 +6398,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             } else {
-                if (!Expressions.compare(y, property, x) || !Expressions.compare(y2, property, x)) {
+                if (!Expressions.compare(y, property, x) && !Expressions.compare(y2, property, x)) {
                     return false;
                 }
             }
