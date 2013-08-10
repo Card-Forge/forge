@@ -15,17 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.cardlistview;
+package forge.gui.listview;
 
 import javax.swing.SwingUtilities;
 
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.tables.DeckController;
-import forge.gui.cardlistview.EditorTableView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SRearrangingUtil;
+import forge.gui.listview.EditorTableView;
 import forge.item.InventoryItem;
 import forge.view.FView;
 
@@ -103,7 +103,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /**
      * Gets the EditorTableView holding the cards in the current deck.
      * 
-     * @return {@link forge.gui.cardlistview.EditorTableView}
+     * @return {@link forge.gui.listview.EditorTableView}
      */
     public EditorTableView<TItem> getTableDeck() {
         return this.tblDeck;
@@ -112,7 +112,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /**
      * Sets the EditorTableView holding the cards in the current deck.
      * 
-     * @param table0 &emsp; {@link forge.gui.cardlistview.EditorTableView}
+     * @param table0 &emsp; {@link forge.gui.listview.EditorTableView}
      */
     public void setTableDeck(final EditorTableView<TItem> table0) {
         this.tblDeck = table0;
@@ -121,7 +121,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /**
      * Gets the EditorTableView holding the cards in the current catalog.
      * 
-     * @return {@link forge.gui.cardlistview.EditorTableView}
+     * @return {@link forge.gui.listview.EditorTableView}
      */
     public EditorTableView<TItem> getTableCatalog() {
         return this.tblCatalog;
@@ -130,7 +130,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /**
      * Sets the EditorTableView holding the cards in the current catalog.
      * 
-     * @param table0 &emsp; {@link forge.gui.cardlistview.EditorTableView}
+     * @param table0 &emsp; {@link forge.gui.listview.EditorTableView}
      */
     public void setTableCatalog(final EditorTableView<TItem> table0) {
         this.tblCatalog = table0;

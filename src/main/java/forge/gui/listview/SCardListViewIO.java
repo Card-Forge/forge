@@ -1,4 +1,4 @@
-package forge.gui.cardlistview;
+package forge.gui.listview;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,8 +18,8 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import forge.gui.cardlistview.SColumnUtil.ColumnName;
-import forge.gui.cardlistview.SColumnUtil.SortState;
+import forge.gui.listview.SColumnUtil.ColumnName;
+import forge.gui.listview.SColumnUtil.SortState;
 import forge.item.InventoryItem;
 import forge.properties.NewConstants;
 
@@ -59,7 +59,7 @@ public class SCardListViewIO {
     /**
      * Retrieve a preference from the editor preference map.
      * 
-     * @param name0 &emsp; {@link forge.gui.cardlistview.SCardListViewUtil.EditorPreference}
+     * @param name0 &emsp; {@link forge.gui.listview.SCardListViewUtil.EditorPreference}
      * @return TableColumnInfo<InventoryItem>
      */
     public static boolean getPref(final EditorPreference name0) {
@@ -69,7 +69,7 @@ public class SCardListViewIO {
     /**
      * Set a preference in the editor preference map.
      * 
-     * @param name0 &emsp; {@link forge.gui.cardlistview.SCardListViewUtil.EditorPreference}
+     * @param name0 &emsp; {@link forge.gui.listview.SCardListViewUtil.EditorPreference}
      * @param val0 &emsp; boolean
      */
     public static void setPref(final EditorPreference name0, final boolean val0) {
@@ -79,7 +79,7 @@ public class SCardListViewIO {
     /**
      * Retrieve a custom column.
      * 
-     * @param name0 &emsp; {@link forge.gui.cardlistview.SCardListViewUtil.CatalogColumnName}
+     * @param name0 &emsp; {@link forge.gui.listview.SCardListViewUtil.CatalogColumnName}
      * @return TableColumnInfo<InventoryItem>
      */
     public static TableColumnInfo<InventoryItem> getColumn(final ColumnName name0) {

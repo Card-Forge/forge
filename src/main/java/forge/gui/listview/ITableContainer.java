@@ -1,8 +1,8 @@
-package forge.gui.cardlistview;
+package forge.gui.listview;
 
 import javax.swing.JTable;
 
-import forge.gui.cardlistview.SCardListViewUtil;
+import forge.gui.listview.SCardListViewUtil;
 import forge.gui.toolbox.FLabel;
 
 /** 
@@ -17,7 +17,7 @@ public interface ITableContainer {
      * Sets the table used for displaying cards in this
      * deck editor container.
      * 
-     * @param tbl0 &emsp; {@link forge.gui.cardlistview.EditorTableView}
+     * @param tbl0 &emsp; {@link forge.gui.listview.EditorTableView}
      */
      void setTableView(JTable tbl0);
 

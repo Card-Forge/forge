@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.cardlistview;
+package forge.gui.listview;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -39,7 +39,7 @@ import forge.card.mana.ManaCost;
 import forge.deck.DeckBase;
 import forge.game.limited.DraftRankCache;
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.cardlistview.ACEditorBase;
+import forge.gui.listview.ACEditorBase;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -253,7 +253,7 @@ public final class SColumnUtil {
     /**
      * Retrieve a custom column (uses identical method in SEditorIO).
      * 
-     * @param id0 &emsp; {@link forge.gui.cardlistview.SCardListViewUtil.CatalogColumnName}
+     * @param id0 &emsp; {@link forge.gui.listview.SCardListViewUtil.CatalogColumnName}
      * @return TableColumnInfo<InventoryItem>
      */
     public static TableColumnInfo<InventoryItem> getColumn(final ColumnName id0) {
@@ -264,7 +264,7 @@ public final class SColumnUtil {
      * Convenience method to get a column's index in the view (that is,
      * in the TableColumnModel).
      * 
-     * @param id0 &emsp; {@link forge.gui.cardlistview.SCardListViewUtil.CatalogColumnName}
+     * @param id0 &emsp; {@link forge.gui.listview.SCardListViewUtil.CatalogColumnName}
      * @return int
      * @param <TItem> extends InventoryItem
      * @param <TModel> extends InventoryItem
@@ -294,7 +294,7 @@ public final class SColumnUtil {
      * Convenience method to get a column's index in the model (that is,
      * in the EditorTableModel, NOT the TableColumnModel).
      * 
-     * @param id0 &emsp; {@link forge.gui.cardlistview.SCardListViewUtil.CatalogColumnName}
+     * @param id0 &emsp; {@link forge.gui.listview.SCardListViewUtil.CatalogColumnName}
      * @return int
      * @param <TItem> extends InventoryItem
      * @param <TModel> extends InventoryItem

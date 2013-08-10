@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.cardlistview;
+package forge.gui.listview;
 
 import java.util.Map.Entry;
 
@@ -23,7 +23,7 @@ import javax.swing.table.TableColumn;
 
 import com.google.common.base.Function;
 
-import forge.gui.cardlistview.SColumnUtil.SortState;
+import forge.gui.listview.SColumnUtil.SortState;
 
 /**
  * A column object in a EditorTableModel in the card editor.
@@ -84,12 +84,12 @@ public class TableColumnInfo<T> extends TableColumn {
         this.sortPriority = position0;
     }
 
-    /** @return {@link forge.gui.cardlistview.EditorTableModel.SortState} */
+    /** @return {@link forge.gui.listview.EditorTableModel.SortState} */
     public SortState getSortState() {
         return this.sortstate;
     }
 
-     /** @param state0 &emsp; {@link forge.gui.cardlistview.TableColumnInfo.SortState} */
+     /** @param state0 &emsp; {@link forge.gui.listview.TableColumnInfo.SortState} */
     public void setSortState(final SortState state0) {
         this.sortstate = state0;
     }

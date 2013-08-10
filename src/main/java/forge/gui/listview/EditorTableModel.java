@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.cardlistview;
+package forge.gui.listview;
 
 import java.awt.Cursor;
 import java.awt.event.FocusAdapter;
@@ -40,9 +40,9 @@ import javax.swing.table.TableColumnModel;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import forge.gui.cardlistview.SColumnUtil.ColumnName;
-import forge.gui.cardlistview.SColumnUtil.SortState;
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.listview.SColumnUtil.ColumnName;
+import forge.gui.listview.SColumnUtil.SortState;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;

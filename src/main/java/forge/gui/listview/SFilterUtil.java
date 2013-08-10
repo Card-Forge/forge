@@ -1,4 +1,4 @@
-package forge.gui.cardlistview;
+package forge.gui.listview;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package forge.gui.cardlistview;
+package forge.gui.listview;
 
 import javax.swing.ImageIcon;
 
@@ -85,7 +85,7 @@ public final class SCardListViewUtil  {
      * 
      * @param <T> &emsp; the generic type
      * @param items &emsp; ItemPoolView<InventoryITem>
-     * @param view &emsp; {@link forge.gui.cardlistview.ITableContainer}
+     * @param view &emsp; {@link forge.gui.listview.ITableContainer}
      */
     public static <T extends InventoryItem> void setStats(final ItemPoolView<T> items, final ITableContainer view) {
         for (StatTypes s : StatTypes.values()) {

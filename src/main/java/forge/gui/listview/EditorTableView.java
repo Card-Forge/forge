@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.cardlistview;
+package forge.gui.listview;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -45,8 +45,8 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.gui.cardlistview.SCardListViewUtil;
-import forge.gui.cardlistview.ITableContainer;
+import forge.gui.listview.ITableContainer;
+import forge.gui.listview.SCardListViewUtil;
 import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
