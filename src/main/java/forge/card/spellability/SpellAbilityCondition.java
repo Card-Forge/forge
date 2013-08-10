@@ -219,6 +219,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             return false;
         }
 
+        if ((this.getGameActivationLimit() != -1) && (this.getNumberGameActivations() >= this.getGameActivationLimit())) {
+            return false;
+        }
+
         if (this.getPhases().size() > 0) {
             boolean isPhase = false;
             final PhaseType currPhase = game.getPhaseHandler().getPhase();

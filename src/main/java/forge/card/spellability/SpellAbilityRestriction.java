@@ -125,6 +125,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setLimitToCheck(params.get("ActivationLimit"));
         }
 
+        if (params.containsKey("GameActivationLimit")) {
+            this.setGameLimitToCheck(params.get("GameActivationLimit"));
+        }
+
         if (params.containsKey("ActivationNumberSacrifice")) {
             this.setActivationNumberSacrifice(Integer.parseInt(params.get("ActivationNumberSacrifice")));
         }
@@ -327,6 +331,16 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setActivationLimit(activationLimit);
 
             if ((this.getActivationLimit() != -1) && (this.getNumberTurnActivations() >= this.getActivationLimit())) {
+                return false;
+            }
+        }
+
+        if (this.getGameLimitToCheck() != null) {
+            String limit = this.getGameLimitToCheck();
+            int gameActivationLimit = AbilityUtils.calculateAmount(c, limit, sa);
+            this.setGameActivationLimit(gameActivationLimit);
+
+            if ((this.getGameActivationLimit() != -1) && (this.getNumberGameActivations() >= this.getGameActivationLimit())) {
                 return false;
             }
         }

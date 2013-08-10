@@ -63,7 +63,7 @@ public class GameNew {
         }
     }
 
-    private static void initVariantsZones(final Player player, final RegisteredPlayer psc) {
+    public static void initVariantsZones(final Player player, final RegisteredPlayer psc) {
         PlayerZone com = player.getZone(ZoneType.Command);
     
         // Mainly for avatar, but might find something else here

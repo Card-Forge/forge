@@ -62,7 +62,9 @@ public class SpellAbilityVariables {
         this.opponentTurn = sav.isOpponentTurn();
         this.playerTurn = sav.isPlayerTurn();
         this.activationLimit = sav.getActivationLimit();
+        this.gameActivationLimit = sav.getGameActivationLimit();
         this.numberTurnActivations = sav.getNumberTurnActivations();
+        this.numberGameActivations = sav.getNumberGameActivations();
         this.activationNumberSacrifice = sav.getActivationNumberSacrifice();
         this.cardsInHand = sav.getCardsInHand();
         this.chosenColors = sav.getColorToCheck();
@@ -114,11 +116,20 @@ public class SpellAbilityVariables {
     /** The activation limit. */
     private int activationLimit = -1;
 
+    /** The game activation limit. */
+    private int gameActivationLimit = -1;
+
     /** The limitToCheck to check. */
     private String limitToCheck = null;
 
+    /** The gameLimitToCheck to check. */
+    private String gameLimitToCheck = null;
+
     /** The number turn activations. */
     private int numberTurnActivations = 0;
+
+    /** The number game activations. */
+    private int numberGameActivations = 0;
 
     /** The activation number sacrifice. */
     private int activationNumberSacrifice = -1;
@@ -348,11 +359,24 @@ public class SpellAbilityVariables {
 
     /**
      * <p>
+     * Setter for the field <code>gameActivationLimit</code>.
+     * </p>
+     * 
+     * @param limit
+     *            a int.
+     */
+    public final void setGameActivationLimit(final int limit) {
+        this.gameActivationLimit = limit;
+    }
+
+    /**
+     * <p>
      * abilityActivated.
      * </p>
      */
     public final void abilityActivated() {
         this.numberTurnActivations++;
+        this.numberGameActivations++;
     }
 
     /**
@@ -364,6 +388,17 @@ public class SpellAbilityVariables {
      */
     public final int getNumberTurnActivations() {
         return this.numberTurnActivations;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>numberTurnActivations</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getNumberGameActivations() {
+        return this.numberGameActivations;
     }
 
     /**
@@ -620,6 +655,15 @@ public class SpellAbilityVariables {
     }
 
     /**
+     * Gets the activation limit.
+     * 
+     * @return the activationLimit
+     */
+    public final int getGameActivationLimit() {
+        return this.gameActivationLimit;
+    }
+
+    /**
      * <p>
      * Setter for the field <code>limitToCheck</code>.
      * </p>
@@ -633,6 +677,18 @@ public class SpellAbilityVariables {
 
     /**
      * <p>
+     * Setter for the field <code>GamelimitToCheck</code>.
+     * </p>
+     * 
+     * @param limit
+     *            a {@link java.lang.String} object.
+     */
+    public final void setGameLimitToCheck(final String limit) {
+        this.gameLimitToCheck = limit;
+    }
+
+    /**
+     * <p>
      * Getter for the field <code>limitToCheck</code>.
      * </p>
      * 
@@ -641,6 +697,18 @@ public class SpellAbilityVariables {
      */
     public final String getLimitToCheck() {
         return this.limitToCheck;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>getGameLimitToCheck</code>.
+     * </p>
+     * 
+     * @return the getGameLimitToCheck
+     *            a {@link java.lang.String} object.
+     */
+    public final String getGameLimitToCheck() {
+        return this.gameLimitToCheck;
     }
 
     /**
