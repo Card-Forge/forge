@@ -30,13 +30,13 @@ import com.google.common.base.Predicate;
 
 /**
  * <p>
- * CardPoolView class.
+ * ItemPoolView class.
  * </p>
  * 
  * @param <T>
  *            an InventoryItem
  * @author Forge
- * @version $Id: CardPoolView.java 9708 2011-08-09 19:34:12Z jendave $
+ * @version $Id: ItemPoolView.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, Integer>> {
 
@@ -48,7 +48,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
         }
     };
 
-    /** The fn to card name. */
+    /** The fn to item name. */
     public final transient Function<Entry<T, Integer>, String> FN_GET_NAME = new Function<Entry<T, Integer>, String>() {
         @Override
         public String apply(final Entry<T, Integer> from) {
@@ -70,13 +70,13 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     }
 
     public ItemPoolView(final Map<T, Integer> inMap, final Class<T> cls) {
-        this.cards = inMap;
+        this.items = inMap;
         this.myClass = cls;
     }
 
     // Data members
-    /** The cards. */
-    private final Map<T, Integer> cards;
+    /** The items. */
+    private final Map<T, Integer> items;
 
     /** The my class. */
     private final Class<T> myClass; // class does not keep this in runtime by
@@ -84,10 +84,10 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
 
     // same thing as above, it was copied to provide sorting (needed by table
     // views in deck editors)
-    /** The cards list ordered. */
-    private final transient List<Entry<T, Integer>> cardsListOrdered = new ArrayList<Map.Entry<T, Integer>>();
+    /** The items ordered. */
+    private final transient List<Entry<T, Integer>> itemsOrdered = new ArrayList<Map.Entry<T, Integer>>();
 
-    /** The is list in sync. */
+    /** Whether list is in sync. */
     private transient boolean isListInSync = false;
 
     /**
@@ -97,38 +97,38 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      */
     @Override
     public final Iterator<Entry<T, Integer>> iterator() {
-        return this.getCards().entrySet().iterator();
+        return this.items.entrySet().iterator();
     }
 
-    // Cards read only operations
+    // Items read only operations
     /**
      * 
      * contains.
      * 
-     * @param card
+     * @param item
      *            a T
      * @return boolean
      */
-    public final boolean contains(final T card) {
-        if (this.getCards() == null) {
+    public final boolean contains(final T item) {
+        if (this.items == null) {
             return false;
         }
-        return this.getCards().containsKey(card);
+        return this.items.containsKey(item);
     }
 
     /**
      * 
      * count.
      * 
-     * @param card
+     * @param item
      *            a T
      * @return int
      */
-    public final int count(final T card) {
-        if (this.getCards() == null) {
+    public final int count(final T item) {
+        if (this.items == null) {
             return 0;
         }
-        final Integer boxed = this.getCards().get(card);
+        final Integer boxed = this.items.get(item);
         return boxed == null ? 0 : boxed.intValue();
     }
 
@@ -148,7 +148,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     
     public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
         int result = 0;
-        if (this.getCards() != null) {
+        if (this.items != null) {
             final boolean isSameClass = cls == myClass;
             for (final Entry<T, Integer> kv : this) {
                 final T key = kv.getKey();
@@ -168,7 +168,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * @return int
      */
     public final int countDistinct() {
-        return this.getCards().size();
+        return this.items.size();
     }
 
     /**
@@ -178,7 +178,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * @return boolean
      */
     public final boolean isEmpty() {
-        return (this.getCards() == null) || this.getCards().isEmpty();
+        return (this.items == null) || this.items.isEmpty();
     }
 
     /**
@@ -191,14 +191,14 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
         if (!this.isListInSync()) {
             this.rebuildOrderedList();
         }
-        return this.cardsListOrdered;
+        return this.itemsOrdered;
     }
 
     private void rebuildOrderedList() {
-        this.cardsListOrdered.clear();
-        if (this.getCards() != null) {
-            for (final Entry<T, Integer> e : this.getCards().entrySet()) {
-                this.cardsListOrdered.add(e);
+        this.itemsOrdered.clear();
+        if (this.items != null) {
+            for (final Entry<T, Integer> e : this.items.entrySet()) {
+                this.itemsOrdered.add(e);
             }
         }
         this.setListInSync(true);
@@ -221,12 +221,12 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     }
 
     /**
-     * Gets the cards.
+     * Gets the items.
      * 
-     * @return the cards
+     * @return the items
      */
-    protected Map<T, Integer> getCards() {
-        return this.cards;
+    protected Map<T, Integer> getItems() {
+        return this.items;
     }
 
     /**
@@ -257,7 +257,6 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
         this.isListInSync = isListInSync0;
     }
 
-
     /**
      * To item list string.
      *
@@ -265,7 +264,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      */
     public Iterable<String> toItemListString() {
         final List<String> list = new ArrayList<String>();
-        for (final Entry<T, Integer> e : this.cards.entrySet()) {
+        for (final Entry<T, Integer> e : this.items.entrySet()) {
             list.add(String.format("%d x %s", e.getValue(), e.getKey().getName()));
         }
         return list;
