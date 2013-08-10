@@ -33,7 +33,6 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Command;
 import forge.FThreads;
 import forge.ITargetable;
 import forge.Singletons;
@@ -56,7 +55,6 @@ import forge.card.spellability.TargetChoices;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
-import forge.game.GameActionUtil.RippleExecutor;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.event.GameEventSpellAbilityCast;
@@ -483,8 +481,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (sp.isSpell() && !sp.isCopied()) {
             this.thisTurnCast.add(sp.getSourceCard());
 
-            final Command ripple = new RippleExecutor(sp.getActivatingPlayer(), sp.getSourceCard());
-            ripple.run();
+            /*final Command ripple = new RippleExecutor(sp.getActivatingPlayer(), sp.getSourceCard());
+            ripple.run();*/
         }
         return si;
     }

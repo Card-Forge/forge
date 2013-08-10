@@ -51,14 +51,8 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.game.ai.AiController;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerControllerAi;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 import forge.util.TextUtil;
 
 
@@ -72,135 +66,135 @@ import forge.util.TextUtil;
  */
 public final class GameActionUtil {
     
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class RippleAbility extends Ability {
-        private final Player controller;
-        private final int rippleCount;
-        private final Card rippleCard;
-    
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param sourceCard
-         * @param manaCost
-         * @param controller
-         * @param rippleCount
-         * @param rippleCard
-         */
-        private RippleAbility(Card sourceCard, ManaCost manaCost, Player controller, int rippleCount,
-                Card rippleCard) {
-            super(sourceCard, manaCost);
-            this.controller = controller;
-            this.rippleCount = rippleCount;
-            this.rippleCard = rippleCard;
-        }
-    
-        @Override
-        public void resolve() {
-            final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
-            final List<Card> revealed = new ArrayList<Card>();
-            int rippleNumber = rippleCount;
-            if (topOfLibrary.size() == 0) {
-                return;
-            }
-    
-            // Shouldn't Have more than Ripple 10, seeing as no
-            // cards exist with a ripple greater than 4
-            final int rippleMax = 10;
-            final Card[] rippledCards = new Card[rippleMax];
-            Card crd;
-            if (topOfLibrary.size() < rippleNumber) {
-                rippleNumber = topOfLibrary.size();
-            }
-    
-            for (int i = 0; i < rippleNumber; i++) {
-                crd = topOfLibrary.get(i);
-                revealed.add(crd);
-                if (crd.getName().equals(rippleCard.getName())) {
-                    rippledCards[i] = crd;
-                }
-            } // for
-            GuiChoose.oneOrNone("Revealed cards:", revealed);
-            for (int i = 0; i < rippleMax; i++) {
-                if (rippledCards[i] != null) {
-                    Player p = rippledCards[i].getController();
-    
-                    if (p.isHuman()) {
-                        if (GuiDialog.confirm(rippledCards[i], "Cast " + rippledCards[i].getName() + "?")) {
-                            HumanPlay.playCardWithoutPayingManaCost(p, rippledCards[i]);
-                            revealed.remove(rippledCards[i]);
-                        }
-                    } else {
-                        final AiController aic = ((PlayerControllerAi)p.getController()).getAi();
-                        SpellAbility saPlayed = aic.chooseAndPlaySa(rippledCards[i].getBasicSpells(), false, true);
-                        if ( saPlayed != null )
-                            revealed.remove(rippledCards[i]);
-                    }
-                }
-            }
-            CardLists.shuffle(revealed);
-            for (final Card bottom : revealed) {
-                controller.getGame().getAction().moveToBottomOfLibrary(bottom);
-            }
-        }
-    
-    }
-
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class RippleExecutor implements Command {
-        private final Player controller;
-        private final Card c;
-        private static final long serialVersionUID = -845154812215847505L;
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param controller
-         * @param c
-         */
-        public RippleExecutor(Player controller, Card c) {
-            this.controller = controller;
-            this.c = c;
-        }
-
-        @Override
-        public void run() {
-
-            final List<Card> thrummingStones = controller.getCardsIn(ZoneType.Battlefield, "Thrumming Stone");
-            for (int i = 0; i < thrummingStones.size(); i++) {
-                c.addExtrinsicKeyword("Ripple:4");
-            }
-
-            for (String parse : c.getKeyword()) {
-                if (parse.startsWith("Ripple")) {
-                    final String[] k = parse.split(":");
-                    this.doRipple(c, Integer.valueOf(k[1]), controller);
-                }
-            }
-        } // execute()
-
-        void doRipple(final Card c, final int rippleCount, final Player controller) {
-            final Card rippleCard = c;
-
-            final Ability ability = new RippleAbility(c, ManaCost.ZERO, controller, rippleCount, rippleCard);
-
-            if (controller.getController().confirmAction(ability, PlayerActionConfirmMode.Ripple, "Activate Ripple for " + c + "?")) {
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append(c).append(" - Ripple.");
-                ability.setStackDescription(sb.toString());
-                ability.setDescription(sb.toString());
-                ability.setActivatingPlayer(controller);
-
-                controller.getGame().getStack().addSimultaneousStackEntry(ability);
-
-            }
-        }
-    }
+//    /** 
+//     * TODO: Write javadoc for this type.
+//     *
+//     */
+//    public static final class RippleAbility extends Ability {
+//        private final Player controller;
+//        private final int rippleCount;
+//        private final Card rippleCard;
+//    
+//        /**
+//         * TODO: Write javadoc for Constructor.
+//         * @param sourceCard
+//         * @param manaCost
+//         * @param controller
+//         * @param rippleCount
+//         * @param rippleCard
+//         */
+//        private RippleAbility(Card sourceCard, ManaCost manaCost, Player controller, int rippleCount,
+//                Card rippleCard) {
+//            super(sourceCard, manaCost);
+//            this.controller = controller;
+//            this.rippleCount = rippleCount;
+//            this.rippleCard = rippleCard;
+//        }
+//    
+//        @Override
+//        public void resolve() {
+//            final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
+//            final List<Card> revealed = new ArrayList<Card>();
+//            int rippleNumber = rippleCount;
+//            if (topOfLibrary.size() == 0) {
+//                return;
+//            }
+//    
+//            // Shouldn't Have more than Ripple 10, seeing as no
+//            // cards exist with a ripple greater than 4
+//            final int rippleMax = 10;
+//            final Card[] rippledCards = new Card[rippleMax];
+//            Card crd;
+//            if (topOfLibrary.size() < rippleNumber) {
+//                rippleNumber = topOfLibrary.size();
+//            }
+//    
+//            for (int i = 0; i < rippleNumber; i++) {
+//                crd = topOfLibrary.get(i);
+//                revealed.add(crd);
+//                if (crd.getName().equals(rippleCard.getName())) {
+//                    rippledCards[i] = crd;
+//                }
+//            } // for
+//            GuiChoose.oneOrNone("Revealed cards:", revealed);
+//            for (int i = 0; i < rippleMax; i++) {
+//                if (rippledCards[i] != null) {
+//                    Player p = rippledCards[i].getController();
+//    
+//                    if (p.isHuman()) {
+//                        if (GuiDialog.confirm(rippledCards[i], "Cast " + rippledCards[i].getName() + "?")) {
+//                            HumanPlay.playCardWithoutPayingManaCost(p, rippledCards[i]);
+//                            revealed.remove(rippledCards[i]);
+//                        }
+//                    } else {
+//                        final AiController aic = ((PlayerControllerAi)p.getController()).getAi();
+//                        SpellAbility saPlayed = aic.chooseAndPlaySa(rippledCards[i].getBasicSpells(), false, true);
+//                        if ( saPlayed != null )
+//                            revealed.remove(rippledCards[i]);
+//                    }
+//                }
+//            }
+//            CardLists.shuffle(revealed);
+//            for (final Card bottom : revealed) {
+//                controller.getGame().getAction().moveToBottomOfLibrary(bottom);
+//            }
+//        }
+//    
+//    }
+//
+//    /** 
+//     * TODO: Write javadoc for this type.
+//     *
+//     */
+//    public static final class RippleExecutor implements Command {
+//        private final Player controller;
+//        private final Card c;
+//        private static final long serialVersionUID = -845154812215847505L;
+//
+//        /**
+//         * TODO: Write javadoc for Constructor.
+//         * @param controller
+//         * @param c
+//         */
+//        public RippleExecutor(Player controller, Card c) {
+//            this.controller = controller;
+//            this.c = c;
+//        }
+//
+//        @Override
+//        public void run() {
+//
+//            final List<Card> thrummingStones = controller.getCardsIn(ZoneType.Battlefield, "Thrumming Stone");
+//            for (int i = 0; i < thrummingStones.size(); i++) {
+//                c.addExtrinsicKeyword("Ripple:4");
+//            }
+//
+//            for (String parse : c.getKeyword()) {
+//                if (parse.startsWith("Ripple")) {
+//                    final String[] k = parse.split(":");
+//                    this.doRipple(c, Integer.valueOf(k[1]), controller);
+//                }
+//            }
+//        } // execute()
+//
+//        void doRipple(final Card c, final int rippleCount, final Player controller) {
+//            final Card rippleCard = c;
+//
+//            final Ability ability = new RippleAbility(c, ManaCost.ZERO, controller, rippleCount, rippleCard);
+//
+//            if (controller.getController().confirmAction(ability, PlayerActionConfirmMode.Ripple, "Activate Ripple for " + c + "?")) {
+//
+//                final StringBuilder sb = new StringBuilder();
+//                sb.append(c).append(" - Ripple.");
+//                ability.setStackDescription(sb.toString());
+//                ability.setDescription(sb.toString());
+//                ability.setActivatingPlayer(controller);
+//
+//                controller.getGame().getStack().addSimultaneousStackEntry(ability);
+//
+//            }
+//        }
+//    }
 
     private GameActionUtil() {
         throw new AssertionError();

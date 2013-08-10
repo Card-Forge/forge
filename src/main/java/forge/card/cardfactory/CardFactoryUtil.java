@@ -3192,6 +3192,36 @@ public class CardFactoryUtil {
             final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
             card.addTrigger(myTrigger);
         } // Recover
+
+        int ripplePos = hasKeyword(card, "Ripple");
+        while (ripplePos != -1) {
+            final int n = ripplePos;
+            final String parse = card.getKeyword().get(n);
+            final String[] k = parse.split(":");
+            final int num = Integer.parseInt(k[1]);
+            UUID triggerSvar = UUID.randomUUID();
+
+            final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | " +
+                    "Execute$ " + triggerSvar + " | Secondary$ True | TriggerDescription$" +
+                    " Ripple " + num + " - CARDNAME | OptionalDecider$ You";
+            final String abString = "AB$ Dig | Cost$ 0 | NoMove$ True | DigNum$ " + num +
+                    " | Reveal$ True | RememberRevealed$ True | SubAbility$ DBCastRipple";
+            final String dbCast = "DB$ Play | Valid$ Card.IsRemembered+sameName | " +
+                    "ValidZone$ Library | WithoutManaCost$ True | Optional$ True | " +
+                    "Amount$ All | SubAbility$ RippleMoveToBottom";
+
+            card.setSVar(triggerSvar.toString(), abString);
+            card.setSVar("DBCastRipple", dbCast);
+            card.setSVar("RippleMoveToBottom", "DB$ ChangeZoneAll | ChangeType$ " +
+                    "Card.IsRemembered | Origin$ Library | Destination$ Library | " +
+                    "LibraryPosition$ -1 | SubAbility$ RippleCleanup");
+            card.setSVar("RippleCleanup", "DB$ Cleanup | ClearRemembered$ True");
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
+            card.addTrigger(parsedTrigger);
+            
+            ripplePos = hasKeyword(card, "Ripple", n + 1);
+        } // Ripple
     }
     
     /**
