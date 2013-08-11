@@ -329,7 +329,6 @@ public class ManaPool {
      */
     public final void clearManaPaid(final SpellAbility ability, final boolean refund) {
         final List<Mana> manaPaid = ability.getPayingMana();
-
         ability.getPayingManaAbilities().clear();
         // move non-undoable paying mana back to floating
         if (refund) {
@@ -345,25 +344,18 @@ public class ManaPool {
 
 
     private boolean accountFor(final SpellAbility sa, final AbilityManaPart ma) {
-        final List<Mana> manaPaid = sa.getPayingMana();
-    
-        if (manaPaid.isEmpty() && this.floatingMana.isEmpty()) {
-          return false;
+        if (this.floatingMana.isEmpty()) {
+            return false;
         }
-    
-        final ArrayList<Mana> removePaying = new ArrayList<Mana>();
+
         final ArrayList<Mana> removeFloating = new ArrayList<Mana>();
-    
- 
+     
         boolean manaNotAccountedFor = false;
         // loop over mana produced by mana ability
         for (Mana mana : ma.getLastManaProduced()) {
             Collection<Mana> poolLane = this.floatingMana.get(mana.getColorCode());
             
-            if (manaPaid.contains(mana)) {
-                removePaying.add(mana);
-            }
-            else if (poolLane != null && poolLane.contains(mana)) {
+            if (poolLane != null && poolLane.contains(mana)) {
                 removeFloating.add(mana);
             }
             else {
@@ -377,31 +369,42 @@ public class ManaPool {
         if (manaNotAccountedFor) {
             return false;
         }
-    
-        for (int k = 0; k < removePaying.size(); k++) {
-            manaPaid.remove(removePaying.get(k));
-        }
+
         for (int k = 0; k < removeFloating.size(); k++) {
             this.removeMana(removeFloating.get(k));
         }
         return true;
     }
 
-    public final void refundManaPaid(final SpellAbility sa, final boolean untap) {
-        // TODO having some crash in here related to undo and not tracking abilities properly
+    public final void refundManaPaid(final SpellAbility sa) {
+        // Send all mana back to your mana pool, before accounting for it. 
+        final List<Mana> manaPaid = sa.getPayingMana();
+               
+        // move non-undoable paying mana back to floating
+        if (sa.getSourceCard() != null) {
+            sa.getSourceCard().setCanCounter(true);
+        }
+        for (final Mana m : manaPaid) {
+            this.addMana(m);
+        }
+        manaPaid.clear();
         
-        for (final SpellAbility am : sa.getPayingManaAbilities()) { // go through paidAbilities if they are undoable
+        List<SpellAbility> payingAbilities = sa.getPayingManaAbilities();
+        for (final SpellAbility am : payingAbilities) { 
+            // undo paying abilities if we can
             AbilityManaPart m = am.getManaPart();
-            if (am.isUndoable()) {
-                if (this.accountFor(sa, m)) {
-                    am.undo();
-                }
-                // else can't account let clearPay move paying back to floating
+            if (am.isUndoable() && this.accountFor(sa, m)) {
+                am.undo();
             }
         }
+        
+        for (final SpellAbility am : payingAbilities) {
+            // Recursively refund abilities that were used.
+            this.refundManaPaid(am);
+        }
+            
+        payingAbilities.clear();
     
-        // move leftover pay back to floating
-        this.clearManaPaid(sa, true);
         // update battlefield of activating player - to redraw cards used to pay mana as untapped
         Player p = sa.getActivatingPlayer();
         p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));

@@ -157,7 +157,7 @@ public class CostPayment {
         }
 
         // Move this to CostMana
-        this.ability.getActivatingPlayer().getManaPool().refundManaPaid(this.ability, false);
+        this.ability.getActivatingPlayer().getManaPool().refundManaPaid(this.ability);
     }
 
     /**

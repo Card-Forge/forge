@@ -97,7 +97,7 @@ public class InputPayManaExecuteCommands extends InputPayMana {
     /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
-        player.getManaPool().refundManaPaid(this.saPaidFor, true);
+        player.getManaPool().refundManaPaid(this.saPaidFor);
         bPaid = false;
         this.stop();
     }
