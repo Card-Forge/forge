@@ -281,17 +281,15 @@ public enum CMatchUI {
     
     private int getPlayerIndex(Player player) {
         return sortedPlayers.indexOf(player);
-    }    
-    
+    }
 
     public void showCombat(Combat combat) {
-        if (combat != null) {
+        if (combat != null && combat.getAttackingPlayer().getGame().getStack().isEmpty()) {
             SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
         }
         CCombat.SINGLETON_INSTANCE.setModel(combat);
         CCombat.SINGLETON_INSTANCE.update();
     } // showBlockers()
-
 
     Set<Player> highlitedPlayers = new HashSet<Player>();
     public void setHighLited(Player ge, boolean b) {
@@ -302,7 +300,6 @@ public enum CMatchUI {
     public boolean isHighlited(Player player) {
         return highlitedPlayers.contains(player);
     }
-
 
     Set<Card> highlitedCards = new HashSet<Card>();
     // used to highlight cards in UI
