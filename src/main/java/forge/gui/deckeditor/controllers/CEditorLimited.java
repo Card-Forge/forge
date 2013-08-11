@@ -160,8 +160,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void init() {
-        this.getCatalogManager().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, SColumnUtil.getCatalogDefaultColumns());
-        this.getDeckManager().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogManager().getTable().setup(SColumnUtil.getCatalogDefaultColumns());
+        this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
         SItemManagerUtil.resetUI();
 

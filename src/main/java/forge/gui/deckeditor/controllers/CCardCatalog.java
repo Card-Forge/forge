@@ -108,7 +108,7 @@ public enum CCardCatalog implements ICDoc {
             }
         };
 
-        for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> entry : VCardCatalog.SINGLETON_INSTANCE.getStatLabels().entrySet()) {
+        for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> entry : VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabels().entrySet()) {
             final FLabel statLabel = entry.getValue();
             statLabel.setCommand(updateFilterCommand);
 
@@ -123,7 +123,7 @@ public enum CCardCatalog implements ICDoc {
                             disableFiltering = true;
                             for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
                                 if (s.group == group && s != st) {
-                                    VCardCatalog.SINGLETON_INSTANCE.getStatLabel(s).setSelected(false);
+                                    VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(s).setSelected(false);
                                 }
                             }
                             statLabel.setSelected(true);
@@ -135,7 +135,7 @@ public enum CCardCatalog implements ICDoc {
             }
         }
 
-        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SItemManagerUtil.StatTypes.TOTAL).setCommand(new Command() {
+        VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(SItemManagerUtil.StatTypes.TOTAL).setCommand(new Command() {
             private boolean lastToggle = true;
             
             @Override
@@ -144,7 +144,7 @@ public enum CCardCatalog implements ICDoc {
                 lastToggle = !lastToggle;
                 for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
                     if (SItemManagerUtil.StatTypes.TOTAL != s) {
-                        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(s).setSelected(lastToggle);
+                        VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(s).setSelected(lastToggle);
                     }
                 }
                 disableFiltering = false;
@@ -351,7 +351,7 @@ public enum CCardCatalog implements ICDoc {
 
         List<Predicate<? super PaperCard>> cardPredicates = new ArrayList<Predicate<? super PaperCard>>();
         cardPredicates.add(Predicates.instanceOf(PaperCard.class));
-        cardPredicates.add(SFilterUtil.buildColorAndTypeFilter(VCardCatalog.SINGLETON_INSTANCE.getStatLabels()));
+        cardPredicates.add(SFilterUtil.buildColorAndTypeFilter(VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabels()));
         cardPredicates.addAll(activePredicates);
         
         // apply current values in the range filters
@@ -373,7 +373,7 @@ public enum CCardCatalog implements ICDoc {
         
         // show packs and decks in the card shop according to the toggle setting
         // this is special-cased apart from the buildColorAndTypeFilter() above
-        if (VCardCatalog.SINGLETON_INSTANCE.getStatLabel(StatTypes.PACK).getSelected()) {
+        if (VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(StatTypes.PACK).getSelected()) {
             List<Predicate<? super PaperCard>> itemPredicates = new ArrayList<Predicate<? super PaperCard>>();
             itemPredicates.add(cardFilter);
             itemPredicates.add(ItemPredicate.Presets.IS_PACK);

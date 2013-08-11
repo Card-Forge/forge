@@ -125,7 +125,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         }
 
         if (sectionMode == DeckSection.Avatar || sectionMode == DeckSection.Commander) {
-            for(Map.Entry<PaperCard, Integer> cp : getDeckManager().getItems()) {
+            for(Map.Entry<PaperCard, Integer> cp : getDeckManager().getPool()) {
                 getDeckManager().removeItem(cp.getKey(), cp.getValue());
             }
         }
@@ -310,8 +310,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
 
-        this.getCatalogManager().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, lstCatalogCols);
-        this.getDeckManager().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogManager().getTable().setup(lstCatalogCols);
+        this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
         SItemManagerUtil.resetUI();
 

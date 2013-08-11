@@ -39,6 +39,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.InventoryItem;
@@ -52,7 +53,8 @@ import forge.item.InventoryItem;
  */
 @SuppressWarnings("serial")
 public final class ItemTable<T extends InventoryItem> extends JTable {
-    private ItemTableModel<T> tableModel;
+    private final ItemManager<T> itemManager;
+    private final ItemTableModel<T> tableModel;
     
     public ItemTableModel<T> getTableModel() {
         return this.tableModel;
@@ -61,11 +63,12 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
     /**
      * ItemTable Constructor.
      * 
-     * @param forceUnique whether this table should display only one item with the same name
-     * @param type0 the class of item that this table will contain
+     * @param itemManager0
+     * @param model0
      */
-    public ItemTable(ItemManagerModel<T> model) {
-        this.tableModel = new ItemTableModel<T>(this, model);
+    public ItemTable(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
+        this.itemManager = itemManager0;
+        this.tableModel = new ItemTableModel<T>(this, model0);
 
         // use different selection highlight colors for focused vs. unfocused tables
         setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
@@ -102,13 +105,12 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
     /**
      * Applies a EditorTableModel and a model listener to this instance's JTable.
      * 
-     * @param view0 &emsp; the {@link forge.gui.itemItemManager.ITableCOntainer}
-     * @param cols0 &emsp; List<TableColumnInfo<InventoryItem>> of additional columns for this
+     * @param cols &emsp; List<TableColumnInfo<InventoryItem>> of additional columns for this
      */
-    public void setup(final ITableContainer view0, final List<TableColumnInfo<InventoryItem>> cols0) {
+    public void setup(final List<TableColumnInfo<InventoryItem>> cols) {
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
-        for (TableColumnInfo<InventoryItem> item : cols0) {
+        for (TableColumnInfo<InventoryItem> item : cols) {
             item.setModelIndex(colmodel.getColumnCount());
             if (item.isShowing()) { colmodel.addColumn(item); }
         }
@@ -126,7 +128,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         this.tableModel.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(final TableModelEvent ev) {
-                SItemManagerUtil.setStats(ItemTable.this.tableModel.getItems(), view0);
+                SItemManagerUtil.setStats(ItemTable.this.itemManager);
             }
         });
     }

@@ -11,7 +11,6 @@ import forge.card.CardRulesPredicates;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.itemmanager.table.ITableContainer;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
@@ -85,22 +84,22 @@ public final class SItemManagerUtil  {
      * setStats.
      * 
      * @param <T> &emsp; the generic type
-     * @param items &emsp; ItemPoolView<InventoryITem>
-     * @param view &emsp; {@link forge.gui.toolbox.itemmanager.table.ITableContainer}
+     * @param itemManager &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager<T>}
      */
-    public static <T extends InventoryItem> void setStats(final ItemPoolView<T> items, final ITableContainer view) {
+    public static <T extends InventoryItem> void setStats(final ItemManager<T> itemManager) {
+        final ItemPoolView<T> items = itemManager.getFilteredItems();
         for (StatTypes s : StatTypes.values()) {
             switch (s) {
             case TOTAL:
-                view.getStatLabel(s).setText(String.valueOf(
+                itemManager.getStatLabel(s).setText(String.valueOf(
                         Aggregates.sum(Iterables.filter(items, Predicates.compose(totalPred, items.FN_GET_KEY)), items.FN_GET_COUNT)));
                 break;
             case PACK:
-                view.getStatLabel(s).setText(String.valueOf(
+                itemManager.getStatLabel(s).setText(String.valueOf(
                         Aggregates.sum(Iterables.filter(items, Predicates.compose(packPred, items.FN_GET_KEY)), items.FN_GET_COUNT)));
                 break;
             default:
-                view.getStatLabel(s).setText(String.valueOf(items.countAll(Predicates.compose(s.predicate, PaperCard.FN_GET_RULES), PaperCard.class)));
+                itemManager.getStatLabel(s).setText(String.valueOf(items.countAll(Predicates.compose(s.predicate, PaperCard.FN_GET_RULES), PaperCard.class)));
             }
         }
     }

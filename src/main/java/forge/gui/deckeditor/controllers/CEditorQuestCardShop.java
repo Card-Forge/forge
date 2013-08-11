@@ -188,8 +188,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsDeck.remove(SColumnUtil.getColumn(ColumnName.DECK_AI));
 
         // Setup with current column set
-        this.getCatalogManager().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
-        this.getDeckManager().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
+        this.getCatalogManager().getTable().setup(columnsCatalog);
+        this.getDeckManager().getTable().setup(columnsDeck);
 
         SItemManagerUtil.resetUI();
 
@@ -505,7 +505,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             @Override
             public void run() {
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
-                for (Map.Entry<InventoryItem, Integer> item : getDeckManager().getItems()) {
+                for (Map.Entry<InventoryItem, Integer> item : getDeckManager().getPool()) {
                     PaperCard card = (PaperCard)item.getKey();
                     int numToKeep = card.getRules().getType().isBasic() ? 50 : 4;
                     if ("Relentless Rats".equals(card.getName())) {
@@ -536,7 +536,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.sellPercentageLabel.setText("<html>Selling cards at " + formatter.format(multiPercent)
                 + "% of their value.<br>" + maxSellingPrice + "</html>");
         
-        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SItemManagerUtil.StatTypes.PACK).setVisible(true);
+        VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(SItemManagerUtil.StatTypes.PACK).setVisible(true);
         
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
@@ -571,7 +571,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(CCAddLabel);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText(CDRemLabel);
         
-        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SItemManagerUtil.StatTypes.PACK).setVisible(false);
+        VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(SItemManagerUtil.StatTypes.PACK).setVisible(false);
         
         //Re-add tabs
         if (deckGenParent != null) {

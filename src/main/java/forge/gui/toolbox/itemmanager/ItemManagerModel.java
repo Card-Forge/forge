@@ -35,7 +35,7 @@ import forge.item.ItemPoolView;
  * @version $Id: ItemManagerModel.java 19857 2013-02-24 08:49:52Z Max mtg $
  */
 public final class ItemManagerModel<T extends InventoryItem> {
-    private final ItemManager<T> ItemManager;
+    private final ItemManager<T> itemManager;
     private final ItemPool<T> data;
     private boolean infiniteSupply;
 
@@ -45,8 +45,8 @@ public final class ItemManagerModel<T extends InventoryItem> {
      * @param ItemManager0
      * @param genericType0
      */
-    public ItemManagerModel(final ItemManager<T> ItemManager0, final Class<T> genericType0) {
-        this.ItemManager = ItemManager0;
+    public ItemManagerModel(final ItemManager<T> itemManager0, final Class<T> genericType0) {
+        this.itemManager = itemManager0;
         this.data = new ItemPool<T>(genericType0);
     }
 
@@ -98,7 +98,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
         final boolean wasThere = this.data.count(item0) > 0;
         if (wasThere) {
             this.data.remove(item0, qty);
-            this.ItemManager.getTableModel().fireTableDataChanged();
+            this.itemManager.getTableModel().fireTableDataChanged();
         }
     }
 
@@ -109,7 +109,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
      */
     public void addItem(final T item0, int qty) {
         this.data.add(item0, qty);
-        this.ItemManager.getTableModel().fireTableDataChanged();
+        this.itemManager.getTableModel().fireTableDataChanged();
     }
 
     /**
@@ -119,7 +119,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
      */
     public void addItems(final Iterable<Entry<T, Integer>> items0) {
         this.data.addAll(items0);
-        this.ItemManager.getTableModel().fireTableDataChanged();
+        this.itemManager.getTableModel().fireTableDataChanged();
     }
     /**
      * Sets whether this table's pool of items is in infinite supply.  If false, items in the

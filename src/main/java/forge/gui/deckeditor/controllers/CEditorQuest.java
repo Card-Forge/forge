@@ -278,8 +278,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
                 this.fnDeckCompare, this.fnDeckGet);
 
-        this.getCatalogManager().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
-        this.getDeckManager().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
+        this.getCatalogManager().getTable().setup(columnsCatalog);
+        this.getDeckManager().getTable().setup(columnsDeck);
 
         Deck deck = new Deck();
 

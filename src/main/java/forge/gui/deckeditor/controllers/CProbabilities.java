@@ -65,7 +65,7 @@ public enum CProbabilities implements ICDoc {
 
         if (ed == null) { return new ArrayList<String>(); }
         
-        final ItemPoolView<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getItems(), PaperCard.class);
+        final ItemPoolView<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getPool(), PaperCard.class);
 
         final List<String> cardProbabilities = new ArrayList<String>();
 

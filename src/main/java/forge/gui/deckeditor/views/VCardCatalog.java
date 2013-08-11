@@ -37,7 +37,6 @@ import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.gui.toolbox.itemmanager.table.ITableContainer;
 import forge.item.InventoryItem;
 import forge.util.TextUtil;
 
@@ -47,7 +46,7 @@ import forge.util.TextUtil;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  * 
  */
-public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
+public enum VCardCatalog implements IVDoc<CCardCatalog> {
     /** */
     SINGLETON_INSTANCE;
     
@@ -237,12 +236,8 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
 
     public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
         this.itemManager = itemManager0;
+        itemManager0.setStatLabels(this.statLabels);
         scroller.setViewportView(itemManager0.getTable());
-    }
-
-    @Override
-    public FLabel getStatLabel(SItemManagerUtil.StatTypes s) {
-        return statLabels.get(s);
     }
 
     //========== Accessor/mutator methods
@@ -259,9 +254,6 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     public JComboBox<String> getCbSearchMode()   { return cbSearchMode;      }
     public JTextField getTxfSearch()     { return txfSearch;         }
 
-    public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {
-        return statLabels;
-    }
     public Map<RangeTypes, Pair<FSpinner, FSpinner>> getSpinners() {
         return spinners;
     }

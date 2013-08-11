@@ -25,7 +25,6 @@ import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.gui.toolbox.itemmanager.table.ITableContainer;
 import forge.item.InventoryItem;
 
 
@@ -34,7 +33,7 @@ import forge.item.InventoryItem;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
+public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -239,15 +238,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
     public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
         this.itemManager = itemManager0;
+        itemManager0.setStatLabels(this.statLabels);
         scroller.setViewportView(itemManager0.getTable());
     }
 
     public JLabel getLblTitle() { return lblTitle; }
-
-    @Override
-    public FLabel getStatLabel(SItemManagerUtil.StatTypes s) {
-        return statLabels.get(s);
-    }
 
     //========== Retrieval
 

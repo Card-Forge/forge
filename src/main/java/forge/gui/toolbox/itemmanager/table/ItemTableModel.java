@@ -46,7 +46,6 @@ import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.SortState;
 import forge.item.InventoryItem;
-import forge.item.ItemPoolView;
 
 /**
  * <p>
@@ -110,15 +109,6 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
                 }
             }
         }
-    }
-    
-    /**
-     * Gets all items in the model.
-     * 
-     * @return ItemPoolView<T>
-     */
-    public ItemPoolView<T> getItems() {
-        return this.model.getItems();
     }
 
     /**

@@ -15002,7 +15002,6 @@ src/main/java/forge/gui/toolbox/itemmanager/SItemManagerIO.java -text
 src/main/java/forge/gui/toolbox/itemmanager/SItemManagerUtil.java -text
 src/main/java/forge/gui/toolbox/itemmanager/package-info.java -text
 src/main/java/forge/gui/toolbox/itemmanager/table/AlwaysShowToolTip.java -text
-src/main/java/forge/gui/toolbox/itemmanager/table/ITableContainer.java -text
 src/main/java/forge/gui/toolbox/itemmanager/table/IntegerRenderer.java -text
 src/main/java/forge/gui/toolbox/itemmanager/table/ItemTable.java -text
 src/main/java/forge/gui/toolbox/itemmanager/table/ItemTableModel.java -text

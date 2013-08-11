@@ -93,8 +93,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * </p>
      */
     private void setup() {
-        this.getCatalogManager().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, SColumnUtil.getCatalogDefaultColumns());
-        this.getDeckManager().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogManager().getTable().setup(SColumnUtil.getCatalogDefaultColumns());
+        this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
         ccAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
@@ -171,7 +171,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         // add sideboard to deck
         CardPool side = deck.getOrCreate(DeckSection.Sideboard);
-        side.addAll(this.getDeckManager().getItems());
+        side.addAll(this.getDeckManager().getPool());
 
         final CardEdition landSet = IBoosterDraft.LAND_SET_CODE[0];
         final int landsCount = 20;

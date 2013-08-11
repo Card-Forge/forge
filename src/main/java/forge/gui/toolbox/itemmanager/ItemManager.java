@@ -32,6 +32,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.table.ItemTable;
 import forge.gui.toolbox.itemmanager.table.ItemTableModel;
 import forge.item.InventoryItem;
@@ -48,12 +49,13 @@ import forge.util.Aggregates;
  */
 public final class ItemManager<T extends InventoryItem> {
     private ItemPool<T> pool;
-    private ItemManagerModel<T> model;
+    private final ItemManagerModel<T> model;
     private final ItemTable<T> table;
     private Predicate<T> filter = null;
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
     private final Class<T> genericType;
+    private Map<SItemManagerUtil.StatTypes, FLabel> statLabels;
 
     /**
      * 
@@ -94,7 +96,17 @@ public final class ItemManager<T extends InventoryItem> {
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(this, genericType0);
-        this.table = new ItemTable<T>(this.model);
+        this.table = new ItemTable<T>(this, this.model);
+    }
+
+    /**
+     * 
+     * Gets the item pool.
+     * 
+     * @return ItemPoolView
+     */
+    public ItemPoolView<T> getPool() {
+        return this.pool;
     }
 
     /**
@@ -174,23 +186,6 @@ public final class ItemManager<T extends InventoryItem> {
         return this.table.getSelectedItems();
     }
 
-    private boolean isUnfiltered() {
-        return this.filter == null;
-    }
-
-    /**
-     * 
-     * setFilter.
-     * 
-     * @param filterToSet
-     */
-    public void setFilter(final Predicate<T> filterToSet) {
-        this.filter = filterToSet;
-        if (null != pool) {
-            this.updateView(true);
-        }
-    }
-
     /**
      * 
      * addItem.
@@ -203,11 +198,17 @@ public final class ItemManager<T extends InventoryItem> {
         this.pool.add(item, qty);
         if (this.isUnfiltered()) {
             this.model.addItem(item, qty);
-       }
+        }
         this.updateView(false);
         this.table.fixSelection(n);
     }
 
+    /**
+     * 
+     * addItems.
+     * 
+     * @param itemsToAdd
+     */
     public void addItems(Iterable<Map.Entry<T, Integer>> itemsToAdd) {
         final int n = this.table.getSelectedRow();
         for (Map.Entry<T, Integer> item : itemsToAdd) {
@@ -220,6 +221,12 @@ public final class ItemManager<T extends InventoryItem> {
         this.table.fixSelection(n);
     }
     
+    /**
+     * 
+     * addItems.
+     * 
+     * @param itemsToAdd
+     */
     public void addItems(Collection<T> itemsToAdd) {
         final int n = this.table.getSelectedRow();
         for (T item : itemsToAdd) {
@@ -237,7 +244,7 @@ public final class ItemManager<T extends InventoryItem> {
      * removeItem.
      * 
      * @param item
-     *            an InventoryItem
+     * @param qty
      */
     public void removeItem(final T item, int qty) {
         final int n = this.table.getSelectedRow();
@@ -249,6 +256,12 @@ public final class ItemManager<T extends InventoryItem> {
         this.table.fixSelection(n);
     }
 
+    /**
+     * 
+     * removeItems.
+     * 
+     * @param itemsToRemove
+     */
     public void removeItems(List<Map.Entry<T, Integer>> itemsToRemove) {
         final int n = this.table.getSelectedRow();
         for (Map.Entry<T, Integer> item : itemsToRemove) {
@@ -261,12 +274,86 @@ public final class ItemManager<T extends InventoryItem> {
         this.table.fixSelection(n);
     }
     
+    /**
+     * 
+     * getItemCount.
+     * 
+     * @param item
+     */
     public int getItemCount(final T item) {
-        return model.isInfinite() ? Integer.MAX_VALUE : this.pool.count(item);
+        return this.model.isInfinite() ? Integer.MAX_VALUE : this.pool.count(item);
     }
     
+    /**
+     * Gets all filtered items in the model.
+     * 
+     * @return ItemPoolView<T>
+     */
+    public ItemPoolView<T> getFilteredItems() {
+        return this.model.getItems();
+    }
+    
+    /**
+     * 
+     * getStatLabels.
+     * 
+     */
+    public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {
+        return this.statLabels;
+    }
+    
+    /**
+     * 
+     * getStatLabel.
+     * 
+     * @param s
+     */
+    public void setStatLabels(Map<SItemManagerUtil.StatTypes, FLabel> statLabels0) {
+        this.statLabels = statLabels0;
+    }
+    
+    /**
+     * 
+     * getStatLabel.
+     * 
+     * @param s
+     */
+    public FLabel getStatLabel(SItemManagerUtil.StatTypes s) {
+        if (this.statLabels != null) {
+            return this.statLabels.get(s);
+        }
+        return null;
+    }
+    
+    /**
+     * 
+     * getFilter.
+     * 
+     */
     public Predicate<T> getFilter() {
-        return filter;
+        return this.filter;
+    }
+    
+    /**
+     * 
+     * isUnfiltered.
+     * 
+     */
+    private boolean isUnfiltered() {
+        return this.filter == null;
+    }
+
+    /**
+     * 
+     * setFilter.
+     * 
+     * @param filterToSet
+     */
+    public void setFilter(final Predicate<T> filterToSet) {
+        this.filter = filterToSet;
+        if (this.pool != null) {
+            this.updateView(true);
+        }
     }
 
     /**
@@ -274,7 +361,6 @@ public final class ItemManager<T extends InventoryItem> {
      * updateView.
      * 
      * @param bForceFilter
-     *            a boolean
      */
     public void updateView(final boolean bForceFilter) {
         final boolean useFilter = (bForceFilter && (this.filter != null)) || !isUnfiltered();
@@ -298,16 +384,6 @@ public final class ItemManager<T extends InventoryItem> {
         }
 
         this.table.getTableModel().refreshSort();
-    }
-
-    /**
-     * 
-     * getItems.
-     * 
-     * @return ItemPoolView
-     */
-    public ItemPoolView<T> getItems() {
-        return this.pool;
     }
 
     /**
@@ -350,18 +426,30 @@ public final class ItemManager<T extends InventoryItem> {
         this.alwaysNonUnique = nonUniqueOnly;
     }
 
+    /**
+     * 
+     * setWantElasticColumns.
+     * 
+     * @param value
+     */
     public void setWantElasticColumns(boolean value) {
-        table.setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_NEXT_COLUMN);
+        this.table.setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_NEXT_COLUMN);
     }
     
+    /**
+     * 
+     * selectAndScrollTo.
+     * 
+     * @param rowIdx
+     */
     public void selectAndScrollTo(int rowIdx) {
-        if (!(table.getParent() instanceof JViewport)) {
+        if (!(this.table.getParent() instanceof JViewport)) {
             return;
         }
-        JViewport viewport = (JViewport)table.getParent();
+        JViewport viewport = (JViewport)this.table.getParent();
 
         // compute where we're going and where we are
-        Rectangle targetRect  = table.getCellRect(rowIdx, 0, true);
+        Rectangle targetRect  = this.table.getCellRect(rowIdx, 0, true);
         Rectangle curViewRect = viewport.getViewRect();
 
         // if the target cell is not visible, attempt to jump to a location where it is
@@ -374,15 +462,20 @@ public final class ItemManager<T extends InventoryItem> {
             targetRect.setLocation(targetRect.x, targetRect.y - (targetRect.height * 3));
         }
         
-        table.scrollRectToVisible(targetRect);
-        table.setRowSelectionInterval(rowIdx, rowIdx);
+        this.table.scrollRectToVisible(targetRect);
+        this.table.setRowSelectionInterval(rowIdx, rowIdx);
     }
 
+    /**
+     * 
+     * focus.
+     * 
+     */
     public void focus() {
-        table.requestFocusInWindow();
+        this.table.requestFocusInWindow();
         
-        if (table.getRowCount() > 0) {
-            table.changeSelection(0, 0, false, false);
+        if (this.table.getRowCount() > 0) {
+            this.table.changeSelection(0, 0, false, false);
         }
     }
 }
