@@ -219,13 +219,11 @@ public final class CardUtil {
             parents.add(card);
         }
 
-        final String colorOrType = sa.getParam("ColorOrType"); // currently Color
-                                                              // or
-        // Type, Type is colors
-        // + colorless
+        final String colorOrType = sa.getParam("ColorOrType"); 
+        // currently Color or Type, Type is colors + colorless
         final String validCard = sa.getParam("Valid");
-        final String reflectProperty = sa.getParam("ReflectProperty"); // Produce
-        // (Reflecting Pool) or Is (Meteor Crater)
+        final String reflectProperty = sa.getParam("ReflectProperty");
+        // Produce (Reflecting Pool) or Is (Meteor Crater)
 
         int maxChoices = 5; // Color is the default colorOrType
         if (colorOrType.equals("Type")) {
@@ -266,6 +264,7 @@ public final class CardUtil {
                 }
             }
         } else if (reflectProperty.equals("Produced")) {
+            // Why is this name so similar to the one below?
             final String producedColors = abMana instanceof AbilitySub ? (String) abMana.getRootAbility().getTriggeringObject("Produced") : (String) abMana.getTriggeringObject("Produced");
             for (final String col : Constant.Color.ONLY_COLORS) {
                 final String s = MagicColor.toShortString(col);
@@ -281,8 +280,6 @@ public final class CardUtil {
             for (final Card c : cards) {
                 abilities.addAll(c.getManaAbility());
             }
-            // currently reflected mana will ignore other reflected mana
-            // abilities
 
             final List<SpellAbility> reflectAbilities = new ArrayList<SpellAbility>();
 
@@ -293,7 +290,8 @@ public final class CardUtil {
 
                 if (ab.getApi() == ApiType.ManaReflected) {
                     if (!parents.contains(ab.getSourceCard())) {
-                        // Recursion!
+                        // Recursion! Set Activator to controller for appropriate valid comparison
+                        ab.setActivatingPlayer(ab.getSourceCard().getController());
                         reflectAbilities.add(ab);
                         parents.add(ab.getSourceCard());
                     }
