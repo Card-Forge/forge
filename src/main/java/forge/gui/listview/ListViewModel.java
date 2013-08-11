@@ -35,20 +35,19 @@ import forge.item.ItemPoolView;
  * @version $Id: ListViewModel.java 19857 2013-02-24 08:49:52Z Max mtg $
  */
 public final class ListViewModel<T extends InventoryItem> {
+    private final ListView<T> listView;
     private final ItemPool<T> data;
-    private final ListViewTable<T> table;
     private boolean infiniteSupply;
 
     /**
-     * Instantiates a new table model, using a JTable,
-     * a column set, and a data set of generic type <T>.
+     * Instantiates a new list view model
      * 
-     * @param table0 &emsp; {@link javax.swing.JTable}
-     * @param class0 &emsp; Generic type <T>
+     * @param listView0
+     * @param genericType0
      */
-    public ListViewModel(final ListViewTable<T> table0, final Class<T> class0) {
-        this.table = table0;
-        this.data = new ItemPool<T>(class0);
+    public ListViewModel(final ListView<T> listView0, final Class<T> genericType0) {
+        this.listView = listView0;
+        this.data = new ItemPool<T>(genericType0);
     }
 
     /**
@@ -99,7 +98,7 @@ public final class ListViewModel<T extends InventoryItem> {
         final boolean wasThere = this.data.count(item0) > 0;
         if (wasThere) {
             this.data.remove(item0, qty);
-            this.table.getTableModel().fireTableDataChanged();
+            this.listView.getTableModel().fireTableDataChanged();
         }
     }
 
@@ -110,7 +109,7 @@ public final class ListViewModel<T extends InventoryItem> {
      */
     public void addItem(final T item0, int qty) {
         this.data.add(item0, qty);
-        this.table.getTableModel().fireTableDataChanged();
+        this.listView.getTableModel().fireTableDataChanged();
     }
 
     /**
@@ -120,7 +119,7 @@ public final class ListViewModel<T extends InventoryItem> {
      */
     public void addItems(final Iterable<Entry<T, Integer>> items0) {
         this.data.addAll(items0);
-        this.table.getTableModel().fireTableDataChanged();
+        this.listView.getTableModel().fireTableDataChanged();
     }
     /**
      * Sets whether this table's pool of items is in infinite supply.  If false, items in the

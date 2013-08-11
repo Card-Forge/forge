@@ -43,8 +43,7 @@ import forge.util.Aggregates;
  * @param <T>
  *            the generic type
  */
-@SuppressWarnings("serial")
-public final class ListView<T extends InventoryItem> extends JViewport {
+public final class ListView<T extends InventoryItem> {
     private ItemPool<T> pool;
     private ListViewModel<T> model;
     private final ListViewTable<T> table;
@@ -57,16 +56,26 @@ public final class ListView<T extends InventoryItem> extends JViewport {
      * 
      * getTable.
      * 
-     * @return JTable
+     * @return ListViewTable<T>
      */
     public ListViewTable<T> getTable() {
         return this.table;
+    }
+    
+    /**
+     * 
+     * getTableModel.
+     * 
+     * @return ListViewTableModel<T>
+     */
+    public ListViewTableModel<T> getTableModel() {
+        return this.table.getTableModel();
     }
 
     /**
      * ListView.
      * 
-     * @param type0 the class of item that this table will contain
+     * @param genericType0 - the class of item that this table will contain
      */
     public ListView(final Class<T> genericType0) {
         this(genericType0, false);
@@ -81,6 +90,7 @@ public final class ListView<T extends InventoryItem> extends JViewport {
     public ListView(final Class<T> genericType0, final boolean wantUnique0) {
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
+        this.model = new ListViewModel<T>(this, genericType0);
         this.table = new ListViewTable<T>(this.model);
     }
 
