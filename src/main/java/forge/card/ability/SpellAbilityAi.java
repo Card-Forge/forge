@@ -9,6 +9,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
@@ -46,7 +47,30 @@ public abstract class SpellAbilityAi extends SaTargetRountines {
     }
 
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        return canPlayAI(aiPlayer, sa) || mandatory;
+        if (canPlayAI(aiPlayer, sa)) {
+            return true;
+        }
+        if (mandatory) {
+            final TargetRestrictions tgt = sa.getTargetRestrictions();
+            final Player opp = aiPlayer.getOpponent();
+            if (tgt != null) {
+                if (opp.canBeTargetedBy(sa)) {
+                    sa.resetTargets();
+                    sa.getTargets().add(opp);
+                } else if (mandatory) {
+                    if (aiPlayer.canBeTargetedBy(sa)) {
+                        sa.resetTargets();
+                        sa.getTargets().add(opp);
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
