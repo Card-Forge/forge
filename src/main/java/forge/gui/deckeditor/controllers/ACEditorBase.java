@@ -58,8 +58,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         public void addTextFilterItem ();
     }
     
-    private ItemManager<TItem> lvCatalog;
-    private ItemManager<TItem> lvDeck;
+    private ItemManager<TItem> catalogManager;
+    private ItemManager<TItem> deckManager;
     
     /** 
      * Operation to add one of selected card to current deck.
@@ -100,39 +100,39 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public abstract void init();
 
     /**
-     * Gets the ListView holding the cards in the current deck.
+     * Gets the ItemManager holding the cards in the current deck.
      * 
      * @return {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public ItemManager<TItem> getDeckListView() {
-        return this.lvDeck;
+    public ItemManager<TItem> getDeckManager() {
+        return this.deckManager;
     }
 
     /**
-     * Sets the ListView holding the cards in the current deck.
+     * Sets the ItemManager holding the cards in the current deck.
      * 
-     * @param table0 &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
+     * @param itemManager &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public void setDeckListView(final ItemManager<TItem> table0) {
-        this.lvDeck = table0;
+    public void setDeckManager(final ItemManager<TItem> itemManager) {
+        this.deckManager = itemManager;
     }
 
     /**
-     * Gets the ListView holding the cards in the current catalog.
+     * Gets the ItemManager holding the cards in the current catalog.
      * 
      * @return {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public ItemManager<TItem> getCatalogListView() {
-        return this.lvCatalog;
+    public ItemManager<TItem> getCatalogManager() {
+        return this.catalogManager;
     }
 
     /**
-     * Sets the ListView holding the cards in the current catalog.
+     * Sets the ItemManager holding the cards in the current catalog.
      * 
-     * @param table0 &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
+     * @param itemManager &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public void setCatalogListView(final ItemManager<TItem> table0) {
-        this.lvCatalog = table0;
+    public void setCatalogManager(final ItemManager<TItem> itemManager) {
+        this.catalogManager = itemManager;
     }
 
     /**

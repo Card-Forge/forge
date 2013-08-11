@@ -74,14 +74,14 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         cardPoolCondition = poolCondition;
         exitToScreen = exitTo;
         
-        final ItemManager<PaperCard> lvCatalog = new ItemManager<PaperCard>(PaperCard.class, true);
-        final ItemManager<PaperCard> lvDeck = new ItemManager<PaperCard>(PaperCard.class, true);
+        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, true);
+        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, true);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(lvCatalog.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(lvDeck.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setTableView(catalogManager.getTable());
+        VCurrentDeck.SINGLETON_INSTANCE.setTableView(deckManager.getTable());
 
-        this.setCatalogListView(lvCatalog);
-        this.setDeckListView(lvDeck);
+        this.setCatalogManager(catalogManager);
+        this.setDeckManager(deckManager);
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override
@@ -104,7 +104,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         }
 
         final PaperCard card = (PaperCard) item;
-        this.getDeckListView().addItem(card, qty);
+        this.getDeckManager().addItem(card, qty);
         this.controller.notifyModelChanged();
     }
 
@@ -118,7 +118,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         }
 
         final PaperCard card = (PaperCard) item;
-        this.getDeckListView().removeItem(card, qty);
+        this.getDeckManager().removeItem(card, qty);
         this.controller.notifyModelChanged();
     }
 
@@ -143,8 +143,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         Iterable<PaperCard> allNT = CardDb.variants().getAllCards();
         allNT = Iterables.filter(allNT, cardPoolCondition);
         
-        this.getCatalogListView().setPool(ItemPool.createFrom(allNT, PaperCard.class), true);
-        this.getDeckListView().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+        this.getCatalogManager().setPool(ItemPool.createFrom(allNT, PaperCard.class), true);
+        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
     }
 
     /*
@@ -165,8 +165,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
 
-        this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, lstCatalogCols);
-        this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogManager().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, lstCatalogCols);
+        this.getDeckManager().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
         SItemManagerUtil.resetUI();
         

@@ -271,7 +271,7 @@ public enum CCardCatalog implements ICDoc {
             public void keyReleased(KeyEvent e) {
                 if (KeyEvent.VK_ENTER == e.getKeyCode() && 0 == e.getModifiers()) {
                     // set focus to table when a plain enter is typed into the text filter box
-                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogListView().getTable().requestFocusInWindow();
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().getTable().requestFocusInWindow();
                 } else if (keypressPending) {
                     // do this in keyReleased instead of keyTyped since the textbox text isn't updated until the key is released
                     // but depend on keypressPending since otherwise we pick up hotkeys and other unwanted stuff
@@ -385,7 +385,7 @@ public enum CCardCatalog implements ICDoc {
         // TODO: is there really no way to make this type safe?
         ACEditorBase<?, ?> editor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (null != editor) {
-            ((ACEditorBase<PaperCard, DeckBase>)editor).getCatalogListView().setFilter(cardFilter);
+            ((ACEditorBase<PaperCard, DeckBase>)editor).getCatalogManager().setFilter(cardFilter);
         }
     }
     

@@ -127,30 +127,30 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     public CEditorQuestCardShop(final QuestController qd) {
         this.questData = qd;
 
-        final ItemManager<InventoryItem> lvCatalog = new ItemManager<InventoryItem>(InventoryItem.class, false);
-        final ItemManager<InventoryItem> lvDeck = new ItemManager<InventoryItem>(InventoryItem.class, false);
+        final ItemManager<InventoryItem> catalogManager = new ItemManager<InventoryItem>(InventoryItem.class, false);
+        final ItemManager<InventoryItem> deckManager = new ItemManager<InventoryItem>(InventoryItem.class, false);
 
-        lvCatalog.setAlwaysNonUnique(true);
-        lvDeck.setAlwaysNonUnique(true);
+        catalogManager.setAlwaysNonUnique(true);
+        deckManager.setAlwaysNonUnique(true);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(lvCatalog.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(lvDeck.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setTableView(catalogManager.getTable());
+        VCurrentDeck.SINGLETON_INSTANCE.setTableView(deckManager.getTable());
 
-        this.setCatalogListView(lvCatalog);
-        this.setDeckListView(lvDeck);
+        this.setCatalogManager(catalogManager);
+        this.setDeckManager(deckManager);
     }
 
     private void toggleFullCatalog() {
         showingFullCatalog = !showingFullCatalog;
         
         if (showingFullCatalog) {
-            this.getCatalogListView().setPool(fullCatalogCards, true);
+            this.getCatalogManager().setPool(fullCatalogCards, true);
             VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(false);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(false);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setEnabled(false);
             fullCatalogToggle.setText("Return to spell shop");
         } else {
-            this.getCatalogListView().setPool(cardsForSale);
+            this.getCatalogManager().setPool(cardsForSale);
             VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(true);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(true);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setEnabled(true);
@@ -188,8 +188,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsDeck.remove(SColumnUtil.getColumn(ColumnName.DECK_AI));
 
         // Setup with current column set
-        this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
-        this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
+        this.getCatalogManager().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
+        this.getDeckManager().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
 
         SItemManagerUtil.resetUI();
 
@@ -363,8 +363,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         
         if (item instanceof PaperCard) {
             final PaperCard card = (PaperCard) item;
-            this.getDeckListView().addItem(card, qty);
-            this.getCatalogListView().removeItem(item, qty);
+            this.getDeckManager().addItem(card, qty);
+            this.getCatalogManager().removeItem(item, qty);
             this.questData.getCards().buyCard(card, qty, value);
 
         } else if (item instanceof OpenablePack) {
@@ -380,19 +380,19 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 this.questData.getCards().buyPack(booster, value);
                 final List<PaperCard> newCards = booster.getCards();
                 final List<InventoryItem> newInventory = new LinkedList<InventoryItem>(newCards);
-                getDeckListView().addItems(newInventory);
+                getDeckManager().addItems(newInventory);
                 final CardListViewer c = new CardListViewer(booster.getName(),
                         "You have found the following cards inside:", newCards);
                 c.show();
             }
-            this.getCatalogListView().removeItem(item, qty);
+            this.getCatalogManager().removeItem(item, qty);
         } else if (item instanceof PreconDeck) {
             final PreconDeck deck = (PreconDeck) item;
             this.questData.getCards().buyPreconDeck(deck, value);
             final ItemPool<InventoryItem> newInventory =
                     ItemPool.createFrom(deck.getDeck().getMain(), InventoryItem.class);
             for (int i = 0; qty > i; ++i) {
-                getDeckListView().addItems(newInventory);
+                getDeckManager().addItems(newInventory);
             }
             boolean one = 1 == qty;
             JOptionPane.showMessageDialog(null, String.format(
@@ -400,7 +400,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                     one ? "Deck" : String.format("%d copies of deck", qty),
                     deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),
                     "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
-            this.getCatalogListView().removeItem(item, qty);
+            this.getCatalogManager().removeItem(item, qty);
         }
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
@@ -416,8 +416,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
 
         final PaperCard card = (PaperCard) item;
-        this.getCatalogListView().addItem(card, qty);
-        this.getDeckListView().removeItem(card, qty);
+        this.getCatalogManager().addItem(card, qty);
+        this.getDeckManager().removeItem(card, qty);
 
         final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards()
                 .getSellPriceLimit());
@@ -446,8 +446,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             return;
         }
         
-        this.getCatalogListView().addItems(cardsToRemove);
-        this.getDeckListView().removeItems(cardsToRemove);
+        this.getCatalogManager().addItems(cardsToRemove);
+        this.getDeckManager().removeItems(cardsToRemove);
 
         for (Map.Entry<InventoryItem, Integer> item : cardsToRemove) {
             if (!(item.getKey() instanceof PaperCard)) {
@@ -496,8 +496,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
         ownedItems.addAll(this.questData.getCards().getCardpool().getView());
 
-        this.getCatalogListView().setPool(cardsForSale);
-        this.getDeckListView().setPool(ownedItems);
+        this.getCatalogManager().setPool(cardsForSale);
+        this.getDeckManager().setPool(ownedItems);
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setText("Sell all extras");
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setToolTipText("Sell unneeded extra copies of all cards");
@@ -505,7 +505,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             @Override
             public void run() {
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
-                for (Map.Entry<InventoryItem, Integer> item : getDeckListView().getItems()) {
+                for (Map.Entry<InventoryItem, Integer> item : getDeckManager().getItems()) {
                     PaperCard card = (PaperCard)item.getKey();
                     int numToKeep = card.getRules().getType().isBasic() ? 50 : 4;
                     if ("Relentless Rats".equals(card.getName())) {

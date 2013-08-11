@@ -59,17 +59,17 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     public CEditorLimited(final IStorage<DeckGroup> deckMap0) {
-        final ItemManager<PaperCard> lvCatalog = new ItemManager<PaperCard>(PaperCard.class, false);
-        final ItemManager<PaperCard> lvDeck = new ItemManager<PaperCard>(PaperCard.class, false);
+        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, false);
+        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, false);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(lvCatalog.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(lvDeck.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setTableView(catalogManager.getTable());
+        VCurrentDeck.SINGLETON_INSTANCE.setTableView(deckManager.getTable());
 
-        lvCatalog.setAlwaysNonUnique(true);
-        lvDeck.setAlwaysNonUnique(true);
+        catalogManager.setAlwaysNonUnique(true);
+        deckManager.setAlwaysNonUnique(true);
 
-        this.setCatalogListView(lvCatalog);
-        this.setDeckListView(lvDeck);
+        this.setCatalogManager(catalogManager);
+        this.setDeckManager(deckManager);
 
         final Supplier<DeckGroup> newCreator = new Supplier<DeckGroup>() {
             @Override
@@ -101,8 +101,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
         // update view
         final PaperCard card = (PaperCard) item;
-        this.getDeckListView().addItem(card, qty);
-        this.getCatalogListView().removeItem(card, qty);
+        this.getDeckManager().addItem(card, qty);
+        this.getCatalogManager().removeItem(card, qty);
         this.getDeckController().notifyModelChanged();
     }
 
@@ -117,8 +117,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
         // update view
         final PaperCard card = (PaperCard) item;
-        this.getCatalogListView().addItem(card, qty);
-        this.getDeckListView().removeItem(card, qty);
+        this.getCatalogManager().addItem(card, qty);
+        this.getDeckManager().removeItem(card, qty);
         this.getDeckController().notifyModelChanged();
     }
 
@@ -141,8 +141,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     @Override
     public void resetTables() {
         final Deck toEdit = this.getSelectedDeck(this.controller.getModel());
-        this.getCatalogListView().setPool(toEdit.getOrCreate(DeckSection.Sideboard));
-        this.getDeckListView().setPool(toEdit.getMain());
+        this.getCatalogManager().setPool(toEdit.getOrCreate(DeckSection.Sideboard));
+        this.getDeckManager().setPool(toEdit.getMain());
     }
 
     /*
@@ -160,8 +160,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void init() {
-        this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, SColumnUtil.getCatalogDefaultColumns());
-        this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogManager().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, SColumnUtil.getCatalogDefaultColumns());
+        this.getDeckManager().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
         SItemManagerUtil.resetUI();
 

@@ -81,8 +81,8 @@ public enum CEditorPreferences implements ICDoc {
                 public void itemStateChanged(ItemEvent arg0) {
                     TableColumnInfo<InventoryItem> col = SColumnUtil.getColumn(name);
                     final JTable table = (col.getEnumValue().substring(0, 4).equals("DECK"))
-                        ? CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckListView().getTable()
-                        : CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogListView().getTable();
+                        ? CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager().getTable()
+                        : CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().getTable();
                     SColumnUtil.toggleColumn(table, col);
                     SItemManagerIO.savePreferences(table);
                 }
@@ -105,12 +105,12 @@ public enum CEditorPreferences implements ICDoc {
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
         ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (curEditor != null) {
-            curEditor.getCatalogListView().setWantElasticColumns(wantElastic);
-            curEditor.getDeckListView().setWantElasticColumns(wantElastic);
-            curEditor.getCatalogListView().setWantUnique(wantUnique);
-            curEditor.getCatalogListView().updateView(true);
-            curEditor.getDeckListView().setWantUnique(wantUnique);
-            curEditor.getDeckListView().updateView(true);
+            curEditor.getCatalogManager().setWantElasticColumns(wantElastic);
+            curEditor.getDeckManager().setWantElasticColumns(wantElastic);
+            curEditor.getCatalogManager().setWantUnique(wantUnique);
+            curEditor.getCatalogManager().updateView(true);
+            curEditor.getDeckManager().setWantUnique(wantUnique);
+            curEditor.getDeckManager().updateView(true);
         }
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbDeckStats().addItemListener(new ItemListener() {
@@ -118,31 +118,31 @@ public enum CEditorPreferences implements ICDoc {
                 VCurrentDeck.SINGLETON_INSTANCE.setStatsVisible(
                         ((JCheckBox) e.getSource()).isSelected());
                 SItemManagerIO.setPref(EditorPreference.stats_deck, ((JCheckBox) e.getSource()).isSelected());
-                SItemManagerIO.savePreferences(CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogListView().getTable()); } });
+                SItemManagerIO.savePreferences(CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().getTable()); } });
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbElasticColumns().addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {
                 ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
                 boolean wantElastic = ((JCheckBox) e.getSource()).isSelected();
                 if (curEditor != null) {
-                    curEditor.getCatalogListView().setWantElasticColumns(wantElastic);
-                    curEditor.getDeckListView().setWantElasticColumns(wantElastic);
+                    curEditor.getCatalogManager().setWantElasticColumns(wantElastic);
+                    curEditor.getDeckManager().setWantElasticColumns(wantElastic);
                 }
                 SItemManagerIO.setPref(EditorPreference.elastic_columns, wantElastic);
-                SItemManagerIO.savePreferences(curEditor.getCatalogListView().getTable()); } });
+                SItemManagerIO.savePreferences(curEditor.getCatalogManager().getTable()); } });
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbCardDisplayUnique().addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {
                 ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
                 boolean wantUnique = ((JCheckBox) e.getSource()).isSelected();
                 if (curEditor != null) {
-                    curEditor.getCatalogListView().setWantUnique(wantUnique);
-                    curEditor.getCatalogListView().updateView(true);
-                    curEditor.getDeckListView().setWantUnique(wantUnique);
-                    curEditor.getDeckListView().updateView(true);
+                    curEditor.getCatalogManager().setWantUnique(wantUnique);
+                    curEditor.getCatalogManager().updateView(true);
+                    curEditor.getDeckManager().setWantUnique(wantUnique);
+                    curEditor.getDeckManager().updateView(true);
                 }
                 SItemManagerIO.setPref(EditorPreference.display_unique_only, wantUnique);
-                SItemManagerIO.savePreferences(curEditor.getCatalogListView().getTable()); } });
+                SItemManagerIO.savePreferences(curEditor.getCatalogManager().getTable()); } });
     }
 
     /* (non-Javadoc)
