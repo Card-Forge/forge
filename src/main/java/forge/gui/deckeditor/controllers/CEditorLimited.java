@@ -59,17 +59,17 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     public CEditorLimited(final IStorage<DeckGroup> deckMap0) {
-        final ListView<PaperCard> tblCatalog = new ListView<PaperCard>(PaperCard.class, false);
-        final ListView<PaperCard> tblDeck = new ListView<PaperCard>(PaperCard.class, false);
+        final ListView<PaperCard> lvCatalog = new ListView<PaperCard>(PaperCard.class, false);
+        final ListView<PaperCard> lvDeck = new ListView<PaperCard>(PaperCard.class, false);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setTableView(lvCatalog.getTable());
+        VCurrentDeck.SINGLETON_INSTANCE.setTableView(lvDeck.getTable());
 
-        tblCatalog.setAlwaysNonUnique(true);
-        tblDeck.setAlwaysNonUnique(true);
+        lvCatalog.setAlwaysNonUnique(true);
+        lvDeck.setAlwaysNonUnique(true);
 
-        this.setCatalogListView(tblCatalog);
-        this.setDeckListView(tblDeck);
+        this.setCatalogListView(lvCatalog);
+        this.setDeckListView(lvDeck);
 
         final Supplier<DeckGroup> newCreator = new Supplier<DeckGroup>() {
             @Override

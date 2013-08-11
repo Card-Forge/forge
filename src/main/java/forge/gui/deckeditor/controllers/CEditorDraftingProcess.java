@@ -64,17 +64,17 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * Updates the deck editor UI as necessary draft selection mode.
      */
     public CEditorDraftingProcess() {
-        final ListView<PaperCard> tblCatalog = new ListView<PaperCard>(PaperCard.class, false);
-        final ListView<PaperCard> tblDeck = new ListView<PaperCard>(PaperCard.class, false);
+        final ListView<PaperCard> lvCatalog = new ListView<PaperCard>(PaperCard.class, false);
+        final ListView<PaperCard> lvDeck = new ListView<PaperCard>(PaperCard.class, false);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setTableView(lvCatalog.getTable());
+        VCurrentDeck.SINGLETON_INSTANCE.setTableView(lvDeck.getTable());
 
-        tblCatalog.setAlwaysNonUnique(true);
-        tblDeck.setAlwaysNonUnique(true);
+        lvCatalog.setAlwaysNonUnique(true);
+        lvDeck.setAlwaysNonUnique(true);
 
-        this.setCatalogListView(tblCatalog);
-        this.setDeckListView(tblDeck);
+        this.setCatalogListView(lvCatalog);
+        this.setDeckListView(lvDeck);
     }
 
     /**

@@ -74,14 +74,14 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         cardPoolCondition = poolCondition;
         exitToScreen = exitTo;
         
-        final ListView<PaperCard> tblCatalog = new ListView<PaperCard>(PaperCard.class, true);
-        final ListView<PaperCard> tblDeck = new ListView<PaperCard>(PaperCard.class, true);
+        final ListView<PaperCard> lvCatalog = new ListView<PaperCard>(PaperCard.class, true);
+        final ListView<PaperCard> lvDeck = new ListView<PaperCard>(PaperCard.class, true);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setTableView(lvCatalog.getTable());
+        VCurrentDeck.SINGLETON_INSTANCE.setTableView(lvDeck.getTable());
 
-        this.setCatalogListView(tblCatalog);
-        this.setDeckListView(tblDeck);
+        this.setCatalogListView(lvCatalog);
+        this.setDeckListView(lvDeck);
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override

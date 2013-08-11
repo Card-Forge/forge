@@ -127,17 +127,17 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     public CEditorQuestCardShop(final QuestController qd) {
         this.questData = qd;
 
-        final ListView<InventoryItem> tblCatalog = new ListView<InventoryItem>(InventoryItem.class, false);
-        final ListView<InventoryItem> tblDeck = new ListView<InventoryItem>(InventoryItem.class, false);
+        final ListView<InventoryItem> lvCatalog = new ListView<InventoryItem>(InventoryItem.class, false);
+        final ListView<InventoryItem> lvDeck = new ListView<InventoryItem>(InventoryItem.class, false);
 
-        tblCatalog.setAlwaysNonUnique(true);
-        tblDeck.setAlwaysNonUnique(true);
+        lvCatalog.setAlwaysNonUnique(true);
+        lvDeck.setAlwaysNonUnique(true);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setTableView(lvCatalog.getTable());
+        VCurrentDeck.SINGLETON_INSTANCE.setTableView(lvDeck.getTable());
 
-        this.setCatalogListView(tblCatalog);
-        this.setDeckListView(tblDeck);
+        this.setCatalogListView(lvCatalog);
+        this.setDeckListView(lvDeck);
     }
 
     private void toggleFullCatalog() {
