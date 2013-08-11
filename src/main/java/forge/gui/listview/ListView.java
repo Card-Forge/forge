@@ -59,7 +59,7 @@ public final class ListView<T extends InventoryItem> extends JViewport {
      * 
      * @return JTable
      */
-    public JTable getTable() {
+    public ListViewTable<T> getTable() {
         return this.table;
     }
 
@@ -93,6 +93,28 @@ public final class ListView<T extends InventoryItem> extends JViewport {
     public void setPool(final Iterable<InventoryItem> items) {
         this.setPool(ItemPool.createFrom(items, this.genericType), false);
     }
+    
+    /**
+     * 
+     * Sets the item pool.
+     * 
+     * @param poolView
+     */
+    public void setPool(final ItemPoolView<T> poolView) {
+        this.setPool(poolView, false);
+    }
+    
+    /**
+     * 
+     * Sets the item pool.
+     * 
+     * @param poolView
+     * @param infinite
+     */
+    public void setPool(final ItemPoolView<T> poolView, boolean infinite) {
+        this.setPoolImpl(ItemPool.createFrom(poolView, this.genericType), infinite);
+
+    }
 
     /**
      * 
@@ -101,7 +123,7 @@ public final class ListView<T extends InventoryItem> extends JViewport {
      * @param pool0
      */
     public void setPool(final ItemPool<T> pool0) {
-        this.setPool(pool0, false);
+        this.setPoolImpl(pool0, false);
     }
 
     /**
@@ -111,7 +133,7 @@ public final class ListView<T extends InventoryItem> extends JViewport {
      * @param pool0
      * @param infinite
      */
-    protected void setPool(final ItemPool<T> pool0, boolean infinite) {
+    protected void setPoolImpl(final ItemPool<T> pool0, boolean infinite) {
         this.model.clear();
         this.pool = pool0;
         this.model.addItems(this.pool);

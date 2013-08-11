@@ -31,18 +31,17 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.SEditorUtil;
-import forge.gui.deckeditor.tables.DeckController;
-import forge.gui.deckeditor.tables.EditorTableView;
-import forge.gui.deckeditor.tables.SColumnUtil;
-import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
-import forge.gui.deckeditor.tables.TableColumnInfo;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.quest.CSubmenuQuestDecks;
+import forge.gui.listview.ListView;
+import forge.gui.listview.SColumnUtil;
+import forge.gui.listview.SColumnUtil.ColumnName;
+import forge.gui.listview.SListViewUtil;
+import forge.gui.listview.TableColumnInfo;
 import forge.gui.toolbox.FLabel;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
@@ -96,8 +95,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     public CEditorQuest(final QuestController questData0) {
         this.questData = questData0;
 
-        final EditorTableView<PaperCard> tblCatalog = new EditorTableView<PaperCard>(false, PaperCard.class);
-        final EditorTableView<PaperCard> tblDeck = new EditorTableView<PaperCard>(false, PaperCard.class);
+        final ListView<PaperCard> tblCatalog = new ListView<PaperCard>(PaperCard.class, false);
+        final ListView<PaperCard> tblDeck = new ListView<PaperCard>(PaperCard.class, false);
 
         tblCatalog.setAlwaysNonUnique(true);
         tblDeck.setAlwaysNonUnique(true);
@@ -105,8 +104,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
 
-        this.setTableCatalog(tblCatalog);
-        this.setTableDeck(tblDeck);
+        this.setCatalogListView(tblCatalog);
+        this.setDeckListView(tblDeck);
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override
@@ -124,7 +123,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      * @param card {@link forge.item.PaperCard}
      */
     public void addCheatCard(final PaperCard card, int qty) {
-        this.getTableCatalog().addCard(card, qty);
+        this.getCatalogListView().addItem(card, qty);
         this.questData.getCards().getCardpool().add(card, qty);
     }
 
@@ -159,9 +158,9 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
                 controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
             }
         } else {
-            getTableDeck().addCard(card, qty);
+            getDeckListView().addItem(card, qty);
         }
-        this.getTableCatalog().removeCard(card, qty);
+        this.getCatalogListView().removeItem(card, qty);
         this.controller.notifyModelChanged();
     }
 
@@ -181,9 +180,9 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
                 controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
             }
         } else {
-            this.getTableCatalog().addCard(card, qty);
+            this.getCatalogListView().addItem(card, qty);
         }
-        this.getTableDeck().removeCard(card, qty);
+        this.getDeckListView().removeItem(card, qty);
         this.controller.notifyModelChanged();
     }
 
@@ -216,8 +215,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         // remove sideboard cards from the catalog
         cardpool.removeAll(deck.getOrCreate(DeckSection.Sideboard));
         // show cards, makes this user friendly
-        this.getTableCatalog().setDeck(cardpool);
-        this.getTableDeck().setDeck(deck.getMain());
+        this.getCatalogListView().setPool(cardpool);
+        this.getDeckListView().setPool(deck.getMain());
     }
 
     //=========== Overridden from ACEditorBase
@@ -237,8 +236,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      */
     public void switchEditorMode(boolean isSideboarding) {
         if (isSideboarding) {
-            this.getTableCatalog().setDeck(this.controller.getModel().getMain());
-            this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+            this.getCatalogListView().setPool(this.controller.getModel().getMain());
+            this.getDeckListView().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
         } else {
             resetTables();
         }
@@ -279,12 +278,12 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
                 this.fnDeckCompare, this.fnDeckGet);
 
-        this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
-        this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
+        this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
+        this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
 
         Deck deck = new Deck();
 
-        SEditorUtil.resetUI();
+        SListViewUtil.resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);

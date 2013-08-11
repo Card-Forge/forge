@@ -47,14 +47,15 @@ import com.google.common.primitives.Ints;
 
 import forge.deck.DeckBase;
 import forge.gui.GuiUtils;
-import forge.gui.deckeditor.SEditorIO.EditorPreference;
+import forge.gui.listview.SListViewIO.EditorPreference;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
-import forge.gui.deckeditor.tables.EditorTableModel;
-import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.views.VCardCatalog;
+import forge.gui.listview.ListView;
+import forge.gui.listview.ListViewTableModel;
+import forge.gui.listview.SListViewIO;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.FLabel;
@@ -105,12 +106,12 @@ public enum CDeckEditorUI {
         this.childController = editor0;
         updateController();
         if (childController != null) {
-            boolean wantElastic = SEditorIO.getPref(EditorPreference.elastic_columns);
-            boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
-            childController.getTableCatalog().setWantElasticColumns(wantElastic);
-            childController.getTableDeck().setWantElasticColumns(wantElastic);
-            childController.getTableCatalog().setWantUnique(wantUnique);
-            childController.getTableDeck().setWantUnique(wantUnique);
+            boolean wantElastic = SListViewIO.getPref(EditorPreference.elastic_columns);
+            boolean wantUnique = SListViewIO.getPref(EditorPreference.display_unique_only);
+            childController.getCatalogListView().setWantElasticColumns(wantElastic);
+            childController.getDeckListView().setWantElasticColumns(wantElastic);
+            childController.getCatalogListView().setWantUnique(wantUnique);
+            childController.getDeckListView().setWantUnique(wantUnique);
             CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
         }
     }
@@ -119,14 +120,14 @@ public enum CDeckEditorUI {
         void move(InventoryItem item, int qty);
     }
 
-    private void moveSelectedCards(EditorTableView<InventoryItem> table, _MoveAction moveAction, int maxQty) {
-        List<InventoryItem> items = table.getSelectedCards();
+    private void moveSelectedCards(ListView<InventoryItem> listView, _MoveAction moveAction, int maxQty) {
+        List<? extends InventoryItem> items = listView.getSelectedItems();
         if (items.isEmpty()) {
             return;
         }
         
         for (InventoryItem item : items) {
-            int toMove = Math.min(maxQty, table.getCardCount(item));
+            int toMove = Math.min(maxQty, listView.getItemCount(item));
             moveAction.move(item, toMove);
         }
 
@@ -136,7 +137,7 @@ public enum CDeckEditorUI {
 
     @SuppressWarnings("unchecked")
     public void addSelectedCards(final boolean toAlternate, int number) {
-        moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableCatalog(),
+        moveSelectedCards((ListView<InventoryItem>)childController.getCatalogListView(),
                 new _MoveAction() {
             @Override
             public void move(InventoryItem item, int qty) {
@@ -147,7 +148,7 @@ public enum CDeckEditorUI {
 
     @SuppressWarnings("unchecked")
     public void removeSelectedCards(final boolean toAlternate, int number) {
-        moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableDeck(),
+        moveSelectedCards((ListView<InventoryItem>)childController.getDeckListView(),
                 new _MoveAction() {
             @Override
             public void move(InventoryItem item, int qty) {
@@ -158,7 +159,7 @@ public enum CDeckEditorUI {
 
     @SuppressWarnings("unchecked")
     public void removeAllCards(final boolean toAlternate) {
-        EditorTableView<InventoryItem> v = (EditorTableView<InventoryItem>)childController.getTableDeck();
+        ListView<InventoryItem> v = (ListView<InventoryItem>)childController.getDeckListView();
         v.getTable().selectAll();
         moveSelectedCards(v, new _MoveAction() {
             @Override
@@ -288,8 +289,8 @@ public enum CDeckEditorUI {
      * Updates listeners for current controller.
      */
     private void updateController() {
-        EditorTableView<? extends InventoryItem> catView  = childController.getTableCatalog();
-        EditorTableView<? extends InventoryItem> deckView = childController.getTableDeck();
+        ListView<? extends InventoryItem> catView  = childController.getCatalogListView();
+        ListView<? extends InventoryItem> deckView = childController.getDeckListView();
         final JTable catTable  = catView.getTable();
         final JTable deckTable = deckView.getTable();
         final _FindAsYouType catFind  = new _FindAsYouType(catView);
@@ -385,10 +386,10 @@ public enum CDeckEditorUI {
         private boolean popupShowing = false;
         private Popup popup;
         private Timer popupTimer;
-        private final EditorTableView<? extends InventoryItem> tableView;
+        private final ListView<? extends InventoryItem> tableView;
         static final int okModifiers = KeyEvent.SHIFT_MASK | KeyEvent.ALT_GRAPH_MASK;
         
-        public _FindAsYouType(EditorTableView<? extends InventoryItem> tableView) {
+        public _FindAsYouType(ListView<? extends InventoryItem> tableView) {
             this.tableView = tableView;
         }
 
@@ -414,10 +415,8 @@ public enum CDeckEditorUI {
             String searchStr = str.toString();
             boolean found = false;
             for (int idx = startIdx;; idx = (idx + increment) % numItems) {
-                @SuppressWarnings("unchecked")
-                EditorTableModel<? extends InventoryItem> tableModel =
-                        (EditorTableModel<? extends InventoryItem>)tableView.getTable().getModel();
-                if (StringUtils.containsIgnoreCase(tableModel.rowToCard(idx).getKey().getName(), searchStr)) {
+                ListViewTableModel<? extends InventoryItem> tableModel = tableView.getTable().getTableModel();
+                if (StringUtils.containsIgnoreCase(tableModel.rowToItem(idx).getKey().getName(), searchStr)) {
                     tableView.selectAndScrollTo(idx);
                     found = true;
                     break;

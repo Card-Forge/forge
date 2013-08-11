@@ -39,12 +39,6 @@ import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckSection;
 import forge.gui.CardListViewer;
-import forge.gui.deckeditor.SEditorUtil;
-import forge.gui.deckeditor.tables.DeckController;
-import forge.gui.deckeditor.tables.EditorTableView;
-import forge.gui.deckeditor.tables.SColumnUtil;
-import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
-import forge.gui.deckeditor.tables.TableColumnInfo;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
@@ -52,6 +46,11 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.framework.DragCell;
 import forge.gui.home.quest.CSubmenuQuestDecks;
+import forge.gui.listview.ListView;
+import forge.gui.listview.SColumnUtil;
+import forge.gui.listview.SColumnUtil.ColumnName;
+import forge.gui.listview.SListViewUtil;
+import forge.gui.listview.TableColumnInfo;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.item.BoosterPack;
@@ -128,8 +127,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     public CEditorQuestCardShop(final QuestController qd) {
         this.questData = qd;
 
-        final EditorTableView<InventoryItem> tblCatalog = new EditorTableView<InventoryItem>(false, InventoryItem.class);
-        final EditorTableView<InventoryItem> tblDeck = new EditorTableView<InventoryItem>(false, InventoryItem.class);
+        final ListView<InventoryItem> tblCatalog = new ListView<InventoryItem>(InventoryItem.class, false);
+        final ListView<InventoryItem> tblDeck = new ListView<InventoryItem>(InventoryItem.class, false);
 
         tblCatalog.setAlwaysNonUnique(true);
         tblDeck.setAlwaysNonUnique(true);
@@ -137,21 +136,21 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
 
-        this.setTableCatalog(tblCatalog);
-        this.setTableDeck(tblDeck);
+        this.setCatalogListView(tblCatalog);
+        this.setDeckListView(tblDeck);
     }
 
     private void toggleFullCatalog() {
         showingFullCatalog = !showingFullCatalog;
         
         if (showingFullCatalog) {
-            this.getTableCatalog().setDeck(fullCatalogCards, true);
+            this.getCatalogListView().setPool(fullCatalogCards, true);
             VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(false);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(false);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setEnabled(false);
             fullCatalogToggle.setText("Return to spell shop");
         } else {
-            this.getTableCatalog().setDeck(cardsForSale);
+            this.getCatalogListView().setPool(cardsForSale);
             VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(true);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(true);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setEnabled(true);
@@ -189,10 +188,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsDeck.remove(SColumnUtil.getColumn(ColumnName.DECK_AI));
 
         // Setup with current column set
-        this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
-        this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
+        this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
+        this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
 
-        SEditorUtil.resetUI();
+        SListViewUtil.resetUI();
 
         CCTabLabel = VCardCatalog.SINGLETON_INSTANCE.getTabLabel().getText();
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Cards for sale");
@@ -364,8 +363,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         
         if (item instanceof PaperCard) {
             final PaperCard card = (PaperCard) item;
-            this.getTableDeck().addCard(card, qty);
-            this.getTableCatalog().removeCard(item, qty);
+            this.getDeckListView().addItem(card, qty);
+            this.getCatalogListView().removeItem(item, qty);
             this.questData.getCards().buyCard(card, qty, value);
 
         } else if (item instanceof OpenablePack) {
@@ -381,19 +380,19 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 this.questData.getCards().buyPack(booster, value);
                 final List<PaperCard> newCards = booster.getCards();
                 final List<InventoryItem> newInventory = new LinkedList<InventoryItem>(newCards);
-                getTableDeck().addCards(newInventory);
+                getDeckListView().addItems(newInventory);
                 final CardListViewer c = new CardListViewer(booster.getName(),
                         "You have found the following cards inside:", newCards);
                 c.show();
             }
-            this.getTableCatalog().removeCard(item, qty);
+            this.getCatalogListView().removeItem(item, qty);
         } else if (item instanceof PreconDeck) {
             final PreconDeck deck = (PreconDeck) item;
             this.questData.getCards().buyPreconDeck(deck, value);
             final ItemPool<InventoryItem> newInventory =
                     ItemPool.createFrom(deck.getDeck().getMain(), InventoryItem.class);
             for (int i = 0; qty > i; ++i) {
-                getTableDeck().addCards(newInventory);
+                getDeckListView().addItems(newInventory);
             }
             boolean one = 1 == qty;
             JOptionPane.showMessageDialog(null, String.format(
@@ -401,7 +400,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                     one ? "Deck" : String.format("%d copies of deck", qty),
                     deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),
                     "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
-            this.getTableCatalog().removeCard(item, qty);
+            this.getCatalogListView().removeItem(item, qty);
         }
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
@@ -417,8 +416,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
 
         final PaperCard card = (PaperCard) item;
-        this.getTableCatalog().addCard(card, qty);
-        this.getTableDeck().removeCard(card, qty);
+        this.getCatalogListView().addItem(card, qty);
+        this.getDeckListView().removeItem(card, qty);
 
         final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards()
                 .getSellPriceLimit());
@@ -447,8 +446,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             return;
         }
         
-        this.getTableCatalog().addCards(cardsToRemove);
-        this.getTableDeck().removeCards(cardsToRemove);
+        this.getCatalogListView().addItems(cardsToRemove);
+        this.getDeckListView().removeItems(cardsToRemove);
 
         for (Map.Entry<InventoryItem, Integer> item : cardsToRemove) {
             if (!(item.getKey() instanceof PaperCard)) {
@@ -497,8 +496,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
         ownedItems.addAll(this.questData.getCards().getCardpool().getView());
 
-        this.getTableCatalog().setDeck(cardsForSale);
-        this.getTableDeck().setDeck(ownedItems);
+        this.getCatalogListView().setPool(cardsForSale);
+        this.getDeckListView().setPool(ownedItems);
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setText("Sell all extras");
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setToolTipText("Sell unneeded extra copies of all cards");
@@ -506,7 +505,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             @Override
             public void run() {
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
-                for (Map.Entry<InventoryItem, Integer> item : getTableDeck().getCards()) {
+                for (Map.Entry<InventoryItem, Integer> item : getDeckListView().getItems()) {
                     PaperCard card = (PaperCard)item.getKey();
                     int numToKeep = card.getRules().getType().isBasic() ? 50 : 4;
                     if ("Relentless Rats".equals(card.getName())) {
@@ -537,7 +536,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.sellPercentageLabel.setText("<html>Selling cards at " + formatter.format(multiPercent)
                 + "% of their value.<br>" + maxSellingPrice + "</html>");
         
-        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SEditorUtil.StatTypes.PACK).setVisible(true);
+        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SListViewUtil.StatTypes.PACK).setVisible(true);
         
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
@@ -572,7 +571,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(CCAddLabel);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText(CDRemLabel);
         
-        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SEditorUtil.StatTypes.PACK).setVisible(false);
+        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SListViewUtil.StatTypes.PACK).setVisible(false);
         
         //Re-add tabs
         if (deckGenParent != null) {

@@ -170,7 +170,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
                 final ACEditorBase<T, TModel> ed = (ACEditorBase<T, TModel>)
                         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
-                final List<PaperCard> cards = (List<PaperCard>) ed.getTableDeck().getCards().toFlatList();
+                final List<PaperCard> cards = (List<PaperCard>) ed.getDeckListView().getItems().toFlatList();
                 final String name1 = lbl.getText();
                 String name2;
 

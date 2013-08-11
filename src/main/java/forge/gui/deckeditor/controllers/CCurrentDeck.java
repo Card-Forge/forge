@@ -18,7 +18,6 @@ import forge.error.BugReporter;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.DeckImport;
 import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;

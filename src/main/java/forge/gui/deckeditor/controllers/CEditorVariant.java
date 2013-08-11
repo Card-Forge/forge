@@ -28,18 +28,17 @@ import forge.card.CardDb;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.SEditorUtil;
-import forge.gui.deckeditor.tables.DeckController;
-import forge.gui.deckeditor.tables.EditorTableView;
-import forge.gui.deckeditor.tables.SColumnUtil;
-import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
-import forge.gui.deckeditor.tables.TableColumnInfo;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
+import forge.gui.listview.ListView;
+import forge.gui.listview.SColumnUtil;
+import forge.gui.listview.SColumnUtil.ColumnName;
+import forge.gui.listview.SListViewUtil;
+import forge.gui.listview.TableColumnInfo;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -75,14 +74,14 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         cardPoolCondition = poolCondition;
         exitToScreen = exitTo;
         
-        final EditorTableView<PaperCard> tblCatalog = new EditorTableView<PaperCard>(true, PaperCard.class);
-        final EditorTableView<PaperCard> tblDeck = new EditorTableView<PaperCard>(true, PaperCard.class);
+        final ListView<PaperCard> tblCatalog = new ListView<PaperCard>(PaperCard.class, true);
+        final ListView<PaperCard> tblDeck = new ListView<PaperCard>(PaperCard.class, true);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
 
-        this.setTableCatalog(tblCatalog);
-        this.setTableDeck(tblDeck);
+        this.setCatalogListView(tblCatalog);
+        this.setDeckListView(tblDeck);
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override
@@ -105,7 +104,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         }
 
         final PaperCard card = (PaperCard) item;
-        this.getTableDeck().addCard(card, qty);
+        this.getDeckListView().addItem(card, qty);
         this.controller.notifyModelChanged();
     }
 
@@ -119,7 +118,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         }
 
         final PaperCard card = (PaperCard) item;
-        this.getTableDeck().removeCard(card, qty);
+        this.getDeckListView().removeItem(card, qty);
         this.controller.notifyModelChanged();
     }
 
@@ -144,8 +143,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         Iterable<PaperCard> allNT = CardDb.variants().getAllCards();
         allNT = Iterables.filter(allNT, cardPoolCondition);
         
-        this.getTableCatalog().setDeck(ItemPool.createFrom(allNT, PaperCard.class), true);
-        this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+        this.getCatalogListView().setPool(ItemPool.createFrom(allNT, PaperCard.class), true);
+        this.getDeckListView().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
     }
 
     /*
@@ -166,10 +165,10 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
 
-        this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, lstCatalogCols);
-        this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, lstCatalogCols);
+        this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
-        SEditorUtil.resetUI();
+        SListViewUtil.resetUI();
         
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        

@@ -26,12 +26,13 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.Command;
 import forge.card.CardRulesPredicates;
 import forge.gui.WrapLayout;
-import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.gui.listview.ITableContainer;
+import forge.gui.listview.SListViewUtil;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSpinner;
@@ -62,8 +63,8 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     // Total and color count labels/filter toggles
     private final Dimension labelSize = new Dimension(60, 24);
     private final JPanel pnlStats = new JPanel(new WrapLayout(FlowLayout.LEFT));
-    private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
-            new HashMap<SEditorUtil.StatTypes, FLabel>();
+    private final Map<SListViewUtil.StatTypes, FLabel> statLabels =
+            new HashMap<SListViewUtil.StatTypes, FLabel>();
 
     // card transfer buttons
     private final JPanel pnlAddButtons =
@@ -130,13 +131,13 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
 
         pnlStats.setOpaque(false);
         
-        for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
-            FLabel label = buildToggleLabel(s, SEditorUtil.StatTypes.TOTAL != s);
+        for (SListViewUtil.StatTypes s : SListViewUtil.StatTypes.values()) {
+            FLabel label = buildToggleLabel(s, SListViewUtil.StatTypes.TOTAL != s);
             statLabels.put(s, label);
             JComponent component = label;
-            if (SEditorUtil.StatTypes.TOTAL == s) {
+            if (SListViewUtil.StatTypes.TOTAL == s) {
                 label.setToolTipText("Total cards (click to toggle all filters)");
-            } else if (SEditorUtil.StatTypes.PACK == s) {
+            } else if (SListViewUtil.StatTypes.PACK == s) {
                 // wrap in a constant-size panel so we can change its visibility without affecting layout
                 component = new JPanel(new MigLayout("insets 0, gap 0"));
                 component.setPreferredSize(labelSize);
@@ -237,7 +238,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     }
 
     @Override
-    public FLabel getStatLabel(SEditorUtil.StatTypes s) {
+    public FLabel getStatLabel(SListViewUtil.StatTypes s) {
         return statLabels.get(s);
     }
 
@@ -255,7 +256,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     public JComboBox<String> getCbSearchMode()   { return cbSearchMode;      }
     public JTextField getTxfSearch()     { return txfSearch;         }
 
-    public Map<SEditorUtil.StatTypes, FLabel> getStatLabels() {
+    public Map<SListViewUtil.StatTypes, FLabel> getStatLabels() {
         return statLabels;
     }
     public Map<RangeTypes, Pair<FSpinner, FSpinner>> getSpinners() {
@@ -263,7 +264,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     }
     
     //========== Other methods
-    private FLabel buildToggleLabel(SEditorUtil.StatTypes s, boolean selectable) {
+    private FLabel buildToggleLabel(SListViewUtil.StatTypes s, boolean selectable) {
         String tooltip;
         if (selectable) { //construct tooltip for selectable toggle labels, indicating click and right-click behavior
             String labelString = s.toLabelString();

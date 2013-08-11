@@ -31,15 +31,14 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.IBoosterDraft;
-import forge.gui.deckeditor.tables.DeckController;
-import forge.gui.deckeditor.tables.EditorTableView;
-import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.sanctioned.CSubmenuDraft;
+import forge.gui.listview.ListView;
+import forge.gui.listview.SColumnUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
@@ -65,8 +64,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * Updates the deck editor UI as necessary draft selection mode.
      */
     public CEditorDraftingProcess() {
-        final EditorTableView<PaperCard> tblCatalog = new EditorTableView<PaperCard>(false, PaperCard.class);
-        final EditorTableView<PaperCard> tblDeck = new EditorTableView<PaperCard>(false, PaperCard.class);
+        final ListView<PaperCard> tblCatalog = new ListView<PaperCard>(PaperCard.class, false);
+        final ListView<PaperCard> tblDeck = new ListView<PaperCard>(PaperCard.class, false);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
@@ -74,8 +73,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         tblCatalog.setAlwaysNonUnique(true);
         tblDeck.setAlwaysNonUnique(true);
 
-        this.setTableCatalog(tblCatalog);
-        this.setTableDeck(tblDeck);
+        this.setCatalogListView(tblCatalog);
+        this.setDeckListView(tblDeck);
     }
 
     /**
@@ -94,8 +93,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * </p>
      */
     private void setup() {
-        this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, SColumnUtil.getCatalogDefaultColumns());
-        this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, SColumnUtil.getCatalogDefaultColumns());
+        this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
         ccAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
@@ -113,7 +112,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         final PaperCard card = (PaperCard) item;
 
         // can only draft one at a time, regardless of the requested quantity
-        this.getTableDeck().addCard(card, 1);
+        this.getDeckListView().addItem(card, 1);
 
         // get next booster pack
         this.boosterDraft.setChoice(card);
@@ -156,8 +155,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
         VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("Select a card from pack number "
                 + (((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1) + ".");
-        this.getTableCatalog().setDeck(list);
-        this.getTableCatalog().fixSelection(0);
+        this.getCatalogListView().setPool(list);
+        this.getCatalogListView().getTable().fixSelection(0);
     } // showChoices()
 
     /**
@@ -172,7 +171,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         // add sideboard to deck
         CardPool side = deck.getOrCreate(DeckSection.Sideboard);
-        side.addAll(this.getTableDeck().getCards());
+        side.addAll(this.getDeckListView().getItems());
 
         final CardEdition landSet = IBoosterDraft.LAND_SET_CODE[0];
         final int landsCount = 20;
@@ -264,7 +263,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     public void init() {
         this.setup();
         this.showChoices(this.boosterDraft.nextChoice());
-        this.getTableDeck().setDeck((Iterable<InventoryItem>) null);
+        this.getDeckListView().setPool((Iterable<InventoryItem>) null);
 
         //Remove buttons
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(false);
@@ -279,7 +278,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
         
         // set catalog table to single-selection only mode
-        getTableCatalog().getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        getCatalogListView().getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /* (non-Javadoc)
@@ -308,7 +307,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         }
         
         // set catalog table back to free-selection mode
-        getTableCatalog().getTable().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        getCatalogListView().getTable().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         return true;
     }

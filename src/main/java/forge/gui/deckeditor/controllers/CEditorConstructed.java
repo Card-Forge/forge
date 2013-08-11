@@ -31,16 +31,16 @@ import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.SEditorIO.EditorPreference;
-import forge.gui.deckeditor.SEditorUtil;
-import forge.gui.deckeditor.tables.DeckController;
-import forge.gui.deckeditor.tables.EditorTableView;
-import forge.gui.deckeditor.tables.SColumnUtil;
-import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
-import forge.gui.deckeditor.tables.TableColumnInfo;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.EDocID;
+import forge.gui.listview.ListView;
+import forge.gui.listview.SColumnUtil;
+import forge.gui.listview.SColumnUtil.ColumnName;
+import forge.gui.listview.SListViewIO;
+import forge.gui.listview.SListViewIO.EditorPreference;
+import forge.gui.listview.SListViewUtil;
+import forge.gui.listview.TableColumnInfo;
 import forge.gui.toolbox.FLabel;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
@@ -92,16 +92,16 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         schemePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)),PaperCard.class);
         commanderPool = ItemPool.createFrom(CardDb.instance().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
         
-        boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
+        boolean wantUnique = SListViewIO.getPref(EditorPreference.display_unique_only);
 
-        final EditorTableView<PaperCard> tblCatalog = new EditorTableView<PaperCard>(wantUnique, PaperCard.class);
-        final EditorTableView<PaperCard> tblDeck = new EditorTableView<PaperCard>(wantUnique, PaperCard.class);
+        final ListView<PaperCard> tblCatalog = new ListView<PaperCard>(PaperCard.class, wantUnique);
+        final ListView<PaperCard> tblDeck = new ListView<PaperCard>(PaperCard.class, wantUnique);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
 
-        this.setTableCatalog(tblCatalog);
-        this.setTableDeck(tblDeck);
+        this.setCatalogListView(tblCatalog);
+        this.setDeckListView(tblDeck);
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override
@@ -125,8 +125,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         }
 
         if (sectionMode == DeckSection.Avatar || sectionMode == DeckSection.Commander) {
-            for(Map.Entry<PaperCard, Integer> cp : getTableDeck().getCards()) {
-                getTableDeck().removeCard(cp.getKey(), cp.getValue());
+            for(Map.Entry<PaperCard, Integer> cp : getDeckListView().getItems()) {
+                getDeckListView().removeItem(cp.getKey(), cp.getValue());
             }
         }
 
@@ -136,10 +136,10 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
                 controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
             }
         } else {
-            getTableDeck().addCard(card, qty);
+            getDeckListView().addItem(card, qty);
         }
         // if not in sideboard mode, "remove" 0 cards in order to re-show the selected card
-        this.getTableCatalog().removeCard(card, sectionMode == DeckSection.Sideboard ? qty : 0);
+        this.getCatalogListView().removeItem(card, sectionMode == DeckSection.Sideboard ? qty : 0);
         
         this.controller.notifyModelChanged();
     }
@@ -161,9 +161,9 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
                 // "added" to library, but library will be recalculated when it is shown again
             }
         } else if (sectionMode == DeckSection.Sideboard) {
-            this.getTableCatalog().addCard(card, qty);
+            this.getCatalogListView().addItem(card, qty);
         }
-        this.getTableDeck().removeCard(card, qty);
+        this.getDeckListView().removeItem(card, qty);
         this.controller.notifyModelChanged();
     }
 
@@ -188,8 +188,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     @Override
     public void resetTables() {
         // Constructed mode can use all cards, no limitations.
-        this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class), true);
-        this.getTableDeck().setDeck(this.controller.getModel().getMain());
+        this.getCatalogListView().setPool(ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class), true);
+        this.getDeckListView().setPool(this.controller.getModel().getMain());
     }
 
     /*
@@ -220,17 +220,17 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         {
             case Main:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-                this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class), true);
-                this.getTableDeck().setDeck(this.controller.getModel().getMain());
+                this.getCatalogListView().getTable().setAvailableColumns(lstCatalogCols);
+                this.getCatalogListView().setPool(ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class), true);
+                this.getDeckListView().setPool(this.controller.getModel().getMain());
                 showOptions = true;
                 title = "Title: ";
                 tabtext = "Main Deck";
                 break;
             case Sideboard:
-                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-                this.getTableCatalog().setDeck(this.controller.getModel().getMain());
-                this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+                this.getCatalogListView().getTable().setAvailableColumns(lstCatalogCols);
+                this.getCatalogListView().setPool(this.controller.getModel().getMain());
+                this.getDeckListView().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
                 showOptions = false;
                 title = "Sideboard";
                 tabtext = "Card Catalog";
@@ -242,9 +242,9 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_CMC));
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_POWER));
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS));
-                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-                this.getTableCatalog().setDeck(avatarPool,true);
-                this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Avatar));
+                this.getCatalogListView().getTable().setAvailableColumns(lstCatalogCols);
+                this.getCatalogListView().setPool(avatarPool, true);
+                this.getDeckListView().setPool(this.controller.getModel().getOrCreate(DeckSection.Avatar));
                 showOptions = false;
                 title = "Vanguard";
                 tabtext = "Card Catalog";
@@ -256,9 +256,9 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COLOR));
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_POWER));
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS));
-                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-                this.getTableCatalog().setDeck(planePool,true);
-                this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Planes));
+                this.getCatalogListView().getTable().setAvailableColumns(lstCatalogCols);
+                this.getCatalogListView().setPool(planePool,true);
+                this.getDeckListView().setPool(this.controller.getModel().getOrCreate(DeckSection.Planes));
                 showOptions = false;
                 title = "Planar";
                 tabtext = "Card Catalog";
@@ -270,18 +270,18 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COLOR));
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_POWER));
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS));
-                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-                this.getTableCatalog().setDeck(schemePool,true);
-                this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Schemes));
+                this.getCatalogListView().getTable().setAvailableColumns(lstCatalogCols);
+                this.getCatalogListView().setPool(schemePool,true);
+                this.getDeckListView().setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
                 showOptions = false;
                 title = "Scheme";
                 tabtext = "Card Catalog";
                 break;
             case Commander:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-                this.getTableCatalog().setDeck(commanderPool,true);
-                this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Commander));
+                this.getCatalogListView().getTable().setAvailableColumns(lstCatalogCols);
+                this.getCatalogListView().setPool(commanderPool, true);
+                this.getDeckListView().setPool(this.controller.getModel().getOrCreate(DeckSection.Commander));
                 showOptions = false;
                 title = "Commander";
                 tabtext = "Card Catalog";
@@ -310,10 +310,10 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
 
-        this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, lstCatalogCols);
-        this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, lstCatalogCols);
+        this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
-        SEditorUtil.resetUI();
+        SListViewUtil.resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard()).setCommand(new Command() {
