@@ -97,8 +97,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, wantUnique);
         final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, wantUnique);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(catalogManager.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(deckManager.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
+        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);

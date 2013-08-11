@@ -15,7 +15,6 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -36,8 +35,10 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSpinner;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.ToolTipListener;
+import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.table.ITableContainer;
+import forge.item.InventoryItem;
 import forge.util.TextUtil;
 
 /** 
@@ -115,8 +116,8 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     
     private final Map<RangeTypes, Pair<FSpinner, FSpinner>> spinners = new HashMap<RangeTypes, Pair<FSpinner, FSpinner>>();
     
-    // card table
-    private JTable tblCards = null;
+    // item manager
+    private ItemManager<? extends InventoryItem> itemManager;
     private final JScrollPane scroller = new JScrollPane();
 
     
@@ -229,12 +230,14 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         parentBody.add(pnlRestrictions, "w 96%, gapleft 1%, gapright push");
         parentBody.add(scroller, "w 98%!, h 100% - 35, gap 1% 0 0 1%");
     }
+    
+    public ItemManager<? extends InventoryItem> getItemManager() {
+        return this.itemManager;
+    }
 
-    //========== Overridden from ITableContainer
-    @Override
-    public void setTableView(final JTable tbl0) {
-        this.tblCards = tbl0;
-        scroller.setViewportView(tblCards);
+    public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
+        this.itemManager = itemManager0;
+        scroller.setViewportView(itemManager0.getTable());
     }
 
     @Override
@@ -283,16 +286,6 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         label.setMinimumSize(labelSize);
         
         return label;
-    }
-
-    public void focusTable() {
-        if (null != tblCards) {
-            tblCards.requestFocusInWindow();
-            
-            if (0 < tblCards.getRowCount()) {
-                tblCards.changeSelection(0, 0, false, false);
-            }
-        }
     }
     
     @SuppressWarnings("serial")

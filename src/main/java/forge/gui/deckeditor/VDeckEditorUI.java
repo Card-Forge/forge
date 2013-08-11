@@ -36,7 +36,7 @@ public enum VDeckEditorUI implements IVTopLevelUI {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                VCardCatalog.SINGLETON_INSTANCE.focusTable();
+                VCardCatalog.SINGLETON_INSTANCE.getItemManager().focus();
             }
         });
     }

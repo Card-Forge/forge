@@ -1,7 +1,5 @@
 package forge.gui.toolbox.itemmanager.table;
 
-import javax.swing.JTable;
-
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 
@@ -19,7 +17,6 @@ public interface ITableContainer {
      * 
      * @param tbl0 &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-     void setTableView(JTable tbl0);
 
      FLabel getStatLabel(SItemManagerUtil.StatTypes s);
  }

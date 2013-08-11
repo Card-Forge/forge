@@ -67,8 +67,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, false);
         final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, false);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(catalogManager.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(deckManager.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
+        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);

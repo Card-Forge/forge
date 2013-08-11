@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -24,8 +23,10 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.ToolTipListener;
+import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.table.ITableContainer;
+import forge.item.InventoryItem;
 
 
 /** 
@@ -126,8 +127,9 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels =
             new HashMap<SItemManagerUtil.StatTypes, FLabel>();
 
-    private JTable tblCards = null;
-    private final JScrollPane scroller = new JScrollPane(tblCards);
+    // item manager
+    private ItemManager<? extends InventoryItem> itemManager;
+    private final JScrollPane scroller = new JScrollPane();
 
     //========== Constructor
 
@@ -230,19 +232,14 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         parentBody.add(pnlRemoveButtons, "w 96%!, gap 2% 0 0 0");
         parentBody.add(scroller, "w 98%!, h 100%  - 35, gap 1% 0 0 1%");
     }
+    
+    public ItemManager<? extends InventoryItem> getItemManager() {
+        return this.itemManager;
+    }
 
-    //========== Retrieval methods
-
-    //========== Custom class handling
-
-    //========== Overridden from ITableContainer
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#setTableView()
-     */
-    @Override
-    public void setTableView(final JTable tbl0) {
-        this.tblCards = tbl0;
-        scroller.setViewportView(tblCards);
+    public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
+        this.itemManager = itemManager0;
+        scroller.setViewportView(itemManager0.getTable());
     }
 
     public JLabel getLblTitle() { return lblTitle; }

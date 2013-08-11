@@ -133,8 +133,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(catalogManager.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(deckManager.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
+        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);

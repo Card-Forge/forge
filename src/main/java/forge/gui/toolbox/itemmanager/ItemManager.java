@@ -377,4 +377,12 @@ public final class ItemManager<T extends InventoryItem> {
         table.scrollRectToVisible(targetRect);
         table.setRowSelectionInterval(rowIdx, rowIdx);
     }
+
+    public void focus() {
+        table.requestFocusInWindow();
+        
+        if (table.getRowCount() > 0) {
+            table.changeSelection(0, 0, false, false);
+        }
+    }
 }
