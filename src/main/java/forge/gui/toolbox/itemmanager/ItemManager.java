@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.listview;
+package forge.gui.toolbox.itemmanager;
 
 import java.awt.Rectangle;
 import java.util.Collection;
@@ -25,12 +25,15 @@ import java.util.Map.Entry;
 
 import javax.swing.JTable;
 import javax.swing.JViewport;
+
 import com.google.common.base.Predicate;
 
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.gui.toolbox.itemmanager.table.ItemTable;
+import forge.gui.toolbox.itemmanager.table.ItemTableModel;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -38,15 +41,15 @@ import forge.util.Aggregates;
 
 
 /**
- * ListView.
+ * ItemManager.
  * 
  * @param <T>
  *            the generic type
  */
-public final class ListView<T extends InventoryItem> {
+public final class ItemManager<T extends InventoryItem> {
     private ItemPool<T> pool;
-    private ListViewModel<T> model;
-    private final ListViewTable<T> table;
+    private ItemManagerModel<T> model;
+    private final ItemTable<T> table;
     private Predicate<T> filter = null;
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
@@ -56,9 +59,9 @@ public final class ListView<T extends InventoryItem> {
      * 
      * getTable.
      * 
-     * @return ListViewTable<T>
+     * @return ItemTable<T>
      */
-    public ListViewTable<T> getTable() {
+    public ItemTable<T> getTable() {
         return this.table;
     }
     
@@ -66,32 +69,32 @@ public final class ListView<T extends InventoryItem> {
      * 
      * getTableModel.
      * 
-     * @return ListViewTableModel<T>
+     * @return ItemTableModel<T>
      */
-    public ListViewTableModel<T> getTableModel() {
+    public ItemTableModel<T> getTableModel() {
         return this.table.getTableModel();
     }
 
     /**
-     * ListView.
+     * ItemManager.
      * 
      * @param genericType0 - the class of item that this table will contain
      */
-    public ListView(final Class<T> genericType0) {
+    public ItemManager(final Class<T> genericType0) {
         this(genericType0, false);
     }
 
     /**
-     * ListView Constructor.
+     * ItemManager Constructor.
      * 
      * @param forceUnique whether this table should display only one item with the same name
      * @param type0 the class of item that this table will contain
      */
-    public ListView(final Class<T> genericType0, final boolean wantUnique0) {
+    public ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
-        this.model = new ListViewModel<T>(this, genericType0);
-        this.table = new ListViewTable<T>(this.model);
+        this.model = new ItemManagerModel<T>(this, genericType0);
+        this.table = new ItemTable<T>(this.model);
     }
 
     /**

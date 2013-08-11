@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.listview;
+package forge.gui.toolbox.itemmanager.table;
 
 import java.awt.Cursor;
 import java.awt.event.FocusAdapter;
@@ -41,35 +41,37 @@ import javax.swing.table.TableColumnModel;
 import org.apache.commons.lang3.ArrayUtils;
 
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.listview.SColumnUtil.ColumnName;
-import forge.gui.listview.SColumnUtil.SortState;
+import forge.gui.toolbox.itemmanager.ItemManagerModel;
+import forge.gui.toolbox.itemmanager.SItemManagerIO;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil.SortState;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
 
 /**
  * <p>
- * ListViewTableModel class.
+ * ItemTableModel class.
  * </p>
  * 
  * @param <T>
  *            the generic type
  * @author Forge
- * @version $Id: ListViewTableModel.java 19857 2013-02-24 08:49:52Z Max mtg $
+ * @version $Id: ItemTableModel.java 19857 2013-02-24 08:49:52Z Max mtg $
  */
 @SuppressWarnings("serial")
-public final class ListViewTableModel<T extends InventoryItem> extends AbstractTableModel {
-    private final ListViewTable<T> table;
-    private final ListViewModel<T> model;
+public final class ItemTableModel<T extends InventoryItem> extends AbstractTableModel {
+    private final ItemTable<T> table;
+    private final ItemManagerModel<T> model;
     private final CascadeManager cascadeManager = new CascadeManager();
     private final int maxSortDepth = 3;
 
     /**
      * Instantiates a new table model.
      * 
-     * @param table0 &emsp; {@link forge.gui.listview.ListViewTable<T>}
-     * @param model0 &emsp; {@link forge.gui.listview.ListViewModel<T>}
+     * @param table0 &emsp; {@link forge.gui.ItemManager.ItemTable<T>}
+     * @param model0 &emsp; {@link forge.gui.ItemManager.ItemManagerModel<T>}
      */
-    public ListViewTableModel(final ListViewTable<T> table0, final ListViewModel<T> model0) {
+    public ItemTableModel(final ItemTable<T> table0, final ItemManagerModel<T> model0) {
         this.table = table0;
         this.model = model0;
     }
@@ -156,7 +158,7 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
             @Override
             public void valueChanged(final ListSelectionEvent arg0) {
                 if (table.isFocusOwner()) {
-                    ListViewTableModel.this.showSelectedItem(table);
+                    ItemTableModel.this.showSelectedItem(table);
                 }
             }
         });
@@ -164,7 +166,7 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
         table.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(final FocusEvent e) {
-                ListViewTableModel.this.showSelectedItem(table);
+                ItemTableModel.this.showSelectedItem(table);
             }
         });
 
@@ -179,7 +181,7 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                SListViewIO.savePreferences(ListViewTableModel.this.table);
+                SItemManagerIO.savePreferences(ItemTableModel.this.table);
             }
         });
     } // addItemListener()
@@ -195,7 +197,7 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
 
     @SuppressWarnings("unchecked")
     private void headerClicked(final MouseEvent e) {
-        final TableColumnModel colModel = ListViewTableModel.this.table.getColumnModel();
+        final TableColumnModel colModel = ItemTableModel.this.table.getColumnModel();
         final int columnModelIndex = colModel.getColumnIndexAtX(e.getX());
         final int modelIndex = colModel.getColumn(columnModelIndex).getModelIndex();
 
@@ -206,14 +208,14 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
         // This will invert if needed
         // 2012/07/21 - Changed from modelIndex to ColumnModelIndex due to a crash
         // Crash was: Hide 2 columns, then search by last column.
-        ListViewTableModel.this.cascadeManager.add((TableColumnInfo<T>) this.table.getColumnModel().getColumn(columnModelIndex));
-        ListViewTableModel.this.refreshSort();
-        ListViewTableModel.this.table.tableChanged(new TableModelEvent(ListViewTableModel.this));
-        ListViewTableModel.this.table.repaint();
-        if (ListViewTableModel.this.table.getRowCount() > 0) {
-            ListViewTableModel.this.table.setRowSelectionInterval(0, 0);
+        ItemTableModel.this.cascadeManager.add((TableColumnInfo<T>) this.table.getColumnModel().getColumn(columnModelIndex));
+        ItemTableModel.this.refreshSort();
+        ItemTableModel.this.table.tableChanged(new TableModelEvent(ItemTableModel.this));
+        ItemTableModel.this.table.repaint();
+        if (ItemTableModel.this.table.getRowCount() > 0) {
+            ItemTableModel.this.table.setRowSelectionInterval(0, 0);
         }
-        SListViewIO.savePreferences(ListViewTableModel.this.table);
+        SItemManagerIO.savePreferences(ItemTableModel.this.table);
     }
 
     //========== Overridden from AbstractTableModel
@@ -334,8 +336,8 @@ public final class ListViewTableModel<T extends InventoryItem> extends AbstractT
         @SuppressWarnings("unchecked")
         @Override
         public int compare(Entry<T, Integer> o1, Entry<T, Integer> o2) {
-            return ListViewTableModel.this.cascadeManager.getSorter().compare(
+            return ItemTableModel.this.cascadeManager.getSorter().compare(
                     (Entry<InventoryItem, Integer>) o1, (Entry<InventoryItem, Integer>) o2);
         }
     }
-} // ListViewTableModel
+} // ItemTableModel

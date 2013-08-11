@@ -15,7 +15,7 @@ import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.views.VStatistics;
 import forge.gui.framework.ICDoc;
-import forge.gui.listview.SListViewUtil;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -59,7 +59,7 @@ public enum CStatistics implements ICDoc {
 
     private void setLabelValue(JLabel label, ItemPoolView<PaperCard> deck, Predicate<CardRules> predicate, int total) {
         int tmp = deck.countAll(Predicates.compose(predicate, PaperCard.FN_GET_RULES));
-        label.setText(tmp + " (" + SListViewUtil.calculatePercentage(tmp, total) + "%)");
+        label.setText(tmp + " (" + SItemManagerUtil.calculatePercentage(tmp, total) + "%)");
 
     }
 
@@ -115,19 +115,19 @@ public enum CStatistics implements ICDoc {
         }
 
         VStatistics.SINGLETON_INSTANCE.getLblCMC0().setText(
-                cmc0 + " (" + SListViewUtil.calculatePercentage(cmc0, total) + "%)");
+                cmc0 + " (" + SItemManagerUtil.calculatePercentage(cmc0, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC1().setText(
-                cmc1 + " (" + SListViewUtil.calculatePercentage(cmc1, total) + "%)");
+                cmc1 + " (" + SItemManagerUtil.calculatePercentage(cmc1, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC2().setText(
-                cmc2 + " (" + SListViewUtil.calculatePercentage(cmc2, total) + "%)");
+                cmc2 + " (" + SItemManagerUtil.calculatePercentage(cmc2, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC3().setText(
-                cmc3 + " (" + SListViewUtil.calculatePercentage(cmc3, total) + "%)");
+                cmc3 + " (" + SItemManagerUtil.calculatePercentage(cmc3, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC4().setText(
-                cmc4 + " (" + SListViewUtil.calculatePercentage(cmc4, total) + "%)");
+                cmc4 + " (" + SItemManagerUtil.calculatePercentage(cmc4, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC5().setText(
-                cmc5 + " (" + SListViewUtil.calculatePercentage(cmc5, total) + "%)");
+                cmc5 + " (" + SItemManagerUtil.calculatePercentage(cmc5, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC6().setText(
-                cmc6 + " (" + SListViewUtil.calculatePercentage(cmc6, total) + "%)");
+                cmc6 + " (" + SItemManagerUtil.calculatePercentage(cmc6, total) + "%)");
 
         double amc = Math.round((double) tmc / (double) total * 100) / 100.0d;
 

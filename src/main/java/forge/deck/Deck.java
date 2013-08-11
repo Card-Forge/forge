@@ -35,7 +35,7 @@ import com.google.common.base.Function;
 import forge.card.CardDb;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
-import forge.gui.listview.TableSorter;
+import forge.gui.toolbox.itemmanager.table.TableSorter;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.ItemPoolView;

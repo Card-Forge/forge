@@ -30,9 +30,9 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
-import forge.gui.listview.ListView;
-import forge.gui.listview.SColumnUtil;
-import forge.gui.listview.SListViewUtil;
+import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.util.storage.IStorage;
@@ -59,8 +59,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     public CEditorLimited(final IStorage<DeckGroup> deckMap0) {
-        final ListView<PaperCard> lvCatalog = new ListView<PaperCard>(PaperCard.class, false);
-        final ListView<PaperCard> lvDeck = new ListView<PaperCard>(PaperCard.class, false);
+        final ItemManager<PaperCard> lvCatalog = new ItemManager<PaperCard>(PaperCard.class, false);
+        final ItemManager<PaperCard> lvDeck = new ItemManager<PaperCard>(PaperCard.class, false);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(lvCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(lvDeck.getTable());
@@ -163,7 +163,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
         this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, SColumnUtil.getCatalogDefaultColumns());
         this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
-        SListViewUtil.resetUI();
+        SItemManagerUtil.resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(false);

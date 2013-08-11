@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.listview;
+package forge.gui.toolbox.itemmanager.table;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -27,6 +27,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.JViewport;
@@ -37,34 +38,34 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import forge.gui.listview.ITableContainer;
-import forge.gui.listview.SListViewUtil;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.itemmanager.ItemManagerModel;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.InventoryItem;
 
 
 /**
- * ListViewTable.
+ * ItemTable.
  * 
  * @param <T>
  *            the generic type
  */
 @SuppressWarnings("serial")
-public final class ListViewTable<T extends InventoryItem> extends JTable {
-    private ListViewTableModel<T> tableModel;
+public final class ItemTable<T extends InventoryItem> extends JTable {
+    private ItemTableModel<T> tableModel;
     
-    public ListViewTableModel<T> getTableModel() {
+    public ItemTableModel<T> getTableModel() {
         return this.tableModel;
     }
 
     /**
-     * ListViewTable Constructor.
+     * ItemTable Constructor.
      * 
      * @param forceUnique whether this table should display only one item with the same name
      * @param type0 the class of item that this table will contain
      */
-    public ListViewTable(ListViewModel<T> model) {
-        this.tableModel = new ListViewTableModel<T>(this, model);
+    public ItemTable(ItemManagerModel<T> model) {
+        this.tableModel = new ItemTableModel<T>(this, model);
 
         // use different selection highlight colors for focused vs. unfocused tables
         setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
@@ -101,7 +102,7 @@ public final class ListViewTable<T extends InventoryItem> extends JTable {
     /**
      * Applies a EditorTableModel and a model listener to this instance's JTable.
      * 
-     * @param view0 &emsp; the {@link forge.gui.itemlistview.ITableCOntainer}
+     * @param view0 &emsp; the {@link forge.gui.itemItemManager.ITableCOntainer}
      * @param cols0 &emsp; List<TableColumnInfo<InventoryItem>> of additional columns for this
      */
     public void setup(final ITableContainer view0, final List<TableColumnInfo<InventoryItem>> cols0) {
@@ -125,7 +126,7 @@ public final class ListViewTable<T extends InventoryItem> extends JTable {
         this.tableModel.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(final TableModelEvent ev) {
-                SListViewUtil.setStats(ListViewTable.this.tableModel.getItems(), view0);
+                SItemManagerUtil.setStats(ItemTable.this.tableModel.getItems(), view0);
             }
         });
     }

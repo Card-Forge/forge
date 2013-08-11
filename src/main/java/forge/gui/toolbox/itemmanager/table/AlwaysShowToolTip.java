@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.listview;
+package forge.gui.toolbox.itemmanager.table;
 
 /**
  * A marker interface for indicating that tooltips should always be shown for

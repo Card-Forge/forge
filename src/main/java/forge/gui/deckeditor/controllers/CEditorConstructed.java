@@ -34,14 +34,14 @@ import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.EDocID;
-import forge.gui.listview.ListView;
-import forge.gui.listview.SColumnUtil;
-import forge.gui.listview.SColumnUtil.ColumnName;
-import forge.gui.listview.SListViewIO;
-import forge.gui.listview.SListViewIO.EditorPreference;
-import forge.gui.listview.SListViewUtil;
-import forge.gui.listview.TableColumnInfo;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SItemManagerIO;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
+import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -92,10 +92,10 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         schemePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)),PaperCard.class);
         commanderPool = ItemPool.createFrom(CardDb.instance().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
         
-        boolean wantUnique = SListViewIO.getPref(EditorPreference.display_unique_only);
+        boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 
-        final ListView<PaperCard> lvCatalog = new ListView<PaperCard>(PaperCard.class, wantUnique);
-        final ListView<PaperCard> lvDeck = new ListView<PaperCard>(PaperCard.class, wantUnique);
+        final ItemManager<PaperCard> lvCatalog = new ItemManager<PaperCard>(PaperCard.class, wantUnique);
+        final ItemManager<PaperCard> lvDeck = new ItemManager<PaperCard>(PaperCard.class, wantUnique);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(lvCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(lvDeck.getTable());
@@ -313,7 +313,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, lstCatalogCols);
         this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
-        SListViewUtil.resetUI();
+        SItemManagerUtil.resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard()).setCommand(new Command() {

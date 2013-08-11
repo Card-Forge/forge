@@ -13,9 +13,9 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.gui.listview.SListViewUtil;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 
 /** 
  * Assembles Swing components of deck editor analysis tab.
@@ -43,22 +43,22 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
     // Total and color count labels
     private final JPanel pnlStats = new JPanel();
-    private final JLabel lblMulti = buildLabel(SListViewUtil.StatTypes.MULTICOLOR, true);
-    private final JLabel lblBlack = buildLabel(SListViewUtil.StatTypes.BLACK, false);
-    private final JLabel lblBlue = buildLabel(SListViewUtil.StatTypes.BLUE, true);
-    private final JLabel lblGreen = buildLabel(SListViewUtil.StatTypes.GREEN, false);
-    private final JLabel lblRed = buildLabel(SListViewUtil.StatTypes.RED, true);
-    private final JLabel lblWhite = buildLabel(SListViewUtil.StatTypes.WHITE, false);
-    private final JLabel lblColorless = buildLabel(SListViewUtil.StatTypes.COLORLESS, true);
+    private final JLabel lblMulti = buildLabel(SItemManagerUtil.StatTypes.MULTICOLOR, true);
+    private final JLabel lblBlack = buildLabel(SItemManagerUtil.StatTypes.BLACK, false);
+    private final JLabel lblBlue = buildLabel(SItemManagerUtil.StatTypes.BLUE, true);
+    private final JLabel lblGreen = buildLabel(SItemManagerUtil.StatTypes.GREEN, false);
+    private final JLabel lblRed = buildLabel(SItemManagerUtil.StatTypes.RED, true);
+    private final JLabel lblWhite = buildLabel(SItemManagerUtil.StatTypes.WHITE, false);
+    private final JLabel lblColorless = buildLabel(SItemManagerUtil.StatTypes.COLORLESS, true);
 
     // Card type labels
-    private final JLabel lblArtifact = buildLabel(SListViewUtil.StatTypes.ARTIFACT, true);
-    private final JLabel lblCreature = buildLabel(SListViewUtil.StatTypes.CREATURE, false);
-    private final JLabel lblEnchantment = buildLabel(SListViewUtil.StatTypes.ENCHANTMENT, true);
-    private final JLabel lblInstant = buildLabel(SListViewUtil.StatTypes.INSTANT, false);
-    private final JLabel lblLand = buildLabel(SListViewUtil.StatTypes.LAND, true);
-    private final JLabel lblPlaneswalker = buildLabel(SListViewUtil.StatTypes.PLANESWALKER, false);
-    private final JLabel lblSorcery = buildLabel(SListViewUtil.StatTypes.SORCERY, true);
+    private final JLabel lblArtifact = buildLabel(SItemManagerUtil.StatTypes.ARTIFACT, true);
+    private final JLabel lblCreature = buildLabel(SItemManagerUtil.StatTypes.CREATURE, false);
+    private final JLabel lblEnchantment = buildLabel(SItemManagerUtil.StatTypes.ENCHANTMENT, true);
+    private final JLabel lblInstant = buildLabel(SItemManagerUtil.StatTypes.INSTANT, false);
+    private final JLabel lblLand = buildLabel(SItemManagerUtil.StatTypes.LAND, true);
+    private final JLabel lblPlaneswalker = buildLabel(SItemManagerUtil.StatTypes.PLANESWALKER, false);
+    private final JLabel lblSorcery = buildLabel(SItemManagerUtil.StatTypes.SORCERY, true);
 
     // CMC labels
     private final JLabel lblCMC0 = buildLabel(
@@ -264,7 +264,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
         return lbl;
     }
     
-    private JLabel buildLabel(SListViewUtil.StatTypes statType, boolean zebra) {
+    private JLabel buildLabel(SItemManagerUtil.StatTypes statType, boolean zebra) {
         return buildLabel(statType.img, zebra);
     }
 }

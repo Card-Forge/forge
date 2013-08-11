@@ -46,13 +46,13 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.framework.DragCell;
 import forge.gui.home.quest.CSubmenuQuestDecks;
-import forge.gui.listview.ListView;
-import forge.gui.listview.SColumnUtil;
-import forge.gui.listview.SColumnUtil.ColumnName;
-import forge.gui.listview.SListViewUtil;
-import forge.gui.listview.TableColumnInfo;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.FatPack;
@@ -127,8 +127,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     public CEditorQuestCardShop(final QuestController qd) {
         this.questData = qd;
 
-        final ListView<InventoryItem> lvCatalog = new ListView<InventoryItem>(InventoryItem.class, false);
-        final ListView<InventoryItem> lvDeck = new ListView<InventoryItem>(InventoryItem.class, false);
+        final ItemManager<InventoryItem> lvCatalog = new ItemManager<InventoryItem>(InventoryItem.class, false);
+        final ItemManager<InventoryItem> lvDeck = new ItemManager<InventoryItem>(InventoryItem.class, false);
 
         lvCatalog.setAlwaysNonUnique(true);
         lvDeck.setAlwaysNonUnique(true);
@@ -191,7 +191,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
         this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
 
-        SListViewUtil.resetUI();
+        SItemManagerUtil.resetUI();
 
         CCTabLabel = VCardCatalog.SINGLETON_INSTANCE.getTabLabel().getText();
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Cards for sale");
@@ -536,7 +536,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.sellPercentageLabel.setText("<html>Selling cards at " + formatter.format(multiPercent)
                 + "% of their value.<br>" + maxSellingPrice + "</html>");
         
-        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SListViewUtil.StatTypes.PACK).setVisible(true);
+        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SItemManagerUtil.StatTypes.PACK).setVisible(true);
         
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
@@ -571,7 +571,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(CCAddLabel);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText(CDRemLabel);
         
-        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SListViewUtil.StatTypes.PACK).setVisible(false);
+        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SItemManagerUtil.StatTypes.PACK).setVisible(false);
         
         //Re-add tabs
         if (deckGenParent != null) {

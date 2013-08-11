@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.listview;
+package forge.gui.toolbox.itemmanager.table;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -37,7 +37,7 @@ import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.game.limited.DraftRankCache;
-import forge.gui.listview.SListViewIO;
+import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -244,7 +244,7 @@ public final class SColumnUtil {
      * @return TableColumnInfo<InventoryItem>
      */
     public static TableColumnInfo<InventoryItem> getColumn(final ColumnName id0) {
-        return SListViewIO.getColumn(id0);
+        return SItemManagerIO.getColumn(id0);
     }
 
     /**
@@ -252,7 +252,7 @@ public final class SColumnUtil {
      * in the TableColumnModel).
      * 
      * @param table JTable
-     * @param id0 &emsp; {@link forge.gui.deckeditor.SListViewUtil.ColumnName}
+     * @param id0 &emsp; {@link forge.gui.deckeditor.SItemManagerUtil.ColumnName}
      * @return int
      */
     public static int getColumnViewIndex(final JTable table, final ColumnName id0) {
@@ -271,7 +271,7 @@ public final class SColumnUtil {
      * in the EditorTableModel, NOT the TableColumnModel).
      * 
      * @param table JTable
-     * @param id0 &emsp; {@link forge.gui.deckeditor.SListViewUtil.ColumnName}
+     * @param id0 &emsp; {@link forge.gui.deckeditor.SItemManagerUtil.ColumnName}
      * @return int
      */
     public static int getColumnModelIndex(final JTable table, final ColumnName id0) {

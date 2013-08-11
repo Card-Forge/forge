@@ -39,11 +39,11 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCardCatalog.RangeTypes;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.quest.DialogChooseSets;
-import forge.gui.listview.SFilterUtil;
-import forge.gui.listview.SListViewUtil;
-import forge.gui.listview.SListViewUtil.StatTypes;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSpinner;
+import forge.gui.toolbox.itemmanager.SFilterUtil;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.item.PaperCard;
 import forge.item.ItemPredicate;
 import forge.quest.QuestWorld;
@@ -108,12 +108,12 @@ public enum CCardCatalog implements ICDoc {
             }
         };
 
-        for (Map.Entry<SListViewUtil.StatTypes, FLabel> entry : VCardCatalog.SINGLETON_INSTANCE.getStatLabels().entrySet()) {
+        for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> entry : VCardCatalog.SINGLETON_INSTANCE.getStatLabels().entrySet()) {
             final FLabel statLabel = entry.getValue();
             statLabel.setCommand(updateFilterCommand);
 
             //hook so right-clicking a filter in a group toggles itself off and toggles on all other filters in group
-            final SListViewUtil.StatTypes st = entry.getKey();
+            final SItemManagerUtil.StatTypes st = entry.getKey();
             final int group = st.group;
             if (group > 0) {
                 statLabel.setRightClickCommand(new Command() {
@@ -121,7 +121,7 @@ public enum CCardCatalog implements ICDoc {
                     public void run() {
                         if (!disableFiltering) {
                             disableFiltering = true;
-                            for (SListViewUtil.StatTypes s : SListViewUtil.StatTypes.values()) {
+                            for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
                                 if (s.group == group && s != st) {
                                     VCardCatalog.SINGLETON_INSTANCE.getStatLabel(s).setSelected(false);
                                 }
@@ -135,15 +135,15 @@ public enum CCardCatalog implements ICDoc {
             }
         }
 
-        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SListViewUtil.StatTypes.TOTAL).setCommand(new Command() {
+        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SItemManagerUtil.StatTypes.TOTAL).setCommand(new Command() {
             private boolean lastToggle = true;
             
             @Override
             public void run() {
                 disableFiltering = true;
                 lastToggle = !lastToggle;
-                for (SListViewUtil.StatTypes s : SListViewUtil.StatTypes.values()) {
-                    if (SListViewUtil.StatTypes.TOTAL != s) {
+                for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
+                    if (SItemManagerUtil.StatTypes.TOTAL != s) {
                         VCardCatalog.SINGLETON_INSTANCE.getStatLabel(s).setSelected(lastToggle);
                     }
                 }

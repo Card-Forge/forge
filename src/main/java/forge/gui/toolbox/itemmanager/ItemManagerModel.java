@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.listview;
+package forge.gui.toolbox.itemmanager;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -26,27 +26,27 @@ import forge.item.ItemPoolView;
 
 /**
  * <p>
- * ListViewModel class.
+ * ItemManagerModel class.
  * </p>
  * 
  * @param <T>
  *            the generic type
  * @author Forge
- * @version $Id: ListViewModel.java 19857 2013-02-24 08:49:52Z Max mtg $
+ * @version $Id: ItemManagerModel.java 19857 2013-02-24 08:49:52Z Max mtg $
  */
-public final class ListViewModel<T extends InventoryItem> {
-    private final ListView<T> listView;
+public final class ItemManagerModel<T extends InventoryItem> {
+    private final ItemManager<T> ItemManager;
     private final ItemPool<T> data;
     private boolean infiniteSupply;
 
     /**
      * Instantiates a new list view model
      * 
-     * @param listView0
+     * @param ItemManager0
      * @param genericType0
      */
-    public ListViewModel(final ListView<T> listView0, final Class<T> genericType0) {
-        this.listView = listView0;
+    public ItemManagerModel(final ItemManager<T> ItemManager0, final Class<T> genericType0) {
+        this.ItemManager = ItemManager0;
         this.data = new ItemPool<T>(genericType0);
     }
 
@@ -98,7 +98,7 @@ public final class ListViewModel<T extends InventoryItem> {
         final boolean wasThere = this.data.count(item0) > 0;
         if (wasThere) {
             this.data.remove(item0, qty);
-            this.listView.getTableModel().fireTableDataChanged();
+            this.ItemManager.getTableModel().fireTableDataChanged();
         }
     }
 
@@ -109,7 +109,7 @@ public final class ListViewModel<T extends InventoryItem> {
      */
     public void addItem(final T item0, int qty) {
         this.data.add(item0, qty);
-        this.listView.getTableModel().fireTableDataChanged();
+        this.ItemManager.getTableModel().fireTableDataChanged();
     }
 
     /**
@@ -119,7 +119,7 @@ public final class ListViewModel<T extends InventoryItem> {
      */
     public void addItems(final Iterable<Entry<T, Integer>> items0) {
         this.data.addAll(items0);
-        this.listView.getTableModel().fireTableDataChanged();
+        this.ItemManager.getTableModel().fireTableDataChanged();
     }
     /**
      * Sets whether this table's pool of items is in infinite supply.  If false, items in the
@@ -132,4 +132,4 @@ public final class ListViewModel<T extends InventoryItem> {
     public boolean isInfinite() {
         return infiniteSupply;
     }
-} // ListViewModel
+} // ItemManagerModel

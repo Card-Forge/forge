@@ -1,4 +1,4 @@
-package forge.gui.listview;
+package forge.gui.toolbox.itemmanager;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,8 +19,10 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import forge.gui.listview.SColumnUtil.ColumnName;
-import forge.gui.listview.SColumnUtil.SortState;
+import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil.SortState;
 import forge.item.InventoryItem;
 import forge.properties.NewConstants;
 
@@ -29,7 +31,7 @@ import forge.properties.NewConstants;
  * 
  * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
  */
-public class SListViewIO {
+public class SItemManagerIO {
     /** Used in the XML IO to extract properties from PREFS file. */
     private enum ColumnProperty { /** */
         enumval, /** */
@@ -60,7 +62,7 @@ public class SListViewIO {
     /**
      * Retrieve a preference from the editor preference map.
      * 
-     * @param name0 &emsp; {@link forge.gui.listview.SListViewUtil.EditorPreference}
+     * @param name0 &emsp; {@link forge.gui.toolbox.itemmanager.SItemManagerUtil.EditorPreference}
      * @return TableColumnInfo<InventoryItem>
      */
     public static boolean getPref(final EditorPreference name0) {
@@ -70,7 +72,7 @@ public class SListViewIO {
     /**
      * Set a preference in the editor preference map.
      * 
-     * @param name0 &emsp; {@link forge.gui.listview.SListViewUtil.EditorPreference}
+     * @param name0 &emsp; {@link forge.gui.toolbox.itemmanager.SItemManagerUtil.EditorPreference}
      * @param val0 &emsp; boolean
      */
     public static void setPref(final EditorPreference name0, final boolean val0) {
@@ -80,7 +82,7 @@ public class SListViewIO {
     /**
      * Retrieve a custom column.
      * 
-     * @param name0 &emsp; {@link forge.gui.listview.SListViewUtil.CatalogColumnName}
+     * @param name0 &emsp; {@link forge.gui.toolbox.itemmanager.SItemManagerUtil.CatalogColumnName}
      * @return TableColumnInfo<InventoryItem>
      */
     public static TableColumnInfo<InventoryItem> getColumn(final ColumnName name0) {

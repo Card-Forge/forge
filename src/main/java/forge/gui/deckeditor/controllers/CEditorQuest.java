@@ -37,12 +37,12 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.quest.CSubmenuQuestDecks;
-import forge.gui.listview.ListView;
-import forge.gui.listview.SColumnUtil;
-import forge.gui.listview.SColumnUtil.ColumnName;
-import forge.gui.listview.SListViewUtil;
-import forge.gui.listview.TableColumnInfo;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -95,8 +95,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     public CEditorQuest(final QuestController questData0) {
         this.questData = questData0;
 
-        final ListView<PaperCard> lvCatalog = new ListView<PaperCard>(PaperCard.class, false);
-        final ListView<PaperCard> lvDeck = new ListView<PaperCard>(PaperCard.class, false);
+        final ItemManager<PaperCard> lvCatalog = new ItemManager<PaperCard>(PaperCard.class, false);
+        final ItemManager<PaperCard> lvDeck = new ItemManager<PaperCard>(PaperCard.class, false);
 
         lvCatalog.setAlwaysNonUnique(true);
         lvDeck.setAlwaysNonUnique(true);
@@ -283,7 +283,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
 
         Deck deck = new Deck();
 
-        SListViewUtil.resetUI();
+        SItemManagerUtil.resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);

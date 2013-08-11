@@ -1,4 +1,4 @@
-package forge.gui.listview;
+package forge.gui.toolbox.itemmanager;
 
 import javax.swing.ImageIcon;
 
@@ -11,6 +11,7 @@ import forge.card.CardRulesPredicates;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.itemmanager.table.ITableContainer;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
@@ -27,7 +28,7 @@ import forge.util.TextUtil;
  * <i>(S at beginning of class name denotes a static factory.)</i>
  *
  */
-public final class SListViewUtil  {
+public final class SItemManagerUtil  {
     /** An enum to encapsulate metadata for the stats/filter objects. */
     public static enum StatTypes {
         TOTAL      (FSkin.ZoneImages.ICO_HAND,      null, 0),
@@ -85,7 +86,7 @@ public final class SListViewUtil  {
      * 
      * @param <T> &emsp; the generic type
      * @param items &emsp; ItemPoolView<InventoryITem>
-     * @param view &emsp; {@link forge.gui.listview.ITableContainer}
+     * @param view &emsp; {@link forge.gui.toolbox.itemmanager.table.ITableContainer}
      */
     public static <T extends InventoryItem> void setStats(final ItemPoolView<T> items, final ITableContainer view) {
         for (StatTypes s : StatTypes.values()) {

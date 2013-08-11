@@ -24,7 +24,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SRearrangingUtil;
-import forge.gui.listview.ListView;
+import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
 import forge.view.FView;
 
@@ -58,8 +58,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         public void addTextFilterItem ();
     }
     
-    private ListView<TItem> lvCatalog;
-    private ListView<TItem> lvDeck;
+    private ItemManager<TItem> lvCatalog;
+    private ItemManager<TItem> lvDeck;
     
     /** 
      * Operation to add one of selected card to current deck.
@@ -102,36 +102,36 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /**
      * Gets the ListView holding the cards in the current deck.
      * 
-     * @return {@link forge.gui.listview.ListView}
+     * @return {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public ListView<TItem> getDeckListView() {
+    public ItemManager<TItem> getDeckListView() {
         return this.lvDeck;
     }
 
     /**
      * Sets the ListView holding the cards in the current deck.
      * 
-     * @param table0 &emsp; {@link forge.gui.listview.ListView}
+     * @param table0 &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public void setDeckListView(final ListView<TItem> table0) {
+    public void setDeckListView(final ItemManager<TItem> table0) {
         this.lvDeck = table0;
     }
 
     /**
      * Gets the ListView holding the cards in the current catalog.
      * 
-     * @return {@link forge.gui.listview.ListView}
+     * @return {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public ListView<TItem> getCatalogListView() {
+    public ItemManager<TItem> getCatalogListView() {
         return this.lvCatalog;
     }
 
     /**
      * Sets the ListView holding the cards in the current catalog.
      * 
-     * @param table0 &emsp; {@link forge.gui.listview.ListView}
+     * @param table0 &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public void setCatalogListView(final ListView<TItem> table0) {
+    public void setCatalogListView(final ItemManager<TItem> table0) {
         this.lvCatalog = table0;
     }
 

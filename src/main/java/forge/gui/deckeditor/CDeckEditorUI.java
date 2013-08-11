@@ -47,19 +47,19 @@ import com.google.common.primitives.Ints;
 
 import forge.deck.DeckBase;
 import forge.gui.GuiUtils;
-import forge.gui.listview.SListViewIO.EditorPreference;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.deckeditor.views.VCardCatalog;
-import forge.gui.listview.ListView;
-import forge.gui.listview.ListViewTableModel;
-import forge.gui.listview.SListViewIO;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SItemManagerIO;
+import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
+import forge.gui.toolbox.itemmanager.table.ItemTableModel;
 import forge.item.InventoryItem;
 
 /**
@@ -106,8 +106,8 @@ public enum CDeckEditorUI {
         this.childController = editor0;
         updateController();
         if (childController != null) {
-            boolean wantElastic = SListViewIO.getPref(EditorPreference.elastic_columns);
-            boolean wantUnique = SListViewIO.getPref(EditorPreference.display_unique_only);
+            boolean wantElastic = SItemManagerIO.getPref(EditorPreference.elastic_columns);
+            boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
             childController.getCatalogListView().setWantElasticColumns(wantElastic);
             childController.getDeckListView().setWantElasticColumns(wantElastic);
             childController.getCatalogListView().setWantUnique(wantUnique);
@@ -120,7 +120,7 @@ public enum CDeckEditorUI {
         void move(InventoryItem item, int qty);
     }
 
-    private void moveSelectedCards(ListView<InventoryItem> listView, _MoveAction moveAction, int maxQty) {
+    private void moveSelectedCards(ItemManager<InventoryItem> listView, _MoveAction moveAction, int maxQty) {
         List<? extends InventoryItem> items = listView.getSelectedItems();
         if (items.isEmpty()) {
             return;
@@ -137,7 +137,7 @@ public enum CDeckEditorUI {
 
     @SuppressWarnings("unchecked")
     public void addSelectedCards(final boolean toAlternate, int number) {
-        moveSelectedCards((ListView<InventoryItem>)childController.getCatalogListView(),
+        moveSelectedCards((ItemManager<InventoryItem>)childController.getCatalogListView(),
                 new _MoveAction() {
             @Override
             public void move(InventoryItem item, int qty) {
@@ -148,7 +148,7 @@ public enum CDeckEditorUI {
 
     @SuppressWarnings("unchecked")
     public void removeSelectedCards(final boolean toAlternate, int number) {
-        moveSelectedCards((ListView<InventoryItem>)childController.getDeckListView(),
+        moveSelectedCards((ItemManager<InventoryItem>)childController.getDeckListView(),
                 new _MoveAction() {
             @Override
             public void move(InventoryItem item, int qty) {
@@ -159,7 +159,7 @@ public enum CDeckEditorUI {
 
     @SuppressWarnings("unchecked")
     public void removeAllCards(final boolean toAlternate) {
-        ListView<InventoryItem> v = (ListView<InventoryItem>)childController.getDeckListView();
+        ItemManager<InventoryItem> v = (ItemManager<InventoryItem>)childController.getDeckListView();
         v.getTable().selectAll();
         moveSelectedCards(v, new _MoveAction() {
             @Override
@@ -289,8 +289,8 @@ public enum CDeckEditorUI {
      * Updates listeners for current controller.
      */
     private void updateController() {
-        ListView<? extends InventoryItem> catView  = childController.getCatalogListView();
-        ListView<? extends InventoryItem> deckView = childController.getDeckListView();
+        ItemManager<? extends InventoryItem> catView  = childController.getCatalogListView();
+        ItemManager<? extends InventoryItem> deckView = childController.getDeckListView();
         final JTable catTable  = catView.getTable();
         final JTable deckTable = deckView.getTable();
         final _FindAsYouType catFind  = new _FindAsYouType(catView);
@@ -386,10 +386,10 @@ public enum CDeckEditorUI {
         private boolean popupShowing = false;
         private Popup popup;
         private Timer popupTimer;
-        private final ListView<? extends InventoryItem> tableView;
+        private final ItemManager<? extends InventoryItem> tableView;
         static final int okModifiers = KeyEvent.SHIFT_MASK | KeyEvent.ALT_GRAPH_MASK;
         
-        public _FindAsYouType(ListView<? extends InventoryItem> tableView) {
+        public _FindAsYouType(ItemManager<? extends InventoryItem> tableView) {
             this.tableView = tableView;
         }
 
@@ -415,7 +415,7 @@ public enum CDeckEditorUI {
             String searchStr = str.toString();
             boolean found = false;
             for (int idx = startIdx;; idx = (idx + increment) % numItems) {
-                ListViewTableModel<? extends InventoryItem> tableModel = tableView.getTable().getTableModel();
+                ItemTableModel<? extends InventoryItem> tableModel = tableView.getTable().getTableModel();
                 if (StringUtils.containsIgnoreCase(tableModel.rowToItem(idx).getKey().getName(), searchStr)) {
                     tableView.selectAndScrollTo(idx);
                     found = true;

@@ -34,11 +34,11 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
-import forge.gui.listview.ListView;
-import forge.gui.listview.SColumnUtil;
-import forge.gui.listview.SColumnUtil.ColumnName;
-import forge.gui.listview.SListViewUtil;
-import forge.gui.listview.TableColumnInfo;
+import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -74,8 +74,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         cardPoolCondition = poolCondition;
         exitToScreen = exitTo;
         
-        final ListView<PaperCard> lvCatalog = new ListView<PaperCard>(PaperCard.class, true);
-        final ListView<PaperCard> lvDeck = new ListView<PaperCard>(PaperCard.class, true);
+        final ItemManager<PaperCard> lvCatalog = new ItemManager<PaperCard>(PaperCard.class, true);
+        final ItemManager<PaperCard> lvDeck = new ItemManager<PaperCard>(PaperCard.class, true);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(lvCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(lvDeck.getTable());
@@ -168,7 +168,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         this.getCatalogListView().getTable().setup(VCardCatalog.SINGLETON_INSTANCE, lstCatalogCols);
         this.getDeckListView().getTable().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
-        SListViewUtil.resetUI();
+        SItemManagerUtil.resetUI();
         
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        

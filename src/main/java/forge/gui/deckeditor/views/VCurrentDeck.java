@@ -20,12 +20,12 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.gui.listview.ITableContainer;
-import forge.gui.listview.SListViewUtil;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.ToolTipListener;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.table.ITableContainer;
 
 
 /** 
@@ -123,8 +123,8 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
     // Total and color count labels/filter toggles
     private final JPanel pnlStats = new JPanel(new WrapLayout(FlowLayout.LEFT));
-    private final Map<SListViewUtil.StatTypes, FLabel> statLabels =
-            new HashMap<SListViewUtil.StatTypes, FLabel>();
+    private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels =
+            new HashMap<SItemManagerUtil.StatTypes, FLabel>();
 
     private JTable tblCards = null;
     private final JScrollPane scroller = new JScrollPane(tblCards);
@@ -160,10 +160,10 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
         pnlStats.setOpaque(false);
         
-        for (SListViewUtil.StatTypes s : SListViewUtil.StatTypes.values()) {
+        for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
             FLabel label = buildLabel(s);
             statLabels.put(s, label);
-            if (SListViewUtil.StatTypes.PACK == s) {
+            if (SItemManagerUtil.StatTypes.PACK == s) {
                 pnlStats.add(buildLabel(null));
             } else {
                 pnlStats.add(label);
@@ -248,7 +248,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     public JLabel getLblTitle() { return lblTitle; }
 
     @Override
-    public FLabel getStatLabel(SListViewUtil.StatTypes s) {
+    public FLabel getStatLabel(SItemManagerUtil.StatTypes s) {
         return statLabels.get(s);
     }
 
@@ -335,7 +335,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
     //========== Other methods
 
-    private FLabel buildLabel(SListViewUtil.StatTypes s) {
+    private FLabel buildLabel(SItemManagerUtil.StatTypes s) {
         FLabel label = new FLabel.Builder()
             .icon(s == null ? null : s.img).iconScaleAuto(false)
             .fontSize(11).tooltip(s == null ? null : s.toLabelString())
