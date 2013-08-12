@@ -34,8 +34,8 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSpinner;
 import forge.gui.toolbox.FTextField;
-import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.InventoryItem;
 import forge.util.TextUtil;
@@ -94,6 +94,9 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
     private final FLabel lblType = new FLabel.Builder().text("Type").hoverable().selectable().selected().build();
     private final FLabel lblText = new FLabel.Builder().text("Text").hoverable().selectable().selected().build();
     private final JPanel pnlRestrictions = new JPanel(new WrapLayout(FlowLayout.LEFT, 10, 5));
+
+    private final ItemManagerContainer itemManagerContainer = new ItemManagerContainer();
+    private ItemManager<? extends InventoryItem> itemManager;
     
     // restriction widgets
     public static enum RangeTypes {
@@ -115,20 +118,9 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
     
     private final Map<RangeTypes, Pair<FSpinner, FSpinner>> spinners = new HashMap<RangeTypes, Pair<FSpinner, FSpinner>>();
     
-    // item manager
-    private ItemManager<? extends InventoryItem> itemManager;
-    private final JScrollPane scroller = new JScrollPane();
-
-    
     //========== Constructor
     /** */
     private VCardCatalog() {
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
-        scroller.getViewport().setBorder(null);
-        scroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
-
         pnlStats.setOpaque(false);
         
         for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
@@ -227,7 +219,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
         parentBody.add(pnlAddButtons, "w 96%!, gap 1% 1% 5 5");
         parentBody.add(pnlSearch, "w 96%, gap 1% 1%");
         parentBody.add(pnlRestrictions, "w 96%, gapleft 1%, gapright push");
-        parentBody.add(scroller, "w 98%!, h 100% - 35, gap 1% 0 0 1%");
+        parentBody.add(itemManagerContainer, "w 98%!, h 100% - 35, gap 1% 0 0 1%");
     }
     
     public ItemManager<? extends InventoryItem> getItemManager() {
@@ -236,7 +228,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
 
     public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
         this.itemManager = itemManager0;
-        scroller.setViewportView(itemManager0.getTable());
+        itemManagerContainer.setItemManager(itemManager0);
     }
 
     //========== Accessor/mutator methods

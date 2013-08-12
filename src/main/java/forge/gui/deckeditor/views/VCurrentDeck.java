@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -22,8 +21,8 @@ import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
-import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.InventoryItem;
 
@@ -126,9 +125,8 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
     private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels =
             new HashMap<SItemManagerUtil.StatTypes, FLabel>();
 
-    // item manager
+    private final ItemManagerContainer itemManagerContainer = new ItemManagerContainer();
     private ItemManager<? extends InventoryItem> itemManager;
-    private final JScrollPane scroller = new JScrollPane();
 
     //========== Constructor
 
@@ -152,12 +150,6 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         pnlRemove.add(btnRemove, "w 30%!, h 30px!, gap 10 10 5 5");
         pnlRemove.add(btnRemove4, "w 30%!, h 30px!, gap 10 10 5 5");
         pnlRemove.add(btnCycleSection, "w 30%!, h 30px!, gap 10 10 5 5");
-
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
-        scroller.getViewport().setBorder(null);
-        scroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
 
         pnlStats.setOpaque(false);
         
@@ -229,16 +221,16 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         parentBody.add(pnlHeader, "w 98%!, gap 1% 1% 5 0");
         parentBody.add(pnlStats, "w 100:500:500, center");
         parentBody.add(pnlRemoveButtons, "w 96%!, gap 2% 0 0 0");
-        parentBody.add(scroller, "w 98%!, h 100%  - 35, gap 1% 0 0 1%");
+        parentBody.add(itemManagerContainer, "w 98%!, h 100%  - 35, gap 1% 0 0 1%");
     }
     
     public ItemManager<? extends InventoryItem> getItemManager() {
         return this.itemManager;
     }
-
+    
     public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
         this.itemManager = itemManager0;
-        scroller.setViewportView(itemManager0.getTable());
+        itemManagerContainer.setItemManager(itemManager0);
     }
     
     public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {

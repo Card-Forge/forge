@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JViewport;
 
@@ -33,6 +34,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.table.ItemTable;
 import forge.gui.toolbox.itemmanager.table.ItemTableModel;
 import forge.item.InventoryItem;
@@ -47,15 +49,18 @@ import forge.util.Aggregates;
  * @param <T>
  *            the generic type
  */
-public final class ItemManager<T extends InventoryItem> {
+public final class ItemManager<T extends InventoryItem> extends JViewport {
+    private static final long serialVersionUID = 3164349984277267922L;
     private ItemPool<T> pool;
     private final ItemManagerModel<T> model;
-    private final ItemTable<T> table;
     private Predicate<T> filter = null;
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
     private final Class<T> genericType;
     private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels;
+    
+    private final ItemTable<T> table;
+    private final JScrollPane tableScroller;
 
     /**
      * ItemManager Constructor.
@@ -69,7 +74,16 @@ public final class ItemManager<T extends InventoryItem> {
         this.statLabels = statLabels0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(this, genericType0);
+
+        //build display
         this.table = new ItemTable<T>(this, this.model);
+        this.tableScroller = new JScrollPane(this.table);
+        this.tableScroller.setOpaque(false);
+        this.tableScroller.getViewport().setOpaque(false);
+        this.tableScroller.setBorder(null);
+        this.tableScroller.getViewport().setBorder(null);
+        this.tableScroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
+        this.add(this.tableScroller, "w 100%!, h 100%!");
     }
 
     /**

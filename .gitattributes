@@ -14996,6 +14996,7 @@ src/main/java/forge/gui/toolbox/imaging/FImagePanel.java -text
 src/main/java/forge/gui/toolbox/imaging/FImageUtil.java -text
 src/main/java/forge/gui/toolbox/imaging/ImageUtil.java -text
 src/main/java/forge/gui/toolbox/itemmanager/ItemManager.java -text
+src/main/java/forge/gui/toolbox/itemmanager/ItemManagerContainer.java -text
 src/main/java/forge/gui/toolbox/itemmanager/ItemManagerModel.java -text
 src/main/java/forge/gui/toolbox/itemmanager/SFilterUtil.java -text
 src/main/java/forge/gui/toolbox/itemmanager/SItemManagerIO.java -text
