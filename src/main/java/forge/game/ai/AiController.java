@@ -781,7 +781,7 @@ public class AiController {
         
         while(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
             Card land = chooseBestLandToPlay(landsWannaPlay);
-            if (ComputerUtil.damageFromETB(player, land) >= player.getLife()) {
+            if (ComputerUtil.damageFromETB(player, land) >= player.getLife() && player.canLoseLife()) {
                 break;
             }
             landsWannaPlay.remove(land);

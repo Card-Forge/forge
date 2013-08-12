@@ -1763,7 +1763,16 @@ public class ComputerUtil {
                 if (!abilityParams.containsKey("NumDmg")) {
                     continue;
                 }
-                damage += AbilityUtils.calculateAmount(source, abilityParams.get("NumDmg"), null);
+                damage += ComputerUtilCombat.predictDamageTo(player, AbilityUtils.calculateAmount(source, abilityParams.get("NumDmg"), null), source, false);
+            } else if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("LoseLife"))
+                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("LoseLife"))) {
+                if (!"TriggeredCardController".equals(abilityParams.get("Defined"))) {
+                    continue;
+                }
+                if (!abilityParams.containsKey("LifeAmount")) {
+                    continue;
+                }
+                damage += AbilityUtils.calculateAmount(source, abilityParams.get("LifeAmount"), null);
             }
         }
         return damage;
