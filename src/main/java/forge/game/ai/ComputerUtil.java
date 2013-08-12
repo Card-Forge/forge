@@ -1735,6 +1735,10 @@ public class ComputerUtil {
             if (!trigger.requirementsCheck(game)) {
                 continue;
             }
+            if (trigParams.containsKey("CheckOnTriggeredCard") 
+                    && AbilityUtils.getDefinedCards(permanent, source.getSVar(trigParams.get("CheckOnTriggeredCard").split(" ")[0]), null).isEmpty()) {
+                continue;
+            }
             TriggerType mode = trigger.getMode();
             if (mode != TriggerType.ChangesZone) {
                 continue;

@@ -206,6 +206,9 @@ public class SpellPermanent extends Spell {
         if (!SpellPermanent.checkETBEffects(card, this, null, ai)) {
             return false;
         }
+        if (ComputerUtil.damageFromETB(ai, card) >= ai.getLife() && ai.canLoseLife()) {
+            return false;
+        }
         return super.canPlayAI();
     }
 
