@@ -95,8 +95,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     public CEditorQuest(final QuestController questData0) {
         this.questData = questData0;
 
-        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, false);
-        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, false);
+        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
+        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);

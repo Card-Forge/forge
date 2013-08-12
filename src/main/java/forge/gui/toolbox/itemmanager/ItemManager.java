@@ -55,45 +55,18 @@ public final class ItemManager<T extends InventoryItem> {
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
     private final Class<T> genericType;
-    private Map<SItemManagerUtil.StatTypes, FLabel> statLabels;
-
-    /**
-     * 
-     * getTable.
-     * 
-     * @return ItemTable<T>
-     */
-    public ItemTable<T> getTable() {
-        return this.table;
-    }
-    
-    /**
-     * 
-     * getTableModel.
-     * 
-     * @return ItemTableModel<T>
-     */
-    public ItemTableModel<T> getTableModel() {
-        return this.table.getTableModel();
-    }
-
-    /**
-     * ItemManager.
-     * 
-     * @param genericType0 - the class of item that this table will contain
-     */
-    public ItemManager(final Class<T> genericType0) {
-        this(genericType0, false);
-    }
+    private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels;
 
     /**
      * ItemManager Constructor.
      * 
-     * @param forceUnique whether this table should display only one item with the same name
-     * @param type0 the class of item that this table will contain
+     * @param genericType0 the class of item that this table will contain
+     * @param statLabels0 stat labels for this item manager
+     * @param wantUnique0 whether this table should display only one item with the same name
      */
-    public ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
+    public ItemManager(final Class<T> genericType0, Map<SItemManagerUtil.StatTypes, FLabel> statLabels0, final boolean wantUnique0) {
         this.genericType = genericType0;
+        this.statLabels = statLabels0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(this, genericType0);
         this.table = new ItemTable<T>(this, this.model);
@@ -164,6 +137,26 @@ public final class ItemManager<T extends InventoryItem> {
         this.model.addItems(this.pool);
         this.model.setInfinite(infinite);
         this.updateView(true);
+    }
+
+    /**
+     * 
+     * getTable.
+     * 
+     * @return ItemTable<T>
+     */
+    public ItemTable<T> getTable() {
+        return this.table;
+    }
+    
+    /**
+     * 
+     * getTableModel.
+     * 
+     * @return ItemTableModel<T>
+     */
+    public ItemTableModel<T> getTableModel() {
+        return this.table.getTableModel();
     }
 
     /**
@@ -295,34 +288,12 @@ public final class ItemManager<T extends InventoryItem> {
     
     /**
      * 
-     * getStatLabels.
-     * 
-     */
-    public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {
-        return this.statLabels;
-    }
-    
-    /**
-     * 
-     * getStatLabel.
-     * 
-     * @param s
-     */
-    public void setStatLabels(Map<SItemManagerUtil.StatTypes, FLabel> statLabels0) {
-        this.statLabels = statLabels0;
-    }
-    
-    /**
-     * 
      * getStatLabel.
      * 
      * @param s
      */
     public FLabel getStatLabel(SItemManagerUtil.StatTypes s) {
-        if (this.statLabels != null) {
-            return this.statLabels.get(s);
-        }
-        return null;
+        return this.statLabels.get(s);
     }
     
     /**

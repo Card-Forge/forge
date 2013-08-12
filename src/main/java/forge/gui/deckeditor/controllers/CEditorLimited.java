@@ -59,8 +59,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     public CEditorLimited(final IStorage<DeckGroup> deckMap0) {
-        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, false);
-        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, false);
+        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
+        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
 
         VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
         VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);

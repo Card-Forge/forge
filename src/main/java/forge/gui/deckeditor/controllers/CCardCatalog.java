@@ -108,7 +108,7 @@ public enum CCardCatalog implements ICDoc {
             }
         };
 
-        for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> entry : VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabels().entrySet()) {
+        for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> entry : VCardCatalog.SINGLETON_INSTANCE.getStatLabels().entrySet()) {
             final FLabel statLabel = entry.getValue();
             statLabel.setCommand(updateFilterCommand);
 
@@ -135,7 +135,7 @@ public enum CCardCatalog implements ICDoc {
             }
         }
 
-        VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(SItemManagerUtil.StatTypes.TOTAL).setCommand(new Command() {
+        VCardCatalog.SINGLETON_INSTANCE.getStatLabels().get(SItemManagerUtil.StatTypes.TOTAL).setCommand(new Command() {
             private boolean lastToggle = true;
             
             @Override
@@ -351,7 +351,7 @@ public enum CCardCatalog implements ICDoc {
 
         List<Predicate<? super PaperCard>> cardPredicates = new ArrayList<Predicate<? super PaperCard>>();
         cardPredicates.add(Predicates.instanceOf(PaperCard.class));
-        cardPredicates.add(SFilterUtil.buildColorAndTypeFilter(VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabels()));
+        cardPredicates.add(SFilterUtil.buildColorAndTypeFilter(VCardCatalog.SINGLETON_INSTANCE.getStatLabels()));
         cardPredicates.addAll(activePredicates);
         
         // apply current values in the range filters

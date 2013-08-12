@@ -236,7 +236,6 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
 
     public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
         this.itemManager = itemManager0;
-        itemManager0.setStatLabels(this.statLabels);
         scroller.setViewportView(itemManager0.getTable());
     }
 
@@ -254,6 +253,9 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
     public JComboBox<String> getCbSearchMode()   { return cbSearchMode;      }
     public JTextField getTxfSearch()     { return txfSearch;         }
 
+    public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {
+        return statLabels;
+    }
     public Map<RangeTypes, Pair<FSpinner, FSpinner>> getSpinners() {
         return spinners;
     }

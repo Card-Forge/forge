@@ -238,8 +238,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
         this.itemManager = itemManager0;
-        itemManager0.setStatLabels(this.statLabels);
         scroller.setViewportView(itemManager0.getTable());
+    }
+    
+    public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {
+        return statLabels;
     }
 
     public JLabel getLblTitle() { return lblTitle; }

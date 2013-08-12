@@ -127,8 +127,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     public CEditorQuestCardShop(final QuestController qd) {
         this.questData = qd;
 
-        final ItemManager<InventoryItem> catalogManager = new ItemManager<InventoryItem>(InventoryItem.class, false);
-        final ItemManager<InventoryItem> deckManager = new ItemManager<InventoryItem>(InventoryItem.class, false);
+        final ItemManager<InventoryItem> catalogManager = new ItemManager<InventoryItem>(InventoryItem.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
+        final ItemManager<InventoryItem> deckManager = new ItemManager<InventoryItem>(InventoryItem.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);

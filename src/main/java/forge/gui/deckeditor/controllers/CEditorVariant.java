@@ -74,8 +74,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         cardPoolCondition = poolCondition;
         exitToScreen = exitTo;
         
-        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, true);
-        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, true);
+        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), true);
+        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), true);
 
         VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
         VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
