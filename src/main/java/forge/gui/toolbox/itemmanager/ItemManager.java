@@ -76,6 +76,7 @@ public final class ItemManager<T extends InventoryItem> extends JViewport {
         this.model = new ItemManagerModel<T>(this, genericType0);
 
         //build display
+        this.setOpaque(false);
         this.table = new ItemTable<T>(this, this.model);
         this.tableScroller = new JScrollPane(this.table);
         this.tableScroller.setOpaque(false);
