@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.lang.StringUtils;
@@ -38,6 +39,7 @@ import forge.CardUtil;
 import forge.ITargetable;
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
@@ -51,6 +53,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.staticability.StaticAbility;
+import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerType;
 import forge.error.BugReporter;
 import forge.game.Game;
 import forge.game.combat.Combat;
@@ -1711,8 +1715,60 @@ public class ComputerUtil {
         });
         return safeCards;
     }
-    
-    
+
+    public static int damageFromETB(final Player player, final Card permanent) {
+        int damage = 0;
+        final Game game = player.getGame();
+        final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
+
+        for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+            theTriggers.addAll(card.getTriggers());
+        }
+        for (Trigger trigger : theTriggers) {
+            HashMap<String, String> trigParams = trigger.getMapParams();
+            final Card source = trigger.getHostCard();
+
+
+            if (!trigger.zonesCheck(game.getZoneOf(source))) {
+                continue;
+            }
+            if (!trigger.requirementsCheck(game)) {
+                continue;
+            }
+            TriggerType mode = trigger.getMode();
+            if (mode != TriggerType.ChangesZone) {
+                continue;
+            }
+            if (!"Battlefield".equals(trigParams.get("Destination"))) {
+                continue;
+            }
+            if (trigParams.containsKey("ValidCard")) {
+                if (!permanent.isValid(trigParams.get("ValidCard"), source.getController(), source)) {
+                    continue;
+                }
+            }
+
+            String ability = source.getSVar(trigParams.get("Execute"));
+            if (ability.isEmpty()) {
+                continue;
+            }
+         
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+            // Destroy triggers
+            if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
+                    || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("DealDamage"))) {
+                if (!"TriggeredCardController".equals(abilityParams.get("Defined"))) {
+                    continue;
+                }
+                if (!abilityParams.containsKey("NumDmg")) {
+                    continue;
+                }
+                damage += AbilityUtils.calculateAmount(source, abilityParams.get("NumDmg"), null);
+            }
+        }
+        return damage;
+    }
+
     // although this should be in AI's code 
     public static boolean isNegativeCounter(CounterType type, Card c) {
         return type == CounterType.AGE || type == CounterType.BLAZE || type == CounterType.BRIBERY || type == CounterType.DOOM
