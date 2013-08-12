@@ -94,7 +94,6 @@ public class Upkeep extends Phase {
 
         Upkeep.upkeepOathOfDruids(game);
         Upkeep.upkeepOathOfGhouls(game);
-        Upkeep.upkeepPowerSurge(game);
 
         game.getStack().unfreezeStack();
     }
@@ -509,42 +508,6 @@ public class Upkeep extends Phase {
             }
         }
     } // Oath of Ghouls
-
-    /**
-     * <p>
-     * upkeepPowerSurge.
-     * </p>
-     */
-    private static void upkeepPowerSurge(final Game game) {
-        /*
-         * At the beginning of each player's upkeep, Power Surge deals X damage
-         * to that player, where X is the number of untapped lands he or she
-         * controlled at the beginning of this turn.
-         */
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-        final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Power Surge"));
-        final int damage = player.getNumPowerSurgeLands();
-
-        for (final Card surge : list) {
-            final Card source = surge;
-            final Ability ability = new Ability(source, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    player.addDamage(damage, source);
-                }
-            }; // Ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(source).append(" - deals ").append(damage).append(" damage to ").append(player);
-            ability.setStackDescription(sb.toString());
-            ability.setDescription(sb.toString());
-            ability.setActivatingPlayer(surge.getController());
-
-            if (damage > 0) {
-                game.getStack().addSimultaneousStackEntry(ability);
-            }
-        } // for
-    } // upkeepPowerSurge()
 
     /**
      * <p>

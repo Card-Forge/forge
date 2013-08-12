@@ -1,7 +1,9 @@
 Name:Power Surge
 ManaCost:R R
 Types:Enchantment
-Text:At the beginning of each player's upkeep, CARDNAME deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
+SVar:X:TriggeredPlayer$NumPowerSurgeLands
 SVar:AITapDown:Land
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_surge.jpg

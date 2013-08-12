@@ -866,6 +866,10 @@ public class CardFactoryUtil {
             return doXMath(player.getCardsIn(ZoneType.Hand).size(), m, source);
         }
 
+        if (value.contains("NumPowerSurgeLands")) {
+            return doXMath(player.getNumPowerSurgeLands(), m, source);
+        }
+
         if (value.contains("DomainPlayer")) {
             int n = 0;
             final List<Card> someCards = new ArrayList<Card>();
