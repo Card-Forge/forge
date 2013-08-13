@@ -291,9 +291,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
             AbilityUtils.resolve(sp);
-            //sp.resolve();
-            sp.resetOnceResolved();
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
+            sp.resetOnceResolved();
             return;
         }
 
@@ -523,8 +522,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // do creatures ETB from here?
         }
         
-        this.finishResolving(sa, thisHasFizzled);
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
+        this.finishResolving(sa, thisHasFizzled);
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature() && game.getZoneOf(source).is(ZoneType.Graveyard)) {
             handleHauntForNonPermanents(sa);
