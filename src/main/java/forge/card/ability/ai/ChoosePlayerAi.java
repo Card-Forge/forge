@@ -6,6 +6,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 public class ChoosePlayerAi extends SpellAbilityAi {
 
@@ -55,6 +56,15 @@ public class ChoosePlayerAi extends SpellAbilityAi {
             if (chosen == null) {
                 System.out.println("No good curse choices. Picking first available: " + choices.get(0));
                 chosen = choices.get(0);
+            }
+        } else if ("MostCardsInHand".equals(sa.getParam("AILogic"))) {
+            int cardsInHand = 0;
+            for (final Player p : choices) {
+                int hand = p.getCardsIn(ZoneType.Hand).size();
+                if (hand >= cardsInHand) {
+                    chosen = p;
+                    cardsInHand = hand;
+                }
             }
         } else {
             System.out.println("Default player choice logic.");
