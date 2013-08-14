@@ -18,6 +18,8 @@
 package forge.gui.toolbox.itemmanager;
 
 import javax.swing.JScrollPane;
+
+import forge.gui.toolbox.FScrollPanel;
 import forge.item.InventoryItem;
 
 
@@ -25,17 +27,14 @@ import forge.item.InventoryItem;
  * Simple container pane meant to contain item managers.
  * 
  */
-public final class ItemManagerContainer extends JScrollPane {
-    private static final long serialVersionUID = 5537189102601508207L;
-
+@SuppressWarnings("serial")
+public final class ItemManagerContainer extends FScrollPanel {
     public ItemManagerContainer() {
         this(null);
     }
     
     public ItemManagerContainer(ItemManager<? extends InventoryItem> itemManager) {
-        super(JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        this.setOpaque(false);
-        this.setViewport(itemManager);
+        super(itemManager, true, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
 
     /**
