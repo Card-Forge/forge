@@ -148,7 +148,7 @@ public class AiAttackController {
         if (ComputerUtilCombat.poisonIfUnblocked(attacker, opp) > 0) {
             return true;
         }
-        if (this.attackers.size() == 1 && attacker.hasKeyword("Exalted")) {
+        if (this.attackers.size() == 1 && attacker.hasKeyword("Exalted") && ComputerUtilCombat.predictDamageTo(opp, 1, attacker, true) > 0) {
             return true;
         }
 
