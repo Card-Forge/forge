@@ -66,6 +66,24 @@ public class ChoosePlayerAi extends SpellAbilityAi {
                     cardsInHand = hand;
                 }
             }
+        } else if ("MostCardsInHand".equals(sa.getParam("AILogic"))) {
+            int cardsInHand = 0;
+            for (final Player p : choices) {
+                int hand = p.getCardsIn(ZoneType.Hand).size();
+                if (hand >= cardsInHand) {
+                    chosen = p;
+                    cardsInHand = hand;
+                }
+            }
+        } else if ("LeastCreatures".equals(sa.getParam("AILogic"))) {
+            int creats = 50;
+            for (final Player p : choices) {
+                int curr = p.getCreaturesInPlay().size();
+                if (curr <= creats) {
+                    chosen = p;
+                    creats = curr;
+                }
+            }
         } else {
             System.out.println("Default player choice logic.");
             chosen = choices.contains(ai) ? ai : choices.get(0);
