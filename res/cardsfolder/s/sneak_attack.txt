@@ -2,8 +2,7 @@ Name:Sneak Attack
 ManaCost:3 R
 Types:Enchantment
 A:AB$ ChangeZone | Cost$ R | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | SubAbility$ DBPump | RememberChanged$ True | ForgetOtherRemembered$ True | SpellDescription$ You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | KW$ Haste | Defined$ Remembered | Permanent$ True | SubAbility$ DBPump2
-SVar:DBPump2:DB$ Pump | Defined$ Remembered | KW$ HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | KW$ Haste & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | Defined$ Remembered | Permanent$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NonStackingEffect:True
 SVar:RemAIDeck:True
