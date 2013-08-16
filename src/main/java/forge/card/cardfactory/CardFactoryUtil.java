@@ -2237,7 +2237,7 @@ public class CardFactoryUtil {
                 		"TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME" +
                 		" | Execute$ TrigUpkeepVanishing | TriggerDescription$ At the " +
                 		"beginning of your upkeep, if CARDNAME has a time counter on it, " +
-                		"removem a time counter from it. | Secondary$ True";
+                		"remove a time counter from it. | Secondary$ True";
                 card.setSVar("TrigUpkeepVanishing", "AB$ RemoveCounter | Cost$ 0 | Defined$ Self" +
                 		" | CounterType$ TIME | CounterNum$ 1");
                 final Trigger parsedUpkeepTrig = TriggerHandler.parseTrigger(upkeepTrig, card, true);
