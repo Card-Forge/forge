@@ -171,8 +171,9 @@ public enum FControl {
         //Why,Swing? Why is this not a property of JTabbbedPane?
         UIManager.put("TabbedPane.selected", FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
         UIManager.put("TabbedPane.contentOpaque", FSkin.getColor(FSkin.Colors.CLR_THEME));
-        UIManager.put("TabbedPane.unselectedBackground", FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
+        UIManager.put("TabbedPane.unselectedBackground", FSkin.getColor(FSkin.Colors.CLR_THEME2));        
+        setComboBoxLookAndFeel();
+                
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
         
@@ -205,6 +206,22 @@ public enum FControl {
         FSkin.setProgessBarMessage("Opening main window...");
         SwingUtilities.invokeLater(new Runnable() { @Override
             public void run() { Singletons.getView().initialize(); } });
+    }
+    
+    /**
+     * @see <a href="http://tips4java.wordpress.com/2008/10/09/uimanager-defaults/">UIManager Defaults</a>
+     */
+    private void setComboBoxLookAndFeel() {
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX)) {
+            UIManager.put("ComboBox.background", FSkin.getColor(FSkin.Colors.CLR_THEME2));
+            UIManager.put("ComboBox.foreground", FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            UIManager.put("ComboBox.selectionBackground", FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+            UIManager.put("ComboBox.selectionForeground", FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            UIManager.put("ComboBox.disabledBackground", FSkin.getColor(FSkin.Colors.CLR_THEME2));
+            UIManager.put("ComboBox.disabledForeground", FSkin.getColor(FSkin.Colors.CLR_THEME2).darker());                                    
+            UIManager.put("Button.select", FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+            UIManager.put("ComboBox.font", FSkin.getFont(UIManager.getFont("ComboBox.font").getSize()));
+        }
     }
 
     /**
