@@ -6623,10 +6623,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.hasCounters()) {
                 return false;
             }
-        } else if (property.equals("HasNoCounters")) {
-            if (this.hasCounters()) {
-                return false;
-            }
         } else if (property.startsWith("wasCastFrom")) {
             final String strZone = property.substring(11);
             final ZoneType realZone = ZoneType.smartValueOf(strZone);

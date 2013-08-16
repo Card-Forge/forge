@@ -71,7 +71,9 @@ public class EndOfTurn extends Phase {
                 for (int i = 0; i < amount; i++) {
                     game.getStack().addSimultaneousStackEntry(ability);
                 }
-
+                // Trigger once: sacrifice at the beginning of the next end step 
+                c.removeAllExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+                c.removeAllExtrinsicKeyword("HIDDEN At the beginning of the end step, sacrifice CARDNAME.");
             }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
                 final Card card = c;
@@ -135,27 +137,6 @@ public class EndOfTurn extends Phase {
                     c.removeAllExtrinsicKeyword("At the beginning of the next end step, "
                             + "destroy CARDNAME if it attacked this turn.");
                 }
-            }
-
-            if (c.hasKeyword("At the beginning of your end step, return CARDNAME to its owner's hand.")
-                    && game.getPhaseHandler().isPlayerTurn(c.getController())) {
-                final Card source = c;
-                final SpellAbility change = new Ability(source, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final Card current = game.getCardState(source);
-                        if (current.isInPlay()) {
-                            game.getAction().moveToHand(current);
-                        }
-                    }
-                };
-                final StringBuilder sb = new StringBuilder();
-                sb.append(source).append(" - At the beginning of your end step, return CARDNAME to its owner's hand.");
-                change.setStackDescription(sb.toString());
-                change.setDescription(sb.toString());
-
-                game.getStack().addSimultaneousStackEntry(change);
-
             }
 
         }
