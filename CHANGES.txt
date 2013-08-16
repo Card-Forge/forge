@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2013 ver 1.4.6
+Forge Beta: 08-16-2013 ver 1.4.6
 
 
-13### cards in total.
+13076 cards in total.
 
 
 -------------
@@ -17,12 +17,12 @@ Window will be made accessible even if monitor setup or screen resolution is dif
 
 
 - Card Zoomer Updates -
-- The Card Zoomer/Preview now supports split, flip and double-sided cards including cards played face down (eg. morph).
-- Split cards (name contains "//") are now rotated 90 degrees for easier viewing.
-- If a card is a flip- or double-sided card then you can easily view the alternate image using...
-  - wheel mode : flick wheel forward or tap CTRL key.
-  - button mode : tap CTRL key.
-- The standard flip graphic (the two rotated arrows) is displayed if the card can be flipped or transformed.
+The Card Zoomer/Preview now supports split, flip and double-sided cards including cards played face down (eg. morph).
+Split cards (name contains "//") are now rotated 90 degrees for easier viewing.
+If a card is a flip- or double-sided card then you can easily view the alternate image using...
+  - wheel mode : flick wheel forward or tap CTRL key.
+  - button mode : tap CTRL key.
+The standard flip graphic (the two rotated arrows) is displayed if the card can be flipped or transformed.
 
 
 - Home Screen UI Improvements -
@@ -64,29 +64,29 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-Wiitigo
-No Quarter
 Arcanum Wings
-Grip of Chaos
-Strionic Resonator
-Ayesha Tanaka
 Awesome Presence
-Mangara's Equity
-Wall of Caltrops
-Volcano Hellion
+Ayesha Tanaka
+Citadel of Pain
+Clockspinning
 Cocoon
-Traveling Plague
-War Cadence
-Heat Wave
-Rock Jockey
 Copperhoof Vorrac
+Grip of Chaos
+Harsh Judgment
+Heat Wave
+Mangara's Equity
+Monsoon
+No Quarter
+Rasputin Dreamweaver
+Rock Jockey
 Stoneshaker Shaman
 Stranglehold
-Clockspinning
-Citadel of Pain
-Harsh Judgment
-Rasputin Dreamweaver
-Monsoon
+Strionic Resonator
+Traveling Plague
+Volcano Hellion
+Wall of Caltrops
+War Cadence
+Wiitigo
 
 
 ----------
@@ -120,7 +120,20 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+Asepetci
+dmacgamer
+DrDev
+Gos
+lazylockie
+Marc
+Max
+Sloth
+Sol
+spr
+Swordshine
+Zirbert
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
