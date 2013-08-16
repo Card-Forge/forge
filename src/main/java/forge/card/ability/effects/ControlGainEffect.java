@@ -142,7 +142,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     sa.getSourceCard().addChangeControllerCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("EOT")) {
-                    game.getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
+                    game.getEndOfTurn().addUntil(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                     tgtC.setSVar("SacMe", "6");
                 }
             }
