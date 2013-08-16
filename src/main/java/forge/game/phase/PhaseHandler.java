@@ -86,17 +86,17 @@ public class PhaseHandler implements java.io.Serializable {
     private boolean bPreventCombatDamageThisTurn  = false;
     private int planarDiceRolledthisTurn = 0;
 
-    private Player playerTurn = null;
+    private transient Player playerTurn = null;
 
     // priority player
 
-    private Player pPlayerPriority = null;
-    private Player pFirstPriority = null;
-    private Combat combat = null;
+    private transient Player pPlayerPriority = null;
+    private transient Player pFirstPriority = null;
+    private transient Combat combat = null;
     private boolean bRepeatCleanup = false;
     
-    private Player playerDeclaresBlockers = null;
-    private Player playerDeclaresAttackers = null;
+    private transient Player playerDeclaresBlockers = null;
+    private transient Player playerDeclaresAttackers = null;
 
     /** The need to next phase. */
     private boolean givePriorityToPlayer = false;
@@ -524,11 +524,13 @@ public class PhaseHandler implements java.io.Serializable {
             }
         }
 
-        // fire trigger
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Attackers", combat.getAttackers());
-        runParams.put("AttackingPlayer", combat.getAttackingPlayer());
-        game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
+        // fire AttackersDeclared trigger
+        if (!combat.getAttackers().isEmpty()) {
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Attackers", combat.getAttackers());
+            runParams.put("AttackingPlayer", combat.getAttackingPlayer());
+            game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
+        }
 
         for (final Card c : combat.getAttackers()) {
             CombatUtil.checkDeclaredAttacker(game, c, combat);
