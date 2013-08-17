@@ -99,10 +99,10 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
         int width = this.getWidth();
         int height = this.getHeight();
         
-        //position toolbar components
-        int toolbarHeight = FTextField.HEIGHT + 3;
-        this.txtSearch.setBounds(x, y, width / 2, FTextField.HEIGHT);
-        y += toolbarHeight;
+        //position toolbar components //TODO: Uncomment
+        //int toolbarHeight = FTextField.HEIGHT + 3;
+        //this.txtSearch.setBounds(x, y, width / 2, FTextField.HEIGHT);
+        //y += toolbarHeight;
         
         //position current item view
         this.tableScroller.setBounds(x, y, width, height - y);
