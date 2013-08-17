@@ -2,7 +2,7 @@ Name:Pandemonium
 ManaCost:3 R
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | OptionalDecider$ TriggeredCardController | TriggerDescription$ Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to target creature or player of his or her choice.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | DamageSource$ TriggeredCard | TargetingPlayer$ TriggeredCardController
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | DamageSource$ TriggeredCard | TargetingPlayer$ TriggeredCardController
 SVar:X:TriggeredCard$CardPower
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pandemonium.jpg

@@ -6283,6 +6283,7 @@ res/cardsfolder/l/leveler.txt svneol=native#text/plain
 res/cardsfolder/l/leviathan.txt -text
 res/cardsfolder/l/levitation.txt svneol=native#text/plain
 res/cardsfolder/l/ley_druid.txt svneol=native#text/plain
+res/cardsfolder/l/ley_line.txt -text
 res/cardsfolder/l/leyline_of_anticipation.txt svneol=native#text/plain
 res/cardsfolder/l/leyline_of_lifeforce.txt svneol=native#text/plain
 res/cardsfolder/l/leyline_of_lightning.txt svneol=native#text/plain

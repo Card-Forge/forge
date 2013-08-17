@@ -1,0 +1,8 @@
+Name:Ley Line
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | OptionalDecider$ TriggeredPlayer | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each player's upkeep, that player may put a +1/+1 counter on target creature of his or her choice.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | TargetingPlayer$ TriggeredPlayer
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ley_line.jpg
+Oracle:At the beginning of each player's upkeep, that player may put a +1/+1 counter on target creature of his or her choice.
