@@ -86,6 +86,7 @@ public class HumanPlay {
         if (sa == Ability.PLAY_LAND_SURROGATE) {
             p.playLand(sa.getSourceCard(), false);
             p.getGame().getPhaseHandler().setPriority(p);
+            p.getGame().getAction().checkStateEffects();
             return;
         }
 

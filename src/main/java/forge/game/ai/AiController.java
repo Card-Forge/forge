@@ -787,6 +787,7 @@ public class AiController {
             landsWannaPlay.remove(land);
             player.playLand(land, false);
             game.getPhaseHandler().setPriority(player);
+            game.getAction().checkStateEffects();
         }
     }
 
