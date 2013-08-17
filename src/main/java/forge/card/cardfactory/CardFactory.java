@@ -526,6 +526,7 @@ public class CardFactory {
         to.getCharacteristics().copyFrom(characteristics);
         // handle triggers and replacement effect through Card class interface
         to.setTriggers(characteristics.getTriggers(), true);
+        to.setReplacementEffects(characteristics.getReplacementEffects());
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to) {
