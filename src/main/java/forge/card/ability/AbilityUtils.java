@@ -406,7 +406,6 @@ public class AbilityUtils {
                         list.add((Card) o);
                     }
                 }
-                System.out.println("RememberedLKI " + ability + list);
             } else {
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Card) {

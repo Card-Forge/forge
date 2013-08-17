@@ -88,7 +88,7 @@ public class Upkeep extends Phase {
         Upkeep.upkeepUpkeepCost(game); // sacrifice unless upkeep cost is paid
         Upkeep.upkeepEcho(game);
 
-        Upkeep.upkeepTheAbyss(game);
+        //Upkeep.upkeepTheAbyss(game);
         Upkeep.upkeepDropOfHoney(game);
         Upkeep.upkeepTangleWire(game);
 

@@ -29,6 +29,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPayment;
 import forge.game.Game;
+import forge.game.player.Player;
 import forge.game.zone.Zone;
 
 /**
@@ -103,18 +104,25 @@ public class HumanPlaySpellAbility {
     private final boolean setupTargets() {
         // Skip to paying if parent ability doesn't target and has no subAbilities.
         // (or trigger case where its already targeted)
-        SpellAbility beingTargeted = ability;
-        do { 
-            TargetRestrictions tgt = beingTargeted.getTargetRestrictions();
+        SpellAbility currentAbility = ability;
+        final Card source = ability.getSourceCard();
+        do {
+            TargetRestrictions tgt = currentAbility.getTargetRestrictions();
             if( tgt != null && tgt.doesTarget()) {
-                clearTargets(beingTargeted);
-                final TargetSelection select = new TargetSelection(beingTargeted);
-                if (!select.chooseTargets(null) ) {
-                    return false;
+                clearTargets(currentAbility);
+                Player targetingPlayer = ability.hasParam("TargetingPlayer") ? 
+                        AbilityUtils.getDefinedPlayers(source, ability.getParam("TargetingPlayer"), currentAbility).get(0) : ability.getActivatingPlayer();
+                if (targetingPlayer.isHuman()) {
+                    final TargetSelection select = new TargetSelection(currentAbility);
+                    if (!select.chooseTargets(null) ) {
+                        return false;
+                    }
+                } else { //AI
+                    return currentAbility.doTrigger(true, targetingPlayer);
                 }
             }
-            beingTargeted = beingTargeted.getSubAbility();
-        } while (beingTargeted != null);
+            currentAbility = currentAbility.getSubAbility();
+        } while (currentAbility != null);
         return true;
     }
 

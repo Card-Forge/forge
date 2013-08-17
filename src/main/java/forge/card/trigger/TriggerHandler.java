@@ -32,6 +32,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
+import forge.card.spellability.TargetSelection;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
@@ -411,7 +412,18 @@ public class TriggerHandler {
             if (wrapperAbility.getActivatingPlayer().isHuman()) {
                 HumanPlay.playSpellAbilityNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility);
             } else {
-                wrapperAbility.doTrigger(isMandatory, wrapperAbility.getActivatingPlayer());
+                if (wrapperAbility.hasParam("TargetingPlayer")) {
+                    Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, wrapperAbility.getParam("TargetingPlayer"), wrapperAbility).get(0);
+                    if (targetingPlayer.isHuman()) {
+                        wrapperAbility.resetTargets();
+                        final TargetSelection select = new TargetSelection(wrapperAbility);
+                        select.chooseTargets(null);
+                    } else { //AI
+                        wrapperAbility.doTrigger(true, targetingPlayer);
+                    }
+                } else {
+                    wrapperAbility.doTrigger(isMandatory, wrapperAbility.getActivatingPlayer());
+                }
                 ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
             }
         } else {

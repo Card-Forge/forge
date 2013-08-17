@@ -52,6 +52,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.spellability.TargetChoices;
+import forge.card.spellability.TargetSelection;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
@@ -783,13 +784,23 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 }
             }
         }
-        if (activePlayerSAs.size() == 0) {
+        if (activePlayerSAs.isEmpty()) {
             return;
         }
 
         if (activePlayer.isComputer()) {
             for (final SpellAbility sa : activePlayerSAs) {
-                sa.doTrigger(true, activePlayer);
+                if (sa.hasParam("TargetingPlayer")) {
+                    Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("TargetingPlayer"), sa).get(0);
+                    if (targetingPlayer.isHuman()) {
+                        final TargetSelection select = new TargetSelection(sa);
+                        select.chooseTargets(null);
+                    } else { //AI
+                        sa.doTrigger(true, targetingPlayer);
+                    }
+                } else {
+                    sa.doTrigger(true, activePlayer);
+                }
                 ComputerUtil.playStack(sa, activePlayer, game);
             }
         } else {
