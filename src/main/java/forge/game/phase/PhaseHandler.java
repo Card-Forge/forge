@@ -372,7 +372,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                     // Rule 514.2
                     // Reset Damage received map
-                    for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                    for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
                         c.onCleanupPhase(playerTurn);
                     }
     

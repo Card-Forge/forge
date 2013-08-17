@@ -1411,7 +1411,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      *            the zone
      * @return a List<Card> with all the cards currently in requested zone
      */
-    public final List<Card> getCardsIn(final ZoneType zoneType, boolean includePhasedOut) {
+    public final List<Card> getCardsIn(final ZoneType zoneType, boolean filterOutPhasedOut) {
         List<Card> result;
         if (zoneType == ZoneType.Stack) {
             result = new ArrayList<Card>();
@@ -1422,7 +1422,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         } else {
             PlayerZone zone = this.getZone(zoneType);
-            result = zone == null ? null : zone.getCards(includePhasedOut);
+            result = zone == null ? null : zone.getCards(filterOutPhasedOut);
         }
         return result;
     }
