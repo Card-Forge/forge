@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
@@ -112,7 +111,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
             .opaque(true).hoverable(true).build();
 
     
-    private final JTextField txfTitle = new FTextField.Builder().text("[New Deck]").build();
+    private final FTextField txfTitle = new FTextField.Builder().ghostText("[New Deck]").hideGhostTextOnFocus(true).build();
 
     private final JPanel pnlRemove = new JPanel();
     private final JPanel pnlHeader = new JPanel();
@@ -276,8 +275,8 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         return btnNew;
     }
 
-    /** @return {@link javax.swing.JTextField} */
-    public JTextField getTxfTitle() {
+    /** @return {@link forge.gui.toolbar.FTextField} */
+    public FTextField getTxfTitle() {
         return txfTitle;
     }
 

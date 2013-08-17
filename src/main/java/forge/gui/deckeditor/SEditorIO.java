@@ -40,7 +40,7 @@ public class SEditorIO {
         final String name = VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().getText();
 
         // Warn if no name
-        if (name.equals("[New Deck]") || name.isEmpty()) {
+        if (name == null || name.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     "Please name your deck using the 'Title' box.",
                     "Save Error!",
