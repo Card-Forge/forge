@@ -17,9 +17,6 @@
  */
 package forge.gui.toolbox.itemmanager;
 
-import java.awt.Rectangle;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +24,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JViewport;
-
 import com.google.common.base.Predicate;
 
 
@@ -437,46 +431,6 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
      */
     public void setAlwaysNonUnique(boolean nonUniqueOnly) {
         this.alwaysNonUnique = nonUniqueOnly;
-    }
-
-    /**
-     * 
-     * setWantElasticColumns.
-     * 
-     * @param value
-     */
-    public void setWantElasticColumns(boolean value) {
-        this.table.setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_NEXT_COLUMN);
-    }
-    
-    /**
-     * 
-     * selectAndScrollTo.
-     * 
-     * @param rowIdx
-     */
-    public void selectAndScrollTo(int rowIdx) {
-        if (!(this.table.getParent() instanceof JViewport)) {
-            return;
-        }
-        JViewport viewport = (JViewport)this.table.getParent();
-
-        // compute where we're going and where we are
-        Rectangle targetRect  = this.table.getCellRect(rowIdx, 0, true);
-        Rectangle curViewRect = viewport.getViewRect();
-
-        // if the target cell is not visible, attempt to jump to a location where it is
-        // visible but not on the edge of the viewport
-        if (targetRect.y + targetRect.height > curViewRect.y + curViewRect.height) {
-            // target is below us, move to position 3 rows below target
-            targetRect.setLocation(targetRect.x, targetRect.y + (targetRect.height * 3));
-        } else if  (targetRect.y < curViewRect.y) {
-            // target is above is, move to position 3 rows above target
-            targetRect.setLocation(targetRect.x, targetRect.y - (targetRect.height * 3));
-        }
-        
-        this.table.scrollRectToVisible(targetRect);
-        this.table.setRowSelectionInterval(rowIdx, rowIdx);
     }
 
     /**

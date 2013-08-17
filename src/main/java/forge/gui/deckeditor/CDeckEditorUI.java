@@ -108,8 +108,8 @@ public enum CDeckEditorUI {
         if (childController != null) {
             boolean wantElastic = SItemManagerIO.getPref(EditorPreference.elastic_columns);
             boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
-            childController.getCatalogManager().setWantElasticColumns(wantElastic);
-            childController.getDeckManager().setWantElasticColumns(wantElastic);
+            childController.getCatalogManager().getTable().setWantElasticColumns(wantElastic);
+            childController.getDeckManager().getTable().setWantElasticColumns(wantElastic);
             childController.getCatalogManager().setWantUnique(wantUnique);
             childController.getDeckManager().setWantUnique(wantUnique);
             CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
@@ -417,7 +417,7 @@ public enum CDeckEditorUI {
             for (int idx = startIdx;; idx = (idx + increment) % numItems) {
                 ItemTableModel<? extends InventoryItem> tableModel = tableView.getTable().getTableModel();
                 if (StringUtils.containsIgnoreCase(tableModel.rowToItem(idx).getKey().getName(), searchStr)) {
-                    tableView.selectAndScrollTo(idx);
+                    tableView.getTable().selectAndScrollTo(idx);
                     found = true;
                     break;
                 }

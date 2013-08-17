@@ -95,7 +95,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         setBorder(null);
         getTableHeader().setBorder(null);
         setRowHeight(18);
-        setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+        setWantElasticColumns(false);
         
         // prevent tables from intercepting tab focus traversals
         setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);

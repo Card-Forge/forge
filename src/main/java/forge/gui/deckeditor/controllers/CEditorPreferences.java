@@ -105,8 +105,8 @@ public enum CEditorPreferences implements ICDoc {
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
         ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (curEditor != null) {
-            curEditor.getCatalogManager().setWantElasticColumns(wantElastic);
-            curEditor.getDeckManager().setWantElasticColumns(wantElastic);
+            curEditor.getCatalogManager().getTable().setWantElasticColumns(wantElastic);
+            curEditor.getDeckManager().getTable().setWantElasticColumns(wantElastic);
             curEditor.getCatalogManager().setWantUnique(wantUnique);
             curEditor.getCatalogManager().updateView(true);
             curEditor.getDeckManager().setWantUnique(wantUnique);
@@ -125,8 +125,8 @@ public enum CEditorPreferences implements ICDoc {
                 ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
                 boolean wantElastic = ((JCheckBox) e.getSource()).isSelected();
                 if (curEditor != null) {
-                    curEditor.getCatalogManager().setWantElasticColumns(wantElastic);
-                    curEditor.getDeckManager().setWantElasticColumns(wantElastic);
+                    curEditor.getCatalogManager().getTable().setWantElasticColumns(wantElastic);
+                    curEditor.getDeckManager().getTable().setWantElasticColumns(wantElastic);
                 }
                 SItemManagerIO.setPref(EditorPreference.elastic_columns, wantElastic);
                 SItemManagerIO.savePreferences(curEditor.getCatalogManager().getTable()); } });
