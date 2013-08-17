@@ -121,7 +121,7 @@ public class CardFactoryUtil {
             public void resolve() {
                 final Card card = sourceCard.getGame().getAction().moveToPlay(sourceCard);
 
-                card.addIntrinsicKeyword("At the beginning of the end step, exile CARDNAME.");
+                card.addHiddenExtrinsicKeyword("At the beginning of the end step, exile CARDNAME.");
                 card.addIntrinsicKeyword("Haste");
                 card.setUnearthed(true);
             }

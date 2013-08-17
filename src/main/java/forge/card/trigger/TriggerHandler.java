@@ -419,9 +419,13 @@ public class TriggerHandler {
         }
         regtrig.setTriggeredSA(wrapperAbility);
         
-        if ( triggerParams.containsKey("OneOff") && regtrig.getHostCard().isImmutable() ) {
-            Player p = regtrig.getHostCard().getController();
-            p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
+        if (triggerParams.containsKey("OneOff")) {
+            if (regtrig.getHostCard().isImmutable()) {
+                Player p = regtrig.getHostCard().getController();
+                p.getZone(ZoneType.Command).remove(regtrig.getHostCard());
+            } else {
+                regtrig.getHostCard().getTriggers().remove(regtrig);
+            }
         }
 
     }

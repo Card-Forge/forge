@@ -77,41 +77,40 @@ public class EndOfTurn extends Phase {
             }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
                 final Card card = c;
-                final SpellAbility exile = new Ability(card, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final Card current = game.getCardState(card);
-                        if (current.isInPlay()) {
-                            game.getAction().exile(current);
-                        }
-                    }
-                };
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Exile ").append(card);
-                exile.setStackDescription(sb.toString());
-                exile.setDescription(sb.toString());
+                String sb = "Exile CARDNAME.";
+                String effect = "AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile";
 
-                game.getStack().addSimultaneousStackEntry(exile);
+                SpellAbility ability = AbilityFactory.getAbility(effect, card);
+                ability.setActivatingPlayer(card.getController());
+                ability.setDescription(sb);
+                ability.setStackDescription(sb);
+                ability.setTrigger(true);
+                final int amount = card.getKeywordAmount("At the beginning of the end step, exile CARDNAME.");
+                for (int i = 0; i < amount; i++) {
+                    game.getStack().addSimultaneousStackEntry(ability);
+                }
+                // Trigger once: exile at the beginning of the next end step 
+                c.removeAllExtrinsicKeyword("At the beginning of the end step, exile CARDNAME.");
+                c.removeAllExtrinsicKeyword("HIDDEN At the beginning of the end step, exile CARDNAME.");
 
             }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
                 final Card card = c;
-                final SpellAbility destroy = new Ability(card, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final Card current = game.getCardState(card);
-                        if (current.isInPlay()) {
-                            game.getAction().destroy(current, this);
-                        }
-                    }
-                };
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Destroy ").append(card);
-                destroy.setStackDescription(sb.toString());
-                destroy.setDescription(sb.toString());
+                String sb = "Destroy CARDNAME.";
+                String effect = "AB$ Destroy | Cost$ 0 | Defined$ Self";
 
-                game.getStack().addSimultaneousStackEntry(destroy);
-
+                SpellAbility ability = AbilityFactory.getAbility(effect, card);
+                ability.setActivatingPlayer(card.getController());
+                ability.setDescription(sb);
+                ability.setStackDescription(sb);
+                ability.setTrigger(true);
+                final int amount = card.getKeywordAmount("At the beginning of the end step, destroy CARDNAME.");
+                for (int i = 0; i < amount; i++) {
+                    game.getStack().addSimultaneousStackEntry(ability);
+                }
+                // Trigger once: destroy at the beginning of the next end step 
+                c.removeAllExtrinsicKeyword("At the beginning of the end step, destroy CARDNAME.");
+                c.removeAllExtrinsicKeyword("HIDDEN At the beginning of the end step, destroy CARDNAME.");
             }
             // Berserk is using this, so don't check isFaceDown()
             if (c.hasKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
