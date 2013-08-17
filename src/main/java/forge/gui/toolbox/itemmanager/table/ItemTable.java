@@ -287,7 +287,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
     }
 
     public void setWantElasticColumns(boolean value) {
-        setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_NEXT_COLUMN);
+        setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_OFF);
     }
     
     public void selectAndScrollTo(int rowIdx) {
