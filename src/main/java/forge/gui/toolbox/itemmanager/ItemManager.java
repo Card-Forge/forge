@@ -95,15 +95,10 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
         this.setLayout(null);
         this.add(this.txtSearch);
         this.add(this.tableScroller);
-        this.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                ItemManager.this.updateLayout();
-            }
-        });
     }
     
-    private void updateLayout()
+    @Override
+    public void doLayout()
     {
         int x = 0;
         int y = 0;
@@ -117,7 +112,6 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
         
         //position current item view
         this.tableScroller.setBounds(x, y, width, height - y);
-        this.repaint();
     }
 
     /**
