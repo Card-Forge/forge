@@ -46,6 +46,8 @@ public class FTextField extends JTextField {
         public Builder hideGhostTextOnFocus(boolean b0) { hideGhostTextOnFocus = b0; return this; }
     }
     
+    public static final int HEIGHT = 25; //TODO: calculate this somehow instead of hard-coding it
+    
     private String ghostText;
     private boolean hideGhostTextOnFocus;
 

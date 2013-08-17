@@ -18,13 +18,17 @@
 package forge.gui.toolbox.itemmanager;
 
 import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JViewport;
 
 import com.google.common.base.Predicate;
@@ -34,6 +38,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.table.ItemTable;
 import forge.gui.toolbox.itemmanager.table.ItemTableModel;
@@ -61,6 +66,8 @@ public final class ItemManager<T extends InventoryItem> extends JViewport {
     
     private final ItemTable<T> table;
     private final JScrollPane tableScroller;
+    private final JPanel pnlContents = new JPanel();
+    private final JTextField txtSearch = new FTextField.Builder().ghostText("Search").build();
 
     /**
      * ItemManager Constructor.
@@ -74,9 +81,8 @@ public final class ItemManager<T extends InventoryItem> extends JViewport {
         this.statLabels = statLabels0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(this, genericType0);
-
-        //build display
-        this.setOpaque(false);
+        
+        //build table view
         this.table = new ItemTable<T>(this, this.model);
         this.tableScroller = new JScrollPane(this.table);
         this.tableScroller.setOpaque(false);
@@ -84,7 +90,37 @@ public final class ItemManager<T extends InventoryItem> extends JViewport {
         this.tableScroller.setBorder(null);
         this.tableScroller.getViewport().setBorder(null);
         this.tableScroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
-        this.add(this.tableScroller, "w 100%!, h 100%!");
+
+        //build display
+        this.setOpaque(false);
+        this.pnlContents.setOpaque(false);
+        this.pnlContents.setLayout(null);
+        this.pnlContents.add(this.txtSearch);
+        this.pnlContents.add(this.tableScroller);
+        this.setView(this.pnlContents);
+        this.pnlContents.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                ItemManager.this.updateLayout();
+            }
+        });
+    }
+    
+    private void updateLayout()
+    {
+        int x = 0;
+        int y = 0;
+        int width = this.pnlContents.getWidth();
+        int height = this.pnlContents.getHeight();
+        
+        //position toolbar components
+        int toolbarHeight = FTextField.HEIGHT + 3;
+        this.txtSearch.setBounds(x, y, width / 2, FTextField.HEIGHT);
+        y += toolbarHeight;
+        
+        //position current item view
+        this.tableScroller.setBounds(x, y, width, height - y);
+        this.repaint();
     }
 
     /**
