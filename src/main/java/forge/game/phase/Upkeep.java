@@ -88,7 +88,6 @@ public class Upkeep extends Phase {
         Upkeep.upkeepUpkeepCost(game); // sacrifice unless upkeep cost is paid
         Upkeep.upkeepEcho(game);
 
-        //Upkeep.upkeepTheAbyss(game);
         Upkeep.upkeepDropOfHoney(game);
         Upkeep.upkeepTangleWire(game);
 
@@ -265,72 +264,6 @@ public class Upkeep extends Phase {
             public void resolve() {}
         };
     }
-
-    /**
-     * <p>
-     * upkeepTheAbyss.
-     * </p>
-     */
-    private static void upkeepTheAbyss(final Game game) {
-        /*
-         * At the beginning of each player's upkeep, destroy target nonartifact
-         * creature that player controls of his or her choice. It can't be
-         * regenerated.
-         */
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-        final List<Card> the = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("The Abyss"));
-        final List<Card> magus = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Magus of the Abyss"));
-
-        final List<Card> cards = new ArrayList<Card>();
-        cards.addAll(the);
-        cards.addAll(magus);
-
-        for (final Card c : cards) {
-            final Card abyss = c;
-
-            final Ability sacrificeCreature = new Ability(abyss, ManaCost.NO_COST) {
-                @Override
-                public void resolve() {
-                    final List<Card> targets = CardLists.getTargetableCards(CardLists.filter(player.getCreaturesInPlay(), Presets.NON_ARTIFACTS), this);
-                    if (player.isHuman() && targets.size() > 0) {
-                        final InputSelectCards chooseArt = new InputSelectCards(1, 1) {
-                            private static final long serialVersionUID = 4820011040853968644L;
-                            @Override
-                            protected boolean isValidChoice(Card choice) {
-                                return choice.isCreature() && !choice.isArtifact() && canTarget(choice) && choice.getController() == player;
-                            };
-                        };
-                        chooseArt.setMessage(abyss.getName() + " - Select one nonartifact creature to destroy");
-                        Singletons.getControl().getInputQueue().setInputAndWait(chooseArt); // Input
-                        if (!chooseArt.hasCancelled()) {
-                            game.getAction().destroyNoRegeneration(chooseArt.getSelected().get(0), this);
-                        }
-                        
-                    } else { // computer
-
-                        final List<Card> indestruct = CardLists.getKeyword(targets, "Indestructible");
-                        if (indestruct.size() > 0) {
-                            game.getAction().destroyNoRegeneration(indestruct.get(0), this);
-                        } else if (targets.size() > 0) {
-                            final Card target = ComputerUtilCard.getWorstCreatureAI(targets);
-                            if (null == target) {
-                                // must be nothing valid to destroy
-                            } else {
-                                game.getAction().destroyNoRegeneration(target, this);
-                            }
-                        }
-                    }
-                } // resolve
-            }; // sacrificeCreature
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(abyss.getName()).append(" - destroy a nonartifact creature of your choice.");
-            sacrificeCreature.setActivatingPlayer(c.getController());
-            sacrificeCreature.setStackDescription(sb.toString());
-            sacrificeCreature.setDescription(sb.toString());
-            game.getStack().addAndUnfreeze(sacrificeCreature);
-        } // end for
-    } // The Abyss
 
     /**
      * <p>
