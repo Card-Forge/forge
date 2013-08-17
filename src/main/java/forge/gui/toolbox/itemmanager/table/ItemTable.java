@@ -173,6 +173,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         return new JTableHeader(columnModel) {
             public String getToolTipText(MouseEvent e) {
                 int col = columnModel.getColumnIndexAtX(e.getPoint().x);
+                if (col < 0) { return null; }
                 TableColumn tableColumn = columnModel.getColumn(col);
                 TableCellRenderer headerRenderer = tableColumn.getHeaderRenderer();
                 if (null == headerRenderer) {
