@@ -111,7 +111,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
             .opaque(true).hoverable(true).build();
 
     
-    private final FTextField txfTitle = new FTextField.Builder().ghostText("[New Deck]").hideGhostTextOnFocus(true).build();
+    private final FTextField txfTitle = new FTextField.Builder().ghostText("[New Deck]").build();
 
     private final JPanel pnlRemove = new JPanel();
     private final JPanel pnlHeader = new JPanel();

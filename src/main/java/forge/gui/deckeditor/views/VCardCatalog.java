@@ -88,7 +88,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
             .tooltip("Click to add custom filters to the card list")
             .reactOnMouseDown().build();
     private final JComboBox<String> cbSearchMode = new JComboBox<String>();
-    private final JTextField txfSearch = new FTextField.Builder().build();
+    private final JTextField txfSearch = new FTextField.Builder().ghostText("Search").build();
     private final FLabel lblName = new FLabel.Builder().text("Name").hoverable().selectable().selected().build();
     private final FLabel lblType = new FLabel.Builder().text("Type").hoverable().selectable().selected().build();
     private final FLabel lblText = new FLabel.Builder().text("Text").hoverable().selectable().selected().build();

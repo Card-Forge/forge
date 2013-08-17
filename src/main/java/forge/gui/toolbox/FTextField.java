@@ -32,7 +32,7 @@ public class FTextField extends JTextField {
         private String  text;
         private String  toolTip;
         private String  ghostText;
-        private boolean hideGhostTextOnFocus;
+        private boolean showGhostTextWithFocus;
 
         public FTextField build() { return new FTextField(this); }
 
@@ -43,13 +43,13 @@ public class FTextField extends JTextField {
         public Builder text(String s0)                  { text = s0; return this; }
         public Builder tooltip(String s0)               { toolTip = s0; return this; }
         public Builder ghostText(String s0)             { ghostText = s0; return this; }
-        public Builder hideGhostTextOnFocus(boolean b0) { hideGhostTextOnFocus = b0; return this; }
+        public Builder showGhostTextWithFocus(boolean b0) { showGhostTextWithFocus = b0; return this; }
     }
     
     public static final int HEIGHT = 25; //TODO: calculate this somehow instead of hard-coding it
     
     private String ghostText;
-    private boolean hideGhostTextOnFocus;
+    private boolean showGhostTextWithFocus;
 
     private FTextField(Builder builder) {
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
@@ -72,7 +72,7 @@ public class FTextField extends JTextField {
             @Override
             public void focusGained(final FocusEvent e) {
                 FTextField field = (FTextField)e.getSource();
-                if (field.ghostText != null && field.isEmpty() && field.hideGhostTextOnFocus)
+                if (field.ghostText != null && field.isEmpty() && !field.showGhostTextWithFocus)
                 {
                     field.repaint();
                 }
@@ -81,13 +81,13 @@ public class FTextField extends JTextField {
             @Override
             public void focusLost(final FocusEvent e) {
                 FTextField field = (FTextField)e.getSource();
-                if (field.ghostText != null && field.isEmpty() && field.hideGhostTextOnFocus)
+                if (field.ghostText != null && field.isEmpty() && !field.showGhostTextWithFocus)
                 {
                     field.repaint();
                 }
             }
         });
-        this.hideGhostTextOnFocus = builder.hideGhostTextOnFocus;
+        this.showGhostTextWithFocus = builder.showGhostTextWithFocus;
         this.ghostText = builder.ghostText;
         if (this.ghostText == "") { this.ghostText = null; } //don't allow empty string to make other logic easier
     }
@@ -101,7 +101,7 @@ public class FTextField extends JTextField {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        if (this.ghostText != null && this.isEmpty() && !(this.hasFocus() && this.hideGhostTextOnFocus))
+        if (this.ghostText != null && this.isEmpty() && (this.showGhostTextWithFocus || !this.hasFocus()))
         {
             //TODO: Make ghost text look more like regular text
             final Insets margin = this.getMargin();
@@ -130,15 +130,15 @@ public class FTextField extends JTextField {
         }
     }
     
-    public boolean getHideGhostTextOnFocus()
+    public boolean getShowGhostTextWithFocus()
     {
-        return this.hideGhostTextOnFocus;
+        return this.showGhostTextWithFocus;
     }
     
-    public void setHideGhostTextOnFocus(boolean hideGhostTextOnFocus0)
+    public void setShowGhostTextWithFocus(boolean showGhostTextWithFocus0)
     {
-        if (this.hideGhostTextOnFocus == hideGhostTextOnFocus0) { return; }
-        this.hideGhostTextOnFocus = hideGhostTextOnFocus0;
+        if (this.showGhostTextWithFocus == showGhostTextWithFocus0) { return; }
+        this.showGhostTextWithFocus = showGhostTextWithFocus0;
         if (this.isEmpty() && this.hasFocus())
         {
             this.repaint();
