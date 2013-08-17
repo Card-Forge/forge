@@ -507,10 +507,6 @@ public class GameAction {
             return this.moveTo(exile, c);
         }
 
-        if (c.hasKeyword("If CARDNAME is put into a graveyard this turn, its controller gets a poison counter.")) {
-            c.getController().addPoisonCounters(1, c);
-        }
-
         // must put card in OWNER's graveyard not controller's
         c = this.moveTo(grave, c);
 
