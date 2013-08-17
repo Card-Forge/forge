@@ -3,9 +3,8 @@ ManaCost:2 W
 Types:Creature Human Rebel
 PT:2/2
 A:AB$ ChangeZone | Cost$ 5 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Rebel+cmcLE4 | ChangeNum$ 1 | SpellDescription$ Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
-T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME blocks, at end of combat, destroy it and all creatures it blocked this turn.
-SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ HIDDEN At the beginning of the end step, destroy CARDNAME.
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump2 | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME blocks, at end of combat, destroy it and all creatures it blocked this turn.
-SVar:TrigPump2:AB$ Pump | Cost$ 0 | Defined$ Card.Self | KW$ HIDDEN At the beginning of the end step, destroy CARDNAME.
+T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ When CARDNAME blocks, at end of combat, destroy it and all creatures it blocked this turn.
+SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ Destroy CARDNAME at end of combat.
+SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Card.Self,Card.blockedBySourceThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defiant_vanguard.jpg
 Oracle:When Defiant Vanguard blocks, at end of combat, destroy it and all creatures it blocked this turn.\n{5}, {T}: Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
