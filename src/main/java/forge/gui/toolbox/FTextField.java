@@ -53,7 +53,7 @@ public class FTextField extends JTextField {
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         this.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.setMargin(new Insets(2, 3, 1, 3));
+        this.setMargin(new Insets(3, 3, 2, 3));
         this.setOpaque(true);
         
         if (0 < builder.maxLength)
