@@ -54,7 +54,7 @@ import forge.util.Aggregates;
  * @param <T>
  *            the generic type
  */
-public final class ItemManager<T extends InventoryItem> extends JViewport {
+public final class ItemManager<T extends InventoryItem> extends JPanel {
     private static final long serialVersionUID = 3164349984277267922L;
     private ItemPool<T> pool;
     private final ItemManagerModel<T> model;
@@ -66,7 +66,6 @@ public final class ItemManager<T extends InventoryItem> extends JViewport {
     
     private final ItemTable<T> table;
     private final JScrollPane tableScroller;
-    private final JPanel pnlContents = new JPanel();
     private final JTextField txtSearch = new FTextField.Builder().ghostText("Search").build();
 
     /**
@@ -93,12 +92,10 @@ public final class ItemManager<T extends InventoryItem> extends JViewport {
 
         //build display
         this.setOpaque(false);
-        this.pnlContents.setOpaque(false);
-        this.pnlContents.setLayout(null);
-        this.pnlContents.add(this.txtSearch);
-        this.pnlContents.add(this.tableScroller);
-        this.setView(this.pnlContents);
-        this.pnlContents.addComponentListener(new ComponentAdapter() {
+        this.setLayout(null);
+        this.add(this.txtSearch);
+        this.add(this.tableScroller);
+        this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 ItemManager.this.updateLayout();
@@ -110,8 +107,8 @@ public final class ItemManager<T extends InventoryItem> extends JViewport {
     {
         int x = 0;
         int y = 0;
-        int width = this.pnlContents.getWidth();
-        int height = this.pnlContents.getHeight();
+        int width = this.getWidth();
+        int height = this.getHeight();
         
         //position toolbar components
         int toolbarHeight = FTextField.HEIGHT + 3;

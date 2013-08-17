@@ -36,7 +36,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.JViewport;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
 
@@ -97,28 +96,6 @@ public class FScrollPanel extends JScrollPane {
         useArrowButtons = useArrowButtons0;
         getViewport().setOpaque(false);
         innerPanel.setOpaque(false);
-        initialize();
-    }
-    
-    /**
-     * An extension of JScrollPane that can be used as a panel and supports using arrow buttons to scroll instead of scrollbars
-     * 
-     * @param viewport &emsp; Viewport for panel
-     * @param useArrowButtons0 &emsp; True to use arrow buttons to scroll, false to use scrollbars
-     * @param vertical0 &emsp; Vertical scroll bar policy
-     * @param horizontal0 &emsp; Horizontal scroll bar policy
-     */
-    protected FScrollPanel(final JViewport viewport, boolean useArrowButtons0, final int vertical0, final int horizontal0) {
-        super(vertical0, horizontal0);
-
-        innerPanel = null;
-        useArrowButtons = useArrowButtons0;
-        this.setViewport(viewport);
-        initialize();
-    }
-    
-    private void initialize()
-    {
         setOpaque(false);
         setBorder(null);
         getHorizontalScrollBar().setUnitIncrement(16);

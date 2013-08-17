@@ -19,7 +19,6 @@ package forge.gui.toolbox.itemmanager;
 
 import javax.swing.JScrollPane;
 
-import forge.gui.toolbox.FScrollPanel;
 import forge.item.InventoryItem;
 
 
@@ -28,13 +27,17 @@ import forge.item.InventoryItem;
  * 
  */
 @SuppressWarnings("serial")
-public final class ItemManagerContainer extends FScrollPanel {
+public final class ItemManagerContainer extends JScrollPane {
     public ItemManagerContainer() {
         this(null);
     }
     
     public ItemManagerContainer(ItemManager<? extends InventoryItem> itemManager) {
-        super(itemManager, true, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        super(itemManager, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        setBorder(null);
+        setOpaque(false);
+        getViewport().setOpaque(false);
     }
 
     /**
@@ -44,6 +47,6 @@ public final class ItemManagerContainer extends FScrollPanel {
      * @return ItemPoolView
      */
     public void setItemManager(ItemManager<? extends InventoryItem> itemManager) {
-        this.setViewport(itemManager);
+        this.getViewport().setView(itemManager);
     }
 }
