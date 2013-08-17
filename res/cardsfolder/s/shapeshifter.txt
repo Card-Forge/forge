@@ -2,9 +2,9 @@ Name:Shapeshifter
 ManaCost:6
 Types:Artifact Creature Shapeshifter
 PT:*/7-*
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseNumber | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a number between 0 and 7.
+K:ETBReplacement:Other:ChooseNumber
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ ChooseNumber | TriggerDescription$ At the beginning of your upkeep, you may choose a number between 0 and 7.
-SVar:ChooseNumber:AB$ ChooseNumber | Cost$ 0 | Defined$ You | Min$ 0 | Max$ 7
+SVar:ChooseNumber:DB$ ChooseNumber | Defined$ You | Min$ 0 | Max$ 7 | AILogic$ Min | SpellDescription$ As CARDNAME enters the battlefield, choose a number between 0 and 7.
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ CARDNAME's power is equal to the last chosen number and its toughness is equal to 7 minus that number.
 SVar:X:Count$ChosenNumber
 SVar:Y:Number$7/Minus.X
