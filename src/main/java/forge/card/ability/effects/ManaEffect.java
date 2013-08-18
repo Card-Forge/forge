@@ -95,11 +95,8 @@ public class ManaEffect extends SpellAbilityEffect {
                             }
                             abMana.setExpressChoice(manaString);
                         }
-                        if (abMana.getExpressChoice().isEmpty()) {
-                            final StringBuilder sb = new StringBuilder();
-                            sb.append("AbilityFactoryMana::manaResolve() - combo mana color choice is empty for ");
-                            sb.append(sa.getSourceCard().getName());
-                            throw new RuntimeException(sb.toString());
+                        if (abMana.getExpressChoice().isEmpty() && amount > 0) {
+                            System.out.println("AbilityFactoryMana::manaResolve() - combo mana color choice is empty for " + sa.getSourceCard().getName());
                         }
                     }
                 }
