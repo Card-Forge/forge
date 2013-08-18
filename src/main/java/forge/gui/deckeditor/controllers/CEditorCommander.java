@@ -70,6 +70,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
     private List<DeckSection> allSections = new ArrayList<DeckSection>();
     private DeckSection sectionMode = DeckSection.Main;
     private final ItemPoolView<PaperCard> commanderPool;
+    private final ItemPoolView<PaperCard> normalPool;
 
     //=========== Constructor
     /**
@@ -80,10 +81,11 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
     public CEditorCommander() {
         super();
         allSections.add(DeckSection.Main);
+        allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);
         
         commanderPool = ItemPool.createFrom(CardDb.instance().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
-        
+        normalPool = ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class);
         
         final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), true);
         final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), true);
@@ -159,16 +161,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public void resetTables() {
-        Iterable<PaperCard> allNT = CardDb.instance().getAllCards();
-        allNT = Iterables.filter(allNT, new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard crd) {
-                return crd.getRules().getType().isCreature() && crd.getRules().getType().isLegendary();
-            }
-        });
-        
-        this.getCatalogManager().setPool(ItemPool.createFrom(allNT, PaperCard.class), true);
-        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+        this.getCatalogManager().setPool(normalPool,false);
+        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Main));
     }
 
     /*
@@ -253,11 +247,20 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
             case Main:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
                 this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
-                this.getCatalogManager().setPool(ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class), false);
+                this.getCatalogManager().setPool(normalPool, false);
                 this.getDeckManager().setPool(this.controller.getModel().getMain());
                 showOptions = true;
                 title = "Title: ";
                 tabtext = "Main Deck";
+                break;
+            case Sideboard:
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+                this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
+                this.getCatalogManager().setPool(normalPool, false);
+                this.getDeckManager().setPool(this.controller.getModel().get(DeckSection.Sideboard));
+                showOptions = true;
+                title = "Title: ";
+                tabtext = "Sideboard";
                 break;
             case Commander:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
