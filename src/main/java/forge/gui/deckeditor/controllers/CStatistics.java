@@ -13,9 +13,9 @@ import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.views.VStatistics;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -59,7 +59,7 @@ public enum CStatistics implements ICDoc {
 
     private void setLabelValue(JLabel label, ItemPoolView<PaperCard> deck, Predicate<CardRules> predicate, int total) {
         int tmp = deck.countAll(Predicates.compose(predicate, PaperCard.FN_GET_RULES));
-        label.setText(tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
+        label.setText(tmp + " (" + SItemManagerUtil.calculatePercentage(tmp, total) + "%)");
 
     }
 
@@ -71,7 +71,7 @@ public enum CStatistics implements ICDoc {
 
         if (ed == null) { return; }
 
-        final ItemPoolView<PaperCard> deck = ItemPool.createFrom(ed.getTableDeck().getCards(), PaperCard.class);
+        final ItemPoolView<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getPool(), PaperCard.class);
 
         int total = deck.countAll();
 
@@ -115,19 +115,19 @@ public enum CStatistics implements ICDoc {
         }
 
         VStatistics.SINGLETON_INSTANCE.getLblCMC0().setText(
-                cmc0 + " (" + SEditorUtil.calculatePercentage(cmc0, total) + "%)");
+                cmc0 + " (" + SItemManagerUtil.calculatePercentage(cmc0, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC1().setText(
-                cmc1 + " (" + SEditorUtil.calculatePercentage(cmc1, total) + "%)");
+                cmc1 + " (" + SItemManagerUtil.calculatePercentage(cmc1, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC2().setText(
-                cmc2 + " (" + SEditorUtil.calculatePercentage(cmc2, total) + "%)");
+                cmc2 + " (" + SItemManagerUtil.calculatePercentage(cmc2, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC3().setText(
-                cmc3 + " (" + SEditorUtil.calculatePercentage(cmc3, total) + "%)");
+                cmc3 + " (" + SItemManagerUtil.calculatePercentage(cmc3, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC4().setText(
-                cmc4 + " (" + SEditorUtil.calculatePercentage(cmc4, total) + "%)");
+                cmc4 + " (" + SItemManagerUtil.calculatePercentage(cmc4, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC5().setText(
-                cmc5 + " (" + SEditorUtil.calculatePercentage(cmc5, total) + "%)");
+                cmc5 + " (" + SItemManagerUtil.calculatePercentage(cmc5, total) + "%)");
         VStatistics.SINGLETON_INSTANCE.getLblCMC6().setText(
-                cmc6 + " (" + SEditorUtil.calculatePercentage(cmc6, total) + "%)");
+                cmc6 + " (" + SItemManagerUtil.calculatePercentage(cmc6, total) + "%)");
 
         double amc = Math.round((double) tmc / (double) total * 100) / 100.0d;
 

@@ -13,9 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -26,7 +24,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.Command;
 import forge.card.CardRulesPredicates;
 import forge.gui.WrapLayout;
-import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -36,7 +33,10 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSpinner;
 import forge.gui.toolbox.FTextField;
-import forge.gui.toolbox.ToolTipListener;
+import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.ItemManagerContainer;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.item.InventoryItem;
 import forge.util.TextUtil;
 
 /** 
@@ -45,7 +45,7 @@ import forge.util.TextUtil;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  * 
  */
-public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
+public enum VCardCatalog implements IVDoc<CCardCatalog> {
     /** */
     SINGLETON_INSTANCE;
     
@@ -62,8 +62,8 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     // Total and color count labels/filter toggles
     private final Dimension labelSize = new Dimension(60, 24);
     private final JPanel pnlStats = new JPanel(new WrapLayout(FlowLayout.LEFT));
-    private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
-            new HashMap<SEditorUtil.StatTypes, FLabel>();
+    private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels =
+            new HashMap<SItemManagerUtil.StatTypes, FLabel>();
 
     // card transfer buttons
     private final JPanel pnlAddButtons =
@@ -88,11 +88,14 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
             .tooltip("Click to add custom filters to the card list")
             .reactOnMouseDown().build();
     private final JComboBox<String> cbSearchMode = new JComboBox<String>();
-    private final JTextField txfSearch = new FTextField.Builder().build();
+    private final JTextField txfSearch = new FTextField.Builder().ghostText("Search").build();
     private final FLabel lblName = new FLabel.Builder().text("Name").hoverable().selectable().selected().build();
     private final FLabel lblType = new FLabel.Builder().text("Type").hoverable().selectable().selected().build();
     private final FLabel lblText = new FLabel.Builder().text("Text").hoverable().selectable().selected().build();
     private final JPanel pnlRestrictions = new JPanel(new WrapLayout(FlowLayout.LEFT, 10, 5));
+
+    private final ItemManagerContainer itemManagerContainer = new ItemManagerContainer();
+    private ItemManager<? extends InventoryItem> itemManager;
     
     // restriction widgets
     public static enum RangeTypes {
@@ -114,29 +117,18 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     
     private final Map<RangeTypes, Pair<FSpinner, FSpinner>> spinners = new HashMap<RangeTypes, Pair<FSpinner, FSpinner>>();
     
-    // card table
-    private JTable tblCards = null;
-    private final JScrollPane scroller = new JScrollPane();
-
-    
     //========== Constructor
     /** */
     private VCardCatalog() {
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
-        scroller.getViewport().setBorder(null);
-        scroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
-
         pnlStats.setOpaque(false);
         
-        for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
-            FLabel label = buildToggleLabel(s, SEditorUtil.StatTypes.TOTAL != s);
+        for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
+            FLabel label = buildToggleLabel(s, SItemManagerUtil.StatTypes.TOTAL != s);
             statLabels.put(s, label);
             JComponent component = label;
-            if (SEditorUtil.StatTypes.TOTAL == s) {
+            if (SItemManagerUtil.StatTypes.TOTAL == s) {
                 label.setToolTipText("Total cards (click to toggle all filters)");
-            } else if (SEditorUtil.StatTypes.PACK == s) {
+            } else if (SItemManagerUtil.StatTypes.PACK == s) {
                 // wrap in a constant-size panel so we can change its visibility without affecting layout
                 component = new JPanel(new MigLayout("insets 0, gap 0"));
                 component.setPreferredSize(labelSize);
@@ -159,9 +151,9 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
         pnlSearch.add(cbSearchMode, "center");
-        pnlSearch.add(lblName, "w pref+8, h pref+4");
-        pnlSearch.add(lblType, "w pref+8, h pref+4");
-        pnlSearch.add(lblText, "w pref+8, h pref+4");
+        pnlSearch.add(lblName, "w pref+8, h pref+8");
+        pnlSearch.add(lblType, "w pref+8, h pref+8");
+        pnlSearch.add(lblText, "w pref+8, h pref+8");
 
         pnlRestrictions.setOpaque(false);
 
@@ -226,19 +218,16 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         parentBody.add(pnlAddButtons, "w 96%!, gap 1% 1% 5 5");
         parentBody.add(pnlSearch, "w 96%, gap 1% 1%");
         parentBody.add(pnlRestrictions, "w 96%, gapleft 1%, gapright push");
-        parentBody.add(scroller, "w 98%!, h 100% - 35, gap 1% 0 0 1%");
+        parentBody.add(itemManagerContainer, "w 98%!, h 100% - 35, gap 1% 0 0 1%");
+    }
+    
+    public ItemManager<? extends InventoryItem> getItemManager() {
+        return this.itemManager;
     }
 
-    //========== Overridden from ITableContainer
-    @Override
-    public void setTableView(final JTable tbl0) {
-        this.tblCards = tbl0;
-        scroller.setViewportView(tblCards);
-    }
-
-    @Override
-    public FLabel getStatLabel(SEditorUtil.StatTypes s) {
-        return statLabels.get(s);
+    public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
+        this.itemManager = itemManager0;
+        itemManagerContainer.setItemManager(itemManager0);
     }
 
     //========== Accessor/mutator methods
@@ -255,7 +244,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     public JComboBox<String> getCbSearchMode()   { return cbSearchMode;      }
     public JTextField getTxfSearch()     { return txfSearch;         }
 
-    public Map<SEditorUtil.StatTypes, FLabel> getStatLabels() {
+    public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {
         return statLabels;
     }
     public Map<RangeTypes, Pair<FSpinner, FSpinner>> getSpinners() {
@@ -263,7 +252,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     }
     
     //========== Other methods
-    private FLabel buildToggleLabel(SEditorUtil.StatTypes s, boolean selectable) {
+    private FLabel buildToggleLabel(SItemManagerUtil.StatTypes s, boolean selectable) {
         String tooltip;
         if (selectable) { //construct tooltip for selectable toggle labels, indicating click and right-click behavior
             String labelString = s.toLabelString();
@@ -282,16 +271,6 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         label.setMinimumSize(labelSize);
         
         return label;
-    }
-
-    public void focusTable() {
-        if (null != tblCards) {
-            tblCards.requestFocusInWindow();
-            
-            if (0 < tblCards.getRowCount()) {
-                tblCards.changeSelection(0, 0, false, false);
-            }
-        }
     }
     
     @SuppressWarnings("serial")

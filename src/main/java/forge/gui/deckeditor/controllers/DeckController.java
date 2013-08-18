@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.deckeditor.tables;
+package forge.gui.deckeditor.controllers;
 
 import java.util.ArrayList;
 
@@ -24,9 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Supplier;
 
 import forge.deck.DeckBase;
-import forge.gui.deckeditor.controllers.ACEditorBase;
-import forge.gui.deckeditor.controllers.CProbabilities;
-import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.util.storage.IStorage;
 

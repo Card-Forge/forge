@@ -20,12 +20,11 @@ package forge.gui.deckeditor.controllers;
 import javax.swing.SwingUtilities;
 
 import forge.deck.DeckBase;
-import forge.gui.deckeditor.tables.DeckController;
-import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SRearrangingUtil;
+import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
 import forge.view.FView;
 
@@ -59,8 +58,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         public void addTextFilterItem ();
     }
     
-    private EditorTableView<TItem> tblCatalog;
-    private EditorTableView<TItem> tblDeck;
+    private ItemManager<TItem> catalogManager;
+    private ItemManager<TItem> deckManager;
     
     /** 
      * Operation to add one of selected card to current deck.
@@ -83,7 +82,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /**
      * Gets controller responsible for the current deck being edited.
      *
-     * @return {@link forge.gui.deckeditor.tables.DeckController}
+     * @return {@link forge.gui.deckeditor.controllers.DeckController}
      */
     public abstract DeckController<TModel> getDeckController();
 
@@ -101,39 +100,39 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public abstract void init();
 
     /**
-     * Gets the EditorTableView holding the cards in the current deck.
+     * Gets the ItemManager holding the cards in the current deck.
      * 
-     * @return {@link forge.gui.deckeditor.tables.EditorTableView}
+     * @return {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public EditorTableView<TItem> getTableDeck() {
-        return this.tblDeck;
+    public ItemManager<TItem> getDeckManager() {
+        return this.deckManager;
     }
 
     /**
-     * Sets the EditorTableView holding the cards in the current deck.
+     * Sets the ItemManager holding the cards in the current deck.
      * 
-     * @param table0 &emsp; {@link forge.gui.deckeditor.tables.EditorTableView}
+     * @param itemManager &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public void setTableDeck(final EditorTableView<TItem> table0) {
-        this.tblDeck = table0;
+    public void setDeckManager(final ItemManager<TItem> itemManager) {
+        this.deckManager = itemManager;
     }
 
     /**
-     * Gets the EditorTableView holding the cards in the current catalog.
+     * Gets the ItemManager holding the cards in the current catalog.
      * 
-     * @return {@link forge.gui.deckeditor.tables.EditorTableView}
+     * @return {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public EditorTableView<TItem> getTableCatalog() {
-        return this.tblCatalog;
+    public ItemManager<TItem> getCatalogManager() {
+        return this.catalogManager;
     }
 
     /**
-     * Sets the EditorTableView holding the cards in the current catalog.
+     * Sets the ItemManager holding the cards in the current catalog.
      * 
-     * @param table0 &emsp; {@link forge.gui.deckeditor.tables.EditorTableView}
+     * @param itemManager &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
-    public void setTableCatalog(final EditorTableView<TItem> table0) {
-        this.tblCatalog = table0;
+    public void setCatalogManager(final ItemManager<TItem> itemManager) {
+        this.catalogManager = itemManager;
     }
 
     /**

@@ -5,16 +5,19 @@ import java.awt.event.ItemListener;
 import java.util.HashMap;
 
 import javax.swing.JCheckBox;
+import javax.swing.JTable;
 
 import forge.Command;
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.SEditorIO.EditorPreference;
-import forge.gui.deckeditor.tables.SColumnUtil;
-import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.SItemManagerIO;
+import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
+import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VEditorPreferences;
 import forge.gui.framework.ICDoc;
+import forge.item.InventoryItem;
 
 /** 
  * Controls the "analysis" panel in the deck editor UI.
@@ -41,7 +44,7 @@ public enum CEditorPreferences implements ICDoc {
      */
     @Override
     public void initialize() {
-        SEditorIO.loadPreferences();
+        SItemManagerIO.loadPreferences();
 
         HashMap<JCheckBox, ColumnName> prefsDict = new HashMap<JCheckBox, SColumnUtil.ColumnName>();
 
@@ -76,66 +79,70 @@ public enum CEditorPreferences implements ICDoc {
             key.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent arg0) {
-                    SColumnUtil.toggleColumn(SColumnUtil.getColumn(name));
-                    SEditorIO.savePreferences();
+                    TableColumnInfo<InventoryItem> col = SColumnUtil.getColumn(name);
+                    final JTable table = (col.getEnumValue().substring(0, 4).equals("DECK"))
+                        ? CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager().getTable()
+                        : CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().getTable();
+                    SColumnUtil.toggleColumn(table, col);
+                    SItemManagerIO.savePreferences(table);
                 }
             });
         }
 
         // Catalog/Deck Stats
         VEditorPreferences.SINGLETON_INSTANCE.getChbDeckStats().setSelected(
-                SEditorIO.getPref(EditorPreference.stats_deck));
+                SItemManagerIO.getPref(EditorPreference.stats_deck));
         VEditorPreferences.SINGLETON_INSTANCE.getChbCardDisplayUnique().setSelected(
-                SEditorIO.getPref(EditorPreference.display_unique_only));
+                SItemManagerIO.getPref(EditorPreference.display_unique_only));
         VEditorPreferences.SINGLETON_INSTANCE.getChbElasticColumns().setSelected(
-                SEditorIO.getPref(EditorPreference.elastic_columns));
+                SItemManagerIO.getPref(EditorPreference.elastic_columns));
 
-        if (!SEditorIO.getPref(EditorPreference.stats_deck)) {
+        if (!SItemManagerIO.getPref(EditorPreference.stats_deck)) {
             VCurrentDeck.SINGLETON_INSTANCE.setStatsVisible(false);
         }
 
-        boolean wantElastic = SEditorIO.getPref(EditorPreference.elastic_columns);
-        boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
+        boolean wantElastic = SItemManagerIO.getPref(EditorPreference.elastic_columns);
+        boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
         ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (curEditor != null) {
-            curEditor.getTableCatalog().setWantElasticColumns(wantElastic);
-            curEditor.getTableDeck().setWantElasticColumns(wantElastic);
-            curEditor.getTableCatalog().setWantUnique(wantUnique);
-            curEditor.getTableCatalog().updateView(true);
-            curEditor.getTableDeck().setWantUnique(wantUnique);
-            curEditor.getTableDeck().updateView(true);
+            curEditor.getCatalogManager().getTable().setWantElasticColumns(wantElastic);
+            curEditor.getDeckManager().getTable().setWantElasticColumns(wantElastic);
+            curEditor.getCatalogManager().setWantUnique(wantUnique);
+            curEditor.getCatalogManager().updateView(true);
+            curEditor.getDeckManager().setWantUnique(wantUnique);
+            curEditor.getDeckManager().updateView(true);
         }
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbDeckStats().addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {
                 VCurrentDeck.SINGLETON_INSTANCE.setStatsVisible(
                         ((JCheckBox) e.getSource()).isSelected());
-                SEditorIO.setPref(EditorPreference.stats_deck, ((JCheckBox) e.getSource()).isSelected());
-                SEditorIO.savePreferences(); } });
+                SItemManagerIO.setPref(EditorPreference.stats_deck, ((JCheckBox) e.getSource()).isSelected());
+                SItemManagerIO.savePreferences(CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().getTable()); } });
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbElasticColumns().addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {
                 ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
                 boolean wantElastic = ((JCheckBox) e.getSource()).isSelected();
                 if (curEditor != null) {
-                    curEditor.getTableCatalog().setWantElasticColumns(wantElastic);
-                    curEditor.getTableDeck().setWantElasticColumns(wantElastic);
+                    curEditor.getCatalogManager().getTable().setWantElasticColumns(wantElastic);
+                    curEditor.getDeckManager().getTable().setWantElasticColumns(wantElastic);
                 }
-                SEditorIO.setPref(EditorPreference.elastic_columns, wantElastic);
-                SEditorIO.savePreferences(); } });
+                SItemManagerIO.setPref(EditorPreference.elastic_columns, wantElastic);
+                SItemManagerIO.savePreferences(curEditor.getCatalogManager().getTable()); } });
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbCardDisplayUnique().addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {
                 ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
                 boolean wantUnique = ((JCheckBox) e.getSource()).isSelected();
                 if (curEditor != null) {
-                    curEditor.getTableCatalog().setWantUnique(wantUnique);
-                    curEditor.getTableCatalog().updateView(true);
-                    curEditor.getTableDeck().setWantUnique(wantUnique);
-                    curEditor.getTableDeck().updateView(true);
+                    curEditor.getCatalogManager().setWantUnique(wantUnique);
+                    curEditor.getCatalogManager().updateView(true);
+                    curEditor.getDeckManager().setWantUnique(wantUnique);
+                    curEditor.getDeckManager().updateView(true);
                 }
-                SEditorIO.setPref(EditorPreference.display_unique_only, wantUnique);
-                SEditorIO.savePreferences(); } });
+                SItemManagerIO.setPref(EditorPreference.display_unique_only, wantUnique);
+                SItemManagerIO.savePreferences(curEditor.getCatalogManager().getTable()); } });
     }
 
     /* (non-Javadoc)

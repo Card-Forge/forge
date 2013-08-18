@@ -1,12 +1,9 @@
 package forge.gui.deckeditor.controllers;
 
 import java.awt.Dialog.ModalityType;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.io.File;
 
 import javax.swing.JFileChooser;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
@@ -18,7 +15,6 @@ import forge.error.BugReporter;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.DeckImport;
 import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
@@ -84,22 +80,6 @@ public enum CCurrentDeck implements ICDoc {
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnNew())
             .setCommand(new Command() { @Override
                 public void run() { newDeck(); } });
-
-        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(final FocusEvent e) {
-                if (((JTextField) e.getSource()).getText().equals("[New Deck]")) {
-                    ((JTextField) e.getSource()).setText("");
-                }
-            }
-
-            @Override
-            public void focusLost(final FocusEvent e) {
-                if (((JTextField) e.getSource()).getText().isEmpty()) {
-                    ((JTextField) e.getSource()).setText("[New Deck]");
-                }
-            }
-        });
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove()).setCommand(new Command() {
             @Override  public void run() {

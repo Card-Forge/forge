@@ -23,10 +23,6 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.SEditorUtil;
-import forge.gui.deckeditor.tables.DeckController;
-import forge.gui.deckeditor.tables.EditorTableView;
-import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
@@ -34,6 +30,9 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
+import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.util.storage.IStorage;
@@ -60,17 +59,17 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     public CEditorLimited(final IStorage<DeckGroup> deckMap0) {
-        final EditorTableView<PaperCard> tblCatalog = new EditorTableView<PaperCard>(false, PaperCard.class);
-        final EditorTableView<PaperCard> tblDeck = new EditorTableView<PaperCard>(false, PaperCard.class);
+        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
+        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
 
-        VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
-        VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
+        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
+        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
 
-        tblCatalog.setAlwaysNonUnique(true);
-        tblDeck.setAlwaysNonUnique(true);
+        catalogManager.setAlwaysNonUnique(true);
+        deckManager.setAlwaysNonUnique(true);
 
-        this.setTableCatalog(tblCatalog);
-        this.setTableDeck(tblDeck);
+        this.setCatalogManager(catalogManager);
+        this.setDeckManager(deckManager);
 
         final Supplier<DeckGroup> newCreator = new Supplier<DeckGroup>() {
             @Override
@@ -102,8 +101,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
         // update view
         final PaperCard card = (PaperCard) item;
-        this.getTableDeck().addCard(card, qty);
-        this.getTableCatalog().removeCard(card, qty);
+        this.getDeckManager().addItem(card, qty);
+        this.getCatalogManager().removeItem(card, qty);
         this.getDeckController().notifyModelChanged();
     }
 
@@ -118,8 +117,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
         // update view
         final PaperCard card = (PaperCard) item;
-        this.getTableCatalog().addCard(card, qty);
-        this.getTableDeck().removeCard(card, qty);
+        this.getCatalogManager().addItem(card, qty);
+        this.getDeckManager().removeItem(card, qty);
         this.getDeckController().notifyModelChanged();
     }
 
@@ -142,8 +141,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     @Override
     public void resetTables() {
         final Deck toEdit = this.getSelectedDeck(this.controller.getModel());
-        this.getTableCatalog().setDeck(toEdit.getOrCreate(DeckSection.Sideboard));
-        this.getTableDeck().setDeck(toEdit.getMain());
+        this.getCatalogManager().setPool(toEdit.getOrCreate(DeckSection.Sideboard));
+        this.getDeckManager().setPool(toEdit.getMain());
     }
 
     /*
@@ -161,10 +160,10 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void init() {
-        this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, SColumnUtil.getCatalogDefaultColumns());
-        this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogManager().getTable().setup(SColumnUtil.getCatalogDefaultColumns());
+        this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
-        SEditorUtil.resetUI();
+        SItemManagerUtil.resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(false);

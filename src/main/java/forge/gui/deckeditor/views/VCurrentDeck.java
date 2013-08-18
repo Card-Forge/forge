@@ -7,15 +7,11 @@ import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.WrapLayout;
-import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.controllers.CCurrentDeck;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -24,7 +20,10 @@ import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
-import forge.gui.toolbox.ToolTipListener;
+import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.ItemManagerContainer;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.item.InventoryItem;
 
 
 /** 
@@ -32,7 +31,7 @@ import forge.gui.toolbox.ToolTipListener;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
+public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -112,7 +111,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .opaque(true).hoverable(true).build();
 
     
-    private final JTextField txfTitle = new FTextField.Builder().text("[New Deck]").build();
+    private final FTextField txfTitle = new FTextField.Builder().ghostText("[New Deck]").build();
 
     private final JPanel pnlRemove = new JPanel();
     private final JPanel pnlHeader = new JPanel();
@@ -122,11 +121,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
     // Total and color count labels/filter toggles
     private final JPanel pnlStats = new JPanel(new WrapLayout(FlowLayout.LEFT));
-    private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
-            new HashMap<SEditorUtil.StatTypes, FLabel>();
+    private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels =
+            new HashMap<SItemManagerUtil.StatTypes, FLabel>();
 
-    private JTable tblCards = null;
-    private final JScrollPane scroller = new JScrollPane(tblCards);
+    private final ItemManagerContainer itemManagerContainer = new ItemManagerContainer();
+    private ItemManager<? extends InventoryItem> itemManager;
 
     //========== Constructor
 
@@ -151,18 +150,12 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         pnlRemove.add(btnRemove4, "w 30%!, h 30px!, gap 10 10 5 5");
         pnlRemove.add(btnCycleSection, "w 30%!, h 30px!, gap 10 10 5 5");
 
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
-        scroller.getViewport().setBorder(null);
-        scroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
-
         pnlStats.setOpaque(false);
         
-        for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
+        for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
             FLabel label = buildLabel(s);
             statLabels.put(s, label);
-            if (SEditorUtil.StatTypes.PACK == s) {
+            if (SItemManagerUtil.StatTypes.PACK == s) {
                 pnlStats.add(buildLabel(null));
             } else {
                 pnlStats.add(label);
@@ -227,29 +220,23 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         parentBody.add(pnlHeader, "w 98%!, gap 1% 1% 5 0");
         parentBody.add(pnlStats, "w 100:500:500, center");
         parentBody.add(pnlRemoveButtons, "w 96%!, gap 2% 0 0 0");
-        parentBody.add(scroller, "w 98%!, h 100%  - 35, gap 1% 0 0 1%");
+        parentBody.add(itemManagerContainer, "w 98%!, h 100%  - 35, gap 1% 0 0 1%");
     }
-
-    //========== Retrieval methods
-
-    //========== Custom class handling
-
-    //========== Overridden from ITableContainer
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#setTableView()
-     */
-    @Override
-    public void setTableView(final JTable tbl0) {
-        this.tblCards = tbl0;
-        scroller.setViewportView(tblCards);
+    
+    public ItemManager<? extends InventoryItem> getItemManager() {
+        return this.itemManager;
+    }
+    
+    public void setItemManager(final ItemManager<? extends InventoryItem> itemManager0) {
+        this.itemManager = itemManager0;
+        itemManagerContainer.setItemManager(itemManager0);
+    }
+    
+    public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {
+        return statLabels;
     }
 
     public JLabel getLblTitle() { return lblTitle; }
-
-    @Override
-    public FLabel getStatLabel(SEditorUtil.StatTypes s) {
-        return statLabels.get(s);
-    }
 
     //========== Retrieval
 
@@ -288,8 +275,8 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         return btnNew;
     }
 
-    /** @return {@link javax.swing.JTextField} */
-    public JTextField getTxfTitle() {
+    /** @return {@link forge.gui.toolbar.FTextField} */
+    public FTextField getTxfTitle() {
         return txfTitle;
     }
 
@@ -334,7 +321,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
     //========== Other methods
 
-    private FLabel buildLabel(SEditorUtil.StatTypes s) {
+    private FLabel buildLabel(SItemManagerUtil.StatTypes s) {
         FLabel label = new FLabel.Builder()
             .icon(s == null ? null : s.img).iconScaleAuto(false)
             .fontSize(11).tooltip(s == null ? null : s.toLabelString())

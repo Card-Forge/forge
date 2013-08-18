@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.deckeditor.tables;
+package forge.gui.toolbox.itemmanager.table;
 
 import java.util.Map.Entry;
 
@@ -23,7 +23,7 @@ import javax.swing.table.TableColumn;
 
 import com.google.common.base.Function;
 
-import forge.gui.deckeditor.tables.SColumnUtil.SortState;
+import forge.gui.toolbox.itemmanager.table.SColumnUtil.SortState;
 
 /**
  * A column object in a EditorTableModel in the card editor.
@@ -84,12 +84,12 @@ public class TableColumnInfo<T> extends TableColumn {
         this.sortPriority = position0;
     }
 
-    /** @return {@link forge.gui.deckeditor.tables.EditorTableModel.SortState} */
+    /** @return {@link forge.gui.toolbox.itemmanager.ItemTableModel.SortState} */
     public SortState getSortState() {
         return this.sortstate;
     }
 
-     /** @param state0 &emsp; {@link forge.gui.deckeditor.tables.TableColumnInfo.SortState} */
+     /** @param state0 &emsp; {@link forge.gui.toolbox.itemmanager.TableColumnInfo.SortState} */
     public void setSortState(final SortState state0) {
         this.sortstate = state0;
     }

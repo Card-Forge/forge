@@ -1,4 +1,4 @@
-package forge.gui.deckeditor;
+package forge.gui.toolbox.itemmanager;
 
 import javax.swing.ImageIcon;
 
@@ -6,13 +6,10 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.Command;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
-import forge.gui.deckeditor.views.ITableContainer;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
-import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
@@ -30,7 +27,7 @@ import forge.util.TextUtil;
  * <i>(S at beginning of class name denotes a static factory.)</i>
  *
  */
-public final class SEditorUtil  {
+public final class SItemManagerUtil  {
     /** An enum to encapsulate metadata for the stats/filter objects. */
     public static enum StatTypes {
         TOTAL      (FSkin.ZoneImages.ICO_HAND,      null, 0),
@@ -87,22 +84,22 @@ public final class SEditorUtil  {
      * setStats.
      * 
      * @param <T> &emsp; the generic type
-     * @param items &emsp; ItemPoolView<InventoryITem>
-     * @param view &emsp; {@link forge.gui.deckeditor.views.ITableContainer}
+     * @param itemManager &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager<T>}
      */
-    public static <T extends InventoryItem> void setStats(final ItemPoolView<T> items, final ITableContainer view) {
+    public static <T extends InventoryItem> void setStats(final ItemManager<T> itemManager) {
+        final ItemPoolView<T> items = itemManager.getFilteredItems();
         for (StatTypes s : StatTypes.values()) {
             switch (s) {
             case TOTAL:
-                view.getStatLabel(s).setText(String.valueOf(
+                itemManager.getStatLabel(s).setText(String.valueOf(
                         Aggregates.sum(Iterables.filter(items, Predicates.compose(totalPred, items.FN_GET_KEY)), items.FN_GET_COUNT)));
                 break;
             case PACK:
-                view.getStatLabel(s).setText(String.valueOf(
+                itemManager.getStatLabel(s).setText(String.valueOf(
                         Aggregates.sum(Iterables.filter(items, Predicates.compose(packPred, items.FN_GET_KEY)), items.FN_GET_COUNT)));
                 break;
             default:
-                view.getStatLabel(s).setText(String.valueOf(items.countAll(Predicates.compose(s.predicate, PaperCard.FN_GET_RULES), PaperCard.class)));
+                itemManager.getStatLabel(s).setText(String.valueOf(items.countAll(Predicates.compose(s.predicate, PaperCard.FN_GET_RULES), PaperCard.class)));
             }
         }
     }
@@ -111,7 +108,6 @@ public final class SEditorUtil  {
      * Resets components that may have been changed
      * by various configurations of the deck editor.
      */
-    @SuppressWarnings("serial")
     public static void resetUI() {
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setVisible(true);
@@ -135,9 +131,5 @@ public final class SEditorUtil  {
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText("Title:");
-
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
-            .setCommand(new Command() {
-                @Override public void run() { SEditorIO.saveDeck(); } });
     }
 }

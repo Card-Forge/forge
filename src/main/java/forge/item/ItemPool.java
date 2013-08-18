@@ -22,9 +22,9 @@ import java.util.Map.Entry;
 
 /**
  * <p>
- * CardPool class.
+ * ItemPool class.
  * </p>
- * Represents a list of cards with amount of each
+ * Represents a list of items with amount of each
  * 
  * @param <T>
  *            an Object
@@ -82,54 +82,54 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      * @return a ItemPoolView
      */
     public ItemPoolView<T> getView() {
-        return new ItemPoolView<T>(Collections.unmodifiableMap(this.getCards()), this.getMyClass());
+        return new ItemPoolView<T>(Collections.unmodifiableMap(this.getItems()), this.getMyClass());
     }
 
-    // Cards manipulation
+    // Items manipulation
     /**
      * 
-     * Add Card.
+     * Add a single item.
      * 
-     * @param card
+     * @param item
      *            a T
      */
-    public void add(final T card) {
-        this.add(card, 1);
+    public void add(final T item) {
+        this.add(item, 1);
     }
 
     /**
      * 
-     * add method.
+     * Add multiple items.
      * 
-     * @param card
+     * @param item
      *            a T
      * @param amount
      *            a int
      */
-    public void add(final T card, final int amount) {
+    public void add(final T item, final int amount) {
         if (amount <= 0) {
             return;
         }
-        this.getCards().put(card, Integer.valueOf(this.count(card) + amount));
+        this.getItems().put(item, Integer.valueOf(this.count(item) + amount));
         this.setListInSync(false);
     }
 
-    private void put(final T card, final int amount) {
-        this.getCards().put(card, amount);
+    private void put(final T item, final int amount) {
+        this.getItems().put(item, amount);
         this.setListInSync(false);
     }
 
     /**
-     * addAllCards.
+     * addAllFlat.
      * 
      * @param <U>
      *            a InventoryItem
-     * @param cards
+     * @param items
      *            a Iterable<U>
      */
     @SuppressWarnings("unchecked")
-    public <U extends InventoryItem> void addAllFlat(final Iterable<U> cards) {
-        for (final U cr : cards) {
+    public <U extends InventoryItem> void addAllFlat(final Iterable<U> items) {
+        for (final U cr : items) {
             if (this.getMyClass().isInstance(cr)) {
                 this.add((T) cr);
             }
@@ -160,31 +160,31 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      * 
      * Remove.
      * 
-     * @param card
+     * @param item
      *            a T
      */
-    public boolean remove(final T card) {
-        return this.remove(card, 1);
+    public boolean remove(final T item) {
+        return this.remove(item, 1);
     }
 
     /**
      * 
      * Remove.
      * 
-     * @param card
+     * @param item
      *            a T
      * @param amount
      *            a int
      */
-    public boolean remove(final T card, final int amount) {
-        final int count = this.count(card);
+    public boolean remove(final T item, final int amount) {
+        final int count = this.count(item);
         if ((count == 0) || (amount <= 0)) {
             return false;
         }
         if (count <= amount) {
-            this.getCards().remove(card);
+            this.getItems().remove(item);
         } else {
-            this.getCards().put(card, count - amount);
+            this.getItems().put(item, count - amount);
         }
         this.setListInSync(false);
         return true;
@@ -221,7 +221,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      * Clear.
      */
     public void clear() {
-        this.getCards().clear();
+        this.getItems().clear();
         this.setListInSync(false);
     }
 }

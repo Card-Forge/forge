@@ -35,14 +35,15 @@ import forge.deck.DeckBase;
 import forge.game.GameFormat;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.SEditorUtil;
-import forge.gui.deckeditor.SFilterUtil;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCardCatalog.RangeTypes;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.quest.DialogChooseSets;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSpinner;
+import forge.gui.toolbox.itemmanager.SFilterUtil;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.item.PaperCard;
 import forge.item.ItemPredicate;
 import forge.quest.QuestWorld;
@@ -107,12 +108,12 @@ public enum CCardCatalog implements ICDoc {
             }
         };
 
-        for (Map.Entry<SEditorUtil.StatTypes, FLabel> entry : VCardCatalog.SINGLETON_INSTANCE.getStatLabels().entrySet()) {
+        for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> entry : VCardCatalog.SINGLETON_INSTANCE.getStatLabels().entrySet()) {
             final FLabel statLabel = entry.getValue();
             statLabel.setCommand(updateFilterCommand);
 
             //hook so right-clicking a filter in a group toggles itself off and toggles on all other filters in group
-            final SEditorUtil.StatTypes st = entry.getKey();
+            final SItemManagerUtil.StatTypes st = entry.getKey();
             final int group = st.group;
             if (group > 0) {
                 statLabel.setRightClickCommand(new Command() {
@@ -120,9 +121,9 @@ public enum CCardCatalog implements ICDoc {
                     public void run() {
                         if (!disableFiltering) {
                             disableFiltering = true;
-                            for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
+                            for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
                                 if (s.group == group && s != st) {
-                                    VCardCatalog.SINGLETON_INSTANCE.getStatLabel(s).setSelected(false);
+                                    VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(s).setSelected(false);
                                 }
                             }
                             statLabel.setSelected(true);
@@ -134,16 +135,16 @@ public enum CCardCatalog implements ICDoc {
             }
         }
 
-        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SEditorUtil.StatTypes.TOTAL).setCommand(new Command() {
+        VCardCatalog.SINGLETON_INSTANCE.getStatLabels().get(SItemManagerUtil.StatTypes.TOTAL).setCommand(new Command() {
             private boolean lastToggle = true;
             
             @Override
             public void run() {
                 disableFiltering = true;
                 lastToggle = !lastToggle;
-                for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
-                    if (SEditorUtil.StatTypes.TOTAL != s) {
-                        VCardCatalog.SINGLETON_INSTANCE.getStatLabel(s).setSelected(lastToggle);
+                for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
+                    if (SItemManagerUtil.StatTypes.TOTAL != s) {
+                        VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(s).setSelected(lastToggle);
                     }
                 }
                 disableFiltering = false;
@@ -270,7 +271,7 @@ public enum CCardCatalog implements ICDoc {
             public void keyReleased(KeyEvent e) {
                 if (KeyEvent.VK_ENTER == e.getKeyCode() && 0 == e.getModifiers()) {
                     // set focus to table when a plain enter is typed into the text filter box
-                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getTableCatalog().getTable().requestFocusInWindow();
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().getTable().requestFocusInWindow();
                 } else if (keypressPending) {
                     // do this in keyReleased instead of keyTyped since the textbox text isn't updated until the key is released
                     // but depend on keypressPending since otherwise we pick up hotkeys and other unwanted stuff
@@ -372,7 +373,7 @@ public enum CCardCatalog implements ICDoc {
         
         // show packs and decks in the card shop according to the toggle setting
         // this is special-cased apart from the buildColorAndTypeFilter() above
-        if (VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SEditorUtil.StatTypes.PACK).getSelected()) {
+        if (VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(StatTypes.PACK).getSelected()) {
             List<Predicate<? super PaperCard>> itemPredicates = new ArrayList<Predicate<? super PaperCard>>();
             itemPredicates.add(cardFilter);
             itemPredicates.add(ItemPredicate.Presets.IS_PACK);
@@ -384,7 +385,7 @@ public enum CCardCatalog implements ICDoc {
         // TODO: is there really no way to make this type safe?
         ACEditorBase<?, ?> editor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (null != editor) {
-            ((ACEditorBase<PaperCard, DeckBase>)editor).getTableCatalog().setFilter(cardFilter);
+            ((ACEditorBase<PaperCard, DeckBase>)editor).getCatalogManager().setFilter(cardFilter);
         }
     }
     

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.deckeditor.tables;
+package forge.gui.toolbox.itemmanager.table;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -36,11 +36,8 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
-import forge.deck.DeckBase;
 import forge.game.limited.DraftRankCache;
-import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.controllers.ACEditorBase;
+import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -210,22 +207,11 @@ public final class SColumnUtil {
     /**
      * Hides/shows a table column.
      * 
+     * @param table JTable
      * @param col0 TableColumnInfo<InventoryItem>
-     * @param <TItem> extends InventoryItem
-     * @param <TModel> extends DeckBase
      */
-    @SuppressWarnings("unchecked")
-    public static <TItem extends InventoryItem, TModel extends DeckBase>
-        void toggleColumn(final TableColumnInfo<InventoryItem> col0) {
-
-        final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
-
-        final JTable tbl = (col0.getEnumValue().substring(0, 4).equals("DECK"))
-            ? ed.getTableDeck().getTable()
-            : ed.getTableCatalog().getTable();
-
-        final TableColumnModel colmodel = tbl.getColumnModel();
+    public static void toggleColumn(final JTable table, final TableColumnInfo<InventoryItem> col0) {
+        final TableColumnModel colmodel = table.getColumnModel();
 
         if (col0.isShowing()) {
             col0.setShowing(false);
@@ -258,33 +244,22 @@ public final class SColumnUtil {
      * @return TableColumnInfo<InventoryItem>
      */
     public static TableColumnInfo<InventoryItem> getColumn(final ColumnName id0) {
-        return SEditorIO.getColumn(id0);
+        return SItemManagerIO.getColumn(id0);
     }
 
     /**
      * Convenience method to get a column's index in the view (that is,
      * in the TableColumnModel).
      * 
-     * @param id0 &emsp; {@link forge.gui.deckeditor.SEditorUtil.CatalogColumnName}
+     * @param table JTable
+     * @param id0 &emsp; {@link forge.gui.deckeditor.SItemManagerUtil.ColumnName}
      * @return int
-     * @param <TItem> extends InventoryItem
-     * @param <TModel> extends InventoryItem
      */
-    @SuppressWarnings("unchecked")
-    public static <TItem extends InventoryItem, TModel extends DeckBase>
-                                    int getColumnViewIndex(final ColumnName id0) {
-
-        final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
-
-        final JTable tbl = (id0.toString().substring(0, 4).equals("DECK"))
-                ? ed.getTableDeck().getTable()
-                : ed.getTableCatalog().getTable();
-
+    public static int getColumnViewIndex(final JTable table, final ColumnName id0) {
         int index = -1;
 
         try {
-            index = tbl.getColumnModel().getColumnIndex(SColumnUtil.getColumn(id0).getIdentifier());
+            index = table.getColumnModel().getColumnIndex(SColumnUtil.getColumn(id0).getIdentifier());
         }
         catch (final Exception e) { }
 
@@ -295,23 +270,12 @@ public final class SColumnUtil {
      * Convenience method to get a column's index in the model (that is,
      * in the EditorTableModel, NOT the TableColumnModel).
      * 
-     * @param id0 &emsp; {@link forge.gui.deckeditor.SEditorUtil.CatalogColumnName}
+     * @param table JTable
+     * @param id0 &emsp; {@link forge.gui.deckeditor.SItemManagerUtil.ColumnName}
      * @return int
-     * @param <TItem> extends InventoryItem
-     * @param <TModel> extends InventoryItem
      */
-    @SuppressWarnings("unchecked")
-    public static <TItem extends InventoryItem, TModel extends DeckBase>
-                                    int getColumnModelIndex(final ColumnName id0) {
-
-        final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
-
-        final JTable tbl = (id0.toString().substring(0, 4).equals("DECK"))
-                ? ed.getTableDeck().getTable()
-                : ed.getTableCatalog().getTable();
-
-        return tbl.getColumn(SColumnUtil.getColumn(id0).getIdentifier()).getModelIndex();
+    public static int getColumnModelIndex(final JTable table, final ColumnName id0) {
+        return table.getColumn(SColumnUtil.getColumn(id0).getIdentifier()).getModelIndex();
     }
 
     //========== Display functions
