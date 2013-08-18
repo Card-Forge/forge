@@ -304,11 +304,11 @@ public class HumanPlay {
         }
         final String orString = prompt != null ? "" : " (or: " + sourceAbility.getStackDescription() + ")";
 
-        if (parts.isEmpty() || costPart.getAmount().equals("0")) {
+        if (parts.isEmpty() || (costPart.getAmount().equals("0") && parts.size() < 2)) {
             return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
         }
         // 0 mana costs were slipping through because CostPart.getAmount returns 1
-        else if (costPart instanceof CostPartMana ) {
+        else if (costPart instanceof CostPartMana && parts.size() < 2) {
             if (((CostPartMana) costPart).getManaToPay().isZero()) {
                 return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
             }
