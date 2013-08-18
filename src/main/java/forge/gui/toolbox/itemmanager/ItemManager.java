@@ -18,6 +18,7 @@
 package forge.gui.toolbox.itemmanager;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -25,6 +26,7 @@ import java.util.Map.Entry;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
 import com.google.common.base.Predicate;
 
 
@@ -34,6 +36,7 @@ import com.google.common.collect.Iterables;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.ToolTipListener;
+import forge.gui.toolbox.itemmanager.filters.ItemFilter;
 import forge.gui.toolbox.itemmanager.table.ItemTable;
 import forge.gui.toolbox.itemmanager.table.ItemTableModel;
 import forge.item.InventoryItem;
@@ -52,7 +55,9 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
     private static final long serialVersionUID = 3164349984277267922L;
     private ItemPool<T> pool;
     private final ItemManagerModel<T> model;
-    private Predicate<T> filter = null;
+    private Predicate<T> filterPredicate = null;
+    private final Map<ItemFilter.FilterTypes, ItemFilter<T>> filters =
+            new HashMap<ItemFilter.FilterTypes, ItemFilter<T>>();
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
     private final Class<T> genericType;
@@ -100,9 +105,9 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
         int height = this.getHeight();
         
         //position toolbar components //TODO: Uncomment
-        //int toolbarHeight = FTextField.HEIGHT + 3;
-        //this.txtSearch.setBounds(x, y, width / 2, FTextField.HEIGHT);
-        //y += toolbarHeight;
+        /*int toolbarHeight = FTextField.HEIGHT + 3;
+        this.txtSearch.setBounds(x, y, width / 2, FTextField.HEIGHT);
+        y += toolbarHeight;*/
         
         //position current item view
         this.tableScroller.setBounds(x, y, width, height - y);
@@ -332,13 +337,24 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
         return this.statLabels.get(s);
     }
     
-    /**
-     * 
-     * getFilter.
-     * 
-     */
-    public Predicate<T> getFilter() {
-        return this.filter;
+    public void addFilter(ItemFilter<T> filter) {
+        this.filters.put(filter.getType(), filter);
+        this.add(filter);
+        this.revalidate();
+    }
+    
+    public void removeFilter(ItemFilter<T> filter) {
+        this.filters.remove(filter.getType());
+        this.remove(filter);
+        this.revalidate();
+    }
+    
+    public void buildFilterPredicate() {
+        /*
+        this.filterPredicate = ?;
+        if (this.pool != null) {
+            this.updateView(true);
+        }*/
     }
     
     /**
@@ -347,17 +363,17 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      */
     private boolean isUnfiltered() {
-        return this.filter == null;
+        return this.filterPredicate == null;
     }
 
     /**
      * 
-     * setFilter.
+     * setFilterPredicate.
      * 
      * @param filterToSet
      */
-    public void setFilter(final Predicate<T> filterToSet) {
-        this.filter = filterToSet;
+    public void setFilterPredicate(final Predicate<T> filterPredicate0) {
+        this.filterPredicate = filterPredicate0;
         if (this.pool != null) {
             this.updateView(true);
         }
@@ -370,18 +386,18 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
      * @param bForceFilter
      */
     public void updateView(final boolean bForceFilter) {
-        final boolean useFilter = (bForceFilter && (this.filter != null)) || !isUnfiltered();
+        final boolean useFilter = (bForceFilter && (this.filterPredicate != null)) || !isUnfiltered();
 
         if (useFilter || this.wantUnique || bForceFilter) {
             this.model.clear();
         }
 
         if (useFilter && this.wantUnique) {
-            Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filter, this.pool.FN_GET_KEY);
+            Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filterPredicate, this.pool.FN_GET_KEY);
             Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(Iterables.filter(this.pool, filterForPool), this.pool.FN_GET_NAME);
             this.model.addItems(items);
         } else if (useFilter) {
-            Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filter, this.pool.FN_GET_KEY);
+            Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filterPredicate, this.pool.FN_GET_KEY);
             this.model.addItems(Iterables.filter(this.pool, pred));
         } else if (this.wantUnique) {
             Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, this.pool.FN_GET_NAME);

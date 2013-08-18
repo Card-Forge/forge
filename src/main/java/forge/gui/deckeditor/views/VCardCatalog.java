@@ -226,9 +226,9 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
     public FLabel getLblType()       { return lblType;       }
     public FLabel getLblText()       { return lblText;       }
     
-    public FLabel getBtnAddRestriction() { return btnAddRestriction; }
-    public JComboBox<String> getCbSearchMode()   { return cbSearchMode;      }
-    public JTextField getTxfSearch()     { return txfSearch;         }
+    public FLabel getBtnAddRestriction()       { return btnAddRestriction; }
+    public JComboBox<String> getCbSearchMode() { return cbSearchMode;      }
+    public JTextField getTxfSearch()           { return txfSearch;         }
 
     public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {
         return statLabels;
