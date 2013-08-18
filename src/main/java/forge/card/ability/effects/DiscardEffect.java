@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardPredicates.Presets;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -147,7 +148,8 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                     if (runDiscard) {
                         final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
-                        final List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, sa.getSourceCard().getController(), sa.getSourceCard());
+                        List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, sa.getSourceCard().getController(), sa.getSourceCard());
+                        list = CardLists.filter(list, Presets.NON_TOKEN);
                         for (int i = 0; i < numCards; i++) {
                             if (list.isEmpty())
                                 break;
@@ -160,7 +162,8 @@ public class DiscardEffect extends SpellAbilityEffect {
                     }
                 } else if (mode.equals("TgtChoose") && sa.hasParam("UnlessType")) {
                     if( numCardsInHand > 0 ) {
-                        final List<Card> hand = p.getCardsIn(ZoneType.Hand);
+                        List<Card> hand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+                        hand = CardLists.filter(hand, Presets.NON_TOKEN);
                         List<Card> toDiscard = p.getController().chooseCardsToDiscardUnlessType(Math.min(numCards, numCardsInHand), hand, sa.getParam("UnlessType"), sa);
                         for(Card c : toDiscard)
                             c.getController().discard(c, sa);
@@ -177,16 +180,16 @@ public class DiscardEffect extends SpellAbilityEffect {
                         valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
                     }
 
-                    final List<Card> dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source);
+                    List<Card> dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source);
+                    dPChHand = CardLists.filter(dPChHand, Presets.NON_TOKEN);
                     // Reveal cards that will be discarded?
                     for (final Card c : dPChHand) {
                         p.discard(c, sa);
                         discarded.add(c);
                     }
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose") || mode.equals("TgtChoose")) {
-                    // Is Reveal you choose right? I think the wrong player is
-                    // being used?
                     List<Card> dPHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+                    dPHand = CardLists.filter(dPHand, Presets.NON_TOKEN);
                     if (dPHand.isEmpty())
                         continue; // for loop over players
 

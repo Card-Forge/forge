@@ -771,7 +771,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                                 return false;
                             }
                         }
-                        return c.getCMC() > 0;
+                        return c.isToken() || c.getCMC() > 0;
                     }
                 });
                 // TODO: Blink permanents with ETB triggers
