@@ -766,6 +766,42 @@ Converted Skins list to themed combo and added to new Visual Themes section. Con
 These new themed combo boxes when used with a theme which uses white colored text will cause readability problems for people using Mac OS X. A new "Themed ComboBox" setting is now available in the preferences section which will enable/disable themed combos should you be having readability problems with the new themed combo used in the preferences page.
 
 
+- Window size/position now remembered between sessions -
+Works with multiple monitors.
+Remembers whether the window was maximized or un-maximized.
+The first time you launch Forge after this update, the window will be maximized on default monitor, with 800x600 centered being used if you un-maximize. This matches how it worked before.
+Remembers last un-maximized size even if the window is currently maximized such that, if you un-maximize the window, it will restore to that size at the center of the current monitor.
+Window will be made accessible even if monitor setup or screen resolution is different between sessions.
+
+
+- Card Zoomer Updates -
+The Card Zoomer/Preview now supports split, flip and double-sided cards including cards played face down (eg. morph).
+Split cards (name contains "//") are now rotated 90 degrees for easier viewing.
+If a card is a flip- or double-sided card then you can easily view the alternate image using...
+  - wheel mode : flick wheel forward or tap CTRL key.
+  - button mode : tap CTRL key.
+The standard flip graphic (the two rotated arrows) is displayed if the card can be flipped or transformed.
+
+
+- Home Screen UI Improvements -
+The menu on the Home Screen is now scrollable using either a mouse wheel or arrow buttons that will appear at the top or bottom if scrolling can occur in that direction
+The Deck Editor and Exit Forge buttons are now laid out vertically to make it easier to add launch buttons for new screens coming down the pipeline (hint, hint...)
+The menu on the Home Screen has been made narrower and the logo size increased to decrease whitespace and increase the width of the main panel
+Release notes added to Games Settings section.
+
+
+- User Preferences -
+There's a new user preference that lets you choose whether a 0-cost block should prompt you to pay or to pay it automatically. This only affects blocking situations where you would have to actually pay 0, (e.g. War Cadence with X = 0). By default you'll be prompted for payment, allowing you to, for instance, prevent forced blocks by activating War Cadence for 0 then not paying the block cost.
+
+
+- Match and Deck Editor Layout problems -
+The match and deck editor windows contain panels that can be moved and/or resized. The changes that you make are saved to files that are named "editor.xml" and "match.xml". These files can be found in your userDir/preferences/ directory.
+
+Sometimes people will decide that they do not like the changes that they made and wish to go back to the original layout. To reset layouts to default, go to the Game Settings -> Preferences -> Troubleshooting section. You will find at this location two buttons that will reset the match layout and the deck editor layouts.
+
+Also use the mentioned measure if your match or deckeditor won't start - it would help in 90% of the cases.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
