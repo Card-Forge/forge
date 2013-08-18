@@ -15022,6 +15022,7 @@ src/main/java/forge/gui/toolbox/itemmanager/filters/CardQuestWorldFilter.java -t
 src/main/java/forge/gui/toolbox/itemmanager/filters/CardSetFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/CardToughnessFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/CardTypeFilter.java -text
+src/main/java/forge/gui/toolbox/itemmanager/filters/ItemFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/ListLabelFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/TextFieldFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/ToggleButtonsFilter.java -text
