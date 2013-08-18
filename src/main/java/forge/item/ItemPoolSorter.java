@@ -15,14 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.toolbox.itemmanager.table;
+package forge.item;
 
 import java.util.Comparator;
 import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 
-import forge.item.PaperCard;
 
 /**
  * <p>
@@ -36,7 +35,7 @@ import forge.item.PaperCard;
  */
 @SuppressWarnings("unchecked")
 // Comparable needs <type>
-public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
+public class ItemPoolSorter<T> implements Comparator<Entry<T, Integer>> {
     private final boolean ascending;
     private final Function<Entry<T, Integer>, Comparable<?>> field;
 
@@ -50,13 +49,13 @@ public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
      * @param inAscending
      *            a boolean.
      */
-    public TableSorter(final Function<Entry<T, Integer>, Comparable<?>> field, final boolean inAscending) {
+    public ItemPoolSorter(final Function<Entry<T, Integer>, Comparable<?>> field, final boolean inAscending) {
         this.field = field;
         this.ascending = inAscending;
     }
 
     /** The Constant byNameThenSet. */
-    public static final TableSorter<PaperCard> BY_NAME_THEN_SET = new TableSorter<PaperCard>(
+    public static final ItemPoolSorter<PaperCard> BY_NAME_THEN_SET = new ItemPoolSorter<PaperCard>(
             new Function<Entry<PaperCard, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<PaperCard, Integer> from) {

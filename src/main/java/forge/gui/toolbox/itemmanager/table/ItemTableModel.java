@@ -45,6 +45,7 @@ import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.SortState;
+import forge.item.ItemPoolSorter;
 import forge.item.InventoryItem;
 
 /**
@@ -306,11 +307,11 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
 
         private TableSorterCascade<InventoryItem> createSorter() {
 
-            final List<TableSorter<InventoryItem>> oneColSorters
-                = new ArrayList<TableSorter<InventoryItem>>(maxSortDepth);
+            final List<ItemPoolSorter<InventoryItem>> oneColSorters
+                = new ArrayList<ItemPoolSorter<InventoryItem>>(maxSortDepth);
 
             for (final TableColumnInfo<InventoryItem> col : this.colsToSort) {
-                oneColSorters.add(new TableSorter<InventoryItem>(
+                oneColSorters.add(new ItemPoolSorter<InventoryItem>(
                         col.getFnSort(),
                         col.getSortState().equals(SortState.ASC) ? true : false));
             }

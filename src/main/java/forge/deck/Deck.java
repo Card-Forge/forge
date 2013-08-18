@@ -35,7 +35,7 @@ import com.google.common.base.Function;
 import forge.card.CardDb;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
-import forge.gui.toolbox.itemmanager.table.TableSorter;
+import forge.item.ItemPoolSorter;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.ItemPoolView;
@@ -200,7 +200,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     private static List<String> writeCardPool(final ItemPoolView<PaperCard> pool) {
         final List<Entry<PaperCard, Integer>> main2sort = pool.getOrderedList();
-        Collections.sort(main2sort, TableSorter.BY_NAME_THEN_SET);
+        Collections.sort(main2sort, ItemPoolSorter.BY_NAME_THEN_SET);
         final List<String> out = new ArrayList<String>();
         for (final Entry<PaperCard, Integer> e : main2sort) {
             out.add(serializeSingleCard(e.getKey(), e.getValue()));

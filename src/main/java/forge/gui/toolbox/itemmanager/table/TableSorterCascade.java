@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import forge.item.ItemPoolSorter;
 import forge.item.InventoryItem;
 
 /**
@@ -34,7 +35,7 @@ import forge.item.InventoryItem;
  * @version $Id: TableSorter.java 10146 2011-09-01 18:11:00Z Max mtg $
  */
 public class TableSorterCascade<T extends InventoryItem> implements Comparator<Entry<T, Integer>> {
-    private final List<TableSorter<T>> sorters;
+    private final List<ItemPoolSorter<T>> sorters;
     private final int cntFields;
 
     /**
@@ -44,7 +45,7 @@ public class TableSorterCascade<T extends InventoryItem> implements Comparator<E
      * @param sortersCascade
      *            a List<TableSorter<T>>
      */
-    public TableSorterCascade(final List<TableSorter<T>> sortersCascade) {
+    public TableSorterCascade(final List<ItemPoolSorter<T>> sortersCascade) {
         this.sorters = sortersCascade;
         this.cntFields = sortersCascade.size();
     }
@@ -60,7 +61,7 @@ public class TableSorterCascade<T extends InventoryItem> implements Comparator<E
         int iField = -1;
         while ((++iField < this.cntFields) && (lastCompare == 0)) { // reverse
                                                                     // iteration
-            final TableSorter<T> sorter = this.sorters.get(iField);
+            final ItemPoolSorter<T> sorter = this.sorters.get(iField);
             if (sorter == null) {
                 break;
             }

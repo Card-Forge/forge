@@ -15023,7 +15023,6 @@ src/main/java/forge/gui/toolbox/itemmanager/table/ManaCostRenderer.java -text
 src/main/java/forge/gui/toolbox/itemmanager/table/SColumnUtil.java -text
 src/main/java/forge/gui/toolbox/itemmanager/table/SetCodeRenderer.java -text
 src/main/java/forge/gui/toolbox/itemmanager/table/TableColumnInfo.java -text
-src/main/java/forge/gui/toolbox/itemmanager/table/TableSorter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/table/TableSorterCascade.java -text
 src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/special/CardViewer.java -text
@@ -15040,6 +15039,7 @@ src/main/java/forge/item/IPaperCard.java -text
 src/main/java/forge/item/InventoryItem.java -text
 src/main/java/forge/item/InventoryItemFromSet.java -text
 src/main/java/forge/item/ItemPool.java -text
+src/main/java/forge/item/ItemPoolSorter.java -text
 src/main/java/forge/item/ItemPoolView.java -text
 src/main/java/forge/item/ItemPredicate.java -text
 src/main/java/forge/item/OpenablePack.java -text
