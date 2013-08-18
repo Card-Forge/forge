@@ -151,9 +151,9 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
         pnlSearch.add(cbSearchMode, "center");
-        pnlSearch.add(lblName, "w pref+8, h pref+4");
-        pnlSearch.add(lblType, "w pref+8, h pref+4");
-        pnlSearch.add(lblText, "w pref+8, h pref+4");
+        pnlSearch.add(lblName, "w pref+8, h pref+8");
+        pnlSearch.add(lblType, "w pref+8, h pref+8");
+        pnlSearch.add(lblText, "w pref+8, h pref+8");
 
         pnlRestrictions.setOpaque(false);
 
