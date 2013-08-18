@@ -24,7 +24,8 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-
+Pandemonium
+Ley Line
 
 
 ------------
