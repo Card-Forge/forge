@@ -2020,6 +2020,30 @@ public class CardFactoryUtil {
             card.addSpellAbility(AbilityFactory.getAbility(rawAbility, card));
         }
     }
+    
+    public static final void addCommanderAbilities(final Card cmd) {
+        ReplacementEffect re = ReplacementHandler.parseReplacement(
+                "Event$ Moved | Destination$ Graveyard,Exile | ValidCard$ Card.Self | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.",
+                cmd, true);
+        cmd.addReplacementEffect(re);
+        if(cmd.getSVar("CommanderCostRaise").equals(""))
+        {
+            cmd.setSVar("CommanderCostRaise", "Number$0");
+        }
+        cmd.setSVar("CommanderMoveReplacement", 
+                "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library | Destination$ Command | Defined$ ReplacedCard");
+        
+        cmd.setSVar("DBCommanderIncCast", 
+                "DB$ StoreSVar | SVar$ CommanderCostRaise | Type$ CountSVar | Expression$ CommanderCostRaise/Plus.2");
+        SpellAbility sa = AbilityFactory.getAbility(
+                "AB$ PermanentCreature | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmd.getManaCost().toString(),
+                cmd);
+        
+        cmd.addSpellAbility(sa);
+        cmd.addIntrinsicAbility("AB$ PermanentCreature | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmd.getManaCost().toString());
+        
+        cmd.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Ability | Affected$ Card.Self | EffectZone$ Command | AffectedZone$ Command");
+    }
 
     /**
      * <p>

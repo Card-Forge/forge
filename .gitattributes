@@ -2008,6 +2008,7 @@ res/cardsfolder/c/combat_medic.txt svneol=native#text/plain
 res/cardsfolder/c/combust.txt svneol=native#text/plain
 res/cardsfolder/c/comet_storm.txt -text
 res/cardsfolder/c/command_of_unsummoning.txt svneol=native#text/plain
+res/cardsfolder/c/command_tower.txt -text
 res/cardsfolder/c/commander_eesha.txt svneol=native#text/plain
 res/cardsfolder/c/commander_greven_il_vec.txt svneol=native#text/plain
 res/cardsfolder/c/commanders_authority.txt -text
@@ -14455,7 +14456,7 @@ src/main/java/forge/card/ability/effects/MillEffect.java -text
 src/main/java/forge/card/ability/effects/MustAttackEffect.java -text
 src/main/java/forge/card/ability/effects/MustBlockEffect.java -text
 src/main/java/forge/card/ability/effects/PeekAndRevealEffect.java -text
-src/main/java/forge/card/ability/effects/PermanentCreatureEfect.java -text
+src/main/java/forge/card/ability/effects/PermanentCreatureEffect.java -text
 src/main/java/forge/card/ability/effects/PermanentNoncreatureEffect.java -text
 src/main/java/forge/card/ability/effects/PhasesEffect.java -text
 src/main/java/forge/card/ability/effects/PlaneswalkEffect.java -text
@@ -14816,6 +14817,7 @@ src/main/java/forge/gui/deckeditor/controllers/CAllDecks.java -text
 src/main/java/forge/gui/deckeditor/controllers/CCardCatalog.java -text
 src/main/java/forge/gui/deckeditor/controllers/CCurrentDeck.java -text
 src/main/java/forge/gui/deckeditor/controllers/CDeckgen.java -text
+src/main/java/forge/gui/deckeditor/controllers/CEditorCommander.java -text
 src/main/java/forge/gui/deckeditor/controllers/CEditorConstructed.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/controllers/CEditorDraftingProcess.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/controllers/CEditorLimited.java -text
@@ -14916,9 +14918,11 @@ src/main/java/forge/gui/home/settings/VSubmenuPreferences.java -text
 src/main/java/forge/gui/home/settings/VSubmenuReleaseNotes.java -text
 src/main/java/forge/gui/home/settings/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/variant/CSubmenuArchenemy.java -text
+src/main/java/forge/gui/home/variant/CSubmenuCommander.java -text
 src/main/java/forge/gui/home/variant/CSubmenuPlanechase.java -text
 src/main/java/forge/gui/home/variant/CSubmenuVanguard.java -text
 src/main/java/forge/gui/home/variant/VSubmenuArchenemy.java -text
+src/main/java/forge/gui/home/variant/VSubmenuCommander.java -text
 src/main/java/forge/gui/home/variant/VSubmenuPlanechase.java -text
 src/main/java/forge/gui/home/variant/VSubmenuVanguard.java -text
 src/main/java/forge/gui/input/Input.java -text

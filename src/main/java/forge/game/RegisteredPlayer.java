@@ -26,6 +26,7 @@ public class RegisteredPlayer {
     private final List<IPaperCard> cardsInCommand = new ArrayList<IPaperCard>();
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<PaperCard> planes = null;
+    private PaperCard commander = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
     
     public RegisteredPlayer(Deck deck0) {
@@ -138,11 +139,6 @@ public class RegisteredPlayer {
 
     
     public static RegisteredPlayer fromDeck(final Deck deck) {
-        RegisteredPlayer start = new RegisteredPlayer(deck);
-        if( deck != null && deck.has(DeckSection.Commander)) {
-            start.setStartingLife(40);
-            start.addCardsInCommand(deck.get(DeckSection.Commander).toFlatList());
-        }
         return new RegisteredPlayer(deck);
     }
 
@@ -166,6 +162,13 @@ public class RegisteredPlayer {
         start.setPlanes(planes);
         return start;
     }
+    
+    public static RegisteredPlayer forCommander(final Deck deck) {
+        RegisteredPlayer start = fromDeck(deck);
+        start.setCommander(deck.get(DeckSection.Commander).get(0));
+        start.setStartingLife(40);
+        return start;
+    }
 
     public LobbyPlayer getPlayer() {
         return player;
@@ -174,6 +177,20 @@ public class RegisteredPlayer {
     public RegisteredPlayer setPlayer(LobbyPlayer player0) {
         this.player = player0;
         return this;
+    }
+
+    /**
+     * @return the commander
+     */
+    public PaperCard getCommander() {
+        return commander;
+    }
+
+    /**
+     * @param commander0 the commander to set
+     */
+    public void setCommander(PaperCard commander0) {
+        this.commander = commander0;
     }
 
 

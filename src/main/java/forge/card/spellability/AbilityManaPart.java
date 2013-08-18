@@ -387,6 +387,31 @@ public class AbilityManaPart implements java.io.Serializable {
             if (retVal.contains("Any")) {
                 retVal = "W U B R G";
             }
+            if(retVal.contains("ColorIdentity")) {
+                retVal = "";
+                ColorSet CID = this.getSourceCard().getOwner().getCommander().getRules().getColorIdentity();
+                if(CID.hasWhite())
+                {
+                    retVal += "W ";
+                }
+                if(CID.hasBlue())
+                {
+                    retVal += "U ";
+                }
+                if(CID.hasBlack())
+                {
+                    retVal += "B ";
+                }
+                if(CID.hasRed())
+                {
+                    retVal += "R ";
+                }
+                if(CID.hasGreen())
+                {
+                    retVal += "G ";
+                }
+                retVal = retVal.substring(0,retVal.length()-1);
+            }
         }
         return retVal;
     }

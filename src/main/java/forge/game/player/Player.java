@@ -55,6 +55,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.GameAge;
+import forge.game.GameType;
 import forge.game.GlobalRuleChange;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventPlayerLivesChanged;
@@ -84,6 +85,9 @@ import forge.util.MyRandom;
  * @version $Id$
  */
 public class Player extends GameEntity implements Comparable<Player> {
+    
+    private final Map<Card,Integer> commanderDamage = new HashMap<Card,Integer>();
+    
     /** The poison counters. */
     private int poisonCounters = 0;
 
@@ -165,6 +169,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int teamNumber = -1;
     
     private Card activeScheme = null;
+    
+    private Card commander = null;
 
     /** The Constant ALL_ZONES. */
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
@@ -623,6 +629,18 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
+        if(source.isCommander())
+        {
+            if(!commanderDamage.containsKey(source))
+            {
+                commanderDamage.put(source, amount);
+            }
+            else
+            {
+                commanderDamage.put(source,commanderDamage.get(source) + amount);
+            }
+        }
+        
         this.assignedDamage.put(source, amount);
         if (source.hasKeyword("Lifelink")) {
             source.getController().gainLife(amount, source);
@@ -2146,7 +2164,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (this.poisonCounters >= 10) {
             return this.loseConditionMet(GameLossReason.Poisoned, null);
         }
-
+        
+        if(game.getType() == GameType.Commander)
+        {
+            Map<Card,Integer> cmdDmg = getCommanderDamage();
+            for(Card c : cmdDmg.keySet())
+            {
+                if(cmdDmg.get(c) >= 21)
+                    return this.loseConditionMet(GameLossReason.CommanderDamage, null);
+            }        
+        }
 
         return false;
     }
@@ -3103,6 +3130,27 @@ public class Player extends GameEntity implements Comparable<Player> {
         final int newHand = getCardsIn(ZoneType.Hand).size();
         stats.notifyHasMulliganed();
         stats.notifyOpeningHandSize(newHand);
+    }
+
+    /**
+     * @return the commander
+     */
+    public Card getCommander() {
+        return commander;
+    }
+
+    /**
+     * @param commander0 the commander to set
+     */
+    public void setCommander(Card commander0) {
+        this.commander = commander0;
+    }
+
+    /**
+     * @return the commanderDamage
+     */
+    public Map<Card,Integer> getCommanderDamage() {
+        return commanderDamage;
     }
 
 }

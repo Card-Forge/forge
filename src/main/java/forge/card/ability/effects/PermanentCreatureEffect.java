@@ -10,7 +10,7 @@ import forge.game.zone.ZoneType;
  * TODO: Write javadoc for this type.
  *
  */
-public class PermanentCreatureEfect extends SpellAbilityEffect {
+public class PermanentCreatureEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(forge.card.spellability.SpellAbility)
