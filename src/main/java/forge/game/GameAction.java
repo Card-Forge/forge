@@ -155,31 +155,36 @@ public class GameAction {
         }
 
         // Don't copy Tokens, copy only cards leaving the battlefield
-        if (c.isToken() || suppress || toBattlefield || !fromBattlefield) {
+        if (suppress || !fromBattlefield) {
             lastKnownInfo = c;
             copied = c;
         } else {
             lastKnownInfo = CardUtil.getLKICopy(c);
 
-            if (c.isCloned()) {
-                c.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
-                c.setState(CardCharacteristicName.Original);
-                c.clearStates(CardCharacteristicName.Cloner);
-                if (c.isFlipCard()) {
-                    c.clearStates(CardCharacteristicName.Flipped);
+            if (!c.isToken()) {
+                if (c.isCloned()) {
+                    c.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
+                    c.setState(CardCharacteristicName.Original);
+                    c.clearStates(CardCharacteristicName.Cloner);
+                    if (c.isFlipCard()) {
+                        c.clearStates(CardCharacteristicName.Flipped);
+                    }
                 }
-            }
-            copied = CardFactory.copyCard(c, false);
-            copied.setUnearthed(c.isUnearthed());
-            copied.setTapped(false);
-            for (final Trigger trigger : copied.getTriggers()) {
-                trigger.setHostCard(copied);
-            }
-            for (final TriggerReplacementBase repl : copied.getReplacementEffects()) {
-                repl.setHostCard(copied);
-            }
-            if (c.getName().equals("Skullbriar, the Walking Grave")) {
-                copied.setCounters(c.getCounters());
+    
+                copied = CardFactory.copyCard(c, false);
+                copied.setUnearthed(c.isUnearthed());
+                copied.setTapped(false);
+                for (final Trigger trigger : copied.getTriggers()) {
+                    trigger.setHostCard(copied);
+                }
+                for (final TriggerReplacementBase repl : copied.getReplacementEffects()) {
+                    repl.setHostCard(copied);
+                }
+                if (c.getName().equals("Skullbriar, the Walking Grave")) {
+                    copied.setCounters(c.getCounters());
+                }
+            } else { //Token
+                copied = c;
             }
         }
 
