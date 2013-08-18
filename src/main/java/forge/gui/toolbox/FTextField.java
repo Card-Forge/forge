@@ -8,6 +8,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -59,8 +60,7 @@ public class FTextField extends JTextField {
         this.setMargin(new Insets(3, 3, 2, 3));
         this.setOpaque(true);
         
-        if (0 < builder.maxLength)
-        {
+        if (builder.maxLength > 0) {
             this.setDocument(new _LengthLimitedDocument(builder.maxLength));
         }
         
@@ -72,18 +72,26 @@ public class FTextField extends JTextField {
         addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(final FocusEvent e) {
-                FTextField field = (FTextField)e.getSource();
-                if (field.ghostText != null && field.isEmpty() && !field.showGhostTextWithFocus)
-                {
-                    field.repaint();
+                final FTextField field = (FTextField)e.getSource();
+                if (field.isEmpty()) {
+                    if (field.ghostText != null && !field.showGhostTextWithFocus) {
+                        field.repaint();
+                    }
+                }
+                else { //if not empty, select all text when focused
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            field.selectAll();
+                        }
+                    });
                 }
             }
 
             @Override
             public void focusLost(final FocusEvent e) {
                 FTextField field = (FTextField)e.getSource();
-                if (field.ghostText != null && field.isEmpty() && !field.showGhostTextWithFocus)
-                {
+                if (field.ghostText != null && field.isEmpty() && !field.showGhostTextWithFocus) {
                     field.repaint();
                 }
             }
@@ -102,8 +110,7 @@ public class FTextField extends JTextField {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        if (this.ghostText != null && this.isEmpty() && (this.showGhostTextWithFocus || !this.hasFocus()))
-        {
+        if (this.ghostText != null && this.isEmpty() && (this.showGhostTextWithFocus || !this.hasFocus())) {
             //TODO: Make ghost text look more like regular text
             final Insets margin = this.getMargin();
             final Graphics2D g2d = (Graphics2D)g.create();
@@ -125,8 +132,7 @@ public class FTextField extends JTextField {
         if (ghostText0 == "") { ghostText0 = null; } //don't allow empty string to make other logic easier
         if (this.ghostText == ghostText0) { return; }
         this.ghostText = ghostText0;
-        if (this.isEmpty())
-        {
+        if (this.isEmpty()) {
             this.repaint();
         }
     }
@@ -140,8 +146,7 @@ public class FTextField extends JTextField {
     {
         if (this.showGhostTextWithFocus == showGhostTextWithFocus0) { return; }
         this.showGhostTextWithFocus = showGhostTextWithFocus0;
-        if (this.isEmpty() && this.hasFocus())
-        {
+        if (this.isEmpty() && this.hasFocus()) {
             this.repaint();
         }
     }

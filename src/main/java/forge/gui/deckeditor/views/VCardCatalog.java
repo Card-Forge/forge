@@ -3,9 +3,6 @@ package forge.gui.deckeditor.views;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +12,6 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -146,7 +141,6 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
         
         pnlSearch.setOpaque(false);
         pnlSearch.add(btnAddRestriction, "center, w pref+8, h pref+8");
-        txfSearch.addFocusListener(_selectAllOnFocus);
         pnlSearch.add(txfSearch, "pushx, growx");
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
@@ -172,15 +166,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
 
     private void _setupSpinner (JSpinner spinner) {
         spinner.setFocusable(false); // only the spinner text field should be focusable, not the up/down widget
-        JTextField t = ((JSpinner.DefaultEditor)spinner.getEditor()).getTextField();
-        t.addFocusListener(_selectAllOnFocus);
     }
-    
-    private final FocusListener _selectAllOnFocus = new FocusAdapter() {
-        @Override public void focusGained(final FocusEvent e) {
-            SwingUtilities.invokeLater(new Runnable() { @Override public void run() { ((JTextField)e.getComponent()).selectAll(); } });
-        }
-    };
     
     //========== Overridden from IVDoc
 
