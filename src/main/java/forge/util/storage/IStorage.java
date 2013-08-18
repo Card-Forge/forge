@@ -31,6 +31,7 @@ public interface IStorage<T> extends Iterable<T> {
     T get(final String name);
     
     T find(final Predicate<T> condition);
+    // todo: find(final Predicate<T> condition, boolean recursive).
 
     Collection<String> getNames();
 
@@ -41,4 +42,6 @@ public interface IStorage<T> extends Iterable<T> {
     void add(final T deck);
 
     void delete(final String deckName);
+    
+    IStorage<IStorage<T>> getFolders();
 }

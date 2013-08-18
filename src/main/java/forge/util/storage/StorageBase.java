@@ -19,6 +19,7 @@ package forge.util.storage;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -40,6 +41,7 @@ import forge.util.IItemReader;
 public class StorageBase<T> implements IStorage<T> {
     protected final Map<String, T> map;
 
+    public final static StorageBase<?> emptyMap = new StorageBase<Object>(new HashMap<String, Object>());
 
     public StorageBase(final IItemReader<T> io) {
         this.map = io.readAll();
@@ -79,6 +81,7 @@ public class StorageBase<T> implements IStorage<T> {
     public T find(Predicate<T> condition) {
         return Iterables.tryFind(map.values(), condition).orNull();
     }
+    
 
     @Override
     public void add(T deck) {
@@ -89,6 +92,12 @@ public class StorageBase<T> implements IStorage<T> {
     @Override
     public void delete(String deckName) {
         throw new UnsupportedOperationException("This is a read-only storage");
-        
+    }
+
+    // we don't have nested folders unless that's overridden in a derived class
+    @SuppressWarnings("unchecked")
+    @Override
+    public IStorage<IStorage<T>> getFolders() {
+        return (IStorage<IStorage<T>>) emptyMap;
     }
 }
