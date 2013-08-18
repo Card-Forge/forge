@@ -37,48 +37,27 @@ import forge.util.IItemReader;
  * @author Forge
  * @version $Id: DeckManager.java 13590 2012-01-27 20:46:27Z Max mtg $
  */
-public class StorageView<T> implements IStorageView<T> {
-    private final Map<String, T> map;
+public class StorageBase<T> implements IStorage<T> {
+    protected final Map<String, T> map;
 
-    /**
-     * <p>
-     * Constructor for DeckManager.
-     * </p>
-     *
-     * @param io the io
-     */
-    public StorageView(final IItemReader<T> io) {
+
+    public StorageBase(final IItemReader<T> io) {
         this.map = io.readAll();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.deck.IFolderMapView#get(java.lang.String)
-     */
+    public StorageBase(final Map<String, T> inMap) {
+        this.map = inMap;
+    }    
+
     @Override
     public T get(final String name) {
         return this.map.get(name);
     }
     
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.deck.IFolderMapView#getNames()
-     */
     @Override
     public final Collection<String> getNames() {
         return new ArrayList<String>(this.map.keySet());
-    }
-
-    /**
-     * Gets the map.
-     *
-     * @return the map
-     */
-    protected final Map<String, T> getMap() {
-        return this.map;
     }
 
     @Override
@@ -86,9 +65,6 @@ public class StorageView<T> implements IStorageView<T> {
         return this.map.values().iterator();
     }
 
-    /* (non-Javadoc)
-     * @see forge.util.IFolderMapView#any(java.lang.String)
-     */
     @Override
     public boolean contains(String name) {
         return name == null ? false : this.map.containsKey(name);
@@ -102,5 +78,17 @@ public class StorageView<T> implements IStorageView<T> {
     @Override
     public T find(Predicate<T> condition) {
         return Iterables.tryFind(map.values(), condition).orNull();
+    }
+
+    @Override
+    public void add(T deck) {
+        throw new UnsupportedOperationException("This is a read-only storage");
+        
+    }
+
+    @Override
+    public void delete(String deckName) {
+        throw new UnsupportedOperationException("This is a read-only storage");
+        
     }
 }

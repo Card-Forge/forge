@@ -29,7 +29,7 @@ import forge.util.IItemSerializer;
  * @author Forge
  * @version $Id$
  */
-public class StorageImmediatelySerialized<T> extends StorageView<T> implements IStorage<T> {
+public class StorageImmediatelySerialized<T> extends StorageBase<T> {
 
     private final IItemSerializer<T> serializer;
     /**
@@ -52,7 +52,7 @@ public class StorageImmediatelySerialized<T> extends StorageView<T> implements I
     @Override
     public final void add(final T deck) {
         String name = serializer.getItemKey(deck);
-        this.getMap().put(name, deck);
+        this.map.put(name, deck);
         this.serializer.save(deck);
     }
 
@@ -63,17 +63,6 @@ public class StorageImmediatelySerialized<T> extends StorageView<T> implements I
      */
     @Override
     public final void delete(final String deckName) {
-        this.serializer.erase(this.getMap().remove(deckName));
+        this.serializer.erase(this.map.remove(deckName));
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.deck.IFolderMapView#isUnique(java.lang.String)
-     */
-    @Override
-    public final boolean isUnique(final String name) {
-        return !this.getMap().containsKey(name);
-    }
-
 }

@@ -259,7 +259,7 @@ public class DeckController<T extends DeckBase> {
      * @return true, if successful
      */
     public boolean fileExists(final String deckName) {
-        return !this.folder.isUnique(deckName);
+        return this.folder.contains(deckName);
     }
 
     /*

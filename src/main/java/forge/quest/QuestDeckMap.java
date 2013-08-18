@@ -17,70 +17,24 @@
  */
 package forge.quest;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
 import forge.deck.Deck;
-import forge.util.storage.IStorage;
+import forge.util.storage.StorageBase;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public class QuestDeckMap implements IStorage<Deck> {
+public class QuestDeckMap extends StorageBase<Deck> {
 
     /**
      * Instantiates a new quest deck map.
      */
-    public QuestDeckMap() {
-        this.map = new HashMap<String, Deck>();
+    public QuestDeckMap(Map<String, Deck> in) {
+        super(in);
     }
 
-    /**
-     * Instantiates a new quest deck map.
-     *
-     * @param inMap the in map
-     */
-    public QuestDeckMap(final Map<String, Deck> inMap) {
-        this.map = inMap;
-    }
-
-    private final Map<String, Deck> map;
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.util.IFolderMapView#get(java.lang.String)
-     */
-    @Override
-    public Deck get(final String name) {
-        return this.map.get(name);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.util.IFolderMapView#getNames()
-     */
-    @Override
-    public Collection<String> getNames() {
-        return this.map.keySet();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Iterable#iterator()
-     */
-    @Override
-    public Iterator<Deck> iterator() {
-        return this.map.values().iterator();
-    }
 
     /*
      * (non-Javadoc)
@@ -100,40 +54,6 @@ public class QuestDeckMap implements IStorage<Deck> {
     @Override
     public void delete(final String deckName) {
         this.map.remove(deckName);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.util.IFolderMap#isUnique(java.lang.String)
-     */
-    @Override
-    public boolean isUnique(final String name) {
-        return !this.map.containsKey(name);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.util.IFolderMapView#any(java.lang.String)
-     */
-    @Override
-    public boolean contains(String name) {
-        return map.containsKey(name);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.util.IStorageView#getCount()
-     */
-    @Override
-    public int size() {
-        return map.size();
-    }
-
-    /* (non-Javadoc)
-     * @see forge.util.storage.IStorageView#find(com.google.common.base.Predicate)
-     */
-    @Override
-    public Deck find(Predicate<Deck> condition) {
-        return Iterables.tryFind(map.values(), condition).orNull();
     }
 
 }

@@ -15178,12 +15178,11 @@ src/main/java/forge/util/maps/TreeMapToAmount.java -text
 src/main/java/forge/util/maps/package-info.java -text
 src/main/java/forge/util/package-info.java -text
 src/main/java/forge/util/storage/IStorage.java -text
-src/main/java/forge/util/storage/IStorageView.java -text
+src/main/java/forge/util/storage/StorageBase.java -text
 src/main/java/forge/util/storage/StorageImmediatelySerialized.java svneol=native#text/plain
 src/main/java/forge/util/storage/StorageReaderFile.java -text
 src/main/java/forge/util/storage/StorageReaderFileSections.java -text
 src/main/java/forge/util/storage/StorageReaderFolder.java -text
-src/main/java/forge/util/storage/StorageView.java -text
 src/main/java/forge/util/storage/package-info.java -text
 src/main/java/forge/view/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/view/FView.java -text

@@ -35,7 +35,6 @@ import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
 import forge.util.storage.IStorage;
-import forge.util.storage.IStorageView;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel {
@@ -217,7 +216,7 @@ public class FDeckChooser extends JPanel {
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         final List<String> customNames = new ArrayList<String>();
-        final IStorageView<PreconDeck> allDecks = QuestController.getPrecons();
+        final IStorage<PreconDeck> allDecks = QuestController.getPrecons();
         for (final PreconDeck d : allDecks) { customNames.add(d.getName()); }
 
         lst.setListData(customNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));

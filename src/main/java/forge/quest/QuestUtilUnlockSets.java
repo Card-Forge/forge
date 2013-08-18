@@ -40,7 +40,7 @@ import forge.gui.CardListViewer;
 import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.quest.io.ReadPriceList;
-import forge.util.storage.IStorageView;
+import forge.util.storage.IStorage;
 
 /** 
  * This is a helper class for unlocking new sets during a format-limited
@@ -182,8 +182,8 @@ public class QuestUtilUnlockSets {
      */
     public static void doUnlock(QuestController qData, final CardEdition unlockedSet) {
 
-        IStorageView<SealedProductTemplate> starters = Singletons.getModel().getTournamentPacks();
-        IStorageView<SealedProductTemplate> boosters = Singletons.getModel().getBoosters();
+        IStorage<SealedProductTemplate> starters = Singletons.getModel().getTournamentPacks();
+        IStorage<SealedProductTemplate> boosters = Singletons.getModel().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
         List<PaperCard> cardsWon = new ArrayList<PaperCard>();

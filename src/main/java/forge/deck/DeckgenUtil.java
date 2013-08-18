@@ -33,7 +33,6 @@ import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
-import forge.util.storage.IStorageView;
 
 /** 
  * Utility collection for various types of decks.
@@ -155,7 +154,7 @@ public class DeckgenUtil {
     }
 
     public static Deck getRandomPreconDeck() {
-        final IStorageView<PreconDeck> allDecks = QuestController.getPrecons();
+        final IStorage<PreconDeck> allDecks = QuestController.getPrecons();
         final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
         final String name = allDecks.getNames().toArray(new String[0])[rand];
         return allDecks.get(name).getDeck();
