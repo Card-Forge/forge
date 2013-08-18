@@ -30,6 +30,7 @@ import forge.card.MagicColor;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerType;
+import forge.game.GameType;
 import forge.game.player.Player;
 
 /**
@@ -105,6 +106,12 @@ public class AbilityManaPart implements java.io.Serializable {
     public final void produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
+        ColorSet CID = null;
+        
+        if(player.getGame().getType() == GameType.Commander)
+        {
+            CID = player.getCommander().getRules().getColorIdentity();
+        }
 
         //clear lastProduced
         this.lastManaProduced.clear();
@@ -116,7 +123,17 @@ public class AbilityManaPart implements java.io.Serializable {
                     this.lastManaProduced.add(new Mana(MagicColor.COLORLESS, source, this));
                 }
             else
-                this.lastManaProduced.add(new Mana(MagicColor.fromName(c), source, this));
+            {
+                byte attemptedMana = MagicColor.fromName(c);
+                if(CID != null)
+                {
+                    if(!CID.hasAnyColor(attemptedMana)) {
+                        attemptedMana = MagicColor.COLORLESS;
+                    }
+                }
+                
+                this.lastManaProduced.add(new Mana(attemptedMana, source, this));
+            }
         }
 
         // add the mana produced to the mana pool
