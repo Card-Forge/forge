@@ -40,10 +40,11 @@ public class FTextField extends JTextField {
         public Builder readonly(boolean b0) { readonly = b0; return this; }
         public Builder readonly()           { return readonly(true); }
 
-        public Builder text(String s0)                  { text = s0; return this; }
-        public Builder tooltip(String s0)               { toolTip = s0; return this; }
-        public Builder ghostText(String s0)             { ghostText = s0; return this; }
+        public Builder text(String s0)                    { text = s0; return this; }
+        public Builder tooltip(String s0)                 { toolTip = s0; return this; }
+        public Builder ghostText(String s0)               { ghostText = s0; return this; }
         public Builder showGhostTextWithFocus(boolean b0) { showGhostTextWithFocus = b0; return this; }
+        public Builder showGhostTextWithFocus()           { return showGhostTextWithFocus(true); }
     }
     
     public static final int HEIGHT = 25; //TODO: calculate this somehow instead of hard-coding it
