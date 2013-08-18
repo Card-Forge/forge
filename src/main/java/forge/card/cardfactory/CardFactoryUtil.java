@@ -2040,7 +2040,7 @@ public class CardFactoryUtil {
                 cmd);
         
         cmd.addSpellAbility(sa);
-        cmd.addIntrinsicAbility("AB$ PermanentCreature | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmd.getManaCost().toString());
+        cmd.addIntrinsicAbility("AB$ PermanentCreature | SorcerySpeed$ True | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmd.getManaCost().toString());
         
         cmd.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Ability | Affected$ Card.Self | EffectZone$ Command | AffectedZone$ Command");
     }
