@@ -46,8 +46,7 @@ import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.io.PreconReader;
 import forge.quest.io.QuestChallengeReader;
 import forge.util.storage.IStorage;
-import forge.util.storage.IStorageView;
-import forge.util.storage.StorageView;
+import forge.util.storage.StorageBase;
 
 /**
  * TODO: Write javadoc for this type.
@@ -71,14 +70,14 @@ public class QuestController {
     private transient IStorage<Deck> decks;
 
     private QuestEventDuelManager duelManager = null;
-    private IStorageView<QuestEventChallenge> allChallenges = null;
+    private IStorage<QuestEventChallenge> allChallenges = null;
 
     private QuestBazaarManager bazaar = null;
 
     private QuestPetStorage pets = null;
 
     // This is used by shop. Had no idea where else to place this
-    private static transient IStorageView<PreconDeck> preconManager = null;
+    private static transient IStorage<PreconDeck> preconManager = null;
 
     /** The Constant RANK_TITLES. */
     public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
@@ -175,9 +174,9 @@ public class QuestController {
      * 
      * @return QuestPreconManager
      */
-    public static IStorageView<PreconDeck> getPrecons() {
+    public static IStorage<PreconDeck> getPrecons() {
         if (null == preconManager) {
-            preconManager = new StorageView<PreconDeck>(new PreconReader(new File(NewConstants.QUEST_PRECON_DIR)));
+            preconManager = new StorageBase<PreconDeck>(new PreconReader(new File(NewConstants.QUEST_PRECON_DIR)));
         }
 
         return QuestController.preconManager;
@@ -368,7 +367,7 @@ public class QuestController {
      * TODO: Write javadoc for this method.
      * @return QuestEventManager
      */
-    public IStorageView<QuestEventChallenge> getChallenges() {
+    public IStorage<QuestEventChallenge> getChallenges() {
         if (this.allChallenges == null) {
             resetChallengesManager();
         }
@@ -392,7 +391,7 @@ public class QuestController {
     public void resetChallengesManager() {
         QuestWorld world = getWorld();
         String path = world == null || world.getChallengesDir() == null ? NewConstants.DEFAULT_CHALLENGES_DIR : "res/quest/world/" + world.getChallengesDir();
-        this.allChallenges = new StorageView<QuestEventChallenge>(new QuestChallengeReader(new File(path)));
+        this.allChallenges = new StorageBase<QuestEventChallenge>(new QuestChallengeReader(new File(path)));
     }
 
     /**

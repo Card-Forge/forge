@@ -17,41 +17,31 @@
  */
 package forge.util.storage;
 
+import java.util.Collection;
+
+import com.google.common.base.Predicate;
+
 /**
  * TODO: Write javadoc for this type.
  *
  * @param <T> the generic type
  */
-public interface IStorage<T> extends IStorageView<T> {
+public interface IStorage<T> extends Iterable<T> {
 
-    /**
-     * <p>
-     * addDeck.
-     * </p>
-     * 
-     * @param deck
-     *            a {@link forge.deck.Deck} object.
-     */
+    T get(final String name);
+    
+    T find(final Predicate<T> condition);
+    // todo: find(final Predicate<T> condition, boolean recursive).
+
+    Collection<String> getNames();
+
+    boolean contains(final String name);
+
+    int size();
+    
     void add(final T deck);
 
-    /**
-     * <p>
-     * deleteDeck.
-     * </p>
-     * 
-     * @param deckName
-     *            a {@link java.lang.String} object.
-     */
     void delete(final String deckName);
-
-    /**
-     * <p>
-     * isUnique.
-     * </p>
-     *
-     * @param name the name
-     * @return a boolean.
-     */
-    boolean isUnique(final String name);
-
+    
+    IStorage<IStorage<T>> getFolders();
 }

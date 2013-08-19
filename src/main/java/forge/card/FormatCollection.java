@@ -23,12 +23,12 @@ import java.util.List;
 import forge.game.GameFormat;
 import forge.util.FileSection;
 import forge.util.storage.StorageReaderFileSections;
-import forge.util.storage.StorageView;
+import forge.util.storage.StorageBase;
 
 /**
  * The Class FormatUtils.
  */
-public final class FormatCollection extends StorageView<GameFormat> {
+public final class FormatCollection extends StorageBase<GameFormat> {
 
 
 
@@ -46,7 +46,7 @@ public final class FormatCollection extends StorageView<GameFormat> {
      * @return the standard
      */
     public GameFormat getStandard() {
-        return getMap().get("Standard");
+        return this.map.get("Standard");
     }
 
     /**
@@ -55,7 +55,7 @@ public final class FormatCollection extends StorageView<GameFormat> {
      * @return the extended
      */
     public GameFormat getExtended() {
-        return getMap().get("Extended");
+        return this.map.get("Extended");
     }
 
     /**
@@ -64,7 +64,7 @@ public final class FormatCollection extends StorageView<GameFormat> {
      * @return the modern
      */
     public GameFormat getModern() {
-        return getMap().get("Modern");
+        return this.map.get("Modern");
     }
 
     /** 
@@ -72,7 +72,7 @@ public final class FormatCollection extends StorageView<GameFormat> {
      * @return the requested format
      */
     public GameFormat getFormat(String format) {
-        return getMap().get(format);
+        return this.map.get(format);
     }
 
     /**

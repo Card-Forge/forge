@@ -21,10 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.Singletons;
@@ -50,7 +48,6 @@ import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.storage.IStorage;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -115,10 +112,14 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
             return;
         }
-        getCatalogManager().removeItem((PaperCard)item,1);
+        if(controller.getModel().getMain().contains((PaperCard)item)
+                || controller.getModel().getOrCreate(DeckSection.Sideboard).contains((PaperCard)item)
+                || controller.getModel().getOrCreate(DeckSection.Commander).contains((PaperCard)item)) {
+            return;
+        }
+
         if (sectionMode == DeckSection.Commander) {
             for(Map.Entry<PaperCard, Integer> cp : getDeckManager().getPool()) {
-                getCatalogManager().addItem(cp.getKey(), cp.getValue());
                 getDeckManager().removeItem(cp.getKey(), cp.getValue());
             }
         }
@@ -136,7 +137,6 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
             return;
         }
-        getCatalogManager().addItem((PaperCard)item, 1);
 
         final PaperCard card = (PaperCard) item;
         this.getDeckManager().removeItem(card, qty);
@@ -193,6 +193,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard()).setCommand(new Command() {
+            private static final long serialVersionUID = -9082606944024479599L;
+
             @Override
             public void run() {
                 cycleEditorMode();
@@ -257,10 +259,10 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
                 this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
                 this.getCatalogManager().setPool(normalPool, false);
-                this.getDeckManager().setPool(this.controller.getModel().get(DeckSection.Sideboard));
-                showOptions = true;
-                title = "Title: ";
-                tabtext = "Sideboard";
+                this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+                showOptions = false;
+                title = "Sideboard";
+                tabtext = "Card Catalog";
                 break;
             case Commander:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));

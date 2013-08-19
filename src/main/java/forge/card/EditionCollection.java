@@ -27,9 +27,9 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.util.IItemReader;
-import forge.util.storage.StorageView;
+import forge.util.storage.StorageBase;
 
-public final class EditionCollection extends StorageView<CardEdition> {
+public final class EditionCollection extends StorageBase<CardEdition> {
 
     private final Map<String, CardEdition> aliasToEdition = new TreeMap<String, CardEdition>();
 

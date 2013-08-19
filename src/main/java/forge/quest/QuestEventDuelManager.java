@@ -31,8 +31,8 @@ import forge.quest.io.QuestDuelReader;
 import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
-import forge.util.storage.IStorageView;
-import forge.util.storage.StorageView;
+import forge.util.storage.IStorage;
+import forge.util.storage.StorageBase;
 
 /**
  * QuestEventManager.
@@ -43,13 +43,13 @@ import forge.util.storage.StorageView;
 public class QuestEventDuelManager {
 
     private final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<QuestEventDifficulty, QuestEventDuel>(QuestEventDifficulty.class, CollectionSuppliers.<QuestEventDuel>arrayLists());
-    private final IStorageView<QuestEventDuel> allDuels;
+    private final IStorage<QuestEventDuel> allDuels;
 
 
     /** Instantiate all events and difficulty lists.
      * @param dir &emsp; File object */
     public QuestEventDuelManager(final File dir) {
-        allDuels = new StorageView<QuestEventDuel>(new QuestDuelReader(dir));
+        allDuels = new StorageBase<QuestEventDuel>(new QuestDuelReader(dir));
         assembleDuelDifficultyLists();
     } // End assembleAllEvents()
 

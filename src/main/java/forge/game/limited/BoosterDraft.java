@@ -49,7 +49,7 @@ import forge.item.ItemPoolView;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
-import forge.util.storage.IStorageView;
+import forge.util.storage.IStorage;
 
 /**
  * 
@@ -94,7 +94,7 @@ public final class BoosterDraft implements IBoosterDraft {
         case Block: case FantasyBlock: // Draft from cards by block or set
 
             List<CardBlock> blocks = new ArrayList<CardBlock>();
-            IStorageView<CardBlock> storage = draftType == LimitedPoolType.Block 
+            IStorage<CardBlock> storage = draftType == LimitedPoolType.Block 
                     ? Singletons.getModel().getBlocks() : Singletons.getModel().getFantasyBlocks();
 
             for (CardBlock b : storage) {

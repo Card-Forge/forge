@@ -50,8 +50,8 @@ import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
 import forge.util.MultiplexOutputStream;
-import forge.util.storage.IStorageView;
-import forge.util.storage.StorageView;
+import forge.util.storage.IStorage;
+import forge.util.storage.StorageBase;
 import forge.view.FView;
 
 /**
@@ -81,14 +81,14 @@ public class FModel {
 
     private final EditionCollection editions;
     private final FormatCollection formats;
-    private final IStorageView<SealedProductTemplate> boosters;
-    private final IStorageView<SealedProductTemplate> specialBoosters;
-    private final IStorageView<SealedProductTemplate> tournaments;
-    private final IStorageView<FatPackTemplate> fatPacks;
-    private final IStorageView<CardBlock> blocks;
-    private final IStorageView<CardBlock> fantasyBlocks;
-    private final IStorageView<QuestWorld> worlds;
-    private final IStorageView<PrintSheet> printSheets;
+    private final IStorage<SealedProductTemplate> boosters;
+    private final IStorage<SealedProductTemplate> specialBoosters;
+    private final IStorage<SealedProductTemplate> tournaments;
+    private final IStorage<FatPackTemplate> fatPacks;
+    private final IStorage<CardBlock> blocks;
+    private final IStorage<CardBlock> fantasyBlocks;
+    private final IStorage<QuestWorld> worlds;
+    private final IStorage<PrintSheet> printSheets;
 
     
     private static FModel instance = null;
@@ -160,13 +160,13 @@ public class FModel {
 
  
         this.formats = new FormatCollection("res/blockdata/formats.txt");
-        this.boosters = new StorageView<SealedProductTemplate>(editions.getBoosterGenerator());
-        this.specialBoosters = new StorageView<SealedProductTemplate>(new SealedProductTemplate.Reader("res/blockdata/boosters-special.txt"));
-        this.tournaments = new StorageView<SealedProductTemplate>(new SealedProductTemplate.Reader("res/blockdata/starters.txt"));
-        this.fatPacks = new StorageView<FatPackTemplate>(new FatPackTemplate.Reader("res/blockdata/fatpacks.txt"));
-        this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
-        this.fantasyBlocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
-        this.worlds = new StorageView<QuestWorld>(new QuestWorld.Reader("res/quest/world/worlds.txt"));
+        this.boosters = new StorageBase<SealedProductTemplate>(editions.getBoosterGenerator());
+        this.specialBoosters = new StorageBase<SealedProductTemplate>(new SealedProductTemplate.Reader("res/blockdata/boosters-special.txt"));
+        this.tournaments = new StorageBase<SealedProductTemplate>(new SealedProductTemplate.Reader("res/blockdata/starters.txt"));
+        this.fatPacks = new StorageBase<FatPackTemplate>(new FatPackTemplate.Reader("res/blockdata/fatpacks.txt"));
+        this.blocks = new StorageBase<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
+        this.fantasyBlocks = new StorageBase<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
+        this.worlds = new StorageBase<QuestWorld>(new QuestWorld.Reader("res/quest/world/worlds.txt"));
         // TODO - there's got to be a better place for this...oblivion?
         Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
@@ -178,7 +178,7 @@ public class FModel {
         this.decks = new CardCollections();
         this.quest = new QuestController();
         
-        this.printSheets = new StorageView<PrintSheet>(new PrintSheet.Reader("res/blockdata/printsheets.txt"));
+        this.printSheets = new StorageBase<PrintSheet>(new PrintSheet.Reader("res/blockdata/printsheets.txt"));
         
         // Preload AI profiles
         AiProfileUtil.loadAllProfiles();
@@ -346,7 +346,7 @@ public class FModel {
      *
      * @return the worlds
      */
-    public final IStorageView<QuestWorld> getWorlds() {
+    public final IStorage<QuestWorld> getWorlds() {
         return this.worlds;
     }
 
@@ -361,35 +361,35 @@ public class FModel {
     }
 
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.CardBlock}> */
-    public IStorageView<CardBlock> getBlocks() {
+    public IStorage<CardBlock> getBlocks() {
         return blocks;
     }
 
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.CardBlock}> */
-    public IStorageView<CardBlock> getFantasyBlocks() {
+    public IStorage<CardBlock> getFantasyBlocks() {
         return fantasyBlocks;
     }
 
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.FatPackTemplate}> */
-    public IStorageView<FatPackTemplate> getFatPacks() {
+    public IStorage<FatPackTemplate> getFatPacks() {
         return fatPacks;
     }
 
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
-    public final IStorageView<SealedProductTemplate> getTournamentPacks() {
+    public final IStorage<SealedProductTemplate> getTournamentPacks() {
         return tournaments;
     }
 
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
-    public final IStorageView<SealedProductTemplate> getBoosters() {
+    public final IStorage<SealedProductTemplate> getBoosters() {
         return boosters;
     }
 
-    public final IStorageView<SealedProductTemplate> getSpecialBoosters() {
+    public final IStorage<SealedProductTemplate> getSpecialBoosters() {
         return specialBoosters;
     }
 
-    public IStorageView<PrintSheet> getPrintSheets() {
+    public IStorage<PrintSheet> getPrintSheets() {
         return printSheets;
     }
     

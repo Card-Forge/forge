@@ -40,7 +40,7 @@ import forge.item.PreconDeck;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.StartingPoolType;
-import forge.util.storage.IStorageView;
+import forge.util.storage.IStorage;
 
 /**
  * Assembles Swing components of quest data submenu singleton.
@@ -248,7 +248,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cboAllowUnlocks.setSelected(true);
 
         final Map<String, String> preconDescriptions = new HashMap<String, String>();
-        IStorageView<PreconDeck> preconDecks = QuestController.getPrecons();
+        IStorage<PreconDeck> preconDecks = QuestController.getPrecons();
 
         for (PreconDeck preconDeck : preconDecks) {
             if (preconDeck.getRecommendedDeals().getMinWins() > 0) {

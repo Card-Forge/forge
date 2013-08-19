@@ -35,7 +35,7 @@ import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
 import forge.util.TextUtil;
-import forge.util.storage.IStorageView;
+import forge.util.storage.IStorage;
 
 /**
  * <p>
@@ -89,7 +89,7 @@ public class CustomLimited extends DeckBase {
      * @param cubes the cubes
      * @return the custom limited
      */
-    public static CustomLimited parse(final List<String> dfData, final IStorageView<Deck> cubes) {
+    public static CustomLimited parse(final List<String> dfData, final IStorage<Deck> cubes) {
 
         final FileSection data = FileSection.parse(dfData, ":");
 
