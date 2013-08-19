@@ -109,9 +109,9 @@ public class DeckgenUtil {
         String name = selection;
         int idxSlash = name.indexOf('/');
         while( idxSlash > 0 ) {
-            String sf = name.substring(0, idxSlash);
+            String sf = name.substring(0, idxSlash).trim();
             path = path.getFolders().get(sf);
-            name = name.substring(idxSlash+1);
+            name = name.substring(idxSlash+1).trim();
             idxSlash = name.indexOf('/');
         };
         return path.get(name);

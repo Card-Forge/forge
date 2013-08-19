@@ -210,7 +210,7 @@ public class FDeckChooser extends JPanel {
     }
 
     private <T extends InventoryItem> void addDecksRecursive(IStorage<T> node, List<String> customNames, String namePrefix ) {
-        String path = namePrefix == null ? "" : namePrefix + "/";
+        String path = namePrefix == null ? "" : namePrefix + " / ";
         for (final String fn : node.getFolders().getNames() )
         {
             IStorage<T> f = node.getFolders().get(fn);
