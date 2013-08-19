@@ -385,7 +385,7 @@ public enum CCardCatalog implements ICDoc {
         // TODO: is there really no way to make this type safe?
         ACEditorBase<?, ?> editor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (null != editor) {
-            ((ACEditorBase<PaperCard, DeckBase>)editor).getCatalogManager().setFilter(cardFilter);
+            ((ACEditorBase<PaperCard, DeckBase>)editor).getCatalogManager().setFilterPredicate(cardFilter);
         }
     }
     
