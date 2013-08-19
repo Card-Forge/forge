@@ -17,6 +17,7 @@
  */
 package forge.util;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -41,4 +42,8 @@ public interface IItemReader<T> {
      * @return the item key
      */
     String getItemKey(T item);
+    
+    Iterable<File> getSubFolders();
+    
+    IItemReader<T> getReaderForFolder(File subfolder);
 }

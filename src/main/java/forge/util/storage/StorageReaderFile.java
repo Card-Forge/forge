@@ -28,7 +28,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Function;
 
 import forge.util.FileUtil;
-import forge.util.IItemReader;
 
 /**
  * This class treats every line of a given file as a source for a named object.
@@ -36,10 +35,10 @@ import forge.util.IItemReader;
  * @param <T>
  *            the generic type
  */
-public abstract class StorageReaderFile<T> implements IItemReader<T> {
+public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
 
     private final File file;
-    private final Function<? super T, String> keySelector;
+
 
     /**
      * Instantiates a new storage reader file.
@@ -58,8 +57,8 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
      * @param keySelector0 the key selector0
      */
     public StorageReaderFile(final File file0, final Function<? super T, String> keySelector0) {
+        super(keySelector0);
         this.file = file0;
-        this.keySelector = keySelector0;
     }
 
     /* (non-Javadoc)
@@ -121,5 +120,4 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
     public String getItemKey(final T item) {
         return this.keySelector.apply(item);
     }
-
 }

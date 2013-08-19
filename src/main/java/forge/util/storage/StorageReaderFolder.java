@@ -18,9 +18,11 @@
 package forge.util.storage;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -34,7 +36,6 @@ import com.google.common.base.Function;
 
 import forge.deck.io.OldDeckFileFormatException;
 import forge.error.BugReporter;
-import forge.util.IItemReader;
 
 /**
  * This class treats every file in the given folder as a source for a named
@@ -43,19 +44,9 @@ import forge.util.IItemReader;
  *
  * @param <T> the generic type
  */
-public abstract class StorageReaderFolder<T> implements IItemReader<T> {
+public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
 
-    private final File directory;
-    private final Function<? super T, String> keySelector;
-
-    /**
-     * Gets the directory.
-     *
-     * @return the directory
-     */
-    protected final File getDirectory() {
-        return this.directory;
-    }
+    protected final File directory;
 
     /**
      * Instantiates a new storage reader folder.
@@ -63,9 +54,9 @@ public abstract class StorageReaderFolder<T> implements IItemReader<T> {
      * @param deckDir0 the deck dir0
      */
     public StorageReaderFolder(final File deckDir0, Function<? super T, String> keySelector0) {
-
+        super(keySelector0);
+        
         this.directory = deckDir0;
-        keySelector = keySelector0;
 
         if (this.directory == null) {
             throw new IllegalArgumentException("No deck directory specified");
@@ -153,5 +144,18 @@ public abstract class StorageReaderFolder<T> implements IItemReader<T> {
     public String getItemKey(T item) {
         return keySelector.apply(item);
     }
+    
 
+    // methods handling nested folders are provided. It's up to consumer whether to use these or not.
+    @Override
+    public Iterable<File> getSubFolders() {
+        File[] list = this.directory.listFiles(new FileFilter() {
+            
+            @Override
+            public boolean accept(File file) {
+                return file.isDirectory() && !file.isHidden();
+            }
+        });
+        return Arrays.asList(list);
+    }
 }

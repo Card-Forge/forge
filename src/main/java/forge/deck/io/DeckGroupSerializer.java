@@ -23,6 +23,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.util.FileUtil;
@@ -111,7 +113,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
      * @return the file
      */
     public File makeFileFor(final DeckGroup decks) {
-        return new File(this.getDirectory(), decks.getBestFileName());
+        return new File(this.directory, decks.getBestFileName());
     }
 
     /*
@@ -132,6 +134,12 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
                 return isVisibleFolder && hasGoodName && fileHumanDeck.exists();
             }
         };
+    }
+
+    @Override
+    public Iterable<File> getSubFolders() {
+        // Sealed decks are kept in separate folders, no further drilling possible
+        return ImmutableList.of();
     }
 
 }
