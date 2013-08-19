@@ -18,6 +18,7 @@
 package forge.game.ai;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -28,6 +29,9 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CounterType;
 import forge.GameEntity;
+import forge.card.TriggerReplacementBase;
+import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
@@ -197,7 +201,7 @@ public class AiBlockController {
                 // 1.Blockers that can destroy the attacker but won't get
                 // destroyed
                 killingBlockers = getKillingBlockers(combat, attacker, safeBlockers);
-                if (killingBlockers.size() > 0) {
+                if (!killingBlockers.isEmpty()) {
                     blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                 } else if (!attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                     blocker = ComputerUtilCard.getWorstCreatureAI(safeBlockers);
@@ -215,11 +219,34 @@ public class AiBlockController {
                     }
                 }
                 // 4.Blockers that can destroy the attacker and are worth less
-                if (blocker == null && killingBlockers.size() > 0) {
+                if (blocker == null && !killingBlockers.isEmpty()) {
                     final Card worst = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
+                    int value = ComputerUtilCard.evaluateCreature(attacker);
+                    
+                    // check for triggers when unblocked
+                    for (Trigger trigger : attacker.getTriggers()) {
+                        final HashMap<String, String> trigParams = trigger.getMapParams();
+                        TriggerType mode = trigger.getMode();
 
-                    if ((ComputerUtilCard.evaluateCreature(worst) + diff) < ComputerUtilCard
-                            .evaluateCreature(attacker)) {
+                        if (!trigger.requirementsCheck(attacker.getGame())) {
+                            continue;
+                        }
+                        
+                        if (mode == TriggerType.DamageDone) {
+                            if (TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), attacker)
+                                    && attacker.getNetCombatDamage() > 0
+                                    && (!trigParams.containsKey("ValidTarget")
+                                            || TriggerReplacementBase.matchesValid(combat.getDefenderByAttacker(attacker), trigParams.get("ValidTarget").split(","), attacker))) {
+                                value += 50;
+                            }
+                        } else if (mode == TriggerType.AttackerUnblocked) {
+                            if (TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidCard").split(","), attacker)) {
+                                value += 50;
+                            }
+                        }
+                    }
+
+                    if ((ComputerUtilCard.evaluateCreature(worst) + diff) < value) {
                         blocker = worst;
                     }
                 }
@@ -378,14 +405,13 @@ public class AiBlockController {
 
             List<Card> possibleBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
             killingBlockers = getKillingBlockers(combat, attacker, possibleBlockers);
-            if ((killingBlockers.size() > 0) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+            if (!killingBlockers.isEmpty() && ComputerUtilCombat.lifeInDanger(ai, combat)) {
                 final Card blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                 combat.addBlocker(attacker, blocker);
                 currentAttackers.remove(attacker);
             }
         }
         attackersLeft = (new ArrayList<Card>(currentAttackers));
-
     }
 
     // Chump Blocks (should only be made if life is in danger)
