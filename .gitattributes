@@ -15193,6 +15193,7 @@ src/main/java/forge/util/package-info.java -text
 src/main/java/forge/util/storage/IStorage.java -text
 src/main/java/forge/util/storage/StorageBase.java -text
 src/main/java/forge/util/storage/StorageImmediatelySerialized.java svneol=native#text/plain
+src/main/java/forge/util/storage/StorageNestedFolders.java -text
 src/main/java/forge/util/storage/StorageReaderBase.java -text
 src/main/java/forge/util/storage/StorageReaderFile.java -text
 src/main/java/forge/util/storage/StorageReaderFileSections.java -text

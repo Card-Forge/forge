@@ -105,7 +105,16 @@ public class DeckgenUtil {
      * @return {@link forge.deck.Deck}
      */
     public static Deck getConstructedDeck(final String selection) {
-        return Singletons.getModel().getDecks().getConstructed().get(selection);
+        IStorage<Deck> path = Singletons.getModel().getDecks().getConstructed();
+        String name = selection;
+        int idxSlash = name.indexOf('/');
+        while( idxSlash > 0 ) {
+            String sf = name.substring(0, idxSlash);
+            path = path.getFolders().get(sf);
+            name = name.substring(idxSlash+1);
+            idxSlash = name.indexOf('/');
+        };
+        return path.get(name);
     }
     
     public static Deck getPreconDeck(String selection) {

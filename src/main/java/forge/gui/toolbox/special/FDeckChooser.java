@@ -29,7 +29,7 @@ import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.JXButtonPanel;
-import forge.item.PreconDeck;
+import forge.item.InventoryItem;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -194,8 +194,7 @@ public class FDeckChooser extends JPanel {
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         final List<String> customNames = new ArrayList<String>();
-        final IStorage<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
-        for (final Deck d : allDecks) { customNames.add(d.getName()); }
+        addDecksRecursive(Singletons.getModel().getDecks().getConstructed(), customNames, null);
 
         lst.setListData(customNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         lst.setName(DeckgenUtil.DeckTypes.CUSTOM.toString());
@@ -210,14 +209,23 @@ public class FDeckChooser extends JPanel {
         lst.setSelectedIndex(0);
     }
 
+    private <T extends InventoryItem> void addDecksRecursive(IStorage<T> node, List<String> customNames, String namePrefix ) {
+        String path = namePrefix == null ? "" : namePrefix + "/";
+        for (final String fn : node.getFolders().getNames() )
+        {
+            IStorage<T> f = node.getFolders().get(fn);
+            addDecksRecursive(f, customNames, path + fn);
+        }
+        for (final T d : node) { customNames.add(path + d.getName()); }
+    }
+    
     /** Handles all control for "custom" radio button click. */
     private void updatePrecons() {
         final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         final List<String> customNames = new ArrayList<String>();
-        final IStorage<PreconDeck> allDecks = QuestController.getPrecons();
-        for (final PreconDeck d : allDecks) { customNames.add(d.getName()); }
+        addDecksRecursive(QuestController.getPrecons(), customNames, null);
 
         lst.setListData(customNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         lst.setName(DeckgenUtil.DeckTypes.PRECON.toString());
