@@ -51,8 +51,8 @@ import forge.util.Aggregates;
  * @param <T>
  *            the generic type
  */
-public final class ItemManager<T extends InventoryItem> extends JPanel {
-    private static final long serialVersionUID = 3164349984277267922L;
+@SuppressWarnings("serial")
+public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private ItemPool<T> pool;
     private final ItemManagerModel<T> model;
     private Predicate<T> filterPredicate = null;
@@ -74,7 +74,7 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
      * @param statLabels0 stat labels for this item manager
      * @param wantUnique0 whether this table should display only one item with the same name
      */
-    public ItemManager(final Class<T> genericType0, Map<SItemManagerUtil.StatTypes, FLabel> statLabels0, final boolean wantUnique0) {
+    protected ItemManager(final Class<T> genericType0, Map<SItemManagerUtil.StatTypes, FLabel> statLabels0, final boolean wantUnique0) {
         this.genericType = genericType0;
         this.statLabels = statLabels0;
         this.wantUnique = wantUnique0;
@@ -105,9 +105,12 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
         int height = this.getHeight();
         
         //position toolbar components //TODO: Uncomment
-        /*int toolbarHeight = FTextField.HEIGHT + 3;
-        this.txtSearch.setBounds(x, y, width / 2, FTextField.HEIGHT);
-        y += toolbarHeight;*/
+        /*this.txtSearch.setBounds(x, y, width / 2, FTextField.HEIGHT);
+        y += FTextField.HEIGHT + 3;
+        for (ItemFilter<T> filter : this.filters.values()) {
+            filter.getPanel().setBounds(x, y, width, ItemFilter.PANEL_HEIGHT);
+            y += ItemFilter.PANEL_HEIGHT + 3;
+        }*/
         
         //position current item view
         this.tableScroller.setBounds(x, y, width, height - y);
@@ -339,13 +342,13 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
     
     public void addFilter(ItemFilter<T> filter) {
         this.filters.put(filter.getType(), filter);
-        this.add(filter);
+        this.add(filter.getPanel());
         this.revalidate();
     }
     
     public void removeFilter(ItemFilter<T> filter) {
         this.filters.remove(filter.getType());
-        this.remove(filter);
+        this.remove(filter.getPanel());
         this.revalidate();
     }
     

@@ -30,7 +30,7 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
-import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil;
 import forge.item.PaperCard;
@@ -59,8 +59,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     public CEditorLimited(final IStorage<DeckGroup> deckMap0) {
-        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
-        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
+        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
+        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
 
         VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
         VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);

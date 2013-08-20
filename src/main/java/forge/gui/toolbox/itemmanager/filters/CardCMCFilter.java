@@ -1,5 +1,7 @@
 package forge.gui.toolbox.itemmanager.filters;
 
+import javax.swing.JPanel;
+
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.PaperCard;
 
@@ -7,7 +9,6 @@ import forge.item.PaperCard;
  * TODO: Write javadoc for this type.
  *
  */
-@SuppressWarnings("serial")
 public class CardCMCFilter extends ValueRangeFilter<PaperCard> {
 
     public CardCMCFilter(ItemManager<PaperCard> itemManager0) {
@@ -20,7 +21,7 @@ public class CardCMCFilter extends ValueRangeFilter<PaperCard> {
     }
 
     @Override
-    protected void addComponents() {
+    protected void buildPanel(JPanel panel) {
         
     }
 

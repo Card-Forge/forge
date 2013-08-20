@@ -7,7 +7,6 @@ import forge.item.InventoryItem;
  * TODO: Write javadoc for this type.
  *
  */
-@SuppressWarnings("serial")
 public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilter<T> {
 
     protected ValueRangeFilter(ItemManager<T> itemManager0) {

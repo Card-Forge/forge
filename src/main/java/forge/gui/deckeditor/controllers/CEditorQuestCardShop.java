@@ -48,7 +48,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.InventoryItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil;
@@ -127,8 +127,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     public CEditorQuestCardShop(final QuestController qd) {
         this.questData = qd;
 
-        final ItemManager<InventoryItem> catalogManager = new ItemManager<InventoryItem>(InventoryItem.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
-        final ItemManager<InventoryItem> deckManager = new ItemManager<InventoryItem>(InventoryItem.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
+        final InventoryItemManager catalogManager = new InventoryItemManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
+        final InventoryItemManager deckManager = new InventoryItemManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);

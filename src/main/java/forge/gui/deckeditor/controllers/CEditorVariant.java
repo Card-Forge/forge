@@ -34,7 +34,7 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
-import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil;
@@ -74,8 +74,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         cardPoolCondition = poolCondition;
         exitToScreen = exitTo;
         
-        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), true);
-        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), true);
+        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), true);
+        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), true);
 
         VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
         VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);

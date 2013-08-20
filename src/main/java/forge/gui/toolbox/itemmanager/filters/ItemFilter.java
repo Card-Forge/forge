@@ -11,9 +11,11 @@ import forge.item.InventoryItem;
  * TODO: Write javadoc for this type.
  *
  */
-@SuppressWarnings("serial")
-public abstract class ItemFilter<T extends InventoryItem> extends JPanel {
+public abstract class ItemFilter<T extends InventoryItem> {
     private final ItemManager<T> itemManager;
+    private JPanel panel;
+    
+    public static int PANEL_HEIGHT = 30;
     
     public enum FilterTypes {
         CardCMC,
@@ -28,16 +30,31 @@ public abstract class ItemFilter<T extends InventoryItem> extends JPanel {
     
     protected ItemFilter(ItemManager<T> itemManager0) {
         this.itemManager = itemManager0;
-        this.setOpaque(false);
-        this.addComponents();
-        this.add(new FLabel.Builder().text("X").fontSize(10).hoverable(true)
-                .tooltip("Remove filter").cmdClick(new Command() {
+    }
+    
+    @SuppressWarnings("serial")
+    public JPanel getPanel() {
+        if (panel == null) {
+            panel = new JPanel();
+            panel.setOpaque(false);
+ 
+            this.buildPanel(panel);
+            
+            //add button to remove filter
+            panel.add(new FLabel.Builder()
+                .text("X")
+                .fontSize(10)
+                .hoverable(true)
+                .tooltip("Remove filter")
+                .cmdClick(new Command() {
                     @Override
                     public void run() {
                         itemManager.removeFilter(ItemFilter.this);
                         ItemFilter.this.onRemoved();
                     }
                 }).build(), "top");
+        }
+        return panel;
     }
     
     protected void applyChange() {
@@ -45,6 +62,6 @@ public abstract class ItemFilter<T extends InventoryItem> extends JPanel {
     }
     
     public abstract FilterTypes getType();
-    protected abstract void addComponents();
+    protected abstract void buildPanel(JPanel panel);
     protected abstract void onRemoved();
 }
