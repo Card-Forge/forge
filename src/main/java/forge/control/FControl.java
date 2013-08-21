@@ -60,6 +60,8 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
+import forge.gui.menubar.FMenuBar;
+import forge.gui.menubar.MenuUtil;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
 import forge.properties.ForgeLookAndFeel;
@@ -81,7 +83,8 @@ import forge.view.FView;
  */
 public enum FControl {
     instance; 
-
+    
+    private FMenuBar menuBar;
     private List<Shortcut> shortcuts;
     private JLayeredPane display;
     private Screens state = Screens.UNKNOWN;
@@ -171,6 +174,8 @@ public enum FControl {
         // and any GUI controls being created.
         FSkin.setProgessBarMessage("Setting look and feel...");        
         setForgeLookAndFeel();
+        
+        createMenuBar();
                 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
@@ -210,6 +215,12 @@ public enum FControl {
         ForgeLookAndFeel laf = new ForgeLookAndFeel();
         laf.setForgeLookAndFeel(Singletons.getView().getFrame());        
     }
+    
+    private void createMenuBar() {
+        if (MenuUtil.isMenuBarVisible()) {
+            this.menuBar = new FMenuBar(Singletons.getView().getFrame());
+        }
+    }    
 
     /**
      * Switches between display states in top level JFrame.
