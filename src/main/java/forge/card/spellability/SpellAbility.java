@@ -1021,13 +1021,24 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
      * @return a boolean.
      */
     public final boolean canTarget(final ITargetable entity) {
+        final TargetRestrictions tr = this.getTargetRestrictions();
+        
         // Restriction related to this ability
-        if (this.getTargetRestrictions() != null) {
-            if (this.getTargetRestrictions().isUniqueTargets() && this.getUniqueTargets().contains(entity))
+        if (tr != null) {
+            if (tr.isUniqueTargets() && this.getUniqueTargets().contains(entity))
                 return false;
+            
+            // If the cards must have a specific controller
+            if (tr.getDefinedController() != null && entity instanceof Card) {
+                final Card c = (Card) entity;
+                List<Player> pl = AbilityUtils.getDefinedPlayers(this.getSourceCard(), tr.getDefinedController(), this);
+                if (pl == null || !pl.contains(c.getController()) ) {
+                    return false;
+                }
+            }
 
-            String[] validTgt = this.getTargetRestrictions().getValidTgts();
-            if (entity instanceof GameEntity && !((GameEntity)entity).isValid(validTgt, this.getActivatingPlayer(), this.getSourceCard()))
+            String[] validTgt = tr.getValidTgts();
+            if (entity instanceof GameEntity && !((GameEntity) entity).isValid(validTgt, this.getActivatingPlayer(), this.getSourceCard()))
                return false;
         }
 
