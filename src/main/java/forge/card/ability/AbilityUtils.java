@@ -704,7 +704,7 @@ public class AbilityUtils {
     public static List<Player> getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
         final List<Player> players = new ArrayList<Player>();
         final String defined = (def == null) ? "You" : def;
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Game game = card == null ? null : card.getGame();
 
         if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingPlayer();
