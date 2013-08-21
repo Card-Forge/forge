@@ -310,6 +310,25 @@ public class ComputerUtilCombat {
         for (final Card attacker : attackers) {
 
             final List<Card> blockers = combat.getBlockers(attacker);
+            
+            if(attacker.isCommander())
+            {
+                int possibleCommanderDamage = attacker.getCurrentPower();
+                int currentCommanderDamage = ai.getCommanderDamage().containsKey(attacker) ? ai.getCommanderDamage().get(attacker) : 0;
+                if(blockers.size() > 0) {
+                    if(attacker.getKeyword().contains("Trample")) {
+                        for(Card b : blockers) {
+                            possibleCommanderDamage -= b.getCurrentToughness();
+                        }
+                    }
+                    else {
+                        possibleCommanderDamage = 0;
+                    }
+                }
+                
+                if(possibleCommanderDamage + currentCommanderDamage >= 21)
+                    return true;
+            }
 
             if (blockers.size() == 0) {
                 if (!attacker.getSVar("MustBeBlocked").equals("")) {

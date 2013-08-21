@@ -112,9 +112,10 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
             return;
         }
-        if(controller.getModel().getMain().contains((PaperCard)item)
+        if((controller.getModel().getMain().contains((PaperCard)item)
                 || controller.getModel().getOrCreate(DeckSection.Sideboard).contains((PaperCard)item)
-                || controller.getModel().getOrCreate(DeckSection.Commander).contains((PaperCard)item)) {
+                || controller.getModel().getOrCreate(DeckSection.Commander).contains((PaperCard)item))
+                && !((PaperCard)item).getRules().getType().isBasic()) {
             return;
         }
 
