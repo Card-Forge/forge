@@ -15009,6 +15009,7 @@ src/main/java/forge/gui/toolbox/FSkin.java -text
 src/main/java/forge/gui/toolbox/FTabbedPane.java -text
 src/main/java/forge/gui/toolbox/FTextArea.java -text
 src/main/java/forge/gui/toolbox/FTextField.java -text
+src/main/java/forge/gui/toolbox/LayoutHelper.java -text
 src/main/java/forge/gui/toolbox/SaveOpenDialog.java -text
 src/main/java/forge/gui/toolbox/imaging/FImagePanel.java -text
 src/main/java/forge/gui/toolbox/imaging/FImageUtil.java -text
@@ -15026,12 +15027,13 @@ src/main/java/forge/gui/toolbox/itemmanager/filters/CardColorFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/CardFormatFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/CardPowerFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/CardQuestWorldFilter.java -text
+src/main/java/forge/gui/toolbox/itemmanager/filters/CardSearchFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/CardSetFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/CardToughnessFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/CardTypeFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/ItemFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/ListLabelFilter.java -text
-src/main/java/forge/gui/toolbox/itemmanager/filters/TextFieldFilter.java -text
+src/main/java/forge/gui/toolbox/itemmanager/filters/TextSearchFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/ToggleButtonsFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/filters/ValueRangeFilter.java -text
 src/main/java/forge/gui/toolbox/itemmanager/package-info.java -text
@@ -15187,6 +15189,7 @@ src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 src/main/java/forge/util/PredicateString.java -text
 src/main/java/forge/util/ReflectionUtil.java -text
 src/main/java/forge/util/TextUtil.java -text
+src/main/java/forge/util/TypeUtil.java -text
 src/main/java/forge/util/XmlUtil.java -text
 src/main/java/forge/util/maps/CollectionSuppliers.java -text
 src/main/java/forge/util/maps/EnumMapOfLists.java -text

@@ -16,11 +16,6 @@ public class CardTypeFilter extends ToggleButtonsFilter<PaperCard> {
     }
 
     @Override
-    public FilterTypes getType() {
-        return FilterTypes.CardType;
-    }
-
-    @Override
     protected void buildPanel(JPanel panel) {
         addToggleButton(panel, StatTypes.LAND);
         addToggleButton(panel, StatTypes.ARTIFACT);

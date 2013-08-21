@@ -1,5 +1,8 @@
 package forge.gui.toolbox.itemmanager.filters;
 
+import javax.swing.JPanel;
+
+import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
 
@@ -7,10 +10,12 @@ import forge.item.InventoryItem;
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilter<T> {
+public abstract class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
+    private String text;
 
-    protected ValueRangeFilter(ItemManager<T> itemManager0) {
+    protected TextSearchFilter(ItemManager<T> itemManager0, String text0) {
         super(itemManager0);
+        this.text = text0;
     }
     
     /**
@@ -21,6 +26,11 @@ public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilt
     @Override
     @SuppressWarnings("rawtypes")
     public boolean merge(ItemFilter filter) {
-        return true;
+        return false;
+    }
+    
+    @Override
+    protected void buildPanel(JPanel panel) {
+        panel.add(new FTextField.Builder().text(this.text).build());
     }
 }

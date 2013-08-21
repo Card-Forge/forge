@@ -63,4 +63,15 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
         this.buttons.add(button);
         panel.add(button);
     }
+    
+    /**
+     * Merge the given filter with this filter if possible
+     * @param filter
+     * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
+     */
+    @Override
+    @SuppressWarnings("rawtypes")
+    public boolean merge(ItemFilter filter) {
+        return true;
+    }
 }

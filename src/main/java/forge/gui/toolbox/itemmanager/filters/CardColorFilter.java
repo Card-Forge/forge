@@ -16,11 +16,6 @@ public class CardColorFilter extends ToggleButtonsFilter<PaperCard> {
     }
 
     @Override
-    public FilterTypes getType() {
-        return FilterTypes.CardColor;
-    }
-
-    @Override
     protected void buildPanel(JPanel panel) {
         addToggleButton(panel, StatTypes.WHITE);
         addToggleButton(panel, StatTypes.BLUE);

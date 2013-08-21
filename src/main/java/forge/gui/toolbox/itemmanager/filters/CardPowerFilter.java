@@ -15,11 +15,6 @@ public class CardPowerFilter extends ValueRangeFilter<PaperCard> {
     }
 
     @Override
-    public FilterTypes getType() {
-        return FilterTypes.CardPower;
-    }
-
-    @Override
     protected void buildPanel(JPanel panel) {
         
     }
