@@ -79,6 +79,9 @@ public class CostTapType extends CostPartWithList {
         
         if (type.contains("sharesCreatureTypeWith")) {
             sb.append("two untapped creatures you control that share a creature type");
+        } else if (type.contains("+withTotalPowerGE")) {
+            String num = type.split("+withTotalPowerGE")[1];
+            sb.append("Tap any number of untapped creatures you control other than CARDNAME with total power " + num + "or greater");
         } else {
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "untapped " + desc));
             sb.append(" you control");
@@ -120,7 +123,14 @@ public class CostTapType extends CostPartWithList {
             sameType = true;
             type = type.replace("sharesCreatureTypeWith", "");
         }
-        
+        boolean totalPower = false;
+        String totalP = "";
+        if (type.contains("+withTotalPowerGE")) {
+            totalPower = true;
+            totalP = type.split("withTotalPowerGE")[1];
+            type = type.replace("+withTotalPowerGE" + totalP, "");
+        }
+
         typeList = CardLists.getValidCards(typeList, type.split(";"), activator, source);
 
         if (!canTapSource) {
@@ -140,6 +150,11 @@ public class CostTapType extends CostPartWithList {
                 }
             }
             return false;
+        }
+
+        if (totalPower) {
+            final int i = Integer.parseInt(totalP);
+            return CardLists.getTotalPower(typeList) >= i;
         }
 
         final Integer amount = this.convertAmount();
@@ -170,9 +185,18 @@ public class CostTapType extends CostPartWithList {
             sameType = true;
             type = type.replace("sharesCreatureTypeWith", "");
         }
+
+        boolean totalPower = false;
+        String totalP = "";
+        if (type.contains("+withTotalPowerGE")) {
+            totalPower = true;
+            totalP = type.split("withTotalPowerGE")[1];
+            type = type.replace("+withTotalPowerGE" + totalP, "");
+        }
+
         typeList = CardLists.getValidCards(typeList, type.split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
-        if (c == null) {
+        if (c == null && !amount.equals("Any")) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
@@ -217,6 +241,21 @@ public class CostTapType extends CostPartWithList {
             }
             return executePayment(ability, tapped);
         }       
+
+        if (totalPower) {
+            int i = Integer.parseInt(totalP);
+            InputSelectCards inp = new InputSelectCardsFromList(0, typeList.size(), typeList);
+            inp.setMessage("Select a card to tap.");
+            inp.setUnselectAllowed(true);
+            inp.setCancelAllowed(true);
+            Singletons.getControl().getInputQueue().setInputAndWait(inp);
+
+            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected()) < i) {
+                return false;
+            } else {
+                return executePayment(ability, inp.getSelected());
+            }
+        }
         
         InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
         inp.setMessage("Select a " + getDescriptiveType() + " to tap (%d left)");
@@ -246,7 +285,7 @@ public class CostTapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        if (this.getType().contains("sharesCreatureTypeWith")) {
+        if (this.getType().contains("sharesCreatureTypeWith") || this.getType().contains("withTotalPowerGE")) {
             return null;
         }
 
