@@ -87,9 +87,26 @@ public class CardFactory {
             alternate = true;
             in.setState(CardCharacteristicName.Original);
         }
-        final Card out = assignNewId
-                ? getCard(CardDb.getCard(in), in.getOwner())
-                : getCard(CardDb.getCard(in), in.getOwner(), in.getUniqueNumber());
+        Card out = null;
+        if (!in.isToken() || in.isCopiedToken()) {
+            out = assignNewId ? getCard(CardDb.getCard(in), in.getOwner()) : getCard(CardDb.getCard(in), in.getOwner(), in.getUniqueNumber());
+        } else { // token
+            out = assignNewId ? new Card(in.getGame().nextCardId()) : new Card(in.getUniqueNumber());
+            out = CardFactory.copyStats(in, in.getController());
+
+            out.setName(in.getName());
+            out.setImageKey(in.getImageKey());
+            out.setManaCost(in.getManaCost());
+            out.setColor(in.getColor());
+            out.setType(in.getType());
+            out.setBaseAttack(in.getBaseAttack());
+            out.setBaseDefense(in.getBaseDefense());
+
+            CardFactoryUtil.addAbilityFactoryAbilities(out);
+            for (String s : out.getStaticAbilityStrings()) {
+                out.addStaticAbility(s);
+            }
+        }
 
 
         CardFactory.copyCharacteristics(in, out);
