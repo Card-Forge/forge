@@ -19,6 +19,9 @@
 package forge.gui.toolbox.imaging;
 
 import java.awt.Dimension;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 
 /**
  * Useful general imaging routines. 
@@ -29,6 +32,12 @@ import java.awt.Dimension;
 public final class ImageUtil {  
     private ImageUtil() {}
     
+    public static ImageIcon getMenuIcon(ImageIcon sourceIcon) {
+        Image img = sourceIcon.getImage();  
+        Image newimg = img.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);  
+        return new ImageIcon(newimg);        
+    }    
+        
     /**
      * Gets the nearest rotation for a requested rotation.
      * <p>

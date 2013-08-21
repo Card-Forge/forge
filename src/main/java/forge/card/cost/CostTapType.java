@@ -161,6 +161,10 @@ public class CostTapType extends CostPartWithList {
     public final boolean payHuman(final SpellAbility ability, final Game game) {
         List<Card> typeList = new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
         String type = this.getType();
+        final String amount = this.getAmount();
+        final Card source = ability.getSourceCard();
+        Integer c = this.convertAmount();
+
         boolean sameType = false;
         if (type.contains("sharesCreatureTypeWith")) {
             sameType = true;
@@ -168,6 +172,16 @@ public class CostTapType extends CostPartWithList {
         }
         typeList = CardLists.getValidCards(typeList, type.split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+        if (c == null) {
+            final String sVar = ability.getSVar(amount);
+            // Generalize this
+            if (sVar.equals("XChoice")) {
+                c = Cost.chooseXValue(source, ability, typeList.size());
+            } else {
+                c = AbilityUtils.calculateAmount(source, amount, ability);
+            }
+        }
+
         if (sameType) {
             final List<Card> List2 = typeList;
             typeList = CardLists.filter(typeList, new Predicate<Card>() {
@@ -181,21 +195,28 @@ public class CostTapType extends CostPartWithList {
                     return false;
                 }
             });
-        }
-        
-        final String amount = this.getAmount();
-        final Card source = ability.getSourceCard();
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = Cost.chooseXValue(source, ability, typeList.size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
+            if (c == 0) return true;
+            List<Card> tapped = new ArrayList<Card>();
+            while (c > 0) {
+                InputSelectCards inp = new InputSelectCardsFromList(1, 1, typeList);
+                inp.setMessage("Select one of the cards to tap. Already chosen: " + tapped);
+                inp.setCancelAllowed(true);
+                Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                if (inp.hasCancelled())
+                    return false;
+                final Card first = inp.getSelected().get(0);
+                tapped.add(first);
+                typeList = CardLists.filter(typeList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return c.sharesCreatureTypeWith(first);
+                    }
+                });
+                typeList.remove(first);
+                c--;
             }
-        }
-        
+            return executePayment(ability, tapped);
+        }       
         
         InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
         inp.setMessage("Select a " + getDescriptiveType() + " to tap (%d left)");

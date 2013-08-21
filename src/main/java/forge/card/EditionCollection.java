@@ -28,6 +28,7 @@ import com.google.common.collect.Lists;
 
 import forge.util.IItemReader;
 import forge.util.storage.StorageBase;
+import forge.util.storage.StorageReaderBase;
 
 public final class EditionCollection extends StorageBase<CardEdition> {
 
@@ -107,7 +108,7 @@ public final class EditionCollection extends StorageBase<CardEdition> {
      */
     public IItemReader<SealedProductTemplate> getBoosterGenerator() {
         // TODO Auto-generated method stub
-        return new IItemReader<SealedProductTemplate>() {
+        return new StorageReaderBase<SealedProductTemplate>(null) {
             
             @Override
             public Map<String, SealedProductTemplate> readAll() {

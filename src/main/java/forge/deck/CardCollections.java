@@ -49,7 +49,7 @@ public class CardCollections {
     public CardCollections() {
         StopWatch sw = new StopWatch();
         sw.start();
-        this.constructed = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_CONSTRUCTED_DIR), true));
+        this.constructed = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_CONSTRUCTED_DIR), true), true);
         this.draft = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(NewConstants.DECK_DRAFT_DIR)));
         this.sealed = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(NewConstants.DECK_SEALED_DIR)));
         this.cube = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_CUBE_DIR)));

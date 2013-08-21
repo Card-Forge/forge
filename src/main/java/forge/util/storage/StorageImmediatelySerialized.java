@@ -17,6 +17,9 @@
  */
 package forge.util.storage;
 
+import com.google.common.base.Function;
+
+import forge.util.IItemReader;
 import forge.util.IItemSerializer;
 
 //reads and writeDeck Deck objects
@@ -32,6 +35,15 @@ import forge.util.IItemSerializer;
 public class StorageImmediatelySerialized<T> extends StorageBase<T> {
 
     private final IItemSerializer<T> serializer;
+    private final IStorage<IStorage<T>> subfolders;
+
+    private final Function<IItemReader<T>, IStorage<T>> nestedFactory = new Function<IItemReader<T>, IStorage<T>>() {
+        @Override
+        public IStorage<T> apply(IItemReader<T> io) {
+            return new StorageImmediatelySerialized<T>((IItemSerializer<T>) io, true);
+        }
+    };
+    
     /**
      * <p>
      * Constructor for DeckManager.
@@ -40,8 +52,14 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
      * @param io the io
      */
     public StorageImmediatelySerialized(final IItemSerializer<T> io) {
+        this(io, false);
+    }
+    
+    
+    public StorageImmediatelySerialized(final IItemSerializer<T> io, boolean withSubFolders) {
         super(io);
         this.serializer = io;
+        subfolders = withSubFolders ? new StorageNestedFolders<T>(io, nestedFactory) : null;
     }
 
     /*
@@ -64,5 +82,13 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
     @Override
     public final void delete(final String deckName) {
         this.serializer.erase(this.map.remove(deckName));
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.util.storage.StorageBase#getFolders()
+     */
+    @Override
+    public IStorage<IStorage<T>> getFolders() {
+        return subfolders == null ? super.getFolders() : subfolders;
     }
 }

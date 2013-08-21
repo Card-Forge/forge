@@ -1,0 +1,7 @@
+Name:Illuminated Folio
+ManaCost:5
+Types:Artifact
+A:AB$ Draw | Cost$ 1 T Reveal<2/SameColor> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/illuminated_folio.jpg
+Oracle:{1}, {T}, Reveal two cards from your hand that share a color: Draw a card.

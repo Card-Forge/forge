@@ -35,7 +35,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.EDocID;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
@@ -92,8 +92,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 
-        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), wantUnique);
-        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), wantUnique);
+        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), wantUnique);
+        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), wantUnique);
 
         VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
         VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);

@@ -1,7 +1,7 @@
 Name:Exhume
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBChangeZoneOpp | SpellDescription$ Each player puts a creature card from his or her graveyard onto the battlefield.
-SVar:DBChangeZoneOpp:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouDontCtrl | DefinedPlayer$ Opponent | ChangeNum$ 1 | Hidden$ True
+A:SP$ RepeatEach | Cost$ 1 B | RepeatSubAbility$ DBChangeZone | RepeatPlayers$ Player | SpellDescription$ Each player puts a creature card from his or her graveyard onto the battlefield.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.RememberedPlayerCtrl | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeNum$ 1 | Hidden$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exhume.jpg
 Oracle:Each player puts a creature card from his or her graveyard onto the battlefield.

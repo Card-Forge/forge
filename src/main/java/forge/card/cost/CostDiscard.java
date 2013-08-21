@@ -192,30 +192,42 @@ public class CostDiscard extends CostPartWithList {
             }
 
             return executePayment(ability, Aggregates.random(handList, c));
-            
+        }
+        if (discardType.contains("+WithSameName")) {
+            String type = discardType.replace("+WithSameName", "");
+            handList = CardLists.getValidCards(handList, type.split(";"), activator, ability.getSourceCard());
+            final List<Card> landList2 = handList;
+            handList = CardLists.filter(handList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    for (Card card : landList2) {
+                        if (!card.equals(c) && card.getName().equals(c.getName())) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+            if (c == 0) return true;
+            List<Card> discarded = new ArrayList<Card>();
+            while (c > 0) {
+                InputSelectCards inp = new InputSelectCardsFromList(1, 1, handList);
+                inp.setMessage("Select one of the cards with the same name to discard. Already chosen: " + discarded);
+                inp.setCancelAllowed(true);
+                Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                if (inp.hasCancelled())
+                    return false;
+                final Card first = inp.getSelected().get(0);
+                discarded.add(first);
+                handList = CardLists.filter(handList, CardPredicates.nameEquals(first.getName()));
+                handList.remove(first);
+                c--;
+            }
+            return executePayment(ability, discarded);
         } else {
             String type = new String(discardType);
-            boolean sameName = false;
-            if (type.contains("+WithSameName")) {
-                sameName = true;
-                type = type.replace("+WithSameName", "");
-            }
             final String[] validType = type.split(";");
             handList = CardLists.getValidCards(handList, validType, activator, ability.getSourceCard());
-            final List<Card> landList2 = handList;
-            if (sameName) {
-                handList = CardLists.filter(handList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        for (Card card : landList2) {
-                            if (!card.equals(c) && card.getName().equals(c.getName())) {
-                                return true;
-                            }
-                        }
-                        return false;
-                    }
-                });
-            }
 
             if (c == null) {
                 final String sVar = ability.getSVar(amount);

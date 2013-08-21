@@ -29,7 +29,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 import forge.Card;
@@ -61,8 +60,11 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
+import forge.gui.menubar.FMenuBar;
+import forge.gui.menubar.MenuUtil;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
+import forge.properties.ForgeLookAndFeel;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -81,7 +83,8 @@ import forge.view.FView;
  */
 public enum FControl {
     instance; 
-
+    
+    private FMenuBar menuBar;
     private List<Shortcut> shortcuts;
     private JLayeredPane display;
     private Screens state = Screens.UNKNOWN;
@@ -166,13 +169,13 @@ public enum FControl {
     public void initialize() {
         // Preloads skin components (using progress bar).
         FSkin.loadFull();
-
-        //This must be done here or at least between the skin being loaded and any FTabbedPanes being created.
-        //Why,Swing? Why is this not a property of JTabbbedPane?
-        UIManager.put("TabbedPane.selected", FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
-        UIManager.put("TabbedPane.contentOpaque", FSkin.getColor(FSkin.Colors.CLR_THEME));
-        UIManager.put("TabbedPane.unselectedBackground", FSkin.getColor(FSkin.Colors.CLR_THEME2));        
-        setComboBoxLookAndFeel();
+        
+        // This must be done here or at least between the skin being loaded
+        // and any GUI controls being created.
+        FSkin.setProgessBarMessage("Setting look and feel...");        
+        setForgeLookAndFeel();
+        
+        createMenuBar();
                 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
@@ -208,21 +211,16 @@ public enum FControl {
             public void run() { Singletons.getView().initialize(); } });
     }
     
-    /**
-     * @see <a href="http://tips4java.wordpress.com/2008/10/09/uimanager-defaults/">UIManager Defaults</a>
-     */
-    private void setComboBoxLookAndFeel() {
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX)) {
-            UIManager.put("ComboBox.background", FSkin.getColor(FSkin.Colors.CLR_THEME2));
-            UIManager.put("ComboBox.foreground", FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            UIManager.put("ComboBox.selectionBackground", FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
-            UIManager.put("ComboBox.selectionForeground", FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            UIManager.put("ComboBox.disabledBackground", FSkin.getColor(FSkin.Colors.CLR_THEME2));
-            UIManager.put("ComboBox.disabledForeground", FSkin.getColor(FSkin.Colors.CLR_THEME2).darker());                                    
-            UIManager.put("Button.select", FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
-            UIManager.put("ComboBox.font", FSkin.getFont(UIManager.getFont("ComboBox.font").getSize()));
-        }
+    private void setForgeLookAndFeel() {
+        ForgeLookAndFeel laf = new ForgeLookAndFeel();
+        laf.setForgeLookAndFeel(Singletons.getView().getFrame());        
     }
+    
+    private void createMenuBar() {
+        if (MenuUtil.isMenuBarVisible()) {
+            this.menuBar = new FMenuBar(Singletons.getView().getFrame());
+        }
+    }    
 
     /**
      * Switches between display states in top level JFrame.

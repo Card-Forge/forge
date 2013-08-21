@@ -61,6 +61,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CLONE_MODE_SOURCE ("false"), /** */
         UI_MATCH_IMAGE_VISIBLE ("true"),
         UI_THEMED_COMBOBOX ("true"),
+        UI_HIDE_MENUBAR ("false"),                  // Dev setting only - cannot be set from GUI.        
         
         UI_FOR_TOUCHSCREN("false"),
 

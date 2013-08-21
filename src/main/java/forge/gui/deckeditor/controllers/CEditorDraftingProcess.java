@@ -37,7 +37,7 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.sanctioned.CSubmenuDraft;
-import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
@@ -64,8 +64,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * Updates the deck editor UI as necessary draft selection mode.
      */
     public CEditorDraftingProcess() {
-        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
-        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
+        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
+        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
 
         VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
         VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);

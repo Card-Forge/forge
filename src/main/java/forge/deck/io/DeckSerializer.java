@@ -40,6 +40,7 @@ import forge.properties.NewConstants;
 import forge.util.FileSection;
 import forge.util.FileSectionManual;
 import forge.util.FileUtil;
+import forge.util.IItemReader;
 import forge.util.IItemSerializer;
 import forge.util.storage.StorageReaderFolder;
 import freemarker.template.Configuration;
@@ -194,7 +195,7 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
     }
 
     public File makeFileFor(final Deck deck) {
-        return new File(this.getDirectory(), deck.getBestFileName() + FILE_EXTENSION);
+        return new File(this.directory, deck.getBestFileName() + FILE_EXTENSION);
     }
 
     @Override
@@ -244,5 +245,15 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
         }
 
         return null;
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.util.storage.StorageReaderBase#getReaderForFolder(java.io.File)
+     */
+    @Override
+    public IItemReader<Deck> getReaderForFolder(File subfolder) {
+        if ( !subfolder.getParentFile().equals(directory) )
+            throw new UnsupportedOperationException("Only child folders of " + directory + " may be processed");
+        return new DeckSerializer(subfolder, false);
     }
 }

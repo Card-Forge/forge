@@ -38,7 +38,7 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil;
@@ -95,8 +95,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     public CEditorQuest(final QuestController questData0) {
         this.questData = questData0;
 
-        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
-        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
+        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
+        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);

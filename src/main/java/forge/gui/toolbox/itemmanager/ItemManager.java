@@ -17,6 +17,9 @@
  */
 package forge.gui.toolbox.itemmanager;
 
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -24,8 +27,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import com.google.common.base.Predicate;
 
@@ -33,8 +37,11 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.Command;
+import forge.gui.GuiUtils;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FTextField;
+import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
 import forge.gui.toolbox.itemmanager.table.ItemTable;
@@ -43,6 +50,7 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.util.Aggregates;
+import forge.util.TypeUtil;
 
 
 /**
@@ -51,21 +59,26 @@ import forge.util.Aggregates;
  * @param <T>
  *            the generic type
  */
-public final class ItemManager<T extends InventoryItem> extends JPanel {
-    private static final long serialVersionUID = 3164349984277267922L;
+@SuppressWarnings("serial")
+public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private ItemPool<T> pool;
     private final ItemManagerModel<T> model;
     private Predicate<T> filterPredicate = null;
-    private final Map<ItemFilter.FilterTypes, ItemFilter<T>> filters =
-            new HashMap<ItemFilter.FilterTypes, ItemFilter<T>>();
+    private final Map<Class<? extends ItemFilter<T>>, List<ItemFilter<T>>> filters =
+            new HashMap<Class<? extends ItemFilter<T>>, List<ItemFilter<T>>>();
+    private final List<ItemFilter<T>> orderedFilters = new ArrayList<ItemFilter<T>>();
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
     private final Class<T> genericType;
     private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels;
     
+    private final FLabel btnAddFilter = new FLabel.ButtonBuilder()
+            .text("Add")
+            .tooltip("Click to add filters to the list")
+            .reactOnMouseDown().build();
+    private final FTextField txtSearch = new FTextField.Builder().ghostText("Search").build();
     private final ItemTable<T> table;
     private final JScrollPane tableScroller;
-    private final JTextField txtSearch = new FTextField.Builder().ghostText("Search").build();
 
     /**
      * ItemManager Constructor.
@@ -74,7 +87,7 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
      * @param statLabels0 stat labels for this item manager
      * @param wantUnique0 whether this table should display only one item with the same name
      */
-    public ItemManager(final Class<T> genericType0, Map<SItemManagerUtil.StatTypes, FLabel> statLabels0, final boolean wantUnique0) {
+    protected ItemManager(final Class<T> genericType0, Map<SItemManagerUtil.StatTypes, FLabel> statLabels0, final boolean wantUnique0) {
         this.genericType = genericType0;
         this.statLabels = statLabels0;
         this.wantUnique = wantUnique0;
@@ -92,25 +105,45 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
         //build display
         this.setOpaque(false);
         this.setLayout(null);
+        this.add(this.btnAddFilter);
         this.add(this.txtSearch);
         this.add(this.tableScroller);
+        
+        //setup command for btnAddFilter
+        final Command addFilterCommand = new Command() {
+            @Override
+            public void run() {
+                JPopupMenu menu = new JPopupMenu("FilterMenu");
+                GuiUtils.addMenuItem(menu, "Current text search",
+                        KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                        new Runnable() {
+                    @Override
+                    public void run() {
+                        ItemFilter<T> searchFilter = createSearchFilter(txtSearch.getText());
+                        if (searchFilter != null) {
+                            addFilter(searchFilter);
+                        }
+                    }
+                }, !txtSearch.isEmpty());
+                buildFilterMenu(menu);
+                menu.show(btnAddFilter, 0, btnAddFilter.getHeight());
+            }
+        };
+        this.btnAddFilter.setCommand(addFilterCommand);
+        this.btnAddFilter.setRightClickCommand(addFilterCommand); //show menu on right-click too   
     }
     
     @Override
     public void doLayout()
     {
-        int x = 0;
-        int y = 0;
-        int width = this.getWidth();
-        int height = this.getHeight();
-        
-        //position toolbar components //TODO: Uncomment
-        /*int toolbarHeight = FTextField.HEIGHT + 3;
-        this.txtSearch.setBounds(x, y, width / 2, FTextField.HEIGHT);
-        y += toolbarHeight;*/
-        
-        //position current item view
-        this.tableScroller.setBounds(x, y, width, height - y);
+        LayoutHelper helper = new LayoutHelper(this);
+        /*helper.include(this.btnAddFilter, 30, FTextField.HEIGHT);
+        helper.include(this.txtSearch, 0.5f, FTextField.HEIGHT);
+        helper.newLine();
+        for (ItemFilter<T> filter : this.orderedFilters) {
+            helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
+        }*/
+        helper.fill(this.tableScroller);
     }
 
     /**
@@ -337,16 +370,48 @@ public final class ItemManager<T extends InventoryItem> extends JPanel {
         return this.statLabels.get(s);
     }
     
+    protected abstract ItemFilter<T> createSearchFilter(String text);
+    protected abstract void buildFilterMenu(JPopupMenu menu);
+    
+    protected <F extends ItemFilter<T>> F getFilter(Class<F> filterClass) {
+        return TypeUtil.safeCast(this.filters.get(filterClass), filterClass);
+    }
+    
+    @SuppressWarnings("unchecked")
     public void addFilter(ItemFilter<T> filter) {
-        this.filters.put(filter.getType(), filter);
-        this.add(filter);
+        final Class<? extends ItemFilter<T>> filterClass = (Class<? extends ItemFilter<T>>) filter.getClass();
+        List<ItemFilter<T>> classFilters = this.filters.get(filterClass);
+        if (classFilters == null) {
+            classFilters = new ArrayList<ItemFilter<T>>();
+            this.filters.put(filterClass, classFilters);
+        }
+        if (classFilters.size() > 0) {
+            //if filter with the same class already exists, try to merge if allowed
+            //NOTE: can always use first filter for these checks since if
+            //merge is supported, only one will ever exist
+            ItemFilter<T> existingFilter = classFilters.get(0);            
+            if (existingFilter.merge(filter)) {
+                //if new filter merged with existing filter, just update layout
+                this.revalidate();
+                return;
+            }
+        }
+        classFilters.add(filter);
+        this.add(filter.getPanel());
         this.revalidate();
     }
     
+    @SuppressWarnings("unchecked")
     public void removeFilter(ItemFilter<T> filter) {
-        this.filters.remove(filter.getType());
-        this.remove(filter);
-        this.revalidate();
+        final Class<? extends ItemFilter<T>> filterClass = (Class<? extends ItemFilter<T>>) filter.getClass();
+        final List<ItemFilter<T>> classFilters = this.filters.get(filterClass);
+        if (classFilters != null && classFilters.remove(filter)) {
+            if (classFilters.size() == 0) {
+                this.filters.remove(filterClass);
+            }
+            this.remove(filter.getPanel());
+            this.revalidate();
+        }
     }
     
     public void buildFilterPredicate() {

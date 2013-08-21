@@ -38,6 +38,7 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
@@ -86,9 +87,11 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         commanderPool = ItemPool.createFrom(CardDb.instance().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
         normalPool = ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class);
         
-        final ItemManager<PaperCard> catalogManager = new ItemManager<PaperCard>(PaperCard.class, VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), true);
-        final ItemManager<PaperCard> deckManager = new ItemManager<PaperCard>(PaperCard.class, VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), true);
+        boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 
+        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), wantUnique);
+        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), wantUnique);
+        
         VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
         VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
 
