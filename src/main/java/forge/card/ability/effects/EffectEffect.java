@@ -188,11 +188,6 @@ public class EffectEffect extends SpellAbilityEffect {
             eff.setChosenColor(hostCard.getChosenColor());
         }
 
-        // Remember created effect
-        if (sa.hasParam("RememberEffect")) {
-            game.getCardState(hostCard).addRemembered(eff);
-        }
-
         // Duration
         final String duration = sa.getParam("Duration");
         if ((duration == null) || !duration.equals("Permanent")) {
