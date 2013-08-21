@@ -19,12 +19,14 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
+import forge.card.ability.effects.FlipCoinEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostDraw;
 import forge.card.cost.CostExile;
+import forge.card.cost.CostFlipCoin;
 import forge.card.cost.CostGainControl;
 import forge.card.cost.CostGainLife;
 import forge.card.cost.CostMill;
@@ -374,7 +376,17 @@ public class HumanPlay {
                 List<Card> listmill = p.getCardsIn(ZoneType.Library, amount);
                 ((CostMill) part).executePayment(sourceAbility, listmill);
             }
-    
+
+            else if (part instanceof CostFlipCoin) {
+                final int amount = getAmountFromPart(part, source, sourceAbility);
+                if (!GuiDialog.confirm(source, "Do you want to flip " + amount + " coin(s)?" + orString))
+                    return false;
+                final int n = FlipCoinEffect.getFilpMultiplier(p);
+                for (int i = 0; i < amount; i++) {
+                    FlipCoinEffect.flipCoinCall(p, sourceAbility, n);
+                }
+            }
+
             else if (part instanceof CostDamage) {
                 int amount = getAmountFromPartX(part, source, sourceAbility);
                 if (!p.canPayLife(amount))

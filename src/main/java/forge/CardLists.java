@@ -289,7 +289,7 @@ public class CardLists {
      * @return the total power.
      */
     public static int getTotalPower(Iterable<Card> cardList) {
-        int total =0;
+        int total = 0;
         for (final Card crd : cardList) {
             total += crd.getNetAttack();
         }

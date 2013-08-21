@@ -5832,6 +5832,7 @@ res/cardsfolder/k/karoo.txt svneol=native#text/plain
 res/cardsfolder/k/karoo_meerkat.txt svneol=native#text/plain
 res/cardsfolder/k/karplusan_forest.txt svneol=native#text/plain
 res/cardsfolder/k/karplusan_giant.txt svneol=native#text/plain
+res/cardsfolder/k/karplusan_minotaur.txt -text
 res/cardsfolder/k/karplusan_strider.txt svneol=native#text/plain
 res/cardsfolder/k/karplusan_wolverine.txt svneol=native#text/plain
 res/cardsfolder/k/karplusan_yeti.txt svneol=native#text/plain
@@ -14510,6 +14511,7 @@ src/main/java/forge/card/cost/CostDraw.java -text
 src/main/java/forge/card/cost/CostExile.java -text
 src/main/java/forge/card/cost/CostExileAndPay.java -text
 src/main/java/forge/card/cost/CostExiledMoveToGrave.java -text
+src/main/java/forge/card/cost/CostFlipCoin.java -text
 src/main/java/forge/card/cost/CostGainControl.java -text
 src/main/java/forge/card/cost/CostGainLife.java -text
 src/main/java/forge/card/cost/CostMill.java -text

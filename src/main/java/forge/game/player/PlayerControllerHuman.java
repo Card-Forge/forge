@@ -719,6 +719,9 @@ public class PlayerControllerHuman extends PlayerController {
 
     // These are not much related to PlayerController
     private String formatNotificationMessage(SpellAbility sa, ITargetable target, String value) {
+        if (sa.getApi() == null) {
+            return ("Result: " + value);
+        }
         switch(sa.getApi()) {
             case ChooseNumber:
                 final boolean random = sa.hasParam("Random");
