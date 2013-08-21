@@ -20,10 +20,12 @@ package forge.card.cost;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -40,7 +42,7 @@ import forge.gui.input.InputSelectCardsFromList;
  */
 public class CostReveal extends CostPartWithList {
     // Reveal<Num/Type/TypeDescription>
-
+    
     /**
      * Instantiates a new cost reveal.
      * 
@@ -83,6 +85,22 @@ public class CostReveal extends CostPartWithList {
             }
         } else if (this.getType().equals("Hand")) {
             return true;
+        } else if (this.getType().equals("SameColor")) {
+            if (amount == null) {
+                return false;
+            } else {
+                for (final Card card : handList) {
+                    if (CardLists.filter(handList, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return c.sharesColorWith(card);
+                        }
+                    }).size() >= amount) {
+                        return true;
+                    }
+                }
+                return false;
+            }
         } else {
             if (ability.isSpell()) {
                 handList.remove(source); // can't pay for itself
@@ -117,6 +135,10 @@ public class CostReveal extends CostPartWithList {
         if (this.getType().equals("Hand"))
             return new PaymentDecision(new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand)));
 
+        if (this.getType().equals("SameColor")) {
+            return null;
+        }
+            
         hand = CardLists.getValidCards(hand, type.split(";"), ai, source);
         Integer c = this.convertAmount();
         if (c == null) {
@@ -152,6 +174,37 @@ public class CostReveal extends CostPartWithList {
             for(Card c : activator.getCardsIn(ZoneType.Hand))
                 executePayment(ability, c);
             return true;
+        } else if (this.getType().equals("SameColor")) {
+            Integer num = this.convertAmount();
+            List<Card> handList = activator.getCardsIn(ZoneType.Hand);
+            final List<Card> handList2 = handList;
+            handList = CardLists.filter(handList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    for (Card card : handList2) {
+                        if (!card.equals(c) && card.sharesColorWith(c)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+            if (num == 0) return true;
+            List<Card> revealed = new ArrayList<Card>();
+            while (num > 0) {
+                InputSelectCards inp = new InputSelectCardsFromList(1, 1, handList);
+                inp.setMessage("Select one of cards to reveal. Already chosen:" + revealed);
+                inp.setCancelAllowed(true);
+                Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                if (inp.hasCancelled())
+                    return false;
+                final Card first = inp.getSelected().get(0);
+                revealed.add(first);
+                handList = CardLists.filter(handList, CardPredicates.sharesColorWith(first));
+                handList.remove(first);
+                num--;
+            }
+            return executePayment(ability, revealed);
         } else {
             Integer num = this.convertAmount();
 
@@ -193,6 +246,8 @@ public class CostReveal extends CostPartWithList {
             sb.append(this.getType());
         } else if (this.getType().equals("Hand")) {
             return ("Reveal you hand");
+        } else if (this.getType().equals("SameColor")) {
+            return ("Reveal " + i + " cards from your hand that share a color");
         } else {
             final StringBuilder desc = new StringBuilder();
 
