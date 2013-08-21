@@ -101,6 +101,7 @@ public class CardFactory {
             out.setType(in.getType());
             out.setBaseAttack(in.getBaseAttack());
             out.setBaseDefense(in.getBaseDefense());
+            out.setToken(true);
 
             CardFactoryUtil.addAbilityFactoryAbilities(out);
             for (String s : out.getStaticAbilityStrings()) {
