@@ -231,7 +231,10 @@ public enum FControl implements KeyEventDispatcher {
     private void createMenuBar() {
         this.menuBar = new FMenuBar(Singletons.getView().getFrame());
         this.menuBar.setVisible(MenuUtil.isMenuBarVisible());
-        this.menuBar.setStatusText("F1 : hide menu");
+    }
+
+    public FMenuBar getMenuBar() {
+        return this.menuBar;
     }
 
     /**
@@ -263,6 +266,7 @@ public enum FControl implements KeyEventDispatcher {
 
         case MATCH_SCREEN:
             VMatchUI.SINGLETON_INSTANCE.populate();
+            CMatchUI.SINGLETON_INSTANCE.initialize();
             FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
             showMatchBackgroundImage();
             Singletons.getView().getFrame().addWindowListener(waConcede);
