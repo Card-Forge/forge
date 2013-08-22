@@ -18,14 +18,18 @@
 package forge.control;
 
 import java.awt.Component;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
@@ -65,6 +69,7 @@ import forge.gui.menubar.MenuUtil;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
 import forge.properties.ForgeLookAndFeel;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -81,9 +86,9 @@ import forge.view.FView;
  * between various display states in that JFrame. Controllers are instantiated
  * separately by each state's top level view class.
  */
-public enum FControl {
-    instance; 
-    
+public enum FControl implements KeyEventDispatcher {
+    instance;
+
     private FMenuBar menuBar;
     private List<Shortcut> shortcuts;
     private JLayeredPane display;
@@ -123,8 +128,8 @@ public enum FControl {
                 System.exit(0);
             }
         };
-        
-        
+
+
 
         // "Close" button override during match
         this.waConcede = new WindowAdapter() {
@@ -152,34 +157,34 @@ public enum FControl {
             }
         };
 
-         this.waLeaveEditor = new WindowAdapter() {
-             @Override
-             public void windowClosing(final WindowEvent ev) {
-                 Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        this.waLeaveEditor = new WindowAdapter() {
+            @Override
+            public void windowClosing(final WindowEvent ev) {
+                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-                 if (CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().exit()) {
-                     changeState(Screens.HOME_SCREEN);
-                 }
-             }
-         };
+                if (CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().exit()) {
+                    changeState(Screens.HOME_SCREEN);
+                }
+            }
+        };
     }
 
-    /** After view and model have been initialized, control can start. 
+    /** After view and model have been initialized, control can start.
      * @param isHeadlessMode */
     public void initialize() {
         // Preloads skin components (using progress bar).
         FSkin.loadFull();
-        
+
         // This must be done here or at least between the skin being loaded
         // and any GUI controls being created.
-        FSkin.setProgessBarMessage("Setting look and feel...");        
+        FSkin.setProgessBarMessage("Setting look and feel...");
         setForgeLookAndFeel();
-        
+
         createMenuBar();
-                
+
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
-        
+
         FSkin.setProgessBarMessage("About to load current quest.");
         // Preload quest data if present
         final File dirQuests = new File(NewConstants.QUEST_SAVE_DIR);
@@ -196,7 +201,7 @@ public enum FControl {
                 sizeChildren();
                 SLayoutIO.saveWindowLayout();
             }
-           
+
             @Override
             public void componentMoved(final ComponentEvent e) {
                 SLayoutIO.saveWindowLayout();
@@ -206,21 +211,28 @@ public enum FControl {
         FView.SINGLETON_INSTANCE.getLpnDocument().addMouseListener(SOverflowUtil.getHideOverflowListener());
         FView.SINGLETON_INSTANCE.getLpnDocument().addComponentListener(SResizingUtil.getWindowResizeListener());
 
+        setGlobalKeyboardHandler();
+
         FSkin.setProgessBarMessage("Opening main window...");
         SwingUtilities.invokeLater(new Runnable() { @Override
             public void run() { Singletons.getView().initialize(); } });
     }
-    
+
+    private void setGlobalKeyboardHandler() {
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(this);
+    }
+
     private void setForgeLookAndFeel() {
         ForgeLookAndFeel laf = new ForgeLookAndFeel();
-        laf.setForgeLookAndFeel(Singletons.getView().getFrame());        
+        laf.setForgeLookAndFeel(Singletons.getView().getFrame());
     }
-    
+
     private void createMenuBar() {
-        if (MenuUtil.isMenuBarVisible()) {
-            this.menuBar = new FMenuBar(Singletons.getView().getFrame());
-        }
-    }    
+        this.menuBar = new FMenuBar(Singletons.getView().getFrame());
+        this.menuBar.setVisible(MenuUtil.isMenuBarVisible());
+        this.menuBar.setStatusText("F1 : hide menu");
+    }
 
     /**
      * Switches between display states in top level JFrame.
@@ -240,58 +252,58 @@ public enum FControl {
 
         // Fire up new state
         switch (screen) {
-            case HOME_SCREEN:
-                SOverlayUtils.hideTargetingOverlay();
-                VHomeUI.SINGLETON_INSTANCE.populate();
-                CHomeUI.SINGLETON_INSTANCE.initialize();
-                FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
-                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
-                Singletons.getView().getFrame().addWindowListener(waDefault);
-                break;
+        case HOME_SCREEN:
+            SOverlayUtils.hideTargetingOverlay();
+            VHomeUI.SINGLETON_INSTANCE.populate();
+            CHomeUI.SINGLETON_INSTANCE.initialize();
+            FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
+            Singletons.getView().getFrame().addWindowListener(waDefault);
+            break;
 
-            case MATCH_SCREEN:
-                VMatchUI.SINGLETON_INSTANCE.populate();
-                FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
-                showMatchBackgroundImage();
-                Singletons.getView().getFrame().addWindowListener(waConcede);
-                SOverlayUtils.showTargetingOverlay();
-                break;
+        case MATCH_SCREEN:
+            VMatchUI.SINGLETON_INSTANCE.populate();
+            FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
+            showMatchBackgroundImage();
+            Singletons.getView().getFrame().addWindowListener(waConcede);
+            SOverlayUtils.showTargetingOverlay();
+            break;
 
-            case DECK_EDITOR_CONSTRUCTED:
-            case DECK_EDITOR_LIMITED:
-            case DECK_EDITOR_QUEST:
-            case QUEST_CARD_SHOP:
-            case DRAFTING_PROCESS:
-                SOverlayUtils.hideTargetingOverlay();
-                VDeckEditorUI.SINGLETON_INSTANCE.populate();
-                FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
-                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
-                Singletons.getView().getFrame().addWindowListener(waLeaveEditor);
-                break;
+        case DECK_EDITOR_CONSTRUCTED:
+        case DECK_EDITOR_LIMITED:
+        case DECK_EDITOR_QUEST:
+        case QUEST_CARD_SHOP:
+        case DRAFTING_PROCESS:
+            SOverlayUtils.hideTargetingOverlay();
+            VDeckEditorUI.SINGLETON_INSTANCE.populate();
+            FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
+            Singletons.getView().getFrame().addWindowListener(waLeaveEditor);
+            break;
 
-            case QUEST_BAZAAR:
-                SOverlayUtils.hideTargetingOverlay();
-                display.add(Singletons.getView().getViewBazaar(), JLayeredPane.DEFAULT_LAYER);
-                FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(false);
-                sizeChildren();
-                Singletons.getView().getFrame().addWindowListener(waLeaveBazaar);
-                break;
+        case QUEST_BAZAAR:
+            SOverlayUtils.hideTargetingOverlay();
+            display.add(Singletons.getView().getViewBazaar(), JLayeredPane.DEFAULT_LAYER);
+            FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(false);
+            sizeChildren();
+            Singletons.getView().getFrame().addWindowListener(waLeaveBazaar);
+            break;
 
-            default:
-                throw new RuntimeException("unhandled screen: " + screen);
+        default:
+            throw new RuntimeException("unhandled screen: " + screen);
         }
     }
-    
+
     private void showMatchBackgroundImage() {
         if (isMatchBackgroundImageVisible()) {
-            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));                    
-        }        
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
+        }
     }
-    
+
     private boolean isMatchBackgroundImageVisible() {
         return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE);
     }
-    
+
     public void changeStateAutoFixLayout(Screens newState, String stateName)  {
         try {
             changeState(newState);
@@ -304,7 +316,7 @@ public enum FControl {
         }
     }
 
-    /** 
+    /**
      * Returns the int reflecting the current state of the top level frame
      * (see field definitions and class methods for details).
      * 
@@ -342,20 +354,20 @@ public enum FControl {
     }
 
 
-    public Player getCurrentPlayer() { 
+    public Player getCurrentPlayer() {
         // try current priority
         Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
-        if( null != currentPriority && currentPriority.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() ) 
+        if( null != currentPriority && currentPriority.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
             return currentPriority;
-        
+
         // otherwise find just any player, belonging to this lobbyplayer
         for(Player p : game.getPlayers())
             if(p.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
                 return p;
-        
+
         return null;
     }
-    
+
     public boolean mayShowCard(Card c) {
         return game == null || !gameHasHumanPlayer || c.canBeShownTo(getCurrentPlayer());
     }
@@ -374,7 +386,7 @@ public enum FControl {
     public Game getObservedGame() {
         return game;
     }
-    
+
     public final void stopGame() {
         List<Player> pp = new ArrayList<Player>();
         for(Player p : game.getPlayers()) {
@@ -382,17 +394,17 @@ public enum FControl {
                 pp.add(p);
         }
         boolean hasHuman = !pp.isEmpty();
-        
-        if ( pp.isEmpty() ) 
+
+        if ( pp.isEmpty() )
             pp.addAll(game.getPlayers()); // no human? then all players surrender!
 
         for(Player p: pp)
             p.concede();
-        
-        Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
-        boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer(); 
 
-        if ( hasHuman && humanHasPriority ) 
+        Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
+        boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer();
+
+        if ( hasHuman && humanHasPriority )
             game.getAction().checkGameOverCondition();
         else
             game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
@@ -405,19 +417,19 @@ public enum FControl {
         return inputQueue;
     }
 
-    
+
     public final void startGameWithUi(Match match) {
         Game newGame = match.createGame();
         attachToGame(newGame);
         match.startGame(newGame, null);
     }
-    
+
     private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler(this);
     private final FControlGamePlayback playbackControl = new FControlGamePlayback(this);
     private void attachToGame(Game game0) {
         // TODO: Detach from other game we might be looking at
-        
-        
+
+
         if ( game0.getType() == GameType.Quest) {
             QuestController qc = Singletons.getModel().getQuest();
             // Reset new list when the Match round starts, not when each game starts
@@ -426,30 +438,30 @@ public enum FControl {
             }
             game0.subscribeToEvents(qc); // this one listens to player's mulligans ATM
         }
-        
+
         inputQueue = new InputQueue();
-        
+
         this.game = game0;
         game.subscribeToEvents(Singletons.getControl().getSoundSystem());
-        
+
         LobbyPlayer humanLobbyPlayer = FServer.instance.getLobby().getGuiPlayer();
         // The UI controls should use these game data as models
         CMatchUI.SINGLETON_INSTANCE.initMatch(game.getRegisteredPlayers(), humanLobbyPlayer);
         CDock.SINGLETON_INSTANCE.setModel(game, humanLobbyPlayer);
         CStack.SINGLETON_INSTANCE.setModel(game.getStack(), humanLobbyPlayer);
         CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
-    
-    
+
+
         Singletons.getModel().getPreferences().actuateMatchPreferences();
-        
+
         changeStateAutoFixLayout(Screens.MATCH_SCREEN, "match");
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
-    
+
         CMessage.SINGLETON_INSTANCE.getInputControl().setGame(game);
-    
+
         // Listen to DuelOutcome event to show ViewWinLose
         game.subscribeToEvents(fcVisitor);
-        
+
         // Add playback controls to match if needed
         gameHasHumanPlayer = false;
         for(Player p :  game.getPlayers()) {
@@ -462,15 +474,43 @@ public enum FControl {
         }
 
         VAntes.SINGLETON_INSTANCE.setModel(game.getRegisteredPlayers());
-    
+
         for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
             field.getDetailsPanel().getLblLibrary().setHoverable(Preferences.DEV_MODE);
         }
-    
+
         // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
         //Set Field shown to current player.
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(game.getPlayers().get(0));
         SDisplayUtil.showTab(nextField);
+    }
+
+    /* (non-Javadoc)
+     * @see java.awt.KeyEventDispatcher#dispatchKeyEvent(java.awt.event.KeyEvent)
+     */
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent e) {
+        // Toggle menu bar visibility using F1 key.
+        if (e.getKeyCode() == KeyEvent.VK_F1 && e.getID() == KeyEvent.KEY_RELEASED) {
+            toggleMenuBarVisibility();
+            return true;
+        } else {
+            //Allow the event to be redispatched
+            return false;
+        }
+    }
+
+    private void toggleMenuBarVisibility() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ForgePreferences prefs = Singletons.getModel().getPreferences();
+                boolean isHidden = !prefs.getPrefBoolean(FPref.UI_HIDE_MENUBAR);
+                menuBar.setVisible(!isHidden);
+                prefs.setPref(FPref.UI_HIDE_MENUBAR, String.valueOf(isHidden));
+                prefs.save();
+            }
+        });
     }
 }
 
