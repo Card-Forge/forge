@@ -42,6 +42,7 @@ public final class LayoutMenu {
 
     private static JMenu getMenu_ViewOptions() {
         JMenu menu = new JMenu("View");
+        menu.add(getMenuItem_ShowTabs());
         menu.add(getMenuItem_ShowBackgroundImage());
         return menu;
     }
@@ -77,6 +78,22 @@ public final class LayoutMenu {
         };
     }
 
+    private static JMenuItem getMenuItem_ShowTabs() {
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Panel Tabs");
+        menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_T));
+        menuItem.setState(!prefs.getPrefBoolean(FPref.UI_HIDE_GAME_TABS));
+        menuItem.addActionListener(getShowTabsAction(menuItem));
+        return menuItem;
+    }
+    private static ActionListener getShowTabsAction(final JCheckBoxMenuItem menuItem) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                prefs.setPref(FPref.UI_HIDE_GAME_TABS, !menuItem.getState());
+                controller.revertLayout();
+            }
+        };
+    }
     private static JMenuItem getMenuItem_SaveLayout() {
         JMenuItem menuItem = new JMenuItem("Save Current Layout");
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_SAVELAYOUT) : null));
