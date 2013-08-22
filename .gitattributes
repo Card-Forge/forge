@@ -5389,6 +5389,7 @@ res/cardsfolder/i/imagecrafter.txt -text
 res/cardsfolder/i/imaginary_pet.txt svneol=native#text/plain
 res/cardsfolder/i/imi_statue.txt svneol=native#text/plain
 res/cardsfolder/i/immaculate_magistrate.txt svneol=native#text/plain
+res/cardsfolder/i/immersturm.txt -text
 res/cardsfolder/i/immerwolf.txt -text
 res/cardsfolder/i/immobilizing_ink.txt svneol=native#text/plain
 res/cardsfolder/i/immolating_souleater.txt svneol=native#text/plain
@@ -7480,6 +7481,7 @@ res/cardsfolder/n/necropouncer.txt svneol=native#text/plain
 res/cardsfolder/n/necrosavant.txt svneol=native#text/plain
 res/cardsfolder/n/necroskitter.txt svneol=native#text/plain
 res/cardsfolder/n/necrotic_ooze.txt -text
+res/cardsfolder/n/necrotic_plague.txt -text
 res/cardsfolder/n/necrotic_sliver.txt svneol=native#text/plain
 res/cardsfolder/n/nectar_faerie.txt -text
 res/cardsfolder/n/need_for_speed.txt svneol=native#text/plain
@@ -8610,6 +8612,7 @@ res/cardsfolder/q/quicksand.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_amulet.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_behemoth.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_dagger.txt svneol=native#text/plain
+res/cardsfolder/q/quicksilver_fountain.txt -text
 res/cardsfolder/q/quicksilver_gargantuan.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_geyser.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_sea.txt -text

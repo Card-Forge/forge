@@ -256,7 +256,7 @@ public class Cost {
         }
 
         if (parse.startsWith("FlipCoin<")) {
-            // FlipCoin<NumCards>
+            // FlipCoin<NumCoins>
             final String[] splitStr = abCostParse(parse, 1);
             return new CostFlipCoin(splitStr[0]);
         }
