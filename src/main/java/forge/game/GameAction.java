@@ -1366,12 +1366,12 @@ public class GameAction {
 
         // System.out.println("Card " + c.getName() +
         // " is getting sent to GY, and this turn it got damaged by: ");
-        for (final Card crd : c.getReceivedDamageFromThisTurn().keySet()) {
+        /*for (final Card crd : c.getReceivedDamageFromThisTurn().keySet()) {
             if (c.getReceivedDamageFromThisTurn().get(crd) > 0) {
                 // System.out.println(crd.getName() );
                 GameActionUtil.executeVampiricEffects(crd);
             }
-        }
+        }*/
 
         if (persist) {
             final Card persistCard = newCard;
