@@ -32,7 +32,7 @@ public class QuestDeckMap extends StorageBase<Deck> {
      * Instantiates a new quest deck map.
      */
     public QuestDeckMap(Map<String, Deck> in) {
-        super(in);
+        super("Quest decks", in);
     }
 
 

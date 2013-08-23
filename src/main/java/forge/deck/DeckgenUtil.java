@@ -158,14 +158,14 @@ public class DeckgenUtil {
     public static Deck getRandomCustomDeck() {
         final IStorage<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
         final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
-        final String name = allDecks.getNames().toArray(new String[0])[rand];
+        final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name);
     }
 
     public static Deck getRandomPreconDeck() {
         final IStorage<PreconDeck> allDecks = QuestController.getPrecons();
         final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
-        final String name = allDecks.getNames().toArray(new String[0])[rand];
+        final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name).getDeck();
     }
     
@@ -224,21 +224,10 @@ public class DeckgenUtil {
     /** Shows decklist dialog for a given deck.
      * @param lst0 {@link javax.swing.JList}
      */
-    public static void showDecklist(final JList<String> lst0) {
+    public static void showDecklist(final Deck deck) {
         
-        if (lst0.getSelectedValue() == null) { return; }
+        if (deck == null) { return; }
         
-        final String deckName = lst0.getSelectedValue().toString();
-        final Deck deck;
-
-        // Retrieve from custom or quest deck maps
-        if (lst0.getName().equals(DeckTypes.CUSTOM.toString())) 
-            deck = Singletons.getModel().getDecks().getConstructed().get(deckName);
-        else if (lst0.getName().equals(DeckTypes.PRECON.toString()))
-            deck = QuestController.getPrecons().get(deckName).getDeck();
-         else 
-            deck = getQuestEvent(deckName).getEventDeck();
-
         // Dump into map and display.
         final String nl = System.getProperty("line.separator");
         final StringBuilder deckList = new StringBuilder();

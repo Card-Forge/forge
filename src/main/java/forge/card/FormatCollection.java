@@ -37,7 +37,7 @@ public final class FormatCollection extends StorageBase<GameFormat> {
      * @param io
      */
     public FormatCollection(String filename) {
-        super(new FormatReader(filename));
+        super("Format collections", new FormatReader(filename));
     }
 
     /**

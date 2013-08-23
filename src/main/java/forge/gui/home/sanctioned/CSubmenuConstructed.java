@@ -98,8 +98,8 @@ public enum CSubmenuConstructed implements ICDoc {
      * @param gameType
      */
     private void startGame(final GameType gameType) {
-        RegisteredPlayer pscLeft = view.getDcLeft().getDeck();
-        RegisteredPlayer pscRight = view.getDcRight().getDeck();
+        RegisteredPlayer pscLeft = view.getDcLeft().getPlayer();
+        RegisteredPlayer pscRight = view.getDcRight().getPlayer();
         
         if (pscLeft == null || pscRight == null) {
             JOptionPane.showMessageDialog(null, "Please specify an AI deck and Player deck first.");

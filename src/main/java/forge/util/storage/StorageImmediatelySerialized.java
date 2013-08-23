@@ -17,9 +17,10 @@
  */
 package forge.util.storage;
 
+import java.io.File;
+
 import com.google.common.base.Function;
 
-import forge.util.IItemReader;
 import forge.util.IItemSerializer;
 
 //reads and writeDeck Deck objects
@@ -37,10 +38,10 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
     private final IItemSerializer<T> serializer;
     private final IStorage<IStorage<T>> subfolders;
 
-    private final Function<IItemReader<T>, IStorage<T>> nestedFactory = new Function<IItemReader<T>, IStorage<T>>() {
+    private final Function<File, IStorage<T>> nestedFactory = new Function<File, IStorage<T>>() {
         @Override
-        public IStorage<T> apply(IItemReader<T> io) {
-            return new StorageImmediatelySerialized<T>((IItemSerializer<T>) io, true);
+        public IStorage<T> apply(File file) {
+            return new StorageImmediatelySerialized<T>(file.getName(), (IItemSerializer<T>) serializer.getReaderForFolder(file), true);
         }
     };
     
@@ -51,15 +52,15 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
      *
      * @param io the io
      */
-    public StorageImmediatelySerialized(final IItemSerializer<T> io) {
-        this(io, false);
+    public StorageImmediatelySerialized(String name, final IItemSerializer<T> io) {
+        this(name, io, false);
     }
     
     
-    public StorageImmediatelySerialized(final IItemSerializer<T> io, boolean withSubFolders) {
-        super(io);
+    public StorageImmediatelySerialized(String name, final IItemSerializer<T> io, boolean withSubFolders) {
+        super(name, io);
         this.serializer = io;
-        subfolders = withSubFolders ? new StorageNestedFolders<T>(io, nestedFactory) : null;
+        subfolders = withSubFolders ? new StorageNestedFolders<T>(io.getDirectory(), io.getSubFolders(), nestedFactory) : null;
     }
 
     /*

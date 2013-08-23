@@ -160,13 +160,13 @@ public class FModel {
 
  
         this.formats = new FormatCollection("res/blockdata/formats.txt");
-        this.boosters = new StorageBase<SealedProductTemplate>(editions.getBoosterGenerator());
-        this.specialBoosters = new StorageBase<SealedProductTemplate>(new SealedProductTemplate.Reader("res/blockdata/boosters-special.txt"));
-        this.tournaments = new StorageBase<SealedProductTemplate>(new SealedProductTemplate.Reader("res/blockdata/starters.txt"));
-        this.fatPacks = new StorageBase<FatPackTemplate>(new FatPackTemplate.Reader("res/blockdata/fatpacks.txt"));
-        this.blocks = new StorageBase<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
-        this.fantasyBlocks = new StorageBase<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
-        this.worlds = new StorageBase<QuestWorld>(new QuestWorld.Reader("res/quest/world/worlds.txt"));
+        this.boosters = new StorageBase<SealedProductTemplate>("Boosters", editions.getBoosterGenerator());
+        this.specialBoosters = new StorageBase<SealedProductTemplate>("Special boosters", new SealedProductTemplate.Reader("res/blockdata/boosters-special.txt"));
+        this.tournaments = new StorageBase<SealedProductTemplate>("Starter sets", new SealedProductTemplate.Reader("res/blockdata/starters.txt"));
+        this.fatPacks = new StorageBase<FatPackTemplate>("Fat packs", new FatPackTemplate.Reader("res/blockdata/fatpacks.txt"));
+        this.blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader("res/blockdata/blocks.txt", editions));
+        this.fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
+        this.worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader("res/quest/world/worlds.txt"));
         // TODO - there's got to be a better place for this...oblivion?
         Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
@@ -178,7 +178,7 @@ public class FModel {
         this.decks = new CardCollections();
         this.quest = new QuestController();
         
-        this.printSheets = new StorageBase<PrintSheet>(new PrintSheet.Reader("res/blockdata/printsheets.txt"));
+        this.printSheets = new StorageBase<PrintSheet>("Special print runs", new PrintSheet.Reader("res/blockdata/printsheets.txt"));
         
         // Preload AI profiles
         AiProfileUtil.loadAllProfiles();

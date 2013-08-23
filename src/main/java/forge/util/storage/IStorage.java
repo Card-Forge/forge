@@ -21,19 +21,21 @@ import java.util.Collection;
 
 import com.google.common.base.Predicate;
 
+import forge.util.IHasName;
+
 /**
  * TODO: Write javadoc for this type.
  *
  * @param <T> the generic type
  */
-public interface IStorage<T> extends Iterable<T> {
+public interface IStorage<T> extends Iterable<T>, IHasName {
 
     T get(final String name);
     
     T find(final Predicate<T> condition);
     // todo: find(final Predicate<T> condition, boolean recursive).
 
-    Collection<String> getNames();
+    Collection<String> getItemNames();
 
     boolean contains(final String name);
 

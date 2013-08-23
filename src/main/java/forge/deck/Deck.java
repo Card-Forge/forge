@@ -77,13 +77,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         getOrCreate(DeckSection.Main);
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.InventoryItem#getItemType()
-     */
-    @Override
-    public String getItemType() {
-        return "Deck";
-    }
         
     @Override
     public int hashCode() {

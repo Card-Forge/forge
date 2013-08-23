@@ -46,6 +46,14 @@ import forge.error.BugReporter;
  */
 public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
 
+    /**
+     * @return the directory
+     */
+    public File getDirectory() {
+        return directory;
+    }
+
+
     protected final File directory;
 
     /**

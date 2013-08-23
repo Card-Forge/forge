@@ -155,7 +155,7 @@ public class DeckController<T extends DeckBase> {
      * @return the saved names
      */
     public ArrayList<String> getSavedNames() {
-        return new ArrayList<String>(this.folder.getNames());
+        return new ArrayList<String>(this.folder.getItemNames());
     }
 
     /*

@@ -176,7 +176,7 @@ public class QuestController {
      */
     public static IStorage<PreconDeck> getPrecons() {
         if (null == preconManager) {
-            preconManager = new StorageBase<PreconDeck>(new PreconReader(new File(NewConstants.QUEST_PRECON_DIR)));
+            preconManager = new StorageBase<PreconDeck>("Quest shop decks", new PreconReader(new File(NewConstants.QUEST_PRECON_DIR)));
         }
 
         return QuestController.preconManager;
@@ -391,7 +391,7 @@ public class QuestController {
     public void resetChallengesManager() {
         QuestWorld world = getWorld();
         String path = world == null || world.getChallengesDir() == null ? NewConstants.DEFAULT_CHALLENGES_DIR : "res/quest/world/" + world.getChallengesDir();
-        this.allChallenges = new StorageBase<QuestEventChallenge>(new QuestChallengeReader(new File(path)));
+        this.allChallenges = new StorageBase<QuestEventChallenge>("Quest Challenges", new QuestChallengeReader(new File(path)));
     }
 
     /**

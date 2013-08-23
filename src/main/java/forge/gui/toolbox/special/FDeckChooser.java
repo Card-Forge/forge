@@ -29,11 +29,11 @@ import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.JXButtonPanel;
-import forge.item.InventoryItem;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
+import forge.util.IHasName;
 import forge.util.storage.IStorage;
 
 @SuppressWarnings("serial")
@@ -67,7 +67,7 @@ public class FDeckChooser extends JPanel {
             if (MouseEvent.BUTTON1 == e.getButton() && e.getClickCount() == 2) {
                 final JList<String> src = ((JList<String>) e.getSource());
                 if (getRadColors().isSelected() || getRadThemes().isSelected()) { return; }
-                DeckgenUtil.showDecklist(src);
+                DeckgenUtil.showDecklist(getDeck());
             }
         }
     };
@@ -209,9 +209,9 @@ public class FDeckChooser extends JPanel {
         lst.setSelectedIndex(0);
     }
 
-    private <T extends InventoryItem> void addDecksRecursive(IStorage<T> node, List<String> customNames, String namePrefix ) {
+    private <T extends IHasName> void addDecksRecursive(IStorage<T> node, List<String> customNames, String namePrefix ) {
         String path = namePrefix == null ? "" : namePrefix + " / ";
-        for (final String fn : node.getFolders().getNames() )
+        for (final String fn : node.getFolders().getItemNames() )
         {
             IStorage<T> f = node.getFolders().get(fn);
             addDecksRecursive(f, customNames, path + fn);
@@ -269,18 +269,34 @@ public class FDeckChooser extends JPanel {
         lst.setSelectedIndex(0);
     }
 
-    /** Generates deck from current list selection(s). */
-    public RegisteredPlayer getDeck() {
-
-        
+    public Deck getDeck() {
         JList<String> lst0 = getLstDecks();
         final List<String> selection = lst0.getSelectedValuesList();
 
         if (selection.isEmpty()) { return null; }
 
         // Special branch for quest events
-        if (lst0.getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString())) {
-            QuestEvent event = DeckgenUtil.getQuestEvent(selection.get(0)); 
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString()))
+            return DeckgenUtil.getQuestEvent(selection.get(0)).getEventDeck(); 
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection))
+            return DeckgenUtil.buildColorDeck(selection, isAi);
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.THEMES.toString()))
+            return DeckgenUtil.buildThemeDeck(selection.get(0));
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.CUSTOM.toString()))
+            return DeckgenUtil.getConstructedDeck(selection.get(0));
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.PRECON.toString())) 
+            return DeckgenUtil.getPreconDeck(selection.get(0));
+        
+        return null;
+    }
+    
+    /** Generates deck from current list selection(s). */
+    public RegisteredPlayer getPlayer() {
+        if (getLstDecks().getSelectedValuesList().isEmpty()) { return null; }
+
+        // Special branch for quest events
+        if (getLstDecks().getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString())) {
+            QuestEvent event = DeckgenUtil.getQuestEvent(getLstDecks().getSelectedValuesList().get(0)); 
             RegisteredPlayer result = new RegisteredPlayer(event.getEventDeck());
             if( event instanceof QuestEventChallenge ) {
                 result.setStartingLife(((QuestEventChallenge) event).getAiLife());
@@ -289,18 +305,7 @@ public class FDeckChooser extends JPanel {
             return result;
         }
 
-        Deck deck = null;
-        if (lst0.getName().equals(DeckgenUtil.DeckTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection)) {
-            deck = DeckgenUtil.buildColorDeck(selection, isAi);
-        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.THEMES.toString())) {
-            deck = DeckgenUtil.buildThemeDeck(selection.get(0));
-        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.CUSTOM.toString())) {
-            deck = DeckgenUtil.getConstructedDeck(selection.get(0));
-        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.PRECON.toString())) {
-            deck = DeckgenUtil.getPreconDeck(selection.get(0));
-        }
-
-        return RegisteredPlayer.fromDeck(deck);
+        return RegisteredPlayer.fromDeck(getDeck());
     }
 
 

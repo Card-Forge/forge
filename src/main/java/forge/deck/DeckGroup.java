@@ -135,13 +135,4 @@ public class DeckGroup extends DeckBase {
         }
     };
 
-    /* (non-Javadoc)
-     * @see forge.item.InventoryItem#getItemType()
-     */
-    @Override
-    public String getItemType() {
-        // TODO Auto-generated method stub
-        return "Set of limited mode decks";
-    }
-
 }

@@ -115,7 +115,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
 
 
     private void addDeck() {
-        final Deck deckToAdd = view.getLstLeft().getDeck().getOriginalDeck();
+        final Deck deckToAdd = view.getLstLeft().getPlayer().getOriginalDeck();
         if ( null == deckToAdd ) return;
         workingDecks.add(deckToAdd);
         view.getLblSave().setVisible(false);
