@@ -136,13 +136,15 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     @Override
     public void doLayout()
     {
+        int number = 0;
         LayoutHelper helper = new LayoutHelper(this);
-        /*helper.include(this.btnAddFilter, 30, FTextField.HEIGHT);
-        helper.include(this.txtSearch, 0.5f, FTextField.HEIGHT);
-        helper.newLine();
-        for (ItemFilter<T> filter : this.orderedFilters) {
+        /*for (ItemFilter<T> filter : this.orderedFilters) {
+            filter.updatePanelTitle(++number);
             helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
-        }*/
+        }
+        helper.newLine();
+        helper.include(this.btnAddFilter, 30, FTextField.HEIGHT);
+        helper.include(this.txtSearch, 0.5f, FTextField.HEIGHT);*/
         helper.fill(this.tableScroller);
     }
 
@@ -397,6 +399,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             }
         }
         classFilters.add(filter);
+        orderedFilters.add(filter);
         this.add(filter.getPanel());
         this.revalidate();
     }
@@ -409,6 +412,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             if (classFilters.size() == 0) {
                 this.filters.remove(filterClass);
             }
+            orderedFilters.remove(filter);
             this.remove(filter.getPanel());
             this.revalidate();
         }

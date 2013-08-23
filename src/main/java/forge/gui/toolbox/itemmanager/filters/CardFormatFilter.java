@@ -39,6 +39,11 @@ public class CardFormatFilter extends ListLabelFilter<PaperCard> {
     }
 
     @Override
+    protected String getTitle() {
+        return "Card Format";
+    }
+
+    @Override
     protected void buildPanel(JPanel panel) {
         
     }

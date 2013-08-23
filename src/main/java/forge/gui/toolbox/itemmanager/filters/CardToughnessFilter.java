@@ -15,6 +15,11 @@ public class CardToughnessFilter extends ValueRangeFilter<PaperCard> {
     }
 
     @Override
+    protected String getTitle() {
+        return "Card Toughness";
+    }
+
+    @Override
     protected void buildPanel(JPanel panel) {
         
     }

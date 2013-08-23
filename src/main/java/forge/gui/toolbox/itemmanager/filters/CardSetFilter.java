@@ -21,6 +21,11 @@ public class CardSetFilter extends ListLabelFilter<PaperCard> {
         super(itemManager0);
         this.sets.addAll(sets);
     }
+
+    @Override
+    protected String getTitle() {
+        return "Card Set";
+    }
     
     /**
      * Merge the given filter with this filter if possible

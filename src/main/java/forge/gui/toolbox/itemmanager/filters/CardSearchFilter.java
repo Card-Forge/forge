@@ -15,6 +15,11 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     }
 
     @Override
+    protected String getTitle() {
+        return "Card Search";
+    }
+
+    @Override
     protected void buildPanel(JPanel panel) {
 
     }
