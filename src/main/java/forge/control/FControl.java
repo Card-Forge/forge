@@ -410,8 +410,10 @@ public enum FControl implements KeyEventDispatcher {
 
         if ( hasHuman && humanHasPriority )
             game.getAction().checkGameOverCondition();
-        else
+        else {
             game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
+            inputQueue.onGameOver(false); // release any waiting input, effectively passing priority 
+        }
 
         playbackControl.onGameStopRequested();
     }

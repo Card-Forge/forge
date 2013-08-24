@@ -154,7 +154,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
     
     private final Runnable unlockGameThreadOnGameOver = new Runnable() { @Override public void run() {
-        fc.getInputQueue().onGameOver(); // this will unlock any game threads waiting for inputs to complete
+        fc.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
     } };
     
     @Override
