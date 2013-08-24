@@ -18,12 +18,15 @@
 package forge.gui.match.views;
 
 import java.awt.Font;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
+import javax.swing.text.DefaultCaret;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
@@ -54,12 +57,18 @@ public enum VMessage implements IVDoc<CMessage> {
     private final JButton btnOK = new FButton("OK");
     private final JButton btnCancel = new FButton("Cancel");
     private final JTextArea tarMessage = new JTextArea();
-    private final JLabel lblGames = new FLabel.Builder()
-            .fontSize(12).fontStyle(Font.BOLD).fontAlign(SwingConstants.CENTER).build();
+    private final JLabel lblGames;
 
     //========= Constructor
     private VMessage() {
-        lblGames.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+
+        lblGames = new FLabel.Builder()
+        .text("Game Setup")
+        .fontSize(12)
+        .fontStyle(Font.PLAIN)
+        .fontAlign(SwingConstants.CENTER)
+        .opaque()
+        .build();
 
         tarMessage.setOpaque(false);
         tarMessage.setFocusable(false);
@@ -68,6 +77,12 @@ public enum VMessage implements IVDoc<CMessage> {
         tarMessage.setWrapStyleWord(true);
         tarMessage.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarMessage.setFont(FSkin.getFont(14));
+        tarMessage.setMargin(new Insets(5, 5, 5, 5));
+
+        // Prevent scroll-bar from automatically scrolling to bottom of JTextArea.
+        DefaultCaret caret = (DefaultCaret)tarMessage.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+
     }
 
     //========== Overridden methods
@@ -77,16 +92,26 @@ public enum VMessage implements IVDoc<CMessage> {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("wrap 2, fill, insets 0 2% 5px 1%, gap 1% 0"));
 
-        parentCell.getBody().add(lblGames, "span 2 1, w 96%!, h 30px, wrap");
-        parentCell.getBody().add(tarMessage, "sx 2, gaptop 12px, h 70%, w 96%");
-        
+        JPanel container = parentCell.getBody();
+
+        // wrap   : 2 columns required for btnOk and btnCancel.
+        container.setLayout(new MigLayout("wrap 2, gap 0px!, insets 1px 1px 5px 1px"));
+        container.add(lblGames, "span 2, w 10:100%, h 22px!");
+
+        JScrollPane scrollPane = new JScrollPane(tarMessage);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setBorder(null);
+        container.add(scrollPane, "span 2, w 10:100%, h 0:100%");
+
         boolean largerButtons = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_FOR_TOUCHSCREN);
-        String constraints = largerButtons ? "w 47%, h 40%" : "w 47%, hmin 24px"; 
-        
-        parentCell.getBody().add(btnOK, constraints);
-        parentCell.getBody().add(btnCancel, constraints);
+        String constraints = largerButtons ? "w 10:50%, h 40%:40%:60px" : "w 10:50%, hmin 24px";
+        constraints += ", gaptop 4px!";
+
+        container.add(btnOK, constraints);
+        container.add(btnCancel, constraints);
+
     }
 
     /* (non-Javadoc)

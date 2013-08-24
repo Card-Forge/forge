@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+
 import javax.swing.JButton;
 
 import forge.Command;
@@ -46,7 +47,7 @@ public enum CMessage implements ICDoc {
     private InputProxy inputControl = new InputProxy();
     private Component lastFocusedButton = null;
     private VMessage view = VMessage.SINGLETON_INSTANCE;
-    
+
     private final ActionListener actCancel = new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent evt) {
@@ -59,7 +60,7 @@ public enum CMessage implements ICDoc {
             inputControl.selectButtonOK();
         }
     };
-    
+
     private final FocusListener onFocus = new FocusAdapter() {
         @Override
         public void focusGained(FocusEvent e) {
@@ -77,7 +78,7 @@ public enum CMessage implements ICDoc {
         button.removeFocusListener(onFocus);
         button.addFocusListener(onFocus);
     }
-    
+
     @Override
     public void initialize() {
         _initButton(view.getBtnCancel(), actCancel);
@@ -118,8 +119,9 @@ public enum CMessage implements ICDoc {
     public void updateText(Game game) {
         FThreads.assertExecutedByEdt(true);
         final Match match = game.getMatch();
-        final String text = String.format("%s: Game #%d of %d, turn %d", match.getGameType(), match.getPlayedGames().size() + 1, match.getGamesPerMatch(), game.getPhaseHandler().getTurn());
+        final String text = String.format("T:%d G:%d/%d [%s]", game.getPhaseHandler().getTurn(), match.getPlayedGames().size() + 1, match.getGamesPerMatch(), match.getGameType());
         view.getLblGames().setText(text);
+        view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", match.getGameType(), match.getPlayedGames().size() + 1, match.getGamesPerMatch(), game.getPhaseHandler().getTurn()));
     }
 
     @Override
