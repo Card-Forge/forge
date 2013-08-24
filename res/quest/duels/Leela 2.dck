@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Leela 2
+Title=Leela
+Difficulty=medium
+Description=UB Sunken Hope deck with Man-o'-War and Sea Gate Oracle
+Icon=Leela.jpg
+Deck Type=constructed
+[main]
+4 Underground Sea
+4 Polluted Delta
+4 Drowned Catacomb
+6 Swamp
+6 Island
+4 Sunken Hope
+1 Heartless Summoning
+4 Familiar's Ruse
+4 Chittering Rats
+4 Man-o'-War
+4 Sedraxis Alchemist
+4 Parasitic Strix
+1 Bloodhunter Bat
+1 Pierce Strider
+4 Sea Gate Oracle
+3 Phyrexian Rager
+2 Nevermaker
+[sideboard]
