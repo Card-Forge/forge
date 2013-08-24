@@ -63,7 +63,6 @@ public enum VMessage implements IVDoc<CMessage> {
     private VMessage() {
 
         lblGames = new FLabel.Builder()
-        .text("Game Setup")
         .fontSize(12)
         .fontStyle(Font.PLAIN)
         .fontAlign(SwingConstants.CENTER)
@@ -98,6 +97,7 @@ public enum VMessage implements IVDoc<CMessage> {
         // wrap   : 2 columns required for btnOk and btnCancel.
         container.setLayout(new MigLayout("wrap 2, gap 0px!, insets 1px 1px 5px 1px"));
         container.add(lblGames, "span 2, w 10:100%, h 22px!");
+        lblGames.setText("Game Setup");
 
         JScrollPane scrollPane = new JScrollPane(tarMessage);
         scrollPane.setOpaque(false);
