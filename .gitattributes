@@ -14814,6 +14814,7 @@ src/main/java/forge/gui/GuiProgressBarWindow.java svneol=native#text/plain
 src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
 src/main/java/forge/gui/InputProxy.java svneol=native#text/plain
 src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
+src/main/java/forge/gui/MouseUtil.java -text
 src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/SOverlayUtils.java -text
@@ -14958,6 +14959,7 @@ src/main/java/forge/gui/input/InputSyncronizedBase.java -text
 src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/match/CMatchUI.java -text
 src/main/java/forge/gui/match/ControlWinLose.java -text
+src/main/java/forge/gui/match/GameLogPanel.java -text
 src/main/java/forge/gui/match/GauntletWinLose.java -text
 src/main/java/forge/gui/match/LimitedWinLose.java -text
 src/main/java/forge/gui/match/QuestWinLose.java -text
