@@ -218,20 +218,14 @@ public enum CSubmenuPreferences implements ICDoc {
     
     private void initializeSkinsComboBox() {
         FPref userSetting = FPref.UI_SKIN;
-        FComboBoxPanel<String> panel = this.view.getSkinsComboBoxPanel();        
-        String[] installedSkins = getSortedListOfInstalledSkins();
-        validatePreferredSkinName(installedSkins);        
-        JComboBox<String> comboBox = createComboBox(installedSkins, userSetting);        
+        FComboBoxPanel<String> panel = this.view.getSkinsComboBoxPanel();
+        String[] installedSkins = FSkin.getSkinNamesArray(true);
+        validatePreferredSkinName(installedSkins);
+        JComboBox<String> comboBox = createComboBox(installedSkins, userSetting);
         String selectedItem = this.prefs.getPref(userSetting);
-        panel.setComboBox(comboBox, selectedItem);         
+        panel.setComboBox(comboBox, selectedItem);
     }
-    
-    private String[] getSortedListOfInstalledSkins() {
-        String[] skins = FSkin.getSkinNamesArray();
-        java.util.Arrays.sort(skins);
-        return skins;
-    }
-    
+
     private void validatePreferredSkinName(String[] installedSkins) {
         String preferredSkin = this.prefs.getPref(FPref.UI_SKIN);
         if (!Arrays.asList(installedSkins).contains(preferredSkin)) {

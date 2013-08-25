@@ -786,11 +786,14 @@ public enum FSkin {
         return mySkins;
     }
     
-    public static String[] getSkinNamesArray() {
+    public static String[] getSkinNamesArray(boolean sorted) {
         ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
         String[] prettySkinNames = new String[skinDirectoryNames.size()];
         for (int i = 0; i < skinDirectoryNames.size(); i++) {
             prettySkinNames[i] = WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' '));          
+        }
+        if (sorted) {
+            java.util.Arrays.sort(prettySkinNames);
         }
         return prettySkinNames;
     }    

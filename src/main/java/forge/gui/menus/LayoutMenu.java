@@ -5,11 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
 
 import forge.Singletons;
+import forge.control.RestartUtil;
 import forge.control.FControl.Screens;
 import forge.gui.GuiChoose;
 import forge.gui.match.controllers.CDock;
@@ -40,8 +44,9 @@ public final class LayoutMenu {
         if (currentScreen != Screens.HOME_SCREEN) {
             menu.add(getMenu_ViewOptions());
             menu.add(getMenu_FileOptions());
-            menu.addSeparator();
         }
+        menu.add(getMenu_ThemeOptions());
+        menu.addSeparator();
         menu.add(getMenuItem_SetWindowSize());
         if (currentScreen != Screens.HOME_SCREEN) {
             menu.add(getMenuItem_RevertLayout());
@@ -65,6 +70,49 @@ public final class LayoutMenu {
         return menu;
     }
 
+    private static JMenu getMenu_ThemeOptions() {
+        JMenu menu = new JMenu("Theme");
+        JRadioButtonMenuItem menuItem;
+        ButtonGroup group = new ButtonGroup();
+        String currentSkin = prefs.getPref(FPref.UI_SKIN);
+        String[] skins = FSkin.getSkinNamesArray(true);
+        for (String skin : skins) {
+            menuItem = new JRadioButtonMenuItem(skin);
+            group.add(menuItem);
+            if (skin.equals(currentSkin)) {
+                menuItem.setSelected(true);
+            }
+            menuItem.setActionCommand(skin);
+            menuItem.addActionListener(changeSkin);
+            menu.add(menuItem);
+        }
+        return menu;
+    }
+
+    private static final ActionListener changeSkin = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String skin = e.getActionCommand();
+            if (!skin.equals(prefs.getPref(FPref.UI_SKIN))) {
+                prefs.setPref(FPref.UI_SKIN, skin);
+                prefs.save();
+
+                Object[] options = {"Restart Now", "Restart Later"};
+                int reply = JOptionPane.showOptionDialog(
+                        null,
+                        "You must restart Forge for " + skin + " theme to take effect.",
+                        "Change Theme",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
+                if (reply == JOptionPane.YES_OPTION) {
+                    RestartUtil.restartApplication(null);
+                }
+            }
+        }
+    };
 
     private static JMenuItem getMenuItem_ShowBackgroundImage() {
         final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Background Image");
