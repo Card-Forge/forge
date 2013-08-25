@@ -42,8 +42,7 @@ public class DevModeMenu implements ActionListener {
         TAP_PERMANENT("Tap Permanent"),
         UNTAP_PERMANENT("Untap Permanent"),
         SET_PLAYER_LIFE("Set Player Life"),
-        DEV_CORNER("Developer's Corner"),
-        WINDOW_SIZE("Set Window Size");
+        DEV_CORNER("Developer's Corner");
 
         protected String caption;
         private DevMenuItem(String value) {
@@ -82,7 +81,6 @@ public class DevModeMenu implements ActionListener {
         menu.add(getMenuItem(DevMenuItem.UNTAP_PERMANENT));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.SET_PLAYER_LIFE));
-        menu.add(getMenuItem(DevMenuItem.WINDOW_SIZE));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.DEV_CORNER));
 
@@ -138,7 +136,6 @@ public class DevModeMenu implements ActionListener {
         case TAP_PERMANENT:     { controller.tapPermanent(); break; }
         case UNTAP_PERMANENT:   { controller.untapPermanent(); break; }
         case SET_PLAYER_LIFE:   { controller.setPlayerLife(); break; }
-        case WINDOW_SIZE:       { controller.setWindowSize(); break; }
         case DEV_CORNER:        { openDevForumInBrowser(); break; }
         }
     }

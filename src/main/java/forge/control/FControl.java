@@ -280,6 +280,7 @@ public enum FControl implements KeyEventDispatcher {
         case DRAFTING_PROCESS:
             SOverlayUtils.hideTargetingOverlay();
             VDeckEditorUI.SINGLETON_INSTANCE.populate();
+            CDeckEditorUI.SINGLETON_INSTANCE.initialize();
             FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
             Singletons.getView().getFrame().addWindowListener(waLeaveEditor);

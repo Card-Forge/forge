@@ -14980,7 +14980,6 @@ src/main/java/forge/gui/match/controllers/package-info.java svneol=native#text/p
 src/main/java/forge/gui/match/menus/CMatchUIMenus.java -text
 src/main/java/forge/gui/match/menus/DevModeMenu.java -text
 src/main/java/forge/gui/match/menus/GameMenu.java -text
-src/main/java/forge/gui/match/menus/LayoutMenu.java -text
 src/main/java/forge/gui/match/nonsingleton/CCommand.java -text
 src/main/java/forge/gui/match/nonsingleton/CEmptyDoc.java -text
 src/main/java/forge/gui/match/nonsingleton/CField.java -text
@@ -15007,6 +15006,7 @@ src/main/java/forge/gui/menubar/IMenuProvider.java -text
 src/main/java/forge/gui/menubar/MenuUtil.java -text
 src/main/java/forge/gui/menus/ForgeMenu.java -text
 src/main/java/forge/gui/menus/HelpMenu.java -text
+src/main/java/forge/gui/menus/LayoutMenu.java -text
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/FAbsolutePositioner.java -text

@@ -1,4 +1,4 @@
-package forge.gui.match.menus;
+package forge.gui.menus;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -10,6 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import forge.Singletons;
+import forge.control.FControl.Screens;
+import forge.gui.GuiChoose;
 import forge.gui.match.controllers.CDock;
 import forge.gui.menubar.MenuUtil;
 import forge.gui.toolbox.FSkin;
@@ -26,24 +28,33 @@ public final class LayoutMenu {
     private LayoutMenu() { }
 
     private static CDock controller =  CDock.SINGLETON_INSTANCE;
+    private static Screens currentScreen;
     private static ForgePreferences prefs = Singletons.getModel().getPreferences();
-    private static boolean showIcons;
+    private static boolean showIcons = false;
 
-    public static JMenu getMenu(boolean showMenuIcons) {
-        showIcons = showMenuIcons;
+    public static JMenu getMenu() {
+        currentScreen = Singletons.getControl().getState();
+
         JMenu menu = new JMenu("Layout");
         menu.setMnemonic(KeyEvent.VK_L);
-        menu.add(getMenu_ViewOptions());
-        menu.add(getMenu_FileOptions());
-        menu.addSeparator();
-        menu.add(getMenuItem_RevertLayout());
+        if (currentScreen != Screens.HOME_SCREEN) {
+            menu.add(getMenu_ViewOptions());
+            menu.add(getMenu_FileOptions());
+            menu.addSeparator();
+        }
+        menu.add(getMenuItem_SetWindowSize());
+        if (currentScreen != Screens.HOME_SCREEN) {
+            menu.add(getMenuItem_RevertLayout());
+        }
         return menu;
     }
 
     private static JMenu getMenu_ViewOptions() {
         JMenu menu = new JMenu("View");
         menu.add(getMenuItem_ShowTabs());
-        menu.add(getMenuItem_ShowBackgroundImage());
+        if (currentScreen == Screens.MATCH_SCREEN) {
+            menu.add(getMenuItem_ShowBackgroundImage());
+        }
         return menu;
     }
 
@@ -138,6 +149,27 @@ public final class LayoutMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.revertLayout();
+            }
+        };
+    }
+
+    private static JMenuItem getMenuItem_SetWindowSize() {
+        JMenuItem menuItem = new JMenuItem("Set Window Size");
+        menuItem.addActionListener(getSetWindowSizeAction());
+        return menuItem;
+    }
+
+    private static ActionListener getSetWindowSizeAction() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] options = {"800x600", "1024x768", "1280x720"};
+                final String choice = GuiChoose.oneOrNone("Choose new window size", options);
+                if (choice != null)
+                {
+                    String[] dims = choice.split("x");
+                    Singletons.getView().getFrame().setSize(Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
+                }
             }
         };
     }

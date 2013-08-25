@@ -21,7 +21,6 @@ public class CMatchUIMenus {
     public List<JMenu> getMenus() {
         List<JMenu> menus = new ArrayList<JMenu>();
         menus.add(GameMenu.getMenu(SHOW_ICONS));
-        menus.add(LayoutMenu.getMenu(SHOW_ICONS));
         if (isDevModeEnabled()) {
             menus.add(DevModeMenu.getMenu());
         }

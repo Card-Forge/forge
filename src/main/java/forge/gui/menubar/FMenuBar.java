@@ -11,6 +11,7 @@ import javax.swing.JMenuBar;
 
 import forge.gui.menus.ForgeMenu;
 import forge.gui.menus.HelpMenu;
+import forge.gui.menus.LayoutMenu;
 import forge.gui.toolbox.FSkin;
 
 @SuppressWarnings("serial")
@@ -28,6 +29,7 @@ public class FMenuBar extends JMenuBar {
         removeAll();
         add(ForgeMenu.getMenu());
         addProviderMenus(provider);
+        add(LayoutMenu.getMenu());
         add(HelpMenu.getMenu());
         setStatusCaption();
         repaint();

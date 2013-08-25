@@ -76,7 +76,6 @@ public enum VDev implements IVDoc<CDev> {
     private final DevLabel lblCardToHand = new DevLabel("Add card to hand");
     private final DevLabel lblRiggedRoll = new DevLabel("Rigged planar roll");
     private final DevLabel lblWalkTo = new DevLabel("Planeswalk to");
-    private final DevLabel lblSetWindowSize = new DevLabel("Set window size");
 
     //========= Constructor
 
@@ -94,7 +93,6 @@ public enum VDev implements IVDoc<CDev> {
         devLBLs.add(lblUntapPermanent);
         devLBLs.add(lblSetLife);
         devLBLs.add(lblWalkTo);
-        devLBLs.add(lblSetWindowSize);
 
         scroller.setBorder(null);
         scroller.setOpaque(false);
@@ -116,7 +114,6 @@ public enum VDev implements IVDoc<CDev> {
         viewport.add(this.lblTapPermanent, halfConstraints + ", split 2");
         viewport.add(this.lblUntapPermanent, halfConstraints);
         viewport.add(this.lblSetLife, constraints);
-        viewport.add(this.lblSetWindowSize, constraints);
     }
 
     //========= Overridden methods
@@ -233,10 +230,6 @@ public enum VDev implements IVDoc<CDev> {
 
     public DevLabel getLblWalkTo() {
         return this.lblWalkTo;
-    }
-    
-    public DevLabel getLblSetWindowSize() {
-        return this.lblSetWindowSize;
     }
 
     /**
