@@ -99,14 +99,14 @@ public final class LayoutMenu {
 
                 Object[] options = {"Restart Now", "Restart Later"};
                 int reply = JOptionPane.showOptionDialog(
-                        null,
-                        "You must restart Forge for " + skin + " theme to take effect.",
-                        "Change Theme",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,
-                        null,
-                        options,
-                        options[0]);
+                    null,
+                    "You must restart Forge for " + skin + " theme to take effect.",
+                    "Change Theme",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    options,
+                    options[0]);
                 if (reply == JOptionPane.YES_OPTION) {
                     RestartUtil.restartApplication(null);
                 }
