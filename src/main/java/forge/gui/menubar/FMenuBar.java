@@ -61,15 +61,14 @@ public class FMenuBar extends JMenuBar {
         }
     }
 
-    /**
-     * Enables or disables the MenuBar.
-     * <p>
-     * Note: Disabling a component does not disable its children.
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#setEnabled(boolean)
      */
-    public void setMenuBarEnabled(boolean isEnabled) {
-        setEnabled(isEnabled);
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
         for (Component c : getComponents()) {
-            c.setEnabled(isEnabled);
+            c.setEnabled(enabled);
         }
     }
 
