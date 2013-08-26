@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -31,7 +33,6 @@ public final class GameMenu {
     private static boolean showIcons;
 
     public static JMenu getMenu(boolean showMenuIcons) {
-        showIcons = true;
         JMenu menu = new JMenu("Game");
         menu.setMnemonic(KeyEvent.VK_G);
         menu.add(getMenuItem_Concede());
@@ -39,9 +40,30 @@ public final class GameMenu {
         menu.add(getMenuItem_AlphaStrike());
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
+        menu.add(getMenuItem_GameSoundEffects());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
         return menu;
+    }
+
+    private static JMenuItem getMenuItem_GameSoundEffects() {
+        JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Sound Effects");
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS));
+        menuItem.addActionListener(getSoundEffectsAction());
+        return menuItem;
+    }
+    private static ActionListener getSoundEffectsAction() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                toggleGameSoundEffects();
+            }
+        };
+    }
+    private static void toggleGameSoundEffects() {
+        boolean isSoundEffectsEnabled = !prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS);
+        prefs.setPref(FPref.UI_ENABLE_SOUNDS, isSoundEffectsEnabled);
+        prefs.save();
     }
 
     private static JMenuItem getMenuItem_Concede() {
@@ -103,22 +125,24 @@ public final class GameMenu {
     private static JMenu getMenuItem_TargetingArcs() {
 
         JMenu menu = new JMenu("Targeting Arcs");
-        menu.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSON) : null));
-
         ButtonGroup group = new ButtonGroup();
+
+        ImageIcon menuIcon = MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSOFF);
 
         JRadioButtonMenuItem menuItem;
         menuItem = getTargetingArcRadioButton("Off", FSkin.DockIcons.ICO_ARCSOFF, 0);
-        if (menuItem.isSelected()) { menu.setIcon(MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSOFF)); }
+        if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSOFF); }
         group.add(menuItem);
         menu.add(menuItem);
         menuItem = getTargetingArcRadioButton("Card mouseover", FSkin.DockIcons.ICO_ARCSHOVER, 1);
-        if (menuItem.isSelected()) { menu.setIcon(MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSHOVER)); }
+        if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSHOVER); }
         group.add(menuItem);
         menu.add(menuItem);
         menuItem = getTargetingArcRadioButton("Always On", FSkin.DockIcons.ICO_ARCSON, 2);
-        if (menuItem.isSelected()) { menu.setIcon(MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSON)); }
+        if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSON); }
         group.add(menuItem);
+
+        menu.setIcon((showIcons ? menuIcon : null));
         menu.add(menuItem);
 
         return menu;
