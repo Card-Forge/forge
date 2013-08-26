@@ -8,6 +8,14 @@ Forge Beta: 08-##-2013 ver 1.4.7
 Release Notes
 -------------
 
+- Constructed Mode decks can now be stored in subfolders -
+The feature is half-complete now. Forge can read subfolders in constructed deck, you may start game with such deck, but cannot yet edit decks in subfolders nor manipulate subfolders.
+
+
+- Forge now has a Menubar -
+The Forge menu contains Exit and Restart options. The Layout menu contains the selector for the various themes and a Set Window Size option. The Help menu contains links to online articles and the local TXT files.
+
+
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
 
