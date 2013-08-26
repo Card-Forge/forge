@@ -12,8 +12,11 @@ Release Notes
 The feature is half-complete now. Forge can read subfolders in constructed deck, you may start game with such deck, but cannot yet edit decks in subfolders nor manipulate subfolders.
 
 
-- Forge now has a Menubar -
-The Forge menu contains Exit and Restart options. The Layout menu contains the selector for the various themes and a Set Window Size option. The Help menu contains links to online articles and the local TXT files.
+=== Forge now has a Menubar ===
+- Toggle visibility using the F1 key. 
+- The Forge menu contains Exit and Restart options. 
+- The Layout menu contains the selector for the various themes and a Set Window Size option. 
+- The Help menu contains links to online articles and the local TXT files.
 
 === Duel/Match Screen Changes ===
 == Menubar Changes ==
