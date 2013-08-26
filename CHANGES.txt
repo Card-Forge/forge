@@ -15,6 +15,22 @@ The feature is half-complete now. Forge can read subfolders in constructed deck,
 - Forge now has a Menubar -
 The Forge menu contains Exit and Restart options. The Layout menu contains the selector for the various themes and a Set Window Size option. The Help menu contains links to online articles and the local TXT files.
 
+=== Duel/Match Screen Changes ===
+== Menubar Changes ==
+- Migration of Dock and DevMode options into Menubar.
+- Toggle console tabs visibility.
+- Toggle background image.
+- Toggle sound effects.
+== Game Log Console ==
+- Scrollbar is now hidden by default. Click console to toggle visibility.
+== Prompt Console ==
+- Fixed: Prevent buttons from disappearing off screen as the console size is decreased.
+== Card Preview Console ==
+- Fixed: now adheres to Scale Image Larger setting.
+
+=== General GUI ===
+== Themes ==
+- Combo-box style should now be appear correctly on Mac OS .
 
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
