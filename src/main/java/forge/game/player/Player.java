@@ -2402,7 +2402,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         } else if (property.startsWith("withMost")) {
             if (property.substring(8).equals("Life")) {
-                int highestLife = -50; // Negative base just in case a few Lich's are running around
+                int highestLife = this.getLife(); // Negative base just in case a few Lich's are running around
                 Player healthiest = null;
                 for (final Player p : game.getPlayers()) {
                     if (p.getLife() > highestLife) {
@@ -2455,7 +2455,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         } else if (property.startsWith("withLowest")) {
             if (property.substring(10).equals("Life")) {
-                int lowestLife = 1000;
+                int lowestLife = this.getLife();
                 List<Player> lowestlifep = new ArrayList<Player>();
                 for (final Player p : game.getPlayers()) {
                     if (p.getLife() == lowestLife) {
