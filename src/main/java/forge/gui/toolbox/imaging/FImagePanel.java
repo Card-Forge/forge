@@ -28,6 +28,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -39,41 +40,41 @@ import com.mortennobel.imagescaling.ResampleOp;
  * Displays a {@code BufferedImage} at its center.
  * <p>
  * Options to scale and rotate the image are available if required.
- *  
- * @version $Id$
+ * 
+ * @version $Id:$
  * 
  */
 @SuppressWarnings("serial")
 public class FImagePanel extends JPanel {
-    
-	// See {@code setAutosizeMode} for descriptions.
+
+    // See {@code setAutosizeMode} for descriptions.
     public enum AutoSizeImageMode {OFF, PANEL, SOURCE};
     AutoSizeImageMode autoSizeMode = AutoSizeImageMode.PANEL;
-    
+
     // The original unscaled, unrotated image.
     // Remains the same regardless of any transformations that might be applied to it.
     private BufferedImage sourceImage = null;
 
     private double imageScale = 1;
-    private int degreesOfRotation = 0;    
+    private int degreesOfRotation = 0;
 
     // Ensures that when resizing only {@code doPerformancePaint} is used.
     private boolean isResizing = false;
 
     private Timer resizingTimer = createResizingTimer(100);
-    
+
     // ctr
-    public FImagePanel() { 
-        setOpaque(false);        
+    public FImagePanel() {
+        setOpaque(false);
         setResizeListener();
     };
-    
+
     public void clearImage() {
         this.sourceImage = null;
         this.imageScale = 1;
-        repaint();      
+        repaint();
     }
-            
+
     /**
      * This timer is used to identify when resizing has finished.
      * <p>
@@ -82,50 +83,54 @@ public class FImagePanel extends JPanel {
      * multiple resize events are fired the timer will never trigger because it
      * will keep getting restarted - see {@code setResizeListener} method.
      */
-    private Timer createResizingTimer(int timerDelay) {   	
-    	return new Timer(timerDelay,  new ActionListener() {                                    
-        	@Override
+    private Timer createResizingTimer(int timerDelay) {
+        return new Timer(timerDelay,  new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent ev) {
-        		doResizedFinished();
-            }                       
+                doResizedFinished();
+            }
         });
     }
-    
+
     private void doResizedFinished() {
-		this.resizingTimer.stop();
+        this.resizingTimer.stop();
         this.isResizing = false;
-        this.repaint();        
+        this.repaint();
     }
-        
+
     /**
      * Ensures that when resizing only {@code doPerformancePaint} is used.
      */
-    private void setResizeListener() {   	
-        addComponentListener(new ComponentAdapter() {            
+    private void setResizeListener() {
+        addComponentListener(new ComponentAdapter() {
             @Override
-            public void componentResized(ComponentEvent e) {           	
-                isResizing = true;              	
-                resizingTimer.restart();           
-            }            
-        });        
+            public void componentResized(ComponentEvent e) {
+                isResizing = true;
+                resizingTimer.restart();
+            }
+        });
     }
-    
+
     /**
      * Displays {@code BufferedImage} with the specified rotation and auto-size mode.
      * <p>
      * Note that rotations are currently rounded to the <b>nearest 90</b> degrees.
      * This means the image can only have either a vertical or horizontal orientation.
-     */    
-    public void setImage(BufferedImage image, int initialRotation, AutoSizeImageMode autoSizeMode) {  	
-        if (this.sourceImage != image) {        	
-        	this.autoSizeMode = autoSizeMode;
+     */
+    public void setImage(BufferedImage image, int initialRotation, AutoSizeImageMode autoSizeMode) {
+        if (this.sourceImage != image) {
+            this.autoSizeMode = autoSizeMode;
             if (initialRotation > 0) { setRotation(initialRotation); }
             this.sourceImage = image;
             setImageScale();
             repaint();
         }
     }
-    
+
+    public void setImage(BufferedImage image, AutoSizeImageMode autoSizeMode) {
+        setImage(image, 0, autoSizeMode);
+    }
+
     /**
      * Displays {@code BufferedImage} with the specified rotation.
      * <p>
@@ -133,11 +138,11 @@ public class FImagePanel extends JPanel {
      * <p>
      * Note that rotations are currently rounded to the <b>nearest 90</b> degrees.
      * This means the image can only have either a vertical or horizontal orientation.
-     */        
+     */
     public void setImage(BufferedImage image, int initialRotation) {
-    	setImage(image, initialRotation, AutoSizeImageMode.PANEL);
+        setImage(image, initialRotation, autoSizeMode);
     }
-    
+
     /**
      * Displays {@code BufferedImage} with no rotation.
      * <p>
@@ -146,14 +151,14 @@ public class FImagePanel extends JPanel {
     public void setImage(BufferedImage image) {
         setImage(image, 0);
     }
-                
+
     /**
      * Shows dimensions of image panel using a dashed border.
      */
     public void setDashedBorder(boolean showBorder) {
-        setBorder(showBorder ? BorderFactory.createDashedBorder(null) : null);      
+        setBorder(showBorder ? BorderFactory.createDashedBorder(null) : null);
     }
-    
+
     /**
      * Rotates image to the <b>nearest 90</b> degrees.
      * <p>
@@ -161,54 +166,54 @@ public class FImagePanel extends JPanel {
      */
     public void setRotation(int degrees) {
         this.degreesOfRotation = ImageUtil.getRotationToNearest(degrees, 90);
-        setImageScale();        
+        setImageScale();
         repaint();
     }
-    
+
     /**
      * Gets the rotation of the displayed image relative to the original image.
      * <p>
      * <b>Note</b><br>
      * The returned value may not be the same as that specified in {@code SetRotation}
-     * since the rotation is currently rounded to the nearest 90 degrees. 
+     * since the rotation is currently rounded to the nearest 90 degrees.
      */
     public int getRotation() {
-    	return this.degreesOfRotation;
+        return this.degreesOfRotation;
     }
-    
+
     /**
-     * Gets the dimensions of the original unscaled image taking into account the current rotation. 
+     * Gets the dimensions of the original unscaled image taking into account the current rotation.
      * <p>
      * These dimensions are dependent on the orientation relative to the original unrotated image.
-     * If display orientation is perpendicular to the original then width and height will be reversed. 
+     * If display orientation is perpendicular to the original then width and height will be reversed.
      */
     private Dimension getSourceImageSize() {
-    	Dimension originalSize = new Dimension(this.sourceImage.getWidth(), this.sourceImage.getHeight());
-    	Dimension rotatedSize = new Dimension(this.sourceImage.getHeight(), this.sourceImage.getWidth());
+        Dimension originalSize = new Dimension(this.sourceImage.getWidth(), this.sourceImage.getHeight());
+        Dimension rotatedSize = new Dimension(this.sourceImage.getHeight(), this.sourceImage.getWidth());
         boolean isOriginalOrientation = (this.degreesOfRotation % 180 == 0);
         return (isOriginalOrientation ? originalSize  : rotatedSize);
     }
-                                            
+
     @Override
-    protected void paintComponent(Graphics g) {       
+    protected void paintComponent(Graphics g) {
         if (this.sourceImage != null) {
             setImageScale();
             if (this.isResizing) {
                 doPerformancePaint(g);
             } else {
                 doQualityPaint(g);
-            } 
+            }
         }
     }
-    
-    private void doQualityPaint(Graphics g) {	
+
+    private void doQualityPaint(Graphics g) {
         BufferedImage resampledImage = getResampledImage();
         if (resampledImage != null) {
-    		Graphics2D g2d = (Graphics2D)g;        	
-        	g2d.drawImage(resampledImage, getAffineTransform(resampledImage, false), null);   
-        }                   
+            Graphics2D g2d = (Graphics2D)g;
+            g2d.drawImage(resampledImage, getAffineTransform(resampledImage, false), null);
+        }
     }
-    
+
     /**
      * Uses Morten Nobel's java-image-scaling library to resize image.
      * <p>
@@ -216,17 +221,17 @@ public class FImagePanel extends JPanel {
      * are reduced but at the cost of performance.
      */
     private BufferedImage getResampledImage() {
-    	BufferedImage scaledImage = null;
+        BufferedImage scaledImage = null;
         if (this.imageScale != 1) {
             DimensionConstrain constrain = DimensionConstrain.createRelativeDimension((float)this.imageScale);
             ResampleOp resampler = new ResampleOp(constrain);
-            scaledImage = resampler.filter(sourceImage, null);                  
+            scaledImage = resampler.filter(sourceImage, null);
         } else {
-            scaledImage = sourceImage;                  
-        }  
+            scaledImage = sourceImage;
+        }
         return scaledImage;
     }
-            
+
     /**
      * Renders image without using any additional re-sampling.
      * <p>
@@ -234,62 +239,62 @@ public class FImagePanel extends JPanel {
      * As the image size is reduced there is a distinct degradation in quality and a resampling
      * algorithm should be used if image quality is paramount.
      */
-    private void doPerformancePaint(Graphics g) {       
+    private void doPerformancePaint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         setRenderingHints(g2d);
-        g2d.drawImage(sourceImage, getAffineTransform(sourceImage, true), null);        
+        g2d.drawImage(sourceImage, getAffineTransform(sourceImage, true), null);
     }
-    
+
     /**
      * Sets Rendering hints which can improve quality of image without requiring resampling.
      * <p>
      * Becomes ineffective as image size becomes smaller.
      */
     private void setRenderingHints(Graphics2D g2d) {
-    	if (!this.isResizing) {
-    		// These hints make a visible difference...
-    		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-    		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-    		// ...not so sure about...
-    		//g2d.setComposite(AlphaComposite.Src);         
-    		//g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    	}
+        if (!this.isResizing) {
+            // These hints make a visible difference...
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            // ...not so sure about...
+            //g2d.setComposite(AlphaComposite.Src);
+            //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        }
     }
-    
+
     /**
      *  Using an Affine transformation, moves the image to the center of FImagePane.
      *  Scales and rotates the image at the same time if required.
-     *  
+     * 
      *  @param image the {@code BufferedImage} to be manipulated.
      *  @param createScaleTransform set to false if no scale transform is required.
-     *  
+     * 
      */
     private AffineTransform getAffineTransform(BufferedImage image, boolean createScaleTransform) {
 
         // Note that transformations happen in reverse order.
         AffineTransform at = new AffineTransform();
-        
+
         // 4. move image to the center of FImagePanel. Remember, image center point is (0,0).
         at.translate(this.getWidth() / 2, this.getHeight() / 2);
-        
+
         // 3. rotate around (0,0).
         at.rotate(Math.toRadians((double) degreesOfRotation));
-        
+
         // 2. scale image.
         if (createScaleTransform) {
-            at.scale(this.imageScale, this.imageScale);             
+            at.scale(this.imageScale, this.imageScale);
         }
 
         // 1. move the image so that its center is at (0,0).
         at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
-        
-       return at;
+
+        return at;
 
     }
-      
+
     /**
      * Determines how the image should fit into FImagePanel.
-     * <p> 
+     * <p>
      * Any automatic resizing will retain the original image's aspect ratio.
      * 
      * @param autoSizeMode can take one of following values :-
@@ -300,27 +305,27 @@ public class FImagePanel extends JPanel {
      * <p>
      * <b>SOURCE</b> - Image will automatically resize to fit FImagePanel unless doing so
      * would exceed the original image size. In this case, the Image will not expand beyond
-     * its original size. 
+     * its original size.
      */
     public void setAutosizeMode(AutoSizeImageMode autoSizeMode) {
         this.autoSizeMode = autoSizeMode;
         repaint();
     }
-    
+
     /**
      * Determines the scale that needs to be applied to the image so
      * that it meets the requirements of the current {@code AutoSizeImageMode}.
      */
     private void setImageScale() {
-    	if (this.sourceImage != null) {
-    		if (this.autoSizeMode != AutoSizeImageMode.OFF) {
-    			this.imageScale = ImageUtil.getBestFitScale(getSourceImageSize(), this.getSize());
-    			if (this.imageScale == 0) { this.imageScale = 1; }; 
-    			if (this.autoSizeMode == AutoSizeImageMode.SOURCE && this.imageScale > 1) {
-    				this.imageScale = 1;
-    			}
-    		}
-    	}   	
+        if (this.sourceImage != null) {
+            if (this.autoSizeMode != AutoSizeImageMode.OFF) {
+                this.imageScale = ImageUtil.getBestFitScale(getSourceImageSize(), this.getSize());
+                if (this.imageScale == 0) { this.imageScale = 1; };
+                if (this.autoSizeMode == AutoSizeImageMode.SOURCE && this.imageScale > 1) {
+                    this.imageScale = 1;
+                }
+            }
+        }
     }
-    	
+
 }

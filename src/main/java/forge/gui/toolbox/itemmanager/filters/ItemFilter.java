@@ -1,9 +1,13 @@
 package forge.gui.toolbox.itemmanager.filters;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
 
@@ -13,8 +17,8 @@ import forge.item.InventoryItem;
  */
 public abstract class ItemFilter<T extends InventoryItem> {
     private final ItemManager<T> itemManager;
-    private int number;
     private JPanel panel;
+    private JLabel lblPanelTitle;
     
     public static int PANEL_HEIGHT = 30;
     
@@ -22,21 +26,15 @@ public abstract class ItemFilter<T extends InventoryItem> {
         this.itemManager = itemManager0;
     }
     
-    public int getNumber() {
-        return this.number;
-    }
-    
-    public void setNumber(int number0) {
-        this.number = number0;
-    }
-    
     @SuppressWarnings("serial")
     public JPanel getPanel() {
         if (this.panel == null) {
-            this.panel = new JPanel();
+            this.panel = new JPanel(new MigLayout("insets 0, gap 2"));
             this.panel.setOpaque(false);
- 
-            this.buildPanel(panel);
+            this.panel.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 2, FSkin.getColor(FSkin.Colors.CLR_TEXT)));
+            
+            this.lblPanelTitle = new FLabel.Builder().fontSize(10).build();
+            this.panel.add(this.lblPanelTitle, "top");
             
             //add button to remove filter
             this.panel.add(new FLabel.Builder()
@@ -51,9 +49,17 @@ public abstract class ItemFilter<T extends InventoryItem> {
                         ItemFilter.this.onRemoved();
                     }
                 }).build(), "top");
+ 
+            this.buildPanel(panel);
         }
         return this.panel;
     }
+    
+    public void updatePanelTitle(int number) {
+        this.lblPanelTitle.setText(number + ". " + this.getTitle());
+    }
+    
+    protected abstract String getTitle();
     
     protected void applyChange() {
         this.itemManager.buildFilterPredicate();

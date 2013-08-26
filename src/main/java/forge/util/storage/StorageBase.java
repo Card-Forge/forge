@@ -41,13 +41,16 @@ import forge.util.IItemReader;
 public class StorageBase<T> implements IStorage<T> {
     protected final Map<String, T> map;
 
-    public final static StorageBase<?> emptyMap = new StorageBase<Object>(new HashMap<String, Object>());
-
-    public StorageBase(final IItemReader<T> io) {
+    public final static StorageBase<?> emptyMap = new StorageBase<Object>("Empty", new HashMap<String, Object>());
+    public final String name;
+    
+    public StorageBase(final String name, final IItemReader<T> io) {
+        this.name = name;
         this.map = io.readAll();
     }
 
-    public StorageBase(final Map<String, T> inMap) {
+    public StorageBase(final String name, final Map<String, T> inMap) {
+        this.name = name;
         this.map = inMap;
     }    
 
@@ -58,7 +61,7 @@ public class StorageBase<T> implements IStorage<T> {
     
 
     @Override
-    public final Collection<String> getNames() {
+    public final Collection<String> getItemNames() {
         return new ArrayList<String>(this.map.keySet());
     }
 
@@ -99,5 +102,14 @@ public class StorageBase<T> implements IStorage<T> {
     @Override
     public IStorage<IStorage<T>> getFolders() {
         return (IStorage<IStorage<T>>) emptyMap;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.util.IHasName#getName()
+     */
+    @Override
+    public String getName() {
+        // TODO Auto-generated method stub
+        return name;
     }
 }

@@ -102,13 +102,15 @@ public class InputQueue extends Observable {
             // acquire and release lock, so that actions from Game thread happen before EDT reads their results  
         }
     }
-    
+
     /**
      * TODO: Write javadoc for this method.
      */
-    public void onGameOver() {
+    public void onGameOver(boolean releaseAllInputs) {
         for(InputSynchronized inp : inputStack ) {
             inp.relaseLatchWhenGameIsOver();
+            if( !releaseAllInputs )
+                break;
         }
     }
     

@@ -27,12 +27,13 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
+
 import forge.Card;
 import forge.CardLists;
-import forge.FThreads;
-import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.Command;
+import forge.FThreads;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.combat.Combat;
@@ -70,7 +71,7 @@ public enum CDock implements ICDoc {
         game = game0;
     }
 
-    public Player findAffectedPlayer() { 
+    public Player findAffectedPlayer() {
         return Singletons.getControl().getCurrentPlayer();
     }
 
@@ -89,11 +90,11 @@ public enum CDock implements ICDoc {
     public void endTurn() {
         Player p = findAffectedPlayer();
 
-        if( p != null ) 
+        if( p != null )
             p.getController().autoPassTo(PhaseType.CLEANUP);
     }
 
-    private void revertLayout() {
+    public void revertLayout() {
         SOverlayUtils.genericOverlay();
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
 
@@ -106,7 +107,7 @@ public enum CDock implements ICDoc {
 
     }
 
-    private void saveLayout() {
+    public void saveLayout() {
         final SaveOpenDialog dlgSave = new SaveOpenDialog();
         final File defFile = new File(SLayoutIO.getFilePreferred(Singletons.getControl().getState()));
         final File saveFile = dlgSave.SaveDialog(defFile, Filetypes.LAYOUT);
@@ -115,33 +116,35 @@ public enum CDock implements ICDoc {
         }
     }
 
-    private void openLayout() {
+    public void openLayout() {
         SOverlayUtils.genericOverlay();
 
         final SaveOpenDialog dlgOpen = new SaveOpenDialog();
         final File defFile = new File(SLayoutIO.getFilePreferred(Singletons.getControl().getState()));
         final File loadFile = dlgOpen.OpenDialog(defFile, Filetypes.LAYOUT);
 
-        FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
-        // let it redraw everything first
-        
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                if (loadFile != null) {
-                    SLayoutIO.loadLayout(loadFile);
-                    SLayoutIO.saveLayout(null);
+        if (loadFile != null) {
+            FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
+            // let it redraw everything first
+
+            FThreads.invokeInEdtLater(new Runnable() {
+                @Override
+                public void run() {
+                    if (loadFile != null) {
+                        SLayoutIO.loadLayout(loadFile);
+                        SLayoutIO.saveLayout(null);
+                    }
+                    SOverlayUtils.hideOverlay();
                 }
-                SOverlayUtils.hideOverlay();
-            }
-        });
+            });
+        }
     }
 
     /**
      * View deck list.
      */
-    private void viewDeckList() {
-        
+    public void viewDeckList() {
+
         showDeck(game.getMatch().getPlayers().get(0).getCurrentDeck());
     }
 
@@ -158,25 +161,25 @@ public enum CDock implements ICDoc {
     /** @param state0 int */
     private void refreshArcStateDisplay() {
         switch (arcState) {
-            case 0:
-                VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Off");
-                VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSOFF));
-                VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
-                break;
-            case 1:
-                VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Card mouseover");
-                VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSHOVER));
-                VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
-                break;
-            default:
-                VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSON));
-                VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Always on");
-                VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
-                break;
+        case 0:
+            VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Off");
+            VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSOFF));
+            VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
+            break;
+        case 1:
+            VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Card mouseover");
+            VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSHOVER));
+            VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
+            break;
+        default:
+            VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSON));
+            VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Always on");
+            VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
+            break;
         }
 
         Singletons.getModel().getPreferences()
-            .setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState));
+        .setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState));
         //FModel.SINGLETON_INSTANCE.getPreferences().save();
     }
 
@@ -189,11 +192,11 @@ public enum CDock implements ICDoc {
         Combat combat = game.getCombat();
         if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, p) && combat!= null) { // ph.is(...) includes null check
             List<Player> defenders = p.getOpponents();
-            
+
             for (Card c : CardLists.filter(p.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
                 if (combat.isAttacking(c))
                     continue;
-                
+
                 for(Player defender : defenders)
                     if( CombatUtil.canAttack(c, defender, combat)) {
                         combat.addAttacker(c, defender);
@@ -215,6 +218,9 @@ public enum CDock implements ICDoc {
 
         refreshArcStateDisplay();
         FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
+    }
+    public void setArcState(int state) {
+        arcState = state;
     }
 
     /**
@@ -246,7 +252,7 @@ public enum CDock implements ICDoc {
             deckList.append(s.getValue() + " x " + s.getKey() + nl);
         }
 
-        
+
         String ttl = "Decklist";
         if (dName != null) {
             ttl += " - " + dName;

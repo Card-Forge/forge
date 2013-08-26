@@ -82,15 +82,6 @@ public class CustomLimited extends DeckBase {
         return this.getName();
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.InventoryItem#getItemType()
-     */
-    @Override
-    public String getItemType() {
-        // TODO Auto-generated method stub
-        return "Limited game setup";
-    }
-    
     /**
      * Parses the.
      *

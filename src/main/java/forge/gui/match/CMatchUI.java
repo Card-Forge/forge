@@ -25,13 +25,16 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.swing.ImageIcon;
+import javax.swing.JMenu;
 
 import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import forge.Card;
+import forge.Command;
 import forge.FThreads;
 import forge.GameEntity;
 import forge.ImageCache;
@@ -47,15 +50,18 @@ import forge.gui.events.UiEvent;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.controllers.CCombat;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CPicture;
+import forge.gui.match.menus.CMatchUIMenus;
 import forge.gui.match.nonsingleton.VCommand;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.views.VPlayers;
+import forge.gui.menubar.IMenuProvider;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.special.PhaseLabel;
 import forge.item.InventoryItem;
@@ -70,15 +76,15 @@ import forge.view.arcane.PlayArea;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CMatchUI {
+public enum CMatchUI implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
     private List<Player> sortedPlayers;
     private VMatchUI view;
-    
+
     private EventBus uiEvents;
     private MatchUiEventVisitor visitor = new MatchUiEventVisitor();
-    
+
     private CMatchUI() {
         uiEvents = new EventBus("ui events");
         uiEvents.register(Singletons.getControl().getSoundSystem());
@@ -90,7 +96,7 @@ public enum CMatchUI {
         if (null != lp.getIconImageKey()) {
             return ImageCache.getIcon(lp);
         }
-        
+
         int avatarIdx = lp.getAvatarIndex();
         return new ImageIcon(FSkin.getAvatars().get(0 <= avatarIdx ? avatarIdx : defaultIndex));
     }
@@ -120,7 +126,7 @@ public enum CMatchUI {
 
         final List<VField> fields = new ArrayList<VField>();
         final List<VCommand> commands = new ArrayList<VCommand>();
-        
+
         int i = 0;
         for (Player p : sortedPlayers) {
             // A field must be initialized after it's instantiated, to update player info.
@@ -136,19 +142,19 @@ public enum CMatchUI {
             c.getLayoutControl().initialize();
             i++;
         }
-        
+
         // Replace old instances
         view.setCommandViews(commands);
         view.setFieldViews(fields);
-        
+
         VPlayers.SINGLETON_INSTANCE.init(players);
-        
+
         initHandViews(localPlayer);
     }
 
-    public void initHandViews(LobbyPlayer localPlayer) { 
+    public void initHandViews(LobbyPlayer localPlayer) {
         final List<VHand> hands = new ArrayList<VHand>();
-       
+
         int i = 0;
         for (Player p : sortedPlayers) {
             if (p.getLobbyPlayer() == localPlayer) {
@@ -158,7 +164,7 @@ public enum CMatchUI {
             }
             i++;
         }
-        
+
         if(hands.isEmpty()) { // add empty hand for matches without human
             VHand newHand = new VHand(EDocID.Hands[0], null);
             newHand.getLayoutControl().initialize();
@@ -215,7 +221,7 @@ public enum CMatchUI {
         List<VHand> allHands = view.getHands();
         return idx < 0 || idx >= allHands.size() ? null : allHands.get(idx);
     }
-    
+
     /**
      * 
      * Fires up trample dialog.  Very old code, due for refactoring with new UI.
@@ -261,14 +267,14 @@ public enum CMatchUI {
     public final boolean stopAtPhase(final Player turn, final PhaseType phase) {
         VField vf = getFieldViewFor(turn);
         PhaseLabel label = vf.getPhaseInidicator().getLabelFor(phase);
-        return label == null || label.getEnabled(); 
+        return label == null || label.getEnabled();
     }
 
     public void setCard(final Card c) {
         FThreads.assertExecutedByEdt(true);
         setCard(c, false);
     }
-    
+
     public void setCard(final Card c, final boolean showFlipped ) {
         CDetail.SINGLETON_INSTANCE.showCard(c);
         CPicture.SINGLETON_INSTANCE.showCard(c, showFlipped);
@@ -320,17 +326,17 @@ public enum CMatchUI {
         for(Pair<Player, ZoneType> kv : zonesToUpdate) {
             Player owner = kv.getKey();
             ZoneType zt = kv.getValue();
-            
+
             if ( zt == ZoneType.Command )
                 getCommandFor(owner).getTabletop().setupPlayZone();
             else if ( zt == ZoneType.Hand ) {
-                VHand vHand = getHandFor(owner); 
+                VHand vHand = getHandFor(owner);
                 if (null != vHand)
                     vHand.getLayoutControl().updateHand();
                 getFieldViewFor(owner).getDetailsPanel().updateZones();
-            } else if ( zt == ZoneType.Battlefield ) 
+            } else if ( zt == ZoneType.Battlefield )
                 getFieldViewFor(owner).getTabletop().setupPlayZone();
-            else 
+            else
                 getFieldViewFor(owner).getDetailsPanel().updateZones();
         }
     }
@@ -341,7 +347,7 @@ public enum CMatchUI {
         for(Player p : manaPoolUpdate) {
             getFieldViewFor(p).getDetailsPanel().updateManaPool();
         }
-        
+
     }
 
     // Player's lives and poison counters
@@ -349,7 +355,7 @@ public enum CMatchUI {
         for(Player p : livesUpdate) {
             getFieldViewFor(p).updateDetails();
         }
-        
+
     }
 
     public void updateCards(Set<Card> cardsToUpdate) {
@@ -357,11 +363,11 @@ public enum CMatchUI {
             updateSingleCard(c);
         }
     }
-    
+
     public void updateSingleCard(Card c) {
         Zone zone = c.getZone();
         if ( null != zone && zone.getZoneType() == ZoneType.Battlefield ) {
-            PlayArea pa = getFieldViewFor(zone.getPlayer()).getTabletop(); 
+            PlayArea pa = getFieldViewFor(zone.getPlayer()).getTabletop();
             pa.updateSingleCard(c);
         }
     }
@@ -374,7 +380,7 @@ public enum CMatchUI {
             System.out.println("UI: " + uiEvent.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(4, true));
         uiEvents.post(uiEvent);
     }
-    
+
     public class MatchUiEventVisitor implements IUiEventVisitor<Void> {
         @Override
         public Void visit(UiEventBlockerAssigned event) {
@@ -387,12 +393,41 @@ public enum CMatchUI {
             updateSingleCard(event.attacker);
             return null;
         }
-        
+
         @Subscribe
-        public void receiveEvent(UiEvent evt) { 
+        public void receiveEvent(UiEvent evt) {
             evt.visit(this);
         }
     }
 
+    /* (non-Javadoc)
+     * @see forge.gui.menubar.IMenuProvider#getMenus()
+     */
+    @Override
+    public List<JMenu> getMenus() {
+        return new CMatchUIMenus().getMenus();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
+     */
+    @Override
+    public Command getCommandOnSelect() {
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#initialize()
+     */
+    @Override
+    public void initialize() {
+        Singletons.getControl().getMenuBar().setupMenuBar(this);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#update()
+     */
+    @Override
+    public void update() { }
+
 }
- 

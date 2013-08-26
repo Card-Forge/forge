@@ -27,7 +27,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.ITargetable;
 import forge.Singletons;
-import forge.card.ability.AbilityUtils;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -240,16 +239,6 @@ public class TargetSelection {
                     return !c.sharesCreatureTypeWith(card);
                 }
             });
-        }
-        // If the cards must have a specific controller
-        if (tgt.getDefinedController() != null) {
-            List<Player> pl = AbilityUtils.getDefinedPlayers(ability.getSourceCard(), tgt.getDefinedController(), this.ability);
-            if (pl != null && !pl.isEmpty()) {
-                Player controller = pl.get(0);
-                choices = CardLists.filterControlledBy(choices, controller);
-            } else {
-                choices.clear();
-            }
         }
         return choices;
     }

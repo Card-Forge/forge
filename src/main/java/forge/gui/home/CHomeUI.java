@@ -1,5 +1,9 @@
 package forge.gui.home;
 
+import java.util.List;
+
+import javax.swing.JMenu;
+
 import forge.Command;
 import forge.Singletons;
 import forge.control.FControl;
@@ -9,19 +13,20 @@ import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
+import forge.gui.menubar.IMenuProvider;
 import forge.net.FServer;
 import forge.net.NetServer;
 import forge.properties.ForgePreferences;
-import forge.properties.NewConstants;
 import forge.properties.ForgePreferences.FPref;
+import forge.properties.NewConstants;
 
-/** 
+/**
  * Assembles Swing components of exit submenu option singleton.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public enum CHomeUI implements ICDoc {
+public enum CHomeUI implements ICDoc, IMenuProvider {
     /** */
     SINGLETON_INSTANCE;
 
@@ -59,10 +64,13 @@ public enum CHomeUI implements ICDoc {
     /* (non-Javadoc)
      * @see forge.view.home.ICDoc#intialize()
      */
-    
+
     @SuppressWarnings("serial")
     @Override
     public void initialize() {
+
+        setupMyMenuBar();
+
         selectPrevious();
         VHomeUI.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
             @Override
@@ -78,11 +86,11 @@ public enum CHomeUI implements ICDoc {
                 System.exit(0);
             }
         });
-        
+
         VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setCommand(new Runnable() {
             @Override
             public void run() {
-                NetServer srv = FServer.instance.getServer(); 
+                NetServer srv = FServer.instance.getServer();
                 srv.listen(NewConstants.SERVER_PORT_NUMBER);
 
                 VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setEnabled(true);
@@ -91,7 +99,7 @@ public enum CHomeUI implements ICDoc {
                 FNetOverlay.SINGLETON_INSTANCE.showUp("Server listening on port " + srv.getPortNumber());
             }
         });
-        
+
         VHomeUI.SINGLETON_INSTANCE.getLblStopServer().setCommand(new Runnable() {
             @Override
             public void run() {
@@ -102,6 +110,11 @@ public enum CHomeUI implements ICDoc {
                 FNetOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
             }
         });
+    }
+
+    private void setupMyMenuBar() {
+        Singletons.getControl().getMenuBar().setupMenuBar(this);
+        Singletons.getControl().getMenuBar().setStatusText("F1 : hide menu");
     }
 
     /* (non-Javadoc)
@@ -127,7 +140,7 @@ public enum CHomeUI implements ICDoc {
         EDocID selected = null;
         try {
             selected = EDocID.valueOf(Singletons.getModel()
-                .getPreferences().getPref(FPref.SUBMENU_CURRENTMENU));
+                    .getPreferences().getPref(FPref.SUBMENU_CURRENTMENU));
         } catch (final Exception e) { }
 
         if (selected != null && VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(selected) != null) {
@@ -136,5 +149,14 @@ public enum CHomeUI implements ICDoc {
         else {
             itemClick(EDocID.HOME_CONSTRUCTED);
         }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.menubar.IMenuProvider#getMenus()
+     */
+    @Override
+    public List<JMenu> getMenus() {
+        // No specific menus associated with Home screen.
+        return null;
     }
 }

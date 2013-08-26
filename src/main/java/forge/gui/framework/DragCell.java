@@ -18,8 +18,11 @@ import net.miginfocom.swing.MigLayout;
 
 import com.google.common.collect.Lists;
 
+import forge.Singletons;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
 
 /**
@@ -57,14 +60,17 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     public DragCell() {
         super(new MigLayout("insets 0, gap 0, wrap 2"));
 
-        this.add(pnlHead, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
-                + "h " + SLayoutConstants.HEAD_H + "px!");
-        this.add(pnlBorderRight, "w " + SLayoutConstants.BORDER_T + "px!, "
-                + "h 100% - " + SLayoutConstants.BORDER_T + "px!, span 1 2");
-        this.add(pnlBody, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
-                + "h 100% - " + (SLayoutConstants.HEAD_H + SLayoutConstants.BORDER_T) + "px!");
-        this.add(pnlBorderBottom, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
-                + "h " + SLayoutConstants.BORDER_T + "px!");
+        int borderT = SLayoutConstants.BORDER_T;
+        int headH = (showGameTabs() ? SLayoutConstants.HEAD_H : 0);
+
+        this.add(pnlHead,
+                "w 100% - " + borderT + "px!" + ", " + "h " + headH + "px!");
+        this.add(pnlBorderRight,
+                "w " + borderT + "px!" + ", " + "h 100% - " + borderT + "px!, span 1 2");
+        this.add(pnlBody,
+                "w 100% - " + borderT + "px!" + ", " + "h 100% - " + (headH + borderT) + "px!");
+        this.add(pnlBorderBottom,
+                "w 100% - " + borderT + "px!" + ", " + "h " + borderT + "px!");
 
         this.setOpaque(false);
         pnlHead.setOpaque(false);
@@ -93,6 +99,14 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         pnlHead.add(lblOverflow, "w 20px!, h 100%!, gap " + tabPaddingPx + "px " + tabPaddingPx + "px 0 0", -1);
 
         pnlBody.setCornerDiameter(0);
+    }
+
+    /**
+     * Determines visibility of tabs on game screen.
+     */
+    private boolean showGameTabs() {
+        ForgePreferences prefs = Singletons.getModel().getPreferences();
+        return !prefs.getPrefBoolean(FPref.UI_HIDE_GAME_TABS);
     }
 
     /** @return {@link javax.swing.JPanel} */
@@ -193,7 +207,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
     /**
      * Automatically calculates rough bounds of this cell.
-     * @param rectangleOfDouble 
+     * @param rectangleOfDouble
      */
     public void updateRoughBounds() {
         final double contentW = FView.SINGLETON_INSTANCE.getPnlContent().getWidth();
@@ -287,7 +301,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
             // already selected
             return;
         }
-        
+
         docSelected = null;
         pnlBody.removeAll();
 
@@ -329,12 +343,12 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         // just slice out?  Doublestrike 18-09-12
         // Looks good so far... Doublestrike 09-10-12
 
-       // this.add(pnlBorderRight, "w " + SLayoutConstants.BORDER_T + "px!, "
-       //         + "h 100% - " + SLayoutConstants.BORDER_T + "px!, span 1 2");
+        // this.add(pnlBorderRight, "w " + SLayoutConstants.BORDER_T + "px!, "
+        //         + "h 100% - " + SLayoutConstants.BORDER_T + "px!, span 1 2");
         this.add(pnlBody, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
                 + "h 100% - " + SLayoutConstants.BORDER_T + "px!");
-       // this.add(pnlBorderBottom, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
-       //         + "h " + SLayoutConstants.BORDER_T + "px!");
+        // this.add(pnlBorderBottom, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
+        //         + "h " + SLayoutConstants.BORDER_T + "px!");
     }
 
     /**

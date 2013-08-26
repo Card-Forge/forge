@@ -34,17 +34,13 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Constant;
-import forge.CounterType;
-
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityFactory.AbilityRecordType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
-import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
-import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
@@ -200,50 +196,42 @@ public final class GameActionUtil {
         throw new AssertionError();
     }
 
-    // this is for cards like Sengir Vampire
-    /**
-     * <p>
-     * executeVampiricEffects.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public static void executeVampiricEffects(final Card c) {
-        if (!c.isInPlay()) return;
-
-        for (final String kw : c.getKeyword()) {
-            if(!kw.startsWith("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put")) {
-                continue;
-            }
-            final Card thisCard = c;
-
-            final Ability ability2 = new Ability(c, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    CounterType counter = CounterType.P1P1;
-                    if (kw.contains("+2/+2")) {
-                        counter = CounterType.P2P2;
-                    }
-                    if (thisCard.isInPlay()) {
-                        thisCard.addCounter(counter, 1, true);
-                    }
-                }
-            }; // ability2
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(c.getName());
-            if (kw.contains("+2/+2")) {
-                sb.append(" - gets a +2/+2 counter");
-            } else {
-                sb.append(" - gets a +1/+1 counter");
-            }
-            ability2.setStackDescription(sb.toString());
-
-            c.getGame().getStack().addSimultaneousStackEntry(ability2);
-
-        }
-    }
+//    // this is for cards like Sengir Vampire
+//    /**
+//     * <p>
+//     * executeVampiricEffects.
+//     * </p>
+//     * 
+//     * @param c
+//     *            a {@link forge.Card} object.
+//     */
+//    public static void executeVampiricEffects(final Card c) {
+//        if (!c.isInPlay()) return;
+//
+//        for (final String kw : c.getKeyword()) {
+//            if(!kw.startsWith("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put")) {
+//                continue;
+//            }
+//            final Card thisCard = c;
+//            String type = kw.contains("+2/+2") ? "P2P2" : "P1P1";
+//                
+//            String effect = "AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ " + type + " | CounterNum$ 1";
+//
+//            final StringBuilder sb = new StringBuilder();
+//            sb.append(c.getName());
+//            if (kw.contains("+2/+2")) {
+//                sb.append(" - gets a +2/+2 counter");
+//            } else {
+//                sb.append(" - gets a +1/+1 counter");
+//            }
+//            SpellAbility ability2 = AbilityFactory.getAbility(effect, thisCard);
+//            ability2.setActivatingPlayer(c.getController());
+//            ability2.setStackDescription(sb.toString());
+//            ability2.setDescription(sb.toString());
+//            ability2.setTrigger(true);
+//            c.getGame().getStack().addSimultaneousStackEntry(ability2);
+//        }
+//    }
 
     // restricted to combat damage, restricted to players
     /**

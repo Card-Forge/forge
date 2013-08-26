@@ -430,7 +430,7 @@ public class ComputerUtilMana {
      * @return Were all mana sources found?
      */
     private static MapOfLists<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final MapOfLists<Integer, SpellAbility> manaAbilityMap, final ManaCostBeingPaid cost) {
-        MapOfLists<ManaCostShard, SpellAbility> res = new EnumMapOfLists<ManaCostShard, SpellAbility>(ManaCostShard.class, CollectionSuppliers.<SpellAbility>hashSets());
+        MapOfLists<ManaCostShard, SpellAbility> res = new EnumMapOfLists<ManaCostShard, SpellAbility>(ManaCostShard.class, CollectionSuppliers.<SpellAbility>arrayLists());
 
         // loop over cost parts
         for (ManaCostShard shard : cost.getDistinctShards() ) {

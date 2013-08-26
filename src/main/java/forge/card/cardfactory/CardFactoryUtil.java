@@ -1749,9 +1749,21 @@ public class CardFactoryUtil {
             return doXMath(list.size(), splitString.length > 1 ? splitString[1] : null, source);
         }
 
+        String filteredString = string;
+        List<Card> filteredList = new ArrayList<Card>(paidList);
+        final String[] filter = filteredString.split("_");
+
+        if (string.startsWith("FilterControlledBy")) {
+            final String pString = filter[0].substring(18);
+            List<Player> controllers = new ArrayList<Player>(AbilityUtils.getDefinedPlayers(source, pString, null));
+            filteredList = CardLists.filterControlledBy(filteredList, controllers);
+            filteredString = filteredString.replace(pString, "");
+            filteredString = filteredString.replace("FilterControlledBy_", "");
+        }
+
         int tot = 0;
-        for (final Card c : paidList) {
-            tot += xCount(c, string);
+        for (final Card c : filteredList) {
+            tot += xCount(c, filteredString);
         }
 
         return tot;

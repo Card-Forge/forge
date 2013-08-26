@@ -16,18 +16,16 @@ public final class LayoutHelper {
     }
     
     /**
-     * Layout component to fill remaining space of parent
+     * Layout component to fill remaining vertical space of parent
      * @param comp
      */
     public void fill(final JComponent comp) {
-        if (x >= parentWidth) {
-            newLine();
-        }
-        include(comp, parentWidth - x, parentHeight - y);
+        newLine(); //start new line if needed
+        include(comp, parentWidth, parentHeight - y);
     }
     
     /**
-     * Layout component to fill remaining space of current line
+     * Layout component to fill remaining horizontal space of current line
      * @param comp
      * @param height
      */

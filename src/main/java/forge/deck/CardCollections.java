@@ -49,13 +49,13 @@ public class CardCollections {
     public CardCollections() {
         StopWatch sw = new StopWatch();
         sw.start();
-        this.constructed = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_CONSTRUCTED_DIR), true), true);
-        this.draft = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(NewConstants.DECK_DRAFT_DIR)));
-        this.sealed = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(NewConstants.DECK_SEALED_DIR)));
-        this.cube = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_CUBE_DIR)));
-        this.scheme = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_SCHEME_DIR)));
-        this.plane = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_PLANE_DIR)));
-        this.commander = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_COMMANDER_DIR)));
+        this.constructed = new StorageImmediatelySerialized<Deck>("Constructed decks", new DeckSerializer(new File(NewConstants.DECK_CONSTRUCTED_DIR), true), true);
+        this.draft = new StorageImmediatelySerialized<DeckGroup>("Draft deck sets", new DeckGroupSerializer(new File(NewConstants.DECK_DRAFT_DIR)));
+        this.sealed = new StorageImmediatelySerialized<DeckGroup>("Sealed deck sets", new DeckGroupSerializer(new File(NewConstants.DECK_SEALED_DIR)));
+        this.cube = new StorageImmediatelySerialized<Deck>("Cubes", new DeckSerializer(new File(NewConstants.DECK_CUBE_DIR)));
+        this.scheme = new StorageImmediatelySerialized<Deck>("Archenemy decks", new DeckSerializer(new File(NewConstants.DECK_SCHEME_DIR)));
+        this.plane = new StorageImmediatelySerialized<Deck>("Planechase decks", new DeckSerializer(new File(NewConstants.DECK_PLANE_DIR)));
+        this.commander = new StorageImmediatelySerialized<Deck>("Commander decks", new DeckSerializer(new File(NewConstants.DECK_COMMANDER_DIR)));
         
         sw.stop();
         System.out.printf("Read decks (%d ms): %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar, %d commander.%n", sw.getTime(), constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size(),commander.size());

@@ -31,6 +31,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
@@ -45,6 +46,8 @@ import org.apache.commons.lang.StringUtils;
 
 import com.google.common.primitives.Ints;
 
+import forge.Command;
+import forge.Singletons;
 import forge.deck.DeckBase;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.controllers.ACEditorBase;
@@ -52,8 +55,10 @@ import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.deckeditor.views.VCardCatalog;
+import forge.gui.framework.ICDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
+import forge.gui.menubar.IMenuProvider;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
@@ -70,7 +75,7 @@ import forge.item.InventoryItem;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CDeckEditorUI {
+public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     /** */
     SINGLETON_INSTANCE;
 
@@ -522,5 +527,35 @@ public enum CDeckEditorUI {
             _findNextMatch(Math.max(0, tableView.getTable().getSelectedRow()), false);
         }
     }
+
+    /* (non-Javadoc)
+     * @see forge.gui.menubar.IMenuProvider#getMenus()
+     */
+    @Override
+    public List<JMenu> getMenus() {
+        return null; //TODO: Create Deck Editor menus
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
+     */
+    @Override
+    public Command getCommandOnSelect() {
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#initialize()
+     */
+    @Override
+    public void initialize() {
+        Singletons.getControl().getMenuBar().setupMenuBar(this);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.ICDoc#update()
+     */
+    @Override
+    public void update() { }
 }
 

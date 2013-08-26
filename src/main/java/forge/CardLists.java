@@ -281,4 +281,18 @@ public class CardLists {
         }
         return tiedForLowest;
     }
+
+    /**
+     * Given a List<Card> cardList, return a int TotalPower.
+     * 
+     * @param cardList          the Card List to be filtered.
+     * @return the total power.
+     */
+    public static int getTotalPower(Iterable<Card> cardList) {
+        int total = 0;
+        for (final Card crd : cardList) {
+            total += crd.getNetAttack();
+        }
+        return total;
+    }
 }

@@ -44,8 +44,9 @@ public enum CSubmenuGauntletContests implements ICDoc {
         @SuppressWarnings("unchecked")
         @Override
         public void mouseClicked(final MouseEvent e) {
-            if (e.getClickCount() == 2) {
-                DeckgenUtil.showDecklist(((JList<String>) e.getSource())); }
+            final GauntletData gd = view.getGauntletLister().getSelectedGauntlet();
+            if (e.getClickCount() == 2)
+                DeckgenUtil.showDecklist( gd.getDecks().get(((JList<String>)e.getSource()).getSelectedIndex()) );
         }
     };
 
@@ -101,7 +102,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
             userDeck = gd.getUserDeck();
         }
         else {
-            userDeck = view.getLstDecks().getDeck().getOriginalDeck();
+            userDeck = view.getLstDecks().getPlayer().getOriginalDeck();
             gd.setUserDeck(userDeck);
         }
 

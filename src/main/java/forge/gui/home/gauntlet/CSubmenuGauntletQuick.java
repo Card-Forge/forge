@@ -97,7 +97,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         Singletons.getModel().getGauntletData().setName(GauntletIO.PREFIX_QUICK + num);
 
         // Pull user deck
-        final Deck userDeck = view.getLstDecks().getDeck().getOriginalDeck(); 
+        final Deck userDeck = view.getLstDecks().getPlayer().getOriginalDeck(); 
 
         // Generate gauntlet decks
         final int numOpponents = view.getSliOpponents().getValue();

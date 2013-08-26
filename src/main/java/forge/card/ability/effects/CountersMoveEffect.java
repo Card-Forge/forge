@@ -23,7 +23,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
         }
-        final List<Card> tgtCards = getTargetCards(sa);
+        final List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
         final String countername = sa.getParam("CounterType");
         final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
 
@@ -74,10 +74,14 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         if (sa.getParam("CounterNum").equals("All")) {
             amount = source.getCounters(cType);
         }
-        List<Card> tgtCards = getTargetCards(sa);
+        List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 
         for (final Card dest : tgtCards) {
-            if ((null != source) && (null != dest)) {
+            if (null != source && null != dest) {
+                // rule 121.5: If the first and second objects are the same object, nothing happens
+                if (source.equals(dest)) {
+                    continue;
+                }
                 if (!"Any".matches(counterName)) {
                     if (dest.canReceiveCounters(cType)
                             && source.getCounters(cType) >= amount) {

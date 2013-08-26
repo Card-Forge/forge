@@ -2531,6 +2531,7 @@ res/cardsfolder/d/death_denied.txt svneol=native#text/plain
 res/cardsfolder/d/death_grasp.txt svneol=native#text/plain
 res/cardsfolder/d/death_hood_cobra.txt svneol=native#text/plain
 res/cardsfolder/d/death_mask_duplicant.txt -text
+res/cardsfolder/d/death_match.txt -text
 res/cardsfolder/d/death_mutation.txt svneol=native#text/plain
 res/cardsfolder/d/death_of_a_thousand_stings.txt svneol=native#text/plain
 res/cardsfolder/d/death_or_glory.txt -text
@@ -3414,6 +3415,7 @@ res/cardsfolder/e/erdwal_ripper.txt -text
 res/cardsfolder/e/erg_raiders.txt svneol=native#text/plain
 res/cardsfolder/e/erhnam_djinn.txt svneol=native#text/plain
 res/cardsfolder/e/erhnam_djinn_avatar.txt -text
+res/cardsfolder/e/erithizon.txt -text
 res/cardsfolder/e/eron_the_relentless.txt svneol=native#text/plain
 res/cardsfolder/e/errand_of_duty.txt -text
 res/cardsfolder/e/errant_doomsayers.txt svneol=native#text/plain
@@ -4639,6 +4641,7 @@ res/cardsfolder/g/grand_arbiter_augustin_iv.txt svneol=native#text/plain
 res/cardsfolder/g/grand_architect.txt -text
 res/cardsfolder/g/grand_coliseum.txt svneol=native#text/plain
 res/cardsfolder/g/grand_melee.txt -text
+res/cardsfolder/g/grand_ossuary.txt -text
 res/cardsfolder/g/grandmother_sengir.txt svneol=native#text/plain
 res/cardsfolder/g/granger_guildmage.txt svneol=native#text/plain
 res/cardsfolder/g/granite_gargoyle.txt svneol=native#text/plain
@@ -5388,6 +5391,7 @@ res/cardsfolder/i/imagecrafter.txt -text
 res/cardsfolder/i/imaginary_pet.txt svneol=native#text/plain
 res/cardsfolder/i/imi_statue.txt svneol=native#text/plain
 res/cardsfolder/i/immaculate_magistrate.txt svneol=native#text/plain
+res/cardsfolder/i/immersturm.txt -text
 res/cardsfolder/i/immerwolf.txt -text
 res/cardsfolder/i/immobilizing_ink.txt svneol=native#text/plain
 res/cardsfolder/i/immolating_souleater.txt svneol=native#text/plain
@@ -5832,6 +5836,7 @@ res/cardsfolder/k/karoo.txt svneol=native#text/plain
 res/cardsfolder/k/karoo_meerkat.txt svneol=native#text/plain
 res/cardsfolder/k/karplusan_forest.txt svneol=native#text/plain
 res/cardsfolder/k/karplusan_giant.txt svneol=native#text/plain
+res/cardsfolder/k/karplusan_minotaur.txt -text
 res/cardsfolder/k/karplusan_strider.txt svneol=native#text/plain
 res/cardsfolder/k/karplusan_wolverine.txt svneol=native#text/plain
 res/cardsfolder/k/karplusan_yeti.txt svneol=native#text/plain
@@ -7245,6 +7250,7 @@ res/cardsfolder/m/mosquito_guard.txt svneol=native#text/plain
 res/cardsfolder/m/moss_diamond.txt svneol=native#text/plain
 res/cardsfolder/m/moss_kami.txt svneol=native#text/plain
 res/cardsfolder/m/moss_monster.txt svneol=native#text/plain
+res/cardsfolder/m/mossbridge_troll.txt -text
 res/cardsfolder/m/mossdog.txt svneol=native#text/plain
 res/cardsfolder/m/mossfire_egg.txt svneol=native#text/plain
 res/cardsfolder/m/mossfire_valley.txt svneol=native#text/plain
@@ -7477,6 +7483,7 @@ res/cardsfolder/n/necropouncer.txt svneol=native#text/plain
 res/cardsfolder/n/necrosavant.txt svneol=native#text/plain
 res/cardsfolder/n/necroskitter.txt svneol=native#text/plain
 res/cardsfolder/n/necrotic_ooze.txt -text
+res/cardsfolder/n/necrotic_plague.txt -text
 res/cardsfolder/n/necrotic_sliver.txt svneol=native#text/plain
 res/cardsfolder/n/nectar_faerie.txt -text
 res/cardsfolder/n/need_for_speed.txt svneol=native#text/plain
@@ -8607,6 +8614,7 @@ res/cardsfolder/q/quicksand.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_amulet.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_behemoth.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_dagger.txt svneol=native#text/plain
+res/cardsfolder/q/quicksilver_fountain.txt -text
 res/cardsfolder/q/quicksilver_gargantuan.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_geyser.txt svneol=native#text/plain
 res/cardsfolder/q/quicksilver_sea.txt -text
@@ -13463,6 +13471,7 @@ res/quest/duels/Hans[!!-~]3.dck -text
 res/quest/duels/Harry[!!-~]Potter[!!-~]1.dck -text
 res/quest/duels/Harry[!!-~]Potter[!!-~]2.dck -text
 res/quest/duels/Harry[!!-~]Potter[!!-~]3.dck -text
+res/quest/duels/Havok[!!-~]3.dck -text
 res/quest/duels/Hellboy[!!-~]2.dck -text
 res/quest/duels/Hellboy[!!-~]3.dck -text
 res/quest/duels/Hercules[!!-~]1.dck -text
@@ -13520,6 +13529,7 @@ res/quest/duels/Kojak[!!-~]3.dck -text
 res/quest/duels/Krypto[!!-~]2.dck -text
 res/quest/duels/Krypto[!!-~]3.dck -text
 res/quest/duels/LeChuck[!!-~]3.dck -text
+res/quest/duels/Leela[!!-~]2.dck -text
 res/quest/duels/Legolas[!!-~]3.dck -text
 res/quest/duels/Leprechaun[!!-~]1.dck -text
 res/quest/duels/Lex[!!-~]Luthor[!!-~]2.dck -text
@@ -14509,6 +14519,7 @@ src/main/java/forge/card/cost/CostDraw.java -text
 src/main/java/forge/card/cost/CostExile.java -text
 src/main/java/forge/card/cost/CostExileAndPay.java -text
 src/main/java/forge/card/cost/CostExiledMoveToGrave.java -text
+src/main/java/forge/card/cost/CostFlipCoin.java -text
 src/main/java/forge/card/cost/CostGainControl.java -text
 src/main/java/forge/card/cost/CostGainLife.java -text
 src/main/java/forge/card/cost/CostMill.java -text
@@ -14804,6 +14815,7 @@ src/main/java/forge/gui/GuiProgressBarWindow.java svneol=native#text/plain
 src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
 src/main/java/forge/gui/InputProxy.java svneol=native#text/plain
 src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
+src/main/java/forge/gui/MouseUtil.java -text
 src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/SOverlayUtils.java -text
@@ -14951,6 +14963,7 @@ src/main/java/forge/gui/input/InputSyncronizedBase.java -text
 src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/match/CMatchUI.java -text
 src/main/java/forge/gui/match/ControlWinLose.java -text
+src/main/java/forge/gui/match/GameLogPanel.java -text
 src/main/java/forge/gui/match/GauntletWinLose.java -text
 src/main/java/forge/gui/match/LimitedWinLose.java -text
 src/main/java/forge/gui/match/QuestWinLose.java -text
@@ -14970,6 +14983,9 @@ src/main/java/forge/gui/match/controllers/CPicture.java -text
 src/main/java/forge/gui/match/controllers/CPlayers.java -text
 src/main/java/forge/gui/match/controllers/CStack.java -text
 src/main/java/forge/gui/match/controllers/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/match/menus/CMatchUIMenus.java -text
+src/main/java/forge/gui/match/menus/DevModeMenu.java -text
+src/main/java/forge/gui/match/menus/GameMenu.java -text
 src/main/java/forge/gui/match/nonsingleton/CCommand.java -text
 src/main/java/forge/gui/match/nonsingleton/CEmptyDoc.java -text
 src/main/java/forge/gui/match/nonsingleton/CField.java -text
@@ -14996,6 +15012,7 @@ src/main/java/forge/gui/menubar/IMenuProvider.java -text
 src/main/java/forge/gui/menubar/MenuUtil.java -text
 src/main/java/forge/gui/menus/ForgeMenu.java -text
 src/main/java/forge/gui/menus/HelpMenu.java -text
+src/main/java/forge/gui/menus/LayoutMenu.java -text
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/FAbsolutePositioner.java -text
@@ -15184,6 +15201,7 @@ src/main/java/forge/util/FileSection.java -text
 src/main/java/forge/util/FileSectionManual.java -text
 src/main/java/forge/util/FileUtil.java svneol=native#text/plain
 src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
+src/main/java/forge/util/IHasName.java -text
 src/main/java/forge/util/IItemReader.java -text
 src/main/java/forge/util/IItemSerializer.java -text
 src/main/java/forge/util/IgnoringXStream.java -text

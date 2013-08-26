@@ -16,6 +16,11 @@ public class CardCMCFilter extends ValueRangeFilter<PaperCard> {
     }
 
     @Override
+    protected String getTitle() {
+        return "Card CMC";
+    }
+
+    @Override
     protected void buildPanel(JPanel panel) {
         
     }

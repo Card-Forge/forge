@@ -1,0 +1,14 @@
+Name:Necrotic Plague
+ManaCost:2 B B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ NecroticPlagueTrig | AddSVar$ NecroticPlagueSac | Description$ Enchanted creature has "At the beginning of your upkeep, sacrifice this creature."
+SVar:NecroticPlagueTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ NecroticPlagueSac | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME.
+SVar:NecroticPlagueSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Self
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChoose | TriggerDescription$ When enchanted creature dies, its controller chooses target creature one of his or her opponents controls. Return CARDNAME from its owner's graveyard to the battlefield attached to that creature.
+SVar:TrigChoose:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Choose a creature your opponents control | TargetsWithDefinedController$ TriggeredCardOpponent | IsCurse$ True | TargetingPlayer$ TriggeredCardController | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ParentTarget
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necrotic_plague.jpg
+Oracle:Enchant creature\nEnchanted creature has "At the beginning of your upkeep, sacrifice this creature."\nWhen enchanted creature dies, its controller chooses target creature one of his or her opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.

@@ -17,6 +17,8 @@
  */
 package forge.util;
 
+import java.io.File;
+
 /**
  * TODO: Write javadoc for this type.
  *
@@ -37,4 +39,7 @@ public interface IItemSerializer<T> extends IItemReader<T> {
      * @param unit the unit
      */
     void erase(T unit);
+
+
+    File getDirectory();
 }

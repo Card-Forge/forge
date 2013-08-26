@@ -35,7 +35,7 @@ public final class EditionCollection extends StorageBase<CardEdition> {
     private final Map<String, CardEdition> aliasToEdition = new TreeMap<String, CardEdition>();
 
     public EditionCollection(File folder) {
-        super(new CardEdition.EditionReader(folder));
+        super("Card editions", new CardEdition.EditionReader(folder));
 
         for (CardEdition ee : this) {
             String alias = ee.getAlias();

@@ -7,16 +7,18 @@ import org.apache.commons.lang.NotImplementedException;
 
 import com.google.common.base.Function;
 
-import forge.util.IItemReader;
-
 
 public class StorageNestedFolders<T> extends StorageBase<IStorage<T>> {
 
-    public StorageNestedFolders(IItemReader<T> io, Function<IItemReader<T>, IStorage<T>> factory) {
-        super(new HashMap<String, IStorage<T>>());
-        for(File sf : io.getSubFolders() )
+    private final File thisFolder;
+
+    public StorageNestedFolders(File thisFolder, Iterable<File> subfolders, Function<File, IStorage<T>> factory) {
+        super("<Subfolders>", new HashMap<String, IStorage<T>>());
+        this.thisFolder = thisFolder;
+        for(File sf : subfolders )
         {
-            map.put(sf.getName(), factory.apply(io.getReaderForFolder(sf)));
+            IStorage<T> newUnit = factory.apply(sf);
+            map.put(sf.getName(), newUnit);
         }
     }
 
@@ -24,13 +26,21 @@ public class StorageNestedFolders<T> extends StorageBase<IStorage<T>> {
     
     @Override
     public void add(IStorage<T> deck) {
-        // need folder name here!
+        File subdir = new File(thisFolder, deck.getName());
+        subdir.mkdir();
+        
+        // TODO: save recursivelly the passed IStorage 
         throw new NotImplementedException();
     }
     
     @Override
     public void delete(String deckName) {
-        throw new NotImplementedException();
+        File subdir = new File(thisFolder, deckName);
+        IStorage<T> f = map.remove(deckName);
+        
+        // TODO: Clear all that files from disk
+        if ( f != null )
+            subdir.delete(); // won't work if not empty;
     }
     
 }

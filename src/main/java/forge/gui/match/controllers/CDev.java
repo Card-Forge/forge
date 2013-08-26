@@ -3,16 +3,16 @@ package forge.gui.match.controllers;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import forge.Command;
 import forge.Singletons;
-import forge.gui.GuiChoose;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VDev;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
-/** 
+/**
  * Controls the combat panel in the match UI.
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
@@ -25,76 +25,113 @@ public enum CDev implements ICDoc {
     //========= Start mouse listener inits
     private final MouseListener madMilling = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            VDev.SINGLETON_INSTANCE.getLblMilling().toggleEnabled();
-            Singletons.getModel().getPreferences().writeMatchPreferences();
-            Singletons.getModel().getPreferences().save();
+        toggleLossByMilling();
     } };
+    public void toggleLossByMilling() {
+        VDev.SINGLETON_INSTANCE.getLblMilling().toggleEnabled();
+        Singletons.getModel().getPreferences().writeMatchPreferences();
+        Singletons.getModel().getPreferences().save();
+    }
 
     private final MouseListener madUnlimited = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().toggleEnabled();
-            System.out.println(VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled());
-            Singletons.getModel().getPreferences().setPref(FPref.DEV_UNLIMITED_LAND,
-                    String.valueOf(VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled()));
-            Singletons.getModel().getPreferences().save();
+        togglePlayManyLandsPerTurn();
     } };
+    public void togglePlayManyLandsPerTurn() {
+        VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().toggleEnabled();
+        System.out.println(VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled());
+        Singletons.getModel().getPreferences().setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled()));
+        Singletons.getModel().getPreferences().save();
+    }
 
     private final MouseListener madMana = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeGenerateMana();
-            Singletons.getModel().getPreferences().save(); } };
+        generateMana(); }
+    };
+    public void generateMana() {
+        GuiDisplayUtil.devModeGenerateMana();
+        Singletons.getModel().getPreferences().save();
+    }
 
     private final MouseListener madSetup = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devSetupGameState(); } };
+        setupGameState(); }
+    };
+    public void setupGameState() {
+        GuiDisplayUtil.devSetupGameState();
+    }
 
     private final MouseListener madTutor = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeTutor(); } };
+        tutorForCard(); }
+    };
+    public void tutorForCard() {
+        GuiDisplayUtil.devModeTutor();
+    }
 
     private final MouseListener madCardToHand = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeCardToHand(); } };
+        addCardToHand(); }
+    };
+    public void addCardToHand() {
+        GuiDisplayUtil.devModeCardToHand();
+    }
 
     private final MouseListener madCounter = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeAddCounter(); } };
+        addCounterToPermanent(); }
+    };
+    public void addCounterToPermanent() {
+        GuiDisplayUtil.devModeAddCounter();
+    }
 
     private final MouseListener madTap = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeTapPerm(); } };
+        tapPermanent(); }
+    };
+    public void tapPermanent() {
+        GuiDisplayUtil.devModeTapPerm();
+    }
 
     private final MouseListener madUntap = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeUntapPerm(); } };
+        untapPermanent(); }
+    };
+    public void untapPermanent() {
+        GuiDisplayUtil.devModeUntapPerm();
+    }
 
     private final MouseListener madLife = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeSetLife(); } };
+        setPlayerLife(); }
+    };
+    public void setPlayerLife() {
+        GuiDisplayUtil.devModeSetLife();
+    }
 
     private final MouseListener madCardToBattlefield = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeCardToBattlefield(); } };
+        addCardToPlay(); }
+    };
+    public void addCardToPlay() {
+        GuiDisplayUtil.devModeCardToBattlefield();
+    }
 
     private final MouseListener madRiggedRoll = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeRiggedPlanarRoll(); } };
+        riggedPlanerRoll(); }
+    };
+    public void riggedPlanerRoll() {
+        GuiDisplayUtil.devModeRiggedPlanarRoll();
+    }
 
     private final MouseListener madWalkToPlane = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModePlaneswalkTo(); } };
-
-    private final MouseListener madSetWindowSize = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            String[] options = {"800x600", "1024x768", "1280x720"};
-            final String choice = GuiChoose.oneOrNone("Choose new window size", options);
-            if (choice != null)
-            {
-                String[] dims = choice.split("x");
-                Singletons.getView().getFrame().setSize(Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
-            }
-        }
+        planeswalkTo(); }
     };
+    public void planeswalkTo() {
+        GuiDisplayUtil.devModePlaneswalkTo();
+    }
 
     //========== End mouse listener inits
 
@@ -124,8 +161,7 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
         VDev.SINGLETON_INSTANCE.getLblRiggedRoll().addMouseListener(madRiggedRoll);
         VDev.SINGLETON_INSTANCE.getLblWalkTo().addMouseListener(madWalkToPlane);
-        VDev.SINGLETON_INSTANCE.getLblSetWindowSize().addMouseListener(madSetWindowSize);
-        
+
         ForgePreferences prefs = Singletons.getModel().getPreferences();
 
         VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(prefs.getPrefBoolean(FPref.DEV_MILLING_LOSS));

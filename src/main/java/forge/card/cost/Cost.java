@@ -255,6 +255,12 @@ public class Cost {
             return new CostMill(splitStr[0]);
         }
 
+        if (parse.startsWith("FlipCoin<")) {
+            // FlipCoin<NumCoins>
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostFlipCoin(splitStr[0]);
+        }
+
         if (parse.startsWith("Discard<")) {
             // Discard<NumCards/Type>
             final String[] splitStr = abCostParse(parse, 3);

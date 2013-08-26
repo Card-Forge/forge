@@ -163,7 +163,7 @@ public enum CSubmenuArchenemy implements ICDoc {
 
         List<Deck> playerDecks = new ArrayList<Deck>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
-            RegisteredPlayer d = view.getDeckChoosers().get(i).getDeck();
+            RegisteredPlayer d = view.getDeckChoosers().get(i).getPlayer();
 
             if (d == null) {
                 //ERROR!

@@ -55,12 +55,6 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             victory = flipCoinCall(caller.get(0), sa, flipMultiplier);
         }
 
-        // Run triggers
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Player", caller.get(0));
-        runParams.put("Result", (Boolean) victory);
-        player.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);
-
         final boolean rememberResult = sa.hasParam("RememberResult");
 
         for (final Player flipper : playersToFlip) {
@@ -155,7 +149,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * @param multiplier
      * @return a boolean.
      */
-    public boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier) {
+    public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier) {
         boolean [] results = new boolean [multiplier];
         for (int i = 0; i < multiplier; i++) {
             final boolean choice = caller.getController().chooseBinary(sa, sa.getSourceCard().getName() + " - Call coin flip", true);
@@ -167,10 +161,16 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         boolean result = multiplier == 1 ? results[0] : caller.getController().chooseFlipResult(sa, caller, results, true);
         
         caller.getGame().getAction().nofityOfValue(sa, caller, result ? "win" : "lose", null);
+
+        // Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Player", caller);
+        runParams.put("Result", (Boolean) result);
+        caller.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);
         return result;
     }
 
-    public int getFilpMultiplier(final Player flipper) {
+    public static int getFilpMultiplier(final Player flipper) {
         int i = 0;
         for (String kw : flipper.getKeywords()) {
             if (kw.startsWith("If you would flip a coin")) {

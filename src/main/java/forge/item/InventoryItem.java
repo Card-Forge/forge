@@ -17,19 +17,14 @@
  */
 package forge.item;
 
+import forge.util.IHasName;
+
 /**
  * Interface to define a player's inventory may hold. Should include
  * CardPrinted, Booster, Pets, Plants... etc
  */
-public interface InventoryItem {
-
-    /**
-     * An inventory item has to provide a name.
-     * 
-     * @return the name
-     */
-    String getName();
-
+public interface InventoryItem extends IHasName
+{
     /**
      * Return type as a string.
      * 

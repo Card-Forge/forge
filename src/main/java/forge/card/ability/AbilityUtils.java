@@ -420,8 +420,17 @@ public class AbilityUtils {
         if (calcX[0].startsWith("Imprinted")) {
             // Add whole Imprinted list to handlePaid
             final List<Card> list = new ArrayList<Card>();
-            for (final Card c : card.getImprinted()) {
-                list.add(game.getCardState(c));
+            Card newCard = card;
+            if (card.getImprinted().isEmpty()) {
+                newCard = game.getCardState(card);
+            }
+
+            if (calcX[0].endsWith("LKI")) { // last known information
+                list.addAll(newCard.getImprinted());
+            } else {
+                for (final Card c : newCard.getImprinted()) {
+                    list.add(game.getCardState(c));
+                }
             }
 
             return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
@@ -496,6 +505,11 @@ public class AbilityUtils {
             final SpellAbility root = ability.getRootAbility();
             Object o = root.getTriggeringObject(calcX[0].substring(9));
             return o instanceof Player ? CardFactoryUtil.playerXProperty((Player) o, calcX[1], card) * multiplier : 0;
+        }
+        if (calcX[0].equals("TriggeredCardController")) {
+            final ArrayList<Player> players = new ArrayList<Player>();
+            players.addAll(getDefinedPlayers(card, "TriggeredCardController", ability));
+            return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
         }
         if(calcX[0].equals("TriggeredSpellAbility")) {
             final SpellAbility root = ability.getRootAbility();
@@ -704,7 +718,7 @@ public class AbilityUtils {
     public static List<Player> getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
         final List<Player> players = new ArrayList<Player>();
         final String defined = (def == null) ? "You" : def;
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Game game = card == null ? null : card.getGame();
 
         if (defined.equals("Targeted")) {
             final SpellAbility saTargeting = sa.getSATargetingPlayer();

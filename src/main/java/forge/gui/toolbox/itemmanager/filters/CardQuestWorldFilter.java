@@ -28,6 +28,11 @@ public class CardQuestWorldFilter extends ListLabelFilter<PaperCard> {
         }
         return existingFilter == null || !((CardQuestWorldFilter)existingFilter).questWorlds.contains(questWorld);
     }
+
+    @Override
+    protected String getTitle() {
+        return "Quest World";
+    }
     
     /**
      * Merge the given filter with this filter if possible
