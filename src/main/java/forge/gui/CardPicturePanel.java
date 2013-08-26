@@ -26,9 +26,12 @@ import javax.swing.JPanel;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.ImageCache;
+import forge.Singletons;
 import forge.gui.toolbox.imaging.FImagePanel;
+import forge.gui.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.gui.toolbox.imaging.FImageUtil;
 import forge.item.InventoryItem;
+import forge.properties.ForgePreferences.FPref;
 
 /**
  * Displays image associated with a card or inventory item.
@@ -62,40 +65,44 @@ public final class CardPicturePanel extends JPanel {
         this.displayed = c;
         this.setImage();
     }
-    
-//    public Card getCard() {
-//        return (Card)displayed;
-//    }
-    
-    public void setCardImage(CardCharacteristicName flipState) {        
+
+    public void setCardImage(CardCharacteristicName flipState) {
         BufferedImage image = FImageUtil.getImage((Card)displayed, flipState);
         if (image != null && image != this.currentImage) {
             this.currentImage = image;
-            this.panel.setImage(image);
-        }              
+            this.panel.setImage(image, getAutoSizeImageMode());
+        }
     }
 
-    public void setImage() {                
+    public void setImage() {
         BufferedImage image = getImage();
         if (image != null && image != this.currentImage) {
             this.currentImage = image;
-            this.panel.setImage(image);
-        }        
+            this.panel.setImage(image, getAutoSizeImageMode());
+        }
     }
-    
+
     public BufferedImage getImage() {
 
         BufferedImage image = null;
-        
+
         if (displayed instanceof InventoryItem) {
             InventoryItem item = (InventoryItem) displayed;
             image = ImageCache.getOriginalImage(ImageCache.getImageKey(item, false), true);
-        
+
         } else if (displayed instanceof Card) {
-            image = FImageUtil.getImage((Card)displayed);            
+            image = FImageUtil.getImage((Card)displayed);
         }
 
         return image;
     }
-        
+
+    private AutoSizeImageMode getAutoSizeImageMode() {
+        return (isUIScaleLarger() ? AutoSizeImageMode.PANEL : AutoSizeImageMode.SOURCE);
+    }
+
+    private boolean isUIScaleLarger() {
+        return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
+    }
+
 }
