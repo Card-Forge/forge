@@ -19,6 +19,7 @@ The feature is half-complete now. Forge can read subfolders in constructed deck,
 - The Help menu contains links to online articles and the local TXT files.
 
 === Duel/Match Screen Changes ===
+- Fixed: Concede is prevented during the declare blockers step.
 == Menubar Changes ==
 - Migration of Dock and DevMode options into Menubar.
 - Toggle console tabs visibility.
