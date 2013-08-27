@@ -2066,16 +2066,16 @@ public class CardFactoryUtil {
         if (evokePos != -1) {
             card.addSpellAbility(makeEvokeSpell(card, card.getKeyword().get(evokePos)));
         }
-        final int monstrousPos = hasKeyword(card, "Monstrousity");
+        final int monstrousPos = hasKeyword(card, "Monstrosity");
         if (monstrousPos != -1) {
             final String parse = card.getKeyword().get(monstrousPos).toString();
             final String[] k = parse.split(":");
-            final String magnitude = k[0].substring(13);
+            final String magnitude = k[0].substring(12);
             final String manacost = k[1];
             card.removeIntrinsicKeyword(parse);
 
             String effect = "AB$ PutCounter | Cost$ " + manacost + " | IsPresent$ " +
-            		"Card.Self+IsNotMonstrous | Monstrousity$ True | CounterNum$ " +
+            		"Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " +
                     magnitude + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " +
             		magnitude + " (If this creature isn't monstrous, put four +1/+1 " +
             		"counters on it and it becomes monstrous.)";
