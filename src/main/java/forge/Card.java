@@ -169,6 +169,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean unearthed;
 
+    private boolean monstrous = false;
+
     private boolean suspendCast = false;
     private boolean suspend = false;
 
@@ -6568,6 +6570,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (this.devouredCards.size() != 0) {
                 return false;
             }
+        } else if (property.equals("IsNotMonstrous")) {
+            if (this.isMonstrous()) {
+                return false;
+            }
         } else if (property.startsWith("non")) {
             // ... Other Card types
             if (this.isType(property.substring(3))) {
@@ -7719,6 +7725,29 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean isEvoked() {
         return this.evoked;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>monstrous</code>.
+     * </p>
+     * 
+     * @param monstrous
+     *            a boolean.
+     */
+    public final void setMonstrous(final boolean monstrous) {
+        this.monstrous = monstrous;
+    }
+
+    /**
+     * <p>
+     * isMonstrous.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isMonstrous() {
+        return this.monstrous;
     }
 
     /**

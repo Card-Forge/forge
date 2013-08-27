@@ -9936,6 +9936,7 @@ res/cardsfolder/s/shinen_of_stars_light.txt svneol=native#text/plain
 res/cardsfolder/s/shinewend.txt svneol=native#text/plain
 res/cardsfolder/s/shinka_gatekeeper.txt svneol=native#text/plain
 res/cardsfolder/s/shinka_the_bloodsoaked_keep.txt svneol=native#text/plain
+res/cardsfolder/s/shipbreaker_kraken.txt -text
 res/cardsfolder/s/shirei_shizos_caretaker.txt -text
 res/cardsfolder/s/shisato_whispering_hunter.txt -text
 res/cardsfolder/s/shiv.txt -text
@@ -14606,6 +14607,7 @@ src/main/java/forge/card/trigger/TriggerAttackerBlocked.java svneol=native#text/
 src/main/java/forge/card/trigger/TriggerAttackerUnblocked.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerAttackersDeclared.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerAttacks.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerBecomeMonstrous.java -text
 src/main/java/forge/card/trigger/TriggerBecomesTarget.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerBlockersDeclared.java -text
 src/main/java/forge/card/trigger/TriggerBlocks.java svneol=native#text/plain
