@@ -36,6 +36,7 @@ The feature is half-complete now. Forge can read subfolders in constructed deck,
 == Themes ==
 - Combo-box style should now be appear correctly on Mac OS .
 
+
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
 
@@ -69,6 +70,13 @@ New Planes
 
 Grand Ossuary
 Immersturm
+
+
+-----------------------
+New Theros branch Cards
+-----------------------
+
+Shipbreaker Kraken
 
 
 ------------
