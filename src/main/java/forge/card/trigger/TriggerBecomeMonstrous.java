@@ -22,11 +22,11 @@ import forge.card.spellability.SpellAbility;
 
 /**
  * <p>
- * Trigger_TurnFaceUp class.
+ * Trigger_BecomeMonstrous class.
  * </p>
  * 
  * @author Forge
- * @version $Id: TriggerTurnFaceUp.java 21543 2013-05-19 21:35:20Z Max mtg $
+ * @version $Id: TriggerBecomeMonstrous.java 21543 2013-05-19 21:35:20Z Max mtg $
  */
 public class TriggerBecomeMonstrous extends Trigger {
 
