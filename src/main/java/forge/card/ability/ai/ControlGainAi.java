@@ -103,8 +103,8 @@ public class ControlGainAi extends SpellAbilityAi {
 
         List<Card> list =
                 CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
-        // AI won't try to grab cards that are filtered out of AI decks on
-        // purpose
+        
+        // AI won't try to grab cards that are filtered out of AI decks on purpose
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -185,7 +185,14 @@ public class ControlGainAi extends SpellAbilityAi {
                 return true;
             }
         } else {
-            return this.canPlayAI(ai, sa);
+            if(!this.canPlayAI(ai, sa) && mandatory) {
+                List<Card> list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
+                if (list.isEmpty()) {
+                    return false;
+                } else {
+                    sa.getTargets().add(ComputerUtilCard.getWorstAI(list));
+                }
+            }
         }
 
         return true;
