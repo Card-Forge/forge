@@ -1350,11 +1350,11 @@ public class GameAction {
             return false;
         }
 
-        final Card newCard = this.moveToGraveyard(c);
-
         boolean persist = (c.hasKeyword("Persist") && c.getCounters(CounterType.M1M1) == 0) && !c.isToken();
         boolean undying = (c.hasKeyword("Undying") && c.getCounters(CounterType.P1P1) == 0) && !c.isToken();
-        
+
+        final Card newCard = this.moveToGraveyard(c);
+
         // don't trigger persist/undying if the dying has been replaced
         if (newCard == null || !newCard.isInZone(ZoneType.Graveyard)) {
             persist = false;
