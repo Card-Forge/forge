@@ -247,26 +247,6 @@ public class Upkeep extends Phase {
 
     /**
      * <p>
-     * upkeepAIPayment.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param cost
-     *            a {@link java.lang.String} object.
-     * @param cost
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.spellability.Ability} object.
-     */
-    public static Ability getBlankAbility(final Card c, final Cost cost) {
-        return new AbilityStatic(c, cost, null) {
-            @Override
-            public void resolve() {}
-        };
-    }
-
-    /**
-     * <p>
      * upkeepDropOfHoney.
      * </p>
      */
@@ -490,11 +470,16 @@ public class Upkeep extends Phase {
                             }
                         }
                     } else {
-                        InputSelectCards inp = new InputSelectCardsFromList(num, num, list);
-                        inp.setMessage(source.getName() + " - Select %d untapped artifact(s), creature(s), or land(s) you control");
-                        Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                        for(Card crd : inp.getSelected())
-                            crd.tap();
+                        if (list.size() > num){
+                            InputSelectCards inp = new InputSelectCardsFromList(num, num, list);
+                            inp.setMessage(source.getName() + " - Select %d untapped artifact(s), creature(s), or land(s) you control");
+                            Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                            for(Card crd : inp.getSelected())
+                                crd.tap();
+                        } else {
+                            for(Card crd : list)
+                                crd.tap();
+                        }
                     }
                 }
             };
