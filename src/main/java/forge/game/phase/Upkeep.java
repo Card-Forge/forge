@@ -35,7 +35,6 @@ import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
-import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
@@ -90,7 +89,6 @@ public class Upkeep extends Phase {
 
         Upkeep.upkeepDropOfHoney(game);
         Upkeep.upkeepTangleWire(game);
-
         Upkeep.upkeepOathOfDruids(game);
         Upkeep.upkeepOathOfGhouls(game);
 
