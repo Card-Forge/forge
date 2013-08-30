@@ -1,7 +1,7 @@
-Forge Beta: 08-##-2013 ver 1.4.7
+Forge Beta: 08-30-2013 ver 1.4.7
 
 
-13### cards in total.
+13087 cards in total.
 
 
 -------------
@@ -53,14 +53,14 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-Pandemonium
-Ley Line
-Illuminated Folio
 Death Match
-Mossbridge Troll
-Karplusan Minotaur
 Erithizon
+Illuminated Folio
+Karplusan Minotaur
+Ley Line
+Mossbridge Troll
 Necrotic Plague
+Pandemonium
 Quicksliver Fountain
 
 
@@ -101,7 +101,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+DrDev
+Gos
+Hellfish
+Marc
+Max
+Nordos
+Sloth
+Sol
+spr
+squee1968
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
