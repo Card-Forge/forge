@@ -8005,6 +8005,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 } else if (kw.equals("Protection from everything")) {
                     return true;
+                } else if (kw.startsWith("Protection:")) { // uses isValid
+                    final String characteristic = kw.split(":")[1];
+                    final String[] characteristics = characteristic.split(",");
+                    if (source.isValid(characteristics, this.getController(), this)
+                      && !source.getName().contains("Flickering Ward") && !source.getName().contains("Pentarch Ward")
+                      && !source.getName().contains("Cho-Manno's Blessing") && !source.getName().contains("Floating Shield")
+                      && !source.getName().contains("Ward of Lights")) {
+                        return true;
+                    }
                 }
 
                 if (kw.equals("Protection from colored spells")
@@ -8028,17 +8037,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 if (kw.equals("Protection from Gorgons") && source.isType("Gorgon")) {
                     return true;
-                }
-
-                if (kw.startsWith("Protection:")) { // uses isValid
-                    final String characteristic = kw.split(":")[1];
-                    final String[] characteristics = characteristic.split(",");
-                    if (source.isValid(characteristics, this.getController(), this)
-                      && !source.getName().contains("Flickering Ward") && !source.getName().contains("Pentarch Ward")
-                      && !source.getName().contains("Cho-Manno's Blessing") && !source.getName().contains("Floating Shield")
-                      && !source.getName().contains("Ward of Lights")) {
-                        return true;
-                    }
                 }
 
             }
