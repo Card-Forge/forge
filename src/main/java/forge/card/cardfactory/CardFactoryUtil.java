@@ -2377,7 +2377,7 @@ public class CardFactoryUtil {
         if (card.hasKeyword("Extort")) {
             final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
                     + "TriggerZones$ Battlefield | Execute$ ExtortOpps | Secondary$ True"
-                    + " | TriggerDescription$ Extort (Whenever you cast a spell, you may pay WB. If you do, "
+                    + " | TriggerDescription$ Extort (Whenever you cast a spell, you may pay W/B. If you do, "
                     + "each opponent loses 1 life and you gain that much life.)";
             final String abString = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | "
                     + "LifeAmount$ 1 | SubAbility$ ExtortGainLife";
