@@ -3,26 +3,30 @@
 Name=Mortivore 3
 Title=Mortivore
 Difficulty=hard
-Description=BG Mortivore deck with Splinterfright and Hermit Druid
+Description=BG Mortivore deck with Mesmeric Orb, Splinterfright and Sewer Nemesis
 Icon=Mortivore.jpg
 Deck Type=constructed
 [main]
-4 Birds of Paradise|2ED
-3 Bonehoard|MBS
-1 Brawn|COM
 4 Dryad Arbor|FUT
 6 Forest|M10
-2 Golgari Grave-Troll|RAV
-4 Hermit Druid|STH
-2 Lord of Extinction|ARB
-2 Mesmeric Orb|MRD
-3 Mortivore|ODY
-1 Revenant|STH
-4 Sakura-Tribe Elder|COM
-3 Shriekmaw|LRW
+7 Swamp|PO2
+4 Bayou
+1 Mox Jet
+1 Mox Emerald
+4 Mesmeric Orb|MRD
+4 Sewer Nemesis
 4 Splinterfright|ISD
-4 Stinkweed Imp|RAV
-1 Svogthos, the Restless Tomb|RAV
-9 Swamp|PO2
-3 Sylvok Replica|SOM
+1 Geth, Lord of the Vault
+1 Horrifying Revelation
+1 Ghoulcaller's Bell
+3 Shriekmaw|LRW
+2 Golgari Grave-Troll|RAV
+4 Bonehoard|MBS
+4 Lord of Extinction|ARB
+4 Mortivore|ODY
+1 Lhurgoyf
+1 Exoskeletal Armor
+1 Avatar of Woe
+1 Necrotic Ooze
+1 Brawn|COM
 [sideboard]
