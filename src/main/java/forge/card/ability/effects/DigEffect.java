@@ -53,6 +53,8 @@ public class DigEffect extends SpellAbilityEffect {
         Player choser = player;
         int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         
+        final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone")) : ZoneType.Library;
+        
         final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone")) : ZoneType.Hand;
         final ZoneType destZone2 = sa.hasParam("DestinationZone2") ? ZoneType.smartValueOf(sa.getParam("DestinationZone2")) : ZoneType.Library;
 
@@ -68,6 +70,7 @@ public class DigEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         final boolean noMove = sa.hasParam("NoMove");
         final boolean skipReorder = sa.hasParam("SkipReorder");
+        
         boolean changeAll = false;
         boolean allButOne = false;
         final ArrayList<String> keywords = new ArrayList<String>();
@@ -102,7 +105,7 @@ public class DigEffect extends SpellAbilityEffect {
             final List<Card> top = new ArrayList<Card>();
             List<Card> valid = new ArrayList<Card>();
             final List<Card> rest = new ArrayList<Card>();
-            final PlayerZone library = p.getZone(ZoneType.Library);
+            final PlayerZone library = p.getZone(srcZone);
 
             numToDig = Math.min(numToDig, library.size());
             for (int i = 0; i < numToDig; i++) {
@@ -275,24 +278,20 @@ public class DigEffect extends SpellAbilityEffect {
                             continue;
                         }
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
-                        if (zone.is(ZoneType.Library)) {
-                            game.getAction().moveToLibrary(c, libraryPosition);
-                        } else {
-                            c = game.getAction().moveTo(zone, c);
-                            if (destZone1.equals(ZoneType.Battlefield)) {
-                                for (final String kw : keywords) {
-                                    c.addExtrinsicKeyword(kw);
-                                }
-                                if (sa.hasParam("Tapped")) {
-                                    c.setTapped(true);
-                                }
+                        c = game.getAction().moveTo(zone, c, libraryPosition);
+                        if (destZone1.equals(ZoneType.Battlefield)) {
+                            for (final String kw : keywords) {
+                                c.addExtrinsicKeyword(kw);
                             }
-                            if (sa.hasParam("ExileFaceDown")) {
-                                c.setState(CardCharacteristicName.FaceDown);
+                            if (sa.hasParam("Tapped")) {
+                                c.setTapped(true);
                             }
-                            if (sa.hasParam("Imprint")) {
-                                host.addImprinted(c);
-                            }
+                        }
+                        if (sa.hasParam("ExileFaceDown")) {
+                            c.setState(CardCharacteristicName.FaceDown);
+                        }
+                        if (sa.hasParam("Imprint")) {
+                            host.addImprinted(c);
                         }
                         if (sa.hasParam("ForgetOtherRemembered")) {
                             host.clearRemembered();
