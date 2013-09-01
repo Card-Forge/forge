@@ -162,7 +162,7 @@ public class HumanPlaySpellAbility {
 
                 boolean isX = "X".equalsIgnoreCase(varName);
                 CostPartMana manaCost = ability.getPayCosts().getCostMana();
-                boolean allowZero = !isX || manaCost == null || manaCost.canXbe0();
+                boolean allowZero = !ability.hasParam("XCantBe0") && (!isX || manaCost == null || manaCost.canXbe0());
 
                 Integer value = ability.getActivatingPlayer().getController().announceRequirements(ability, varName, allowZero);
                 if ( null == value )
