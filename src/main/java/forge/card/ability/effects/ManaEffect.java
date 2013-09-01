@@ -3,6 +3,8 @@ package forge.card.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.Constant;
 import forge.CounterType;
@@ -203,7 +205,9 @@ public class ManaEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Add ").append(GameActionUtil.generatedMana(sa)).append(" to your mana pool.");
+        String mana = !sa.hasParam("Amount") || StringUtils.isNumeric(sa.getParam("Amount"))
+                ? GameActionUtil.generatedMana(sa) : "mana";
+        sb.append("Add ").append(mana).append(" to your mana pool.");
         return sb.toString();
     }
 }

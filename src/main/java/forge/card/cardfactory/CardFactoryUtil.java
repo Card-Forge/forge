@@ -1216,18 +1216,25 @@ public class CardFactoryUtil {
             return Aggregates.min(cc.getGame().getPlayers(), Player.Accessors.countCardsInZone(ZoneType.Library));
         }
         
-        
+        // Count$MonstrosityMagnitude
+        if (sq[0].contains("MonstrosityMagnitude")) {
+            return doXMath(c.getMonstrosityNum(), m, c);
+        }
 
         // Count$Chroma.<mana letter>
-        if (sq[0].contains("Chroma")) {
+        if (sq[0].contains("Chroma") || sq[0].contains("Devotion")) {
             ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
+            String colorAbb = sq[1];
+            if (colorAbb.contains("Chosen")) {
+                colorAbb = MagicColor.toShortString(c.getChosenColor().get(0));
+            }
             final List<Card> cards;
             if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
                 cards = Lists.newArrayList(c);
             } else {
                 cards = cc.getCardsIn(sourceZone);
             }
-            return doXMath(getNumberOfManaSymbolsByColor(sq[1], cards), m, c);
+            return doXMath(getNumberOfManaSymbolsByColor(colorAbb, cards), m, c);
         }
 
         if (sq[0].contains("Hellbent"))         return doXMath(Integer.parseInt(sq[cc.hasHellbent() ? 1 : 2]), m, c);
@@ -2074,11 +2081,13 @@ public class CardFactoryUtil {
             final String manacost = k[1];
             card.removeIntrinsicKeyword(parse);
 
+            String ref = "X".equals(magnitude) ? " | References$ X" : "";
             String effect = "AB$ PutCounter | Cost$ " + manacost + " | IsPresent$ " +
             		"Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " +
                     magnitude + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " +
             		magnitude + " (If this creature isn't monstrous, put four +1/+1 " +
-            		"counters on it and it becomes monstrous.)";
+            		"counters on it and it becomes monstrous.)" + ref;
+            		
             card.addSpellAbility(AbilityFactory.getAbility(effect, card));
         }
 

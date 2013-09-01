@@ -170,6 +170,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean unearthed;
 
     private boolean monstrous = false;
+    private int monstrosityNum = 0;
 
     private boolean suspendCast = false;
     private boolean suspend = false;
@@ -7750,6 +7751,28 @@ public class Card extends GameEntity implements Comparable<Card> {
         return this.monstrous;
     }
 
+    /**
+     * <p>
+     * Setter for the field <code>monstrosityNum</code>.
+     * </p>
+     * 
+     * @param num
+     *            an int.
+     */
+    public final void setMonstrosityNum(final int num) {
+        this.monstrosityNum = num;
+    }
+
+    /**
+     * <p>
+     * getMonstrosityNum.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getMonstrosityNum() {
+        return this.monstrosityNum;
+    }
     /**
      * 
      * TODO Write javadoc for this method.

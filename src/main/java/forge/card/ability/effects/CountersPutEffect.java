@@ -111,6 +111,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("Monstrosity")) {
                         tgtCard.setMonstrous(true);
+                        tgtCard.setMonstrosityNum(counterAmount);
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();
                         runParams.put("Card", tgtCard);
                         tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
