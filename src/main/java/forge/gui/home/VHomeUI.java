@@ -256,8 +256,11 @@ public enum VHomeUI implements IVTopLevelUI {
 
     /** */
     public class PnlDisplay extends JPanel implements ILocalRepaint {
+        private final JComponentSkin<PnlDisplay> skin;
+
         /** Constructor. */
         public PnlDisplay() {
+            this.skin = FSkin.get(this);
             this.setOpaque(false);
         }
 
@@ -272,7 +275,7 @@ public enum VHomeUI implements IVTopLevelUI {
             super.paintComponent(g);
             final Graphics2D g2d = (Graphics2D) g.create();
 
-            g2d.setColor(this.getBackground());
+            skin.setGraphicsColor(g2d, skin.getBackground());
             g2d.fillRect(0, 0, getWidth(), getHeight());
 
             g2d.dispose();

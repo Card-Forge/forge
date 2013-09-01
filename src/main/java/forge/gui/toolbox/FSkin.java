@@ -388,7 +388,7 @@ public enum FSkin {
                 this.color = FSkin.stepColor(this.color, this.step);
             }
             if (this.alpha != NO_ALPHA) {
-                this.color = FSkin.stepColor(this.color, this.alpha);
+                this.color = FSkin.alphaColor(this.color, this.alpha);
             }
         }
     }
