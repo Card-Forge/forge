@@ -302,7 +302,13 @@ public class ComputerUtilCombat {
                             cmdDmg -= blocker.getCurrentToughness();
                         }
                     }
-                    
+                    else
+                    {
+                        if(combat.getBlockers(c).size() == 0)
+                        {
+                            cmdDmg += c.getCurrentPower();
+                        }
+                    }
                     if(cmdDmg >= 21) {
                         res.add(c);
                     }
