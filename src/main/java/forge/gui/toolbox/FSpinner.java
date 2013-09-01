@@ -37,9 +37,10 @@ public class FSpinner extends JSpinner {
         this.setEditor(new JSpinner.NumberEditor(this, "##"));
         JFormattedTextField txt = ((JSpinner.NumberEditor)this.getEditor()).getTextField();
         ((NumberFormatter)txt.getFormatter()).setAllowsInvalid(false);
-        txt.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        txt.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        txt.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.JTextComponentSkin<JFormattedTextField> txtSkin = FSkin.get(txt);
+        txtSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        txtSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        txtSkin.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         txt.setMargin(new Insets(5, 5, 5, 5));
         txt.setOpaque(true);
         

@@ -22,7 +22,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Composite;
 import java.awt.Dimension;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
@@ -40,6 +39,8 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
 
 import forge.gui.framework.ILocalRepaint;
+import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
 
 /** 
  * An extension of JScrollPane that can be used as a panel and supports using arrow buttons to scroll instead of scrollbars
@@ -195,12 +196,13 @@ public class FScrollPanel extends JScrollPane {
     }
     
     private abstract class ArrowButton extends JLabel implements ILocalRepaint {
-        private final Color clrFore = FSkin.getColor(FSkin.Colors.CLR_TEXT);
-        private final Color clrBack = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-        private final Color d50 = FSkin.stepColor(clrBack, -50);
-        private final Color d10 = FSkin.stepColor(clrBack, -10);
-        private final Color l10 = FSkin.stepColor(clrBack, 10);
-        private final Color l20 = FSkin.stepColor(clrBack, 20);
+        private final JComponentSkin<ArrowButton> skin;
+        private final SkinColor clrFore = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+        private final SkinColor clrBack = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+        private final SkinColor d50 = clrBack.stepColor(-50);
+        private final SkinColor d10 = clrBack.stepColor(-10);
+        private final SkinColor l10 = clrBack.stepColor(10);
+        private final SkinColor l20 = clrBack.stepColor(20);
         private final AlphaComposite alphaDefault = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f);
         private final AlphaComposite alphaHovered = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.9f);
         protected final int arrowSize = 6;
@@ -210,6 +212,7 @@ public class FScrollPanel extends JScrollPane {
 
         protected ArrowButton(final JScrollBar scrollBar0, final int incrementDirection0) {
             super("");
+            skin = FSkin.get(this);
             scrollBar = scrollBar0;
             incrementDirection = incrementDirection0;
             timer.setInitialDelay(500); //wait half a second after mouse down before starting timer
@@ -235,16 +238,15 @@ public class FScrollPanel extends JScrollPane {
             Composite oldComp = g2d.getComposite();
             g2d.setComposite(hovered ? alphaHovered : alphaDefault);
 
-            GradientPaint gradient = new GradientPaint(0, h, d10, 0, 0, l20);
-            g2d.setPaint(gradient);
+            skin.setGraphicsGradientPaint(g2d, 0, h, d10, 0, 0, l20);
             g.fillRect(0, 0, w, h);
 
-            g.setColor(d50);
+            skin.setGraphicsColor(g, d50);
             g.drawRect(0, 0, w - 1, h - 1);
-            g.setColor(l10);
+            skin.setGraphicsColor(g, l10);
             g.drawRect(1, 1, w - 3, h - 3);
 
-            g.setColor(clrFore);
+            skin.setGraphicsColor(g, clrFore);
             drawArrow(g);
 
             super.paintComponent(g);

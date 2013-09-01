@@ -75,7 +75,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
 
     private VSubmenuPlanechase() {
 
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         //This listener will look for any of the radio buttons being selected
         //and call the method that shows/hides tabs appropriately.

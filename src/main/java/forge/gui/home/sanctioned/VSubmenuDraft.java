@@ -79,7 +79,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         lstAI.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         btnStart.setEnabled(false);
 
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         JXButtonPanel grpPanel = new JXButtonPanel();
         grpPanel.add(radSingle, "w 200px!, h 30px!");

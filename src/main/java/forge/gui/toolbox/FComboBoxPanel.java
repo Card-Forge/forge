@@ -60,7 +60,7 @@ public class FComboBoxPanel<E> extends JPanel {
         if (this.comboBoxCaption != null && !this.comboBoxCaption.isEmpty()) {
             JLabel comboLabel;
             comboLabel = new JLabel(this.comboBoxCaption);
-            comboLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            FSkin.get(comboLabel).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             comboLabel.setFont(FSkin.getBoldFont(12));
             this.add(comboLabel);            
         }
@@ -69,8 +69,9 @@ public class FComboBoxPanel<E> extends JPanel {
     private void setComboBoxLayout() {
         if (this.comboBox != null) {
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX)) {
-                this.comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-                this.comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+                FSkin.JComponentSkin<JComboBox<E>> comboBoxSkin = FSkin.get(this.comboBox);
+                comboBoxSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+                comboBoxSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
                 this.comboBox.setFont(FSkin.getFont(12));
                 this.comboBox.setRenderer(new ComplexCellRenderer<E>());
             }

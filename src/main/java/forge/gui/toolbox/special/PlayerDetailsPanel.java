@@ -85,11 +85,11 @@ public class PlayerDetailsPanel extends JPanel {
         final JPanel row5 = new JPanel(new MigLayout("insets 0, gap 0"));
         final JPanel row6 = new JPanel(new MigLayout("insets 0, gap 0"));
 
-        row1.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        FSkin.get(row1).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row2.setOpaque(false);
-        row3.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        FSkin.get(row3).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row4.setOpaque(false);
-        row5.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        FSkin.get(row5).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row6.setOpaque(false);
 
         // Hand, library, graveyard, exile, flashback, poison labels
@@ -151,8 +151,12 @@ public class PlayerDetailsPanel extends JPanel {
 
         // Poison/life
         this.getLblPoison().setText("" + player.getPoisonCounters());
-        Color poisonFg = player.getPoisonCounters() >= 8 ? Color.red : FSkin.getColor(FSkin.Colors.CLR_TEXT);
-        this.getLblPoison().setForeground(poisonFg);
+        if (player.getPoisonCounters() < 8) {
+            FSkin.get(this.getLblPoison()).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        }
+        else {
+            FSkin.get(this.getLblPoison()).setForeground(Color.red);
+        }
     }
 
     /**

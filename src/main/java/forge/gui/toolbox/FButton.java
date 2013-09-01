@@ -65,7 +65,7 @@ public class FButton extends JButton implements ILocalRepaint {
     public FButton(final String label) {
         super(label);
         this.setOpaque(false);
-        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setBackground(Color.red);
         this.setFocusPainted(false);
         this.setBorder(BorderFactory.createEmptyBorder());

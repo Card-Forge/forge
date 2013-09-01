@@ -124,10 +124,14 @@ public class SSubmenuQuestUtil {
 
         if (view.equals(VSubmenuChallenges.SINGLETON_INSTANCE)) {
             view.getLblZep().setVisible(qCtrl.getAssets().hasItem(QuestItemType.ZEPPELIN));
-            view.getLblZep().setEnabled(qCtrl.getAssets().getItemLevel(
-                    QuestItemType.ZEPPELIN) == 2 ? false : true);
-            view.getLblZep().setForeground(qCtrl.getAssets().getItemLevel(
-                    QuestItemType.ZEPPELIN) == 2 ? Color.gray : FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            if (qCtrl.getAssets().getItemLevel(QuestItemType.ZEPPELIN) == 2) {
+                view.getLblZep().setEnabled(false);
+                FSkin.get(view.getLblZep()).setForeground(Color.gray);
+            }
+            else {
+                view.getLblZep().setEnabled(true);
+                FSkin.get(view.getLblZep()).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            }
         }
         else {
             view.getLblZep().setVisible(false);
@@ -193,7 +197,7 @@ public class SSubmenuQuestUtil {
             lblCurrentDeck.setText("Build, then select a deck in the \"Decks\" submenu.  ");
         }
         else {
-            lblCurrentDeck.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            FSkin.get(lblCurrentDeck).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             lblCurrentDeck.setText("Your current deck is \""
                     + SSubmenuQuestUtil.getCurrentDeck().getName() + "\".");
         }

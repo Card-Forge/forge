@@ -1,11 +1,9 @@
 package forge.gui.toolbox;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -31,6 +29,8 @@ import javax.swing.event.AncestorListener;
 
 import forge.Command;
 import forge.gui.framework.ILocalRepaint;
+import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
 
 /** 
  * Uses the Builder pattern to facilitate/encourage inline styling.
@@ -186,6 +186,8 @@ public class FLabel extends JLabel implements ILocalRepaint {
     // Call this using FLabel.Builder()...
     protected FLabel(final Builder b0) {
         super(b0.bldText);
+        
+        this.skin = FSkin.get(this);
 
         // Init fields from builder
         this.iconScaleFactor = b0.bldIconScaleFactor;
@@ -230,8 +232,8 @@ public class FLabel extends JLabel implements ILocalRepaint {
         
         if (b0.bldUseSkinColors) {
             // Non-custom display properties
-            this.setForeground(clrText);
-            this.setBackground(clrMain);
+            this.skin.setForeground(clrText);
+            this.skin.setBackground(clrMain);
         }
 
         // Resize adapter
@@ -245,15 +247,16 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     //========== Variable initialization
     // Final inits
-    private final Color clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
-    private final Color clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
-    private final Color clrMain = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-    private final Color d50 = FSkin.stepColor(clrMain, -50);
-    private final Color d30 = FSkin.stepColor(clrMain, -30);
-    private final Color d10 = FSkin.stepColor(clrMain, -10);
-    private final Color l10 = FSkin.stepColor(clrMain, 10);
-    private final Color l20 = FSkin.stepColor(clrMain, 20);
-    private final Color l30 = FSkin.stepColor(clrMain, 30);
+    private final JComponentSkin<FLabel> skin;
+    private final SkinColor clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+    private final SkinColor clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+    private final SkinColor clrMain = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+    private final SkinColor d50 = clrMain.stepColor(-50);
+    private final SkinColor d30 = clrMain.stepColor(-30);
+    private final SkinColor d10 = clrMain.stepColor(-10);
+    private final SkinColor l10 = clrMain.stepColor(10);
+    private final SkinColor l20 = clrMain.stepColor(20);
+    private final SkinColor l30 = clrMain.stepColor(30);
     
     // Custom properties, assigned either at realization (using builder)
     // or dynamically (using methods below).
@@ -538,38 +541,36 @@ public class FLabel extends JLabel implements ILocalRepaint {
     }
 
     private void paintFocus(final Graphics2D g, int w, int h) {
-        g.setColor(clrHover);
+        skin.setGraphicsColor(g, clrHover);
         g.drawRect(0, 0, w - 2, h - 2);
-        g.setColor(l30);
+        skin.setGraphicsColor(g, l30);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
     private void paintUp(final Graphics2D g, int w, int h) {
-        GradientPaint gradient = new GradientPaint(0, h, d10, 0, 0, l20);
-        g.setPaint(gradient);
+        skin.setGraphicsGradientPaint(g, 0, h, d10, 0, 0, l20);
         g.fillRect(0, 0, w, h);
 
-        g.setColor(d50);
+        skin.setGraphicsColor(g, d50);
         g.drawRect(0, 0, w - 2, h - 2);
-        g.setColor(l10);
+        skin.setGraphicsColor(g, l10);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
     private void paintBorder(final Graphics2D g, int w, int h) {
-        g.setColor(l10);
+        skin.setGraphicsColor(g, l10);
         g.drawRect(0, 0, w - 2, h - 2);
-        g.setColor(l30);
+        skin.setGraphicsColor(g, l30);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
     private void paintDown(final Graphics2D g, int w, int h) {
-        GradientPaint gradient = new GradientPaint(0, h, d30, 0, 0, l10);
-        g.setPaint(gradient);
+        skin.setGraphicsGradientPaint(g, 0, h, d30, 0, 0, l10);
         g.fillRect(0, 0, w - 1, h - 1);
 
-        g.setColor(d30);
+        skin.setGraphicsColor(g, d30);
         g.drawRect(0, 0, w - 2, h - 2);
-        g.setColor(l10);
+        skin.setGraphicsColor(g, l10);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 

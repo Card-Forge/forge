@@ -79,7 +79,7 @@ public class ViewStall extends JPanel {
         this.setOpaque(false);
 
         this.tpnFluff.setOpaque(false);
-        this.tpnFluff.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.get(this.tpnFluff).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.tpnFluff.setFont(FSkin.getItalicFont(15));
         this.tpnFluff.setFocusable(false);
         this.tpnFluff.setEditable(false);

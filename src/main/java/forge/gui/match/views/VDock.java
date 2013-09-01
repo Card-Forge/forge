@@ -36,6 +36,8 @@ import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
 
 /**
  * Assembles Swing components of button dock area.
@@ -194,9 +196,10 @@ public enum VDock implements IVDoc<CDock> {
     @SuppressWarnings("serial")
     private class DockButton extends JLabel {
         private final Image img;
-        private final Color hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+        private final JComponentSkin<DockButton> skin;
+        private final SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         private final Color defaultBG = new Color(0, 0, 0, 0);
-        private Color clrBorders = new Color(0, 0, 0, 0);
+        private final Color defaultBorderColor = new Color(0, 0, 0, 0);
         private int w, h;
 
         /**
@@ -209,6 +212,7 @@ public enum VDock implements IVDoc<CDock> {
          */
         public DockButton(final ImageIcon i0, final String s0) {
             super();
+            this.skin = FSkin.get(this);
             this.setToolTipText(s0);
             this.setOpaque(false);
             this.setBackground(this.defaultBG);
@@ -222,13 +226,11 @@ public enum VDock implements IVDoc<CDock> {
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    DockButton.this.clrBorders = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
-                    DockButton.this.setBackground(DockButton.this.hoverBG);
+                    DockButton.this.skin.setBackground(DockButton.this.hoverBG);
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
-                    DockButton.this.clrBorders = new Color(0, 0, 0, 0);
                     DockButton.this.setBackground(DockButton.this.defaultBG);
                 }
             });
@@ -245,7 +247,12 @@ public enum VDock implements IVDoc<CDock> {
             this.h = this.getHeight();
             g.setColor(this.getBackground());
             g.fillRect(0, 0, this.w, this.h);
-            g.setColor(this.clrBorders);
+            if (skin.getBackground() == this.hoverBG) {
+                skin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+            }
+            else {
+                g.setColor(this.defaultBorderColor);
+            }
             g.drawRect(0, 0, this.w - 1, this.h - 1);
             g.drawImage(this.img, 0, 0, this.w, this.h, null);
             super.paintComponent(g);

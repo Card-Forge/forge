@@ -18,7 +18,10 @@
 package forge.gui.toolbox;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -30,15 +33,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.text.JTextComponent;
 
 import org.apache.commons.lang.WordUtils;
 
 import forge.FThreads;
+import forge.Singletons;
 import forge.gui.GuiUtils;
+import forge.properties.ForgePreferences.FPref;
+import forge.util.TypeUtil;
 import forge.view.FView;
 
 /**
@@ -50,6 +63,209 @@ import forge.view.FView;
 public enum FSkin {
     /** Singleton instance of skin. */
     SINGLETON_INSTANCE;
+    
+    public static class ComponentSkin<T extends Component> {
+        protected T comp;
+        private SkinColor foreground, background;
+        private boolean needRepaintOnUpdate;
+        
+        private ComponentSkin(T comp0) {
+            this.comp = comp0;
+        }
+        
+        public SkinColor getForeground() {
+            return this.foreground;
+        }
+
+        public void setForeground(SkinColor skinColor) {
+            this.foreground = skinColor;
+            this.comp.setForeground(skinColor.color);
+        }
+        public void setForeground(Color color) {
+            this.foreground = null; //ensure this field is reset when static color set
+            this.comp.setForeground(color);
+        }
+        
+        public SkinColor getBackground() {
+            return this.background;
+        }
+
+        public void setBackground(SkinColor skinColor) {
+            this.background = skinColor;
+            this.comp.setBackground(skinColor.color);
+        }
+        public void setBackground(Color color) {
+            this.background = null;  //ensure this field is reset when static color set
+            this.comp.setBackground(color);
+        }
+        
+        public void setGraphicsColor(Graphics g, SkinColor skinColor) {
+            this.needRepaintOnUpdate = true;
+            g.setColor(skinColor.color);
+        }
+        
+        public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, SkinColor skinColor2) {
+            this.needRepaintOnUpdate = true;
+            g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, skinColor2.color));
+        }
+        public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, Color color1, float x2, float y2, SkinColor skinColor2) {
+            this.needRepaintOnUpdate = true;
+            g2d.setPaint(new GradientPaint(x1, y1, color1, x2, y2, skinColor2.color));
+        }
+        public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, Color color2) {
+            this.needRepaintOnUpdate = true;
+            g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, color2));
+        }
+    }    
+    public static class JComponentSkin<T extends JComponent> extends ComponentSkin<T> {
+        private class LineBorder {
+            private final SkinColor skinColor;
+            private final int thickness;
+            private final boolean rounded;
+
+            private LineBorder(SkinColor skinColor0, int thickness0, boolean rounded0) {
+                this.skinColor = skinColor0;
+                this.thickness = thickness0;
+                this.rounded = rounded0;
+            }
+            
+            private void apply() {
+                JComponentSkin.this.comp.setBorder(BorderFactory.createLineBorder(this.skinColor.color, this.thickness, this.rounded));
+            }
+        }
+        private LineBorder lineBorder;
+        
+        private class MatteBorder {
+            private final int top, left, bottom, right;
+            private final SkinColor skinColor;
+
+            private MatteBorder(int top0, int left0, int bottom0, int right0, SkinColor skinColor0) {
+                this.top = top0;
+                this.left = left0;
+                this.bottom = bottom0;
+                this.right = right0;
+                this.skinColor = skinColor0;
+            }
+
+            private void apply() {
+                JComponentSkin.this.comp.setBorder(BorderFactory.createMatteBorder(this.top, this.left, this.bottom, this.right, this.skinColor.color));
+            }
+        }
+        private MatteBorder matteBorder;
+        
+        private JComponentSkin(T comp0) {
+            super(comp0);
+        }
+        
+        public void setLineBorder(SkinColor skinColor) {
+            setLineBorder(skinColor, 1, false);
+        }
+        public void setLineBorder(SkinColor skinColor, int thickness) {
+            setLineBorder(skinColor, thickness, false);
+        }
+        public void setLineBorder(SkinColor skinColor, int thickness, boolean rounded) {
+            this.lineBorder = new LineBorder(skinColor, thickness, rounded);
+            this.lineBorder.apply();
+        }
+        
+        public void setMatteBorder(int top, int left, int bottom, int right, SkinColor skinColor) {
+            this.matteBorder = new MatteBorder(top, left, bottom, right, skinColor);
+            this.matteBorder.apply();
+        }
+    }
+    public static class JTextComponentSkin<T extends JTextComponent> extends JComponentSkin<T> {
+        private SkinColor caretColor;
+        
+        private JTextComponentSkin(T comp0) {
+            super(comp0);
+        }
+
+        public SkinColor getCaretColor() {
+            return this.caretColor;
+        }
+        
+        public void setCaretColor(SkinColor skinColor) {
+            this.caretColor = skinColor;
+            this.comp.setCaretColor(skinColor.color);
+        }
+        public void setCaretColor(Color color) {
+            this.caretColor = null;  //ensure this field is reset when static color set
+            this.comp.setCaretColor(color);
+        }
+    }
+    public static class JTableSkin<T extends JTable> extends JComponentSkin<T> {
+        private SkinColor selectionForeground, selectionBackground;
+        
+        private JTableSkin(T comp0) {
+            super(comp0);
+        }
+
+        public SkinColor getSelectionForeground() {
+            return this.selectionForeground;
+        }
+
+        public void setSelectionForeground(SkinColor skinColor) {
+            this.selectionForeground = skinColor;
+            this.comp.setSelectionForeground(skinColor.color);
+        }
+        public void setSelectionForeground(Color color) {
+            this.selectionForeground = null; //ensure this field is reset when static color set
+            this.comp.setSelectionForeground(color);
+        }
+        
+        public SkinColor getSelectionBackground() {
+            return this.selectionBackground;
+        }
+
+        public void setSelectionBackground(SkinColor skinColor) {
+            this.selectionBackground = skinColor;
+            this.comp.setSelectionBackground(skinColor.color);
+        }
+        public void setSelectionBackground(Color color) {
+            this.selectionBackground = null;  //ensure this field is reset when static color set
+            this.comp.setSelectionBackground(color);
+        }
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private static HashMap<Component, ComponentSkin> skinnedComps = new HashMap<Component, ComponentSkin>();
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Component> ComponentSkin<T> get(T comp) {
+        ComponentSkin<T> skinnedComp = skinnedComps.get(comp);
+        if (skinnedComp == null) {
+            skinnedComp = new ComponentSkin<T>(comp);
+            skinnedComps.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JComponent> JComponentSkin<T> get(T comp) {
+        JComponentSkin<T> skinnedComp = TypeUtil.safeCast(skinnedComps.get(comp), JComponentSkin.class);
+        if (skinnedComp == null) {
+            skinnedComp = new JComponentSkin<T>(comp);
+            skinnedComps.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JTextComponent> JTextComponentSkin<T> get(T comp) {
+        JTextComponentSkin<T> skinnedComp = TypeUtil.safeCast(skinnedComps.get(comp), JTextComponentSkin.class);
+        if (skinnedComp == null) {
+            skinnedComp = new JTextComponentSkin<T>(comp);
+            skinnedComps.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JTable> JTableSkin<T> get(T comp) {
+        JTableSkin<T> skinnedComp = TypeUtil.safeCast(skinnedComps.get(comp), JTableSkin.class);
+        if (skinnedComp == null) {
+            skinnedComp = new JTableSkin<T>(comp);
+            skinnedComps.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
 
     /** */
     public enum Backgrounds implements SkinProp { /** */
@@ -63,6 +279,118 @@ public enum FSkin {
         /** @return int[] */
         @Override
         public int[] getCoords() { return coords; }
+    }
+    
+    /**
+     * Retrieves a color from this skin's color map.
+     * 
+     * @param c0 &emsp; Colors property (from enum)
+     * @return Color
+     */
+    public static SkinColor getColor(final Colors c0) {
+        return SkinColor.baseColors.get(c0);
+    }
+    
+    /** Steps RGB components of a color up or down.
+     * Returns opaque (non-alpha) stepped color.
+     * Plus for lighter, minus for darker.
+     *
+     * @param clr0 {@link java.awt.Color}
+     * @param step int
+     * @return {@link java.awt.Color}
+     */
+    public static Color stepColor(Color clr0, int step) {
+        int r = clr0.getRed();
+        int g = clr0.getGreen();
+        int b = clr0.getBlue();
+
+        // Darker
+        if (step < 0) {
+            r =  ((r + step > 0) ? r + step : 0);
+            g =  ((g + step > 0) ? g + step : 0);
+            b =  ((b + step > 0) ? b + step : 0);
+        }
+        else {
+            r =  ((r + step < 255) ? r + step : 255);
+            g =  ((g + step < 255) ? g + step : 255);
+            b =  ((b + step < 255) ? b + step : 255);
+        }
+
+        return new Color(r, g, b);
+    }
+
+    /** Returns RGB components of a color, with a new
+     * value for alpha. 0 = transparent, 255 = opaque.
+     *
+     * @param clr0 {@link java.awt.Color}
+     * @param alpha int
+     * @return {@link java.awt.Color}
+     */
+    public static Color alphaColor(Color clr0, int alpha) {
+        return new Color(clr0.getRed(), clr0.getGreen(), clr0.getBlue(), alpha);
+    }
+    
+    public static class SkinColor {
+        private static final HashMap<Colors, SkinColor> baseColors = new HashMap<Colors, SkinColor>();
+        private static final int NO_BRIGHTNESS_DELTA = 0;
+        private static final int NO_STEP = -10000; //needs to be large negative since small negative values are valid
+        private static final int NO_ALPHA = -1;
+        
+        private final Colors baseColor;
+        private final int brightnessDelta;
+        private final int step;
+        private final int alpha;
+        private Color color;
+        
+        //private constructors for color that changes with skin (use FSkin.getColor())
+        private SkinColor(Colors baseColor0) {
+            this(baseColor0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_ALPHA);
+        }
+        private SkinColor(Colors baseColor0, int brightnessDelta0, int step0, int alpha0) {
+            this.baseColor = baseColor0;
+            this.brightnessDelta = brightnessDelta0;
+            this.step = step0;
+            this.alpha = alpha0;
+            this.updateColor();
+        }
+        
+        public SkinColor brighter() {
+            return new SkinColor(this.baseColor, this.brightnessDelta + 1, this.step, this.alpha);
+        }
+        
+        public SkinColor darker() {
+            return new SkinColor(this.baseColor, this.brightnessDelta - 1, this.step, this.alpha);
+        }
+        
+        public SkinColor stepColor(int step0) {
+            return new SkinColor(this.baseColor, this.brightnessDelta, step0, this.alpha);
+        }
+        
+        public SkinColor alphaColor(int alpha0) {
+            return new SkinColor(this.baseColor, this.brightnessDelta, this.step, alpha0);
+        }
+        
+        private void updateColor() {
+            this.color = this.baseColor.color;
+            if (this.brightnessDelta != NO_BRIGHTNESS_DELTA) {
+                if (this.brightnessDelta < 0) {
+                    for (int i = 0; i > this.brightnessDelta; i--) {
+                        this.color = this.color.darker();
+                    }
+                }
+                else {
+                    for (int i = 0; i < this.brightnessDelta; i++) {
+                        this.color = this.color.brighter();
+                    }
+                }
+            }
+            if (this.step != NO_STEP) {
+                this.color = FSkin.stepColor(this.color, this.step);
+            }
+            if (this.alpha != NO_ALPHA) {
+                this.color = FSkin.stepColor(this.color, this.alpha);
+            }
+        }
     }
 
     /** */
@@ -81,12 +409,34 @@ public enum FSkin {
         CLR_THEME2                  (new int[] {70, 230}), /** */
         CLR_OVERLAY                 (new int[] {70, 250});
 
+        private Color color;
         private int[] coords;
+
         /** @param xy &emsp; int[] coordinates */
         Colors(final int[] xy) { this.coords = xy; }
+ 
         /** @return int[] */
         @Override
         public int[] getCoords() { return coords; }
+        
+        public static void updateAll() {
+            for (final Colors c : Colors.values()) {
+                c.updateColor();
+            }
+            if (SkinColor.baseColors.size() == 0) { //initialize base skin colors if needed
+                for (final Colors c : Colors.values()) {
+                    SkinColor.baseColors.put(c, new SkinColor(c));
+                }
+            }
+        }
+        
+        private void updateColor() {
+            tempCoords = this.getCoords();
+            x0 = tempCoords[0];
+            y0 = tempCoords[1];
+
+            color = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x0, y0));
+        }
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
@@ -404,7 +754,6 @@ public enum FSkin {
 
     private static Map<SkinProp, ImageIcon> icons;
     private static Map<SkinProp, Image> images;
-    private static Map<SkinProp, Color> colors;
 
     private static Map<Integer, Font> fixedFonts;
     private static Map<Integer, Font> plainFonts;
@@ -452,11 +801,9 @@ public enum FSkin {
 
         if (FSkin.icons != null) { FSkin.icons.clear(); }
         if (FSkin.images != null) { FSkin.images.clear(); }
-        if (FSkin.colors != null) { FSkin.colors.clear(); }
 
         FSkin.icons = new HashMap<SkinProp, ImageIcon>();
         FSkin.images = new HashMap<SkinProp, Image>();
-        FSkin.colors = new HashMap<SkinProp, Color>();
 
         final File f = new File(preferredDir + FILE_SPLASH);
         if (!f.exists()) {
@@ -587,7 +934,7 @@ public enum FSkin {
         FSkin.setIcon(Backgrounds.BG_MATCH, preferredDir + FILE_MATCH_BG);
 
         // Run through enums and load their coords.
-        for (final Colors e : Colors.values()) { FSkin.setColor(e); }
+        Colors.updateAll();
         for (final ZoneImages e : ZoneImages.values())                    { FSkin.setImage(e); }
         for (final DockIcons e : DockIcons.values())                      { FSkin.setIcon(e); }
         for (final InterfaceIcons e : InterfaceIcons.values())                    { FSkin.setIcon(e); }
@@ -629,6 +976,11 @@ public enum FSkin {
         FSkin.bimPreferredSprite = null;
         FSkin.bimDefaultAvatars = null;
         FSkin.bimPreferredAvatars = null;
+
+        // Set look and feel after skin loaded
+        FSkin.setProgessBarMessage("Setting look and feel...");
+        ForgeLookAndFeel laf = new ForgeLookAndFeel();
+        laf.setForgeLookAndFeel(Singletons.getView().getFrame());
     }
     
     private static void setDefaultFontSize() {
@@ -754,16 +1106,6 @@ public enum FSkin {
     }
 
     /**
-     * Retrieves a color from this skin's color map.
-     * 
-     * @param s0 &emsp; Skin property (from enum)
-     * @return Color
-     */
-    public static Color getColor(final SkinProp s0) {
-        return colors.get(s0);
-    }
-
-    /**
      * Gets the skins.
      *
      * @return the skins
@@ -802,47 +1144,8 @@ public enum FSkin {
     public static Map<Integer, Image> getAvatars() {
         return avatars;
     }
-
-    /** Steps RGB components of a color up or down.
-     * Returns opaque (non-alpha) stepped color.
-     * Plus for lighter, minus for darker.
-     *
-     * @param clr0 {@link java.awt.Color}
-     * @param step int
-     * @return {@link java.awt.Color}
-     */
-    public static Color stepColor(Color clr0, int step) {
-        int r = clr0.getRed();
-        int g = clr0.getGreen();
-        int b = clr0.getBlue();
-
-        // Darker
-        if (step < 0) {
-            r =  ((r + step > 0) ? r + step : 0);
-            g =  ((g + step > 0) ? g + step : 0);
-            b =  ((b + step > 0) ? b + step : 0);
-        }
-        else {
-            r =  ((r + step < 255) ? r + step : 255);
-            g =  ((g + step < 255) ? g + step : 255);
-            b =  ((b + step < 255) ? b + step : 255);
-        }
-
-        return new Color(r, g, b);
-    }
     
     public static boolean isLoaded() { return loaded; }
-
-    /** Returns RGB components of a color, with a new
-     * value for alpha. 0 = transparent, 255 = opaque.
-     *
-     * @param clr0 {@link java.awt.Color}
-     * @param alpha int
-     * @return {@link java.awt.Color}
-     */
-    public static Color alphaColor(Color clr0, int alpha) {
-        return new Color(clr0.getRed(), clr0.getGreen(), clr0.getBlue(), alpha);
-    }
 
     /**
      * <p>
@@ -947,14 +1250,6 @@ public enum FSkin {
         FSkin.images.put(s0, isOldStyle ? bimOldFoils.getSubimage(x0, y0, w0, h0) : bimFoils.getSubimage(x0, y0, w0, h0));
     }
 
-    private static void setColor(final SkinProp s0) {
-        tempCoords = s0.getCoords();
-        x0 = tempCoords[0];
-        y0 = tempCoords[1];
-
-        FSkin.colors.put(s0, FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x0, y0)));
-    }
-
     private static void setFont(final int size) {
         plainFonts.put(size, font.deriveFont(Font.PLAIN, size));
     }
@@ -1046,5 +1341,155 @@ public enum FSkin {
         else {
             FSkin.images.put(s0, bi0);
         }
+    }
+    
+    /** 
+     * Sets the look and feel of the GUI based on the selected Forge theme.
+     *
+     * @see <a href="http://tips4java.wordpress.com/2008/10/09/uimanager-defaults/">UIManager Defaults</a>
+     */
+    private static class ForgeLookAndFeel { //needs to live in FSkin for access to skin colors
+        
+        private Color FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT).color;
+        private Color BACK_COLOR = FSkin.getColor(FSkin.Colors.CLR_THEME2).color;
+        private Color HIGHLIGHT_COLOR = BACK_COLOR.brighter();
+        private Border LINE_BORDER = BorderFactory.createLineBorder(FORE_COLOR.darker(), 1);
+        private Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2,2,2,2);    
+        
+        /**
+         * Sets the look and feel of the GUI based on the selected Forge theme.
+         */
+        public void setForgeLookAndFeel(JFrame appFrame) {
+            if (isUIManagerEnabled()) {
+                if (setMetalLookAndFeel(appFrame)) {
+                    setMenusLookAndFeel();
+                    setComboBoxLookAndFeel();
+                    setTabbedPaneLookAndFeel();
+                    setButtonLookAndFeel();
+                }
+            }
+        }
+        
+        /**
+         * Sets the standard "Java L&F" (also called "Metal") that looks the same on all platforms.
+         * <p>
+         * If not explicitly set then the Mac uses its native L&F which does
+         * not support various settings (eg. combobox background color). 
+         */
+        private boolean setMetalLookAndFeel(JFrame appFrame) {
+            boolean isMetalLafSet = false;
+            try {
+                UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+                SwingUtilities.updateComponentTreeUI(appFrame);            
+                isMetalLafSet = true;
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+                // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+                e.printStackTrace();
+            }
+            return isMetalLafSet;
+        }
+        
+        /**
+         * Sets the look and feel for a JMenuBar, JMenu, JMenuItem & variations.
+         */
+        private void setMenusLookAndFeel() {
+            // JMenuBar
+            Color clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME).color;
+            Color backgroundColor = FSkin.stepColor(clrTheme, 0);
+            Color menuBarEdgeColor = FSkin.stepColor(clrTheme, -80);
+            UIManager.put("MenuBar.foreground", FORE_COLOR);
+            UIManager.put("MenuBar.gradient", getColorGradients(backgroundColor.darker(), backgroundColor));
+            UIManager.put("MenuBar.border", BorderFactory.createMatteBorder(0, 0, 1, 0, menuBarEdgeColor));        
+            // JMenu
+            UIManager.put("Menu.foreground", FORE_COLOR);
+            UIManager.put("Menu.background", BACK_COLOR);
+            UIManager.put("Menu.borderPainted", false);                
+            UIManager.put("Menu.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("Menu.selectionForeground", FORE_COLOR);
+            UIManager.put("Menu.border", EMPTY_BORDER);        
+            UIManager.put("Menu.opaque", false);
+            // JPopupMenu
+            UIManager.put("PopupMenu.border", LINE_BORDER);
+            UIManager.put("PopupMenu.background", BACK_COLOR);
+            UIManager.put("PopupMenu.foreground", FORE_COLOR);        
+            // JMenuItem
+            UIManager.put("MenuItem.foreground", FORE_COLOR);
+            UIManager.put("MenuItem.background", BACK_COLOR);
+            UIManager.put("MenuItem.border", EMPTY_BORDER);        
+            UIManager.put("MenuItem.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("MenuItem.selectionForeground", FORE_COLOR);
+            UIManager.put("MenuItem.acceleratorForeground", FORE_COLOR.darker());
+            UIManager.put("MenuItem.opaque", true);
+            // JSeparator (needs to be opaque!).
+            UIManager.put("Separator.foreground", FORE_COLOR.darker());
+            UIManager.put("Separator.background", BACK_COLOR);        
+            // JRadioButtonMenuItem
+            UIManager.put("RadioButtonMenuItem.foreground", FORE_COLOR);
+            UIManager.put("RadioButtonMenuItem.background", BACK_COLOR);
+            UIManager.put("RadioButtonMenuItem.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("RadioButtonMenuItem.selectionForeground", FORE_COLOR);
+            UIManager.put("RadioButtonMenuItem.border", EMPTY_BORDER);
+            UIManager.put("RadioButtonMenuItem.acceleratorForeground", FORE_COLOR.darker());
+            // JCheckboxMenuItem
+            UIManager.put("CheckBoxMenuItem.foreground", FORE_COLOR);
+            UIManager.put("CheckBoxMenuItem.background", BACK_COLOR);
+            UIManager.put("CheckBoxMenuItem.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("CheckBoxMenuItem.selectionForeground", FORE_COLOR);
+            UIManager.put("CheckBoxMenuItem.border", EMPTY_BORDER);
+            UIManager.put("CheckBoxMenuItem.acceleratorForeground", FORE_COLOR.darker());        
+        }    
+            
+        private void setTabbedPaneLookAndFeel() {
+            UIManager.put("TabbedPane.selected", HIGHLIGHT_COLOR);
+            UIManager.put("TabbedPane.contentOpaque", FSkin.getColor(FSkin.Colors.CLR_THEME));
+            UIManager.put("TabbedPane.unselectedBackground", BACK_COLOR);        
+        }
+
+        /**
+         * Sets the look and feel for a <b>non-editable</b> JComboBox.
+         */
+        private void setComboBoxLookAndFeel() {        
+            UIManager.put("ComboBox.background", BACK_COLOR);
+            UIManager.put("ComboBox.foreground", FORE_COLOR);
+            UIManager.put("ComboBox.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("ComboBox.selectionForeground", FORE_COLOR);
+            UIManager.put("ComboBox.disabledBackground", BACK_COLOR);
+            UIManager.put("ComboBox.disabledForeground", BACK_COLOR.darker());                                                
+            UIManager.put("ComboBox.font", getDefaultFont("ComboBox.font"));
+            UIManager.put("Button.select", HIGHLIGHT_COLOR);
+        }
+        
+        private void setButtonLookAndFeel() {
+            UIManager.put("Button.foreground", FORE_COLOR);
+            UIManager.put("Button.background", BACK_COLOR);        
+            UIManager.put("Button.select", HIGHLIGHT_COLOR);
+            UIManager.put("Button.focus", FORE_COLOR.darker());
+            UIManager.put("Button.rollover", false);
+        }    
+        
+        /**
+         * Determines whether theme styles should be applied to GUI.
+         * <p>
+         * TODO: Currently is using UI_THEMED_COMBOBOX setting but will
+         *       eventually want to rename for clarity.
+         */
+        private boolean isUIManagerEnabled() {
+            return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX);
+        }
+        
+        private Font getDefaultFont(String component) {
+            return FSkin.getFont(UIManager.getFont(component).getSize());
+        }
+        
+        private ArrayList<Object> getColorGradients(Color bottom, Color top) {
+          ArrayList<Object> gradients = new ArrayList<>();
+          gradients.add(0.0);
+          gradients.add(0.0);
+          gradients.add(top);
+          gradients.add(bottom);        
+          gradients.add(bottom);
+          return gradients;
+        }
+        
     }
 }

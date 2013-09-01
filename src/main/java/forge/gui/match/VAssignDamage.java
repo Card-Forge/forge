@@ -33,8 +33,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
-
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.CounterType;
@@ -113,7 +111,7 @@ public class VAssignDamage {
             if (!damage.containsKey(source)) source = null; // to get player instead of fake card
             
             FSkin.Colors brdrColor = VAssignDamage.this.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
-            ((CardPanel) evt.getSource()).setBorder(new LineBorder(FSkin.getColor(brdrColor), 2));
+            FSkin.get((CardPanel) evt.getSource()).setLineBorder(FSkin.getColor(brdrColor), 2);
         }
 
         @Override
@@ -155,7 +153,7 @@ public class VAssignDamage {
         // Top-level UI stuff
         final JPanel overlay = SOverlayUtils.genericOverlay();
         final JPanel pnlMain = new JPanel();
-        pnlMain.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(pnlMain).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Attacker area
         final CardPanel pnlAttacker = new CardPanel(attacker0);

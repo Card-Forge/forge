@@ -66,7 +66,7 @@ public enum TargetingOverlay {
         pnl.setOpaque(false);
         pnl.setVisible(false);
         pnl.setFocusTraversalKeysEnabled(false);
-        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        FSkin.get(pnl).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
     }
 
     /** @return {@link javax.swing.JPanel} */
@@ -300,7 +300,7 @@ public enum TargetingOverlay {
             return area;
         }
 
-        private void drawArrow(Graphics2D g2d, int startX, int startY, int endX, int endY, Color color) {
+        private void drawArrow(Graphics2D g2d, int startX, int startY, int endX, int endY, FSkin.SkinColor skinColor) {
             float ex = endX - startX;
             float ey = endY - startY;
             if (ex == 0 && ey == 0) { return; }
@@ -318,7 +318,7 @@ public enum TargetingOverlay {
             g2d.translate(startX, startY);
             g2d.rotate(Math.atan2(ey, ex));
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f));
-            g2d.setColor(color);
+            FSkin.get(this).setGraphicsColor(g2d, skinColor);
             g2d.fill(arrow);
             g2d.setColor(Color.BLACK);
             g2d.draw(arrow);
@@ -347,7 +347,7 @@ public enum TargetingOverlay {
 
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            Color color = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+            FSkin.SkinColor skinColor = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
 
             for (Point[] p : arcs) {
                 if (p[0] == null || p[1] == null) {
@@ -359,7 +359,7 @@ public enum TargetingOverlay {
                 int startX = (int) p[1].getX();
                 int startY = (int) p[1].getY();
 
-                drawArrow(g2d, startX, startY, endX, endY, color);
+                drawArrow(g2d, startX, startY, endX, endY, skinColor);
             }
 
             FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI

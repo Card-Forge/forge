@@ -53,6 +53,7 @@ import forge.item.InventoryItem;
  */
 @SuppressWarnings("serial")
 public final class ItemTable<T extends InventoryItem> extends JTable {
+    private final FSkin.JTableSkin<ItemTable<T>> skin;
     private final ItemManager<T> itemManager;
     private final ItemTableModel<T> tableModel;
     
@@ -71,19 +72,20 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         this.tableModel = new ItemTableModel<T>(this, model0);
 
         // use different selection highlight colors for focused vs. unfocused tables
-        setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
-        setSelectionForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        skin = FSkin.get(this);
+        skin.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+        skin.setSelectionForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         addFocusListener(new FocusListener() {
             @Override
             public void focusLost(FocusEvent e) {
                 if (!e.isTemporary()) {
-                    setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+                    skin.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
                 }
             }
             
             @Override
             public void focusGained(FocusEvent e) {
-                setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+                skin.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
                 // if nothing selected when we gain focus, select the first row (if exists)
                 if (-1 == getSelectedRow() && 0 < getRowCount()) {
                     setRowSelectionInterval(0, 0);

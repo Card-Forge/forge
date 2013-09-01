@@ -199,8 +199,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
      */
     @SuppressWarnings("unchecked")
     private VSubmenuQuestData() {
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        lblTitleNew.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitleNew).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         scrQuests.setBorder(null);
 

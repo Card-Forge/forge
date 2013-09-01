@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -264,7 +263,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
         final JPanel pnl = new JPanel(new MigLayout("insets 2, gap 2, h 30!"));
 
         pnl.setOpaque(false);
-        pnl.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 2, FSkin.getColor(FSkin.Colors.CLR_TEXT)));
+        FSkin.get(pnl).setMatteBorder(1, 2, 1, 2, FSkin.getColor(FSkin.Colors.CLR_TEXT));
         
         pnl.add(component, "h 30!, center");
         pnl.add(new FLabel.Builder().text("X").fontSize(10).hoverable(true)

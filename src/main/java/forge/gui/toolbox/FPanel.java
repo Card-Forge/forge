@@ -17,7 +17,6 @@
  */
 package forge.gui.toolbox;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -51,13 +50,14 @@ import forge.gui.framework.ILocalRepaint;
 @SuppressWarnings("serial")
 public class FPanel extends JPanel implements ILocalRepaint {
     //========== Variable initialization
+    protected final FSkin.JComponentSkin<FPanel> skin;
     // Defaults for adjustable values
     private boolean selectable          = false;
     private boolean hoverable           = false;
     private boolean foregroundStretch   = false;
     private Image   foregroundImage     = null;
     private Image   backgroundTexture   = null;
-    private Color   borderColor         = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
+    private FSkin.SkinColor   borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private boolean borderToggle        = true;
     private int     cornerDiameter      = 20;
     private int     foregroundAlign     = SwingConstants.CENTER;
@@ -85,7 +85,8 @@ public class FPanel extends JPanel implements ILocalRepaint {
         this.setOpaque(false);
 
         // Background will follow skin theme.
-        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        skin = FSkin.get(this);
+        skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
     }
 
     // Mouse event handler
@@ -138,8 +139,8 @@ public class FPanel extends JPanel implements ILocalRepaint {
     /** @param bool0 &emsp; boolean */
     public void setSelected(final boolean bool0) {
         selected = bool0;
-        if (bool0) { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
-        else    { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
+        if (bool0) { skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
+        else       { skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
         repaintSelf();
     }
 
@@ -203,8 +204,8 @@ public class FPanel extends JPanel implements ILocalRepaint {
         this.borderToggle = bool0;
     }
 
-    /** @param clr0 &emsp; {@link java.awt.Color} */
-    public void setBorderColor(final Color clr0) {
+    /** @param clr0 &emsp; {@link forge.gui.toolbox.FSkin.SkinColor} */
+    public void setBorderColor(final FSkin.SkinColor clr0) {
         this.borderColor = clr0;
     }
 
@@ -260,10 +261,10 @@ public class FPanel extends JPanel implements ILocalRepaint {
     //========== Special draw methods
     private void drawBackgroundColor(final Graphics2D g2d0) {
         // Color background as appropriate
-        if (selected)           { g2d0.setColor(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
-        else if (hovered)       { g2d0.setColor(FSkin.getColor(FSkin.Colors.CLR_HOVER)); }
-        else if (selectable)    { g2d0.setColor(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
-        else                    { g2d0.setColor(getBackground()); }
+        if (selected)           { skin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
+        else if (hovered)       { skin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_HOVER)); }
+        else if (selectable)    { skin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
+        else                    { skin.setGraphicsColor(g2d0, skin.getBackground()); }
 
         g2d0.fillRoundRect(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter);
     }
@@ -327,7 +328,7 @@ public class FPanel extends JPanel implements ILocalRepaint {
     }
 
     private void drawBorder(final Graphics2D g2d0) {
-        g2d0.setColor(borderColor);
+        skin.setGraphicsColor(g2d0, borderColor);
         g2d0.drawRoundRect(0, 0, pnlW - 1, pnlH - 1, cornerDiameter, cornerDiameter);
     }
 

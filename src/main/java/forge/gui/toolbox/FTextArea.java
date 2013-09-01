@@ -11,8 +11,9 @@ public class FTextArea extends JTextArea {
     /** */
     public FTextArea() {
         super();
-        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.JTextComponentSkin<FTextArea> skin = FSkin.get(this);
+        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        skin.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setOpaque(false);
         this.setWrapStyleWord(true);
         this.setLineWrap(true);

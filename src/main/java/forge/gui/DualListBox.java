@@ -77,8 +77,8 @@ public class DualListBox<T> extends FPanel {
         
         setPreferredSize(new Dimension(650, 300));
         setLayout(new GridLayout(0, 3));
-        setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        this.skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         final Runnable onAdd = new Runnable() {
             @SuppressWarnings("unchecked")

@@ -49,14 +49,16 @@ public class FTextField extends JTextField {
     }
     
     public static final int HEIGHT = 25; //TODO: calculate this somehow instead of hard-coding it
-    
+
+    private final FSkin.JTextComponentSkin<FTextField> skin;
     private String ghostText;
     private boolean showGhostTextWithFocus;
 
     private FTextField(Builder builder) {
-        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        this.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        skin = FSkin.get(this);
+        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        skin.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setMargin(new Insets(3, 3, 2, 3));
         this.setOpaque(true);
         
@@ -115,7 +117,7 @@ public class FTextField extends JTextField {
             final Insets margin = this.getMargin();
             final Graphics2D g2d = (Graphics2D)g.create();
             g2d.setFont(this.getFont());
-            g2d.setColor(FSkin.stepColor(this.getForeground(), 20));
+            skin.setGraphicsColor(g2d, skin.getForeground().stepColor(20));
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.drawString(this.ghostText, margin.left + 2, margin.top + 15); //account for borders (TODO: why +15?)
             g2d.dispose();

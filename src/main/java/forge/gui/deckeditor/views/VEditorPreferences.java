@@ -4,8 +4,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.MatteBorder;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.deckeditor.controllers.CEditorPreferences;
 import forge.gui.framework.DragCell;
@@ -74,10 +72,10 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
 
     //========== Constructor
     private VEditorPreferences() {
-        lblStats.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
-        lblCatalog.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
-        lblDeck.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
-        lblDisplay.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        FSkin.get(lblStats).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        FSkin.get(lblCatalog).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        FSkin.get(lblDeck).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        FSkin.get(lblDisplay).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
 
         chbCatalogColor.setFont(FSkin.getFont(12));
         chbCatalogRarity.setFont(FSkin.getFont(12));

@@ -44,7 +44,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -130,7 +129,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         radProxySocks.addChangeListener(new ProxyHandler(2));
         radProxyNone.setSelected(true);
 
-        btnClose.setBorder(new LineBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT), 1));
+        FSkin.get(btnClose).setLineBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         btnStart.setFont(FSkin.getFont(18));
         btnStart.setVisible(false);
 

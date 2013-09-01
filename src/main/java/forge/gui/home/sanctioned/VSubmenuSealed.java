@@ -79,7 +79,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     private VSubmenuSealed() {
         btnStart.setEnabled(false);
 
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
     }
 
     /* (non-Javadoc)
@@ -166,7 +166,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         // Init directions text pane
         final JTextPane tpnDirections = new JTextPane();
         tpnDirections.setOpaque(false);
-        tpnDirections.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.get(tpnDirections).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tpnDirections.setFont(FSkin.getFont(15));
         tpnDirections.setAlignmentX(SwingConstants.CENTER);
         tpnDirections.setFocusable(false);

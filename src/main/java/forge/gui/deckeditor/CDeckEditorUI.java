@@ -439,7 +439,12 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             
             // show a popup with the current search string, highlighted in red if not found
             popupLabel.setText(searchStr + " (hit Enter for next match, Esc to cancel)");
-            popupLabel.setForeground(found ? FSkin.getColor(FSkin.Colors.CLR_TEXT) : new Color(255, 0, 0));
+            if (found) {
+                FSkin.get(popupLabel).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            }
+            else {
+                FSkin.get(popupLabel).setForeground(new Color(255, 0, 0));
+            }
             
             if (popupShowing) {
                 _setPopupSize();
@@ -448,7 +453,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                 PopupFactory factory = PopupFactory.getSharedInstance();
                 Point tableLoc = tableView.getTable().getTableHeader().getLocationOnScreen();
                 popup = factory.getPopup(null, popupLabel, tableLoc.x + 10, tableLoc.y + 10);
-                SwingUtilities.getRoot(popupLabel).setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+                FSkin.get(SwingUtilities.getRoot(popupLabel)).setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
                 
                 popupTimer = new Timer(5000, new ActionListener() {
                     @Override

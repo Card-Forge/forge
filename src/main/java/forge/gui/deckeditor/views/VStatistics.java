@@ -258,7 +258,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
         if (zebra) {
             lbl.setOpaque(true);
-            lbl.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+            FSkin.get(lbl).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         }
 
         return lbl;

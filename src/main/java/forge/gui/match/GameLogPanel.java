@@ -1,7 +1,6 @@
 package forge.gui.match;
 
 import java.awt.AWTEvent;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -158,16 +157,16 @@ public class GameLogPanel extends JPanel {
         tar.setEditable(false);
         tar.setLineWrap(true);
         tar.setWrapStyleWord(true);
-        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.get(tar).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         setTextAreaBackground(tar, useAlternateBackColor);
         return tar;
     }
 
     private void setTextAreaBackground(JTextArea tar, boolean useAlternateBackColor) {
-        Color skinColor = FSkin.getColor(FSkin.Colors.CLR_THEME2);
+        FSkin.SkinColor skinColor = FSkin.getColor(FSkin.Colors.CLR_THEME2);
         if (useAlternateBackColor) { skinColor = skinColor.darker(); }
         tar.setOpaque(true);
-        tar.setBackground(skinColor);
+        FSkin.get(tar).setBackground(skinColor);
     }
 
     protected final class MyScrollablePanel extends JPanel implements Scrollable {

@@ -17,7 +17,6 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -239,9 +238,9 @@ public enum VDev implements IVDoc<CDev> {
     public class DevLabel extends JLabel {
         private static final long serialVersionUID = 7917311680519060700L;
 
-        private Color defaultBG = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
-        private final Color hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
-        private final Color pressedBG = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+        private FSkin.SkinColor defaultBG = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+        private final FSkin.SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+        private final FSkin.SkinColor pressedBG = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
         private boolean enabled;
         private final String enabledText, disabledText;
         private int w, h; // Width, height, radius, insets (for paintComponent)
@@ -285,27 +284,27 @@ public enum VDev implements IVDoc<CDev> {
             this.r = 6; // Radius (for paintComponent)
             this.i = 2; // Insets (for paintComponent)
             this.setEnabled(true);
-            this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(final MouseEvent e) {
-                    DevLabel.this.setBackground(DevLabel.this.pressedBG);
+                    FSkin.get(DevLabel.this).setBackground(DevLabel.this.pressedBG);
                 }
 
                 @Override
                 public void mouseReleased(final MouseEvent e) {
-                    DevLabel.this.setBackground(DevLabel.this.defaultBG);
+                    FSkin.get(DevLabel.this).setBackground(DevLabel.this.defaultBG);
                 }
 
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    DevLabel.this.setBackground(DevLabel.this.hoverBG);
+                    FSkin.get(DevLabel.this).setBackground(DevLabel.this.hoverBG);
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
-                    DevLabel.this.setBackground(DevLabel.this.defaultBG);
+                    FSkin.get(DevLabel.this).setBackground(DevLabel.this.defaultBG);
                 }
             });
         }
@@ -330,7 +329,7 @@ public enum VDev implements IVDoc<CDev> {
             this.enabled = b;
             this.setText(s);
             this.setToolTipText(s);
-            this.setBackground(this.defaultBG);
+            FSkin.get(this).setBackground(this.defaultBG);
         }
 
         /**

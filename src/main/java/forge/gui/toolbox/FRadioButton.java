@@ -16,7 +16,7 @@ public class FRadioButton  extends JRadioButton {
     public FRadioButton(String s0) {
         super();
         this.setText(s0);
-        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setFont(FSkin.getFont(14));
         this.setOpaque(false);
     }

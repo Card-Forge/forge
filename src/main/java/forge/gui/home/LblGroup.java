@@ -1,9 +1,7 @@
 package forge.gui.home;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
@@ -14,6 +12,8 @@ import javax.swing.JLabel;
 import forge.Singletons;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -28,12 +28,13 @@ public class LblGroup extends JLabel implements ILocalRepaint {
         
     private boolean hovered = false;
 
-    private final Color clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
-    private final Color l20 = FSkin.stepColor(clrTheme, 20);
-    private final Color l25 = FSkin.stepColor(clrTheme, 25);
-    private final Color l40 = FSkin.stepColor(clrTheme, 40);
-    private final Color d20 = FSkin.stepColor(clrTheme, -20);
-    private final Color d80 = FSkin.stepColor(clrTheme, -80);
+    private final JComponentSkin<LblGroup> skin;
+    private final SkinColor clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
+    private final SkinColor l20 = clrTheme.stepColor(20);
+    private final SkinColor l25 = clrTheme.stepColor(25);
+    private final SkinColor l40 = clrTheme.stepColor(40);
+    private final SkinColor d20 = clrTheme.stepColor(-20);
+    private final SkinColor d80 = clrTheme.stepColor(-80);
 
     /** 
      * Custom JLabel for title of menu item groups.
@@ -44,9 +45,10 @@ public class LblGroup extends JLabel implements ILocalRepaint {
     public LblGroup(final EMenuGroup e0) {
         
         super("  " + e0.getTitle());
-               
+
+        skin = FSkin.get(this);
         this.setFont(FSkin.getBoldFont(14));
-        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -128,16 +130,15 @@ public class LblGroup extends JLabel implements ILocalRepaint {
             int w = getWidth();
             int h = getHeight();
 
-            g.setColor(l20);
+            skin.setGraphicsColor(g, l20);
             g.fillRect(0, 0, getWidth(), getHeight());
 
-            GradientPaint edge = new GradientPaint(w - 10, 0, l25, w, 0, d80, false);
-            g2d.setPaint(edge);
+            skin.setGraphicsGradientPaint(g2d, w - 10, 0, l25, w, 0, d80);
             g2d.fillRect(w - 10, 0, w, h);
 
-            g2d.setColor(l40);
+            skin.setGraphicsColor(g, l40);
             g2d.drawLine(0, 0, w - 6, 0);
-            g2d.setColor(d20);
+            skin.setGraphicsColor(g, d20);
             g2d.drawLine(0, h - 1, w - 6, h - 1);
         }
 

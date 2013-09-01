@@ -17,11 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
-
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
+
 import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts;
@@ -294,10 +293,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private class SectionLabel extends JLabel {
         public SectionLabel(final String txt0) {
             super(txt0);
-            setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+            FSkin.JComponentSkin<SectionLabel> skin = FSkin.get(this);
+            skin.setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             setHorizontalAlignment(SwingConstants.CENTER);
             setFont(FSkin.getBoldFont(16));
-            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
     }
 
@@ -306,8 +306,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private class NoteLabel extends JLabel {
         public NoteLabel(final String txt0) {
             super(txt0);
+            FSkin.JComponentSkin<NoteLabel> skin = FSkin.get(this);
             setFont(FSkin.getItalicFont(12));
-            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
     }
 
@@ -344,7 +345,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             this.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(final FocusEvent evt) {
-                    KeyboardShortcutField.this.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+                    FSkin.get(KeyboardShortcutField.this).setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
                 }
 
                 @Override
@@ -352,7 +353,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                     Singletons.getModel().getPreferences().setPref(prefKey, getCodeString());
                     Singletons.getModel().getPreferences().save();
                     shortcut0.attach();
-                    KeyboardShortcutField.this.setBackground(Color.white);
+                    FSkin.get(KeyboardShortcutField.this).setBackground(Color.white);
                 }
             });
         }

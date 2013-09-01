@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -68,10 +67,11 @@ public enum FNetOverlay {
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
     private FNetOverlay() {
+        FSkin.JComponentSkin<JPanel> pnlSkin = FSkin.get(pnl);
         pnl.setOpaque(false);
         pnl.setVisible(false);
-        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
-        pnl.setBorder(BorderFactory.createLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        pnlSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        pnlSkin.setLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
 
         pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 2"));
 //        pnl.add(new FLabel.Builder().text("Loading new game...").fontSize(22).build(), "h 40px!, align center");
@@ -80,7 +80,7 @@ public enum FNetOverlay {
 
         txtLog.setOpaque(true);
         txtLog.setFocusable(true);
-        txtLog.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        FSkin.get(txtLog).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
 
         JScrollPane _operationLogScroller = new JScrollPane(txtLog);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -88,7 +88,7 @@ public enum FNetOverlay {
         new SmartScroller(_operationLogScroller);
         pnl.add(_operationLogScroller, "pushx, hmin 24, pushy, growy, growx, gap 2px 2px 2px 0, sx 2");
 
-        txtInput.setBorder(BorderFactory.createLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        FSkin.get(txtInput).setLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
         pnl.add(txtInput, "pushx, growx, h 26px!, gap 2px 2px 2px 0");
         pnl.add(cmdSend, "w 60px!, h 28px!, gap 0 0 2px 0");
         

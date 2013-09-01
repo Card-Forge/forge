@@ -17,9 +17,7 @@
  */
 package forge.gui.home;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -33,6 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
@@ -61,6 +60,8 @@ import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
 import forge.properties.NewConstants;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
@@ -77,8 +78,8 @@ public enum VHomeUI implements IVTopLevelUI {
     /** */
     SINGLETON_INSTANCE;
 
-    private final Color clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
-    private final Color l00 = FSkin.stepColor(clrTheme, 0);
+    private final SkinColor clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
+    private final SkinColor l00 = clrTheme.stepColor(0);
 
     private final List<IVSubmenu<? extends ICDoc>> allSubmenus = new ArrayList<IVSubmenu<? extends ICDoc>>();
     private final Map<EDocID, LblMenuItem> allSubmenuLabels = new HashMap<EDocID, LblMenuItem>();
@@ -188,7 +189,7 @@ public enum VHomeUI implements IVTopLevelUI {
         }
 
         pnlMenu.add(pnlSubmenus, "w 100%!, h 100% - " + pnlMainMenuHeight + "px!");
-        pnlDisplay.setBackground(FSkin.alphaColor(l00, 100));
+        FSkin.get(pnlDisplay).setBackground(l00.alphaColor(100));
     }
 
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
@@ -279,9 +280,11 @@ public enum VHomeUI implements IVTopLevelUI {
     }
 
     private class PnlMenu extends JPanel {
-        private final Color d80 = FSkin.stepColor(clrTheme, -80);
+        private final JComponentSkin<PnlMenu> skin;
+        private final SkinColor d80 = clrTheme.stepColor(-80);
 
         public PnlMenu() {
+            this.skin = FSkin.get(this);
             this.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
             this.setOpaque(false);
         }
@@ -313,15 +316,14 @@ public enum VHomeUI implements IVTopLevelUI {
                 }
             }
 
-            g2d.setColor(l00);
+            skin.setGraphicsColor(g2d, l00);
             g2d.fillRect(0, y1, w, h1);
             if (h2 > 0) {
                 g2d.fillRect(0, y2, w, h2);
             }
             
             int x = w - 8;
-            GradientPaint edge = new GradientPaint(x, 0, l00, w, 0, d80, false);
-            g2d.setPaint(edge);
+            skin.setGraphicsGradientPaint(g2d, x, 0, l00, w, 0, d80);
             g2d.fillRect(x, y1, w, h1);
             if (h2 > 0) {
                 g2d.fillRect(x, y2, w, h2);

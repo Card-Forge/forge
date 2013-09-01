@@ -74,7 +74,7 @@ public enum VMessage implements IVDoc<CMessage> {
         tarMessage.setEditable(false);
         tarMessage.setLineWrap(true);
         tarMessage.setWrapStyleWord(true);
-        tarMessage.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.get(tarMessage).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarMessage.setFont(FSkin.getFont(14));
         tarMessage.setMargin(new Insets(5, 5, 5, 5));
 

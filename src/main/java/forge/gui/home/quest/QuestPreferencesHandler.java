@@ -16,6 +16,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JTextComponentSkin;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 
@@ -240,7 +241,8 @@ public class QuestPreferencesHandler extends JPanel {
     private class PrefInput extends JTextField {
         private final QPref qpref;
         private final ErrType err;
-        private final Color clrHover, clrActive, clrText;
+        private final JTextComponentSkin<PrefInput> skin;
+        private final FSkin.SkinColor clrHover, clrActive, clrText;
         private boolean isFocus = false;
         private String previousText = "";
 
@@ -255,6 +257,7 @@ public class QuestPreferencesHandler extends JPanel {
 
             this.qpref = qp0;
             this.err = e0;
+            this.skin = FSkin.get(this);
             this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
             this.clrActive = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
             this.clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
@@ -262,9 +265,9 @@ public class QuestPreferencesHandler extends JPanel {
             this.setOpaque(false);
             this.setBorder(null);
             this.setFont(FSkin.getFont(13));
-            this.setForeground(clrText);
-            this.setCaretColor(clrText);
-            this.setBackground(clrHover);
+            this.skin.setForeground(clrText);
+            this.skin.setCaretColor(clrText);
+            this.skin.setBackground(clrHover);
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setText(prefs.getPref(qpref));
             this.setPreviousText(prefs.getPref(qpref));
@@ -290,14 +293,14 @@ public class QuestPreferencesHandler extends JPanel {
                 public void focusGained(FocusEvent e) {
                     isFocus = true;
                     setOpaque(true);
-                    setBackground(clrActive);
+                    skin.setBackground(clrActive);
                 }
 
                 @Override
                 public void focusLost(FocusEvent e) {
                     isFocus = false;
                     setOpaque(false);
-                    setBackground(clrHover);
+                    skin.setBackground(clrHover);
 
                     // TODO for slight performance improvement
                     // check if value has changed before validating

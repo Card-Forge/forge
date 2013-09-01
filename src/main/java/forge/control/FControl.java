@@ -68,7 +68,6 @@ import forge.gui.menubar.FMenuBar;
 import forge.gui.menubar.MenuUtil;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
-import forge.properties.ForgeLookAndFeel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
@@ -175,11 +174,6 @@ public enum FControl implements KeyEventDispatcher {
         // Preloads skin components (using progress bar).
         FSkin.loadFull();
 
-        // This must be done here or at least between the skin being loaded
-        // and any GUI controls being created.
-        FSkin.setProgessBarMessage("Setting look and feel...");
-        setForgeLookAndFeel();
-
         createMenuBar();
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
@@ -221,11 +215,6 @@ public enum FControl implements KeyEventDispatcher {
     private void setGlobalKeyboardHandler() {
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(this);
-    }
-
-    private void setForgeLookAndFeel() {
-        ForgeLookAndFeel laf = new ForgeLookAndFeel();
-        laf.setForgeLookAndFeel(Singletons.getView().getFrame());
     }
 
     private void createMenuBar() {

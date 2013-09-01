@@ -81,7 +81,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final StartButton btnStart  = new StartButton();
 
     private VSubmenuGauntletQuick() {
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         boxUserDecks.setSelected(true);
         boxQuestDecks.setSelected(true);
@@ -95,7 +95,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         sliOpponents.setPaintLabels(true);
         sliOpponents.setSnapToTicks(true);
         sliOpponents.setOpaque(false);
-        sliOpponents.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.get(sliOpponents).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         sliOpponents.setFont(FSkin.getFont(12));
 
 
@@ -104,7 +104,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         scrLoad.getViewport().setOpaque(false);
         scrLoad.setBorder(null);
 
-        pnlOptions.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(pnlOptions).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlOptions.add(lblOptions, "h 30px!, w 96%!, gap 2% 0 0 5px");
         pnlOptions.add(sliOpponents, "h 40px!, w 96%!, gap 2% 0 0 5px, ax center");
         pnlOptions.add(lblDesc1, "w 96%!, gap 2% 0 0 20px");

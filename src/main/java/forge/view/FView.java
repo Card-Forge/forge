@@ -84,14 +84,14 @@ public enum FView {
 
     private FView() {
         frmSplash = new SplashFrame();
-
-        // Insets panel has background image / texture, which
-        // must be instantiated after the skin is loaded.
-        pnlInsets = new FPanel(new BorderLayout());
     }
 
     /** */
     public void initialize() {
+        // Insets panel has background image / texture, which
+        // must be instantiated after the skin is loaded.
+        pnlInsets = new FPanel(new BorderLayout());
+
         // Frame styling
         frmDocument.setMinimumSize(new Dimension(800, 600));
         frmDocument.setLocationRelativeTo(null);
@@ -121,7 +121,7 @@ public enum FView {
         pnlContent.setOpaque(false);
         pnlContent.setLayout(null);
 
-        FOverlay.SINGLETON_INSTANCE.getPanel().setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
+        FSkin.get(FOverlay.SINGLETON_INSTANCE.getPanel()).setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
 
         // Populate all drag tab components.
         this.cacheUIStates();

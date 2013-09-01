@@ -26,8 +26,6 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
-
 import net.miginfocom.swing.MigLayout;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -73,7 +71,6 @@ public class VField implements IVDoc<CField> {
     private final PhaseIndicator phaseInidicator = new PhaseIndicator();
 
     private final Border borderAvatarSimple = new LineBorder(new Color(0, 0, 0, 0), 1);
-    private final Border borderAvatarHover = new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1);
     private final Border borderAvatarHighlited = new LineBorder(Color.red, 2);
 
 
@@ -102,7 +99,7 @@ public class VField implements IVDoc<CField> {
         control = new CField(player, this, playerViewer);
 
         avatarArea.setOpaque(false);
-        avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
+        FSkin.get(avatarArea).setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
         avatarArea.add(lblAvatar, "w 100%!, h 70%!, wrap, gaptop 4%");
         avatarArea.add(lblLife, "w 100%!, h 30%!, gaptop 4%");
@@ -113,7 +110,7 @@ public class VField implements IVDoc<CField> {
             public void mouseEntered(final MouseEvent e) {
                 avatarArea.setOpaque(true);
                 if (!isHighlited())
-                    avatarArea.setBorder(borderAvatarHover);
+                    FSkin.get(avatarArea).setLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             }
 
             @Override
@@ -124,8 +121,7 @@ public class VField implements IVDoc<CField> {
             }
         });
 
-        tabletop.setBorder(new MatteBorder(0, 1, 0, 0,
-                FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        FSkin.get(tabletop).setMatteBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
         tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
@@ -261,9 +257,12 @@ public class VField implements IVDoc<CField> {
         detailsPanel.updateDetails();
         
         this.getLblLife().setText("" + player.getLife());
-        Color lifeFg = player.getLife() <= 5 ? Color.red : FSkin.getColor(FSkin.Colors.CLR_TEXT);
-        this.getLblLife().setForeground(lifeFg);
-
+        if (player.getLife() > 5) {
+            FSkin.get(this.getLblLife()).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        }
+        else {
+            FSkin.get(this.getLblLife()).setForeground(Color.red);
+        }
         
         boolean highlited = isHighlited(); 
         this.avatarArea.setBorder(highlited ? borderAvatarHighlited : borderAvatarSimple );
