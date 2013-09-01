@@ -1885,7 +1885,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 
                 Map<Card,Integer> map = p.getCommanderDamage();
                 if(map.containsKey(this)) {
-                    sb.append("Damage to " + p.getName() + ": "+ map.get(p) + "\r\n");
+                    sb.append("Damage to " + p.getName() + ": "+ map.get(this) + "\r\n");
                 }
             }
         }
