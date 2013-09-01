@@ -3,7 +3,6 @@ package forge.card.ability.effects;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
 import forge.Card;
 import forge.CounterType;
 import forge.card.ability.AbilityUtils;
@@ -109,6 +108,12 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();
                         runParams.put("Card", tgtCard);
                         tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.Evolved, runParams, false);
+                    }
+                    if (sa.hasParam("Monstrosity")) {
+                        tgtCard.setMonstrous(true);
+                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                        runParams.put("Card", tgtCard);
+                        tgtCard.getController().getGame().getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
                     }
                 } else {
                     // adding counters to something like re-suspend cards

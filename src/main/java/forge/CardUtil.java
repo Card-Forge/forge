@@ -121,6 +121,7 @@ public final class CardUtil {
             newCopy.addAlternateState(CardCharacteristicName.Cloner);
         }
         newCopy.setType(new ArrayList<String>(in.getType()));
+        newCopy.setToken(in.isToken());
         newCopy.setTriggers(in.getTriggers(), false);
         for (SpellAbility sa : in.getManaAbility()) {
             newCopy.addSpellAbility(sa);

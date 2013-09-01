@@ -23,6 +23,7 @@ import java.util.Map;
 import forge.Card;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -100,5 +101,7 @@ public class TriggerAttacks extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Attacker", this.getRunParams().get("Attacker"));
         sa.setTriggeringObject("Defender", this.getRunParams().get("Attacked"));
+        final Player defendingPlayer = ((Card) this.getRunParams().get("Attacker")).getGame().getCombat().getDefenderPlayerByAttacker((Card) this.getRunParams().get("Attacker"));
+        sa.setTriggeringObject("DefendingPlayer", defendingPlayer);
     }
 }

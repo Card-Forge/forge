@@ -13433,6 +13433,7 @@ res/quest/duels/Frodo[!!-~]1.dck -text
 res/quest/duels/Frodo[!!-~]2.dck -text
 res/quest/duels/Frodo[!!-~]3.dck -text
 res/quest/duels/Frodo[!!-~]4.dck -text
+res/quest/duels/Galadriel[!!-~]1.dck -text
 res/quest/duels/Galadriel[!!-~]2.dck -text
 res/quest/duels/Galahad[!!-~]1.dck -text
 res/quest/duels/Galahad[!!-~]2.dck -text
@@ -14606,6 +14607,7 @@ src/main/java/forge/card/trigger/TriggerAttackerBlocked.java svneol=native#text/
 src/main/java/forge/card/trigger/TriggerAttackerUnblocked.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerAttackersDeclared.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerAttacks.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerBecomeMonstrous.java -text
 src/main/java/forge/card/trigger/TriggerBecomesTarget.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerBlockersDeclared.java -text
 src/main/java/forge/card/trigger/TriggerBlocks.java svneol=native#text/plain

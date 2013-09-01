@@ -2090,6 +2090,21 @@ public class CardFactoryUtil {
         if (evokePos != -1) {
             card.addSpellAbility(makeEvokeSpell(card, card.getKeyword().get(evokePos)));
         }
+        final int monstrousPos = hasKeyword(card, "Monstrosity");
+        if (monstrousPos != -1) {
+            final String parse = card.getKeyword().get(monstrousPos).toString();
+            final String[] k = parse.split(":");
+            final String magnitude = k[0].substring(12);
+            final String manacost = k[1];
+            card.removeIntrinsicKeyword(parse);
+
+            String effect = "AB$ PutCounter | Cost$ " + manacost + " | IsPresent$ " +
+            		"Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " +
+                    magnitude + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " +
+            		magnitude + " (If this creature isn't monstrous, put four +1/+1 " +
+            		"counters on it and it becomes monstrous.)";
+            card.addSpellAbility(AbilityFactory.getAbility(effect, card));
+        }
 
         if (hasKeyword(card, "Cycling") != -1) {
             final int n = hasKeyword(card, "Cycling");
@@ -2386,7 +2401,7 @@ public class CardFactoryUtil {
         if (card.hasKeyword("Extort")) {
             final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
                     + "TriggerZones$ Battlefield | Execute$ ExtortOpps | Secondary$ True"
-                    + " | TriggerDescription$ Extort (Whenever you cast a spell, you may pay WB. If you do, "
+                    + " | TriggerDescription$ Extort (Whenever you cast a spell, you may pay W/B. If you do, "
                     + "each opponent loses 1 life and you gain that much life.)";
             final String abString = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | "
                     + "LifeAmount$ 1 | SubAbility$ ExtortGainLife";

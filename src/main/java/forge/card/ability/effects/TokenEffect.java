@@ -202,7 +202,8 @@ public class TokenEffect extends SpellAbilityEffect {
         }
         final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
 
-        final String remember = sa.getParam("RememberTokens");
+        final boolean remember = sa.hasParam("RememberTokens");
+        final boolean imprint = sa.hasParam("ImprintTokens");
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
             for (int i = 0; i < finalAmount; i++) {
                 final List<Card> tokens = CardFactory.makeToken(substitutedName, imageName, controller, cost,
@@ -293,8 +294,11 @@ public class TokenEffect extends SpellAbilityEffect {
                         }
                         combat.addAttacker(c, defender);
                     }
-                    if (remember != null) {
+                    if (remember) {
                         game.getCardState(sa.getSourceCard()).addRemembered(c);
+                    }
+                    if (imprint) {
+                        game.getCardState(sa.getSourceCard()).addImprinted(c);
                     }
                     if (sa.getParam("RememberSource") != null) {
                         game.getCardState(c).addRemembered(host);
