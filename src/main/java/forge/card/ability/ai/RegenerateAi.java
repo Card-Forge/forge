@@ -78,6 +78,10 @@ public class RegenerateAi extends SpellAbilityAi {
             if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, abCost, hostCard)) {
                 return false;
             }
+            
+            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, hostCard)) {
+                return false;
+            }
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();

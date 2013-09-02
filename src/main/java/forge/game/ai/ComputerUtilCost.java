@@ -70,21 +70,11 @@ public class ComputerUtilCost {
         if (cost == null) {
             return true;
         }
-        double p1p1Percent = .25;
-        if (source.isCreature()) {
-            p1p1Percent = .1;
-        }
-        final double otherPercent = .9;
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter) {
                 final CostRemoveCounter remCounter = (CostRemoveCounter) part;
     
-                // A card has a 25% chance per counter to be able to pass
-                // through here
-                // 4+ counters will always pass. 0 counters will never
                 final CounterType type = remCounter.getCounter();
-                final double percent = type.name().equals("P1P1") ? p1p1Percent : otherPercent;
-                final int currentNum = source.getCounters(type);
                 if (!part.payCostFromSource()) {
                     if (type.name().equals("P1P1")) {
                         return false;
@@ -94,15 +84,6 @@ public class ComputerUtilCost {
 
                 //don't kill the creature
                 if (type.name().equals("P1P1") && source.getLethalDamage() <= 1) {
-                    return false;
-                }
-    
-                Integer amount = part.convertAmount();
-                if (amount == null) {
-                    amount = currentNum;
-                }
-                final double chance = percent * (currentNum / amount);
-                if (chance <= MyRandom.getRandom().nextFloat()) {
                     return false;
                 }
             }
