@@ -6571,6 +6571,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (this.devouredCards.size() != 0) {
                 return false;
             }
+        } else if (property.equals("IsMonstrous")) {
+            if (!this.isMonstrous()) {
+                return false;
+            }
         } else if (property.equals("IsNotMonstrous")) {
             if (this.isMonstrous()) {
                 return false;
