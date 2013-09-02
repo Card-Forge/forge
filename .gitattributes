@@ -14640,6 +14640,7 @@ src/main/java/forge/card/trigger/TriggerPlanarDice.java -text
 src/main/java/forge/card/trigger/TriggerPlaneswalkedFrom.java -text
 src/main/java/forge/card/trigger/TriggerPlaneswalkedTo.java -text
 src/main/java/forge/card/trigger/TriggerSacrificed.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerScry.java -text
 src/main/java/forge/card/trigger/TriggerSetInMotion.java -text
 src/main/java/forge/card/trigger/TriggerShuffled.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerSpellAbilityCast.java svneol=native#text/plain

@@ -39,7 +39,6 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.CardManager;
-import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;

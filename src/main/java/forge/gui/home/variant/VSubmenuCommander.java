@@ -8,19 +8,13 @@ import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.deck.Deck;
-import forge.gui.CardDetailPanel;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -29,7 +23,6 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FPanel;
@@ -37,10 +30,6 @@ import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTabbedPane;
-import forge.gui.toolbox.special.FDeckChooser;
-import forge.item.PaperCard;
-import forge.item.IPaperCard;
-import forge.model.FModel;
 
 /** 
  * Assembles Swing components of constructed submenu singleton.

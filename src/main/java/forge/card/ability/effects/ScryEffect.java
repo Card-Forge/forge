@@ -2,6 +2,7 @@ package forge.card.ability.effects;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -11,6 +12,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
+import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -90,6 +92,9 @@ public class ScryEffect extends SpellAbilityEffect {
                 p.getGame().getAction().moveToLibrary(c);
             }
         }
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("Player", p);
+        p.getGame().getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
     }
 
 }

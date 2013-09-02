@@ -50,6 +50,7 @@ public enum TriggerType {
     PlaneswalkedFrom(TriggerPlaneswalkedFrom.class),
     PlaneswalkedTo(TriggerPlaneswalkedTo.class),
     Sacrificed(TriggerSacrificed.class),
+    Scry(TriggerScry.class),
     SetInMotion(TriggerSetInMotion.class),
     Shuffled(TriggerShuffled.class),
     SpellAbilityCast(TriggerSpellAbilityCast.class),

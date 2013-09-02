@@ -9,15 +9,11 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.RegisteredPlayer;
@@ -26,15 +22,9 @@ import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorCommander;
-import forge.gui.deckeditor.controllers.CEditorVariant;
-import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
-import forge.gui.toolbox.special.FDeckChooser;
-import forge.item.PaperCard;
 import forge.net.FServer;
 import forge.net.Lobby;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 
 /** 
