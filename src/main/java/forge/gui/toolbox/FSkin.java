@@ -54,6 +54,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.TypeUtil;
 import forge.view.FView;
+import forge.view.SplashFrame;
 
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
@@ -836,7 +837,7 @@ public enum FSkin {
         prefs.save();
 
         //load skin
-        loadLight(skinName);
+        loadLight(skinName, false);
         loadFull();
 
         //reapply skin to all skinned components
@@ -853,9 +854,11 @@ public enum FSkin {
      * @param skinName
      *            the skin name
      */
-    public static void loadLight(final String skinName) {
-        // No need for this method to be loaded while on the EDT.
-        FThreads.assertExecutedByEdt(false);
+    public static void loadLight(final String skinName, final boolean onInit) {
+        if (onInit) {
+            // No need for this method to be loaded while on the EDT.
+            FThreads.assertExecutedByEdt(false);
+        }
 
         // Non-default (preferred) skin name and dir.
         FSkin.preferredName = skinName.toLowerCase().replace(' ', '_');
@@ -867,48 +870,57 @@ public enum FSkin {
         FSkin.icons = new HashMap<SkinProp, ImageIcon>();
         FSkin.images = new HashMap<SkinProp, Image>();
 
-        final File f = new File(preferredDir + FILE_SPLASH);
-        if (!f.exists()) {
-            FSkin.loadLight("default");
-        }
-        else {
-            final BufferedImage img;
-            try {
-                img = ImageIO.read(f);
-
-                final int h = img.getHeight();
-                final int w = img.getWidth();
-
-                FSkin.setIcon(Backgrounds.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
-
-                UIManager.put("ProgressBar.background", FSkin.getColorFromPixel(img.getRGB(25, h - 75)));
-                UIManager.put("ProgressBar.selectionBackground", FSkin.getColorFromPixel(img.getRGB(75, h - 75)));
-                UIManager.put("ProgressBar.foreground", FSkin.getColorFromPixel(img.getRGB(25, h - 25)));
-                UIManager.put("ProgressBar.selectionForeground", FSkin.getColorFromPixel(img.getRGB(75, h - 25)));
-                UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));
-            } catch (final IOException e) {
-                e.printStackTrace();
+        if (onInit) {
+            final File f = new File(preferredDir + FILE_SPLASH);
+            if (!f.exists()) {
+                FSkin.loadLight("default", onInit);
             }
+            else {
+                final BufferedImage img;
+                try {
+                    img = ImageIO.read(f);
+    
+                    final int h = img.getHeight();
+                    final int w = img.getWidth();
+    
+                    FSkin.setIcon(Backgrounds.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
+    
+                    UIManager.put("ProgressBar.background", FSkin.getColorFromPixel(img.getRGB(25, h - 75)));
+                    UIManager.put("ProgressBar.selectionBackground", FSkin.getColorFromPixel(img.getRGB(75, h - 75)));
+                    UIManager.put("ProgressBar.foreground", FSkin.getColorFromPixel(img.getRGB(25, h - 25)));
+                    UIManager.put("ProgressBar.selectionForeground", FSkin.getColorFromPixel(img.getRGB(75, h - 25)));
+                    UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));
+                } catch (final IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            loaded = true;
         }
-        loaded = true;
     }
     
+    private static FProgressBar splashProgressBar;
+    
+    public static void incrementProgessBar() {
+        if (splashProgressBar == null) { return; }
+        splashProgressBar.increment();
+    }
     public static void setProgessBarMessage(final String message) { 
         setProgessBarMessage(message, 0);
     }
     public static void setProgessBarMessage(final String message, final int cnt) {
-        final FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
+        if (splashProgressBar == null) { return; }
+
+        final FProgressBar progressBar = splashProgressBar; //must cache for sake of runnable below
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 if ( cnt > 0 ) {
-                    barProgress.reset();
-                    barProgress.setMaximum(cnt);
+                    progressBar.reset();
+                    progressBar.setMaximum(cnt);
                 }
-                barProgress.setShowETA(false);
-                barProgress.setShowCount(cnt > 0);
-                barProgress.setDescription(message);
-                
+                progressBar.setShowETA(false);
+                progressBar.setShowCount(cnt > 0);
+                progressBar.setDescription(message);
             }
         });
     }
@@ -933,18 +945,20 @@ public enum FSkin {
      * missing, the default picture is retrieved.
      */
     public static void loadFull() {
-        // No need for this method to be loaded while on the EDT.
-        FThreads.assertExecutedByEdt(false);
+        final SplashFrame splash = FView.SINGLETON_INSTANCE.getSplash();
+        final boolean onInit = (splash != null);
+        if (onInit) { 
+            splashProgressBar = splash.getProgressBar();
 
-        // Preferred skin name must be called via loadLight() method,
-        // which does some cleanup and init work.
-        if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default"); }
+            // No need for this method to be loaded while on the EDT.
+            FThreads.assertExecutedByEdt(false);
 
-        // Everything OK?
-        
-        final FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
-        setProgessBarMessage("Processing image sprites: ", 5);
+            // Preferred skin name must be called via loadLight() method,
+            // which does some cleanup and init work.
+            if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default", onInit); }
 
+            setProgessBarMessage("Processing image sprites: ", 5);
+        }
 
         // Grab and test various sprite files.
         final File f1 = new File(DEFAULT_DIR + FILE_ICON_SPRITE);
@@ -956,18 +970,18 @@ public enum FSkin {
 
         try {
             bimDefaultSprite = ImageIO.read(f1);
-            barProgress.increment();
+            incrementProgessBar();
             bimPreferredSprite = ImageIO.read(f2);
-            barProgress.increment();
+            incrementProgessBar();
             bimFoils = ImageIO.read(f3);
-            barProgress.increment();
+            incrementProgessBar();
             bimOldFoils = f6.exists() ? ImageIO.read(f6) : ImageIO.read(f3);
-            barProgress.increment();
+            incrementProgessBar();
             bimDefaultAvatars = ImageIO.read(f4);
 
             if (f5.exists()) { bimPreferredAvatars = ImageIO.read(f5); }
 
-            barProgress.increment();
+            incrementProgessBar();
 
             preferredH = bimPreferredSprite.getHeight();
             preferredW = bimPreferredSprite.getWidth();
@@ -1040,9 +1054,11 @@ public enum FSkin {
         FSkin.bimPreferredAvatars = null;
 
         // Set look and feel after skin loaded
-        FSkin.setProgessBarMessage("Setting look and feel...");
+        setProgessBarMessage("Setting look and feel...");
         ForgeLookAndFeel laf = new ForgeLookAndFeel();
         laf.setForgeLookAndFeel(Singletons.getView().getFrame());
+
+        splashProgressBar = null;
     }
     
     private static void setDefaultFontSize() {

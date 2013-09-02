@@ -77,7 +77,7 @@ public class SplashFrame extends JFrame {
     public SplashFrame() {
         super();
         final ForgePreferences prefs = new ForgePreferences();
-        FSkin.loadLight(prefs.getPref(FPref.UI_SKIN));
+        FSkin.loadLight(prefs.getPref(FPref.UI_SKIN), true);
 
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
