@@ -107,7 +107,15 @@ public class TokenAi extends SpellAbilityAi {
                 && ph.isPlayerTurn(ai) && !haste
                 && !sa.hasParam("ActivationPhases")
                 && !ComputerUtil.castSpellInMain1(ai, sa)) {
-            return false;
+            boolean buff = false;
+            for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
+                if ("Creature".equals(c.getSVar("BuffedBy"))) {
+                    buff = true;
+                }
+            }
+            if (!buff) {
+                return false;
+            }
         }
         if ((ph.isPlayerTurn(ai)
                 || ph.getPhase().isBefore(
