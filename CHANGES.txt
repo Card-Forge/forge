@@ -8,6 +8,10 @@ Forge Beta: 09-##-2013 ver 1.4.8
 Release Notes
 -------------
 
+- New Theros cards -
+We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+
+
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
 
@@ -27,11 +31,11 @@ New Cards
 
 
 
-----------
-New Planes
-----------
+---------------
+New Phenomenons
+---------------
 
-
+Interplanar Tunnel
 
 
 -----------------------
@@ -39,6 +43,19 @@ New Theros branch Cards
 -----------------------
 
 Shipbreaker Kraken
+Anax and Cymede
+Polukranos, World Eater
+Nykthos, Shrine to Nyx
+Nylea, God of the Hunt
+Nessian Asp
+Flamespeaker Adept
+Commune with the Gods
+Lost in a Labyrinth
+Rageblood Shaman
+Satyr Hedonist
+Voyage's End
+Witches' Eye
+Polis Crusher
 
 
 ------------
