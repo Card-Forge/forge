@@ -1,0 +1,6 @@
+Name:Command Tower
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ Combo ColorIdentity | SpellDescription$ Add to your mana pool one mana of any color in your commander's color identity.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/command_tower.jpg
+Oracle:{T}: Add to your mana pool one mana of any color in your commander's color identity.

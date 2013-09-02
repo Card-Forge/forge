@@ -1877,6 +1877,19 @@ public class Card extends GameEntity implements Comparable<Card> {
             sb.append("\r\nLife Modifier: ").append(getRules().getLife());
             sb.append("\r\n\r\n");
         }
+        if(this.isCommander)
+        {
+            sb.append(this.getOwner().getName() + "'s Commander\r\n");
+            for(Player p : getOwner().getGame().getPlayers()) {
+                if(p.equals(getOwner()))
+                    continue;
+                
+                Map<Card,Integer> map = p.getCommanderDamage();
+                if(map.containsKey(this)) {
+                    sb.append("Damage to " + p.getName() + ": "+ map.get(this) + "\r\n");
+                }
+            }
+        }
         sb.append(this.getAbilityText());
 
         String nonAbilityText = this.getNonAbilityText();

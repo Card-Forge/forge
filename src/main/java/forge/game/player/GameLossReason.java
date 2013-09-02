@@ -34,7 +34,7 @@ public enum GameLossReason {
     /** The Spell effect. */
     SpellEffect,
     
-    EdhGeneralDamage,
+    CommanderDamage,
 
     OpponentWon
 

@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -125,6 +126,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position) {
+        
         if (c.isCopiedSpell()) {
             if ((zoneFrom != null)) {
                 zoneFrom.remove(c);
@@ -792,7 +794,6 @@ public class GameAction {
         // Max: I don't know where to put this! - but since it's a state based action, it must be in check state effects
         if(game.getType() == GameType.Archenemy) 
             game.archenemy904_10();
-
         
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);

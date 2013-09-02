@@ -30,6 +30,7 @@ import forge.card.MagicColor;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerType;
+import forge.game.GameType;
 import forge.game.player.Player;
 
 /**
@@ -105,6 +106,12 @@ public class AbilityManaPart implements java.io.Serializable {
     public final void produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
+        ColorSet CID = null;
+        
+        if(player.getGame().getType() == GameType.Commander)
+        {
+            CID = player.getCommander().getRules().getColorIdentity();
+        }
 
         //clear lastProduced
         this.lastManaProduced.clear();
@@ -116,7 +123,17 @@ public class AbilityManaPart implements java.io.Serializable {
                     this.lastManaProduced.add(new Mana(MagicColor.COLORLESS, source, this));
                 }
             else
-                this.lastManaProduced.add(new Mana(MagicColor.fromName(c), source, this));
+            {
+                byte attemptedMana = MagicColor.fromName(c);
+                if(CID != null)
+                {
+                    if(!CID.hasAnyColor(attemptedMana)) {
+                        attemptedMana = MagicColor.COLORLESS;
+                    }
+                }
+                
+                this.lastManaProduced.add(new Mana(attemptedMana, source, this));
+            }
         }
 
         // add the mana produced to the mana pool
@@ -386,6 +403,35 @@ public class AbilityManaPart implements java.io.Serializable {
             retVal = this.getOrigProduced().replace("Combo ", "");
             if (retVal.contains("Any")) {
                 retVal = "W U B R G";
+            }
+            if(retVal.contains("ColorIdentity")) {
+                retVal = "";
+                if(this.getSourceCard().getOwner().getCommander() == null)
+                {
+                    return "";
+                }
+                ColorSet CID = this.getSourceCard().getOwner().getCommander().getRules().getColorIdentity();
+                if(CID.hasWhite())
+                {
+                    retVal += "W ";
+                }
+                if(CID.hasBlue())
+                {
+                    retVal += "U ";
+                }
+                if(CID.hasBlack())
+                {
+                    retVal += "B ";
+                }
+                if(CID.hasRed())
+                {
+                    retVal += "R ";
+                }
+                if(CID.hasGreen())
+                {
+                    retVal += "G ";
+                }
+                retVal = retVal.substring(0,retVal.length()-1);
             }
         }
         return retVal;

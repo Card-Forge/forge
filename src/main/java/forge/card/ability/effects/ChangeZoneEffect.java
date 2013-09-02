@@ -859,7 +859,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             combat.addAttacker(c, defender);
                         }
                     }
-
                     movedCard = game.getAction().moveTo(c.getController().getZone(destination), c);
                     if (sa.hasParam("Tapped")) {
                         movedCard.setTapped(true);

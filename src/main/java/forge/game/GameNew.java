@@ -20,6 +20,12 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameLogEntryType;
 import forge.card.CardDb;
+import forge.card.ability.AbilityFactory;
+import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.replacement.ReplacementEffect;
+import forge.card.replacement.ReplacementHandler;
+import forge.card.spellability.SpellAbility;
+import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.deck.CardPool;
@@ -90,6 +96,17 @@ public class GameNew {
                 player.getZone(ZoneType.PlanarDeck).add(c);
             }
             player.getZone(ZoneType.PlanarDeck).shuffle();
+        }
+        
+        // Commander
+        if(psc.getCommander() != null)
+        {
+            Card cmd = psc.getCommander().toForgeCard(player);
+            cmd.setCommander(true);
+            com.add(cmd);
+            player.setCommander(cmd);
+            
+            CardFactoryUtil.addCommanderAbilities(cmd);
         }
         
     }

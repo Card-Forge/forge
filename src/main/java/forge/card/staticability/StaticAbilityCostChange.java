@@ -122,6 +122,21 @@ public class StaticAbilityCostChange {
             }
         }
         int value = 0;
+        try {
+            value = Integer.parseInt(amount);
+        }
+        catch(NumberFormatException nfe) {
+            if ("Min3".equals(amount)) {
+                int cmc = manaCost.getConvertedManaCost();
+                if (cmc < 3) {
+                    value = 3 - cmc;
+                }
+            }
+            else {
+                value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amount));
+            }
+        }
+        /*
         if ("X".equals(amount)) {
             value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
         } else if ("Y".equals(amount)) {
@@ -135,6 +150,7 @@ public class StaticAbilityCostChange {
             value = AbilityUtils.calculateAmount(card, amount, sa);
             //value = Integer.valueOf(amount);
         }
+        */
 
         if (!params.containsKey("Color")) {
             manaCost.increaseColorlessMana(value);

@@ -108,8 +108,7 @@ public class CardFactory {
                 out.addStaticAbility(s);
             }
         }
-
-
+                
         CardFactory.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
             for (final CardCharacteristicName state : in.getStates()) {
@@ -140,6 +139,16 @@ public class CardFactory {
         }
         for (final Card o : in.getImprinted()) {
             out.addImprinted(o);
+        }
+        out.setCommander(in.isCommander());
+        if(out.isCommander())
+        {
+            out.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Ability | Affected$ Card.Self | EffectZone$ Command | AffectedZone$ Command");
+            SpellAbility sa = AbilityFactory.getAbility(
+                    "AB$ PermanentCreature | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + out.getManaCost().toString(),
+                    out);
+            
+            out.addSpellAbility(sa);
         }
 
         return out;

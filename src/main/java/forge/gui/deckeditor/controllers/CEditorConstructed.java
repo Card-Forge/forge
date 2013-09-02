@@ -68,7 +68,6 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     private final ItemPoolView<PaperCard> avatarPool;
     private final ItemPoolView<PaperCard> planePool;
     private final ItemPoolView<PaperCard> schemePool;
-    private final ItemPoolView<PaperCard> commanderPool;
     
     //=========== Constructor
     /**
@@ -90,7 +89,6 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         avatarPool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)),PaperCard.class);
         planePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)),PaperCard.class);
         schemePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)),PaperCard.class);
-        commanderPool = ItemPool.createFrom(CardDb.instance().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
         
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 
@@ -124,7 +122,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             return;
         }
 
-        if (sectionMode == DeckSection.Avatar || sectionMode == DeckSection.Commander) {
+        if (sectionMode == DeckSection.Avatar) {
             for(Map.Entry<PaperCard, Integer> cp : getDeckManager().getPool()) {
                 getDeckManager().removeItem(cp.getKey(), cp.getValue());
             }
@@ -275,15 +273,6 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
                 this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
                 showOptions = false;
                 title = "Scheme";
-                tabtext = "Card Catalog";
-                break;
-            case Commander:
-                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-                this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
-                this.getCatalogManager().setPool(commanderPool, true);
-                this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Commander));
-                showOptions = false;
-                title = "Commander";
                 tabtext = "Card Catalog";
                 break;
         }
