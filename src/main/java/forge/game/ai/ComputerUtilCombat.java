@@ -292,27 +292,25 @@ public class ComputerUtilCombat {
     public static List<Card> getLifeThreateningCommanders(final Player ai, final Combat combat) {
         List<Card> res = new ArrayList<Card>();
         
-        if(ai.getGame().getType() == GameType.Commander) {
-            for(Card c : combat.getAttackers()) {
-                if(c.isCommander()) {
-                    int cmdDmg = ai.getCommanderDamage().containsKey(c) ? ai.getCommanderDamage().get(c) : 0;
-                    
-                    if(c.hasKeyword("Trample")) {
-                        for(Card blocker : combat.getBlockers(c)) {
-                            cmdDmg -= blocker.getCurrentToughness();
+        for(Card c : combat.getAttackers()) {
+            if(c.isCommander())
+            {
+                List<Card> blockers = combat.getBlockers(c);
+                int possibleCommanderDamage = c.getCurrentPower();
+                int currentCommanderDamage = ai.getCommanderDamage().containsKey(c) ? ai.getCommanderDamage().get(c) : 0;
+                if(blockers.size() > 0) {
+                    if(c.getKeyword().contains("Trample")) {
+                        for(Card b : blockers) {
+                            possibleCommanderDamage -= b.getCurrentToughness();
                         }
                     }
-                    else
-                    {
-                        if(combat.getBlockers(c).size() == 0)
-                        {
-                            cmdDmg += c.getCurrentPower();
-                        }
-                    }
-                    if(cmdDmg >= 21) {
-                        res.add(c);
+                    else {
+                        possibleCommanderDamage = 0;
                     }
                 }
+                
+                if(possibleCommanderDamage + currentCommanderDamage >= 21)
+                    res.add(c);
             }
         }
         
@@ -337,34 +335,20 @@ public class ComputerUtilCombat {
 
         // check for creatures that must be blocked
         final List<Card> attackers = combat.getAttackersOf(ai);
+        
+        final List<Card> threateningCommanders = getLifeThreateningCommanders(ai,combat);
 
         for (final Card attacker : attackers) {
 
-            final List<Card> blockers = combat.getBlockers(attacker);
-            
-            if(attacker.isCommander())
-            {
-                int possibleCommanderDamage = attacker.getCurrentPower();
-                int currentCommanderDamage = ai.getCommanderDamage().containsKey(attacker) ? ai.getCommanderDamage().get(attacker) : 0;
-                if(blockers.size() > 0) {
-                    if(attacker.getKeyword().contains("Trample")) {
-                        for(Card b : blockers) {
-                            possibleCommanderDamage -= b.getCurrentToughness();
-                        }
-                    }
-                    else {
-                        possibleCommanderDamage = 0;
-                    }
-                }
-                
-                if(possibleCommanderDamage + currentCommanderDamage >= 21)
-                    return true;
-            }
+            final List<Card> blockers = combat.getBlockers(attacker);           
 
             if (blockers.size() == 0) {
                 if (!attacker.getSVar("MustBeBlocked").equals("")) {
                     return true;
                 }
+            }
+            if (threateningCommanders.contains(attacker)) {
+                return true;
             }
         }
 
@@ -408,7 +392,7 @@ public class ComputerUtilCombat {
             return false;
         }
         
-        final List<Card> deadlyCommanders = ComputerUtilCombat.getLifeThreateningCommanders(ai, combat);
+        final List<Card> threateningCommanders = ComputerUtilCombat.getLifeThreateningCommanders(ai, combat);
 
         // check for creatures that must be blocked
         final List<Card> attackers = combat.getAttackersOf(ai);
@@ -418,9 +402,12 @@ public class ComputerUtilCombat {
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.size() == 0) {
-                if (!attacker.getSVar("MustBeBlocked").equals("") || deadlyCommanders.contains(attacker)) {
+                if (!attacker.getSVar("MustBeBlocked").equals("")) {
                     return true;
                 }
+            }
+            if(threateningCommanders.contains(attacker)) {
+                return true;
             }
         }
 
