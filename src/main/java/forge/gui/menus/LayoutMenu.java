@@ -9,11 +9,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 
 import forge.Singletons;
-import forge.control.RestartUtil;
 import forge.control.FControl.Screens;
 import forge.gui.GuiChoose;
 import forge.gui.match.controllers.CDock;
@@ -92,25 +90,7 @@ public final class LayoutMenu {
     private static final ActionListener changeSkin = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String skin = e.getActionCommand();
-            if (!skin.equals(prefs.getPref(FPref.UI_SKIN))) {
-                prefs.setPref(FPref.UI_SKIN, skin);
-                prefs.save();
-
-                Object[] options = {"Restart Now", "Restart Later"};
-                int reply = JOptionPane.showOptionDialog(
-                    null,
-                    "You must restart Forge for " + skin + " theme to take effect.",
-                    "Change Theme",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE,
-                    null,
-                    options,
-                    options[0]);
-                if (reply == JOptionPane.YES_OPTION) {
-                    RestartUtil.restartApplication(null);
-                }
-            }
+            FSkin.changeSkin(e.getActionCommand());
         }
     };
 

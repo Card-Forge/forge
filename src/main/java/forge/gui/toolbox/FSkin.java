@@ -50,6 +50,7 @@ import org.apache.commons.lang.WordUtils;
 import forge.FThreads;
 import forge.Singletons;
 import forge.gui.GuiUtils;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.TypeUtil;
 import forge.view.FView;
@@ -67,7 +68,7 @@ public enum FSkin {
     public static class ComponentSkin<T extends Component> {
         protected T comp;
         private SkinColor foreground, background;
-        private boolean needRepaintOnUpdate;
+        private boolean needRepaintOnReapply;
         
         private ComponentSkin(T comp0) {
             this.comp = comp0;
@@ -100,21 +101,33 @@ public enum FSkin {
         }
         
         public void setGraphicsColor(Graphics g, SkinColor skinColor) {
-            this.needRepaintOnUpdate = true;
+            this.needRepaintOnReapply = true;
             g.setColor(skinColor.color);
         }
         
         public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, SkinColor skinColor2) {
-            this.needRepaintOnUpdate = true;
+            this.needRepaintOnReapply = true;
             g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, skinColor2.color));
         }
         public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, Color color1, float x2, float y2, SkinColor skinColor2) {
-            this.needRepaintOnUpdate = true;
+            this.needRepaintOnReapply = true;
             g2d.setPaint(new GradientPaint(x1, y1, color1, x2, y2, skinColor2.color));
         }
         public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, Color color2) {
-            this.needRepaintOnUpdate = true;
+            this.needRepaintOnReapply = true;
             g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, color2));
+        }
+        
+        protected void reapply() {
+            if (this.foreground != null) {
+                comp.setForeground(this.foreground.color);
+            }
+            if (this.background != null) {
+                comp.setBackground(this.background.color);
+            }
+            if (this.needRepaintOnReapply) {
+                comp.repaint();
+            }
         }
     }    
     public static class JComponentSkin<T extends JComponent> extends ComponentSkin<T> {
@@ -172,6 +185,17 @@ public enum FSkin {
             this.matteBorder = new MatteBorder(top, left, bottom, right, skinColor);
             this.matteBorder.apply();
         }
+        
+        @Override
+        protected void reapply() {
+            if (this.lineBorder != null) {
+                this.lineBorder.apply();
+            }
+            if (this.matteBorder != null) {
+                this.matteBorder.apply();
+            }
+            super.reapply();
+        }
     }
     public static class JTextComponentSkin<T extends JTextComponent> extends JComponentSkin<T> {
         private SkinColor caretColor;
@@ -191,6 +215,14 @@ public enum FSkin {
         public void setCaretColor(Color color) {
             this.caretColor = null;  //ensure this field is reset when static color set
             this.comp.setCaretColor(color);
+        }
+        
+        @Override
+        protected void reapply() {
+            if (this.caretColor != null) {
+                this.comp.setCaretColor(this.caretColor.color);
+            }
+            super.reapply();
         }
     }
     public static class JTableSkin<T extends JTable> extends JComponentSkin<T> {
@@ -225,44 +257,55 @@ public enum FSkin {
             this.selectionBackground = null;  //ensure this field is reset when static color set
             this.comp.setSelectionBackground(color);
         }
+        
+        @Override
+        protected void reapply() {
+            if (this.selectionForeground != null) {
+                this.comp.setSelectionForeground(this.selectionForeground.color);
+            }
+            if (this.selectionBackground != null) {
+                this.comp.setSelectionBackground(this.selectionBackground.color);
+            }
+            super.reapply();
+        }
     }
     
     @SuppressWarnings("rawtypes")
-    private static HashMap<Component, ComponentSkin> skinnedComps = new HashMap<Component, ComponentSkin>();
+    private static HashMap<Component, ComponentSkin> compSkins = new HashMap<Component, ComponentSkin>();
 
     @SuppressWarnings("unchecked")
     public static <T extends Component> ComponentSkin<T> get(T comp) {
-        ComponentSkin<T> skinnedComp = skinnedComps.get(comp);
+        ComponentSkin<T> skinnedComp = compSkins.get(comp);
         if (skinnedComp == null) {
             skinnedComp = new ComponentSkin<T>(comp);
-            skinnedComps.put(comp, skinnedComp);
+            compSkins.put(comp, skinnedComp);
         }
         return skinnedComp;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JComponent> JComponentSkin<T> get(T comp) {
-        JComponentSkin<T> skinnedComp = TypeUtil.safeCast(skinnedComps.get(comp), JComponentSkin.class);
+        JComponentSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JComponentSkin.class);
         if (skinnedComp == null) {
             skinnedComp = new JComponentSkin<T>(comp);
-            skinnedComps.put(comp, skinnedComp);
+            compSkins.put(comp, skinnedComp);
         }
         return skinnedComp;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JTextComponent> JTextComponentSkin<T> get(T comp) {
-        JTextComponentSkin<T> skinnedComp = TypeUtil.safeCast(skinnedComps.get(comp), JTextComponentSkin.class);
+        JTextComponentSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JTextComponentSkin.class);
         if (skinnedComp == null) {
             skinnedComp = new JTextComponentSkin<T>(comp);
-            skinnedComps.put(comp, skinnedComp);
+            compSkins.put(comp, skinnedComp);
         }
         return skinnedComp;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JTable> JTableSkin<T> get(T comp) {
-        JTableSkin<T> skinnedComp = TypeUtil.safeCast(skinnedComps.get(comp), JTableSkin.class);
+        JTableSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JTableSkin.class);
         if (skinnedComp == null) {
             skinnedComp = new JTableSkin<T>(comp);
-            skinnedComps.put(comp, skinnedComp);
+            compSkins.put(comp, skinnedComp);
         }
         return skinnedComp;
     }
@@ -782,6 +825,25 @@ public enum FSkin {
     private static int[] tempCoords;    
     private static int defaultFontSize = 12;
     private static boolean loaded = false;
+    
+    @SuppressWarnings("rawtypes")
+    public static void changeSkin(final String skinName) {
+        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        if (skinName.equals(prefs.getPref(FPref.UI_SKIN))) { return; }
+
+        //save skin preference
+        prefs.setPref(FPref.UI_SKIN, skinName);
+        prefs.save();
+
+        //load skin
+        loadLight(skinName);
+        loadFull();
+
+        //reapply skin to all skinned components
+        for (ComponentSkin compSkin : compSkins.values()) {
+            compSkin.reapply();
+        }
+    }
 
     /**
      * Loads a "light" version of FSkin, just enough for the splash screen:

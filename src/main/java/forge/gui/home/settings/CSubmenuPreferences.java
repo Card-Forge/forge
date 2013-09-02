@@ -217,13 +217,18 @@ public enum CSubmenuPreferences implements ICDoc {
     }
     
     private void initializeSkinsComboBox() {
-        FPref userSetting = FPref.UI_SKIN;
         FComboBoxPanel<String> panel = this.view.getSkinsComboBoxPanel();
         String[] installedSkins = FSkin.getSkinNamesArray(true);
         validatePreferredSkinName(installedSkins);
-        JComboBox<String> comboBox = createComboBox(installedSkins, userSetting);
-        String selectedItem = this.prefs.getPref(userSetting);
+        final JComboBox<String> comboBox = new JComboBox<String>(installedSkins);
+        String selectedItem = this.prefs.getPref(FPref.UI_SKIN);
         panel.setComboBox(comboBox, selectedItem);
+        comboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent e) {
+                FSkin.changeSkin(comboBox.getSelectedItem().toString());
+            }
+        });
     }
 
     private void validatePreferredSkinName(String[] installedSkins) {
@@ -240,7 +245,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
     
     private <E> void addComboBoxListener(final JComboBox<E> comboBox, final ForgePreferences.FPref setting) {
-        comboBox.addItemListener(new ItemListener() {            
+        comboBox.addItemListener(new ItemListener() {
             @SuppressWarnings("unchecked")
             @Override
             public void itemStateChanged(final ItemEvent e) {
@@ -248,7 +253,6 @@ public enum CSubmenuPreferences implements ICDoc {
                 CSubmenuPreferences.this.prefs.setPref(setting, selectedType.toString());
                 CSubmenuPreferences.this.prefs.save();
             }
-        });                
+        });
     }
-        
 }
