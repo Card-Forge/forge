@@ -802,6 +802,35 @@ Sometimes people will decide that they do not like the changes that they made an
 Also use the mentioned measure if your match or deckeditor won't start - it would help in 90% of the cases.
 
 
+- Constructed Mode decks can now be stored in subfolders -
+The feature is half-complete now. Forge can read subfolders in constructed deck, you may start game with such deck, but cannot yet edit decks in subfolders nor manipulate subfolders.
+
+
+=== Forge now has a Menubar ===
+- Toggle visibility using the F1 key. 
+- The Forge menu contains Exit and Restart options. 
+- The Layout menu contains the selector for the various themes and a Set Window Size option. 
+- The Help menu contains links to online articles and the local TXT files.
+
+=== Duel/Match Screen Changes ===
+- Fixed: Concede is prevented during the declare blockers step.
+== Menubar Changes ==
+- Migration of Dock and DevMode options into Menubar.
+- Toggle console tabs visibility.
+- Toggle background image.
+- Toggle sound effects.
+== Game Log Console ==
+- Scrollbar is now hidden by default. Click console to toggle visibility.
+== Prompt Console ==
+- Fixed: Prevent buttons from disappearing off screen as the console size is decreased.
+== Card Preview Console ==
+- Fixed: now adheres to Scale Image Larger setting.
+
+=== General GUI ===
+== Themes ==
+- Combo-box style should now be appear correctly on Mac OS .
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

@@ -1,41 +1,12 @@
-Forge Beta: 08-30-2013 ver 1.4.7
+Forge Beta: 09-##-2013 ver 1.4.8
 
 
-13087 cards in total.
+13### cards in total.
 
 
 -------------
 Release Notes
 -------------
-
-- Constructed Mode decks can now be stored in subfolders -
-The feature is half-complete now. Forge can read subfolders in constructed deck, you may start game with such deck, but cannot yet edit decks in subfolders nor manipulate subfolders.
-
-
-=== Forge now has a Menubar ===
-- Toggle visibility using the F1 key. 
-- The Forge menu contains Exit and Restart options. 
-- The Layout menu contains the selector for the various themes and a Set Window Size option. 
-- The Help menu contains links to online articles and the local TXT files.
-
-=== Duel/Match Screen Changes ===
-- Fixed: Concede is prevented during the declare blockers step.
-== Menubar Changes ==
-- Migration of Dock and DevMode options into Menubar.
-- Toggle console tabs visibility.
-- Toggle background image.
-- Toggle sound effects.
-== Game Log Console ==
-- Scrollbar is now hidden by default. Click console to toggle visibility.
-== Prompt Console ==
-- Fixed: Prevent buttons from disappearing off screen as the console size is decreased.
-== Card Preview Console ==
-- Fixed: now adheres to Scale Image Larger setting.
-
-=== General GUI ===
-== Themes ==
-- Combo-box style should now be appear correctly on Mac OS .
-
 
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6.
@@ -53,23 +24,14 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-Death Match
-Erithizon
-Illuminated Folio
-Karplusan Minotaur
-Ley Line
-Mossbridge Troll
-Necrotic Plague
-Pandemonium
-Quicksliver Fountain
+
 
 
 ----------
 New Planes
 ----------
 
-Grand Ossuary
-Immersturm
+
 
 
 -----------------------
@@ -101,18 +63,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-DrDev
-Gos
-Hellfish
-Marc
-Max
-Nordos
-Sloth
-Sol
-spr
-squee1968
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
