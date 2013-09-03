@@ -52,6 +52,7 @@ import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FProgressBar;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JComponentSkin;
 import forge.gui.toolbox.FSkin.SkinCursor;
@@ -405,5 +406,31 @@ public enum FView {
         VMatchUI.SINGLETON_INSTANCE.instantiate();
         VHomeUI.SINGLETON_INSTANCE.instantiate();
         VDeckEditorUI.SINGLETON_INSTANCE.instantiate();
+    }
+    
+    public void incrementSplashProgessBar() {
+        if (this.frmSplash == null) { return; }
+        this.frmSplash.getProgressBar().increment();
+    }
+
+    public void setSplashProgessBarMessage(final String message) { 
+        setSplashProgessBarMessage(message, 0);
+    }
+    public void setSplashProgessBarMessage(final String message, final int cnt) {
+        if (this.frmSplash == null) { return; }
+
+        final FProgressBar progressBar = this.frmSplash.getProgressBar(); //must cache for sake of runnable below
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if ( cnt > 0 ) {
+                    progressBar.reset();
+                    progressBar.setMaximum(cnt);
+                }
+                progressBar.setShowETA(false);
+                progressBar.setShowCount(cnt > 0);
+                progressBar.setDescription(message);
+            }
+        });
     }
 }

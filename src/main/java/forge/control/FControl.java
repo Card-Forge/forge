@@ -172,14 +172,14 @@ public enum FControl implements KeyEventDispatcher {
      * @param isHeadlessMode */
     public void initialize() {
         // Preloads skin components (using progress bar).
-        FSkin.loadFull();
+        FSkin.loadFull(true);
 
         createMenuBar();
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
-        FSkin.setProgessBarMessage("About to load current quest.");
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("About to load current quest.");
         // Preload quest data if present
         final File dirQuests = new File(NewConstants.QUEST_SAVE_DIR);
         final String questname = Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_QUEST);
@@ -207,7 +207,7 @@ public enum FControl implements KeyEventDispatcher {
 
         setGlobalKeyboardHandler();
 
-        FSkin.setProgessBarMessage("Opening main window...");
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Opening main window...");
         SwingUtilities.invokeLater(new Runnable() { @Override
             public void run() { Singletons.getView().initialize(); } });
     }

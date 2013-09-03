@@ -61,7 +61,6 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.TypeUtil;
 import forge.view.FView;
-import forge.view.SplashFrame;
 
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
@@ -1418,7 +1417,7 @@ public enum FSkin {
         //load skin
         loaded = false; //reset this temporarily until end of loadFull()
         loadLight(skinName, false);
-        loadFull();
+        loadFull(false);
 
         //reapply skin to all skinned components
         for (ComponentSkin compSkin : compSkins.values()) {
@@ -1471,33 +1470,6 @@ public enum FSkin {
             loaded = true;
         }
     }
-    
-    private static FProgressBar splashProgressBar;
-    
-    public static void incrementProgessBar() {
-        if (splashProgressBar == null) { return; }
-        splashProgressBar.increment();
-    }
-    public static void setProgessBarMessage(final String message) { 
-        setProgessBarMessage(message, 0);
-    }
-    public static void setProgessBarMessage(final String message, final int cnt) {
-        if (splashProgressBar == null) { return; }
-
-        final FProgressBar progressBar = splashProgressBar; //must cache for sake of runnable below
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                if ( cnt > 0 ) {
-                    progressBar.reset();
-                    progressBar.setMaximum(cnt);
-                }
-                progressBar.setShowETA(false);
-                progressBar.setShowCount(cnt > 0);
-                progressBar.setDescription(message);
-            }
-        });
-    }
 
     /**
      * Loads two sprites: the default (which should be a complete
@@ -1518,21 +1490,17 @@ public enum FSkin {
      * preferred takes precedence over default, but if something is
      * missing, the default picture is retrieved.
      */
-    public static void loadFull() {
-        final SplashFrame splash = FView.SINGLETON_INSTANCE.getSplash();
-        final boolean onInit = (splash != null);
+    public static void loadFull(final boolean onInit) {
         if (onInit) { 
-            splashProgressBar = splash.getProgressBar();
-
             // No need for this method to be loaded while on the EDT.
             FThreads.assertExecutedByEdt(false);
 
             // Preferred skin name must be called via loadLight() method,
             // which does some cleanup and init work.
             if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default", onInit); }
-
-            setProgessBarMessage("Processing image sprites: ", 5);
         }
+
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 5);
 
         // Grab and test various sprite files.
         final File f1 = new File(DEFAULT_DIR + FILE_ICON_SPRITE);
@@ -1544,18 +1512,18 @@ public enum FSkin {
 
         try {
             bimDefaultSprite = ImageIO.read(f1);
-            incrementProgessBar();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
             bimPreferredSprite = ImageIO.read(f2);
-            incrementProgessBar();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
             bimFoils = ImageIO.read(f3);
-            incrementProgessBar();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
             bimOldFoils = f6.exists() ? ImageIO.read(f6) : ImageIO.read(f3);
-            incrementProgessBar();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
             bimDefaultAvatars = ImageIO.read(f4);
 
             if (f5.exists()) { bimPreferredAvatars = ImageIO.read(f5); }
 
-            incrementProgessBar();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
 
             preferredH = bimPreferredSprite.getHeight();
             preferredW = bimPreferredSprite.getWidth();
@@ -1608,7 +1576,7 @@ public enum FSkin {
         UIManager.put("Table.alternateRowColor", new Color(240, 240, 240));
 
         // Images loaded; can start UI init.
-        setProgessBarMessage("Creating display components.");
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Creating display components.");
         loaded = true;
 
         // Clear references to buffered images
@@ -1628,11 +1596,9 @@ public enum FSkin {
         FSkin.bimPreferredAvatars = null;
 
         // Set look and feel after skin loaded
-        setProgessBarMessage("Setting look and feel...");
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Setting look and feel...");
         ForgeLookAndFeel laf = new ForgeLookAndFeel();
         laf.setForgeLookAndFeel(Singletons.getView().getFrame());
-
-        splashProgressBar = null;
     }
     
     private static void setDefaultFontSize() {
