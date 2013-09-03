@@ -61,7 +61,7 @@ public class FList<E> extends JList<E> {
             JLabel lblItem = (JLabel) defaultRenderer.getListCellRendererComponent(
                     lst0, val0, i0, isSelected, cellHasFocus);
 
-            FSkin.JComponentSkin<JLabel> lblItemSkin = FSkin.get(lblItem);
+            FSkin.JLabelSkin<JLabel> lblItemSkin = FSkin.get(lblItem);
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
             lblItemSkin.setBackground(FSkin.getColor(hasFocus() ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE));
             lblItemSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));

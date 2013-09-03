@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,7 +26,7 @@ import forge.quest.data.QuestData;
  */
 @SuppressWarnings("serial")
 public class QuestFileLister extends JPanel {
-    private ImageIcon icoDelete, icoDeleteOver, icoEdit, icoEditOver;
+    private FSkin.SkinIcon icoDelete, icoDeleteOver, icoEdit, icoEditOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
     private Command cmdRowSelect, cmdRowDelete, cmdRowEdit;
@@ -116,10 +115,11 @@ public class QuestFileLister extends JPanel {
     private class DeleteButton extends JButton {
         public DeleteButton(final RowPanel r0) {
             super();
+            FSkin.AbstractButtonSkin<DeleteButton> skin = FSkin.get(this);
             setRolloverEnabled(true);
-            setPressedIcon(icoDeleteOver);
-            setRolloverIcon(icoDeleteOver);
-            setIcon(icoDelete);
+            skin.setPressedIcon(icoDeleteOver);
+            skin.setRolloverIcon(icoDeleteOver);
+            skin.setIcon(icoDelete);
             setOpaque(false);
             setContentAreaFilled(false);
             setBorder(null);
@@ -152,10 +152,11 @@ public class QuestFileLister extends JPanel {
     private class EditButton extends JButton {
         public EditButton(final RowPanel r0) {
             super();
+            FSkin.AbstractButtonSkin<EditButton> skin = FSkin.get(this);
             setRolloverEnabled(true);
-            setPressedIcon(icoEditOver);
-            setRolloverIcon(icoEditOver);
-            setIcon(icoEdit);
+            skin.setPressedIcon(icoEditOver);
+            skin.setRolloverIcon(icoEditOver);
+            skin.setIcon(icoEdit);
             setOpaque(false);
             setContentAreaFilled(false);
             setBorder(null);

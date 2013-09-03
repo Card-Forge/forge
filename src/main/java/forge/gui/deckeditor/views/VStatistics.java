@@ -2,7 +2,6 @@ package forge.gui.deckeditor.views;
 
 import java.awt.Font;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -15,6 +14,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 
 /** 
@@ -61,20 +61,13 @@ public enum VStatistics implements IVDoc<CStatistics> {
     private final JLabel lblSorcery = buildLabel(SItemManagerUtil.StatTypes.SORCERY, true);
 
     // CMC labels
-    private final JLabel lblCMC0 = buildLabel(
-            new ImageIcon(FSkin.getImage(FSkin.ColorlessManaImages.IMG_0, 16, 16)), true);
-    private final JLabel lblCMC1 = buildLabel(
-            new ImageIcon(FSkin.getImage(FSkin.ColorlessManaImages.IMG_1, 16, 16)), false);
-    private final JLabel lblCMC2 = buildLabel(
-            new ImageIcon(FSkin.getImage(FSkin.ColorlessManaImages.IMG_2, 16, 16)), true);
-    private final JLabel lblCMC3 = buildLabel(
-            new ImageIcon(FSkin.getImage(FSkin.ColorlessManaImages.IMG_3, 16, 16)), false);
-    private final JLabel lblCMC4 = buildLabel(
-            new ImageIcon(FSkin.getImage(FSkin.ColorlessManaImages.IMG_4, 16, 16)), true);
-    private final JLabel lblCMC5 = buildLabel(
-            new ImageIcon(FSkin.getImage(FSkin.ColorlessManaImages.IMG_5, 16, 16)), false);
-    private final JLabel lblCMC6 = buildLabel(
-            new ImageIcon(FSkin.getImage(FSkin.ColorlessManaImages.IMG_6, 16, 16)), true);
+    private final JLabel lblCMC0 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_0, 16, 16), true);
+    private final JLabel lblCMC1 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_1, 16, 16), false);
+    private final JLabel lblCMC2 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_2, 16, 16), true);
+    private final JLabel lblCMC3 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_3, 16, 16), false);
+    private final JLabel lblCMC4 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_4, 16, 16), true);
+    private final JLabel lblCMC5 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_5, 16, 16), false);
+    private final JLabel lblCMC6 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_6, 16, 16), true);
 
     // Layout containers
     private final JScrollPane scroller = new JScrollPane(pnlStats);
@@ -251,7 +244,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
     //========== Other methods
 
-    private JLabel buildLabel(ImageIcon icon, boolean zebra) {
+    private JLabel buildLabel(SkinImage icon, boolean zebra) {
         final JLabel lbl = new FLabel.Builder().text("0")
                 .icon(icon).iconScaleAuto(false)
                 .fontSize(11).build();

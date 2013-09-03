@@ -27,7 +27,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -59,15 +58,12 @@ import forge.item.InventoryItem;
  */
 @SuppressWarnings("serial")
 public class DeckLister extends JPanel implements ILocalRepaint {
-    private final ImageIcon icoDelete;
-    private final ImageIcon icoDeleteOver;
-    private final ImageIcon icoEdit;
-    private final ImageIcon icoEditOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
     private final GameType gametype;
     private Command cmdDelete, cmdRowSelect;
     private final Color clrDefault;
+    private final FSkin.SkinIcon icoDelete, icoDeleteOver, icoEdit, icoEditOver;
     private final FSkin.SkinColor clrHover, clrActive, clrBorders;
 
     /**
@@ -188,10 +184,11 @@ public class DeckLister extends JPanel implements ILocalRepaint {
     private class DeleteButton extends JButton {
         public DeleteButton(final RowPanel r0) {
             super();
+            FSkin.AbstractButtonSkin<DeleteButton> skin = FSkin.get(this);
             this.setRolloverEnabled(true);
-            this.setPressedIcon(DeckLister.this.icoDeleteOver);
-            this.setRolloverIcon(DeckLister.this.icoDeleteOver);
-            this.setIcon(DeckLister.this.icoDelete);
+            skin.setPressedIcon(DeckLister.this.icoDeleteOver);
+            skin.setRolloverIcon(DeckLister.this.icoDeleteOver);
+            skin.setIcon(DeckLister.this.icoDelete);
             this.setOpaque(false);
             this.setContentAreaFilled(false);
             this.setBorder(null);
@@ -226,10 +223,11 @@ public class DeckLister extends JPanel implements ILocalRepaint {
     private class EditButton extends JButton {
         public EditButton(final RowPanel r0) {
             super();
+            FSkin.AbstractButtonSkin<EditButton> skin = FSkin.get(this);
             this.setRolloverEnabled(true);
-            this.setPressedIcon(DeckLister.this.icoEditOver);
-            this.setRolloverIcon(DeckLister.this.icoEditOver);
-            this.setIcon(DeckLister.this.icoEdit);
+            skin.setPressedIcon(DeckLister.this.icoEditOver);
+            skin.setRolloverIcon(DeckLister.this.icoEditOver);
+            skin.setIcon(DeckLister.this.icoEdit);
             this.setOpaque(false);
             this.setContentAreaFilled(false);
             this.setBorder(null);

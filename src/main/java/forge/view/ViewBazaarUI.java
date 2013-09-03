@@ -38,7 +38,7 @@ public class ViewBazaarUI extends FPanel {
         // Component styling
         this.setCornerDiameter(0);
         this.setBorderToggle(false);
-        this.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        this.skin.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
         this.setLayout(new MigLayout("insets 0, gap 0"));
         pnlAllStalls.setOpaque(false);
         pnlAllStalls.setLayout(new MigLayout("insets 0, gap 0, wrap, align center"));

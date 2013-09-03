@@ -43,11 +43,11 @@ public enum VPicture implements IVDoc<CPicture> {
 
     // Top-level containers
     private final CardPicturePanel pnlPicture = new CardPicturePanel();
-    private final JLabel lblFlipcard = new JLabel(
-            FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
+    private final JLabel lblFlipcard = new JLabel();
 
     //========= Constructor
     private VPicture() {
+        FSkin.get(lblFlipcard).setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
         pnlPicture.setOpaque(false);
         lblFlipcard.setVisible(false);
     }

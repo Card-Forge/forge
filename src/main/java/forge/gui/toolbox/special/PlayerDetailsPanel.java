@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -48,7 +47,7 @@ public class PlayerDetailsPanel extends JPanel {
     private final List<Pair<FLabel, Byte>> manaLabels = new ArrayList<Pair<FLabel,Byte>>();
 
     private FLabel getBuiltFLabel(SkinProp p0, String s0, String s1) {
-        return new FLabel.Builder().icon(new ImageIcon(FSkin.getImage(p0)))
+        return new FLabel.Builder().icon(FSkin.getImage(p0))
             .opaque(false).fontSize(14)
             .fontStyle(Font.BOLD).iconInBackground()
             .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT).build();

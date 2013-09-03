@@ -135,7 +135,7 @@ public final class LayoutMenu {
     }
     private static JMenuItem getMenuItem_SaveLayout() {
         JMenuItem menuItem = new JMenuItem("Save Current Layout");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_SAVELAYOUT) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_SAVELAYOUT) : null));
         menuItem.addActionListener(getSaveLayoutAction());
         return menuItem;
     }
@@ -151,7 +151,7 @@ public final class LayoutMenu {
 
     private static JMenuItem getMenuItem_OpenLayout() {
         JMenuItem menuItem = new JMenuItem("Open...");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_OPENLAYOUT) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_OPENLAYOUT) : null));
         menuItem.addActionListener(getOpenLayoutAction());
         return menuItem;
     }
@@ -167,7 +167,7 @@ public final class LayoutMenu {
 
     private static JMenuItem getMenuItem_RevertLayout() {
         JMenuItem menuItem = new JMenuItem("Refresh");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_REVERTLAYOUT) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_REVERTLAYOUT) : null));
         menuItem.addActionListener(getRevertLayoutAction());
         return menuItem;
     }

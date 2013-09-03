@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import forge.Singletons;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.properties.ForgePreferences.FPref;
 
@@ -28,7 +28,7 @@ public class LblGroup extends JLabel implements ILocalRepaint {
         
     private boolean hovered = false;
 
-    private final JComponentSkin<LblGroup> skin;
+    private final JLabelSkin<LblGroup> skin;
     private final SkinColor clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
     private final SkinColor l20 = clrTheme.stepColor(20);
     private final SkinColor l25 = clrTheme.stepColor(25);

@@ -19,14 +19,12 @@ package forge.gui.match;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -55,6 +53,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.home.quest.CSubmenuChallenges;
 import forge.gui.home.quest.CSubmenuDuels;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
@@ -85,7 +84,7 @@ import forge.util.MyRandom;
 public class QuestWinLose extends ControlWinLose {
     private final transient boolean wonMatch;
     private final transient ViewWinLose view;
-    private transient ImageIcon icoTemp;
+    private transient SkinIcon icoTemp;
     private transient JLabel lblTemp1;
     private transient JLabel lblTemp2;
     private final transient boolean isAnte;
@@ -472,15 +471,16 @@ public class QuestWinLose extends ControlWinLose {
         qData.getAssets().addCredits(credTotal);
 
         // Generate Swing components and attach.
-        this.icoTemp = QuestWinLose.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD), 0.5);
+        this.icoTemp = FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD).scale(0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
         this.lblTemp2 = new JLabel(sb.toString());
+        FSkin.JLabelSkin<JLabel> labelSkin = FSkin.get(this.lblTemp2);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setFont(FSkin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
-        this.lblTemp2.setIcon(this.icoTemp);
+        labelSkin.setIcon(this.icoTemp);
         this.lblTemp2.setIconTextGap(50);
 
         this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
@@ -624,15 +624,16 @@ public class QuestWinLose extends ControlWinLose {
         qData.getAssets().addCredits(questRewardCredits);
 
         // Generate Swing components and attach.
-        this.icoTemp = QuestWinLose.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
+        this.icoTemp = FSkin.getIcon(FSkin.QuestIcons.ICO_BOX).scale(0.5);
         this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestEventChallenge) qEvent).getTitle() + "\"");
 
         this.lblTemp2 = new JLabel(sb.toString());
+        FSkin.JLabelSkin<JLabel> labelSkin = FSkin.get(this.lblTemp2);
         this.lblTemp2.setFont(FSkin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setIconTextGap(50);
-        this.lblTemp2.setIcon(this.icoTemp);
+        labelSkin.setIcon(this.icoTemp);
 
         this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
         this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLose.CONSTRAINTS_TEXT);
@@ -697,16 +698,17 @@ public class QuestWinLose extends ControlWinLose {
 
     private void penalizeLoss() {
         final int x = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.PENALTY_LOSS);
-        this.icoTemp = QuestWinLose.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_HEART), 0.5);
+        this.icoTemp = FSkin.getIcon(FSkin.QuestIcons.ICO_HEART).scale(0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
         this.lblTemp2 = new JLabel("You lose! You have lost " + x + " credits.");
+        FSkin.JLabelSkin<JLabel> labelSkin = FSkin.get(this.lblTemp2);
         this.lblTemp2.setFont(FSkin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setIconTextGap(50);
-        this.lblTemp2.setIcon(this.icoTemp);
+        labelSkin.setIcon(this.icoTemp);
 
         this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
         this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLose.CONSTRAINTS_TEXT);
@@ -781,24 +783,6 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         return credits;
-    }
-
-    /**
-     * <p>
-     * getResizedIcon.
-     * </p>
-     * 
-     * @param icon
-     *            ImageIcon
-     * @param scale
-     *            Double
-     * @return {@link javax.swing.ImageIcon} object
-     */
-    public static ImageIcon getResizedIcon(final ImageIcon icon, final double scale) {
-        final int w = (int) (icon.getIconWidth() * scale);
-        final int h = (int) (icon.getIconHeight() * scale);
-
-        return new ImageIcon(icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH));
     }
 
     /**

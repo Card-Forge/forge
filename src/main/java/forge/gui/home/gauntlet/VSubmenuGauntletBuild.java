@@ -2,7 +2,6 @@ package forge.gui.home.gauntlet;
 
 import java.awt.Color;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -74,22 +73,22 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     private final FLabel btnUp = new FLabel.Builder()
         .tooltip("Move this deck up in the gauntlet").hoverable(true)
         .iconScaleAuto(true).iconScaleFactor(1.0)
-        .icon(new ImageIcon(FSkin.getImage(FSkin.LayoutImages.IMG_CUR_T))).build();
+        .icon(FSkin.getImage(FSkin.LayoutImages.IMG_CUR_T)).build();
 
     private final FLabel btnDown = new FLabel.Builder()
         .tooltip("Move this deck down in the gauntlet").hoverable(true)
         .iconScaleAuto(true).iconScaleFactor(1.0)
-        .icon(new ImageIcon(FSkin.getImage(FSkin.LayoutImages.IMG_CUR_B))).build();
+        .icon(FSkin.getImage(FSkin.LayoutImages.IMG_CUR_B)).build();
 
     private final FLabel btnRight = new FLabel.Builder()
         .tooltip("Add this deck to the gauntlet").hoverable(true)
         .iconScaleAuto(true).iconScaleFactor(1.0)
-        .icon(new ImageIcon(FSkin.getImage(FSkin.LayoutImages.IMG_CUR_R))).build();
+        .icon(FSkin.getImage(FSkin.LayoutImages.IMG_CUR_R)).build();
 
     private final FLabel btnLeft = new FLabel.Builder()
         .tooltip("Remove this deck from the gauntlet").hoverable(true)
         .iconScaleAuto(true).iconScaleFactor(1.0)
-        .icon(new ImageIcon(FSkin.getImage(FSkin.LayoutImages.IMG_CUR_L))).build();
+        .icon(FSkin.getImage(FSkin.LayoutImages.IMG_CUR_L)).build();
 
     private final FLabel btnSave = new FLabel.Builder()
         .fontSize(14)

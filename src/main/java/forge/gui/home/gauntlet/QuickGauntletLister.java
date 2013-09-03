@@ -11,17 +11,18 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinIcon;
 
 /** 
  * Creates file list/table for quick deleting, editing, and basic info.
@@ -29,7 +30,7 @@ import forge.gui.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class QuickGauntletLister extends JPanel {
-    private ImageIcon icoDelete, icoDeleteOver;
+    private SkinIcon icoDelete, icoDeleteOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
     private Command cmdRowSelect, cmdRowDelete;
@@ -125,10 +126,11 @@ public class QuickGauntletLister extends JPanel {
     private class DeleteButton extends JButton {
         public DeleteButton(final RowPanel r0) {
             super();
+            FSkin.AbstractButtonSkin<DeleteButton> skin = FSkin.get(this);
             setRolloverEnabled(true);
-            setPressedIcon(icoDeleteOver);
-            setRolloverIcon(icoDeleteOver);
-            setIcon(icoDelete);
+            skin.setPressedIcon(icoDeleteOver);
+            skin.setRolloverIcon(icoDeleteOver);
+            skin.setIcon(icoDelete);
             setOpaque(false);
             setContentAreaFilled(false);
             setBorder(null);

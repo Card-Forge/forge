@@ -15,7 +15,7 @@ import forge.gui.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public final class DragTab extends JLabel implements ILocalRepaint {
-    private final FSkin.JComponentSkin<DragTab> skin;
+    private final FSkin.JLabelSkin<DragTab> skin;
     private boolean selected = false;
     private int priority = 10;
 

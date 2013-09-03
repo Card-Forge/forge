@@ -39,7 +39,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
 
 import forge.gui.framework.ILocalRepaint;
-import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 
 /** 
@@ -196,7 +196,7 @@ public class FScrollPanel extends JScrollPane {
     }
     
     private abstract class ArrowButton extends JLabel implements ILocalRepaint {
-        private final JComponentSkin<ArrowButton> skin;
+        private final JLabelSkin<ArrowButton> skin;
         private final SkinColor clrFore = FSkin.getColor(FSkin.Colors.CLR_TEXT);
         private final SkinColor clrBack = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
         private final SkinColor d50 = clrBack.stepColor(-50);

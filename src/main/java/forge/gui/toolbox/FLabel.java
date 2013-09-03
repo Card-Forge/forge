@@ -29,8 +29,9 @@ import javax.swing.event.AncestorListener;
 
 import forge.Command;
 import forge.gui.framework.ILocalRepaint;
-import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinImage;
 
 /** 
  * Uses the Builder pattern to facilitate/encourage inline styling.
@@ -76,7 +77,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
         private boolean bldEnabled            = true;
 
         protected String  bldText, bldToolTip;
-        private ImageIcon bldIcon;
+        private SkinImage bldIcon;
         private int bldFontAlign;
         protected Command bldCmd;
 
@@ -93,9 +94,9 @@ public class FLabel extends JLabel implements ILocalRepaint {
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder tooltip(final String s0) { this.bldToolTip = s0; return this; }
 
-        /**@param i0 &emsp; {@link javax.swing.ImageIcon}
+        /**@param i0 &emsp; {@link forge.gui.toolbox.FSkin.SkinIcon}
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder icon(final ImageIcon i0) { this.bldIcon = i0; return this; }
+        public Builder icon(final SkinImage i0) { this.bldIcon = i0; return this; }
 
         /**@param i0 &emsp; SwingConstants.CENTER, .LEFT, or .RIGHT
          * @return {@link forge.gui.toolbox.Builder} */
@@ -247,7 +248,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     //========== Variable initialization
     // Final inits
-    private final JComponentSkin<FLabel> skin;
+    private final JLabelSkin<FLabel> skin;
     private final SkinColor clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
     private final SkinColor clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private final SkinColor clrMain = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
@@ -363,6 +364,10 @@ public class FLabel extends JLabel implements ILocalRepaint {
             }
         }
     };
+    
+    public void setIcon(FSkin.SkinImage icon) {
+        this.skin.setIcon(icon);
+    }
 
     //========== Methods
     /** @param b0 &emsp; boolean */

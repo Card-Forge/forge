@@ -26,7 +26,6 @@ import java.awt.event.MouseAdapter;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,6 +37,7 @@ import javax.swing.UIManager;
 
 import forge.gui.toolbox.FProgressBar;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -92,7 +92,7 @@ public class SplashFrame extends JFrame {
     }
 
     private void init() {
-        final ImageIcon bgIcon = FSkin.getIcon(FSkin.Backgrounds.BG_SPLASH);
+        final SkinIcon bgIcon = FSkin.getIcon(FSkin.Backgrounds.BG_SPLASH);
         barProgress = new FProgressBar();
 
         this.setUndecorated(true);
@@ -138,7 +138,8 @@ public class SplashFrame extends JFrame {
         barProgress.setBounds(20, 373, 410, 57);
         pnlContent.add(barProgress);
 
-        final JLabel bgLabel = new JLabel(bgIcon);
+        final JLabel bgLabel = new JLabel();
+        FSkin.get(bgLabel).setIcon(bgIcon);
         bgLabel.setBounds(0, 0, 450, 450);
         pnlContent.add(bgLabel);
 

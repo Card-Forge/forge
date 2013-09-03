@@ -17,8 +17,7 @@
  */
 package forge.quest.bazaar;
 
-import javax.swing.ImageIcon;
-
+import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.quest.data.QuestAssets;
 
 /**
@@ -53,7 +52,7 @@ public interface IQuestBazaarItem extends Comparable<Object> {
      * 
      * @return the name of the image that is displayed in the bazaar
      */
-    ImageIcon getIcon(QuestAssets qA);
+    SkinIcon getIcon(QuestAssets qA);
 
     /**
      * <p>

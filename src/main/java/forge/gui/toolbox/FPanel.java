@@ -35,6 +35,7 @@ import javax.swing.SwingConstants;
 
 import forge.Command;
 import forge.gui.framework.ILocalRepaint;
+import forge.gui.toolbox.FSkin.SkinImage;
 
 /** 
  * Core panel used in UI.
@@ -50,7 +51,7 @@ import forge.gui.framework.ILocalRepaint;
 @SuppressWarnings("serial")
 public class FPanel extends JPanel implements ILocalRepaint {
     //========== Variable initialization
-    protected final FSkin.JComponentSkin<FPanel> skin;
+    protected final FSkin.FPanelSkin<FPanel> skin;
     // Defaults for adjustable values
     private boolean selectable          = false;
     private boolean hoverable           = false;
@@ -162,6 +163,11 @@ public class FPanel extends JPanel implements ILocalRepaint {
         setForegroundImage(ii0.getImage());
     }
 
+    /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
+    public void setForegroundImage(final SkinImage skinImage) {
+        skin.setForegroundImage(skinImage);
+    }
+
     /** Aligns NON-STRETCHED foreground image.
      * Must use SwingConstants.
      * @param i0 &emsp; int
@@ -197,6 +203,11 @@ public class FPanel extends JPanel implements ILocalRepaint {
     /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
     public void setBackgroundTexture(final ImageIcon ii0) {
         setBackgroundTexture(ii0.getImage());
+    }
+    
+    /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
+    public void setBackgroundTexture(final SkinImage skinImage) {
+        skin.setBackgroundTexture(skinImage);
     }
 
     /** @param bool0 &emsp; boolean */

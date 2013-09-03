@@ -64,7 +64,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
         scroller.getViewport().setBorder(null);
         scroller.getVerticalScrollBar().setUnitIncrement(16);
 
-        FSkin.JComponentSkin<JLabel> labelSkin = FSkin.get(lblSampleHand);
+        FSkin.JLabelSkin<JLabel> labelSkin = FSkin.get(lblSampleHand);
         labelSkin.setMatteBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
         labelSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         

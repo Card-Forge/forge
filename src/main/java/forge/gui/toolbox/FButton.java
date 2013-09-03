@@ -22,7 +22,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.FocusAdapter;
@@ -35,6 +34,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import forge.gui.framework.ILocalRepaint;
+import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinImage;
 
 /**
  * The core JButton used throughout the Forge project. Follows skin font and
@@ -45,9 +46,10 @@ import forge.gui.framework.ILocalRepaint;
 public class FButton extends JButton implements ILocalRepaint {
 
     /** The img r. */
-    private Image imgL;
-    private Image imgM;
-    private Image imgR;
+    private final JComponentSkin<FButton> skin;
+    private SkinImage imgL;
+    private SkinImage imgM;
+    private SkinImage imgR;
     private int w, h = 0;
     private boolean allImagesPresent = false;
     private boolean toggle = false;
@@ -65,16 +67,17 @@ public class FButton extends JButton implements ILocalRepaint {
     public FButton(final String label) {
         super(label);
         this.setOpaque(false);
-        FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.setBackground(Color.red);
+        skin = FSkin.get(this);
+        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        skin.setBackground(Color.red);
         this.setFocusPainted(false);
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setContentAreaFilled(false);
         this.setMargin(new Insets(0, 25, 0, 25));
         this.setFont(FSkin.getBoldFont(14));
-        this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT).getImage();
-        this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER).getImage();
-        this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT).getImage();
+        this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT);
+        this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER);
+        this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT);
 
         if ((this.imgL != null) && (this.imgM != null) && (this.imgR != null)) {
             this.allImagesPresent = true;
@@ -110,9 +113,9 @@ public class FButton extends JButton implements ILocalRepaint {
             @Override
             public void mousePressed(MouseEvent evt) {
                 if (isToggled() || !isEnabled()) { return; }
-                imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_LEFT).getImage();
-                imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_CENTER).getImage();
-                imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_RIGHT).getImage();
+                imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_LEFT);
+                imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_CENTER);
+                imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_RIGHT);
                 repaintSelf();
             }
 
@@ -146,27 +149,27 @@ public class FButton extends JButton implements ILocalRepaint {
 
     private void resetImg() {
         if (hovered) {
-            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_LEFT).getImage();
-            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_CENTER).getImage();
-            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_RIGHT).getImage();
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_LEFT);
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_CENTER);
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_RIGHT);
         }
         else if (isFocusOwner()) {
-            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_LEFT).getImage();
-            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_CENTER).getImage();
-            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_RIGHT).getImage();
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_LEFT);
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_CENTER);
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_RIGHT);
         } else {
-            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT).getImage();
-            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER).getImage();
-            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT).getImage();
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT);
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER);
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT);
         }
     }
     
     @Override
     public void setEnabled(boolean b0) {
         if (!b0) {
-            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_LEFT).getImage();
-            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_CENTER).getImage();
-            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_RIGHT).getImage();
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_LEFT);
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_CENTER);
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_RIGHT);
         }
         else {
             resetImg();
@@ -188,17 +191,17 @@ public class FButton extends JButton implements ILocalRepaint {
     /** @param b0 &emsp; boolean. */
     public void setToggled(boolean b0) {
         if (b0) {
-            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_LEFT).getImage();
-            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_CENTER).getImage();
-            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_RIGHT).getImage();
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_LEFT);
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_CENTER);
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_RIGHT);
         }
         else if (isEnabled()) {
             resetImg();
         }
         else {
-            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_LEFT).getImage();
-            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_CENTER).getImage();
-            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_RIGHT).getImage();
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_LEFT);
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_CENTER);
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_RIGHT);
         }
         this.toggle = b0;
         repaintSelf();
@@ -230,9 +233,9 @@ public class FButton extends JButton implements ILocalRepaint {
         w = getWidth();
         h = getHeight();
 
-        g2d.drawImage(imgL, 0, 0, this.h, this.h, null);
-        g2d.drawImage(imgM, this.h, 0, this.w - (2 * this.h), this.h, null);
-        g2d.drawImage(imgR, this.w - this.h, 0, this.h, this.h, null);
+        skin.drawImage(g2d, imgL, 0, 0, this.h, this.h);
+        skin.drawImage(g2d, imgM, this.h, 0, this.w - (2 * this.h), this.h);
+        skin.drawImage(g2d, imgR, this.w - this.h, 0, this.h, this.h);
 
         super.paintComponent(g);
     }

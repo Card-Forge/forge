@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 
 /** 
@@ -15,7 +15,7 @@ import forge.gui.toolbox.FSkin.SkinColor;
  */
 @SuppressWarnings("serial")
 public class LblHeader extends JLabel {
-    private final JComponentSkin<LblHeader> skin;
+    private final JLabelSkin<LblHeader> skin;
     private final SkinColor clr = FSkin.getColor(FSkin.Colors.CLR_THEME).stepColor(0);
     private final SkinColor a100 = clr.alphaColor(100);
     private final SkinColor d40 = clr.stepColor(-40);

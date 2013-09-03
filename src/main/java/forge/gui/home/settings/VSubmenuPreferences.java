@@ -293,7 +293,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private class SectionLabel extends JLabel {
         public SectionLabel(final String txt0) {
             super(txt0);
-            FSkin.JComponentSkin<SectionLabel> skin = FSkin.get(this);
+            FSkin.JLabelSkin<SectionLabel> skin = FSkin.get(this);
             skin.setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             setHorizontalAlignment(SwingConstants.CENTER);
             setFont(FSkin.getBoldFont(16));
@@ -306,7 +306,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private class NoteLabel extends JLabel {
         public NoteLabel(final String txt0) {
             super(txt0);
-            FSkin.JComponentSkin<NoteLabel> skin = FSkin.get(this);
+            FSkin.JLabelSkin<NoteLabel> skin = FSkin.get(this);
             setFont(FSkin.getItalicFont(12));
             skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }

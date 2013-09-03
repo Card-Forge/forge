@@ -20,11 +20,11 @@ package forge.quest.bazaar;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.item.PaperToken;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestAssets;
@@ -119,10 +119,10 @@ public class QuestPetController implements IQuestBazaarItem {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public final ImageIcon getIcon(final QuestAssets qA) {
+    public final SkinIcon getIcon(final QuestAssets qA) {
         final String path = NewConstants.CACHE_TOKEN_PICS_DIR;
         final int level = this.getPetLevel(qA);
-        return new ImageIcon(path + this.levels.get(level < this.maxLevel ? level + 1 : level).getPicture() + ".jpg");
+        return new FSkin.UnskinnedIcon(path + this.levels.get(level < this.maxLevel ? level + 1 : level).getPicture() + ".jpg");
     }
 
     /**

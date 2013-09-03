@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -16,6 +15,7 @@ import forge.Singletons;
 import forge.gui.match.controllers.CDock;
 import forge.gui.menubar.MenuUtil;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.gui.toolbox.FSkin.SkinProp;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -68,7 +68,7 @@ public final class GameMenu {
 
     private static JMenuItem getMenuItem_Concede() {
         JMenuItem menuItem = new JMenuItem("Concede");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_CONCEDE) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_CONCEDE) : null));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_Q));
         menuItem.addActionListener(getConcedeAction());
         return menuItem;
@@ -90,7 +90,7 @@ public final class GameMenu {
 
     private static JMenuItem getMenuItem_AlphaStrike() {
         JMenuItem menuItem = new JMenuItem("Alpha Strike");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ALPHASTRIKE) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ALPHASTRIKE) : null));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_A));
         menuItem.addActionListener(getAlphaStrikeAction());
         return menuItem;
@@ -107,7 +107,7 @@ public final class GameMenu {
 
     private static JMenuItem getMenuItem_EndTurn() {
         JMenuItem menuItem = new JMenuItem("End Turn");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ENDTURN) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ENDTURN) : null));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_E));
         menuItem.addActionListener(getEndTurnAction());
         return menuItem;
@@ -127,7 +127,7 @@ public final class GameMenu {
         JMenu menu = new JMenu("Targeting Arcs");
         ButtonGroup group = new ButtonGroup();
 
-        ImageIcon menuIcon = MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSOFF);
+        SkinIcon menuIcon = MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSOFF);
 
         JRadioButtonMenuItem menuItem;
         menuItem = getTargetingArcRadioButton("Off", FSkin.DockIcons.ICO_ARCSOFF, 0);
@@ -142,7 +142,7 @@ public final class GameMenu {
         if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSON); }
         group.add(menuItem);
 
-        menu.setIcon((showIcons ? menuIcon : null));
+        FSkin.get(menu).setIcon((showIcons ? menuIcon : null));
         menu.add(menuItem);
 
         return menu;
@@ -150,7 +150,7 @@ public final class GameMenu {
 
     private static JRadioButtonMenuItem getTargetingArcRadioButton(String caption, SkinProp icon, final int arcState) {
         final JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem(caption);
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(icon) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(icon) : null));
         menuItem.setSelected(arcState == controller.getArcState());
         menuItem.addActionListener(getTargetingRadioButtonAction(arcState));
         return menuItem;
@@ -176,7 +176,7 @@ public final class GameMenu {
 
     private static JMenuItem getMenuItem_ViewDeckList() {
         JMenuItem menuItem = new JMenuItem("Deck List");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_DECKLIST) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_DECKLIST) : null));
         menuItem.addActionListener(getViewDeckListAction());
         return menuItem;
     }

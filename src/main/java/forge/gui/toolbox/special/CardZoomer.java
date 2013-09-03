@@ -26,8 +26,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -59,7 +57,7 @@ public enum CardZoomer {
     private final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
     private JPanel pnlMain;
     private FImagePanel imagePanel;
-    private JLabel lblFlipcard = new JLabel(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));    
+    private JLabel lblFlipcard = new JLabel();    
         
     // Details about the current card being displayed.
     private Card thisCard;
@@ -78,7 +76,8 @@ public enum CardZoomer {
     private boolean isMouseWheelEnabled = false;    
     
     // ctr
-    private CardZoomer() {        
+    private CardZoomer() {
+        FSkin.get(lblFlipcard).setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
         setMouseButtonListener();
         setMouseWheelListener();
         setKeyListeners();
@@ -236,15 +235,11 @@ public enum CardZoomer {
      */
     private void setImage() {
         imagePanel = new FImagePanel();
-        imagePanel.setImage(getImageFromCache(), getInitialRotation(), AutoSizeImageMode.SOURCE);
+        imagePanel.setImage(FImageUtil.getImage(thisCard, cardState, FSkin.get(imagePanel)), getInitialRotation(), AutoSizeImageMode.SOURCE);
         pnlMain.removeAll();
-        pnlMain.add(imagePanel, "w 80%!, h 80%!");        
+        pnlMain.add(imagePanel, "w 80%!, h 80%!");
         pnlMain.validate();
-        setFlipIndicator();        
-    }
-    
-    private BufferedImage getImageFromCache() {        
-        return FImageUtil.getImage(thisCard, cardState); 
+        setFlipIndicator();
     }
         
     private int getInitialRotation() {

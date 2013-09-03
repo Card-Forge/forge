@@ -21,11 +21,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -36,8 +34,9 @@ import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinImage;
 
 /**
  * Assembles Swing components of button dock area.
@@ -195,8 +194,8 @@ public enum VDock implements IVDoc<CDock> {
      */
     @SuppressWarnings("serial")
     private class DockButton extends JLabel {
-        private final Image img;
-        private final JComponentSkin<DockButton> skin;
+        private final SkinImage img;
+        private final JLabelSkin<DockButton> skin;
         private final SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         private final Color defaultBG = new Color(0, 0, 0, 0);
         private final Color defaultBorderColor = new Color(0, 0, 0, 0);
@@ -210,13 +209,13 @@ public enum VDock implements IVDoc<CDock> {
          * @param s0
          *            &emsp; Tooltip string
          */
-        public DockButton(final ImageIcon i0, final String s0) {
+        public DockButton(final SkinImage i0, final String s0) {
             super();
             this.skin = FSkin.get(this);
             this.setToolTipText(s0);
             this.setOpaque(false);
             this.setBackground(this.defaultBG);
-            this.img = i0.getImage();
+            this.img = i0;
 
             Dimension size = new Dimension(30, 30);
             this.setMinimumSize(size);
@@ -254,7 +253,7 @@ public enum VDock implements IVDoc<CDock> {
                 g.setColor(this.defaultBorderColor);
             }
             g.drawRect(0, 0, this.w - 1, this.h - 1);
-            g.drawImage(this.img, 0, 0, this.w, this.h, null);
+            skin.drawImage(g, this.img, 0, 0, this.w, this.h);
             super.paintComponent(g);
         }
     }

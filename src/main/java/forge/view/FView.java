@@ -2,6 +2,7 @@ package forge.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -52,6 +53,8 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinCursor;
 import forge.model.BuildInfo;
 import forge.properties.NewConstants;
 
@@ -71,7 +74,7 @@ public enum FView {
     // Top-level UI components; all have getters.
     private final JFrame frmDocument = new JFrame();
     // A layered pane is the frame's viewport, allowing overlay effects.
-    private final JLayeredPane lpnDocument = new JLayeredPane();
+    private final DocumentPane lpnDocument = new DocumentPane();
     // The content panel is placed in the layered pane.
     private final JPanel pnlContent = new JPanel();
     // An insets panel neatly maintains a space from the edges of the window and
@@ -96,7 +99,7 @@ public enum FView {
         frmDocument.setMinimumSize(new Dimension(800, 600));
         frmDocument.setLocationRelativeTo(null);
         frmDocument.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frmDocument.setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON).getImage());
+        FSkin.get(frmDocument).setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON));
         frmDocument.setTitle("Forge: " + BuildInfo.getVersionString());
 
         // Frame components
@@ -295,7 +298,7 @@ public enum FView {
     }
 
     /** @return {@link javax.swing.JLayeredPane} */
-    public JLayeredPane getLpnDocument() {
+    public DocumentPane getLpnDocument() {
         return lpnDocument;
     }
 
@@ -364,6 +367,25 @@ public enum FView {
             super.paintComponent(g);
             g.setColor(new Color(0, 0, 0, 50));
             g.fillRect(0, 0, getWidth(), getHeight());
+        }
+    }
+    
+    @SuppressWarnings("serial")
+    public class DocumentPane extends JLayeredPane {
+        private final JComponentSkin<DocumentPane> skin;
+        
+        public DocumentPane() {
+            super();
+            this.skin = FSkin.get(this);
+        }
+
+        public void setCursor(SkinCursor skinCursor) {
+            this.skin.setCursor(skinCursor);
+        }
+
+        @Override
+        public void setCursor(Cursor cursor) {
+            this.skin.setCursor(cursor); //ensure skin cursor reset if needed
         }
     }
 

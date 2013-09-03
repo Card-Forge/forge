@@ -29,6 +29,8 @@ import forge.card.CardSplitType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.gui.toolbox.CardFaceSymbols;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 
 /**
  * Displays mana cost as symbols.
@@ -41,6 +43,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
     static final int padding0 = 1;
     static final int spaceBetweenSplitCosts = 3;
     
+    private final JLabelSkin<ManaCostRenderer> skin = FSkin.get(this);
     private ManaCost v1;
     private ManaCost v2;
 
@@ -110,7 +113,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
         // Display X Mana before any other type of mana
         if (xManaCosts > 0) {
             for (int i = 0; i < xManaCosts; i++) {
-                CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, (int) xpos, 1);
+                CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), skin, g, (int) xpos, 1);
                 xpos += offset;
             }
         }
@@ -118,7 +121,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
         // Display colorless mana before colored mana
         if (hasGeneric) {
             final String sGeneric = Integer.toString(genericManaCost);
-            CardFaceSymbols.drawSymbol(sGeneric, g, (int) xpos, 1);
+            CardFaceSymbols.drawSymbol(sGeneric, skin, g, (int) xpos, 1);
             xpos += offset;
         }
 
@@ -127,7 +130,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
                 // X costs already drawn up above
                 continue;
             }
-            CardFaceSymbols.drawSymbol(s.getImageKey(), g, (int) xpos, 1);
+            CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, (int) xpos, 1);
             xpos += offset;
         }
     }
