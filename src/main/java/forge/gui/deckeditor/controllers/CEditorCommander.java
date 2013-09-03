@@ -278,6 +278,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
                 title = "Commander";
                 tabtext = "Card Catalog";
                 break;
+            default:
+                break;
         }
 
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(tabtext);

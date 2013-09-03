@@ -136,7 +136,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     @Override
     public void doLayout()
     {
-        int number = 0;
+        //int number = 0;
         LayoutHelper helper = new LayoutHelper(this);
         /*for (ItemFilter<T> filter : this.orderedFilters) {
             filter.updatePanelTitle(++number);

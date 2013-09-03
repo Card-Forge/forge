@@ -41,7 +41,6 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
-import forge.game.GameType;
 import forge.game.GlobalRuleChange;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;

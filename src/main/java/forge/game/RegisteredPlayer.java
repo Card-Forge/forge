@@ -102,13 +102,6 @@ public class RegisteredPlayer {
     }
 
     /**
-     * @param schemes0 the schemes to set
-     */
-    public void setSchemes(Iterable<? extends IPaperCard> s) {
-        this.schemes = s;
-    }
-
-    /**
      * TODO: Write javadoc for this method.
      */
     public void restoreOriginalDeck() {
@@ -120,13 +113,6 @@ public class RegisteredPlayer {
      */
     public Iterable<PaperCard> getPlanes(final Player p) {
         return planes == null ? EmptyList : planes;
-    }
-
-    /**
-     * @param planes0 the planes to set
-     */
-    public void setPlanes(Iterable<PaperCard> planes0) {
-        this.planes = planes0;
     }
 
     public int getTeamNumber() {
@@ -153,19 +139,19 @@ public class RegisteredPlayer {
 
     public static RegisteredPlayer forArchenemy(final Deck deck, final Iterable<PaperCard> schemes) {
         RegisteredPlayer start = fromDeck(deck);
-        start.setSchemes(schemes);
+        start.schemes = schemes;
         return start;
     }
     
     public static RegisteredPlayer forPlanechase(final Deck deck, final Iterable<PaperCard> planes) {
         RegisteredPlayer start = fromDeck(deck);
-        start.setPlanes(planes);
+        start.planes = planes;
         return start;
     }
     
     public static RegisteredPlayer forCommander(final Deck deck) {
         RegisteredPlayer start = fromDeck(deck);
-        start.setCommander(deck.get(DeckSection.Commander).get(0));
+        start.commander = deck.get(DeckSection.Commander).get(0);
         start.setStartingLife(40);
         return start;
     }
@@ -180,18 +166,10 @@ public class RegisteredPlayer {
     }
 
     /**
-     * @return the commander
+     * TODO: Write javadoc for this method.
+     * @return
      */
-    public PaperCard getCommander() {
+    public IPaperCard getCommander() {
         return commander;
     }
-
-    /**
-     * @param commander0 the commander to set
-     */
-    public void setCommander(PaperCard commander0) {
-        this.commander = commander0;
-    }
-
-
 }

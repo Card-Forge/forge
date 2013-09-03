@@ -61,11 +61,10 @@ public class FDeckChooser extends JPanel {
     private boolean isAi;
     
     private final MouseAdapter madDecklist = new MouseAdapter() {
-        @SuppressWarnings("unchecked")
         @Override
         public void mouseClicked(final MouseEvent e) {
             if (MouseEvent.BUTTON1 == e.getButton() && e.getClickCount() == 2) {
-                final JList<String> src = ((JList<String>) e.getSource());
+                //final JList<String> src = ((JList<String>) e.getSource());
                 if (getRadColors().isSelected() || getRadThemes().isSelected()) { return; }
                 DeckgenUtil.showDecklist(getDeck());
             }

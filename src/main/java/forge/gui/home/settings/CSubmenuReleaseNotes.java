@@ -19,9 +19,7 @@
 package forge.gui.home.settings;
 
 import forge.Command;
-import forge.Singletons;
 import forge.gui.framework.ICDoc;
-import forge.properties.ForgePreferences;
 import forge.util.FileUtil;
 
 /** 
@@ -35,7 +33,7 @@ public enum CSubmenuReleaseNotes implements ICDoc {
     SINGLETON_INSTANCE;
 
     private VSubmenuReleaseNotes view;
-    private ForgePreferences prefs;
+    //private ForgePreferences prefs;
     private boolean isReleaseNotesUpdated = false;
 
     /* (non-Javadoc)
@@ -44,7 +42,7 @@ public enum CSubmenuReleaseNotes implements ICDoc {
     @Override
     public void initialize() {       
         this.view = VSubmenuReleaseNotes.SINGLETON_INSTANCE;
-        this.prefs = Singletons.getModel().getPreferences();
+        //this.prefs = Singletons.getModel().getPreferences();
     }
 
     /* (non-Javadoc)
@@ -53,7 +51,7 @@ public enum CSubmenuReleaseNotes implements ICDoc {
     @Override
     public void update() {       
        this.view = VSubmenuReleaseNotes.SINGLETON_INSTANCE;
-       this.prefs = Singletons.getModel().getPreferences();
+       //this.prefs = Singletons.getModel().getPreferences();
        setReleaseNotesContent();
     }
     

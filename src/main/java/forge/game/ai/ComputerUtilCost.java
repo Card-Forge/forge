@@ -22,7 +22,6 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 import forge.util.TextUtil;
 
 /** 
