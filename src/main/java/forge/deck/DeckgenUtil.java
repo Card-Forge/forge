@@ -108,12 +108,14 @@ public class DeckgenUtil {
         IStorage<Deck> path = Singletons.getModel().getDecks().getConstructed();
         String name = selection;
         int idxSlash = name.indexOf('/');
-        while( idxSlash > 0 ) {
+        while( idxSlash > 0 && path != null) {
             String sf = name.substring(0, idxSlash).trim();
             path = path.getFolders().get(sf);
             name = name.substring(idxSlash+1).trim();
             idxSlash = name.indexOf('/');
         };
+        if ( path == null )
+            throw new IllegalArgumentException("Path not found - " + selection);
         return path.get(name);
     }
     
