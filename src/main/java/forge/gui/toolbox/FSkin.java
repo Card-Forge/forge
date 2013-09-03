@@ -110,11 +110,14 @@ public enum FSkin {
         
         public void setCursor(SkinCursor skinCursor) {
             this.cursor = skinCursor;
-            this.comp.setCursor(skinCursor.cursor);
+            this.comp.setCursor(skinCursor != null ? skinCursor.cursor : null);
         }
         public void setCursor(Cursor cursor0) {
             this.cursor = null;  //ensure this field is reset when static cursor set
             this.comp.setCursor(cursor0);
+        }
+        public void resetCursor() {
+            this.cursor = null;
         }
         
         public void setGraphicsColor(Graphics g, SkinColor skinColor) {

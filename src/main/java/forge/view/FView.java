@@ -386,7 +386,8 @@ public enum FView {
 
         @Override
         public void setCursor(Cursor cursor) {
-            this.skin.setCursor(cursor); //ensure skin cursor reset if needed
+            this.skin.resetCursor(); //ensure skin cursor reset if needed
+            super.setCursor(cursor);
         }
     }
 
