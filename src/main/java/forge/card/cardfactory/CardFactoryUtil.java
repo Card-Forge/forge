@@ -2108,6 +2108,8 @@ public class CardFactoryUtil {
             		" +1/+1 counters on it and it becomes monstrous.)" + ref;
             		
             card.addSpellAbility(AbilityFactory.getAbility(effect, card));
+            // add ability to instrinic strings so copies/clones create the ability also
+            card.getUnparsedAbilities().add(effect);
         }
 
         if (hasKeyword(card, "Cycling") != -1) {
