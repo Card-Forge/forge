@@ -279,8 +279,8 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
                         
-                        if (zone.is(ZoneType.Library)) {
-                            c = game.getAction().moveToLibrary(c, libraryPosition);
+                        if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
+                            c = game.getAction().moveTo(zone, c, libraryPosition);
                         } else {
                             c = game.getAction().moveTo(zone, c);
                             if (destZone1.equals(ZoneType.Battlefield)) {
