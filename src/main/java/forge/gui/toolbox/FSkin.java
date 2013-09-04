@@ -855,7 +855,7 @@ public enum FSkin {
 
             final Graphics2D g2d = resizedImage.createGraphics();
             g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            g2d.drawImage(baseImage.image, 0, 0, w0, h0, 0, 0, baseImage.getWidth(), baseImage.getHeight(), null);
+            g2d.drawImage(baseImage.image, 0, 0, w, h, 0, 0, baseImage.getWidth(), baseImage.getHeight(), null);
             g2d.dispose();
 
             this.changeImage(resizedImage, null);

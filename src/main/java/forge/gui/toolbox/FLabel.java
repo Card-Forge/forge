@@ -364,10 +364,6 @@ public class FLabel extends JLabel implements ILocalRepaint {
             }
         }
     };
-    
-    public void setIcon(FSkin.SkinImage icon) {
-        this.skin.setIcon(icon);
-    }
 
     //========== Methods
     /** @param b0 &emsp; boolean */
@@ -447,21 +443,31 @@ public class FLabel extends JLabel implements ILocalRepaint {
         return this.cmdRightClick;
     }
 
+    public void setIcon(FSkin.SkinImage icon) {
+        this.skin.setIcon(icon);
+    }
+
     @Override
     // Must be public.
     public void setIcon(final Icon i0) {
-        if (i0 == null) { this.img = null; return; }
         // Will need image (not icon) for scaled and non-scaled.
-        if (iconInBackground) { this.img = ((ImageIcon) i0).getImage(); }
         // Will need image if not in background, but scaled.
-        else if (iconScaleAuto) { this.img = ((ImageIcon) i0).getImage(); }
-        // If not in background, not scaled, can use original icon.
-        else { super.setIcon(i0); }
-
-        if (img != null) {
-            iw = img.getWidth(null);
-            ih = img.getHeight(null);
-            iar = ((double) iw) / ((double) ih);
+        if (iconInBackground || iconScaleAuto) {
+            if (i0 != null) {
+                img = ((ImageIcon) i0).getImage();
+                iw = img.getWidth(null);
+                ih = img.getHeight(null);
+                iar = ((double) iw) / ((double) ih);
+            }
+            else {
+                img = null;
+                iw = 0;
+                ih = 0;
+                iar = 0;
+            }
+        }
+        else { // If not in background, not scaled, can use original icon.
+            super.setIcon(i0);
         }
     }
 
