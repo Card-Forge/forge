@@ -856,6 +856,9 @@ public class CombatUtil {
             } else if (keyword.equals("CARDNAME can't attack unless defending player controls a blue permanent.")) {
                 if (!Iterables.any(list, CardPredicates.isColor(MagicColor.BLUE)))
                     return false;
+            } else if (keyword.equals("CARDNAME can't attack during extra turns.")) {
+                if (c.getGame().getPhaseHandler().getPlayerTurn().isPlayingExtraTurn())
+                    return false;
             }
         }
 

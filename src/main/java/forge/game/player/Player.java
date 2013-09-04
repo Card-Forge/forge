@@ -181,6 +181,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private boolean triedToDrawFromEmptyLibrary = false;
 
+    private boolean isPlayingExtraTrun = false;;
+
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
     }
@@ -3153,4 +3155,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         return commanderDamage;
     }
 
+    /**
+     * @param b isPlayingExtraTurn to set 
+     */
+    public void setExtraTurn(boolean b) {
+        this.isPlayingExtraTrun  = b;
+        
+    }
+
+    /**
+     * @return a boolean
+     */
+    public boolean isPlayingExtraTurn() {
+        return isPlayingExtraTrun;
+    }
 }
