@@ -57,6 +57,24 @@ Voyage's End
 Witches' Eye
 Polis Crusher
 Elspeth, Sun's Champion
+Ember Swallower
+Reverent Hunter
+Sealock Monster
+Stoneshock Giant
+Sylvan Caryatid
+Omenspeaker
+Abhorrent Overlord
+Gray Merchant of Asphodel
+Cavalry Pegasus
+Gods Willing
+Phalanx Leader
+Vanquish the Foul
+Wingsteed Rider
+Battlewise Hoplite
+Underworld Cerberus
+Xenagos, the Reveler
+Karametra's Acolyte
+Stormbreath Dragon
 
 
 ------------
