@@ -30,7 +30,7 @@ import forge.gui.match.views.VDev;
 import forge.gui.toolbox.special.PhaseIndicator;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
-    /** 
+    /**
      * Preference identifiers, and their default values.
      */
     public static enum FPref {
@@ -39,9 +39,11 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_RANDOM_FOIL ("false"),
         UI_SMOOTH_LAND ("false"),
         UI_AVATARS ("0,1"),
+        UI_SHOW_CARD_OVERLAYS ("true"),
         UI_OVERLAY_CARD_NAME ("true"),
         UI_OVERLAY_CARD_POWER ("true"),
-        UI_OVERLAY_CARD_MANA_COST ("true"),        
+        UI_OVERLAY_CARD_MANA_COST ("true"),
+        UI_OVERLAY_CARD_ID ("true"),
         UI_UPLOAD_DRAFT ("false"),
         UI_SCALE_LARGER ("true"),
         UI_MAX_STACK ("3"),
@@ -63,7 +65,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_THEMED_COMBOBOX ("true"),
         UI_HIDE_MENUBAR ("false"),                  // Dev setting only - cannot be set from GUI.
         UI_HIDE_GAME_TABS ("false"),                // Visibility of tabs in match screen.
-        
+
         UI_FOR_TOUCHSCREN("false"),
 
         MATCHPREF_PROMPT_FREE_BLOCKS("false"),
@@ -140,12 +142,12 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         tiny, smaller, small, medium, large, huge
     }
 
-   
+
     public static enum StackOffsetType {
         tiny, small, medium, large
     }
 
-   
+
     public static enum HomeMenus {
         constructed, draft, sealed, quest, settings, utilities
     }
@@ -244,7 +246,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     protected FPref[] getEnumValues() {
         return FPref.values();
     }
-    
+
     protected FPref valueOf(String name) {
         try {
             return FPref.valueOf(name);

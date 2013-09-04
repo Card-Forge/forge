@@ -66,6 +66,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.special.PhaseLabel;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
+import forge.view.arcane.CardPanel;
 import forge.view.arcane.PlayArea;
 
 /**
@@ -430,4 +431,23 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     @Override
     public void update() { }
 
+    public void repaintCardOverlays() {
+        List<CardPanel> panels = getVisibleCardPanels();
+        for (CardPanel panel : panels) {
+            panel.repaintOverlays();
+        }
+    }
+    private List<CardPanel> getVisibleCardPanels() {
+        List<CardPanel> panels = new ArrayList<CardPanel>();
+        for (VHand h : view.getHands()) {
+            panels.addAll(h.getHandArea().getCardPanels());
+        }
+        for (VField f : view.getFieldViews()) {
+            panels.addAll(f.getTabletop().getCardPanels());
+        }
+        for (VCommand c : view.getCommandViews()) {
+            panels.addAll(c.getTabletop().getCardPanels());
+        }
+        return panels;
+    }
 }

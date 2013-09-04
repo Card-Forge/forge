@@ -40,6 +40,8 @@ public final class GameMenu {
         menu.add(getMenuItem_AlphaStrike());
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
+        menu.add(CardOverlaysMenu.getMenu(showMenuIcons));
+        menu.addSeparator();
         menu.add(getMenuItem_GameSoundEffects());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());

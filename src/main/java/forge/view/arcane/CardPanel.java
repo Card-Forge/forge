@@ -115,11 +115,12 @@ public class CardPanel extends JPanel implements CardContainer {
     /**
      * 
      */
-    private final ScaledImagePanel imagePanel;
+    private ScaledImagePanel imagePanel;
 
-    private final OutlinedLabel titleText;
-    private final OutlinedLabel ptText;
-    private final OutlinedLabel damageText;
+    private OutlinedLabel titleText;
+    private OutlinedLabel ptText;
+    private OutlinedLabel damageText;
+    private OutlinedLabel cardIdText;
     private final List<CardPanel> imageLoadListeners = new ArrayList<CardPanel>(2);
     private boolean displayEnabled = true;
     private boolean isAnimationPanel;
@@ -135,31 +136,20 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public CardPanel(final Card newGameCard) {
-        this.setGameCard(newGameCard);
+        this.gameCard = newGameCard;
 
         this.setBackground(Color.black);
         this.setOpaque(false);
 
-        this.titleText = new OutlinedLabel();
-        this.titleText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
-        this.titleText.setForeground(Color.white);
-        this.titleText.setGlow(Color.black);
-        this.titleText.setWrap(true);
-        this.add(this.titleText);
+        createCardNameOverlay();
+        createPTOverlay();
+        createCardIdOverlay();
+        createScaleImagePanel();
 
-        this.ptText = new OutlinedLabel();
-        this.ptText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
-        this.ptText.setForeground(Color.white);
-        this.ptText.setGlow(Color.black);
-        this.add(this.ptText);
+        this.setCard(newGameCard);
+    }
 
-        this.damageText = new OutlinedLabel();
-        this.damageText.setFont(this.getFont().deriveFont(Font.BOLD, 15f));
-        this.damageText.setForeground(new Color(160,0,0));
-        this.damageText.setGlow(Color.white);
-        this.add(this.damageText);
-        
-        
+    private void createScaleImagePanel() {
         this.imagePanel = new ScaledImagePanel();
         this.add(this.imagePanel);
         this.addComponentListener(new ComponentAdapter() {
@@ -167,14 +157,43 @@ public class CardPanel extends JPanel implements CardContainer {
             public void componentShown(final ComponentEvent e) {
                 CardPanel.this.setCard(CardPanel.this.getGameCard());
             }
-
             @Override
             public void componentResized(final ComponentEvent e) {
                 CardPanel.this.setCard(CardPanel.this.getGameCard());
             }
         });
+    }
 
-        this.setCard(newGameCard);
+    private void createCardNameOverlay() {
+        this.titleText = new OutlinedLabel();
+        this.titleText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
+        this.titleText.setForeground(Color.white);
+        this.titleText.setGlow(Color.black);
+        this.titleText.setWrap(true);
+        this.add(this.titleText);
+    }
+
+    private void createPTOverlay() {
+        // Power
+        this.ptText = new OutlinedLabel();
+        this.ptText.setFont(this.getFont().deriveFont(Font.BOLD, 13f));
+        this.ptText.setForeground(Color.white);
+        this.ptText.setGlow(Color.black);
+        this.add(this.ptText);
+        // Toughness
+        this.damageText = new OutlinedLabel();
+        this.damageText.setFont(this.getFont().deriveFont(Font.BOLD, 15f));
+        this.damageText.setForeground(new Color(160,0,0));
+        this.damageText.setGlow(Color.white);
+        this.add(this.damageText);
+    }
+
+    private void createCardIdOverlay() {
+        this.cardIdText = new OutlinedLabel();
+        this.cardIdText.setFont(this.getFont().deriveFont(Font.BOLD, 11f));
+        this.cardIdText.setForeground(Color.LIGHT_GRAY);
+        this.cardIdText.setGlow(Color.black);
+        this.add(this.cardIdText);
     }
 
     /**
@@ -321,12 +340,12 @@ public class CardPanel extends JPanel implements CardContainer {
             final int n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
         }
-        
-        // Black fill - (will become outline for white bordered cards) 
+
+        // Black fill - (will become outline for white bordered cards)
         final int n = 0;
         g2d.setColor(Color.black);
         g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
-        
+
         // White border if card is known to have it.
         if (this.getGameCard() != null && !this.getGameCard().isFaceDown()) {
             CardEdition ed = Singletons.getModel().getEditions().get(this.getGameCard().getCurSetCode());
@@ -341,14 +360,14 @@ public class CardPanel extends JPanel implements CardContainer {
     /**
      * TODO: Write javadoc for this method.
      * @param g
-     * @param manaCost 
+     * @param manaCost
      */
     private void drawManaCost(final Graphics g, ManaCost cost, int deltaY ) {
         int width = CardFaceSymbols.getWidth(cost);
         int height = CardFaceSymbols.getHeight();
         CardFaceSymbols.draw(g, cost, (this.cardXOffset + (this.cardWidth / 2)) - (width / 2), deltaY + this.cardYOffset + (this.cardHeight / 2) - height/2);
     }
-            
+
     /** {@inheritDoc} */
     @Override
     protected final void paintChildren(final Graphics g) {
@@ -394,11 +413,11 @@ public class CardPanel extends JPanel implements CardContainer {
 
         final int combatXSymbols = (this.cardXOffset + (this.cardWidth / 4)) - 16;
         final int stateXSymbols = (this.cardXOffset + (this.cardWidth / 2)) - 16;
-        final int ySymbols = (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16; 
+        final int ySymbols = (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16;
         // int yOff = (cardHeight/4) + 2;
         Combat combat = card.getGame().getCombat();
         if( combat != null ) {
-            if ( combat.isAttacking(card)) 
+            if ( combat.isAttacking(card))
                 CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols);
             if ( combat.isBlocking(card))
                 CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols);
@@ -436,31 +455,53 @@ public class CardPanel extends JPanel implements CardContainer {
         this.imagePanel.setSize(imgSize);
 
         final int fontHeight = Math.round(this.cardHeight * (27f / 680));
-        final boolean showText = !this.imagePanel.hasImage() || (!this.isAnimationPanel && (fontHeight < 12));
-        this.titleText.setVisible(showText);
-        this.ptText.setVisible(showText);
-        this.damageText.setVisible(showText);
+        boolean showText = !this.imagePanel.hasImage() || (!this.isAnimationPanel && (fontHeight < 12));
 
-        final int titleX = Math.round(imgSize.width * (24f / 480));
-        final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
-        final int titleH = Math.round(imgSize.height * (360f / 640));
-        this.titleText.setBounds(imgPos.x + titleX, imgPos.y + titleY, imgSize.width - 2 * titleX, titleH - titleY);
-
-        final int rightLine = Math.round(imgSize.width * (412f / 480)); 
-
-        final Dimension ptSize = this.ptText.getPreferredSize();
-        this.ptText.setSize(ptSize.width, ptSize.height);
-        final int ptX = rightLine - ptSize.width/2;
-        final int ptY = Math.round(imgSize.height * (650f / 680)) - 13;
-        this.ptText.setLocation(imgPos.x + ptX, imgPos.y + ptY);
-
-        final Dimension dmgSize = this.damageText.getPreferredSize();
-        this.damageText.setSize(dmgSize.width, dmgSize.height);
-        final int dmgX = rightLine - dmgSize.width / 2;
-        final int dmgY =  ptY - 16;
-        this.damageText.setLocation(imgPos.x + dmgX, imgPos.y + dmgY);
+        displayCardNameOverlay(showText && showCardNameOverlay(), imgSize, imgPos);
+        displayPTOverlay(showText && showCardPowerOverlay(), imgSize, imgPos);
+        displayCardIdOverlay(showText && showCardIdOverlay(), imgSize, imgPos);
     }
 
+    private void displayCardIdOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
+        if (isVisible) {
+            final Dimension idSize = this.cardIdText.getPreferredSize();
+            this.cardIdText.setSize(idSize.width, idSize.height);
+            final int idX = Math.round(imgSize.width * (24f / 480));
+            final int idY = Math.round(imgSize.height * (650f / 680)) - 8;
+            this.cardIdText.setLocation(imgPos.x + idX, imgPos.y + idY);
+        }
+        this.cardIdText.setVisible(isVisible);
+    }
+
+    private void displayPTOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
+        if (isVisible) {
+            final int rightLine = Math.round(imgSize.width * (412f / 480)) + 3;
+            // Power
+            final Dimension ptSize = this.ptText.getPreferredSize();
+            this.ptText.setSize(ptSize.width, ptSize.height);
+            final int ptX = rightLine - ptSize.width/2;
+            final int ptY = Math.round(imgSize.height * (650f / 680)) - 10;
+            this.ptText.setLocation(imgPos.x + ptX, imgPos.y + ptY);
+            // Toughness
+            final Dimension dmgSize = this.damageText.getPreferredSize();
+            this.damageText.setSize(dmgSize.width, dmgSize.height);
+            final int dmgX = rightLine - dmgSize.width / 2;
+            final int dmgY =  ptY - 16;
+            this.damageText.setLocation(imgPos.x + dmgX, imgPos.y + dmgY);
+        }
+        this.ptText.setVisible(isVisible);
+        this.damageText.setVisible(isVisible);
+    }
+
+    private void displayCardNameOverlay(boolean isVisible, Dimension imgSize, Point imgPos) {
+        if (isVisible) {
+            final int titleX = Math.round(imgSize.width * (24f / 480));
+            final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
+            final int titleH = Math.round(imgSize.height * (360f / 640));
+            this.titleText.setBounds(imgPos.x + titleX, imgPos.y + titleY + 2, imgSize.width - 2 * titleX, titleH - titleY);
+        }
+        this.titleText.setVisible(isVisible);
+    }
 
     @Override
     public final String toString() {
@@ -580,37 +621,38 @@ public class CardPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public final void setText(final Card card) {
-                
+
         if ((card == null)) {
             return;
         }
-        
+
+        // Card name overlay
         if (card.isFaceDown()) {
             this.titleText.setText("");
         } else {
-            if (showCardNameOverlay()) {
-                this.titleText.setText(card.getName());   
-            }
+            this.titleText.setText(card.getName());
         }
-        
-        if (showCardPowerOverlay()) {
-            String sPt = "";
-            if (card.isCreature() && card.isPlaneswalker()) {
-                sPt = String.format("%d/%d (%d)", card.getNetAttack(), card.getNetDefense(), card.getCounters(CounterType.LOYALTY));
-            } else if (card.isCreature()) {
-                sPt = String.format("%d/%d", card.getNetAttack(), card.getNetDefense());
-            } else if (card.isPlaneswalker()) {
-                int loyalty = card.getCounters(CounterType.LOYALTY);
-                sPt = String.valueOf(loyalty == 0 ? card.getBaseLoyalty() : loyalty);
-            }
-            this.ptText.setText(sPt);            
+
+        // P/T overlay
+        String sPt = "";
+        if (card.isCreature() && card.isPlaneswalker()) {
+            sPt = String.format("%d/%d (%d)", card.getNetAttack(), card.getNetDefense(), card.getCounters(CounterType.LOYALTY));
+        } else if (card.isCreature()) {
+            sPt = String.format("%d/%d", card.getNetAttack(), card.getNetDefense());
+        } else if (card.isPlaneswalker()) {
+            int loyalty = card.getCounters(CounterType.LOYALTY);
+            sPt = String.valueOf(loyalty == 0 ? card.getBaseLoyalty() : loyalty);
         }
+        this.ptText.setText(sPt);
 
         int damage = card.getDamage();
         this.damageText.setText(damage > 0 ? "\u00BB " + String.valueOf(damage) + " \u00AB" : "");
 
+        // Card Id overlay
+        this.cardIdText.setText(Integer.toString(card.getUniqueNumber()));
+
     }
-            
+
     /**
      * <p>
      * getCard.
@@ -629,8 +671,8 @@ public class CardPanel extends JPanel implements CardContainer {
                 && this.imagePanel.hasImage()) {
             return;
         }
-        
-        this.setGameCard(card);
+
+        this.gameCard = card;
         if (!this.isShowing()) {
             return;
         }
@@ -640,7 +682,7 @@ public class CardPanel extends JPanel implements CardContainer {
 
         this.setImage(image);
     }
-    
+
     /**
      * Gets the game card.
      * 
@@ -648,16 +690,6 @@ public class CardPanel extends JPanel implements CardContainer {
      */
     public final Card getGameCard() {
         return this.gameCard;
-    }
-
-    /**
-     * Sets the game card.
-     * 
-     * @param gameCard0
-     *            the gameCard to set
-     */
-    public final void setGameCard(final Card gameCard0) {
-        this.gameCard = gameCard0;
     }
 
     /**
@@ -763,22 +795,36 @@ public class CardPanel extends JPanel implements CardContainer {
     public static final float getBorderSize() {
         return BLACK_BORDER_SIZE;
     }
-    
+
     private boolean isPreferenceEnabled(FPref preferenceName) {
         return Singletons.getModel().getPreferences().getPrefBoolean(preferenceName);
-    }    
+    }
+
+    private boolean isShowingOverlays() {
+        return isPreferenceEnabled(FPref.UI_SHOW_CARD_OVERLAYS);
+    }
 
     private boolean showCardNameOverlay() {
-        return isPreferenceEnabled(FPref.UI_OVERLAY_CARD_NAME);
+        return isShowingOverlays() && isPreferenceEnabled(FPref.UI_OVERLAY_CARD_NAME);
     }
 
     private boolean showCardPowerOverlay() {
-        return isPreferenceEnabled(FPref.UI_OVERLAY_CARD_POWER);
+        return isShowingOverlays() && isPreferenceEnabled(FPref.UI_OVERLAY_CARD_POWER);
     }
 
     private boolean showCardManaCostOverlay() {
-        return isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST) && !this.getCard().isFaceDown();
+        return isShowingOverlays() &&
+                isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST) &&
+                !this.getCard().isFaceDown();
     }
-    
-    
+
+    private boolean showCardIdOverlay() {
+        return isShowingOverlays() && isPreferenceEnabled(FPref.UI_OVERLAY_CARD_ID);
+    }
+
+    public void repaintOverlays() {
+        repaint();
+        doLayout();
+    }
+
 }
