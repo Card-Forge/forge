@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -23,6 +24,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorCommander;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.FList;
 import forge.net.FServer;
 import forge.net.Lobby;
 import forge.util.MyRandom;
@@ -44,6 +46,29 @@ public enum CSubmenuCommander implements ICDoc {
      */
     @Override
     public void update() {
+     // reinit deck lists and restore last selections (if any)
+        for (FList<Object> deckList : view.getDeckLists()) {
+            Vector<Object> listData = new Vector<Object>();            
+            
+            if(Singletons.getModel().getDecks().getCommander().size() != 0) {
+                listData.add("Random");
+                for (Deck commanderDeck : Singletons.getModel().getDecks().getCommander()) {
+                    listData.add(commanderDeck);
+                }                
+            }
+            
+            Object val = deckList.getSelectedValue();
+            deckList.setListData(listData);
+            if (null != val) {
+                deckList.setSelectedValue(val, true);
+            }
+            
+            if (-1 == deckList.getSelectedIndex() && listData.size() != 0) {
+                deckList.setSelectedIndex(0);
+            }
+            
+        }
+        
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() { view.getBtnStart().requestFocusInWindow(); }
         });
@@ -59,6 +84,7 @@ public enum CSubmenuCommander implements ICDoc {
         view.getBtnStart().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
+
                 startGame();
             }
         });

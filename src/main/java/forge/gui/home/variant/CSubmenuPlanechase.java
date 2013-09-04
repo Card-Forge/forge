@@ -55,13 +55,19 @@ public enum CSubmenuPlanechase implements ICDoc {
     public void update() {
         // reinit deck lists and restore last selections (if any)
         for (FList<Object> deckList : view.getPlanarDeckLists()) {
-            Vector<Object> listData = new Vector<Object>();
-            listData.add("Random");
-            listData.add("Generate");
-            for (Deck planarDeck : Singletons.getModel().getDecks().getPlane()) {
-                listData.add(planarDeck);
+            Vector<Object> listData = new Vector<Object>();            
+            
+            if(Singletons.getModel().getDecks().getPlane().size() == 0) {
+                listData.add("Generate");
             }
-
+            else {
+                listData.add("Generate");
+                listData.add("Random");
+                for (Deck planarDeck : Singletons.getModel().getDecks().getPlane()) {
+                    listData.add(planarDeck);
+                }                
+            }
+            
             Object val = deckList.getSelectedValue();
             deckList.setListData(listData);
             if (null != val) {
@@ -71,6 +77,7 @@ public enum CSubmenuPlanechase implements ICDoc {
             if (-1 == deckList.getSelectedIndex()) {
                 deckList.setSelectedIndex(0);
             }
+            
         }
         
         SwingUtilities.invokeLater(new Runnable() {

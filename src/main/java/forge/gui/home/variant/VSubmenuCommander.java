@@ -74,10 +74,12 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         Vector<Object> cmdDeckListData = new Vector<Object>();
-        cmdDeckListData.add("Random");
-        for(Deck d : Singletons.getModel().getDecks().getCommander()) {
-            allCommanderDecks.add(d);
-            cmdDeckListData.add(d);
+        if(Singletons.getModel().getDecks().getCommander().size() > 0) {
+            cmdDeckListData.add("Random");
+            for(Deck d : Singletons.getModel().getDecks().getCommander()) {
+                allCommanderDecks.add(d);
+                cmdDeckListData.add(d);
+            }
         }
 
         //This listener will look for any of the radio buttons being selected
