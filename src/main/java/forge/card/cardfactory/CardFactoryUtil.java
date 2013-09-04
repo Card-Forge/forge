@@ -2104,8 +2104,8 @@ public class CardFactoryUtil {
             String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ " +
             		"Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " +
                     magnitude + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " +
-            		magnitude + " (If this creature isn't monstrous, put four +1/+1 " +
-            		"counters on it and it becomes monstrous.)" + ref;
+            		magnitude + " (If this creature isn't monstrous, put " + magnitude + 
+            		" +1/+1 counters on it and it becomes monstrous.)" + ref;
             		
             card.addSpellAbility(AbilityFactory.getAbility(effect, card));
         }
