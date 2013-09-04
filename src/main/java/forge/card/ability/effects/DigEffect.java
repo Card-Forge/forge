@@ -278,15 +278,21 @@ public class DigEffect extends SpellAbilityEffect {
                             continue;
                         }
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
-                        c = game.getAction().moveTo(zone, c, libraryPosition);
-                        if (destZone1.equals(ZoneType.Battlefield)) {
-                            for (final String kw : keywords) {
-                                c.addExtrinsicKeyword(kw);
-                            }
-                            if (sa.hasParam("Tapped")) {
-                                c.setTapped(true);
+                        
+                        if (zone.is(ZoneType.Library)) {
+                            c = game.getAction().moveToLibrary(c, libraryPosition);
+                        } else {
+                            c = game.getAction().moveTo(zone, c);
+                            if (destZone1.equals(ZoneType.Battlefield)) {
+                                for (final String kw : keywords) {
+                                    c.addExtrinsicKeyword(kw);
+                                }
+                                if (sa.hasParam("Tapped")) {
+                                    c.setTapped(true);
+                                }
                             }
                         }
+
                         if (sa.hasParam("ExileFaceDown")) {
                             c.setState(CardCharacteristicName.FaceDown);
                         }
