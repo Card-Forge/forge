@@ -396,7 +396,8 @@ public class AiAttackController {
         }
 
         for (Card blocker : this.blockers) {
-            if (blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
+            if (blocker.hasKeyword("CARDNAME can block any number of creatures.")
+                    || blocker.hasKeyword("CARDNAME can block an additional ninety-nine creatures.")) {
                 for (Card attacker : this.attackers) {
                     if (CombatUtil.canBlock(attacker, blocker)) {
                         remainingAttackers.remove(attacker);

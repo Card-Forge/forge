@@ -156,8 +156,9 @@ public class CombatUtil {
         if (blockedBy.isEmpty() || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
             return true;
         }
-
-        return blocker.getKeywordAmount("CARDNAME can block an additional creature.") >= blockedBy.size();
+        int canBlockMore = blocker.getKeywordAmount("CARDNAME can block an additional creature.") 
+                + blocker.getKeywordAmount("CARDNAME can block an additional ninety-nine creatures.") * 99;
+        return canBlockMore >= blockedBy.size();
     }
 
     // can the attacker be blocked at all?
