@@ -121,7 +121,12 @@ public class HumanPlaySpellAbility {
                     return currentAbility.doTrigger(true, targetingPlayer);
                 }
             }
-            currentAbility = currentAbility.getSubAbility();
+            final SpellAbility subAbility = currentAbility.getSubAbility();
+            if (subAbility != null) {
+                // This is necessary for "TargetsWithDefinedController$ ParentTarget"
+                ((AbilitySub) subAbility).setParent(currentAbility);
+            }
+            currentAbility = subAbility;
         } while (currentAbility != null);
         return true;
     }

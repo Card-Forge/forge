@@ -1029,9 +1029,9 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
                 return false;
             
             // If the cards must have a specific controller
-            if (tr.getDefinedController() != null && entity instanceof Card) {
+            if (hasParam("TargetsWithDefinedController") && entity instanceof Card) {
                 final Card c = (Card) entity;
-                List<Player> pl = AbilityUtils.getDefinedPlayers(this.getSourceCard(), tr.getDefinedController(), this);
+                List<Player> pl = AbilityUtils.getDefinedPlayers(getSourceCard(), getParam("TargetsWithDefinedController"), this);
                 if (pl == null || !pl.contains(c.getController()) ) {
                     return false;
                 }
@@ -1491,7 +1491,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     public SpellAbility getParentTargetingPlayer() {
         SpellAbility parent = this.getParent();
         while (parent != null) {
-            if (parent.targetChosen.isTargetingAnyPlayer())
+            if (parent.getTargets().isTargetingAnyPlayer())
                 return parent;
             parent = parent.getParent();
         }

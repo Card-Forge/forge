@@ -1,7 +1,7 @@
 Name:Temporal Cascade
 ManaCost:5 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 5 U U |  ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | SubAbility$ TemporalChangeAll | PreCostDesc$ Choose one - | SpellDescription$ Each player shuffles his or her hand and graveyard into his or her library;
+A:SP$ ChangeZoneAll | Cost$ 5 U U |  ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | PreCostDesc$ Choose one - | SpellDescription$ Each player shuffles his or her hand and graveyard into his or her library;
 A:SP$ Draw | Cost$ 5 U U | NumCards$ 7 | Defined$ Each | SpellDescription$ or each player draws seven cards.
 A:SP$ ChangeZoneAll | Cost$ 7 U U |  ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True  | UseAllOriginZones$ True | SubAbility$ CascadeDraw | PrecostDesc$ Entwine 2 | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
 SVar:CascadeDraw:DB$ Draw | NumCards$ 7 | Defined$ Each

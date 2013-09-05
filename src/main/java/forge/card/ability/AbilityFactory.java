@@ -255,9 +255,6 @@ public final class AbilityFactory {
         if (mapParams.containsKey("TargetsWithoutSameCreatureType")) {
             abTgt.setWithoutSameCreatureType(true);
         }
-        if (mapParams.containsKey("TargetsWithDefinedController")) {
-            abTgt.setDefinedController(mapParams.get("TargetsWithDefinedController"));
-        }
         if (mapParams.containsKey("TargetsWithSameController")) {
             abTgt.setSameController(true);
         }

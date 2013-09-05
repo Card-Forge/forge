@@ -67,7 +67,6 @@ public class TargetRestrictions {
     private boolean withoutSameCreatureType = false;
     private boolean singleTarget = false;
     private boolean randomTarget = false;
-    private String definedController = null;
     private String relatedProperty = null;
 
     // How many can be targeted?
@@ -106,7 +105,6 @@ public class TargetRestrictions {
         this.differentZone = target.isDifferentZone();
         this.sameController = target.isSameController();
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
-        this.definedController = target.getDefinedController();
         this.relatedProperty = target.getRelatedProperty();
         this.singleTarget = target.isSingleTarget();
         this.randomTarget = target.isRandomTarget();
@@ -521,10 +519,9 @@ public class TargetRestrictions {
             }
         } else {
             for (final Card c : game.getCardsIn(this.tgtZone)) {
-                boolean isValidTarget = c.isValid(this.validTgts, srcCard.getController(), srcCard);
-                boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
-                boolean isAlreadyTargeted = sa.getTargets().isTargeting(c);
-                if (isValidTarget && canTarget && !isAlreadyTargeted) {
+                if (c.isValid(this.validTgts, srcCard.getController(), srcCard) 
+                        && (!isTargeted || sa.canTarget(c)) 
+                        && !sa.getTargets().isTargeting(c)) {
                     candidates.add(c);
                 }
             }
@@ -660,20 +657,6 @@ public class TargetRestrictions {
      */
     public final void setSameController(final boolean same) {
         this.sameController = same;
-    }
-
-    /**
-     * @return the definedController
-     */
-    public String getDefinedController() {
-        return definedController;
-    }
-
-    /**
-     * @param defined the definedController to set
-     */
-    public void setDefinedController(String defined) {
-        this.definedController = defined;
     }
     
     /**
