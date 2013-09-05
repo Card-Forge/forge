@@ -1803,9 +1803,9 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param land
      *            a {@link forge.Card} object.
      */
-    public final boolean playLand(final Card land, final boolean ignoreTiming) {
+    public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming) {
         FThreads.assertExecutedByEdt(false);
-        if (this.canPlayLand(land, ignoreTiming)) {
+        if (this.canPlayLand(land, ignoreZoneAndTiming)) {
             land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
 
@@ -1842,9 +1842,9 @@ public class Player extends GameEntity implements Comparable<Player> {
      * 
      * @return a boolean.
      */
-    public final boolean canPlayLand(Card land, final boolean ignoreTiming) {
+    public final boolean canPlayLand(Card land, final boolean ignoreZoneAndTiming) {
 
-        if (!ignoreTiming && !this.canCastSorcery()) {
+        if (!ignoreZoneAndTiming && !this.canCastSorcery()) {
             return false;
         }
 
@@ -1858,7 +1858,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
         
-        if( land != null) {
+        if( land != null && !ignoreZoneAndTiming) {
             if (land.getOwner() != this && !land.hasKeyword("May be played by your opponent"))
                 return false;
 
