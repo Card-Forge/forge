@@ -119,6 +119,7 @@ public class DamagePreventAi extends SpellAbilityAi {
 
         } // Protect combatants
         else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            sa.resetTargets();
             if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, combat)
                     && (ComputerUtilCombat.lifeInDanger(ai, combat) || sa.isAbility() || sa.isTrigger())
                     && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
