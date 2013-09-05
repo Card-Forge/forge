@@ -38,7 +38,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, IH
      * @param name0 the name0
      */
     public DeckBase(final String name0) {
-        this.name = name0;
+        this.name = name0.replace('/', '_');
     }
 
     /* (non-Javadoc)
