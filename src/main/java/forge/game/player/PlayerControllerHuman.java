@@ -415,7 +415,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         InputSelectCards inp = new InputSelectCardsFromList(min, max, valid);
-        inp.setMessage(sa.hasParam("AnyNumber") ? "Discard up to %d cards" : "Discard %d cards");
+        inp.setMessage(sa.hasParam("AnyNumber") ? "Discard up to %d card(s)" : "Discard %d card(s)");
         Singletons.getControl().getInputQueue().setInputAndWait(inp);
         return inp.getSelected();
     }
@@ -505,7 +505,7 @@ public class PlayerControllerHuman extends PlayerController {
                 return super.hasAllTargets();
             }
         };
-        target.setMessage("Select %d cards to discard, unless you discard a " + uType + ".");
+        target.setMessage("Select %d card(s) to discard, unless you discard a " + uType + ".");
         Singletons.getControl().getInputQueue().setInputAndWait(target);
         return target.getSelected();
     }
