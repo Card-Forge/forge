@@ -462,7 +462,7 @@ public class TargetRestrictions {
                 if (!c.isValid(this.validTgts, srcCard.getController(), srcCard)) {
                     continue;
                 }
-                if (isTargeted && !c.canBeTargetedBy(sa)) {
+                if (isTargeted && !sa.canTarget(c)) {
                     continue;
                 }
                 if (sa.getTargets().isTargeting(c)) {
@@ -513,10 +513,9 @@ public class TargetRestrictions {
         final Card srcCard = sa.getSourceCard(); // should there be OrginalHost at any moment?
         if (this.tgtZone.contains(ZoneType.Stack)) {
             for (final Card c : game.getStackZone().getCards()) {
-                boolean isValidTarget = c.isValid(this.validTgts, srcCard.getController(), srcCard);
-                boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
-                boolean isAlreadyTargeted = sa.getTargets().isTargeting(c);
-                if (isValidTarget && canTarget && !isAlreadyTargeted) {
+                if (c.isValid(this.validTgts, srcCard.getController(), srcCard) 
+                        && (!isTargeted || sa.canTarget(c)) 
+                        && !sa.getTargets().isTargeting(c)) {
                     candidates.add(c);
                 }
             }
