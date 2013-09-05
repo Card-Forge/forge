@@ -18,6 +18,7 @@
 package forge.card.mana;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -298,6 +299,11 @@ public class ManaPool {
             this.removeMana(mana);
             if (mana.addsNoCounterMagic(sa) && sa.getSourceCard() != null) {
                 sa.getSourceCard().setCanCounter(false);
+            }
+            if (sa.isSpell() && sa.getSourceCard() != null
+                    && sa.getSourceCard().isCreature() && mana.addsKeywords(sa)) {
+                final long timestamp = sa.getSourceCard().getGame().getNextTimestamp();
+                sa.getSourceCard().addChangedCardKeywords(Arrays.asList(mana.getAddedKeywords().split(" & ")), new ArrayList<String>(), false, timestamp);
             }
         }
     }

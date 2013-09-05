@@ -49,6 +49,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private String lastExpressChoice = "";
     private final String manaRestrictions;
     private final String cannotCounterSpell;
+    private final String addsKeywords;
     private final boolean persistentMana;
     
     private transient ArrayList<Mana> lastManaProduced = new ArrayList<Mana>();
@@ -78,6 +79,7 @@ public class AbilityManaPart implements java.io.Serializable {
         origProduced = params.containsKey("Produced") ? params.get("Produced") : "1";
         this.manaRestrictions = params.containsKey("RestrictValid") ? params.get("RestrictValid") : "";
         this.cannotCounterSpell = params.get("AddsNoCounter");
+        this.addsKeywords = params.get("AddsKeywords");
         this.persistentMana = (null == params.get("PersistentMana")) ? false :
             "True".equalsIgnoreCase(params.get("PersistentMana"));
     }
@@ -167,6 +169,29 @@ public class AbilityManaPart implements java.io.Serializable {
         return source.isValid(cannotCounterSpell, sourceCard.getController(), sourceCard);
     }
 
+    /**
+     * <p>
+     * addKeywords.
+     * </p>
+     * @param saBeingPaid 
+     * 
+     * @return a {@link java.lang.String} object.
+     */
+    public boolean addKeywords(SpellAbility saBeingPaid) {
+        return this.addsKeywords != null;
+    }
+
+    /**
+     * <p>
+     * getKeywords.
+     * </p>
+     * @param saBeingPaid 
+     * 
+     * @return a {@link java.lang.String} object.
+     */
+    public String getKeywords() {
+        return this.addsKeywords;
+    }
     /**
      * <p>
      * getManaRestrictions.
@@ -451,6 +476,7 @@ public class AbilityManaPart implements java.io.Serializable {
     public boolean isPersistentMana() {
         return this.persistentMana;
     }
+
 
 } // end class AbilityMana
 

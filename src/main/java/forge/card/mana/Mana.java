@@ -146,6 +146,27 @@ public class Mana {
 
     /**
      * <p>
+     * addsKeywords.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean addsKeywords(SpellAbility saBeingPaid) {
+        return this.manaAbility != null && manaAbility.addKeywords(saBeingPaid);
+    }
+
+    /**
+     * <p>
+     * getAddedKeywords.
+     * </p>
+     * @return a String.
+     */
+    public final String getAddedKeywords() {
+        return this.manaAbility.getKeywords();
+    }
+
+    /**
+     * <p>
      * isColor.
      * </p>
      * 
