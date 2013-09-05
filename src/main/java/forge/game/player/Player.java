@@ -355,7 +355,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public boolean isOpponentOf(Player other) {
-        return other != this && ( other.teamNumber < 0 || other.teamNumber != this.teamNumber );
+        return other != this && other != null && ( other.teamNumber < 0 || other.teamNumber != this.teamNumber );
     }
 
     
