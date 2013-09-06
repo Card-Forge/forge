@@ -411,7 +411,7 @@ public class CardDetailPanel extends FPanel {
         if ((card.hasKeyword("Play with the top card of your library revealed.") || card
                 .hasKeyword("Players play with the top card of their libraries revealed."))
                 && card.getController() != null
-                && (card.isInZone(ZoneType.Battlefield) || card.isInZone(ZoneType.Command))
+                && (card.isInZone(ZoneType.Battlefield) || (card.isInZone(ZoneType.Command) && !card.isCommander()))
                 && !card.getController().getZone(ZoneType.Library).isEmpty()) {
             area.append("\r\nTop card of your library: ");
             area.append(card.getController().getCardsIn(ZoneType.Library, 1));
