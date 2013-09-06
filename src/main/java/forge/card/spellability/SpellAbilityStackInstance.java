@@ -18,9 +18,11 @@
 package forge.card.spellability;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import forge.Card;
+import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 
 /**
@@ -254,6 +256,22 @@ public class SpellAbilityStackInstance {
             this.tc = target;
             this.ability.setTargets(tc);
             this.stackDescription = this.ability.getStackDescription();
+            // Run BecomesTargetTrigger
+            HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("SourceSA", this.ability);
+            HashSet<Object> distinctObjects = new HashSet<Object>();
+            for (final Object tgt : target.getTargets()) {
+                if (distinctObjects.contains(tgt)) {
+                    continue;
+                }
+                distinctObjects.add(tgt);
+                if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
+                    runParams.put("FirstTime", null);
+                    ((Card) tgt).setBecameTargetThisTurn(true);
+                }
+                runParams.put("Target", tgt);
+                this.getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
+            }
         }
     }
 
