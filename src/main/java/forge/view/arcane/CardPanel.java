@@ -454,8 +454,7 @@ public class CardPanel extends JPanel implements CardContainer {
         this.imagePanel.setLocation(imgPos);
         this.imagePanel.setSize(imgSize);
 
-        final int fontHeight = Math.round(this.cardHeight * (27f / 680));
-        boolean showText = !this.imagePanel.hasImage() || (!this.isAnimationPanel && (fontHeight < 12));
+        boolean showText = !this.imagePanel.hasImage() || !this.isAnimationPanel;
 
         displayCardNameOverlay(showText && showCardNameOverlay(), imgSize, imgPos);
         displayPTOverlay(showText && showCardPowerOverlay(), imgSize, imgPos);
