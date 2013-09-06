@@ -449,14 +449,6 @@ public class ComputerUtilCard {
                 value += power * 15;
             }
             value += c.getKeywordMagnitude("Rampage");
-            /*if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is "
-                    + "put into a graveyard, put a +1/+1 counter on CARDNAME.")) {
-                value += 2;
-            }
-            if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is "
-                    + "put into a graveyard, put a +2/+2 counter on CARDNAME.")) {
-                value += 3;
-            }*/
         }
     
         value += c.getKeywordMagnitude("Bushido") * 16;
@@ -565,6 +557,10 @@ public class ComputerUtilCard {
         // paired creatures are more valuable because they grant a bonus to the other creature
         if (c.isPaired()) {
             value += 14;
+        }
+        
+        if (!c.getEncoded().isEmpty()) {
+            value += 24;
         }
     
         return value;
