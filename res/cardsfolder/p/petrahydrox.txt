@@ -2,7 +2,7 @@ Name:Petrahydrox
 ManaCost:3 UR
 Types:Creature Weird
 PT:3/3
-T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.
 SVar:TrigChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petrahydrox.jpg
