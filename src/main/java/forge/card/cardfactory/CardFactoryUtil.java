@@ -2056,7 +2056,7 @@ public class CardFactoryUtil {
         cmd.addSpellAbility(sa);
 
         cmd.addIntrinsicAbility("SP$ PermanentCreature | SorcerySpeed$ True | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmdManaCost);
-        cmd.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Spell | Affected$ Card.Self+wasCastFromCommand | EffectZone$ All | AffectedZone$ Stack");
+        cmd.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.Self+wasCastFromCommand | EffectZone$ All | AffectedZone$ Stack");
     }
 
     /**
