@@ -143,7 +143,7 @@ public class CardFactory {
         out.setCommander(in.isCommander());
         if(out.isCommander())
         {
-            out.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Spell | Affected$ Card.Self | EffectZone$ Command | AffectedZone$ Command");
+            out.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Spell | Affected$ Card.Self+wasCastFromCommand | EffectZone$ All | AffectedZone$ Stack");
             SpellAbility sa = AbilityFactory.getAbility(
                     "SP$ PermanentCreature | SorcerySpeed$ True | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + out.getManaCost().toString(),
                     out);
