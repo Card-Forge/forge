@@ -844,7 +844,7 @@ public enum FSkin {
                     i.getValue().createResizedImage(this, Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
                 }
                 else { //dynamic scale
-                    dims = i.getKey().split("|");
+                    dims = i.getKey().split("\\|"); //must escape since "|" is regex operator
                     i.getValue().createScaledImage(this, Double.parseDouble(dims[0]), Double.parseDouble(dims[1]));
                 }
             }

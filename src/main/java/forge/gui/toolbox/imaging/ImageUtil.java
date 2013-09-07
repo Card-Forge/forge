@@ -31,7 +31,7 @@ public final class ImageUtil {
     private ImageUtil() {}
     
     public static SkinIcon getMenuIcon(SkinIcon sourceIcon) {
-        return sourceIcon.scale(16, 16);      
+        return sourceIcon.resize(16, 16);      
     }    
         
     /**
