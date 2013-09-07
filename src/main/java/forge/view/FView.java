@@ -384,4 +384,10 @@ public enum FView {
         VHomeUI.SINGLETON_INSTANCE.instantiate();
         VDeckEditorUI.SINGLETON_INSTANCE.instantiate();
     }
+
+    public void refreshAllCellLayouts(boolean showTabs) {
+        for (DragCell cell : allCells) {
+            cell.doCellLayout(showTabs);
+        }
+    }
 }

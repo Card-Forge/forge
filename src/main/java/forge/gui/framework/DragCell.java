@@ -60,18 +60,6 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     public DragCell() {
         super(new MigLayout("insets 0, gap 0, wrap 2"));
 
-        int borderT = SLayoutConstants.BORDER_T;
-        int headH = (showGameTabs() ? SLayoutConstants.HEAD_H : 0);
-
-        this.add(pnlHead,
-                "w 100% - " + borderT + "px!" + ", " + "h " + headH + "px!");
-        this.add(pnlBorderRight,
-                "w " + borderT + "px!" + ", " + "h 100% - " + borderT + "px!, span 1 2");
-        this.add(pnlBody,
-                "w 100% - " + borderT + "px!" + ", " + "h 100% - " + (headH + borderT) + "px!");
-        this.add(pnlBorderBottom,
-                "w 100% - " + borderT + "px!" + ", " + "h " + borderT + "px!");
-
         this.setOpaque(false);
         pnlHead.setOpaque(false);
 
@@ -99,6 +87,30 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         pnlHead.add(lblOverflow, "w 20px!, h 100%!, gap " + tabPaddingPx + "px " + tabPaddingPx + "px 0 0", -1);
 
         pnlBody.setCornerDiameter(0);
+
+        doCellLayout(showGameTabs());
+    }
+
+    /**
+     * Refreshes the cell layout without affecting contents.
+     * <p>
+     * Primarily used to toggle visibility of tabs.
+     */
+    public void doCellLayout(boolean showTabs) {
+        this.removeAll();
+        int borderT = SLayoutConstants.BORDER_T;
+        int headH = (showTabs ? SLayoutConstants.HEAD_H : 0);
+        this.add(pnlHead,
+                "w 100% - " + borderT + "px!" + ", " + "h " + headH + "px!");
+        this.add(pnlBorderRight,
+                "w " + borderT + "px!" + ", " + "h 100% - " + borderT + "px!, span 1 2");
+        this.add(pnlBody,
+                "w 100% - " + borderT + "px!" + ", " + "h 100% - " + (headH + borderT) + "px!");
+        this.add(pnlBorderBottom,
+                "w 100% - " + borderT + "px!" + ", " + "h " + borderT + "px!");
+        if (this.isShowing()) {
+            this.validate();
+        }
     }
 
     /**
@@ -331,24 +343,6 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      * @return {@link forge.gui.framework.IVDoc} */
     public IVDoc<? extends ICDoc> getSelected() {
         return docSelected;
-    }
-
-    /**
-     * Removes all components in this cell and
-     * rebuilds it without a header bar.
-     */
-    public void hideHead() {
-        this.removeAll();
-        // These cause the cell to be "bumped" over...hopefully can
-        // just slice out?  Doublestrike 18-09-12
-        // Looks good so far... Doublestrike 09-10-12
-
-        // this.add(pnlBorderRight, "w " + SLayoutConstants.BORDER_T + "px!, "
-        //         + "h 100% - " + SLayoutConstants.BORDER_T + "px!, span 1 2");
-        this.add(pnlBody, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
-                + "h 100% - " + SLayoutConstants.BORDER_T + "px!");
-        // this.add(pnlBorderBottom, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
-        //         + "h " + SLayoutConstants.BORDER_T + "px!");
     }
 
     /**

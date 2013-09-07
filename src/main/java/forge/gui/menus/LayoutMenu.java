@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 
 import forge.Singletons;
-import forge.control.RestartUtil;
 import forge.control.FControl.Screens;
+import forge.control.RestartUtil;
 import forge.gui.GuiChoose;
 import forge.gui.match.controllers.CDock;
 import forge.gui.menubar.MenuUtil;
@@ -99,14 +99,14 @@ public final class LayoutMenu {
 
                 Object[] options = {"Restart Now", "Restart Later"};
                 int reply = JOptionPane.showOptionDialog(
-                    null,
-                    "You must restart Forge for " + skin + " theme to take effect.",
-                    "Change Theme",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE,
-                    null,
-                    options,
-                    options[0]);
+                        null,
+                        "You must restart Forge for " + skin + " theme to take effect.",
+                        "Change Theme",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE,
+                        null,
+                        options,
+                        options[0]);
                 if (reply == JOptionPane.YES_OPTION) {
                     RestartUtil.restartApplication(null);
                 }
@@ -148,8 +148,9 @@ public final class LayoutMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                prefs.setPref(FPref.UI_HIDE_GAME_TABS, !menuItem.getState());
-                controller.revertLayout();
+                boolean showTabs = menuItem.getState();
+                FView.SINGLETON_INSTANCE.refreshAllCellLayouts(showTabs);
+                prefs.setPref(FPref.UI_HIDE_GAME_TABS, !showTabs);
             }
         };
     }
