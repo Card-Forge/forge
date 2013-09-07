@@ -2052,11 +2052,11 @@ public class CardFactoryUtil {
         String cmdManaCost = cmd.getManaCost().toString();
         cmd.setSVar("CommanderMoveReplacement", "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library | Destination$ Command | Defined$ ReplacedCard");
         cmd.setSVar("DBCommanderIncCast", "DB$ StoreSVar | SVar$ CommanderCostRaise | Type$ CountSVar | Expression$ CommanderCostRaise/Plus.2");
-        SpellAbility sa = AbilityFactory.getAbility("AB$ PermanentCreature | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmdManaCost, cmd);
+        SpellAbility sa = AbilityFactory.getAbility("SP$ PermanentCreature | SorcerySpeed$ True | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmdManaCost, cmd);
         cmd.addSpellAbility(sa);
 
-        cmd.addIntrinsicAbility("AB$ PermanentCreature | SorcerySpeed$ True | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmdManaCost);
-        cmd.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Ability | Affected$ Card.Self | EffectZone$ Command | AffectedZone$ Command");
+        cmd.addIntrinsicAbility("SP$ PermanentCreature | SorcerySpeed$ True | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmdManaCost);
+        cmd.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Spell | Affected$ Card.Self | EffectZone$ Command | AffectedZone$ Command");
     }
 
     /**
