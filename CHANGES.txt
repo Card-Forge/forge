@@ -95,6 +95,12 @@ Temple of Deceit
 Temple of Mystery
 Temple of Silence
 Temple of Triumph
+Hammer of Purphoros
+Ordeal of Purphoros
+Fleecemane Lion
+Kragma Warcaller
+Prophet of Kruphix
+Tymaret, the Murder King
 
 
 ------------
