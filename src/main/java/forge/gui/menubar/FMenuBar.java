@@ -53,7 +53,12 @@ public class FMenuBar extends JMenuBar {
         add(Box.createHorizontalGlue()); // align right hack/patch.
         lblStatus = new JLabel(statusText);
         JLabelSkin<JLabel> labelSkin = FSkin.get(lblStatus);
-        labelSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        if (FSkin.isLookAndFeelSet()) {
+            labelSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        }
+        else { //ensure status is visible on default menu bar
+            labelSkin.setForeground(getForeground());
+        }
         lblStatus.setFont(FSkin.getItalicFont(11));
         lblStatus.setOpaque(false);
         add(lblStatus);

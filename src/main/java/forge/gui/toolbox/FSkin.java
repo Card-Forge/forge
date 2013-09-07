@@ -1833,6 +1833,10 @@ public enum FSkin {
         italicFonts.put(size, FSkin.font.deriveFont(Font.ITALIC, size));
     }
     
+    public static boolean isLookAndFeelSet() {
+        return ForgeLookAndFeel.isMetalLafSet;
+    }
+    
     /** 
      * Sets the look and feel of the GUI based on the selected Forge theme.
      *
