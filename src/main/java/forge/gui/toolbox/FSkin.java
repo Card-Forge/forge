@@ -1426,6 +1426,9 @@ public enum FSkin {
         for (ComponentSkin compSkin : compSkins.values()) {
             compSkin.reapply();
         }
+        
+        //refresh certain components skinned via look and feel
+        Singletons.getControl().getMenuBar().refresh();
     }
 
     /**

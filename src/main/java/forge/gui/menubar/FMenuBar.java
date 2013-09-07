@@ -2,6 +2,7 @@ package forge.gui.menubar;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
@@ -17,18 +18,24 @@ import forge.gui.toolbox.FSkin;
 @SuppressWarnings("serial")
 public class FMenuBar extends JMenuBar {
 
-    JLabel statusCaption;
+    private JLabel statusCaption;
+    private IMenuProvider provider;
 
     public FMenuBar(JFrame f) {
         f.setJMenuBar(this);
         setPreferredSize(new Dimension(f.getWidth(), 26));
-        setupMenuBar(null);
+        refresh();
     }
 
-    public void setupMenuBar(IMenuProvider provider) {
+    public void setupMenuBar(IMenuProvider provider0) {
+        this.provider = provider0;
+        refresh();
+    }
+    
+    public void refresh() {
         removeAll();
         add(ForgeMenu.getMenu());
-        addProviderMenus(provider);
+        addProviderMenus();
         add(LayoutMenu.getMenu());
         add(HelpMenu.getMenu());
         setStatusCaption();
@@ -52,11 +59,14 @@ public class FMenuBar extends JMenuBar {
         statusCaption.setText(text.trim() + "  ");
     }
 
-    private void addProviderMenus(IMenuProvider provider) {
-        if (provider != null && provider.getMenus() != null) {
-            for (JMenu m : provider.getMenus()) {
-                m.setBorderPainted(false);
-                add(m);
+    private void addProviderMenus() {
+        if (provider != null) {
+            List<JMenu> menus = provider.getMenus();
+            if (menus != null) {
+                for (JMenu m : menus) {
+                    m.setBorderPainted(false);
+                    add(m);
+                }
             }
         }
     }
