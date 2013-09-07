@@ -32,6 +32,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
@@ -49,6 +50,7 @@ import forge.gui.deckeditor.controllers.CEditorQuest;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.item.InventoryItem;
 
 /**
@@ -342,7 +344,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 this.setBackground(Color.GREEN);
             }
             this.setHorizontalAlignment(SwingConstants.CENTER);
-            this.setFont(FSkin.getBoldFont(12));
+            FSkin.get(this).setFont(FSkin.getBoldFont(12));
             this.setHorizontalAlignment(SwingConstants.CENTER);
         }
     }
@@ -351,8 +353,9 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         public GenericLabel(final String txt0) {
             super(txt0);
             this.setHorizontalAlignment(SwingConstants.CENTER);
-            FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            this.setFont(FSkin.getBoldFont(12));
+            JLabelSkin<GenericLabel> skin = FSkin.get(this);
+            skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            skin.setFont(FSkin.getBoldFont(12));
         }
     }
 

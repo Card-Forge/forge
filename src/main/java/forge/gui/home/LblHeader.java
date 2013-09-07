@@ -29,7 +29,7 @@ public class LblHeader extends JLabel {
         super(txt0);
         skin = FSkin.get(this);
         skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.setFont(FSkin.getFont(18));
+        skin.setFont(FSkin.getFont(18));
         this.setBorder(new EmptyBorder(5, 30, 0, 0));
     }
 

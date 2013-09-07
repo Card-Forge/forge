@@ -2,6 +2,8 @@ package forge.gui.toolbox;
 
 import javax.swing.JRadioButton;
 
+import forge.gui.toolbox.FSkin.JComponentSkin;
+
 /** 
  * A custom instance of JRadioButton using Forge skin properties.
  */
@@ -16,8 +18,9 @@ public class FRadioButton  extends JRadioButton {
     public FRadioButton(String s0) {
         super();
         this.setText(s0);
-        FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.setFont(FSkin.getFont(14));
+        JComponentSkin<FRadioButton> skin = FSkin.get(this);
+        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        skin.setFont(FSkin.getFont(14));
         this.setOpaque(false);
     }
 }

@@ -91,24 +91,24 @@ public class ViewWinLose {
 
         lblTitle.setForeground(Color.white);
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTitle.setFont(FSkin.getFont().deriveFont(Font.BOLD, 30));
+        FSkin.get(lblTitle).setFont(FSkin.getBoldFont(30));
 
         lblStats.setForeground(Color.white);
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStats.setFont(FSkin.getFont().deriveFont(Font.PLAIN, 26));
+        FSkin.get(lblStats).setFont(FSkin.getFont(26));
 
         btnContinue.setText("Continue");
-        btnContinue.setFont(FSkin.getFont(22));
+        FSkin.get(btnContinue).setFont(FSkin.getFont(22));
         btnRestart.setText("Restart");
-        btnRestart.setFont(FSkin.getFont(22));
+        FSkin.get(btnRestart).setFont(FSkin.getFont(22));
         btnQuit.setText("Quit");
-        btnQuit.setFont(FSkin.getFont(22));
+        FSkin.get(btnQuit).setFont(FSkin.getFont(22));
         btnContinue.setEnabled(!game.getMatch().isMatchOver());
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
         txtLog.setText(game.getGameLog().getLogText(null));
-        txtLog.setFont(FSkin.getFont(14));
+        FSkin.get(txtLog).setFont(FSkin.getFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
         
         FLabel btnCopyLog = new FLabel.ButtonBuilder().text("Copy to clipboard").build();

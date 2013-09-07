@@ -43,7 +43,7 @@ public class LblMenuItem extends JLabel implements ILocalRepaint {
         super("      " + doc0.getMenuTitle());
 
         skin = FSkin.get(this);
-        this.setFont(FSkin.getFont(14));
+        skin.setFont(FSkin.getFont(14));
         FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {

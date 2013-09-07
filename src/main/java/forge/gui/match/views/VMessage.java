@@ -38,6 +38,7 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JTextComponentSkin;
 import forge.properties.ForgePreferences.FPref;
 
 /**
@@ -69,13 +70,14 @@ public enum VMessage implements IVDoc<CMessage> {
         .opaque()
         .build();
 
+        JTextComponentSkin<JTextArea> tarMessageSkin = FSkin.get(tarMessage);
         tarMessage.setOpaque(false);
         tarMessage.setFocusable(false);
         tarMessage.setEditable(false);
         tarMessage.setLineWrap(true);
         tarMessage.setWrapStyleWord(true);
-        FSkin.get(tarMessage).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tarMessage.setFont(FSkin.getFont(14));
+        tarMessageSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tarMessageSkin.setFont(FSkin.getFont(14));
         tarMessage.setMargin(new Insets(5, 5, 5, 5));
 
         // Prevent scroll-bar from automatically scrolling to bottom of JTextArea.

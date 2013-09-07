@@ -65,7 +65,7 @@ public class FList<E> extends JList<E> {
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
             lblItemSkin.setBackground(FSkin.getColor(hasFocus() ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE));
             lblItemSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            lblItem.setFont(FSkin.getFont(13));
+            lblItemSkin.setFont(FSkin.getFont(13));
             lblItem.setOpaque(isSelected);
             return lblItem;
         }

@@ -395,9 +395,9 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     private void setFontSize(final int i0) {
         switch(this.fontStyle) {
-            case Font.BOLD: this.setFont(FSkin.getBoldFont(i0)); break;
-            case Font.ITALIC: this.setFont(FSkin.getItalicFont(i0)); break;
-            default: this.setFont(FSkin.getFont(i0));
+            case Font.BOLD: skin.setFont(FSkin.getBoldFont(i0)); break;
+            case Font.ITALIC: skin.setFont(FSkin.getItalicFont(i0)); break;
+            default: skin.setFont(FSkin.getFont(i0));
         }
     }
 

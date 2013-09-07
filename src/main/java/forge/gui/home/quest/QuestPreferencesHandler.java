@@ -263,7 +263,7 @@ public class QuestPreferencesHandler extends JPanel {
 
             this.setOpaque(false);
             this.setBorder(null);
-            this.setFont(FSkin.getFont(13));
+            this.skin.setFont(FSkin.getFont(13));
             this.skin.setForeground(clrText);
             this.skin.setCaretColor(clrText);
             this.skin.setBackground(clrHover);

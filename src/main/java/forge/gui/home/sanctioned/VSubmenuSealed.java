@@ -30,6 +30,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JTextComponentSkin;
 import forge.gui.toolbox.special.DeckLister;
 
 /** 
@@ -165,9 +166,10 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
 
         // Init directions text pane
         final JTextPane tpnDirections = new JTextPane();
+        JTextComponentSkin<JTextPane> tpnDirectionsSkin = FSkin.get(tpnDirections);
         tpnDirections.setOpaque(false);
-        FSkin.get(tpnDirections).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tpnDirections.setFont(FSkin.getFont(15));
+        tpnDirectionsSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tpnDirectionsSkin.setFont(FSkin.getFont(15));
         tpnDirections.setAlignmentX(SwingConstants.CENTER);
         tpnDirections.setFocusable(false);
         tpnDirections.setEditable(false);

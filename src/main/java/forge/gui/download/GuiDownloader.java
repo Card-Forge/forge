@@ -130,7 +130,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         radProxyNone.setSelected(true);
 
         FSkin.get(btnClose).setLineBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        btnStart.setFont(FSkin.getFont(18));
+        FSkin.get(btnStart).setFont(FSkin.getFont(18));
         btnStart.setVisible(false);
 
         barProgress.reset();

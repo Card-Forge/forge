@@ -478,7 +478,7 @@ public class QuestWinLose extends ControlWinLose {
         this.lblTemp2 = new JLabel(sb.toString());
         FSkin.JLabelSkin<JLabel> labelSkin = FSkin.get(this.lblTemp2);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        this.lblTemp2.setFont(FSkin.getFont(14));
+        labelSkin.setFont(FSkin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         labelSkin.setIcon(this.icoTemp);
         this.lblTemp2.setIconTextGap(50);
@@ -629,7 +629,7 @@ public class QuestWinLose extends ControlWinLose {
 
         this.lblTemp2 = new JLabel(sb.toString());
         FSkin.JLabelSkin<JLabel> labelSkin = FSkin.get(this.lblTemp2);
-        this.lblTemp2.setFont(FSkin.getFont(14));
+        labelSkin.setFont(FSkin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setIconTextGap(50);
@@ -704,7 +704,7 @@ public class QuestWinLose extends ControlWinLose {
 
         this.lblTemp2 = new JLabel("You lose! You have lost " + x + " credits.");
         FSkin.JLabelSkin<JLabel> labelSkin = FSkin.get(this.lblTemp2);
-        this.lblTemp2.setFont(FSkin.getFont(14));
+        labelSkin.setFont(FSkin.getFont(14));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
         this.lblTemp2.setIconTextGap(50);
@@ -793,7 +793,7 @@ public class QuestWinLose extends ControlWinLose {
     private class TitleLabel extends JLabel {
         TitleLabel(final String msg) {
             super(msg);
-            this.setFont(FSkin.getFont(16));
+            FSkin.get(this).setFont(FSkin.getFont(16));
             this.setPreferredSize(new Dimension(200, 40));
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setForeground(Color.white);

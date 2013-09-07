@@ -75,6 +75,7 @@ public enum FSkin {
     public static class ComponentSkin<T extends Component> {
         protected T comp;
         private SkinColor foreground, background;
+        private SkinFont font;
         private SkinCursor cursor;
         protected boolean needRepaintOnReapply;
         
@@ -106,6 +107,15 @@ public enum FSkin {
         public void setBackground(Color color) {
             this.background = null;  //ensure this field is reset when static color set
             this.comp.setBackground(color);
+        }
+
+        public void setFont(SkinFont skinFont) {
+            this.font = skinFont;
+            this.comp.setFont(skinFont.font);
+        }
+        public void setFont(Font font) {
+            this.font = null;  //ensure this field is reset when static font set
+            this.comp.setFont(font);
         }
         
         public void setCursor(SkinCursor skinCursor) {
@@ -157,6 +167,9 @@ public enum FSkin {
             }
             if (this.background != null) {
                 comp.setBackground(this.background.color);
+            }
+            if (this.font != null) {
+                comp.setFont(this.font.font);
             }
             if (this.cursor != null) {
                 comp.setCursor(this.cursor.cursor);
@@ -1380,11 +1393,104 @@ public enum FSkin {
         int[] getCoords();
     }
 
-    private static Map<Integer, Font> fixedFonts;
-    private static Map<Integer, Font> plainFonts;
-    private static Map<Integer, Font> boldFonts;
-    private static Map<Integer, Font> italicFonts;
     private static Map<Integer, SkinImage> avatars;
+    private static Map<Integer, Font> fixedFonts = new HashMap<Integer, Font>();
+    
+    /** @return {@link java.awt.font} */
+    public static Font getFixedFont(final int size) {
+        Font fixedFont = fixedFonts.get(size);
+        if (fixedFont == null) {
+            fixedFont = new Font("Monospaced", Font.PLAIN, size);
+            fixedFonts.put(size, fixedFont);
+        }
+        return fixedFont;
+    }
+
+    /** 
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getFont() {
+        return FSkin.getFont(FSkin.defaultFontSize);
+    }
+
+    /**
+     * @param size - integer, pixel size
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getFont(final int size) {
+        return SkinFont.get(Font.PLAIN, size);
+    }
+    
+    /** 
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getBoldFont() {
+        return FSkin.getBoldFont(FSkin.defaultFontSize);
+    }        
+
+    /**
+     * @param size - integer, pixel size
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getBoldFont(final int size) {
+        return SkinFont.get(Font.BOLD, size);
+    }
+    
+    /** 
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getItalicFont() {
+        return FSkin.getItalicFont(FSkin.defaultFontSize);
+    }            
+    
+    /**
+     * @param size - integer, pixel size
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getItalicFont(final int size) {
+        return SkinFont.get(Font.ITALIC, size);
+    }
+    
+    public static class SkinFont {
+        private static Font baseFont;
+        private static Map<String, SkinFont> fonts = new HashMap<String, SkinFont>();
+        
+        private static SkinFont get(final int style0, final int size0) {
+            String key = style0 + "|" + size0;
+            SkinFont skinFont = fonts.get(key);
+            if (skinFont == null) {
+                skinFont = new SkinFont(style0, size0);
+                fonts.put(key, skinFont);
+            }
+            return skinFont;
+        }
+        
+        private static void setBaseFont(Font baseFont0) {
+            baseFont = baseFont0;
+
+            //update all cached skin fonts
+            for (SkinFont skinFont : fonts.values()) {
+                skinFont.updateFont();
+            }
+        }
+
+        private final int style, size;
+        private Font font;
+
+        private SkinFont(final int style0, final int size0) {
+            this.style = style0;
+            this.size = size0;
+            this.updateFont();
+        }
+        
+        public int getSize() {
+            return this.font.getSize();
+        }
+        
+        private void updateFont() {
+            this.font = baseFont.deriveFont(this.style, this.size);
+        }
+    }
 
     private static final String
         FILE_SKINS_DIR = "res/skins/",
@@ -1400,7 +1506,6 @@ public enum FSkin {
 
     private static String preferredDir;
     private static String preferredName;
-    private static Font font;
     private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils,
         bimOldFoils, bimDefaultAvatars, bimPreferredAvatars;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
@@ -1540,17 +1645,14 @@ public enum FSkin {
             e.printStackTrace();
         }
 
-        // Pre-derive most fonts (plain, bold, and italic).
-        // Exceptions handled inside method.
-        FSkin.setDefaultFontSize();
-        FSkin.font = GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT);
-        fixedFonts = new HashMap<Integer, Font>();
-        plainFonts = new HashMap<Integer, Font>();
-        boldFonts = new HashMap<Integer, Font>();
-        italicFonts = new HashMap<Integer, Font>();
-        for (int i = 10; i <= 22; i++) { setFont(i); }
-        for (int i = 10; i <= 20; i += 2) { setBoldFont(i); }
-        for (int i = 12; i <= 14; i += 2) { setItalicFont(i); }
+        // Initialize fonts
+        if (onInit) { //set default font size only once onInit
+            Font f = UIManager.getDefaults().getFont("Label.font");
+            if (f != null) {
+                FSkin.defaultFontSize = f.getSize();    
+            }
+        }
+        SkinFont.setBaseFont(GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT));
 
         // Put various images into map (except sprite and splash).
         // Exceptions handled inside method.
@@ -1605,66 +1707,6 @@ public enum FSkin {
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Setting look and feel...");
         ForgeLookAndFeel laf = new ForgeLookAndFeel();
         laf.setForgeLookAndFeel(Singletons.getView().getFrame());
-    }
-    
-    private static void setDefaultFontSize() {
-        Font f = UIManager.getDefaults().getFont("Label.font");
-        if (f != null) {
-            FSkin.defaultFontSize = f.getSize();    
-        }
-    }
-
-    /** @return {@link java.awt.font} font */
-    public static Font getFont() {
-        return FSkin.getFont(FSkin.defaultFontSize);
-    }
-
-    /**
-     * @param size - integer, pixel size
-     * @return {@link java.awt.font} font1
-     */
-    public static Font getFont(final int size) {
-        if (plainFonts.get(size) == null) {
-            plainFonts.put(size, getFont().deriveFont(Font.PLAIN, size));
-        }
-        return plainFonts.get(size);
-    }
-    
-    public static Font getFixedFont(final int size) {
-        if (fixedFonts.get(size) == null) {
-            fixedFonts.put(size, new Font("Monospaced", Font.PLAIN, size));
-        }
-        return fixedFonts.get(size);
-    }
-    
-    public static Font getBoldFont() {
-        return FSkin.getBoldFont(FSkin.defaultFontSize);
-    }        
-
-    /**
-     * @param size - integer, pixel size
-     * @return {@link java.awt.font} font1
-     */
-    public static Font getBoldFont(final int size) {
-        if (boldFonts.get(size) == null) {
-            boldFonts.put(size, getFont().deriveFont(Font.BOLD, size));
-        }
-        return boldFonts.get(size);
-    }
-    
-    public static Font getItalicFont() {
-        return FSkin.getItalicFont(FSkin.defaultFontSize);
-    }            
-    
-    /**
-     * @param size - integer, pixel size
-     * @return {@link java.awt.font} font1
-     */
-    public static Font getItalicFont(final int size) {
-        if (boldFonts.get(size) == null) {
-            italicFonts.put(size, getFont().deriveFont(Font.ITALIC, size));
-        }
-        return italicFonts.get(size);
     }
 
     /**
@@ -1820,18 +1862,6 @@ public enum FSkin {
 
         SkinImage.setImage(s0, isOldStyle ? bimOldFoils.getSubimage(x0, y0, w0, h0) : bimFoils.getSubimage(x0, y0, w0, h0));
     }
-
-    private static void setFont(final int size) {
-        plainFonts.put(size, font.deriveFont(Font.PLAIN, size));
-    }
-
-    private static void setBoldFont(final int size) {
-        boldFonts.put(size, font.deriveFont(Font.BOLD, size));
-    }
-
-    private static void setItalicFont(final int size) {
-        italicFonts.put(size, FSkin.font.deriveFont(Font.ITALIC, size));
-    }
     
     public static boolean isLookAndFeelSet() {
         return ForgeLookAndFeel.isMetalLafSet;
@@ -1977,7 +2007,7 @@ public enum FSkin {
         }
         
         private Font getDefaultFont(String component) {
-            return FSkin.getFont(UIManager.getFont(component).getSize());
+            return FSkin.getFont(UIManager.getFont(component).getSize()).font;
         }
         
         private ArrayList<Object> getColorGradients(Color bottom, Color top) {

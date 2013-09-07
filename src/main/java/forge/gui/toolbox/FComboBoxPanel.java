@@ -2,6 +2,7 @@ package forge.gui.toolbox;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
+
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -11,6 +12,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 
 import forge.Singletons;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -58,10 +60,10 @@ public class FComboBoxPanel<E> extends JPanel {
     
     private void setLabelLayout() {
         if (this.comboBoxCaption != null && !this.comboBoxCaption.isEmpty()) {
-            JLabel comboLabel;
-            comboLabel = new JLabel(this.comboBoxCaption);
-            FSkin.get(comboLabel).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            comboLabel.setFont(FSkin.getBoldFont(12));
+            JLabel comboLabel = new JLabel(this.comboBoxCaption);
+            JLabelSkin<JLabel> labelSkin = FSkin.get(comboLabel);
+            labelSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            labelSkin.setFont(FSkin.getBoldFont(12));
             this.add(comboLabel);            
         }
     }
@@ -72,7 +74,7 @@ public class FComboBoxPanel<E> extends JPanel {
                 FSkin.JComponentSkin<JComboBox<E>> comboBoxSkin = FSkin.get(this.comboBox);
                 comboBoxSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
                 comboBoxSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-                this.comboBox.setFont(FSkin.getFont(12));
+                comboBoxSkin.setFont(FSkin.getFont(12));
                 this.comboBox.setRenderer(new ComplexCellRenderer<E>());
             }
             this.comboBox.setEditable(false);
@@ -97,12 +99,9 @@ public class FComboBoxPanel<E> extends JPanel {
                     lst0, val0, i0, isSelected, cellHasFocus);
 
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
-            lblItem.setFont(FSkin.getFont(12));
+            FSkin.get(lblItem).setFont(FSkin.getFont(12));
             lblItem.setOpaque(isSelected);
             return lblItem;
-
         }
-
     }
-
 }

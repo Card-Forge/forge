@@ -93,7 +93,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
             }
         });
         
-        setFont(FSkin.getFont(12));
+        skin.setFont(FSkin.getFont(12));
         setBorder(null);
         getTableHeader().setBorder(null);
         setRowHeight(18);

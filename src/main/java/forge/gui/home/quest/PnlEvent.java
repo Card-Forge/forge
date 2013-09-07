@@ -58,11 +58,11 @@ class PnlEvent extends JPanel {
 
         // Title and description
         this.rad = new FRadioButton(event.getTitle() + " (" + event.getDifficulty().getTitle() + ")");
-        this.rad.setFont(FSkin.getBoldFont(16));
+        FSkin.get(this.rad).setFont(FSkin.getBoldFont(16));
 
         final FTextArea tarDesc = new FTextArea();
         tarDesc.setText(event.getDescription());
-        tarDesc.setFont(FSkin.getItalicFont(12));
+        FSkin.get(tarDesc).setFont(FSkin.getItalicFont(12));
 
         // Change listener for radio button
         this.rad.addChangeListener(new ChangeListener() {

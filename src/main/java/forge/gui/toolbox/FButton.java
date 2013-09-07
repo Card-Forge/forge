@@ -74,7 +74,7 @@ public class FButton extends JButton implements ILocalRepaint {
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setContentAreaFilled(false);
         this.setMargin(new Insets(0, 25, 0, 25));
-        this.setFont(FSkin.getBoldFont(14));
+        skin.setFont(FSkin.getBoldFont(14));
         this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT);
         this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER);
         this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT);

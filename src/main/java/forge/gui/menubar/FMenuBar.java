@@ -59,7 +59,7 @@ public class FMenuBar extends JMenuBar {
         else { //ensure status is visible on default menu bar
             labelSkin.setForeground(getForeground());
         }
-        lblStatus.setFont(FSkin.getItalicFont(11));
+        labelSkin.setFont(FSkin.getItalicFont(11));
         lblStatus.setOpaque(false);
         add(lblStatus);
     }

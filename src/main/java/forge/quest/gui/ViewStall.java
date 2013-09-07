@@ -34,6 +34,7 @@ import forge.Singletons;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JTextComponentSkin;
 import forge.quest.QuestController;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.bazaar.QuestStallDefinition;
@@ -78,9 +79,10 @@ public class ViewStall extends JPanel {
         // Component styling
         this.setOpaque(false);
 
+        JTextComponentSkin<JTextPane> tpnFluffSkin = FSkin.get(this.tpnFluff);
         this.tpnFluff.setOpaque(false);
-        FSkin.get(this.tpnFluff).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.tpnFluff.setFont(FSkin.getItalicFont(15));
+        tpnFluffSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tpnFluffSkin.setFont(FSkin.getItalicFont(15));
         this.tpnFluff.setFocusable(false);
         this.tpnFluff.setEditable(false);
         this.tpnFluff.setBorder(null);

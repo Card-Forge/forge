@@ -47,7 +47,7 @@ public class LblGroup extends JLabel implements ILocalRepaint {
         super("  " + e0.getTitle());
 
         skin = FSkin.get(this);
-        this.setFont(FSkin.getBoldFont(14));
+        skin.setFont(FSkin.getBoldFont(14));
         skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {
