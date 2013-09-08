@@ -8,6 +8,10 @@ Forge Beta: 09-##-2013 ver 1.4.8
 Release Notes
 -------------
 
+- Commander -
+The Commander gaming mode has been added and is located in the Variant view. This is a work in progress and is not finished at this time. You are invited to play test this variant.
+
+
 - Card Overlays -
 Card overlays are now always displayed regardless of card image size if the display card overlays option is turned on in your user preferences.
 
@@ -101,6 +105,24 @@ Fleecemane Lion
 Kragma Warcaller
 Prophet of Kruphix
 Tymaret, the Murder King
+Arbor Colossus
+Cavern Lampad
+Celestial Archon
+Leafcrown Dryad
+Nimbus Naiad
+Observant Alseid
+Spearpoint Oread
+Glare of Heresy
+Two-headed Cerberus
+Arbor Colossus
+Cavern Lampad
+Celestial Archon
+Leafcrown Dryad
+Nimbus Naiad
+Observant Alseid
+Spearpoint Oread
+Glare of Heresy
+Two-headed Cerberus
 
 
 ------------
