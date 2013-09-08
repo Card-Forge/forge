@@ -95,6 +95,7 @@ public enum FView {
         // Insets panel has background image / texture, which
         // must be instantiated after the skin is loaded.
         pnlInsets = new FPanel(new BorderLayout());
+        pnlInsets.setBorderToggle(false);
 
         // Frame styling
         frmDocument.setMinimumSize(new Dimension(800, 600));
