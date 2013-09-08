@@ -2531,6 +2531,38 @@ public class CardFactoryUtil {
             card.getUnparsedAbilities().add(abilityStr.toString());
         }
 
+        if (card.hasStartOfKeyword("Bestow")) {
+            final int bestowPos = card.getKeywordPosition("Bestow");
+            final String cost = card.getKeyword().get(bestowPos).split(":")[1];
+            card.removeIntrinsicKeyword(card.getKeyword().get(bestowPos));       
+
+            final StringBuilder sbAttach = new StringBuilder();
+            sbAttach.append("SP$ Attach | Cost$ ");
+            sbAttach.append(cost);
+            sbAttach.append(" | AILogic$ Pump | Bestow$ True | ValidTgts$ Creature");
+            final SpellAbility bestow = AbilityFactory.getAbility(sbAttach.toString(), card);
+
+            bestow.setDescription("Bestow " + cost + " (If you cast this card for" +
+                  " its bestow cost, it's an Aura spell with enchant creature. It" +
+                  " becomes a creature again if it's not attached to a creature.)");
+            bestow.setStackDescription("Bestow - " + card.getName());
+            bestow.setBasicSpell(false);
+            card.addSpellAbility(bestow);
+            card.getUnparsedAbilities().add(sbAttach.toString());
+
+            // Second, a static trigger when bestow cost is paid to animate Aura
+            final StringBuilder sbTrigger = new StringBuilder();
+            sbTrigger.append("Mode$ SpellCast | ValidCard$ Card.Self | Bestow$ True | ");
+            sbTrigger.append("Execute$ BestowAnimateSelf | Static$ True");
+
+            final StringBuilder sbSVar = new StringBuilder();
+            sbSVar.append("AB$ Animate | Cost$ 0 | Defined$ Self | OverwriteTypes$ True");
+            sbSVar.append(" | Types$ Enchantment,Aura | Keywords$ Enchant creature | Permanent$ True");
+            card.setSVar("BestowAnimateSelf", sbSVar.toString());
+            final Trigger animateSelf = TriggerHandler.parseTrigger(sbTrigger.toString(), card, true);
+            card.addTrigger(animateSelf);
+        }
+
         setupEtbKeywords(card);
     }
 

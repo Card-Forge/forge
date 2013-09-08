@@ -44,6 +44,7 @@ import forge.FThreads;
 import forge.GameEntity;
 import forge.GameLogEntryType;
 import forge.ITargetable;
+import forge.card.CardDb;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
@@ -908,7 +909,15 @@ public class GameAction {
     
         // Check if Card Aura is attached to is a legal target
         final GameEntity entity = c.getEnchanting();
-        final SpellAbility sa = c.getSpells().get(0);
+        SpellAbility sa = c.getSpells().get(0);
+        if (c.isBestowed()) {
+            for (SpellAbility s : c.getSpellAbilities()) {
+                if (s.getApi() == ApiType.Attach && s.hasParam("Bestow")) {
+                    sa = s;
+                    break;
+                }
+            }
+        }
 
         TargetRestrictions tgt = null;
         if (sa != null) {
@@ -921,7 +930,17 @@ public class GameAction {
 
             if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c) || (perm.isPhasedOut() && !c.isPhasedOut())) {
                 c.unEnchantEntity(perm);
-                this.moveToGraveyard(c);
+                if (c.isBestowed()) {
+                    // TODO : support for tokens
+                    ArrayList<String> type = CardFactory.getCard(CardDb.getCard(c), c.getController()).getType();
+                    final long timestamp = game.getNextTimestamp();
+                    c.addChangedCardTypes(type, Lists.newArrayList("Aura"), false, false, false, false, timestamp);
+                    c.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);
+                    c.setBestow(false);
+                    game.fireEvent(new GameEventCardStatsChanged(c));
+                } else {
+                    this.moveToGraveyard(c);
+                }
                 checkAgain = true;
             }
         } else if (entity instanceof Player) {
@@ -943,7 +962,17 @@ public class GameAction {
         }
 
         if (c.isInPlay() && !c.isEnchanting()) {
-            this.moveToGraveyard(c);
+            if (c.isBestowed()) {
+                // TODO : support for tokens
+                ArrayList<String> type = CardFactory.getCard(CardDb.getCard(c), c.getController()).getType();
+                final long timestamp = game.getNextTimestamp();
+                c.addChangedCardTypes(type, Lists.newArrayList("Aura"), false, false, false, false, timestamp);
+                c.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);
+                c.setBestow(false);
+                game.fireEvent(new GameEventCardStatsChanged(c));
+            } else {
+                this.moveToGraveyard(c);
+            }
             checkAgain = true;
         }
         return checkAgain;

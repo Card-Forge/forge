@@ -184,6 +184,11 @@ public class TriggerSpellAbilityCast extends Trigger {
                 return true;
             }
         }
+        if (this.mapParams.containsKey("Bestow")) {
+            if (!spellAbility.hasParam("Bestow")) {
+                return false;
+            }
+        }
 
         return true;
     }

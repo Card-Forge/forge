@@ -172,6 +172,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean monstrous = false;
     private int monstrosityNum = 0;
 
+    private boolean bestow = false;
     private boolean suspendCast = false;
     private boolean suspend = false;
 
@@ -7770,6 +7771,28 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
+     * Setter for the field <code>bestow</code>.
+     * </p>
+     * 
+     * @param b
+     *            a boolean.
+     */
+    public final void setBestow(final boolean b) {
+        this.bestow = b;
+    }
+
+    /**
+     * <p>
+     * isBestowed.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isBestowed() {
+        return this.bestow;
+    }
+    /**
+     * <p>
      * Setter for the field <code>monstrosityNum</code>.
      * </p>
      * 
@@ -8225,7 +8248,15 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean
      */
     public final boolean canBeEnchantedBy(final Card aura) {
-        final SpellAbility sa = aura.getFirstSpellAbility();
+        SpellAbility sa = aura.getFirstSpellAbility();
+        if (aura.isBestowed()) {
+            for (SpellAbility s : aura.getSpellAbilities()) {
+                if (s.getApi() == ApiType.Attach && s.hasParam("Bestow")) {
+                    sa = s;
+                    break;
+                }
+            }
+        }
         TargetRestrictions tgt = null;
         if (sa != null) {
             tgt = sa.getTargetRestrictions();
