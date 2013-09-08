@@ -1406,7 +1406,7 @@ public enum FSkin {
         return fixedFont;
     }
 
-    /** 
+    /**
      * @return {@link forge.gui.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getFont() {
@@ -1421,12 +1421,12 @@ public enum FSkin {
         return SkinFont.get(Font.PLAIN, size);
     }
     
-    /** 
+    /**
      * @return {@link forge.gui.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getBoldFont() {
         return FSkin.getBoldFont(FSkin.defaultFontSize);
-    }        
+    }
 
     /**
      * @param size - integer, pixel size
@@ -1436,12 +1436,12 @@ public enum FSkin {
         return SkinFont.get(Font.BOLD, size);
     }
     
-    /** 
+    /**
      * @return {@link forge.gui.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getItalicFont() {
         return FSkin.getItalicFont(FSkin.defaultFontSize);
-    }            
+    }
     
     /**
      * @param size - integer, pixel size
