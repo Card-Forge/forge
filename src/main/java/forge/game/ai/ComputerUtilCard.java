@@ -497,6 +497,8 @@ public class ComputerUtilCard {
             value -= 10;
         } else if (c.hasKeyword("CARDNAME attacks each turn if able.")) {
             value -= 10;
+        } else if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able.")) {
+            value -= 10;
         } else if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
             value -= toughness * 5;
         }

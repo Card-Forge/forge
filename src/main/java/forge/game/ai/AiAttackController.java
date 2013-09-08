@@ -519,7 +519,8 @@ public class AiAttackController {
             }
             boolean mustAttack = false;
             for (String s : attacker.getKeyword()) {
-                if (s.equals("CARDNAME attacks each turn if able.")) {
+                if (s.equals("CARDNAME attacks each turn if able.")
+                        || s.startsWith("CARDNAME attacks specific player each combat if able")) {
                     mustAttack = true;
                     break;
                 }

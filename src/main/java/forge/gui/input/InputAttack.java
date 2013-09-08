@@ -23,6 +23,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardPredicates;
 import forge.GameEntity;
+import forge.card.ability.AbilityUtils;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -76,13 +77,19 @@ public class InputAttack extends InputSyncronizedBase {
 
         List<Card> possibleAttackers = playerAttacks.getCardsIn(ZoneType.Battlefield);
         for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
-            if (!c.hasKeyword("CARDNAME attacks each turn if able."))
-                continue; // do not force
-
-            for(GameEntity def : defenders ) {
-                if( CombatUtil.canAttack(c, def, combat) ) {
-                    combat.addAttacker(c, currentDefender);
-                    break;
+            if (c.hasKeyword("CARDNAME attacks each turn if able.")) {
+                for(GameEntity def : defenders ) {
+                    if( CombatUtil.canAttack(c, def, combat) ) {
+                        combat.addAttacker(c, currentDefender);
+                        break;
+                    }
+                }
+            } else if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
+                final int i = c.getKeywordPosition("CARDNAME attacks specific player each combat if able");
+                final String defined = c.getKeyword().get(i).split(":")[1];
+                final Player player = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
+                if (player != null && CombatUtil.canAttack(c, player, combat)) {
+                    combat.addAttacker(c, player);
                 }
             }
         }
@@ -115,7 +122,8 @@ public class InputAttack extends InputSyncronizedBase {
     @Override
     protected final void onCardSelected(final Card card, boolean isMetaDown) {
         final List<Card> att = combat.getAttackers();
-        if (isMetaDown && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")) {
+        if (isMetaDown && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")
+                && !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
             // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
             combat.removeFromCombat(card);
             CMatchUI.SINGLETON_INSTANCE.setUsedToPay(card, false);

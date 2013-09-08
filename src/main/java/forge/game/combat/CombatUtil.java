@@ -34,6 +34,7 @@ import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
+import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -860,6 +861,12 @@ public class CombatUtil {
             } else if (keyword.equals("CARDNAME can't attack during extra turns.")) {
                 if (c.getGame().getPhaseHandler().getPlayerTurn().isPlayingExtraTurn())
                     return false;
+            } else if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
+                final String defined = keyword.split(":")[1];
+                final Player player = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
+                if (!defender.equals(player)) {
+                    return false;
+                }
             }
         }
 

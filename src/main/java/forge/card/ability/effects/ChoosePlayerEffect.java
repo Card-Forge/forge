@@ -8,6 +8,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
+import forge.util.Aggregates;
 
 public class ChoosePlayerEffect extends SpellAbilityEffect {
 
@@ -35,6 +36,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                 sa.getSourceCard(), sa.getParam("Choices"), sa) : sa.getActivatingPlayer().getGame().getPlayers();
 
         final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a player";
+        final boolean random = sa.hasParam("Random");
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
@@ -42,9 +44,12 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                 // Was if (sa.getActivatingPlayer().isHuman()) but defined player was being
                 // overwritten by activatingPlayer (or controller if no activator was set).
                 // Revert if it causes issues and remove Goblin Festival from card database.
-
-                Player chosen = choices.isEmpty() ? null : p.getController().chooseSinglePlayerForEffect(choices, sa, choiceDesc);
-
+                Player chosen;
+                if (random) {
+                    chosen = choices.isEmpty() ? null : Aggregates.random(choices);
+                } else {
+                    chosen = choices.isEmpty() ? null : p.getController().chooseSinglePlayerForEffect(choices, sa, choiceDesc);
+                }
                 if( null != chosen )
                     card.setChosenPlayer(chosen);
             }
