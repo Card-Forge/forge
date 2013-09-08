@@ -97,6 +97,12 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
 
     private void done() {
         ButtonUtil.reset();
+        if (isCommander) {
+            // Clear the "selected" icon after clicking the done button
+            for(Card c : this.selected) {
+                CMatchUI.SINGLETON_INSTANCE.setUsedToPay(c, false);
+            }
+        }
         stop();
     }
 
