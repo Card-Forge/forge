@@ -76,6 +76,11 @@ public class EffectAi extends SpellAbilityAi {
                 randomReturn = true;
             } else if (logic.equals("Always")) {
                 randomReturn = true;
+            } else if (logic.equals("Main2")) {
+                if (phase.getPhase().isBefore(PhaseType.MAIN2)) {
+                    return false;
+                }
+                randomReturn = true;
             } else if (logic.equals("Evasion")) {
                 List<Card> comp = ai.getCreaturesInPlay();
                 List<Card> human = opp.getCreaturesInPlay();
