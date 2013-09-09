@@ -46,6 +46,14 @@ New Phenomenons
 Interplanar Tunnel
 
 
+-----------
+New Schemes
+-----------
+
+Rotted Ones, Lay Siege
+The Dead Shall Serve
+
+
 -----------------------
 New Theros branch Cards
 -----------------------
@@ -123,6 +131,7 @@ Observant Alseid
 Spearpoint Oread
 Glare of Heresy
 Two-headed Cerberus
+Medomai the Ageless
 
 
 ------------
