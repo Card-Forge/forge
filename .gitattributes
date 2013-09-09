@@ -9258,6 +9258,7 @@ res/cardsfolder/r/rotcrown_ghoul.txt -text
 res/cardsfolder/r/roterothopter.txt svneol=native#text/plain
 res/cardsfolder/r/rotlung_reanimator.txt svneol=native#text/plain
 res/cardsfolder/r/rotted_hystrix.txt svneol=native#text/plain
+res/cardsfolder/r/rotted_ones_lay_siege.txt -text
 res/cardsfolder/r/rotting_fensnake.txt -text
 res/cardsfolder/r/rotting_giant.txt -text
 res/cardsfolder/r/rotting_legion.txt svneol=native#text/plain
