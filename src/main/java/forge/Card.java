@@ -2451,10 +2451,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sb.append(keyword.replace(":", " ")).append("\r\n");
             }
             if (keyword.equals("CARDNAME can't be countered.")
-                    || keyword.startsWith("May be played")
+                    || keyword.startsWith("May be played") || keyword.startsWith("Conspire")
                     || keyword.startsWith("Cascade") || keyword.startsWith("Wither")
                     || (keyword.startsWith("Epic") && !sb.toString().contains("Epic"))
-                    || (keyword.startsWith("Conspire") && !sb.toString().contains("Conspire"))
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
                     || (keyword.startsWith("Multikicker") && !sb.toString().contains("Multikicker"))) {
                 sb.append(kw.get(i)).append("\r\n");
