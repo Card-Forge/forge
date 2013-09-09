@@ -947,6 +947,8 @@ public class AbilityUtils {
             if (!players.contains(p)) {
                 players.add(p);
             }
+        } else if (defined.equals("CardOwner")) {
+            players.add(card.getOwner());
         } else if (defined.startsWith("PlayerNamed_")) {
             for (Player p : game.getPlayers()) {
                 System.out.println("Named player " + defined.substring(12));
