@@ -845,23 +845,32 @@ public class ComputerUtilCombat {
         for (SpellAbility ability : defender.getAllSpellAbilities()) {
             if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
                 continue;
-            }
-            if (ability.getApi() != ApiType.Pump) {
+            }                
+            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
                 continue;
             }
 
-            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
-                continue;
-            }
-
-            if (!ability.hasParam("NumAtt")) {
-                continue;
-            }
-
-            if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
-                int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
-                if (pBonus > 0) {
-                    power += pBonus;
+            if (ability.getApi() == ApiType.Pump) {
+                if (!ability.hasParam("NumAtt")) {
+                    continue;
+                }
+    
+                if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
+                    int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
+                    if (pBonus > 0) {
+                        power += pBonus;
+                    }
+                }
+            } else if (ability.getApi() == ApiType.PutCounter) {
+                if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
+                    continue;
+                }
+                
+                if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
+                    int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("CounterNum"), ability);
+                    if (pBonus > 0) {
+                        power += pBonus;
+                    }
                 }
             }
         }
@@ -966,18 +975,27 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
+                continue;
+            }
+
             if (ability.getApi() != ApiType.Pump || !ability.hasParam("NumDef")) {
-                continue;
-            }
-
-            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
-                continue;
-            }
-
-            if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
-                int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
-                if (tBonus > 0) {
-                    toughness += tBonus;
+                if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
+                    int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
+                    if (tBonus > 0) {
+                        toughness += tBonus;
+                    }
+                }
+            } else if (ability.getApi() == ApiType.PutCounter) {
+                if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
+                    continue;
+                }
+                
+                if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
+                    int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("CounterNum"), ability);
+                    if (tBonus > 0) {
+                        toughness += tBonus;
+                    }
                 }
             }
         }
@@ -1123,22 +1141,31 @@ public class ComputerUtilCombat {
             if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
                 continue;
             }
-            if (ability.getApi() != ApiType.Pump) {
+            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
                 continue;
             }
 
-            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
-                continue;
-            }
-
-            if (!ability.hasParam("NumAtt")) {
-                continue;
-            }
-
-            if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-                int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
-                if (pBonus > 0) {
-                    power += pBonus;
+            if (ability.getApi() == ApiType.Pump) {
+                if (!ability.hasParam("NumAtt")) {
+                    continue;
+                }
+    
+                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
+                    int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
+                    if (pBonus > 0) {
+                        power += pBonus;
+                    }
+                }
+            } else if (ability.getApi() == ApiType.PutCounter) {
+                if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
+                    continue;
+                }
+                
+                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
+                    int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("CounterNum"), ability);
+                    if (pBonus > 0) {
+                        power += pBonus;
+                    }
                 }
             }
         }
@@ -1295,18 +1322,27 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed") || ability.hasParam("ActivationZone")) {
+                continue;
+            }
+
             if (ability.getApi() != ApiType.Pump || !ability.hasParam("NumDef")) {
-                continue;
-            }
-
-            if (ability.hasParam("ActivationPhases") || ability.hasParam("SorcerySpeed")) {
-                continue;
-            }
-
-            if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-                int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
-                if (tBonus > 0) {
-                    toughness += tBonus;
+                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
+                    int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
+                    if (tBonus > 0) {
+                        toughness += tBonus;
+                    }
+                }
+            } else if (ability.getApi() == ApiType.PutCounter) {
+                if (!ability.hasParam("CounterType") || !ability.getParam("CounterType").equals("P1P1")) {
+                    continue;
+                }
+                
+                if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
+                    int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("CounterNum"), ability);
+                    if (tBonus > 0) {
+                        toughness += tBonus;
+                    }
                 }
             }
         }
