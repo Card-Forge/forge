@@ -277,6 +277,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 });
             }
+            if (origin != null && origin.isKnown()) {
+                list = CardLists.getValidCards(list, type, source.getController(), source);
+            }
 
             String num = sa.getParam("ChangeNum");
             if (num != null) {
