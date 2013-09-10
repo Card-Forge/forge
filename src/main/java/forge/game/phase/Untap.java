@@ -189,9 +189,6 @@ public class Untap extends Phase {
                         }
                     }
                 }
-            } else if ((c.getCounters(CounterType.WIND) > 0) && game.isCardInPlay("Freyalise's Winds")) {
-                // remove a WIND counter instead of untapping
-                c.subtractCounter(CounterType.WIND, 1);
             } else {
                 c.untap();
             }
