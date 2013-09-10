@@ -132,6 +132,13 @@ Spearpoint Oread
 Glare of Heresy
 Two-headed Cerberus
 Medomai the Ageless
+Boon Satyr
+Nighthowler
+Purphoros Emissary
+Thassa's Emissary
+Bident of Thassa
+Triton Fortune Hunter
+Wavecrash Triton
 
 
 ------------
