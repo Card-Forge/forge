@@ -3107,11 +3107,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link forge.game.player.Player} object.
      */
     public final Player getController() {
-        
-        if (!this.tempControllers.isEmpty()) {
-            final long lastTimestamp = this.tempControllers.lastKey();
+        Entry<Long, Player> lastEntry = this.tempControllers.lastEntry();
+        if (lastEntry != null) {
+            final long lastTimestamp = lastEntry.getKey();
             if (lastTimestamp > this.controllerTimestamp) {
-                return this.tempControllers.lastEntry().getValue();
+                return lastEntry.getValue();
             }
         }
         if (this.controller != null) {
