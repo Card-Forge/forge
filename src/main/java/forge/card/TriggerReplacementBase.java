@@ -220,10 +220,13 @@ public abstract class TriggerReplacementBase {
             }
             List<Card> list = new ArrayList<Card>();
             if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
+                for (Player p : this.getHostCard().getController().getOpponents())
+                    list.addAll(p.getCardsIn(presentZone));
+
             }
             if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getOpponent().getCardsIn(presentZone));
+                for (Player p : this.getHostCard().getController().getOpponents())
+                    list.addAll(p.getCardsIn(presentZone));
             }
     
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
