@@ -1,5 +1,5 @@
 [metadata]
-Code=HVM
+Code=DDL
 Date=2013-09-06
 Name=Duel Decks: Heroes vs. Monsters
 Type=Duel_Decks
