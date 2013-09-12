@@ -58,7 +58,7 @@ public class DigEffect extends SpellAbilityEffect {
         final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone")) : ZoneType.Hand;
         final ZoneType destZone2 = sa.hasParam("DestinationZone2") ? ZoneType.smartValueOf(sa.getParam("DestinationZone2")) : ZoneType.Library;
 
-        final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;
+        int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;
         int destZone1ChangeNum = 1;
         final boolean mitosis = sa.hasParam("Mitosis");
         String changeValid = sa.hasParam("ChangeValid") ? sa.getParam("ChangeValid") : "";
@@ -280,6 +280,9 @@ public class DigEffect extends SpellAbilityEffect {
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
                         
                         if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
+                            if (libraryPosition == -1 || libraryPosition > library.size()) {
+                                libraryPosition = library.size();
+                            }
                             c = game.getAction().moveTo(zone, c, libraryPosition);
                         } else {
                             c = game.getAction().moveTo(zone, c);
