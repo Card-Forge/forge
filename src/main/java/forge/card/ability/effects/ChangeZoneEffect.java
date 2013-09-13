@@ -436,7 +436,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition);
 
                 // for things like Gaea's Blessing
-                if (sa.hasParam("Shuffle")) {
+                if (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
                     tgtC.getOwner().shuffle();
                 }
             } else {
@@ -715,10 +715,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
         }
 
-        final String remember = sa.getParam("RememberChanged");
+        final boolean remember = sa.hasParam("RememberChanged");
         final boolean champion = sa.hasParam("Champion");
-        final String forget = sa.getParam("ForgetChanged");
-        final String imprint = sa.getParam("Imprint");
+        final boolean forget = sa.hasParam("ForgetChanged");
+        final boolean imprint = sa.hasParam("Imprint");
         final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : "Select a card from " + origin;
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(card, totalcmc, sa);
@@ -880,14 +880,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
                 }
                 
-                if (remember != null) {
+                if (remember) {
                     card.addRemembered(movedCard);
                 }
-                if (forget != null) {
-                    sa.getSourceCard().getRemembered().remove(movedCard);
+                if (forget) {
+                    card.removeRemembered(movedCard);
                 }
                 // for imprinted since this doesn't use Target
-                if (imprint != null) {
+                if (imprint) {
                     card.addImprinted(movedCard);
                 }
                 if (totalcmc != null) {

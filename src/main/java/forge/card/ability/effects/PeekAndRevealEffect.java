@@ -29,7 +29,8 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         //RevealValid$ Card.sharesCreatureTypeWith | RevealOptional$ True | RememberRevealed$ True
         Card source = sa.getSourceCard();
-        boolean rememberRevealed = sa.hasParam("RememberRevealed");
+        final boolean rememberRevealed = sa.hasParam("RememberRevealed");
+        final boolean imprintRevealed = sa.hasParam("ImprintRevealed");
         String revealValid = sa.hasParam("RevealValid") ? sa.getParam("RevealValid") : "Card";
         String peekAmount = sa.hasParam("PeekAmount") ? sa.getParam("PeekAmount") : "1";
         int numPeek = AbilityUtils.calculateAmount(sa.getSourceCard(), peekAmount, sa);
@@ -63,6 +64,11 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 if (rememberRevealed) {
                     for(Card c : revealableCards) {
                         source.addRemembered(CardUtil.getLKICopy(c));
+                    }
+                }
+                if (imprintRevealed) {
+                    for(Card c : revealableCards) {
+                        source.addImprinted(CardUtil.getLKICopy(c));
                     }
                 }
             } else if (sa.hasParam("RememberPeeked")) {

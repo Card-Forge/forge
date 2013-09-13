@@ -1,0 +1,11 @@
+Name:Truth or Tale
+ManaCost:1 U
+Types:Instant
+A:SP$ PeekAndReveal | Cost$ 1 U | PeekAmount$ 5 | NoPeek$ True | ImprintRevealed$ True | SubAbility$ DBTwoPile | SpellDescription$ Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put a card from the chosen pile into your hand, then put all other cards revealed this way on the bottom of your library in any order.
+SVar:DBTwoPile:DB$ TwoPiles | Chooser$ Opponent | DefinedCards$ Imprinted | Separator$ You | ChosenPile$ DBHand | AILogic$ Worst
+SVar:DBHand:DB$ ChooseCard | Defined$ You | Choices$ Card.IsRemembered | ChoiceZone$ Library | Mandatory$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Library | Destination$ Hand | SubAbility$ DBMoveToBottom
+SVar:DBMoveToBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsImprinted | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/truth_or_tale.jpg
+Oracle:Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put a card from the chosen pile into your hand, then put all other cards revealed this way on the bottom of your library in any order.

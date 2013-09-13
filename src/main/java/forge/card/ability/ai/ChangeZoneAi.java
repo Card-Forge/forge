@@ -1161,10 +1161,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<Card> fetched = new ArrayList<Card>();
-        final String remember = sa.getParam("RememberChanged");
-        final String forget = sa.getParam("ForgetChanged");
+        final boolean remember = sa.hasParam("RememberChanged");
+        final boolean forget = sa.hasParam("ForgetChanged");
         final boolean champion = sa.hasParam("Champion");
-        final String imprint = sa.getParam("Imprint");
+        final boolean imprint = sa.hasParam("Imprint");
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(card, totalcmc, sa);
 
@@ -1371,14 +1371,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
             }
             
-            if (remember != null) {
+            if (remember) {
                 card.addRemembered(movedCard);
             }
-            if (forget != null) {
-                sa.getSourceCard().getRemembered().remove(movedCard);
+            if (forget) {
+                card.removeRemembered(movedCard);
             }
             // for imprinted since this doesn't use Target
-            if (imprint != null) {
+            if (imprint) {
                 card.addImprinted(movedCard);
             }
         }
