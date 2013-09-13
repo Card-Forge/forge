@@ -46,6 +46,13 @@ New Phenomenons
 Interplanar Tunnel
 
 
+----------
+New Planes
+----------
+
+Stairs to Infinity
+
+
 -----------
 New Schemes
 -----------
@@ -139,6 +146,35 @@ Thassa's Emissary
 Bident of Thassa
 Triton Fortune Hunter
 Wavecrash Triton
+Hero's Downfall
+Hythonia the Cruel
+Tormented Hero
+Ashen Rider
+Destructive Revelry
+Reaper of the Wilds
+Bow of Nylea
+Spear of Heliod
+Whip of Erebos
+Heliod's Emissary
+Ordeal of Erebos
+Ordeal of Heliod
+Ordeal of Nylea
+Ordeal of Thassa
+Dauntless Onslaught
+Fabled Hero
+Favored Hoplite
+Soldier of the Pantheon
+Dissolve
+Swan Song
+Anthousa, Setessan Hero
+Hunt the Hunter
+Artisan of Forms
+Master of Waves
+Prognostic Sphinx
+Steam Augury
+Triad of Fates
+Centaur Battlemaster
+Mistcutter Hydra
 
 
 ------------
