@@ -199,7 +199,13 @@ public enum CSubmenuPreferences implements ICDoc {
         File f = new File(fd);
         f.delete();      
     }
-                        
+    
+    public void refreshComboBoxes() {
+        initializeGameLogVerbosityComboBox();
+        initializeAiProfilesComboBox();
+        initializeSkinsComboBox();
+    }
+
     private void initializeGameLogVerbosityComboBox() {
         FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
         FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();

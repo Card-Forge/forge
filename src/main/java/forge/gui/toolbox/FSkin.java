@@ -57,6 +57,7 @@ import org.apache.commons.lang.WordUtils;
 import forge.FThreads;
 import forge.Singletons;
 import forge.gui.GuiUtils;
+import forge.gui.home.settings.CSubmenuPreferences;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.TypeUtil;
@@ -1534,6 +1535,7 @@ public enum FSkin {
         
         //refresh certain components skinned via look and feel
         Singletons.getControl().getMenuBar().refresh();
+        CSubmenuPreferences.SINGLETON_INSTANCE.refreshComboBoxes();
     }
 
     /**
