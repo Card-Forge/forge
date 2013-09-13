@@ -40,7 +40,9 @@ import java.util.Map.Entry;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -1903,6 +1905,10 @@ public enum FSkin {
                     setComboBoxLookAndFeel();
                     setTabbedPaneLookAndFeel();
                     setButtonLookAndFeel();
+                    
+                    if (!onInit) {
+                        refreshComboBoxes(appFrame);
+                    }
                 }
             }
             onInit = false;
@@ -2004,6 +2010,29 @@ public enum FSkin {
             UIManager.put("Button.select", HIGHLIGHT_COLOR);
             UIManager.put("Button.focus", FORE_COLOR.darker());
             UIManager.put("Button.rollover", false);
+        }
+        
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+        private void refreshComboBoxes(final JFrame appFrame) {
+            ArrayList<JComboBox> comboBoxes = TypeUtil.findAllComponents(JComboBox.class, appFrame);
+            for (JComboBox comboBox : comboBoxes) {
+                //backup model
+                ComboBoxModel model = comboBox.getModel();
+                Object selectedItem = model.getSelectedItem();
+                ArrayList<Object> items = new ArrayList<Object>();
+                int count = model.getSize();
+                for(int i = 0; i < count; i++) {
+                    items.add(model.getElementAt(i));
+                }
+
+                comboBox.removeAllItems();
+                
+                //restore model backup
+                for(int i = 0; i < count; i++) {
+                    comboBox.addItem(items.get(i));
+                }
+                comboBox.setSelectedItem(selectedItem);
+            }
         }
         
         /**
