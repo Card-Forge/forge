@@ -423,24 +423,32 @@ public enum FSkin {
         }
         
         public void setForegroundImage(SkinImage skinIcon) {
+            this.comp.setForegroundImage(skinIcon.image); //must call this first since it will call resetForegroundImage 
             this.foregroundImage = skinIcon;
-            this.comp.setForegroundImage(skinIcon.image);
             this.needRepaintOnReapply = true; //foreground image draw during paint
         }
         
+        public void resetForegroundImage() {
+            this.foregroundImage = null;
+        }
+        
         public void setBackgroundTexture(SkinImage skinIcon) {
+            this.comp.setBackgroundTexture(skinIcon.image); //must call this first since it will call resetBackgroundTexture 
             this.backgroundTexture = skinIcon;
-            this.comp.setBackgroundTexture(skinIcon.image);
             this.needRepaintOnReapply = true; //background texture drawn during paint
+        }
+        
+        public void resetBackgroundTexture() {
+            this.backgroundTexture = null;
         }
         
         @Override
         protected void reapply() {
             if (this.foregroundImage != null) {
-                this.comp.setForegroundImage(this.foregroundImage.image);
+                this.setForegroundImage(this.foregroundImage); //use skin function so foregroundImage field retained
             }
             if (this.backgroundTexture != null) {
-                this.comp.setBackgroundTexture(this.backgroundTexture.image);
+                this.setBackgroundTexture(this.backgroundTexture); //use skin function so backgroundTexture field retained
             }
             super.reapply();
         }

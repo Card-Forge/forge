@@ -147,6 +147,8 @@ public class FPanel extends JPanel implements ILocalRepaint {
 
     /** @param img0 &emsp; {@link java.awt.Image} */
     public void setForegroundImage(final Image img0) {
+        skin.resetForegroundImage(); //must reset if non-skin image set
+
         if (img0 == null) {
             this.foregroundImage = null;
             return;
@@ -193,6 +195,8 @@ public class FPanel extends JPanel implements ILocalRepaint {
 
     /** @param img0 &emsp; {@link java.awt.Image} */
     public void setBackgroundTexture(final Image img0) {
+        skin.resetBackgroundTexture(); //must reset if non-skin image set
+
         if (img0 == null) { return; }
 
         this.backgroundTexture = img0;
