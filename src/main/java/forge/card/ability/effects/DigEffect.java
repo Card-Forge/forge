@@ -315,27 +315,20 @@ public class DigEffect extends SpellAbilityEffect {
                     }
 
                     // now, move the rest to destZone2
-                    if (destZone2.equals(ZoneType.Library)) {
-                        if (choser.isHuman()) {
-                            String prompt = "Put the rest on top of the library in any order";
-                            if (libraryPosition2 == -1) {
-                                prompt = "Put the rest on the bottom of the library in any order";
-                            }
-                            // put them in any order
-                            while (rest.size() > 0) {
-                                Card chosen;
-                                if (!skipReorder && rest.size() > 1) {
-          
-                                    chosen = GuiChoose.one(prompt, rest);
-                                } else {
-                                    chosen = rest.get(0);
-                                }
-                                game.getAction().moveToLibrary(chosen, libraryPosition2);
-                                rest.remove(chosen);
-                            }
-                        } else { // Computer
-                            for (int i = 0; i < rest.size(); i++) {
-                                game.getAction().moveToLibrary(rest.get(i), libraryPosition2);
+                    if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck || destZone2 == ZoneType.SchemeDeck) {
+                        List<Card> afterOrder = rest;
+                        if (!skipReorder && rest.size() > 1) {
+                            afterOrder = choser.getController().orderMoveToZoneList(rest, destZone2);
+                        }
+                        if (libraryPosition2 != -1) {
+                            // Closest to top
+                            Collections.reverse(afterOrder);
+                        }
+                        for (final Card c : afterOrder) {
+                            if (destZone2 == ZoneType.Library) {
+                                game.getAction().moveToLibrary(c, libraryPosition2);
+                            } else {
+                                game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2);
                             }
                         }
                     } else {
@@ -350,7 +343,6 @@ public class DigEffect extends SpellAbilityEffect {
                                 }
                             }
                         }
-
                     }
                 }
             }

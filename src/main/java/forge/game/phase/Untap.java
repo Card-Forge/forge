@@ -28,7 +28,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
-import forge.CounterType;
 import forge.GameEntity;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;

@@ -231,7 +231,8 @@ public class GameAction {
                 game.getCombat().removeFromCombat(c);
                 
             }
-            if (zoneFrom.is(ZoneType.Library) && zoneFrom == zoneTo && position.equals(zoneFrom.size()) && position != 0) {
+            if ((zoneFrom.is(ZoneType.Library) || zoneFrom.is(ZoneType.PlanarDeck) || zoneFrom.is(ZoneType.SchemeDeck))
+                    && zoneFrom == zoneTo && position.equals(zoneFrom.size()) && position != 0) {
                 position--;
             }
             zoneFrom.remove(c);
@@ -610,6 +611,27 @@ public class GameAction {
             libPosition = library.size();
         }
         return this.changeZone(game.getZoneOf(c), library, c, libPosition);
+    }
+
+    /**
+     * <p>
+     * moveToVariantDeck.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param zone
+     *            a {@link forge.Card} object.
+     * @param libPosition
+     *            a int.
+     * @return a {@link forge.Card} object.
+     */
+    public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition) {
+        final PlayerZone deck = c.getOwner().getZone(zone);
+        if (deckPosition == -1 || deckPosition > deck.size()) {
+            deckPosition = deck.size();
+        }
+        return this.changeZone(game.getZoneOf(c), deck, c, deckPosition);
     }
 
     /**

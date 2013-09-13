@@ -397,12 +397,20 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public List<Card> orderMoveToZoneList(List<Card> cards, ZoneType destinationZone) {
-        if (destinationZone == ZoneType.Library) {
-            return GuiChoose.order("Choose order of cards to put into the library", "Closest to top", 0, cards, null, null);
-        } else if (destinationZone == ZoneType.Battlefield) {
-            return GuiChoose.order("Choose order of cards to put onto the battlefield", "Put first", 0, cards, null, null);
-        } else if (destinationZone == ZoneType.Graveyard) {
-            return GuiChoose.order("Choose order of cards to put into the graveyard", "Closest to bottom", 0, cards, null, null);
+        switch (destinationZone) {
+            case Library:
+                return GuiChoose.order("Choose order of cards to put into the library", "Closest to top", 0, cards, null, null);
+            case Battlefield:
+                return GuiChoose.order("Choose order of cards to put onto the battlefield", "Put first", 0, cards, null, null);
+            case Graveyard:
+                return GuiChoose.order("Choose order of cards to put into the graveyard", "Closest to bottom", 0, cards, null, null);
+            case PlanarDeck:
+                return GuiChoose.order("Choose order of cards to put into the planar deck", "Closest to top", 0, cards, null, null);
+            case SchemeDeck:
+                return GuiChoose.order("Choose order of cards to put into the scheme deck", "Closest to top", 0, cards, null, null);
+            default:
+                System.out.println("ZoneType " + destinationZone + " - Not Ordered");
+                break;
         }
         return cards;
     }
