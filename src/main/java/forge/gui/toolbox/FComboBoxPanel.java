@@ -28,7 +28,7 @@ public class FComboBoxPanel<E> extends JPanel {
     public FComboBoxPanel(String comboBoxCaption) {
         super();
         this.comboBoxCaption = comboBoxCaption;
-        applyLayoutAndSkin();        
+        applyLayoutAndSkin();
     }
             
     public void setComboBox(JComboBox<E> comboBox, E selectedItem) {
