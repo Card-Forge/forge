@@ -156,7 +156,7 @@ public class FModel {
         FThreads.assertExecutedByEdt(false);
         final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true, initWithUi ? FView.SINGLETON_INSTANCE.getSplash().getProgressBar() : null);
         // this fills in our map of card names to Card instances.
-        CardDb.setup(reader.loadCards(), editions.getOrderedEditions());
+        CardDb.setup(reader.loadCards(), editions);
 
  
         this.formats = new FormatCollection("res/blockdata/formats.txt");

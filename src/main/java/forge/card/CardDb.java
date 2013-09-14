@@ -63,7 +63,7 @@ public final class CardDb implements ICardDatabase {
         return CardDb.variantCards;
     }
 
-    public static void setup(final Iterable<CardRules> rules, Iterable<CardEdition> editions) {
+    public static void setup(final Iterable<CardRules> rules, EditionCollection editions) {
         if (CardDb.commonCards != null) {
             throw new RuntimeException("CardDb has already been initialized, don't do it twice please");
         }
@@ -84,12 +84,14 @@ public final class CardDb implements ICardDatabase {
     private final List<PaperCard> allCards = new ArrayList<PaperCard>();
     private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards); 
     private final Collection<PaperCard> roUniqueCards = Collections.unmodifiableCollection(uniqueCardsByName.values());
+    private final EditionCollection editions;
     
 
-    private CardDb(Map<String, CardRules> rules, Iterable<CardEdition> editions, boolean logMissingCards) {
+    private CardDb(Map<String, CardRules> rules, EditionCollection editions0, boolean logMissingCards) {
         this.rulesByName = rules;
+        this.editions = editions0;
         List<String> missingCards = new ArrayList<String>();
-        for(CardEdition e : editions) {
+        for(CardEdition e : editions.getOrderedEditions()) {
             boolean worthLogging = logMissingCards && ( e.getType() == Type.CORE || e.getType() == Type.EXPANSION || e.getType() == Type.REPRINT );
             if(worthLogging)
                 System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
@@ -211,24 +213,28 @@ public final class CardDb implements ICardDatabase {
     public PaperCard tryGetCard(final String cardName0, String setName, int index) {
         final boolean isFoil = this.isFoil(cardName0);
         final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
-        
+
         Collection<PaperCard> cards = allCardsByName.get(cardName);
         if ( null == cards ) return null;
-    
+
+        CardEdition edition = editions.get(setName);
+        if ( null == edition ) return null;
+        String effectiveSet = edition.getCode();
+
         PaperCard result = null;
         if ( index < 0 ) { // this stands for 'random art'
             PaperCard[] candidates = new PaperCard[9]; // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
             int cnt = 0;
             for( PaperCard pc : cards ) {
-                if( pc.getEdition().equalsIgnoreCase(setName) )
+                if( pc.getEdition().equalsIgnoreCase(effectiveSet) )
                     candidates[cnt++] = pc;
             }
-    
+
             if (cnt == 0 ) return null;
             result = cnt == 1  ? candidates[0] : candidates[MyRandom.getRandom().nextInt(cnt)];
         } else 
             for( PaperCard pc : cards ) {
-                if( pc.getEdition().equalsIgnoreCase(setName) && index == pc.getArtIndex() ) {
+                if( pc.getEdition().equalsIgnoreCase(effectiveSet) && index == pc.getArtIndex() ) {
                     result = pc;
                     break;
                 }

@@ -32,7 +32,7 @@ import forge.util.storage.StorageReaderBase;
 
 public final class EditionCollection extends StorageBase<CardEdition> {
 
-    private final Map<String, CardEdition> aliasToEdition = new TreeMap<String, CardEdition>();
+    private final Map<String, CardEdition> aliasToEdition = new TreeMap<String, CardEdition>(String.CASE_INSENSITIVE_ORDER);
 
     public EditionCollection(File folder) {
         super("Card editions", new CardEdition.EditionReader(folder));
