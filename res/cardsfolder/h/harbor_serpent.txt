@@ -7,4 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. | 
 SVar:X:Count$Valid Island
 SVar:BuffedBy:Island
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_serpent.jpg
-Oracle:Islandwalk (This creature is unblockable as long as defending player controls an Island.)\nHarbor Serpent can't attack unless there are five or more Islands on the battlefield.
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nHarbor Serpent can't attack unless there are five or more Islands on the battlefield.

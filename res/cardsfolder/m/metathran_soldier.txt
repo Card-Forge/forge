@@ -4,4 +4,4 @@ Types:Creature Metathran Soldier
 PT:1/1
 K:Unblockable
 SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card19096.jpg
-Oracle:Metathran Soldier is unblockable.
+Oracle:Metathran Soldier can't be blocked.

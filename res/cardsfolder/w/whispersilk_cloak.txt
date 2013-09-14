@@ -2,6 +2,6 @@ Name:Whispersilk Cloak
 ManaCost:3
 Types:Artifact Equipment
 K:Equip 2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ Unblockable | AddKeyword$ Shroud | Description$ Equipped creature is unblockable and has shroud.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ Unblockable | AddKeyword$ Shroud | Description$ Equipped creature can't be blocked and has shroud.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whispersilk_cloak.jpg
-Oracle:Equipped creature is unblockable and has shroud.\nEquip {2}
+Oracle:Equipped creature can't be blocked and has shroud.\nEquip {2}

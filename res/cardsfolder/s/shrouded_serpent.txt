@@ -2,8 +2,8 @@ Name:Shrouded Serpent
 ManaCost:4 U U U
 Types:Creature Serpent
 PT:4/4
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, defending player may pay 4. If he or she doesn't, CARDNAME is unblockable this turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, defending player may pay 4. If he or she doesn't, CARDNAME can't be blocked this turn.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Unblockable | UnlessCost$ 4 | UnlessPayer$ DefendingPlayer
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrouded_serpent.jpg
-Oracle:Whenever Shrouded Serpent attacks, defending player may pay {4}. If he or she doesn't, Shrouded Serpent is unblockable this turn.
+Oracle:Whenever Shrouded Serpent attacks, defending player may pay {4}. If he or she doesn't, Shrouded Serpent can't be blocked this turn.

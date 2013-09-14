@@ -2,7 +2,7 @@ Name:Ogre Marauder
 ManaCost:1 B B
 Types:Creature Ogre Warrior
 PT:3/1
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigOgreMarauderSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, it gains "Ogre Marauder is unblockable" until end of turn unless defending player sacrifices a creature.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigOgreMarauderSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, it gains "Ogre Marauder can't be blocked" until end of turn unless defending player sacrifices a creature.
 SVar:TrigOgreMarauderSacrifice:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature | Defined$ DefendingPlayer | Optional$ True | RememberSacrificed$ True | SubAbility$ DBOgreMarauderPump
 SVar:DBOgreMarauderPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBOgreMarauderCleanup
 SVar:DBOgreMarauderCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -10,4 +10,4 @@ SVar:HasAttackEffect:TRUE
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_marauder.jpg
-Oracle:Whenever Ogre Marauder attacks, it gains "Ogre Marauder is unblockable" until end of turn unless defending player sacrifices a creature.
+Oracle:Whenever Ogre Marauder attacks, it gains "Ogre Marauder can't be blocked" until end of turn unless defending player sacrifices a creature.
