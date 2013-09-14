@@ -73,6 +73,7 @@ import forge.gui.GuiChoose;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Aggregates;
+import forge.util.Lang;
 
 /**
  * <p>
@@ -2101,12 +2102,14 @@ public class CardFactoryUtil {
             card.removeIntrinsicKeyword(parse);
 
             String ref = "X".equals(magnitude) ? " | References$ X" : "";
+            String counters = StringUtils.isNumeric(magnitude) 
+                    ? Lang.nounWithNumeral(Integer.parseInt(magnitude), "+1/+1 counter"): "X +1/+1 counters";
             String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ " +
             		"Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " +
                     magnitude + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " +
-            		magnitude + " (If this creature isn't monstrous, put " + magnitude + 
-            		" +1/+1 counters on it and it becomes monstrous.)" + ref;
-            		
+            		magnitude + " (If this creature isn't monstrous, put " + 
+                    counters + " on it and it becomes monstrous.)" + ref;
+
             card.addSpellAbility(AbilityFactory.getAbility(effect, card));
             // add ability to instrinic strings so copies/clones create the ability also
             card.getUnparsedAbilities().add(effect);
