@@ -58,7 +58,8 @@ public class SpellAbilityVariables {
         this.sorcerySpeed = sav.isSorcerySpeed();
         this.instantSpeed = sav.isInstantSpeed();
         this.anyPlayer = sav.isAnyPlayer();
-        this.setOpponentOnly(sav.isAnyPlayer());
+        this.opponentOnly = sav.isOpponentOnly();
+        this.ownerOnly = sav.isOwnerOnly();
         this.opponentTurn = sav.isOpponentTurn();
         this.playerTurn = sav.isPlayerTurn();
         this.activationLimit = sav.getActivationLimit();
@@ -104,8 +105,11 @@ public class SpellAbilityVariables {
     /** The b any player. */
     private boolean anyPlayer = false;
 
-    /** The b any player. */
+    /** The b opponent only. */
     private boolean opponentOnly = false;
+
+    /** The b owner only. */
+    private boolean ownerOnly = false;
 
     /** The b opponent turn. */
     private boolean opponentTurn = false;
@@ -992,6 +996,19 @@ public class SpellAbilityVariables {
         this.opponentOnly = opponentOnly;
     }
 
+    /**
+     * @return the ownerOnly
+     */
+    public boolean isOwnerOnly() {
+        return ownerOnly;
+    }
+
+    /**
+     * @param ownerOnly the ownerOnly to set
+     */
+    public void setOwnerOnly(boolean ownerOnly) {
+        this.ownerOnly = ownerOnly;
+    }
     /**
      * <p>
      * Setter for the field <code>ColorToCheck</code>.

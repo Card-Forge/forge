@@ -121,6 +121,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setOpponentOnly(true);
         }
 
+        if (params.containsKey("OwnerOnly")) {
+            this.setOwnerOnly(true);
+        }
+
         if (params.containsKey("ActivationLimit")) {
             this.setLimitToCheck(params.get("ActivationLimit"));
         }
@@ -274,9 +278,14 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return true;
         }
 
+        if (this.isOwnerOnly()) {
+            return activator.equals(c.getOwner());
+        }
+
         if (activator.equals(c.getController()) && !this.isOpponentOnly()) {
             return true;
         }
+
         if (!activator.equals(c.getController())
                 && (this.isOpponentOnly() || c.hasKeyword("May be played by your opponent"))) {
             return true;
