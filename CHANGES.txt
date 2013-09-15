@@ -37,6 +37,8 @@ New Cards
 ---------
 
 Hall of the Bandit Lord
+Truth or Tale
+Personal Incarnation
 
 
 ---------------
@@ -175,6 +177,25 @@ Steam Augury
 Triad of Fates
 Centaur Battlemaster
 Mistcutter Hydra
+Chained to the Rocks
+Agent of Horizons
+Artisan's Sorrow
+Unknown Shores
+Battlewise Valor
+Chosen by Heliod
+Decorated Griffin
+Ephara's Warden
+Aqueous Form
+Benthic Giant
+Breaching Hippocamp
+Coastline Chimera
+Sentry of the Underworld
+Shipwreck Singer
+Spellheart Chimera
+Agent of the Fates
+Asphodel Wanderer
+Blood-Toll Harpy
+Boon of Erebos
 
 
 ------------
