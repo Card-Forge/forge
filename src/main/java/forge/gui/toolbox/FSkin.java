@@ -191,7 +191,7 @@ public enum FSkin {
             this.iconImage = skinImage;
             this.comp.setIconImage(skinImage.image);
         }
-        public void setIcon(Image image) {
+        public void setIconImage(Image image) {
             this.iconImage = null; //ensure this field is reset when static image set
             this.comp.setIconImage(image);
         }
