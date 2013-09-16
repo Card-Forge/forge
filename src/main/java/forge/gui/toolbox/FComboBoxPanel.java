@@ -2,6 +2,7 @@ package forge.gui.toolbox;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
@@ -16,12 +17,20 @@ import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Panel with combo box and caption (either FComboBoxWrapper or FComboBoxPanel should be used instead of JComboBox so skinning works)
  *
  */
 @SuppressWarnings("serial")
 public class FComboBoxPanel<E> extends JPanel {
-    
+
+    private static ArrayList<FComboBoxPanel<?>> allPanels = new ArrayList<FComboBoxPanel<?>>();
+
+    public static void refreshAllSkins() {
+        for (FComboBoxPanel<?> panel : allPanels) {
+            panel.refreshSkin();
+        }
+    }
+
     private String comboBoxCaption = "";
     private JComboBox<E> comboBox = null;
     
@@ -29,6 +38,7 @@ public class FComboBoxPanel<E> extends JPanel {
         super();
         this.comboBoxCaption = comboBoxCaption;
         applyLayoutAndSkin();
+        allPanels.add(this);
     }
             
     public void setComboBox(JComboBox<E> comboBox, E selectedItem) {
@@ -82,6 +92,18 @@ public class FComboBoxPanel<E> extends JPanel {
             this.comboBox.setOpaque(true);                
             this.add(this.comboBox);
         }
+    }
+    
+    public void setSelectedItem(Object item) {
+        this.comboBox.setSelectedItem(item);
+    }
+    
+    public Object getSelectedItem() {
+        return this.comboBox.getSelectedItem();
+    }
+    
+    private void refreshSkin() {
+        this.comboBox = FComboBoxWrapper.refreshComboBoxSkin(this.comboBox);
     }
             
     private class ComplexCellRenderer<E1> implements ListCellRenderer<E1> {

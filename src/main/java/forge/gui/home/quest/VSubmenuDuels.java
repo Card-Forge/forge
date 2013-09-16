@@ -19,7 +19,7 @@ import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FComboBox;
+import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -45,7 +45,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final JButton btnStart  = new StartButton();
-    private final FComboBox<String> cbxPet  = new FComboBox<String>();
+    private final FComboBoxWrapper<String> cbxPet  = new FComboBoxWrapper<String>();
     private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
     private final JLabel lblZep     = new FLabel.Builder().text("Launch Zeppelin").fontSize(14).build();
 
@@ -107,7 +107,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         pnlStats.add(lblLife, constraints);
         pnlStats.add(lblWorld, constraints);
         pnlStats.add(cbPlant, constraints);
-        pnlStats.add(cbxPet, constraints);
+        cbxPet.addTo(pnlStats, constraints);
         pnlStats.setOpaque(false);
     }
 
@@ -241,7 +241,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     }
 
     @Override
-    public FComboBox<String> getCbxPet() {
+    public FComboBoxWrapper<String> getCbxPet() {
         return cbxPet;
     }
 

@@ -23,7 +23,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.gui.toolbox.FComboBox;
+import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSpinner;
@@ -82,7 +82,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
             .text("Add filter")
             .tooltip("Click to add custom filters to the card list")
             .reactOnMouseDown().build();
-    private final FComboBox<String> cbSearchMode = new FComboBox<String>();
+    private final FComboBoxWrapper<String> cbSearchMode = new FComboBoxWrapper<String>();
     private final JTextField txfSearch = new FTextField.Builder().ghostText("Search").build();
     private final FLabel lblName = new FLabel.Builder().text("Name").hoverable().selectable().selected().build();
     private final FLabel lblType = new FLabel.Builder().text("Type").hoverable().selectable().selected().build();
@@ -144,7 +144,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
         pnlSearch.add(txfSearch, "pushx, growx");
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
-        pnlSearch.add(cbSearchMode, "center");
+        cbSearchMode.addTo(pnlSearch, "center");
         pnlSearch.add(lblName, "w pref+8, h pref+8");
         pnlSearch.add(lblType, "w pref+8, h pref+8");
         pnlSearch.add(lblText, "w pref+8, h pref+8");
@@ -227,7 +227,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
     public FLabel getLblText()       { return lblText;       }
     
     public FLabel getBtnAddRestriction()       { return btnAddRestriction; }
-    public FComboBox<String> getCbSearchMode() { return cbSearchMode;      }
+    public FComboBoxWrapper<String> getCbSearchMode() { return cbSearchMode;      }
     public JTextField getTxfSearch()           { return txfSearch;         }
 
     public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {

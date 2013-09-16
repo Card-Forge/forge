@@ -30,7 +30,7 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FComboBox;
+import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
@@ -79,33 +79,33 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final JCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
 
     private final JLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
-    private final FComboBox<QuestWorld> cbxStartingWorld = new FComboBox<QuestWorld>();
+    private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<QuestWorld>();
 
 
     /* Second column */
 
     private final JLabel lblStartingPool = new FLabel.Builder().text("Starting pool:").build();
-    private final FComboBox<StartingPoolType> cbxStartingPool = new FComboBox<StartingPoolType>();
+    private final FComboBoxWrapper<StartingPoolType> cbxStartingPool = new FComboBoxWrapper<StartingPoolType>();
 
     private final JLabel lblUnrestricted = new FLabel.Builder().text("All cards will be available to play.").build();
 
     private final JLabel lblPreconDeck = new FLabel.Builder().text("Starter/Event deck:").build();
-    private final FComboBox<String> cbxPreconDeck = new FComboBox<String>();
+    private final FComboBoxWrapper<String> cbxPreconDeck = new FComboBoxWrapper<String>();
 
     private final JLabel lblFormat = new FLabel.Builder().text("Sanctioned format:").build();
-    private final FComboBox<GameFormat> cbxFormat = new FComboBox<GameFormat>();
+    private final FComboBoxWrapper<GameFormat> cbxFormat = new FComboBoxWrapper<GameFormat>();
 
     private final JLabel lblCustomDeck = new FLabel.Builder().text("Custom deck:").build();
-    private final FComboBox<Deck> cbxCustomDeck = new FComboBox<Deck>();
+    private final FComboBoxWrapper<Deck> cbxCustomDeck = new FComboBoxWrapper<Deck>();
 
     private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
     private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
 
     private final JLabel lblPrizedCards = new FLabel.Builder().text("Prized cards:").build();
-    private final FComboBox<Object> cbxPrizedCards = new FComboBox<Object>();
+    private final FComboBoxWrapper<Object> cbxPrizedCards = new FComboBoxWrapper<Object>();
 
     private final JLabel lblPrizeFormat = new FLabel.Builder().text("Sanctioned format:").build();
-    private final FComboBox<GameFormat> cbxPrizeFormat = new FComboBox<GameFormat>();
+    private final FComboBoxWrapper<GameFormat> cbxPrizeFormat = new FComboBoxWrapper<GameFormat>();
 
     private final JLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be available to win.").build();
     private final JLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets found in starting pool will be available.").build();
@@ -302,28 +302,28 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
         pnlRestrictions.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[120, al right][240, fill]", "[|]12[|]6[]"));
         pnlRestrictions.add(lblStartingPool, constraints + lblWidthStart);
-        pnlRestrictions.add(cbxStartingPool, constraints + cboWidthStart);
+        cbxStartingPool.addTo(pnlRestrictions, constraints + cboWidthStart);
 
         /* out of these 3 groups only one will be visible */
         pnlRestrictions.add(lblUnrestricted, constraints + hidemode + "spanx 2");
 
         pnlRestrictions.add(lblPreconDeck, constraints + lblWidthStart);
-        pnlRestrictions.add(cbxPreconDeck, constraints + cboWidthStart);
+        cbxPreconDeck.addTo(pnlRestrictions, constraints + cboWidthStart);
 
         pnlRestrictions.add(lblCustomDeck, constraints + lblWidthStart);
-        pnlRestrictions.add(cbxCustomDeck, constraints + cboWidthStart); // , skip 1
+        cbxCustomDeck.addTo(pnlRestrictions, constraints + cboWidthStart); // , skip 1
 
         pnlRestrictions.add(lblFormat, constraints + lblWidthStart);
-        pnlRestrictions.add(cbxFormat, constraints + cboWidthStart); // , skip 1
+        cbxFormat.addTo(pnlRestrictions, constraints + cboWidthStart); // , skip 1
 
         pnlRestrictions.add(btnDefineCustomFormat, constraints + hidemode + "spanx 2, w 240px");
 
         // Prized cards options
         pnlRestrictions.add(lblPrizedCards, constraints + lblWidth);
-        pnlRestrictions.add(cbxPrizedCards, constraints + cboWidth);
+        cbxPrizedCards.addTo(pnlRestrictions, constraints + cboWidth);
 
         pnlRestrictions.add(lblPrizeFormat, constraints + lblWidthStart);
-        pnlRestrictions.add(cbxPrizeFormat, constraints + cboWidthStart); // , skip 1
+        cbxPrizeFormat.addTo(pnlRestrictions, constraints + cboWidthStart); // , skip 1
         pnlRestrictions.add(btnPrizeDefineCustomFormat, constraints + hidemode + "spanx 2, w 240px");
         pnlRestrictions.add(lblPrizeSameAsStarting,  constraints + hidemode + "spanx 2");
         pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "spanx 2");
@@ -331,7 +331,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.add(cboAllowUnlocks, constraints + "spanx 2, ax right");
 
         pnlRestrictions.add(lblStartingWorld, constraints + lblWidthStart);
-        pnlRestrictions.add(cbxStartingWorld, constraints + cboWidthStart);
+        cbxStartingWorld.addTo(pnlRestrictions, constraints + cboWidthStart);
 
 //        cboAllowUnlocks.setOpaque(false);
         pnlRestrictions.setOpaque(false);

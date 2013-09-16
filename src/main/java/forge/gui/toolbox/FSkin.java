@@ -19,7 +19,6 @@ package forge.gui.toolbox;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -41,9 +40,7 @@ import java.util.Map.Entry;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
-import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -1546,7 +1543,9 @@ public enum FSkin {
         
         //refresh certain components skinned via look and feel
         Singletons.getControl().getMenuBar().refresh();
-        CSubmenuPreferences.SINGLETON_INSTANCE.refreshComboBoxes();
+        FComboBoxWrapper.refreshAllSkins();
+        FComboBoxPanel.refreshAllSkins();
+        CSubmenuPreferences.SINGLETON_INSTANCE.updateCurrentSkin();
     }
 
     /**
@@ -1906,10 +1905,6 @@ public enum FSkin {
                     setComboBoxLookAndFeel();
                     setTabbedPaneLookAndFeel();
                     setButtonLookAndFeel();
-                    
-                    if (!onInit) {
-                        refreshComboBoxes(appFrame);
-                    }
                 }
             }
             onInit = false;
@@ -2012,31 +2007,7 @@ public enum FSkin {
             UIManager.put("Button.focus", FORE_COLOR.darker());
             UIManager.put("Button.rollover", false);
         }
-        
-        @SuppressWarnings({ "rawtypes", "unchecked" })
-        private void refreshComboBoxes(final JFrame appFrame) {
-            ArrayList<JComboBox> comboBoxes = TypeUtil.findAllComponents(JComboBox.class, appFrame);
-            for (JComboBox comboBox : comboBoxes) {
-                Container parent = comboBox.getParent();
-                if (parent == null) { continue; } //shouldn't happen
 
-                //backup model
-                ComboBoxModel model = comboBox.getModel();
-                Object selectedItem = model.getSelectedItem();
-                ArrayList<Object> items = new ArrayList<Object>();
-                int count = model.getSize();
-                for(int i = 0; i < count; i++) {
-                    items.add(model.getElementAt(i));
-                }
-                
-                //restore model backup in new combo box
-                for(int i = 0; i < count; i++) {
-                    comboBox.addItem(items.get(i));
-                }
-                comboBox.setSelectedItem(selectedItem);
-            }
-        }
-        
         /**
          * Determines whether theme styles should be applied to GUI.
          * <p>

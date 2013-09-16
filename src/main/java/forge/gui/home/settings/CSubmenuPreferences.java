@@ -24,6 +24,7 @@ import forge.gui.toolbox.FComboBoxPanel;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -199,12 +200,6 @@ public enum CSubmenuPreferences implements ICDoc {
         File f = new File(fd);
         f.delete();      
     }
-    
-    public void refreshComboBoxes() {
-        initializeGameLogVerbosityComboBox();
-        initializeAiProfilesComboBox();
-        initializeSkinsComboBox();
-    }
 
     private void initializeGameLogVerbosityComboBox() {
         FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
@@ -223,7 +218,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
     
     private void initializeSkinsComboBox() {
-        FComboBoxPanel<String> panel = this.view.getSkinsComboBoxPanel();
+        final FComboBoxPanel<String> panel = this.view.getSkinsComboBoxPanel();
         String[] installedSkins = FSkin.getSkinNamesArray(true);
         validatePreferredSkinName(installedSkins);
         final JComboBox<String> comboBox = new JComboBox<String>(installedSkins);
@@ -232,9 +227,13 @@ public enum CSubmenuPreferences implements ICDoc {
         comboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(final ItemEvent e) {
-                FSkin.changeSkin(comboBox.getSelectedItem().toString());
+                FSkin.changeSkin(panel.getSelectedItem().toString());
             }
         });
+    }
+
+    public void updateCurrentSkin() {
+        this.view.getSkinsComboBoxPanel().setSelectedItem(this.prefs.getPref(FPref.UI_SKIN));
     }
 
     private void validatePreferredSkinName(String[] installedSkins) {

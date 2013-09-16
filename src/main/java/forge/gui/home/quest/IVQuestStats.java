@@ -3,7 +3,7 @@ package forge.gui.home.quest;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 
-import forge.gui.toolbox.FComboBox;
+import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 
 /** Dictates methods required for a panel with stats/pet display. */
@@ -45,8 +45,8 @@ public interface IVQuestStats {
     /** @return {@link javax.swing.JLabel} */
     JLabel getLblWinStreak();
 
-    /** @return {@link javax.swing.FComboBox} */
-    FComboBox<String> getCbxPet();
+    /** @return {@link javax.swing.FComboBoxWrapper} */
+    FComboBoxWrapper<String> getCbxPet();
 
     /** @return {@link javax.swing.JCheckBox} */
     JCheckBox getCbPlant();
