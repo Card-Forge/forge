@@ -190,6 +190,7 @@ Reflection
 Rhino
 Rigger
 Rogue
+Sable
 Salamander
 Samurai
 Sand
