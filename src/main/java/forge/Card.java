@@ -973,6 +973,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.mustBlockCards.add(c);
     }
 
+    public final void addMustBlockCards(final List<Card> attackersToBlock) {
+        if (mustBlockCards == null) {
+            mustBlockCards = new ArrayList<Card>();
+        }
+        this.mustBlockCards.addAll(attackersToBlock);
+    }
+
     /**
      * get the Card that this Card must block this combat.
      * 
@@ -5377,6 +5384,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (getGame().getCombat().getDefendingPlayerRelatedTo(source) != this.getController()) {
                     return false;
                 }
+            }
+        } else if (property.startsWith("DefendingPlayerCtrl")) {
+            if (!game.getPhaseHandler().inCombat()) {
+                return false;
+            }
+            if (!getGame().getCombat().isPlayerAttacked(this.getController())) {
+                return false;
             }
         } else if (property.startsWith("EnchantedPlayerCtrl")) {
             final Object o = source.getEnchanting();

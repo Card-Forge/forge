@@ -49,6 +49,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.Lang;
 import forge.util.TextUtil;
 
 
@@ -372,6 +373,20 @@ public class CombatUtil {
 
         // if a creature does not block but should, return false
         for (final Card blocker : defendersArmy) {
+            if (blocker.getMustBlockCards() != null) {
+                int mustBlockAmt = blocker.getMustBlockCards().size();
+                List<Card> blockedSoFar = combat.getAttackersBlockedBy(blocker);
+                List<Card> remainingBlockables = new ArrayList<Card>();
+                for (final Card attacker : attackers) {
+                    if (!blockedSoFar.contains(attacker) && CombatUtil.canBlock(attacker, blocker)) {
+                        remainingBlockables.add(attacker);
+                    }
+                }
+                boolean canBlockAnother = CombatUtil.canBlockMoreCreatures(blocker, blockedSoFar);
+                if (canBlockAnother && mustBlockAmt > blockedSoFar.size() && remainingBlockables.size() > 0) {
+                    return String.format("%s must still block %s.", blocker, Lang.joinHomogenous(remainingBlockables));
+                }
+            }
             // lure effects
             if (!blockers.contains(blocker) && CombatUtil.mustBlockAnAttacker(blocker, combat)) {
                 return String.format("%s must block an attacker, but has not been assigned to block any.", blocker);
@@ -503,6 +518,9 @@ public class CombatUtil {
             return false;
         }
         if (!CombatUtil.canBeBlocked(attacker, combat, blocker.getController())) {
+            return false;
+        }
+        if (combat.isBlocking(blocker, attacker)) { // Can't block if already blocking the attacker
             return false;
         }
 

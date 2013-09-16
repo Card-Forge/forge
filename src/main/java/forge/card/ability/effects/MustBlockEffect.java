@@ -17,6 +17,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
 
         List<Card> tgtCards = getTargetCards(sa);
         final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final boolean mustBlockAll = sa.hasParam("BlockAllDefined");
 
         List<Card> cards;
         if (sa.hasParam("DefinedAttacker")) {
@@ -28,9 +29,13 @@ public class MustBlockEffect extends SpellAbilityEffect {
 
         for (final Card c : tgtCards) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
-                final Card attacker = cards.get(0);
-                c.addMustBlockCard(attacker);
-                System.out.println(c + " is adding " + attacker + " to mustBlockCards: " + c.getMustBlockCards());
+                if (mustBlockAll) {
+                    c.addMustBlockCards(cards);
+                } else {
+                    final Card attacker = cards.get(0);
+                    c.addMustBlockCard(attacker);
+                    System.out.println(c + " is adding " + attacker + " to mustBlockCards: " + c.getMustBlockCards());
+                }
             }
         }
 

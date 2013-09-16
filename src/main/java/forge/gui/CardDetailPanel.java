@@ -57,6 +57,7 @@ import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
 import forge.item.OpenablePack;
 import forge.item.PreconDeck;
+import forge.util.Lang;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.
@@ -597,7 +598,8 @@ public class CardDetailPanel extends FPanel {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("Must block an attacker");
+            String mustBlockThese = Lang.joinHomogenous(card.getMustBlockCards());
+            area.append("Must block " + mustBlockThese);
         }
         return area.toString();
     }

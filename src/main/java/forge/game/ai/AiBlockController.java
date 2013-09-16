@@ -734,7 +734,16 @@ public class AiBlockController {
                             && (CombatUtil.mustBlockAnAttacker(blocker, combat)
                                     || blocker.hasKeyword("CARDNAME blocks each turn if able."))) {
                         combat.addBlocker(attacker, blocker);
-                        blockersLeft.remove(blocker);
+                        if (blocker.getMustBlockCards() != null) {
+                            int mustBlockAmt = blocker.getMustBlockCards().size();
+                            List<Card> blockedSoFar = combat.getAttackersBlockedBy(blocker);
+                            boolean canBlockAnother = CombatUtil.canBlockMoreCreatures(blocker, blockedSoFar);
+                            if (!canBlockAnother || mustBlockAmt == blockedSoFar.size()) {
+                                blockersLeft.remove(blocker);
+                            }
+                        } else {
+                            blockersLeft.remove(blocker);
+                        }
                     }
                 }
             }

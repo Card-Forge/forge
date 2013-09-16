@@ -1,0 +1,8 @@
+Name:Blaze of Glory
+ManaCost:W
+Types:Instant
+A:SP$ Pump | Cost$ W | ValidTgts$ Creature.DefendingPlayerCtrl | TgtPrompt$ Select target creature defending player controls | KW$ HIDDEN CARDNAME can block any number of creatures. | SubAbility$ GoingDownInStyle | ActivationPhases$ BeginCombat->Declare Attackers | StackDescription$ {c:Targeted} can block any number of creatures this turn. It blocks each attacking creature this turn if able. | SpellDescription$ Cast CARDNAME only during combat before blockers are declared. Target creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.
+SVar:GoingDownInStyle:DB$ MustBlock | Defined$ ParentTarget | DefinedAttacker$ Valid Card.attacking | BlockAllDefined$ True | StackDescription$ None
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blaze_of_glory.jpg
+Oracle:Cast Blaze of Glory only during combat before blockers are declared.\nTarget creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.
