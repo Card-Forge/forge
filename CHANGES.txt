@@ -39,6 +39,7 @@ New Cards
 Hall of the Bandit Lord
 Truth or Tale
 Personal Incarnation
+Wort, the Raidmother
 
 
 ---------------
@@ -215,6 +216,8 @@ Guardians of Meletis
 Opaline Unicorn
 Prowler's Helm
 Pyxis of Pandemonium
+Baleful Eidolon
+Cutthroat Maneuver
 
 
 ------------
