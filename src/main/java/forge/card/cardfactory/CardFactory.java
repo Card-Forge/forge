@@ -141,6 +141,7 @@ public class CardFactory {
             out.addImprinted(o);
         }
         out.setCommander(in.isCommander());
+        /*
         if(out.isCommander())
         {
             out.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.Self+wasCastFromCommand | EffectZone$ All | AffectedZone$ Stack");
@@ -150,7 +151,7 @@ public class CardFactory {
             
             out.addSpellAbility(sa);
         }
-
+         */
         return out;
 
     }

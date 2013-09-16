@@ -2040,7 +2040,7 @@ public class CardFactoryUtil {
             card.addSpellAbility(AbilityFactory.getAbility(rawAbility, card));
         }
     }
-    
+    /*
     public static final void addCommanderAbilities(final Card cmd) {
         ReplacementEffect re = ReplacementHandler.parseReplacement(
                 "Event$ Moved | Destination$ Graveyard,Exile | ValidCard$ Card.Self | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement | " +
@@ -2058,6 +2058,21 @@ public class CardFactoryUtil {
 
         cmd.addIntrinsicAbility("SP$ PermanentCreature | SorcerySpeed$ True | ActivationZone$ Command | SubAbility$ DBCommanderIncCast | Cost$ " + cmdManaCost);
         cmd.addStaticAbility("Mode$ RaiseCost | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.Self+wasCastFromCommand | EffectZone$ All | AffectedZone$ Stack");
+    }
+    */
+    public static final String getCommanderInfo(final Player originPlayer ) {
+        StringBuilder sb = new StringBuilder();
+        for(Player p : originPlayer.getGame().getPlayers()) {
+            if(p.equals(originPlayer))
+                continue;
+            
+            Map<Card,Integer> map = p.getCommanderDamage();
+            if(map.containsKey(originPlayer.getCommander())) {
+                sb.append("Commander Damage to " + p.getName() + ": "+ map.get(originPlayer.getCommander()) + "\r\n");
+            }
+        }
+        
+        return sb.toString();
     }
 
     /**

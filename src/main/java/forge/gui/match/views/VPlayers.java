@@ -29,7 +29,9 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.Singletons;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.Game;
+import forge.game.GameType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -90,10 +92,11 @@ public enum VPlayers implements IVDoc<CPlayers> {
             final InfoLabel prevention = new InfoLabel();
             final InfoLabel keywords = new InfoLabel();
             final InfoLabel antes = new InfoLabel();
-            this.infoLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords, antes });
+            final InfoLabel cmd = new InfoLabel();
+            this.infoLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords, antes, cmd });
 
             // Set border on bottom label, and larger font on player name
-            antes.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+            cmd.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             name.setText(p.getName());
         }
     }
@@ -169,6 +172,9 @@ public enum VPlayers implements IVDoc<CPlayers> {
                     }
                 }
                 temp[6].setText(sb.toString());
+            }
+            if(p0.getGame().getType() == GameType.Commander) {
+                temp[7].setText(CardFactoryUtil.getCommanderInfo(p0));
             }
         }
     }
