@@ -4,7 +4,6 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
@@ -20,6 +19,7 @@ import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
+import forge.gui.toolbox.FComboBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -46,7 +46,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final JButton btnStart  = new StartButton();
-    private final JComboBox<String> cbxPet  = new JComboBox<String>();
+    private final FComboBox<String> cbxPet  = new FComboBox<String>();
     private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
     private final JLabel lblZep   = new FLabel.Builder().text("<html>Launch<br>Zeppelin</html>")
             .hoverable(true).icon(FSkin.getIcon(FSkin.QuestIcons.ICO_ZEP))
@@ -248,7 +248,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     }
 
     @Override
-    public JComboBox<String> getCbxPet() {
+    public FComboBox<String> getCbxPet() {
         return cbxPet;
     }
 

@@ -6,11 +6,11 @@ import java.awt.FlowLayout;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -23,6 +23,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.gui.toolbox.FComboBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSpinner;
@@ -81,7 +82,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
             .text("Add filter")
             .tooltip("Click to add custom filters to the card list")
             .reactOnMouseDown().build();
-    private final JComboBox<String> cbSearchMode = new JComboBox<String>();
+    private final FComboBox<String> cbSearchMode = new FComboBox<String>();
     private final JTextField txfSearch = new FTextField.Builder().ghostText("Search").build();
     private final FLabel lblName = new FLabel.Builder().text("Name").hoverable().selectable().selected().build();
     private final FLabel lblType = new FLabel.Builder().text("Type").hoverable().selectable().selected().build();
@@ -226,7 +227,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
     public FLabel getLblText()       { return lblText;       }
     
     public FLabel getBtnAddRestriction()       { return btnAddRestriction; }
-    public JComboBox<String> getCbSearchMode() { return cbSearchMode;      }
+    public FComboBox<String> getCbSearchMode() { return cbSearchMode;      }
     public JTextField getTxfSearch()           { return txfSearch;         }
 
     public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {

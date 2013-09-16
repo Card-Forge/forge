@@ -15017,6 +15017,7 @@ src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/FAbsolutePositioner.java -text
 src/main/java/forge/gui/toolbox/FButton.java -text
 src/main/java/forge/gui/toolbox/FCheckBox.java -text
+src/main/java/forge/gui/toolbox/FComboBox.java -text
 src/main/java/forge/gui/toolbox/FComboBoxPanel.java -text
 src/main/java/forge/gui/toolbox/FLabel.java -text
 src/main/java/forge/gui/toolbox/FList.java -text

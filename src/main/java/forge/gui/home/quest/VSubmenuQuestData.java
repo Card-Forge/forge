@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -31,6 +30,7 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
+import forge.gui.toolbox.FComboBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
@@ -79,33 +79,33 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final JCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
 
     private final JLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
-    private final JComboBox<QuestWorld> cbxStartingWorld = new JComboBox<QuestWorld>();
+    private final FComboBox<QuestWorld> cbxStartingWorld = new FComboBox<QuestWorld>();
 
 
     /* Second column */
 
     private final JLabel lblStartingPool = new FLabel.Builder().text("Starting pool:").build();
-    private final JComboBox<StartingPoolType> cbxStartingPool = new JComboBox<StartingPoolType>();
+    private final FComboBox<StartingPoolType> cbxStartingPool = new FComboBox<StartingPoolType>();
 
     private final JLabel lblUnrestricted = new FLabel.Builder().text("All cards will be available to play.").build();
 
     private final JLabel lblPreconDeck = new FLabel.Builder().text("Starter/Event deck:").build();
-    private final JComboBox<String> cbxPreconDeck = new JComboBox<String>();
+    private final FComboBox<String> cbxPreconDeck = new FComboBox<String>();
 
     private final JLabel lblFormat = new FLabel.Builder().text("Sanctioned format:").build();
-    private final JComboBox<GameFormat> cbxFormat = new JComboBox<GameFormat>();
+    private final FComboBox<GameFormat> cbxFormat = new FComboBox<GameFormat>();
 
     private final JLabel lblCustomDeck = new FLabel.Builder().text("Custom deck:").build();
-    private final JComboBox<Deck> cbxCustomDeck = new JComboBox<Deck>();
+    private final FComboBox<Deck> cbxCustomDeck = new FComboBox<Deck>();
 
     private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
     private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
 
     private final JLabel lblPrizedCards = new FLabel.Builder().text("Prized cards:").build();
-    private final JComboBox<Object> cbxPrizedCards = new JComboBox<Object>();
+    private final FComboBox<Object> cbxPrizedCards = new FComboBox<Object>();
 
     private final JLabel lblPrizeFormat = new FLabel.Builder().text("Sanctioned format:").build();
-    private final JComboBox<GameFormat> cbxPrizeFormat = new JComboBox<GameFormat>();
+    private final FComboBox<GameFormat> cbxPrizeFormat = new FComboBox<GameFormat>();
 
     private final JLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be available to win.").build();
     private final JLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets found in starting pool will be available.").build();

@@ -19,6 +19,7 @@ package forge.gui.toolbox;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -2016,6 +2017,9 @@ public enum FSkin {
         private void refreshComboBoxes(final JFrame appFrame) {
             ArrayList<JComboBox> comboBoxes = TypeUtil.findAllComponents(JComboBox.class, appFrame);
             for (JComboBox comboBox : comboBoxes) {
+                Container parent = comboBox.getParent();
+                if (parent == null) { continue; } //shouldn't happen
+
                 //backup model
                 ComboBoxModel model = comboBox.getModel();
                 Object selectedItem = model.getSelectedItem();
@@ -2024,10 +2028,8 @@ public enum FSkin {
                 for(int i = 0; i < count; i++) {
                     items.add(model.getElementAt(i));
                 }
-
-                comboBox.removeAllItems();
                 
-                //restore model backup
+                //restore model backup in new combo box
                 for(int i = 0; i < count; i++) {
                     comboBox.addItem(items.get(i));
                 }
