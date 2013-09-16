@@ -218,7 +218,8 @@ public final class CardDb implements ICardDatabase {
         if ( null == cards ) return null;
 
         CardEdition edition = editions.get(setName);
-        if ( null == edition ) return null;
+        if ( null == edition ) 
+            return tryGetCard(cardName, true); // set not found, try to get the same card from just any set.
         String effectiveSet = edition.getCode();
 
         PaperCard result = null;
