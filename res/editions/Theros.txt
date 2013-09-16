@@ -1,0 +1,259 @@
+[metadata]
+Code=THS
+Date=2013-09-27
+Name=Theros
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+FoilAlwaysInCommonSlot=True
+
+[cards]
+C Battlewise Valor
+C Cavalry Pegasus
+R Celestial Archon
+R Chained to the Rocks
+C Chosen by Heliod
+U Dauntless Onslaught
+U Decorated Griffin
+C Divine Verdict
+M Elspeth, Sun's Champion
+C Ephara's Warden
+U Evangel of Heliod
+R Fabled Hero
+U Favored Hoplite
+R Gift of Immortality
+U Glare of Heresy
+C Gods Willing
+M Heliod, God of the Sun
+U Heliod's Emissary
+C Hopeful Eidolon
+R Hundred-Handed One
+C Lagonna-Band Elder
+C Last Breath
+C Leonin Snarecaster
+C Observant Alseid
+U Ordeal of Heliod
+U Phalanx Leader
+C Ray of Dissolution
+C Scholar of Athreos
+C Setessan Battle Priest
+C Setessan Griffin
+C Silent Artisan
+R Soldier of the Pantheon
+R Spear of Heliod
+C Traveling Philosopher
+U Vanquish the Foul
+C Wingsteed Rider
+C Yoked Ox
+C Annul
+C Aqueous Form
+R Artisan of Forms
+C Benthic Giant
+R Bident of Thassa
+C Breaching Hippocamp
+C Coastline Chimera
+C Crackling Triton
+R Curse of the Swine
+U Dissolve
+C Fate Foretold
+U Gainsay
+C Griptide
+U Horizon Scholar
+C Lost in a Labyrinth
+M Master of Waves
+R Meletis Charlatan
+C Mnemonic Wall
+C Nimbus Naiad
+C Omenspeaker
+U Ordeal of Thassa
+C Prescient Chimera
+R Prognostic Sphinx
+U Sea God's Revenge
+U Sealock Monster
+R Shipbreaker Kraken
+C Stymied Hopes
+R Swan Song
+M Thassa, God of the Sea
+C Thassa's Bounty
+U Thassa's Emissary
+U Triton Fortune Hunter
+C Triton Shorethief
+U Triton Tactics
+C Vaporkin
+C Voyage's End
+C Wavecrash Triton
+R Abhorrent Overlord
+R Agent of the Fates
+C Asphodel Wanderer
+C Baleful Eidolon
+C Blood-Toll Harpy
+C Boon of Erebos
+C Cavern Lampad
+U Cutthroat Maneuver
+U Dark Betrayal
+C Disciple of Phenax
+M Erebos, God of the Dead
+U Erebos's Emissary
+C Fellhide Minotaur
+C Fleshmad Steed
+C Gray Merchant of Asphodel
+R Hero's Downfall
+M Hythonia the Cruel
+U Insatiable Harpy
+U Keepsake Gorgon
+C Lash of the Whip
+C Loathsome Catoblepas
+C March of the Returned
+U Mogis's Marauder
+R Nighthowler
+U Ordeal of Erebos
+C Pharika's Cure
+C Read the Bones
+U Rescue from the Underworld
+C Returned Centaur
+C Returned Phalanx
+C Scourgemark
+C Sip of Hemlock
+R Thoughtseize
+U Tormented Hero
+C Viper's Kiss
+R Whip of Erebos
+C Akroan Crusader
+R Anger of the Gods
+U Arena Athlete
+C Borderland Minotaur
+C Boulderfall
+U Coordinated Assault
+C Deathbellow Raider
+C Demolish
+C Dragon Mantle
+R Ember Swallower
+U Fanatic of Mogis
+R Firedrinker Satyr
+U Flamespeaker Adept
+R Hammer of Purphoros
+C Ill-Tempered Cyclops
+R Labyrinth Champion
+C Lightning Strike
+U Magma Jet
+C Messenger's Speed
+C Minotaur Skullcleaver
+U Ordeal of Purphoros
+U Peak Eruption
+C Portent of Betrayal
+C Priest of Iroas
+M Purphoros, God of the Forge
+U Purphoros's Emissary
+C Rage of Purphoros
+R Rageblood Shaman
+C Satyr Rambler
+C Spark Jolt
+C Spearpoint Oread
+U Stoneshock Giant
+M Stormbreath Dragon
+R Titan of Eternal Fire
+C Titan's Strength
+C Two-Headed Cerberus
+C Wild Celebrants
+C Agent of Horizons
+R Anthousa, Setessan Hero
+R Arbor Colossus
+U Artisan's Sorrow
+R Boon Satyr
+R Bow of Nylea
+U Centaur Battlemaster
+C Commune with the Gods
+C Defend the Hearth
+C Fade into Antiquity
+C Feral Invocation
+U Hunt the Hunter
+U Karametra's Acolyte
+C Leafcrown Dryad
+R Mistcutter Hydra
+U Nemesis of Mortals
+C Nessian Asp
+C Nessian Courser
+M Nylea, God of the Hunt
+C Nylea's Disciple
+U Nylea's Emissary
+C Nylea's Presence
+U Ordeal of Nylea
+C Pheres-Band Centaurs
+M Polukranos, World Eater
+R Reverent Hunter
+C Satyr Hedonist
+U Satyr Piper
+C Savage Surge
+C Sedge Scorpion
+C Shredding Winds
+C Staunch-Hearted Warrior
+R Sylvan Caryatid
+C Time to Feed
+C Voyaging Satyr
+C Vulpine Goliath
+U Warrior's Lesson
+U Akroan Hoplite
+R Anax and Cymede
+M Ashen Rider
+M Ashiok, Nightmare Weaver
+U Battlewise Hoplite
+U Chronicler of Heroes
+R Daxos of Meletis
+U Destructive Revelry
+R Fleecemane Lion
+U Horizon Chimera
+U Kragma Warcaller
+M Medomai the Ageless
+U Pharika's Mender
+R Polis Crusher
+R Prophet of Kruphix
+R Psychic Intrusion
+R Reaper of the Wilds
+U Sentry of the Underworld
+U Shipwreck Singer
+U Spellheart Chimera
+R Steam Augury
+R Triad of Fates
+R Tymaret, the Murder King
+M Underworld Cerberus
+M Xenagos, the Reveler
+R Akroan Horse
+U Anvilwrought Raptor
+C Bronze Sable
+U Burnished Hart
+R Colossus of Akros
+U Flamecast Wheel
+C Fleetfeather Sandals
+C Guardians of Meletis
+C Opaline Unicorn
+U Prowler's Helm
+R Pyxis of Pandemonium
+C Traveler's Amulet
+U Witches' Eye
+R Nykthos, Shrine to Nyx
+R Temple of Abandon
+R Temple of Deceit
+R Temple of Mystery
+R Temple of Silence
+R Temple of Triumph
+C Unknown Shores
+L Plains
+L Plains
+L Plains
+L Plains
+L Island
+L Island
+L Island
+L Island
+L Swamp
+L Swamp
+L Swamp
+L Swamp
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Forest
+L Forest
+L Forest
+L Forest
