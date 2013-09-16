@@ -103,6 +103,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
 
     private List<Card> tappedForConvoke = new ArrayList<Card>();
     private Card sacrificedAsOffering = null;
+    private int conspireInstances = 0;
 
     private HashMap<String, String> sVars = new HashMap<String, String>();
 
@@ -1598,4 +1599,18 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     
         return false;
     }
+
+    // Methods enabling multiple instances of conspire
+    public void addConspireInstance() {
+        this.conspireInstances++;
+    }
+
+    public void subtractConspireInstance() {
+        this.conspireInstances--;
+    }
+
+    public int getConspireInstances() {
+        return this.conspireInstances;
+    } // End of Conspire methods
+
 }

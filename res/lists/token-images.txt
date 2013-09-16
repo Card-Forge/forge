@@ -156,6 +156,7 @@ r_5_5_dragon.jpg                       http://www.cardforge.org/fpics/tokens/r_5
 r_6_6_dragon_rtr.jpg                   http://www.cardforge.org/fpics/tokens/RTR/r_6_6_dragon_rtr.jpg
 r_7_1_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_7_1_elemental.jpg
 r_x_x_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_x_x_elemental.jpg
+rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg
 rg_3_4_stangg_twin.jpg                 http://www.cardforge.org/fpics/tokens/rg_3_4_stangg_twin.jpg
 rg_4_4_giant_warrior.jpg               http://www.cardforge.org/fpics/tokens/rg_4_4_giant_warrior.jpg
 rw_1_1_goblin_soldier.jpg              http://www.cardforge.org/fpics/tokens/rw_1_1_goblin_soldier.jpg
@@ -236,6 +237,3 @@ sorin_lord_of_innistrad_emblem.jpg     http://www.cardforge.org/fpics/effects/so
 tamiyo_the_moon_sage_emblem.jpg        http://www.cardforge.org/fpics/effects/tamiyo-the-moon-sage-emblem.jpg
 venser_the_sojourner_emblem.jpg        http://www.cardforge.org/fpics/effects/venser_the_sojourner_emblem.jpg
 morph.jpg                              http://www.cardforge.org/fpics/effects/morph.jpg
-
-# //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
-# //rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg              [SHM] Wort, the Raidmother

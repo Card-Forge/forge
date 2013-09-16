@@ -614,16 +614,24 @@ public final class GameActionUtil {
                         
                     }
                 }
-            } else if (keyword.startsWith("Conspire")) {
+            }
+        }
+
+        if (source.hasKeyword("Conspire")) {
+            int amount = source.getAmountOfKeyword("Conspire");
+            for (int kwInstance = 1; kwInstance <= amount; kwInstance++) {
                 for (int i = 0; i < abilities.size(); i++) {
                     final SpellAbility newSA = abilities.get(i).copy();
                     newSA.setBasicSpell(false);
                     final String conspireCost = "tapXType<2/Creature.SharesColorWith/untapped creature you control that shares a color with " + source.getName() + ">";
                     newSA.setPayCosts(new Cost(conspireCost, false).add(newSA.getPayCosts()));
-                    newSA.setDescription(newSA.getDescription() + " (Conspire)");
+                    final String tag = kwInstance > 1 ? " (Conspire " + kwInstance + ")" : " (Conspire)";
+                    newSA.setDescription(newSA.getDescription() + tag);
                     newSA.addOptionalCost(OptionalCost.Conspire);
-                    if ( newSA.canPlay() )
+                    newSA.addConspireInstance();
+                    if (newSA.canPlay()) {
                         abilities.add(++i, newSA);
+                    }
                 }
             }
         }

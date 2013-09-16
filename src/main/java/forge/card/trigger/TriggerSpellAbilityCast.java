@@ -160,7 +160,14 @@ public class TriggerSpellAbilityCast extends Trigger {
             if (!spellAbility.isOptionalCostPaid(OptionalCost.Conspire)) {
                 return false;
             }
+            if (spellAbility.getConspireInstances() == 0) {
+                return false;
+            } else {
+                spellAbility.subtractConspireInstance();
+                //System.out.println("Conspire instances left = " + spellAbility.getConspireInstances());
+            }
         }
+
         if (this.mapParams.containsKey("IsSingleTarget")) {
             if (spellAbility.getTargets().getNumTargeted() != 1) {
                 return false;
