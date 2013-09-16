@@ -196,6 +196,25 @@ Agent of the Fates
 Asphodel Wanderer
 Blood-Toll Harpy
 Boon of Erebos
+Borderland Minotaur
+Boulderfall
+Coordinated Assault
+Deathbellow Raider
+Nylea's Emissary
+Nylea's Presence
+Pheres-Band Centaurs
+Sedge Scorpion
+Akroan Horse
+Anvilwrought Raptor
+Bronze Sable
+Burnished Hart
+Colossus of Akros
+Flamecast Wheel
+Fleetfeather Sandals
+Guardians of Meletis
+Opaline Unicorn
+Prowler's Helm
+Pyxis of Pandemonium
 
 
 ------------
