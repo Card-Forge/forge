@@ -27,6 +27,8 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JComponentSkin;
 import forge.gui.toolbox.imaging.FImagePanel;
 import forge.gui.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.gui.toolbox.imaging.FImageUtil;
@@ -46,12 +48,14 @@ public final class CardPicturePanel extends JPanel {
     private Object displayed;
 
     private final FImagePanel panel;
+    private final JComponentSkin<FImagePanel> panelSkin;
     private BufferedImage currentImage;
 
     public CardPicturePanel() {
         super(new BorderLayout());
 
         this.panel = new FImagePanel();
+        this.panelSkin = FSkin.get(this.panel);
         this.add(this.panel);
     }
 
@@ -67,7 +71,7 @@ public final class CardPicturePanel extends JPanel {
     }
 
     public void setCardImage(CardCharacteristicName flipState) {
-        BufferedImage image = FImageUtil.getImage((Card)displayed, flipState);
+        BufferedImage image = FImageUtil.getImage((Card)displayed, flipState, this.panelSkin);
         if (image != null && image != this.currentImage) {
             this.currentImage = image;
             this.panel.setImage(image, getAutoSizeImageMode());
@@ -91,7 +95,7 @@ public final class CardPicturePanel extends JPanel {
             image = ImageCache.getOriginalImage(ImageCache.getImageKey(item, false), true);
 
         } else if (displayed instanceof Card) {
-            image = FImageUtil.getImage((Card)displayed);
+            image = FImageUtil.getImage((Card)displayed, this.panelSkin);
         }
 
         return image;

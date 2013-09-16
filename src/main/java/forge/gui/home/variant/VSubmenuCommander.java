@@ -71,7 +71,7 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
 
     private VSubmenuCommander() {
 
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         Vector<Object> cmdDeckListData = new Vector<Object>();
         if(Singletons.getModel().getDecks().getCommander().size() > 0) {

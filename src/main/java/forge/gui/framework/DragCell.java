@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -21,6 +20,8 @@ import com.google.common.collect.Lists;
 import forge.Singletons;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
@@ -443,12 +444,12 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
     /** Paints dragging handle image the length of the label. */
     private class DragHandle extends JLabel {
-        private final Image img = FSkin.getImage(FSkin.LayoutImages.IMG_HANDLE);
-        private final int imgW = img.getWidth(null);
-        private final int imgH = img.getHeight(null);
+        private final JLabelSkin<DragHandle> skin;
+        private final SkinImage img = FSkin.getImage(FSkin.LayoutImages.IMG_HANDLE);
         private boolean hovered = false;
 
         public DragHandle() {
+            this.skin = FSkin.get(this);
             this.addMouseListener(SRearrangingUtil.getRearrangeClickEvent());
             this.addMouseMotionListener(SRearrangingUtil.getRearrangeDragEvent());
 
@@ -469,10 +470,14 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         public void paintComponent(final Graphics g) {
             super.paintComponent(g);
             if (!hovered) { return; }
+            
+            final Dimension imgSize = img.getSizeForPaint(g);            
+            final int imgW = imgSize.width;
             if (imgW < 1) { return; }
+            final int imgH = imgSize.height;
 
             for (int x = 0; x < getWidth(); x += imgW) {
-                g.drawImage(img, x, ((getHeight() - imgH) / 2), null);
+                skin.drawImage(g, img, x, ((getHeight() - imgH) / 2));
             }
         }
     }

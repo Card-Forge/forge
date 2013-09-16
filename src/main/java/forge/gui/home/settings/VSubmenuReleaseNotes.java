@@ -66,9 +66,11 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
         tar.setWrapStyleWord(true);
         tar.setEditable(false);
         tar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        FSkin.JTextComponentSkin<JTextArea> tarSkin = FSkin.get(tar);
         tar.setFont(FSkin.getFixedFont(16));
-        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tar.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        tarSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tarSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         
         scroller = new JScrollPane(tar);
         pnlMain.add(scroller, "w 100%!, h 100%!");

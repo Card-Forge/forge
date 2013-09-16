@@ -9,8 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
-
 import net.miginfocom.swing.MigLayout;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -66,10 +64,13 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
         scroller.getViewport().setBorder(null);
         scroller.getVerticalScrollBar().setUnitIncrement(16);
 
-        lblSampleHand.setBorder(new MatteBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
-        lblSampleHand.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        lblRemainingDraws.setBorder(new MatteBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
-        lblRemainingDraws.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.JLabelSkin<JLabel> labelSkin = FSkin.get(lblSampleHand);
+        labelSkin.setMatteBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        labelSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        
+        labelSkin = FSkin.get(lblRemainingDraws);
+        labelSkin.setMatteBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        labelSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Core layout
         pnlContent.add(lblReshuffle, "w 96%!, h 29px!, gap 2% 0 5px 5px");
@@ -188,7 +189,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
 
         if (zebra) {
             lbl.setOpaque(true);
-            lbl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+            FSkin.get(lbl).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         }
 
         return lbl;

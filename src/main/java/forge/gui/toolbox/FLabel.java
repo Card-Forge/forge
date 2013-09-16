@@ -1,11 +1,9 @@
 package forge.gui.toolbox;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -31,6 +29,9 @@ import javax.swing.event.AncestorListener;
 
 import forge.Command;
 import forge.gui.framework.ILocalRepaint;
+import forge.gui.toolbox.FSkin.JLabelSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinImage;
 
 /** 
  * Uses the Builder pattern to facilitate/encourage inline styling.
@@ -76,7 +77,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
         private boolean bldEnabled            = true;
 
         protected String  bldText, bldToolTip;
-        private ImageIcon bldIcon;
+        private SkinImage bldIcon;
         private int bldFontAlign;
         protected Command bldCmd;
 
@@ -93,9 +94,9 @@ public class FLabel extends JLabel implements ILocalRepaint {
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder tooltip(final String s0) { this.bldToolTip = s0; return this; }
 
-        /**@param i0 &emsp; {@link javax.swing.ImageIcon}
+        /**@param i0 &emsp; {@link forge.gui.toolbox.FSkin.SkinIcon}
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder icon(final ImageIcon i0) { this.bldIcon = i0; return this; }
+        public Builder icon(final SkinImage i0) { this.bldIcon = i0; return this; }
 
         /**@param i0 &emsp; SwingConstants.CENTER, .LEFT, or .RIGHT
          * @return {@link forge.gui.toolbox.Builder} */
@@ -186,6 +187,8 @@ public class FLabel extends JLabel implements ILocalRepaint {
     // Call this using FLabel.Builder()...
     protected FLabel(final Builder b0) {
         super(b0.bldText);
+        
+        this.skin = FSkin.get(this);
 
         // Init fields from builder
         this.iconScaleFactor = b0.bldIconScaleFactor;
@@ -230,8 +233,8 @@ public class FLabel extends JLabel implements ILocalRepaint {
         
         if (b0.bldUseSkinColors) {
             // Non-custom display properties
-            this.setForeground(clrText);
-            this.setBackground(clrMain);
+            this.skin.setForeground(clrText);
+            this.skin.setBackground(clrMain);
         }
 
         // Resize adapter
@@ -245,15 +248,16 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     //========== Variable initialization
     // Final inits
-    private final Color clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
-    private final Color clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
-    private final Color clrMain = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-    private final Color d50 = FSkin.stepColor(clrMain, -50);
-    private final Color d30 = FSkin.stepColor(clrMain, -30);
-    private final Color d10 = FSkin.stepColor(clrMain, -10);
-    private final Color l10 = FSkin.stepColor(clrMain, 10);
-    private final Color l20 = FSkin.stepColor(clrMain, 20);
-    private final Color l30 = FSkin.stepColor(clrMain, 30);
+    private final JLabelSkin<FLabel> skin;
+    private final SkinColor clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+    private final SkinColor clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+    private final SkinColor clrMain = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+    private final SkinColor d50 = clrMain.stepColor(-50);
+    private final SkinColor d30 = clrMain.stepColor(-30);
+    private final SkinColor d10 = clrMain.stepColor(-10);
+    private final SkinColor l10 = clrMain.stepColor(10);
+    private final SkinColor l20 = clrMain.stepColor(20);
+    private final SkinColor l30 = clrMain.stepColor(30);
     
     // Custom properties, assigned either at realization (using builder)
     // or dynamically (using methods below).
@@ -391,9 +395,9 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     private void setFontSize(final int i0) {
         switch(this.fontStyle) {
-            case Font.BOLD: this.setFont(FSkin.getBoldFont(i0)); break;
-            case Font.ITALIC: this.setFont(FSkin.getItalicFont(i0)); break;
-            default: this.setFont(FSkin.getFont(i0));
+            case Font.BOLD: skin.setFont(FSkin.getBoldFont(i0)); break;
+            case Font.ITALIC: skin.setFont(FSkin.getItalicFont(i0)); break;
+            default: skin.setFont(FSkin.getFont(i0));
         }
     }
 
@@ -439,21 +443,31 @@ public class FLabel extends JLabel implements ILocalRepaint {
         return this.cmdRightClick;
     }
 
+    public void setIcon(FSkin.SkinImage icon) {
+        this.skin.setIcon(icon);
+    }
+
     @Override
     // Must be public.
     public void setIcon(final Icon i0) {
-        if (i0 == null) { this.img = null; return; }
         // Will need image (not icon) for scaled and non-scaled.
-        if (iconInBackground) { this.img = ((ImageIcon) i0).getImage(); }
         // Will need image if not in background, but scaled.
-        else if (iconScaleAuto) { this.img = ((ImageIcon) i0).getImage(); }
-        // If not in background, not scaled, can use original icon.
-        else { super.setIcon(i0); }
-
-        if (img != null) {
-            iw = img.getWidth(null);
-            ih = img.getHeight(null);
-            iar = ((double) iw) / ((double) ih);
+        if (iconInBackground || iconScaleAuto) {
+            if (i0 != null) {
+                img = ((ImageIcon) i0).getImage();
+                iw = img.getWidth(null);
+                ih = img.getHeight(null);
+                iar = ((double) iw) / ((double) ih);
+            }
+            else {
+                img = null;
+                iw = 0;
+                ih = 0;
+                iar = 0;
+            }
+        }
+        else { // If not in background, not scaled, can use original icon.
+            super.setIcon(i0);
         }
     }
 
@@ -538,38 +552,36 @@ public class FLabel extends JLabel implements ILocalRepaint {
     }
 
     private void paintFocus(final Graphics2D g, int w, int h) {
-        g.setColor(clrHover);
+        skin.setGraphicsColor(g, clrHover);
         g.drawRect(0, 0, w - 2, h - 2);
-        g.setColor(l30);
+        skin.setGraphicsColor(g, l30);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
     private void paintUp(final Graphics2D g, int w, int h) {
-        GradientPaint gradient = new GradientPaint(0, h, d10, 0, 0, l20);
-        g.setPaint(gradient);
+        skin.setGraphicsGradientPaint(g, 0, h, d10, 0, 0, l20);
         g.fillRect(0, 0, w, h);
 
-        g.setColor(d50);
+        skin.setGraphicsColor(g, d50);
         g.drawRect(0, 0, w - 2, h - 2);
-        g.setColor(l10);
+        skin.setGraphicsColor(g, l10);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
     private void paintBorder(final Graphics2D g, int w, int h) {
-        g.setColor(l10);
+        skin.setGraphicsColor(g, l10);
         g.drawRect(0, 0, w - 2, h - 2);
-        g.setColor(l30);
+        skin.setGraphicsColor(g, l30);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
     private void paintDown(final Graphics2D g, int w, int h) {
-        GradientPaint gradient = new GradientPaint(0, h, d30, 0, 0, l10);
-        g.setPaint(gradient);
+        skin.setGraphicsGradientPaint(g, 0, h, d30, 0, 0, l10);
         g.fillRect(0, 0, w - 1, h - 1);
 
-        g.setColor(d30);
+        skin.setGraphicsColor(g, d30);
         g.drawRect(0, 0, w - 2, h - 2);
-        g.setColor(l10);
+        skin.setGraphicsColor(g, l10);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 

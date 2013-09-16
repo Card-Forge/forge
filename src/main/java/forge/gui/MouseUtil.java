@@ -25,5 +25,4 @@ public final class MouseUtil {
     public static void setMouseCursor(MouseCursor cursor) {
         FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(cursor.getValue()));
     }
-
 }

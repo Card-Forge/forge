@@ -48,7 +48,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     private VSubmenuConstructed() {
 
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
         final String strCheckboxConstraints = "pushy, gap 0 20px 0 0";
@@ -59,8 +59,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         //pnlStart.add(cbAiVsAi, strCheckboxConstraintsTop);
         pnlStart.add(cbArtifacts, strCheckboxConstraints);
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
-        
-
     }
 
     /* (non-Javadoc)

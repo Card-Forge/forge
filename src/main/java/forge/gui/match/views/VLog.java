@@ -17,7 +17,6 @@
  */
 package forge.gui.match.views;
 
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +36,7 @@ import forge.gui.framework.IVDoc;
 import forge.gui.match.GameLogPanel;
 import forge.gui.match.controllers.CLog;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinFont;
 
 /**
  * Assembles Swing components of game log report.
@@ -186,9 +186,8 @@ public enum VLog implements IVDoc<CLog> {
         }
     }
 
-    private Font getJTextAreaFont(GameLogEntryType logEntryType) {
+    private SkinFont getJTextAreaFont(GameLogEntryType logEntryType) {
         boolean isNewTurn = (logEntryType == GameLogEntryType.TURN);
         return (isNewTurn ? FSkin.getBoldFont() : FSkin.getFont());
     }
-
 }

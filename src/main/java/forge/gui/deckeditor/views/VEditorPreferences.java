@@ -4,8 +4,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.MatteBorder;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.deckeditor.controllers.CEditorPreferences;
 import forge.gui.framework.DragCell;
@@ -74,36 +72,38 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
 
     //========== Constructor
     private VEditorPreferences() {
-        lblStats.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
-        lblCatalog.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
-        lblDeck.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
-        lblDisplay.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        FSkin.get(lblStats).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        FSkin.get(lblCatalog).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        FSkin.get(lblDeck).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        FSkin.get(lblDisplay).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
 
-        chbCatalogColor.setFont(FSkin.getFont(12));
-        chbCatalogRarity.setFont(FSkin.getFont(12));
-        chbCatalogCMC.setFont(FSkin.getFont(12));
-        chbCatalogSet.setFont(FSkin.getFont(12));
-        chbCatalogAI.setFont(FSkin.getFont(12));
-        chbCatalogRanking.setFont(FSkin.getFont(12));
-        chbCatalogPower.setFont(FSkin.getFont(12));
-        chbCatalogToughness.setFont(FSkin.getFont(12));
-        chbCatalogOwned.setFont(FSkin.getFont(12));
+        FSkin.SkinFont font = FSkin.getFont(12);
 
-        chbDeckColor.setFont(FSkin.getFont(12));
-        chbDeckRarity.setFont(FSkin.getFont(12));
-        chbDeckCMC.setFont(FSkin.getFont(12));
-        chbDeckSet.setFont(FSkin.getFont(12));
-        chbDeckAI.setFont(FSkin.getFont(12));
-        chbDeckRanking.setFont(FSkin.getFont(12));
-        chbDeckPower.setFont(FSkin.getFont(12));
-        chbDeckToughness.setFont(FSkin.getFont(12));
+        FSkin.get(chbCatalogColor).setFont(font);
+        FSkin.get(chbCatalogRarity).setFont(font);
+        FSkin.get(chbCatalogCMC).setFont(font);
+        FSkin.get(chbCatalogSet).setFont(font);
+        FSkin.get(chbCatalogAI).setFont(font);
+        FSkin.get(chbCatalogRanking).setFont(font);
+        FSkin.get(chbCatalogPower).setFont(font);
+        FSkin.get(chbCatalogToughness).setFont(font);
+        FSkin.get(chbCatalogOwned).setFont(font);
 
-        chbDeckStats.setFont(FSkin.getFont(12));
-        chbElasticColumns.setFont(FSkin.getFont(12));
+        FSkin.get(chbDeckColor).setFont(font);
+        FSkin.get(chbDeckRarity).setFont(font);
+        FSkin.get(chbDeckCMC).setFont(font);
+        FSkin.get(chbDeckSet).setFont(font);
+        FSkin.get(chbDeckAI).setFont(font);
+        FSkin.get(chbDeckRanking).setFont(font);
+        FSkin.get(chbDeckPower).setFont(font);
+        FSkin.get(chbDeckToughness).setFont(font);
+
+        FSkin.get(chbDeckStats).setFont(font);
+        FSkin.get(chbElasticColumns).setFont(font);
         chbDeckStats.setSelected(true);
         chbElasticColumns.setSelected(false);
 
-        chbCardDisplayUnique.setFont(FSkin.getFont(12));
+        FSkin.get(chbCardDisplayUnique).setFont(font);
         chbCardDisplayUnique.setSelected(false);
 
         pnl.add(lblStats, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");

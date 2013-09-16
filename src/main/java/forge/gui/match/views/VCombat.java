@@ -18,8 +18,6 @@
 package forge.gui.match.views;
 
 import javax.swing.JTextArea;
-import javax.swing.border.MatteBorder;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -44,9 +42,10 @@ public enum VCombat implements IVDoc<CCombat> {
     final JTextArea tar = new JTextArea();
 
     private VCombat() {
+        FSkin.JTextComponentSkin<JTextArea> tarSkin = FSkin.get(tar);
         tar.setOpaque(false);
-        tar.setBorder(new MatteBorder(0, 0, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
-        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tarSkin.setMatteBorder(0, 0, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        tarSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tar.setFocusable(false);
         tar.setLineWrap(true);
     }

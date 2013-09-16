@@ -24,8 +24,6 @@ import java.util.Map.Entry;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.MatteBorder;
-
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.Singletons;
@@ -96,7 +94,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
             this.infoLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords, antes, cmd });
 
             // Set border on bottom label, and larger font on player name
-            cmd.setBorder(new MatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+            FSkin.get(cmd).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             name.setText(p.getName());
         }
     }
@@ -195,7 +193,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
     private class InfoLabel extends JLabel {
         public InfoLabel() {
             super();
-            this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
     }
 }

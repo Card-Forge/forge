@@ -2,6 +2,8 @@ package forge.gui.toolbox;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -11,22 +13,32 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 
 import forge.Singletons;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
- * TODO: Write javadoc for this type.
+ * Panel with combo box and caption (either FComboBoxWrapper or FComboBoxPanel should be used instead of JComboBox so skinning works)
  *
  */
 @SuppressWarnings("serial")
 public class FComboBoxPanel<E> extends JPanel {
-    
+
+    private static ArrayList<FComboBoxPanel<?>> allPanels = new ArrayList<FComboBoxPanel<?>>();
+
+    public static void refreshAllSkins() {
+        for (FComboBoxPanel<?> panel : allPanels) {
+            panel.refreshSkin();
+        }
+    }
+
     private String comboBoxCaption = "";
     private JComboBox<E> comboBox = null;
     
     public FComboBoxPanel(String comboBoxCaption) {
         super();
         this.comboBoxCaption = comboBoxCaption;
-        applyLayoutAndSkin();        
+        applyLayoutAndSkin();
+        allPanels.add(this);
     }
             
     public void setComboBox(JComboBox<E> comboBox, E selectedItem) {
@@ -58,10 +70,10 @@ public class FComboBoxPanel<E> extends JPanel {
     
     private void setLabelLayout() {
         if (this.comboBoxCaption != null && !this.comboBoxCaption.isEmpty()) {
-            JLabel comboLabel;
-            comboLabel = new JLabel(this.comboBoxCaption);
-            comboLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            comboLabel.setFont(FSkin.getBoldFont(12));
+            JLabel comboLabel = new JLabel(this.comboBoxCaption);
+            JLabelSkin<JLabel> labelSkin = FSkin.get(comboLabel);
+            labelSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            labelSkin.setFont(FSkin.getBoldFont(12));
             this.add(comboLabel);            
         }
     }
@@ -69,9 +81,10 @@ public class FComboBoxPanel<E> extends JPanel {
     private void setComboBoxLayout() {
         if (this.comboBox != null) {
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX)) {
-                this.comboBox.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-                this.comboBox.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-                this.comboBox.setFont(FSkin.getFont(12));
+                FSkin.JComponentSkin<JComboBox<E>> comboBoxSkin = FSkin.get(this.comboBox);
+                comboBoxSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+                comboBoxSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+                comboBoxSkin.setFont(FSkin.getFont(12));
                 this.comboBox.setRenderer(new ComplexCellRenderer<E>());
             }
             this.comboBox.setEditable(false);
@@ -79,6 +92,18 @@ public class FComboBoxPanel<E> extends JPanel {
             this.comboBox.setOpaque(true);                
             this.add(this.comboBox);
         }
+    }
+    
+    public void setSelectedItem(Object item) {
+        this.comboBox.setSelectedItem(item);
+    }
+    
+    public Object getSelectedItem() {
+        return this.comboBox.getSelectedItem();
+    }
+    
+    private void refreshSkin() {
+        this.comboBox = FComboBoxWrapper.refreshComboBoxSkin(this.comboBox);
     }
             
     private class ComplexCellRenderer<E1> implements ListCellRenderer<E1> {
@@ -96,12 +121,9 @@ public class FComboBoxPanel<E> extends JPanel {
                     lst0, val0, i0, isSelected, cellHasFocus);
 
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
-            lblItem.setFont(FSkin.getFont(12));
+            FSkin.get(lblItem).setFont(FSkin.getFont(12));
             lblItem.setOpaque(isSelected);
             return lblItem;
-
         }
-
     }
-
 }

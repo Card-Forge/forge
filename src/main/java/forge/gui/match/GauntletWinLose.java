@@ -182,7 +182,7 @@ public class GauntletWinLose extends ControlWinLose {
         final JPanel pnl = this.getView().getPnlCustom();
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center"));
         pnl.setOpaque(true);
-        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(pnl).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnl.add(lblTitle, "gap 0 0 20px 10px, ax center");
         pnl.add(pnlResults, "w 96%!, growy, pushy, gap 2% 0 0 0");
 

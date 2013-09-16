@@ -44,7 +44,7 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
      * Constructor.
      */
     private VSubmenuQuestDecks() {
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         scr.setBorder(null);
         scr.getViewport().setBorder(null);

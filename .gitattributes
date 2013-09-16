@@ -15034,6 +15034,7 @@ src/main/java/forge/gui/toolbox/FAbsolutePositioner.java -text
 src/main/java/forge/gui/toolbox/FButton.java -text
 src/main/java/forge/gui/toolbox/FCheckBox.java -text
 src/main/java/forge/gui/toolbox/FComboBoxPanel.java -text
+src/main/java/forge/gui/toolbox/FComboBoxWrapper.java -text
 src/main/java/forge/gui/toolbox/FLabel.java -text
 src/main/java/forge/gui/toolbox/FList.java -text
 src/main/java/forge/gui/toolbox/FOverlay.java -text
@@ -15145,7 +15146,6 @@ src/main/java/forge/net/protocol/toserver/IPacketSrv.java -text
 src/main/java/forge/net/protocol/toserver/IncorrectPacketSrv.java -text
 src/main/java/forge/net/protocol/toserver/package-info.java -text
 src/main/java/forge/package-info.java svneol=native#text/plain
-src/main/java/forge/properties/ForgeLookAndFeel.java -text
 src/main/java/forge/properties/ForgePreferences.java svneol=native#text/plain
 src/main/java/forge/properties/NewConstants.java svneol=native#text/plain
 src/main/java/forge/properties/Preferences.java svneol=native#text/plain

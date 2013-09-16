@@ -25,6 +25,8 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JTextComponentSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 
@@ -76,7 +78,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
      * Constructor.
      */
     private VSubmenuQuestPrefs() {
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         pnlContent.setOpaque(false);
         pnlContent.setLayout(new MigLayout("insets 0, gap 0, wrap"));
@@ -89,7 +91,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         // Rewards panel
         final FPanel pnlTitleRewards = new FPanel();
         pnlTitleRewards.setLayout(new MigLayout("insets 0, align center"));
-        pnlTitleRewards.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(pnlTitleRewards).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitleRewards.add(new FLabel.Builder().text("Rewards")
                 .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COIN))
                 .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
@@ -101,7 +103,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         // Booster panel
         final FPanel pnlTitleBooster = new FPanel();
         pnlTitleBooster.setLayout(new MigLayout("insets 0, align center"));
-        pnlTitleBooster.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(pnlTitleBooster).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitleBooster.add(new FLabel.Builder().text("Booster Pack Ratios")
                 .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOOK))
                 .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
@@ -112,7 +114,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         // Difficulty table panel
         final FPanel pnlTitleDifficulty = new FPanel();
         pnlTitleDifficulty.setLayout(new MigLayout("insets 0, align center"));
-        pnlTitleDifficulty.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(pnlTitleDifficulty).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitleDifficulty.add(new FLabel.Builder().text("Difficulty Adjustments")
                 .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_NOTES))
                 .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
@@ -123,7 +125,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         // Shop panel
         final FPanel pnlTitleShop = new FPanel();
         pnlTitleShop.setLayout(new MigLayout("insets 0, align center"));
-        pnlTitleShop.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(pnlTitleShop).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlTitleShop.add(new FLabel.Builder().text("Shop Preferences")
                 .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COIN))
                 .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
@@ -373,7 +375,8 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
     public class PrefInput extends JTextField {
         private final QPref qpref;
         private final QuestPreferencesErrType err;
-        private final Color clrHover, clrActive, clrText;
+        private final JTextComponentSkin<PrefInput> skin;
+        private final SkinColor clrHover, clrActive, clrText;
         private boolean isFocus = false;
         private String previousText = "";
 
@@ -388,16 +391,17 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
 
             this.qpref = qp0;
             this.err = e0;
+            this.skin = FSkin.get(this);
             this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
             this.clrActive = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
             this.clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
 
             this.setOpaque(false);
             this.setBorder(null);
-            this.setFont(FSkin.getFont(13));
-            this.setForeground(clrText);
-            this.setCaretColor(clrText);
-            this.setBackground(clrHover);
+            this.skin.setFont(FSkin.getFont(13));
+            this.skin.setForeground(clrText);
+            this.skin.setCaretColor(clrText);
+            this.skin.setBackground(clrHover);
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setText(prefs.getPref(qpref));
             this.setPreviousText(prefs.getPref(qpref));
@@ -423,14 +427,14 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
                 public void focusGained(FocusEvent e) {
                     isFocus = true;
                     setOpaque(true);
-                    setBackground(clrActive);
+                    skin.setBackground(clrActive);
                 }
 
                 @Override
                 public void focusLost(FocusEvent e) {
                     isFocus = false;
                     setOpaque(false);
-                    setBackground(clrHover);
+                    skin.setBackground(clrHover);
 
                     CSubmenuQuestPrefs.validateAndSave(PrefInput.this);
                 }

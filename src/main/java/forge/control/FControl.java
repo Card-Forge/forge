@@ -68,7 +68,6 @@ import forge.gui.menubar.FMenuBar;
 import forge.gui.menubar.MenuUtil;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
-import forge.properties.ForgeLookAndFeel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
@@ -173,19 +172,14 @@ public enum FControl implements KeyEventDispatcher {
      * @param isHeadlessMode */
     public void initialize() {
         // Preloads skin components (using progress bar).
-        FSkin.loadFull();
-
-        // This must be done here or at least between the skin being loaded
-        // and any GUI controls being created.
-        FSkin.setProgessBarMessage("Setting look and feel...");
-        setForgeLookAndFeel();
+        FSkin.loadFull(true);
 
         createMenuBar();
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
-        FSkin.setProgessBarMessage("About to load current quest.");
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("About to load current quest.");
         // Preload quest data if present
         final File dirQuests = new File(NewConstants.QUEST_SAVE_DIR);
         final String questname = Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_QUEST);
@@ -213,7 +207,7 @@ public enum FControl implements KeyEventDispatcher {
 
         setGlobalKeyboardHandler();
 
-        FSkin.setProgessBarMessage("Opening main window...");
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Opening main window...");
         SwingUtilities.invokeLater(new Runnable() { @Override
             public void run() { Singletons.getView().initialize(); } });
     }
@@ -221,11 +215,6 @@ public enum FControl implements KeyEventDispatcher {
     private void setGlobalKeyboardHandler() {
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(this);
-    }
-
-    private void setForgeLookAndFeel() {
-        ForgeLookAndFeel laf = new ForgeLookAndFeel();
-        laf.setForgeLookAndFeel(Singletons.getView().getFrame());
     }
 
     private void createMenuBar() {

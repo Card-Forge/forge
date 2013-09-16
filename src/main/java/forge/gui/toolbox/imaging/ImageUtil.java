@@ -19,9 +19,7 @@
 package forge.gui.toolbox.imaging;
 
 import java.awt.Dimension;
-import java.awt.Image;
-
-import javax.swing.ImageIcon;
+import forge.gui.toolbox.FSkin.SkinIcon;
 
 /**
  * Useful general imaging routines. 
@@ -32,10 +30,8 @@ import javax.swing.ImageIcon;
 public final class ImageUtil {  
     private ImageUtil() {}
     
-    public static ImageIcon getMenuIcon(ImageIcon sourceIcon) {
-        Image img = sourceIcon.getImage();  
-        Image newimg = img.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);  
-        return new ImageIcon(newimg);        
+    public static SkinIcon getMenuIcon(SkinIcon sourceIcon) {
+        return sourceIcon.resize(16, 16);      
     }    
         
     /**

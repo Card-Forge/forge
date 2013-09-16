@@ -2,8 +2,6 @@ package forge.gui.framework;
 
 import java.awt.Container;
 import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,10 +10,10 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinCursor;
 import forge.view.FView;
 
 /**
@@ -43,26 +41,20 @@ public final class SRearrangingUtil {
     private static int tempW;
     private static int tempH;
 
-    private static JPanel pnlPreview     = FView.SINGLETON_INSTANCE.getPnlPreview();
-    private static JLayeredPane pnlDocument     = FView.SINGLETON_INSTANCE.getLpnDocument();
-    private static DragCell cellTarget     = null;
-    private static DragCell cellSrc         = null;
-    private static DragCell cellNew        = null;
-    private static Dropzone dropzone         = Dropzone.NONE;
-    private static List<IVDoc<? extends ICDoc>> docsToMove     = new ArrayList<IVDoc<? extends ICDoc>>();
-    private static IVDoc<? extends ICDoc> srcSelectedDoc = null;
+    private static JPanel pnlPreview                       = FView.SINGLETON_INSTANCE.getPnlPreview();
+    private static FView.DocumentPane pnlDocument          = FView.SINGLETON_INSTANCE.getLpnDocument();
+    private static DragCell cellTarget                     = null;
+    private static DragCell cellSrc                        = null;
+    private static DragCell cellNew                        = null;
+    private static Dropzone dropzone                       = Dropzone.NONE;
+    private static List<IVDoc<? extends ICDoc>> docsToMove = new ArrayList<IVDoc<? extends ICDoc>>();
+    private static IVDoc<? extends ICDoc> srcSelectedDoc   = null;
 
-    private static final Toolkit TOOLS = Toolkit.getDefaultToolkit();
-    private static final Cursor CUR_L = TOOLS.createCustomCursor(
-            FSkin.getImage(FSkin.LayoutImages.IMG_CUR_L), new Point(16, 16), "CUR_L");
-    private static final Cursor CUR_T = TOOLS.createCustomCursor(
-            FSkin.getImage(FSkin.LayoutImages.IMG_CUR_T), new Point(16, 16), "CUR_T");
-    private static final Cursor CUR_B = TOOLS.createCustomCursor(
-            FSkin.getImage(FSkin.LayoutImages.IMG_CUR_B), new Point(16, 16), "CUR_B");
-    private static final Cursor CUR_R = TOOLS.createCustomCursor(
-            FSkin.getImage(FSkin.LayoutImages.IMG_CUR_R), new Point(16, 16), "CUR_R");
-    private static final Cursor CUR_TAB = TOOLS.createCustomCursor(
-            FSkin.getImage(FSkin.LayoutImages.IMG_CUR_TAB), new Point(16, 16), "CUR_TAB");
+    private static final SkinCursor CUR_L = FSkin.getCursor(FSkin.LayoutImages.IMG_CUR_L, 16, 16, "CUR_L");
+    private static final SkinCursor CUR_T = FSkin.getCursor(FSkin.LayoutImages.IMG_CUR_T, 16, 16, "CUR_T");
+    private static final SkinCursor CUR_B = FSkin.getCursor(FSkin.LayoutImages.IMG_CUR_B, 16, 16, "CUR_B");
+    private static final SkinCursor CUR_R = FSkin.getCursor(FSkin.LayoutImages.IMG_CUR_R, 16, 16, "CUR_R");
+    private static final SkinCursor CUR_TAB = FSkin.getCursor(FSkin.LayoutImages.IMG_CUR_TAB, 16, 16, "CUR_TAB");
 
     private static final MouseListener MAD_REARRANGE = new MouseAdapter() {
         @Override

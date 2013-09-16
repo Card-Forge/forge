@@ -43,11 +43,11 @@ public enum VDetail implements IVDoc<CDetail> {
 
     // Top-level containers
     private final CardDetailPanel pnlDetail = new CardDetailPanel(null);
-    private final JLabel lblFlipcard = new JLabel(
-            FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
+    private final JLabel lblFlipcard = new JLabel();
 
     //========= Constructor
     private VDetail() {
+        FSkin.get(lblFlipcard).setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
         lblFlipcard.setVisible(false);
     }
 

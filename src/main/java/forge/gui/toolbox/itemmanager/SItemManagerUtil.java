@@ -1,7 +1,5 @@
 package forge.gui.toolbox.itemmanager;
 
-import javax.swing.ImageIcon;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -11,6 +9,7 @@ import forge.card.CardRulesPredicates;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
@@ -48,12 +47,12 @@ public final class SItemManagerUtil  {
         INSTANT      (FSkin.EditorImages.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT, 2),
         SORCERY      (FSkin.EditorImages.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY, 2);
 
-        public final ImageIcon img;
+        public final SkinImage img;
         public final Predicate<CardRules> predicate;
         public final int group;
 
         StatTypes(FSkin.SkinProp prop, Predicate<CardRules> pred, int grp) {
-            img = new ImageIcon(FSkin.getImage(prop, 18, 18));
+            img = FSkin.getImage(prop, 18, 18);
             predicate = pred;
             group = grp;
         }

@@ -67,7 +67,7 @@ public class QuestWinLoseCardViewer extends FPanel {
 
         this.setCornerDiameter(20);
         this.setBorderToggle(false);
-        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(this).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         picture.setOpaque(false);
         scroller.setBorder(null);
 

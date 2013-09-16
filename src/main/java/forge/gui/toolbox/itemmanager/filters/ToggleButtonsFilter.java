@@ -3,11 +3,11 @@ package forge.gui.toolbox.itemmanager.filters;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import forge.Command;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.item.InventoryItem;
@@ -30,7 +30,7 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
         addToggleButton(panel, s.toLabelString(), s.img);
     }
     
-    protected void addToggleButton(JPanel panel, String filterName, ImageIcon icon) {
+    protected void addToggleButton(JPanel panel, String filterName, SkinImage icon) {
         final FLabel button = new FLabel.Builder()
                 .icon(icon).iconScaleAuto(false)
                 .fontSize(11)

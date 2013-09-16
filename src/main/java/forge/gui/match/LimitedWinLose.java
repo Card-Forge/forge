@@ -129,7 +129,7 @@ public class LimitedWinLose extends ControlWinLose {
                 // + "      Total Wins: " + gauntlet.getWins()
                 // + "      Total Losses: " + gauntlet.getLosses());
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        this.lblTemp2.setFont(FSkin.getFont(17));
+        FSkin.get(this.lblTemp2).setFont(FSkin.getFont(17));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setIconTextGap(50);
         this.getView().getPnlCustom().add(this.lblTemp1, LimitedWinLose.CONSTRAINTS_TITLE);
@@ -207,7 +207,7 @@ public class LimitedWinLose extends ControlWinLose {
     private class TitleLabel extends JLabel {
         TitleLabel(final String msg) {
             super(msg);
-            this.setFont(FSkin.getFont(18));
+            FSkin.get(this).setFont(FSkin.getFont(18));
             this.setPreferredSize(new Dimension(200, 40));
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setForeground(Color.white);

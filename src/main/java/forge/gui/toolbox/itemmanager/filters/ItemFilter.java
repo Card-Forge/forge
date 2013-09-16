@@ -1,6 +1,5 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -31,7 +30,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
         if (this.panel == null) {
             this.panel = new JPanel(new MigLayout("insets 0, gap 2"));
             this.panel.setOpaque(false);
-            this.panel.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 2, FSkin.getColor(FSkin.Colors.CLR_TEXT)));
+            FSkin.get(this.panel).setMatteBorder(1, 2, 1, 2, FSkin.getColor(FSkin.Colors.CLR_TEXT));
             
             this.lblPanelTitle = new FLabel.Builder().fontSize(10).build();
             this.panel.add(this.lblPanelTitle, "top");

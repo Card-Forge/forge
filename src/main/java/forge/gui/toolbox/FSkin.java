@@ -18,27 +18,49 @@
 package forge.gui.toolbox;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.text.JTextComponent;
 
 import org.apache.commons.lang.WordUtils;
 
 import forge.FThreads;
+import forge.Singletons;
 import forge.gui.GuiUtils;
+import forge.gui.home.settings.CSubmenuPreferences;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
+import forge.util.TypeUtil;
 import forge.view.FView;
 
 /**
@@ -50,6 +72,463 @@ import forge.view.FView;
 public enum FSkin {
     /** Singleton instance of skin. */
     SINGLETON_INSTANCE;
+    
+    public static class ComponentSkin<T extends Component> {
+        protected T comp;
+        private SkinColor foreground, background;
+        private SkinFont font;
+        private SkinCursor cursor;
+        protected boolean needRepaintOnReapply;
+        
+        private ComponentSkin(T comp0) {
+            this.comp = comp0;
+        }
+        
+        public SkinColor getForeground() {
+            return this.foreground;
+        }
+
+        public void setForeground(SkinColor skinColor) {
+            this.foreground = skinColor;
+            this.comp.setForeground(skinColor.color);
+        }
+        public void setForeground(Color color) {
+            this.foreground = null; //ensure this field is reset when static color set
+            this.comp.setForeground(color);
+        }
+        
+        public SkinColor getBackground() {
+            return this.background;
+        }
+
+        public void setBackground(SkinColor skinColor) {
+            this.background = skinColor;
+            this.comp.setBackground(skinColor.color);
+        }
+        public void setBackground(Color color) {
+            this.background = null;  //ensure this field is reset when static color set
+            this.comp.setBackground(color);
+        }
+
+        public void setFont(SkinFont skinFont) {
+            this.font = skinFont;
+            this.comp.setFont(skinFont.font);
+        }
+        public void setFont(Font font) {
+            this.font = null;  //ensure this field is reset when static font set
+            this.comp.setFont(font);
+        }
+        
+        public void setCursor(SkinCursor skinCursor) {
+            this.cursor = skinCursor;
+            this.comp.setCursor(skinCursor != null ? skinCursor.cursor : null);
+        }
+        public void setCursor(Cursor cursor0) {
+            this.cursor = null;  //ensure this field is reset when static cursor set
+            this.comp.setCursor(cursor0);
+        }
+        public void resetCursor() {
+            this.cursor = null;
+        }
+        
+        public void setGraphicsColor(Graphics g, SkinColor skinColor) {
+            this.needRepaintOnReapply = true;
+            g.setColor(skinColor.color);
+        }
+        
+        public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, SkinColor skinColor2) {
+            this.needRepaintOnReapply = true;
+            g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, skinColor2.color));
+        }
+        public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, Color color1, float x2, float y2, SkinColor skinColor2) {
+            this.needRepaintOnReapply = true;
+            g2d.setPaint(new GradientPaint(x1, y1, color1, x2, y2, skinColor2.color));
+        }
+        public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, Color color2) {
+            this.needRepaintOnReapply = true;
+            g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, color2));
+        }
+        
+        public void drawImage(Graphics g, SkinImage skinImage, int x, int y) {
+            this.needRepaintOnReapply = true;
+            g.drawImage(skinImage.image, x, y, null);
+        }
+        public void drawImage(Graphics g, SkinImage skinImage, int x, int y, int w, int h) {
+            this.needRepaintOnReapply = true;
+            g.drawImage(skinImage.image, x, y, w, h, null);
+        }
+        public void drawImage(Graphics g, SkinImage skinImage, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
+            this.needRepaintOnReapply = true;
+            g.drawImage(skinImage.image, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, null);
+        }
+        
+        protected void reapply() {
+            if (this.foreground != null) {
+                comp.setForeground(this.foreground.color);
+            }
+            if (this.background != null) {
+                comp.setBackground(this.background.color);
+            }
+            if (this.font != null) {
+                comp.setFont(this.font.font);
+            }
+            if (this.cursor != null) {
+                comp.setCursor(this.cursor.cursor);
+            }
+            if (this.needRepaintOnReapply) {
+                comp.repaint();
+            }
+        }
+    }
+    public static class JFrameSkin<T extends JFrame> extends ComponentSkin<T> {
+        private SkinImage iconImage;
+        
+        private JFrameSkin(T comp0) {
+            super(comp0);
+        }
+        
+        public void setIconImage(SkinImage skinImage) {
+            this.iconImage = skinImage;
+            this.comp.setIconImage(skinImage.image);
+        }
+        public void setIcon(Image image) {
+            this.iconImage = null; //ensure this field is reset when static image set
+            this.comp.setIconImage(image);
+        }
+        
+        @Override
+        protected void reapply() {
+            if (this.iconImage != null) {
+                this.comp.setIconImage(this.iconImage.image);
+            }
+            super.reapply();
+        }
+    }
+    public static class JComponentSkin<T extends JComponent> extends ComponentSkin<T> {
+        private class LineBorder {
+            private final SkinColor skinColor;
+            private final int thickness;
+            private final boolean rounded;
+
+            private LineBorder(SkinColor skinColor0, int thickness0, boolean rounded0) {
+                this.skinColor = skinColor0;
+                this.thickness = thickness0;
+                this.rounded = rounded0;
+            }
+            
+            private void apply() {
+                JComponentSkin.this.comp.setBorder(BorderFactory.createLineBorder(this.skinColor.color, this.thickness, this.rounded));
+            }
+        }
+        private LineBorder lineBorder;
+        
+        private class MatteBorder {
+            private final int top, left, bottom, right;
+            private final SkinColor skinColor;
+
+            private MatteBorder(int top0, int left0, int bottom0, int right0, SkinColor skinColor0) {
+                this.top = top0;
+                this.left = left0;
+                this.bottom = bottom0;
+                this.right = right0;
+                this.skinColor = skinColor0;
+            }
+
+            private void apply() {
+                JComponentSkin.this.comp.setBorder(BorderFactory.createMatteBorder(this.top, this.left, this.bottom, this.right, this.skinColor.color));
+            }
+        }
+        private MatteBorder matteBorder;
+        
+        private JComponentSkin(T comp0) {
+            super(comp0);
+        }
+        
+        public void setLineBorder(SkinColor skinColor) {
+            setLineBorder(skinColor, 1, false);
+        }
+        public void setLineBorder(SkinColor skinColor, int thickness) {
+            setLineBorder(skinColor, thickness, false);
+        }
+        public void setLineBorder(SkinColor skinColor, int thickness, boolean rounded) {
+            this.lineBorder = new LineBorder(skinColor, thickness, rounded);
+            this.lineBorder.apply();
+        }
+        
+        public void setMatteBorder(int top, int left, int bottom, int right, SkinColor skinColor) {
+            this.matteBorder = new MatteBorder(top, left, bottom, right, skinColor);
+            this.matteBorder.apply();
+        }
+        
+        @Override
+        protected void reapply() {
+            if (this.lineBorder != null) {
+                this.lineBorder.apply();
+            }
+            if (this.matteBorder != null) {
+                this.matteBorder.apply();
+            }
+            super.reapply();
+        }
+    }
+    public static class JLabelSkin<T extends JLabel> extends JComponentSkin<T> {
+        private SkinImage icon;
+        
+        private JLabelSkin(T comp0) {
+            super(comp0);
+        }
+        
+        public void setIcon(SkinImage skinImage) {
+            this.icon = skinImage;
+            this.comp.setIcon(skinImage != null ? skinImage.getIcon() : null);
+        }
+        public void setIcon(ImageIcon imageIcon) {
+            this.icon = null; //ensure this field is reset when static icon set
+            this.comp.setIcon(imageIcon);
+        }
+        
+        @Override
+        protected void reapply() {
+            if (this.icon != null) {
+                this.comp.setIcon(this.icon.getIcon());
+            }
+            super.reapply();
+        }
+    }
+    public static class AbstractButtonSkin<T extends AbstractButton> extends JComponentSkin<T> {
+        private SkinImage icon, pressedIcon, rolloverIcon;
+        
+        private AbstractButtonSkin(T comp0) {
+            super(comp0);
+        }
+        
+        public void setIcon(SkinImage skinImage) {
+            this.icon = skinImage;
+            this.comp.setIcon(skinImage != null ? skinImage.getIcon() : null);
+        }
+        public void setIcon(ImageIcon imageIcon) {
+            this.icon = null; //ensure this field is reset when static icon set
+            this.comp.setIcon(imageIcon);
+        }
+        
+        public void setPressedIcon(SkinImage skinImage) {
+            this.pressedIcon = skinImage;
+            this.comp.setPressedIcon(skinImage != null ? skinImage.getIcon() : null);
+        }
+        public void setPressedIcon(ImageIcon imageIcon) {
+            this.pressedIcon = null; //ensure this field is reset when static icon set
+            this.comp.setPressedIcon(imageIcon);
+        }
+        
+        public void setRolloverIcon(SkinImage skinImage) {
+            this.rolloverIcon = skinImage;
+            this.comp.setRolloverIcon(skinImage != null ? skinImage.getIcon() : null);
+        }
+        public void setRolloverIcon(ImageIcon imageIcon) {
+            this.rolloverIcon = null; //ensure this field is reset when static icon set
+            this.comp.setRolloverIcon(imageIcon);
+        }
+        
+        @Override
+        protected void reapply() {
+            if (this.icon != null) {
+                this.comp.setIcon(this.icon.getIcon());
+            }
+            if (this.pressedIcon != null) {
+                this.comp.setPressedIcon(this.pressedIcon.getIcon());
+            }
+            if (this.rolloverIcon != null) {
+                this.comp.setRolloverIcon(this.rolloverIcon.getIcon());
+            }
+            super.reapply();
+        }
+    }
+    public static class JTextComponentSkin<T extends JTextComponent> extends JComponentSkin<T> {
+        private SkinColor caretColor;
+        
+        private JTextComponentSkin(T comp0) {
+            super(comp0);
+        }
+
+        public SkinColor getCaretColor() {
+            return this.caretColor;
+        }
+        
+        public void setCaretColor(SkinColor skinColor) {
+            this.caretColor = skinColor;
+            this.comp.setCaretColor(skinColor.color);
+        }
+        public void setCaretColor(Color color) {
+            this.caretColor = null;  //ensure this field is reset when static color set
+            this.comp.setCaretColor(color);
+        }
+        
+        @Override
+        protected void reapply() {
+            if (this.caretColor != null) {
+                this.comp.setCaretColor(this.caretColor.color);
+            }
+            super.reapply();
+        }
+    }
+    public static class JTableSkin<T extends JTable> extends JComponentSkin<T> {
+        private SkinColor selectionForeground, selectionBackground;
+        
+        private JTableSkin(T comp0) {
+            super(comp0);
+        }
+
+        public SkinColor getSelectionForeground() {
+            return this.selectionForeground;
+        }
+
+        public void setSelectionForeground(SkinColor skinColor) {
+            this.selectionForeground = skinColor;
+            this.comp.setSelectionForeground(skinColor.color);
+        }
+        public void setSelectionForeground(Color color) {
+            this.selectionForeground = null; //ensure this field is reset when static color set
+            this.comp.setSelectionForeground(color);
+        }
+        
+        public SkinColor getSelectionBackground() {
+            return this.selectionBackground;
+        }
+
+        public void setSelectionBackground(SkinColor skinColor) {
+            this.selectionBackground = skinColor;
+            this.comp.setSelectionBackground(skinColor.color);
+        }
+        public void setSelectionBackground(Color color) {
+            this.selectionBackground = null;  //ensure this field is reset when static color set
+            this.comp.setSelectionBackground(color);
+        }
+        
+        @Override
+        protected void reapply() {
+            if (this.selectionForeground != null) {
+                this.comp.setSelectionForeground(this.selectionForeground.color);
+            }
+            if (this.selectionBackground != null) {
+                this.comp.setSelectionBackground(this.selectionBackground.color);
+            }
+            super.reapply();
+        }
+    }
+    public static class FPanelSkin<T extends FPanel> extends JComponentSkin<T> {
+        private SkinImage foregroundImage, backgroundTexture;
+        
+        private FPanelSkin(T comp0) {
+            super(comp0);
+        }
+        
+        public void setForegroundImage(SkinImage skinIcon) {
+            this.comp.setForegroundImage(skinIcon.image); //must call this first since it will call resetForegroundImage 
+            this.foregroundImage = skinIcon;
+            this.needRepaintOnReapply = true; //foreground image draw during paint
+        }
+        
+        public void resetForegroundImage() {
+            this.foregroundImage = null;
+        }
+        
+        public void setBackgroundTexture(SkinImage skinIcon) {
+            this.comp.setBackgroundTexture(skinIcon.image); //must call this first since it will call resetBackgroundTexture 
+            this.backgroundTexture = skinIcon;
+            this.needRepaintOnReapply = true; //background texture drawn during paint
+        }
+        
+        public void resetBackgroundTexture() {
+            this.backgroundTexture = null;
+        }
+        
+        @Override
+        protected void reapply() {
+            if (this.foregroundImage != null) {
+                this.setForegroundImage(this.foregroundImage); //use skin function so foregroundImage field retained
+            }
+            if (this.backgroundTexture != null) {
+                this.setBackgroundTexture(this.backgroundTexture); //use skin function so backgroundTexture field retained
+            }
+            super.reapply();
+        }
+    }
+    
+    @SuppressWarnings("rawtypes")
+    private static HashMap<Component, ComponentSkin> compSkins = new HashMap<Component, ComponentSkin>();
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Component> ComponentSkin<T> get(T comp) {
+        ComponentSkin<T> skinnedComp = compSkins.get(comp);
+        if (skinnedComp == null) {
+            skinnedComp = new ComponentSkin<T>(comp);
+            compSkins.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JFrame> JFrameSkin<T> get(T comp) {
+        JFrameSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JFrameSkin.class);
+        if (skinnedComp == null) {
+            skinnedComp = new JFrameSkin<T>(comp);
+            compSkins.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JComponent> JComponentSkin<T> get(T comp) {
+        JComponentSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JComponentSkin.class);
+        if (skinnedComp == null) {
+            skinnedComp = new JComponentSkin<T>(comp);
+            compSkins.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JLabel> JLabelSkin<T> get(T comp) {
+        JLabelSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JLabelSkin.class);
+        if (skinnedComp == null) {
+            skinnedComp = new JLabelSkin<T>(comp);
+            compSkins.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends AbstractButton> AbstractButtonSkin<T> get(T comp) {
+        AbstractButtonSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), AbstractButtonSkin.class);
+        if (skinnedComp == null) {
+            skinnedComp = new AbstractButtonSkin<T>(comp);
+            compSkins.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JTextComponent> JTextComponentSkin<T> get(T comp) {
+        JTextComponentSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JTextComponentSkin.class);
+        if (skinnedComp == null) {
+            skinnedComp = new JTextComponentSkin<T>(comp);
+            compSkins.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JTable> JTableSkin<T> get(T comp) {
+        JTableSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JTableSkin.class);
+        if (skinnedComp == null) {
+            skinnedComp = new JTableSkin<T>(comp);
+            compSkins.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends FPanel> FPanelSkin<T> get(T comp) {
+        FPanelSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), FPanelSkin.class);
+        if (skinnedComp == null) {
+            skinnedComp = new FPanelSkin<T>(comp);
+            compSkins.put(comp, skinnedComp);
+        }
+        return skinnedComp;
+    }
 
     /** */
     public enum Backgrounds implements SkinProp { /** */
@@ -63,6 +542,129 @@ public enum FSkin {
         /** @return int[] */
         @Override
         public int[] getCoords() { return coords; }
+    }
+    
+    /**
+     * Retrieves a color from this skin's color map.
+     * 
+     * @param c0 &emsp; Colors property (from enum)
+     * @return {@link forge.gui.toolbox.FSkin.SkinColor}
+     */
+    public static SkinColor getColor(final Colors c0) {
+        return SkinColor.baseColors.get(c0);
+    }
+    
+    /** Steps RGB components of a color up or down.
+     * Returns opaque (non-alpha) stepped color.
+     * Plus for lighter, minus for darker.
+     *
+     * @param clr0 {@link java.awt.Color}
+     * @param step int
+     * @return {@link java.awt.Color}
+     */
+    public static Color stepColor(Color clr0, int step) {
+        int r = clr0.getRed();
+        int g = clr0.getGreen();
+        int b = clr0.getBlue();
+
+        // Darker
+        if (step < 0) {
+            r =  ((r + step > 0) ? r + step : 0);
+            g =  ((g + step > 0) ? g + step : 0);
+            b =  ((b + step > 0) ? b + step : 0);
+        }
+        else {
+            r =  ((r + step < 255) ? r + step : 255);
+            g =  ((g + step < 255) ? g + step : 255);
+            b =  ((b + step < 255) ? b + step : 255);
+        }
+
+        return new Color(r, g, b);
+    }
+
+    /** Returns RGB components of a color, with a new
+     * value for alpha. 0 = transparent, 255 = opaque.
+     *
+     * @param clr0 {@link java.awt.Color}
+     * @param alpha int
+     * @return {@link java.awt.Color}
+     */
+    public static Color alphaColor(Color clr0, int alpha) {
+        return new Color(clr0.getRed(), clr0.getGreen(), clr0.getBlue(), alpha);
+    }
+    
+    public static class SkinColor {
+        private static final HashMap<Colors, SkinColor> baseColors = new HashMap<Colors, SkinColor>();
+        private static final HashMap<String, SkinColor> derivedColors = new HashMap<String, SkinColor>();
+        private static final int NO_BRIGHTNESS_DELTA = 0;
+        private static final int NO_STEP = -999; //needs to be large negative since small negative values are valid
+        private static final int NO_ALPHA = -1;
+        
+        private final Colors baseColor;
+        private final int brightnessDelta;
+        private final int step;
+        private final int alpha;
+        private Color color;
+        
+        //private constructors for color that changes with skin (use FSkin.getColor())
+        private SkinColor(Colors baseColor0) {
+            this(baseColor0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_ALPHA);
+        }
+        private SkinColor(Colors baseColor0, int brightnessDelta0, int step0, int alpha0) {
+            this.baseColor = baseColor0;
+            this.brightnessDelta = brightnessDelta0;
+            this.step = step0;
+            this.alpha = alpha0;
+            this.updateColor();
+        }
+        
+        private SkinColor getDerivedColor(int brightnessDelta0, int step0, int alpha0) {
+            String key = this.baseColor.name() + "|" + brightnessDelta0 + "|" + step0 + "|" + alpha0;
+            SkinColor derivedColor = derivedColors.get(key);
+            if (derivedColor == null) {
+                derivedColor = new SkinColor(this.baseColor, brightnessDelta0, step0, alpha0);
+                derivedColors.put(key, derivedColor);
+            }
+            return derivedColor;
+        }
+        
+        public SkinColor brighter() {
+            return getDerivedColor(this.brightnessDelta + 1, this.step, this.alpha);
+        }
+        
+        public SkinColor darker() {
+            return getDerivedColor(this.brightnessDelta - 1, this.step, this.alpha);
+        }
+        
+        public SkinColor stepColor(int step0) {
+            return getDerivedColor(this.brightnessDelta, step0, this.alpha);
+        }
+        
+        public SkinColor alphaColor(int alpha0) {
+            return getDerivedColor(this.brightnessDelta, this.step, alpha0);
+        }
+        
+        private void updateColor() {
+            this.color = this.baseColor.color;
+            if (this.brightnessDelta != NO_BRIGHTNESS_DELTA) {
+                if (this.brightnessDelta < 0) {
+                    for (int i = 0; i > this.brightnessDelta; i--) {
+                        this.color = this.color.darker();
+                    }
+                }
+                else {
+                    for (int i = 0; i < this.brightnessDelta; i++) {
+                        this.color = this.color.brighter();
+                    }
+                }
+            }
+            if (this.step != NO_STEP) {
+                this.color = FSkin.stepColor(this.color, this.step);
+            }
+            if (this.alpha != NO_ALPHA) {
+                this.color = FSkin.alphaColor(this.color, this.alpha);
+            }
+        }
     }
 
     /** */
@@ -81,12 +683,410 @@ public enum FSkin {
         CLR_THEME2                  (new int[] {70, 230}), /** */
         CLR_OVERLAY                 (new int[] {70, 250});
 
+        private Color color;
         private int[] coords;
+
         /** @param xy &emsp; int[] coordinates */
         Colors(final int[] xy) { this.coords = xy; }
+ 
         /** @return int[] */
         @Override
         public int[] getCoords() { return coords; }
+        
+        public static void updateAll() {
+            for (final Colors c : Colors.values()) {
+                c.updateColor();
+            }
+            if (SkinColor.baseColors.size() == 0) { //initialize base skin colors if needed
+                for (final Colors c : Colors.values()) {
+                    SkinColor.baseColors.put(c, new SkinColor(c));
+                }
+            }
+            else { //update existing SkinColors if baseColors already initialized
+                for (final SkinColor c : SkinColor.baseColors.values()) {
+                    c.updateColor();
+                }
+                for (final SkinColor c : SkinColor.derivedColors.values()) {
+                    c.updateColor();
+                }
+            }
+        }
+        
+        private void updateColor() {
+            tempCoords = this.getCoords();
+            x0 = tempCoords[0];
+            y0 = tempCoords[1];
+
+            color = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x0, y0));
+        }
+    }
+    
+    /**
+     * Gets an image.
+     *
+     * @param s0 &emsp; SkinProp enum
+     * @return {@link forge.gui.toolbox.FSkin.SkinImage}
+     */
+    public static SkinImage getImage(final SkinProp s0) {
+        SkinImage image = SkinImage.images.get(s0);
+        if (image == null) {
+            throw new NullPointerException("Can't find an image for SkinProp " + s0);
+        }
+        return image;
+    }
+
+    /**
+     * Gets a scaled version of an image from this skin's image map.
+     * 
+     * @param s0
+     *            String image enum
+     * @param w0
+     *            int new width
+     * @param h0
+     *            int new height
+     * @return {@link forge.gui.toolbox.FSkin.SkinImage}
+     */
+    public static SkinImage getImage(final SkinProp s0, int w0, int h0) {
+        w0 = (w0 < 1) ? 1 : w0;
+        h0 = (h0 < 1) ? 1 : h0;
+        return getImage(s0).resize(w0, h0);
+    }
+    
+    public static class SkinImage {
+        private static final Map<SkinProp, SkinImage> images = new HashMap<SkinProp, SkinImage>();
+        
+        private static void setImage(final SkinProp s0, Image image0) {
+            SkinImage skinImage = images.get(s0);
+            if (skinImage == null) {
+                skinImage = new SkinImage(image0);
+                images.put(s0, skinImage);
+            }
+            else {
+                skinImage.changeImage(image0, null);
+            }
+        }
+
+        /**
+         * setImage, with auto-scaling assumed true.
+         * 
+         * @param s0
+         */
+        private static void setImage(final SkinProp s0) {
+            setImage(s0, true);
+        }
+
+        /**
+         * Checks the preferred sprite for existence of a sub-image
+         * defined by X, Y, W, H.
+         * 
+         * If an image is not present at those coordinates, default
+         * icon is substituted.
+         * 
+         * The result is saved in a HashMap.
+         * 
+         * @param s0 &emsp; An address in the hashmap, derived from SkinProp enum
+         */
+        private static void setImage(final SkinProp s0, final boolean scale) {
+            tempCoords = s0.getCoords();
+            x0 = tempCoords[0];
+            y0 = tempCoords[1];
+            w0 = tempCoords[2];
+            h0 = tempCoords[3];
+            newW = (tempCoords.length == 6 ? tempCoords[4] : 0);
+            newH = (tempCoords.length == 6 ? tempCoords[5] : 0);
+
+            final BufferedImage img = FSkin.testPreferredSprite(s0);
+            final BufferedImage bi0 = img.getSubimage(x0, y0, w0, h0);
+
+            if (scale && newW != 0) {
+                setImage(s0, bi0.getScaledInstance(newW, newH, Image.SCALE_AREA_AVERAGING));
+            }
+            else {
+                setImage(s0, bi0);
+            }
+        }
+        
+        protected Image image;
+        protected ImageIcon imageIcon;
+        protected HashMap<String, SkinImage> scaledImages;
+        private HashMap<String, SkinCursor> cursors;
+        
+        private SkinImage(Image image0) {
+            this.image = image0;
+        }
+        
+        protected void changeImage(Image image0, ImageIcon imageIcon0) {
+            this.image = image0;
+            this.imageIcon = imageIcon0;
+            this.updateScaledImages();
+            this.updateCursors();
+        }
+
+        protected SkinImage clone() {
+            return new SkinImage(this.image);
+        }
+
+        public SkinImage resize(int w, int h) {
+            if (this.scaledImages == null) {
+                this.scaledImages = new HashMap<String, SkinImage>();
+            }
+            String key = w + "x" + h;
+            SkinImage scaledImage = this.scaledImages.get(key);
+            if (scaledImage == null) {
+                scaledImage = this.clone();
+                scaledImage.createResizedImage(this, w, h);
+                this.scaledImages.put(key, scaledImage);
+            }
+            return scaledImage;
+        }
+        
+        public SkinImage scale(double scale) {
+            return scale(scale, scale);
+        }
+        public SkinImage scale(double scaleX, double scaleY) {
+            if (this.scaledImages == null) {
+                this.scaledImages = new HashMap<String, SkinImage>();
+            }
+            String key = scaleX + "|" + scaleY;
+            SkinImage scaledImage = this.scaledImages.get(key);
+            if (scaledImage == null) {
+                scaledImage = this.clone();
+                scaledImage.createScaledImage(this, scaleX, scaleY);
+                this.scaledImages.put(key, scaledImage);
+            }
+            return scaledImage;
+        }
+        
+        protected void updateScaledImages() {
+            if (this.scaledImages == null) { return; }
+
+            for (Entry<String, SkinImage> i : this.scaledImages.entrySet()) {
+                String[] dims = i.getKey().split("x");
+                if (dims.length == 2) { //static scale
+                    i.getValue().createResizedImage(this, Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
+                }
+                else { //dynamic scale
+                    dims = i.getKey().split("\\|"); //must escape since "|" is regex operator
+                    i.getValue().createScaledImage(this, Double.parseDouble(dims[0]), Double.parseDouble(dims[1]));
+                }
+            }
+        }
+
+        protected void createResizedImage(SkinImage baseImage, int w, int h) {
+            final BufferedImage resizedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+            final Graphics2D g2d = resizedImage.createGraphics();
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2d.drawImage(baseImage.image, 0, 0, w, h, 0, 0, baseImage.getWidth(), baseImage.getHeight(), null);
+            g2d.dispose();
+
+            this.changeImage(resizedImage, null);
+        }
+
+        private void createScaledImage(SkinImage baseImage, double scaleX, double scaleY) {
+            createResizedImage(baseImage, (int)(baseImage.getWidth() * scaleX), (int)(baseImage.getHeight() * scaleY));
+        }
+        
+        private SkinCursor toCursor(int hotSpotX, int hotSpotY, String name) {
+            if (this.cursors == null) {
+                this.cursors = new HashMap<String, SkinCursor>();
+            }
+            String key = hotSpotX + "|" + hotSpotY + "|" + name;
+            SkinCursor cursor = this.cursors.get(key);
+            if (cursor == null) {
+                cursor = new SkinCursor(new Point(hotSpotX, hotSpotY), name);
+                cursor.updateCursor(this.image);
+                this.cursors.put(key, cursor);
+            }
+            return cursor;
+        }
+        
+        private void updateCursors() {
+            if (this.cursors == null) { return; }
+
+            for (SkinCursor cursor : this.cursors.values()) {
+                cursor.updateCursor(this.image);
+            }
+        }
+        
+        public Dimension getSizeForPaint(Graphics g) {
+            if (g == null) {
+                throw new NullPointerException("Must pass Graphics to get size for paint");
+            }
+            return new Dimension(this.getWidth(), this.getHeight());
+        }
+        
+        protected int getWidth() {
+            return this.image.getWidth(null);
+        }
+        
+        protected int getHeight() {
+            return this.image.getHeight(null);
+        }
+        
+        protected ImageIcon getIcon() {
+            if (this.imageIcon == null) {
+                this.imageIcon = new ImageIcon(this.image);
+            }
+            return this.imageIcon;
+        }
+    }
+    
+    /**
+     * Gets an image.
+     *
+     * @param s0 &emsp; SkinProp enum
+     * @return {@link forge.gui.toolbox.FSkin.SkinCursor}
+     */
+    public static SkinCursor getCursor(final SkinProp s0, int hotSpotX, int hotSpotY, String name) {
+        return getImage(s0).toCursor(hotSpotX, hotSpotY, name);
+    }
+    
+    public static class SkinCursor {
+        private static final Toolkit TOOLS = Toolkit.getDefaultToolkit();
+
+        private final Point hotSpot;
+        private final String name;
+        private Cursor cursor;
+        
+        private SkinCursor(Point hotSpot0, String name0) {
+            this.hotSpot = hotSpot0;
+            this.name = name0;
+        }
+        
+        private void updateCursor(Image image) {
+            this.cursor = TOOLS.createCustomCursor(image, this.hotSpot, this.name);
+        }
+    }
+
+    /**
+     * Gets an icon.
+     *
+     * @param s0 &emsp; SkinProp enum
+     * @return {@link forge.gui.toolbox.FSkin.SkinImage}
+     */
+    public static SkinIcon getIcon(final SkinProp s0) {
+        SkinIcon icon = SkinIcon.icons.get(s0);
+        if (icon == null) {
+            throw new NullPointerException("Can't find an icon for SkinProp " + s0);
+        }
+        return icon;
+    }
+    
+    public static class SkinIcon extends SkinImage {
+        private static final Map<SkinProp, SkinIcon> icons = new HashMap<SkinProp, SkinIcon>();
+        
+        private static void setIcon(final SkinProp s0, ImageIcon imageIcon0) {
+            SkinIcon skinIcon = icons.get(s0);
+            if (skinIcon == null) {
+                skinIcon = new SkinIcon(imageIcon0);
+                icons.put(s0, skinIcon);
+            }
+            else {
+                skinIcon.changeImage(imageIcon0.getImage(), imageIcon0);
+            }
+        }
+
+        private static void setIcon(final SkinProp s0) {
+            tempCoords = s0.getCoords();
+            x0 = tempCoords[0];
+            y0 = tempCoords[1];
+            w0 = tempCoords[2];
+            h0 = tempCoords[3];
+
+            final BufferedImage img = testPreferredSprite(s0);
+
+            setIcon(s0, new ImageIcon(img.getSubimage(x0, y0, w0, h0)));
+        }
+
+        /**
+         * Sets an icon in this skin's icon map from a file address.
+         * Throws IO exception for debugging if needed.
+         * 
+         * @param s0
+         *            &emsp; Skin property (from enum)
+         * @param s1
+         *            &emsp; File address
+         */
+        private static void setIcon(final SkinProp s0, final String s1) {
+            try {
+                final File file = new File(s1);
+                ImageIO.read(file);
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+            setIcon(s0, new ImageIcon(s1));
+        }
+
+        /**
+         * Sets an icon in this skin's icon map from a buffered image.
+         * 
+         * @param s0 &emsp; Skin property (from enum)
+         * @param bi0 &emsp; BufferedImage
+         */
+        private static void setIcon(final SkinProp s0, final BufferedImage bi0) {
+            setIcon(s0, new ImageIcon(bi0));
+        }
+        
+        private SkinIcon(ImageIcon imageIcon0) {
+            super(imageIcon0.getImage());
+            this.imageIcon = imageIcon0;
+        }
+
+        @Override
+        protected SkinIcon clone() {
+            return new SkinIcon(this.imageIcon);
+        }
+        
+        @Override
+        public SkinIcon resize(int w, int h) {
+            return (SkinIcon)super.resize(w, h);
+        }
+        
+        @Override
+        public SkinIcon scale(double scale) {
+            return scale(scale, scale);
+        }
+        @Override
+        public SkinIcon scale(double scaleX, double scaleY) {
+            return (SkinIcon)super.scale(scaleX, scaleY);
+        }
+
+        @Override
+        protected void createResizedImage(SkinImage baseImage, int w, int h) {
+            Image image0 = baseImage.image.getScaledInstance(w, h, java.awt.Image.SCALE_SMOOTH);
+            this.changeImage(image0, new ImageIcon(image0));
+        }
+        
+        @Override
+        protected int getWidth() {
+            return this.imageIcon.getIconWidth();
+        }
+        
+        @Override
+        protected int getHeight() {
+            return this.imageIcon.getIconHeight();
+        }
+        
+        @Override
+        protected ImageIcon getIcon() { //can skip null check since imageIcon will always be set
+            return this.imageIcon;
+        }
+    }
+    
+    //allow creating dynamic icons that can be used in place of skin icons
+    public static class UnskinnedIcon extends SkinIcon {
+        public UnskinnedIcon(String path0) {
+            super(new ImageIcon(path0));
+        }
+        public UnskinnedIcon(BufferedImage i0) {
+            super(new ImageIcon(i0));
+        }
+        
+        @Override
+        public ImageIcon getIcon() {
+            return super.getIcon();
+        }
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
@@ -402,15 +1402,104 @@ public enum FSkin {
         int[] getCoords();
     }
 
-    private static Map<SkinProp, ImageIcon> icons;
-    private static Map<SkinProp, Image> images;
-    private static Map<SkinProp, Color> colors;
+    private static Map<Integer, SkinImage> avatars;
+    private static Map<Integer, Font> fixedFonts = new HashMap<Integer, Font>();
+    
+    /** @return {@link java.awt.font} */
+    public static Font getFixedFont(final int size) {
+        Font fixedFont = fixedFonts.get(size);
+        if (fixedFont == null) {
+            fixedFont = new Font("Monospaced", Font.PLAIN, size);
+            fixedFonts.put(size, fixedFont);
+        }
+        return fixedFont;
+    }
 
-    private static Map<Integer, Font> fixedFonts;
-    private static Map<Integer, Font> plainFonts;
-    private static Map<Integer, Font> boldFonts;
-    private static Map<Integer, Font> italicFonts;
-    private static Map<Integer, Image> avatars;
+    /**
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getFont() {
+        return FSkin.getFont(FSkin.defaultFontSize);
+    }
+
+    /**
+     * @param size - integer, pixel size
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getFont(final int size) {
+        return SkinFont.get(Font.PLAIN, size);
+    }
+    
+    /**
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getBoldFont() {
+        return FSkin.getBoldFont(FSkin.defaultFontSize);
+    }
+
+    /**
+     * @param size - integer, pixel size
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getBoldFont(final int size) {
+        return SkinFont.get(Font.BOLD, size);
+    }
+    
+    /**
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getItalicFont() {
+        return FSkin.getItalicFont(FSkin.defaultFontSize);
+    }
+    
+    /**
+     * @param size - integer, pixel size
+     * @return {@link forge.gui.toolbox.FSkin.SkinFont}
+     */
+    public static SkinFont getItalicFont(final int size) {
+        return SkinFont.get(Font.ITALIC, size);
+    }
+    
+    public static class SkinFont {
+        private static Font baseFont;
+        private static Map<String, SkinFont> fonts = new HashMap<String, SkinFont>();
+        
+        private static SkinFont get(final int style0, final int size0) {
+            String key = style0 + "|" + size0;
+            SkinFont skinFont = fonts.get(key);
+            if (skinFont == null) {
+                skinFont = new SkinFont(style0, size0);
+                fonts.put(key, skinFont);
+            }
+            return skinFont;
+        }
+        
+        private static void setBaseFont(Font baseFont0) {
+            baseFont = baseFont0;
+
+            //update all cached skin fonts
+            for (SkinFont skinFont : fonts.values()) {
+                skinFont.updateFont();
+            }
+        }
+
+        private final int style, size;
+        private Font font;
+
+        private SkinFont(final int style0, final int size0) {
+            this.style = style0;
+            this.size = size0;
+            this.updateFont();
+        }
+        
+        public int getSize() {
+            return this.font.getSize();
+        }
+        
+        private void updateFont() {
+            this.font = baseFont.deriveFont(this.style, this.size);
+        }
+    }
 
     private static final String
         FILE_SKINS_DIR = "res/skins/",
@@ -426,13 +1515,38 @@ public enum FSkin {
 
     private static String preferredDir;
     private static String preferredName;
-    private static Font font;
     private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils,
         bimOldFoils, bimDefaultAvatars, bimPreferredAvatars;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;    
     private static int defaultFontSize = 12;
     private static boolean loaded = false;
+    
+    @SuppressWarnings("rawtypes")
+    public static void changeSkin(final String skinName) {
+        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        if (skinName.equals(prefs.getPref(FPref.UI_SKIN))) { return; }
+
+        //save skin preference
+        prefs.setPref(FPref.UI_SKIN, skinName);
+        prefs.save();
+
+        //load skin
+        loaded = false; //reset this temporarily until end of loadFull()
+        loadLight(skinName, false);
+        loadFull(false);
+
+        //reapply skin to all skinned components
+        for (ComponentSkin compSkin : compSkins.values()) {
+            compSkin.reapply();
+        }
+        
+        //refresh certain components skinned via look and feel
+        Singletons.getControl().getMenuBar().refresh();
+        FComboBoxWrapper.refreshAllSkins();
+        FComboBoxPanel.refreshAllSkins();
+        CSubmenuPreferences.SINGLETON_INSTANCE.updateCurrentSkin();
+    }
 
     /**
      * Loads a "light" version of FSkin, just enough for the splash screen:
@@ -442,66 +1556,42 @@ public enum FSkin {
      * @param skinName
      *            the skin name
      */
-    public static void loadLight(final String skinName) {
-        // No need for this method to be loaded while on the EDT.
-        FThreads.assertExecutedByEdt(false);
+    public static void loadLight(final String skinName, final boolean onInit) {
+        if (onInit) {
+            // No need for this method to be loaded while on the EDT.
+            FThreads.assertExecutedByEdt(false);
+        }
 
         // Non-default (preferred) skin name and dir.
         FSkin.preferredName = skinName.toLowerCase().replace(' ', '_');
         FSkin.preferredDir = FILE_SKINS_DIR + preferredName + "/";
 
-        if (FSkin.icons != null) { FSkin.icons.clear(); }
-        if (FSkin.images != null) { FSkin.images.clear(); }
-        if (FSkin.colors != null) { FSkin.colors.clear(); }
-
-        FSkin.icons = new HashMap<SkinProp, ImageIcon>();
-        FSkin.images = new HashMap<SkinProp, Image>();
-        FSkin.colors = new HashMap<SkinProp, Color>();
-
-        final File f = new File(preferredDir + FILE_SPLASH);
-        if (!f.exists()) {
-            FSkin.loadLight("default");
-        }
-        else {
-            final BufferedImage img;
-            try {
-                img = ImageIO.read(f);
-
-                final int h = img.getHeight();
-                final int w = img.getWidth();
-
-                FSkin.setIcon(Backgrounds.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
-
-                UIManager.put("ProgressBar.background", FSkin.getColorFromPixel(img.getRGB(25, h - 75)));
-                UIManager.put("ProgressBar.selectionBackground", FSkin.getColorFromPixel(img.getRGB(75, h - 75)));
-                UIManager.put("ProgressBar.foreground", FSkin.getColorFromPixel(img.getRGB(25, h - 25)));
-                UIManager.put("ProgressBar.selectionForeground", FSkin.getColorFromPixel(img.getRGB(75, h - 25)));
-                UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));
-            } catch (final IOException e) {
-                e.printStackTrace();
+        if (onInit) {
+            final File f = new File(preferredDir + FILE_SPLASH);
+            if (!f.exists()) {
+                FSkin.loadLight("default", onInit);
             }
-        }
-        loaded = true;
-    }
+            else {
+                final BufferedImage img;
+                try {
+                    img = ImageIO.read(f);
     
-    public static void setProgessBarMessage(final String message) { 
-        setProgessBarMessage(message, 0);
-    }
-    public static void setProgessBarMessage(final String message, final int cnt) {
-        final FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                if ( cnt > 0 ) {
-                    barProgress.reset();
-                    barProgress.setMaximum(cnt);
+                    final int h = img.getHeight();
+                    final int w = img.getWidth();
+    
+                    SkinIcon.setIcon(Backgrounds.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
+    
+                    UIManager.put("ProgressBar.background", FSkin.getColorFromPixel(img.getRGB(25, h - 75)));
+                    UIManager.put("ProgressBar.selectionBackground", FSkin.getColorFromPixel(img.getRGB(75, h - 75)));
+                    UIManager.put("ProgressBar.foreground", FSkin.getColorFromPixel(img.getRGB(25, h - 25)));
+                    UIManager.put("ProgressBar.selectionForeground", FSkin.getColorFromPixel(img.getRGB(75, h - 25)));
+                    UIManager.put("ProgressBar.border", new LineBorder(Color.BLACK, 0));
+                } catch (final IOException e) {
+                    e.printStackTrace();
                 }
-                barProgress.setShowETA(false);
-                barProgress.setShowCount(cnt > 0);
-                barProgress.setDescription(message);
-                
             }
-        });
+            loaded = true;
+        }
     }
 
     /**
@@ -523,19 +1613,17 @@ public enum FSkin {
      * preferred takes precedence over default, but if something is
      * missing, the default picture is retrieved.
      */
-    public static void loadFull() {
-        // No need for this method to be loaded while on the EDT.
-        FThreads.assertExecutedByEdt(false);
+    public static void loadFull(final boolean onInit) {
+        if (onInit) { 
+            // No need for this method to be loaded while on the EDT.
+            FThreads.assertExecutedByEdt(false);
 
-        // Preferred skin name must be called via loadLight() method,
-        // which does some cleanup and init work.
-        if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default"); }
+            // Preferred skin name must be called via loadLight() method,
+            // which does some cleanup and init work.
+            if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default", onInit); }
+        }
 
-        // Everything OK?
-        
-        final FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
-        setProgessBarMessage("Processing image sprites: ", 5);
-
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Processing image sprites: ", 5);
 
         // Grab and test various sprite files.
         final File f1 = new File(DEFAULT_DIR + FILE_ICON_SPRITE);
@@ -547,18 +1635,18 @@ public enum FSkin {
 
         try {
             bimDefaultSprite = ImageIO.read(f1);
-            barProgress.increment();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
             bimPreferredSprite = ImageIO.read(f2);
-            barProgress.increment();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
             bimFoils = ImageIO.read(f3);
-            barProgress.increment();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
             bimOldFoils = f6.exists() ? ImageIO.read(f6) : ImageIO.read(f3);
-            barProgress.increment();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
             bimDefaultAvatars = ImageIO.read(f4);
 
             if (f5.exists()) { bimPreferredAvatars = ImageIO.read(f5); }
 
-            barProgress.increment();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
 
             preferredH = bimPreferredSprite.getHeight();
             preferredW = bimPreferredSprite.getWidth();
@@ -569,36 +1657,33 @@ public enum FSkin {
             e.printStackTrace();
         }
 
-        // Pre-derive most fonts (plain, bold, and italic).
-        // Exceptions handled inside method.
-        FSkin.setDefaultFontSize();
-        FSkin.font = GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT);
-        fixedFonts = new HashMap<Integer, Font>();
-        plainFonts = new HashMap<Integer, Font>();
-        boldFonts = new HashMap<Integer, Font>();
-        italicFonts = new HashMap<Integer, Font>();
-        for (int i = 10; i <= 22; i++) { setFont(i); }
-        for (int i = 10; i <= 20; i += 2) { setBoldFont(i); }
-        for (int i = 12; i <= 14; i += 2) { setItalicFont(i); }
+        // Initialize fonts
+        if (onInit) { //set default font size only once onInit
+            Font f = UIManager.getDefaults().getFont("Label.font");
+            if (f != null) {
+                FSkin.defaultFontSize = f.getSize();    
+            }
+        }
+        SkinFont.setBaseFont(GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT));
 
         // Put various images into map (except sprite and splash).
         // Exceptions handled inside method.
-        FSkin.setIcon(Backgrounds.BG_TEXTURE, preferredDir + FILE_TEXTURE_BG);
-        FSkin.setIcon(Backgrounds.BG_MATCH, preferredDir + FILE_MATCH_BG);
+        SkinIcon.setIcon(Backgrounds.BG_TEXTURE, preferredDir + FILE_TEXTURE_BG);
+        SkinIcon.setIcon(Backgrounds.BG_MATCH, preferredDir + FILE_MATCH_BG);
 
         // Run through enums and load their coords.
-        for (final Colors e : Colors.values()) { FSkin.setColor(e); }
-        for (final ZoneImages e : ZoneImages.values())                    { FSkin.setImage(e); }
-        for (final DockIcons e : DockIcons.values())                      { FSkin.setIcon(e); }
-        for (final InterfaceIcons e : InterfaceIcons.values())                    { FSkin.setIcon(e); }
-        for (final ButtonImages e : ButtonImages.values())                { FSkin.setIcon(e); }
-        for (final QuestIcons e : QuestIcons.values())                    { FSkin.setIcon(e); }
+        Colors.updateAll();
+        for (final ZoneImages e : ZoneImages.values())                    { SkinImage.setImage(e); }
+        for (final DockIcons e : DockIcons.values())                      { SkinIcon.setIcon(e); }
+        for (final InterfaceIcons e : InterfaceIcons.values())            { SkinIcon.setIcon(e); }
+        for (final ButtonImages e : ButtonImages.values())                { SkinIcon.setIcon(e); }
+        for (final QuestIcons e : QuestIcons.values())                    { SkinIcon.setIcon(e); }
 
-        for (final EditorImages e : EditorImages.values())                { FSkin.setImage(e); }
-        for (final ManaImages e : ManaImages.values())                    { FSkin.setImage(e); }
-        for (final ColorlessManaImages e : ColorlessManaImages.values())  { FSkin.setImage(e); }
-        for (final GameplayImages e : GameplayImages.values())            { FSkin.setImage(e); }
-        for (final LayoutImages e : LayoutImages.values())                { FSkin.setImage(e); }
+        for (final EditorImages e : EditorImages.values())                { SkinImage.setImage(e); }
+        for (final ManaImages e : ManaImages.values())                    { SkinImage.setImage(e); }
+        for (final ColorlessManaImages e : ColorlessManaImages.values())  { SkinImage.setImage(e); }
+        for (final GameplayImages e : GameplayImages.values())            { SkinImage.setImage(e); }
+        for (final LayoutImages e : LayoutImages.values())                { SkinImage.setImage(e); }
 
         // Foils have a separate sprite, so uses a specific method.
         for (final Foils e : Foils.values()) { FSkin.setFoil(e, false); }
@@ -611,7 +1696,7 @@ public enum FSkin {
         UIManager.put("Table.alternateRowColor", new Color(240, 240, 240));
 
         // Images loaded; can start UI init.
-        setProgessBarMessage("Creating display components.");
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Creating display components.");
         loaded = true;
 
         // Clear references to buffered images
@@ -629,66 +1714,11 @@ public enum FSkin {
         FSkin.bimPreferredSprite = null;
         FSkin.bimDefaultAvatars = null;
         FSkin.bimPreferredAvatars = null;
-    }
-    
-    private static void setDefaultFontSize() {
-        Font f = UIManager.getDefaults().getFont("Label.font");
-        if (f != null) {
-            FSkin.defaultFontSize = f.getSize();    
-        }
-    }
 
-    /** @return {@link java.awt.font} font */
-    public static Font getFont() {
-        return FSkin.getFont(FSkin.defaultFontSize);
-    }
-
-    /**
-     * @param size - integer, pixel size
-     * @return {@link java.awt.font} font1
-     */
-    public static Font getFont(final int size) {
-        if (plainFonts.get(size) == null) {
-            plainFonts.put(size, getFont().deriveFont(Font.PLAIN, size));
-        }
-        return plainFonts.get(size);
-    }
-    
-    public static Font getFixedFont(final int size) {
-        if (fixedFonts.get(size) == null) {
-            fixedFonts.put(size, new Font("Monospaced", Font.PLAIN, size));
-        }
-        return fixedFonts.get(size);
-    }
-    
-    public static Font getBoldFont() {
-        return FSkin.getBoldFont(FSkin.defaultFontSize);
-    }        
-
-    /**
-     * @param size - integer, pixel size
-     * @return {@link java.awt.font} font1
-     */
-    public static Font getBoldFont(final int size) {
-        if (boldFonts.get(size) == null) {
-            boldFonts.put(size, getFont().deriveFont(Font.BOLD, size));
-        }
-        return boldFonts.get(size);
-    }
-    
-    public static Font getItalicFont() {
-        return FSkin.getItalicFont(FSkin.defaultFontSize);
-    }            
-    
-    /**
-     * @param size - integer, pixel size
-     * @return {@link java.awt.font} font1
-     */
-    public static Font getItalicFont(final int size) {
-        if (boldFonts.get(size) == null) {
-            italicFonts.put(size, getFont().deriveFont(Font.ITALIC, size));
-        }
-        return italicFonts.get(size);
+        // Set look and feel after skin loaded
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Setting look and feel...");
+        ForgeLookAndFeel laf = new ForgeLookAndFeel();
+        laf.setForgeLookAndFeel(Singletons.getView().getFrame());
     }
 
     /**
@@ -698,69 +1728,6 @@ public enum FSkin {
      */
     public static String getName() {
         return FSkin.preferredName;
-    }
-
-    /**
-     * Gets an image.
-     *
-     * @param s0 &emsp; SkinProp enum
-     * @return {@link java.awt.Image}
-     */
-    public static Image getImage(final SkinProp s0) {
-        if (FSkin.images.get(s0) == null) {
-            throw new NullPointerException("Can't find an image for SkinProp " + s0);
-         }
-        return FSkin.images.get(s0);
-    }
-
-    /**
-     * Gets an icon.
-     *
-     * @param s0 &emsp; SkinProp enum
-     * @return {@link javax.swing.ImageIcon}
-     */
-    public static ImageIcon getIcon(final SkinProp s0) {
-        if (FSkin.icons.get(s0) == null) {
-           throw new NullPointerException("Can't find an icon for SkinProp " + s0);
-        }
-        return FSkin.icons.get(s0);
-    }
-
-    /**
-     * Gets a scaled version of an image from this skin's image map.
-     * 
-     * @param s0
-     *            String image enum
-     * @param w0
-     *            int new width
-     * @param h0
-     *            int new height
-     * @return {@link java.awt.Image}
-     */
-    public static Image getImage(final SkinProp s0, int w0, int h0) {
-        w0 = (w0 < 1) ? 1 : w0;
-        h0 = (h0 < 1) ? 1 : h0;
-
-        final Image original = FSkin.images.get(s0);
-
-        final BufferedImage scaled = new BufferedImage(w0, h0, BufferedImage.TYPE_INT_ARGB);
-
-        final Graphics2D g2d = scaled.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2d.drawImage(original, 0, 0, w0, h0, 0, 0, original.getWidth(null), original.getHeight(null), null);
-        g2d.dispose();
-
-        return scaled;
-    }
-
-    /**
-     * Retrieves a color from this skin's color map.
-     * 
-     * @param s0 &emsp; Skin property (from enum)
-     * @return Color
-     */
-    public static Color getColor(final SkinProp s0) {
-        return colors.get(s0);
     }
 
     /**
@@ -799,50 +1766,11 @@ public enum FSkin {
     }    
 
     /** @return Map<Integer, Image> */
-    public static Map<Integer, Image> getAvatars() {
+    public static Map<Integer, SkinImage> getAvatars() {
         return avatars;
-    }
-
-    /** Steps RGB components of a color up or down.
-     * Returns opaque (non-alpha) stepped color.
-     * Plus for lighter, minus for darker.
-     *
-     * @param clr0 {@link java.awt.Color}
-     * @param step int
-     * @return {@link java.awt.Color}
-     */
-    public static Color stepColor(Color clr0, int step) {
-        int r = clr0.getRed();
-        int g = clr0.getGreen();
-        int b = clr0.getBlue();
-
-        // Darker
-        if (step < 0) {
-            r =  ((r + step > 0) ? r + step : 0);
-            g =  ((g + step > 0) ? g + step : 0);
-            b =  ((b + step > 0) ? b + step : 0);
-        }
-        else {
-            r =  ((r + step < 255) ? r + step : 255);
-            g =  ((g + step < 255) ? g + step : 255);
-            b =  ((b + step < 255) ? b + step : 255);
-        }
-
-        return new Color(r, g, b);
     }
     
     public static boolean isLoaded() { return loaded; }
-
-    /** Returns RGB components of a color, with a new
-     * value for alpha. 0 = transparent, 255 = opaque.
-     *
-     * @param clr0 {@link java.awt.Color}
-     * @param alpha int
-     * @return {@link java.awt.Color}
-     */
-    public static Color alphaColor(Color clr0, int alpha) {
-        return new Color(clr0.getRed(), clr0.getGreen(), clr0.getBlue(), alpha);
-    }
 
     /**
      * <p>
@@ -906,7 +1834,7 @@ public enum FSkin {
     }
 
     private static void assembleAvatars() {
-        FSkin.avatars = new HashMap<Integer, Image>();
+        FSkin.avatars = new HashMap<Integer, SkinImage>();
         int counter = 0;
         Color pxTest;
 
@@ -919,7 +1847,7 @@ public enum FSkin {
                     if (i == 0 && j == 0) { continue; }
                     pxTest = FSkin.getColorFromPixel(bimPreferredAvatars.getRGB(i + 50, j + 50));
                     if (pxTest.getAlpha() == 0) { continue; }
-                    FSkin.avatars.put(counter++, bimPreferredAvatars.getSubimage(i, j, 100, 100));
+                    FSkin.avatars.put(counter++, new SkinImage(bimPreferredAvatars.getSubimage(i, j, 100, 100)));
                 }
             }
         }
@@ -932,7 +1860,7 @@ public enum FSkin {
                 if (i == 0 && j == 0) { continue; }
                 pxTest = FSkin.getColorFromPixel(bimDefaultAvatars.getRGB(i + 50, j + 50));
                 if (pxTest.getAlpha() == 0) { continue; }
-                FSkin.avatars.put(counter++, bimDefaultAvatars.getSubimage(i, j, 100, 100));
+                FSkin.avatars.put(counter++, new SkinImage(bimDefaultAvatars.getSubimage(i, j, 100, 100)));
             }
         }
     }
@@ -944,107 +1872,164 @@ public enum FSkin {
         w0 = tempCoords[2];
         h0 = tempCoords[3];
 
-        FSkin.images.put(s0, isOldStyle ? bimOldFoils.getSubimage(x0, y0, w0, h0) : bimFoils.getSubimage(x0, y0, w0, h0));
+        SkinImage.setImage(s0, isOldStyle ? bimOldFoils.getSubimage(x0, y0, w0, h0) : bimFoils.getSubimage(x0, y0, w0, h0));
     }
-
-    private static void setColor(final SkinProp s0) {
-        tempCoords = s0.getCoords();
-        x0 = tempCoords[0];
-        y0 = tempCoords[1];
-
-        FSkin.colors.put(s0, FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x0, y0)));
+    
+    public static boolean isLookAndFeelSet() {
+        return ForgeLookAndFeel.isMetalLafSet;
     }
-
-    private static void setFont(final int size) {
-        plainFonts.put(size, font.deriveFont(Font.PLAIN, size));
-    }
-
-    private static void setBoldFont(final int size) {
-        boldFonts.put(size, font.deriveFont(Font.BOLD, size));
-    }
-
-    private static void setItalicFont(final int size) {
-        italicFonts.put(size, FSkin.font.deriveFont(Font.ITALIC, size));
-    }
-
-    private static void setIcon(final SkinProp s0) {
-        tempCoords = s0.getCoords();
-        x0 = tempCoords[0];
-        y0 = tempCoords[1];
-        w0 = tempCoords[2];
-        h0 = tempCoords[3];
-
-        final BufferedImage img = testPreferredSprite(s0);
-
-        FSkin.icons.put(s0, new ImageIcon(img.getSubimage(x0, y0, w0, h0)));
-    }
-
-    /**
-     * Sets an icon in this skin's icon map from a file address.
-     * Throws IO exception for debugging if needed.
-     * 
-     * @param s0
-     *            &emsp; Skin property (from enum)
-     * @param s1
-     *            &emsp; File address
+    
+    /** 
+     * Sets the look and feel of the GUI based on the selected Forge theme.
+     *
+     * @see <a href="http://tips4java.wordpress.com/2008/10/09/uimanager-defaults/">UIManager Defaults</a>
      */
-    private static void setIcon(final SkinProp s0, final String s1) {
-        try {
-            final File file = new File(s1);
-            ImageIO.read(file);
-        } catch (final IOException e) {
-            e.printStackTrace();
+    private static class ForgeLookAndFeel { //needs to live in FSkin for access to skin colors
+
+        private static boolean onInit = true;
+        private static boolean isMetalLafSet = false;
+        
+        private final Color FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT).color;
+        private final Color BACK_COLOR = FSkin.getColor(FSkin.Colors.CLR_THEME2).color;
+        private final Color HIGHLIGHT_COLOR = BACK_COLOR.brighter();
+        private final Border LINE_BORDER = BorderFactory.createLineBorder(FORE_COLOR.darker(), 1);
+        private final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2, 2, 2, 2);
+        
+        /**
+         * Sets the look and feel of the GUI based on the selected Forge theme.
+         */
+        private void setForgeLookAndFeel(final JFrame appFrame) {
+            if (isUIManagerEnabled()) {
+                if (setMetalLookAndFeel(appFrame)) {
+                    setMenusLookAndFeel();
+                    setComboBoxLookAndFeel();
+                    setTabbedPaneLookAndFeel();
+                    setButtonLookAndFeel();
+                }
+            }
+            onInit = false;
         }
-        FSkin.icons.put(s0, new ImageIcon(s1));
-    }
-
-    /**
-     * Sets an icon in this skin's icon map from a buffered image.
-     * 
-     * @param s0 &emsp; Skin property (from enum)
-     * @param bi0 &emsp; BufferedImage
-     */
-    private static void setIcon(final SkinProp s0, final BufferedImage bi0) {
-        FSkin.icons.put(s0, new ImageIcon(bi0));
-    }
-
-    /**
-     * setImage, with auto-scaling assumed true.
-     * 
-     * @param s0
-     */
-    private static void setImage(final SkinProp s0) {
-        FSkin.setImage(s0, true);
-    }
-
-    /**
-     * Checks the preferred sprite for existence of a sub-image
-     * defined by X, Y, W, H.
-     * 
-     * If an image is not present at those coordinates, default
-     * icon is substituted.
-     * 
-     * The result is saved in a HashMap.
-     * 
-     * @param s0 &emsp; An address in the hashmap, derived from SkinProp enum
-     */
-    private static void setImage(final SkinProp s0, final boolean scale) {
-        tempCoords = s0.getCoords();
-        x0 = tempCoords[0];
-        y0 = tempCoords[1];
-        w0 = tempCoords[2];
-        h0 = tempCoords[3];
-        newW = (tempCoords.length == 6 ? tempCoords[4] : 0);
-        newH = (tempCoords.length == 6 ? tempCoords[5] : 0);
-
-        final BufferedImage img = FSkin.testPreferredSprite(s0);
-        final BufferedImage bi0 = img.getSubimage(x0, y0, w0, h0);
-
-        if (scale && newW != 0) {
-            FSkin.images.put(s0, bi0.getScaledInstance(newW, newH, Image.SCALE_AREA_AVERAGING));
+        
+        /**
+         * Sets the standard "Java L&F" (also called "Metal") that looks the same on all platforms.
+         * <p>
+         * If not explicitly set then the Mac uses its native L&F which does
+         * not support various settings (eg. combobox background color). 
+         */
+        private boolean setMetalLookAndFeel(JFrame appFrame) {
+            if (onInit) { //only attempt to set Metal Look and Feel the first time
+                try {
+                    UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+                    SwingUtilities.updateComponentTreeUI(appFrame);
+                    isMetalLafSet = true;
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+                    // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+                    e.printStackTrace();
+                }
+            }
+            return isMetalLafSet;
         }
-        else {
-            FSkin.images.put(s0, bi0);
+        
+        /**
+         * Sets the look and feel for a JMenuBar, JMenu, JMenuItem & variations.
+         */
+        private void setMenusLookAndFeel() {
+            // JMenuBar
+            Color clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME).color;
+            Color backgroundColor = FSkin.stepColor(clrTheme, 0);
+            Color menuBarEdgeColor = FSkin.stepColor(clrTheme, -80);
+            UIManager.put("MenuBar.foreground", FORE_COLOR);
+            UIManager.put("MenuBar.gradient", getColorGradients(backgroundColor.darker(), backgroundColor));
+            UIManager.put("MenuBar.border", BorderFactory.createMatteBorder(0, 0, 1, 0, menuBarEdgeColor));
+            // JMenu
+            UIManager.put("Menu.foreground", FORE_COLOR);
+            UIManager.put("Menu.background", BACK_COLOR);
+            UIManager.put("Menu.borderPainted", false);
+            UIManager.put("Menu.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("Menu.selectionForeground", FORE_COLOR);
+            UIManager.put("Menu.border", EMPTY_BORDER);
+            UIManager.put("Menu.opaque", false);
+            // JPopupMenu
+            UIManager.put("PopupMenu.border", LINE_BORDER);
+            UIManager.put("PopupMenu.background", BACK_COLOR);
+            UIManager.put("PopupMenu.foreground", FORE_COLOR);
+            // JMenuItem
+            UIManager.put("MenuItem.foreground", FORE_COLOR);
+            UIManager.put("MenuItem.background", BACK_COLOR);
+            UIManager.put("MenuItem.border", EMPTY_BORDER);
+            UIManager.put("MenuItem.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("MenuItem.selectionForeground", FORE_COLOR);
+            UIManager.put("MenuItem.acceleratorForeground", FORE_COLOR.darker());
+            UIManager.put("MenuItem.opaque", true);
+            // JSeparator (needs to be opaque!).
+            UIManager.put("Separator.foreground", FORE_COLOR.darker());
+            UIManager.put("Separator.background", BACK_COLOR);
+            // JRadioButtonMenuItem
+            UIManager.put("RadioButtonMenuItem.foreground", FORE_COLOR);
+            UIManager.put("RadioButtonMenuItem.background", BACK_COLOR);
+            UIManager.put("RadioButtonMenuItem.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("RadioButtonMenuItem.selectionForeground", FORE_COLOR);
+            UIManager.put("RadioButtonMenuItem.border", EMPTY_BORDER);
+            UIManager.put("RadioButtonMenuItem.acceleratorForeground", FORE_COLOR.darker());
+            // JCheckboxMenuItem
+            UIManager.put("CheckBoxMenuItem.foreground", FORE_COLOR);
+            UIManager.put("CheckBoxMenuItem.background", BACK_COLOR);
+            UIManager.put("CheckBoxMenuItem.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("CheckBoxMenuItem.selectionForeground", FORE_COLOR);
+            UIManager.put("CheckBoxMenuItem.border", EMPTY_BORDER);
+            UIManager.put("CheckBoxMenuItem.acceleratorForeground", FORE_COLOR.darker());
+        }
+            
+        private void setTabbedPaneLookAndFeel() {
+            UIManager.put("TabbedPane.selected", HIGHLIGHT_COLOR);
+            UIManager.put("TabbedPane.contentOpaque", FSkin.getColor(FSkin.Colors.CLR_THEME));
+            UIManager.put("TabbedPane.unselectedBackground", BACK_COLOR);
+        }
+
+        /**
+         * Sets the look and feel for a <b>non-editable</b> JComboBox.
+         */
+        private void setComboBoxLookAndFeel() {        
+            UIManager.put("ComboBox.background", BACK_COLOR);
+            UIManager.put("ComboBox.foreground", FORE_COLOR);
+            UIManager.put("ComboBox.selectionBackground", HIGHLIGHT_COLOR);
+            UIManager.put("ComboBox.selectionForeground", FORE_COLOR);
+            UIManager.put("ComboBox.disabledBackground", BACK_COLOR);
+            UIManager.put("ComboBox.disabledForeground", BACK_COLOR.darker());
+            UIManager.put("ComboBox.font", getDefaultFont("ComboBox.font"));
+            UIManager.put("Button.select", HIGHLIGHT_COLOR);
+        }
+        
+        private void setButtonLookAndFeel() {
+            UIManager.put("Button.foreground", FORE_COLOR);
+            UIManager.put("Button.background", BACK_COLOR);
+            UIManager.put("Button.select", HIGHLIGHT_COLOR);
+            UIManager.put("Button.focus", FORE_COLOR.darker());
+            UIManager.put("Button.rollover", false);
+        }
+
+        /**
+         * Determines whether theme styles should be applied to GUI.
+         * <p>
+         * TODO: Currently is using UI_THEMED_COMBOBOX setting but will
+         *       eventually want to rename for clarity.
+         */
+        private boolean isUIManagerEnabled() {
+            return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX);
+        }
+        
+        private Font getDefaultFont(String component) {
+            return FSkin.getFont(UIManager.getFont(component).getSize()).font;
+        }
+        
+        private ArrayList<Object> getColorGradients(Color bottom, Color top) {
+            ArrayList<Object> gradients = new ArrayList<>();
+            gradients.add(0.0);
+            gradients.add(0.0);
+            gradients.add(top);
+            gradients.add(bottom);
+            gradients.add(bottom);
+            return gradients;
         }
     }
 }

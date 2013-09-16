@@ -9,7 +9,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 
 import forge.Singletons;
@@ -92,25 +91,7 @@ public final class LayoutMenu {
     private static final ActionListener changeSkin = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String skin = e.getActionCommand();
-            if (!skin.equals(prefs.getPref(FPref.UI_SKIN))) {
-                prefs.setPref(FPref.UI_SKIN, skin);
-                prefs.save();
-
-                Object[] options = {"Restart Now", "Restart Later"};
-                int reply = JOptionPane.showOptionDialog(
-                        null,
-                        "You must restart Forge for " + skin + " theme to take effect.",
-                        "Change Theme",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.INFORMATION_MESSAGE,
-                        null,
-                        options,
-                        options[0]);
-                if (reply == JOptionPane.YES_OPTION) {
-                    RestartUtil.restartApplication(null);
-                }
-            }
+            FSkin.changeSkin(e.getActionCommand());
         }
     };
 
@@ -156,7 +137,7 @@ public final class LayoutMenu {
     }
     private static JMenuItem getMenuItem_SaveLayout() {
         JMenuItem menuItem = new JMenuItem("Save Current Layout");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_SAVELAYOUT) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_SAVELAYOUT) : null));
         menuItem.addActionListener(getSaveLayoutAction());
         return menuItem;
     }
@@ -172,7 +153,7 @@ public final class LayoutMenu {
 
     private static JMenuItem getMenuItem_OpenLayout() {
         JMenuItem menuItem = new JMenuItem("Open...");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_OPENLAYOUT) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_OPENLAYOUT) : null));
         menuItem.addActionListener(getOpenLayoutAction());
         return menuItem;
     }
@@ -188,7 +169,7 @@ public final class LayoutMenu {
 
     private static JMenuItem getMenuItem_RevertLayout() {
         JMenuItem menuItem = new JMenuItem("Refresh");
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_REVERTLAYOUT) : null));
+        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_REVERTLAYOUT) : null));
         menuItem.addActionListener(getRevertLayoutAction());
         return menuItem;
     }

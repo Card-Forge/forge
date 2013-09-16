@@ -11,6 +11,8 @@ Release Notes
 - Commander -
 The Commander gaming mode has been added and is located in the Variant view. This is a work in progress and is not finished at this time. You are invited to play test this variant.
 
+- Switch Theme/Skin Without Restart -
+You can now switch between themes/skins from any screen without restarting via Layout > Theme on main menu or via combo box on Preferences page of Home screen
 
 - Card Overlays -
 Card overlays are now always displayed regardless of card image size if the display card overlays option is turned on in your user preferences.

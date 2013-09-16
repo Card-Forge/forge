@@ -6,12 +6,11 @@ import java.awt.FlowLayout;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -24,6 +23,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSpinner;
@@ -82,7 +82,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
             .text("Add filter")
             .tooltip("Click to add custom filters to the card list")
             .reactOnMouseDown().build();
-    private final JComboBox<String> cbSearchMode = new JComboBox<String>();
+    private final FComboBoxWrapper<String> cbSearchMode = new FComboBoxWrapper<String>();
     private final JTextField txfSearch = new FTextField.Builder().ghostText("Search").build();
     private final FLabel lblName = new FLabel.Builder().text("Name").hoverable().selectable().selected().build();
     private final FLabel lblType = new FLabel.Builder().text("Type").hoverable().selectable().selected().build();
@@ -144,7 +144,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
         pnlSearch.add(txfSearch, "pushx, growx");
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
-        pnlSearch.add(cbSearchMode, "center");
+        cbSearchMode.addTo(pnlSearch, "center");
         pnlSearch.add(lblName, "w pref+8, h pref+8");
         pnlSearch.add(lblType, "w pref+8, h pref+8");
         pnlSearch.add(lblText, "w pref+8, h pref+8");
@@ -227,7 +227,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
     public FLabel getLblText()       { return lblText;       }
     
     public FLabel getBtnAddRestriction()       { return btnAddRestriction; }
-    public JComboBox<String> getCbSearchMode() { return cbSearchMode;      }
+    public FComboBoxWrapper<String> getCbSearchMode() { return cbSearchMode;      }
     public JTextField getTxfSearch()           { return txfSearch;         }
 
     public Map<SItemManagerUtil.StatTypes, FLabel> getStatLabels() {
@@ -264,7 +264,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
         final JPanel pnl = new JPanel(new MigLayout("insets 2, gap 2, h 30!"));
 
         pnl.setOpaque(false);
-        pnl.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 2, FSkin.getColor(FSkin.Colors.CLR_TEXT)));
+        FSkin.get(pnl).setMatteBorder(1, 2, 1, 2, FSkin.getColor(FSkin.Colors.CLR_TEXT));
         
         pnl.add(component, "h 30!, center");
         pnl.add(new FLabel.Builder().text("X").fontSize(10).hoverable(true)

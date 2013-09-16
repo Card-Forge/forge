@@ -114,7 +114,6 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
 
     private void setupMyMenuBar() {
         Singletons.getControl().getMenuBar().setupMenuBar(this);
-        Singletons.getControl().getMenuBar().setStatusText("F1 : hide menu");
     }
 
     /* (non-Javadoc)

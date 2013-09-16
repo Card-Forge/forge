@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -63,6 +62,7 @@ import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.views.VPlayers;
 import forge.gui.menubar.IMenuProvider;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.special.PhaseLabel;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
@@ -92,18 +92,18 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         uiEvents.register(visitor);
     }
 
-    private ImageIcon getPlayerAvatar(final Player p, final int defaultIndex) {
+    private SkinImage getPlayerAvatar(final Player p, final int defaultIndex) {
         LobbyPlayer lp = p.getLobbyPlayer();
         if (null != lp.getIconImageKey()) {
             return ImageCache.getIcon(lp);
         }
 
         int avatarIdx = lp.getAvatarIndex();
-        return new ImageIcon(FSkin.getAvatars().get(0 <= avatarIdx ? avatarIdx : defaultIndex));
+        return FSkin.getAvatars().get(0 <= avatarIdx ? avatarIdx : defaultIndex);
     }
 
 
-    private void setAvatar(VField view, ImageIcon img) {
+    private void setAvatar(VField view, SkinImage img) {
         view.getLblAvatar().setIcon(img);
         view.getLblAvatar().getResizeTimer().start();
     }

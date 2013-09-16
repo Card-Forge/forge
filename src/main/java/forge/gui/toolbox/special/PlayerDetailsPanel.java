@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -48,7 +47,7 @@ public class PlayerDetailsPanel extends JPanel {
     private final List<Pair<FLabel, Byte>> manaLabels = new ArrayList<Pair<FLabel,Byte>>();
 
     private FLabel getBuiltFLabel(SkinProp p0, String s0, String s1) {
-        return new FLabel.Builder().icon(new ImageIcon(FSkin.getImage(p0)))
+        return new FLabel.Builder().icon(FSkin.getImage(p0))
             .opaque(false).fontSize(14)
             .fontStyle(Font.BOLD).iconInBackground()
             .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT).build();
@@ -85,11 +84,11 @@ public class PlayerDetailsPanel extends JPanel {
         final JPanel row5 = new JPanel(new MigLayout("insets 0, gap 0"));
         final JPanel row6 = new JPanel(new MigLayout("insets 0, gap 0"));
 
-        row1.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        FSkin.get(row1).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row2.setOpaque(false);
-        row3.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        FSkin.get(row3).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row4.setOpaque(false);
-        row5.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        FSkin.get(row5).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row6.setOpaque(false);
 
         // Hand, library, graveyard, exile, flashback, poison labels
@@ -151,8 +150,12 @@ public class PlayerDetailsPanel extends JPanel {
 
         // Poison/life
         this.getLblPoison().setText("" + player.getPoisonCounters());
-        Color poisonFg = player.getPoisonCounters() >= 8 ? Color.red : FSkin.getColor(FSkin.Colors.CLR_TEXT);
-        this.getLblPoison().setForeground(poisonFg);
+        if (player.getPoisonCounters() < 8) {
+            FSkin.get(this.getLblPoison()).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        }
+        else {
+            FSkin.get(this.getLblPoison()).setForeground(Color.red);
+        }
     }
 
     /**

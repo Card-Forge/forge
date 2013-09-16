@@ -12,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.border.LineBorder;
-
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.match.TargetingOverlay;
@@ -44,7 +42,7 @@ public final class SOverlayUtils {
         // (which is preset with null layout and close button)
         final FPanel pnl = new FPanel();
         pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap"));
-        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+        FSkin.get(pnl).setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
         pnl.setBounds(new Rectangle(((w - pnlW) / 2), ((h - pnlH) / 2), pnlW, pnlH));
 
         pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_LOGO)).build(),
@@ -70,7 +68,7 @@ public final class SOverlayUtils {
 
         final JLabel lblLoading = new JLabel("");
         lblLoading.setOpaque(true);
-        lblLoading.setBackground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.get(lblLoading).setBackground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblLoading.setMinimumSize(new Dimension(0, 20));
 
         pnlLoading.setBounds(((w - 170) / 2), ((h - 80) / 2), 170, 80);
@@ -104,9 +102,10 @@ public final class SOverlayUtils {
         final int w = overlay.getWidth();
 
         final JButton btnCloseTopRight = new JButton("X");
+        final FSkin.JComponentSkin<JButton> btnCloseTopRightSkin = FSkin.get(btnCloseTopRight);
         btnCloseTopRight.setBounds(w - 25, 10, 15, 15);
-        btnCloseTopRight.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        btnCloseTopRight.setBorder(new LineBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT), 1));
+        btnCloseTopRightSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        btnCloseTopRightSkin.setLineBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         btnCloseTopRight.setOpaque(false);
         btnCloseTopRight.setBackground(new Color(0, 0, 0));
         btnCloseTopRight.setFocusPainted(false);

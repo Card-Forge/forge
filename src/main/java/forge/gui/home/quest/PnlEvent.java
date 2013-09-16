@@ -2,10 +2,10 @@ package forge.gui.home.quest;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
@@ -17,6 +17,9 @@ import net.miginfocom.swing.MigLayout;
 import forge.ImageCache;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.FTextArea;
 import forge.quest.QuestEvent;
 
@@ -29,16 +32,16 @@ import forge.quest.QuestEvent;
 class PnlEvent extends JPanel {
     private final QuestEvent event;
     private final JRadioButton rad;
-    private final Image img;
-    private final int wSrc, hSrc;
+    private final SkinImage img;
 
     private final int wImg = 100;
     private final int hImg = 100;
     private final int hRfl = 20;
 
+    private final JComponentSkin<PnlEvent> skin;
     private final Color clr1 = new Color(255, 0, 255, 100);
     private final Color clr2 = new Color(255, 255, 0, 0);
-    private final Color clr3 = FSkin.alphaColor(FSkin.getColor(FSkin.Colors.CLR_THEME2), 200);
+    private final SkinColor clr3 = FSkin.getColor(FSkin.Colors.CLR_THEME2).alphaColor(200);
 
     /**
      * Panels for displaying duels and challenges.<br>
@@ -49,19 +52,17 @@ class PnlEvent extends JPanel {
      */
     public PnlEvent(final QuestEvent e0) {
         super();
+        this.skin = FSkin.get(this);
         this.event = e0;
-        img = ImageCache.getIcon(e0).getImage();
-
-        wSrc = img.getWidth(null);
-        hSrc = img.getHeight(null);
+        img = ImageCache.getIcon(e0);
 
         // Title and description
         this.rad = new FRadioButton(event.getTitle() + " (" + event.getDifficulty().getTitle() + ")");
-        this.rad.setFont(FSkin.getBoldFont(16));
+        FSkin.get(this.rad).setFont(FSkin.getBoldFont(16));
 
         final FTextArea tarDesc = new FTextArea();
         tarDesc.setText(event.getDescription());
-        tarDesc.setFont(FSkin.getItalicFont(12));
+        FSkin.get(tarDesc).setFont(FSkin.getItalicFont(12));
 
         // Change listener for radio button
         this.rad.addChangeListener(new ChangeListener() {
@@ -93,16 +94,19 @@ class PnlEvent extends JPanel {
     @Override
     public void paintComponent(final Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setPaint(new GradientPaint(0, 0, clr3, getWidth(), 0, clr2));
+        skin.setGraphicsGradientPaint(g2d, 0, 0, clr3, getWidth(), 0, clr2);
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
         // Padding here
         g2d.translate(5, 5);
+        
+        Dimension srcSize = img.getSizeForPaint(g2d);
+        int wSrc = srcSize.width;
+        int hSrc = srcSize.height;
 
-        g2d.drawImage(img,
+        skin.drawImage(g2d, img,
                 0, 0, wImg, hImg, // Destination
-                0, 0, wSrc, hSrc, // Source
-                null);
+                0, 0, wSrc, hSrc); // Source
 
         // Gap between image and reflection set here
         g2d.translate(0, hImg + 2);
@@ -111,10 +115,9 @@ class PnlEvent extends JPanel {
         BufferedImage refl = new BufferedImage(wImg, hImg, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gRefl = refl.createGraphics();
 
-        gRefl.drawImage(img,
+        skin.drawImage(gRefl, img,
                 0, hRfl, wImg, 0, // Destination
-                0, hSrc - hRfl * hSrc / hImg, wSrc, hSrc, // Source
-                null);
+                0, hSrc - hRfl * hSrc / hImg, wSrc, hSrc); // Source
 
         gRefl.setPaint(new GradientPaint(0, 0, clr1, 0, hRfl, clr2));
         gRefl.setComposite(AlphaComposite.DstIn);

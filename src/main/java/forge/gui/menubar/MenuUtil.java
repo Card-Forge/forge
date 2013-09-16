@@ -3,7 +3,6 @@ package forge.gui.menubar;
 import java.awt.Toolkit;
 import java.io.IOException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
@@ -36,7 +35,7 @@ public final class MenuUtil {
         }
     }
         
-    public static ImageIcon getMenuIcon(SkinProp ico) {
+    public static FSkin.SkinIcon getMenuIcon(SkinProp ico) {
         return ImageUtil.getMenuIcon(FSkin.getIcon(ico));       
     }
     

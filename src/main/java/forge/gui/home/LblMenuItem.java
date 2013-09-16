@@ -1,8 +1,6 @@
 package forge.gui.home;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
@@ -13,6 +11,8 @@ import javax.swing.JLabel;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
 
 /** 
  * Custom JLabel for an item in the menu. Handles listening
@@ -24,14 +24,14 @@ public class LblMenuItem extends JLabel implements ILocalRepaint {
     private boolean selected = false;
     private boolean hovered = false;
 
-    private final Color clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
-    private final Color l00 = FSkin.stepColor(clrTheme, 0);
-    private final Color l20 = FSkin.stepColor(clrTheme, 20);
-    private final Color d20 = FSkin.stepColor(clrTheme, -20);
-    private final Color d60 = FSkin.stepColor(clrTheme, -60);
-    private final Color d80 = FSkin.stepColor(clrTheme, -80);
-
-    private final GradientPaint edge = new GradientPaint(200 - 8, 0, l00, 200, 0, d80, false);
+    private final JLabelSkin<LblMenuItem> skin;
+    private final SkinColor clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
+    private final SkinColor l00 = clrTheme.stepColor(0);
+    private final SkinColor l20 = clrTheme.stepColor(20);
+    private final SkinColor d20 = clrTheme.stepColor(-20);
+    private final SkinColor d60 = clrTheme.stepColor(-60);
+    private final SkinColor d80 = clrTheme.stepColor(-80);
+    private final SkinColor alpha100 = l00.alphaColor(100);
 
     /**
      * Custom JLabel for an item in the menu. Handles listening
@@ -41,8 +41,10 @@ public class LblMenuItem extends JLabel implements ILocalRepaint {
      */
     public LblMenuItem(final IVSubmenu<? extends ICDoc> doc0) {
         super("      " + doc0.getMenuTitle());
-        this.setFont(FSkin.getFont(14));
-        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+
+        skin = FSkin.get(this);
+        skin.setFont(FSkin.getFont(14));
+        FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -82,23 +84,23 @@ public class LblMenuItem extends JLabel implements ILocalRepaint {
         int h = getHeight();
 
         if (this.selected) {
-            g2d.setColor(FSkin.alphaColor(l00, 100));
+            skin.setGraphicsColor(g2d, alpha100);
             g2d.fillRect(0, 0, w, h);
-            g2d.setColor(d20);
+            skin.setGraphicsColor(g2d, d20);
             g2d.drawLine(0, 0, w - 3, 0);
-            g2d.setColor(l20);
+            skin.setGraphicsColor(g2d, l20);
             g2d.drawLine(0, h - 1, w - 3, h - 1);
         }
         else if (this.hovered) {
-            g2d.setColor(d60);
+            skin.setGraphicsColor(g2d, d60);
             g2d.fillRect(0, 0, getWidth(), h);
 
-            g2d.setPaint(edge);
+            skin.setGraphicsGradientPaint(g2d, 200 - 8, 0, l00, 200, 0, d80);
             g2d.fillRect(w - 2, 0, w, h);
 
-            g2d.setColor(d20);
+            skin.setGraphicsColor(g2d, d20);
             g2d.drawLine(0, 0, w - 3, 0);
-            g2d.setColor(l20);
+            skin.setGraphicsColor(g2d, l20);
             g2d.drawLine(0, h - 1, w - 3, h - 1);
         }
 

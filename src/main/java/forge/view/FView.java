@@ -2,6 +2,7 @@ package forge.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -51,7 +52,10 @@ import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FProgressBar;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinCursor;
 import forge.model.BuildInfo;
 import forge.properties.NewConstants;
 
@@ -71,7 +75,7 @@ public enum FView {
     // Top-level UI components; all have getters.
     private final JFrame frmDocument = new JFrame();
     // A layered pane is the frame's viewport, allowing overlay effects.
-    private final JLayeredPane lpnDocument = new JLayeredPane();
+    private final DocumentPane lpnDocument = new DocumentPane();
     // The content panel is placed in the layered pane.
     private final JPanel pnlContent = new JPanel();
     // An insets panel neatly maintains a space from the edges of the window and
@@ -84,19 +88,20 @@ public enum FView {
 
     private FView() {
         frmSplash = new SplashFrame();
-
-        // Insets panel has background image / texture, which
-        // must be instantiated after the skin is loaded.
-        pnlInsets = new FPanel(new BorderLayout());
     }
 
     /** */
     public void initialize() {
+        // Insets panel has background image / texture, which
+        // must be instantiated after the skin is loaded.
+        pnlInsets = new FPanel(new BorderLayout());
+        pnlInsets.setBorderToggle(false);
+
         // Frame styling
         frmDocument.setMinimumSize(new Dimension(800, 600));
         frmDocument.setLocationRelativeTo(null);
         frmDocument.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frmDocument.setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON).getImage());
+        FSkin.get(frmDocument).setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON));
         frmDocument.setTitle("Forge: " + BuildInfo.getVersionString());
 
         // Frame components
@@ -121,7 +126,7 @@ public enum FView {
         pnlContent.setOpaque(false);
         pnlContent.setLayout(null);
 
-        FOverlay.SINGLETON_INSTANCE.getPanel().setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
+        FSkin.get(FOverlay.SINGLETON_INSTANCE.getPanel()).setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
 
         // Populate all drag tab components.
         this.cacheUIStates();
@@ -158,7 +163,7 @@ public enum FView {
                 resDirs.add(new File("res", resDir));
             }
 
-	    final Set<File> doNotDeleteDirs = new HashSet<File>();
+            final Set<File> doNotDeleteDirs = new HashSet<File>();
             for (String dir : Lists.newArrayList("decks", "decks/constructed", "decks/draft", "decks/plane", "decks/scheme", "decks/sealed", "gauntlet", "layouts", "pics", "preferences", "quest/data")) {
                 doNotDeleteDirs.add(new File("res", dir));
             }
@@ -295,7 +300,7 @@ public enum FView {
     }
 
     /** @return {@link javax.swing.JLayeredPane} */
-    public JLayeredPane getLpnDocument() {
+    public DocumentPane getLpnDocument() {
         return lpnDocument;
     }
 
@@ -366,6 +371,26 @@ public enum FView {
             g.fillRect(0, 0, getWidth(), getHeight());
         }
     }
+    
+    @SuppressWarnings("serial")
+    public class DocumentPane extends JLayeredPane {
+        private final JComponentSkin<DocumentPane> skin;
+        
+        public DocumentPane() {
+            super();
+            this.skin = FSkin.get(this);
+        }
+
+        public void setCursor(SkinCursor skinCursor) {
+            this.skin.setCursor(skinCursor);
+        }
+
+        @Override
+        public void setCursor(Cursor cursor) {
+            this.skin.resetCursor(); //ensure skin cursor reset if needed
+            super.setCursor(cursor);
+        }
+    }
 
     /** @return {@link forge.view.ViewBazaarUI} */
     public ViewBazaarUI getViewBazaar() {
@@ -383,6 +408,32 @@ public enum FView {
         VMatchUI.SINGLETON_INSTANCE.instantiate();
         VHomeUI.SINGLETON_INSTANCE.instantiate();
         VDeckEditorUI.SINGLETON_INSTANCE.instantiate();
+    }
+    
+    public void incrementSplashProgessBar() {
+        if (this.frmSplash == null) { return; }
+        this.frmSplash.getProgressBar().increment();
+    }
+
+    public void setSplashProgessBarMessage(final String message) { 
+        setSplashProgessBarMessage(message, 0);
+    }
+    public void setSplashProgessBarMessage(final String message, final int cnt) {
+        if (this.frmSplash == null) { return; }
+
+        final FProgressBar progressBar = this.frmSplash.getProgressBar(); //must cache for sake of runnable below
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if ( cnt > 0 ) {
+                    progressBar.reset();
+                    progressBar.setMaximum(cnt);
+                }
+                progressBar.setShowETA(false);
+                progressBar.setShowCount(cnt > 0);
+                progressBar.setDescription(message);
+            }
+        });
     }
 
     public void refreshAllCellLayouts(boolean showTabs) {

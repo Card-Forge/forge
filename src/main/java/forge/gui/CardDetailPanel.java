@@ -91,8 +91,9 @@ public class CardDetailPanel extends FPanel {
         labelConstrains.weightx = 1.0;
 
         final JPanel cdLabels = new JPanel(new GridLayout(0, 1, 0, 5));
-        cdLabels.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        cdLabels.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        final FSkin.JComponentSkin<JPanel> cdLabelsSkin = FSkin.get(cdLabels);
+        cdLabelsSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        cdLabelsSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.nameCostLabel = new FLabel.Builder().build();
         this.typeLabel = new FLabel.Builder().build();
         this.powerToughnessLabel = new FLabel.Builder().build();
@@ -101,8 +102,9 @@ public class CardDetailPanel extends FPanel {
         cdLabels.add(this.powerToughnessLabel);
 
         final JPanel idr = new JPanel(new GridBagLayout());
-        idr.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        idr.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.JComponentSkin<JPanel> idrSkin = FSkin.get(idr);
+        idrSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        idrSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         final GridBagConstraints c1 = new GridBagConstraints();
         final GridBagConstraints c2 = new GridBagConstraints();
 

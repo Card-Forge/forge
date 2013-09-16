@@ -59,11 +59,11 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
         .text("A gauntlet that has been started will keep the same deck until it is finished.").build();
 
     private VSubmenuGauntletContests() {
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
 
         pnlLoad.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnlLoad.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(pnlLoad).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlLoad.add(lblLoad, "h 30px!, w 94%!, gap 1% 0 0 5px, ax center");
        // pnlLoad.add(new FLabel.Builder().text("If a gauntlet has been started, its deck is frozen.").build(),
          //       "gap 0 0 0 5px, ax center");

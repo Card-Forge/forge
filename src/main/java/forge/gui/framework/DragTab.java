@@ -15,6 +15,7 @@ import forge.gui.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public final class DragTab extends JLabel implements ILocalRepaint {
+    private final FSkin.JLabelSkin<DragTab> skin;
     private boolean selected = false;
     private int priority = 10;
 
@@ -27,11 +28,12 @@ public final class DragTab extends JLabel implements ILocalRepaint {
      */
     public DragTab(final String title0) {
         super(title0);
+        skin = FSkin.get(this);
         setToolTipText(title0);
         setOpaque(false);
         setSelected(false);
         setBorder(new EmptyBorder(2, 5, 2, 5));
-        setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(SRearrangingUtil.getRearrangeClickEvent());
         this.addMouseMotionListener(SRearrangingUtil.getRearrangeDragEvent());
@@ -76,15 +78,15 @@ public final class DragTab extends JLabel implements ILocalRepaint {
     @Override
     public void paintComponent(final Graphics g) {
         if (!selected) {
-            g.setColor(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+            skin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
             g.fillRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
-            g.setColor(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+            skin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             g.drawRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
         }
         else {
-            g.setColor(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+            skin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
             g.fillRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
-            g.setColor(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+            skin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             g.drawRoundRect(0, 0, getWidth() - 1, getHeight() * 2, 6, 6);
         }
 

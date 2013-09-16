@@ -40,7 +40,6 @@ import forge.error.ExceptionHandler;
 import forge.game.ai.AiProfileUtil;
 import forge.game.limited.GauntletMini;
 import forge.gauntlet.GauntletData;
-import forge.gui.toolbox.FSkin;
 import forge.item.PrintSheet;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -172,8 +171,9 @@ public class FModel {
 
         this.loadDynamicGamedata();
 
-        if(initWithUi)
-            FSkin.setProgessBarMessage("Loading decks");
+        if (initWithUi) {
+            FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Loading decks");
+        }
 
         this.decks = new CardCollections();
         this.quest = new QuestController();

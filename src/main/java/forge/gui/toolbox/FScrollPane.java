@@ -4,7 +4,6 @@ import java.awt.Component;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.LineBorder;
 
 /** 
  * A very basic extension of JScrollPane to centralize common styling changes.
@@ -33,7 +32,7 @@ public class FScrollPane extends JScrollPane {
         super(c0, vertical0, horizontal0);
         getVerticalScrollBar().setUnitIncrement(16);
         getViewport().setOpaque(false);
-        setBorder(new LineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS), 1));
+        FSkin.get(this).setLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
         setOpaque(false);
     }
 }

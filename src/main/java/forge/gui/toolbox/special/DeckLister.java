@@ -27,13 +27,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
@@ -52,6 +50,7 @@ import forge.gui.deckeditor.controllers.CEditorQuest;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.item.InventoryItem;
 
 /**
@@ -61,15 +60,13 @@ import forge.item.InventoryItem;
  */
 @SuppressWarnings("serial")
 public class DeckLister extends JPanel implements ILocalRepaint {
-    private final ImageIcon icoDelete;
-    private final ImageIcon icoDeleteOver;
-    private final ImageIcon icoEdit;
-    private final ImageIcon icoEditOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
     private final GameType gametype;
     private Command cmdDelete, cmdRowSelect;
-    private final Color clrDefault, clrHover, clrActive, clrBorders;
+    private final Color clrDefault;
+    private final FSkin.SkinIcon icoDelete, icoDeleteOver, icoEdit, icoEditOver;
+    private final FSkin.SkinColor clrHover, clrActive, clrBorders;
 
     /**
      * Creates deck list for selected decks for quick deleting, editing, and
@@ -125,7 +122,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         // scroll panes will have difficulty dynamically resizing if 100% width
         // is set.
         final JPanel rowTitle = new TitlePanel();
-        rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        FSkin.get(rowTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
 
         rowTitle.add(new FLabel.Builder().text("Delete").fontAlign(SwingConstants.CENTER).build(),
@@ -189,10 +186,11 @@ public class DeckLister extends JPanel implements ILocalRepaint {
     private class DeleteButton extends JButton {
         public DeleteButton(final RowPanel r0) {
             super();
+            FSkin.AbstractButtonSkin<DeleteButton> skin = FSkin.get(this);
             this.setRolloverEnabled(true);
-            this.setPressedIcon(DeckLister.this.icoDeleteOver);
-            this.setRolloverIcon(DeckLister.this.icoDeleteOver);
-            this.setIcon(DeckLister.this.icoDelete);
+            skin.setPressedIcon(DeckLister.this.icoDeleteOver);
+            skin.setRolloverIcon(DeckLister.this.icoDeleteOver);
+            skin.setIcon(DeckLister.this.icoDelete);
             this.setOpaque(false);
             this.setContentAreaFilled(false);
             this.setBorder(null);
@@ -203,7 +201,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     if (!r0.selected) {
-                        r0.setBackground(DeckLister.this.clrHover);
+                        FSkin.get(r0).setBackground(DeckLister.this.clrHover);
                         r0.setOpaque(true);
                     }
                 }
@@ -211,7 +209,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 @Override
                 public void mouseExited(final MouseEvent e) {
                     if (!r0.selected) {
-                        r0.setBackground(DeckLister.this.clrDefault);
+                        FSkin.get(r0).setBackground(DeckLister.this.clrDefault);
                         r0.setOpaque(false);
                     }
                 }
@@ -227,10 +225,11 @@ public class DeckLister extends JPanel implements ILocalRepaint {
     private class EditButton extends JButton {
         public EditButton(final RowPanel r0) {
             super();
+            FSkin.AbstractButtonSkin<EditButton> skin = FSkin.get(this);
             this.setRolloverEnabled(true);
-            this.setPressedIcon(DeckLister.this.icoEditOver);
-            this.setRolloverIcon(DeckLister.this.icoEditOver);
-            this.setIcon(DeckLister.this.icoEdit);
+            skin.setPressedIcon(DeckLister.this.icoEditOver);
+            skin.setRolloverIcon(DeckLister.this.icoEditOver);
+            skin.setIcon(DeckLister.this.icoEdit);
             this.setOpaque(false);
             this.setContentAreaFilled(false);
             this.setBorder(null);
@@ -241,7 +240,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
                     if (!r0.selected) {
-                        r0.setBackground(DeckLister.this.clrHover);
+                        FSkin.get(r0).setBackground(DeckLister.this.clrHover);
                         r0.setOpaque(true);
                     }
                 }
@@ -249,7 +248,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 @Override
                 public void mouseExited(final MouseEvent e) {
                     if (!r0.selected) {
-                        r0.setBackground(DeckLister.this.clrDefault);
+                        FSkin.get(r0).setBackground(DeckLister.this.clrDefault);
                         r0.setOpaque(false);
                     }
                 }
@@ -284,7 +283,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
             this.setOpaque(false);
             this.setBackground(new Color(0, 0, 0, 0));
             this.setLayout(new MigLayout("insets 0, gap 0"));
-            this.setBorder(new MatteBorder(0, 0, 1, 0, DeckLister.this.clrBorders));
+            FSkin.get(this).setMatteBorder(0, 0, 1, 0, DeckLister.this.clrBorders);
             this.deck = d0;
 
             this.addMouseListener(new MouseAdapter() {
@@ -292,7 +291,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 public void mouseEntered(final MouseEvent e) {
                     RowPanel.this.hovered = true;
                     if (!RowPanel.this.selected) {
-                        ((RowPanel) e.getSource()).setBackground(DeckLister.this.clrHover);
+                        FSkin.get(((RowPanel) e.getSource())).setBackground(DeckLister.this.clrHover);
                         ((RowPanel) e.getSource()).setOpaque(true);
                     }
                 }
@@ -301,7 +300,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 public void mouseExited(final MouseEvent e) {
                     RowPanel.this.hovered = false;
                     if (!RowPanel.this.selected) {
-                        ((RowPanel) e.getSource()).setBackground(DeckLister.this.clrDefault);
+                        FSkin.get(((RowPanel) e.getSource())).setBackground(DeckLister.this.clrDefault);
                         ((RowPanel) e.getSource()).setOpaque(false);
                     }
                 }
@@ -321,7 +320,9 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         public void setSelected(final boolean b0) {
             this.selected = b0;
             this.setOpaque(b0);
-            this.setBackground(b0 ? DeckLister.this.clrActive : (this.hovered ? DeckLister.this.clrHover : DeckLister.this.clrDefault));
+            if (b0) { FSkin.get(this).setBackground(DeckLister.this.clrActive); }
+            else if (this.hovered) { FSkin.get(this).setBackground(DeckLister.this.clrHover); }
+            else { FSkin.get(this).setBackground(DeckLister.this.clrDefault); }
         }
 
         public boolean isSelected() {
@@ -343,7 +344,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 this.setBackground(Color.GREEN);
             }
             this.setHorizontalAlignment(SwingConstants.CENTER);
-            this.setFont(FSkin.getBoldFont(12));
+            FSkin.get(this).setFont(FSkin.getBoldFont(12));
             this.setHorizontalAlignment(SwingConstants.CENTER);
         }
     }
@@ -352,8 +353,9 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         public GenericLabel(final String txt0) {
             super(txt0);
             this.setHorizontalAlignment(SwingConstants.CENTER);
-            this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            this.setFont(FSkin.getBoldFont(12));
+            JLabelSkin<GenericLabel> skin = FSkin.get(this);
+            skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            skin.setFont(FSkin.getBoldFont(12));
         }
     }
 

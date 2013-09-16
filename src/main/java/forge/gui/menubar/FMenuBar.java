@@ -2,6 +2,7 @@ package forge.gui.menubar;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
@@ -13,50 +14,73 @@ import forge.gui.menus.ForgeMenu;
 import forge.gui.menus.HelpMenu;
 import forge.gui.menus.LayoutMenu;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
 
 @SuppressWarnings("serial")
 public class FMenuBar extends JMenuBar {
 
-    JLabel statusCaption;
+    private String statusText;
+    private JLabel lblStatus;
+    private IMenuProvider provider;
 
     public FMenuBar(JFrame f) {
         f.setJMenuBar(this);
         setPreferredSize(new Dimension(f.getWidth(), 26));
-        setupMenuBar(null);
+        refresh();
+        setStatusText(""); //set default status text
     }
 
-    public void setupMenuBar(IMenuProvider provider) {
+    public void setupMenuBar(IMenuProvider provider0) {
+        provider = provider0;
+        refresh();
+    }
+    
+    public void refresh() {
         removeAll();
         add(ForgeMenu.getMenu());
-        addProviderMenus(provider);
+        addProviderMenus();
         add(LayoutMenu.getMenu());
         add(HelpMenu.getMenu());
-        setStatusCaption();
-        repaint();
+        addStatusLabel();
+        revalidate();
     }
 
     /**
      * Adds a label to the right-hand side of the MenuBar which can
      * be used to show hints or status information.
      */
-    private void setStatusCaption() {
+    private void addStatusLabel() {
         add(Box.createHorizontalGlue()); // align right hack/patch.
-        statusCaption = new JLabel();
-        statusCaption.setForeground(getForeground());
-        statusCaption.setFont(FSkin.getItalicFont(11));
-        statusCaption.setOpaque(false);
-        add(statusCaption);
+        lblStatus = new JLabel(statusText);
+        JLabelSkin<JLabel> labelSkin = FSkin.get(lblStatus);
+        if (FSkin.isLookAndFeelSet()) {
+            labelSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        }
+        else { //ensure status is visible on default menu bar
+            labelSkin.setForeground(getForeground());
+        }
+        labelSkin.setFont(FSkin.getItalicFont(11));
+        lblStatus.setOpaque(false);
+        add(lblStatus);
     }
 
     public void setStatusText(String text) {
-        statusCaption.setText(text.trim() + "  ");
+        statusText = text.trim();
+        if (statusText.isEmpty()) {
+            statusText = "F1 : hide menu"; //show shortcut to hide menu if no other status to show
+        }
+        statusText += "  "; //add padding from right edge of menu bar
+        lblStatus.setText(statusText);
     }
 
-    private void addProviderMenus(IMenuProvider provider) {
-        if (provider != null && provider.getMenus() != null) {
-            for (JMenu m : provider.getMenus()) {
-                m.setBorderPainted(false);
-                add(m);
+    private void addProviderMenus() {
+        if (provider != null) {
+            List<JMenu> menus = provider.getMenus();
+            if (menus != null) {
+                for (JMenu m : menus) {
+                    m.setBorderPainted(false);
+                    add(m);
+                }
             }
         }
     }

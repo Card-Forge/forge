@@ -1,6 +1,5 @@
 package forge.gui.toolbox.special;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -115,7 +114,7 @@ public class PhaseLabel extends JLabel {
     public void paintComponent(final Graphics g) {
         final int w = this.getWidth();
         final int h = this.getHeight();
-        Color c;
+        FSkin.SkinColor c;
 
         // Set color according to skip or active or hover state of label
         if (this.hover) {
@@ -131,7 +130,7 @@ public class PhaseLabel extends JLabel {
         }
 
         // Center vertically and horizontally. Show border if active.
-        g.setColor(c);
+        FSkin.get(this).setGraphicsColor(g, c);
         g.fillRoundRect(1, 1, w - 2, h - 2, 5, 5);
         super.paintComponent(g);
     }

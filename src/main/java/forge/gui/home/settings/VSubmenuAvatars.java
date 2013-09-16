@@ -1,10 +1,8 @@
 package forge.gui.home.settings;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.util.Map;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 
@@ -21,6 +19,7 @@ import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -76,7 +75,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
 
     @SuppressWarnings("serial")
     private void populateAvatars() {
-        final Map<Integer, Image> avatarMap = FSkin.getAvatars();
+        final Map<Integer, SkinImage> avatarMap = FSkin.getAvatars();
         final JPanel pnlAvatarPics = new JPanel(new WrapLayout());
         final JPanel pnlAvatarUsers = new JPanel(new MigLayout("insets 0, gap 0, align center"));
 
@@ -121,16 +120,16 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         if (humanIndex >= FSkin.getAvatars().size()) { humanIndex = 0; }
         if (aiIndex >= FSkin.getAvatars().size()) { aiIndex = 0; }
 
-        lblAvatarAI.setIcon(new ImageIcon(FSkin.getAvatars().get(aiIndex)));
-        lblAvatarHuman.setIcon(new ImageIcon(FSkin.getAvatars().get(humanIndex)));
+        lblAvatarAI.setIcon(FSkin.getAvatars().get(aiIndex));
+        lblAvatarHuman.setIcon(FSkin.getAvatars().get(humanIndex));
 
         Singletons.getModel().getPreferences().setPref(FPref.UI_AVATARS, humanIndex + "," + aiIndex);
         Singletons.getModel().getPreferences().save();
     }
 
     @SuppressWarnings("serial")
-    private FLabel makeAvatarLabel(final Image img0, final int index0) {
-        final FLabel lbl = new FLabel.Builder().icon(new ImageIcon(img0)).iconScaleFactor(1.0)
+    private FLabel makeAvatarLabel(final SkinImage img0, final int index0) {
+        final FLabel lbl = new FLabel.Builder().icon(img0).iconScaleFactor(1.0)
                 .iconInBackground(true).hoverable(true).build();
 
         final Dimension size = new Dimension(100, 100);
@@ -145,12 +144,12 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
                         .getPref(FPref.UI_AVATARS).split(",");
 
                 if (lblAvatarAI.getSelected()) {
-                    lblAvatarAI.setIcon(new ImageIcon(FSkin.getAvatars().get(index0)));
+                    lblAvatarAI.setIcon(FSkin.getAvatars().get(index0));
                     lblAvatarAI.repaintSelf();
                     indices[1] = String.valueOf(index0);
                 }
                 else {
-                    lblAvatarHuman.setIcon(new ImageIcon(FSkin.getAvatars().get(index0)));
+                    lblAvatarHuman.setIcon(FSkin.getAvatars().get(index0));
                     lblAvatarHuman.repaintSelf();
                     indices[0] = String.valueOf(index0);
                 }

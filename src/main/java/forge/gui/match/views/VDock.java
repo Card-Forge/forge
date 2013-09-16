@@ -21,11 +21,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -36,6 +34,9 @@ import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JLabelSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinImage;
 
 /**
  * Assembles Swing components of button dock area.
@@ -193,10 +194,11 @@ public enum VDock implements IVDoc<CDock> {
      */
     @SuppressWarnings("serial")
     private class DockButton extends JLabel {
-        private final Image img;
-        private final Color hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+        private final SkinImage img;
+        private final JLabelSkin<DockButton> skin;
+        private final SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         private final Color defaultBG = new Color(0, 0, 0, 0);
-        private Color clrBorders = new Color(0, 0, 0, 0);
+        private final Color defaultBorderColor = new Color(0, 0, 0, 0);
         private int w, h;
 
         /**
@@ -207,12 +209,13 @@ public enum VDock implements IVDoc<CDock> {
          * @param s0
          *            &emsp; Tooltip string
          */
-        public DockButton(final ImageIcon i0, final String s0) {
+        public DockButton(final SkinImage i0, final String s0) {
             super();
+            this.skin = FSkin.get(this);
             this.setToolTipText(s0);
             this.setOpaque(false);
             this.setBackground(this.defaultBG);
-            this.img = i0.getImage();
+            this.img = i0;
 
             Dimension size = new Dimension(30, 30);
             this.setMinimumSize(size);
@@ -222,13 +225,11 @@ public enum VDock implements IVDoc<CDock> {
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    DockButton.this.clrBorders = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
-                    DockButton.this.setBackground(DockButton.this.hoverBG);
+                    DockButton.this.skin.setBackground(DockButton.this.hoverBG);
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
-                    DockButton.this.clrBorders = new Color(0, 0, 0, 0);
                     DockButton.this.setBackground(DockButton.this.defaultBG);
                 }
             });
@@ -245,9 +246,14 @@ public enum VDock implements IVDoc<CDock> {
             this.h = this.getHeight();
             g.setColor(this.getBackground());
             g.fillRect(0, 0, this.w, this.h);
-            g.setColor(this.clrBorders);
+            if (skin.getBackground() == this.hoverBG) {
+                skin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+            }
+            else {
+                g.setColor(this.defaultBorderColor);
+            }
             g.drawRect(0, 0, this.w - 1, this.h - 1);
-            g.drawImage(this.img, 0, 0, this.w, this.h, null);
+            skin.drawImage(g, this.img, 0, 0, this.w, this.h);
             super.paintComponent(g);
         }
     }

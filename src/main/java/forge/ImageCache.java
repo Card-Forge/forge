@@ -25,8 +25,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.cache.CacheBuilder;
@@ -39,6 +37,7 @@ import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.game.player.IHasIcon;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.PaperToken;
@@ -125,7 +124,7 @@ public class ImageCache {
      * retrieve an icon from the cache.  returns the current skin's ICO_UNKNOWN if the icon image is not found
      * in the cache and cannot be loaded from disk.
      */
-    public static ImageIcon getIcon(IHasIcon ihi) {
+    public static SkinIcon getIcon(IHasIcon ihi) {
         String imageKey = ihi.getIconImageKey();
         final BufferedImage i;
         if (_missingIconKeys.contains(imageKey) ||
@@ -133,7 +132,7 @@ public class ImageCache {
             _missingIconKeys.add(imageKey);
             return FSkin.getIcon(FSkin.InterfaceIcons.ICO_UNKNOWN);
         }
-        return new ImageIcon(i);
+        return new FSkin.UnskinnedIcon(i);
     }
     
     /**

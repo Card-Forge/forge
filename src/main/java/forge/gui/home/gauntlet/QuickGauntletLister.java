@@ -11,12 +11,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
@@ -24,6 +22,7 @@ import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinIcon;
 
 /** 
  * Creates file list/table for quick deleting, editing, and basic info.
@@ -31,11 +30,12 @@ import forge.gui.toolbox.FSkin;
  */
 @SuppressWarnings("serial")
 public class QuickGauntletLister extends JPanel {
-    private ImageIcon icoDelete, icoDeleteOver;
+    private SkinIcon icoDelete, icoDeleteOver;
     private RowPanel previousSelect;
     private RowPanel[] rows;
     private Command cmdRowSelect, cmdRowDelete;
-    private final Color clrDefault, clrHover, clrActive, clrBorders;
+    private final Color clrDefault;
+    private final FSkin.SkinColor clrHover, clrActive, clrBorders;
 
     /** */
     public QuickGauntletLister() {
@@ -70,7 +70,7 @@ public class QuickGauntletLister extends JPanel {
         // Note: careful with the widths of the rows here;
         // scroll panes will have difficulty dynamically resizing if 100% width is set.
         final JPanel rowTitle = new JPanel();
-        rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        FSkin.get(rowTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
         rowTitle.add(new FLabel.Builder().build(),
                 "w 30px!, h 20px!, gap 1% 0 5px 0");
@@ -126,10 +126,11 @@ public class QuickGauntletLister extends JPanel {
     private class DeleteButton extends JButton {
         public DeleteButton(final RowPanel r0) {
             super();
+            FSkin.AbstractButtonSkin<DeleteButton> skin = FSkin.get(this);
             setRolloverEnabled(true);
-            setPressedIcon(icoDeleteOver);
-            setRolloverIcon(icoDeleteOver);
-            setIcon(icoDelete);
+            skin.setPressedIcon(icoDeleteOver);
+            skin.setRolloverIcon(icoDeleteOver);
+            skin.setIcon(icoDelete);
             setOpaque(false);
             setContentAreaFilled(false);
             setBorder(null);
@@ -140,14 +141,14 @@ public class QuickGauntletLister extends JPanel {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     if (!r0.selected) {
-                        r0.setBackground(clrHover);
+                        FSkin.get(r0).setBackground(clrHover);
                         r0.setOpaque(true);
                     }
                 }
                 @Override
                 public void mouseExited(MouseEvent e) {
                     if (!r0.selected) {
-                        r0.setBackground(clrDefault);
+                        FSkin.get(r0).setBackground(clrDefault);
                         r0.setOpaque(false);
                     }
                 }
@@ -168,21 +169,21 @@ public class QuickGauntletLister extends JPanel {
             setOpaque(false);
             setBackground(new Color(0, 0, 0, 0));
             setLayout(new MigLayout("insets 0, gap 0"));
-            setBorder(new MatteBorder(0, 0, 1, 0, clrBorders));
+            FSkin.get(this).setMatteBorder(0, 0, 1, 0, clrBorders);
             gauntletData = gd0;
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     if (!selected) {
-                        ((RowPanel) e.getSource()).setBackground(clrHover);
+                        FSkin.get(((RowPanel) e.getSource())).setBackground(clrHover);
                         ((RowPanel) e.getSource()).setOpaque(true);
                     }
                 }
                 @Override
                 public void mouseExited(MouseEvent e) {
                     if (!selected) {
-                        ((RowPanel) e.getSource()).setBackground(clrDefault);
+                        FSkin.get(((RowPanel) e.getSource())).setBackground(clrDefault);
                         ((RowPanel) e.getSource()).setOpaque(false);
                     }
                 }
@@ -196,7 +197,7 @@ public class QuickGauntletLister extends JPanel {
         public void setSelected(boolean b0) {
             selected = b0;
             setOpaque(b0);
-            setBackground(b0 ? clrActive : clrHover);
+            FSkin.get(this).setBackground(b0 ? clrActive : clrHover);
         }
 
         public boolean isSelected() {

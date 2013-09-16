@@ -19,8 +19,6 @@ package forge.gui.match.nonsingleton;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.MatteBorder;
-
 import net.miginfocom.swing.MigLayout;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -71,8 +69,7 @@ public class VCommand implements IVDoc<CCommand> {
 
         control = new CCommand(player, this);
 
-        tabletop.setBorder(new MatteBorder(0, 1, 0, 0,
-                FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        FSkin.get(tabletop).setMatteBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
         tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);

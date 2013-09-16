@@ -131,13 +131,10 @@ public enum VStack implements IVDoc<CStack> {
         tab.setText("Stack : " + stack.size());
 
         final Border border = new EmptyBorder(5, 5, 5, 5);
-        Color[] scheme;
         
         stackTARs.clear();
         boolean isFirst = true;
         for (final SpellAbilityStackInstance spell : stack) {
-            scheme = getSpellColor(spell);
-
             String isOptional = spell.getSpellAbility().isOptionalTrigger() 
                     && spell.getSourceCard().getController().getController().getLobbyPlayer().equals(viewer) ? "(OPTIONAL) " : "";
             String txt = (count++) + ". " + isOptional + spell.getStackDescription();
@@ -145,8 +142,7 @@ public enum VStack implements IVDoc<CStack> {
             tar.setToolTipText(txt);
             tar.setOpaque(true);
             tar.setBorder(border);
-            tar.setForeground(scheme[1]);
-            tar.setBackground(scheme[0]);
+            this.setSpellColor(tar, spell);
 
             tar.setFocusable(false);
             tar.setEditable(false);
@@ -203,23 +199,43 @@ public enum VStack implements IVDoc<CStack> {
         parentCell.getBody().repaint();
     }
 
-    /** Returns array with [background, foreground] colors. */
-    private Color[] getSpellColor(SpellAbilityStackInstance s0) {
-        if (s0.getStackDescription().startsWith("Morph ")) 
-            return new Color[] { new Color(0, 0, 0, 0), FSkin.getColor(FSkin.Colors.CLR_TEXT) };
-        if (CardUtil.getColors(s0.getSourceCard()).isMulticolor()) 
-            return new Color[] { new Color(253, 175, 63), Color.black };
-
-        if (s0.getSourceCard().isBlack())      return new Color[] { Color.black, Color.white };
-        if (s0.getSourceCard().isBlue())       return new Color[] { new Color(71, 108, 191), Color.white };
-        if (s0.getSourceCard().isGreen())      return new Color[] { new Color(23, 95, 30), Color.white };
-        if (s0.getSourceCard().isRed())        return new Color[] { new Color(214, 8, 8), Color.white };
-        if (s0.getSourceCard().isWhite())      return new Color[] { Color.white, Color.black };
-
-        if (s0.getSourceCard().isArtifact() || s0.getSourceCard().isLand())
-            return new Color[] { new Color(111, 75, 43), Color.white };
-
-        return new Color[] { new Color(0, 0, 0, 0), FSkin.getColor(FSkin.Colors.CLR_TEXT) };
+    private void setSpellColor(JTextArea tar, SpellAbilityStackInstance s0) {
+        if (s0.getStackDescription().startsWith("Morph ")) {
+            tar.setBackground(new Color(0, 0, 0, 0));
+            FSkin.get(tar).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        }
+        else if (CardUtil.getColors(s0.getSourceCard()).isMulticolor()) {
+            tar.setBackground(new Color(253, 175, 63));
+            tar.setForeground(Color.black);
+        }
+        else if (s0.getSourceCard().isBlack()) {
+            tar.setBackground(Color.black);
+            tar.setForeground(Color.white);
+        }
+        else if (s0.getSourceCard().isBlue()) {
+            tar.setBackground(new Color(71, 108, 191));
+            tar.setForeground(Color.white);
+        }
+        else if (s0.getSourceCard().isGreen()) {
+            tar.setBackground(new Color(23, 95, 30));
+            tar.setForeground(Color.white);
+        }
+        else if (s0.getSourceCard().isRed()) {
+            tar.setBackground(new Color(214, 8, 8));
+            tar.setForeground(Color.white);
+        }
+        else if (s0.getSourceCard().isWhite()) {
+            tar.setBackground(Color.white);
+            tar.setForeground(Color.black);
+        }
+        else if (s0.getSourceCard().isArtifact() || s0.getSourceCard().isLand()) {
+            tar.setBackground(new Color(111, 75, 43));
+            tar.setForeground(Color.white);
+        }
+        else {
+            tar.setBackground(new Color(0, 0, 0, 0));
+            FSkin.get(tar).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        }
     }
 
     //========= Custom class handling

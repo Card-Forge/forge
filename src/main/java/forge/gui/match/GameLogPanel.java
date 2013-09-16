@@ -1,9 +1,7 @@
 package forge.gui.match;
 
 import java.awt.AWTEvent;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -18,7 +16,6 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.LayerUI;
 
@@ -26,13 +23,15 @@ import net.miginfocom.swing.MigLayout;
 import forge.gui.MouseUtil;
 import forge.gui.MouseUtil.MouseCursor;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.JTextComponentSkin;
+import forge.gui.toolbox.FSkin.SkinFont;
 
 @SuppressWarnings("serial")
 public class GameLogPanel extends JPanel {
 
     private JScrollPane scrollPane;
     private MyScrollablePanel scrollablePanel;
-    private Font textFont = UIManager.getDefaults().getFont("TextArea.font");
+    private SkinFont textFont = FSkin.getFont();
 
     private LayerUI<JScrollPane> layerUI = new GameLogPanelLayerUI();
     private JLayer<JScrollPane> layer;
@@ -146,28 +145,27 @@ public class GameLogPanel extends JPanel {
 
     }
 
-    public void setTextFont(Font newFont) {
+    public void setTextFont(SkinFont newFont) {
         this.textFont = newFont;
     }
 
     private JTextArea createNewLogEntryJTextArea(String text, boolean useAlternateBackColor) {
         final JTextArea tar = new JTextArea(text);
-        tar.setFont(textFont);
+        final JTextComponentSkin<JTextArea> tarSkin = FSkin.get(tar);
+        tarSkin.setFont(textFont);
         tar.setBorder(new EmptyBorder(3, 4, 3, 4));
         tar.setFocusable(false);
         tar.setEditable(false);
         tar.setLineWrap(true);
         tar.setWrapStyleWord(true);
-        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        setTextAreaBackground(tar, useAlternateBackColor);
-        return tar;
-    }
+        tarSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
-    private void setTextAreaBackground(JTextArea tar, boolean useAlternateBackColor) {
-        Color skinColor = FSkin.getColor(FSkin.Colors.CLR_THEME2);
+        FSkin.SkinColor skinColor = FSkin.getColor(FSkin.Colors.CLR_THEME2);
         if (useAlternateBackColor) { skinColor = skinColor.darker(); }
         tar.setOpaque(true);
-        tar.setBackground(skinColor);
+        tarSkin.setBackground(skinColor);
+
+        return tar;
     }
 
     protected final class MyScrollablePanel extends JPanel implements Scrollable {
