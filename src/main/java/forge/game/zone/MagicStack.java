@@ -29,6 +29,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
@@ -38,6 +39,7 @@ import forge.ITargetable;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.GameLogEntryType;
+import forge.card.CardDb;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -58,6 +60,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
@@ -513,8 +516,21 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         boolean thisHasFizzled = this.hasFizzled(sa, source, false);
         
         if (thisHasFizzled) { // Fizzle
-            // TODO: Spell fizzles, what's the best way to alert player?
-            Log.debug(source.getName() + " ability fizzles.");
+            if (sa.hasParam("Bestow")) {
+                // 702.102d: if its target is illegal, 
+                // the effect making it an Aura spell ends. 
+                // It continues resolving as a creature spell.
+                ArrayList<String> type = CardFactory.getCard(CardDb.getCard(source), source.getController()).getType();
+                final long timestamp = game.getNextTimestamp();
+                source.addChangedCardTypes(type, Lists.newArrayList("Aura"), false, false, false, false, timestamp);
+                source.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);
+                source.setBestow(false);
+                game.fireEvent(new GameEventCardStatsChanged(source));
+                AbilityUtils.resolve(sa.getSourceCard().getFirstSpellAbility());
+            } else {
+                // TODO: Spell fizzles, what's the best way to alert player?
+                Log.debug(source.getName() + " ability fizzles.");
+            }
         } else if (sa.getApi() != null) {
             AbilityUtils.handleRemembering(sa);
             AbilityUtils.resolve(sa);
@@ -691,10 +707,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
                     fizzle &= invalidTarget;
 
-                    if (sa.hasParam("CantFizzle") || sa.hasParam("Bestow")) {
+                    if (sa.hasParam("CantFizzle")) {
                         // Gilded Drake cannot be countered by rules if the
                         // targeted card is not valid
-                        // Bestow spells
                         fizzle = false;
                     }
                 }
