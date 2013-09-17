@@ -230,6 +230,11 @@ public class StaticAbilityCostChange {
                 if (!sa.isSpell() || !((Spell) sa).isCastFaceDown()) {
                     return;
                 }
+            } else if (params.get("Type").equals("SelfMonstrosity")) {
+                if (!(sa instanceof AbilityActivated) || !sa.hasParam("Monstrosity") || sa.isTemporary()) {
+                    // Nemesis of Mortals
+                    return;
+                }
             }
         }
         if (params.containsKey("ValidTarget")) {
