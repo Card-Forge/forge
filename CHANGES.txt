@@ -42,6 +42,7 @@ Hall of the Bandit Lord
 Truth or Tale
 Personal Incarnation
 Wort, the Raidmother
+Blaze of Glory
 
 
 ---------------
@@ -146,7 +147,7 @@ Two-headed Cerberus
 Medomai the Ageless
 Boon Satyr
 Nighthowler
-Purphoros Emissary
+Purphoros's Emissary
 Thassa's Emissary
 Bident of Thassa
 Triton Fortune Hunter
@@ -220,6 +221,50 @@ Prowler's Helm
 Pyxis of Pandemonium
 Baleful Eidolon
 Cutthroat Maneuver
+Akroan Hoplite
+Chronicler of Heroes
+Horizon Chimera
+Pharika's Mender
+Evangel of Heliod
+Hopeful Eidolon
+Lagonna-Band Elder
+Leonin Snarecaster
+Ray of Dissolution
+Scholar of Athreos
+Setessan Battle Priest
+Setessan Griffin
+Silent Artisan
+Traveling Philosopher
+Yoked Ox
+Crackling Triton
+Fate Foretold
+Horizon Scholar
+Prescient Chimera
+Sea God's Revenge
+Defend the Hearth
+Fade into Antiquity
+Feral Invocation
+Meletis Charlatan
+Nemesis of Mortals
+Nylea's Disciple
+Satyr Piper
+Shredding Winds
+Staunch-Hearted Warrior
+Time to Feed
+Voyaging Satyr
+Vulpine Goliath
+Warrior's Lesson
+Gift of Immortality
+Disciple of Phenax
+Erebos's Emissary
+Fellhide Minotaur
+Fleshmad Steed
+Insatiable Harpy
+Keepsake Gorgon
+Lash of the Whip
+Loathsome Catoblepas
+March of the Returned
+Mogis's Marauder
 
 
 ------------
