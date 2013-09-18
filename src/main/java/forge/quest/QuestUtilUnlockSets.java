@@ -147,7 +147,7 @@ public class QuestUtilUnlockSets {
                 continue;
             long distance = Integer.MAX_VALUE;
             for (CardEdition in : allowedSets) {
-                long d = Math.abs(ex.getDate().getTime() - in.getDate().getTime());
+                long d = (Math.abs(ex.getDate().getTime() - in.getDate().getTime())) / 10000;
                 if (d < distance) {
                     distance = d;
                 }
