@@ -72,9 +72,13 @@ public class CountersPutAi extends SpellAbilityAi {
                 return false;
             }
         }
+        
+        if (sa.hasParam("Monstrosity") && source.isMonstrous()) {
+            return false;
+        }
 
         // TODO handle proper calculation of X values based on Cost
-        int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
 
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
