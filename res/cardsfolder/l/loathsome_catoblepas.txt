@@ -8,3 +8,4 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Sele
 DeckNeeds:Color$Green
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loathsome_catoblepas.jpg
+Oracle:{2}{G}: Loathsome Catoblepas must be blocked this turn if able.\nWhen Loathsome Catoblepas dies, target creature an opponent controls gets -3/-3 until end of turn.

@@ -7,3 +7,4 @@ SVar:BuffedBy:Creature
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_purphoros.jpg
+Oracle:Creatures you control have haste.\n{2}{R}, {T}, Sacrifice a land: Put a 3/3 colorless Golem enchantment artifact creature token onto the battlefield.

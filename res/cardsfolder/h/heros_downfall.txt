@@ -3,3 +3,4 @@ ManaCost:1 B B
 Types:Instant
 A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heros_downfall.jpg
+Oracle:Destroy target creature or planeswalker.
