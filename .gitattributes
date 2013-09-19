@@ -15295,5 +15295,6 @@ tools/formats.txt -text
 tools/guilds.xlsx -text
 tools/mtg-data.txt svneol=native#text/plain
 tools/mtgdata-sets-to-forge.txt svneol=native#text/plain
+tools/oracleScraper.py -text
 tools/oracleScript.py svneol=native#text/x-python
 tools/packdata.xlsx -text
