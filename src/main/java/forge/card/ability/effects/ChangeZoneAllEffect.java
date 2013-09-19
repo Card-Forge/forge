@@ -127,7 +127,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 game.getCardState(source).removeRemembered(c);
             }
             if (imprint != null) {
-                game.getCardState(source).addImprinted(movedCard);
+                if(movedCard.getZone().is(ZoneType.Exile)) {
+                    game.getCardState(source).addImprinted(movedCard);
+                }
             }
         }
 
