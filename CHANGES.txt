@@ -265,6 +265,36 @@ Lash of the Whip
 Loathsome Catoblepas
 March of the Returned
 Mogis's Marauder
+Pharika's Cure
+Rescue from the Underworld
+Returned Centaur
+Returned Phalanx
+Enchantment Aura
+Sip of Hemlock
+Viper's Kiss
+Rage of Purphoros
+Satyr Rambler
+Spark Jolt
+Titan's Strength
+Wild Celebrants
+Messenger's Speed
+Minotaur Skullcleaver
+Portent of Betrayal
+Priest of Iroas
+Stymied Hopes
+Thassa's Bounty
+Triton Shorethief
+Vaporkin
+Akroan Crusader
+Anger of the Gods
+Arena Athlete
+Dragon Mantle
+Fanatic of Mogis
+Firedrinker Satyr
+Ill-Tempered Cyclops
+Labyrinth Champion
+Curse of the Swine
+Triton Tactics
 
 
 ------------
