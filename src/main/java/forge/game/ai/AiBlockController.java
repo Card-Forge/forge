@@ -233,7 +233,8 @@ public class AiBlockController {
                         }
                         
                         if (mode == TriggerType.DamageDone) {
-                            if (TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), attacker)
+                            if ((!trigParams.containsKey("ValidSource")
+                                        || TriggerReplacementBase.matchesValid(attacker, trigParams.get("ValidSource").split(","), attacker))
                                     && attacker.getNetCombatDamage() > 0
                                     && (!trigParams.containsKey("ValidTarget")
                                             || TriggerReplacementBase.matchesValid(combat.getDefenderByAttacker(attacker), trigParams.get("ValidTarget").split(","), attacker))) {
