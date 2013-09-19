@@ -10,3 +10,4 @@ A:AB$ ChangeZone | Cost$ B T | ValidTgts$ Creature.counters_GE1_FATE | TgtPrompt
 SVar:DBDraw:DB$ Draw | Defined$ RememberedController | NumCards$ 2 | SubAbility$ DBCleanup
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triad_of_fates.jpg
+Oracle:{1}, {T}: Put a fate counter on another target creature.\n{W}, {T}: Exile target creature that has a fate counter on it, then return it to the battlefield under its owner's control.\n{B}, {T}: Exile target creature that has a fate counter on it. Its controller draws two cards.

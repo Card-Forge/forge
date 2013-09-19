@@ -3,3 +3,4 @@ ManaCost:3 W W
 Types:Creature Giant
 PT:3/5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_artisan.jpg
+Oracle:

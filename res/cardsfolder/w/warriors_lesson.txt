@@ -6,3 +6,4 @@ SVar:WarriorLessonDmg:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ P
 SVar:WarriorLessonDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warriors_lesson.jpg
+Oracle:Until end of turn, up to two target creatures you control each gain "Whenever this creature deals combat damage to a player, draw a card."

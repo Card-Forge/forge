@@ -5,3 +5,4 @@ A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target enchantme
 SVar:DBToken:DB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenOwner$ TargetedController | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenColors$ Blue | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swan_song.jpg
+Oracle:Counter target enchantment, instant, or sorcery spell. Its controller puts a 2/2 blue Bird creature token with flying onto the battlefield.

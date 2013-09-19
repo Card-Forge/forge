@@ -4,3 +4,4 @@ Types:Creature Fox
 PT:6/5
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vulpine_goliath.jpg
+Oracle:Trample

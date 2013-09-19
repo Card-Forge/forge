@@ -11,3 +11,4 @@ SVar:TrigDmg:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player.Opponent | RepeatS
 SVar:DBDmg:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ X | References$ X
 SVar:X:Count$ValidHand Card.RememberedPlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormbreath_dragon.jpg
+Oracle:Flying, haste, protection from white\n{5}{R}{R}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen Stormbreath Dragon becomes monstrous, it deals damage to each opponent equal to the number of cards in that player's hand.

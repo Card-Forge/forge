@@ -3,3 +3,4 @@ ManaCost:1 W
 Types:Creature Human Advisor
 PT:2/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traveling_philosopher.jpg
+Oracle:

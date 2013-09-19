@@ -3,3 +3,4 @@ ManaCost:W
 Types:Creature Ox
 PT:0/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yoked_ox.jpg
+Oracle:

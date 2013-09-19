@@ -3,3 +3,4 @@ ManaCost:U
 Types:Creature Merfolk Rogue
 PT:1/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triton_shorethief.jpg
+Oracle:

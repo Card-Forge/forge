@@ -8,3 +8,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | Defined$ Self | SubAbility$ DBChangeZoneAll
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | UseAllOriginZones$ True | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/underworld_cerberus.jpg
+Oracle:Underworld Cerberus can't be blocked except by three or more creatures.\nCards in graveyards can't be the targets of spells or abilities.\nWhen Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.

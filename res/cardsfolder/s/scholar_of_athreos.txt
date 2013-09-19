@@ -6,3 +6,4 @@ A:AB$ LoseLife | Cost$ 2 B | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBG
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scholar_of_athreos.jpg
+Oracle:{2}{B}: Each opponent loses 1 life. You gain life equal to the life lost this way.

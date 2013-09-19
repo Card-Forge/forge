@@ -7,3 +7,4 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 3
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control to fight the first target
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_to_feed.jpg
+Oracle:Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. Target creature you control fights that\ncreature. (Each deals damage equal to its power to the other.)
