@@ -9,3 +9,4 @@ SVar:X:Count$Devotion.B
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature | SacMessage$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abhorrent_overlord.jpg
+Oracle:Flying\nWhen Abhorrent Overlord enters the battlefield, put a number of 1/1 black Harpy creature tokens with flying onto the battlefield equal to your devotion to black. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)\nAt the beginning of your upkeep, sacrifice a creature.

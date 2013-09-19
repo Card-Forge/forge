@@ -3,3 +3,4 @@ ManaCost:2 R R
 Types:Creature Minotaur Warrior
 PT:4/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borderland_minotaur.jpg
+Oracle:

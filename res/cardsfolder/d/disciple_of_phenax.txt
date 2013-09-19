@@ -6,3 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Player | NumCards$ 1 | RevealNumber$ X | References$ X | Mode$ RevealYouChoose | DiscardValid$ Card
 SVar:X:Count$Devotion.B
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_phenax.jpg
+Oracle:When Disciple of Phenax enters the battlefield, target player reveals a number of cards from his or her hand equal to your devotion to black. You choose one of them. That player discards that card. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)

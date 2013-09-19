@@ -7,3 +7,4 @@ SVar:TrigArtisanCopy:AB$ Clone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Sele
 SVar:ArtisanHeroicTrig:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigArtisanCopy | TriggerDescription$ Heroic - Whenever you cast a spell that targets CARDNAME, you may have CARDNAME become a copy of target creature and gain this ability.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artisan_of_forms.jpg
+Oracle:Heroic - Whenever you cast a spell that targets Artisan of Forms, you may have Artisan of Forms become a copy of target creature and gain this ability.

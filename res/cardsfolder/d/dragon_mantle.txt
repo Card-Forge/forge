@@ -8,3 +8,4 @@ SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddAbility$ Pump | Description$ Enchanted creature has "R: This creature gets +1/+0 until end of turn."
 SVar:Pump:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_mantle.jpg
+Oracle:Enchant creature\nWhen Dragon Mantle enters the battlefield, draw a card.\nEnchanted creature has "{R}: This creature gets +1/+0 until end of turn."
