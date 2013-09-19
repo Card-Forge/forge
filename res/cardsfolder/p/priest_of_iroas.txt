@@ -6,3 +6,4 @@ A:AB$ Destroy | Cost$ 3 W Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ 
 SVar:RemAIDeck:True
 DeckNeeds:Color$White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_iroas.jpg
+Oracle:{3}{W}, Sacrifice Priest of Iroas: Destroy target enchantment.

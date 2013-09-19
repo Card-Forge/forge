@@ -9,3 +9,4 @@ SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyxis_of_pandemonium.jpg
+Oracle:{T}: Each player exiles the top card of his or her library face down.\n{7}, {T}, Sacrifice Pyxis of Pandemonium: Each player turns face up all cards he or she owns exiled with Pyxis of Pandemonium, then puts all permanent cards among them onto the battlefield.

@@ -12,3 +12,4 @@ SVar:TrigDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Player | NumCards$ 2 | Mode$
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordeal_of_erebos.jpg
+Oracle:Enchant creature\nWhenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Erebos.\nWhen you sacrifice Ordeal of Erebos, target player discards two cards.

@@ -6,3 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:Count$Devotion.G
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nyleas_disciple.jpg
+Oracle:When Nylea's Disciple enters the battlefield, you gain life equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts toward your devotion to green.)

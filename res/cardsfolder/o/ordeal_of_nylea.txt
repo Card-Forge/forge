@@ -12,3 +12,4 @@ SVar:TrigDiscard:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battl
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordeal_of_nylea.jpg
+Oracle:Enchant creature\nWhenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Nylea.\nWhen you sacrifice Ordeal of Nylea, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.

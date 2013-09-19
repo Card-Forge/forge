@@ -12,3 +12,4 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 2
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordeal_of_thassa.jpg
+Oracle:Enchant creature\nWhenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Thassa.\nWhen you sacrifice Ordeal of Thassa, draw two cards.
