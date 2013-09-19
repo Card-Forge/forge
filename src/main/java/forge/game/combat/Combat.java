@@ -34,6 +34,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.maps.CollectionSuppliers;
+import forge.util.maps.ConcurrentHashMapOfLists;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
@@ -48,7 +49,7 @@ import forge.util.maps.MapOfLists;
 public class Combat {
     private final Player playerWhoAttacks;
     // Defenders, as they are attacked by hostile forces
-    private final MapOfLists<GameEntity, AttackingBand> attackedEntities = new HashMapOfLists<GameEntity, AttackingBand>(CollectionSuppliers.<AttackingBand>arrayLists());
+    private final MapOfLists<GameEntity, AttackingBand> attackedEntities = new ConcurrentHashMapOfLists<GameEntity, AttackingBand>(CollectionSuppliers.<AttackingBand>arrayLists());
     // Blockers to stop the hostile invaders
     private final MapOfLists<AttackingBand, Card> blockedBands = new HashMapOfLists<AttackingBand, Card>(CollectionSuppliers.<Card>arrayLists());
 
