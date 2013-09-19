@@ -1,0 +1,7 @@
+Name:Nessian Asp
+ManaCost:4 G
+Types:Creature Snake
+PT:4/5
+K:Reach
+K:Monstrosity 4:6 G
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nessian_asp.jpg

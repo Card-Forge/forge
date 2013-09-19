@@ -1,0 +1,9 @@
+Name:Sealock Monster
+ManaCost:3 U U
+Types:Creature Octopus
+PT:5/5
+K:CARDNAME can't attack unless defending player controls an Island.
+K:Monstrosity 3:5 U U
+T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME becomes monstrous, target land becomes an Island in addition to its other types.
+SVar:TrigAnimate:AB$ Animate | Cost$ 0 | ValidTgts$ Land | AITgts$ Land.OppCtrl | Types$ Island | Permanent$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sealock_monster.jpg

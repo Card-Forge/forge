@@ -1,0 +1,7 @@
+Name:Gods Willing
+ManaCost:W
+Types:Instant
+A:SP$ Protection | Cost$ W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SubAbility$ DBScry | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gods_willing.jpg

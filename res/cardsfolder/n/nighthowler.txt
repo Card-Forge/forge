@@ -1,0 +1,8 @@
+Name:Nighthowler
+ManaCost:1 B B
+Types:Enchantment Creature Horror
+PT:0/0
+K:Bestow:2 B B
+S:Mode$ Continuous | Affected$ Card.Self,Card.EnchantedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.
+SVar:X:Count$TypeInAllYards.Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nighthowler.jpg

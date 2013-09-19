@@ -1,0 +1,12 @@
+Name:Triton Tactics
+ManaCost:U
+Types:Instant
+A:SP$ Pump | Cost$ U | TargetMin$ 0 | TargetMax$ 2 | NumDef$ +3 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | RememberTargets$ True | SubAbility$ DBUntap | SpellDescription$ Up to two target creatures each get +0/+3 until end of turn. Untap those creatures. At this turn's next end of combat, tap each creature that was blocked by one of those creatures this turn and it doesn't untap during its controller's next untap step.
+SVar:DBUntap:DB$ Untap | Defined$ ParentTarget | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Name$ Triton Tactics Effect | RememberObjects$ ParentTarget | Triggers$ TrigEOC | SVars$ TrigTap,DBPump,ExileSelf
+SVar:TrigEOC:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Command | Execute$ TrigTap | TriggerDescription$ At this turn's next end of combat, tap each creature that was blocked by one of those creatures this turn and it doesn't untap during its controller's next untap step.
+SVar:TrigTap:AB$ TapAll | Cost$ 0 | ValidCards$ Creature.blockedByRemembered | SubAbility$ DBPump
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.blockedByRemembered | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step. | SubAbility$ ExileSelf
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/triton_tactics.jpg

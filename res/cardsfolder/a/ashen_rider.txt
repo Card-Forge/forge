@@ -1,0 +1,9 @@
+Name:Ashen Rider
+ManaCost:4 W W B B
+Types:Creature Archon
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield or dies, exile target permanent.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, exile target permanent.
+SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Permanent | Origin$ Battlefield | Destination$ Exile
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ashen_rider.jpg

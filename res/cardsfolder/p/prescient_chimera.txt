@@ -1,0 +1,8 @@
+Name:Prescient Chimera
+ManaCost:3 U U
+Types:Creature Chimera
+PT:3/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever you cast an instant or sorcery spell, scry 1.
+SVar:TrigScry:AB$ Scry | Cost$ 0 | ScryNum$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prescient_chimera.jpg

@@ -1,0 +1,10 @@
+Name:Fate Foretold
+ManaCost:1 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigDraw | TriggerDescription$ When enchanted creature dies, its controller draws a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredCardController
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fate_foretold.jpg

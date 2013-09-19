@@ -1,0 +1,8 @@
+Name:Shipwreck Singer
+ManaCost:U B
+Types:Creature Siren
+PT:1/2
+K:Flying
+A:AB$ Pump | Cost$ 1 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | KW$ HIDDEN CARDNAME attacks each turn if able. | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
+A:AB$ PumpAll | Cost$ 1 B T | ValidCards$ Creature.attacking | IsCurse$ True | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Attacking creatures get -1/-1 until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shipwreck_singer.jpg

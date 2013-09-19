@@ -1,0 +1,7 @@
+Name:Insatiable Harpy
+ManaCost:2 B B
+Types:Creature Harpy
+PT:2/2
+K:Flying
+K:Lifelink
+SVar:Picture:http://www.wizards.com/global/images/magic/general/insatiable_harpy.jpg

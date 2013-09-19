@@ -1,0 +1,9 @@
+Name:Artisan of Forms
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/1
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigArtisanCopy | TriggerDescription$ Heroic - Whenever you cast a spell that targets CARDNAME, you may have CARDNAME become a copy of target creature and gain this ability.
+SVar:TrigArtisanCopy:AB$ Clone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to copy | Optional$ True | AddTriggers$ ArtisanHeroicTrig | AddSVars$ TrigArtisanCopy,ArtisanHeroicTrig
+SVar:ArtisanHeroicTrig:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigArtisanCopy | TriggerDescription$ Heroic - Whenever you cast a spell that targets CARDNAME, you may have CARDNAME become a copy of target creature and gain this ability.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/artisan_of_forms.jpg

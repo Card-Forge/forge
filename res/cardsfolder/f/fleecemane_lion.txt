@@ -1,0 +1,7 @@
+Name:Fleecemane Lion
+ManaCost:G W
+Types:Creature Cat
+PT:3/3
+K:Monstrosity 1:3 G W
+S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Hexproof & Indestructible | Description$ As long as CARDNAME is monstrous, it has hexproof and indestructible.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fleecemane_lion.jpg

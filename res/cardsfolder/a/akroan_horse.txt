@@ -1,0 +1,11 @@
+Name:Akroan Horse
+ManaCost:4
+Types:Artifact Creature Horse
+PT:0/4
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, an opponent gains control of it.
+SVar:TrigChoose:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ DBDonate
+SVar:DBDonate:DB$ GainControl | Defined$ Self | NewController$ Player.Chosen
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, each opponent puts a 1/1 white Soldier creature token onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ Player.Opponent | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/akroan_horse.jpg

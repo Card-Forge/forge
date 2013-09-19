@@ -1,0 +1,7 @@
+Name:Deathbellow Raider
+ManaCost:1 R
+Types:Creature Minotaur Berserker
+PT:2/3
+K:CARDNAME attacks each turn if able.
+A:AB$ Regenerate | Cost$ 2 B | SpellDescription$ Regenerate CARDNAME.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathbellow_raider.jpg

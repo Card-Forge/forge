@@ -1,0 +1,10 @@
+Name:Polis Crusher
+ManaCost:2 R G
+Types:Creature Cyclops
+PT:4/4
+K:Trample
+K:Protection from enchantments
+K:Monstrosity 3:4 R G
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | IsPresent$ Card.Self+IsMonstrous | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if CARDNAME is monstrous, destroy target enchantment that player controls.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment that player controls | TargetsWithDefinedController$ TriggeredTarget
+SVar:Picture:http://www.wizards.com/global/images/magic/general/polis_crusher.jpg

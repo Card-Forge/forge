@@ -1,0 +1,5 @@
+Name:Boulderfall
+ManaCost:6 R R
+Types:Instant
+A:SP$ DealDamage | Cost$ 6 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 5 | TargetMin$ 1 | TargetMax$ 5 | DividedAsYouChoose$ 5 | SpellDescription$ CARDNAME deals 5 damage divided as you choose among any number of target creatures and/or players.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boulderfal.jpg

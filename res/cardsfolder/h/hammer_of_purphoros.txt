@@ -1,0 +1,9 @@
+Name:Hammer of Purphoros
+ManaCost:2 R
+Types:Legendary Enchantment Artifact
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
+A:AB$ Token | Cost$ 2 R T Sac<1/Land> | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Enchantment,Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 colorless Golem enchantment artifact creature token onto the battlefield.
+SVar:BuffedBy:Creature
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_purphoros.jpg

@@ -1,0 +1,6 @@
+Name:Sedge Scorpion
+ManaCost:G
+Types:Creature Scorpion
+PT:1/1
+K:Deathtouch
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sedge_scorpion.jpg

@@ -1,0 +1,9 @@
+Name:Colossus of Akros
+ManaCost:8
+Types:Artifact Creature Golem
+PT:10/10
+K:Defender
+K:Indestructible
+K:Monstrosity 10:10
+S:Mode$ Continuous | Affected$ Card.Self+IsMonstrous | AddKeyword$ Trample | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ As long as CARDNAME is monstrous, it has trample and can attack as though it didn't have defender.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/colossus_of_akros.jpg

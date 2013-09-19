@@ -1,0 +1,8 @@
+Name:Spearpoint Oread
+ManaCost:2 R
+Types:Enchantment Creature Nymph
+PT:2/2
+K:Bestow:5 R
+K:First Strike
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ First Strike | Description$ Enchanted creature gets +2/+2 and has first strike.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spearpoint_oread.jpg

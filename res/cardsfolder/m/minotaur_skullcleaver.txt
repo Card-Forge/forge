@@ -1,0 +1,8 @@
+Name:Minotaur Skullcleaver
+ManaCost:2 R
+Types:Creature Minotaur Berserker
+PT:2/2
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, it gets +2/+0 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_skullcleaver.jpg

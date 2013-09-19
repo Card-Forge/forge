@@ -1,0 +1,9 @@
+Name:Heliod's Emissary
+ManaCost:3 W
+Types:Enchantment Creature Elk
+PT:3/3
+K:Bestow:6 W
+T:Mode$ Attacks | ValidCard$ Card.Self,Creature.EnchantedBy | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME or enchanted creature attacks, tap target creature an opponent controls.
+SVar:TrigTap:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heliods_emissary.jpg

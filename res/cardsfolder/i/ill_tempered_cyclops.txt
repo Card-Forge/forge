@@ -1,0 +1,7 @@
+Name:Ill-Tempered Cyclops
+ManaCost:3 R
+Types:Creature Cyclops
+PT:3/3
+K:Trample
+K:Monstrosity 3:5 R
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ill_tempered_cyclops.jpg

@@ -1,0 +1,8 @@
+Name:Ember Swallower
+ManaCost:2 R R
+Types:Creature Elemental
+PT:4/5
+K:Monstrosity 3:5 R R
+T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes monstrous, each player sacrifices three lands.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Each | SacValid$ Land | Amount$ 3
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_swallower.jpg
