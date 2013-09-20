@@ -539,9 +539,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 hostCard.getRemembered().remove(movedCard);
             }
             if (imprint != null) {
-                if(movedCard.getZone().is(ZoneType.Exile)) {
-                    hostCard.addImprinted(movedCard);
-                }
+                hostCard.addImprinted(movedCard);
             }
         }
     }
