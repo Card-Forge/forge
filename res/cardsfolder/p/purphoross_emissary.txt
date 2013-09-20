@@ -1,0 +1,9 @@
+Name:Purphoros's Emissary
+ManaCost:3 R
+Types:Enchantment Creature Ox
+PT:3/3
+K:Bestow:6 R
+K:CantBeBlockedByAmount LT2
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddHiddenKeyword$ CantBeBlockedByAmount LT2 | Description$ Enchanted creature gets +3/+3 and can't be blocked except by two or more creatures.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/purphoross_emissary.jpg
+Oracle:Bestow {6}{R} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nPurphoros's Emissary can't be blocked except by two or more creatures.\nEnchanted creature gets +3/+3 and can't be blocked except by two or more creatures.

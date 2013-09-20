@@ -1357,7 +1357,7 @@ res/cardsfolder/b/brave_the_elements.txt svneol=native#text/plain
 res/cardsfolder/b/brawl.txt -text
 res/cardsfolder/b/brawn.txt svneol=native#text/plain
 res/cardsfolder/b/breach.txt svneol=native#text/plain
-res/cardsfolder/b/breaching_hippocamp[!!-~].txt -text
+res/cardsfolder/b/breaching_hippocamp.txt -text
 res/cardsfolder/b/break_asunder.txt svneol=native#text/plain
 res/cardsfolder/b/break_of_day.txt -text
 res/cardsfolder/b/break_open.txt -text
@@ -3752,9 +3752,9 @@ res/cardsfolder/f/feeding_grounds.txt -text
 res/cardsfolder/f/feeling_of_dread.txt -text
 res/cardsfolder/f/feint.txt -text
 res/cardsfolder/f/feldons_cane.txt svneol=native#text/plain
+res/cardsfolder/f/felhide_minotaur.txt -text
 res/cardsfolder/f/felidar_sovereign.txt svneol=native#text/plain
 res/cardsfolder/f/felidar_umbra.txt -text
-res/cardsfolder/f/fellhide_minotaur.txt -text
 res/cardsfolder/f/fellwar_stone.txt svneol=native#text/plain
 res/cardsfolder/f/femeref_archers.txt svneol=native#text/plain
 res/cardsfolder/f/femeref_enchantress.txt svneol=native#text/plain
@@ -8688,8 +8688,8 @@ res/cardsfolder/p/purging_scythe.txt -text
 res/cardsfolder/p/purify.txt svneol=native#text/plain
 res/cardsfolder/p/purify_the_grave.txt -text
 res/cardsfolder/p/purity.txt svneol=native#text/plain
-res/cardsfolder/p/purphoros_emissary.txt -text
 res/cardsfolder/p/purphoros_god_of_the_forge.txt -text
+res/cardsfolder/p/purphoross_emissary.txt -text
 res/cardsfolder/p/purraj_of_urborg.txt svneol=native#text/plain
 res/cardsfolder/p/pursuit_of_flight.txt -text
 res/cardsfolder/p/pursuit_of_knowledge.txt -text
