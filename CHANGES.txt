@@ -1,4 +1,4 @@
-Forge Beta: 09-##-2013 ver 1.4.8
+Forge Beta: 09-##-2013 ver 1.5.0
 
 
 13### cards in total.
@@ -11,6 +11,7 @@ Release Notes
 - Commander -
 The Commander gaming mode has been added and is located in the Variant view. This is a work in progress and is not finished at this time. You are invited to play test this variant.
 
+
 - Switch Theme/Skin Without Restart -
 You can now switch between themes/skins from any screen without restarting, using either Layout > Theme on main menu or combo box on Preferences page of Home screen
 
@@ -18,8 +19,8 @@ You can now switch between themes/skins from any screen without restarting, usin
 Card overlays are now always displayed regardless of card image size if the display card overlays option is turned on in your user preferences.
 
 
-- New Theros cards -
-We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
+- Theros cards -
+Forge now includes most of the new Theros cards. It may take a few days before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient.
 
 
 - Forge now requires Java 7 -
@@ -67,234 +68,234 @@ Rotted Ones, Lay Siege
 The Dead Shall Serve
 
 
------------------------
-New Theros branch Cards
------------------------
+----------------
+New Theros Cards
+----------------
 
-Shipbreaker Kraken
+Abhorrent Overlord
+Agent of Horizons
+Agent of the Fates
+Akroan Crusader
+Akroan Hoplite
+Akroan Horse
 Anax and Cymede
-Polukranos, World Eater
-Nykthos, Shrine to Nyx
-Nylea, God of the Hunt
-Nessian Asp
-Flamespeaker Adept
+Anger of the Gods
+Anthousa, Setessan Hero
+Anvilwrought Raptor
+Aqueous Form
+Arbor Colossus
+Arbor Colossus
+Arena Athlete
+Artisan of Forms
+Artisan's Sorrow
+Ashen Rider
+Ashiok, Nightmare Weaver
+Asphodel Wanderer
+Baleful Eidolon
+Battlewise Hoplite
+Battlewise Valor
+Benthic Giant
+Bident of Thassa
+Blood-Toll Harpy
+Boon of Erebos
+Boon Satyr
+Borderland Minotaur
+Boulderfall
+Bow of Nylea
+Breaching Hippocamp
+Bronze Sable
+Burnished Hart
+Cavalry Pegasus
+Cavern Lampad
+Cavern Lampad
+Celestial Archon
+Celestial Archon
+Centaur Battlemaster
+Chained to the Rocks
+Chosen by Heliod
+Chronicler of Heroes
+Coastline Chimera
+Colossus of Akros
 Commune with the Gods
-Lost in a Labyrinth
-Rageblood Shaman
-Satyr Hedonist
-Voyage's End
-Witches' Eye
-Polis Crusher
+Coordinated Assault
+Crackling Triton
+Curse of the Swine
+Cutthroat Maneuver
+Dark Betrayal
+Dauntless Onslaught
+Deathbellow Raider
+Decorated Griffin
+Defend the Hearth
+Destructive Revelry
+Disciple of Phenax
+Dissolve
+Dragon Mantle
 Elspeth, Sun's Champion
 Ember Swallower
-Reverent Hunter
-Sealock Monster
-Stoneshock Giant
-Sylvan Caryatid
-Omenspeaker
-Abhorrent Overlord
-Gray Merchant of Asphodel
-Cavalry Pegasus
-Gods Willing
-Phalanx Leader
-Vanquish the Foul
-Wingsteed Rider
-Battlewise Hoplite
-Underworld Cerberus
-Xenagos, the Reveler
-Karametra's Acolyte
-Stormbreath Dragon
-Hundred-Handed One
-Ashiok, Nightmare Weaver
+Enchantment Aura
+Ephara's Warden
+Erebos's Emissary
 Erebos, God of the Dead
+Evangel of Heliod
+Fabled Hero
+Fade into Antiquity
+Fanatic of Mogis
+Fate Foretold
+Favored Hoplite
+Fellhide Minotaur
+Feral Invocation
+Firedrinker Satyr
+Flamecast Wheel
+Flamespeaker Adept
+Fleecemane Lion
+Fleetfeather Sandals
+Fleshmad Steed
+Gift of Immortality
+Glare of Heresy
+Glare of Heresy
+Gods Willing
+Gray Merchant of Asphodel
+Guardians of Meletis
+Hammer of Purphoros
+Heliod's Emissary
 Heliod, God of the Sun
-Purphoros, God of the Forge
-Thassa, God of the Sea
-Dark Betrayal
-Read the Bones
+Hero's Downfall
+Hopeful Eidolon
+Horizon Chimera
+Horizon Scholar
+Hundred-Handed One
+Hunt the Hunter
+Hythonia the Cruel
+Ill-Tempered Cyclops
+Insatiable Harpy
+Karametra's Acolyte
+Keepsake Gorgon
+Kragma Warcaller
+Labyrinth Champion
+Lagonna-Band Elder
+Lash of the Whip
+Leafcrown Dryad
+Leafcrown Dryad
+Leonin Snarecaster
 Lightning Strike
+Loathsome Catoblepas
+Lost in a Labyrinth
+March of the Returned
+Master of Waves
+Medomai the Ageless
+Meletis Charlatan
+Messenger's Speed
+Minotaur Skullcleaver
+Mistcutter Hydra
+Mogis's Marauder
+Nemesis of Mortals
+Nessian Asp
+Nighthowler
+Nimbus Naiad
+Nimbus Naiad
+Nykthos, Shrine to Nyx
+Nylea's Disciple
+Nylea's Emissary
+Nylea's Presence
+Nylea, God of the Hunt
+Observant Alseid
+Observant Alseid
+Omenspeaker
+Opaline Unicorn
+Ordeal of Erebos
+Ordeal of Heliod
+Ordeal of Nylea
+Ordeal of Purphoros
+Ordeal of Thassa
 Peak Eruption
-Titan of Eternal Fire
+Phalanx Leader
+Pharika's Cure
+Pharika's Mender
+Pheres-Band Centaurs
+Polis Crusher
+Polukranos, World Eater
+Portent of Betrayal
+Prescient Chimera
+Priest of Iroas
+Prognostic Sphinx
+Prophet of Kruphix
+Prowler's Helm
+Purphoros's Emissary
+Purphoros, God of the Forge
+Pyxis of Pandemonium
+Rage of Purphoros
+Rageblood Shaman
+Ray of Dissolution
+Read the Bones
+Reaper of the Wilds
+Rescue from the Underworld
+Returned Centaur
+Returned Phalanx
+Reverent Hunter
+Satyr Hedonist
+Satyr Piper
+Satyr Rambler
+Scholar of Athreos
+Sea God's Revenge
+Sealock Monster
+Sedge Scorpion
+Sentry of the Underworld
+Setessan Battle Priest
+Setessan Griffin
+Shipbreaker Kraken
+Shipwreck Singer
+Shredding Winds
+Silent Artisan
+Sip of Hemlock
+Soldier of the Pantheon
+Spark Jolt
+Spear of Heliod
+Spearpoint Oread
+Spearpoint Oread
+Spellheart Chimera
+Staunch-Hearted Warrior
+Steam Augury
+Stoneshock Giant
+Stormbreath Dragon
+Stymied Hopes
+Swan Song
+Sylvan Caryatid
 Temple of Abandon
 Temple of Deceit
 Temple of Mystery
 Temple of Silence
 Temple of Triumph
-Hammer of Purphoros
-Ordeal of Purphoros
-Fleecemane Lion
-Kragma Warcaller
-Prophet of Kruphix
-Tymaret, the Murder King
-Arbor Colossus
-Cavern Lampad
-Celestial Archon
-Leafcrown Dryad
-Nimbus Naiad
-Observant Alseid
-Spearpoint Oread
-Glare of Heresy
-Two-headed Cerberus
-Arbor Colossus
-Cavern Lampad
-Celestial Archon
-Leafcrown Dryad
-Nimbus Naiad
-Observant Alseid
-Spearpoint Oread
-Glare of Heresy
-Two-headed Cerberus
-Medomai the Ageless
-Boon Satyr
-Nighthowler
-Purphoros's Emissary
+Thassa's Bounty
 Thassa's Emissary
-Bident of Thassa
-Triton Fortune Hunter
-Wavecrash Triton
-Hero's Downfall
-Hythonia the Cruel
-Tormented Hero
-Ashen Rider
-Destructive Revelry
-Reaper of the Wilds
-Bow of Nylea
-Spear of Heliod
-Whip of Erebos
-Heliod's Emissary
-Ordeal of Erebos
-Ordeal of Heliod
-Ordeal of Nylea
-Ordeal of Thassa
-Dauntless Onslaught
-Fabled Hero
-Favored Hoplite
-Soldier of the Pantheon
-Dissolve
-Swan Song
-Anthousa, Setessan Hero
-Hunt the Hunter
-Artisan of Forms
-Master of Waves
-Prognostic Sphinx
-Steam Augury
-Triad of Fates
-Centaur Battlemaster
-Mistcutter Hydra
-Chained to the Rocks
-Agent of Horizons
-Artisan's Sorrow
-Unknown Shores
-Battlewise Valor
-Chosen by Heliod
-Decorated Griffin
-Ephara's Warden
-Aqueous Form
-Benthic Giant
-Breaching Hippocamp
-Coastline Chimera
-Sentry of the Underworld
-Shipwreck Singer
-Spellheart Chimera
-Agent of the Fates
-Asphodel Wanderer
-Blood-Toll Harpy
-Boon of Erebos
-Borderland Minotaur
-Boulderfall
-Coordinated Assault
-Deathbellow Raider
-Nylea's Emissary
-Nylea's Presence
-Pheres-Band Centaurs
-Sedge Scorpion
-Akroan Horse
-Anvilwrought Raptor
-Bronze Sable
-Burnished Hart
-Colossus of Akros
-Flamecast Wheel
-Fleetfeather Sandals
-Guardians of Meletis
-Opaline Unicorn
-Prowler's Helm
-Pyxis of Pandemonium
-Baleful Eidolon
-Cutthroat Maneuver
-Akroan Hoplite
-Chronicler of Heroes
-Horizon Chimera
-Pharika's Mender
-Evangel of Heliod
-Hopeful Eidolon
-Lagonna-Band Elder
-Leonin Snarecaster
-Ray of Dissolution
-Scholar of Athreos
-Setessan Battle Priest
-Setessan Griffin
-Silent Artisan
-Traveling Philosopher
-Yoked Ox
-Crackling Triton
-Fate Foretold
-Horizon Scholar
-Prescient Chimera
-Sea God's Revenge
-Defend the Hearth
-Fade into Antiquity
-Feral Invocation
-Meletis Charlatan
-Nemesis of Mortals
-Nylea's Disciple
-Satyr Piper
-Shredding Winds
-Staunch-Hearted Warrior
+Thassa, God of the Sea
 Time to Feed
+Titan of Eternal Fire
+Titan's Strength
+Tormented Hero
+Traveling Philosopher
+Triad of Fates
+Triton Fortune Hunter
+Triton Shorethief
+Triton Tactics
+Two-headed Cerberus
+Two-headed Cerberus
+Tymaret, the Murder King
+Underworld Cerberus
+Unknown Shores
+Vanquish the Foul
+Vaporkin
+Viper's Kiss
+Voyage's End
 Voyaging Satyr
 Vulpine Goliath
 Warrior's Lesson
-Gift of Immortality
-Disciple of Phenax
-Erebos's Emissary
-Fellhide Minotaur
-Fleshmad Steed
-Insatiable Harpy
-Keepsake Gorgon
-Lash of the Whip
-Loathsome Catoblepas
-March of the Returned
-Mogis's Marauder
-Pharika's Cure
-Rescue from the Underworld
-Returned Centaur
-Returned Phalanx
-Enchantment Aura
-Sip of Hemlock
-Viper's Kiss
-Rage of Purphoros
-Satyr Rambler
-Spark Jolt
-Titan's Strength
+Wavecrash Triton
+Whip of Erebos
 Wild Celebrants
-Messenger's Speed
-Minotaur Skullcleaver
-Portent of Betrayal
-Priest of Iroas
-Stymied Hopes
-Thassa's Bounty
-Triton Shorethief
-Vaporkin
-Akroan Crusader
-Anger of the Gods
-Arena Athlete
-Dragon Mantle
-Fanatic of Mogis
-Firedrinker Satyr
-Ill-Tempered Cyclops
-Labyrinth Champion
-Curse of the Swine
-Triton Tactics
+Wingsteed Rider
+Witches' Eye
+Xenagos, the Reveler
+Yoked Ox
 
 
 ------------
