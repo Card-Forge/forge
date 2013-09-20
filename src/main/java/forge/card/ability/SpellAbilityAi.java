@@ -17,7 +17,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 
-public abstract class SpellAbilityAi extends SaTargetRountines {
+public abstract class SpellAbilityAi extends SaTargetRoutines {
 
     public final boolean canPlayAIWithSubs(final Player aiPlayer, final SpellAbility sa) {
         if (!canPlayAI(aiPlayer, sa)) {

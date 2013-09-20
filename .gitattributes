@@ -14512,7 +14512,7 @@ src/main/java/forge/card/ability/AbilityApiBased.java -text
 src/main/java/forge/card/ability/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/ability/AbilityUtils.java -text
 src/main/java/forge/card/ability/ApiType.java -text
-src/main/java/forge/card/ability/SaTargetRountines.java -text
+src/main/java/forge/card/ability/SaTargetRoutines.java -text
 src/main/java/forge/card/ability/SpellAbilityAi.java -text
 src/main/java/forge/card/ability/SpellAbilityEffect.java -text
 src/main/java/forge/card/ability/SpellApiBased.java -text

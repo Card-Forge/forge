@@ -12,7 +12,7 @@ import forge.game.player.Player;
 // Class contains all that methods that are used by both effects and AI to fetch their targets.
 // {SA}Effect and {SA}Ai now inherit from this class to use these routines, though they should not.
 
-public class SaTargetRountines {
+public class SaTargetRoutines {
 
     // Cards
     protected List<Card> getTargetCards(SpellAbility sa) {                                  return getCards(false, "Defined", sa); }
