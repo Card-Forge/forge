@@ -2123,7 +2123,7 @@ public class CardFactoryUtil {
             		"Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " +
                     magnitude + " | CounterType$ P1P1 | SpellDescription$ Monstrosity " +
             		magnitude + " (If this creature isn't monstrous, put " + 
-                    counters + " on it and it becomes monstrous.)" + ref;
+                    counters + " on it and it becomes monstrous.) | StackDescription$ SpellDescription" + ref;
 
             card.addSpellAbility(AbilityFactory.getAbility(effect, card));
             // add ability to instrinic strings so copies/clones create the ability also

@@ -2313,6 +2313,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         final StringBuilder sb = new StringBuilder();
         final ArrayList<String> keyword = this.getUnhiddenKeyword();
 
+        if (this.monstrous) {
+            sb.append("Monstrous\r\n");
+        }
         sb.append(this.keywordsToText(keyword));
 
         // Give spellText line breaks for easier reading
