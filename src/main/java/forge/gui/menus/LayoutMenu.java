@@ -13,7 +13,6 @@ import javax.swing.JRadioButtonMenuItem;
 
 import forge.Singletons;
 import forge.control.FControl.Screens;
-import forge.control.RestartUtil;
 import forge.gui.GuiChoose;
 import forge.gui.match.controllers.CDock;
 import forge.gui.menubar.MenuUtil;
