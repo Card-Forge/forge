@@ -94,7 +94,7 @@ U Dark Betrayal
 C Disciple of Phenax
 M Erebos, God of the Dead
 U Erebos's Emissary
-C Fellhide Minotaur
+C Felhide Minotaur
 C Fleshmad Steed
 C Gray Merchant of Asphodel
 R Hero's Downfall
