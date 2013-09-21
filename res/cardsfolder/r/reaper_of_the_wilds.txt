@@ -1,5 +1,5 @@
 Name:Reaper of the Wilds
-ManaCost:2 B R
+ManaCost:2 B G
 Types:Creature Gorgon
 PT:4/5
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever another creature dies, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
