@@ -18,14 +18,12 @@ Deck Type=constructed
 [main]
 1 Ancestral Recall|LEB
 1 Armageddon|LEB
-1 Balance|LEB
 1 Braingeyser|LEB
 4 City of Brass|ARN
 3 Counterspell|LEB
-1 Demonic Tutor|LEB
 3 Disenchant|LEB
 3 Erhnam Djinn|ARN
-2 Fireball|LEB
+1 Desert Twister|ARN
 4 Island|MIR
 3 Mana Drain|LEG
 2 Mana Vault|LEB
@@ -39,13 +37,12 @@ Deck Type=constructed
 1 Sol Ring|LEB
 1 Soldevi Simulacrum|ICE
 3 Strip Mine|ATQ
-3 Swords to Plowshares|LEB
-1 Sylvan Library|LEG
+4 Swords to Plowshares|LEB
+4 Su-Chi|ATQ
 2 Tropical Island|LEB
 2 Tundra|LEB
 4 Unstable Mutation|TSB
 1 Volcanic Island|LEB
-1 Wheel of Fortune|LEB
 [sideboard]
 [planes]
 [schemes]

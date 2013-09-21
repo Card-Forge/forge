@@ -7,7 +7,7 @@ Wins=20
 Card Reward=20% duplicate card;90% 1 white rare;90% 1 green rare;90% 1 red rare;90% 1 black rare;90% 1 blue rare
 Credit Reward=400
 HumanExtras=Bazaar of Wonders
-AIExtras=Bazaar of Wonders|Mox Jet|Mox Sapphire|Mox Pearl|Mox Emerald|Mox Ruby
+AIExtras=Mox Jet|Mox Sapphire|Mox Pearl|Mox Emerald|Mox Ruby
 [metadata]
 Name=quest3002
 Title=Prester John's Mighty Empire
@@ -33,7 +33,7 @@ Deck Type=constructed
 1 Dirtwater Wraith|MIR
 1 Dissipate|MIR
 1 Dream Cache|MIR
-1 Feldon's Cane|5ED
+1 Feral Shadow|MIR
 1 Gravebane Zombie|MIR
 9 Island|MIR
 1 Jayemdae Tome|5ED
@@ -41,7 +41,6 @@ Deck Type=constructed
 1 Memory Lapse|MIR
 1 Merfolk Raiders|MIR
 1 Millstone|ATQ
-1 Mystical Tutor|MIR
 1 Nekrataal|VIS
 1 Odylic Wraith|WTH
 1 Phantom Warrior|WTH
@@ -55,6 +54,7 @@ Deck Type=constructed
 1 Straw Golem|WTH
 8 Swamp|MIR
 2 Teferi's Isle|MIR
+1 Terror|LEB
 1 The Hive|LEB
 [sideboard]
 [planes]
