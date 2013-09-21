@@ -686,6 +686,8 @@ public class GameAction {
             case Graveyard:     return this.moveToGraveyard(c);
             case Exile:         return this.exile(c);
             case Stack:         return this.moveToStack(c);
+            case PlanarDeck:    return this.moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition);
+            case SchemeDeck:    return this.moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition);
             default: // sideboard will also get there
                 return this.moveTo(c.getOwner().getZone(name), c);
         }
