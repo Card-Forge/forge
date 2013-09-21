@@ -1,4 +1,4 @@
-Name:Warrior's Lesson
+Name:Warriors' Lesson
 ManaCost:G
 Types:Instant
 A:SP$ Animate | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | TargetMin$ 0 | TargetMax$ 2 | Triggers$ WarriorLessonDmg | sVars$ WarriorLessonDraw | SpellDescription$ Until end of turn, up to two target creatures you control each gain "Whenever this creature deals combat damage to a player, draw a card."
