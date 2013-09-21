@@ -191,7 +191,7 @@ R Sylvan Caryatid
 C Time to Feed
 C Voyaging Satyr
 C Vulpine Goliath
-U Warrior's Lesson
+U Warriors' Lesson
 U Akroan Hoplite
 R Anax and Cymede
 M Ashen Rider
