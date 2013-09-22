@@ -125,19 +125,22 @@ public class TriggerSpellAbilityCast extends Trigger {
             } else {
                 if (sa.getTargetRestrictions().doesTarget()) {
                     boolean validTgtFound = false;
-                    for (final Card tgt : sa.getTargets().getTargetCards()) {
-                        if (tgt.isValid(this.mapParams.get("TargetsValid").split(","), this.getHostCard()
-                                .getController(), this.getHostCard())) {
-                            validTgtFound = true;
-                            break;
+                    while (sa != null && !validTgtFound) {
+                        for (final Card tgt : sa.getTargets().getTargetCards()) {
+                            if (tgt.isValid(this.mapParams.get("TargetsValid").split(","), this.getHostCard()
+                                    .getController(), this.getHostCard())) {
+                                validTgtFound = true;
+                                break;
+                            }
                         }
-                    }
 
-                    for (final Player p : sa.getTargets().getTargetPlayers()) {
-                        if (matchesValid(p, this.mapParams.get("TargetsValid").split(","), this.getHostCard())) {
-                            validTgtFound = true;
-                            break;
+                        for (final Player p : sa.getTargets().getTargetPlayers()) {
+                            if (matchesValid(p, this.mapParams.get("TargetsValid").split(","), this.getHostCard())) {
+                                validTgtFound = true;
+                                break;
+                            }
                         }
+                        sa = sa.getSubAbility();
                     }
 
                     if (!validTgtFound) {
