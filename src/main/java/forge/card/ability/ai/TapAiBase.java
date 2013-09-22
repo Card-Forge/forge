@@ -115,7 +115,8 @@ public abstract class TapAiBase extends SpellAbilityAi  {
     protected boolean tapPrefTargeting(final Player ai, final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory) {
         final Player opp = ai.getOpponent();
         final Game game = ai.getGame();
-        List<Card> tapList = opp.getCardsIn(ZoneType.Battlefield);
+        List<Card> tapList = game.getCardsIn(ZoneType.Battlefield);
+        tapList = CardLists.filterControlledBy(tapList, ai.getOpponents());
         tapList = CardLists.filter(tapList, Presets.UNTAPPED);
         tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
         // filter out enchantments and planeswalkers, their tapped state doesn't matter.
@@ -138,14 +139,14 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             }
         });
 
-        if (tapList.size() == 0) {
+        if (tapList.isEmpty()) {
             return false;
         }
 
         while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
             Card choice = null;
 
-            if (tapList.size() == 0) {
+            if (tapList.isEmpty()) {
                 if ((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0)) {
                     if (!mandatory) {
                         sa.resetTargets();
@@ -163,7 +164,6 @@ public abstract class TapAiBase extends SpellAbilityAi  {
             if (phase.isPlayerTurn(ai)
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
-
                 List<Card> attackers;
                 if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     //Combat has already started
@@ -179,6 +179,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                 }
                 Predicate<Card> findBlockers = CardPredicates.possibleBlockerForAtLeastOne(attackers);
                 List<Card> creatureList = CardLists.filter(tapList, findBlockers);
+
                 if (!attackers.isEmpty() && !creatureList.isEmpty()) {
                     choice = ComputerUtilCard.getBestCreatureAI(creatureList);
                 } else if (sa.isTrigger() || ComputerUtil.castSpellInMain1(ai, sa)) {
@@ -251,6 +252,10 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         if (tapTargetList(ai, sa, tapList, mandatory)) {
             return true;
         }
+        
+        if (sa.getTargets().getNumTargeted() >= tgt.getMinTargets(sa.getSourceCard(), sa)) {
+            return true;
+        }
 
         // filter by enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
@@ -264,6 +269,10 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         tapList = CardLists.filter(list, Presets.TAPPED);
 
         if (tapTargetList(ai, sa, tapList, mandatory)) {
+            return true;
+        }
+        
+        if (sa.getTargets().getNumTargeted() >= tgt.getMinTargets(sa.getSourceCard(), sa)) {
             return true;
         }
 
