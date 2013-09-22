@@ -53,7 +53,7 @@ public class TriggerPlaneswalkedFrom extends Trigger {
      */
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObject("Cards", this.getRunParams().get("Card"));
         // The 'Card' triggered object above is actually an array list of the current planes being left,
         // so the actual source has to be determined differently than usual
         sa.setTriggeringObject("Source", this.hostCard);

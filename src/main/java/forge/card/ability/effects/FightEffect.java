@@ -22,7 +22,7 @@ public class FightEffect extends SpellAbilityEffect {
         if (fighters.size() > 1) {
             sb.append(fighters.get(0) + " fights " + fighters.get(1));
         }
-        else {
+        else if (fighters.size() == 1) {
             sb.append(fighters.get(0) + " fights unknown");
         }
         return sb.toString();
