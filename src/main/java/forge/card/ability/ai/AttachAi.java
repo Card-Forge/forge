@@ -24,6 +24,8 @@ import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.staticability.StaticAbility;
+import forge.card.trigger.Trigger;
+import forge.card.trigger.TriggerType;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
@@ -769,19 +771,37 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
-        if (magnetList != null && !magnetList.isEmpty()) {
-            // Always choose something from the Magnet List.
-            // Probably want to "weight" the list by amount of Enchantments and
-            // choose the "lightest"
-
-            magnetList = CardLists.filter(magnetList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return CombatUtil.canAttack(c, ai.getWeakestOpponent());
+        if (magnetList != null) {
+            
+            // Look for Heroic triggers
+            if (magnetList.isEmpty() && sa.isSpell()) {
+                for (Card target : list) {
+                    for (Trigger t : target.getTriggers()) {
+                        if (t.getMode() == TriggerType.SpellCast) {
+                            final HashMap<String, String> params = t.getMapParams();
+                            if ("Card.Self".equals(params.get("TargetsValid")) && "You".equals(params.get("ValidActivatingPlayer"))) {
+                                magnetList.add(target);
+                                break;
+                            }
+                        }
+                    }
                 }
-            });
-
-            return ComputerUtilCard.getBestAI(magnetList);
+            }
+            
+            if (!magnetList.isEmpty()) {
+                // Always choose something from the Magnet List.
+                // Probably want to "weight" the list by amount of Enchantments and
+                // choose the "lightest"
+    
+                magnetList = CardLists.filter(magnetList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return CombatUtil.canAttack(c, ai.getWeakestOpponent());
+                    }
+                });
+    
+                return ComputerUtilCard.getBestAI(magnetList);
+            }
         }
 
         int totToughness = 0;
