@@ -321,14 +321,16 @@ public class AiBlockController {
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);
             List<Card> usableBlockers;
             final List<Card> blockGang = new ArrayList<Card>();
-            int absorbedDamage = 0; // The amount of damage needed to kill the
-                                    // first blocker
+            int absorbedDamage = 0; // The amount of damage needed to kill the first blocker
             int currentValue = 0; // The value of the creatures in the blockgang
+            
+            // AI can't handle good triple blocks yet
+            if (CombatUtil.needsBlockers(attacker) > 2) {
+                continue;
+            }
 
-            // Try to add blockers that could be destroyed, but are worth less
-            // than the attacker
-            // Don't use blockers without First Strike or Double Strike if
-            // attacker has it
+            // Try to add blockers that could be destroyed, but are worth less than the attacker
+            // Don't use blockers without First Strike or Double Strike if attacker has it
             usableBlockers = CardLists.filter(blockers, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
