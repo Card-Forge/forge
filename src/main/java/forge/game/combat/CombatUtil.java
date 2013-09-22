@@ -520,7 +520,7 @@ public class CombatUtil {
         if (!CombatUtil.canBeBlocked(attacker, combat, blocker.getController())) {
             return false;
         }
-        if (combat.isBlocking(blocker, attacker)) { // Can't block if already blocking the attacker
+        if (combat != null && combat.isBlocking(blocker, attacker)) { // Can't block if already blocking the attacker
             return false;
         }
 
