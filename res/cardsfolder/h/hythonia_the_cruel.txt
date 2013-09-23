@@ -2,6 +2,7 @@ Name:Hythonia the Cruel
 ManaCost:4 B B
 Types:Legendary Creature Gorgon
 PT:4/6
+K:Deathtouch
 K:Monstrosity 3:6 B B
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME becomes monstrous, destroy all non-Gorgon creatures.
 SVar:TrigDestroyAll:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.nonGorgon
