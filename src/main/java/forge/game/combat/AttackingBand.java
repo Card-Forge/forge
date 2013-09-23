@@ -13,21 +13,17 @@ import forge.GameEntity;
  */
 public class AttackingBand {
     private List<Card> attackers = new ArrayList<Card>();
-//    private GameEntity defender = null;
     private Boolean blocked = null; // even if all blockers were killed before FS or CD, band remains blocked
     
     public AttackingBand(List<Card> band, GameEntity def) {
         attackers.addAll(band);
-//        this.defender = def;
     }
     
     public AttackingBand(Card card, GameEntity def) {
         attackers.add(card);
-//        this.defender = def;
     }
     
     public List<Card> getAttackers() { return this.attackers; }
-//    public GameEntity getDefender() { return this.defender; }
     
     public void addAttacker(Card card) { attackers.add(card); }
     public void removeAttacker(Card card) { attackers.remove(card); }
