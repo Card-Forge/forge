@@ -5404,12 +5404,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else { // source not enchanting a player
                 return false;
             }
-        } else if (property.startsWith("RememberedPlayerCtrl")) {
+        } else if (property.startsWith("RememberedPlayer")) {
+            Player p = property.endsWith("Ctrl") ? this.getController() : this.getOwner();
             if (source.getRemembered().isEmpty()) {
                 final Card newCard = game.getCardState(source);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Player) {
-                        if (!this.getController().equals(o)) {
+                        if (!p.equals(o)) {
                             return false;
                           }
                     }
@@ -5418,7 +5419,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Player) {
-                    if (!this.getController().equals(o)) {
+                    if (!p.equals(o)) {
                         return false;
                       }
                 }
