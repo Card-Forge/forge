@@ -15,6 +15,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.TargetChoices;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
@@ -171,7 +172,7 @@ public class DamageDealAi extends DamageAiBase {
         });
 
         Card targetCard;
-        if (pl.isOpponentOf(ai) && (killables.size() > 0)) {
+        if (pl.isOpponentOf(ai) && !killables.isEmpty()) {
             targetCard = ComputerUtilCard.getBestCreatureAI(killables);
 
             return targetCard;
@@ -181,7 +182,7 @@ public class DamageDealAi extends DamageAiBase {
             return null;
         }
 
-        if (hPlay.size() > 0) {
+        if (!hPlay.isEmpty()) {
             if (pl.isOpponentOf(ai)) {
                 targetCard = ComputerUtilCard.getBestCreatureAI(hPlay);
             } else {
@@ -241,6 +242,7 @@ public class DamageDealAi extends DamageAiBase {
         final Game game = source.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final boolean divided = sa.hasParam("DividedAsYouChoose");
+        TargetChoices tcs = sa.getTargets();
 
         // target loop
         sa.resetTargets();
@@ -250,12 +252,12 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        while (sa.getTargets().getNumTargeted() < tgt.getMaxTargets(source, sa)) {
+        while (tcs.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
 
             if (tgt.canTgtCreatureAndPlayer()) {
 
                 if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
-                    sa.getTargets().add(enemy);
+                    tcs.add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);
                         break;
@@ -265,7 +267,7 @@ public class DamageDealAi extends DamageAiBase {
 
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
-                    sa.getTargets().add(c);
+                    tcs.add(c);
                     if (divided) {
                         final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                         if (assignedDamage <= dmg) {
@@ -300,7 +302,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 if (freePing && sa.canTarget(enemy)) {
-                    sa.getTargets().add(enemy);
+                    tcs.add(enemy);
                     if (divided) {
                         tgt.addDividedAllocation(enemy, dmg);
                         break;
@@ -309,11 +311,13 @@ public class DamageDealAi extends DamageAiBase {
             } else if (tgt.canTgtCreature()) {
                 final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
-                    sa.getTargets().add(c);
+                    tcs.add(c);
                     if (divided) {
                         final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                         if (assignedDamage <= dmg) {
                             tgt.addDividedAllocation(c, assignedDamage);
+                        } else {
+                            tgt.addDividedAllocation(c, dmg);
                         }
                         dmg = dmg - assignedDamage;
                         if (dmg <= 0) {
@@ -469,7 +473,7 @@ public class DamageDealAi extends DamageAiBase {
 
         final Card source = sa.getSourceCard();
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 
         // Remove all damage
         if (sa.hasParam("Remove")) {
