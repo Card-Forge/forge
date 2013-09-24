@@ -22,6 +22,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
+import forge.card.spellability.TargetChoices;
 import forge.game.Game;
 import forge.game.player.Player;
 
@@ -150,7 +151,11 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
 
         if (this.mapParams.containsKey("IsSingleTarget")) {
-            if (spellAbility.getTargets().getNumTargeted() != 1) {
+            int numTargeted = 0;
+            for (TargetChoices tc : spellAbility.getAllTargetChoices()) {
+                numTargeted += tc.getNumTargeted();
+            }
+            if (numTargeted != 1) {
                 return false;
             }
         }

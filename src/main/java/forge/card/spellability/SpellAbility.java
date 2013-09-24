@@ -1355,6 +1355,22 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     }
 
     /**
+     * Reset the first target.
+     * 
+     */
+    public void resetFirstTarget(ITargetable c) {
+        SpellAbility sa = this;
+        while (sa != null) {
+            if (sa.targetRestricions != null) {
+                sa.targetChosen = new TargetChoices();
+                sa.targetChosen.add(c);
+                break;
+            }
+            sa = sa.subAbility;
+        }
+    }
+
+    /**
      * <p>
      * getAllTargetChoices.
      * </p>

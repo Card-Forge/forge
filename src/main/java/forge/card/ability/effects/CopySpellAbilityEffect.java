@@ -84,18 +84,25 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         else if (sa.hasParam("CopyForEachCanTarget")) {
             SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa, "Select a spell to copy");
             chosenSA.setActivatingPlayer(controller);
-            List<ITargetable> candidates = chosenSA.getTargetRestrictions().getAllCandidates(chosenSA, true);
+            // Find subability or rootability that has targets
+            SpellAbility targetedSA = chosenSA;
+            while (targetedSA != null) {
+                if (targetedSA.usesTargeting() && targetedSA.getTargets().getNumTargeted() != 0) {
+                    break;
+                }
+                targetedSA = targetedSA.getSubAbility();
+            }
+            List<ITargetable> candidates = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
             if (sa.hasParam("CanTargetPlayer")) {
                 // Radiate
                 // Remove targeted players because getAllCandidates include all the valid players
-                for(Player p : chosenSA.getTargets().getTargetPlayers())
+                for(Player p : targetedSA.getTargets().getTargetPlayers())
                     candidates.remove(p);
                 
                 mayChoseNewTargets = false;
                 for (ITargetable o : candidates) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getSourceCard(), chosenSA, true);
-                    copy.resetTargets();
-                    copy.getTargets().add(o);
+                    copy.resetFirstTarget(o);
                     copies.add(copy);
                 }
             } else {// Precursor Golem, Ink-Treader Nephilim
@@ -112,8 +119,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 mayChoseNewTargets = false;
                 for (Card c : valid) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getSourceCard(), chosenSA, true);
-                    copy.resetTargets();
-                    copy.getTargets().add(c);
+                    copy.resetFirstTarget(c);
                     copies.add(copy);
                 }
             }
