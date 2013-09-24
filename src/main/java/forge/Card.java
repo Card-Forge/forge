@@ -5308,6 +5308,24 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.getName().equals(source.getNamedCard())) {
                 return false;
             }
+        } else if (property.equals("NamedByRememberedPlayer")) {
+            if (source.getRemembered().isEmpty()) {
+                final Card newCard = game.getCardState(source);
+                for (final Object o : newCard.getRemembered()) {
+                    if (o instanceof Player) {
+                        if (!this.getName().equals(((Player) o).getNamedCard())) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            for (final Object o : source.getRemembered()) {
+                if (o instanceof Player) {
+                    if (!this.getName().equals(((Player) o).getNamedCard())) {
+                        return false;
+                    }
+                }
+            }
         } else if (property.equals("ChosenCard")) {
             if (!source.getChosenCard().contains(this)) {
                 return false;

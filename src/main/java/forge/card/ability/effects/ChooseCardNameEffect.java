@@ -111,6 +111,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                         Card instanceForPlayer = cp.toForgeCard(p); // the Card instance for test needs a game to be tested
                         if (instanceForPlayer.isValid(valid, host.getController(), host)) {
                             host.setNamedCard(cp.getName());
+                            p.setNamedCard(cp.getName());
                             ok = true;
                         }
                     } else {
@@ -123,6 +124,8 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                                 chosen = ComputerUtilCard.getMostProminentCardName(p.getOpponent().getCardsIn(ZoneType.Library));
                             } else if (logic.equals("BestCreatureInComputerDeck")) {
                                 chosen = ComputerUtilCard.getBestCreatureAI(p.getCardsIn(ZoneType.Library)).getName();
+                            } else if (logic.equals("RandomInComputerDeck")) {
+                                chosen = Aggregates.random(p.getCardsIn(ZoneType.Library)).getName();
                             }
                         } else {
                             List<Card> list = CardLists.filterControlledBy(p.getGame().getCardsInGame(), p.getOpponent());
@@ -136,6 +139,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                         }
                         GuiChoose.one("Computer picked: ", new String[]{chosen});
                         host.setNamedCard(chosen);
+                        p.setNamedCard(chosen);
                         ok = true;
                     }
                 }

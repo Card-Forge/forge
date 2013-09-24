@@ -1,0 +1,13 @@
+Name:Conundrum Sphinx
+ManaCost:2 U U
+Types:Creature Sphinx
+PT:4/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ EachName | TriggerDescription$ Whenever CARDNAME attacks, each player names a card. Then each player reveals the top card of his or her library. If the card a player revealed is the card he or she named, that player puts it into his or her hand. If it's not, that player puts it on the bottom of his or her library.
+SVar:EachName:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | RepeatSubAbility$ DBName | SubAbility$ DBDigEach
+SVar:DBName:DB$ NameCard | Defined$ Player.IsRemembered | AILogic$ RandomInComputerDeck
+SVar:DBDigEach:DB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | RepeatSubAbility$ DBDig
+SVar:DBDig:DB$ Dig | DigNum$ 1 | Defined$ Player.IsRemembered | ChangeNum$ All | ChangeValid$ Card.NamedByRememberedPlayer | Reveal$ True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conundrum_sphinx.jpg
+Oracle:Flying\nWhenever Conundrum Sphinx attacks, each player names a card. Then each player reveals the top card of his or her library. If the card a player revealed is the card he or she named, that player puts it into his or her hand. If it's not, that player puts it on the bottom of his or her library.

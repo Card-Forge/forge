@@ -130,6 +130,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     /** The last drawn card. */
     private Card lastDrawnCard = null;
 
+    /** The named card. */
+    private String namedCard = "";
+
     /** The num drawn this turn. */
     private int numDrawnThisTurn = 0;
     private int numDrawnThisDrawStep = 0;
@@ -1960,6 +1963,30 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     /**
      * <p>
+     * Getter for the field <code>namedCard</code>.
+     * </p>
+     * 
+     * @return a String.
+     */
+    public final String getNamedCard() {
+        return this.namedCard;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>namedCard</code>.
+     * </p>
+     * 
+     * @param s
+     *            a {@link forge.Card} object.
+     * @return 
+     * @return a {@link forge.Card} object.
+     */
+    public final void setNamedCard(final String s) {
+        this.namedCard = s;
+    }
+    /**
+     * <p>
      * getTurn.
      * </p>
      * 
@@ -2378,6 +2405,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (this.equals(sourceController) || !this.isOpponentOf(sourceController)) {
                 return false;
             }
+        } else if (property.equals("OpponentToActive")) {
+            final Player active = game.getPhaseHandler().getPlayerTurn();
+            if (this.equals(active) || !this.isOpponentOf(active)) {
+                return false;
+            }
         } else if (property.equals("Other")) {
             if (this.equals(sourceController)) {
                 return false;
@@ -2424,10 +2456,28 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         } else if (property.startsWith("withMore")) {
             final String cardType = property.split("sThan")[0].substring(8);
+            final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             final List<Card> oppList = CardLists.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            final List<Card> yourList = CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final List<Card> yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
             if (oppList.size() <= yourList.size()) {
                 return false;
+            }
+        } else if (property.startsWith("hasMore")) {
+            final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
+            if (property.substring(7).startsWith("Life") && this.getLife() <= controller.getLife()) {
+                return false;
+            } else if (property.substring(7).startsWith("CardsInHand") 
+                    && this.getCardsIn(ZoneType.Hand).size() <= controller.getCardsIn(ZoneType.Hand).size()) {
+                return false;
+            }
+        } else if (property.startsWith("hasFewer")) {
+            final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
+            if (property.substring(8).startsWith("CreaturesInYard")) {
+                final List<Card> oppList = CardLists.filter(this.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+                final List<Card> yourList = CardLists.filter(controller.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+                if (oppList.size() >= yourList.size()) {
+                    return false;
+                }
             }
         } else if (property.startsWith("withMost")) {
             if (property.substring(8).equals("Life")) {
