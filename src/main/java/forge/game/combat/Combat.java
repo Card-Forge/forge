@@ -226,13 +226,13 @@ public class Combat {
         getBandOfAttacker(attacker).setBlocked(value); // called by Curtain of Light, Dazzling Beauty, Trap Runner
     }
 
-    public final void addBlocker(final Card attacker, final Card blocker) {
+    public synchronized final void addBlocker(final Card attacker, final Card blocker) {
         AttackingBand band = getBandOfAttacker(attacker);
         blockedBands.add(band, blocker);
     }
 
     // remove blocked from specific attacker
-    public final void removeBlockAssignment(final Card attacker, final Card blocker) {
+    public synchronized final void removeBlockAssignment(final Card attacker, final Card blocker) {
         AttackingBand band = getBandOfAttacker(attacker);
         Collection<Card> cc = blockedBands.get(band);
         if( cc != null)
@@ -240,13 +240,13 @@ public class Combat {
     }
 
     // remove blocker from everywhere
-    public final void undoBlockingAssignment(final Card blocker) {
+    public synchronized final void undoBlockingAssignment(final Card blocker) {
         for(Collection<Card> blockers : blockedBands.values()) {
             blockers.remove(blocker);
         }
     }
 
-    public final List<Card> getAllBlockers() {
+    public synchronized final List<Card> getAllBlockers() {
         List<Card> result = new ArrayList<Card>();
         for(Collection<Card> blockers : blockedBands.values()) {
             for (Card blocker : blockers) {
@@ -257,13 +257,13 @@ public class Combat {
         return result;
     }
 
-    public final List<Card> getBlockers(final AttackingBand band) {
+    public synchronized final List<Card> getBlockers(final AttackingBand band) {
         Collection<Card> blockers = blockedBands.get(band);
         return blockers == null ? Lists.<Card>newArrayList() : Lists.newArrayList(blockers);
     }
 
 
-    public final List<Card> getAttackersBlockedBy(final Card blocker) {
+    public synchronized final List<Card> getAttackersBlockedBy(final Card blocker) {
         List<Card> blocked =  new ArrayList<Card>();
         for(Entry<AttackingBand, Collection<Card>> s : blockedBands.entrySet()) {
             if (s.getValue().contains(blocker)) 
@@ -272,7 +272,7 @@ public class Combat {
         return blocked;
     }
     
-    public final List<AttackingBand> getAttackingBandsBlockedBy(Card blocker) {
+    public synchronized final List<AttackingBand> getAttackingBandsBlockedBy(Card blocker) {
         List<AttackingBand> bands = Lists.newArrayList();
         for( Entry<AttackingBand, Collection<Card>> kv : blockedBands.entrySet()) {
             if (kv.getValue().contains(blocker))
@@ -331,7 +331,7 @@ public class Combat {
     }
     
     // removes references to this attacker from all indices and orders
-    private void unregisterAttacker(final Card c, AttackingBand ab) {
+    private synchronized void unregisterAttacker(final Card c, AttackingBand ab) {
         blockersOrderedForDamageAssignment.remove(c);
         
         Collection<Card> blockers = blockedBands.get(ab);
@@ -357,7 +357,7 @@ public class Combat {
     }
 
     // remove a combatant whose side is unknown
-    public final void removeFromCombat(final Card c) {
+    public synchronized final void removeFromCombat(final Card c) {
         AttackingBand ab = getBandOfAttacker(c);
         if (ab != null) {
             unregisterAttacker(c, ab);
@@ -682,7 +682,7 @@ public class Combat {
         return false;
     }
 
-    public boolean isBlocking(Card blocker) {
+    public synchronized boolean isBlocking(Card blocker) {
         if ( !blocker.isInPlay() ) {
             CombatLki lki = lkiCache.get(blocker);
             return null != lki && !lki.isAttacker; // was blocking something anyway
@@ -693,7 +693,7 @@ public class Combat {
         return false;
     }
 
-    public boolean isBlocking(Card blocker, Card attacker) {
+    public synchronized boolean isBlocking(Card blocker, Card attacker) {
         AttackingBand ab = getBandOfAttacker(attacker);
         if ( !blocker.isInPlay() ) {
             CombatLki lki = lkiCache.get(blocker);
