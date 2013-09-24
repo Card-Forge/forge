@@ -145,9 +145,9 @@ public class QuestUtilUnlockSets {
         for (CardEdition ex : excludedSets) {
             if (!unlockableSetTypes.contains(ex.getType())) // don't add non-traditional sets
                 continue;
-            long distance = Integer.MAX_VALUE;
+            long distance = Long.MAX_VALUE;
             for (CardEdition in : allowedSets) {
-                long d = (Math.abs(ex.getDate().getTime() - in.getDate().getTime())) / 10000;
+                long d = (Math.abs(ex.getDate().getTime() - in.getDate().getTime()));
                 if (d < distance) {
                     distance = d;
                 }
