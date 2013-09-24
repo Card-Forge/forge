@@ -1,0 +1,10 @@
+Name:Oath of Scholars
+ManaCost:3 U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | Execute$ TrigOathofScholars | TriggerZones$ Battlefield | OptionalDecider$ TriggeredPlayer | TriggerDescription$ At the beginning of each player's upkeep, that player chooses target player who has more cards in hand than he or she does and is his or her opponent. The first player may discard his or her hand and draw three cards.
+SVar:TrigOathofScholars:AB$ Pump | Cost$ 0 | TargetingPlayer$ TriggeredPlayer | ValidTgts$ Player.OpponentToActive+hasMoreCardsInHandThanActive | TgtPrompt$ Choose target player who has more life than you and is your opponent | IsCurse$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ TriggeredPlayer | Mode$ Hand | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ 3
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_scholars.jpg
+Oracle:At the beginning of each player's upkeep, that player chooses target player who has more cards in hand than he or she does and is his or her opponent. The first player may discard his or her hand and draw three cards.

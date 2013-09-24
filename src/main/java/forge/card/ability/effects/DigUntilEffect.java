@@ -108,9 +108,13 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final int noneFoundLibPos = AbilityUtils.calculateAmount(host, sa.getParam("NoneFoundLibraryPosition"), sa);
         final ZoneType digSite = sa.hasParam("DigZone") ? ZoneType.smartValueOf(sa.getParam("DigZone")) : ZoneType.Library;
         boolean shuffle = sa.hasParam("Shuffle");
+        final boolean optional = sa.hasParam("Optional");
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                if (optional && !p.getController().confirmAction(sa, null, "Do you want to dig your library?")) {
+                    continue;
+                }
                 List<Card> found = new ArrayList<Card>();
                 List<Card> revealed = new ArrayList<Card>();
 

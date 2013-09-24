@@ -7824,6 +7824,8 @@ res/cardsfolder/o/oath_of_druids.txt svneol=native#text/plain
 res/cardsfolder/o/oath_of_ghouls.txt svneol=native#text/plain
 res/cardsfolder/o/oath_of_lieges.txt -text
 res/cardsfolder/o/oath_of_lim_dul.txt -text
+res/cardsfolder/o/oath_of_mages.txt -text
+res/cardsfolder/o/oath_of_scholars.txt -text
 res/cardsfolder/o/oath_of_the_ancient_wood.txt -text
 res/cardsfolder/o/oathkeeper_takenos_daisho.txt -text
 res/cardsfolder/o/oathsworn_giant.txt svneol=native#text/plain

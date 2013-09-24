@@ -42,10 +42,7 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
@@ -89,8 +86,6 @@ public class Upkeep extends Phase {
 
         Upkeep.upkeepDropOfHoney(game);
         Upkeep.upkeepTangleWire(game);
-        Upkeep.upkeepOathOfDruids(game);
-        Upkeep.upkeepOathOfGhouls(game);
 
         game.getStack().unfreezeStack();
     }
@@ -291,134 +286,6 @@ public class Upkeep extends Phase {
 
         } // end for
     } // upkeepDropOfHoney()
-
-    /**
-     * <p>
-     * upkeepOathOfDruids.
-     * </p>
-     */
-    private static void upkeepOathOfDruids(final Game game) {
-        final List<Card> oathList = CardLists.filter(game
-                .getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Druids"));
-        if (oathList.isEmpty()) {
-            return;
-        }
-
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-
-        if (Game.compareTypeAmountInPlay(player, "Creature") < 0) {
-            for (int i = 0; i < oathList.size(); i++) {
-                final Card oath = oathList.get(i);
-                final Ability ability = new Ability(oath, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final List<Card> libraryList = new ArrayList<Card>(player.getCardsIn(ZoneType.Library));
-                        final PlayerZone battlefield = player.getZone(ZoneType.Battlefield);
-                        boolean oathFlag = true;
-
-                        if (Game.compareTypeAmountInPlay(player, "Creature") < 0) {
-                            if (player.isHuman()) {
-                                final StringBuilder question = new StringBuilder();
-                                question.append("Reveal cards from the top of your library and place ");
-                                question.append("the first creature revealed onto the battlefield?");
-                                if (!GuiDialog.confirm(oath, question.toString())) {
-                                    oathFlag = false;
-                                }
-                            } else { // if player == Computer
-                                final List<Card> creaturesInLibrary =
-                                        CardLists.filter(player.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
-                                final List<Card> creaturesInBattlefield =
-                                        CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-
-                                // if there are at least 3 creatures in library,
-                                // or none in play with one in library, oath
-                                if ((creaturesInLibrary.size() > 2)
-                                        || ((creaturesInBattlefield.size() == 0) && (creaturesInLibrary.size() > 0))) {
-                                    oathFlag = true;
-                                } else {
-                                    oathFlag = false;
-                                }
-                            }
-
-                            if (oathFlag) {
-                                final List<Card> cardsToReveal = new ArrayList<Card>();
-                                for (final Card c : libraryList) {
-                                    cardsToReveal.add(c);
-                                    if (c.isCreature()) {
-                                        game.getAction().moveTo(battlefield, c);
-                                        break;
-                                    } else {
-                                        game.getAction().moveToGraveyard(c);
-                                    }
-                                } // for loop
-                                if (cardsToReveal.size() > 0) {
-                                    GuiChoose.one("Revealed cards", cardsToReveal);
-                                }
-                            }
-                        }
-                    }
-                }; // Ability
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append("At the beginning of each player's upkeep, that player chooses target player ");
-                sb.append("who controls more creatures than he or she does and is his or her opponent. The ");
-                sb.append("first player may reveal cards from the top of his or her library until he or she ");
-                sb.append("reveals a creature card. If he or she does, that player puts that card onto the ");
-                sb.append("battlefield and all other cards revealed this way into his or her graveyard.");
-                ability.setStackDescription(sb.toString());
-                ability.setDescription(sb.toString());
-                ability.setActivatingPlayer(oath.getController());
-
-                game.getStack().addSimultaneousStackEntry(ability);
-            }
-        }
-    } // upkeepOathOfDruids()
-
-    /**
-     * <p>
-     * upkeepOathOfGhouls.
-     * </p>
-     */
-    private static void upkeepOathOfGhouls(final Game game) {
-        final List<Card> oathList = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Ghouls"));
-        if (oathList.isEmpty()) {
-            return;
-        }
-
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-
-        if (Game.compareTypeAmountInGraveyard(player, "Creature") > 0) {
-            for (int i = 0; i < oathList.size(); i++) {
-                final Ability ability = new Ability(oathList.get(0), ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final List<Card> graveyardCreatures = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
-
-                        if (Game.compareTypeAmountInGraveyard(player, "Creature") > 0) {
-                            Card card = null;
-                            if (player.isHuman()) {
-                                card = GuiChoose.oneOrNone("Pick a creature to return to hand", graveyardCreatures);
-                            } else if (player.isComputer()) {
-                                card = graveyardCreatures.get(0);
-                            }
-                            if (card != null)
-                                game.getAction().moveToHand(card);
-                        }
-                    }
-                }; // Ability
-
-                final StringBuilder sb = new StringBuilder();
-                sb.append("At the beginning of each player's upkeep, Oath of Ghouls returns a creature ");
-                sb.append("from their graveyard to owner's hand if they have more than an opponent.");
-                ability.setStackDescription(sb.toString());
-                ability.setDescription(sb.toString());
-                ability.setActivatingPlayer(oathList.get(0).getController());
-
-                game.getStack().addSimultaneousStackEntry(ability);
-
-            }
-        }
-    } // Oath of Ghouls
 
     /**
      * <p>

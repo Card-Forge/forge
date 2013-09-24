@@ -1,14 +1,17 @@
 package forge.card.ability.ai;
 
+import java.util.List;
 import java.util.Random;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardPredicates;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -30,7 +33,7 @@ public class DigUntilAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (!opp.canBeTargetedBy(sa)) {
+            if (!sa.canTarget(opp)) {
                 return false;
             } else {
                 sa.getTargets().add(opp);
@@ -71,12 +74,44 @@ public class DigUntilAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.isCurse()) {
-                sa.getTargets().add(ai.getOpponent());
+                for (Player opp : ai.getOpponents()) {
+                    if (sa.canTarget(opp)) {
+                        sa.getTargets().add(opp);
+                        break;
+                    }
+                }
+                if (mandatory && sa.getTargets().isEmpty() && sa.canTarget(ai)) {
+                    sa.getTargets().add(ai);
+                }
             } else {
-                sa.getTargets().add(ai);
+                if (sa.canTarget(ai)) {
+                    sa.getTargets().add(ai);
+                }
             }
         }
 
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
+     */
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        if (sa.hasParam("AILogic")) {
+            final String logic = sa.getParam("AILogic");
+            if ("OathOfDruids".equals(logic)) {
+                final List<Card> creaturesInLibrary =
+                        CardLists.filter(player.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
+                final List<Card> creaturesInBattlefield =
+                        CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                // if there are at least 3 creatures in library,
+                // or none in play with one in library, oath
+                return creaturesInLibrary.size() > 2
+                        || (creaturesInBattlefield.size() == 0 && creaturesInLibrary.size() > 0);
+                    
+            }
+        }
         return true;
     }
 }
