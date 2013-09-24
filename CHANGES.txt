@@ -15,6 +15,7 @@ The Commander gaming mode has been added and is located in the Variant view. Thi
 - Switch Theme/Skin Without Restart -
 You can now switch between themes/skins from any screen without restarting, using either Layout > Theme on main menu or combo box on Preferences page of Home screen
 
+
 - Card Overlays -
 Card overlays are now always displayed regardless of card image size if the display card overlays option is turned on in your user preferences.
 
@@ -44,6 +45,9 @@ Truth or Tale
 Personal Incarnation
 Wort, the Raidmother
 Blaze of Glory
+Conundrum Sphinx
+Oath of Mages
+Oath of Scholars
 
 
 ---------------
