@@ -1,6 +1,6 @@
 Name:Shanodin Dryads
 ManaCost:G
-Types:Creature Dryad
+Types:Creature Nymph Dryad
 PT:1/1
 K:Forestwalk
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card11494.jpg
