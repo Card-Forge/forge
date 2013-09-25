@@ -41,7 +41,7 @@ import com.mortennobel.imagescaling.ResampleOp;
  * <p>
  * Options to scale and rotate the image are available if required.
  * 
- * @version $Id:$
+ * @version $Id$
  * 
  */
 @SuppressWarnings("serial")
@@ -54,6 +54,11 @@ public class FImagePanel extends JPanel {
     // The original unscaled, unrotated image.
     // Remains the same regardless of any transformations that might be applied to it.
     private BufferedImage sourceImage = null;
+
+    // Resampling is an expensive operation so keep a copy of last resampled image and
+    // use this for repaints if image has not been resized or changed.
+    private BufferedImage scaledImage = null;
+    private boolean isResampleEnabled = true;
 
     private double imageScale = 1;
     private int degreesOfRotation = 0;
@@ -68,12 +73,6 @@ public class FImagePanel extends JPanel {
         setOpaque(false);
         setResizeListener();
     };
-
-    public void clearImage() {
-        this.sourceImage = null;
-        this.imageScale = 1;
-        repaint();
-    }
 
     /**
      * This timer is used to identify when resizing has finished.
@@ -95,6 +94,7 @@ public class FImagePanel extends JPanel {
     private void doResizedFinished() {
         this.resizingTimer.stop();
         this.isResizing = false;
+        this.isResampleEnabled = true;
         this.repaint();
     }
 
@@ -118,11 +118,11 @@ public class FImagePanel extends JPanel {
      * This means the image can only have either a vertical or horizontal orientation.
      */
     public void setImage(BufferedImage image, int initialRotation, AutoSizeImageMode autoSizeMode) {
-        if (this.sourceImage != image) {
+        if (this.sourceImage != image || this.degreesOfRotation != initialRotation || this.autoSizeMode != autoSizeMode) {
+            isResampleEnabled = true;
             this.autoSizeMode = autoSizeMode;
             if (initialRotation > 0) { setRotation(initialRotation); }
             this.sourceImage = image;
-            setImageScale();
             repaint();
         }
     }
@@ -165,9 +165,11 @@ public class FImagePanel extends JPanel {
      * This means the image can only have either a vertical or horizontal orientation.
      */
     public void setRotation(int degrees) {
-        this.degreesOfRotation = ImageUtil.getRotationToNearest(degrees, 90);
-        setImageScale();
-        repaint();
+        if (this.degreesOfRotation != degrees) {
+            this.degreesOfRotation = ImageUtil.getRotationToNearest(degrees, 90);
+            isResampleEnabled = true;
+            repaint();
+        }
     }
 
     /**
@@ -217,19 +219,26 @@ public class FImagePanel extends JPanel {
     /**
      * Uses Morten Nobel's java-image-scaling library to resize image.
      * <p>
-     * This produces superior quality to affine scaling as image sizes
-     * are reduced but at the cost of performance.
+     * This produces superior quality to affine scaling especially as
+     * image sizes are reduced but at the cost of performance.
+     * <p>
+     * You cannot legislate for when this will be called since it depends
+     * on how often paintComponent() is invoked and any number of external
+     * events can cause this to happen. But resampling is an expensive operation
+     * so use an existing copy if the image has not changed or been resized.
      */
     private BufferedImage getResampledImage() {
-        BufferedImage scaledImage = null;
         if (this.imageScale != 1) {
-            DimensionConstrain constrain = DimensionConstrain.createRelativeDimension((float)this.imageScale);
-            ResampleOp resampler = new ResampleOp(constrain);
-            scaledImage = resampler.filter(sourceImage, null);
+            if (isResampleEnabled) {
+                isResampleEnabled = false;
+                DimensionConstrain constrain = DimensionConstrain.createRelativeDimension((float)this.imageScale);
+                ResampleOp resampler = new ResampleOp(constrain);
+                this.scaledImage = resampler.filter(sourceImage, null);
+            }
         } else {
-            scaledImage = sourceImage;
+            this.scaledImage = sourceImage;
         }
-        return scaledImage;
+        return this.scaledImage;
     }
 
     /**
@@ -319,10 +328,14 @@ public class FImagePanel extends JPanel {
     private void setImageScale() {
         if (this.sourceImage != null) {
             if (this.autoSizeMode != AutoSizeImageMode.OFF) {
-                this.imageScale = ImageUtil.getBestFitScale(getSourceImageSize(), this.getSize());
-                if (this.imageScale == 0) { this.imageScale = 1; };
-                if (this.autoSizeMode == AutoSizeImageMode.SOURCE && this.imageScale > 1) {
-                    this.imageScale = 1;
+                Double newScale = ImageUtil.getBestFitScale(getSourceImageSize(), this.getSize());
+                if (newScale != this.imageScale) {
+                    isResampleEnabled = true;
+                    this.imageScale = newScale;
+                    if (newScale == 0) { this.imageScale = 1; };
+                    if (this.autoSizeMode == AutoSizeImageMode.SOURCE && newScale > 1) {
+                        this.imageScale = 1;
+                    }
                 }
             }
         }
