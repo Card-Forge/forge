@@ -1,4 +1,4 @@
-Name:Two-headed Cerberus
+Name:Two-Headed Cerberus
 ManaCost:1 R R
 Types:Creature Hound
 PT:1/2
