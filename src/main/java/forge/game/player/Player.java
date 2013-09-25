@@ -634,7 +634,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        if(source.isCommander())
+        if(source.isCommander() && isCombat)
         {
             if(!commanderDamage.containsKey(source))
             {
