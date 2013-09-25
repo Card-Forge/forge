@@ -60,7 +60,6 @@ import forge.gui.GuiUtils;
 import forge.gui.home.settings.CSubmenuPreferences;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.TypeUtil;
 import forge.view.FView;
 
 /**
@@ -74,6 +73,37 @@ public enum FSkin {
     SINGLETON_INSTANCE;
     
     public static class ComponentSkin<T extends Component> {
+        @SuppressWarnings("rawtypes")
+        private static HashMap<Component, ComponentSkin> skins = new HashMap<Component, ComponentSkin>();
+        
+        @SuppressWarnings("rawtypes")
+        private static void reapplyAll() {
+            for (ComponentSkin compSkin : ComponentSkin.skins.values()) {
+                compSkin.reapply();
+            }
+            for (JFrameSkin compSkin : JFrameSkin.skins.values()) {
+                compSkin.reapply();
+            }
+            for (JComponentSkin compSkin : JComponentSkin.skins.values()) {
+                compSkin.reapply();
+            }
+            for (JLabelSkin compSkin : JLabelSkin.skins.values()) {
+                compSkin.reapply();
+            }
+            for (AbstractButtonSkin compSkin : AbstractButtonSkin.skins.values()) {
+                compSkin.reapply();
+            }
+            for (JTextComponentSkin compSkin : JTextComponentSkin.skins.values()) {
+                compSkin.reapply();
+            }
+            for (JTableSkin compSkin : JTableSkin.skins.values()) {
+                compSkin.reapply();
+            }
+            for (FPanelSkin compSkin : FPanelSkin.skins.values()) {
+                compSkin.reapply();
+            }
+        }
+
         protected T comp;
         private SkinColor foreground, background;
         private SkinFont font;
@@ -181,6 +211,9 @@ public enum FSkin {
         }
     }
     public static class JFrameSkin<T extends JFrame> extends ComponentSkin<T> {
+        @SuppressWarnings("rawtypes")
+        private static HashMap<JFrame, JFrameSkin> skins = new HashMap<JFrame, JFrameSkin>();
+
         private SkinImage iconImage;
         
         private JFrameSkin(T comp0) {
@@ -205,6 +238,9 @@ public enum FSkin {
         }
     }
     public static class JComponentSkin<T extends JComponent> extends ComponentSkin<T> {
+        @SuppressWarnings("rawtypes")
+        private static HashMap<JComponent, JComponentSkin> skins = new HashMap<JComponent, JComponentSkin>();
+
         private class LineBorder {
             private final SkinColor skinColor;
             private final int thickness;
@@ -272,6 +308,9 @@ public enum FSkin {
         }
     }
     public static class JLabelSkin<T extends JLabel> extends JComponentSkin<T> {
+        @SuppressWarnings("rawtypes")
+        private static HashMap<JLabel, JLabelSkin> skins = new HashMap<JLabel, JLabelSkin>();
+
         private SkinImage icon;
         
         private JLabelSkin(T comp0) {
@@ -296,6 +335,9 @@ public enum FSkin {
         }
     }
     public static class AbstractButtonSkin<T extends AbstractButton> extends JComponentSkin<T> {
+        @SuppressWarnings("rawtypes")
+        private static HashMap<AbstractButton, AbstractButtonSkin> skins = new HashMap<AbstractButton, AbstractButtonSkin>();
+
         private SkinImage icon, pressedIcon, rolloverIcon;
         
         private AbstractButtonSkin(T comp0) {
@@ -344,6 +386,9 @@ public enum FSkin {
         }
     }
     public static class JTextComponentSkin<T extends JTextComponent> extends JComponentSkin<T> {
+        @SuppressWarnings("rawtypes")
+        private static HashMap<JTextComponent, JTextComponentSkin> skins = new HashMap<JTextComponent, JTextComponentSkin>();
+
         private SkinColor caretColor;
         
         private JTextComponentSkin(T comp0) {
@@ -372,6 +417,9 @@ public enum FSkin {
         }
     }
     public static class JTableSkin<T extends JTable> extends JComponentSkin<T> {
+        @SuppressWarnings("rawtypes")
+        private static HashMap<JTable, JTableSkin> skins = new HashMap<JTable, JTableSkin>();
+
         private SkinColor selectionForeground, selectionBackground;
         
         private JTableSkin(T comp0) {
@@ -416,6 +464,9 @@ public enum FSkin {
         }
     }
     public static class FPanelSkin<T extends FPanel> extends JComponentSkin<T> {
+        @SuppressWarnings("rawtypes")
+        private static HashMap<FPanel, FPanelSkin> skins = new HashMap<FPanel, FPanelSkin>();
+
         private SkinImage foregroundImage, backgroundTexture;
         
         private FPanelSkin(T comp0) {
@@ -453,81 +504,78 @@ public enum FSkin {
             super.reapply();
         }
     }
-    
-    @SuppressWarnings("rawtypes")
-    private static HashMap<Component, ComponentSkin> compSkins = new HashMap<Component, ComponentSkin>();
 
     @SuppressWarnings("unchecked")
     public static <T extends Component> ComponentSkin<T> get(T comp) {
-        ComponentSkin<T> skinnedComp = compSkins.get(comp);
-        if (skinnedComp == null) {
-            skinnedComp = new ComponentSkin<T>(comp);
-            compSkins.put(comp, skinnedComp);
+        ComponentSkin<T> compSkin = ComponentSkin.skins.get(comp);
+        if (compSkin == null) {
+            compSkin = new ComponentSkin<T>(comp);
+            ComponentSkin.skins.put(comp, compSkin);
         }
-        return skinnedComp;
+        return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JFrame> JFrameSkin<T> get(T comp) {
-        JFrameSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JFrameSkin.class);
-        if (skinnedComp == null) {
-            skinnedComp = new JFrameSkin<T>(comp);
-            compSkins.put(comp, skinnedComp);
+        JFrameSkin<T> compSkin = JFrameSkin.skins.get(comp);
+        if (compSkin == null) {
+            compSkin = new JFrameSkin<T>(comp);
+            JFrameSkin.skins.put(comp, compSkin);
         }
-        return skinnedComp;
+        return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JComponent> JComponentSkin<T> get(T comp) {
-        JComponentSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JComponentSkin.class);
-        if (skinnedComp == null) {
-            skinnedComp = new JComponentSkin<T>(comp);
-            compSkins.put(comp, skinnedComp);
+        JComponentSkin<T> compSkin = JComponentSkin.skins.get(comp);
+        if (compSkin == null) {
+            compSkin = new JComponentSkin<T>(comp);
+            JComponentSkin.skins.put(comp, compSkin);
         }
-        return skinnedComp;
+        return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JLabel> JLabelSkin<T> get(T comp) {
-        JLabelSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JLabelSkin.class);
-        if (skinnedComp == null) {
-            skinnedComp = new JLabelSkin<T>(comp);
-            compSkins.put(comp, skinnedComp);
+        JLabelSkin<T> compSkin = JLabelSkin.skins.get(comp);
+        if (compSkin == null) {
+            compSkin = new JLabelSkin<T>(comp);
+            JLabelSkin.skins.put(comp, compSkin);
         }
-        return skinnedComp;
+        return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends AbstractButton> AbstractButtonSkin<T> get(T comp) {
-        AbstractButtonSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), AbstractButtonSkin.class);
-        if (skinnedComp == null) {
-            skinnedComp = new AbstractButtonSkin<T>(comp);
-            compSkins.put(comp, skinnedComp);
+        AbstractButtonSkin<T> compSkin = AbstractButtonSkin.skins.get(comp);
+        if (compSkin == null) {
+            compSkin = new AbstractButtonSkin<T>(comp);
+            AbstractButtonSkin.skins.put(comp, compSkin);
         }
-        return skinnedComp;
+        return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JTextComponent> JTextComponentSkin<T> get(T comp) {
-        JTextComponentSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JTextComponentSkin.class);
-        if (skinnedComp == null) {
-            skinnedComp = new JTextComponentSkin<T>(comp);
-            compSkins.put(comp, skinnedComp);
+        JTextComponentSkin<T> compSkin = JTextComponentSkin.skins.get(comp);
+        if (compSkin == null) {
+            compSkin = new JTextComponentSkin<T>(comp);
+            JTextComponentSkin.skins.put(comp, compSkin);
         }
-        return skinnedComp;
+        return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JTable> JTableSkin<T> get(T comp) {
-        JTableSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), JTableSkin.class);
-        if (skinnedComp == null) {
-            skinnedComp = new JTableSkin<T>(comp);
-            compSkins.put(comp, skinnedComp);
+        JTableSkin<T> compSkin = JTableSkin.skins.get(comp);
+        if (compSkin == null) {
+            compSkin = new JTableSkin<T>(comp);
+            JTableSkin.skins.put(comp, compSkin);
         }
-        return skinnedComp;
+        return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends FPanel> FPanelSkin<T> get(T comp) {
-        FPanelSkin<T> skinnedComp = TypeUtil.safeCast(compSkins.get(comp), FPanelSkin.class);
-        if (skinnedComp == null) {
-            skinnedComp = new FPanelSkin<T>(comp);
-            compSkins.put(comp, skinnedComp);
+        FPanelSkin<T> compSkin = FPanelSkin.skins.get(comp);
+        if (compSkin == null) {
+            compSkin = new FPanelSkin<T>(comp);
+            FPanelSkin.skins.put(comp, compSkin);
         }
-        return skinnedComp;
+        return compSkin;
     }
 
     /** */
@@ -1522,7 +1570,6 @@ public enum FSkin {
     private static int defaultFontSize = 12;
     private static boolean loaded = false;
     
-    @SuppressWarnings("rawtypes")
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
         if (skinName.equals(prefs.getPref(FPref.UI_SKIN))) { return; }
@@ -1537,9 +1584,7 @@ public enum FSkin {
         loadFull(false);
 
         //reapply skin to all skinned components
-        for (ComponentSkin compSkin : compSkins.values()) {
-            compSkin.reapply();
-        }
+        ComponentSkin.reapplyAll();
         
         //refresh certain components skinned via look and feel
         Singletons.getControl().getMenuBar().refresh();
