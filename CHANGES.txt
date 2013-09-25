@@ -17,7 +17,7 @@ You can now switch between themes/skins from any screen without restarting, usin
 
 
 - Card Overlays -
-Card overlays are now always displayed regardless of card image size if the display card overlays option is turned on in your user preferences.
+Card overlays can be switched on/off during a match via the Game menu. Added new card id overlay. Overlays are now always displayed regardless of card image size (if switched on).
 
 
 - Theros cards -
