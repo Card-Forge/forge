@@ -69,6 +69,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("Always")) {
                 return true;
+            } else if (sa.getParam("AILogic").equals("BeforeCombat")) {
+                if (aiPlayer.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
+                    return false;
+                }
             }
         }
 
