@@ -61,177 +61,11 @@ import forge.util.TextUtil;
  * @version $Id$
  */
 public final class GameActionUtil {
-    
-//    /** 
-//     * TODO: Write javadoc for this type.
-//     *
-//     */
-//    public static final class RippleAbility extends Ability {
-//        private final Player controller;
-//        private final int rippleCount;
-//        private final Card rippleCard;
-//    
-//        /**
-//         * TODO: Write javadoc for Constructor.
-//         * @param sourceCard
-//         * @param manaCost
-//         * @param controller
-//         * @param rippleCount
-//         * @param rippleCard
-//         */
-//        private RippleAbility(Card sourceCard, ManaCost manaCost, Player controller, int rippleCount,
-//                Card rippleCard) {
-//            super(sourceCard, manaCost);
-//            this.controller = controller;
-//            this.rippleCount = rippleCount;
-//            this.rippleCard = rippleCard;
-//        }
-//    
-//        @Override
-//        public void resolve() {
-//            final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
-//            final List<Card> revealed = new ArrayList<Card>();
-//            int rippleNumber = rippleCount;
-//            if (topOfLibrary.size() == 0) {
-//                return;
-//            }
-//    
-//            // Shouldn't Have more than Ripple 10, seeing as no
-//            // cards exist with a ripple greater than 4
-//            final int rippleMax = 10;
-//            final Card[] rippledCards = new Card[rippleMax];
-//            Card crd;
-//            if (topOfLibrary.size() < rippleNumber) {
-//                rippleNumber = topOfLibrary.size();
-//            }
-//    
-//            for (int i = 0; i < rippleNumber; i++) {
-//                crd = topOfLibrary.get(i);
-//                revealed.add(crd);
-//                if (crd.getName().equals(rippleCard.getName())) {
-//                    rippledCards[i] = crd;
-//                }
-//            } // for
-//            GuiChoose.oneOrNone("Revealed cards:", revealed);
-//            for (int i = 0; i < rippleMax; i++) {
-//                if (rippledCards[i] != null) {
-//                    Player p = rippledCards[i].getController();
-//    
-//                    if (p.isHuman()) {
-//                        if (GuiDialog.confirm(rippledCards[i], "Cast " + rippledCards[i].getName() + "?")) {
-//                            HumanPlay.playCardWithoutPayingManaCost(p, rippledCards[i]);
-//                            revealed.remove(rippledCards[i]);
-//                        }
-//                    } else {
-//                        final AiController aic = ((PlayerControllerAi)p.getController()).getAi();
-//                        SpellAbility saPlayed = aic.chooseAndPlaySa(rippledCards[i].getBasicSpells(), false, true);
-//                        if ( saPlayed != null )
-//                            revealed.remove(rippledCards[i]);
-//                    }
-//                }
-//            }
-//            CardLists.shuffle(revealed);
-//            for (final Card bottom : revealed) {
-//                controller.getGame().getAction().moveToBottomOfLibrary(bottom);
-//            }
-//        }
-//    
-//    }
-//
-//    /** 
-//     * TODO: Write javadoc for this type.
-//     *
-//     */
-//    public static final class RippleExecutor implements Command {
-//        private final Player controller;
-//        private final Card c;
-//        private static final long serialVersionUID = -845154812215847505L;
-//
-//        /**
-//         * TODO: Write javadoc for Constructor.
-//         * @param controller
-//         * @param c
-//         */
-//        public RippleExecutor(Player controller, Card c) {
-//            this.controller = controller;
-//            this.c = c;
-//        }
-//
-//        @Override
-//        public void run() {
-//
-//            final List<Card> thrummingStones = controller.getCardsIn(ZoneType.Battlefield, "Thrumming Stone");
-//            for (int i = 0; i < thrummingStones.size(); i++) {
-//                c.addExtrinsicKeyword("Ripple:4");
-//            }
-//
-//            for (String parse : c.getKeyword()) {
-//                if (parse.startsWith("Ripple")) {
-//                    final String[] k = parse.split(":");
-//                    this.doRipple(c, Integer.valueOf(k[1]), controller);
-//                }
-//            }
-//        } // execute()
-//
-//        void doRipple(final Card c, final int rippleCount, final Player controller) {
-//            final Card rippleCard = c;
-//
-//            final Ability ability = new RippleAbility(c, ManaCost.ZERO, controller, rippleCount, rippleCard);
-//
-//            if (controller.getController().confirmAction(ability, PlayerActionConfirmMode.Ripple, "Activate Ripple for " + c + "?")) {
-//
-//                final StringBuilder sb = new StringBuilder();
-//                sb.append(c).append(" - Ripple.");
-//                ability.setStackDescription(sb.toString());
-//                ability.setDescription(sb.toString());
-//                ability.setActivatingPlayer(controller);
-//
-//                controller.getGame().getStack().addSimultaneousStackEntry(ability);
-//
-//            }
-//        }
-//    }
+
 
     private GameActionUtil() {
         throw new AssertionError();
     }
-
-//    // this is for cards like Sengir Vampire
-//    /**
-//     * <p>
-//     * executeVampiricEffects.
-//     * </p>
-//     * 
-//     * @param c
-//     *            a {@link forge.Card} object.
-//     */
-//    public static void executeVampiricEffects(final Card c) {
-//        if (!c.isInPlay()) return;
-//
-//        for (final String kw : c.getKeyword()) {
-//            if(!kw.startsWith("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put")) {
-//                continue;
-//            }
-//            final Card thisCard = c;
-//            String type = kw.contains("+2/+2") ? "P2P2" : "P1P1";
-//                
-//            String effect = "AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ " + type + " | CounterNum$ 1";
-//
-//            final StringBuilder sb = new StringBuilder();
-//            sb.append(c.getName());
-//            if (kw.contains("+2/+2")) {
-//                sb.append(" - gets a +2/+2 counter");
-//            } else {
-//                sb.append(" - gets a +1/+1 counter");
-//            }
-//            SpellAbility ability2 = AbilityFactory.getAbility(effect, thisCard);
-//            ability2.setActivatingPlayer(c.getController());
-//            ability2.setStackDescription(sb.toString());
-//            ability2.setDescription(sb.toString());
-//            ability2.setTrigger(true);
-//            c.getGame().getStack().addSimultaneousStackEntry(ability2);
-//        }
-//    }
 
     // restricted to combat damage, restricted to players
     /**
@@ -259,7 +93,7 @@ public final class GameActionUtil {
             // Now can be copied by Strionic Resonator
             String effect = "AB$ Poison | Cost$ 0 | Defined$ PlayerNamed_" + player.getName() + " | Num$ " + k[1];
             SpellAbility ability = AbilityFactory.getAbility(effect, c);
-            
+
             final StringBuilder sb = new StringBuilder();
             sb.append(c);
             sb.append(" - Poisonous: ");
@@ -361,7 +195,7 @@ public final class GameActionUtil {
 
     /**
      * Gets the st land mana abilities.
-     * @param game 
+     * @param game
      * 
      * @return the stLandManaAbilities
      */
@@ -382,7 +216,7 @@ public final class GameActionUtil {
         }
 
         // add all appropriate mana abilities based on current types
-        for(int i = 0; i < MagicColor.WUBRG.length; i++ ) {
+        for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
             String landType = Constant.Color.BASIC_LANDS.get(i);
             String color = MagicColor.toShortString(MagicColor.WUBRG[i]);
             String abString = "AB$ Mana | Cost$ T | Produced$ " + color + " | SpellDescription$ Add " + color + " to your mana pool.";
@@ -548,7 +382,7 @@ public final class GameActionUtil {
                 for (SpellAbility sa : abilities) {
                     final SpellAbility newSA = sa.copy();
                     newSA.setBasicSpell(false);
-                    
+
                     final Cost cost1 = new Cost(costs[1], false);
                     newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
                     newSA.setPayCosts(cost1.add(sa.getPayCosts()));
@@ -576,7 +410,7 @@ public final class GameActionUtil {
                     newSA.setPayCosts(new Cost(keyword.substring(8), false).add(newSA.getPayCosts()));
                     newSA.setDescription(newSA.getDescription() + " (with Buyback)");
                     newSA.addOptionalCost(OptionalCost.Buyback);
-                    if ( newSA.canPlay() ) {
+                    if (newSA.canPlay()) {
                         abilities.add(i, newSA);
                         i++;
                     }
@@ -585,20 +419,20 @@ public final class GameActionUtil {
                 for (int i = 0; i < abilities.size(); i++) {
                     String[] sCosts = TextUtil.split(keyword.substring(7), ':');
                     int iUnKicked = i;
-                    for(int j = 0; j < sCosts.length; j++) {
+                    for (int j = 0; j < sCosts.length; j++) {
                         final SpellAbility newSA = abilities.get(iUnKicked).copy();
                         newSA.setBasicSpell(false);
                         final Cost cost = new Cost(sCosts[j], false);
                         newSA.setDescription(newSA.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
                         newSA.setPayCosts(cost.add(newSA.getPayCosts()));
                         newSA.addOptionalCost(j == 0 ? OptionalCost.Kicker1 : OptionalCost.Kicker2);
-                        if ( newSA.canPlay() ) {
+                        if (newSA.canPlay()) {
                             abilities.add(i, newSA);
                             i++;
                             iUnKicked++;
                         }
                     }
-                    if(sCosts.length == 2) { // case for both kickers - it's hardcoded since they never have more than 2 kickers
+                    if (sCosts.length == 2) { // case for both kickers - it's hardcoded since they never have more than 2 kickers
                         final SpellAbility newSA = abilities.get(iUnKicked).copy();
                         newSA.setBasicSpell(false);
                         final Cost cost1 = new Cost(sCosts[0], false);
@@ -607,11 +441,10 @@ public final class GameActionUtil {
                         newSA.setPayCosts(cost2.add(cost1.add(newSA.getPayCosts())));
                         newSA.addOptionalCost(OptionalCost.Kicker1);
                         newSA.addOptionalCost(OptionalCost.Kicker2);
-                        if ( newSA.canPlay() ) {
+                        if (newSA.canPlay()) {
                             abilities.add(i, newSA);
                             i++;
                         }
-                        
                     }
                 }
             }
@@ -639,7 +472,7 @@ public final class GameActionUtil {
         // Splice
         final List<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : abilities) {
-            if( sa.isSpell() && sa.getSourceCard().isType("Arcane") && sa.getApi() != null ) {
+            if (sa.isSpell() && sa.getSourceCard().isType("Arcane") && sa.getApi() != null ) {
                 newAbilities.addAll(GameActionUtil.getSpliceAbilities(sa));
             }
         }
@@ -663,7 +496,6 @@ public final class GameActionUtil {
         allSaCombinations.add(sa);
         Card source = sa.getSourceCard();
 
-    
         for (Card c : sa.getActivatingPlayer().getCardsIn(ZoneType.Hand)) {
             if (c.equals(source)) {
                 continue;
@@ -672,12 +504,12 @@ public final class GameActionUtil {
             String spliceKwCost = null;
             for (String keyword : c.getKeyword()) {
                 if (keyword.startsWith("Splice")) {
-                    spliceKwCost = keyword.substring(19); 
+                    spliceKwCost = keyword.substring(19);
                     break;
                 }
             }
 
-            if( spliceKwCost == null )
+            if (spliceKwCost == null)
                 continue;
 
             Map<String, String> params = AbilityFactory.getMapParams(c.getCharacteristics().getUnparsedAbilities().get(0));
@@ -717,7 +549,6 @@ public final class GameActionUtil {
                 allSaCombinations.add(++i, newSA);
             }
         }
-    
         return newSAs;
     }
 
@@ -741,11 +572,7 @@ public final class GameActionUtil {
      * <p>
      * generatedMana.
      * </p>
-     * 
-     * @param abMana
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @param af
-     *            a {@link forge.card.ability.AbilityFactory} object.
+     *
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
@@ -762,17 +589,14 @@ public final class GameActionUtil {
             if (baseMana.isEmpty()) {
                 baseMana = abMana.getOrigProduced();
             }
-        }
-        else if (abMana.isAnyMana()) {
+        } else if (abMana.isAnyMana()) {
             baseMana = abMana.getExpressChoice();
             if (baseMana.isEmpty()) {
                 baseMana = "Any";
             }
-        }
-        else if (sa.getApi() == ApiType.ManaReflected) {
+        } else if (sa.getApi() == ApiType.ManaReflected) {
             baseMana = abMana.getExpressChoice();
-        }
-        else {
+        } else {
             baseMana = abMana.mana();
         }
 
@@ -794,7 +618,7 @@ public final class GameActionUtil {
             // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
             // that's hard to track and remove
             sa.setUndoable(false);
-        } else {      
+        } else {
             try {
                 if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
                     sa.setUndoable(false);
@@ -807,13 +631,11 @@ public final class GameActionUtil {
         final StringBuilder sb = new StringBuilder();
         if (amount == 0) {
             sb.append("0");
-        }
-        else if (abMana.isComboMana()) {
+        } else if (abMana.isComboMana()) {
             // amount is already taken care of in resolve method for combination mana, just append baseMana
             sb.append(baseMana);
-        }
-        else {
-            if(StringUtils.isNumeric(baseMana)) {
+        } else {
+            if (StringUtils.isNumeric(baseMana)) {
                 sb.append(amount * Integer.parseInt(baseMana));
             } else {
                 sb.append(baseMana);
