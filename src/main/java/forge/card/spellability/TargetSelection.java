@@ -257,7 +257,7 @@ public class TargetSelection {
      */
     private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
-        final Game game = ability.getActivatingPlayer().getGame(); 
+        final Game game = ability.getActivatingPlayer().getGame();
 
         final List<Card> crdsBattle = new ArrayList<Card>();
         final List<Card> crdsExile = new ArrayList<Card>();
@@ -300,7 +300,12 @@ public class TargetSelection {
             choicesFiltered.add(msgDone);
         }
         
-        final Object chosen = GuiChoose.oneOrNone(getTgt().getVTSelection(), choicesFiltered);
+        Object chosen = null;
+        if (!choices.isEmpty() && mandatory) {
+            chosen = GuiChoose.one(getTgt().getVTSelection(), choicesFiltered);
+        } else {
+            chosen = GuiChoose.oneOrNone(getTgt().getVTSelection(), choicesFiltered);
+        }
         if (chosen == null) {
             return false;
         }
