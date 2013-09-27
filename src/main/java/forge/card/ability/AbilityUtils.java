@@ -805,6 +805,10 @@ public class AbilityUtils {
             for (final Card rem : card.getImprinted()) {
                 players.add(rem.getController());
             }
+        } else if (defined.equals("ImprintedOwner")) {
+            for (final Card rem : card.getImprinted()) {
+                players.add(rem.getOwner());
+            }
         } else if (defined.startsWith("Triggered")) {
             final SpellAbility root = sa.getRootAbility();
             Object o = null;
