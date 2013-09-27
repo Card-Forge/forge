@@ -1,7 +1,7 @@
-Forge Beta: 09-##-2013 ver 1.5.0
+Forge Beta: 09-27-2013 ver 1.5.0
 
 
-13### cards in total.
+13316 cards in total.
 
 
 -------------
@@ -40,14 +40,14 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-Hall of the Bandit Lord
-Truth or Tale
-Personal Incarnation
-Wort, the Raidmother
 Blaze of Glory
 Conundrum Sphinx
+Hall of the Bandit Lord
 Oath of Mages
 Oath of Scholars
+Personal Incarnation
+Truth or Tale
+Wort, the Raidmother
 
 
 ---------------
@@ -324,7 +324,21 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Dead Speak
+Diogenes
+DrDev
+Dripton
+Gos
+Hellfish
+Marc
+Max
+RumbleBBU
+Sloth
+Sol
+spr
+Swordshine
+ZzzzSleep
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
