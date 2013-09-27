@@ -6911,6 +6911,7 @@ res/cardsfolder/m/matsu_tribe_decoy.txt -text
 res/cardsfolder/m/matsu_tribe_sniper.txt svneol=native#text/plain
 res/cardsfolder/m/maul_splicer.txt svneol=native#text/plain
 res/cardsfolder/m/mausoleum_guard.txt -text
+res/cardsfolder/m/mausoleum_turnkey.txt -text
 res/cardsfolder/m/maw_of_the_mire.txt -text
 res/cardsfolder/m/maw_of_the_obzedat.txt -text
 res/cardsfolder/m/mawcor.txt svneol=native#text/plain

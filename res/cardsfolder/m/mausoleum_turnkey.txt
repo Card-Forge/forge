@@ -1,0 +1,9 @@
+Name:Mausoleum Turnkey
+ManaCost:3 B
+Types:Creature Ogre Rogue
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | RememberController$ True | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card of an opponent's choice from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.RememberedPlayerCtrl | TargetingPlayer$ Opponent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mausoleum_turnkey.jpg
+Oracle:When Mausoleum Turnkey enters the battlefield, return target creature card of an opponent's choice from your graveyard to your hand.

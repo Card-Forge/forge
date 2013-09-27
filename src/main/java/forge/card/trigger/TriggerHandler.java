@@ -377,6 +377,10 @@ public class TriggerHandler {
             sa.setActivatingPlayer(p);
         }
 
+        if (triggerParams.containsKey("RememberController")) {
+            host.addRemembered(sa.getActivatingPlayer());
+        }
+
         sa.setStackDescription(sa.toString());
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
