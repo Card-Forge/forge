@@ -80,11 +80,11 @@ public class Combat {
         return this.playerWhoAttacks;
     }
 
-    public synchronized final List<GameEntity> getDefenders() {
+    public final List<GameEntity> getDefenders() {
         return Lists.newArrayList(attackedEntities.keySet());
     }
 
-    public synchronized final List<GameEntity> getDefendersControlledBy(Player who) {
+    public final List<GameEntity> getDefendersControlledBy(Player who) {
         List<GameEntity> res = Lists.newArrayList();
         for(GameEntity ge : attackedEntities.keySet()) {
             // if defender is the player himself or his cards
@@ -94,7 +94,7 @@ public class Combat {
         return res;
     }
     
-    public synchronized final List<Card> getDefendingPlaneswalkers() {
+    public final List<Card> getDefendingPlaneswalkers() {
         final List<Card> pwDefending = new ArrayList<Card>();
         for (final GameEntity o : attackedEntities.keySet()) {
             if (o instanceof Card) {
@@ -104,11 +104,11 @@ public class Combat {
         return pwDefending;
     }
 
-    public synchronized final List<AttackingBand> getAttackingBandsOf(GameEntity defender) {
+    public final List<AttackingBand> getAttackingBandsOf(GameEntity defender) {
         return Lists.newArrayList(attackedEntities.get(defender));
     }
     
-    public synchronized final List<Card> getAttackersOf(GameEntity defender) {
+    public final List<Card> getAttackersOf(GameEntity defender) {
         List<Card> result = new ArrayList<Card>();
         if (!attackedEntities.containsKey(defender)) {
             return result;
@@ -123,7 +123,7 @@ public class Combat {
         addAttacker(c, defender, null);
     }
     
-    public synchronized final void addAttacker(final Card c, GameEntity defender, AttackingBand band) {
+    public final void addAttacker(final Card c, GameEntity defender, AttackingBand band) {
         Collection<AttackingBand> attackersOfDefender = attackedEntities.get(defender);
         if (attackersOfDefender == null) {
             System.out.println("Trying to add Attacker " + c + " to missing defender " + defender);
@@ -142,7 +142,7 @@ public class Combat {
         return getDefenderByAttacker(getBandOfAttacker(c));
     }
     
-    public synchronized final GameEntity getDefenderByAttacker(final AttackingBand c) {
+    public final GameEntity getDefenderByAttacker(final AttackingBand c) {
         for(Entry<GameEntity, Collection<AttackingBand>> e : attackedEntities.entrySet()) {
             for(AttackingBand ab : e.getValue()) {
                 if ( ab == c )
@@ -167,7 +167,7 @@ public class Combat {
         return null;
     }
 
-    public synchronized final AttackingBand getBandOfAttacker(final Card c) {
+    public final AttackingBand getBandOfAttacker(final Card c) {
         for(Collection<AttackingBand> abs : attackedEntities.values()) {
             for(AttackingBand ab : abs) {
                 if ( ab.contains(c) )
@@ -178,7 +178,7 @@ public class Combat {
         return lki == null ? null : lki.getFirstBand();
     }
 
-    public synchronized final List<AttackingBand> getAttackingBands() {
+    public final List<AttackingBand> getAttackingBands() {
         List<AttackingBand> result = Lists.newArrayList();
         for(Collection<AttackingBand> abs : attackedEntities.values()) 
             result.addAll(abs);
@@ -190,7 +190,7 @@ public class Combat {
         return ab != null;
     }
 
-    public synchronized boolean isAttacking(Card card, GameEntity defender) {
+    public boolean isAttacking(Card card, GameEntity defender) {
         AttackingBand ab = getBandOfAttacker(card);
 
         for(Entry<GameEntity, Collection<AttackingBand>> ee : attackedEntities.entrySet()) 
@@ -199,7 +199,7 @@ public class Combat {
         return false;
     }
 
-    public synchronized final List<Card> getAttackers() {
+    public final List<Card> getAttackers() {
         List<Card> result = Lists.newArrayList();
         for(Collection<AttackingBand> abs : attackedEntities.values()) 
             for(AttackingBand ab : abs)
@@ -207,7 +207,7 @@ public class Combat {
         return result;
     }
 
-    public synchronized final List<Card> getBlockers(final Card card) {
+    public final List<Card> getBlockers(final Card card) {
         // If requesting the ordered blocking list pass true, directly. 
         AttackingBand band = getBandOfAttacker(card);
         Collection<Card> blockers = blockedBands.get(band);
@@ -225,13 +225,13 @@ public class Combat {
         getBandOfAttacker(attacker).setBlocked(value); // called by Curtain of Light, Dazzling Beauty, Trap Runner
     }
 
-    public synchronized final void addBlocker(final Card attacker, final Card blocker) {
+    public final void addBlocker(final Card attacker, final Card blocker) {
         AttackingBand band = getBandOfAttacker(attacker);
         blockedBands.add(band, blocker);
     }
 
     // remove blocked from specific attacker
-    public synchronized final void removeBlockAssignment(final Card attacker, final Card blocker) {
+    public final void removeBlockAssignment(final Card attacker, final Card blocker) {
         AttackingBand band = getBandOfAttacker(attacker);
         Collection<Card> cc = blockedBands.get(band);
         if( cc != null)
@@ -239,13 +239,13 @@ public class Combat {
     }
 
     // remove blocker from everywhere
-    public synchronized final void undoBlockingAssignment(final Card blocker) {
+    public final void undoBlockingAssignment(final Card blocker) {
         for(Collection<Card> blockers : blockedBands.values()) {
             blockers.remove(blocker);
         }
     }
 
-    public synchronized final List<Card> getAllBlockers() {
+    public final List<Card> getAllBlockers() {
         List<Card> result = new ArrayList<Card>();
         for(Collection<Card> blockers : blockedBands.values()) {
             for (Card blocker : blockers) {
@@ -256,13 +256,13 @@ public class Combat {
         return result;
     }
 
-    public synchronized final List<Card> getBlockers(final AttackingBand band) {
+    public final List<Card> getBlockers(final AttackingBand band) {
         Collection<Card> blockers = blockedBands.get(band);
         return blockers == null ? Lists.<Card>newArrayList() : Lists.newArrayList(blockers);
     }
 
 
-    public synchronized final List<Card> getAttackersBlockedBy(final Card blocker) {
+    public final List<Card> getAttackersBlockedBy(final Card blocker) {
         List<Card> blocked =  new ArrayList<Card>();
         for(Entry<AttackingBand, Collection<Card>> s : blockedBands.entrySet()) {
             if (s.getValue().contains(blocker)) 
@@ -271,7 +271,7 @@ public class Combat {
         return blocked;
     }
     
-    public synchronized final List<AttackingBand> getAttackingBandsBlockedBy(Card blocker) {
+    public final List<AttackingBand> getAttackingBandsBlockedBy(Card blocker) {
         List<AttackingBand> bands = Lists.newArrayList();
         for( Entry<AttackingBand, Collection<Card>> kv : blockedBands.entrySet()) {
             if (kv.getValue().contains(blocker))
@@ -295,7 +295,7 @@ public class Combat {
     }
 
     /** If there are multiple blockers, the Attacker declares the Assignment Order */
-    public synchronized void orderBlockersForDamageAssignment() { // this method performs controller's role 
+    public void orderBlockersForDamageAssignment() { // this method performs controller's role 
 
         for(Collection<AttackingBand> abs : attackedEntities.values())
             for (final AttackingBand band : abs) {
@@ -330,7 +330,7 @@ public class Combat {
     }
     
     // removes references to this attacker from all indices and orders
-    private synchronized void unregisterAttacker(final Card c, AttackingBand ab) {
+    private void unregisterAttacker(final Card c, AttackingBand ab) {
         blockersOrderedForDamageAssignment.remove(c);
         
         Collection<Card> blockers = blockedBands.get(ab);
@@ -356,7 +356,7 @@ public class Combat {
     }
 
     // remove a combatant whose side is unknown
-    public synchronized final void removeFromCombat(final Card c) {
+    public final void removeFromCombat(final Card c) {
         AttackingBand ab = getBandOfAttacker(c);
         if (ab != null) {
             unregisterAttacker(c, ab);
@@ -373,7 +373,7 @@ public class Combat {
         }
     } // removeFromCombat()
 
-    public synchronized final void removeAbsentCombatants() {
+    public final void removeAbsentCombatants() {
         // iterate all attackers and remove them
         for(Entry<GameEntity, Collection<AttackingBand>> ee : attackedEntities.entrySet()) {
             for(AttackingBand ab : ee.getValue()) {
@@ -401,7 +401,7 @@ public class Combat {
 
     
     // Call this method right after turn-based action of declare blockers has been performed
-    public synchronized final void fireTriggersForUnblockedAttackers() {
+    public final void fireTriggersForUnblockedAttackers() {
         for(Collection<AttackingBand> abs : attackedEntities.values()) {
             for(AttackingBand ab : abs) {
                 Collection<Card> blockers = blockedBands.get(ab);
@@ -655,7 +655,7 @@ public class Combat {
      * 
      * @return an array of {@link forge.Card} objects.
      */
-    public synchronized final List<Card> getUnblockedAttackers() {
+    public final List<Card> getUnblockedAttackers() {
         List<Card> unblocked = new ArrayList<Card>();
         for (Collection<AttackingBand> abs : attackedEntities.values())
             for (AttackingBand ab : abs)
@@ -665,7 +665,7 @@ public class Combat {
         return unblocked;
     }
 
-    public synchronized boolean isPlayerAttacked(Player who) {
+    public boolean isPlayerAttacked(Player who) {
         for(Entry<GameEntity, Collection<AttackingBand>> ee : attackedEntities.entrySet() ) {
             GameEntity defender = ee.getKey();
             Card defenderAsCard = defender instanceof Card ? (Card)defender : null;
@@ -681,7 +681,7 @@ public class Combat {
         return false;
     }
 
-    public synchronized boolean isBlocking(Card blocker) {
+    public boolean isBlocking(Card blocker) {
         if ( !blocker.isInPlay() ) {
             CombatLki lki = lkiCache.get(blocker);
             return null != lki && !lki.isAttacker; // was blocking something anyway
@@ -692,7 +692,7 @@ public class Combat {
         return false;
     }
 
-    public synchronized boolean isBlocking(Card blocker, Card attacker) {
+    public boolean isBlocking(Card blocker, Card attacker) {
         AttackingBand ab = getBandOfAttacker(attacker);
         if ( !blocker.isInPlay() ) {
             CombatLki lki = lkiCache.get(blocker);
