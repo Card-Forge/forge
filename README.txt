@@ -828,7 +828,23 @@ The feature is half-complete now. Forge can read subfolders in constructed deck,
 
 === General GUI ===
 == Themes ==
-- Combo-box style should now be appear correctly on Mac OS .
+- Combo-box style should now be appear correctly on Mac OS.
+
+
+- Commander -
+The Commander gaming mode has been added and is located in the Variant view. This is a work in progress and is not finished at this time. You are invited to play test this variant.
+
+
+- Switch Theme/Skin Without Restart -
+You can now switch between themes/skins from any screen without restarting, using either Layout > Theme on main menu or combo box on Preferences page of Home screen
+
+
+- Card Overlays -
+Card overlays can be switched on/off during a match via the Game menu. Added new card id overlay. Overlays are now always displayed regardless of card image size (if switched on).
+
+
+- Theros cards -
+Forge now includes most of the new Theros cards. It may take a few days before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient.
 
 
 Our Lawyers Made Us Do This:
