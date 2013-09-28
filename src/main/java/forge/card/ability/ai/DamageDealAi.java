@@ -242,10 +242,10 @@ public class DamageDealAi extends DamageAiBase {
         final Game game = source.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final boolean divided = sa.hasParam("DividedAsYouChoose");
-        TargetChoices tcs = sa.getTargets();
 
         // target loop
         sa.resetTargets();
+        TargetChoices tcs = sa.getTargets();
         Player enemy = ai.getOpponent();
         
         if (tgt.getMaxTargets(source, sa) <= 0) {
