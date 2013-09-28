@@ -18,6 +18,7 @@
 package forge.gui.deckeditor.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -116,10 +117,12 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
             return;
         }
+        List<String> limitExceptions = Arrays.asList(new String[]{"Relentless Rats", "Shadowborn Apostle"});
+        
         if((controller.getModel().getMain().contains((PaperCard)item)
                 || controller.getModel().getOrCreate(DeckSection.Sideboard).contains((PaperCard)item)
                 || controller.getModel().getOrCreate(DeckSection.Commander).contains((PaperCard)item))
-                && !((PaperCard)item).getRules().getType().isBasic()) {
+                && !(((PaperCard)item).getRules().getType().isBasic() || limitExceptions.contains(item.getName()))) {
             return;
         }
 
