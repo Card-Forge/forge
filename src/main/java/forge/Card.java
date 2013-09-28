@@ -1891,6 +1891,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         if(this.getName().equals("Commander effect"))
         {
+            sb.append("Zone: " + getOwner().getCommander().getZone().toString() + "\r\n");
             sb.append(CardFactoryUtil.getCommanderInfo(getOwner()));
         }
         sb.append(this.getAbilityText());

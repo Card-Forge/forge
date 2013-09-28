@@ -137,8 +137,8 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
             
             tempPanel.add(new FLabel.Builder().text("Select Deck:").build(), "gap 0px 0px 10px 10px, flowy");
 
-            JScrollPane scrAvatar = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            tempPanel.add(scrAvatar, "h 90%, gap 0px 10px 0px 10px, growy, pushy, wrap");
+            JScrollPane scrDecks = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            tempPanel.add(scrDecks, "h 90%, gap 0px 10px 0px 10px, growy, pushy, wrap");
 
             playerPanels.add(tempPanel);
             if (i == 0) {
