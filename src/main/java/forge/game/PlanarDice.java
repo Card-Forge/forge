@@ -57,6 +57,6 @@ public enum PlanarDice {
             }
         }
 
-        throw new RuntimeException("Element " + value + " not found in TriggerType enum");
+        throw new RuntimeException("Element " + value + " not found in PlanarDice enum");
     }
 }
