@@ -8,6 +8,10 @@ Forge Beta: 10-##-2013 ver 1.5.1
 Release Notes
 -------------
 
+- Forge freezing during a match bug -
+A number of people have reported this bug and we now feel that it may have been fixed in this version. Please play test this version and let us know.
+
+
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6. Those who are using Mac OS should install the JDK version rather than the JRE version.
 
@@ -25,6 +29,13 @@ New Cards
 ---------
 
 Mausoleum Turnkey
+Mana Reflection
+Pulse of Llanowar
+Deep Water
+Naked Singularity
+Chaos Moon
+Infernal Darkness
+Pale Moon
 
 
 -----------
@@ -32,6 +43,13 @@ New Schemes
 -----------
 
 Nature Demands an Offering
+
+
+--------------------
+New Vanguard Avatars
+--------------------
+
+Mirri
 
 
 ------------
