@@ -15,6 +15,11 @@ import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.Colors;
+import forge.gui.toolbox.FSkin.CompoundSkinBorder;
+import forge.gui.toolbox.FSkin.LineSkinBorder;
+
 @SuppressWarnings("serial")
 public class FFrame extends JFrame {
     private static final int borderThickness = 3;
@@ -138,10 +143,12 @@ public class FFrame extends JFrame {
     
     private void updateBorder() {
         if (this.maximized) {
-            getRootPane().setBorder(null);
+            FSkin.get(getRootPane()).removeBorder();
         }
         else {
-            getRootPane().setBorder(BorderFactory.createLineBorder(new Color(0, 0, 61), borderThickness));
+            FSkin.get(getRootPane()).setBorder(new CompoundSkinBorder(
+                    BorderFactory.createLineBorder(Color.BLACK, 1), 
+                    new LineSkinBorder(FSkin.getColor(Colors.CLR_BORDERS), borderThickness - 1)));
         }
     }
     
