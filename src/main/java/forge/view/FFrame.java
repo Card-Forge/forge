@@ -211,8 +211,11 @@ public class FFrame extends JFrame {
                     else if (loc.y < grabArea) {
                         setResizeCursor(Cursor.N_RESIZE_CURSOR);
                     }
-                    else {
+                    else if (loc.y >= getHeight() - grabArea) {
                         setResizeCursor(Cursor.S_RESIZE_CURSOR);
+                    }
+                    else {
+                        setResizeCursor(Cursor.DEFAULT_CURSOR);
                     }
                 }
             }
