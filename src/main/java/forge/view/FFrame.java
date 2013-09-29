@@ -62,6 +62,28 @@ public class FFrame extends JFrame {
         }
     }
     
+    //ensure un-maximized if location or size changed
+    @Override
+    public void setLocation(Point point) {
+        this.setMaximized(false);
+        super.setLocation(point);
+    }
+    @Override
+    public void setLocation(int x, int y) {
+        this.setMaximized(false);
+        super.setLocation(x, y);
+    }
+    @Override
+    public void setSize(Dimension size) {
+        this.setMaximized(false);
+        super.setSize(size);
+    }
+    @Override
+    public void setSize(int width, int height) {
+        this.setMaximized(false);
+        super.setSize(width, height);
+    }
+    
     public boolean getMinimized() {
         return getState() == Frame.ICONIFIED;
     }
@@ -117,10 +139,8 @@ public class FFrame extends JFrame {
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     if (e.getClickCount() == 1) {
-                        if (!maximized) { //TODO: consider supporting moving while maximized by first un-maximizing
-                            locBeforeMove = getLocation();
-                            mouseDownLoc = e.getLocationOnScreen();
-                        }
+                        locBeforeMove = getLocation();
+                        mouseDownLoc = e.getLocationOnScreen();
                     }
                     else {
                         setMaximized(!getMaximized());
