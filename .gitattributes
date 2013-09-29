@@ -15266,6 +15266,7 @@ src/main/java/forge/gui/toolbox/FButton.java -text
 src/main/java/forge/gui/toolbox/FCheckBox.java -text
 src/main/java/forge/gui/toolbox/FComboBoxPanel.java -text
 src/main/java/forge/gui/toolbox/FComboBoxWrapper.java -text
+src/main/java/forge/gui/toolbox/FDigitalClock.java -text
 src/main/java/forge/gui/toolbox/FLabel.java -text
 src/main/java/forge/gui/toolbox/FList.java -text
 src/main/java/forge/gui/toolbox/FOverlay.java -text

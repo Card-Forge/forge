@@ -18,6 +18,7 @@ import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
 
 import forge.gui.framework.ILocalRepaint;
+import forge.gui.toolbox.FDigitalClock;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.FSkin.JLabelSkin;
@@ -33,6 +34,7 @@ public class FTitleBar extends JMenuBar {
     private final FFrame frame;
     private final SpringLayout layout = new SpringLayout();
     private final JLabel lblTitle = new JLabel();
+    private final FDigitalClock clock = new FDigitalClock();
     private final MinimizeButton btnMinimize = new MinimizeButton();
     private final MaximizeButton btnMaximize = new MaximizeButton();
     private final CloseButton btnClose = new CloseButton();
@@ -46,6 +48,7 @@ public class FTitleBar extends JMenuBar {
         setTitle(f.getTitle()); //set default title based on frame title
         setIconImage(f.getIconImage()); //set default icon image based on frame icon image
         FSkin.get(lblTitle).setForeground(foreColor);
+        FSkin.get(clock).setForeground(foreColor);
 
         add(lblTitle);
         layout.putConstraint(SpringLayout.WEST, lblTitle, 1, SpringLayout.WEST, this);
@@ -62,9 +65,15 @@ public class FTitleBar extends JMenuBar {
         add(btnMinimize);
         layout.putConstraint(SpringLayout.EAST, btnMinimize, 0, SpringLayout.WEST, btnMaximize);
         layout.putConstraint(SpringLayout.NORTH, btnMinimize, 0, SpringLayout.NORTH, btnMaximize);
+        
+        add(clock);
+        clock.setVisible(false); //hide unless maximized
+        layout.putConstraint(SpringLayout.EAST, clock, -6, SpringLayout.WEST, btnMinimize);
+        layout.putConstraint(SpringLayout.NORTH, clock, 0, SpringLayout.NORTH, lblTitle);
     }
     
     public void handleMaximizedChanged() {
+        clock.setVisible(frame.getMaximized());
         if (frame.getMaximized()) {
             btnMaximize.setToolTipText("Restore Down");
         }
