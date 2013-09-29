@@ -1,0 +1,8 @@
+Name:Pulse of Llanowar
+ManaCost:3 G
+Types:Enchantment
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land.Basic+YouCtrl | ManaReplacement$ ProduceAny | Description$ If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type.
+SVar:ProduceAny:Colorless->Any & R->Any & B->Any & U->Any & G->Any & W->Any
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_of_llanowar.jpg
+Oracle:If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type.
