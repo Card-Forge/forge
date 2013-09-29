@@ -1791,6 +1791,7 @@ res/cardsfolder/c/chaos_charm.txt svneol=native#text/plain
 res/cardsfolder/c/chaos_harlequin.txt -text
 res/cardsfolder/c/chaos_imps.txt -text
 res/cardsfolder/c/chaos_lord.txt -text
+res/cardsfolder/c/chaos_moon.txt -text
 res/cardsfolder/c/chaos_warp.txt svneol=native#text/plain
 res/cardsfolder/c/chaoslace.txt -text
 res/cardsfolder/c/chaosphere.txt svneol=native#text/plain
@@ -5561,6 +5562,7 @@ res/cardsfolder/i/infectious_host.txt svneol=native#text/plain
 res/cardsfolder/i/infectious_rage.txt -text
 res/cardsfolder/i/infernal_caretaker.txt svneol=native#text/plain
 res/cardsfolder/i/infernal_contract.txt svneol=native#text/plain
+res/cardsfolder/i/infernal_darkness.txt -text
 res/cardsfolder/i/infernal_genesis.txt svneol=native#text/plain
 res/cardsfolder/i/infernal_harvest.txt -text
 res/cardsfolder/i/infernal_kirin.txt svneol=native#text/plain
@@ -8096,6 +8098,7 @@ res/cardsfolder/p/palace_guard.txt -text
 res/cardsfolder/p/paladin_en_vec.txt svneol=native#text/plain
 res/cardsfolder/p/paladin_of_prahv.txt -text
 res/cardsfolder/p/pale_bears.txt svneol=native#text/plain
+res/cardsfolder/p/pale_moon.txt -text
 res/cardsfolder/p/pale_recluse.txt svneol=native#text/plain
 res/cardsfolder/p/pale_wayfarer.txt svneol=native#text/plain
 res/cardsfolder/p/paleoloth.txt svneol=native#text/plain
