@@ -11,6 +11,9 @@ Release Notes
 - Forge freezing during a match bug -
 A number of people have reported this bug and we now feel that it may have been fixed in this version. Please play test this version and let us know.
 
+- Skinned titlebar for main window -
+Titlebar is now skinned instead of displaying using standard OS window titlebar
+Maximizing window now displays full-screen
 
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6. Those who are using Mac OS should install the JDK version rather than the JRE version.

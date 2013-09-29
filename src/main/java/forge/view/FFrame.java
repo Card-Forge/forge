@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -50,6 +51,14 @@ public class FFrame extends JFrame {
         super.setTitle(title);
         if (this.titleBar != null) {
             this.titleBar.setTitle(title);
+        }
+    }
+    
+    @Override
+    public void setIconImage(Image image) {
+        super.setIconImage(image);
+        if (this.titleBar != null) {
+            this.titleBar.setIconImage(image);
         }
     }
     

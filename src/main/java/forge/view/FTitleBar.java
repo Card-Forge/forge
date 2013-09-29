@@ -4,12 +4,14 @@ import java.awt.BasicStroke;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.SpringLayout;
@@ -42,10 +44,11 @@ public class FTitleBar extends JMenuBar {
         setLayout(this.layout);
         FSkin.get(this).setBackground(backColor);
         setTitle(f.getTitle()); //set default title based on frame title
+        setIconImage(f.getIconImage()); //set default icon image based on frame icon image
         FSkin.get(lblTitle).setForeground(foreColor);
 
         add(lblTitle);
-        layout.putConstraint(SpringLayout.WEST, lblTitle, 3, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.WEST, lblTitle, 1, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, lblTitle, 2, SpringLayout.NORTH, this);
 
         add(btnClose);
@@ -77,6 +80,15 @@ public class FTitleBar extends JMenuBar {
 
     public void setTitle(String title) {
         this.lblTitle.setText(title);
+    }
+    
+    public void setIconImage(Image image) {
+        if (image != null) {
+            this.lblTitle.setIcon(new ImageIcon(image.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+        }
+        else {
+            this.lblTitle.setIcon(null);
+        }
     }
     
     public abstract class TitleBarButton extends JLabel implements ILocalRepaint {
