@@ -10,6 +10,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.KeyStroke;
 
 import forge.Singletons;
 import forge.control.FControl.Screens;
@@ -39,8 +40,8 @@ public final class LayoutMenu {
 
         JMenu menu = new JMenu("Layout");
         menu.setMnemonic(KeyEvent.VK_L);
+        menu.add(getMenu_ViewOptions());
         if (currentScreen != Screens.HOME_SCREEN) {
-            menu.add(getMenu_ViewOptions());
             menu.add(getMenu_FileOptions());
         }
         menu.add(getMenu_ThemeOptions());
@@ -54,7 +55,10 @@ public final class LayoutMenu {
 
     private static JMenu getMenu_ViewOptions() {
         JMenu menu = new JMenu("View");
-        menu.add(getMenuItem_ShowTabs());
+        menu.add(getMenuItem_ShowTitleBar());
+        if (currentScreen != Screens.HOME_SCREEN) {
+            menu.add(getMenuItem_ShowTabs());
+        }
         if (currentScreen == Screens.MATCH_SCREEN) {
             menu.add(getMenuItem_ShowBackgroundImage());
         }
@@ -134,6 +138,24 @@ public final class LayoutMenu {
             }
         };
     }
+
+    private static JMenuItem getMenuItem_ShowTitleBar() {
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Titlebar");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
+        menuItem.setState(Singletons.getView().getFrame().getShowTitleBar());
+        menuItem.addActionListener(getShowTitleBarAction(menuItem));
+        return menuItem;
+    }
+    private static ActionListener getShowTitleBarAction(final JCheckBoxMenuItem menuItem) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean showTitleBar = menuItem.getState();
+                Singletons.getView().getFrame().setShowTitleBar(showTitleBar);
+            }
+        };
+    }
+
     private static JMenuItem getMenuItem_SaveLayout() {
         JMenuItem menuItem = new JMenuItem("Save Current Layout");
         FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_SAVELAYOUT) : null));

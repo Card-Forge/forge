@@ -23,7 +23,7 @@ public class FFrame extends JFrame {
     private Point mouseDownLoc;
     private int resizeCursor;
     private FTitleBar titleBar;
-    private boolean maximized;
+    private boolean maximized, showTitleBar;
     private final JRootPane innerPane = new JRootPane();
 
     public FFrame() {
@@ -38,12 +38,25 @@ public class FFrame extends JFrame {
 
         // Title bar
         this.titleBar = new FTitleBar(this);
-        this.titleBar.setVisible(true);
+        this.setShowTitleBar(true); //show titlebar by default
         addMoveSupport();
     }
 
     public FTitleBar getTitleBar() {
         return this.titleBar;
+    }
+    
+    public boolean getShowTitleBar() {
+        return this.showTitleBar;
+    }
+    
+    public void setShowTitleBar(boolean showTitleBar0) {
+        if (this.showTitleBar == showTitleBar0) { return; }
+        this.showTitleBar = showTitleBar0;
+        this.titleBar.setVisible(showTitleBar0);
+        if (!showTitleBar0) {
+            this.setMaximized(true); //only support hidden titlebar if maximized
+        }
     }
     
     @Override
@@ -116,6 +129,9 @@ public class FFrame extends JFrame {
         if (getMinimized()) { return; } //skip remaining logic while minimized
 
         this.maximized = (state == Frame.MAXIMIZED_BOTH);
+        if (!this.maximized) {
+            this.setShowTitleBar(true); //only support hidden titlebar if maximized
+        }
         updateBorder();
         this.titleBar.handleMaximizedChanged(); //update icon and tooltip for maximize button
     }
