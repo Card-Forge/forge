@@ -2648,6 +2648,7 @@ res/cardsfolder/d/deep_sea_kraken.txt svneol=native#text/plain
 res/cardsfolder/d/deep_sea_serpent.txt svneol=native#text/plain
 res/cardsfolder/d/deep_slumber_titan.txt svneol=native#text/plain
 res/cardsfolder/d/deep_spawn.txt -text
+res/cardsfolder/d/deep_water.txt -text
 res/cardsfolder/d/deep_wood.txt -text
 res/cardsfolder/d/deepcavern_imp.txt -text
 res/cardsfolder/d/deepchannel_mentor.txt svneol=native#text/plain
@@ -7157,6 +7158,7 @@ res/cardsfolder/m/mirozel.txt svneol=native#text/plain
 res/cardsfolder/m/mirran_crusader.txt svneol=native#text/plain
 res/cardsfolder/m/mirran_mettle.txt svneol=native#text/plain
 res/cardsfolder/m/mirran_spy.txt svneol=native#text/plain
+res/cardsfolder/m/mirri.txt -text
 res/cardsfolder/m/mirri_cat_warrior.txt svneol=native#text/plain
 res/cardsfolder/m/mirri_the_cursed.txt svneol=native#text/plain
 res/cardsfolder/m/mirri_the_cursed_avatar.txt -text
