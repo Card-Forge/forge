@@ -37,6 +37,7 @@ import forge.properties.NewConstants;
 import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
+import forge.view.FFrame;
 import forge.view.FView;
 
 
@@ -75,10 +76,10 @@ public final class SLayoutIO {
     }
     
     private synchronized static void finishSaveWindowLayout() {
-        final JFrame window = FView.SINGLETON_INSTANCE.getFrame();
+        final FFrame window = FView.SINGLETON_INSTANCE.getFrame();
+        if (window.getMinimized()) { return; } //don't update saved layout if minimized
+        
         final int state = window.getExtendedState();
-        if (state == Frame.ICONIFIED) { return; } //don't update saved layout if minimized
-
         final Rectangle bounds = window.getBounds();
         final int x = bounds.x;
         final int y = bounds.y;

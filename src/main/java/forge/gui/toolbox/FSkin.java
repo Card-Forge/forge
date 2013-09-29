@@ -241,68 +241,42 @@ public enum FSkin {
         @SuppressWarnings("rawtypes")
         private static HashMap<JComponent, JComponentSkin> skins = new HashMap<JComponent, JComponentSkin>();
 
-        private class LineBorder {
-            private final SkinColor skinColor;
-            private final int thickness;
-            private final boolean rounded;
-
-            private LineBorder(SkinColor skinColor0, int thickness0, boolean rounded0) {
-                this.skinColor = skinColor0;
-                this.thickness = thickness0;
-                this.rounded = rounded0;
-            }
-            
-            private void apply() {
-                JComponentSkin.this.comp.setBorder(BorderFactory.createLineBorder(this.skinColor.color, this.thickness, this.rounded));
-            }
-        }
-        private LineBorder lineBorder;
-        
-        private class MatteBorder {
-            private final int top, left, bottom, right;
-            private final SkinColor skinColor;
-
-            private MatteBorder(int top0, int left0, int bottom0, int right0, SkinColor skinColor0) {
-                this.top = top0;
-                this.left = left0;
-                this.bottom = bottom0;
-                this.right = right0;
-                this.skinColor = skinColor0;
-            }
-
-            private void apply() {
-                JComponentSkin.this.comp.setBorder(BorderFactory.createMatteBorder(this.top, this.left, this.bottom, this.right, this.skinColor.color));
-            }
-        }
-        private MatteBorder matteBorder;
+        private SkinBorder border;
         
         private JComponentSkin(T comp0) {
             super(comp0);
         }
         
+        public void setBorder(SkinBorder border0) {
+            this.border = border0;
+            this.comp.setBorder(this.border.createBorder());
+        }
+        
+        public void setBorder(Border border0) {
+            this.border = null; //ensure this field is reset when static border set
+            this.comp.setBorder(border0);
+        }
+        
+        public void removeBorder() {
+            this.border = null;
+            this.comp.setBorder(null);
+        }
+        
         public void setLineBorder(SkinColor skinColor) {
-            setLineBorder(skinColor, 1, false);
+            setBorder(new LineSkinBorder(skinColor));
         }
         public void setLineBorder(SkinColor skinColor, int thickness) {
-            setLineBorder(skinColor, thickness, false);
-        }
-        public void setLineBorder(SkinColor skinColor, int thickness, boolean rounded) {
-            this.lineBorder = new LineBorder(skinColor, thickness, rounded);
-            this.lineBorder.apply();
+            setBorder(new LineSkinBorder(skinColor, thickness));
         }
         
         public void setMatteBorder(int top, int left, int bottom, int right, SkinColor skinColor) {
-            this.matteBorder = new MatteBorder(top, left, bottom, right, skinColor);
-            this.matteBorder.apply();
+            setBorder(new MatteSkinBorder(top, left, bottom, right, skinColor));
         }
         
         @Override
         protected void reapply() {
-            if (this.lineBorder != null) {
-                this.lineBorder.apply();
-            }
-            if (this.matteBorder != null) {
-                this.matteBorder.apply();
+            if (this.border != null) {
+                this.comp.setBorder(this.border.createBorder());
             }
             super.reapply();
         }
@@ -712,6 +686,74 @@ public enum FSkin {
             if (this.alpha != NO_ALPHA) {
                 this.color = FSkin.alphaColor(this.color, this.alpha);
             }
+        }
+    }
+    
+    public static abstract class SkinBorder {
+        protected abstract Border createBorder();
+    }
+    public static class LineSkinBorder extends SkinBorder {
+        private final SkinColor skinColor;
+        private final int thickness;
+
+        public LineSkinBorder(SkinColor skinColor0) {
+            this(skinColor0, 1);
+        }
+        public LineSkinBorder(SkinColor skinColor0, int thickness0) {
+            this.skinColor = skinColor0;
+            this.thickness = thickness0;
+        }
+        
+        @Override
+        protected Border createBorder() {
+            return BorderFactory.createLineBorder(this.skinColor.color, this.thickness);
+        }
+    }
+    public static class MatteSkinBorder extends SkinBorder {
+        private final int top, left, bottom, right;
+        private final SkinColor skinColor;
+
+        public MatteSkinBorder(int top0, int left0, int bottom0, int right0, SkinColor skinColor0) {
+            this.top = top0;
+            this.left = left0;
+            this.bottom = bottom0;
+            this.right = right0;
+            this.skinColor = skinColor0;
+        }
+
+        @Override
+        protected Border createBorder() {
+            return BorderFactory.createMatteBorder(this.top, this.left, this.bottom, this.right, this.skinColor.color);
+        }
+    }
+    public static class CompoundSkinBorder extends SkinBorder {
+        private Border outsideBorder, insideBorder;
+        private SkinBorder outsideSkinBorder, insideSkinBorder;
+
+        public CompoundSkinBorder(SkinBorder outsideSkinBorder0, SkinBorder insideSkinBorder0) {
+            this.outsideSkinBorder = outsideSkinBorder0;
+            this.insideSkinBorder = insideSkinBorder0;
+        }
+        public CompoundSkinBorder(SkinBorder outsideSkinBorder0, Border insideBorder0) {
+            this.outsideSkinBorder = outsideSkinBorder0;
+            this.insideBorder = insideBorder0;
+        }
+        public CompoundSkinBorder(Border outsideBorder0, SkinBorder insideSkinBorder0) {
+            this.outsideBorder = outsideBorder0;
+            this.insideSkinBorder = insideSkinBorder0;
+        }
+
+        @Override
+        protected Border createBorder() {
+            Border outBorder = this.outsideBorder;
+            if (this.outsideSkinBorder != null) {
+                outBorder = this.outsideSkinBorder.createBorder();
+            }
+            Border inBorder = this.insideBorder;
+            if (this.insideSkinBorder != null) {
+                inBorder = this.insideSkinBorder.createBorder();
+            }
+            return BorderFactory.createCompoundBorder(outBorder, inBorder);
         }
     }
 

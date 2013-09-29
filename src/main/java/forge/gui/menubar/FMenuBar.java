@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.Box;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,6 +14,7 @@ import forge.gui.menus.HelpMenu;
 import forge.gui.menus.LayoutMenu;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JLabelSkin;
+import forge.view.FFrame;
 
 @SuppressWarnings("serial")
 public class FMenuBar extends JMenuBar {
@@ -23,9 +23,9 @@ public class FMenuBar extends JMenuBar {
     private JLabel lblStatus;
     private IMenuProvider provider;
 
-    public FMenuBar(JFrame f) {
-        f.setJMenuBar(this);
-        setPreferredSize(new Dimension(f.getWidth(), 26));
+    public FMenuBar(FFrame f) {
+        f.getInnerPane().setJMenuBar(this);
+        setPreferredSize(new Dimension(f.getWidth(), 22));
         refresh();
         setStatusText(""); //set default status text
     }

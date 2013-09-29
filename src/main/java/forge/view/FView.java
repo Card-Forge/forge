@@ -16,7 +16,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -73,7 +72,7 @@ public enum FView {
     private ViewBazaarUI bazaar = null;
 
     // Top-level UI components; all have getters.
-    private final JFrame frmDocument = new JFrame();
+    private final FFrame frmDocument = new FFrame();
     // A layered pane is the frame's viewport, allowing overlay effects.
     private final DocumentPane lpnDocument = new DocumentPane();
     // The content panel is placed in the layered pane.
@@ -98,6 +97,7 @@ public enum FView {
         pnlInsets.setBorderToggle(false);
 
         // Frame styling
+        frmDocument.initialize();
         frmDocument.setMinimumSize(new Dimension(800, 600));
         frmDocument.setLocationRelativeTo(null);
         frmDocument.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -105,7 +105,7 @@ public enum FView {
         frmDocument.setTitle("Forge: " + BuildInfo.getVersionString());
 
         // Frame components
-        frmDocument.setContentPane(lpnDocument);
+        frmDocument.getInnerPane().setContentPane(lpnDocument);
         lpnDocument.add(pnlInsets, (Integer) 1);
         FAbsolutePositioner.SINGLETON_INSTANCE.initialize(lpnDocument, (Integer) 2);
         lpnDocument.add(pnlPreview, (Integer) 3);
@@ -295,7 +295,7 @@ public enum FView {
     }
 
     /** @return {@link javax.swing.JFrame} */
-    public JFrame getFrame() {
+    public FFrame getFrame() {
         return frmDocument;
     }
 

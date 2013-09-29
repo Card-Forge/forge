@@ -117,7 +117,7 @@ public final class SResizingUtil {
         final JPanel pnlContent = FView.SINGLETON_INSTANCE.getPnlContent();
         final JPanel pnlInsets = FView.SINGLETON_INSTANCE.getPnlInsets();
 
-        Rectangle mainBounds = FView.SINGLETON_INSTANCE.getFrame().getContentPane().getBounds();
+        Rectangle mainBounds = FView.SINGLETON_INSTANCE.getFrame().getInnerPane().getContentPane().getBounds();
         mainBounds.y = 0; // Play nicely with MenuBar if visible or not.
         FAbsolutePositioner.SINGLETON_INSTANCE.containerResized(mainBounds);
         FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
