@@ -8,6 +8,8 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.Card;
 import forge.CounterType;
 import forge.GameEntity;
@@ -163,5 +165,7 @@ public abstract class PlayerController {
     public abstract Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap);
 
     public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num);
+
+    public abstract String chooseSingleColor(ImmutableList<String> onlyColors);
 
 }

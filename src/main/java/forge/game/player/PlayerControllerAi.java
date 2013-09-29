@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.Card;
@@ -35,6 +36,7 @@ import forge.game.GameType;
 import forge.game.ai.AiController;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.AiBlockController;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.combat.Combat;
@@ -479,5 +481,10 @@ public class PlayerControllerAi extends PlayerController {
         List<CounterType> countersOnCard = new ArrayList<CounterType>();
         int random = MyRandom.getRandom().nextInt(countersOnCard.size());
         return new ImmutablePair<CounterType,String>(countersOnCard.get(random),"Remove");
+    }
+
+    @Override
+    public String chooseSingleColor(ImmutableList<String> names) {
+        return ComputerUtilCard.getMostProminentColor(player.getCardsIn(ZoneType.Hand));
     }
 }

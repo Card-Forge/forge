@@ -13,6 +13,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -776,5 +777,10 @@ public class PlayerControllerHuman extends PlayerController {
             chosen.add(a);
         }
         return chosen;
+    }
+
+    @Override
+    public String chooseSingleColor(ImmutableList<String> names) {
+        return GuiChoose.one("Choose a color:", names);
     }
 }

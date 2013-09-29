@@ -204,6 +204,7 @@ public class ReplacementHandler {
                 replacementEffect.setReplacingObjects(runParams, tailend);
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
+
         }
         else if (replacementEffect.getOverridingAbility() != null) {
             effectSA = replacementEffect.getOverridingAbility();
@@ -238,7 +239,17 @@ public class ReplacementHandler {
         }
 
         Player player = replacementEffect.getHostCard().getController();
-        player.getController().playSpellAbilityNoStack(effectSA, true);
+
+        if (mapParams.containsKey("ManaReplacement")) {
+            final SpellAbility manaAb = (SpellAbility) runParams.get("AbilityMana");
+            final Player player1 = (Player) runParams.get("Player");
+            final String rep = (String) runParams.get("Mana");
+            // Replaced mana type
+            manaAb.getManaPart().setManaReplaceType(replacementEffect.getHostCard().getSVar(mapParams.get("ManaReplacement")));
+            manaAb.getManaPart().produceMana(rep, player1, manaAb);
+        } else {
+            player.getController().playSpellAbilityNoStack(effectSA, true);
+        }
 
         return ReplacementResult.Replaced;
     }

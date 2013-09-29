@@ -21,14 +21,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
+import forge.Constant;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
+import forge.card.replacement.ReplacementResult;
 import forge.card.trigger.TriggerType;
 import forge.game.GameType;
 import forge.game.player.Player;
@@ -51,10 +55,12 @@ public class AbilityManaPart implements java.io.Serializable {
     private final String cannotCounterSpell;
     private final String addsKeywords;
     private final boolean persistentMana;
+    private String manaReplaceType;
     
     private transient ArrayList<Mana> lastManaProduced = new ArrayList<Mana>();
 
     private final transient Card sourceCard;
+
 
     // Spells paid with this mana spell can't be countered.
 
@@ -82,6 +88,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsKeywords = params.get("AddsKeywords");
         this.persistentMana = (null == params.get("PersistentMana")) ? false :
             "True".equalsIgnoreCase(params.get("PersistentMana"));
+        this.manaReplaceType = params.containsKey("ManaReplaceType") ? params.get("ManaReplaceType") : "";
     }
 
     /**
@@ -108,32 +115,38 @@ public class AbilityManaPart implements java.io.Serializable {
     public final void produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
+        String afterReplace = applyManaReplacement(sa, produced);
+        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        repParams.put("Event", "ProduceMana");
+        repParams.put("Mana", afterReplace);
+        repParams.put("Affected", source);
+        repParams.put("Player", player);
+        repParams.put("AbilityMana", sa);
+        if (player.getGame().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+            return;
+        }
         ColorSet CID = null;
-        
-        if(player.getGame().getType() == GameType.Commander)
-        {
+
+        if (player.getGame().getType() == GameType.Commander) {
             CID = player.getCommander().getRules().getColorIdentity();
         }
-
         //clear lastProduced
         this.lastManaProduced.clear();
 
         // loop over mana produced string
-        for (final String c : produced.split(" ")) {
-            if(StringUtils.isNumeric(c)) 
-                for(int i = Integer.parseInt(c); i > 0; i--) {
+        for (final String c : afterReplace.split(" ")) {
+            if (StringUtils.isNumeric(c)) {
+                for (int i = Integer.parseInt(c); i > 0; i--) {
                     this.lastManaProduced.add(new Mana(MagicColor.COLORLESS, source, this));
                 }
-            else
-            {
+            } else {
                 byte attemptedMana = MagicColor.fromName(c);
-                if(CID != null)
-                {
-                    if(!CID.hasAnyColor(attemptedMana)) {
+                if (CID != null) {
+                    if (!CID.hasAnyColor(attemptedMana)) {
                         attemptedMana = MagicColor.COLORLESS;
                     }
                 }
-                
+
                 this.lastManaProduced.add(new Mana(attemptedMana, source, this));
             }
         }
@@ -147,9 +160,10 @@ public class AbilityManaPart implements java.io.Serializable {
         runParams.put("Card", source);
         runParams.put("Player", player);
         runParams.put("AbilityMana", sa);
-        runParams.put("Produced", produced);
+        runParams.put("Produced", afterReplace);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
-
+        // Clear Mana replacement
+        this.manaReplaceType = "";
     } // end produceMana(String)
 
     /**
@@ -477,6 +491,67 @@ public class AbilityManaPart implements java.io.Serializable {
         return this.persistentMana;
     }
 
+    /**
+     * @return the manaReplaceType
+     */
+    public String getManaReplaceType() {
+        return manaReplaceType;
+    }
+
+    /**
+     * setManaReplaceType.
+     */
+    public void setManaReplaceType(final String type) {
+        this.manaReplaceType = type;
+    }
+    /**
+     * <p>
+     * applyManaReplacement.
+     * </p>
+     * @return a String
+     */
+    public static String applyManaReplacement(final SpellAbility sa, final String original) {
+        final HashMap<String, String> repMap = new HashMap<String, String>();
+        final Player act = sa.getActivatingPlayer();
+        final String manaReplace = sa.getManaPart().getManaReplaceType();
+        if (manaReplace.isEmpty()) {
+            return original;
+        }
+        if (manaReplace.startsWith("Any")) {
+            // Replace any type and amount
+            return manaReplace.split("->")[1];
+        }
+        final Pattern splitter = Pattern.compile("->");
+        // Replace any type
+        for (String part : manaReplace.split(" & ")) {
+            final String[] v = splitter.split(part, 2);
+            if (v[0].equals("Colorless")) {
+                repMap.put("[0-9][0-9]?", v.length > 1 ? v[1].trim() : "");
+            } else {
+                repMap.put(v[0], v.length > 1 ? v[1].trim() : "");
+            }
+        }
+        // Handle different replacement simultaneously
+        Pattern pattern = Pattern.compile(StringUtils.join(repMap.keySet().iterator(), "|"));
+        Matcher m = pattern.matcher(original);
+        StringBuffer sb = new StringBuffer();
+        while(m.find()) {
+            if (m.group().matches("[0-9][0-9]?")) {
+                final String rep = StringUtils.repeat(repMap.get("[0-9][0-9]?") + " ", 
+                        Integer.parseInt(m.group())).trim();
+                m.appendReplacement(sb, rep);
+            } else {
+                m.appendReplacement(sb, repMap.get(m.group()));
+            }
+        }
+        m.appendTail(sb);
+        String replaced = sb.toString();
+        while (replaced.contains("Any")) {
+            String rs = act.getController().chooseSingleColor(Constant.Color.ONLY_COLORS);
+            replaced = replaced.replaceFirst("Any", MagicColor.toShortString(rs));
+        }
+        return replaced;
+    }
 
 } // end class AbilityMana
 

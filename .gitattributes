@@ -6769,6 +6769,7 @@ res/cardsfolder/m/mana_leech.txt svneol=native#text/plain
 res/cardsfolder/m/mana_matrix.txt svneol=native#text/plain
 res/cardsfolder/m/mana_maze.txt -text
 res/cardsfolder/m/mana_prism.txt svneol=native#text/plain
+res/cardsfolder/m/mana_reflection.txt -text
 res/cardsfolder/m/mana_seism.txt -text
 res/cardsfolder/m/mana_severance.txt svneol=native#text/plain
 res/cardsfolder/m/mana_short.txt svneol=native#text/plain
@@ -14794,6 +14795,7 @@ src/main/java/forge/card/replacement/ReplaceDraw.java -text
 src/main/java/forge/card/replacement/ReplaceGainLife.java -text
 src/main/java/forge/card/replacement/ReplaceGameLoss.java -text
 src/main/java/forge/card/replacement/ReplaceMoved.java -text
+src/main/java/forge/card/replacement/ReplaceProduceMana.java -text
 src/main/java/forge/card/replacement/ReplaceSetInMotion.java -text
 src/main/java/forge/card/replacement/ReplaceTurnFaceUp.java -text
 src/main/java/forge/card/replacement/ReplaceUntap.java -text
