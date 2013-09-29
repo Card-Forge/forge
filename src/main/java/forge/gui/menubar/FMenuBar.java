@@ -18,14 +18,16 @@ import forge.view.FFrame;
 
 @SuppressWarnings("serial")
 public class FMenuBar extends JMenuBar {
-
+    private final FFrame frame;
     private String statusText;
     private JLabel lblStatus;
     private IMenuProvider provider;
 
     public FMenuBar(FFrame f) {
+        this.frame = f;
+        setVisible(false); //hide by default until prefs decide whether to show it
+        super.setVisible(true); //ensure super is visible since setVisible overriden to only set height to 0 to hide
         f.getInnerPane().setJMenuBar(this);
-        setPreferredSize(new Dimension(f.getWidth(), 22));
         refresh();
         setStatusText(""); //set default status text
     }
@@ -96,4 +98,13 @@ public class FMenuBar extends JMenuBar {
         }
     }
 
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#setVisible(boolean)
+     */
+    @Override
+    public void setVisible(boolean visible) {
+        //use height 0 to hide rather than setting visible to false to allow menu item accelerators to work
+        setPreferredSize(new Dimension(this.frame.getWidth(), visible ? 22 : 0));
+        revalidate();
+    }
 }
