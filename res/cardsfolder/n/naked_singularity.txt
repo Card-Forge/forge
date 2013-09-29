@@ -1,0 +1,19 @@
+Name:Naked Singularity
+ManaCost:5
+Types:Artifact
+Text:If tapped for mana, Plains produce R, Islands produce G, Swamps produce W, Mountains produce U, and Forests produce B instead of any other type.
+K:Cumulative upkeep:3
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Plains | ManaReplacement$ ProduceR | Secondary$ True | Description$ If tapped for mana, Plains produce R.
+SVar:ProduceR:Colorless->R & B->R & U->R & G->R & W->R
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Island | ManaReplacement$ ProduceG | Secondary$ True | Description$ If tapped for mana, Islands produce G.
+SVar:ProduceG:Colorless->G & B->G & U->G & R->G & W->G
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Swamp | ManaReplacement$ ProduceW | Secondary$ True | Description$ If tapped for mana, Swamps produce W.
+SVar:ProduceW:Colorless->W & B->W & U->W & R->W & G->W
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Mountain | ManaReplacement$ ProduceU | Secondary$ True | Description$ If tapped for mana, Mountains produce U.
+SVar:ProduceU:Colorless->U & B->U & G->U & R->U & W->U
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Forest | ManaReplacement$ ProduceB | Secondary$ True | Description$ If tapped for mana, Forests produce B.
+SVar:ProduceB:Colorless->B & G->B & U->B & R->B & W->B
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/naked_singularity.jpg
+Oracle:Cumulative upkeep {3} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nIf tapped for mana, Plains produce {R}, Islands produce {G}, Swamps produce {W}, Mountains produce {U}, and Forests produce {B} instead of any other type.

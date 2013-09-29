@@ -349,7 +349,7 @@ public class AiController {
                         
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
                             AbilityManaPart mp = m.getManaPart();
-                            if (mp.canProduce(MagicColor.toShortString(color))) {
+                            if (mp.canProduce(MagicColor.toShortString(color), m)) {
                                 return land;
                             }
                         }

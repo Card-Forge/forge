@@ -3,6 +3,7 @@ package forge.game.ai;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +29,13 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaPool;
+import forge.card.replacement.ReplacementEffect;
+import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -110,10 +114,12 @@ public class ComputerUtilMana {
             return false;
         }
         
+        if ( DEBUG_MANA_PAYMENT ) {
+            System.out.println("DEBUG_MANA_PAYMENT: manaAbilityMap = " + manaAbilityMap);
+        }
+        
         // select which abilities may be used for each shard
         MapOfLists<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
-        
-        // Loop over mana needed
         
         if ( DEBUG_MANA_PAYMENT ) {
             System.out.println((test ? "test -- " : "PROD -- ") + FThreads.debugGetStackTraceItem(5, true));
@@ -129,6 +135,7 @@ public class ComputerUtilMana {
 
         String originalCost = cost.toString(false);
         ManaCostShard toPay = null;
+        // Loop over mana needed
         while (!cost.isPaid()) {
             toPay = getNextShardToPay(cost, sourcesForShards);
 
@@ -167,6 +174,7 @@ public class ComputerUtilMana {
 
             if ( test ) {
                 String manaProduced = toPay.isSnow() ? "S" : GameActionUtil.generatedMana(saPayment);
+                manaProduced = AbilityManaPart.applyManaReplacement(saPayment, manaProduced);
                 //System.out.println(manaProduced);
                 /* String remainder = */ cost.payMultipleMana(manaProduced);
                 // add it to mana pool?
@@ -356,7 +364,7 @@ public class ComputerUtilMana {
                     choice = abMana.getExpressChoice();
                     abMana.clearExpressChoice();
                     byte colorMask = MagicColor.fromName(choice);
-                    if (abMana.canProduce(choice) && testCost.isAnyPartPayableWith(colorMask)) {
+                    if (abMana.canProduce(choice, manaAb) && testCost.isAnyPartPayableWith(colorMask)) {
                         choiceString.append(choice);
                         testCost.payMultipleMana(choice);
                         continue;
@@ -625,6 +633,7 @@ public class ComputerUtilMana {
     //This method is currently used by AI to estimate mana available
     private static MapOfLists<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
         final MapOfLists<Integer, SpellAbility> manaMap = new TreeMapOfLists<Integer, SpellAbility>(CollectionSuppliers.<SpellAbility>arrayLists());
+        final Game game = ai.getGame();
 
         // Loop over all current available mana sources
         for (final Card sourceCard : getAvailableMana(ai, checkPlayable)) {
@@ -644,22 +653,43 @@ public class ComputerUtilMana {
                 
                 manaMap.add(ManaAtom.COLORLESS, m); // add to colorless source list
                 AbilityManaPart mp = m.getManaPart();
+                
+                
+                final HashMap<String, Object> repParams = new HashMap<String, Object>();
+                repParams.put("Event", "ProduceMana");
+                repParams.put("Mana", mp.getOrigProduced());
+                repParams.put("Affected", sourceCard);
+                repParams.put("Player", ai);
+                repParams.put("AbilityMana", m);
+                
+                for (final Player p : game.getPlayers()) {
+                    for (final Card crd : p.getAllCards()) {
+                        for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
+                            if (replacementEffect.requirementsCheck(game)
+                                    && replacementEffect.canReplace(repParams)
+                                    && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
+                                mp.setManaReplaceType(crd.getSVar(replacementEffect.getMapParams().get("ManaReplacement")));
+                            }
+                        }
+                    }
+                }
+
 
                 Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                 // find possible colors
-                if (mp.canProduce("W") || reflectedColors.contains(Constant.Color.WHITE)) {
+                if (mp.canProduce("W", m) || reflectedColors.contains(Constant.Color.WHITE)) {
                     manaMap.add(ManaAtom.WHITE, m);
                 }
-                if (mp.canProduce("U") || reflectedColors.contains(Constant.Color.BLUE)) {
+                if (mp.canProduce("U", m) || reflectedColors.contains(Constant.Color.BLUE)) {
                     manaMap.add(ManaAtom.BLUE, m);
                 }
-                if (mp.canProduce("B") || reflectedColors.contains(Constant.Color.BLACK)) {
+                if (mp.canProduce("B", m) || reflectedColors.contains(Constant.Color.BLACK)) {
                     manaMap.add(ManaAtom.BLACK, m);
                 }
-                if (mp.canProduce("R") || reflectedColors.contains(Constant.Color.RED)) {
+                if (mp.canProduce("R", m) || reflectedColors.contains(Constant.Color.RED)) {
                     manaMap.add(ManaAtom.RED, m);
                 }
-                if (mp.canProduce("G") || reflectedColors.contains(Constant.Color.GREEN)) {
+                if (mp.canProduce("G", m) || reflectedColors.contains(Constant.Color.GREEN)) {
                     manaMap.add(ManaAtom.GREEN, m);
                 }
                 if (mp.isSnow()) {

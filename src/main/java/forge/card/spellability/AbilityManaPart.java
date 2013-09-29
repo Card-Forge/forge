@@ -378,6 +378,19 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a boolean.
      */
     public final boolean canProduce(final String s) {
+        return canProduce(s, null);
+    }
+    
+    /**
+     * <p>
+     * canProduce.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    public final boolean canProduce(final String s, final SpellAbility sa) {
         if (isAnyMana()) {
             return true;
         }
@@ -387,6 +400,9 @@ public class AbilityManaPart implements java.io.Serializable {
             if ( !chosenCol.isEmpty() && MagicColor.toShortString(chosenCol.get(0)).contains(s)) {
                 return true;
             }
+        }
+        if (sa != null) {
+            return applyManaReplacement(sa, this.getOrigProduced()).contains(s);
         }
         return this.getOrigProduced().contains(s);
     }
@@ -547,7 +563,10 @@ public class AbilityManaPart implements java.io.Serializable {
         m.appendTail(sb);
         String replaced = sb.toString();
         while (replaced.contains("Any")) {
-            String rs = act.getController().chooseSingleColor(Constant.Color.ONLY_COLORS);
+            String rs = Constant.Color.GREEN;
+            if (act != null) {
+                rs = act.getController().chooseSingleColor(Constant.Color.ONLY_COLORS);
+            }
             replaced = replaced.replaceFirst("Any", MagicColor.toShortString(rs));
         }
         return replaced;
