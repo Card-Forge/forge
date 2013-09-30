@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gauntlet.GauntletIO;
+import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -23,7 +24,6 @@ import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
-import forge.gui.toolbox.special.FDeckChooser;
 
 /** 
  * Assembles Swing components of "build gauntlet" submenu singleton.

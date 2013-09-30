@@ -15066,6 +15066,7 @@ src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/SOverlayUtils.java -text
 src/main/java/forge/gui/UnsortedListModel.java -text
 src/main/java/forge/gui/WrapLayout.java -text
+src/main/java/forge/gui/deckchooser/FDeckChooser.java -text
 src/main/java/forge/gui/deckeditor/CDeckEditorUI.java -text
 src/main/java/forge/gui/deckeditor/DeckImport.java -text
 src/main/java/forge/gui/deckeditor/SEditorIO.java -text
@@ -15322,7 +15323,6 @@ src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/special/CardViewer.java -text
 src/main/java/forge/gui/toolbox/special/CardZoomer.java -text
 src/main/java/forge/gui/toolbox/special/DeckLister.java -text
-src/main/java/forge/gui/toolbox/special/FDeckChooser.java -text
 src/main/java/forge/gui/toolbox/special/PhaseIndicator.java -text
 src/main/java/forge/gui/toolbox/special/PhaseLabel.java -text
 src/main/java/forge/gui/toolbox/special/PlayerDetailsPanel.java -text

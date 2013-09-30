@@ -11,6 +11,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -23,7 +24,6 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JComponentSkin;
-import forge.gui.toolbox.special.FDeckChooser;
 
 /** 
  * Assembles Swing components of "quick gauntlet" submenu singleton.

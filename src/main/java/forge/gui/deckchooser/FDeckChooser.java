@@ -1,4 +1,4 @@
-package forge.gui.toolbox.special;
+package forge.gui.deckchooser;
 
 import java.awt.Font;
 import java.awt.event.ItemEvent;

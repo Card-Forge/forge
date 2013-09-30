@@ -15,6 +15,7 @@ import javax.swing.ScrollPaneConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.deck.Deck;
+import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -31,7 +32,6 @@ import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTabbedPane;
-import forge.gui.toolbox.special.FDeckChooser;
 
 /** 
  * Assembles Swing components of constructed submenu singleton.
