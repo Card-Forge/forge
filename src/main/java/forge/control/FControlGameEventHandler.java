@@ -293,9 +293,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
         // Update all attackers. 
         // Although they might have been updated when they were apped, there could be someone with vigilance, not redrawn yet.
-        for(Collection<Card> cc : event.attackersMap.values()) {
-            updateManyCards(cc);
-        }
+        updateManyCards(event.attackersMap.values());
+
         return super.visit(event);
     }
     

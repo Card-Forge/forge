@@ -24,6 +24,9 @@ import java.util.Map;
 import java.util.Stack;
 import org.apache.commons.lang.time.StopWatch;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
@@ -501,8 +504,9 @@ public class PhaseHandler implements java.io.Serializable {
         this.nCombatsThisTurn++;
 
         // Prepare and fire event 'attackers declared'
-        MapOfLists<GameEntity, Card> attackersMap = new HashMapOfLists<GameEntity, Card>(CollectionSuppliers.<Card>arrayLists());
-        for(GameEntity ge : combat.getDefenders()) attackersMap.addAll(ge, combat.getAttackersOf(ge));
+        Multimap<GameEntity, Card> attackersMap = ArrayListMultimap.create();
+        for(GameEntity ge : combat.getDefenders()) 
+            attackersMap.putAll(ge, combat.getAttackersOf(ge));
         game.fireEvent(new GameEventAttackersDeclared(playerTurn, attackersMap));
 
         // This Exalted handler should be converted to script

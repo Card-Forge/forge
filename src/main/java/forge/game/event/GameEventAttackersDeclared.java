@@ -1,9 +1,10 @@
 package forge.game.event;
 
+import com.google.common.collect.Multimap;
+
 import forge.Card;
 import forge.GameEntity;
 import forge.game.player.Player;
-import forge.util.maps.MapOfLists;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -12,9 +13,9 @@ import forge.util.maps.MapOfLists;
 public class GameEventAttackersDeclared extends GameEvent {
 
     public final Player player;
-    public final MapOfLists<GameEntity, Card> attackersMap;
+    public final Multimap<GameEntity, Card> attackersMap;
     
-    public GameEventAttackersDeclared(Player playerTurn, MapOfLists<GameEntity, Card> attackersMap) {
+    public GameEventAttackersDeclared(Player playerTurn, Multimap<GameEntity, Card> attackersMap) {
         this.player = playerTurn;
         this.attackersMap = attackersMap;
     }

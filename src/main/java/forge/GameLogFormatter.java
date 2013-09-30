@@ -182,14 +182,15 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         // Append Defending Player/Planeswalker
 
         // Not a big fan of the triple nested loop here
-        for (Entry<GameEntity, Collection<Card>> kv : ev.attackersMap.entrySet()) {
-            Collection<Card> attackers = kv.getValue();
+        for (GameEntity k : ev.attackersMap.keySet()) {
+            
+            Collection<Card> attackers = ev.attackersMap.get(k);
             if (attackers == null || attackers.isEmpty()) {
                 continue;
             }
             if ( sb.length() > 0 ) sb.append("\n");
             sb.append(ev.player + " assigned " + Lang.joinHomogenous(attackers));
-            sb.append(" to attack " + kv.getKey() + ".");
+            sb.append(" to attack " + k + ".");
         }
         if ( sb.length() == 0 ) 
             sb.append(ev.player + " didn't attack this turn.");
