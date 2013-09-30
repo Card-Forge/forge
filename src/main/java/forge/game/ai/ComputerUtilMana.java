@@ -21,7 +21,6 @@ import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaAtom;
@@ -30,8 +29,6 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaPool;
 import forge.card.replacement.ReplacementEffect;
-import forge.card.replacement.ReplacementResult;
-import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -176,8 +173,7 @@ public class ComputerUtilMana {
                 String manaProduced = toPay.isSnow() ? "S" : GameActionUtil.generatedMana(saPayment);
                 manaProduced = AbilityManaPart.applyManaReplacement(saPayment, manaProduced);
                 //System.out.println(manaProduced);
-                /* String remainder = */ cost.payMultipleMana(manaProduced);
-                // add it to mana pool?
+                cost.payMultipleMana(manaProduced);
                 
                 // remove from available lists
                 for(Collection<SpellAbility> kv : sourcesForShards.values()) {
@@ -212,7 +208,9 @@ public class ComputerUtilMana {
         handleOfferingsAI(sa, test, cost.isPaid());
 
         if( DEBUG_MANA_PAYMENT )
-            System.err.printf("%s > [%s] payment has %s (%s +%d) for (%s) %s:%n\t%s%n%n", FThreads.debugGetCurrThreadId(), test ? "test" : "PROD", cost.isPaid() ? "*PAID*" : "failed", originalCost, extraMana, sa.getSourceCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t") );
+            System.err.printf("%s > [%s] payment has %s (%s +%d) for (%s) %s:%n\t%s%n%n",
+                    FThreads.debugGetCurrThreadId(), test ? "test" : "PROD", cost.isPaid() ? "*PAID*" : "failed", originalCost,
+                            extraMana, sa.getSourceCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t") );
         
         if(!cost.isPaid()) {
             if( test )
@@ -220,12 +218,10 @@ public class ComputerUtilMana {
             else 
                 System.out.println("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName() + ". Didn't find what to pay for " + toPay);
                 return false;
-                
         }
-                
-        
-        // if (sa instanceof Spell_Permanent) // should probably add this
+
         sa.getSourceCard().setColorsPaid(cost.getColorsPaid());
+        // if (sa instanceof Spell_Permanent) // should probably add this
         sa.getSourceCard().setSunburstValue(cost.getSunburst());
         return true;
     } // payManaCost()
@@ -410,23 +406,6 @@ public class ComputerUtilMana {
 
         abMana.setExpressChoice(choiceString.toString());
     }
-
-
-    // TODO: this code is disconnected now, it was moved here from MagicStack, where X cost is not processed any more
-    public static void computerPayX(final SpellAbility sa, Player player, int xCost) {
-        final int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
-        final Ability ability = new Ability(sa.getSourceCard(), ManaCost.get(xCost)) {
-            @Override
-            public void resolve() {
-                sa.getSourceCard().addXManaCostPaid(1);
-            }
-        };
-        
-        while (ComputerUtilCost.canPayCost(ability, player) && (neededDamage != sa.getSourceCard().getXManaCostPaid())) {
-            ComputerUtil.playNoStack(player, ability, player.getGame());
-        }
-
-    }
     
     /**
      * Find all mana sources.
@@ -437,7 +416,8 @@ public class ComputerUtilMana {
      * @param foundAllSources
      * @return Were all mana sources found?
      */
-    private static MapOfLists<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final MapOfLists<Integer, SpellAbility> manaAbilityMap, final ManaCostBeingPaid cost) {
+    private static MapOfLists<ManaCostShard, SpellAbility> groupAndOrderToPayShards(final Player ai, final MapOfLists<Integer, SpellAbility> manaAbilityMap,
+            final ManaCostBeingPaid cost) {
         MapOfLists<ManaCostShard, SpellAbility> res = new EnumMapOfLists<ManaCostShard, SpellAbility>(ManaCostShard.class, CollectionSuppliers.<SpellAbility>arrayLists());
 
         // loop over cost parts
@@ -654,7 +634,7 @@ public class ComputerUtilMana {
                 manaMap.add(ManaAtom.COLORLESS, m); // add to colorless source list
                 AbilityManaPart mp = m.getManaPart();
                 
-                
+                // setup produce mana replacement effects
                 final HashMap<String, Object> repParams = new HashMap<String, Object>();
                 repParams.put("Event", "ProduceMana");
                 repParams.put("Mana", mp.getOrigProduced());
@@ -667,13 +647,13 @@ public class ComputerUtilMana {
                         for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                             if (replacementEffect.requirementsCheck(game)
                                     && replacementEffect.canReplace(repParams)
+                                    && replacementEffect.getMapParams().containsKey("ManaReplacement")
                                     && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
                                 mp.setManaReplaceType(crd.getSVar(replacementEffect.getMapParams().get("ManaReplacement")));
                             }
                         }
                     }
                 }
-
 
                 Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                 // find possible colors
