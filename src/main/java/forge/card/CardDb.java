@@ -32,6 +32,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 
 import forge.Card;
 import forge.card.CardEdition.Type;
@@ -40,8 +42,6 @@ import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.maps.CollectionSuppliers;
-import forge.util.maps.MapOfLists;
-import forge.util.maps.TreeMapOfLists;
 
 public final class CardDb implements ICardDatabase {
     private static volatile CardDb commonCards = null; // 'volatile' keyword makes this working
@@ -77,7 +77,7 @@ public final class CardDb implements ICardDatabase {
     }
 
     // need this to obtain cardReference by name+set+artindex
-    private final MapOfLists<String, PaperCard> allCardsByName = new TreeMapOfLists<String, PaperCard>(String.CASE_INSENSITIVE_ORDER, CollectionSuppliers.<PaperCard>arrayLists());
+    private final Multimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.<PaperCard>arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = new TreeMap<String, PaperCard>(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     
@@ -133,14 +133,14 @@ public final class CardDb implements ICardDatabase {
     }
 
     private void addCard(PaperCard paperCard) {
-        allCardsByName.add(paperCard.name, paperCard);
+        allCardsByName.put(paperCard.name, paperCard);
     }
 
     private void reIndex() {
         uniqueCardsByName.clear();
         allCards.clear();
-        for(Entry<String, Collection<PaperCard>> kv : allCardsByName.entrySet()) {
-            uniqueCardsByName.put(kv.getKey(), Iterables.get(kv.getValue(), 0));
+        for(Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
+            uniqueCardsByName.put(kv.getKey(), Iterables.getFirst(kv.getValue(), null));
             allCards.addAll(kv.getValue());
         }
     }
