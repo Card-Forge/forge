@@ -82,13 +82,13 @@ public class FDeckChooser extends JPanel {
             updateTitle();
     }
     
-    private void updateTitle() {
-        String title = canChoosePlayerType ? String.format(titleTextTemplate, isAi ? "AI" : "player's" ) : titleTextTemplate;
-        titleLabel.setText(title);
-    }
-
     public FDeckChooser(String titleText, boolean forAi) {
         this(titleText, forAi, false);
+    }
+    private void updateTitle() {
+        String title = canChoosePlayerType ? String.format(titleTextTemplate, isAi ? "Computer" : "Human" ) : titleTextTemplate;
+        titleLabel.setText(title);
+
     }
 
     private void _listen(final JRadioButton btn, final Runnable onSelect) {
@@ -110,17 +110,11 @@ public class FDeckChooser extends JPanel {
         grpRadios.add(radThemes, strRadioConstraints);
 
         pnlRadios.setOpaque(false);
-        pnlRadios.add(titleLabel, canChoosePlayerType ? "split 2, sx 2, pushx, growx, h 28px!" : "sx 2");
+        pnlRadios.add(titleLabel, "w 10:100%, h 28px!, span 2");
         if(canChoosePlayerType) {
-            //titleLabel.setHoverable(true);
             titleLabel.setOpaque(true);
-            titleLabel.setSelected(true);
-            //titleLabel.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-            //titleLabel.setBorder(null);
-            pnlRadios.add(btnChange, "w 180px!, h 28px!, gap 10px 0 0 4px, ax right");
         }
         pnlRadios.add(grpRadios, "pushx, growx");
-        pnlRadios.add(btnRandom, "w 180px!, h 30px!, gap 10px 0 0 0, ax center, ay bottom");
         
         // Radio button event handling
         _listen(getRadColors(), new Runnable() { @Override public void run() { updateColors();      } });
@@ -313,10 +307,16 @@ public class FDeckChooser extends JPanel {
     }
 
     public void populate() {
-        this.setLayout(new MigLayout("insets 0, gap 0, flowy, ax right"));
-
-        this.add(pnlRadios, "w 100%!, gap 0 0 0 12px");
-        this.add(scrDecks, "w 100%!, growy, pushy");
-        this.add(lblDecklist, "w 100%!, h 20px!");
+        this.setLayout(new MigLayout("insets 0, gap 0, flowy"));
+        this.add(pnlRadios, "w 10:100%, gap 0 0 0 12px");
+        this.add(scrDecks, "w 10:100%, growy, pushy");
+        this.add(btnRandom, "w 10:100%, h 26px!, gap 0 0 2px 0");
+        this.add(lblDecklist, "w 10:100%, h 20px!");
     }
+
+    public void setIsAiDeck(boolean isAiDeck) {
+        this.isAi = isAiDeck;
+        updateTitle();
+    }
+
 }

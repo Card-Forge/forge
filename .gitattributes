@@ -15162,6 +15162,7 @@ src/main/java/forge/gui/home/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/sanctioned/CSubmenuConstructed.java -text
 src/main/java/forge/gui/home/sanctioned/CSubmenuDraft.java -text
 src/main/java/forge/gui/home/sanctioned/CSubmenuSealed.java -text
+src/main/java/forge/gui/home/sanctioned/ConstructedGameMenu.java -text
 src/main/java/forge/gui/home/sanctioned/VSubmenuConstructed.java -text
 src/main/java/forge/gui/home/sanctioned/VSubmenuDraft.java -text
 src/main/java/forge/gui/home/sanctioned/VSubmenuSealed.java -text
@@ -15264,6 +15265,7 @@ src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/FAbsolutePositioner.java -text
 src/main/java/forge/gui/toolbox/FButton.java -text
 src/main/java/forge/gui/toolbox/FCheckBox.java -text
+src/main/java/forge/gui/toolbox/FComboBox.java -text
 src/main/java/forge/gui/toolbox/FComboBoxPanel.java -text
 src/main/java/forge/gui/toolbox/FComboBoxWrapper.java -text
 src/main/java/forge/gui/toolbox/FDigitalClock.java -text

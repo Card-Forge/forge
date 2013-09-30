@@ -71,11 +71,11 @@ import forge.view.FView;
 public enum FSkin {
     /** Singleton instance of skin. */
     SINGLETON_INSTANCE;
-    
+
     public static class ComponentSkin<T extends Component> {
         @SuppressWarnings("rawtypes")
         private static HashMap<Component, ComponentSkin> skins = new HashMap<Component, ComponentSkin>();
-        
+
         @SuppressWarnings("rawtypes")
         private static void reapplyAll() {
             for (ComponentSkin compSkin : ComponentSkin.skins.values()) {
@@ -109,11 +109,11 @@ public enum FSkin {
         private SkinFont font;
         private SkinCursor cursor;
         protected boolean needRepaintOnReapply;
-        
+
         private ComponentSkin(T comp0) {
             this.comp = comp0;
         }
-        
+
         public SkinColor getForeground() {
             return this.foreground;
         }
@@ -126,7 +126,7 @@ public enum FSkin {
             this.foreground = null; //ensure this field is reset when static color set
             this.comp.setForeground(color);
         }
-        
+
         public SkinColor getBackground() {
             return this.background;
         }
@@ -148,7 +148,7 @@ public enum FSkin {
             this.font = null;  //ensure this field is reset when static font set
             this.comp.setFont(font);
         }
-        
+
         public void setCursor(SkinCursor skinCursor) {
             this.cursor = skinCursor;
             this.comp.setCursor(skinCursor != null ? skinCursor.cursor : null);
@@ -160,12 +160,12 @@ public enum FSkin {
         public void resetCursor() {
             this.cursor = null;
         }
-        
+
         public void setGraphicsColor(Graphics g, SkinColor skinColor) {
             this.needRepaintOnReapply = true;
             g.setColor(skinColor.color);
         }
-        
+
         public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, SkinColor skinColor2) {
             this.needRepaintOnReapply = true;
             g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, skinColor2.color));
@@ -178,7 +178,7 @@ public enum FSkin {
             this.needRepaintOnReapply = true;
             g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, color2));
         }
-        
+
         public void drawImage(Graphics g, SkinImage skinImage, int x, int y) {
             this.needRepaintOnReapply = true;
             g.drawImage(skinImage.image, x, y, null);
@@ -191,7 +191,7 @@ public enum FSkin {
             this.needRepaintOnReapply = true;
             g.drawImage(skinImage.image, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, null);
         }
-        
+
         protected void reapply() {
             if (this.foreground != null) {
                 comp.setForeground(this.foreground.color);
@@ -215,11 +215,11 @@ public enum FSkin {
         private static HashMap<JFrame, JFrameSkin> skins = new HashMap<JFrame, JFrameSkin>();
 
         private SkinImage iconImage;
-        
+
         private JFrameSkin(T comp0) {
             super(comp0);
         }
-        
+
         public void setIconImage(SkinImage skinImage) {
             this.iconImage = skinImage;
             this.comp.setIconImage(skinImage.image);
@@ -228,7 +228,7 @@ public enum FSkin {
             this.iconImage = null; //ensure this field is reset when static image set
             this.comp.setIconImage(image);
         }
-        
+
         @Override
         protected void reapply() {
             if (this.iconImage != null) {
@@ -242,37 +242,37 @@ public enum FSkin {
         private static HashMap<JComponent, JComponentSkin> skins = new HashMap<JComponent, JComponentSkin>();
 
         private SkinBorder border;
-        
+
         private JComponentSkin(T comp0) {
             super(comp0);
         }
-        
+
         public void setBorder(SkinBorder border0) {
             this.border = border0;
             this.comp.setBorder(this.border.createBorder());
         }
-        
+
         public void setBorder(Border border0) {
             this.border = null; //ensure this field is reset when static border set
             this.comp.setBorder(border0);
         }
-        
+
         public void removeBorder() {
             this.border = null;
             this.comp.setBorder(null);
         }
-        
+
         public void setLineBorder(SkinColor skinColor) {
             setBorder(new LineSkinBorder(skinColor));
         }
         public void setLineBorder(SkinColor skinColor, int thickness) {
             setBorder(new LineSkinBorder(skinColor, thickness));
         }
-        
+
         public void setMatteBorder(int top, int left, int bottom, int right, SkinColor skinColor) {
             setBorder(new MatteSkinBorder(top, left, bottom, right, skinColor));
         }
-        
+
         @Override
         protected void reapply() {
             if (this.border != null) {
@@ -286,11 +286,11 @@ public enum FSkin {
         private static HashMap<JLabel, JLabelSkin> skins = new HashMap<JLabel, JLabelSkin>();
 
         private SkinImage icon;
-        
+
         private JLabelSkin(T comp0) {
             super(comp0);
         }
-        
+
         public void setIcon(SkinImage skinImage) {
             this.icon = skinImage;
             this.comp.setIcon(skinImage != null ? skinImage.getIcon() : null);
@@ -299,7 +299,7 @@ public enum FSkin {
             this.icon = null; //ensure this field is reset when static icon set
             this.comp.setIcon(imageIcon);
         }
-        
+
         @Override
         protected void reapply() {
             if (this.icon != null) {
@@ -313,11 +313,11 @@ public enum FSkin {
         private static HashMap<AbstractButton, AbstractButtonSkin> skins = new HashMap<AbstractButton, AbstractButtonSkin>();
 
         private SkinImage icon, pressedIcon, rolloverIcon;
-        
+
         private AbstractButtonSkin(T comp0) {
             super(comp0);
         }
-        
+
         public void setIcon(SkinImage skinImage) {
             this.icon = skinImage;
             this.comp.setIcon(skinImage != null ? skinImage.getIcon() : null);
@@ -326,7 +326,7 @@ public enum FSkin {
             this.icon = null; //ensure this field is reset when static icon set
             this.comp.setIcon(imageIcon);
         }
-        
+
         public void setPressedIcon(SkinImage skinImage) {
             this.pressedIcon = skinImage;
             this.comp.setPressedIcon(skinImage != null ? skinImage.getIcon() : null);
@@ -335,7 +335,7 @@ public enum FSkin {
             this.pressedIcon = null; //ensure this field is reset when static icon set
             this.comp.setPressedIcon(imageIcon);
         }
-        
+
         public void setRolloverIcon(SkinImage skinImage) {
             this.rolloverIcon = skinImage;
             this.comp.setRolloverIcon(skinImage != null ? skinImage.getIcon() : null);
@@ -344,7 +344,7 @@ public enum FSkin {
             this.rolloverIcon = null; //ensure this field is reset when static icon set
             this.comp.setRolloverIcon(imageIcon);
         }
-        
+
         @Override
         protected void reapply() {
             if (this.icon != null) {
@@ -364,7 +364,7 @@ public enum FSkin {
         private static HashMap<JTextComponent, JTextComponentSkin> skins = new HashMap<JTextComponent, JTextComponentSkin>();
 
         private SkinColor caretColor;
-        
+
         private JTextComponentSkin(T comp0) {
             super(comp0);
         }
@@ -372,7 +372,7 @@ public enum FSkin {
         public SkinColor getCaretColor() {
             return this.caretColor;
         }
-        
+
         public void setCaretColor(SkinColor skinColor) {
             this.caretColor = skinColor;
             this.comp.setCaretColor(skinColor.color);
@@ -381,7 +381,7 @@ public enum FSkin {
             this.caretColor = null;  //ensure this field is reset when static color set
             this.comp.setCaretColor(color);
         }
-        
+
         @Override
         protected void reapply() {
             if (this.caretColor != null) {
@@ -395,7 +395,7 @@ public enum FSkin {
         private static HashMap<JTable, JTableSkin> skins = new HashMap<JTable, JTableSkin>();
 
         private SkinColor selectionForeground, selectionBackground;
-        
+
         private JTableSkin(T comp0) {
             super(comp0);
         }
@@ -412,7 +412,7 @@ public enum FSkin {
             this.selectionForeground = null; //ensure this field is reset when static color set
             this.comp.setSelectionForeground(color);
         }
-        
+
         public SkinColor getSelectionBackground() {
             return this.selectionBackground;
         }
@@ -425,7 +425,7 @@ public enum FSkin {
             this.selectionBackground = null;  //ensure this field is reset when static color set
             this.comp.setSelectionBackground(color);
         }
-        
+
         @Override
         protected void reapply() {
             if (this.selectionForeground != null) {
@@ -442,31 +442,31 @@ public enum FSkin {
         private static HashMap<FPanel, FPanelSkin> skins = new HashMap<FPanel, FPanelSkin>();
 
         private SkinImage foregroundImage, backgroundTexture;
-        
+
         private FPanelSkin(T comp0) {
             super(comp0);
         }
-        
+
         public void setForegroundImage(SkinImage skinIcon) {
-            this.comp.setForegroundImage(skinIcon.image); //must call this first since it will call resetForegroundImage 
+            this.comp.setForegroundImage(skinIcon.image); //must call this first since it will call resetForegroundImage
             this.foregroundImage = skinIcon;
             this.needRepaintOnReapply = true; //foreground image draw during paint
         }
-        
+
         public void resetForegroundImage() {
             this.foregroundImage = null;
         }
-        
+
         public void setBackgroundTexture(SkinImage skinIcon) {
-            this.comp.setBackgroundTexture(skinIcon.image); //must call this first since it will call resetBackgroundTexture 
+            this.comp.setBackgroundTexture(skinIcon.image); //must call this first since it will call resetBackgroundTexture
             this.backgroundTexture = skinIcon;
             this.needRepaintOnReapply = true; //background texture drawn during paint
         }
-        
+
         public void resetBackgroundTexture() {
             this.backgroundTexture = null;
         }
-        
+
         @Override
         protected void reapply() {
             if (this.foregroundImage != null) {
@@ -565,7 +565,7 @@ public enum FSkin {
         @Override
         public int[] getCoords() { return coords; }
     }
-    
+
     /**
      * Retrieves a color from this skin's color map.
      * 
@@ -575,7 +575,7 @@ public enum FSkin {
     public static SkinColor getColor(final Colors c0) {
         return SkinColor.baseColors.get(c0);
     }
-    
+
     /** Steps RGB components of a color up or down.
      * Returns opaque (non-alpha) stepped color.
      * Plus for lighter, minus for darker.
@@ -641,7 +641,7 @@ public enum FSkin {
             this.alpha = alpha0;
             this.updateColor();
         }
-        
+
         private SkinColor getDerivedColor(int brightnessDelta0, int step0, int alpha0) {
             String key = this.baseColor.name() + "|" + brightnessDelta0 + "|" + step0 + "|" + alpha0;
             SkinColor derivedColor = derivedColors.get(key);
@@ -651,23 +651,23 @@ public enum FSkin {
             }
             return derivedColor;
         }
-        
+
         public SkinColor brighter() {
             return getDerivedColor(this.brightnessDelta + 1, this.step, this.alpha);
         }
-        
+
         public SkinColor darker() {
             return getDerivedColor(this.brightnessDelta - 1, this.step, this.alpha);
         }
-        
+
         public SkinColor stepColor(int step0) {
             return getDerivedColor(this.brightnessDelta, step0, this.alpha);
         }
-        
+
         public SkinColor alphaColor(int alpha0) {
             return getDerivedColor(this.brightnessDelta, this.step, alpha0);
         }
-        
+
         private void updateColor() {
             this.color = this.baseColor.color;
             if (this.brightnessDelta != NO_BRIGHTNESS_DELTA) {
@@ -690,7 +690,7 @@ public enum FSkin {
             }
         }
     }
-    
+
     public static abstract class SkinBorder {
         protected abstract Border createBorder();
     }
@@ -705,7 +705,7 @@ public enum FSkin {
             this.skinColor = skinColor0;
             this.thickness = thickness0;
         }
-        
+
         @Override
         protected Border createBorder() {
             return BorderFactory.createLineBorder(this.skinColor.color, this.thickness);
@@ -780,11 +780,11 @@ public enum FSkin {
 
         /** @param xy &emsp; int[] coordinates */
         Colors(final int[] xy) { this.coords = xy; }
- 
+
         /** @return int[] */
         @Override
         public int[] getCoords() { return coords; }
-        
+
         public static void updateAll() {
             for (final Colors c : Colors.values()) {
                 c.updateColor();
@@ -803,7 +803,7 @@ public enum FSkin {
                 }
             }
         }
-        
+
         private void updateColor() {
             tempCoords = this.getCoords();
             x0 = tempCoords[0];
@@ -812,7 +812,7 @@ public enum FSkin {
             color = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x0, y0));
         }
     }
-    
+
     /**
      * Gets an image.
      *
@@ -843,10 +843,10 @@ public enum FSkin {
         h0 = (h0 < 1) ? 1 : h0;
         return getImage(s0).resize(w0, h0);
     }
-    
+
     public static class SkinImage {
         private static final Map<SkinProp, SkinImage> images = new HashMap<SkinProp, SkinImage>();
-        
+
         private static void setImage(final SkinProp s0, Image image0) {
             SkinImage skinImage = images.get(s0);
             if (skinImage == null) {
@@ -897,16 +897,16 @@ public enum FSkin {
                 setImage(s0, bi0);
             }
         }
-        
+
         protected Image image;
         protected ImageIcon imageIcon;
         protected HashMap<String, SkinImage> scaledImages;
         private HashMap<String, SkinCursor> cursors;
-        
+
         private SkinImage(Image image0) {
             this.image = image0;
         }
-        
+
         protected void changeImage(Image image0, ImageIcon imageIcon0) {
             this.image = image0;
             this.imageIcon = imageIcon0;
@@ -931,7 +931,7 @@ public enum FSkin {
             }
             return scaledImage;
         }
-        
+
         public SkinImage scale(double scale) {
             return scale(scale, scale);
         }
@@ -948,7 +948,7 @@ public enum FSkin {
             }
             return scaledImage;
         }
-        
+
         protected void updateScaledImages() {
             if (this.scaledImages == null) { return; }
 
@@ -978,7 +978,7 @@ public enum FSkin {
         private void createScaledImage(SkinImage baseImage, double scaleX, double scaleY) {
             createResizedImage(baseImage, (int)(baseImage.getWidth() * scaleX), (int)(baseImage.getHeight() * scaleY));
         }
-        
+
         private SkinCursor toCursor(int hotSpotX, int hotSpotY, String name) {
             if (this.cursors == null) {
                 this.cursors = new HashMap<String, SkinCursor>();
@@ -992,7 +992,7 @@ public enum FSkin {
             }
             return cursor;
         }
-        
+
         private void updateCursors() {
             if (this.cursors == null) { return; }
 
@@ -1000,22 +1000,22 @@ public enum FSkin {
                 cursor.updateCursor(this.image);
             }
         }
-        
+
         public Dimension getSizeForPaint(Graphics g) {
             if (g == null) {
                 throw new NullPointerException("Must pass Graphics to get size for paint");
             }
             return new Dimension(this.getWidth(), this.getHeight());
         }
-        
+
         protected int getWidth() {
             return this.image.getWidth(null);
         }
-        
+
         protected int getHeight() {
             return this.image.getHeight(null);
         }
-        
+
         protected ImageIcon getIcon() {
             if (this.imageIcon == null) {
                 this.imageIcon = new ImageIcon(this.image);
@@ -1023,7 +1023,7 @@ public enum FSkin {
             return this.imageIcon;
         }
     }
-    
+
     /**
      * Gets an image.
      *
@@ -1033,19 +1033,19 @@ public enum FSkin {
     public static SkinCursor getCursor(final SkinProp s0, int hotSpotX, int hotSpotY, String name) {
         return getImage(s0).toCursor(hotSpotX, hotSpotY, name);
     }
-    
+
     public static class SkinCursor {
         private static final Toolkit TOOLS = Toolkit.getDefaultToolkit();
 
         private final Point hotSpot;
         private final String name;
         private Cursor cursor;
-        
+
         private SkinCursor(Point hotSpot0, String name0) {
             this.hotSpot = hotSpot0;
             this.name = name0;
         }
-        
+
         private void updateCursor(Image image) {
             this.cursor = TOOLS.createCustomCursor(image, this.hotSpot, this.name);
         }
@@ -1064,10 +1064,10 @@ public enum FSkin {
         }
         return icon;
     }
-    
+
     public static class SkinIcon extends SkinImage {
         private static final Map<SkinProp, SkinIcon> icons = new HashMap<SkinProp, SkinIcon>();
-        
+
         private static void setIcon(final SkinProp s0, ImageIcon imageIcon0) {
             SkinIcon skinIcon = icons.get(s0);
             if (skinIcon == null) {
@@ -1119,7 +1119,7 @@ public enum FSkin {
         private static void setIcon(final SkinProp s0, final BufferedImage bi0) {
             setIcon(s0, new ImageIcon(bi0));
         }
-        
+
         private SkinIcon(ImageIcon imageIcon0) {
             super(imageIcon0.getImage());
             this.imageIcon = imageIcon0;
@@ -1129,12 +1129,12 @@ public enum FSkin {
         protected SkinIcon clone() {
             return new SkinIcon(this.imageIcon);
         }
-        
+
         @Override
         public SkinIcon resize(int w, int h) {
             return (SkinIcon)super.resize(w, h);
         }
-        
+
         @Override
         public SkinIcon scale(double scale) {
             return scale(scale, scale);
@@ -1149,23 +1149,23 @@ public enum FSkin {
             Image image0 = baseImage.image.getScaledInstance(w, h, java.awt.Image.SCALE_SMOOTH);
             this.changeImage(image0, new ImageIcon(image0));
         }
-        
+
         @Override
         protected int getWidth() {
             return this.imageIcon.getIconWidth();
         }
-        
+
         @Override
         protected int getHeight() {
             return this.imageIcon.getIconHeight();
         }
-        
+
         @Override
         protected ImageIcon getIcon() { //can skip null check since imageIcon will always be set
             return this.imageIcon;
         }
     }
-    
+
     //allow creating dynamic icons that can be used in place of skin icons
     public static class UnskinnedIcon extends SkinIcon {
         public UnskinnedIcon(String path0) {
@@ -1174,7 +1174,7 @@ public enum FSkin {
         public UnskinnedIcon(BufferedImage i0) {
             super(new ImageIcon(i0));
         }
-        
+
         @Override
         public ImageIcon getIcon() {
             return super.getIcon();
@@ -1496,7 +1496,7 @@ public enum FSkin {
 
     private static Map<Integer, SkinImage> avatars;
     private static Map<Integer, Font> fixedFonts = new HashMap<Integer, Font>();
-    
+
     /** @return {@link java.awt.font} */
     public static Font getFixedFont(final int size) {
         Font fixedFont = fixedFonts.get(size);
@@ -1521,7 +1521,7 @@ public enum FSkin {
     public static SkinFont getFont(final int size) {
         return SkinFont.get(Font.PLAIN, size);
     }
-    
+
     /**
      * @return {@link forge.gui.toolbox.FSkin.SkinFont}
      */
@@ -1536,14 +1536,14 @@ public enum FSkin {
     public static SkinFont getBoldFont(final int size) {
         return SkinFont.get(Font.BOLD, size);
     }
-    
+
     /**
      * @return {@link forge.gui.toolbox.FSkin.SkinFont}
      */
     public static SkinFont getItalicFont() {
         return FSkin.getItalicFont(FSkin.defaultFontSize);
     }
-    
+
     /**
      * @param size - integer, pixel size
      * @return {@link forge.gui.toolbox.FSkin.SkinFont}
@@ -1551,11 +1551,11 @@ public enum FSkin {
     public static SkinFont getItalicFont(final int size) {
         return SkinFont.get(Font.ITALIC, size);
     }
-    
+
     public static class SkinFont {
         private static Font baseFont;
         private static Map<String, SkinFont> fonts = new HashMap<String, SkinFont>();
-        
+
         private static SkinFont get(final int style0, final int size0) {
             String key = style0 + "|" + size0;
             SkinFont skinFont = fonts.get(key);
@@ -1565,7 +1565,7 @@ public enum FSkin {
             }
             return skinFont;
         }
-        
+
         private static void setBaseFont(Font baseFont0) {
             baseFont = baseFont0;
 
@@ -1583,37 +1583,37 @@ public enum FSkin {
             this.size = size0;
             this.updateFont();
         }
-        
+
         public int getSize() {
             return this.font.getSize();
         }
-        
+
         private void updateFont() {
             this.font = baseFont.deriveFont(this.style, this.size);
         }
     }
 
     private static final String
-        FILE_SKINS_DIR = "res/skins/",
-        FILE_ICON_SPRITE = "sprite_icons.png",
-        FILE_FOIL_SPRITE = "sprite_foils.png",
-        FILE_OLD_FOIL_SPRITE = "sprite_old_foils.png",
-        FILE_AVATAR_SPRITE = "sprite_avatars.png",
-        FILE_FONT = "font1.ttf",
-        FILE_SPLASH = "bg_splash.png",
-        FILE_MATCH_BG = "bg_match.jpg",
-        FILE_TEXTURE_BG = "bg_texture.jpg",
-        DEFAULT_DIR = FILE_SKINS_DIR + "default/";
+    FILE_SKINS_DIR = "res/skins/",
+    FILE_ICON_SPRITE = "sprite_icons.png",
+    FILE_FOIL_SPRITE = "sprite_foils.png",
+    FILE_OLD_FOIL_SPRITE = "sprite_old_foils.png",
+    FILE_AVATAR_SPRITE = "sprite_avatars.png",
+    FILE_FONT = "font1.ttf",
+    FILE_SPLASH = "bg_splash.png",
+    FILE_MATCH_BG = "bg_match.jpg",
+    FILE_TEXTURE_BG = "bg_texture.jpg",
+    DEFAULT_DIR = FILE_SKINS_DIR + "default/";
 
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils,
-        bimOldFoils, bimDefaultAvatars, bimPreferredAvatars;
+    bimOldFoils, bimDefaultAvatars, bimPreferredAvatars;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
-    private static int[] tempCoords;    
+    private static int[] tempCoords;
     private static int defaultFontSize = 12;
     private static boolean loaded = false;
-    
+
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
         if (skinName.equals(prefs.getPref(FPref.UI_SKIN))) { return; }
@@ -1629,7 +1629,7 @@ public enum FSkin {
 
         //reapply skin to all skinned components
         ComponentSkin.reapplyAll();
-        
+
         //refresh certain components skinned via look and feel
         Singletons.getControl().getMenuBar().refresh();
         FComboBoxWrapper.refreshAllSkins();
@@ -1664,12 +1664,12 @@ public enum FSkin {
                 final BufferedImage img;
                 try {
                     img = ImageIO.read(f);
-    
+
                     final int h = img.getHeight();
                     final int w = img.getWidth();
-    
+
                     SkinIcon.setIcon(Backgrounds.BG_SPLASH, img.getSubimage(0, 0, w, h - 100));
-    
+
                     UIManager.put("ProgressBar.background", FSkin.getColorFromPixel(img.getRGB(25, h - 75)));
                     UIManager.put("ProgressBar.selectionBackground", FSkin.getColorFromPixel(img.getRGB(75, h - 75)));
                     UIManager.put("ProgressBar.foreground", FSkin.getColorFromPixel(img.getRGB(25, h - 25)));
@@ -1703,7 +1703,7 @@ public enum FSkin {
      * missing, the default picture is retrieved.
      */
     public static void loadFull(final boolean onInit) {
-        if (onInit) { 
+        if (onInit) {
             // No need for this method to be loaded while on the EDT.
             FThreads.assertExecutedByEdt(false);
 
@@ -1750,7 +1750,7 @@ public enum FSkin {
         if (onInit) { //set default font size only once onInit
             Font f = UIManager.getDefaults().getFont("Label.font");
             if (f != null) {
-                FSkin.defaultFontSize = f.getSize();    
+                FSkin.defaultFontSize = f.getSize();
             }
         }
         SkinFont.setBaseFont(GuiUtils.newFont(FILE_SKINS_DIR + preferredName + "/" + FILE_FONT));
@@ -1841,24 +1841,24 @@ public enum FSkin {
 
         return mySkins;
     }
-    
+
     public static String[] getSkinNamesArray(boolean sorted) {
         ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
         String[] prettySkinNames = new String[skinDirectoryNames.size()];
         for (int i = 0; i < skinDirectoryNames.size(); i++) {
-            prettySkinNames[i] = WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' '));          
+            prettySkinNames[i] = WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' '));
         }
         if (sorted) {
             java.util.Arrays.sort(prettySkinNames);
         }
         return prettySkinNames;
-    }    
+    }
 
     /** @return Map<Integer, Image> */
     public static Map<Integer, SkinImage> getAvatars() {
         return avatars;
     }
-    
+
     public static boolean isLoaded() { return loaded; }
 
     /**
@@ -1963,12 +1963,12 @@ public enum FSkin {
 
         SkinImage.setImage(s0, isOldStyle ? bimOldFoils.getSubimage(x0, y0, w0, h0) : bimFoils.getSubimage(x0, y0, w0, h0));
     }
-    
+
     public static boolean isLookAndFeelSet() {
         return ForgeLookAndFeel.isMetalLafSet;
     }
-    
-    /** 
+
+    /**
      * Sets the look and feel of the GUI based on the selected Forge theme.
      *
      * @see <a href="http://tips4java.wordpress.com/2008/10/09/uimanager-defaults/">UIManager Defaults</a>
@@ -1977,13 +1977,13 @@ public enum FSkin {
 
         private static boolean onInit = true;
         private static boolean isMetalLafSet = false;
-        
+
         private final Color FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT).color;
         private final Color BACK_COLOR = FSkin.getColor(FSkin.Colors.CLR_THEME2).color;
         private final Color HIGHLIGHT_COLOR = BACK_COLOR.brighter();
         private final Border LINE_BORDER = BorderFactory.createLineBorder(FORE_COLOR.darker(), 1);
         private final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(2, 2, 2, 2);
-        
+
         /**
          * Sets the look and feel of the GUI based on the selected Forge theme.
          */
@@ -1998,12 +1998,12 @@ public enum FSkin {
             }
             onInit = false;
         }
-        
+
         /**
          * Sets the standard "Java L&F" (also called "Metal") that looks the same on all platforms.
          * <p>
          * If not explicitly set then the Mac uses its native L&F which does
-         * not support various settings (eg. combobox background color). 
+         * not support various settings (eg. combobox background color).
          */
         private boolean setMetalLookAndFeel(JFrame appFrame) {
             if (onInit) { //only attempt to set Metal Look and Feel the first time
@@ -2018,7 +2018,7 @@ public enum FSkin {
             }
             return isMetalLafSet;
         }
-        
+
         /**
          * Sets the look and feel for a JMenuBar, JMenu, JMenuItem & variations.
          */
@@ -2068,7 +2068,7 @@ public enum FSkin {
             UIManager.put("CheckBoxMenuItem.border", EMPTY_BORDER);
             UIManager.put("CheckBoxMenuItem.acceleratorForeground", FORE_COLOR.darker());
         }
-            
+
         private void setTabbedPaneLookAndFeel() {
             UIManager.put("TabbedPane.selected", HIGHLIGHT_COLOR);
             UIManager.put("TabbedPane.contentOpaque", FSkin.getColor(FSkin.Colors.CLR_THEME));
@@ -2078,7 +2078,7 @@ public enum FSkin {
         /**
          * Sets the look and feel for a <b>non-editable</b> JComboBox.
          */
-        private void setComboBoxLookAndFeel() {        
+        private void setComboBoxLookAndFeel() {
             UIManager.put("ComboBox.background", BACK_COLOR);
             UIManager.put("ComboBox.foreground", FORE_COLOR);
             UIManager.put("ComboBox.selectionBackground", HIGHLIGHT_COLOR);
@@ -2087,8 +2087,11 @@ public enum FSkin {
             UIManager.put("ComboBox.disabledForeground", BACK_COLOR.darker());
             UIManager.put("ComboBox.font", getDefaultFont("ComboBox.font"));
             UIManager.put("Button.select", HIGHLIGHT_COLOR);
+            boolean isBright = isColorBright(FORE_COLOR);
+            UIManager.put("ComboBox.border", BorderFactory.createLineBorder(isBright ? FORE_COLOR.darker() : FORE_COLOR.brighter(), 1));
+            UIManager.put("Button.select", HIGHLIGHT_COLOR);
         }
-        
+
         private void setButtonLookAndFeel() {
             UIManager.put("Button.foreground", FORE_COLOR);
             UIManager.put("Button.background", BACK_COLOR);
@@ -2106,11 +2109,11 @@ public enum FSkin {
         private boolean isUIManagerEnabled() {
             return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX);
         }
-        
+
         private Font getDefaultFont(String component) {
             return FSkin.getFont(UIManager.getFont(component).getSize()).font;
         }
-        
+
         private ArrayList<Object> getColorGradients(Color bottom, Color top) {
             ArrayList<Object> gradients = new ArrayList<>();
             gradients.add(0.0);
@@ -2120,5 +2123,17 @@ public enum FSkin {
             gradients.add(bottom);
             return gradients;
         }
+
+        /**
+         * @see http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
+         */
+        public static boolean isColorBright(Color c) {
+            int v = (int)Math.sqrt(
+                    c.getRed() * c.getRed() * 0.241 +
+                    c.getGreen() * c.getGreen() * 0.691 +
+                    c.getBlue() * c.getBlue() * 0.068);
+            return v >= 130;
+        }
+
     }
 }

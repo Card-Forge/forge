@@ -3,8 +3,12 @@ package forge.gui.menubar;
 import java.awt.Toolkit;
 import java.io.IOException;
 
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import forge.Singletons;
 import forge.gui.toolbox.FSkin;
@@ -15,9 +19,9 @@ import forge.properties.ForgePreferences.FPref;
 
 public final class MenuUtil {
     private MenuUtil() { }
-    
+
     private static ForgePreferences prefs = Singletons.getModel().getPreferences();
-        
+
     // Get appropriate OS standard accelerator key for menu shortcuts.
     private static final int DEFAULT_MenuShortcutKeyMask = 
             Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
@@ -57,4 +61,20 @@ public final class MenuUtil {
         return (reply == JOptionPane.YES_OPTION);                      
     }    
 
+    public static void setupMenuBar(IMenuProvider provider) {
+        Singletons.getControl().getMenuBar().setupMenuBar(provider);
+    }
+    public static void setMenuHint(final JMenuItem menu, final String hint) {
+        menu.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JMenuItem item = (JMenuItem) e.getSource();
+                if (item.isArmed() || (item.isSelected() && e.getSource() instanceof JMenu)) {
+                    Singletons.getControl().getMenuBar().setStatusText(hint);
+                } else {
+                    Singletons.getControl().getMenuBar().setStatusText("");
+                }
+            }
+        });
+    }
 }

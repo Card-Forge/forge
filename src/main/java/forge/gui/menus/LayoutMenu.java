@@ -15,6 +15,8 @@ import javax.swing.KeyStroke;
 import forge.Singletons;
 import forge.control.FControl.Screens;
 import forge.gui.GuiChoose;
+import forge.gui.MouseUtil;
+import forge.gui.MouseUtil.MouseCursor;
 import forge.gui.match.controllers.CDock;
 import forge.gui.menubar.MenuUtil;
 import forge.gui.toolbox.FSkin;
@@ -94,7 +96,9 @@ public final class LayoutMenu {
     private static final ActionListener changeSkin = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            MouseUtil.setMouseCursor(MouseCursor.WAIT_CURSOR);
             FSkin.changeSkin(e.getActionCommand());
+            MouseUtil.setMouseCursor(MouseCursor.DEFAULT_CURSOR);
         }
     };
 

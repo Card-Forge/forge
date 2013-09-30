@@ -9,12 +9,21 @@ public final class MouseUtil {
 
     // Add existing Cursor values as needed.
     public enum MouseCursor {
+        WAIT_CURSOR (Cursor.WAIT_CURSOR),
         DEFAULT_CURSOR (Cursor.DEFAULT_CURSOR),
         HAND_CURSOR (Cursor.HAND_CURSOR);
         // Scaffolding...
         private int value;
         private MouseCursor(int value) { this.value = value; }
-        public int getValue() { return value; }
+        public int toInt() { return value; }
+        public static MouseCursor fromInt(int value){
+            for (final MouseCursor c : MouseCursor.values()) {
+                if (c.value == value) {
+                    return c;
+                }
+            }
+            throw new IllegalArgumentException("No Enum specified for this int");
+        }
     };
 
     /**
@@ -23,6 +32,6 @@ public final class MouseUtil {
      * @param mouseCursor one of the predefined {@code Cursor} types.
      */
     public static void setMouseCursor(MouseCursor cursor) {
-        FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(cursor.getValue()));
+        FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(cursor.toInt()));
     }
 }
