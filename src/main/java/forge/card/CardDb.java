@@ -20,6 +20,7 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -177,11 +178,6 @@ public final class CardDb implements ICardDatabase {
         return cardName.toLowerCase().endsWith(CardDb.foilSuffix) ? cardName.substring(0, cardName.length() - CardDb.foilSuffixLength) : cardName;
     }
 
-    
-    /**
-     * Checks if is card supported.
-     */
-    
     @Override
     public PaperCard tryGetCard(final String cardName0) {
         return tryGetCard(cardName0, true);
@@ -203,6 +199,31 @@ public final class CardDb implements ICardDatabase {
                 : tryGetCard(nameWithSet.left, nameWithSet.right);
         return null != res && isFoil ? getFoiled(res) : res;
     }
+    
+    @Override
+    public PaperCard tryGetCardPrintedByDate(final String name0, final boolean fromLatestSet, final Date printedBefore) {
+        final boolean isFoil = this.isFoil(name0);
+        final String cardName = isFoil ? this.removeFoilSuffix(name0) : name0;
+        final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(cardName);
+        
+        PaperCard res = null;
+        if (null != nameWithSet.right) // set explicitly requested, should return card from it and disregard the date 
+            res = tryGetCard(nameWithSet.left, nameWithSet.right);
+        else {
+            Collection<PaperCard> cards = this.allCardsByName.get(nameWithSet.left); // cards are sorted by datetime desc
+            int idxRightSet = 0;
+            for (PaperCard card : cards) {
+                if (editions.get(card.getEdition()).getDate().after(printedBefore))
+                    idxRightSet++;
+                else
+                    break;
+            }
+            res = fromLatestSet ? Iterables.get(cards, idxRightSet, null) : Aggregates.random(Iterables.skip(cards, idxRightSet));
+        }
+
+        return null != res && isFoil ? getFoiled(res) : res;
+    }
+    
 
     @Override
     public PaperCard tryGetCard(final String cardName, String setName) {
@@ -285,7 +306,19 @@ public final class CardDb implements ICardDatabase {
         }
         return result;
     }
-
+    
+    
+    @Override
+    public PaperCard getCardPrintedByDate(final String name0, final boolean fromLatestSet, Date printedBefore ) {
+        // Sometimes they read from decks things like "CardName|Set" - but we
+        // can handle it
+        final PaperCard result = tryGetCard(name0, fromLatestSet);
+        if (null == result) {
+            throw new NoSuchElementException(String.format("Card '%s' released before %s not found in our database.", name0, printedBefore.toString()));
+        }
+        return result;
+    }    
+    
     // Advanced fetch by name+set
     @Override
     public PaperCard getCard(final String name, final String set) {
