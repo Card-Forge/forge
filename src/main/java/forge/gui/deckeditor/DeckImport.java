@@ -17,28 +17,26 @@
  */
 package forge.gui.deckeditor;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.ElementIterator;
+
+import org.apache.commons.lang3.StringUtils;
 
 import net.miginfocom.swing.MigLayout;
 import forge.deck.Deck;
@@ -48,6 +46,13 @@ import forge.deck.DeckRecognizer.TokenType;
 import forge.deck.DeckSection;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.controllers.ACEditorBase;
+import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.FCheckBox;
+import forge.gui.toolbox.FComboBoxWrapper;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FTextArea;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 
@@ -61,7 +66,7 @@ import forge.item.InventoryItem;
 public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> extends JDialog {
     private static final long serialVersionUID = -5837776824284093004L;
 
-    private final JTextArea txtInput = new JTextArea();
+    private final FTextArea txtInput = new FTextArea();
     private static final String STYLESHEET = "<style>"
             + "body, h1, h2, h3, h4, h5, h6, table, tr, td, p {margin: 3px 1px; padding: 0; font-weight: "
             + "normal; font-style: normal; text-decoration: none; font-family: Arial; font-size: 10px;} "
@@ -86,13 +91,17 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             + "</html>";
 
     private final JEditorPane htmlOutput = new JEditorPane("text/html", DeckImport.HTML_WELCOME_TEXT);
-    private final JScrollPane scrollInput = new JScrollPane(this.txtInput);
-    private final JScrollPane scrollOutput = new JScrollPane(this.htmlOutput);
-    private final JLabel summaryMain = new JLabel("Imported deck summary will appear here");
-    private final JLabel summarySide = new JLabel("This is second line");
-    private final JButton cmdAccept = new JButton("Import Deck");
-    private final JButton cmdCancel = new JButton("Cancel");
-    private final JCheckBox newEditionCheck = new JCheckBox("Import latest version of card", true);
+    private final FScrollPane scrollInput = new FScrollPane(this.txtInput);
+    private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput);
+    private final FLabel summaryMain = new FLabel.Builder().text("Imported deck summary will appear here").build();
+    private final FLabel summarySide = new FLabel.Builder().text("Line for sideboard summary").build();
+    private final FButton cmdAccept = new FButton("Import Deck");
+    private final FButton cmdCancel = new FButton("Cancel");
+    private final FCheckBox newEditionCheck = new FCheckBox("Import latest version of card", true);
+    private final FCheckBox dateTimeCheck = new FCheckBox("Use only sets released before:", false);
+    
+    private final FComboBoxWrapper<String> monthDropdown = new FComboBoxWrapper<>();
+    private final FComboBoxWrapper<Integer> yearDropdown = new FComboBoxWrapper<>();
 
     /** The tokens. */
     private final List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
@@ -116,14 +125,13 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         GuiUtils.centerFrame(this);
         this.setResizable(false);
         this.setTitle("Deck Importer");
+        
+        FPanel fp = new FPanel(new MigLayout("fill"));
+        this.add(fp);
 
-        final Font fButtons = new java.awt.Font("Dialog", 0, 13);
-        this.cmdAccept.setFont(fButtons);
-        this.cmdCancel.setFont(fButtons);
-
-        this.txtInput.setFont(fButtons);
-        // htmlOutput.setFont(fButtons);
-
+        txtInput.setFocusable(true);
+        txtInput.setEditable(true);
+        
         this.htmlOutput.setEditable(false);
 
         this.scrollInput.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), "Paste or type a decklist"));
@@ -132,15 +140,21 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
-        this.getContentPane().setLayout(new MigLayout("fill"));
-        this.getContentPane().add(this.scrollInput, "cell 0 0, w 50%, growy, pushy");
-        this.getContentPane().add(this.newEditionCheck, "cell 0 1, w 50%, align c");
-        this.getContentPane().add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
-        this.getContentPane().add(this.summaryMain, "cell 1 1, label");
-        this.getContentPane().add(this.summarySide, "cell 1 2, label");
+        
+        fp.add(this.scrollInput, "cell 0 0, w 50%, growy, pushy");
+        fp.add(this.newEditionCheck, "cell 0 1, w 50%, ax c");
+        fp.add(this.dateTimeCheck, "cell 0 2, w 50%, ax c");
+        
+        monthDropdown.addTo(fp, "cell 0 3, w 20%, ax r, split 2");
+        yearDropdown.addTo(fp, "w 15%, pad 0 0 0 -10");
+        fillDateDropdowns();
+        
+        fp.add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
+        fp.add(this.summaryMain, "cell 1 1, label");
+        fp.add(this.summarySide, "cell 1 2, label");
 
-        this.getContentPane().add(this.cmdAccept, "cell 1 3, split 2, w 100, align c");
-        this.getContentPane().add(this.cmdCancel, "w 100");
+        fp.add(this.cmdAccept, "cell 1 3, split 2, w 140, align c, h 26, pad 0 0 0 -20");
+        fp.add(this.cmdCancel, "w 120, h 26");
 
 
         this.cmdCancel.addActionListener(new ActionListener() {
@@ -165,15 +179,54 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
+        
+        ActionListener updateDateCheck = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean isSel = dateTimeCheck.isSelected();
+                monthDropdown.setEnabled(isSel);
+                yearDropdown.setEnabled(isSel);
+                parseAndDisplay();
+            }
+        };
+        this.dateTimeCheck.addActionListener(updateDateCheck);
+        
+        ActionListener reparse = new ActionListener() {
+            @Override public void actionPerformed(ActionEvent e) { parseAndDisplay(); }
+        };
+        this.newEditionCheck.addActionListener(reparse);
+        this.yearDropdown.addActionListener(reparse);
+        this.monthDropdown.addActionListener(reparse);
+        updateDateCheck.actionPerformed(null); // update actual state
 
         this.txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
         this.cmdAccept.setEnabled(false);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    private void fillDateDropdowns() {
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        monthDropdown.removeAllItems();
+        String[] months = dfs.getMonths();
+        for(String monthName : months)
+            if(!StringUtils.isBlank(monthName))
+                monthDropdown.addItem(monthName);
+        int yearNow = Calendar.getInstance().get(Calendar.YEAR);
+        for(int i = yearNow; i >= 1993; i--)
+            yearDropdown.addItem(Integer.valueOf(i));
     }
 
     private void readInput() {
         this.tokens.clear();
         final ElementIterator it = new ElementIterator(this.txtInput.getDocument().getDefaultRootElement());
         Element e;
+        
+        DeckRecognizer recognizer = new DeckRecognizer(newEditionCheck.isSelected());
+        if(dateTimeCheck.isSelected())
+            recognizer.setDateConstraint(monthDropdown.getSelectedIndex(), yearDropdown.getSelectedItem());
+        
         while ((e = it.next()) != null) {
             if (!e.isLeaf()) {
                 continue;
@@ -182,20 +235,24 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             final int rangeEnd = e.getEndOffset();
             try {
                 final String line = this.txtInput.getText(rangeStart, rangeEnd - rangeStart);
-                this.tokens.add(DeckRecognizer.recognizeLine(line, newEditionCheck.isSelected()));
+                this.tokens.add(recognizer.recognizeLine(line));
             } catch (final BadLocationException ex) {
             }
         }
     }
 
     private void displayTokens() {
-        final StringBuilder sbOut = new StringBuilder("<html>");
-        sbOut.append(DeckImport.STYLESHEET);
-        for (final DeckRecognizer.Token t : this.tokens) {
-            sbOut.append(this.makeHtmlViewOfToken(t));
+        if(this.tokens.isEmpty())
+            this.htmlOutput.setText(HTML_WELCOME_TEXT);
+        else {
+            final StringBuilder sbOut = new StringBuilder("<html>");
+            sbOut.append(DeckImport.STYLESHEET);
+            for (final DeckRecognizer.Token t : this.tokens) {
+                sbOut.append(this.makeHtmlViewOfToken(t));
+            }
+            sbOut.append("</html>");
+            this.htmlOutput.setText(sbOut.toString());
         }
-        sbOut.append("</html>");
-        this.htmlOutput.setText(sbOut.toString());
     }
 
     private void updateSummaries() {
@@ -241,14 +298,18 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         return result;
     }
 
+    protected void parseAndDisplay() {
+        readInput();
+        displayTokens();
+        updateSummaries();
+    }
+    
     /**
      * The Class OnChangeTextUpdate.
      */
     protected class OnChangeTextUpdate implements DocumentListener {
         private void onChange() {
-            DeckImport.this.readInput();
-            DeckImport.this.displayTokens();
-            DeckImport.this.updateSummaries();
+            DeckImport.this.parseAndDisplay();
         }
 
         /*

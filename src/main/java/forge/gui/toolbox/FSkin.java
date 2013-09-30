@@ -628,6 +628,8 @@ public enum FSkin {
         private final int alpha;
         private Color color;
         
+        public Color getColor() { return color; }
+        
         //private constructors for color that changes with skin (use FSkin.getColor())
         private SkinColor(Colors baseColor0) {
             this(baseColor0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_ALPHA);

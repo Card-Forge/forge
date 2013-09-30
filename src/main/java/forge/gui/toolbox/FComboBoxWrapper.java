@@ -64,8 +64,10 @@ public class FComboBoxWrapper<E> {
         this.comboBox.removeAllItems();
     }
     
-    public Object getSelectedItem() {
-        return this.comboBox.getSelectedItem();
+    @SuppressWarnings("unchecked")
+    public E getSelectedItem() {
+        Object res = this.comboBox.getSelectedItem();
+        return res == null ? null : (E) res;
     }
     
     public void setSelectedItem(Object item) {
@@ -109,7 +111,7 @@ public class FComboBoxWrapper<E> {
     }
     
     public void setEnabled(boolean aFlag) {
-        this.comboBox.setVisible(aFlag);
+        this.comboBox.setEnabled(aFlag);
     }
     
     public void addTo(Container container) {

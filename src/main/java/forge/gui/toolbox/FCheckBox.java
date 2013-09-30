@@ -20,4 +20,9 @@ public class FCheckBox extends JCheckBox {
         skin.setFont(FSkin.getFont(14));
         this.setOpaque(false);
     }
+    
+    public FCheckBox(final String s0, boolean checked) {
+        this(s0);
+        setSelected(checked);
+    }
 }

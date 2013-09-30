@@ -17,12 +17,15 @@
  */
 package forge.deck;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardDb;
+import forge.card.ICardDatabase;
 import forge.item.PaperCard;
 
 /**
@@ -159,17 +162,17 @@ public class DeckRecognizer {
     private static final Pattern SEARCH_NUMBERS_IN_FRONT = Pattern.compile("([\\d]{1,2})[^A-Za-wyz]*\\s+(.*)");
     //private static final Pattern READ_SEPARATED_EDITION = Pattern.compile("[[\\(\\{]([a-zA-Z0-9]){1,3})[]*\\s+(.*)");
 
-    /**
-     * Recognize line.
-     * 
-     * @param rawLine
-     *            the raw_line
-     * @param newestEdition
-     *            get the newest available edition?
-     *
-     * @return the token
-     */
-    public static Token recognizeLine(final String rawLine, final boolean newestEdition) {
+
+    private final boolean useLastSet;
+    private final ICardDatabase db;
+    private Date recognizeCardsPrintedBefore = null;
+    
+    public DeckRecognizer(boolean fromLatestSet) {
+        useLastSet = fromLatestSet;
+        db = CardDb.instance();
+    }
+    
+    public Token recognizeLine(final String rawLine) {
         if (StringUtils.isBlank(rawLine)) {
             return new Token(TokenType.Comment, 0, rawLine);
         }
@@ -181,7 +184,7 @@ public class DeckRecognizer {
         if (foundNumbersInFront.matches()) {
             final String cardName = foundNumbersInFront.group(2);
             final int amount = Integer.parseInt(foundNumbersInFront.group(1));
-            result = DeckRecognizer.recognizePossibleNameAndNumber(cardName, amount, newestEdition);
+            result = recognizePossibleNameAndNumber(cardName, amount);
         } /*
            * else if (foundNumbersInBack.matches()) { String cardName =
            * foundNumbersInBack.group(1); int amount =
@@ -189,17 +192,25 @@ public class DeckRecognizer {
            * Token(cardName, amount); }
            */
         else {
-            if (null != CardDb.instance().tryGetCard(line)) {
-                return Token.knownCard(CardDb.instance().getCard(line, newestEdition), 1);
+            PaperCard pc = tryGetCard(line);
+            if (null != pc) {
+                return Token.knownCard(pc, 1);
             }
             result = DeckRecognizer.recognizeNonCard(line, 1);
         }
         return result != null ? result : new Token(TokenType.UnknownText, 0, line);
     }
 
-    private static Token recognizePossibleNameAndNumber(final String name, final int n, final boolean newestEdition) {
-        if (null != CardDb.instance().tryGetCard(name)) {
-            return Token.knownCard(CardDb.instance().getCard(name, newestEdition), n);
+    private PaperCard tryGetCard(String text) {
+        if(recognizeCardsPrintedBefore != null )
+            return db.tryGetCardPrintedByDate(text, useLastSet, recognizeCardsPrintedBefore);
+        return db.tryGetCard(text, useLastSet);
+    }
+    
+    private Token recognizePossibleNameAndNumber(final String name, final int n) {
+        PaperCard pc = tryGetCard(name);
+        if (null != pc) {
+            return Token.knownCard(pc, n);
         }
 
         // TODO: recognize format: http://topdeck.ru/forum/index.php?showtopic=12711
@@ -258,6 +269,18 @@ public class DeckRecognizer {
             return true;
         }
         return false;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param month
+     * @param year
+     */
+    public void setDateConstraint(int month, Integer year) {
+        Calendar ca = Calendar.getInstance();
+        ca.set(year, month, 1);
+        recognizeCardsPrintedBefore = ca.getTime();
+        
     }
 
 }
