@@ -1,7 +1,7 @@
-Forge Beta: 10-##-2013 ver 1.5.1
+Forge Beta: 10-01-2013 ver 1.5.1
 
 
-13### cards in total.
+13328 cards in total.
 
 
 -------------
@@ -11,10 +11,12 @@ Release Notes
 - Forge freezing during a match bug -
 A number of people have reported this bug and we now feel that it may have been fixed in this version. Please play test this version and let us know.
 
+
 - Skinned titlebar for main window -
 Titlebar is now skinned instead of displaying using standard OS window titlebar
 Maximizing window now displays full-screen
 Can use Layout > View > Titlebar (F11) to toggle visibility of titlebar (will also open full-screen if hiding titlebar)
+
 
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6. Those who are using Mac OS should install the JDK version rather than the JRE version.
@@ -32,14 +34,16 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-Mausoleum Turnkey
-Mana Reflection
-Pulse of Llanowar
-Deep Water
-Naked Singularity
 Chaos Moon
+Deep Water
 Infernal Darkness
+Mana Reflection
+Mausoleum Turnkey
+Naked Singularity
 Pale Moon
+Pulse of Llanowar
+Reality Twist
+Ritual of Subdual
 
 
 -----------
@@ -78,7 +82,15 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+DrDev
+Dripton
+Gos
+Hellfish
+Max
+Sloth
+spr
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
