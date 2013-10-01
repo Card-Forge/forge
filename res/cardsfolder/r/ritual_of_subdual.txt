@@ -1,0 +1,11 @@
+Name:Ritual of Subdual
+ManaCost:4 G G
+Types:Enchantment
+K:Cumulative upkeep:2
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ManaReplacement$ ProduceColorless | Description$ If a land is tapped for mana, it produces colorless mana instead of any other type.
+SVar:ProduceColorless:B->1 & U->1 & R->1 & G->1 & W->1
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:NonStackingEffect:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ritual_of_subdual.jpg
+Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nIf a land is tapped for mana, it produces colorless mana instead of any other type.

@@ -8983,6 +8983,7 @@ res/cardsfolder/r/reality_ripple.txt -text
 res/cardsfolder/r/reality_shaping.txt -text
 res/cardsfolder/r/reality_spasm.txt svneol=native#text/plain
 res/cardsfolder/r/reality_strobe.txt svneol=native#text/plain
+res/cardsfolder/r/reality_twist.txt -text
 res/cardsfolder/r/realm_razer.txt -text svneol=unset#text/plain
 res/cardsfolder/r/realms_befitting_my_majesty.txt -text
 res/cardsfolder/r/realms_uncharted.txt -text
@@ -9329,6 +9330,7 @@ res/cardsfolder/r/riths_charm.txt -text
 res/cardsfolder/r/riths_grove.txt svneol=native#text/plain
 res/cardsfolder/r/ritual_of_restoration.txt svneol=native#text/plain
 res/cardsfolder/r/ritual_of_steel.txt svneol=native#text/plain
+res/cardsfolder/r/ritual_of_subdual.txt -text
 res/cardsfolder/r/ritual_of_the_machine.txt svneol=native#text/plain
 res/cardsfolder/r/rivalry.txt svneol=native#text/plain
 res/cardsfolder/r/rivals_duel.txt -text
