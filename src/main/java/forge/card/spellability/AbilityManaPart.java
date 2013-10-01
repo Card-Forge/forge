@@ -528,8 +528,8 @@ public class AbilityManaPart implements java.io.Serializable {
      */
     public static String applyManaReplacement(final SpellAbility sa, final String original) {
         final HashMap<String, String> repMap = new HashMap<String, String>();
-        final Player act = sa.getActivatingPlayer();
-        final String manaReplace = sa.getManaPart().getManaReplaceType();
+        final Player act = sa != null ? sa.getActivatingPlayer() : null;
+        final String manaReplace = sa != null ? sa.getManaPart().getManaReplaceType(): "";
         if (manaReplace.isEmpty()) {
             return original;
         }
