@@ -847,6 +847,16 @@ Card overlays can be switched on/off during a match via the Game menu. Added new
 Forge now includes most of the new Theros cards. It may take a few days before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient.
 
 
+- Forge freezing during a match bug -
+A number of people have reported this bug and we now feel that it may have been fixed in this version. Please play test this version and let us know.
+
+
+- Skinned titlebar for main window -
+Titlebar is now skinned instead of displaying using standard OS window titlebar
+Maximizing window now displays full-screen
+Can use Layout > View > Titlebar (F11) to toggle visibility of titlebar (will also open full-screen if hiding titlebar)
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
