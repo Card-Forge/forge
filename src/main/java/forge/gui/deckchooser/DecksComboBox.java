@@ -45,7 +45,7 @@ public class DecksComboBox extends FComboBox<DeckType> {
     private DeckType selectedDeckType = null;
 
     public DecksComboBox() {
-        setButtonVisible(false);
+        setButtonVisible(true);
         FSkin.get(this).setFont(FSkin.getBoldFont(14));
         setTextAlignment(TextAlignment.CENTER);
         setModel(new DefaultComboBoxModel<DeckType>(DeckType.values()));

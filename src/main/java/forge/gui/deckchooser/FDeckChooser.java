@@ -1,7 +1,6 @@
 package forge.gui.deckchooser;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -56,9 +55,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private final FLabel lblDecklist = new FLabel.Builder().text("Double click deck for its decklist.").fontSize(12).build();
 
-    private final FLabel titleLabel;
-    private final String titleTextTemplate;
-    private final boolean canChoosePlayerType;
     private boolean isAi;
 
     private final MouseAdapter madDecklist = new MouseAdapter() {
@@ -75,27 +71,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     public FDeckChooser(final String titleText, boolean forAi, boolean canSwitchType) {
         setOpaque(false);
         isAi = forAi;
-        titleTextTemplate = titleText;
-        canChoosePlayerType = canSwitchType;
-
-        titleLabel = new FLabel.Builder()
-        .text(titleText)
-        .fontStyle(Font.BOLD)
-        .fontSize(20)
-        .opaque(false)
-        .build();
-
-        if( canChoosePlayerType )
-            updateTitle();
     }
 
     public FDeckChooser(String titleText, boolean forAi) {
         this(titleText, forAi, false);
-    }
-    private void updateTitle() {
-        String title = canChoosePlayerType ? String.format(titleTextTemplate, isAi ? "Computer" : "Human" ) : titleTextTemplate;
-        titleLabel.setText(title);
-
     }
 
     public void initialize() {
@@ -271,7 +250,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         setupUI();
         removeAll();
         this.setLayout(new MigLayout("insets 0, gap 0, flowy"));
-        this.add(titleLabel, "w 10:100%, h 28px!, gap 0 0 0 5px");
         this.add(decksComboBox, "w 10:100%, h 30px!");
         this.add(scrDecks, "w 10:100%, growy, pushy");
         this.add(btnRandom, "w 10:100%, h 26px!, gap 0 0 2px 0");
@@ -284,7 +262,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     public void setIsAiDeck(boolean isAiDeck) {
         this.isAi = isAiDeck;
-        updateTitle();
     }
 
     /* (non-Javadoc)

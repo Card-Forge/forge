@@ -43,7 +43,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     // CTR
     private VSubmenuConstructed() {
         FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        cboGamePlayers.setButtonVisible(false);
+        cboGamePlayers.setButtonVisible(true);
         cboGamePlayers.setTextAlignment(TextAlignment.CENTER);
         FSkin.get(cboGamePlayers).setFont(FSkin.getBoldFont(16));
     }
@@ -92,7 +92,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         container.removeAll();
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         container.add(lblTitle, "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
-        container.add(cboGamePlayers, "w 400px!, h 40px!, gap 0 0 15px 5px, span 2, al center");
+        container.add(cboGamePlayers, "w 400px!, h 30px!, gap 0 0 15px 5px, span 2, al center");
         container.add(dcLeft, "w 50%, gap 40px 20px 20px 5px, growy, pushy");
         container.add(dcRight, "w 50%, gap 20px 40px 20px 5px, growy, pushy");
         container.add(btnStart, "span 2, gap 0 0 0px 20px, center");
