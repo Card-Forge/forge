@@ -48,11 +48,11 @@ public class DecksComboBox extends FComboBox<DeckType> {
         setButtonVisible(true);
         FSkin.get(this).setFont(FSkin.getBoldFont(14));
         setTextAlignment(TextAlignment.CENTER);
-        setModel(new DefaultComboBoxModel<DeckType>(DeckType.values()));
         addActionListener(getDeckTypeComboListener());
     }
 
     public void refresh(DeckType deckType) {
+        setModel(new DefaultComboBoxModel<DeckType>(DeckType.values()));
         setSelectedItem(deckType);
     }
 

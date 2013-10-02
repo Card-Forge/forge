@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -15,6 +16,7 @@ import javax.swing.ScrollPaneConstants;
 
 import net.miginfocom.swing.MigLayout;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import forge.Command;
@@ -30,6 +32,8 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -46,6 +50,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private DecksComboBox decksComboBox;
     private DeckType selectedDeckType = DeckType.COLOR_DECK;
+    private List<String> selectedDecks = new ArrayList<String>();
 
     private final JList<String> lstDecks  = new FList<String>();
     private final FLabel btnRandom = new FLabel.ButtonBuilder().text("Random").fontSize(16).build();
@@ -56,6 +61,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private final FLabel lblDecklist = new FLabel.Builder().text("Double click deck for its decklist.").fontSize(12).build();
 
     private boolean isAi;
+
+    private final ForgePreferences prefs = Singletons.getModel().getPreferences();
+    private FPref stateSetting = null;
 
     private final MouseAdapter madDecklist = new MouseAdapter() {
         @Override
@@ -77,9 +85,15 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         this(titleText, forAi, false);
     }
 
+    public void initialize(FPref savedStateSetting, DeckType defaultDeckType) {
+        stateSetting = savedStateSetting;
+        selectedDeckType = defaultDeckType;
+    }
+    public void initialize(DeckType defaultDeckType) {
+        initialize(null, defaultDeckType);
+    }
     public void initialize() {
-        lstDecks.setOpaque(false);
-        scrDecks.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, BORDER_COLOR));
+        initialize(DeckType.COLOR_DECK);
     }
 
     private JList<String> getLstDecks()  { return lstDecks;  }
@@ -89,7 +103,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        lst.setListData(new String[] {"Random 1", "Random 2", "Random 3", "Black", "Blue", "Green", "Red", "White"});
+        final String[] listData = new String[] {"Random 1", "Random 2", "Random 3", "Black", "Blue", "Green", "Red", "White"};
+        lst.setListData(listData);
         lst.setName(DeckgenUtil.DeckTypes.COLORS.toString());
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
@@ -98,8 +113,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         getBtnRandom().setCommand(new Command() {
             @Override public void run() { lst.setSelectedIndices(DeckgenUtil.randomSelectColors(8)); } });
 
-        // Init basic two color deck
-        lst.setSelectedIndices(new int[]{0, 1});
+        if (listData.length > 0) {
+            // default selection = basic two color deck
+            lst.setSelectedIndices(getSelectedDeckIndices(Arrays.asList(listData), new int[]{0, 1}));
+            lst.ensureIndexIsVisible(lst.getSelectedIndices()[0]);
+        }
+
     }
 
     private void updateThemes() {
@@ -109,10 +128,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
-        final List<String> themeNames = new ArrayList<String>();
-        for (final String s : GenerateThemeDeck.getThemeNames()) { themeNames.add(s); }
+        final List<String> listData = new ArrayList<String>();
+        for (final String s : GenerateThemeDeck.getThemeNames()) { listData.add(s); }
 
-        lst.setListData(themeNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
+        lst.setListData(listData.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         lst.setName(DeckgenUtil.DeckTypes.THEMES.toString());
         lst.removeMouseListener(madDecklist);
 
@@ -120,18 +139,21 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         getBtnRandom().setCommand(new Command() {
             @Override public void run() { DeckgenUtil.randomSelect(lst); } });
 
-        // Init first in list
-        lst.setSelectedIndex(0);
+        if (listData.size() > 0) {
+            lst.setSelectedIndices(getSelectedDeckIndices(listData, new int[]{0}));
+            lst.ensureIndexIsVisible(lst.getSelectedIndices()[0]);
+        }
+
     }
 
     private void updateCustom() {
         final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        final List<String> customNames = new ArrayList<String>();
-        addDecksRecursive(Singletons.getModel().getDecks().getConstructed(), customNames, null);
+        final List<String> listData = new ArrayList<String>();
+        addDecksRecursive(Singletons.getModel().getDecks().getConstructed(), listData, null);
 
-        lst.setListData(customNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
+        lst.setListData(listData.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         lst.setName(DeckgenUtil.DeckTypes.CUSTOM.toString());
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
@@ -140,8 +162,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         getBtnRandom().setCommand(new Command() {
             @Override public void run() { DeckgenUtil.randomSelect(lst); } });
 
-        // Init first in list
-        lst.setSelectedIndex(0);
+        if (listData.size() > 0) {
+            lst.setSelectedIndices(getSelectedDeckIndices(listData, new int[]{0}));
+            lst.ensureIndexIsVisible(lst.getSelectedIndices()[0]);
+        }
     }
 
     private <T extends IHasName> void addDecksRecursive(IStorage<T> node, List<String> customNames, String namePrefix ) {
@@ -158,10 +182,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        final List<String> customNames = new ArrayList<String>();
-        addDecksRecursive(QuestController.getPrecons(), customNames, null);
+        final List<String> listData = new ArrayList<String>();
+        addDecksRecursive(QuestController.getPrecons(), listData, null);
 
-        lst.setListData(customNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
+        lst.setListData(listData.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         lst.setName(DeckgenUtil.DeckTypes.PRECON.toString());
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
@@ -170,26 +194,28 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         getBtnRandom().setCommand(new Command() {
             @Override public void run() { DeckgenUtil.randomSelect(lst); } });
 
-        // Init first in list
-        lst.setSelectedIndex(0);
+        if (listData.size() > 0) {
+            lst.setSelectedIndices(getSelectedDeckIndices(listData, new int[]{0}));
+            lst.ensureIndexIsVisible(lst.getSelectedIndices()[0]);
+        }
     }
 
     private void updateQuestEvents() {
         final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        final List<String> eventNames = new ArrayList<String>();
+        final List<String> listData = new ArrayList<String>();
 
         QuestController quest = Singletons.getModel().getQuest();
         for (QuestEvent e : quest.getDuelsManager().getAllDuels()) {
-            eventNames.add(e.getName());
+            listData.add(e.getName());
         }
 
         for (QuestEvent e : quest.getChallenges()) {
-            eventNames.add(e.getTitle());
+            listData.add(e.getTitle());
         }
 
-        lst.setListData(eventNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
+        lst.setListData(listData.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         lst.setName(DeckgenUtil.DeckTypes.QUESTEVENTS.toString());
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
@@ -198,8 +224,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         getBtnRandom().setCommand(new Command() {
             @Override public void run() { DeckgenUtil.randomSelect(lst); } });
 
-        // Init first in list
-        lst.setSelectedIndex(0);
+        if (listData.size() > 0) {
+            lst.setSelectedIndices(getSelectedDeckIndices(listData, new int[]{0}));
+            lst.ensureIndexIsVisible(lst.getSelectedIndices()[0]);
+        }
+
     }
 
     public Deck getDeck() {
@@ -287,10 +316,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             // core UI components.
             decksComboBox = new DecksComboBox();
             // set component styles.
-            // ...
+            lstDecks.setOpaque(false);
+            scrDecks.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, BORDER_COLOR));
             // monitor events generated by these components.
             decksComboBox.addListener(this);
             // now everything is in place, fire initial populate event.
+            restoreSavedState();
             decksComboBox.refresh(selectedDeckType);
         }
     }
@@ -319,6 +350,81 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             break;
         }
         selectedDeckType = deckType;
+    }
+
+    private final String SELECTED_DECK_DELIMITER = "::";
+
+    public void saveState() {
+        if (stateSetting == null) {
+            throw new NullPointerException("State setting missing. Specify first using the initialize() method.");
+        }
+        prefs.setPref(stateSetting, getState());
+        prefs.save();
+    }
+
+    private String getState() {
+        String deckType = decksComboBox.getDeckType().name();
+        String state = deckType;
+        final JList<String> lst = getLstDecks();
+        state += ";";
+        for (String value : lst.getSelectedValuesList()) {
+            state += value + SELECTED_DECK_DELIMITER;
+        }
+        state = state.substring(0, state.length()-SELECTED_DECK_DELIMITER.length());
+        return state;
+    }
+
+    private void restoreSavedState() {
+        if (stateSetting != null) {
+            String savedState = prefs.getPref(stateSetting);
+            selectedDeckType = getDeckTypeFromSavedState(savedState);
+            selectedDecks = getSelectedDecksFromSavedState(savedState);
+        }
+    }
+
+    private DeckType getDeckTypeFromSavedState(String savedState) {
+        try {
+            if (StringUtils.isBlank(savedState)) {
+                return selectedDeckType;
+            } else {
+                return DeckType.valueOf(savedState.split(";")[0]);
+            }
+        } catch (IllegalArgumentException ex) {
+            System.err.println(ex.getMessage() + ". Using default : " + selectedDeckType);
+            return selectedDeckType;
+        }
+    }
+
+    private List<String> getSelectedDecksFromSavedState(String savedState) {
+        try {
+            if (StringUtils.isBlank(savedState)) {
+                return new ArrayList<String>();
+            } else {
+                return Arrays.asList(savedState.split(";")[1].split(SELECTED_DECK_DELIMITER));
+            }
+        } catch (Exception ex) {
+            System.err.println(ex + " [savedState=" + savedState + "]");
+            return new ArrayList<String>();
+        }
+    }
+
+    private int[] getSelectedDeckIndices(List<String> listData, int[] defaultSelection) {
+        if (selectedDecks != null && selectedDecks.size() > 0) {
+            List<Integer> selectedIndices = new ArrayList<Integer>();
+            for (String deck : selectedDecks) {
+                int index = listData.indexOf(deck);
+                if (index >= 0) {
+                    selectedIndices.add(index);
+                }
+            }
+            int[] indices = ArrayUtils.toPrimitive(selectedIndices.toArray(new Integer[selectedIndices.size()]));
+            if (indices.length == 0) { indices = defaultSelection; }
+            // only do this once at startup.
+            selectedDecks = null;
+            return indices;
+        } else {
+            return defaultSelection;
+        }
     }
 
 }

@@ -18,6 +18,7 @@ import forge.game.Match;
 import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
+import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
 import forge.gui.menubar.IMenuProvider;
 import forge.gui.menubar.MenuUtil;
@@ -79,8 +80,8 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
 
         initializeGamePlayersComboBox();
 
-        view.getDcLeft().initialize();
-        view.getDcRight().initialize();
+        view.getDcLeft().initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
+        view.getDcRight().initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
 
         // Checkbox event handling
         view.getBtnStart().addActionListener(new ActionListener() {
@@ -128,6 +129,9 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
 
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
+
+        view.getDcLeft().saveState();
+        view.getDcRight().saveState();
 
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
