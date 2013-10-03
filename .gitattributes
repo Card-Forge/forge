@@ -14417,6 +14417,11 @@ res/skins/smith/bg_splash.png -text
 res/skins/smith/bg_texture.jpg -text
 res/skins/smith/font1.ttf -text
 res/skins/smith/sprite_icons.png -text
+res/skins/the_dale/bg_match.jpg -text
+res/skins/the_dale/bg_splash.png -text
+res/skins/the_dale/bg_texture.jpg -text
+res/skins/the_dale/font1.ttf -text
+res/skins/the_dale/sprite_icons.png -text
 res/skins/the_simpsons/bg_match.jpg -text
 res/skins/the_simpsons/bg_splash.png -text
 res/skins/the_simpsons/bg_texture.jpg -text
