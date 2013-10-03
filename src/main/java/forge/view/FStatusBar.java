@@ -14,7 +14,7 @@ import forge.gui.toolbox.FSkin.SkinColor;
 
 @SuppressWarnings("serial")
 public class FStatusBar extends JPanel {
-    private static final SkinColor foreColor = FSkin.getColor(Colors.CLR_TEXT);
+    private static final SkinColor foreColor = FSkin.getColor(Colors.CLR_TEXT).alphaColor(150);
     private static final SkinColor clrTheme = FSkin.getColor(Colors.CLR_THEME);
     private static final SkinColor backColor = clrTheme.stepColor(0).darker();
     private static final SkinColor borderColor = clrTheme.stepColor(-80);
@@ -40,7 +40,7 @@ public class FStatusBar extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, lblStatus, 0, SpringLayout.NORTH, this);
         
         add(clock);
-        layout.putConstraint(SpringLayout.EAST, clock, -5, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.EAST, clock, -4, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, clock, 0, SpringLayout.NORTH, lblStatus);
         
         this.setVisible(visible0);
