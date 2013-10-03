@@ -111,12 +111,12 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
             return;
         }
         this.getItems().put(item, Integer.valueOf(this.count(item) + amount));
-        this.setListInSync(false);
+        this.isListInSync = false;
     }
 
     private void put(final T item, final int amount) {
         this.getItems().put(item, amount);
-        this.setListInSync(false);
+        this.isListInSync = false;
     }
 
     /**
@@ -134,7 +134,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
                 this.add((T) cr);
             }
         }
-        this.setListInSync(false);
+        this.isListInSync = false;
     }
 
     /**
@@ -153,7 +153,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
                 this.add((T) e.getKey(), e.getValue());
             }
         }
-        this.setListInSync(false);
+        this.isListInSync = false;
     }
 
     /**
@@ -186,7 +186,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         } else {
             this.getItems().put(item, count - amount);
         }
-        this.setListInSync(false);
+        this.isListInSync = false;
         return true;
     }
 
@@ -222,6 +222,6 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      */
     public void clear() {
         this.getItems().clear();
-        this.setListInSync(false);
+        this.isListInSync = false;
     }
 }

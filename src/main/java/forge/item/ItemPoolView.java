@@ -88,7 +88,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     private final transient List<Entry<T, Integer>> itemsOrdered = new ArrayList<Map.Entry<T, Integer>>();
 
     /** Whether list is in sync. */
-    private transient boolean isListInSync = false;
+    protected transient boolean isListInSync = false;
 
     /**
      * iterator.
@@ -188,7 +188,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * @return List<Entry<T, Integer>>
      */
     public final List<Entry<T, Integer>> getOrderedList() {
-        if (!this.isListInSync()) {
+        if (!this.isListInSync) {
             this.rebuildOrderedList();
         }
         return this.itemsOrdered;
@@ -201,7 +201,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
                 this.itemsOrdered.add(e);
             }
         }
-        this.setListInSync(true);
+        this.isListInSync = true;
     }
 
     /**
@@ -238,24 +238,6 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
         return this.myClass;
     }
 
-    /**
-     * Checks if is list in sync.
-     * 
-     * @return the isListInSync
-     */
-    public boolean isListInSync() {
-        return this.isListInSync;
-    }
-
-    /**
-     * Sets the list in sync.
-     * 
-     * @param isListInSync0
-     *            the isListInSync to set
-     */
-    protected void setListInSync(final boolean isListInSync0) {
-        this.isListInSync = isListInSync0;
-    }
 
     /**
      * To item list string.

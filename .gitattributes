@@ -15518,7 +15518,6 @@ src/test/java/forge/GuiDownloadPicturesLQTest.java svneol=native#text/plain
 src/test/java/forge/GuiDownloadSetPicturesLQTest.java svneol=native#text/plain
 src/test/java/forge/GuiProgressBarWindowTest.java svneol=native#text/plain
 src/test/java/forge/PanelTest.java svneol=native#text/plain
-src/test/java/forge/ReadDraftRankingsTest.java -text
 src/test/java/forge/RunTest.java svneol=native#text/plain
 src/test/java/forge/TinyTest.java svneol=native#text/plain
 src/test/java/forge/card/mana/ManaPartTest.java svneol=native#text/plain
