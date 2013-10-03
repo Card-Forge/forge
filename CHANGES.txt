@@ -8,6 +8,20 @@ Forge Beta: 10-##-2013 ver 1.5.2
 Release Notes
 -------------
 
+- Introducing the Forge button -
+The old menu bar has been removed.
+The Forge button on the left side of the titlebar will drop down the same menu of options.
+The Alt and Menu keys will also open this menu (even if the titlebar is hidden), with full keyboard navigation of the menus then possible.
+The titlebar, minimize, maximize, and close buttons have all been increased in height to make room for the Forge button.
+Menu items have been increased in height to make them more touch screen friendly. They also now enforce a minimum 100px width.
+F1 has been changed to launch the Forge wiki since it no longer needs to toggle menu bar visibility.
+
+- New status bar -
+The Forge version and digital clock have been moved to a new thin status bar to make room for the new Forge button.
+Status messages that used to display on the right side of the old menu bar will now display in place of the version on the left side of the status bar.
+F12 and Forge > Layout > View > Status Bar will allow hiding this status bar.
+Both titlebar and status bar visibility will now be remembered between sessions.
+
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6. Those who are using Mac OS should install the JDK version rather than the JRE version.
 
