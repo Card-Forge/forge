@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import forge.gui.FNetOverlay;
 import forge.gui.toolbox.FAbsolutePositioner;
 import forge.gui.toolbox.FOverlay;
+import forge.view.FStatusBar;
 import forge.view.FView;
 
 /**
@@ -116,6 +117,7 @@ public final class SResizingUtil {
         final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
         final JPanel pnlContent = FView.SINGLETON_INSTANCE.getPnlContent();
         final JPanel pnlInsets = FView.SINGLETON_INSTANCE.getPnlInsets();
+        final FStatusBar statusBar = FView.SINGLETON_INSTANCE.getStatusBar();
 
         Rectangle mainBounds = FView.SINGLETON_INSTANCE.getFrame().getInnerPane().getContentPane().getBounds();
         mainBounds.y = 0; // Play nicely with MenuBar if visible or not.
@@ -123,8 +125,13 @@ public final class SResizingUtil {
         FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
         FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
         
-        pnlInsets.setBounds(mainBounds);
+        final int statusBarHeight = statusBar.getPreferredSize().height;
+        
+        pnlInsets.setBounds(mainBounds.x, mainBounds.y, mainBounds.width, mainBounds.height - statusBarHeight);
         pnlInsets.validate();
+        
+        statusBar.setBounds(mainBounds.x, mainBounds.y + mainBounds.height - statusBarHeight, mainBounds.width, statusBarHeight);
+        statusBar.validate();
 
         final int w = pnlContent.getWidth();
         final int h = pnlContent.getHeight();

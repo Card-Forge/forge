@@ -77,6 +77,8 @@ public enum FView {
     private final DocumentPane lpnDocument = new DocumentPane();
     // The content panel is placed in the layered pane.
     private final JPanel pnlContent = new JPanel();
+    // The status bar to display at the bottom of the frame
+    private FStatusBar statusBar;
     // An insets panel neatly maintains a space from the edges of the window and
     // whatever layout is happening, without having to explicitly define a margin each time.
     private FPanel pnlInsets;
@@ -125,6 +127,11 @@ public enum FView {
 
         pnlContent.setOpaque(false);
         pnlContent.setLayout(null);
+
+        // Status bar has foreground/background color which
+        // must be instantiated after the skin is loaded.
+        statusBar = new FStatusBar(frmDocument);
+        lpnDocument.add(statusBar, (Integer) 1);
 
         FSkin.get(FOverlay.SINGLETON_INSTANCE.getPanel()).setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
 
@@ -312,6 +319,11 @@ public enum FView {
     /** @return {@link javax.swing.JPanel} */
     public JPanel getPnlContent() {
         return pnlContent;
+    }
+    
+    /** @return {@link forge.view.FStatusBar} */
+    public FStatusBar getStatusBar() {
+        return statusBar;
     }
 
     /** @return {@link javax.swing.JPanel} */
