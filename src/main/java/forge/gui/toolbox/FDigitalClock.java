@@ -15,6 +15,7 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class FDigitalClock extends JLabel {
     private final Calendar now = Calendar.getInstance();
+    private final DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT);
 
     public FDigitalClock() {
         Timer timer = new Timer(60000, new ActionListener() {
@@ -30,6 +31,6 @@ public class FDigitalClock extends JLabel {
     }
 
     private void updateDisplay() {
-        setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(now.getTime()));
+        setText(timeFormatter.format(now.getTime()));
     }
 }
