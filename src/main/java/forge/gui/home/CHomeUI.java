@@ -14,6 +14,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
 import forge.gui.menubar.IMenuProvider;
+import forge.gui.menubar.MenuUtil;
 import forge.net.FServer;
 import forge.net.NetServer;
 import forge.properties.ForgePreferences;
@@ -30,6 +31,8 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
     /** */
     SINGLETON_INSTANCE;
 
+    Object previousDoc = null;
+
     private LblMenuItem lblSelected = new LblMenuItem(VSubmenuConstructed.SINGLETON_INSTANCE);
 
     /** Programatically selects a menu item.
@@ -42,6 +45,12 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
             lblSelected.repaintSelf();
         }
 
+        if (previousDoc != null) {
+            if (!previousDoc.equals(id0.getDoc().getLayoutControl())) {
+                MenuUtil.setupMenuBar(null);
+            }
+        }
+
         id0.getDoc().populate();
         id0.getDoc().getLayoutControl().update();
         lblSelected = VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(id0);
@@ -49,6 +58,8 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
 
         prefs.setPref(FPref.SUBMENU_CURRENTMENU, id0.toString());
         Singletons.getModel().getPreferences().save();
+
+        previousDoc = id0.getDoc().getLayoutControl();
     }
 
     /** @param lbl0 {@link forge.gui.home.LblMenuItem} */

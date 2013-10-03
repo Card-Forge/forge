@@ -36,7 +36,7 @@ public class FMenuBar extends JMenuBar {
         provider = provider0;
         refresh();
     }
-    
+
     public void refresh() {
         removeAll();
         add(ForgeMenu.getMenu());
@@ -44,7 +44,17 @@ public class FMenuBar extends JMenuBar {
         add(LayoutMenu.getMenu());
         add(HelpMenu.getMenu());
         addStatusLabel();
-        revalidate();
+        repaintMenuBar();
+    }
+
+    /**
+     * Ensures that MenuBar is repainted correctly.
+     * <p>
+     * !! Both statements are required - do not alter !!
+     */
+    private void repaintMenuBar() {
+        validate();
+        repaint();
     }
 
     /**
