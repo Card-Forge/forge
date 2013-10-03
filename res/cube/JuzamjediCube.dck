@@ -1,15 +1,17 @@
 [metadata]
 Name=JuzamjediCube
 [Main]
-1 Abrupt Decay|RTR
 1 Abyssal Persecutor|WWK
 1 Accorder Paladin|MBS
 1 Acidic Slime|M11
 1 AEther Adept|M11
+1 AEtherling|DGM
 1 Ajani Goldmane|M10
+1 Ajani Vengeant|ALA
 1 Ajani, Caller of the Pride|M13
 1 Ancestral Recall|2ED
 1 Ancestral Vision|TSP
+1 Ancient Tomb|TMP
 1 Angel of Serenity|RTR
 1 Animate Dead|4ED
 1 Ankh of Mishra|4ED
@@ -20,15 +22,15 @@ Name=JuzamjediCube
 1 Armageddon|S99
 1 Arrogant Bloodlord|ROE
 1 Ash Zealot|RTR
-1 Augur of Bolas|M13
+1 Ashiok, Nightmare Weaver|THS
 1 Avalanche Riders|ULG
-1 Azorius Arrester|RTR
 1 Badlands|3ED
+1 Balance|4ED
 1 Baleful Strix|PC2
 1 Ball Lightning|DRK
 1 Bane of the Living|LGN
-1 Banefire|CFX
 1 Baneslayer Angel|M11
+1 Banisher Priest|M14
 1 Batterskull|NPH
 1 Battlefield Forge|10E
 1 Bayou|3ED
@@ -40,7 +42,6 @@ Name=JuzamjediCube
 1 Black Vise|4ED
 1 Blade of the Sixth Pride|FUT
 1 Blade Splicer|NPH
-1 Blastoderm|NMS
 1 Blightning|ALA
 1 Blistering Firecat|ONS
 1 Blood Crypt|DIS
@@ -53,7 +54,7 @@ Name=JuzamjediCube
 1 Bone Shredder|ULG
 1 Bonesplitter|MRD
 1 Bonfire of the Damned|AVR
-1 Boros Charm|GTC
+1 Boon Satyr|THS
 1 Boros Reckoner|GTC
 1 Brainstorm|ICE
 1 Bramblecrush|ISD
@@ -61,12 +62,15 @@ Name=JuzamjediCube
 1 Bribery|8ED
 1 Brimstone Volley|ISD
 1 Burst Lightning|ZEN
+1 Catastrophe|USG
 1 Caves of Koilos|10E
 1 Celestial Colonnade|WWK
+1 Chain Lightning|LEG
 1 Chainer's Edict|TOR
 1 Chameleon Colossus|MOR
 1 Chandra Nalaar|M11
 1 Chandra's Phoenix|M12
+1 Chandra, Pyromaster|M14
 1 Char|RAV
 1 Chromatic Lantern|RTR
 1 Chrome Mox|MRD
@@ -74,16 +78,17 @@ Name=JuzamjediCube
 1 Cloistered Youth|ISD
 1 Cloudgoat Ranger|LRW
 1 Coalition Relic|FUT
+1 Coldsteel Heart|CSP
 1 Compulsive Research|RAV
 1 Condescend|5DN
 1 Consecrated Sphinx|MBS
 1 Consuming Vapors|ROE
 1 Control Magic|4ED
 1 Counterspell|7ED
+1 Craterhoof Behemoth|AVR
 1 Creeping Tar Pit|WWK
 1 Crucible of Worlds|5DN
 1 Cryptic Command|LRW
-1 Crystal Shard|MRD
 1 Cultivate|M11
 1 Cursed Scroll|TMP
 1 Cyclonic Rift|RTR
@@ -93,18 +98,17 @@ Name=JuzamjediCube
 1 Dark Ritual|4ED
 1 Day of Judgment|M11
 1 Daze|NMS
-1 Deadbridge Goliath|RTR
 1 Deathrite Shaman|RTR
-1 Delver of Secrets|ISD
+1 Deep Analysis|TOR
 1 Demonic Tutor|3ED
 1 Deranged Hermit|ULG
 1 Detention Sphere|RTR
+1 Devil's Play|DDK
 1 Diabolic Edict|TMP
 1 Diabolic Servitude|USG
 1 Disciple of Bolas|M13
 1 Disenchant|6ED
 1 Dismember|NPH
-1 Domri Rade|GTC
 1 Doom Blade|M11
 1 Drana, Kalastria Bloodchief|ROE
 1 Dreadbore|RTR
@@ -112,15 +116,15 @@ Name=JuzamjediCube
 1 Duplicant|MRD
 1 Duress|M11
 1 Duskmantle Seer|GTC
-1 Earthquake|PO2
 1 Electrolyze|GPT
 1 Elesh Norn, Grand Cenobite|NPH
 1 Elite Vanguard|M11
 1 Elspeth, Knight-Errant|ALA
+1 Elspeth, Sun's Champion|THS
+1 Elvish Mystic|M14
 1 Enclave Cryptologist|ROE
 1 Enlightened Tutor|6ED
 1 Entomb|ODY
-1 Erratic Portal|EXO
 1 Eternal Dragon|SCG
 1 Eternal Witness|5DN
 1 Everflowing Chalice|WWK
@@ -131,14 +135,15 @@ Name=JuzamjediCube
 1 Fact or Fiction|INV
 1 Faith's Fetters|RAV
 1 Faithless Looting|DKA
-1 Far // Away|DGM
 1 Farseek|M13
 1 Fauna Shaman|M11
 1 Fettergeist|AVR
+1 Fiend Hunter|DDK
 1 Figure of Destiny|EVE
 1 Fire Imp|POR
 1 Fireblast|VIS
 1 Firebolt|ODY
+1 Firedrinker Satyr|THS
 1 Flagstones of Trokair|TSP
 1 Flames of the Firebrand|M13
 1 Flametongue Kavu|PLS
@@ -154,17 +159,20 @@ Name=JuzamjediCube
 1 Fyndhorn Elves|ICE
 1 Garruk Relentless|ISD
 1 Garruk Wildspeaker|M11
+1 Garruk, Caller of Beasts|M14
 1 Garruk, Primal Hunter|M12
 1 Geist of Saint Traft|ISD
+1 Gemstone Mine|WTH
 1 Genesis|JUD
 1 Ghastly Demise|ODY
 1 Ghor-Clan Rampager|GTC
 1 Gideon Jura|ROE
-1 Gideon, Champion of Justice|GTC
+1 Gifts Ungiven|MMA
+1 Gilded Drake|USG
 1 Glen Elendra Archmage|EVE
-1 Glorious Anthem|USG
 1 Go for the Throat|MBS
 1 Goblin Guide|ZEN
+1 Goblin Welder|ULG
 1 Godless Shrine|GPT
 1 Gore-House Chainwalker|RTR
 1 Grafted Wargear|5DN
@@ -188,6 +196,7 @@ Name=JuzamjediCube
 1 Hellspark Elemental|CFX
 1 Hero of Bladehold|MBS
 1 Hero of Oxid Ridge|MBS
+1 Hero's Downfall|THS
 1 High Priest of Penance|GTC
 1 Hinterland Harbor|ISD
 1 Horizon Canopy|FUT
@@ -195,6 +204,7 @@ Name=JuzamjediCube
 1 Hymn to Tourach|FEM
 1 Hypnotic Specter|M10
 1 Icy Manipulator|ICE
+1 Imposing Sovereign|M14
 1 Impulse|VIS
 1 Incinerate|10E
 1 Indrik Stomphowler|DIS
@@ -211,26 +221,31 @@ Name=JuzamjediCube
 1 Joraga Treespeaker|ROE
 1 Journey to Nowhere|ZEN
 1 Jungle Lion|POR
+1 Kalonian Hydra|M14
 1 Kargan Dragonlord|ROE
+1 Karmic Guide|ULG
 1 Karn Liberated|NPH
-1 Keiga, the Tide Star|CHK
 1 Keldon Champion|UDS
 1 Keldon Marauders|PLC
 1 Keldon Vandals|UDS
+1 Kira, Great Glass-Spinner|BOK
 1 Kird Ape|9ED
 1 Kitchen Finks|SHM
 1 Knight of Meadowgrain|LRW
 1 Knight of the Reliquary|CFX
 1 Kodama's Reach|CHK
 1 Kokusho, the Evening Star|CHK
-1 Kor Duelist|ZEN
+1 Kor Sanctifiers|HOP
+1 Kor Skyfisher|DDF
 1 Koth of the Hammer|SOM
 1 Kozilek, Butcher of Truth|ROE
 1 Krosan Tusker|ONS
 1 Land Tax|4ED
 1 Leonin Relic-Warder|MBS
 1 Library of Alexandria|ARN
+1 Life // Death|APC
 1 Life from the Loam|RAV
+1 Lifebane Zombie|M14
 1 Lightning Bolt|M11
 1 Lightning Greaves|MRD
 1 Lightning Helix|RAV
@@ -240,6 +255,7 @@ Name=JuzamjediCube
 1 Liliana Vess|M11
 1 Liliana's Specter|M11
 1 Lingering Souls|DKA
+1 Living Death|COM
 1 Llanowar Elves|M11
 1 Llanowar Wastes|10E
 1 Lodestone Golem|WWK
@@ -257,7 +273,7 @@ Name=JuzamjediCube
 1 Manic Vandal|M11
 1 Marsh Flats|ZEN
 1 Master of the Wild Hunt|M10
-1 Masticore|UDS
+1 Mayor of Avabruck|ISD
 1 Maze of Ith|DRK
 1 Meloku the Clouded Mirror|CHK
 1 Memory Lapse|7ED
@@ -265,12 +281,14 @@ Name=JuzamjediCube
 1 Mimic Vat|SOM
 1 Mind Stone|10E
 1 Mind Twist|3ED
+1 Mindsparker|M14
 1 Mirran Crusader|MBS
 1 Mirror Entity|LRW
 1 Miscalculation|ULG
 1 Mishra's Factory|4ED
 1 Mistral Charger|DIS
 1 Misty Rainforest|ZEN
+1 Moat|LEG
 1 Mogg Fanatic|TMP
 1 Molten Rain|MRD
 1 Molten-Tail Masticore|SOM
@@ -285,19 +303,24 @@ Name=JuzamjediCube
 1 Mutavault|MOR
 1 Myr Battlesphere|SOM
 1 Mystic Snake|APC
+1 Mystical Tutor|MIR
+1 Natural Order|POR
+1 Necromancy|VIS
 1 Negate|M10
 1 Nekrataal|10E
 1 Nevinyrral's Disk|5ED
 1 Nezumi Graverobber|CHK
 1 Night's Whisper|5DN
-1 Niv-Mizzet, Dracogenius|RTR
 1 Noble Hierarch|CFX
 1 Ob Nixilis, the Fallen|ZEN
 1 Oblivion Ring|ALA
 1 Oblivion Stone|COM
 1 Obzedat, Ghost Council|GTC
-1 Ohran Viper|CSP
+1 Olivia Voldaren|ISD
+1 Omenspeaker|THS
 1 Oona's Prowler|LRW
+1 Opposition|7ED
+1 Oracle of Mul Daya|ZEN
 1 Overgrown Tomb|RAV
 1 Pack Rat|RTR
 1 Path to Exile|CFX
@@ -312,6 +335,7 @@ Name=JuzamjediCube
 1 Plated Geopede|ZEN
 1 Plow Under|8ED
 1 Polluted Delta|ONS
+1 Polukranos, World Eater|THS
 1 Ponder|LRW
 1 Porcelain Legionnaire|NPH
 1 Pouncing Jaguar|USG
@@ -319,24 +343,28 @@ Name=JuzamjediCube
 1 Preordain|M11
 1 Prime Speaker Zegana|GTC
 1 Primeval Titan|M11
-1 Prophetic Bolt|COM
+1 Profane Command|LRW
 1 Psionic Blast|TSB
+1 Psychatog|ODY
 1 Puppeteer Clique|SHM
 1 Qasali Pridemage|ARB
 1 Raging Ravine|WWK
+1 Ral Zarek|DGM
 1 Rancor|ULG
 1 Ravages of War|PTK
-1 Razormane Masticore|5DN
 1 Reanimate|TMP
+1 Reckless Charge|HOP
 1 Reckless Waif|ISD
 1 Recurring Nightmare|EXO
 1 Red Sun's Zenith|MBS
+1 Reflecting Pool|SHM
 1 Regrowth|3ED
 1 Remand|RAV
 1 Repeal|GPT
 1 Restoration Angel|AVR
 1 Reveillark|MOR
 1 Rift Bolt|TSP
+1 Rishadan Port|MMQ
 1 River Boa|ZEN
 1 Rofellos, Llanowar Emissary|UDS
 1 Rolling Earthquake|PTK
@@ -353,10 +381,10 @@ Name=JuzamjediCube
 1 Searing Spear|M13
 1 Sensei's Divining Top|CHK
 1 Serendib Efreet|3ED
-1 Serum Visions|5DN
-1 Shadowmage Infiltrator|TSB
+1 Shadowborn Demon|M14
 1 Shelldock Isle|LRW
 1 Sheoldred, Whispering One|NPH
+1 Show and Tell|USG
 1 Shriekmaw|LRW
 1 Shrine of Burning Rage|NPH
 1 Siege-Gang Commander|10E
@@ -366,12 +394,14 @@ Name=JuzamjediCube
 1 Skinrender|SOM
 1 Skinshifter|M12
 1 Skullclamp|DST
-1 Skylasher|DGM
 1 Smash to Smithereens|SHM
+1 Smokestack|USG
 1 Smother|ONS
 1 Snapcaster Mage|ISD
+1 Sneak Attack|USG
 1 Snuff Out|MMQ
 1 Sol Ring|LEA
+1 Soldier of the Pantheon|THS
 1 Solemn Simulacrum|MRD
 1 Soltari Champion|STH
 1 Soltari Monk|TMP
@@ -379,16 +409,18 @@ Name=JuzamjediCube
 1 Soltari Trooper|TMP
 1 Sorin, Lord of Innistrad|DKA
 1 Sower of Temptation|LRW
+1 Spear of Heliod|THS
 1 Spectral Procession|SHM
 1 Spell Pierce|ZEN
+1 Spellskite|NPH
 1 Sphinx of Jwar Isle|ZEN
+1 Sphinx of the Steel Wind|PD3
 1 Sphinx's Revelation|RTR
-1 Spike Jester|DGM
 1 Spikeshot Elder|SOM
-1 Spined Thopter|NPH
 1 Splatter Thug|RTR
 1 Squee, Goblin Nabob|MMQ
 1 Staggershock|ROE
+1 Steam Augury|THS
 1 Steam Vents|GPT
 1 Steppe Lynx|ZEN
 1 Stomping Ground|GPT
@@ -412,17 +444,21 @@ Name=JuzamjediCube
 1 Sword of Light and Shadow|DST
 1 Sword of War and Peace|NPH
 1 Swords to Plowshares|ICE
+1 Sylvan Caryatid|THS
 1 Sylvan Library|4ED
 1 Taiga|3ED
 1 Tamiyo, the Moon Sage|AVR
 1 Tangle Wire|NMS
 1 Tarmogoyf|FUT
+1 Tattermunge Maniac|SHM
 1 Temple Garden|RAV
 1 Terastodon|WWK
 1 Terminate|ARB
 1 Terramorphic Expanse|10E
 1 Terror|6ED
+1 Tezzeret the Seeker|DDF
 1 Thalia, Guardian of Thraben|DKA
+1 Thassa, God of the Sea|THS
 1 Thirst for Knowledge|MRD
 1 Thoughtseize|LRW
 1 Thragtusk|M13
@@ -431,12 +467,12 @@ Name=JuzamjediCube
 1 Thundermaw Hellkite|M13
 1 Time Spiral|USG
 1 Time Walk|2ED
+1 Timetwister|LEA
 1 Tinker|ULG
 1 Tombstalker|FUT
 1 Torch Fiend|DKA
 1 Treachery|UDS
 1 Treetop Village|10E
-1 Triskelion|ATQ
 1 Troll Ascetic|10E
 1 Tropical Island|3ED
 1 Trygon Predator|DIS
@@ -445,6 +481,7 @@ Name=JuzamjediCube
 1 Ulamog, the Infinite Gyre|ROE
 1 Ultimate Price|RTR
 1 Umezawa's Jitte|BOK
+1 Unburial Rites|ISD
 1 Underground Sea|3ED
 1 Upheaval|ODY
 1 Vampire Nighthawk|ZEN
@@ -469,6 +506,7 @@ Name=JuzamjediCube
 1 Weathered Wayfarer|ONS
 1 Wheel of Fortune|LEA
 1 Wickerbough Elder|EVE
+1 Wild Dogs|USG
 1 Wild Mongrel|ODY
 1 Wild Nacatl|ALA
 1 Windswept Heath|ONS
@@ -480,6 +518,7 @@ Name=JuzamjediCube
 1 Worn Powerstone|USG
 1 Wrath of God|10E
 1 Wurmcoil Engine|SOM
+1 Xenagos, the Reveler|THS
 1 Yavimaya Elder|UDS
-1 Yosei, the Morning Star|CHK
+1 Young Pyromancer|M14
 1 Zealous Conscripts|AVR

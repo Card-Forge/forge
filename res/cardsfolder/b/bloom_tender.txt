@@ -2,9 +2,9 @@ Name:Bloom Tender
 ManaCost:1 G
 Types:Creature Elf Druid
 PT:1/1
-A:AB$ Mana | Cost$ T | Produced$ W | ConditionCheckSVar$ CheckW | ConditionSVarCompare$ GE1 | SubAbility$ DBManaU | SpellDescription$ For each color among permanents you control, add one mana of that color to your mana pool.
-SVar:DBManaU:DB$ Mana | Produced$ U | ConditionCheckSVar$ CheckU | ConditionSVarCompare$ GE1 | SubAbility$ DBManaB
-SVar:DBManaB:DB$ Mana | Produced$ B | ConditionCheckSVar$ CheckB | ConditionSVarCompare$ GE1 | SubAbility$ DBManaR
+A:AB$ Mana | Cost$ T | Produced$ W | ConditionCheckSVar$ CheckW | SVar$ CheckW | ConditionSVarCompare$ GE1 | SubAbility$ DBManaU | SpellDescription$ For each color among permanents you control, add one mana of that color to your mana pool.
+SVar:DBManaU:DB$ Mana | Produced$ U | ConditionCheckSVar$ CheckU | SVar$ CheckU | ConditionSVarCompare$ GE1 | SubAbility$ DBManaB
+SVar:DBManaB:DB$ Mana | Produced$ B | ConditionCheckSVar$ CheckB | SVar$ CheckB | ConditionSVarCompare$ GE1 | SubAbility$ DBManaR
 SVar:DBManaR:DB$ Mana | Produced$ R | ConditionCheckSVar$ CheckR | ConditionSVarCompare$ GE1 | SubAbility$ DBManaG
 SVar:DBManaG:DB$ Mana | Produced$ G | ConditionCheckSVar$ CheckG | ConditionSVarCompare$ GE1
 SVar:CheckW:Count$Valid Permanent.YouCtrl+White
