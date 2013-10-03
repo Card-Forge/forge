@@ -15260,12 +15260,11 @@ src/main/java/forge/gui/match/views/VPicture.java -text
 src/main/java/forge/gui/match/views/VPlayers.java -text
 src/main/java/forge/gui/match/views/VStack.java -text
 src/main/java/forge/gui/match/views/package-info.java svneol=native#text/plain
-src/main/java/forge/gui/menubar/FMenuBar.java -text
-src/main/java/forge/gui/menubar/IMenuProvider.java -text
-src/main/java/forge/gui/menubar/MenuUtil.java -text
 src/main/java/forge/gui/menus/ForgeMenu.java -text
 src/main/java/forge/gui/menus/HelpMenu.java -text
+src/main/java/forge/gui/menus/IMenuProvider.java -text
 src/main/java/forge/gui/menus/LayoutMenu.java -text
+src/main/java/forge/gui/menus/MenuUtil.java -text
 src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/FAbsolutePositioner.java -text
@@ -15489,8 +15488,10 @@ src/main/java/forge/util/storage/StorageReaderFolder.java -text
 src/main/java/forge/util/storage/package-info.java -text
 src/main/java/forge/view/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/view/FFrame.java -text
+src/main/java/forge/view/FNavigationBar.java -text
 src/main/java/forge/view/FStatusBar.java -text
 src/main/java/forge/view/FTitleBar.java -text
+src/main/java/forge/view/FTitleBarBase.java -text
 src/main/java/forge/view/FView.java -text
 src/main/java/forge/view/Main.java -text
 src/main/java/forge/view/SplashFrame.java -text

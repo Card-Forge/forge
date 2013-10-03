@@ -1631,7 +1631,7 @@ public enum FSkin {
         ComponentSkin.reapplyAll();
 
         //refresh certain components skinned via look and feel
-        Singletons.getControl().getMenuBar().refresh();
+        Singletons.getControl().getForgeMenu().refresh();
         FComboBoxWrapper.refreshAllSkins();
         FComboBoxPanel.refreshAllSkins();
         CSubmenuPreferences.SINGLETON_INSTANCE.updateCurrentSkin();

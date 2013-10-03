@@ -12,7 +12,7 @@ import javax.swing.event.MenuListener;
 
 import forge.Singletons;
 import forge.gui.match.controllers.CDev;
-import forge.gui.menubar.MenuUtil;
+import forge.gui.menus.MenuUtil;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -93,11 +93,11 @@ public class DevModeMenu implements ActionListener {
         return new MenuListener() {
             @Override
             public void menuSelected(MenuEvent arg0) {
-                Singletons.getControl().getMenuBar().setStatusText("Options for testing during development");
+                Singletons.getView().getStatusBar().setStatusText("Options for testing during development");
             }
             @Override
             public void menuDeselected(MenuEvent arg0) {
-                Singletons.getControl().getMenuBar().setStatusText("");
+                Singletons.getView().getStatusBar().setStatusText("");
             }
             @Override
             public void menuCanceled(MenuEvent arg0) { }

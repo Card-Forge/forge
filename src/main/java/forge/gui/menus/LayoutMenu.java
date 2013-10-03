@@ -17,8 +17,8 @@ import forge.control.FControl.Screens;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
 import forge.gui.MouseUtil.MouseCursor;
+import forge.gui.framework.SResizingUtil;
 import forge.gui.match.controllers.CDock;
-import forge.gui.menubar.MenuUtil;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -32,9 +32,9 @@ import forge.view.FView;
 public final class LayoutMenu {
     private LayoutMenu() { }
 
-    private static CDock controller =  CDock.SINGLETON_INSTANCE;
+    private static final CDock controller =  CDock.SINGLETON_INSTANCE;
     private static Screens currentScreen;
-    private static ForgePreferences prefs = Singletons.getModel().getPreferences();
+    private static final ForgePreferences prefs = Singletons.getModel().getPreferences();
     private static boolean showIcons = false;
 
     public static JMenu getMenu() {
@@ -58,6 +58,7 @@ public final class LayoutMenu {
     private static JMenu getMenu_ViewOptions() {
         JMenu menu = new JMenu("View");
         menu.add(getMenuItem_ShowTitleBar());
+        menu.add(getMenuItem_ShowStatusBar());
         if (currentScreen != Screens.HOME_SCREEN) {
             menu.add(getMenuItem_ShowTabs());
         }
@@ -139,14 +140,15 @@ public final class LayoutMenu {
                 boolean showTabs = menuItem.getState();
                 FView.SINGLETON_INSTANCE.refreshAllCellLayouts(showTabs);
                 prefs.setPref(FPref.UI_HIDE_GAME_TABS, !showTabs);
+                prefs.save();
             }
         };
     }
 
     private static JMenuItem getMenuItem_ShowTitleBar() {
-        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Titlebar");
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Title Bar");
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
-        menuItem.setState(Singletons.getView().getFrame().getShowTitleBar());
+        menuItem.setState(!prefs.getPrefBoolean(FPref.UI_HIDE_TITLE_BAR));
         menuItem.addActionListener(getShowTitleBarAction(menuItem));
         return menuItem;
     }
@@ -155,7 +157,29 @@ public final class LayoutMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean showTitleBar = menuItem.getState();
+                prefs.setPref(FPref.UI_HIDE_TITLE_BAR, !showTitleBar);
+                prefs.save();
                 Singletons.getView().getFrame().setShowTitleBar(showTitleBar);
+            }
+        };
+    }
+    
+    private static JMenuItem getMenuItem_ShowStatusBar() {
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Status Bar");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
+        menuItem.setState(!prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
+        menuItem.addActionListener(getShowStatusBarAction(menuItem));
+        return menuItem;
+    }
+    private static ActionListener getShowStatusBarAction(final JCheckBoxMenuItem menuItem) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean showStatusBar = menuItem.getState();
+                prefs.setPref(FPref.UI_HIDE_STATUS_BAR, !showStatusBar);
+                prefs.save();
+                Singletons.getView().getStatusBar().setVisible(showStatusBar);
+                SResizingUtil.resizeWindow();
             }
         };
     }

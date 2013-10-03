@@ -9,7 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import forge.Singletons;
-import forge.gui.menubar.MenuUtil;
+import forge.gui.menus.MenuUtil;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 

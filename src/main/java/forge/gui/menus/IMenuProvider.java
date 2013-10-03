@@ -1,4 +1,4 @@
-package forge.gui.menubar;
+package forge.gui.menus;
 
 import java.util.List;
 

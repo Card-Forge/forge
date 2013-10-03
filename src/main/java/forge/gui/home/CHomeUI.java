@@ -13,8 +13,8 @@ import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
-import forge.gui.menubar.IMenuProvider;
-import forge.gui.menubar.MenuUtil;
+import forge.gui.menus.IMenuProvider;
+import forge.gui.menus.MenuUtil;
 import forge.net.FServer;
 import forge.net.NetServer;
 import forge.properties.ForgePreferences;
@@ -47,7 +47,7 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
 
         if (previousDoc != null) {
             if (!previousDoc.equals(id0.getDoc().getLayoutControl())) {
-                MenuUtil.setupMenuBar(null);
+                MenuUtil.setMenuProvider(null);
             }
         }
 
@@ -124,7 +124,7 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
     }
 
     private void setupMyMenuBar() {
-        Singletons.getControl().getMenuBar().setupMenuBar(this);
+        Singletons.getControl().getForgeMenu().setProvider(this);
     }
 
     /* (non-Javadoc)

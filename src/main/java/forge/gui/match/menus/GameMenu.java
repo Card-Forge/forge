@@ -13,7 +13,7 @@ import javax.swing.JRadioButtonMenuItem;
 
 import forge.Singletons;
 import forge.gui.match.controllers.CDock;
-import forge.gui.menubar.MenuUtil;
+import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.gui.toolbox.FSkin.SkinProp;

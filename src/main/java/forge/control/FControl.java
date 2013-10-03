@@ -64,11 +64,9 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
-import forge.gui.menubar.FMenuBar;
-import forge.gui.menubar.MenuUtil;
+import forge.gui.menus.ForgeMenu;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
-import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -88,10 +86,11 @@ import forge.view.FView;
 public enum FControl implements KeyEventDispatcher {
     instance;
 
-    private FMenuBar menuBar;
+    private ForgeMenu forgeMenu;
     private List<Shortcut> shortcuts;
     private JLayeredPane display;
     private Screens state = Screens.UNKNOWN;
+    private boolean altKeyLastDown;
 
     private WindowListener waDefault, waConcede, waLeaveBazaar, waLeaveEditor;
 
@@ -174,7 +173,7 @@ public enum FControl implements KeyEventDispatcher {
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
 
-        createMenuBar();
+        forgeMenu = new ForgeMenu();
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
@@ -217,13 +216,8 @@ public enum FControl implements KeyEventDispatcher {
         manager.addKeyEventDispatcher(this);
     }
 
-    private void createMenuBar() {
-        this.menuBar = new FMenuBar(Singletons.getView().getFrame());
-        this.menuBar.setVisible(MenuUtil.isMenuBarVisible());
-    }
-
-    public FMenuBar getMenuBar() {
-        return this.menuBar;
+    public ForgeMenu getForgeMenu() {
+        return this.forgeMenu;
     }
 
     /**
@@ -486,27 +480,33 @@ public enum FControl implements KeyEventDispatcher {
      */
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
-        // Toggle menu bar visibility using F1 key.
-        if (e.getKeyCode() == KeyEvent.VK_F1 && e.getID() == KeyEvent.KEY_RELEASED) {
-            toggleMenuBarVisibility();
-            return true;
-        } else {
-            //Allow the event to be redispatched
-            return false;
-        }
-    }
-
-    private void toggleMenuBarVisibility() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                ForgePreferences prefs = Singletons.getModel().getPreferences();
-                boolean isHidden = !prefs.getPrefBoolean(FPref.UI_HIDE_MENUBAR);
-                menuBar.setVisible(!isHidden);
-                prefs.setPref(FPref.UI_HIDE_MENUBAR, String.valueOf(isHidden));
-                prefs.save();
+        // Show Forge menu if Alt key pressed without modifiers and released without pressing any other keys in between
+        if (e.getKeyCode() == KeyEvent.VK_ALT) {
+            if (e.getID() == KeyEvent.KEY_RELEASED) {
+                if (altKeyLastDown) {
+                    forgeMenu.show(true);
+                    return true;
+                }
             }
-        });
+            else if (e.getID() == KeyEvent.KEY_PRESSED && e.getModifiers() == KeyEvent.ALT_MASK) {
+                altKeyLastDown = true;
+            }
+        }
+        else {
+            altKeyLastDown = false;
+            if (e.getID() == KeyEvent.KEY_PRESSED) {
+                if (forgeMenu.handleKeyEvent(e)) { //give Forge menu the chance to handle the key event
+                    return true;
+                }
+            }
+            else if (e.getID() == KeyEvent.KEY_RELEASED) {
+                if (e.getKeyCode() == KeyEvent.VK_CONTEXT_MENU) {
+                    forgeMenu.show();
+                }
+            }
+        }
+        //Allow the event to be redispatched
+        return false;
     }
 }
 

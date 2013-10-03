@@ -60,7 +60,7 @@ import forge.gui.match.nonsingleton.VCommand;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.views.VPlayers;
-import forge.gui.menubar.IMenuProvider;
+import forge.gui.menus.IMenuProvider;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.special.PhaseLabel;
@@ -422,7 +422,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
      */
     @Override
     public void initialize() {
-        Singletons.getControl().getMenuBar().setupMenuBar(this);
+        Singletons.getControl().getForgeMenu().setProvider(this);
     }
 
     /* (non-Javadoc)

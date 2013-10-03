@@ -66,7 +66,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CLONE_MODE_SOURCE ("false"), /** */
         UI_MATCH_IMAGE_VISIBLE ("true"),
         UI_THEMED_COMBOBOX ("true"),
-        UI_HIDE_MENUBAR ("false"),                  // Dev setting only - cannot be set from GUI.
+        UI_HIDE_TITLE_BAR ("false"),
+        UI_HIDE_STATUS_BAR ("false"),
         UI_HIDE_GAME_TABS ("false"),                // Visibility of tabs in match screen.
 
         UI_FOR_TOUCHSCREN("false"),

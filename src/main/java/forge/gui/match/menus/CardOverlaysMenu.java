@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 
 import forge.Singletons;
 import forge.gui.match.CMatchUI;
-import forge.gui.menubar.MenuUtil;
+import forge.gui.menus.MenuUtil;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 

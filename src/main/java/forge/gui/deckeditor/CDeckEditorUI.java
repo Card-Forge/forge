@@ -58,7 +58,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
-import forge.gui.menubar.IMenuProvider;
+import forge.gui.menus.IMenuProvider;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
@@ -554,7 +554,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
      */
     @Override
     public void initialize() {
-        Singletons.getControl().getMenuBar().setupMenuBar(this);
+        Singletons.getControl().getForgeMenu().setProvider(this);
     }
 
     /* (non-Javadoc)

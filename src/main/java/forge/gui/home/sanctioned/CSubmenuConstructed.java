@@ -20,8 +20,8 @@ import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
-import forge.gui.menubar.IMenuProvider;
-import forge.gui.menubar.MenuUtil;
+import forge.gui.menus.IMenuProvider;
+import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FComboBox;
 import forge.net.FServer;
 import forge.net.Lobby;
@@ -65,7 +65,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     @Override
     public void update() {
 
-        MenuUtil.setupMenuBar(this);
+        MenuUtil.setMenuProvider(this);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() { view.getBtnStart().requestFocusInWindow(); }

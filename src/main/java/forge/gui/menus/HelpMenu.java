@@ -9,8 +9,8 @@ import java.io.IOException;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
-import forge.gui.menubar.MenuUtil;
 import forge.util.FileUtil;
 
 public final class HelpMenu {
@@ -47,7 +47,7 @@ public final class HelpMenu {
         JMenu mnu = new JMenu("Getting Started");
         mnu.add(getMenuItem_HowToPlayFile());
         mnu.addSeparator();
-        mnu.add(getMenuItem_UrlLink("Forge Wiki", "http://www.slightlymagic.net/wiki/Forge"));
+        mnu.add(getMenuItem_UrlLink("Forge Wiki", "http://www.slightlymagic.net/wiki/Forge", KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0)));
         mnu.add(getMenuItem_UrlLink("What is Forge?", "http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=468"));
         return mnu;
     }
@@ -112,11 +112,16 @@ public final class HelpMenu {
             Desktop.getDesktop().open(file);
         }
     }
-
-
+    
     private static JMenuItem getMenuItem_UrlLink(String caption, String url) {
         JMenuItem menuItem = new JMenuItem(caption);
         menuItem.addActionListener(getLaunchUrlAction(url));
+        return menuItem;
+    }
+
+    private static JMenuItem getMenuItem_UrlLink(String caption, String url, KeyStroke accelerator) {
+        JMenuItem menuItem = getMenuItem_UrlLink(caption, url);
+        menuItem.setAccelerator(accelerator);
         return menuItem;
     }
 

@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import forge.gui.framework.SResizingUtil;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.FSkin.CompoundSkinBorder;
@@ -27,27 +28,29 @@ public class FFrame extends JFrame {
     private Dimension sizeBeforeResize;
     private Point mouseDownLoc;
     private int resizeCursor;
-    private FTitleBar titleBar;
+    private FTitleBarBase titleBar;
     private boolean maximized, showTitleBar;
-    private final JRootPane innerPane = new JRootPane();
 
     public FFrame() {
         setUndecorated(true);
-        setContentPane(innerPane);
     }
     
     public void initialize() {
+        initialize(new FTitleBar(this), true); //show titlebar by default
+    }
+    
+    public void initialize(FTitleBarBase titleBar0, boolean showTitleBar0) {
         // Frame border
         updateBorder();
         addResizeSupport();
 
         // Title bar
-        this.titleBar = new FTitleBar(this);
-        this.setShowTitleBar(true); //show titlebar by default
+        this.titleBar = titleBar0;
+        this.setShowTitleBar(showTitleBar0);
         addMoveSupport();
     }
 
-    public FTitleBar getTitleBar() {
+    public FTitleBarBase getTitleBar() {
         return this.titleBar;
     }
     
@@ -59,8 +62,11 @@ public class FFrame extends JFrame {
         if (this.showTitleBar == showTitleBar0) { return; }
         this.showTitleBar = showTitleBar0;
         this.titleBar.setVisible(showTitleBar0);
-        if (!showTitleBar0) {
+        if (!showTitleBar0 && !this.getMaximized()) {
             this.setMaximized(true); //only support hidden titlebar if maximized
+        }
+        else {
+            SResizingUtil.resizeWindow(); //ensure window layout updated to account for showing titlebar
         }
     }
     
@@ -150,10 +156,6 @@ public class FFrame extends JFrame {
                     BorderFactory.createLineBorder(Color.BLACK, 1), 
                     new LineSkinBorder(FSkin.getColor(Colors.CLR_BORDERS), borderThickness - 1)));
         }
-    }
-    
-    public JRootPane getInnerPane() {
-        return innerPane;
     }
     
     private void addMoveSupport() {

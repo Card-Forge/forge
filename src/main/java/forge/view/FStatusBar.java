@@ -25,7 +25,7 @@ public class FStatusBar extends JPanel {
     private final JLabel lblStatus = new JLabel();
     private final FDigitalClock clock = new FDigitalClock();
 
-    public FStatusBar(FFrame f) {
+    public FStatusBar(FFrame f, boolean visible0) {
         this.frame = f;
         setPreferredSize(new Dimension(f.getWidth(), 18));
         setLayout(this.layout);
@@ -42,6 +42,8 @@ public class FStatusBar extends JPanel {
         add(clock);
         layout.putConstraint(SpringLayout.EAST, clock, -4, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, clock, 0, SpringLayout.NORTH, lblStatus);
+        
+        this.setVisible(visible0);
     }
 
     public void setStatusText(String text) {
