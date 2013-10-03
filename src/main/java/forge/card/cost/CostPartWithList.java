@@ -92,7 +92,7 @@ public abstract class CostPartWithList extends CostPart {
     }
 
     public final boolean executePayment(SpellAbility ability, Card targetCard) {
-        this.list.add(targetCard);
+        this.list.add(CardUtil.getLKICopy(targetCard));
         doPayment(ability, targetCard);
         return true;
     }
