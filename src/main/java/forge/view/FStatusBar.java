@@ -27,7 +27,7 @@ public class FStatusBar extends JPanel {
 
     public FStatusBar(FFrame f, boolean visible0) {
         this.frame = f;
-        setPreferredSize(new Dimension(f.getWidth(), 18));
+        setPreferredSize(new Dimension(f.getWidth(), 19));
         setLayout(this.layout);
         setStatusText(""); //set default status based on frame title
         skin.setBackground(backColor);
@@ -36,11 +36,11 @@ public class FStatusBar extends JPanel {
         FSkin.get(clock).setForeground(foreColor);
 
         add(lblStatus);
-        layout.putConstraint(SpringLayout.WEST, lblStatus, 4, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.WEST, lblStatus, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, lblStatus, 0, SpringLayout.NORTH, this);
         
         add(clock);
-        layout.putConstraint(SpringLayout.EAST, clock, -4, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.EAST, clock, -5, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, clock, 0, SpringLayout.NORTH, lblStatus);
         
         this.setVisible(visible0);
