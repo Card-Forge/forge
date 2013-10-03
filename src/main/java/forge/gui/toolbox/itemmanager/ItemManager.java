@@ -280,29 +280,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      */
     public void addItems(Iterable<Map.Entry<T, Integer>> itemsToAdd) {
         final int n = this.table.getSelectedRow();
-        for (Map.Entry<T, Integer> item : itemsToAdd) {
-            this.pool.add(item.getKey(), item.getValue());
-            if (this.isUnfiltered()) {
-                this.model.addItem(item.getKey(), item.getValue());
-            }
-        }
-        this.updateView(false);
-        this.table.fixSelection(n);
-    }
-    
-    /**
-     * 
-     * addItems.
-     * 
-     * @param itemsToAdd
-     */
-    public void addItems(Collection<T> itemsToAdd) {
-        final int n = this.table.getSelectedRow();
-        for (T item : itemsToAdd) {
-            this.pool.add(item, 1);
-            if (this.isUnfiltered()) {
-                this.model.addItem(item, 1);
-            }
+        this.pool.addAll(itemsToAdd);
+        if (this.isUnfiltered()) {
+            this.model.addItems(itemsToAdd);
         }
         this.updateView(false);
         this.table.fixSelection(n);

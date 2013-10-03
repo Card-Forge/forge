@@ -364,7 +364,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         if (item instanceof PaperCard) {
             final PaperCard card = (PaperCard) item;
             this.getDeckManager().addItem(card, qty);
-            this.getCatalogManager().removeItem(item, qty);
             this.questData.getCards().buyCard(card, qty, value);
 
         } else if (item instanceof OpenablePack) {
@@ -379,13 +378,13 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 }
                 this.questData.getCards().buyPack(booster, value);
                 final List<PaperCard> newCards = booster.getCards();
-                final List<InventoryItem> newInventory = new LinkedList<InventoryItem>(newCards);
+
+                ItemPool<InventoryItem> newInventory = new ItemPool<InventoryItem>(InventoryItem.class);
+                newInventory.addAllFlat(newCards);
                 getDeckManager().addItems(newInventory);
-                final CardListViewer c = new CardListViewer(booster.getName(),
-                        "You have found the following cards inside:", newCards);
+                final CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", newCards);
                 c.show();
             }
-            this.getCatalogManager().removeItem(item, qty);
         } else if (item instanceof PreconDeck) {
             final PreconDeck deck = (PreconDeck) item;
             this.questData.getCards().buyPreconDeck(deck, value);
@@ -400,8 +399,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                     one ? "Deck" : String.format("%d copies of deck", qty),
                     deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),
                     "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
-            this.getCatalogManager().removeItem(item, qty);
-        }
+        } else return;
+        this.getCatalogManager().removeItem(item, qty);
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
