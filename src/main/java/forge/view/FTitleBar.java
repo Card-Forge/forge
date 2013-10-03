@@ -42,7 +42,7 @@ public class FTitleBar extends JMenuBar {
     public FTitleBar(FFrame f) {
         this.frame = f;
         f.setJMenuBar(this);
-        setPreferredSize(new Dimension(f.getWidth(), 22));
+        setPreferredSize(new Dimension(f.getWidth(), 26));
         setLayout(this.layout);
         FSkin.get(this).setBackground(backColor);
         setTitle(f.getTitle()); //set default title based on frame title
@@ -52,11 +52,11 @@ public class FTitleBar extends JMenuBar {
 
         add(lblTitle);
         layout.putConstraint(SpringLayout.WEST, lblTitle, 1, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.NORTH, lblTitle, 2, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.NORTH, lblTitle, 4, SpringLayout.NORTH, this);
 
         add(btnClose);
         layout.putConstraint(SpringLayout.EAST, btnClose, 0, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.NORTH, btnClose, 1, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.NORTH, btnClose, 0, SpringLayout.NORTH, this);
 
         add(btnMaximize);
         layout.putConstraint(SpringLayout.EAST, btnMaximize, 0, SpringLayout.WEST, btnClose);
@@ -105,7 +105,7 @@ public class FTitleBar extends JMenuBar {
         private boolean pressed, hovered;
 
         private TitleBarButton() {
-            setPreferredSize(new Dimension(19, 19));
+            setPreferredSize(new Dimension(25, 25));
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -119,8 +119,10 @@ public class FTitleBar extends JMenuBar {
                     if (SwingUtilities.isLeftMouseButton(e)) {
                         if (pressed) {
                             pressed = false;
-                            repaintSelf();
-                            onClick();
+                            if (hovered) { //only handle click if mouse released over button
+                                repaintSelf();
+                                onClick();
+                            }
                         }
                     }
                 }
@@ -147,14 +149,16 @@ public class FTitleBar extends JMenuBar {
         
         @Override
         public void paintComponent(Graphics g) {
-            if (pressed) {
-                skin.setGraphicsColor(g, buttonDownColor);
-                g.fillRect(0, 0, getWidth(), getHeight());
-                g.translate(1, 1); //translate icon to give pressed button look
-            }
-            else if (hovered) {
-                skin.setGraphicsColor(g, buttonHoverColor);
-                g.fillRect(0, 0, getWidth(), getHeight());
+            if (hovered) {
+                if (pressed) {
+                    skin.setGraphicsColor(g, buttonDownColor);
+                    g.fillRect(0, 0, getWidth(), getHeight());
+                    g.translate(1, 1); //translate icon to give pressed button look
+                }
+                else {
+                    skin.setGraphicsColor(g, buttonHoverColor);
+                    g.fillRect(0, 0, getWidth(), getHeight());
+                }
             }
         }
     }
@@ -172,10 +176,11 @@ public class FTitleBar extends JMenuBar {
             super.paintComponent(g);
 
             int thickness = 2;
-            int offset = 6;
-            int x1 = offset;
-            int x2 = getWidth() - offset;
-            int y = getHeight() - offset - thickness;
+            int offsetX = 8;
+            int offsetY = 7;
+            int x1 = offsetX;
+            int x2 = getWidth() - offsetX;
+            int y = getHeight() - offsetY - thickness;
             
             Graphics2D g2d = (Graphics2D) g;
             skin.setGraphicsColor(g2d, foreColor);
@@ -197,8 +202,8 @@ public class FTitleBar extends JMenuBar {
             super.paintComponent(g);
 
             int thickness = 2;
-            int offsetX = 5;
-            int offsetY = 6;
+            int offsetX = 7;
+            int offsetY = 8;
             int x = offsetX;
             int y = offsetY;
             int width = getWidth() - 2 * offsetX;
@@ -244,7 +249,7 @@ public class FTitleBar extends JMenuBar {
             super.paintComponent(g);
 
             int thickness = 2;
-            int offset = 6;
+            int offset = 7;
             int x1 = offset;
             int y1 = offset;
             int x2 = getWidth() - offset - 1;
