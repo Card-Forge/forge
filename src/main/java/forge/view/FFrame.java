@@ -15,12 +15,13 @@ import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import forge.Singletons;
 import forge.gui.framework.SResizingUtil;
-import forge.gui.menus.LayoutMenu;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.FSkin.CompoundSkinBorder;
 import forge.gui.toolbox.FSkin.LineSkinBorder;
+import forge.properties.ForgePreferences.FPref;
 
 @SuppressWarnings("serial")
 public class FFrame extends JFrame {
@@ -143,13 +144,13 @@ public class FFrame extends JFrame {
         if (getMinimized()) { return; } //skip remaining logic while minimized
 
         this.maximized = (state == Frame.MAXIMIZED_BOTH);
-        if (!this.maximized && !this.getShowTitleBar()) { //only support hidden titlebar if maximized
-            if (this.isMainFrame) {
-                LayoutMenu.toggleShowTitleBar(); //if main frame, need to update layout menu so preference saved
+        if (this.maximized) {
+            if (this.isMainFrame) { //for main frame, use preference to determine whether to hide title bar when maximizing
+                this.setShowTitleBar(!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_HIDE_TITLE_BAR));
             }
-            else {
-                this.setShowTitleBar(true);
-            }
+        }
+        else { //only support hidden titlebar if maximized
+            this.setShowTitleBar(true);
         }
         updateBorder();
         this.titleBar.handleMaximizedChanged(); //update icon and tooltip for maximize button

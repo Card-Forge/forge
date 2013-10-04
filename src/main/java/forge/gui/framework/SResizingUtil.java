@@ -25,6 +25,7 @@ import forge.gui.toolbox.FAbsolutePositioner;
 import forge.gui.toolbox.FOverlay;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.view.FFrame;
 import forge.view.FNavigationBar;
 import forge.view.FStatusBar;
 import forge.view.FView;
@@ -119,19 +120,20 @@ public final class SResizingUtil {
 
     public static void resizeWindow() {
         final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
+        final FFrame frame = FView.SINGLETON_INSTANCE.getFrame();
         final FNavigationBar navigationBar = FView.SINGLETON_INSTANCE.getNavigationBar();
         final JPanel pnlContent = FView.SINGLETON_INSTANCE.getPnlContent();
         final JPanel pnlInsets = FView.SINGLETON_INSTANCE.getPnlInsets();
         final FStatusBar statusBar = FView.SINGLETON_INSTANCE.getStatusBar();
 
-        Rectangle mainBounds = FView.SINGLETON_INSTANCE.getFrame().getContentPane().getBounds();
+        Rectangle mainBounds = frame.getContentPane().getBounds();
         mainBounds.y = 0; // Play nicely with MenuBar if visible or not.
         FAbsolutePositioner.SINGLETON_INSTANCE.containerResized(mainBounds);
         FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
         FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
         
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        final int navigationBarHeight = prefs.getPrefBoolean(FPref.UI_HIDE_TITLE_BAR) ? 0 : navigationBar.getPreferredSize().height;
+        final int navigationBarHeight = frame.getShowTitleBar() ? navigationBar.getPreferredSize().height : 0;
         final int statusBarHeight = prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR) ? 0 : statusBar.getPreferredSize().height;
         
         navigationBar.setBounds(mainBounds.x, mainBounds.y, mainBounds.width, navigationBarHeight);
