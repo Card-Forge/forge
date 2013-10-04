@@ -144,12 +144,20 @@ public final class LayoutMenu {
             }
         };
     }
+    
+    private static JCheckBoxMenuItem menuItem_ShowTitleBar;
+    public static void toggleShowTitleBar() {
+        if (menuItem_ShowTitleBar != null) {
+            menuItem_ShowTitleBar.doClick();
+        }
+    }
 
     private static JMenuItem getMenuItem_ShowTitleBar() {
         final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Title Bar");
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
         menuItem.setState(!prefs.getPrefBoolean(FPref.UI_HIDE_TITLE_BAR));
         menuItem.addActionListener(getShowTitleBarAction(menuItem));
+        menuItem_ShowTitleBar = menuItem;
         return menuItem;
     }
     private static ActionListener getShowTitleBarAction(final JCheckBoxMenuItem menuItem) {

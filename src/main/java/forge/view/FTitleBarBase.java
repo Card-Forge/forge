@@ -25,6 +25,7 @@ import forge.gui.toolbox.FSkin.SkinColor;
 
 @SuppressWarnings("serial")
 public abstract class FTitleBarBase extends JMenuBar {
+    protected static final int visibleHeight = 26;
     protected static final SkinColor foreColor = FSkin.getColor(Colors.CLR_TEXT);
     protected static final SkinColor backColor = FSkin.getColor(Colors.CLR_THEME2);
     protected static final SkinColor borderColor = backColor.stepColor(-80);
@@ -40,7 +41,7 @@ public abstract class FTitleBarBase extends JMenuBar {
 
     protected FTitleBarBase(FFrame f) {
         this.frame = f;
-        setVisible(true); //set to visible by default so preferred size set
+        setVisible(false); //start out hidden unless frame chooses to show title bar
         setLayout(this.layout);
         skin.setBackground(backColor);
         skin.setMatteBorder(0, 0, 1, 0, borderColor);
@@ -49,15 +50,15 @@ public abstract class FTitleBarBase extends JMenuBar {
     protected void addControls() {
         add(btnClose);
         layout.putConstraint(SpringLayout.EAST, btnClose, 0, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.NORTH, btnClose, 0, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, btnClose, 0, SpringLayout.SOUTH, this);
 
         add(btnMaximize);
         layout.putConstraint(SpringLayout.EAST, btnMaximize, 0, SpringLayout.WEST, btnClose);
-        layout.putConstraint(SpringLayout.NORTH, btnMaximize, 0, SpringLayout.NORTH, btnClose);
+        layout.putConstraint(SpringLayout.SOUTH, btnMaximize, 0, SpringLayout.SOUTH, btnClose);
         
         add(btnMinimize);
         layout.putConstraint(SpringLayout.EAST, btnMinimize, 0, SpringLayout.WEST, btnMaximize);
-        layout.putConstraint(SpringLayout.NORTH, btnMinimize, 0, SpringLayout.NORTH, btnMaximize);
+        layout.putConstraint(SpringLayout.SOUTH, btnMinimize, 0, SpringLayout.SOUTH, btnMaximize);
     }
 
     public abstract String getTitle();
@@ -80,7 +81,7 @@ public abstract class FTitleBarBase extends JMenuBar {
     @Override
     public void setVisible(boolean visible) {
         //use height 0 to hide rather than setting visible to false to allow menu item accelerators to work
-        setPreferredSize(new Dimension(this.frame.getWidth(), visible ? 26 : 0));
+        setPreferredSize(new Dimension(this.frame.getWidth(), visible ? visibleHeight : 0));
         revalidate();
     }
     

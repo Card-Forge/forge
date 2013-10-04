@@ -20,7 +20,13 @@ F1 has been changed to launch the Forge wiki since it no longer needs to toggle 
 The Forge version and digital clock have been moved to a new thin status bar to make room for the new Forge button.
 Status messages that used to display on the right side of the old menu bar will now display in place of the version on the left side of the status bar.
 F12 and Forge > Layout > View > Status Bar will allow hiding this status bar.
+While status bar hidden and maximized, digital clock will display in title bar left of minimize button
 Both titlebar and status bar visibility will now be remembered between sessions.
+
+- Hidden title bar can be revealed temporarily -
+If the title bar is hidden, moving the mouse to the top of the screen will now drop down the title bar until you mouse away
+The title bar will appear on top of other components in this case rather than pushing anything down
+The title bar will remain visible while accessing the Forge menu
 
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6. Those who are using Mac OS should install the JDK version rather than the JRE version.

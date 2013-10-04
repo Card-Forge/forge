@@ -122,7 +122,8 @@ public enum FView {
         FAbsolutePositioner.SINGLETON_INSTANCE.initialize(lpnDocument, (Integer) 2);
         lpnDocument.add(pnlPreview, (Integer) 3);
         lpnDocument.add(pnlTabOverflow, (Integer) 4);
-        lpnDocument.add(navigationBar, (Integer) 5); //ensure this appears over all other non-overlay layers
+        lpnDocument.add(navigationBar.getPnlReveal(), (Integer) 5); //put this at layer directly behind navigation bar
+        lpnDocument.add(navigationBar, (Integer) 6); //ensure this appears over all other non-overlay layers
         lpnDocument.add(FOverlay.SINGLETON_INSTANCE.getPanel(), JLayeredPane.MODAL_LAYER);
         // Note: when adding new panels here, keep in mind that the layered pane
         // has a null layout, so new components will be W0 x H0 pixels - gotcha!

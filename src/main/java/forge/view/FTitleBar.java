@@ -23,7 +23,7 @@ public class FTitleBar extends FTitleBarBase {
     protected void addControls() {
         add(lblTitle);
         layout.putConstraint(SpringLayout.WEST, lblTitle, 1, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.NORTH, lblTitle, 4, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, lblTitle, -5, SpringLayout.SOUTH, this);
         super.addControls();
     }
     

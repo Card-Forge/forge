@@ -16,6 +16,7 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
 import forge.gui.framework.SResizingUtil;
+import forge.gui.menus.LayoutMenu;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.FSkin.CompoundSkinBorder;
@@ -29,7 +30,7 @@ public class FFrame extends JFrame {
     private Point mouseDownLoc;
     private int resizeCursor;
     private FTitleBarBase titleBar;
-    private boolean maximized, showTitleBar;
+    private boolean maximized, showTitleBar, isMainFrame;
 
     public FFrame() {
         setUndecorated(true);
@@ -40,6 +41,8 @@ public class FFrame extends JFrame {
     }
     
     public void initialize(FTitleBarBase titleBar0, boolean showTitleBar0) {
+        this.isMainFrame = (FView.SINGLETON_INSTANCE.getFrame() == this);
+
         // Frame border
         updateBorder();
         addResizeSupport();
@@ -65,7 +68,7 @@ public class FFrame extends JFrame {
         if (!showTitleBar0 && !this.getMaximized()) {
             this.setMaximized(true); //only support hidden titlebar if maximized
         }
-        else {
+        else if (this.isMainFrame) {
             SResizingUtil.resizeWindow(); //ensure window layout updated to account for showing titlebar
         }
     }
@@ -140,8 +143,13 @@ public class FFrame extends JFrame {
         if (getMinimized()) { return; } //skip remaining logic while minimized
 
         this.maximized = (state == Frame.MAXIMIZED_BOTH);
-        if (!this.maximized) {
-            this.setShowTitleBar(true); //only support hidden titlebar if maximized
+        if (!this.maximized && !this.getShowTitleBar()) { //only support hidden titlebar if maximized
+            if (this.isMainFrame) {
+                LayoutMenu.toggleShowTitleBar(); //if main frame, need to update layout menu so preference saved
+            }
+            else {
+                this.setShowTitleBar(true);
+            }
         }
         updateBorder();
         this.titleBar.handleMaximizedChanged(); //update icon and tooltip for maximize button

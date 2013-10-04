@@ -2,10 +2,16 @@ package forge.view;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JPanel;
 import javax.swing.SpringLayout;
+import javax.swing.Timer;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
@@ -25,6 +31,10 @@ public class FNavigationBar extends FTitleBarBase {
 
     private final FButton btnForge = new FButton("Forge");
     private final FDigitalClock clock = new FDigitalClock();
+    private final JPanel pnlReveal = new JPanel();
+    private Timer incrementRevealTimer, checkForRevealChangeTimer;
+    private boolean hidden;
+    private int revealDir = 0;
     private long timeMenuHidden = 0;
 
     public FNavigationBar(FFrame f) {
@@ -34,21 +44,22 @@ public class FNavigationBar extends FTitleBarBase {
         setIconImage(this.frame.getIconImage()); //set default icon image based on frame icon image
         FSkin.get(btnForge).setForeground(foreColor);
         FSkin.get(clock).setForeground(foreColor);
-        addControls();
+        addControls();        
+        setupPnlReveal();
     }
     
     @Override
     protected void addControls() {
         add(btnForge);
         layout.putConstraint(SpringLayout.WEST, btnForge, 1, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.NORTH, btnForge, 1, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, btnForge, -1, SpringLayout.SOUTH, this);
         addForgeButtonListeners();
 
         super.addControls();
 
         add(clock);
         layout.putConstraint(SpringLayout.EAST, clock, -6, SpringLayout.WEST, btnMinimize);
-        layout.putConstraint(SpringLayout.NORTH, clock, 4, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, clock, -5, SpringLayout.SOUTH, this);
         updateClockVisibility();
     }
     
@@ -56,6 +67,11 @@ public class FNavigationBar extends FTitleBarBase {
     public void handleMaximizedChanged() {
         super.handleMaximizedChanged();
         updateClockVisibility();
+    }
+    
+    //only show clock if maximized and status bar hidden
+    public void updateClockVisibility() {
+        clock.setVisible(this.frame.getMaximized() && prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
     }
     
     private void addForgeButtonListeners() {
@@ -80,11 +96,6 @@ public class FNavigationBar extends FTitleBarBase {
         });
     }
     
-    //only show clock if maximized and status bar hidden
-    public void updateClockVisibility() {
-        this.clock.setVisible(this.frame.getMaximized() && prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
-    }
-    
     public void showForgeMenu(boolean hideIfAlreadyShown) {
         if (!btnForge.isToggled()) {
             btnForge.setToggled(true);
@@ -93,6 +104,111 @@ public class FNavigationBar extends FTitleBarBase {
         else if (hideIfAlreadyShown) {
             forgeMenu.setVisible(false);
         }
+    }
+    
+    //setup panel used to reveal navigation bar when hidden
+    private void setupPnlReveal() {
+        pnlReveal.setVisible(hidden);
+        pnlReveal.setOpaque(false);
+        pnlReveal.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if (revealDir == 0) {
+                    startReveal();
+                }
+            }
+        });
+        incrementRevealTimer = new Timer(500 / visibleHeight, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                incrementReveal();
+            }
+        });
+        checkForRevealChangeTimer = new Timer(250, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                checkForRevealChange();
+            }
+        });
+    }
+    
+    private void startReveal() {
+        if (this.getHeight() == visibleHeight) { return; }
+        if (revealDir == 0) {
+            incrementRevealTimer.setInitialDelay(250);
+            incrementRevealTimer.start();
+            checkForRevealChangeTimer.stop();
+        }
+        revealDir = 1;
+    }
+    
+    private void stopReveal() {
+        if (this.getHeight() == 0) { return; }
+        if (revealDir == 0) {
+            incrementRevealTimer.setInitialDelay(250);
+            incrementRevealTimer.start();
+            checkForRevealChangeTimer.stop();
+        }
+        revealDir = -1;
+    }
+    
+    private void incrementReveal() {
+        int newHeight = this.getHeight() + revealDir * 2;
+        switch (revealDir) {
+            case 0:
+                incrementRevealTimer.stop();
+                return;
+            case 1:
+                if (newHeight >= visibleHeight) {
+                    newHeight = visibleHeight;
+                    revealDir = 0;
+                    incrementRevealTimer.stop();
+                    checkForRevealChangeTimer.start(); //once open fully, start another timer to check when mouse moves away
+                }
+                break;
+            case -1:
+                if (newHeight <= 0) {
+                    newHeight = 0;
+                    revealDir = 0;
+                    incrementRevealTimer.stop();
+                }
+                break;
+        }
+        this.setSize(this.getWidth(), newHeight);
+        revalidate();
+        checkForRevealChange();
+    }
+    
+    private void checkForRevealChange() {
+        if (hidden && this.getHeight() > 0 && !btnForge.isToggled()) { //don't change reveal while Forge menu open
+            final Rectangle screenBounds = new Rectangle(this.getLocationOnScreen(), this.getSize());
+            if (screenBounds.contains(MouseInfo.getPointerInfo().getLocation())) {
+                startReveal();
+            }
+            else {
+                stopReveal();
+            }
+        }
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        hidden = !visible;
+        if (pnlReveal != null) { //check needed because FTitleBarBase constructor calls this
+            revealDir = 0;
+            incrementRevealTimer.stop();
+            checkForRevealChangeTimer.stop();
+            pnlReveal.setVisible(hidden);
+        }
+        super.setVisible(visible);
+    }
+    
+    @Override
+    public void setBounds(int x, int y, int width, int height) {
+        super.setBounds(x, y, width, height);
+        pnlReveal.setBounds(x, y, width, 1);
+    }
+    
+    public JPanel getPnlReveal() {
+        return pnlReveal;
     }
     
     @Override
