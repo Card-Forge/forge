@@ -1,7 +1,7 @@
-Forge Beta: 10-##-2013 ver 1.5.2
+Forge Beta: 10-04-2013 ver 1.5.2
 
 
-13### cards in total.
+13328 cards in total.
 
 
 -------------
@@ -16,6 +16,7 @@ The titlebar, minimize, maximize, and close buttons have all been increased in h
 Menu items have been increased in height to make them more touch screen friendly. They also now enforce a minimum 100px width.
 F1 has been changed to launch the Forge wiki since it no longer needs to toggle menu bar visibility.
 
+
 - New status bar -
 The Forge version and digital clock have been moved to a new thin status bar to make room for the new Forge button.
 Status messages that used to display on the right side of the old menu bar will now display in place of the version on the left side of the status bar.
@@ -23,10 +24,12 @@ F12 and Forge > Layout > View > Status Bar will allow hiding this status bar.
 While status bar hidden and maximized, digital clock will display in title bar left of minimize button
 Both titlebar and status bar visibility will now be remembered between sessions.
 
+
 - Hidden title bar can be revealed temporarily -
 If the title bar is hidden, moving the mouse to the top of the screen will now drop down the title bar until you mouse away
 The title bar will appear on top of other components in this case rather than pushing anything down
 The title bar will remain visible while accessing the Forge menu
+
 
 - Forge now requires Java 7 -
 Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6. Those who are using Mac OS should install the JDK version rather than the JRE version.
@@ -38,13 +41,6 @@ At this time Forge now requires Java 7 and will no longer run under Java 6.
 Unfortunately, the Mac OS X builder that we were using does not support Java 7. We hope to find and to use a different Mac OS X builder in order to continue releasing a Mac OS bundled application like we have in the past.
 
 Currently, the windows/unix release of Forge includes a launcher file named "forge.command". Double click on the "forge.command" launcher command file and this will in turn launch the Forge jar file via the terminal application while increasing the Java heap space. This should be a temporary inconvenience.
-
-
----------
-New Cards
----------
-
-
 
 
 ------------
@@ -69,7 +65,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+DrDev
+Gos
+Juzamjedi
+Marc
+Max
+RumbleBBU
+Sloth
+Sol
+spr
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
