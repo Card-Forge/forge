@@ -12,9 +12,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.Timer;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-
 import forge.Singletons;
 import forge.gui.menus.ForgeMenu;
 import forge.gui.toolbox.FButton;
@@ -83,27 +80,21 @@ public class FNavigationBar extends FTitleBarBase {
                 }
             }
         });
-        forgeMenu.addPopupMenuListener(new PopupMenuListener() {
-            @Override
-            public void popupMenuWillBecomeInvisible(PopupMenuEvent popupMenuEvent) {
-                btnForge.setToggled(false);
-                timeMenuHidden = System.currentTimeMillis();
-            }
-            @Override
-            public void popupMenuWillBecomeVisible(PopupMenuEvent popupMenuEvent) {}
-            @Override
-            public void popupMenuCanceled(PopupMenuEvent popupMenuEvent) {}
-        });
     }
     
     public void showForgeMenu(boolean hideIfAlreadyShown) {
         if (!btnForge.isToggled()) {
             btnForge.setToggled(true);
-            forgeMenu.show(this, 1, this.getHeight());
+            forgeMenu.getPopupMenu().show(this, 1, this.getHeight());
         }
         else if (hideIfAlreadyShown) {
-            forgeMenu.setVisible(false);
+            forgeMenu.hide();
         }
+    }
+    
+    public void onForgeMenuHidden() {
+        btnForge.setToggled(false);
+        timeMenuHidden = System.currentTimeMillis();
     }
     
     //setup panel used to reveal navigation bar when hidden

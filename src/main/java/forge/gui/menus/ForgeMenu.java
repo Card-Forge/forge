@@ -11,17 +11,19 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import forge.Singletons;
 import forge.control.RestartUtil;
 import forge.control.FControl.Screens;
 import forge.util.TypeUtil;
 
-@SuppressWarnings("serial")
-public class ForgeMenu extends JPopupMenu {
+public final class ForgeMenu {
     private static final int minItemWidth = 100;
     private static final int itemHeight = 25;
 
+    private JPopupMenu popupMenu;
     private IMenuProvider provider;
     private static HashMap<KeyStroke, JMenuItem> activeShortcuts = new HashMap<KeyStroke, JMenuItem>();
 
@@ -29,14 +31,20 @@ public class ForgeMenu extends JPopupMenu {
         refresh();
     }
     
-    @Override
     public void show() {
         show(false);
     }
     
-    @Override
     public void show(boolean hideIfAlreadyShown) {
         Singletons.getView().getNavigationBar().showForgeMenu(hideIfAlreadyShown);
+    }
+    
+    public void hide() {
+        popupMenu.setVisible(false);
+    }
+    
+    public JPopupMenu getPopupMenu() {
+        return popupMenu;
     }
 
     public void setProvider(IMenuProvider provider0) {
@@ -46,7 +54,17 @@ public class ForgeMenu extends JPopupMenu {
     
     public void refresh() {
         activeShortcuts.clear();
-        removeAll();
+        popupMenu = new JPopupMenu();
+        popupMenu.addPopupMenuListener(new PopupMenuListener() {
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent popupMenuEvent) {
+                Singletons.getView().getNavigationBar().onForgeMenuHidden();
+            }
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent popupMenuEvent) {}
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent popupMenuEvent) {}
+        });
         if (provider != null) {
             List<JMenu> menus = provider.getMenus();
             if (menus != null) {
@@ -63,11 +81,13 @@ public class ForgeMenu extends JPopupMenu {
         add(getMenuItem_Exit());
     }
     
-    @Override
-    public JMenuItem add(JMenuItem item) {
-        item = super.add(item);
+    public void add(JMenuItem item) {
+        item = popupMenu.add(item);
         setupItem(item);
-        return item;
+    }
+    
+    public void addSeparator() {
+        popupMenu.addSeparator();
     }
     
     private void setupMenu(JMenu menu) {
@@ -95,7 +115,7 @@ public class ForgeMenu extends JPopupMenu {
     public boolean handleKeyEvent(KeyEvent e) {
         JMenuItem item = activeShortcuts.get(KeyStroke.getKeyStrokeForEvent(e));
         if (item != null) {
-            setVisible(false); //ensure menu doesn't stay open if currently open
+            hide(); //ensure menu doesn't stay open if currently open
             item.doClick();
             return true;
         }
