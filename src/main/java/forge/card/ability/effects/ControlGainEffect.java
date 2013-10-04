@@ -23,7 +23,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         List<Player> newController = getTargetPlayers(sa, "NewController");
-        if (newController.size() == 0) {
+        if (newController.isEmpty()) {
             newController.add(sa.getActivatingPlayer());
         }
 
