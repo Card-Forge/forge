@@ -213,23 +213,26 @@ public class QuestController {
      * New game.
      *
      * @param name the name
-     * @param diff the diff
+     * @param difficulty
+     *      the difficulty
      * @param mode the mode
-     * @param startPool the start type
-     * @param startFormat the format of starting pool
-     * @param preconName the precon name
-     * @param userFormat user-defined format, if any
-     * @param persist
-     *      enforce the format for the whole quest
-     * @param userDeck
-     *      user-specified starting deck
+     * @param formatPrizes
+     *          prize boosters format
+     * @param allowSetUnlocks
+     *      allow unlocking of sets
+     * @param startingCards
+     *      the starting deck
+     * @param formatStartingPool
+     *      format used for the starting pool
      * @param startingWorld
      *      starting world
+     * @param userPrefs
+     *      user preferences
      */
     public void newGame(final String name, final int difficulty, final QuestMode mode,
             final GameFormat formatPrizes, final boolean allowSetUnlocks,
             final Deck startingCards, final GameFormat formatStartingPool,
-            final String startingWorld) {
+            final String startingWorld, final StartingPoolPreferences userPrefs) {
 
         this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks, startingWorld)); // pass awards and unlocks here
 
@@ -240,7 +243,7 @@ public class QuestController {
             if (formatStartingPool != null) {
                 filter = formatStartingPool.getFilterPrinted();
             }
-            this.myCards.setupNewGameCardPool(filter, difficulty);
+            this.myCards.setupNewGameCardPool(filter, difficulty, userPrefs);
         }
 
         this.getAssets().setCredits(Singletons.getModel().getQuestPreferences().getPrefInt(DifficultyPrefs.STARTING_CREDITS, difficulty));
@@ -424,20 +427,20 @@ public class QuestController {
 
         return unlocksAvaliable > unlocksSpent ? Math.min(unlocksAvaliable - unlocksSpent, cntLocked) : 0;
     }
-    
+
     @Subscribe
     public void receiveGameEvent(GameEvent ev) { // Receives events only during quest games
-        if ( ev instanceof GameEventMulligan ) {
-            GameEventMulligan mev = (GameEventMulligan)ev;
+        if (ev instanceof GameEventMulligan) {
+            GameEventMulligan mev = (GameEventMulligan) ev;
             // First mulligan is free
-            if (mev.player.getLobbyPlayer() == FServer.instance.getLobby().getQuestPlayer() 
+            if (mev.player.getLobbyPlayer() == FServer.instance.getLobby().getQuestPlayer()
                     && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() == 0) {
                 mev.player.drawCard();
             }
         }
     }
-    
-    
+
+
     public int getTurnsToUnlockChallenge() {
         if (Singletons.getModel().getQuest().getAssets().hasItem(QuestItemType.ZEPPELIN)) {
             return 8;
@@ -450,31 +453,35 @@ public class QuestController {
         return 10;
     }
 
-    
+
     public final void regenerateChallenges() {
         final QuestAchievements achievements = model.getAchievements();
         final List<String> unlockedChallengeIds = new ArrayList<String>();
         final List<String> availableChallengeIds = achievements.getCurrentChallenges();
-    
+
         int maxChallenges = achievements.getWin() / getTurnsToUnlockChallenge() - achievements.getChallengesPlayed();
         if (maxChallenges > 5) {
             maxChallenges = 5;
         }
-    
+
         // Generate IDs as needed.
         if (achievements.getCurrentChallenges().size() < maxChallenges) {
             for (final QuestEventChallenge qc : allChallenges) {
-                if( qc.getWinsReqd() > achievements.getWin()) continue;
-                if( !qc.isRepeatable() && achievements.getLockedChallenges().contains(qc.getId())) continue;
+                if (qc.getWinsReqd() > achievements.getWin()) {
+                    continue;
+                }
+                if (!qc.isRepeatable() && achievements.getLockedChallenges().contains(qc.getId())) {
+                    continue;
+                }
                 if (!availableChallengeIds.contains(qc.getId())) {
                     unlockedChallengeIds.add(qc.getId());
                 }
             }
-    
+
             Collections.shuffle(unlockedChallengeIds);
-    
+
             maxChallenges = Math.min(maxChallenges, unlockedChallengeIds.size());
-    
+
             for (int i = availableChallengeIds.size(); i < maxChallenges; i++) {
                 availableChallengeIds.add(unlockedChallengeIds.get(i));
             }

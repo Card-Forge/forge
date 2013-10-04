@@ -98,11 +98,11 @@ public final class QuestUtilCards {
 
         if (usedFormat != null) {
             List<String> availableEditions = usedFormat.getAllowedSetCodes();
-            
+
             for (String edCode : availableEditions) {
                 CardEdition ed = Singletons.getModel().getEditions().get(edCode);
                 // Duel decks might have only 2 types of basic lands
-                if( CardEdition.Predicates.hasBasicLands.apply(ed) ) {
+                if (CardEdition.Predicates.hasBasicLands.apply(ed)) {
                     landCodes.add(edCode);
                 }
             }
@@ -126,14 +126,14 @@ public final class QuestUtilCards {
             landCode = "M10";
         }
 
-        for(String landName : Constant.Color.BASIC_LANDS) {
+        for (String landName : Constant.Color.BASIC_LANDS) {
             pool.add(db.getCard(landName, landCode), nBasic);
         }
 
 
         if (!snowLandCodes.isEmpty()) {
             String snowLandCode = Aggregates.random(snowLandCodes);
-            for(String landName : Constant.Color.SNOW_LANDS) {
+            for (String landName : Constant.Color.SNOW_LANDS) {
                 pool.add(db.getCard(landName, snowLandCode), nSnow);
             }
         }
@@ -172,6 +172,8 @@ public final class QuestUtilCards {
      * 
      * @param card
      *            the card
+     * @param qty
+     *          quantity
      */
     public void addSingleCard(final PaperCard card, int qty) {
         this.qa.getCardPool().add(card, qty);
@@ -229,13 +231,15 @@ public final class QuestUtilCards {
      *            the filter
      * @param idxDifficulty
      *            the idx difficulty
+     * @param userPrefs
+     *            user preferences
      */
-    public void setupNewGameCardPool(final Predicate<PaperCard> filter, final int idxDifficulty) {
+    public void setupNewGameCardPool(final Predicate<PaperCard> filter, final int idxDifficulty, final StartingPoolPreferences userPrefs) {
         final int nC = this.qpref.getPrefInt(DifficultyPrefs.STARTING_COMMONS, idxDifficulty);
         final int nU = this.qpref.getPrefInt(DifficultyPrefs.STARTING_UNCOMMONS, idxDifficulty);
         final int nR = this.qpref.getPrefInt(DifficultyPrefs.STARTING_RARES, idxDifficulty);
 
-        this.addAllCards(BoosterUtils.getQuestStarterDeck(filter, nC, nU, nR));
+        this.addAllCards(BoosterUtils.getQuestStarterDeck(filter, nC, nU, nR, userPrefs));
     }
 
     /**
@@ -243,6 +247,8 @@ public final class QuestUtilCards {
      * 
      * @param card
      *            the card
+     * @param qty
+     *          quantity
      * @param value
      *            the value
      */
@@ -299,8 +305,9 @@ public final class QuestUtilCards {
         }
         this.qc.getMyDecks().add(fromDeck);
         this.addAllCards(fromDeck.getMain().toFlatList());
-        if (fromDeck.has(DeckSection.Sideboard))
+        if (fromDeck.has(DeckSection.Sideboard)) {
             this.addAllCards(fromDeck.get(DeckSection.Sideboard).toFlatList());
+        }
     }
 
     /**
@@ -308,13 +315,23 @@ public final class QuestUtilCards {
      * 
      * @param card
      *            the card
-     * @param price
-     *            the price
+     * @param qty
+     *          quantity
+     * @param pricePerCard
+     *            the price per card
      */
     public void sellCard(final PaperCard card, int qty, final int pricePerCard) {
         this.sellCard(card, qty, pricePerCard, true);
     }
 
+    /**
+     * lose card.
+     * 
+     * @param card
+     *            the card
+     * @param qty
+     *          quantity
+     */
     public void loseCard(final PaperCard card, int qty) {
         this.sellCard(card, qty, 0, false);
     }
@@ -345,7 +362,9 @@ public final class QuestUtilCards {
             int cntInMain = deck.getMain().count(card);
             int cntInSb = deck.has(DeckSection.Sideboard) ? deck.get(DeckSection.Sideboard).count(card) : 0;
             int nToRemoveFromThisDeck = cntInMain + cntInSb - leftInPool;
-            if ( nToRemoveFromThisDeck <= 0 ) continue; // this is not the deck you are looking for
+            if (nToRemoveFromThisDeck <= 0) {
+                continue; // this is not the deck you are looking for
+            }
 
             int nToRemoveFromSb = Math.min(cntInSb, nToRemoveFromThisDeck);
             if (nToRemoveFromSb > 0) {
@@ -496,8 +515,8 @@ public final class QuestUtilCards {
     private void generatePreconsInShop(final int count) {
         final List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
         for (final PreconDeck deck : QuestController.getPrecons()) {
-            if (deck.getRecommendedDeals().meetsRequiremnts(this.qc.getAchievements()) &&
-                    (null == qc.getFormat() || qc.getFormat().isSetLegal(deck.getEdition()))) {
+            if (deck.getRecommendedDeals().meetsRequiremnts(this.qc.getAchievements())
+                    && (null == qc.getFormat() || qc.getFormat().isSetLegal(deck.getEdition()))) {
                 meetRequirements.add(deck);
             }
         }
@@ -506,18 +525,18 @@ public final class QuestUtilCards {
 
     @SuppressWarnings("unchecked")
     private SealedProductTemplate getShopBoosterTemplate() {
-        return new SealedProductTemplate(Lists.newArrayList( 
-            Pair.of(BoosterGenerator.COMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_COMMON)), 
-            Pair.of(BoosterGenerator.UNCOMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON)), 
+        return new SealedProductTemplate(Lists.newArrayList(
+            Pair.of(BoosterGenerator.COMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_COMMON)),
+            Pair.of(BoosterGenerator.UNCOMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON)),
             Pair.of(BoosterGenerator.RARE_MYTHIC, this.qpref.getPrefInt(QPref.SHOP_SINGLES_RARE))
         ));
     }
 
     @SuppressWarnings("unchecked")
     private SealedProductTemplate getBoosterTemplate() {
-        return new SealedProductTemplate(Lists.newArrayList( 
-            Pair.of(BoosterGenerator.COMMON, this.qpref.getPrefInt(QPref.BOOSTER_COMMONS)), 
-            Pair.of(BoosterGenerator.UNCOMMON, this.qpref.getPrefInt(QPref.BOOSTER_UNCOMMONS)), 
+        return new SealedProductTemplate(Lists.newArrayList(
+            Pair.of(BoosterGenerator.COMMON, this.qpref.getPrefInt(QPref.BOOSTER_COMMONS)),
+            Pair.of(BoosterGenerator.UNCOMMON, this.qpref.getPrefInt(QPref.BOOSTER_UNCOMMONS)),
             Pair.of(BoosterGenerator.RARE_MYTHIC, this.qpref.getPrefInt(QPref.BOOSTER_RARES))
         ));
     }
@@ -536,10 +555,10 @@ public final class QuestUtilCards {
         final int winPacks = this.qc.getAchievements().getWin() / winsForPack;
         final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
 
-        
+
         SealedProductTemplate tpl = getShopBoosterTemplate();
-        UnOpenedProduct unopened = qc.getFormat() == null ?  new UnOpenedProduct( tpl ) : new UnOpenedProduct( tpl, qc.getFormat().getFilterPrinted());
-        
+        UnOpenedProduct unopened = qc.getFormat() == null ?  new UnOpenedProduct(tpl) : new UnOpenedProduct(tpl, qc.getFormat().getFilterPrinted());
+
         for (int i = 0; i < totalPacks; i++) {
             this.qa.getShopList().addAllFlat(unopened.get());
         }
@@ -623,7 +642,7 @@ public final class QuestUtilCards {
             return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? "NEW" : "";
         }
     };
-    
+
     public Function<Entry<InventoryItem, Integer>, Comparable<?>> getFnOwnedCompare() {
         return this.fnOwnedCompare;
     }
@@ -631,7 +650,7 @@ public final class QuestUtilCards {
     public Function<Entry<InventoryItem, Integer>, Object> getFnOwnedGet() {
         return this.fnOwnedGet;
     }
-    
+
     public int getCompletionPercent(String edition) {
         // get all cards in the specified edition
         Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(edition);
@@ -643,11 +662,11 @@ public final class QuestUtilCards {
         int numOwnedCards = 0;
         for (PaperCard card : editionCards) {
             final int target = CardRarity.BasicLand == card.getRarity() ? 1 : 4;
-            
+
             completeCards += target;
             numOwnedCards += Math.min(target, ownedCards.count(card));
         }
-        
+
         return (numOwnedCards * 100) / completeCards;
     }
 
@@ -658,12 +677,12 @@ public final class QuestUtilCards {
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
             if (i instanceof PaperCard) {
-                return QuestUtilCards.this.qa.getCardPool().count((PaperCard)i);
+                return QuestUtilCards.this.qa.getCardPool().count((PaperCard) i);
             } else if (i instanceof PreconDeck) {
-                PreconDeck pDeck = (PreconDeck)i;
+                PreconDeck pDeck = (PreconDeck) i;
                 return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? -1 : -2;
             } else if (i instanceof OpenablePack) {
-                OpenablePack oPack = (OpenablePack)i;
+                OpenablePack oPack = (OpenablePack) i;
                 return getCompletionPercent(oPack.getEdition()) - 103;
             }
             return null;
@@ -676,12 +695,12 @@ public final class QuestUtilCards {
         public Object apply(final Entry<InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
             if (i instanceof PaperCard) {
-                return QuestUtilCards.this.qa.getCardPool().count((PaperCard)i);
+                return QuestUtilCards.this.qa.getCardPool().count((PaperCard) i);
             } else if (i instanceof PreconDeck) {
-                PreconDeck pDeck = (PreconDeck)i;
+                PreconDeck pDeck = (PreconDeck) i;
                 return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? "YES" : "NO";
             } else if (i instanceof OpenablePack) {
-                OpenablePack oPack = (OpenablePack)i;
+                OpenablePack oPack = (OpenablePack) i;
                 return String.format("%d%%", getCompletionPercent(oPack.getEdition()));
             }
             return null;

@@ -64,10 +64,13 @@ public final class BoosterUtils {
      *            the num uncommon
      * @param numRare
      *            the num rare
+     * @param userPrefs
+     *            the starting pool preferences
      * @return the quest starter deck
      */
     public static List<PaperCard> getQuestStarterDeck(final Predicate<PaperCard> filter, final int numCommon,
-            final int numUncommon, final int numRare) {
+            final int numUncommon, final int numRare, final StartingPoolPreferences userPrefs) {
+
         final ArrayList<PaperCard> cards = new ArrayList<PaperCard>();
 
         // Each color should have around the same amount of monocolored cards
@@ -75,18 +78,28 @@ public final class BoosterUtils {
         // There should be 1 Multicolor card for every 4 cards in a single color
 
         final List<Predicate<CardRules>> colorFilters = new ArrayList<Predicate<CardRules>>();
-        colorFilters.add(CardRulesPredicates.Presets.IS_MULTICOLOR);
+        final boolean preferred = (userPrefs != null && userPrefs.getPreferredColor() != MagicColor.ALL_COLORS);
 
-        for (int i = 0; i < 4; i++) {
-            if (i != 2) {
-                colorFilters.add(CardRulesPredicates.Presets.IS_COLORLESS);
+        if (userPrefs != null && !userPrefs.useRandomPool()) {
+            colorFilters.add(CardRulesPredicates.Presets.IS_MULTICOLOR);
+
+            for (int i = 0; i < (preferred ? 3 : 4); i++) {
+                if (i != 2) {
+                    colorFilters.add(CardRulesPredicates.Presets.IS_COLORLESS);
+                }
+
+                colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.WHITE));
+                colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.RED));
+                colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.BLUE));
+                colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.BLACK));
+                colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.GREEN));
             }
-
-            colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.WHITE));
-            colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.RED));
-            colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.BLUE));
-            colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.BLACK));
-            colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.GREEN));
+            // Add some extra filters of the preferred color if chosen
+            if (preferred) {
+                for (int i = 0; i < 6; i++) {
+                    colorFilters.add(CardRulesPredicates.isMonoColor(userPrefs.getPreferredColor()));
+                }
+            }
         }
 
         // This will save CPU time when sets are limited
@@ -181,8 +194,9 @@ public final class BoosterUtils {
      * 
      */
     public static Predicate<CardRules> parseRulesLimitation(final String input) {
-        if (null == input || "random".equalsIgnoreCase(input))
+        if (null == input || "random".equalsIgnoreCase(input)) {
             return Predicates.alwaysTrue();
+        }
 
         if (input.equalsIgnoreCase("black"))          return CardRulesPredicates.Presets.IS_BLACK;
         if (input.equalsIgnoreCase("blue"))           return CardRulesPredicates.Presets.IS_BLUE;
@@ -214,7 +228,7 @@ public final class BoosterUtils {
         List<InventoryItem> rewards = new ArrayList<InventoryItem>();
 
         // last word starts with 'rare' ignore case
-        if (temp.length > 1 && temp[temp.length-1].regionMatches(true, 0, "rare", 0, 4)) {
+        if (temp.length > 1 && temp[temp.length - 1].regionMatches(true, 0, "rare", 0, 4)) {
             // Type 1: 'n [color] rares'
             final int qty = Integer.parseInt(temp[0]);
 
@@ -223,16 +237,17 @@ public final class BoosterUtils {
 
             if (temp.length > 2) {
                 Predicate<CardRules> cr = parseRulesLimitation(temp[1]);
-                if(Predicates.alwaysTrue() != (Object)cr) // guava has a single instance for always-const predicates
+                if (Predicates.alwaysTrue() != (Object) cr) { // guava has a single instance for always-const predicates
                     preds.add(Predicates.compose(cr, PaperCard.FN_GET_RULES));
+                }
             }
-            
+
             if (Singletons.getModel().getQuest().getFormat() != null) {
                 preds.add(Singletons.getModel().getQuest().getFormat().getFilterPrinted());
             }
 
             PrintSheet ps = new PrintSheet("Quest rewards");
-            Predicate<PaperCard> predicate = preds.size() == 1 ? preds.get(0) : Predicates.and(preds);  
+            Predicate<PaperCard> predicate = preds.size() == 1 ? preds.get(0) : Predicates.and(preds);
             ps.addAll(Iterables.filter(CardDb.instance().getAllCards(), predicate));
             rewards.addAll(ps.random(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {

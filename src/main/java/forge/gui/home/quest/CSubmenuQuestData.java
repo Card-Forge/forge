@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.Singletons;
+import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
@@ -24,6 +25,7 @@ import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestMode;
 import forge.quest.QuestWorld;
+import forge.quest.StartingPoolPreferences;
 import forge.quest.StartingPoolType;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
@@ -69,7 +71,7 @@ public enum CSubmenuQuestData implements ICDoc {
         unselectableSets.add("VAN");
         unselectableSets.add("ARC");
         unselectableSets.add("PC2");
-        
+
         view.getBtnCustomFormat().setCommand(new Command() { @Override public void run() {
             final DialogChooseSets dialog = new DialogChooseSets(customFormatCodes, unselectableSets, false);
             dialog.setOkCallback(new Runnable() {
@@ -139,7 +141,7 @@ public enum CSubmenuQuestData implements ICDoc {
 
         view.getLstQuests().setSelectCommand(cmdQuestSelect);
         view.getLstQuests().setDeleteCommand(cmdQuestDelete);
-        
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() { view.getBtnEmbark().requestFocusInWindow(); }
         });
@@ -246,6 +248,7 @@ public enum CSubmenuQuestData implements ICDoc {
         // } else {
         //    fmtPrizes = worldFormat;
         // }
+        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(false, MagicColor.ALL_COLORS); // To be changed later
 
         final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
         if (o == null) { return; }
@@ -259,7 +262,7 @@ public enum CSubmenuQuestData implements ICDoc {
 
         QuestController qc = Singletons.getModel().getQuest();
 
-        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName());
+        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName(), userPrefs);
         Singletons.getModel().getQuest().save();
 
         // Save in preferences.

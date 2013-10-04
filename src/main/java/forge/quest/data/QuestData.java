@@ -72,8 +72,6 @@ public final class QuestData {
      *  achievement diff
      * @param name2
      *      quest name
-     * @param formatString
-     *      String, persistent format for the quest (null if none).
      * @param userFormat
      *      user-defined format, if any (null if none).
      * @param allowSetUnlocks
@@ -81,7 +79,7 @@ public final class QuestData {
      * @param startingWorld
      *      starting world
      */
-    public QuestData(String name2, int diff, QuestMode mode2, GameFormat userFormat, 
+    public QuestData(String name2, int diff, QuestMode mode2, GameFormat userFormat,
             boolean allowSetUnlocks, final String startingWorld) {
         this.name = name2;
 

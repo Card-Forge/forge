@@ -15412,6 +15412,7 @@ src/main/java/forge/quest/QuestUtilCards.java -text
 src/main/java/forge/quest/QuestUtilUnlockSets.java -text
 src/main/java/forge/quest/QuestWorld.java -text
 src/main/java/forge/quest/SellRules.java -text
+src/main/java/forge/quest/StartingPoolPreferences.java -text
 src/main/java/forge/quest/StartingPoolType.java -text
 src/main/java/forge/quest/bazaar/IQuestBazaarItem.java svneol=native#text/plain
 src/main/java/forge/quest/bazaar/QuestBazaarManager.java svneol=native#text/plain
