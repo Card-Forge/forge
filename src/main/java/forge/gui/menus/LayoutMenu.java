@@ -179,6 +179,7 @@ public final class LayoutMenu {
                 prefs.setPref(FPref.UI_HIDE_STATUS_BAR, !showStatusBar);
                 prefs.save();
                 Singletons.getView().getStatusBar().setVisible(showStatusBar);
+                Singletons.getView().getNavigationBar().updateClockVisibility();
                 SResizingUtil.resizeWindow();
             }
         };

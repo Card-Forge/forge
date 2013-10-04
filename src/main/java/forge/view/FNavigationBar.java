@@ -12,13 +12,19 @@ import javax.swing.event.PopupMenuListener;
 import forge.Singletons;
 import forge.gui.menus.ForgeMenu;
 import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.FDigitalClock;
 import forge.gui.toolbox.FSkin;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 
 @SuppressWarnings("serial")
 public class FNavigationBar extends FTitleBarBase {
-    
+
+    private static final ForgeMenu forgeMenu = Singletons.getControl().getForgeMenu();
+    private static final ForgePreferences prefs = Singletons.getModel().getPreferences();
+
     private final FButton btnForge = new FButton("Forge");
-    private final ForgeMenu forgeMenu = Singletons.getControl().getForgeMenu();
+    private final FDigitalClock clock = new FDigitalClock();
     private long timeMenuHidden = 0;
 
     public FNavigationBar(FFrame f) {
@@ -27,6 +33,7 @@ public class FNavigationBar extends FTitleBarBase {
         btnForge.setPreferredSize(new Dimension(100, 23));
         setIconImage(this.frame.getIconImage()); //set default icon image based on frame icon image
         FSkin.get(btnForge).setForeground(foreColor);
+        FSkin.get(clock).setForeground(foreColor);
         addControls();
     }
     
@@ -36,7 +43,19 @@ public class FNavigationBar extends FTitleBarBase {
         layout.putConstraint(SpringLayout.WEST, btnForge, 1, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, btnForge, 1, SpringLayout.NORTH, this);
         addForgeButtonListeners();
+
         super.addControls();
+
+        add(clock);
+        layout.putConstraint(SpringLayout.EAST, clock, -6, SpringLayout.WEST, btnMinimize);
+        layout.putConstraint(SpringLayout.NORTH, clock, 4, SpringLayout.NORTH, this);
+        updateClockVisibility();
+    }
+    
+    @Override
+    public void handleMaximizedChanged() {
+        super.handleMaximizedChanged();
+        updateClockVisibility();
     }
     
     private void addForgeButtonListeners() {
@@ -59,6 +78,11 @@ public class FNavigationBar extends FTitleBarBase {
             @Override
             public void popupMenuCanceled(PopupMenuEvent popupMenuEvent) {}
         });
+    }
+    
+    //only show clock if maximized and status bar hidden
+    public void updateClockVisibility() {
+        this.clock.setVisible(this.frame.getMaximized() && prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
     }
     
     public void showForgeMenu(boolean hideIfAlreadyShown) {

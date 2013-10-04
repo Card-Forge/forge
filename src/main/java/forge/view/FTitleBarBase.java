@@ -34,9 +34,9 @@ public abstract class FTitleBarBase extends JMenuBar {
     protected final FFrame frame;
     protected final JComponentSkin<FTitleBarBase> skin = FSkin.get(this);
     protected final SpringLayout layout = new SpringLayout();
-    private final MinimizeButton btnMinimize = new MinimizeButton();
-    private final MaximizeButton btnMaximize = new MaximizeButton();
-    private final CloseButton btnClose = new CloseButton();
+    protected final MinimizeButton btnMinimize = new MinimizeButton();
+    protected final MaximizeButton btnMaximize = new MaximizeButton();
+    protected final CloseButton btnClose = new CloseButton();
 
     protected FTitleBarBase(FFrame f) {
         this.frame = f;
