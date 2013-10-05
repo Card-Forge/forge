@@ -29,10 +29,12 @@ public class FNavigationBar extends FTitleBarBase {
     private final FButton btnForge = new FButton("Forge");
     private final FDigitalClock clock = new FDigitalClock();
     private final JPanel pnlReveal = new JPanel();
-    private Timer incrementRevealTimer, checkForRevealChangeTimer;
-    private boolean hidden;
+    private final int revealSpeed = 300;
+    private final int revealDelay = 150;
     private int revealDir = 0;
     private long timeMenuHidden = 0;
+    private Timer incrementRevealTimer, checkForRevealChangeTimer;
+    private boolean hidden;
 
     public FNavigationBar(FFrame f) {
         super(f);
@@ -109,12 +111,12 @@ public class FNavigationBar extends FTitleBarBase {
                 }
             }
         });
-        incrementRevealTimer = new Timer(300 / visibleHeight, new ActionListener() {
+        incrementRevealTimer = new Timer(revealSpeed / visibleHeight, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 incrementReveal();
             }
         });
-        checkForRevealChangeTimer = new Timer(150, new ActionListener() {
+        checkForRevealChangeTimer = new Timer(revealDelay, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 checkForRevealChange();
             }
@@ -124,7 +126,7 @@ public class FNavigationBar extends FTitleBarBase {
     private void startReveal() {
         if (this.getHeight() == visibleHeight) { return; }
         if (revealDir == 0) {
-            incrementRevealTimer.setInitialDelay(150);
+            incrementRevealTimer.setInitialDelay(revealDelay);
             incrementRevealTimer.start();
             checkForRevealChangeTimer.stop();
         }
@@ -134,7 +136,7 @@ public class FNavigationBar extends FTitleBarBase {
     private void stopReveal() {
         if (this.getHeight() == 0) { return; }
         if (revealDir == 0) {
-            incrementRevealTimer.setInitialDelay(150);
+            incrementRevealTimer.setInitialDelay(revealDelay);
             incrementRevealTimer.start();
             checkForRevealChangeTimer.stop();
         }
