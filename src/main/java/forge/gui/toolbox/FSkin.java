@@ -1994,6 +1994,7 @@ public enum FSkin {
                     setComboBoxLookAndFeel();
                     setTabbedPaneLookAndFeel();
                     setButtonLookAndFeel();
+                    setToolTipLookAndFeel();
                 }
             }
             onInit = false;
@@ -2086,10 +2087,8 @@ public enum FSkin {
             UIManager.put("ComboBox.disabledBackground", BACK_COLOR);
             UIManager.put("ComboBox.disabledForeground", BACK_COLOR.darker());
             UIManager.put("ComboBox.font", getDefaultFont("ComboBox.font"));
-            UIManager.put("Button.select", HIGHLIGHT_COLOR);
             boolean isBright = isColorBright(FORE_COLOR);
             UIManager.put("ComboBox.border", BorderFactory.createLineBorder(isBright ? FORE_COLOR.darker() : FORE_COLOR.brighter(), 1));
-            UIManager.put("Button.select", HIGHLIGHT_COLOR);
         }
 
         private void setButtonLookAndFeel() {
@@ -2098,6 +2097,12 @@ public enum FSkin {
             UIManager.put("Button.select", HIGHLIGHT_COLOR);
             UIManager.put("Button.focus", FORE_COLOR.darker());
             UIManager.put("Button.rollover", false);
+        }
+        
+        private void setToolTipLookAndFeel() {
+            UIManager.put("ToolTip.background", BACK_COLOR);
+            UIManager.put("ToolTip.foreground", FORE_COLOR);
+            UIManager.put("ToolTip.border", LINE_BORDER);
         }
 
         /**
