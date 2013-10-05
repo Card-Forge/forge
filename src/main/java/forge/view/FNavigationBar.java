@@ -109,12 +109,12 @@ public class FNavigationBar extends FTitleBarBase {
                 }
             }
         });
-        incrementRevealTimer = new Timer(500 / visibleHeight, new ActionListener() {
+        incrementRevealTimer = new Timer(300 / visibleHeight, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 incrementReveal();
             }
         });
-        checkForRevealChangeTimer = new Timer(250, new ActionListener() {
+        checkForRevealChangeTimer = new Timer(150, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 checkForRevealChange();
             }
@@ -124,7 +124,7 @@ public class FNavigationBar extends FTitleBarBase {
     private void startReveal() {
         if (this.getHeight() == visibleHeight) { return; }
         if (revealDir == 0) {
-            incrementRevealTimer.setInitialDelay(250);
+            incrementRevealTimer.setInitialDelay(150);
             incrementRevealTimer.start();
             checkForRevealChangeTimer.stop();
         }
@@ -134,7 +134,7 @@ public class FNavigationBar extends FTitleBarBase {
     private void stopReveal() {
         if (this.getHeight() == 0) { return; }
         if (revealDir == 0) {
-            incrementRevealTimer.setInitialDelay(250);
+            incrementRevealTimer.setInitialDelay(150);
             incrementRevealTimer.start();
             checkForRevealChangeTimer.stop();
         }
