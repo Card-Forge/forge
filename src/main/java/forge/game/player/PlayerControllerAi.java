@@ -487,4 +487,14 @@ public class PlayerControllerAi extends PlayerController {
     public String chooseSingleColor(ImmutableList<String> names) {
         return ComputerUtilCard.getMostProminentColor(player.getCardsIn(ZoneType.Hand));
     }
+
+    @Override
+    public String chooseHybridMana(String s) {
+        final String c = ComputerUtilCard.getMostProminentColor(player.getCardsIn(ZoneType.Hand));
+        if (s.contains(c)) {
+            return c;
+        } else {
+            return s.substring(0, 1);
+        }
+    }
 }

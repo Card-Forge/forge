@@ -3283,6 +3283,7 @@ res/cardsfolder/e/electryte.txt -text
 res/cardsfolder/e/elemental_appeal.txt -text
 res/cardsfolder/e/elemental_augury.txt svneol=native#text/plain
 res/cardsfolder/e/elemental_mastery.txt svneol=native#text/plain
+res/cardsfolder/e/elemental_resonance.txt -text
 res/cardsfolder/e/elephant_ambush.txt svneol=native#text/plain
 res/cardsfolder/e/elephant_grass.txt svneol=native#text/plain
 res/cardsfolder/e/elephant_graveyard.txt svneol=native#text/plain

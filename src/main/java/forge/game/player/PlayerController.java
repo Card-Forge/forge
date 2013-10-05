@@ -168,4 +168,6 @@ public abstract class PlayerController {
 
     public abstract String chooseSingleColor(ImmutableList<String> onlyColors);
 
+    public abstract String chooseHybridMana(String s);
+
 }

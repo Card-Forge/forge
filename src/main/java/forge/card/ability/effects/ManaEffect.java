@@ -11,6 +11,7 @@ import forge.CounterType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
@@ -68,7 +69,7 @@ public class ManaEffect extends SpellAbilityEffect {
                                 if (o == null) {
                                     final StringBuilder sb = new StringBuilder();
                                     sb.append("AbilityFactoryMana::manaResolve() - Human color mana choice is empty for ");
-                                    sb.append(sa.getSourceCard().getName());
+                                    sb.append(card.getName());
                                     throw new RuntimeException(sb.toString());
                                 } else {
                                     choice = MagicColor.toShortString((String) o);
@@ -98,13 +99,12 @@ public class ManaEffect extends SpellAbilityEffect {
                             abMana.setExpressChoice(manaString);
                         }
                         if (abMana.getExpressChoice().isEmpty() && amount > 0) {
-                            System.out.println("AbilityFactoryMana::manaResolve() - combo mana color choice is empty for " + sa.getSourceCard().getName());
+                            System.out.println("AbilityFactoryMana::manaResolve() - combo mana color choice is empty for " + card.getName());
                         }
                     }
                 }
             }
-        }
-        else if (abMana.isAnyMana()) {
+        } else if (abMana.isAnyMana()) {
             for (Player p : tgtPlayers) {
                 if (tgt == null || p.canBeTargetedBy(sa)) {
                     Player act = sa.getActivatingPlayer();
@@ -131,7 +131,7 @@ public class ManaEffect extends SpellAbilityEffect {
                             if (s == null) {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append("AbilityFactoryMana::manaResolve() - Human color mana choice is empty for ");
-                                sb.append(sa.getSourceCard().getName());
+                                sb.append(card.getName());
                                 throw new RuntimeException(sb.toString());
                             } else {
                                 choice = MagicColor.toShortString(s);
@@ -155,12 +155,41 @@ public class ManaEffect extends SpellAbilityEffect {
                         if (abMana.getExpressChoice().isEmpty()) {
                             final StringBuilder sb = new StringBuilder();
                             sb.append("AbilityFactoryMana::manaResolve() - any color mana choice is empty for ");
-                            sb.append(sa.getSourceCard().getName());
+                            sb.append(card.getName());
                             throw new RuntimeException(sb.toString());
                         }
                     }
                 }
             }
+        } else if (abMana.isSpecialMana()) {
+            for (Player p : tgtPlayers) {
+                if (tgt == null || p.canBeTargetedBy(sa)) {
+                    String type = abMana.getOrigProduced().split("Special ")[1];
+                    String choice = "";
+                    if (type.equals("EnchantedManaCost")) {
+                        if (card.getEnchanting() != null ) {
+                            Card enchanted = card.getEnchantingCard();
+                            // Remove X and phyrexian mana
+                            choice = enchanted.getManaCost().toString().replaceAll("X|/P", "").trim();
+                        }
+                    }
+                    if (choice.equals("no cost") || choice.isEmpty()) {
+                        choice = "0";
+                    }
+                    StringBuilder sb = new StringBuilder();
+                    for (String s : choice.split(" ")) {
+                        if (s.length() == 1 || StringUtils.isNumeric(s)) {
+                            sb.append(" ").append(s);
+                        } else { // Handle hybrid mana
+                            sb.append(" ").append(sa.getActivatingPlayer().getController().chooseHybridMana(s));
+                        }
+                    }
+                    abMana.setExpressChoice(sb.toString().trim());
+                    if (abMana.getExpressChoice().isEmpty()) {
+                        System.out.println("AbilityFactoryMana::manaResolve() - special mana effect is empty for " + sa.getSourceCard().getName());
+                    }
+                }
+            }    
         }
 
         for (final Player player : tgtPlayers) {

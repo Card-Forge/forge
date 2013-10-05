@@ -1,0 +1,9 @@
+Name:Elemental Resonance
+ManaCost:2 G G
+Types:Enchantment Aura
+K:Enchant permanent
+A:SP$ Attach | Cost$ 2 G G | ValidTgts$ Permanent | AILogic$ Pump
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your precombat main phase, add mana equal to enchanted permanent's mana cost to your mana pool. (Mana cost includes color. If a mana symbol has multiple colors, choose one.)
+SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ Special EnchantedManaCost
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elemental_resonance.jpg
+Oracle:Enchant permanent\nAt the beginning of your precombat main phase, add mana equal to enchanted permanent's mana cost to your mana pool. (Mana cost includes color. If a mana symbol has multiple colors, choose one.)

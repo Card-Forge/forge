@@ -596,6 +596,8 @@ public final class GameActionUtil {
             }
         } else if (sa.getApi() == ApiType.ManaReflected) {
             baseMana = abMana.getExpressChoice();
+        } else if (abMana.isSpecialMana()) {
+            baseMana = abMana.getExpressChoice();
         } else {
             baseMana = abMana.mana();
         }

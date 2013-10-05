@@ -370,6 +370,16 @@ public class AbilityManaPart implements java.io.Serializable {
 
     /**
      * <p>
+     * isSpecialMana.
+     * </p>
+     *
+     * @return a boolean.
+     */
+    public boolean isSpecialMana() {
+        return this.getOrigProduced().contains("Special");
+    }
+    /**
+     * <p>
      * canProduce.
      * </p>
      * 

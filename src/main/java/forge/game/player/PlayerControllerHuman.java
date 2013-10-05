@@ -783,4 +783,9 @@ public class PlayerControllerHuman extends PlayerController {
     public String chooseSingleColor(ImmutableList<String> names) {
         return GuiChoose.one("Choose a color:", names);
     }
+
+    @Override
+    public String chooseHybridMana(String s) {
+        return GuiChoose.one("Choose a type", s.split("/"));
+    }
 }
