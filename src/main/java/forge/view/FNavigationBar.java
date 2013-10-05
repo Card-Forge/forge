@@ -25,12 +25,12 @@ public class FNavigationBar extends FTitleBarBase {
 
     private static final ForgeMenu forgeMenu = Singletons.getControl().getForgeMenu();
     private static final ForgePreferences prefs = Singletons.getModel().getPreferences();
+    private static final int revealSpeed = 300;
+    private static final int revealDelay = 150;
 
     private final FButton btnForge = new FButton("Forge");
     private final FDigitalClock clock = new FDigitalClock();
     private final JPanel pnlReveal = new JPanel();
-    private final int revealSpeed = 300;
-    private final int revealDelay = 150;
     private int revealDir = 0;
     private long timeMenuHidden = 0;
     private Timer incrementRevealTimer, checkForRevealChangeTimer;
