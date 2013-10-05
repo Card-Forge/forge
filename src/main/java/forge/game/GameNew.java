@@ -119,7 +119,7 @@ public class GameNew {
             ReplacementEffect r = ReplacementHandler.parseReplacement("Event$ Moved | Destination$ Graveyard,Exile | ValidCard$ Card.IsCommander+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.", eff, true);
             eff.addReplacementEffect(r);
             eff.addStaticAbility("Mode$ Continuous | EffectZone$ Command | AddKeyword$ May be played | Affected$ Card.YouOwn+IsCommander | AffectedZone$ Command");
-            eff.addStaticAbility("Mode$ RaiseCost | EffectZone$ Command | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | EffectZone$ All | AffectedZone$ Stack");
+            eff.addStaticAbility("Mode$ RaiseCost | EffectZone$ Command | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | EffectZone$ All | AffectedZone$ Command,Stack");
             
             player.getZone(ZoneType.Command).add(eff);
         }

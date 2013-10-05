@@ -18,6 +18,7 @@
 package forge.card.staticability;
 
 import java.util.HashMap;
+import java.util.List;
 
 import forge.Card;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -86,8 +87,19 @@ public class StaticAbilityCostChange {
                 }
             }
         }
-        if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
-            return;
+        if (params.containsKey("AffectedZone")) {
+            List<ZoneType> zones = ZoneType.listValueOf(params.get("AffectedZone"));
+            boolean found = false;
+            for(ZoneType zt : zones) {
+                if(card.isInZone(zt))
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) {
+                return;
+            }
         }
         if (params.containsKey("ValidTarget")) {
             TargetRestrictions tgt = sa.getTargetRestrictions();
