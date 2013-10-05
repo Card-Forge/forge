@@ -536,6 +536,8 @@ public class AbilityUtils {
             }
         } else if (calcX[0].startsWith("Exiled")) {
             list = ability.getRootAbility().getPaidList("Exiled");
+        } else if (calcX[0].startsWith("Milled")) {
+            list = ability.getRootAbility().getPaidList("Milled");
         } else if (calcX[0].startsWith("Tapped")) {
             list = ability.getRootAbility().getPaidList("Tapped");
         } else if (calcX[0].startsWith("Revealed")) {
