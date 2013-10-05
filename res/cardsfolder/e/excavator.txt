@@ -1,0 +1,8 @@
+Name:Excavator
+ManaCost:2
+Types:Artifact
+A:AB$ Pump | Cost$ T Sac<1/Land.Basic/basic land> | DefinedLandwalk$ Sacrificed | ValidTgts$ Creature | SpellDescription$ Target creature gains landwalk of each of the land types of the sacrificed land until end of turn.
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/excavator.jpg
+Oracle:{T}, Sacrifice a basic land: Target creature gains landwalk of each of the land types of the sacrificed land until end of turn.

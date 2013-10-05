@@ -8,6 +8,7 @@ import forge.Card;
 import forge.CardUtil;
 import forge.Command;
 import forge.GameEntity;
+import forge.card.CardType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -204,6 +205,15 @@ public class PumpEffect extends SpellAbilityEffect {
                 final String t = host.getChosenType();
                 for (int i = 0; i < keywords.size(); i++) {
                     keywords.set(i, keywords.get(i).replaceAll("ChosenType", t));
+                }
+            }
+        }
+        if (sa.hasParam("DefinedLandwalk")) {
+            final String landtype = sa.getParam("DefinedLandwalk");
+            final Card c = AbilityUtils.getDefinedCards(host, landtype, sa).get(0);
+            for (String type : c.getType()) {
+                if (CardType.isALandType(type) || CardType.isABasicLandType(type)) {
+                    keywords.add(type + "walk");
                 }
             }
         }
