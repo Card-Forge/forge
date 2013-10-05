@@ -70,7 +70,7 @@ public class FNavigationBar extends FTitleBarBase {
     
     //only show clock if maximized and status bar hidden
     public void updateClockVisibility() {
-        clock.setVisible(this.frame.getMaximized() && prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
+        clock.setVisible(this.frame.isMaximized() && prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
     }
     
     private void addForgeButtonListeners() {

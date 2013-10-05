@@ -66,7 +66,7 @@ public abstract class FTitleBarBase extends JMenuBar {
     public abstract void setIconImage(Image image);
     
     public void handleMaximizedChanged() {
-        if (frame.getMaximized()) {
+        if (frame.isMaximized()) {
             btnMaximize.setToolTipText("Restore Down");
         }
         else {
@@ -180,7 +180,7 @@ public abstract class FTitleBarBase extends JMenuBar {
         }
         @Override
         protected void onClick() {
-            frame.setMaximized(!frame.getMaximized());
+            frame.setMaximized(!frame.isMaximized());
         }
         @Override
         public void paintComponent(Graphics g) {
@@ -198,7 +198,7 @@ public abstract class FTitleBarBase extends JMenuBar {
             skin.setGraphicsColor(g2d, foreColor);
             g2d.setStroke(new BasicStroke(thickness));
             
-            if (frame.getMaximized()) { //draw 2 rectangles offset if icon to restore window
+            if (frame.isMaximized()) { //draw 2 rectangles offset if icon to restore window
                 x -= 1;
                 y += 2;
                 width -= 1;

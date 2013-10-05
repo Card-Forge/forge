@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -16,6 +17,7 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
 import forge.Singletons;
+import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SResizingUtil;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
@@ -66,7 +68,7 @@ public class FFrame extends JFrame {
         if (this.showTitleBar == showTitleBar0) { return; }
         this.showTitleBar = showTitleBar0;
         this.titleBar.setVisible(showTitleBar0);
-        if (!showTitleBar0 && !this.getMaximized()) {
+        if (!showTitleBar0 && !this.isMaximized()) {
             this.setMaximized(true); //only support hidden titlebar if maximized
         }
         else if (this.isMainFrame) {
@@ -112,7 +114,7 @@ public class FFrame extends JFrame {
         super.setSize(width, height);
     }
     
-    public boolean getMinimized() {
+    public boolean isMinimized() {
         return getState() == Frame.ICONIFIED;
     }
 
@@ -125,10 +127,10 @@ public class FFrame extends JFrame {
         }
     }
     
-    public boolean getMaximized() {
+    public boolean isMaximized() {
         return this.maximized;
     }
-    
+
     public void setMaximized(boolean maximized0) {
         if (this.maximized == maximized0) { return; }
         if (maximized0) {
@@ -138,10 +140,20 @@ public class FFrame extends JFrame {
             this.setExtendedState(Frame.NORMAL);
         }
     }
-    
+
+    private void updateMaximizedBounds() {
+        Rectangle frameBounds = this.getBounds();
+        Point centerPoint = new Point(frameBounds.x + (frameBounds.width / 2), frameBounds.y + (frameBounds.height / 2));
+        this.setMaximizedBounds(SDisplayUtil.getScreenMaximizedBounds(centerPoint));
+    }
+
+    @Override
     public void setExtendedState(int state) {
+        updateMaximizedBounds() ; //update maximized bounds whenever extended state changes
+
         super.setExtendedState(state);
-        if (getMinimized()) { return; } //skip remaining logic while minimized
+
+        if (isMinimized()) { return; } //skip remaining logic while minimized
 
         this.maximized = (state == Frame.MAXIMIZED_BOTH);
         if (this.maximized) {
@@ -177,7 +189,7 @@ public class FFrame extends JFrame {
                         mouseDownLoc = e.getLocationOnScreen();
                     }
                     else {
-                        setMaximized(!getMaximized());
+                        setMaximized(!isMaximized());
                     }
                 }
             }

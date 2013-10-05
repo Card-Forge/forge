@@ -5,9 +5,11 @@ import java.awt.Component;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
 import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -123,5 +125,28 @@ public class SDisplayUtil {
         }
         //return bounds of default monitor if point not on any screen
         return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+    }
+    
+    public static Rectangle getScreenMaximizedBounds(Point point) {
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsConfiguration graphicsConfiguration = null;
+        for (GraphicsDevice gd : env.getScreenDevices()) {
+            if (gd.getDefaultConfiguration().getBounds().contains(point)) {
+                graphicsConfiguration = gd.getDefaultConfiguration();
+                break;
+            }
+        }
+        if (graphicsConfiguration == null) {
+            return env.getMaximumWindowBounds();
+        }
+
+        Rectangle bounds = graphicsConfiguration.getBounds();
+        Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(graphicsConfiguration);
+
+        bounds.x += screenInsets.left;
+        bounds.y += screenInsets.top;
+        bounds.height -= screenInsets.bottom;
+        bounds.width -= screenInsets.right;
+        return bounds;
     }
 }

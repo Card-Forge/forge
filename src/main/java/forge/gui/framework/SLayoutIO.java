@@ -77,7 +77,7 @@ public final class SLayoutIO {
     
     private synchronized static void finishSaveWindowLayout() {
         final FFrame window = FView.SINGLETON_INSTANCE.getFrame();
-        if (window.getMinimized()) { return; } //don't update saved layout if minimized
+        if (window.isMinimized()) { return; } //don't update saved layout if minimized
         
         final int state = window.getExtendedState();
         final Rectangle bounds = window.getBounds();

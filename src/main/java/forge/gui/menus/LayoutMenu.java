@@ -159,7 +159,7 @@ public final class LayoutMenu {
             public void actionPerformed(ActionEvent e) {
                 boolean showTitleBar = menuItem.getState();
                 final FFrame frame = Singletons.getView().getFrame();
-                if (showTitleBar && !frame.getMaximized()) {
+                if (showTitleBar && !frame.isMaximized()) {
                     //if titlebar toggled back on while frame not maximized (likely using F11), instead just maximize frame
                     frame.setMaximized(true);
                     menuItem.setState(false); //reset menu item state in this case
