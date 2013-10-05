@@ -1097,7 +1097,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     public static void hiddenOriginResolveAI(final Player ai, final SpellAbility sa, Player player) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card card = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
         final boolean defined = sa.hasParam("Defined");
         final Player activator = sa.getActivatingPlayer();
         final Game game = ai.getGame();
@@ -1121,14 +1121,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
             type = "Card";
         }
 
-        int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(card, sa.getParam("ChangeNum"),
+        int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(source, sa.getParam("ChangeNum"),
                 sa) : 1;
 
         List<Card> fetchList;
         boolean shuffleMandatory = true;
         boolean searchedLibrary = false;
         if (defined) {
-            fetchList = new ArrayList<Card>(AbilityUtils.getDefinedCards(card, sa.getParam("Defined"), sa));
+            fetchList = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
             if (!sa.hasParam("ChangeNum")) {
                 changeNum = fetchList.size();
             }
@@ -1170,10 +1170,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final boolean champion = sa.hasParam("Champion");
         final boolean imprint = sa.hasParam("Imprint");
         final String totalcmc = sa.getParam("WithTotalCMC");
-        int totcmc = AbilityUtils.calculateAmount(card, totalcmc, sa);
+        int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
 
         if (sa.hasParam("Unimprint")) {
-            card.clearImprinted();
+            source.clearImprinted();
         }
 
         for (int i = 0; i < changeNum; i++) {
@@ -1184,7 +1184,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
             if (totalcmc != null) {
                 if (totcmc >= 0) {
-                    fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), ai, card);
+                    fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), ai, source);
                 }
             }
             if ((fetchList.size() == 0) || (destination == null)) {
@@ -1246,7 +1246,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 } else {
                     // Don't fetch another tutor with the same name
-                    List<Card> sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(card.getName())));
+                    List<Card> sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(source.getName())));
                     if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
                         fetchList = sameNamed;
                     }
@@ -1347,6 +1347,19 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if ( !defenders.isEmpty() )
                         game.getCombat().addAttacker(c, defenders.get(0));
                 }
+                if (sa.hasParam("Blocking")) {
+                    final Combat combat = game.getCombat();
+                    if ( null != combat ) {
+                        List<Card> attackers = AbilityUtils.getDefinedCards(source, sa.getParam("Blocking"), sa);
+                        if (!attackers.isEmpty()) {
+                            Card attacker = attackers.get(0);
+                            if (combat.isAttacking(attacker)) {
+                                combat.addBlocker(attacker, c);
+                                combat.orderAttackersForDamageAssignment(c);
+                            }
+                        }
+                    }
+                }
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
                     final SpellAbility saAura = AttachEffect.getAttachSpellAbility(c);
@@ -1370,20 +1383,20 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             if (champion) {
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                runParams.put("Card", card);
+                runParams.put("Card", source);
                 runParams.put("Championed", c);
                 game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
             }
             
             if (remember) {
-                card.addRemembered(movedCard);
+                source.addRemembered(movedCard);
             }
             if (forget) {
-                card.removeRemembered(movedCard);
+                source.removeRemembered(movedCard);
             }
             // for imprinted since this doesn't use Target
             if (imprint) {
-                card.addImprinted(movedCard);
+                source.addImprinted(movedCard);
             }
         }
 

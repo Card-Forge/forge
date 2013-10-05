@@ -134,6 +134,7 @@ res/cardsfolder/a/aetherflame_wall.txt svneol=native#text/plain
 res/cardsfolder/a/aetherize.txt -text
 res/cardsfolder/a/aetherling.txt -text
 res/cardsfolder/a/aethermages_touch.txt svneol=native#text/plain
+res/cardsfolder/a/aetherplasm.txt -text
 res/cardsfolder/a/aethersnipe.txt svneol=native#text/plain
 res/cardsfolder/a/aethertow.txt -text
 res/cardsfolder/a/affa_guard_hound.txt svneol=native#text/plain

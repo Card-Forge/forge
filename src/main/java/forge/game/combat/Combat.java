@@ -315,17 +315,21 @@ public class Combat {
     public void orderAttackersForDamageAssignment() { // this method performs controller's role
         // If there are multiple blockers, the Attacker declares the Assignment Order
         for (final Card blocker : getAllBlockers()) {
-            List<Card> attackers = getAttackersBlockedBy(blocker);
-            // They need a reverse map here: Blocker => List<Attacker>
-            
-            Player blockerCtrl = blocker.getController();
-            List<Card> orderedAttacker = attackers.size() <= 1 ? attackers : blockerCtrl.getController().orderAttackers(blocker, attackers);
-
-            // Damage Ordering needs to take cards like Melee into account, is that happening?
-            attackersOrderedForDamageAssignment.put(blocker, orderedAttacker);
+            orderAttackersForDamageAssignment(blocker);
         }
     }
-    
+
+    public void orderAttackersForDamageAssignment(Card blocker) { // this method performs controller's role
+        List<Card> attackers = getAttackersBlockedBy(blocker);
+        // They need a reverse map here: Blocker => List<Attacker>
+        
+        Player blockerCtrl = blocker.getController();
+        List<Card> orderedAttacker = attackers.size() <= 1 ? attackers : blockerCtrl.getController().orderAttackers(blocker, attackers);
+
+        // Damage Ordering needs to take cards like Melee into account, is that happening?
+        attackersOrderedForDamageAssignment.put(blocker, orderedAttacker);
+    }
+
     // removes references to this attacker from all indices and orders
     private void unregisterAttacker(final Card c, AttackingBand ab) {
         blockersOrderedForDamageAssignment.remove(c);
