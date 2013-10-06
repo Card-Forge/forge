@@ -2,7 +2,6 @@ package forge.gui.framework;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;
@@ -54,14 +52,14 @@ public final class SLayoutIO {
         public final static String h = "h";
         public final static String sel = "sel";
         public final static String doc = "doc";
-        public final static String state = "state";
+        public final static String max = "max";
+        public final static String fs = "fs";
     }
 
     private static final XMLEventFactory EF = XMLEventFactory.newInstance();
     private static final XMLEvent NEWLINE = EF.createDTD("\n");
     private static final XMLEvent TAB = EF.createDTD("\t");
-    
-    private static int normalWindowWidth, normalWindowHeight;
+
     private final static AtomicBoolean saveWindowRequested = new AtomicBoolean(false);
 
     public static void saveWindowLayout() {
@@ -79,22 +77,7 @@ public final class SLayoutIO {
         final FFrame window = FView.SINGLETON_INSTANCE.getFrame();
         if (window.isMinimized()) { return; } //don't update saved layout if minimized
         
-        final int state = window.getExtendedState();
-        final Rectangle bounds = window.getBounds();
-        final int x = bounds.x;
-        final int y = bounds.y;
-        if ((state & Frame.MAXIMIZED_HORIZ) != Frame.MAXIMIZED_HORIZ) { //only modify saved width if not maximized horizontally
-            normalWindowWidth = bounds.width;
-        }
-        else if (normalWindowWidth == 0) {
-            normalWindowWidth = window.getMinimumSize().width;
-        }
-        if ((state & Frame.MAXIMIZED_VERT) != Frame.MAXIMIZED_VERT) { //only modify saved width if not maximized vertically
-            normalWindowHeight = bounds.height;
-        }
-        else if (normalWindowHeight == 0) {
-            normalWindowHeight = window.getMinimumSize().height;
-        }
+        final Rectangle normalBounds = window.getNormalBounds();
         
         final FileLocation file = NewConstants.WINDOW_LAYOUT_FILE;
         final String fWriteTo = file.userPrefLoc;
@@ -108,11 +91,12 @@ public final class SLayoutIO {
             writer.add(EF.createStartDocument());
             writer.add(NEWLINE);
             writer.add(EF.createStartElement("", "", "layout"));
-            writer.add(EF.createAttribute(Property.x, String.valueOf(x)));
-            writer.add(EF.createAttribute(Property.y, String.valueOf(y)));
-            writer.add(EF.createAttribute(Property.w, String.valueOf(normalWindowWidth)));
-            writer.add(EF.createAttribute(Property.h, String.valueOf(normalWindowHeight)));
-            writer.add(EF.createAttribute(Property.state, String.valueOf(state)));
+            writer.add(EF.createAttribute(Property.x, String.valueOf(normalBounds.x)));
+            writer.add(EF.createAttribute(Property.y, String.valueOf(normalBounds.y)));
+            writer.add(EF.createAttribute(Property.w, String.valueOf(normalBounds.width)));
+            writer.add(EF.createAttribute(Property.h, String.valueOf(normalBounds.height)));
+            writer.add(EF.createAttribute(Property.max, window.isMaximized() ? "1" : "0"));
+            writer.add(EF.createAttribute(Property.fs, window.isFullScreen() ? "1" : "0"));
             writer.add(EF.createEndElement("", "", "layout"));
             writer.flush(); 
             writer.add(EF.createEndDocument());
@@ -133,7 +117,7 @@ public final class SLayoutIO {
     }
     
     public static void loadWindowLayout() {
-        final JFrame window = FView.SINGLETON_INSTANCE.getFrame();
+        final FFrame window = FView.SINGLETON_INSTANCE.getFrame();
         final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         final FileLocation file = NewConstants.WINDOW_LAYOUT_FILE;
         boolean usedCustomPrefsFile = false;
@@ -165,58 +149,44 @@ public final class SLayoutIO {
                         if (element.getName().getLocalPart().equals("layout")) {
                             attributes = element.getAttributes();
                             Dimension minSize = window.getMinimumSize();
-                            int x = 0, y = 0, w = minSize.width, h = minSize.height, state = Frame.MAXIMIZED_BOTH;
+                            int x = 0, y = 0, w = minSize.width, h = minSize.height;
+                            boolean max = false, fs = false;
                             while (attributes.hasNext()) {
                                 attribute = (Attribute) attributes.next();
                                 switch (attribute.getName().toString()) {
-                                    case Property.x:     x =     Integer.parseInt(attribute.getValue()); break;                                        
-                                    case Property.y:     y =     Integer.parseInt(attribute.getValue()); break;
-                                    case Property.w:     w =     Integer.parseInt(attribute.getValue()); break;
-                                    case Property.h:     h =     Integer.parseInt(attribute.getValue()); break;
-                                    case Property.state: state = Integer.parseInt(attribute.getValue()); break;
+                                    case Property.x:   x =   Integer.parseInt(attribute.getValue()); break;                                        
+                                    case Property.y:   y =   Integer.parseInt(attribute.getValue()); break;
+                                    case Property.w:   w =   Integer.parseInt(attribute.getValue()); break;
+                                    case Property.h:   h =   Integer.parseInt(attribute.getValue()); break;
+                                    case Property.max: max = attribute.getValue().equals("1"); break;
+                                    case Property.fs:  fs =  attribute.getValue().equals("1"); break;
                                 }
                             }
 
-                            //set normal size to loaded size
-                            normalWindowWidth = w;
-                            normalWindowHeight = h;
-                            
-                            //update x and y if needed such that window is centered on that axis
-                            //when un-maximized if starting out maximized on that axis
+                            //ensure the window is accessible
                             int centerX = x + w / 2;
                             int centerY = y + h / 2;
                             Rectangle screenBounds = SDisplayUtil.getScreenBoundsForPoint(new Point(centerX, centerY)); 
-                            if ((state & Frame.MAXIMIZED_HORIZ) == Frame.MAXIMIZED_HORIZ) {
-                                x = screenBounds.x + (screenBounds.width - w) / 2;
+                            if (centerX < screenBounds.x) {
+                                x = screenBounds.x;
                             }
-                            else { //ensure the window is accessible
-                                if (centerX < screenBounds.x) {
+                            else if (centerX > screenBounds.x + screenBounds.width) {
+                                x = screenBounds.x + screenBounds.width - w;
+                                if (x < screenBounds.x) {
                                     x = screenBounds.x;
                                 }
-                                else if (centerX > screenBounds.x + screenBounds.width) {
-                                    x = screenBounds.x + screenBounds.width - w;
-                                    if (x < screenBounds.x) {
-                                        x = screenBounds.x;
-                                    }
-                                }
                             }
-                            if ((state & Frame.MAXIMIZED_VERT) == Frame.MAXIMIZED_VERT) {
-                                y = screenBounds.y + (screenBounds.height - h) / 2;
+                            if (centerY < screenBounds.y) {
+                                y = screenBounds.y;
                             }
-                            else { //ensure the window is accessible
-                                if (centerY < screenBounds.y) {
+                            else if (centerY > screenBounds.y + screenBounds.height) {
+                                y = screenBounds.y + screenBounds.height - h;
+                                if (y < screenBounds.y) {
                                     y = screenBounds.y;
-                                }
-                                else if (centerY > screenBounds.y + screenBounds.height) {
-                                    y = screenBounds.y + screenBounds.height - h;
-                                    if (y < screenBounds.y) {
-                                        y = screenBounds.y;
-                                    }
                                 }
                             }
                             
-                            window.setBounds(x, y, w, h);
-                            window.setExtendedState(state);
+                            window.setWindowLayout(x, y, w, h, max, fs);
                         }
                     }
                 }

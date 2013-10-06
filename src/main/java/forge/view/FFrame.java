@@ -10,20 +10,20 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
-import forge.Singletons;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SResizingUtil;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.FSkin.CompoundSkinBorder;
 import forge.gui.toolbox.FSkin.LineSkinBorder;
-import forge.properties.ForgePreferences.FPref;
 
 @SuppressWarnings("serial")
 public class FFrame extends JFrame {
@@ -33,7 +33,8 @@ public class FFrame extends JFrame {
     private Point mouseDownLoc;
     private int resizeCursor;
     private FTitleBarBase titleBar;
-    private boolean maximized, showTitleBar, isMainFrame;
+    private boolean minimized, maximized, fullScreen, hideBorder, showTitleBar, isMainFrame;
+    private Rectangle normalBounds;
 
     public FFrame() {
         setUndecorated(true);
@@ -47,8 +48,14 @@ public class FFrame extends JFrame {
         this.isMainFrame = (FView.SINGLETON_INSTANCE.getFrame() == this);
 
         // Frame border
-        updateBorder();
+        this.hideBorder = true; //ensure border shown when window layout loaded
         addResizeSupport();
+        this.addWindowStateListener(new WindowStateListener() {
+            @Override
+            public void windowStateChanged(WindowEvent arg0) {
+                setState(arg0.getNewState());
+            }
+        });
 
         // Title bar
         this.titleBar = titleBar0;
@@ -68,8 +75,8 @@ public class FFrame extends JFrame {
         if (this.showTitleBar == showTitleBar0) { return; }
         this.showTitleBar = showTitleBar0;
         this.titleBar.setVisible(showTitleBar0);
-        if (!showTitleBar0 && !this.isMaximized()) {
-            this.setMaximized(true); //only support hidden titlebar if maximized
+        if (!showTitleBar0 && !this.fullScreen) {
+            this.setFullScreen(true); //only support hidden titlebar if full screen
         }
         else if (this.isMainFrame) {
             SResizingUtil.resizeWindow(); //ensure window layout updated to account for showing titlebar
@@ -95,36 +102,60 @@ public class FFrame extends JFrame {
     //ensure un-maximized if location or size changed
     @Override
     public void setLocation(Point point) {
-        this.setMaximized(false);
+        resetState();
         super.setLocation(point);
     }
     @Override
     public void setLocation(int x, int y) {
-        this.setMaximized(false);
+        resetState();
         super.setLocation(x, y);
     }
     @Override
     public void setSize(Dimension size) {
-        this.setMaximized(false);
+        resetState();
         super.setSize(size);
     }
     @Override
     public void setSize(int width, int height) {
-        this.setMaximized(false);
+        resetState();
         super.setSize(width, height);
     }
     
+    private void resetState() {
+        if (this.minimized || this.maximized || this.fullScreen) {
+            this.minimized = false;
+            this.maximized = false;
+            this.fullScreen = false;
+            updateState();
+        }
+    }
+    
+    public void setWindowLayout(int x, int y, int width, int height, boolean maximized0, boolean fullScreen0) {
+        this.normalBounds = new Rectangle(x, y, width, height);
+        this.maximized = maximized0;
+        this.fullScreen = fullScreen0;
+        updateState();
+    }
+    
+    public Rectangle getNormalBounds() {
+        return this.normalBounds;
+    }
+    
+    public void updateNormalBounds() {
+        if (this.minimized || this.maximized || this.fullScreen) {
+            return;
+        }
+        this.normalBounds = this.getBounds();
+    }
+    
     public boolean isMinimized() {
-        return getState() == Frame.ICONIFIED;
+        return this.minimized;
     }
 
     public void setMinimized(boolean minimized0) {
-        if (minimized0) {
-            setState(Frame.ICONIFIED);
-        }
-        else {
-            setState(Frame.NORMAL);
-        }
+        if (this.minimized == minimized0) { return; }
+        this.minimized = minimized0;
+        updateState();
     }
     
     public boolean isMaximized() {
@@ -133,43 +164,54 @@ public class FFrame extends JFrame {
 
     public void setMaximized(boolean maximized0) {
         if (this.maximized == maximized0) { return; }
-        if (maximized0) {
-            this.setExtendedState(Frame.MAXIMIZED_BOTH);
-        }
-        else {
-            this.setExtendedState(Frame.NORMAL);
-        }
+        this.maximized = maximized0;
+        updateState();
+    }
+    
+    public boolean isFullScreen() {
+        return this.fullScreen;
     }
 
-    private void updateMaximizedBounds() {
-        Rectangle frameBounds = this.getBounds();
-        Point centerPoint = new Point(frameBounds.x + (frameBounds.width / 2), frameBounds.y + (frameBounds.height / 2));
-        this.setMaximizedBounds(SDisplayUtil.getScreenMaximizedBounds(centerPoint));
-    }
-
-    @Override
-    public void setExtendedState(int state) {
-        updateMaximizedBounds() ; //update maximized bounds whenever extended state changes
-
-        super.setExtendedState(state);
-
-        if (isMinimized()) { return; } //skip remaining logic while minimized
-
-        this.maximized = (state == Frame.MAXIMIZED_BOTH);
-        if (this.maximized) {
-            if (this.isMainFrame) { //for main frame, use preference to determine whether to hide title bar when maximizing
-                this.setShowTitleBar(!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_HIDE_TITLE_BAR));
-            }
+    public void setFullScreen(boolean fullScreen0) {
+        if (this.fullScreen == fullScreen0) { return; }
+        this.fullScreen = fullScreen0;
+        if (!fullScreen0) { //cancel full screen here instead of updateState
+            SDisplayUtil.setFullScreenWindow(this, false);
         }
-        else { //only support hidden titlebar if maximized
-            this.setShowTitleBar(true);
+        updateState();
+    }
+    
+    private void updateState() {
+        if (this.minimized) {
+            super.setExtendedState(Frame.ICONIFIED);
+            return;
         }
         updateBorder();
-        this.titleBar.handleMaximizedChanged(); //update icon and tooltip for maximize button
+
+        super.setExtendedState(Frame.NORMAL);
+
+        if (this.fullScreen) {
+            if (SDisplayUtil.setFullScreenWindow(this, true)) {
+                return; //nothing else needed if full-screen successful
+            }
+            this.fullScreen = false; //reset if full screen failed
+            updateBorder(); //ensure border updated for non-full screen if needed
+        }
+
+        if (this.maximized) {
+            this.setBounds(SDisplayUtil.getScreenMaximizedBounds(this.normalBounds));
+        }
+        else {
+            this.setBounds(this.normalBounds);
+        }
     }
     
     private void updateBorder() {
-        if (this.maximized) {
+        if (this.minimized || this.hideBorder == (this.maximized || this.fullScreen)) {
+            return; //don't update border if minimized or border visibility wouldn't change
+        }
+        this.hideBorder = !this.hideBorder;
+        if (this.hideBorder) {
             FSkin.get(getRootPane()).removeBorder();
         }
         else {
@@ -177,6 +219,23 @@ public class FFrame extends JFrame {
                     BorderFactory.createLineBorder(Color.BLACK, 1), 
                     new LineSkinBorder(FSkin.getColor(Colors.CLR_BORDERS), borderThickness - 1)));
         }
+    }
+    
+    //override normal state behavior
+    @Override
+    public void setState(int state) {
+        setMinimized(state == Frame.ICONIFIED);
+        if (state == Frame.MAXIMIZED_BOTH) {
+            this.setMaximized(true);
+        }
+    }
+
+    //override normal extended state behavior
+    @Override
+    public void setExtendedState(int state) {
+        this.minimized = (state & Frame.ICONIFIED) == Frame.ICONIFIED;
+        this.maximized = (state & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH;
+        updateState();
     }
     
     private void addMoveSupport() {

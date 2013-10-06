@@ -73,6 +73,7 @@ import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
 import forge.sound.SoundSystem;
+import forge.view.FFrame;
 import forge.view.FView;
 
 /**
@@ -188,15 +189,18 @@ public enum FControl implements KeyEventDispatcher {
         }
 
         // Handles resizing in null layouts of layers in JLayeredPane as well as saving window layout
-        Singletons.getView().getFrame().addComponentListener(new ComponentAdapter() {
+        final FFrame window = Singletons.getView().getFrame();
+        window.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(final ComponentEvent e) {
                 sizeChildren();
+                window.updateNormalBounds();
                 SLayoutIO.saveWindowLayout();
             }
 
             @Override
             public void componentMoved(final ComponentEvent e) {
+                window.updateNormalBounds();
                 SLayoutIO.saveWindowLayout();
             }
         });

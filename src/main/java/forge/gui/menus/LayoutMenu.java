@@ -49,6 +49,7 @@ public final class LayoutMenu {
         }
         menu.add(getMenu_ThemeOptions());
         menu.addSeparator();
+        menu.add(getMenuItem_FullScreen());
         menu.add(getMenuItem_SetWindowSize());
         if (currentScreen != Screens.HOME_SCREEN) {
             menu.add(getMenuItem_RevertLayout());
@@ -148,7 +149,6 @@ public final class LayoutMenu {
 
     private static JMenuItem getMenuItem_ShowTitleBar() {
         final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Title Bar");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
         menuItem.setState(!prefs.getPrefBoolean(FPref.UI_HIDE_TITLE_BAR));
         menuItem.addActionListener(getShowTitleBarAction(menuItem));
         return menuItem;
@@ -262,4 +262,19 @@ public final class LayoutMenu {
         };
     }
 
+    private static JMenuItem getMenuItem_FullScreen() {
+        final JMenuItem menuItem = new JMenuItem("Full Screen");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
+        menuItem.addActionListener(getFullScreenAction(menuItem));
+        return menuItem;
+    }
+    private static ActionListener getFullScreenAction(final JMenuItem menuItem) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final FFrame frame = Singletons.getView().getFrame();
+                frame.setFullScreen(!frame.isFullScreen());
+            }
+        };
+    }
 }

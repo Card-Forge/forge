@@ -10,6 +10,7 @@ import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -113,40 +114,52 @@ public class SDisplayUtil {
         FThreads.invokeInEdtLater(showTabRoutine);
     }
     
-    public static Rectangle getScreenBoundsForPoint(Point point) {
-        Rectangle bounds;
-        for (GraphicsDevice device : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
-            for (GraphicsConfiguration config : device.getConfigurations()) {
-                bounds = config.getBounds();
-                if (bounds.contains(point)) {
-                    return bounds;
-                }
-            }
-        }
-        //return bounds of default monitor if point not on any screen
-        return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-    }
-    
-    public static Rectangle getScreenMaximizedBounds(Point point) {
+    public static GraphicsDevice getGraphicsDevice(Point point) {
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsConfiguration graphicsConfiguration = null;
         for (GraphicsDevice gd : env.getScreenDevices()) {
             if (gd.getDefaultConfiguration().getBounds().contains(point)) {
-                graphicsConfiguration = gd.getDefaultConfiguration();
-                break;
+                return gd;
             }
         }
-        if (graphicsConfiguration == null) {
-            return env.getMaximumWindowBounds();
+        return null;
+    }
+    
+    public static GraphicsDevice getGraphicsDevice(Rectangle rect) {
+        return getGraphicsDevice(new Point(rect.x + (rect.width / 2), rect.y + (rect.height / 2)));
+    }
+    
+    public static Rectangle getScreenBoundsForPoint(Point point) {
+        GraphicsDevice gd = getGraphicsDevice(point);
+        if (gd == null) {
+            //return bounds of default monitor if point not on any screen
+            return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        }
+        return gd.getDefaultConfiguration().getBounds();
+    }
+    
+    public static Rectangle getScreenMaximizedBounds(Rectangle rect) {
+        GraphicsDevice gd = getGraphicsDevice(rect);
+        if (gd == null) {
+            //return bounds of default monitor if center of rect not on any screen
+            return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         }
 
-        Rectangle bounds = graphicsConfiguration.getBounds();
-        Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(graphicsConfiguration);
-
+        GraphicsConfiguration config = gd.getDefaultConfiguration();
+        Rectangle bounds = config.getBounds();
+        Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(config);
         bounds.x += screenInsets.left;
         bounds.y += screenInsets.top;
         bounds.height -= screenInsets.bottom;
         bounds.width -= screenInsets.right;
         return bounds;
+    }
+
+    public static boolean setFullScreenWindow(Window window, boolean fullScreen) {
+        GraphicsDevice gd = getGraphicsDevice(window.getBounds());
+        if (gd != null && gd.isFullScreenSupported()) {
+            gd.setFullScreenWindow(fullScreen ? window : null);
+            return true;
+        }
+        return false;
     }
 }
