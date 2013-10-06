@@ -125,7 +125,10 @@ public class FFrame extends JFrame {
         if (this.minimized || this.maximized || this.fullScreen) {
             this.minimized = false;
             this.maximized = false;
-            this.fullScreen = false;
+            if (this.fullScreen) { //need to cancel full screen here
+                SDisplayUtil.setFullScreenWindow(this, false);
+                this.fullScreen = false;
+            }
             updateState();
         }
     }
