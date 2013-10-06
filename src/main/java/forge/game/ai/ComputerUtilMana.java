@@ -456,6 +456,12 @@ public class ComputerUtilMana {
      * @return ManaCost
      */
     private static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
+        ZoneType castFromBackup = null;
+        if(test && sa.isSpell()) {
+            castFromBackup = sa.getSourceCard().getCastFrom();
+            sa.getSourceCard().setCastFrom(sa.getSourceCard().getZone().getZoneType());
+        }
+        
         Cost payCosts = sa.getPayCosts();
         final ManaCost mana = payCosts != null ? payCosts.getTotalMana() : ManaCost.NO_COST;
     
@@ -494,6 +500,10 @@ public class ComputerUtilMana {
             if (!test) {
                 card.setXManaCostPaid(manaToAdd / cost.getXcounter());
             }
+        }
+        
+        if(test && sa.isSpell()) {
+            sa.getSourceCard().setCastFrom(castFromBackup);
         }
     
         return cost;
