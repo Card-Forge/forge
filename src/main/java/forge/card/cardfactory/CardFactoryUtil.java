@@ -2756,6 +2756,7 @@ public class CardFactoryUtil {
             public void resolve() {
                 final Game game = card.getGame();
                 this.setActivatingPlayer(card.getController());
+                haunterDiesWork.setActivatingPlayer(card.getController());
                 List<Card> allCreatures = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                 final List<Card> creats = CardLists.getTargetableCards(allCreatures, haunterDiesWork);
                 if (creats.isEmpty()) {
