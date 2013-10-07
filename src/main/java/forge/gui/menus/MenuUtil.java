@@ -3,13 +3,9 @@ package forge.gui.menus;
 import java.awt.Toolkit;
 import java.io.IOException;
 
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import forge.Singletons;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
@@ -56,16 +52,6 @@ public final class MenuUtil {
         Singletons.getControl().getForgeMenu().setProvider(provider);
     }
     public static void setMenuHint(final JMenuItem menu, final String hint) {
-        menu.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                JMenuItem item = (JMenuItem) e.getSource();
-                if (item.isArmed() || (item.isSelected() && e.getSource() instanceof JMenu)) {
-                    Singletons.getView().getStatusBar().setStatusText(hint);
-                } else {
-                    Singletons.getView().getStatusBar().setStatusText("");
-                }
-            }
-        });
+        menu.setToolTipText(hint);
     }
 }

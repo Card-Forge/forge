@@ -7,9 +7,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
-
 import forge.Singletons;
 import forge.gui.match.controllers.CDev;
 import forge.gui.menus.MenuUtil;
@@ -83,25 +80,7 @@ public class DevModeMenu implements ActionListener {
         menu.add(getMenuItem(DevMenuItem.SET_PLAYER_LIFE));
         menu.addSeparator();
         menu.add(getMenuItem(DevMenuItem.DEV_CORNER));
-
-        menu.addMenuListener(getMenuListener());
-
         return menu;
-    }
-
-    private static MenuListener getMenuListener() {
-        return new MenuListener() {
-            @Override
-            public void menuSelected(MenuEvent arg0) {
-                Singletons.getView().getStatusBar().setStatusText("Options for testing during development");
-            }
-            @Override
-            public void menuDeselected(MenuEvent arg0) {
-                Singletons.getView().getStatusBar().setStatusText("");
-            }
-            @Override
-            public void menuCanceled(MenuEvent arg0) { }
-        };
     }
 
     private static JMenuItem getMenuItem(DevMenuItem m) {

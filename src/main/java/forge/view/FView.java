@@ -56,9 +56,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JComponentSkin;
 import forge.gui.toolbox.FSkin.SkinCursor;
 import forge.model.BuildInfo;
-import forge.properties.ForgePreferences;
 import forge.properties.NewConstants;
-import forge.properties.ForgePreferences.FPref;
 
 /** */
 public enum FView {
@@ -66,7 +64,10 @@ public enum FView {
     SINGLETON_INSTANCE;
 
     /** */
-    public static final Integer TARGETING_LAYER = JLayeredPane.MODAL_LAYER - 1;
+    public static final Integer NAVIGATION_BAR_LAYER = JLayeredPane.MODAL_LAYER - 1;
+    public static final Integer NAVIGATION_BAR_REVEAL_LAYER = NAVIGATION_BAR_LAYER - 1;
+    public static final Integer OVERLAY_LAYER = NAVIGATION_BAR_REVEAL_LAYER - 1;
+    public static final Integer TARGETING_LAYER = OVERLAY_LAYER - 1;
 
     private final List<DragCell> allCells = new ArrayList<DragCell>();
     private SplashFrame frmSplash;
@@ -85,8 +86,6 @@ public enum FView {
     // An insets panel neatly maintains a space from the edges of the window and
     // whatever layout is happening, without having to explicitly define a margin each time.
     private FPanel pnlInsets;
-    // The status bar to display at the bottom of the frame
-    private FStatusBar statusBar;
     // Preview panel is what is shown when a drag cell is being moved around
     private final JPanel pnlPreview = new PreviewPanel();
     // Tab overflow is for the +X display for extra tabs.
@@ -99,14 +98,11 @@ public enum FView {
 
     /** */
     public void initialize() {
-        final ForgePreferences prefs = Singletons.getModel().getPreferences();
-
-        // pnlInsets, navigationBar, and statusBar are skinned components
+        // pnlInsets and navigationBar are skinned components
         // which must be instantiated after the skin is loaded.
         pnlInsets = new FPanel(new BorderLayout());
         pnlInsets.setBorderToggle(false);
         navigationBar = new FNavigationBar(frmDocument);
-        statusBar = new FStatusBar(frmDocument, !prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
 
         // Frame styling
         frmDocument.initialize(navigationBar);
@@ -118,18 +114,17 @@ public enum FView {
         // Frame components
         frmDocument.setContentPane(lpnDocument);
         lpnDocument.add(pnlInsets, (Integer) 1);
-        lpnDocument.add(statusBar, (Integer) 1); //should always appear below pnlInsets, so put at same level
         FAbsolutePositioner.SINGLETON_INSTANCE.initialize(lpnDocument, (Integer) 2);
         lpnDocument.add(pnlPreview, (Integer) 3);
         lpnDocument.add(pnlTabOverflow, (Integer) 4);
-        lpnDocument.add(navigationBar.getPnlReveal(), (Integer) 5); //put this at layer directly behind navigation bar
-        lpnDocument.add(navigationBar, (Integer) 6); //ensure this appears over all other non-overlay layers
-        lpnDocument.add(FOverlay.SINGLETON_INSTANCE.getPanel(), JLayeredPane.MODAL_LAYER);
+        lpnDocument.add(navigationBar, NAVIGATION_BAR_LAYER);
+        lpnDocument.add(navigationBar.getPnlReveal(), NAVIGATION_BAR_REVEAL_LAYER);
+        lpnDocument.add(FOverlay.SINGLETON_INSTANCE.getPanel(), OVERLAY_LAYER);
         // Note: when adding new panels here, keep in mind that the layered pane
         // has a null layout, so new components will be W0 x H0 pixels - gotcha!
         // FControl has a method called "sizeComponents" which will fix this.
         lpnDocument.add(TargetingOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);
-        lpnDocument.add(FNetOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);        
+        lpnDocument.add(FNetOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);
 
         pnlInsets.add(pnlContent, BorderLayout.CENTER);
         pnlInsets.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
@@ -331,11 +326,6 @@ public enum FView {
     /** @return {@link javax.swing.JPanel} */
     public JPanel getPnlContent() {
         return pnlContent;
-    }
-    
-    /** @return {@link forge.view.FStatusBar} */
-    public FStatusBar getStatusBar() {
-        return statusBar;
     }
 
     /** @return {@link javax.swing.JPanel} */

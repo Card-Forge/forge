@@ -17,7 +17,6 @@ import forge.control.FControl.Screens;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
 import forge.gui.MouseUtil.MouseCursor;
-import forge.gui.framework.SResizingUtil;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
@@ -43,8 +42,8 @@ public final class LayoutMenu {
 
         JMenu menu = new JMenu("Layout");
         menu.setMnemonic(KeyEvent.VK_L);
-        menu.add(getMenu_ViewOptions());
         if (currentScreen != Screens.HOME_SCREEN) {
+            menu.add(getMenu_ViewOptions());
             menu.add(getMenu_FileOptions());
         }
         menu.add(getMenu_ThemeOptions());
@@ -59,10 +58,7 @@ public final class LayoutMenu {
 
     private static JMenu getMenu_ViewOptions() {
         JMenu menu = new JMenu("View");
-        menu.add(getMenuItem_ShowStatusBar());
-        if (currentScreen != Screens.HOME_SCREEN) {
-            menu.add(getMenuItem_ShowTabs());
-        }
+        menu.add(getMenuItem_ShowTabs());
         if (currentScreen == Screens.MATCH_SCREEN) {
             menu.add(getMenuItem_ShowBackgroundImage());
         }
@@ -142,27 +138,6 @@ public final class LayoutMenu {
                 FView.SINGLETON_INSTANCE.refreshAllCellLayouts(showTabs);
                 prefs.setPref(FPref.UI_HIDE_GAME_TABS, !showTabs);
                 prefs.save();
-            }
-        };
-    }
-    
-    private static JMenuItem getMenuItem_ShowStatusBar() {
-        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Status Bar");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
-        menuItem.setState(!prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
-        menuItem.addActionListener(getShowStatusBarAction(menuItem));
-        return menuItem;
-    }
-    private static ActionListener getShowStatusBarAction(final JCheckBoxMenuItem menuItem) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean showStatusBar = menuItem.getState();
-                prefs.setPref(FPref.UI_HIDE_STATUS_BAR, !showStatusBar);
-                prefs.save();
-                Singletons.getView().getStatusBar().setVisible(showStatusBar);
-                Singletons.getView().getNavigationBar().updateClockVisibility();
-                SResizingUtil.resizeWindow();
             }
         };
     }

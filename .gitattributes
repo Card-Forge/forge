@@ -15500,7 +15500,6 @@ src/main/java/forge/util/storage/package-info.java -text
 src/main/java/forge/view/ButtonUtil.java svneol=native#text/plain
 src/main/java/forge/view/FFrame.java -text
 src/main/java/forge/view/FNavigationBar.java -text
-src/main/java/forge/view/FStatusBar.java -text
 src/main/java/forge/view/FTitleBar.java -text
 src/main/java/forge/view/FTitleBarBase.java -text
 src/main/java/forge/view/FView.java -text

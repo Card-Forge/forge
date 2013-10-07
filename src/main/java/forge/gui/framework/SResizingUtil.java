@@ -19,15 +19,11 @@ import java.util.Set;
 
 import javax.swing.JPanel;
 
-import forge.Singletons;
 import forge.gui.FNetOverlay;
 import forge.gui.toolbox.FAbsolutePositioner;
 import forge.gui.toolbox.FOverlay;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 import forge.view.FFrame;
 import forge.view.FNavigationBar;
-import forge.view.FStatusBar;
 import forge.view.FView;
 
 /**
@@ -124,29 +120,24 @@ public final class SResizingUtil {
         final FNavigationBar navigationBar = FView.SINGLETON_INSTANCE.getNavigationBar();
         final JPanel pnlContent = FView.SINGLETON_INSTANCE.getPnlContent();
         final JPanel pnlInsets = FView.SINGLETON_INSTANCE.getPnlInsets();
-        final FStatusBar statusBar = FView.SINGLETON_INSTANCE.getStatusBar();
 
         Rectangle mainBounds = frame.getContentPane().getBounds();
-        mainBounds.y = 0; // Play nicely with MenuBar if visible or not.
-        FAbsolutePositioner.SINGLETON_INSTANCE.containerResized(mainBounds);
-        FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
-        FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
 
         int navigationBarHeight = navigationBar.getPreferredSize().height;
         navigationBar.setBounds(mainBounds.x, mainBounds.y, mainBounds.width, navigationBarHeight);
         navigationBar.validate();
 
-        if (frame.isTitleBarHidden()) {
-            navigationBarHeight = 0; //use 0 for remaining calculations if title bar hidden
+        if (!frame.isTitleBarHidden()) { //adjust bounds for titlebar if not hidden
+            mainBounds.y += navigationBarHeight;
+            mainBounds.height -= navigationBarHeight;
         }
-        final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        final int statusBarHeight = prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR) ? 0 : statusBar.getPreferredSize().height;
 
-        pnlInsets.setBounds(mainBounds.x, mainBounds.y + navigationBarHeight, mainBounds.width, mainBounds.height - navigationBarHeight - statusBarHeight);
+        FAbsolutePositioner.SINGLETON_INSTANCE.containerResized(mainBounds);
+        FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
+        FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
+
+        pnlInsets.setBounds(mainBounds);
         pnlInsets.validate();
-        
-        statusBar.setBounds(mainBounds.x, mainBounds.y + mainBounds.height - statusBarHeight, mainBounds.width, statusBarHeight);
-        statusBar.validate();
 
         final int w = pnlContent.getWidth();
         final int h = pnlContent.getHeight();

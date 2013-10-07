@@ -72,7 +72,6 @@ public abstract class FTitleBarBase extends JMenuBar {
         layout.putConstraint(SpringLayout.SOUTH, btnLockTitleBar, 0, SpringLayout.SOUTH, btnMinimize);
     }
 
-    public abstract String getTitle();
     public abstract void setTitle(String title);
     public abstract void setIconImage(Image image);
     

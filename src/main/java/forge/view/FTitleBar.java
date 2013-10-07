@@ -26,11 +26,6 @@ public class FTitleBar extends FTitleBarBase {
         layout.putConstraint(SpringLayout.SOUTH, lblTitle, -5, SpringLayout.SOUTH, this);
         super.addControls();
     }
-    
-    @Override
-    public String getTitle() {
-        return this.lblTitle.getText();
-    }
 
     @Override
     public void setTitle(String title) {

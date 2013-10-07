@@ -19,14 +19,11 @@ import forge.gui.menus.LayoutMenu;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FDigitalClock;
 import forge.gui.toolbox.FSkin;
-import forge.properties.ForgePreferences;
-import forge.properties.ForgePreferences.FPref;
 
 @SuppressWarnings("serial")
 public class FNavigationBar extends FTitleBarBase {
 
     private static final ForgeMenu forgeMenu = Singletons.getControl().getForgeMenu();
-    private static final ForgePreferences prefs = Singletons.getModel().getPreferences();
     private static final int revealSpeed = 300;
     private static final int revealDelay = 150;
 
@@ -42,7 +39,6 @@ public class FNavigationBar extends FTitleBarBase {
         super(f);
         btnForge.setFocusable(false);
         btnForge.setPreferredSize(new Dimension(100, 23));
-        setIconImage(this.frame.getIconImage()); //set default icon image based on frame icon image
         FSkin.get(btnForge).setForeground(foreColor);
         FSkin.get(clock).setForeground(foreColor);
         addControls();        
@@ -71,11 +67,11 @@ public class FNavigationBar extends FTitleBarBase {
         LayoutMenu.updateFullScreenItemText();
     }
     
-    //only show clock if maximized and status bar hidden
-    public void updateClockVisibility() {
-        clock.setVisible(this.frame.isFullScreen() && prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
+    //only show clock if Full Screen
+    private void updateClockVisibility() {
+        clock.setVisible(this.frame.isFullScreen());
     }
-    
+
     private void addForgeButtonListeners() {
         btnForge.addMouseListener(new MouseAdapter() {
             @Override
@@ -210,11 +206,6 @@ public class FNavigationBar extends FTitleBarBase {
     
     public JPanel getPnlReveal() {
         return pnlReveal;
-    }
-    
-    @Override
-    public String getTitle() {
-        return "Forge";
     }
 
     @Override
