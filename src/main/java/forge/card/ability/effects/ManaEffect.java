@@ -11,7 +11,6 @@ import forge.CounterType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
