@@ -113,11 +113,13 @@ public final class ForgeMenu {
     }
     
     public boolean handleKeyEvent(KeyEvent e) {
-        JMenuItem item = activeShortcuts.get(KeyStroke.getKeyStrokeForEvent(e));
-        if (item != null) {
-            hide(); //ensure menu doesn't stay open if currently open
-            item.doClick();
-            return true;
+        if (popupMenu.isEnabled()) {
+            JMenuItem item = activeShortcuts.get(KeyStroke.getKeyStrokeForEvent(e));
+            if (item != null) {
+                hide(); //ensure menu doesn't stay open if currently open
+                item.doClick();
+                return true;
+            }
         }
         return false;
     }

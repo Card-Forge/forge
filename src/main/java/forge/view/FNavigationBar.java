@@ -77,7 +77,7 @@ public class FNavigationBar extends FTitleBarBase {
         btnForge.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (System.currentTimeMillis() - timeMenuHidden > 250) { //time comparsion needed clicking button a second time to hide menu
+                if (btnForge.isEnabled() && System.currentTimeMillis() - timeMenuHidden > 250) { //time comparsion needed clicking button a second time to hide menu
                     showForgeMenu(true);
                 }
             }
@@ -85,7 +85,7 @@ public class FNavigationBar extends FTitleBarBase {
     }
     
     public void showForgeMenu(boolean hideIfAlreadyShown) {
-        if (!btnForge.isToggled()) {
+        if (!btnForge.isToggled() && btnForge.isEnabled()) {
             btnForge.setToggled(true);
             forgeMenu.getPopupMenu().show(this, 1, this.getHeight());
         }
@@ -97,6 +97,11 @@ public class FNavigationBar extends FTitleBarBase {
     public void onForgeMenuHidden() {
         btnForge.setToggled(false);
         timeMenuHidden = System.currentTimeMillis();
+    }
+    
+    public void setForgeButtonEnabled(boolean enabled0) {
+        btnForge.setEnabled(enabled0);
+        forgeMenu.getPopupMenu().setEnabled(enabled0);
     }
     
     //setup panel used to reveal navigation bar when hidden
