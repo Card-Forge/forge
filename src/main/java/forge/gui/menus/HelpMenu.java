@@ -9,8 +9,11 @@ import java.io.IOException;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import forge.Singletons;
+import forge.model.BuildInfo;
 import forge.util.FileUtil;
 
 public final class HelpMenu {
@@ -25,7 +28,28 @@ public final class HelpMenu {
         menu.addSeparator();
         menu.add(getMenuItem_ReleaseNotes());
         menu.add(getMenuItem_License());
+        menu.addSeparator();
+        menu.add(getMenuItem_About());
         return menu;
+    }
+
+    private static JMenuItem getMenuItem_About() {
+        JMenuItem menuItem = new JMenuItem("About Forge...");
+        menuItem.addActionListener(getAboutForgeAction());
+        return menuItem;
+    }
+
+    private static ActionListener getAboutForgeAction() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(
+                        Singletons.getView().getFrame(),
+                        "Version : " + BuildInfo.getVersionString(),
+                        "About Forge",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        };
     }
 
     private static JMenu getMenu_Troubleshooting() {
@@ -112,7 +136,7 @@ public final class HelpMenu {
             Desktop.getDesktop().open(file);
         }
     }
-    
+
     private static JMenuItem getMenuItem_UrlLink(String caption, String url) {
         JMenuItem menuItem = new JMenuItem(caption);
         menuItem.addActionListener(getLaunchUrlAction(url));
