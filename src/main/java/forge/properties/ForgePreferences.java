@@ -34,6 +34,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
      * Preference identifiers, and their default values.
      */
     public static enum FPref {
+        PLAYER_NAME (""),
         CONSTRUCTED_P1_DECK_STATE(""),
         CONSTRUCTED_P2_DECK_STATE(""),
         CONSTRUCTED_GAMEPLAYERS(""),

@@ -9,11 +9,12 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerAi;
 import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.LobbyPlayerRemote;
+import forge.gui.GuiDisplayUtil;
 import forge.gui.toolbox.FSkin;
 import forge.net.client.INetClient;
 import forge.util.MyRandom;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
@@ -85,8 +86,12 @@ public class Lobby {
      */
     private String getRandomName() {
         Random my = MyRandom.getRandom();
-        return opponentNames[my.nextInt(opponentNames.length)];
-
+        String playerName = GuiDisplayUtil.getPlayerName();
+        String aiName = opponentNames[my.nextInt(opponentNames.length)];
+        while (aiName.equalsIgnoreCase(playerName)) {
+            aiName = opponentNames[my.nextInt(opponentNames.length)];
+        }
+        return aiName;
     }
 
     /**
@@ -110,7 +115,7 @@ public class Lobby {
         speak(ChatArea.Room, system, res.getName()  + " has joined the server.");
         // have to load avatar from remote user's preferences here
         remotePlayers.put(name, res);
-        
+
         return res;
     }
 

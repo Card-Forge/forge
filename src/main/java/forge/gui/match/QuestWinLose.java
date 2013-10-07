@@ -134,7 +134,7 @@ public class QuestWinLose extends ControlWinLose {
 
             // Ante returns to owners in a draw
             if (!outcome.isDraw()) {
-                boolean isHumanWinner = outcome.getWinner().equals(questPlayer);
+                boolean isHumanWinner = outcome.getWinningLobbyPlayer().equals(questPlayer);
                 final List<PaperCard> anteCards = new ArrayList<PaperCard>();
                 for (Player p : lastGame.getRegisteredPlayers()) {
                     if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) {

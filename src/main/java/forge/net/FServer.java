@@ -107,7 +107,7 @@ public enum FServer {
         for(GameLogEntry l : log)
             System.out.println(l);
 
-        System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinner().getName()));
+        System.out.println(String.format("\nGame %d ended in %d ms. %s has won!\n", 1+iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName()));
     }
 
 

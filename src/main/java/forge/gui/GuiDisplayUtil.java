@@ -32,6 +32,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
@@ -53,8 +54,9 @@ import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCardsFromList;
-import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.properties.ForgePreferences.FPref;
 
 public final class GuiDisplayUtil {
     private GuiDisplayUtil() {
@@ -122,7 +124,7 @@ public final class GuiDisplayUtil {
                 else if (categoryName.equals("aicardsinlibrary"))       aiCardTexts.put(ZoneType.Library, categoryValue);
                 else if (categoryName.equals("humancardsinexile"))      humanCardTexts.put(ZoneType.Exile, categoryValue);
                 else if (categoryName.equals("aicardsinexile"))         aiCardTexts.put(ZoneType.Exile, categoryValue);
-                
+
             }
 
             in.close();
@@ -138,7 +140,7 @@ public final class GuiDisplayUtil {
 
     private static void setupGameState(final int humanLife, final int computerLife, final Map<ZoneType, String> humanCardTexts,
             final Map<ZoneType, String> aiCardTexts, final String tChangePlayer, final String tChangePhase) {
-        
+
         final Game game = getGame();
         game.getAction().invoke(new Runnable() {
             @Override
@@ -148,17 +150,17 @@ public final class GuiDisplayUtil {
 
                 Player newPlayerTurn = tChangePlayer.equals("human") ? newPlayerTurn = human : tChangePlayer.equals("ai") ? newPlayerTurn = ai : null;
                 PhaseType newPhase = tChangePhase.trim().equalsIgnoreCase("none") ? null : PhaseType.smartValueOf(tChangePhase);
-                
+
                 game.getPhaseHandler().devModeSet(newPhase, newPlayerTurn);
-              
-                
+
+
                 game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-              
+
                 devSetupPlayerState(humanLife, humanCardTexts, human);
                 devSetupPlayerState(computerLife, aiCardTexts, ai);
-              
+
                 game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-              
+
                 game.getAction().checkStaticAbilities();
             }
         });
@@ -242,7 +244,7 @@ public final class GuiDisplayUtil {
         final Card c = GuiChoose.oneOrNone("Choose a card", lib);
         if (null == c)
             return;
-        
+
         getGame().getAction().invoke(new Runnable() { @Override public void run() { getGame().getAction().moveToHand(c); }});
 
     }
@@ -311,8 +313,8 @@ public final class GuiDisplayUtil {
      */
     public static void devModeUntapPerm() {
         final Game game = getGame();
-        
-        
+
+
 
         game.getAction().invoke(new Runnable() {
             @Override
@@ -380,7 +382,7 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        getGame().getAction().invoke(new Runnable() { @Override public void run() { 
+        getGame().getAction().invoke(new Runnable() { @Override public void run() {
             Card forgeCard = c.toForgeCard(p);
             getGame().getAction().moveToHand(forgeCard);
         }});
@@ -410,20 +412,20 @@ public final class GuiDisplayUtil {
                 if (c.getRules().getType().isLand()) {
                     forgeCard.setOwner(p);
                     game.getAction().moveToPlay(forgeCard);
-        
+
                 } else {
                     final List<SpellAbility> choices = forgeCard.getBasicSpells();
                     if (choices.isEmpty()) {
                         return; // when would it happen?
                     }
-        
+
                     final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices);
                     if (sa == null) {
                         return; // happens if cancelled
                     }
-        
-                    game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least) 
-                    // Human player is choosing targets for an ability controlled by chosen player. 
+
+                    game.getAction().moveToHand(forgeCard); // this is really needed (for rollbacks at least)
+                    // Human player is choosing targets for an ability controlled by chosen player.
                     sa.setActivatingPlayer(p);
                     HumanPlay.playSaWithoutPayingManaCost(game, sa, true);
                 }
@@ -440,26 +442,26 @@ public final class GuiDisplayUtil {
         if (null == p) {
             return;
         }
-        
+
         PlanarDice res = GuiChoose.oneOrNone("Choose result", PlanarDice.values());
         if(res == null)
             return;
-        
+
         System.out.println("Rigging planar dice roll: " + res.toString());
 
         //DBG
         //System.out.println("ActivePlanes: " + getGame().getActivePlanes());
         //System.out.println("CommandPlanes: " + getGame().getCardsIn(ZoneType.Command));
-        
+
         PlanarDice.roll(p, res);
-        
+
         getGame().getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
             }
         });
-        
+
     }
 
     public static void devModePlaneswalkTo() {
@@ -494,6 +496,15 @@ public final class GuiDisplayUtil {
 
     private static Game getGame() {
         return Singletons.getControl().getObservedGame();
+    }
+
+    public static String getPlayerName() {
+        return Singletons.getModel().getPreferences().getPref(FPref.PLAYER_NAME);
+    }
+
+    public static String personalizeHuman(String text) {
+        String playerName = Singletons.getModel().getPreferences().getPref(FPref.PLAYER_NAME);
+        return text.replaceAll("(?i)human", playerName);
     }
 
 

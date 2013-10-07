@@ -53,10 +53,13 @@ public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStati
     /** The player rating. */
     private final List<Pair<LobbyPlayer, PlayerStatistics>> playerRating = new ArrayList<Pair<LobbyPlayer, PlayerStatistics>>(2);
 
+    private final Iterable<Player> players;
+
     private GameEndReason winCondition;
 
     public GameOutcome(GameEndReason reason, final Iterable<Player> list) {
         winCondition = reason;
+        players = list;
         for (final Player n : list) {
             this.playerRating.add(Pair.of(n.getLobbyPlayer(), n.getStats()));
         }
@@ -84,10 +87,25 @@ public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStati
      * 
      * @return the winner
      */
-    public LobbyPlayer getWinner() {
+    public LobbyPlayer getWinningLobbyPlayer() {
         for (Entry<LobbyPlayer, PlayerStatistics> ps : playerRating) {
             if (ps.getValue().getOutcome().hasWon()) {
                 return ps.getKey();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets winning {@code Player}.
+     * <p>
+     * Alternative to {@link getWinningLobbyPlayer()} which does not
+     * distinguish between human player names (a problem for hotseat games).
+     */
+    public Player getWinningPlayer() {
+        for (Player p: players) {
+            if (p.getOutcome().hasWon()) {
+                return p;
             }
         }
         return null;
@@ -157,6 +175,10 @@ public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStati
      */
     public int getNumPlayers() {
         return playerRating.size();
+    }
+
+    public List<Player> getPlayers() {
+        return (List<Player>)players;
     }
 
 }

@@ -137,7 +137,7 @@ public class Match {
     public boolean isMatchOver() {
         int[] victories = new int[players.size()];
         for (GameOutcome go : gamesPlayed) {
-            LobbyPlayer winner = go.getWinner();
+            LobbyPlayer winner = go.getWinningLobbyPlayer();
             int i = 0;
             for (RegisteredPlayer p : players) {
                 if (p.getPlayer().equals(winner)) {
@@ -165,7 +165,7 @@ public class Match {
     public int getGamesWonBy(LobbyPlayer questPlayer) {
         int sum = 0;
         for (GameOutcome go : gamesPlayed) {
-            if (questPlayer.equals(go.getWinner())) {
+            if (questPlayer.equals(go.getWinningLobbyPlayer())) {
                 sum++;
             }
         }

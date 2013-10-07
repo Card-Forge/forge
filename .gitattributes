@@ -15187,6 +15187,7 @@ src/main/java/forge/gui/home/settings/CSubmenuAvatars.java -text
 src/main/java/forge/gui/home/settings/CSubmenuDownloaders.java -text
 src/main/java/forge/gui/home/settings/CSubmenuPreferences.java -text
 src/main/java/forge/gui/home/settings/CSubmenuReleaseNotes.java -text
+src/main/java/forge/gui/home/settings/GamePlayerUtil.java -text
 src/main/java/forge/gui/home/settings/VSubmenuAvatars.java -text
 src/main/java/forge/gui/home/settings/VSubmenuDownloaders.java -text
 src/main/java/forge/gui/home/settings/VSubmenuPreferences.java -text

@@ -79,7 +79,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
      * Plays the sound corresponding to the outcome of the duel.
      */
     public SoundEffectType visit(GameEventGameOutcome event) {
-        boolean humanWonTheDuel = event.result.getWinner() == FServer.instance.getLobby().getGuiPlayer();
+        boolean humanWonTheDuel = event.result.getWinningLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer();
         return humanWonTheDuel ? SoundEffectType.WinDuel : SoundEffectType.LoseDuel;
     }
 

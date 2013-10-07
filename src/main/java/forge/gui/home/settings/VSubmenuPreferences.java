@@ -1,6 +1,7 @@
 package forge.gui.home.settings;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +40,7 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences.FPref;
 
-/** 
+/**
  * Assembles Swing components of preferences submenu singleton.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
@@ -59,7 +61,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to Default Settings").build();
     private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Match Layout").build();
     private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Editor Layout").build();
-    
+    private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
+
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
     private final JCheckBox cbSingletons = new OptionsCheckBox("Singleton Mode");
     private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
@@ -87,47 +90,50 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
     // ComboBox items are added in CSubmenuPreferences since this is just the View.
-    private final FComboBoxPanel<String> cbpSkin = new FComboBoxPanel<String>("Choose Skin:");    
+    private final FComboBoxPanel<String> cbpSkin = new FComboBoxPanel<String>("Choose Skin:");
     private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<GameLogEntryType>("Game Log Verbosity:");
     private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<String>("AI Personality:");
-    
+
     /**
      * Constructor.
      */
     private VSubmenuPreferences() {
-        
+
         pnlPrefs.setOpaque(false);
         pnlPrefs.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         // Spacing between components is defined here.
         final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
         final String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
-        
-        
+
+
         // Troubleshooting
         pnlPrefs.add(new SectionLabel("Troubleshooting"), sectionConstraints);
-        
+
         //pnlPrefs.add(new SectionLabel(" "), sectionConstraints);
         pnlPrefs.add(btnReset, regularConstraints + ", h 30px!");
-                
+
         final String twoButtonConstraints = "w 38%!, h 30px!, gap 10% 0 0 10px";
         pnlPrefs.add(btnDeleteMatchUI, twoButtonConstraints);
         pnlPrefs.add(btnDeleteEditorUI, "w 38%!, h 30px!, gap 0 0 0 10px");
         // Reset button
 
-          
+
         // General Configuration
         pnlPrefs.add(new SectionLabel("General Configuration"), sectionConstraints + ", gaptop 2%");
-        
+
+        pnlPrefs.add(getPlayerNamePanel(), regularConstraints + ", h 26px!");
+        pnlPrefs.add(new NoteLabel("Sets the name that you will be referred to by Forge during gameplay."), regularConstraints);
+
         pnlPrefs.add(cbCompactMainMenu, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enable for a space efficient sidebar that displays only one menu group at a time (RESTART REQUIRED)."), regularConstraints);
-        
-                 
+
+
         // Gameplay Options
         pnlPrefs.add(new SectionLabel("Gameplay"), sectionConstraints + ", gaptop 2%");
-        
+
         pnlPrefs.add(cbpAiProfiles, "w 80%!, gap 10% 0 0 10px, span 2 1");
-        pnlPrefs.add(new NoteLabel("Choose your AI opponent."), regularConstraints);        
+        pnlPrefs.add(new NoteLabel("Choose your AI opponent."), regularConstraints);
 
         pnlPrefs.add(cbAnte, regularConstraints);
         pnlPrefs.add(new NoteLabel("Determines whether or not the game is played for ante."), regularConstraints);
@@ -161,7 +167,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbRemoveArtifacts, regularConstraints);
         pnlPrefs.add(new NoteLabel("Disables artifact cards in generated decks."), regularConstraints);
-        
+
         // Advanced
         pnlPrefs.add(new SectionLabel("Advanced Settings"), sectionConstraints);
 
@@ -174,10 +180,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbUseThemedComboBox, regularConstraints);
         pnlPrefs.add(new NoteLabel("Turn off if you are having combo-box color clash (RESTART REQUIRED)."), regularConstraints);
 
-        
+
         // Themes
         pnlPrefs.add(new SectionLabel("Visual Themes"), sectionConstraints + ", gaptop 2%");
-        
+
         pnlPrefs.add(cbpSkin, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Change the overall look and feel of Forge (RESTART REQUIRED)."), regularConstraints);
 
@@ -207,7 +213,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbOverlayCardPower, regularConstraints);
         pnlPrefs.add(cbOverlayCardManaCost, regularConstraints);
 
-        
+
         // Sound options
         pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");
 
@@ -216,8 +222,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbAltSoundSystem, regularConstraints);
         pnlPrefs.add(new NoteLabel("Use the alternate sound system (only use in case your have issues with sound not playing or disappearing)"), regularConstraints);
-	
-        
+
+
         // Keyboard shortcuts
         final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
         pnlPrefs.add(lblShortcuts, sectionConstraints + ", gaptop 2%");
@@ -234,7 +240,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         scrContent.setBorder(null);
     }
-    
+
     public void reloadShortcuts() {
         for (Map.Entry<FPref, KeyboardShortcutField> e : shortcutFields.entrySet()) {
             e.getValue().reload(e.getKey());
@@ -396,11 +402,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             this.setText(StringUtils.join(displayText, ' '));
         }
     }
-    
+
     /** @return {@link javax.swing.JCheckBox} */
     public final JCheckBox getCbCompactMainMenu() {
         return cbCompactMainMenu;
-    }    
+    }
 
     /** @return {@link javax.swing.JCheckBox} */
     public final JCheckBox getCbRemoveSmall() {
@@ -441,7 +447,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public JCheckBox getCbOverlayCardManaCost() {
         return cbOverlayCardManaCost;
     }
-    
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbRandomFoil() {
         return cbRandomFoil;
@@ -471,7 +477,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public JCheckBox getCbDevMode() {
         return cbDevMode;
     }
-        
+
     public FComboBoxPanel<String> getAiProfilesComboBoxPanel() {
         return cbpAiProfiles;
     }
@@ -479,11 +485,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
     }
-  
+
     public FComboBoxPanel<String> getSkinsComboBoxPanel() {
         return cbpSkin;
     }
-               
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnforceDeckLegality() {
         return cbEnforceDeckLegality;
@@ -506,7 +512,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbAltSoundSystem() {
-	return cbAltSoundSystem;
+        return cbAltSoundSystem;
     }
 
     public final JCheckBox getCbUiForTouchScreen() {
@@ -517,17 +523,21 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public FLabel getBtnReset() {
         return btnReset;
     }
-    
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbShowMatchBackgroundImage() {
         return cbShowMatchBackgroundImage;
     }
-    
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbUseThemedComboBox() {
         return cbUseThemedComboBox;
-    }    
-    
+    }
+
+    public FLabel getBtnPlayerName() {
+        return btnPlayerName;
+    }
+
     //========== Overridden from IVDoc
 
     public final FLabel getBtnDeleteMatchUI() {
@@ -576,5 +586,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     @Override
     public DragCell getParentCell() {
         return parentCell;
+    }
+
+    private JPanel getPlayerNamePanel() {
+        JPanel p = new JPanel(new MigLayout("insets 0, gap 0!"));
+        p.setOpaque(false);
+        FLabel lbl = new FLabel.Builder().text("Player Name: ").fontSize(12).fontStyle(Font.BOLD).build();
+        p.add(lbl, "aligny top, h 100%");
+        p.add(btnPlayerName, "aligny top, h 100%, w 200px!");
+        return p;
     }
 }

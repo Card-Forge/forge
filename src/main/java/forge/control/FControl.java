@@ -35,6 +35,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+import org.apache.commons.lang.StringUtils;
+
 import forge.Card;
 import forge.Constant.Preferences;
 import forge.Singletons;
@@ -42,7 +44,10 @@ import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.Match;
+import forge.game.RegisteredPlayer;
 import forge.game.player.LobbyPlayer;
+import forge.game.player.LobbyPlayerAi;
+import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
@@ -56,6 +61,7 @@ import forge.gui.framework.SOverflowUtil;
 import forge.gui.framework.SResizingUtil;
 import forge.gui.home.CHomeUI;
 import forge.gui.home.VHomeUI;
+import forge.gui.home.settings.GamePlayerUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.controllers.CDock;
@@ -67,6 +73,7 @@ import forge.gui.match.views.VAntes;
 import forge.gui.menus.ForgeMenu;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -400,7 +407,7 @@ public enum FControl implements KeyEventDispatcher {
             game.getAction().checkGameOverCondition();
         else {
             game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
-            inputQueue.onGameOver(false); // release any waiting input, effectively passing priority 
+            inputQueue.onGameOver(false); // release any waiting input, effectively passing priority
         }
 
         playbackControl.onGameStopRequested();
@@ -413,6 +420,7 @@ public enum FControl implements KeyEventDispatcher {
 
 
     public final void startGameWithUi(Match match) {
+        setPlayerName(match.getPlayers());
         Game newGame = match.createGame();
         attachToGame(newGame);
         match.startGame(newGame, null);
@@ -512,5 +520,23 @@ public enum FControl implements KeyEventDispatcher {
         //Allow the event to be redispatched
         return false;
     }
+
+    /**
+     * Prompts user for a name that will be used instead of "Human" during gameplay.
+     * <p>
+     * This is a one time only event that is triggered when starting a game and the
+     * PLAYER_NAME setting is blank. Does not apply to a hotseat game.
+     */
+    private void setPlayerName(List<RegisteredPlayer> players) {
+        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        if (StringUtils.isBlank(prefs.getPref(FPref.PLAYER_NAME))) {
+            boolean isPlayerOneHuman = players.get(0).getPlayer() instanceof LobbyPlayerHuman;
+            boolean isPlayerTwoComputer = players.get(1).getPlayer() instanceof LobbyPlayerAi;
+            if (isPlayerOneHuman && isPlayerTwoComputer) {
+                GamePlayerUtil.setPlayerName();
+            }
+        }
+    }
+
 }
 

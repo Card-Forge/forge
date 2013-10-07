@@ -5,13 +5,12 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
@@ -21,19 +20,17 @@ import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.game.Game;
 import forge.game.GameOutcome;
-import forge.game.player.LobbyPlayer;
-import forge.game.player.PlayerStatistics;
+import forge.game.player.Player;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
-import forge.net.FServer;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
- *
+ * 
  */
 public class ViewWinLose {
     private final FButton btnContinue, btnRestart, btnQuit;
@@ -42,9 +39,14 @@ public class ViewWinLose {
     private final JLabel lblTitle = new JLabel("WinLoseFrame > lblTitle needs updating.");
     private final JLabel lblStats = new JLabel("WinLoseFrame > lblStats needs updating.");
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
-    
+
+    private final Game game;
+
     @SuppressWarnings("serial")
-    public ViewWinLose(final Game game) {
+    public ViewWinLose(final Game game0) {
+
+        game = game0;
+
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 
         final JPanel pnlLeft = new JPanel();
@@ -56,29 +58,29 @@ public class ViewWinLose {
         btnRestart = new FButton();
         btnQuit = new FButton();
 
-        // Control of the win/lose is handled differently for various game modes.
+        // Control of the win/lose is handled differently for various game
+        // modes.
         ControlWinLose control = null;
-        switch (game.getType()) {
-            case Quest:
-                control = new QuestWinLose(this, game);
+        switch (game0.getType()) {
+        case Quest:
+            control = new QuestWinLose(this, game0);
+            break;
+        case Draft:
+            if (!Singletons.getModel().getGauntletMini().isGauntletDraft()) {
                 break;
-            case Draft:
-                if (!Singletons.getModel().getGauntletMini().isGauntletDraft()) {
-                    break;
-                }
-            case Sealed:
-                control = new LimitedWinLose(this, game);
-                break;
-            case Gauntlet:
-                control = new GauntletWinLose(this, game);
-                break;
-            default: // will catch it after switch
-                break;
+            }
+        case Sealed:
+            control = new LimitedWinLose(this, game0);
+            break;
+        case Gauntlet:
+            control = new GauntletWinLose(this, game0);
+            break;
+        default: // will catch it after switch
+            break;
         }
         if (null == control) {
-            control = new ControlWinLose(this, game);
+            control = new ControlWinLose(this, game0);
         }
-
 
         pnlLeft.setOpaque(false);
         pnlRight.setOpaque(false);
@@ -97,20 +99,20 @@ public class ViewWinLose {
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
         FSkin.get(lblStats).setFont(FSkin.getFont(26));
 
-        btnContinue.setText("Continue");
+        btnContinue.setText("Next Game");
         FSkin.get(btnContinue).setFont(FSkin.getFont(22));
-        btnRestart.setText("Restart");
+        btnRestart.setText("Start New Match");
         FSkin.get(btnRestart).setFont(FSkin.getFont(22));
-        btnQuit.setText("Quit");
+        btnQuit.setText("Quit Match");
         FSkin.get(btnQuit).setFont(FSkin.getFont(22));
-        btnContinue.setEnabled(!game.getMatch().isMatchOver());
+        btnContinue.setEnabled(!game0.getMatch().isMatchOver());
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
-        txtLog.setText(game.getGameLog().getLogText(null));
+        txtLog.setText(game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]"));
         FSkin.get(txtLog).setFont(FSkin.getFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
-        
+
         FLabel btnCopyLog = new FLabel.ButtonBuilder().text("Copy to clipboard").build();
         btnCopyLog.setCommand(new Command() {
             @Override
@@ -135,8 +137,7 @@ public class ViewWinLose {
             overlay.add(pnlLeft, "w 40%!, h 100%!");
             overlay.add(pnlRight, "w 60%!, h 100%!");
             pnlRight.add(scrCustom, "w 100%!, h 100%!");
-        }
-        else {
+        } else {
             overlay.add(pnlLeft, "w 100%!, h 100%!");
         }
 
@@ -160,9 +161,9 @@ public class ViewWinLose {
         scrLog.setBorder(null);
         pnlLog.setOpaque(false);
 
-        pnlLog.add(new FLabel.Builder().text("Game Log").fontAlign(SwingConstants.CENTER)
-                .fontSize(18).fontStyle(Font.BOLD).build(),
-                "w 300px!, h 28px!, gaptop 20px");
+        pnlLog.add(
+                new FLabel.Builder().text("Game Log").fontAlign(SwingConstants.CENTER).fontSize(18)
+                .fontStyle(Font.BOLD).build(), "w 300px!, h 28px!, gaptop 20px");
 
         pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10 10");
         pnlLog.add(btnCopyLog, "center, w pref+16, h pref+8");
@@ -172,7 +173,8 @@ public class ViewWinLose {
             @Override
             public void run() {
                 scrLog.getViewport().setViewPosition(new Point(0, 0));
-                // populateCustomPanel may have changed which buttons are enabled; focus on the 'best' one
+                // populateCustomPanel may have changed which buttons are
+                // enabled; focus on the 'best' one
                 if (btnContinue.isEnabled()) {
                     btnContinue.requestFocusInWindow();
                 } else {
@@ -180,30 +182,21 @@ public class ViewWinLose {
                 }
             }
         });
-        
-        lblTitle.setText(composeTitle(game.getOutcome()));
 
-        GameLog log = game.getGameLog();
+        lblTitle.setText(composeTitle(game0.getOutcome()));
 
-        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME)) 
-            pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
+        showGameOutcomeSummary();
+        showPlayerScores();
 
-        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.MATCH_RESULTS))
-            lblStats.setText(o.message);
     }
 
     private String composeTitle(GameOutcome outcome) {
-        LobbyPlayer guiPlayer = FServer.instance.getLobby().getGuiPlayer();
-        int nHumansInGame = 0;
-        for(Pair<LobbyPlayer, PlayerStatistics> pps : outcome) {
-            if( pps.getKey() == guiPlayer )
-                nHumansInGame++;
-        }
-        LobbyPlayer winner = outcome.getWinner();
-        if ( winner == null )
+        Player winner = outcome.getWinningPlayer();
+        if (winner == null) {
             return "It's a draw!";
-
-        return nHumansInGame == 1 ? "You " + (winner == guiPlayer ? "won!" : "lost!") : winner.getName() + " Won!";
+        } else {
+            return winner.getName() + " Won!";
+        }
     }
 
     /** @return {@link forge.gui.toolbox.FButton} */
@@ -224,5 +217,22 @@ public class ViewWinLose {
     /** @return {@link javax.swing.JPanel} */
     public JPanel getPnlCustom() {
         return this.pnlCustom;
+    }
+
+    private void showGameOutcomeSummary() {
+        GameLog log = game.getGameLog();
+        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.GAME_OUTCOME))
+            pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
+    }
+
+    private void showPlayerScores() {
+        GameLog log = game.getGameLog();
+        for (GameLogEntry o : log.getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
+            lblStats.setText(removePlayerTypeFromLogMessage(o.message));
+        }
+    }
+
+    private String removePlayerTypeFromLogMessage(String message) {
+        return message.replaceAll("\\[[^\\]]*\\]", "");
     }
 }
