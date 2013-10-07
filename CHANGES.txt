@@ -17,6 +17,7 @@ When in Full Screen mode, a clock will appear to the left of the "Lock/Unlock Ti
 The title bar will appear on top of other components if not locked rather than pushing anything down
 The title bar will remain visible while accessing the Forge menu
 
+
 - Introducing the Forge button -
 The old menu bar has been removed.
 The Forge button on the left side of the titlebar will drop down the same menu of options.
@@ -46,6 +47,7 @@ Charmed Pendant
 Elemental Resonance
 AEtherplasm
 Excavator
+Snowblind
 
 
 ------------
