@@ -33,6 +33,9 @@ public final class Main {
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 
+        //Turn off the Java 2D system's use of Direct3D to improve rendering speed (particularly when Full Screen)
+        System.setProperty("sun.java2d.d3d", "false");
+
         // Start splash screen first, then data models, then controller.
         if(args.length == 0) {
             Singletons.setView(FView.SINGLETON_INSTANCE);
