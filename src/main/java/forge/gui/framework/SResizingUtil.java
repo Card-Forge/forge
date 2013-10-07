@@ -133,7 +133,7 @@ public final class SResizingUtil {
         FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
         
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        final int navigationBarHeight = frame.getShowTitleBar() ? navigationBar.getPreferredSize().height : 0;
+        final int navigationBarHeight = frame.isTitleBarHidden() ? 0 : navigationBar.getPreferredSize().height;
         final int statusBarHeight = prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR) ? 0 : statusBar.getPreferredSize().height;
         
         navigationBar.setBounds(mainBounds.x, mainBounds.y, mainBounds.width, navigationBarHeight);

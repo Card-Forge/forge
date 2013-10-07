@@ -109,7 +109,7 @@ public enum FView {
         statusBar = new FStatusBar(frmDocument, !prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
 
         // Frame styling
-        frmDocument.initialize(navigationBar, !prefs.getPrefBoolean(FPref.UI_HIDE_TITLE_BAR));
+        frmDocument.initialize(navigationBar);
         frmDocument.setMinimumSize(new Dimension(800, 600));
         frmDocument.setLocationRelativeTo(null);
         frmDocument.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

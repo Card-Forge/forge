@@ -59,7 +59,6 @@ public final class LayoutMenu {
 
     private static JMenu getMenu_ViewOptions() {
         JMenu menu = new JMenu("View");
-        menu.add(getMenuItem_ShowTitleBar());
         menu.add(getMenuItem_ShowStatusBar());
         if (currentScreen != Screens.HOME_SCREEN) {
             menu.add(getMenuItem_ShowTabs());
@@ -143,31 +142,6 @@ public final class LayoutMenu {
                 FView.SINGLETON_INSTANCE.refreshAllCellLayouts(showTabs);
                 prefs.setPref(FPref.UI_HIDE_GAME_TABS, !showTabs);
                 prefs.save();
-            }
-        };
-    }
-
-    private static JMenuItem getMenuItem_ShowTitleBar() {
-        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Title Bar");
-        menuItem.setState(!prefs.getPrefBoolean(FPref.UI_HIDE_TITLE_BAR));
-        menuItem.addActionListener(getShowTitleBarAction(menuItem));
-        return menuItem;
-    }
-    private static ActionListener getShowTitleBarAction(final JCheckBoxMenuItem menuItem) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean showTitleBar = menuItem.getState();
-                final FFrame frame = Singletons.getView().getFrame();
-                if (showTitleBar && !frame.isMaximized()) {
-                    //if titlebar toggled back on while frame not maximized (likely using F11), instead just maximize frame
-                    frame.setMaximized(true);
-                    menuItem.setState(false); //reset menu item state in this case
-                    return;
-                }
-                prefs.setPref(FPref.UI_HIDE_TITLE_BAR, !showTitleBar);
-                prefs.save();
-                frame.setShowTitleBar(showTitleBar);
             }
         };
     }
@@ -262,13 +236,18 @@ public final class LayoutMenu {
         };
     }
 
-    private static JMenuItem getMenuItem_FullScreen() {
-        final JMenuItem menuItem = new JMenuItem("Full Screen");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
-        menuItem.addActionListener(getFullScreenAction(menuItem));
-        return menuItem;
+    private static JMenuItem fullScreenItem;
+    public static void updateFullScreenItemText() {
+        fullScreenItem.setText(Singletons.getView().getFrame().isFullScreen() ? "Exit Full Screen" : "Full Screen");
     }
-    private static ActionListener getFullScreenAction(final JMenuItem menuItem) {
+    private static JMenuItem getMenuItem_FullScreen() {
+        fullScreenItem = new JMenuItem("Full Screen");
+        updateFullScreenItemText();
+        fullScreenItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
+        fullScreenItem.addActionListener(getFullScreenAction());
+        return fullScreenItem;
+    }
+    private static ActionListener getFullScreenAction() {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

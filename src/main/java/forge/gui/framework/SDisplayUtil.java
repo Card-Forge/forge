@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import forge.FThreads;
+import forge.view.FFrame;
 
 /** 
  * Experimental static factory for generic operations carried out
@@ -153,11 +154,23 @@ public class SDisplayUtil {
         bounds.width -= screenInsets.right;
         return bounds;
     }
-
+    
+    public static boolean setFullScreenWindow(FFrame frame, boolean fullScreen) {
+        return setFullScreenWindow(getGraphicsDevice(frame.getNormalBounds()), frame, fullScreen);
+    }
+    
     public static boolean setFullScreenWindow(Window window, boolean fullScreen) {
-        GraphicsDevice gd = getGraphicsDevice(window.getBounds());
+        return setFullScreenWindow(getGraphicsDevice(window.getBounds()), window, fullScreen);
+    }
+
+    private static boolean setFullScreenWindow(GraphicsDevice gd, Window window, boolean fullScreen) {
         if (gd != null && gd.isFullScreenSupported()) {
-            gd.setFullScreenWindow(fullScreen ? window : null);
+            if (fullScreen) {
+                gd.setFullScreenWindow(window);
+            }
+            else if (gd.getFullScreenWindow() == window) {
+                gd.setFullScreenWindow(null);
+            }
             return true;
         }
         return false;

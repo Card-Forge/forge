@@ -18,12 +18,15 @@ import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
+import forge.Singletons;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SResizingUtil;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.FSkin.CompoundSkinBorder;
 import forge.gui.toolbox.FSkin.LineSkinBorder;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 
 @SuppressWarnings("serial")
 public class FFrame extends JFrame {
@@ -33,7 +36,7 @@ public class FFrame extends JFrame {
     private Point mouseDownLoc;
     private int resizeCursor;
     private FTitleBarBase titleBar;
-    private boolean minimized, maximized, fullScreen, hideBorder, showTitleBar, isMainFrame;
+    private boolean minimized, maximized, fullScreen, hideBorder, lockTitleBar, hideTitleBar, isMainFrame;
     private Rectangle normalBounds;
 
     public FFrame() {
@@ -41,14 +44,16 @@ public class FFrame extends JFrame {
     }
     
     public void initialize() {
-        initialize(new FTitleBar(this), true); //show titlebar by default
+        initialize(new FTitleBar(this));
     }
     
-    public void initialize(FTitleBarBase titleBar0, boolean showTitleBar0) {
+    public void initialize(FTitleBarBase titleBar0) {
         this.isMainFrame = (FView.SINGLETON_INSTANCE.getFrame() == this);
 
         // Frame border
         this.hideBorder = true; //ensure border shown when window layout loaded
+        this.hideTitleBar = true; //ensure titlebar shown when window layout loaded
+        this.lockTitleBar = this.isMainFrame && Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_LOCK_TITLE_BAR);
         addResizeSupport();
         this.addWindowStateListener(new WindowStateListener() {
             @Override
@@ -59,7 +64,6 @@ public class FFrame extends JFrame {
 
         // Title bar
         this.titleBar = titleBar0;
-        this.setShowTitleBar(showTitleBar0);
         addMoveSupport();
     }
 
@@ -67,19 +71,34 @@ public class FFrame extends JFrame {
         return this.titleBar;
     }
     
-    public boolean getShowTitleBar() {
-        return this.showTitleBar;
+    public boolean getLockTitleBar() {
+        return this.lockTitleBar;
     }
     
-    public void setShowTitleBar(boolean showTitleBar0) {
-        if (this.showTitleBar == showTitleBar0) { return; }
-        this.showTitleBar = showTitleBar0;
-        this.titleBar.setVisible(showTitleBar0);
-        if (!showTitleBar0 && !this.fullScreen) {
-            this.setFullScreen(true); //only support hidden titlebar if full screen
+    public void setLockTitleBar(boolean lockTitleBar0) {
+        if (this.lockTitleBar == lockTitleBar0) { return; }
+        this.lockTitleBar = lockTitleBar0;
+        if (this.isMainFrame) {
+            final ForgePreferences prefs = Singletons.getModel().getPreferences();
+            prefs.setPref(FPref.UI_LOCK_TITLE_BAR, lockTitleBar0);
+            prefs.save();
         }
-        else if (this.isMainFrame) {
-            SResizingUtil.resizeWindow(); //ensure window layout updated to account for showing titlebar
+        updateTitleBar();
+    }
+    
+    public boolean isTitleBarHidden() {
+        return this.hideTitleBar;
+    }
+    
+    private void updateTitleBar() {
+        this.titleBar.updateButtons();
+        if (this.hideTitleBar == (this.fullScreen && !this.lockTitleBar)) {
+            return;
+        }
+        this.hideTitleBar = !this.hideTitleBar;
+        this.titleBar.setVisible(!this.hideTitleBar);
+        if (this.isMainFrame) {
+            SResizingUtil.resizeWindow(); //ensure window layout updated to account for titlebar visibility change
         }
     }
     
@@ -190,6 +209,7 @@ public class FFrame extends JFrame {
             return;
         }
         updateBorder();
+        updateTitleBar();
 
         super.setExtendedState(Frame.NORMAL);
 
@@ -199,6 +219,7 @@ public class FFrame extends JFrame {
             }
             this.fullScreen = false; //reset if full screen failed
             updateBorder(); //ensure border updated for non-full screen if needed
+            updateTitleBar(); //ensure titlebar updated for non-full screen if needed
         }
 
         if (this.maximized) {
@@ -245,7 +266,7 @@ public class FFrame extends JFrame {
         this.titleBar.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
+                if (SwingUtilities.isLeftMouseButton(e) && !fullScreen) { //don't allow moving or restore down when Full Screen
                     if (e.getClickCount() == 1) {
                         locBeforeMove = getLocation();
                         mouseDownLoc = e.getLocationOnScreen();

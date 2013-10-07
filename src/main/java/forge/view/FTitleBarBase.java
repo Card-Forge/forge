@@ -31,10 +31,13 @@ public abstract class FTitleBarBase extends JMenuBar {
     protected static final SkinColor borderColor = backColor.stepColor(-80);
     protected static final SkinColor buttonHoverColor = backColor.stepColor(40);
     protected static final SkinColor buttonDownColor = backColor.stepColor(-40);
+    protected static final SkinColor buttonToggleColor = backColor.stepColor(-30);
 
     protected final FFrame frame;
     protected final JComponentSkin<FTitleBarBase> skin = FSkin.get(this);
     protected final SpringLayout layout = new SpringLayout();
+    protected final LockTitleBarButton btnLockTitleBar = new LockTitleBarButton();
+    protected final FullScreenButton btnFullScreen = new FullScreenButton();
     protected final MinimizeButton btnMinimize = new MinimizeButton();
     protected final MaximizeButton btnMaximize = new MaximizeButton();
     protected final CloseButton btnClose = new CloseButton();
@@ -59,20 +62,48 @@ public abstract class FTitleBarBase extends JMenuBar {
         add(btnMinimize);
         layout.putConstraint(SpringLayout.EAST, btnMinimize, 0, SpringLayout.WEST, btnMaximize);
         layout.putConstraint(SpringLayout.SOUTH, btnMinimize, 0, SpringLayout.SOUTH, btnMaximize);
+        
+        add(btnFullScreen);
+        layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnMinimize);
+        layout.putConstraint(SpringLayout.SOUTH, btnFullScreen, 0, SpringLayout.SOUTH, btnMinimize);
+        
+        add(btnLockTitleBar);
+        layout.putConstraint(SpringLayout.EAST, btnLockTitleBar, 0, SpringLayout.WEST, btnMinimize);
+        layout.putConstraint(SpringLayout.SOUTH, btnLockTitleBar, 0, SpringLayout.SOUTH, btnMinimize);
     }
 
     public abstract String getTitle();
     public abstract void setTitle(String title);
     public abstract void setIconImage(Image image);
     
-    public void handleMaximizedChanged() {
-        if (frame.isMaximized()) {
-            btnMaximize.setToolTipText("Restore Down");
+    public void updateButtons() {
+        boolean fullScreen = frame.isFullScreen();
+        btnLockTitleBar.setVisible(fullScreen);
+        btnMaximize.setVisible(!fullScreen);
+
+        if (fullScreen) {
+            layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnClose);
+            btnFullScreen.setToolTipText("Exit Full Screen (F11)");
+            if (frame.getLockTitleBar()) {
+                btnLockTitleBar.setToolTipText("Unlock Title Bar");
+            }
+            else {
+                btnLockTitleBar.setToolTipText("Lock Title Bar");
+            }
+            btnLockTitleBar.repaintSelf();
         }
         else {
-            btnMaximize.setToolTipText("Maximize");
+            layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnMinimize);
+            btnFullScreen.setToolTipText("Full Screen (F11)");
+            if (frame.isMaximized()) {
+                btnMaximize.setToolTipText("Restore Down");
+            }
+            else {
+                btnMaximize.setToolTipText("Maximize");
+            }
+            btnMaximize.repaintSelf();
         }
-        btnMaximize.repaintSelf();
+        btnFullScreen.repaintSelf();
     }
     
     /* (non-Javadoc)
@@ -132,6 +163,10 @@ public abstract class FTitleBarBase extends JMenuBar {
             repaint(0, 0, d.width, d.height);
         }
         
+        protected boolean isToggled() { //virtual method to override in extended classes
+            return false;
+        }
+        
         @Override
         public void paintComponent(Graphics g) {
             if (hovered) {
@@ -145,6 +180,106 @@ public abstract class FTitleBarBase extends JMenuBar {
                     g.fillRect(0, 0, getWidth(), getHeight());
                 }
             }
+            else if (isToggled()) {
+                int width = getWidth() - 2;
+                int height = getHeight() - 2;
+                skin.setGraphicsColor(g, buttonToggleColor);
+                g.fillRect(1, 1, width, height);
+                skin.setGraphicsColor(g, borderColor);
+                g.drawRect(1, 1, width - 1, height - 1);
+            }
+        }
+    }
+    
+    public class LockTitleBarButton extends TitleBarButton {
+        private LockTitleBarButton() {
+            //Tooltip set in updateButtons()
+        }
+        @Override
+        protected void onClick() {
+            frame.setLockTitleBar(!frame.getLockTitleBar());
+        }
+        @Override
+        protected boolean isToggled() {
+            return frame.getLockTitleBar();
+        }
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            int knobWidth = 5;
+            int knobHeight = 7;
+            int pinHeight = 4;
+            int centerX = getWidth() / 2;
+            int x1 = centerX - knobWidth / 2;
+            int x2 = x1 + knobWidth - 1;
+            int y1 = (getHeight() - knobHeight) / 2 - 1;
+            int y2 = y1 + knobHeight - 1;
+
+            skin.setGraphicsColor(g, foreColor);
+            
+            g.drawRect(x1, y1, knobWidth - 1, knobHeight - 1);
+            g.drawLine(x2 - 1, y1 + 1, x2 - 1, y2 - 1);
+            g.drawLine(x1 - 1, y2, x2 + 1, y2);
+            g.drawLine(centerX, y2, centerX, y2 + pinHeight);
+        }
+    }
+    
+    public class FullScreenButton extends TitleBarButton {
+        private FullScreenButton() {
+            //Tooltip set in updateButtons()
+        }
+        @Override
+        protected void onClick() {
+            frame.setFullScreen(!frame.isFullScreen());
+        }
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            int thickness = 2;
+            int offset = 6;
+            int arrowLength = 4;
+            int x1 = offset;
+            int y1 = offset;
+            int x2 = getWidth() - offset - 1;
+            int y2 = getHeight() - offset - 1;
+            
+            Graphics2D g2d = (Graphics2D) g;
+            skin.setGraphicsColor(g2d, foreColor);
+
+            if (frame.isFullScreen()) { //draw arrows facing inward
+                g2d.drawLine(x1 + arrowLength, y1, x1 + arrowLength, y1 + arrowLength);
+                g2d.drawLine(x1, y1 + arrowLength, x1 + arrowLength, y1 + arrowLength);
+                g2d.drawLine(x2 - arrowLength, y1, x2 - arrowLength, y1 + arrowLength);
+                g2d.drawLine(x2, y1 + arrowLength, x2 - arrowLength, y1 + arrowLength);
+                g2d.drawLine(x1 + arrowLength, y2, x1 + arrowLength, y2 - arrowLength);
+                g2d.drawLine(x1, y2 - arrowLength, x1 + arrowLength, y2 - arrowLength);
+                g2d.drawLine(x2 - arrowLength, y2, x2 - arrowLength, y2 - arrowLength);
+                g2d.drawLine(x2, y2 - arrowLength, x2 - arrowLength, y2 - arrowLength);
+            }
+            else { //draw arrows facing outward
+                x1--; x2++; y1--; y2++;//temporary adjustment so arrows align with angled lines using anti-aliasing below
+                g2d.drawLine(x1, y1, x1, y1 + arrowLength);
+                g2d.drawLine(x1, y1, x1 + arrowLength, y1);
+                g2d.drawLine(x2, y1, x2, y1 + arrowLength);
+                g2d.drawLine(x2, y1, x2 - arrowLength, y1);
+                g2d.drawLine(x1, y2, x1, y2 - arrowLength);
+                g2d.drawLine(x1, y2, x1 + arrowLength, y2);
+                g2d.drawLine(x2, y2, x2, y2 - arrowLength);
+                g2d.drawLine(x2, y2, x2 - arrowLength, y2);
+                x1++; x2--; y1++; y2--;
+            }
+            
+            //draw angled lines for arrows
+            arrowLength--; //decrease length to account for anti-aliasing
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setStroke(new BasicStroke(thickness));
+
+            g2d.drawLine(x1, y1, x1 + arrowLength, y1 + arrowLength);
+            g2d.drawLine(x2, y1, x2 - arrowLength, y1 + arrowLength);
+            g2d.drawLine(x1, y2, x1 + arrowLength, y2 - arrowLength);
+            g2d.drawLine(x2, y2, x2 - arrowLength, y2 - arrowLength);
         }
     }
     
@@ -176,7 +311,7 @@ public abstract class FTitleBarBase extends JMenuBar {
     
     public class MaximizeButton extends TitleBarButton {
         private MaximizeButton() {
-            setToolTipText("Maximize");
+            //Tooltip set in updateButtons()
         }
         @Override
         protected void onClick() {
@@ -219,7 +354,7 @@ public abstract class FTitleBarBase extends JMenuBar {
             }
         }
     }
-    
+
     public class CloseButton extends TitleBarButton {
         private CloseButton() {
             setToolTipText("Close");

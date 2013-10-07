@@ -12,8 +12,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.Timer;
+
 import forge.Singletons;
 import forge.gui.menus.ForgeMenu;
+import forge.gui.menus.LayoutMenu;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FDigitalClock;
 import forge.gui.toolbox.FSkin;
@@ -57,20 +59,21 @@ public class FNavigationBar extends FTitleBarBase {
         super.addControls();
 
         add(clock);
-        layout.putConstraint(SpringLayout.EAST, clock, -6, SpringLayout.WEST, btnMinimize);
+        layout.putConstraint(SpringLayout.EAST, clock, -6, SpringLayout.WEST, btnLockTitleBar);
         layout.putConstraint(SpringLayout.SOUTH, clock, -5, SpringLayout.SOUTH, this);
         updateClockVisibility();
     }
     
     @Override
-    public void handleMaximizedChanged() {
-        super.handleMaximizedChanged();
+    public void updateButtons() {
+        super.updateButtons();
         updateClockVisibility();
+        LayoutMenu.updateFullScreenItemText();
     }
     
     //only show clock if maximized and status bar hidden
     public void updateClockVisibility() {
-        clock.setVisible(this.frame.isMaximized() && prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
+        clock.setVisible(this.frame.isFullScreen() && prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR));
     }
     
     private void addForgeButtonListeners() {
