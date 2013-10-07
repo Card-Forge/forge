@@ -194,7 +194,12 @@ public class FNavigationBar extends FTitleBarBase {
             checkForRevealChangeTimer.stop();
             pnlReveal.setVisible(hidden);
         }
-        super.setVisible(visible);
+        if (visible || this.getHeight() < visibleHeight) {
+            super.setVisible(visible);
+        }
+        else if (pnlReveal != null) { //if previously fully visible, delay hiding titlebar until mouse moves away
+            checkForRevealChangeTimer.start();
+        }
     }
     
     @Override

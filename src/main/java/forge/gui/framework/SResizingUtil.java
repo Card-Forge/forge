@@ -131,14 +131,17 @@ public final class SResizingUtil {
         FAbsolutePositioner.SINGLETON_INSTANCE.containerResized(mainBounds);
         FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
         FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
-        
-        final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        final int navigationBarHeight = frame.isTitleBarHidden() ? 0 : navigationBar.getPreferredSize().height;
-        final int statusBarHeight = prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR) ? 0 : statusBar.getPreferredSize().height;
-        
+
+        int navigationBarHeight = navigationBar.getPreferredSize().height;
         navigationBar.setBounds(mainBounds.x, mainBounds.y, mainBounds.width, navigationBarHeight);
         navigationBar.validate();
-        
+
+        if (frame.isTitleBarHidden()) {
+            navigationBarHeight = 0; //use 0 for remaining calculations if title bar hidden
+        }
+        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        final int statusBarHeight = prefs.getPrefBoolean(FPref.UI_HIDE_STATUS_BAR) ? 0 : statusBar.getPreferredSize().height;
+
         pnlInsets.setBounds(mainBounds.x, mainBounds.y + navigationBarHeight, mainBounds.width, mainBounds.height - navigationBarHeight - statusBarHeight);
         pnlInsets.validate();
         
