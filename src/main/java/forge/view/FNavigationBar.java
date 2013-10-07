@@ -24,8 +24,8 @@ import forge.gui.toolbox.FSkin;
 public class FNavigationBar extends FTitleBarBase {
 
     private static final ForgeMenu forgeMenu = Singletons.getControl().getForgeMenu();
-    private static final int revealSpeed = 300;
-    private static final int revealDelay = 150;
+    private static final int revealSpeed = 200;
+    private static final int revealDelay = 100;
 
     private final FButton btnForge = new FButton("Forge");
     private final FDigitalClock clock = new FDigitalClock();
