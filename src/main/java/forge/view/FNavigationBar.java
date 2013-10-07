@@ -26,6 +26,7 @@ public class FNavigationBar extends FTitleBarBase {
     private static final ForgeMenu forgeMenu = Singletons.getControl().getForgeMenu();
     private static final int revealSpeed = 200;
     private static final int revealDelay = 100;
+    private static final int initialHideDelay = 500;
 
     private final FButton btnForge = new FButton("Forge");
     private final FDigitalClock clock = new FDigitalClock();
@@ -153,6 +154,7 @@ public class FNavigationBar extends FTitleBarBase {
                     newHeight = visibleHeight;
                     revealDir = 0;
                     incrementRevealTimer.stop();
+                    checkForRevealChangeTimer.setInitialDelay(0);
                     checkForRevealChangeTimer.start(); //once open fully, start another timer to check when mouse moves away
                 }
                 break;
@@ -194,6 +196,7 @@ public class FNavigationBar extends FTitleBarBase {
             super.setVisible(visible);
         }
         else if (pnlReveal != null) { //if previously fully visible, delay hiding titlebar until mouse moves away
+            checkForRevealChangeTimer.setInitialDelay(initialHideDelay); //delay hiding a bit even if mouse already outside titlebar
             checkForRevealChangeTimer.start();
         }
     }
