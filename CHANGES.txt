@@ -8,6 +8,15 @@ Forge Beta: 10-##-2013 ver 1.5.3
 Release Notes
 -------------
 
+- True Full Screen support -
+Full Screen is now toggled using F11 and has its own button on the title bar
+Maximize will no longer pretend to be Full Screen by covering up the taskbar
+When in Full Screen mode, the titlebar will be hidden unless you move the mouse to the top of the screen
+A "Lock/Unlock" Title Bar button will be available in Full Screen mode to toggle whether the title bar should remain visible at all times
+When in Full Screen mode, a clock will appear to the left of the "Lock/Unlock Title Bar" button
+The title bar will appear on top of other components if not locked rather than pushing anything down
+The title bar will remain visible while accessing the Forge menu
+
 - Introducing the Forge button -
 The old menu bar has been removed.
 The Forge button on the left side of the titlebar will drop down the same menu of options.
@@ -15,20 +24,6 @@ The Alt and Menu keys will also open this menu (even if the titlebar is hidden),
 The titlebar, minimize, maximize, and close buttons have all been increased in height to make room for the Forge button.
 Menu items have been increased in height to make them more touch screen friendly. They also now enforce a minimum 100px width.
 F1 has been changed to launch the Forge wiki since it no longer needs to toggle menu bar visibility.
-
-
-- New status bar -
-The Forge version and digital clock have been moved to a new thin status bar to make room for the new Forge button.
-Status messages that used to display on the right side of the old menu bar will now display in place of the version on the left side of the status bar.
-F12 and Forge > Layout > View > Status Bar will allow hiding this status bar.
-While status bar hidden and maximized, digital clock will display in title bar left of minimize button
-Both titlebar and status bar visibility will now be remembered between sessions.
-
-
-- Hidden title bar can be revealed temporarily -
-If the title bar is hidden, moving the mouse to the top of the screen will now drop down the title bar until you mouse away
-The title bar will appear on top of other components in this case rather than pushing anything down
-The title bar will remain visible while accessing the Forge menu
 
 
 - Forge now requires Java 7 -
