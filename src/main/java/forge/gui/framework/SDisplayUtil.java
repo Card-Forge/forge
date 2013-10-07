@@ -150,8 +150,8 @@ public class SDisplayUtil {
         Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(config);
         bounds.x += screenInsets.left;
         bounds.y += screenInsets.top;
-        bounds.height -= screenInsets.bottom;
-        bounds.width -= screenInsets.right;
+        bounds.width -= screenInsets.left + screenInsets.right;
+        bounds.height -= screenInsets.top + screenInsets.bottom;
         return bounds;
     }
     
