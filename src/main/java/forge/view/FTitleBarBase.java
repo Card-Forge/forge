@@ -37,8 +37,8 @@ public abstract class FTitleBarBase extends JMenuBar {
     protected final JComponentSkin<FTitleBarBase> skin = FSkin.get(this);
     protected final SpringLayout layout = new SpringLayout();
     protected final LockTitleBarButton btnLockTitleBar = new LockTitleBarButton();
-    protected final FullScreenButton btnFullScreen = new FullScreenButton();
     protected final MinimizeButton btnMinimize = new MinimizeButton();
+    protected final FullScreenButton btnFullScreen = new FullScreenButton();
     protected final MaximizeButton btnMaximize = new MaximizeButton();
     protected final CloseButton btnClose = new CloseButton();
 
@@ -59,13 +59,13 @@ public abstract class FTitleBarBase extends JMenuBar {
         layout.putConstraint(SpringLayout.EAST, btnMaximize, 0, SpringLayout.WEST, btnClose);
         layout.putConstraint(SpringLayout.SOUTH, btnMaximize, 0, SpringLayout.SOUTH, btnClose);
         
-        add(btnMinimize);
-        layout.putConstraint(SpringLayout.EAST, btnMinimize, 0, SpringLayout.WEST, btnMaximize);
-        layout.putConstraint(SpringLayout.SOUTH, btnMinimize, 0, SpringLayout.SOUTH, btnMaximize);
-        
         add(btnFullScreen);
-        layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnMinimize);
-        layout.putConstraint(SpringLayout.SOUTH, btnFullScreen, 0, SpringLayout.SOUTH, btnMinimize);
+        layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnMaximize);
+        layout.putConstraint(SpringLayout.SOUTH, btnFullScreen, 0, SpringLayout.SOUTH, btnMaximize);
+        
+        add(btnMinimize);
+        layout.putConstraint(SpringLayout.EAST, btnMinimize, 0, SpringLayout.WEST, btnFullScreen);
+        layout.putConstraint(SpringLayout.SOUTH, btnMinimize, 0, SpringLayout.SOUTH, btnFullScreen);
         
         add(btnLockTitleBar);
         layout.putConstraint(SpringLayout.EAST, btnLockTitleBar, 0, SpringLayout.WEST, btnMinimize);
@@ -93,7 +93,7 @@ public abstract class FTitleBarBase extends JMenuBar {
             btnLockTitleBar.repaintSelf();
         }
         else {
-            layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnMinimize);
+            layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnMaximize);
             btnFullScreen.setToolTipText("Full Screen (F11)");
             if (frame.isMaximized()) {
                 btnMaximize.setToolTipText("Restore Down");
@@ -225,6 +225,32 @@ public abstract class FTitleBarBase extends JMenuBar {
         }
     }
     
+    public class MinimizeButton extends TitleBarButton {
+        private MinimizeButton() {
+            setToolTipText("Minimize");
+        }
+        @Override
+        protected void onClick() {
+            frame.setMinimized(true);
+        }
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            int thickness = 2;
+            int offsetX = 8;
+            int offsetY = 7;
+            int x1 = offsetX;
+            int x2 = getWidth() - offsetX;
+            int y = getHeight() - offsetY - thickness;
+            
+            Graphics2D g2d = (Graphics2D) g;
+            skin.setGraphicsColor(g2d, foreColor);
+            g2d.setStroke(new BasicStroke(thickness));
+            g2d.drawLine(x1, y, x2, y);
+        }
+    }
+    
     public class FullScreenButton extends TitleBarButton {
         private FullScreenButton() {
             //Tooltip set in updateButtons()
@@ -280,32 +306,6 @@ public abstract class FTitleBarBase extends JMenuBar {
             g2d.drawLine(x2, y1, x2 - arrowLength, y1 + arrowLength);
             g2d.drawLine(x1, y2, x1 + arrowLength, y2 - arrowLength);
             g2d.drawLine(x2, y2, x2 - arrowLength, y2 - arrowLength);
-        }
-    }
-    
-    public class MinimizeButton extends TitleBarButton {
-        private MinimizeButton() {
-            setToolTipText("Minimize");
-        }
-        @Override
-        protected void onClick() {
-            frame.setMinimized(true);
-        }
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-
-            int thickness = 2;
-            int offsetX = 8;
-            int offsetY = 7;
-            int x1 = offsetX;
-            int x2 = getWidth() - offsetX;
-            int y = getHeight() - offsetY - thickness;
-            
-            Graphics2D g2d = (Graphics2D) g;
-            skin.setGraphicsColor(g2d, foreColor);
-            g2d.setStroke(new BasicStroke(thickness));
-            g2d.drawLine(x1, y, x2, y);
         }
     }
     
