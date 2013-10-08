@@ -6,20 +6,21 @@ import javax.swing.JMenu;
 
 import forge.Command;
 import forge.Singletons;
-import forge.control.FControl;
+import forge.control.FControl.Screens;
 import forge.gui.FNetOverlay;
-import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.net.FServer;
 import forge.net.NetServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
+import forge.view.FNavigationBar.INavigationTabData;
 
 /**
  * Assembles Swing components of exit submenu option singleton.
@@ -27,7 +28,7 @@ import forge.properties.NewConstants;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public enum CHomeUI implements ICDoc, IMenuProvider {
+public enum CHomeUI implements ICDoc, IMenuProvider, INavigationTabData {
     /** */
     SINGLETON_INSTANCE;
 
@@ -75,28 +76,12 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
     /* (non-Javadoc)
      * @see forge.view.home.ICDoc#intialize()
      */
-
-    @SuppressWarnings("serial")
     @Override
     public void initialize() {
 
-        setupMyMenuBar();
+        Singletons.getControl().getForgeMenu().setProvider(this);
 
         selectPrevious();
-        VHomeUI.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
-            @Override
-            public void run() {
-                Singletons.getControl().changeStateAutoFixLayout(FControl.Screens.DECK_EDITOR_CONSTRUCTED, "deck editor");
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorConstructed());
-            }
-        });
-
-        VHomeUI.SINGLETON_INSTANCE.getLblExit().setCommand(new Command() {
-            @Override
-            public void run() {
-                System.exit(0);
-            }
-        });
 
         VHomeUI.SINGLETON_INSTANCE.getLblStartServer().setCommand(new Runnable() {
             @Override
@@ -121,10 +106,8 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
                 FNetOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
             }
         });
-    }
 
-    private void setupMyMenuBar() {
-        Singletons.getControl().getForgeMenu().setProvider(this);
+        Singletons.getView().getNavigationBar().setSelectedTab(this);
     }
 
     /* (non-Javadoc)
@@ -168,5 +151,45 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
     public List<JMenu> getMenus() {
         // No specific menus associated with Home screen.
         return null;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#getTabCaption()
+     */
+    @Override
+    public String getTabCaption() {
+        return "Home";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#getTabIcon()
+     */
+    @Override
+    public SkinImage getTabIcon() {
+        return FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#getTabDestScreen()
+     */
+    @Override
+    public Screens getTabDestScreen() {
+        return Screens.HOME_SCREEN;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#getTabCloseButtonTooltip()
+     */
+    @Override
+    public String getTabCloseButtonTooltip() {
+        return null; //return null to indicate not to show close button
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#onClosingTab()
+     */
+    @Override
+    public boolean onClosingTab() {
+        return false; //don't allow closing Home tab
     }
 }

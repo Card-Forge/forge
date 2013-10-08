@@ -48,10 +48,12 @@ import com.google.common.primitives.Ints;
 
 import forge.Command;
 import forge.Singletons;
+import forge.control.FControl.Screens;
 import forge.deck.DeckBase;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CCardCatalog;
+import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.deckeditor.views.VCardCatalog;
@@ -61,11 +63,13 @@ import forge.gui.match.controllers.CPicture;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
 import forge.gui.toolbox.itemmanager.table.ItemTableModel;
 import forge.item.InventoryItem;
+import forge.view.FNavigationBar.INavigationTabData;
 
 /**
  * Constructs instance of deck editor UI controller, used as a single point of
@@ -75,7 +79,7 @@ import forge.item.InventoryItem;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CDeckEditorUI implements ICDoc, IMenuProvider {
+public enum CDeckEditorUI implements ICDoc, IMenuProvider, INavigationTabData {
     /** */
     SINGLETON_INSTANCE;
 
@@ -92,6 +96,13 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     public void setCard(final InventoryItem item) {
         CDetail.SINGLETON_INSTANCE.showCard(item);
         CPicture.SINGLETON_INSTANCE.showImage(item);
+    }
+    
+    public boolean canExit() {
+        if (this.childController != null) {
+            return this.childController.exit();
+        }
+        return true;
     }
 
     //========= Accessor/mutator methods
@@ -555,6 +566,10 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     @Override
     public void initialize() {
         Singletons.getControl().getForgeMenu().setProvider(this);
+        if (this.childController == null) { //ensure child controller set
+            setCurrentEditorController(new CEditorConstructed());
+        }
+        Singletons.getView().getNavigationBar().setSelectedTab(this);
     }
 
     /* (non-Javadoc)
@@ -562,5 +577,45 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
      */
     @Override
     public void update() { }
+    
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#getTabCaption()
+     */
+    @Override
+    public String getTabCaption() {
+        return "Deck Editor";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#getTabIcon()
+     */
+    @Override
+    public SkinImage getTabIcon() {
+        return FSkin.getImage(FSkin.EditorImages.IMG_PACK);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#getTabDestScreen()
+     */
+    @Override
+    public Screens getTabDestScreen() {
+        return Screens.DECK_EDITOR_CONSTRUCTED;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#canCloseTab()
+     */
+    @Override
+    public String getTabCloseButtonTooltip() {
+        return null; //return null to indicate not to show close button
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#onClosingTab()
+     */
+    @Override
+    public boolean onClosingTab() {
+        return false; //don't allow closing Deck Editor tab
+    }
 }
 

@@ -8,6 +8,7 @@ import java.util.concurrent.CountDownLatch;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.Singletons;
 import forge.game.event.GameEventAnteCardsSelected;
@@ -192,6 +193,5 @@ public class Match {
      */
     public static int getPoisonCountersAmountToLose() {
         return 10;
-    }
-    
+    }    
 }

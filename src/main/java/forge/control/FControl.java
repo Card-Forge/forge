@@ -32,6 +32,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
@@ -71,6 +72,7 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.gui.menus.ForgeMenu;
+import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
 import forge.properties.ForgePreferences;
@@ -100,7 +102,7 @@ public enum FControl implements KeyEventDispatcher {
     private Screens state = Screens.UNKNOWN;
     private boolean altKeyLastDown;
 
-    private WindowListener waDefault, waConcede, waLeaveBazaar, waLeaveEditor;
+    private WindowListener waDefault, waLeaveBazaar;
 
     public static enum Screens {
         UNKNOWN,
@@ -128,26 +130,8 @@ public enum FControl implements KeyEventDispatcher {
         this.waDefault = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                Singletons.getView().getFrame().setDefaultCloseOperation(
-                        WindowConstants.EXIT_ON_CLOSE);
-
-                System.exit(0);
-            }
-        };
-
-
-
-        // "Close" button override during match
-        this.waConcede = new WindowAdapter() {
-            @Override
-            public void windowClosing(final WindowEvent e) {
-                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
-                if (!FControl.this.game.isGameOver())
-                    stopGame();
-                else {
-                    Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
-                    SOverlayUtils.hideOverlay();
+                if (!exitForge()) {
+                    Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 }
             }
         };
@@ -156,23 +140,32 @@ public enum FControl implements KeyEventDispatcher {
         this.waLeaveBazaar = new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                Singletons.getView().getFrame().setDefaultCloseOperation(
-                        WindowConstants.DO_NOTHING_ON_CLOSE);
-
+                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 changeState(Screens.HOME_SCREEN);
             }
         };
-
-        this.waLeaveEditor = new WindowAdapter() {
-            @Override
-            public void windowClosing(final WindowEvent ev) {
-                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
-                if (CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().exit()) {
-                    changeState(Screens.HOME_SCREEN);
-                }
+    }
+    
+    public boolean canExitForge(boolean forRestart) {
+        if (this.game != null) {
+            String userPrompt = "A game is currently active. Are you sure you wish to " + (forRestart ? "restart" : "exit") + " Forge?\n\n";
+            if (!MenuUtil.getUserConfirmation(userPrompt, "Exit Forge")) {
+                return false;
             }
-        };
+        }
+        if (!CDeckEditorUI.SINGLETON_INSTANCE.canExit()) {
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean exitForge() {
+        if (!canExitForge(false)) {
+            return false;
+        }
+        Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        System.exit(0);
+        return true;
     }
 
     /** After view and model have been initialized, control can start.
@@ -243,9 +236,7 @@ public enum FControl implements KeyEventDispatcher {
         this.state = screen;
 
         Singletons.getView().getFrame().removeWindowListener(waDefault);
-        Singletons.getView().getFrame().removeWindowListener(waConcede);
         Singletons.getView().getFrame().removeWindowListener(waLeaveBazaar);
-        Singletons.getView().getFrame().removeWindowListener(waLeaveEditor);
 
         // Fire up new state
         switch (screen) {
@@ -263,8 +254,9 @@ public enum FControl implements KeyEventDispatcher {
             CMatchUI.SINGLETON_INSTANCE.initialize();
             FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
             showMatchBackgroundImage();
-            Singletons.getView().getFrame().addWindowListener(waConcede);
             SOverlayUtils.showTargetingOverlay();
+            Singletons.getView().getNavigationBar().setSelectedTab(this.game);
+            Singletons.getView().getFrame().addWindowListener(waDefault);
             break;
 
         case DECK_EDITOR_CONSTRUCTED:
@@ -277,7 +269,7 @@ public enum FControl implements KeyEventDispatcher {
             CDeckEditorUI.SINGLETON_INSTANCE.initialize();
             FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
-            Singletons.getView().getFrame().addWindowListener(waLeaveEditor);
+            Singletons.getView().getFrame().addWindowListener(waDefault);
             break;
 
         case QUEST_BAZAAR:
@@ -420,18 +412,27 @@ public enum FControl implements KeyEventDispatcher {
 
 
     public final void startGameWithUi(Match match) {
+        if (this.game != null) {
+            this.changeState(Screens.MATCH_SCREEN);
+            SOverlayUtils.hideOverlay();
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Cannot start a new game while another game is already in progress.");
+            return; //TODO: See if it's possible to run multiple games at once without crashing
+        }
         setPlayerName(match.getPlayers());
         Game newGame = match.createGame();
         attachToGame(newGame);
         match.startGame(newGame, null);
     }
+    
+    public final void endCurrentGame() {
+        if (this.game == null) { return; }
+        Singletons.getView().getNavigationBar().closeTab(this.game);
+        this.game = null;
+    }
 
     private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler(this);
     private final FControlGamePlayback playbackControl = new FControlGamePlayback(this);
     private void attachToGame(Game game0) {
-        // TODO: Detach from other game we might be looking at
-
-
         if ( game0.getType() == GameType.Quest) {
             QuestController qc = Singletons.getModel().getQuest();
             // Reset new list when the Match round starts, not when each game starts
@@ -485,6 +486,8 @@ public enum FControl implements KeyEventDispatcher {
         //Set Field shown to current player.
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(game.getPlayers().get(0));
         SDisplayUtil.showTab(nextField);
+
+        Singletons.getView().getNavigationBar().addNavigationTab(game, true);
     }
 
     /* (non-Javadoc)

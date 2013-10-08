@@ -20,7 +20,6 @@ import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.VHomeUI;
 import forge.net.FServer;
 import forge.net.Lobby;
 
@@ -53,8 +52,6 @@ public enum CSubmenuGauntletLoad implements ICDoc {
                 JButton btnStart = view.getBtnStart();
                 if (btnStart.isEnabled()) {
                     view.getBtnStart().requestFocusInWindow();
-                } else {
-                    VHomeUI.SINGLETON_INSTANCE.getLblEditor().requestFocusInWindow();
                 }
             }
         });

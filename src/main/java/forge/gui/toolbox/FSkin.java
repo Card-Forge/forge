@@ -613,10 +613,26 @@ public enum FSkin {
     public static Color alphaColor(Color clr0, int alpha) {
         return new Color(clr0.getRed(), clr0.getGreen(), clr0.getBlue(), alpha);
     }
+
+    /**
+     * @see http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
+     */
+    public static boolean isColorBright(Color c) {
+        int v = (int)Math.sqrt(
+                c.getRed() * c.getRed() * 0.241 +
+                c.getGreen() * c.getGreen() * 0.691 +
+                c.getBlue() * c.getBlue() * 0.068);
+        return v >= 130;
+    }
+    
+    public static Color getHighContrastColor(Color c) {
+        return isColorBright(c) ? Color.BLACK : Color.WHITE;
+    }
     
     public static class SkinColor {
         private static final HashMap<Colors, SkinColor> baseColors = new HashMap<Colors, SkinColor>();
         private static final HashMap<String, SkinColor> derivedColors = new HashMap<String, SkinColor>();
+        private static final HashMap<SkinColor, HighContrastSkinColor> highContrastColors = new HashMap<SkinColor, HighContrastSkinColor>();
         private static final int NO_BRIGHTNESS_DELTA = 0;
         private static final int NO_STEP = -999; //needs to be large negative since small negative values are valid
         private static final int NO_ALPHA = -1;
@@ -625,7 +641,7 @@ public enum FSkin {
         private final int brightnessDelta;
         private final int step;
         private final int alpha;
-        private Color color;
+        protected Color color;
         
         public Color getColor() { return color; }
 
@@ -667,7 +683,7 @@ public enum FSkin {
             return getDerivedColor(this.brightnessDelta, this.step, alpha0);
         }
 
-        private void updateColor() {
+        protected void updateColor() {
             this.color = this.baseColor.color;
             if (this.brightnessDelta != NO_BRIGHTNESS_DELTA) {
                 if (this.brightnessDelta < 0) {
@@ -686,6 +702,30 @@ public enum FSkin {
             }
             if (this.alpha != NO_ALPHA) {
                 this.color = FSkin.alphaColor(this.color, this.alpha);
+            }
+        }
+
+        public SkinColor getContrastColor(int positiveStepIfDarkColor) {
+            return getDerivedColor(this.brightnessDelta, isColorBright(this.color) ? -positiveStepIfDarkColor : positiveStepIfDarkColor, this.alpha);
+        }
+
+        public SkinColor getHighContrastColor() {
+            HighContrastSkinColor highContrastColor = highContrastColors.get(this);
+            if (highContrastColor == null) {
+                highContrastColor = new HighContrastSkinColor(this);
+                highContrastColors.put(this, highContrastColor);
+            }
+            return highContrastColor;
+        }
+        
+        private static class HighContrastSkinColor extends SkinColor {
+            private HighContrastSkinColor(SkinColor fromColor) {
+                super(fromColor.baseColor, fromColor.brightnessDelta, fromColor.step, fromColor.alpha);
+            }
+            @Override
+            protected void updateColor() {
+                super.updateColor();
+                this.color = FSkin.getHighContrastColor(this.color);
             }
         }
     }
@@ -798,6 +838,9 @@ public enum FSkin {
                     c.updateColor();
                 }
                 for (final SkinColor c : SkinColor.derivedColors.values()) {
+                    c.updateColor();
+                }
+                for (final SkinColor c : SkinColor.highContrastColors.values()) {
                     c.updateColor();
                 }
             }
@@ -2126,17 +2169,5 @@ public enum FSkin {
             gradients.add(bottom);
             return gradients;
         }
-
-        /**
-         * @see http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
-         */
-        public static boolean isColorBright(Color c) {
-            int v = (int)Math.sqrt(
-                    c.getRed() * c.getRed() * 0.241 +
-                    c.getGreen() * c.getGreen() * 0.691 +
-                    c.getBlue() * c.getBlue() * 0.068);
-            return v >= 130;
-        }
-
     }
 }

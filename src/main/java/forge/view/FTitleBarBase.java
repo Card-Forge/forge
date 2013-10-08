@@ -25,10 +25,11 @@ import forge.gui.toolbox.FSkin.SkinColor;
 
 @SuppressWarnings("serial")
 public abstract class FTitleBarBase extends JMenuBar {
-    protected static final int visibleHeight = 26;
+    protected static final int visibleHeight = 27;
     protected static final SkinColor foreColor = FSkin.getColor(Colors.CLR_TEXT);
     protected static final SkinColor backColor = FSkin.getColor(Colors.CLR_THEME2);
-    protected static final SkinColor borderColor = backColor.stepColor(-80);
+    protected static final SkinColor bottomEdgeColor = FSkin.getColor(Colors.CLR_BORDERS).stepColor(0);
+    protected static final SkinColor buttonBorderColor = backColor.stepColor(-80);
     protected static final SkinColor buttonHoverColor = backColor.stepColor(40);
     protected static final SkinColor buttonDownColor = backColor.stepColor(-40);
     protected static final SkinColor buttonToggleColor = backColor.stepColor(-30);
@@ -47,7 +48,7 @@ public abstract class FTitleBarBase extends JMenuBar {
         setVisible(false); //start out hidden unless frame chooses to show title bar
         setLayout(this.layout);
         skin.setBackground(backColor);
-        skin.setMatteBorder(0, 0, 1, 0, borderColor);
+        skin.setMatteBorder(0, 0, 2, 0, bottomEdgeColor);
     }
     
     protected void addControls() {
@@ -184,7 +185,7 @@ public abstract class FTitleBarBase extends JMenuBar {
                 int height = getHeight() - 2;
                 skin.setGraphicsColor(g, buttonToggleColor);
                 g.fillRect(1, 1, width, height);
-                skin.setGraphicsColor(g, borderColor);
+                skin.setGraphicsColor(g, buttonBorderColor);
                 g.drawRect(1, 1, width - 1, height - 1);
             }
         }

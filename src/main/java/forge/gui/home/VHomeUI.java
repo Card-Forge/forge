@@ -95,10 +95,8 @@ public enum VHomeUI implements IVTopLevelUI {
         .iconAlignX(SwingConstants.CENTER)
         .iconInBackground(true).iconScaleFactor(1.0).build();
 
-    private final FLabel lblEditor = new FLabel.ButtonBuilder().text("Deck Editor").fontSize(14).build();
     private final FLabel lblStartServer = new FLabel.ButtonBuilder().text("Start Server").fontSize(14).build();
     private final FLabel lblStopServer = new FLabel.ButtonBuilder().text("Stop Server").fontSize(14).build();
-    private final FLabel lblExit = new FLabel.ButtonBuilder().text("Exit Forge").fontSize(14).build();
 
     private VHomeUI() {
         // Add main menu containing logo and menu buttons
@@ -106,13 +104,11 @@ public enum VHomeUI implements IVTopLevelUI {
         pnlMainMenu.setOpaque(false);
 
         final List<FLabel> mainMenuButtons = new ArrayList<FLabel>();
-        mainMenuButtons.add(lblEditor);
         if (NewConstants.SERVER_PORT_NUMBER >= 80) {
             mainMenuButtons.add(lblStartServer);
             mainMenuButtons.add(lblStopServer);
             lblStopServer.setEnabled(false);
         }
-        mainMenuButtons.add(lblExit);
 
         final int logoSize = 170;
         final int logoBottomGap = 4;
@@ -153,9 +149,6 @@ public enum VHomeUI implements IVTopLevelUI {
         allSubmenus.add(VSubmenuAvatars.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuDownloaders.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuReleaseNotes.SINGLETON_INSTANCE);
-        
-        //allSubmenus.add(VSubmenuDeckEditor.SINGLETON_INSTANCE);
-        //allSubmenus.add(VSubmenuExit.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuArchenemy.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuVanguard.SINGLETON_INSTANCE);        
@@ -192,16 +185,6 @@ public enum VHomeUI implements IVTopLevelUI {
 
         pnlMenu.add(pnlSubmenus, "w 100%!, h 100% - " + pnlMainMenuHeight + "px!");
         FSkin.get(pnlDisplay).setBackground(l00.alphaColor(100));
-    }
-
-    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    public FLabel getLblExit() {
-        return this.lblExit;
-    }
-
-    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    public FLabel getLblEditor() {
-        return this.lblEditor;
     }
 
     public final FLabel getLblStartServer() {

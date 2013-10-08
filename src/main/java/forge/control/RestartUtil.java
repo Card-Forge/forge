@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.List;
 
+import forge.Singletons;
+
 /** 
  * Restarts a java app.
  * Credit: http://leolewis.website.org/wordpress/2011/07/06/programmatically-restart-a-java-application/
@@ -21,6 +23,9 @@ public class RestartUtil {
      * @param runBeforeRestart some custom code to be run before restarting
      */
     public static void restartApplication(final Runnable runBeforeRestart) {
+        if (!Singletons.getControl().canExitForge(true)) {
+            return;
+        }
         try {
             // java binary
             final String java = System.getProperty("java.home")

@@ -79,6 +79,7 @@ public class ControlWinLose {
         if (isAnte && lastGame.getType() != GameType.Quest) {
             executeAnte();
         }
+        Singletons.getControl().endCurrentGame();
         Singletons.getControl().startGameWithUi(lastGame.getMatch());
     }
 
@@ -88,6 +89,7 @@ public class ControlWinLose {
         saveOptions();
         final Match match = lastGame.getMatch();
         match.clearGamesPlayed();
+        Singletons.getControl().endCurrentGame();
         Singletons.getControl().startGameWithUi(match);
     }
 
@@ -95,6 +97,7 @@ public class ControlWinLose {
     public void actionOnQuit() {
         // Reset other stuff
         saveOptions();
+        Singletons.getControl().endCurrentGame();
         Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
         SOverlayUtils.hideOverlay();
     }

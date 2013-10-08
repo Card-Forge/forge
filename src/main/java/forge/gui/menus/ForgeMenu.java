@@ -16,7 +16,6 @@ import javax.swing.event.PopupMenuListener;
 
 import forge.Singletons;
 import forge.control.RestartUtil;
-import forge.control.FControl.Screens;
 import forge.util.TypeUtil;
 
 public final class ForgeMenu {
@@ -135,12 +134,6 @@ public final class ForgeMenu {
         return new ActionListener() {            
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!isHomeScreenActive()) {
-                    String userPrompt = "Please confirm you want to restart Forge.\n\n";
-                    if (!MenuUtil.getUserConfirmation(userPrompt, "Restart Forge")) {
-                        return;
-                    }
-                }
                 RestartUtil.restartApplication(null);                
             }
         };
@@ -157,18 +150,8 @@ public final class ForgeMenu {
         return new ActionListener() {            
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!isHomeScreenActive()) {                    
-                    String userPrompt = "Please confirm you want to close Forge.\n\n";
-                    if (!MenuUtil.getUserConfirmation(userPrompt, "Exit Forge")) {
-                        return;
-                    }
-                }
-                System.exit(0);                
+                Singletons.getControl().exitForge();
             }
         };
-    }
-    
-    private static boolean isHomeScreenActive() {
-        return Singletons.getControl().getState() == Screens.HOME_SCREEN;
     }
 }
