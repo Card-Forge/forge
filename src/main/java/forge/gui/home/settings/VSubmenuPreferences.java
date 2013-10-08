@@ -80,7 +80,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for touchscreens");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
-    private final JCheckBox cbUseThemedComboBox = new OptionsCheckBox("Themed ComboBox");
+    private final JCheckBox cbUseThemes = new OptionsCheckBox("Enable Themes");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
@@ -172,8 +172,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbpGameLogEntryType, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Changes how much information is displayed in the game log. Sorted by least to most verbose."), regularConstraints);
 
-        pnlPrefs.add(cbUseThemedComboBox, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Turn off if you are having combo-box color clash (RESTART REQUIRED)."), regularConstraints);
+        pnlPrefs.add(cbUseThemes, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Currently only applies to UIManager-related theme settings. (RESTART REQUIRED)"), regularConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
@@ -482,8 +482,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbUseThemedComboBox() {
-        return cbUseThemedComboBox;
+    public JCheckBox getCbUseThemes() {
+        return cbUseThemes;
     }
 
     public FLabel getBtnPlayerName() {
