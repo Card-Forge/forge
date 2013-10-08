@@ -9,27 +9,28 @@ Release Notes
 -------------
 
 - Navigation tabs -
-Forge now display navigation tabs in the titlebar and supports switching screens without closing them
-By default, Home and Deck Editor are available as tabs, with another closable tab added for any game you start
-X button in upper right now exits Forge rather than going back to Home screen
-To concede the current game, use the X button in the Game tab itself
-Deck Editor and Exit Forge buttons have been removed from the Home screen since they're both accessible on the titlebar
+Forge now display navigation tabs in the titlebar and supports switching screens without closing them.
+By default, Home and Deck Editor are available as tabs, with another closable tab added for any game you start.
+X button in upper right now exits Forge rather than going back to Home screen.
+To concede the current game, use the X button in the Game tab itself.
+Deck Editor and Exit Forge buttons have been removed from the Home screen since they're both accessible on the titlebar.
 
 
 - True Full Screen support -
-Full Screen is now toggled using F11 and has its own button on the title bar
-Maximize will no longer pretend to be Full Screen by covering up the taskbar
-When in Full Screen mode, the titlebar will be hidden unless you move the mouse to the top of the screen
-A "Lock/Unlock" Title Bar button will be available in Full Screen mode to toggle whether the title bar should remain visible at all times
-When in Full Screen mode, a clock will appear to the left of the "Lock/Unlock Title Bar" button
-The title bar will appear on top of other components if not locked rather than pushing anything down
-The title bar will remain visible while accessing the Forge menu
+Full Screen is now toggled using F11 and has its own button on the title bar.
+Maximize will no longer pretend to be Full Screen by covering up the taskbar.
+When in Full Screen mode, the titlebar will be hidden unless you move the mouse to the top of the screen.
+A "Lock/Unlock" Title Bar button will be available in Full Screen mode to toggle whether the title bar should remain visible at all times.
+When in Full Screen mode, a clock will appear to the left of the "Lock/Unlock Title Bar" button.
+The title bar will appear on top of other components if not locked rather than pushing anything down.
+The title bar will remain visible while accessing the Forge menu.
 
 
 - Window fixes -
 Minimize no longer crashes on Mac
-Message and Input dialogs now appear properly centered and on top of main Forge window
-Prompt to save in Deck Editor (if unsaved changes) when using Forge > Restart
+Message and Input dialogs now appear properly centered and on top of main Forge window.
+Prompt to save in Deck Editor (if unsaved changes) when using Forge > Restart.
+
 
 - Introducing the Forge button -
 The old menu bar has been removed.
@@ -61,6 +62,14 @@ Elemental Resonance
 AEtherplasm
 Excavator
 Snowblind
+
+
+--------------------
+New C13 branch Cards
+--------------------
+
+Derevi, Empyrial Tactician
+Oloro, Ageless Ascetic
 
 
 ------------
