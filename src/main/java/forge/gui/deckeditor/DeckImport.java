@@ -26,7 +26,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
@@ -44,7 +43,6 @@ import forge.deck.DeckBase;
 import forge.deck.DeckRecognizer;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.deck.DeckSection;
-import forge.gui.GuiUtils;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FCheckBox;
@@ -55,6 +53,7 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FTextArea;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.view.FDialog;
 
 /**
  * 
@@ -63,7 +62,7 @@ import forge.item.InventoryItem;
  * @param <TItem>
  * @param <TModel>
  */
-public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> extends JDialog {
+public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> extends FDialog {
     private static final long serialVersionUID = -5837776824284093004L;
 
     private final FTextArea txtInput = new FTextArea();
@@ -122,7 +121,6 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
         this.setPreferredSize(new java.awt.Dimension(wWidth, wHeight));
         this.setSize(wWidth, wHeight);
-        GuiUtils.centerFrame(this);
         this.setResizable(false);
         this.setTitle("Deck Importer");
         
@@ -179,7 +177,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
-        
+
         ActionListener updateDateCheck = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

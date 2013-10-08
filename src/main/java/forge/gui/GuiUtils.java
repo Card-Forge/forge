@@ -17,11 +17,8 @@
  */
 package forge.gui;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.Rectangle;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -48,22 +45,6 @@ import forge.view.arcane.CardPanel;
 public final class GuiUtils {
     private GuiUtils() {
         throw new AssertionError();
-    }
-
-    /**
-     * Centers a frame on the screen based on its current size.
-     * 
-     * @param frame
-     *            a fully laid-out frame
-     */
-    public static void centerFrame(final Window frame) {
-        final Dimension screen = frame.getToolkit().getScreenSize();
-        final Rectangle bounds = frame.getBounds();
-        bounds.width = frame.getWidth();
-        bounds.height = frame.getHeight();
-        bounds.x = (screen.width - bounds.width) / 2;
-        bounds.y = (screen.height - bounds.height) / 2;
-        frame.setBounds(bounds);
     }
 
     /**

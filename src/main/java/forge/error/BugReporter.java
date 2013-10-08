@@ -241,10 +241,9 @@ public class BugReporter {
         
         JOptionPane pane = new JOptionPane(p, JOptionPane.PLAIN_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, null, options.toArray(), options.get(0));
-        JDialog dlg = pane.createDialog(null, title);
+        JDialog dlg = pane.createDialog(JOptionPane.getRootFrame(), title);
         dlg.setSize(showExitAppBtn ? 780 : 600, 400);
         dlg.setResizable(true);
-        dlg.setLocationRelativeTo(null);
         dialogShown = true;
         dlg.setVisible(true);
         dlg.dispose();

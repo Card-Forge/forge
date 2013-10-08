@@ -28,11 +28,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.CounterType;
@@ -44,6 +44,7 @@ import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.view.FDialog;
 import forge.view.arcane.CardPanel;
 
 /**
@@ -59,7 +60,7 @@ public class VAssignDamage {
     // Width and height of blocker dialog
     private final int wDlg = 700;
     private final int hDlg = 500;
-    private final JDialog dlg = new JDialog();
+    private final FDialog dlg = new FDialog();
 
     // Damage storage
     private final int totalDamageToAssign;
