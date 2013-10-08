@@ -10,6 +10,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 
@@ -55,6 +56,14 @@ public class FFrame extends JFrame {
         this.hideTitleBar = true; //ensure titlebar shown when window layout loaded
         this.lockTitleBar = this.isMainFrame && Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_LOCK_TITLE_BAR);
         addResizeSupport();
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowDeactivated(WindowEvent arg0) {
+                if (fullScreen && arg0.getOppositeWindow() == null) {
+                    setMinimized(true); //minimize if switching from Full Screen Forge to outside application window
+                }
+            }
+        });
         this.addWindowStateListener(new WindowStateListener() {
             @Override
             public void windowStateChanged(WindowEvent arg0) {
