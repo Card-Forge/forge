@@ -18,7 +18,9 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.text.WordUtils;
 
+import forge.Constant;
 import forge.Singletons;
+import forge.card.MagicColor;
 import forge.deck.CardCollections;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -81,6 +83,9 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final JLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
     private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<QuestWorld>();
 
+    private final JCheckBox boxBalanceColors = new FCheckBox("Balance starting pool colors");
+    private final JLabel lblPreferredColor = new FLabel.Builder().text("Preferred color:").build();
+    private final FComboBoxWrapper<String> cbxPreferredColor = new FComboBoxWrapper<String>();
 
     /* Second column */
 
@@ -139,14 +144,14 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             if (usesDeckList) {
                 cbxCustomDeck.removeAllItems();
                 CardCollections decks = Singletons.getModel().getDecks();
-                switch(newVal) { 
-                    case SealedDeck: 
+                switch (newVal) {
+                    case SealedDeck:
                         for (DeckGroup d : decks.getSealed()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
                         break;
-                    case DraftDeck: 
+                    case DraftDeck:
                         for (DeckGroup d : decks.getDraft()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
                         break;
-                    case Cube: 
+                    case Cube:
                         for (Deck d : decks.getCubes()) { cbxCustomDeck.addItem(d); }
                         break;
                 }
@@ -175,6 +180,14 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         public void actionPerformed(ActionEvent e) {
             updateEnableFormats();
         }
+     };
+
+     /* Listener for color preference */
+     private final ActionListener alColorPreference = new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+             cbxPreferredColor.setEnabled(boxBalanceColors.isSelected());
+         }
      };
 
     /**
@@ -236,6 +249,19 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             cbxPrizeFormat.addItem(gf);
         }
 
+        // Initialize color balance selection
+        boxBalanceColors.setSelected(true);
+        boxBalanceColors.setEnabled(true);
+        cbxPreferredColor.addItem("none");
+        cbxPreferredColor.addItem(Constant.Color.WHITE);
+        cbxPreferredColor.addItem(Constant.Color.BLUE);
+        cbxPreferredColor.addItem(Constant.Color.BLACK);
+        cbxPreferredColor.addItem(Constant.Color.RED);
+        cbxPreferredColor.addItem(Constant.Color.GREEN);
+        cbxPreferredColor.addItem(Constant.Color.COLORLESS);
+
+        boxBalanceColors.addActionListener(alColorPreference);
+
         for (QuestWorld qw : Singletons.getModel().getWorlds()) {
             cbxStartingWorld.addItem(qw);
         }
@@ -283,6 +309,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         boxFantasy.setSelected(true);
         boxFantasy.setEnabled(true);
 
+        cbxPreferredColor.setEnabled(true);
+
         pnlOptions.setOpaque(false);
         pnlOptions.setLayout(new MigLayout("insets 0, gap 10px, fillx, wrap 2"));
 
@@ -291,6 +319,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlDifficultyMode.add(boxFantasy, difficulty_constraints + ", gapright 4%");
         pnlDifficultyMode.setOpaque(false);
         pnlOptions.add(pnlDifficultyMode, "w 40%");
+
 
         JPanel pnlRestrictions = new JPanel();
         final String constraints = "h 27px!, ";
@@ -301,6 +330,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         final String cboWidthStart = cboWidth + hidemode;
 
         pnlRestrictions.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[120, al right][240, fill]", "[|]12[|]6[]"));
+
+
         pnlRestrictions.add(lblStartingPool, constraints + lblWidthStart);
         cbxStartingPool.addTo(pnlRestrictions, constraints + cboWidthStart);
 
@@ -329,6 +360,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "spanx 2");
 
         pnlRestrictions.add(cboAllowUnlocks, constraints + "spanx 2, ax right");
+
+        pnlRestrictions.add(boxBalanceColors, constraints + "spanx 2, ax right");
+        pnlRestrictions.add(lblPreferredColor,  constraints + lblWidthStart);
+        cbxPreferredColor.addTo(pnlRestrictions, constraints + cboWidthStart + ", wrap");
 
         pnlRestrictions.add(lblStartingWorld, constraints + lblWidthStart);
         cbxStartingWorld.addTo(pnlRestrictions, constraints + cboWidthStart);
@@ -468,7 +503,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         return (StartingPoolType) cbxStartingPool.getSelectedItem();
     }
 
-
     public StartingPoolType getPrizedPoolType() {
          Object v = cbxPrizedCards.getSelectedItem();
          return v instanceof StartingPoolType ? (StartingPoolType) v : null;
@@ -480,6 +514,17 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     public boolean isFantasy() {
         return boxFantasy.isSelected();
+    }
+
+    public boolean balanceColors() {
+        return boxBalanceColors.isSelected();
+    }
+
+    public byte getPreferredColor() {
+        if ("none".equals(cbxPreferredColor.getSelectedItem())) {
+            return MagicColor.ALL_COLORS;
+        }
+        return MagicColor.fromName(cbxPreferredColor.getSelectedItem());
     }
 
     public GameFormat getRotatingFormat() {
