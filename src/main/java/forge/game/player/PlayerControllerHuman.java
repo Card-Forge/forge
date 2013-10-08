@@ -146,10 +146,10 @@ public class PlayerControllerHuman extends PlayerController {
                 if (newMain != null) {
                     if (newMain.size() < deckMinSize) {
                         String errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
-                        JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
                     } else {
                         String errMsg = String.format("Too many cards in your sideboard (maximum %d), please make modifications to your deck again.", sbMax);
-                        JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 // Sideboard rules have changed for M14, just need to consider min maindeck and max sideboard sizes
@@ -218,7 +218,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         String message = String.format("How much will you announce for %s?%s", announce, canChooseZero ? "" : " (X cannot be 0)");
         while(true){
-            String str = JOptionPane.showInputDialog(null, message, ability.getSourceCard().getName(), JOptionPane.QUESTION_MESSAGE);
+            String str = JOptionPane.showInputDialog(JOptionPane.getRootFrame(), message, ability.getSourceCard().getName(), JOptionPane.QUESTION_MESSAGE);
             if (null == str) return null; // that is 'cancel'
             
             if(StringUtils.isNumeric(str)) {

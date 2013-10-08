@@ -98,14 +98,14 @@ public enum CSubmenuDraft implements ICDoc {
         final int aiIndex = (int) Math.floor(Math.random() * 7);
 
         if (humanDeck == null) {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                     "No deck selected for human!\r\n(You may need to build a new deck.)",
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
         } 
         String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
         if (null != errorMessage) {
-            JOptionPane.showMessageDialog(null, "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

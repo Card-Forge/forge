@@ -12,7 +12,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import forge.Singletons;
 import forge.model.BuildInfo;
 import forge.util.FileUtil;
 
@@ -44,7 +43,7 @@ public final class HelpMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(
-                        Singletons.getView().getFrame(),
+                        JOptionPane.getRootFrame(),
                         "Version : " + BuildInfo.getVersionString(),
                         "About Forge",
                         JOptionPane.INFORMATION_MESSAGE);

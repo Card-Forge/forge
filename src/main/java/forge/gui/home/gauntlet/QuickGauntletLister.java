@@ -264,7 +264,7 @@ public class QuickGauntletLister extends JPanel {
     private void deleteFile(RowPanel r0) {
         final GauntletData gd = r0.getGauntletData();
 
-        final int n = JOptionPane.showConfirmDialog(null,
+        final int n = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                 "Are you sure you want to delete \"" + gd.getName()
                 + "\" ?", "Delete Gauntlet", JOptionPane.YES_NO_OPTION);
 

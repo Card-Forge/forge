@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -94,6 +95,7 @@ public enum FView {
     private FView() {
         frmSplash = new SplashFrame();
         frmDocument.setTitle("Forge: " + BuildInfo.getVersionString());
+        JOptionPane.setRootFrame(frmDocument);
     }
 
     /** */

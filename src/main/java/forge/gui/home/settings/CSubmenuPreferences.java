@@ -163,7 +163,7 @@ public enum CSubmenuPreferences implements ICDoc {
         String userPrompt =
                 "This will reset all preferences to their defaults and restart Forge.\n\n" +
                         "Reset and restart Forge?";
-        int reply = JOptionPane.showConfirmDialog(null, userPrompt, "Reset Settings", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Settings", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             ForgePreferences prefs = Singletons.getModel().getPreferences();
             prefs.reset();
@@ -178,10 +178,10 @@ public enum CSubmenuPreferences implements ICDoc {
                 "This will reset the Deck Editor screen layout.\n" +
                         "All tabbed views will be restored to their default positions.\n\n" +
                         "Reset layout?";
-        int reply = JOptionPane.showConfirmDialog(null, userPrompt, "Reset Deck Editor Layout", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Deck Editor Layout", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             deleteScreenLayoutFile(Screens.DECK_EDITOR_CONSTRUCTED);
-            JOptionPane.showMessageDialog(null, "Deck Editor layout has been reset.");
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Deck Editor layout has been reset.");
         }
     }
 
@@ -191,10 +191,10 @@ public enum CSubmenuPreferences implements ICDoc {
                         "If you want to save the current layout first, please use " +
                         "the Dock tab -> Save Layout option in the Match screen.\n\n" +
                         "Reset layout?";
-        int reply = JOptionPane.showConfirmDialog(null, userPrompt, "Reset Match Screen Layout", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Match Screen Layout", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             deleteScreenLayoutFile(Screens.MATCH_SCREEN);
-            JOptionPane.showMessageDialog(null, "Match Screen layout has been reset.");
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Match Screen layout has been reset.");
         }
     }
 

@@ -58,7 +58,7 @@ public class FHyperlink extends FLabel {
                         try {
                             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
                         } catch (IllegalStateException ex) {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                                     "Sorry, a problem occurred while copying this link to your system clipboard.",
                                     "A problem occured", JOptionPane.ERROR_MESSAGE);
                         }

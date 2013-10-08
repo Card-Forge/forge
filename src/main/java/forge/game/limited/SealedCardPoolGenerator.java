@@ -152,7 +152,7 @@ public class SealedCardPoolGenerator {
     
                 // present list to user
                 if (customs.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "No custom sealed files found.", "", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "No custom sealed files found.", "", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     final CustomLimited draft = GuiChoose.one("Choose Custom Sealed Pool", customs);
 

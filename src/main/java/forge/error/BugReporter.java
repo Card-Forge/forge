@@ -274,7 +274,7 @@ public class BugReporter {
                 // browse to url
                 Desktop.getDesktop().browse(new URI(url));
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null,
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                         "Sorry, a problem occurred while opening the forum in your default browser.",
                         "A problem occured", JOptionPane.ERROR_MESSAGE);
             }

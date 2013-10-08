@@ -41,7 +41,7 @@ public class SEditorIO {
 
         // Warn if no name
         if (name == null || name.isEmpty()) {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                     "Please name your deck using the 'Title' box.",
                     "Save Error!",
                     JOptionPane.ERROR_MESSAGE);
@@ -84,7 +84,7 @@ public class SEditorIO {
     public static boolean confirmSaveChanges() {
         if (!((DeckController<DeckBase>) CDeckEditorUI
                 .SINGLETON_INSTANCE.getCurrentEditorController().getDeckController()).isSaved()) {
-            final int choice = JOptionPane.showConfirmDialog(null,
+            final int choice = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                     "Save changes to current deck?",
                     "Save Changes?",
                     JOptionPane.YES_NO_CANCEL_OPTION,

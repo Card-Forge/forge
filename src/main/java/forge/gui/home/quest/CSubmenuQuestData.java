@@ -171,7 +171,7 @@ public enum CSubmenuQuestData implements ICDoc {
             case CustomFormat:
                 if (customFormatCodes.isEmpty()) {
 
-                    int answer = JOptionPane.showConfirmDialog(null, "You have defined custom format as containing no sets.\nThis will start a game without restriction.\n\nContinue?");
+                    int answer = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), "You have defined custom format as containing no sets.\nThis will start a game without restriction.\n\nContinue?");
                     if (JOptionPane.YES_OPTION != answer) {
                         return;
                     }
@@ -185,7 +185,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 dckStartPool = view.getSelectedDeck();
                 if (null == dckStartPool) {
 
-                    JOptionPane.showMessageDialog(null, "You have not selected a deck to start", "Cannot start a quest", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "You have not selected a deck to start", "Cannot start a quest", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 break;
@@ -250,13 +250,13 @@ public enum CSubmenuQuestData implements ICDoc {
         // }
         final StartingPoolPreferences userPrefs = new StartingPoolPreferences(false, MagicColor.ALL_COLORS); // To be changed later
 
-        final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
+        final Object o = JOptionPane.showInputDialog(JOptionPane.getRootFrame(), "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
         if (o == null) { return; }
 
         final String questName = SSubmenuQuestUtil.cleanString(o.toString());
 
         if (getAllQuests().get(questName) != null || questName.equals("")) {
-            JOptionPane.showMessageDialog(null, "Please pick another quest name, a quest already has that name.");
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please pick another quest name, a quest already has that name.");
             return;
         }
 

@@ -94,7 +94,7 @@ public class QuestUtilUnlockSets {
         CardEdition choosenEdition = toBuy.left;
 
         if (qData.getAssets().getCredits() < price) {
-            JOptionPane.showMessageDialog(null, "Unfortunately, you cannot afford that set yet.\n"
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Unfortunately, you cannot afford that set yet.\n"
                     + "To unlock " + choosenEdition.getName() + ", you need " + price + " credits.\n"
                     + "You have only " + qData.getAssets().getCredits() + " credits.",
                     "Failed to unlock " + choosenEdition.getName(),
@@ -102,7 +102,7 @@ public class QuestUtilUnlockSets {
             return null;
         }
 
-        final int unlockConfirm = JOptionPane.showConfirmDialog(null,
+        final int unlockConfirm = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                 "Unlocking " + choosenEdition.getName() + " will cost you " + price + " credits.\n"
                 + "You have " + qData.getAssets().getCredits() + " credits.\n\n"
                 + "Are you sure you want to unlock " + choosenEdition.getName() + "?",

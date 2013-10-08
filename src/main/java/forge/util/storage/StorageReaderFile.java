@@ -78,7 +78,7 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
             if (null == item) {
                 final String msg = "An object stored in " + this.file.getPath()
                         + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
-                JOptionPane.showMessageDialog(null, msg);
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg);
                 continue;
             }
 

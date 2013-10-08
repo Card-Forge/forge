@@ -145,7 +145,7 @@ public class ListChooser<T> {
         }
         Integer value;
         do {
-            this.dialog = this.optionPane.createDialog(this.optionPane.getParent(), this.title);
+            this.dialog = this.optionPane.createDialog(JOptionPane.getRootFrame(), this.title);
             if (this.minChoices != 0) {
                 this.dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             }

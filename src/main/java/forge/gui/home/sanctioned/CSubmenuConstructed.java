@@ -102,19 +102,19 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         RegisteredPlayer pscRight = view.getDcRight().getPlayer();
 
         if (pscLeft == null || pscRight == null) {
-            JOptionPane.showMessageDialog(null, "Please specify a Human and Computer deck first.");
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please specify a Human and Computer deck first.");
             return;
         }
 
         String leftDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscLeft.getOriginalDeck());
         if (null != leftDeckErrorMessage) {
-            JOptionPane.showMessageDialog(null, "Left-side deck " + leftDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Left-side deck " + leftDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         String rightDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscRight.getOriginalDeck());
         if (null != rightDeckErrorMessage) {
-            JOptionPane.showMessageDialog(null, "Right-side deck " + rightDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Right-side deck " + rightDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

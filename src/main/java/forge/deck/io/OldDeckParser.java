@@ -150,7 +150,7 @@ public class OldDeckParser {
                 this.draft.add(d);
             } else {
                 final String msg = String.format("Draft '%s' lacked some decks.%n%nShould it be deleted?");
-                mayDelete = JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, msg, "Draft loading error",
+                mayDelete = JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), msg, "Draft loading error",
                         JOptionPane.YES_NO_OPTION);
             }
 
@@ -187,7 +187,7 @@ public class OldDeckParser {
                                 .format("Can not convert deck '%s' for some unsupported cards it contains. %n%s%n%nMay Forge delete all such decks?",
                                         name, ex.getMessage());
                         allowDeleteUnsupportedConstructed = JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(
-                                null, msg, "Problem converting decks", JOptionPane.YES_NO_OPTION);
+                                JOptionPane.getRootFrame(), msg, "Problem converting decks", JOptionPane.YES_NO_OPTION);
                     }
                 }
                 if (importedOk || allowDeleteUnsupportedConstructed) {

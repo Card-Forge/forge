@@ -357,7 +357,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         final int value = this.getCardValue(item);
 
         if (value > this.questData.getAssets().getCredits()) {
-            JOptionPane.showMessageDialog(null, "Not enough credits!");
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Not enough credits!");
             return;
         }
         
@@ -394,7 +394,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 getDeckManager().addItems(newInventory);
             }
             boolean one = 1 == qty;
-            JOptionPane.showMessageDialog(null, String.format(
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), String.format(
                     "%s '%s' %s added to your decklist.%n%n%s cards were also added to your pool.",
                     one ? "Deck" : String.format("%d copies of deck", qty),
                     deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),

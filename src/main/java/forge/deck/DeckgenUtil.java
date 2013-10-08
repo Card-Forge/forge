@@ -269,7 +269,7 @@ public class DeckgenUtil {
         msg.append("Copy Decklist to Clipboard?");
 
         // Output
-        final int rcMsg = JOptionPane.showConfirmDialog(null, msg, "Decklist", JOptionPane.OK_CANCEL_OPTION);
+        final int rcMsg = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), msg, "Decklist", JOptionPane.OK_CANCEL_OPTION);
         if (rcMsg == JOptionPane.OK_OPTION) {
             final StringSelection ss = new StringSelection(deckList.toString());
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
@@ -287,14 +287,14 @@ public class DeckgenUtil {
         boolean result = true;
 
         if (colors0.size() == 4) {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                     "Sorry, four color generated decks aren't supported yet."
                     + "\n\rPlease use 2, 3, or 5 colors for this deck.",
                     "Generate deck: 4 colors", JOptionPane.ERROR_MESSAGE);
             result = false;
         }
         else if (colors0.size() > 5) {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                     "Generate deck: maximum five colors!",
                     "Generate deck: too many colors", JOptionPane.ERROR_MESSAGE);
             result = false;

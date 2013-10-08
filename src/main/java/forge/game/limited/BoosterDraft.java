@@ -138,11 +138,9 @@ public final class BoosterDraft implements IBoosterDraft {
             final List<CustomLimited> myDrafts = this.loadCustomDrafts("res/draft/", ".draft");
 
             if (myDrafts.isEmpty()) {
-                JOptionPane
-                        .showMessageDialog(null, "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                final CustomLimited draft = GuiChoose.one("Choose Custom Draft",
-                        myDrafts);
+                final CustomLimited draft = GuiChoose.one("Choose Custom Draft", myDrafts);
                 this.setupCustomDraft(draft);
             }
             break;

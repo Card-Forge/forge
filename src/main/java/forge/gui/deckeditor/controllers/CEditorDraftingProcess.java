@@ -188,7 +188,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * </p>
      */
     private void saveDraft() {
-        String s = JOptionPane.showInputDialog(null,
+        String s = JOptionPane.showInputDialog(JOptionPane.getRootFrame(),
                 "Save this draft as:",
                 "Save draft",
                 JOptionPane.QUESTION_MESSAGE);

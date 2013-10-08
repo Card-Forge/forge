@@ -39,7 +39,7 @@ public class GuiDialog {
                 final String title = c == null ? "Question" : c.getName() + " - Ability";
                 String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
                 String[] opts = options == null ? defaultConfirmOptions : options;
-                int answer = JOptionPane.showOptionDialog(null, questionToUse, title, 
+                int answer = JOptionPane.showOptionDialog(JOptionPane.getRootFrame(), questionToUse, title, 
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, 
                         opts, opts[defaultIsYes ? 0 : 1]);
                 return answer == JOptionPane.YES_OPTION;
@@ -72,7 +72,7 @@ public class GuiDialog {
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {
-                JOptionPane.showMessageDialog(null, message, title, JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), message, title, JOptionPane.PLAIN_MESSAGE);
             }
         });
     }

@@ -129,9 +129,9 @@ public final class GuiDisplayUtil {
 
             in.close();
         } catch (final FileNotFoundException fnfe) {
-            JOptionPane.showMessageDialog(null, "File not found: " + fc.getSelectedFile().getAbsolutePath());
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "File not found: " + fc.getSelectedFile().getAbsolutePath());
         } catch (final Exception e) {
-            JOptionPane.showMessageDialog(null, "Error loading battle setup file!");
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Error loading battle setup file!");
             return;
         }
 

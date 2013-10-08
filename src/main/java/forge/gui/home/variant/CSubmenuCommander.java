@@ -130,7 +130,7 @@ public enum CSubmenuCommander implements ICDoc {
             if (null != errorMessage) {
                 if(!problemDecks.contains(d)) 
                 {
-                    JOptionPane.showMessageDialog(null, "The deck "  + d.getName() + " " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "The deck "  + d.getName() + " " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
                     problemDecks.add(d);
                 }
             }

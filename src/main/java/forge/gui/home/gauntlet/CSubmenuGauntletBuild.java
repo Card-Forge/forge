@@ -175,7 +175,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
 
         // Warn if no name
         if (name.equals(GauntletIO.TXF_PROMPT) || name.isEmpty()) {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                     "Please name your gauntlet using the 'Gauntlet Name' box.",
                     "Save Error!",
                     JOptionPane.ERROR_MESSAGE);
@@ -185,7 +185,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         final File f = new File(NewConstants.GAUNTLET_DIR.userPrefLoc + name + ".dat");
         // Confirm if overwrite
         if (f.exists()) {
-            final int m = JOptionPane.showConfirmDialog(null,
+            final int m = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                     "There is already a gauntlet named '" + name + "'.\n"
                     + "All progress and data will be overwritten. Continue?",
                     "Overwrite Gauntlet?",
@@ -197,7 +197,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         }
         // Confirm if a new gauntlet will be created
         else {
-            final int m = JOptionPane.showConfirmDialog(null,
+            final int m = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                     "This will create a new gauntlet named '" + name + "'. Continue?",
                     "Create Gauntlet?",
                     JOptionPane.YES_NO_OPTION,

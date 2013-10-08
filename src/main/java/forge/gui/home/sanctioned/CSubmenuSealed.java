@@ -123,7 +123,7 @@ public enum CSubmenuSealed implements ICDoc {
         final Deck human = VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
 
         if (human == null) {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                     "Please build and/or select a deck for yourself.",
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
@@ -131,7 +131,7 @@ public enum CSubmenuSealed implements ICDoc {
         
         String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(human);
         if (null != errorMessage) {
-            JOptionPane.showMessageDialog(null, "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -162,7 +162,7 @@ public enum CSubmenuSealed implements ICDoc {
         if ( null == rounds ) return;
 
 
-        final String sDeckName = JOptionPane.showInputDialog(null,
+        final String sDeckName = JOptionPane.showInputDialog(JOptionPane.getRootFrame(),
                 "Save this card pool as:",
                 "Save Card Pool",
                 JOptionPane.QUESTION_MESSAGE);
@@ -182,7 +182,7 @@ public enum CSubmenuSealed implements ICDoc {
         final IStorage<DeckGroup> sealedDecks = Singletons.getModel().getDecks().getSealed();
 
         if (sealedDecks.contains(sDeckName)) {
-            final int deleteDeck = JOptionPane.showConfirmDialog(null, "\"" + sDeckName
+            final int deleteDeck = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), "\"" + sDeckName
                     + "\" already exists! Do you want to replace it?",
                     "Sealed Deck Game Exists", JOptionPane.YES_NO_OPTION);
 

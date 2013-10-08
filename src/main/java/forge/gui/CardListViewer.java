@@ -138,7 +138,7 @@ public class CardListViewer {
         }
         this.jList.setSelectedIndex(0);
 
-        this.dialog = this.optionPane.createDialog(this.optionPane.getParent(), this.title);
+        this.dialog = this.optionPane.createDialog(JOptionPane.getRootFrame(), this.title);
         this.dialog.setSize(720, 360);
         this.dialog.addWindowFocusListener(new CardListFocuser());
         this.dialog.setLocationRelativeTo(null);

@@ -20,7 +20,7 @@ public final class GamePlayerUtil {
 
         if (StringUtils.isBlank(playerName)) {
             newName = (String)JOptionPane.showInputDialog(
-                    Singletons.getView().getFrame(),
+                    JOptionPane.getRootFrame(),
                     "By default, Forge will refer to you as the \"Human\" during gameplay.\n" +
                             "If you would prefer a different name please enter it now.\n",
                             "Personalize Forge Gameplay",
@@ -43,7 +43,7 @@ public final class GamePlayerUtil {
 
         if (StringUtils.isBlank(playerName) && newName != "Human") {
             JOptionPane.showMessageDialog(
-                    Singletons.getView().getFrame(),
+                    JOptionPane.getRootFrame(),
                     "Thank you, " + newName + ". " +
                     "You will not be prompted again but you can change\nyour name at any time using the \"Player Name\" setting in Preferences.\n\n");
         }
@@ -53,7 +53,7 @@ public final class GamePlayerUtil {
     private static String getNewPlayerNameFromInputDialog(String playerName) {
         String newName =
                 (String)JOptionPane.showInputDialog(
-                        Singletons.getView().getFrame(),
+                        JOptionPane.getRootFrame(),
                         "Please enter a new name (alpha-numeric only)\n",
                         "Personalize Forge Gameplay",
                         JOptionPane.PLAIN_MESSAGE,

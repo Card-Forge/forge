@@ -267,7 +267,7 @@ public enum CDock implements ICDoc {
 
         msg.append("Copy Decklist to Clipboard?");
 
-        int rcMsg = JOptionPane.showConfirmDialog(null, msg, ttl, JOptionPane.OK_CANCEL_OPTION);
+        int rcMsg = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), msg, ttl, JOptionPane.OK_CANCEL_OPTION);
 
         if (rcMsg == JOptionPane.OK_OPTION) {
             final StringSelection ss = new StringSelection(deckList.toString());

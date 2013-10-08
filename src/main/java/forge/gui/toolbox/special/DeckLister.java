@@ -468,7 +468,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
     private void deleteDeck(final RowPanel r0) {
         final Deck d0 = r0.getDeck();
 
-        final int n = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete \"" + d0.getName() + "\" ?",
+        final int n = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), "Are you sure you want to delete \"" + d0.getName() + "\" ?",
                 "Delete Deck", JOptionPane.YES_NO_OPTION);
 
         if (n == JOptionPane.NO_OPTION) {

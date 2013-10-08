@@ -100,7 +100,7 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
                     final String msg = "An object stored in "
                             + file.getPath()
                             + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
-                    JOptionPane.showMessageDialog(null, msg);
+                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg);
                     continue;
                 }
                 String newKey = keySelector.apply(newDeck);
@@ -110,10 +110,8 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
                 result.put(newKey, newDeck);
             } catch (final OldDeckFileFormatException ex) {
                 if (!hasWarnedOfOldFormat) {
-                    JOptionPane
-                            .showMessageDialog(
-                                    null,
-                                    "Found a deck in old fileformat in the storage.\nMoving this file and all similiar ones to parent folder.\n\nForge will try to convert them in a second.");
+                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                            "Found a deck in old fileformat in the storage.\nMoving this file and all similiar ones to parent folder.\n\nForge will try to convert them in a second.");
                     hasWarnedOfOldFormat = true;
                 }
                 file.renameTo(new File(this.directory.getParentFile(), file.getName()));
@@ -125,7 +123,7 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
         }
 
         if (!decksThatFailedToLoad.isEmpty()) {
-            JOptionPane.showMessageDialog(null,
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
                     StringUtils.join(decksThatFailedToLoad, System.getProperty("line.separator")),
                     "Some of your objects were not loaded.", JOptionPane.WARNING_MESSAGE);
         }

@@ -240,7 +240,7 @@ public class SSubmenuQuestUtil {
         QuestController qc = Singletons.getModel().getQuest();
         if (qc == null || qc.getAssets() == null) {
             String msg = "Please create a Quest before attempting to " + location;
-            JOptionPane.showMessageDialog(null, msg, "No Quest", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg, "No Quest", JOptionPane.ERROR_MESSAGE);
             System.out.println(msg);
             return false;
         }
@@ -279,7 +279,7 @@ public class SSubmenuQuestUtil {
 
         CardEdition unlocked = toUnlock.left;
         qData.getAssets().subtractCredits(toUnlock.right);
-        JOptionPane.showMessageDialog(null, "You have successfully unlocked " + unlocked.getName() + "!",
+        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "You have successfully unlocked " + unlocked.getName() + "!",
                 unlocked.getName() + " unlocked!",
                 JOptionPane.PLAIN_MESSAGE);
 
@@ -301,7 +301,7 @@ public class SSubmenuQuestUtil {
         }
 
         if (worlds.size() < 1) {
-            JOptionPane.showMessageDialog(null, "There are currently no worlds you can travel to\nin this version of Forge.", "No worlds", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "There are currently no worlds you can travel to\nin this version of Forge.", "No worlds", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -368,14 +368,14 @@ public class SSubmenuQuestUtil {
         }
         if (deck == null) {
             String msg = "Please select a Quest Deck.";
-            JOptionPane.showMessageDialog(null, msg, "No Deck", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg, "No Deck", JOptionPane.ERROR_MESSAGE);
             System.out.println(msg);
             return;
         }
         
         String errorMessage = GameType.Quest.getDecksFormat().getDeckConformanceProblem(deck);
         if (null != errorMessage) {
-            JOptionPane.showMessageDialog(null, "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

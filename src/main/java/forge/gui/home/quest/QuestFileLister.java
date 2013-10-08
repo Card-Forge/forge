@@ -293,7 +293,7 @@ public class QuestFileLister extends JPanel {
     }
 
     private void editFileName(String s0) {
-        final Object o = JOptionPane.showInputDialog(null,
+        final Object o = JOptionPane.showInputDialog(JOptionPane.getRootFrame(),
                 "Rename Quest to:", "Quest Rename", JOptionPane.OK_CANCEL_OPTION);
 
         if (o == null) { return; }
@@ -310,7 +310,7 @@ public class QuestFileLister extends JPanel {
         }
 
         if (exists || questName.equals("")) {
-            JOptionPane.showMessageDialog(null, "Please pick another quest name, a quest already has that name.");
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please pick another quest name, a quest already has that name.");
             return;
         }
         else {
@@ -326,7 +326,7 @@ public class QuestFileLister extends JPanel {
     private void deleteFile(RowPanel r0) {
         final QuestData qd = r0.getQuestData();
 
-        final int n = JOptionPane.showConfirmDialog(null,
+        final int n = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                 "Are you sure you want to delete \"" + qd.getName()
                 + "\" ?", "Delete Deck", JOptionPane.YES_NO_OPTION);
 

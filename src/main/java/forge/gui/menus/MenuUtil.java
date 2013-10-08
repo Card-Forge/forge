@@ -37,7 +37,7 @@ public final class MenuUtil {
     public static boolean getUserConfirmation(String prompt, String dialogTitle) {
         Object[] options = {"Yes", "No"};                    
         int reply = JOptionPane.showOptionDialog(
-                null, 
+                JOptionPane.getRootFrame(), 
                 prompt, 
                 dialogTitle, 
                 JOptionPane.YES_NO_OPTION,
