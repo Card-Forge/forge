@@ -257,9 +257,11 @@ public class FFrame extends JFrame {
     //override normal extended state behavior
     @Override
     public void setExtendedState(int state) {
-        this.minimized = (state & Frame.ICONIFIED) == Frame.ICONIFIED;
-        this.maximized = (state & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH;
-        updateState();
+        if (this.isActive()) { //only update state set this way when active, otherwise window will be minimized when deactivated
+            this.minimized = (state & Frame.ICONIFIED) == Frame.ICONIFIED;
+            this.maximized = (state & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH;
+            updateState();
+        }
     }
     
     private void addMoveSupport() {
