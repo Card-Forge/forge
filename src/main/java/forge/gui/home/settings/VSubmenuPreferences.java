@@ -79,9 +79,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for touchscreens");
-    private final JCheckBox cbOverlayCardName = new OptionsCheckBox("Card Name");
-    private final JCheckBox cbOverlayCardPower = new OptionsCheckBox("Power/Toughness");
-    private final JCheckBox cbOverlayCardManaCost = new OptionsCheckBox("Mana Cost");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbShowMatchBackgroundImage = new OptionsCheckBox("Show Background Image on Match Screen");
     private final JCheckBox cbUseThemedComboBox = new OptionsCheckBox("Themed ComboBox");
@@ -205,14 +202,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbUiForTouchScreen, regularConstraints);
         pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), regularConstraints);
-
-        // Card Overlay options
-        pnlPrefs.add(new SectionLabel("Card Overlay Options"), sectionConstraints);
-        pnlPrefs.add(new NoteLabel("Show text overlays which are easier to read when cards are reduced in size to fit the play area."), regularConstraints);
-        pnlPrefs.add(cbOverlayCardName, regularConstraints);
-        pnlPrefs.add(cbOverlayCardPower, regularConstraints);
-        pnlPrefs.add(cbOverlayCardManaCost, regularConstraints);
-
 
         // Sound options
         pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");
@@ -431,21 +420,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbStackLand() {
         return cbStackLand;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbOverlayCardName() {
-        return cbOverlayCardName;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbOverlayCardPower() {
-        return cbOverlayCardPower;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbOverlayCardManaCost() {
-        return cbOverlayCardManaCost;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
