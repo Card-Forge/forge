@@ -57,7 +57,6 @@ import org.apache.commons.lang.WordUtils;
 import forge.FThreads;
 import forge.Singletons;
 import forge.gui.GuiUtils;
-import forge.gui.home.settings.CSubmenuPreferences;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
@@ -629,7 +628,7 @@ public enum FSkin {
         private Color color;
         
         public Color getColor() { return color; }
-        
+
         //private constructors for color that changes with skin (use FSkin.getColor())
         private SkinColor(Colors baseColor0) {
             this(baseColor0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_ALPHA);
@@ -1634,7 +1633,6 @@ public enum FSkin {
         Singletons.getControl().getForgeMenu().refresh();
         FComboBoxWrapper.refreshAllSkins();
         FComboBoxPanel.refreshAllSkins();
-        CSubmenuPreferences.SINGLETON_INSTANCE.updateCurrentSkin();
     }
 
     /**
@@ -2098,7 +2096,7 @@ public enum FSkin {
             UIManager.put("Button.focus", FORE_COLOR.darker());
             UIManager.put("Button.rollover", false);
         }
-        
+
         private void setToolTipLookAndFeel() {
             UIManager.put("ToolTip.background", BACK_COLOR);
             UIManager.put("ToolTip.foreground", FORE_COLOR);

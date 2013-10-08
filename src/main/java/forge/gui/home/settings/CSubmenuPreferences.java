@@ -4,7 +4,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JCheckBox;
@@ -26,7 +25,6 @@ import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.toolbox.FComboBoxPanel;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -83,7 +81,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbAltSoundSystem(), FPref.UI_ALT_SOUND_SYSTEM));
         lstControls.add(Pair.of(view.getCbUiForTouchScreen(), FPref.UI_FOR_TOUCHSCREN));
         lstControls.add(Pair.of(view.getCbCompactMainMenu(), FPref.UI_COMPACT_MAIN_MENU));
-        lstControls.add(Pair.of(view.getCbShowMatchBackgroundImage(), FPref.UI_MATCH_IMAGE_VISIBLE));
         lstControls.add(Pair.of(view.getCbUseThemedComboBox(), FPref.UI_THEMED_COMBOBOX));
         lstControls.add(Pair.of(view.getCbPromptFreeBlocks(), FPref.MATCHPREF_PROMPT_FREE_BLOCKS));
 
@@ -120,7 +117,6 @@ public enum CSubmenuPreferences implements ICDoc {
 
         initializeGameLogVerbosityComboBox();
         initializeAiProfilesComboBox();
-        initializeSkinsComboBox();
         initializePlayerNameButton();
 
     }
@@ -215,32 +211,6 @@ public enum CSubmenuPreferences implements ICDoc {
         JComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
         String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
-    }
-
-    private void initializeSkinsComboBox() {
-        final FComboBoxPanel<String> panel = this.view.getSkinsComboBoxPanel();
-        String[] installedSkins = FSkin.getSkinNamesArray(true);
-        validatePreferredSkinName(installedSkins);
-        final JComboBox<String> comboBox = new JComboBox<String>(installedSkins);
-        String selectedItem = this.prefs.getPref(FPref.UI_SKIN);
-        panel.setComboBox(comboBox, selectedItem);
-        comboBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent e) {
-                FSkin.changeSkin(panel.getSelectedItem().toString());
-            }
-        });
-    }
-
-    public void updateCurrentSkin() {
-        this.view.getSkinsComboBoxPanel().setSelectedItem(this.prefs.getPref(FPref.UI_SKIN));
-    }
-
-    private void validatePreferredSkinName(String[] installedSkins) {
-        String preferredSkin = this.prefs.getPref(FPref.UI_SKIN);
-        if (!Arrays.asList(installedSkins).contains(preferredSkin)) {
-            this.prefs.setPref(FPref.UI_SKIN, "Default");
-        }
     }
 
     private <E> JComboBox<E> createComboBox(E[] items, final ForgePreferences.FPref setting) {

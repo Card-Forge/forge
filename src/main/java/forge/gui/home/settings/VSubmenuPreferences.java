@@ -80,14 +80,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for touchscreens");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
-    private final JCheckBox cbShowMatchBackgroundImage = new OptionsCheckBox("Show Background Image on Match Screen");
     private final JCheckBox cbUseThemedComboBox = new OptionsCheckBox("Themed ComboBox");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
     // ComboBox items are added in CSubmenuPreferences since this is just the View.
-    private final FComboBoxPanel<String> cbpSkin = new FComboBoxPanel<String>("Choose Skin:");
     private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<GameLogEntryType>("Game Log Verbosity:");
     private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<String>("AI Personality:");
 
@@ -176,17 +174,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbUseThemedComboBox, regularConstraints);
         pnlPrefs.add(new NoteLabel("Turn off if you are having combo-box color clash (RESTART REQUIRED)."), regularConstraints);
-
-
-        // Themes
-        pnlPrefs.add(new SectionLabel("Visual Themes"), sectionConstraints + ", gaptop 2%");
-
-        pnlPrefs.add(cbpSkin, "w 80%!, gap 10% 0 0 10px, span 2 1");
-        pnlPrefs.add(new NoteLabel("Change the overall look and feel of Forge (RESTART REQUIRED)."), regularConstraints);
-
-        pnlPrefs.add(cbShowMatchBackgroundImage, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Toggle the visibility of the background image on the match screen."), regularConstraints);
-
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
@@ -460,10 +447,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpGameLogEntryType;
     }
 
-    public FComboBoxPanel<String> getSkinsComboBoxPanel() {
-        return cbpSkin;
-    }
-
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnforceDeckLegality() {
         return cbEnforceDeckLegality;
@@ -496,11 +479,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnReset() {
         return btnReset;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbShowMatchBackgroundImage() {
-        return cbShowMatchBackgroundImage;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
