@@ -16,7 +16,11 @@ A "Lock/Unlock" Title Bar button will be available in Full Screen mode to toggle
 When in Full Screen mode, a clock will appear to the left of the "Lock/Unlock Title Bar" button
 The title bar will appear on top of other components if not locked rather than pushing anything down
 The title bar will remain visible while accessing the Forge menu
+
+
+- Window fixes -
 Minimize no longer crashes on Mac
+Message and Input dialogs now appear properly centered and on top of main Forge window
 
 
 - Introducing the Forge button -
