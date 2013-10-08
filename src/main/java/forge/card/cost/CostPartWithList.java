@@ -65,7 +65,7 @@ public abstract class CostPartWithList extends CostPart {
     public final void reportPaidCardsTo(final SpellAbility sa) {
         final String paymentMethod = getHashForList();
         for (final Card card : this.list) {
-            sa.addCostToHashList(CardUtil.getLKICopy(card), paymentMethod);
+            sa.addCostToHashList(card, paymentMethod);
         }
     }
     
