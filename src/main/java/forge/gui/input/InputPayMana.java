@@ -1,6 +1,7 @@
 package forge.gui.input;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,6 +14,7 @@ import forge.card.MagicColor;
 import forge.card.ability.ApiType;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
@@ -117,7 +119,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         boolean guessAbilityWithRequiredColors = true;
         for (SpellAbility ma : card.getManaAbility()) {
             ma.setActivatingPlayer(player);
-            
 
             AbilityManaPart m = ma.getManaPartRecursive();
             if (m == null || !ma.canPlay())                                     continue;
@@ -212,6 +213,31 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (m.isAnyMana()) {
             return true;
         }
+        
+        // check for produce mana replacement effects - they mess this up, so just use the mana ability
+        final Card source = am.getSourceCard();
+        final Player activator = am.getActivatingPlayer();
+        final Game g = source.getGame();
+        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        repParams.put("Event", "ProduceMana");
+        repParams.put("Mana", m.getOrigProduced());
+        repParams.put("Affected", source);
+        repParams.put("Player", activator);
+        repParams.put("AbilityMana", am);
+        
+        for (final Player p : g.getPlayers()) {
+            for (final Card crd : p.getAllCards()) {
+                for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
+                    if (replacementEffect.requirementsCheck(g)
+                            && replacementEffect.canReplace(repParams)
+                            && replacementEffect.getMapParams().containsKey("ManaReplacement")
+                            && replacementEffect.zonesCheck(g.getZoneOf(crd))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        
         if (am.getApi() == ApiType.ManaReflected) {
             final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am);
             for (final String color : reflectableColors) {
