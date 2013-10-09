@@ -136,11 +136,12 @@ public enum FControl implements KeyEventDispatcher {
     }
     
     public boolean canExitForge(boolean forRestart) {
+        String userPrompt = "Are you sure you wish to " + (forRestart ? "restart" : "exit") + " Forge?";
         if (this.game != null) {
-            String userPrompt = "A game is currently active. Are you sure you wish to " + (forRestart ? "restart" : "exit") + " Forge?\n\n";
-            if (!MenuUtil.getUserConfirmation(userPrompt, "Exit Forge")) {
-                return false;
-            }
+            userPrompt = "A game is currently active. " + userPrompt;
+        }
+        if (!MenuUtil.getUserConfirmation(userPrompt, "Exit Forge")) {
+            return false;
         }
         if (!CDeckEditorUI.SINGLETON_INSTANCE.canExit()) {
             return false;
