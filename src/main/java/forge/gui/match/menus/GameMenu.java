@@ -83,7 +83,7 @@ public final class GameMenu {
                 String userPrompt =
                         "This will end the current game and you will not be able to resume.\n\n" +
                                 "Concede anyway?";
-                if (MenuUtil.getUserConfirmation(userPrompt, "Concede Game?")) {
+                if (MenuUtil.getUserConfirmation(userPrompt, "Concede Game?", false)) {
                     controller.concede();
                 }
             }

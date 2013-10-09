@@ -34,7 +34,7 @@ public final class MenuUtil {
         return KeyStroke.getKeyStroke(key, DEFAULT_MenuShortcutKeyMask);
     }
             
-    public static boolean getUserConfirmation(String prompt, String dialogTitle) {
+    public static boolean getUserConfirmation(String prompt, String dialogTitle, boolean defaultYes) {
         Object[] options = {"Yes", "No"};                    
         int reply = JOptionPane.showOptionDialog(
                 JOptionPane.getRootFrame(), 
@@ -44,7 +44,7 @@ public final class MenuUtil {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
-                options[1]);
+                options[defaultYes ? 0 : 1]);
         return (reply == JOptionPane.YES_OPTION);                      
     }    
 

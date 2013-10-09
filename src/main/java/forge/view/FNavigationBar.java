@@ -101,14 +101,29 @@ public class FNavigationBar extends FTitleBarBase {
         return tab;
     }
     
-    public void setSelectedTab(INavigationTabData data) {
+    private NavigationTab getTab(INavigationTabData data) {
         for (NavigationTab tab : tabs) {
             if (tab.data == data) {
-                setSelectedTab(tab);
-                return;
+                return tab;
             }
         }
-        setSelectedTab(addNavigationTab(data)); //if tab not found, add and select it
+        return null;
+    }
+
+    public void ensureTabActive(INavigationTabData data) {
+        NavigationTab tab = getTab(data);
+        if (tab != null && !tab.selected) {
+            setSelectedTab(tab);
+            Singletons.getControl().changeStateAutoFixLayout(data.getTabDestScreen(), tab.getText());
+        }
+    }
+    
+    public void setSelectedTab(INavigationTabData data) {
+        NavigationTab tab = getTab(data);
+        if (tab == null) {
+            tab = addNavigationTab(data); //if tab not found, add and select it
+        }
+        setSelectedTab(tab);
     }
     
     private void setSelectedTab(NavigationTab tab) {
@@ -122,11 +137,9 @@ public class FNavigationBar extends FTitleBarBase {
     }
     
     public void closeTab(INavigationTabData data) {
-        for (NavigationTab tab : tabs) {
-            if (tab.data == data) {
-                closeTab(tab);
-                return;
-            }
+        NavigationTab tab = getTab(data);
+        if (tab != null) {
+            closeTab(tab);
         }
     }
     

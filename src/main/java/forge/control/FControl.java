@@ -140,7 +140,7 @@ public enum FControl implements KeyEventDispatcher {
         if (this.game != null) {
             userPrompt = "A game is currently active. " + userPrompt;
         }
-        if (!MenuUtil.getUserConfirmation(userPrompt, "Exit Forge")) {
+        if (!MenuUtil.getUserConfirmation(userPrompt, "Exit Forge", this.game == null)) { //default Yes if no game active
             return false;
         }
         if (!CDeckEditorUI.SINGLETON_INSTANCE.canExit()) {

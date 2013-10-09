@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang.StringUtils;
 
+import forge.Singletons;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.controllers.DeckController;
 import forge.gui.deckeditor.views.VCurrentDeck;
@@ -82,8 +83,8 @@ public class SEditorIO {
      */
     @SuppressWarnings("unchecked")
     public static boolean confirmSaveChanges() {
-        if (!((DeckController<DeckBase>) CDeckEditorUI
-                .SINGLETON_INSTANCE.getCurrentEditorController().getDeckController()).isSaved()) {
+        if (!((DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController()).isSaved()) {
+            Singletons.getView().getNavigationBar().ensureTabActive(CDeckEditorUI.SINGLETON_INSTANCE); //ensure Deck Editor is active before showing dialog
             final int choice = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                     "Save changes to current deck?",
                     "Save Changes?",
