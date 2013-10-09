@@ -197,7 +197,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
     public JLabel getLblErrBooster() {
         return lblErrBooster;
     }
-    
+
     public void focusFirstTextbox() {
         focusTarget.requestFocusInWindow();
     }
@@ -317,6 +317,9 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
 
         pnlDifficulty.add(new FLabel.Builder().text("Starting snow lands").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_SNOW_LANDS, QuestPreferencesErrType.DIFFICULTY), constraints1 + ", wrap");
+
+        pnlDifficulty.add(new FLabel.Builder().text("Color bias (1-10)").build(), constraints2);
+        pnlDifficulty.add(new PrefInput(QPref.STARTING_POOL_COLOR_BIAS, QuestPreferencesErrType.DIFFICULTY), constraints1 + ", wrap");
 
         pnlDifficulty.add(new FLabel.Builder().text("Penalty for loss").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.PENALTY_LOSS, QuestPreferencesErrType.DIFFICULTY), constraints1 + ", wrap");

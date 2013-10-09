@@ -39,6 +39,7 @@ import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PrintSheet;
 import forge.item.TournamentPack;
+import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
@@ -94,9 +95,11 @@ public final class BoosterUtils {
                 colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.BLACK));
                 colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.GREEN));
             }
+
             // Add some extra filters of the preferred color if chosen
             if (preferred) {
-                for (int i = 0; i < 6; i++) {
+                final int colorBias =  Singletons.getModel().getQuestPreferences().getPrefInt(QPref.STARTING_POOL_COLOR_BIAS);
+                for (int i = 0; i < colorBias; i++) {
                     colorFilters.add(CardRulesPredicates.isMonoColor(userPrefs.getPreferredColor()));
                 }
             }

@@ -176,6 +176,9 @@ public class QuestPreferencesHandler extends JPanel {
         pnlDifficulty.add(new FLabel.Builder().text("Starting snow lands").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.STARTING_SNOW_LANDS, ErrType.DIFFICULTY), constraints1 + ", wrap");
 
+        pnlDifficulty.add(new FLabel.Builder().text("Color bias (1-10)").build(), constraints2);
+        pnlDifficulty.add(new PrefInput(QPref.STARTING_POOL_COLOR_BIAS, ErrType.DIFFICULTY), constraints1 + ", wrap");
+
         pnlDifficulty.add(new FLabel.Builder().text("Penalty for loss").build(), constraints2);
         pnlDifficulty.add(new PrefInput(QPref.PENALTY_LOSS, ErrType.DIFFICULTY), constraints1 + ", wrap");
 
@@ -401,6 +404,13 @@ public class QuestPreferencesHandler extends JPanel {
                     return "Value too small (minimum 1).";
                 } else if (val > 25) {
                     return "Value too large (maximum 25).";
+                }
+                break;
+            case STARTING_POOL_COLOR_BIAS:
+                if (val < 1) {
+                    return "Bias value too small (minimum 1).";
+                } else if (val > 10) {
+                    return "Bias value too large (maximum 10).";
                 }
                 break;
             default:

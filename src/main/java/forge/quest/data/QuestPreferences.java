@@ -70,6 +70,9 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         STARTING_BASIC_LANDS("20"),
         STARTING_SNOW_LANDS("5"),
 
+        // Starting pool color bias effect
+        STARTING_POOL_COLOR_BIAS("6"),
+
         // Commons in your starting pool, by difficulty
         STARTING_COMMONS_EASY("82"),
         STARTING_COMMONS_MEDIUM("80"),
