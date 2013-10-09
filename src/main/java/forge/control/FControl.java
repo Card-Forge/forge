@@ -470,8 +470,6 @@ public enum FControl implements KeyEventDispatcher {
         //Set Field shown to current player.
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(game.getPlayers().get(0));
         SDisplayUtil.showTab(nextField);
-
-        Singletons.getView().getNavigationBar().addNavigationTab(game, true);
     }
 
     /* (non-Javadoc)

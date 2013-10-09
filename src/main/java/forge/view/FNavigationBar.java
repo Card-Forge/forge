@@ -74,8 +74,8 @@ public class FNavigationBar extends FTitleBarBase {
         layout.putConstraint(SpringLayout.SOUTH, btnForge, -1, SpringLayout.SOUTH, this);
         addForgeButtonListeners();
 
-        addNavigationTab(CHomeUI.SINGLETON_INSTANCE, false);
-        addNavigationTab(CDeckEditorUI.SINGLETON_INSTANCE, false);
+        addNavigationTab(CHomeUI.SINGLETON_INSTANCE);
+        addNavigationTab(CDeckEditorUI.SINGLETON_INSTANCE);
 
         super.addControls();
 
@@ -85,7 +85,7 @@ public class FNavigationBar extends FTitleBarBase {
         updateClockVisibility();
     }
     
-    public void addNavigationTab(INavigationTabData data, boolean autoSelect) {
+    private NavigationTab addNavigationTab(INavigationTabData data) {
         NavigationTab tab = new NavigationTab(data);
         if (tabs.size() == 0) {
             tab.setSelected(true);
@@ -98,9 +98,7 @@ public class FNavigationBar extends FTitleBarBase {
         layout.putConstraint(SpringLayout.SOUTH, tab, 0, SpringLayout.SOUTH, this);
         tabs.add(tab);
         add(tab);
-        if (autoSelect) {
-            setSelectedTab(tab);
-        }
+        return tab;
     }
     
     public void setSelectedTab(INavigationTabData data) {
@@ -110,7 +108,7 @@ public class FNavigationBar extends FTitleBarBase {
                 return;
             }
         }
-        addNavigationTab(data, true); //if tab not found, add and select it
+        setSelectedTab(addNavigationTab(data)); //if tab not found, add and select it
     }
     
     private void setSelectedTab(NavigationTab tab) {
