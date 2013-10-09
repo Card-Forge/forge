@@ -110,6 +110,7 @@ public class FNavigationBar extends FTitleBarBase {
                 return;
             }
         }
+        addNavigationTab(data, true); //if tab not found, add and select it
     }
     
     private void setSelectedTab(NavigationTab tab) {

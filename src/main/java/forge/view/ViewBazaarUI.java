@@ -6,18 +6,23 @@ import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
+import forge.Singletons;
 import forge.control.ControlBazaarUI;
+import forge.control.FControl;
+import forge.control.FControl.Screens;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.quest.bazaar.QuestBazaarManager;
 import forge.quest.gui.ViewStall;
+import forge.view.FNavigationBar.INavigationTabData;
 
 
 /** Lays out containers and borders for resizeable layout and
  *  instantiates top-level controller for bazaar UI. */
 @SuppressWarnings("serial")
-public class ViewBazaarUI extends FPanel {
+public class ViewBazaarUI extends FPanel implements INavigationTabData {
     private final JPanel pnlAllStalls;
     private final ViewStall pnlSingleStall;
     private final ControlBazaarUI control;
@@ -99,5 +104,46 @@ public class ViewBazaarUI extends FPanel {
      */
     public ViewStall getPnlSingleStall() {
         return this.pnlSingleStall;
+    }
+    
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#getTabCaption()
+     */
+    @Override
+    public String getTabCaption() {
+        return "Bazaar";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#getTabIcon()
+     */
+    @Override
+    public SkinImage getTabIcon() {
+        return FSkin.getIcon(FSkin.QuestIcons.ICO_BOTTLES);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#getTabDestScreen()
+     */
+    @Override
+    public Screens getTabDestScreen() {
+        return Screens.QUEST_BAZAAR;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#canCloseTab()
+     */
+    @Override
+    public String getTabCloseButtonTooltip() {
+        return "Leave Bazaar";
+    }
+
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#onClosingTab()
+     */
+    @Override
+    public boolean onClosingTab() {
+        Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
+        return true;
     }
 }

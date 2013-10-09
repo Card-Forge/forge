@@ -25,7 +25,6 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +72,7 @@ import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.gui.menus.ForgeMenu;
 import forge.gui.menus.MenuUtil;
+import forge.gui.toolbox.FAbsolutePositioner;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
 import forge.properties.ForgePreferences;
@@ -102,8 +102,6 @@ public enum FControl implements KeyEventDispatcher {
     private Screens state = Screens.UNKNOWN;
     private boolean altKeyLastDown;
 
-    private WindowListener waDefault, waLeaveBazaar;
-
     public static enum Screens {
         UNKNOWN,
         HOME_SCREEN,
@@ -127,23 +125,14 @@ public enum FControl implements KeyEventDispatcher {
      * instantiated separately by each state's top level view class.
      */
     private FControl() {
-        this.waDefault = new WindowAdapter() {
+        Singletons.getView().getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
                 if (!exitForge()) {
                     Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 }
             }
-        };
-
-        // "Close" button override while inside bazaar (will probably be used later for other things)
-        this.waLeaveBazaar = new WindowAdapter() {
-            @Override
-            public void windowClosing(final WindowEvent e) {
-                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                changeState(Screens.HOME_SCREEN);
-            }
-        };
+        });
     }
     
     public boolean canExitForge(boolean forRestart) {
@@ -235,9 +224,6 @@ public enum FControl implements KeyEventDispatcher {
         clearChildren(JLayeredPane.DEFAULT_LAYER);
         this.state = screen;
 
-        Singletons.getView().getFrame().removeWindowListener(waDefault);
-        Singletons.getView().getFrame().removeWindowListener(waLeaveBazaar);
-
         // Fire up new state
         switch (screen) {
         case HOME_SCREEN:
@@ -246,7 +232,6 @@ public enum FControl implements KeyEventDispatcher {
             CHomeUI.SINGLETON_INSTANCE.initialize();
             FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
-            Singletons.getView().getFrame().addWindowListener(waDefault);
             break;
 
         case MATCH_SCREEN:
@@ -256,7 +241,6 @@ public enum FControl implements KeyEventDispatcher {
             showMatchBackgroundImage();
             SOverlayUtils.showTargetingOverlay();
             Singletons.getView().getNavigationBar().setSelectedTab(this.game);
-            Singletons.getView().getFrame().addWindowListener(waDefault);
             break;
 
         case DECK_EDITOR_CONSTRUCTED:
@@ -269,15 +253,15 @@ public enum FControl implements KeyEventDispatcher {
             CDeckEditorUI.SINGLETON_INSTANCE.initialize();
             FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
-            Singletons.getView().getFrame().addWindowListener(waDefault);
             break;
 
         case QUEST_BAZAAR:
             SOverlayUtils.hideTargetingOverlay();
+            FAbsolutePositioner.SINGLETON_INSTANCE.hideAll();
             display.add(Singletons.getView().getViewBazaar(), JLayeredPane.DEFAULT_LAYER);
             FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(false);
             sizeChildren();
-            Singletons.getView().getFrame().addWindowListener(waLeaveBazaar);
+            Singletons.getView().getNavigationBar().setSelectedTab(Singletons.getView().getViewBazaar());
             break;
 
         default:
