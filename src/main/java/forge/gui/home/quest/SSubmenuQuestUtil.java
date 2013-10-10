@@ -249,7 +249,7 @@ public class SSubmenuQuestUtil {
     
     /** */
     public static void showSpellShop() {
-        if (!checkActiveQuest("visit the Spell Shop.")) {
+        if (!checkActiveQuest("Visit the Spell Shop.")) {
             return;
         }
         Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_QUEST);
@@ -259,7 +259,7 @@ public class SSubmenuQuestUtil {
 
     /** */
     public static void showBazaar() {
-        if (!checkActiveQuest("Visit the Bazzar.")) {
+        if (!checkActiveQuest("Visit the Bazaar.")) {
             return;
         }
         Singletons.getControl().changeState(FControl.Screens.QUEST_BAZAAR);
