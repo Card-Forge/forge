@@ -167,7 +167,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Player opponent = ai.getOpponent();
 
         if (sa.hasParam("Origin")) {
-            origin = ZoneType.smartValueOf(sa.getParam("Origin"));
+            try {
+                origin = ZoneType.smartValueOf(sa.getParam("Origin"));
+            } catch (IllegalArgumentException ex) {
+                // This happens when Origin is something like
+                // "Graveyard,Library" (Doomsday)
+                return false;
+            }
         }
         final String destination = sa.getParam("Destination");
 
