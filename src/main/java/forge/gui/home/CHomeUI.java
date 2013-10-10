@@ -190,6 +190,7 @@ public enum CHomeUI implements ICDoc, IMenuProvider, INavigationTabData {
      */
     @Override
     public boolean onClosingTab() {
+        Singletons.getControl().exitForge();
         return false; //don't allow closing Home tab
     }
 }

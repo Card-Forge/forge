@@ -39,13 +39,13 @@ public final class MenuUtil {
         int reply = JOptionPane.showOptionDialog(
                 JOptionPane.getRootFrame(), 
                 prompt, 
-                dialogTitle, 
+                dialogTitle,
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
                 options[defaultYes ? 0 : 1]);
-        return (reply == JOptionPane.YES_OPTION);                      
+        return (reply == JOptionPane.YES_OPTION);
     }    
 
     public static void setMenuProvider(IMenuProvider provider) {

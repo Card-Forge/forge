@@ -615,6 +615,9 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider, INavigationTabData {
      */
     @Override
     public boolean onClosingTab() {
+        if (canExit()) {
+            Singletons.getControl().changeState(Screens.HOME_SCREEN);
+        }
         return false; //don't allow closing Deck Editor tab
     }
 }

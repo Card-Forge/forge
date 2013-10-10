@@ -135,6 +135,10 @@ public class FNavigationBar extends FTitleBarBase {
             selectedTab = tab;
         }
     }
+
+    public void closeSelectedTab() {
+        closeTab(selectedTab);
+    }
     
     public void closeTab(INavigationTabData data) {
         NavigationTab tab = getTab(data);
@@ -379,7 +383,7 @@ public class FNavigationBar extends FTitleBarBase {
                             Singletons.getControl().changeStateAutoFixLayout(data.getTabDestScreen(), NavigationTab.this.getText());
                         }
                     }
-                    else if (SwingUtilities.isMiddleMouseButton(e)) {
+                    else if (SwingUtilities.isMiddleMouseButton(e) && data.getTabCloseButtonTooltip() != null) {
                         FNavigationBar.this.closeTab(NavigationTab.this);
                     }
                 }

@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.GameLogEntryType;
 import forge.Singletons;
+import forge.control.FControl.CloseAction;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.gui.framework.DragCell;
@@ -87,6 +88,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     // ComboBox items are added in CSubmenuPreferences since this is just the View.
     private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<GameLogEntryType>("Game Log Verbosity:");
+    private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<CloseAction>("Close Action:");
     private final FComboBoxPanel<String> cbpAiProfiles = new FComboBoxPanel<String>("AI Personality:");
 
     /**
@@ -174,6 +176,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbUseThemes, regularConstraints);
         pnlPrefs.add(new NoteLabel("Currently only applies to UIManager-related theme settings. (RESTART REQUIRED)"), regularConstraints);
+        
+        pnlPrefs.add(cbpCloseAction, "w 80%!, gap 10% 0 0 10px, span 2 1");
+        pnlPrefs.add(new NoteLabel("Changes what happens when clicking the X button in the upper right."), regularConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints + ", gaptop 2%");
@@ -445,6 +450,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
+    }
+    
+    public FComboBoxPanel<CloseAction> getCloseActionComboBoxPanel() {
+        return cbpCloseAction;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

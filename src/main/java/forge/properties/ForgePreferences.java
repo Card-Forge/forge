@@ -22,6 +22,7 @@ import java.util.List;
 import forge.Constant;
 import forge.Constant.Preferences;
 import forge.GameLogEntryType;
+import forge.control.FControl.CloseAction;
 import forge.game.ai.AiProfileUtil;
 import forge.gui.home.EMenuItem;
 import forge.gui.match.VMatchUI;
@@ -69,6 +70,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_THEMED_COMBOBOX ("true"),                // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),
         UI_HIDE_GAME_TABS ("false"),                // Visibility of tabs in match screen.
+        UI_CLOSE_ACTION (CloseAction.NONE.toString()),
 
         UI_FOR_TOUCHSCREN("false"),
 

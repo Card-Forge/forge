@@ -18,6 +18,7 @@ import forge.Command;
 import forge.Constant.Preferences;
 import forge.GameLogEntryType;
 import forge.Singletons;
+import forge.control.FControl.CloseAction;
 import forge.control.FControl.Screens;
 import forge.control.RestartUtil;
 import forge.game.ai.AiProfileUtil;
@@ -116,9 +117,9 @@ public enum CSubmenuPreferences implements ICDoc {
         });
 
         initializeGameLogVerbosityComboBox();
+        initializeCloseActionComboBox();
         initializeAiProfilesComboBox();
         initializePlayerNameButton();
-
     }
 
 
@@ -202,6 +203,19 @@ public enum CSubmenuPreferences implements ICDoc {
         FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();
         JComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
         GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
+        panel.setComboBox(comboBox, selectedItem);
+    }
+    
+    private void initializeCloseActionComboBox() {
+        final FComboBoxPanel<CloseAction> panel = this.view.getCloseActionComboBoxPanel();
+        final JComboBox<CloseAction> comboBox = new JComboBox<CloseAction>(CloseAction.values());
+        comboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent e) {
+                Singletons.getControl().setCloseAction((CloseAction) comboBox.getSelectedItem());
+            }
+        });
+        CloseAction selectedItem = CloseAction.valueOf(this.prefs.getPref(FPref.UI_CLOSE_ACTION));
         panel.setComboBox(comboBox, selectedItem);
     }
 

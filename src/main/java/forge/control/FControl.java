@@ -101,6 +101,7 @@ public enum FControl implements KeyEventDispatcher {
     private JLayeredPane display;
     private Screens state = Screens.UNKNOWN;
     private boolean altKeyLastDown;
+    private CloseAction closeAction;
 
     public static enum Screens {
         UNKNOWN,
@@ -112,6 +113,12 @@ public enum FControl implements KeyEventDispatcher {
         DECK_EDITOR_QUEST,
         QUEST_CARD_SHOP,
         DRAFTING_PROCESS
+    }
+
+    public static enum CloseAction {
+        NONE,
+        CLOSE_SCREEN,
+        EXIT_FORGE
     }
 
     private final SoundSystem soundSystem = new SoundSystem();
@@ -128,11 +135,55 @@ public enum FControl implements KeyEventDispatcher {
         Singletons.getView().getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
-                if (!exitForge()) {
-                    Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                switch (closeAction) {
+                case NONE: //prompt user for close action if not previously specified
+                    Object[] options = {"Close Screen", "Exit Forge", "Cancel"};
+                    int reply = JOptionPane.showOptionDialog(
+                            JOptionPane.getRootFrame(), 
+                            "Forge now supports navigation tabs which allow closing and switching between different screens with ease.\n"
+                            + "As a result, you no longer need to use the X button in the upper right to close the current screen and go back.\n"
+                            + "\n"
+                            + "Please select what you want to happen when clicking the X button in the upper right. This choice will be used\n"
+                            + "going forward and you will not see this message again. You can change this behavior at any time in Preferences.",
+                            "Select Your Close Action",
+                            JOptionPane.YES_NO_CANCEL_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE,
+                            null,
+                            options,
+                            options[2]);
+                    switch (reply) {
+                    case 0: //Close Screen
+                        setCloseAction(CloseAction.CLOSE_SCREEN);
+                        windowClosing(e); //call again to apply chosen close action
+                        return;
+                    case 1: //Exit Forge
+                        setCloseAction(CloseAction.EXIT_FORGE);
+                        windowClosing(e); //call again to apply chosen close action
+                        return;
+                    case 2: //Cancel
+                        break;
+                    }
+                    break;
+                case CLOSE_SCREEN:
+                    Singletons.getView().getNavigationBar().closeSelectedTab();
+                    break;
+                case EXIT_FORGE:
+                    if (exitForge()) { return; }
+                    break;
                 }
+                //prevent closing Forge if we reached this point
+                Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             }
         });
+    }
+
+    public void setCloseAction(CloseAction closeAction0) {
+        if (this.closeAction == closeAction0) { return; }
+        this.closeAction = closeAction0;
+
+        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        prefs.setPref(FPref.UI_CLOSE_ACTION, closeAction0.toString());
+        prefs.save();
     }
     
     public boolean canExitForge(boolean forRestart) {
@@ -164,10 +215,14 @@ public enum FControl implements KeyEventDispatcher {
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
 
-        forgeMenu = new ForgeMenu();
+        this.forgeMenu = new ForgeMenu();
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
+
+        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        
+        this.closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
 
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("About to load current quest.");
         // Preload quest data if present
