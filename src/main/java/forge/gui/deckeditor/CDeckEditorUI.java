@@ -603,18 +603,26 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider, INavigationTabData {
     }
 
     /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#allowTabClose()
+     */
+    @Override
+    public boolean allowTabClose() {
+        return false;
+    }
+
+    /* (non-Javadoc)
      * @see forge.view.FNavigationBar.INavigationTabData#canCloseTab()
      */
     @Override
-    public String getTabCloseButtonTooltip() {
-        return null; //return null to indicate not to show close button
+    public String getCloseButtonTooltip() {
+        return "Close Editor";
     }
 
     /* (non-Javadoc)
      * @see forge.view.FNavigationBar.INavigationTabData#onClosingTab()
      */
     @Override
-    public boolean onClosingTab() {
+    public boolean onClosing() {
         if (canExit()) {
             Singletons.getControl().changeState(Screens.HOME_SCREEN);
         }

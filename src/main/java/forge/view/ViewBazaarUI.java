@@ -129,12 +129,20 @@ public class ViewBazaarUI extends FPanel implements INavigationTabData {
     public Screens getTabDestScreen() {
         return Screens.QUEST_BAZAAR;
     }
+    
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#allowTabClose()
+     */
+    @Override
+    public boolean allowTabClose() {
+        return true;
+    }
 
     /* (non-Javadoc)
      * @see forge.view.FNavigationBar.INavigationTabData#canCloseTab()
      */
     @Override
-    public String getTabCloseButtonTooltip() {
+    public String getCloseButtonTooltip() {
         return "Leave Bazaar";
     }
 
@@ -142,7 +150,7 @@ public class ViewBazaarUI extends FPanel implements INavigationTabData {
      * @see forge.view.FNavigationBar.INavigationTabData#onClosingTab()
      */
     @Override
-    public boolean onClosingTab() {
+    public boolean onClosing() {
         Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
         return true;
     }

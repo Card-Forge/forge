@@ -215,8 +215,7 @@ public enum CSubmenuPreferences implements ICDoc {
                 Singletons.getControl().setCloseAction((CloseAction) comboBox.getSelectedItem());
             }
         });
-        CloseAction selectedItem = CloseAction.valueOf(this.prefs.getPref(FPref.UI_CLOSE_ACTION));
-        panel.setComboBox(comboBox, selectedItem);
+        panel.setComboBox(comboBox, Singletons.getControl().getCloseAction());
     }
 
     private void initializeAiProfilesComboBox() {

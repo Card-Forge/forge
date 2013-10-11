@@ -176,10 +176,15 @@ public enum FControl implements KeyEventDispatcher {
             }
         });
     }
+    
+    public CloseAction getCloseAction() {
+        return this.closeAction;
+    }
 
     public void setCloseAction(CloseAction closeAction0) {
         if (this.closeAction == closeAction0) { return; }
         this.closeAction = closeAction0;
+        Singletons.getView().getNavigationBar().updateBtnCloseTooltip();
 
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
         prefs.setPref(FPref.UI_CLOSE_ACTION, closeAction0.toString());

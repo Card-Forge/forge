@@ -176,20 +176,28 @@ public enum CHomeUI implements ICDoc, IMenuProvider, INavigationTabData {
     public Screens getTabDestScreen() {
         return Screens.HOME_SCREEN;
     }
+    
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#allowTabClose()
+     */
+    @Override
+    public boolean allowTabClose() {
+        return false;
+    }
 
     /* (non-Javadoc)
      * @see forge.view.FNavigationBar.INavigationTabData#getTabCloseButtonTooltip()
      */
     @Override
-    public String getTabCloseButtonTooltip() {
-        return null; //return null to indicate not to show close button
+    public String getCloseButtonTooltip() {
+        return "Exit Forge";
     }
 
     /* (non-Javadoc)
      * @see forge.view.FNavigationBar.INavigationTabData#onClosingTab()
      */
     @Override
-    public boolean onClosingTab() {
+    public boolean onClosing() {
         Singletons.getControl().exitForge();
         return false; //don't allow closing Home tab
     }

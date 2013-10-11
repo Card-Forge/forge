@@ -64,7 +64,21 @@ public class FNavigationBar extends FTitleBarBase {
         FSkin.get(clock).setForeground(foreColor);
         addControls();        
         setupPnlReveal();
-        btnClose.setToolTipText("Exit Forge");
+        updateBtnCloseTooltip();
+    }
+    
+    public void updateBtnCloseTooltip() {
+        switch (Singletons.getControl().getCloseAction()) {
+        case NONE:
+            btnClose.setToolTipText("Close");
+            break;
+        case CLOSE_SCREEN:
+            btnClose.setToolTipText(this.selectedTab.data.getCloseButtonTooltip());
+            break;
+        case EXIT_FORGE:
+            btnClose.setToolTipText("Exit Forge");
+            break;
+        }
     }
     
     @Override
@@ -133,6 +147,7 @@ public class FNavigationBar extends FTitleBarBase {
             }
             tab.setSelected(true);
             selectedTab = tab;
+            updateBtnCloseTooltip();
         }
     }
 
@@ -149,7 +164,7 @@ public class FNavigationBar extends FTitleBarBase {
     
     private void closeTab(NavigationTab tab) {
         if (tab == null) { return; }
-        if (!tab.data.onClosingTab()) { return; } //give data a chance to perform special close handling and/or cancel closing tab
+        if (!tab.data.onClosing()) { return; } //give data a chance to perform special close handling and/or cancel closing tab
 
         if (tab.selected) {
             setSelectedTab(tabs.get(0)); //select home tab if selected tab closed (TODO: support navigation history and go to previous tab instead)
@@ -333,8 +348,9 @@ public class FNavigationBar extends FTitleBarBase {
         public String getTabCaption();
         public SkinImage getTabIcon();
         public Screens getTabDestScreen();
-        public String getTabCloseButtonTooltip();
-        public boolean onClosingTab();
+        public boolean allowTabClose();
+        public String getCloseButtonTooltip();
+        public boolean onClosing();
     }
     
     private final class NavigationTab extends JLabel implements ILocalRepaint {
@@ -357,10 +373,9 @@ public class FNavigationBar extends FTitleBarBase {
             skin.setFont(FSkin.getFont(fontSize));
             
             int closeButtonOffset;
-            String closeButtonTooltip = data.getTabCloseButtonTooltip();
-            if (closeButtonTooltip != null) {
+            if (data.allowTabClose()) {
                 btnClose = new CloseButton();
-                btnClose.setToolTipText(closeButtonTooltip);
+                btnClose.setToolTipText(data.getCloseButtonTooltip());
                 closeButtonOffset = btnClose.getPreferredSize().width;
                 SpringLayout tabLayout = new SpringLayout();
                 setLayout(tabLayout);
@@ -383,7 +398,7 @@ public class FNavigationBar extends FTitleBarBase {
                             Singletons.getControl().changeStateAutoFixLayout(data.getTabDestScreen(), NavigationTab.this.getText());
                         }
                     }
-                    else if (SwingUtilities.isMiddleMouseButton(e) && data.getTabCloseButtonTooltip() != null) {
+                    else if (SwingUtilities.isMiddleMouseButton(e) && data.allowTabClose()) {
                         FNavigationBar.this.closeTab(NavigationTab.this);
                     }
                 }

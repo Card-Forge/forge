@@ -617,20 +617,28 @@ public class Game implements INavigationTabData {
     public Screens getTabDestScreen() {
         return Screens.MATCH_SCREEN;
     }
+    
+    /* (non-Javadoc)
+     * @see forge.view.FNavigationBar.INavigationTabData#allowTabClose()
+     */
+    @Override
+    public boolean allowTabClose() {
+        return true;
+    }
 
     /* (non-Javadoc)
      * @see forge.view.FNavigationBar.INavigationTabData#canCloseTab()
      */
     @Override
-    public String getTabCloseButtonTooltip() {
+    public String getCloseButtonTooltip() {
         return "Concede Game";
     }
 
     /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#onClosingTab()
+     * @see forge.view.FNavigationBar.INavigationTabData#onClosing()
      */
     @Override
-    public boolean onClosingTab() {
+    public boolean onClosing() {
         if (!isGameOver()) {
             Singletons.getControl().stopGame();
             return false; //delay hiding tab
