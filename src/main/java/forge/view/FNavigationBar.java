@@ -221,11 +221,6 @@ public class FNavigationBar extends FTitleBarBase {
         timeMenuHidden = System.currentTimeMillis();
     }
     
-    public void setForgeButtonEnabled(boolean enabled0) {
-        btnForge.setEnabled(enabled0);
-        forgeMenu.getPopupMenu().setEnabled(enabled0);
-    }
-    
     //setup panel used to reveal navigation bar when hidden
     private void setupPnlReveal() {
         pnlReveal.setLocation(0, 0);
@@ -307,6 +302,15 @@ public class FNavigationBar extends FTitleBarBase {
             else {
                 stopReveal();
             }
+        }
+    }
+    
+    @Override
+    public void setEnabled(boolean enabled0) {
+        btnForge.setEnabled(enabled0);
+        forgeMenu.getPopupMenu().setEnabled(enabled0);
+        for (NavigationTab tab : tabs) {
+            tab.setEnabled(enabled0);
         }
     }
 
@@ -394,6 +398,7 @@ public class FNavigationBar extends FTitleBarBase {
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
+                    if (!NavigationTab.this.isEnabled()) { return; }
                     if (SwingUtilities.isLeftMouseButton(e)) {
                         if (!selected) {
                             FNavigationBar.this.setSelectedTab(NavigationTab.this);
@@ -406,12 +411,13 @@ public class FNavigationBar extends FTitleBarBase {
                 }
                 @Override
                 public void mouseEntered(MouseEvent e) {
+                    if (!NavigationTab.this.isEnabled()) { return; }
                     hovered = true;
                     repaintSelf();
                 }
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    if (btnClose == null || !btnClose.getBounds().contains(e.getPoint())) { //ensure mouse didn't simply move onto close button
+                    if (hovered && (btnClose == null || !btnClose.getBounds().contains(e.getPoint()))) { //ensure mouse didn't simply move onto close button
                         hovered = false;
                         repaintSelf();
                     }
@@ -436,6 +442,14 @@ public class FNavigationBar extends FTitleBarBase {
             else {
                 super.setIcon(null);
             }
+        }
+        
+        @Override
+        public void setEnabled(boolean enabled0) {
+            if (!enabled0 && hovered) {
+                hovered = false; //ensure hovered reset if disabled
+            }
+            super.setEnabled(enabled0);
         }
 
         @Override

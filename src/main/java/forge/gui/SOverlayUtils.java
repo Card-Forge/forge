@@ -126,7 +126,7 @@ public final class SOverlayUtils {
     
     private static Component prevFocusOwner;
     public static void showOverlay() {
-        Singletons.getView().getNavigationBar().setForgeButtonEnabled(false);
+        Singletons.getView().getNavigationBar().setEnabled(false);
         prevFocusOwner = FocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
         FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
         // ensure no background element has focus
@@ -138,7 +138,7 @@ public final class SOverlayUtils {
      * Removes child components and closes overlay.
      */
     public static void hideOverlay() {
-        Singletons.getView().getNavigationBar().setForgeButtonEnabled(true);
+        Singletons.getView().getNavigationBar().setEnabled(true);
         FOverlay.SINGLETON_INSTANCE.getPanel().removeAll();
         FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
         if (null != prevFocusOwner) {
