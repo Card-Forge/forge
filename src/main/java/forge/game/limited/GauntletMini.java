@@ -110,6 +110,7 @@ public class GauntletMini {
         }
 
         currentRound++;
+        Singletons.getControl().endCurrentGame();
         startRound();
     }
 
