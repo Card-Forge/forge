@@ -113,7 +113,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
 
         if (divideOnResolution) {
             // Dividing Damage up to multiple targets using combat damage box
-            // Currently only used for Master of the Wild Hutn
+            // Currently only used for Master of the Wild Hunt
             List<Player> players = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DividerOnResolution"), sa);
             if (players.isEmpty()) {
                 return;
