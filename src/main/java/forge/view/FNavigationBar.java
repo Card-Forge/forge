@@ -312,6 +312,7 @@ public class FNavigationBar extends FTitleBarBase {
         for (NavigationTab tab : tabs) {
             tab.setEnabled(enabled0);
         }
+        btnClose.setEnabled(enabled0); //don't allow closing screens using Close button while disabled
     }
 
     @Override
@@ -449,6 +450,9 @@ public class FNavigationBar extends FTitleBarBase {
             if (!enabled0 && hovered) {
                 hovered = false; //ensure hovered reset if disabled
             }
+            if (btnClose != null) {
+                btnClose.setEnabled(enabled0);
+            }
             super.setEnabled(enabled0);
         }
 
@@ -485,6 +489,7 @@ public class FNavigationBar extends FTitleBarBase {
                 addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e) {
+                        if (!CloseButton.this.isEnabled()) { return; }
                         if (SwingUtilities.isLeftMouseButton(e)) {
                             pressed = true;
                             repaintSelf();
@@ -492,27 +497,36 @@ public class FNavigationBar extends FTitleBarBase {
                     }
                     @Override
                     public void mouseReleased(MouseEvent e) {
-                        if (SwingUtilities.isLeftMouseButton(e)) {
-                            if (pressed) {
-                                pressed = false;
-                                if (hovered) { //only handle click if mouse released over button
-                                    repaintSelf();
-                                    FNavigationBar.this.closeTab(NavigationTab.this);
-                                }
+                        if (pressed && SwingUtilities.isLeftMouseButton(e)) {
+                            pressed = false;
+                            if (hovered) { //only handle click if mouse released over button
+                                repaintSelf();
+                                FNavigationBar.this.closeTab(NavigationTab.this);
                             }
                         }
                     }
                     @Override
                     public void mouseEntered(MouseEvent e) {
+                        if (!CloseButton.this.isEnabled()) { return; }
                         hovered = true;
                         repaintSelf();
                     }
                     @Override
                     public void mouseExited(MouseEvent e) {
-                        hovered = false;
-                        repaintSelf();
+                        if (hovered) {
+                            hovered = false;
+                            repaintSelf();
+                        }
                     }
                 });
+            }
+            
+            @Override
+            public void setEnabled(boolean enabled0) {
+                if (!enabled0 && hovered) {
+                    hovered = false; //ensure hovered reset if disabled
+                }
+                super.setEnabled(enabled0);
             }
             
             @Override

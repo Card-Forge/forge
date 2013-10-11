@@ -125,6 +125,7 @@ public abstract class FTitleBarBase extends JMenuBar {
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
+                    if (!TitleBarButton.this.isEnabled()) { return; }
                     if (SwingUtilities.isLeftMouseButton(e)) {
                         pressed = true;
                         repaintSelf();
@@ -132,30 +133,39 @@ public abstract class FTitleBarBase extends JMenuBar {
                 }
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    if (SwingUtilities.isLeftMouseButton(e)) {
-                        if (pressed) {
-                            pressed = false;
-                            if (hovered) { //only handle click if mouse released over button
-                                repaintSelf();
-                                onClick();
-                            }
+                    if (pressed && SwingUtilities.isLeftMouseButton(e)) {
+                        pressed = false;
+                        if (hovered) { //only handle click if mouse released over button
+                            repaintSelf();
+                            onClick();
                         }
                     }
                 }
                 @Override
                 public void mouseEntered(MouseEvent e) {
+                    if (!TitleBarButton.this.isEnabled()) { return; }
                     hovered = true;
                     repaintSelf();
                 }
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    hovered = false;
-                    repaintSelf();
+                    if (hovered) {
+                        hovered = false;
+                        repaintSelf();
+                    }
                 }
             });
         }
         
         protected abstract void onClick();
+        
+        @Override
+        public void setEnabled(boolean enabled0) {
+            if (!enabled0 && hovered) {
+                hovered = false; //ensure hovered reset if disabled
+            }
+            super.setEnabled(enabled0);
+        }
         
         @Override
         public void repaintSelf() {
