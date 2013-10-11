@@ -58,6 +58,8 @@ public class FNavigationBar extends FTitleBarBase {
 
     public FNavigationBar(FFrame f) {
         super(f);
+        this.setLocation(0, -visibleHeight); //hide by default
+        this.setPreferredSize(new Dimension(this.frame.getWidth(), visibleHeight));
         btnForge.setFocusable(false);
         btnForge.setPreferredSize(new Dimension(100, 23));
         FSkin.get(btnForge).setForeground(foreColor);
@@ -226,6 +228,7 @@ public class FNavigationBar extends FTitleBarBase {
     
     //setup panel used to reveal navigation bar when hidden
     private void setupPnlReveal() {
+        pnlReveal.setLocation(0, 0);
         pnlReveal.setVisible(hidden);
         pnlReveal.setOpaque(false);
         pnlReveal.addMouseListener(new MouseAdapter() {
@@ -249,7 +252,7 @@ public class FNavigationBar extends FTitleBarBase {
     }
     
     private void startReveal() {
-        if (this.getHeight() == visibleHeight) { return; }
+        if (this.getLocation().y == 0) { return; }
         if (revealDir == 0) {
             incrementRevealTimer.setInitialDelay(revealDelay);
             incrementRevealTimer.start();
@@ -259,7 +262,7 @@ public class FNavigationBar extends FTitleBarBase {
     }
     
     private void stopReveal() {
-        if (this.getHeight() == 0) { return; }
+        if (this.getLocation().y == -visibleHeight) { return; }
         if (revealDir == 0) {
             incrementRevealTimer.setInitialDelay(revealDelay);
             incrementRevealTimer.start();
@@ -269,14 +272,14 @@ public class FNavigationBar extends FTitleBarBase {
     }
     
     private void incrementReveal() {
-        int newHeight = this.getHeight() + revealDir * 2;
+        int newY = this.getLocation().y + revealDir * 2;
         switch (revealDir) {
             case 0:
                 incrementRevealTimer.stop();
                 return;
             case 1:
-                if (newHeight >= visibleHeight) {
-                    newHeight = visibleHeight;
+                if (newY >= 0) {
+                    newY = 0;
                     revealDir = 0;
                     incrementRevealTimer.stop();
                     checkForRevealChangeTimer.setInitialDelay(0);
@@ -284,15 +287,14 @@ public class FNavigationBar extends FTitleBarBase {
                 }
                 break;
             case -1:
-                if (newHeight <= 0) {
-                    newHeight = 0;
+                if (newY <= -visibleHeight) {
+                    newY = -visibleHeight;
                     revealDir = 0;
                     incrementRevealTimer.stop();
                 }
                 break;
         }
-        this.setSize(this.getWidth(), newHeight);
-        revalidate();
+        this.setLocation(0, newY);
         checkForRevealChange();
     }
     
@@ -317,8 +319,8 @@ public class FNavigationBar extends FTitleBarBase {
             checkForRevealChangeTimer.stop();
             pnlReveal.setVisible(hidden);
         }
-        if (visible || this.getHeight() < visibleHeight) {
-            super.setVisible(visible);
+        if (visible || this.getLocation().y < 0) {
+            setLocation(0, visible ? 0 : -visibleHeight);
         }
         else if (pnlReveal != null) { //if previously fully visible, delay hiding titlebar until mouse moves away
             checkForRevealChangeTimer.setInitialDelay(initialHideDelay); //delay hiding a bit even if mouse already outside titlebar
@@ -327,9 +329,9 @@ public class FNavigationBar extends FTitleBarBase {
     }
     
     @Override
-    public void setBounds(int x, int y, int width, int height) {
-        super.setBounds(x, y, width, height);
-        pnlReveal.setBounds(x, y, width, 1);
+    public void setSize(int width, int height) {
+        super.setSize(width, height);
+        pnlReveal.setSize(width, 1);
     }
     
     public JPanel getPnlReveal() {

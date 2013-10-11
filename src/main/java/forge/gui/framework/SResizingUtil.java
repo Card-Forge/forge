@@ -124,7 +124,7 @@ public final class SResizingUtil {
         Rectangle mainBounds = frame.getContentPane().getBounds();
 
         int navigationBarHeight = navigationBar.getPreferredSize().height;
-        navigationBar.setBounds(mainBounds.x, mainBounds.y, mainBounds.width, navigationBarHeight);
+        navigationBar.setSize(mainBounds.width, navigationBarHeight);
         navigationBar.validate();
 
         if (!frame.isTitleBarHidden()) { //adjust bounds for titlebar if not hidden
