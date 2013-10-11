@@ -24,6 +24,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
 
+import forge.view.FDialog;
+
 /**
  * <p>
  * Gui_ProgressBarWindow class.
@@ -33,7 +35,7 @@ import javax.swing.border.EmptyBorder;
  * @version $Id$
  * @since 1.0.15
  */
-public class GuiProgressBarWindow extends JDialog {
+public class GuiProgressBarWindow extends FDialog {
 
     /**
      *

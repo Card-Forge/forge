@@ -1,6 +1,5 @@
 package forge.gui;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -10,8 +9,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
@@ -24,6 +21,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.gui.match.CMatchUI;
 import forge.item.InventoryItem;
+import forge.view.FDialog;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -183,23 +181,15 @@ public class GuiChoose {
         Callable<List<T>> callable = new Callable<List<T>>() {
             @Override
             public List<T> call() throws Exception {
-                final JFrame frame = new JFrame();
                 DualListBox<T> dual = new DualListBox<T>(remainingObjects, sourceChoices, destChoices);
                 dual.setSecondColumnLabelText(top);
         
-                frame.setLayout(new BorderLayout());
-                frame.setSize(dual.getPreferredSize());
-                frame.add(dual);
-                frame.setTitle(title);
-                frame.setVisible(false);
-        
                 dual.setSideboardMode(sideboardingMode);
         
-                final JDialog dialog = new JDialog(frame, true);
+                final FDialog dialog = new FDialog();
                 dialog.setTitle(title);
                 dialog.setContentPane(dual);
                 dialog.setSize(dual.getPreferredSize());
-                dialog.setLocationRelativeTo(null);
                 dialog.pack();
                 dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 if (referenceCard != null) {
