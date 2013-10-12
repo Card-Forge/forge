@@ -1,0 +1,16 @@
+Name:Spellweaver Volute
+ManaCost:3 U U
+Types:Enchantment Aura
+K:Enchant instant card in a graveyard
+A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Instant | TgtZone$ Graveyard | TgtPrompt$ Select target instant card in a graveyard | AILogic$ Pump
+T:Mode$ SpellCast | ValidCard$ Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a sorcery spell, copy the enchanted instant card. You may cast the copy without paying its mana cost. If you do, exile the enchanted card and attach CARDNAME to another instant card in a graveyard.
+SVar:TrigCopy:AB$ Play | Cost$ 0 | Defined$ Enchanted | WithoutManaCost$ True | Optional$ True | CopyCard$ True | RememberPlayed$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ Enchanted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | Choices$ Instant | ChoiceZone$ Graveyard | Amount$ 1 | Mandatory$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ ChosenCard | Object$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spellweaver_volute.jpg
+Oracle:Enchant instant card in a graveyard\nWhenever you cast a sorcery spell, copy the enchanted instant card. You may cast the copy without paying its mana cost. If you do, exile the enchanted card and attach Spellweaver Volute to another instant card in a graveyard.

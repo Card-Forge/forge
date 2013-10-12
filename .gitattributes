@@ -10749,6 +10749,7 @@ res/cardsfolder/s/spellstutter_sprite.txt svneol=native#text/plain
 res/cardsfolder/s/spelltithe_enforcer.txt -text
 res/cardsfolder/s/spelltwine.txt -text
 res/cardsfolder/s/spellweaver_helix.txt -text svneol=unset#text/plain
+res/cardsfolder/s/spellweaver_volute.txt -text
 res/cardsfolder/s/spellwild_ouphe.txt -text
 res/cardsfolder/s/sphere_of_duty.txt svneol=native#text/plain
 res/cardsfolder/s/sphere_of_grace.txt svneol=native#text/plain
