@@ -62,6 +62,9 @@ Elemental Resonance
 AEtherplasm
 Excavator
 Snowblind
+Takklemaggot
+Spellweaver Volute
+Protective Sphere
 
 
 --------------------
