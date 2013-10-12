@@ -5851,6 +5851,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (c.isEmpty() || !this.sharesColorWith(c.get(c.size() - 1))) {
                         return false;
                     }
+                } else if (restriction.equals("ActivationColor" )) {
+                    byte manaSpent = source.getColorsPaid();
+                    if (!CardUtil.getColors(this).hasAnyColor(manaSpent)) {
+                        return false;
+                    }
                 } else {
                     for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {
                         if (card.isValid(restriction, sourceController, source) && this.sharesColorWith(card)) {

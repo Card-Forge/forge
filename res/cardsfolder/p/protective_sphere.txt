@@ -1,0 +1,11 @@
+Name:Protective Sphere
+ManaCost:2 W
+Types:Enchantment
+A:AB$ ChooseSource | Cost$ 1 PayLife<1> | Choices$ Card.SharesColorWith ActivationColor | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage that would be dealt to you this turn by a source of your choice that shares a color with the mana spent on this activation cost. (Colorless mana prevents no damage.)
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PreventFromSource | References$ PreventFromSource | RememberObjects$ Remembered | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:PreventFromSource:Mode$ PreventDamage | EffectZone$ Command | Target$ You | Source$ Card.IsRemembered | Description$ Prevent all damage that would be dealt to you by a source of your choice that shares a color with the mana spent on this activation cost.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/protective_sphere.jpg
+Oracle:{1}, Pay 1 life: Prevent all damage that would be dealt to you this turn by a source of your choice that shares a color with the mana spent on this activation cost. (Colorless mana prevents no damage.)
