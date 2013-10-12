@@ -6820,8 +6820,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         for (final String type : this.getType()) {
-            if (type.equals("AllCreatureTypes") 
-                    && (c1.hasACreatureType() || c1.typeContains("AllCreatureTypes"))) {
+            if (type.equals("AllCreatureTypes") && c1.hasACreatureType()) {
                 return true;
             }
             if (forge.card.CardType.isACreatureType(type) && c1.isType(type)) {
@@ -6896,7 +6895,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean hasACreatureType() {
         for (final String type : this.getType()) {
-            if (forge.card.CardType.isACreatureType(type)) {
+            if (forge.card.CardType.isACreatureType(type) ||  type.equals("AllCreatureTypes")) {
                 return true;
             }
         }
@@ -8129,31 +8128,31 @@ public class Card extends GameEntity implements Comparable<Card> {
                       && !source.getName().contains("Ward of Lights")) {
                         return true;
                     }
+                } else if (kw.equals("Protection from colored spells")) {
+                    if (source.isSpell() && !source.isColorless()) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from Dragons")) {
+                    if (source.isType("Dragon")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from Demons")) {
+                    if (source.isType("Demon")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from Goblins")) {
+                    if (source.isType("Goblin")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from Clerics")) {
+                    if (source.isType("Cleric")) {
+                        return true;
+                    }
+                } else if (kw.equals("Protection from Gorgons")) {
+                    if (source.isType("Gorgon")) {
+                        return true;
+                    }
                 }
-
-                if (kw.equals("Protection from colored spells")
-                        && (source.isInstant() || source.isSorcery()
-                                || (source.isAura() && !source.isInZone(ZoneType.Battlefield)))
-                        && !source.isColorless()) {
-                    return true;
-                }
-
-                if (kw.equals("Protection from Dragons") && source.isType("Dragon")) {
-                    return true;
-                }
-                if (kw.equals("Protection from Demons") && source.isType("Demon")) {
-                    return true;
-                }
-                if (kw.equals("Protection from Goblins") && source.isType("Goblin")) {
-                    return true;
-                }
-                if (kw.equals("Protection from Clerics") && source.isType("Cleric")) {
-                    return true;
-                }
-                if (kw.equals("Protection from Gorgons") && source.isType("Gorgon")) {
-                    return true;
-                }
-
             }
         }
         return false;
