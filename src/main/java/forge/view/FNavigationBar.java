@@ -559,7 +559,11 @@ public class FNavigationBar extends FTitleBarBase {
                 int y2 = getHeight() - offset - 1;
 
                 Graphics2D g2d = (Graphics2D) g;
-                skin.setGraphicsColor(g2d, NavigationTab.this.skin.getForeground());
+                SkinColor iconColor = NavigationTab.this.skin.getForeground();
+                if (!NavigationTab.this.isEnabled()) {
+                    iconColor = iconColor.alphaColor(100);
+                }
+                skin.setGraphicsColor(g2d, iconColor);
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2d.setStroke(new BasicStroke(thickness));
                 g2d.drawLine(x1, y1, x2, y2);

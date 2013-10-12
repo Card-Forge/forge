@@ -632,7 +632,6 @@ public enum FSkin {
     public static class SkinColor {
         private static final HashMap<Colors, SkinColor> baseColors = new HashMap<Colors, SkinColor>();
         private static final HashMap<String, SkinColor> derivedColors = new HashMap<String, SkinColor>();
-        private static final HashMap<SkinColor, HighContrastSkinColor> highContrastColors = new HashMap<SkinColor, HighContrastSkinColor>();
         private static final int NO_BRIGHTNESS_DELTA = 0;
         private static final int NO_STEP = -999; //needs to be large negative since small negative values are valid
         private static final int NO_ALPHA = -1;
@@ -640,6 +639,7 @@ public enum FSkin {
         private final Colors baseColor;
         private final int brightnessDelta;
         private final int step;
+        private final int contrastStep;
         private final int alpha;
         protected Color color;
         
@@ -647,40 +647,55 @@ public enum FSkin {
 
         //private constructors for color that changes with skin (use FSkin.getColor())
         private SkinColor(Colors baseColor0) {
-            this(baseColor0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_ALPHA);
+            this(baseColor0, NO_BRIGHTNESS_DELTA, NO_STEP, NO_STEP, NO_ALPHA);
         }
-        private SkinColor(Colors baseColor0, int brightnessDelta0, int step0, int alpha0) {
+        private SkinColor(Colors baseColor0, int brightnessDelta0, int step0, int contrastStep0, int alpha0) {
             this.baseColor = baseColor0;
             this.brightnessDelta = brightnessDelta0;
             this.step = step0;
+            this.contrastStep = contrastStep0;
             this.alpha = alpha0;
             this.updateColor();
         }
 
-        private SkinColor getDerivedColor(int brightnessDelta0, int step0, int alpha0) {
-            String key = this.baseColor.name() + "|" + brightnessDelta0 + "|" + step0 + "|" + alpha0;
+        private SkinColor getDerivedColor(int brightnessDelta0, int step0, int contrastStep0, int alpha0) {
+            String key = this.baseColor.name() + "|" + brightnessDelta0 + "|" + step0 + "|" + contrastStep0 + "|" + alpha0;
             SkinColor derivedColor = derivedColors.get(key);
             if (derivedColor == null) {
-                derivedColor = new SkinColor(this.baseColor, brightnessDelta0, step0, alpha0);
+                derivedColor = new SkinColor(this.baseColor, brightnessDelta0, step0, contrastStep0, alpha0);
                 derivedColors.put(key, derivedColor);
             }
             return derivedColor;
         }
 
         public SkinColor brighter() {
-            return getDerivedColor(this.brightnessDelta + 1, this.step, this.alpha);
+            return getDerivedColor(this.brightnessDelta + 1, this.step, this.contrastStep, this.alpha);
         }
 
         public SkinColor darker() {
-            return getDerivedColor(this.brightnessDelta - 1, this.step, this.alpha);
+            return getDerivedColor(this.brightnessDelta - 1, this.step, this.contrastStep, this.alpha);
         }
 
         public SkinColor stepColor(int step0) {
-            return getDerivedColor(this.brightnessDelta, step0, this.alpha);
+            if (this.step != NO_STEP) {
+                step0 += this.step;
+            }
+            return getDerivedColor(this.brightnessDelta, step0, this.contrastStep, this.alpha);
+        }
+
+        public SkinColor getContrastColor(int contrastStep0) {
+            if (this.contrastStep != NO_STEP) {
+                contrastStep0 += this.contrastStep;
+            }
+            return getDerivedColor(this.brightnessDelta, this.step, contrastStep0, this.alpha);
+        }
+
+        public SkinColor getHighContrastColor() {
+            return getContrastColor(255);
         }
 
         public SkinColor alphaColor(int alpha0) {
-            return getDerivedColor(this.brightnessDelta, this.step, alpha0);
+            return getDerivedColor(this.brightnessDelta, this.step, this.contrastStep, alpha0);
         }
 
         protected void updateColor() {
@@ -700,32 +715,11 @@ public enum FSkin {
             if (this.step != NO_STEP) {
                 this.color = FSkin.stepColor(this.color, this.step);
             }
+            if (this.contrastStep != NO_STEP) {
+                this.color = FSkin.stepColor(this.color, isColorBright(this.color) ? -this.contrastStep : this.contrastStep);
+            }
             if (this.alpha != NO_ALPHA) {
                 this.color = FSkin.alphaColor(this.color, this.alpha);
-            }
-        }
-
-        public SkinColor getContrastColor(int positiveStepIfDarkColor) {
-            return getDerivedColor(this.brightnessDelta, isColorBright(this.color) ? -positiveStepIfDarkColor : positiveStepIfDarkColor, this.alpha);
-        }
-
-        public SkinColor getHighContrastColor() {
-            HighContrastSkinColor highContrastColor = highContrastColors.get(this);
-            if (highContrastColor == null) {
-                highContrastColor = new HighContrastSkinColor(this);
-                highContrastColors.put(this, highContrastColor);
-            }
-            return highContrastColor;
-        }
-        
-        private static class HighContrastSkinColor extends SkinColor {
-            private HighContrastSkinColor(SkinColor fromColor) {
-                super(fromColor.baseColor, fromColor.brightnessDelta, fromColor.step, fromColor.alpha);
-            }
-            @Override
-            protected void updateColor() {
-                super.updateColor();
-                this.color = FSkin.getHighContrastColor(this.color);
             }
         }
     }
@@ -838,9 +832,6 @@ public enum FSkin {
                     c.updateColor();
                 }
                 for (final SkinColor c : SkinColor.derivedColors.values()) {
-                    c.updateColor();
-                }
-                for (final SkinColor c : SkinColor.highContrastColors.values()) {
                     c.updateColor();
                 }
             }

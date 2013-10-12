@@ -385,8 +385,12 @@ public abstract class FTitleBarBase extends JMenuBar {
             int x2 = getWidth() - offset - 1;
             int y2 = getHeight() - offset - 1;
 
+            SkinColor iconColor = foreColor;
+            if (!CloseButton.this.isEnabled()) {
+                iconColor = iconColor.alphaColor(100);
+            }
             Graphics2D g2d = (Graphics2D) g;
-            skin.setGraphicsColor(g2d, foreColor);
+            skin.setGraphicsColor(g2d, iconColor);
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setStroke(new BasicStroke(thickness));
             g2d.drawLine(x1, y1, x2, y2);
