@@ -84,7 +84,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
             c.setSickness(true); // summoning sickness
             c.executeTrigger(ZCTrigger.ENTERFIELD);
             
-            if (c.isLand()) {
+            /*if (c.isLand()) {
 
 
                 for( Player opp : c.getOwner().getOpponents())
@@ -97,7 +97,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                             game.getStack().addSimultaneousStackEntry(abSac);
                         }
                     }
-            } // isLand()
+            } // isLand()*/
         }
 
         if (game.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
