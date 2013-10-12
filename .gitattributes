@@ -11404,6 +11404,7 @@ res/cardsfolder/t/takeno_samurai_general.txt -text
 res/cardsfolder/t/takenos_cavalry.txt svneol=native#text/plain
 res/cardsfolder/t/takenuma.txt -text
 res/cardsfolder/t/takenuma_bleeder.txt svneol=native#text/plain
+res/cardsfolder/t/takklemaggot.txt -text
 res/cardsfolder/t/talaras_bane.txt -text
 res/cardsfolder/t/talaras_battalion.txt -text
 res/cardsfolder/t/talas_air_ship.txt svneol=native#text/plain
