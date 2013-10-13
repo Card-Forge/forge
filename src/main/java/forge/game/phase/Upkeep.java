@@ -93,49 +93,6 @@ public class Upkeep extends Phase {
 
     /**
      * <p>
-     * upkeepBraidOfFire.
-     * </p>
-     */
-    private static void upkeepBraidOfFire(final Game game) {
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-
-        final List<Card> braids = player.getCardsIn(ZoneType.Battlefield, "Braid of Fire");
-
-        for (int i = 0; i < braids.size(); i++) {
-            final Card c = braids.get(i);
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Cumulative Upkeep for ").append(c).append("\n");
-            final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    c.addCounter(CounterType.AGE, 1, true);
-                    StringBuilder rs = new StringBuilder("R");
-                    for (int ageCounters = c.getCounters(CounterType.AGE); ageCounters > 1; ageCounters--) {
-                        rs.append(" R");
-                    }
-                    Map<String, String> produced = new HashMap<String, String>();
-                    produced.put("Produced", rs.toString());
-                    final AbilityManaPart abMana = new AbilityManaPart(c, produced);
-                    if( player.getController().confirmAction(this, PlayerActionConfirmMode.BraidOfFire, sb.toString())) {
-                        abMana.produceMana(this);
-                    } else {
-                        game.getAction().sacrifice(c, null);
-                    }
-
-                }
-            };
-            upkeepAbility.setActivatingPlayer(c.getController());
-            upkeepAbility.setStackDescription(sb.toString());
-            upkeepAbility.setDescription(sb.toString());
-
-            game.getStack().addSimultaneousStackEntry(upkeepAbility);
-
-        }
-    } // upkeepBraidOfFire
-
-    /**
-     * <p>
      * upkeepEcho.
      * </p>
      */
