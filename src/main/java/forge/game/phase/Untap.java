@@ -144,7 +144,8 @@ public class Untap extends Phase {
                 if (c.isArtifact() && player.hasKeyword("You can't untap more than one artifact during your untap step.")) {
                     return false;
                 }
-                if (c.isCreature() && (game.isCardInPlay("Smoke") || game.isCardInPlay("Stoic Angel") || game.isCardInPlay("Intruder Alarm"))) {
+                if (c.isCreature() && (player.hasKeyword("You can't untap more than one creature during your untap step.")
+                        || player.hasKeyword("You can't untap creatures during your untap step."))) {
                     return false;
                 }
                 return true;
@@ -238,7 +239,7 @@ public class Untap extends Phase {
                 }
             }
         }
-        if ((game.isCardInPlay("Smoke") || game.isCardInPlay("Stoic Angel"))) {
+        if (player.hasKeyword("You can't untap more than one creature during your untap step.")) {
             final List<Card> creatures = CardLists.filter(player.getCreaturesInPlay(), tappedCanUntap);
             if (!creatures.isEmpty()) {
                 if (player.isComputer()) {
