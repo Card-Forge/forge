@@ -141,7 +141,7 @@ public class Untap extends Phase {
                 if (c.isLand() && player.hasKeyword("You can't untap more than one land during your untap step.")) {
                     return false;
                 }
-                if (c.isArtifact() && (game.isCardInPlay("Damping Field") || game.isCardInPlay("Imi Statue"))) {
+                if (c.isArtifact() && player.hasKeyword("You can't untap more than one artifact during your untap step.")) {
                     return false;
                 }
                 if (c.isCreature() && (game.isCardInPlay("Smoke") || game.isCardInPlay("Stoic Angel") || game.isCardInPlay("Intruder Alarm"))) {
@@ -223,12 +223,11 @@ public class Untap extends Phase {
                     toUntap.untap();
             }
         }
-        if (game.isCardInPlay("Damping Field") || game.isCardInPlay("Imi Statue")) {
-            final Player turnOwner = game.getPhaseHandler().getPlayerTurn();
-            final List<Card> artList = CardLists.filter(turnOwner.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS, tappedCanUntap);
+        if (player.hasKeyword("You can't untap more than one artifact during your untap step.")) {
+            final List<Card> artList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS, tappedCanUntap);
             
             if (!artList.isEmpty()) {
-                if (turnOwner.isComputer()) {
+                if (player.isComputer()) {
                     ComputerUtilCard.getBestArtifactAI(artList).untap();
                 } else {
                     final InputSelectCards target = new InputSelectCardsFromList(1,1, artList);
