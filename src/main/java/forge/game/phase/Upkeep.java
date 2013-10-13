@@ -17,15 +17,12 @@
  */
 package forge.game.phase;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardPredicates;
-import forge.Singletons;
 import forge.CounterType;
 import forge.card.ability.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -35,12 +32,9 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
-import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
-import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * <p>
@@ -78,8 +72,6 @@ public class Upkeep extends Phase {
 
         Upkeep.upkeepUpkeepCost(game); // sacrifice unless upkeep cost is paid
         Upkeep.upkeepEcho(game);
-
-        Upkeep.upkeepTangleWire(game);
 
         game.getStack().unfreezeStack();
     }
@@ -188,75 +180,4 @@ public class Upkeep extends Phase {
 
         } // for
     } // upkeepCost
-
-    /**
-     * <p>
-     * upkeepTangleWire.
-     * </p>
-     */
-    private static void upkeepTangleWire(final Game game) {
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-        final List<Card> wires = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tangle Wire"));
-
-        for (final Card source : wires) {
-            final SpellAbility ability = new Ability(source, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    final int num = source.getCounters(CounterType.FADE);
-                    final List<Card> list = new ArrayList<Card>();
-                    for( Card c : player.getCardsIn(ZoneType.Battlefield)) {
-                        if ((c.isArtifact() || c.isLand() || c.isCreature()) && c.isUntapped())
-                            list.add(c);
-                    }
-
-                    if (player.isComputer()) {
-                        for (int i = 0; i < num; i++) {
-                            Card toTap = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
-                            // try to find non creature cards without tap abilities
-                            List<Card> betterList = CardLists.filter(list, new Predicate<Card>() {
-                                @Override
-                                public boolean apply(final Card c) {
-                                    if (c.isCreature()) {
-                                        return false;
-                                    }
-                                    for (SpellAbility sa : c.getAllSpellAbilities()) {
-                                        if (sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
-                                            return false;
-                                        }
-                                    }
-                                    return true;
-                                }
-                            });
-                            System.out.println("Tangle Wire" + list + " - " + betterList);
-                            if (!betterList.isEmpty()) {
-                                toTap = betterList.get(0);
-                            }
-                            if (null != toTap) {
-                                toTap.tap();
-                                list.remove(toTap);
-                            }
-                        }
-                    } else {
-                        if (list.size() > num){
-                            InputSelectCards inp = new InputSelectCardsFromList(num, num, list);
-                            inp.setMessage(source.getName() + " - Select %d untapped artifact(s), creature(s), or land(s) you control");
-                            Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                            for(Card crd : inp.getSelected())
-                                crd.tap();
-                        } else {
-                            for(Card crd : list)
-                                crd.tap();
-                        }
-                    }
-                }
-            };
-            String message = source.getName() + " - " + player + " taps X artifacts, creatures or lands he or she controls.";
-            ability.setStackDescription(message);
-            ability.setDescription(message);
-            ability.setActivatingPlayer(source.getController());
-
-            game.getStack().addSimultaneousStackEntry(ability);
-
-        } // foreach(wire)
-    } // upkeepTangleWire()
 } // end class Upkeep

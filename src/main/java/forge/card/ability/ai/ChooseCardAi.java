@@ -159,6 +159,27 @@ public class ChooseCardAi extends SpellAbilityAi {
                 Collections.reverse(creats);
                 choice = creats.get(0);
             }
+        } else if ("TangleWire".equals(logic)) {
+            List<Card> betterList = CardLists.filter(options, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    if (c.isCreature()) {
+                        return false;
+                    }
+                    for (SpellAbility sa : c.getAllSpellAbilities()) {
+                        if (sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            });
+            System.out.println("Tangle Wire" + options + " - " + betterList);
+            if (!betterList.isEmpty()) {
+                choice = betterList.get(0);
+            } else {
+                choice = ComputerUtilCard.getWorstPermanentAI(options, false, false, false, false);
+            }
         } else {
             choice = ComputerUtilCard.getBestAI(options);
         }
