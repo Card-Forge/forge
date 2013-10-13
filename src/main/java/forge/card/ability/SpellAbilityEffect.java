@@ -60,6 +60,9 @@ import forge.card.spellability.SpellAbility;
             if (stackDesc != null) {
                 if ("SpellDescription".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                     sb.append(params.get("SpellDescription").replace("CARDNAME", sa.getSourceCard().getName()));
+                    if (sa.getTargets() != null && !sa.getTargets().getTargets().isEmpty()) {
+                        sb.append(" (Targeting: " + sa.getTargets().getTargets() + ")");
+                    }
                 } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                     makeSpellDescription(sa, sb, stackDesc);
                 }

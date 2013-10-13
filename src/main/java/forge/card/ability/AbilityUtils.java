@@ -1189,6 +1189,12 @@ public class AbilityUtils {
             }
         }
 
+        if (sa.hasParam("ImprintTargets") && sa.getTargetRestrictions() != null) {
+            for (final Card c : sa.getTargets().getTargetCards()) {
+                host.addImprinted(c);
+            }
+        }
+
         if (sa.hasParam("RememberCostCards")) {
             if (sa.getParam("Cost").contains("Exile")) {
                 final List<Card> paidListExiled = sa.getPaidList("Exiled");
