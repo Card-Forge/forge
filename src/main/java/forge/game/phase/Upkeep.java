@@ -79,7 +79,6 @@ public class Upkeep extends Phase {
     public final void executeAt() {
          
         game.getStack().freezeStack();
-        Upkeep.upkeepBraidOfFire(game);
 
         Upkeep.upkeepUpkeepCost(game); // sacrifice unless upkeep cost is paid
         Upkeep.upkeepEcho(game);

@@ -126,7 +126,7 @@ public class ManaPool {
             if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
                 final List<Mana> pMana = new ArrayList<Mana>();
                 for (final Mana mana : this.floatingMana.get(b)) {
-                    if (mana.getManaAbility().isPersistentMana()) {
+                    if (mana.getManaAbility()!= null && mana.getManaAbility().isPersistentMana()) {
                         pMana.add(mana);
                     }
                 }

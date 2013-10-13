@@ -14772,6 +14772,7 @@ src/main/java/forge/card/cardfactory/CardFactoryUtil.java svneol=native#text/pla
 src/main/java/forge/card/cardfactory/CardStorageReader.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cost/Cost.java svneol=native#text/plain
+src/main/java/forge/card/cost/CostAddMana.java -text
 src/main/java/forge/card/cost/CostDamage.java -text
 src/main/java/forge/card/cost/CostDiscard.java -text
 src/main/java/forge/card/cost/CostDraw.java -text

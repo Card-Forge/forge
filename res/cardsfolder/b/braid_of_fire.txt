@@ -1,7 +1,7 @@
 Name:Braid of Fire
 ManaCost:1 R
 Types:Enchantment
-Text:Cumulative upkeep-Add R to your mana pool.
+K:Cumulative upkeep:AddMana<1/R>:Add R to your mana pool.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braid_of_fire.jpg
 Oracle:Cumulative upkeep-Add {R} to your mana pool. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)

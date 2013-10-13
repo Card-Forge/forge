@@ -22,6 +22,7 @@ import forge.card.ability.effects.CharmEffect;
 import forge.card.ability.effects.FlipCoinEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostAddMana;
 import forge.card.cost.CostDamage;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostDraw;
@@ -362,6 +363,17 @@ public class HumanPlay {
             }
 
             else if (part instanceof CostGainLife) {
+                if (!part.payHuman(sourceAbility, p.getGame())) {
+                    return false;
+                }
+            }
+
+            else if (part instanceof CostAddMana) {
+                if (!GuiDialog.confirm(source, "Do you want to add "
+                        + ((CostAddMana) part).toString()
+                        + " to your mana pool?" + orString)) {
+                    return false;
+                }
                 if (!part.payHuman(sourceAbility, p.getGame())) {
                     return false;
                 }
