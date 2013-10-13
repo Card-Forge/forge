@@ -25,8 +25,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.card.ability.AbilityFactory;
-import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GameActionUtil;

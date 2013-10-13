@@ -138,7 +138,7 @@ public class Untap extends Phase {
                 if (!Untap.canUntap(c)) {
                     return false;
                 }
-                if (canOnlyUntapOneLand() && c.isLand()) {
+                if (c.isLand() && player.hasKeyword("You can't untap more than one land during your untap step.")) {
                     return false;
                 }
                 if (c.isArtifact() && (game.isCardInPlay("Damping Field") || game.isCardInPlay("Imi Statue"))) {
@@ -204,7 +204,7 @@ public class Untap extends Phase {
         }
         // end other players untapping during your untap phase
 
-        if (canOnlyUntapOneLand()) {
+        if (player.hasKeyword("You can't untap more than one land during your untap step.")) {
             final List<Card> landList = CardLists.filter(player.getLandsInPlay(), tappedCanUntap);
             
             if (!landList.isEmpty()) {
@@ -266,16 +266,6 @@ public class Untap extends Phase {
         }
         game.getStack().chooseOrderOfSimultaneousStackEntryAll();
     } // end doUntap
-
-    private boolean canOnlyUntapOneLand() {
-        // Winter Orb was given errata so it no longer matters if it's tapped or
-        // not
-        if (game.isCardInPlay("Winter Orb") || game.getPhaseHandler().getPlayerTurn().isCardInPlay("Mungha Wurm")) {
-            return true;
-        }
-
-        return false;
-    }
 
     private static void doPhasing(final Player turn) {
         // Needs to include phased out cards

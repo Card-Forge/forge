@@ -1,7 +1,7 @@
 Name:Mungha Wurm
 ManaCost:2 G G
 Types:Creature Wurm
-Text:You can't untap more than one land during your untap step.
 PT:6/5
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't untap more than one land during your untap step. | Description$ You can't untap more than one land during your untap step.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mungha_wurm.jpg
 Oracle:You can't untap more than one land during your untap step.

@@ -15,7 +15,6 @@ import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.Singletons;
-import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;

@@ -19,7 +19,6 @@ package forge.gui;
 
 import java.awt.Dimension;
 
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
