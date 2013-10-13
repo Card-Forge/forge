@@ -649,7 +649,7 @@ public class AiController {
         // Abilities without api may also use this routine, However they should provide a unique mode value
         if ( null == api ) {
             if( mode != null ) switch (mode) {
-                case BraidOfFire: return true;
+                // case BraidOfFire: return true;
                 // case Ripple: return true;
             }
 

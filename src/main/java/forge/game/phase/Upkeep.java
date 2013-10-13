@@ -20,27 +20,23 @@ package forge.game.phase;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.CardPredicates.Presets;
 import forge.CounterType;
 import forge.card.ability.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCards;
@@ -83,7 +79,6 @@ public class Upkeep extends Phase {
         Upkeep.upkeepUpkeepCost(game); // sacrifice unless upkeep cost is paid
         Upkeep.upkeepEcho(game);
 
-        Upkeep.upkeepDropOfHoney(game);
         Upkeep.upkeepTangleWire(game);
 
         game.getStack().unfreezeStack();
@@ -193,55 +188,6 @@ public class Upkeep extends Phase {
 
         } // for
     } // upkeepCost
-
-    /**
-     * <p>
-     * upkeepDropOfHoney.
-     * </p>
-     */
-    private static void upkeepDropOfHoney(final Game game) {
-        /*
-         * At the beginning of your upkeep, destroy the creature with the least
-         * power. It can't be regenerated. If two or more creatures are tied for
-         * least power, you choose one of them.
-         */
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-        final List<Card> drops = player.getCardsIn(ZoneType.Battlefield, "Drop of Honey");
-        drops.addAll(player.getCardsIn(ZoneType.Battlefield, "Porphyry Nodes"));
-        final List<Card> cards = drops;
-
-        for (int i = 0; i < cards.size(); i++) {
-            final Card c = cards.get(i);
-
-            final Ability ability = new Ability(c, ManaCost.NO_COST) {
-                @Override
-                public void resolve() {
-                    final List<Card> creatures = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-                    if (creatures.size() > 0) {
-                        CardLists.sortByPowerAsc(creatures);
-                        final List<Card> lowest = new ArrayList<Card>();
-                        final int power = creatures.get(0).getNetAttack();
-                        for(Card c : creatures) {
-                            if (c.getNetAttack() > power) break;
-                            lowest.add(c);
-                        }
-
-                        List<Card> toSac = player.getController().choosePermanentsToDestroy(this, 1, 1, lowest, "Select creature with power: " + power + " to destroy.");
-                        game.getAction().destroyNoRegeneration(toSac.get(0), this);
-                    }
-                } // resolve
-            }; // Ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(c.getName()).append(" - destroy 1 creature with lowest power.");
-            ability.setActivatingPlayer(c.getController());
-            ability.setStackDescription(sb.toString());
-            ability.setDescription(sb.toString());
-
-            game.getStack().addSimultaneousStackEntry(ability);
-
-        } // end for
-    } // upkeepDropOfHoney()
 
     /**
      * <p>
