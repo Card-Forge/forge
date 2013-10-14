@@ -530,9 +530,14 @@ public class PhaseHandler implements java.io.Serializable {
 
         // fire AttackersDeclared trigger
         if (!combat.getAttackers().isEmpty()) {
+            List<GameEntity> attackedTarget = new ArrayList<GameEntity>();
+            for (final Card c : combat.getAttackers()) {
+                attackedTarget.add(combat.getDefenderByAttacker(c));
+            }
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Attackers", combat.getAttackers());
             runParams.put("AttackingPlayer", combat.getAttackingPlayer());
+            runParams.put("AttackedTarget", attackedTarget);
             game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
         }
 

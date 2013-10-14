@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
+import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
 
 /**
@@ -59,6 +60,20 @@ public class TriggerAttackersDeclared extends Trigger {
                 return false;
             }
         }
+        if (this.mapParams.containsKey("AttackedTarget")) {
+            boolean valid = false;
+            @SuppressWarnings("unchecked")
+            List<GameEntity> list = (List<GameEntity>) runParams2.get("AttackedTarget");
+            for (GameEntity b : list) {
+                if (matchesValid(b, this.mapParams.get("AttackedTarget").split(","), this.getHostCard())) {
+                    valid = true;
+                    break;
+                }
+            }
+            if (!valid) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -66,5 +81,6 @@ public class TriggerAttackersDeclared extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Attackers", this.getRunParams().get("Attackers"));
+        sa.setTriggeringObject("AttackingPlayer", this.getRunParams().get("AttackingPlayer"));
     }
 }
