@@ -65,6 +65,7 @@ Snowblind
 Takklemaggot
 Spellweaver Volute
 Protective Sphere
+Carom
 
 
 --------------------
@@ -73,6 +74,11 @@ New C13 branch Cards
 
 Derevi, Empyrial Tactician
 Oloro, Ageless Ascetic
+Curse of Chaos
+Baleful Force
+Bane of Progress
+Gahiji, Honored One
+Nekusar, the Mindrazer
 
 
 ------------
