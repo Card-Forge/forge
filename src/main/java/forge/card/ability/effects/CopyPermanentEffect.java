@@ -178,12 +178,6 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                     // when copying something stolen:
                     copy.setController(controller, 0);
-
-                    // add keywords from sa
-                    for (final String kw : keywords) {
-                        copy.addIntrinsicKeyword(kw);
-                    }
-
                     copy.setCurSetCode(c.getCurSetCode());
 
                     if (c.isDoubleFaced()) { // Cloned DFC's can't transform
@@ -234,6 +228,12 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             continue;
                         }
                     }
+
+                    // add keywords from sa
+                    for (final String kw : keywords) {
+                        copy.addIntrinsicKeyword(kw);
+                    }
+
                     copy = game.getAction().moveToPlay(copy);
 
                     copy.setCloneOrigin(hostCard);
