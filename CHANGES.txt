@@ -79,6 +79,7 @@ Baleful Force
 Bane of Progress
 Gahiji, Honored One
 Nekusar, the Mindrazer
+Eye of Doom
 
 
 ------------
