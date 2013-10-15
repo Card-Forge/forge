@@ -1662,21 +1662,19 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        game.getAction().discardMadness(c, this);
-
         boolean discardToTopOfLibrary = null != sa && sa.hasParam("DiscardToTopOfLibrary");
+        boolean discardMadness = sa != null && sa.hasParam("Madness");
 
         if (discardToTopOfLibrary) {
             game.getAction().moveToLibrary(c, 0);
             // Play the Discard sound
-            this.numDiscardedThisTurn++;
+        } else if (discardMadness) {
+            game.getAction().exile(c);
         } else {
             game.getAction().moveToGraveyard(c);
-
             // Play the Discard sound
-            this.numDiscardedThisTurn++;
         }
-
+        this.numDiscardedThisTurn++;
         // Run triggers
         Card cause = null;
         if (sa != null) {
@@ -1686,6 +1684,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put("Player", this);
         runParams.put("Card", c);
         runParams.put("Cause", cause);
+        runParams.put("IsMadness", (Boolean) discardMadness);
         game.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams, false);
         return true;
 

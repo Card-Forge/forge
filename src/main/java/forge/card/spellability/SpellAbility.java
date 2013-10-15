@@ -104,6 +104,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     private List<Card> tappedForConvoke = new ArrayList<Card>();
     private Card sacrificedAsOffering = null;
     private int conspireInstances = 0;
+    private boolean madness = false;
 
     private HashMap<String, String> sVars = new HashMap<String, String>();
 
@@ -936,6 +937,11 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
         return newSA;
     }
 
+    public SpellAbility copyWithDefinedCost(Cost abCost) {
+        final SpellAbility newSA = this.copy();
+        newSA.setPayCosts(abCost);
+        return newSA;
+    }
     /**
      * <p>
      * Setter for the field <code>trigger</code>.
@@ -1629,4 +1635,12 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
         return this.conspireInstances;
     } // End of Conspire methods
 
+    // Madness
+    public boolean isMadness() {
+        return madness;
+    }
+
+    public void setMadness(boolean madness) {
+        this.madness = madness;
+    }
 }

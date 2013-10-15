@@ -270,12 +270,6 @@ public class PlayerControllerAi extends PlayerController {
         getAi().chooseAndPlaySa(false, false, miracle);
     }
 
-
-    @Override
-    public void playMadness(SpellAbility madness) {
-        getAi().chooseAndPlaySa(false, false, madness);
-    }
-
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#chooseCardsToDelve(int, java.util.List)
      */

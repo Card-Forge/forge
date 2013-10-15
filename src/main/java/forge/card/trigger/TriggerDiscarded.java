@@ -72,6 +72,12 @@ public class TriggerDiscarded extends Trigger {
                 return false;
             }
         }
+        if (this.mapParams.containsKey("IsMadness")) {
+            Boolean madness = (Boolean) runParams2.get("IsMadness");
+            if (this.mapParams.get("IsMadness").equals("True") ^ madness) {
+                return false;
+            }
+        }
         return true;
     }
 

@@ -3124,11 +3124,35 @@ public class CardFactoryUtil {
         if (hasKeyword(card, "Madness") != -1) {
             final int n = hasKeyword(card, "Madness");
             if (n != -1) {
+                // Set Madness Replacement effects
+                String repeffstr = "Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | " +
+                		"ReplaceWith$ DiscardMadness | Secondary$ True | Description$ If you would" +
+                		" discard this card, you discard it, but may exile it instead of putting it" +
+                		" into your graveyard";
+                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
+                card.addReplacementEffect(re);
+                String sVarMadness = "DB$ Discard | Defined$ ReplacedPlayer" +
+                		" | Mode$ Defined | DefinedCards$ ReplacedCard | Madness$ True";
+                card.setSVar("DiscardMadness", sVarMadness);
+
+                // Set Madness Triggers
                 final String parse = card.getKeyword().get(n).toString();
                 // card.removeIntrinsicKeyword(parse);
-
                 final String[] k = parse.split(":");
-                card.setMadnessCost(new Cost(k[1], false));
+                String trigStr = "Mode$ Discarded | ValidCard$ Card.Self | IsMadness$ True | " +
+                		"Execute$ TrigPlayMadness | Secondary$ True | TriggerDescription$ " +
+                		"Play Madness - " + card.getName();
+                final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
+                card.addTrigger(myTrigger);
+                String playMadness = "AB$ Play | Cost$ 0 | Defined$ Self | PlayMadness$ " + k[1] + 
+                		" | Optional$ True | SubAbility$ DBWasNotPlayMadness | RememberPlayed$ True";
+                String moveToYard = "DB$ ChangeZone | Defined$ Self | Origin$ Exile | " +
+                		"Destination$ Graveyard | ConditionDefined$ Remembered | ConditionPresent$" +
+                		" Card | ConditionCompare$ EQ0 | SubAbility$ DBMadnessCleanup";
+                String cleanUp = "DB$ Cleanup | ClearRemembered$ True";
+                card.setSVar("TrigPlayMadness", playMadness);
+                card.setSVar("DBWasNotPlayMadness", moveToYard);
+                card.setSVar("DBMadnessCleanup", cleanUp);
             }
         } // madness
 
@@ -3199,8 +3223,8 @@ public class CardFactoryUtil {
                         " | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | Execute$ ModularTrig | " +
                         "Secondary$ True | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, " +
                         "you may put a +1/+1 counter on target artifact creature for each +1/+1 counter on CARDNAME";
-                    final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
-                    card.addTrigger(myTrigger);
+                final Trigger myTrigger = TriggerHandler.parseTrigger(trigStr, card, true);
+                card.addTrigger(myTrigger);
             }
         } // Modular
 

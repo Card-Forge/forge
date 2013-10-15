@@ -52,9 +52,7 @@ import forge.card.ability.ApiType;
 import forge.card.ability.effects.AttachEffect;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementResult;
-import forge.card.spellability.Ability;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
@@ -691,46 +689,6 @@ public class GameAction {
             default: // sideboard will also get there
                 return this.moveTo(c.getOwner().getZone(name), c);
         }
-    }
-
-    /**
-     * <p>
-     * discardMadness.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @param player 
-     */
-    public final void discardMadness(final Card card, final Player player) {
-        // Whenever a card with madness is discarded, you may cast it for it's
-        // madness cost
-        if (card.getMadnessCost() == null) {
-            return;
-        }
-
-        final SpellAbility madness = card.getFirstSpellAbility().copy();
-        madness.setPayCosts(card.getMadnessCost());
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(card.getName()).append(" - Cast via Madness");
-        madness.setStackDescription(sb.toString());
-
-        // TODO Convert this to a Trigger
-        final Ability activate = new Ability(card, ManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                // pay madness cost here.
-                card.getOwner().getController().playMadness(madness);
-            }
-        };
-
-        final StringBuilder sbAct = new StringBuilder();
-        sbAct.append(card.getName()).append(" - Madness.");
-        activate.setStackDescription(sbAct.toString());
-        activate.setActivatingPlayer(card.getOwner());
-
-        game.getStack().add(activate);
     }
 
     /** */

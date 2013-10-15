@@ -218,7 +218,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private String text = "";
     private String echoCost = "";
-    private Cost madnessCost = null;
     private Cost miracleCost = null;
     private String chosenType = "";
     private List<String> chosenColor = new ArrayList<String>();
@@ -4828,29 +4827,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setUnearthed(final boolean b) {
         this.unearthed = b;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>madnessCost</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final Cost getMadnessCost() {
-        return this.madnessCost;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>madnessCost</code>.
-     * </p>
-     * 
-     * @param cost
-     *            a {@link java.lang.String} object.
-     */
-    public final void setMadnessCost(final Cost cost) {
-        this.madnessCost = cost;
     }
 
     /**

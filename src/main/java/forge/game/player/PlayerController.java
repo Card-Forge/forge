@@ -139,7 +139,6 @@ public abstract class PlayerController {
     public abstract Card chooseCardToDredge(List<Card> dredgers);
 
     public abstract void playMiracle(SpellAbility miracle, Card card);
-    public abstract void playMadness(SpellAbility madness);
     public abstract List<Card> chooseCardsToDelve(int colorLessAmount, List<Card> grave);
     public abstract List<Card> chooseCardsToRevealFromHand(int min, int max, List<Card> valid);
     public abstract List<Card> chooseCardsToDiscardUnlessType(int min, List<Card> hand, String param, SpellAbility sa);

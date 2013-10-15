@@ -16,6 +16,7 @@ import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
+import forge.card.cost.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -205,7 +206,13 @@ public class PlayEffect extends SpellAbilityEffect {
             // only one mode can be used
             tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(sas);
             boolean noManaCost = sa.hasParam("WithoutManaCost");
-            tgtSA = noManaCost ? tgtSA.copyWithNoManaCost() : tgtSA;
+            if (noManaCost) {
+                tgtSA = tgtSA.copyWithNoManaCost();
+            } else if (sa.hasParam("PlayMadness")) {
+                Cost abCost = new Cost(sa.getParam("PlayMadness"), false);
+                tgtSA = tgtSA.copyWithDefinedCost(abCost);
+                tgtSA.setMadness(true);
+            }
 
             if (tgtSA.usesTargeting() && !optional) {
                 tgtSA.getTargetRestrictions().setMandatory(true);

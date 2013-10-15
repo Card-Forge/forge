@@ -445,13 +445,6 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public void playMadness(SpellAbility madness) {
-        if (GuiDialog.confirm(madness.getSourceCard(), madness.getSourceCard() + " - Discarded. Pay Madness Cost?")) {
-           HumanPlay.playSpellAbility(player, madness);
-        }
-    }
-
-    @Override
     public List<Card> chooseCardsToDelve(int colorLessAmount, List<Card> grave) {
         List<Card> toExile = new ArrayList<Card>();
         int cardsInGrave = grave.size();
