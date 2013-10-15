@@ -13,6 +13,7 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
+import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
@@ -443,6 +444,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (destination.equals(ZoneType.Battlefield)) {
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
                         tgtC.setTapped(true);
+                    }
+                    if (sa.hasParam("WithCounters")) {
+                        String[] parse = sa.getParam("WithCounters").split("_");
+                        tgtC.addCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), true);
                     }
                     if (sa.hasParam("GainControl")) {
                         if (sa.hasParam("NewController")) {

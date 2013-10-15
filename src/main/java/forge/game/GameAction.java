@@ -1419,33 +1419,14 @@ public class GameAction {
 
         // System.out.println("Card " + c.getName() +
         // " is getting sent to GY, and this turn it got damaged by: ");
-        /*for (final Card crd : c.getReceivedDamageFromThisTurn().keySet()) {
-            if (c.getReceivedDamageFromThisTurn().get(crd) > 0) {
-                // System.out.println(crd.getName() );
-                GameActionUtil.executeVampiricEffects(crd);
-            }
-        }*/
 
         if (persist) {
             final Card persistCard = newCard;
-            final Ability persistAb = new Ability(persistCard, ManaCost.ZERO) {
-
-                @Override
-                public void resolve() {
-                    if (game.getZoneOf(persistCard).is(ZoneType.Graveyard)) {
-                        final PlayerZone ownerPlay = persistCard.getOwner().getZone(ZoneType.Battlefield);
-                        final Card card = GameAction.this.moveTo(ownerPlay, persistCard);
-                        card.addCounter(CounterType.M1M1, 1, true);
-                    }
-                }
-            };
-            // TODO : convert Persist for Strionic Resonator
-            /*String effect = String.format("AB$ ChangeZone | Cost$ 0 | Defined$ CardUID_%d | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCounter",
+            String effect = String.format("AB$ ChangeZone | Cost$ 0 | Defined$ CardUID_%d" +
+            		" | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1",
                     persistCard.getUniqueNumber());
-            String dbString = String.format("DB$ PutCounter | Defined$ CardUID_%d | CounterNum$ 1 | CounterType$ M1M1", persistCard.getUniqueNumber());
             SpellAbility persistAb = AbilityFactory.getAbility(effect, c);
-            persistAb.setSubAbility(AbilityFactory.getSubAbility(persistCard, dbString));
-            persistAb.setTrigger(true);*/
+            persistAb.setTrigger(true);
             persistAb.setStackDescription(newCard.getName() + " - Returning from Persist");
             persistAb.setDescription(newCard.getName() + " - Returning from Persist");
             persistAb.setActivatingPlayer(c.getController());
@@ -1455,24 +1436,11 @@ public class GameAction {
 
         if (undying) {
             final Card undyingCard = newCard;
-            final Ability undyingAb = new Ability(undyingCard, ManaCost.ZERO) {
-
-                @Override
-                public void resolve() {
-                    if (game.getZoneOf(undyingCard).is(ZoneType.Graveyard)) {
-                        final PlayerZone ownerPlay = undyingCard.getOwner().getZone(ZoneType.Battlefield);
-                        final Card card = GameAction.this.moveTo(ownerPlay, undyingCard);
-                        card.addCounter(CounterType.P1P1, 1, true);
-                    }
-                }
-            };
-            // TODO : convert Undying for Strionic Resonator
-            /*String effect = String.format("AB$ ChangeZone | Cost$ 0 | Defined$ CardUID_%d | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCounter",
-                    undyingCard.getUniqueNumber());
-            String dbString = String.format("DB$ PutCounter | Defined$ CardUID_%d | CounterNum$ 1 | CounterType$ P1P1", undyingCard.getUniqueNumber());
+            String effect = String.format("AB$ ChangeZone | Cost$ 0 | Defined$ CardUID_%d |" +
+            		" Origin$ Graveyard | Destination$ Battlefield | WithCounters$ P1P1_1",
+            		undyingCard.getUniqueNumber());
             SpellAbility undyingAb = AbilityFactory.getAbility(effect, c);
-            undyingAb.setSubAbility(AbilityFactory.getSubAbility(undyingCard, dbString));
-            undyingAb.setTrigger(true);*/
+            undyingAb.setTrigger(true);
             undyingAb.setStackDescription(newCard.getName() + " - Returning from Undying");
             undyingAb.setDescription(newCard.getName() + " - Returning from Undying");
             undyingAb.setActivatingPlayer(c.getController());
