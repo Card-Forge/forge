@@ -1051,6 +1051,8 @@ public class AbilityUtils {
             if (card.getEffectSource() != null) {
                 sas.addAll(card.getEffectSource().getSpellAbilities());
             }
+        } else if (defined.equals("SourceFirstSpell")) {
+            sas.add(card.getFirstSpellAbility());
         }
 
         if (s != null) {

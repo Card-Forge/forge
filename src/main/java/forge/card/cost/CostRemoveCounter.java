@@ -257,7 +257,7 @@ public class CostRemoveCounter extends CostPartWithList {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        if (this.counter.getName().equals("Loyalty")) {
+        if (this.counter == CounterType.LOYALTY) {
             sb.append("-").append(this.getAmount());
         } else {
             sb.append("Remove ");

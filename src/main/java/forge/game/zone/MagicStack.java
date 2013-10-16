@@ -40,6 +40,7 @@ import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.GameLogEntryType;
 import forge.card.CardDb;
+import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -356,11 +357,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         if( hasPaid )
                             magnitude++;
                     } while( hasPaid );
-
-                    for (int i = 0; i < magnitude; i++) {
-                        SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(source, sp.getSourceCard(), sp, false);
-                        activator.getController().playSpellAbilityForFree(copy, true);
-                    }
+                    // Replicate Trigger
+                    String effect = String.format("AB$ CopySpellAbility | Cost$ 0 | Defined$ SourceFirstSpell | Amount$ %d", magnitude);
+                    SpellAbility sa = AbilityFactory.getAbility(effect, source);
+                    sa.setDescription("Replicate - " + source);
+                    sa.setTrigger(true);
+                    addSimultaneousStackEntry(sa);
                 }
 
             }
