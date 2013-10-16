@@ -2472,6 +2472,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (oppList.size() <= yourList.size()) {
                 return false;
             }
+        } else if (property.startsWith("withAtLeast")) {
+            final String cardType = property.split("More")[1].split("sThan")[0];
+            final int amount = Integer.parseInt(property.substring(11, 12));
+            final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
+            final List<Card> oppList = CardLists.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final List<Card> yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            System.out.println(yourList.size());
+            if (oppList.size() < yourList.size() + amount) {
+                return false;
+            }
         } else if (property.startsWith("hasMore")) {
             final Player controller = "Active".equals(property.split("Than")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             if (property.substring(7).startsWith("Life") && this.getLife() <= controller.getLife()) {

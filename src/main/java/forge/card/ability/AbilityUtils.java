@@ -388,6 +388,14 @@ public class AbilityUtils {
                 players.addAll(game.getPlayers());
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+            } else if (hType.startsWith("Property")) {
+                String defined = hType.split("Property")[1];
+                for (Player p : game.getPlayers()) {
+                    if (p.hasProperty(defined, ability.getActivatingPlayer(), ability.getSourceCard())) {
+                        players.add(p);
+                    }
+                }
+                return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
             }
             return 0;
         }
