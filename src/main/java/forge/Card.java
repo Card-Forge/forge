@@ -8137,6 +8137,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (source.isType("Gorgon")) {
                         return true;
                     }
+                } else if (kw.equals("Protection from the chosen player")) {
+                    if (source.getController().equals(this.chosenPlayer)) {
+                        return true;
+                    }
                 }
             }
         }
