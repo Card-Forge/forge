@@ -80,9 +80,20 @@ public final class BoosterUtils {
 
         final List<Predicate<CardRules>> colorFilters = new ArrayList<Predicate<CardRules>>();
         final boolean preferred = (userPrefs != null && userPrefs.getPreferredColor() != MagicColor.ALL_COLORS);
+        final int colorBias =  preferred ? Singletons.getModel().getQuestPreferences().getPrefInt(QPref.STARTING_POOL_COLOR_BIAS) : 0;
+        final int biasAdjustedCommons = (((colorBias * numCommon) / 25) > 0 ? numCommon - (colorBias * numCommon) / 25 : numCommon);
+        final int biasAdjustedUncommons = (((colorBias * numUncommon) / 25) > 0 ? numUncommon - (colorBias * numUncommon) / 25 : numUncommon);
+        final int biasAdjustedRares = (((colorBias * numRare) / 25) > 0 ? numRare - (colorBias * numRare) / 25 : numRare);
 
         if (userPrefs != null && !userPrefs.useRandomPool()) {
             colorFilters.add(CardRulesPredicates.Presets.IS_MULTICOLOR);
+
+            // extra filters of the preferred color if chosen
+            if (preferred) {
+                for (int i = 0; i < colorBias +  (colorBias > 6 ? (2 * (colorBias - 6 + (colorBias / 10))) : 0); i++) {
+                    colorFilters.add(CardRulesPredicates.isMonoColor(userPrefs.getPreferredColor()));
+                }
+            }
 
             for (int i = 0; i < (preferred ? 3 : 4); i++) {
                 if (i != 2) {
@@ -96,25 +107,18 @@ public final class BoosterUtils {
                 colorFilters.add(CardRulesPredicates.isMonoColor(MagicColor.GREEN));
             }
 
-            // Add some extra filters of the preferred color if chosen
-            if (preferred) {
-                final int colorBias =  Singletons.getModel().getQuestPreferences().getPrefInt(QPref.STARTING_POOL_COLOR_BIAS);
-                for (int i = 0; i < colorBias; i++) {
-                    colorFilters.add(CardRulesPredicates.isMonoColor(userPrefs.getPreferredColor()));
-                }
-            }
         }
 
         // This will save CPU time when sets are limited
         final List<PaperCard> cardpool = Lists.newArrayList(Iterables.filter(CardDb.instance().getAllCards(), filter));
 
         final Predicate<PaperCard> pCommon = IPaperCard.Predicates.Presets.IS_COMMON;
-        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, numCommon, colorFilters));
+        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, biasAdjustedCommons, colorFilters));
 
         final Predicate<PaperCard> pUncommon = IPaperCard.Predicates.Presets.IS_UNCOMMON;
-        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pUncommon, numUncommon, colorFilters));
+        cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pUncommon, biasAdjustedUncommons, colorFilters));
 
-        int nRares = numRare, nMythics = 0;
+        int nRares = biasAdjustedRares, nMythics = 0;
         final Predicate<PaperCard> filterMythics = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
         final boolean haveMythics = Iterables.any(cardpool, filterMythics);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {

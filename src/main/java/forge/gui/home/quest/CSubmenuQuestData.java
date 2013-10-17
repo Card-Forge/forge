@@ -247,7 +247,7 @@ public enum CSubmenuQuestData implements ICDoc {
         // } else {
         //    fmtPrizes = worldFormat;
         // }
-        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(!(view.balanceColors()), view.getPreferredColor());
+        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(view.randomizeColorDistribution(), view.getPreferredColor());
 
         final Object o = JOptionPane.showInputDialog(JOptionPane.getRootFrame(), "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
         if (o == null) { return; }
