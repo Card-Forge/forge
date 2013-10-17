@@ -80,12 +80,13 @@ public final class BoosterUtils {
 
         final List<Predicate<CardRules>> colorFilters = new ArrayList<Predicate<CardRules>>();
         final boolean preferred = (userPrefs != null && userPrefs.getPreferredColor() != MagicColor.ALL_COLORS);
-        final int colorBias =  preferred ? Singletons.getModel().getQuestPreferences().getPrefInt(QPref.STARTING_POOL_COLOR_BIAS) : 0;
+        final boolean randomized = userPrefs != null && userPrefs.useRandomPool();
+        final int colorBias =  (preferred && !randomized) ? Singletons.getModel().getQuestPreferences().getPrefInt(QPref.STARTING_POOL_COLOR_BIAS) : 0;
         final int biasAdjustedCommons = (((colorBias * numCommon) / 25) > 0 ? numCommon - (colorBias * numCommon) / 25 : numCommon);
         final int biasAdjustedUncommons = (((colorBias * numUncommon) / 25) > 0 ? numUncommon - (colorBias * numUncommon) / 25 : numUncommon);
         final int biasAdjustedRares = (((colorBias * numRare) / 25) > 0 ? numRare - (colorBias * numRare) / 25 : numRare);
 
-        if (userPrefs != null && !userPrefs.useRandomPool()) {
+        if (!randomized) {
             colorFilters.add(CardRulesPredicates.Presets.IS_MULTICOLOR);
 
             // extra filters of the preferred color if chosen
