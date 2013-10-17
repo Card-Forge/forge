@@ -37,7 +37,6 @@ import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
-import forge.control.FControl;
 import forge.game.Game;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
@@ -50,6 +49,7 @@ import forge.game.player.PlayerStatistics;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
+import forge.gui.framework.FScreen;
 import forge.gui.home.quest.CSubmenuChallenges;
 import forge.gui.home.quest.CSubmenuDuels;
 import forge.gui.toolbox.FSkin;
@@ -300,7 +300,7 @@ public class QuestWinLose extends ControlWinLose {
         Singletons.getModel().getPreferences().save();
 
         Singletons.getControl().endCurrentGame();
-        Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
+        Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
 
         SOverlayUtils.hideOverlay();
     }

@@ -35,6 +35,7 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.framework.IVTopLevelUI;
@@ -319,5 +320,22 @@ public enum VHomeUI implements IVTopLevelUI {
 
             g2d.dispose();
         }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVTopLevelUI#onSwitching(forge.gui.framework.FScreen)
+     */
+    @Override
+    public boolean onSwitching(FScreen screen) {
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVTopLevelUI#onClosing(forge.control.FControl.Screens)
+     */
+    @Override
+    public boolean onClosing(FScreen screen) {
+        Singletons.getControl().exitForge();
+        return false; //don't allow closing Home tab
     }
 }

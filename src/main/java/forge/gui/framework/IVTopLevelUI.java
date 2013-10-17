@@ -1,5 +1,7 @@
 package forge.gui.framework;
 
+import forge.gui.framework.FScreen;
+
 /** 
  * This interface provides a unifying type for all top-level
  * UI components.
@@ -24,4 +26,16 @@ public interface IVTopLevelUI {
      * a completely fresh layout on the component.
      */
     void populate();
+    
+    /**
+     * Fires when this view's tab is being switched away from.
+     * 
+     * @return true to allow switching away from tab, false otherwise */
+    boolean onSwitching(FScreen screen);
+    
+    /**
+     * Fires when this view's tab is closing.
+     * 
+     * @return true to allow closing tab, false otherwise */
+    boolean onClosing(FScreen screen);
 }

@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
 import forge.Command;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.io.DeckSerializer;
@@ -123,7 +124,7 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     @SuppressWarnings("unchecked")
     private void newDeck() {
-        if (!SEditorIO.confirmSaveChanges()) { return; }
+        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen())) { return; }
 
         try {
             SwingUtilities.invokeLater(new Runnable() {
@@ -143,7 +144,7 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     @SuppressWarnings("unchecked")
     private void openDeck() {
-        if (!SEditorIO.confirmSaveChanges()) { return; }
+        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen())) { return; }
 
         final File file = this.getImportFilename();
 

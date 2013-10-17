@@ -52,6 +52,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.SaveOpenDialog;
 import forge.gui.toolbox.SaveOpenDialog.Filetypes;
 import forge.item.PaperCard;
+import forge.properties.FileLocation;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
 
@@ -109,7 +110,8 @@ public enum CDock implements ICDoc {
 
     public void saveLayout() {
         final SaveOpenDialog dlgSave = new SaveOpenDialog();
-        final File defFile = new File(SLayoutIO.getFilePreferred(Singletons.getControl().getState()));
+        final FileLocation layoutFile = Singletons.getControl().getCurrentScreen().getLayoutFile();
+        final File defFile = layoutFile != null ? new File(layoutFile.userPrefLoc) : null;
         final File saveFile = dlgSave.SaveDialog(defFile, Filetypes.LAYOUT);
         if (saveFile != null) {
             SLayoutIO.saveLayout(saveFile);
@@ -120,7 +122,8 @@ public enum CDock implements ICDoc {
         SOverlayUtils.genericOverlay();
 
         final SaveOpenDialog dlgOpen = new SaveOpenDialog();
-        final File defFile = new File(SLayoutIO.getFilePreferred(Singletons.getControl().getState()));
+        final FileLocation layoutFile = Singletons.getControl().getCurrentScreen().getLayoutFile();
+        final File defFile = layoutFile != null ? new File(layoutFile.userPrefLoc) : null;
         final File loadFile = dlgOpen.OpenDialog(defFile, Filetypes.LAYOUT);
 
         if (loadFile != null) {

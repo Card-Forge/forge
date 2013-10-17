@@ -10,10 +10,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.CardEdition;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.Match;
@@ -23,6 +23,7 @@ import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorQuestCardShop;
+import forge.gui.framework.FScreen;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
 import forge.net.Lobby;
@@ -252,7 +253,7 @@ public class SSubmenuQuestUtil {
         if (!checkActiveQuest("Visit the Spell Shop.")) {
             return;
         }
-        Singletons.getControl().changeState(FControl.Screens.DECK_EDITOR_QUEST);
+        Singletons.getControl().setCurrentScreen(FScreen.QUEST_CARD_SHOP);
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
                 new CEditorQuestCardShop(Singletons.getModel().getQuest()));
     }
@@ -262,7 +263,7 @@ public class SSubmenuQuestUtil {
         if (!checkActiveQuest("Visit the Bazaar.")) {
             return;
         }
-        Singletons.getControl().changeState(FControl.Screens.QUEST_BAZAAR);
+        Singletons.getControl().setCurrentScreen(FScreen.QUEST_BAZAAR);
         Singletons.getView().getFrame().validate();
     }
 

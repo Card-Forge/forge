@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.gui.match.controllers.CDock;
@@ -50,7 +51,7 @@ public class KeyboardShortcuts {
         final Action actShowStack = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (Singletons.getControl().getState() != FControl.Screens.MATCH_SCREEN) { return; }
+                if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
                 SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
             }
         };
@@ -59,7 +60,7 @@ public class KeyboardShortcuts {
         final Action actShowCombat = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (Singletons.getControl().getState() != FControl.Screens.MATCH_SCREEN) { return; }
+                if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
                 SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
             }
         };
@@ -68,7 +69,7 @@ public class KeyboardShortcuts {
         final Action actShowConsole = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (Singletons.getControl().getState() != FControl.Screens.MATCH_SCREEN) { return; }
+                if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
                 SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
             }
         };
@@ -77,7 +78,7 @@ public class KeyboardShortcuts {
         final Action actShowPlayers = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (Singletons.getControl().getState() != FControl.Screens.MATCH_SCREEN) { return; }
+                if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
                 SDisplayUtil.showTab(EDocID.REPORT_PLAYERS.getDoc());
             }
         };
@@ -86,7 +87,7 @@ public class KeyboardShortcuts {
         final Action actShowDev = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (Singletons.getControl().getState() != FControl.Screens.MATCH_SCREEN) { return; }
+                if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
                 if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
                     SDisplayUtil.showTab(EDocID.DEV_MODE.getDoc());
                 }
@@ -97,7 +98,7 @@ public class KeyboardShortcuts {
         final Action actConcede = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (Singletons.getControl().getState() != FControl.Screens.MATCH_SCREEN) { return; }
+                if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
                 CDock.SINGLETON_INSTANCE.concede();
             }
         };
@@ -106,7 +107,7 @@ public class KeyboardShortcuts {
         final Action actEndTurn = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (Singletons.getControl().getState() != FControl.Screens.MATCH_SCREEN) { return; }
+                if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
                 CDock.SINGLETON_INSTANCE.endTurn();
             }
         };
@@ -115,7 +116,7 @@ public class KeyboardShortcuts {
         final Action actAllAttack = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (Singletons.getControl().getState() != FControl.Screens.MATCH_SCREEN) { return; }
+                if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
                 CDock.SINGLETON_INSTANCE.alphaStrike();
             }
         };
@@ -124,7 +125,7 @@ public class KeyboardShortcuts {
         final Action actTgtOverlay = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (Singletons.getControl().getState() != FControl.Screens.MATCH_SCREEN) { return; }
+                if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
                 CDock.SINGLETON_INSTANCE.toggleTargeting();
             }
         };

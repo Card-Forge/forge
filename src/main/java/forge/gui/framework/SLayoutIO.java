@@ -28,7 +28,6 @@ import javax.xml.stream.events.XMLEvent;
 
 import forge.FThreads;
 import forge.Singletons;
-import forge.control.FControl.Screens;
 import forge.gui.toolbox.FAbsolutePositioner;
 import forge.properties.FileLocation;
 import forge.properties.NewConstants;
@@ -222,14 +221,6 @@ public final class SLayoutIO {
         }
     }
 
-    /**
-     * Gets preferred layout file corresponding to current state of UI.
-     * @return {@link java.lang.String}
-     */
-    public static String getFilePreferred(Screens mode) {
-        return SLayoutIO.getFileForState(mode).userPrefLoc;
-    }
-
     
     private final static AtomicBoolean saveRequested = new AtomicBoolean(false);
     /** Publicly-accessible save method, to neatly handle exception handling.
@@ -251,10 +242,10 @@ public final class SLayoutIO {
 
     private synchronized static void save(final File f0) {
         final String fWriteTo;
-        FileLocation file = SLayoutIO.getFileForState(Singletons.getControl().getState());
+        FileLocation file = Singletons.getControl().getCurrentScreen().getLayoutFile();
 
         if (f0 == null) {
-            if (null == file) {
+            if (file == null) {
                 return;
             }
             fWriteTo = file.userPrefLoc;
@@ -318,83 +309,89 @@ public final class SLayoutIO {
 
     public static void loadLayout(final File f) {
         final FView view = FView.SINGLETON_INSTANCE;
-        final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-        FileLocation file = SLayoutIO.getFileForState(Singletons.getControl().getState());
-
         FAbsolutePositioner.SINGLETON_INSTANCE.hideAll();
         view.getPnlInsets().removeAll();
         view.getPnlInsets().setLayout(new BorderLayout());
         view.getPnlInsets().add(view.getPnlContent(), BorderLayout.CENTER);
         view.getPnlInsets().setBorder(new EmptyBorder(SLayoutConstants.BORDER_T, SLayoutConstants.BORDER_T, 0, 0));
-
         view.removeAllDragCells();
-        
-        // Read a model for new layout
-        MapOfLists<LayoutInfo, EDocID> model = null;
-        
-        boolean usedCustomPrefsFile = false;
-        
-        FileInputStream fis = null;
 
-        try {
-            if (f != null && f.exists()) 
-                fis = new FileInputStream(f);
-            else {
-                File userSetting = new File(file.userPrefLoc);
-                if ( userSetting.exists() ) {
-                    usedCustomPrefsFile = true;
-                    fis = new FileInputStream(userSetting);
-                } else {
-                    fis = new FileInputStream(file.defaultLoc);
-                }
-            }
-
-            XMLEventReader xer = null;
+        FileLocation file = Singletons.getControl().getCurrentScreen().getLayoutFile();
+        if (file != null) {
+            // Read a model for new layout
+            MapOfLists<LayoutInfo, EDocID> model = null;
+            boolean usedCustomPrefsFile = false;
+            FileInputStream fis = null;
+    
             try {
-                xer = inputFactory.createXMLEventReader(fis); 
-                model = readLayout(xer);
-            } catch (final Exception e) { // I don't care what happened inside, the layout is wrong
-                try {
-                    if ( xer != null ) xer.close();
-                } catch (final XMLStreamException x) {
-                    e.printStackTrace();
+                if (f != null && f.exists()) {
+                    fis = new FileInputStream(f);
                 }
-                e.printStackTrace();
-                if ( usedCustomPrefsFile ) // the one we can safely delete
-                    throw new InvalidLayoutFileException();
-                else
-                    throw new RuntimeException(e);
-            }
+                else {
+                    File userSetting = new File(file.userPrefLoc);
+                    if (userSetting.exists()) {
+                        usedCustomPrefsFile = true;
+                        fis = new FileInputStream(userSetting);
+                    }
+                    else {
+                        fis = new FileInputStream(file.defaultLoc);
+                    }
+                }
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if ( fis != null )
+                final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+                XMLEventReader xer = null;
                 try {
-                    fis.close();
-                } catch (IOException e) {
+                    xer = inputFactory.createXMLEventReader(fis); 
+                    model = readLayout(xer);
+                } catch (final Exception e) { // I don't care what happened inside, the layout is wrong
+                    try {
+                        if (xer != null) { xer.close(); }
+                    }
+                    catch (final XMLStreamException x) {
+                        x.printStackTrace();
+                    }
                     e.printStackTrace();
+                    if (usedCustomPrefsFile) { // the one we can safely delete
+                        throw new InvalidLayoutFileException();
+                    }
+                    else {
+                        throw new RuntimeException(e);
+                    }
                 }
-        }
-
-        
-        // Apply new layout
-        for(Entry<LayoutInfo, Collection<EDocID>> kv : model.entrySet()) {
-            LayoutInfo layoutInfo = kv.getKey();
-            DragCell cell = new DragCell();
-            cell.setRoughBounds(layoutInfo.getBounds());
-            FView.SINGLETON_INSTANCE.addDragCell(cell); 
-            for(EDocID edoc : kv.getValue()) {
-                try {
-                    //System.out.println(String.format("adding doc %s -> %s",  edoc, edoc.getDoc()));
-                    cell.addDoc(edoc.getDoc());
-                }
-                catch (IllegalArgumentException e) {
-                    System.err.println("Failed to get doc for " + edoc); 
+    
+            }
+            catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-            if (layoutInfo.getSelectedId() != null) {
-                cell.setSelected(layoutInfo.getSelectedId().getDoc());
+    
+            // Apply new layout
+            for (Entry<LayoutInfo, Collection<EDocID>> kv : model.entrySet()) {
+                LayoutInfo layoutInfo = kv.getKey();
+                DragCell cell = new DragCell();
+                cell.setRoughBounds(layoutInfo.getBounds());
+                FView.SINGLETON_INSTANCE.addDragCell(cell); 
+                for(EDocID edoc : kv.getValue()) {
+                    try {
+                        //System.out.println(String.format("adding doc %s -> %s",  edoc, edoc.getDoc()));
+                        cell.addDoc(edoc.getDoc());
+                    }
+                    catch (IllegalArgumentException e) {
+                        System.err.println("Failed to get doc for " + edoc); 
+                    }
+                }
+                if (layoutInfo.getSelectedId() != null) {
+                    cell.setSelected(layoutInfo.getSelectedId().getDoc());
+                }
             }
         }
 
@@ -469,34 +466,6 @@ public final class SLayoutIO {
         writer0.add(EF.createCharacters(value));
         writer0.add(EF.createEndElement("", "", propertyName));
         writer0.add(NEWLINE);
-    }
-
-    /**
-     * Updates preferred / default layout addresses particular to each UI state.
-     * Always called before a load or a save, to ensure file addresses are correct.
-     * @return 
-     */
-    private static FileLocation getFileForState(Screens state) {
-        switch(state) {
-            case HOME_SCREEN:
-                return NewConstants.HOME_LAYOUT_FILE;
-
-            case MATCH_SCREEN:
-                return NewConstants.MATCH_LAYOUT_FILE;
-
-            case DECK_EDITOR_CONSTRUCTED:
-            case DECK_EDITOR_LIMITED:
-            case DECK_EDITOR_QUEST:
-            case DRAFTING_PROCESS:
-            case QUEST_CARD_SHOP:
-                return NewConstants.EDITOR_LAYOUT_FILE;
-
-            case QUEST_BAZAAR:
-                return null;
-
-            default:
-                throw new IllegalStateException("Layout load failed; UI state unknown.");
-        }
     }
 }
  

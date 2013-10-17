@@ -87,7 +87,6 @@ public final class NewConstants {
     private static final String _DEFAULTS_DIR                = _RES_ROOT + "defaults/";
     public static final FileLocation EDITOR_PREFERENCES_FILE = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.preferences");
     public static final FileLocation WINDOW_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "window.xml");
-    public static final FileLocation HOME_LAYOUT_FILE        = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "home.xml");
     public static final FileLocation MATCH_LAYOUT_FILE       = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match.xml");
     public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.xml");
     public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,       "gauntlet/");

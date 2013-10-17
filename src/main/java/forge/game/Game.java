@@ -30,14 +30,11 @@ import forge.CardLists;
 import forge.ColorChanger;
 import forge.FThreads;
 import forge.GameLog;
-import forge.Singletons;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.control.FControl;
-import forge.control.FControl.Screens;
 import forge.game.combat.Combat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventGameOutcome;
@@ -51,15 +48,11 @@ import forge.game.player.Player;
 import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.SOverlayUtils;
-import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.SkinImage;
-import forge.view.FNavigationBar.INavigationTabData;
 
     /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
-public class Game implements INavigationTabData {
+public class Game {
     private final GameType type;
     private final List<Player> roIngamePlayers;
     private final List<Player> allPlayers;
@@ -592,59 +585,5 @@ public class Game implements INavigationTabData {
     public int nextCardId() {
         // TODO Auto-generated method stub
         return ++cardIdCounter;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#getTabCaption()
-     */
-    @Override
-    public String getTabCaption() {
-        return "Game - " + type.getDecksFormat().name(); //TODO: Consider including more info, such as game number, match record, etc.
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#getTabIcon()
-     */
-    @Override
-    public SkinImage getTabIcon() {
-        return FSkin.getIcon(FSkin.DockIcons.ICO_ALPHASTRIKE);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#getTabDestScreen()
-     */
-    @Override
-    public Screens getTabDestScreen() {
-        return Screens.MATCH_SCREEN;
-    }
-    
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#allowTabClose()
-     */
-    @Override
-    public boolean allowTabClose() {
-        return true;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#canCloseTab()
-     */
-    @Override
-    public String getCloseButtonTooltip() {
-        return "Concede Game";
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#onClosing()
-     */
-    @Override
-    public boolean onClosing() {
-        if (!isGameOver()) {
-            Singletons.getControl().stopGame();
-            return false; //delay hiding tab
-        }
-        Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
-        SOverlayUtils.hideOverlay();
-        return true;
     }
 }

@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.Constant;
+import forge.Singletons;
 import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
@@ -76,7 +77,7 @@ public enum CDeckgen implements ICDoc {
     //========== Other methods
     @SuppressWarnings("unchecked")
     private <TItem extends InventoryItem, TModel extends DeckBase> void newRandomConstructed() {
-        if (!SEditorIO.confirmSaveChanges()) { return; }
+        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen())) { return; }
 
         final Deck randomDeck = new Deck();
 
@@ -97,7 +98,7 @@ public enum CDeckgen implements ICDoc {
 
     @SuppressWarnings("unchecked")
     private <TItem extends InventoryItem, TModel extends DeckBase> void newGenerateConstructed(final int colorCount0) {
-        if (!SEditorIO.confirmSaveChanges()) { return; }
+        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen())) { return; }
 
         final Deck genConstructed = new Deck();
 

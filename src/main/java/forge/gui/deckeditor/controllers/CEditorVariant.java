@@ -23,7 +23,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 
-import forge.Singletons;
 import forge.card.CardDb;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -33,7 +32,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
-import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
@@ -42,7 +41,6 @@ import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.storage.IStorage;
 
 /**
@@ -57,10 +55,10 @@ import forge.util.storage.IStorage;
  */
 public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
     private final DeckController<Deck> controller;
+    private final FScreen screen;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
     private final Predicate<PaperCard> cardPoolCondition;
-    private final EDocID exitToScreen;
 
     //=========== Constructor
     /**
@@ -68,20 +66,14 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
      * This is the least restrictive mode;
      * all cards are available.
      */
-    public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final EDocID exitTo) {
+    public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final FScreen screen0) {
         super();
         
-        cardPoolCondition = poolCondition;
-        exitToScreen = exitTo;
+        this.cardPoolCondition = poolCondition;
+        this.screen = screen0;
         
-        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), true);
-        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), true);
-
-        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
-        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
-
-        this.setCatalogManager(catalogManager);
-        this.setDeckManager(deckManager);
+        this.setCatalogManager(new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), true));
+        this.setDeckManager(new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), true));
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override
@@ -161,7 +153,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
     @Override
-    public void init() {
+    public void update() {
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
 
@@ -171,9 +163,9 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         SItemManagerUtil.resetUI();
         
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        
-
-        this.controller.newModel();
+        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        
+        this.controller.refreshModel();
     }
 
     /* (non-Javadoc)
@@ -181,10 +173,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public boolean exit() {
-        // Override the submenu save choice - tell it to go to "constructed".
-        Singletons.getModel().getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, exitToScreen.toString());
-
-        if (!SEditorIO.confirmSaveChanges())
+        if (!SEditorIO.confirmSaveChanges(this.screen))
         {
             return false;
         }

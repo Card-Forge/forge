@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
@@ -31,6 +30,7 @@ import forge.gui.GuiChoose;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
@@ -205,9 +205,9 @@ public enum CSubmenuSealed implements ICDoc {
         Singletons.getModel().getDecks().getSealed().add(sealed);
 
         final ACEditorBase<? extends InventoryItem, T> editor = (ACEditorBase<? extends InventoryItem, T>) new CEditorLimited(
-                Singletons.getModel().getDecks().getSealed());
+                Singletons.getModel().getDecks().getSealed(), FScreen.DECK_EDITOR_SEALED);
 
-        Singletons.getControl().changeStateAutoFixLayout(FControl.Screens.DECK_EDITOR_LIMITED, "deck editor");
+        Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_SEALED);
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(editor);
         editor.getDeckController().setModel((T) sealed);
     }

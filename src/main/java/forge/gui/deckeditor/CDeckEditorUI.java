@@ -29,6 +29,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JMenu;
@@ -48,7 +49,6 @@ import com.google.common.primitives.Ints;
 
 import forge.Command;
 import forge.Singletons;
-import forge.control.FControl.Screens;
 import forge.deck.DeckBase;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.controllers.ACEditorBase;
@@ -57,19 +57,20 @@ import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.deckeditor.views.VCardCatalog;
+import forge.gui.deckeditor.views.VCurrentDeck;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
+import forge.gui.toolbox.itemmanager.table.ItemTable;
 import forge.gui.toolbox.itemmanager.table.ItemTableModel;
 import forge.item.InventoryItem;
-import forge.view.FNavigationBar.INavigationTabData;
 
 /**
  * Constructs instance of deck editor UI controller, used as a single point of
@@ -79,14 +80,16 @@ import forge.view.FNavigationBar.INavigationTabData;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CDeckEditorUI implements ICDoc, IMenuProvider, INavigationTabData {
+public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     /** */
     SINGLETON_INSTANCE;
 
+    private final HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>> screenChildControllers;
     private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
     private boolean isFindingAsYouType = false;
 
     private CDeckEditorUI() {
+        screenChildControllers = new HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>>();
     }
 
     /**
@@ -119,17 +122,10 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider, INavigationTabData {
      * @param editor0 &emsp; {@link forge.gui.deckeditor.controllers.ACEditorBase}<?, ?>
      */
     public void setCurrentEditorController(ACEditorBase<? extends InventoryItem, ? extends DeckBase> editor0) {
+        if (this.childController == editor0) { return; }
         this.childController = editor0;
+        screenChildControllers.put(Singletons.getControl().getCurrentScreen(), editor0);
         updateController();
-        if (childController != null) {
-            boolean wantElastic = SItemManagerIO.getPref(EditorPreference.elastic_columns);
-            boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
-            childController.getCatalogManager().getTable().setWantElasticColumns(wantElastic);
-            childController.getDeckManager().getTable().setWantElasticColumns(wantElastic);
-            childController.getCatalogManager().setWantUnique(wantUnique);
-            childController.getDeckManager().setWantUnique(wantUnique);
-            CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
-        }
     }
     
     private interface _MoveAction {
@@ -302,98 +298,116 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider, INavigationTabData {
     }
     
     /**
-     * Updates listeners for current controller.
+     * Updates UI and listeners for current controller.
      */
     private void updateController() {
-        ItemManager<? extends InventoryItem> catView  = childController.getCatalogManager();
-        ItemManager<? extends InventoryItem> deckView = childController.getDeckManager();
-        final JTable catTable  = catView.getTable();
-        final JTable deckTable = deckView.getTable();
-        final _FindAsYouType catFind  = new _FindAsYouType(catView);
-        final _FindAsYouType deckFind = new _FindAsYouType(deckView);
+        if (childController == null) { return; }
 
-        catTable.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
-                    addSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
-                } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
-                    deckTable.requestFocusInWindow();
-                } else if (KeyEvent.VK_F == e.getKeyCode()) {
-                    // let ctrl/cmd-F set focus to the text filter box
-                    if (e.isControlDown() || e.isMetaDown()) {
-                        VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().requestFocusInWindow();
+        final ItemManager<? extends InventoryItem> catView  = childController.getCatalogManager();
+        final ItemManager<? extends InventoryItem> deckView = childController.getDeckManager();
+        final ItemTable<? extends InventoryItem> catTable  = catView.getTable();
+        final ItemTable<? extends InventoryItem> deckTable = deckView.getTable();
+
+        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catView);
+        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckView);
+        
+        if (!childController.listenersHooked) { //hook listeners the first time the controller is updated
+            catTable.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
+                        addSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
+                    } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
+                        deckTable.requestFocusInWindow();
+                    } else if (KeyEvent.VK_F == e.getKeyCode()) {
+                        // let ctrl/cmd-F set focus to the text filter box
+                        if (e.isControlDown() || e.isMetaDown()) {
+                            VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().requestFocusInWindow();
+                        }
                     }
                 }
-            }
-        });
-
-        deckTable.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
-                    removeSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
-                } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
-                    catTable.requestFocusInWindow();
+            });
+    
+            deckTable.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
+                        removeSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
+                    } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
+                        catTable.requestFocusInWindow();
+                    }
                 }
-            }
-        });
-
-        final _MoveCard onAdd = new _MoveCard() {
-            @Override
-            public void moveCard(boolean toAlternate, int qty) {
-                addSelectedCards(toAlternate, qty);
-            }
-        };
-        final _MoveCard onRemove = new _MoveCard() {
-            @Override
-            public void moveCard(boolean toAlternate, int qty) {
-                removeSelectedCards(toAlternate, qty);
-            }
-        };
-        
-        catTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { addSelectedCards(false, 1); }
-                else if (MouseEvent.BUTTON3 == e.getButton()) {
-                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, catTable, deckTable, onAdd);
-                    childController.buildAddContextMenu(cmb);
-                    cmb.show();
+            });
+    
+            final _MoveCard onAdd = new _MoveCard() {
+                @Override
+                public void moveCard(boolean toAlternate, int qty) {
+                    addSelectedCards(toAlternate, qty);
                 }
-            }
-        });
-
-        deckTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { removeSelectedCards(false, 1); }
-                else if (MouseEvent.BUTTON3 == e.getButton()) {
-                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, deckTable, catTable, onRemove);
-                    childController.buildRemoveContextMenu(cmb);
-                    cmb.show();
+            };
+            final _MoveCard onRemove = new _MoveCard() {
+                @Override
+                public void moveCard(boolean toAlternate, int qty) {
+                    removeSelectedCards(toAlternate, qty);
                 }
-            }
-        });
+            };
+            
+            catTable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { addSelectedCards(false, 1); }
+                    else if (MouseEvent.BUTTON3 == e.getButton()) {
+                        _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, catTable, deckTable, onAdd);
+                        childController.buildAddContextMenu(cmb);
+                        cmb.show();
+                    }
+                }
+            });
+    
+            deckTable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { removeSelectedCards(false, 1); }
+                    else if (MouseEvent.BUTTON3 == e.getButton()) {
+                        _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, deckTable, catTable, onRemove);
+                        childController.buildRemoveContextMenu(cmb);
+                        cmb.show();
+                    }
+                }
+            });
 
-        catTable.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent arg0) {
-                catFind.cancel();
-            }
-        });
-        deckTable.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent arg0) {
-                deckFind.cancel();
-            }
-        });
-        
-        // highlight items as the user types a portion of their names
-        catTable.addKeyListener(catFind);
-        deckTable.addKeyListener(deckFind);
-        
-        childController.init();
+            final _FindAsYouType catFind  = new _FindAsYouType(catView);
+            final _FindAsYouType deckFind = new _FindAsYouType(deckView);
+    
+            catTable.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusLost(FocusEvent arg0) {
+                    catFind.cancel();
+                }
+            });
+            deckTable.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusLost(FocusEvent arg0) {
+                    deckFind.cancel();
+                }
+            });
+            
+            // highlight items as the user types a portion of their names
+            catTable.addKeyListener(catFind);
+            deckTable.addKeyListener(deckFind);
+            
+            childController.listenersHooked = true;
+        }
+
+        childController.update();
+
+        boolean wantElastic = SItemManagerIO.getPref(EditorPreference.elastic_columns);
+        boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
+        catTable.setWantElasticColumns(wantElastic);
+        deckTable.setWantElasticColumns(wantElastic);
+        catView.setWantUnique(wantUnique);
+        deckView.setWantUnique(wantUnique);
+        CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
     }
     
     private class _FindAsYouType extends KeyAdapter {
@@ -566,10 +580,16 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider, INavigationTabData {
     @Override
     public void initialize() {
         Singletons.getControl().getForgeMenu().setProvider(this);
-        if (this.childController == null) { //ensure child controller set
-            setCurrentEditorController(new CEditorConstructed());
+        
+        //change to previously open child controller based on screen
+        FScreen screen = Singletons.getControl().getCurrentScreen();
+        ACEditorBase<? extends InventoryItem, ? extends DeckBase> screenChildController = screenChildControllers.get(screen);
+        if (screenChildController != null) {
+            setCurrentEditorController(screenChildController);
         }
-        Singletons.getView().getNavigationBar().setSelectedTab(this);
+        else if (screen == FScreen.DECK_EDITOR_CONSTRUCTED) {
+            setCurrentEditorController(new CEditorConstructed()); //ensure Constructed deck editor controller initialized
+        }
     }
 
     /* (non-Javadoc)
@@ -577,56 +597,5 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider, INavigationTabData {
      */
     @Override
     public void update() { }
-    
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#getTabCaption()
-     */
-    @Override
-    public String getTabCaption() {
-        return "Deck Editor";
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#getTabIcon()
-     */
-    @Override
-    public SkinImage getTabIcon() {
-        return FSkin.getImage(FSkin.EditorImages.IMG_PACK);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#getTabDestScreen()
-     */
-    @Override
-    public Screens getTabDestScreen() {
-        return Screens.DECK_EDITOR_CONSTRUCTED;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#allowTabClose()
-     */
-    @Override
-    public boolean allowTabClose() {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#canCloseTab()
-     */
-    @Override
-    public String getCloseButtonTooltip() {
-        return "Close Editor";
-    }
-
-    /* (non-Javadoc)
-     * @see forge.view.FNavigationBar.INavigationTabData#onClosingTab()
-     */
-    @Override
-    public boolean onClosing() {
-        if (canExit()) {
-            Singletons.getControl().changeState(Screens.HOME_SCREEN);
-        }
-        return false; //don't allow closing Deck Editor tab
-    }
 }
 

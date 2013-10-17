@@ -6,11 +6,11 @@ import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorQuest;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.CHomeUI;
 import forge.quest.QuestController;
@@ -51,7 +51,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
                 if (!SSubmenuQuestUtil.checkActiveQuest("Create a Deck.")) {
                     return;
                 }
-                Singletons.getControl().changeStateAutoFixLayout(FControl.Screens.DECK_EDITOR_QUEST, "deck editor");
+                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorQuest(Singletons.getModel().getQuest()));
             }
         });

@@ -8,6 +8,7 @@ import forge.Singletons;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.controllers.DeckController;
 import forge.gui.deckeditor.views.VCurrentDeck;
+import forge.gui.framework.FScreen;
 
 /** 
  * Handles editor preferences saving and loading.
@@ -82,9 +83,9 @@ public class SEditorIO {
      * @return boolean, true if success
      */
     @SuppressWarnings("unchecked")
-    public static boolean confirmSaveChanges() {
+    public static boolean confirmSaveChanges(FScreen screen) {
         if (!((DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController()).isSaved()) {
-            Singletons.getView().getNavigationBar().ensureTabActive(CDeckEditorUI.SINGLETON_INSTANCE); //ensure Deck Editor is active before showing dialog
+            Singletons.getControl().ensureScreenActive(screen); //ensure Deck Editor is active before showing dialog
             final int choice = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                     "Save changes to current deck?",
                     "Save Changes?",

@@ -12,7 +12,6 @@ import javax.swing.SwingUtilities;
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
@@ -24,6 +23,7 @@ import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorDraftingProcess;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.net.FServer;
 import forge.net.Lobby;
@@ -159,7 +159,7 @@ public enum CSubmenuDraft implements ICDoc {
         final CEditorDraftingProcess draft = new CEditorDraftingProcess();
         draft.showGui(new BoosterDraft(o));
 
-        Singletons.getControl().changeState(FControl.Screens.DRAFTING_PROCESS);
+        Singletons.getControl().setCurrentScreen(FScreen.DRAFTING_PROCESS);
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(draft);
     }
 

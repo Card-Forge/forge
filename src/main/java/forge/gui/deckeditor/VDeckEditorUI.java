@@ -2,9 +2,10 @@ package forge.gui.deckeditor;
 
 import javax.swing.SwingUtilities;
 
+import forge.Singletons;
 import forge.gui.deckeditor.views.VCardCatalog;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
-import forge.gui.framework.SLayoutIO;
 
 /** 
 /** 
@@ -32,12 +33,32 @@ public enum VDeckEditorUI implements IVTopLevelUI {
      */
     @Override
     public void populate() {
-        SLayoutIO.loadLayout(null);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 VCardCatalog.SINGLETON_INSTANCE.getItemManager().focus();
             }
         });
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVTopLevelUI#onSwitching(forge.gui.framework.FScreen)
+     */
+    @Override
+    public boolean onSwitching(FScreen screen) {
+        return CDeckEditorUI.SINGLETON_INSTANCE.canExit(); //ensure deck saved before switching away
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVTopLevelUI#onClosing()
+     */
+    @Override
+    public boolean onClosing(FScreen screen) {
+        if (screen == FScreen.DECK_EDITOR_CONSTRUCTED) {
+            //don't close tab if Constructed editor, but return to home screen if this called
+            Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
+            return false;
+        }
+        return CDeckEditorUI.SINGLETON_INSTANCE.canExit();
     }
 }

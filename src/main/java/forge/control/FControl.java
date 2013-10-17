@@ -52,15 +52,13 @@ import forge.game.player.Player;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.InvalidLayoutFileException;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SOverflowUtil;
 import forge.gui.framework.SResizingUtil;
-import forge.gui.home.CHomeUI;
-import forge.gui.home.VHomeUI;
 import forge.gui.home.settings.GamePlayerUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
@@ -72,7 +70,6 @@ import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.gui.menus.ForgeMenu;
 import forge.gui.menus.MenuUtil;
-import forge.gui.toolbox.FAbsolutePositioner;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
 import forge.properties.ForgePreferences;
@@ -90,8 +87,8 @@ import forge.view.FView;
  * FControl.
  * </p>
  * Controls all Forge UI functionality inside one JFrame. This class switches
- * between various display states in that JFrame. Controllers are instantiated
- * separately by each state's top level view class.
+ * between various display screens in that JFrame. Controllers are instantiated
+ * separately by each screen's top level view class.
  */
 public enum FControl implements KeyEventDispatcher {
     instance;
@@ -99,21 +96,9 @@ public enum FControl implements KeyEventDispatcher {
     private ForgeMenu forgeMenu;
     private List<Shortcut> shortcuts;
     private JLayeredPane display;
-    private Screens state = Screens.UNKNOWN;
+    private FScreen currentScreen;
     private boolean altKeyLastDown;
     private CloseAction closeAction;
-
-    public static enum Screens {
-        UNKNOWN,
-        HOME_SCREEN,
-        MATCH_SCREEN,
-        DECK_EDITOR_CONSTRUCTED,
-        QUEST_BAZAAR,
-        DECK_EDITOR_LIMITED,
-        DECK_EDITOR_QUEST,
-        QUEST_CARD_SHOP,
-        DRAFTING_PROCESS
-    }
 
     public static enum CloseAction {
         NONE,
@@ -128,8 +113,8 @@ public enum FControl implements KeyEventDispatcher {
      * FControl.
      * </p>
      * Controls all Forge UI functionality inside one JFrame. This class
-     * switches between various display states in that JFrame. Controllers are
-     * instantiated separately by each state's top level view class.
+     * switches between various display screens in that JFrame. Controllers are
+     * instantiated separately by each screen's top level view class.
      */
     private FControl() {
         Singletons.getView().getFrame().addWindowListener(new WindowAdapter() {
@@ -220,8 +205,6 @@ public enum FControl implements KeyEventDispatcher {
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
 
-        this.forgeMenu = new ForgeMenu();
-
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
@@ -271,95 +254,70 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public ForgeMenu getForgeMenu() {
+        if (this.forgeMenu == null) {
+            this.forgeMenu = new ForgeMenu();
+        }
         return this.forgeMenu;
     }
 
-    /**
-     * Switches between display states in top level JFrame.
-     */
-    public void changeState(Screens screen) {
-        //TODO: Uncomment the line below if this function stops being used to refresh
-        //the current screen in some places (such as Continue and Restart in the match screen)
-        //if (this.state == screen) { return; }
-
-        clearChildren(JLayeredPane.DEFAULT_LAYER);
-        this.state = screen;
-
-        // Fire up new state
-        switch (screen) {
-        case HOME_SCREEN:
-            SOverlayUtils.hideTargetingOverlay();
-            VHomeUI.SINGLETON_INSTANCE.populate();
-            CHomeUI.SINGLETON_INSTANCE.initialize();
-            FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
-            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
-            break;
-
-        case MATCH_SCREEN:
-            VMatchUI.SINGLETON_INSTANCE.populate();
-            CMatchUI.SINGLETON_INSTANCE.initialize();
-            FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
-            showMatchBackgroundImage();
-            SOverlayUtils.showTargetingOverlay();
-            Singletons.getView().getNavigationBar().setSelectedTab(this.game);
-            break;
-
-        case DECK_EDITOR_CONSTRUCTED:
-        case DECK_EDITOR_LIMITED:
-        case DECK_EDITOR_QUEST:
-        case QUEST_CARD_SHOP:
-        case DRAFTING_PROCESS:
-            SOverlayUtils.hideTargetingOverlay();
-            VDeckEditorUI.SINGLETON_INSTANCE.populate();
-            CDeckEditorUI.SINGLETON_INSTANCE.initialize();
-            FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
-            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
-            break;
-
-        case QUEST_BAZAAR:
-            SOverlayUtils.hideTargetingOverlay();
-            FAbsolutePositioner.SINGLETON_INSTANCE.hideAll();
-            display.add(Singletons.getView().getViewBazaar(), JLayeredPane.DEFAULT_LAYER);
-            FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(false);
-            sizeChildren();
-            Singletons.getView().getNavigationBar().setSelectedTab(Singletons.getView().getViewBazaar());
-            break;
-
-        default:
-            throw new RuntimeException("unhandled screen: " + screen);
-        }
+    public FScreen getCurrentScreen() {
+        return this.currentScreen;
     }
 
-    private void showMatchBackgroundImage() {
-        if (isMatchBackgroundImageVisible()) {
-            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
+    /**
+     * Switches between display screens in top level JFrame.
+     */
+    public void setCurrentScreen(FScreen screen) {
+        //TODO: Uncomment the line below if this function stops being used to refresh
+        //the current screen in some places (such as Continue and Restart in the match screen)
+        //if (this.currentScreen == screen) { return; }
+
+        //give previous screen a chance to perform special switch handling and/or cancel switching away from screen
+        if (!Singletons.getView().getNavigationBar().canSwitchAway()) { return; }
+        
+        if (this.currentScreen == FScreen.MATCH_SCREEN) { //hide targeting overlay and reset image if was on match screen
+            SOverlayUtils.hideTargetingOverlay();
+            if (isMatchBackgroundImageVisible()) {
+                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
+            }
         }
+
+        clearChildren(JLayeredPane.DEFAULT_LAYER);
+        SOverlayUtils.hideOverlay();
+
+        this.currentScreen = screen;
+
+        //load layout for new current screen
+        try {
+            SLayoutIO.loadLayout(null);
+        } catch (InvalidLayoutFileException ex) {
+            GuiDialog.message("Your " + screen.getTabCaption() + " layout file could not be read. It will be deleted after you press OK.\nThe game will proceed with default layout.");
+            if (screen.deleteLayoutFile()) {
+                SLayoutIO.loadLayout(null); //try again
+            }
+        }
+
+        screen.getView().populate();
+        screen.getController().initialize();
+
+        if (screen == FScreen.MATCH_SCREEN) {
+            if (isMatchBackgroundImageVisible()) {
+                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
+            }
+            SOverlayUtils.showTargetingOverlay();
+        }
+
+        Singletons.getView().getNavigationBar().updateSelectedTab();
     }
 
     private boolean isMatchBackgroundImageVisible() {
         return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE);
     }
 
-    public void changeStateAutoFixLayout(Screens newState, String stateName)  {
-        try {
-            changeState(newState);
-        } catch (InvalidLayoutFileException ex) {
-            GuiDialog.message("Your " + stateName + " layout file could not be read. It will be deleted after you press OK.\nThe game will proceed with default layout.");
-            File fLayout = new File(SLayoutIO.getFilePreferred(newState));
-            fLayout.delete();
-            // try again
-            changeState(newState);
-        }
-    }
+    public void ensureScreenActive(FScreen screen) {
+        if (this.currentScreen == screen) { return; }
 
-    /**
-     * Returns the int reflecting the current state of the top level frame
-     * (see field definitions and class methods for details).
-     * 
-     * @return {@link java.lang.Integer}
-     * */
-    public Screens getState() {
-        return this.state;
+        setCurrentScreen(screen);
     }
 
     /** @return List<Shortcut> A list of attached keyboard shortcut descriptions and properties. */
@@ -455,10 +413,9 @@ public enum FControl implements KeyEventDispatcher {
         return inputQueue;
     }
 
-
     public final void startGameWithUi(Match match) {
         if (this.game != null) {
-            this.changeState(Screens.MATCH_SCREEN);
+            this.setCurrentScreen(FScreen.MATCH_SCREEN);
             SOverlayUtils.hideOverlay();
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Cannot start a new game while another game is already in progress.");
             return; //TODO: See if it's possible to run multiple games at once without crashing
@@ -471,7 +428,7 @@ public enum FControl implements KeyEventDispatcher {
     
     public final void endCurrentGame() {
         if (this.game == null) { return; }
-        Singletons.getView().getNavigationBar().closeTab(this.game);
+        Singletons.getView().getNavigationBar().closeTab(FScreen.MATCH_SCREEN);
         this.game = null;
     }
 
@@ -502,7 +459,7 @@ public enum FControl implements KeyEventDispatcher {
 
         Singletons.getModel().getPreferences().actuateMatchPreferences();
 
-        changeStateAutoFixLayout(Screens.MATCH_SCREEN, "match");
+        setCurrentScreen(FScreen.MATCH_SCREEN);
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
         CMessage.SINGLETON_INSTANCE.getInputControl().setGame(game);

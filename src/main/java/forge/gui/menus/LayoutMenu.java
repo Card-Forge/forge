@@ -13,10 +13,10 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 import forge.Singletons;
-import forge.control.FControl.Screens;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
 import forge.gui.MouseUtil.MouseCursor;
+import forge.gui.framework.FScreen;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
@@ -33,16 +33,16 @@ public final class LayoutMenu {
     private LayoutMenu() { }
 
     private static final CDock controller =  CDock.SINGLETON_INSTANCE;
-    private static Screens currentScreen;
+    private static FScreen currentScreen;
     private static final ForgePreferences prefs = Singletons.getModel().getPreferences();
     private static boolean showIcons = false;
 
     public static JMenu getMenu() {
-        currentScreen = Singletons.getControl().getState();
+        currentScreen = Singletons.getControl().getCurrentScreen();
 
         JMenu menu = new JMenu("Layout");
         menu.setMnemonic(KeyEvent.VK_L);
-        if (currentScreen != Screens.HOME_SCREEN) {
+        if (currentScreen != FScreen.HOME_SCREEN) {
             menu.add(getMenu_ViewOptions());
             menu.add(getMenu_FileOptions());
         }
@@ -50,7 +50,7 @@ public final class LayoutMenu {
         menu.addSeparator();
         menu.add(getMenuItem_FullScreen());
         menu.add(getMenuItem_SetWindowSize());
-        if (currentScreen != Screens.HOME_SCREEN) {
+        if (currentScreen != FScreen.HOME_SCREEN) {
             menu.add(getMenuItem_RevertLayout());
         }
         return menu;
@@ -59,7 +59,7 @@ public final class LayoutMenu {
     private static JMenu getMenu_ViewOptions() {
         JMenu menu = new JMenu("View");
         menu.add(getMenuItem_ShowTabs());
-        if (currentScreen == Screens.MATCH_SCREEN) {
+        if (currentScreen == FScreen.MATCH_SCREEN) {
             menu.add(getMenuItem_ShowBackgroundImage());
         }
         return menu;

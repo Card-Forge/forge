@@ -57,7 +57,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         public void addMoveAlternateItems (String verb, String nounSingular, String nounPlural, String destination);
         public void addTextFilterItem ();
     }
-    
+
+    public boolean listenersHooked;
     private ItemManager<TItem> catalogManager;
     private ItemManager<TItem> deckManager;
     
@@ -97,7 +98,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /**
      * Resets and initializes the current editor.
      */
-    public abstract void init();
+    public abstract void update();
 
     /**
      * Gets the ItemManager holding the cards in the current deck.

@@ -36,6 +36,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
+import forge.gui.framework.FScreen;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.CardManager;
@@ -100,9 +101,6 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
-
-        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
-        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
@@ -257,7 +255,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      */
     @SuppressWarnings("serial")
     @Override
-    public void init() {
+    public void update() {
         final List<TableColumnInfo<InventoryItem>> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
         final List<TableColumnInfo<InventoryItem>> columnsDeck = SColumnUtil.getDeckDefaultColumns();
 
@@ -281,8 +279,6 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         this.getCatalogManager().getTable().setup(columnsCatalog);
         this.getDeckManager().getTable().setup(columnsDeck);
 
-        Deck deck = new Deck();
-
         SItemManagerUtil.resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
@@ -297,7 +293,12 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        
 
-        this.getDeckController().setModel(deck);
+        if (this.controller.getModel() == null) {
+            this.getDeckController().setModel(new Deck());
+        }
+        else {
+            this.controller.refreshModel();
+        }
     }
 
     /* (non-Javadoc)
@@ -305,7 +306,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public boolean exit() {
-        final boolean okToExit = SEditorIO.confirmSaveChanges();
+        final boolean okToExit = SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_QUEST);
         if (okToExit) {
             Singletons.getModel().getQuest().save();
             CSubmenuQuestDecks.SINGLETON_INSTANCE.update();

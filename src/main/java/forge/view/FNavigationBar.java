@@ -24,10 +24,8 @@ import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
 import forge.Singletons;
-import forge.control.FControl.Screens;
-import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ILocalRepaint;
-import forge.gui.home.CHomeUI;
 import forge.gui.menus.ForgeMenu;
 import forge.gui.menus.LayoutMenu;
 import forge.gui.toolbox.FButton;
@@ -35,7 +33,6 @@ import forge.gui.toolbox.FDigitalClock;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
-import forge.gui.toolbox.FSkin.SkinImage;
 import forge.util.TypeUtil;
 
 @SuppressWarnings("serial")
@@ -75,7 +72,7 @@ public class FNavigationBar extends FTitleBarBase {
             btnClose.setToolTipText("Close");
             break;
         case CLOSE_SCREEN:
-            btnClose.setToolTipText(this.selectedTab.data.getCloseButtonTooltip());
+            btnClose.setToolTipText(this.selectedTab.screen.getCloseButtonTooltip());
             break;
         case EXIT_FORGE:
             btnClose.setToolTipText("Exit Forge");
@@ -90,8 +87,8 @@ public class FNavigationBar extends FTitleBarBase {
         layout.putConstraint(SpringLayout.SOUTH, btnForge, -1, SpringLayout.SOUTH, this);
         addForgeButtonListeners();
 
-        addNavigationTab(CHomeUI.SINGLETON_INSTANCE);
-        addNavigationTab(CDeckEditorUI.SINGLETON_INSTANCE);
+        addNavigationTab(FScreen.HOME_SCREEN);
+        addNavigationTab(FScreen.DECK_EDITOR_CONSTRUCTED);
 
         super.addControls();
 
@@ -101,8 +98,8 @@ public class FNavigationBar extends FTitleBarBase {
         updateClockVisibility();
     }
     
-    private NavigationTab addNavigationTab(INavigationTabData data) {
-        NavigationTab tab = new NavigationTab(data);
+    private NavigationTab addNavigationTab(FScreen screen) {
+        NavigationTab tab = new NavigationTab(screen);
         if (tabs.size() == 0) {
             tab.setSelected(true);
             selectedTab = tab;
@@ -117,48 +114,41 @@ public class FNavigationBar extends FTitleBarBase {
         return tab;
     }
     
-    private NavigationTab getTab(INavigationTabData data) {
+    private NavigationTab getTab(FScreen screen) {
         for (NavigationTab tab : tabs) {
-            if (tab.data == data) {
+            if (tab.screen == screen) {
                 return tab;
             }
         }
         return null;
     }
-
-    public void ensureTabActive(INavigationTabData data) {
-        NavigationTab tab = getTab(data);
-        if (tab != null && !tab.selected) {
-            setSelectedTab(tab);
-            Singletons.getControl().changeStateAutoFixLayout(data.getTabDestScreen(), tab.getText());
-        }
+    
+    public boolean canSwitchAway() {
+        return (selectedTab == null || selectedTab.screen.onSwitching());
     }
     
-    public void setSelectedTab(INavigationTabData data) {
-        NavigationTab tab = getTab(data);
+    public void updateSelectedTab() {
+        FScreen screen = Singletons.getControl().getCurrentScreen();
+        NavigationTab tab = getTab(screen);
         if (tab == null) {
-            tab = addNavigationTab(data); //if tab not found, add and select it
+            tab = addNavigationTab(screen); //if tab not found, add and select it
         }
-        setSelectedTab(tab);
-    }
-    
-    private void setSelectedTab(NavigationTab tab) {
-        if (tab != null && tab != selectedTab) {
-            if (selectedTab != null) {
-                selectedTab.setSelected(false);
-            }
-            tab.setSelected(true);
-            selectedTab = tab;
-            updateBtnCloseTooltip();
+        else if (tab == selectedTab) { return; }
+
+        if (selectedTab != null) {
+            selectedTab.setSelected(false);
         }
+        tab.setSelected(true);
+        selectedTab = tab;
+        updateBtnCloseTooltip();
     }
 
     public void closeSelectedTab() {
         closeTab(selectedTab);
     }
     
-    public void closeTab(INavigationTabData data) {
-        NavigationTab tab = getTab(data);
+    public void closeTab(FScreen screen) {
+        NavigationTab tab = getTab(screen);
         if (tab != null) {
             closeTab(tab);
         }
@@ -166,10 +156,13 @@ public class FNavigationBar extends FTitleBarBase {
     
     private void closeTab(NavigationTab tab) {
         if (tab == null) { return; }
-        if (!tab.data.onClosing()) { return; } //give data a chance to perform special close handling and/or cancel closing tab
+        if (!tab.screen.onClosing()) { return; } //give screen a chance to perform special close handling and/or cancel closing tab
 
         if (tab.selected) {
-            setSelectedTab(tabs.get(0)); //select home tab if selected tab closed (TODO: support navigation history and go to previous tab instead)
+            //return to Home screen if selected tab closed
+            //TODO: support navigation history and go to previous tab instead
+            this.selectedTab = null; //prevent raising onSwitching for tab being closed
+            Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
         }
         int index = tabs.indexOf(tab);
         if (index != -1) {
@@ -350,39 +343,30 @@ public class FNavigationBar extends FTitleBarBase {
     @Override
     public void setIconImage(Image image) {
     }
-
-    public interface INavigationTabData {
-        public String getTabCaption();
-        public SkinImage getTabIcon();
-        public Screens getTabDestScreen();
-        public boolean allowTabClose();
-        public String getCloseButtonTooltip();
-        public boolean onClosing();
-    }
     
     private final class NavigationTab extends JLabel implements ILocalRepaint {
         private static final int fontSize = 14;
         private static final int unhoveredAlpha = 150;
         private final FSkin.JLabelSkin<NavigationTab> skin;
-        private final INavigationTabData data;
+        private final FScreen screen;
         private final CloseButton btnClose;
         private SkinColor backColor;
         private boolean selected = false;
         private boolean hovered = false;
 
-        private NavigationTab(final INavigationTabData data0) {
-            super(data0.getTabCaption());
-            this.data = data0;
+        private NavigationTab(final FScreen screen0) {
+            super(screen0.getTabCaption());
+            this.screen = screen0;
             setOpaque(false);
             skin = FSkin.get(this);
-            skin.setIcon(data0.getTabIcon());
+            skin.setIcon(screen0.getTabIcon());
             skin.setForeground(foreColor.alphaColor(unhoveredAlpha));
             skin.setFont(FSkin.getFont(fontSize));
             
             int closeButtonOffset;
-            if (data.allowTabClose()) {
+            if (screen.allowTabClose()) {
                 btnClose = new CloseButton();
-                btnClose.setToolTipText(data.getCloseButtonTooltip());
+                btnClose.setToolTipText(screen.getCloseButtonTooltip());
                 closeButtonOffset = btnClose.getPreferredSize().width;
                 SpringLayout tabLayout = new SpringLayout();
                 setLayout(tabLayout);
@@ -402,11 +386,10 @@ public class FNavigationBar extends FTitleBarBase {
                     if (!NavigationTab.this.isEnabled()) { return; }
                     if (SwingUtilities.isLeftMouseButton(e)) {
                         if (!selected) {
-                            FNavigationBar.this.setSelectedTab(NavigationTab.this);
-                            Singletons.getControl().changeStateAutoFixLayout(data.getTabDestScreen(), NavigationTab.this.getText());
+                            Singletons.getControl().setCurrentScreen(screen);
                         }
                     }
-                    else if (SwingUtilities.isMiddleMouseButton(e) && data.allowTabClose()) {
+                    else if (SwingUtilities.isMiddleMouseButton(e) && screen.allowTabClose()) {
                         FNavigationBar.this.closeTab(NavigationTab.this);
                     }
                 }

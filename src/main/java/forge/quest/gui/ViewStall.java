@@ -31,6 +31,7 @@ import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
+import forge.gui.bazaar.VBazaarUI;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -39,7 +40,6 @@ import forge.quest.QuestController;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.bazaar.QuestStallDefinition;
 import forge.quest.data.QuestAssets;
-import forge.view.ViewBazaarUI;
 
 /**
  * <p>
@@ -55,15 +55,15 @@ public class ViewStall extends JPanel {
     private final JTextPane tpnFluff;
     private final JPanel pnlInventory;
     private final FScrollPane scrInventory;
-    private final ViewBazaarUI parentView;
+    private final VBazaarUI parentView;
     private final List<ViewItem> lstItemPanels;
     private QuestStallDefinition stall;
 
     /**
      * @param v0
-     *            {@link forge.view.ViewBazaarUI}
+     *            {@link forge.gui.bazaar.VBazaarUI}
      */
-    public ViewStall(final ViewBazaarUI v0) {
+    public ViewStall(final VBazaarUI v0) {
         // Final/component inits
         this.lblStallName = new FLabel.Builder().text("").fontAlign(SwingConstants.CENTER).build();
         this.lblEmpty = new FLabel.Builder().text("The merchant does not have anything useful for sale.")
@@ -179,8 +179,8 @@ public class ViewStall extends JPanel {
         }
     }
 
-    /** @return {@link forge.view.ViewBazaarUI} */
-    public ViewBazaarUI getParentView() {
+    /** @return {@link forge.gui.bazaar.VBazaarUI} */
+    public VBazaarUI getParentView() {
         return this.parentView;
     }
 }

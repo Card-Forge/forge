@@ -37,7 +37,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
-import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
@@ -50,7 +50,6 @@ import forge.item.ItemPoolView;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
-import forge.properties.ForgePreferences.FPref;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -89,14 +88,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 
-        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), wantUnique);
-        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), wantUnique);
-        
-        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
-        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
-
-        this.setCatalogManager(catalogManager);
-        this.setDeckManager(deckManager);
+        this.setCatalogManager(new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), wantUnique));
+        this.setDeckManager(new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), wantUnique));
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override
@@ -187,7 +180,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
     @Override
-    public void init() {
+    public void update() {
         
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
@@ -209,9 +202,9 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         } });
         
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        
-
-        this.controller.newModel();
+        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
+        
+        this.controller.refreshModel();
     }
 
     /* (non-Javadoc)
@@ -219,10 +212,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public boolean exit() {
-        // Override the submenu save choice - tell it to go to "constructed".
-        Singletons.getModel().getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, EDocID.HOME_COMMANDER.toString());
-
-        if (!SEditorIO.confirmSaveChanges())
+        if (!SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_COMMANDER))
         {
             return false;
         }

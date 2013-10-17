@@ -2,7 +2,6 @@ package forge.gui.home.settings;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +18,10 @@ import forge.Constant.Preferences;
 import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.control.FControl.CloseAction;
-import forge.control.FControl.Screens;
 import forge.control.RestartUtil;
 import forge.game.ai.AiProfileUtil;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
-import forge.gui.framework.SLayoutIO;
 import forge.gui.toolbox.FComboBoxPanel;
 import forge.gui.toolbox.FLabel;
 import forge.properties.ForgePreferences;
@@ -174,8 +172,9 @@ public enum CSubmenuPreferences implements ICDoc {
                         "Reset layout?";
         int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Deck Editor Layout", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            deleteScreenLayoutFile(Screens.DECK_EDITOR_CONSTRUCTED);
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Deck Editor layout has been reset.");
+            if (FScreen.DECK_EDITOR_CONSTRUCTED.deleteLayoutFile()) {
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Deck Editor layout has been reset.");
+            }
         }
     }
 
@@ -187,15 +186,10 @@ public enum CSubmenuPreferences implements ICDoc {
                         "Reset layout?";
         int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Match Screen Layout", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            deleteScreenLayoutFile(Screens.MATCH_SCREEN);
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Match Screen layout has been reset.");
+            if (FScreen.MATCH_SCREEN.deleteLayoutFile()) {
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Match Screen layout has been reset.");
+            }
         }
-    }
-
-    private void deleteScreenLayoutFile(Screens screen) {
-        String fd = SLayoutIO.getFilePreferred(screen);
-        File f = new File(fd);
-        f.delete();
     }
 
     private void initializeGameLogVerbosityComboBox() {

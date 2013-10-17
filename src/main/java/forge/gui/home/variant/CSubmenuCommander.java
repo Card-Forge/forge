@@ -13,7 +13,6 @@ import javax.swing.SwingUtilities;
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.Match;
@@ -23,6 +22,7 @@ import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorCommander;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FList;
 import forge.net.FServer;
@@ -94,7 +94,7 @@ public enum CSubmenuCommander implements ICDoc {
 
             @Override
             public void run() {                
-                Singletons.getControl().changeStateAutoFixLayout(FControl.Screens.DECK_EDITOR_CONSTRUCTED, "deck editor");
+                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
                         new CEditorCommander());
             }

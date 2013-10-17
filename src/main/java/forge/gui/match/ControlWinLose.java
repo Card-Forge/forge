@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import forge.Card;
 import forge.Singletons;
 import forge.card.CardDb;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameOutcome;
@@ -21,6 +20,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
+import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.net.FServer;
 import forge.properties.ForgePreferences.FPref;
@@ -98,7 +98,7 @@ public class ControlWinLose {
         // Reset other stuff
         saveOptions();
         Singletons.getControl().endCurrentGame();
-        Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
+        Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
         SOverlayUtils.hideOverlay();
     }
 

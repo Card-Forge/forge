@@ -13,7 +13,6 @@ import com.google.common.base.Predicate;
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
@@ -25,7 +24,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorVariant;
-import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FList;
 import forge.item.PaperCard;
@@ -100,9 +99,9 @@ public enum CSubmenuArchenemy implements ICDoc {
                     }
                 };
                 
-                Singletons.getControl().changeStateAutoFixLayout(FControl.Screens.DECK_EDITOR_CONSTRUCTED, "deck editor");
+                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
-                        new CEditorVariant(Singletons.getModel().getDecks().getScheme(),predSchemes,EDocID.HOME_ARCHENEMY));
+                        new CEditorVariant(Singletons.getModel().getDecks().getScheme(), predSchemes, FScreen.DECK_EDITOR_ARCHENEMY));
             }
         });
 

@@ -35,8 +35,8 @@ import javax.swing.JPanel;
 
 import forge.Card;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.game.combat.Combat;
+import forge.gui.framework.FScreen;
 import forge.gui.match.controllers.CDock;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.toolbox.FSkin;
@@ -330,7 +330,7 @@ public enum TargetingOverlay {
         public void paintComponent(final Graphics g) {
             final Combat combat = Singletons.getControl().getObservedGame().getCombat(); // this will get deprecated too
             // No need for this except in match view
-            if (Singletons.getControl().getState() != FControl.Screens.MATCH_SCREEN) { return; }
+            if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
 
             super.paintComponent(g);
 

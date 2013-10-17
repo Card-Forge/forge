@@ -33,14 +33,15 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
-import forge.control.FControl;
 import forge.control.RestartUtil;
 import forge.gui.FNetOverlay;
 import forge.gui.ImportDialog;
 import forge.gui.SOverlayUtils;
+import forge.gui.bazaar.VBazaarUI;
 import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.SLayoutConstants;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.home.VHomeUI;
@@ -74,7 +75,7 @@ public enum FView {
     private SplashFrame frmSplash;
 
     // Non-singleton instances (deprecated, but not updated yet)
-    private ViewBazaarUI bazaar = null;
+    private VBazaarUI bazaar = null;
 
     // Top-level UI components; all have getters.
     private final FFrame frmDocument = new FFrame();
@@ -152,7 +153,7 @@ public enum FView {
         }
 
         // All is ready to go - fire up home screen and discard splash frame.
-        Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
+        Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
 
         FView.this.frmSplash.dispose();
         FView.this.frmSplash = null;
@@ -408,9 +409,9 @@ public enum FView {
         }
     }
 
-    /** @return {@link forge.view.ViewBazaarUI} */
-    public ViewBazaarUI getViewBazaar() {
-        if (Singletons.getControl().getState() != FControl.Screens.QUEST_BAZAAR) {
+    /** @return {@link forge.gui.bazaar.VBazaarUI} */
+    public VBazaarUI getViewBazaar() {
+        if (Singletons.getControl().getCurrentScreen() != FScreen.QUEST_BAZAAR) {
             throw new IllegalArgumentException("FView$getViewBazaar\n"
                     + "may only be called while the bazaar UI is showing.");
         }
@@ -420,10 +421,10 @@ public enum FView {
 
     /** */
     private void cacheUIStates() {
-        FView.this.bazaar = new ViewBazaarUI(Singletons.getModel().getQuest().getBazaar());
         VMatchUI.SINGLETON_INSTANCE.instantiate();
         VHomeUI.SINGLETON_INSTANCE.instantiate();
         VDeckEditorUI.SINGLETON_INSTANCE.instantiate();
+        VBazaarUI.SINGLETON_INSTANCE.instantiate();
     }
     
     public void incrementSplashProgessBar() {

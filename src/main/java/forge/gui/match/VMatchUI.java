@@ -9,8 +9,8 @@ import javax.swing.SwingUtilities;
 import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
-import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SRearrangingUtil;
 import forge.gui.framework.VEmptyDoc;
 import forge.gui.match.nonsingleton.VCommand;
@@ -54,8 +54,6 @@ public enum VMatchUI implements IVTopLevelUI {
     /** */
     @Override
     public void populate() {
-        SLayoutIO.loadLayout(null);
-
         // Dev mode disabled? Remove from parent cell if exists.
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
             if (VDev.SINGLETON_INSTANCE.getParentCell() != null) {
@@ -165,5 +163,25 @@ public enum VMatchUI implements IVTopLevelUI {
 
     public List<VHand> getHands() {
         return lstHands;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVTopLevelUI#onSwitching(forge.gui.framework.FScreen)
+     */
+    @Override
+    public boolean onSwitching(FScreen screen) {
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.framework.IVTopLevelUI#onClosing(forge.control.FControl.Screens)
+     */
+    @Override
+    public boolean onClosing(FScreen screen) {
+        if (!Singletons.getControl().getObservedGame().isGameOver()) {
+            Singletons.getControl().stopGame();
+            return false; //delay hiding tab
+        }
+        return true;
     }
 }

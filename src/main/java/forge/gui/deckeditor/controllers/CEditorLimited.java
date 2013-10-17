@@ -28,6 +28,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
+import forge.gui.framework.FScreen;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
 import forge.gui.toolbox.itemmanager.CardManager;
@@ -48,6 +49,7 @@ import forge.util.storage.IStorage;
 public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
     private final DeckController<DeckGroup> controller;
+    private final FScreen screen;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
 
@@ -58,12 +60,11 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      *
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
-    public CEditorLimited(final IStorage<DeckGroup> deckMap0) {
+    public CEditorLimited(final IStorage<DeckGroup> deckMap0, FScreen screen0) {
+        this.screen = screen0;
+
         final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
         final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
-
-        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
-        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -159,7 +160,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
     @Override
-    public void init() {
+    public void update() {
         this.getCatalogManager().getTable().setup(SColumnUtil.getCatalogDefaultColumns());
         this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
@@ -183,7 +184,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public boolean exit() {
-        final boolean okToExit = SEditorIO.confirmSaveChanges();
+        final boolean okToExit = SEditorIO.confirmSaveChanges(this.screen);
 
         if (okToExit) {
             CSubmenuDraft.SINGLETON_INSTANCE.update();

@@ -133,9 +133,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
 
-        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
-        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
-
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
     }
@@ -156,62 +153,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setEnabled(true);
             fullCatalogToggle.setText("See full catalog");
         }
-    }
-    
-    private void setup() {
-        final List<TableColumnInfo<InventoryItem>> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
-        final List<TableColumnInfo<InventoryItem>> columnsDeck = SColumnUtil.getDeckDefaultColumns();
-
-        // Add spell shop-specific columns
-        columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_PURCHASE_PRICE));
-        columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
-                this.fnPriceCompare, this.fnPriceGet);
-
-        columnsCatalog.add(1, SColumnUtil.getColumn(ColumnName.CAT_OWNED));
-        columnsCatalog.get(1).setSortAndDisplayFunctions(
-                questData.getCards().getFnOwnedCompare(), questData.getCards().getFnOwnedGet());
-
-        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_SALE_PRICE));
-        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
-                this.fnPriceCompare, this.fnPriceSellGet);
-
-        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_NEW));
-        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
-                this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
-
-        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_DECKS));
-        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
-                this.fnDeckCompare, this.fnDeckGet);
-
-        // don't need AI column for either table
-        columnsCatalog.remove(SColumnUtil.getColumn(ColumnName.CAT_AI));
-        columnsDeck.remove(SColumnUtil.getColumn(ColumnName.DECK_AI));
-
-        // Setup with current column set
-        this.getCatalogManager().getTable().setup(columnsCatalog);
-        this.getDeckManager().getTable().setup(columnsDeck);
-
-        SItemManagerUtil.resetUI();
-
-        CCTabLabel = VCardCatalog.SINGLETON_INSTANCE.getTabLabel().getText();
-        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Cards for sale");
-
-        CCAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Buy Card");
-
-        CDTabLabel = VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().getText();
-        VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Your Cards");
-
-        CDRemLabel = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().getText();
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText("Sell Card");
-        
-        VProbabilities.SINGLETON_INSTANCE.getTabLabel().setVisible(false);
-
-        prevRem4Label = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getText();
-        prevRem4Tooltip = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getToolTipText();
-        prevRem4Cmd = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getCommand();
-        
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
     }
 
     // fills number of decks using each card
@@ -485,8 +426,60 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @SuppressWarnings("serial")
     @Override
-    public void init() {
-        setup();
+    public void update() {
+        final List<TableColumnInfo<InventoryItem>> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
+        final List<TableColumnInfo<InventoryItem>> columnsDeck = SColumnUtil.getDeckDefaultColumns();
+
+        // Add spell shop-specific columns
+        columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_PURCHASE_PRICE));
+        columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
+                this.fnPriceCompare, this.fnPriceGet);
+
+        columnsCatalog.add(1, SColumnUtil.getColumn(ColumnName.CAT_OWNED));
+        columnsCatalog.get(1).setSortAndDisplayFunctions(
+                questData.getCards().getFnOwnedCompare(), questData.getCards().getFnOwnedGet());
+
+        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_SALE_PRICE));
+        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
+                this.fnPriceCompare, this.fnPriceSellGet);
+
+        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_NEW));
+        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
+                this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
+
+        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_DECKS));
+        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
+                this.fnDeckCompare, this.fnDeckGet);
+
+        // don't need AI column for either table
+        columnsCatalog.remove(SColumnUtil.getColumn(ColumnName.CAT_AI));
+        columnsDeck.remove(SColumnUtil.getColumn(ColumnName.DECK_AI));
+
+        // Setup with current column set
+        this.getCatalogManager().getTable().setup(columnsCatalog);
+        this.getDeckManager().getTable().setup(columnsDeck);
+
+        SItemManagerUtil.resetUI();
+
+        CCTabLabel = VCardCatalog.SINGLETON_INSTANCE.getTabLabel().getText();
+        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Cards for sale");
+
+        CCAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
+        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Buy Card");
+
+        CDTabLabel = VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().getText();
+        VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Your Cards");
+
+        CDRemLabel = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().getText();
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText("Sell Card");
+        
+        VProbabilities.SINGLETON_INSTANCE.getTabLabel().setVisible(false);
+
+        prevRem4Label = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getText();
+        prevRem4Tooltip = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getToolTipText();
+        prevRem4Cmd = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getCommand();
+        
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
         this.decksUsingMyCards = this.countDecksForEachCard();
         this.multiplier = this.questData.getCards().getSellMultiplier();

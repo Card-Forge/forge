@@ -14916,7 +14916,6 @@ src/main/java/forge/card/trigger/WrappedAbility.java -text
 src/main/java/forge/card/trigger/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
 src/main/java/forge/control/ChatArea.java -text
-src/main/java/forge/control/ControlBazaarUI.java -text
 src/main/java/forge/control/FControl.java -text
 src/main/java/forge/control/FControlGameEventHandler.java -text
 src/main/java/forge/control/FControlGamePlayback.java -text
@@ -15085,6 +15084,8 @@ src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
 src/main/java/forge/gui/SOverlayUtils.java -text
 src/main/java/forge/gui/UnsortedListModel.java -text
 src/main/java/forge/gui/WrapLayout.java -text
+src/main/java/forge/gui/bazaar/CBazaarUI.java -text
+src/main/java/forge/gui/bazaar/VBazaarUI.java -text
 src/main/java/forge/gui/deckchooser/DecksComboBox.java -text
 src/main/java/forge/gui/deckchooser/DecksComboBoxEvent.java -text
 src/main/java/forge/gui/deckchooser/FDeckChooser.java -text
@@ -15130,6 +15131,7 @@ src/main/java/forge/gui/events/UiEventBlockerAssigned.java -text
 src/main/java/forge/gui/framework/DragCell.java -text
 src/main/java/forge/gui/framework/DragTab.java -text
 src/main/java/forge/gui/framework/EDocID.java -text
+src/main/java/forge/gui/framework/FScreen.java -text
 src/main/java/forge/gui/framework/ICDoc.java -text
 src/main/java/forge/gui/framework/IDocIdList.java -text
 src/main/java/forge/gui/framework/ILocalRepaint.java -text
@@ -15514,7 +15516,6 @@ src/main/java/forge/view/FTitleBarBase.java -text
 src/main/java/forge/view/FView.java -text
 src/main/java/forge/view/Main.java -text
 src/main/java/forge/view/SplashFrame.java -text
-src/main/java/forge/view/ViewBazaarUI.java -text
 src/main/java/forge/view/arcane/CardArea.java svneol=native#text/plain
 src/main/java/forge/view/arcane/CardPanel.java svneol=native#text/plain
 src/main/java/forge/view/arcane/CardPanelContainer.java svneol=native#text/plain

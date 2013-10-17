@@ -24,7 +24,6 @@ import forge.Constant;
 import forge.Singletons;
 import forge.card.CardDb;
 import forge.card.CardEdition;
-import forge.control.FControl;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -36,6 +35,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
+import forge.gui.framework.FScreen;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil;
@@ -67,9 +67,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
         final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
 
-        VCardCatalog.SINGLETON_INSTANCE.setItemManager(catalogManager);
-        VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckManager);
-
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
 
@@ -85,19 +82,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      */
     public final void showGui(final IBoosterDraft inBoosterDraft) {
         this.boosterDraft = inBoosterDraft;
-    }
-
-    /**
-     * <p>
-     * setup.
-     * </p>
-     */
-    private void setup() {
-        this.getCatalogManager().getTable().setup(SColumnUtil.getCatalogDefaultColumns());
-        this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
-
-        ccAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
     }
 
     /* (non-Javadoc)
@@ -230,7 +214,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
             Singletons.getModel().getDecks().getDraft().add(finishedDraft);
         }
 
-        Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
+        Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
     }
 
     //========== Overridden from ACEditorBase
@@ -260,8 +244,13 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
     @Override
-    public void init() {
-        this.setup();
+    public void update() {
+        this.getCatalogManager().getTable().setup(SColumnUtil.getCatalogDefaultColumns());
+        this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
+
+        ccAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
+        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
+
         this.showChoices(this.boosterDraft.nextChoice());
         this.getDeckManager().setPool((Iterable<InventoryItem>) null);
 

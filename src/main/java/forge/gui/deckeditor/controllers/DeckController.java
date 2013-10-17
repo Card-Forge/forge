@@ -32,6 +32,11 @@ import forge.util.storage.IStorage;
  *
  * @param <T> the generic type
  */
+/** 
+ * TODO: Write javadoc for this type.
+ *
+ * @param <T>
+ */
 public class DeckController<T extends DeckBase> {
 
     private T model;
@@ -291,12 +296,18 @@ public class DeckController<T extends DeckBase> {
     public boolean isModelInStore() {
         return this.modelInStore;
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#newModel()
+    
+    /**
+     * Refresh current model or create new one if none
      */
+    public void refreshModel() {
+        if (this.model == null) {
+            newModel();
+        }
+        else {
+            setModel(this.model, this.modelInStore);
+        }
+    }
 
     /**
      * New model.
