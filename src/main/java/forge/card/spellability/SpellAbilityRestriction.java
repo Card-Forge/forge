@@ -286,10 +286,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return true;
         }
 
-        if (!activator.equals(c.getController())
-                && (this.isOpponentOnly() || c.hasKeyword("May be played by your opponent"))) {
+        if (activator.isOpponentOf(c.getController()) && this.isOpponentOnly()) {
             return true;
         }
+        if (sa.isSpell() && activator.isOpponentOf(c.getController()) && c.hasKeyword("May be played by your opponent")) {
+            return true;
+        }
+        
         return false;
     }
 
