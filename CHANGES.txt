@@ -1,7 +1,7 @@
-Forge Beta: 10-##-2013 ver 1.5.3
+Forge Beta: 10-18-2013 ver 1.5.3
 
 
-13### cards in total.
+13337 cards in total.
 
 
 -------------
@@ -57,49 +57,49 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
+AEtherplasm
+Carom
 Charmed Pendant
 Elemental Resonance
-AEtherplasm
 Excavator
-Snowblind
-Takklemaggot
-Spellweaver Volute
 Protective Sphere
-Carom
+Snowblind
+Spellweaver Volute
+Takklemaggot
 
 
 --------------------
 New C13 branch Cards
 --------------------
 
-Derevi, Empyrial Tactician
-Oloro, Ageless Ascetic
-Curse of Chaos
+Act of Authority
+Angel of Finality
 Baleful Force
 Bane of Progress
-Gahiji, Honored One
-Nekusar, the Mindrazer
-Eye of Doom
-Djinn of Infinite Deceits
-Tempt with Immortality
-Surveyor's Scope
+Curse of Chaos
+Curse of Forsaken
 Curse of Inertia
 Curse of Predation
-Diviner Spirit
-Sydri, Galvanic Genius
-Curse of Forsaken
 Curse of Shallow Graves
+Derevi, Empyrial Tactician
+Diviner Spirit
+Djinn of Infinite Deceits
+Eye of Doom
+Fell Shepherd
+Gahiji, Honored One
+Hooded Horror
 Illusionist's Gambit
-True-Name Nemesis
+Nekusar, the Mindrazer
+Oloro, Ageless Ascetic
 Restore
 Roon of the Hidden Realm
 Shattergang Brothers
-Fell Shepherd
 Spawning Grounds
-Act of Authority
-Angel of Finality
-Hooded Horror
+Surveyor's Scope
+Sydri, Galvanic Genius
+Tempt with Immortality
 Tidal Force
+True-Name Nemesis
 
 
 ------------
@@ -124,7 +124,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+DrDev
+Dripton
+Gos
+Hellfish
+Nordos
+RumbleBBU
+Sloth
+Sol
+spr
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
