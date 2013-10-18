@@ -102,8 +102,12 @@ public class PlayEffect extends SpellAbilityEffect {
                 int ncopied = AbilityUtils.calculateAmount(source, num, sa);
                 while(ncopied > 0) {
                     final PaperCard cp = Aggregates.random(copysource);
-                    if (cp.getMatchingForgeCard().isValid(valid, source.getController(), source)) {
-                        choice.add(cp.getMatchingForgeCard());
+                    Card possibleCard = cp.getMatchingForgeCard();
+                    // Need to temporarily set the Owner so the Game is set
+                    possibleCard.setOwner(sa.getActivatingPlayer());
+                    
+                    if (possibleCard.isValid(valid, source.getController(), source)) {
+                        choice.add(possibleCard);
                         copysource.remove(cp);
                         ncopied -= 1;
                     }

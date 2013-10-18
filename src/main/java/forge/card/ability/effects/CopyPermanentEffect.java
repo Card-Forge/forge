@@ -91,8 +91,12 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 int ncopied = AbilityUtils.calculateAmount(hostCard, num, sa);
                 while(ncopied > 0) {
                     final PaperCard cp = Aggregates.random(copysource);
-                    if (cp.getMatchingForgeCard().isValid(valid, hostCard.getController(), hostCard)) {
-                        choice.add(cp.getMatchingForgeCard());
+                    Card possibleCard = cp.getMatchingForgeCard();
+                    // Need to temporarily set the Owner so the Game is set
+                    possibleCard.setOwner(sa.getActivatingPlayer());
+                    
+                    if (possibleCard.isValid(valid, hostCard.getController(), hostCard)) {
+                        choice.add(possibleCard);
                         copysource.remove(cp);
                         ncopied -= 1;
                     }
@@ -249,52 +253,43 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         final GameEntity defender = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("CopyAttacking"), sa).get(0);
                         game.getCombat().addAttacker(copy, defender);
                     }
+                    
+                    if (sa.hasParam("AtEOT")) {
+                        final String location = sa.getParam("AtEOT");
+                        final Card source = copy;
+                    
+                        final SpellAbility sac = new Ability(copy, ManaCost.ZERO) {
+                            @Override
+                            public void resolve() {
+                                // technically your opponent could steal the token
+                                // and the token shouldn't be sacrificed
+                                if (source.isInPlay()) {
+                                    if (location.equals("Sacrifice")) {
+                                        game.getAction().sacrifice(source, sa);
+                                    } else if (location.equals("Exile")) {
+                                        game.getAction().exile(source);
+                                    }
+    
+                                }
+                            }
+                        };
+
+                        final Command atEOT = new Command() {
+                            private static final long serialVersionUID = -4184510100801568140L;
+    
+                            @Override
+                            public void run() {
+                                sac.setStackDescription(sa.getParam("AtEOT") + " " + source + ".");
+                                game.getStack().addSimultaneousStackEntry(sac);
+                            }
+                        };
+                    
+                        game.getEndOfTurn().addAt(atEOT);
+                    }
                 }
 
                 if (wasInAlt) {
                     c.setState(stateName);
-                }
-                
-
-                // have to do this since getTargetCard() might change
-                // if Kiki-Jiki somehow gets untapped again
-                final Card[] target = new Card[multiplier];
-                for (int i = 0; i < multiplier; i++) {
-                    final int index = i;
-                    target[index] = crds[index];
-
-                    final SpellAbility sac = new Ability(target[index], ManaCost.ZERO) {
-                        @Override
-                        public void resolve() {
-                            // technically your opponent could steal the token
-                            // and the token shouldn't be sacrificed
-                            if (target[index].isInPlay()) {
-                                if (sa.getParam("AtEOT").equals("Sacrifice")) {
-                                    // maybe do a setSacrificeAtEOT, but
-                                    // probably not.
-                                    game.getAction().sacrifice(target[index], sa);
-                                } else if (sa.getParam("AtEOT").equals("Exile")) {
-                                    game.getAction().exile(target[index]);
-                                }
-
-                            }
-                        }
-                    };
-
-                    final Command atEOT = new Command() {
-                        private static final long serialVersionUID = -4184510100801568140L;
-
-                        @Override
-                        public void run() {
-                            sac.setStackDescription(sa.getParam("AtEOT") + " " + target[index] + ".");
-                            game.getStack().addSimultaneousStackEntry(sac);
-                        }
-                    }; // Command
-                    if (sa.hasParam("AtEOT")) {
-                        game.getEndOfTurn().addAt(atEOT);
-                    }
-                    // end copied Kiki code
-
                 }
             } // end canBeTargetedBy
         } // end foreach Card
