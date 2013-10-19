@@ -1552,7 +1552,7 @@ public class GameAction {
                         for (final Card c : toMulligan) {
                             moveToLibrary(c);
                         }
-                        p.shuffle();
+                        p.shuffle(null);
                         p.drawCards(handSize[i] - mulliganDelta);
                     } else { 
                         List<Card> toExile = Lists.newArrayList(toMulligan);
@@ -1580,7 +1580,7 @@ public class GameAction {
                 for(Card c : cc) {
                     moveToLibrary(c);
                 }
-                p.shuffle();
+                p.shuffle(null);
             }
     }
     

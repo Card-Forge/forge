@@ -292,7 +292,7 @@ public class GameNew {
                 final Iterable<Card> c1 = GameNew.smoothComputerManaCurve(player.getCardsIn(ZoneType.Library));
                 player.getZone(ZoneType.Library).setCards(c1);
             } else {
-                player.shuffle();
+                player.shuffle(null);
             }
             
             if(isFirstGame && player.getLobbyPlayer().getType() == PlayerType.COMPUTER) {

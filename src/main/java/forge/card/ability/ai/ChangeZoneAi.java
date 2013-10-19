@@ -1306,7 +1306,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         if (origin.contains(ZoneType.Library) && !defined && !"False".equals(sa.getParam("Shuffle")) && shuffleMandatory) {
-            player.shuffle();
+            player.shuffle(sa);
         }
 
         for (final Card c : fetched) {
@@ -1407,7 +1407,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         if ("True".equals(sa.getParam("Shuffle"))) {
-            player.shuffle();
+            player.shuffle(sa);
         }
 
         if (((!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined)

@@ -189,7 +189,7 @@ public class CounterEffect extends SpellAbilityEffect {
             game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
         } else if (destination.equals("ShuffleIntoLibrary")) {
             game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
-            tgtSA.getSourceCard().getController().shuffle();
+            tgtSA.getSourceCard().getController().shuffle(srcSA);
         } else {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "
                     + srcSA.getSourceCard().getName());

@@ -35,6 +35,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
@@ -89,7 +90,11 @@ public class ControlGainAi extends SpellAbilityAi {
                 if (!opp.canBeTargetedBy(sa)) {
                     return false;
                 }
-                sa.getTargets().add(opp);
+                if (tgt.isRandomTarget()) {
+                    sa.getTargets().add(Aggregates.random(tgt.getAllCandidates(sa, false)));
+                } else {
+                    sa.getTargets().add(opp);
+                }
             }
         }
 

@@ -136,7 +136,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         if (sa.hasParam("Shuffle")) {
             for (Player p : game.getPlayers()) {
                 if (Iterables.any(cards, CardPredicates.isOwner(p))) {
-                    p.shuffle();
+                    p.shuffle(sa);
                 }
             }
         }

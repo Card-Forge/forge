@@ -1763,7 +1763,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * shuffle.
      * </p>
      */
-    public final void shuffle() {
+    public final void shuffle(final SpellAbility sa) {
         final List<Card> list = Lists.newArrayList(this.getCardsIn(ZoneType.Library));
 
         if (list.size() <= 1) {
@@ -1796,6 +1796,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
+        runParams.put("Source", sa);
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams, false);
 
         // Play the shuffle sound

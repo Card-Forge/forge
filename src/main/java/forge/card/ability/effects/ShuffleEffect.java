@@ -22,7 +22,7 @@ public class ShuffleEffect extends SpellAbilityEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 boolean mustShuffle = !optional || sa.getActivatingPlayer().getController().confirmAction(sa, null, "Have " + p + " shuffle?"); 
                 if (mustShuffle) 
-                    p.shuffle();
+                    p.shuffle(sa);
             }
         }
     }

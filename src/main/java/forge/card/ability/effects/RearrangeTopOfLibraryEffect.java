@@ -82,7 +82,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
 
             for (final Player p : getTargetPlayers(sa)) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                    rearrangeTopOfLibrary(host, p, numCards, shuffle);
+                    rearrangeTopOfLibrary(host, p, numCards, shuffle, sa);
                 }
             }
         }
@@ -101,7 +101,8 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
      * @param mayshuffle
      *            a boolean.
      */
-    private void rearrangeTopOfLibrary(final Card src, final Player player, final int numCards, final boolean mayshuffle) {
+    private void rearrangeTopOfLibrary(final Card src, final Player player, final int numCards,
+            final boolean mayshuffle, final SpellAbility sa) {
         final PlayerZone lib = player.getZone(ZoneType.Library);
         int maxCards = lib.size();
         // If library is smaller than N, only show that many cards
@@ -122,7 +123,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
         }
         if (mayshuffle) {
             if (GuiDialog.confirm(src, "Do you want to shuffle the library?")) {
-                player.shuffle();
+                player.shuffle(sa);
             }
         }
     }

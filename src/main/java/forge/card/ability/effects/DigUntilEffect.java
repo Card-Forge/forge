@@ -216,7 +216,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
 
                 if (shuffle) {
-                    p.shuffle();
+                    p.shuffle(sa);
                 }
             } // end foreach player
         }

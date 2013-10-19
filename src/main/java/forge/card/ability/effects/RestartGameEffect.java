@@ -83,7 +83,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
                 action.moveToLibrary(c, 0);
             }
     
-            player.shuffle();
+            player.shuffle(null);
         }
     
         trigHandler.clearSuppression(TriggerType.ChangesZone);

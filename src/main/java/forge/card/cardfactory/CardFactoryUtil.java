@@ -365,7 +365,7 @@ public class CardFactoryUtil {
                     sourceCard.getGame().getAction().moveToHand(c1);
 
                 }
-                sourceCard.getController().shuffle();
+                sourceCard.getController().shuffle(this);
             }
         }
         final SpellAbility transmute = new AbilityTransmute(sourceCard, abCost, null);

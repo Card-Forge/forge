@@ -438,7 +438,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 // for things like Gaea's Blessing
                 if (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"))) {
-                    tgtC.getOwner().shuffle();
+                    tgtC.getOwner().shuffle(sa);
                 }
             } else {
                 if (destination.equals(ZoneType.Battlefield)) {
@@ -779,7 +779,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // do not shuffle the library once we have placed a fetched
                     // card on top.
                     if (origin.contains(ZoneType.Library) && (i < 1) && !"False".equals(sa.getParam("Shuffle"))) {
-                        player.shuffle();
+                        player.shuffle(sa);
                     }
                     movedCard = game.getAction().moveToLibrary(c, libraryPos);
                 } else if (destination.equals(ZoneType.Battlefield)) {
@@ -929,7 +929,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)
                 || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
-            player.shuffle();
+            player.shuffle(sa);
         }
     }
 
@@ -969,7 +969,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else if (srcSA.getParam("Destination").equals("Library")) {
                 game.getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
                 if (srcSA.hasParam("Shuffle")) {
-                    tgtSA.getSourceCard().getOwner().shuffle();
+                    tgtSA.getSourceCard().getOwner().shuffle(srcSA);
                 }
             } else {
                 throw new IllegalArgumentException("AbilityFactory_ChangeZone: Invalid Destination argument for card "
