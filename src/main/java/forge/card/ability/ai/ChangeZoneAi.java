@@ -1168,7 +1168,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (searchedLibrary && ai.equals(player)) {
             ai.incLibrarySearched();
         }
-
+        if (sa.hasParam("NoShuffle")) {
+            shuffleMandatory = false;
+        }
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<Card> fetched = new ArrayList<Card>();
         final boolean remember = sa.hasParam("RememberChanged");

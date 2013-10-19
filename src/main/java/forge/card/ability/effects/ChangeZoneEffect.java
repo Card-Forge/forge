@@ -705,6 +705,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             decider.incLibrarySearched();
         }
 
+        if (sa.hasParam("NoShuffle")) {
+            shuffleMandatory = false;
+        }
+
         if (!defined) {
             if (origin.contains(ZoneType.Library) && !defined && !sa.hasParam("NoLooking") && !decider.hasKeyword("CantSearchLibrary")) {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
