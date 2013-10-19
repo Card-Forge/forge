@@ -1,7 +1,7 @@
-Forge Beta: 10-18-2013 ver 1.5.3
+Forge Beta: 1#-##-2013 ver 1.5.4
 
 
-13337 cards in total.
+13### cards in total.
 
 
 -------------
@@ -14,6 +14,12 @@ By default, Home and Deck Editor are available as tabs, with another closable ta
 X button in upper right now exits Forge rather than going back to Home screen.
 To concede the current game, use the X button in the Game tab itself.
 Deck Editor and Exit Forge buttons have been removed from the Home screen since they're both accessible on the titlebar.
+
+
+- The X button in the upper right corner -
+The first time you click the X button in the upper right, you'll be given the choice between the old behavior of closing the current screen and returning to the Home screen (which matches what the X button on each navigation tab does) or exiting Forge if already on the Home screen, or the alternative behavior of exiting Forge regardless of the current screen. Your choice will be remembered so you won't be prompted again, though you can change this setting at any time in preferences. This way, whether you like the old behavior or expect that X button to exit the application, you'll be able to have it work that way.
+
+Also keep in mind that even if you choose to have that X button work like before, the tabs will remain available for switching screens without closing them.
 
 
 - True Full Screen support -
@@ -57,15 +63,7 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-AEtherplasm
-Carom
-Charmed Pendant
-Elemental Resonance
-Excavator
-Protective Sphere
-Snowblind
-Spellweaver Volute
-Takklemaggot
+
 
 
 --------------------
@@ -101,6 +99,16 @@ Tempt with Immortality
 Tidal Force
 True-Name Nemesis
 
+Sudden Demise
+Tempt with Vengeance
+Terra Ravager
+Toxic Deluge
+Widespread Panic
+Witch Hunt
+Naya Soulbeast
+Tempt with Discovery
+Darksteel Mutation
+
 
 ------------
 Known Issues
@@ -124,17 +132,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-DrDev
-Dripton
-Gos
-Hellfish
-Nordos
-RumbleBBU
-Sloth
-Sol
-spr
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
