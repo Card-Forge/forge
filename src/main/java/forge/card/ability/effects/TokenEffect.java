@@ -55,7 +55,6 @@ public class TokenEffect extends SpellAbilityEffect {
     private String tokenName;
     private String[] tokenKeywords;
     private String[] tokenHiddenKeywords;
-    private boolean optional;
 
     private void readParameters(final SpellAbility mapParams) {
         String image;
@@ -115,7 +114,6 @@ public class TokenEffect extends SpellAbilityEffect {
         } else {
             this.tokenOwner = "You";
         }
-        this.optional = mapParams.hasParam("Optional");
     }
 
     @Override
@@ -207,9 +205,6 @@ public class TokenEffect extends SpellAbilityEffect {
         final boolean remember = sa.hasParam("RememberTokens");
         final boolean imprint = sa.hasParam("ImprintTokens");
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
-            if (optional && !controller.getController().confirmAction(sa, null, "Do you want to make tokens?")) {
-                continue;
-            }
             for (int i = 0; i < finalAmount; i++) {
                 final List<Card> tokens = CardFactory.makeToken(substitutedName, imageName, controller, cost,
                         substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
@@ -318,9 +313,6 @@ public class TokenEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-            }
-            if (sa.hasParam("RememberController")) {
-                host.addRemembered(controller);
             }
         }
     }

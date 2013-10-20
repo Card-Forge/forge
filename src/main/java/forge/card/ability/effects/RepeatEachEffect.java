@@ -81,8 +81,14 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("RepeatPlayers")) {
             final List<Player> repeatPlayers = AbilityUtils.getDefinedPlayers(source, sa.getParam("RepeatPlayers"), sa);
-
+            boolean optional = false;
+            if (sa.hasParam("RepeatOptionalForEachPlayer")) {
+                optional = true;
+            }
             for (Player player : repeatPlayers) {
+                if (optional && !player.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"))) {
+                    continue;
+                }
                 source.addRemembered(player);
                 AbilityUtils.resolve(repeat);
                 source.removeRemembered(player);

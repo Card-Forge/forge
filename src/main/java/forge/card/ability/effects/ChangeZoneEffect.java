@@ -19,6 +19,7 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.ability.ai.ChangeZoneAi;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
@@ -299,7 +300,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 // this needs to be zero indexed. Top = 0, Third = 2, -1 =
                 // Bottom
-                final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
+                final int libraryPosition = sa.hasParam("LibraryPosition") ? CardFactoryUtil.xCount(host, host.getSVar(sa.getParam("LibraryPosition"))) : 0;
 
                 if (libraryPosition == -1) {
                     sb.append(" on the bottom of").append(pronoun).append("owner's library.");
@@ -432,7 +433,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             if (destination.equals(ZoneType.Library)) {
                 // library position is zero indexed
-                final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
+                final int libraryPosition = sa.hasParam("LibraryPosition") ? CardFactoryUtil.xCount(hostCard, hostCard.getSVar(sa.getParam("LibraryPosition"))) : 0;
 
                 movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition);
 
@@ -632,7 +633,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         // this needs to be zero indexed. Top = 0, Third = 2
-        int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
+        int libraryPos = sa.hasParam("LibraryPosition") ? CardFactoryUtil.xCount(source, source.getSVar(sa.getParam("LibraryPosition"))) : 0;
 
         if (sa.hasParam("OriginChoice")) {
             // Currently only used for Mishra, but may be used by other things
