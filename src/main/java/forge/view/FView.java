@@ -74,9 +74,6 @@ public enum FView {
     private final List<DragCell> allCells = new ArrayList<DragCell>();
     private SplashFrame frmSplash;
 
-    // Non-singleton instances (deprecated, but not updated yet)
-    private VBazaarUI bazaar = null;
-
     // Top-level UI components; all have getters.
     private final FFrame frmDocument = new FFrame();
     // A layered pane is the frame's viewport, allowing overlay effects.
@@ -407,16 +404,6 @@ public enum FView {
             this.skin.resetCursor(); //ensure skin cursor reset if needed
             super.setCursor(cursor);
         }
-    }
-
-    /** @return {@link forge.gui.bazaar.VBazaarUI} */
-    public VBazaarUI getViewBazaar() {
-        if (Singletons.getControl().getCurrentScreen() != FScreen.QUEST_BAZAAR) {
-            throw new IllegalArgumentException("FView$getViewBazaar\n"
-                    + "may only be called while the bazaar UI is showing.");
-        }
-        bazaar.refreshLastInstance();
-        return FView.this.bazaar;
     }
 
     /** */

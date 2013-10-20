@@ -7,6 +7,7 @@ import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
+import forge.gui.bazaar.VBazaarUI;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
@@ -53,7 +54,7 @@ public class ViewItem extends FPanel {
                     ViewItem.this.getItem().onPurchase(qA);
                     Singletons.getModel().getQuest().save();
                 }
-                Singletons.getView().getViewBazaar().refreshLastInstance();
+                VBazaarUI.SINGLETON_INSTANCE.refreshLastInstance();
             }
         });
     }
