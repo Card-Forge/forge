@@ -7,8 +7,9 @@ Difficulty=hard
 Description=Black regenerating creatures and The Disk.
 Deck Type=constructed
 [main]
+1 Animate Dead|4ED
 4 Clay Statue|ATQ
-2 Dark Ritual|4ED
+1 Mox Jet
 2 Diabolic Machine|DRK
 4 Drudge Skeletons|4ED
 2 Howl from Beyond|LEB

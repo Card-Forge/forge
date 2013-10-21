@@ -8,9 +8,9 @@ Description=Black regenerating creatures and The Disk.
 Deck Type=constructed
 [main]
 3 Clay Statue|ATQ
-2 Dark Ritual|4ED
 3 Diabolic Machine|DRK
 4 Drudge Skeletons|4ED
+1 Eater of the Dead|DRK
 2 Greed|LEG
 2 Howl from Beyond|LEB
 4 Nevinyrral's Disk|LEB
@@ -18,6 +18,7 @@ Deck Type=constructed
 23 Swamp|4ED
 3 Throne of Bone|LEB
 4 Unholy Strength|4ED
+1 Walking Dead|LEG
 2 Wall of Bone|4ED
 3 Weakness|4ED
 4 Will-o'-the-Wisp|LEB
