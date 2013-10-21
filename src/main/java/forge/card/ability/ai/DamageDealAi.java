@@ -344,7 +344,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
             // fell through all the choices, no targets left?
-            if (((sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa)) || (sa.getTargets().getNumTargeted() == 0))) {
+            if (sa.getTargets().getNumTargeted() < tgt.getMinTargets(source, sa) || sa.getTargets().getNumTargeted() == 0) {
                 if (!mandatory) {
                     sa.resetTargets();
                     return false;
