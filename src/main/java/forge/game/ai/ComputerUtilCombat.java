@@ -735,6 +735,13 @@ public class ComputerUtilCombat {
         if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
             power -= attacker.getAmountOfKeyword("Flanking");
         }
+        
+        // Serene Master switches power with attacker
+        if (defender.getName().equals("Serene Master")) {
+            power += attacker.getNetAttack() - defender.getNetAttack();
+        } else if (defender.getName().equals("Shape Stealer")) {
+            power += attacker.getNetAttack() - defender.getNetAttack();
+        } 
 
         // if the attacker has first strike and wither the blocker will deal
         // less damage than expected
@@ -882,6 +889,10 @@ public class ComputerUtilCombat {
         if (attacker.hasKeyword("Flanking") && !defender.hasKeyword("Flanking")) {
             toughness -= attacker.getAmountOfKeyword("Flanking");
         }
+        
+        if (defender.getName().equals("Shape Stealer")) {
+            toughness += attacker.getNetDefense() - defender.getNetDefense();
+        } 
 
         toughness += defender.getKeywordMagnitude("Bushido");
         final Game game = attacker.getGame();
@@ -1013,6 +1024,13 @@ public class ComputerUtilCombat {
             for (Card card : attacker.getController().getCardsIn(ZoneType.Battlefield)) {
                 power += card.getKeywordAmount("Exalted");
             }
+        }
+
+        // Serene Master switches power with attacker
+        if (defender!= null && defender.getName().equals("Serene Master")) {
+            power += defender.getNetAttack() - attacker.getNetAttack();
+        } else if (defender != null && attacker.getName().equals("Shape Stealer")) {
+            power += defender.getNetAttack() - attacker.getNetAttack();
         }
 
         final Game game = attacker.getGame();
@@ -1182,6 +1200,10 @@ public class ComputerUtilCombat {
             for (Card card : attacker.getController().getCardsIn(ZoneType.Battlefield)) {
                 toughness += card.getKeywordAmount("Exalted");
             }
+        }
+
+        if (defender != null && attacker.getName().equals("Shape Stealer")) {
+            toughness += defender.getNetDefense() - attacker.getNetDefense();
         }
 
         final Game game = attacker.getGame();
