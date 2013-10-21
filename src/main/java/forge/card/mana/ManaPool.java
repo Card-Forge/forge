@@ -28,6 +28,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 
+import forge.CounterType;
 import forge.card.MagicColor;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -300,10 +301,15 @@ public class ManaPool {
             if (mana.addsNoCounterMagic(sa) && sa.getSourceCard() != null) {
                 sa.getSourceCard().setCanCounter(false);
             }
-            if (sa.isSpell() && sa.getSourceCard() != null
-                    && sa.getSourceCard().isCreature() && mana.addsKeywords(sa)) {
-                final long timestamp = sa.getSourceCard().getGame().getNextTimestamp();
-                sa.getSourceCard().addChangedCardKeywords(Arrays.asList(mana.getAddedKeywords().split(" & ")), new ArrayList<String>(), false, timestamp);
+            if (sa.isSpell() && sa.getSourceCard() != null) {
+                if (sa.getSourceCard().isCreature() && mana.addsKeywords(sa)) {
+                    final long timestamp = sa.getSourceCard().getGame().getNextTimestamp();
+                    sa.getSourceCard().addChangedCardKeywords(Arrays.asList(mana.getAddedKeywords().split(" & ")), new ArrayList<String>(), false, timestamp);
+                }
+                if (mana.addsCounters(sa)
+                        && sa.getSourceCard().isValid(mana.getManaAbility().getAddsCounters().split("_")[0], sa.getActivatingPlayer(), sa.getSourceCard())) {
+                    sa.getSourceCard().addCounter(CounterType.getType(mana.getManaAbility().getAddsCountersType()), mana.getManaAbility().getAddsCountersNum(), true);
+                }
             }
         }
     }

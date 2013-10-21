@@ -30,6 +30,7 @@ import forge.Card;
 import forge.Constant;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
 import forge.card.replacement.ReplacementResult;
@@ -54,6 +55,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private final String manaRestrictions;
     private final String cannotCounterSpell;
     private final String addsKeywords;
+    private final String addsCounters;
     private final boolean persistentMana;
     private String manaReplaceType;
     
@@ -86,6 +88,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.manaRestrictions = params.containsKey("RestrictValid") ? params.get("RestrictValid") : "";
         this.cannotCounterSpell = params.get("AddsNoCounter");
         this.addsKeywords = params.get("AddsKeywords");
+        this.addsCounters = params.get("AddsCounters");
         this.persistentMana = (null == params.get("PersistentMana")) ? false :
             "True".equalsIgnoreCase(params.get("PersistentMana"));
         this.manaReplaceType = params.containsKey("ManaReplaceType") ? params.get("ManaReplaceType") : "";
@@ -206,6 +209,53 @@ public class AbilityManaPart implements java.io.Serializable {
     public String getKeywords() {
         return this.addsKeywords;
     }
+
+    /**
+     * <p>
+     * addsCounters.
+     * </p>
+     * @param saBeingPaid 
+     * 
+     * @return a {@link java.lang.String} object.
+     */
+    public boolean addsCounters(SpellAbility saBeingPaid) {
+        return this.addsCounters != null;
+    }
+
+    /**
+     * @return the getAddsCounters
+     */
+    public String getAddsCounters() {
+        return this.addsCounters;
+    }
+
+    /**
+     * @return the getAddsCountersType
+     */
+    public String getAddsCountersType() {
+        if (this.addsCounters != null) {
+            return  this.addsCounters.split("_")[1];
+        }
+        return "";
+    }
+
+    /**
+     * @return the getAddsCountersNum
+     */
+    public int getAddsCountersNum() {
+        if (this.addsCounters != null) {
+            int n = 0;
+            String num = this.addsCounters.split("_")[2];
+            try {
+                n = Integer.parseInt(num);
+            } catch (NumberFormatException e) {
+                n = CardFactoryUtil.xCount(sourceCard, sourceCard.getSVar(num));
+            }
+            return n;
+        }
+        return 0;
+    }
+
     /**
      * <p>
      * getManaRestrictions.

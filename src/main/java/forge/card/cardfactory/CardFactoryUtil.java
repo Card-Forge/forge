@@ -1110,6 +1110,13 @@ public class CardFactoryUtil {
             return doXMath(added, m, c);
         }
 
+        if (l[0].startsWith("CommanderCastFromCommandZone")) {
+            // Read SVar CommanderCostRaise from Commander effect
+            Card commeff = CardLists.filter(cc.getCardsIn(ZoneType.Command),
+                    CardPredicates.nameEquals("Commander effect")).get(0);
+            return doXMath(xCount(commeff, commeff.getSVar("CommanderCostRaise")), "DivideEvenlyDown.2", c);
+        }
+
         if (l[0].startsWith("RolledThisTurn")) {
             return game.getPhaseHandler().getPlanarDiceRolledthisTurn();
         }

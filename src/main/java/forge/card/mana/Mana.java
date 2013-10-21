@@ -146,6 +146,18 @@ public class Mana {
 
     /**
      * <p>
+     * addsCounters.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean addsCounters(SpellAbility saBeingPaid) {
+        return this.manaAbility != null && manaAbility.addsCounters(saBeingPaid);
+    }
+
+
+    /**
+     * <p>
      * addsKeywords.
      * </p>
      * 
