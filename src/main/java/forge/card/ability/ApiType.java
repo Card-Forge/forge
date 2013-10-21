@@ -61,6 +61,7 @@ public enum ApiType {
     EndTurn (EndTurnEffect.class, EndTurnAi.class),
     ExchangeLife (LifeExchangeEffect.class, LifeExchangeAi.class),
     ExchangeControl (ControlExchangeEffect.class, ControlExchangeAi.class),
+    ExchangePower (PowerExchangeEffect.class, PowerExchangeAi.class),
     ExchangeZone (ZoneExchangeEffect.class, ZoneExchangeAi.class),
     Fight (FightEffect.class, FightAi.class),
     FlipACoin (FlipCoinEffect.class, FlipACoinAi.class),

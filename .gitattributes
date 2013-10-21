@@ -14621,6 +14621,7 @@ src/main/java/forge/card/ability/ai/PermanentNoncreatureAi.java -text
 src/main/java/forge/card/ability/ai/PhasesAi.java -text
 src/main/java/forge/card/ability/ai/PlayAi.java -text
 src/main/java/forge/card/ability/ai/PoisonAi.java -text
+src/main/java/forge/card/ability/ai/PowerExchangeAi.java -text
 src/main/java/forge/card/ability/ai/ProtectAi.java -text
 src/main/java/forge/card/ability/ai/ProtectAllAi.java -text
 src/main/java/forge/card/ability/ai/PumpAi.java -text
@@ -14733,6 +14734,7 @@ src/main/java/forge/card/ability/effects/PhasesEffect.java -text
 src/main/java/forge/card/ability/effects/PlaneswalkEffect.java -text
 src/main/java/forge/card/ability/effects/PlayEffect.java -text
 src/main/java/forge/card/ability/effects/PoisonEffect.java -text
+src/main/java/forge/card/ability/effects/PowerExchangeEffect.java -text
 src/main/java/forge/card/ability/effects/ProtectAllEffect.java -text
 src/main/java/forge/card/ability/effects/ProtectEffect.java -text
 src/main/java/forge/card/ability/effects/PumpAllEffect.java -text
