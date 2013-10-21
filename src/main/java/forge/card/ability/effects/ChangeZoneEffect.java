@@ -193,7 +193,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             if (destination.equals("Library")) {
-                final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
+                final int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(host, sa.getParam("LibraryPosition"), sa) : 0;
 
                 if (libraryPos == 0) {
                     sb.append(" on top");
@@ -300,7 +300,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 // this needs to be zero indexed. Top = 0, Third = 2, -1 =
                 // Bottom
-                final int libraryPosition = sa.hasParam("LibraryPosition") ? CardFactoryUtil.xCount(host, host.getSVar(sa.getParam("LibraryPosition"))) : 0;
+                final int libraryPosition = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(host, sa.getParam("LibraryPosition"), sa) : 0;
 
                 if (libraryPosition == -1) {
                     sb.append(" on the bottom of").append(pronoun).append("owner's library.");
@@ -433,7 +433,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             if (destination.equals(ZoneType.Library)) {
                 // library position is zero indexed
-                final int libraryPosition = sa.hasParam("LibraryPosition") ? CardFactoryUtil.xCount(hostCard, hostCard.getSVar(sa.getParam("LibraryPosition"))) : 0;
+                final int libraryPosition = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(hostCard, sa.getParam("LibraryPosition"), sa) : 0;
 
                 movedCard = game.getAction().moveToLibrary(tgtC, libraryPosition);
 

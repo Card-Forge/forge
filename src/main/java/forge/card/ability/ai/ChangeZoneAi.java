@@ -23,7 +23,6 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.ability.effects.AttachEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
@@ -1315,7 +1314,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         for (final Card c : fetched) {
             Card movedCard = null;
             if (ZoneType.Library.equals(destination)) {
-                final int libraryPos = sa.hasParam("LibraryPosition") ? CardFactoryUtil.xCount(source, source.getSVar(sa.getParam("LibraryPosition"))) : 0;
+                final int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
                 movedCard = game.getAction().moveToLibrary(c, libraryPos);
             } else if (ZoneType.Battlefield.equals(destination)) {
                 if (sa.hasParam("Tapped")) {
