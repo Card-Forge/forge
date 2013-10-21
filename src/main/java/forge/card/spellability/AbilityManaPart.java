@@ -30,9 +30,11 @@ import forge.Card;
 import forge.Constant;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
+import forge.card.replacement.ReplacementEffect;
+import forge.card.replacement.ReplacementHandler;
+import forge.card.replacement.ReplacementLayer;
 import forge.card.replacement.ReplacementResult;
 import forge.card.trigger.TriggerType;
 import forge.game.GameType;
@@ -223,37 +225,32 @@ public class AbilityManaPart implements java.io.Serializable {
     }
 
     /**
-     * @return the getAddsCounters
+     * createETBCounters
      */
-    public String getAddsCounters() {
-        return this.addsCounters;
-    }
-
-    /**
-     * @return the getAddsCountersType
-     */
-    public String getAddsCountersType() {
-        if (this.addsCounters != null) {
-            return  this.addsCounters.split("_")[1];
-        }
-        return "";
-    }
-
-    /**
-     * @return the getAddsCountersNum
-     */
-    public int getAddsCountersNum() {
-        if (this.addsCounters != null) {
-            int n = 0;
-            String num = this.addsCounters.split("_")[2];
+    public void createETBCounters(Card c) {
+        String[] parse = this.addsCounters.split("_");
+        // Convert random SVars if there are other cards with this effect
+        if (c.isValid(parse[0], c.getController(), c)) {
+            String abStr = "AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield"
+                    + "| Defined$ ReplacedCard | SubAbility$ ManaDBETBCounters";
+            String dbStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + parse[1] + " | CounterNum$ " + parse[2];
             try {
-                n = Integer.parseInt(num);
-            } catch (NumberFormatException e) {
-                n = CardFactoryUtil.xCount(sourceCard, sourceCard.getSVar(num));
+                Integer.parseInt(parse[2]);
+            } catch (NumberFormatException ignored) {
+                dbStr += " | References$ " + parse[2];
+                c.setSVar(parse[2], sourceCard.getSVar(parse[2]));
             }
-            return n;
+            c.setSVar("ManaETBCounters", abStr);
+            c.setSVar("ManaDBETBCounters", dbStr);
+
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
+                    + "| ReplaceWith$ ManaETBCounters";
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, c, false);
+            re.setLayer(ReplacementLayer.Other);
+
+            c.addReplacementEffect(re);
         }
-        return 0;
     }
 
     /**
