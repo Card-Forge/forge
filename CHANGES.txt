@@ -63,7 +63,8 @@ Currently, the windows/unix release of Forge includes a launcher file named "for
 New Cards
 ---------
 
-
+Seeds of Innocence
+Dichotomancy
 
 
 --------------------
@@ -108,6 +109,12 @@ Witch Hunt
 Naya Soulbeast
 Tempt with Discovery
 Darksteel Mutation
+Tempt with Glory
+Tempt with Reflections
+Unexpectedly Absent
+Serene Master
+Opal Palace
+From the Ashes
 
 
 ------------
