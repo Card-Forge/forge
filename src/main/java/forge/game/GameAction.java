@@ -288,12 +288,6 @@ public class GameAction {
                     c.setPairedWith(null);
             }
             unattachCardLeavingBattlefield(copied);
-        } else if (zoneFrom.is(ZoneType.Exile) && !toBattlefield) {
-            // Pull from Eternity used on a suspended card
-            copied.clearOptionalCostsPaid();
-            if (copied.isFaceDown()) {
-                copied.turnFaceUp();
-            }
         } else if (toBattlefield) {
             copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeyword()) {
@@ -308,7 +302,7 @@ public class GameAction {
                 copied.getDamageHistory().setNotBlockedSinceLastUpkeepOf(p);
                 copied.getDamageHistory().setNotBeenBlockedSinceLastUpkeepOf(p);
             }
-        } else if (zoneTo.is(ZoneType.Graveyard)) {
+        } else if (zoneTo.is(ZoneType.Graveyard) || zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library)) {
             copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeyword()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
@@ -319,7 +313,7 @@ public class GameAction {
             }
             copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
-                copied.turnFaceUp();
+                copied.setState(CardCharacteristicName.Original);
             }
         }
 
