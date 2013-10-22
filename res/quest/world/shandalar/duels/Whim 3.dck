@@ -8,15 +8,14 @@ Description=UBW tap-dancing deck.
 Deck Type=constructed
 [main]
 1 Alabaster Potion|LEG
-1 Black Lotus|LEB
-2 Carrion Ants|LEG
+1 Carrion Ants|LEG
 1 Colossus of Sardia|ATQ
 2 Flood|DRK
 3 Icy Manipulator|2ED
 3 Island|4ED
 2 Kismet|LEG
 1 Kormus Bell|LEB
-2 Meekstone|LEB
+4 Meekstone|LEB
 1 Mox Jet|LEB
 1 Mox Pearl|LEB
 1 Mox Sapphire|LEB
@@ -25,13 +24,10 @@ Deck Type=constructed
 4 Psychic Venom|LEB
 4 Royal Assassin|2ED
 4 Scrubland|LEB
-2 Serra Angel|4ED
-2 Shapeshifter|ATQ
-2 Siren's Call|LEB
+4 Serra Angel|4ED
 2 Swamp|4ED
 4 Tundra|LEB
-1 Twiddle|LEB
 4 Underground Sea|LEB
-1 Word of Binding|DRK
 4 Yotian Soldier|4ED
+3 Zephyr Falcon|LEG
 [sideboard]
