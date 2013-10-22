@@ -4,6 +4,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardUtil;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -70,15 +71,15 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         }
 
         if (noRegen) {
-            for (int i = 0; i < list.size(); i++) {
-                if (game.getAction().destroyNoRegeneration(list.get(i), sa) && remDestroyed) {
-                    card.addRemembered(list.get(i));
+            for (Card c : list) {
+                if (game.getAction().destroyNoRegeneration(c, sa) && remDestroyed) {
+                    card.addRemembered(CardUtil.getLKICopy(c));
                 }
             }
         } else {
-            for (int i = 0; i < list.size(); i++) {
-                if (game.getAction().destroy(list.get(i), sa) && remDestroyed) {
-                    card.addRemembered(list.get(i));
+            for (Card c : list) {
+                if (game.getAction().destroy(c, sa) && remDestroyed) {
+                    card.addRemembered(CardUtil.getLKICopy(c));
                 }
             }
         }

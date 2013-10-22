@@ -244,7 +244,8 @@ public class AbilityManaPart implements java.io.Serializable {
             c.setSVar("ManaDBETBCounters", dbStr);
 
             String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                    + "| ReplaceWith$ ManaETBCounters";
+                    + "| ReplaceWith$ ManaETBCounters | Secondary$ True | Description$ CARDNAME"
+                    + " enters the battlefield with " + parse[1] + " counters.";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, c, false);
             re.setLayer(ReplacementLayer.Other);
