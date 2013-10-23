@@ -2417,6 +2417,7 @@ res/cardsfolder/c/cyclonic_rift.txt -text
 res/cardsfolder/c/cyclopean_giant.txt svneol=native#text/plain
 res/cardsfolder/c/cyclopean_mummy.txt svneol=native#text/plain
 res/cardsfolder/c/cyclopean_snare.txt svneol=native#text/plain
+res/cardsfolder/c/cyclopean_tomb.txt -text
 res/cardsfolder/c/cyclops_gladiator.txt svneol=native#text/plain
 res/cardsfolder/c/cyclops_tyrant.txt -text
 res/cardsfolder/c/cylian_elf.txt svneol=native#text/plain
@@ -7923,6 +7924,7 @@ res/cardsfolder/o/one_with_nothing.txt svneol=native#text/plain
 res/cardsfolder/o/oni_of_wild_places.txt svneol=native#text/plain
 res/cardsfolder/o/oni_of_wild_places_avatar.txt -text
 res/cardsfolder/o/oni_possession.txt svneol=native#text/plain
+res/cardsfolder/o/only_blood_ends_your_nightmares.txt -text
 res/cardsfolder/o/onslaught.txt svneol=native#text/plain
 res/cardsfolder/o/onulet.txt svneol=native#text/plain
 res/cardsfolder/o/onyx_goblet.txt svneol=native#text/plain
