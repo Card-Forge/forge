@@ -1,0 +1,8 @@
+Name:Graxiplon
+ManaCost:5 U
+Types:Creature Beast
+PT:3/4
+S:Mode$ Continuous | Affected$ Card.Self+attacking | AddHiddenKeyword$ Unblockable | CheckSVar$ X | References$ X | SVarCompare$ LT3 | Description$ CARDNAME can't be blocked unless defending player controls three or more creatures that share a creature type.
+SVar:X:Count$MostProminentCreatureType Creature.DefenderCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/graxiplon.jpg
+Oracle:Graxiplon can't be blocked unless defending player controls three or more creatures that share a creature type.

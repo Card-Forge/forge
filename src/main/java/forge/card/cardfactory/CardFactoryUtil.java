@@ -18,6 +18,7 @@
 package forge.card.cardfactory;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -36,6 +37,7 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.GameLogEntryType;
 import forge.Singletons;
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -1116,6 +1118,12 @@ public class CardFactoryUtil {
                     CardPredicates.nameEquals("Commander effect")).get(0);
             return doXMath(xCount(commeff, commeff.getSVar("CommanderCostRaise")), "DivideEvenlyDown.2", c);
         }
+        
+        if (l[0].startsWith("MostProminentCreatureType")) {
+            String restriction = l[0].split(" ")[1];
+            List<Card> list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c);
+            return doXMath(getMostProminentCreatureTypeSize(list), m, c);
+        }
 
         if (l[0].startsWith("RolledThisTurn")) {
             return game.getPhaseHandler().getPlanarDiceRolledthisTurn();
@@ -1864,7 +1872,52 @@ public class CardFactoryUtil {
         }
         return mask;
     }
+
+    /**
+     * <p>
+     * getMostProminentCreatureType.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @return an int.
+     */
+    public static int getMostProminentCreatureTypeSize(final List<Card> list) {
     
+        if (list.isEmpty()) {
+            return 0;
+        }
+        int allCreatureType = 0;
+
+        final Map<String, Integer> map = new HashMap<String, Integer>();
+        for (final Card c : list) {
+            // Remove Duplicated types
+            final Set<String> types = new HashSet<String>(c.getType());
+            if (types.contains("AllCreatureTypes")) {
+                allCreatureType++;
+                continue;
+            }
+            for (final String var : types) {
+                if (CardType.isACreatureType(var)) {
+                    if (!map.containsKey(var)) {
+                        map.put(var, 1);
+                    } else {
+                        map.put(var, map.get(var) + 1);
+                    }
+                }
+            }
+        }
+    
+        int max = 0;
+        for (final Entry<String, Integer> entry : map.entrySet()) {
+            if (max < entry.getValue()) {
+                max = entry.getValue();
+            }
+        }
+
+        return max +  allCreatureType;
+    }
+
     /**
      * <p>
      * sharedKeywords.
