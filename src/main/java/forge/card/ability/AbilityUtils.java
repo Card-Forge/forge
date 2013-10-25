@@ -14,7 +14,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.CounterType;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostBeingPaid;
@@ -469,7 +469,7 @@ public class AbilityUtils {
             return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
         }
         if (calcX[0].startsWith("TargetedObjects")) {
-            final List<ITargetable> objects = new ArrayList<ITargetable>();
+            final List<GameObject> objects = new ArrayList<GameObject>();
             // Make list of all targeted objects starting with the root SpellAbility
             SpellAbility loopSA = ability.getRootAbility();
             while (loopSA != null) {
@@ -603,8 +603,8 @@ public class AbilityUtils {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static List<ITargetable> getDefinedObjects(final Card card, final String def, final SpellAbility sa) {
-        final ArrayList<ITargetable> objects = new ArrayList<ITargetable>();
+    public static List<GameObject> getDefinedObjects(final Card card, final String def, final SpellAbility sa) {
+        final ArrayList<GameObject> objects = new ArrayList<GameObject>();
         final String defined = (def == null) ? "Self" : def;
 
         objects.addAll(AbilityUtils.getDefinedPlayers(card, defined, sa));
@@ -1194,7 +1194,7 @@ public class AbilityUtils {
             if (sa.hasParam("ForgetOtherTargets")) {
                 host.clearRemembered();
             }
-            for (final ITargetable o : sa.getTargets().getTargets()) {
+            for (final GameObject o : sa.getTargets().getTargets()) {
                 host.addRemembered(o);
             }
         }

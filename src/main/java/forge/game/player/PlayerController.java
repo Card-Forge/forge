@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableList;
 import forge.Card;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.replacement.ReplacementEffect;
@@ -111,7 +111,7 @@ public abstract class PlayerController {
     public abstract TargetChoices chooseNewTargetsFor(SpellAbility ability);
 
     // Specify a target of a spell (Spellskite)
-    public abstract Pair<SpellAbilityStackInstance, ITargetable> chooseTarget(SpellAbility sa, List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets);
+    public abstract Pair<SpellAbilityStackInstance, GameObject> chooseTarget(SpellAbility sa, List<Pair<SpellAbilityStackInstance, GameObject>> allTargets);
 
     public abstract List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int amount, boolean isOptional);
     public Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
@@ -129,7 +129,7 @@ public abstract class PlayerController {
     /** Shows the card to this player*/
     public abstract void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner);
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
-    public abstract void notifyOfValue(SpellAbility saSource, ITargetable realtedTarget, String value);
+    public abstract void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value);
     public abstract ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN);
     public abstract boolean willPutCardOnTop(Card c);
     public abstract List<Card> orderMoveToZoneList(List<Card> cards, ZoneType destinationZone);

@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 
 import forge.Card;
 import forge.CardUtil;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -28,7 +28,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
 
-        List<ITargetable> tgts = getTargets(sa);
+        List<GameObject> tgts = getTargets(sa);
         if (tgts.isEmpty()) 
             return "";
 
@@ -74,7 +74,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
         final boolean removeDamage = sa.hasParam("Remove");
         final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
-        List<ITargetable> tgts = getTargets(sa);
+        List<GameObject> tgts = getTargets(sa);
 
         // Right now for Fireball, maybe later for other stuff
         if (sa.hasParam("DivideEvenly")) {
@@ -121,7 +121,7 @@ public class DamageDealEffect extends SpellAbilityEffect {
             
             List<Card> assigneeCards = new ArrayList<Card>();
             // Do we have a way of doing this in a better fashion?
-            for(ITargetable obj : tgts) {
+            for(GameObject obj : tgts) {
                 if (obj instanceof Card) {
                     assigneeCards.add((Card)obj);
                 }

@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.CardType;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPartMana;
@@ -220,10 +220,10 @@ public class HumanPlaySpellAbility {
         final StringBuilder sb = new StringBuilder();
         sb.append(ability.getSourceCard().getName());
         if (ability.getTargetRestrictions() != null) {
-            final Iterable<ITargetable> targets = ability.getTargets().getTargets();
+            final Iterable<GameObject> targets = ability.getTargets().getTargets();
             if (!Iterables.isEmpty(targets)) {
                 sb.append(" - Targeting ");
-                for (final ITargetable o : targets) {
+                for (final GameObject o : targets) {
                     sb.append(o.toString()).append(" ");
                 }
             }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -183,7 +183,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         final StringBuilder sb = new StringBuilder(regtrig.toString());
         if (this.getTargetRestrictions() != null) {
             sb.append(" (Targeting ");
-            for (final ITargetable o : this.getTargets().getTargets()) {
+            for (final GameObject o : this.getTargets().getTargets()) {
                 sb.append(o.toString());
                 sb.append(", ");
             }

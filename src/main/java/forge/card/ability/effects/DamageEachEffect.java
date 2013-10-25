@@ -4,7 +4,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -65,7 +65,7 @@ public class DamageEachEffect extends SpellAbilityEffect {
             sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), card.getController(), card);
         }
 
-        final List<ITargetable> tgts = getTargets(sa, "DefinedPlayers");
+        final List<GameObject> tgts = getTargets(sa, "DefinedPlayers");
 
         final boolean targeted = (sa.usesTargeting());
 

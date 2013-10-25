@@ -25,7 +25,7 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.Singletons;
 import forge.game.Game;
 import forge.game.player.Player;
@@ -97,8 +97,8 @@ public class TargetSelection {
         final boolean choiceResult;
         final boolean random = tgt.isRandomTarget();
         if (random) {
-            List<ITargetable> candidates = tgt.getAllCandidates(this.ability, true);
-            ITargetable choice = Aggregates.random(candidates);
+            List<GameObject> candidates = tgt.getAllCandidates(this.ability, true);
+            GameObject choice = Aggregates.random(candidates);
             return ability.getTargets().add(choice);
         } else if (zone.size() == 1 && zone.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
@@ -149,7 +149,7 @@ public class TargetSelection {
                 choices.remove(ability.getSourceCard());
             }
         }
-        List<ITargetable> targetedObjects = this.ability.getUniqueTargets();
+        List<GameObject> targetedObjects = this.ability.getUniqueTargets();
 
         if (tgt.isUniqueTargets()) {
             for (final Object o : targetedObjects) {

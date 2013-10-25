@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityEffect;
@@ -206,7 +206,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             }
     
             
-            List<? extends ITargetable> objects = getTargets(abilityOnStack);
+            List<? extends GameObject> objects = getTargets(abilityOnStack);
     
             if (!abilityOnStack.usesTargeting() && !abilityOnStack.hasParam("Defined") && abilityOnStack.hasParam("ValidPlayers")) 
                 objects = AbilityUtils.getDefinedPlayers(source, abilityOnStack.getParam("ValidPlayers"), abilityOnStack);

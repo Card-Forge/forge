@@ -32,7 +32,7 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.GameEntity;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
@@ -53,7 +53,7 @@ import forge.util.TextUtil;
  * @author Forge
  * @version $Id$
  */
-public abstract class SpellAbility implements ISpellAbility, ITargetable {
+public abstract class SpellAbility extends GameObject implements ISpellAbility {
 
     // choices for constructor isPermanent argument
     private String description = "";
@@ -1027,7 +1027,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
      *            a GameEntity
      * @return a boolean.
      */
-    public final boolean canTarget(final ITargetable entity) {
+    public final boolean canTarget(final GameObject entity) {
         final TargetRestrictions tr = this.getTargetRestrictions();
         
         // Restriction related to this ability
@@ -1364,7 +1364,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
      * Reset the first target.
      * 
      */
-    public void resetFirstTarget(ITargetable c) {
+    public void resetFirstTarget(GameObject c) {
         SpellAbility sa = this;
         while (sa != null) {
             if (sa.targetRestricions != null) {
@@ -1528,8 +1528,8 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
      *            the ability
      * @return the unique targets
      */
-    public final List<ITargetable> getUniqueTargets() {
-        final List<ITargetable> targets = new ArrayList<ITargetable>();
+    public final List<GameObject> getUniqueTargets() {
+        final List<GameObject> targets = new ArrayList<GameObject>();
         SpellAbility child = this.getParent();
         while (child != null) {
             if (child.getTargetRestrictions() != null) {
@@ -1574,7 +1574,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
     
             boolean result = false;
     
-            for (final ITargetable o : matchTgt.getTargets()) {
+            for (final GameObject o : matchTgt.getTargets()) {
                 if (matchesValid(o, splitTargetRestrictions.split(","))) {
                     result = true;
                     break;
@@ -1604,7 +1604,7 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
         return topSA.getSourceCard().isValid(tgt.getValidTgts(), this.getActivatingPlayer(), this.getSourceCard());
     }
 
-    private boolean matchesValid(final ITargetable o, final String[] valids) {
+    private boolean matchesValid(final GameObject o, final String[] valids) {
         final Card srcCard = this.getSourceCard();
         final Player activatingPlayer = this.getActivatingPlayer();
         if (o instanceof Card) {
@@ -1620,6 +1620,61 @@ public abstract class SpellAbility implements ISpellAbility, ITargetable {
         }
     
         return false;
+    }
+    
+    // Takes one argument like Permanent.Blue+withFlying
+    /**
+     * <p>
+     * isValid.
+     * </p>
+     * 
+     * @param restriction
+     *            a {@link java.lang.String} object.
+     * @param sourceController
+     *            a {@link forge.game.player.Player} object.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    @Override
+    public final boolean isValid(final String restriction, final Player sourceController, final Card source) {
+
+        // Inclusive restrictions are Card types
+        final String[] incR = restriction.split("\\.", 2);
+
+        if (incR[0].equals("Spell") && !this.isSpell()) {
+            return false;
+        }
+
+        if (incR.length > 1) {
+            final String excR = incR[1];
+            final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
+            for (int j = 0; j < exR.length; j++) {
+                if (!this.hasProperty(exR[j], sourceController, source)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    } // isValid(String Restriction)
+    
+    // Takes arguments like Blue or withFlying
+    /**
+     * <p>
+     * hasProperty.
+     * </p>
+     * 
+     * @param property
+     *            a {@link java.lang.String} object.
+     * @param sourceController
+     *            a {@link forge.game.player.Player} object.
+     * @param source
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    @Override
+    public boolean hasProperty(final String property, final Player sourceController, final Card source) {
+        return true;
     }
 
     // Methods enabling multiple instances of conspire

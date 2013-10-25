@@ -8,7 +8,7 @@ import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactory;
@@ -92,7 +92,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 }
                 targetedSA = targetedSA.getSubAbility();
             }
-            List<ITargetable> candidates = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
+            List<GameObject> candidates = targetedSA.getTargetRestrictions().getAllCandidates(targetedSA, true);
             if (sa.hasParam("CanTargetPlayer")) {
                 // Radiate
                 // Remove targeted players because getAllCandidates include all the valid players
@@ -100,7 +100,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     candidates.remove(p);
                 
                 mayChoseNewTargets = false;
-                for (ITargetable o : candidates) {
+                for (GameObject o : candidates) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndSrcCard(card, chosenSA.getSourceCard(), chosenSA, true);
                     copy.resetFirstTarget(o);
                     copies.add(copy);

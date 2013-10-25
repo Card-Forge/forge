@@ -6,7 +6,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
@@ -79,7 +79,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     }
 
                     final Card threatSource = topStack.getSourceCard();
-                    List<? extends ITargetable> objects = getTargets(sa);
+                    List<? extends GameObject> objects = getTargets(sa);
 
                     if (!topStack.usesTargeting() && topStack.hasParam("ValidPlayers") && !topStack.hasParam("Defined")) {
                         objects = AbilityUtils.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack);

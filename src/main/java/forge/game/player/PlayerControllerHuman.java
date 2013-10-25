@@ -20,7 +20,7 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.Singletons;
 import forge.card.ability.effects.CharmEffect;
 import forge.card.cost.Cost;
@@ -697,30 +697,30 @@ public class PlayerControllerHuman extends PlayerController {
 
 
     @Override
-    public Pair<SpellAbilityStackInstance, ITargetable> chooseTarget(SpellAbility saSpellskite, List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets) {
+    public Pair<SpellAbilityStackInstance, GameObject> chooseTarget(SpellAbility saSpellskite, List<Pair<SpellAbilityStackInstance, GameObject>> allTargets) {
         if( allTargets.size() < 2)
             return Iterables.getFirst(allTargets, null);
         
-        final Function<Pair<SpellAbilityStackInstance, ITargetable>, String> fnToString = new Function<Pair<SpellAbilityStackInstance, ITargetable>, String>() {
+        final Function<Pair<SpellAbilityStackInstance, GameObject>, String> fnToString = new Function<Pair<SpellAbilityStackInstance, GameObject>, String>() {
             @Override
-            public String apply(Pair<SpellAbilityStackInstance, ITargetable> targ) {
+            public String apply(Pair<SpellAbilityStackInstance, GameObject> targ) {
                 return targ.getRight().toString() + " - " + targ.getLeft().getStackDescription();
             }
         };
         
-        List<Pair<SpellAbilityStackInstance, ITargetable>> chosen = GuiChoose.getChoices(saSpellskite.getSourceCard().getName(), 1, 1, allTargets, null, fnToString);
+        List<Pair<SpellAbilityStackInstance, GameObject>> chosen = GuiChoose.getChoices(saSpellskite.getSourceCard().getName(), 1, 1, allTargets, null, fnToString);
         return Iterables.getFirst(chosen, null);
     }
 
     @Override
-    public void notifyOfValue(SpellAbility sa, ITargetable realtedTarget, String value) {
+    public void notifyOfValue(SpellAbility sa, GameObject realtedTarget, String value) {
         String message = formatNotificationMessage(sa, realtedTarget, value); 
         GuiDialog.message(message, sa.getSourceCard().getName());
     }
 
 
     // These are not much related to PlayerController
-    private String formatNotificationMessage(SpellAbility sa, ITargetable target, String value) {
+    private String formatNotificationMessage(SpellAbility sa, GameObject target, String value) {
         if (sa.getApi() == null) {
             return ("Result: " + value);
         }
@@ -741,7 +741,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
     }
     
-    private String mayBeYou(ITargetable what, Player you) {
+    private String mayBeYou(GameObject what, Player you) {
         return what == you ? "you" : what.toString();
     }
     // end of not related candidates for move.

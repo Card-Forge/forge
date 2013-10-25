@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Card;
 import forge.CounterType;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -26,7 +26,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         sb.append(sa.getActivatingPlayer().getName());
         sb.append(" removes a counter from or puts another of those counters on ");
 
-        final List<ITargetable> targets = getTargets(sa);
+        final List<GameObject> targets = getTargets(sa);
         sb.append(Lang.joinHomogenous(targets));
 
         return sb.toString();

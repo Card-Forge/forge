@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Card;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -68,7 +68,7 @@ public class UnattachAllAi extends SpellAbilityAi {
         final Card card = sa.getSourceCard();
         final Player opp = ai.getOpponent();
         // Check if there are any valid targets
-        List<ITargetable> targets = new ArrayList<ITargetable>();
+        List<GameObject> targets = new ArrayList<GameObject>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);

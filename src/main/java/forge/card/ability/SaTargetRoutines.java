@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
@@ -51,11 +51,11 @@ public class SaTargetRoutines {
     }
 
     // Targets of unspecified type
-    protected List<ITargetable> getTargets(SpellAbility sa) {                                   return getTargetables(false, "Defined", sa); }
-    protected List<ITargetable> getTargets(SpellAbility sa, String definedParam) {              return getTargetables(false, definedParam, sa); }
-    protected List<ITargetable> getDefinedOrTargeteded(SpellAbility sa, String definedParam) {  return getTargetables(true, definedParam, sa); }
+    protected List<GameObject> getTargets(SpellAbility sa) {                                   return getTargetables(false, "Defined", sa); }
+    protected List<GameObject> getTargets(SpellAbility sa, String definedParam) {              return getTargetables(false, definedParam, sa); }
+    protected List<GameObject> getDefinedOrTargeteded(SpellAbility sa, String definedParam) {  return getTargetables(true, definedParam, sa); }
 
-    private List<ITargetable> getTargetables(boolean definedFirst, String definedParam, SpellAbility sa) {
+    private List<GameObject> getTargetables(boolean definedFirst, String definedParam, SpellAbility sa) {
         boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargets()) 
                 : AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam(definedParam), sa);

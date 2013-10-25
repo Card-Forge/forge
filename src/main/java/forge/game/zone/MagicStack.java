@@ -35,7 +35,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.FThreads;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.GameLogEntryType;
@@ -692,7 +692,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // With multi-targets, as long as one target is still legal,
                 // we'll try to go through as much as possible
                 final TargetChoices choices = sa.getTargets();
-                for (final ITargetable o : sa.getTargets().getTargets()) {
+                for (final GameObject o : sa.getTargets().getTargets()) {
                     boolean invalidTarget = false;
                     if (o instanceof Card) {
                         final Card card = (Card) o;

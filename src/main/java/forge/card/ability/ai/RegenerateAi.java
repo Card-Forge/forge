@@ -23,7 +23,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -91,7 +91,7 @@ public class RegenerateAi extends SpellAbilityAi {
             final List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
             if (!game.getStack().isEmpty()) {
-                final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
                 for (final Card c : list) {
                     if (objects.contains(c)) {
@@ -127,7 +127,7 @@ public class RegenerateAi extends SpellAbilityAi {
             if (!game.getStack().isEmpty()) {
                 // check stack for something on the stack will kill anything i
                 // control
-                final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
                 final List<Card> threatenedTargets = new ArrayList<Card>();
 

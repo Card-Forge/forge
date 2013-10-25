@@ -24,7 +24,6 @@ import java.util.TreeMap;
 import forge.game.Game;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
-import forge.game.player.Player;
 
 /**
  * <p>
@@ -34,7 +33,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id: Player.java 10091 2011-08-30 16:11:21Z Sloth $
  */
-public abstract class GameEntity implements ITargetable {
+public abstract class GameEntity extends GameObject {
     private String name = "";
     private int preventNextDamage = 0;
     private TreeMap<Card, Map<String, String>> preventionShieldsWithEffects = new TreeMap<Card, Map<String, String>>();
@@ -339,58 +338,6 @@ public abstract class GameEntity implements ITargetable {
      * @return true, if successful
      */
     public boolean hasKeyword(final String keyword) {
-        return false;
-    }
-
-    /**
-     * Checks if is valid.
-     * 
-     * @param restrictions
-     *            the restrictions
-     * @param sourceController
-     *            the source controller
-     * @param source
-     *            the source
-     * @return true, if is valid
-     */
-    public boolean isValid(final String[] restrictions, final Player sourceController, final Card source) {
-
-        for (final String restriction : restrictions) {
-            if (this.isValid(restriction, sourceController, source)) {
-                return true;
-            }
-        }
-        return false;
-
-    } // isValid
-
-    /**
-     * Checks if is valid.
-     * 
-     * @param restriction
-     *            the restriction
-     * @param sourceController
-     *            the source controller
-     * @param source
-     *            the source
-     * @return true, if is valid
-     */
-    public boolean isValid(final String restriction, final Player sourceController, final Card source) {
-        return false;
-    }
-
-    /**
-     * Checks for property.
-     * 
-     * @param property
-     *            the property
-     * @param sourceController
-     *            the source controller
-     * @param source
-     *            the source
-     * @return true, if successful
-     */
-    public boolean hasProperty(final String property, final Player sourceController, final Card source) {
         return false;
     }
 

@@ -43,7 +43,7 @@ import forge.CounterType;
 import forge.FThreads;
 import forge.GameEntity;
 import forge.GameLogEntryType;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.CardDb;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
@@ -1420,7 +1420,7 @@ public class GameAction {
     }
 
     /** Delivers a message to all players. (use reveal to show Cards) */
-    public void nofityOfValue(SpellAbility saSource, ITargetable relatedTarget, String value, Player playerExcept) {
+    public void nofityOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
         for(Player p : game.getPlayers()) {
             if (playerExcept == p) continue;
             p.getController().notifyOfValue(saSource, relatedTarget, value);

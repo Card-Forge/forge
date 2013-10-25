@@ -25,7 +25,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import forge.Card;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.CardType;
 import forge.card.ability.AbilityUtils;
 import forge.game.Game;
@@ -499,9 +499,9 @@ public class TargetRestrictions {
      *            Check Valid Candidates and Targeting
      * @return a List<Object>.
      */
-    public final List<ITargetable> getAllCandidates(final SpellAbility sa, final boolean isTargeted) {
+    public final List<GameObject> getAllCandidates(final SpellAbility sa, final boolean isTargeted) {
         final Game game = sa.getActivatingPlayer().getGame();
-        List<ITargetable> candidates = new ArrayList<ITargetable>();
+        List<GameObject> candidates = new ArrayList<GameObject>();
         for (Player player : game.getPlayers()) {
             if (sa.canTarget(player)) {
                 candidates.add(player);

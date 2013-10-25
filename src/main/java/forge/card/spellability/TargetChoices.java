@@ -23,7 +23,7 @@ import java.util.List;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.game.player.Player;
 
 /**
@@ -62,7 +62,7 @@ public class TargetChoices implements Cloneable {
      *            a {@link java.lang.Object} object.
      * @return a boolean.
      */
-    public final boolean add(final ITargetable o) {
+    public final boolean add(final GameObject o) {
         if (o instanceof Player) {
             return this.addTarget((Player) o);
         } else if (o instanceof Card) {
@@ -137,7 +137,7 @@ public class TargetChoices implements Cloneable {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean remove(final ITargetable target) {
+    public final boolean remove(final GameObject target) {
         // remove returns true if element was found in given list
         if (this.targetCards.remove(target) || this.targetPlayers.remove(target) || this.targetSpells.remove(target)) {
             this.numTargeted--;
@@ -186,8 +186,8 @@ public class TargetChoices implements Cloneable {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final List<ITargetable> getTargets() {
-        final ArrayList<ITargetable> tgts = new ArrayList<ITargetable>();
+    public final List<GameObject> getTargets() {
+        final ArrayList<GameObject> tgts = new ArrayList<GameObject>();
         tgts.addAll(this.targetPlayers);
         tgts.addAll(this.targetCards);
         tgts.addAll(this.targetSpells);
@@ -197,7 +197,7 @@ public class TargetChoices implements Cloneable {
 
 
     public final String getTargetedString() {
-        final List<ITargetable> tgts = this.getTargets();
+        final List<GameObject> tgts = this.getTargets();
         final StringBuilder sb = new StringBuilder();
         for (final Object o : tgts) {
             if (o instanceof Player) {
@@ -231,7 +231,7 @@ public class TargetChoices implements Cloneable {
         return !targetSpells.isEmpty();
     }
 
-    public final boolean isTargeting(ITargetable e) {
+    public final boolean isTargeting(GameObject e) {
         return targetCards.contains(e) || targetSpells.contains(e) || targetPlayers.contains(e); 
     }
 

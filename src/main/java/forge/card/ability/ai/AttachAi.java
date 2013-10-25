@@ -15,7 +15,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
@@ -628,7 +628,7 @@ public class AttachAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getSourceCard();
         // Check if there are any valid targets
-        List<ITargetable> targets = new ArrayList<ITargetable>();
+        List<GameObject> targets = new ArrayList<GameObject>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
@@ -703,7 +703,7 @@ public class AttachAi extends SpellAbilityAi {
      * @return true, if successful
      */
     private static boolean attachPreference(final SpellAbility sa, final TargetRestrictions tgt, final boolean mandatory) {
-        ITargetable o;
+        GameObject o;
         if (tgt.canTgtPlayer()) {
             o = attachToPlayerAIPreferences(sa.getActivatingPlayer(), sa, mandatory);
         } else {

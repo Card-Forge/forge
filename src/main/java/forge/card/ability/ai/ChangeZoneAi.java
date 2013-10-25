@@ -18,7 +18,7 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.GameEntity;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
@@ -621,7 +621,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     return false;
                 }
 
-                final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
+                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
                 boolean contains = false;
                 for (final Card c : retrieval) {
                     if (objects.contains(c)) {
@@ -743,7 +743,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // check stack for something on the stack that will kill
                 // anything i control
                 if (!game.getStack().isEmpty()) {
-                    final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
+                    final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
 
                     final List<Card> threatenedTargets = new ArrayList<Card>();
 

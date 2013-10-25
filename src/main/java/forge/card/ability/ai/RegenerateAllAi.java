@@ -5,7 +5,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -58,7 +58,7 @@ public class RegenerateAllAi extends SpellAbilityAi {
 
         int numSaved = 0;
         if (!game.getStack().isEmpty()) {
-            final List<ITargetable> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+            final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
             for (final Card c : list) {
                 if (objects.contains(c) && c.getShield() == 0) {

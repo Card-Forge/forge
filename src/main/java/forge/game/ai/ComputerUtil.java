@@ -36,7 +36,7 @@ import forge.Constant;
 import forge.CounterType;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -1272,9 +1272,9 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static List<ITargetable> predictThreatenedObjects(final Player aiPlayer, final SpellAbility sa) {
+    public static List<GameObject> predictThreatenedObjects(final Player aiPlayer, final SpellAbility sa) {
         final Game game = aiPlayer.getGame();
-        final List<ITargetable> objects = new ArrayList<ITargetable>();
+        final List<GameObject> objects = new ArrayList<GameObject>();
         if (game.getStack().isEmpty()) {
             return objects;
         }
@@ -1298,10 +1298,10 @@ public class ComputerUtil {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    private static Iterable<? extends ITargetable> predictThreatenedObjects(final Player aiPlayer, final SpellAbility saviour,
+    private static Iterable<? extends GameObject> predictThreatenedObjects(final Player aiPlayer, final SpellAbility saviour,
             final SpellAbility topStack) {
-        Iterable<? extends ITargetable> objects = new ArrayList<ITargetable>();
-        final List<ITargetable> threatened = new ArrayList<ITargetable>();
+        Iterable<? extends GameObject> objects = new ArrayList<GameObject>();
+        final List<GameObject> threatened = new ArrayList<GameObject>();
         ApiType saviourApi = saviour == null ? null : saviour.getApi();
     
         if (topStack == null) {

@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 import forge.Card;
 import forge.CardUtil;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -18,7 +18,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<ITargetable> tgts = getTargets(sa);
+        final List<GameObject> tgts = getTargets(sa);
 
         sb.append("Prevent the next ");
         sb.append(sa.getParam("Amount"));
@@ -67,7 +67,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         Card host = sa.getSourceCard();
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
-        final List<ITargetable> tgts = getTargets(sa);
+        final List<GameObject> tgts = getTargets(sa);
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         
         if (sa.hasParam("Radiance") && (sa.usesTargeting())) {
@@ -100,7 +100,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
                         effectMap.put("ShieldAmount", String.valueOf(numDam));
                         if (sa.hasParam("ShieldEffectTarget")) {
                             String effTgtString = "";
-                            List<ITargetable> effTgts = new ArrayList<ITargetable>();
+                            List<GameObject> effTgts = new ArrayList<GameObject>();
                             effTgts = AbilityUtils.getDefinedObjects(host, sa.getParam("ShieldEffectTarget"), sa);
                             for (final Object effTgt : effTgts) {
                                 if (effTgt instanceof Card) {
@@ -127,7 +127,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
                         effectMap.put("ShieldAmount", String.valueOf(numDam));
                         if (sa.hasParam("ShieldEffectTarget")) {
                             String effTgtString = "";
-                            List<ITargetable> effTgts = new ArrayList<ITargetable>();
+                            List<GameObject> effTgts = new ArrayList<GameObject>();
                             effTgts = AbilityUtils.getDefinedObjects(host, sa.getParam("ShieldEffectTarget"), sa);
                             for (final Object effTgt : effTgts) {
                                 if (effTgt instanceof Card) {

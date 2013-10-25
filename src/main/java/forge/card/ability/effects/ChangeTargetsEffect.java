@@ -8,7 +8,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Iterables;
 
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
@@ -53,11 +53,11 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
             if( changesOneTarget ) {
                 // 1. choose a target of target spell
-                List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets = new ArrayList<>();
+                List<Pair<SpellAbilityStackInstance, GameObject>> allTargets = new ArrayList<>();
                 while(changingTgtSI != null) {
                     SpellAbility changedSa = changingTgtSI.getSpellAbility(); 
                     if(changedSa.usesTargeting()) {
-                        for(ITargetable it : changedSa.getTargets().getTargets())
+                        for(GameObject it : changedSa.getTargets().getTargets())
                             allTargets.add(ImmutablePair.of(changingTgtSI, it));
                     }
                     changingTgtSI = changingTgtSI.getSubInstace();
@@ -68,16 +68,16 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     return;
                 }
 
-                Pair<SpellAbilityStackInstance, ITargetable> chosenTarget = chooser.getController().chooseTarget(sa, allTargets);
+                Pair<SpellAbilityStackInstance, GameObject> chosenTarget = chooser.getController().chooseTarget(sa, allTargets);
                 // 2. prepare new target choices
                 SpellAbilityStackInstance replaceIn = chosenTarget.getKey();
-                ITargetable oldTarget = chosenTarget.getValue();
+                GameObject oldTarget = chosenTarget.getValue();
                 TargetChoices oldTargetBlock = replaceIn.getTargetChoices();
                 TargetChoices newTargetBlock = oldTargetBlock.clone();
                 newTargetBlock.remove(oldTarget);
                 replaceIn.updateTarget(newTargetBlock);
                 // 3. test if updated choices would be correct.
-                ITargetable newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa), null);
+                GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa), null);
                 if(replaceIn.getSpellAbility().canTarget(newTarget)) {
                     newTargetBlock.add(newTarget);
                     replaceIn.updateTarget(newTargetBlock);
@@ -94,8 +94,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                         }
                     } else {
                         changingTgtSA.resetTargets();
-                        List<ITargetable> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
-                        ITargetable choice = Aggregates.random(candidates);
+                        List<GameObject> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
+                        GameObject choice = Aggregates.random(candidates);
                         changingTgtSA.getTargets().add(choice);
                         changingTgtSI.updateTarget(changingTgtSA.getTargets());
                     }

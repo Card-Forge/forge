@@ -17,7 +17,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.ITargetable;
+import forge.GameObject;
 import forge.card.ability.ApiType;
 import forge.card.ability.ai.CharmAi;
 import forge.card.cost.Cost;
@@ -408,14 +408,14 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Pair<SpellAbilityStackInstance, ITargetable> chooseTarget(SpellAbility saSrc, List<Pair<SpellAbilityStackInstance, ITargetable>> allTargets) {
+    public Pair<SpellAbilityStackInstance, GameObject> chooseTarget(SpellAbility saSrc, List<Pair<SpellAbilityStackInstance, GameObject>> allTargets) {
         // TODO Teach AI how to use Spellskite
         return allTargets.get(0);
     }
 
 
     @Override
-    public void notifyOfValue(SpellAbility saSource, ITargetable realtedTarget, String value) {
+    public void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value) {
         // AI should take into consideration creature types, numbers and other information (mostly choices) arriving through this channel
     }
 
