@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Robot Santa 3
+Title=Robot Santa
+Difficulty=hard
+Description=Mono R artifact deck with Whipflare
+Icon=Robot Santa.jpg
+Deck Type=constructed
+[main]
+16 Mountain|SOM
+4 Great Furnace
+1 Mox Ruby
+4 Memnite
+3 Signal Pest
+4 Frogmite
+3 Myr Enforcer
+4 Oxidda Golem
+2 Etched Champion
+4 Cranial Plating
+4 Whipflare
+4 Galvanic Blast
+4 Lightning Bolt
+1 Pillage
+1 Hammer of Purphoros
+1 Blood Moon
+[sideboard]
