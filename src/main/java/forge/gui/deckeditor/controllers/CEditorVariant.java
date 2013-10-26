@@ -55,7 +55,6 @@ import forge.util.storage.IStorage;
  */
 public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
     private final DeckController<Deck> controller;
-    private final FScreen screen;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
     private final Predicate<PaperCard> cardPoolCondition;
@@ -67,10 +66,9 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
      * all cards are available.
      */
     public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final FScreen screen0) {
-        super();
+        super(screen0);
         
         this.cardPoolCondition = poolCondition;
-        this.screen = screen0;
         
         this.setCatalogManager(new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), true));
         this.setDeckManager(new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), true));
@@ -169,15 +167,18 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.controllers.ACEditorBase#exit()
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#canSwitchAway()
      */
     @Override
-    public boolean exit() {
-        if (!SEditorIO.confirmSaveChanges(this.screen))
-        {
-            return false;
-        }
-        
+    public boolean canSwitchAway(boolean isClosing) {
+        return SEditorIO.confirmSaveChanges(getScreen());
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#resetUIChanges()
+     */
+    @Override
+    public void resetUIChanges() {
         //Re-add tabs
         if (deckGenParent != null) {
             deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
@@ -185,7 +186,5 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         if (allDecksParent != null) {
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
         }
-        
-        return true;
     }
 }

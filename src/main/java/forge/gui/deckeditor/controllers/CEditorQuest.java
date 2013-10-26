@@ -94,6 +94,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      * @param questData0 &emsp; {@link forge.quest.QuestController}
      */
     public CEditorQuest(final QuestController questData0) {
+        super(FScreen.DECK_EDITOR_QUEST);
+        
         this.questData = questData0;
 
         final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
@@ -302,24 +304,30 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.controllers.ACEditorBase#exit()
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#canSwitchAway()
      */
     @Override
-    public boolean exit() {
-        final boolean okToExit = SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_QUEST);
-        if (okToExit) {
+    public boolean canSwitchAway(boolean isClosing) {
+        if (SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_QUEST)) {
             Singletons.getModel().getQuest().save();
-            CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
-            //Re-add tabs
-            if (deckGenParent != null) {
-                deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-            }
-            if (allDecksParent != null) {
-                allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-            }
-            
+            return true;
         }
-        return okToExit;
+        return false;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#resetUIChanges()
+     */
+    @Override
+    public void resetUIChanges() {
+        CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
+        //Re-add tabs
+        if (deckGenParent != null) {
+            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
+        }
+        if (allDecksParent != null) {
+            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        }
     }
 
     /**

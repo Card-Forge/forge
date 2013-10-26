@@ -31,7 +31,7 @@ public interface IVTopLevelUI {
      * Fires when this view's tab is being switched away from.
      * 
      * @return true to allow switching away from tab, false otherwise */
-    boolean onSwitching(FScreen screen);
+    boolean onSwitching(FScreen fromScreen, FScreen toScreen);
     
     /**
      * Fires when this view's tab is closing.

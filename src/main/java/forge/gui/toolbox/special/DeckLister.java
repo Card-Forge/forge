@@ -461,7 +461,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         
         Singletons.getControl().setCurrentScreen(screen);
         if (editorCtrl != null) {
-            CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(editorCtrl);
+            CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editorCtrl);
         }
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(d0.getName());
     }

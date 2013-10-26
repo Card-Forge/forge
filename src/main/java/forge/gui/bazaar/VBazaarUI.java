@@ -119,7 +119,7 @@ public enum VBazaarUI implements IVTopLevelUI {
      * @see forge.gui.framework.IVTopLevelUI#onSwitching(forge.gui.framework.FScreen)
      */
     @Override
-    public boolean onSwitching(FScreen screen) {
+    public boolean onSwitching(FScreen fromScreen, FScreen toScreen) {
         return true;
     }
  

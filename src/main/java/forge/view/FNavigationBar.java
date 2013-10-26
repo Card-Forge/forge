@@ -123,8 +123,8 @@ public class FNavigationBar extends FTitleBarBase {
         return null;
     }
     
-    public boolean canSwitchAway() {
-        return (selectedTab == null || selectedTab.screen.onSwitching());
+    public boolean canSwitch(FScreen toScreen) {
+        return (selectedTab == null || selectedTab.screen.onSwitching(toScreen));
     }
     
     public void updateSelectedTab() {

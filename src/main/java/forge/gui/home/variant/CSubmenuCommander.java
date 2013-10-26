@@ -95,8 +95,7 @@ public enum CSubmenuCommander implements ICDoc {
             @Override
             public void run() {                
                 Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_COMMANDER);
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
-                        new CEditorCommander());
+                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorCommander());
             }
         });
     }

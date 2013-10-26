@@ -21,6 +21,7 @@ import javax.swing.SwingUtilities;
 
 import forge.deck.DeckBase;
 import forge.gui.framework.DragCell;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SRearrangingUtil;
@@ -59,8 +60,17 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     }
 
     public boolean listenersHooked;
+    private final FScreen screen;
     private ItemManager<TItem> catalogManager;
     private ItemManager<TItem> deckManager;
+    
+    protected ACEditorBase(FScreen screen0) {
+        this.screen = screen0;
+    }
+    
+    public FScreen getScreen() {
+        return this.screen;
+    }
     
     /** 
      * Operation to add one of selected card to current deck.
@@ -88,17 +98,21 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public abstract DeckController<TModel> getDeckController();
 
     /**
-     * Called when an editor wants to exit. Should confirm save options,
-     * update next UI screen, etc.
+     * Called when switching away from or closing the editor wants to exit. Should confirm save options.
      * 
      * @return boolean &emsp; true if safe to exit
      */
-    public abstract boolean exit();
+    public abstract boolean canSwitchAway(boolean isClosing);
 
     /**
      * Resets and initializes the current editor.
      */
     public abstract void update();
+
+    /**
+     * Reset UI changes made in update
+     */
+    public abstract void resetUIChanges();
 
     /**
      * Gets the ItemManager holding the cards in the current deck.

@@ -49,7 +49,6 @@ import forge.util.storage.IStorage;
 public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
     private final DeckController<DeckGroup> controller;
-    private final FScreen screen;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
 
@@ -61,7 +60,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     public CEditorLimited(final IStorage<DeckGroup> deckMap0, FScreen screen0) {
-        this.screen = screen0;
+        super(screen0);
 
         final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
         final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
@@ -180,26 +179,27 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.controllers.ACEditorBase#exit()
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#canSwitchAway()
      */
     @Override
-    public boolean exit() {
-        final boolean okToExit = SEditorIO.confirmSaveChanges(this.screen);
+    public boolean canSwitchAway(boolean isClosing) {
+        return SEditorIO.confirmSaveChanges(getScreen());
+    }
 
-        if (okToExit) {
-            CSubmenuDraft.SINGLETON_INSTANCE.update();
-            CSubmenuSealed.SINGLETON_INSTANCE.update();
-            
-            //Re-add tabs
-            if (deckGenParent != null) {
-                deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
-            }
-            if (allDecksParent != null) {
-                allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-            }
-            
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#resetUIChanges()
+     */
+    @Override
+    public void resetUIChanges() {
+        CSubmenuDraft.SINGLETON_INSTANCE.update();
+        CSubmenuSealed.SINGLETON_INSTANCE.update();
+        
+        //Re-add tabs
+        if (deckGenParent != null) {
+            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
         }
-
-        return okToExit;
+        if (allDecksParent != null) {
+            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        }
     }
 }

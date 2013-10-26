@@ -45,8 +45,9 @@ public enum VDeckEditorUI implements IVTopLevelUI {
      * @see forge.gui.framework.IVTopLevelUI#onSwitching(forge.gui.framework.FScreen)
      */
     @Override
-    public boolean onSwitching(FScreen screen) {
-        return CDeckEditorUI.SINGLETON_INSTANCE.canExit(); //ensure deck saved before switching away
+    public boolean onSwitching(FScreen fromScreen, FScreen toScreen) {
+        //ensure deck saved before switching
+        return CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(false);
     }
 
     /* (non-Javadoc)
@@ -59,6 +60,6 @@ public enum VDeckEditorUI implements IVTopLevelUI {
             Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
             return false;
         }
-        return CDeckEditorUI.SINGLETON_INSTANCE.canExit();
+        return CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true);
     }
 }

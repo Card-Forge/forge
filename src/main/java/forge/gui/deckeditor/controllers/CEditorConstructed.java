@@ -75,7 +75,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
      * all cards are available.
      */
     public CEditorConstructed() {
-        super();
+        super(FScreen.DECK_EDITOR_CONSTRUCTED);
         
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
@@ -308,10 +308,17 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.controllers.ACEditorBase#exit()
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#canSwitchAway()
      */
     @Override
-    public boolean exit() {
+    public boolean canSwitchAway(boolean isClosing) {
         return SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_CONSTRUCTED);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#resetUIChanges()
+     */
+    @Override
+    public void resetUIChanges() {
     }
 }

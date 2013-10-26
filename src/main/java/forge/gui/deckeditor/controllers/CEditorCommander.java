@@ -78,7 +78,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      * all cards are available.
      */
     public CEditorCommander() {
-        super();
+        super(FScreen.DECK_EDITOR_COMMANDER);
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);
@@ -208,15 +208,18 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.controllers.ACEditorBase#exit()
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#canSwitchAway()
      */
     @Override
-    public boolean exit() {
-        if (!SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_COMMANDER))
-        {
-            return false;
-        }
-        
+    public boolean canSwitchAway(boolean isClosing) {
+        return SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_COMMANDER);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#resetUIChanges()
+     */
+    @Override
+    public void resetUIChanges() {
         //Re-add tabs
         if (deckGenParent != null) {
             deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
@@ -224,8 +227,6 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         if (allDecksParent != null) {
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
         }
-        
-        return true;
     }
     
     /**

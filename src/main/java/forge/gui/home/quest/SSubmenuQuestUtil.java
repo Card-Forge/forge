@@ -254,7 +254,7 @@ public class SSubmenuQuestUtil {
             return;
         }
         Singletons.getControl().setCurrentScreen(FScreen.QUEST_CARD_SHOP);
-        CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
                 new CEditorQuestCardShop(Singletons.getModel().getQuest()));
     }
 

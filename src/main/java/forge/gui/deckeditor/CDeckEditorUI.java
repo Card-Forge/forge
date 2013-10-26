@@ -101,9 +101,15 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
         CPicture.SINGLETON_INSTANCE.showImage(item);
     }
     
-    public boolean canExit() {
+    public boolean canSwitchAway(boolean isClosing) {
         if (this.childController != null) {
-            return this.childController.exit();
+            if (!this.childController.canSwitchAway(isClosing)) {
+                return false;
+            }
+            this.childController.resetUIChanges();
+            if (isClosing) {
+                screenChildControllers.remove(this.childController.getScreen());
+            }
         }
         return true;
     }
@@ -117,15 +123,14 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     }
 
     /**
-     * Set controller for current configuration of editor.
-     * 
-     * @param editor0 &emsp; {@link forge.gui.deckeditor.controllers.ACEditorBase}<?, ?>
+     * Set controller for a given editor screen.
      */
-    public void setCurrentEditorController(ACEditorBase<? extends InventoryItem, ? extends DeckBase> editor0) {
-        if (this.childController == editor0) { return; }
-        this.childController = editor0;
-        screenChildControllers.put(Singletons.getControl().getCurrentScreen(), editor0);
-        updateController();
+    public void setEditorController(ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController0) {
+        FScreen screen = childController0.getScreen();
+        screenChildControllers.put(screen, childController0);
+        if (screen == Singletons.getControl().getCurrentScreen()) {
+            setCurrentEditorController(childController0);
+        }
     }
     
     private interface _MoveAction {
@@ -298,9 +303,11 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     }
     
     /**
-     * Updates UI and listeners for current controller.
+     * Set current editor controller
      */
-    private void updateController() {
+    private void setCurrentEditorController(ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController0) {
+        this.childController = childController0;
+
         if (childController == null) { return; }
 
         final ItemManager<? extends InventoryItem> catView  = childController.getCatalogManager();
@@ -588,7 +595,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             setCurrentEditorController(screenChildController);
         }
         else if (screen == FScreen.DECK_EDITOR_CONSTRUCTED) {
-            setCurrentEditorController(new CEditorConstructed()); //ensure Constructed deck editor controller initialized
+            setEditorController(new CEditorConstructed()); //ensure Constructed deck editor controller initialized
         }
     }
 

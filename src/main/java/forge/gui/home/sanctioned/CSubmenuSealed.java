@@ -208,7 +208,7 @@ public enum CSubmenuSealed implements ICDoc {
                 Singletons.getModel().getDecks().getSealed(), FScreen.DECK_EDITOR_SEALED);
 
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_SEALED);
-        CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(editor);
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editor);
         editor.getDeckController().setModel((T) sealed);
     }
 

@@ -45,6 +45,7 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.framework.DragCell;
+import forge.gui.framework.FScreen;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -125,6 +126,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      *            a {@link forge.quest.data.QuestData} object.
      */
     public CEditorQuestCardShop(final QuestController qd) {
+        super(FScreen.QUEST_CARD_SHOP);
+        
         this.questData = qd;
 
         final InventoryItemManager catalogManager = new InventoryItemManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
@@ -536,15 +539,23 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.controllers.ACEditorBase#exit()
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#canSwitchAway()
      */
     @Override
-    public boolean exit() {
+    public boolean canSwitchAway(boolean isClosing) {
+        Singletons.getModel().getQuest().save();
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#resetUIChanges()
+     */
+    @Override
+    public void resetUIChanges() {
         if (showingFullCatalog) {
             toggleFullCatalog();
         }
         
-        Singletons.getModel().getQuest().save();
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
 
         // undo Card Shop Specifics
@@ -575,7 +586,5 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         if (probsParent != null) {
             probsParent.addDoc(VProbabilities.SINGLETON_INSTANCE);
         }
-        
-        return true;
     }
 }

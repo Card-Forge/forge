@@ -52,7 +52,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
                     return;
                 }
                 Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST);
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorQuest(Singletons.getModel().getQuest()));
+                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuest(Singletons.getModel().getQuest()));
             }
         });
     }

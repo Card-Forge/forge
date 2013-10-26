@@ -168,8 +168,8 @@ public enum FScreen {
         return closeButtonTooltip;
     }
     
-    public boolean onSwitching() {
-        return view.onSwitching(this);
+    public boolean onSwitching(FScreen toScreen) {
+        return view.onSwitching(this, toScreen);
     }
     
     public boolean onClosing() {

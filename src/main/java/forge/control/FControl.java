@@ -184,7 +184,7 @@ public enum FControl implements KeyEventDispatcher {
         if (!MenuUtil.getUserConfirmation(userPrompt, "Exit Forge", this.game == null)) { //default Yes if no game active
             return false;
         }
-        if (!CDeckEditorUI.SINGLETON_INSTANCE.canExit()) {
+        if (!CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true)) {
             return false;
         }
         return true;
@@ -273,7 +273,9 @@ public enum FControl implements KeyEventDispatcher {
         //if (this.currentScreen == screen) { return; }
 
         //give previous screen a chance to perform special switch handling and/or cancel switching away from screen
-        if (!Singletons.getView().getNavigationBar().canSwitchAway()) { return; }
+        if (this.currentScreen != screen && !Singletons.getView().getNavigationBar().canSwitch(screen)) {
+            return;
+        }
         
         if (this.currentScreen == FScreen.MATCH_SCREEN) { //hide targeting overlay and reset image if was on match screen
             SOverlayUtils.hideTargetingOverlay();

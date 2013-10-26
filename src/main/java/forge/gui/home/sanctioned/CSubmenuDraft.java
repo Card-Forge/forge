@@ -160,7 +160,7 @@ public enum CSubmenuDraft implements ICDoc {
         draft.showGui(new BoosterDraft(o));
 
         Singletons.getControl().setCurrentScreen(FScreen.DRAFTING_PROCESS);
-        CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(draft);
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(draft);
     }
 
     /* (non-Javadoc)

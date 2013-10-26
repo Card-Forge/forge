@@ -101,7 +101,7 @@ public enum CSubmenuPlanechase implements ICDoc {
                 };
                 
                 Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
+                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
                         new CEditorVariant(Singletons.getModel().getDecks().getPlane(), predPlanes, FScreen.DECK_EDITOR_PLANECHASE));
             }
         });

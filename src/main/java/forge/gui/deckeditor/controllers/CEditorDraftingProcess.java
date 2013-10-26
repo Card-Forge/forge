@@ -64,6 +64,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * Updates the deck editor UI as necessary draft selection mode.
      */
     public CEditorDraftingProcess() {
+        super(FScreen.DRAFTING_PROCESS);
+
         final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
         final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
 
@@ -271,10 +273,18 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.controllers.ACEditorBase#exit()
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#canSwitchAway()
      */
     @Override
-    public boolean exit() {
+    public boolean canSwitchAway(boolean isClosing) {
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.controllers.ACEditorBase#resetUIChanges()
+     */
+    @Override
+    public void resetUIChanges() {
         CSubmenuDraft.SINGLETON_INSTANCE.update();
 
         //Re-rename buttons
@@ -297,7 +307,5 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         
         // set catalog table back to free-selection mode
         getCatalogManager().getTable().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-        return true;
     }
 }
