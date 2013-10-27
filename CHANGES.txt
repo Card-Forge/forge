@@ -8,10 +8,17 @@ Forge Beta: 1#-##-2013 ver 1.5.4
 Release Notes
 -------------
 
+-Draft fixes-
+Draft Deck Editor will now automatically open after finishing and naming a draft
+Fixed bug where switching away from a Draft and back would lose your picks
+Fixed bug where Draft tab remained open after finishing a draft and would crash if clicked at that point or another draft started
+Prevented canceling naming a draft, which would cause a crash
+
+
 - Navigation tabs -
 Forge now display navigation tabs in the titlebar and supports switching screens without closing them.
 By default, Home and Deck Editor are available as tabs, with another closable tab added for any game you start.
-X button in upper right now exits Forge rather than going back to Home screen.
+X button in upper right can now exit Forge rather than closing the current screen and going back to Home screen, depending on user preference
 To concede the current game, use the X button in the Game tab itself.
 Deck Editor and Exit Forge buttons have been removed from the Home screen since they're both accessible on the titlebar.
 
