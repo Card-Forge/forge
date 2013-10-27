@@ -17,7 +17,7 @@ import javax.swing.ListCellRenderer;
  */
 public class FComboBoxWrapper<E> {
 
-    private static ArrayList<FComboBoxWrapper<?>> allWrappers = new ArrayList<FComboBoxWrapper<?>>();
+    private static final ArrayList<FComboBoxWrapper<?>> allWrappers = new ArrayList<FComboBoxWrapper<?>>();
 
     public static void refreshAllSkins() {
         for (FComboBoxWrapper<?> wrapper : allWrappers) {

@@ -43,7 +43,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     // CTR
     private VSubmenuConstructed() {
         FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        cboGamePlayers.setButtonVisible(true);
         cboGamePlayers.setTextAlignment(TextAlignment.CENTER);
         FSkin.get(cboGamePlayers).setFont(FSkin.getBoldFont(16));
     }

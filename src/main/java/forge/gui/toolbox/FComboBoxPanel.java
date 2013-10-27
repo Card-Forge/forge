@@ -23,7 +23,7 @@ import forge.properties.ForgePreferences.FPref;
 @SuppressWarnings("serial")
 public class FComboBoxPanel<E> extends JPanel {
 
-    private static ArrayList<FComboBoxPanel<?>> allPanels = new ArrayList<FComboBoxPanel<?>>();
+    private static final ArrayList<FComboBoxPanel<?>> allPanels = new ArrayList<FComboBoxPanel<?>>();
 
     public static void refreshAllSkins() {
         for (FComboBoxPanel<?> panel : allPanels) {
