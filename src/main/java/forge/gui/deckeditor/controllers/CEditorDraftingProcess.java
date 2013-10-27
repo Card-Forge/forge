@@ -214,6 +214,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         finishedDraft.addAiDecks(computer);
 
         Singletons.getModel().getDecks().getDraft().add(finishedDraft);
+        CSubmenuDraft.SINGLETON_INSTANCE.update();
 
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited(Singletons.getModel().getDecks().getDraft(), FScreen.DECK_EDITOR_DRAFT));
@@ -255,9 +256,12 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         ccAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
 
-        this.showChoices(this.boosterDraft.nextChoice());
-        if (this.getDeckManager().getPool() == null) {
+        if (this.getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen 
+            this.showChoices(this.boosterDraft.nextChoice());
             this.getDeckManager().setPool((Iterable<InventoryItem>) null);
+        }
+        else {
+            this.showChoices(this.getCatalogManager().getPool());
         }
 
         //Remove buttons
@@ -289,8 +293,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void resetUIChanges() {
-        CSubmenuDraft.SINGLETON_INSTANCE.update();
-
         //Re-rename buttons
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(ccAddLabel);
 
