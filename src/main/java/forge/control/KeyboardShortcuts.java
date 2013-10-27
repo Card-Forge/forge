@@ -21,6 +21,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.home.settings.VSubmenuPreferences.KeyboardShortcutField;
+import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CDock;
 import forge.properties.ForgePreferences.FPref;
 
@@ -99,7 +100,7 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (Singletons.getControl().getCurrentScreen() != FScreen.MATCH_SCREEN) { return; }
-                CDock.SINGLETON_INSTANCE.concede();
+                CMatchUI.SINGLETON_INSTANCE.concede();
             }
         };
 

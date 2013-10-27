@@ -61,6 +61,8 @@ import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.views.VPlayers;
 import forge.gui.menus.IMenuProvider;
+import forge.gui.menus.MenuUtil;
+import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.special.PhaseLabel;
@@ -449,5 +451,19 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
             panels.addAll(c.getTabletop().getCardPanels());
         }
         return panels;
+    }
+
+    /** Concede game, bring up WinLose UI. */
+    public void concede() {
+        if (FOverlay.SINGLETON_INSTANCE.getPanel().isShowing()) {
+            return;
+        }
+
+        String userPrompt =
+                "This will end the current game and you will not be able to resume.\n\n" +
+                        "Concede anyway?";
+        if (MenuUtil.getUserConfirmation(userPrompt, "Concede Game?", false)) {
+            Singletons.getControl().stopGame();
+        }
     }
 }

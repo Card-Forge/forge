@@ -179,8 +179,8 @@ public enum VMatchUI implements IVTopLevelUI {
     @Override
     public boolean onClosing(FScreen screen) {
         if (!Singletons.getControl().getObservedGame().isGameOver()) {
-            Singletons.getControl().stopGame();
-            return false; //delay hiding tab
+            CMatchUI.SINGLETON_INSTANCE.concede();
+            return false; //delay hiding tab even if concede successful
         }
         return true;
     }

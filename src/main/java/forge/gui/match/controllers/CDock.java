@@ -46,8 +46,8 @@ import forge.game.zone.ZoneType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
+import forge.gui.match.CMatchUI;
 import forge.gui.match.views.VDock;
-import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.SaveOpenDialog;
 import forge.gui.toolbox.SaveOpenDialog.Filetypes;
@@ -74,15 +74,6 @@ public enum CDock implements ICDoc {
 
     public Player findAffectedPlayer() {
         return Singletons.getControl().getCurrentPlayer();
-    }
-
-    /** Concede game, bring up WinLose UI. */
-    public void concede() {
-        if (FOverlay.SINGLETON_INSTANCE.getPanel().isShowing()) {
-            return;
-        }
-
-        Singletons.getControl().stopGame();
     }
 
     /**
@@ -308,7 +299,7 @@ public enum CDock implements ICDoc {
         refreshArcStateDisplay();
 
         VDock.SINGLETON_INSTANCE.getBtnConcede()
-        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { concede(); } });
+        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { CMatchUI.SINGLETON_INSTANCE.concede(); } });
 
         VDock.SINGLETON_INSTANCE.getBtnSettings()
         .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { SOverlayUtils.showOverlay(); } });

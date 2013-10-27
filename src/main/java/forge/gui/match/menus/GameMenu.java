@@ -12,6 +12,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JRadioButtonMenuItem;
 
 import forge.Singletons;
+import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CDock;
 import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FSkin;
@@ -80,12 +81,7 @@ public final class GameMenu {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String userPrompt =
-                        "This will end the current game and you will not be able to resume.\n\n" +
-                                "Concede anyway?";
-                if (MenuUtil.getUserConfirmation(userPrompt, "Concede Game?", false)) {
-                    controller.concede();
-                }
+                CMatchUI.SINGLETON_INSTANCE.concede();
             }
         };
     }
