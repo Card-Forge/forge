@@ -191,7 +191,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
             // Check for overwrite case
             for (DeckGroup d : Singletons.getModel().getDecks().getDraft()) {
                 if (s.equalsIgnoreCase(d.getName())) {
-                    final int m = JOptionPane.showConfirmDialog(null,
+                    final int m = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                             "There is already a deck named '" + s + "'. Overwrite?",
                             "Overwrite Deck?",
                             JOptionPane.YES_NO_OPTION,

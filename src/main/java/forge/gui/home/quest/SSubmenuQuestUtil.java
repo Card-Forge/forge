@@ -318,7 +318,7 @@ public class SSubmenuQuestUtil {
             if (nextChallengeInWins() < 1 && qCtrl.getAchievements().getCurrentChallenges().size() > 0) {
                 needRemove = true;
 
-                final int confirmLoss = JOptionPane.showConfirmDialog(null,
+                final int confirmLoss = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                         "You have uncompleted challenges in your current world. If you travel now, they will be LOST!"
                         + "\nAre you sure you wish to travel anyway?\n"
                         + "(Click \"No\" to go back  and complete your current challenges first.)",

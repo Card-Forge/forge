@@ -230,7 +230,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 case CustomFormat:
                     if (customPrizeFormatCodes.isEmpty()) {
 
-                        int answer = JOptionPane.showConfirmDialog(null, "You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?");
+                        int answer = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), "You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?");
                         if (JOptionPane.YES_OPTION != answer) {
                             return;
                         }

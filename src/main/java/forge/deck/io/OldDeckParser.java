@@ -260,7 +260,7 @@ public class OldDeckParser {
             }
             sb.append(System.getProperty("line.separator"));
             sb.append("May Forge delete these decks?");
-            final int response = JOptionPane.showConfirmDialog(null, sb.toString(),
+            final int response = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), sb.toString(),
                     "Some of your sealed decks are orphaned", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
                 for (final Pair<DeckGroup, MutablePair<File, File>> s : sealedDecks.values()) {

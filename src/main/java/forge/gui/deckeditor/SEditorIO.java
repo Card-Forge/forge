@@ -53,7 +53,7 @@ public class SEditorIO {
         else if (controller.fileExists(name)) {
             int confirmResult = JOptionPane.YES_OPTION;
             if ( !StringUtils.equals(name, controller.getModelName()) ) { // prompt only if name was changed
-                confirmResult = JOptionPane.showConfirmDialog(null,
+                confirmResult = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                     limitedDeckMode ? "Would you like to save changes to your deck?"
                     : "There is already a deck named '" + name + "'. Overwrite?",
                     limitedDeckMode ? "Save changes?" : "Overwrite Deck?",
@@ -65,7 +65,7 @@ public class SEditorIO {
         }
         // Confirm if a new deck will be created
         else {
-            final int m = JOptionPane.showConfirmDialog(null,
+            final int m = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
                     "This will create a new deck named '" + name + "'. Continue?",
                     "Create Deck?",
                     JOptionPane.YES_NO_OPTION,
