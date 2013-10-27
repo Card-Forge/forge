@@ -15,6 +15,12 @@ Fixed bug where Draft tab remained open after finishing a draft and would crash 
 Prevented canceling naming a draft, which would cause a crash
 
 
+-ComboBox visual tweaks-
+Standardized appearance of combo boxes
+Removed separation between text and drop down glyph
+Fixed combo boxes on Constructed home screen to update properly when skin switched
+
+
 - Navigation tabs -
 Forge now display navigation tabs in the titlebar and supports switching screens without closing them.
 By default, Home and Deck Editor are available as tabs, with another closable tab added for any game you start.
