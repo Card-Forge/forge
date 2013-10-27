@@ -10,6 +10,9 @@ import java.util.Vector;
 import javax.swing.ComboBoxModel;
 import javax.swing.ListCellRenderer;
 
+import forge.gui.toolbox.FComboBox.TextAlignment;
+import forge.gui.toolbox.FSkin.SkinFont;
+
 /** 
  * Wrapper for combo box with extra logic (either FComboBoxWrapper or FComboBoxPanel should be used instead of FComboBox so skinning works)
  *
@@ -105,6 +108,18 @@ public class FComboBoxWrapper<E> {
         this.comboBox.setRenderer(aRenderer);
     }
     
+    public void setModel(ComboBoxModel<E> aModel) {
+        this.comboBox.setModel(aModel);
+    }
+    
+    public void setTextAlignment(TextAlignment align) {
+        this.comboBox.setTextAlignment(align);
+    }
+    
+    public void setSkinFont(SkinFont skinFont) {
+        this.comboBox.setSkinFont(skinFont);
+    }
+    
     public void setVisible(boolean aFlag) {
         this.comboBox.setVisible(aFlag);
     }
@@ -178,6 +193,10 @@ public class FComboBoxWrapper<E> {
         }
 
         newComboBox.setRenderer(comboBox.getRenderer());
+        newComboBox.setTextAlignment(comboBox.getTextAlignment());
+        if (comboBox.getSkinFont() != null) {
+            newComboBox.setSkinFont(comboBox.getSkinFont());
+        }
         
         //replace combo box with its copy so skin updated
         parent.remove(index);

@@ -10,11 +10,11 @@ import javax.swing.DefaultComboBoxModel;
 import forge.gui.MouseUtil;
 import forge.gui.MouseUtil.MouseCursor;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
-import forge.gui.toolbox.FComboBox;
+import forge.gui.toolbox.FComboBox.TextAlignment;
+import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FSkin;
 
-@SuppressWarnings("serial")
-public class DecksComboBox extends FComboBox<DeckType> {
+public class DecksComboBox extends FComboBoxWrapper<DeckType> {
 
     public enum DeckType {
         CUSTOM_DECK ("Custom User Decks"),
@@ -45,7 +45,7 @@ public class DecksComboBox extends FComboBox<DeckType> {
     private DeckType selectedDeckType = null;
 
     public DecksComboBox() {
-        FSkin.get(this).setFont(FSkin.getBoldFont(14));
+        setSkinFont(FSkin.getBoldFont(14));
         setTextAlignment(TextAlignment.CENTER);
         addActionListener(getDeckTypeComboListener());
     }

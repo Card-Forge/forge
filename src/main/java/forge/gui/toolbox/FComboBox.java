@@ -21,6 +21,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.ComboPopup;
 
+import forge.gui.toolbox.FSkin.SkinFont;
+
 @SuppressWarnings("serial")
 public class FComboBox<E> extends JComboBox<E> {
 
@@ -33,6 +35,7 @@ public class FComboBox<E> extends JComboBox<E> {
         public int getInt() { return value; }
     }
     private TextAlignment textAlignment = TextAlignment.LEFT;
+    private SkinFont skinFont;
 
     // CTR
     public FComboBox() {
@@ -60,9 +63,22 @@ public class FComboBox<E> extends JComboBox<E> {
     private Border getDefaultBorder() {
         return UIManager.getBorder("ComboBox.border");
     }
+    
+    public TextAlignment getTextAlignment() {
+        return textAlignment;
+    }
 
     public void setTextAlignment(TextAlignment align) {
         textAlignment = align;
+    }
+    
+    public SkinFont getSkinFont() {
+        return this.skinFont;
+    }
+    
+    public void setSkinFont(SkinFont skinFont0) {
+        this.skinFont = skinFont0;
+        FSkin.get(this).setFont(skinFont0);
     }
 
     @Override

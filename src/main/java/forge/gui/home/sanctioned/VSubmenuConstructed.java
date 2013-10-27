@@ -14,7 +14,7 @@ import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.home.sanctioned.CSubmenuConstructed.GamePlayers;
-import forge.gui.toolbox.FComboBox;
+import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FComboBox.TextAlignment;
 import forge.gui.toolbox.FSkin;
 
@@ -34,7 +34,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** */
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Constructed");
-    private final FComboBox<GamePlayers> cboGamePlayers = new FComboBox<GamePlayers>();
+    private final FComboBoxWrapper<GamePlayers> cboGamePlayers = new FComboBoxWrapper<GamePlayers>();
     private final StartButton btnStart  = new StartButton();
 
     private final FDeckChooser dcLeft = new FDeckChooser("%s Deck", false, true);
@@ -44,7 +44,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private VSubmenuConstructed() {
         FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         cboGamePlayers.setTextAlignment(TextAlignment.CENTER);
-        FSkin.get(cboGamePlayers).setFont(FSkin.getBoldFont(16));
+        cboGamePlayers.setSkinFont(FSkin.getBoldFont(16));
     }
 
     /* (non-Javadoc)
@@ -91,7 +91,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         container.removeAll();
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         container.add(lblTitle, "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
-        container.add(cboGamePlayers, "w 400px!, h 30px!, gap 0 0 15px 5px, span 2, al center");
+        cboGamePlayers.addTo(container, "w 400px!, h 30px!, gap 0 0 15px 5px, span 2, al center");
         container.add(dcLeft, "w 50%, gap 40px 20px 20px 5px, growy, pushy");
         container.add(dcRight, "w 50%, gap 20px 40px 20px 5px, growy, pushy");
         container.add(btnStart, "span 2, gap 0 0 0px 20px, center");
@@ -161,7 +161,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         return parentCell;
     }
 
-    public FComboBox<GamePlayers> getGamePlayersComboBox() {
+    public FComboBoxWrapper<GamePlayers> getGamePlayersComboBox() {
         return cboGamePlayers;
     }
 

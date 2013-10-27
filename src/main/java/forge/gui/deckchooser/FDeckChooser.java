@@ -279,7 +279,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         setupUI();
         removeAll();
         this.setLayout(new MigLayout("insets 0, gap 0, flowy"));
-        this.add(decksComboBox, "w 10:100%, h 30px!");
+        decksComboBox.addTo(this, "w 10:100%, h 30px!");
         this.add(scrDecks, "w 10:100%, growy, pushy");
         this.add(btnRandom, "w 10:100%, h 26px!, gap 0 0 2px 0");
         this.add(lblDecklist, "w 10:100%, h 20px!, , gap 0 0 5px 0");

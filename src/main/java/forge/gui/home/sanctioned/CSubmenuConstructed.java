@@ -22,7 +22,7 @@ import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
-import forge.gui.toolbox.FComboBox;
+import forge.gui.toolbox.FComboBoxWrapper;
 import forge.net.FServer;
 import forge.net.Lobby;
 import forge.properties.ForgePreferences;
@@ -161,7 +161,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     }
 
     private void initializeGamePlayersComboBox() {
-        final FComboBox<GamePlayers> comboBox = this.view.getGamePlayersComboBox();
+        final FComboBoxWrapper<GamePlayers> comboBox = this.view.getGamePlayersComboBox();
         comboBox.setModel(new DefaultComboBoxModel<GamePlayers>(GamePlayers.values()));
         comboBox.addActionListener(new ActionListener() {
             @Override
