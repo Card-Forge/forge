@@ -49,6 +49,7 @@ import forge.gui.events.UiEvent;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.controllers.CCombat;
@@ -458,6 +459,8 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         if (FOverlay.SINGLETON_INSTANCE.getPanel().isShowing()) {
             return;
         }
+
+        Singletons.getControl().ensureScreenActive(FScreen.MATCH_SCREEN);
 
         String userPrompt =
                 "This will end the current game and you will not be able to resume.\n\n" +
