@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -22,6 +21,7 @@ import forge.control.RestartUtil;
 import forge.game.ai.AiProfileUtil;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.FComboBox;
 import forge.gui.toolbox.FComboBoxPanel;
 import forge.gui.toolbox.FLabel;
 import forge.properties.ForgePreferences;
@@ -195,14 +195,14 @@ public enum CSubmenuPreferences implements ICDoc {
     private void initializeGameLogVerbosityComboBox() {
         FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
         FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();
-        JComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
+        FComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
         GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
         panel.setComboBox(comboBox, selectedItem);
     }
     
     private void initializeCloseActionComboBox() {
         final FComboBoxPanel<CloseAction> panel = this.view.getCloseActionComboBoxPanel();
-        final JComboBox<CloseAction> comboBox = new JComboBox<CloseAction>(CloseAction.values());
+        final FComboBox<CloseAction> comboBox = new FComboBox<CloseAction>(CloseAction.values());
         comboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(final ItemEvent e) {
@@ -215,18 +215,18 @@ public enum CSubmenuPreferences implements ICDoc {
     private void initializeAiProfilesComboBox() {
         FPref userSetting = FPref.UI_CURRENT_AI_PROFILE;
         FComboBoxPanel<String> panel = this.view.getAiProfilesComboBoxPanel();
-        JComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
+        FComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
         String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
     }
 
-    private <E> JComboBox<E> createComboBox(E[] items, final ForgePreferences.FPref setting) {
-        final JComboBox<E> comboBox = new JComboBox<E>(items);
+    private <E> FComboBox<E> createComboBox(E[] items, final ForgePreferences.FPref setting) {
+        final FComboBox<E> comboBox = new FComboBox<E>(items);
         addComboBoxListener(comboBox, setting);
         return comboBox;
     }
 
-    private <E> void addComboBoxListener(final JComboBox<E> comboBox, final ForgePreferences.FPref setting) {
+    private <E> void addComboBoxListener(final FComboBox<E> comboBox, final ForgePreferences.FPref setting) {
         comboBox.addItemListener(new ItemListener() {
             @SuppressWarnings("unchecked")
             @Override

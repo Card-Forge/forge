@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
+import java.util.Vector;
+
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
@@ -45,6 +47,10 @@ public class FComboBox<E> extends JComboBox<E> {
         super(items);
         initialize();
     }
+    public FComboBox(Vector<E> items) {
+        super(items);
+        initialize();
+    }
 
     private void initialize() {
         setUI(new FComboBoxUI());
@@ -64,10 +70,16 @@ public class FComboBox<E> extends JComboBox<E> {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
         g2d.setPaint(getForeground());
-        int shapeWidth = 10;
-        int shapeHeight = 10;
-        int x = getWidth() - shapeWidth - 8;
-        int y = getHeight() / 2 - 2;
+        int shapeWidth = 8;
+        int shapeHeight = 8;
+        int x = getWidth() - shapeWidth - 6;
+        int y = getHeight() / 2 - 1;
+        if (getHeight() > 26) { //increase arrow size if taller combo box
+            shapeWidth += 2;
+            shapeHeight += 2;
+            x -= 4;
+            y--;
+        }
         int[] xPoints = {x, x + shapeWidth, x + (shapeWidth / 2)};
         int[] yPoints = {y, y, y + (shapeHeight / 2)};
         g2d.fillPolygon(xPoints, yPoints, 3);

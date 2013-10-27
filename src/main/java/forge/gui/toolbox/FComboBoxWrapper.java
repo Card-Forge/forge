@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.ComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.ListCellRenderer;
 
 /** 
- * Wrapper for combo box with extra logic (either FComboBoxWrapper or FComboBoxPanel should be used instead of JComboBox so skinning works)
+ * Wrapper for combo box with extra logic (either FComboBoxWrapper or FComboBoxPanel should be used instead of FComboBox so skinning works)
  *
  */
 public class FComboBoxWrapper<E> {
@@ -25,30 +24,30 @@ public class FComboBoxWrapper<E> {
         }
     }
 
-    private JComboBox<E> comboBox;
+    private FComboBox<E> comboBox;
     private Object constraints;
     
     public FComboBoxWrapper() {
         super();
-        this.comboBox = new JComboBox<E>();
+        this.comboBox = new FComboBox<E>();
         allWrappers.add(this);
     }
     
     public FComboBoxWrapper(E[] items) {
         super();
-        this.comboBox = new JComboBox<E>(items);
+        this.comboBox = new FComboBox<E>(items);
         allWrappers.add(this);
     }
     
     public FComboBoxWrapper(Vector<E> items) {
         super();
-        this.comboBox = new JComboBox<E>(items);
+        this.comboBox = new FComboBox<E>(items);
         allWrappers.add(this);
     }
     
     public FComboBoxWrapper(ComboBoxModel<E> aModel) {
         super();
-        this.comboBox = new JComboBox<E>(aModel);
+        this.comboBox = new FComboBox<E>(aModel);
         allWrappers.add(this);
     }
     
@@ -129,10 +128,10 @@ public class FComboBoxWrapper<E> {
     
     //refresh combo box skin by replacing it with a copy of itself
     //TODO: Figure out if there's a better way, as calling updateUI doesn't seem to work
-    public static <E> JComboBox<E> refreshComboBoxSkin(JComboBox<E> comboBox) {
+    public static <E> FComboBox<E> refreshComboBoxSkin(FComboBox<E> comboBox) {
         return refreshComboBoxSkin(comboBox, null);
     }
-    public static <E> JComboBox<E> refreshComboBoxSkin(JComboBox<E> comboBox, Object constraints) {
+    public static <E> FComboBox<E> refreshComboBoxSkin(FComboBox<E> comboBox, Object constraints) {
         //find index of combo box within parent
         Container parent = comboBox.getParent();
         if (parent == null) { return comboBox; }
@@ -145,7 +144,7 @@ public class FComboBoxWrapper<E> {
         }
         
         //create copy of combo box
-        JComboBox<E> newComboBox = new JComboBox<E>();
+        FComboBox<E> newComboBox = new FComboBox<E>();
         for (int i = 0; i < comboBox.getItemCount(); i++) {
             newComboBox.addItem(comboBox.getItemAt(i));
         }

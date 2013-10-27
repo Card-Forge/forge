@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -17,7 +16,7 @@ import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
- * Panel with combo box and caption (either FComboBoxWrapper or FComboBoxPanel should be used instead of JComboBox so skinning works)
+ * Panel with combo box and caption (either FComboBoxWrapper or FComboBoxPanel should be used instead of FComboBox so skinning works)
  *
  */
 @SuppressWarnings("serial")
@@ -32,7 +31,7 @@ public class FComboBoxPanel<E> extends JPanel {
     }
 
     private String comboBoxCaption = "";
-    private JComboBox<E> comboBox = null;
+    private FComboBox<E> comboBox = null;
     
     public FComboBoxPanel(String comboBoxCaption) {
         super();
@@ -41,7 +40,7 @@ public class FComboBoxPanel<E> extends JPanel {
         allPanels.add(this);
     }
             
-    public void setComboBox(JComboBox<E> comboBox, E selectedItem) {
+    public void setComboBox(FComboBox<E> comboBox, E selectedItem) {
         removeExistingComboBox();
         this.comboBox = comboBox;
         this.comboBox.setSelectedItem(selectedItem);        
@@ -81,7 +80,7 @@ public class FComboBoxPanel<E> extends JPanel {
     private void setComboBoxLayout() {
         if (this.comboBox != null) {
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_THEMED_COMBOBOX)) {
-                FSkin.JComponentSkin<JComboBox<E>> comboBoxSkin = FSkin.get(this.comboBox);
+                FSkin.JComponentSkin<FComboBox<E>> comboBoxSkin = FSkin.get(this.comboBox);
                 comboBoxSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
                 comboBoxSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
                 comboBoxSkin.setFont(FSkin.getFont(12));
