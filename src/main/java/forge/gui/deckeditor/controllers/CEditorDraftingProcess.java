@@ -30,6 +30,7 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.IBoosterDraft;
+import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
@@ -216,7 +217,10 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
             Singletons.getModel().getDecks().getDraft().add(finishedDraft);
         }
 
-        Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
+        Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
+        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited(Singletons.getModel().getDecks().getDraft(), FScreen.DECK_EDITOR_DRAFT));
+        CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(s);
+        FScreen.DRAFTING_PROCESS.close();
     }
 
     //========== Overridden from ACEditorBase

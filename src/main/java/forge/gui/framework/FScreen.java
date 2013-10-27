@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.swing.JOptionPane;
 
+import forge.Singletons;
 import forge.gui.bazaar.CBazaarUI;
 import forge.gui.bazaar.VBazaarUI;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -193,5 +194,13 @@ public enum FScreen {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Failed to delete layout file.");
         }
         return false;
+    }
+
+    public void open() {
+        Singletons.getControl().setCurrentScreen(this);
+    }
+    
+    public void close() {
+        Singletons.getView().getNavigationBar().closeTab(this);
     }
 }
