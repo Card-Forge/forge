@@ -11,6 +11,7 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.home.CHomeUI;
 import forge.gui.home.VHomeUI;
+import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
@@ -32,7 +33,7 @@ public enum FScreen {
             null),
     MATCH_SCREEN(
             VMatchUI.SINGLETON_INSTANCE,
-            CHomeUI.SINGLETON_INSTANCE,
+            CMatchUI.SINGLETON_INSTANCE,
             "Game",
             FSkin.getIcon(FSkin.DockIcons.ICO_ALPHASTRIKE),
             true,
