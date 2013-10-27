@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
@@ -126,6 +127,20 @@ public class FComboBox<E> extends JComboBox<E> {
         textAlignment = align;
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setPaint(getForeground());
+        int shapeWidth = 10;
+        int shapeHeight = 10;
+        int x = getWidth() - shapeWidth - 8;
+        int y = getHeight() / 2 - 2;
+        int[] xPoints = {x, x + shapeWidth, x + (shapeWidth/2)};
+        int[] yPoints = {y, y, y + (shapeHeight/2)};
+        g2d.fillPolygon(xPoints, yPoints, 3);
+    }
+
     private class FComboBoxUI extends BasicComboBoxUI {
 
         @Override
@@ -147,37 +162,18 @@ public class FComboBox<E> extends JComboBox<E> {
 
         @Override
         protected JButton createArrowButton() {
-            JButton btn = new ComboButton();
-            btn.setOpaque(false);
-            btn.setBorderPainted(true);
-            btn.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, getBorderColor()));
-            btn.setBackground(getBackground());
-            btn.setForeground(getForeground());
-            return btn;
+            return new JButton() { //return button that takes up no space
+                @Override  
+                public int getWidth() {  
+                    return 0;  
+                }  
+            };
         }
 
         @SuppressWarnings("rawtypes")
         @Override
         protected ListCellRenderer createRenderer() {
             return new CustomCellRenderer<>();
-        }
-
-        private class ComboButton extends JButton {
-
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D)g;
-                g2d.setPaint(getForeground());
-                int shapeWidth = 10;
-                int shapeHeight = 10;
-                int x = (getWidth() / 2) - (shapeWidth / 2);
-                int y = (getHeight() / 2) - (shapeHeight / 3); //(shapeHeight / 2) + ((shapeHeight / 4));
-                int[] xPoints = {x, x+shapeWidth, x+(shapeWidth/2)};
-                int[] yPoints = {y, y, y+(shapeHeight/2)};
-                g2d.fillPolygon(xPoints, yPoints, 3);
-            }
-
         }
 
         @SuppressWarnings("hiding")
@@ -197,7 +193,6 @@ public class FComboBox<E> extends JComboBox<E> {
                 lblItem.setHorizontalAlignment(textAlignment.getInt());
                 return lblItem;
             }
-
         }
     }
 
