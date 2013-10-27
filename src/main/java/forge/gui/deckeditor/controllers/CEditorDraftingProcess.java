@@ -182,40 +182,38 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         // Cancel button will be null; OK will return string.
         // Must check for null value first, then string length.
-        if (s != null) {
-            // Recurse, if empty string.
-            if (s.length() == 0) {
-                saveDraft();
-                return;
-            }
-
-            // Check for overwrite case
-            for (DeckGroup d : Singletons.getModel().getDecks().getDraft()) {
-                if (s.equalsIgnoreCase(d.getName())) {
-                    final int m = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
-                            "There is already a deck named '" + s + "'. Overwrite?",
-                            "Overwrite Deck?",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.QUESTION_MESSAGE);
-
-                    // If no overwrite, recurse.
-                    if (m == JOptionPane.NO_OPTION) {
-                        saveDraft();
-                        return;
-                    }
-                    break;
-                }
-            }
-
-            // Construct computer's decks and save draft
-            final Deck[] computer = this.boosterDraft.getDecks();
-
-            final DeckGroup finishedDraft = new DeckGroup(s);
-            finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(s));
-            finishedDraft.addAiDecks(computer);
-
-            Singletons.getModel().getDecks().getDraft().add(finishedDraft);
+        // Recurse, if either null or empty string.
+        if (s == null || s.length() == 0) {
+            saveDraft();
+            return;
         }
+
+        // Check for overwrite case
+        for (DeckGroup d : Singletons.getModel().getDecks().getDraft()) {
+            if (s.equalsIgnoreCase(d.getName())) {
+                final int m = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+                        "There is already a deck named '" + s + "'. Overwrite?",
+                        "Overwrite Deck?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+
+                // If no overwrite, recurse.
+                if (m == JOptionPane.NO_OPTION) {
+                    saveDraft();
+                    return;
+                }
+                break;
+            }
+        }
+
+        // Construct computer's decks and save draft
+        final Deck[] computer = this.boosterDraft.getDecks();
+
+        final DeckGroup finishedDraft = new DeckGroup(s);
+        finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(s));
+        finishedDraft.addAiDecks(computer);
+
+        Singletons.getModel().getDecks().getDraft().add(finishedDraft);
 
         Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_DRAFT);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorLimited(Singletons.getModel().getDecks().getDraft(), FScreen.DECK_EDITOR_DRAFT));
@@ -258,7 +256,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
 
         this.showChoices(this.boosterDraft.nextChoice());
-        this.getDeckManager().setPool((Iterable<InventoryItem>) null);
+        if (this.getDeckManager().getPool() == null) {
+            this.getDeckManager().setPool((Iterable<InventoryItem>) null);
+        }
 
         //Remove buttons
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(false);
