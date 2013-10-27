@@ -83,7 +83,7 @@ public enum VMatchUI implements IVTopLevelUI {
             }
         }
 
-     // Add extra players alternatively to existing user/AI field panels.
+        // Add extra players alternatively to existing user/AI field panels.
         for (int i = 2; i < lstCommands.size(); i++) {
             // If already in layout, no need to add again.
             VCommand cmdView = lstCommands.get(i);

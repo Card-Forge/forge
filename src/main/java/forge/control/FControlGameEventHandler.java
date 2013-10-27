@@ -47,6 +47,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.SDisplayUtil;
+import forge.gui.framework.SLayoutIO;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.ViewWinLose;
@@ -145,6 +146,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
             CMatchUI.SINGLETON_INSTANCE.initHandViews(FServer.instance.getLobby().getGuiPlayer());
+            SLayoutIO.loadLayout(null);
             VMatchUI.SINGLETON_INSTANCE.populate();
             for(VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
                 h.getLayoutControl().updateHand();
