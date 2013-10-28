@@ -94,6 +94,8 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
                 .getColumn(0)).getEnumValue().substring(0, 4).equals("DECK")
                     ? true : false;
 
+        cascadeManager.reset();
+
         if (sortcols[1] == null) {
             if (isDeckTable) {
                 cascadeManager.add((TableColumnInfo<T>) SColumnUtil.getColumn(ColumnName.DECK_NAME));
@@ -305,8 +307,12 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
             return this.sorter;
         }
 
-        private TableSorterCascade<InventoryItem> createSorter() {
+        public void reset() {
+            this.colsToSort.clear();
+            this.sorter = null;
+        }
 
+        private TableSorterCascade<InventoryItem> createSorter() {
             final List<ItemPoolSorter<InventoryItem>> oneColSorters
                 = new ArrayList<ItemPoolSorter<InventoryItem>>(maxSortDepth);
 
