@@ -155,7 +155,7 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
         }
     };
 
-    private final FMouseAdapter headerMouseAdapter = new FMouseAdapter(3) { //use clickTolerance of 3 pixels to avoid toggling sort if column drag initiated       
+    private final FMouseAdapter headerMouseAdapter = new FMouseAdapter(true) {
         @SuppressWarnings("unchecked")
         @Override
         public void onLeftClick(MouseEvent e) {

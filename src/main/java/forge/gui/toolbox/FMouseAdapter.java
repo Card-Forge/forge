@@ -41,18 +41,15 @@ public abstract class FMouseAdapter extends MouseAdapter {
      * Forge Mouse Adapter with infinite click tolerance (so long as mouse doesn't leave component)
      */
     public FMouseAdapter() {
-        this(-1);
+        this(false);
     }
     
-    /**
-     * Forge Mouse Adapter with specific click tolerance
-     * @param clickTolerance - number of pixels mouse can move while mouse down and still be considered a click
-     */
-    public FMouseAdapter(int clickTolerance0) {
-        clickTolerance = clickTolerance0;
+    public FMouseAdapter(boolean isCompDraggable0) {
+        isCompDraggable = isCompDraggable0;
     }
 
-    private final int clickTolerance;
+    private final boolean isCompDraggable;
+    private boolean hovered;
     private Point mouseDownLoc;
     private Point firstClickLoc;
     private int firstClickButton;
@@ -74,8 +71,8 @@ public abstract class FMouseAdapter extends MouseAdapter {
 
         mouseDownLoc = e.getLocationOnScreen();
         
-        //if click tolerance specified, ensure this adapter added as mouse motion listener to component
-        if (clickTolerance >= 0) {
+        //if component is draggable, ensure this adapter added as mouse motion listener to component while mouse down
+        if (isCompDraggable) {
             tempMotionListenerComp = e.getComponent();
             if (tempMotionListenerComp != null) {
                 for (MouseMotionListener motionListener : tempMotionListenerComp.getMouseMotionListeners()) {
@@ -107,15 +104,16 @@ public abstract class FMouseAdapter extends MouseAdapter {
                     break;
                 }
             }
-            resetFirstClickLoc();
+            firstClickLoc = null;
+            firstClickButton = 0;
         }
     }
     
     @Override
     public final void mouseDragged(MouseEvent e) {
-        //clear mouse down location if dragged more than click tolerance
-        if (mouseDownLoc != null && clickTolerance >= 0 &&
-                e.getLocationOnScreen().distance(mouseDownLoc) > clickTolerance) {
+        //clear mouse down location if component begins being dragged
+        if (mouseDownLoc != null && isCompDraggable &&
+                e.getLocationOnScreen().distance(mouseDownLoc) > 3) {
             resetMouseDownLoc();
         }
         if (tempMotionListenerComp == null) { //don't raise drag event if only a temporary motion listener
@@ -135,14 +133,13 @@ public abstract class FMouseAdapter extends MouseAdapter {
     
     @Override
     public final void mouseEntered(MouseEvent e) {
+        hovered = true;
         onMouseEnter(e);
     }
     
     @Override
     public final void mouseExited(MouseEvent e) {
-        //clear mouse down and first click locations if mouse leaves component
-        resetMouseDownLoc();
-        resetFirstClickLoc();
+        hovered = false;
         onMouseExit(e);
     }
     
@@ -152,11 +149,6 @@ public abstract class FMouseAdapter extends MouseAdapter {
             tempMotionListenerComp.removeMouseMotionListener(this);
             tempMotionListenerComp = null;
         }
-    }
-    
-    private void resetFirstClickLoc() {
-        firstClickLoc = null;
-        firstClickButton = 0;
     }
 
     @Override
@@ -171,6 +163,10 @@ public abstract class FMouseAdapter extends MouseAdapter {
         case 3:
             onRightMouseUp(e);
             break;
+        }
+        
+        if (!hovered) { //reset mouse down location and don't handle click if mouse up outside component
+            resetMouseDownLoc();
         }
 
         //if mouse down on component and not cleared by drag or exit, handle click
@@ -195,7 +191,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
                 break;
             }
         }
-        else { //handle drag drop if click not handled
+        else if (isCompDraggable) { //handle drag drop if click not handled and component is draggable
             switch (e.getButton()) {
             case 1:
                 onLeftMouseDragDrop(e);
