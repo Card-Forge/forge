@@ -103,6 +103,13 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
         setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
     }
+    
+    private final TableModelListener tableModelListener = new TableModelListener() {
+        @Override
+        public void tableChanged(final TableModelEvent ev) {
+            SItemManagerUtil.setStats(ItemTable.this.itemManager);
+        }
+    };
 
     /**
      * Applies a EditorTableModel and a model listener to this instance's JTable.
@@ -127,12 +134,8 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         getTableHeader().setBackground(new Color(200, 200, 200));
 
         // Update stats each time table changes
-        this.tableModel.addTableModelListener(new TableModelListener() {
-            @Override
-            public void tableChanged(final TableModelEvent ev) {
-                SItemManagerUtil.setStats(ItemTable.this.itemManager);
-            }
-        });
+        this.tableModel.removeTableModelListener(tableModelListener); //ensure listener not added multiple times
+        this.tableModel.addTableModelListener(tableModelListener);
     }
     
     private String _getCellTooltip(TableCellRenderer renderer, int row, int col, Object val) {

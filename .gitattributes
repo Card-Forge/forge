@@ -15307,6 +15307,7 @@ src/main/java/forge/gui/toolbox/FComboBoxWrapper.java -text
 src/main/java/forge/gui/toolbox/FDigitalClock.java -text
 src/main/java/forge/gui/toolbox/FLabel.java -text
 src/main/java/forge/gui/toolbox/FList.java -text
+src/main/java/forge/gui/toolbox/FMouseAdapter.java -text
 src/main/java/forge/gui/toolbox/FOverlay.java -text
 src/main/java/forge/gui/toolbox/FPanel.java -text
 src/main/java/forge/gui/toolbox/FProgressBar.java -text

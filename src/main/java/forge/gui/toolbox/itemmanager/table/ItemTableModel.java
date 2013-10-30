@@ -20,7 +20,6 @@ package forge.gui.toolbox.itemmanager.table;
 import java.awt.Cursor;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,13 +33,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
@@ -139,6 +138,58 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
             CDeckEditorUI.SINGLETON_INSTANCE.setCard(null != card ? card.getKey() : null);
         }
     }
+    
+    private final ListSelectionListener listSelectionListener = new ListSelectionListener() {
+        @Override
+        public void valueChanged(final ListSelectionEvent arg0) {
+            if (table.isFocusOwner()) {
+                ItemTableModel.this.showSelectedItem(table);
+            }
+        }
+    };
+    
+    private final FocusAdapter focusAdapter = new FocusAdapter() {
+        @Override
+        public void focusGained(final FocusEvent e) {
+            ItemTableModel.this.showSelectedItem(table);
+        }
+    };
+
+    private final FMouseAdapter headerMouseAdapter = new FMouseAdapter(3) { //use clickTolerance of 3 pixels to avoid toggling sort if column drag initiated       
+        @SuppressWarnings("unchecked")
+        @Override
+        public void onLeftClick(MouseEvent e) {
+            if (Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR) == table.getTableHeader().getCursor()) {
+                return;
+            }
+            
+            //toggle column sort
+            final TableColumnModel colModel = ItemTableModel.this.table.getColumnModel();
+            final int columnModelIndex = colModel.getColumnIndexAtX(e.getX());
+            final int modelIndex = colModel.getColumn(columnModelIndex).getModelIndex();
+
+            if (modelIndex < 0) {
+                return;
+            }
+
+            // This will invert if needed
+            // 2012/07/21 - Changed from modelIndex to ColumnModelIndex due to a crash
+            // Crash was: Hide 2 columns, then search by last column.
+            ItemTableModel.this.cascadeManager.add((TableColumnInfo<T>) ItemTableModel.this.table.getColumnModel().getColumn(columnModelIndex));
+            ItemTableModel.this.refreshSort();
+            ItemTableModel.this.table.tableChanged(new TableModelEvent(ItemTableModel.this));
+            ItemTableModel.this.table.repaint();
+            if (ItemTableModel.this.table.getRowCount() > 0) {
+                ItemTableModel.this.table.setRowSelectionInterval(0, 0);
+            }
+            SItemManagerIO.savePreferences(ItemTableModel.this.table);
+        }
+        
+        @Override
+        public void onLeftMouseDragDrop(MouseEvent e) { //save preferences after column moved/resized
+            SItemManagerIO.savePreferences(ItemTableModel.this.table);
+        }
+    };
 
     /**
      * <p>
@@ -147,37 +198,15 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
      */
     public void addListeners() {
         // updates card detail, listens to any key strokes
-        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(final ListSelectionEvent arg0) {
-                if (table.isFocusOwner()) {
-                    ItemTableModel.this.showSelectedItem(table);
-                }
-            }
-        });
+        table.getSelectionModel().removeListSelectionListener(listSelectionListener);  //ensure listener not added multiple times
+        table.getSelectionModel().addListSelectionListener(listSelectionListener);
         
-        table.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(final FocusEvent e) {
-                ItemTableModel.this.showSelectedItem(table);
-            }
-        });
+        table.removeFocusListener(focusAdapter); //ensure listener not added multiple times
+        table.addFocusListener(focusAdapter);
 
-        final JTableHeader header = table.getTableHeader();
-        header.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(final MouseEvent e) {
-                if (Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR) != header.getCursor()) {
-                    headerClicked(e);
-                }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                SItemManagerIO.savePreferences(ItemTableModel.this.table);
-            }
-        });
-    } // addItemListener()
+        table.getTableHeader().removeMouseListener(headerMouseAdapter); //ensure listener not added multiple times
+        table.getTableHeader().addMouseListener(headerMouseAdapter);
+    }
 
     /**
      * Resort.
@@ -186,29 +215,6 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
         if (this.model.getOrderedList().size() == 0) { return; }
 
         Collections.sort(this.model.getOrderedList(), new MyComparator());
-    }
-
-    @SuppressWarnings("unchecked")
-    private void headerClicked(final MouseEvent e) {
-        final TableColumnModel colModel = ItemTableModel.this.table.getColumnModel();
-        final int columnModelIndex = colModel.getColumnIndexAtX(e.getX());
-        final int modelIndex = colModel.getColumn(columnModelIndex).getModelIndex();
-
-        if (modelIndex < 0) {
-            return;
-        }
-
-        // This will invert if needed
-        // 2012/07/21 - Changed from modelIndex to ColumnModelIndex due to a crash
-        // Crash was: Hide 2 columns, then search by last column.
-        ItemTableModel.this.cascadeManager.add((TableColumnInfo<T>) this.table.getColumnModel().getColumn(columnModelIndex));
-        ItemTableModel.this.refreshSort();
-        ItemTableModel.this.table.tableChanged(new TableModelEvent(ItemTableModel.this));
-        ItemTableModel.this.table.repaint();
-        if (ItemTableModel.this.table.getRowCount() > 0) {
-            ItemTableModel.this.table.setRowSelectionInterval(0, 0);
-        }
-        SItemManagerIO.savePreferences(ItemTableModel.this.table);
     }
 
     //========== Overridden from AbstractTableModel
