@@ -121,12 +121,32 @@ public enum CCardCatalog implements ICDoc {
                     public void run() {
                         if (!disableFiltering) {
                             disableFiltering = true;
+
+                            boolean foundSelected = false;
                             for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
                                 if (s.group == group && s != st) {
-                                    VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(s).setSelected(false);
+                                    FLabel lbl = VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(s);
+                                    if (lbl.getSelected()) {
+                                        foundSelected = true;
+                                        lbl.setSelected(false);
+                                    }
                                 }
                             }
-                            statLabel.setSelected(true);
+                            if (!statLabel.getSelected()) {
+                                statLabel.setSelected(true);
+                            }
+                            else if (!foundSelected) {
+                                //if statLabel only label in group selected, re-select all other labels in group
+                                for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
+                                    if (s.group == group && s != st) {
+                                        FLabel lbl = VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(s);
+                                        if (!lbl.getSelected()) {
+                                            lbl.setSelected(true);
+                                        }
+                                    }
+                                }
+                            }
+
                             disableFiltering = false;
                             applyCurrentFilter();
                         }
