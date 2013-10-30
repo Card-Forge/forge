@@ -16,7 +16,6 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.Icon;
@@ -323,45 +322,36 @@ public class FLabel extends JLabel implements ILocalRepaint {
     }
 
     // Mouse event handler
-    private final MouseAdapter madEvents = new MouseAdapter() {
+    private final FMouseAdapter madEvents = new FMouseAdapter() {
         @Override
-        public void mouseEntered(MouseEvent e) {
+        public void onMouseEnter(MouseEvent e) {
             hovered = true;
             repaintSelf();
         }
 
         @Override
-        public void mouseExited(MouseEvent e) {
+        public void onMouseExit(MouseEvent e) {
             hovered = false;
             repaintSelf();
         }
         
         @Override
-        public void mouseMoved(MouseEvent e) {
-            if (!hovered) {
-                hovered = true;
-                repaintSelf();
-            }
-        }
-        
-        @Override
-        public void mousePressed(MouseEvent e) {
-            if (reactOnMouseDown && e.getButton() == 1) { //left mouse button
+        public void onLeftMouseDown(MouseEvent e) {
+            if (reactOnMouseDown) {
                 _doMouseAction();
             }
         }
         
         @Override
-        public void mouseReleased(MouseEvent e) {
-            int button = e.getButton();
-            if (button == 1) { //left mouse button
-                if (!reactOnMouseDown) {
-                    _doMouseAction();
-                }
+        public void onLeftClick(MouseEvent e) {
+            if (!reactOnMouseDown) {
+                _doMouseAction();
             }
-            else if (button == 3) { //right mouse button
-                _doRightClickAction();
-            }
+        }
+        
+        @Override
+        public void onRightClick(MouseEvent e) {
+            _doRightClickAction();
         }
     };
 
