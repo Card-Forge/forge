@@ -22,7 +22,6 @@ package forge.gui.toolbox.special;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +47,7 @@ import forge.gui.deckeditor.controllers.CEditorQuest;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.item.InventoryItem;
@@ -196,9 +196,9 @@ public class DeckLister extends JPanel implements ILocalRepaint {
             this.setBorderPainted(false);
             this.setToolTipText("Delete this deck");
 
-            this.addMouseListener(new MouseAdapter() {
+            this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseEntered(final MouseEvent e) {
+                public void onMouseEnter(final MouseEvent e) {
                     if (!r0.selected) {
                         FSkin.get(r0).setBackground(DeckLister.this.clrHover);
                         r0.setOpaque(true);
@@ -206,7 +206,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 }
 
                 @Override
-                public void mouseExited(final MouseEvent e) {
+                public void onMouseExit(final MouseEvent e) {
                     if (!r0.selected) {
                         FSkin.get(r0).setBackground(DeckLister.this.clrDefault);
                         r0.setOpaque(false);
@@ -214,7 +214,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 }
 
                 @Override
-                public void mouseClicked(final MouseEvent e) {
+                public void onLeftClick(final MouseEvent e) {
                     DeckLister.this.deleteDeck(r0);
                 }
             });
@@ -235,9 +235,9 @@ public class DeckLister extends JPanel implements ILocalRepaint {
             this.setBorderPainted(false);
             this.setToolTipText("Edit this deck");
 
-            this.addMouseListener(new MouseAdapter() {
+            this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseEntered(final MouseEvent e) {
+                public void onMouseEnter(final MouseEvent e) {
                     if (!r0.selected) {
                         FSkin.get(r0).setBackground(DeckLister.this.clrHover);
                         r0.setOpaque(true);
@@ -245,7 +245,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 }
 
                 @Override
-                public void mouseExited(final MouseEvent e) {
+                public void onMouseExit(final MouseEvent e) {
                     if (!r0.selected) {
                         FSkin.get(r0).setBackground(DeckLister.this.clrDefault);
                         r0.setOpaque(false);
@@ -253,7 +253,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 }
 
                 @Override
-                public void mouseClicked(final MouseEvent e) {
+                public void onLeftClick(final MouseEvent e) {
                     DeckLister.this.editDeck(r0.getDeck());
                 }
             });
@@ -285,9 +285,9 @@ public class DeckLister extends JPanel implements ILocalRepaint {
             FSkin.get(this).setMatteBorder(0, 0, 1, 0, DeckLister.this.clrBorders);
             this.deck = d0;
 
-            this.addMouseListener(new MouseAdapter() {
+            this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseEntered(final MouseEvent e) {
+                public void onMouseEnter(final MouseEvent e) {
                     RowPanel.this.hovered = true;
                     if (!RowPanel.this.selected) {
                         FSkin.get(((RowPanel) e.getSource())).setBackground(DeckLister.this.clrHover);
@@ -296,7 +296,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 }
 
                 @Override
-                public void mouseExited(final MouseEvent e) {
+                public void onMouseExit(final MouseEvent e) {
                     RowPanel.this.hovered = false;
                     if (!RowPanel.this.selected) {
                         FSkin.get(((RowPanel) e.getSource())).setBackground(DeckLister.this.clrDefault);
@@ -305,13 +305,15 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 }
 
                 @Override
-                public void mousePressed(final MouseEvent e) {
+                public void onLeftMouseDown(final MouseEvent e) {
                     if (e.getClickCount() == 1) {
                         DeckLister.this.selectHandler((RowPanel) e.getSource());
                     }
-                    else { //edit deck on double click
-                        DeckLister.this.editDeck(RowPanel.this.deck);
-                    }
+                }
+                
+                @Override
+                public void onLeftDblClick(final MouseEvent e) {
+                    DeckLister.this.editDeck(RowPanel.this.deck);
                 }
             });
         }

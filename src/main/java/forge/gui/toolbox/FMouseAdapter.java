@@ -205,4 +205,10 @@ public abstract class FMouseAdapter extends MouseAdapter {
             }
         }
     }
+    
+    @Override
+    public final void mouseClicked(MouseEvent e) {
+        //override mouseClicked as final to prevent it being used since it doesn't fire
+        //if the user moves the mouse at all between mouse down and mouse up
+    }
 }
