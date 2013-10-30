@@ -263,7 +263,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
     private double iconScaleFactor;
     private int fontStyle, iconAlignX;
     private int iw, ih;
-    private boolean selectable, selected, hoverable, hovered, opaque,
+    private boolean selectable, selected, hoverable, hovered, pressed, opaque,
         iconInBackground, iconScaleAuto, reactOnMouseDown;
     private Point iconInsets;
 
@@ -307,16 +307,12 @@ public class FLabel extends JLabel implements ILocalRepaint {
     private void _doMouseAction() {
         if (selectable) { setSelected(!selected); }
         if (cmdClick != null && isEnabled()) {
-            hovered = false;
-            repaintSelf();
             cmdClick.run();
         }
     }
     
     private void _doRightClickAction() {
         if (cmdRightClick != null && isEnabled()) {
-            hovered = false;
-            repaintSelf();
             cmdRightClick.run();
         }
     }
@@ -338,8 +334,16 @@ public class FLabel extends JLabel implements ILocalRepaint {
         @Override
         public void onLeftMouseDown(MouseEvent e) {
             if (reactOnMouseDown) {
-                _doMouseAction();
+                _doMouseAction(); //for best responsiveness, do action before repainting for pressed state
             }
+            pressed = true;
+            repaintSelf();
+        }
+        
+        @Override
+        public void onLeftMouseUp(MouseEvent e) {
+            pressed = false;
+            repaintSelf();
         }
         
         @Override
@@ -501,8 +505,12 @@ public class FLabel extends JLabel implements ILocalRepaint {
         if (hoverable) {
             g2d.setComposite(paintWithHover ? alphaStrong : alphaDim);
         }
-        
-        if (opaque) {
+
+        boolean paintPressedState = pressed && hovered && isEnabled() && (opaque || selectable);
+        if (paintPressedState) {
+            paintPressed(g2d, w, h);
+        }
+        else if (opaque) {
             if (selected) {
                 paintDown(g2d, w, h);
             } else {
@@ -514,6 +522,10 @@ public class FLabel extends JLabel implements ILocalRepaint {
             } else {
                 paintBorder(g2d, w, h);
             }
+        }
+
+        if (paintPressedState) { //while pressed, translate graphics so icon and text appear shifted down and to the right
+            g2d.translate(1, 1);
         }
 
         // Icon in background
@@ -531,6 +543,10 @@ public class FLabel extends JLabel implements ILocalRepaint {
         }
 
         super.paintComponent(g);
+
+        if (paintPressedState) { //reset translation after icon and text painted
+            g2d.translate(-1, -1);
+        }
         
         if (hoverable) {
             g2d.setComposite(oldComp);
@@ -545,6 +561,16 @@ public class FLabel extends JLabel implements ILocalRepaint {
         skin.setGraphicsColor(g, clrHover);
         g.drawRect(0, 0, w - 2, h - 2);
         skin.setGraphicsColor(g, l30);
+        g.drawRect(1, 1, w - 4, h - 4);
+    }
+    
+    private void paintPressed(final Graphics2D g, int w, int h) {
+        skin.setGraphicsGradientPaint(g, 0, h, d50, 0, 0, d10);
+        g.fillRect(0, 0, w - 1, h - 1);
+
+        skin.setGraphicsColor(g, d50);
+        g.drawRect(0, 0, w - 2, h - 2);
+        skin.setGraphicsColor(g, d10);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
