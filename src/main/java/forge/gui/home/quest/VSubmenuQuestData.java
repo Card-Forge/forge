@@ -83,10 +83,11 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final JLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
     private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<QuestWorld>();
 
-    private final JLabel lblPreferredColor = new FLabel.Builder().text("Preferred color:").build();
+    private final JLabel lblPreferredColor = new FLabel.Builder().text("Starting pool colors:").build();
     private final FComboBoxWrapper<String> cbxPreferredColor = new FComboBoxWrapper<String>();
     private final String stringBalancedDistribution = new String("balanced distribution");
-    private final JCheckBox boxForceColorRandomization = new FCheckBox("Force randomized color distribution");
+    private final String stringRandomizedDistribution = new String("randomized distribution");
+    private final String stringBias = new String(" bias");
 
     /* Second column */
 
@@ -183,13 +184,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         }
      };
 
-     /* Listener for color preference */
-     private final ActionListener alColorPreference = new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-             cbxPreferredColor.setEnabled(!boxForceColorRandomization.isSelected());
-         }
-     };
 
     /**
      * Aux function for enabling or disabling the format selection according to world selection.
@@ -251,17 +245,14 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         }
 
         // Initialize color balance selection
-        boxForceColorRandomization.setSelected(false);
-        boxForceColorRandomization.setEnabled(true);
         cbxPreferredColor.addItem(stringBalancedDistribution);
-        cbxPreferredColor.addItem(Constant.Color.WHITE);
-        cbxPreferredColor.addItem(Constant.Color.BLUE);
-        cbxPreferredColor.addItem(Constant.Color.BLACK);
-        cbxPreferredColor.addItem(Constant.Color.RED);
-        cbxPreferredColor.addItem(Constant.Color.GREEN);
-        cbxPreferredColor.addItem(Constant.Color.COLORLESS);
-
-        boxForceColorRandomization.addActionListener(alColorPreference);
+        cbxPreferredColor.addItem(stringRandomizedDistribution);
+        cbxPreferredColor.addItem(Constant.Color.WHITE + stringBias);
+        cbxPreferredColor.addItem(Constant.Color.BLUE + stringBias);
+        cbxPreferredColor.addItem(Constant.Color.BLACK + stringBias);
+        cbxPreferredColor.addItem(Constant.Color.RED + stringBias);
+        cbxPreferredColor.addItem(Constant.Color.GREEN + stringBias);
+        cbxPreferredColor.addItem(Constant.Color.COLORLESS + stringBias);
 
         for (QuestWorld qw : Singletons.getModel().getWorlds()) {
             cbxStartingWorld.addItem(qw);
@@ -365,7 +356,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
         pnlRestrictions.add(lblPreferredColor,  constraints + lblWidthStart);
         cbxPreferredColor.addTo(pnlRestrictions, constraints + cboWidthStart + ", wrap");
-        pnlRestrictions.add(boxForceColorRandomization, constraints + "spanx 2, ax right");
 
         pnlRestrictions.add(lblStartingWorld, constraints + lblWidthStart);
         cbxStartingWorld.addTo(pnlRestrictions, constraints + cboWidthStart);
@@ -519,14 +509,15 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     }
 
     public boolean randomizeColorDistribution() {
-        return boxForceColorRandomization.isSelected();
+        return stringRandomizedDistribution.equals(cbxPreferredColor.getSelectedItem());
     }
 
     public byte getPreferredColor() {
-        if (stringBalancedDistribution.equals(cbxPreferredColor.getSelectedItem())) {
+        if (stringBalancedDistribution.equals(cbxPreferredColor.getSelectedItem())
+                || stringRandomizedDistribution.equals(cbxPreferredColor.getSelectedItem())) {
             return MagicColor.ALL_COLORS;
         }
-        return MagicColor.fromName(cbxPreferredColor.getSelectedItem());
+        return MagicColor.fromName("" + cbxPreferredColor.getSelectedItem().charAt(0));
     }
 
     public GameFormat getRotatingFormat() {
