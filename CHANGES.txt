@@ -1,98 +1,26 @@
-Forge Beta: 11-01-2013 ver 1.5.4
+Forge Beta: 11-##-2013 ver 1.5.5
 
 
-13343 cards in total.
+13### cards in total.
 
 
 -------------
 Release Notes
 -------------
 
-- Draft fixes -
-Draft Deck Editor will now automatically open after finishing and naming a draft.
-Fixed bug where switching away from a Draft and back would lose your picks.
-Fixed bug where Draft tab remained open after finishing a draft and would crash if clicked at that point or another draft started.
-Prevented canceling naming a draft, which would cause a crash.
 
-
-- ComboBox visual tweaks -
-Standardized appearance of combo boxes.
-Removed separation between text and drop down glyph.
-Fixed combo boxes on Constructed home screen to update properly when skin switched.
-
-
-- Navigation tabs -
-Forge now display navigation tabs in the titlebar and supports switching screens without closing them.
-By default, Home and Deck Editor are available as tabs, with another closable tab added for any game you start.
-X button in upper right can now exit Forge rather than closing the current screen and going back to Home screen, depending on user preference.
-To concede the current game, you can use the X button in the Game tab itself, and you will now be prompted for confirmation.
-Deck Editor and Exit Forge buttons have been removed from the Home screen since they're both accessible on the titlebar.
-
-
-- The X button in the upper right corner -
-The first time you click the X button in the upper right, you'll be given the choice between the old behavior of closing the current screen and returning to the Home screen (which matches what the X button on each navigation tab does) or exiting Forge if already on the Home screen, or the alternative behavior of exiting Forge regardless of the current screen. Your choice will be remembered so you won't be prompted again, though you can change this setting at any time in preferences. This way, whether you like the old behavior or expect that X button to exit the application, you'll be able to have it work that way.
-
-Also keep in mind that even if you choose to have that X button work like before, the tabs will remain available for switching screens without closing them.
-
-
-- True Full Screen support -
-Full Screen is now toggled using F11 and has its own button on the title bar.
-Maximize will no longer pretend to be Full Screen by covering up the taskbar.
-When in Full Screen mode, the titlebar will be hidden unless you move the mouse to the top of the screen.
-A "Lock/Unlock" Title Bar button will be available in Full Screen mode to toggle whether the title bar should remain visible at all times.
-When in Full Screen mode, a clock will appear to the left of the "Lock/Unlock Title Bar" button.
-The title bar will appear on top of other components if not locked rather than pushing anything down.
-The title bar will remain visible while accessing the Forge menu.
-
-
-- Window fixes -
-Minimize no longer crashes on Mac.
-Message and Input dialogs now appear properly centered and on top of main Forge window.
-Prompt to save in Deck Editor (if unsaved changes) when using Forge > Restart.
-
-
-- Introducing the Forge button -
-The old menu bar has been removed.
-The Forge button on the left side of the titlebar will drop down the same menu of options.
-The Alt and Menu keys will also open this menu (even if the titlebar is hidden), with full keyboard navigation of the menus then possible.
-The titlebar, minimize, maximize, and close buttons have all been increased in height to make room for the Forge button.
-Menu items have been increased in height to make them more touch screen friendly. They also now enforce a minimum 100px width.
-F1 has been changed to launch the Forge wiki since it no longer needs to toggle menu bar visibility.
-
-
-- Forge now requires Java 7 -
-Please update your Java runtime environment. At this point Forge versions 1.4.2 and above will no longer run under Java 6. Those who are using Mac OS should install the JDK version rather than the JRE version.
-
-
-- The Mac OS X application -
-At this time Forge now requires Java 7 and will no longer run under Java 6.
-
-Unfortunately, the Mac OS X builder that we were using does not support Java 7. We hope to find and to use a different Mac OS X builder in order to continue releasing a Mac OS bundled application like we have in the past.
-
-Currently, the windows/unix release of Forge includes a launcher file named "forge.command". Double click on the "forge.command" launcher command file and this will in turn launch the Forge jar file via the terminal application while increasing the Java heap space. This should be a temporary inconvenience.
 
 
 ---------
 New Cards
 ---------
 
-Cyclopean Tomb
-Dichotomancy
-Glarecaster
-Graxiplon
-Seeds of Innocence
 
 
------------
-New Schemes
------------
 
-Only Blood Ends Your Nightmares
-
-
--------------------------------
-New Commander 2013 branch Cards
--------------------------------
+------------------------
+New Commander 2013 Cards
+------------------------
 
 Act of Authority
 Angel of Finality
@@ -161,14 +89,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-DrDev
-Gos
-Nordos
-RumbleBBU
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
