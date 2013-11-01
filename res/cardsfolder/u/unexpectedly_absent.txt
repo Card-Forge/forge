@@ -1,0 +1,7 @@
+Name:Unexpectedly Absent
+ManaCost:X W W
+Types:Instant
+A:SP$ ChangeZone | Cost$ X W W | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ X | Referneces$ X | SpellDescription$ Put target nonland permanent into its owner's library just beneath the top X cards of that library.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unexpectedly_absent.jpg

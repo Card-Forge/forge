@@ -1,0 +1,8 @@
+Name:Djinn of Infinite Deceits
+ManaCost:4 U U
+Types:Creature Djinn
+PT:2/7
+K:Flying
+A:AB$ ExchangeControl | Cost$ T | ValidTgts$ Creature.nonLegendary | TgtPrompt$ Select target nonlegendary creature | TargetMin$ 2 | TargetMax$ 2 | ActivationPhases$ Upkeep,Draw,Main1,Main2,End of Turn | SpellDescription$ Exchange control of two target nonlegendary creatures. You can't activate this ability during combat.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/djinn_of_infinite_deceits.jpg

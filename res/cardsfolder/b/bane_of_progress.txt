@@ -1,0 +1,13 @@
+Name:Bane of Progress
+ManaCost:4 G G
+Types:Creature Elemental
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy all artifacts and enchantments. Put a +1/+1 counter on CARDNAME for each permanent destroyed this way.
+SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Artifact,Enchantment | RememberDestroyed$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:Y:Count$Valid Artifact.OppCtrl,Enchantment.OppCtrl
+SVar:NeedsToPlayVar:Y GE2
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bane_of_progress.jpg

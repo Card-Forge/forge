@@ -1,0 +1,7 @@
+Name:Toxic Deluge
+ManaCost:2 B
+Types:Sorcery
+A:SP$ PumpAll | Cost$ 2 B PayLife<X> | ValidCards$ Creature | NumAtt$ -ChosenX | NumDef$ -ChosenX | References$ X | SpellDescription$ All creatures get -X/-X until end of turn.
+SVar:X:XChoice
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/toxic_deluge.jpg

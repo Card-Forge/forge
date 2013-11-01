@@ -1,0 +1,8 @@
+Name:Terra Ravager
+ManaCost:2 R R
+Types:Creature Elemental Beast
+PT:0/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the number of lands defending player controls.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | References$ X
+SVar:X:Count$Valid Land.DefenderCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/terra_ravager.jpg
