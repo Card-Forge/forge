@@ -9,5 +9,4 @@ SVar:DBGainControl:DB$ GainControl | Defined$ Self | NewController$ RememberedCo
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/act_of_authority.jpg
