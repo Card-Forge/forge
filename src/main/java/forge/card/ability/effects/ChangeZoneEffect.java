@@ -633,7 +633,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         // this needs to be zero indexed. Top = 0, Third = 2
-        int libraryPos = sa.hasParam("LibraryPosition") ? CardFactoryUtil.xCount(source, source.getSVar(sa.getParam("LibraryPosition"))) : 0;
+        int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
 
         if (sa.hasParam("OriginChoice")) {
             // Currently only used for Mishra, but may be used by other things
