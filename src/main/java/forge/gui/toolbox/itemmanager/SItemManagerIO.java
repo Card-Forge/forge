@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-
 import javax.swing.JTable;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;
@@ -37,6 +36,7 @@ public class SItemManagerIO {
         enumval, /** */
         identifier, /** */
         show, /** */
+        index, /** */
         sortpriority, /** */
         sortstate, /** */
         width
@@ -135,6 +135,7 @@ public class SItemManagerIO {
             if (index == -1) {
                 index = COLS.get(c).getModelIndex();
             }
+            COLS.get(c).setIndex(index); //update index property of column
 
             writer.add(TAB);
             writer.add(EVENT_FACTORY.createStartElement("", "", "col"));
@@ -144,6 +145,8 @@ public class SItemManagerIO {
                     ColumnProperty.identifier.toString(), COLS.get(c).getIdentifier().toString()));
             writer.add(EVENT_FACTORY.createAttribute(
                     ColumnProperty.show.toString(), String.valueOf(COLS.get(c).isShowing())));
+            writer.add(EVENT_FACTORY.createAttribute(
+                    ColumnProperty.index.toString(), String.valueOf(index)));
             writer.add(EVENT_FACTORY.createAttribute(
                     ColumnProperty.sortpriority.toString(), String.valueOf(COLS.get(c).getSortPriority())));
             writer.add(EVENT_FACTORY.createAttribute(
@@ -227,6 +230,9 @@ public class SItemManagerIO {
                         }
                         else if (attribute.getName().toString().equals(ColumnProperty.show.toString())) {
                             tempcol.setShowing(Boolean.valueOf(attribute.getValue()));
+                        }
+                        else if (attribute.getName().toString().equals(ColumnProperty.index.toString())) {
+                            tempcol.setIndex(Integer.valueOf(attribute.getValue()));
                         }
                         else if (attribute.getName().toString().equals(ColumnProperty.sortpriority.toString())) {
                             tempcol.setSortPriority(Integer.valueOf(attribute.getValue()));

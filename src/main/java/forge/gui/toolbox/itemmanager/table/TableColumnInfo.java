@@ -39,6 +39,7 @@ public class TableColumnInfo<T> extends TableColumn {
     private int sortPriority = 0;
     private boolean show = true;
     private String enumval;
+    private int index = 0;
 
     private Function<Entry<T, Integer>, Comparable<?>> fnSort;
     private Function<Entry<T, Integer>, Object> fnDisplay;
@@ -65,6 +66,24 @@ public class TableColumnInfo<T> extends TableColumn {
     public void setEnumValue(final String val0) {
         this.enumval = val0;
     }
+    
+    /**
+     * Index within table columns
+     * 
+     * @return int
+     */
+    public int getIndex() {
+        return this.index;
+    }
+
+    /**
+     * Index within table columns
+     * 
+     * @param index0 &emsp; int
+     */
+    public void setIndex(final int index0) {
+        this.index = index0;
+    }
 
     /**
      * Position in sort cascade, 0 for no priority.
@@ -78,10 +97,10 @@ public class TableColumnInfo<T> extends TableColumn {
     /**
      * Position in sort cascade, 0 for no priority.
      * 
-     * @param position0 &emsp; int
+     * @param sortPriority0 &emsp; int
      */
-    public void setSortPriority(final int position0) {
-        this.sortPriority = position0;
+    public void setSortPriority(final int sortPriority0) {
+        this.sortPriority = sortPriority0;
     }
 
     /** @return {@link forge.gui.toolbox.itemmanager.ItemTableModel.SortState} */

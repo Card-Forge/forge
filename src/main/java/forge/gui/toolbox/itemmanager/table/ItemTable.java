@@ -26,6 +26,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -118,6 +120,14 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
      */
     public void setup(final List<TableColumnInfo<InventoryItem>> cols) {
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
+        
+        //ensure columns ordered properly
+        Collections.sort(cols, new Comparator<TableColumnInfo<InventoryItem>>() {
+            @Override
+            public int compare(TableColumnInfo<InventoryItem> arg0, TableColumnInfo<InventoryItem> arg1) {
+                return Integer.compare(arg0.getIndex(), arg1.getIndex());
+            }
+        });
 
         for (TableColumnInfo<InventoryItem> item : cols) {
             item.setModelIndex(colmodel.getColumnCount());
