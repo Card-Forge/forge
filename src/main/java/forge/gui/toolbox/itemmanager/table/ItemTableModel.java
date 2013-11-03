@@ -97,17 +97,17 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
 
         if (sortcols[1] == null) {
             if (isDeckTable) {
-                cascadeManager.add((TableColumnInfo<T>) SColumnUtil.getColumn(ColumnName.DECK_NAME));
+                cascadeManager.add((TableColumnInfo<T>) SColumnUtil.getColumn(ColumnName.DECK_NAME), true);
             }
             else {
-                cascadeManager.add((TableColumnInfo<T>) SColumnUtil.getColumn(ColumnName.CAT_NAME));
+                cascadeManager.add((TableColumnInfo<T>) SColumnUtil.getColumn(ColumnName.CAT_NAME), true);
             }
         }
         else {
             ArrayUtils.reverse(sortcols);
             for (int i = 1; i < sortcols.length; i++) {
                 if (sortcols[i] != null) {
-                    cascadeManager.add((TableColumnInfo<T>) sortcols[i]);
+                    cascadeManager.add((TableColumnInfo<T>) sortcols[i], true);
                 }
             }
         }
@@ -175,7 +175,7 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
             // This will invert if needed
             // 2012/07/21 - Changed from modelIndex to ColumnModelIndex due to a crash
             // Crash was: Hide 2 columns, then search by last column.
-            ItemTableModel.this.cascadeManager.add((TableColumnInfo<T>) ItemTableModel.this.table.getColumnModel().getColumn(columnModelIndex));
+            ItemTableModel.this.cascadeManager.add((TableColumnInfo<T>) ItemTableModel.this.table.getColumnModel().getColumn(columnModelIndex), false);
             ItemTableModel.this.refreshSort();
             ItemTableModel.this.table.tableChanged(new TableModelEvent(ItemTableModel.this));
             ItemTableModel.this.table.repaint();
@@ -266,35 +266,39 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
         // If column is first in the cascade, inverts direction of sort.
         // Otherwise, sorts in ascending direction.
         @SuppressWarnings("unchecked")
-        public void add(final TableColumnInfo<T> col0) {
+        public void add(final TableColumnInfo<T> col0, boolean forSetup) {
             this.sorter = null;
 
-            // Found at top level, should invert
-            if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) {
-                this.colsToSort.get(0).setSortState(
-                        this.colsToSort.get(0).getSortState() == SortState.ASC
-                            ? SortState.DESC : SortState.ASC);
-                this.colsToSort.get(0).setSortPriority(1);
-            }
-            // Found somewhere: move down others, this one to top.
-            else if (colsToSort.contains(col0)) {
-                col0.setSortState(SortState.ASC);
-                this.colsToSort.remove(col0);
+            if (forSetup) { //just add column unmodified if setting up sort columns
                 this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
             }
-            // No column in list; add directly.
             else {
-                col0.setSortState(SortState.ASC);
-                this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
-                this.colsToSort.get(0).setSortPriority(1);
-            }
+                // Found at top level, should invert
+                if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) {
+                    col0.setSortPriority(1);
+                    col0.setSortState(col0.getSortState() == SortState.ASC
+                                ? SortState.DESC : SortState.ASC);
+                }
+                // Found somewhere: move down others, this one to top.
+                else if (colsToSort.contains(col0)) {
+                    col0.setSortState(SortState.ASC);
+                    this.colsToSort.remove(col0);
+                    this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
+                }
+                // No column in list; add directly.
+                else {
+                    col0.setSortPriority(1);
+                    col0.setSortState(SortState.ASC);
+                    this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
+                }
 
-            // Decrement sort priority on remaining columns
-            for (int i = 1; i < maxSortDepth; i++) {
-                if (colsToSort.size() == i) { break; }
-
-                if (colsToSort.get(i).getSortPriority() != 0) {
-                    colsToSort.get(i).setSortPriority(i + 1);
+                // Decrement sort priority on remaining columns
+                for (int i = 1; i < maxSortDepth; i++) {
+                    if (colsToSort.size() == i) { break; }
+    
+                    if (colsToSort.get(i).getSortPriority() != 0) {
+                        colsToSort.get(i).setSortPriority(i + 1);
+                    }
                 }
             }
 
