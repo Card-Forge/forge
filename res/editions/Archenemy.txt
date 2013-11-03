@@ -202,7 +202,7 @@ C Which of You Burns Brightest?
 C Wickerbough Elder
 U Yavimaya Dryad
 C Your Fate Is Thrice Sealed
-P Your Inescapable Doom
+S Your Inescapable Doom
 C Your Puny Minds Cannot Fathom
 C Your Will Is Not Your Own
 U Zombie Infestation

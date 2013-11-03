@@ -1053,14 +1053,12 @@ public class CardFactoryUtil {
             return highest;
         }
 
-        if (l[0].startsWith("HighestCMCRemembered")) {
-            final List<Card> list = new ArrayList<Card>();
+        if (l[0].startsWith("HighestCMC_")) {
+            final String restriction = l[0].substring(11);
+            final String[] rest = restriction.split(",");
+            List<Card> list = cc.getGame().getCardsInGame();
+            list = CardLists.getValidCards(list, rest, cc, c);
             int highest = 0;
-            for (final Object o : c.getRemembered()) {
-                if (o instanceof Card) {
-                    list.add(game.getCardState((Card) o));
-                }
-            }
             for (final Card crd : list) {
                 if (crd.isSplitCard()) {
                     if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > highest) {

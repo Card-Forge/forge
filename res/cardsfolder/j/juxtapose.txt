@@ -1,0 +1,18 @@
+Name:Juxtapose
+ManaCost:3 U
+Types:Sorcery
+A:SP$ ChooseCard | Cost$ 3 U | ValidTgts$ Player | Choices$ Creature.cmcEQY | TargetControls$ True | References$ Y | Mandatory$ True | AILogic$ WorstCard | RememberChosen$ True | SubAbility$ DBChooseCreatureYou | SpellDescription$ You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.
+SVar:DBChooseCreatureYou:DB$ ChooseCard | Choices$ Creature.YouCtrl+cmcEQX | References$ X | Mandatory$ True | RememberChosen$ True | SubAbility$ DBExchangeCreature
+SVar:DBExchangeCreature:DB$ ExchangeControl | BothDefined$ True | Defined$ Remembered | SubAbility$ DBCleanCreature
+SVar:DBCleanCreature:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseArtifactYou
+SVar:DBChooseArtifactYou:DB$ ChooseCard | Choices$ Artifact.YouCtrl+cmcEQZ | References$ Z | Mandatory$ True | RememberChosen$ True | SubAbility$ DBChooseArtifactOpp
+SVar:DBChooseArtifactOpp:DB$ ChooseCard | Defined$ ParentTarget | Choices$ Artifact.cmcEQW | TargetControls$ True | References$ W | Mandatory$ True | AILogic$ WorstCard | RememberChosen$ True | SubAbility$ DBExchangeArtifact
+SVar:DBExchangeArtifact:DB$ ExchangeControl | BothDefined$ True | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$HighestCMC_Creature.YouCtrl+inZoneBattlefield
+SVar:Y:Count$HighestCMC_Creature.TargetedPlayerCtrl+inZoneBattlefield
+SVar:Z:Count$HighestCMC_Artifact.YouCtrl+inZoneBattlefield
+SVar:W:Count$HighestCMC_Artifact.TargetedPlayerCtrl+inZoneBattlefield
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/juxtapose.jpg
+Oracle:You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.
