@@ -1,0 +1,12 @@
+Name:Johan
+ManaCost:3 R G W
+Types:Legendary Creature Human Wizard
+PT:5/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCantAttack | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of combat on your turn, you may have CARDNAME gain "CARDNAME can't attack" until end of combat. If you do, attacking doesn't cause creatures you control to tap this combat if CARDNAME is untapped.
+SVar:TrigCantAttack:AB$ Pump | Cost$ 0 | KW$ CARDNAME can't attack. | UntilEndOfCombat$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STVigilance | ImprintCards$ Self | SVars$ JohanUntap | Duration$ UntilEndOfCombat
+SVar:STVigilance:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Attacking doesn't cause CARDNAME to tap. | CheckSVar$ JohanUntap | Description$ Attacking doesn't cause creatures you control to tap this combat if Johan is untapped.
+SVar:JohanUntap:Count$Valid Card.IsImprinted+untapped
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/johan.jpg
+Oracle:At the beginning of combat on your turn, you may have Johan gain "Johan can't attack" until end of combat. If you do, attacking doesn't cause creatures you control to tap this combat if Johan is untapped.

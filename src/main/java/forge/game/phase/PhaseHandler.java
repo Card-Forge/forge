@@ -494,7 +494,7 @@ public class PhaseHandler implements java.io.Serializable {
         for (final Card c2 : combat.getAttackers()) {
             boolean canAttack = CombatUtil.checkPropagandaEffects(game, c2, combat);
             if ( canAttack ) {
-                if (!c2.hasKeyword("Vigilance")) 
+                if (!c2.hasKeyword("Vigilance") && !c2.hasKeyword("Attacking doesn't cause CARDNAME to tap.")) 
                     c2.tap();
             } else {
                 combat.removeFromCombat(c2);
