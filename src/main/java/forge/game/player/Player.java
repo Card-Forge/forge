@@ -2465,6 +2465,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (source.getChosenPlayer() == null || !source.getChosenPlayer().equals(this)) {
                 return false;
             }
+        } else if (property.startsWith("LifeEquals_")) {
+            int life = AbilityUtils.calculateAmount(source, property.substring(11), null);
+            if (this.getLife() != life) {
+                return false;
+            }
         } else if (property.startsWith("withMore")) {
             final String cardType = property.split("sThan")[0].substring(8);
             final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
