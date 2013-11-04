@@ -13,3 +13,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_soulbeast.jpg
+Oracle:Trample\nWhen you cast Naya Soulbeast, each player reveals the top card of his or her library. Naya Soulbeast enters the battlefield with X +1/+1 counters on it, where X is the total converted mana cost of all cards revealed this way.

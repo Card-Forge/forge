@@ -6,3 +6,4 @@ SVar:DBDmg:DB$ DamageAll | NumDmg$ X | References$ X | ValidCards$ Creature.Chos
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_demise.jpg
+Oracle:Choose a color. Sudden Demise deals X damage to each creature of the chosen color.

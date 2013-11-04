@@ -9,3 +9,4 @@ SVar:DBDraw:DB$ Draw | Defined$ TriggeredAttackingPlayer | NumCards$ 1 | Conditi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chaos.jpg
+Oracle:Enchant player\nWhenever a player attacks enchanted player with one or more creatures, that attacking player may discard a card. If the player does, he or she draws a card.

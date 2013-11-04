@@ -10,3 +10,4 @@ SVar:X:Count$Valid Card.IsRemembered+RememberedPlayerCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/from_the_ashes.jpg
+Oracle:Destroy all nonbasic lands. For each land destroyed this way, its controller may search his or her library for a basic land card and put it onto the battlefield. Then each player who searched his or her library this way shuffles it.

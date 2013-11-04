@@ -11,3 +11,4 @@ SVar:Y:Count$Valid Artifact.OppCtrl,Enchantment.OppCtrl
 SVar:NeedsToPlayVar:Y GE2
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bane_of_progress.jpg
+Oracle:When Bane of Progress enters the battlefield, destroy all artifacts and enchantments. Put a +1/+1 counter on Bane of Progress for each permanent destroyed this way.

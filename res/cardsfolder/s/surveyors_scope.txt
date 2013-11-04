@@ -6,3 +6,4 @@ SVar:X:PlayerCountPropertywithAtLeast2MoreLandsThanYou$Amount
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surveyors_scope.jpg
+Oracle:{T}, Exile Surveyor's Scope: Search your library for up to X basic land cards, where X is the number of players who control at least two more lands than you. Put those cards onto the battlefield, then shuffle your library.

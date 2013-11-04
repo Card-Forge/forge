@@ -7,3 +7,4 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | SetToughness$ 1 
 SVar:NonStackingAttachEffect:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_mutation.jpg
+Oracle:Enchant creature\nEnchanted creature is a 0/1 Insect artifact creature with indestructible and loses all other abilities, card types, and creature types.

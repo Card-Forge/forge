@@ -6,3 +6,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ ThisTurnEntered_Graveyard_from_Battlefield_Card.YouOwn+Creature
 A:AB$ Pump | Cost$ B Sac<1/Creature.Other/another creature> | ValidTgts$ Creature | NumAtt$ -2 | NumDef$ -2 | SpellDescription$ Target creature gets -2/-2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fell_shepherd.jpg
+Oracle:Whenever Fell Shepherd deals combat damage to a player, you may return to your hand all creature cards that were put into your graveyard from the battlefield this turn.\n{B}, Sacrifice another creature: Target creature gets -2/-2 until end of turn.

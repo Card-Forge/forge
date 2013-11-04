@@ -7,3 +7,4 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X | 
 SVar:DBDraw:DB$ Draw | Defined$ TriggeredTarget | NumCards$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diviner_spirit.jpg
+Oracle:Whenever Diviner Spirit deals combat damage to a player, you and that player each draw that many cards.

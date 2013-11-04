@@ -6,3 +6,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefiel
 SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | NumDmg$ X | References$ X | Defined$ TriggeredPlayer
 SVar:X:TriggeredPlayer$CardsInHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/price_of_knowledge.jpg
+Oracle:Players have no maximum hand size.\nAt the beginning of each opponent's upkeep, Price of Knowledge deals damage to that player equal to the number of cards in that player's hand.
