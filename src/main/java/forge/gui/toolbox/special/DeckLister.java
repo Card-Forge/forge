@@ -312,7 +312,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                 }
                 
                 @Override
-                public void onLeftDblClick(final MouseEvent e) {
+                public void onLeftDoubleClick(final MouseEvent e) {
                     DeckLister.this.editDeck(RowPanel.this.deck);
                 }
             });

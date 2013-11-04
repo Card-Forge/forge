@@ -16,21 +16,21 @@ public abstract class FMouseAdapter extends MouseAdapter {
     public void onLeftMouseDown(MouseEvent e) {}
     public void onLeftMouseUp(MouseEvent e) {}
     public void onLeftClick(MouseEvent e) {}
-    public void onLeftDblClick(MouseEvent e) {}
+    public void onLeftDoubleClick(MouseEvent e) {}
     public void onLeftMouseDragging(MouseEvent e) {}
     public void onLeftMouseDragDrop(MouseEvent e) {}
 
     public void onMiddleMouseDown(MouseEvent e) {}
     public void onMiddleMouseUp(MouseEvent e) {}
     public void onMiddleClick(MouseEvent e) {}
-    public void onMiddleDblClick(MouseEvent e) {}
+    public void onMiddleDoubleClick(MouseEvent e) {}
     public void onMiddleMouseDragging(MouseEvent e) {}
     public void onMiddleMouseDragDrop(MouseEvent e) {}
 
     public void onRightMouseDown(MouseEvent e) {}
     public void onRightMouseUp(MouseEvent e) {}
     public void onRightClick(MouseEvent e) {}
-    public void onRightDblClick(MouseEvent e) {}
+    public void onRightDoubleClick(MouseEvent e) {}
     public void onRightMouseDragging(MouseEvent e) {}
     public void onRightMouseDragDrop(MouseEvent e) {}
 
@@ -90,17 +90,17 @@ public abstract class FMouseAdapter extends MouseAdapter {
         if (firstClickLoc != null) {
             //if first mouse down resulted in click and second mouse down with same button in close proximity,
             //handle double click event (don't wait until second mouse up to improve responsiveness)
-            if (e.getClickCount() == 2 && e.getButton() == firstClickButton &&
+            if (e.getClickCount() % 2 == 0 && e.getButton() == firstClickButton &&
                     e.getLocationOnScreen().distance(firstClickLoc) <= 3) {
                 switch (firstClickButton) {
                 case 1:
-                    onLeftDblClick(e);
+                    onLeftDoubleClick(e);
                     break;
                 case 2:
-                    onMiddleDblClick(e);
+                    onMiddleDoubleClick(e);
                     break;
                 case 3:
-                    onRightDblClick(e);
+                    onRightDoubleClick(e);
                     break;
                 }
             }
@@ -172,7 +172,7 @@ public abstract class FMouseAdapter extends MouseAdapter {
         //if mouse down on component and not cleared by drag or exit, handle click
         if (mouseDownLoc != null) {
             //if first click, cache button and mouse down location for determination of double click later
-            if (e.getClickCount() == 1) {
+            if (e.getClickCount() % 2 == 1) {
                 firstClickButton = e.getButton();
                 firstClickLoc = mouseDownLoc;
             }

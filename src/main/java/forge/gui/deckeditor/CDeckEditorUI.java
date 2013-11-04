@@ -27,7 +27,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +63,7 @@ import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
@@ -359,27 +359,31 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                 }
             };
             
-            catTable.addMouseListener(new MouseAdapter() {
+            catTable.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseClicked(MouseEvent e) {
-                    if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { addSelectedCards(false, 1); }
-                    else if (MouseEvent.BUTTON3 == e.getButton()) {
-                        _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, catTable, deckTable, onAdd);
-                        childController.buildAddContextMenu(cmb);
-                        cmb.show();
-                    }
+                public void onLeftDoubleClick(MouseEvent e) {
+                    addSelectedCards(false, 1);
+                }
+
+                @Override
+                public void onRightClick(MouseEvent e) {
+                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, catTable, deckTable, onAdd);
+                    childController.buildAddContextMenu(cmb);
+                    cmb.show();
                 }
             });
     
-            deckTable.addMouseListener(new MouseAdapter() {
+            deckTable.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseClicked(MouseEvent e) {
-                    if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { removeSelectedCards(false, 1); }
-                    else if (MouseEvent.BUTTON3 == e.getButton()) {
-                        _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, deckTable, catTable, onRemove);
-                        childController.buildRemoveContextMenu(cmb);
-                        cmb.show();
-                    }
+                public void onLeftDoubleClick(MouseEvent e) {
+                    removeSelectedCards(false, 1);
+                }
+
+                @Override
+                public void onRightClick(MouseEvent e) {
+                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, deckTable, catTable, onRemove);
+                    childController.buildRemoveContextMenu(cmb);
+                    cmb.show();
                 }
             });
 
