@@ -1542,24 +1542,9 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
 
     public boolean canTargetSpellAbility(final SpellAbility topSA) {
         final TargetRestrictions tgt = this.getTargetRestrictions();
-        final String saType = tgt.getTargetSpellAbilityType();
     
-        if (null == saType) {
-            // just take this to mean no restrictions - carry on.
-        } else if (topSA instanceof Spell) {
-            if (!saType.contains("Spell")) {
-                return false;
-            }
-        } else if (topSA.isTrigger()) {
-            if (!saType.contains("Triggered")) {
-                return false;
-            }
-        } else if (topSA instanceof AbilityActivated) {
-            if (!saType.contains("Activated")) {
-                return false;
-            }
-        } else {
-            return false; //Static ability? Whatever.
+        if (this.hasParam("TargetType") && !topSA.isValid(this.getParam("TargetType").split(","), this.getActivatingPlayer(), this.getSourceCard())) {
+            return false;
         }
     
         final String splitTargetRestrictions = tgt.getSAValidTargeting();
@@ -1642,10 +1627,19 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
 
-        if (incR[0].equals("Spell") && !this.isSpell()) {
-            return false;
+        if (incR[0].equals("Spell")) {
+            if (!this.isSpell())
+                return false;
         }
-
+        else if (incR[0].equals("Triggered")) {
+            if (!this.isTrigger())
+                return false;
+        }
+        else if (incR[0].equals("Activated")) {
+            if (!(this instanceof AbilityActivated))
+                return false;
+        }
+        
         if (incR.length > 1) {
             final String excR = incR[1];
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
