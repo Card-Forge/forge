@@ -225,13 +225,6 @@ public final class AbilityFactory {
             abTgt.setZone(ZoneType.listValueOf(mapParams.get("TgtZone")));
         }
 
-        // Target Type mostly for Counter: Spell,Activated,Triggered,Ability
-        // (or any combination of)
-        // Ability = both activated and triggered abilities
-        if (mapParams.containsKey("TargetType")) {
-            abTgt.setTargetSpellAbilityType(mapParams.get("TargetType"));
-        }
-
         // TargetValidTargeting most for Counter: e.g. target spell that
         // targets X.
         if (mapParams.containsKey("TargetValidTargeting")) {

@@ -204,8 +204,9 @@ public class ComputerUtil {
 
         // And lastly give some bonus points to least restrictive TargetType
         // (Spell,Ability,Triggered)
-        final String tgtType = tgt.getTargetSpellAbilityType();
-        restrict -= (5 * tgtType.split(",").length);
+        final String tgtType = sa.getParam("TargetType");
+        if (tgtType != null)
+            restrict -= (5 * tgtType.split(",").length);
 
         return restrict;
     }

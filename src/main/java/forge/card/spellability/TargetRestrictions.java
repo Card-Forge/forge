@@ -52,9 +52,6 @@ public class TargetRestrictions {
     private String uiPrompt = "";
     private List<ZoneType> tgtZone = Arrays.asList(ZoneType.Battlefield);
 
-    //SpellAbility Restrictions
-    // Comma-separated <Spell,Activated,Triggered>
-    private String targetSpellAbilityType = null;
     // The target SA of this SA must be targeting a Valid X
     private String saValidTargeting = null;
     
@@ -96,7 +93,6 @@ public class TargetRestrictions {
         this.minTargets = target.getMinTargets();
         this.maxTargets = target.getMaxTargets();
         this.tgtZone = target.getZone();
-        this.targetSpellAbilityType = target.getTargetSpellAbilityType();
         this.saValidTargeting = target.getSAValidTargeting();
         this.dividedAsYouChoose = target.isDividedAsYouChoose();
         this.uniqueTargets = target.isUniqueTargets();
@@ -304,29 +300,6 @@ public class TargetRestrictions {
      */
     public final List<ZoneType> getZone() {
         return this.tgtZone;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>targetSpellAbilityType</code>.
-     * </p>
-     * 
-     * @param tgtSAType
-     *            a {@link java.lang.String} object.
-     */
-    public final void setTargetSpellAbilityType(final String tgtSAType) {
-        this.targetSpellAbilityType = tgtSAType;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>targetSpellAbilityType</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getTargetSpellAbilityType() {
-        return this.targetSpellAbilityType;
     }
 
     /**

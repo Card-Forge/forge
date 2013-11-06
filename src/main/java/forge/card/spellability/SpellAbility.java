@@ -1560,7 +1560,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
             boolean result = false;
     
             for (final GameObject o : matchTgt.getTargets()) {
-                if (matchesValid(o, splitTargetRestrictions.split(","))) {
+                if (o.isValid(splitTargetRestrictions.split(","), this.getActivatingPlayer(), this.getSourceCard())) {
                     result = true;
                     break;
                 }
@@ -1588,24 +1588,6 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
     
         return topSA.getSourceCard().isValid(tgt.getValidTgts(), this.getActivatingPlayer(), this.getSourceCard());
     }
-
-    private boolean matchesValid(final GameObject o, final String[] valids) {
-        final Card srcCard = this.getSourceCard();
-        final Player activatingPlayer = this.getActivatingPlayer();
-        if (o instanceof Card) {
-            final Card c = (Card) o;
-            return c.isValid(valids, activatingPlayer, srcCard);
-        }
-    
-        if (o instanceof Player) {
-            Player p = (Player) o;
-            if (p.isValid(valids, activatingPlayer, srcCard)) {
-                return true;
-            }
-        }
-    
-        return false;
-    }
     
     // Takes one argument like Permanent.Blue+withFlying
     /**
@@ -1630,14 +1612,14 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         if (incR[0].equals("Spell")) {
             if (!this.isSpell())
                 return false;
-        }
-        else if (incR[0].equals("Triggered")) {
+        } else if (incR[0].equals("Triggered")) {
             if (!this.isTrigger())
                 return false;
-        }
-        else if (incR[0].equals("Activated")) {
+        } else if (incR[0].equals("Activated")) {
             if (!(this instanceof AbilityActivated))
                 return false;
+        } else { //not a spell/ability type
+            return false;
         }
         
         if (incR.length > 1) {
