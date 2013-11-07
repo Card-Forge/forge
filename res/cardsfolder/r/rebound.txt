@@ -1,0 +1,7 @@
+Name:Rebound
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeTargets | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | TargetValidTargeting$ Player | TargetsSingleTarget$ True | TargetRestriction$ Player | SpellDescription$ Change the target of target spell that targets only a player. The new target must be a player.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rebound.jpg
+Oracle:Change the target of target spell that targets only a player. The new target must be a player.

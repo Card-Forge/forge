@@ -107,6 +107,9 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                                 if (newTarget.getFirstTargetedCard() != null && newTarget.getFirstTargetedCard().
                                         isValid(sa.getParam("TargetRestriction").split(","), activator, sa.getSourceCard())) {
                                     changingTgtSI.updateTarget(newTarget);
+                                } else if (newTarget.getFirstTargetedPlayer() != null && newTarget.getFirstTargetedPlayer().
+                                        isValid(sa.getParam("TargetRestriction").split(","), activator, sa.getSourceCard())) {
+                                    changingTgtSI.updateTarget(newTarget);
                                 }
                             } else {
                                 changingTgtSI.updateTarget(newTarget);
