@@ -4,7 +4,7 @@ Types:Creature Beast
 PT:3/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, change the target of target spell that targets only a single creature to Muck Drubb.
-SVar:TrigChange:AB$ ChangeTargets | Cost$ 0 | TargetType$ Spell | ValidTgts$ Card | Defined$ Self | TargetsSingleTarget$ True | ChangeSingleTarget$ True | TargetValidTargeting$ Creature
+SVar:TrigChange:AB$ ChangeTargets | Cost$ 0 | TargetType$ Spell | ValidTgts$ Card | Defined$ Self | TargetsSingleTarget$ True | TargetValidTargeting$ Creature
 K:Madness:2 B
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muck_drubb.jpg

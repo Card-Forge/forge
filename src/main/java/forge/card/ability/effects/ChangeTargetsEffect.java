@@ -30,7 +30,6 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final List<SpellAbility> sas = getTargetSpells(sa);
         final boolean remember = sa.hasParam("RememberTargetedCard");
-        final boolean random = sa.hasParam("RandomTarget");
 
         final MagicStack stack = sa.getActivatingPlayer().getGame().getStack();
         for (final SpellAbility tgtSA : sas) {
@@ -86,18 +85,25 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             } else {
                 while(changingTgtSI != null) {
                     SpellAbility changingTgtSA = changingTgtSI.getSpellAbility();
-                    if (!random) {
-                        // Update targets, with a potential new target
-                        TargetChoices newTarget = sa.getActivatingPlayer().getController().chooseNewTargetsFor(changingTgtSA);
-                        if (null != newTarget) {
-                            changingTgtSI.updateTarget(newTarget);
-                        }
-                    } else {
+                    if (sa.hasParam("RandomTarget")){
                         changingTgtSA.resetTargets();
                         List<GameObject> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
                         GameObject choice = Aggregates.random(candidates);
                         changingTgtSA.getTargets().add(choice);
                         changingTgtSI.updateTarget(changingTgtSA.getTargets());
+                    } else if (sa.hasParam("Defined")){
+                        GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa), null);
+                        if(changingTgtSA.canTarget(newTarget)) {
+                            changingTgtSA.resetTargets();
+                            changingTgtSA.getTargets().add(newTarget);
+                            changingTgtSI.updateTarget(changingTgtSA.getTargets());
+                        }
+                    } else {
+                        // Update targets, with a potential new target
+                        TargetChoices newTarget = sa.getActivatingPlayer().getController().chooseNewTargetsFor(changingTgtSA);
+                        if (null != newTarget) {
+                            changingTgtSI.updateTarget(newTarget);
+                        }
                     }
                     changingTgtSI = changingTgtSI.getSubInstace();
                 }
