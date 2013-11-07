@@ -30,8 +30,9 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final List<SpellAbility> sas = getTargetSpells(sa);
         final boolean remember = sa.hasParam("RememberTargetedCard");
+        final Player activator = sa.getActivatingPlayer();
 
-        final MagicStack stack = sa.getActivatingPlayer().getGame().getStack();
+        final MagicStack stack = activator.getGame().getStack();
         for (final SpellAbility tgtSA : sas) {
             SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(tgtSA);
             if (si == null) {
@@ -102,7 +103,14 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                         // Update targets, with a potential new target
                         TargetChoices newTarget = sa.getActivatingPlayer().getController().chooseNewTargetsFor(changingTgtSA);
                         if (null != newTarget) {
-                            changingTgtSI.updateTarget(newTarget);
+                            if (sa.hasParam("TargetRestriction")) {
+                                if (newTarget.getFirstTargetedCard() != null && newTarget.getFirstTargetedCard().
+                                        isValid(sa.getParam("TargetRestriction").split(","), activator, sa.getSourceCard())) {
+                                    changingTgtSI.updateTarget(newTarget);
+                                }
+                            } else {
+                                changingTgtSI.updateTarget(newTarget);
+                            }
                         }
                     }
                     changingTgtSI = changingTgtSI.getSubInstace();

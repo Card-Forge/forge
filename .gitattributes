@@ -10294,6 +10294,7 @@ res/cardsfolder/s/silver_inlaid_dagger.txt -text
 res/cardsfolder/s/silver_knight.txt svneol=native#text/plain
 res/cardsfolder/s/silver_myr.txt svneol=native#text/plain
 res/cardsfolder/s/silver_seraph.txt svneol=native#text/plain
+res/cardsfolder/s/silver_wyvern.txt -text
 res/cardsfolder/s/silverback_ape.txt svneol=native#text/plain
 res/cardsfolder/s/silverblade_paladin.txt -text
 res/cardsfolder/s/silverchase_fox.txt -text
