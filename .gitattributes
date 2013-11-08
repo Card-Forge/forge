@@ -15,12 +15,14 @@ forge-ai/.settings/org.eclipse.core.resources.prefs -text
 forge-ai/.settings/org.eclipse.jdt.core.prefs -text
 forge-ai/.settings/org.eclipse.m2e.core.prefs -text
 forge-ai/pom.xml -text
+forge-ai/src/main/java/forge/game/ai/AiProps.java -text
 forge-core/.classpath -text
 forge-core/.project -text
 forge-core/.settings/org.eclipse.core.resources.prefs -text
 forge-core/.settings/org.eclipse.jdt.core.prefs -text
 forge-core/.settings/org.eclipse.m2e.core.prefs -text
 forge-core/pom.xml -text
+forge-core/src/main/java/forge/card/CardRarity.java -text
 forge-gui/.classpath -text
 forge-gui/.project -text
 forge-gui/.settings/org.eclipse.core.resources.prefs -text
@@ -14609,7 +14611,6 @@ forge-gui/src/main/java/forge/card/CardCoreType.java -text
 forge-gui/src/main/java/forge/card/CardDb.java -text
 forge-gui/src/main/java/forge/card/CardEdition.java -text
 forge-gui/src/main/java/forge/card/CardFace.java -text
-forge-gui/src/main/java/forge/card/CardRarity.java -text
 forge-gui/src/main/java/forge/card/CardRules.java -text
 forge-gui/src/main/java/forge/card/CardRulesPredicates.java -text
 forge-gui/src/main/java/forge/card/CardRulesReader.java svneol=native#text/plain
@@ -15059,7 +15060,6 @@ forge-gui/src/main/java/forge/game/ai/AiAttackController.java svneol=native#text
 forge-gui/src/main/java/forge/game/ai/AiBlockController.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/ai/AiController.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/ai/AiProfileUtil.java -text
-forge-gui/src/main/java/forge/game/ai/AiProps.java -text
 forge-gui/src/main/java/forge/game/ai/ComputerUtil.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/ai/ComputerUtilCard.java -text
 forge-gui/src/main/java/forge/game/ai/ComputerUtilCombat.java -text
