@@ -14013,8 +14013,10 @@ res/quest/precons/Air[!!-~]Razers.dck -text
 res/quest/precons/Angelic[!!-~]Might.dck -text
 res/quest/precons/Arcanis's[!!-~]Guile.dck -text
 res/quest/precons/Armada.dck -text
+res/quest/precons/Army[!!-~]of[!!-~]Entropy.dck -text
 res/quest/precons/Army[!!-~]of[!!-~]Justice.dck -text
 res/quest/precons/Assassin.dck -text
+res/quest/precons/Aura[!!-~]Mastery.dck -text
 res/quest/precons/Azorius[!!-~]Advance.dck -text
 res/quest/precons/Azorius[!!-~]Ascendant.dck -text
 res/quest/precons/Bait[!!-~]and[!!-~]Bludgeon.dck -text
@@ -14038,6 +14040,7 @@ res/quest/precons/Custom[!!-~]Creatures.dck -text
 res/quest/precons/Dark[!!-~]Sacrifice.dck -text
 res/quest/precons/Dead[!!-~]Ahead.dck -text
 res/quest/precons/Deadspread.dck -text
+res/quest/precons/Death[!!-~]March.dck -text
 res/quest/precons/Death's[!!-~]Minions.dck -text
 res/quest/precons/Deathfed.dck -text
 res/quest/precons/Deathly[!!-~]Dominion.dck -text
@@ -14051,6 +14054,8 @@ res/quest/precons/Disrupter.dck -text
 res/quest/precons/Domain.dck -text
 res/quest/precons/Doom[!!-~]Inevitable.dck -text
 res/quest/precons/Eldritch[!!-~]Onslaught.dck -text
+res/quest/precons/Elementals[!!-~]Path.dck -text
+res/quest/precons/Elvish[!!-~]Predation.dck -text
 res/quest/precons/Elvish[!!-~]Rage.dck -text
 res/quest/precons/Entangling[!!-~]Webs.dck -text
 res/quest/precons/Esper[!!-~]Air[!!-~]Assault.dck -text
@@ -14091,6 +14096,7 @@ res/quest/precons/Legion[!!-~]Aloft.dck -text
 res/quest/precons/Levelers'[!!-~]Glory.dck -text
 res/quest/precons/Levelers'[!!-~]Scorn.dck -text
 res/quest/precons/Life[!!-~]Boost.dck -text
+res/quest/precons/Life[!!-~]Drain.dck -text
 res/quest/precons/Little[!!-~]Bashers.dck -text
 res/quest/precons/Lofty[!!-~]Heights.dck -text
 res/quest/precons/Master[!!-~]Blaster.dck -text
@@ -14108,6 +14114,7 @@ res/quest/precons/Mystical[!!-~]Might.dck -text
 res/quest/precons/Naya[!!-~]Behemoths.dck -text
 res/quest/precons/Naya[!!-~]Domain.dck -text
 res/quest/precons/Orzhov[!!-~]Oppression.dck -text
+res/quest/precons/Overkill.dck -text
 res/quest/precons/Path[!!-~]of[!!-~]Blight.dck -text
 res/quest/precons/Phyrexian[!!-~]Assault.dck -text
 res/quest/precons/Phyrexian[!!-~]Poison.dck -text
@@ -14134,6 +14141,7 @@ res/quest/precons/Sacrificial[!!-~]Bam.dck -text
 res/quest/precons/Selesnya[!!-~]Surge.dck -text
 res/quest/precons/Selesnya[!!-~]United.dck -text
 res/quest/precons/Shamanism.dck -text
+res/quest/precons/Sidestep.dck -text
 res/quest/precons/Simic[!!-~]Synthesis.dck -text
 res/quest/precons/Sky[!!-~]Slam.dck -text
 res/quest/precons/Slaughterhouse.dck -text

@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Sidestep
+Description=When playing the "Sidestep" deck, you're in control of an ever-changing reality. Creatures suddenly gain flying, thanks to Stream Hopper and Merrow Levitator. Creatures suddenly switch their power and toughness, thanks to Crag Puca and Inside Out. And creatures that used to fight on your opponent's side suddenly fight on yours, thanks to Dominus of Fealty and Unwilling Recruit!
+Deck Type=constructed
+Set=EVE
+Image=sidestep.jpg
+
+[Main]
+11 Island|SHM
+14 Mountain|SHM
+1 Merrow Levitator|EVE
+1 Hatchet Bully|EVE
+1 Outrage Shaman|EVE
+2 Stream Hopper|EVE
+3 Riverfall Mimic|EVE
+2 Noggle Hedge-Mage|EVE
+3 Noggle Bandit|EVE
+1 Crag Puca|EVE
+3 Shrewd Hatchling|EVE
+2 Noggle Bridgebreaker|EVE
+1 Dominus of Fealty|EVE
+2 Nucklavee|EVE
+1 Mindwrack Liege|EVE
+1 Spell Syphon|SHM
+1 Oona's Grace|EVE
+1 Flame Jab|EVE
+2 Burn Trail|SHM
+1 Jaws of Stone|SHM
+2 Unwilling Recruit|EVE
+3 Clout of the Dominus|EVE
+1 Inside Out|EVE
