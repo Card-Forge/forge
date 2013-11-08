@@ -14037,6 +14037,7 @@ forge-gui/res/quest/precons/Azorius[!!-~]Ascendant.dck -text
 forge-gui/res/quest/precons/Bait[!!-~]and[!!-~]Bludgeon.dck -text
 forge-gui/res/quest/precons/Bant[!!-~]Exalted.dck -text
 forge-gui/res/quest/precons/Bant[!!-~]on[!!-~]the[!!-~]March.dck -text
+forge-gui/res/quest/precons/Battalion.dck -text
 forge-gui/res/quest/precons/Battle[!!-~]Blitz.dck -text
 forge-gui/res/quest/precons/Battle[!!-~]Cries.dck -text
 forge-gui/res/quest/precons/Battle[!!-~]Surge.dck -text
@@ -14046,6 +14047,7 @@ forge-gui/res/quest/precons/Bomber.dck -text
 forge-gui/res/quest/precons/Boros[!!-~]Battalion.dck -text
 forge-gui/res/quest/precons/Bound[!!-~]by[!!-~]Strength.dck -text
 forge-gui/res/quest/precons/Breath[!!-~]of[!!-~]Fire.dck -text
+forge-gui/res/quest/precons/Brute[!!-~]Force.dck -text
 forge-gui/res/quest/precons/Carnival[!!-~]of[!!-~]Blood.dck -text
 forge-gui/res/quest/precons/Cho-Manno's[!!-~]Resolve.dck -text
 forge-gui/res/quest/precons/Code[!!-~]of[!!-~]the[!!-~]Orzhov.dck -text
@@ -14068,6 +14070,7 @@ forge-gui/res/quest/precons/Dimir[!!-~]Dementia.dck -text
 forge-gui/res/quest/precons/Disrupter.dck -text
 forge-gui/res/quest/precons/Domain.dck -text
 forge-gui/res/quest/precons/Doom[!!-~]Inevitable.dck -text
+forge-gui/res/quest/precons/Eldrazi[!!-~]Arisen.dck -text
 forge-gui/res/quest/precons/Eldritch[!!-~]Onslaught.dck -text
 forge-gui/res/quest/precons/Elementals[!!-~]Path.dck -text
 forge-gui/res/quest/precons/Elvish[!!-~]Predation.dck -text
@@ -14086,6 +14089,7 @@ forge-gui/res/quest/precons/Fiery[!!-~]Dawn.dck -text
 forge-gui/res/quest/precons/Firebomber.dck -text
 forge-gui/res/quest/precons/Flyover.dck -text
 forge-gui/res/quest/precons/Gleeful[!!-~]Flames.dck -text
+forge-gui/res/quest/precons/Going[!!-~]Rogue.dck -text
 forge-gui/res/quest/precons/Golgari[!!-~]Deathcreep.dck -text
 forge-gui/res/quest/precons/Golgari[!!-~]Growth.dck -text
 forge-gui/res/quest/precons/Grab[!!-~]for[!!-~]Power.dck -text
@@ -14123,6 +14127,7 @@ forge-gui/res/quest/precons/Mirromancy.dck -text
 forge-gui/res/quest/precons/Mob[!!-~]Rule.dck -text
 forge-gui/res/quest/precons/Molimo's[!!-~]Might.dck -text
 forge-gui/res/quest/precons/Monstrous[!!-~]Surprise.dck -text
+forge-gui/res/quest/precons/Mortal[!!-~]Coil.dck -text
 forge-gui/res/quest/precons/Myr[!!-~]of[!!-~]Mirrodin.dck -text
 forge-gui/res/quest/precons/Mysterious[!!-~]Realms.dck -text
 forge-gui/res/quest/precons/Mystical[!!-~]Might.dck -text
@@ -14136,6 +14141,7 @@ forge-gui/res/quest/precons/Phyrexian[!!-~]Poison.dck -text
 forge-gui/res/quest/precons/Presence[!!-~]of[!!-~]Mind.dck -text
 forge-gui/res/quest/precons/Primordial[!!-~]Jund.dck -text
 forge-gui/res/quest/precons/Pummel.dck -text
+forge-gui/res/quest/precons/Pumped[!!-~]Up.dck -text
 forge-gui/res/quest/precons/Radiant's[!!-~]Revenge.dck -text
 forge-gui/res/quest/precons/Rakdos[!!-~]Bloodsport.dck -text
 forge-gui/res/quest/precons/Rakdos[!!-~]Raid.dck -text
