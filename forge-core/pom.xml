@@ -11,4 +11,12 @@
 
     <artifactId>forge-core</artifactId>
     <name>Forge Core</name>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>14.0.1</version>
+        </dependency>
+    </dependencies>
 </project>
