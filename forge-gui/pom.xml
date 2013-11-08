@@ -10,7 +10,6 @@
     <artifactId>forge-gui</artifactId>
     <packaging>jar</packaging>
     <name>Forge</name>
-    <version>1.5.5-SNAPSHOT</version>
     <description>
         Forge lets you play the card game Magic: The Gathering against a computer opponent
         using all of the rules.

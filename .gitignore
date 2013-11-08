@@ -2,6 +2,8 @@
 /*.iml
 /*.tmp
 /.metadata
+forge-ai/target
+forge-core/target
 forge-gui/res/*.log
 forge-gui/res/PerSetTrackingResults
 forge-gui/res/cardsfolder/*.bat
@@ -9,6 +11,7 @@ forge-gui/res/decks
 forge-gui/res/layouts
 forge-gui/res/pics*
 forge-gui/res/pics_product
+forge-gui/target
 forge-gui/tools/PerSetTrackingResults
 forge-gui/tools/oracleScript.log
 /forge.profile.properties
