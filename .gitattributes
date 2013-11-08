@@ -21,8 +21,10 @@ forge-core/.settings/org.eclipse.core.resources.prefs -text
 forge-core/.settings/org.eclipse.jdt.core.prefs -text
 forge-core/.settings/org.eclipse.m2e.core.prefs -text
 forge-core/pom.xml -text
+forge-gui/.classpath -text
 forge-gui/.project -text
 forge-gui/.settings/org.eclipse.core.resources.prefs -text
+forge-gui/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui/.settings/org.eclipse.m2e.core.prefs -text
 forge-gui/pom.xml -text
 forge-gui/res/ai/Default.ai -text
