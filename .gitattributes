@@ -8854,6 +8854,7 @@ forge-gui/res/cardsfolder/q/quicksand.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quicksilver_amulet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quicksilver_behemoth.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quicksilver_dagger.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/q/quicksilver_dragon.txt -text
 forge-gui/res/cardsfolder/q/quicksilver_fountain.txt -text
 forge-gui/res/cardsfolder/q/quicksilver_gargantuan.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/q/quicksilver_geyser.txt svneol=native#text/plain
