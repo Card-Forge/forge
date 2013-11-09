@@ -6073,6 +6073,7 @@ forge-gui/res/cardsfolder/k/keldon_mantle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/keldon_marauders.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/keldon_megaliths.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/keldon_necropolis.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/k/keldon_twilight.txt -text
 forge-gui/res/cardsfolder/k/keldon_vandals.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/keldon_warlord.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kelinore_bat.txt svneol=native#text/plain
