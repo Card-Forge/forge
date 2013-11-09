@@ -6,9 +6,6 @@
 .settings/net.sf.jautodoc.prefs -text
 .settings/org.eclipse.jdt.core.prefs -text
 .settings/org.eclipse.jdt.ui.prefs -text
-/CHANGES.txt svneol=native#text/plain
-/LICENSE.txt svneol=native#text/plain
-/README.txt svneol=native#text/plain
 forge-ai/.classpath -text
 forge-ai/.project -text
 forge-ai/.settings/org.eclipse.core.resources.prefs -text
@@ -49,6 +46,10 @@ forge-gui/.project -text
 forge-gui/.settings/org.eclipse.core.resources.prefs -text
 forge-gui/.settings/org.eclipse.jdt.core.prefs -text
 forge-gui/.settings/org.eclipse.m2e.core.prefs -text
+forge-gui/CHANGES.txt -text
+forge-gui/LICENSE.txt -text
+forge-gui/README.txt -text
+forge-gui/forge.profile.properties.example -text
 forge-gui/pom.xml -text
 forge-gui/res/ai/Default.ai -text
 forge-gui/res/ai/Reckless.ai -text
