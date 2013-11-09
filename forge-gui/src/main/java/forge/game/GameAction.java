@@ -34,7 +34,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -44,6 +43,7 @@ import forge.FThreads;
 import forge.GameEntity;
 import forge.GameLogEntryType;
 import forge.GameObject;
+import forge.card.CardCharacteristicName;
 import forge.card.CardDb;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;

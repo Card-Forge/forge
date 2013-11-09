@@ -11,7 +11,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.CardCharacteristicName;
+import forge.card.CardCharacteristicName;
 import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;

@@ -36,10 +36,10 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CounterType;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.card.CardCharacteristicName;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
 import forge.game.combat.Combat;

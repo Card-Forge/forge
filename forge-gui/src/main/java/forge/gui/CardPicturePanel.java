@@ -24,9 +24,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.card.CardCharacteristicName;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JComponentSkin;
 import forge.gui.toolbox.imaging.FImagePanel;

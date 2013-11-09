@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
+import forge.card.CardCharacteristicName;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactory;

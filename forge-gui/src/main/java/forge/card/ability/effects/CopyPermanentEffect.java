@@ -12,10 +12,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.Command;
 import forge.GameEntity;
+import forge.card.CardCharacteristicName;
 import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;

@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import forge.Card;
-import forge.CardCharacteristicName;
+import forge.card.CardCharacteristicName;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;

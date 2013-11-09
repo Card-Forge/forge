@@ -1,7 +1,5 @@
 package forge.card;
 
-import forge.CardCharacteristicName;
-
 public enum CardSplitType
 {
     None(AggregationMethod.USE_PRIMARY_FACE, null),

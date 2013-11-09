@@ -5,9 +5,9 @@ import java.util.List;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.card.CardCharacteristicName;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;

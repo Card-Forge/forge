@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardLists;
+import forge.card.CardCharacteristicName;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;

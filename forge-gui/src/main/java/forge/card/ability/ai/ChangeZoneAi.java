@@ -12,13 +12,13 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.GameEntity;
 import forge.GameObject;
+import forge.card.CardCharacteristicName;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;

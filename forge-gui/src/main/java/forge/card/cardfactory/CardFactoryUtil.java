@@ -26,7 +26,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -37,6 +36,7 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.GameLogEntryType;
 import forge.Singletons;
+import forge.card.CardCharacteristicName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;

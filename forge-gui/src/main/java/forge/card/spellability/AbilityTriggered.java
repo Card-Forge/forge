@@ -20,8 +20,8 @@ package forge.card.spellability;
 import java.util.Arrays;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.Command;
+import forge.card.CardCharacteristicName;
 import forge.card.CardCharacteristics;
 import forge.card.mana.ManaCost;
 import forge.card.trigger.ZCTrigger;

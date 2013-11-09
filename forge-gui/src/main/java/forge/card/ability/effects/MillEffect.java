@@ -3,7 +3,7 @@ package forge.card.ability.effects;
 import java.util.List;
 
 import forge.Card;
-import forge.CardCharacteristicName;
+import forge.card.CardCharacteristicName;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;

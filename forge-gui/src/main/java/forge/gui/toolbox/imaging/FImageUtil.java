@@ -22,8 +22,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.ImageCache;
+import forge.card.CardCharacteristicName;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FSkin.ComponentSkin;
 

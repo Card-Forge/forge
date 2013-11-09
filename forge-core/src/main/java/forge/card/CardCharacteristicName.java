@@ -1,4 +1,4 @@
-package forge;
+package forge.card;
 
 /** 
  * TODO: Write javadoc for this type.

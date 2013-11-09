@@ -9,13 +9,13 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.CardCharacteristicName;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.ability.ai.ChangeZoneAi;

@@ -42,6 +42,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.CardPredicates.Presets;
+import forge.card.CardCharacteristicName;
 import forge.card.CardCharacteristics;
 import forge.card.CardDb;
 import forge.card.CardEdition;
@@ -761,7 +762,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.trigger.Trigger} object.
      *
      * @param state
-     *            a {@link forge.CardCharacteristicName} object.
+     *            a {@link forge.card.CardCharacteristicName} object.
      */
     public final void removeTrigger(final Trigger t, final CardCharacteristicName state) {
         CardCharacteristics stateCharacteristics = this.getState(state);

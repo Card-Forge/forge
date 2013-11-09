@@ -23,10 +23,10 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardUtil;
 import forge.ImageCache;
+import forge.card.CardCharacteristicName;
 import forge.card.CardCharacteristics;
 import forge.card.CardDb;
 import forge.card.CardRules;

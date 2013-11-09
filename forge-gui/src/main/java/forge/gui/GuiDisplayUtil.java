@@ -37,11 +37,11 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CounterType;
 import forge.Singletons;
+import forge.card.CardCharacteristicName;
 import forge.card.CardDb;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;

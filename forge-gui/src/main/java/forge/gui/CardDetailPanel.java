@@ -38,11 +38,11 @@ import javax.swing.border.EtchedBorder;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardUtil;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.CardCharacteristicName;
 import forge.card.CardEdition;
 import forge.card.CardType;
 import forge.card.ColorSet;

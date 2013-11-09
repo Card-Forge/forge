@@ -24,9 +24,9 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.JLabel;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardUtil;
 import forge.Command;
+import forge.card.CardCharacteristicName;
 import forge.gui.CardPicturePanel;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;

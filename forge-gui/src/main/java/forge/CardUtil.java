@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import forge.card.CardCharacteristicName;
 import forge.card.CardCharacteristics;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
