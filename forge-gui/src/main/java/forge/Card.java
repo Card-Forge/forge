@@ -8666,7 +8666,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param player
      * @return
      */
-    public List<SpellAbility> getAllPossibleAbilites(Player player) {
+    public List<SpellAbility> getAllPossibleAbilities(Player player) {
         // this can only be called by the Human
     
         final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
