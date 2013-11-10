@@ -50,6 +50,7 @@ public class TriggerSacrificed extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card sac = (Card) runParams2.get("Card");
+        final SpellAbility sourceSA = (SpellAbility) runParams2.get("Cause");
         if (this.mapParams.containsKey("ValidPlayer")) {
             if (!matchesValid(sac.getController(), this.mapParams.get("ValidPlayer").split(","),
                     this.getHostCard())) {
@@ -61,6 +62,12 @@ public class TriggerSacrificed extends Trigger {
                     this.getHostCard())) {
                 return false;
             }
+        }
+        if (this.mapParams.containsKey("ValidSourceController")) {
+        	if (sourceSA == null || !sourceSA.getActivatingPlayer().isValid(this.mapParams.get("ValidSourceController"),
+        			this.getHostCard().getController(), this.getHostCard())) {
+        		return false;
+        	}
         }
         return true;
     }

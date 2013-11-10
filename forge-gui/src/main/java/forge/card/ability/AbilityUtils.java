@@ -978,6 +978,8 @@ public class AbilityUtils {
                     }
                 }
             }
+        } else if (defined.equals("ActivePlayer")) {
+        	players.add(game.getPhaseHandler().getPlayerTurn());
         } else if (defined.equals("You")) {
             players.add(sa.getActivatingPlayer());
         } else if (defined.equals("Each")) {

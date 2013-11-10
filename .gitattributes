@@ -471,6 +471,7 @@ forge-gui/res/cardsfolder/a/arbalest_elite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arbiter_of_knollridge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arbor_colossus.txt -text
 forge-gui/res/cardsfolder/a/arbor_elf.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/arboria.txt -text
 forge-gui/res/cardsfolder/a/arc_blade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arc_lightning.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arc_mage.txt svneol=native#text/plain
@@ -8608,6 +8609,7 @@ forge-gui/res/cardsfolder/p/predatory_urge.txt -text
 forge-gui/res/cardsfolder/p/predict.txt -text
 forge-gui/res/cardsfolder/p/preeminent_captain.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/preemptive_strike.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/premature_burial.txt -text
 forge-gui/res/cardsfolder/p/preordain.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/prescient_chimera.txt -text
 forge-gui/res/cardsfolder/p/presence_of_gond.txt svneol=native#text/plain
@@ -9620,6 +9622,7 @@ forge-gui/res/cardsfolder/s/sacellum_godspeaker.txt -text
 forge-gui/res/cardsfolder/s/sachi_daughter_of_seshiro.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sacred_boon.txt -text
 forge-gui/res/cardsfolder/s/sacred_foundry.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/sacred_ground.txt -text
 forge-gui/res/cardsfolder/s/sacred_guide.txt -text
 forge-gui/res/cardsfolder/s/sacred_knight.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sacred_mesa.txt -text

@@ -1210,6 +1210,7 @@ public class GameAction {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
+        runParams.put("Cause", source);
         game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
         return true;
     }

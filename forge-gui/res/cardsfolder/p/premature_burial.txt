@@ -1,0 +1,10 @@
+Name:Premature Burial
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.IsRemembered | TgtPrompt$ Select target nonblack creature that entered the battlefield since your last turn ended | SpellDescription$ Destroy target nonblack creature that entered the battlefield since your last turn ended.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonBlack | Static$ True | Execute$ TrigRemember
+SVar:TrigRemember:DB$ Pump | RememberObjects$ TriggeredCard
+T:Mode$ Phase | Phase$ Cleanup | ValidPlayer$ You | Execute$ TrigCleanup | Static$ True
+SVar:TrigCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/premature_burial.jpg
+Oracle:Destroy target nonblack creature that entered the battlefield since your last turn ended.
