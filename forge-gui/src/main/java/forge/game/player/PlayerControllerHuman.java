@@ -85,29 +85,42 @@ public class PlayerControllerHuman extends PlayerController {
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
     public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent) {
+        if (triggerEvent == null) {
+        	List<SpellAbility> playableAbilities = new ArrayList<SpellAbility>();
+        	for (SpellAbility ab : abilities) {
+        		if (ab.canPlay()) {
+        			playableAbilities.add(ab);
+        		}
+        	}
+        	if (playableAbilities.isEmpty()) {
+                return null;
+            }
+            if (playableAbilities.size() == 1 && !playableAbilities.get(0).promptIfOnlyPossibleAbility()) {
+                return playableAbilities.get(0);
+            }
+        	return GuiChoose.oneOrNone("Choose ability to play", playableAbilities);
+        }
+
     	if (abilities.isEmpty()) {
             return null;
         }
-        if (abilities.size() == 1) {
+        if (abilities.size() == 1 && !abilities.get(0).promptIfOnlyPossibleAbility()) {
             return abilities.get(0);
         }
-        if (triggerEvent == null) {
-        	return GuiChoose.oneOrNone("Choose ability to play", abilities);
-        }
         
-        //show menu if mouse triggered ability
+        //show menu if mouse was trigger for ability
         final JPopupMenu menu = new JPopupMenu("Abilities");
         
         int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
         for (final SpellAbility ab : abilities) {
-        	GuiUtils.addMenuItem(menu, ab.toString(), 
+        	GuiUtils.addMenuItem(menu, ab.toString(),
         			shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
                     new Runnable() {
         				@Override
         				public void run() {
         			        CMessage.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
         				}
-        			});
+        			}, ab.getActivatingPlayer() == null || ab.canPlay()); //check getActivatingPlayer() to account for playing lands
         	shortcut++;
         	if (shortcut > KeyEvent.VK_9) {
         		shortcut = 0; //stop adding shortcuts after 9

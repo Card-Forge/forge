@@ -180,6 +180,28 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * @return a boolean.
      */
     public abstract boolean canPlay();
+    
+    /**
+     * <p>
+     * isPossible.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean isPossible() {
+    	return canPlay(); //by default, ability is only possible if it can be played
+    }
+    
+    /**
+     * <p>
+     * promptIfOnlyPossibleAbility.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean promptIfOnlyPossibleAbility() {
+    	return false; //by default, don't prompt user if ability is only possible ability
+    }
 
     // all Spell's and Abilities must override this method
     /**

@@ -117,8 +117,19 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
 
         return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this);
     }
-
-    /* (non-Javadoc)
-     * @see forge.card.spellability.SpellAbility#resolve()
-     */
+    
+    /** {@inheritDoc} */
+    @Override
+    public boolean isPossible() {
+    	//consider activated abilities possible always and simply disable if not currently playable
+    	//the exception is to consider them not possible if there's a zone or activator restriction that's not met
+    	return this.getRestrictions().checkZoneRestrictions(this.getSourceCard(), this) && 
+    		   this.getRestrictions().checkActivatorRestrictions(this.getSourceCard(), this);
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public boolean promptIfOnlyPossibleAbility() {
+    	return !this.isManaAbility(); //prompt user for non-mana activated abilities even is only possible ability
+    }
 }

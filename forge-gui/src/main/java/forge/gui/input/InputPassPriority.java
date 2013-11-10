@@ -63,7 +63,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     @Override
     protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
-    	List<SpellAbility> abilities = card.getAllPossibleAbilities(player);
+    	List<SpellAbility> abilities = card.getAllPossibleAbilities(player, false);
     	if (abilities.isEmpty()) {
             flashIncorrectAction();
             return;

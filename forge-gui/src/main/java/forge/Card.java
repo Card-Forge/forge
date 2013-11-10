@@ -2658,8 +2658,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<SpellAbility> getSpellAbilities() {
-        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(this.getCharacteristics().getSpellAbility());
-        res.addAll(this.getManaAbility());
+        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(this.getManaAbility());
+        res.addAll(this.getCharacteristics().getSpellAbility());
         return res;
     }
 
@@ -8669,7 +8669,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param player
      * @return
      */
-    public List<SpellAbility> getAllPossibleAbilities(Player player) {
+    public List<SpellAbility> getAllPossibleAbilities(Player player, boolean removeUnplayable) {
         // this can only be called by the Human
     
         final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
@@ -8678,14 +8678,16 @@ public class Card extends GameEntity implements Comparable<Card> {
             abilities.add(sa);
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
         }
-    
-        for (int iSa = 0; iSa < abilities.size();) {
-            SpellAbility sa = abilities.get(iSa); 
+
+        for (int i = abilities.size() - 1; i >= 0; i--) {
+            SpellAbility sa = abilities.get(i);
             sa.setActivatingPlayer(player);
-            if (!sa.canPlay())
-                abilities.remove(iSa);
-            else
-                iSa++;
+            if (removeUnplayable && !sa.canPlay()) {
+                abilities.remove(i);
+            }
+            else if (!sa.isPossible()) {
+            	abilities.remove(i);
+            }
         }
     
         if (isLand() && player.canPlayLand(this)) {

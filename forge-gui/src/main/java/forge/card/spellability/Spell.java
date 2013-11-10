@@ -68,16 +68,18 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        final Game game = getActivatingPlayer().getGame();
-        if (game.getStack().isSplitSecondOnStack()) {
-            return false;
-        }
-
         final Card card = this.getSourceCard();
-
         Player activator = this.getActivatingPlayer();
         if (activator == null) {
-            activator = this.getSourceCard().getController();
+            activator = card.getController();
+            if (activator == null) {
+            	return false;
+            }
+        }
+
+        final Game game = activator.getGame();
+        if (game.getStack().isSplitSecondOnStack()) {
+            return false;
         }
 
         if (!(card.isInstant() || activator.canCastSorcery() || card.hasKeyword("Flash")
