@@ -5,7 +5,7 @@ A:SP$ Effect | Cost$ W | Name$ Scout's Warning effect | StaticAbilities$ ScoutFl
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:ScoutFlash:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl+nonToken | AffectedZone$ Hand,Graveyard,Exile,Library,Command | AddHiddenKeyword$ Flash
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ WarningGiven | Static$ True | TriggerDescription$ The next creature card you play this turn can be played as though it had flash.
-SVar:WarningGiven:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Graveyard
+SVar:WarningGiven:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scouts_warning.jpg
 Oracle:The next creature card you play this turn can be played as though it had flash.\nDraw a card.
