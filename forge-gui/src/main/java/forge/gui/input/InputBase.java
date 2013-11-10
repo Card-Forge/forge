@@ -17,7 +17,10 @@
  */
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
+
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
@@ -50,7 +53,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
     protected abstract void showMessage();
 
     @Override
-    public void selectPlayer(final Player player) {    }
+    public void selectPlayer(final Player player) { }
+
+    @Override
+    public void selectAbility(SpellAbility ab) { }
 
     
     @Override
@@ -66,12 +72,12 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     @Override
-    public final void selectCard(Card c, boolean isMetaDown) {
+    public final void selectCard(final Card c, final MouseEvent triggerEvent) {
         if( isFinished() ) return;
-        onCardSelected(c, isMetaDown);
+        onCardSelected(c, triggerEvent);
     }
 
-    protected void onCardSelected(Card c, boolean isRmb) {}
+    protected void onCardSelected(final Card c, final MouseEvent triggerEvent) {}
     protected void onCancel() {}
     protected void onOk() {}
 

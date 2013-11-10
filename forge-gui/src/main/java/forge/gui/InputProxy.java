@@ -17,6 +17,7 @@
  */
 package forge.gui;
 
+import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
@@ -24,6 +25,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
+import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.gui.input.Input;
@@ -113,13 +115,18 @@ public class InputProxy implements Observer {
      * 
      * @param card
      *            a {@link forge.Card} object.
-     * @param zone
-     *            a {@link forge.game.zone.PlayerZone} object.
+     * @param triggerEvent
      */
-    public final void selectCard(final Card card, boolean isRightButton) {
+    public final void selectCard(final Card card, final MouseEvent triggerEvent) {
         Input inp = getInput();
         if ( null != inp )
-            inp.selectCard(card, isRightButton);
+            inp.selectCard(card, triggerEvent);
+    }
+
+    public final void selectAbility(SpellAbility ab) {
+    	Input inp = getInput();
+        if ( null != inp )
+            inp.selectAbility(ab);
     }
 
     /** {@inheritDoc} */

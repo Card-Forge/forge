@@ -1,11 +1,16 @@
 package forge.game.player;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
 
 import org.apache.commons.lang.math.IntRange;
 import org.apache.commons.lang3.StringUtils;
@@ -51,6 +56,7 @@ import forge.gui.input.InputPlayOrDraw;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.match.CMatchUI;
+import forge.gui.match.controllers.CMessage;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
@@ -75,18 +81,41 @@ public class PlayerControllerHuman extends PlayerController {
         return !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
     }
     
-
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities) {
-        if (abilities.isEmpty()) {
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent) {
+    	if (abilities.isEmpty()) {
             return null;
-        } else if (abilities.size() == 1) {
-            return abilities.get(0);
-        } else {
-            return GuiChoose.oneOrNone("Choose ability to play", abilities);
         }
+        if (abilities.size() == 1) {
+            return abilities.get(0);
+        }
+        if (triggerEvent == null) {
+        	return GuiChoose.oneOrNone("Choose ability to play", abilities);
+        }
+        
+        //show menu if mouse triggered ability
+        final JPopupMenu menu = new JPopupMenu("Abilities");
+        
+        int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
+        for (final SpellAbility ab : abilities) {
+        	GuiUtils.addMenuItem(menu, ab.toString(), 
+        			shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
+                    new Runnable() {
+        				@Override
+        				public void run() {
+        			        CMessage.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
+        				}
+        			});
+        	shortcut++;
+        	if (shortcut > KeyEvent.VK_9) {
+        		shortcut = 0; //stop adding shortcuts after 9
+        	}
+        }
+        menu.show(triggerEvent.getComponent(), triggerEvent.getX(), triggerEvent.getY());
+        
+    	return null; //delay ability until choice made
     }
 
     /**

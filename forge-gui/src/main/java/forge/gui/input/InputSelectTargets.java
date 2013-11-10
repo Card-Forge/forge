@@ -1,5 +1,6 @@
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,7 +102,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onCardSelected(Card card, boolean isRmb) {
+    protected final void onCardSelected(final Card card, final MouseEvent triggerEvent) {
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(card)) {
             return;
         }

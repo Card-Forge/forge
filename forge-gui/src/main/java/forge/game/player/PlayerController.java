@@ -1,5 +1,6 @@
 package forge.game.player;
 
+import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -90,7 +91,14 @@ public abstract class PlayerController {
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
-    public abstract SpellAbility getAbilityToPlay(List<SpellAbility> abilities);
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities) {
+    	return getAbilityToPlay(abilities, null);
+    }
+    
+    /**
+     * Uses GUI to learn which spell the player (human in our case) would like to play
+     */
+    public abstract SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent);
 
     /**
      * TODO: Write javadoc for this method.

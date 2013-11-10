@@ -1,11 +1,13 @@
 package forge.game.player;
 
+import java.awt.event.MouseEvent;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -62,7 +64,7 @@ public class PlayerControllerAi extends PlayerController {
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities) {
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent) {
         if (abilities.size() == 0) {
             return null;
         } else 

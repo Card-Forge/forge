@@ -17,7 +17,9 @@
  */
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
 import java.util.List;
+
 import com.google.common.collect.Iterables;
 
 import forge.Card;
@@ -120,9 +122,9 @@ public class InputAttack extends InputSyncronizedBase {
     
     /** {@inheritDoc} */
     @Override
-    protected final void onCardSelected(final Card card, boolean isMetaDown) {
+    protected final void onCardSelected(final Card card, final MouseEvent triggerEvent) {
         final List<Card> att = combat.getAttackers();
-        if (isMetaDown && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")
+        if (triggerEvent.getButton() == 3 && att.contains(card) && !card.hasKeyword("CARDNAME attacks each turn if able.")
                 && !card.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
             // TODO Is there no way to attacks each turn cards to attack Planeswalkers?
             combat.removeFromCombat(card);

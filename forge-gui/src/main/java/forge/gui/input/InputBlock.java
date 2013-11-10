@@ -17,6 +17,8 @@
  */
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
+
 import forge.Card;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -97,9 +99,9 @@ public class InputBlock extends InputSyncronizedBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void onCardSelected(final Card card, boolean isMetaDown) {
+    public final void onCardSelected(final Card card, final MouseEvent triggerEvent) {
 
-        if (isMetaDown && card.getController() == defender) {
+        if (triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
             CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventBlockerAssigned(card, (Card)null));
         } else { 

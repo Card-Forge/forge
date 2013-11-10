@@ -111,7 +111,6 @@ public class CostPutCounter extends CostPartWithList {
         public int getTimesSelected(Card c) {
             return selected.contains(c) ? max == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue() : 0;
         }
-        
     }
 
     // Put Counter doesn't really have a "Valid" portion of the cost

@@ -1,5 +1,6 @@
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     }
 
     @Override
-    protected void onCardSelected(Card card, boolean isRmb) {
+    protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
         if( !selectEntity(card) )
             return;
         

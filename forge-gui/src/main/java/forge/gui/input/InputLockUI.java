@@ -1,10 +1,12 @@
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
+import forge.card.spellability.SpellAbility;
 import forge.control.InputQueue;
 import forge.game.player.Player;
 import forge.gui.match.CMatchUI;
@@ -62,7 +64,8 @@ public class InputLockUI implements Input  {
         CMatchUI.SINGLETON_INSTANCE.showMessage(message);
     }
 
-    @Override public void selectCard(Card c, boolean isMetaDown) {}
+    @Override public void selectCard(Card c, MouseEvent triggerEvent) {}
+    @Override public void selectAbility(SpellAbility ab) {}
     @Override public void selectPlayer(Player player) {}
     @Override public void selectButtonOK() {}
     @Override public void selectButtonCancel() {}

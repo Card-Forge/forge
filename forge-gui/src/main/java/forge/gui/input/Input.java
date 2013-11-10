@@ -1,6 +1,9 @@
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
+
 import forge.Card;
+import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
 /** 
@@ -12,7 +15,9 @@ public interface Input {
     // showMessage() is always the first method called
     void showMessageInitial();
 
-    void selectCard(Card c, boolean isMetaDown);
+    void selectCard(Card c, MouseEvent triggerEvent);
+    
+    void selectAbility(SpellAbility ab);
 
     void selectPlayer(Player player);
 

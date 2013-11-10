@@ -17,6 +17,9 @@
  */
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
+import java.util.List;
+
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -59,14 +62,21 @@ public class InputPassPriority extends InputSyncronizedBase {
 
 
     @Override
-    protected void onCardSelected(Card card, boolean isRmb) {
-        final SpellAbility ab = player.getController().getAbilityToPlay(card.getAllPossibleAbilities(player));
-        if ( null != ab) {
+    protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
+    	List<SpellAbility> abilities = card.getAllPossibleAbilities(player);
+    	if (abilities.isEmpty()) {
+            flashIncorrectAction();
+            return;
+    	}
+
+    	selectAbility(player.getController().getAbilityToPlay(abilities, triggerEvent));
+    }
+    
+    @Override
+    public void selectAbility(final SpellAbility ab) {
+    	if (ab != null) {
             chosenSa = ab;
             stop();
-        }
-        else {
-            flashIncorrectAction();
         }
     }
 }

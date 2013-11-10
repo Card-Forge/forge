@@ -17,6 +17,7 @@
  */
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +110,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     volatile boolean cardSelectLocked = false;
     
     @Override
-    protected void onCardSelected(final Card c0, boolean isRmb) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities 
+    protected void onCardSelected(final Card c0, final MouseEvent triggerEvent) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities 
         
         boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
         boolean isSerumPowder = c0.getName().equals("Serum Powder");

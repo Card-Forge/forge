@@ -1,5 +1,6 @@
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +82,7 @@ public class InputPayManaX extends InputPayMana {
     }
 
     @Override
-    protected void onCardSelected(Card card, boolean isRmb) {
+    protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
         // don't allow here the cards that produce only wrong colors
         activateManaAbility(card, this.manaCost);
     }

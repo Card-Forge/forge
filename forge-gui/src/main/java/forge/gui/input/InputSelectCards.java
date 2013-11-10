@@ -1,5 +1,7 @@
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
+
 import forge.Card;
 
 public abstract class InputSelectCards extends InputSelectManyBase<Card> {
@@ -10,7 +12,7 @@ public abstract class InputSelectCards extends InputSelectManyBase<Card> {
     }
 
     @Override
-    protected void onCardSelected(Card c, boolean isRmb) {
+    protected void onCardSelected(final Card c, final MouseEvent triggerEvent) {
         if ( !selectEntity(c) )
             return;
         
