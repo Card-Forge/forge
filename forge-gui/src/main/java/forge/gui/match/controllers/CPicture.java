@@ -78,7 +78,7 @@ public enum CPicture implements ICDoc {
     public void showImage(final InventoryItem item) {       
         if (item instanceof IPaperCard) {
             IPaperCard paperCard = ((IPaperCard)item);
-            Card c = paperCard.getMatchingForgeCard();
+            Card c = Card.getCardForUi(paperCard);
             if (paperCard.isFoil() && c.getFoil() == 0) {
                 c.setRandomFoil();
             }

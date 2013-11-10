@@ -202,7 +202,7 @@ public final class GuiDisplayUtil {
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");
 
-            final Card c = CardDb.instance().getCard(cardinfo[0]).toForgeCard(player);
+            final Card c = Card.fromPaperCard(CardDb.instance().getCard(cardinfo[0]), player);
 
             boolean hasSetCurSet = false;
             for (final String info : cardinfo) {
@@ -383,8 +383,7 @@ public final class GuiDisplayUtil {
         }
 
         getGame().getAction().invoke(new Runnable() { @Override public void run() {
-            Card forgeCard = c.toForgeCard(p);
-            getGame().getAction().moveToHand(forgeCard);
+            getGame().getAction().moveToHand(Card.fromPaperCard(c, p));
         }});
     }
 
@@ -407,10 +406,9 @@ public final class GuiDisplayUtil {
         final Game game = getGame();
         game.getAction().invoke(new Runnable() {
             @Override public void run() {
-                final Card forgeCard = c.toForgeCard(p);
+                final Card forgeCard = Card.fromPaperCard(c, p);
 
                 if (c.getRules().getType().isLand()) {
-                    forgeCard.setOwner(p);
                     game.getAction().moveToPlay(forgeCard);
 
                 } else {
@@ -480,7 +478,7 @@ public final class GuiDisplayUtil {
         // use standard forge's list selection dialog
         final IPaperCard c = GuiChoose.oneOrNone("Name the card", allPlanars);
         if (c == null) { return; }
-        final Card forgeCard = c.toForgeCard(p);
+        final Card forgeCard = Card.fromPaperCard(c, p);
 
         forgeCard.setOwner(p);
         game.getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0);

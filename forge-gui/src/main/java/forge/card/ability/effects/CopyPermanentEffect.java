@@ -91,7 +91,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                 int ncopied = AbilityUtils.calculateAmount(hostCard, num, sa);
                 while(ncopied > 0) {
                     final PaperCard cp = Aggregates.random(copysource);
-                    Card possibleCard = cp.getMatchingForgeCard();
+                    Card possibleCard = Card.fromPaperCard(cp, null);
                     // Need to temporarily set the Owner so the Game is set
                     possibleCard.setOwner(sa.getActivatingPlayer());
                     
@@ -115,8 +115,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
 
                 tgtCards.clear();
                 if (!cards.isEmpty()) {
-                    Card c = cards.get(0).getMatchingForgeCard();
-                    tgtCards.add(c);
+                    tgtCards.add(Card.fromPaperCard(cards.get(0), null));
                 }
             }
         }

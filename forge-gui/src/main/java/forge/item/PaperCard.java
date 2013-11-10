@@ -17,16 +17,10 @@
  */
 package forge.item;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.common.base.Function;
 
-import forge.Card;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.card.cardfactory.CardFactory;
-import forge.game.player.Player;
 
 
 /**
@@ -184,34 +178,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         // return String.format("%s|%s", name, cardSet);
     }
 
-    /**
-     * To forge card.
-     * 
-     * @return the card
-     */
-    private static final Map<PaperCard, Card> cp2card = new HashMap<PaperCard, Card>();
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getMatchingForgeCard()
-     */
-    @Override
-    public Card getMatchingForgeCard() {
-        Card res = cp2card.get(this);
-        if (null == res) { 
-            res = toForgeCard(null); 
-            cp2card.put(this, res);
-        }
-        return res;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#toForgeCard(forge.game.player.Player)
-     */
-    @Override
-    public Card toForgeCard(Player owner) {
-        final Card c = CardFactory.getCard(this, owner);
-        return c;
-    }
-
+    
     /*
      * (non-Javadoc)
      * 

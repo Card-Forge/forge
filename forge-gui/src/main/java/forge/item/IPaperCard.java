@@ -9,10 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-import forge.Card;
+//import forge.Card;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.game.player.Player;
 import forge.util.PredicateString;
 
 public interface IPaperCard extends InventoryItem {
@@ -160,8 +159,5 @@ public interface IPaperCard extends InventoryItem {
     public abstract CardRarity getRarity();
 
     public abstract String getItemType();
-
-    public abstract Card getMatchingForgeCard();
-    public abstract Card toForgeCard(Player owner);
 
 }

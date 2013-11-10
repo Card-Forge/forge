@@ -17,6 +17,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Card;
 import forge.card.CardDb;
 import forge.gui.CardDetailPanel;
 import forge.gui.deckchooser.FDeckChooser;
@@ -132,7 +133,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
                 Object obj = avatarLists.get(index).getSelectedValue();
 
                 if (obj instanceof PaperCard) {
-                    cdpAvatarDetails.get(index).setCard(((IPaperCard) obj).getMatchingForgeCard());
+                    cdpAvatarDetails.get(index).setCard(Card.getCardForUi((IPaperCard) obj));
                 }
             }
 

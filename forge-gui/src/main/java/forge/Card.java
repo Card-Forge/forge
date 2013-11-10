@@ -53,6 +53,7 @@ import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
+import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -84,6 +85,8 @@ import forge.game.event.GameEventCardTapped;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
 import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.MyRandom;
@@ -8692,5 +8695,24 @@ public class Card extends GameEntity implements Comparable<Card> {
     
         return abilities;
     }
+    
+
+    public static Card fromPaperCard(IPaperCard pc, Player owner) {
+        return CardFactory.getCard(pc, owner);
+    }
+
+    private static final Map<PaperCard, Card> cp2card = new HashMap<PaperCard, Card>();
+    public static Card getCardForUi(IPaperCard pc) {
+        if( pc instanceof PaperCard ) {
+            Card res = cp2card.get(pc);
+            if (null == res) { 
+                res = fromPaperCard(pc, null); 
+                cp2card.put((PaperCard) pc, res);
+            }
+            return res;
+        }
+        return fromPaperCard(pc, null);
+    }
+
 
 } // end Card class

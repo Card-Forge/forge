@@ -37,6 +37,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.Card;
 import forge.item.PaperCard;
 
 /**
@@ -201,7 +202,7 @@ public class CardListViewer {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < CardListViewer.this.list.size())) {
                 final PaperCard cp = CardListViewer.this.list.get(row);
-                CardListViewer.this.detail.setCard(cp.getMatchingForgeCard());
+                CardListViewer.this.detail.setCard(Card.getCardForUi(cp));
                 CardListViewer.this.picture.setCard(cp);
             }
         }

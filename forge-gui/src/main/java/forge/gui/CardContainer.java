@@ -46,4 +46,5 @@ public interface CardContainer {
      * @return a {@link forge.Card} object.
      */
     Card getCard();
+
 }

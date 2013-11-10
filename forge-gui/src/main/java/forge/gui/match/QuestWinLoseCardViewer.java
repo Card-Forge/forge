@@ -26,6 +26,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Card;
 import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
 import forge.gui.toolbox.FList;
@@ -103,7 +104,7 @@ public class QuestWinLoseCardViewer extends FPanel {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < QuestWinLoseCardViewer.this.list.size())) {
                 final PaperCard cp = QuestWinLoseCardViewer.this.list.get(row);
-                QuestWinLoseCardViewer.this.detail.setCard(cp.getMatchingForgeCard());
+                QuestWinLoseCardViewer.this.detail.setCard(Card.getCardForUi(cp));
                 QuestWinLoseCardViewer.this.picture.setCard(cp);
             }
         }

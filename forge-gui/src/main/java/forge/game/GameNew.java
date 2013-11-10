@@ -56,8 +56,7 @@ public class GameNew {
         PlayerZone bf = player.getZone(ZoneType.Battlefield);
         if (cards != null) {
             for (final IPaperCard cp : cards) {
-                Card c = cp.toForgeCard(player);
-                c.setOwner(player);
+                Card c = Card.fromPaperCard(cp, player);
                 bf.add(c);
                 c.setSickness(true);
                 c.setStartsGameInPlay(true);
@@ -69,13 +68,14 @@ public class GameNew {
         PlayerZone com = player.getZone(ZoneType.Command);
     
         // Mainly for avatar, but might find something else here
-        for (final IPaperCard c : psc.getCardsInCommand(player)) {
-            com.add(c.toForgeCard(player));
+        for (final IPaperCard cp : psc.getCardsInCommand(player)) {
+            com.add(Card.fromPaperCard(cp, player));
         }
     
         // Schemes
         List<Card> sd = new ArrayList<Card>();
-        for(IPaperCard cp : psc.getSchemes(player)) sd.add(cp.toForgeCard(player));
+        for(IPaperCard cp : psc.getSchemes(player)) 
+            sd.add(Card.fromPaperCard(cp, player));
         if ( !sd.isEmpty()) {
             for(Card c : sd) {
                 player.getZone(ZoneType.SchemeDeck).add(c);
@@ -86,7 +86,8 @@ public class GameNew {
     
         // Planes
         List<Card> l = new ArrayList<Card>();
-        for(IPaperCard cp : psc.getPlanes(player)) l.add(cp.toForgeCard(player));
+        for(IPaperCard cp : psc.getPlanes(player)) 
+            l.add(Card.fromPaperCard(cp, player));
         if ( !l.isEmpty() ) {
             for(Card c : l) {
                 player.getZone(ZoneType.PlanarDeck).add(c);
@@ -97,7 +98,7 @@ public class GameNew {
         // Commander
         if(psc.getCommander() != null)
         {
-            Card cmd = psc.getCommander().toForgeCard(player);
+            Card cmd = Card.fromPaperCard(psc.getCommander(), player);
             cmd.setCommander(true);
             com.add(cmd);
             player.setCommander(cmd);
@@ -159,7 +160,7 @@ public class GameNew {
                         cpi = CardDb.instance().getFoiled(cpi);
                 }
 
-                final Card card = cpi.toForgeCard(player);
+                final Card card = Card.fromPaperCard(cpi, player);
                 
                 // Assign card-specific foiling or random foiling on approximately 1:20 cards if enabled
                 if (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {

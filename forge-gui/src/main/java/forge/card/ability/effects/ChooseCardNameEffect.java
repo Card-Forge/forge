@@ -108,7 +108,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                         Collections.sort(cards);
                             
                         PaperCard cp = GuiChoose.one(message, cards);
-                        Card instanceForPlayer = cp.toForgeCard(p); // the Card instance for test needs a game to be tested
+                        Card instanceForPlayer = Card.fromPaperCard(cp, p); // the Card instance for test needs a game to be tested
                         if (instanceForPlayer.isValid(valid, host.getController(), host)) {
                             host.setNamedCard(cp.getName());
                             p.setNamedCard(cp.getName());

@@ -52,7 +52,7 @@ public enum CDetail implements ICDoc {
 
     public void showCard(InventoryItem item) {
         if (item instanceof IPaperCard) {
-            showCard(((IPaperCard)item).getMatchingForgeCard());
+            showCard(Card.getCardForUi((IPaperCard)item));
         } else if (item instanceof InventoryItemFromSet) {
             view.getLblFlipcard().setVisible(false);
             view.getPnlDetail().setItem((InventoryItemFromSet)item);

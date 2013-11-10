@@ -316,7 +316,7 @@ public class DualListBox<T> extends FPanel {
         } else if (obj instanceof SpellAbility) {
             card = ((SpellAbility) obj).getSourceCard();
         } else if (obj instanceof PaperCard) {
-            card = ((IPaperCard) obj).getMatchingForgeCard();
+            card = Card.getCardForUi((IPaperCard) obj);
         }
 
         GuiUtils.clearPanelSelections();

@@ -2,12 +2,10 @@ package forge.item;
 
 import java.util.Locale;
 
-import forge.Card;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.card.cardfactory.CardFactory;
-import forge.game.player.Player;
+
 
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private String name;
@@ -61,13 +59,6 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     public String getImageFilename() { return imageFileName; }
 
     @Override public String getItemType() { return "Token"; }
-    @Override public Card getMatchingForgeCard() { return toForgeCard(null); } // hope this won't be queried too frequently, so no cache 
-
-    @Override
-    public Card toForgeCard(Player owner) { 
-        final Card c = CardFactory.getCard(this, owner);
-        return c;
-    }
 
     @Override public boolean isToken() { return true; }
 }
