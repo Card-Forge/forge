@@ -11,7 +11,7 @@
 
     <artifactId>forge-core</artifactId>
     <name>Forge Core</name>
-    
+
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -19,9 +19,9 @@
             <version>14.0.1</version>
         </dependency>
         <dependency>
-        	<groupId>org.apache.commons</groupId>
-        	<artifactId>commons-lang3</artifactId>
-        	<version>3.1</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
         </dependency>
     </dependencies>
 </project>
