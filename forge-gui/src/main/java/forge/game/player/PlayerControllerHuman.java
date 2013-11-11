@@ -11,6 +11,9 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
+import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang.math.IntRange;
 import org.apache.commons.lang3.StringUtils;
@@ -136,6 +139,11 @@ public class PlayerControllerHuman extends PlayerController {
         	}
         }
         if (hasEnabled) { //only show menu if at least one ability can be played
+        	SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first ability selected by default
+        		public void run() {
+        			MenuSelectionManager.defaultManager().setSelectedPath(new MenuElement[]{menu, menu.getSubElements()[0]});
+                }
+            });
         	menu.show(triggerEvent.getComponent(), triggerEvent.getX(), triggerEvent.getY());
         }
         
