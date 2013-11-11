@@ -1,6 +1,5 @@
 package forge.gui.menus;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,12 +15,10 @@ import javax.swing.event.PopupMenuListener;
 
 import forge.Singletons;
 import forge.control.RestartUtil;
+import forge.gui.GuiUtils;
 import forge.util.TypeUtil;
 
 public final class ForgeMenu {
-    private static final int minItemWidth = 100;
-    private static final int itemHeight = 25;
-
     private JPopupMenu popupMenu;
     private IMenuProvider provider;
     private static HashMap<KeyStroke, JMenuItem> activeShortcuts = new HashMap<KeyStroke, JMenuItem>();
@@ -98,8 +95,8 @@ public final class ForgeMenu {
     private void setupItem(JMenuItem item) {
         if (item == null) { return; }
 
-        item.setPreferredSize(new Dimension(Math.max(item.getPreferredSize().width, minItemWidth), itemHeight));
-        
+        GuiUtils.setMenuItemSize(item);
+
         KeyStroke shortcut = item.getAccelerator();
         if (shortcut != null) {
             activeShortcuts.put(shortcut, item);

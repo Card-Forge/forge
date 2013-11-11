@@ -17,6 +17,7 @@
  */
 package forge.gui;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
@@ -100,6 +101,13 @@ public final class GuiUtils {
         }
     }
 
+    private static final int minItemWidth = 100;
+    private static final int itemHeight = 25;
+
+    public static void setMenuItemSize(JMenuItem item) {
+        item.setPreferredSize(new Dimension(Math.max(item.getPreferredSize().width, minItemWidth), itemHeight));
+    }
+
     public static JMenuItem createMenuItem(String label, KeyStroke accelerator, final Runnable onClick, boolean enabled, boolean bold) {
         JMenuItem item = new JMenuItem(label);
         item.addActionListener(new ActionListener() {
@@ -115,9 +123,10 @@ public final class GuiUtils {
         if (bold) {
             item.setFont(item.getFont().deriveFont(Font.BOLD));
         }
+        setMenuItemSize(item);
         return item;
     }
-    
+
     public static void addMenuItem(JPopupMenu parent, String label, KeyStroke accelerator, Runnable onClick) {
         parent.add(createMenuItem(label, accelerator, onClick, true, false));
     }

@@ -8,6 +8,12 @@ Forge Beta: 11-##-2013 ver 1.5.5
 Release Notes
 -------------
 
+- Select abilities using context menu -
+Instead of displaying a dialog to select abilities, you'll now get a context menu when left or right clicking cards with multiple ability choices
+Each ability will have a keyboard shortcut of 1-9 based on order
+Unplayable activated abilities will still appear disabled so shortcuts are constant regardless of game state
+
+
 - Commander 2013 cards -
 Forge now includes many of the new Commander 2013 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
