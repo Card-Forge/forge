@@ -471,7 +471,6 @@ forge-gui/res/cardsfolder/a/arbalest_elite.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arbiter_of_knollridge.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arbor_colossus.txt -text
 forge-gui/res/cardsfolder/a/arbor_elf.txt svneol=native#text/plain
-forge-gui/res/cardsfolder/a/arboria.txt -text
 forge-gui/res/cardsfolder/a/arc_blade.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arc_lightning.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/arc_mage.txt svneol=native#text/plain

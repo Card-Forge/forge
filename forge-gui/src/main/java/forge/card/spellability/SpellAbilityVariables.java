@@ -86,6 +86,8 @@ public class SpellAbilityVariables {
         this.lifeTotal = sav.getLifeTotal();
         this.lifeAmount = sav.getLifeAmount();
         this.manaSpent = sav.getManaSpent();
+        this.targetValidTargeting = sav.getTargetValidTargeting();
+        this.targetsSingleTarget = sav.targetsSingleTarget();
         this.pwAbility = sav.isPwAbility();
     }
 
@@ -197,7 +199,12 @@ public class SpellAbilityVariables {
 
     /** The chosen colors string. */
     private String chosenColors = null;
+    
+    /** The target valid targeting */
+    private String targetValidTargeting = null;
 
+    /** The b targetsSingleTargeting */
+    private boolean targetsSingleTarget = false;
 
     /**
      * <p>
@@ -1030,6 +1037,34 @@ public class SpellAbilityVariables {
      */
     public final String getColorToCheck() {
         return this.chosenColors;
+    }
+
+	/**
+	 * @return the targetValidTargeting
+	 */
+	public String getTargetValidTargeting() {
+		return targetValidTargeting;
+	}
+
+	/**
+	 * @param targetValidTargeting the targetValidTargeting to set
+	 */
+	public void setTargetValidTargeting(String targetValidTargeting) {
+		this.targetValidTargeting = targetValidTargeting;
+	}
+	
+    /**
+     * @return the targetsSingleTarget
+     */
+	public boolean targetsSingleTarget() {
+		return targetsSingleTarget;
+	}
+    
+    /**
+     * @param b the targetsSingleTarget to set
+     */
+    public void setTargetsSingleTarget(boolean b) {
+        this.targetsSingleTarget = b;
     }
 
 } // end class SpellAbilityVariables

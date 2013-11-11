@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardLists;
+import forge.GameObject;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -163,6 +164,12 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (params.containsKey("ConditionSVarCompare")) {
             this.setSvarOperator(params.get("ConditionSVarCompare").substring(0, 2));
             this.setSvarOperand(params.get("ConditionSVarCompare").substring(2));
+        }
+        if (params.containsKey("ConditionTargetValidTargeting")) {
+            this.setTargetValidTargeting(params.get("ConditionTargetValidTargeting"));
+        }
+        if (params.containsKey("ConditionTargetsSingleTarget")) {
+            this.setTargetsSingleTarget(true);
         }
 
     } // setConditions
@@ -307,6 +314,34 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
 
             if (!Expressions.compare(life, this.getLifeAmount(), right)) {
+                return false;
+            }
+        }
+        if (this.getTargetValidTargeting() != null) {
+            final TargetChoices matchTgt = sa.getTargets();
+            if (matchTgt == null || matchTgt.getFirstTargetedSpell() == null
+            		|| matchTgt.getFirstTargetedSpell().getTargets() == null) {
+                return false;
+            }
+
+            boolean result = false;
+    
+            for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets().getTargets()) {
+                if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), sa.getSourceCard())) {
+                    result = true;
+                    break;
+                }
+            }
+    
+            if (!result) {
+                return false;
+            }
+        }
+        if (this.targetsSingleTarget()) {
+            final TargetChoices matchTgt = sa.getTargets();
+            if (matchTgt == null || matchTgt.getFirstTargetedSpell() == null
+            		|| matchTgt.getFirstTargetedSpell().getTargets() == null
+            		|| matchTgt.getFirstTargetedSpell().getTargets().getNumTargeted() != 1) {
                 return false;
             }
         }
