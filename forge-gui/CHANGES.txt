@@ -9,10 +9,10 @@ Release Notes
 -------------
 
 - Select abilities using context menu -
-Instead of displaying a dialog to select abilities, you'll now get a context menu when left or right clicking cards with multiple ability choices
-Each ability will have a keyboard shortcut of 1-9 based on order
-Unplayable activated abilities will still appear disabled so shortcuts are constant regardless of game state
-Menu will appear even if only one non-mana activated ability is available to avoid accidentally activating an ability that can't be cancelled or undone
+Instead of displaying a dialog to select abilities, you'll now get a context menu when left or right clicking cards with multiple ability choices.
+Each ability will have a keyboard shortcut of 1-9 based on order.
+Unplayable activated abilities will still appear disabled so shortcuts are constant regardless of game state.
+Menu will appear even if only one non-mana activated ability is available to avoid accidentally activating an ability that can't be cancelled or undone.
 
 
 - Commander 2013 cards -
@@ -31,6 +31,9 @@ Rebound
 Keldon Twilight
 Reflecting Mirror
 Quicksilver Dragon
+Premature Burial
+Sacred Ground
+Invasion Plans
 
 
 -----------
