@@ -5725,6 +5725,7 @@ forge-gui/res/cardsfolder/i/intruder_alarm.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/intuition.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/inundate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/i/invader_parasite.txt -text
+forge-gui/res/cardsfolder/i/invasion_plans.txt -text
 forge-gui/res/cardsfolder/i/invert_the_skies.txt -text
 forge-gui/res/cardsfolder/i/invigorate.txt -text
 forge-gui/res/cardsfolder/i/invigorating_boon.txt svneol=native#text/plain

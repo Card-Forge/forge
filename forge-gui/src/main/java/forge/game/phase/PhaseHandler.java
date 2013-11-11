@@ -43,6 +43,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameAge;
 import forge.game.Game;
 import forge.game.GameType;
+import forge.game.GlobalRuleChange;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventAttackersDeclared;
@@ -555,6 +556,9 @@ public class PhaseHandler implements java.io.Serializable {
             p = game.getNextPlayerAfter(p);
             // Apply Odric's effect here
             Player whoDeclaresBlockers = playerDeclaresBlockers == null || playerDeclaresBlockers.hasLost() ? p : playerDeclaresBlockers;
+            if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.attackerChoosesBlockers)) {
+            	whoDeclaresBlockers = combat.getAttackingPlayer();
+            }
             if ( combat.isPlayerAttacked(p) ) {
                 whoDeclaresBlockers.getController().declareBlockers(p, combat);
             } else
