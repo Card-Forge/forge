@@ -105,9 +105,12 @@ public class PlayerControllerHuman extends PlayerController {
             return null;
         }
         if (abilities.size() == 1 && !abilities.get(0).promptIfOnlyPossibleAbility()) {
-            return abilities.get(0);
+        	if (abilities.get(0).canPlay()) {
+        		return abilities.get(0); //only return ability if it's playable, otherwise return null
+        	}
+        	return null;
         }
-        
+
         //show menu if mouse was trigger for ability
         final JPopupMenu menu = new JPopupMenu("Abilities");
         
@@ -120,7 +123,7 @@ public class PlayerControllerHuman extends PlayerController {
         				public void run() {
         			        CMessage.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
         				}
-        			}, ab.getActivatingPlayer() == null || ab.canPlay()); //check getActivatingPlayer() to account for playing lands
+        			}, ab.canPlay());
         	shortcut++;
         	if (shortcut > KeyEvent.VK_9) {
         		shortcut = 0; //stop adding shortcuts after 9

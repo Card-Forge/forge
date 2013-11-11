@@ -80,9 +80,12 @@ public abstract class Ability extends SpellAbility {
     }
     
     public static final Ability PLAY_LAND_SURROGATE = new Ability(null, (Cost)null){
+    	@Override
+        public boolean canPlay() {
+    		return true; //if this ability is added anywhere, it can be assummed that land can be played
+        }
         @Override
         public void resolve() {
-            // TODO Auto-generated method stub
             throw new RuntimeException("This ability is intended to indicate \"land to play\" choice only");
         }
         @Override
