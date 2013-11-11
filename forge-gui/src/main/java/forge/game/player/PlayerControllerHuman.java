@@ -113,9 +113,15 @@ public class PlayerControllerHuman extends PlayerController {
 
         //show menu if mouse was trigger for ability
         final JPopupMenu menu = new JPopupMenu("Abilities");
-        
+
+        boolean enabled;
+        boolean hasEnabled = false;
         int shortcut = KeyEvent.VK_1; //use number keys as shortcuts for abilities 1-9
         for (final SpellAbility ab : abilities) {
+        	enabled = ab.canPlay();
+        	if (enabled) {
+        		hasEnabled = true;
+        	}
         	GuiUtils.addMenuItem(menu, ab.toString(),
         			shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
                     new Runnable() {
@@ -123,13 +129,15 @@ public class PlayerControllerHuman extends PlayerController {
         				public void run() {
         			        CMessage.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
         				}
-        			}, ab.canPlay());
+        			}, enabled);
         	shortcut++;
         	if (shortcut > KeyEvent.VK_9) {
         		shortcut = 0; //stop adding shortcuts after 9
         	}
         }
-        menu.show(triggerEvent.getComponent(), triggerEvent.getX(), triggerEvent.getY());
+        if (hasEnabled) { //only show menu if at least one ability can be played
+        	menu.show(triggerEvent.getComponent(), triggerEvent.getX(), triggerEvent.getY());
+        }
         
     	return null; //delay ability until choice made
     }
