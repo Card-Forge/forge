@@ -2,8 +2,9 @@
 /*.iml
 /*.tmp
 /.metadata
-forge-ai/target
-forge-core/target
+forge-ai/forge-ai.iml
+forge-core/forge-core.iml
+forge-gui/forge-gui.iml
 forge-gui/res/*.log
 forge-gui/res/PerSetTrackingResults
 forge-gui/res/cardsfolder/*.bat
