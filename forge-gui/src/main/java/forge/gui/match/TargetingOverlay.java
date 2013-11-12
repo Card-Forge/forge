@@ -109,12 +109,17 @@ public enum TargetingOverlay {
         // Locations of arc endpoint, per card, with ID as primary key.
         final Map<Integer, Point> endpoints = new HashMap<Integer, Point>();
 
+        Point cardLocOnScreen;
+        Point locOnScreen = this.getPanel().getLocationOnScreen();
+
         for (CardPanel c : cardPanels) {
-            if (!c.isShowing()) { continue; }
-            endpoints.put(c.getCard().getUniqueNumber(), new Point(
-                (int) (c.getParent().getLocationOnScreen().getX() + c.getCardLocation().getX() /* - docOffsets.getX() */ + c.getWidth() / 4),
-                (int) (c.getParent().getLocationOnScreen().getY() + c.getCardLocation().getY() /* - docOffsets.getY() */ + c.getHeight() / 4)
-            ));
+            if (c.isShowing()) {
+	            cardLocOnScreen = c.getCardLocationOnScreen();
+	            endpoints.put(c.getCard().getUniqueNumber(), new Point(
+	                (int) (cardLocOnScreen.getX() - locOnScreen.getX() + c.getWidth() / 4),
+	                (int) (cardLocOnScreen.getY() - locOnScreen.getY() + c.getHeight() / 4)
+	            ));
+            }
         }
 
         List<Card> temp = new ArrayList<Card>();

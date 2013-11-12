@@ -595,6 +595,20 @@ public class CardPanel extends JPanel implements CardContainer {
         p.y += this.cardYOffset;
         return p;
     }
+    
+    /**
+     * <p>
+     * getCardLocationOnScreen.
+     * </p>
+     * 
+     * @return a {@link java.awt.Point} object.
+     */
+    public final Point getCardLocationOnScreen() {
+        final Point p = this.getLocationOnScreen();
+        p.x += this.cardXOffset;
+        p.y += this.cardYOffset;
+        return p;
+    }
 
     /**
      * <p>
