@@ -32,8 +32,10 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -58,6 +60,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.gui.GuiUtils;
 import forge.properties.ForgePreferences;
+import forge.properties.NewConstants;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
 
@@ -965,6 +968,24 @@ public enum FSkin {
             return scaledImage;
         }
 
+        public boolean save(String path, int w, int h) {
+        	final BufferedImage resizedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+            final Graphics2D g2d = resizedImage.createGraphics();
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2d.drawImage(this.image, 0, 0, w, h, 0, 0, this.getWidth(), this.getHeight(), null);
+            g2d.dispose();
+
+            File outputfile = new File(path);
+            try {
+				ImageIO.write(resizedImage, "png", outputfile);
+				return true;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+            return false;
+        }
+
         public SkinImage scale(double scale) {
             return scale(scale, scale);
         }
@@ -1626,6 +1647,32 @@ public enum FSkin {
         }
     }
 
+    private final static Map<String, String> encodingSymbolLookup = new LinkedHashMap<String, String>(); //must be LinkedHashMap so iteration order is same as add order
+    
+    private static void addEncodingSymbol(String key, SkinProp skinProp) {
+    	String path = NewConstants.CACHE_SYMBOLS_DIR + "/" + key.replace('/', '_') + ".png";
+    	if (!getImage(skinProp).save(path, 13, 13)) { return; }
+
+    	try {
+			encodingSymbolLookup.put(key, new File(path).toURI().toURL().toString()); //cache image url as string
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+    }
+
+    public static String encodeSymbols(String in) {
+    	String out = in;
+    	for (Entry<String, String> e : encodingSymbolLookup.entrySet()) {
+    		//replace symbol if followed by space, comma, semi-colon, or if it ends line
+    		out = out.replaceAll("(?<![^ \r\n])" + e.getKey() + "(?![^ ,:\r\n])", "<img src='" + e.getValue() + "'>");
+    	}
+    	if (!out.equals(in)) {
+    		out = out.replaceAll("'> +<img", "'><img"); //remove space between consecutive symbols
+    		out = "<html>" + out + "</html>"; //need to wrap in HTML tags to ensure text rendered as HTML so symbols appear
+    	}
+    	return out;
+    }
+
     private static final String
     FILE_SKINS_DIR = "res/skins/",
     FILE_ICON_SPRITE = "sprite_icons.png",
@@ -1835,6 +1882,52 @@ public enum FSkin {
         FSkin.bimPreferredSprite = null;
         FSkin.bimDefaultAvatars = null;
         FSkin.bimPreferredAvatars = null;
+        
+        //establish encoding symbols
+        File dir = new File(NewConstants.CACHE_SYMBOLS_DIR);
+        if (!dir.mkdir()) { //ensure symbols directory exists and is empty
+        	for (File file : dir.listFiles()) {
+        		file.delete();
+        	}
+        }
+        encodingSymbolLookup.clear();
+
+        addEncodingSymbol("W/U", ManaImages.IMG_WHITE_BLUE);
+        addEncodingSymbol("U/B", ManaImages.IMG_BLUE_BLACK);
+        addEncodingSymbol("B/R", ManaImages.IMG_BLACK_RED);
+        addEncodingSymbol("R/G", ManaImages.IMG_RED_GREEN);
+        addEncodingSymbol("G/W", ManaImages.IMG_GREEN_WHITE);
+        addEncodingSymbol("W/B", ManaImages.IMG_WHITE_BLACK);
+        addEncodingSymbol("U/R", ManaImages.IMG_BLUE_RED);
+        addEncodingSymbol("B/G", ManaImages.IMG_BLACK_GREEN);
+        addEncodingSymbol("R/W", ManaImages.IMG_RED_WHITE);
+        addEncodingSymbol("G/U", ManaImages.IMG_GREEN_BLUE);
+        addEncodingSymbol("2/W", ManaImages.IMG_2W);
+        addEncodingSymbol("2/U", ManaImages.IMG_2U);
+        addEncodingSymbol("2/B", ManaImages.IMG_2B);
+        addEncodingSymbol("2/R", ManaImages.IMG_2R);
+        addEncodingSymbol("2/G", ManaImages.IMG_2G);
+        addEncodingSymbol("W/P", ManaImages.IMG_PHRYX_WHITE);
+        addEncodingSymbol("U/P", ManaImages.IMG_PHRYX_BLUE);
+        addEncodingSymbol("B/P", ManaImages.IMG_PHRYX_BLACK);
+        addEncodingSymbol("R/P", ManaImages.IMG_PHRYX_RED);
+        addEncodingSymbol("G/P", ManaImages.IMG_PHRYX_GREEN);
+        addEncodingSymbol("W", ManaImages.IMG_WHITE); //NOTE: single character symbols must come after multi-character symbols to ensure the correct symbol is used
+        addEncodingSymbol("U", ManaImages.IMG_BLUE);
+        addEncodingSymbol("B", ManaImages.IMG_BLACK);
+        addEncodingSymbol("R", ManaImages.IMG_RED);
+        addEncodingSymbol("G", ManaImages.IMG_GREEN);
+        for (int i = 0; i <= 20; i++) {
+        	try {
+        		addEncodingSymbol(String.valueOf(i), ColorlessManaImages.valueOf("IMG_" + i));
+        	}
+        	catch (Exception e) {} //ignore exception from non-existant mana image
+        }
+        addEncodingSymbol("X", ColorlessManaImages.IMG_X);
+        addEncodingSymbol("Y", ColorlessManaImages.IMG_Y);
+        addEncodingSymbol("Z", ColorlessManaImages.IMG_Z);
+        addEncodingSymbol("Tap", GameplayImages.IMG_TAP);
+        addEncodingSymbol("Untap", GameplayImages.IMG_UNTAP);
 
         // Set look and feel after skin loaded
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Setting look and feel...");

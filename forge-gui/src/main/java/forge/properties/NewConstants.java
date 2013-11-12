@@ -96,6 +96,7 @@ public final class NewConstants {
     public static final String DB_DIR                        = CACHE_DIR + "db/";
     public static final String CACHE_TOKEN_PICS_DIR          = _PICS_DIR + "tokens/";
     public static final String CACHE_ICON_PICS_DIR           = _PICS_DIR + "icons/";
+    public static final String CACHE_SYMBOLS_DIR             = _PICS_DIR + "symbols/";
     public static final String CACHE_BOOSTER_PICS_DIR        = _PICS_DIR + "boosters/";
     public static final String CACHE_FATPACK_PICS_DIR        = _PICS_DIR + "fatpacks/";
     public static final String CACHE_PRECON_PICS_DIR         = _PICS_DIR + "precons/";

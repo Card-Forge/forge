@@ -15398,6 +15398,7 @@ forge-gui/src/main/java/forge/gui/toolbox/FComboBox.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FComboBoxPanel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FComboBoxWrapper.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FDigitalClock.java -text
+forge-gui/src/main/java/forge/gui/toolbox/FHtmlViewer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FLabel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FList.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FMouseAdapter.java -text

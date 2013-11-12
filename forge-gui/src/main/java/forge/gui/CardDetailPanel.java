@@ -28,7 +28,6 @@ import java.util.Iterator;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
@@ -52,7 +51,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FTextArea;
+import forge.gui.toolbox.FHtmlViewer;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
 import forge.item.OpenablePack;
@@ -76,7 +75,7 @@ public class CardDetailPanel extends FPanel {
     private final FLabel powerToughnessLabel;
     private final FLabel idLabel;
     private final JLabel setInfoLabel;
-    private final FTextArea cdArea;
+    private final FHtmlViewer cdArea;
     private final FScrollPane scrArea;
 
     public CardDetailPanel(final Card card) {
@@ -133,7 +132,7 @@ public class CardDetailPanel extends FPanel {
         this.setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         //4, 12
-        this.cdArea = new FTextArea();
+        this.cdArea = new FHtmlViewer();
         this.cdArea.setFont(new java.awt.Font("Dialog", 0, 14));
         this.cdArea.setBorder(new EmptyBorder(4, 4, 4, 4));
         this.cdArea.setOpaque(false);
@@ -230,7 +229,7 @@ public class CardDetailPanel extends FPanel {
                 if ( card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
                     manaCost = card.getRules().getMainPart().getManaCost().toString() + " // " + card.getRules().getOtherPart().getManaCost().toString();
                 }
-                this.nameCostLabel.setText(card.getName() + " - " + manaCost);
+                this.nameCostLabel.setText(FSkin.encodeSymbols(card.getName() + " - " + manaCost));
             }
             this.typeLabel.setText(formatCardType(card));
             
@@ -601,7 +600,7 @@ public class CardDetailPanel extends FPanel {
             String mustBlockThese = Lang.joinHomogenous(card.getMustBlockCards());
             area.append("Must block " + mustBlockThese);
         }
-        return area.toString();
+        return FSkin.encodeSymbols(area.toString());
     }
 
     /** @return JLabel */
@@ -625,7 +624,7 @@ public class CardDetailPanel extends FPanel {
     }
 
     /** @return JLabel */
-    public JTextArea getCDArea() {
+    public FHtmlViewer getCDArea() {
         return this.cdArea;
     }
 

@@ -60,6 +60,7 @@ import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
+import forge.gui.toolbox.FSkin;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
@@ -125,7 +126,7 @@ public class PlayerControllerHuman extends PlayerController {
         	if (enabled) {
         		hasEnabled = true;
         	}
-        	GuiUtils.addMenuItem(menu, ab.toString(),
+        	GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(ab.toString()),
         			shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
                     new Runnable() {
         				@Override
