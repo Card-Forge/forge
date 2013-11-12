@@ -133,9 +133,11 @@ public class PlayerControllerHuman extends PlayerController {
         			        CMessage.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
         				}
         			}, enabled);
-        	shortcut++;
-        	if (shortcut > KeyEvent.VK_9) {
-        		shortcut = 0; //stop adding shortcuts after 9
+        	if (shortcut > 0) {
+	        	shortcut++;
+	        	if (shortcut > KeyEvent.VK_9) {
+	        		shortcut = 0; //stop adding shortcuts after 9
+	        	}
         	}
         }
         if (hasEnabled) { //only show menu if at least one ability can be played
