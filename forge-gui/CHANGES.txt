@@ -15,6 +15,10 @@ Unplayable activated abilities will still appear disabled so shortcuts are const
 Menu will appear even if only one non-mana activated ability is available to avoid accidentally activating an ability that can't be cancelled or undone.
 
 
+- Mana symbols shown in Card Detail and ability menu -
+The Card Detail pane now shows mana symbols in place of WUBRG and other appropriate text characters
+Same for ability context menu described above
+
 - Commander 2013 cards -
 Forge now includes many of the new Commander 2013 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
