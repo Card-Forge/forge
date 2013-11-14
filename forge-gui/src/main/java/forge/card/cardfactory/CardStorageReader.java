@@ -378,7 +378,7 @@ public class CardStorageReader {
     public static void parseAllCards(String[] args) {
     	if (args.length < 2) { return; }
 
-    	final int[] updatedCounts = new int[args.length - 1];
+    	final int[] counts = new int[args.length];
     	final List<File> allFiles = new ArrayList<File>();
     	final CardRulesReader rulesReader = new CardRulesReader();
     	final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, false, null);
@@ -395,24 +395,26 @@ public class CardStorageReader {
 	            System.out.println();
 	            System.out.print(rules.getName());
 	            
+	            counts[0]++;
 	            for (int i = 1; i < args.length; i++) {
 	            	switch (args[i]) {
 	            	case "updateAbilityManaSymbols":
 	            		if (updateAbilityManaSymbols(rules, lines, file)) {
-	            			updatedCounts[i - 1]++;
+	            			counts[i]++;
 	            		}
 	            		break;
 	            	}
 	            }
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+			} catch (FileNotFoundException ex) {
 			}
         }
 
-    	for (int i = 1; i < args.length; i++) {
-    		int count = updatedCounts[i - 1];
+		System.out.println();
+
+    	for (int i = 0; i < args.length; i++) {
+    		int count = counts[i];
     		System.out.println();
-            System.out.print(args[i] + " - " + count + "card" + (count != 1 ? "s" : ""));
+            System.out.print(args[i] + " - " + count + " card" + (count != 1 ? "s" : ""));
         }
     }
     
@@ -427,17 +429,23 @@ public class CardStorageReader {
         	}
         	s = s.trim();
         	if (s.isEmpty()) { continue; }
-        	String pattern = s.replaceAll("\\{([WUBRGSXYZ]|[0-9]+)\\}", "$1[ ]\\?").replaceAll("\\{C\\}", "Chaos");
-        	if (pattern.length() != s.length()) {
-        		pattern = "Description\\$(.*)" + pattern;
-        		s = "Description\\$$1" + s;
-        		for (int i = 0; i < lines.size(); i++) {
-        			String newLine = lines.get(i).replaceAll(pattern, s);
-        			if (newLine.length() != lines.get(i).length()) {
-        				updated = true;
-            			lines.set(i, newLine);
-        			}
-        		}
+        	try {
+	        	String pattern = s.replaceAll("\\{([WUBRGSXYZ]|[0-9]+)\\}", "$1[ ]\\?").replaceAll("\\{C\\}", "Chaos");
+	        	if (pattern.length() != s.length()) {
+	        		pattern = "Description\\$(.*)" + pattern;
+	        		s = "Description\\$$1" + s;
+	        		for (int i = 0; i < lines.size(); i++) {
+	        			String newLine = lines.get(i).replaceAll(pattern, s);
+	        			if (newLine.length() != lines.get(i).length()) {
+	        				updated = true;
+	            			lines.set(i, newLine);
+	        			}
+	        		}
+	        	}
+        	}
+        	catch (Exception ex) {
+	            System.out.print(" - Exception: " + ex.getMessage());
+	            return false;
         	}
         }
 		if (updated) {
