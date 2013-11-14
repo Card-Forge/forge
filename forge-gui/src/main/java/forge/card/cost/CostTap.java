@@ -50,7 +50,7 @@ public class CostTap extends CostPart {
      */
     @Override
     public final String toString() {
-        return "Tap";
+        return "{T}";
     }
 
     /*

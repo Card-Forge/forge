@@ -50,7 +50,7 @@ public class CostUntap extends CostPart {
      */
     @Override
     public final String toString() {
-        return "Untap";
+        return "{Q}";
     }
 
     /*

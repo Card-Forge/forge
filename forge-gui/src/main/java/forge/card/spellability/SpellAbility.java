@@ -824,7 +824,6 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-
         if (this.isSuppressed()) {
             return "";
         }
@@ -849,7 +848,6 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
 
             sb.append(node.getDescription().replace("CARDNAME", node.getSourceCard().getName()));
             node = node.getSubAbility();
-
         }
         return sb.toString();
     }

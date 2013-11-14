@@ -97,21 +97,14 @@ public final class ManaCost implements Comparable<ManaCost> {
             return "no cost";
         }
         if (this.shards.isEmpty()) {
-            return Integer.toString(this.genericCost);
+            return "{" + this.genericCost + "}";
         }
 
         final StringBuilder sb = new StringBuilder();
-        boolean isFirst = true;
         if (this.genericCost > 0) {
-            sb.append(this.genericCost);
-            isFirst = false;
+            sb.append("{" + this.genericCost + "}");
         }
         for (final ManaCostShard s : this.shards) {
-            if (!isFirst) {
-                sb.append(' ');
-            } else {
-                isFirst = false;
-            }
             sb.append(s.toString());
         }
         return sb.toString();

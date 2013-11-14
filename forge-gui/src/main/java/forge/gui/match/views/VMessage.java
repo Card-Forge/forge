@@ -24,7 +24,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.text.DefaultCaret;
 
@@ -36,6 +35,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.FHtmlViewer;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JTextComponentSkin;
@@ -57,7 +57,7 @@ public enum VMessage implements IVDoc<CMessage> {
     // Various components
     private final JButton btnOK = new FButton("OK");
     private final JButton btnCancel = new FButton("Cancel");
-    private final JTextArea tarMessage = new JTextArea();
+    private final FHtmlViewer tarMessage = new FHtmlViewer();
     private final JLabel lblGames;
 
     //========= Constructor
@@ -70,12 +70,7 @@ public enum VMessage implements IVDoc<CMessage> {
         .opaque()
         .build();
 
-        JTextComponentSkin<JTextArea> tarMessageSkin = FSkin.get(tarMessage);
-        tarMessage.setOpaque(false);
-        tarMessage.setFocusable(false);
-        tarMessage.setEditable(false);
-        tarMessage.setLineWrap(true);
-        tarMessage.setWrapStyleWord(true);
+        JTextComponentSkin<FHtmlViewer> tarMessageSkin = FSkin.get(tarMessage);
         tarMessageSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarMessageSkin.setFont(FSkin.getFont(14));
         tarMessage.setMargin(new Insets(5, 5, 5, 5));
@@ -168,7 +163,7 @@ public enum VMessage implements IVDoc<CMessage> {
     }
 
     /** @return {@link javax.swing.JTextArea} */
-    public JTextArea getTarMessage() {
+    public FHtmlViewer getTarMessage() {
         return this.tarMessage;
     }
 

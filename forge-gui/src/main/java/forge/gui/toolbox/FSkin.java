@@ -35,7 +35,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -1647,30 +1646,25 @@ public enum FSkin {
         }
     }
 
-    private final static Map<String, String> encodingSymbolLookup = new LinkedHashMap<String, String>(); //must be LinkedHashMap so iteration order is same as add order
-    
     private static void addEncodingSymbol(String key, SkinProp skinProp) {
-    	String path = NewConstants.CACHE_SYMBOLS_DIR + "/" + key.replace('/', '_') + ".png";
-    	if (!getImage(skinProp).save(path, 13, 13)) { return; }
-
-    	try {
-			encodingSymbolLookup.put(key, new File(path).toURI().toURL().toString()); //cache image url as string
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+    	String path = NewConstants.CACHE_SYMBOLS_DIR + "/" + key.replace("/", "") + ".png";
+    	getImage(skinProp).save(path, 13, 13);
     }
 
-    public static String encodeSymbols(String in) {
-    	String out = in;
-    	for (Entry<String, String> e : encodingSymbolLookup.entrySet()) {
-    		//replace symbol if followed by space, comma, semi-colon, or if it ends line
-    		out = out.replaceAll("(?<![^ \r\n])" + e.getKey() + "(?![^ ,:\r\n])", "<img src='" + e.getValue() + "'>");
+    public static String encodeSymbols(String str) {
+    	String pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
+    	String replacement;
+		try {
+			replacement = "<img src='" + new File(NewConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "'>";
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return str;
+		}
+    	String encodedStr = str.replaceAll(pattern, replacement);
+    	if (encodedStr.length() != str.length()) {
+    		encodedStr = "<html>" + encodedStr + "</html>"; //need to wrap in HTML tags to ensure text rendered as HTML so symbols appear
     	}
-    	if (!out.equals(in)) {
-    		out = out.replaceAll("'> +<img", "'><img"); //remove space between consecutive symbols
-    		out = "<html>" + out + "</html>"; //need to wrap in HTML tags to ensure text rendered as HTML so symbols appear
-    	}
-    	return out;
+    	return encodedStr;
     }
 
     private static final String
@@ -1890,8 +1884,12 @@ public enum FSkin {
         		file.delete();
         	}
         }
-        encodingSymbolLookup.clear();
 
+        addEncodingSymbol("W", ManaImages.IMG_WHITE);
+        addEncodingSymbol("U", ManaImages.IMG_BLUE);
+        addEncodingSymbol("B", ManaImages.IMG_BLACK);
+        addEncodingSymbol("R", ManaImages.IMG_RED);
+        addEncodingSymbol("G", ManaImages.IMG_GREEN);
         addEncodingSymbol("W/U", ManaImages.IMG_WHITE_BLUE);
         addEncodingSymbol("U/B", ManaImages.IMG_BLUE_BLACK);
         addEncodingSymbol("B/R", ManaImages.IMG_BLACK_RED);
@@ -1912,11 +1910,6 @@ public enum FSkin {
         addEncodingSymbol("B/P", ManaImages.IMG_PHRYX_BLACK);
         addEncodingSymbol("R/P", ManaImages.IMG_PHRYX_RED);
         addEncodingSymbol("G/P", ManaImages.IMG_PHRYX_GREEN);
-        addEncodingSymbol("W", ManaImages.IMG_WHITE); //NOTE: single character symbols must come after multi-character symbols to ensure the correct symbol is used
-        addEncodingSymbol("U", ManaImages.IMG_BLUE);
-        addEncodingSymbol("B", ManaImages.IMG_BLACK);
-        addEncodingSymbol("R", ManaImages.IMG_RED);
-        addEncodingSymbol("G", ManaImages.IMG_GREEN);
         for (int i = 0; i <= 20; i++) {
         	try {
         		addEncodingSymbol(String.valueOf(i), ColorlessManaImages.valueOf("IMG_" + i));
@@ -1926,8 +1919,9 @@ public enum FSkin {
         addEncodingSymbol("X", ColorlessManaImages.IMG_X);
         addEncodingSymbol("Y", ColorlessManaImages.IMG_Y);
         addEncodingSymbol("Z", ColorlessManaImages.IMG_Z);
-        addEncodingSymbol("Tap", GameplayImages.IMG_TAP);
-        addEncodingSymbol("Untap", GameplayImages.IMG_UNTAP);
+        addEncodingSymbol("Q", GameplayImages.IMG_UNTAP);
+        addEncodingSymbol("S", GameplayImages.IMG_SNOW);
+        addEncodingSymbol("T", GameplayImages.IMG_TAP);
 
         // Set look and feel after skin loaded
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Setting look and feel...");

@@ -64,7 +64,7 @@ public class CostAddMana extends CostPart {
      * @return a String
      */
     private String convertManaAmountType(Integer i, String type) {
-        return StringUtils.repeat(" " + type, i).trim();
+        return StringUtils.repeat("{" + type + "}", i);
     }
 
     /*

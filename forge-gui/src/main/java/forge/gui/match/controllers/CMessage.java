@@ -34,6 +34,7 @@ import forge.gui.InputProxy;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.views.VMessage;
+import forge.gui.toolbox.FSkin;
 
 /**
  * Controls the message panel in the match UI.
@@ -96,7 +97,7 @@ public enum CMessage implements ICDoc {
 
     /** @param s0 &emsp; {@link java.lang.String} */
     public void setMessage(String s0) {
-        view.getTarMessage().setText(s0);
+        view.getTarMessage().setText(FSkin.encodeSymbols(s0));
     }
 
     /** Flashes animation on input panel if play is currently waiting on input. */

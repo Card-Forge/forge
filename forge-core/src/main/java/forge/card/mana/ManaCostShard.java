@@ -35,14 +35,14 @@ public enum ManaCostShard implements Comparable<ManaCostShard> {
     /* Hybrid */
     WU(ManaAtom.WHITE | ManaAtom.BLUE, "W/U", "WU"),
     WB(ManaAtom.WHITE | ManaAtom.BLACK, "W/B", "WB"),
-    WR(ManaAtom.WHITE | ManaAtom.RED, "W/R", "RW"),
-    WG(ManaAtom.WHITE | ManaAtom.GREEN, "W/G", "GW"),
     UB(ManaAtom.BLUE | ManaAtom.BLACK, "U/B", "UB"),
     UR(ManaAtom.BLUE | ManaAtom.RED, "U/R", "UR"),
-    UG(ManaAtom.BLUE | ManaAtom.GREEN, "U/G", "GU"),
     BR(ManaAtom.BLACK | ManaAtom.RED, "B/R", "BR"),
     BG(ManaAtom.BLACK | ManaAtom.GREEN, "B/G", "BG"),
+    RW(ManaAtom.RED | ManaAtom.WHITE, "R/W", "RW"),
     RG(ManaAtom.RED | ManaAtom.GREEN, "R/G", "RG"),
+    GW(ManaAtom.GREEN | ManaAtom.WHITE, "G/W", "GW"),
+    GU(ManaAtom.GREEN | ManaAtom.BLUE, "G/U", "GU"),
 
     /* Or 2 colorless */
     W2(ManaAtom.WHITE | ManaAtom.OR_2_COLORLESS, "2/W", "2W"),
@@ -102,7 +102,7 @@ public enum ManaCostShard implements Comparable<ManaCostShard> {
         this.shard = value;
         this.cmc = this.getCMC();
         this.cmpc = this.getCmpCost();
-        this.stringValue = sValue;
+        this.stringValue = "{" + sValue + "}";
         this.imageKey = imgKey;
     }
 

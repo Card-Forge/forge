@@ -424,13 +424,21 @@ public class ManaCostBeingPaid {
 
         if (addX) {
             for (int i = 0; i < this.getXcounter(); i++) {
-                sb.append("X").append(" ");
+                sb.append("{X}");
             }
         }
 
         int nGeneric = getColorlessManaAmount();
         if (nGeneric > 0) {
-            sb.append(nGeneric).append(" ");
+        	if (nGeneric <= 12 || nGeneric == 15 || nGeneric == 16 || nGeneric == 20) { //TODO: Update if new colorless mana symbols added
+                sb.append("{" + nGeneric + "}");
+        	}
+        	else { //if no mana symbol exists for colorless amount, use combination of symbols for each digit
+        		String genericStr = String.valueOf(nGeneric);
+        		for (int i = 0; i < genericStr.length(); i++) {
+        			sb.append("{" + genericStr.charAt(i) + "}");
+        		}
+        	}
         }
 
         for (Entry<ManaCostShard, Integer> s : unpaidShards.entrySet()) {
@@ -438,11 +446,11 @@ public class ManaCostBeingPaid {
                 continue;
             }
             for (int i = 0; i < s.getValue(); i++) {
-                sb.append(s.getKey().toString()).append(" ");
+                sb.append(s.getKey().toString());
             }
         }
 
-        final String str = sb.toString().trim();
+        final String str = sb.toString();
 
         if (str.equals("")) {
             return "0";
