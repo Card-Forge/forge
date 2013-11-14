@@ -3,7 +3,7 @@
 Name=Leprechaun 1
 Title=Leprechaun
 Difficulty=easy
-Description=WBG anti green deck with Aisling Leprechaun, Beast Within and Waiting in the Weeds
+Description=WBG anti green deck with Aisling Leprechaun, Seed the Land and Beast Within
 Icon=Leprechaun.jpg
 Deck Type=constructed
 [main]
@@ -20,9 +20,8 @@ Deck Type=constructed
 1 Vec Townships
 4 Aisling Leprechaun
 4 Beast Within
+3 Seed the Land
 1 Greener Pastures
-1 Seed the Land
-2 Waiting in the Weeds
 1 Disturbed Burial
 1 An-Havva Inn
 1 An-Havva Constable
