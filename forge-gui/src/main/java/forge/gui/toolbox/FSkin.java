@@ -1323,6 +1323,7 @@ public enum FSkin {
         IMG_SNOW            (new int[] {320, 160, 40, 40}), /** */
         IMG_TAP             (new int[] {660, 440, 20, 20}), /** */
         IMG_UNTAP           (new int[] {640, 460, 20, 20}), /** */
+        IMG_CHAOS           (new int[] {320, 400, 40, 40}), /** */
         IMG_SLASH           (new int[] {660, 400, 10, 13}), /** */
         IMG_ATTACK          (new int[] {160, 320, 80, 80, 32, 32}), /** */
         IMG_DEFEND          (new int[] {160, 400, 80, 80, 32, 32}), /** */
@@ -1919,6 +1920,7 @@ public enum FSkin {
         addEncodingSymbol("X", ColorlessManaImages.IMG_X);
         addEncodingSymbol("Y", ColorlessManaImages.IMG_Y);
         addEncodingSymbol("Z", ColorlessManaImages.IMG_Z);
+        addEncodingSymbol("C", GameplayImages.IMG_CHAOS);
         addEncodingSymbol("Q", GameplayImages.IMG_UNTAP);
         addEncodingSymbol("S", GameplayImages.IMG_SNOW);
         addEncodingSymbol("T", GameplayImages.IMG_TAP);

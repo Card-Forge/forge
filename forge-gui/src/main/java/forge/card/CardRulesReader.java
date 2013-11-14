@@ -173,7 +173,6 @@ public class CardRulesReader {
             case 'O':
                 if ("Oracle".equals(key)) {
                     this.faces[this.curFace].setOracleText(value);
-
                 }
                 break;
 
@@ -224,7 +223,6 @@ public class CardRulesReader {
                 }
                 break;
         }
-
     }
 
     /**
