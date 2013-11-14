@@ -1,7 +1,7 @@
 Name:Mana Seism
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 1 R | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBMana | SpellDescription$ Sacrifice any number of lands. Add 1 to your mana pool for each land sacrificed this way.
+A:SP$ Sacrifice | Cost$ 1 R | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBMana | SpellDescription$ Sacrifice any number of lands. Add {1} to your mana pool for each land sacrificed this way.
 SVar:DBMana:DB$ Mana | Produced$ 1 | Amount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Land.YouCtrl
