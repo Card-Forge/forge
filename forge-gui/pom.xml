@@ -437,7 +437,16 @@
                                         <mkdir dir="${project.build.directory}/res/cardsfolder" />
                                         <zip destfile="${project.build.directory}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/res/cardsfolder" level="1" />
                                         <taskdef name="bundleapp" classpathref="maven.runtime.classpath" classname="com.oracle.appbundler.AppBundlerTask" />
-                                        <bundleapp outputdirectory="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" displayname="${project.name}" shortversion="${project.version}" identifier="forge.view.Main" icon="${basedir}/${configSourceDirectory}/Forge.icns" applicationCategory="public.app-category.games" mainclassname="forge.view.Main">
+                                        <bundleapp
+                                            outputdirectory="${project.build.directory}/${project.build.finalName}-osx"
+                                            name="${project.name}"
+                                            displayname="${project.name}"
+                                            shortversion="${project.version}"
+                                            identifier="forge.view.Main"
+                                            icon="${basedir}/${configSourceDirectory}/Forge.icns"
+                                            applicationCategory="public.app-category.games"
+                                            mainclassname="forge.view.Main">
+                                            <runtime dir="${env.JAVA_HOME}"/>
                                             <classpath file="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar" />
                                             <classpath file="${basedir}/res/cardsfolder" />
                                             <classpath file="${project.build.directory}/res/cardsfolder/cardsfolder.zip" />
