@@ -206,7 +206,7 @@ public class ManaPool {
                 continue;
 
             for(final Mana thisMana : this.floatingMana.get(manaKey)) {
-                if (!thisMana.getManaAbility().meetsManaRestrictions(saBeingPaidFor)) {
+                if (thisMana.getManaAbility() != null && !thisMana.getManaAbility().meetsManaRestrictions(saBeingPaidFor)) {
                     continue;
                 }
     
