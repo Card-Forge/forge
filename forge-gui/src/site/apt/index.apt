@@ -31,13 +31,13 @@ Forge
   defender, reach, and haste. Forge now also has a mana pool and supports creature enchantments.
 
   Forge runs on Windows, Linux, and OSX. You can download Forge from
-  {{{http://cardforge.org/releases/releases/forge/forge}here}}.
+  {{{http://cardforge.org/releases/releases/forge/forge-gui}here}}.
 
   <<Maven Project Links>>
 
-  * {{{http://cardforge.org/releases/releases/forge/forge}Forge Releases}}
+  * {{{http://cardforge.org/releases/releases/forge/forge-gui}Forge Releases}}
 
-  * {{{http://cardforge.org/releases/snapshots/forge/forge}Forge Snapshot Builds}}
+  * {{{http://cardforge.org/releases/snapshots/forge/forge-gui}Forge Snapshot Builds}}
 
   * {{{./apidocs/index.html}JavaDocs}}
 
