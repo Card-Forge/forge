@@ -1,7 +1,7 @@
 Name:Wooded Bastion
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
 A:AB$ Mana | Cost$ GW T | Produced$ W | Amount$ 2 | SpellDescription$ Add W W to your mana pool.
 A:AB$ Mana | Cost$ GW T | Produced$ W G | SpellDescription$ Add W G to your mana pool.
 A:AB$ Mana | Cost$ GW T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.

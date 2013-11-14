@@ -4,7 +4,7 @@ Types:Plane Valla
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Command | Execute$ TrigDamage | OptionalDecider$ TriggeredCardController | TriggerDescription$ Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to target creature or player of his or her choice.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ Y | References$ Y | DamageSource$ TriggeredCard | TargetingPlayer$ TriggeredCardController
 SVar:Y:TriggeredCard$CardPower
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, exile target creature, then return it to the battlefield under its owner's control.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, exile target creature, then return it to the battlefield under its owner's control.
 SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ RestorationReturn
 SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

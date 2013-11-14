@@ -2,7 +2,7 @@ Name:Magosi, the Waterveil
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
 A:AB$ PutCounter | Cost$ U T | Defined$ Self | CounterType$ EON | CounterNum$ 1 | SubAbility$ DBSkipTurn | SpellDescription$ Put an eon counter on CARDNAME. Skip your next turn.
 A:AB$ AddTurn | Cost$ T SubCounter<1/EON> | NumTurns$ 1 | Defined$ You | SubAbility$ DBBounce | SpellDescription$ Take an extra turn after this one.
 SVar:DBSkipTurn:DB$ SkipTurn | NumTurns$ 1 | Defined$ You

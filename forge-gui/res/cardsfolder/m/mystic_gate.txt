@@ -1,7 +1,7 @@
 Name:Mystic Gate
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add {1} to your mana pool.
 A:AB$ Mana | Cost$ WU T | Produced$ W | Amount$2 | SpellDescription$ Add W W to your mana pool.
 A:AB$ Mana | Cost$ WU T | Produced$ W U | SpellDescription$ Add W U to your mana pool.
 A:AB$ Mana | Cost$ WU T | Produced$ U | Amount$2 | SpellDescription$ Add U U to your mana pool.

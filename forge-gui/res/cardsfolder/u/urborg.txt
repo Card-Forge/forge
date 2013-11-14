@@ -1,7 +1,7 @@
 Name:Urborg
 ManaCost:no cost
 Types:Legendary Land
-A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add B to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add {B} to your mana pool.
 A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ First Strike | SpellDescription$ Target creature loses first strike until end of turn.
 A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Swampwalk | SpellDescription$ Target creature loses swampwalk until end of turn.
 SVar:RemAIDeck:True

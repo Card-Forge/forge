@@ -4,7 +4,7 @@ Types:Creature Spirit
 PT:1/1
 K:Haste
 K:Shadow
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | OptionalDecider$ You | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever another creature is put into your graveyard from the battlefield, you may pay B. If you do, return CARDNAME from your graveyard to the battlefield.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | OptionalDecider$ You | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever another creature is put into your graveyard from the battlefield, you may pay {B}. If you do, return CARDNAME from your graveyard to the battlefield.
 SVar:TrigReturn:AB$ChangeZone | Cost$ B | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 SVar:SacMe:1
 SVar:DiscardMe:1

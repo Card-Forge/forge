@@ -2,7 +2,7 @@ Name:Scorned Villager
 ManaCost:1 G
 Types:Creature Human Werewolf
 PT:1/1
-A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G} to your mana pool.
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced

@@ -1,7 +1,7 @@
 Name:Rhystic Deluge
 ManaCost:2 U
 Types:Enchantment
-A:AB$ Tap | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | UnlessCost$ 1 | UnlessPayer$ TargetedController | SpellDescription$ Tap target creature unless its controller pays 1.
+A:AB$ Tap | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | UnlessCost$ 1 | UnlessPayer$ TargetedController | SpellDescription$ Tap target creature unless its controller pays {1}.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_deluge.jpg
 Oracle:{U}: Tap target creature unless its controller pays {1}.

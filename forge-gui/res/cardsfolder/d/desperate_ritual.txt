@@ -1,7 +1,7 @@
 Name:Desperate Ritual
 ManaCost:1 R
 Types:Instant Arcane
-A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ 3 | SpellDescription$ Add R R R to your mana pool.
+A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ 3 | SpellDescription$ Add {R}{R}{R} to your mana pool.
 K:Splice onto Arcane 1 R
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_ritual.jpg

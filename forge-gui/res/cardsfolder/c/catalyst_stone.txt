@@ -1,8 +1,8 @@
 Name:Catalyst Stone
 ManaCost:2
 Types:Artifact
-S:Mode$ ReduceCost | ValidCard$ Card | Type$ Flashback | Activator$ You | Amount$ 2 | Description$ Flashback costs you pay cost up to 2 less.
-S:Mode$ RaiseCost | ValidCard$ Card | Type$ Flashback | Activator$ Opponent | Amount$ 2 | Description$ Flashback costs your opponents pay cost 2 more.
+S:Mode$ ReduceCost | ValidCard$ Card | Type$ Flashback | Activator$ You | Amount$ 2 | Description$ Flashback costs you pay cost up to {2} less.
+S:Mode$ RaiseCost | ValidCard$ Card | Type$ Flashback | Activator$ Opponent | Amount$ 2 | Description$ Flashback costs your opponents pay cost {2} more.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catalyst_stone.jpg
 Oracle:Flashback costs you pay cost up to {2} less.\nFlashback costs your opponents pay cost {2} more.

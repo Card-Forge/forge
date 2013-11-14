@@ -6,7 +6,7 @@ SVar:Unearth:AB$ ChangeZone | Cost$ CardManaCost | Defined$ Self | Origin$ Grave
 SVar:Unearthed:DB$ Pump | Defined$ Self | KW$ Haste & HIDDEN If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else. | Permanent$ True | SubAbility$ TrueDeath | StackDescription$ It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield.
 SVar:TrueDeath:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Unavailable | TriggerDescription$ Exile CARDNAME at the beginning of the next end step.
 SVar:Unavailable:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
-T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, put target creature card from a graveyard onto the battlefield under your control.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {C}, put target creature card from a graveyard onto the battlefield under your control.
 SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 3 | LowPriority$ True | MaxRollsPerTurn$ 9
