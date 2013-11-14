@@ -86,34 +86,37 @@ public final class CardDb implements ICardDatabase {
     private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards); 
     private final Collection<PaperCard> roUniqueCards = Collections.unmodifiableCollection(uniqueCardsByName.values());
     private final EditionCollection editions;
-    
 
     private CardDb(Map<String, CardRules> rules, EditionCollection editions0, boolean logMissingCards) {
         this.rulesByName = rules;
         this.editions = editions0;
         List<String> missingCards = new ArrayList<String>();
-        for(CardEdition e : editions.getOrderedEditions()) {
+        for (CardEdition e : editions.getOrderedEditions()) {
             boolean worthLogging = logMissingCards && ( e.getType() == Type.CORE || e.getType() == Type.EXPANSION || e.getType() == Type.REPRINT );
-            if(worthLogging)
+            if (worthLogging) {
                 System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
+            }
             String lastCardName = null;
             int artIdx = 0;
-            for(CardEdition.CardInSet cis : e.getCards()) {
-                if ( cis.name.equals(lastCardName) ) 
+            for (CardEdition.CardInSet cis : e.getCards()) {
+                if (cis.name.equals(lastCardName))
                     artIdx++;
                 else {
                     artIdx = 0;
                     lastCardName = cis.name;
                 }
                 CardRules cr = rulesByName.get(lastCardName);
-                if( cr != null ) 
+                if (cr != null) {
                     addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
-                else if (worthLogging)
+                }
+                else if (worthLogging) {
                     missingCards.add(cis.name);
+                }
             }
-            if(worthLogging) {
-                if(missingCards.isEmpty())
+            if (worthLogging) {
+                if (missingCards.isEmpty()) {
                     System.out.println(" ... 100% ");
+                }
                 else {
                     int missing = (e.getCards().length - missingCards.size()) * 10000 / e.getCards().length;
                     System.out.printf(" ... %.2f%% (%s missing: %s )%n", missing * 0.01f, Lang.nounWithAmount(missingCards.size(), "card"), StringUtils.join(missingCards, " | ") );
@@ -122,9 +125,8 @@ public final class CardDb implements ICardDatabase {
             }
         }
         
-        for(CardRules cr : rulesByName.values()) {
-            if( !allCardsByName.containsKey(cr.getName()) )
-            {
+        for (CardRules cr : rulesByName.values()) {
+            if (!allCardsByName.containsKey(cr.getName())) {
                 System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/cardeditions/ folder. ");
                 addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 0));
             }

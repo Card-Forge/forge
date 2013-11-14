@@ -157,7 +157,6 @@ public class FModel {
         // this fills in our map of card names to Card instances.
         CardDb.setup(reader.loadCards(), editions);
 
- 
         this.formats = new FormatCollection("res/blockdata/formats.txt");
         this.boosters = new StorageBase<SealedProductTemplate>("Boosters", editions.getBoosterGenerator());
         this.specialBoosters = new StorageBase<SealedProductTemplate>("Special boosters", new SealedProductTemplate.Reader("res/blockdata/boosters-special.txt"));
@@ -403,12 +402,9 @@ public class FModel {
 
 
     public GauntletMini getGauntletMini() {
-
         if (gauntlet == null) {
             gauntlet = new GauntletMini();
         }
         return gauntlet;
     }
-
-
 }
