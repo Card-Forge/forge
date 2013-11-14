@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -44,6 +45,7 @@ import forge.card.CardRules;
 import forge.card.CardRulesReader;
 import forge.error.BugReporter;
 import forge.gui.toolbox.FProgressBar;
+import forge.properties.NewConstants;
 import forge.util.FileUtil;
 
 /**
@@ -298,7 +300,6 @@ public class CardStorageReader {
             }
     }
 
-
     /**
      * <p>
      * load a card.
@@ -371,5 +372,91 @@ public class CardStorageReader {
                 // PM
             }
         }
+    }
+
+    //utility functions to parse all cards and perform certain actions on each card
+    public static void parseAllCards(String[] args) {
+    	if (args.length < 2) { return; }
+
+    	final int[] updatedCounts = new int[args.length - 1];
+    	final List<File> allFiles = new ArrayList<File>();
+    	final CardRulesReader rulesReader = new CardRulesReader();
+    	final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, false, null);
+    	reader.fillFilesArray(allFiles, reader.cardsfolder);
+    	for (File file : allFiles) {
+    		rulesReader.reset();
+
+            InputStreamReader isr;
+			try {
+				isr = new InputStreamReader(new FileInputStream(file), reader.charset);
+	            List<String> lines = FileUtil.readAllLines(isr, true);
+	            CardRules rules = rulesReader.readCard(lines);
+	            
+	            System.out.println();
+	            System.out.print(rules.getName());
+	            
+	            for (int i = 1; i < args.length; i++) {
+	            	switch (args[i]) {
+	            	case "updateAbilityManaSymbols":
+	            		if (updateAbilityManaSymbols(rules, lines, file)) {
+	            			updatedCounts[i - 1]++;
+	            		}
+	            		break;
+	            	}
+	            }
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+        }
+
+    	for (int i = 1; i < args.length; i++) {
+    		int count = updatedCounts[i - 1];
+    		System.out.println();
+            System.out.print(args[i] + " - " + count + "card" + (count != 1 ? "s" : ""));
+        }
+    }
+    
+    private static boolean updateAbilityManaSymbols(CardRules rules, List<String> lines, File file) {
+		boolean updated = false;
+    	String oracleText = rules.getOracleText();
+        String[] sentences = oracleText.replace(rules.getName(), "CARDNAME").split("\\.|\\\\n|\\\"|\\(|\\)");
+        for (String s : sentences) {
+        	int idx = s.indexOf(":");
+        	if (idx != -1) {
+        		s = s.substring(idx + 1);
+        	}
+        	s = s.trim();
+        	if (s.isEmpty()) { continue; }
+        	String pattern = s.replaceAll("\\{([WUBRGSXYZ]|[0-9]+)\\}", "$1[ ]\\?").replaceAll("\\{C\\}", "Chaos");
+        	if (pattern.length() != s.length()) {
+        		pattern = "Description\\$(.*)" + pattern;
+        		s = "Description\\$$1" + s;
+        		for (int i = 0; i < lines.size(); i++) {
+        			String newLine = lines.get(i).replaceAll(pattern, s);
+        			if (newLine.length() != lines.get(i).length()) {
+        				updated = true;
+            			lines.set(i, newLine);
+        			}
+        		}
+        	}
+        }
+		if (updated) {
+			try {
+	            PrintWriter p = new PrintWriter(file);
+	            for (int i = 0; i < lines.size(); i++) {
+	            	if (i < lines.size() - 1) {
+	            		p.println(lines.get(i));
+	            	}
+	            	else {
+	            		p.print(lines.get(i));
+	            	}
+	            }
+	            p.close();
+	            System.out.print(" - ability mana symbols updated");
+	            return true;
+	        } catch (final Exception ex) {
+	        }
+		}
+		return false;
     }
 }

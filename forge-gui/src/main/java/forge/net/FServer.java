@@ -15,6 +15,7 @@ import forge.game.Game;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.RegisteredPlayer;
+import forge.model.FModel;
 import forge.util.Lang;
 
 
@@ -50,6 +51,7 @@ public enum FServer {
      * @param args
      */
     public void simulateMatches(String[] args) {
+        Singletons.setModel(FModel.getInstance(false));
         interactiveMode = false;
         System.out.println("Simulation mode");
         if(args.length < 3 ) {
@@ -124,6 +126,4 @@ public enum FServer {
     public boolean isInteractiveMode() {
         return interactiveMode;
     }
-
-    
 }

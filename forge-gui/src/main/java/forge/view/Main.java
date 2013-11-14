@@ -18,6 +18,7 @@
 package forge.view;
 
 import forge.Singletons;
+import forge.card.cardfactory.CardStorageReader;
 import forge.control.FControl;
 import forge.model.FModel;
 import forge.net.FServer;
@@ -49,14 +50,17 @@ public final class Main {
         
         
         // command line startup here
-        Singletons.setModel(FModel.getInstance(false));
         String mode = args[0].toLowerCase();
         
         switch(mode) {
             case "sim":
                 FServer.instance.simulateMatches(args);
                 break;
-                
+
+            case "parse":
+            	CardStorageReader.parseAllCards(args);
+                break;
+
             case "server":
                 System.out.println("Dedicated server mode.\nNot implemented.");
                 break;
