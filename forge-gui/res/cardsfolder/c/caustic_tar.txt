@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 4 B B | ValidTgts$ Land | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ LoseLife | Description$ Enchanted land has "tap: Target player loses 3 life."
+S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ LoseLife | Description$ Enchanted land has "{T}: Target player loses 3 life."
 SVar:LoseLife:AB$LoseLife | Cost$ T | ValidTgts$ Player | LifeAmount$ 3 | TgtPrompt$ Target a player to lose life | SpellDescription$ Target player loses 3 life.
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caustic_tar.jpg
