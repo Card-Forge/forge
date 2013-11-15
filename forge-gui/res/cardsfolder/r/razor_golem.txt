@@ -3,7 +3,7 @@ ManaCost:6
 Types:Artifact Creature Golem
 PT:3/4
 K:Vigilance
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for Plains (This spell costs 1 less to cast for each Plains you control.)
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for Plains (This spell costs {1} less to cast for each Plains you control.)
 SVar:X:Count$Valid Plains.YouCtrl
 SVar:RemRandomDeck:True
 DeckNeeds:Color$white

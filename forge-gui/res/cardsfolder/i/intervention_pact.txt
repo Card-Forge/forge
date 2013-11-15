@@ -9,7 +9,7 @@ SVar:GainLifeInstead:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ E
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:X:ReplaceCount$DamageAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBDelTrig
-SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseGame | TriggerDescription$ At the beginning of your next upkeep, pay 1 W W. If you don't, you lose the game.
+SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseGame | TriggerDescription$ At the beginning of your next upkeep, pay {1}{W}{W}. If you don't, you lose the game.
 SVar:TrigLoseGame:AB$ LosesGame | Cost$ 0 | UnlessCost$ 1 W W | UnlessPayer$ You | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intervention_pact.jpg

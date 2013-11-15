@@ -1,7 +1,7 @@
 Name:Brightstone Ritual
 ManaCost:R
 Types:Instant
-A:SP$ Mana | Cost$ R | Produced$ R | Amount$ X | References$ X | SpellDescription$ Add R to your mana pool for each Goblin on the battlefield.
+A:SP$ Mana | Cost$ R | Produced$ R | Amount$ X | References$ X | SpellDescription$ Add {R} to your mana pool for each Goblin on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Goblin
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

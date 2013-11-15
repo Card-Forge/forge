@@ -2,7 +2,7 @@ Name:Rustic Clachan
 ManaCost:no cost
 Types:Land
 Text:As CARDNAME enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W} to your mana pool.
 A:AB$ PutCounter | Cost$ 1 W Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | ActivationZone$ Hand | PrecostDesc$ Reinforce 1 - | SpellDescription$ Put a +1/+1 counter on target creature.
 K:ETBReplacement:Other:DBTap
 SVar:DBTap:AB$ Tap | Cost$ 0 | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Kithkin> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped.
