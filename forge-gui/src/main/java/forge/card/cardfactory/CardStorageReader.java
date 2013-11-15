@@ -438,7 +438,6 @@ public class CardStorageReader {
         	if (idx != -1) {
         		s = s.substring(idx + 1);
         	}
-        	s = s.trim();
         	if (s.isEmpty()) { continue; }
         	try {
 	        	String pattern = s.replaceAll("\\{([WUBRGSXYZ]|[0-9]+)\\}", "$1[ ]\\?").replaceAll("\\{C\\}", "Chaos");
