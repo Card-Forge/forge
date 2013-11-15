@@ -1657,15 +1657,11 @@ public enum FSkin {
     	String replacement;
 		try {
 			replacement = "<img src='" + new File(NewConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "'>";
+			str = str.replaceAll(pattern, replacement);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-			return str;
 		}
-    	String encodedStr = str.replaceAll(pattern, replacement);
-    	if (encodedStr.length() != str.length()) {
-    		encodedStr = "<html>" + encodedStr + "</html>"; //need to wrap in HTML tags to ensure text rendered as HTML so symbols appear
-    	}
-    	return encodedStr;
+    	return "<html>" + str + "</html>"; //must wrap in <html> tag for images to appear
     }
 
     private static final String

@@ -109,7 +109,10 @@ public final class GuiUtils {
     }
 
     public static JMenuItem createMenuItem(String label, KeyStroke accelerator, final Runnable onClick, boolean enabled, boolean bold) {
-        JMenuItem item = new JMenuItem(label);
+        if (label.startsWith("<html>")) { //adjust label if HTML
+        	label = "<html>" + "<div style='height: " + itemHeight + "px; margin-top: 6px;'>" + label.substring(6, label.length() - 7) + "</div></html>";
+        }
+    	JMenuItem item = new JMenuItem(label);
         item.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
