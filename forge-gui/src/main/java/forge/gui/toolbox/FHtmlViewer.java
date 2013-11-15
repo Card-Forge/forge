@@ -33,6 +33,7 @@ public class FHtmlViewer extends JEditorPane {
     	SwingUtilities.invokeLater( new Runnable() { //need to invokeLater to avoid flicker
             public void run() {
             	setSuperText(text.replaceAll("(\r\n)|(\n)", "<br>")); //replace line breaks with <br> elements
+            	setCaretPosition(0); //keep scrolled to top
             }
         });
     }
