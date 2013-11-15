@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another creature is returned to your hand from the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature is returned to your hand from the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
-SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 2
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 2 | Mandatory$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormfront_riders.jpg
 Oracle:Flying\nWhen Stormfront Riders enters the battlefield, return two creatures you control to their owner's hand.\nWhenever Stormfront Riders or another creature is returned to your hand from the battlefield, put a 1/1 white Soldier creature token onto the battlefield.
