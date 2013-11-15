@@ -34,7 +34,8 @@ public class ChooseCardEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Player activator = sa.getActivatingPlayer();
+        final Game game = activator.getGame();
         final List<Card> chosen = new ArrayList<Card>();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -46,7 +47,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         }
         List<Card> choices = game.getCardsIn(choiceZone);
         if (sa.hasParam("Choices")) {
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host);
         }
         if (sa.hasParam("TargetControls")) {
             choices = CardLists.filterControlledBy(choices, tgtPlayers.get(0));
