@@ -3,7 +3,7 @@ ManaCost:6 G G
 Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 6 G G | ValidTgts$ Land | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ SpawningGroundsToken | Description$ Enchanted land has "T: Put a 5/5 green Beast creature token with trample onto the battlefield."
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ SpawningGroundsToken | Description$ Enchanted land has "{T}: Put a 5/5 green Beast creature token with trample onto the battlefield."
 SVar:SpawningGroundsToken:AB$ Token | Cost$ T | TokenOwner$ You | TokenName$ Beast | TokenColors$ Green | TokenTypes$ Creature,Beast | TokenPower$ 5 | TokenToughness$ 5 | TokenAmount$ 1 | TokenKeywords$ Trample | SpellDescription$ Put a 5/5 green Beast creature token with trample onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spawning_grounds.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Put a 5/5 green Beast creature token with trample onto the battlefield."

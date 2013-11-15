@@ -1,7 +1,7 @@
 Name:Leonin Bola
 ManaCost:1
 Types:Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ BolaTap | Description$ Equipped creature has "T, Unattach CARDNAME: Tap target creature."
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ BolaTap | Description$ Equipped creature has "{T}, Unattach CARDNAME: Tap target creature."
 SVar:BolaTap:AB$ Tap | Cost$ T Unattach<OriginalHost/Leonin Bola> | ValidTgts$ Creature | SpellDescription$ Tap target creature.
 K:Equip 1
 SVar:NonStackingAttachEffect:True

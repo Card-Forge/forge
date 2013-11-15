@@ -2,7 +2,7 @@ Name:Quilled Sliver
 ManaCost:1 W
 Types:Creature Sliver
 PT:1/1
-S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Damage | Description$ All Slivers have "Tap: This permanent deals 1 damage to target attacking or blocking creature."
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Damage | Description$ All Slivers have "{T}: This permanent deals 1 damage to target attacking or blocking creature."
 SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Choose target attacking or blocking creature. | NumDmg$ 1 | SpellDescription$ This permanent deals 1 damage to target attacking or blocking creature.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quilled_sliver.jpg
