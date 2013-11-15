@@ -130,6 +130,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
     /** {@inheritDoc} */
     @Override
     public boolean promptIfOnlyPossibleAbility() {
-    	return !this.isManaAbility(); //prompt user for non-mana activated abilities even is only possible ability
+    	return false; //TODO: allow showing prompt based on whether ability has cost that requires user input and possible "misclick protection" setting
+    	//return !this.isManaAbility(); //prompt user for non-mana activated abilities even is only possible ability
     }
 }
