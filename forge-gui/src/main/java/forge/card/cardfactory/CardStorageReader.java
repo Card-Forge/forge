@@ -33,6 +33,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -430,7 +432,42 @@ public class CardStorageReader {
     }
     
     private static void updateAbilityManaSymbols(CardRules rules, List<String> lines, File file, List<String> output) {
+		String pattern;
 		boolean updated = false;
+		
+		//ensure mana symbols appear in correct order
+		String wubrg = "WUBRG";
+        for (int i = 0; i < lines.size(); i++) {
+        	String newLine = lines.get(i);
+    		for (int c = 0; c < 5; c++) {
+    			char ch1 = wubrg.charAt(c);
+    			char ch2 = wubrg.charAt((c + 1) % 5);
+    			char ch3 = wubrg.charAt((c + 2) % 5);
+    			newLine = newLine.replaceAll("(^|\\W)(" + ch2 + "|" + ch3 + ")( ?)(/?)" + ch1 + "(\\W|$)", "$1" + ch1 + "$3$4$2$5");
+    			newLine = newLine.replaceAll("(^|\\W)\\{(" + ch2 + "|" + ch3 + ")\\}\\{" + ch1 + "\\}(\\W|$)", "$1\\{" + ch1 + "\\}\\{$2\\}$3");
+    		}
+			if (!newLine.equals(lines.get(i))) {
+				updated = true;
+    			lines.set(i, newLine);
+    			i--; //if something changed, repeat in case more than 2 mana symbols consecutively
+			}
+		}
+        
+        //convert {2W} and {WP} to {2/W} and {W/P}, and ensure not {W/2} or {P/W}
+        for (int i = 0; i < lines.size(); i++) {
+        	String newLine = lines.get(i).replaceAll("\\{([WUBRG2])([WUBRGP])\\}", "\\{$1/$2\\}")
+        			.replaceAll("\\{([WUBRG])/2\\}", "\\{2/$1\\}")
+        			.replaceAll("\\{P/([WUBRG])\\}", "\\{$1/P\\}");
+        	if (!newLine.equals(lines.get(i))) {
+				updated = true;
+    			lines.set(i, newLine);
+			}
+		}
+		
+		//check for oracle text appearing in ability descriptions missing "{G}" formatting
+        if (updated) { //if lines updated above, ensure updated oracle text used
+        	rules = new CardRulesReader().readCard(lines);
+        }
     	String oracleText = rules.getOracleText();
         String[] sentences = oracleText.replace(rules.getName(), "CARDNAME").split("\\.|\\\\n|\\\"|\\(|\\)");
         for (String s : sentences) {
@@ -440,7 +477,9 @@ public class CardStorageReader {
         	}
         	if (s.isEmpty()) { continue; }
         	try {
-	        	String pattern = s.replaceAll("\\{([WUBRGSXYZ]|[0-9]+)\\}", "$1[ ]\\?").replaceAll("\\{C\\}", "Chaos");
+	        	pattern = s.replaceAll("\\{([WUBRGSXYZ]|[0-9]+)\\}", "$1[ ]\\?")
+	        			.replaceAll("\\{([WUBRG2])/([WUBRGP])\\}", "$1$2[ ]\\?")
+	        			.replaceAll("\\{C\\}", "Chaos");
 	        	if (pattern.length() != s.length()) {
 	        		pattern = "Description\\$(.*)" + pattern;
 	        		s = "Description\\$$1" + s;
@@ -455,8 +494,33 @@ public class CardStorageReader {
         	}
         	catch (Exception ex) {
 	            output.add("<Exception (" + rules.getName() + ") " + ex.getMessage() + ">");
+	            return;
         	}
         }
+        
+        //check for other key phrases that might be missing "{G}" formatting
+        String[] phrases = new String[] {
+        		"Add * to your mana pool"
+        };
+        for (String phrase : phrases) {
+	        pattern = ".*Description\\$.*" + phrase.replace("* ", "((([WUBRGSXYZ]|[0-9]+) )+)") + ".*"; 
+	        Pattern p = Pattern.compile(pattern);
+	        for (int i = 0; i < lines.size(); i++) {
+	        	String line = lines.get(i);
+	        	Matcher m = p.matcher(line);
+	        	if (m.matches()) {
+		        	StringBuilder newLineBuilder = new StringBuilder();
+		        	newLineBuilder.append(line.substring(0, m.start(1)));
+	        		for (String sym : m.group(1).split(" ")) {
+	        			newLineBuilder.append("{" + sym + "}");
+	        		}
+        			newLineBuilder.append(line.substring(m.end(1) - 1)); //-1 so final space appended
+	        		updated = true;
+        			lines.set(i, newLineBuilder.toString());
+	        	}
+			}
+        }
+        
 		if (updated) {
 			try {
 	            PrintWriter p = new PrintWriter(file);
