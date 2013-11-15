@@ -1,6 +1,7 @@
 package forge.gui.toolbox;
 
 import javax.swing.JEditorPane;
+import javax.swing.SwingUtilities;
 
 /** 
  * Viewer for HTML
@@ -28,7 +29,15 @@ public class FHtmlViewer extends JEditorPane {
     }
     
     @Override
-    public void setText(String text) {
-    	super.setText(text.replaceAll("(\r\n)|(\n)", "<br>")); //replace line breaks with <br> elements
+    public void setText(final String text) {
+    	SwingUtilities.invokeLater( new Runnable() { //need to invokeLater to avoid flicker
+            public void run() {
+            	setSuperText(text.replaceAll("(\r\n)|(\n)", "<br>")); //replace line breaks with <br> elements
+            }
+        });
+    }
+    
+    private void setSuperText(final String text) {
+    	super.setText(text);
     }
 }
