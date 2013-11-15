@@ -432,7 +432,6 @@ public class CardStorageReader {
     }
     
     private static void updateAbilityManaSymbols(CardRules rules, List<String> lines, File file, List<String> output) {
-		String pattern;
 		boolean updated = false;
 		
 		//ensure mana symbols appear in correct order
@@ -477,7 +476,7 @@ public class CardStorageReader {
         	}
         	if (s.isEmpty()) { continue; }
         	try {
-	        	pattern = s.replaceAll("\\{([WUBRGSXYZ]|[0-9]+)\\}", "$1[ ]\\?")
+        		String pattern = s.replaceAll("\\{([WUBRGSXYZ]|[0-9]+)\\}", "$1[ ]\\?")
 	        			.replaceAll("\\{([WUBRG2])/([WUBRGP])\\}", "$1$2[ ]\\?")
 	        			.replaceAll("\\{C\\}", "Chaos");
 	        	if (pattern.length() != s.length()) {
@@ -498,12 +497,26 @@ public class CardStorageReader {
         	}
         }
         
+        //convert mana costs in quoted ability descriptions
+        //TODO: Uncomment when not flawed (currently doesn't work with hybrid, consecutive symbols, "Untap" in place of Q, or Pay # life/Put +1/+1 or -1/-1 costs
+        /*for (int i = 0; i < lines.size(); i++) {
+        	String newLine = lines.get(i)
+        			.replaceAll("Description\\$(.*)\\\"(.*)Tap:(.*)\\\"", "Description\\$$1\\\"$2\\{T\\}:$3\\\"")
+        			.replaceAll("Description\\$(.*)\\\"(.*)Tap([ ,][A-Z0-9\\{].*):(.*)\\\"", "Description\\$$1\\\"$2\\{T\\}$3:$4\\\"")
+        			.replaceAll("Description\\$(.*)\\\"(.*)([WUBRGQSTXYZ]|[0-9]+):(.*)\\\"", "Description\\$$1\\\"$2\\{$3\\}:$4\\\"")
+        			.replaceAll("Description\\$(.*)\\\"(.*)([WUBRGQSTXYZ]|[0-9]+)([ ,].*):(.*)\\\"", "Description\\$$1\\\"$2\\{$3\\}$4:$5\\\"");
+        	if (!newLine.equals(lines.get(i))) {
+				updated = true;
+    			lines.set(i, newLine);
+			}
+		}*/
+
         //check for other key phrases that might be missing "{G}" formatting
         String[] phrases = new String[] {
         		"Add * to your mana pool"
         };
         for (String phrase : phrases) {
-	        pattern = ".*Description\\$.*" + phrase.replace("* ", "((([WUBRGSXYZ]|[0-9]+) )+)") + ".*"; 
+        	String pattern = ".*Description\\$.*" + phrase.replace("* ", "((([WUBRGSXYZ]|[0-9]+) )+)") + ".*"; 
 	        Pattern p = Pattern.compile(pattern);
 	        for (int i = 0; i < lines.size(); i++) {
 	        	String line = lines.get(i);
