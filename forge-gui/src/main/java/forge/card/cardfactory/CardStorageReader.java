@@ -378,7 +378,11 @@ public class CardStorageReader {
     public static void parseAllCards(String[] args) {
     	if (args.length < 2) { return; }
 
-    	final int[] counts = new int[args.length];
+    	int totalParsedCount = 0;
+    	final List<List<String>> output = new ArrayList<List<String>>();
+    	for (int i = 1; i < args.length; i++) {
+    		output.add(new ArrayList<String>());
+        }
     	final List<File> allFiles = new ArrayList<File>();
     	final CardRulesReader rulesReader = new CardRulesReader();
     	final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, false, null);
@@ -393,15 +397,13 @@ public class CardStorageReader {
 	            CardRules rules = rulesReader.readCard(lines);
 	            
 	            System.out.println();
-	            System.out.print(rules.getName());
+	            System.out.print(rules.getName()); //print each card here in case it gets stuck in utility
 	            
-	            counts[0]++;
+	            totalParsedCount++;
 	            for (int i = 1; i < args.length; i++) {
 	            	switch (args[i]) {
 	            	case "updateAbilityManaSymbols":
-	            		if (updateAbilityManaSymbols(rules, lines, file)) {
-	            			counts[i]++;
-	            		}
+	            		updateAbilityManaSymbols(rules, lines, file, output.get(i - 1));
 	            		break;
 	            	}
 	            }
@@ -410,15 +412,24 @@ public class CardStorageReader {
         }
 
 		System.out.println();
+		System.out.println();
+        System.out.print("Total cards: " + totalParsedCount);
 
-    	for (int i = 0; i < args.length; i++) {
-    		int count = counts[i];
+    	for (int i = 1; i < args.length; i++) {
+    		List<String> singleOutput = output.get(i - 1);
     		System.out.println();
-            System.out.print(args[i] + " - " + count + " card" + (count != 1 ? "s" : ""));
+    		System.out.println();
+    		System.out.println(args[i] + ":");
+    		System.out.println();
+    		for (String line : singleOutput) {
+        		System.out.println(line);
+    		}
+    		System.out.println();
+            System.out.print("Total cards: " + singleOutput.size());
         }
     }
     
-    private static boolean updateAbilityManaSymbols(CardRules rules, List<String> lines, File file) {
+    private static void updateAbilityManaSymbols(CardRules rules, List<String> lines, File file, List<String> output) {
 		boolean updated = false;
     	String oracleText = rules.getOracleText();
         String[] sentences = oracleText.replace(rules.getName(), "CARDNAME").split("\\.|\\\\n|\\\"|\\(|\\)");
@@ -444,8 +455,7 @@ public class CardStorageReader {
 	        	}
         	}
         	catch (Exception ex) {
-	            System.out.print(" - Exception: " + ex.getMessage());
-	            return false;
+	            output.add("<Exception (" + rules.getName() + ") " + ex.getMessage() + ">");
         	}
         }
 		if (updated) {
@@ -460,11 +470,9 @@ public class CardStorageReader {
 	            	}
 	            }
 	            p.close();
-	            System.out.print(" - ability mana symbols updated");
-	            return true;
+	            output.add(rules.getName());
 	        } catch (final Exception ex) {
 	        }
 		}
-		return false;
     }
 }
