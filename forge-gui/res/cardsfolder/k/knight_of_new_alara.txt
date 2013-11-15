@@ -1,5 +1,5 @@
 Name:Knight of New Alara
-ManaCost:2 W G
+ManaCost:2 G W
 Types:Creature Human Knight
 Text:Each other multicolored creature you control gets +1/+1 for each of its colors.
 PT:2/2

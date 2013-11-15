@@ -1,5 +1,5 @@
 Name:Lightning Reaver
-ManaCost:3 R B
+ManaCost:3 B R
 Types:Creature Zombie Beast
 PT:3/3
 K:Haste

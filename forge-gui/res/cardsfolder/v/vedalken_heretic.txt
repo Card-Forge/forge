@@ -1,5 +1,5 @@
 Name:Vedalken Heretic
-ManaCost:U G
+ManaCost:G U
 Types:Creature Vedalken Rogue
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, you may draw a card.

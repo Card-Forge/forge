@@ -1,5 +1,5 @@
 Name:Juniper Order Ranger
-ManaCost:3 W G
+ManaCost:3 G W
 Types:Creature Human Knight
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on CARDNAME.

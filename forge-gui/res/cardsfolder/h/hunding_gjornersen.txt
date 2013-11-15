@@ -1,5 +1,5 @@
 Name:Hunding Gjornersen
-ManaCost:3 U U W
+ManaCost:3 W U U
 Types:Legendary Creature Human Warrior
 PT:5/4
 K:Rampage 1

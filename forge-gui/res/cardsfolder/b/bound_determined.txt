@@ -14,9 +14,9 @@ Oracle:Sacrifice a creature. Return up to X cards from your graveyard to your ha
 ALTERNATE
 
 Name:Determined
-ManaCost:U G
+ManaCost:G U
 Types:Instant
-A:SP$ Effect | Cost$ U G | StaticAbilities$ STCantbeCountered | SubAbility$ DBDraw | SpellDescription$ Other spells you control can't be countered by spells or abilities this turn. Draw a card.
+A:SP$ Effect | Cost$ G U | StaticAbilities$ STCantbeCountered | SubAbility$ DBDraw | SpellDescription$ Other spells you control can't be countered by spells or abilities this turn. Draw a card.
 SVar:STCantbeCountered:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.YouCtrl | AddHiddenKeyword$ CARDNAME can't be countered. | Description$ Other spells you control can't be countered by spells or abilities this turn.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Other spells you control can't be countered by spells or abilities this turn.\nDraw a card.

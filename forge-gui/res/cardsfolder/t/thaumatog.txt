@@ -1,5 +1,5 @@
 Name:Thaumatog
-ManaCost:1 W G
+ManaCost:1 G W
 Types:Creature Atog
 PT:1/2
 A:AB$ Pump | Cost$ Sac<1/Enchantment> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Thaumatog gets +1/+1 until end of turn.

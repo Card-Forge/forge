@@ -1,5 +1,5 @@
 Name:Palladia-Mors
-ManaCost:2 W W R R G G
+ManaCost:2 R R G G W W
 Types:Legendary Creature Elder Dragon
 PT:7/7
 K:Flying

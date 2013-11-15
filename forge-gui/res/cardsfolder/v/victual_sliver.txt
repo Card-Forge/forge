@@ -1,5 +1,5 @@
 Name:Victual Sliver
-ManaCost:W G
+ManaCost:G W
 Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ GainLife | Description$ All Slivers have "2, Sacrifice this permanent: You gain 4 life."

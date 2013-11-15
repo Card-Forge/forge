@@ -1,5 +1,5 @@
 Name:Tetsuo Umezawa
-ManaCost:R B U
+ManaCost:U B R
 Types:Legendary Creature Human Archer
 PT:3/3
 K:CARDNAME can't be the target of Aura spells.

@@ -1,5 +1,5 @@
 Name:Firemane Angel
-ManaCost:3 W W R
+ManaCost:3 R W W
 Types:Creature Angel
 PT:4/3
 K:Flying

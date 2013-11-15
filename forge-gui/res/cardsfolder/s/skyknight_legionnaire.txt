@@ -1,5 +1,5 @@
 Name:Skyknight Legionnaire
-ManaCost:1 W R
+ManaCost:1 R W
 Types:Creature Human Knight
 PT:2/2
 K:Flying

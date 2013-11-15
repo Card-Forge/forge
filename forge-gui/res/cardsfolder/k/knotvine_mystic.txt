@@ -1,8 +1,8 @@
 Name:Knotvine Mystic
-ManaCost:W R G
+ManaCost:R G W
 Types:Creature Elf Druid
 PT:2/2
-A:AB$ Mana | Cost$ 1 T | Produced$ W R G | SpellDescription$ Add W R G to your mana pool.
+A:AB$ Mana | Cost$ 1 T | Produced$ R G W | SpellDescription$ Add {R}{G}{W} to your mana pool.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knotvine_mystic.jpg
 Oracle:{1}, {T}: Add {R}{G}{W} to your mana pool.

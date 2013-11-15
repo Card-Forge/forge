@@ -1,5 +1,5 @@
 Name:Gaea's Skyfolk
-ManaCost:U G
+ManaCost:G U
 Types:Creature Elf Merfolk
 PT:2/2
 K:Flying

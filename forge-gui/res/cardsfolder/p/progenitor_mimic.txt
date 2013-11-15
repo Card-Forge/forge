@@ -1,5 +1,5 @@
 Name:Progenitor Mimic
-ManaCost:4 U G
+ManaCost:4 G U
 Types:Creature Shapeshifter
 PT:0/0
 K:ETBReplacement:Copy:ChooseCreature:Optional

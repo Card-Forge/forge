@@ -1,5 +1,5 @@
 Name:Apocalypse Hydra
-ManaCost:X G R
+ManaCost:X R G
 Types:Creature Hydra
 PT:0/0
 K:etbCounter:P1P1:Y:no condition:CARDNAME enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.

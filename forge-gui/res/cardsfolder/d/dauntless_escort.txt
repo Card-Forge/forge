@@ -1,5 +1,5 @@
 Name:Dauntless Escort
-ManaCost:1 W G
+ManaCost:1 G W
 Types:Creature Rhino Soldier
 PT:3/3
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SpellDescription$ Creatures you control get indestructible until end of turn.

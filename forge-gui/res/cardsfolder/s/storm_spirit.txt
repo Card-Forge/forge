@@ -1,5 +1,5 @@
 Name:Storm Spirit
-ManaCost:3 W U G
+ManaCost:3 G W U
 Types:Creature Elemental Spirit
 PT:3/3
 K:Flying

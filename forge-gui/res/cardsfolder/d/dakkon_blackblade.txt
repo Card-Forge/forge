@@ -1,5 +1,5 @@
 Name:Dakkon Blackblade
-ManaCost:2 B U U W
+ManaCost:2 W U U B
 Types:Legendary Creature Human Warrior
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.

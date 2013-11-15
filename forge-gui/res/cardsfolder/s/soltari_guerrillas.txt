@@ -1,5 +1,5 @@
 Name:Soltari Guerrillas
-ManaCost:2 W R
+ManaCost:2 R W
 Types:Creature Soltari Soldier
 PT:3/2
 K:Shadow

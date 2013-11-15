@@ -1,5 +1,5 @@
 Name:Phelddagrif
-ManaCost:1 W U G
+ManaCost:1 G W U
 Types:Legendary Creature Phelddagrif
 PT:4/4
 A:AB$ Pump | Cost$ G | KW$ Trample | SubAbility$ DBToken | SpellDescription$ CARDNAME gains trample until end of turn. Target opponent puts a 1/1 green Hippo creature token onto the battlefield.

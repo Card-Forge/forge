@@ -1,5 +1,5 @@
 Name:Bartel Runeaxe
-ManaCost:3 G R B
+ManaCost:3 B R G
 Types:Legendary Creature Giant Warrior
 PT:6/5
 K:Vigilance

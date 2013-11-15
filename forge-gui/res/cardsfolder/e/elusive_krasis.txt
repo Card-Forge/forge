@@ -1,5 +1,5 @@
 Name:Elusive Krasis
-ManaCost:1 U G
+ManaCost:1 G U
 Types:Creature Fish Mutant
 PT:0/4
 K:Unblockable

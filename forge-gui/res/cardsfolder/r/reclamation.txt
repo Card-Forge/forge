@@ -1,5 +1,5 @@
 Name:Reclamation
-ManaCost:2 W G
+ManaCost:2 G W
 Types:Enchantment
 S:Mode$ CantAttackUnless | ValidCard$ Creature.Black | Target$ Player,Planeswalker | Cost$ Sac<1/Land> | Description$ Black creatures can't attack unless their controller sacrifices a land for each black creature he or she controls that's attacking.
 SVar:RemRandomDeck:True

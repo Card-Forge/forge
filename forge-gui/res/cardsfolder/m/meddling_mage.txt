@@ -1,5 +1,5 @@
 Name:Meddling Mage
-ManaCost:U W
+ManaCost:W U
 Types:Creature Human Wizard
 PT:2/2
 K:ETBReplacement:Other:DBNameCard

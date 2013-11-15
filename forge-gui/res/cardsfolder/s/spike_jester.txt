@@ -1,5 +1,5 @@
 Name:Spike Jester
-ManaCost:R B
+ManaCost:B R
 Types:Creature Goblin Warrior
 PT:3/1
 K:Haste

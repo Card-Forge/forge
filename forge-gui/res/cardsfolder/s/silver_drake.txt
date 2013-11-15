@@ -1,5 +1,5 @@
 Name:Silver Drake
-ManaCost:1 U W
+ManaCost:1 W U
 Types:Creature Drake
 PT:3/3
 K:Flying

@@ -1,5 +1,5 @@
 Name:Naya Sojourners
-ManaCost:2 G W R
+ManaCost:2 R G W
 Types:Creature Elf Shaman
 PT:5/3
 K:Cycling:2 G
