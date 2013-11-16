@@ -1,7 +1,7 @@
 Name:Naked Singularity
 ManaCost:5
 Types:Artifact
-Text:If tapped for mana, Plains produce R, Islands produce G, Swamps produce W, Mountains produce U, and Forests produce B instead of any other type.
+Text:If tapped for mana, Plains produce {R}, Islands produce {G}, Swamps produce {W}, Mountains produce {U}, and Forests produce {B} instead of any other type.
 K:Cumulative upkeep:3
 R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Plains | ManaReplacement$ ProduceR | Secondary$ True | Description$ If tapped for mana, Plains produce R.
 SVar:ProduceR:Colorless->R & B->R & U->R & G->R & W->R
