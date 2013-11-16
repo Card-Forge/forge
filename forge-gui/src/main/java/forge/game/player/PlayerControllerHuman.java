@@ -90,19 +90,13 @@ public class PlayerControllerHuman extends PlayerController {
      */
     public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent) {
         if (triggerEvent == null) {
-        	List<SpellAbility> playableAbilities = new ArrayList<SpellAbility>();
-        	for (SpellAbility ab : abilities) {
-        		if (ab.canPlay()) {
-        			playableAbilities.add(ab);
-        		}
-        	}
-        	if (playableAbilities.isEmpty()) {
+        	if (abilities.isEmpty()) {
                 return null;
             }
-            if (playableAbilities.size() == 1 && !playableAbilities.get(0).promptIfOnlyPossibleAbility()) {
-                return playableAbilities.get(0);
+            if (abilities.size() == 1) {
+                return abilities.get(0);
             }
-        	return GuiChoose.oneOrNone("Choose ability to play", playableAbilities);
+        	return GuiChoose.oneOrNone("Choose ability to play", abilities);
         }
 
     	if (abilities.isEmpty()) {
