@@ -3,7 +3,9 @@
 /*.tmp
 /.metadata
 forge-ai/forge-ai.iml
+forge-ai/target
 forge-core/forge-core.iml
+forge-core/target
 forge-gui/forge-gui.iml
 forge-gui/res/*.log
 forge-gui/res/PerSetTrackingResults
