@@ -38,7 +38,7 @@ public final class Main {
         System.setProperty("sun.java2d.d3d", "false");
 
         // Start splash screen first, then data models, then controller.
-        if(args.length == 0) {
+        if (args.length == 0) {
             Singletons.setView(FView.SINGLETON_INSTANCE);
             Singletons.setModel(FModel.getInstance(true));
             Singletons.setControl(FControl.instance);

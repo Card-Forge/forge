@@ -122,8 +122,6 @@ public final class AbilityFactory {
     }
 
     public static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams, Cost abCost, Card hostCard) {
-        
-        
         TargetRestrictions abTgt = mapParams.containsKey("ValidTgts") ? readTarget(mapParams) : null;
 
         if (api == ApiType.CopySpellAbility || api == ApiType.Counter || api == ApiType.ChangeTargets) {
@@ -157,8 +155,6 @@ public final class AbilityFactory {
 
         // *********************************************
         // set universal properties of the SpellAbility
-
-
 
         if (mapParams.containsKey("References")) {
             for (String svar : mapParams.get("References").split(",")) {

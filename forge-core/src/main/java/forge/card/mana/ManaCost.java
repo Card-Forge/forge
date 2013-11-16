@@ -280,5 +280,4 @@ public final class ManaCost implements Comparable<ManaCost> {
         res.sealClass(sh);
         return res;
     }
-
 }

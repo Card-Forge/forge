@@ -10,6 +10,17 @@ public class ManaCostParser implements IParserManaCost {
     private final String[] cost;
     private int nextToken;
     private int colorlessCost;
+    
+    /**
+     * Parse the given cost and output formatted cost string
+     * 
+     * @param cost
+     */
+    public static String parse(final String cost) {
+    	final ManaCostParser parser = new ManaCostParser(cost);
+    	final ManaCost manaCost = new ManaCost(parser);
+    	return manaCost.toString();
+    }
 
     /**
      * Instantiates a new parser cardname txt mana cost.
@@ -54,7 +65,6 @@ public class ManaCostParser implements IParserManaCost {
      */
     @Override
     public final ManaCostShard next() {
-
         final String unparsed = this.cost[this.nextToken++];
         // System.out.println(unparsed);
         if (StringUtils.isNumeric(unparsed)) {

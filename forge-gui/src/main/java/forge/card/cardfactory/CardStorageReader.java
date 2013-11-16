@@ -513,10 +513,11 @@ public class CardStorageReader {
 
         //check for other key phrases that might be missing "{G}" formatting
         String[] phrases = new String[] {
-        		"Add * to your mana pool"
+        		"Add * to your mana pool",
+        		"CostDesc\\$ * \\|"
         };
         for (String phrase : phrases) {
-        	String pattern = ".*Description\\$.*" + phrase.replace("* ", "((([WUBRGSXYZ]|[0-9]+) )+)") + ".*"; 
+        	String pattern = ".*" + phrase.replace("* ", "((([WUBRGSXYZ]|[0-9]+) )+)") + ".*"; 
 	        Pattern p = Pattern.compile(pattern);
 	        for (int i = 0; i < lines.size(); i++) {
 	        	String line = lines.get(i);

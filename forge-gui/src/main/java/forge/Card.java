@@ -57,6 +57,7 @@ import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
@@ -2002,7 +2003,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final StringBuilder sbMana = new StringBuilder();
 
         for (int i = 0; i < keywords.size(); i++) {
-            String keyword = keywords.get(i).toString();
+            String keyword = keywords.get(i);
             if (keyword.startsWith("Permanents don't untap during their controllers' untap steps")
                     || keyword.startsWith("PreventAllDamageBy")
                     || keyword.startsWith("CantBlock")
@@ -2032,23 +2033,22 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
                 sbLong.append(s).append("\r\n");
             } else if (keyword.startsWith("Protection:")) {
-                final String[] k = keywords.get(i).split(":");
+                final String[] k = keyword.split(":");
                 sbLong.append(k[2]).append("\r\n");
             } else if (keyword.startsWith("Creatures can't attack unless their controller pays")) {
-                final String[] k = keywords.get(i).split(":");
+                final String[] k = keyword.split(":");
                 if (!k[3].equals("no text")) {
                     sbLong.append(k[3]).append("\r\n");
                 }
             } else if (keyword.startsWith("Enchant")) {
-                String k = keywords.get(i);
+                String k = keyword;
                 k = k.replace("Curse", "");
                 sbLong.append(k).append("\r\n");
-            } else if (keyword.startsWith("Fading")
-                    || keyword.startsWith("Ripple") || keywords.get(i).startsWith("Unearth")
-                    || keyword.startsWith("Vanishing") || keywords.get(i).startsWith("Madness")) {
-                String k = keywords.get(i);
-                k = k.replace(":", " ");
-                sbLong.append(k).append("\r\n");
+            } else if (keyword.startsWith("Fading") || keyword.startsWith("Ripple") || keyword.startsWith("Vanishing")) {
+                sbLong.append(keyword.replace(":", " ")).append("\r\n");
+            } else if (keyword.startsWith("Unearth") || keyword.startsWith("Madness")) {
+                String[] parts = keyword.split(":");
+                sbLong.append(parts[0] + " " + ManaCostParser.parse(parts[1])).append("\r\n");
             } else if (keyword.startsWith("Devour")) {
                 final String[] parts = keyword.split(":");
                 final String extra = parts.length > 2 ? parts[2] : "";
@@ -2057,7 +2057,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Morph")) {
                 sbLong.append("Morph");
                 if (keyword.contains(":")) {
-                    final Cost mCost = new Cost(keywords.get(i).substring(6), true);
+                    final Cost mCost = new Cost(keyword.substring(6), true);
                     if (!mCost.isOnlyManaCost()) {
                         sbLong.append(" -");
                     }
@@ -2069,21 +2069,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             } else if (keyword.startsWith("Echo")) {
                 sbLong.append("Echo ");
-                final String[] upkeepCostParams = keywords.get(i).split(":");
-                final String cost = upkeepCostParams[1];
-                final String costDesc = upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : cost;
-                sbLong.append(costDesc);
+                final String[] upkeepCostParams = keyword.split(":");
+                sbLong.append(upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
                 sbLong.append("\r\n");
             } else if (keyword.startsWith("Cumulative upkeep")) {
                 sbLong.append("Cumulative upkeep ");
-                final String[] upkeepCostParams = keywords.get(i).split(":");
-                final String cost = upkeepCostParams[1];
-                final String costDesc = upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : cost;
-                sbLong.append(costDesc);
+                final String[] upkeepCostParams = keyword.split(":");
+                sbLong.append(upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
                 sbLong.append("\r\n");
             } else if (keyword.startsWith("Amplify")) {
                 sbLong.append("Amplify ");
-                final String[] ampParams = keywords.get(i).split(":");
+                final String[] ampParams = keyword.split(":");
                 final String magnitude = ampParams[1];
                 sbLong.append(magnitude);
                 sbLong.append("(As this creature enters the battlefield, put a +1/+1 counter on it for each ");
@@ -2099,20 +2095,20 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append("As an additional cost to cast " + this.getName() + ", " + cost1.toSimpleString()
                         + " or pay " + cost2.toSimpleString() + ".\r\n");
             } else if (keyword.startsWith("Kicker")) {
-                final Cost cost = new Cost(keywords.get(i).substring(7), false);
+                final Cost cost = new Cost(keyword.substring(7), false);
                 sbLong.append("Kicker " + cost.toSimpleString() + "\r\n");
-            } else if (keyword.endsWith(".") && !keywords.get(i).startsWith("Haunt")) {
-                sbLong.append(keywords.get(i).toString()).append("\r\n");
+            } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
+                sbLong.append(keyword.toString()).append("\r\n");
             } else if (keyword.contains("At the beginning of your upkeep, ")
                     && keyword.contains(" unless you pay")) {
-                sbLong.append(keywords.get(i).toString()).append("\r\n");
+                sbLong.append(keyword.toString()).append("\r\n");
             } else if (keyword.toString().contains("tap: add ")) {
-                sbMana.append(keywords.get(i).toString()).append("\r\n");
+                sbMana.append(keyword.toString()).append("\r\n");
             } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
                 continue;
             } else if (keyword.startsWith("Provoke")) {
-                sbLong.append(keywords.get(i));
+                sbLong.append(keyword);
                 sbLong.append(" (When this attacks, you may have target creature ");
                 sbLong.append("defending player controls untap and block it if able.)");
             } else if (keyword.contains("Haunt")) {
@@ -2135,14 +2131,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (sb.length() != 0) {
                     sb.append("\r\n");
                 }
-                sbLong.append(keywords.get(i));
+                sbLong.append(keyword);
                 sbLong.append(" (You may cast this card any time you could cast an instant by sacrificing a ");
                 sbLong.append(offeringType);
                 sbLong.append("and paying the difference in mana costs between this and the sacrificed ");
                 sbLong.append(offeringType);
                 sbLong.append(". Mana cost includes color.)");
             } else if (keyword.startsWith("Soulbond")) {
-                sbLong.append(keywords.get(i));
+                sbLong.append(keyword);
                 sbLong.append(" (You may pair this creature ");
                 sbLong.append("with another unpaired creature when either ");
                 sbLong.append("enters the battlefield. They remain paired for ");
