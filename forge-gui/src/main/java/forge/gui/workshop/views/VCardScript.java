@@ -1,16 +1,12 @@
 package forge.gui.workshop.views;
 
-import java.awt.Insets;
-
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FTextEditor;
 import forge.gui.workshop.controllers.CCardScript;
 
 /** 
@@ -26,25 +22,14 @@ public enum VCardScript implements IVDoc<CCardScript> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Card Script");
 
-    private final JTextArea tarScript = new JTextArea();
-    private final JScrollPane scroller;
+    private final FTextEditor txtScript = new FTextEditor();
 
     //========== Constructor
     private VCardScript() {
-        FSkin.JTextComponentSkin<JTextArea> txtScriptSkin = FSkin.get(tarScript);
-        txtScriptSkin.setFont(FSkin.getFixedFont(16));
-        txtScriptSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        txtScriptSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        txtScriptSkin.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tarScript.setMargin(new Insets(3, 3, 3, 3));
-
-        scroller = new JScrollPane(tarScript);
-        scroller.setBorder(null);
-        scroller.setOpaque(false);
     }
     
-    public JTextArea getTarScript() {
-    	return tarScript;
+    public FTextEditor getTxtScript() {
+    	return txtScript;
     }
 
     //========== Overridden methods
@@ -96,6 +81,6 @@ public enum VCardScript implements IVDoc<CCardScript> {
     public void populate() {
     	JPanel body = parentCell.getBody();
     	body.setLayout(new MigLayout("insets 1, gap 0, wrap"));
-    	body.add(scroller, "w 100%, h 100%");
+    	body.add(txtScript, "w 100%, h 100%");
     }
 }

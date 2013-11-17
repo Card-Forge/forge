@@ -12,6 +12,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.FTextEditor;
 import forge.gui.workshop.menus.WorkshopFileMenu;
 import forge.gui.workshop.views.VCardDesigner;
 import forge.gui.workshop.views.VCardScript;
@@ -35,7 +36,7 @@ public enum CCardScript implements ICDoc {
     private boolean isTextDirty;
     
     private CCardScript() {
-    	VCardScript.SINGLETON_INSTANCE.getTarScript().getDocument().addDocumentListener(new DocumentListener() {
+    	VCardScript.SINGLETON_INSTANCE.getTxtScript().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent arg0) {
 				updateDirtyFlag();
@@ -54,7 +55,7 @@ public enum CCardScript implements ICDoc {
     }
     
     private void updateDirtyFlag() {
-    	boolean isTextNowDirty = !VCardScript.SINGLETON_INSTANCE.getTarScript().getText().equals(baseText);
+    	boolean isTextNowDirty = !VCardScript.SINGLETON_INSTANCE.getTxtScript().getText().equals(baseText);
     	if (this.isTextDirty == isTextNowDirty) { return; }
     	this.isTextDirty = isTextNowDirty;
     	VCardDesigner.SINGLETON_INSTANCE.getBtnSaveCard().setEnabled(isTextNowDirty);
@@ -94,10 +95,10 @@ public enum CCardScript implements ICDoc {
         }
         this.baseText = text;
 
-        JTextArea tarScript = VCardScript.SINGLETON_INSTANCE.getTarScript();
-        tarScript.setText(text);
-        tarScript.setEditable(editable);
-        tarScript.setCaretPosition(0); //keep scrolled to top
+        FTextEditor txtScript = VCardScript.SINGLETON_INSTANCE.getTxtScript();
+        txtScript.setText(text);
+        txtScript.setEditable(editable);
+        txtScript.setCaretPosition(0); //keep scrolled to top
     }
     
     public boolean hasChanges() {
@@ -131,7 +132,7 @@ public enum CCardScript implements ICDoc {
         if (sourceFile == null) { return true; }
     	
     	try {
-    		String text = VCardScript.SINGLETON_INSTANCE.getTarScript().getText();
+    		String text = VCardScript.SINGLETON_INSTANCE.getTxtScript().getText();
 
             PrintWriter p = new PrintWriter(sourceFile);
             p.print(text);
