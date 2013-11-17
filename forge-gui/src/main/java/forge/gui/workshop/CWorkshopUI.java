@@ -30,6 +30,7 @@ import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
 import forge.gui.toolbox.itemmanager.table.ItemTable;
 import forge.gui.workshop.controllers.CWorkshopCatalog;
+import forge.gui.workshop.menus.CWorkshopUIMenus;
 import forge.gui.workshop.views.VWorkshopCatalog;
 import forge.item.PaperCard;
 
@@ -53,7 +54,7 @@ public enum CWorkshopUI implements ICDoc, IMenuProvider {
      */
     @Override
     public List<JMenu> getMenus() {
-        return null; //TODO: Create Workshop menus
+        return new CWorkshopUIMenus().getMenus();
     }
 
     /* (non-Javadoc)

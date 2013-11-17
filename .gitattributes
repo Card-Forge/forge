@@ -15463,6 +15463,8 @@ forge-gui/src/main/java/forge/gui/workshop/VWorkshopUI.java -text
 forge-gui/src/main/java/forge/gui/workshop/controllers/CCardDesigner.java -text
 forge-gui/src/main/java/forge/gui/workshop/controllers/CCardScript.java -text
 forge-gui/src/main/java/forge/gui/workshop/controllers/CWorkshopCatalog.java -text
+forge-gui/src/main/java/forge/gui/workshop/menus/CWorkshopUIMenus.java -text
+forge-gui/src/main/java/forge/gui/workshop/menus/WorkshopFileMenu.java -text
 forge-gui/src/main/java/forge/gui/workshop/views/VCardDesigner.java -text
 forge-gui/src/main/java/forge/gui/workshop/views/VCardScript.java -text
 forge-gui/src/main/java/forge/gui/workshop/views/VWorkshopCatalog.java -text

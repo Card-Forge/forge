@@ -30,5 +30,4 @@ public class CMatchUIMenus {
     private boolean isDevModeEnabled() {
         return prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED);
     }
-
 }

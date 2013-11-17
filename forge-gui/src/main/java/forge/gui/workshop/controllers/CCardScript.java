@@ -12,6 +12,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.gui.workshop.menus.WorkshopFileMenu;
 import forge.gui.workshop.views.VCardDesigner;
 import forge.gui.workshop.views.VCardScript;
 import forge.gui.workshop.views.VWorkshopCatalog;
@@ -58,6 +59,7 @@ public enum CCardScript implements ICDoc {
     	this.isTextDirty = isTextNowDirty;
     	VCardDesigner.SINGLETON_INSTANCE.getBtnSaveCard().setEnabled(isTextNowDirty);
     	VCardScript.SINGLETON_INSTANCE.getTabLabel().setText((isTextNowDirty ? "*" : "") + "Card Script");
+    	WorkshopFileMenu.updateSaveEnabled();
     }
 
     public PaperCard getCurrentCard() {
@@ -98,8 +100,12 @@ public enum CCardScript implements ICDoc {
         tarScript.setCaretPosition(0); //keep scrolled to top
     }
     
+    public boolean hasChanges() {
+    	return (this.currentCard != null && this.isTextDirty);
+    }
+    
     public boolean canSwitchAway(boolean isCardChanging) {
-    	if (this.currentCard == null || !this.isTextDirty) { return true; }
+    	if (!hasChanges()) { return true; }
 
     	Singletons.getControl().ensureScreenActive(FScreen.WORKSHOP_SCREEN); //ensure Workshop is active before showing dialog
         final int choice = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
@@ -119,7 +125,7 @@ public enum CCardScript implements ICDoc {
     }
     
     public boolean saveChanges() {
-    	if (this.currentCard == null || !this.isTextDirty) { return true; } //not need if text hasn't been changed
+    	if (!hasChanges()) { return true; } //not need if text hasn't been changed
 
         File sourceFile = this.currentCard.getRules().getSourceFile();
         if (sourceFile == null) { return true; }
