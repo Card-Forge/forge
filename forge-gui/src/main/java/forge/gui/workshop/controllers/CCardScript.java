@@ -50,9 +50,11 @@ public enum CCardScript implements ICDoc {
     }
     
     private void updateDirtyFlag() {
-    	isTextDirty = !VCardScript.SINGLETON_INSTANCE.getTarScript().getText().equals(baseText);
-    	VCardDesigner.SINGLETON_INSTANCE.getBtnSaveCard().setEnabled(isTextDirty);
-    	VCardScript.SINGLETON_INSTANCE.getTabLabel().setText((isTextDirty ? "*" : "") + "Card Script");
+    	boolean isTextNowDirty = !VCardScript.SINGLETON_INSTANCE.getTarScript().getText().equals(baseText);
+    	if (this.isTextDirty == isTextNowDirty) { return; }
+    	this.isTextDirty = isTextNowDirty;
+    	VCardDesigner.SINGLETON_INSTANCE.getBtnSaveCard().setEnabled(isTextNowDirty);
+    	VCardScript.SINGLETON_INSTANCE.getTabLabel().setText((isTextNowDirty ? "*" : "") + "Card Script");
     }
 
     public void showCard(PaperCard card) {
