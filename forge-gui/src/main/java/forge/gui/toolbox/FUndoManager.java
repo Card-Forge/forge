@@ -158,13 +158,9 @@ public class FUndoManager extends UndoManager
 	 *  Caret to be repositioned
 	 */
 	public void insertUpdate(final DocumentEvent e) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				int offset = e.getOffset() + e.getLength();
-				offset = Math.min(offset, textComponent.getDocument().getLength());
-				textComponent.setCaretPosition(offset);
-			}
-		});
+		int offset = e.getOffset() + e.getLength();
+		offset = Math.min(offset, textComponent.getDocument().getLength());
+		textComponent.setCaretPosition(offset);
 	}
 
 	public void removeUpdate(DocumentEvent e) {
@@ -182,8 +178,9 @@ public class FUndoManager extends UndoManager
 
 		public void undo() throws CannotUndoException {
 			//  End the edit so future edits don't get absorbed by this edit
-			if (compoundEdit != null)
+			if (compoundEdit != null) {
 				compoundEdit.end();
+			}
 
 			super.undo();
 
