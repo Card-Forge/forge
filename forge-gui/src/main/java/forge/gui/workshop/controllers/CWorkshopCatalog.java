@@ -353,6 +353,7 @@ public enum CWorkshopCatalog implements ICDoc {
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
         VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().getTable().setup(lstCatalogCols);
+        //TODO: Restore previously selected card
     }
 
     public void applyCurrentFilter() {

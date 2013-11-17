@@ -5,6 +5,7 @@ import javax.swing.SwingUtilities;
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
+import forge.gui.workshop.controllers.CCardScript;
 import forge.gui.workshop.views.VWorkshopCatalog;
 
 /** 
@@ -46,8 +47,7 @@ public enum VWorkshopUI implements IVTopLevelUI {
      */
     @Override
     public boolean onSwitching(FScreen fromScreen, FScreen toScreen) {
-        //TODO: ensure card saved before switching
-        return true;
+        return CCardScript.SINGLETON_INSTANCE.canSwitchAway(false);
     }
 
     /* (non-Javadoc)

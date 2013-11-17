@@ -260,6 +260,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
+     * setSelectedItem.
+     * 
+     * @param item - Item to select
+     */
+    public void setSelectedItem(T item) {
+    	this.table.setSelectedItem(item);
+    }
+
+    /**
+     * 
      * addItem.
      * 
      * @param item

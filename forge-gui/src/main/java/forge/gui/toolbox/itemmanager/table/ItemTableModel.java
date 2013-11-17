@@ -112,15 +112,30 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
     }
 
     /**
-     * Row to card.
+     * Row to item.
      * 
-     * @param row
-     *            the row
-     * @return the entry
+     * @param row - the row
+     * @return the item
      */
     public Entry<T, Integer> rowToItem(final int row) {
-        final List<Entry<T, Integer>> model = this.model.getOrderedList();
-        return (row >= 0) && (row < model.size()) ? model.get(row) : null;
+        final List<Entry<T, Integer>> orderedList = this.model.getOrderedList();
+        return (row >= 0) && (row < orderedList.size()) ? orderedList.get(row) : null;
+    }
+    
+    /**
+     * Item to row.
+     * 
+     * @param item - the item
+     * @return the row
+     */
+    public int itemToRow(final T item) { //TODO: Consider optimizing this if used frequently
+        final List<Entry<T, Integer>> orderedList = this.model.getOrderedList();
+        for (int i = 0; i < orderedList.size(); i++) {
+        	if (orderedList.get(i).getKey() == item) {
+        		return i;
+        	}
+        }
+        return -1;
     }
 
     public void onSelectionChange(final ItemTable<T> table) {

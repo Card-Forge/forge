@@ -15459,7 +15459,6 @@ forge-gui/src/main/java/forge/gui/toolbox/special/PhaseLabel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/special/PlayerDetailsPanel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/special/package-info.java -text
 forge-gui/src/main/java/forge/gui/workshop/CWorkshopUI.java -text
-forge-gui/src/main/java/forge/gui/workshop/SWorkshopIO.java -text
 forge-gui/src/main/java/forge/gui/workshop/VWorkshopUI.java -text
 forge-gui/src/main/java/forge/gui/workshop/controllers/CCardDesigner.java -text
 forge-gui/src/main/java/forge/gui/workshop/controllers/CCardScript.java -text

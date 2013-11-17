@@ -3,15 +3,18 @@ package forge.gui.workshop.controllers;
 import java.io.File;
 import java.io.PrintWriter;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import forge.Command;
-import forge.error.BugReporter;
+import forge.Singletons;
+import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.workshop.views.VCardDesigner;
 import forge.gui.workshop.views.VCardScript;
+import forge.gui.workshop.views.VWorkshopCatalog;
 import forge.item.PaperCard;
 import forge.util.FileUtil;
 
@@ -57,21 +60,35 @@ public enum CCardScript implements ICDoc {
     	VCardScript.SINGLETON_INSTANCE.getTabLabel().setText((isTextNowDirty ? "*" : "") + "Card Script");
     }
 
+    public PaperCard getCurrentCard() {
+    	return this.currentCard;
+    }
+
     public void showCard(PaperCard card) {
     	if (this.currentCard == card) { return; }
-    	this.currentCard = card;
+    	if (!canSwitchAway(true)) { //ensure current card saved before changing to a different card
+    		VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().setSelectedItem(this.currentCard); //return selection to current card //TODO: fix so clicking away again doesn't cause weird selection problems
+    		return;
+    	}
 
+    	this.currentCard = card;
+    	refresh();
+    }
+    
+    public void refresh() {
     	String text = "";
         boolean editable = false;
-        File sourceFile = card.getRules().getSourceFile();
-        if (sourceFile != null) {
-        	try {
-        		text = FileUtil.readFileToString(sourceFile);
-        		editable = true;
-        	}
-        	catch (final Exception ex) {
-        		text = "Couldn't read file - " + sourceFile + "\n\nException:\n" + ex.toString();
-        	}
+        if (this.currentCard != null) {
+	        File sourceFile = this.currentCard.getRules().getSourceFile();
+	        if (sourceFile != null) {
+	        	try {
+	        		text = FileUtil.readFileToString(sourceFile);
+	        		editable = true;
+	        	}
+	        	catch (final Exception ex) {
+	        		text = "Couldn't read file - " + sourceFile + "\n\nException:\n" + ex.toString();
+	        	}
+	        }
         }
         this.baseText = text;
 
@@ -81,11 +98,31 @@ public enum CCardScript implements ICDoc {
         tarScript.setCaretPosition(0); //keep scrolled to top
     }
     
-    public void saveChanges() {
-    	if (this.currentCard == null || !this.isTextDirty) { return; } //not need if text hasn't been changed
+    public boolean canSwitchAway(boolean isCardChanging) {
+    	if (this.currentCard == null || !this.isTextDirty) { return true; }
+
+    	Singletons.getControl().ensureScreenActive(FScreen.WORKSHOP_SCREEN); //ensure Workshop is active before showing dialog
+        final int choice = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+                "Save changes to " + this.currentCard + "?",
+                "Save Changes?",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (choice == JOptionPane.CANCEL_OPTION) { return false; }
+
+        if (choice == JOptionPane.YES_OPTION && !saveChanges()) { return false; }
+
+        if (!isCardChanging) {
+        	refresh(); //refresh if current card isn't changing to restore script text from file
+        }
+        return true;
+    }
+    
+    public boolean saveChanges() {
+    	if (this.currentCard == null || !this.isTextDirty) { return true; } //not need if text hasn't been changed
 
         File sourceFile = this.currentCard.getRules().getSourceFile();
-        if (sourceFile == null) { return; }
+        if (sourceFile == null) { return true; }
     	
     	try {
     		String text = VCardScript.SINGLETON_INSTANCE.getTarScript().getText();
@@ -96,9 +133,10 @@ public enum CCardScript implements ICDoc {
             
             this.baseText = text;
             updateDirtyFlag();
+            return true;
         } catch (final Exception ex) {
-            BugReporter.reportException(ex);
-            throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + sourceFile + " : " + ex);
+        	JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "FileUtil : writeFile() error, problem writing file - " + sourceFile + " : " + ex);
+        	return false;
         }
     }
 

@@ -306,6 +306,19 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         return items;
     }
 
+    /**
+     * 
+     * setSelectedItem.
+     * 
+     * @param item - Item to select
+     */
+    public void setSelectedItem(T item) {
+    	int row = this.tableModel.itemToRow(item);
+    	if (row != -1) {
+    		selectAndScrollTo(row);
+    	}
+    }
+
     public void setWantElasticColumns(boolean value) {
         setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_OFF);
     }
