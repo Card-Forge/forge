@@ -58,6 +58,10 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
     private final FSkin.JTableSkin<ItemTable<T>> skin;
     private final ItemManager<T> itemManager;
     private final ItemTableModel<T> tableModel;
+
+    public ItemManager<T> getItemManager() {
+    	return this.itemManager;
+    }
     
     public ItemTableModel<T> getTableModel() {
         return this.tableModel;
@@ -283,7 +287,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
      * 
      * @return InventoryItem
      */
-    public InventoryItem getSelectedItem() {
+    public T getSelectedItem() {
         final int iRow = getSelectedRow();
         return iRow >= 0 ? this.tableModel.rowToItem(iRow).getKey() : null;
     }
@@ -294,8 +298,8 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
      * 
      * @return List<InventoryItem>
      */
-    public List<InventoryItem> getSelectedItems() {
-        List<InventoryItem> items = new ArrayList<InventoryItem>();
+    public List<T> getSelectedItems() {
+        List<T> items = new ArrayList<T>();
         for (int row : getSelectedRows()) {
             items.add(tableModel.rowToItem(row).getKey());
         }

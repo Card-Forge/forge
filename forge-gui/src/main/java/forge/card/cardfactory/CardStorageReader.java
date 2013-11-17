@@ -329,15 +329,17 @@ public class CardStorageReader {
      * 
      * @return a new Card instance
      */
-    protected final CardRules loadCard(final CardRulesReader reader, final File pathToTxtFile) {
+    protected final CardRules loadCard(final CardRulesReader reader, final File file) {
         FileInputStream fileInputStream = null;
         try {
-            fileInputStream = new FileInputStream(pathToTxtFile);
-            return this.loadCard(reader, fileInputStream);
+            fileInputStream = new FileInputStream(file);
+            CardRules rules = this.loadCard(reader, fileInputStream);
+            rules.setSourceFile(file);
+            return rules;
         } catch (final FileNotFoundException ex) {
-            BugReporter.reportException(ex, "File \"%s\" exception", pathToTxtFile.getAbsolutePath());
+            BugReporter.reportException(ex, "File \"%s\" exception", file.getAbsolutePath());
             throw new RuntimeException("CardReader : run error -- file exception -- filename is "
-                    + pathToTxtFile.getPath(), ex);
+                    + file.getPath(), ex);
         } finally {
             try {
                 fileInputStream.close();

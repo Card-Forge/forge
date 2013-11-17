@@ -115,15 +115,22 @@ public final class FileUtil {
     } // writeAllDecks()
 
     public static String readFileToString(String filename) {
+        return readFileToString(new File(filename));
+    }
+    
+    public static String readFileToString(File file) {
         StringBuilder s = new StringBuilder();
-        for (String line : readFile(filename)) {
-            s.append(line).append('\n');
+        for (String line : readFile(file)) {
+        	if (s.length() > 0) {
+        		s.append('\n');
+        	}
+            s.append(line);
         }
         return s.toString();
     }
     
     public static List<String> readFile(final String filename) {
-        return FileUtil.readFile(new File(filename));
+        return readFile(new File(filename));
     }
 
     // reads line by line and adds each line to the ArrayList

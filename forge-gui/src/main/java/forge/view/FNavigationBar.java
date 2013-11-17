@@ -89,6 +89,7 @@ public class FNavigationBar extends FTitleBarBase {
 
         addNavigationTab(FScreen.HOME_SCREEN);
         addNavigationTab(FScreen.DECK_EDITOR_CONSTRUCTED);
+        addNavigationTab(FScreen.WORKSHOP_SCREEN);
 
         super.addControls();
 

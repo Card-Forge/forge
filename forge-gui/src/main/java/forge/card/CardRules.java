@@ -17,7 +17,9 @@
  */
 package forge.card;
 
+import java.io.File;
 import java.util.List;
+
 import forge.card.mana.ManaCost;
 
 /**
@@ -34,8 +36,8 @@ public final class CardRules implements ICardCharacteristics {
     //private final Map<String, CardInSet> setsPrinted = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
 
     private CardAiHints aiHints;
-    
     private ColorSet colorIdentity = null;
+    private File sourceFile;
 
     public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
@@ -65,8 +67,7 @@ public final class CardRules implements ICardCharacteristics {
         colorIdentity = ColorSet.fromMask(colMask);
     }
     
-    private byte calculateColorIdentity(ICardFace face)
-    {
+    private byte calculateColorIdentity(ICardFace face) {
         byte res = face.getColor().getColor();
         boolean isReminder = false;
         boolean isSymbol = false;
@@ -216,7 +217,14 @@ public final class CardRules implements ICardCharacteristics {
     }
     
     public ColorSet getColorIdentity() {
-        return colorIdentity;
-        
+        return this.colorIdentity;
+    }
+
+    public File getSourceFile() {
+        return this.sourceFile;
+    }
+
+    public void setSourceFile(File sourceFile0) {
+    	this.sourceFile = sourceFile0;
     }
 }

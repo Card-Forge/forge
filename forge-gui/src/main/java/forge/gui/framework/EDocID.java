@@ -40,6 +40,9 @@ import forge.gui.match.views.VMessage;
 import forge.gui.match.views.VPicture;
 import forge.gui.match.views.VPlayers;
 import forge.gui.match.views.VStack;
+import forge.gui.workshop.views.VCardDesigner;
+import forge.gui.workshop.views.VCardScript;
+import forge.gui.workshop.views.VWorkshopCatalog;
 
 /**
  * These are the identifiers for tabs found in the drag layout.
@@ -59,6 +62,10 @@ public enum EDocID { /** */
     EDITOR_CATALOG (VCardCatalog.SINGLETON_INSTANCE), /** */
     EDITOR_CURRENTDECK (VCurrentDeck.SINGLETON_INSTANCE), /** */
     EDITOR_DECKGEN (VDeckgen.SINGLETON_INSTANCE), /** */
+    
+    WORKSHOP_CATALOG (VWorkshopCatalog.SINGLETON_INSTANCE), /** */
+    WORKSHOP_CARDDESIGNER (VCardDesigner.SINGLETON_INSTANCE), /** */
+    WORKSHOP_CARDSCRIPT (VCardScript.SINGLETON_INSTANCE), /** */
 
     HOME_QUESTCHALLENGES (VSubmenuChallenges.SINGLETON_INSTANCE), /** */
     HOME_QUESTDUELS (VSubmenuDuels.SINGLETON_INSTANCE), /** */

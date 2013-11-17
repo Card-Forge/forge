@@ -62,6 +62,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to Default Settings").build();
     private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Match Layout").build();
     private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Editor Layout").build();
+    private final FLabel btnDeleteWorkshopUI = new FLabel.Builder().opaque(true).hoverable(true).text("Reset Workshop Layout").build();
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
 
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
@@ -103,18 +104,16 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         final String sectionConstraints = "w 80%!, h 42px!, gap 10% 0 10px 10px, span 2 1";
         final String regularConstraints = "w 80%!, h 22px!, gap 10% 0 0 10px, span 2 1";
 
-
         // Troubleshooting
         pnlPrefs.add(new SectionLabel("Troubleshooting"), sectionConstraints);
 
-        //pnlPrefs.add(new SectionLabel(" "), sectionConstraints);
-        pnlPrefs.add(btnReset, regularConstraints + ", h 30px!");
-
-        final String twoButtonConstraints = "w 38%!, h 30px!, gap 10% 0 0 10px";
-        pnlPrefs.add(btnDeleteMatchUI, twoButtonConstraints);
-        pnlPrefs.add(btnDeleteEditorUI, "w 38%!, h 30px!, gap 0 0 0 10px");
-        // Reset button
-
+        // Reset buttons
+        final String twoButtonConstraints1 = "w 38%!, h 30px!, gap 10% 0 0 10px";
+        final String twoButtonConstraints2 = "w 38%!, h 30px!, gap 0 0 0 10px";
+        pnlPrefs.add(btnReset, twoButtonConstraints1);
+        pnlPrefs.add(btnDeleteMatchUI, twoButtonConstraints2);
+        pnlPrefs.add(btnDeleteEditorUI, twoButtonConstraints1);
+        pnlPrefs.add(btnDeleteWorkshopUI, twoButtonConstraints2);
 
         // General Configuration
         pnlPrefs.add(new SectionLabel("General Configuration"), sectionConstraints + ", gaptop 2%");
@@ -507,6 +506,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final FLabel getBtnDeleteEditorUI() {
         return btnDeleteEditorUI;
+    }
+    
+    public final FLabel getBtnDeleteWorkshopUI() {
+        return btnDeleteWorkshopUI;
     }
 
     /* (non-Javadoc)

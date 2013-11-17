@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout>
+	<cell x="0.0" y="0.0" w="0.38722" h="0.62302">
+		<doc>WORKSHOP_CATALOG</doc>
+	</cell>
+	<cell x="0.38722" y="0.0" w="0.38722" h="0.62302">
+		<doc>WORKSHOP_CARDDESIGNER</doc>
+	</cell>
+	<cell x="0.0" y="0.62302" w="0.77444" h="0.37698">
+		<doc>WORKSHOP_CARDSCRIPT</doc>
+	</cell>
+	<cell x="0.77444" y="0.0" w="0.22556" h="0.37698">
+		<doc>CARD_DETAIL</doc>
+	</cell>
+	<cell x="0.77444" y="0.37698" w="0.22556" h="0.62302">
+		<doc>CARD_PICTURE</doc>
+	</cell>
+</layout>

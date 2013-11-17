@@ -47,8 +47,6 @@ public class CardRulesReader {
     private boolean removedFromRandomDecks = false;
     private DeckHints hints = null;
     private DeckHints needs = null;
-    
-
 
     // Reset all fields to parse next card (to avoid allocating new
     // CardRulesReader N times)

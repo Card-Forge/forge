@@ -40,6 +40,8 @@ import javax.swing.PopupFactory;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.commons.lang.CharUtils;
 import org.apache.commons.lang.StringUtils;
@@ -85,7 +87,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     SINGLETON_INSTANCE;
 
     private final HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>> screenChildControllers;
-    private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
+	private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
     private boolean isFindingAsYouType = false;
 
     private CDeckEditorUI() {
@@ -358,7 +360,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                     removeSelectedCards(toAlternate, qty);
                 }
             };
-            
+
             catTable.addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftDoubleClick(MouseEvent e) {
@@ -406,6 +408,24 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             // highlight items as the user types a portion of their names
             catTable.addKeyListener(catFind);
             deckTable.addKeyListener(deckFind);
+            
+            //set card when selection changes
+            catView.addSelectionListener(new ListSelectionListener() {
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					setCard(catView.getSelectedItem());
+				}
+			});
+            
+            deckView.addSelectionListener(new ListSelectionListener() {
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					setCard(deckView.getSelectedItem());
+				}
+			});
+            
+            catView.setAllowMultipleSelections(true);            
+            deckView.setAllowMultipleSelections(true);
             
             childController.listenersHooked = true;
         }

@@ -13468,6 +13468,7 @@ forge-gui/res/defaults/gauntlet/LOCKED_Swimming[!!-~]With[!!-~]Sharks.dat -text
 forge-gui/res/defaults/home.xml svneol=native#text/xml
 forge-gui/res/defaults/match.xml svneol=native#text/xml
 forge-gui/res/defaults/window.xml -text
+forge-gui/res/defaults/workshop.xml -text
 forge-gui/res/draft/cube_juzamjedi.draft -text
 forge-gui/res/draft/cube_skiera.draft -text
 forge-gui/res/draft/rankings.txt -text
@@ -15457,6 +15458,15 @@ forge-gui/src/main/java/forge/gui/toolbox/special/PhaseIndicator.java -text
 forge-gui/src/main/java/forge/gui/toolbox/special/PhaseLabel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/special/PlayerDetailsPanel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/special/package-info.java -text
+forge-gui/src/main/java/forge/gui/workshop/CWorkshopUI.java -text
+forge-gui/src/main/java/forge/gui/workshop/SWorkshopIO.java -text
+forge-gui/src/main/java/forge/gui/workshop/VWorkshopUI.java -text
+forge-gui/src/main/java/forge/gui/workshop/controllers/CCardDesigner.java -text
+forge-gui/src/main/java/forge/gui/workshop/controllers/CCardScript.java -text
+forge-gui/src/main/java/forge/gui/workshop/controllers/CWorkshopCatalog.java -text
+forge-gui/src/main/java/forge/gui/workshop/views/VCardDesigner.java -text
+forge-gui/src/main/java/forge/gui/workshop/views/VCardScript.java -text
+forge-gui/src/main/java/forge/gui/workshop/views/VWorkshopCatalog.java -text
 forge-gui/src/main/java/forge/item/BoosterPack.java -text
 forge-gui/src/main/java/forge/item/FatPack.java -text
 forge-gui/src/main/java/forge/item/IPaperCard.java -text

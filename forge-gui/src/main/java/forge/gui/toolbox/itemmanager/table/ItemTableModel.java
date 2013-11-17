@@ -28,7 +28,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -38,7 +37,6 @@ import javax.swing.table.TableColumnModel;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
@@ -125,17 +123,13 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
         return (row >= 0) && (row < model.size()) ? model.get(row) : null;
     }
 
-    /**
-     * Show selected card.
-     * 
-     * @param table
-     *            the table
-     */
-    public void showSelectedItem(final JTable table) {
+    public void onSelectionChange(final ItemTable<T> table) {
         final int row = table.getSelectedRow();
         if (row != -1) {
-            Entry<T, Integer> card = this.rowToItem(row);
-            CDeckEditorUI.SINGLETON_INSTANCE.setCard(null != card ? card.getKey() : null);
+            ListSelectionEvent event = new ListSelectionEvent(table.getItemManager(), row, row, false);
+            for (ListSelectionListener listener : table.getItemManager().getSelectionListeners()) {
+            	listener.valueChanged(event);
+            }
         }
     }
     
@@ -143,7 +137,7 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
         @Override
         public void valueChanged(final ListSelectionEvent arg0) {
             if (table.isFocusOwner()) {
-                ItemTableModel.this.showSelectedItem(table);
+                ItemTableModel.this.onSelectionChange(table);
             }
         }
     };
@@ -151,7 +145,7 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
     private final FocusAdapter focusAdapter = new FocusAdapter() {
         @Override
         public void focusGained(final FocusEvent e) {
-            ItemTableModel.this.showSelectedItem(table);
+            ItemTableModel.this.onSelectionChange(table);
         }
     };
 

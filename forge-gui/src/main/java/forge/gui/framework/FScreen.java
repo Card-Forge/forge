@@ -15,6 +15,8 @@ import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
+import forge.gui.workshop.CWorkshopUI;
+import forge.gui.workshop.VWorkshopUI;
 import forge.properties.FileLocation;
 import forge.properties.NewConstants;
 
@@ -35,10 +37,18 @@ public enum FScreen {
             VMatchUI.SINGLETON_INSTANCE,
             CMatchUI.SINGLETON_INSTANCE,
             "Game",
-            FSkin.getIcon(FSkin.DockIcons.ICO_ALPHASTRIKE),
+            FSkin.getIcon(FSkin.DockIcons.ICO_ALPHASTRIKE), //TODO: Create icon for match screen
             true,
             "Concede Game",
             NewConstants.MATCH_LAYOUT_FILE),
+    WORKSHOP_SCREEN(
+            VWorkshopUI.SINGLETON_INSTANCE,
+            CWorkshopUI.SINGLETON_INSTANCE,
+            "Workshop",
+            FSkin.getIcon(FSkin.DockIcons.ICO_SETTINGS), //TODO: Create icon for workshop screen
+            false,
+            "Back to Home",
+            NewConstants.WORKSHOP_LAYOUT_FILE),
     DECK_EDITOR_CONSTRUCTED(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,

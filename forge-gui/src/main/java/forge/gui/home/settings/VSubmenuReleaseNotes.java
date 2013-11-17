@@ -74,8 +74,6 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
         
         scroller = new JScrollPane(tar);
         pnlMain.add(scroller, "w 100%!, h 100%!");
-        
-                       
     }
     
     /* (non-Javadoc)

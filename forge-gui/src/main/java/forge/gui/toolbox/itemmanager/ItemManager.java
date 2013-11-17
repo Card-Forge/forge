@@ -29,6 +29,8 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionListener;
 
 import com.google.common.base.Predicate;
 
@@ -68,8 +70,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private final List<ItemFilter<T>> orderedFilters = new ArrayList<ItemFilter<T>>();
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
+    private boolean allowMultipleSelections = false;
     private final Class<T> genericType;
     private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels;
+    private final ArrayList<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
     
     private final FLabel btnAddFilter = new FLabel.ButtonBuilder()
             .text("Add")
@@ -94,6 +98,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         
         //build table view
         this.table = new ItemTable<T>(this, this.model);
+        this.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.tableScroller = new JScrollPane(this.table);
         this.tableScroller.setOpaque(false);
         this.tableScroller.getViewport().setOpaque(false);
@@ -133,8 +138,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     }
     
     @Override
-    public void doLayout()
-    {
+    public void doLayout() {
         //int number = 0;
         LayoutHelper helper = new LayoutHelper(this);
         /*for (ItemFilter<T> filter : this.orderedFilters) {
@@ -240,7 +244,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @return InventoryItem
      */
-    public InventoryItem getSelectedItem() {
+    public T getSelectedItem() {
         return this.table.getSelectedItem();
     }
     
@@ -250,7 +254,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @return List<InventoryItem>
      */
-    public List<InventoryItem> getSelectedItems() {
+    public List<T> getSelectedItems() {
         return this.table.getSelectedItems();
     }
 
@@ -471,7 +475,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * setWantUnique.
      * 
-     * @param unique if true, the editor will be set to the "unique item names only" mode.
+     * @param unique - if true, the editor will be set to the "unique item names only" mode.
      */
     public void setWantUnique(boolean unique) {
         this.wantUnique = this.alwaysNonUnique ? false : unique;
@@ -481,7 +485,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * getAlwaysNonUnique.
      * 
-     * @return if ture, this editor must always show non-unique items (e.g. quest editor).
+     * @return if true, this editor must always show non-unique items (e.g. quest editor).
      */
     public boolean getAlwaysNonUnique() {
         return this.alwaysNonUnique;
@@ -491,10 +495,32 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * setAlwaysNonUnique.
      * 
-     * @param nonUniqueOnly if true, this editor must always show non-unique items (e.g. quest editor).
+     * @param nonUniqueOnly - if true, this editor must always show non-unique items (e.g. quest editor).
      */
     public void setAlwaysNonUnique(boolean nonUniqueOnly) {
         this.alwaysNonUnique = nonUniqueOnly;
+    }
+    
+    /**
+     * 
+     * getAllowMultipleSelections.
+     * 
+     * @return if true, multiple items can be selected at once
+     */
+    public boolean getAllowMultipleSelections() {
+    	return this.allowMultipleSelections;
+    }
+    
+    /**
+     * 
+     * getAllowMultipleSelections.
+     * 
+     * @return allowMultipleSelections0 - if true, multiple items can be selected at once
+     */
+    public void setAllowMultipleSelections(boolean allowMultipleSelections0) {
+    	if (this.allowMultipleSelections == allowMultipleSelections0) { return; }
+    	this.allowMultipleSelections = allowMultipleSelections0;
+        this.table.setSelectionMode(allowMultipleSelections0 ? ListSelectionModel.MULTIPLE_INTERVAL_SELECTION : ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -508,5 +534,18 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         if (this.table.getRowCount() > 0) {
             this.table.changeSelection(0, 0, false, false);
         }
+    }
+
+    public void addSelectionListener(ListSelectionListener listener) {
+    	selectionListeners.remove(listener); //ensure listener not added multiple times
+    	selectionListeners.add(listener);
+    }
+    
+    public void removeSelectionListener(ListSelectionListener listener) {
+    	selectionListeners.remove(listener);
+    }
+    
+    public Iterable<ListSelectionListener> getSelectionListeners() {
+    	return selectionListeners;
     }
 }

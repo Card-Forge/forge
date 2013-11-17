@@ -106,6 +106,13 @@ public enum CSubmenuPreferences implements ICDoc {
                 CSubmenuPreferences.this.resetDeckEditorLayout();
             }
         });
+        
+        view.getBtnDeleteWorkshopUI().setCommand(new Command() {
+            @Override
+            public void run() {
+                CSubmenuPreferences.this.resetWorkshopLayout();
+            }
+        });
 
         view.getBtnDeleteMatchUI().setCommand(new Command() {
             @Override
@@ -174,6 +181,19 @@ public enum CSubmenuPreferences implements ICDoc {
         if (reply == JOptionPane.YES_OPTION) {
             if (FScreen.DECK_EDITOR_CONSTRUCTED.deleteLayoutFile()) {
                 JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Deck Editor layout has been reset.");
+            }
+        }
+    }
+
+    private void resetWorkshopLayout() {
+        String userPrompt =
+                "This will reset the Workshop screen layout.\n" +
+                        "All tabbed views will be restored to their default positions.\n\n" +
+                        "Reset layout?";
+        int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Workshop Layout", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            if (FScreen.WORKSHOP_SCREEN.deleteLayoutFile()) {
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Workshop layout has been reset.");
             }
         }
     }
