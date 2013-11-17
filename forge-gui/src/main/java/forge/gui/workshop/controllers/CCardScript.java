@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.PrintWriter;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
