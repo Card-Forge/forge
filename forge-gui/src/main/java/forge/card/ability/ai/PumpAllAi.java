@@ -104,6 +104,10 @@ public class PumpAllAi extends PumpAiBase {
                 }
                 return false;
             } // -X/-0 end
+            
+            if (comp.isEmpty() && ComputerUtil.activateForCost(sa, ai)) {
+            	return true;
+            }
 
             // evaluate both lists and pass only if human creatures are more
             // valuable
@@ -114,8 +118,10 @@ public class PumpAllAi extends PumpAiBase {
         } // end Curse
 
         // don't use non curse PumpAll after Combat_Begin until AI is improved
-        if (phase.isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) || phase.isBefore(PhaseType.MAIN1)) {
+        if (phase.isBefore(PhaseType.MAIN1)) {
             return false;
+        } else if (phase.isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        	return ComputerUtil.activateForCost(sa, ai);
         }
 
         // only count creatures that can attack

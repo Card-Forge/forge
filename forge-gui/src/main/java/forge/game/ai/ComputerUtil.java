@@ -47,6 +47,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
+import forge.card.cost.CostPutCounter;
 import forge.card.cost.CostSacrifice;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -1164,6 +1165,12 @@ public class ComputerUtil {
                     }
                 }
             }
+        } else if (sa.hasParam("Planeswalker") && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+        	for (final CostPart part : abCost.getCostParts()) {
+        		if (part instanceof CostPutCounter) {
+        			return true;
+        		}
+        	}
         }
         for (final CostPart part : abCost.getCostParts()) {
             if (part instanceof CostSacrifice) {
@@ -1783,7 +1790,6 @@ public class ComputerUtil {
         return damage;
     }
 
-    // although this should be in AI's code 
     public static boolean isNegativeCounter(CounterType type, Card c) {
         return type == CounterType.AGE || type == CounterType.BLAZE || type == CounterType.BRIBERY || type == CounterType.DOOM
                 || type == CounterType.ICE || type == CounterType.M1M1 || type == CounterType.M0M2 || type == CounterType.M0M1
