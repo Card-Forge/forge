@@ -1,0 +1,43 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+
+[metadata]
+Name=Rebels Unite
+Description=Explore your rebellious side! With the “Rebels Unite” deck, you’ll take command of a ragtag group of scrappy fighters that are always willing to rally to the cause. Their ambush tactics will help you win the day. 
+Deck Type=constructed
+Set=FUT
+Image=rebels_unite.jpg
+
+[main]
+12 Plains|TSP
+10 Swamp|TSP
+2 Terramorphic Expanse|TSP
+
+2 Samite Censer-Bearer|FUT
+1 Amrou Scout|TSP
+3 Blade of the Sixth Pride|FUT
+2 Errant Doomsayers|TSP
+1 Knight of the Holy Nimbus|TSP
+3 Amrou Seekers|TSP
+1 Aven Riftwatcher|PLC
+1 Defiant Vanguard|TSB
+1 Zealot il-Vec|TSP
+2 Outrider en-Kor|TSP
+1 Riftmarked Knight|PLC
+2 Ramosian Revivalist|FUT
+1 Angel of Salvation|FUT
+1 Blightspeaker|PLC
+2 Putrid Cyclops|FUT
+1 Big Game Hunter|PLC
+1 Magus of the Abyss|FUT
+
+2 Dawn Charm|PLC
+3 Lumithread Field|FUT
+2 Bound in Silence|FUT
+2 Return to Dust|TSP
+1 Witch's Mist|FUT
+
+[sideboard]
