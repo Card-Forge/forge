@@ -115,6 +115,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     private boolean cancel;
     private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int tptr = 0;
+    private int skipped = 0;
     private long lTime = System.currentTimeMillis();
 
     protected GuiDownloader() {
@@ -254,7 +255,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                     
                     sb.append(String.format("%02d remaining.", t2Go / 1000));
                 } else {
-                    sb.append(String.format("%d of %d items finished! Please close!",
+                    sb.append(String.format("%d of %d items finished! Skipped " + skipped + " items. Please close!",
                             card, GuiDownloader.this.cards.size()));
                     btnStart.setText("OK");
                     btnStart.addActionListener(actOK);
@@ -314,6 +315,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                     conn.disconnect();
                     System.out.println("Skipped Download for: " + fileDest.getPath());
                     update(++iCard, fileDest);
+                    skipped++;
                     continue;
                 }
 
