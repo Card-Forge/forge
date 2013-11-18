@@ -8701,9 +8701,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private static final Map<PaperCard, Card> cp2card = new HashMap<PaperCard, Card>();
     public static Card getCardForUi(IPaperCard pc) {
-        if( pc instanceof PaperCard ) {
+        if (pc instanceof PaperCard) {
             Card res = cp2card.get(pc);
-            if (null == res) { 
+            if (res == null) {
                 res = fromPaperCard(pc, null); 
                 cp2card.put((PaperCard) pc, res);
             }
@@ -8712,5 +8712,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         return fromPaperCard(pc, null);
     }
 
-
+    /**
+     * Update Card instance for the given PaperCard if any
+     * @param pc
+     */
+    public static void updateCard(PaperCard pc) {
+    	Card res = cp2card.get(pc);
+        if (res != null) {
+        	cp2card.put(pc, fromPaperCard(pc, null));
+        }
+    }
 } // end Card class

@@ -540,10 +540,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      */
     public void focus() {
         this.table.requestFocusInWindow();
-        
-        if (this.table.getRowCount() > 0) {
-            this.table.changeSelection(0, 0, false, false);
-        }
     }
 
     public void addSelectionListener(ListSelectionListener listener) {

@@ -30,16 +30,19 @@ import forge.card.mana.ManaCost;
  * @version $Id: CardRules.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardRules implements ICardCharacteristics {
-    private final CardSplitType splitType;
-    private final ICardFace mainPart;
-    private final ICardFace otherPart;
+    private CardSplitType splitType;
+    private ICardFace mainPart;
+    private ICardFace otherPart;
     //private final Map<String, CardInSet> setsPrinted = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
 
     private CardAiHints aiHints;
     private ColorSet colorIdentity = null;
     private File sourceFile;
 
-    public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
+    public CardRules() {
+    }
+    
+    public void setup(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
@@ -65,6 +68,12 @@ public final class CardRules implements ICardCharacteristics {
             colMask |= calculateColorIdentity(otherPart);
         }        
         colorIdentity = ColorSet.fromMask(colMask);
+        
+        //reset these
+        this.deltaHand = 0;
+        this.deltaLife = 0;
+        this.dlUrl = null;
+        this.dlUrlOtherSide = null;
     }
     
     private byte calculateColorIdentity(ICardFace face) {
@@ -135,7 +144,6 @@ public final class CardRules implements ICardCharacteristics {
                 return mainPart.getType();
         }
     }
-
 
     @Override
     public ManaCost getManaCost() {

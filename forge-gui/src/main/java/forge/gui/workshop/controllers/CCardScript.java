@@ -11,6 +11,8 @@ import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.gui.match.controllers.CDetail;
+import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.FTextEditor;
 import forge.gui.workshop.menus.WorkshopFileMenu;
 import forge.gui.workshop.views.VCardDesigner;
@@ -139,6 +141,11 @@ public enum CCardScript implements ICDoc {
             
             this.baseText = text;
             updateDirtyFlag();
+
+            this.currentCard.updateRules(text);
+            VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().repaint();
+	        CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
+	        CPicture.SINGLETON_INSTANCE.showImage(this.currentCard);
             return true;
         } catch (final Exception ex) {
         	JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "FileUtil : writeFile() error, problem writing file - " + sourceFile + " : " + ex);
