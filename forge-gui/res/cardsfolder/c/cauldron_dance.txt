@@ -5,7 +5,7 @@ A:SP$ ChangeZone | Cost$ 4 B R | Origin$ Graveyard | Destination$ Battlefield | 
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Keywords$ Haste | Triggers$ TrigBounce | sVars$ TrigReturn | SubAbility$ DBChangeZone
 SVar:TrigBounce:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return CARDNAME to its owner's hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | OptionalDecider$ You | ChangeType$ Creature | ChangeNum$ 1 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBAnimate2
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Creature | ChangeNum$ 1 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBAnimate2
 SVar:DBAnimate2:DB$ Animate | Defined$ Remembered | Keywords$ Haste | Triggers$ TrigSacrifice | sVars$ TrigSac
 SVar:TrigSacrifice:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the next end step, sacrifice CARDNAME.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup
