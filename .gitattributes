@@ -15635,6 +15635,7 @@ forge-gui/src/main/java/forge/util/storage/StorageImmediatelySerialized.java svn
 forge-gui/src/main/java/forge/util/storage/StorageNestedFolders.java -text
 forge-gui/src/main/java/forge/util/storage/package-info.java -text
 forge-gui/src/main/java/forge/view/ButtonUtil.java svneol=native#text/plain
+forge-gui/src/main/java/forge/view/CardReaderExperiments.java -text
 forge-gui/src/main/java/forge/view/FDialog.java -text
 forge-gui/src/main/java/forge/view/FFrame.java -text
 forge-gui/src/main/java/forge/view/FNavigationBar.java -text

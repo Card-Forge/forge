@@ -17,6 +17,7 @@
  */
 package forge.view;
 
+
 import forge.Singletons;
 import forge.card.cardfactory.CardStorageReader;
 import forge.net.FServer;
@@ -54,7 +55,7 @@ public final class Main {
                 break;
 
             case "parse":
-            	CardStorageReader.parseAllCards(args);
+            	CardReaderExperiments.parseAllCards(args);
                 break;
 
             case "server":
