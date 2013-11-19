@@ -30,7 +30,6 @@ import com.google.common.collect.Iterables;
 
 import forge.ImageCache;
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.EditionCollection;
@@ -101,7 +100,7 @@ public class ImportSourceAnalyzer {
         else if ("pics_product".equalsIgnoreCase(dirname)) { _analyzeProductPicsDir(root);     }
         else if ("preferences".equalsIgnoreCase(dirname))  { _analyzePreferencesDir(root);     }
         else if ("quest".equalsIgnoreCase(dirname))        { _analyzeQuestDir(root);           }
-        else if (null != Singletons.getModel().getEditions().get(dirname)) { _analyzeCardPicsSetDir(root); }
+        else if (null != Singletons.getMagicDb().getEditions().get(dirname)) { _analyzeCardPicsSetDir(root); }
         else {
             // look at files in directory and make a semi-educated guess based on file extensions
             int numUnhandledFiles = 0;
@@ -323,13 +322,13 @@ public class ImportSourceAnalyzer {
             _defaultPicNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
             _defaultPicOldNameToCurrentName = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
-            for (PaperCard c : CardDb.instance().getAllCards()) {
+            for (PaperCard c : Singletons.getMagicDb().getCommonCards().getAllCards()) {
                 _addDefaultPicNames(c, false);
                 if (ImageCache.hasBackFacePicture(c))
                     _addDefaultPicNames(c, true);
             }
             
-            for (PaperCard c : CardDb.variants().getAllCards()) {
+            for (PaperCard c : Singletons.getMagicDb().getVariantCards().getAllCards()) {
                 _addDefaultPicNames(c, false);
                 // variants never have backfaces
             }
@@ -378,11 +377,11 @@ public class ImportSourceAnalyzer {
     private void _analyzeCardPicsSetDir(File root) {
         if (null == _cardFileNamesBySet) {
             _cardFileNamesBySet = new TreeMap<String, Map<String, String>>(String.CASE_INSENSITIVE_ORDER);
-            for (CardEdition ce : Singletons.getModel().getEditions()) {
+            for (CardEdition ce : Singletons.getMagicDb().getEditions()) {
                 Map<String, String> cardFileNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
                 Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(ce.getCode());
-                _addSetCards(cardFileNames, CardDb.instance().getAllCards(), filter);
-                _addSetCards(cardFileNames, CardDb.variants().getAllCards(), filter);
+                _addSetCards(cardFileNames, Singletons.getMagicDb().getCommonCards().getAllCards(), filter);
+                _addSetCards(cardFileNames, Singletons.getMagicDb().getVariantCards().getAllCards(), filter);
                 _cardFileNamesBySet.put(ce.getCode2(), cardFileNames);
             }
             
@@ -395,7 +394,7 @@ public class ImportSourceAnalyzer {
                 }
             };
 
-            for (PaperCard c : Iterables.filter(CardDb.variants().getAllCards(), predPlanes)) {
+            for (PaperCard c : Iterables.filter(Singletons.getMagicDb().getVariantCards().getAllCards(), predPlanes)) {
                 String baseName = ImageCache.getImageKey(c,false, true);
                 _nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
                 if (ImageCache.hasBackFacePicture(c)) {
@@ -405,7 +404,7 @@ public class ImportSourceAnalyzer {
             }
         }
 
-        EditionCollection editions = Singletons.getModel().getEditions();
+        EditionCollection editions = Singletons.getMagicDb().getEditions();
         String editionCode = root.getName();
         CardEdition edition = editions.get(editionCode);
         if (null == edition) {

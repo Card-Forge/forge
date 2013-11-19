@@ -36,49 +36,18 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
-import forge.Card;
-import forge.card.CardEdition.Type;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.CollectionSuppliers;
 import forge.util.Lang;
 import forge.util.MyRandom;
-import forge.util.maps.CollectionSuppliers;
 
 public final class CardDb implements ICardDatabase {
-    private static volatile CardDb commonCards = null; // 'volatile' keyword makes this working
-    private static volatile CardDb variantCards = null; // 'volatile' keyword makes this working
     public final static String foilSuffix = "+";
     private final static int foilSuffixLength = foilSuffix.length();
 
-    public static ICardDatabase instance() {
-        if (CardDb.commonCards == null) {
-            throw new NullPointerException("CardDb has not yet been initialized, run setup() first");
-        }
-        return CardDb.commonCards;
-    }
-    
-    public static ICardDatabase variants() {
-        if (CardDb.variantCards == null) {
-            throw new NullPointerException("CardDb has not yet been initialized, run setup() first");
-        }
-        return CardDb.variantCards;
-    }
-
-    public static void setup(final Iterable<CardRules> rules, EditionCollection editions) {
-        if (CardDb.commonCards != null) {
-            throw new RuntimeException("CardDb has already been initialized, don't do it twice please");
-        }
-        synchronized (CardDb.class) {
-            if (CardDb.commonCards == null) { // It's broken under 1.4 and below, on 1.5+ works again!
-                CardSorter cs = new CardSorter(rules);
-                commonCards = new CardDb(cs.regularCards, editions, false);
-                variantCards = new CardDb(cs.variantsCards, editions, false);
-            }
-        }
-    }
-
     // need this to obtain cardReference by name+set+artindex
-    private final Multimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.<PaperCard>arrayLists());
+    private final Multimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = new TreeMap<String, PaperCard>(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     
@@ -86,37 +55,34 @@ public final class CardDb implements ICardDatabase {
     private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards); 
     private final Collection<PaperCard> roUniqueCards = Collections.unmodifiableCollection(uniqueCardsByName.values());
     private final EditionCollection editions;
+    
 
-    private CardDb(Map<String, CardRules> rules, EditionCollection editions0, boolean logMissingCards) {
+    public CardDb(Map<String, CardRules> rules, EditionCollection editions0, boolean logMissingCards) {
         this.rulesByName = rules;
         this.editions = editions0;
         List<String> missingCards = new ArrayList<String>();
-        for (CardEdition e : editions.getOrderedEditions()) {
-            boolean worthLogging = logMissingCards && ( e.getType() == Type.CORE || e.getType() == Type.EXPANSION || e.getType() == Type.REPRINT );
-            if (worthLogging) {
+        for(CardEdition e : editions.getOrderedEditions()) {
+            boolean worthLogging = logMissingCards && ( e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION || e.getType() == CardEdition.Type.REPRINT );
+            if(worthLogging)
                 System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
-            }
             String lastCardName = null;
             int artIdx = 0;
-            for (CardEdition.CardInSet cis : e.getCards()) {
-                if (cis.name.equals(lastCardName))
+            for(CardEdition.CardInSet cis : e.getCards()) {
+                if ( cis.name.equals(lastCardName) ) 
                     artIdx++;
                 else {
                     artIdx = 0;
                     lastCardName = cis.name;
                 }
                 CardRules cr = rulesByName.get(lastCardName);
-                if (cr != null) {
+                if( cr != null ) 
                     addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
-                }
-                else if (worthLogging) {
+                else if (worthLogging)
                     missingCards.add(cis.name);
-                }
             }
-            if (worthLogging) {
-                if (missingCards.isEmpty()) {
+            if(worthLogging) {
+                if(missingCards.isEmpty())
                     System.out.println(" ... 100% ");
-                }
                 else {
                     int missing = (e.getCards().length - missingCards.size()) * 10000 / e.getCards().length;
                     System.out.printf(" ... %.2f%% (%s missing: %s )%n", missing * 0.01f, Lang.nounWithAmount(missingCards.size(), "card"), StringUtils.join(missingCards, " | ") );
@@ -125,8 +91,9 @@ public final class CardDb implements ICardDatabase {
             }
         }
         
-        for (CardRules cr : rulesByName.values()) {
-            if (!allCardsByName.containsKey(cr.getName())) {
+        for(CardRules cr : rulesByName.values()) {
+            if( !allCardsByName.containsKey(cr.getName()) )
+            {
                 System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/cardeditions/ folder. ");
                 addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 0));
             }
@@ -338,21 +305,6 @@ public final class CardDb implements ICardDatabase {
         return result;
     }
 
-    // Fetch from Forge's Card instance. Well, there should be no errors, but
-    // we'll still check
-    public static PaperCard getCard(final Card forgeCard) {
-        final String name = forgeCard.getName();
-        final String set = forgeCard.getCurSetCode();
-        
-        if (StringUtils.isNotBlank(set)) {
-            PaperCard cp = variants().tryGetCard(name, set);
-            
-            return cp == null ? instance().getCard(name, set) : cp;
-        }
-        PaperCard cp = variants().tryGetCard(name, true);
-        return cp == null ? instance().getCard(name) : cp;
-    }
-    
     // returns a list of all cards from their respective latest editions
     @Override
     public Collection<PaperCard> getUniqueCards() {
@@ -370,25 +322,6 @@ public final class CardDb implements ICardDatabase {
         return Lists.newArrayList(Iterables.filter(this.roAllCards, predicate));
     }
 
-    private static class CardSorter{
-        // Here are refs, get them by name
-        public final Map<String, CardRules> regularCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
-        public final Map<String, CardRules> variantsCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
-
-
-        CardSorter(final Iterable<CardRules> parser) {
-            for (CardRules card : parser) {
-                if (null == card) continue;
-                
-                final String cardName = card.getName();
-                if ( card.isVariant() )
-                    variantsCards.put(cardName, card);
-                else
-                    regularCards.put(cardName, card);
-            }
-        }
-    }
-
     public Predicate<? super PaperCard> wasPrintedInSets(List<String> setCodes) {
         return new PredicateExistsInSets(setCodes);
     }
@@ -403,7 +336,9 @@ public final class CardDb implements ICardDatabase {
         @Override
         public boolean apply(final PaperCard subject) {
             Collection<PaperCard> cc = allCardsByName.get(subject.getName());
-            for(PaperCard c : cc) if (sets.contains(c.getEdition())) return true;
+            for(PaperCard c : cc) 
+                if (sets.contains(c.getEdition())) 
+                    return true;
             return false;
         }
     }

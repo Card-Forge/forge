@@ -42,7 +42,6 @@ import forge.CardPredicates;
 import forge.CounterType;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
-import forge.card.CardDb;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
@@ -202,7 +201,7 @@ public final class GuiDisplayUtil {
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");
 
-            final Card c = Card.fromPaperCard(CardDb.instance().getCard(cardinfo[0]), player);
+            final Card c = Card.fromPaperCard(Singletons.getMagicDb().getCommonCards().getCard(cardinfo[0]), player);
 
             boolean hasSetCurSet = false;
             for (final String info : cardinfo) {
@@ -373,7 +372,7 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        final List<PaperCard> cards =  Lists.newArrayList(CardDb.instance().getUniqueCards());
+        final List<PaperCard> cards =  Lists.newArrayList(Singletons.getMagicDb().getCommonCards().getUniqueCards());
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
@@ -394,7 +393,7 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        final List<PaperCard> cards =  Lists.newArrayList(CardDb.instance().getUniqueCards());
+        final List<PaperCard> cards =  Lists.newArrayList(Singletons.getMagicDb().getCommonCards().getUniqueCards());
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
@@ -468,7 +467,7 @@ public final class GuiDisplayUtil {
         final Player p = game.getPhaseHandler().getPlayerTurn();
 
         final List<PaperCard> allPlanars = new ArrayList<PaperCard>();
-        for (PaperCard c : CardDb.variants().getAllCards()) {
+        for (PaperCard c : Singletons.getMagicDb().getVariantCards().getAllCards()) {
             if (c.getRules().getType().isPlane() || c.getRules().getType().isPhenomenon()) {
                 allPlanars.add(c);
             }

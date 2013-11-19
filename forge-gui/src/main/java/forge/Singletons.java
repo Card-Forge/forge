@@ -17,8 +17,10 @@
  */
 package forge;
 
+import forge.card.cardfactory.CardStorageReader;
 import forge.control.FControl;
 import forge.model.FModel;
+import forge.properties.NewConstants;
 import forge.view.FView;
 
 /**
@@ -28,6 +30,7 @@ public final class Singletons {
     private static FModel   model   = null;
     private static FView    view    = null;
     private static FControl control = null;
+    private static StaticData magicDb = null;
 
     /**
      * IMPORTANT - does not return view frame!  Must call
@@ -36,11 +39,23 @@ public final class Singletons {
     public static FView    getView()    { return view;    }
     public static FControl getControl() { return control; }
     public static FModel   getModel()   { return model;   }
+    public static StaticData getMagicDb() { return magicDb; }
 
-    public static void setModel  (FModel   model0)   { model   = model0;   }
-    public static void setView   (FView    view0)    { view    = view0;    }
-    public static void setControl(FControl control0) { control = control0; }
-
+    public static void initializeOnce(boolean withUi) { 
+        if(withUi)
+            view = FView.SINGLETON_INSTANCE;
+        
+        // Loads all cards (using progress bar).
+        FThreads.assertExecutedByEdt(false);
+        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true, withUi ? view.getSplash().getProgressBar() : null);
+        magicDb = new StaticData(reader, "res/editions", "res/blockdata");
+        model = FModel.getInstance(withUi);
+        
+        if(withUi)
+            control = FControl.instance;
+        
+    }
+    
     // disallow instantiation
     private Singletons() { }
 }

@@ -27,7 +27,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.Constant;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.Mana;
@@ -621,9 +620,9 @@ public class AbilityManaPart implements java.io.Serializable {
         m.appendTail(sb);
         String replaced = sb.toString();
         while (replaced.contains("Any")) {
-            String rs = Constant.Color.GREEN;
+            String rs = MagicColor.Constant.GREEN;
             if (act != null) {
-                rs = act.getController().chooseSingleColor(Constant.Color.ONLY_COLORS);
+                rs = act.getController().chooseSingleColor(MagicColor.Constant.ONLY_COLORS);
             }
             replaced = replaced.replaceFirst("Any", MagicColor.toShortString(rs));
         }

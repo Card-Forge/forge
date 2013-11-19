@@ -26,8 +26,8 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.Singletons;
 import forge.card.BoosterGenerator;
-import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.SealedProductTemplate;
 import forge.util.Aggregates;
@@ -104,6 +104,6 @@ public abstract class OpenablePack implements InventoryItemFromSet {
         Predicate<PaperCard> cardsRule = Predicates.and(
                 IPaperCard.Predicates.printedInSet(setCode),
                 Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
-        return Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), cardsRule), count);
+        return Aggregates.random(Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), cardsRule), count);
     }
 }

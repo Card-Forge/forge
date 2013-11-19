@@ -16,7 +16,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
-import forge.Constant;
 import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
@@ -36,7 +35,7 @@ import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.maps.CollectionSuppliers;
+import forge.util.CollectionSuppliers;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
 import forge.util.maps.TreeMapOfLists;
@@ -667,19 +666,19 @@ public class ComputerUtilMana {
 
                 Set<String> reflectedColors = CardUtil.getReflectableManaColors(m);
                 // find possible colors
-                if (mp.canProduce("W", m) || reflectedColors.contains(Constant.Color.WHITE)) {
+                if (mp.canProduce("W", m) || reflectedColors.contains(MagicColor.Constant.WHITE)) {
                     manaMap.add(ManaAtom.WHITE, m);
                 }
-                if (mp.canProduce("U", m) || reflectedColors.contains(Constant.Color.BLUE)) {
+                if (mp.canProduce("U", m) || reflectedColors.contains(MagicColor.Constant.BLUE)) {
                     manaMap.add(ManaAtom.BLUE, m);
                 }
-                if (mp.canProduce("B", m) || reflectedColors.contains(Constant.Color.BLACK)) {
+                if (mp.canProduce("B", m) || reflectedColors.contains(MagicColor.Constant.BLACK)) {
                     manaMap.add(ManaAtom.BLACK, m);
                 }
-                if (mp.canProduce("R", m) || reflectedColors.contains(Constant.Color.RED)) {
+                if (mp.canProduce("R", m) || reflectedColors.contains(MagicColor.Constant.RED)) {
                     manaMap.add(ManaAtom.RED, m);
                 }
-                if (mp.canProduce("G", m) || reflectedColors.contains(Constant.Color.GREEN)) {
+                if (mp.canProduce("G", m) || reflectedColors.contains(MagicColor.Constant.GREEN)) {
                     manaMap.add(ManaAtom.GREEN, m);
                 }
                 if (mp.isSnow()) {

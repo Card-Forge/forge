@@ -15,8 +15,8 @@ import javax.swing.SwingUtilities;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Command;
-import forge.Constant;
 import forge.Singletons;
+import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
@@ -34,7 +34,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
+import forge.util.ItemPool;
 import forge.util.storage.IStorage;
 
 /** 
@@ -175,7 +175,7 @@ public enum CSubmenuSealed implements ICDoc {
         final Deck deck = new Deck(sDeckName);
         deck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
 
-        for (final String element : Constant.Color.BASIC_LANDS) {
+        for (final String element : MagicColor.Constant.BASIC_LANDS) {
             deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), 18);
         }
 

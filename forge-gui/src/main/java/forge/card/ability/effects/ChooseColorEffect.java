@@ -7,7 +7,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Constant;
+import forge.card.MagicColor;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
@@ -39,7 +39,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
 
-        List<String> colorChoices = new ArrayList<String>(Constant.Color.ONLY_COLORS);
+        List<String> colorChoices = new ArrayList<String>(MagicColor.Constant.ONLY_COLORS);
         if (sa.hasParam("Choices")) {
             String[] restrictedChoices = sa.getParam("Choices").split(",");
             colorChoices = Arrays.asList(restrictedChoices);
@@ -112,9 +112,9 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                         else if (logic.equals("MostProminentKeywordInComputerDeck")) {
                             List<Card> list = ai.getAllCards();
                             int max = 0;
-                            String chosenColor = Constant.Color.WHITE;
+                            String chosenColor = MagicColor.Constant.WHITE;
 
-                            for (final String c : Constant.Color.ONLY_COLORS) {
+                            for (final String c : MagicColor.Constant.ONLY_COLORS) {
                                 final int cmp = CardLists.filter(list, CardPredicates.containsKeyword(c)).size();
                                 if (cmp > max) {
                                     max = cmp;
@@ -125,7 +125,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                         }
                     }
                     if (chosen.size() == 0) {
-                        chosen.add(Constant.Color.GREEN);
+                        chosen.add(MagicColor.Constant.GREEN);
                     }
                     GuiChoose.one("Computer picked: ", chosen);
                     final ArrayList<String> colorTemp = new ArrayList<String>();

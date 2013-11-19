@@ -17,12 +17,8 @@
  */
 package forge.card;
 
-import java.util.Arrays;
-import java.util.List;
-
 import forge.game.GameFormat;
-import forge.util.FileSection;
-import forge.util.storage.StorageReaderFileSections;
+import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageBase;
 
 /**
@@ -36,8 +32,8 @@ public final class FormatCollection extends StorageBase<GameFormat> {
      * TODO: Write javadoc for Constructor.
      * @param io
      */
-    public FormatCollection(String filename) {
-        super("Format collections", new FormatReader(filename));
+    public FormatCollection(StorageReaderBase<GameFormat> reader) {
+        super("Format collections", reader);
     }
 
     /**
@@ -75,32 +71,6 @@ public final class FormatCollection extends StorageBase<GameFormat> {
         return this.map.get(format);
     }
 
-    /**
-     * Instantiates a new format utils.
-     */
-    public static class FormatReader extends StorageReaderFileSections<GameFormat> {
-        public FormatReader(String file0) {
-            super(file0, GameFormat.FN_GET_NAME);
-        }
-
-        @Override
-        protected GameFormat read(String title, Iterable<String> body, int idx) {
-            List<String> sets = null; // default: all sets allowed
-            List<String> bannedCards = null; // default: nothing banned
-
-            FileSection section = FileSection.parse(body, ":");
-            String strSets = section.get("sets");
-            if ( null != strSets ) {
-                sets = Arrays.asList(strSets.split(", "));
-            }
-            String strCars = section.get("banned");
-            if ( strCars != null ) {
-                bannedCards = Arrays.asList(strCars.split("; "));
-            }
-
-            return new GameFormat(title, sets, bannedCards, 1 + idx);
-        }
-    }
 }
 
 /** 

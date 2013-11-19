@@ -18,7 +18,6 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.text.WordUtils;
 
-import forge.Constant;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.deck.CardCollections;
@@ -239,7 +238,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cbxPrizedCards.addItem(StartingPoolType.CustomFormat);
         cbxPrizedCards.addActionListener(alPrizesPool);
 
-        for (GameFormat gf : Singletons.getModel().getFormats()) {
+        for (GameFormat gf : Singletons.getMagicDb().getFormats()) {
             cbxFormat.addItem(gf);
             cbxPrizeFormat.addItem(gf);
         }
@@ -247,12 +246,12 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         // Initialize color balance selection
         cbxPreferredColor.addItem(stringBalancedDistribution);
         cbxPreferredColor.addItem(stringRandomizedDistribution);
-        cbxPreferredColor.addItem(Constant.Color.WHITE + stringBias);
-        cbxPreferredColor.addItem(Constant.Color.BLUE + stringBias);
-        cbxPreferredColor.addItem(Constant.Color.BLACK + stringBias);
-        cbxPreferredColor.addItem(Constant.Color.RED + stringBias);
-        cbxPreferredColor.addItem(Constant.Color.GREEN + stringBias);
-        cbxPreferredColor.addItem(Constant.Color.COLORLESS + stringBias);
+        cbxPreferredColor.addItem(MagicColor.Constant.WHITE + stringBias);
+        cbxPreferredColor.addItem(MagicColor.Constant.BLUE + stringBias);
+        cbxPreferredColor.addItem(MagicColor.Constant.BLACK + stringBias);
+        cbxPreferredColor.addItem(MagicColor.Constant.RED + stringBias);
+        cbxPreferredColor.addItem(MagicColor.Constant.GREEN + stringBias);
+        cbxPreferredColor.addItem(MagicColor.Constant.COLORLESS + stringBias);
 
         for (QuestWorld qw : Singletons.getModel().getWorlds()) {
             cbxStartingWorld.addItem(qw);

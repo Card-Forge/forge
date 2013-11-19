@@ -82,7 +82,7 @@ public final class GameFormatQuest extends GameFormat {
             return exSets;
         }
 
-        for (CardEdition ce : Singletons.getModel().getEditions()) {
+        for (CardEdition ce : Singletons.getMagicDb().getEditions()) {
             if (!isSetLegal(ce.getCode())) {
                 exSets.add(ce.getCode());
             }

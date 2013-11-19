@@ -138,7 +138,7 @@ public class DeckHintsTest {
             crr.parseLine(line);
         }
         // Don't care what the actual set or rarity is here.
-        return new PaperCard(crr.createCardRules(), "M11", CardRarity.Common, 0);
+        return new PaperCard(crr.getCard(), "M11", CardRarity.Common, 0);
     }
 
 }

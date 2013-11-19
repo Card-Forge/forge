@@ -24,8 +24,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Constant;
-
 /**
  * <p>
  * Immutable Card type. Can be build only from parsing a string.
@@ -236,6 +234,47 @@ public final class CardType implements Comparable<CardType> {
         return this.coreType.contains(CardCoreType.Phenomenon);
     }
 
+    
+
+    /**
+     * The Interface CardTypes.
+     */
+    public static class Constant {
+
+        /** The loaded. */
+        public static final boolean[] LOADED = { false };
+
+        /** The card types. */
+        public static final List<String> CARD_TYPES = new ArrayList<String>();
+
+        /** The super types. */
+        public static final List<String> SUPER_TYPES = new ArrayList<String>();
+
+        /** The basic types. */
+        public static final List<String> BASIC_TYPES = new ArrayList<String>();
+
+        /** The land types. */
+        public static final List<String> LAND_TYPES = new ArrayList<String>();
+
+        /** The creature types. */
+        public static final List<String> CREATURE_TYPES = new ArrayList<String>();
+
+        /** The instant types. */
+        public static final List<String> INSTANT_TYPES = new ArrayList<String>();
+
+        /** The sorcery types. */
+        public static final List<String> SORCERY_TYPES = new ArrayList<String>();
+
+        /** The enchantment types. */
+        public static final List<String> ENCHANTMENT_TYPES = new ArrayList<String>();
+
+        /** The artifact types. */
+        public static final List<String> ARTIFACT_TYPES = new ArrayList<String>();
+
+        /** The walker types. */
+        public static final List<String> WALKER_TYPES = new ArrayList<String>();
+    }
+    
     ///////// Utility methods
     public static boolean isACardType(final String cardType) {
         return CardType.getAllCardTypes().contains(cardType);
@@ -245,7 +284,7 @@ public final class CardType implements Comparable<CardType> {
         final ArrayList<String> types = new ArrayList<String>();
     
         // types.addAll(getCardTypes());
-        types.addAll(Constant.CardTypes.CARD_TYPES);
+        types.addAll(Constant.CARD_TYPES);
     
         // not currently used by Forge
         types.add("Plane");
@@ -258,7 +297,7 @@ public final class CardType implements Comparable<CardType> {
     public static ArrayList<String> getBasicTypes() {
         final ArrayList<String> types = new ArrayList<String>();
     
-        types.addAll(Constant.CardTypes.BASIC_TYPES);
+        types.addAll(Constant.BASIC_TYPES);
     
         return types;
     }
@@ -266,8 +305,8 @@ public final class CardType implements Comparable<CardType> {
     public static ArrayList<String> getLandTypes() {
         final ArrayList<String> types = new ArrayList<String>();
     
-        types.addAll(Constant.CardTypes.BASIC_TYPES);
-        types.addAll(Constant.CardTypes.LAND_TYPES);
+        types.addAll(Constant.BASIC_TYPES);
+        types.addAll(Constant.LAND_TYPES);
     
         return types;
     }
@@ -275,13 +314,13 @@ public final class CardType implements Comparable<CardType> {
     public static ArrayList<String> getCreatureTypes() {
         final ArrayList<String> types = new ArrayList<String>();
     
-        types.addAll(Constant.CardTypes.CREATURE_TYPES);
+        types.addAll(Constant.CREATURE_TYPES);
     
         return types;
     }
 
     public static boolean isASuperType(final String cardType) {
-        return (Constant.CardTypes.SUPER_TYPES.contains(cardType));
+        return (Constant.SUPER_TYPES.contains(cardType));
     }
 
     public static boolean isASubType(final String cardType) {
@@ -289,18 +328,18 @@ public final class CardType implements Comparable<CardType> {
     }
 
     public static boolean isACreatureType(final String cardType) {
-        return (Constant.CardTypes.CREATURE_TYPES.contains(cardType));
+        return (Constant.CREATURE_TYPES.contains(cardType));
     }
 
     public static boolean isALandType(final String cardType) {
-        return (Constant.CardTypes.LAND_TYPES.contains(cardType));
+        return (Constant.LAND_TYPES.contains(cardType));
     }
 
     public static boolean isAPlaneswalkerType(final String cardType) {
-        return (Constant.CardTypes.WALKER_TYPES.contains(cardType));
+        return (Constant.WALKER_TYPES.contains(cardType));
     }
 
     public static boolean isABasicLandType(final String cardType) {
-        return (Constant.CardTypes.BASIC_TYPES.contains(cardType));
+        return (Constant.BASIC_TYPES.contains(cardType));
     }
 }

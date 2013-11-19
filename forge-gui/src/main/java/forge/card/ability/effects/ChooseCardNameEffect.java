@@ -13,7 +13,7 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
@@ -70,7 +70,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
                         Predicate<CardRules>  additionalRule = CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount);
 
-                        List<PaperCard> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+                        List<PaperCard> cards = Lists.newArrayList(Singletons.getMagicDb().getCommonCards().getUniqueCards());
                         Predicate<PaperCard> cpp = Predicates.and(Predicates.compose(baseRule, PaperCard.FN_GET_RULES), 
                                 Predicates.compose(additionalRule, PaperCard.FN_GET_RULES));
                         cards = Lists.newArrayList(Iterables.filter(cards, cpp));
@@ -83,7 +83,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     } else if (p.isHuman()) {
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
                         
-                        List<PaperCard> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+                        List<PaperCard> cards = Lists.newArrayList(Singletons.getMagicDb().getCommonCards().getUniqueCards());
                         if ( StringUtils.containsIgnoreCase(valid, "nonland") )
                         {
                             Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES);

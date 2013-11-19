@@ -25,13 +25,13 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
 import forge.quest.QuestDeckMap;
 import forge.quest.QuestMode;
 import forge.quest.QuestUtilCards;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences.QPref;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 
 /** */
 public class QuestAssets {

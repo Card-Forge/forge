@@ -27,7 +27,6 @@ import com.google.common.base.Supplier;
 
 import forge.Command;
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -46,10 +45,10 @@ import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
 import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
-import forge.item.ItemPoolView;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -83,8 +82,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);
         
-        commanderPool = ItemPool.createFrom(CardDb.instance().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
-        normalPool = ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class);
+        commanderPool = ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
+        normalPool = ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
         
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 

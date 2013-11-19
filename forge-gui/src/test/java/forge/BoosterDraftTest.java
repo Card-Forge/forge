@@ -9,8 +9,8 @@ import forge.card.SealedProductTemplate;
 import forge.deck.Deck;
 import forge.game.limited.IBoosterDraft;
 import forge.item.PaperCard;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 
 /**
  * <p>
@@ -49,7 +49,7 @@ public class BoosterDraftTest implements IBoosterDraft {
     @Override
     public ItemPoolView<PaperCard> nextChoice() {
         this.n--;
-        SealedProductTemplate booster = Singletons.getModel().getBoosters().get("M11");
+        SealedProductTemplate booster = Singletons.getMagicDb().getBoosters().get("M11");
         return ItemPool.createFrom(BoosterGenerator.getBoosterPack(booster), PaperCard.class);
     }
 

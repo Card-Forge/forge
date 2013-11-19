@@ -80,7 +80,7 @@ public class PreconDeck implements InventoryItemFromSet {
         imageFilename = kv.get("Image");
         description = kv.get("Description");
         String deckEdition = kv.get("set");
-        this.set = deckEdition == null || Singletons.getModel().getEditions().get(deckEdition.toUpperCase()) == null ? "n/a" : deckEdition;
+        this.set = deckEdition == null || Singletons.getMagicDb().getEditions().get(deckEdition.toUpperCase()) == null ? "n/a" : deckEdition;
         this.recommendedDeals = new SellRules(sections.get("shop"));
 
     }

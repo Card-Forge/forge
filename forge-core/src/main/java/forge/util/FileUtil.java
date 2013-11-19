@@ -31,8 +31,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.error.BugReporter;
-
 /**
  * <p>
  * FileUtil class.
@@ -109,28 +107,20 @@ public final class FileUtil {
             }
             p.close();
         } catch (final Exception ex) {
-            BugReporter.reportException(ex);
             throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + file + " : " + ex);
         }
     } // writeAllDecks()
 
     public static String readFileToString(String filename) {
-        return readFileToString(new File(filename));
-    }
-    
-    public static String readFileToString(File file) {
         StringBuilder s = new StringBuilder();
-        for (String line : readFile(file)) {
-        	if (s.length() > 0) {
-        		s.append('\n');
-        	}
-            s.append(line);
+        for (String line : readFile(filename)) {
+            s.append(line).append('\n');
         }
         return s.toString();
     }
     
     public static List<String> readFile(final String filename) {
-        return readFile(new File(filename));
+        return FileUtil.readFile(new File(filename));
     }
 
     // reads line by line and adds each line to the ArrayList
@@ -152,7 +142,6 @@ public final class FileUtil {
             }
             return FileUtil.readAllLines(new FileReader(file), false);
         } catch (final Exception ex) {
-            BugReporter.reportException(ex);
             throw new RuntimeException("FileUtil : readFile() error, " + ex);
         }
     } // readFile()
@@ -187,7 +176,6 @@ public final class FileUtil {
             }
             in.close();
         } catch (final IOException ex) {
-            BugReporter.reportException(ex);
             throw new RuntimeException("FileUtil : readAllLines() error, " + ex);
         }
         return list;

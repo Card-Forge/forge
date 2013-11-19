@@ -21,7 +21,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
-import forge.Constant;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -145,7 +144,7 @@ public class ComputerUtilCard {
         int iminBL = 20000; // hopefully no one will ever have more than 20000
                             // lands of one type....
         int n = 0;
-        for (String name : Constant.Color.BASIC_LANDS) {
+        for (String name : MagicColor.Constant.BASIC_LANDS) {
             n = CardLists.getType(land, name).size();
             if ((n < iminBL) && (n > 0)) {
                 // if two or more are tied, only the
@@ -745,7 +744,7 @@ public class ComputerUtilCard {
             if ( (colors & c) != 0 )
                 return MagicColor.toLongString(c);
         }
-        return Constant.Color.WHITE; // no difference, there was no prominent color
+        return MagicColor.Constant.WHITE; // no difference, there was no prominent color
     }
 
     public static String getMostProminentColor(final List<Card> list, final List<String> restrictedToColors) {

@@ -7,7 +7,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.item.PaperCard;
 
 /** 
@@ -58,7 +58,7 @@ public class QuestRewardCardFiltered extends QuestRewardCard implements IQuestRe
     @Override
     public final List<PaperCard> getChoices() {
         List<PaperCard> cardChoices = new ArrayList<PaperCard>();
-        for (final PaperCard card : Iterables.filter(CardDb.instance().getAllCards(), predicates)) {
+        for (final PaperCard card : Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), predicates)) {
             cardChoices.add(card);
         }
         Collections.sort(cardChoices);

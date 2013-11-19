@@ -32,14 +32,14 @@ public class BoosterPack extends OpenablePack {
     public static final Function<CardEdition, BoosterPack> FN_FROM_SET = new Function<CardEdition, BoosterPack>() {
         @Override
         public BoosterPack apply(final CardEdition arg1) {
-            SealedProductTemplate d = Singletons.getModel().getBoosters().get(arg1.getCode());
+            SealedProductTemplate d = Singletons.getMagicDb().getBoosters().get(arg1.getCode());
             return new BoosterPack(arg1.getName(), d);
         }
     };
 
     public BoosterPack(final String name0, final SealedProductTemplate boosterData) {
         super(name0, boosterData);
-        int maxIdx = Singletons.getModel().getEditions().get(boosterData.getEdition()).getCntBoosterPictures();
+        int maxIdx = Singletons.getMagicDb().getEditions().get(boosterData.getEdition()).getCntBoosterPictures();
         artIndex = MyRandom.getRandom().nextInt(maxIdx) + 1;
         hash = super.hashCode() ^  artIndex;
     }

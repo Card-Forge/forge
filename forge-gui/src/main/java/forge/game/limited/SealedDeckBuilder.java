@@ -9,11 +9,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Iterables;
 
-import forge.Constant;
-import forge.Constant.Color;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
 
@@ -61,14 +60,14 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
         List<String> secondColors = new ArrayList<String>();
         for (int i = 0; i < 5; i++) {
             if (countsCopy[4] == colorCounts[i]) {
-                maxColors.add(Constant.Color.ONLY_COLORS.get(i));
+                maxColors.add(MagicColor.Constant.ONLY_COLORS.get(i));
             } else if (countsCopy[3] == colorCounts[i]) {
-                secondColors.add(Constant.Color.ONLY_COLORS.get(i));
+                secondColors.add(MagicColor.Constant.ONLY_COLORS.get(i));
             }
         }
 
-        String color1 = Color.GREEN;
-        String color2 = Color.BLACK;
+        String color1 = MagicColor.Constant.GREEN;
+        String color2 = MagicColor.Constant.BLACK;
         final Random r = MyRandom.getRandom();
         if (maxColors.size() > 1) {
             int n = r.nextInt(maxColors.size());

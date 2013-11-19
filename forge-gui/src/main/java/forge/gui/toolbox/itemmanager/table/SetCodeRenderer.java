@@ -32,7 +32,7 @@ public class SetCodeRenderer extends DefaultTableCellRenderer implements AlwaysS
         String setAbbrev   = getText();
         String setFullName = "Unknown set";
         
-        EditionCollection editions = Singletons.getModel().getEditions();
+        EditionCollection editions = Singletons.getMagicDb().getEditions();
         
         if (null != setAbbrev && editions.contains(setAbbrev)) {
             setFullName = editions.get(setAbbrev).getName();

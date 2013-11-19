@@ -24,23 +24,16 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
-
 import forge.Constant;
 import forge.Constant.Preferences;
-import forge.FThreads;
+import forge.Singletons;
 import forge.card.CardBlock;
-import forge.card.CardDb;
-import forge.card.EditionCollection;
-import forge.card.FatPackTemplate;
-import forge.card.FormatCollection;
-import forge.card.SealedProductTemplate;
-import forge.card.cardfactory.CardStorageReader;
+import forge.card.CardType;
 import forge.deck.CardCollections;
 import forge.error.ExceptionHandler;
 import forge.game.ai.AiProfileUtil;
 import forge.game.limited.GauntletMini;
 import forge.gauntlet.GauntletData;
-import forge.item.PrintSheet;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
@@ -78,16 +71,10 @@ public class FModel {
     private final QuestController quest;
     private final CardCollections decks;
 
-    private final EditionCollection editions;
-    private final FormatCollection formats;
-    private final IStorage<SealedProductTemplate> boosters;
-    private final IStorage<SealedProductTemplate> specialBoosters;
-    private final IStorage<SealedProductTemplate> tournaments;
-    private final IStorage<FatPackTemplate> fatPacks;
     private final IStorage<CardBlock> blocks;
     private final IStorage<CardBlock> fantasyBlocks;
     private final IStorage<QuestWorld> worlds;
-    private final IStorage<PrintSheet> printSheets;
+
 
     
     private static FModel instance = null;
@@ -146,24 +133,13 @@ public class FModel {
             throw new RuntimeException(exn);
         }
 
+        this.blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader("res/blockdata/blocks.txt", Singletons.getMagicDb().getEditions()));
         this.questPreferences = new QuestPreferences();
         this.gauntletData = new GauntletData();
 
-        this.editions = new EditionCollection(new File("res/editions"));
         
-        // Loads all cards (using progress bar).
-        FThreads.assertExecutedByEdt(false);
-        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true, initWithUi ? FView.SINGLETON_INSTANCE.getSplash().getProgressBar() : null);
-        // this fills in our map of card names to Card instances.
-        CardDb.setup(reader.loadCards(), editions);
-
-        this.formats = new FormatCollection("res/blockdata/formats.txt");
-        this.boosters = new StorageBase<SealedProductTemplate>("Boosters", editions.getBoosterGenerator());
-        this.specialBoosters = new StorageBase<SealedProductTemplate>("Special boosters", new SealedProductTemplate.Reader("res/blockdata/boosters-special.txt"));
-        this.tournaments = new StorageBase<SealedProductTemplate>("Starter sets", new SealedProductTemplate.Reader("res/blockdata/starters.txt"));
-        this.fatPacks = new StorageBase<FatPackTemplate>("Fat packs", new FatPackTemplate.Reader("res/blockdata/fatpacks.txt"));
-        this.blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader("res/blockdata/blocks.txt", editions));
-        this.fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
+        
+        this.fantasyBlocks = new StorageBase<CardBlock>("Custom blocks", new CardBlock.Reader("res/blockdata/fantasyblocks.txt", Singletons.getMagicDb().getEditions()));
         this.worlds = new StorageBase<QuestWorld>("Quest worlds", new QuestWorld.Reader("res/quest/world/worlds.txt"));
         // TODO - there's got to be a better place for this...oblivion?
         Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
@@ -177,7 +153,7 @@ public class FModel {
         this.decks = new CardCollections();
         this.quest = new QuestController();
         
-        this.printSheets = new StorageBase<PrintSheet>("Special print runs", new PrintSheet.Reader("res/blockdata/printsheets.txt"));
+        
         
         // Preload AI profiles
         AiProfileUtil.loadAllProfiles();
@@ -191,7 +167,7 @@ public class FModel {
      * Load dynamic gamedata.
      */
     public void loadDynamicGamedata() {
-        if (!Constant.CardTypes.LOADED[0]) {
+        if (!CardType.Constant.LOADED[0]) {
             final List<String> typeListFile = FileUtil.readFile(NewConstants.TYPE_LIST_FILE);
 
             List<String> tList = null;
@@ -201,43 +177,43 @@ public class FModel {
                     final String s = typeListFile.get(i);
 
                     if (s.equals("[CardTypes]")) {
-                        tList = Constant.CardTypes.CARD_TYPES;
+                        tList = CardType.Constant.CARD_TYPES;
                     }
 
                     else if (s.equals("[SuperTypes]")) {
-                        tList = Constant.CardTypes.SUPER_TYPES;
+                        tList = CardType.Constant.SUPER_TYPES;
                     }
 
                     else if (s.equals("[BasicTypes]")) {
-                        tList = Constant.CardTypes.BASIC_TYPES;
+                        tList = CardType.Constant.BASIC_TYPES;
                     }
 
                     else if (s.equals("[LandTypes]")) {
-                        tList = Constant.CardTypes.LAND_TYPES;
+                        tList = CardType.Constant.LAND_TYPES;
                     }
 
                     else if (s.equals("[CreatureTypes]")) {
-                        tList = Constant.CardTypes.CREATURE_TYPES;
+                        tList = CardType.Constant.CREATURE_TYPES;
                     }
 
                     else if (s.equals("[InstantTypes]")) {
-                        tList = Constant.CardTypes.INSTANT_TYPES;
+                        tList = CardType.Constant.INSTANT_TYPES;
                     }
 
                     else if (s.equals("[SorceryTypes]")) {
-                        tList = Constant.CardTypes.SORCERY_TYPES;
+                        tList = CardType.Constant.SORCERY_TYPES;
                     }
 
                     else if (s.equals("[EnchantmentTypes]")) {
-                        tList = Constant.CardTypes.ENCHANTMENT_TYPES;
+                        tList = CardType.Constant.ENCHANTMENT_TYPES;
                     }
 
                     else if (s.equals("[ArtifactTypes]")) {
-                        tList = Constant.CardTypes.ARTIFACT_TYPES;
+                        tList = CardType.Constant.ARTIFACT_TYPES;
                     }
 
                     else if (s.equals("[WalkerTypes]")) {
-                        tList = Constant.CardTypes.WALKER_TYPES;
+                        tList = CardType.Constant.WALKER_TYPES;
                     }
 
                     else if (s.length() > 1) {
@@ -245,19 +221,19 @@ public class FModel {
                     }
                 }
             }
-            Constant.CardTypes.LOADED[0] = true;
+            CardType.Constant.LOADED[0] = true;
             /*
              * if (Constant.Runtime.DevMode[0]) {
-             * System.out.println(Constant.CardTypes.cardTypes[0].list);
-             * System.out.println(Constant.CardTypes.superTypes[0].list);
-             * System.out.println(Constant.CardTypes.basicTypes[0].list);
-             * System.out.println(Constant.CardTypes.landTypes[0].list);
-             * System.out.println(Constant.CardTypes.creatureTypes[0].list);
-             * System.out.println(Constant.CardTypes.instantTypes[0].list);
-             * System.out.println(Constant.CardTypes.sorceryTypes[0].list);
-             * System.out.println(Constant.CardTypes.enchantmentTypes[0].list);
-             * System.out.println(Constant.CardTypes.artifactTypes[0].list);
-             * System.out.println(Constant.CardTypes.walkerTypes[0].list); }
+             * System.out.println(CardType.Constant.cardTypes[0].list);
+             * System.out.println(CardType.Constant.superTypes[0].list);
+             * System.out.println(CardType.Constant.basicTypes[0].list);
+             * System.out.println(CardType.Constant.landTypes[0].list);
+             * System.out.println(CardType.Constant.creatureTypes[0].list);
+             * System.out.println(CardType.Constant.instantTypes[0].list);
+             * System.out.println(CardType.Constant.sorceryTypes[0].list);
+             * System.out.println(CardType.Constant.enchantmentTypes[0].list);
+             * System.out.println(CardType.Constant.artifactTypes[0].list);
+             * System.out.println(CardType.Constant.walkerTypes[0].list); }
              */
         }
 
@@ -279,12 +255,12 @@ public class FModel {
         }
 
         /*
-         * if (!Constant.Color.loaded[0]) { ArrayList<String> lcListFile =
+         * if (!MagicColor.Constant.loaded[0]) { ArrayList<String> lcListFile =
          * FileUtil.readFile("res/gamedata/LandColorList");
          * 
          * if (lcListFile.size() > 1) { for (int i=0; i<lcListFile.size(); i++)
          * { String s = lcListFile.get(i); if (s.length() > 1)
-         * Constant.Color.LandColor[0].map.add(s); } }
+         * MagicColor.Constant.LandColor[0].map.add(s); } }
          * Constant.Keywords.loaded[0] = true; if (Constant.Runtime.DevMode[0])
          * { System.out.println(Constant.Keywords.NonStackingList[0].list); } }
          */
@@ -299,6 +275,11 @@ public class FModel {
         return this.preferences;
     }
 
+
+    /** @return {@link forge.util.storage.IStorageView}<{@link forge.CardBlock}> */
+    public IStorage<CardBlock> getBlocks() {
+        return blocks;
+    }    
     /**
      * Gets the quest preferences.
      * 
@@ -322,25 +303,6 @@ public class FModel {
     }
 
     /**
-     * TODO: Write javadoc for this method.
-     *
-     * @return the editions
-     */
-
-    public final EditionCollection getEditions() {
-        return this.editions;
-    }
-
-    /**
-     * Gets the formats.
-     *
-     * @return the formats
-     */
-    public final FormatCollection getFormats() {
-        return this.formats;
-    }
-
-    /**
      * Gets the game worlds.
      *
      * @return the worlds
@@ -359,39 +321,7 @@ public class FModel {
         logFileStream.close();
     }
 
-    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.CardBlock}> */
-    public IStorage<CardBlock> getBlocks() {
-        return blocks;
-    }
 
-    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.CardBlock}> */
-    public IStorage<CardBlock> getFantasyBlocks() {
-        return fantasyBlocks;
-    }
-
-    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.FatPackTemplate}> */
-    public IStorage<FatPackTemplate> getFatPacks() {
-        return fatPacks;
-    }
-
-    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
-    public final IStorage<SealedProductTemplate> getTournamentPacks() {
-        return tournaments;
-    }
-
-    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
-    public final IStorage<SealedProductTemplate> getBoosters() {
-        return boosters;
-    }
-
-    public final IStorage<SealedProductTemplate> getSpecialBoosters() {
-        return specialBoosters;
-    }
-
-    public IStorage<PrintSheet> getPrintSheets() {
-        return printSheets;
-    }
-    
     /**
      * TODO: Write javadoc for this method.
      * @param data0 {@link forge.gauntlet.GauntletData}
@@ -400,6 +330,10 @@ public class FModel {
         this.gauntletData = data0;
     }
 
+    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.CardBlock}> */
+    public IStorage<CardBlock> getFantasyBlocks() {
+        return fantasyBlocks;
+    }
 
     public GauntletMini getGauntletMini() {
         if (gauntlet == null) {

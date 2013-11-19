@@ -11,8 +11,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
+import forge.Singletons;
 import forge.card.CardCharacteristicName;
-import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -85,7 +85,7 @@ public class PlayEffect extends SpellAbilityEffect {
             useEncoded = true;
         }
         else if (sa.hasParam("AnySupportedCard")) {
-            List<PaperCard> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+            List<PaperCard> cards = Lists.newArrayList(Singletons.getMagicDb().getCommonCards().getUniqueCards());
             String valid = sa.getParam("AnySupportedCard");
             if (StringUtils.containsIgnoreCase(valid, "sorcery")) {
                 Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_SORCERY, PaperCard.FN_GET_RULES);
@@ -160,7 +160,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             Card original = tgtCard;
             if (sa.hasParam("CopyCard")) {
-                tgtCard = Card.fromPaperCard(CardDb.getCard(tgtCard), sa.getActivatingPlayer());
+                tgtCard = Card.fromPaperCard(tgtCard.getPaperCard(), sa.getActivatingPlayer());
 
                 tgtCard.setToken(true);
                 tgtCard.setCopiedSpell(true);

@@ -28,14 +28,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
-import javax.swing.JOptionPane;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
-
-import forge.deck.io.OldDeckFileFormatException;
-import forge.error.BugReporter;
 
 /**
  * This class treats every file in the given folder as a source for a named
@@ -67,7 +60,7 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
         this.directory = deckDir0;
 
         if (this.directory == null) {
-            throw new IllegalArgumentException("No deck directory specified");
+            throw new IllegalArgumentException("No directory specified");
         }
         try {
             if (this.directory.isFile()) {
@@ -79,55 +72,37 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
                 }
             }
         } catch (final IOException ex) {
-            BugReporter.reportException(ex);
-            throw new RuntimeException("DeckManager : writeDeck() error, " + ex.getMessage());
+            throw new RuntimeException("StorageReaderFolder.ctor() error, " + ex.getMessage());
         }
     }
 
+    public final List<String> objectsThatFailedToLoad = new ArrayList<String>();
+    
     /* (non-Javadoc)
      * @see forge.util.IItemReader#readAll()
      */
     @Override
     public Map<String, T> readAll() {
         final Map<String, T> result = new TreeMap<String, T>();
-        final List<String> decksThatFailedToLoad = new ArrayList<String>();
+
         final File[] files = this.directory.listFiles(this.getFileFilter());
-        boolean hasWarnedOfOldFormat = false;
         for (final File file : files) {
             try {
                 final T newDeck = this.read(file);
                 if (null == newDeck) {
-                    final String msg = "An object stored in "
-                            + file.getPath()
-                            + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
-                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg);
-                    continue;
+                    final String msg = "An object stored in " + file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file/directory attached.";
+                    throw new RuntimeException(msg);
                 }
                 String newKey = keySelector.apply(newDeck);
                 if( result.containsKey(newKey))
                     System.err.println("StorageReader: Overwriting an object with key " + newKey);
                 
                 result.put(newKey, newDeck);
-            } catch (final OldDeckFileFormatException ex) {
-                if (!hasWarnedOfOldFormat) {
-                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                            "Found a deck in old fileformat in the storage.\nMoving this file and all similiar ones to parent folder.\n\nForge will try to convert them in a second.");
-                    hasWarnedOfOldFormat = true;
-                }
-                file.renameTo(new File(this.directory.getParentFile(), file.getName()));
             } catch (final NoSuchElementException ex) {
-                final String message = String.format("%s failed to load because ---- %s", file.getName(),
-                        ex.getMessage());
-                decksThatFailedToLoad.add(message);
+                final String message = String.format("%s failed to load because ---- %s", file.getName(), ex.getMessage());
+                objectsThatFailedToLoad.add(message);
             }
         }
-
-        if (!decksThatFailedToLoad.isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                    StringUtils.join(decksThatFailedToLoad, System.getProperty("line.separator")),
-                    "Some of your objects were not loaded.", JOptionPane.WARNING_MESSAGE);
-        }
-
         return result;
     }
 

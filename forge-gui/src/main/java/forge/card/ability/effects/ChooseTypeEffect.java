@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import forge.Card;
-import forge.Constant;
 import forge.card.CardType;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -39,7 +38,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
         }
 
         if (type.equals("Card")) {
-            if (validTypes.isEmpty()) validTypes.addAll(Constant.CardTypes.CARD_TYPES);
+            if (validTypes.isEmpty()) validTypes.addAll(CardType.Constant.CARD_TYPES);
         } else if (type.equals("Creature")) {
             if (validTypes.isEmpty()) validTypes.addAll(CardType.getCreatureTypes());
         } else if (type.equals("Basic Land")) {

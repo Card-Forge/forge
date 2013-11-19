@@ -5,10 +5,9 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Command;
-import forge.Constant;
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
+import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.generate.Generate2ColorDeck;
@@ -82,10 +81,10 @@ public enum CDeckgen implements ICDoc {
         final Deck randomDeck = new Deck();
 
         Predicate<PaperCard> notBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
-        Iterable<PaperCard> source = Iterables.filter(CardDb.instance().getUniqueCards(), notBasicLand);
+        Iterable<PaperCard> source = Iterables.filter(Singletons.getMagicDb().getCommonCards().getUniqueCards(), notBasicLand);
         randomDeck.getMain().addAllFlat(Aggregates.random(source, 15 * 5));
 
-        for(String landName : Constant.Color.BASIC_LANDS) { 
+        for(String landName : MagicColor.Constant.BASIC_LANDS) { 
             randomDeck.getMain().add(landName, 1);
         }
         randomDeck.getMain().add("Terramorphic Expanse", 1);

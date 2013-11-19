@@ -46,8 +46,8 @@ import forge.gui.toolbox.itemmanager.table.SColumnUtil;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
 import forge.quest.QuestController;
+import forge.util.ItemPool;
 
 //import forge.quest.data.QuestBoosterPack;
 

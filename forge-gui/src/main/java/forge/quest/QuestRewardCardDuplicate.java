@@ -7,7 +7,7 @@ import java.util.Map;
 
 import forge.Singletons;
 import forge.item.PaperCard;
-import forge.item.ItemPool;
+import forge.util.ItemPool;
 
 /** 
  * Allows the player to choose a duplicate copy of a currently owned card.

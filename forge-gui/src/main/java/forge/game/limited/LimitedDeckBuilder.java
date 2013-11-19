@@ -16,12 +16,11 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Constant;
 import forge.Singletons;
 import forge.Constant.Preferences;
 import forge.card.CardAiHints;
-import forge.card.CardDb;
 import forge.card.CardEdition;
+import forge.card.CardEditionPredicates;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
@@ -269,8 +268,8 @@ public class LimitedDeckBuilder {
     private void findBasicLandSets() {
         Set<String> sets = new HashSet<String>();
         for (PaperCard cp : aiPlayables) {
-            CardEdition ee = Singletons.getModel().getEditions().get(cp.edition);
-            if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.apply(ee))
+            CardEdition ee = Singletons.getMagicDb().getEditions().get(cp.edition);
+            if( !sets.contains(cp.getEdition()) && CardEditionPredicates.hasBasicLands.apply(ee))
                 sets.add(cp.getEdition());
         }
         setsWithBasicLands.addAll(sets);
@@ -303,7 +302,7 @@ public class LimitedDeckBuilder {
                 final float p = (float) clrCnts[i] / (float) totalColor;
                 final int nLand = Math.round(landsNeeded * p); // desired truncation to int
                 if (Preferences.DEV_MODE) {
-                    System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", Constant.Color.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
+                    System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", MagicColor.Constant.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
                 }
 
                 for (int j = 0; j < nLand; j++) {
@@ -326,7 +325,7 @@ public class LimitedDeckBuilder {
         } else {
             set = setsWithBasicLands.get(0);
         }
-        return CardDb.instance().getCard(Constant.Color.BASIC_LANDS.get(basicLand), set);
+        return Singletons.getMagicDb().getCommonCards().getCard(MagicColor.Constant.BASIC_LANDS.get(basicLand), set);
     }
 
     /**

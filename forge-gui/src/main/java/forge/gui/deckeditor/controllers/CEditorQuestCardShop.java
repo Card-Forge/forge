@@ -33,7 +33,6 @@ import com.google.common.base.Function;
 
 import forge.Command;
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -59,13 +58,13 @@ import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
 import forge.item.OpenablePack;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.quest.QuestController;
 import forge.quest.io.ReadPriceList;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 
 /**
  * Child controller for quest card shop UI.
@@ -99,7 +98,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     
     private ItemPoolView<InventoryItem> cardsForSale;
     private final ItemPool<InventoryItem> fullCatalogCards =
-            ItemPool.createFrom(CardDb.instance().getAllCards(), InventoryItem.class);
+            ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), InventoryItem.class);
     private boolean showingFullCatalog = false;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;

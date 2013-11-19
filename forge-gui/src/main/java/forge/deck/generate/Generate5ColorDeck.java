@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
 import forge.card.ColorSet;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.item.PaperCard;
-import forge.item.ItemPoolView;
+import forge.util.ItemPoolView;
 
 /**
  * <p>

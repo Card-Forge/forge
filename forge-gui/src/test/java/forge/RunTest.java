@@ -53,74 +53,74 @@ public class RunTest {
         // ********* test ManaCost
         ManaCost manaCost = new ManaCost("G");
         this.check("21", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.GREEN);
+        manaCost.payMana(MagicColor.Constant.GREEN);
         this.check("22", manaCost.isPaid());
 
         manaCost = new ManaCost("7");
         this.check("23", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.BLACK);
+        manaCost.payMana(MagicColor.Constant.BLACK);
         this.check("24", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.BLUE);
+        manaCost.payMana(MagicColor.Constant.BLUE);
         this.check("25", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.COLORLESS);
+        manaCost.payMana(MagicColor.Constant.COLORLESS);
         this.check("26", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.GREEN);
+        manaCost.payMana(MagicColor.Constant.GREEN);
         this.check("27", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.RED);
+        manaCost.payMana(MagicColor.Constant.RED);
         this.check("28", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.WHITE);
+        manaCost.payMana(MagicColor.Constant.WHITE);
         this.check("29", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.WHITE);
+        manaCost.payMana(MagicColor.Constant.WHITE);
         this.check("30", manaCost.isPaid());
 
         manaCost = new ManaCost("2 W W G G B B U U R R");
         this.check("31", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.WHITE);
+        manaCost.payMana(MagicColor.Constant.WHITE);
         this.check("32", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.WHITE);
+        manaCost.payMana(MagicColor.Constant.WHITE);
         this.check("32.1", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.BLACK);
+        manaCost.payMana(MagicColor.Constant.BLACK);
         this.check("33", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.BLACK);
+        manaCost.payMana(MagicColor.Constant.BLACK);
         this.check("34", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.BLUE);
+        manaCost.payMana(MagicColor.Constant.BLUE);
         this.check("35", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.BLUE);
+        manaCost.payMana(MagicColor.Constant.BLUE);
         this.check("36", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.GREEN);
+        manaCost.payMana(MagicColor.Constant.GREEN);
         this.check("37", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.GREEN);
+        manaCost.payMana(MagicColor.Constant.GREEN);
         this.check("38", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.RED);
+        manaCost.payMana(MagicColor.Constant.RED);
         this.check("39", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.RED);
+        manaCost.payMana(MagicColor.Constant.RED);
         this.check("40", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.RED);
+        manaCost.payMana(MagicColor.Constant.RED);
         this.check("41", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.BLUE);
+        manaCost.payMana(MagicColor.Constant.BLUE);
         this.check("42", manaCost.isPaid());
 
         manaCost = new ManaCost("G G");
         this.check("43", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.GREEN);
+        manaCost.payMana(MagicColor.Constant.GREEN);
         this.check("44", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.GREEN);
+        manaCost.payMana(MagicColor.Constant.GREEN);
         this.check("45", manaCost.isPaid());
 
         manaCost = new ManaCost("1 U B");
         this.check("45", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.BLACK);
+        manaCost.payMana(MagicColor.Constant.BLACK);
         this.check("46", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.BLUE);
+        manaCost.payMana(MagicColor.Constant.BLUE);
         this.check("47", !manaCost.isPaid());
-        manaCost.payMana(Constant.Color.BLUE);
+        manaCost.payMana(MagicColor.Constant.BLUE);
         this.check("48", manaCost.isPaid());
 
         // ********* test CardUtil.getColors()
         c = new Card();
         c.setManaCost(new CardManaCost(new ManaCostParser("G")));
         ArrayList<String> color = CardUtil.getColors(c);
-        this.check("49", color.contains(Constant.Color.GREEN));
+        this.check("49", color.contains(MagicColor.Constant.GREEN));
         this.check("50", color.size() == 1);
 
         c = new Card();
@@ -129,38 +129,38 @@ public class RunTest {
         final Set<String> set = new HashSet<String>(color);
         System.out.println("color: " + color);
         this.check("51", set.size() == 5);
-        this.check("52", color.contains(Constant.Color.BLACK));
-        this.check("53", color.contains(Constant.Color.BLUE));
-        this.check("54", color.contains(Constant.Color.GREEN));
-        this.check("55", color.contains(Constant.Color.RED));
-        this.check("56", color.contains(Constant.Color.WHITE));
+        this.check("52", color.contains(MagicColor.Constant.BLACK));
+        this.check("53", color.contains(MagicColor.Constant.BLUE));
+        this.check("54", color.contains(MagicColor.Constant.GREEN));
+        this.check("55", color.contains(MagicColor.Constant.RED));
+        this.check("56", color.contains(MagicColor.Constant.WHITE));
 
         c = new Card();
         c.setManaCost(new CardManaCost(new ManaCostParser("2")));
         color = CardUtil.getColors(c);
         this.check("57", color.size() == 1);
-        this.check("58", color.contains(Constant.Color.COLORLESS));
+        this.check("58", color.contains(MagicColor.Constant.COLORLESS));
 
         c = new Card();
         color = CardUtil.getColors(c);
         this.check("59", color.size() == 1);
-        this.check("60", color.contains(Constant.Color.COLORLESS));
+        this.check("60", color.contains(MagicColor.Constant.COLORLESS));
 
         c = new Card();
         c.setManaCost(new CardManaCost(new ManaCostParser("")));
         color = CardUtil.getColors(c);
         this.check("61", color.size() == 1);
-        this.check("62", color.contains(Constant.Color.COLORLESS));
+        this.check("62", color.contains(MagicColor.Constant.COLORLESS));
 
         c = cf.getCard("Bayou", null);
         color = CardUtil.getColors(c);
         this.check("63", color.size() == 1);
-        this.check("64", color.contains(Constant.Color.COLORLESS));
+        this.check("64", color.contains(MagicColor.Constant.COLORLESS));
 
         c = cf.getCard("Elvish Warrior", null);
         color = CardUtil.getColors(c);
         this.check("65", color.size() == 1);
-        this.check("66", color.contains(Constant.Color.GREEN));
+        this.check("66", color.contains(MagicColor.Constant.GREEN));
 
         c = new Card();
         c.setManaCost(new CardManaCost(new ManaCostParser("11 W W B B U U R R G G")));
@@ -172,7 +172,7 @@ public class RunTest {
         c.setManaCost(new CardManaCost(new ManaCostParser("11")));
         color = CardUtil.getColors(c);
         this.check("68", color.size() == 1);
-        this.check("69", color.contains(Constant.Color.COLORLESS));
+        this.check("69", color.contains(MagicColor.Constant.COLORLESS));
 
         this.check("70", c.isCreature());
         this.check("71", !c.isArtifact());
@@ -210,27 +210,27 @@ public class RunTest {
         this.check("97", c.isUntapped());
 
         // test Input_PayManaCostUtil
-        this.check("98", InputPayManaCostUtil.getLongColorString("G").equals(Constant.Color.GREEN));
-        this.check("99", InputPayManaCostUtil.getLongColorString("1").equals(Constant.Color.COLORLESS));
+        this.check("98", InputPayManaCostUtil.getLongColorString("G").equals(MagicColor.Constant.GREEN));
+        this.check("99", InputPayManaCostUtil.getLongColorString("1").equals(MagicColor.Constant.COLORLESS));
 */
         /*
-         * check("101", Input_PayManaCostUtil.isManaNeeded(Constant.Color.Green,
+         * check("101", Input_PayManaCostUtil.isManaNeeded(MagicColor.Constant.Green,
          * new ManaCost("5")) == true); check("102",
-         * Input_PayManaCostUtil.isManaNeeded(Constant.Color.Blue, new
+         * Input_PayManaCostUtil.isManaNeeded(MagicColor.Constant.Blue, new
          * ManaCost("4")) == true); check("103",
-         * Input_PayManaCostUtil.isManaNeeded(Constant.Color.White, new
+         * Input_PayManaCostUtil.isManaNeeded(MagicColor.Constant.White, new
          * ManaCost("3")) == true); check("104",
-         * Input_PayManaCostUtil.isManaNeeded(Constant.Color.Black, new
+         * Input_PayManaCostUtil.isManaNeeded(MagicColor.Constant.Black, new
          * ManaCost("2")) == true); check("105",
-         * Input_PayManaCostUtil.isManaNeeded(Constant.Color.Red, new
+         * Input_PayManaCostUtil.isManaNeeded(MagicColor.Constant.Red, new
          * ManaCost("1")) == true);
          */
         /*
          * ManaCost cost = new ManaCost("1 B B");
-         * Input_PayManaCostUtil.isManaNeeded(Constant.Color.Black, cost);
-         * cost.subtractMana(Constant.Color.Black);
-         * cost.subtractMana(Constant.Color.Green); check("106",
-         * Input_PayManaCostUtil.isManaNeeded(Constant.Color.Green, cost) ==
+         * Input_PayManaCostUtil.isManaNeeded(MagicColor.Constant.Black, cost);
+         * cost.subtractMana(MagicColor.Constant.Black);
+         * cost.subtractMana(MagicColor.Constant.Green); check("106",
+         * Input_PayManaCostUtil.isManaNeeded(MagicColor.Constant.Green, cost) ==
          * false);
          */
 

@@ -43,6 +43,7 @@ import javax.swing.SwingUtilities;
 import org.apache.commons.lang.time.StopWatch;
 
 import forge.FThreads;
+import forge.ICardStorageReader;
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
 import forge.error.BugReporter;
@@ -58,7 +59,8 @@ import forge.util.FileUtil;
  * @author Forge
  * @version $Id$
  */
-public class CardStorageReader {
+
+public class CardStorageReader implements ICardStorageReader {
 
     private static final String CARD_FILE_DOT_EXTENSION = ".txt";
 
@@ -334,7 +336,7 @@ public class CardStorageReader {
         try {
             fileInputStream = new FileInputStream(file);
             CardRules rules = this.loadCard(reader, fileInputStream);
-            rules.setSourceFile(file);
+            //rules.setSourceFile(file);
             return rules;
         } catch (final FileNotFoundException ex) {
             BugReporter.reportException(ex, "File \"%s\" exception", file.getAbsolutePath());

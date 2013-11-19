@@ -133,11 +133,11 @@ public class QuestUtilUnlockSets {
         List<CardEdition> options = new ArrayList<CardEdition>();
 
         // Sort current sets by date
-        List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), Singletons.getModel().getEditions().FN_EDITION_BY_CODE));
+        List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), Singletons.getMagicDb().getEditions().FN_EDITION_BY_CODE));
         Collections.sort(allowedSets);
         
         // Sort unlockable sets by date
-        List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), Singletons.getModel().getEditions().FN_EDITION_BY_CODE));
+        List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), Singletons.getMagicDb().getEditions().FN_EDITION_BY_CODE));
         Collections.sort(excludedSets);
         
         // get a number of sets between an excluded and any included set
@@ -182,8 +182,8 @@ public class QuestUtilUnlockSets {
      */
     public static void doUnlock(QuestController qData, final CardEdition unlockedSet) {
 
-        IStorage<SealedProductTemplate> starters = Singletons.getModel().getTournamentPacks();
-        IStorage<SealedProductTemplate> boosters = Singletons.getModel().getBoosters();
+        IStorage<SealedProductTemplate> starters = Singletons.getMagicDb().getTournamentPacks();
+        IStorage<SealedProductTemplate> boosters = Singletons.getMagicDb().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
         List<PaperCard> cardsWon = new ArrayList<PaperCard>();

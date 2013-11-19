@@ -66,7 +66,7 @@ public abstract class QuestRewardCard implements InventoryItem, IQuestRewardCard
                     if (setcodes.length > 0) {
                         List<String> sets = new ArrayList<String>();
                         for (String code : setcodes) {
-                            if (Singletons.getModel().getEditions().contains(code)) {
+                            if (Singletons.getMagicDb().getEditions().contains(code)) {
                                 // System.out.println("Set " + code + " was found!");
                                 sets.add(code);
                             }

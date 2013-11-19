@@ -20,7 +20,7 @@ package forge.game.limited;
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.PaperCard;
-import forge.item.ItemPoolView;
+import forge.util.ItemPoolView;
 
 /**
  * <p>

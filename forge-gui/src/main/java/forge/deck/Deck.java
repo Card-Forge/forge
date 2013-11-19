@@ -35,12 +35,12 @@ import com.google.common.base.Function;
 import forge.card.CardDb;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
-import forge.item.ItemPoolSorter;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
-import forge.item.ItemPoolView;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.ItemPoolSorter;
+import forge.util.ItemPoolView;
 
 
 /**

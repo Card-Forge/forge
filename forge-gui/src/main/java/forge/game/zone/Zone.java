@@ -33,7 +33,7 @@ import forge.game.Game;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
-import forge.util.maps.CollectionSuppliers;
+import forge.util.CollectionSuppliers;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
 

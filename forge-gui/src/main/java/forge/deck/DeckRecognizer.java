@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.card.ICardDatabase;
 import forge.item.PaperCard;
 
@@ -169,7 +169,7 @@ public class DeckRecognizer {
     
     public DeckRecognizer(boolean fromLatestSet) {
         useLastSet = fromLatestSet;
-        db = CardDb.instance();
+        db = Singletons.getMagicDb().getCommonCards();
     }
     
     public Token recognizeLine(final String rawLine) {

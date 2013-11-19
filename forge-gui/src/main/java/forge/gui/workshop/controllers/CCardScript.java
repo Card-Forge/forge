@@ -83,16 +83,16 @@ public enum CCardScript implements ICDoc {
     	String text = "";
         boolean editable = false;
         if (this.currentCard != null) {
-	        File sourceFile = this.currentCard.getRules().getSourceFile();
-	        if (sourceFile != null) {
-	        	try {
-	        		text = FileUtil.readFileToString(sourceFile);
-	        		editable = true;
-	        	}
-	        	catch (final Exception ex) {
-	        		text = "Couldn't read file - " + sourceFile + "\n\nException:\n" + ex.toString();
-	        	}
-	        }
+//            File sourceFile = this.currentCard.getRules().getSourceFile();
+//            if (sourceFile != null) {
+//            	try {
+//            		text = FileUtil.readFileToString(sourceFile);
+//            		editable = true;
+//            	}
+//            	catch (final Exception ex) {
+//            		text = "Couldn't read file - " + sourceFile + "\n\nException:\n" + ex.toString();
+//            	}
+//            }
         }
         this.baseText = text;
 
@@ -129,28 +129,29 @@ public enum CCardScript implements ICDoc {
     public boolean saveChanges() {
     	if (!hasChanges()) { return true; } //not need if text hasn't been changed
 
-        File sourceFile = this.currentCard.getRules().getSourceFile();
-        if (sourceFile == null) { return true; }
-    	
-    	try {
-    		String text = VCardScript.SINGLETON_INSTANCE.getTxtScript().getText();
-
-            PrintWriter p = new PrintWriter(sourceFile);
-            p.print(text);
-            p.close();
-            
-            this.baseText = text;
-            updateDirtyFlag();
-
-            this.currentCard.updateRules(text);
-            VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().repaint();
-	        CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
-	        CPicture.SINGLETON_INSTANCE.showImage(this.currentCard);
-            return true;
-        } catch (final Exception ex) {
-        	JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "FileUtil : writeFile() error, problem writing file - " + sourceFile + " : " + ex);
-        	return false;
-        }
+//        File sourceFile = this.currentCard.getRules().getSourceFile();
+//        if (sourceFile == null) { return true; }
+//    	
+//    	try {
+//    		String text = VCardScript.SINGLETON_INSTANCE.getTxtScript().getText();
+//
+//            PrintWriter p = new PrintWriter(sourceFile);
+//            p.print(text);
+//            p.close();
+//            
+//            this.baseText = text;
+//            updateDirtyFlag();
+//
+//            this.currentCard.updateRules(text);
+//            VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().repaint();
+//	        CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
+//	        CPicture.SINGLETON_INSTANCE.showImage(this.currentCard);
+//            return true;
+//        } catch (final Exception ex) {
+//        	JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "FileUtil : writeFile() error, problem writing file - " + sourceFile + " : " + ex);
+//        	return false;
+//        }
+    	return false;
     }
 
     //========== Overridden methods

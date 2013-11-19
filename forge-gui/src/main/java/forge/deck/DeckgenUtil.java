@@ -15,7 +15,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
@@ -23,13 +22,13 @@ import forge.deck.generate.GenerateColoredDeckBase;
 import forge.deck.generate.GenerateMonoColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.item.PaperCard;
-import forge.item.ItemPoolView;
 import forge.item.PreconDeck;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestEventDuel;
 import forge.util.Aggregates;
+import forge.util.ItemPoolView;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
@@ -305,7 +304,7 @@ public class DeckgenUtil {
     public static CardPool generateSchemeDeck() {
         CardPool schemes = new CardPool();
         List<PaperCard> allSchemes = new ArrayList<PaperCard>();
-        for (PaperCard c : CardDb.variants().getAllCards()) {
+        for (PaperCard c : Singletons.getMagicDb().getVariantCards().getAllCards()) {
             if (c.getRules().getType().isScheme()) {
                 allSchemes.add(c);
             }
@@ -330,7 +329,7 @@ public class DeckgenUtil {
     public static CardPool generatePlanarDeck() {
         CardPool res = new CardPool();
         List<PaperCard> allPlanars = new ArrayList<PaperCard>();
-        for (PaperCard c : CardDb.variants().getAllCards()) {
+        for (PaperCard c : Singletons.getMagicDb().getVariantCards().getAllCards()) {
             if (c.getRules().getType().isPlane() || c.getRules().getType().isPhenomenon()) {
                 allPlanars.add(c);
             }

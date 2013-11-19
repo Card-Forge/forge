@@ -28,7 +28,6 @@ import forge.CardUtil;
 import forge.ImageCache;
 import forge.card.CardCharacteristicName;
 import forge.card.CardCharacteristics;
-import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
@@ -89,7 +88,8 @@ public class CardFactory {
         }
         Card out = null;
         if (!in.isToken() || in.isCopiedToken()) {
-            out = assignNewId ? getCard(CardDb.getCard(in), in.getOwner()) : getCard(CardDb.getCard(in), in.getOwner(), in.getUniqueNumber());
+            out = assignNewId ? getCard(in.getPaperCard(), in.getOwner()) 
+                              : getCard(in.getPaperCard(), in.getOwner(), in.getUniqueNumber());
         } else { // token
             out = assignNewId ? new Card(in.getGame().nextCardId()) : new Card(in.getUniqueNumber());
             out = CardFactory.copyStats(in, in.getController());

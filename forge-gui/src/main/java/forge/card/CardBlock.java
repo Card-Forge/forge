@@ -297,6 +297,6 @@ public final class CardBlock implements Comparable<CardBlock> {
      */
     public IUnOpenedProduct getBooster(final String code) {
         MetaSet ms = metaSets.get(code);
-        return ms == null ? new UnOpenedProduct(Singletons.getModel().getBoosters().get(code)) : ms.getBooster();
+        return ms == null ? new UnOpenedProduct(Singletons.getMagicDb().getBoosters().get(code)) : ms.getBooster();
     }
 }

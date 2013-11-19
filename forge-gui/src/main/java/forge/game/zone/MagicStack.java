@@ -39,7 +39,6 @@ import forge.GameObject;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.GameLogEntryType;
-import forge.card.CardDb;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactory;
@@ -522,7 +521,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // 702.102d: if its target is illegal, 
                 // the effect making it an Aura spell ends. 
                 // It continues resolving as a creature spell.
-                ArrayList<String> type = CardFactory.getCard(CardDb.getCard(source), source.getController()).getType();
+                ArrayList<String> type = CardFactory.getCard(source.getPaperCard(), source.getController()).getType();
                 final long timestamp = game.getNextTimestamp();
                 source.addChangedCardTypes(type, Lists.newArrayList("Aura"), false, false, false, false, timestamp);
                 source.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);

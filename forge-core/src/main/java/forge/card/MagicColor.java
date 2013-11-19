@@ -1,6 +1,8 @@
 package forge.card;
 
-import forge.Constant;
+import java.util.List;
+
+import com.google.common.collect.ImmutableList;
 
 /** 
  * Holds byte values for each color magic has.
@@ -22,31 +24,31 @@ public class MagicColor {
     
     public static byte fromName(String s) {
         if( s == null ) return 0;
-        if (s.equalsIgnoreCase(Constant.Color.WHITE) || s.equalsIgnoreCase("w")) {
+        if (s.equalsIgnoreCase(Constant.WHITE) || s.equalsIgnoreCase("w")) {
             return MagicColor.WHITE;
         }
-        if (s.equalsIgnoreCase(Constant.Color.BLUE) || s.equalsIgnoreCase("u")) {
+        if (s.equalsIgnoreCase(Constant.BLUE) || s.equalsIgnoreCase("u")) {
             return MagicColor.BLUE;
         }
-        if (s.equalsIgnoreCase(Constant.Color.BLACK) || s.equalsIgnoreCase("b")) {
+        if (s.equalsIgnoreCase(Constant.BLACK) || s.equalsIgnoreCase("b")) {
             return MagicColor.BLACK;
         }
-        if (s.equalsIgnoreCase(Constant.Color.RED) || s.equalsIgnoreCase("r")) {
+        if (s.equalsIgnoreCase(Constant.RED) || s.equalsIgnoreCase("r")) {
             return MagicColor.RED;
         }
-        if (s.equalsIgnoreCase(Constant.Color.GREEN) || s.equalsIgnoreCase("g")) {
+        if (s.equalsIgnoreCase(Constant.GREEN) || s.equalsIgnoreCase("g")) {
             return MagicColor.GREEN;
         }
         return 0; // colorless
     }
 
     public static String toShortString(String color) {
-        if (color.equalsIgnoreCase(Constant.Color.SNOW)) return "S"; // compatibility
+        if (color.equalsIgnoreCase(Constant.SNOW)) return "S"; // compatibility
         return toShortString(fromName(color));
     }
     
     public static String toLongString(String color) {
-        if (color.equalsIgnoreCase("s")) return Constant.Color.SNOW; // compatibility
+        if (color.equalsIgnoreCase("s")) return Constant.SNOW; // compatibility
         return toLongString(fromName(color));
     }
         
@@ -63,12 +65,47 @@ public class MagicColor {
 
     public static String toLongString(byte color) {
         switch(color){
-            case GREEN: return Constant.Color.GREEN ;
-            case RED: return Constant.Color.RED;
-            case BLUE: return Constant.Color.BLUE;
-            case BLACK: return Constant.Color.BLACK;
-            case WHITE: return Constant.Color.WHITE;
-            default: return Constant.Color.COLORLESS;
+            case GREEN: return Constant.GREEN ;
+            case RED: return Constant.RED;
+            case BLUE: return Constant.BLUE;
+            case BLACK: return Constant.BLACK;
+            case WHITE: return Constant.WHITE;
+            default: return Constant.COLORLESS;
         }
     }
+    
+    /**
+     * The Interface Color.
+     */
+    public static class Constant {
+
+        /** The Black. */
+        public static final String BLACK = "black";
+
+        /** The Blue. */
+        public static final String BLUE = "blue";
+
+        /** The Green. */
+        public static final String GREEN = "green";
+
+        /** The Red. */
+        public static final String RED = "red";
+
+        /** The White. */
+        public static final String WHITE = "white";
+
+        /** The Colorless. */
+        public static final String COLORLESS = "colorless";
+        // color order "wubrg"
+
+        /** The only colors. */
+        public static final ImmutableList<String> ONLY_COLORS = ImmutableList.of(WHITE, BLUE, BLACK, RED, GREEN);
+
+        /** The Snow. */
+        public static final String SNOW = "snow";
+
+        /** The Basic lands. */
+        public static final List<String> BASIC_LANDS = ImmutableList.of("Plains", "Island", "Swamp", "Mountain", "Forest");
+        public static final List<String> SNOW_LANDS = ImmutableList.of("Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", "Snow-Covered Mountain", "Snow-Covered Forest");
+    }    
 }

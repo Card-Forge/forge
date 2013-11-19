@@ -174,7 +174,7 @@ public enum CWorkshopCatalog implements ICDoc {
                     }
                 }, canSearch());
                 JMenu fmt = new JMenu("Format");
-                for (final GameFormat f : Singletons.getModel().getFormats()) {
+                for (final GameFormat f : Singletons.getMagicDb().getFormats()) {
                     GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                         @Override
                         public void run() {
@@ -490,7 +490,7 @@ public enum CWorkshopCatalog implements ICDoc {
     }
     
     private Pair<FLabel, Predicate<PaperCard>> buildFormatRestriction(String displayName, GameFormat format, boolean allowReprints) {
-        EditionCollection editions = Singletons.getModel().getEditions();
+        EditionCollection editions = Singletons.getMagicDb().getEditions();
         StringBuilder tooltip = new StringBuilder("<html>Sets:");
         
         int lastLen = 0;

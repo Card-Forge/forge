@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.Constant;
 import forge.GameEntity;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostBeingPaid;
@@ -499,11 +499,11 @@ public class StaticAbility {
                     return false;
                 }
             } else if (condition.equals("PermanentOfEachColor")) {
-                if ((controller.getColoredCardsInPlay(Constant.Color.BLACK).isEmpty()
-                        || controller.getColoredCardsInPlay(Constant.Color.BLUE).isEmpty()
-                        || controller.getColoredCardsInPlay(Constant.Color.GREEN).isEmpty()
-                        || controller.getColoredCardsInPlay(Constant.Color.RED).isEmpty()
-                        || controller.getColoredCardsInPlay(Constant.Color.WHITE).isEmpty())) {
+                if ((controller.getColoredCardsInPlay(MagicColor.Constant.BLACK).isEmpty()
+                        || controller.getColoredCardsInPlay(MagicColor.Constant.BLUE).isEmpty()
+                        || controller.getColoredCardsInPlay(MagicColor.Constant.GREEN).isEmpty()
+                        || controller.getColoredCardsInPlay(MagicColor.Constant.RED).isEmpty()
+                        || controller.getColoredCardsInPlay(MagicColor.Constant.WHITE).isEmpty())) {
                     return false;
                 }
             } else if (condition.equals("FatefulHour")) {

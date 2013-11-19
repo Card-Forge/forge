@@ -19,10 +19,8 @@ package forge.item;
 
 import com.google.common.base.Function;
 
-import forge.Card;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.card.CardRulesReader;
 
 
 /**
@@ -36,10 +34,10 @@ import forge.card.CardRulesReader;
  */
 public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard {
     // Reference to rules
-    private final transient CardRules rules;
+    private final transient CardRules card;
 
     // These fields are kinda PK for PrintedCard
-    public String name;
+    public final String name;
     public final String edition;
     public final int artIndex;
     public final boolean foil;
@@ -74,7 +72,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
 
     @Override
     public CardRules getRules() {
-        return this.rules;
+        return this.card;
     }
 
     @Override
@@ -82,11 +80,15 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         return this.rarity;
     }
 
+
+    
+    
 //    @Override
 //    public String getImageKey() {
 //        return getImageLocator(getImageName(), getArtIndex(), true, false);
 //    }
-
+    
+    
     @Override
     public String getItemType() {
         return "Card";
@@ -98,7 +100,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     public static final Function<PaperCard, CardRules> FN_GET_RULES = new Function<PaperCard, CardRules>() {
         @Override
         public CardRules apply(final PaperCard from) {
-            return from.rules;
+            return from.card;
         }
     };
     public static final Function<PaperCard, String> FN_GET_NAME = new Function<PaperCard, String>() {
@@ -108,20 +110,19 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
     };    
 
-    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0) {
-        this(rules0, edition0, rarity0, artIndex0, false);
+    public PaperCard(final CardRules c, final String edition0, final CardRarity rare, final int index) {
+        this(c, edition0, rare, index, false);
     }
     
-    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0, final boolean foil0) {
-        if (edition0 == null || rules0 == null || rarity0 == null) {
+    public PaperCard(final CardRules c, final String edition0, final CardRarity rare, final int index, final boolean foil) {
+        if ( edition0 == null || c == null || rare == null )
             throw new IllegalArgumentException("Cannot create card without rules, edition or rarity");
-        }
-        this.rules = rules0;
-        this.name = rules0.getName();
+        this.card = c;
+        this.name = c.getName();
         this.edition = edition0;
-        this.rarity = rarity0;
-        this.artIndex = artIndex0;
-        this.foil = foil0;
+        this.artIndex = index;
+        this.foil = foil;
+        this.rarity = rare;
     }
 
     // Want this class to be a key for HashTable
@@ -191,11 +192,5 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
         // TODO compare sets properly
         return this.edition.compareTo(o.getEdition());
-    }
-    
-    public void updateRules(String script) {
-    	CardRulesReader.updateCardRules(this.rules, script);
-    	this.name = this.rules.getName();
-    	Card.updateCard(this);
     }
 }

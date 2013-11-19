@@ -26,7 +26,6 @@ import com.google.common.base.Supplier;
 
 import forge.Command;
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -44,8 +43,8 @@ import forge.gui.toolbox.itemmanager.table.SColumnUtil;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -84,9 +83,9 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         allSections.add(DeckSection.Planes);
         //allSections.add(DeckSection.Commander);
 
-        avatarPool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)),PaperCard.class);
-        planePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)),PaperCard.class);
-        schemePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)),PaperCard.class);
+        avatarPool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)),PaperCard.class);
+        planePool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)),PaperCard.class);
+        schemePool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)),PaperCard.class);
         
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 
@@ -178,7 +177,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     @Override
     public void resetTables() {
         // Constructed mode can use all cards, no limitations.
-        this.getCatalogManager().setPool(ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class), true);
+        this.getCatalogManager().setPool(ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
         this.getDeckManager().setPool(this.controller.getModel().getMain());
     }
 
@@ -210,7 +209,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         case Main:
             lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
             this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
-            this.getCatalogManager().setPool(ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class), true);
+            this.getCatalogManager().setPool(ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
             this.getDeckManager().setPool(this.controller.getModel().getMain());
             showOptions = true;
             title = "Title: ";

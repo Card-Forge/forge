@@ -333,7 +333,7 @@ public class CardPanel extends JPanel implements CardContainer {
 
         // White border if card is known to have it.
         if (this.getGameCard() != null && !this.getGameCard().isFaceDown()) {
-            CardEdition ed = Singletons.getModel().getEditions().get(this.getGameCard().getCurSetCode());
+            CardEdition ed = Singletons.getMagicDb().getEditions().get(this.getGameCard().getCurSetCode());
             if (ed != null && ed.isWhiteBorder() && this.getGameCard().getFoil() == 0) {
                 g2d.setColor(Color.white);
                 int ins = 1;

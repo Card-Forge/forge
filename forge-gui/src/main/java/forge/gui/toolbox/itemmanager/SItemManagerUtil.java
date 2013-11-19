@@ -12,8 +12,8 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPoolView;
 import forge.util.Aggregates;
+import forge.util.ItemPoolView;
 import forge.util.TextUtil;
 
 

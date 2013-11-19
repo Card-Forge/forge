@@ -21,8 +21,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import forge.item.ItemPoolSorter;
 import forge.item.InventoryItem;
+import forge.util.ItemPoolSorter;
 
 /**
  * <p>

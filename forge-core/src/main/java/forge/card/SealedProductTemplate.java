@@ -18,6 +18,7 @@
 
 package forge.card;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +31,13 @@ import com.google.common.collect.Lists;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
 
+
 public class SealedProductTemplate {
 
     @SuppressWarnings("unchecked")
     public final static SealedProductTemplate genericBooster = new SealedProductTemplate(null, Lists.newArrayList(
-        Pair.of(BoosterGenerator.COMMON, 10), Pair.of(BoosterGenerator.UNCOMMON, 3), 
-        Pair.of(BoosterGenerator.RARE_MYTHIC, 1), Pair.of(BoosterGenerator.BASIC_LAND, 1)
+        Pair.of(BoosterSlots.COMMON, 10), Pair.of(BoosterSlots.UNCOMMON, 3), 
+        Pair.of(BoosterSlots.RARE_MYTHIC, 1), Pair.of(BoosterSlots.BASIC_LAND, 1)
     ));
 
     
@@ -61,6 +63,10 @@ public class SealedProductTemplate {
         name = name0;
     }
 
+    public SealedProductTemplate(String code, String boosterDesc) {
+        this(code, Reader.parseSlots(boosterDesc));
+    }
+
     public int getNumberOfCardsExpected() {
         int sum = 0;
         for(Pair<String, Integer> p : slots) {
@@ -69,7 +75,7 @@ public class SealedProductTemplate {
         return sum;
     }
     
-    protected static final Function<? super SealedProductTemplate, String> FN_GET_NAME = new Function<SealedProductTemplate, String>() {
+    public static final Function<? super SealedProductTemplate, String> FN_GET_NAME = new Function<SealedProductTemplate, String>() {
         @Override
         public String apply(SealedProductTemplate arg1) {
             return arg1.name;
@@ -98,9 +104,9 @@ public class SealedProductTemplate {
         return s.toString();
     }
     
-    public static final class Reader extends StorageReaderFile<SealedProductTemplate> {
-        public Reader(String pathname) {
-            super(pathname, SealedProductTemplate.FN_GET_NAME);
+    public final static class Reader extends StorageReaderFile<SealedProductTemplate> {
+        public Reader(File file) {
+            super(file, SealedProductTemplate.FN_GET_NAME);
         }
 
         public static List<Pair<String, Integer>> parseSlots(String data) {
@@ -118,5 +124,5 @@ public class SealedProductTemplate {
             String[] headAndData = TextUtil.split(line, ':', 2);
             return new SealedProductTemplate(headAndData[0], parseSlots(headAndData[1]));
         }
-    }
+    }    
 }

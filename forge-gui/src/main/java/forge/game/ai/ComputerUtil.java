@@ -32,7 +32,6 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Constant;
 import forge.CounterType;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
@@ -1654,7 +1653,7 @@ public class ComputerUtil {
                 if (logic.equals("MostNeededType")) {
                     // Choose a type that is in the deck, but not in hand or on the battlefield 
                     final ArrayList<String> basics = new ArrayList<String>();
-                    basics.addAll(Constant.CardTypes.BASIC_TYPES);
+                    basics.addAll(CardType.Constant.BASIC_TYPES);
                     List<Card> presentCards = ai.getCardsIn(ZoneType.Battlefield);
                     presentCards.addAll(ai.getCardsIn(ZoneType.Hand));
                     List<Card> possibleCards = ai.getAllCards();

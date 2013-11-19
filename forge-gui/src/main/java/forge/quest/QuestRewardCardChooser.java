@@ -9,10 +9,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
+import forge.util.ItemPool;
 
 /** 
  * Resolves a card chooser InventoryItem into a CardPrinted.
@@ -108,7 +107,7 @@ public class QuestRewardCardChooser extends QuestRewardCard implements Inventory
         } else if (type == poolType.predicateFilter) {
             List<PaperCard> cardChoices = new ArrayList<PaperCard>();
 
-            for (final PaperCard card : Iterables.filter(CardDb.instance().getAllCards(), predicates)) {
+            for (final PaperCard card : Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), predicates)) {
                 cardChoices.add(card);
             }
             Collections.sort(cardChoices);

@@ -23,7 +23,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
@@ -40,7 +40,7 @@ import forge.gui.toolbox.itemmanager.table.SColumnUtil;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
+import forge.util.ItemPool;
 import forge.util.storage.IStorage;
 
 /**
@@ -130,7 +130,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public void resetTables() {
-        Iterable<PaperCard> allNT = CardDb.variants().getAllCards();
+        Iterable<PaperCard> allNT = Singletons.getMagicDb().getVariantCards().getAllCards();
         allNT = Iterables.filter(allNT, cardPoolCondition);
         
         this.getCatalogManager().setPool(ItemPool.createFrom(allNT, PaperCard.class), true);

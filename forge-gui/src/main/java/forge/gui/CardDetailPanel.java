@@ -181,7 +181,7 @@ public class CardDetailPanel extends FPanel {
             setInfoLabel.setOpaque(false);
             setInfoLabel.setBorder(null);
         } else {
-            CardEdition edition = Singletons.getModel().getEditions().get(set);
+            CardEdition edition = Singletons.getMagicDb().getEditions().get(set);
             if (null != edition) {
                 setInfoLabel.setToolTipText(edition.getName());
             }
@@ -236,7 +236,7 @@ public class CardDetailPanel extends FPanel {
             String set = card.getCurSetCode();
             this.setInfoLabel.setText(set);
             if (null != set && !set.isEmpty()) {
-                CardEdition edition = Singletons.getModel().getEditions().get(set);
+                CardEdition edition = Singletons.getMagicDb().getEditions().get(set);
                 if (null == edition) {
                     setInfoLabel.setToolTipText(card.getRarity().name());
                 } else {

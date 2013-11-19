@@ -19,7 +19,6 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.google.common.collect.ImmutableList;
 
 /**
  * <p>
@@ -54,79 +53,6 @@ public final class Constant {
         public static final int HEIGHT = 0;
     }
 
-    /**
-     * The Interface Color.
-     */
-    public static class Color {
-
-        /** The Black. */
-        public static final String BLACK = "black";
-
-        /** The Blue. */
-        public static final String BLUE = "blue";
-
-        /** The Green. */
-        public static final String GREEN = "green";
-
-        /** The Red. */
-        public static final String RED = "red";
-
-        /** The White. */
-        public static final String WHITE = "white";
-
-        /** The Colorless. */
-        public static final String COLORLESS = "colorless";
-        // color order "wubrg"
-
-        /** The only colors. */
-        public static final ImmutableList<String> ONLY_COLORS = ImmutableList.of(Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN);
-
-        /** The Snow. */
-        public static final String SNOW = "snow";
-
-        /** The Basic lands. */
-        public static final List<String> BASIC_LANDS = ImmutableList.of("Plains", "Island", "Swamp", "Mountain", "Forest");
-        public static final List<String> SNOW_LANDS = ImmutableList.of("Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", "Snow-Covered Mountain", "Snow-Covered Forest");
-    }
-
-    /**
-     * The Interface CardTypes.
-     */
-    public static class CardTypes {
-
-        /** The loaded. */
-        public static final boolean[] LOADED = { false };
-
-        /** The card types. */
-        public static final List<String> CARD_TYPES = new ArrayList<String>();
-
-        /** The super types. */
-        public static final List<String> SUPER_TYPES = new ArrayList<String>();
-
-        /** The basic types. */
-        public static final List<String> BASIC_TYPES = new ArrayList<String>();
-
-        /** The land types. */
-        public static final List<String> LAND_TYPES = new ArrayList<String>();
-
-        /** The creature types. */
-        public static final List<String> CREATURE_TYPES = new ArrayList<String>();
-
-        /** The instant types. */
-        public static final List<String> INSTANT_TYPES = new ArrayList<String>();
-
-        /** The sorcery types. */
-        public static final List<String> SORCERY_TYPES = new ArrayList<String>();
-
-        /** The enchantment types. */
-        public static final List<String> ENCHANTMENT_TYPES = new ArrayList<String>();
-
-        /** The artifact types. */
-        public static final List<String> ARTIFACT_TYPES = new ArrayList<String>();
-
-        /** The walker types. */
-        public static final List<String> WALKER_TYPES = new ArrayList<String>();
-    }
 
     /**
      * The Interface Keywords.

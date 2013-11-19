@@ -32,7 +32,6 @@ import org.apache.commons.lang.StringUtils;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.SealedProductTemplate;
@@ -141,7 +140,7 @@ public class QuestWinLose extends ControlWinLose {
                         continue;
                     }
                     for (Card c : p.getCardsIn(ZoneType.Ante)) {
-                        anteCards.add(CardDb.getCard(c));
+                        anteCards.add(c.getPaperCard());
                     }
                 }
 
@@ -543,7 +542,7 @@ public class QuestWinLose extends ControlWinLose {
             String preferredFormat = Singletons.getModel().getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
             GameFormat pref = null;
-            for (GameFormat f : Singletons.getModel().getFormats()) {
+            for (GameFormat f : Singletons.getMagicDb().getFormats()) {
                 formats.add(f);
                 if (f.toString().equals(preferredFormat)) {
                     pref = f;
@@ -564,7 +563,7 @@ public class QuestWinLose extends ControlWinLose {
         } else {
             final List<String> sets = new ArrayList<String>();
 
-            for (SealedProductTemplate bd : Singletons.getModel().getBoosters()) {
+            for (SealedProductTemplate bd : Singletons.getMagicDb().getBoosters()) {
                 if (bd != null && qData.getFormat().isSetLegal(bd.getEdition())) {
                     sets.add(bd.getEdition());
                 }
@@ -585,13 +584,13 @@ public class QuestWinLose extends ControlWinLose {
                 int ix = MyRandom.getRandom().nextInt(sets.size());
                 String set = sets.get(ix);
                 sets.remove(ix);
-                options.add(Singletons.getModel().getEditions().get(set));
+                options.add(Singletons.getMagicDb().getEditions().get(set));
                 maxChoices--;
             }
 
             final CardEdition chooseEd = GuiChoose.one("Choose bonus booster set:", options);
 
-            IUnOpenedProduct product = new UnOpenedProduct(Singletons.getModel().getBoosters().get(chooseEd.getCode()));
+            IUnOpenedProduct product = new UnOpenedProduct(Singletons.getMagicDb().getBoosters().get(chooseEd.getCode()));
             cardsWon = product.get();
             qData.getCards().addAllCards(cardsWon);
             this.lblTemp1 = new TitleLabel("Bonus " + chooseEd.getName() + " booster pack!");

@@ -18,7 +18,7 @@ import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Command;
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.gui.WrapLayout;
 import forge.gui.deckeditor.views.VCardCatalog.RangeTypes;
 import forge.gui.framework.DragCell;
@@ -37,8 +37,8 @@ import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.workshop.controllers.CCardScript;
 import forge.gui.workshop.controllers.CWorkshopCatalog;
-import forge.item.ItemPool;
 import forge.item.PaperCard;
+import forge.util.ItemPool;
 
 /** 
  * Assembles Swing components of card catalog in workshop.
@@ -125,7 +125,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
         }
         
         this.cardManager = new CardManager(this.statLabels, true);
-        this.cardManager.setPool(ItemPool.createFrom(CardDb.instance().getAllCards(), PaperCard.class), true);
+        this.cardManager.setPool(ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
         this.cardManagerContainer.setItemManager(this.cardManager);
         
         this.cardManager.addSelectionListener(new ListSelectionListener() {

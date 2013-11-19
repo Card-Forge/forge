@@ -17,7 +17,6 @@
  */
 package forge.card;
 
-import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +33,8 @@ public final class EditionCollection extends StorageBase<CardEdition> {
 
     private final Map<String, CardEdition> aliasToEdition = new TreeMap<String, CardEdition>(String.CASE_INSENSITIVE_ORDER);
 
-    public EditionCollection(File folder) {
-        super("Card editions", new CardEdition.EditionReader(folder));
+    public EditionCollection(IItemReader<CardEdition> reader) {
+        super("Card editions", reader);
 
         for (CardEdition ee : this) {
             String alias = ee.getAlias();

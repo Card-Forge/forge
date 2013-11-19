@@ -32,7 +32,6 @@ import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
-import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.game.player.IHasIcon;
@@ -237,7 +236,7 @@ public class ImageCache {
             return ImageCache.TOURNAMENTPACK_PREFIX + ((TournamentPack)ii).getEdition();
         if ( ii instanceof BoosterPack ) {
             BoosterPack bp = (BoosterPack)ii;
-            int cntPics = Singletons.getModel().getEditions().get(bp.getEdition()).getCntBoosterPictures();
+            int cntPics = Singletons.getMagicDb().getEditions().get(bp.getEdition()).getCntBoosterPictures();
             String suffix = (1 >= cntPics) ? "" : ("_" + bp.getArtIndex());
             return ImageCache.BOOSTER_PREFIX + bp.getEdition() + suffix;
         }
@@ -264,7 +263,7 @@ public class ImageCache {
         final int cntPictures;
         final boolean hasManyPictures;
         if (includeSet) {
-            cntPictures = !card.isVariant() ? CardDb.instance().getPrintCount(card.getName(), edition) : CardDb.variants().getPrintCount(card.getName(), edition); 
+            cntPictures = !card.isVariant() ? Singletons.getMagicDb().getCommonCards().getPrintCount(card.getName(), edition) : Singletons.getMagicDb().getVariantCards().getPrintCount(card.getName(), edition); 
             hasManyPictures = cntPictures > 1;
         } else {
             // without set number of pictures equals number of urls provided in Svar:Picture
@@ -272,7 +271,7 @@ public class ImageCache {
             cntPictures = StringUtils.countMatches(urls, "\\") + 1;
 
             // raise the art index limit to the maximum of the sets this card was printed in
-            int maxCntPictures = !card.isVariant() ? CardDb.instance().getMaxPrintCount(card.getName()) : CardDb.variants().getMaxPrintCount(card.getName());
+            int maxCntPictures = !card.isVariant() ? Singletons.getMagicDb().getCommonCards().getMaxPrintCount(card.getName()) : Singletons.getMagicDb().getVariantCards().getMaxPrintCount(card.getName());
             hasManyPictures = maxCntPictures > 1;
         }
         
@@ -297,7 +296,7 @@ public class ImageCache {
         }
         
         if (includeSet) {
-            String editionAliased = isDownloadUrl ? Singletons.getModel().getEditions().getCode2ByCode(edition) : getSetFolder(edition);
+            String editionAliased = isDownloadUrl ? Singletons.getMagicDb().getEditions().getCode2ByCode(edition) : getSetFolder(edition);
             return String.format("%s/%s", editionAliased, fname);
         } else {
             return fname;
@@ -311,7 +310,7 @@ public class ImageCache {
     
     public static String getSetFolder(String edition) {
         return  !NewConstants.CACHE_CARD_PICS_SUBDIR.containsKey(edition)
-                ? Singletons.getModel().getEditions().getCode2ByCode(edition) // by default 2-letter codes from MWS are used
+                ? Singletons.getMagicDb().getEditions().getCode2ByCode(edition) // by default 2-letter codes from MWS are used
                 : NewConstants.CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
     }
 

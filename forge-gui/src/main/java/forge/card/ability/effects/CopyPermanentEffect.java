@@ -15,8 +15,8 @@ import forge.Card;
 import forge.CardLists;
 import forge.Command;
 import forge.GameEntity;
+import forge.Singletons;
 import forge.card.CardCharacteristicName;
-import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -71,7 +71,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (sa.hasParam("ValidSupportedCopy")) {
-            List<PaperCard> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
+            List<PaperCard> cards = Lists.newArrayList(Singletons.getMagicDb().getCommonCards().getUniqueCards());
             String valid = sa.getParam("ValidSupportedCopy");
             if (valid.contains("X")) {
                 valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(hostCard, "X", sa)));
@@ -154,7 +154,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     if (!c.isToken() || c.isCopiedToken()) {
                         // copy creature and put it onto the battlefield
 
-                        copy = CardFactory.getCard(CardDb.getCard(c), sa.getActivatingPlayer());
+                        copy = CardFactory.getCard(c.getPaperCard(), sa.getActivatingPlayer());
 
                         copy.setToken(true);
                         copy.setCopiedToken(true);

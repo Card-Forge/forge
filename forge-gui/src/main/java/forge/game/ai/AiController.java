@@ -32,8 +32,8 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
-import forge.Constant;
 import forge.GameEntity;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -344,7 +344,7 @@ public class AiController {
                 byte color = MagicColor.WUBRG[i];
                 if (!CardLists.filter(oneDrops, CardPredicates.isColor(color)).isEmpty()) {
                     for (Card land : landList) {
-                        if (land.isType(Constant.Color.BASIC_LANDS.get(i)))
+                        if (land.isType(MagicColor.Constant.BASIC_LANDS.get(i)))
                             return land;
                         
                         for (final SpellAbility m : ComputerUtilMana.getAIPlayableMana(land)) {
@@ -365,7 +365,7 @@ public class AiController {
             final ArrayList<String> basics = new ArrayList<String>();
     
             // what types can I go get?
-            for (final String name : Constant.CardTypes.BASIC_TYPES) {
+            for (final String name : CardType.Constant.BASIC_TYPES) {
                 if (Iterables.any(landList, CardPredicates.isType(name))) {
                     basics.add(name);
                 }

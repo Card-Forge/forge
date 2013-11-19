@@ -15,10 +15,10 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
-import forge.Constant;
 import forge.GameEntity;
 import forge.GameObject;
 import forge.card.CardCharacteristicName;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
@@ -456,7 +456,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final ArrayList<String> basics = new ArrayList<String>();
 
         // what types can I go get?
-        for (final String name : Constant.Color.BASIC_LANDS) {
+        for (final String name : MagicColor.Constant.BASIC_LANDS) {
             if (!CardLists.getType(list, name).isEmpty()) {
                 basics.add(name);
             }
@@ -500,7 +500,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     private static boolean areAllBasics(final String types) {
         for (String ct : types.split(",")) {
-            if (!Constant.Color.BASIC_LANDS.contains(ct)) {
+            if (!MagicColor.Constant.BASIC_LANDS.contains(ct)) {
                 return false;
             }
         }

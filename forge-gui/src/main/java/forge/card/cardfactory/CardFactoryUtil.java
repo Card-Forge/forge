@@ -31,7 +31,6 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
-import forge.Constant;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.GameLogEntryType;
@@ -877,7 +876,7 @@ public class CardFactoryUtil {
             int n = 0;
             final List<Card> someCards = new ArrayList<Card>();
             someCards.addAll(player.getCardsIn(ZoneType.Battlefield));
-            final List<String> basic = Constant.Color.BASIC_LANDS;
+            final List<String> basic = MagicColor.Constant.BASIC_LANDS;
 
             for (int i = 0; i < basic.size(); i++) {
                 if (!CardLists.getType(someCards, basic.get(i)).isEmpty()) {
@@ -1423,7 +1422,7 @@ public class CardFactoryUtil {
             int n = 0;
             Player neededPlayer = sq[0].equals("DomainActivePlayer") ? activePlayer : cc;
             List<Card> someCards = CardLists.filter(neededPlayer.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
-            for (String basic : Constant.Color.BASIC_LANDS) {
+            for (String basic : MagicColor.Constant.BASIC_LANDS) {
                 if (!CardLists.getType(someCards, basic).isEmpty()) {
                     n++;
                 }
@@ -1636,7 +1635,7 @@ public class CardFactoryUtil {
         }
 
 //        String sq0 = sq[0].toLowerCase();
-//        for(String color : Constant.Color.ONLY_COLORS) {
+//        for(String color : MagicColor.Constant.ONLY_COLORS) {
 //            if( sq0.contains(color) )
 //                someCards = someCards.filter(CardListFilter.WHITE);
 //        }

@@ -32,7 +32,7 @@ public class TournamentPack extends OpenablePack {
     public static final Function<CardEdition, TournamentPack> FN_FROM_SET = new Function<CardEdition, TournamentPack>() {
         @Override
         public TournamentPack apply(final CardEdition arg1) {
-            SealedProductTemplate d = Singletons.getModel().getTournamentPacks().get(arg1.getCode());
+            SealedProductTemplate d = Singletons.getMagicDb().getTournamentPacks().get(arg1.getCode());
             return new TournamentPack(arg1.getName(), d);
         }
     };

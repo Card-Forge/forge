@@ -31,7 +31,7 @@ import forge.Singletons;
 import forge.gui.toolbox.FAbsolutePositioner;
 import forge.properties.FileLocation;
 import forge.properties.NewConstants;
-import forge.util.maps.CollectionSuppliers;
+import forge.util.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 import forge.view.FFrame;

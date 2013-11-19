@@ -1,5 +1,6 @@
-package forge.item;
+package forge.card;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.ArrayList;
@@ -7,7 +8,9 @@ import java.util.Collection;
 
 import com.google.common.base.Function;
 
+import forge.util.ItemPool;
 import forge.deck.CardPool;
+import forge.item.PaperCard;
 import forge.util.MyRandom;
 import forge.util.storage.StorageReaderFileSections;
 
@@ -30,7 +33,7 @@ public class PrintSheet {
         this(name0, null);
     }
     
-    private PrintSheet(String name0, ItemPool<PaperCard> pool) {
+    public PrintSheet(String name0, ItemPool<PaperCard> pool) {
         name = name0;
         cardsWithWeights = pool != null ? pool : new ItemPool<PaperCard>(PaperCard.class);
     }
@@ -105,18 +108,6 @@ public class PrintSheet {
         return result;
     }
 
-    public static class Reader extends StorageReaderFileSections<PrintSheet> {
-        public Reader(String fileName) {
-            super(fileName, PrintSheet.FN_GET_KEY);
-        }
-
-        @Override
-        protected PrintSheet read(String title, Iterable<String> body, int idx) {
-            return new PrintSheet(title, CardPool.fromCardList(body));
-        }
-        
-    }
-
     public boolean isEmpty() {
         return cardsWithWeights.isEmpty();
     }
@@ -125,5 +116,16 @@ public class PrintSheet {
         return cardsWithWeights.toFlatList();
     }
 
+    public static class Reader extends StorageReaderFileSections<PrintSheet> {
+        public Reader(File file) {
+            super(file, PrintSheet.FN_GET_KEY);
+        }
+
+        @Override
+        protected PrintSheet read(String title, Iterable<String> body, int idx) {
+            return new PrintSheet(title, CardPool.fromCardList(body));
+        }
+        
+    }    
 
 }

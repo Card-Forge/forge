@@ -42,8 +42,8 @@ import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.SortState;
-import forge.item.ItemPoolSorter;
 import forge.item.InventoryItem;
+import forge.util.ItemPoolSorter;
 
 /**
  * <p>

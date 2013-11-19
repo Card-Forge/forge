@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.Constant;
 import forge.CounterType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
@@ -60,7 +59,7 @@ public class ManaEffect extends SpellAbilityEffect {
                             }
                         }
                         else {
-                            colorMenu = Constant.Color.ONLY_COLORS;
+                            colorMenu = MagicColor.Constant.ONLY_COLORS;
                         }
                         for (int nMana = 1; nMana <= amount; nMana++) {
                             String choice = "";
@@ -83,12 +82,12 @@ public class ManaEffect extends SpellAbilityEffect {
                     else {
                         // TODO: Add some logic for AI choice (ArsenalNut 2012/09/16)
                         if (!sa.hasParam("AILogic") || sa.getParam("AILogic").equals("MostProminentInComputerHand")) {
-                            String chosen = Constant.Color.BLACK;
+                            String chosen = MagicColor.Constant.BLACK;
                             List<Card> hand = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
                             hand.addAll(activator.getCardsIn(ZoneType.Stack));
                             chosen = ComputerUtilCard.getMostProminentColor(hand);
                             if (chosen.equals("")) {
-                                chosen = Constant.Color.BLACK;
+                                chosen = MagicColor.Constant.BLACK;
                             }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
                             String manaString = "";
@@ -124,7 +123,7 @@ public class ManaEffect extends SpellAbilityEffect {
                                 }
                             }
                             else {
-                                colorMenu = Constant.Color.ONLY_COLORS;
+                                colorMenu = MagicColor.Constant.ONLY_COLORS;
                             }
                             String s = GuiChoose.one("Select Mana to Produce", colorMenu);
                             if (s == null) {
@@ -141,12 +140,12 @@ public class ManaEffect extends SpellAbilityEffect {
                     else {
                         if (abMana.getExpressChoice().isEmpty()) {
                             final String logic = sa.hasParam("AILogic") ? sa.getParam("AILogic") : null;
-                            String chosen = Constant.Color.BLACK;
+                            String chosen = MagicColor.Constant.BLACK;
                             if (logic == null || logic.equals("MostProminentInComputerHand")) {
                                 chosen = ComputerUtilCard.getMostProminentColor(act.getCardsIn(ZoneType.Hand));
                             }
                             if (chosen.equals("")) {
-                                chosen = Constant.Color.GREEN;
+                                chosen = MagicColor.Constant.GREEN;
                             }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
                             abMana.setExpressChoice(MagicColor.toShortString(chosen));

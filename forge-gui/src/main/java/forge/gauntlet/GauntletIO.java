@@ -20,7 +20,7 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.deck.CardPool;
 import forge.error.BugReporter;
 import forge.item.PaperCard;
@@ -153,7 +153,7 @@ public class GauntletIO {
                 final String nodename = reader.getNodeName();
 
                 if ("string".equals(nodename)) {
-                    result.add(CardDb.instance().getCard(reader.getValue()));
+                    result.add(Singletons.getMagicDb().getCommonCards().getCard(reader.getValue()));
                 } else if ("card".equals(nodename)) { // new format
                     result.add(this.readCardPrinted(reader), cnt);
                 }
@@ -183,8 +183,8 @@ public class GauntletIO {
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            final PaperCard card = CardDb.instance().getCard(name, set, index);
-            return foil ? CardDb.instance().getFoiled(card) : card;
+            final PaperCard card = Singletons.getMagicDb().getCommonCards().getCard(name, set, index);
+            return foil ? Singletons.getMagicDb().getCommonCards().getFoiled(card) : card;
         }
     }
 }

@@ -9,7 +9,6 @@ import javax.swing.JButton;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameOutcome;
@@ -138,7 +137,7 @@ public class ControlWinLose {
             Deck oDeck = psc.getOriginalDeck();
 
             for (Card c : compAntes) {
-                PaperCard toRemove = CardDb.getCard(c);
+                PaperCard toRemove = (PaperCard) c.getPaperCard();
                 cDeck.getMain().remove(toRemove);
                 if ( cDeck != oDeck )
                     oDeck.getMain().remove(toRemove);

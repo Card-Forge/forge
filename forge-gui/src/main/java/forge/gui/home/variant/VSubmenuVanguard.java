@@ -18,7 +18,7 @@ import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.gui.CardDetailPanel;
 import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
@@ -365,7 +365,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
      */
     public Iterable<PaperCard> getAllAvatars() {
         if (allAvatars.isEmpty()) {
-            for (PaperCard c : CardDb.variants().getAllCards()) {
+            for (PaperCard c : Singletons.getMagicDb().getVariantCards().getAllCards()) {
                 if (c.getRules().getType().isVanguard()) {
                     allAvatars.add(c);
                 }

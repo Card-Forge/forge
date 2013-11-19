@@ -54,7 +54,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -64,7 +63,6 @@ import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.properties.NewConstants;
@@ -77,6 +75,7 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestItemCondition;
 import forge.util.IgnoringXStream;
+import forge.util.ItemPool;
 import forge.util.XmlUtil;
 
 /**
@@ -539,7 +538,7 @@ public class QuestDataIO {
                     final int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
                     final String nodename = reader.getNodeName();
                     if ("string".equals(nodename)) {
-                        pool.add(CardDb.instance().getCard(reader.getValue()));
+                        pool.add(Singletons.getMagicDb().getCommonCards().getCard(reader.getValue()));
                     } else if ("card".equals(nodename)) { // new format
                         pool.add(this.readCardPrinted(reader), cnt);
                     }
@@ -633,7 +632,7 @@ public class QuestDataIO {
                 final String nodename = reader.getNodeName();
 
                 if ("string".equals(nodename)) {
-                    result.add(CardDb.instance().getCard(reader.getValue()));
+                    result.add(Singletons.getMagicDb().getCommonCards().getCard(reader.getValue()));
                 } else if ("card".equals(nodename)) { // new format
                     result.add(this.readCardPrinted(reader), cnt);
                 } else if ("booster".equals(nodename)) {
@@ -662,17 +661,17 @@ public class QuestDataIO {
         }
 
         protected BoosterPack readBooster(final HierarchicalStreamReader reader) {
-            final CardEdition ed = Singletons.getModel().getEditions().get(reader.getAttribute("s"));
+            final CardEdition ed = Singletons.getMagicDb().getEditions().get(reader.getAttribute("s"));
             return BoosterPack.FN_FROM_SET.apply(ed);
         }
 
         protected TournamentPack readTournamentPack(final HierarchicalStreamReader reader) {
-            final CardEdition ed = Singletons.getModel().getEditions().get(reader.getAttribute("s"));
+            final CardEdition ed = Singletons.getMagicDb().getEditions().get(reader.getAttribute("s"));
             return TournamentPack.FN_FROM_SET.apply(ed);
         }
 
         protected FatPack readFatPack(final HierarchicalStreamReader reader) {
-            final CardEdition ed = Singletons.getModel().getEditions().get(reader.getAttribute("s"));
+            final CardEdition ed = Singletons.getMagicDb().getEditions().get(reader.getAttribute("s"));
             return FatPack.FN_FROM_SET.apply(ed);
         }
 
@@ -682,9 +681,9 @@ public class QuestDataIO {
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            PaperCard c = CardDb.instance().tryGetCard(name, set, index);
-            if ( null == c ) c = CardDb.instance().getCard(name);
-            return foil ? CardDb.instance().getFoiled(c) : c;
+            PaperCard c = Singletons.getMagicDb().getCommonCards().tryGetCard(name, set, index);
+            if ( null == c ) c = Singletons.getMagicDb().getCommonCards().getCard(name);
+            return foil ? Singletons.getMagicDb().getCommonCards().getFoiled(c) : c;
         }
     }
 }

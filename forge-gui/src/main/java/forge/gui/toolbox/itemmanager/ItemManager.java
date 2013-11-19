@@ -48,9 +48,9 @@ import forge.gui.toolbox.itemmanager.filters.ItemFilter;
 import forge.gui.toolbox.itemmanager.table.ItemTable;
 import forge.gui.toolbox.itemmanager.table.ItemTableModel;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
 import forge.util.Aggregates;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 import forge.util.TypeUtil;
 
 

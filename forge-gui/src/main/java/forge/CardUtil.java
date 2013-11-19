@@ -253,7 +253,7 @@ public final class CardUtil {
         if (reflectProperty.equals("Is")) { // Meteor Crater
             for (final Card card1 : cards) {
                 // For each card, go through all the colors and if the card is that color, add
-                for (final String col : Constant.Color.ONLY_COLORS) {
+                for (final String col : MagicColor.Constant.ONLY_COLORS) {
                     if (card1.isOfColor(col)) {
                         colors.add(col);
                         if (colors.size() == maxChoices) {
@@ -265,14 +265,14 @@ public final class CardUtil {
         } else if (reflectProperty.equals("Produced")) {
             // Why is this name so similar to the one below?
             final String producedColors = abMana instanceof AbilitySub ? (String) abMana.getRootAbility().getTriggeringObject("Produced") : (String) abMana.getTriggeringObject("Produced");
-            for (final String col : Constant.Color.ONLY_COLORS) {
+            for (final String col : MagicColor.Constant.ONLY_COLORS) {
                 final String s = MagicColor.toShortString(col);
                 if (producedColors.contains(s)) {
                     colors.add(col);
                 }
             }
             if (maxChoices == 6 && producedColors.contains("1")) {
-                colors.add(Constant.Color.COLORLESS);
+                colors.add(MagicColor.Constant.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
             final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
@@ -315,7 +315,7 @@ public final class CardUtil {
 
     public static Set<String> canProduce(final int maxChoices, final AbilityManaPart ab,
             final Set<String> colors) {
-        for (final String col : Constant.Color.ONLY_COLORS) {
+        for (final String col : MagicColor.Constant.ONLY_COLORS) {
             final String s = MagicColor.toShortString(col);
             if (ab.canProduce(s)) {
                 colors.add(col);
@@ -323,7 +323,7 @@ public final class CardUtil {
         }
 
         if (maxChoices == 6 && ab.canProduce("1")) {
-            colors.add(Constant.Color.COLORLESS);
+            colors.add(MagicColor.Constant.COLORLESS);
         }
 
         return colors;

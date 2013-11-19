@@ -24,7 +24,7 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.ImageCache;
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.card.CardRules;
 import forge.item.PaperCard;
 import forge.properties.NewConstants;
@@ -39,13 +39,13 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
     protected final Map<String, String> getNeededImages() {
         Map<String, String> downloads = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
-        for (PaperCard c : CardDb.instance().getAllCards()) {
+        for (PaperCard c : Singletons.getMagicDb().getCommonCards().getAllCards()) {
             addDLObject(c, downloads, false);
             if (ImageCache.hasBackFacePicture(c))
                 addDLObject(c, downloads, true);
         }
 
-        for (PaperCard c : CardDb.variants().getAllCards()) {
+        for (PaperCard c : Singletons.getMagicDb().getVariantCards().getAllCards()) {
             addDLObject(c, downloads, false);
         }
         

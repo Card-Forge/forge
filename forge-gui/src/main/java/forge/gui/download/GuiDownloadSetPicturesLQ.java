@@ -26,7 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Iterables;
 
 import forge.ImageCache;
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.properties.NewConstants;
@@ -41,7 +41,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
     protected final Map<String, String> getNeededImages() {
         Map<String, String> downloads = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
-        for (final PaperCard c : Iterables.concat(CardDb.instance().getAllCards(), CardDb.variants().getAllCards())) {
+        for (final PaperCard c : Iterables.concat(Singletons.getMagicDb().getCommonCards().getAllCards(), Singletons.getMagicDb().getVariantCards().getAllCards())) {
             final String setCode3 = c.getEdition();
             if (StringUtils.isBlank(setCode3) || CardEdition.UNKNOWN.getCode().equals(setCode3)) {
              // we don't want cards from unknown sets

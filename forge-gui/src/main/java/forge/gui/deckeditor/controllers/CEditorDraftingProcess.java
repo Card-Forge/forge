@@ -20,10 +20,9 @@ package forge.gui.deckeditor.controllers;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
-import forge.Constant;
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.card.CardEdition;
+import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -42,7 +41,7 @@ import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPoolView;
+import forge.util.ItemPoolView;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.
@@ -162,8 +161,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         final CardEdition landSet = IBoosterDraft.LAND_SET_CODE[0];
         final int landsCount = 20;
-        for(String landName : Constant.Color.BASIC_LANDS) {
-            side.add(CardDb.instance().getCard(landName, landSet.getCode()), landsCount);
+        for(String landName : MagicColor.Constant.BASIC_LANDS) {
+            side.add(Singletons.getMagicDb().getCommonCards().getCard(landName, landSet.getCode()), landsCount);
         }
 
         return deck;

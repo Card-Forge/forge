@@ -44,7 +44,6 @@ import forge.GameEntity;
 import forge.GameLogEntryType;
 import forge.GameObject;
 import forge.card.CardCharacteristicName;
-import forge.card.CardDb;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
@@ -75,7 +74,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.maps.CollectionSuppliers;
+import forge.util.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
@@ -906,7 +905,7 @@ public class GameAction {
                 c.unEnchantEntity(perm);
                 if (c.isBestowed()) {
                     // TODO : support for tokens
-                    ArrayList<String> type = CardFactory.getCard(CardDb.getCard(c), c.getController()).getType();
+                    ArrayList<String> type = CardFactory.getCard(c.getPaperCard(), c.getController()).getType();
                     final long timestamp = game.getNextTimestamp();
                     c.addChangedCardTypes(type, Lists.newArrayList("Aura"), false, false, false, false, timestamp);
                     c.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);
@@ -938,7 +937,7 @@ public class GameAction {
         if (c.isInPlay() && !c.isEnchanting()) {
             if (c.isBestowed()) {
                 // TODO : support for tokens
-                ArrayList<String> type = CardFactory.getCard(CardDb.getCard(c), c.getController()).getType();
+                ArrayList<String> type = CardFactory.getCard(c.getPaperCard(), c.getController()).getType();
                 final long timestamp = game.getNextTimestamp();
                 c.addChangedCardTypes(type, Lists.newArrayList("Aura"), false, false, false, false, timestamp);
                 c.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);

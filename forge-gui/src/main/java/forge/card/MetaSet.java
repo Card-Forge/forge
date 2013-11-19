@@ -164,13 +164,13 @@ public class MetaSet {
                 return new UnOpenedProduct(SealedProductTemplate.genericBooster);
 
             case Booster:
-                return new UnOpenedProduct(Singletons.getModel().getBoosters().get(data));
+                return new UnOpenedProduct(Singletons.getMagicDb().getBoosters().get(data));
 
             case SpecialBooster:
-                return new UnOpenedProduct(Singletons.getModel().getSpecialBoosters().get(data));
+                return new UnOpenedProduct(Singletons.getMagicDb().getSpecialBoosters().get(data));
 
             case Pack:
-                return new UnOpenedProduct(Singletons.getModel().getTournamentPacks().get(data));
+                return new UnOpenedProduct(Singletons.getMagicDb().getTournamentPacks().get(data));
 
             case JoinedSet:
                 Predicate<PaperCard> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));

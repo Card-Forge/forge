@@ -22,11 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.error.BugReporter;
 import forge.item.PaperCard;
-import forge.item.ItemPoolView;
 import forge.util.FileUtil;
+import forge.util.ItemPoolView;
 import forge.util.MyRandom;
 
 /**
@@ -130,7 +130,7 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase {
                 }
 
                 final int n = cardCounts.get(s);
-                tDeck.add(CardDb.instance().getCard(s));
+                tDeck.add(Singletons.getMagicDb().getCommonCards().getCard(s));
                 cardCounts.put(s, n + 1);
                 tmpDeck += s + "\n";
 

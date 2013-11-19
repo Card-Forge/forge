@@ -7,7 +7,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Constant;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.ability.effects.ProtectEffect;
@@ -26,7 +26,7 @@ import forge.game.zone.ZoneType;
 
 public class ProtectAi extends SpellAbilityAi {
     private static boolean hasProtectionFrom(final Card card, final String color) {
-        final ArrayList<String> onlyColors = new ArrayList<String>(Constant.Color.ONLY_COLORS);
+        final ArrayList<String> onlyColors = new ArrayList<String>(MagicColor.Constant.ONLY_COLORS);
 
         // make sure we have a valid color
         if (!onlyColors.contains(color)) {

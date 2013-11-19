@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 
 /**
  * <p>

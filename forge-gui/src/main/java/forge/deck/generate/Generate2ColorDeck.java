@@ -27,7 +27,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.item.PaperCard;
-import forge.item.ItemPoolView;
+import forge.util.ItemPoolView;
 
 /**
  * <p>

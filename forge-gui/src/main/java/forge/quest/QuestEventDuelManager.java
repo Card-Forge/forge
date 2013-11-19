@@ -28,7 +28,7 @@ import forge.Singletons;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.io.QuestDuelReader;
-import forge.util.maps.CollectionSuppliers;
+import forge.util.CollectionSuppliers;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
 import forge.util.storage.IStorage;

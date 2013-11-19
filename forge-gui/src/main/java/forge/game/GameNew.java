@@ -19,7 +19,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameLogEntryType;
-import forge.card.CardDb;
+import forge.Singletons;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.Trigger;
@@ -38,9 +38,9 @@ import forge.net.FServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
+import forge.util.CollectionSuppliers;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import forge.util.maps.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
@@ -155,9 +155,9 @@ public class GameNew {
                 PaperCard cpi = cp;
                 // apply random pictures for cards
                 if (preferences.getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
-                    cpi = CardDb.instance().getCard(cp.getName(), cp.getEdition(), -1);
+                    cpi = Singletons.getMagicDb().getCommonCards().getCard(cp.getName(), cp.getEdition(), -1);
                     if ( cp.isFoil() )
-                        cpi = CardDb.instance().getFoiled(cpi);
+                        cpi = Singletons.getMagicDb().getCommonCards().getFoiled(cpi);
                 }
 
                 final Card card = Card.fromPaperCard(cpi, player);

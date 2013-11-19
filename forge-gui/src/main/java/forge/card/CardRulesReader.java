@@ -18,7 +18,6 @@
 package forge.card;
 
 import java.util.StringTokenizer;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.mana.IParserManaCost;
@@ -48,6 +47,8 @@ public class CardRulesReader {
     private boolean removedFromRandomDecks = false;
     private DeckHints hints = null;
     private DeckHints needs = null;
+    
+
 
     // Reset all fields to parse next card (to avoid allocating new
     // CardRulesReader N times)
@@ -69,43 +70,35 @@ public class CardRulesReader {
         this.needs = null;
         this.hints = null;
     }
-    
+
     /**
-     * Create new CardRules from read properties
+     * Gets the card.
      * 
      * @return the card
      */
-    public final CardRules createCardRules() {
-        final CardRules rules = new CardRules();
-        apply(rules);
-        return rules;
-    }
-
-    /**
-     * Apply read properties to a CardRules object
-     * 
-     */
-    private final void apply(CardRules rules) {
+    public final CardRules getCard() {
         CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, hints, needs );
         faces[0].assignMissingFields();
-        if (faces[1] != null) {
-        	faces[1].assignMissingFields();
-        }
-        rules.setup(faces, altMode, cah);
-        rules.setDlUrls(pictureUrl);
-        if (StringUtils.isNotBlank(handLife)) {
-        	rules.setVanguardProperties(handLife);
-        }
+        if (null != faces[1]) faces[1].assignMissingFields();
+        final CardRules result = new CardRules(faces, altMode, cah);
+        result.setDlUrls(pictureUrl);
+        if (StringUtils.isNotBlank(handLife))
+            result.setVanguardProperties(handLife);
+        return result;
     }
 
     public final CardRules readCard(final Iterable<String> script) {
         this.reset();
         for (String line : script) {
+            if (line.isEmpty() || line.charAt(0) == '#') {
+                continue;
+            }
             this.parseLine(line);
         }
-        return this.createCardRules();
+        return this.getCard();
     }
-
+    
+    
     /**
      * Parses the line.
      * 
@@ -113,10 +106,6 @@ public class CardRulesReader {
      *            the line
      */
     public final void parseLine(final String line) {
-        if (line.isEmpty() || line.charAt(0) == '#') {
-            return;
-        }
-
         int colonPos = line.indexOf(':');
         String key = colonPos > 0 ? line.substring(0, colonPos) : line;
         String value = colonPos > 0 ? line.substring(1+colonPos).trim() : null;
@@ -184,6 +173,7 @@ public class CardRulesReader {
             case 'O':
                 if ("Oracle".equals(key)) {
                     this.faces[this.curFace].setOracleText(value);
+
                 }
                 break;
 
@@ -234,11 +224,11 @@ public class CardRulesReader {
                 }
                 break;
         }
+
     }
 
     /**
      * Instantiates class, reads a card. Do not use for batch operations.
-     * 
      * @param script
      * @return
      */
@@ -247,22 +237,7 @@ public class CardRulesReader {
         for(String line : script) {
             crr.parseLine(line);
         }
-        return crr.createCardRules();
-    }
-
-    /**
-     * Instantiates class, reads card rules from script, then updates an existing card.
-     * 
-     * @param rules
-     * @param script
-     */
-    public static void updateCardRules(CardRules rules, String script) {
-        CardRulesReader crr = new CardRulesReader();
-        String[] lines = script.split("(\r\n)|\n");
-        for (String line : lines) {
-            crr.parseLine(line);
-        }
-        crr.apply(rules);
+        return crr.getCard();
     }
     
     /**

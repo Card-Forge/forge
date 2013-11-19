@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.Constant;
+import forge.card.MagicColor;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 
@@ -91,7 +91,7 @@ public class ReadDraftRankings {
         Double rank = null;
 
         // Basic lands should be excluded from the evaluation --BBU
-        if ( Constant.Color.BASIC_LANDS.contains(cardName))
+        if ( MagicColor.Constant.BASIC_LANDS.contains(cardName))
             return null;
 
         if (draftRankings.containsKey(edition)) {

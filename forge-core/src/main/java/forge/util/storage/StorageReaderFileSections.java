@@ -18,10 +18,10 @@
 package forge.util.storage;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,30 +35,18 @@ import forge.util.FileUtil;
  * @param <T>
  *            the generic type
  */
-public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
+public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> {
 
     private final File file;
 
-
-    /**
-     * Instantiates a new storage reader file.
-     *
-     * @param pathname the pathname
-     * @param keySelector0 the key selector0
-     */
-    public StorageReaderFile(final String pathname, final Function<? super T, String> keySelector0) {
+    public StorageReaderFileSections(final String pathname, final Function<? super T, String> keySelector0) {
         this(new File(pathname), keySelector0);
     }
 
-    /**
-     * Instantiates a new storage reader file.
-     *
-     * @param file0 the file0
-     * @param keySelector0 the key selector0
-     */
-    public StorageReaderFile(final File file0, final Function<? super T, String> keySelector0) {
+    public StorageReaderFileSections(final File file0, final Function<? super T, String> keySelector0) {
         super(keySelector0);
         this.file = file0;
+        
     }
 
     /* (non-Javadoc)
@@ -69,30 +57,54 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
         final Map<String, T> result = new TreeMap<String, T>();
 
         int idx = 0;
-        for (final String s : FileUtil.readFile(this.file)) {
+        Iterable<String> file = FileUtil.readFile(this.file);
+        
+        List<String> accumulator = new ArrayList<String>();
+        String header = null;
+        
+        for (final String s : file) {
             if (!this.lineContainsObject(s)) {
                 continue;
             }
 
-            final T item = this.read(s, idx);
-            if (null == item) {
-                final String msg = "An object stored in " + this.file.getPath()
-                        + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg);
-                continue;
-            }
+            if(s.charAt(0) == '[') {
+                if( header != null ) {
+                    // read previously collected item
+                    T item = readItem(header, accumulator, idx);
+                    if( item != null ) {
+                        result.put(this.keySelector.apply(item), item);
+                        idx++;
+                    }
+                }
 
-            idx++;
-            String newKey = keySelector.apply(item);
-            if( result.containsKey(newKey))
-                System.err.println("StorageReader: Overwriting an object with key " + newKey);
-            
-            result.put(newKey, item);
+                header = StringUtils.strip(s, "[] ");
+                accumulator.clear();
+            } else
+                accumulator.add(s);
         }
 
+        // store the last item
+        if ( !accumulator.isEmpty() ) {
+            T item = readItem(header, accumulator, idx);
+            if( item != null ) {
+                String newKey = keySelector.apply(item);
+                if( result.containsKey(newKey))
+                    System.err.println("StorageReader: Overwriting an object with key " + newKey);
+                
+                result.put(newKey, item);
+            }
+        }
         return result;
     }
 
+    private final T readItem(String header, Iterable<String> accumulator, int idx) {
+        final T item = this.read(header, accumulator, idx);
+        if (null != item) return item;
+            
+        final String msg = "An object stored in " + this.file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
+        throw new RuntimeException(msg);
+    }
+    
     /**
      * TODO: Write javadoc for this method.
      * 
@@ -100,7 +112,7 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
      *            the line
      * @return the t
      */ 
-    protected abstract T read(String line, int idx);
+    protected abstract T read(String title, Iterable<String> body, int idx);
 
     /**
      * Line contains object.
@@ -120,4 +132,5 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
     public String getItemKey(final T item) {
         return this.keySelector.apply(item);
     }
+
 }

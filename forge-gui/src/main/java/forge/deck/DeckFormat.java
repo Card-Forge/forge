@@ -26,7 +26,6 @@ import org.apache.commons.lang.math.IntRange;
 
 import forge.Singletons;
 import forge.card.CardCoreType;
-import forge.card.CardDb;
 import forge.card.ColorSet;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
@@ -233,7 +232,7 @@ public enum DeckFormat {
             // should group all cards by name, so that different editions of same card are really counted as the same card
             for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, PaperCard.FN_GET_NAME)) {
 
-                IPaperCard simpleCard = CardDb.instance().getCard(cp.getKey());
+                IPaperCard simpleCard = Singletons.getMagicDb().getCommonCards().getCard(cp.getKey());
                 boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
 
                 if (!canHaveMultiple && cp.getValue() > maxCopies) {

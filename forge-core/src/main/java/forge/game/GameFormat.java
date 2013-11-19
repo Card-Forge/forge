@@ -17,7 +17,9 @@
  */
 package forge.game;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,9 +28,11 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
-import forge.card.CardDb;
+import forge.StaticData;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.util.FileSection;
+import forge.util.storage.StorageReaderFileSections;
 
 
 /**
@@ -90,7 +94,7 @@ public class GameFormat implements Comparable<GameFormat> {
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
         }
-        return Predicates.and(banNames, CardDb.instance().wasPrintedInSets(this.allowedSetCodes));
+        return Predicates.and(banNames, StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes));
     }
 
     /**
@@ -182,4 +186,30 @@ public class GameFormat implements Comparable<GameFormat> {
         return index;
     }
 
+    /**
+     * Instantiates a new format utils.
+     */
+    public static class Reader extends StorageReaderFileSections<GameFormat> {
+        public Reader(File file0) {
+            super(file0, GameFormat.FN_GET_NAME);
+        }
+
+        @Override
+        protected GameFormat read(String title, Iterable<String> body, int idx) {
+            List<String> sets = null; // default: all sets allowed
+            List<String> bannedCards = null; // default: nothing banned
+
+            FileSection section = FileSection.parse(body, ":");
+            String strSets = section.get("sets");
+            if ( null != strSets ) {
+                sets = Arrays.asList(strSets.split(", "));
+            }
+            String strCars = section.get("banned");
+            if ( strCars != null ) {
+                bannedCards = Arrays.asList(strCars.split("; "));
+            }
+
+            return new GameFormat(title, sets, bannedCards, 1 + idx);
+        }
+    }    
 }

@@ -19,8 +19,6 @@ package forge.view;
 
 import forge.Singletons;
 import forge.card.cardfactory.CardStorageReader;
-import forge.control.FControl;
-import forge.model.FModel;
 import forge.net.FServer;
 
 /**
@@ -39,9 +37,7 @@ public final class Main {
 
         // Start splash screen first, then data models, then controller.
         if (args.length == 0) {
-            Singletons.setView(FView.SINGLETON_INSTANCE);
-            Singletons.setModel(FModel.getInstance(true));
-            Singletons.setControl(FControl.instance);
+            Singletons.initializeOnce(true);
 
             // Controller can now step in and take over.
             Singletons.getControl().initialize();

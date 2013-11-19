@@ -33,7 +33,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
-import forge.Constant;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityFactory.AbilityRecordType;
@@ -217,7 +216,7 @@ public final class GameActionUtil {
 
         // add all appropriate mana abilities based on current types
         for (int i = 0; i < MagicColor.WUBRG.length; i++ ) {
-            String landType = Constant.Color.BASIC_LANDS.get(i);
+            String landType = MagicColor.Constant.BASIC_LANDS.get(i);
             String color = MagicColor.toShortString(MagicColor.WUBRG[i]);
             String abString = "AB$ Mana | Cost$ T | Produced$ " + color + " | SpellDescription$ Add {" + color + "} to your mana pool.";
             for (final Card land : lands) {

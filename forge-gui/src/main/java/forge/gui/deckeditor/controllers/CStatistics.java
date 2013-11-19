@@ -18,8 +18,8 @@ import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 
 
 /** 

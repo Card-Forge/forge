@@ -18,7 +18,6 @@
 package forge.deck;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,10 +25,9 @@ import java.util.NoSuchElementException;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
-import forge.card.CardDb;
+import forge.StaticData;
 import forge.item.PaperCard;
-import forge.item.ItemPool;
+import forge.util.ItemPool;
 
 /**
  * Deck section.
@@ -54,15 +52,6 @@ public class CardPool extends ItemPool<PaperCard> {
         this.addAll(cards);
     }
 
-    /**
-     * Adds the.
-     * 
-     * @param card
-     *            the card
-     */
-    public void add(final Card card) {
-        this.add(CardDb.getCard(card));
-    }
     
     /**
      * Adds the.
@@ -84,26 +73,14 @@ public class CardPool extends ItemPool<PaperCard> {
      * @param amount the amount
      */
     public void add(final String cardName, final String setCode, final int amount) {
-        PaperCard cp = CardDb.instance().tryGetCard(cardName, setCode);
+        PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(cardName, setCode);
         if ( cp == null )
-            cp = CardDb.variants().tryGetCard(cardName, setCode);
+            cp = StaticData.instance().getVariantCards().tryGetCard(cardName, setCode);
 
         if ( cp != null)
             this.add(cp, amount);
         else
             throw new RuntimeException(String.format("Card %s from %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName, setCode ));
-    }
-
-    /**
-     * Adds the.
-     * 
-     * @param cardList
-     *            the card list
-     */
-    public void add(final List<Card> cardList) {
-        for (final Card c : cardList) {
-            this.add(c);
-        }
     }
 
     /**
@@ -124,9 +101,9 @@ public class CardPool extends ItemPool<PaperCard> {
      * @param cardName the card name
      */
     public void add(final String cardName, int cnt) {
-        PaperCard cp = CardDb.instance().tryGetCard(cardName);
+        PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(cardName);
         if ( cp == null )
-            cp = CardDb.variants().tryGetCard(cardName);
+            cp = StaticData.instance().getVariantCards().tryGetCard(cardName);
 
         if ( cp != null)
             this.add(cp, cnt);

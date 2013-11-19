@@ -37,7 +37,7 @@ public class DialogChooseSets {
         
         // create a local copy of the editions list so we can sort it
         List<CardEdition> editions = new ArrayList<CardEdition>();
-        for (CardEdition ce : Singletons.getModel().getEditions()) {
+        for (CardEdition ce : Singletons.getMagicDb().getEditions()) {
             editions.add(ce);
         }
         Collections.sort(editions);

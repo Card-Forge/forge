@@ -29,7 +29,6 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Constant;
 import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -232,7 +231,7 @@ public class CombatUtil {
 
         ArrayList<String> walkTypes = new ArrayList<String>();
 
-        for (String basic : Constant.Color.BASIC_LANDS) {
+        for (String basic : MagicColor.Constant.BASIC_LANDS) {
             StringBuilder sbLand = new StringBuilder();
             sbLand.append(basic);
             sbLand.append("walk");

@@ -37,6 +37,7 @@ import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.CardBlock;
 import forge.card.CardEdition;
+import forge.card.CardEditionPredicates;
 import forge.card.IUnOpenedProduct;
 import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
@@ -44,11 +45,11 @@ import forge.deck.Deck;
 import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 import forge.util.storage.IStorage;
 
 /**
@@ -88,7 +89,7 @@ public final class BoosterDraft implements IBoosterDraft {
             Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProductTemplate.genericBooster);
 
             for (int i = 0; i < 3; i++) this.product.add(s);
-            IBoosterDraft.LAND_SET_CODE[0] = CardEdition.getRandomSetWithAllBasicLands(Singletons.getModel().getEditions());
+            IBoosterDraft.LAND_SET_CODE[0] = CardEditionPredicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions());
             break;
 
         case Block: case FantasyBlock: // Draft from cards by block or set
@@ -165,7 +166,7 @@ public final class BoosterDraft implements IBoosterDraft {
             this.product.add(toAdd);
         }
 
-        IBoosterDraft.LAND_SET_CODE[0] = Singletons.getModel().getEditions().get(draft.getLandSetCode());
+        IBoosterDraft.LAND_SET_CODE[0] = Singletons.getMagicDb().getEditions().get(draft.getLandSetCode());
     }
 
     /** Looks for res/draft/*.draft files, reads them, returns a list. */

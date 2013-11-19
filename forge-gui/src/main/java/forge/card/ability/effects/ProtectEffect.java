@@ -9,7 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
-import forge.Constant;
+import forge.card.MagicColor;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
@@ -229,7 +229,7 @@ public class ProtectEffect extends SpellAbilityEffect {
 
             // Replace AnyColor with the 5 colors
             if (choices.contains("AnyColor")) {
-                gains.addAll(Constant.Color.ONLY_COLORS);
+                gains.addAll(MagicColor.Constant.ONLY_COLORS);
                 choices = choices.replaceAll("AnyColor,?", "");
             }
             // Add any remaining choices

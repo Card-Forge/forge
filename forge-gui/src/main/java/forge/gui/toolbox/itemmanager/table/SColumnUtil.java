@@ -317,7 +317,7 @@ public final class SColumnUtil {
     }
 
     private static CardEdition toSetCmp(final InventoryItem i) {
-        return i instanceof InventoryItemFromSet ? Singletons.getModel().getEditions()
+        return i instanceof InventoryItemFromSet ? Singletons.getMagicDb().getEditions()
                 .get(((InventoryItemFromSet) i).getEdition()) : CardEdition.UNKNOWN;
     }
 

@@ -29,15 +29,14 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
+import forge.card.PrintSheet;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.item.PrintSheet;
 import forge.item.TournamentPack;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
@@ -111,7 +110,7 @@ public final class BoosterUtils {
         }
 
         // This will save CPU time when sets are limited
-        final List<PaperCard> cardpool = Lists.newArrayList(Iterables.filter(CardDb.instance().getAllCards(), filter));
+        final List<PaperCard> cardpool = Lists.newArrayList(Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), filter));
 
         final Predicate<PaperCard> pCommon = IPaperCard.Predicates.Presets.IS_COMMON;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, biasAdjustedCommons, colorFilters));
@@ -256,7 +255,7 @@ public final class BoosterUtils {
 
             PrintSheet ps = new PrintSheet("Quest rewards");
             Predicate<PaperCard> predicate = preds.size() == 1 ? preds.get(0) : Predicates.and(preds);
-            ps.addAll(Iterables.filter(CardDb.instance().getAllCards(), predicate));
+            ps.addAll(Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), predicate));
             rewards.addAll(ps.random(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice
@@ -266,14 +265,14 @@ public final class BoosterUtils {
             rewards.add(new QuestRewardCardFiltered(temp));
         } else if (temp.length >= 3 && temp[0].equalsIgnoreCase("booster") && temp[1].equalsIgnoreCase("pack")) {
             // Type 4: a predetermined extra booster pack
-            rewards.add(BoosterPack.FN_FROM_SET.apply(Singletons.getModel().getEditions().get(temp[2])));
+            rewards.add(BoosterPack.FN_FROM_SET.apply(Singletons.getMagicDb().getEditions().get(temp[2])));
         } else if (temp.length >= 3 && temp[0].equalsIgnoreCase("tournament") && temp[1].equalsIgnoreCase("pack")) {
             // Type 5: a predetermined extra tournament ("starter") pack
-            rewards.add(TournamentPack.FN_FROM_SET.apply(Singletons.getModel().getEditions().get(temp[2])));
+            rewards.add(TournamentPack.FN_FROM_SET.apply(Singletons.getMagicDb().getEditions().get(temp[2])));
         }
         else if (temp.length > 0) {
             // default: assume we are asking for a single copy of a specific card
-            final PaperCard specific = CardDb.instance().getCard(s);
+            final PaperCard specific = Singletons.getMagicDb().getCommonCards().getCard(s);
             if (specific != null) {
                 rewards.add(specific);
             }

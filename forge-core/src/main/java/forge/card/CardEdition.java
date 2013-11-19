@@ -29,14 +29,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
-import forge.Constant;
-import forge.Singletons;
-import forge.game.GameFormat;
-import forge.util.Aggregates;
+import com.google.common.base.Function;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.StorageReaderFolder;
@@ -204,76 +198,20 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         return whiteBorder;
     }
 
-
-    /**
-     * The Class Predicates.
-     */
-    public abstract static class Predicates {
-
-        /** The Constant canMakeBooster. */
-        public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = new CanMakeBooster();
-
-        private static class CanMakeBooster implements Predicate<CardEdition> {
-            @Override
-            public boolean apply(final CardEdition subject) {
-                return subject.boosterTpl != null;
-            }
-        }
-
-        public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
-        private static class CanMakeStarter implements Predicate<CardEdition> {
-            @Override
-            public boolean apply(final CardEdition subject) {
-                return Singletons.getModel().getTournamentPacks().contains(subject.getCode());
-            }
-        }
-
-        public static final Predicate<CardEdition> HAS_FAT_PACK = new CanMakeFatPack();
-        private static class CanMakeFatPack implements Predicate<CardEdition> {
-            @Override
-            public boolean apply(final CardEdition subject) {
-                return Singletons.getModel().getFatPacks().contains(subject.getCode());
-            }
-        }
-
-        /**
-         * Checks if is legal in format.
-         *
-         * @param format the format
-         * @return the predicate
-         */
-        public static final Predicate<CardEdition> isLegalInFormat(final GameFormat format) {
-            return new LegalInFormat(format);
-        }
-
-        private static class LegalInFormat implements Predicate<CardEdition> {
-            private final GameFormat format;
-
-            public LegalInFormat(final GameFormat fmt) {
-                this.format = fmt;
-            }
-
-            @Override
-            public boolean apply(final CardEdition subject) {
-                return this.format.isSetLegal(subject.getCode());
-            }
-        }
-
-        public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
-            @Override
-            public boolean apply(CardEdition ed) {
-                for(String landName : Constant.Color.BASIC_LANDS) {
-                    if (null == CardDb.instance().tryGetCard(landName, ed.getCode(), 0))
-                        return false;
-                }
-                return true;
-            };
-        };
-
+    public int getCntBoosterPictures() {
+        return boosterArts;
     }
 
-    public static class EditionReader extends StorageReaderFolder<CardEdition> {
-        public EditionReader(File path) {
+    public SealedProductTemplate getBoosterTemplate() {
+        return boosterTpl;
+    }
+
+    public boolean hasBoosterTemplate() {
+        return boosterTpl != null;
+    }
+    
+    public static class Reader extends StorageReaderFolder<CardEdition> {
+        public Reader(File path) {
             super(path, CardEdition.FN_GET_CODE);
         }
         
@@ -360,16 +298,5 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
         };
     }
-    
-    public final static CardEdition getRandomSetWithAllBasicLands(Iterable<CardEdition> allEditions) {
-        return Aggregates.random(Iterables.filter(allEditions, CardEdition.Predicates.hasBasicLands));
-    }
 
-    public int getCntBoosterPictures() {
-        return boosterArts;
-    }
-
-    public SealedProductTemplate getBoosterTemplate() {
-        return boosterTpl;
-    }
 }

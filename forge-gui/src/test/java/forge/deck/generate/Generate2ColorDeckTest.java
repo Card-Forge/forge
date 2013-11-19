@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import forge.item.PaperCard;
-import forge.item.ItemPoolView;
+import forge.util.ItemPoolView;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson

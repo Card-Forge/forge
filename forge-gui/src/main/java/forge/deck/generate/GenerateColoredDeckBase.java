@@ -31,19 +31,17 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Constant;
 import forge.Singletons;
-import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.item.PaperCard;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 import forge.util.MyRandom;
 
 /**
@@ -132,8 +130,8 @@ public abstract class GenerateColoredDeckBase {
             } while ((this.cardCounts.get(s) > 3) && (lc <= 20));
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
-            PaperCard cp = CardDb.instance().getCard(s);
-            tDeck.add(CardDb.instance().getCard(cp.getName(), false));
+            PaperCard cp = Singletons.getMagicDb().getCommonCards().getCard(s);
+            tDeck.add(Singletons.getMagicDb().getCommonCards().getCard(cp.getName(), false));
 
             final int n = this.cardCounts.get(s);
             this.cardCounts.put(s, n + 1);
@@ -169,10 +167,10 @@ public abstract class GenerateColoredDeckBase {
             // just to prevent a null exception by the deck size fixing code
             this.cardCounts.put(color, nLand);
 
-            PaperCard cp = CardDb.instance().getCard(color);
+            PaperCard cp = Singletons.getMagicDb().getCommonCards().getCard(color);
             String basicLandSet = cp.getEdition();
 
-            tDeck.add(CardDb.instance().getCard(cp.getName(), basicLandSet), nLand);
+            tDeck.add(Singletons.getMagicDb().getCommonCards().getCard(cp.getName(), basicLandSet), nLand);
             landsLeft -= nLand;
         }
     }
@@ -222,7 +220,7 @@ public abstract class GenerateColoredDeckBase {
             final List<PaperCard> curvedRandomized = Lists.newArrayList();
             for (PaperCard c : curved) {
                 this.cardCounts.put(c.getName(), 0);
-                curvedRandomized.add(CardDb.instance().getCard(c.getName(), false));
+                curvedRandomized.add(Singletons.getMagicDb().getCommonCards().getCard(c.getName(), false));
             }
 
             addSome(addOfThisCmc, curvedRandomized);
@@ -239,7 +237,7 @@ public abstract class GenerateColoredDeckBase {
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
             hasColor = Predicates.or(hasColor, GenerateDeckUtil.COLORLESS_CARDS);
         }
-        return Iterables.filter(CardDb.instance().getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), PaperCard.FN_GET_RULES));
+        return Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), PaperCard.FN_GET_RULES));
     }
 
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {
@@ -254,15 +252,15 @@ public abstract class GenerateColoredDeckBase {
             int profile = cpe.getKey().getRules().getManaCost().getColorProfile();
 
             if ((profile & MagicColor.WHITE) != 0) {
-                increment(res, Constant.Color.BASIC_LANDS.get(0), cpe.getValue());
+                increment(res, MagicColor.Constant.BASIC_LANDS.get(0), cpe.getValue());
             } else if ((profile & MagicColor.BLUE) != 0) {
-                increment(res, Constant.Color.BASIC_LANDS.get(1), cpe.getValue());
+                increment(res, MagicColor.Constant.BASIC_LANDS.get(1), cpe.getValue());
             } else if ((profile & MagicColor.BLACK) != 0) {
-                increment(res, Constant.Color.BASIC_LANDS.get(2), cpe.getValue());
+                increment(res, MagicColor.Constant.BASIC_LANDS.get(2), cpe.getValue());
             } else if ((profile & MagicColor.RED) != 0) {
-                increment(res, Constant.Color.BASIC_LANDS.get(3), cpe.getValue());
+                increment(res, MagicColor.Constant.BASIC_LANDS.get(3), cpe.getValue());
             } else if ((profile & MagicColor.GREEN) != 0) {
-                increment(res, Constant.Color.BASIC_LANDS.get(4), cpe.getValue());
+                increment(res, MagicColor.Constant.BASIC_LANDS.get(4), cpe.getValue());
             }
 
         }

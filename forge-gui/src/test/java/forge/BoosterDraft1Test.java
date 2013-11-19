@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.LimitedPoolType;
 import forge.item.PaperCard;
-import forge.item.ItemPoolView;
+import forge.util.ItemPoolView;
 
 /**
  * Unit test for simple App.

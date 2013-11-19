@@ -29,14 +29,15 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Constant;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
-import forge.card.CardDb;
+import forge.card.BoosterSlots;
 import forge.card.CardEdition;
+import forge.card.CardEditionPredicates;
 import forge.card.CardRarity;
 import forge.card.FormatCollection;
 import forge.card.ICardDatabase;
+import forge.card.MagicColor;
 import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
@@ -46,8 +47,6 @@ import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.item.ItemPool;
-import forge.item.ItemPoolView;
 import forge.item.OpenablePack;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
@@ -58,6 +57,8 @@ import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
+import forge.util.ItemPool;
+import forge.util.ItemPoolView;
 import forge.util.MyRandom;
 
 /**
@@ -90,7 +91,7 @@ public final class QuestUtilCards {
      * @return the item pool view
      */
     public static ItemPoolView<PaperCard> generateBasicLands(final int nBasic, final int nSnow, final GameFormatQuest usedFormat) {
-        final ICardDatabase db = CardDb.instance();
+        final ICardDatabase db = Singletons.getMagicDb().getCommonCards();
         final ItemPool<PaperCard> pool = new ItemPool<PaperCard>(PaperCard.class);
 
         List<String> landCodes = new ArrayList<String>();
@@ -100,9 +101,9 @@ public final class QuestUtilCards {
             List<String> availableEditions = usedFormat.getAllowedSetCodes();
 
             for (String edCode : availableEditions) {
-                CardEdition ed = Singletons.getModel().getEditions().get(edCode);
+                CardEdition ed = Singletons.getMagicDb().getEditions().get(edCode);
                 // Duel decks might have only 2 types of basic lands
-                if (CardEdition.Predicates.hasBasicLands.apply(ed)) {
+                if (CardEditionPredicates.hasBasicLands.apply(ed)) {
                     landCodes.add(edCode);
                 }
             }
@@ -113,8 +114,8 @@ public final class QuestUtilCards {
                 snowLandCodes.add("CSP");
             }
         } else {
-            Iterable<CardEdition> allEditions = Singletons.getModel().getEditions();
-            for (CardEdition edition : Iterables.filter(allEditions, CardEdition.Predicates.hasBasicLands)) {
+            Iterable<CardEdition> allEditions = Singletons.getMagicDb().getEditions();
+            for (CardEdition edition : Iterables.filter(allEditions, CardEditionPredicates.hasBasicLands)) {
                 landCodes.add(edition.getCode());
             }
             snowLandCodes.add("ICE");
@@ -126,14 +127,14 @@ public final class QuestUtilCards {
             landCode = "M10";
         }
 
-        for (String landName : Constant.Color.BASIC_LANDS) {
+        for (String landName : MagicColor.Constant.BASIC_LANDS) {
             pool.add(db.getCard(landName, landCode), nBasic);
         }
 
 
         if (!snowLandCodes.isEmpty()) {
             String snowLandCode = Aggregates.random(snowLandCodes);
-            for (String landName : Constant.Color.SNOW_LANDS) {
+            for (String landName : MagicColor.Constant.SNOW_LANDS) {
                 pool.add(db.getCard(landName, snowLandCode), nSnow);
             }
         }
@@ -204,7 +205,7 @@ public final class QuestUtilCards {
 
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final PaperCard card = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter));
+        final PaperCard card = Aggregates.random(Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), myFilter));
         this.addSingleCard(card, 1);
         return card;
     }
@@ -219,7 +220,7 @@ public final class QuestUtilCards {
     public List<PaperCard> addRandomRare(final int n) {
         final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter), n);
+        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), myFilter), n);
         this.addAllCards(newCards);
         return newCards;
     }
@@ -429,21 +430,21 @@ public final class QuestUtilCards {
     /**
      * Generate cards in shop.
      */
-    private final FormatCollection formats = Singletons.getModel().getFormats();
-    private final Predicate<CardEdition> filterExt = CardEdition.Predicates.isLegalInFormat(this.formats.getExtended());
+    private final FormatCollection formats = Singletons.getMagicDb().getFormats();
+    private final Predicate<CardEdition> filterExt = CardEditionPredicates.isLegalInFormat(this.formats.getExtended());
 
     /** The filter t2booster. */
-    private final Predicate<CardEdition> filterT2booster = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            CardEdition.Predicates.isLegalInFormat(this.formats.getStandard()));
+    private final Predicate<CardEdition> filterT2booster = Predicates.and(CardEditionPredicates.CAN_MAKE_BOOSTER,
+            CardEditionPredicates.isLegalInFormat(this.formats.getStandard()));
 
     /** The filter ext but t2. */
     private final Predicate<CardEdition> filterExtButT2 = Predicates.and(
-            CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            CardEditionPredicates.CAN_MAKE_BOOSTER,
             Predicates.and(this.filterExt,
-                    Predicates.not(CardEdition.Predicates.isLegalInFormat(this.formats.getStandard()))));
+                    Predicates.not(CardEditionPredicates.isLegalInFormat(this.formats.getStandard()))));
 
     /** The filter not ext. */
-    private final Predicate<CardEdition> filterNotExt = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
+    private final Predicate<CardEdition> filterNotExt = Predicates.and(CardEditionPredicates.CAN_MAKE_BOOSTER,
             Predicates.not(this.filterExt));
 
     /**
@@ -469,9 +470,9 @@ public final class QuestUtilCards {
             Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
             if (qc.getFormat() != null) {
-                filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, isLegalInQuestFormat(qc.getFormat()));
+                filter = Predicates.and(CardEditionPredicates.CAN_MAKE_BOOSTER, isLegalInQuestFormat(qc.getFormat()));
             }
-            Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), filter);
+            Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getMagicDb().getEditions(), filter);
             this.qa.getShopList().add(BoosterPack.FN_FROM_SET.apply(Aggregates.random(rightEditions)));
         }
     }
@@ -483,11 +484,11 @@ public final class QuestUtilCards {
      *            the count
      */
     private void generateTournamentsInShop(final int count) {
-        Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
+        Predicate<CardEdition> formatFilter = CardEditionPredicates.HAS_TOURNAMENT_PACK;
         if (qc.getFormat() != null) {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
         }
-        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), formatFilter);
+        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getMagicDb().getEditions(), formatFilter);
         this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack.FN_FROM_SET), count));
     }
 
@@ -498,11 +499,11 @@ public final class QuestUtilCards {
      *            the count
      */
     private void generateFatPacksInShop(final int count) {
-        Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_FAT_PACK;
+        Predicate<CardEdition> formatFilter = CardEditionPredicates.HAS_FAT_PACK;
         if (qc.getFormat() != null) {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
         }
-        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), formatFilter);
+        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getMagicDb().getEditions(), formatFilter);
         this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack.FN_FROM_SET), count));
     }
 
@@ -526,18 +527,18 @@ public final class QuestUtilCards {
     @SuppressWarnings("unchecked")
     private SealedProductTemplate getShopBoosterTemplate() {
         return new SealedProductTemplate(Lists.newArrayList(
-            Pair.of(BoosterGenerator.COMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_COMMON)),
-            Pair.of(BoosterGenerator.UNCOMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON)),
-            Pair.of(BoosterGenerator.RARE_MYTHIC, this.qpref.getPrefInt(QPref.SHOP_SINGLES_RARE))
+            Pair.of(BoosterSlots.COMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_COMMON)),
+            Pair.of(BoosterSlots.UNCOMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON)),
+            Pair.of(BoosterSlots.RARE_MYTHIC, this.qpref.getPrefInt(QPref.SHOP_SINGLES_RARE))
         ));
     }
 
     @SuppressWarnings("unchecked")
     private SealedProductTemplate getBoosterTemplate() {
         return new SealedProductTemplate(Lists.newArrayList(
-            Pair.of(BoosterGenerator.COMMON, this.qpref.getPrefInt(QPref.BOOSTER_COMMONS)),
-            Pair.of(BoosterGenerator.UNCOMMON, this.qpref.getPrefInt(QPref.BOOSTER_UNCOMMONS)),
-            Pair.of(BoosterGenerator.RARE_MYTHIC, this.qpref.getPrefInt(QPref.BOOSTER_RARES))
+            Pair.of(BoosterSlots.COMMON, this.qpref.getPrefInt(QPref.BOOSTER_COMMONS)),
+            Pair.of(BoosterSlots.UNCOMMON, this.qpref.getPrefInt(QPref.BOOSTER_UNCOMMONS)),
+            Pair.of(BoosterSlots.RARE_MYTHIC, this.qpref.getPrefInt(QPref.BOOSTER_RARES))
         ));
     }
 
@@ -654,7 +655,7 @@ public final class QuestUtilCards {
     public int getCompletionPercent(String edition) {
         // get all cards in the specified edition
         Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(edition);
-        Iterable<PaperCard> editionCards = Iterables.filter(CardDb.instance().getAllCards(), filter);
+        Iterable<PaperCard> editionCards = Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), filter);
 
         ItemPool<PaperCard> ownedCards = qa.getCardPool();
         // 100% means at least one of every basic land and at least 4 of every other card in the set

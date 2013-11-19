@@ -24,7 +24,7 @@ import java.util.Random;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.Constant;
+import forge.card.MagicColor;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
@@ -94,7 +94,7 @@ public class ReadPriceList {
             try {
                 int val = Integer.parseInt(price.trim());
 
-                if (!(Constant.Color.BASIC_LANDS.contains(name) || Constant.Color.SNOW_LANDS.contains(name))) {
+                if (!(MagicColor.Constant.BASIC_LANDS.contains(name) || MagicColor.Constant.SNOW_LANDS.contains(name))) {
                     float ff = 0;
                     if (r.nextInt(100) < 90) {
                         ff = r.nextInt(10) * (float) .01;
