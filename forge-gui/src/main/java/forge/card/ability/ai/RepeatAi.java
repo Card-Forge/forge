@@ -1,7 +1,9 @@
 package forge.card.ability.ai;
 
 
+import forge.card.ability.AbilityFactory;
 import forge.card.ability.SpellAbilityAi;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.player.Player;
@@ -29,4 +31,17 @@ public class RepeatAi extends SpellAbilityAi {
         return false;
     }
 
+    @Override
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    	// setup subability to repeat
+        final SpellAbility repeat = AbilityFactory.getAbility(sa.getSourceCard().getSVar(sa.getParam("RepeatSubAbility")), sa.getSourceCard());
+
+        if (repeat == null) {
+        	return false;
+        }
+
+        repeat.setActivatingPlayer(sa.getActivatingPlayer());
+        ((AbilitySub) repeat).setParent(sa);
+        return repeat.doTrigger(mandatory, ai);
+    }
 }
