@@ -45,7 +45,6 @@ import org.apache.commons.lang.time.StopWatch;
 import forge.FThreads;
 import forge.ICardStorageReader;
 import forge.card.CardRules;
-import forge.card.CardRulesReader;
 import forge.error.BugReporter;
 import forge.gui.toolbox.FProgressBar;
 import forge.properties.NewConstants;
@@ -127,7 +126,7 @@ public class CardStorageReader implements ICardStorageReader {
 
     private final List<CardRules> loadCardsInRange(final List<File> files, int from, int to) {
         
-        CardRulesReader rulesReader = new CardRulesReader();
+        CardRules.Reader rulesReader = new CardRules.Reader();
         
         List<CardRules> result = new ArrayList<CardRules>();
         for(int i = from; i < to; i++) {
@@ -139,7 +138,7 @@ public class CardStorageReader implements ICardStorageReader {
     
     private final List<CardRules> loadCardsInRangeFromZip(final List<ZipEntry> files, int from, int to) {
     
-        CardRulesReader rulesReader = new CardRulesReader();
+        CardRules.Reader rulesReader = new CardRules.Reader();
         
         List<CardRules> result = new ArrayList<CardRules>();
         for(int i = from; i < to; i++) {
@@ -314,7 +313,7 @@ public class CardStorageReader implements ICardStorageReader {
      * 
      * @return the card loaded from the stream
      */
-    protected final CardRules loadCard(CardRulesReader reader, final InputStream inputStream) {
+    protected final CardRules loadCard(CardRules.Reader reader, final InputStream inputStream) {
         reader.reset();
 
         InputStreamReader isr = new InputStreamReader(inputStream, this.charset);
@@ -331,7 +330,7 @@ public class CardStorageReader implements ICardStorageReader {
      * 
      * @return a new Card instance
      */
-    protected final CardRules loadCard(final CardRulesReader reader, final File file) {
+    protected final CardRules loadCard(final CardRules.Reader reader, final File file) {
         FileInputStream fileInputStream = null;
         try {
             fileInputStream = new FileInputStream(file);
@@ -360,7 +359,7 @@ public class CardStorageReader implements ICardStorageReader {
      * 
      * @return a new Card instance
      */
-    protected final CardRules loadCard(final CardRulesReader rulesReader, final ZipEntry entry) {
+    protected final CardRules loadCard(final CardRules.Reader rulesReader, final ZipEntry entry) {
         InputStream zipInputStream = null;
         try {
             zipInputStream = this.zip.getInputStream(entry);
@@ -390,7 +389,7 @@ public class CardStorageReader implements ICardStorageReader {
     		output.add(new ArrayList<String>());
         }
     	final List<File> allFiles = new ArrayList<File>();
-    	final CardRulesReader rulesReader = new CardRulesReader();
+    	final CardRules.Reader rulesReader = new CardRules.Reader();
     	final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, false, null);
     	reader.fillFilesArray(allFiles, reader.cardsfolder);
     	for (File file : allFiles) {
@@ -469,7 +468,7 @@ public class CardStorageReader implements ICardStorageReader {
 		
 		//check for oracle text appearing in ability descriptions missing "{G}" formatting
         if (updated) { //if lines updated above, ensure updated oracle text used
-        	rules = new CardRulesReader().readCard(lines);
+        	rules = CardRules.fromScript(lines);
         }
     	String oracleText = rules.getOracleText();
         String[] sentences = oracleText.replace(rules.getName(), "CARDNAME").split("\\.|\\\\n|\\\"|\\(|\\)");

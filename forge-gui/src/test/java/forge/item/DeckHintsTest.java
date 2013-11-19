@@ -9,7 +9,7 @@ import junit.framework.Assert;
 import org.testng.annotations.Test;
 
 import forge.card.CardRarity;
-import forge.card.CardRulesReader;
+import forge.card.CardRules;
 import forge.card.DeckHints;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
@@ -133,7 +133,7 @@ public class DeckHintsTest {
         File dir = new File(NewConstants.CARD_DATA_DIR, firstLetter);
         File txtFile = new File(dir, filename);
 
-        CardRulesReader crr = new CardRulesReader();
+        CardRules.Reader crr = new CardRules.Reader();
         for (String line : FileUtil.readFile(txtFile)) {
             crr.parseLine(line);
         }

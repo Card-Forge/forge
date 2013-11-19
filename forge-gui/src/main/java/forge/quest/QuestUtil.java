@@ -23,7 +23,7 @@ import java.util.List;
 import forge.Card;
 import forge.Singletons;
 import forge.card.CardEdition;
-import forge.card.CardRulesReader;
+import forge.card.CardRules;
 import forge.item.PaperToken;
 import forge.item.IPaperCard;
 import forge.quest.bazaar.QuestPetController;
@@ -143,7 +143,7 @@ public class QuestUtil {
         script.add("Types:" + properties[5].replace(';', ' '));
         script.add("Oracle:"); // tokens don't have texts yet
         String fileName = PaperToken.makeTokenFileName(properties[1], properties[2], properties[3], properties[4]);
-        final PaperToken c = new PaperToken(CardRulesReader.parseSingleCard(script), CardEdition.UNKNOWN, fileName);
+        final PaperToken c = new PaperToken(CardRules.fromScript(script), CardEdition.UNKNOWN, fileName);
         return c;
     }
 

@@ -29,6 +29,7 @@ forge-core/src/main/java/forge/card/CardCharacteristicName.java -text
 forge-core/src/main/java/forge/card/CardCoreType.java -text
 forge-core/src/main/java/forge/card/CardDb.java -text
 forge-core/src/main/java/forge/card/CardEdition.java -text
+forge-core/src/main/java/forge/card/CardFace.java -text
 forge-core/src/main/java/forge/card/CardRarity.java -text
 forge-core/src/main/java/forge/card/CardRules.java -text
 forge-core/src/main/java/forge/card/CardRulesPredicates.java -text
@@ -14683,8 +14684,6 @@ forge-gui/src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plai
 forge-gui/src/main/java/forge/card/CardBlock.java -text
 forge-gui/src/main/java/forge/card/CardCharacteristics.java -text
 forge-gui/src/main/java/forge/card/CardEditionPredicates.java -text
-forge-gui/src/main/java/forge/card/CardFace.java -text
-forge-gui/src/main/java/forge/card/CardRulesReader.java svneol=native#text/plain
 forge-gui/src/main/java/forge/card/MetaSet.java -text
 forge-gui/src/main/java/forge/card/TriggerReplacementBase.java -text
 forge-gui/src/main/java/forge/card/UnOpenedMeta.java -text
