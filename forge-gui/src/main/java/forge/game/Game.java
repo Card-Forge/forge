@@ -27,7 +27,6 @@ import com.google.common.eventbus.EventBus;
 
 import forge.Card;
 import forge.CardLists;
-import forge.ColorChanger;
 import forge.FThreads;
 import forge.GameLog;
 import forge.StaticEffects;
@@ -72,7 +71,6 @@ public class Game {
     private final ReplacementHandler replacementHandler = new ReplacementHandler(this);
     private final EventBus events = new EventBus("game events");
     private final GameLog gameLog = new GameLog();
-    private final ColorChanger colorChanger = new ColorChanger();
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
 
@@ -435,14 +433,6 @@ public class Game {
         }
         all.addAll(getStackZone().getCards());
         return all;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public ColorChanger getColorChanger() {
-        return colorChanger;
     }
 
     public final GameAction getAction() {

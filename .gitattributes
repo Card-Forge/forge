@@ -21,8 +21,10 @@ forge-core/.settings/org.eclipse.m2e.core.prefs -text
 forge-core/pom.xml -text
 forge-core/src/main/java/forge/Constant.java svneol=native#text/plain
 forge-core/src/main/java/forge/ICardStorageReader.java -text
+forge-core/src/main/java/forge/IProgressObserver.java -text
 forge-core/src/main/java/forge/StaticData.java -text
 forge-core/src/main/java/forge/card/AggregationMethod.java -text
+forge-core/src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
 forge-core/src/main/java/forge/card/BoosterSlots.java -text
 forge-core/src/main/java/forge/card/CardAiHints.java -text
 forge-core/src/main/java/forge/card/CardCharacteristicName.java -text
@@ -48,6 +50,7 @@ forge-core/src/main/java/forge/card/ICardRawAbilites.java -text
 forge-core/src/main/java/forge/card/IUnOpenedProduct.java -text
 forge-core/src/main/java/forge/card/MagicColor.java -text
 forge-core/src/main/java/forge/card/PrintSheet.java -text
+forge-core/src/main/java/forge/card/UnOpenedProduct.java -text
 forge-core/src/main/java/forge/card/mana/IParserManaCost.java -text
 forge-core/src/main/java/forge/card/mana/ManaAtom.java -text
 forge-core/src/main/java/forge/card/mana/ManaCost.java -text
@@ -14665,7 +14668,6 @@ forge-gui/src/main/java/forge/CardPowerToughness.java svneol=native#text/plain
 forge-gui/src/main/java/forge/CardPredicates.java svneol=native#text/plain
 forge-gui/src/main/java/forge/CardType.java svneol=native#text/plain
 forge-gui/src/main/java/forge/CardUtil.java svneol=native#text/plain
-forge-gui/src/main/java/forge/ColorChanger.java -text
 forge-gui/src/main/java/forge/Command.java svneol=native#text/plain
 forge-gui/src/main/java/forge/CounterType.java svneol=native#text/plain
 forge-gui/src/main/java/forge/FThreads.java -text
@@ -14680,14 +14682,12 @@ forge-gui/src/main/java/forge/ImageLoader.java -text
 forge-gui/src/main/java/forge/Singletons.java svneol=native#text/plain
 forge-gui/src/main/java/forge/StaticEffect.java svneol=native#text/plain
 forge-gui/src/main/java/forge/StaticEffects.java svneol=native#text/plain
-forge-gui/src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
 forge-gui/src/main/java/forge/card/CardBlock.java -text
 forge-gui/src/main/java/forge/card/CardCharacteristics.java -text
 forge-gui/src/main/java/forge/card/CardEditionPredicates.java -text
 forge-gui/src/main/java/forge/card/MetaSet.java -text
 forge-gui/src/main/java/forge/card/TriggerReplacementBase.java -text
 forge-gui/src/main/java/forge/card/UnOpenedMeta.java -text
-forge-gui/src/main/java/forge/card/UnOpenedProduct.java -text
 forge-gui/src/main/java/forge/card/ability/AbilityApiBased.java -text
 forge-gui/src/main/java/forge/card/ability/AbilityFactory.java svneol=native#text/plain
 forge-gui/src/main/java/forge/card/ability/AbilityUtils.java -text

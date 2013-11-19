@@ -34,7 +34,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
+import forge.StaticData;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.TextUtil;
@@ -53,7 +53,7 @@ public class BoosterGenerator {
     private final static Map<String, PrintSheet> cachedSheets = new TreeMap<String, PrintSheet>(String.CASE_INSENSITIVE_ORDER);
     private static final synchronized PrintSheet getPrintSheet(String key) {
         if( !cachedSheets.containsKey(key) )
-            cachedSheets.put(key, makeSheet(key, Singletons.getMagicDb().getCommonCards().getAllCards()));
+            cachedSheets.put(key, makeSheet(key, StaticData.instance().getCommonCards().getAllCards()));
         return cachedSheets.get(key);
     }
 
@@ -65,7 +65,7 @@ public class BoosterGenerator {
 
             String[] sType = TextUtil.splitWithParenthesis(slotType, ' ');
             String setCode = sType.length == 1 && booster.getEdition() != null ?  booster.getEdition() : null;
-            String sheetKey = Singletons.getMagicDb().getEditions().contains(setCode) ? slotType.trim() + " " + setCode: slotType.trim(); 
+            String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode: slotType.trim(); 
 
             PrintSheet ps = getPrintSheet(sheetKey);
             result.addAll(ps.random(numCards, true));
@@ -88,7 +88,7 @@ public class BoosterGenerator {
             String mainCode = itMod.next();
             if ( mainCode.regionMatches(true, 0, "fromSheet", 0, 9)) { // custom print sheet
                 String sheetName = StringUtils.strip(mainCode.substring(9), "()\" ");
-                src = Singletons.getMagicDb().getPrintSheets().get(sheetName).toFlatList();
+                src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
                 setPred = Predicates.alwaysTrue();
 
             } else if (mainCode.startsWith("promo")) { // get exactly the named cards, that's a tiny inlined print sheet
@@ -96,7 +96,7 @@ public class BoosterGenerator {
                 String[] cardNames = TextUtil.splitWithParenthesis(list, ',', '"', '"');
                 List<PaperCard> srcList = new ArrayList<PaperCard>();
                 for(String cardName: cardNames)
-                    srcList.add(Singletons.getMagicDb().getCommonCards().getCard(cardName));
+                    srcList.add(StaticData.instance().getCommonCards().getCard(cardName));
                 src = srcList;
                 setPred = Predicates.alwaysTrue();
 

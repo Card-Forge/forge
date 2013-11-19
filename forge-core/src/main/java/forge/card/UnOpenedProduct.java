@@ -10,7 +10,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.Singletons;
+import forge.StaticData;
 import forge.item.PaperCard;
 import forge.util.ItemPoolView;
 
@@ -48,7 +48,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
     }
 
     public UnOpenedProduct(SealedProductTemplate sealedProductTemplate, Predicate<PaperCard> filterPrinted) {
-        this(sealedProductTemplate, Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), filterPrinted));
+        this(sealedProductTemplate, Iterables.filter(StaticData.instance().getCommonCards().getAllCards(), filterPrinted));
     }
 
     private void prebuildSheets(Iterable<PaperCard> sourceList) {

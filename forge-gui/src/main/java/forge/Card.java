@@ -1470,7 +1470,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (s.equals("")) {
             s = "0";
         }
-        this.getCharacteristics().getCardColor().add(new CardColor(s, false, true));
+        ManaCost mc = new ManaCost(new ManaCostParser(s));
+        this.getCharacteristics().getCardColor().add(new CardColor(mc.getColorProfile()));
     }
 
     /**
@@ -1492,7 +1493,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (bIncrease) {
             CardColor.increaseTimestamp();
         }
-        this.getCharacteristics().getCardColor().add(new CardColor(s, addToColors, false));
+        this.getCharacteristics().getCardColor().add(new CardColor(s, addToColors));
         return CardColor.getTimestamp();
     }
 
@@ -1521,22 +1522,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (removeCol != null) {
             this.getCharacteristics().getCardColor().remove(removeCol);
         }
-    }
-
-    /**
-     * <p>
-     * determineColor.
-     * </p>
-     * 
-     * @return a {@link forge.CardColor} object.
-     */
-    public final ColorSet determineColor() {
-        if (this.isImmutable()) {
-            return ColorSet.getNullColor();
-        }
-
-        final List<CardColor> globalChanges = getOwner() == null ? new ArrayList<CardColor>() : getOwner().getGame().getColorChanger().getColorChanges();
-        return this.determineColor(globalChanges);
     }
 
     /**
@@ -1570,48 +1555,21 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            an ArrayList<CardColor>
      * @return a CardColor
      */
-    final ColorSet determineColor(final List<CardColor> globalChanges) {
+    public final ColorSet determineColor() {
+        if (this.isImmutable()) {
+            return ColorSet.getNullColor();
+        }
+
+        List<CardColor> colorList = this.getCharacteristics().getCardColor();
+        
         byte colors = 0;
-        int i = this.getCharacteristics().getCardColor().size() - 1;
-        int j = -1;
-        if (globalChanges != null) {
-            j = globalChanges.size() - 1;
-        }
-        // if both have changes, see which one is most recent
-        while ((i >= 0) && (j >= 0)) {
-            CardColor cc = null;
-            if (this.getCharacteristics().getCardColor().get(i).getStamp() > globalChanges.get(j).getStamp()) {
-                // Card has a more recent color stamp
-                cc = this.getCharacteristics().getCardColor().get(i);
-                i--;
-            } else {
-                // Global effect has a more recent color stamp
-                cc = globalChanges.get(j);
-                j--;
-            }
-
+        for(int i = colorList.size() - 1;i >= 0;i--) {
+            final CardColor cc = colorList.get(i);
             colors |= cc.getColorMask();
             if (!cc.isAdditional()) {
                 return ColorSet.fromMask(colors);
             }
         }
-        while (i >= 0) {
-            final CardColor cc = this.getCharacteristics().getCardColor().get(i);
-            i--;
-            colors |= cc.getColorMask();
-            if (!cc.isAdditional()) {
-                return ColorSet.fromMask(colors);
-            }
-        }
-        while (j >= 0) {
-            final CardColor cc = globalChanges.get(j);
-            j--;
-            colors |= cc.getColorMask();
-            if (!cc.isAdditional()) {
-                return ColorSet.fromMask(colors);
-            }
-        }
-
         return ColorSet.fromMask(colors);
     }
 

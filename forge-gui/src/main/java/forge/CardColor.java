@@ -71,15 +71,11 @@ public class CardColor  {
      * @param baseColor
      *            a boolean.
      */
-    CardColor(final String colors, final boolean addToColors, final boolean baseColor) {
+    CardColor(final String colors, final boolean addToColors) {
         this.additional = addToColors;
         ManaCost mc = new ManaCost(new ManaCostParser(colors));
         this.colorMask = mc.getColorProfile();
-        if (baseColor) {
-            this.stamp = 0;
-        } else {
-            this.stamp = CardColor.timeStamp;
-        }
+        this.stamp = CardColor.timeStamp;
     }
 
     public CardColor(byte mask) {
