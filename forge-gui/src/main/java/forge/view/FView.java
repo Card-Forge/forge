@@ -414,9 +414,9 @@ public enum FView {
         VBazaarUI.SINGLETON_INSTANCE.instantiate();
     }
     
-    public void incrementSplashProgessBar() {
+    public void incrementSplashProgessBar(int value) {
         if (this.frmSplash == null) { return; }
-        this.frmSplash.getProgressBar().increment();
+        this.frmSplash.getProgressBar().setValueThreadSafe(value);
     }
 
     public void setSplashProgessBarMessage(final String message) { 

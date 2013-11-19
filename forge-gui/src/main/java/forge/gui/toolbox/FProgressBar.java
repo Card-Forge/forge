@@ -51,9 +51,9 @@ public class FProgressBar extends JProgressBar {
     };
     
     /** Increments bar, thread safe. Calculations executed on separate thread. */
-    public void increment() {
+    public void setValueThreadSafe(int value) {
         //GuiUtils.checkEDT("FProgressBar$increment", false);
-        tempVal++;
+        tempVal = value;
 
         // String.format leads to StringBuilder anyway. Direct calls will be faster
         StringBuilder sb = new StringBuilder(desc);

@@ -18,8 +18,7 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 
-
-/**
+ /**
  * The class holding game invariants, such as cards, editions, game formats. All that data, which is not supposed to be changed by player
  * 
  * @author Max
@@ -38,6 +37,7 @@ public class StaticData {
 
   private static StaticData lastInstance = null;
 
+
   
   public StaticData(ICardStorageReader reader, String editionFolder, String blockDataFolder) {
       this.editions = new EditionCollection(new CardEdition.Reader(new File(editionFolder)));
@@ -46,21 +46,21 @@ public class StaticData {
       final Map<String, CardRules> regularCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
       final Map<String, CardRules> variantsCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
 
-      synchronized (CardDb.class) {
-          List<CardRules> rules = reader.loadCards();
-          for (CardRules card : rules) {
-              if (null == card) continue;
-              
-              final String cardName = card.getName();
-              if ( card.isVariant() )
-                  variantsCards.put(cardName, card);
-              else
-                  regularCards.put(cardName, card);
-          }
+
+      List<CardRules> rules = reader.loadCards();
+      for (CardRules card : rules) {
+          if (null == card) continue;
           
-          commonCards = new CardDb(regularCards, editions, false);
-          variantCards = new CardDb(variantsCards, editions, false);
+          final String cardName = card.getName();
+          if ( card.isVariant() )
+              variantsCards.put(cardName, card);
+          else
+              regularCards.put(cardName, card);
       }
+      
+      commonCards = new CardDb(regularCards, editions, false);
+      variantCards = new CardDb(variantsCards, editions, false);
+
 
 
       this.formats = new FormatCollection(new GameFormat.Reader(new File(blockDataFolder, "formats.txt")));

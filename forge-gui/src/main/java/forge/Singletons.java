@@ -19,6 +19,7 @@ package forge;
 
 import forge.card.cardfactory.CardStorageReader;
 import forge.control.FControl;
+import forge.gui.toolbox.FProgressBar;
 import forge.model.FModel;
 import forge.properties.NewConstants;
 import forge.view.FView;
@@ -27,6 +28,7 @@ import forge.view.FView;
  * Provides global/static access to singleton instances.
  */
 public final class Singletons {
+    private static boolean initialized = false;
     private static FModel   model   = null;
     private static FView    view    = null;
     private static FControl control = null;
@@ -41,13 +43,38 @@ public final class Singletons {
     public static FModel   getModel()   { return model;   }
     public static StaticData getMagicDb() { return magicDb; }
 
-    public static void initializeOnce(boolean withUi) { 
+    public static void initializeOnce(boolean withUi) {
+        FThreads.assertExecutedByEdt(false);
+        
+        synchronized (Singletons.class) {
+            if(initialized) 
+                throw new IllegalStateException("Singletons.initializeOnce really cannot be called again");
+            initialized = true;
+        }
+
         if(withUi)
             view = FView.SINGLETON_INSTANCE;
+
+        IProgressObserver progressBarBridge = view == null ? IProgressObserver.emptyObserver : new IProgressObserver() {
+            FProgressBar bar = view.getSplash().getProgressBar();
+            @Override
+            public void setOperationName(final String name, final boolean usePercents) { 
+                FThreads.invokeInEdtLater(new Runnable() { @Override public void run() {
+                    bar.setDescription(name); 
+                    bar.setPercentMode(usePercents); 
+                } });
+            }
+            
+            @Override
+            public void report(int current, int total) {
+                if ( total != bar.getMaximum())
+                    bar.setMaximum(total);
+                bar.setValueThreadSafe(current);
+            }
+        };
         
         // Loads all cards (using progress bar).
-        FThreads.assertExecutedByEdt(false);
-        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true, withUi ? view.getSplash().getProgressBar() : null);
+        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true, progressBarBridge);
         magicDb = new StaticData(reader, "res/editions", "res/blockdata");
         model = FModel.getInstance(withUi);
         

@@ -1793,19 +1793,20 @@ public enum FSkin {
         final File f6 = new File(DEFAULT_DIR + FILE_OLD_FOIL_SPRITE);
 
         try {
+            int p = 0;
             bimDefaultSprite = ImageIO.read(f1);
-            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPreferredSprite = ImageIO.read(f2);
-            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimFoils = ImageIO.read(f3);
-            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimOldFoils = f6.exists() ? ImageIO.read(f6) : ImageIO.read(f3);
-            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimDefaultAvatars = ImageIO.read(f4);
 
             if (f5.exists()) { bimPreferredAvatars = ImageIO.read(f5); }
 
-            FView.SINGLETON_INSTANCE.incrementSplashProgessBar();
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
 
             preferredH = bimPreferredSprite.getHeight();
             preferredW = bimPreferredSprite.getWidth();

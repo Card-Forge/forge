@@ -57,7 +57,7 @@ public class FThreads {
      * @param mustBeEDT &emsp; boolean: true = exception if not EDT, false = exception if EDT
      */
     public static void assertExecutedByEdt(final boolean mustBeEDT) {
-        if (isEDT() != mustBeEDT ) { 
+        if (isGuiThread() != mustBeEDT ) { 
             StackTraceElement[] trace = Thread.currentThread().getStackTrace();
             final String methodName =  trace[2].getClassName() + "." + trace[2].getMethodName();
             String modalOperator = mustBeEDT ? " must be" : " may not be";
@@ -77,7 +77,7 @@ public class FThreads {
      * TODO: Write javadoc for this method.
      */
     public static void invokeInEdtNowOrLater(Runnable proc) {
-        if( isEDT() )
+        if( isGuiThread() )
             proc.run();
         else
             invokeInEdtLater(proc);
@@ -119,7 +119,7 @@ public class FThreads {
      * TODO: Write javadoc for this method.
      * @return
      */
-    public static boolean isEDT() {
+    public static boolean isGuiThread() {
         return SwingUtilities.isEventDispatchThread();
     }
 
@@ -138,7 +138,7 @@ public class FThreads {
     }
     
     public static String debugGetCurrThreadId() {
-        return isEDT() ? "EDT" : Thread.currentThread().getName();
+        return isGuiThread() ? "EDT" : Thread.currentThread().getName();
     }
 
     public static String prependThreadId(String message) {

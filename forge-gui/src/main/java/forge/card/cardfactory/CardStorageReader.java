@@ -35,15 +35,12 @@ import java.util.concurrent.Future;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import javax.swing.SwingUtilities;
-
 import org.apache.commons.lang.time.StopWatch;
 
 import forge.FThreads;
 import forge.ICardStorageReader;
+import forge.IProgressObserver;
 import forge.card.CardRules;
-import forge.error.BugReporter;
-import forge.gui.toolbox.FProgressBar;
 import forge.util.FileUtil;
 
 /**
@@ -62,11 +59,11 @@ public class CardStorageReader implements ICardStorageReader {
     /** Default charset when loading from files. */
     public static final String DEFAULT_CHARSET_NAME = "US-ASCII";
 
-    final private boolean useThreadPool = FThreads.isMultiCoreSystem();
-    final private int NUMBER_OF_PARTS = 25;
+    private final boolean useThreadPool = FThreads.isMultiCoreSystem();
+    public final static int NUMBER_OF_PARTS = 25;
     
-    final private CountDownLatch cdl = new CountDownLatch(NUMBER_OF_PARTS);
-    final private FProgressBar barProgress;
+    private final CountDownLatch cdl = new CountDownLatch(NUMBER_OF_PARTS);
+    private final IProgressObserver progressObserver;
     
     private transient File cardsfolder;
 
@@ -88,31 +85,28 @@ public class CardStorageReader implements ICardStorageReader {
      *            if true, attempts to load cards from a zip file, if one
      *            exists.
      */
-    public CardStorageReader(String cardDataDir, final boolean useZip, FProgressBar barProgress) {
-        this.barProgress = barProgress; 
+    public CardStorageReader(String cardDataDir, final boolean useZip, IProgressObserver progressObserver) {
+        this.progressObserver = progressObserver != null ? progressObserver : IProgressObserver.emptyObserver; 
+        this.cardsfolder = new File(cardDataDir);
         
         // These read data for lightweight classes.
-        File theCardsFolder = new File(cardDataDir);
-
-        if (!theCardsFolder.exists()) {
-            throw new RuntimeException("CardReader : constructor error -- file not found -- filename is "
-                    + theCardsFolder.getAbsolutePath());
+        if (!cardsfolder.exists()) {
+            throw new RuntimeException("CardReader : constructor error -- " + cardsfolder.getAbsolutePath() + " file/folder not found.");
         }
 
-        if (!theCardsFolder.isDirectory()) {
-            throw new RuntimeException("CardReader : constructor error -- not a directory -- "
-                    + theCardsFolder.getAbsolutePath());
+        if (!cardsfolder.isDirectory()) {
+            throw new RuntimeException("CardReader : constructor error -- not a directory -- " + cardsfolder.getAbsolutePath());
         }
 
-        this.cardsfolder = theCardsFolder;
+        
 
-        final File zipFile = new File(theCardsFolder, "cardsfolder.zip");
+        final File zipFile = new File(cardsfolder, "cardsfolder.zip");
 
         if (useZip && zipFile.exists()) {
             try {
                 this.zip = new ZipFile(zipFile);
             } catch (final Exception exn) {
-                System.err.printf("Error reading zip file \"%s\": %s. Defaulting to txt files in \"%s\".%n", zipFile.getAbsolutePath(), exn, theCardsFolder.getAbsolutePath());
+                System.err.printf("Error reading zip file \"%s\": %s. Defaulting to txt files in \"%s\".%n", zipFile.getAbsolutePath(), exn, cardsfolder.getAbsolutePath());
             }
          }
 
@@ -155,17 +149,9 @@ public class CardStorageReader implements ICardStorageReader {
      * @return the Card or null if it was not found.
      */
     public final List<CardRules> loadCards() {
-        if (barProgress != null) {
-            barProgress.setMaximum(NUMBER_OF_PARTS);
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    barProgress.setPercentMode(true);
-                    barProgress.setDescription("Loading card data: ");
-                }
-            });
-        }
-        
+        progressObserver.setOperationName("Loading card data", true);
+        progressObserver.report(0, NUMBER_OF_PARTS);
+
         final List<Callable<List<CardRules>>> tasks;
         long estimatedFilesRemaining;
         
@@ -200,8 +186,8 @@ public class CardStorageReader implements ICardStorageReader {
         sw.stop();
         final long timeOnParse = sw.getTime();
         System.out.printf("Read cards: %s %s in %d ms (%d parts) %s%n", estimatedFilesRemaining, zip == null? "files" : "archived files", timeOnParse, NUMBER_OF_PARTS, useThreadPool ? "using thread pool" : "in same thread");
-        if ( null != barProgress )
-            barProgress.setPercentMode(false);
+//        if ( null != barProgress )
+//            barProgress.setPercentMode(false);
         return res;
     } // loadCardsUntilYouFind(String)
 
@@ -244,9 +230,8 @@ public class CardStorageReader implements ICardStorageReader {
                 @Override
                 public List<CardRules> call() throws Exception{
                     List<CardRules> res = loadCardsInRangeFromZip(entries, from, till);
-                    if ( null != barProgress )
-                        barProgress.increment();
                     cdl.countDown();
+                    progressObserver.report(NUMBER_OF_PARTS - (int)cdl.getCount(), NUMBER_OF_PARTS);
                     return res;
                 }
             });
@@ -265,9 +250,8 @@ public class CardStorageReader implements ICardStorageReader {
                 @Override
                 public List<CardRules> call() throws Exception{
                     List<CardRules> res = loadCardsInRange(allFiles, from, till);
-                    if ( null != barProgress )
-                        barProgress.increment();
                     cdl.countDown();
+                    progressObserver.report(NUMBER_OF_PARTS - (int)cdl.getCount(), NUMBER_OF_PARTS);
                     return res;
                 }
             });
@@ -329,9 +313,7 @@ public class CardStorageReader implements ICardStorageReader {
             //rules.setSourceFile(file);
             return rules;
         } catch (final FileNotFoundException ex) {
-            BugReporter.reportException(ex, "File \"%s\" exception", file.getAbsolutePath());
-            throw new RuntimeException("CardReader : run error -- file exception -- filename is "
-                    + file.getPath(), ex);
+            throw new RuntimeException("CardReader : run error -- file not found: " + file.getPath(), ex);
         } finally {
             try {
                 fileInputStream.close();
