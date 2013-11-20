@@ -21,6 +21,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -43,7 +45,6 @@ import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.DifficultyPrefs;
-import forge.quest.io.PreconReader;
 import forge.quest.io.QuestChallengeReader;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
@@ -169,19 +170,25 @@ public class QuestController {
         this.currentEvent = currentEvent;
     }
 
-    /**
-     * Gets the precons.
-     * 
-     * @return QuestPreconManager
-     */
     public static IStorage<PreconDeck> getPrecons() {
         if (null == preconManager) {
-            preconManager = new StorageBase<PreconDeck>("Quest shop decks", new PreconReader(new File(NewConstants.QUEST_PRECON_DIR)));
+            // read with a special class, that will fill sell rules as it processes each PreconDeck
+            preconManager = new StorageBase<PreconDeck>("Quest shop decks", new PreconDeck.Reader(new File(NewConstants.QUEST_PRECON_DIR)){
+                @Override
+                protected PreconDeck getPreconDeckFromSections(java.util.Map<String,java.util.List<String>> sections) {
+                    PreconDeck result = super.getPreconDeckFromSections(sections);
+                    preconDeals.put(result.getName(), new SellRules(sections.get("shop")));
+                    return result;
+                };
+            });
         }
-
         return QuestController.preconManager;
     }
-
+    private final static Map<String, SellRules> preconDeals = new TreeMap<String, SellRules>();
+    public static SellRules getPreconDeals(PreconDeck deck) {
+        return preconDeals.get(deck.getName());
+    }
+    
     /**
      * TODO: Write javadoc for this method.
      *

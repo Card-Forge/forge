@@ -268,7 +268,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         IStorage<PreconDeck> preconDecks = QuestController.getPrecons();
 
         for (PreconDeck preconDeck : preconDecks) {
-            if (preconDeck.getRecommendedDeals().getMinWins() > 0) {
+            if (QuestController.getPreconDeals(preconDeck).getMinWins() > 0) {
                 continue;
             }
             String name = preconDeck.getName();

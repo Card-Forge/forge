@@ -23,7 +23,6 @@ import java.util.TreeSet;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.DeckFormat;
-import forge.game.player.PlayerType;
 import forge.util.FileSection;
 
 /**
@@ -48,13 +47,21 @@ public class DeckFileHeader {
     private static final String PLAYER_TYPE = "PlayerType";
 
     private final DeckFormat deckType;
-    private final PlayerType playerType;
     private final boolean customPool;
 
     private final String name;
     private final String comment;
 
     private final Set<String> tags;
+
+    private final boolean intendedForAi;
+
+    /**
+     * @return the intendedForAi
+     */
+    public boolean isIntendedForAi() {
+        return intendedForAi;
+    }
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -67,8 +74,7 @@ public class DeckFileHeader {
         this.comment = kvPairs.get(DeckFileHeader.COMMENT);
         this.deckType = DeckFormat.smartValueOf(kvPairs.get(DeckFileHeader.DECK_TYPE), DeckFormat.Constructed);
         this.customPool = kvPairs.getBoolean(DeckFileHeader.CSTM_POOL);
-        boolean isForAi = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE));
-        this.playerType = isForAi ? PlayerType.COMPUTER : PlayerType.HUMAN;
+        this.intendedForAi = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE));
         this.tags = new TreeSet<String>();
         
         String rawTags = kvPairs.get(DeckFileHeader.TAGS);
@@ -79,15 +85,6 @@ public class DeckFileHeader {
         }
         
             
-    }
-
-    /**
-     * Gets the player type.
-     * 
-     * @return the player type
-     */
-    public final PlayerType getPlayerType() {
-        return this.playerType;
     }
 
     /**

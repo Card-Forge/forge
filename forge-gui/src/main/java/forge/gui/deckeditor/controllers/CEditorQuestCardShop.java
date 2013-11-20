@@ -220,7 +220,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         } else if (card instanceof FatPack) {
             value = 2365;
         } else if (card instanceof PreconDeck) {
-            value = ((PreconDeck) card).getRecommendedDeals().getCost();
+            value = QuestController.getPreconDeals((PreconDeck) card).getCost();
         }
 
         // TODO: make this changeable via a user-definable property?

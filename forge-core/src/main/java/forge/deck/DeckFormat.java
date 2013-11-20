@@ -22,42 +22,37 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang.math.IntRange;
 
-import forge.Singletons;
+import org.apache.commons.lang3.Range;
+
+import forge.StaticData;
 import forge.card.CardCoreType;
 import forge.card.ColorSet;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 
 /**
  * GameType is an enum to determine the type of current game. :)
  */
 public enum DeckFormat {
-
+    
     //            Main board: allowed size             SB: restriction   Max distinct non basic cards
-    Constructed ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0, 15), 4),
-    QuestDeck   ( new IntRange(40, Integer.MAX_VALUE), new IntRange(0, 15), 4),
-    Limited     ( new IntRange(40, Integer.MAX_VALUE), null,             Integer.MAX_VALUE),
-    Commander   ( new IntRange(99),                    new IntRange(0, 10), 1),
-    Vanguard    ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),  4),
-    Planechase  ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),  4),
-    Archenemy   ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),  4);
+    Constructed ( Range.between(60, Integer.MAX_VALUE), Range.between(0, 15), 4),
+    QuestDeck   ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
+    Limited     ( Range.between(40, Integer.MAX_VALUE), null,             Integer.MAX_VALUE),
+    Commander   ( Range.is(99),                         Range.between(0, 10), 1),
+    Vanguard    ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
+    Planechase  ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
+    Archenemy   ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4);
 
-    private final IntRange mainRange;
-    private final IntRange sideRange; // null => no check
+    private final Range<Integer> mainRange;
+    private final Range<Integer> sideRange; // null => no check
     private final int maxCardCopies;
 
 
-    /**
-     * Instantiates a new game type.
-     * 
-     * @param isLimited
-     *            the is limited
-     */
-    DeckFormat(IntRange main, IntRange side, int maxCopies) {
+    
+    DeckFormat(Range<Integer> main, Range<Integer> side, int maxCopies) {
         mainRange = main;
         sideRange = side;
         maxCardCopies = maxCopies;
@@ -89,7 +84,7 @@ public enum DeckFormat {
     /**
      * @return the sideRange
      */
-    public IntRange getSideRange() {
+    public Range<Integer> getSideRange() {
         return sideRange;
     }
 
@@ -97,7 +92,7 @@ public enum DeckFormat {
     /**
      * @return the mainRange
      */
-    public IntRange getMainRange() {
+    public Range<Integer> getMainRange() {
         return mainRange;
     }
 
@@ -117,15 +112,10 @@ public enum DeckFormat {
             return "is not selected";
         }
 
-        // That's really a bad dependence
-        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            return null;
-        }
-
         int deckSize = deck.getMain().countAll();
 
-        int min = getMainRange().getMinimumInteger();
-        int max = getMainRange().getMaximumInteger();
+        int min = getMainRange().getMinimum();
+        int max = getMainRange().getMaximum();
 
         if (deckSize < min) {
             return String.format("should have a minimum of %d cards", min);
@@ -232,7 +222,7 @@ public enum DeckFormat {
             // should group all cards by name, so that different editions of same card are really counted as the same card
             for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, PaperCard.FN_GET_NAME)) {
 
-                IPaperCard simpleCard = Singletons.getMagicDb().getCommonCards().getCard(cp.getKey());
+                IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
                 boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
 
                 if (!canHaveMultiple && cp.getValue() > maxCopies) {
@@ -243,11 +233,11 @@ public enum DeckFormat {
 
         // The sideboard must contain either 0 or 15 cards
         int sideboardSize = deck.has(DeckSection.Sideboard) ? deck.get(DeckSection.Sideboard).countAll() : 0;
-        IntRange sbRange = getSideRange();
-        if (sbRange != null && sideboardSize > 0 && !sbRange.containsInteger(sideboardSize)) {
-            return sbRange.getMinimumInteger() == sbRange.getMaximumInteger()
-            ? String.format("must have a sideboard of %d cards or no sideboard at all", sbRange.getMaximumInteger())
-            : String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimumInteger(), sbRange.getMaximumInteger());
+        Range<Integer> sbRange = getSideRange();
+        if (sbRange != null && sideboardSize > 0 && !sbRange.contains(sideboardSize)) {
+            return sbRange.getMinimum() == sbRange.getMaximum()
+            ? String.format("must have a sideboard of %d cards or no sideboard at all", sbRange.getMaximum())
+            : String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimum(), sbRange.getMaximum());
         }
 
         return null;

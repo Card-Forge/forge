@@ -18,16 +18,18 @@
 package forge.item;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Function;
 
-import forge.Singletons;
+import forge.StaticData;
 import forge.deck.Deck;
-import forge.quest.SellRules;
+import forge.deck.io.DeckSerializer;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.storage.StorageReaderFolder;
 
 /**
  * TODO: Write javadoc for this type.
@@ -36,11 +38,11 @@ import forge.util.FileUtil;
 public class PreconDeck implements InventoryItemFromSet {
 
     private final Deck deck;
-    private final String imageFilename;
     private final String set;
     private final String description;
-
-    private final SellRules recommendedDeals;
+    private String imageFilename;
+    
+    // private final SellRules recommendedDeals;
 
     /*
      * (non-Javadoc)
@@ -62,34 +64,12 @@ public class PreconDeck implements InventoryItemFromSet {
         return "Prebuilt Deck";
     }
 
-    /**
-     * Instantiates a new precon deck.
-     * 
-     * @param f
-     *            the f
-     */
-    public PreconDeck(final File f) {
-        final List<String> deckLines = FileUtil.readFile(f);
-        final Map<String, List<String>> sections = FileSection.parseSections(deckLines);
-        this.deck = Deck.fromSections(sections);
-
-        
-
-        FileSection kv = FileSection.parse(sections.get("metadata"), "=");
-
-        imageFilename = kv.get("Image");
-        description = kv.get("Description");
-        String deckEdition = kv.get("set");
-        this.set = deckEdition == null || Singletons.getMagicDb().getEditions().get(deckEdition.toUpperCase()) == null ? "n/a" : deckEdition;
-        this.recommendedDeals = new SellRules(sections.get("shop"));
-
+    public PreconDeck(final Deck d, String set, String description) {
+        deck = d;
+        this.set = set;
+        this.description = description;
     }
-
-    /**
-     * Gets the deck.
-     * 
-     * @return the deck
-     */
+    
     public final Deck getDeck() {
         return this.deck;
     }
@@ -99,9 +79,9 @@ public class PreconDeck implements InventoryItemFromSet {
      * 
      * @return the recommended deals
      */
-    public final SellRules getRecommendedDeals() {
-        return this.recommendedDeals;
-    }
+//    public final SellRules getRecommendedDeals() {
+//        return this.recommendedDeals;
+//    }
 
     public final String getImageFilename() {
         return imageFilename;
@@ -132,5 +112,38 @@ public class PreconDeck implements InventoryItemFromSet {
             return arg1.getName();
         }
     };
+    
+    public static class Reader extends StorageReaderFolder<PreconDeck> {
+
+
+        public Reader(final File deckDir0) {
+            super(deckDir0, PreconDeck.FN_NAME_SELECTOR);
+        }
+
+
+        @Override
+        protected PreconDeck read(final File file) {
+            return getPreconDeckFromSections(FileSection.parseSections(FileUtil.readFile(file)));
+        }
+
+        // To be able to read "shops" section in overloads
+        protected PreconDeck getPreconDeckFromSections(final Map<String, List<String>> sections) {
+            FileSection kv = FileSection.parse(sections.get("metadata"), "=");
+            String imageFilename = kv.get("Image");
+            String description = kv.get("Description");
+            String deckEdition = kv.get("set");
+            String set = deckEdition == null || StaticData.instance().getEditions().get(deckEdition.toUpperCase()) == null ? "n/a" : deckEdition;
+            PreconDeck result = new PreconDeck(Deck.fromSections(sections), set, description);
+            result.imageFilename = imageFilename;
+            return result;
+        }
+
+        @Override
+        protected FilenameFilter getFileFilter() {
+            return DeckSerializer.DCK_FILE_FILTER;
+        }
+
+
+    }
 
 }

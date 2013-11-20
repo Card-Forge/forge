@@ -19,7 +19,6 @@ package forge.view;
 
 
 import forge.Singletons;
-import forge.card.cardfactory.CardStorageReader;
 import forge.net.FServer;
 
 /**

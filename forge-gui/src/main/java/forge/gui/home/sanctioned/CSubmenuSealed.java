@@ -34,6 +34,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
 import forge.util.storage.IStorage;
 
@@ -129,10 +130,12 @@ public enum CSubmenuSealed implements ICDoc {
             return;
         } 
         
-        String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(human);
-        if (null != errorMessage) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
-            return;
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(human);
+            if (null != errorMessage) {
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         int matches = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().size();

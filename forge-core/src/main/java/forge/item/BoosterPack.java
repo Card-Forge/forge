@@ -20,7 +20,7 @@ package forge.item;
 
 import com.google.common.base.Function;
 
-import forge.Singletons;
+import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.SealedProductTemplate;
 import forge.util.MyRandom;
@@ -32,14 +32,14 @@ public class BoosterPack extends OpenablePack {
     public static final Function<CardEdition, BoosterPack> FN_FROM_SET = new Function<CardEdition, BoosterPack>() {
         @Override
         public BoosterPack apply(final CardEdition arg1) {
-            SealedProductTemplate d = Singletons.getMagicDb().getBoosters().get(arg1.getCode());
+            SealedProductTemplate d = StaticData.instance().getBoosters().get(arg1.getCode());
             return new BoosterPack(arg1.getName(), d);
         }
     };
 
     public BoosterPack(final String name0, final SealedProductTemplate boosterData) {
         super(name0, boosterData);
-        int maxIdx = Singletons.getMagicDb().getEditions().get(boosterData.getEdition()).getCntBoosterPictures();
+        int maxIdx = StaticData.instance().getEditions().get(boosterData.getEdition()).getCntBoosterPictures();
         artIndex = MyRandom.getRandom().nextInt(maxIdx) + 1;
         hash = super.hashCode() ^  artIndex;
     }

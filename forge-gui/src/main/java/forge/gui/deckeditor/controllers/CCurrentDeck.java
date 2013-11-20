@@ -11,6 +11,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.io.DeckHtmlSerializer;
 import forge.deck.io.DeckSerializer;
 import forge.error.BugReporter;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -45,7 +46,19 @@ public enum CCurrentDeck implements ICDoc {
             fileChooser.removeChoosableFileFilter(defFilter);
         }
         
-        fileChooser.addChoosableFileFilter(DeckSerializer.DCK_FILTER);
+        FileFilter DCK_FILTER = new FileFilter() {
+            @Override
+            public boolean accept(final File f) {
+                return f.getName().endsWith(DeckSerializer.FILE_EXTENSION) || f.isDirectory();
+            }
+    
+            @Override
+            public String getDescription() {
+                return "Simple Deck File .dck";
+            }
+        };
+        
+        fileChooser.addChoosableFileFilter(DCK_FILTER);
     }
 
     /* (non-Javadoc)
@@ -202,7 +215,7 @@ public enum CCurrentDeck implements ICDoc {
         }
 
         try {
-            DeckSerializer.writeDeckHtml(
+            DeckHtmlSerializer.writeDeckHtml(
                 ((DeckController<Deck>) CDeckEditorUI.SINGLETON_INSTANCE
                 .getCurrentEditorController().getDeckController()).getModel(), filename);
         } catch (final Exception ex) {
@@ -231,7 +244,7 @@ public enum CCurrentDeck implements ICDoc {
         final JFileChooser save = new JFileChooser(previousDirectory);
         save.setDialogTitle("Print Proxies");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
-        save.setFileFilter(DeckSerializer.HTML_FILTER);
+        save.setFileFilter(HTML_FILTER);
 
         if (save.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             final File file = save.getSelectedFile();
@@ -244,4 +257,16 @@ public enum CCurrentDeck implements ICDoc {
         return null;
     }
 
+        /** The Constant HTML_FILTER. */
+        public static final FileFilter HTML_FILTER = new FileFilter() {
+            @Override
+            public boolean accept(final File f) {
+                return f.getName().endsWith(".html") || f.isDirectory();
+            }
+    
+            @Override
+            public String getDescription() {
+                return "Proxy File .html";
+            }
+        };    
 }

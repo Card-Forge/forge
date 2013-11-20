@@ -27,6 +27,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.net.FServer;
 import forge.net.Lobby;
+import forge.properties.ForgePreferences.FPref;
 
 /** 
  * Controls the draft submenu in the home UI.
@@ -103,10 +104,13 @@ public enum CSubmenuDraft implements ICDoc {
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
         } 
-        String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
-        if (null != errorMessage) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
-            return;
+        
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
+            if (null != errorMessage) {
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         Singletons.getModel().getGauntletMini().resetGauntletDraft();

@@ -32,7 +32,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
-import forge.game.player.PlayerType;
 import forge.properties.NewConstants;
 import forge.util.FileSection;
 import forge.util.FileUtil;
@@ -216,7 +215,6 @@ public class OldDeckParser {
                 break;
 
             case Limited:
-                final boolean isAi = dh.getPlayerType() == PlayerType.COMPUTER;
                 name = name.startsWith("AI_") ? name.replace("AI_", "") : name;
 
                 Pair<DeckGroup, MutablePair<File, File>> stored = sealedDecks.get(name);
@@ -225,7 +223,7 @@ public class OldDeckParser {
                 }
 
                 final Deck deck = Deck.fromSections(sections);
-                if (isAi) {
+                if (dh.isIntendedForAi()) {
                     stored.getLeft().addAiDeck(deck);
                     stored.getRight().setRight(f);
                 } else {

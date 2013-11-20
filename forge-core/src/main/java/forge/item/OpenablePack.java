@@ -20,13 +20,11 @@ package forge.item;
 
 import java.util.List;
 
-import org.apache.commons.lang.NullArgumentException;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.Singletons;
+import forge.StaticData;
 import forge.card.BoosterGenerator;
 import forge.card.CardRulesPredicates;
 import forge.card.SealedProductTemplate;
@@ -39,8 +37,8 @@ public abstract class OpenablePack implements InventoryItemFromSet {
     private List<PaperCard> cards = null;
 
     public OpenablePack(String name0, SealedProductTemplate boosterData) {
-        if (null == name0)       { throw new NullArgumentException("name0");       }
-        if (null == boosterData) { throw new NullArgumentException("boosterData"); }
+        if (null == name0)       { throw new IllegalArgumentException("name0 must not be null");       }
+        if (null == boosterData) { throw new IllegalArgumentException("boosterData must not be null"); }
         contents = boosterData;
         name = name0;
         hash = name.hashCode() ^ getClass().hashCode() ^ contents.hashCode();
@@ -104,6 +102,6 @@ public abstract class OpenablePack implements InventoryItemFromSet {
         Predicate<PaperCard> cardsRule = Predicates.and(
                 IPaperCard.Predicates.printedInSet(setCode),
                 Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
-        return Aggregates.random(Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), cardsRule), count);
+        return Aggregates.random(Iterables.filter(StaticData.instance().getCommonCards().getAllCards(), cardsRule), count);
     }
 }

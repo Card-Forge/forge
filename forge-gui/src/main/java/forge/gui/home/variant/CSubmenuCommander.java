@@ -27,6 +27,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FList;
 import forge.net.FServer;
 import forge.net.Lobby;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 
 /** 
@@ -125,12 +126,14 @@ public enum CSubmenuCommander implements ICDoc {
                 GuiDialog.message("No deck selected for player " + (i + 1));
                 return;
             }
-            String errorMessage = GameType.Commander.getDecksFormat().getDeckConformanceProblem(d);
-            if (null != errorMessage) {
-                if(!problemDecks.contains(d)) 
-                {
-                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "The deck "  + d.getName() + " " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
-                    problemDecks.add(d);
+            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+                String errorMessage = GameType.Commander.getDecksFormat().getDeckConformanceProblem(d);
+                if (null != errorMessage) {
+                    if(!problemDecks.contains(d)) 
+                    {
+                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "The deck "  + d.getName() + " " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                        problemDecks.add(d);
+                    }
                 }
             }
             playerDecks.add(d);

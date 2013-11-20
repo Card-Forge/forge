@@ -23,7 +23,7 @@ import java.util.List;
 
 import com.google.common.base.Function;
 
-import forge.Singletons;
+import forge.StaticData;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
 import forge.card.FatPackTemplate;
@@ -32,7 +32,7 @@ public class FatPack extends OpenablePack {
     public static final Function<CardEdition, FatPack> FN_FROM_SET = new Function<CardEdition, FatPack>() {
         @Override
         public FatPack apply(final CardEdition arg1) {
-            FatPackTemplate d = Singletons.getMagicDb().getFatPacks().get(arg1.getCode());
+            FatPackTemplate d = StaticData.instance().getFatPacks().get(arg1.getCode());
             return new FatPack(arg1.getName(), d);
         }
     };
@@ -40,7 +40,7 @@ public class FatPack extends OpenablePack {
     private final FatPackTemplate fpData;
 
     public FatPack(final String name0, final FatPackTemplate fpData0) {
-        super(name0, Singletons.getMagicDb().getBoosters().get(fpData0.getEdition()));
+        super(name0, StaticData.instance().getBoosters().get(fpData0.getEdition()));
         fpData = fpData0;
     }
 

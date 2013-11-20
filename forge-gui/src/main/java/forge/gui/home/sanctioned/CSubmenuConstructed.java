@@ -106,16 +106,18 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
             return;
         }
 
-        String leftDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscLeft.getOriginalDeck());
-        if (null != leftDeckErrorMessage) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Left-side deck " + leftDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        String rightDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscRight.getOriginalDeck());
-        if (null != rightDeckErrorMessage) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Right-side deck " + rightDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
-            return;
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            String leftDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscLeft.getOriginalDeck());
+            if (null != leftDeckErrorMessage) {
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Left-side deck " + leftDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+    
+            String rightDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscRight.getOriginalDeck());
+            if (null != rightDeckErrorMessage) {
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Right-side deck " + rightDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         Lobby lobby = FServer.instance.getLobby();

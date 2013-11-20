@@ -15,7 +15,7 @@ import javax.swing.MenuElement;
 import javax.swing.MenuSelectionManager;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang.math.IntRange;
+import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -188,10 +188,10 @@ public class PlayerControllerHuman extends PlayerController {
         int sbSize = sideboard.countAll();
         int combinedDeckSize = mainSize + sbSize;
 
-        int deckMinSize = Math.min(mainSize, gameType.getDecksFormat().getMainRange().getMinimumInteger());
-        IntRange sbRange = gameType.getDecksFormat().getSideRange();
+        int deckMinSize = Math.min(mainSize, gameType.getDecksFormat().getMainRange().getMinimum());
+        Range<Integer> sbRange = gameType.getDecksFormat().getSideRange();
         // Limited doesn't have a sideboard max, so let the Main min take care of things.
-        int sbMax = sbRange == null ? combinedDeckSize : sbRange.getMaximumInteger();
+        int sbMax = sbRange == null ? combinedDeckSize : sbRange.getMaximum();
 
         CardPool newSb = new CardPool();
         List<PaperCard> newMain = null;

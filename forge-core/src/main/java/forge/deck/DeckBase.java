@@ -52,8 +52,8 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, IH
     /** {@inheritDoc} */
     @Override
     public boolean equals(final Object o) {
-        if (o instanceof Deck) {
-            final Deck d = (Deck) o;
+        if (o instanceof DeckBase) {
+            final DeckBase d = (DeckBase) o;
             return this.getName().equals(d.getName());
         }
         return false;

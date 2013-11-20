@@ -30,7 +30,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
-import forge.card.BoosterGenerator;
 import forge.card.BoosterSlots;
 import forge.card.CardEdition;
 import forge.card.CardEditionPredicates;
@@ -516,7 +515,7 @@ public final class QuestUtilCards {
     private void generatePreconsInShop(final int count) {
         final List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
         for (final PreconDeck deck : QuestController.getPrecons()) {
-            if (deck.getRecommendedDeals().meetsRequiremnts(this.qc.getAchievements())
+            if (QuestController.getPreconDeals(deck).meetsRequiremnts(this.qc.getAchievements())
                     && (null == qc.getFormat() || qc.getFormat().isSetLegal(deck.getEdition()))) {
                 meetRequirements.add(deck);
             }

@@ -27,6 +27,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
 import forge.net.Lobby;
+import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -374,10 +375,12 @@ public class SSubmenuQuestUtil {
             return;
         }
         
-        String errorMessage = GameType.Quest.getDecksFormat().getDeckConformanceProblem(deck);
-        if (null != errorMessage) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
-            return;
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            String errorMessage = GameType.Quest.getDecksFormat().getDeckConformanceProblem(deck);
+            if (null != errorMessage) {
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
 
         SwingUtilities.invokeLater(new Runnable() {
