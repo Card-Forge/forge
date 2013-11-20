@@ -33,6 +33,7 @@ public class LifeGainAi extends SpellAbilityAi {
         final int life = ai.getLife();
         final String amountStr = sa.getParam("LifeAmount");
         int lifeAmount = 0;
+        boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
@@ -43,12 +44,12 @@ public class LifeGainAi extends SpellAbilityAi {
         }
 
         // don't use it if no life to gain
-        if (lifeAmount <= 0) {
+        if (!activateForCost && lifeAmount <= 0) {
             return false;
         }
         // don't play if the conditions aren't met, unless it would trigger a
         // beneficial sub-condition
-        if (!sa.getConditions().areMet(sa)) {
+        if (!activateForCost && !sa.getConditions().areMet(sa)) {
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
                 if (!abSub.getConditions().areMet(abSub)) {
@@ -80,7 +81,7 @@ public class LifeGainAi extends SpellAbilityAi {
             }
         }
 
-        if (!ai.canGainLife()) {
+        if (!activateForCost && !ai.canGainLife()) {
             return false;
         }
 
@@ -99,10 +100,9 @@ public class LifeGainAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!lifeCritical && (!game.getPhaseHandler().getNextTurn().equals(ai)
+        if (!lifeCritical && !activateForCost && (!game.getPhaseHandler().getNextTurn().equals(ai)
                 || game.getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
-                && !ComputerUtil.activateForCost(sa, ai)) {
+                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)) {
             return false;
         }
 

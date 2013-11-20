@@ -165,6 +165,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final Card source = sa.getSourceCard();
         ZoneType origin = null;
         final Player opponent = ai.getOpponent();
+        boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
 
         if (sa.hasParam("Origin")) {
             try {
@@ -226,7 +227,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
-        if (!sa.getConditions().areMet(sa)) {
+        if (!activateForCost && !sa.getConditions().areMet(sa)) {
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
                 if (!abSub.getConditions().areMet(abSub)) {
@@ -239,7 +240,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         final Random r = MyRandom.getRandom();
         // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
 
         Iterable<Player> pDefined = Lists.newArrayList(source.getController());
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -301,7 +304,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
 
-            if (list.isEmpty()) {
+            if (!activateForCost && list.isEmpty()) {
                 return false;
             }
         }
@@ -319,9 +322,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        chance &= subAb == null || subAb.getAi().chkDrawbackWithSubs(ai, subAb);
-
-        return chance;
+        return subAb == null || subAb.getAi().chkDrawbackWithSubs(ai, subAb);
     }
 
     /**
