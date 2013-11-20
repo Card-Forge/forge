@@ -1,7 +1,5 @@
 package forge.game.player;
 
-import org.apache.commons.lang.NotImplementedException;
-
 import forge.game.Game;
 import forge.net.client.INetClient;
 import forge.net.protocol.toclient.ChatPacketClt;
@@ -26,7 +24,7 @@ public class LobbyPlayerRemote extends LobbyPlayer {
     @Override
     public Player getPlayer(Game gameState) {
         // Cannot create remote players yet 
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException("method is not implemented");
     }
 
     @Override
@@ -40,6 +38,6 @@ public class LobbyPlayerRemote extends LobbyPlayer {
     @Override
     public PlayerController createControllerFor(Player p) {
         // Cannot create remote players yet 
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException("method is not implemented");
     }
 }

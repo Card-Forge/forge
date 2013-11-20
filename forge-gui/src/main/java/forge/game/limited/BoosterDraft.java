@@ -29,7 +29,7 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.base.Supplier;
 import forge.Card;

@@ -2,7 +2,7 @@ package forge.gui.home.settings;
 
 import javax.swing.JOptionPane;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
 import forge.properties.ForgePreferences;

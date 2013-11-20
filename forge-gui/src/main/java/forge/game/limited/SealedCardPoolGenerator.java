@@ -24,7 +24,7 @@ import java.util.Stack;
 
 import javax.swing.JOptionPane;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 import forge.Singletons;
 import forge.card.CardBlock;

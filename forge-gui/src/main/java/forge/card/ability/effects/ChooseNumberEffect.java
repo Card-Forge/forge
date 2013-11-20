@@ -3,7 +3,7 @@ package forge.card.ability.effects;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.card.ability.SpellAbilityEffect;

@@ -2,8 +2,6 @@ package forge.card.ability.ai;
 
 import java.util.List;
 
-import org.apache.commons.lang.math.RandomUtils;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
@@ -11,6 +9,7 @@ import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 
 public class BalanceAi extends SpellAbilityAi {
 
@@ -48,6 +47,6 @@ public class BalanceAi extends SpellAbilityAi {
         diff += 0.5 * (humHand.size() - compHand.size());
 
         // Larger differential == more chance to actually cast this spell
-        return diff > 2 && RandomUtils.nextInt(100) < diff*10;
+        return diff > 2 && MyRandom.getRandom().nextInt(100) < diff*10;
     }
 }

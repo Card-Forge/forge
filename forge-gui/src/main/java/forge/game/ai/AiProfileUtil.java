@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Holds default AI personality profile values in an enum.

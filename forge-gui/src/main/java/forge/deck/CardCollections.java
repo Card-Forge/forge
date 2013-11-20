@@ -19,7 +19,7 @@ package forge.deck;
 
 import java.io.File;
 
-import org.apache.commons.lang.time.StopWatch;
+import org.apache.commons.lang3.time.StopWatch;
 
 import forge.deck.io.DeckGroupSerializer;
 import forge.deck.io.DeckSerializer;
