@@ -115,7 +115,7 @@ public class DiscardAi extends SpellAbilityAi {
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         Player opp = ai.getOpponent();
-        if (opp.getCardsIn(ZoneType.Hand).isEmpty()) {
+        if (opp.getCardsIn(ZoneType.Hand).isEmpty() && !ComputerUtil.activateForCost(sa, ai)) {
             return false;
         }
         if (tgt != null) {
