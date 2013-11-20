@@ -200,8 +200,10 @@ public class GameAction {
             ReplacementResult repres = game.getReplacementHandler().run(repParams);
             if (repres != ReplacementResult.NotReplaced) {
                 if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
-                    return this.moveToGraveyard(c);
+                	copied.getOwner().removeInboundToken(copied);
+                	return this.moveToGraveyard(c);
                 }
+                copied.getOwner().removeInboundToken(copied);
                 return c;
             }
 
