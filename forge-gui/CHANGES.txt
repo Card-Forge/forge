@@ -1,7 +1,7 @@
-Forge Beta: 11-15-2013 ver 1.5.5
+Forge Beta: 11-##-2013 ver 1.5.6
 
 
-13400 cards in total.
+13### cards in total.
 
 
 -------------
@@ -28,73 +28,7 @@ Forge now includes many of the new Commander 2013 cards. It may take a few days/
 New Cards
 ---------
 
-Invasion Plans
-Johan
-Juxtapose
-Keldon Twilight
-Muck Drubb
-Premature Burial
-Quicksilver Dragon
-Rebound
-Reflecting Mirror
-Sacred Ground
-Silver Wyvern
-
-
------------
-New Schemes
------------
-
-Your Inescapable Doom
-
-
-------------------------
-New Commander 2013 Cards
-------------------------
-
-Act of Authority
-Angel of Finality
-Baleful Force
-Bane of Progress
-Curse of Chaos
-Curse of Forsaken
-Curse of Inertia
-Curse of Predation
-Curse of Shallow Graves
-Darksteel Mutation
-Derevi, Empyrial Tactician
-Diviner Spirit
-Djinn of Infinite Deceits
-Eye of Doom
-Fell Shepherd
-From the Ashes
-Gahiji, Honored One
-Hooded Horror
-Illusionist's Gambit
-Naya Soulbeast
-Nekusar, the Mindrazer
-Oloro, Ageless Ascetic
-Opal Palace
-Restore
-Roon of the Hidden Realm
-Serene Master
-Shattergang Brothers
-Spawning Grounds
-Sudden Demise
-Surveyor's Scope
-Sydri, Galvanic Genius
-Tempt with Discovery
-Tempt with Glory
-Tempt with Immortality
-Tempt with Reflections
-Tempt with Vengeance
-Terra Ravager
-Tidal Force
-Toxic Deluge
-True-Name Nemesis
-Unexpectedly Absent
-Widespread Panic
-Witch Hunt
+Liar's Pendulum
 
 
 ------------
@@ -119,15 +53,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Dave
-DrDev
-Erazmus
-Gos
-Max
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
