@@ -6547,6 +6547,7 @@ forge-gui/res/cardsfolder/l/leyline_of_vitality.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/leyline_phantom.txt -text
 forge-gui/res/cardsfolder/l/lhurgoyf.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/liability.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/l/liars_pendulum.txt -text
 forge-gui/res/cardsfolder/l/liberate.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/liberated_dwarf.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/l/library_of_alexandria.txt svneol=native#text/plain

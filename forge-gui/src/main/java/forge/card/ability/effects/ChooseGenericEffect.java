@@ -50,15 +50,23 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 continue;
             }
             SpellAbility chosenSA = null;
+            String choice;
             if (sa.hasParam("AtRandom")) {
-                chosenSA = AbilityFactory.getAbility(host.getSVar(Aggregates.random(choices.keySet())), host);
+                choice = Aggregates.random(choices.keySet());
             } else {
                 if (p.isHuman()) {
-                    String choice = GuiChoose.one("Choose one", choices.values());
-                    chosenSA = AbilityFactory.getAbility(host.getSVar(choices.inverse().get(choice)), host);
+                    choice = choices.inverse().get(GuiChoose.one("Choose one", choices.values()));
                 } else { //Computer AI
-                    chosenSA = AbilityFactory.getAbility(host.getSVar(sa.getParam("Choices").split(",")[0]), host);
+                    if ("Random".equals(sa.getParam("AILogic"))) {
+                        choice = Aggregates.random(choices.keySet());
+                    } else {
+                        choice = sa.getParam("Choices").split(",")[0];
+                    }
                 }
+            }
+            chosenSA = AbilityFactory.getAbility(host.getSVar(choice), host);
+            if (sa.hasParam("ShowChoice")) {
+                p.getGame().getAction().nofityOfValue(sa, p, choices.get(choice), null);
             }
             chosenSA.setActivatingPlayer(sa.getSourceCard().getController());
             ((AbilitySub) chosenSA).setParent(sa);

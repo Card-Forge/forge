@@ -1,8 +1,5 @@
 package forge.gui.workshop.controllers;
 
-import java.io.File;
-import java.io.PrintWriter;
-
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -11,15 +8,12 @@ import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
-import forge.gui.match.controllers.CDetail;
-import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.FTextEditor;
 import forge.gui.workshop.menus.WorkshopFileMenu;
 import forge.gui.workshop.views.VCardDesigner;
 import forge.gui.workshop.views.VCardScript;
 import forge.gui.workshop.views.VWorkshopCatalog;
 import forge.item.PaperCard;
-import forge.util.FileUtil;
 
 
 /** 
