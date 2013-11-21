@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -29,6 +30,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -36,6 +38,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
+import forge.card.CardEdition.CardInSet;
+import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
@@ -340,6 +344,72 @@ public final class CardDb implements ICardDatabase {
                 if (sets.contains(c.getEdition())) 
                     return true;
             return false;
+        }
+    }
+    
+    private final Editor editor = new Editor();
+    public Editor getEditor() { return editor; }
+    public class Editor {
+        private boolean immediateReindex = true;
+        public CardRules putCard(CardRules rules) { return putCard(rules, null); /* will use data from editions folder */ }
+        public CardRules putCard(CardRules rules, List<Pair<String, CardRarity>> whenItWasPrinted){ // works similarly to Map<K,V>, returning prev. value
+            String cardName = rules.getName(); 
+            CardRules result = rulesByName.put(cardName, rules);
+            // 1. generate all paper cards from edition data we have (either explicit, or found in res/editions, or add to unknown edition)
+            List<PaperCard> paperCards = new ArrayList<PaperCard>();
+            if (null == whenItWasPrinted || whenItWasPrinted.isEmpty()) {
+                for(CardEdition e : editions.getOrderedEditions()) {
+                    int artIdx = 0;
+                    for(CardInSet cis : e.getCards()) {
+                        if( !cis.name.equals(cardName) )
+                            continue;
+                        paperCards.add(new PaperCard(rules, e.getCode(), cis.rarity, artIdx++));
+                    }
+                }
+            } else {
+                String lastEdition = null;
+                int artIdx = 0;
+                for(Pair<String, CardRarity> tuple : whenItWasPrinted){
+                    if(!tuple.getKey().equals(lastEdition)) {
+                        artIdx = 0;
+                        lastEdition = tuple.getKey();
+                    }
+                    CardEdition ed = editions.get(lastEdition);
+                    if(null == ed)
+                        continue;
+                    paperCards.add(new PaperCard(rules, lastEdition, tuple.getValue(), artIdx++));
+                }
+            }
+            if(paperCards.isEmpty())
+                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 0));
+
+            // 2. add them to db
+            for (PaperCard paperCard : paperCards)
+                addCard(paperCard);
+            // 3. reindex can be temporary disabled and run after the whole batch of rules is added to db.
+            if(immediateReindex)
+                reIndex();
+            
+            return result;
+        }
+        public void removeCard(String name) {
+            allCardsByName.removeAll(name);
+            uniqueCardsByName.remove(name);
+            rulesByName.remove(name);
+            Iterator<PaperCard> it = allCards.iterator();
+            while(it.hasNext()) {
+                PaperCard pc = it.next();
+                if( pc.getName().equalsIgnoreCase(name))
+                    it.remove();
+            }
+        }
+        public void rebuildIndex() { reIndex(); }
+        
+        public boolean isImmediateReindex() {
+            return immediateReindex;
+        }
+        public void setImmediateReindex(boolean immediateReindex) {
+            this.immediateReindex = immediateReindex;
         }
     }
     
