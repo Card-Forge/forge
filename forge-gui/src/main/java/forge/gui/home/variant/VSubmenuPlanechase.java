@@ -98,7 +98,6 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
         FPanel tempPanel;
         FDeckChooser tempChooser;
         FList<Object> tempPlanarDeckList;
-        ButtonGroup tempBtnGroup;
 
         //Settings panel
         FPanel settingsPanel = new FPanel();
@@ -131,15 +130,19 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
 
             deckChoosers.add(tempChooser);
             
-            tempBtnGroup = new ButtonGroup();
+            ButtonGroup tempBtnGroup = new ButtonGroup();            
             FRadioButton tmpAI = new FRadioButton();
             tmpAI.setText("AI");
             tmpAI.setSelected(i != 0);
             FRadioButton tmpHuman = new FRadioButton();
             tmpHuman.setText("Human");
             tmpHuman.setSelected(i == 0);
-            tempPanel.add(tmpAI);
-            tempPanel.add(tmpHuman,"wrap");
+            
+            FPanel typeBtnPanel = new FPanel();
+            typeBtnPanel.add(tmpAI);
+            typeBtnPanel.add(tmpHuman,"wrap");
+            tempPanel.add(typeBtnPanel);
+            
             tempBtnGroup.add(tmpAI);
             tempBtnGroup.add(tmpHuman);
             playerIsAIRadios.add(tmpAI);
@@ -157,11 +160,8 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
             planarDeckLists.add(tempPlanarDeckList);
 
             playerPanels.add(tempPanel);
-            if (i == 0) {
-                tabPane.add("Human", tempPanel);
-            } else {
-                tabPane.add("Opponent " + i, tempPanel);
-            }
+            
+            tabPane.add("Player " + (i+1), tempPanel);
         }
 
         final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
@@ -185,7 +185,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
         }
         else {
             for (int i = currentNumTabsShown; i <= toShow; i++) {
-                tabPane.add("Opponent " + i, playerPanels.get(i));
+                tabPane.add("Player " + i, playerPanels.get(i));
             }
             currentNumTabsShown = tabPane.getComponentCount() - 1;
         }

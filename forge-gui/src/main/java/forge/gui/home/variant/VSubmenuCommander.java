@@ -126,7 +126,7 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
         //Player panels (Human + 7 AIs)
         for (int i = 0; i < 8; i++) {
             tempPanel = new FPanel();
-            tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy, ax center"));
+            tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowx, ax center"));
 
             tempList = new FList<Object>();
 
@@ -136,30 +136,34 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
 
             deckLists.add(tempList);
             
-            ButtonGroup tempBtnGroup = new ButtonGroup();
+            ButtonGroup tempBtnGroup = new ButtonGroup();            
             FRadioButton tmpAI = new FRadioButton();
             tmpAI.setText("AI");
             tmpAI.setSelected(i != 0);
             FRadioButton tmpHuman = new FRadioButton();
             tmpHuman.setText("Human");
             tmpHuman.setSelected(i == 0);
-            tempPanel.add(tmpAI);
-            tempPanel.add(tmpHuman,"wrap");
+            
+            FPanel typeBtnPanel = new FPanel();
+            typeBtnPanel.add(tmpAI);
+            typeBtnPanel.add(tmpHuman,"wrap");
+            
+            
             tempBtnGroup.add(tmpAI);
             tempBtnGroup.add(tmpHuman);
+            playerIsAIRadios.add(tmpAI);
             playerIsAIRadios.add(tmpAI);
             
             tempPanel.add(new FLabel.Builder().text("Select Deck:").build(), "gap 0px 0px 10px 10px, flowy");
 
+            tempPanel.add(typeBtnPanel);
+            
             JScrollPane scrDecks = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             tempPanel.add(scrDecks, "w 55%!, h 90%, gap 0px 10px 0px 10px, growy, pushy, wrap");
 
             playerPanels.add(tempPanel);
-            if (i == 0) {
-                tabPane.add("Human", tempPanel);
-            } else {
-                tabPane.add("Opponent " + i, tempPanel);
-            }
+
+            tabPane.add("Player " + (i+1), tempPanel);
         }
 
         pnlStart.setOpaque(false);
@@ -179,7 +183,7 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
         }
         else {
             for (int i = currentNumTabsShown; i <= toShow; i++) {
-                tabPane.add("Opponent " + i, playerPanels.get(i));
+                tabPane.add("Player " + i, playerPanels.get(i));
             }
             currentNumTabsShown = tabPane.getComponentCount() - 1;
         }
