@@ -20,7 +20,6 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import forge.Singletons;
 import forge.card.MagicColor;
-import forge.deck.CardCollections;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.GameFormat;
@@ -38,6 +37,7 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.JXButtonPanel;
 import forge.item.PreconDeck;
+import forge.model.CardCollections;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.StartingPoolType;

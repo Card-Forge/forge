@@ -29,7 +29,6 @@ import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.CardBlock;
 import forge.card.CardType;
-import forge.deck.CardCollections;
 import forge.error.ExceptionHandler;
 import forge.game.ai.AiProfileUtil;
 import forge.game.limited.GauntletMini;
@@ -296,7 +295,7 @@ public class FModel {
     /**
      * Returns all player's decks for constructed, sealed and whatever.
      * 
-     * @return {@link forge.deck.CardCollections}
+     * @return {@link forge.model.CardCollections}
      */
     public final CardCollections getDecks() {
         return this.decks;

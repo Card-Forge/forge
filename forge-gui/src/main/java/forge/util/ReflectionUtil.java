@@ -28,4 +28,17 @@ public class ReflectionUtil {
         throw new RuntimeException("No default constructor found in class " + cls.getName());
     }
 
+    /**
+     * Cast object to a given type if possible, returning null if not possible
+     * @param obj
+     * @param type
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T safeCast(Object obj, Class<T> type) {
+        if (type.isInstance(obj)) {
+            return (T) obj;
+        }
+        return null;
+    }
+
 }

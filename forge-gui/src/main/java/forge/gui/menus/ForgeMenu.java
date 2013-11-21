@@ -16,7 +16,7 @@ import javax.swing.event.PopupMenuListener;
 import forge.Singletons;
 import forge.control.RestartUtil;
 import forge.gui.GuiUtils;
-import forge.util.TypeUtil;
+import forge.util.ReflectionUtil;
 
 public final class ForgeMenu {
     private JPopupMenu popupMenu;
@@ -102,7 +102,7 @@ public final class ForgeMenu {
             activeShortcuts.put(shortcut, item);
         }
 
-        JMenu subMenu = TypeUtil.safeCast(item, JMenu.class);
+        JMenu subMenu = ReflectionUtil.safeCast(item, JMenu.class);
         if (subMenu != null) {
             setupMenu(subMenu);
         }

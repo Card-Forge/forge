@@ -51,7 +51,7 @@ import forge.item.InventoryItem;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.ItemPoolView;
-import forge.util.TypeUtil;
+import forge.util.ReflectionUtil;
 
 
 /**
@@ -369,7 +369,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     protected abstract void buildFilterMenu(JPopupMenu menu);
     
     protected <F extends ItemFilter<T>> F getFilter(Class<F> filterClass) {
-        return TypeUtil.safeCast(this.filters.get(filterClass), filterClass);
+        return ReflectionUtil.safeCast(this.filters.get(filterClass), filterClass);
     }
     
     @SuppressWarnings("unchecked")

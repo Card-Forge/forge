@@ -35,7 +35,6 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
-import forge.deck.CardCollections;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckSection;
@@ -51,6 +50,7 @@ import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.item.InventoryItem;
+import forge.model.CardCollections;
 
 /**
  * Creates deck list for selected decks for quick deleting, editing, and basic

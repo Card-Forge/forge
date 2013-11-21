@@ -33,7 +33,7 @@ import forge.gui.toolbox.FDigitalClock;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
-import forge.util.TypeUtil;
+import forge.util.ReflectionUtil;
 
 @SuppressWarnings("serial")
 public class FNavigationBar extends FTitleBarBase {
@@ -420,7 +420,7 @@ public class FNavigationBar extends FTitleBarBase {
         
         @Override
         public void setIcon(Icon icon) {
-            ImageIcon imageIcon = TypeUtil.safeCast(icon, ImageIcon.class);
+            ImageIcon imageIcon = ReflectionUtil.safeCast(icon, ImageIcon.class);
             if (imageIcon != null) {
                 super.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING)));
             }

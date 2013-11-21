@@ -15,12 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.deck;
+package forge.model;
 
 import java.io.File;
 
 import org.apache.commons.lang3.time.StopWatch;
 
+import forge.deck.Deck;
+import forge.deck.DeckGroup;
 import forge.deck.io.DeckGroupSerializer;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.OldDeckParser;

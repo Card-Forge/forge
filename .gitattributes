@@ -15091,12 +15091,10 @@ forge-gui/src/main/java/forge/control/InputQueue.java svneol=native#text/plain
 forge-gui/src/main/java/forge/control/KeyboardShortcuts.java -text
 forge-gui/src/main/java/forge/control/RestartUtil.java -text
 forge-gui/src/main/java/forge/control/package-info.java -text
-forge-gui/src/main/java/forge/deck/CardCollections.java -text
 forge-gui/src/main/java/forge/deck/io/DeckGroupSerializer.java -text
 forge-gui/src/main/java/forge/deck/io/DeckHtmlSerializer.java -text
 forge-gui/src/main/java/forge/deck/io/OldDeckParser.java -text
 forge-gui/src/main/java/forge/deck/io/package-info.java svneol=native#text/plain
-forge-gui/src/main/java/forge/deck/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 forge-gui/src/main/java/forge/error/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/Game.java -text
@@ -15516,6 +15514,7 @@ forge-gui/src/main/java/forge/gui/workshop/views/VCardDesigner.java -text
 forge-gui/src/main/java/forge/gui/workshop/views/VCardScript.java -text
 forge-gui/src/main/java/forge/gui/workshop/views/VWorkshopCatalog.java -text
 forge-gui/src/main/java/forge/model/BuildInfo.java -text
+forge-gui/src/main/java/forge/model/CardCollections.java -text
 forge-gui/src/main/java/forge/model/FModel.java svneol=native#text/plain
 forge-gui/src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
 forge-gui/src/main/java/forge/model/package-info.java svneol=native#text/plain
@@ -15613,6 +15612,7 @@ forge-gui/src/main/java/forge/sound/IAudioClip.java -text
 forge-gui/src/main/java/forge/sound/NoSoundClip.java -text
 forge-gui/src/main/java/forge/sound/SoundEffectType.java -text
 forge-gui/src/main/java/forge/sound/SoundSystem.java -text
+forge-gui/src/main/java/forge/util/AwtUtil.java -text
 forge-gui/src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/Expressions.java -text
 forge-gui/src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
@@ -15620,7 +15620,6 @@ forge-gui/src/main/java/forge/util/IgnoringXStream.java -text
 forge-gui/src/main/java/forge/util/LineReader.java -text
 forge-gui/src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/ReflectionUtil.java -text
-forge-gui/src/main/java/forge/util/TypeUtil.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text
 forge-gui/src/main/java/forge/util/maps/EnumMapOfLists.java -text
 forge-gui/src/main/java/forge/util/maps/EnumMapToAmount.java -text
