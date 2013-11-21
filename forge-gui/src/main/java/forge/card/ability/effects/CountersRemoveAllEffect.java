@@ -1,6 +1,7 @@
 package forge.card.ability.effects;
 
 import java.util.List;
+import java.util.Set;
 
 import forge.Card;
 import forge.CardLists;
@@ -58,7 +59,11 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
 
         for (final Card tgtCard : cards) {
             if (sa.hasParam("AllCounterTypes")) {
-                tgtCard.getCounters().clear();
+            	Set<CounterType> types = tgtCard.getCounters().keySet();
+            	for(CounterType ct : types) {
+            		tgtCard.subtractCounter(ct, tgtCard.getCounters(ct));
+            	}
+                //tgtCard.getCounters().clear();
                 continue;
             }
             if (sa.hasParam("AllCounters")) {
