@@ -114,6 +114,12 @@ forge-core/src/main/java/forge/util/storage/StorageReaderFile.java -text
 forge-core/src/main/java/forge/util/storage/StorageReaderFileSections.java -text
 forge-core/src/main/java/forge/util/storage/StorageReaderFolder.java -text
 forge-core/src/main/java/forge/util/storage/package-info.java -text
+forge-game/.classpath -text
+forge-game/.project -text
+forge-game/.settings/org.eclipse.core.resources.prefs -text
+forge-game/.settings/org.eclipse.jdt.core.prefs -text
+forge-game/.settings/org.eclipse.m2e.core.prefs -text
+forge-game/pom.xml -text
 forge-gui/.classpath -text
 forge-gui/.project -text
 forge-gui/.settings/org.eclipse.core.resources.prefs -text
