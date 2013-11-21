@@ -237,8 +237,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return false;
             }
         }
-
-        final Random r = MyRandom.getRandom();
         // prevent run-away activations - first time will always return true
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;

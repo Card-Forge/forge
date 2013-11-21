@@ -202,17 +202,17 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             tempBtnGroup.add(tmpHuman);
             playerIsAIRadios.add(tmpAI);
 
-            tempPanel.add(tempChooser, "span 1 2, w 55%!, gap 10px 10px 0px 10px, growy, pushy, wrap");
+            tempPanel.add(tempChooser, "span 1 2, w 33%, gap 10px 10px 0px 10px, growy, pushy, wrap");
 
             tempPanel.add(new FLabel.Builder().text("Select Avatar:").build(), "gap 0px 0px 10px 10px, flowy");
 
             JScrollPane scrAvatar = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            tempPanel.add(scrAvatar, "h 90%, gap 0px 10px 0px 10px, growy, pushy, wrap");
+            tempPanel.add(scrAvatar, "h 90%, w 33%, gap 0px 10px 0px 10px, growy, pushy, wrap");
 
             tempDetail = new CardDetailPanel(null);
             cdpAvatarDetails.add(tempDetail);
 
-            tempPanel.add(tempDetail, "span 1 2, gap 0px 10px 10px 10px, growy, pushy, growx, pushx");
+            tempPanel.add(tempDetail, "span 1 2, w 33%, gap 0px 10px 10px 10px, growy, pushy, growx");
 
             playerPanels.add(tempPanel);
             

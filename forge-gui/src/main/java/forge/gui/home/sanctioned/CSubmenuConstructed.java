@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -16,16 +15,13 @@ import forge.Singletons;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.RegisteredPlayer;
-import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
-import forge.gui.toolbox.FComboBoxWrapper;
 import forge.net.FServer;
 import forge.net.Lobby;
-import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
 /**
@@ -57,7 +53,6 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     };
 
     private final VSubmenuConstructed view = VSubmenuConstructed.SINGLETON_INSTANCE;
-    private final ForgePreferences prefs = Singletons.getModel().getPreferences();
 
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
@@ -77,11 +72,16 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
      */
     @Override
     public void initialize() {
-
-        initializeGamePlayersComboBox();
-
-        view.getDcLeft().initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
-        view.getDcRight().initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
+    	view.getDeckChooser(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
+    	view.getDeckChooser(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
+    	view.getDeckChooser(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, DeckType.COLOR_DECK);
+    	view.getDeckChooser(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, DeckType.COLOR_DECK);
+    	view.getDeckChooser(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
+    	view.getDeckChooser(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
+    	view.getDeckChooser(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
+    	view.getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);
+        //view.getDcLeft().initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
+        //view.getDcRight().initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
 
         // Checkbox event handling
         view.getBtnStart().addActionListener(new ActionListener() {
@@ -98,42 +98,37 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
      * @param gameType
      */
     private void startGame(final GameType gameType) {
-        RegisteredPlayer pscLeft = view.getDcLeft().getPlayer();
-        RegisteredPlayer pscRight = view.getDcRight().getPlayer();
-
-        if (pscLeft == null || pscRight == null) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please specify a Human and Computer deck first.");
-            return;
-        }
-
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String leftDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscLeft.getOriginalDeck());
-            if (null != leftDeckErrorMessage) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Left-side deck " + leftDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+        for(int i=0;i<view.getNumPlayers();i++) {
+        	if (view.getDeckChooser(i).getPlayer() == null) {
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please specify a deck for each player first.");
                 return;
             }
-    
-            String rightDeckErrorMessage = gameType.getDecksFormat().getDeckConformanceProblem(pscRight.getOriginalDeck());
-            if (null != rightDeckErrorMessage) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Right-side deck " + rightDeckErrorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
-                return;
+        }        
+
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            for(int i=0;i<view.getNumPlayers();i++) {
+            	String errMsg = gameType.getDecksFormat().getDeckConformanceProblem(view.getDeckChooser(i).getPlayer().getOriginalDeck());
+                if (null != errMsg) {
+                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Player " + i + "'s deck " + errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
         }
 
         Lobby lobby = FServer.instance.getLobby();
-        LobbyPlayer leftPlayer = view.isLeftPlayerAi() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
-        LobbyPlayer rightPlayer = view.isRightPlayerAi() ? lobby.getAiPlayer() : lobby.getGuiPlayer();
-
         List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
-        players.add(pscLeft.setPlayer(leftPlayer));
-        players.add(pscRight.setPlayer(rightPlayer));
+        for(int i=0;i<view.getNumPlayers();i++) {
+        	RegisteredPlayer rp = view.getDeckChooser(i).getPlayer();
+        	players.add(rp.setPlayer(view.isPlayerAI(i) ? lobby.getAiPlayer() : lobby.getGuiPlayer()));
+        }
         final Match mc = new Match(gameType, players);
 
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
 
-        view.getDcLeft().saveState();
-        view.getDcRight().saveState();
+        for(int i=0;i<view.getNumPlayers();i++) {
+        	view.getDeckChooser(i).saveState();
+        }
 
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
@@ -160,36 +155,6 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         List<JMenu> menus = new ArrayList<JMenu>();
         menus.add(ConstructedGameMenu.getMenu());
         return menus;
-    }
-
-    private void initializeGamePlayersComboBox() {
-        final FComboBoxWrapper<GamePlayers> comboBox = this.view.getGamePlayersComboBox();
-        comboBox.setModel(new DefaultComboBoxModel<GamePlayers>(GamePlayers.values()));
-        comboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setGamePlayers((GamePlayers)comboBox.getSelectedItem());
-            }
-        });
-        comboBox.setSelectedItem(getGamePlayersSetting());
-    }
-
-    private void setGamePlayers(GamePlayers p) {
-        boolean isPlayerOneHuman = (p == GamePlayers.HUMAN_VS_AI) || (p == GamePlayers.HUMAN_VS_HUMAN);
-        boolean isPlayerTwoHuman = (p == GamePlayers.HUMAN_VS_HUMAN);
-        view.getDcLeft().setIsAiDeck(isPlayerOneHuman ? false : true);
-        view.getDcRight().setIsAiDeck(isPlayerTwoHuman ? false : true);
-        prefs.setPref(FPref.CONSTRUCTED_GAMEPLAYERS, p.name());
-        prefs.save();
-    }
-
-    private GamePlayers getGamePlayersSetting() {
-        try {
-            GamePlayers players = GamePlayers.valueOf(prefs.getPref(FPref.CONSTRUCTED_GAMEPLAYERS));
-            return players;
-        } catch (IllegalArgumentException e) {
-            return GamePlayers.HUMAN_VS_AI;
-        }
     }
 
 }
