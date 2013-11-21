@@ -276,7 +276,7 @@ public class FModel {
     }
 
 
-    /** @return {@link forge.util.storage.IStorageView}<{@link forge.CardBlock}> */
+    /** @return {@link forge.util.storage.IStorage}<{@link forge.card.CardBlock}> */
     public IStorage<CardBlock> getBlocks() {
         return blocks;
     }    
@@ -296,7 +296,7 @@ public class FModel {
     /**
      * Returns all player's decks for constructed, sealed and whatever.
      * 
-     * @return {@link forge.decks.CardCollections}
+     * @return {@link forge.deck.CardCollections}
      */
     public final CardCollections getDecks() {
         return this.decks;
@@ -330,7 +330,7 @@ public class FModel {
         this.gauntletData = data0;
     }
 
-    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.CardBlock}> */
+    /** @return {@link forge.util.storage.IStorage}<{@link forge.card.CardBlock}> */
     public IStorage<CardBlock> getFantasyBlocks() {
         return fantasyBlocks;
     }
