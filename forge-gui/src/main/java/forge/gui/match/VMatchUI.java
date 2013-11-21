@@ -40,8 +40,12 @@ public enum VMatchUI implements IVTopLevelUI {
     private final CMatchUI control = null;
 
     private VMatchUI() {
-        // Create empty docs for all slots
-        for (int i = 0; i < 8; i++) EDocID.Fields[i].setDoc(new VEmptyDoc(EDocID.Fields[i]));
+       createEmptyDocs();       
+    }
+    
+    private void createEmptyDocs() {
+    	 // Create empty docs for all slots
+    	for (int i = 0; i < 8; i++) EDocID.Fields[i].setDoc(new VEmptyDoc(EDocID.Fields[i]));
         for (int i = 0; i < 8; i++) EDocID.Commands[i].setDoc(new VEmptyDoc(EDocID.Commands[i]));
         for (int i = 0; i < 8; i++) EDocID.Hands[i].setDoc(new VEmptyDoc(EDocID.Hands[i]));
     }
@@ -73,6 +77,9 @@ public enum VMatchUI implements IVTopLevelUI {
                 VMessage.SINGLETON_INSTANCE.getParentCell().addDoc(VDev.SINGLETON_INSTANCE);
             }
         }
+        
+        //Clear previous match views if any
+        createEmptyDocs();
 
         // Add extra players alternatively to existing user/AI field panels.
         for (int i = 2; i < lstFields.size(); i++) {
