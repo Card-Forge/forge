@@ -5,6 +5,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -68,6 +69,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
     private final FList<Object> archenemySchemes = new FList<Object>();
     private final List<Deck> allSchemeDecks = new ArrayList<Deck>();
     private final JCheckBox cbUseDefaultSchemes = new FCheckBox("Use default scheme decks if possible.");
+    private final List<JRadioButton> playerIsAIRadios = new ArrayList<JRadioButton>();
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
     private int currentNumTabsShown = 8;
 
@@ -125,6 +127,19 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
             tempChooser.initialize();
 
             deckChoosers.add(tempChooser);
+            
+            ButtonGroup tempBtnGroup = new ButtonGroup();
+            FRadioButton tmpAI = new FRadioButton();
+            tmpAI.setText("AI");
+            tmpAI.setSelected(i != 0);
+            FRadioButton tmpHuman = new FRadioButton();
+            tmpHuman.setText("Human");
+            tmpHuman.setSelected(i == 0);
+            tempPanel.add(tmpAI);
+            tempPanel.add(tmpHuman,"wrap");
+            tempBtnGroup.add(tmpAI);
+            tempBtnGroup.add(tmpHuman);
+            playerIsAIRadios.add(tmpAI);
 
             tempPanel.add(tempChooser, "span 1 2, w 55%!, gap 10px 10px 0px 10px, growy, pushy, wrap");
             if (i == 0) {
@@ -154,6 +169,10 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
 
         // ensure we don't fire the selected event before the tabPane is populated
         fieldRadios.get(fieldRadios.size() - 1).setSelected(true);
+    }
+    
+    public boolean isPlayerAI(int playernum) {
+    	return playerIsAIRadios.get(playernum).isSelected();
     }
 
     private void changeTabs(int toShow) {

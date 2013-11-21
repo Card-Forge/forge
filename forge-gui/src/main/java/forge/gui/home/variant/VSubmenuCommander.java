@@ -61,6 +61,7 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
     private final FTabbedPane tabPane = new FTabbedPane();
     private final List<FPanel> playerPanels = new ArrayList<FPanel>();
 
+    private final List<JRadioButton> playerIsAIRadios = new ArrayList<JRadioButton>();
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
     private final ButtonGroup grpFields = new ButtonGroup();
     private int currentNumTabsShown = 8;
@@ -135,10 +136,23 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
 
             deckLists.add(tempList);
             
+            ButtonGroup tempBtnGroup = new ButtonGroup();
+            FRadioButton tmpAI = new FRadioButton();
+            tmpAI.setText("AI");
+            tmpAI.setSelected(i != 0);
+            FRadioButton tmpHuman = new FRadioButton();
+            tmpHuman.setText("Human");
+            tmpHuman.setSelected(i == 0);
+            tempPanel.add(tmpAI);
+            tempPanel.add(tmpHuman,"wrap");
+            tempBtnGroup.add(tmpAI);
+            tempBtnGroup.add(tmpHuman);
+            playerIsAIRadios.add(tmpAI);
+            
             tempPanel.add(new FLabel.Builder().text("Select Deck:").build(), "gap 0px 0px 10px 10px, flowy");
 
             JScrollPane scrDecks = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            tempPanel.add(scrDecks, "h 90%, gap 0px 10px 0px 10px, growy, pushy, wrap");
+            tempPanel.add(scrDecks, "w 55%!, h 90%, gap 0px 10px 0px 10px, growy, pushy, wrap");
 
             playerPanels.add(tempPanel);
             if (i == 0) {
@@ -150,6 +164,10 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
 
         pnlStart.setOpaque(false);
         pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");
+    }
+    
+    public boolean isPlayerAI(int playernum) {
+    	return playerIsAIRadios.get(playernum).isSelected();
     }
 
     private void changeTabs(int toShow) {

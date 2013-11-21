@@ -152,7 +152,7 @@ public enum CSubmenuCommander implements ICDoc {
         Lobby lobby = FServer.instance.getLobby();
         List<RegisteredPlayer> helper = new ArrayList<RegisteredPlayer>();
         for (int i = 0; i < view.getNumPlayers(); i++) {
-            LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
+            LobbyPlayer player = view.isPlayerAI(i) ? lobby.getAiPlayer() : lobby.getGuiPlayer();
             helper.add(RegisteredPlayer.forCommander(playerDecks.get(i)).setPlayer(player));
         }
         final Match mc = new Match(GameType.Commander, helper);

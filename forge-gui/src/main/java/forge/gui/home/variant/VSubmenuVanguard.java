@@ -79,6 +79,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     private final List<FList<Object>> avatarLists = new ArrayList<FList<Object>>();
 
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
+    private final List<JRadioButton> playerIsAIRadios = new ArrayList<JRadioButton>();
     private final ButtonGroup grpFields = new ButtonGroup();
     private final FCheckBox cbDefaultAvatars = new FCheckBox("Use deck-default avatars if possible.");
     private final List<CardDetailPanel> cdpAvatarDetails = new ArrayList<CardDetailPanel>();
@@ -145,6 +146,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         FDeckChooser tempChooser;
         FList<Object> tempList;
         CardDetailPanel tempDetail;
+        ButtonGroup tempBtnGroup;
 
         //Settings panel
         FPanel settingsPanel = new FPanel();
@@ -183,6 +185,19 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
 
             deckChoosers.add(tempChooser);
             avatarLists.add(tempList);
+            
+            tempBtnGroup = new ButtonGroup();
+            FRadioButton tmpAI = new FRadioButton();
+            tmpAI.setText("AI");
+            tmpAI.setSelected(i != 0);
+            FRadioButton tmpHuman = new FRadioButton();
+            tmpHuman.setText("Human");
+            tmpHuman.setSelected(i == 0);
+            tempPanel.add(tmpAI);
+            tempPanel.add(tmpHuman,"wrap");
+            tempBtnGroup.add(tmpAI);
+            tempBtnGroup.add(tmpHuman);
+            playerIsAIRadios.add(tmpAI);
 
             tempPanel.add(tempChooser, "span 1 2, w 55%!, gap 10px 10px 0px 10px, growy, pushy, wrap");
 
@@ -210,6 +225,10 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");
         pnlStart.add(cbArtifacts, strCheckboxConstraints);
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
+    }
+    
+    public boolean isPlayerAI(int playernum) {
+    	return playerIsAIRadios.get(playernum).isSelected();
     }
 
     private void changeTabs(int toShow) {

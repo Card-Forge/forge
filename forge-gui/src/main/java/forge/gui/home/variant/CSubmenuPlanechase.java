@@ -215,7 +215,7 @@ public enum CSubmenuPlanechase implements ICDoc {
 
                 GuiDialog.message("Player " + (i+1) + " will use a default planar deck.");
             }
-            LobbyPlayer player = i == 0 ? lobby.getGuiPlayer() : lobby.getAiPlayer();
+            LobbyPlayer player = view.isPlayerAI(i) ? lobby.getAiPlayer() : lobby.getGuiPlayer();
             helper.add(RegisteredPlayer.forPlanechase(playerDecks.get(i), planes).setPlayer(player));
         }
 

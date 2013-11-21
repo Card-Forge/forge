@@ -67,6 +67,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
     private final List<FList<Object>> planarDeckLists = new ArrayList<FList<Object>>();
     private final List<Deck> allPlanarDecks = new ArrayList<Deck>();
     private final JCheckBox cbUseDefaultPlanes = new FCheckBox("Use default planar decks if possible.");
+    private final List<JRadioButton> playerIsAIRadios = new ArrayList<JRadioButton>();
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
     private final ButtonGroup grpFields = new ButtonGroup();
     private int currentNumTabsShown = 8;
@@ -97,6 +98,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
         FPanel tempPanel;
         FDeckChooser tempChooser;
         FList<Object> tempPlanarDeckList;
+        ButtonGroup tempBtnGroup;
 
         //Settings panel
         FPanel settingsPanel = new FPanel();
@@ -128,6 +130,19 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
             tempChooser.initialize();
 
             deckChoosers.add(tempChooser);
+            
+            tempBtnGroup = new ButtonGroup();
+            FRadioButton tmpAI = new FRadioButton();
+            tmpAI.setText("AI");
+            tmpAI.setSelected(i != 0);
+            FRadioButton tmpHuman = new FRadioButton();
+            tmpHuman.setText("Human");
+            tmpHuman.setSelected(i == 0);
+            tempPanel.add(tmpAI);
+            tempPanel.add(tmpHuman,"wrap");
+            tempBtnGroup.add(tmpAI);
+            tempBtnGroup.add(tmpHuman);
+            playerIsAIRadios.add(tmpAI);
 
             tempPanel.add(tempChooser, "span 1 2, w 55%!, gap 10px 10px 0px 10px, growy, pushy, wrap");
 
@@ -155,6 +170,10 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
         pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");
         pnlStart.add(cbArtifacts, strCheckboxConstraints);
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
+    }
+    
+    public boolean isPlayerAI(int playernum) {
+    	return playerIsAIRadios.get(playernum).isSelected();
     }
 
     private void changeTabs(int toShow) {
