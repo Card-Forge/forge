@@ -36,7 +36,6 @@ forge-core/src/main/java/forge/card/CardSplitType.java -text
 forge-core/src/main/java/forge/card/CardType.java -text
 forge-core/src/main/java/forge/card/ColorSet.java -text
 forge-core/src/main/java/forge/card/DeckHints.java -text
-forge-core/src/main/java/forge/card/FormatCollection.java -text
 forge-core/src/main/java/forge/card/ICardCharacteristics.java -text
 forge-core/src/main/java/forge/card/ICardDatabase.java -text
 forge-core/src/main/java/forge/card/ICardFace.java -text
