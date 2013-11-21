@@ -12,12 +12,13 @@ import com.google.common.collect.Iterables;
 
 import forge.StaticData;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.util.ItemPoolView;
 
 
 public class UnOpenedProduct implements IUnOpenedProduct {
 
-    private final SealedProductTemplate tpl;
+    private final SealedProduct.Template tpl;
     private final Map<String, PrintSheet> sheets;
     private boolean poolLimited = false; // if true after successful generation cards are removed from printsheets. 
 
@@ -31,23 +32,23 @@ public class UnOpenedProduct implements IUnOpenedProduct {
     
 
     // Means to select from all unique cards (from base game, ie. no schemes or avatars)
-    public UnOpenedProduct(SealedProductTemplate template) {
+    public UnOpenedProduct(SealedProduct.Template template) {
         tpl = template;
         sheets = null;
     }
 
     // Invoke this constructor only if you are sure that the pool is not equal to deafult carddb
-    public UnOpenedProduct(SealedProductTemplate template, ItemPoolView<PaperCard> pool) {
+    public UnOpenedProduct(SealedProduct.Template template, ItemPoolView<PaperCard> pool) {
         this(template, pool.toFlatList());
     }
 
-    public UnOpenedProduct(SealedProductTemplate template, Iterable<PaperCard> cards) {
+    public UnOpenedProduct(SealedProduct.Template template, Iterable<PaperCard> cards) {
         tpl = template;
         sheets = new TreeMap<String, PrintSheet>();
         prebuildSheets(cards);
     }
 
-    public UnOpenedProduct(SealedProductTemplate sealedProductTemplate, Predicate<PaperCard> filterPrinted) {
+    public UnOpenedProduct(SealedProduct.Template sealedProductTemplate, Predicate<PaperCard> filterPrinted) {
         this(sealedProductTemplate, Iterables.filter(StaticData.instance().getCommonCards().getAllCards(), filterPrinted));
     }
 

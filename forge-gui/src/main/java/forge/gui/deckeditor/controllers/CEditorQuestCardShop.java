@@ -58,7 +58,7 @@ import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.item.OpenablePack;
+import forge.item.SealedProduct;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.quest.QuestController;
@@ -309,9 +309,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             this.getDeckManager().addItem(card, qty);
             this.questData.getCards().buyCard(card, qty, value);
 
-        } else if (item instanceof OpenablePack) {
+        } else if (item instanceof SealedProduct) {
             for (int i = 0; qty > i; ++i) {
-                OpenablePack booster = null;
+                SealedProduct booster = null;
                 if (item instanceof BoosterPack) {
                     booster = (BoosterPack) ((BoosterPack) item).clone();
                 } else if (item instanceof TournamentPack) {

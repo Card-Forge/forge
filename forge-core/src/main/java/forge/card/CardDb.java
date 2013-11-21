@@ -54,10 +54,10 @@ public final class CardDb implements ICardDatabase {
     private final List<PaperCard> allCards = new ArrayList<PaperCard>();
     private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards); 
     private final Collection<PaperCard> roUniqueCards = Collections.unmodifiableCollection(uniqueCardsByName.values());
-    private final EditionCollection editions;
+    private final CardEdition.Collection editions;
     
 
-    public CardDb(Map<String, CardRules> rules, EditionCollection editions0, boolean logMissingCards) {
+    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, boolean logMissingCards) {
         this.rulesByName = rules;
         this.editions = editions0;
         List<String> missingCards = new ArrayList<String>();

@@ -46,7 +46,7 @@ public final class CardManager extends ItemManager<PaperCard> {
     @Override
     protected void buildFilterMenu(JPopupMenu menu) {        
         JMenu fmt = new JMenu("Format");
-        for (final GameFormat f : Singletons.getMagicDb().getFormats()) {
+        for (final GameFormat f : Singletons.getModel().getFormats()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
                 public void run() {

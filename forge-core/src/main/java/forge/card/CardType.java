@@ -34,20 +34,64 @@ import org.apache.commons.lang3.StringUtils;
  */
 
 public final class CardType implements Comparable<CardType> {
+    
+    public enum CoreType {
+
+        /** The Artifact. */
+        Artifact,
+        /** The Creature. */
+        Creature,
+        /** The Enchantment. */
+        Enchantment,
+        /** The Instant. */
+        Instant,
+        /** The Land. */
+        Land,
+        /** The Plane. */
+        Plane,
+        /** The Planeswalker. */
+        Planeswalker,
+        /** The Scheme. */
+        Scheme,
+        /** The Sorcery. */
+        Sorcery,
+        /** The Tribal. */
+        Tribal,
+        /** The Vanguard. */
+        Vanguard,
+        /** The Phenomenon. */
+        Phenomenon
+    }
+
+    public enum SuperType {
+
+        /** The Basic. */
+        Basic,
+        /** The Legendary. */
+        Legendary,
+        /** The Snow. */
+        Snow,
+        /** The Ongoing. */
+        Ongoing,
+        /** The World. */
+        World
+    }
+
+    
     private final List<String> subType = new ArrayList<String>();
-    private final EnumSet<CardCoreType> coreType = EnumSet.noneOf(CardCoreType.class);
-    private final EnumSet<CardSuperType> superType = EnumSet.noneOf(CardSuperType.class);
+    private final EnumSet<CardType.CoreType> coreType = EnumSet.noneOf(CardType.CoreType.class);
+    private final EnumSet<CardType.SuperType> superType = EnumSet.noneOf(CardType.SuperType.class);
     private String calculatedType = null; // since obj is immutable, this is
                                           // calc'd once
 
     // This will be useful for faster parses
-    private static HashMap<String, CardCoreType> stringToCoreType = new HashMap<String, CardCoreType>();
-    private static HashMap<String, CardSuperType> stringToSuperType = new HashMap<String, CardSuperType>();
+    private static HashMap<String, CardType.CoreType> stringToCoreType = new HashMap<String, CardType.CoreType>();
+    private static HashMap<String, CardType.SuperType> stringToSuperType = new HashMap<String, CardType.SuperType>();
     static {
-        for (final CardSuperType st : CardSuperType.values()) {
+        for (final CardType.SuperType st : CardType.SuperType.values()) {
             CardType.stringToSuperType.put(st.name(), st);
         }
-        for (final CardCoreType ct : CardCoreType.values()) {
+        for (final CardType.CoreType ct : CardType.CoreType.values()) {
             CardType.stringToCoreType.put(ct.name(), ct);
         }
     }
@@ -104,13 +148,13 @@ public final class CardType implements Comparable<CardType> {
             return;
         }
 
-        final CardCoreType ct = CardType.stringToCoreType.get(type);
+        final CardType.CoreType ct = CardType.stringToCoreType.get(type);
         if (ct != null) {
             this.coreType.add(ct);
             return;
         }
 
-        final CardSuperType st = CardType.stringToSuperType.get(type);
+        final CardType.SuperType st = CardType.stringToSuperType.get(type);
         if (st != null) {
             this.superType.add(st);
             return;
@@ -124,56 +168,56 @@ public final class CardType implements Comparable<CardType> {
         return this.subType.contains(operand);
     }
 
-    public boolean typeContains(final CardCoreType operand) {
+    public boolean typeContains(final CardType.CoreType operand) {
         return this.coreType.contains(operand);
     }
 
-    public boolean superTypeContains(final CardSuperType operand) {
+    public boolean superTypeContains(final CardType.SuperType operand) {
         return this.superType.contains(operand);
     }
 
     public boolean isCreature() {
-        return this.coreType.contains(CardCoreType.Creature);
+        return this.coreType.contains(CardType.CoreType.Creature);
     }
 
     public boolean isPlaneswalker() {
-        return this.coreType.contains(CardCoreType.Planeswalker);
+        return this.coreType.contains(CardType.CoreType.Planeswalker);
     }
 
     public boolean isLand() {
-        return this.coreType.contains(CardCoreType.Land);
+        return this.coreType.contains(CardType.CoreType.Land);
     }
 
     public boolean isArtifact() {
-        return this.coreType.contains(CardCoreType.Artifact);
+        return this.coreType.contains(CardType.CoreType.Artifact);
     }
 
     public boolean isInstant() {
-        return this.coreType.contains(CardCoreType.Instant);
+        return this.coreType.contains(CardType.CoreType.Instant);
     }
 
     public boolean isSorcery() {
-        return this.coreType.contains(CardCoreType.Sorcery);
+        return this.coreType.contains(CardType.CoreType.Sorcery);
     }
 
     public boolean isVanguard() {
-        return this.coreType.contains(CardCoreType.Vanguard);
+        return this.coreType.contains(CardType.CoreType.Vanguard);
     }
 
     public boolean isScheme() {
-        return this.coreType.contains(CardCoreType.Scheme);
+        return this.coreType.contains(CardType.CoreType.Scheme);
     }
 
     public boolean isEnchantment() {
-        return this.coreType.contains(CardCoreType.Enchantment);
+        return this.coreType.contains(CardType.CoreType.Enchantment);
     }
 
     public boolean isBasic() {
-        return this.superType.contains(CardSuperType.Basic);
+        return this.superType.contains(CardType.SuperType.Basic);
     }
 
     public boolean isLegendary() {
-        return this.superType.contains(CardSuperType.Legendary);
+        return this.superType.contains(CardType.SuperType.Legendary);
     }
 
     public boolean isBasicLand() {
@@ -198,10 +242,10 @@ public final class CardType implements Comparable<CardType> {
 
     public List<String> getTypesBeforeDash() {
         final ArrayList<String> types = new ArrayList<String>();
-        for (final CardSuperType st : this.superType) {
+        for (final CardType.SuperType st : this.superType) {
             types.add(st.name());
         }
-        for (final CardCoreType ct : this.coreType) {
+        for (final CardType.CoreType ct : this.coreType) {
             types.add(ct.name());
         }
         return types;
@@ -227,11 +271,11 @@ public final class CardType implements Comparable<CardType> {
     }
 
     public boolean isPlane() {
-        return this.coreType.contains(CardCoreType.Plane);
+        return this.coreType.contains(CardType.CoreType.Plane);
     }
     
     public boolean isPhenomenon() {
-        return this.coreType.contains(CardCoreType.Phenomenon);
+        return this.coreType.contains(CardType.CoreType.Phenomenon);
     }
 
     

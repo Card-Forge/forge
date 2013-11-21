@@ -30,6 +30,7 @@ import forge.Singletons;
 import forge.card.CardBlock;
 import forge.card.CardType;
 import forge.error.ExceptionHandler;
+import forge.game.GameFormat;
 import forge.game.ai.AiProfileUtil;
 import forge.game.limited.GauntletMini;
 import forge.gauntlet.GauntletData;
@@ -73,7 +74,8 @@ public class FModel {
     private final IStorage<CardBlock> blocks;
     private final IStorage<CardBlock> fantasyBlocks;
     private final IStorage<QuestWorld> worlds;
-
+    private final GameFormat.Collection formats;
+    
 
     
     private static FModel instance = null;
@@ -131,6 +133,8 @@ public class FModel {
         } catch (final Exception exn) {
             throw new RuntimeException(exn);
         }
+        
+        this.formats = new GameFormat.Collection(new GameFormat.Reader(new File("res/blockdata", "formats.txt")));
 
         this.blocks = new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader("res/blockdata/blocks.txt", Singletons.getMagicDb().getEditions()));
         this.questPreferences = new QuestPreferences();
@@ -309,7 +313,9 @@ public class FModel {
     public final IStorage<QuestWorld> getWorlds() {
         return this.worlds;
     }
-
+    public final GameFormat.Collection getFormats() {
+        return this.formats;
+    }
     /**
      * Finalizer, generally should be avoided, but here closes the log file
      * stream and resets the system output streams.

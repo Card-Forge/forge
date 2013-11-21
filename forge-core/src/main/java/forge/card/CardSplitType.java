@@ -1,24 +1,26 @@
 package forge.card;
 
+import forge.card.CardFace.FaceSelectionMethod;
+
 public enum CardSplitType
 {
-    None(AggregationMethod.USE_PRIMARY_FACE, null),
-    Transform(AggregationMethod.USE_ACTIVE_FACE, CardCharacteristicName.Transformed),
-    Split(AggregationMethod.AGGREGATE, CardCharacteristicName.RightSplit),
-    Flip(AggregationMethod.USE_PRIMARY_FACE, CardCharacteristicName.Flipped),
+    None(FaceSelectionMethod.USE_PRIMARY_FACE, null),
+    Transform(FaceSelectionMethod.USE_ACTIVE_FACE, CardCharacteristicName.Transformed),
+    Split(FaceSelectionMethod.COMBINE, CardCharacteristicName.RightSplit),
+    Flip(FaceSelectionMethod.USE_PRIMARY_FACE, CardCharacteristicName.Flipped),
     // used by 12 licid creatures to switch type into enchantment aura
-    Licid(AggregationMethod.USE_PRIMARY_FACE, CardCharacteristicName.Licid); 
+    Licid(FaceSelectionMethod.USE_PRIMARY_FACE, CardCharacteristicName.Licid); 
 
-    private CardSplitType(AggregationMethod calcMode, CardCharacteristicName stateName) {
+    private CardSplitType(FaceSelectionMethod calcMode, CardCharacteristicName stateName) {
         method = calcMode;
         this.changedStateName = stateName;
     }
 
-    public AggregationMethod getAggregationMethod() {
+    public FaceSelectionMethod getAggregationMethod() {
         return method;
     }
 
-    private final AggregationMethod method;
+    private final FaceSelectionMethod method;
     private final CardCharacteristicName changedStateName;
     
     public static CardSplitType smartValueOf(String text) {

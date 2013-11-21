@@ -26,7 +26,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.Range;
 
 import forge.StaticData;
-import forge.card.CardCoreType;
+import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
@@ -178,7 +178,7 @@ public enum DeckFormat {
                 int phenoms = 0;
                 for (Entry<PaperCard, Integer> cp : planes) {
 
-                    if (cp.getKey().getRules().getType().typeContains(CardCoreType.Phenomenon)) {
+                    if (cp.getKey().getRules().getType().typeContains(CardType.CoreType.Phenomenon)) {
                         phenoms++;
                     }
                     if (cp.getValue() > 1) {

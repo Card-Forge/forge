@@ -34,11 +34,11 @@ import com.google.common.collect.Lists;
 
 import forge.Singletons;
 import forge.card.CardEdition;
-import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
 import forge.gui.CardListViewer;
 import forge.gui.GuiChoose;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.quest.io.ReadPriceList;
 import forge.util.storage.IStorage;
 
@@ -182,8 +182,8 @@ public class QuestUtilUnlockSets {
      */
     public static void doUnlock(QuestController qData, final CardEdition unlockedSet) {
 
-        IStorage<SealedProductTemplate> starters = Singletons.getMagicDb().getTournamentPacks();
-        IStorage<SealedProductTemplate> boosters = Singletons.getMagicDb().getBoosters();
+        IStorage<SealedProduct.Template> starters = Singletons.getMagicDb().getTournamentPacks();
+        IStorage<SealedProduct.Template> boosters = Singletons.getMagicDb().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
         List<PaperCard> cardsWon = new ArrayList<PaperCard>();

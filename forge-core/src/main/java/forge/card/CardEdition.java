@@ -22,17 +22,25 @@ import java.io.FilenameFilter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
 
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+
+import forge.item.SealedProduct;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.IItemReader;
+import forge.util.storage.StorageBase;
+import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
 
 
@@ -98,7 +106,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     
     
     private int boosterArts = 1;
-    private SealedProductTemplate boosterTpl = null;
+    private SealedProduct.Template boosterTpl = null;
 
     private CardEdition(CardInSet[] cards) {
         this.cards = cards;
@@ -202,7 +210,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         return boosterArts;
     }
 
-    public SealedProductTemplate getBoosterTemplate() {
+    public SealedProduct.Template getBoosterTemplate() {
         return boosterTpl;
     }
 
@@ -247,7 +255,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             
             res.boosterArts = section.getInt("BoosterCovers", 1);
             String boosterDesc = section.get("Booster");
-            res.boosterTpl = boosterDesc == null ? null : new SealedProductTemplate(res.code, SealedProductTemplate.Reader.parseSlots(boosterDesc));
+            res.boosterTpl = boosterDesc == null ? null : new SealedProduct.Template(res.code, SealedProduct.Template.Reader.parseSlots(boosterDesc));
             
             res.alias = section.get("alias");
             res.whiteBorder = "white".equalsIgnoreCase(section.get("border"));
@@ -299,4 +307,100 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         };
     }
 
+    public static class Collection extends StorageBase<CardEdition> {
+
+        private final Map<String, CardEdition> aliasToEdition = new TreeMap<String, CardEdition>(String.CASE_INSENSITIVE_ORDER);
+
+        public Collection(IItemReader<CardEdition> reader) {
+            super("Card editions", reader);
+
+            for (CardEdition ee : this) {
+                String alias = ee.getAlias();
+                if (null != alias) {
+                    aliasToEdition.put(alias, ee);
+                }
+                aliasToEdition.put(ee.getCode2(), ee);
+            }
+        }
+
+        /**
+         * Gets a sets by code.  It will search first by three letter codes, then by aliases and two-letter codes.
+         * 
+         * @param code
+         *            the code
+         * @return the sets the by code
+         */
+        @Override
+        public CardEdition get(final String code) {
+            CardEdition baseResult = super.get(code);
+            return baseResult == null ? aliasToEdition.get(code) : baseResult;
+        }
+        
+        
+        public Iterable<CardEdition> getOrderedEditions() {
+            List<CardEdition> res = Lists.newArrayList(this);
+            Collections.sort(res);
+            Collections.reverse(res);
+            return res;
+        }
+
+        /**
+         * Gets the sets by code or throw.
+         * 
+         * @param code
+         *            the code
+         * @return the sets the by code or throw
+         */
+        public CardEdition getEditionByCodeOrThrow(final String code) {
+            final CardEdition set = this.get(code);
+            if (null == set) {
+                throw new RuntimeException(String.format("Edition with code '%s' not found", code));
+            }
+            return set;
+        }
+
+        // used by image generating code
+        /**
+         * Gets the code2 by code.
+         * 
+         * @param code
+         *            the code
+         * @return the code2 by code
+         */
+        public String getCode2ByCode(final String code) {
+            final CardEdition set = this.get(code);
+            return set == null ? "" : set.getCode2();
+        }
+
+        public final Function<String, CardEdition> FN_EDITION_BY_CODE = new Function<String, CardEdition>() {
+            @Override
+            public CardEdition apply(String code) {
+                return Collection.this.get(code);
+            };
+        };
+
+        /**
+         * TODO: Write javadoc for this method.
+         * @return
+         */
+        public IItemReader<SealedProduct.Template> getBoosterGenerator() {
+            // TODO Auto-generated method stub
+            return new StorageReaderBase<SealedProduct.Template>(null) {
+                
+                @Override
+                public Map<String, SealedProduct.Template> readAll() {
+                    Map<String, SealedProduct.Template> map = new TreeMap<String, SealedProduct.Template>(String.CASE_INSENSITIVE_ORDER);
+                    for(CardEdition ce : Collection.this) {
+                         map.put(ce.getCode(), ce.getBoosterTemplate());
+                    }
+                    return map;
+                }
+                
+                @Override
+                public String getItemKey(SealedProduct.Template item) {
+                    return item.getEdition();
+                }
+            };
+        }
+    }
 }

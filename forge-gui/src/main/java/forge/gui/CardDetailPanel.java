@@ -54,7 +54,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FHtmlViewer;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
-import forge.item.OpenablePack;
+import forge.item.SealedProduct;
 import forge.item.PreconDeck;
 import forge.util.Lang;
 
@@ -159,8 +159,8 @@ public class CardDetailPanel extends FPanel {
     }
     
     public String getItemDescription(InventoryItemFromSet i) {
-        if( i instanceof OpenablePack )
-            return ((OpenablePack)i).getDescription();
+        if( i instanceof SealedProduct )
+            return ((SealedProduct)i).getDescription();
         if( i instanceof PreconDeck)
             return ((PreconDeck) i).getDescription();
         return i.getName(); 

@@ -30,7 +30,6 @@ import com.google.common.base.Predicates;
 import forge.Command;
 import forge.Singletons;
 import forge.card.CardEdition;
-import forge.card.EditionCollection;
 import forge.game.GameFormat;
 import forge.gui.GuiUtils;
 import forge.gui.workshop.views.VWorkshopCatalog;
@@ -174,7 +173,7 @@ public enum CWorkshopCatalog implements ICDoc {
                     }
                 }, canSearch());
                 JMenu fmt = new JMenu("Format");
-                for (final GameFormat f : Singletons.getMagicDb().getFormats()) {
+                for (final GameFormat f : Singletons.getModel().getFormats()) {
                     GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                         @Override
                         public void run() {
@@ -490,7 +489,7 @@ public enum CWorkshopCatalog implements ICDoc {
     }
     
     private Pair<FLabel, Predicate<PaperCard>> buildFormatRestriction(String displayName, GameFormat format, boolean allowReprints) {
-        EditionCollection editions = Singletons.getMagicDb().getEditions();
+        CardEdition.Collection editions = Singletons.getMagicDb().getEditions();
         StringBuilder tooltip = new StringBuilder("<html>Sets:");
         
         int lastLen = 0;

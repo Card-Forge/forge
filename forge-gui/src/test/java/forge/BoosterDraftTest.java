@@ -5,10 +5,10 @@ import java.util.List;
 import org.testng.annotations.Test;
 
 import forge.card.BoosterGenerator;
-import forge.card.SealedProductTemplate;
 import forge.deck.Deck;
 import forge.game.limited.IBoosterDraft;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.util.ItemPool;
 import forge.util.ItemPoolView;
 
@@ -49,7 +49,7 @@ public class BoosterDraftTest implements IBoosterDraft {
     @Override
     public ItemPoolView<PaperCard> nextChoice() {
         this.n--;
-        SealedProductTemplate booster = Singletons.getMagicDb().getBoosters().get("M11");
+        SealedProduct.Template booster = Singletons.getMagicDb().getBoosters().get("M11");
         return ItemPool.createFrom(BoosterGenerator.getBoosterPack(booster), PaperCard.class);
     }
 

@@ -8,12 +8,9 @@ import java.util.TreeMap;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
-import forge.card.EditionCollection;
-import forge.card.FatPackTemplate;
-import forge.card.FormatCollection;
 import forge.card.PrintSheet;
-import forge.card.SealedProductTemplate;
-import forge.game.GameFormat;
+import forge.item.FatPack;
+import forge.item.SealedProduct;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
@@ -27,12 +24,11 @@ public class StaticData {
 
   private final CardDb commonCards;
   private final CardDb variantCards;
-  private final EditionCollection editions;
-  private final FormatCollection formats;
-  private final IStorage<SealedProductTemplate> boosters;
-  private final IStorage<SealedProductTemplate> specialBoosters;
-  private final IStorage<SealedProductTemplate> tournaments;
-  private final IStorage<FatPackTemplate> fatPacks;
+  private final CardEdition.Collection editions;
+  private final IStorage<SealedProduct.Template> boosters;
+  private final IStorage<SealedProduct.Template> specialBoosters;
+  private final IStorage<SealedProduct.Template> tournaments;
+  private final IStorage<FatPack.Template> fatPacks;
   private final IStorage<PrintSheet> printSheets;
 
   private static StaticData lastInstance = null;
@@ -40,7 +36,7 @@ public class StaticData {
 
   
   public StaticData(ICardStorageReader reader, String editionFolder, String blockDataFolder) {
-      this.editions = new EditionCollection(new CardEdition.Reader(new File(editionFolder)));
+      this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
       lastInstance = this;
 
       final Map<String, CardRules> regularCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
@@ -62,12 +58,10 @@ public class StaticData {
       variantCards = new CardDb(variantsCards, editions, false);
 
 
-
-      this.formats = new FormatCollection(new GameFormat.Reader(new File(blockDataFolder, "formats.txt")));
-      this.boosters = new StorageBase<SealedProductTemplate>("Boosters", editions.getBoosterGenerator());
-      this.specialBoosters = new StorageBase<SealedProductTemplate>("Special boosters", new SealedProductTemplate.Reader(new File(blockDataFolder, "boosters-special.txt")));
-      this.tournaments = new StorageBase<SealedProductTemplate>("Starter sets", new SealedProductTemplate.Reader(new File(blockDataFolder, "starters.txt")));
-      this.fatPacks = new StorageBase<FatPackTemplate>("Fat packs", new FatPackTemplate.Reader("res/blockdata/fatpacks.txt"));
+      this.boosters = new StorageBase<SealedProduct.Template>("Boosters", editions.getBoosterGenerator());
+      this.specialBoosters = new StorageBase<SealedProduct.Template>("Special boosters", new SealedProduct.Template.Reader(new File(blockDataFolder, "boosters-special.txt")));
+      this.tournaments = new StorageBase<SealedProduct.Template>("Starter sets", new SealedProduct.Template.Reader(new File(blockDataFolder, "starters.txt")));
+      this.fatPacks = new StorageBase<FatPack.Template>("Fat packs", new FatPack.Template.Reader("res/blockdata/fatpacks.txt"));
       this.printSheets = new StorageBase<PrintSheet>("Special print runs", new PrintSheet.Reader(new File(blockDataFolder, "printsheets.txt")));
   }
   
@@ -76,30 +70,26 @@ public class StaticData {
   }
   
   
-  public final EditionCollection getEditions() {
+  public final CardEdition.Collection getEditions() {
       return this.editions;
   }
 
-  public final FormatCollection getFormats() {
-      return this.formats;
-  }
-
-  /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.FatPackTemplate}> */
-  public IStorage<FatPackTemplate> getFatPacks() {
+  /** @return {@link forge.util.storage.IStorageView}<{@link forge.item.FatPackTemplate}> */
+  public IStorage<FatPack.Template> getFatPacks() {
       return fatPacks;
   }
 
   /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
-  public final IStorage<SealedProductTemplate> getTournamentPacks() {
+  public final IStorage<SealedProduct.Template> getTournamentPacks() {
       return tournaments;
   }
 
   /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterTemplate}> */
-  public final IStorage<SealedProductTemplate> getBoosters() {
+  public final IStorage<SealedProduct.Template> getBoosters() {
       return boosters;
   }
 
-  public final IStorage<SealedProductTemplate> getSpecialBoosters() {
+  public final IStorage<SealedProduct.Template> getSpecialBoosters() {
       return specialBoosters;
   }
 

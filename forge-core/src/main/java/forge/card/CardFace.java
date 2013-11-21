@@ -22,6 +22,13 @@ import forge.card.mana.ManaCost;
  */
 final class CardFace implements ICardFace {
 
+    public enum FaceSelectionMethod { // 
+        USE_ACTIVE_FACE,
+        USE_PRIMARY_FACE,
+        COMBINE;
+    }
+
+    
     private final static List<String> emptyList = Collections.unmodifiableList(new ArrayList<String>());
     private final static Map<String, String> emptyMap = Collections.unmodifiableMap(new TreeMap<String, String>());
 

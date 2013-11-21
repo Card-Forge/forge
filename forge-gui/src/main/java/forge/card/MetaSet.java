@@ -26,6 +26,7 @@ import forge.Singletons;
 import forge.game.limited.CustomLimited;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.item.SealedProduct;
 import forge.util.FileUtil;
 
 /** 
@@ -161,7 +162,7 @@ public class MetaSet {
 
         switch(type) {
             case Full:
-                return new UnOpenedProduct(SealedProductTemplate.genericBooster);
+                return new UnOpenedProduct(SealedProduct.Template.genericBooster);
 
             case Booster:
                 return new UnOpenedProduct(Singletons.getMagicDb().getBoosters().get(data));
@@ -174,7 +175,7 @@ public class MetaSet {
 
             case JoinedSet:
                 Predicate<PaperCard> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
-                return new UnOpenedProduct(SealedProductTemplate.genericBooster, predicate);
+                return new UnOpenedProduct(SealedProduct.Template.genericBooster, predicate);
 
             case Choose: return UnOpenedMeta.choose(data);
             case Random: return UnOpenedMeta.random(data);
@@ -194,7 +195,7 @@ public class MetaSet {
                 List<String> dfData = FileUtil.readFile("res/sealed/" + data + ".sealed");
                 final CustomLimited myCube = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
 
-                SealedProductTemplate fnPick = myCube.getSealedProductTemplate();
+                SealedProduct.Template fnPick = myCube.getSealedProductTemplate();
                 return new UnOpenedProduct(fnPick, myCube.getCardPool());
                 
             default: return null;

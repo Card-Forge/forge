@@ -32,7 +32,6 @@ import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.CardRules;
-import forge.card.EditionCollection;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.properties.NewConstants;
@@ -404,7 +403,7 @@ public class ImportSourceAnalyzer {
             }
         }
 
-        EditionCollection editions = Singletons.getMagicDb().getEditions();
+        CardEdition.Collection editions = Singletons.getMagicDb().getEditions();
         String editionCode = root.getName();
         CardEdition edition = editions.get(editionCode);
         if (null == edition) {

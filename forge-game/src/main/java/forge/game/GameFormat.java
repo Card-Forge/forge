@@ -32,6 +32,8 @@ import forge.StaticData;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.FileSection;
+import forge.util.storage.StorageBase;
+import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFileSections;
 
 
@@ -211,5 +213,28 @@ public class GameFormat implements Comparable<GameFormat> {
 
             return new GameFormat(title, sets, bannedCards, 1 + idx);
         }
-    }    
+    }
+    
+    public static class Collection extends StorageBase<GameFormat> {
+        public Collection(StorageReaderBase<GameFormat> reader) {
+            super("Format collections", reader);
+        }
+
+        public GameFormat getStandard() {
+            return this.map.get("Standard");
+        }
+
+        public GameFormat getExtended() {
+            return this.map.get("Extended");
+        }
+
+        public GameFormat getModern() {
+            return this.map.get("Modern");
+        }
+
+        public GameFormat getFormat(String format) {
+            return this.map.get(format);
+        }
+
+    }
 }

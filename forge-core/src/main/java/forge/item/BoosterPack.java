@@ -22,22 +22,21 @@ import com.google.common.base.Function;
 
 import forge.StaticData;
 import forge.card.CardEdition;
-import forge.card.SealedProductTemplate;
 import forge.util.MyRandom;
 
-public class BoosterPack extends OpenablePack {
+public class BoosterPack extends SealedProduct {
     private final int artIndex;
     private final int hash;
 
     public static final Function<CardEdition, BoosterPack> FN_FROM_SET = new Function<CardEdition, BoosterPack>() {
         @Override
         public BoosterPack apply(final CardEdition arg1) {
-            SealedProductTemplate d = StaticData.instance().getBoosters().get(arg1.getCode());
+            Template d = StaticData.instance().getBoosters().get(arg1.getCode());
             return new BoosterPack(arg1.getName(), d);
         }
     };
 
-    public BoosterPack(final String name0, final SealedProductTemplate boosterData) {
+    public BoosterPack(final String name0, final Template boosterData) {
         super(name0, boosterData);
         int maxIdx = StaticData.instance().getEditions().get(boosterData.getEdition()).getCntBoosterPictures();
         artIndex = MyRandom.getRandom().nextInt(maxIdx) + 1;
@@ -58,7 +57,7 @@ public class BoosterPack extends OpenablePack {
         return new BoosterPack(name, contents);
     }
     
-    public SealedProductTemplate getBoosterData() {
+    public Template getBoosterData() {
         return contents;
     }
 

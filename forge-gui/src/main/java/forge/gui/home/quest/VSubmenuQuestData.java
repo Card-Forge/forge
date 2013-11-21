@@ -238,7 +238,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cbxPrizedCards.addItem(StartingPoolType.CustomFormat);
         cbxPrizedCards.addActionListener(alPrizesPool);
 
-        for (GameFormat gf : Singletons.getMagicDb().getFormats()) {
+        for (GameFormat gf : Singletons.getModel().getFormats()) {
             cbxFormat.addItem(gf);
             cbxPrizeFormat.addItem(gf);
         }

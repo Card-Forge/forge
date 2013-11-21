@@ -39,12 +39,12 @@ import forge.card.CardBlock;
 import forge.card.CardEdition;
 import forge.card.CardEditionPredicates;
 import forge.card.IUnOpenedProduct;
-import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
 import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.item.SealedProduct;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
@@ -86,7 +86,7 @@ public final class BoosterDraft implements IBoosterDraft {
 
         switch (draftType) {
         case Full: // Draft from all cards in Forge
-            Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProductTemplate.genericBooster);
+            Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericBooster);
 
             for (int i = 0; i < 3; i++) this.product.add(s);
             IBoosterDraft.LAND_SET_CODE[0] = CardEditionPredicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions());
@@ -158,7 +158,7 @@ public final class BoosterDraft implements IBoosterDraft {
             throw new RuntimeException("BoosterGenerator : deck not found");
         }
 
-        final SealedProductTemplate tpl = draft.getSealedProductTemplate();
+        final SealedProduct.Template tpl = draft.getSealedProductTemplate();
 
         UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
         toAdd.setLimitedPool(draft.isSingleton());

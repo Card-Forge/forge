@@ -120,7 +120,7 @@ public final class CardRules implements ICardCharacteristics {
 
     public String getName() {
         switch(splitType.getAggregationMethod()) {
-            case AGGREGATE:
+            case COMBINE:
                 return mainPart.getName() + " // " + otherPart.getName();
             default:
                 return mainPart.getName();
@@ -134,7 +134,7 @@ public final class CardRules implements ICardCharacteristics {
     @Override
     public CardType getType() {
         switch(splitType.getAggregationMethod()) {
-            case AGGREGATE: // no cards currently have different types
+            case COMBINE: // no cards currently have different types
                 return CardType.combine(mainPart.getType(), otherPart.getType());
             default:
                 return mainPart.getType();
@@ -145,7 +145,7 @@ public final class CardRules implements ICardCharacteristics {
     @Override
     public ManaCost getManaCost() {
         switch(splitType.getAggregationMethod()) {
-        case AGGREGATE:
+        case COMBINE:
             return ManaCost.combine(mainPart.getManaCost(), otherPart.getManaCost());
         default:
             return mainPart.getManaCost();
@@ -155,7 +155,7 @@ public final class CardRules implements ICardCharacteristics {
     @Override
     public ColorSet getColor() {
         switch(splitType.getAggregationMethod()) {
-        case AGGREGATE:
+        case COMBINE:
             return ColorSet.fromMask(mainPart.getColor().getColor() | otherPart.getColor().getColor()); 
         default:
             return mainPart.getColor();
@@ -171,7 +171,7 @@ public final class CardRules implements ICardCharacteristics {
     @Override
     public String getOracleText() {
         switch(splitType.getAggregationMethod()) {
-        case AGGREGATE:
+        case COMBINE:
             return mainPart.getOracleText() + "\r\n\r\n" + otherPart.getOracleText(); 
         default:
             return mainPart.getOracleText();

@@ -26,10 +26,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Singletons;
 import forge.card.CardEditionPredicates;
-import forge.card.SealedProductTemplate;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.util.FileSection;
 import forge.util.ItemPool;
 import forge.util.ItemPoolView;
@@ -45,7 +45,7 @@ import forge.util.storage.IStorage;
  * @version $Id$
  */
 public class CustomLimited extends DeckBase {
-    private final SealedProductTemplate tpl;
+    private final SealedProduct.Template tpl;
     
     /**
      * TODO: Write javadoc for Constructor.
@@ -55,7 +55,7 @@ public class CustomLimited extends DeckBase {
      */
     public CustomLimited(final String name0, List<Pair<String, Integer>> slots) {
         super(name0);
-        tpl = new SealedProductTemplate(slots);
+        tpl = new SealedProduct.Template(slots);
     }
 
     private static final long serialVersionUID = 7435640939026612173L;
@@ -101,7 +101,7 @@ public class CustomLimited extends DeckBase {
                 slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
             }
         } else
-            slots = SealedProductTemplate.genericBooster.getSlots();
+            slots = SealedProduct.Template.genericBooster.getSlots();
 
         final CustomLimited cd = new CustomLimited(data.get("Name"), slots);
         cd.landSetCode = data.get("LandSetCode");
@@ -166,7 +166,7 @@ public class CustomLimited extends DeckBase {
      * TODO: Write javadoc for this method.
      * @return
      */
-    public SealedProductTemplate getSealedProductTemplate() {
+    public SealedProduct.Template getSealedProductTemplate() {
         return tpl;
     }
 

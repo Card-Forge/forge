@@ -20,7 +20,7 @@ package forge.gui.toolbox.itemmanager.table;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import forge.Singletons;
-import forge.card.EditionCollection;
+import forge.card.CardEdition;
 
 /**
  * A wrapper to show explanatory tooltips for edition set abbreviations.
@@ -32,7 +32,7 @@ public class SetCodeRenderer extends DefaultTableCellRenderer implements AlwaysS
         String setAbbrev   = getText();
         String setFullName = "Unknown set";
         
-        EditionCollection editions = Singletons.getMagicDb().getEditions();
+        CardEdition.Collection editions = Singletons.getMagicDb().getEditions();
         
         if (null != setAbbrev && editions.contains(setAbbrev)) {
             setFullName = editions.get(setAbbrev).getName();

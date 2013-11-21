@@ -37,6 +37,7 @@ import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.item.SealedProduct;
 import forge.util.TextUtil;
 
 /**
@@ -57,7 +58,7 @@ public class BoosterGenerator {
         return cachedSheets.get(key);
     }
 
-    public static final List<PaperCard> getBoosterPack(SealedProductTemplate booster) {
+    public static final List<PaperCard> getBoosterPack(SealedProduct.Template booster) {
         List<PaperCard> result = new ArrayList<PaperCard>();
         for(Pair<String, Integer> slot : booster.getSlots()) {
             String slotType = slot.getLeft(); // add expansion symbol here?

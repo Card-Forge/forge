@@ -170,7 +170,7 @@ public final class CardRulesPredicates {
      */
     public static Predicate<CardRules> coreType(final boolean isEqual, final String what) {
         try {
-            return CardRulesPredicates.coreType(isEqual, Enum.valueOf(CardCoreType.class, what));
+            return CardRulesPredicates.coreType(isEqual, Enum.valueOf(CardType.CoreType.class, what));
         } catch (final Exception e) {
             return com.google.common.base.Predicates.alwaysFalse();
         }
@@ -185,7 +185,7 @@ public final class CardRulesPredicates {
      *            the type
      * @return the predicate
      */
-    public static Predicate<CardRules> coreType(final boolean isEqual, final CardCoreType type) {
+    public static Predicate<CardRules> coreType(final boolean isEqual, final CardType.CoreType type) {
         return new PredicateCoreType(type, isEqual);
     }
 
@@ -200,7 +200,7 @@ public final class CardRulesPredicates {
      */
     public static Predicate<CardRules> superType(final boolean isEqual, final String what) {
         try {
-            return CardRulesPredicates.superType(isEqual, Enum.valueOf(CardSuperType.class, what));
+            return CardRulesPredicates.superType(isEqual, Enum.valueOf(CardType.SuperType.class, what));
         } catch (final Exception e) {
             return com.google.common.base.Predicates.alwaysFalse();
         }
@@ -215,7 +215,7 @@ public final class CardRulesPredicates {
      *            the type
      * @return the predicate
      */
-    public static Predicate<CardRules> superType(final boolean isEqual, final CardSuperType type) {
+    public static Predicate<CardRules> superType(final boolean isEqual, final CardType.SuperType type) {
         return new PredicateSuperType(type, isEqual);
     }
 
@@ -396,7 +396,7 @@ public final class CardRulesPredicates {
     }
 
     private static class PredicateCoreType implements Predicate<CardRules> {
-        private final CardCoreType operand;
+        private final CardType.CoreType operand;
         private final boolean shouldBeEqual;
 
         @Override
@@ -407,14 +407,14 @@ public final class CardRulesPredicates {
             return this.shouldBeEqual == card.getType().typeContains(this.operand);
         }
 
-        public PredicateCoreType(final CardCoreType type, final boolean wantEqual) {
+        public PredicateCoreType(final CardType.CoreType type, final boolean wantEqual) {
             this.operand = type;
             this.shouldBeEqual = wantEqual;
         }
     }
 
     private static class PredicateSuperType implements Predicate<CardRules> {
-        private final CardSuperType operand;
+        private final CardType.SuperType operand;
         private final boolean shouldBeEqual;
 
         @Override
@@ -422,7 +422,7 @@ public final class CardRulesPredicates {
             return this.shouldBeEqual == card.getType().superTypeContains(this.operand);
         }
 
-        public PredicateSuperType(final CardSuperType type, final boolean wantEqual) {
+        public PredicateSuperType(final CardType.SuperType type, final boolean wantEqual) {
             this.operand = type;
             this.shouldBeEqual = wantEqual;
         }
@@ -448,21 +448,21 @@ public final class CardRulesPredicates {
 
         /** The Constant isCreature. */
         public static final Predicate<CardRules> IS_CREATURE = CardRulesPredicates
-                .coreType(true, CardCoreType.Creature);
+                .coreType(true, CardType.CoreType.Creature);
         
         public static final Predicate<CardRules> IS_LEGENDARY = CardRulesPredicates
-                .superType(true, CardSuperType.Legendary);
+                .superType(true, CardType.SuperType.Legendary);
 
         /** The Constant isArtifact. */
         public static final Predicate<CardRules> IS_ARTIFACT = CardRulesPredicates
-                .coreType(true, CardCoreType.Artifact);
+                .coreType(true, CardType.CoreType.Artifact);
         
         /** The Constant isEquipment. */
         public static final Predicate<CardRules> IS_EQUIPMENT = CardRulesPredicates
                 .subType("Equipment");
 
         /** The Constant isLand. */
-        public static final Predicate<CardRules> IS_LAND = CardRulesPredicates.coreType(true, CardCoreType.Land);
+        public static final Predicate<CardRules> IS_LAND = CardRulesPredicates.coreType(true, CardType.CoreType.Land);
 
         /** The Constant isBasicLand. */
         public static final Predicate<CardRules> IS_BASIC_LAND = new Predicate<CardRules>() {
@@ -480,31 +480,17 @@ public final class CardRulesPredicates {
             }
         };
 
-        /** The Constant isPlaneswalker. */
-        public static final Predicate<CardRules> IS_PLANESWALKER = CardRulesPredicates.coreType(true,
-                CardCoreType.Planeswalker);
-
-        /** The Constant isInstant. */
-        public static final Predicate<CardRules> IS_INSTANT = CardRulesPredicates.coreType(true, CardCoreType.Instant);
-
-        /** The Constant isSorcery. */
-        public static final Predicate<CardRules> IS_SORCERY = CardRulesPredicates.coreType(true, CardCoreType.Sorcery);
-
-        /** The Constant isEnchantment. */
-        public static final Predicate<CardRules> IS_ENCHANTMENT = CardRulesPredicates.coreType(true, CardCoreType.Enchantment);
-        
-        public static final Predicate<CardRules> IS_PLANE = CardRulesPredicates.coreType(true, CardCoreType.Plane);
-        public static final Predicate<CardRules> IS_PHENOMENON = CardRulesPredicates.coreType(true, CardCoreType.Phenomenon);
+        public static final Predicate<CardRules> IS_PLANESWALKER = CardRulesPredicates.coreType(true, CardType.CoreType.Planeswalker);
+        public static final Predicate<CardRules> IS_INSTANT = CardRulesPredicates.coreType(true, CardType.CoreType.Instant);
+        public static final Predicate<CardRules> IS_SORCERY = CardRulesPredicates.coreType(true, CardType.CoreType.Sorcery);
+        public static final Predicate<CardRules> IS_ENCHANTMENT = CardRulesPredicates.coreType(true, CardType.CoreType.Enchantment);
+        public static final Predicate<CardRules> IS_PLANE = CardRulesPredicates.coreType(true, CardType.CoreType.Plane);
+        public static final Predicate<CardRules> IS_PHENOMENON = CardRulesPredicates.coreType(true, CardType.CoreType.Phenomenon);
         public static final Predicate<CardRules> IS_PLANE_OR_PHENOMENON = Predicates.or(IS_PLANE, IS_PHENOMENON);
-        public static final Predicate<CardRules> IS_SCHEME = CardRulesPredicates.coreType(true, CardCoreType.Scheme);
-        public static final Predicate<CardRules> IS_VANGUARD = CardRulesPredicates.coreType(true, CardCoreType.Vanguard);
-
-        /** The Constant isNonLand. */
-        public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardCoreType.Land);
-
-        /** The Constant isNonCreatureSpell. */
-        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates.not(Predicates.or(
-                Presets.IS_CREATURE, Presets.IS_LAND));
+        public static final Predicate<CardRules> IS_SCHEME = CardRulesPredicates.coreType(true, CardType.CoreType.Scheme);
+        public static final Predicate<CardRules> IS_VANGUARD = CardRulesPredicates.coreType(true, CardType.CoreType.Vanguard);
+        public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardType.CoreType.Land);
+        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates.not(Predicates.or(Presets.IS_CREATURE, Presets.IS_LAND));
 
         /** The Constant IS_NONCREATURE_SPELL_FOR_GENERATOR. **/
         @SuppressWarnings("unchecked")

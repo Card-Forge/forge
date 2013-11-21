@@ -222,13 +222,13 @@ public final class CardBlock implements Comparable<CardBlock> {
 
     public static class Reader extends StorageReaderFile<CardBlock> {
 
-        private final EditionCollection editions;
+        private final CardEdition.Collection editions;
         /**
          * TODO: Write javadoc for Constructor.
          * @param pathname
          * @param keySelector0
          */
-        public Reader(String pathname, EditionCollection editions0) {
+        public Reader(String pathname, CardEdition.Collection editions0) {
             super(pathname, CardBlock.FN_GET_NAME);
             editions = editions0;
         }

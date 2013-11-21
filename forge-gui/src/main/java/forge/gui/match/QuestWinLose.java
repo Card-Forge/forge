@@ -34,7 +34,6 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
-import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
 import forge.game.Game;
 import forge.game.GameEndReason;
@@ -56,7 +55,7 @@ import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
-import forge.item.OpenablePack;
+import forge.item.SealedProduct;
 import forge.item.TournamentPack;
 import forge.net.FServer;
 import forge.properties.ForgePreferences.FPref;
@@ -542,7 +541,7 @@ public class QuestWinLose extends ControlWinLose {
             String preferredFormat = Singletons.getModel().getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
             GameFormat pref = null;
-            for (GameFormat f : Singletons.getMagicDb().getFormats()) {
+            for (GameFormat f : Singletons.getModel().getFormats()) {
                 formats.add(f);
                 if (f.toString().equals(preferredFormat)) {
                     pref = f;
@@ -563,7 +562,7 @@ public class QuestWinLose extends ControlWinLose {
         } else {
             final List<String> sets = new ArrayList<String>();
 
-            for (SealedProductTemplate bd : Singletons.getMagicDb().getBoosters()) {
+            for (SealedProduct.Template bd : Singletons.getMagicDb().getBoosters()) {
                 if (bd != null && qData.getFormat().isSetLegal(bd.getEdition())) {
                     sets.add(bd.getEdition());
                 }
@@ -662,7 +661,7 @@ public class QuestWinLose extends ControlWinLose {
                 cardsWon.add((PaperCard) ii);
             } else if (ii instanceof TournamentPack || ii instanceof BoosterPack) {
                 List<PaperCard> boosterCards = new ArrayList<PaperCard>();
-                OpenablePack booster = null;
+                SealedProduct booster = null;
                 if (ii instanceof BoosterPack) {
                     booster = (BoosterPack) ((BoosterPack) ii).clone();
                     boosterCards.addAll(booster.getCards());

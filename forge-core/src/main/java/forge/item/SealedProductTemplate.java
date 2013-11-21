@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package forge.card;
+package forge.item;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,6 +28,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
+import forge.card.BoosterSlots;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
 

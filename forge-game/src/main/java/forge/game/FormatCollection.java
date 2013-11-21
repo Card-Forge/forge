@@ -15,21 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.card;
+package forge.game;
 
 /**
- * The Enum CardSuperType.
+ * The Class FormatUtils.
  */
-public enum CardSuperType {
 
-    /** The Basic. */
-    Basic,
-    /** The Legendary. */
-    Legendary,
-    /** The Snow. */
-    Snow,
-    /** The Ongoing. */
-    Ongoing,
-    /** The World. */
-    World
-}
+
+/** 
+ * TODO: Write javadoc for this type.
+ *
+ */

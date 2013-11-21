@@ -34,19 +34,18 @@ import forge.card.BoosterSlots;
 import forge.card.CardEdition;
 import forge.card.CardEditionPredicates;
 import forge.card.CardRarity;
-import forge.card.FormatCollection;
 import forge.card.ICardDatabase;
 import forge.card.MagicColor;
-import forge.card.SealedProductTemplate;
 import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.GameFormat;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.FatPack;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.item.OpenablePack;
+import forge.item.SealedProduct;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
 import forge.quest.bazaar.QuestItemType;
@@ -269,7 +268,7 @@ public final class QuestUtilCards {
      * @param value
      *            the value
      */
-    public void buyPack(final OpenablePack booster, final int value) {
+    public void buyPack(final SealedProduct booster, final int value) {
         if (this.qa.getCredits() >= value) {
             this.qa.setCredits(this.qa.getCredits() - value);
             this.qa.getShopList().remove(booster);
@@ -429,7 +428,7 @@ public final class QuestUtilCards {
     /**
      * Generate cards in shop.
      */
-    private final FormatCollection formats = Singletons.getMagicDb().getFormats();
+    private final GameFormat.Collection formats = Singletons.getModel().getFormats();
     private final Predicate<CardEdition> filterExt = CardEditionPredicates.isLegalInFormat(this.formats.getExtended());
 
     /** The filter t2booster. */
@@ -524,8 +523,8 @@ public final class QuestUtilCards {
     }
 
     @SuppressWarnings("unchecked")
-    private SealedProductTemplate getShopBoosterTemplate() {
-        return new SealedProductTemplate(Lists.newArrayList(
+    private SealedProduct.Template getShopBoosterTemplate() {
+        return new SealedProduct.Template(Lists.newArrayList(
             Pair.of(BoosterSlots.COMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_COMMON)),
             Pair.of(BoosterSlots.UNCOMMON, this.qpref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON)),
             Pair.of(BoosterSlots.RARE_MYTHIC, this.qpref.getPrefInt(QPref.SHOP_SINGLES_RARE))
@@ -533,8 +532,8 @@ public final class QuestUtilCards {
     }
 
     @SuppressWarnings("unchecked")
-    private SealedProductTemplate getBoosterTemplate() {
-        return new SealedProductTemplate(Lists.newArrayList(
+    private SealedProduct.Template getBoosterTemplate() {
+        return new SealedProduct.Template(Lists.newArrayList(
             Pair.of(BoosterSlots.COMMON, this.qpref.getPrefInt(QPref.BOOSTER_COMMONS)),
             Pair.of(BoosterSlots.UNCOMMON, this.qpref.getPrefInt(QPref.BOOSTER_UNCOMMONS)),
             Pair.of(BoosterSlots.RARE_MYTHIC, this.qpref.getPrefInt(QPref.BOOSTER_RARES))
@@ -556,7 +555,7 @@ public final class QuestUtilCards {
         final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
 
 
-        SealedProductTemplate tpl = getShopBoosterTemplate();
+        SealedProduct.Template tpl = getShopBoosterTemplate();
         UnOpenedProduct unopened = qc.getFormat() == null ?  new UnOpenedProduct(tpl) : new UnOpenedProduct(tpl, qc.getFormat().getFilterPrinted());
 
         for (int i = 0; i < totalPacks; i++) {
@@ -681,8 +680,8 @@ public final class QuestUtilCards {
             } else if (i instanceof PreconDeck) {
                 PreconDeck pDeck = (PreconDeck) i;
                 return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? -1 : -2;
-            } else if (i instanceof OpenablePack) {
-                OpenablePack oPack = (OpenablePack) i;
+            } else if (i instanceof SealedProduct) {
+                SealedProduct oPack = (SealedProduct) i;
                 return getCompletionPercent(oPack.getEdition()) - 103;
             }
             return null;
@@ -699,8 +698,8 @@ public final class QuestUtilCards {
             } else if (i instanceof PreconDeck) {
                 PreconDeck pDeck = (PreconDeck) i;
                 return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? "YES" : "NO";
-            } else if (i instanceof OpenablePack) {
-                OpenablePack oPack = (OpenablePack) i;
+            } else if (i instanceof SealedProduct) {
+                SealedProduct oPack = (SealedProduct) i;
                 return String.format("%d%%", getCompletionPercent(oPack.getEdition()));
             }
             return null;
