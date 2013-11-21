@@ -22,8 +22,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.deck.DeckgenUtil;
-import forge.deck.generate.GenerateThemeDeck;
 import forge.game.RegisteredPlayer;
 import forge.gui.MouseUtil;
 import forge.gui.MouseUtil.MouseCursor;

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.deck.generate;
+package forge.deck.generation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,8 +24,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
+import forge.card.ICardDatabase;
 import forge.card.MagicColor;
-import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.item.PaperCard;
 import forge.util.ItemPoolView;
 
@@ -37,17 +37,17 @@ import forge.util.ItemPoolView;
  * @author Forge
  * @version $Id$
  */
-public class Generate2ColorDeck extends GenerateColoredDeckBase {
+public class DeckGenerator2Color extends DeckGeneratorBase {
     @Override protected final float getLandsPercentage() { return 0.39f; }
     @Override protected final float getCreatPercentage() { return 0.36f; }
     @Override protected final float getSpellPercentage() { return 0.25f; }
 
     @SuppressWarnings("unchecked")
     final List<ImmutablePair<FilterCMC, Integer>> cmcRelativeWeights = Lists.newArrayList(
-        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(0, 2), 6),
-        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(3, 4), 4),
-        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(5, 6), 2),
-        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(7, 20), 1)
+        ImmutablePair.of(new FilterCMC(0, 2), 6),
+        ImmutablePair.of(new FilterCMC(3, 4), 4),
+        ImmutablePair.of(new FilterCMC(5, 6), 2),
+        ImmutablePair.of(new FilterCMC(7, 20), 1)
     );
 
     // mana curve of the card pool
@@ -67,7 +67,8 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
      * @param clr2
      *            a {@link java.lang.String} object.
      */
-    public Generate2ColorDeck(final String clr1, final String clr2) {
+    public DeckGenerator2Color(ICardDatabase cardDb, final String clr1, final String clr2) {
+        super(cardDb);
         int c1 = MagicColor.fromName(clr1);
         int c2 = MagicColor.fromName(clr2);
         
@@ -96,7 +97,7 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
         tmpDeck.append(String.format("Adjusted deck size to: %d, should add %d land(s)%n", size - numLands, numLands));
 
         // Add dual lands
-        List<String> duals = GenerateDeckUtil.getDualLandList(colors);
+        List<String> duals = getDualLandList();
         for (String s : duals) {
             this.cardCounts.put(s, 0);
         }

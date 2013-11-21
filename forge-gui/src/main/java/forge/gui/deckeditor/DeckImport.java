@@ -38,6 +38,7 @@ import javax.swing.text.ElementIterator;
 import org.apache.commons.lang3.StringUtils;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckRecognizer;
@@ -221,7 +222,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         final ElementIterator it = new ElementIterator(this.txtInput.getDocument().getDefaultRootElement());
         Element e;
         
-        DeckRecognizer recognizer = new DeckRecognizer(newEditionCheck.isSelected());
+        DeckRecognizer recognizer = new DeckRecognizer(newEditionCheck.isSelected(), Singletons.getMagicDb().getCommonCards());
         if(dateTimeCheck.isSelected())
             recognizer.setDateConstraint(monthDropdown.getSelectedIndex(), yearDropdown.getSelectedItem());
         

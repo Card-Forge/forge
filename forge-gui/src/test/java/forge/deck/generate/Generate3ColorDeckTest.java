@@ -3,6 +3,9 @@ package forge.deck.generate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import forge.Singletons;
+import forge.card.CardDb;
+import forge.deck.generation.DeckGenerator3Color;
 import forge.item.PaperCard;
 import forge.util.ItemPoolView;
 
@@ -17,7 +20,8 @@ public class Generate3ColorDeckTest {
      */
     @Test(timeOut = 1000, enabled = false)
     public void generate3ColorDeckTest1() {
-        final Generate3ColorDeck gen = new Generate3ColorDeck("white", "blue", "black");
+        CardDb cardDb = Singletons.getMagicDb().getCommonCards();
+        final DeckGenerator3Color gen = new DeckGenerator3Color(cardDb, "white", "blue", "black");
         final ItemPoolView<PaperCard> cardList = gen.getDeck(60, false);
         Assert.assertNotNull(cardList);
     }

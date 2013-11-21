@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.deck.generate;
+package forge.deck.generation;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
-import forge.deck.generate.GenerateDeckUtil.FilterCMC;
+import forge.card.ICardDatabase;
 import forge.item.PaperCard;
 import forge.util.ItemPoolView;
 
@@ -36,12 +36,12 @@ import forge.util.ItemPoolView;
  * @author Forge
  * @version $Id$
  */
-public class Generate5ColorDeck extends GenerateColoredDeckBase {
+public class DeckGenerator5Color extends DeckGeneratorBase {
     @SuppressWarnings("unchecked")
     final List<ImmutablePair<FilterCMC, Integer>> cmcLevels = Lists.newArrayList(
-        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(0, 2), 3),
-        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(3, 5), 2),
-        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(6, 20), 1)
+        ImmutablePair.of(new FilterCMC(0, 2), 3),
+        ImmutablePair.of(new FilterCMC(3, 5), 2),
+        ImmutablePair.of(new FilterCMC(6, 20), 1)
     );
 
     // resulting mana curve of the card pool
@@ -53,7 +53,8 @@ public class Generate5ColorDeck extends GenerateColoredDeckBase {
     /**
      * Instantiates a new generate5 color deck.
      */
-    public Generate5ColorDeck() {
+    public DeckGenerator5Color(ICardDatabase cardDb) {
+        super(cardDb);
         colors = ColorSet.fromMask(0).inverse();
     }
 
@@ -68,7 +69,7 @@ public class Generate5ColorDeck extends GenerateColoredDeckBase {
         tmpDeck.append("numLands:").append(numLands).append("\n");
 
         // Add dual lands
-        List<String> duals = GenerateDeckUtil.getDualLandList(colors);
+        List<String> duals = getDualLandList();
         for (String s : duals) {
             this.cardCounts.put(s, 0);
         }

@@ -6,13 +6,16 @@ import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
-import forge.deck.generate.Generate2ColorDeck;
-import forge.deck.generate.Generate3ColorDeck;
-import forge.deck.generate.Generate5ColorDeck;
+import forge.deck.generation.DeckGenerator2Color;
+import forge.deck.generation.DeckGenerator3Color;
+import forge.deck.generation.DeckGenerator5Color;
+import forge.deck.generation.DeckGeneratorBase;
+import forge.deck.generation.DeckGeneratorMonoColor;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VDeckgen;
@@ -20,6 +23,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 
 
@@ -100,22 +104,22 @@ public enum CDeckgen implements ICDoc {
         if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen())) { return; }
 
         final Deck genConstructed = new Deck();
-
+        CardDb cardDb = Singletons.getMagicDb().getCommonCards();
+        DeckGeneratorBase gen = null;
         switch (colorCount0) {
-            case 2:
-                genConstructed.getMain().addAll((new Generate2ColorDeck(null, null)).getDeck(60, false));
-                break;
-            case 3:
-                genConstructed.getMain().addAll((new Generate3ColorDeck(null, null, null)).getDeck(60, false));
-                break;
-            case 5:
-                genConstructed.getMain().addAll((new Generate5ColorDeck()).getDeck(60, false));
-                break;
-            default:
+            case 1: gen = new DeckGeneratorMonoColor(cardDb, null);             break;
+            case 2: gen = new DeckGenerator2Color(cardDb, null, null);          break;
+            case 3: gen = new DeckGenerator3Color(cardDb, null, null, null);    break;
+            case 5: gen = new DeckGenerator5Color(cardDb);                      break;
+        }
+        
+        if( null != gen ) {
+            gen.setSingleton(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
+            gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+            genConstructed.getMain().addAll(gen.getDeck(60, false));
         }
 
-        final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
+        final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
         ed.getDeckController().setModel((TModel) genConstructed);
     }

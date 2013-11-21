@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.deck.generate;
+package forge.deck.generation;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
+import forge.card.ICardDatabase;
 import forge.card.MagicColor;
-import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.item.PaperCard;
 import forge.util.ItemPoolView;
 import forge.util.MyRandom;
@@ -38,12 +38,12 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id$
  */
-public class Generate3ColorDeck extends GenerateColoredDeckBase {
+public class DeckGenerator3Color extends DeckGeneratorBase {
     @SuppressWarnings("unchecked")
     final List<ImmutablePair<FilterCMC, Integer>> cmcLevels = Lists.newArrayList(
-        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(0, 2), 12),
-        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(3, 5), 9),
-        ImmutablePair.of(new GenerateDeckUtil.FilterCMC(6, 20), 3)
+        ImmutablePair.of(new FilterCMC(0, 2), 12),
+        ImmutablePair.of(new FilterCMC(3, 5), 9),
+        ImmutablePair.of(new FilterCMC(6, 20), 3)
     );
 
     /**
@@ -58,7 +58,8 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
      * @param clr3
      *            a {@link java.lang.String} object.
      */
-    public Generate3ColorDeck(final String clr1, final String clr2, final String clr3) {
+    public DeckGenerator3Color(ICardDatabase cardDb, final String clr1, final String clr2, final String clr3) {
+        super(cardDb);
         int c1 = MagicColor.fromName(clr1);
         int c2 = MagicColor.fromName(clr2);
         int c3 = MagicColor.fromName(clr3);
@@ -105,7 +106,7 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
         tmpDeck.append("numLands:").append(numLands).append("\n");
 
         // Add dual lands
-        List<String> duals = GenerateDeckUtil.getDualLandList(colors);
+        List<String> duals = getDualLandList();
         for (String s : duals) {
             this.cardCounts.put(s, 0);
         }

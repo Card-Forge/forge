@@ -1,4 +1,4 @@
-package     forge.deck;
+package     forge.gui.deckchooser;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
@@ -15,14 +15,17 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.Singletons;
-import forge.deck.generate.Generate2ColorDeck;
-import forge.deck.generate.Generate3ColorDeck;
-import forge.deck.generate.Generate5ColorDeck;
-import forge.deck.generate.GenerateColoredDeckBase;
-import forge.deck.generate.GenerateMonoColorDeck;
-import forge.deck.generate.GenerateThemeDeck;
+import forge.card.CardDb;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.deck.generation.DeckGenerator2Color;
+import forge.deck.generation.DeckGenerator3Color;
+import forge.deck.generation.DeckGenerator5Color;
+import forge.deck.generation.DeckGeneratorBase;
+import forge.deck.generation.DeckGeneratorMonoColor;
 import forge.item.PaperCard;
-import forge.item.PreconDeck;
+import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -60,19 +63,20 @@ public class DeckgenUtil {
         final Deck deck;
         String deckName = null;  
         
-        GenerateColoredDeckBase gen = null;
-        
+        DeckGeneratorBase gen = null;
+        CardDb cardDb = Singletons.getMagicDb().getCommonCards();
         if (selection.size() == 1) {
-            gen = new GenerateMonoColorDeck(selection.get(0));
+            gen = new DeckGeneratorMonoColor(cardDb, selection.get(0));
         } else if (selection.size() == 2) {
-            gen = new Generate2ColorDeck(selection.get(0), selection.get(1));
+            gen = new DeckGenerator2Color(cardDb, selection.get(0), selection.get(1));
         } else if (selection.size() == 3) {
-            gen = new Generate3ColorDeck(selection.get(0), selection.get(1), selection.get(2));
+            gen = new DeckGenerator3Color(cardDb, selection.get(0), selection.get(1), selection.get(2));
         } else {
-            gen = new Generate5ColorDeck();
+            gen = new DeckGenerator5Color(cardDb);
             deckName = "5 colors";
         }
-        
+        gen.setSingleton(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
+        gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
         ItemPoolView<PaperCard> cards = gen == null ? null : gen.getDeck(60, forAi);
         
         if(null == deckName)
@@ -92,6 +96,8 @@ public class DeckgenUtil {
     public static Deck buildThemeDeck(final String selection) {
         final GenerateThemeDeck gen = new GenerateThemeDeck();
         final Deck deck = new Deck();
+        gen.setSingleton(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
+        gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
         deck.getMain().addAll(gen.getThemeDeck(selection, 60));
 
         return deck;
@@ -161,13 +167,6 @@ public class DeckgenUtil {
         final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
         final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name);
-    }
-
-    public static Deck getRandomPreconDeck() {
-        final IStorage<PreconDeck> allDecks = QuestController.getPrecons();
-        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
-        final String name = allDecks.getItemNames().toArray(new String[0])[rand];
-        return allDecks.get(name).getDeck();
     }
     
     /** @return {@link forge.deck.Deck} */

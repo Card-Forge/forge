@@ -15,8 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.deck.generate;
+package forge.deck.generation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,14 +32,13 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
+import forge.card.ICardDatabase;
 import forge.card.MagicColor;
-import forge.deck.generate.GenerateDeckUtil.FilterCMC;
+import forge.card.mana.ManaCost;
 import forge.item.PaperCard;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.ItemPoolView;
@@ -52,13 +52,15 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id: Generate2ColorDeck.java 14959 2012-03-28 14:03:43Z Chris H. $
  */
-public abstract class GenerateColoredDeckBase {
+public abstract class DeckGeneratorBase {
     protected final Random r = MyRandom.getRandom();
     protected final Map<String, Integer> cardCounts = new HashMap<String, Integer>();
-    protected int maxDuplicates;
+    protected int maxDuplicates = 4;
+    protected boolean useArtifacts = true;
 
     protected ColorSet colors;
-    protected final ItemPool<PaperCard> tDeck;
+    protected final ItemPool<PaperCard> tDeck = new ItemPool<PaperCard>(PaperCard.class);
+    protected final ICardDatabase cardDb;
 
     // 2-colored deck generator has its own constants. The rest works fine with these ones
     protected float getLandsPercentage() { return 0.44f; }
@@ -67,9 +69,15 @@ public abstract class GenerateColoredDeckBase {
 
     StringBuilder tmpDeck = new StringBuilder();
 
-    public GenerateColoredDeckBase() {
-        this.maxDuplicates = Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS) ? 1 : 4;
-        tDeck = new ItemPool<PaperCard>(PaperCard.class);
+    public DeckGeneratorBase(ICardDatabase cardDb) {
+        this.cardDb =  cardDb;
+    }
+
+    public void setSingleton(boolean singleton){
+        this.maxDuplicates = singleton ? 1 : 4;
+    }
+    public void setUseArtifacts(boolean value) {
+        this.useArtifacts = value;
     }
 
     protected void addCreaturesAndSpells(int size, List<ImmutablePair<FilterCMC, Integer>> cmcLevels, boolean forAi) {
@@ -130,8 +138,7 @@ public abstract class GenerateColoredDeckBase {
             } while ((this.cardCounts.get(s) > 3) && (lc <= 20));
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
-            PaperCard cp = Singletons.getMagicDb().getCommonCards().getCard(s);
-            tDeck.add(Singletons.getMagicDb().getCommonCards().getCard(cp.getName(), false));
+            tDeck.add(cardDb.getCard(s, false));
 
             final int n = this.cardCounts.get(s);
             this.cardCounts.put(s, n + 1);
@@ -157,20 +164,20 @@ public abstract class GenerateColoredDeckBase {
 
         int landsLeft = cnt;
         for (Entry<String, Integer> c : clrCnts.entrySet()) {
-            String color = c.getKey();
+            String basicLandName = c.getKey();
 
 
             // calculate number of lands for each color
             final int nLand = Math.min(landsLeft, Math.round(cnt * c.getValue() / totalColor));
-            tmpDeck.append("nLand-").append(color).append(":").append(nLand).append("\n");
+            tmpDeck.append("nLand-").append(basicLandName).append(":").append(nLand).append("\n");
 
             // just to prevent a null exception by the deck size fixing code
-            this.cardCounts.put(color, nLand);
+            this.cardCounts.put(basicLandName, nLand);
 
-            PaperCard cp = Singletons.getMagicDb().getCommonCards().getCard(color);
+            PaperCard cp = cardDb.getCard(basicLandName);
             String basicLandSet = cp.getEdition();
 
-            tDeck.add(Singletons.getMagicDb().getCommonCards().getCard(cp.getName(), basicLandSet), nLand);
+            tDeck.add(cardDb.getCard(cp.getName(), basicLandSet), nLand);
             landsLeft -= nLand;
         }
     }
@@ -220,7 +227,7 @@ public abstract class GenerateColoredDeckBase {
             final List<PaperCard> curvedRandomized = Lists.newArrayList();
             for (PaperCard c : curved) {
                 this.cardCounts.put(c.getName(), 0);
-                curvedRandomized.add(Singletons.getMagicDb().getCommonCards().getCard(c.getName(), false));
+                curvedRandomized.add(cardDb.getCard(c.getName(), false));
             }
 
             addSome(addOfThisCmc, curvedRandomized);
@@ -231,13 +238,13 @@ public abstract class GenerateColoredDeckBase {
 
         // start with all cards
         // remove cards that generated decks don't like
-        Predicate<CardRules> canPlay = forAi ? GenerateDeckUtil.AI_CAN_PLAY : GenerateDeckUtil.HUMAN_CAN_PLAY;
-        Predicate<CardRules> hasColor = new GenerateDeckUtil.MatchColorIdentity(colors);
+        Predicate<CardRules> canPlay = forAi ? AI_CAN_PLAY : HUMAN_CAN_PLAY;
+        Predicate<CardRules> hasColor = new MatchColorIdentity(colors);
 
-        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
-            hasColor = Predicates.or(hasColor, GenerateDeckUtil.COLORLESS_CARDS);
+        if (useArtifacts) {
+            hasColor = Predicates.or(hasColor, COLORLESS_CARDS);
         }
-        return Iterables.filter(Singletons.getMagicDb().getCommonCards().getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), PaperCard.FN_GET_RULES));
+        return Iterables.filter(cardDb.getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), PaperCard.FN_GET_RULES));
     }
 
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {
@@ -272,4 +279,127 @@ public abstract class GenerateColoredDeckBase {
         final Integer boxed = map.get(key);
         map.put(key, boxed == null ? delta : boxed.intValue() + delta);
     }
+    
+    public static final Predicate<CardRules> AI_CAN_PLAY = new Predicate<CardRules>() {
+        @Override
+        public boolean apply(CardRules c) {
+            return !c.getAiHints().getRemAIDecks() && !c.getAiHints().getRemRandomDecks();
+        }
+    };
+
+    public static final Predicate<CardRules> HUMAN_CAN_PLAY = new Predicate<CardRules>() {
+        @Override
+        public boolean apply(CardRules c) {
+            return !c.getAiHints().getRemRandomDecks();
+        }
+    };
+
+    public static final Predicate<CardRules> COLORLESS_CARDS = new Predicate<CardRules>() {
+        @Override
+        public boolean apply(CardRules c) {
+            ManaCost mc = c.getManaCost();
+            return c.getColorIdentity().isColorless() && !mc.isNoCost();
+        }
+    };
+
+    public static class MatchColorIdentity implements Predicate<CardRules> {
+        private final ColorSet allowedColor;
+
+        public MatchColorIdentity(ColorSet color) {
+            allowedColor = color;
+        }
+
+        @Override
+        public boolean apply(CardRules subject) {
+            ManaCost mc = subject.getManaCost();
+            return !mc.isPureGeneric() && allowedColor.containsAllColorsFrom(subject.getColorIdentity().getColor());
+            //return  mc.canBePaidWithAvaliable(allowedColor);
+            // return allowedColor.containsAllColorsFrom(mc.getColorProfile());
+        }
+    }
+
+    public static class FilterCMC implements Predicate<CardRules> {
+        private final int min;
+        private final int max;
+
+        public FilterCMC(int from, int to) {
+            min = from;
+            max = to;
+        }
+
+        @Override
+        public boolean apply(CardRules c) {
+            ManaCost mc = c.getManaCost();
+            int cmc = mc.getCMC();
+            return cmc >= min && cmc <= max && !mc.isNoCost();
+        }
+    }
+
+    private static Map<Integer, String[]> dualLands = new HashMap<Integer, String[]>();
+    static {
+        dualLands.put(MagicColor.WHITE | MagicColor.BLUE, new String[] { "Tundra", "Hallowed Fountain", "Flooded Strand" });
+        dualLands.put(MagicColor.BLACK | MagicColor.BLUE, new String[] { "Underground Sea", "Watery Grave", "Polluted Delta" });
+        dualLands.put(MagicColor.BLACK | MagicColor.RED, new String[] { "Badlands", "Blood Crypt", "Bloodstained Mire" });
+        dualLands.put(MagicColor.GREEN | MagicColor.RED, new String[] { "Taiga", "Stomping Ground", "Wooded Foothills" });
+        dualLands.put(MagicColor.GREEN | MagicColor.WHITE, new String[] { "Savannah", "Temple Garden", "Windswept Heath" });
+
+        dualLands.put(MagicColor.WHITE | MagicColor.BLACK, new String[] { "Scrubland", "Godless Shrine", "Marsh Flats" });
+        dualLands.put(MagicColor.BLUE  | MagicColor.RED, new String[] { "Volcanic Island", "Steam Vents", "Scalding Tarn" });
+        dualLands.put(MagicColor.BLACK | MagicColor.GREEN, new String[] { "Bayou", "Overgrown Tomb", "Verdant Catacombs" });
+        dualLands.put(MagicColor.WHITE | MagicColor.RED, new String[] { "Plateau", "Sacred Foundry", "Arid Mesa" });
+        dualLands.put(MagicColor.GREEN | MagicColor.BLUE, new String[] { "Tropical Island", "Breeding Pool", "Misty Rainforest" });
+    }
+
+    /**
+     * Get list of dual lands for this color combo.
+     * 
+     * @param color
+     *            the color
+     * @return dual land names
+     */
+    protected List<String> getDualLandList() {
+
+        final List<String> dLands = new ArrayList<String>();
+
+        if (colors.countColors() > 3) {
+            dLands.add("Rupture Spire");
+            dLands.add("Undiscovered Paradise");
+        }
+
+        if (colors.countColors() > 2) {
+            dLands.add("Evolving Wilds");
+            dLands.add("Terramorphic Expanse");
+        }
+        for (Entry<Integer, String[]> dual : dualLands.entrySet()) {
+            if (colors.hasAllColors(dual.getKey())) {
+                for (String s : dual.getValue()) {
+                    dLands.add(s);
+                }
+            }
+        }
+
+        return dLands;
+    }
+
+    /**
+     * Get all dual lands that do not match this color combo.
+     * 
+     * @param color
+     *            the color
+     * @return dual land names
+     */
+    protected List<String> getInverseDualLandList() {
+
+        final List<String> dLands = new ArrayList<String>();
+
+        for (Entry<Integer, String[]> dual : dualLands.entrySet()) {
+            if (!colors.hasAllColors(dual.getKey())) {
+                for (String s : dual.getValue()) {
+                    dLands.add(s);
+                }
+            }
+        }
+
+        return dLands;
+    }    
 }

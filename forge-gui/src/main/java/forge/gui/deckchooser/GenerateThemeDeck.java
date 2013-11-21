@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.deck.generate;
+package forge.gui.deckchooser;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Singletons;
+import forge.deck.generation.DeckGeneratorBase;
 import forge.error.BugReporter;
 import forge.item.PaperCard;
 import forge.util.FileUtil;
@@ -37,7 +38,7 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id$
  */
-public class GenerateThemeDeck extends GenerateColoredDeckBase {
+public class GenerateThemeDeck extends DeckGeneratorBase {
     private int basicLandPercentage = 0;
     private boolean testing = false;
 
@@ -47,6 +48,7 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase {
      * </p>
      */
     public GenerateThemeDeck() {
+        super(Singletons.getMagicDb().getCommonCards());
         this.maxDuplicates = 4;
     }
 

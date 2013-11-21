@@ -17,7 +17,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
-import forge.Constant.Preferences;
+
 import forge.card.CardAiHints;
 import forge.card.CardEdition;
 import forge.card.CardEditionPredicates;
@@ -31,20 +31,21 @@ import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.deck.generate.GenerateDeckUtil;
+import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.util.ItemPoolView;
 import forge.util.MyRandom;
 
 /**
  * Limited format deck.
  * 
  */
-public class LimitedDeckBuilder {
+public class LimitedDeckBuilder extends DeckGeneratorBase{
 
     private int numSpellsNeeded = 22;
     private int landsNeeded = 18;
-    private ColorSet colors;
+
     private final DeckColors deckColors;
     private Predicate<CardRules> hasColor;
     private final List<PaperCard> availableList;
@@ -59,6 +60,8 @@ public class LimitedDeckBuilder {
 
     private static ReadDraftRankings draftRankings = new ReadDraftRankings();
 
+    private static final boolean logToConsole = false;
+    
     /**
      * 
      * Constructor.
@@ -69,6 +72,7 @@ public class LimitedDeckBuilder {
      *            Chosen colors.
      */
     public LimitedDeckBuilder(List<PaperCard> dList, DeckColors pClrs) {
+        super(Singletons.getMagicDb().getCommonCards());
         this.availableList = dList;
         this.deckColors = pClrs;
         this.colors = pClrs.getChosenColors();
@@ -93,6 +97,11 @@ public class LimitedDeckBuilder {
         this(list, new DeckColors());
     }
 
+    @Override
+    public ItemPoolView<PaperCard> getDeck(int size, boolean forAi) {
+        return buildDeck().getMain();
+    }
+    
     /**
      * <p>
      * buildDeck.
@@ -102,7 +111,7 @@ public class LimitedDeckBuilder {
      */
     public Deck buildDeck() {
         // 1. Prepare
-        hasColor = Predicates.or(new GenerateDeckUtil.MatchColorIdentity(colors), GenerateDeckUtil.COLORLESS_CARDS);
+        hasColor = Predicates.or(new MatchColorIdentity(colors), COLORLESS_CARDS);
         colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, PaperCard.FN_GET_RULES));
         onColorCreatures = Iterables.filter(colorList,
                 Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES));
@@ -144,7 +153,7 @@ public class LimitedDeckBuilder {
                 deckList.add(c);
                 getAiPlayables().remove(c);
                 landsNeeded--;
-                if (Preferences.DEV_MODE) {
+                if (logToConsole) {
                     System.out.println("Low CMC: " + c.getName());
                 }
             }
@@ -178,7 +187,7 @@ public class LimitedDeckBuilder {
             CardPool cp = result.getOrCreate(DeckSection.Sideboard);
             cp.add(aiPlayables);
             cp.add(availableList);
-            if (Preferences.DEV_MODE) {
+            if (logToConsole) {
                 debugFinalDeck();
             }
             return result;
@@ -301,7 +310,7 @@ public class LimitedDeckBuilder {
                 // calculate number of lands for each color
                 final float p = (float) clrCnts[i] / (float) totalColor;
                 final int nLand = Math.round(landsNeeded * p); // desired truncation to int
-                if (Preferences.DEV_MODE) {
+                if (logToConsole) {
                     System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", MagicColor.Constant.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
                 }
 
@@ -359,7 +368,7 @@ public class LimitedDeckBuilder {
      * Add non-basic lands to the deck.
      */
     private void addNonBasicLands() {
-        List<String> inverseDuals = GenerateDeckUtil.getInverseDualLandList(colors);
+        List<String> inverseDuals = getInverseDualLandList();
         Iterable<PaperCard> lands = Iterables.filter(aiPlayables,
                 Predicates.compose(CardRulesPredicates.Presets.IS_NONBASIC_LAND, PaperCard.FN_GET_RULES));
         List<Pair<Double, PaperCard>> ranked = rankCards(lands);
@@ -374,7 +383,7 @@ public class LimitedDeckBuilder {
                     deckList.add(bean.getValue());
                     aiPlayables.remove(bean.getValue());
                     landsNeeded--;
-                    if (Preferences.DEV_MODE) {
+                    if (logToConsole) {
                         System.out.println("NonBasicLand[" + landsNeeded + "]:" + bean.getValue().getName());
                     }
                 }
@@ -401,8 +410,8 @@ public class LimitedDeckBuilder {
                 }
             }
 
-            hasColor = Predicates.or(new GenerateDeckUtil.MatchColorIdentity(colors),
-                    GenerateDeckUtil.COLORLESS_CARDS);
+            hasColor = Predicates.or(new DeckGeneratorBase.MatchColorIdentity(colors),
+                    DeckGeneratorBase.COLORLESS_CARDS);
             Iterable<PaperCard> threeColorList = Iterables.filter(aiPlayables,
                     Predicates.compose(hasColor, PaperCard.FN_GET_RULES));
             ranked = rankCards(threeColorList);
@@ -411,7 +420,7 @@ public class LimitedDeckBuilder {
                     deckList.add(bean.getValue());
                     aiPlayables.remove(bean.getValue());
                     nCards--;
-                    if (Preferences.DEV_MODE) {
+                    if (logToConsole) {
                         System.out.println("Third Color[" + nCards + "]:" + bean.getValue().getName() + "("
                                 + bean.getValue().getRules().getManaCost() + ")");
                     }
@@ -436,7 +445,7 @@ public class LimitedDeckBuilder {
                 deckList.add(bean.getValue());
                 aiPlayables.remove(bean.getValue());
                 nCards--;
-                if (Preferences.DEV_MODE) {
+                if (logToConsole) {
                     System.out.println("Random[" + nCards + "]:" + bean.getValue().getName() + "("
                             + bean.getValue().getRules().getManaCost() + ")");
                 }
@@ -460,7 +469,7 @@ public class LimitedDeckBuilder {
                 deckList.add(cardToAdd);
                 num--;
                 getAiPlayables().remove(cardToAdd);
-                if (Preferences.DEV_MODE) {
+                if (logToConsole) {
                     System.out.println("Others[" + num + "]:" + cardToAdd.getName() + " ("
                             + cardToAdd.getRules().getManaCost() + ")");
                 }
@@ -486,7 +495,7 @@ public class LimitedDeckBuilder {
         if (hints != null && hints.getType() != DeckHints.Type.NONE) {
             Iterable<PaperCard> onColor = Iterables.filter(aiPlayables, Predicates.compose(hasColor, PaperCard.FN_GET_RULES));
             List<PaperCard> comboCards = hints.filter(onColor);
-            if (Preferences.DEV_MODE) {
+            if (logToConsole) {
                 System.out.println("Found " + comboCards.size() + " cards for " + cardToAdd.getName());
             }
             for (Pair<Double, PaperCard> comboBean : rankCards(comboCards)) {
@@ -535,7 +544,7 @@ public class LimitedDeckBuilder {
                     comboCards.addAll(hints.filter(deckList));
                 }
                 if (comboCards.isEmpty()) {
-                    if (Preferences.DEV_MODE) {
+                    if (logToConsole) {
                         System.out.println("No combo cards found for " + card.getName() + ", removing it.");
                     }
                     it.remove();
@@ -546,7 +555,7 @@ public class LimitedDeckBuilder {
                         numOthers++;
                     }
                 } else {
-                    if (Preferences.DEV_MODE) {
+                    if (logToConsole) {
                         System.out.println("Found " + comboCards.size() + " cards for " + card.getName());
                     }
                 }
@@ -580,7 +589,7 @@ public class LimitedDeckBuilder {
                 deckList.add(c);
                 num--;
                 getAiPlayables().remove(c);
-                if (Preferences.DEV_MODE) {
+                if (logToConsole) {
                     System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getRules().getManaCost() + ")");
                 }
                 num = addDeckHintsCards(c, num);
@@ -645,12 +654,12 @@ public class LimitedDeckBuilder {
                 num--;
                 getAiPlayables().remove(c);
                 creatureCosts.put(cmc, creatureCosts.get(cmc) + 1);
-                if (Preferences.DEV_MODE) {
+                if (logToConsole) {
                     System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getRules().getManaCost() + ")");
                 }
                 num = addDeckHintsCards(c, num);
             } else {
-                if (Preferences.DEV_MODE) {
+                if (logToConsole) {
                     System.out.println(c.getName() + " not added because CMC " + c.getRules().getManaCost().getCMC()
                             + " has " + currentAtCmc + " already.");
                 }
