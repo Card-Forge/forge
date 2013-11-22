@@ -1,7 +1,6 @@
 package forge;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -9,7 +8,6 @@ import java.util.TreeMap;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
-import forge.card.CardScriptInfo;
 import forge.card.PrintSheet;
 import forge.item.FatPack;
 import forge.item.SealedProduct;
@@ -31,31 +29,26 @@ public class StaticData {
     private final IStorage<SealedProduct.Template> tournaments;
     private final IStorage<FatPack.Template> fatPacks;
     private final IStorage<PrintSheet> printSheets;
-	private final HashMap<CardRules, CardScriptInfo> scriptLookup;
 
     private static StaticData lastInstance = null;
 
     public StaticData(ICardStorageReader reader, String editionFolder, String blockDataFolder) {
-    	this.scriptLookup = new HashMap<CardRules, CardScriptInfo>();
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         lastInstance = this;
 
         final Map<String, CardRules> regularCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
         final Map<String, CardRules> variantsCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
 
-        List<CardScriptInfo> cards = reader.loadCards();
-        for (CardScriptInfo card : cards) {
+        List<CardRules> rules = reader.loadCards();
+        for (CardRules card : rules) {
             if (null == card) continue;
 
-            final CardRules rules = card.getRules();
-            scriptLookup.put(rules, card);
-
-            final String cardName = rules.getName();
-            if (rules.isVariant()) {
-                variantsCards.put(cardName, rules);
+            final String cardName = card.getName();
+            if ( card.isVariant() ) {
+                variantsCards.put(cardName, card);
             }
             else {
-                regularCards.put(cardName, rules);
+                regularCards.put(cardName, card);
             }
         }
 
@@ -69,7 +62,7 @@ public class StaticData {
         this.printSheets = new StorageBase<PrintSheet>("Special print runs", new PrintSheet.Reader(new File(blockDataFolder, "printsheets.txt")));
     }
 
-    public final static StaticData instance() {
+    public final static StaticData instance() { 
         return lastInstance;
     }
 
@@ -106,9 +99,5 @@ public class StaticData {
 
     public CardDb getVariantCards() {
         return variantCards;
-    }
-
-    public CardScriptInfo getScriptInfo(CardRules rules) {
-    	return scriptLookup.get(rules);
     }
 }

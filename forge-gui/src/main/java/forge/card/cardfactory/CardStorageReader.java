@@ -41,9 +41,7 @@ import forge.FThreads;
 import forge.ICardStorageReader;
 import forge.IProgressObserver;
 import forge.card.CardRules;
-import forge.card.CardScriptInfo;
 import forge.util.FileUtil;
-import forge.util.TextUtil;
 
 /**
  * <p>
@@ -72,6 +70,8 @@ public class CardStorageReader implements ICardStorageReader {
     private transient ZipFile zip;
     private final transient Charset charset;
 
+    private final Observer observer;
+
 
     // 8/18/11 10:56 PM
 
@@ -87,9 +87,10 @@ public class CardStorageReader implements ICardStorageReader {
      *            if true, attempts to load cards from a zip file, if one
      *            exists.
      */
-    public CardStorageReader(String cardDataDir, final boolean useZip, IProgressObserver progressObserver) {
+    public CardStorageReader(String cardDataDir, final boolean useZip, IProgressObserver progressObserver, ICardStorageReader.Observer observer) {
         this.progressObserver = progressObserver != null ? progressObserver : IProgressObserver.emptyObserver;
         this.cardsfolder = new File(cardDataDir);
+        this.observer = observer;
 
         // These read data for lightweight classes.
         if (!cardsfolder.exists()) {
@@ -114,21 +115,21 @@ public class CardStorageReader implements ICardStorageReader {
 
     } // CardReader()
 
-    private final List<CardScriptInfo> loadCardsInRange(final List<File> files, int from, int to) {
+    private final List<CardRules> loadCardsInRange(final List<File> files, int from, int to) {
         CardRules.Reader rulesReader = new CardRules.Reader();
 
-        List<CardScriptInfo> result = new ArrayList<CardScriptInfo>();
+        List<CardRules> result = new ArrayList<CardRules>();
         for(int i = from; i < to; i++) {
             File cardTxtFile = files.get(i);
-                result.add(this.loadCard(rulesReader, cardTxtFile));
+            result.add(this.loadCard(rulesReader, cardTxtFile));
         }
         return result;
     }
 
-    private final List<CardScriptInfo> loadCardsInRangeFromZip(final List<ZipEntry> files, int from, int to) {
+    private final List<CardRules> loadCardsInRangeFromZip(final List<ZipEntry> files, int from, int to) {
         CardRules.Reader rulesReader = new CardRules.Reader();
 
-        List<CardScriptInfo> result = new ArrayList<CardScriptInfo>();
+        List<CardRules> result = new ArrayList<CardRules>();
         for(int i = from; i < to; i++) {
             ZipEntry ze = files.get(i);
             // if (ze.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION))  // already filtered!
@@ -145,12 +146,11 @@ public class CardStorageReader implements ICardStorageReader {
      *
      * @return the Card or null if it was not found.
      */
-    @Override
-    public final List<CardScriptInfo> loadCards() {
+    public final List<CardRules> loadCards() {
         progressObserver.setOperationName("Loading card data", true);
         progressObserver.report(0, NUMBER_OF_PARTS);
 
-        final List<Callable<List<CardScriptInfo>>> tasks;
+        final List<Callable<List<CardRules>>> tasks;
         long estimatedFilesRemaining;
 
         // Iterate through txt files or zip archive.
@@ -178,7 +178,7 @@ public class CardStorageReader implements ICardStorageReader {
         StopWatch sw = new StopWatch();
         sw.start();
 
-        List<CardScriptInfo> res = executeLoadTask(tasks);
+        List<CardRules> res = executeLoadTask(tasks);
 
         sw.stop();
         final long timeOnParse = sw.getTime();
@@ -188,20 +188,20 @@ public class CardStorageReader implements ICardStorageReader {
         return res;
     } // loadCardsUntilYouFind(String)
 
-    private List<CardScriptInfo> executeLoadTask(final List<Callable<List<CardScriptInfo>>> tasks) {
-        List<CardScriptInfo> result = new ArrayList<CardScriptInfo>();
+    private List<CardRules> executeLoadTask(final List<Callable<List<CardRules>>> tasks) {
+        List<CardRules> result = new ArrayList<CardRules>();
 
         try {
             if ( useThreadPool ) {
                 final ExecutorService executor = FThreads.getComputingPool(0.5f);
-                final List<Future<List<CardScriptInfo>>> parts = executor.invokeAll(tasks);
+                final List<Future<List<CardRules>>> parts = executor.invokeAll(tasks);
                 executor.shutdown();
                 cdl.await();
-                for(Future<List<CardScriptInfo>> pp : parts) {
+                for(Future<List<CardRules>> pp : parts) {
                     result.addAll(pp.get());
                 }
             } else {
-                for(Callable<List<CardScriptInfo>> c : tasks) {
+                for(Callable<List<CardRules>> c : tasks) {
                     result.addAll(c.call());
                 }
             }
@@ -216,17 +216,17 @@ public class CardStorageReader implements ICardStorageReader {
         return result;
     }
 
-    private List<Callable<List<CardScriptInfo>>> makeTaskListForZip(final List<ZipEntry> entries) {
+    private List<Callable<List<CardRules>>> makeTaskListForZip(final List<ZipEntry> entries) {
         int totalFiles = entries.size();
         int filesPerPart = totalFiles / NUMBER_OF_PARTS;
-        final List<Callable<List<CardScriptInfo>>> tasks = new ArrayList<Callable<List<CardScriptInfo>>>();
+        final List<Callable<List<CardRules>>> tasks = new ArrayList<Callable<List<CardRules>>>();
         for (int iPart = 0; iPart < NUMBER_OF_PARTS; iPart++) {
             final int from = iPart * filesPerPart;
             final int till = iPart == NUMBER_OF_PARTS - 1 ? totalFiles : from + filesPerPart;
-            tasks.add(new Callable<List<CardScriptInfo>>() {
+            tasks.add(new Callable<List<CardRules>>() {
                 @Override
-                public List<CardScriptInfo> call() throws Exception{
-                    List<CardScriptInfo> res = loadCardsInRangeFromZip(entries, from, till);
+                public List<CardRules> call() throws Exception{
+                    List<CardRules> res = loadCardsInRangeFromZip(entries, from, till);
                     cdl.countDown();
                     progressObserver.report(NUMBER_OF_PARTS - (int)cdl.getCount(), NUMBER_OF_PARTS);
                     return res;
@@ -236,17 +236,17 @@ public class CardStorageReader implements ICardStorageReader {
         return tasks;
     }
 
-    private List<Callable<List<CardScriptInfo>>> makeTaskListForFiles(final List<File> allFiles) {
+    private List<Callable<List<CardRules>>> makeTaskListForFiles(final List<File> allFiles) {
         int totalFiles = allFiles.size();
         int filesPerPart = totalFiles / NUMBER_OF_PARTS;
-        final List<Callable<List<CardScriptInfo>>> tasks = new ArrayList<Callable<List<CardScriptInfo>>>();
+        final List<Callable<List<CardRules>>> tasks = new ArrayList<Callable<List<CardRules>>>();
         for (int iPart = 0; iPart < NUMBER_OF_PARTS; iPart++) {
             final int from = iPart * filesPerPart;
             final int till = iPart == NUMBER_OF_PARTS - 1 ? totalFiles : from + filesPerPart;
-            tasks.add(new Callable<List<CardScriptInfo>>() {
+            tasks.add(new Callable<List<CardRules>>() {
                 @Override
-                public List<CardScriptInfo> call() throws Exception{
-                    List<CardScriptInfo> res = loadCardsInRange(allFiles, from, till);
+                public List<CardRules> call() throws Exception{
+                    List<CardRules> res = loadCardsInRange(allFiles, from, till);
                     cdl.countDown();
                     progressObserver.report(NUMBER_OF_PARTS - (int)cdl.getCount(), NUMBER_OF_PARTS);
                     return res;
@@ -275,25 +275,11 @@ public class CardStorageReader implements ICardStorageReader {
         return accumulator;
     }
 
-    /**
-     * <p>
-     * load a card.
-     * </p>
-     *
-     * @param inputStream
-     *            the stream from which to load the card's information
-     *
-     * @return the card loaded from the stream
-     */
-    protected final CardScriptInfo loadCard(CardRules.Reader reader, final InputStream inputStream, final File file) {
-        reader.reset();
 
-        InputStreamReader isr = new InputStreamReader(inputStream, this.charset);
-        List<String> allLines = FileUtil.readAllLines(isr, true);
-
-        return new CardScriptInfo(TextUtil.join(allLines, "\n"), file, reader.readCard(allLines));
+    private List<String> readScript(final InputStream inputStream) {
+        return FileUtil.readAllLines(new InputStreamReader(inputStream, this.charset), true);
     }
-
+    
     /**
      * Load a card from a txt file.
      *
@@ -302,11 +288,16 @@ public class CardStorageReader implements ICardStorageReader {
      *
      * @return a new Card instance
      */
-    protected final CardScriptInfo loadCard(final CardRules.Reader reader, final File file) {
+    protected final CardRules loadCard(final CardRules.Reader reader, final File file) {
         FileInputStream fileInputStream = null;
         try {
             fileInputStream = new FileInputStream(file);
-            return this.loadCard(reader, fileInputStream, file);
+            reader.reset();
+            List<String> lines = readScript(fileInputStream);
+            CardRules rules = reader.readCard(lines);
+            if ( null != observer )
+                observer.cardLoaded(rules, lines, file);
+            return rules;
         } catch (final FileNotFoundException ex) {
             throw new RuntimeException("CardReader : run error -- file not found: " + file.getPath(), ex);
         } finally {
@@ -327,11 +318,14 @@ public class CardStorageReader implements ICardStorageReader {
      *
      * @return a new Card instance
      */
-    protected final CardScriptInfo loadCard(final CardRules.Reader rulesReader, final ZipEntry entry) {
+    protected final CardRules loadCard(final CardRules.Reader rulesReader, final ZipEntry entry) {
         InputStream zipInputStream = null;
         try {
             zipInputStream = this.zip.getInputStream(entry);
-            return this.loadCard(rulesReader, zipInputStream, null);
+            rulesReader.reset();
+            CardRules rules = rulesReader.readCard(readScript(zipInputStream));
+
+            return rules;
         } catch (final IOException exn) {
             throw new RuntimeException(exn);
             // PM
@@ -346,4 +340,5 @@ public class CardStorageReader implements ICardStorageReader {
             }
         }
     }
+
 }

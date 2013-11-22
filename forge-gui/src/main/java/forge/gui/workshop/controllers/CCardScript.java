@@ -1,16 +1,22 @@
 package forge.gui.workshop.controllers;
 
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import forge.Command;
 import forge.Singletons;
-import forge.StaticData;
-import forge.card.CardScriptInfo;
+import forge.card.CardRules;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.gui.match.controllers.CDetail;
+import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.FTextEditor;
+import forge.gui.workshop.CardScriptInfo;
 import forge.gui.workshop.menus.WorkshopFileMenu;
 import forge.gui.workshop.views.VCardDesigner;
 import forge.gui.workshop.views.VCardScript;
@@ -79,7 +85,7 @@ public enum CCardScript implements ICDoc {
     	String text = "";
         boolean editable = false;
         if (this.currentCard != null) {
-        	CardScriptInfo scriptInfo = StaticData.instance().getScriptInfo(this.currentCard.getRules());
+        	CardScriptInfo scriptInfo = CardScriptInfo.getScriptFor(this.currentCard.getRules().getName());
         	if (scriptInfo != null) {
 	        	text = scriptInfo.getText();
 	        	editable = scriptInfo.canEdit();
@@ -120,29 +126,32 @@ public enum CCardScript implements ICDoc {
     public boolean saveChanges() {
     	if (!hasChanges()) { return true; } //not need if text hasn't been changed
 
-//        File sourceFile = this.currentCard.getRules().getSourceFile();
-//        if (sourceFile == null) { return true; }
-//    	
-//    	try {
-//    		String text = VCardScript.SINGLETON_INSTANCE.getTxtScript().getText();
-//
-//            PrintWriter p = new PrintWriter(sourceFile);
-//            p.print(text);
-//            p.close();
-//
-//            this.baseText = text;
-//            updateDirtyFlag();
-//
-//            this.currentCard.updateRules(text);
-//            VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().repaint();
-//	        CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
-//	        CPicture.SINGLETON_INSTANCE.showImage(this.currentCard);
-//            return true;
-//        } catch (final Exception ex) {
-//        	JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "FileUtil : writeFile() error, problem writing file - " + sourceFile + " : " + ex);
-//        	return false;
-//        }
-    	return false;
+    	CardScriptInfo csi = CardScriptInfo.getScriptFor(this.currentCard.getRules().getName());
+        File sourceFile = csi == null ? null : csi.getFile();
+        if (sourceFile == null) { return true; }
+    	
+    	try {
+    		String text = VCardScript.SINGLETON_INSTANCE.getTxtScript().getText();
+
+            PrintWriter p = new PrintWriter(sourceFile);
+            p.print(text);
+            p.close();
+
+            this.baseText = text;
+            updateDirtyFlag();
+
+            CardRules newRules = CardRules.fromScript(Arrays.asList(text.split("\n")));
+            Singletons.getMagicDb().getCommonCards().getEditor().putCard(newRules);
+            this.currentCard = Singletons.getMagicDb().getCommonCards().getCard(newRules.getName());
+            
+            VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().repaint();
+	        CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
+	        CPicture.SINGLETON_INSTANCE.showImage(this.currentCard);
+            return true;
+        } catch (final Exception ex) {
+        	JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "FileUtil : writeFile() error, problem writing file - " + sourceFile + " : " + ex);
+        	return false;
+        }
     }
 
     //========== Overridden methods

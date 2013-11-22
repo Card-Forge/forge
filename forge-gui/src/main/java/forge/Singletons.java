@@ -20,6 +20,8 @@ package forge;
 import forge.card.cardfactory.CardStorageReader;
 import forge.control.FControl;
 import forge.gui.toolbox.FProgressBar;
+import forge.gui.workshop.CardScriptInfo;
+import forge.gui.workshop.controllers.CCardScript;
 import forge.model.FModel;
 import forge.properties.NewConstants;
 import forge.view.FView;
@@ -74,7 +76,7 @@ public final class Singletons {
         };
         
         // Loads all cards (using progress bar).
-        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true, progressBarBridge);
+        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true, progressBarBridge, CardScriptInfo.readerObserver);
         magicDb = new StaticData(reader, "res/editions", "res/blockdata");
         model = FModel.getInstance(withUi);
         
