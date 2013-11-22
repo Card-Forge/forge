@@ -2406,21 +2406,24 @@ public class Card extends GameEntity implements Comparable<Card> {
             final String keyword = kw.get(i);
             if ((keyword.startsWith("Ripple") && !sb.toString().contains("Ripple"))
                     || (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge"))
-                    || (keyword.startsWith("Madness") && !sb.toString().contains("Madness"))
-                    || (keyword.startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))
-                    || (keyword.startsWith("Recover") && !sb.toString().contains("Recover"))
-                    || (keyword.startsWith("Miracle") && !sb.toString().contains("Miracle"))) {
+                    || (keyword.startsWith("CARDNAME is ") && !sb.toString().contains("CARDNAME is "))) {
                 sb.append(keyword.replace(":", " ")).append("\r\n");
             }
-            if (keyword.equals("CARDNAME can't be countered.")
+            else if ((keyword.startsWith("Madness") && !sb.toString().contains("Madness"))
+                    || (keyword.startsWith("Recover") && !sb.toString().contains("Recover"))
+                    || (keyword.startsWith("Miracle") && !sb.toString().contains("Miracle"))) {
+            	String[] parts = keyword.split(":");
+            	sb.append(parts[0] + " " + ManaCostParser.parse(parts[1])).append("\r\n");
+            }
+            else if (keyword.equals("CARDNAME can't be countered.")
                     || keyword.startsWith("May be played") || keyword.startsWith("Conspire")
                     || keyword.startsWith("Cascade") || keyword.startsWith("Wither")
                     || (keyword.startsWith("Epic") && !sb.toString().contains("Epic"))
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
                     || (keyword.startsWith("Multikicker") && !sb.toString().contains("Multikicker"))) {
-                sb.append(kw.get(i)).append("\r\n");
+                sb.append(keyword).append("\r\n");
             }
-            if (keyword.startsWith("Flashback")) {
+            else if (keyword.startsWith("Flashback")) {
                 sb.append("Flashback");
                 if (keyword.contains(" ")) {
                     final Cost fbCost = new Cost(keyword.substring(10), true);
