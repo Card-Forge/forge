@@ -48,6 +48,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     private final JButton btnStart  = new StartButton();
     private final FComboBoxWrapper<String> cbxPet  = new FComboBoxWrapper<String>();
     private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
+    private final JCheckBox cbCharm = new FCheckBox("Use Charm of Vigor");
     private final JLabel lblZep   = new FLabel.Builder().text("<html>Launch<br>Zeppelin</html>")
             .hoverable(true).icon(FSkin.getIcon(FSkin.QuestIcons.ICO_ZEP))
             .fontSize(16).build();
@@ -109,6 +110,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         pnlStats.add(lblLife, constraints);
         pnlStats.add(lblWorld, constraints);
         pnlStats.add(cbPlant, constraints);
+        pnlStats.add(cbCharm, constraints);
         cbxPet.addTo(pnlStats, constraints);
         pnlStats.add(lblZep, "w 130px!, h 60px!, gap 0 0 0 5px");
         pnlStats.setOpaque(false);
@@ -298,4 +300,11 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     public DragCell getParentCell() {
         return parentCell;
     }
+
+	/**
+	 * @return the cbCharm
+	 */
+	public JCheckBox getCbCharm() {
+		return cbCharm;
+	}
 }

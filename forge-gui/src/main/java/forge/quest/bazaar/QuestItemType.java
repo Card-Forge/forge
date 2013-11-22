@@ -41,7 +41,9 @@ public enum QuestItemType {
     /** The ELIXIR_OF_LIFE. */
     ELIXIR_OF_LIFE("Elixir of Life", QuestItemElixir.class, QuestItemCondition.class),
     /** The POUND_FLESH. */
-    POUND_FLESH("Pound of Flesh", QuestItemPoundFlesh.class, QuestItemCondition.class);
+    POUND_FLESH("Pound of Flesh", QuestItemPoundFlesh.class, QuestItemCondition.class),
+    /** The AMULET. */
+    CHARM("Charm of Vigor", QuestItemCharmOfVigor.class, QuestItemCondition.class);
 
     private final String saveFileKey;
     private final Class<? extends QuestItemBasic> bazaarControllerClass;

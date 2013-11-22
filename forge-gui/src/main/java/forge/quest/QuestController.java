@@ -107,6 +107,17 @@ public class QuestController {
                 this.model.getPetSlots().put(slot, name);
         }
     }
+    
+    public void setCharmState(boolean active) {
+    	if (this.model != null) {
+    		this.model.setCharmActive(active);
+    	}
+    }
+    
+    public boolean getCharmState() {
+    	return this.model == null ? false : this.model.isCharmActive();
+    }
+    
     /**
      * 
      * @param slot &emsp; int

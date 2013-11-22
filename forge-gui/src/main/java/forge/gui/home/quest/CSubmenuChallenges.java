@@ -98,6 +98,14 @@ public enum CSubmenuChallenges implements ICDoc {
                 quest.save();
             }
         });
+        
+        view.getCbCharm().addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent arg0) {
+        		quest.setCharmState(view.getCbCharm().isSelected());
+        		quest.save();
+        	}
+        });
     }
 
     private final KeyAdapter _startOnEnter = new KeyAdapter() {

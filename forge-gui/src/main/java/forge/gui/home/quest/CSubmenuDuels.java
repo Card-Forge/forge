@@ -67,6 +67,14 @@ public enum CSubmenuDuels implements ICDoc {
                 quest.save();
             }
         });
+        
+        view.getCbCharm().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                quest.setCharmState(view.getCbCharm().isSelected());
+                quest.save();
+            }
+        });
 
         view.getCbxPet().addActionListener(new ActionListener() {
             @Override

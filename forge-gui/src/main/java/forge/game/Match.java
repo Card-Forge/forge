@@ -37,15 +37,28 @@ public class Match {
     /**
      * This should become constructor once.
      */
-    public Match(GameType type, List<RegisteredPlayer> players0) {
+    public Match(GameType type, List<RegisteredPlayer> players0, int games) {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
         players = Collections.unmodifiableList(Lists.newArrayList(players0));
         gameType = type;
+        
+        gamesPerMatch = games;
+        gamesToWinMatch = (int)Math.ceil((gamesPerMatch+1)/2);
+    }
+    
+    public Match(GameType type, List<RegisteredPlayer> players0) {
+    	this(type,players0,3);
     }
     
     public Match(GameType type, List<RegisteredPlayer> players0, Boolean overrideAnte) {
         this(type, players0);
         if( overrideAnte != null )
+            this.useAnte = overrideAnte.booleanValue();
+    }
+    
+    public Match(GameType type, List<RegisteredPlayer> players0, Boolean overrideAnte, int games) {
+    	this(type, players0, games);
+    	if( overrideAnte != null )
             this.useAnte = overrideAnte.booleanValue();
     }
 
@@ -67,7 +80,7 @@ public class Match {
     public int getGamesToWinMatch() {
         return gamesToWinMatch;
     }
-
+    
     public void addGamePlayed(Game finished) {
         if (!finished.isGameOver()) {
             throw new IllegalStateException("Game is not over yet.");

@@ -46,6 +46,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
 
     private final JButton btnStart  = new StartButton();
     private final FComboBoxWrapper<String> cbxPet  = new FComboBoxWrapper<String>();
+    private final JCheckBox cbCharm = new FCheckBox("Use Charm of Vigor");
     private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
     private final JLabel lblZep     = new FLabel.Builder().text("Launch Zeppelin").fontSize(14).build();
 
@@ -107,6 +108,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         pnlStats.add(lblLife, constraints);
         pnlStats.add(lblWorld, constraints);
         pnlStats.add(cbPlant, constraints);
+        pnlStats.add(cbCharm, constraints);
         cbxPet.addTo(pnlStats, constraints);
         pnlStats.setOpaque(false);
     }
@@ -291,4 +293,11 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     public DragCell getParentCell() {
         return parentCell;
     }
+
+	/**
+	 * @return the cbCharm
+	 */
+	public JCheckBox getCbCharm() {
+		return cbCharm;
+	}
 }

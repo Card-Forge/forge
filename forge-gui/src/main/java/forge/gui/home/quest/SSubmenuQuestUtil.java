@@ -122,6 +122,15 @@ public class SSubmenuQuestUtil {
                     view.getCbxPet().setVisible(false);
                 }
             }
+            if (iSlot == 2) {
+            	if (petList.isEmpty()) {
+                    view.getCbCharm().setVisible(false);
+                }
+                else {
+                    view.getCbCharm().setVisible(true);
+                    view.getCbCharm().setSelected(currentPetName != null);
+                }
+            }
         }
 
         if (view.equals(VSubmenuChallenges.SINGLETON_INSTANCE)) {
@@ -212,6 +221,7 @@ public class SSubmenuQuestUtil {
             // Classic mode display changes
             view0.getCbxPet().setVisible(false);
             view0.getCbPlant().setVisible(false);
+            view0.getCbCharm().setVisible(false);
             view0.getLblZep().setVisible(false);
             view0.getLblNextChallengeInWins().setVisible(false);
             view0.getBtnBazaar().setVisible(false);
@@ -448,7 +458,7 @@ public class SSubmenuQuestUtil {
         aiPlayer.setIconImageKey(event.getIconImageKey());
         starter.add(aiStart.setPlayer(aiPlayer));
 
-        final Match mc = new Match(GameType.Quest, starter, forceAnte);
+        final Match mc = new Match(GameType.Quest, starter, forceAnte, qData.getCharmState() ? 5 : 3);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

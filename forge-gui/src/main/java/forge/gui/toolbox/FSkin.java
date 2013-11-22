@@ -1417,6 +1417,7 @@ public enum FSkin {
         ICO_BOTTLES     (new int[] {400, 480, 80, 80}), /** */
         ICO_BOX         (new int[] {480, 480, 80, 80}), /** */
         ICO_COIN        (new int[] {560, 480, 80, 80}), /** */
+        ICO_CHARM		(new int[] {480, 800, 80, 80}), /** */
 
         ICO_FOX         (new int[] {0, 560, 80, 80}), /** */
         ICO_LEAF        (new int[] {80, 560, 80, 80}), /** */

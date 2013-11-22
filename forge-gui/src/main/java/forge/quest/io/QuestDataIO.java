@@ -202,6 +202,11 @@ public class QuestDataIO {
             QuestDataIO.setFinalField(QuestData.class, "petSlots", newData, new HashMap<Integer, String>());
         }
         
+        if(saveVersion < 8) {
+        	QuestDataIO.setFinalField(QuestData.class, "isCharmActive", newData, false);
+        }
+        
+        
         final QuestAssets qS = newData.getAssets();
         final QuestAchievements qA = newData.getAchievements();
 

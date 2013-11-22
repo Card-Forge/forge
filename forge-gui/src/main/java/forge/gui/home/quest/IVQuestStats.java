@@ -51,6 +51,9 @@ public interface IVQuestStats {
     /** @return {@link javax.swing.JCheckBox} */
     JCheckBox getCbPlant();
 
+    /** @return {@link javax.swing.JCheckBox} */    
+    JCheckBox getCbCharm();
+
     /** @return {@link javax.swing.JLabel} */
     JLabel getLblZep();
 }

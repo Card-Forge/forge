@@ -40,7 +40,7 @@ import forge.quest.io.QuestDataIO;
 public final class QuestData {
 
     /** Holds the latest version of the Quest Data. */
-    public static final int CURRENT_VERSION_NUMBER = 7;
+    public static final int CURRENT_VERSION_NUMBER = 8;
 
     // This field places the version number into QD instance,
     // but only when the object is created through the constructor
@@ -62,6 +62,7 @@ public final class QuestData {
     private final QuestAssets assets;
     private final QuestAchievements achievements;
     private final Map<Integer, String> petSlots = new HashMap<Integer, String>();
+    private boolean isCharmActive = false;
 
 
     /**
@@ -185,5 +186,19 @@ public final class QuestData {
 
         worldId = newId;
     }
+
+	/**
+	 * @return the isCharmActive
+	 */
+	public boolean isCharmActive() {
+		return isCharmActive;
+	}
+
+	/**
+	 * @param isCharmActive the isCharmActive to set
+	 */
+	public void setCharmActive(boolean isCharmActive) {
+		this.isCharmActive = isCharmActive;
+	}
 
 }
