@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import forge.CardStorageReader;
 import forge.card.CardRules;
-import forge.card.cardfactory.CardStorageReader;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 

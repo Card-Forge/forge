@@ -26,12 +26,12 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import forge.FThreads;
 import forge.Singletons;
 import forge.gui.toolbox.FAbsolutePositioner;
 import forge.properties.FileLocation;
 import forge.properties.NewConstants;
 import forge.util.CollectionSuppliers;
+import forge.util.ThreadUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 import forge.view.FFrame;
@@ -63,7 +63,7 @@ public final class SLayoutIO {
 
     public static void saveWindowLayout() {
         if (saveWindowRequested.getAndSet(true)) { return; }
-        FThreads.delay(500, new Runnable() {
+        ThreadUtil.delay(500, new Runnable() {
             @Override
             public void run() {
                 finishSaveWindowLayout();
@@ -230,7 +230,7 @@ public final class SLayoutIO {
      */
     public static void saveLayout(final File f0) {
         if( saveRequested.getAndSet(true) ) return; 
-        FThreads.delay(100, new Runnable() {
+        ThreadUtil.delay(100, new Runnable() {
             
             @Override
             public void run() {

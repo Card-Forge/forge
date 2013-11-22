@@ -75,6 +75,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
+import forge.util.ThreadUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
 
@@ -1620,10 +1621,10 @@ public class GameAction {
 
     // Invokes given runnable in Game thread pool - used to start game and perform actions from UI (when game-0 waits for input)
     public void invoke(final Runnable proc) {
-        if( FThreads.isGameThread() ) {
+        if( ThreadUtil.isGameThread() ) {
             proc.run();
         } else
-            FThreads.invokeInGameThread(proc);
+            ThreadUtil.invokeInGameThread(proc);
     }
 
 }

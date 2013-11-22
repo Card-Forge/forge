@@ -22,13 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
-import forge.FThreads;
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 import forge.gui.match.CMatchUI;
 import forge.util.Lang;
+import forge.util.ThreadUtil;
 import forge.view.ButtonUtil;
  /**
   * <p>
@@ -122,7 +122,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         
         if ( isSerumPowder && GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
             cardSelectLocked = true;
-            FThreads.invokeInGameThread(new Runnable() { 
+            ThreadUtil.invokeInGameThread(new Runnable() { 
                 public void run() {
                     List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
                     for (Card c : hand) {

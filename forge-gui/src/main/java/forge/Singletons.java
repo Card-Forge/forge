@@ -17,11 +17,9 @@
  */
 package forge;
 
-import forge.card.cardfactory.CardStorageReader;
 import forge.control.FControl;
 import forge.gui.toolbox.FProgressBar;
 import forge.gui.workshop.CardScriptInfo;
-import forge.gui.workshop.controllers.CCardScript;
 import forge.model.FModel;
 import forge.properties.NewConstants;
 import forge.view.FView;
@@ -57,7 +55,8 @@ public final class Singletons {
         if(withUi)
             view = FView.SINGLETON_INSTANCE;
 
-        IProgressObserver progressBarBridge = view == null ? IProgressObserver.emptyObserver : new IProgressObserver() {
+        CardStorageReader.ProgressObserver progressBarBridge = view == null 
+                ? CardStorageReader.ProgressObserver.emptyObserver : new CardStorageReader.ProgressObserver() {
             FProgressBar bar = view.getSplash().getProgressBar();
             @Override
             public void setOperationName(final String name, final boolean usePercents) { 

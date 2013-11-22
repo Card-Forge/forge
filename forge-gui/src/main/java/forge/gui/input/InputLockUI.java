@@ -10,6 +10,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.InputQueue;
 import forge.game.player.Player;
 import forge.gui.match.CMatchUI;
+import forge.util.ThreadUtil;
 import forge.view.ButtonUtil;
 
 /** 
@@ -24,7 +25,7 @@ public class InputLockUI implements Input  {
 
     public void showMessageInitial() {
         int ixCall = 1 + iCall.getAndIncrement();
-        FThreads.delay(500, new InputUpdater(ixCall));
+        ThreadUtil.delay(500, new InputUpdater(ixCall));
     }
     
     @Override

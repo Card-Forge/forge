@@ -32,7 +32,7 @@ public class StaticData {
 
     private static StaticData lastInstance = null;
 
-    public StaticData(ICardStorageReader reader, String editionFolder, String blockDataFolder) {
+    public StaticData(CardStorageReader reader, String editionFolder, String blockDataFolder) {
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         lastInstance = this;
 

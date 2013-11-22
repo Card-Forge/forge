@@ -19,8 +19,7 @@ forge-core/.settings/org.eclipse.core.resources.prefs -text
 forge-core/.settings/org.eclipse.jdt.core.prefs -text
 forge-core/.settings/org.eclipse.m2e.core.prefs -text
 forge-core/pom.xml -text
-forge-core/src/main/java/forge/ICardStorageReader.java -text
-forge-core/src/main/java/forge/IProgressObserver.java -text
+forge-core/src/main/java/forge/CardStorageReader.java -text
 forge-core/src/main/java/forge/StaticData.java -text
 forge-core/src/main/java/forge/card/BoosterGenerator.java svneol=native#text/plain
 forge-core/src/main/java/forge/card/BoosterSlots.java -text
@@ -98,6 +97,7 @@ forge-core/src/main/java/forge/util/Lang.java -text
 forge-core/src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 forge-core/src/main/java/forge/util/PredicateString.java -text
 forge-core/src/main/java/forge/util/TextUtil.java -text
+forge-core/src/main/java/forge/util/ThreadUtil.java -text
 forge-core/src/main/java/forge/util/package-info.java -text
 forge-core/src/main/java/forge/util/storage/IStorage.java -text
 forge-core/src/main/java/forge/util/storage/StorageBase.java -text
@@ -14944,7 +14944,6 @@ forge-gui/src/main/java/forge/card/ability/package-info.java svneol=native#text/
 forge-gui/src/main/java/forge/card/cardfactory/CardFactory.java svneol=native#text/plain
 forge-gui/src/main/java/forge/card/cardfactory/CardFactoryCreatures.java svneol=native#text/plain
 forge-gui/src/main/java/forge/card/cardfactory/CardFactoryUtil.java svneol=native#text/plain
-forge-gui/src/main/java/forge/card/cardfactory/CardStorageReader.java svneol=native#text/plain
 forge-gui/src/main/java/forge/card/cardfactory/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/card/cost/Cost.java svneol=native#text/plain
 forge-gui/src/main/java/forge/card/cost/CostAddMana.java -text

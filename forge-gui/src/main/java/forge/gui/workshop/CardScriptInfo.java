@@ -20,12 +20,11 @@ package forge.gui.workshop;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.ICardStorageReader;
+import forge.CardStorageReader;
 import forge.card.CardRules;
 
 public final class CardScriptInfo {
@@ -58,7 +57,7 @@ public final class CardScriptInfo {
         return allScrips.get(name);
     }
     
-    public static ICardStorageReader.Observer readerObserver = new ICardStorageReader.Observer() {
+    public static CardStorageReader.Observer readerObserver = new CardStorageReader.Observer() {
         @Override
         public void cardLoaded(CardRules rules, List<String> lines, File fileOnDisk) {
             allScrips.put(rules.getName(), new CardScriptInfo(StringUtils.join(lines, '\n'), fileOnDisk));
