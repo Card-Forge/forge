@@ -43,7 +43,7 @@ public class TextUtil {
         return mapAsString.toString();
     }
 
-    public static String[] split(CharSequence input, char delimiter) { 
+    public static String[] split(CharSequence input, char delimiter) {
         return splitWithParenthesis(input, delimiter, Integer.MAX_VALUE, '\0', '\0', true);
     }
 
@@ -68,7 +68,7 @@ public class TextUtil {
 
     /** 
      * Split string separated by a single char delimiter, can take parenthesis in account
-     * It's faster than String.split, and allows parenthesis 
+     * It's faster than String.split, and allows parenthesis
      */
     public static String[] splitWithParenthesis(CharSequence input, char delimiter, int maxEntries, char openPar, char closePar, boolean skipEmpty) {
         List<String> result = new ArrayList<String>();
@@ -98,7 +98,18 @@ public class TextUtil {
         String[] toReturn = result.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
         return trimParenthesis ? StringUtils.stripAll(toReturn, String.valueOf(openPar)) : toReturn;
     }
-    
+
+    public static String join(Iterable<String> strs, String delim) {
+    	StringBuilder sb = new StringBuilder();
+    	for (String str : strs) {
+    		if (sb.length() > 0) {
+    			sb.append(delim);
+    		}
+    		sb.append(str);
+    	}
+    	return sb.toString();
+    }
+
     /**
      * Converts an enum value to a printable label but upcasing the first letter
      * and lcasing all subsequent letters

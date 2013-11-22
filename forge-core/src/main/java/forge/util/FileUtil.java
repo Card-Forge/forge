@@ -112,11 +112,7 @@ public final class FileUtil {
     } // writeAllDecks()
 
     public static String readFileToString(String filename) {
-        StringBuilder s = new StringBuilder();
-        for (String line : readFile(filename)) {
-            s.append(line).append('\n');
-        }
-        return s.toString();
+    	return TextUtil.join(readFile(filename), "\n");
     }
     
     public static List<String> readFile(final String filename) {

@@ -6,6 +6,8 @@ import javax.swing.event.DocumentListener;
 
 import forge.Command;
 import forge.Singletons;
+import forge.StaticData;
+import forge.card.CardScriptInfo;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FTextEditor;
@@ -25,11 +27,11 @@ import forge.item.PaperCard;
 public enum CCardScript implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
-    
+
     private PaperCard currentCard;
     private String baseText;
     private boolean isTextDirty;
-    
+
     private CCardScript() {
     	VCardScript.SINGLETON_INSTANCE.getTxtScript().addDocumentListener(new DocumentListener() {
 			@Override
@@ -48,7 +50,7 @@ public enum CCardScript implements ICDoc {
 			}
 		});
     }
-    
+
     private void updateDirtyFlag() {
     	boolean isTextNowDirty = !VCardScript.SINGLETON_INSTANCE.getTxtScript().getText().equals(baseText);
     	if (this.isTextDirty == isTextNowDirty) { return; }
@@ -72,21 +74,16 @@ public enum CCardScript implements ICDoc {
     	this.currentCard = card;
     	refresh();
     }
-    
+
     public void refresh() {
     	String text = "";
         boolean editable = false;
         if (this.currentCard != null) {
-//            File sourceFile = this.currentCard.getRules().getSourceFile();
-//            if (sourceFile != null) {
-//            	try {
-//            		text = FileUtil.readFileToString(sourceFile);
-//            		editable = true;
-//            	}
-//            	catch (final Exception ex) {
-//            		text = "Couldn't read file - " + sourceFile + "\n\nException:\n" + ex.toString();
-//            	}
-//            }
+        	CardScriptInfo scriptInfo = StaticData.instance().getScriptInfo(this.currentCard.getRules());
+        	if (scriptInfo != null) {
+	        	text = scriptInfo.getText();
+	        	editable = scriptInfo.canEdit();
+        	}
         }
         this.baseText = text;
 
@@ -95,11 +92,11 @@ public enum CCardScript implements ICDoc {
         txtScript.setEditable(editable);
         txtScript.setCaretPosition(0); //keep scrolled to top
     }
-    
+
     public boolean hasChanges() {
     	return (this.currentCard != null && this.isTextDirty);
     }
-    
+
     public boolean canSwitchAway(boolean isCardChanging) {
     	if (!hasChanges()) { return true; }
 
@@ -119,7 +116,7 @@ public enum CCardScript implements ICDoc {
         }
         return true;
     }
-    
+
     public boolean saveChanges() {
     	if (!hasChanges()) { return true; } //not need if text hasn't been changed
 
@@ -132,7 +129,7 @@ public enum CCardScript implements ICDoc {
 //            PrintWriter p = new PrintWriter(sourceFile);
 //            p.print(text);
 //            p.close();
-//            
+//
 //            this.baseText = text;
 //            updateDirtyFlag();
 //

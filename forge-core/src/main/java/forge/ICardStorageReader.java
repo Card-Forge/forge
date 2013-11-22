@@ -2,8 +2,8 @@ package forge;
 
 import java.util.List;
 
-import forge.card.CardRules;
+import forge.card.CardScriptInfo;
 
 public interface ICardStorageReader{
-    List<CardRules> loadCards();
+    List<CardScriptInfo> loadCards();
 }

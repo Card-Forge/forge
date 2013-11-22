@@ -32,6 +32,7 @@ forge-core/src/main/java/forge/card/CardFace.java -text
 forge-core/src/main/java/forge/card/CardRarity.java -text
 forge-core/src/main/java/forge/card/CardRules.java -text
 forge-core/src/main/java/forge/card/CardRulesPredicates.java -text
+forge-core/src/main/java/forge/card/CardScriptInfo.java -text
 forge-core/src/main/java/forge/card/CardSplitType.java -text
 forge-core/src/main/java/forge/card/CardType.java -text
 forge-core/src/main/java/forge/card/ColorSet.java -text
