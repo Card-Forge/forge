@@ -72,7 +72,7 @@ public class CardStorageReader {
     public static final String DEFAULT_CHARSET_NAME = "US-ASCII";
 
     private final boolean useThreadPool = ThreadUtil.isMultiCoreSystem();
-    public final static int NUMBER_OF_PARTS = 25;
+    private final static int NUMBER_OF_PARTS = 25;
 
     private final CountDownLatch cdl = new CountDownLatch(NUMBER_OF_PARTS);
     private final ProgressObserver progressObserver;
@@ -99,7 +99,7 @@ public class CardStorageReader {
      *            if true, attempts to load cards from a zip file, if one
      *            exists.
      */
-    public CardStorageReader(String cardDataDir, final boolean useZip, CardStorageReader.ProgressObserver progressObserver, Observer observer) {
+    public CardStorageReader(String cardDataDir, CardStorageReader.ProgressObserver progressObserver, Observer observer) {
         this.progressObserver = progressObserver != null ? progressObserver : CardStorageReader.ProgressObserver.emptyObserver;
         this.cardsfolder = new File(cardDataDir);
         this.observer = observer;
@@ -115,7 +115,7 @@ public class CardStorageReader {
 
         final File zipFile = new File(cardsfolder, "cardsfolder.zip");
 
-        if (useZip && zipFile.exists()) {
+        if (zipFile.exists()) {
             try {
                 this.zip = new ZipFile(zipFile);
             } catch (final Exception exn) {
@@ -162,16 +162,13 @@ public class CardStorageReader {
         progressObserver.setOperationName("Loading card data", true);
         progressObserver.report(0, NUMBER_OF_PARTS);
 
-        final List<Callable<List<CardRules>>> tasks;
+        final List<Callable<List<CardRules>>> tasks = new ArrayList<>();
         long estimatedFilesRemaining;
 
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.
-        if (this.zip == null) {
-            final List<File> allFiles = collectCardFiles(new ArrayList<File>(), this.cardsfolder);
-            estimatedFilesRemaining = allFiles.size();
-            tasks = makeTaskListForFiles(allFiles);
-        } else {
+        
+        if( this.zip != null ) {
             estimatedFilesRemaining = this.zip.size();
             ZipEntry entry;
             List<ZipEntry> entries = new ArrayList<ZipEntry>();
@@ -184,8 +181,12 @@ public class CardStorageReader {
                 entries.add(entry);
                 }
 
-            tasks = makeTaskListForZip(entries);
-        } // endif
+            tasks.addAll(makeTaskListForZip(entries, NUMBER_OF_PARTS));
+        }
+
+        final List<File> allFiles = collectCardFiles(new ArrayList<File>(), this.cardsfolder);
+        estimatedFilesRemaining = allFiles.size();
+        tasks.addAll(makeTaskListForFiles(allFiles, zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 5));
 
         StopWatch sw = new StopWatch();
         sw.start();
@@ -194,7 +195,7 @@ public class CardStorageReader {
 
         sw.stop();
         final long timeOnParse = sw.getTime();
-        System.out.printf("Read cards: %s %s in %d ms (%d parts) %s%n", estimatedFilesRemaining, zip == null? "files" : "archived files", timeOnParse, NUMBER_OF_PARTS, useThreadPool ? "using thread pool" : "in same thread");
+        System.out.printf("Read cards: %s files in %d ms (%d parts) %s%n", estimatedFilesRemaining, timeOnParse, tasks.size(), useThreadPool ? "using thread pool" : "in same thread");
 //        if ( null != barProgress )
 //            barProgress.setPercentMode(false);
         return res;
@@ -228,19 +229,19 @@ public class CardStorageReader {
         return result;
     }
 
-    private List<Callable<List<CardRules>>> makeTaskListForZip(final List<ZipEntry> entries) {
+    private List<Callable<List<CardRules>>> makeTaskListForZip(final List<ZipEntry> entries, final int maxParts) {
         int totalFiles = entries.size();
-        int filesPerPart = totalFiles / NUMBER_OF_PARTS;
+        int filesPerPart = totalFiles / maxParts;
         final List<Callable<List<CardRules>>> tasks = new ArrayList<Callable<List<CardRules>>>();
-        for (int iPart = 0; iPart < NUMBER_OF_PARTS; iPart++) {
+        for (int iPart = 0; iPart < maxParts; iPart++) {
             final int from = iPart * filesPerPart;
-            final int till = iPart == NUMBER_OF_PARTS - 1 ? totalFiles : from + filesPerPart;
+            final int till = iPart == maxParts - 1 ? totalFiles : from + filesPerPart;
             tasks.add(new Callable<List<CardRules>>() {
                 @Override
                 public List<CardRules> call() throws Exception{
                     List<CardRules> res = loadCardsInRangeFromZip(entries, from, till);
                     cdl.countDown();
-                    progressObserver.report(NUMBER_OF_PARTS - (int)cdl.getCount(), NUMBER_OF_PARTS);
+                    progressObserver.report(maxParts - (int)cdl.getCount(), maxParts);
                     return res;
                 }
             });
@@ -248,19 +249,19 @@ public class CardStorageReader {
         return tasks;
     }
 
-    private List<Callable<List<CardRules>>> makeTaskListForFiles(final List<File> allFiles) {
+    private List<Callable<List<CardRules>>> makeTaskListForFiles(final List<File> allFiles, final int maxParts) {
         int totalFiles = allFiles.size();
-        int filesPerPart = totalFiles / NUMBER_OF_PARTS;
+        int filesPerPart = totalFiles / maxParts;
         final List<Callable<List<CardRules>>> tasks = new ArrayList<Callable<List<CardRules>>>();
-        for (int iPart = 0; iPart < NUMBER_OF_PARTS; iPart++) {
+        for (int iPart = 0; iPart < maxParts; iPart++) {
             final int from = iPart * filesPerPart;
-            final int till = iPart == NUMBER_OF_PARTS - 1 ? totalFiles : from + filesPerPart;
+            final int till = iPart == maxParts - 1 ? totalFiles : from + filesPerPart;
             tasks.add(new Callable<List<CardRules>>() {
                 @Override
                 public List<CardRules> call() throws Exception{
                     List<CardRules> res = loadCardsInRange(allFiles, from, till);
                     cdl.countDown();
-                    progressObserver.report(NUMBER_OF_PARTS - (int)cdl.getCount(), NUMBER_OF_PARTS);
+                    progressObserver.report(maxParts - (int)cdl.getCount(), maxParts);
                     return res;
                 }
             });
