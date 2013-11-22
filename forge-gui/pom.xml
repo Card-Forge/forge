@@ -186,7 +186,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>14.0.1</version>
+            <version>15.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -449,7 +449,7 @@
                                             <option value="-Dcom.apple.mrj.application.apple.menu.about.name=Forge" />
                                             <option value="-Dcom.apple.smallTabs=true" />
                                             <option value="-Xmx1024M" />
-                                            <option value="-Duser.dir=Contents/Resources" />
+                                            <option value="-Dapp.dir=$APP_ROOT/Contents/Resources/" />
                                         </bundleapp>
                                         <symlink link="${project.build.directory}/${project.build.finalName}-osx/Applications" resource="/Applications" />
                                         <exec executable="${basedir}/${configSourceDirectory}/create-dmg" failonerror="false">
