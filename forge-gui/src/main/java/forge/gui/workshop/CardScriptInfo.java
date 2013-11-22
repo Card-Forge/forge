@@ -48,19 +48,19 @@ public final class CardScriptInfo {
     	return this.file != null;
     }
 
-    private static Map<String, CardScriptInfo> allScrips = new ConcurrentHashMap<>();
+    private static Map<String, CardScriptInfo> allScripts = new ConcurrentHashMap<>();
     public static void addCard(String name, String script, File file) {
-        allScrips.put(name, new CardScriptInfo(script, file));
+        allScripts.put(name, new CardScriptInfo(script, file));
     }
     
     public static CardScriptInfo getScriptFor(String name) {
-        return allScrips.get(name);
+        return allScripts.get(name);
     }
     
     public static CardStorageReader.Observer readerObserver = new CardStorageReader.Observer() {
         @Override
         public void cardLoaded(CardRules rules, List<String> lines, File fileOnDisk) {
-            allScrips.put(rules.getName(), new CardScriptInfo(StringUtils.join(lines, '\n'), fileOnDisk));
+            allScripts.put(rules.getName(), new CardScriptInfo(StringUtils.join(lines, '\n'), fileOnDisk));
         }
     };
 }
