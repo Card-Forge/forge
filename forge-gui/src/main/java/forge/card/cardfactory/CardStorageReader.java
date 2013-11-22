@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -47,7 +47,7 @@ import forge.util.FileUtil;
  * <p>
  * CardReader class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -61,10 +61,10 @@ public class CardStorageReader implements ICardStorageReader {
 
     private final boolean useThreadPool = FThreads.isMultiCoreSystem();
     public final static int NUMBER_OF_PARTS = 25;
-    
+
     private final CountDownLatch cdl = new CountDownLatch(NUMBER_OF_PARTS);
     private final IProgressObserver progressObserver;
-    
+
     private transient File cardsfolder;
 
     private transient ZipFile zip;
@@ -78,7 +78,7 @@ public class CardStorageReader implements ICardStorageReader {
      * <p>
      * Constructor for CardReader.
      * </p>
-     * 
+     *
      * @param theCardsFolder
      *            indicates location of the cardsFolder
      * @param useZip
@@ -86,9 +86,9 @@ public class CardStorageReader implements ICardStorageReader {
      *            exists.
      */
     public CardStorageReader(String cardDataDir, final boolean useZip, IProgressObserver progressObserver) {
-        this.progressObserver = progressObserver != null ? progressObserver : IProgressObserver.emptyObserver; 
+        this.progressObserver = progressObserver != null ? progressObserver : IProgressObserver.emptyObserver;
         this.cardsfolder = new File(cardDataDir);
-        
+
         // These read data for lightweight classes.
         if (!cardsfolder.exists()) {
             throw new RuntimeException("CardReader : constructor error -- " + cardsfolder.getAbsolutePath() + " file/folder not found.");
@@ -97,8 +97,6 @@ public class CardStorageReader implements ICardStorageReader {
         if (!cardsfolder.isDirectory()) {
             throw new RuntimeException("CardReader : constructor error -- not a directory -- " + cardsfolder.getAbsolutePath());
         }
-
-        
 
         final File zipFile = new File(cardsfolder, "cardsfolder.zip");
 
@@ -115,9 +113,8 @@ public class CardStorageReader implements ICardStorageReader {
     } // CardReader()
 
     private final List<CardRules> loadCardsInRange(final List<File> files, int from, int to) {
-        
         CardRules.Reader rulesReader = new CardRules.Reader();
-        
+
         List<CardRules> result = new ArrayList<CardRules>();
         for(int i = from; i < to; i++) {
             File cardTxtFile = files.get(i);
@@ -125,11 +122,10 @@ public class CardStorageReader implements ICardStorageReader {
         }
         return result;
     }
-    
+
     private final List<CardRules> loadCardsInRangeFromZip(final List<ZipEntry> files, int from, int to) {
-    
         CardRules.Reader rulesReader = new CardRules.Reader();
-        
+
         List<CardRules> result = new ArrayList<CardRules>();
         for(int i = from; i < to; i++) {
             ZipEntry ze = files.get(i);
@@ -137,15 +133,14 @@ public class CardStorageReader implements ICardStorageReader {
             result.add(this.loadCard(rulesReader, ze));
         }
         return result;
-    }    
-    
-    
+    }
+
     /**
      * Starts reading cards into memory until the given card is found.
-     * 
+     *
      * After that, we save our place in the list of cards (on disk) in case we
      * need to load more.
-     * 
+     *
      * @return the Card or null if it was not found.
      */
     public final List<CardRules> loadCards() {
@@ -154,7 +149,7 @@ public class CardStorageReader implements ICardStorageReader {
 
         final List<Callable<List<CardRules>>> tasks;
         long estimatedFilesRemaining;
-        
+
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.
         if (this.zip == null) {
@@ -162,7 +157,6 @@ public class CardStorageReader implements ICardStorageReader {
             estimatedFilesRemaining = allFiles.size();
             tasks = makeTaskListForFiles(allFiles);
         } else {
-            
             estimatedFilesRemaining = this.zip.size();
             ZipEntry entry;
             List<ZipEntry> entries = new ArrayList<ZipEntry>();
@@ -180,9 +174,9 @@ public class CardStorageReader implements ICardStorageReader {
 
         StopWatch sw = new StopWatch();
         sw.start();
-        
+
         List<CardRules> res = executeLoadTask(tasks);
-        
+
         sw.stop();
         final long timeOnParse = sw.getTime();
         System.out.printf("Read cards: %s %s in %d ms (%d parts) %s%n", estimatedFilesRemaining, zip == null? "files" : "archived files", timeOnParse, NUMBER_OF_PARTS, useThreadPool ? "using thread pool" : "in same thread");
@@ -215,13 +209,13 @@ public class CardStorageReader implements ICardStorageReader {
         } catch (Exception e) { // this clause comes from non-threaded branch
             throw new RuntimeException(e);
         }
-        
+
         return result;
     }
-        
+
     private List<Callable<List<CardRules>>> makeTaskListForZip(final List<ZipEntry> entries) {
         int totalFiles = entries.size();
-        int filesPerPart = totalFiles / NUMBER_OF_PARTS; 
+        int filesPerPart = totalFiles / NUMBER_OF_PARTS;
         final List<Callable<List<CardRules>>> tasks = new ArrayList<Callable<List<CardRules>>>();
         for (int iPart = 0; iPart < NUMBER_OF_PARTS; iPart++) {
             final int from = iPart * filesPerPart;
@@ -241,7 +235,7 @@ public class CardStorageReader implements ICardStorageReader {
 
     private List<Callable<List<CardRules>>> makeTaskListForFiles(final List<File> allFiles) {
         int totalFiles = allFiles.size();
-        int filesPerPart = totalFiles / NUMBER_OF_PARTS; 
+        int filesPerPart = totalFiles / NUMBER_OF_PARTS;
         final List<Callable<List<CardRules>>> tasks = new ArrayList<Callable<List<CardRules>>>();
         for (int iPart = 0; iPart < NUMBER_OF_PARTS; iPart++) {
             final int from = iPart * filesPerPart;
@@ -257,8 +251,8 @@ public class CardStorageReader implements ICardStorageReader {
             });
         }
         return tasks;
-            }
-        
+    }
+
     public static List<File> collectCardFiles(List<File> accumulator, File startDir) {
         String[] list = startDir.list();
         for (String filename : list) {
@@ -282,10 +276,10 @@ public class CardStorageReader implements ICardStorageReader {
      * <p>
      * load a card.
      * </p>
-     * 
+     *
      * @param inputStream
      *            the stream from which to load the card's information
-     * 
+     *
      * @return the card loaded from the stream
      */
     protected final CardRules loadCard(CardRules.Reader reader, final InputStream inputStream) {
@@ -299,10 +293,10 @@ public class CardStorageReader implements ICardStorageReader {
 
     /**
      * Load a card from a txt file.
-     * 
+     *
      * @param pathToTxtFile
      *            the full or relative path to the file to load
-     * 
+     *
      * @return a new Card instance
      */
     protected final CardRules loadCard(final CardRules.Reader reader, final File file) {
@@ -326,10 +320,10 @@ public class CardStorageReader implements ICardStorageReader {
 
     /**
      * Load a card from an entry in a zip file.
-     * 
+     *
      * @param entry
      *            to load from
-     * 
+     *
      * @return a new Card instance
      */
     protected final CardRules loadCard(final CardRules.Reader rulesReader, final ZipEntry entry) {

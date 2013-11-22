@@ -39,7 +39,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
 import forge.card.CardEdition.CardInSet;
-import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
@@ -54,12 +53,11 @@ public final class CardDb implements ICardDatabase {
     private final Multimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = new TreeMap<String, PaperCard>(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
-    
+
     private final List<PaperCard> allCards = new ArrayList<PaperCard>();
-    private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards); 
+    private final List<PaperCard> roAllCards = Collections.unmodifiableList(allCards);
     private final Collection<PaperCard> roUniqueCards = Collections.unmodifiableCollection(uniqueCardsByName.values());
     private final CardEdition.Collection editions;
-    
 
     public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, boolean logMissingCards) {
         this.rulesByName = rules;
@@ -72,14 +70,14 @@ public final class CardDb implements ICardDatabase {
             String lastCardName = null;
             int artIdx = 0;
             for(CardEdition.CardInSet cis : e.getCards()) {
-                if ( cis.name.equals(lastCardName) ) 
+                if ( cis.name.equals(lastCardName) )
                     artIdx++;
                 else {
                     artIdx = 0;
                     lastCardName = cis.name;
                 }
                 CardRules cr = rulesByName.get(lastCardName);
-                if( cr != null ) 
+                if( cr != null )
                     addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
                 else if (worthLogging)
                     missingCards.add(cis.name);
@@ -94,7 +92,7 @@ public final class CardDb implements ICardDatabase {
                 missingCards.clear();
             }
         }
-        
+
         for(CardRules cr : rulesByName.values()) {
             if( !allCardsByName.containsKey(cr.getName()) )
             {
@@ -102,7 +100,7 @@ public final class CardDb implements ICardDatabase {
                 addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 0));
             }
         }
-        
+
         reIndex();
     }
 
@@ -155,7 +153,7 @@ public final class CardDb implements ICardDatabase {
     public PaperCard tryGetCard(final String cardName0) {
         return tryGetCard(cardName0, true);
     }
-    
+
     @Override
     public PaperCard tryGetCard(final String cardName0, boolean fromLastSet) {
         if (null == cardName0) {
@@ -164,23 +162,23 @@ public final class CardDb implements ICardDatabase {
 
         final boolean isFoil = this.isFoil(cardName0);
         final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
-        
+
         final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(cardName);
-        
-        final PaperCard res = nameWithSet.right == null 
-                ? ( fromLastSet ? this.uniqueCardsByName.get(nameWithSet.left) : Aggregates.random(this.allCardsByName.get(nameWithSet.left)) ) 
+
+        final PaperCard res = nameWithSet.right == null
+                ? ( fromLastSet ? this.uniqueCardsByName.get(nameWithSet.left) : Aggregates.random(this.allCardsByName.get(nameWithSet.left)) )
                 : tryGetCard(nameWithSet.left, nameWithSet.right);
         return null != res && isFoil ? getFoiled(res) : res;
     }
-    
+
     @Override
     public PaperCard tryGetCardPrintedByDate(final String name0, final boolean fromLatestSet, final Date printedBefore) {
         final boolean isFoil = this.isFoil(name0);
         final String cardName = isFoil ? this.removeFoilSuffix(name0) : name0;
         final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(cardName);
-        
+
         PaperCard res = null;
-        if (null != nameWithSet.right) // set explicitly requested, should return card from it and disregard the date 
+        if (null != nameWithSet.right) // set explicitly requested, should return card from it and disregard the date
             res = tryGetCard(nameWithSet.left, nameWithSet.right);
         else {
             Collection<PaperCard> cards = this.allCardsByName.get(nameWithSet.left); // cards are sorted by datetime desc
@@ -196,13 +194,12 @@ public final class CardDb implements ICardDatabase {
 
         return null != res && isFoil ? getFoiled(res) : res;
     }
-    
 
     @Override
     public PaperCard tryGetCard(final String cardName, String setName) {
         return tryGetCard(cardName, setName, -1);
     }
-    
+
     @Override
     public PaperCard tryGetCard(final String cardName0, String setName, int index) {
         final boolean isFoil = this.isFoil(cardName0);
@@ -212,7 +209,7 @@ public final class CardDb implements ICardDatabase {
         if ( null == cards ) return null;
 
         CardEdition edition = editions.get(setName);
-        if ( null == edition ) 
+        if ( null == edition )
             return tryGetCard(cardName, true); // set not found, try to get the same card from just any set.
         String effectiveSet = edition.getCode();
 
@@ -227,7 +224,7 @@ public final class CardDb implements ICardDatabase {
 
             if (cnt == 0 ) return null;
             result = cnt == 1  ? candidates[0] : candidates[MyRandom.getRandom().nextInt(cnt)];
-        } else 
+        } else
             for( PaperCard pc : cards ) {
                 if( pc.getEdition().equalsIgnoreCase(effectiveSet) && index == pc.getArtIndex() ) {
                     result = pc;
@@ -237,7 +234,7 @@ public final class CardDb implements ICardDatabase {
         if ( result == null ) return null;
         return isFoil ? getFoiled(result) : result;
     }
-    
+
     public PaperCard getFoiled(PaperCard card0) {
         // Here - I am still unsure if there should be a cache Card->Card from unfoiled to foiled, to avoid creation of N instances of single plains
         return new PaperCard(card0.getRules(), card0.getEdition(), card0.getRarity(), card0.getArtIndex(), true);
@@ -252,17 +249,17 @@ public final class CardDb implements ICardDatabase {
         }
         return cnt;
     }
-    
+
     @Override
     public int getMaxPrintCount(String cardName) {
         int max = -1;
         for( PaperCard pc : allCardsByName.get(cardName) ) {
-            if ( max < pc.getArtIndex() ) 
+            if ( max < pc.getArtIndex() )
                 max = pc.getArtIndex();
         }
         return max + 1;
-    }    
-    
+    }
+
     // Single fetch
     @Override
     public PaperCard getCard(final String name) {
@@ -279,8 +276,7 @@ public final class CardDb implements ICardDatabase {
         }
         return result;
     }
-    
-    
+
     @Override
     public PaperCard getCardPrintedByDate(final String name0, final boolean fromLatestSet, Date printedBefore ) {
         // Sometimes they read from decks things like "CardName|Set" - but we
@@ -290,8 +286,8 @@ public final class CardDb implements ICardDatabase {
             throw new NoSuchElementException(String.format("Card '%s' released before %s not found in our database.", name0, printedBefore.toString()));
         }
         return result;
-    }    
-    
+    }
+
     // Advanced fetch by name+set
     @Override
     public PaperCard getCard(final String name, final String set) {
@@ -300,7 +296,6 @@ public final class CardDb implements ICardDatabase {
 
     @Override
     public PaperCard getCard(final String name, final String set, final int artIndex) {
-        
         final PaperCard result = tryGetCard(name, set, artIndex);
         if (null == result) {
             final String message = String.format("Asked for '%s' from '%s' #%d: db didn't find that copy.", name, set, artIndex);
@@ -329,7 +324,7 @@ public final class CardDb implements ICardDatabase {
     public Predicate<? super PaperCard> wasPrintedInSets(List<String> setCodes) {
         return new PredicateExistsInSets(setCodes);
     }
-    
+
     private class PredicateExistsInSets implements Predicate<PaperCard> {
         private final List<String> sets;
 
@@ -340,20 +335,20 @@ public final class CardDb implements ICardDatabase {
         @Override
         public boolean apply(final PaperCard subject) {
             Collection<PaperCard> cc = allCardsByName.get(subject.getName());
-            for(PaperCard c : cc) 
-                if (sets.contains(c.getEdition())) 
+            for(PaperCard c : cc)
+                if (sets.contains(c.getEdition()))
                     return true;
             return false;
         }
     }
-    
+
     private final Editor editor = new Editor();
     public Editor getEditor() { return editor; }
     public class Editor {
         private boolean immediateReindex = true;
         public CardRules putCard(CardRules rules) { return putCard(rules, null); /* will use data from editions folder */ }
         public CardRules putCard(CardRules rules, List<Pair<String, CardRarity>> whenItWasPrinted){ // works similarly to Map<K,V>, returning prev. value
-            String cardName = rules.getName(); 
+            String cardName = rules.getName();
             CardRules result = rulesByName.put(cardName, rules);
             // 1. generate all paper cards from edition data we have (either explicit, or found in res/editions, or add to unknown edition)
             List<PaperCard> paperCards = new ArrayList<PaperCard>();
@@ -389,7 +384,7 @@ public final class CardDb implements ICardDatabase {
             // 3. reindex can be temporary disabled and run after the whole batch of rules is added to db.
             if(immediateReindex)
                 reIndex();
-            
+
             return result;
         }
         public void removeCard(String name) {
@@ -404,7 +399,7 @@ public final class CardDb implements ICardDatabase {
             }
         }
         public void rebuildIndex() { reIndex(); }
-        
+
         public boolean isImmediateReindex() {
             return immediateReindex;
         }
@@ -412,5 +407,4 @@ public final class CardDb implements ICardDatabase {
             this.immediateReindex = immediateReindex;
         }
     }
-    
 }

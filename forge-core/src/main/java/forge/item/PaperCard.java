@@ -49,7 +49,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     public String getName() {
         return this.name;
     }
-    
+
     @Override
     public String getEdition() {
         return this.edition;
@@ -80,15 +80,11 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         return this.rarity;
     }
 
-
-    
-    
 //    @Override
 //    public String getImageKey() {
 //        return getImageLocator(getImageName(), getArtIndex(), true, false);
 //    }
-    
-    
+
     @Override
     public String getItemType() {
         return "Card";
@@ -108,12 +104,12 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         public String apply(final PaperCard from) {
             return from.getName();
         }
-    };    
+    };
 
     public PaperCard(final CardRules c, final String edition0, final CardRarity rare, final int index) {
         this(c, edition0, rare, index, false);
     }
-    
+
     public PaperCard(final CardRules c, final String edition0, final CardRarity rare, final int index, final boolean foil) {
         if ( edition0 == null || c == null || rare == null )
             throw new IllegalArgumentException("Cannot create card without rules, edition or rarity");
@@ -178,7 +174,6 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         // return String.format("%s|%s", name, cardSet);
     }
 
-    
     /*
      * (non-Javadoc)
      * 
