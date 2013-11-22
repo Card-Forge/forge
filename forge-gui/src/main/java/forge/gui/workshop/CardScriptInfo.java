@@ -21,6 +21,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -48,7 +49,7 @@ public final class CardScriptInfo {
     	return this.file != null;
     }
 
-    private static Map<String, CardScriptInfo> allScrips = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    private static Map<String, CardScriptInfo> allScrips = new ConcurrentHashMap<>();
     public static void addCard(String name, String script, File file) {
         allScrips.put(name, new CardScriptInfo(script, file));
     }
