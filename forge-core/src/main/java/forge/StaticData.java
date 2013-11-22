@@ -39,8 +39,7 @@ public class StaticData {
         final Map<String, CardRules> regularCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
         final Map<String, CardRules> variantsCards = new TreeMap<String, CardRules>(String.CASE_INSENSITIVE_ORDER);
 
-        List<CardRules> rules = reader.loadCards();
-        for (CardRules card : rules) {
+        for (CardRules card : reader.loadCards()) {
             if (null == card) continue;
 
             final String cardName = card.getName();

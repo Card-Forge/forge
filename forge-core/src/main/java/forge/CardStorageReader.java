@@ -25,8 +25,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
@@ -158,16 +162,18 @@ public class CardStorageReader {
      *
      * @return the Card or null if it was not found.
      */
-    public final List<CardRules> loadCards() {
-        progressObserver.setOperationName("Loading card data", true);
-        progressObserver.report(0, NUMBER_OF_PARTS);
+    public final Iterable<CardRules> loadCards() {
+        progressObserver.setOperationName("Loading cards, examining folder", true);
 
-        final List<Callable<List<CardRules>>> tasks = new ArrayList<>();
         long estimatedFilesRemaining;
-
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.
-        
+
+        final List<File> allFiles = collectCardFiles(new ArrayList<File>(), this.cardsfolder);
+        estimatedFilesRemaining = allFiles.size();
+        List<Callable<List<CardRules>>> taskFiles = makeTaskListForFiles(allFiles, zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 5);
+
+        List<Callable<List<CardRules>>> taskZip = new ArrayList<>();
         if( this.zip != null ) {
             estimatedFilesRemaining = this.zip.size();
             ZipEntry entry;
@@ -181,29 +187,42 @@ public class CardStorageReader {
                 entries.add(entry);
                 }
 
-            tasks.addAll(makeTaskListForZip(entries, NUMBER_OF_PARTS));
+            taskZip = makeTaskListForZip(entries, NUMBER_OF_PARTS);
         }
 
-        final List<File> allFiles = collectCardFiles(new ArrayList<File>(), this.cardsfolder);
-        estimatedFilesRemaining = allFiles.size();
-        tasks.addAll(makeTaskListForFiles(allFiles, zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 5));
+        Set<CardRules> result = new TreeSet<CardRules>(new Comparator<CardRules>() {
+            @Override
+            public int compare(CardRules o1, CardRules o2) {
+                return String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName());
+            }
+        });
 
-        StopWatch sw = new StopWatch();
-        sw.start();
+        if( taskFiles.size() > 0 ) {
+            progressObserver.setOperationName("Loading cards from folders", true);
+            progressObserver.report(0, taskFiles.size());
+            StopWatch sw = new StopWatch();
+            sw.start();
+            executeLoadTask(result, taskFiles);
+            sw.stop();
+            final long timeOnParse = sw.getTime();
+            System.out.printf("Read cards: %s files in %d ms (%d parts) %s%n", estimatedFilesRemaining, timeOnParse, taskFiles.size(), useThreadPool ? "using thread pool" : "in same thread");            
+        }
 
-        List<CardRules> res = executeLoadTask(tasks);
-
-        sw.stop();
-        final long timeOnParse = sw.getTime();
-        System.out.printf("Read cards: %s files in %d ms (%d parts) %s%n", estimatedFilesRemaining, timeOnParse, tasks.size(), useThreadPool ? "using thread pool" : "in same thread");
-//        if ( null != barProgress )
-//            barProgress.setPercentMode(false);
-        return res;
+        if( taskZip.size() > 0 ) {
+            progressObserver.setOperationName("Loading cards from archive", true);
+            progressObserver.report(0, taskZip.size());
+            StopWatch sw = new StopWatch();
+            sw.start();
+            executeLoadTask(result, taskZip);
+            sw.stop();
+            final long timeOnParse = sw.getTime();
+            System.out.printf("Read cards: %s archived files in %d ms (%d parts) %s%n", estimatedFilesRemaining, timeOnParse, taskZip.size(), useThreadPool ? "using thread pool" : "in same thread");            
+        }
+        
+        return result;
     } // loadCardsUntilYouFind(String)
 
-    private List<CardRules> executeLoadTask(final List<Callable<List<CardRules>>> tasks) {
-        List<CardRules> result = new ArrayList<CardRules>();
-
+    private void executeLoadTask(Collection<CardRules> result, final List<Callable<List<CardRules>>> tasks) {
         try {
             if ( useThreadPool ) {
                 final ExecutorService executor = ThreadUtil.getComputingPool(0.5f);
@@ -225,8 +244,6 @@ public class CardStorageReader {
         } catch (Exception e) { // this clause comes from non-threaded branch
             throw new RuntimeException(e);
         }
-
-        return result;
     }
 
     private List<Callable<List<CardRules>>> makeTaskListForZip(final List<ZipEntry> entries, final int maxParts) {
