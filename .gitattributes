@@ -123,7 +123,6 @@ forge-gui/.settings/org.eclipse.m2e.core.prefs -text
 forge-gui/CHANGES.txt -text
 forge-gui/LICENSE.txt -text
 forge-gui/README.txt -text
-forge-gui/forge.profile.properties -text
 forge-gui/forge.profile.properties.example -text
 forge-gui/pom.xml -text
 forge-gui/res/ai/Default.ai -text
