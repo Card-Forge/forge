@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import net.miginfocom.swing.MigLayout;
-import forge.gui.CardDetailPanel;
 import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -24,7 +23,6 @@ import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FTabbedPane;
@@ -137,6 +135,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             
             tabPane.add("Player " + (i+1), tempPanel);
         }
+        
+        fieldRadios.get(0).setSelected(true);
 
         final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
         pnlStart.setOpaque(false);
