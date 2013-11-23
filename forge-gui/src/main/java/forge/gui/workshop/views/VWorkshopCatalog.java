@@ -51,7 +51,7 @@ import forge.util.ItemPool;
 public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
     /** */
     SINGLETON_INSTANCE;
-    
+
     public static final int SEARCH_MODE_INVERSE_INDEX = 1;
 
     // Fields used with interface IVDoc
@@ -79,14 +79,14 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
 
     private final ItemManagerContainer cardManagerContainer = new ItemManagerContainer();
     private final CardManager cardManager;
-    
+
     private final Map<RangeTypes, Pair<FSpinner, FSpinner>> spinners = new HashMap<RangeTypes, Pair<FSpinner, FSpinner>>();
-    
+
     //========== Constructor
     /** */
     private VWorkshopCatalog() {
         pnlStats.setOpaque(false);
-        
+
         for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
             FLabel label = buildToggleLabel(s, SItemManagerUtil.StatTypes.TOTAL != s);
             statLabels.put(s, label);
@@ -104,7 +104,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
             }
             pnlStats.add(component);
         }
-        
+
         pnlSearch.setOpaque(false);
         pnlSearch.add(btnAddRestriction, "center, w pref+8, h pref+8");
         pnlSearch.add(txfSearch, "pushx, growx");
@@ -116,7 +116,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
         pnlSearch.add(lblText, "w pref+8, h pref+8");
 
         pnlRestrictions.setOpaque(false);
-        
+
         // fill spinner map
         for (RangeTypes t : RangeTypes.values()) {
             FSpinner lowerBound = new FSpinner.Builder().maxValue(10).build();
@@ -130,7 +130,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
         Iterable<PaperCard> allCards = Iterables.concat(Singletons.getMagicDb().getCommonCards(), Singletons.getMagicDb().getVariantCards());
         this.cardManager.setPool(ItemPool.createFrom(allCards, PaperCard.class), true);
         this.cardManagerContainer.setItemManager(this.cardManager);
-        
+
         this.cardManager.addSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -145,7 +145,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
     private void _setupSpinner (JSpinner spinner) {
         spinner.setFocusable(false); // only the spinner text field should be focusable, not the up/down widget
     }
-    
+
     //========== Overridden from IVDoc
 
     @Override
@@ -187,7 +187,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
     public FLabel getLblName()       { return lblName;       }
     public FLabel getLblType()       { return lblType;       }
     public FLabel getLblText()       { return lblText;       }
-    
+
     public FLabel getBtnAddRestriction()       { return btnAddRestriction; }
     public FComboBoxWrapper<String> getCbSearchMode() { return cbSearchMode; }
     public JTextField getTxfSearch()           { return txfSearch;         }
@@ -201,7 +201,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
     public Map<RangeTypes, Pair<FSpinner, FSpinner>> getSpinners() {
         return spinners;
     }
-    
+
     //========== Other methods
     private FLabel buildToggleLabel(SItemManagerUtil.StatTypes s, boolean selectable) {
         String tooltip;
@@ -217,20 +217,20 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
                 .tooltip(tooltip)
                 .hoverable().selectable(selectable).selected(selectable)
                 .build();
-        
+
         label.setPreferredSize(labelSize);
         label.setMinimumSize(labelSize);
-        
+
         return label;
     }
-    
+
     @SuppressWarnings("serial")
     public void addRestrictionWidget(JComponent component, final Command onRemove) {
         final JPanel pnl = new JPanel(new MigLayout("insets 2, gap 2, h 30!"));
 
         pnl.setOpaque(false);
         FSkin.get(pnl).setMatteBorder(1, 2, 1, 2, FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        
+
         pnl.add(component, "h 30!, center");
         pnl.add(new FLabel.Builder().text("X").fontSize(10).hoverable(true)
                 .tooltip("Remove filter").cmdClick(new Command() {
@@ -245,25 +245,25 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
         pnlRestrictions.add(pnl, "h 30!");
         refreshRestrictionWidgets();
     }
-    
+
     public void refreshRestrictionWidgets() {
         Container parent = pnlRestrictions.getParent();
         pnlRestrictions.validate();
         parent.validate();
         parent.repaint();
     }
-    
+
     public JPanel buildRangeRestrictionWidget(RangeTypes t) {
         JPanel pnl = new JPanel(new MigLayout("insets 0, gap 2"));
         pnl.setOpaque(false);
-        
+
         Pair<FSpinner, FSpinner> s = spinners.get(t);
         pnl.add(s.getLeft(), "w 45!, h 26!, center");
         pnl.add(new FLabel.Builder().text("<=").fontSize(11).build(), "h 26!, center");
         pnl.add(new FLabel.Builder().text(t.toLabelString()).fontSize(11).build(), "h 26!, center");
         pnl.add(new FLabel.Builder().text("<=").fontSize(11).build(), "h 26!, center");
         pnl.add(s.getRight(), "w 45!, h 26!, center");
-        
+
         return pnl;
     }
 
