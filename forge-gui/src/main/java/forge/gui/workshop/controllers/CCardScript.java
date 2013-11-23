@@ -6,8 +6,10 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import forge.Card;
 import forge.Command;
 import forge.Singletons;
+import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
@@ -120,9 +122,14 @@ public enum CCardScript implements ICDoc {
         }
 
         updateDirtyFlag();
+
         CardRules newRules = CardRules.fromScript(Arrays.asList(text.split("\n")));
-        newRules = Singletons.getMagicDb().getCommonCards().getEditor().putCard(newRules);
-        this.currentCard = Singletons.getMagicDb().getCommonCards().getCard(newRules.getName());
+        CardDb cardDb = newRules.isVariant() ? Singletons.getMagicDb().getVariantCards() :
+            Singletons.getMagicDb().getCommonCards();
+
+        newRules = cardDb.getEditor().putCard(newRules);
+        this.currentCard = cardDb.getCard(newRules.getName());
+        Card.updateCard(this.currentCard);
 
         VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().repaint();
         CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
