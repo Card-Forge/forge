@@ -30,6 +30,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionListener;
 
 import com.google.common.base.Predicate;
@@ -74,7 +75,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private final Class<T> genericType;
     private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels;
     private final ArrayList<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
-    
+
     private final FLabel btnAddFilter = new FLabel.ButtonBuilder()
             .text("Add")
             .tooltip("Click to add filters to the list")
@@ -95,7 +96,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.statLabels = statLabels0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(this, genericType0);
-        
+
         //build table view
         this.table = new ItemTable<T>(this, this.model);
         this.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -112,7 +113,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.add(this.btnAddFilter);
         this.add(this.txtSearch);
         this.add(this.tableScroller);
-        
+
         //setup command for btnAddFilter
         final Command addFilterCommand = new Command() {
             @Override
@@ -134,9 +135,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             }
         };
         this.btnAddFilter.setCommand(addFilterCommand);
-        this.btnAddFilter.setRightClickCommand(addFilterCommand); //show menu on right-click too   
+        this.btnAddFilter.setRightClickCommand(addFilterCommand); //show menu on right-click too
     }
-    
+
     @Override
     public void doLayout() {
         //int number = 0;
@@ -170,7 +171,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public void setPool(final Iterable<InventoryItem> items) {
         this.setPool(ItemPool.createFrom(items, this.genericType), false);
     }
-    
+
     /**
      * 
      * Sets the item pool.
@@ -180,7 +181,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public void setPool(final ItemPoolView<T> poolView) {
         this.setPool(poolView, false);
     }
-    
+
     /**
      * 
      * Sets the item pool.
@@ -227,7 +228,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public ItemTable<T> getTable() {
         return this.table;
     }
-    
+
     /**
      * 
      * getTableModel.
@@ -247,7 +248,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public T getSelectedItem() {
         return this.table.getSelectedItem();
     }
-    
+
     /**
      * 
      * getSelectedItems.
@@ -335,7 +336,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.updateView(false);
         this.table.fixSelection(n);
     }
-    
+
     /**
      * 
      * getItemCount.
@@ -345,7 +346,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public int getItemCount(final T item) {
         return this.model.isInfinite() ? Integer.MAX_VALUE : this.pool.count(item);
     }
-    
+
     /**
      * Gets all filtered items in the model.
      * 
@@ -354,7 +355,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public ItemPoolView<T> getFilteredItems() {
         return this.model.getItems();
     }
-    
+
     /**
      * 
      * getStatLabel.
@@ -364,14 +365,14 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public FLabel getStatLabel(SItemManagerUtil.StatTypes s) {
         return this.statLabels.get(s);
     }
-    
+
     protected abstract ItemFilter<T> createSearchFilter(String text);
     protected abstract void buildFilterMenu(JPopupMenu menu);
-    
+
     protected <F extends ItemFilter<T>> F getFilter(Class<F> filterClass) {
         return ReflectionUtil.safeCast(this.filters.get(filterClass), filterClass);
     }
-    
+
     @SuppressWarnings("unchecked")
     public void addFilter(ItemFilter<T> filter) {
         final Class<? extends ItemFilter<T>> filterClass = (Class<? extends ItemFilter<T>>) filter.getClass();
@@ -384,7 +385,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             //if filter with the same class already exists, try to merge if allowed
             //NOTE: can always use first filter for these checks since if
             //merge is supported, only one will ever exist
-            ItemFilter<T> existingFilter = classFilters.get(0);            
+            ItemFilter<T> existingFilter = classFilters.get(0);
             if (existingFilter.merge(filter)) {
                 //if new filter merged with existing filter, just update layout
                 this.revalidate();
@@ -396,7 +397,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.add(filter.getPanel());
         this.revalidate();
     }
-    
+
     @SuppressWarnings("unchecked")
     public void removeFilter(ItemFilter<T> filter) {
         final Class<? extends ItemFilter<T>> filterClass = (Class<? extends ItemFilter<T>>) filter.getClass();
@@ -410,7 +411,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             this.revalidate();
         }
     }
-    
+
     public void buildFilterPredicate() {
         /*
         this.filterPredicate = ?;
@@ -418,7 +419,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             this.updateView(true);
         }*/
     }
-    
+
     /**
      * 
      * isUnfiltered.
@@ -469,6 +470,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         }
 
         this.table.getTableModel().refreshSort();
+
+        //select first row if no row already selected
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if (table.getRowCount() > 0 && table.getSelectedRowCount() == 0) {
+                    table.selectAndScrollTo(0);
+                }
+            }
+        });
     }
 
     /**
@@ -510,7 +521,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public void setAlwaysNonUnique(boolean nonUniqueOnly) {
         this.alwaysNonUnique = nonUniqueOnly;
     }
-    
+
     /**
      * 
      * getAllowMultipleSelections.
@@ -520,7 +531,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public boolean getAllowMultipleSelections() {
     	return this.allowMultipleSelections;
     }
-    
+
     /**
      * 
      * getAllowMultipleSelections.
@@ -546,11 +557,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     	selectionListeners.remove(listener); //ensure listener not added multiple times
     	selectionListeners.add(listener);
     }
-    
+
     public void removeSelectionListener(ListSelectionListener listener) {
     	selectionListeners.remove(listener);
     }
-    
+
     public Iterable<ListSelectionListener> getSelectionListeners() {
     	return selectionListeners;
     }

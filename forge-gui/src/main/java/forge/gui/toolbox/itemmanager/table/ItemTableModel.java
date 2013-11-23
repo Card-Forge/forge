@@ -121,7 +121,7 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
         final List<Entry<T, Integer>> orderedList = this.model.getOrderedList();
         return (row >= 0) && (row < orderedList.size()) ? orderedList.get(row) : null;
     }
-    
+
     /**
      * Item to row.
      * 
@@ -147,16 +147,14 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
             }
         }
     }
-    
+
     private final ListSelectionListener listSelectionListener = new ListSelectionListener() {
         @Override
         public void valueChanged(final ListSelectionEvent arg0) {
-            if (table.isFocusOwner()) {
-                ItemTableModel.this.onSelectionChange(table);
-            }
+            ItemTableModel.this.onSelectionChange(table);
         }
     };
-    
+
     private final FocusAdapter focusAdapter = new FocusAdapter() {
         @Override
         public void focusGained(final FocusEvent e) {
@@ -171,7 +169,7 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
             if (Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR) == table.getTableHeader().getCursor()) {
                 return;
             }
-            
+
             //toggle column sort
             final TableColumnModel colModel = ItemTableModel.this.table.getColumnModel();
             final int columnModelIndex = colModel.getColumnIndexAtX(e.getX());
@@ -193,7 +191,7 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
             }
             SItemManagerIO.savePreferences(ItemTableModel.this.table);
         }
-        
+
         @Override
         public void onLeftMouseDragDrop(MouseEvent e) { //save preferences after column moved/resized
             SItemManagerIO.savePreferences(ItemTableModel.this.table);
@@ -209,7 +207,7 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
         // updates card detail, listens to any key strokes
         table.getSelectionModel().removeListSelectionListener(listSelectionListener);  //ensure listener not added multiple times
         table.getSelectionModel().addListSelectionListener(listSelectionListener);
-        
+
         table.removeFocusListener(focusAdapter); //ensure listener not added multiple times
         table.addFocusListener(focusAdapter);
 
@@ -304,7 +302,7 @@ public final class ItemTableModel<T extends InventoryItem> extends AbstractTable
                 // Decrement sort priority on remaining columns
                 for (int i = 1; i < maxSortDepth; i++) {
                     if (colsToSort.size() == i) { break; }
-    
+
                     if (colsToSort.get(i).getSortPriority() != 0) {
                         colsToSort.get(i).setSortPriority(i + 1);
                     }
