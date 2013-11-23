@@ -33,6 +33,7 @@ import forge.gui.toolbox.FDigitalClock;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.ReflectionUtil;
 
 @SuppressWarnings("serial")
@@ -89,7 +90,10 @@ public class FNavigationBar extends FTitleBarBase {
 
         addNavigationTab(FScreen.HOME_SCREEN);
         addNavigationTab(FScreen.DECK_EDITOR_CONSTRUCTED);
-        addNavigationTab(FScreen.WORKSHOP_SCREEN);
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED)) {
+            //TODO: Make Workshop available outside developer mode when custom cards supported
+            addNavigationTab(FScreen.WORKSHOP_SCREEN);
+        }
 
         super.addControls();
 
