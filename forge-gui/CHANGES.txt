@@ -18,7 +18,7 @@ Unplayable activated abilities will still appear disabled so shortcuts are const
 The Card Detail pane now shows mana symbols in place of WUBRG and other appropriate text characters.
 Same for ability context menu described above and Game Prompt pane.
 Also fixed WUBRG of colored mana symbols on a few dozen cards.
-Reminder text now appears in italics.
+Reminder text now appears in italics, with a preference that can be set to hide it.
 
 
 - Quest mode bazaar -
