@@ -2547,7 +2547,7 @@ public class CardFactoryUtil {
             final int equipPos = card.getKeywordPosition("Equip");
             // Check for additional params such as preferred AI targets
             final String equipString = card.getKeyword().get(equipPos).substring(5);
-            final String[] equipExtras = equipString.contains("\\|") ? equipString.split("\\|", 2) : null;
+            final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
             // Get cost string
             String equipCost = "";
             if (equipExtras != null) {
@@ -2581,7 +2581,7 @@ public class CardFactoryUtil {
         if (card.hasStartOfKeyword("Fortify")) {
             final int equipPos = card.getKeywordPosition("Fortify");
             final String equipString = card.getKeyword().get(equipPos).substring(7);
-            final String[] equipExtras = equipString.contains("\\|") ? equipString.split("\\|", 2) : null;
+            final String[] equipExtras = equipString.contains("|") ? equipString.split("\\|", 2) : null;
             // Get cost string
             String equipCost = "";
             if (equipExtras != null) {
