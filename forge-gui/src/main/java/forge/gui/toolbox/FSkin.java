@@ -1662,6 +1662,7 @@ public enum FSkin {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
+		str = str.replace("(", "<i>(").replace(")", ")</i>"); //format reminder text in italics
     	return "<html>" + str + "</html>"; //must wrap in <html> tag for images to appear
     }
 
