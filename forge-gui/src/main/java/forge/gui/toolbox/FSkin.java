@@ -626,25 +626,25 @@ public enum FSkin {
                 c.getBlue() * c.getBlue() * 0.068);
         return v >= 130;
     }
-    
+
     public static Color getHighContrastColor(Color c) {
         return isColorBright(c) ? Color.BLACK : Color.WHITE;
     }
-    
+
     public static class SkinColor {
         private static final HashMap<Colors, SkinColor> baseColors = new HashMap<Colors, SkinColor>();
         private static final HashMap<String, SkinColor> derivedColors = new HashMap<String, SkinColor>();
         private static final int NO_BRIGHTNESS_DELTA = 0;
         private static final int NO_STEP = -999; //needs to be large negative since small negative values are valid
         private static final int NO_ALPHA = -1;
-        
+
         private final Colors baseColor;
         private final int brightnessDelta;
         private final int step;
         private final int contrastStep;
         private final int alpha;
         protected Color color;
-        
+
         public Color getColor() { return color; }
 
         //private constructors for color that changes with skin (use FSkin.getColor())
@@ -1654,15 +1654,20 @@ public enum FSkin {
     }
 
     public static String encodeSymbols(String str) {
-    	String pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
-    	String replacement;
+        //format reminder text in italics
+        String pattern = "\\((.+)\\)";
+        String replacement = "<i>\\($1\\)</i>"; //TODO: Consider setting to hide reminder text, in which case replace with "" here
+        str = str.replaceAll(pattern, replacement);
+
+        //format mana symbols to display as icons
+    	pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
 		try {
 			replacement = "<img src='" + new File(NewConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "'>";
 			str = str.replaceAll(pattern, replacement);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		str = str.replace("(", "<i>(").replace(")", ")</i>"); //format reminder text in italics
+
     	return "<html>" + str + "</html>"; //must wrap in <html> tag for images to appear
     }
 
@@ -1876,7 +1881,7 @@ public enum FSkin {
         FSkin.bimPreferredSprite = null;
         FSkin.bimDefaultAvatars = null;
         FSkin.bimPreferredAvatars = null;
-        
+
         //establish encoding symbols
         File dir = new File(NewConstants.CACHE_SYMBOLS_DIR);
         if (!dir.mkdir()) { //ensure symbols directory exists and is empty
