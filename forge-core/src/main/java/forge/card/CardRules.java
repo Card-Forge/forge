@@ -34,13 +34,10 @@ import forge.card.mana.ManaCostShard;
  * @version $Id: CardRules.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardRules implements ICardCharacteristics {
-    private final CardSplitType splitType;
-    private final ICardFace mainPart;
-    private final ICardFace otherPart;
-    //private final Map<String, CardInSet> setsPrinted = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
-
+    private CardSplitType splitType;
+    private ICardFace mainPart;
+    private ICardFace otherPart;
     private CardAiHints aiHints;
-
     private ColorSet colorIdentity = null;
 
     private CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
@@ -49,18 +46,6 @@ public final class CardRules implements ICardCharacteristics {
         otherPart = faces[1];
         aiHints = cah;
 
-        //System.out.print(faces[0].getName());
-
-//        for (Entry<String, CardInSet> cs : sets.entrySet()) {
-//            if( CardRulesReader.editions.get(cs.getKey()) != null )
-//                setsPrinted.put(cs.getKey(), cs.getValue());
-//        }
-//
-//        if ( setsPrinted.isEmpty() ) {
-//            System.err.println(getName() + " was not assigned any set.");
-//            setsPrinted.put(CardEdition.UNKNOWN.getCode(), new CardInSet(CardRarity.Common, 1) );
-//        }
-//
         //Calculate Color Identity
         byte colMask = calculateColorIdentity(mainPart);
 
@@ -69,6 +54,18 @@ public final class CardRules implements ICardCharacteristics {
             colMask |= calculateColorIdentity(otherPart);
         }
         colorIdentity = ColorSet.fromMask(colMask);
+    }
+    
+    public void reinitializeFromScript(Iterable<String> script) {
+        CardRules newRules = fromScript(script);
+        if(!newRules.getName().equals(this.getName()))
+            throw new UnsupportedOperationException("You cannot rename the card using the same CardRules object");
+        
+        splitType = newRules.splitType;
+        mainPart = newRules.mainPart;
+        otherPart = newRules.otherPart;
+        aiHints = newRules.aiHints;
+        colorIdentity = newRules.colorIdentity;
     }
 
     private byte calculateColorIdentity(ICardFace face)
