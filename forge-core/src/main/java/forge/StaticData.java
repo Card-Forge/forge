@@ -1,6 +1,7 @@
 package forge;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -10,6 +11,7 @@ import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.PrintSheet;
 import forge.item.FatPack;
+import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
@@ -98,5 +100,11 @@ public class StaticData {
 
     public CardDb getVariantCards() {
         return variantCards;
+    }
+
+    public List<PaperCard> getAllCards() {
+        List<PaperCard> cards = new ArrayList<PaperCard>(commonCards.getAllCards());
+        cards.addAll(variantCards.getAllCards());
+        return cards;
     }
 }

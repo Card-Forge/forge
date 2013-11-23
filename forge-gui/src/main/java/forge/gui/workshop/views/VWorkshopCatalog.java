@@ -123,9 +123,9 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
             _setupSpinner(upperBound);
             spinners.put(t, Pair.of(lowerBound, upperBound));
         }
-        
+
         this.cardManager = new CardManager(this.statLabels, true);
-        this.cardManager.setPool(ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
+        this.cardManager.setPool(ItemPool.createFrom(Singletons.getMagicDb().getAllCards(), PaperCard.class), true);
         this.cardManagerContainer.setItemManager(this.cardManager);
         
         this.cardManager.addSelectionListener(new ListSelectionListener() {
