@@ -129,7 +129,7 @@ public enum CCardScript implements ICDoc {
         CardDb cardDb = newRules.isVariant() ? Singletons.getMagicDb().getVariantCards() :
             Singletons.getMagicDb().getCommonCards();
 
-        newRules = cardDb.getEditor().putCard(newRules);
+        cardDb.getEditor().putCard(newRules);
         if (newRules.getName().equals(oldName)) {
             Card.updateCard(this.currentCard);
         }
