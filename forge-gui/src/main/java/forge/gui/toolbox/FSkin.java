@@ -1654,9 +1654,10 @@ public enum FSkin {
     }
 
     public static String encodeSymbols(String str) {
-        //format reminder text in italics
+        //format reminder text in italics (or hide if preference set)
         String pattern = "\\((.+)\\)";
-        String replacement = "<i>\\($1\\)</i>"; //TODO: Consider setting to hide reminder text, in which case replace with "" here
+        String replacement = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT) ?
+                "" : "<i>\\($1\\)</i>";
         str = str.replaceAll(pattern, replacement);
 
         //format mana symbols to display as icons

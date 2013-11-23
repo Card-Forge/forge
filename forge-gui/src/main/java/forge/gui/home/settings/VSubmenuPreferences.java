@@ -84,6 +84,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbUseThemes = new OptionsCheckBox("Enable Themes");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
+    private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
 
@@ -175,7 +176,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbUseThemes, regularConstraints);
         pnlPrefs.add(new NoteLabel("Currently only applies to UIManager-related theme settings. (RESTART REQUIRED)"), regularConstraints);
-        
+
         pnlPrefs.add(cbpCloseAction, "w 80%!, gap 10% 0 0 10px, span 2 1");
         pnlPrefs.add(new NoteLabel("Changes what happens when clicking the X button in the upper right."), regularConstraints);
 
@@ -186,13 +187,16 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel("Adds foiled effects to random cards."), regularConstraints);
 
         pnlPrefs.add(cbRandomizeArt, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Randomize the card art for cards in the human's deck"), regularConstraints);
+        pnlPrefs.add(new NoteLabel("Randomize the card art for cards in the human's deck."), regularConstraints);
 
         pnlPrefs.add(cbScaleLarger, regularConstraints);
         pnlPrefs.add(new NoteLabel("Allows card pictures to be expanded larger than their original size."), regularConstraints);
 
         pnlPrefs.add(cbUiForTouchScreen, regularConstraints);
         pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), regularConstraints);
+
+        pnlPrefs.add(cbHideReminderText, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Hide reminder text in Card Detail pane."), regularConstraints);
 
         // Sound options
         pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints + ", gaptop 2%");
@@ -450,7 +454,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
     }
-    
+
     public FComboBoxPanel<CloseAction> getCloseActionComboBoxPanel() {
         return cbpCloseAction;
     }
@@ -484,6 +488,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbUiForTouchScreen;
     }
 
+    public final JCheckBox getCbHideReminderText() {
+        return cbHideReminderText;
+    }
+
     /** @return {@link forge.gui.toolbox.FLabel} */
     public FLabel getBtnReset() {
         return btnReset;
@@ -507,7 +515,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public final FLabel getBtnDeleteEditorUI() {
         return btnDeleteEditorUI;
     }
-    
+
     public final FLabel getBtnDeleteWorkshopUI() {
         return btnDeleteWorkshopUI;
     }
