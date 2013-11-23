@@ -18,9 +18,12 @@
 package forge.gui.workshop;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -28,16 +31,16 @@ import forge.CardStorageReader;
 import forge.card.CardRules;
 
 public final class CardScriptInfo {
-    private String cardScript;
+    private String text;
     private File file;
 
     public CardScriptInfo(String text0, File file0) {
-        this.cardScript = text0;
+        this.text = text0;
         this.file = file0;
     }
 
     public String getText() {
-        return this.cardScript;
+        return this.text;
     }
 
     public File getFile() {
@@ -48,15 +51,31 @@ public final class CardScriptInfo {
     	return this.file != null;
     }
 
+    public boolean trySetText(String text0) {
+    	if (this.file == null) { return false; }
+
+    	try {
+    	    PrintWriter p = new PrintWriter(this.file);
+    	    p.print(text0);
+    	    p.close();
+
+    	    this.text = text0;
+    	    return true;
+    	} catch (final Exception ex) {
+    		JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Problem writing file - " + this.file + " : " + ex);
+    		return false;
+    	}
+    }
+
     private static Map<String, CardScriptInfo> allScripts = new ConcurrentHashMap<>();
     public static void addCard(String name, String script, File file) {
         allScripts.put(name, new CardScriptInfo(script, file));
     }
-    
+
     public static CardScriptInfo getScriptFor(String name) {
         return allScripts.get(name);
     }
-    
+
     public static CardStorageReader.Observer readerObserver = new CardStorageReader.Observer() {
         @Override
         public void cardLoaded(CardRules rules, List<String> lines, File fileOnDisk) {

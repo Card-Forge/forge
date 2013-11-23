@@ -67,8 +67,7 @@ public final class CardRules implements ICardCharacteristics {
         colorIdentity = newRules.colorIdentity;
     }
 
-    private byte calculateColorIdentity(ICardFace face)
-    {
+    private byte calculateColorIdentity(ICardFace face) {
         byte res = face.getColor().getColor();
         boolean isReminder = false;
         boolean isSymbol = false;
