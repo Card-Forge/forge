@@ -2555,7 +2555,7 @@ public class CardFactoryUtil {
             } else {
                 equipCost = equipString.trim();
             }
-           // Create attach ability string
+            // Create attach ability string
             final StringBuilder abilityStr = new StringBuilder();
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
@@ -2564,12 +2564,13 @@ public class CardFactoryUtil {
             if (equipExtras != null) {
                 abilityStr.append("| ").append(equipExtras[1]).append(" ");
             }
-            if (equipCost.matches(".+<.+>")) { //Something other than a mana cost
-                abilityStr.append("| PrecostDesc$ Equip - | SpellDescription$ (Attach to target creature you control. Equip only as a sorcery.)");
+            abilityStr.append("| PrecostDesc$ Equip ");
+            Cost cost = new Cost(equipCost, true);
+            if (!cost.isOnlyManaCost()) { //Something other than a mana cost
+                abilityStr.append("- ");
             }
-            else {
-                abilityStr.append("| PrecostDesc$ Equip | SpellDescription$ (Attach to target creature you control. Equip only as a sorcery.)");
-            }
+            abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
+            abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target creature you control. Equip only as a sorcery.)");
             // instantiate attach ability
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             card.addSpellAbility(sa);
@@ -2588,7 +2589,7 @@ public class CardFactoryUtil {
             } else {
                 equipCost = equipString.trim();
             }
-           // Create attach ability string
+            // Create attach ability string
             final StringBuilder abilityStr = new StringBuilder();
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
@@ -2597,7 +2598,13 @@ public class CardFactoryUtil {
             if (equipExtras != null) {
                 abilityStr.append("| ").append(equipExtras[1]).append(" ");
             }
-            abilityStr.append("| PrecostDesc$ Fortify | SpellDescription$ (Attach to target land you control. Fortify only as a sorcery.)");
+            abilityStr.append("| PrecostDesc$ Fortify ");
+            Cost cost = new Cost(equipCost, true);
+            if (!cost.isOnlyManaCost()) { //Something other than a mana cost
+                abilityStr.append("- ");
+            }
+            abilityStr.append("| CostDesc$ " + cost.toSimpleString() + " ");
+            abilityStr.append("| SpellDescription$ (" + cost.toSimpleString() + ": Attach to target land you control. Fortify only as a sorcery.)");
  
             // instantiate attach ability
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
