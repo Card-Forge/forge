@@ -121,7 +121,7 @@ public enum CCardScript implements ICDoc {
 
         updateDirtyFlag();
         CardRules newRules = CardRules.fromScript(Arrays.asList(text.split("\n")));
-        Singletons.getMagicDb().getCommonCards().getEditor().putCard(newRules);
+        newRules = Singletons.getMagicDb().getCommonCards().getEditor().putCard(newRules);
         this.currentCard = Singletons.getMagicDb().getCommonCards().getCard(newRules.getName());
 
         VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().repaint();
