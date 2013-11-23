@@ -49,7 +49,7 @@ public final class ManaCost implements Comparable<ManaCost> {
     public static final ManaCost FOUR = new ManaCost(4);
 
     public static ManaCost get(int cntColorless) {
-        switch (cntColorless) { 
+        switch (cntColorless) {
             case 0: return ZERO;
             case 1: return ONE;
             case 2: return TWO;
@@ -58,14 +58,14 @@ public final class ManaCost implements Comparable<ManaCost> {
         }
         return cntColorless > 0 ? new ManaCost(cntColorless) : NO_COST;
     }
-    
+
     // pass mana cost parser here
     private ManaCost(int cmc) {
         this.hasNoCost = cmc < 0;
         this.genericCost = cmc < 0 ? 0 : cmc;
         sealClass(new ArrayList<ManaCostShard>());
     }
-    
+
     private void sealClass(List<ManaCostShard> shards0) {
         this.shards = Collections.unmodifiableList(shards0);
         this.stringValue = this.getSimpleString();
@@ -100,14 +100,20 @@ public final class ManaCost implements Comparable<ManaCost> {
             return "{" + this.genericCost + "}";
         }
 
+        final StringBuilder xb = new StringBuilder();
         final StringBuilder sb = new StringBuilder();
         if (this.genericCost > 0) {
             sb.append("{" + this.genericCost + "}");
         }
         for (final ManaCostShard s : this.shards) {
-            sb.append(s.toString());
+            if (s == ManaCostShard.X) {
+                xb.append(s.toString());
+            }
+            else {
+                sb.append(s.toString());
+            }
         }
-        return sb.toString();
+        return xb.toString() + sb.toString();
     }
 
     /**
@@ -189,7 +195,7 @@ public final class ManaCost implements Comparable<ManaCost> {
     public boolean isZero() {
         return genericCost == 0 && isPureGeneric();
     }
-    
+
     /*
      * (non-Javadoc)
      * 

@@ -23,7 +23,7 @@ import forge.util.BinaryUtil;
  * The Class CardManaCostShard.
  */
 public enum ManaCostShard implements Comparable<ManaCostShard> {
-    // declaration order matters! Place the shards that offer least ways to be paid for first 
+    // declaration order matters! Place the shards that offer least ways to be paid for first
 
     /* Pure colors */
     WHITE(ManaAtom.WHITE, "W"),
@@ -55,7 +55,7 @@ public enum ManaCostShard implements Comparable<ManaCostShard> {
     S(ManaAtom.IS_SNOW, "S"),
     COLORLESS(ManaAtom.COLORLESS, "1"),
 
-    /* Phyrexian */ 
+    /* Phyrexian */
     PW(ManaAtom.WHITE | ManaAtom.OR_2_LIFE, "W/P", "PW"),
     PU(ManaAtom.BLUE | ManaAtom.OR_2_LIFE, "U/P", "PU"),
     PB(ManaAtom.BLACK | ManaAtom.OR_2_LIFE, "B/P", "PB"),
@@ -106,11 +106,8 @@ public enum ManaCostShard implements Comparable<ManaCostShard> {
         this.imageKey = imgKey;
     }
 
-
-
     public static final int COLORS_SUPERPOSITION = ManaAtom.WHITE | ManaAtom.BLUE | ManaAtom.BLACK | ManaAtom.RED | ManaAtom.GREEN;
 
-    
     private int getCMC() {
         if (0 != (this.shard & ManaAtom.IS_X)) {
             return 0;
