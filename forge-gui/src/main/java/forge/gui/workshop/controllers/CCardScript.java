@@ -123,13 +123,19 @@ public enum CCardScript implements ICDoc {
 
         updateDirtyFlag();
 
+        String oldName = this.currentCard.getName();
+
         CardRules newRules = CardRules.fromScript(Arrays.asList(text.split("\n")));
         CardDb cardDb = newRules.isVariant() ? Singletons.getMagicDb().getVariantCards() :
             Singletons.getMagicDb().getCommonCards();
 
         newRules = cardDb.getEditor().putCard(newRules);
-        this.currentCard = cardDb.getCard(newRules.getName());
-        Card.updateCard(this.currentCard);
+        if (newRules.getName().equals(oldName)) {
+            Card.updateCard(this.currentCard);
+        }
+        else {
+            this.currentCard = cardDb.getCard(newRules.getName());
+        }
 
         VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().repaint();
         CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
