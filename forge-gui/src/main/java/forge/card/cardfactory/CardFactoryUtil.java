@@ -2617,7 +2617,7 @@ public class CardFactoryUtil {
             sbAttach.append(" | AILogic$ Pump | Bestow$ True | ValidTgts$ Creature");
             final SpellAbility bestow = AbilityFactory.getAbility(sbAttach.toString(), card);
 
-            bestow.setDescription("Bestow " + cost + " (If you cast this card for" +
+            bestow.setDescription("Bestow " + ManaCostParser.parse(cost) + " (If you cast this card for" +
                   " its bestow cost, it's an Aura spell with enchant creature. It" +
                   " becomes a creature again if it's not attached to a creature.)");
             bestow.setStackDescription("Bestow - " + card.getName());
