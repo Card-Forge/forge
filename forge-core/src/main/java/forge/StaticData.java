@@ -102,9 +102,4 @@ public class StaticData {
         return variantCards;
     }
 
-    public List<PaperCard> getAllCards() {
-        List<PaperCard> cards = new ArrayList<PaperCard>(commonCards.getAllCards());
-        cards.addAll(variantCards.getAllCards());
-        return cards;
-    }
 }

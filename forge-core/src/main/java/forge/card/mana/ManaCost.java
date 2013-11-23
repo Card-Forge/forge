@@ -100,20 +100,18 @@ public final class ManaCost implements Comparable<ManaCost> {
             return "{" + this.genericCost + "}";
         }
 
-        final StringBuilder xb = new StringBuilder();
         final StringBuilder sb = new StringBuilder();
         if (this.genericCost > 0) {
             sb.append("{" + this.genericCost + "}");
         }
         for (final ManaCostShard s : this.shards) {
             if (s == ManaCostShard.X) {
-                xb.append(s.toString());
-            }
-            else {
+                sb.insert(0, s.toString());
+            } else {
                 sb.append(s.toString());
             }
         }
-        return xb.toString() + sb.toString();
+        return sb.toString();
     }
 
     /**

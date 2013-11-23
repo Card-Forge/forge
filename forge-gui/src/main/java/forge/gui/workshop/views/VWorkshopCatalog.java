@@ -17,6 +17,8 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.Iterables;
+
 import forge.Command;
 import forge.Singletons;
 import forge.gui.WrapLayout;
@@ -125,18 +127,19 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
         }
 
         this.cardManager = new CardManager(this.statLabels, true);
-        this.cardManager.setPool(ItemPool.createFrom(Singletons.getMagicDb().getAllCards(), PaperCard.class), true);
+        Iterable<PaperCard> allCards = Iterables.concat(Singletons.getMagicDb().getCommonCards(), Singletons.getMagicDb().getVariantCards());
+        this.cardManager.setPool(ItemPool.createFrom(allCards, PaperCard.class), true);
         this.cardManagerContainer.setItemManager(this.cardManager);
         
         this.cardManager.addSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				PaperCard card = cardManager.getSelectedItem();
-		        CDetail.SINGLETON_INSTANCE.showCard(card);
-		        CPicture.SINGLETON_INSTANCE.showImage(card);
-		        CCardScript.SINGLETON_INSTANCE.showCard(card);
-			}
-		});
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                PaperCard card = cardManager.getSelectedItem();
+                CDetail.SINGLETON_INSTANCE.showCard(card);
+                CPicture.SINGLETON_INSTANCE.showImage(card);
+                CCardScript.SINGLETON_INSTANCE.showCard(card);
+            }
+        });
     }
 
     private void _setupSpinner (JSpinner spinner) {

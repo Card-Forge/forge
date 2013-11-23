@@ -321,6 +321,11 @@ public final class CardDb implements ICardDatabase {
         return Lists.newArrayList(Iterables.filter(this.roAllCards, predicate));
     }
 
+    @Override
+    public Iterator<PaperCard> iterator() {
+        return this.roAllCards.iterator();
+    }
+
     public Predicate<? super PaperCard> wasPrintedInSets(List<String> setCodes) {
         return new PredicateExistsInSets(setCodes);
     }

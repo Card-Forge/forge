@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 
 import forge.item.PaperCard;
 
-public interface ICardDatabase {
+public interface ICardDatabase extends Iterable<PaperCard> {
     PaperCard tryGetCard(String cardName);
     PaperCard tryGetCard(String cardName, boolean fromLastSet);
     PaperCard tryGetCard(String cardName, String edition);
