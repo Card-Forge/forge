@@ -350,6 +350,12 @@ public final class CardDb implements ICardDatabase {
         public CardRules putCard(CardRules rules, List<Pair<String, CardRarity>> whenItWasPrinted){ // works similarly to Map<K,V>, returning prev. value
             String cardName = rules.getName();
             CardRules result = rulesByName.put(cardName, rules);
+            
+            if(result.getName().equals(cardName)){ // change properties only
+                result.reinitializeFromRules(rules);
+                return result;
+            }
+            
             // 1. generate all paper cards from edition data we have (either explicit, or found in res/editions, or add to unknown edition)
             List<PaperCard> paperCards = new ArrayList<PaperCard>();
             if (null == whenItWasPrinted || whenItWasPrinted.isEmpty()) {

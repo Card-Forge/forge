@@ -56,8 +56,7 @@ public final class CardRules implements ICardCharacteristics {
         colorIdentity = ColorSet.fromMask(colMask);
     }
     
-    public void reinitializeFromScript(Iterable<String> script) {
-        CardRules newRules = fromScript(script);
+    void reinitializeFromRules(CardRules newRules) {
         if(!newRules.getName().equals(this.getName()))
             throw new UnsupportedOperationException("You cannot rename the card using the same CardRules object");
         
