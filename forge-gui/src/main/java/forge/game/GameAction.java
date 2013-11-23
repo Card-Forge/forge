@@ -731,7 +731,8 @@ public class GameAction {
             com.apply(game);
         }
 
-        GameActionUtil.grantBasicLandsManaAbilities(game);
+        List<Card> lands = game.getCardsIn(ZoneType.Battlefield);
+        GameActionUtil.grantBasicLandsManaAbilities(CardLists.filter(lands, CardPredicates.Presets.LANDS));
 
         // Exclude cards in hidden zones from update
         Iterator<Card> it = affectedCards.iterator();
@@ -1441,14 +1442,14 @@ public class GameAction {
             // Where there are none, it should bring up speed controls
             game.fireEvent(new GameEventGameStarted(game.getType(), first, game.getPlayers()));
 
-            game.setAge(GameAge.Mulligan);
+            game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers())
                 p1.drawCards(p1.getMaxHandSize());
 
             performMulligans(first, game.getType() == GameType.Commander);
             if ( game.isGameOver() ) break; // conceded during "mulligan" prompt
 
-            game.setAge(GameAge.Play);
+            game.setAge(GameStage.Play);
 
             // THIS CODE WILL WORK WITH PHASE = NULL {
                 if(game.getType() == GameType.Planechase)
@@ -1465,7 +1466,7 @@ public class GameAction {
             game.getPhaseHandler().startFirstTurn(first);
             
             first = game.getPhaseHandler().getPlayerTurn();  // needed only for restart
-        } while( game.getAge() == GameAge.RestartedByKarn );
+        } while( game.getAge() == GameStage.RestartedByKarn );
 
         // will pull UI dialog, when the UI is listening
         game.fireEvent(new GameEventGameFinished());

@@ -54,7 +54,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GameActionUtil;
-import forge.game.GameAge;
+import forge.game.GameStage;
 import forge.game.GameType;
 import forge.game.GlobalRuleChange;
 import forge.game.RegisteredPlayer;
@@ -1403,7 +1403,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             // Miracle draws
             if (this.numDrawnThisTurn == 1
                     && game.getPhaseHandler().getTurn() != 1
-                    && game.getAge() != GameAge.Mulligan) {
+                    && game.getAge() != GameStage.Mulligan) {
                 drawMiracle(c);
             }
 

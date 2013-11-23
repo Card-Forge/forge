@@ -112,7 +112,6 @@ forge-game/.settings/org.eclipse.core.resources.prefs -text
 forge-game/.settings/org.eclipse.jdt.core.prefs -text
 forge-game/.settings/org.eclipse.m2e.core.prefs -text
 forge-game/pom.xml -text
-forge-game/src/main/java/forge/game/FormatCollection.java -text
 forge-game/src/main/java/forge/game/GameFormat.java -text
 forge-game/src/main/java/forge/game/package-info.java -text
 forge-gui/.classpath -text
@@ -15100,10 +15099,10 @@ forge-gui/src/main/java/forge/error/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/Game.java -text
 forge-gui/src/main/java/forge/game/GameAction.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
-forge-gui/src/main/java/forge/game/GameAge.java -text
 forge-gui/src/main/java/forge/game/GameEndReason.java -text
 forge-gui/src/main/java/forge/game/GameNew.java -text
 forge-gui/src/main/java/forge/game/GameOutcome.java -text
+forge-gui/src/main/java/forge/game/GameStage.java -text
 forge-gui/src/main/java/forge/game/GameType.java -text
 forge-gui/src/main/java/forge/game/GlobalRuleChange.java -text
 forge-gui/src/main/java/forge/game/Match.java -text
@@ -15201,7 +15200,6 @@ forge-gui/src/main/java/forge/game/player/PlayerOutcome.java -text
 forge-gui/src/main/java/forge/game/player/PlayerStatistics.java -text
 forge-gui/src/main/java/forge/game/player/PlayerType.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/player/package-info.java svneol=native#text/plain
-forge-gui/src/main/java/forge/game/zone/IZone.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/zone/MagicStack.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/zone/PlayerZone.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/zone/PlayerZoneBattlefield.java svneol=native#text/plain

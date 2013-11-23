@@ -77,7 +77,7 @@ public class Game {
     private long timestamp = 0;
     public final GameAction action;
     private final Match match;
-    private GameAge age = GameAge.BeforeMulligan;
+    private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
 
     /**
@@ -280,7 +280,7 @@ public class Game {
      * @return the gameOver
      */
     public synchronized boolean isGameOver() {
-        return age == GameAge.GameOver;
+        return age == GameStage.GameOver;
     }
 
     /**
@@ -288,7 +288,7 @@ public class Game {
      * @param go the gameOver to set
      */
     public synchronized void setGameOver(GameEndReason reason) {
-        this.age = GameAge.GameOver;
+        this.age = GameStage.GameOver;
         for (Player p : allPlayers ) {
             if (p.isMindSlaved()) 
                 p.releaseControl(); // for correct totals
@@ -562,11 +562,11 @@ public class Game {
         }
     }
 
-    public GameAge getAge() {
+    public GameStage getAge() {
         return age;
     }
 
-    public void setAge(GameAge value) {
+    public void setAge(GameStage value) {
         age = value;
     }
 

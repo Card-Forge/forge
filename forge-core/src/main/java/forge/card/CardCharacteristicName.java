@@ -1,7 +1,5 @@
 package forge.card;
 
-import org.apache.commons.lang3.StringUtils;
-
 /** 
  * TODO: Write javadoc for this type.
  *

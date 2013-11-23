@@ -14,7 +14,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.game.GameAction;
-import forge.game.GameAge;
+import forge.game.GameStage;
 import forge.game.GameNew;
 import forge.game.Game;
 import forge.game.RegisteredPlayer;
@@ -88,7 +88,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
     
         trigHandler.clearSuppression(TriggerType.ChangesZone);
     
-        game.setAge(GameAge.RestartedByKarn);
+        game.setAge(GameStage.RestartedByKarn);
         // Do not need this because ability will resolve only during that player's turn
         //game.getPhaseHandler().setPlayerTurn(sa.getActivatingPlayer());
         

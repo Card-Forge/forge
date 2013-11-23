@@ -31,7 +31,6 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -198,10 +197,7 @@ public final class GameActionUtil {
      * 
      * @return the stLandManaAbilities
      */
-    public static void grantBasicLandsManaAbilities(Game game) {
-        List<Card> lands = game.getCardsIn(ZoneType.Battlefield);
-        lands = CardLists.filter(lands, Presets.LANDS);
-
+    public static void grantBasicLandsManaAbilities(List<Card> lands) {
         // remove all abilities granted by this Command
         for (final Card land : lands) {
             List<SpellAbility> origManaAbs = Lists.newArrayList(land.getManaAbility());

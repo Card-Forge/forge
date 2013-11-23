@@ -40,7 +40,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
-import forge.game.GameAge;
+import forge.game.GameStage;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.GlobalRuleChange;
@@ -1009,7 +1009,7 @@ public class PhaseHandler implements java.io.Serializable {
             }
 
             // If ever the karn's ultimate resolved
-            if( game.getAge() == GameAge.RestartedByKarn) {
+            if( game.getAge() == GameStage.RestartedByKarn) {
                 phase = null;
                 game.fireEvent(new GameEventGameRestarted(playerTurn));
                 return;

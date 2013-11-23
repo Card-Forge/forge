@@ -1,6 +1,6 @@
 package forge.game;
 
-public enum GameAge {
+public enum GameStage {
     BeforeMulligan,
     Mulligan,
     Play,

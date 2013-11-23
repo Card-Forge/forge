@@ -45,7 +45,7 @@ import forge.util.maps.MapOfLists;
  * @author Forge
  * @version $Id: PlayerZone.java 17582 2012-10-19 22:39:09Z Max mtg $
  */
-public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
+public class Zone implements java.io.Serializable, Iterable<Card> {
     /** Constant <code>serialVersionUID=-5687652485777639176L</code>. */
     private static final long serialVersionUID = -5687652485777639176L;
 
@@ -66,17 +66,16 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
         //System.out.println(zoneName + " (ct) " + Integer.toHexString(System.identityHashCode(roCardList)));
     }
 
-    @Override
     public Player getPlayer() { // generic zones like stack have no player associated
         return null;
     }
     
-    @Override
+
     public final void add(final Card c) {
         add(c, null);
     }
 
-    @Override
+
     public void add(final Card c, final Integer index) {
         
         // Immutable cards are usually emblems and effects
@@ -99,7 +98,7 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
     }
 
-    @Override
+
     public final boolean contains(final Card c) {
         return this.cardList.contains(c);
     }
@@ -108,13 +107,12 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
         return Iterables.any(this.cardList, condition);
     }
 
-    @Override
     public void remove(final Card c) {
         this.cardList.remove(c);
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Removed, c));
     }
 
-    @Override
+
     public final void setCards(final Iterable<Card> cards) {
         cardList.clear();
         for (Card c : cards) {
@@ -125,39 +123,37 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
         
     }
 
-    @Override
+
     public final boolean is(final ZoneType zone) {
         return zone == this.zoneType;
     }
 
     // PlayerZone should override it with a correct implementation
-    @Override
+
     public final boolean is(final ZoneType zone, final Player player) {
         return zoneType == zone && player == getPlayer();
     }
 
-    @Override
+
     public final ZoneType getZoneType() {
         return this.zoneType;
     }
 
-    @Override
     public final int size() {
         return this.cardList.size();
     }
 
-    @Override
+
     public final Card get(final int index) {
         return this.cardList.get(index);
     }
 
-    @Override
     public final List<Card> getCards() {
         //System.out.println(zoneName + ": " + Integer.toHexString(System.identityHashCode(roCardList)));
         return this.getCards(true);
     }
 
-    @Override
+
     public List<Card> getCards(final boolean filter) {
         // Non-Battlefield PlayerZones don't care about the filter
         return this.roCardList;
@@ -168,7 +164,7 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
      * 
      * @see forge.IPlayerZone#isEmpty()
      */
-    @Override
+
     public final boolean isEmpty() {
         return this.cardList.isEmpty();
     }
@@ -210,7 +206,6 @@ public class Zone implements IZone, java.io.Serializable, Iterable<Card> {
      * resetCardsAddedThisTurn.
      * </p>
      */
-    @Override
     public final void resetCardsAddedThisTurn() {
         this.cardsAddedThisTurn.clear();
     }
