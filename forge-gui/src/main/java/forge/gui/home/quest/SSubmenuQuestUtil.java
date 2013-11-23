@@ -122,15 +122,6 @@ public class SSubmenuQuestUtil {
                     view.getCbxPet().setVisible(false);
                 }
             }
-            if (iSlot == 2) {
-            	if (petList.isEmpty()) {
-                    view.getCbCharm().setVisible(false);
-                }
-                else {
-                    view.getCbCharm().setVisible(true);
-                    view.getCbCharm().setSelected(currentPetName != null);
-                }
-            }
         }
 
         if (view.equals(VSubmenuChallenges.SINGLETON_INSTANCE)) {
