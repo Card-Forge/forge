@@ -8,9 +8,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
@@ -314,6 +316,11 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes) {
         String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa.getParam("AILogic"), invalidTypes);
+        if( StringUtils.isBlank(chosen) && !validTypes.isEmpty() )
+        {
+            chosen = validTypes.get(0);
+            Log.warn("AI has no idea how to choose " + kindOfType +", defaulting to 1st element: chosen" );
+        }
         game.getAction().nofityOfValue(sa, null, "Computer picked: " + chosen, player);
         return chosen;
     }

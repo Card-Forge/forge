@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +14,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellPermanent;
 import forge.game.trigger.TriggerType;
-import forge.gui.GuiChoose;
 
 public class CounterEffect extends SpellAbilityEffect {
     @Override
@@ -154,13 +154,8 @@ public class CounterEffect extends SpellAbilityEffect {
 
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : "Graveyard";
         if (srcSA.hasParam("DestinationChoice")) {//Hinder
-            final String[] pos = srcSA.getParam("DestinationChoice").split(",");
-            if (srcSA.getActivatingPlayer().isComputer()) {
-                destination = pos[0];
-            } else {
-                final String prompt = "Select a destination to remove";
-                destination = GuiChoose.one(prompt, pos);
-            }
+            List<String> pos = Arrays.asList(srcSA.getParam("DestinationChoice").split(","));
+            destination = srcSA.getActivatingPlayer().getController().chooseSomeType("a destination to remove", tgtSA, pos, null);
         }
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,
