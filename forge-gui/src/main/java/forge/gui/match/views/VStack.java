@@ -115,14 +115,14 @@ public enum VStack implements IVDoc<CStack> {
     //========== Observer update methods
 
     /**
-     * @param stack  
+     * @param stack
      * @param viewer */
     public void updateStack(final MagicStack stack, final LobbyPlayer viewer) {
         // No need to update this unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
         int count = 1;
-        
+
         List<JTextArea> list = new ArrayList<JTextArea>();
 
         parentCell.getBody().removeAll();
@@ -131,11 +131,11 @@ public enum VStack implements IVDoc<CStack> {
         tab.setText("Stack : " + stack.size());
 
         final Border border = new EmptyBorder(5, 5, 5, 5);
-        
+
         stackTARs.clear();
         boolean isFirst = true;
         for (final SpellAbilityStackInstance spell : stack) {
-            String isOptional = spell.getSpellAbility().isOptionalTrigger() 
+            String isOptional = spell.getSpellAbility().isOptionalTrigger()
                     && spell.getSourceCard().getController().getController().getLobbyPlayer().equals(viewer) ? "(OPTIONAL) " : "";
             String txt = (count++) + ". " + isOptional + spell.getStackDescription();
             JTextArea tar = new JTextArea(txt);
@@ -166,7 +166,7 @@ public enum VStack implements IVDoc<CStack> {
                     }
                 }
             });
-            
+
             if(spell.getSpellAbility().isOptionalTrigger() && spell.getSpellAbility().getActivatingPlayer().getLobbyPlayer() == viewer) {
                 tar.addMouseListener(new MouseAdapter() {
                     @Override
@@ -180,7 +180,7 @@ public enum VStack implements IVDoc<CStack> {
                 });
             }
             list.add(tar);
-            
+
             /*
              * This updates the Card Picture/Detail when the spell is added to
              * the stack. This functionality was not present in v 1.1.8.
@@ -239,63 +239,57 @@ public enum VStack implements IVDoc<CStack> {
     }
 
     //========= Custom class handling
-    
+
     private final class OptionalTriggerMenu extends JPopupMenu {
         private static final long serialVersionUID = 1548494191627807962L;
         private final JCheckBoxMenuItem jmiAccept;
         private final JCheckBoxMenuItem jmiDecline;
         private final JCheckBoxMenuItem jmiAsk;
         private PlayerController localPlayer;
-        
+
         private Integer triggerID = 0;
-        
+
         public OptionalTriggerMenu(){
-            
+
             jmiAccept = new JCheckBoxMenuItem("Always Accept");
             jmiDecline = new JCheckBoxMenuItem("Always Decline");
             jmiAsk = new JCheckBoxMenuItem("Always Ask");
-            
-            jmiAccept.addActionListener(new ActionListener() {
 
+            jmiAccept.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     if ( localPlayer == null ) return;
                     localPlayer.setShouldAlwaysAcceptTrigger(triggerID);
                 }
-                
             });
-            
-            jmiDecline.addActionListener(new ActionListener() {
 
+            jmiDecline.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     if ( localPlayer == null ) return;
                     localPlayer.setShouldAlwaysDeclineTrigger(triggerID);
                 }
-                
             });
-            
-            jmiAsk.addActionListener(new ActionListener() {
 
+            jmiAsk.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     if ( localPlayer == null ) return;
                     localPlayer.setShouldAlwaysAskTrigger(triggerID);
                 }
-                
             });
-            
+
             add(jmiAccept);
             add(jmiDecline);
             add(jmiAsk);
         }
-        
+
         public void setStackInstance(final SpellAbilityStackInstance SI)
         {
             localPlayer = SI.getSpellAbility().getActivatingPlayer().getController();
-            
+
             triggerID = SI.getSpellAbility().getSourceTrigger();
-            
+
             if(localPlayer.shouldAlwaysAcceptTrigger(triggerID)) {
                 jmiAccept.setSelected(true);
                 jmiDecline.setSelected(false);

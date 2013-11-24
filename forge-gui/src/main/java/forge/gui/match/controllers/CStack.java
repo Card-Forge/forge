@@ -17,7 +17,7 @@ import forge.gui.match.views.VStack;
 public enum CStack implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
-    
+
     private MagicStack model;
     private LobbyPlayer viewer;
 
@@ -39,12 +39,11 @@ public enum CStack implements ICDoc {
     @Override
     public void update() {
         SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-        VStack.SINGLETON_INSTANCE.updateStack(model, viewer); 
-    }
-    
-    public void setModel(MagicStack model, LobbyPlayer guiPlayer) { 
-        this.model = model; 
-        this.viewer = guiPlayer;
+        VStack.SINGLETON_INSTANCE.updateStack(model, viewer);
     }
 
+    public void setModel(MagicStack model, LobbyPlayer guiPlayer) { 
+        this.model = model;
+        this.viewer = guiPlayer;
+    }
 }
