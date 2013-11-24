@@ -1412,6 +1412,12 @@ public class GameAction {
         reveal(cardOwner + " reveals card from " + zt, cards, zt, cardOwner, dontRevealToOwner);
     }
     
+    public void reveal(String message, List<Card> cards, Player cardOwner, boolean dontRevealToOwner) {
+        if (cards.isEmpty()) 
+            return;
+        reveal(message, cards, cards.get(0).getZone().getZoneType(), cardOwner, dontRevealToOwner);
+    }
+    
     public void reveal(String message, List<Card> cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner) {
         for(Player p : game.getPlayers()) {
             if (dontRevealToOwner && cardOwner == p) continue;

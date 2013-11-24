@@ -66,7 +66,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
@@ -115,7 +114,7 @@ public class ComputerUtil {
             if (pay.payComputerCosts(ai, game)) {
                 game.getStack().addAndUnfreeze(sa);
                 if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
-                    GuiChoose.oneOrNone("Computer reveals spliced cards:", sa.getSplicedCards());
+                    game.getAction().reveal("Computer reveals spliced cards:", sa.getSplicedCards(), ai, true);
                 }
                 return true;
                 // TODO: solve problems with TapsForMana triggers by adding
@@ -1704,8 +1703,6 @@ public class ComputerUtil {
                 chosen = "Island";
         }
 
-
-        GuiChoose.one("Computer picked: ", new String[]{chosen});
         return chosen;
     }
     

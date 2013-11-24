@@ -30,6 +30,7 @@ import forge.game.card.Card;
 import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.game.zone.Zone;
 
 /**
@@ -192,12 +193,12 @@ public class HumanPlaySpellAbility {
     private boolean announceType() {
      // Announcing Requirements like choosing creature type or number
         String announce = ability.getParam("AnnounceType");
+        PlayerController pc = ability.getActivatingPlayer().getController();
         if (announce != null) {
             for(String aVar : announce.split(",")) {
                 String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
-                    String choice = ability.getActivatingPlayer().getController().chooseSomeType("Creature", 
-                            ability.getParam("AILogic"), CardType.getCreatureTypes(), new ArrayList<String>());
+                    String choice = pc.chooseSomeType("Creature", ability, CardType.getCreatureTypes(), new ArrayList<String>());
                     ability.getSourceCard().setChosenType(choice);
                 }
                 if ("ChooseNumber".equals(varName)) {

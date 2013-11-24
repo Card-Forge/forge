@@ -312,8 +312,10 @@ public class PlayerControllerAi extends PlayerController {
      * @see forge.game.player.PlayerController#ChooseSomeType(java.lang.String, java.util.List, java.util.List)
      */
     @Override
-    public String chooseSomeType(String kindOfType, String aiLogic, List<String> validTypes, List<String> invalidTypes) {
-        return ComputerUtil.chooseSomeType(player, kindOfType, aiLogic, invalidTypes);
+    public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes) {
+        String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa.getParam("AILogic"), invalidTypes);
+        game.getAction().nofityOfValue(sa, null, "Computer picked: " + chosen, player);
+        return chosen;
     }
 
     /* (non-Javadoc)

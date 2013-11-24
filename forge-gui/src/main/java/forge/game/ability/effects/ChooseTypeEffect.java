@@ -58,7 +58,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
         if( !validTypes.isEmpty()) {
             for (final Player p : tgtPlayers) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                    String choice = p.getController().chooseSomeType(type, sa.getParam("AILogic"), validTypes, invalidTypes);
+                    String choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
                     card.setChosenType(choice);
                 }
             }
