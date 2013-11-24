@@ -3,12 +3,12 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;

@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import forge.card.MagicColor;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;

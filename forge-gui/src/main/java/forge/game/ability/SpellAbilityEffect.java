@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang3.StringUtils;
 
 
-import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.card.CardFactoryUtil;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 

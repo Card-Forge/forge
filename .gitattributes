@@ -14810,10 +14810,6 @@ forge-gui/src/main/java/forge/card/CardCharacteristics.java -text
 forge-gui/src/main/java/forge/card/CardEditionPredicates.java -text
 forge-gui/src/main/java/forge/card/MetaSet.java -text
 forge-gui/src/main/java/forge/card/UnOpenedMeta.java -text
-forge-gui/src/main/java/forge/card/cardfactory/CardFactory.java svneol=native#text/plain
-forge-gui/src/main/java/forge/card/cardfactory/CardFactoryCreatures.java svneol=native#text/plain
-forge-gui/src/main/java/forge/card/cardfactory/CardFactoryUtil.java svneol=native#text/plain
-forge-gui/src/main/java/forge/card/cardfactory/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/card/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/control/ChatArea.java -text
 forge-gui/src/main/java/forge/control/FControl.java -text
@@ -14974,6 +14970,8 @@ forge-gui/src/main/java/forge/game/ability/package-info.java svneol=native#text/
 forge-gui/src/main/java/forge/game/card/Card.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/card/CardColor.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/card/CardDamageHistory.java -text
+forge-gui/src/main/java/forge/game/card/CardFactory.java svneol=native#text/plain
+forge-gui/src/main/java/forge/game/card/CardFactoryUtil.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/card/CardKeywords.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/card/CardLists.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/card/CardPowerToughness.java svneol=native#text/plain
@@ -15629,7 +15627,6 @@ forge-gui/src/main/java/forge/util/maps/EnumMapToAmount.java -text
 forge-gui/src/main/java/forge/util/maps/HashMapOfLists.java -text
 forge-gui/src/main/java/forge/util/maps/MapOfLists.java -text
 forge-gui/src/main/java/forge/util/maps/MapToAmount.java -text
-forge-gui/src/main/java/forge/util/maps/TreeMapToAmount.java -text
 forge-gui/src/main/java/forge/util/maps/package-info.java -text
 forge-gui/src/main/java/forge/util/package-info.java -text
 forge-gui/src/main/java/forge/util/storage/StorageImmediatelySerialized.java svneol=native#text/plain

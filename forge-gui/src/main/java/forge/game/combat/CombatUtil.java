@@ -28,7 +28,6 @@ import com.google.common.collect.Lists;
 
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -36,6 +35,7 @@ import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;

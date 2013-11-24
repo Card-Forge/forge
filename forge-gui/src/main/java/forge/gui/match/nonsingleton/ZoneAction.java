@@ -6,8 +6,8 @@ import java.util.List;
 
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
-import forge.card.cardfactory.CardFactory;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.zone.PlayerZone;
 import forge.gui.ForgeAction;
 import forge.gui.GuiChoose;

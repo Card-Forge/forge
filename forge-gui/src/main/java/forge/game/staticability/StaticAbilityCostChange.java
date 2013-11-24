@@ -20,9 +20,9 @@ package forge.game.staticability;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCostShard;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityActivated;

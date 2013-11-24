@@ -29,7 +29,6 @@ import com.google.common.collect.Multimap;
 
 import forge.FThreads;
 import forge.Singletons;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntity;
 import forge.game.GameStage;
@@ -38,6 +37,7 @@ import forge.game.GameType;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;

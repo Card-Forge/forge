@@ -6,11 +6,11 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
-import forge.card.cardfactory.CardFactory;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;

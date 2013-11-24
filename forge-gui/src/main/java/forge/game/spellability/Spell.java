@@ -20,10 +20,10 @@ package forge.game.spellability;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.error.BugReporter;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;

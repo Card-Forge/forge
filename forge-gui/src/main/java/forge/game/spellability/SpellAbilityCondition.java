@@ -24,11 +24,11 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.MagicColor;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;

@@ -19,8 +19,8 @@ package forge.game.replacement;
 
 import java.util.Map;
 
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 

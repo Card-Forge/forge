@@ -21,13 +21,13 @@ import java.util.Arrays;
 import java.util.List;
 
 
-import forge.card.cardfactory.CardFactory;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;

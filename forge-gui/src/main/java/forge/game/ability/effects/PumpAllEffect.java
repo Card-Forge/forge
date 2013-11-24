@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import forge.Command;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;

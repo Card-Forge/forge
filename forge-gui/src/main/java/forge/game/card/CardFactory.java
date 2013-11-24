@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.card.cardfactory;
+package forge.game.card;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,13 +33,12 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.Card;
-import forge.game.card.CardColor;
-import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilityActivated;
+import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
@@ -48,6 +47,9 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.PlayerZone;
+import forge.game.zone.ZoneType;
+import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 
@@ -339,7 +341,7 @@ public class CardFactory {
         // ************** Link to different CardFactories *******************
 
         if (card.isCreature()) {
-            CardFactoryCreatures.buildCard(card, cardName);
+            buildCard(card, cardName);
         } else if (card.isPlaneswalker()) {
             buildPlaneswalkerAbilities(card);
         } else if (card.isType("Plane")) {
@@ -660,4 +662,114 @@ public class CardFactory {
         return wrapperAbility;
     }
 
+    private static void getCard_SphinxJwar(final Card card) {
+        final SpellAbility ability1 = new AbilityStatic(card, ManaCost.ZERO) {
+            @Override
+            public void resolve() {
+                final Player player = card.getController();
+                final PlayerZone lib = player.getZone(ZoneType.Library);
+
+                if (lib.size() < 1 || !this.getActivatingPlayer().equals(card.getController())) {
+                    return;
+                }
+
+                final List<Card> cl = new ArrayList<Card>();
+                cl.add(lib.get(0));
+
+                GuiChoose.oneOrNone("Top card", cl);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                return false;
+            }
+        }; // SpellAbility
+
+        final StringBuilder sb1 = new StringBuilder();
+        sb1.append(card.getName()).append(" - look at top card of library.");
+        ability1.setStackDescription(sb1.toString());
+
+        ability1.setDescription("You may look at the top card of your library.");
+        card.addSpellAbility(ability1);
+    }
+
+    public static void buildCard(final Card card, final String cardName) {
+
+        if (cardName.equals("Sphinx of Jwar Isle")) {
+            getCard_SphinxJwar(card);
+        }
+
+        // ***************************************************
+        // end of card specific code
+        // ***************************************************
+
+        final int iLvlUp = CardFactoryUtil.hasKeyword(card, "Level up");
+        final int iLvlMax = CardFactoryUtil.hasKeyword(card, "maxLevel");
+        
+        if (iLvlUp != -1 && iLvlMax != -1) {
+            final String parse = card.getKeyword().get(iLvlUp);
+            final String parseMax = card.getKeyword().get(iLvlMax);
+            card.addSpellAbility(makeLevellerAbility(card, parse, parseMax));
+            card.setLevelUp(true);
+        } // level up
+    }
+
+
+    private static SpellAbility makeLevellerAbility(final Card card, final String strLevelCost, final String strMaxLevel) {
+        card.removeIntrinsicKeyword(strLevelCost);
+        card.removeIntrinsicKeyword(strMaxLevel);
+
+        final String[] k = strLevelCost.split(":");
+        final String manacost = k[1];
+
+        final String[] l = strMaxLevel.split(":");
+        final int maxLevel = Integer.parseInt(l[1]);
+
+        class LevelUpAbility extends AbilityActivated {
+            public LevelUpAbility(final Card ca, final String s) {
+                super(ca, new Cost(manacost, true), null);
+            }
+
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated levelUp = new LevelUpAbility(getSourceCard(), getPayCosts().toString());
+                levelUp.getRestrictions().setSorcerySpeed(true);
+                return levelUp;
+            }
+
+            private static final long serialVersionUID = 3998280279949548652L;
+
+            @Override
+            public void resolve() {
+                card.addCounter(CounterType.LEVEL, 1, true);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                // creatures enchanted by curse auras have low priority
+                if (card.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                    for (Card aura : card.getEnchantedBy()) {
+                        if (aura.getController().isOpponentOf(card.getController())) {
+                            return false;
+                        }
+                    }
+                }
+                return card.getCounters(CounterType.LEVEL) < maxLevel;
+            }
+
+            @Override
+            public String getDescription() {
+                final StringBuilder sbDesc = new StringBuilder();
+                sbDesc.append("Level up ").append(manacost).append(" (").append(manacost);
+                sbDesc.append(": Put a level counter on this. Level up only as a sorcery.)");
+                return sbDesc.toString();
+            }
+        }
+        final SpellAbility levelUp = new LevelUpAbility(card, manacost);
+        levelUp.getRestrictions().setSorcerySpeed(true);
+        final StringBuilder sbStack = new StringBuilder();
+        sbStack.append(card).append(" - put a level counter on this.");
+        levelUp.setStackDescription(sbStack.toString());
+        return levelUp;
+    }    
 } // end class AbstractCardFactory

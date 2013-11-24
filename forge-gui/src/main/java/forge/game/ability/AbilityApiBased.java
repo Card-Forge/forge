@@ -2,12 +2,12 @@ package forge.game.ability;
 
 import java.util.Map;
 
-import forge.card.cardfactory.CardFactory;
 import forge.game.ability.effects.ChangeZoneAllEffect;
 import forge.game.ability.effects.ChangeZoneEffect;
 import forge.game.ability.effects.ManaEffect;
 import forge.game.ability.effects.ManaReflectedEffect;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityActivated;

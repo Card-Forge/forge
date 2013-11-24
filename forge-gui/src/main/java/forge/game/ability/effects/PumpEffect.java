@@ -6,12 +6,12 @@ import java.util.List;
 
 import forge.Command;
 import forge.card.CardType;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;

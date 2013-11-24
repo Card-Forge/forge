@@ -10,7 +10,6 @@ import com.google.common.base.Predicate;
 
 import forge.FThreads;
 import forge.Singletons;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.game.GameActionUtil;
 import forge.game.Game;
@@ -20,6 +19,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.ability.effects.FlipCoinEffect;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;

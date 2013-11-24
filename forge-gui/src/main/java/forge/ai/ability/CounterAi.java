@@ -2,11 +2,11 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityAi;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;

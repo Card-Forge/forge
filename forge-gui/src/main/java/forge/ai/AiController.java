@@ -30,13 +30,13 @@ import com.google.common.collect.Iterables;
 
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.ai.AiProps;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;

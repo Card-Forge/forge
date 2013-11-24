@@ -19,9 +19,9 @@ package forge.game.staticability;
 
 import java.util.HashMap;
 
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
 
 /**

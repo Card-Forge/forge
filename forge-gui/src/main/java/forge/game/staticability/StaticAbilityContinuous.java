@@ -27,7 +27,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.StaticEffect;
@@ -36,6 +35,7 @@ import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
