@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.match.nonsingleton;
+package forge.gui.match.views;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,6 +26,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.gui.match.controllers.CHand;
 import forge.view.arcane.HandArea;
 
 /**

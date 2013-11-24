@@ -1,4 +1,4 @@
-package forge.gui.match.nonsingleton;
+package forge.gui.match;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import forge.gui.GuiChoose;
  * "zones" of a player field: hand, library, etc.
  * 
  */
-class ZoneAction extends ForgeAction {
+public class ZoneAction extends ForgeAction {
     private static final long serialVersionUID = -5822976087772388839L;
     private final PlayerZone zone;
     private final String title;

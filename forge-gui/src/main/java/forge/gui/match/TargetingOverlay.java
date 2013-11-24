@@ -38,7 +38,7 @@ import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.gui.framework.FScreen;
 import forge.gui.match.controllers.CDock;
-import forge.gui.match.nonsingleton.VField;
+import forge.gui.match.views.VField;
 import forge.gui.toolbox.FSkin;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;

@@ -13,10 +13,10 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SRearrangingUtil;
 import forge.gui.framework.VEmptyDoc;
-import forge.gui.match.nonsingleton.VCommand;
-import forge.gui.match.nonsingleton.VField;
-import forge.gui.match.nonsingleton.VHand;
+import forge.gui.match.views.VCommand;
 import forge.gui.match.views.VDev;
+import forge.gui.match.views.VField;
+import forge.gui.match.views.VHand;
 import forge.gui.match.views.VMessage;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
@@ -134,7 +134,7 @@ public enum VMatchUI implements IVTopLevelUI {
         this.lstFields = lst0;
     }
 
-    /** @return {@link java.util.List}<{@link forge.gui.match.nonsigleton.VHand}> */
+    /** @return {@link java.util.List}<{@link forge.gui.match.views.VHand}> */
     public List<VField> getFieldViews() {
         return lstFields;
     }

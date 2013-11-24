@@ -1,6 +1,5 @@
 package forge.gui.framework;
 
-import forge.gui.match.nonsingleton.CEmptyDoc;
 
 /** 
  * An intentionally empty IVDoc to fill field slots unused

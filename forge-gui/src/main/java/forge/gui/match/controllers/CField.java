@@ -15,13 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.match.nonsingleton;
+package forge.gui.match.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+
 import com.google.common.base.Function;
 
 import forge.Command;
@@ -38,7 +39,8 @@ import forge.gui.ForgeAction.MatchConstants;
 import forge.gui.framework.ICDoc;
 import forge.gui.input.Input;
 import forge.gui.input.InputPayMana;
-import forge.gui.match.controllers.CMessage;
+import forge.gui.match.ZoneAction;
+import forge.gui.match.views.VField;
 
 /**
  * Controls Swing components of a player's field instance.
@@ -59,7 +61,7 @@ public class CField implements ICDoc {
      * Controls Swing components of a player's field instance.
      * 
      * @param p0 &emsp; {@link forge.game.player.Player}
-     * @param v0 &emsp; {@link forge.gui.match.nonsingleton.VField}
+     * @param v0 &emsp; {@link forge.gui.match.views.VField}
      * @param playerViewer 
      */
     @SuppressWarnings("serial")
@@ -154,7 +156,7 @@ public class CField implements ICDoc {
         return this.player;
     }
 
-    /** @return {@link forge.gui.nonsingleton.VField} */
+    /** @return {@link forge.gui.match.views.VField} */
     public VField getView() {
         return this.view;
     }

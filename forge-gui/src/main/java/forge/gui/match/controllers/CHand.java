@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.match.nonsingleton;
+package forge.gui.match.controllers;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -34,6 +34,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
+import forge.gui.match.views.VField;
+import forge.gui.match.views.VHand;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.HandArea;
 import forge.view.arcane.util.Animation;
@@ -51,7 +53,7 @@ public class CHand implements ICDoc {
      * Controls Swing components of a player's hand instance.
      * 
      * @param p0 &emsp; {@link forge.game.player.Player}
-     * @param v0 &emsp; {@link forge.gui.match.nonsingleton.VHand}
+     * @param v0 &emsp; {@link forge.gui.match.views.VHand}
      */
     public CHand(final Player p0, final VHand v0) {
         this.player = p0;

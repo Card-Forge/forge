@@ -15,11 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.match.nonsingleton;
+package forge.gui.match.controllers;
 
 import forge.Command;
 import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
+import forge.gui.match.views.VCommand;
 /**
  * Controls Swing components of a player's command instance.
  */
@@ -31,7 +32,7 @@ public class CCommand implements ICDoc {
      * Controls Swing components of a player's command instance.
      * 
      * @param p0 &emsp; {@link forge.game.player.Player}
-     * @param v0 &emsp; {@link forge.gui.match.nonsingleton.VCommand}
+     * @param v0 &emsp; {@link forge.gui.match.views.VCommand}
      */
     public CCommand(final Player p0, final VCommand v0) {
         this.player = p0;
@@ -51,7 +52,7 @@ public class CCommand implements ICDoc {
         return this.player;
     }
 
-    /** @return {@link forge.gui.nonsingleton.VField} */
+    /** @return {@link forge.gui.match.views.VField} */
     public VCommand getView() {
         return this.view;
     }

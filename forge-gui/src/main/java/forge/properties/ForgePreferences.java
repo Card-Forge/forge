@@ -26,8 +26,8 @@ import forge.control.FControl.CloseAction;
 import forge.game.GameLogEntryType;
 import forge.gui.home.EMenuItem;
 import forge.gui.match.VMatchUI;
-import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VDev;
+import forge.gui.match.views.VField;
 import forge.gui.toolbox.special.PhaseIndicator;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {

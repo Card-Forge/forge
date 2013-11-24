@@ -1,7 +1,6 @@
-package forge.gui.match.nonsingleton;
+package forge.gui.framework;
 
 import forge.Command;
-import forge.gui.framework.ICDoc;
 
 /** 
  * An intentionally empty ICDoc to fill field slots unused

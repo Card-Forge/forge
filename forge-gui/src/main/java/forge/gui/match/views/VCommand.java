@@ -15,10 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.match.nonsingleton;
+package forge.gui.match.views;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import net.miginfocom.swing.MigLayout;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -26,6 +27,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.gui.match.controllers.CCommand;
 import forge.gui.toolbox.FSkin;
 import forge.view.arcane.PlayArea;
 
