@@ -8,7 +8,7 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
-import forge.game.ability.SpellAbilityAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;

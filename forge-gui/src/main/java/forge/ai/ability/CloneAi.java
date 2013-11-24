@@ -2,9 +2,9 @@ package forge.ai.ability;
 
 import java.util.List;
 
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;

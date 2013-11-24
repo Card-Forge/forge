@@ -679,7 +679,7 @@ public class CardFactory {
             }
 
             @Override
-            public boolean canPlayAI() {
+            public boolean canPlayAI(Player aiPlayer) {
                 return false;
             }
         }; // SpellAbility
@@ -744,11 +744,11 @@ public class CardFactory {
             }
 
             @Override
-            public boolean canPlayAI() {
+            public boolean canPlayAI(Player aiPlayer) {
                 // creatures enchanted by curse auras have low priority
                 if (card.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
                     for (Card aura : card.getEnchantedBy()) {
-                        if (aura.getController().isOpponentOf(card.getController())) {
+                        if (aura.getController().isOpponentOf(aiPlayer)) {
                             return false;
                         }
                     }

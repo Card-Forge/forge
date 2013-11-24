@@ -8,8 +8,8 @@ import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;

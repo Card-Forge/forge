@@ -2,6 +2,7 @@ package forge.game.ability;
 
 import java.util.Map;
 
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.effects.ChangeZoneAllEffect;
 import forge.game.ability.effects.ChangeZoneEffect;
 import forge.game.ability.effects.ManaEffect;
@@ -63,8 +64,8 @@ public class AbilityApiBased extends AbilityActivated {
     }
 
     @Override
-    public boolean canPlayAI() {
-        return ai.canPlayAIWithSubs(getActivatingPlayer(), this);
+    public boolean canPlayAI(Player aiPlayer) {
+        return ai.canPlayAIWithSubs(aiPlayer, this);
     }
 
     @Override

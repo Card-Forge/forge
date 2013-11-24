@@ -6,8 +6,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;

@@ -1,8 +1,8 @@
 package forge.ai.ability;
 
 
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;

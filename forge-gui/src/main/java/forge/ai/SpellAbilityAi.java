@@ -1,4 +1,4 @@
-package forge.game.ability;
+package forge.ai;
 
 
 import java.util.Collection;
@@ -6,8 +6,7 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCost;
+import forge.game.ability.SaTargetRoutines;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;

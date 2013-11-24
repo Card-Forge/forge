@@ -4,6 +4,7 @@ package forge.game.ability;
 import java.util.Map;
 import java.util.TreeMap;
 
+import forge.ai.SpellAbilityAi;
 import forge.ai.ability.*;
 import forge.game.ability.effects.*;
 import forge.util.ReflectionUtil;

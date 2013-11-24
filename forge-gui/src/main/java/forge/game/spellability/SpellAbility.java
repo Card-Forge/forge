@@ -218,7 +218,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * 
      * @return a boolean.
      */
-    public /*final*/ boolean canPlayAI() {
+    public /*final*/ boolean canPlayAI(Player aiPlayer) {
         return true;
     }
 

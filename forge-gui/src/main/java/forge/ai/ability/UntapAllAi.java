@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import java.util.List;
 
-import forge.game.ability.SpellAbilityAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;

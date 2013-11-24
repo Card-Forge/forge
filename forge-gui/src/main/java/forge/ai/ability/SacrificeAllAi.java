@@ -6,7 +6,7 @@ import java.util.Random;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
-import forge.game.ability.SpellAbilityAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;

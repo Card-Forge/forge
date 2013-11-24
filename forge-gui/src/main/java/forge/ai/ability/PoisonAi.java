@@ -4,8 +4,8 @@ import java.util.List;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;

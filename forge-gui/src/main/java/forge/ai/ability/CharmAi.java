@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import forge.game.ability.SpellAbilityAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -49,7 +49,7 @@ public class CharmAi extends SpellAbilityAi {
             AbilitySub thisPick = null;
             for (SpellAbility sub : choices) {
                 sub.setActivatingPlayer(ai);
-                if (!playNow && sub.canPlayAI()) {
+                if (!playNow && sub.canPlayAI(ai)) {
                     thisPick = (AbilitySub) sub;
                     choices.remove(sub);
                     playNow = true;

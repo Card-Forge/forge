@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 
 import forge.ai.AiController;
-import forge.game.ability.SpellAbilityAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.ai.AiProps;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;

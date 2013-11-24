@@ -19,9 +19,9 @@ package forge.game.spellability;
 
 import java.util.Map;
 
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.ability.effects.ChangeZoneAllEffect;
 import forge.game.ability.effects.ChangeZoneEffect;
@@ -121,8 +121,8 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     }
 
     @Override
-    public boolean canPlayAI() {
-        return ai.canPlayAIWithSubs(getActivatingPlayer(), this);
+    public boolean canPlayAI(Player aiPlayer) {
+        return ai.canPlayAIWithSubs(aiPlayer, this);
     }
 
     @Override

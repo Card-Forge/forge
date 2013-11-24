@@ -124,7 +124,7 @@ public class CardFactoryUtil {
             }
 
             @Override
-            public boolean canPlayAI() {
+            public boolean canPlayAI(Player aiPlayer) {
                 PhaseHandler phase = sourceCard.getGame().getPhaseHandler();
                 if (phase.getPhase().isAfter(PhaseType.MAIN1) || !phase.isPlayerTurn(getActivatingPlayer())) {
                     return false;
@@ -323,7 +323,7 @@ public class CardFactoryUtil {
             private static final long serialVersionUID = -4960704261761785512L;
 
             @Override
-            public boolean canPlayAI() {
+            public boolean canPlayAI(Player aiPlayer) {
                 return false;
             }
 
@@ -412,7 +412,7 @@ public class CardFactoryUtil {
             }
 
             @Override
-            public boolean canPlayAI() {
+            public boolean canPlayAI(Player aiPlayer) {
                 return true;
                 // Suspend currently not functional for the AI,
                 // seems to be an issue with regaining Priority after Suspension
@@ -2948,21 +2948,20 @@ public class CardFactoryUtil {
             }
 
             @Override
-            public boolean canPlayAI() {
+            public boolean canPlayAI(Player aiPlayer) {
                 final Game game = card.getGame();
-                final Player ai = getActivatingPlayer();
-                if (!SpellPermanent.checkETBEffects(card, this.getActivatingPlayer())) {
+                if (!SpellPermanent.checkETBEffects(card, aiPlayer)) {
                     return false;
                 }
                 // Wait for Main2 if possible
                 if (game.getPhaseHandler().is(PhaseType.MAIN1)
-                        && game.getPhaseHandler().isPlayerTurn(ai)
-                        && ai.getManaPool().totalMana() <= 0
-                        && !ComputerUtil.castPermanentInMain1(ai, this)) {
+                        && game.getPhaseHandler().isPlayerTurn(aiPlayer)
+                        && aiPlayer.getManaPool().totalMana() <= 0
+                        && !ComputerUtil.castPermanentInMain1(aiPlayer, this)) {
                     return false;
                 }
 
-                return super.canPlayAI();
+                return super.canPlayAI(aiPlayer);
             }
         };
         card.removeIntrinsicKeyword(evokeKeyword);
@@ -3441,7 +3440,7 @@ public class CardFactoryUtil {
             }
 
             @Override
-            public boolean canPlayAI() {
+            public boolean canPlayAI(Player aiPlayer) {
                 return false;
             }
 

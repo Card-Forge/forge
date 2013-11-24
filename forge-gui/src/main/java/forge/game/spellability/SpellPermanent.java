@@ -89,15 +89,14 @@ public class SpellPermanent extends Spell {
 
     /** {@inheritDoc} */
     @Override
-    public boolean canPlayAI() {
+    public boolean canPlayAI(Player aiPlayer) {
 
         final Card card = this.getSourceCard();
         ManaCost mana = this.getPayCosts().getTotalMana();
-        final Player ai = getActivatingPlayer();
-        final Game game = ai.getGame();
+        final Game game = aiPlayer.getGame();
         if (mana.countX() > 0) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtilMana.determineLeftoverMana(this, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(this, aiPlayer);
             if (xPay <= 0) {
                 return false;
             }
@@ -105,7 +104,7 @@ public class SpellPermanent extends Spell {
         }
         // Prevent the computer from summoning Ball Lightning type creatures after attacking
         if (card.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
-                && (game.getPhaseHandler().isPlayerTurn(ai.getOpponent())
+                && (game.getPhaseHandler().isPlayerTurn(aiPlayer.getOpponent())
                      || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
             return false;
         }
@@ -118,47 +117,46 @@ public class SpellPermanent extends Spell {
         
         // Wait for Main2 if possible
         if (game.getPhaseHandler().is(PhaseType.MAIN1)
-                && game.getPhaseHandler().isPlayerTurn(ai)
-                && ai.getManaPool().totalMana() <= 0
-                && !ComputerUtil.castPermanentInMain1(ai, this)) {
+                && game.getPhaseHandler().isPlayerTurn(aiPlayer)
+                && aiPlayer.getManaPool().totalMana() <= 0
+                && !ComputerUtil.castPermanentInMain1(aiPlayer, this)) {
             return false;
         }
         // save cards with flash for surprise blocking
         if (card.hasKeyword("Flash")
-                && (ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize())
-                && ai.getManaPool().totalMana() <= 0
-                && (game.getPhaseHandler().isPlayerTurn(ai)
+                && (aiPlayer.isUnlimitedHandSize() || aiPlayer.getCardsIn(ZoneType.Hand).size() <= aiPlayer.getMaxHandSize())
+                && aiPlayer.getManaPool().totalMana() <= 0
+                && (game.getPhaseHandler().isPlayerTurn(aiPlayer)
                         || game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && !card.hasETBTrigger())
-                && !ComputerUtil.castPermanentInMain1(ai, this)) {
+                && !ComputerUtil.castPermanentInMain1(aiPlayer, this)) {
             return false;
         }
 
-        return canPlayFromEffectAI(false, true);
+        return canPlayFromEffectAI(aiPlayer, false, true);
     } // canPlayAI()
 
     /** {@inheritDoc} */
     @Override
-    public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+    public boolean canPlayFromEffectAI(Player aiPlayer, final boolean mandatory, final boolean withOutManaCost) {
         if (mandatory) {
             return true;
         }
-        final Player ai = getActivatingPlayer();
         final Card card = this.getSourceCard();
         ManaCost mana = this.getPayCosts().getTotalMana();
         final Cost cost = this.getPayCosts();
 
         if (cost != null) {
             // AI currently disabled for these costs
-            if (!ComputerUtilCost.checkLifeCost(ai, cost, card, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(aiPlayer, cost, card, 4, null)) {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkDiscardCost(ai, cost, card)) {
+            if (!ComputerUtilCost.checkDiscardCost(aiPlayer, cost, card)) {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, card)) {
+            if (!ComputerUtilCost.checkSacrificeCost(aiPlayer, cost, card)) {
                 return false;
             }
 
@@ -169,14 +167,14 @@ public class SpellPermanent extends Spell {
 
         // check on legendary
         if (card.isType("Legendary")
-                && !ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-            final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
+                && !aiPlayer.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
+            final List<Card> list = aiPlayer.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
                 return false;
             }
         }
         if (card.isPlaneswalker()) {
-            List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = aiPlayer.getCardsIn(ZoneType.Battlefield);
             list = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS);
 
             for (int i = 0; i < list.size(); i++) {
@@ -190,7 +188,7 @@ public class SpellPermanent extends Spell {
             }
         }
         if (card.isType("World")) {
-            List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = aiPlayer.getCardsIn(ZoneType.Battlefield);
             list = CardLists.getType(list, "World");
             if (list.size() > 0) {
                 return false;
@@ -203,13 +201,13 @@ public class SpellPermanent extends Spell {
             return false;
         }
 
-        if (!SpellPermanent.checkETBEffects(card, this, null, ai)) {
+        if (!SpellPermanent.checkETBEffects(card, this, null, aiPlayer)) {
             return false;
         }
-        if (ComputerUtil.damageFromETB(ai, card) >= ai.getLife() && ai.canLoseLife()) {
+        if (ComputerUtil.damageFromETB(aiPlayer, card) >= aiPlayer.getLife() && aiPlayer.canLoseLife()) {
             return false;
         }
-        return super.canPlayAI();
+        return super.canPlayAI(aiPlayer);
     }
 
     public static boolean checkETBEffects(final Card card, final Player ai) {

@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 
 import forge.ai.ComputerUtilCost;
-import forge.game.ability.SpellAbilityAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;

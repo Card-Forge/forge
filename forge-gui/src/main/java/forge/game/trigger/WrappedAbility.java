@@ -139,8 +139,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public boolean canPlayAI() {
-        return sa.canPlayAI();
+    public boolean canPlayAI(Player aiPlayer) {
+        return sa.canPlayAI(aiPlayer);
     }
 
     @Override

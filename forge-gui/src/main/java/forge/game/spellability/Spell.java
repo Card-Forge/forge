@@ -127,7 +127,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
     /** {@inheritDoc} */
     @Override
-    public boolean canPlayAI() {
+    public boolean canPlayAI(Player aiPlayer) {
         final Card card = this.getSourceCard();
         final Game game = getActivatingPlayer().getGame();
         if (card.getSVar("NeedsToPlay").length() > 0) {
@@ -161,7 +161,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
         }
 
-        return super.canPlayAI();
+        return super.canPlayAI(aiPlayer);
     }
 
 
@@ -193,8 +193,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
      *            is the spell cast without paying mana
      * @return a boolean.
      */
-    public boolean canPlayFromEffectAI(boolean mandatory, boolean withOutManaCost) {
-        return canPlayAI();
+    public boolean canPlayFromEffectAI(Player aiPlayer, boolean mandatory, boolean withOutManaCost) {
+        return canPlayAI(aiPlayer);
     }
 
     /**

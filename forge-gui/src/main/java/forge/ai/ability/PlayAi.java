@@ -9,8 +9,8 @@ import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
@@ -121,7 +121,7 @@ public class PlayAi extends SpellAbilityAi {
                     Spell spell = (Spell) s;
                     s.setActivatingPlayer(ai);
                     // timing restrictions still apply
-                    if (s.getRestrictions().checkTimingRestrictions(c, s) && spell.canPlayFromEffectAI(false, true)) {
+                    if (s.getRestrictions().checkTimingRestrictions(c, s) && spell.canPlayFromEffectAI(ai, false, true)) {
                         return true;
                     }
                 }

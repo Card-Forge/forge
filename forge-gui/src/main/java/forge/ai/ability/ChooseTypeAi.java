@@ -1,7 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 

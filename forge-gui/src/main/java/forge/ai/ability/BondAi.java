@@ -20,7 +20,7 @@ package forge.ai.ability;
 import java.util.Collection;
 
 import forge.ai.ComputerUtilCard;
-import forge.game.ability.SpellAbilityAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;

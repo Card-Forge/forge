@@ -3,8 +3,8 @@ package forge.ai.ability;
 import java.util.Random;
 
 import forge.ai.ComputerUtil;
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;

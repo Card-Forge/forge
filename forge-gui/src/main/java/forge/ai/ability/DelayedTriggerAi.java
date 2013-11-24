@@ -1,7 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -17,7 +17,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
         if (trigsa instanceof AbilitySub) {
             return ((AbilitySub) trigsa).getAi().chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
         } else {
-            return trigsa.canPlayAI();
+            return trigsa.canPlayAI(ai);
         }
     }
 
@@ -39,7 +39,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
         final String svarName = sa.getParam("Execute");
         final SpellAbility trigsa = AbilityFactory.getAbility(sa.getSourceCard().getSVar(svarName), sa.getSourceCard());
         trigsa.setActivatingPlayer(ai);
-        return trigsa.canPlayAI();
+        return trigsa.canPlayAI(ai);
     }
 
 }

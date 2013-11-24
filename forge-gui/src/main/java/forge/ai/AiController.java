@@ -476,7 +476,7 @@ public class AiController {
             return false;
         }
         //System.out.printf("Ai thinks of %s @ %s >>> ", sa, sa.getActivatingPlayer().getGame().getPhaseHandler().debugPrintState());
-        if (!sa.canPlayAI()) {
+        if (!sa.canPlayAI(player)) {
             return false;
         }
         //System.out.printf("wouldPlay: %s, canPay: %s%n", aiWouldPlay, canPay);
@@ -713,11 +713,11 @@ public class AiController {
             sa.setActivatingPlayer(player);
             //Spells
             if (sa instanceof Spell) {
-                if (!((Spell) sa).canPlayFromEffectAI(mandatory, withoutPayingManaCost)) {
+                if (!((Spell) sa).canPlayFromEffectAI(player, mandatory, withoutPayingManaCost)) {
                     continue;
                 }
             } else {
-                if (sa.canPlayAI()) {
+                if (sa.canPlayAI(player)) {
                     continue;
                 }
             }

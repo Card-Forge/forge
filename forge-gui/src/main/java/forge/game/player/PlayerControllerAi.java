@@ -250,11 +250,11 @@ public class PlayerControllerAi extends PlayerController {
         if( mayChooseNewTargets ) {
             if (copySA instanceof Spell) {
                 Spell spell = (Spell) copySA;
-                if (!spell.canPlayFromEffectAI(true, true)) {
+                if (!spell.canPlayFromEffectAI(player, true, true)) {
                     return; // is this legal at all?
                 }
             } else {
-                copySA.canPlayAI();
+                copySA.canPlayAI(player);
             }
         }
         ComputerUtil.playSpellAbilityForFree(player, copySA);

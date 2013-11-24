@@ -14698,6 +14698,7 @@ forge-gui/src/main/java/forge/ai/ComputerUtilCard.java -text
 forge-gui/src/main/java/forge/ai/ComputerUtilCombat.java -text
 forge-gui/src/main/java/forge/ai/ComputerUtilCost.java -text
 forge-gui/src/main/java/forge/ai/ComputerUtilMana.java -text
+forge-gui/src/main/java/forge/ai/SpellAbilityAi.java -text
 forge-gui/src/main/java/forge/ai/ability/AddPhaseAi.java -text
 forge-gui/src/main/java/forge/ai/ability/AddTurnAi.java svneol=native#text/plain
 forge-gui/src/main/java/forge/ai/ability/AlwaysPlayAi.java -text
@@ -14848,7 +14849,6 @@ forge-gui/src/main/java/forge/game/ability/AbilityFactory.java svneol=native#tex
 forge-gui/src/main/java/forge/game/ability/AbilityUtils.java -text
 forge-gui/src/main/java/forge/game/ability/ApiType.java -text
 forge-gui/src/main/java/forge/game/ability/SaTargetRoutines.java -text
-forge-gui/src/main/java/forge/game/ability/SpellAbilityAi.java -text
 forge-gui/src/main/java/forge/game/ability/SpellAbilityEffect.java -text
 forge-gui/src/main/java/forge/game/ability/SpellApiBased.java -text
 forge-gui/src/main/java/forge/game/ability/effects/AbandonEffect.java -text

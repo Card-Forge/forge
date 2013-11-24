@@ -6,8 +6,8 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;

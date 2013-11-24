@@ -1,7 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
-import forge.game.ability.SpellAbilityAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;

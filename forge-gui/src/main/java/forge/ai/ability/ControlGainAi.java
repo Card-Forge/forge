@@ -24,9 +24,9 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.combat.CombatUtil;

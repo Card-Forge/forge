@@ -2,12 +2,14 @@ package forge.game.ability;
 
 import java.util.Map;
 
+import forge.ai.SpellAbilityAi;
 import forge.game.ability.effects.ChangeZoneAllEffect;
 import forge.game.ability.effects.ChangeZoneEffect;
 import forge.game.ability.effects.ManaEffect;
 import forge.game.ability.effects.ManaReflectedEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
+import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.Spell;
 import forge.game.spellability.TargetRestrictions;
@@ -45,8 +47,8 @@ public class SpellApiBased extends Spell {
      */
 
     @Override
-    public boolean canPlayAI() {
-        return ai.canPlayAIWithSubs(getActivatingPlayer(), this) && super.canPlayAI();
+    public boolean canPlayAI(Player aiPlayer) {
+        return ai.canPlayAIWithSubs(aiPlayer, this) && super.canPlayAI(aiPlayer);
     }
 
     @Override
@@ -55,13 +57,13 @@ public class SpellApiBased extends Spell {
     }
 
     @Override
-    public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+    public boolean canPlayFromEffectAI(Player aiPlayer, final boolean mandatory, final boolean withOutManaCost) {
         boolean chance = false;
         if (withOutManaCost) {
-            chance = ai.doTriggerNoCostWithSubs(this.getActivatingPlayer(), this, mandatory);
+            chance = ai.doTriggerNoCostWithSubs(aiPlayer, this, mandatory);
         } else {
-            chance = ai.doTriggerAI(this.getActivatingPlayer(), this, mandatory);
+            chance = ai.doTriggerAI(aiPlayer, this, mandatory);
         }
-        return chance && super.canPlayAI();
+        return chance && super.canPlayAI(aiPlayer);
     }
 }

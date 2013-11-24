@@ -3,7 +3,7 @@ package forge.ai.ability;
 import java.util.Random;
 
 import forge.ai.ComputerUtilCost;
-import forge.game.ability.SpellAbilityAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.player.Player;

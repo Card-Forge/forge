@@ -227,7 +227,7 @@ public class PlayEffect extends SpellAbilityEffect {
             } else {
                 if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
                     Spell spell = (Spell) tgtSA;
-                    if (spell.canPlayFromEffectAI(!optional, noManaCost) || !optional) {
+                    if (spell.canPlayFromEffectAI(controller, !optional, noManaCost) || !optional) {
                         if (noManaCost) {
                             ComputerUtil.playSpellAbilityWithoutPayingManaCost(controller, tgtSA, game);
                         } else {

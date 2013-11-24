@@ -3,9 +3,9 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Random;
 
+import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
