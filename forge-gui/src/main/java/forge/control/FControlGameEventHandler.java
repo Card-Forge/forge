@@ -11,9 +11,9 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.eventbus.Subscribe;
 
-import forge.Card;
 import forge.FThreads;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.event.GameEventAttackersDeclared;

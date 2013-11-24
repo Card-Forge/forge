@@ -2,7 +2,6 @@ package forge.card.ability.effects;
 
 import java.util.HashMap;
 
-import forge.Card;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -10,6 +9,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameAction;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -68,7 +68,7 @@ public class ClashEffect extends SpellAbilityEffect {
      * </p>
      * 
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean clashWithOpponent(final Card source) {

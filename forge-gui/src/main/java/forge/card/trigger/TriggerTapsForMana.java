@@ -19,9 +19,9 @@ package forge.card.trigger;
 
 import java.util.List;
 
-import forge.Card;
 import forge.card.MagicColor;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /**
@@ -42,7 +42,7 @@ public class TriggerTapsForMana extends Trigger {
      * @param params
      *            a {@link java.util.HashMap} object.
      * @param host
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param intrinsic
      *            the intrinsic
      */

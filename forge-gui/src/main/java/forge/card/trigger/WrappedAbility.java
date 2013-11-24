@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.GameObject;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -17,6 +15,8 @@ import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.spellability.TargetChoices;
 import forge.game.Game;
+import forge.game.GameObject;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 

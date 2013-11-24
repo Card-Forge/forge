@@ -3,13 +3,13 @@ package forge.card.ability.effects;
 import java.util.List;
 import java.util.Set;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

@@ -1,4 +1,4 @@
-package forge;
+package forge.game;
 
 public enum GameLogEntryType {
     GAME_OUTCOME("Game outcome"),

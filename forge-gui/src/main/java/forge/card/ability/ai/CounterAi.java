@@ -1,6 +1,5 @@
 package forge.card.ability.ai;
 
-import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -10,6 +9,7 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 

@@ -9,11 +9,12 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
 
-import forge.Card;
 import forge.Singletons;
+import forge.game.card.Card;
 import forge.game.event.GameEventAnteCardsSelected;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.player.RegisteredPlayer;
 import forge.properties.ForgePreferences.FPref;
 
 /**

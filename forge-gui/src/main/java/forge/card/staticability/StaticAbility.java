@@ -21,13 +21,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.GameEntity;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -55,7 +55,7 @@ public class StaticAbility {
      * getHostCard.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getHostCard() {
         return this.hostCard;
@@ -82,7 +82,7 @@ public class StaticAbility {
      * @param abString
      *            a {@link java.lang.String} object.
      * @param hostCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link java.util.HashMap} object.
      */
     public final HashMap<String, String> getMapParams(final String abString, final Card hostCard) {

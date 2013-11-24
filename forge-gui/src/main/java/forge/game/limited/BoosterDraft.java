@@ -32,7 +32,6 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.base.Supplier;
-import forge.Card;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.CardBlock;
@@ -41,6 +40,7 @@ import forge.card.CardEditionPredicates;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
+import forge.game.card.Card;
 import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;

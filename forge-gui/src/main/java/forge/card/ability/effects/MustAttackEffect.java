@@ -2,11 +2,11 @@ package forge.card.ability.effects;
 
 import java.util.List;
 
-import forge.Card;
-import forge.GameEntity;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 public class MustAttackEffect extends SpellAbilityEffect {

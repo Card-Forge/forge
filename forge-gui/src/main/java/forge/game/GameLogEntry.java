@@ -1,4 +1,4 @@
-package forge;
+package forge.game;
 
 public class GameLogEntry {
     public final String message;

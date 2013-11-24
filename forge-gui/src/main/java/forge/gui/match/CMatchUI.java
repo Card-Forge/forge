@@ -32,12 +32,12 @@ import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
-import forge.Card;
 import forge.Command;
 import forge.FThreads;
-import forge.GameEntity;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
@@ -231,7 +231,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
      * Fires up trample dialog.  Very old code, due for refactoring with new UI.
      * Could possibly move to view.
      * 
-     * @param attacker &emsp; {@link forge.Card}
+     * @param attacker &emsp; {@link forge.game.card.Card}
      * @param blockers &emsp; {@link forge.CardList}
      * @param damage &emsp; int
      * @param overrideOrder overriding combatant order

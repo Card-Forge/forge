@@ -8,8 +8,8 @@ import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
 import forge.FThreads;
+import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 
 /** 

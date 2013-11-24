@@ -17,7 +17,6 @@
  */
 package forge.card.cost;
 
-import forge.Card;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
@@ -27,6 +26,7 @@ import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilMana;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.gui.input.InputPayMana;
 import forge.gui.input.InputPayManaOfCostPayment;

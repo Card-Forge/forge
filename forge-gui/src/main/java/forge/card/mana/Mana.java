@@ -17,10 +17,10 @@
  */
 package forge.card.mana;
 
-import forge.Card;
 import forge.card.MagicColor;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 
 /**
  * <p>
@@ -78,7 +78,7 @@ public class Mana {
      * @param col
      *            a {@link java.lang.String} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param manaAbility
      *            a {@link forge.card.spellability.AbilityMana} object
      */
@@ -206,7 +206,7 @@ public class Mana {
      * Getter for the field <code>sourceCard</code>.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getSourceCard() {
         return this.sourceCard;

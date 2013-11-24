@@ -3,11 +3,11 @@ package forge.card.ability.effects;
 import java.util.Iterator;
 import java.util.List;
 
-import forge.Card;
 import forge.card.CardCharacteristicName;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
 
 public class SetStateEffect extends SpellAbilityEffect {

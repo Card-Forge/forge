@@ -16,13 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package forge;
+package forge.game;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
 import org.apache.commons.lang3.StringUtils;
+
+import forge.Singletons;
 import forge.game.event.IGameEventVisitor;
 import forge.properties.ForgePreferences.FPref;
 

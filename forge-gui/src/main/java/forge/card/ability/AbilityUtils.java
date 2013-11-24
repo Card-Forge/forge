@@ -10,11 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardUtil;
-import forge.CounterType;
-import forge.GameObject;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostBeingPaid;
@@ -24,8 +19,13 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.game.Game;
+import forge.game.GameObject;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterType;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -70,7 +70,7 @@ public class AbilityUtils {
      * </p>
      * 
      * @param hostCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param def
      *            a {@link java.lang.String} object.
      * @param sa
@@ -287,7 +287,7 @@ public class AbilityUtils {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param amount
      *            a {@link java.lang.String} object.
      * @param ability
@@ -596,7 +596,7 @@ public class AbilityUtils {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param def
      *            a {@link java.lang.String} object.
      * @param sa
@@ -718,7 +718,7 @@ public class AbilityUtils {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param def
      *            a {@link java.lang.String} object.
      * @param sa
@@ -1002,7 +1002,7 @@ public class AbilityUtils {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param def
      *            a {@link java.lang.String} object.
      * @param sa
@@ -1238,7 +1238,7 @@ public class AbilityUtils {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param s
      *            a {@link java.lang.String} object.
      * @param sa

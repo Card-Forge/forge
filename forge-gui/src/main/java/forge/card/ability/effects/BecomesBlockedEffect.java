@@ -6,13 +6,13 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
+import forge.game.card.Card;
 
 public class BecomesBlockedEffect extends SpellAbilityEffect {
 

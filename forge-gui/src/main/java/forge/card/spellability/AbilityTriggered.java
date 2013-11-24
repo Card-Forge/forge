@@ -19,12 +19,12 @@ package forge.card.spellability;
 
 import java.util.Arrays;
 
-import forge.Card;
 import forge.Command;
 import forge.card.CardCharacteristicName;
 import forge.card.CardCharacteristics;
 import forge.card.mana.ManaCost;
 import forge.card.trigger.ZCTrigger;
+import forge.game.card.Card;
 
 /**
  * <p>
@@ -75,7 +75,7 @@ public class AbilityTriggered extends Ability implements Command {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sourceCommand
      *            a {@link forge.Command} object.
      * @param situation
@@ -128,7 +128,7 @@ public class AbilityTriggered extends Ability implements Command {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean triggerFor(final Card c) {

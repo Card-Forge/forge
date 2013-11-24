@@ -14,7 +14,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.RegisteredPlayer;
+import forge.game.player.RegisteredPlayer;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;

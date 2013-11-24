@@ -25,15 +25,13 @@ import java.util.TreeMap;
 
 import com.google.common.eventbus.EventBus;
 
-import forge.Card;
-import forge.CardLists;
 import forge.FThreads;
-import forge.GameLog;
-import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventGameOutcome;
@@ -44,6 +42,7 @@ import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
 import forge.game.player.Player;
+import forge.game.player.RegisteredPlayer;
 import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;

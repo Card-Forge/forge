@@ -37,7 +37,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.Card;
+import forge.game.card.Card;
 import forge.item.PaperCard;
 
 /**

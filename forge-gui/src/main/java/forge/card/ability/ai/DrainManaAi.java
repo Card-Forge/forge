@@ -3,11 +3,11 @@ package forge.card.ability.ai;
 import java.util.List;
 import java.util.Random;
 
-import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 

@@ -23,11 +23,11 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.CardLists;
-import forge.GameObject;
 import forge.Singletons;
 import forge.game.Game;
+import forge.game.GameObject;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;

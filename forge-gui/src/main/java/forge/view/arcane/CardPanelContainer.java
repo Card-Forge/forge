@@ -31,9 +31,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
-import forge.Card;
 import forge.Constant;
 import forge.FThreads;
+import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.view.arcane.util.CardPanelMouseListener;
@@ -292,7 +292,7 @@ public abstract class CardPanelContainer extends JPanel {
      * Must call from the Swing event thread.
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.view.arcane.CardPanel} object.
      */
     public CardPanel addCard(final Card card) {
@@ -581,7 +581,7 @@ public abstract class CardPanelContainer extends JPanel {
      * getCardFromMouseOverPanel.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getHoveredCard(MouseEvent e) {
         // re-evaluate cursor position so if we hovered over a card, alt-tabbed out of the application, then

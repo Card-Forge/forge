@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 
@@ -78,7 +78,7 @@ public abstract class GameEntity extends GameObject {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return whether or not damage was dealt
      */
     public boolean addDamage(final int damage, final Card source) {
@@ -98,7 +98,7 @@ public abstract class GameEntity extends GameObject {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return whether or not damage was dealt
      */
     public boolean addDamageWithoutPrevention(final int damage, final Card source) {
@@ -119,7 +119,7 @@ public abstract class GameEntity extends GameObject {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return whether or not damage was dealt
@@ -137,7 +137,7 @@ public abstract class GameEntity extends GameObject {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -156,7 +156,7 @@ public abstract class GameEntity extends GameObject {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -173,7 +173,7 @@ public abstract class GameEntity extends GameObject {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -188,7 +188,7 @@ public abstract class GameEntity extends GameObject {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -382,7 +382,7 @@ public abstract class GameEntity extends GameObject {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void addEnchantedBy(final Card c) {
         this.enchantedBy.add(c);
@@ -395,7 +395,7 @@ public abstract class GameEntity extends GameObject {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void removeEnchantedBy(final Card c) {
         this.enchantedBy.remove(c);

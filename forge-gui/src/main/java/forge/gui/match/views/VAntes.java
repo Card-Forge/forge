@@ -26,7 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Card;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.CardPicturePanel;
@@ -144,7 +144,7 @@ public enum VAntes implements IVDoc<CAntes> {
         /**
          * 
          * @param p0 &emsp; {@link forge.game.player.Player}
-         * @param c0 &emsp; {@link forge.Card}
+         * @param c0 &emsp; {@link forge.game.card.Card}
          */
         public AntePanel(final Card c0) {
             super();

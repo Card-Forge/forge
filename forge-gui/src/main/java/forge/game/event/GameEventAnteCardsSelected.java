@@ -2,7 +2,7 @@ package forge.game.event;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.Card;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 public class GameEventAnteCardsSelected extends GameEvent {

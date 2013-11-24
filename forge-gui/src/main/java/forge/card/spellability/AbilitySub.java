@@ -19,7 +19,6 @@ package forge.card.spellability;
 
 import java.util.Map;
 
-import forge.Card;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
@@ -30,6 +29,7 @@ import forge.card.ability.effects.ManaEffect;
 import forge.card.ability.effects.ManaReflectedEffect;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cost.Cost;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /**

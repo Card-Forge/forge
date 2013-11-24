@@ -33,16 +33,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.CardUtil;
 import forge.Command;
-import forge.CounterType;
 import forge.FThreads;
-import forge.GameEntity;
-import forge.GameLogEntryType;
-import forge.GameObject;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
@@ -59,6 +51,11 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterType;
 import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardRegenerated;
@@ -119,9 +116,9 @@ public class GameAction {
      * @param zoneTo
      *            a {@link forge.game.zone.PlayerZone} object.
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param position TODO
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position) {
         
@@ -381,8 +378,8 @@ public class GameAction {
      * @param zoneTo
      *            a {@link forge.game.zone.PlayerZone} object.
      * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveTo(final Zone zoneTo, Card c) {
        // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT, 
@@ -481,8 +478,8 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveToStack(final Card c) {
         final Zone stack = game.getStackZone();
@@ -495,8 +492,8 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveToGraveyard(Card c) {
         final Player owner = c.getOwner();
@@ -520,8 +517,8 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveToHand(final Card c) {
         final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
@@ -534,8 +531,8 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveToPlay(final Card c) {
         final PlayerZone play = c.getController().getZone(ZoneType.Battlefield);
@@ -548,10 +545,10 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param p
      *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveToPlay(final Card c, final Player p) {
         // move to a specific player's Battlefield
@@ -565,8 +562,8 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveToBottomOfLibrary(final Card c) {
         return this.moveToLibrary(c, -1);
@@ -578,8 +575,8 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveToLibrary(final Card c) {
         return this.moveToLibrary(c, 0);
@@ -591,10 +588,10 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param libPosition
      *            a int.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveToLibrary(Card c, int libPosition) {
         final PlayerZone library = c.getOwner().getZone(ZoneType.Library);
@@ -611,12 +608,12 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param zone
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param libPosition
      *            a int.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveToVariantDeck(Card c, ZoneType zone, int deckPosition) {
         final PlayerZone deck = c.getOwner().getZone(zone);
@@ -632,8 +629,8 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card exile(final Card c) {
         if (game.isCardExiled(c)) {
@@ -664,10 +661,10 @@ public class GameAction {
      * @param name
      *            a {@link java.lang.String} object.
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param libPosition
      *            a int.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveTo(final ZoneType name, final Card c, final int libPosition) {
         // Call specific functions to set PlayerZone, then move onto moveTo
@@ -1224,7 +1221,7 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean destroy(final Card c, final SpellAbility sa) {
@@ -1256,7 +1253,7 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean destroyNoRegeneration(final Card c, final SpellAbility sa) {
@@ -1304,8 +1301,8 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     private static Card addSuspendTriggers(final Card c) {
         if (c.getSVar("HasteFromSuspend").equals("True")) {
@@ -1349,7 +1346,7 @@ public class GameAction {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean sacrificeDestroy(final Card c) {

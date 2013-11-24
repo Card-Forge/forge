@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,8 +30,8 @@ import com.esotericsoftware.minlog.Log;
 import forge.card.TriggerReplacementBase;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
-import forge.game.Game;
-import forge.game.GlobalRuleChange;
+import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

@@ -29,13 +29,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.CounterType;
-import forge.CardPredicates.Presets;
-import forge.CardUtil;
-import forge.GameObject;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -57,6 +50,13 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.error.BugReporter;
 import forge.game.Game;
+import forge.game.GameObject;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterType;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -325,12 +325,12 @@ public class ComputerUtil {
      * </p>
      * 
      * @param activate
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param pref
      *            a {@link java.lang.String} object.
      * @param typeList
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getCardPreference(final Player ai, final Card activate, final String pref, final List<Card> typeList) {
 
@@ -415,9 +415,9 @@ public class ComputerUtil {
      * @param type
      *            a {@link java.lang.String} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param target
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param amount
      *            a int.
      * @return a {@link forge.CardList} object.
@@ -464,9 +464,9 @@ public class ComputerUtil {
      * @param type
      *            a {@link java.lang.String} object.
      * @param activate
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param target
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param amount
      *            a int.
      * @return a {@link forge.CardList} object.
@@ -511,9 +511,9 @@ public class ComputerUtil {
      * @param type
      *            a {@link java.lang.String} object.
      * @param activate
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param target
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param amount
      *            a int.
      * @return a {@link forge.CardList} object.
@@ -554,7 +554,7 @@ public class ComputerUtil {
      * @param type
      *            a {@link java.lang.String} object.
      * @param activate
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param tap
      *            a boolean.
      * @param amount
@@ -594,7 +594,7 @@ public class ComputerUtil {
      * @param type
      *            a {@link java.lang.String} object.
      * @param activate
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param untap
      *            a boolean.
      * @param amount
@@ -634,9 +634,9 @@ public class ComputerUtil {
      * @param type
      *            a {@link java.lang.String} object.
      * @param activate
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param target
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param amount
      *            a int.
      * @return a {@link forge.CardList} object.
@@ -764,7 +764,7 @@ public class ComputerUtil {
      * @param ai 
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean canRegenerate(Player ai, final Card card) {
@@ -829,7 +829,7 @@ public class ComputerUtil {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int possibleDamagePrevention(final Card card) {

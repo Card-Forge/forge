@@ -1,7 +1,7 @@
 package forge.game.event;
 
-import forge.Card;
-import forge.CounterType;
+import forge.game.card.Card;
+import forge.game.card.CounterType;
 
 public class GameEventCardCounters extends GameEvent {
     public final Card card;

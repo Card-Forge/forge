@@ -27,7 +27,7 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.RegisteredPlayer;
+import forge.game.player.RegisteredPlayer;
 import forge.gui.SOverlayUtils;
 import forge.net.FServer;
 import forge.net.Lobby;

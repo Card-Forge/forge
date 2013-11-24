@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import forge.card.BoosterGenerator;
 import forge.deck.Deck;
+import forge.game.card.Card;
 import forge.game.limited.IBoosterDraft;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;

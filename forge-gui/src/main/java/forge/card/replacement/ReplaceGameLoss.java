@@ -2,7 +2,7 @@
 
 import java.util.Map;
 
-import forge.Card;
+import forge.game.card.Card;
 
 /** 
  * TODO: Write javadoc for this type.

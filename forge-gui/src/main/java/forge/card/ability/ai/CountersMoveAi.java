@@ -3,14 +3,14 @@ package forge.card.ability.ai;
 import java.util.List;
 import java.util.Random;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;

@@ -5,16 +5,16 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -101,7 +101,7 @@ public abstract class TapAiBase extends SpellAbilityAi  {
      * </p>
      * 
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param tgt
      *            a {@link forge.card.spellability.TargetRestrictions} object.
      * @param af

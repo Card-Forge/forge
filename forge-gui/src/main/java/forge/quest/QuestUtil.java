@@ -20,10 +20,10 @@ package forge.quest;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Card;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.CardRules;
+import forge.game.card.Card;
 import forge.item.PaperToken;
 import forge.item.IPaperCard;
 import forge.quest.bazaar.QuestPetController;

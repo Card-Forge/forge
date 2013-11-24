@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
-import forge.CounterType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -16,6 +14,8 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;

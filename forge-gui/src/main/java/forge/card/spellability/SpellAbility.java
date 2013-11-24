@@ -30,9 +30,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.GameEntity;
-import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
@@ -40,6 +37,9 @@ import forge.card.cost.CostPartMana;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.GameObject;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.TextUtil;
 
@@ -164,7 +164,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * @param spellOrAbility
      *            a int.
      * @param iSourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public SpellAbility(final Card iSourceCard, Cost toPay) {
         this.sourceCard = iSourceCard;
@@ -362,7 +362,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public void setSourceCard(final Card c) {
         this.sourceCard = c;
@@ -373,7 +373,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * Getter for the field <code>sourceCard</code>.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public Card getSourceCard() {
         return this.sourceCard;
@@ -385,7 +385,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public void setOriginalHost(final Card c) {
         this.grantorCard = c;
@@ -396,7 +396,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * Getter for the field <code>originalHost</code>.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public Card getOriginalHost() {
         return this.grantorCard;
@@ -582,7 +582,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param str
      *            a {@link java.lang.String} object.
      */
@@ -1432,7 +1432,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public void setTargetCard(final Card card) {
         if (card == null) {
@@ -1620,7 +1620,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * @param sourceController
      *            a {@link forge.game.player.Player} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     @Override
@@ -1665,7 +1665,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * @param sourceController
      *            a {@link forge.game.player.Player} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     @Override

@@ -19,12 +19,12 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 
-import forge.Card;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -46,7 +46,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param manacost
      *            a {@link java.lang.String} object.
      */
@@ -60,7 +60,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param abCost
      *            a {@link forge.card.cost.Cost} object.
      * @param tgt

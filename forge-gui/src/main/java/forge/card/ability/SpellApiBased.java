@@ -2,7 +2,6 @@ package forge.card.ability;
 
 import java.util.Map;
 
-import forge.Card;
 import forge.card.ability.effects.ChangeZoneAllEffect;
 import forge.card.ability.effects.ChangeZoneEffect;
 import forge.card.ability.effects.ManaEffect;
@@ -11,6 +10,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.Spell;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.card.Card;
 
 public class SpellApiBased extends Spell {
     private static final long serialVersionUID = -6741797239508483250L;

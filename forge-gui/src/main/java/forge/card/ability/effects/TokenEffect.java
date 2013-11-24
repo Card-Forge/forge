@@ -20,8 +20,6 @@ package forge.card.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.Card;
-import forge.GameEntity;
 
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
@@ -31,6 +29,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;

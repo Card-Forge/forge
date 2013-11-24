@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
 import forge.card.CardCharacteristicName;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
@@ -29,6 +28,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityCondition;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.card.Card;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 
@@ -88,7 +88,7 @@ public final class AbilityFactory {
      * @param abString
      *            a {@link java.lang.String} object.
      * @param hostCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static final SpellAbility getAbility(final String abString, final Card hostCard) {

@@ -24,11 +24,11 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
-import forge.GameObject;
 import forge.card.CardType;
 import forge.card.ability.AbilityUtils;
 import forge.game.Game;
+import forge.game.GameObject;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -112,7 +112,7 @@ public class TargetRestrictions {
      * </p>
      * 
      * @param src
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param prompt
      *            a {@link java.lang.String} object.
      * @param valid
@@ -210,7 +210,7 @@ public class TargetRestrictions {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a int.
@@ -225,7 +225,7 @@ public class TargetRestrictions {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a int.
@@ -240,7 +240,7 @@ public class TargetRestrictions {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
@@ -256,7 +256,7 @@ public class TargetRestrictions {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.

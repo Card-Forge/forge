@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
-import forge.Card;
+import forge.game.card.Card;
 
 /**
  * This means card's characteristics have changed on server, clients must re-request them

@@ -19,10 +19,10 @@ package forge.card.cost;
 
 import java.util.List;
 
-import forge.Card;
-import forge.CardLists;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 

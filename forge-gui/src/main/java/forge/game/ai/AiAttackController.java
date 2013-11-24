@@ -24,12 +24,12 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CounterType;
-import forge.GameEntity;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.game.GameEntity;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
@@ -129,7 +129,7 @@ public class AiAttackController {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
@@ -192,7 +192,7 @@ public class AiAttackController {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param attackers
      *            a {@link forge.CardList} object.
      * @return a boolean.
@@ -859,7 +859,7 @@ public class AiAttackController {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public final int getAttack(final Card c) {
@@ -878,7 +878,7 @@ public class AiAttackController {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defenders
      *            a {@link forge.CardList} object.
      * @param combat

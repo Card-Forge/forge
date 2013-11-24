@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
-import forge.CardUtil;
 import forge.FThreads;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -19,6 +17,8 @@ import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
@@ -90,7 +90,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param manaCost
      *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      * @return a {@link forge.card.mana.ManaCostBeingPaid} object.

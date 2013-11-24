@@ -6,9 +6,6 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -19,6 +16,9 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;

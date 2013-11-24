@@ -3,9 +3,6 @@ package forge.card.ability.ai;
 import java.util.List;
 import java.util.Random;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates.Presets;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
@@ -13,6 +10,9 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -230,7 +230,7 @@ public class UntapAi extends SpellAbilityAi {
      * </p>
      * 
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param tgt
      *            a {@link forge.card.spellability.TargetRestrictions} object.
      * @param af

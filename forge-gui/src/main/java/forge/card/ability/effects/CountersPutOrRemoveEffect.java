@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.Card;
-import forge.CounterType;
-import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameObject;
+import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;

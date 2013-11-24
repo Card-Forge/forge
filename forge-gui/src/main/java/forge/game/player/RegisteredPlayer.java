@@ -1,4 +1,4 @@
-package forge.game;
+package forge.game.player;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,8 +6,6 @@ import java.util.List;
 
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.player.LobbyPlayer;
-import forge.game.player.Player;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 

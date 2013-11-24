@@ -17,10 +17,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.CardUtil;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -29,6 +25,10 @@ import forge.card.spellability.SpellAbility;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.item.PaperCard;
@@ -48,10 +48,10 @@ public class ComputerUtilCard {
      * @param list
      *            a {@link forge.CardList} object.
      * @param spell
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param targeted
      *            a boolean.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getMostExpensivePermanentAI(final List<Card> list, final SpellAbility spell, final boolean targeted) {
         List<Card> all = list;
@@ -75,7 +75,7 @@ public class ComputerUtilCard {
      * 
      * @param list
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestArtifactAI(final List<Card> list) {
         List<Card> all = CardLists.filter(list, CardPredicates.Presets.ARTIFACTS);
@@ -95,10 +95,10 @@ public class ComputerUtilCard {
      * @param list
      *            a {@link forge.CardList} object.
      * @param spell
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param targeted
      *            a boolean.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestEnchantmentAI(final List<Card> list, final SpellAbility spell, final boolean targeted) {
         List<Card> all = CardLists.filter(list, CardPredicates.Presets.ENCHANTMENTS);
@@ -123,7 +123,7 @@ public class ComputerUtilCard {
      * 
      * @param list
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestLandAI(final Collection<Card> list) {
         final List<Card> land = CardLists.filter(list, CardPredicates.Presets.LANDS);
@@ -176,10 +176,10 @@ public class ComputerUtilCard {
      * @param list
      *            a {@link forge.CardList} object.
      * @param spell
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param targeted
      *            a boolean.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getCheapestPermanentAI(Collection<Card> all, final SpellAbility spell, final boolean targeted) {
         if (targeted) {
@@ -215,7 +215,7 @@ public class ComputerUtilCard {
      * 
      * @param list
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestAI(final Collection<Card> list) {
         // Get Best will filter by appropriate getBest list if ALL of the list
@@ -249,7 +249,7 @@ public class ComputerUtilCard {
      * 
      * @param list
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getWorstCreatureAI(final List<Card> list) {
         return Aggregates.itemWithMin(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.fnEvaluateCreature);
@@ -263,7 +263,7 @@ public class ComputerUtilCard {
      * 
      * @param list
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestCreatureToBounceAI(final List<Card> list) {
         final int tokenBonus = 60;
@@ -289,7 +289,7 @@ public class ComputerUtilCard {
      * 
      * @param list
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getWorstAI(final Collection<Card> list) {
         return ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
@@ -310,7 +310,7 @@ public class ComputerUtilCard {
      *            a boolean.
      * @param biasCreature
      *            a boolean.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getWorstPermanentAI(final Collection<Card> list, final boolean biasEnch, final boolean biasLand,
             final boolean biasArt, final boolean biasCreature) {
@@ -374,7 +374,7 @@ public class ComputerUtilCard {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int evaluateCreature(final Card c) {
@@ -607,7 +607,7 @@ public class ComputerUtilCard {
      * @param ai
      *            the AI player
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean doesCreatureAttackAI(final Player ai, final Card card) {
@@ -796,7 +796,7 @@ public class ComputerUtilCard {
      * 
      * @param lands
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card getWorstLand(final List<Card> lands) {
         Card worstLand = null;

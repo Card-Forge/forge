@@ -17,12 +17,12 @@
  */
 package forge.game.phase;
 
-import forge.Card;
 import forge.card.ability.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;

@@ -2,7 +2,6 @@ package forge.card.ability;
 
 import java.util.Map;
 
-import forge.Card;
 import forge.card.ability.effects.ChangeZoneAllEffect;
 import forge.card.ability.effects.ChangeZoneEffect;
 import forge.card.ability.effects.ManaEffect;
@@ -12,6 +11,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 public class AbilityApiBased extends AbilityActivated {

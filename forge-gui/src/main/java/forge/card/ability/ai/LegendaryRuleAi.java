@@ -4,9 +4,9 @@ import java.util.Collection;
 
 import com.google.common.collect.Iterables;
 
-import forge.Card;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /** 

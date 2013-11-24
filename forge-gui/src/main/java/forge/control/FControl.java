@@ -37,18 +37,18 @@ import javax.swing.WindowConstants;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.RegisteredPlayer;
+import forge.game.card.Card;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerAi;
 import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.Player;
+import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-import forge.Card;
-import forge.CardUtil;
-import forge.GameObject;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameObject;
+import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 
 public class DamagePreventEffect extends SpellAbilityEffect {

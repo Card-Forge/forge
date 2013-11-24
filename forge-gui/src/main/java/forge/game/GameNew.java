@@ -15,10 +15,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
@@ -27,8 +23,12 @@ import forge.card.trigger.TriggerHandler;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
+import forge.game.player.RegisteredPlayer;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
@@ -181,8 +181,8 @@ public class GameNew {
      * </p>
      * 
      * @param in
-     *            an array of {@link forge.Card} objects.
-     * @return an array of {@link forge.Card} objects.
+     *            an array of {@link forge.game.card.Card} objects.
+     * @return an array of {@link forge.game.card.Card} objects.
      */
     private static Iterable<Card> smoothComputerManaCurve(final Iterable<Card> in) {
         final List<Card> library = Lists.newArrayList(in);

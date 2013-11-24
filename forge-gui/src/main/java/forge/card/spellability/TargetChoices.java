@@ -22,8 +22,8 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.GameObject;
+import forge.game.GameObject;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /**
@@ -80,7 +80,7 @@ public class TargetChoices implements Cloneable {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     private final boolean addTarget(final Card c) {
@@ -134,7 +134,7 @@ public class TargetChoices implements Cloneable {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean remove(final GameObject target) {

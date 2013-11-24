@@ -5,14 +5,14 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardUtil;
-import forge.GameEntity;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -33,7 +33,7 @@ public abstract class TriggerReplacementBase {
      * Getter for the field <code>hostCard</code>.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getHostCard() {
         return this.hostCard;
@@ -45,7 +45,7 @@ public abstract class TriggerReplacementBase {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void setHostCard(final Card c) {
         this.hostCard = c;
@@ -107,7 +107,7 @@ public abstract class TriggerReplacementBase {
      * @param valids
      *            an array of {@link java.lang.String} objects.
      * @param srcCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {

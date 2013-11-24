@@ -19,9 +19,9 @@ package forge.gui.input;
 
 import java.awt.event.MouseEvent;
 
-import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.gui.framework.SDisplayUtil;

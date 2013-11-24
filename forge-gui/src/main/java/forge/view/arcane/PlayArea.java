@@ -27,8 +27,8 @@ import java.util.List;
 
 import javax.swing.JScrollPane;
 
-import forge.Card;
 import forge.FThreads;
+import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
 import forge.view.arcane.util.Animation;
@@ -521,7 +521,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * </p>
      * 
      * @param newList
-     *            an array of {@link forge.Card} objects.
+     *            an array of {@link forge.game.card.Card} objects.
      */
     public void setupPlayZone() {
         FThreads.assertExecutedByEdt(true);

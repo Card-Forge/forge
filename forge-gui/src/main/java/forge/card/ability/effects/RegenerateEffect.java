@@ -3,12 +3,12 @@ package forge.card.ability.effects;
 import java.util.Iterator;
 import java.util.List;
 
-import forge.Card;
 import forge.Command;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
+import forge.game.card.Card;
 
 public class RegenerateEffect extends SpellAbilityEffect {
 

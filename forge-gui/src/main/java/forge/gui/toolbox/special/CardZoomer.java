@@ -31,9 +31,9 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Card;
-import forge.CardUtil;
 import forge.card.CardCharacteristicName;
+import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FSkin;

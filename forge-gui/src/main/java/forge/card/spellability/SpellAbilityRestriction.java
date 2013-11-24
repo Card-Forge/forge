@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -191,7 +191,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * checkZoneRestrictions.
      * </p>
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
@@ -228,7 +228,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * checkTimingRestrictions.
      * </p>
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
@@ -267,7 +267,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * checkActivatorRestrictions.
      * </p>
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
@@ -302,7 +302,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.

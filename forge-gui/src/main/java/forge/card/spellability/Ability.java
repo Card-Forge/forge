@@ -19,10 +19,10 @@ package forge.card.spellability;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.Card;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.card.Card;
 
 /**
  * <p>
@@ -40,7 +40,7 @@ public abstract class Ability extends SpellAbility {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param manaCost
      *            a {@link java.lang.String} object.
      */
@@ -56,7 +56,7 @@ public abstract class Ability extends SpellAbility {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param manaCost
      *            a {@link java.lang.String} object.
      * @param stackDescription

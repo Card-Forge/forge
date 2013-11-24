@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.Card;
-import forge.CardLists;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
@@ -19,6 +17,8 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;

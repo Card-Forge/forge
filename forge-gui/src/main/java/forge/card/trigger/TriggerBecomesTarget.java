@@ -19,8 +19,8 @@ package forge.card.trigger;
 
 import java.util.Map;
 
-import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 
 /**
  * <p>
@@ -41,7 +41,7 @@ public class TriggerBecomesTarget extends Trigger {
      * @param params
      *            a {@link java.util.HashMap} object.
      * @param host
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param intrinsic
      *            the intrinsic
      */

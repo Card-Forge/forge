@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
@@ -19,6 +17,8 @@ import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.properties.ForgePreferences.FPref;
 
 public class CloneEffect extends SpellAbilityEffect {

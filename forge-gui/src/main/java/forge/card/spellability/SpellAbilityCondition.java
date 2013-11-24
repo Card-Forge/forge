@@ -23,13 +23,13 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
-import forge.CardLists;
-import forge.GameObject;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.Game;
+import forge.game.GameObject;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;

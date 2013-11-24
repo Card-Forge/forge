@@ -19,12 +19,12 @@ package forge.card.ability.effects;
 
 import java.util.ArrayList;
 
-import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
+import forge.game.card.Card;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
@@ -34,7 +34,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param af
      *            a {@link forge.card.ability.AbilityFactory} object.
      * @param power
@@ -115,7 +115,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param originalPower
      *            a int.
      * @param originalToughness

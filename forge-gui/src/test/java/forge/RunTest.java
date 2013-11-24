@@ -2,6 +2,7 @@ package forge;
 
 import org.testng.annotations.Test;
 
+import forge.game.card.Card;
 import forge.game.combat.CombatUtil;
 
 /**

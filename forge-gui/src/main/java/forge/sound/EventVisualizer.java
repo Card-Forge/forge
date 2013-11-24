@@ -2,8 +2,8 @@ package forge.sound;
 
 import java.util.Collection;
 
-import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDamaged;

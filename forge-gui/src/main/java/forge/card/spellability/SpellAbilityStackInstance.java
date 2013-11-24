@@ -21,8 +21,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import forge.Card;
 import forge.card.trigger.TriggerType;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /**
@@ -182,7 +182,7 @@ public class SpellAbilityStackInstance {
      * getSourceCard.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getSourceCard() {
         return this.ability.getSourceCard();

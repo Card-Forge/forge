@@ -19,9 +19,9 @@ package forge.card.staticability;
 
 import java.util.HashMap;
 
-import forge.Card;
-import forge.GameEntity;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 
 /**
  * The Class StaticAbility_PreventDamage.

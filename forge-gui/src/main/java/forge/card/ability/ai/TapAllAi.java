@@ -6,13 +6,13 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -102,7 +102,7 @@ public class TapAllAi extends SpellAbilityAi {
      * @param valid
      *            a {@link java.lang.String} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.CardList} object.
      */
     private List<Card> getTapAllTargets(final String valid, final Card source) {

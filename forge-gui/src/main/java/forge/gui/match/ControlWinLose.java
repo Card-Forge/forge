@@ -7,15 +7,15 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-import forge.Card;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.RegisteredPlayer;
+import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.player.RegisteredPlayer;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;

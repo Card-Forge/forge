@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
-import forge.CardLists;
-import forge.GameEntity;
-import forge.GameObject;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.GameObject;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

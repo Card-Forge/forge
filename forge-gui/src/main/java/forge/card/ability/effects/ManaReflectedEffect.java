@@ -3,12 +3,12 @@ package forge.card.ability.effects;
 import java.util.Collection;
 import java.util.List;
 
-import forge.CardUtil;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 

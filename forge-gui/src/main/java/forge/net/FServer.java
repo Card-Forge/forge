@@ -8,13 +8,13 @@ import java.util.concurrent.CountDownLatch;
 
 import org.apache.commons.lang3.time.StopWatch;
 
-import forge.GameLogEntry;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.Game;
+import forge.game.GameLogEntry;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.RegisteredPlayer;
+import forge.game.player.RegisteredPlayer;
 import forge.util.Lang;
 
 

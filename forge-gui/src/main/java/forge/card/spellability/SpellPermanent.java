@@ -26,9 +26,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
@@ -42,6 +39,9 @@ import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -64,7 +64,7 @@ public class SpellPermanent extends Spell {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public SpellPermanent(final Card sourceCard) {
         super(sourceCard, new Cost(sourceCard.getManaCost(), false));

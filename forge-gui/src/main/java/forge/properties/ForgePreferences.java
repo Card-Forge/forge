@@ -21,8 +21,8 @@ import java.util.List;
 
 import forge.Constant;
 import forge.Constant.Preferences;
-import forge.GameLogEntryType;
 import forge.control.FControl.CloseAction;
+import forge.game.GameLogEntryType;
 import forge.game.ai.AiProfileUtil;
 import forge.gui.home.EMenuItem;
 import forge.gui.match.VMatchUI;

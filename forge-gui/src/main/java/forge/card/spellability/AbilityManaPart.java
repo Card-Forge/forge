@@ -26,7 +26,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.Mana;
@@ -37,6 +36,7 @@ import forge.card.replacement.ReplacementLayer;
 import forge.card.replacement.ReplacementResult;
 import forge.card.trigger.TriggerType;
 import forge.game.GameType;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /**
@@ -74,7 +74,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param parse
      *            a {@link java.lang.String} object.
      * @param produced

@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.CardUtil;
 import forge.Command;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
@@ -18,6 +16,8 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
 
 public class AnimateEffect extends AnimateEffectBase {

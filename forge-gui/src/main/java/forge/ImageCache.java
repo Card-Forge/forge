@@ -34,6 +34,7 @@ import com.mortennobel.imagescaling.ResampleOp;
 
 import forge.card.CardRules;
 import forge.card.CardSplitType;
+import forge.game.card.Card;
 import forge.game.player.IHasIcon;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinIcon;

@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
@@ -20,6 +17,9 @@ import forge.card.cost.CostRemoveCounter;
 import forge.card.cost.CostSacrifice;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
@@ -287,7 +287,7 @@ public class ComputerUtilCost {
      * </p>
      * 
      * @param hostCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param costString
      *            a {@link java.lang.String} object.
      * @return a boolean.

@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.GameEntity;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;

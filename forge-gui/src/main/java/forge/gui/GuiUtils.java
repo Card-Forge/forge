@@ -30,7 +30,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 
-import forge.Card;
+import forge.game.card.Card;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.nonsingleton.VField;
 import forge.view.arcane.CardPanel;

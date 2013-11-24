@@ -1,11 +1,11 @@
 package forge.card.ability.ai;
 
 
-import forge.Card;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.AiController;
 import forge.game.ai.AiProps;
+import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;

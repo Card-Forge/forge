@@ -20,14 +20,14 @@ package forge.card.spellability;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Card;
-import forge.CardLists;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
 import forge.error.BugReporter;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -53,7 +53,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public Spell(final Card sourceCard) {
         this(sourceCard, new Cost(sourceCard.getManaCost(), false));

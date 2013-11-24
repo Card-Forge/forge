@@ -5,12 +5,12 @@ import java.util.List;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.CardPredicates;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
+import forge.game.card.Card;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;

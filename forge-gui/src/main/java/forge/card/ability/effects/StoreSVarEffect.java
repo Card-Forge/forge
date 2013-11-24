@@ -1,10 +1,10 @@
 package forge.card.ability.effects;
 
-import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 
 public class StoreSVarEffect extends SpellAbilityEffect {
 

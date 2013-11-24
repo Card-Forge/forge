@@ -1,7 +1,7 @@
 package forge.game.event;
 
-import forge.Card;
-import forge.GameEntity;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 
 public class GameEventCardAttachment extends GameEvent {
     public enum AttachMethod {

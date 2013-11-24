@@ -1,4 +1,4 @@
-package forge;
+package forge.game;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import com.google.common.eventbus.Subscribe;
 
 import forge.card.spellability.TargetChoices;
-import forge.game.GameOutcome;
+import forge.game.card.Card;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAttackersDeclared;
 import forge.game.event.GameEventBlockersDeclared;

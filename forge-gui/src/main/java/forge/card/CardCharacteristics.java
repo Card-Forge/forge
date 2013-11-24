@@ -25,12 +25,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.collect.Lists;
 
-import forge.CardColor;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
+import forge.game.card.CardColor;
 
 /**
  * TODO: Write javadoc for this type.

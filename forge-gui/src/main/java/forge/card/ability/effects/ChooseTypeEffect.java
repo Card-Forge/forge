@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.Card;
 import forge.card.CardType;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 public class ChooseTypeEffect extends SpellAbilityEffect {

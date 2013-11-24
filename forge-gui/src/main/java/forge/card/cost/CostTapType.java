@@ -22,14 +22,14 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.Card;
-import forge.CardLists;
 import forge.Singletons;
-import forge.CardPredicates.Presets;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCards;

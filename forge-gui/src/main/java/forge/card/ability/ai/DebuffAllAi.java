@@ -5,10 +5,10 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import forge.Card;
-import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;

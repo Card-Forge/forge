@@ -1,6 +1,6 @@
 package forge.gui.events;
 
-import forge.Card;
+import forge.game.card.Card;
 
 public class UiEventBlockerAssigned extends UiEvent {
 

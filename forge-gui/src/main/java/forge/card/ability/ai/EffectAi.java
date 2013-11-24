@@ -6,8 +6,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.CardLists;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
@@ -16,6 +14,8 @@ import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;

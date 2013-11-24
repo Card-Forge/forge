@@ -2,9 +2,9 @@ package forge.gui.match.controllers;
 
 import java.util.List;
 
-import forge.Card;
 import forge.Command;
-import forge.GameEntity;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
@@ -128,7 +128,7 @@ public enum CCombat implements ICDoc {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link java.lang.String} object.
      */
     private static String combatantToString(final Card c) {

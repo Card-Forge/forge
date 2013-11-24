@@ -1,4 +1,4 @@
-package forge;
+package forge.game.card;
 
 import java.util.ArrayList;
 import java.util.List;

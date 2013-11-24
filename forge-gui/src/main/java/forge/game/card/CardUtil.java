@@ -15,13 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.card;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import forge.Constant;
+import forge.Singletons;
+import forge.Constant.Keywords;
 import forge.card.CardCharacteristicName;
 import forge.card.CardCharacteristics;
 import forge.card.ColorSet;

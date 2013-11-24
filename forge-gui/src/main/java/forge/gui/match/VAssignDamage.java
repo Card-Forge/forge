@@ -34,10 +34,10 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Card;
-import forge.CounterType;
-import forge.GameEntity;
+import forge.game.GameEntity;
 import forge.game.Match;
+import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FButton;
@@ -135,8 +135,8 @@ public class VAssignDamage {
 
     /** Constructor.
      * 
-     * @param attacker0 {@link forge.Card}
-     * @param defenderCards List<{@link forge.Card}>
+     * @param attacker0 {@link forge.game.card.Card}
+     * @param defenderCards List<{@link forge.game.card.Card}>
      * @param damage0 int
      * @param defender GameEntity that's bein attacked
      * @param overrideOrder override combatant order

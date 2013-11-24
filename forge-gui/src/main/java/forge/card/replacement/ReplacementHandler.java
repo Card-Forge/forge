@@ -25,12 +25,12 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
-import forge.GameLogEntryType;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.GameLogEntryType;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;

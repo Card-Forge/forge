@@ -10,7 +10,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Card;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.card.CardRulesPredicates;
@@ -22,6 +21,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.game.Game;
 import forge.game.ai.ComputerUtil;
+import forge.game.card.Card;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;

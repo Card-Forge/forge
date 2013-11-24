@@ -2,8 +2,8 @@ package forge.card.mana;
 
 import org.testng.annotations.Test;
 
-import forge.Card;
 import forge.card.MagicColor;
+import forge.game.card.Card;
 
 /**
  * <p>

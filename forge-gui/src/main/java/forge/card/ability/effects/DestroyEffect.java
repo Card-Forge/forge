@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import forge.Card;
-import forge.CardUtil;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardUtil;
 
 public class DestroyEffect extends SpellAbilityEffect {
     /* (non-Javadoc)

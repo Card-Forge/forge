@@ -3,8 +3,8 @@ package forge.gui.input;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Card;
-import forge.GameEntity;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 

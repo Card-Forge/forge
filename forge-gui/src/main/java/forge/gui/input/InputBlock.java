@@ -19,7 +19,7 @@ package forge.gui.input;
 
 import java.awt.event.MouseEvent;
 
-import forge.Card;
+import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;

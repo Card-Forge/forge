@@ -3,9 +3,9 @@ package forge.game.combat;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Card;
-import forge.CardLists;
-import forge.GameEntity;
+import forge.game.GameEntity;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
 
 /** 
  * TODO: Write javadoc for this type.

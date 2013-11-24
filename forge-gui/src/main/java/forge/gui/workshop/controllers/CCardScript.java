@@ -6,11 +6,11 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import forge.Card;
 import forge.Command;
 import forge.Singletons;
 import forge.card.CardDb;
 import forge.card.CardRules;
+import forge.game.card.Card;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.controllers.CDetail;

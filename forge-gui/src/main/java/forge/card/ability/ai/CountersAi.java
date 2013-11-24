@@ -21,10 +21,10 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CounterType;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.util.Aggregates;
 
 
@@ -50,7 +50,7 @@ public abstract class CountersAi {
      *            a {@link java.lang.String} object.
      * @param amount
      *            a int.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card chooseCursedTarget(final List<Card> list, final String type, final int amount) {
         Card choice;
@@ -83,7 +83,7 @@ public abstract class CountersAi {
      *            a {@link forge.CardList} object.
      * @param type
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card chooseBoonTarget(final List<Card> list, final String type) {
         Card choice;

@@ -22,13 +22,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.GameObject;
 import forge.card.CardType;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPayment;
 import forge.game.Game;
+import forge.game.GameObject;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 

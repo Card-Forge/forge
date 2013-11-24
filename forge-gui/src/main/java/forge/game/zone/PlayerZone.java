@@ -23,8 +23,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.Lang;
 

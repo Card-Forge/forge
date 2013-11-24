@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.CounterType;
-import forge.GameEntity;
+import forge.game.GameEntity;
+import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 

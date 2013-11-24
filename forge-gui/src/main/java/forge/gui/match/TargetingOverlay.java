@@ -33,8 +33,8 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
-import forge.Card;
 import forge.Singletons;
+import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.gui.framework.FScreen;
 import forge.gui.match.controllers.CDock;

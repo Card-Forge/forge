@@ -19,9 +19,9 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-import forge.Card;
-import forge.CardUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 
 /**

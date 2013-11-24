@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.card;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +41,8 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
-import forge.CardPredicates.Presets;
+import forge.Command;
+import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.card.CardCharacteristics;
 import forge.card.CardEdition;
@@ -72,7 +73,10 @@ import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameEntity;
+import forge.game.GameLogEntryType;
 import forge.game.GlobalRuleChange;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.event.GameEventCardDamaged;
@@ -586,7 +590,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void addImprinted(final Card c) {
         this.imprintedCards.add(c);
@@ -637,7 +641,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void addEncoded(final Card c) {
         this.encodedCards.add(c);
@@ -1033,7 +1037,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void addClone(final Card c) {
         this.clones.add(c);
@@ -1053,7 +1057,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Getter for the field <code>cloneOrigin</code>.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getCloneOrigin() {
         return this.cloneOrigin;
@@ -1065,7 +1069,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param name
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void setCloneOrigin(final Card name) {
         this.cloneOrigin = name;
@@ -1200,7 +1204,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param counterName
-     *            a {@link forge.CounterType} object.
+     *            a {@link forge.game.card.CounterType} object.
      * @param n
      *            a int.
      */
@@ -1239,7 +1243,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param counterName
-     *            a {@link forge.CounterType} object.
+     *            a {@link forge.game.card.CounterType} object.
      * @return a int.
      */
     public final int getCounters(final CounterType counterName) {
@@ -1482,7 +1486,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s
      *            a {@link java.lang.String} object.
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param addToColors
      *            a boolean.
      * @param bIncrease
@@ -1505,7 +1509,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s
      *            a {@link java.lang.String} object.
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param addTo
      *            a boolean.
      * @param timestampIn
@@ -1755,7 +1759,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * used primarily with AbilityFactory_GainControl
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void addGainControlTarget(final Card c) {
         this.gainControlTargets.add(c);
@@ -3194,7 +3198,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * getEquippingCard.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getEquippingCard() {
         if (this.equipping.isEmpty()) {
@@ -3208,7 +3212,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * getFortifyingCard.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getFortifyingCard() {
         if (this.fortifying.isEmpty()) {
@@ -3292,7 +3296,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * equipment.equipCard(cardToBeEquipped)
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void equipCard(final Card c) {
         if (c.hasKeyword("CARDNAME can't be equipped.")) {
@@ -3338,7 +3342,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * fortification.fortifyCard(cardToBeFortified)
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void fortifyCard(final Card c) {
         Card oldTarget = null;
@@ -3366,7 +3370,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void unEquipCard(final Card c) // equipment.unEquipCard(equippedCard);
     {
@@ -3388,7 +3392,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void unFortifyCard(final Card c) { // fortification.unEquipCard(fortifiedCard);
         this.fortifying.remove(c);
@@ -3414,7 +3418,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * Getter for the field <code>enchanting</code>.
      * </p>
      * 
-     * @return a {@link forge.GameEntity} object.
+     * @return a {@link forge.game.GameEntity} object.
      */
     public final GameEntity getEnchanting() {
         return this.enchanting;
@@ -3425,7 +3429,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * getEnchantingCard.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getEnchantingCard() {
         if ((this.enchanting != null) && (this.enchanting instanceof Card)) {
@@ -3517,7 +3521,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param e
-     *            a {@link forge.GameEntity} object.
+     *            a {@link forge.game.GameEntity} object.
      */
     public final void removeEnchanting(final GameEntity e) {
         if (this.enchanting.equals(e)) {
@@ -3531,7 +3535,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param entity
-     *            a {@link forge.GameEntity} object.
+     *            a {@link forge.game.GameEntity} object.
      */
     public final void enchantEntity(final GameEntity entity) {
         if (entity.hasKeyword("CARDNAME can't be enchanted.")) {
@@ -3558,7 +3562,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param gameEntity
-     *            a {@link forge.GameEntity} object.
+     *            a {@link forge.game.GameEntity} object.
      */
     public final void unEnchantEntity(final GameEntity entity) {
         if (this.enchanting == null || !this.enchanting.equals(entity))
@@ -5174,7 +5178,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param sourceController
      *            a {@link forge.game.player.Player} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     @Override
@@ -5228,7 +5232,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param sourceController
      *            a {@link forge.game.player.Player} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     @Override
@@ -6736,7 +6740,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c1
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean sharesColorWith(final Card c1) {
@@ -6755,7 +6759,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c1
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean sharesCreatureTypeWith(final Card c1) {
@@ -6781,7 +6785,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c1
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean sharesCardTypeWith(final Card c1) {
@@ -6800,7 +6804,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c1
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean sharesTypeWith(final Card c1) {
@@ -6819,7 +6823,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c1
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean sharesControllerWith(final Card c1) {
@@ -6882,7 +6886,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param damage
      *            a int.
      */
@@ -6936,7 +6940,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param damage
      *            a int.
      */
@@ -7070,7 +7074,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param damage
      *            a int.
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void addAssignedDamage(int damage, final Card sourceCard) {
         if (damage < 0) {
@@ -7165,7 +7169,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param possiblePrevention
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -7223,7 +7227,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param damageIn
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -7322,7 +7326,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -7450,7 +7454,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -7525,7 +7529,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param damageIn
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -7572,7 +7576,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param damageIn
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return whether or not damage as dealt
@@ -8417,7 +8421,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public boolean hasETBTrigger() {

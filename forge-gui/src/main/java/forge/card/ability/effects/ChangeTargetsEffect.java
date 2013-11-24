@@ -8,11 +8,11 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Iterables;
 
-import forge.GameObject;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetChoices;
+import forge.game.GameObject;
 import forge.game.player.Player;
 import forge.game.zone.MagicStack;
 import forge.util.Aggregates;

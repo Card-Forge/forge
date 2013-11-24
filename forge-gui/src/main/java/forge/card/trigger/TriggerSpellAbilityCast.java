@@ -17,13 +17,13 @@
  */
 package forge.card.trigger;
 
-import forge.Card;
 import forge.card.cost.Cost;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.TargetChoices;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /**
@@ -44,7 +44,7 @@ public class TriggerSpellAbilityCast extends Trigger {
      * @param params
      *            a {@link java.util.HashMap} object.
      * @param host
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param intrinsic
      *            the intrinsic
      */

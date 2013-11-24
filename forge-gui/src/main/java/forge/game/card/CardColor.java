@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game.card;
 
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
@@ -65,7 +65,7 @@ public class CardColor  {
      * @param mc
      *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param addToColors
      *            a boolean.
      * @param baseColor
@@ -97,7 +97,7 @@ public class CardColor  {
      * @param cost
      *            a {@link java.lang.String} object.
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param addToColors
      *            a boolean.
      * @param time

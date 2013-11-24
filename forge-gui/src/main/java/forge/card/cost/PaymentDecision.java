@@ -3,7 +3,7 @@ package forge.card.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Card;
+import forge.game.card.Card;
 
 /** 
  * TODO: Write javadoc for this type.

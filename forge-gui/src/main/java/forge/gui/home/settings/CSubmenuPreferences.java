@@ -14,10 +14,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Command;
 import forge.Constant.Preferences;
-import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.control.FControl.CloseAction;
 import forge.control.RestartUtil;
+import forge.game.GameLogEntryType;
 import forge.game.ai.AiProfileUtil;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;

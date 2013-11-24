@@ -32,14 +32,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.CardPredicates.Presets;
 import forge.Constant.Preferences;
-import forge.CounterType;
 import forge.FThreads;
-import forge.GameEntity;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -54,10 +48,15 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameEntity;
 import forge.game.GameStage;
 import forge.game.GameType;
 import forge.game.GlobalRuleChange;
-import forge.game.RegisteredPlayer;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventMulligan;
 import forge.game.event.GameEventPlayerControl;
@@ -389,7 +388,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param newLife
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean setLife(final int newLife, final Card source) {
@@ -448,7 +447,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param toGain
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean gainLife(final int toGain, final Card source) {
@@ -583,7 +582,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param lifePayment
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean payLife(final int lifePayment, final Card source) {
@@ -614,7 +613,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return whether or not damage was dealt
@@ -693,7 +692,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -759,7 +758,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -846,7 +845,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -877,7 +876,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -1043,7 +1042,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final boolean addCombatDamage(final int damage, final Card source) {
 
@@ -1581,7 +1580,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     protected final int getDredgeNumber(final Card c) {
@@ -1638,7 +1637,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.CardList} object.
@@ -1815,7 +1814,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * </p>
      * 
      * @param land
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming) {
         FThreads.assertExecutedByEdt(false);
@@ -1952,7 +1951,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Getter for the field <code>lastDrawnCard</code>.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getLastDrawnCard() {
         return this.lastDrawnCard;
@@ -1964,8 +1963,8 @@ public class Player extends GameEntity implements Comparable<Player> {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     private final Card setLastDrawnCard(final Card c) {
         this.lastDrawnCard = c;
@@ -1989,9 +1988,9 @@ public class Player extends GameEntity implements Comparable<Player> {
      * </p>
      * 
      * @param s
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final void setNamedCard(final String s) {
         this.namedCard = s;
@@ -3128,7 +3127,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void drawMiracle(final Card card) {
         // Whenever a card with miracle is the first card drawn in a turn,

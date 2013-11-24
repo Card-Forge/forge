@@ -19,7 +19,7 @@ package forge.card.staticability;
 
 import java.util.HashMap;
 
-import forge.Card;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

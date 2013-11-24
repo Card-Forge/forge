@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.GameObject;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameObject;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 // Class contains all that methods that are used by both effects and AI to fetch their targets.

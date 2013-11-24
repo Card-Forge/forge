@@ -26,9 +26,9 @@ import net.miginfocom.swing.MigLayout;
 
 import com.google.common.collect.Lists;
 
-import forge.GameLog;
-import forge.GameLogEntry;
-import forge.GameLogEntryType;
+import forge.game.GameLog;
+import forge.game.GameLogEntry;
+import forge.game.GameLogEntryType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;

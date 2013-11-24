@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import forge.Card;
-import forge.CounterType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.TextUtil;
@@ -425,7 +425,7 @@ public class Cost {
      * </p>
      * 
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void refundPaidCost(final Card source) {
         // prereq: isUndoable is called first

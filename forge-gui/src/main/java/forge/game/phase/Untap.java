@@ -23,14 +23,14 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
 import forge.Singletons;
-import forge.CardPredicates.Presets;
-import forge.GameEntity;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
@@ -77,7 +77,7 @@ public class Untap extends Phase {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean canUntap(final Card c) {

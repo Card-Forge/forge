@@ -20,9 +20,9 @@ package forge.card.cost;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /**
@@ -158,7 +158,7 @@ public abstract class CostPart {
      * @param ability
      *            {@link forge.card.spellability.SpellAbility}
      * @param source
-     *            {@link forge.Card}
+     *            {@link forge.game.card.Card}
      * @param payment
      *            {@link forge.card.cost.CostPayment}
      * @return true, if successful
@@ -173,7 +173,7 @@ public abstract class CostPart {
      * @param ability
      *            {@link forge.card.spellability.SpellAbility}
      * @param source
-     *            {@link forge.Card}
+     *            {@link forge.game.card.Card}
      * @param payment
      *            {@link forge.card.cost.CostPayment}
      * @param game
@@ -187,7 +187,7 @@ public abstract class CostPart {
      * @param ability
      *            {@link forge.card.spellability.SpellAbility}
      * @param source
-     *            {@link forge.Card}
+     *            {@link forge.game.card.Card}
      * @param payment
      *            {@link forge.card.cost.CostPayment}
      * @param game

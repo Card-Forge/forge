@@ -24,10 +24,6 @@ import java.util.Map;
 
 import com.google.common.base.Predicate;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CounterType;
-import forge.GameEntity;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
@@ -41,7 +37,11 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
@@ -64,7 +64,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param player
      *            a {@link forge.game.player.Player} object.
      * @return a int.
@@ -91,7 +91,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int getAttack(final Card c) {
@@ -112,7 +112,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param attacked
      *            a {@link forge.game.player.Player} object.
      * @param combat
@@ -142,7 +142,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param attacked
      *            a {@link forge.game.player.Player} object.
      * @param combat
@@ -412,7 +412,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defenders
      *            a {@link forge.CardList} object.
      * @return a int.
@@ -434,9 +434,9 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int dealsDamageAsBlocker(final Card attacker, final Card defender) {
@@ -487,7 +487,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defenders
      *            a {@link forge.CardList} object.
      * @return a int.
@@ -511,9 +511,9 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int shieldDamage(final Card attacker, final Card defender) {
@@ -548,7 +548,7 @@ public class ComputerUtilCombat {
      * @param ai 
      * 
      * @param combatant
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean combatantWouldBeDestroyed(Player ai, final Card combatant, Combat combat) {
@@ -570,7 +570,7 @@ public class ComputerUtilCombat {
      * @param ai 
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean attackerWouldBeDestroyed(Player ai, final Card attacker, Combat combat) {
@@ -593,9 +593,9 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param trigger
      *            a {@link forge.card.trigger.Trigger} object.
      * @param combat
@@ -724,9 +724,9 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int predictPowerBonusOfBlocker(final Card attacker, final Card defender, boolean withoutAbilities) {
@@ -878,9 +878,9 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int predictToughnessBonusOfBlocker(final Card attacker, final Card defender, boolean withoutAbilities) {
@@ -1007,9 +1007,9 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a int.
@@ -1184,9 +1184,9 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a int.
@@ -1364,9 +1364,9 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean checkDestroyBlockerTrigger(final Card attacker, final Card defender) {
@@ -1420,9 +1420,9 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean checkDestroyAttackerTrigger(final Card attacker, final Card defender) {
@@ -1476,9 +1476,9 @@ public class ComputerUtilCombat {
      * @param ai 
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @param withoutAbilities
@@ -1606,7 +1606,7 @@ public class ComputerUtilCombat {
      * @param ai 
      * 
      * @param blocker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean blockerWouldBeDestroyed(Player ai, final Card blocker, Combat combat) {
@@ -1631,9 +1631,9 @@ public class ComputerUtilCombat {
      * @param ai 
      * 
      * @param defender
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @param withoutAbilities
@@ -1761,7 +1761,7 @@ public class ComputerUtilCombat {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param block
      *            a {@link forge.CardList} object.
      * @param dmgCanDeal
@@ -1856,7 +1856,7 @@ public class ComputerUtilCombat {
      * @param maxDamage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -1873,7 +1873,7 @@ public class ComputerUtilCombat {
      * @param maxDamage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @param noPrevention
@@ -1942,7 +1942,7 @@ public class ComputerUtilCombat {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -2003,7 +2003,7 @@ public class ComputerUtilCombat {
      * @param damage
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.
@@ -2033,7 +2033,7 @@ public class ComputerUtilCombat {
      * @param possiblePrevention
      *            a int.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param isCombat
      *            a boolean.
      * @return a int.

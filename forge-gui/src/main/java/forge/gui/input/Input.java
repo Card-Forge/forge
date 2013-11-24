@@ -2,8 +2,8 @@ package forge.gui.input;
 
 import java.awt.event.MouseEvent;
 
-import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /** 

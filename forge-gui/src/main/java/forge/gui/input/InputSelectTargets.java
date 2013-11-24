@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import forge.Card;
-import forge.GameEntity;
 import forge.card.ability.ApiType;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;

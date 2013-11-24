@@ -30,7 +30,6 @@ import javax.swing.SwingConstants;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
@@ -39,6 +38,7 @@ import forge.game.Game;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameOutcome;
+import forge.game.card.Card;
 import forge.game.player.GameLossReason;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;

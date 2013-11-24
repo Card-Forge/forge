@@ -11,12 +11,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.CardPredicates.Presets;
-import forge.GameEntity;
-import forge.GameObject;
 import forge.card.CardCharacteristicName;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
@@ -31,6 +25,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.AiBlockController;
@@ -38,6 +34,10 @@ import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -445,7 +445,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * 
      * @param list
      *            a {@link forge.CardList} object.
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     private static Card basicManaFixing(final Player ai, final List<Card> list) { // Search for a Basic Land
 

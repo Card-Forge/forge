@@ -17,10 +17,10 @@
  */
 package forge.gui.input;
 
-import forge.Card;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.view.ButtonUtil;
 

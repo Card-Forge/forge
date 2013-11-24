@@ -25,15 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.CardPredicates.Presets;
-import forge.CardUtil;
 import forge.Command;
-import forge.CounterType;
-import forge.GameEntity;
-import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
@@ -61,9 +53,17 @@ import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
+import forge.game.GameEntity;
+import forge.game.GameLogEntryType;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
+import forge.game.card.CounterType;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -92,7 +92,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param manaCost
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.AbilityActivated} object.
@@ -157,7 +157,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityMorphDown(final Card sourceCard) {
@@ -196,7 +196,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param cost
      *            a {@link forge.card.cost.Cost} object.
      * @return a {@link forge.card.spellability.AbilityActivated} object.
@@ -246,7 +246,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param cycleCost
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
@@ -270,7 +270,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param cycleCost
      *            a {@link java.lang.String} object.
      * @param type
@@ -304,7 +304,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param transmuteCost
      *            a {@link java.lang.String} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
@@ -392,7 +392,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param sourceCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param suspendCost
      *            a {@link java.lang.String} object.
      * @param timeCounters
@@ -520,7 +520,7 @@ public class CardFactoryUtil {
      * @param colorAbb
      *            a {@link java.lang.String} object.
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int getNumberOfManaSymbolsByColor(final String colorAbb, final Card card) {
@@ -616,7 +616,7 @@ public class CardFactoryUtil {
      * @param ability
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param target
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean isTargetStillValid(final SpellAbility ability, final Card target) {
@@ -659,9 +659,9 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param target
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean hasProtectionFrom(final Card card, final Card target) {
@@ -678,7 +678,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean isCounterable(final Card c) {
@@ -695,7 +695,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            the sa
      * @return a boolean.
@@ -758,7 +758,7 @@ public class CardFactoryUtil {
      * @param s
      *            a {@link java.lang.String} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int objectXCount(final List<?> objects, final String s, final Card source) {
@@ -780,7 +780,7 @@ public class CardFactoryUtil {
      * @param s
      *            a {@link java.lang.String} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int playerXCount(final List<Player> players, final String s, final Card source) {
@@ -962,7 +962,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param expression
      *            a {@link java.lang.String} object.
      * @return a int.
@@ -1740,7 +1740,7 @@ public class CardFactoryUtil {
      * @param string
      *            a {@link java.lang.String} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public static int handlePaid(final List<Card> paidList, final String string, final Card source) {
@@ -2030,7 +2030,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<SpellAbility> getBushidoEffects(final Card c) {
@@ -2138,7 +2138,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public static void setupKeywordedAbilities(final Card card) {
         // this function should handle any keywords that need to be added after
@@ -2997,7 +2997,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param k
      *            a {@link java.lang.String} object.
      * @return a int.
@@ -3012,7 +3012,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param k
      *            a {@link java.lang.String} object.
      * @param startPos
@@ -3038,7 +3038,7 @@ public class CardFactoryUtil {
      * generator
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param cardName
      *            a {@link java.lang.String} object.
      * 

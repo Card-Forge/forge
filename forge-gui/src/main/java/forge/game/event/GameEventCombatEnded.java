@@ -2,7 +2,7 @@ package forge.game.event;
 
 import java.util.List;
 
-import forge.Card;
+import forge.game.card.Card;
 
 public class GameEventCombatEnded extends GameEvent {
 

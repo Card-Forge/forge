@@ -20,12 +20,12 @@ package forge.card.replacement;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.util.Expressions;

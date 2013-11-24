@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
-import forge.Card;
-import forge.CardLists;
-import forge.CounterType;
-import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameEntity;
 import forge.game.ai.ComputerUtil;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputProliferate;

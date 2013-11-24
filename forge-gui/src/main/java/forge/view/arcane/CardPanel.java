@@ -35,13 +35,13 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
-import forge.Card;
-import forge.CounterType;
 import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.card.CardEdition;
 import forge.card.mana.ManaCost;
+import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.gui.CardContainer;
 import forge.gui.match.CMatchUI;
@@ -117,7 +117,7 @@ public class CardPanel extends JPanel implements CardContainer {
      * </p>
      * 
      * @param newGameCard
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public CardPanel(final Card newGameCard) {
         this.gameCard = newGameCard;
@@ -616,7 +616,7 @@ public class CardPanel extends JPanel implements CardContainer {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void setText(final Card card) {
 
@@ -656,7 +656,7 @@ public class CardPanel extends JPanel implements CardContainer {
      * getCard.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getCard() {
         return this.getGameCard();

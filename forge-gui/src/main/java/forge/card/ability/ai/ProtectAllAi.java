@@ -1,11 +1,11 @@
 package forge.card.ability.ai;
 
 
-import forge.Card;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 public class ProtectAllAi extends SpellAbilityAi {

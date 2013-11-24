@@ -1,7 +1,7 @@
 package forge.gui.events;
 
-import forge.Card;
-import forge.GameEntity;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 
 /** 
  * TODO: Write javadoc for this type.

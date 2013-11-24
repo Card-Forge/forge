@@ -2,13 +2,13 @@ package forge.card.ability.effects;
 
 import java.util.HashMap;
 import java.util.List;
-import forge.Card;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
+import forge.game.card.Card;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.player.Player;
 import forge.util.MyRandom;
@@ -145,7 +145,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      * @param caller
      *            a {@link forge.game.player.Player} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param multiplier
      * @return a boolean.
      */

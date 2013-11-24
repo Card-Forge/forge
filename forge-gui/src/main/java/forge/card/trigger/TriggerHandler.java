@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -36,6 +35,7 @@ import forge.card.spellability.TargetSelection;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
+import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;

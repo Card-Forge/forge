@@ -1,6 +1,6 @@
 package forge.game.event;
 
-import forge.Card;
+import forge.game.card.Card;
 import forge.game.zone.Zone;
 
 public class GameEventCardChangeZone extends GameEvent {

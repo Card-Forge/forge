@@ -28,9 +28,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
 import forge.Command;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -45,6 +42,9 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
@@ -74,7 +74,7 @@ public final class GameActionUtil {
      * @param player
      *            a {@link forge.game.player.Player} object.
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param damage
      *            a int.
      */

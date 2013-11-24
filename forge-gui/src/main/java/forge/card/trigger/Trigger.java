@@ -22,12 +22,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
 import forge.card.TriggerReplacementBase;
 import forge.card.spellability.Ability;
 import forge.card.spellability.OptionalCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -129,7 +129,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @param params
      *            a {@link java.util.HashMap} object.
      * @param host
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param intrinsic
      *            the intrinsic
      */

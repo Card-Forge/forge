@@ -19,10 +19,10 @@ package forge.card.trigger;
 
 import java.util.Map;
 
-import forge.Card;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 import forge.util.Expressions;
 
 /**
@@ -43,7 +43,7 @@ public class TriggerChangesZone extends Trigger {
      * @param params
      *            a {@link java.util.HashMap} object.
      * @param host
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param intrinsic
      *            the intrinsic
      */

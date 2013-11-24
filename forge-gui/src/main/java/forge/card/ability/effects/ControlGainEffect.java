@@ -3,7 +3,6 @@ package forge.card.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.Card;
 import forge.Command;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -11,6 +10,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

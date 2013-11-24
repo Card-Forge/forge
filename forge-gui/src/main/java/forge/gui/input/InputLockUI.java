@@ -3,11 +3,11 @@ package forge.gui.input;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.InputQueue;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.gui.match.CMatchUI;
 import forge.util.ThreadUtil;

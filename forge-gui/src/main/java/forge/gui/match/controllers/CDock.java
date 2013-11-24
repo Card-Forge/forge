@@ -28,14 +28,14 @@ import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.Game;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;

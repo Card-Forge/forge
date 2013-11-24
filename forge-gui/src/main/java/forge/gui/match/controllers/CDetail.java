@@ -20,9 +20,9 @@ package forge.gui.match.controllers;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import forge.Card;
 import forge.Command;
 import forge.Singletons;
+import forge.game.card.Card;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VDetail;
 import forge.item.IPaperCard;

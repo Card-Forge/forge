@@ -26,10 +26,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
@@ -41,7 +37,11 @@ import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.phase.Untap;
 import forge.game.player.Player;
@@ -69,7 +69,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param blocker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
@@ -112,7 +112,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param blocker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean canBlock(final Card blocker) {
@@ -126,7 +126,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param blocker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean canBlock(final Card blocker, final boolean nextTurn) {
@@ -169,7 +169,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
@@ -201,7 +201,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean canBeBlocked(final Card attacker, Player defender) {
@@ -337,7 +337,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static int needsBlockers(final Card attacker) {
@@ -428,7 +428,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param blocker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
@@ -500,9 +500,9 @@ public class CombatUtil {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param blocker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
@@ -544,9 +544,9 @@ public class CombatUtil {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param blocker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean canBlock(final Card attacker, final Card blocker) {
@@ -560,9 +560,9 @@ public class CombatUtil {
      * </p>
      * 
      * @param attacker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param blocker
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean canBlock(final Card attacker, final Card blocker, final boolean nextTurn) {
@@ -676,7 +676,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param combat
      *            a {@link forge.game.combat.Combat} object.
      * @return a boolean.
@@ -729,7 +729,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean canAttack(final Card c, final GameEntity defender) {
@@ -772,7 +772,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean canAttackNextTurn(final Card c) {
@@ -786,7 +786,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public static boolean canAttackNextTurn(final Card c, final GameEntity defender) {
@@ -911,7 +911,7 @@ public class CombatUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param bLast
      *            a boolean.
      */
@@ -939,7 +939,7 @@ public class CombatUtil {
      * @param game 
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat) {
         // Run triggers

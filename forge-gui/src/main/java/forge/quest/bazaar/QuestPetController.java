@@ -73,7 +73,7 @@ public class QuestPetController implements IQuestBazaarItem {
      * getPetCard.
      * </p>
      * @param qA quest assets
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
 
     public PaperToken getPetCard(final QuestAssets qA) {

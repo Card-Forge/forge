@@ -31,11 +31,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.GameEntity;
 import forge.card.trigger.TriggerType;
+import forge.game.GameEntity;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -638,7 +638,7 @@ public class Combat {
      * </p>
      * 
      * @param att
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     public final boolean isUnblocked(final Card att) {
@@ -651,7 +651,7 @@ public class Combat {
      * getUnblockedAttackers.
      * </p>
      * 
-     * @return an array of {@link forge.Card} objects.
+     * @return an array of {@link forge.game.card.Card} objects.
      */
     public final List<Card> getUnblockedAttackers() {
         List<Card> unblocked = new ArrayList<Card>();

@@ -20,7 +20,6 @@ package forge.card.staticability;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.Card;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
@@ -28,6 +27,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

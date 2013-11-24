@@ -15,13 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /**
@@ -122,7 +123,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
@@ -142,7 +143,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param s
      *            a {@link java.util.ArrayList} object.
      */
@@ -162,7 +163,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<SpellAbility> getOriginalAbilities(final Card c) {
@@ -179,7 +180,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void clearOriginalAbilities(final Card c) {
         if (this.originalAbilities.containsKey(c)) {
@@ -227,7 +228,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param s
      *            a {@link java.lang.String} object.
      */
@@ -247,7 +248,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param s
      *            a {@link java.util.ArrayList} object.
      */
@@ -267,7 +268,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getOriginalKeywords(final Card c) {
@@ -284,7 +285,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void clearOriginalKeywords(final Card c) {
         if (this.originalKeywords.containsKey(c)) {
@@ -308,7 +309,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param power
      *            a int.
      * @param toughness
@@ -327,7 +328,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public final int getOriginalPower(final Card c) {
@@ -344,7 +345,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a int.
      */
     public final int getOriginalToughness(final Card c) {
@@ -442,7 +443,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param s
      *            a {@link java.lang.String} object.
      */
@@ -462,7 +463,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param s
      *            a {@link java.util.ArrayList} object.
      */
@@ -482,7 +483,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getOriginalTypes(final Card c) {
@@ -499,7 +500,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void clearOriginalTypes(final Card c) {
         if (this.originalTypes.containsKey(c)) {
@@ -523,7 +524,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param s
      *            a {@link java.lang.String} object.
      */
@@ -543,7 +544,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a {@link java.util.ArrayList} object.
      */
     public final ArrayList<String> getTypes(final Card c) {
@@ -560,7 +561,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param type
      *            a {@link java.lang.String} object.
      */
@@ -576,7 +577,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     public final void clearTypes(final Card c) {
         if (this.types.containsKey(c)) {
@@ -657,7 +658,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a long.
      */
     public final long getTimestamp(final Card c) {
@@ -675,7 +676,7 @@ public class StaticEffect {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param timestamp
      *            a long.
      */
@@ -698,7 +699,7 @@ public class StaticEffect {
      * Getter for the field <code>source</code>.
      * </p>
      * 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final Card getSource() {
         return this.source;

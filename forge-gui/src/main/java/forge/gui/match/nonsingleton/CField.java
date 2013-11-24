@@ -24,12 +24,12 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import com.google.common.base.Function;
 
-import forge.Card;
 import forge.Command;
 import forge.Singletons;
 import forge.Constant.Preferences;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.player.HumanPlay;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;

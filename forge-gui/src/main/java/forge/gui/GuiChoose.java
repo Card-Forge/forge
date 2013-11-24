@@ -16,9 +16,9 @@ import javax.swing.event.ListSelectionListener;
 
 import com.google.common.base.Function;
 
-import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
+import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.item.InventoryItem;
 import forge.view.FDialog;

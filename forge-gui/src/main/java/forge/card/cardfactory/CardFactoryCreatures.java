@@ -20,13 +20,13 @@ package forge.card.cardfactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Card;
-import forge.CounterType;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;

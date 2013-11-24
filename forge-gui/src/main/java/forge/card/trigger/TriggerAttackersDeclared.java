@@ -20,9 +20,9 @@ package forge.card.trigger;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameEntity;
+import forge.game.card.Card;
 
 /**
  * TODO Write javadoc for this type.

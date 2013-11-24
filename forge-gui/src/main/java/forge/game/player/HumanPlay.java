@@ -8,13 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates.Presets;
-import forge.CardPredicates;
-import forge.CounterType;
 import forge.FThreads;
-import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -52,6 +46,12 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
 import forge.game.GameActionUtil;
 import forge.game.Game;
+import forge.game.GameLogEntryType;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterType;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;

@@ -22,10 +22,10 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
-import forge.Card;
-import forge.CardPredicates;
-import forge.GameEntity;
 import forge.card.ability.AbilityUtils;
+import forge.game.GameEntity;
+import forge.game.card.Card;
+import forge.game.card.CardPredicates;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;

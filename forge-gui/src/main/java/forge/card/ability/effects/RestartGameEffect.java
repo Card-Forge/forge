@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerHandler;
@@ -17,8 +14,11 @@ import forge.game.GameAction;
 import forge.game.GameStage;
 import forge.game.GameNew;
 import forge.game.Game;
-import forge.game.RegisteredPlayer;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
+import forge.game.player.RegisteredPlayer;
 import forge.game.zone.ZoneType;
 
 public class RestartGameEffect extends SpellAbilityEffect {

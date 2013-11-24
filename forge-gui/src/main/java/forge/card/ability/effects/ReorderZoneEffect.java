@@ -6,10 +6,10 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.TargetRestrictions;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;

@@ -1,6 +1,7 @@
-package forge;
+package forge.game;
 
 import forge.card.spellability.SpellAbility;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 public abstract class GameObject {

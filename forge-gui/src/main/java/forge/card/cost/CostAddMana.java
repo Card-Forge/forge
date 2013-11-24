@@ -20,7 +20,6 @@ package forge.card.cost;
 import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
@@ -28,6 +27,7 @@ import forge.card.mana.Mana;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.GameType;
+import forge.game.card.Card;
 import forge.game.player.Player;
 
 /**

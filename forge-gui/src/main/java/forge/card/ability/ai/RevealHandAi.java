@@ -2,11 +2,11 @@ package forge.card.ability.ai;
 
 import java.util.Random;
 
-import forge.Card;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 

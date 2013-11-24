@@ -26,10 +26,10 @@ import java.util.Observable;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
-import forge.Card;
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;

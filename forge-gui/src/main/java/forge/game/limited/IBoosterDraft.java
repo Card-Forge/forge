@@ -46,7 +46,7 @@ public interface IBoosterDraft {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      */
     void setChoice(PaperCard c);
 

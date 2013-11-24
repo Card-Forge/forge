@@ -26,11 +26,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardUtil;
-import forge.StaticEffect;
-import forge.StaticEffects;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
@@ -44,6 +39,11 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
+import forge.game.StaticEffect;
+import forge.game.StaticEffects;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package forge;
+package forge.game.card;
 
 /**
  * The class Counters.
@@ -301,7 +301,7 @@ public enum CounterType {
      * 
      * @param name
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.CounterType} object.
+     * @return a {@link forge.game.card.CounterType} object.
      */
     public static CounterType getType(final String name) {
         final String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase();

@@ -22,9 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
-import forge.Card;
-import forge.CardColor;
-import forge.CardUtil;
 import forge.ImageCache;
 import forge.card.CardCharacteristicName;
 import forge.card.CardCharacteristics;
@@ -47,6 +44,9 @@ import forge.card.spellability.TargetRestrictions;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.WrappedAbility;
+import forge.game.card.Card;
+import forge.game.card.CardColor;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
@@ -76,8 +76,8 @@ public class CardFactory {
      * </p>
      * 
      * @param in
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public final static Card copyCard(final Card in, boolean assignNewId) {
         final CardCharacteristicName curState = in.getCurState();
@@ -162,9 +162,9 @@ public class CardFactory {
      * </p>
      * 
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param original
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param bCopyDetails
@@ -251,7 +251,7 @@ public class CardFactory {
      *            a {@link java.lang.String} object.
      * @param owner
      *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.Card} instance, owned by owner; or the special
+     * @return a {@link forge.game.card.Card} instance, owned by owner; or the special
      *         blankCard
      */
     
@@ -477,7 +477,7 @@ public class CardFactory {
      * @param sim
      *            a {@link java.lang.Object} object.
      * @param newOwner 
-     * @return a {@link forge.Card} object.
+     * @return a {@link forge.game.card.Card} object.
      */
     public static Card copyStats(final Card sim, Player newOwner) {
         int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();

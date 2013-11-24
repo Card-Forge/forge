@@ -22,11 +22,11 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.concurrent.atomic.AtomicReference;
 
-import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.gui.input.Input;
 
@@ -114,7 +114,7 @@ public class InputProxy implements Observer {
      * </p>
      * 
      * @param card
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @param triggerEvent
      */
     public final void selectCard(final Card card, final MouseEvent triggerEvent) {

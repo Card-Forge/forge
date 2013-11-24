@@ -5,7 +5,7 @@ import java.util.Observer;
 
 import forge.Command;
 import forge.FThreads;
-import forge.GameLog;
+import forge.game.GameLog;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VLog;
 

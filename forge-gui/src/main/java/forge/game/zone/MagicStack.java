@@ -31,14 +31,8 @@ import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
 import forge.FThreads;
-import forge.GameObject;
 import forge.Singletons;
-import forge.CardPredicates.Presets;
-import forge.GameLogEntryType;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactory;
@@ -58,8 +52,14 @@ import forge.card.spellability.TargetSelection;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.game.Game;
+import forge.game.GameLogEntryType;
+import forge.game.GameObject;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.card.Card;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
@@ -673,7 +673,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param source
-     *            a {@link forge.Card} object.
+     *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
     private final boolean hasFizzled(final SpellAbility sa, final Card source, final boolean parentFizzled) {

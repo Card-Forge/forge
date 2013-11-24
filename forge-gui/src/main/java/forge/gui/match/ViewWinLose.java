@@ -14,11 +14,11 @@ import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
-import forge.GameLog;
-import forge.GameLogEntry;
-import forge.GameLogEntryType;
 import forge.Singletons;
 import forge.game.Game;
+import forge.game.GameLog;
+import forge.game.GameLogEntry;
+import forge.game.GameLogEntryType;
 import forge.game.GameOutcome;
 import forge.game.player.Player;
 import forge.gui.toolbox.FButton;
