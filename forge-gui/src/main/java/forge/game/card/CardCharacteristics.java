@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.card;
+package forge.game.card;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.collect.Lists;
 
+import forge.card.CardEdition;
+import forge.card.CardRarity;
 import forge.card.mana.ManaCost;
-import forge.game.card.CardColor;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;

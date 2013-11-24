@@ -24,7 +24,6 @@ import java.util.Map.Entry;
 
 import forge.ImageCache;
 import forge.card.CardCharacteristicName;
-import forge.card.CardCharacteristics;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;

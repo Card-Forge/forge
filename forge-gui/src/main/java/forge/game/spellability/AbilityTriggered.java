@@ -21,9 +21,9 @@ import java.util.Arrays;
 
 import forge.Command;
 import forge.card.CardCharacteristicName;
-import forge.card.CardCharacteristics;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
+import forge.game.card.CardCharacteristics;
 import forge.game.trigger.ZCTrigger;
 
 /**

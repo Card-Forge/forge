@@ -44,7 +44,6 @@ import com.google.common.collect.Lists;
 import forge.Command;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
-import forge.card.CardCharacteristics;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
