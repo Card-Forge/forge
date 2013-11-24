@@ -14806,10 +14806,6 @@ forge-gui/src/main/java/forge/ai/ability/UnattachAllAi.java -text
 forge-gui/src/main/java/forge/ai/ability/UntapAi.java -text
 forge-gui/src/main/java/forge/ai/ability/UntapAllAi.java -text
 forge-gui/src/main/java/forge/ai/ability/ZoneExchangeAi.java -text
-forge-gui/src/main/java/forge/card/CardBlock.java -text
-forge-gui/src/main/java/forge/card/MetaSet.java -text
-forge-gui/src/main/java/forge/card/UnOpenedMeta.java -text
-forge-gui/src/main/java/forge/card/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/control/ChatArea.java -text
 forge-gui/src/main/java/forge/control/FControl.java -text
 forge-gui/src/main/java/forge/control/FControlGameEventHandler.java -text
@@ -15513,9 +15509,12 @@ forge-gui/src/main/java/forge/gui/workshop/views/VCardDesigner.java -text
 forge-gui/src/main/java/forge/gui/workshop/views/VCardScript.java -text
 forge-gui/src/main/java/forge/gui/workshop/views/VWorkshopCatalog.java -text
 forge-gui/src/main/java/forge/model/BuildInfo.java -text
+forge-gui/src/main/java/forge/model/CardBlock.java -text
 forge-gui/src/main/java/forge/model/CardCollections.java -text
 forge-gui/src/main/java/forge/model/FModel.java svneol=native#text/plain
+forge-gui/src/main/java/forge/model/MetaSet.java -text
 forge-gui/src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
+forge-gui/src/main/java/forge/model/UnOpenedMeta.java -text
 forge-gui/src/main/java/forge/model/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/net/FServer.java -text
 forge-gui/src/main/java/forge/net/IClientSocket.java -text

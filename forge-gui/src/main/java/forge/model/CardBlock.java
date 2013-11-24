@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.card;
+package forge.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,10 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.Singletons;
+import forge.card.CardEdition;
+import forge.card.IUnOpenedProduct;
+import forge.card.UnOpenedProduct;
+import forge.card.CardEdition.Collection;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.TextUtil;

@@ -28,7 +28,6 @@ import forge.Constant;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.ai.AiProfileUtil;
-import forge.card.CardBlock;
 import forge.card.CardType;
 import forge.error.ExceptionHandler;
 import forge.game.GameFormat;
@@ -279,7 +278,7 @@ public class FModel {
     }
 
 
-    /** @return {@link forge.util.storage.IStorage}<{@link forge.card.CardBlock}> */
+    /** @return {@link forge.util.storage.IStorage}<{@link forge.model.CardBlock}> */
     public IStorage<CardBlock> getBlocks() {
         return blocks;
     }    
@@ -335,7 +334,7 @@ public class FModel {
         this.gauntletData = data0;
     }
 
-    /** @return {@link forge.util.storage.IStorage}<{@link forge.card.CardBlock}> */
+    /** @return {@link forge.util.storage.IStorage}<{@link forge.model.CardBlock}> */
     public IStorage<CardBlock> getFantasyBlocks() {
         return fantasyBlocks;
     }

@@ -27,15 +27,15 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.ArrayUtils;
 
 import forge.Singletons;
-import forge.card.CardBlock;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
-import forge.card.UnOpenedMeta;
 import forge.card.UnOpenedProduct;
 import forge.deck.CardPool;
 import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.model.CardBlock;
+import forge.model.UnOpenedMeta;
 import forge.util.FileUtil;
 import forge.util.ItemPool;
 import forge.util.TextUtil;

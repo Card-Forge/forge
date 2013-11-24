@@ -16,13 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package forge.card;
+package forge.model;
 
 import java.io.File;
 import java.util.List;
 
 import com.google.common.base.Predicate;
 import forge.Singletons;
+import forge.card.IUnOpenedProduct;
+import forge.card.UnOpenedProduct;
 import forge.game.limited.CustomLimited;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
