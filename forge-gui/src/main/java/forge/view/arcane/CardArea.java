@@ -165,8 +165,8 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
                 this.cardSpacingX = Math.round(cardWidth * CardArea.VERT_CARD_SPACING_X);
                 cardSpacingY = cardHeight + Math.round(cardWidth * CardArea.VERT_CARD_SPACING_Y);
-                int maxRows = (int) Math.floor(((cardAreaWidth - (CardArea.GUTTER_X * 2)) + this.cardSpacingX)
-                        / (cardWidth + this.cardSpacingX));
+                int maxRows = Math.max((int) Math.floor(((cardAreaWidth - (CardArea.GUTTER_X * 2)) + this.cardSpacingX)
+                        / (cardWidth + this.cardSpacingX)), 1);
                 if (this.maxRows > 0) {
                     maxRows = Math.min(this.maxRows, maxRows);
                 }
@@ -217,8 +217,8 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 final int extraCardSpacingX = Math.round(cardWidth * CardArea.HORIZ_CARD_SPACING_X);
                 cardSpacingY = Math.round(cardHeight * CardArea.HORIZ_CARD_SPACING_Y);
                 this.cardSpacingX = cardWidth + extraCardSpacingX;
-                int maxRows = (int) Math.floor(((cardAreaHeight - (CardArea.GUTTER_Y * 2)) + cardSpacingY)
-                        / (double) (cardHeight + cardSpacingY));
+                int maxRows = Math.max((int) Math.floor(((cardAreaHeight - (CardArea.GUTTER_Y * 2)) + cardSpacingY)
+                        / (double) (cardHeight + cardSpacingY)), 1);
                 if (this.maxRows > 0) {
                     maxRows = Math.min(this.maxRows, maxRows);
                 }
