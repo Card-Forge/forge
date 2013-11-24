@@ -24,9 +24,9 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.Singletons;
+import forge.ai.ComputerUtilCard;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.ai.ComputerUtilCard;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;

@@ -24,10 +24,10 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import forge.FThreads;
 import forge.Singletons;
-import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.gui.input.Input;
 
 /**

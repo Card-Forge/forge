@@ -63,7 +63,7 @@ public class CardColor  {
      * </p>
      * 
      * @param mc
-     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
+     *            a {@link forge.game.mana.ManaCostBeingPaid} object.
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @param addToColors

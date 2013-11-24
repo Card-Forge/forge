@@ -1,9 +1,9 @@
 package forge.gui.input;
 
-import forge.card.mana.ManaCostBeingPaid;
-import forge.card.spellability.SpellAbility;
 import forge.game.card.Card;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
 

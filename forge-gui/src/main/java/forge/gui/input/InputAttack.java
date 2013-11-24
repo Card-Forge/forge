@@ -22,8 +22,8 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
-import forge.card.ability.AbilityUtils;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
 import forge.game.combat.AttackingBand;

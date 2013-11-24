@@ -7,9 +7,9 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.ColorSet;
-import forge.card.mana.ManaCostBeingPaid;
-import forge.card.spellability.SpellAbility;
 import forge.game.card.Card;
+import forge.game.mana.ManaCostBeingPaid;
+import forge.game.spellability.SpellAbility;
 import forge.view.ButtonUtil;
 
 public class InputPayManaX extends InputPayMana {

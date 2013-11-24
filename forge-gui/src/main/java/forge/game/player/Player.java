@@ -36,22 +36,16 @@ import forge.Constant.Preferences;
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.MagicColor;
-import forge.card.ability.AbilityFactory;
-import forge.card.ability.AbilityUtils;
-import forge.card.ability.ApiType;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaPool;
-import forge.card.replacement.ReplacementResult;
-import forge.card.spellability.Ability;
-import forge.card.spellability.SpellAbility;
-import forge.card.staticability.StaticAbility;
-import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GameStage;
 import forge.game.GameType;
 import forge.game.GlobalRuleChange;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -64,8 +58,14 @@ import forge.game.event.GameEventPlayerDamaged;
 import forge.game.event.GameEventPlayerLivesChanged;
 import forge.game.event.GameEventPlayerPoisoned;
 import forge.game.event.GameEventShuffle;
+import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.replacement.ReplacementResult;
+import forge.game.spellability.Ability;
+import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
@@ -1639,7 +1639,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link forge.CardList} object.
      */
     public final boolean discard(final Card c, final SpellAbility sa) {

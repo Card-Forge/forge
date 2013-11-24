@@ -23,8 +23,8 @@ import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.card.spellability.SpellAbility;
 import forge.game.card.Card;
+import forge.game.spellability.SpellAbility;
 import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;

@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 
 import forge.card.MagicColor;
 import forge.game.card.Card;
+import forge.game.mana.Mana;
+import forge.game.mana.ManaCostBeingPaid;
 
 /**
  * <p>
@@ -462,7 +464,7 @@ public class ManaPartTest {
      * @param b
      *            a boolean.
      * @param p
-     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
+     *            a {@link forge.game.mana.ManaCostBeingPaid} object.
      */
     void check(final double n, final boolean b, final ManaCostBeingPaid p) {
         if (!b) {

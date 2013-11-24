@@ -19,7 +19,7 @@ import com.google.common.base.Function;
 
 import forge.Constant.Preferences;
 import forge.card.MagicColor;
-import forge.card.mana.ManaPool;
+import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;

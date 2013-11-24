@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.card.spellability.SpellAbility;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 
 /**
  * <p>
@@ -125,7 +125,7 @@ public class StaticEffect {
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final void addOriginalAbilities(final Card c, final SpellAbility sa) {
         if (!this.originalAbilities.containsKey(c)) {

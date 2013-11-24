@@ -1,6 +1,6 @@
 package forge.game.event;
 
-import forge.card.mana.Mana;
+import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.util.Lang;
 

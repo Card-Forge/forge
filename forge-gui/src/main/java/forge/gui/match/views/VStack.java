@@ -32,10 +32,10 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.card.spellability.SpellAbilityStackInstance;
 import forge.game.card.CardUtil;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerController;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.MagicStack;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;

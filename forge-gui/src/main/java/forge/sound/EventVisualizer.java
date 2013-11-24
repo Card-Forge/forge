@@ -2,7 +2,6 @@ package forge.sound;
 
 import java.util.Collection;
 
-import forge.card.spellability.SpellAbility;
 import forge.game.card.Card;
 import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardChangeZone;
@@ -24,6 +23,7 @@ import forge.game.event.GameEventShuffle;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.event.IGameEventVisitor;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEventAttackerDeclared;

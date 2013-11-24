@@ -2,9 +2,9 @@ package forge.gui.input;
 
 import java.awt.event.MouseEvent;
 
-import forge.card.spellability.SpellAbility;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 
 /** 
  * TODO: Write javadoc for this type.

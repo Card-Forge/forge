@@ -1,8 +1,8 @@
 package forge.game.player;
 
 import forge.Singletons;
+import forge.ai.AiProfileUtil;
 import forge.game.Game;
-import forge.game.ai.AiProfileUtil;
 import forge.properties.ForgePreferences.FPref;
 
 public class LobbyPlayerAi extends LobbyPlayer {

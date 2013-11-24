@@ -33,33 +33,21 @@ import com.google.common.collect.Lists;
 
 import forge.FThreads;
 import forge.Singletons;
-import forge.card.ability.AbilityFactory;
-import forge.card.ability.AbilityUtils;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityStatic;
-import forge.card.spellability.AbilityTriggered;
-import forge.card.spellability.OptionalCost;
-import forge.card.spellability.Spell;
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbilityStackInstance;
-import forge.card.spellability.TargetRestrictions;
-import forge.card.spellability.TargetChoices;
-import forge.card.spellability.TargetSelection;
-import forge.card.trigger.Trigger;
-import forge.card.trigger.TriggerType;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
-import forge.game.ai.ComputerUtil;
-import forge.game.ai.ComputerUtilCard;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.cost.Cost;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
@@ -67,6 +55,18 @@ import forge.game.event.GameEventSpellResolved;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
+import forge.game.spellability.Ability;
+import forge.game.spellability.AbilityStatic;
+import forge.game.spellability.AbilityTriggered;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.Spell;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
+import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.TargetSelection;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.gui.GuiChoose;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
@@ -172,7 +172,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      * </p>
      * 
      * @param ability
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final void addAndUnfreeze(final SpellAbility ability) {
         ability.getRestrictions().abilityActivated();
@@ -277,7 +277,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      * </p>
      * 
      * @param sp
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final void add(final SpellAbility sp) {
         FThreads.assertExecutedByEdt(false);
@@ -648,7 +648,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     + "| WithoutManaCost$ True | Optional$ True");
 
             //Setup a Rebound-trigger
-            final Trigger reboundTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase "
+            final Trigger reboundTrigger = forge.game.trigger.TriggerHandler.parseTrigger("Mode$ Phase "
                     + "| Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ ReboundAbilityTrigger "
                     + "| TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString()
                     + " without paying it's manacost.", source, true);
@@ -671,7 +671,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      * </p>
      * 
      * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @param source
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.

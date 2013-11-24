@@ -10,17 +10,17 @@ import org.apache.commons.lang3.StringUtils;
 import forge.FThreads;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.ability.ApiType;
-import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
-import forge.card.replacement.ReplacementEffect;
-import forge.card.spellability.AbilityManaPart;
-import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.SpellAbility;
 import forge.gui.GuiChoose;
 import forge.view.ButtonUtil;
 
@@ -88,12 +88,12 @@ public abstract class InputPayMana extends InputSyncronizedBase {
      * </p>
      * 
      * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @param card
      *            a {@link forge.game.card.Card} object.
      * @param manaCost
-     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
-     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
+     *            a {@link forge.game.mana.ManaCostBeingPaid} object.
+     * @return a {@link forge.game.mana.ManaCostBeingPaid} object.
      */
     protected void activateManaAbility(final Card card, ManaCostBeingPaid manaCost) {
         // make sure computer's lands aren't selected

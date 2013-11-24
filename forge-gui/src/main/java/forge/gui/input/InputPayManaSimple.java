@@ -17,11 +17,11 @@
  */
 package forge.gui.input;
 
-import forge.card.mana.ManaCostBeingPaid;
-import forge.card.spellability.SpellAbility;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.view.ButtonUtil;
 
 //pays the cost of a card played from the player's hand

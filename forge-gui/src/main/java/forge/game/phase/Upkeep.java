@@ -21,19 +21,19 @@ import java.util.HashMap;
 import java.util.List;
 import com.google.common.base.Predicate;
 
-import forge.card.ability.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.spellability.Ability;
-import forge.card.spellability.SpellAbility;
-import forge.card.trigger.TriggerType;
 import forge.game.Game;
+import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
+import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
+import forge.game.spellability.Ability;
+import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 /**

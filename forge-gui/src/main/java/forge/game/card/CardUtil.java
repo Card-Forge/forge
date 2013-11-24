@@ -29,13 +29,13 @@ import forge.card.CardCharacteristicName;
 import forge.card.CardCharacteristics;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.ability.AbilityUtils;
-import forge.card.ability.ApiType;
-import forge.card.spellability.AbilityManaPart;
-import forge.card.spellability.AbilitySub;
-import forge.card.spellability.SpellAbility;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.player.Player;
+import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.properties.NewConstants;
 

@@ -1,6 +1,6 @@
 package forge.game.event;
 
-import forge.card.spellability.SpellAbility;
+import forge.game.spellability.SpellAbility;
 
 /** 
  * TODO: Write javadoc for this type.

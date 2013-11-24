@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 
 import com.google.common.eventbus.Subscribe;
 
-import forge.card.spellability.TargetChoices;
 import forge.game.card.Card;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventAttackersDeclared;
@@ -26,6 +25,7 @@ import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;

@@ -27,12 +27,11 @@ import java.util.Set;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.card.TriggerReplacementBase;
-import forge.card.spellability.SpellAbility;
-import forge.card.staticability.StaticAbility;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 
 /**

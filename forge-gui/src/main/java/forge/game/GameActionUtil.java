@@ -30,22 +30,22 @@ import com.google.common.collect.Lists;
 
 import forge.Command;
 import forge.card.MagicColor;
-import forge.card.ability.AbilityFactory;
-import forge.card.ability.AbilityFactory.AbilityRecordType;
-import forge.card.ability.AbilityUtils;
-import forge.card.ability.ApiType;
-import forge.card.cost.Cost;
-import forge.card.mana.ManaCostBeingPaid;
-import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.AbilityManaPart;
-import forge.card.spellability.AbilitySub;
-import forge.card.spellability.OptionalCost;
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbilityRestriction;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
+import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.cost.Cost;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.spellability.AbilityActivated;
+import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
@@ -569,7 +569,7 @@ public final class GameActionUtil {
      * </p>
      *
      * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
     public static String generatedMana(final SpellAbility sa) {

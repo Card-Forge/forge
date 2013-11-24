@@ -50,35 +50,22 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.ability.AbilityFactory;
-import forge.card.ability.AbilityUtils;
-import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.card.replacement.ReplaceMoved;
-import forge.card.replacement.ReplacementEffect;
-import forge.card.replacement.ReplacementResult;
-import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityTriggered;
-import forge.card.spellability.OptionalCost;
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellPermanent;
-import forge.card.spellability.TargetRestrictions;
-import forge.card.staticability.StaticAbility;
-import forge.card.trigger.Trigger;
-import forge.card.trigger.TriggerType;
-import forge.card.trigger.ZCTrigger;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
 import forge.game.GlobalRuleChange;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
+import forge.game.cost.Cost;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
@@ -87,6 +74,19 @@ import forge.game.event.GameEventCardCounters;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventCardTapped;
 import forge.game.player.Player;
+import forge.game.replacement.ReplaceMoved;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementResult;
+import forge.game.spellability.Ability;
+import forge.game.spellability.AbilityTriggered;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.TargetRestrictions;
+import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
+import forge.game.trigger.ZCTrigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
@@ -725,8 +725,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param t
-     *            a {@link forge.card.trigger.Trigger} object.
-     * @return a {@link forge.card.trigger.Trigger} object.
+     *            a {@link forge.game.trigger.Trigger} object.
+     * @return a {@link forge.game.trigger.Trigger} object.
      */
     public final Trigger addTrigger(final Trigger t) {
         final Trigger newtrig = t.getCopyForHostCard(this);
@@ -754,7 +754,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param t
-     *            a {@link forge.card.trigger.Trigger} object.
+     *            a {@link forge.game.trigger.Trigger} object.
      */
     public final void removeTrigger(final Trigger t) {
         this.getCharacteristics().getTriggers().remove(t);
@@ -766,7 +766,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param t
-     *            a {@link forge.card.trigger.Trigger} object.
+     *            a {@link forge.game.trigger.Trigger} object.
      *
      * @param state
      *            a {@link forge.card.CardCharacteristicName} object.
@@ -2562,7 +2562,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * getSpellPermanent.
      * </p>
      * 
-     * @return a {@link forge.card.spellability.SpellPermanent} object.
+     * @return a {@link forge.game.spellability.SpellPermanent} object.
      */
     public final SpellPermanent getSpellPermanent() {
         for (final SpellAbility sa : this.getCharacteristics().getSpellAbility()) {
@@ -2579,7 +2579,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param a
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final void addSpellAbility(final SpellAbility a) {
 
@@ -2598,7 +2598,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param a
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final void removeSpellAbility(final SpellAbility a) {
         if (a.isManaAbility()) {
@@ -2876,7 +2876,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param c
      *            a {@link forge.Command} object.
      * @param typeIn
-     *            a {@link forge.card.trigger.ZCTrigger} object.
+     *            a {@link forge.game.trigger.ZCTrigger} object.
      */
     public final void addTrigger(final Command c, final ZCTrigger typeIn) {
         this.zcTriggers.add(new AbilityTriggered(this, c, typeIn));
@@ -2890,7 +2890,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param c
      *            a {@link forge.Command} object.
      * @param typeIn
-     *            a {@link forge.card.trigger.ZCTrigger} object.
+     *            a {@link forge.game.trigger.ZCTrigger} object.
      */
     public final void removeTrigger(final Command c, final ZCTrigger typeIn) {
         this.zcTriggers.remove(new AbilityTriggered(this, c, typeIn));
@@ -2902,7 +2902,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param type
-     *            a {@link forge.card.trigger.ZCTrigger} object.
+     *            a {@link forge.game.trigger.ZCTrigger} object.
      */
     public final void executeTrigger(final ZCTrigger type) {
         for (final AbilityTriggered t : this.zcTriggers) {

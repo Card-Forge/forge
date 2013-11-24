@@ -28,26 +28,26 @@ import forge.card.CardCharacteristics;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
-import forge.card.ability.AbilityFactory;
-import forge.card.ability.AbilityUtils;
-import forge.card.ability.ApiType;
-import forge.card.ability.effects.CharmEffect;
-import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.replacement.ReplacementHandler;
-import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.AbilitySub;
-import forge.card.spellability.OptionalCost;
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellPermanent;
-import forge.card.spellability.TargetRestrictions;
-import forge.card.trigger.Trigger;
-import forge.card.trigger.TriggerHandler;
-import forge.card.trigger.WrappedAbility;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
+import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardColor;
 import forge.game.card.CardUtil;
+import forge.game.cost.Cost;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementHandler;
+import forge.game.spellability.AbilityActivated;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.WrappedAbility;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 
@@ -166,7 +166,7 @@ public class CardFactory {
      * @param original
      *            a {@link forge.game.card.Card} object.
      * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @param bCopyDetails
      *            a boolean.
      */

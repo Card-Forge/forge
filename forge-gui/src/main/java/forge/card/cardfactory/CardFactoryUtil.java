@@ -27,47 +27,47 @@ import com.google.common.collect.Lists;
 
 import forge.Command;
 import forge.Singletons;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.ability.AbilityFactory;
-import forge.card.ability.AbilityUtils;
-import forge.card.ability.ApiType;
-import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.card.replacement.ReplacementEffect;
-import forge.card.replacement.ReplacementHandler;
-import forge.card.replacement.ReplacementLayer;
-import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.AbilityStatic;
-import forge.card.spellability.AbilitySub;
-import forge.card.spellability.OptionalCost;
-import forge.card.spellability.Spell;
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbilityRestriction;
-import forge.card.spellability.SpellPermanent;
-import forge.card.spellability.TargetRestrictions;
-import forge.card.trigger.Trigger;
-import forge.card.trigger.TriggerHandler;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
-import forge.game.ai.ComputerUtil;
-import forge.game.ai.ComputerUtilCard;
-import forge.game.ai.ComputerUtilCost;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.cost.Cost;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.spellability.Ability;
+import forge.game.spellability.AbilityActivated;
+import forge.game.spellability.AbilityStatic;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.Spell;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.TargetRestrictions;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -95,7 +95,7 @@ public class CardFactoryUtil {
      *            a {@link forge.game.card.Card} object.
      * @param manaCost
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.spellability.AbilityActivated} object.
+     * @return a {@link forge.game.spellability.AbilityActivated} object.
      */
     public static AbilityActivated abilityUnearth(final Card sourceCard, final String manaCost) {
 
@@ -158,7 +158,7 @@ public class CardFactoryUtil {
      * 
      * @param sourceCard
      *            a {@link forge.game.card.Card} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link forge.game.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityMorphDown(final Card sourceCard) {
         final Spell morphDown = new Spell(sourceCard, new Cost(ManaCost.THREE, false)) {
@@ -198,8 +198,8 @@ public class CardFactoryUtil {
      * @param sourceCard
      *            a {@link forge.game.card.Card} object.
      * @param cost
-     *            a {@link forge.card.cost.Cost} object.
-     * @return a {@link forge.card.spellability.AbilityActivated} object.
+     *            a {@link forge.game.cost.Cost} object.
+     * @return a {@link forge.game.spellability.AbilityActivated} object.
      */
     public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost) {
         final AbilityStatic morphUp = new AbilityStatic(sourceCard, cost, null) {
@@ -249,7 +249,7 @@ public class CardFactoryUtil {
      *            a {@link forge.game.card.Card} object.
      * @param cycleCost
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link forge.game.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityCycle(final Card sourceCard, String cycleCost) {
         StringBuilder sb = new StringBuilder();
@@ -275,7 +275,7 @@ public class CardFactoryUtil {
      *            a {@link java.lang.String} object.
      * @param type
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link forge.game.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityTypecycle(final Card sourceCard, String cycleCost, final String type) {
         StringBuilder sb = new StringBuilder();
@@ -307,7 +307,7 @@ public class CardFactoryUtil {
      *            a {@link forge.game.card.Card} object.
      * @param transmuteCost
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link forge.game.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityTransmute(final Card sourceCard, String transmuteCost) {
         transmuteCost += " Discard<1/CARDNAME>";
@@ -397,7 +397,7 @@ public class CardFactoryUtil {
      *            a {@link java.lang.String} object.
      * @param timeCounters
      *            a int.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link forge.game.spellability.SpellAbility} object.
      */
     public static SpellAbility abilitySuspendStatic(final Card sourceCard, final String suspendCost, final String timeCounters) {
         // be careful with Suspend ability, it will not hit the stack
@@ -614,7 +614,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param ability
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @param target
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
@@ -2059,7 +2059,7 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param ability
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a int.
      */
     public static int getNeededXDamage(final SpellAbility ability) {
@@ -2853,7 +2853,7 @@ public class CardFactoryUtil {
         sbDies.append("ValidCard$ Creature.HauntedBy | Execute$ ").append(hauntSVarName);
         sbDies.append(" | TriggerDescription$ ").append(hauntDescription);
 
-        final Trigger hauntedDies = forge.card.trigger.TriggerHandler.parseTrigger(sbDies.toString(), card, true);
+        final Trigger hauntedDies = forge.game.trigger.TriggerHandler.parseTrigger(sbDies.toString(), card, true);
 
         // Third, create the trigger that runs when the haunting creature
         // enters the battlefield
@@ -2862,7 +2862,7 @@ public class CardFactoryUtil {
         sbETB.append(hauntSVarName).append(" | Secondary$ True | TriggerDescription$ ");
         sbETB.append(hauntDescription);
 
-        final Trigger haunterETB = forge.card.trigger.TriggerHandler.parseTrigger(sbETB.toString(), card, true);
+        final Trigger haunterETB = forge.game.trigger.TriggerHandler.parseTrigger(sbETB.toString(), card, true);
 
         // Fourth, create a trigger that removes the haunting status if the
         // haunter leaves the exile
@@ -2871,7 +2871,7 @@ public class CardFactoryUtil {
         sbUnExiled.append("ValidCard$ Card.Self | Static$ True | Secondary$ True | ");
         sbUnExiled.append("TriggerDescription$ Blank");
 
-        final Trigger haunterUnExiled = forge.card.trigger.TriggerHandler.parseTrigger(sbUnExiled.toString(), card,
+        final Trigger haunterUnExiled = forge.game.trigger.TriggerHandler.parseTrigger(sbUnExiled.toString(), card,
                 true);
 
         final Ability haunterUnExiledWork = new Ability(card, ManaCost.ZERO) {

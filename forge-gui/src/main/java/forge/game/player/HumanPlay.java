@@ -10,48 +10,48 @@ import com.google.common.base.Predicate;
 
 import forge.FThreads;
 import forge.Singletons;
-import forge.card.ability.AbilityUtils;
-import forge.card.ability.ApiType;
-import forge.card.ability.effects.CharmEffect;
-import forge.card.ability.effects.FlipCoinEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.cost.Cost;
-import forge.card.cost.CostAddMana;
-import forge.card.cost.CostDamage;
-import forge.card.cost.CostDiscard;
-import forge.card.cost.CostDraw;
-import forge.card.cost.CostExile;
-import forge.card.cost.CostFlipCoin;
-import forge.card.cost.CostGainControl;
-import forge.card.cost.CostGainLife;
-import forge.card.cost.CostMill;
-import forge.card.cost.CostPart;
-import forge.card.cost.CostPartMana;
-import forge.card.cost.CostPartWithList;
-import forge.card.cost.CostPayLife;
-import forge.card.cost.CostPayment;
-import forge.card.cost.CostPutCardToLib;
-import forge.card.cost.CostPutCounter;
-import forge.card.cost.CostRemoveAnyCounter;
-import forge.card.cost.CostRemoveCounter;
-import forge.card.cost.CostReturn;
-import forge.card.cost.CostReveal;
-import forge.card.cost.CostSacrifice;
-import forge.card.cost.CostTapType;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostBeingPaid;
-import forge.card.spellability.Ability;
-import forge.card.spellability.HumanPlaySpellAbility;
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.TargetRestrictions;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
+import forge.game.ability.effects.CharmEffect;
+import forge.game.ability.effects.FlipCoinEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.cost.Cost;
+import forge.game.cost.CostAddMana;
+import forge.game.cost.CostDamage;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostDraw;
+import forge.game.cost.CostExile;
+import forge.game.cost.CostFlipCoin;
+import forge.game.cost.CostGainControl;
+import forge.game.cost.CostGainLife;
+import forge.game.cost.CostMill;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPartWithList;
+import forge.game.cost.CostPayLife;
+import forge.game.cost.CostPayment;
+import forge.game.cost.CostPutCardToLib;
+import forge.game.cost.CostPutCounter;
+import forge.game.cost.CostRemoveAnyCounter;
+import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostReturn;
+import forge.game.cost.CostReveal;
+import forge.game.cost.CostSacrifice;
+import forge.game.cost.CostTapType;
+import forge.game.mana.ManaCostBeingPaid;
+import forge.game.spellability.Ability;
+import forge.game.spellability.HumanPlaySpellAbility;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
@@ -81,7 +81,7 @@ public class HumanPlay {
      * </p>
      * 
      * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final static void playSpellAbility(Player p, SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
@@ -195,7 +195,7 @@ public class HumanPlay {
      * </p>
      * 
      * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public static final void playSaWithoutPayingManaCost(final Game game, final SpellAbility sa, boolean mayChooseNewTargets) {
         FThreads.assertExecutedByEdt(false);
@@ -228,7 +228,7 @@ public class HumanPlay {
      * </p>
      * 
      * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @param skipTargeting
      *            a boolean.
      */
@@ -276,9 +276,9 @@ public class HumanPlay {
      * </p>
      * 
      * @param ability
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     *            a {@link forge.game.spellability.SpellAbility} object.
      * @param cost
-     *            a {@link forge.card.cost.Cost} object.
+     *            a {@link forge.game.cost.Cost} object.
      * @param paid
      *            a {@link forge.Command} object.
      * @param unpaid

@@ -11,13 +11,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.card.cost.Cost;
-import forge.card.mana.Mana;
-import forge.card.replacement.ReplacementEffect;
-import forge.card.spellability.AbilitySub;
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbilityStackInstance;
-import forge.card.spellability.TargetChoices;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -26,7 +19,14 @@ import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
+import forge.game.cost.Cost;
+import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.spellability.AbilitySub;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 
 

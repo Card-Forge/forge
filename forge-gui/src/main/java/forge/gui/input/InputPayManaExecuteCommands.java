@@ -17,11 +17,11 @@
  */
 package forge.gui.input;
 
-import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostBeingPaid;
-import forge.card.spellability.SpellAbility;
+import forge.game.cost.Cost;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 
 //if cost is paid, Command.execute() is called
 
