@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -838,5 +840,14 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public String chooseHybridMana(String s) {
         return GuiChoose.one("Choose a type", s.split("/"));
+    }
+
+
+    @Override
+    public PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name) {
+        Iterable<PaperCard> cardsFromDb = Singletons.getMagicDb().getCommonCards().getUniqueCards();
+        List<PaperCard> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
+        Collections.sort(cards);
+        return GuiChoose.one(message, cards);
     }
 }

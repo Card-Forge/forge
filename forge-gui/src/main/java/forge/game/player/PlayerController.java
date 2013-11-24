@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
 import forge.deck.Deck;
@@ -28,6 +29,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
+import forge.item.PaperCard;
 
 
 /** 
@@ -174,7 +176,8 @@ public abstract class PlayerController {
     public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num);
 
     public abstract String chooseSingleColor(ImmutableList<String> onlyColors);
-
     public abstract String chooseHybridMana(String s);
+    
+    public abstract PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name);
 
 }

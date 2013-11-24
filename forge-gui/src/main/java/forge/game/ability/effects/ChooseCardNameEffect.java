@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,11 +57,13 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             validDesc = sa.getParam("ValidDesc");
         }
 
+        boolean randomChoice = sa.hasParam("AtRandom");
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                boolean ok = false;
-                while (!ok) {
-                    if (sa.hasParam("AtRandom")) {
+                String chosen = "";
+
+                while (true) {
+                    if (randomChoice) {
                         // Currently only used for Momir Avatar, if something else gets added here, make it more generic
                         Predicate<CardRules> baseRule = CardRulesPredicates.Presets.IS_CREATURE;
 
@@ -75,47 +78,44 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                                 Predicates.compose(additionalRule, PaperCard.FN_GET_RULES));
                         cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                         if (!cards.isEmpty()) {
-                            host.setNamedCard(Aggregates.random(cards).getName());
+                            chosen = Aggregates.random(cards).getName();
                         } else {
-                            host.setNamedCard("");
+                            chosen = "";
                         }
-                        ok = true;
-                    } else if (p.isHuman()) {
+                        break;
+                    } 
+
+                    if (p.isHuman()) {
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
                         
-                        List<PaperCard> cards = Lists.newArrayList(Singletons.getMagicDb().getCommonCards().getUniqueCards());
+                        Predicate<PaperCard> cpp = null;
+                        
+                        
                         if ( StringUtils.containsIgnoreCase(valid, "nonland") )
                         {
-                            Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES);
-                            cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                            cpp = Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES);
                         }
                         if ( StringUtils.containsIgnoreCase(valid, "nonbasic") )
                         {
-                            Predicate<PaperCard> cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES);
-                            cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                            cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES);
                         }
                         if ( StringUtils.containsIgnoreCase(valid, "noncreature") )
                         {
-                            Predicate<PaperCard> cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_CREATURE), PaperCard.FN_GET_RULES);
-                            cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                            cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_CREATURE), PaperCard.FN_GET_RULES);
                         }
                         else if ( StringUtils.containsIgnoreCase(valid, "creature") )
                         {
-                            Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
-                            cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                            cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
                         }
 
-                        Collections.sort(cards);
-                            
-                        PaperCard cp = GuiChoose.one(message, cards);
+                        PaperCard cp = p.getController().chooseSinglePaperCard(sa, message, cpp, sa.getSourceCard().getName());
                         Card instanceForPlayer = Card.fromPaperCard(cp, p); // the Card instance for test needs a game to be tested
-                        if (instanceForPlayer.isValid(valid, host.getController(), host)) {
-                            host.setNamedCard(cp.getName());
-                            p.setNamedCard(cp.getName());
-                            ok = true;
-                        }
+                        if (!instanceForPlayer.isValid(valid, host.getController(), host)) 
+                            continue;
+
+                        chosen = cp.getName();
                     } else {
-                        String chosen = "";
+                        
                         if (sa.hasParam("AILogic")) {
                             final String logic = sa.getParam("AILogic");
                             if (logic.equals("MostProminentInComputerDeck")) {
@@ -137,11 +137,12 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                         if (chosen.equals("")) {
                             chosen = "Morphling";
                         }
-                        GuiChoose.one("Computer picked: ", new String[]{chosen});
-                        host.setNamedCard(chosen);
-                        p.setNamedCard(chosen);
-                        ok = true;
                     }
+                }
+                host.setNamedCard(chosen);
+                if(!randomChoice) {
+                    p.getGame().getAction().nofityOfValue(sa, host, p.getName() + " picked " + chosen, p);
+                    p.setNamedCard(chosen);
                 }
             }
         }
