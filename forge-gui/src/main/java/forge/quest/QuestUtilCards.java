@@ -32,7 +32,6 @@ import com.google.common.collect.Lists;
 import forge.Singletons;
 import forge.card.BoosterSlots;
 import forge.card.CardEdition;
-import forge.card.CardEditionPredicates;
 import forge.card.CardRarity;
 import forge.card.ICardDatabase;
 import forge.card.MagicColor;
@@ -101,7 +100,7 @@ public final class QuestUtilCards {
             for (String edCode : availableEditions) {
                 CardEdition ed = Singletons.getMagicDb().getEditions().get(edCode);
                 // Duel decks might have only 2 types of basic lands
-                if (CardEditionPredicates.hasBasicLands.apply(ed)) {
+                if (CardEdition.Predicates.hasBasicLands.apply(ed)) {
                     landCodes.add(edCode);
                 }
             }
@@ -113,7 +112,7 @@ public final class QuestUtilCards {
             }
         } else {
             Iterable<CardEdition> allEditions = Singletons.getMagicDb().getEditions();
-            for (CardEdition edition : Iterables.filter(allEditions, CardEditionPredicates.hasBasicLands)) {
+            for (CardEdition edition : Iterables.filter(allEditions, CardEdition.Predicates.hasBasicLands)) {
                 landCodes.add(edition.getCode());
             }
             snowLandCodes.add("ICE");
@@ -429,20 +428,19 @@ public final class QuestUtilCards {
      * Generate cards in shop.
      */
     private final GameFormat.Collection formats = Singletons.getModel().getFormats();
-    private final Predicate<CardEdition> filterExt = CardEditionPredicates.isLegalInFormat(this.formats.getExtended());
+    private final Predicate<CardEdition> filterExt = this.formats.getExtended().editionLegalPredicate;
 
     /** The filter t2booster. */
-    private final Predicate<CardEdition> filterT2booster = Predicates.and(CardEditionPredicates.CAN_MAKE_BOOSTER,
-            CardEditionPredicates.isLegalInFormat(this.formats.getStandard()));
+    private final Predicate<CardEdition> filterT2booster = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, 
+            this.formats.getStandard().editionLegalPredicate);
 
     /** The filter ext but t2. */
     private final Predicate<CardEdition> filterExtButT2 = Predicates.and(
-            CardEditionPredicates.CAN_MAKE_BOOSTER,
-            Predicates.and(this.filterExt,
-                    Predicates.not(CardEditionPredicates.isLegalInFormat(this.formats.getStandard()))));
+            CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            Predicates.and(this.filterExt, this.formats.getStandard().editionLegalPredicate));
 
     /** The filter not ext. */
-    private final Predicate<CardEdition> filterNotExt = Predicates.and(CardEditionPredicates.CAN_MAKE_BOOSTER,
+    private final Predicate<CardEdition> filterNotExt = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
             Predicates.not(this.filterExt));
 
     /**
@@ -468,7 +466,7 @@ public final class QuestUtilCards {
             Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
             if (qc.getFormat() != null) {
-                filter = Predicates.and(CardEditionPredicates.CAN_MAKE_BOOSTER, isLegalInQuestFormat(qc.getFormat()));
+                filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, isLegalInQuestFormat(qc.getFormat()));
             }
             Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getMagicDb().getEditions(), filter);
             this.qa.getShopList().add(BoosterPack.FN_FROM_SET.apply(Aggregates.random(rightEditions)));
@@ -482,7 +480,7 @@ public final class QuestUtilCards {
      *            the count
      */
     private void generateTournamentsInShop(final int count) {
-        Predicate<CardEdition> formatFilter = CardEditionPredicates.HAS_TOURNAMENT_PACK;
+        Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
         if (qc.getFormat() != null) {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
         }
@@ -497,7 +495,7 @@ public final class QuestUtilCards {
      *            the count
      */
     private void generateFatPacksInShop(final int count) {
-        Predicate<CardEdition> formatFilter = CardEditionPredicates.HAS_FAT_PACK;
+        Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_FAT_PACK;
         if (qc.getFormat() != null) {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
         }

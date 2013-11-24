@@ -33,9 +33,13 @@ import org.apache.commons.lang3.StringUtils;
 
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.StaticData;
 import forge.item.SealedProduct;
+import forge.util.Aggregates;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.IItemReader;
@@ -403,4 +407,49 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             };
         }
     }
+    public static class Predicates {
+
+        /** The Constant canMakeBooster. */
+        public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = new CanMakeBooster();
+
+        private static class CanMakeBooster implements Predicate<CardEdition> {
+            @Override
+            public boolean apply(final CardEdition subject) {
+                return subject.hasBoosterTemplate();
+            }
+        }
+
+
+        public final static CardEdition getRandomSetWithAllBasicLands(Iterable<CardEdition> allEditions) {
+            return Aggregates.random(Iterables.filter(allEditions, hasBasicLands));
+        }
+        
+        public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
+        private static class CanMakeStarter implements Predicate<CardEdition> {
+            @Override
+            public boolean apply(final CardEdition subject) {
+                return StaticData.instance().getTournamentPacks().contains(subject.getCode());
+            }
+        }
+
+        public static final Predicate<CardEdition> HAS_FAT_PACK = new CanMakeFatPack();
+        private static class CanMakeFatPack implements Predicate<CardEdition> {
+            @Override
+            public boolean apply(final CardEdition subject) {
+                return StaticData.instance().getFatPacks().contains(subject.getCode());
+            }
+        }
+
+
+        public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
+            @Override
+            public boolean apply(CardEdition ed) {
+                for(String landName : MagicColor.Constant.BASIC_LANDS) {
+                    if (null == StaticData.instance().getCommonCards().tryGetCard(landName, ed.getCode(), 0))
+                        return false;
+                }
+                return true;
+            };
+        };
+    }    
 }

@@ -29,6 +29,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
+import forge.card.CardEdition;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.FileSection;
@@ -237,4 +238,12 @@ public class GameFormat implements Comparable<GameFormat> {
         }
 
     }
+    
+    // declared here because
+    public final Predicate<CardEdition> editionLegalPredicate = new Predicate<CardEdition>() {
+        @Override
+        public boolean apply(final CardEdition subject) {
+            return GameFormat.this.isSetLegal(subject.getCode());
+        }
+    };
 }

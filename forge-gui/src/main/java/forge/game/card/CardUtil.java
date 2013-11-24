@@ -24,7 +24,6 @@ import java.util.Set;
 
 import forge.Constant;
 import forge.Singletons;
-import forge.Constant.Keywords;
 import forge.card.CardCharacteristicName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;

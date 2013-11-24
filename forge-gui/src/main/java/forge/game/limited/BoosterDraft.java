@@ -36,7 +36,6 @@ import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.CardBlock;
 import forge.card.CardEdition;
-import forge.card.CardEditionPredicates;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
@@ -89,7 +88,7 @@ public final class BoosterDraft implements IBoosterDraft {
             Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericBooster);
 
             for (int i = 0; i < 3; i++) this.product.add(s);
-            IBoosterDraft.LAND_SET_CODE[0] = CardEditionPredicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions());
+            IBoosterDraft.LAND_SET_CODE[0] = CardEdition.Predicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions());
             break;
 
         case Block: case FantasyBlock: // Draft from cards by block or set

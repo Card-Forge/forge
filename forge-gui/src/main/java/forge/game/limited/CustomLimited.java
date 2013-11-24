@@ -25,7 +25,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Singletons;
-import forge.card.CardEditionPredicates;
+import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.item.PaperCard;
@@ -66,7 +66,7 @@ public class CustomLimited extends DeckBase {
     private transient ItemPoolView<PaperCard> cardPool;
 
     /** The Land set code. */
-    private String landSetCode = CardEditionPredicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions()).getCode();
+    private String landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions()).getCode();
 
     private boolean singleton; 
 

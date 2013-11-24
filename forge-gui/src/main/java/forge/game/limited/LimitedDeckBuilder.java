@@ -20,7 +20,6 @@ import forge.Singletons;
 
 import forge.card.CardAiHints;
 import forge.card.CardEdition;
-import forge.card.CardEditionPredicates;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
@@ -278,7 +277,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
         Set<String> sets = new HashSet<String>();
         for (PaperCard cp : aiPlayables) {
             CardEdition ee = Singletons.getMagicDb().getEditions().get(cp.edition);
-            if( !sets.contains(cp.getEdition()) && CardEditionPredicates.hasBasicLands.apply(ee))
+            if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.apply(ee))
                 sets.add(cp.getEdition());
         }
         setsWithBasicLands.addAll(sets);
