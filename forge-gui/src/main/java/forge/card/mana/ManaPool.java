@@ -25,9 +25,9 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Supplier;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
-
+import com.google.common.collect.Multimap;
 import forge.card.MagicColor;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -38,8 +38,6 @@ import forge.game.event.GameEventZone;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.maps.MapOfLists;
-import forge.util.maps.TreeMapOfLists;
 
 /**
  * <p>
@@ -51,11 +49,7 @@ import forge.util.maps.TreeMapOfLists;
  */
 public class ManaPool {
 
-    private final static Supplier<List<Mana>> listFactory = new Supplier<List<Mana>>(){ 
-        @Override public List<Mana> get() { return new ArrayList<Mana>(); }
-    };
-
-    private final MapOfLists<Byte, Mana> floatingMana = new TreeMapOfLists<Byte, Mana>(listFactory);
+    private final Multimap<Byte, Mana> floatingMana = ArrayListMultimap.create();
 
     /** Constant <code>map</code>. */
     private final Player owner;
@@ -78,7 +72,7 @@ public class ManaPool {
     }
 
     private void addMana(final Mana mana) {
-        floatingMana.add(mana.getColorCode(), mana);
+        floatingMana.put(mana.getColorCode(), mana);
         owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Added, mana));
     }
 
@@ -132,7 +126,7 @@ public class ManaPool {
                 }
                 numRemoved += floatingMana.get(b).size() - pMana.size();
                 floatingMana.get(b).clear();
-                floatingMana.addAll(b, pMana);
+                floatingMana.putAll(b, pMana);
             } else {
                 numRemoved += floatingMana.get(b).size();
                 floatingMana.get(b).clear();
@@ -320,11 +314,7 @@ public class ManaPool {
      * @return a int.
      */
     public final int totalMana() {
-        int total = 0;
-        for (Collection<Mana> cm : floatingMana.values()) {
-            total += cm.size();
-        }
-        return total;
+        return floatingMana.values().size();
     }
 
     /**
