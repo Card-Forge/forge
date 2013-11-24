@@ -123,6 +123,12 @@ public class SSubmenuQuestUtil {
                 }
             }
         }
+        
+        if(qCtrl.getAssets().hasItem(QuestItemType.CHARM)) {
+        	view.getCbCharm().setVisible(true);
+        } else {
+        	view.getCbCharm().setVisible(false);
+        }
 
         if (view.equals(VSubmenuChallenges.SINGLETON_INSTANCE)) {
             view.getLblZep().setVisible(qCtrl.getAssets().hasItem(QuestItemType.ZEPPELIN));
