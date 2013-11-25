@@ -204,6 +204,18 @@
             <version>6.8.7</version>
             <scope>test</scope>
         </dependency>
+	   <dependency>
+	      	<groupId>org.powermock</groupId>
+	      	<artifactId>powermock-module-testng</artifactId>
+	      	<version>1.5.2</version>
+	      	<scope>test</scope>
+	   </dependency>
+	   <dependency>
+	      	<groupId>org.powermock</groupId>
+	      	<artifactId>powermock-api-mockito</artifactId>
+	      	<version>1.5.2</version>
+	      	<scope>test</scope>
+	   </dependency>  
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-websocket</artifactId>
