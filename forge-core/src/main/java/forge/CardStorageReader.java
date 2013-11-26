@@ -78,7 +78,6 @@ public class CardStorageReader {
     private final boolean useThreadPool = ThreadUtil.isMultiCoreSystem();
     private final static int NUMBER_OF_PARTS = 25;
 
-    private final CountDownLatch cdl = new CountDownLatch(NUMBER_OF_PARTS);
     private final ProgressObserver progressObserver;
 
     private transient File cardsfolder;
@@ -171,8 +170,13 @@ public class CardStorageReader {
 
         final List<File> allFiles = collectCardFiles(new ArrayList<File>(), this.cardsfolder);
         estimatedFilesRemaining = allFiles.size();
-        List<Callable<List<CardRules>>> taskFiles = makeTaskListForFiles(allFiles, zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 5);
+        int fileParts = zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 3;
+        if( allFiles.size() < fileParts * 100)
+            fileParts = allFiles.size() / 100; // to avoid creation of many threads for a dozen of files
+        final CountDownLatch cdlFiles = new CountDownLatch(fileParts);
+        List<Callable<List<CardRules>>> taskFiles = makeTaskListForFiles(allFiles, cdlFiles);
 
+        final CountDownLatch cdlZip = new CountDownLatch(NUMBER_OF_PARTS);
         List<Callable<List<CardRules>>> taskZip = new ArrayList<>();
         if( this.zip != null ) {
             estimatedFilesRemaining = this.zip.size();
@@ -187,7 +191,7 @@ public class CardStorageReader {
                 entries.add(entry);
                 }
 
-            taskZip = makeTaskListForZip(entries, NUMBER_OF_PARTS);
+            taskZip = makeTaskListForZip(entries, cdlZip);
         }
 
         Set<CardRules> result = new TreeSet<CardRules>(new Comparator<CardRules>() {
@@ -202,7 +206,7 @@ public class CardStorageReader {
             progressObserver.report(0, taskFiles.size());
             StopWatch sw = new StopWatch();
             sw.start();
-            executeLoadTask(result, taskFiles);
+            executeLoadTask(result, taskFiles, cdlFiles);
             sw.stop();
             final long timeOnParse = sw.getTime();
             System.out.printf("Read cards: %s files in %d ms (%d parts) %s%n", estimatedFilesRemaining, timeOnParse, taskFiles.size(), useThreadPool ? "using thread pool" : "in same thread");            
@@ -213,7 +217,7 @@ public class CardStorageReader {
             progressObserver.report(0, taskZip.size());
             StopWatch sw = new StopWatch();
             sw.start();
-            executeLoadTask(result, taskZip);
+            executeLoadTask(result, taskZip, cdlZip);
             sw.stop();
             final long timeOnParse = sw.getTime();
             System.out.printf("Read cards: %s archived files in %d ms (%d parts) %s%n", estimatedFilesRemaining, timeOnParse, taskZip.size(), useThreadPool ? "using thread pool" : "in same thread");            
@@ -222,7 +226,7 @@ public class CardStorageReader {
         return result;
     } // loadCardsUntilYouFind(String)
 
-    private void executeLoadTask(Collection<CardRules> result, final List<Callable<List<CardRules>>> tasks) {
+    private void executeLoadTask(Collection<CardRules> result, final List<Callable<List<CardRules>>> tasks, CountDownLatch cdl) {
         try {
             if ( useThreadPool ) {
                 final ExecutorService executor = ThreadUtil.getComputingPool(0.5f);
@@ -246,8 +250,9 @@ public class CardStorageReader {
         }
     }
 
-    private List<Callable<List<CardRules>>> makeTaskListForZip(final List<ZipEntry> entries, final int maxParts) {
+    private List<Callable<List<CardRules>>> makeTaskListForZip(final List<ZipEntry> entries, final CountDownLatch cdl) {
         int totalFiles = entries.size();
+        final int maxParts = (int) cdl.getCount();
         int filesPerPart = totalFiles / maxParts;
         final List<Callable<List<CardRules>>> tasks = new ArrayList<Callable<List<CardRules>>>();
         for (int iPart = 0; iPart < maxParts; iPart++) {
@@ -266,8 +271,9 @@ public class CardStorageReader {
         return tasks;
     }
 
-    private List<Callable<List<CardRules>>> makeTaskListForFiles(final List<File> allFiles, final int maxParts) {
+    private List<Callable<List<CardRules>>> makeTaskListForFiles(final List<File> allFiles, final CountDownLatch cdl) {
         int totalFiles = allFiles.size();
+        final int maxParts = (int) cdl.getCount();
         int filesPerPart = totalFiles / maxParts;
         final List<Callable<List<CardRules>>> tasks = new ArrayList<Callable<List<CardRules>>>();
         for (int iPart = 0; iPart < maxParts; iPart++) {
