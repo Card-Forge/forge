@@ -18,6 +18,10 @@
 package forge.gui.match.views;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -26,12 +30,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Singletons;
 import forge.game.card.CardUtil;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerController;
@@ -43,7 +51,14 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CStack;
+import forge.gui.toolbox.FMouseAdapter;
+import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
+import forge.properties.ForgePreferences.FPref;
+import forge.view.arcane.CardArea;
+import forge.view.arcane.CardPanel;
+import forge.view.arcane.CardPanelContainer;
+import forge.view.arcane.util.Animation;
 
 /** 
  * Assembles Swing components of stack report.
@@ -56,11 +71,22 @@ public enum VStack implements IVDoc<CStack> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
+    private boolean cardView;
     private final DragTab tab = new DragTab("Stack");
+
+    // Top-level containers
+    private final FScrollPanel scroller = new FScrollPanel(null, true,
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    private final StackArea stackArea = new StackArea(scroller);
 
     // Other fields
     private List<JTextArea> stackTARs = new ArrayList<JTextArea>();
     private OptionalTriggerMenu otMenu = new OptionalTriggerMenu();
+
+    private VStack() {
+        scroller.setViewportView(stackArea);
+        stackArea.setOpaque(false);
+    }
 
     //========= Overridden methods
 
@@ -69,7 +95,22 @@ public enum VStack implements IVDoc<CStack> {
      */
     @Override
     public void populate() {
-        // (Panel uses observers to update, no permanent components here.)
+        cardView = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_STACK_CARD_VIEW);
+        if (cardView) {
+            final JPanel pnl = parentCell.getBody();
+            pnl.setLayout(new MigLayout("insets 0, gap 0"));
+
+            pnl.add(scroller, "w 100%, h 100%!");
+        }
+    }
+
+    /**
+     * Gets the stack area.
+     *
+     * @return {@link forge.gui.match.views.VStack.StackArea}
+     */
+    public StackArea getStackArea() {
+        return this.stackArea;
     }
 
     /* (non-Javadoc)
@@ -122,64 +163,71 @@ public enum VStack implements IVDoc<CStack> {
         if (!parentCell.getSelected().equals(this)) { return; }
 
         int count = 1;
-
-        List<JTextArea> list = new ArrayList<JTextArea>();
-
-        parentCell.getBody().removeAll();
-        parentCell.getBody().setLayout(new MigLayout("insets 1%, gap 1%, wrap"));
+        Border border = null;
 
         tab.setText("Stack : " + stack.size());
 
-        final Border border = new EmptyBorder(5, 5, 5, 5);
-
-        stackTARs.clear();
+        if (cardView) {
+            stackArea.clear();
+        }
+        else {
+            parentCell.getBody().removeAll();
+            parentCell.getBody().setLayout(new MigLayout("insets 1%, gap 1%, wrap"));
+            border = new EmptyBorder(5, 5, 5, 5);
+            stackTARs.clear();
+        }
         boolean isFirst = true;
         for (final SpellAbilityStackInstance spell : stack) {
             String isOptional = spell.getSpellAbility().isOptionalTrigger()
                     && spell.getSourceCard().getController().getController().getLobbyPlayer().equals(viewer) ? "(OPTIONAL) " : "";
             String txt = (count++) + ". " + isOptional + spell.getStackDescription();
-            JTextArea tar = new JTextArea(txt);
-            tar.setToolTipText(txt);
-            tar.setOpaque(true);
-            tar.setBorder(border);
-            this.setSpellColor(tar, spell);
 
-            tar.setFocusable(false);
-            tar.setEditable(false);
-            tar.setLineWrap(true);
-            tar.setWrapStyleWord(true);
+            if (cardView) {
+                Animation.moveCard(stackArea.addCard(spell.getSourceCard()));
+            }
+            else {
+                JTextArea tar = new JTextArea(txt);
+                tar.setToolTipText(txt);
+                tar.setOpaque(true);
+                tar.setBorder(border);
+                this.setSpellColor(tar, spell);
 
-            /*
-             * TODO - we should figure out how to display cards on the stack in
-             * the Picture/Detail panel The problem not is that when a computer
-             * casts a Morph, the real card shows because Picture/Detail checks
-             * isFaceDown() which will be false on for spell.getSourceCard() on
-             * the stack.
-             */
+                tar.setFocusable(false);
+                tar.setEditable(false);
+                tar.setLineWrap(true);
+                tar.setWrapStyleWord(true);
 
-            // this functionality was present in v 1.1.8
-            tar.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(final MouseEvent e) {
-                    if (!spell.getStackDescription().startsWith("Morph ")) {
-                        CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSpellAbility().getSourceCard());
-                    }
-                }
-            });
+                /*
+                 * TODO - we should figure out how to display cards on the stack in
+                 * the Picture/Detail panel The problem not is that when a computer
+                 * casts a Morph, the real card shows because Picture/Detail checks
+                 * isFaceDown() which will be false on for spell.getSourceCard() on
+                 * the stack.
+                 */
 
-            if(spell.getSpellAbility().isOptionalTrigger() && spell.getSpellAbility().getActivatingPlayer().getLobbyPlayer() == viewer) {
+                // this functionality was present in v 1.1.8
                 tar.addMouseListener(new MouseAdapter() {
                     @Override
-                    public void mouseClicked(MouseEvent e){
-                        if (e.getButton() == MouseEvent.BUTTON3)
-                        {
-                            otMenu.setStackInstance(spell);
-                            otMenu.show(e.getComponent(), e.getX(), e.getY());
+                    public void mouseEntered(final MouseEvent e) {
+                        if (!spell.getStackDescription().startsWith("Morph ")) {
+                            CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSpellAbility().getSourceCard());
                         }
                     }
                 });
+
+                if (spell.getSpellAbility().isOptionalTrigger() && spell.getSpellAbility().getActivatingPlayer().getLobbyPlayer() == viewer) {
+                    tar.addMouseListener(new FMouseAdapter() {
+                        @Override
+                        public void onRightClick(MouseEvent e) {
+                            otMenu.setStackInstance(spell);
+                            otMenu.show(e.getComponent(), e.getX(), e.getY());
+                        }
+                    });
+                }
+
+                parentCell.getBody().add(tar, "w 98%!");
+                stackTARs.add(tar);
             }
-            list.add(tar);
 
             /*
              * This updates the Card Picture/Detail when the spell is added to
@@ -187,16 +235,17 @@ public enum VStack implements IVDoc<CStack> {
              * 
              * Problem is described in TODO right above this.
              */
-            if (isFirst && !spell.getStackDescription().startsWith("Morph ")) {
-                CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSourceCard());
+            if (isFirst) {
+                isFirst = false;
+                if (!spell.getStackDescription().startsWith("Morph ")) {
+                    CMatchUI.SINGLETON_INSTANCE.setCard(spell.getSourceCard());
+                }
             }
-            isFirst = false;
-
-            parentCell.getBody().add(tar, "w 98%!");
-            stackTARs.add(tar);
         }
 
-        parentCell.getBody().repaint();
+        if (!cardView) {
+            parentCell.getBody().repaint();
+        }
     }
 
     private void setSpellColor(JTextArea tar, SpellAbilityStackInstance s0) {
@@ -303,6 +352,98 @@ public enum VStack implements IVDoc<CStack> {
                 jmiAccept.setSelected(false);
                 jmiDecline.setSelected(false);
             }
+        }
+    }
+
+    @SuppressWarnings("serial")
+    public class StackArea extends CardPanelContainer {
+        private static final float STACK_SPACING_Y = 0.1f;
+
+        private Dimension size;
+
+        public StackArea(final JScrollPane scrollPane) {
+            super(scrollPane);
+            setCardWidthMax(200);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final void doLayout() {
+            if (this.getCardPanels().isEmpty()) {
+                return;
+            }
+
+            final Rectangle rect = this.getScrollPane().getVisibleRect();
+            final Insets insets = this.getScrollPane().getInsets();
+            rect.width -= insets.left;
+            rect.height -= insets.top;
+            rect.width -= insets.right;
+            rect.height -= insets.bottom;
+
+            int maxWidth = rect.width - CardArea.GUTTER_X * 2;
+            int maxHeight = rect.height - CardArea.GUTTER_Y * 2;
+            int cardWidth = Math.min(maxWidth, this.getCardWidthMax());
+            int cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
+            if (cardHeight > maxHeight) {
+                cardHeight = maxHeight;
+                cardWidth = Math.round(cardHeight / CardPanel.ASPECT_RATIO);
+            }
+            int x = CardArea.GUTTER_X + (maxWidth - cardWidth) / 2;
+            int y = CardArea.GUTTER_Y;
+            int cardSpacingY = Math.round(cardHeight * STACK_SPACING_Y);
+
+            List<CardPanel> panels = this.getCardPanels();
+            for (int i = panels.size() - 1; i >= 0; i--) {
+                CardPanel panel = panels.get(i);
+                panel.setCardBounds(x, y, cardWidth, cardHeight);
+                this.setComponentZOrder(panel, i);
+                y += cardSpacingY;
+            }
+
+            maxWidth = rect.width;
+            maxHeight = Math.max(rect.height, y - cardSpacingY + cardHeight);
+            final Dimension oldPreferredSize = this.getPreferredSize();
+            this.setPreferredSize(new Dimension(maxWidth, maxHeight));
+            if ((oldPreferredSize.width != maxWidth) || (oldPreferredSize.height != maxHeight)) {
+                this.getParent().invalidate();
+                this.getParent().validate();
+            }
+        }
+
+        @Override
+        public final void paint(final Graphics g) {
+            Dimension newSize = this.getScrollPane().getSize();
+            if (this.size == null || !this.size.equals(newSize)) {
+                if (this.size != null) {
+                    this.revalidate();
+                }
+                this.size = newSize;
+            }
+            super.paint(g);
+        }
+
+        @Override
+        protected CardPanel getCardPanel(int x, int y) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final void mouseOver(final CardPanel panel, final MouseEvent evt) {
+            super.mouseOver(panel, evt);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
+            super.mouseLeftClicked(panel, evt);
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
+            super.mouseRightClicked(panel, evt);
         }
     }
 }

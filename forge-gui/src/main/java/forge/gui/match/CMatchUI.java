@@ -61,6 +61,7 @@ import forge.gui.match.views.VCommand;
 import forge.gui.match.views.VField;
 import forge.gui.match.views.VHand;
 import forge.gui.match.views.VPlayers;
+import forge.gui.match.views.VStack;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FOverlay;
@@ -451,6 +452,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         for (VCommand c : view.getCommandViews()) {
             panels.addAll(c.getTabletop().getCardPanels());
         }
+        panels.addAll(VStack.SINGLETON_INSTANCE.getStackArea().getCardPanels());
         return panels;
     }
 
