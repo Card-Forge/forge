@@ -84,6 +84,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbUseThemes = new OptionsCheckBox("Enable Themes");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
+    private final JCheckBox cbStackCardView = new OptionsCheckBox("Card View for Stack");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
@@ -194,6 +195,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbUiForTouchScreen, regularConstraints);
         pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), regularConstraints);
+
+        pnlPrefs.add(cbStackCardView, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), regularConstraints);
 
         pnlPrefs.add(cbHideReminderText, regularConstraints);
         pnlPrefs.add(new NoteLabel("Hide reminder text in Card Detail pane."), regularConstraints);
@@ -486,6 +490,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbUiForTouchScreen() {
         return cbUiForTouchScreen;
+    }
+
+    public final JCheckBox getCbStackCardView() {
+        return cbStackCardView;
     }
 
     public final JCheckBox getCbHideReminderText() {

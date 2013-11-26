@@ -363,7 +363,6 @@ public enum VStack implements IVDoc<CStack> {
 
         public StackArea(final JScrollPane scrollPane) {
             super(scrollPane);
-            setCardWidthMax(200);
         }
 
         /** {@inheritDoc} */
