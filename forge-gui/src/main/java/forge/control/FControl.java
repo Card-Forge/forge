@@ -124,7 +124,7 @@ public enum FControl implements KeyEventDispatcher {
                 case NONE: //prompt user for close action if not previously specified
                     Object[] options = {"Close Screen", "Exit Forge", "Cancel"};
                     int reply = JOptionPane.showOptionDialog(
-                            JOptionPane.getRootFrame(), 
+                            JOptionPane.getRootFrame(),
                             "Forge now supports navigation tabs which allow closing and switching between different screens with ease.\n"
                             + "As a result, you no longer need to use the X button in the upper right to close the current screen and go back.\n"
                             + "\n"
@@ -161,7 +161,7 @@ public enum FControl implements KeyEventDispatcher {
             }
         });
     }
-    
+
     public CloseAction getCloseAction() {
         return this.closeAction;
     }
@@ -175,7 +175,7 @@ public enum FControl implements KeyEventDispatcher {
         prefs.setPref(FPref.UI_CLOSE_ACTION, closeAction0.toString());
         prefs.save();
     }
-    
+
     public boolean canExitForge(boolean forRestart) {
         String userPrompt = "Are you sure you wish to " + (forRestart ? "restart" : "exit") + " Forge?";
         if (this.game != null) {
@@ -189,7 +189,7 @@ public enum FControl implements KeyEventDispatcher {
         }
         return true;
     }
-    
+
     public boolean exitForge() {
         if (!canExitForge(false)) {
             return false;
@@ -209,7 +209,7 @@ public enum FControl implements KeyEventDispatcher {
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        
+
         this.closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
 
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("About to load current quest.");
@@ -276,7 +276,7 @@ public enum FControl implements KeyEventDispatcher {
         if (this.currentScreen != screen && !Singletons.getView().getNavigationBar().canSwitch(screen)) {
             return;
         }
-        
+
         if (this.currentScreen == FScreen.MATCH_SCREEN) { //hide targeting overlay and reset image if was on match screen
             SOverlayUtils.hideTargetingOverlay();
             if (isMatchBackgroundImageVisible()) {
@@ -427,7 +427,7 @@ public enum FControl implements KeyEventDispatcher {
         attachToGame(newGame);
         match.startGame(newGame, null);
     }
-    
+
     public final void endCurrentGame() {
         if (this.game == null) { return; }
         Singletons.getView().getNavigationBar().closeTab(FScreen.MATCH_SCREEN);
