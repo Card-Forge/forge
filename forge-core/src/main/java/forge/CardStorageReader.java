@@ -164,22 +164,38 @@ public class CardStorageReader {
     public final Iterable<CardRules> loadCards() {
         progressObserver.setOperationName("Loading cards, examining folder", true);
 
-        long estimatedFilesRemaining;
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.
 
-        final List<File> allFiles = collectCardFiles(new ArrayList<File>(), this.cardsfolder);
-        estimatedFilesRemaining = allFiles.size();
-        int fileParts = zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 3;
-        if( allFiles.size() < fileParts * 100)
-            fileParts = allFiles.size() / 100; // to avoid creation of many threads for a dozen of files
-        final CountDownLatch cdlFiles = new CountDownLatch(fileParts);
-        List<Callable<List<CardRules>>> taskFiles = makeTaskListForFiles(allFiles, cdlFiles);
 
-        final CountDownLatch cdlZip = new CountDownLatch(NUMBER_OF_PARTS);
-        List<Callable<List<CardRules>>> taskZip = new ArrayList<>();
+        Set<CardRules> result = new TreeSet<CardRules>(new Comparator<CardRules>() {
+            @Override
+            public int compare(CardRules o1, CardRules o2) {
+                return String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName());
+            }
+        });
+
+        final List<File> allFiles = collectCardFiles(new ArrayList<File>(), this.cardsfolder);
+        if(!allFiles.isEmpty()) {
+            int fileParts = zip == null ? NUMBER_OF_PARTS : 1 + NUMBER_OF_PARTS / 3;
+            if( allFiles.size() < fileParts * 100)
+                fileParts = allFiles.size() / 100; // to avoid creation of many threads for a dozen of files
+            final CountDownLatch cdlFiles = new CountDownLatch(fileParts);
+            List<Callable<List<CardRules>>> taskFiles = makeTaskListForFiles(allFiles, cdlFiles);
+            progressObserver.setOperationName("Loading cards from folders", true);
+            progressObserver.report(0, taskFiles.size());
+            StopWatch sw = new StopWatch();
+            sw.start();
+            executeLoadTask(result, taskFiles, cdlFiles);
+            sw.stop();
+            final long timeOnParse = sw.getTime();
+            System.out.printf("Read cards: %s files in %d ms (%d parts) %s%n", allFiles.size(), timeOnParse, taskFiles.size(), useThreadPool ? "using thread pool" : "in same thread");
+        }
+
         if( this.zip != null ) {
-            estimatedFilesRemaining = this.zip.size();
+            final CountDownLatch cdlZip = new CountDownLatch(NUMBER_OF_PARTS);
+            List<Callable<List<CardRules>>> taskZip = new ArrayList<>();
+            
             ZipEntry entry;
             List<ZipEntry> entries = new ArrayList<ZipEntry>();
             // zipEnum was initialized in the constructor.
@@ -192,27 +208,6 @@ public class CardStorageReader {
                 }
 
             taskZip = makeTaskListForZip(entries, cdlZip);
-        }
-
-        Set<CardRules> result = new TreeSet<CardRules>(new Comparator<CardRules>() {
-            @Override
-            public int compare(CardRules o1, CardRules o2) {
-                return String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName());
-            }
-        });
-
-        if( taskFiles.size() > 0 ) {
-            progressObserver.setOperationName("Loading cards from folders", true);
-            progressObserver.report(0, taskFiles.size());
-            StopWatch sw = new StopWatch();
-            sw.start();
-            executeLoadTask(result, taskFiles, cdlFiles);
-            sw.stop();
-            final long timeOnParse = sw.getTime();
-            System.out.printf("Read cards: %s files in %d ms (%d parts) %s%n", estimatedFilesRemaining, timeOnParse, taskFiles.size(), useThreadPool ? "using thread pool" : "in same thread");            
-        }
-
-        if( taskZip.size() > 0 ) {
             progressObserver.setOperationName("Loading cards from archive", true);
             progressObserver.report(0, taskZip.size());
             StopWatch sw = new StopWatch();
@@ -220,9 +215,9 @@ public class CardStorageReader {
             executeLoadTask(result, taskZip, cdlZip);
             sw.stop();
             final long timeOnParse = sw.getTime();
-            System.out.printf("Read cards: %s archived files in %d ms (%d parts) %s%n", estimatedFilesRemaining, timeOnParse, taskZip.size(), useThreadPool ? "using thread pool" : "in same thread");            
+            System.out.printf("Read cards: %s archived files in %d ms (%d parts) %s%n", this.zip.size(), timeOnParse, taskZip.size(), useThreadPool ? "using thread pool" : "in same thread");            
         }
-        
+
         return result;
     } // loadCardsUntilYouFind(String)
 
