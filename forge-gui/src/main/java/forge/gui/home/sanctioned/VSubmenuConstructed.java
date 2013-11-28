@@ -155,7 +155,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         }
         else {
             for (int i = currentNumTabsShown; i <= toShow; i++) {
-                tabPane.add("Player " + i, playerPanels.get(i));
+                tabPane.add("Player " + (i + 1), playerPanels.get(i));
             }
             currentNumTabsShown = tabPane.getComponentCount() - 1;
         }
