@@ -88,8 +88,6 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         pnlHead.add(lblOverflow, "w 20px!, h 100%!, gap " + tabPaddingPx + "px " + tabPaddingPx + "px 0 0", -1);
 
         pnlBody.setCornerDiameter(0);
-
-        doCellLayout(showGameTabs());
     }
 
     /**
@@ -100,7 +98,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     public void doCellLayout(boolean showTabs) {
         this.removeAll();
         int borderT = SLayoutConstants.BORDER_T;
-        int headH = (showTabs ? SLayoutConstants.HEAD_H : 0);
+        int headH = ((showTabs || allDocs.size() > 1) ? SLayoutConstants.HEAD_H : 0);
         this.add(pnlHead,
                 "w 100% - " + borderT + "px!" + ", " + "h " + headH + "px!");
         this.add(pnlBorderRight,
@@ -284,6 +282,8 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
         // Ensure that a tab is selected
         setSelected(getSelected());
+
+        doCellLayout(showGameTabs());
     }
 
     /** Removes a document from the layout and tabs.
@@ -295,6 +295,8 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         if (wasSelected) { //after removing selected doc, select most recent doc if possible
             setSelected(null);
         }
+
+        doCellLayout(showGameTabs());
     }
 
     /** - Deselects previous selection, if there is one<br>
