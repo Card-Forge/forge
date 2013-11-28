@@ -8,6 +8,8 @@ Forge Beta: 11-##-2013 ver 1.5.6
 Release Notes
 -------------
 
+- If hide tabs setting on, still show tabs for panes with multiple tabs -
+
 - Select abilities using context menu -
 Instead of displaying a dialog to select abilities, you'll now get a context menu when left or right clicking cards with multiple ability choices.
 Each ability will have a keyboard shortcut of 1-9 based on order.
