@@ -94,7 +94,7 @@ public enum VMatchUI implements IVTopLevelUI {
             }
         }
 
-        if (Singletons.getControl().getObservedGame().isCommandZoneNeeded()) {
+        if (Singletons.getControl().getObservedGame().getType().isCommandZoneNeeded()) {
 	        // Add extra players alternatively to existing user/AI field panels.
 	        for (int i = 2; i < lstCommands.size(); i++) {
 	            // If already in layout, no need to add again.

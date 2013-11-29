@@ -49,4 +49,17 @@ public enum GameType {
     public boolean isSideboardingAllowed() {
         return canSideboard;
     }
+
+    public boolean isCommandZoneNeeded() {
+        switch (this) {
+        case Archenemy:
+        case Commander:
+        case Planechase:
+        case Vanguard:
+            return true;
+        default:
+            return false;
+        }
+        
+    }
 }
