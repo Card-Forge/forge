@@ -512,6 +512,21 @@ public class Game {
     public GameType getType() {
         return type;
     }
+    
+    /**
+     * @return whether command zone is needed for this game
+     */
+    @SuppressWarnings("incomplete-switch")
+	public boolean isCommandZoneNeeded() {
+    	switch (type) {
+    	case Archenemy:
+    	case Commander:
+    	case Planechase:
+    	case Vanguard:
+    		return true;
+    	}
+    	return false;
+    }
 
     /**
      * @return the activePlane
