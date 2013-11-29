@@ -12,6 +12,8 @@ Release Notes
 
 - Multi-color cards containing a filtered color will no longer show up in catalogs -
 
+- Add setting for Compact Prompt, which hides prompt header and reduces font size to allow the prompt to be smaller in your custom layout
+
 - Select abilities using context menu -
 Instead of displaying a dialog to select abilities, you'll now get a context menu when left or right clicking cards with multiple ability choices.
 Each ability will have a keyboard shortcut of 1-9 based on order.
