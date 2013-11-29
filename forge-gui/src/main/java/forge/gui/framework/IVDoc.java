@@ -30,7 +30,7 @@ public interface IVDoc<TCDoc extends ICDoc> {
     /** Retrieves control object associated with this document.
      * @return {@link forge.gui.home.ICSubmenu}
      */
-     TCDoc getLayoutControl();
+    TCDoc getLayoutControl();
 
     /** Sets the current parent cell of this view,
      * allowing access to its body and head sections.

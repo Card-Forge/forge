@@ -21,6 +21,7 @@ package forge.gui.toolbox;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -79,7 +80,7 @@ public class SaveOpenDialog extends JPanel {
             fc.addChoosableFileFilter(filter);
         }
 
-        int RetValue = fc.showOpenDialog(getParent());
+        int RetValue = fc.showOpenDialog(JOptionPane.getRootFrame());
         if (RetValue == JFileChooser.APPROVE_OPTION) {
             final File RetFile = fc.getSelectedFile();
             return RetFile;
@@ -106,7 +107,7 @@ public class SaveOpenDialog extends JPanel {
             fc.addChoosableFileFilter(filter);
         }
 
-        int RetValue = fc.showSaveDialog(getParent());
+        int RetValue = fc.showSaveDialog(JOptionPane.getRootFrame());
 
         /* user picked save */
         if (RetValue == JFileChooser.APPROVE_OPTION) {
