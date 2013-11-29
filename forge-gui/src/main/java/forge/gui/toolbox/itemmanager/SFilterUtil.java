@@ -33,6 +33,7 @@ public class SFilterUtil {
      */
     public static Predicate<PaperCard> buildColorAndTypeFilter(Map<SItemManagerUtil.StatTypes, FLabel> statLabels) {
         final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
+        final List<Predicate<CardRules>> notColors = new ArrayList<Predicate<CardRules>>();
         final List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
         
         boolean wantMulticolor = false;
@@ -41,6 +42,7 @@ public class SFilterUtil {
             switch (s) {
             case WHITE: case BLUE: case BLACK: case RED: case GREEN: case COLORLESS:
                 if (statLabels.get(s).getSelected()) { colors.add(s.predicate); }
+                else { notColors.add(Predicates.not(s.predicate)); }
                 break;
             case MULTICOLOR:
                 wantMulticolor = statLabels.get(s).getSelected();
@@ -57,6 +59,10 @@ public class SFilterUtil {
             default:
                 throw new RuntimeException("unhandled enum value: " + s);
             }
+        }
+        
+        if (wantMulticolor && !colors.isEmpty() && !notColors.isEmpty()) {
+        	preExceptMulti = Predicates.and(notColors); //ensure multicolor cards with filtered colors don't show up
         }
 
         Predicate<CardRules> preColors = colors.size() == 6 ? null : Predicates.or(colors);
