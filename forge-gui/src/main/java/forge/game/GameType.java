@@ -51,7 +51,8 @@ public enum GameType {
     }
 
     public boolean isCommandZoneNeeded() {
-        switch (this) {
+    	return true; //TODO: Figure out way to move command zone into field so it can be hidden when empty
+        /*switch (this) {
         case Archenemy:
         case Commander:
         case Planechase:
@@ -59,7 +60,6 @@ public enum GameType {
             return true;
         default:
             return false;
-        }
-        
+        }*/
     }
 }
