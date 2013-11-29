@@ -1,18 +1,22 @@
-Forge Beta: 11-##-2013 ver 1.5.6
+Forge Beta: 11-29-2013 ver 1.5.6
 
 
-13### cards in total.
+13401 cards in total.
 
 
 -------------
 Release Notes
 -------------
 
-- If hide tabs setting on, still show tabs for panes with multiple tabs -
+- Preferences -
+If hide tabs setting on, still show tabs for panes with multiple tabs.
 
-- Multi-color cards containing a filtered color will no longer show up in catalogs -
+Add setting for Compact Prompt, which hides prompt header and reduces font size to allow the prompt to be smaller in your custom layout.
 
-- Add setting for Compact Prompt, which hides prompt header and reduces font size to allow the prompt to be smaller in your custom layout
+
+- Deck Editor filtering -
+Multi-color cards containing a filtered color will no longer show up in catalogs.
+
 
 - Select abilities using context menu -
 Instead of displaying a dialog to select abilities, you'll now get a context menu when left or right clicking cards with multiple ability choices.
@@ -64,7 +68,19 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Asepetci
+Dave
+DrDev
+Erazmus
+Gos
+Hellfish
+Marc
+Max
+ptx
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
