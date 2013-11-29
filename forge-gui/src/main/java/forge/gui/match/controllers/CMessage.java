@@ -97,7 +97,7 @@ public enum CMessage implements ICDoc {
 
     /** @param s0 &emsp; {@link java.lang.String} */
     public void setMessage(String s0) {
-        view.getTarMessage().setText(FSkin.encodeSymbols(s0));
+        view.getTarMessage().setText(FSkin.encodeSymbols(s0, false));
     }
 
     /** Flashes animation on input panel if play is currently waiting on input. */

@@ -1653,12 +1653,16 @@ public enum FSkin {
     	getImage(skinProp).save(path, 13, 13);
     }
 
-    public static String encodeSymbols(String str) {
-        //format reminder text in italics (or hide if preference set)
-        String pattern = "\\((.+)\\)";
-        String replacement = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT) ?
-                "" : "<i>\\($1\\)</i>";
-        str = str.replaceAll(pattern, replacement);
+    public static String encodeSymbols(String str, boolean formatReminderText) {
+    	String pattern, replacement;
+
+    	if (formatReminderText) {
+	        //format reminder text in italics (or hide if preference set)
+	        pattern = "\\((.+)\\)";
+	        replacement = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_HIDE_REMINDER_TEXT) ?
+	                "" : "<i>\\($1\\)</i>";
+	        str = str.replaceAll(pattern, replacement);
+    	}
 
         //format mana symbols to display as icons
     	pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement

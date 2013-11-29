@@ -122,7 +122,7 @@ public class PlayerControllerHuman extends PlayerController {
         	if (enabled) {
         		hasEnabled = true;
         	}
-        	GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(ab.toString()),
+        	GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(ab.toString(), true),
         			shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
                     new Runnable() {
         				@Override

@@ -95,8 +95,8 @@ public abstract class InputBase implements java.io.Serializable, Input {
         final PhaseHandler ph = game.getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
     
-        sb.append("Priority: ").append(ph.getPriorityPlayer()).append("\n").append("\n");
-        sb.append("Turn : ").append(ph.getPlayerTurn()).append("\n");
+        sb.append("Priority: ").append(ph.getPriorityPlayer()).append("\n");
+        sb.append("Turn ").append(ph.getTurn()).append(" (").append(ph.getPlayerTurn()).append(")\n");
         sb.append("Phase: ").append(ph.getPhase().nameForUi).append("\n");
         sb.append("Stack: ");
         if (!game.getStack().isEmpty()) {

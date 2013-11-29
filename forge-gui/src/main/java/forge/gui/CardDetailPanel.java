@@ -229,7 +229,7 @@ public class CardDetailPanel extends FPanel {
                 if ( card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
                     manaCost = card.getRules().getMainPart().getManaCost().toString() + " // " + card.getRules().getOtherPart().getManaCost().toString();
                 }
-                this.nameCostLabel.setText(FSkin.encodeSymbols(card.getName() + " - " + manaCost));
+                this.nameCostLabel.setText(FSkin.encodeSymbols(card.getName() + " - " + manaCost, true));
             }
             this.typeLabel.setText(formatCardType(card));
             
@@ -600,7 +600,7 @@ public class CardDetailPanel extends FPanel {
             String mustBlockThese = Lang.joinHomogenous(card.getMustBlockCards());
             area.append("Must block " + mustBlockThese);
         }
-        return FSkin.encodeSymbols(area.toString());
+        return FSkin.encodeSymbols(area.toString(), true);
     }
 
     /** @return JLabel */
