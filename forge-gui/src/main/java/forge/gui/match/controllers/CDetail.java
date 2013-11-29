@@ -17,7 +17,6 @@
  */
 package forge.gui.match.controllers;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import forge.Command;
@@ -25,6 +24,7 @@ import forge.Singletons;
 import forge.game.card.Card;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VDetail;
+import forge.gui.toolbox.FMouseAdapter;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
@@ -69,9 +69,9 @@ public enum CDetail implements ICDoc {
 
     @Override
     public void initialize() {
-        view.getPnlDetail().addMouseListener(new MouseAdapter() {
+        view.getPnlDetail().addMouseListener(new FMouseAdapter() {
             @Override
-            public void mouseClicked(final MouseEvent e) {
+            public void onLeftClick(final MouseEvent e) {
                 CPicture.SINGLETON_INSTANCE.flipCard();
             }
         });

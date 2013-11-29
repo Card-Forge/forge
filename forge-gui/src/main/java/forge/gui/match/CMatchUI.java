@@ -297,7 +297,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     }
 
     public void showCombat(Combat combat) {
-        if (combat != null && combat.getAttackingPlayer().getGame().getStack().isEmpty()) {
+        if (combat != null && combat.getAttackers().size() > 0 && combat.getAttackingPlayer().getGame().getStack().isEmpty()) {
         	if (selectedDocBeforeCombat == null) {
 	        	IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
 	        	if (combatDoc.getParentCell() != null) {
