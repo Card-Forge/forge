@@ -58,8 +58,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_UPLOAD_DRAFT ("false"),
         UI_SCALE_LARGER ("true"),
         UI_COMPACT_PROMPT ("false"),
-        UI_MAX_STACK ("3"),
-        UI_STACK_OFFSET ("tiny"),
         UI_STACK_CARD_VIEW ("false"),
         UI_CARD_SIZE ("small"),
         UI_BUGZ_NAME (""),

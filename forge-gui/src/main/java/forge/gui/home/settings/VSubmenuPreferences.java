@@ -200,8 +200,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbCompactPrompt, regularConstraints);
         pnlPrefs.add(new NoteLabel("Hide header and use smaller font in Prompt pane to make it more compact."), regularConstraints);
 
-        pnlPrefs.add(cbStackCardView, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), regularConstraints);
+        /*pnlPrefs.add(cbStackCardView, regularConstraints); TODO: Show this checkbox when setting can support being enabled
+        pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), regularConstraints);*/
 
         pnlPrefs.add(cbHideReminderText, regularConstraints);
         pnlPrefs.add(new NoteLabel("Hide reminder text in Card Detail pane."), regularConstraints);
