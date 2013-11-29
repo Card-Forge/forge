@@ -48,9 +48,9 @@ import forge.gui.toolbox.FSkin.SkinColor;
  */
 @SuppressWarnings("serial")
 public class FScrollPanel extends JScrollPane {
-    private final ArrowButton[] arrowButtons = new ArrowButton[4];
-    private final JPanel innerPanel;
     private final boolean useArrowButtons;
+    private final ArrowButton[] arrowButtons = new ArrowButton[4];
+    private JPanel innerPanel;
     
     /**
      * An extension of JScrollPane that can be used as a panel and supports using arrow buttons to scroll instead of scrollbars
@@ -91,12 +91,34 @@ public class FScrollPanel extends JScrollPane {
      * @param horizontal0 &emsp; Horizontal scroll bar policy
      */
     public FScrollPanel(final LayoutManager layout, boolean useArrowButtons0, final int vertical0, final int horizontal0) {
-        super(new JPanel(layout), vertical0, horizontal0);
-
+        this(new JPanel(layout), useArrowButtons0, vertical0, horizontal0);
         innerPanel = (JPanel)getViewport().getView();
+        innerPanel.setOpaque(false);
+    }
+    
+    /**
+     * An extension of JScrollPane that can be used as a panel and supports using arrow buttons to scroll instead of scrollbars
+     * 
+     * @param view &emsp; Scrollable view component.
+     * @param useArrowButtons0 &emsp; True to use arrow buttons to scroll, false to use scrollbars
+     */
+    public FScrollPanel(final Component view, boolean useArrowButtons0) {
+        this(view, useArrowButtons0, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    }
+    
+    /**
+     * An extension of JScrollPane that can be used as a panel and supports using arrow buttons to scroll instead of scrollbars
+     * 
+     * @param view &emsp; Scrollable view component.
+     * @param useArrowButtons0 &emsp; True to use arrow buttons to scroll, false to use scrollbars
+     * @param vertical0 &emsp; Vertical scroll bar policy
+     * @param horizontal0 &emsp; Horizontal scroll bar policy
+     */
+    public FScrollPanel(final Component view, boolean useArrowButtons0, final int vertical0, final int horizontal0) {
+        super(view, vertical0, horizontal0);
+
         useArrowButtons = useArrowButtons0;
         getViewport().setOpaque(false);
-        innerPanel.setOpaque(false);
         setOpaque(false);
         setBorder(null);
         getHorizontalScrollBar().setUnitIncrement(16);

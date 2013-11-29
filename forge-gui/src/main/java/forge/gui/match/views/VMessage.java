@@ -23,7 +23,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.text.DefaultCaret;
 
@@ -37,8 +37,10 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FHtmlViewer;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JTextComponentSkin;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
 /**
@@ -58,11 +60,12 @@ public enum VMessage implements IVDoc<CMessage> {
     private final JButton btnOK = new FButton("OK");
     private final JButton btnCancel = new FButton("Cancel");
     private final FHtmlViewer tarMessage = new FHtmlViewer();
+    private final FScrollPanel messageScroller = new FScrollPanel(tarMessage, false,
+    		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final JLabel lblGames;
 
     //========= Constructor
     private VMessage() {
-
         lblGames = new FLabel.Builder()
         .fontSize(12)
         .fontStyle(Font.PLAIN)
@@ -72,13 +75,12 @@ public enum VMessage implements IVDoc<CMessage> {
 
         JTextComponentSkin<FHtmlViewer> tarMessageSkin = FSkin.get(tarMessage);
         tarMessageSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tarMessageSkin.setFont(FSkin.getFont(14));
-        tarMessage.setMargin(new Insets(5, 5, 5, 5));
+        tarMessageSkin.setFont(FSkin.getFont(12));
+        tarMessage.setMargin(new Insets(3, 3, 3, 3));
 
         // Prevent scroll-bar from automatically scrolling to bottom of JTextArea.
         DefaultCaret caret = (DefaultCaret)tarMessage.getCaret();
         caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
-
     }
 
     //========== Overridden methods
@@ -88,27 +90,24 @@ public enum VMessage implements IVDoc<CMessage> {
      */
     @Override
     public void populate() {
-
+    	ForgePreferences prefs = Singletons.getModel().getPreferences();
         JPanel container = parentCell.getBody();
 
         // wrap   : 2 columns required for btnOk and btnCancel.
         container.setLayout(new MigLayout("wrap 2, gap 0px!, insets 1px 1px 5px 1px"));
-        container.add(lblGames, "span 2, w 10:100%, h 22px!");
+        if (!prefs.getPrefBoolean(FPref.UI_HIDE_PROMPT_HEADER)) {
+        	container.add(lblGames, "span 2, w 10:100%, h 22px!");
+        }
         lblGames.setText("Game Setup");
 
-        JScrollPane scrollPane = new JScrollPane(tarMessage);
-        scrollPane.setOpaque(false);
-        scrollPane.getViewport().setOpaque(false);
-        scrollPane.setBorder(null);
-        container.add(scrollPane, "span 2, w 10:100%, h 0:100%");
+        container.add(messageScroller, "span 2, w 10:100%, h 0:100%");
 
-        boolean largerButtons = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_FOR_TOUCHSCREN);
+        boolean largerButtons = prefs.getPrefBoolean(FPref.UI_FOR_TOUCHSCREN);
         String constraints = largerButtons ? "w 10:50%, h 40%:40%:60px" : "w 10:50%, hmin 24px";
         constraints += ", gaptop 4px!";
 
         container.add(btnOK, constraints);
         container.add(btnCancel, constraints);
-
     }
 
     /* (non-Javadoc)

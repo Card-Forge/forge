@@ -75,7 +75,7 @@ public enum VStack implements IVDoc<CStack> {
     private final DragTab tab = new DragTab("Stack");
 
     // Top-level containers
-    private final FScrollPanel scroller = new FScrollPanel(null, true,
+    private final FScrollPanel scroller = new FScrollPanel(new JPanel(), true,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final StackArea stackArea = new StackArea(scroller);
 

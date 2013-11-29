@@ -85,6 +85,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbUseThemes = new OptionsCheckBox("Enable Themes");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
     private final JCheckBox cbStackCardView = new OptionsCheckBox("Card View for Stack");
+    private final JCheckBox cbHidePromptHeader = new OptionsCheckBox("Hide Prompt Header");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
@@ -198,6 +199,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbStackCardView, regularConstraints);
         pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), regularConstraints);
+
+        pnlPrefs.add(cbHidePromptHeader, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Hide header in Prompt pane that shows the current game and turn."), regularConstraints);
 
         pnlPrefs.add(cbHideReminderText, regularConstraints);
         pnlPrefs.add(new NoteLabel("Hide reminder text in Card Detail pane."), regularConstraints);
@@ -494,6 +498,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbStackCardView() {
         return cbStackCardView;
+    }
+
+    public final JCheckBox getCbHidePromptHeader() {
+        return cbHidePromptHeader;
     }
 
     public final JCheckBox getCbHideReminderText() {
