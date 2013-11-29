@@ -84,8 +84,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbUseThemes = new OptionsCheckBox("Enable Themes");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
+    private final JCheckBox cbCompactPrompt = new OptionsCheckBox("Compact Prompt");
     private final JCheckBox cbStackCardView = new OptionsCheckBox("Card View for Stack");
-    private final JCheckBox cbHidePromptHeader = new OptionsCheckBox("Hide Prompt Header");
     private final JCheckBox cbHideReminderText = new OptionsCheckBox("Hide Reminder Text");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
@@ -197,11 +197,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbUiForTouchScreen, regularConstraints);
         pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), regularConstraints);
 
+        pnlPrefs.add(cbCompactPrompt, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Hide header and use smaller font in Prompt pane to make it more compact."), regularConstraints);
+
         pnlPrefs.add(cbStackCardView, regularConstraints);
         pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), regularConstraints);
-
-        pnlPrefs.add(cbHidePromptHeader, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Hide header in Prompt pane that shows the current game and turn."), regularConstraints);
 
         pnlPrefs.add(cbHideReminderText, regularConstraints);
         pnlPrefs.add(new NoteLabel("Hide reminder text in Card Detail pane."), regularConstraints);
@@ -496,12 +496,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbUiForTouchScreen;
     }
 
-    public final JCheckBox getCbStackCardView() {
-        return cbStackCardView;
+    public final JCheckBox getCbCompactPrompt() {
+        return cbCompactPrompt;
     }
 
-    public final JCheckBox getCbHidePromptHeader() {
-        return cbHidePromptHeader;
+    public final JCheckBox getCbStackCardView() {
+        return cbStackCardView;
     }
 
     public final JCheckBox getCbHideReminderText() {

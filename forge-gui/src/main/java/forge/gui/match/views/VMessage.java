@@ -25,8 +25,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.text.DefaultCaret;
-
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.framework.DragCell;
@@ -39,7 +37,6 @@ import forge.gui.toolbox.FHtmlViewer;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JTextComponentSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -73,14 +70,8 @@ public enum VMessage implements IVDoc<CMessage> {
         .opaque()
         .build();
 
-        JTextComponentSkin<FHtmlViewer> tarMessageSkin = FSkin.get(tarMessage);
-        tarMessageSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tarMessageSkin.setFont(FSkin.getFont(12));
+        FSkin.get(tarMessage).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarMessage.setMargin(new Insets(3, 3, 3, 3));
-
-        // Prevent scroll-bar from automatically scrolling to bottom of JTextArea.
-        DefaultCaret caret = (DefaultCaret)tarMessage.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
     }
 
     //========== Overridden methods
@@ -95,8 +86,12 @@ public enum VMessage implements IVDoc<CMessage> {
 
         // wrap   : 2 columns required for btnOk and btnCancel.
         container.setLayout(new MigLayout("wrap 2, gap 0px!, insets 1px 1px 3px 1px"));
-        if (!prefs.getPrefBoolean(FPref.UI_HIDE_PROMPT_HEADER)) {
+        if (prefs.getPrefBoolean(FPref.UI_COMPACT_PROMPT)) { //hide header and use smaller font if compact prompt
+        	FSkin.get(tarMessage).setFont(FSkin.getFont(12));
+        }
+        else {
         	container.add(lblGames, "span 2, w 10:100%, h 22px!");
+        	FSkin.get(tarMessage).setFont(FSkin.getFont(14));
         }
         lblGames.setText("Game Setup");
 
