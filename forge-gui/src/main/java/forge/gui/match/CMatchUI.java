@@ -51,6 +51,7 @@ import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.controllers.CCombat;
 import forge.gui.match.controllers.CDetail;
@@ -88,6 +89,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     private VMatchUI view;
 
     private EventBus uiEvents;
+    private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
     private MatchUiEventVisitor visitor = new MatchUiEventVisitor();
 
     private CMatchUI() {
@@ -296,7 +298,22 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     public void showCombat(Combat combat) {
         if (combat != null && combat.getAttackingPlayer().getGame().getStack().isEmpty()) {
-            SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
+        	if (selectedDocBeforeCombat == null) {
+	        	IVDoc<? extends ICDoc> combatDoc = EDocID.REPORT_COMBAT.getDoc();
+	        	if (combatDoc.getParentCell() != null) {
+	            	selectedDocBeforeCombat = combatDoc.getParentCell().getSelected();
+	            	if (selectedDocBeforeCombat != combatDoc) {
+	            		SDisplayUtil.showTab(combatDoc);
+	            	}
+	            	else {
+	            		selectedDocBeforeCombat = null; //don't need to cache combat doc this way
+	            	}
+	        	}
+        	}
+        }
+        else if (selectedDocBeforeCombat != null) { //re-select doc that was selected before once combat finished
+        	SDisplayUtil.showTab(selectedDocBeforeCombat);
+        	selectedDocBeforeCombat = null;
         }
         CCombat.SINGLETON_INSTANCE.setModel(combat);
         CCombat.SINGLETON_INSTANCE.update();

@@ -45,16 +45,16 @@ public enum CCombat implements ICDoc {
     @Override
     public void update() {
         Combat localCombat = this.combat; // noone will re-assign this from other thread. 
-        if (localCombat != null )
+        if (localCombat != null) {
             VCombat.SINGLETON_INSTANCE.updateCombat(localCombat.getAttackers().size(), getCombatDescription(localCombat));
-        else
+        }
+        else {
             VCombat.SINGLETON_INSTANCE.updateCombat(0, "");
+        }
     }
     
-    public void setModel(Combat combat)
-    {
+    public void setModel(Combat combat) {
         this.combat = combat;
-
     }
     
     private static String getCombatDescription(Combat combat) {
