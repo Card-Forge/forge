@@ -94,7 +94,7 @@ public enum VMessage implements IVDoc<CMessage> {
         JPanel container = parentCell.getBody();
 
         // wrap   : 2 columns required for btnOk and btnCancel.
-        container.setLayout(new MigLayout("wrap 2, gap 0px!, insets 1px 1px 5px 1px"));
+        container.setLayout(new MigLayout("wrap 2, gap 0px!, insets 1px 1px 3px 1px"));
         if (!prefs.getPrefBoolean(FPref.UI_HIDE_PROMPT_HEADER)) {
         	container.add(lblGames, "span 2, w 10:100%, h 22px!");
         }
@@ -104,7 +104,7 @@ public enum VMessage implements IVDoc<CMessage> {
 
         boolean largerButtons = prefs.getPrefBoolean(FPref.UI_FOR_TOUCHSCREN);
         String constraints = largerButtons ? "w 10:50%, h 40%:40%:60px" : "w 10:50%, hmin 24px";
-        constraints += ", gaptop 4px!";
+        constraints += ", gaptop 2px!";
 
         container.add(btnOK, constraints);
         container.add(btnCancel, constraints);
