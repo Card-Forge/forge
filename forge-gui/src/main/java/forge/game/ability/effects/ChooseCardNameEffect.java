@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +22,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ComparableOp;
@@ -138,6 +135,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                             chosen = "Morphling";
                         }
                     }
+                    break;
                 }
                 host.setNamedCard(chosen);
                 if(!randomChoice) {
