@@ -70,7 +70,6 @@ public class VField implements IVDoc<CField> {
     private final FLabel lblAvatar = new FLabel.Builder().fontAlign(SwingConstants.CENTER).iconScaleFactor(1.0f).build();
     private final FLabel lblLife = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).build();
 
-
     private final PhaseIndicator phaseIndicator = new PhaseIndicator();
 
     private final Border borderAvatarSimple = new LineBorder(new Color(0, 0, 0, 0), 1);
@@ -268,6 +267,5 @@ public class VField implements IVDoc<CField> {
         boolean highlighted = isHighlighted();
         this.avatarArea.setBorder(highlighted ? borderAvatarHighlighted : borderAvatarSimple );
         this.avatarArea.setOpaque(highlighted);
-
     }
 }
