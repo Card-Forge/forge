@@ -47,22 +47,20 @@ public class InputAttack extends InputSyncronizedBase {
     /** Constant <code>serialVersionUID=7849903731842214245L</code>. */
     private static final long serialVersionUID = 7849903731842214245L;
 
-    
     private final Combat combat;
     private final List<GameEntity> defenders;
     private GameEntity currentDefender;
     private final Player playerAttacks;
     private final Player playerDeclares;
     private AttackingBand activeBand = null;
-    
+
     public InputAttack(Player attacks, Player declares, Combat combat) {
         this.playerAttacks = attacks;
         this.playerDeclares = declares;
         this.combat = combat;
         this.defenders = combat.getDefenders();
     }
-    
-    
+
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
@@ -96,12 +94,12 @@ public class InputAttack extends InputSyncronizedBase {
             }
         }
     }
-    
+
     private void showCombat() {
         // redraw sword icons
         CMatchUI.SINGLETON_INSTANCE.showCombat(combat);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {
@@ -119,7 +117,7 @@ public class InputAttack extends InputSyncronizedBase {
         else
             flashIncorrectAction(); // cannot attack that player
     }
-    
+
     /** {@inheritDoc} */
     @Override
     protected final void onCardSelected(final Card card, final MouseEvent triggerEvent) {
@@ -132,7 +130,7 @@ public class InputAttack extends InputSyncronizedBase {
             showCombat();
             // When removing an attacker clear the attacking band
             this.activateBand(null);
-            
+
             CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventAttackerDeclared(card, null));
             return;
         }
@@ -143,7 +141,7 @@ public class InputAttack extends InputSyncronizedBase {
                 this.activateBand(combat.getBandOfAttacker(card));
             } else if (this.activeBand.getAttackers().contains(card)) {
                 this.activateBand(null);
-            } else { // Join a band by selecting a non-active band member after activating a band 
+            } else { // Join a band by selecting a non-active band member after activating a band
                 if (this.activeBand.canJoinBand(card)) {
                     combat.removeFromCombat(card);
                     declareAttacker(card);
@@ -155,7 +153,7 @@ public class InputAttack extends InputSyncronizedBase {
             updateMessage();
             return;
         }
-    
+
         if ( card.getController().isOpponentOf(playerAttacks) ) {
             if ( defenders.contains(card) ) { // planeswalker?
                 setCurrentDefender(card);
@@ -170,11 +168,11 @@ public class InputAttack extends InputSyncronizedBase {
                 flashIncorrectAction();
                 return;
             }
-            
+
             if(combat.isAttacking(card)) {
                 combat.removeFromCombat(card);
-            } 
-            
+            }
+
             declareAttacker(card);
             showCombat();
         }
@@ -192,12 +190,12 @@ public class InputAttack extends InputSyncronizedBase {
         combat.addAttacker(card, currentDefender, this.activeBand);
         this.activateBand(this.activeBand);
         updateMessage();
-        
+
         CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventAttackerDeclared(card, currentDefender));
     }
 
     private final void setCurrentDefender(GameEntity def) {
-        currentDefender = def; 
+        currentDefender = def;
         for( GameEntity ge: defenders ) {
             if ( ge instanceof Card) {
                 CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card)ge, ge == def);
@@ -211,7 +209,7 @@ public class InputAttack extends InputSyncronizedBase {
 
         // update UI
     }
-    
+
     private final void activateBand(AttackingBand band) {
         if (this.activeBand != null) {
             for(Card card : this.activeBand.getAttackers()) {
@@ -219,16 +217,16 @@ public class InputAttack extends InputSyncronizedBase {
             }
         }
         this.activeBand = band;
-        
+
         if (this.activeBand != null) {
             for(Card card : this.activeBand.getAttackers()) {
                 CMatchUI.SINGLETON_INSTANCE.setUsedToPay(card, true);
             }
         }
-        
+
         // update UI
     }
-    
+
     private void updateMessage() {
         StringBuilder sb = new StringBuilder();
         sb.append(playerDeclares.getName()).append(", ");

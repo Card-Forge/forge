@@ -20,6 +20,7 @@ package forge.game.combat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -157,7 +158,7 @@ public class CombatUtil {
         if (blockedBy.isEmpty() || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
             return true;
         }
-        int canBlockMore = blocker.getKeywordAmount("CARDNAME can block an additional creature.") 
+        int canBlockMore = blocker.getKeywordAmount("CARDNAME can block an additional creature.")
                 + blocker.getKeywordAmount("CARDNAME can block an additional ninety-nine creatures.") * 99;
         return canBlockMore >= blockedBy.size();
     }
@@ -184,7 +185,7 @@ public class CombatUtil {
             if (attacker.hasStartOfKeyword("CantBeBlockedByAmount GT") && !combat.getBlockers(attacker).isEmpty()) {
                 return false;
             }
-            
+
             // Rule 802.4a: A player can block only creatures attacking him or a planeswalker he controls
             Player attacked = combat.getDefendingPlayerRelatedTo(attacker);
             if (attacked != null && attacked != defendingPlayer) {
@@ -327,7 +328,7 @@ public class CombatUtil {
                 blocks++;
             }
         }
-        
+
         return canAttackerBeBlockedWithAmount(attacker, blocks);
     }
 
@@ -368,7 +369,7 @@ public class CombatUtil {
 
         final List<Card> defendersArmy = defending.getCreaturesInPlay();
         final List<Card> attackers = combat.getAttackers();
-        final List<Card> blockers = CardLists.filterControlledBy(combat.getAllBlockers(), defending); 
+        final List<Card> blockers = CardLists.filterControlledBy(combat.getAllBlockers(), defending);
 
         // if a creature does not block but should, return false
         for (final Card blocker : defendersArmy) {
@@ -448,7 +449,7 @@ public class CombatUtil {
             if (attacker.hasStartOfKeyword("All creatures able to block CARDNAME do so.")
                     || (attacker.hasStartOfKeyword("All Walls able to block CARDNAME do so.") && blocker.isType("Wall"))
                     || (attacker.hasStartOfKeyword("All creatures with flying able to block CARDNAME do so.") && blocker.hasKeyword("Flying"))
-                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.") 
+                    || (attacker.hasStartOfKeyword("CARDNAME must be blocked if able.")
                             && combat.getBlockers(attacker).isEmpty())) {
                 attackersWithLure.add(attacker);
             }
@@ -669,6 +670,45 @@ public class CombatUtil {
         }
     }
 
+    // can a player attack with one or more creatures at the moment?
+    /**
+     * <p>
+     * canAttack.
+     * </p>
+     * 
+     * @param p
+     *            a {@link forge.game.player} object.
+     * @return a boolean.
+     */
+    public static boolean canAttack(Player p) {
+        List<Card> creatures = p.getCreaturesInPlay();
+        if (creatures.isEmpty()) { return false; }
+
+        List<Player> defenders = p.getOpponents();
+        if (defenders.isEmpty()) { return false; }
+
+        boolean foundCreatureThatCantAttackAlone = false;
+
+        for (Card c : creatures) {
+            if (CombatUtil.canAttack(c)) {
+                for (Player def : defenders) {
+                    if (CombatUtil.canAttackNextTurn(c, def)) {
+                        if (c.hasKeyword("CARDNAME can't attack or block alone.")) {
+                            //ensure another possible attacker is found
+                            //if the first one found can't attack alone
+                            if (!foundCreatureThatCantAttackAlone) {
+                                foundCreatureThatCantAttackAlone = true;
+                                break;
+                            }
+                        }
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     // can a creature attack given the combat state
     /**
      * <p>
@@ -685,37 +725,40 @@ public class CombatUtil {
         int cntAttackers = combat.getAttackers().size();
         final Game game = c.getGame();
 
-        for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
-            for (final String keyword : card.getKeyword()) {
-                if (keyword.equals("No more than two creatures can attack each combat.") && cntAttackers > 1) {
-                    return false;
+        if (cntAttackers > 0) {
+            for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
+                for (final String keyword : card.getKeyword()) {
+                    if (cntAttackers > 1) {
+                        if (keyword.equals("No more than two creatures can attack each combat.")) {
+                            return false;
+                        }
+                        if (keyword.equals("No more than two creatures can attack you each combat.") &&
+                                card.getController().getOpponent().equals(c.getController())) {
+                            return false;
+                        }
+                    }
+                    if (keyword.equals("CARDNAME can only attack alone.") && combat.isAttacking(card)) {
+                        return false;
+                    }
                 }
-                if (keyword.equals("No more than two creatures can attack you each combat.") && cntAttackers > 1
-                        && card.getController().getOpponent().equals(c.getController())) {
-                    return false;
-                }
-                if (keyword.equals("CARDNAME can only attack alone.") && combat.isAttacking(card)) {
-                    return false;
-                }
+            }
+
+            if (c.hasKeyword("CARDNAME can only attack alone.")) {
+                return false;
+            }
+
+            if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerACombat)) {
+                return false;
             }
         }
 
-        final List<Card> list = c.getController().getCreaturesInPlay();
-        if (list.size() < 2 && c.hasKeyword("CARDNAME can't attack or block alone.")) {
+        if (c.hasKeyword("CARDNAME can't attack or block alone.") &&
+                c.getController().getCreaturesInPlay().size() < 2) {
             return false;
         }
 
-        if (cntAttackers > 0 && c.hasKeyword("CARDNAME can only attack alone.")) {
-            return false;
-        }
-
-        if (cntAttackers > 0
-                && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerACombat)) {
-            return false;
-        }
-
-        if ((cntAttackers > 0 || c.getController().getAttackedWithCreatureThisTurn())
-                && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn)) {
+        if ((cntAttackers > 0 || c.getController().getAttackedWithCreatureThisTurn()) &&
+                game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn)) {
             return false;
         }
 
@@ -735,7 +778,7 @@ public class CombatUtil {
     public static boolean canAttack(final Card c, final GameEntity defender) {
         return canAttack(c) && canAttackNextTurn(c, defender);
     }
-    
+
     public static boolean canAttack(final Card c) {
         final Game game = c.getGame();
         if (c.isTapped() || c.isPhasedOut()
@@ -745,12 +788,12 @@ public class CombatUtil {
         }
         return true;
     }
-    
+
     public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount) {
         if( amount == 0 )
             return false; // no block
-        
-        List<String> restrictions = Lists.newArrayList(); 
+
+        List<String> restrictions = Lists.newArrayList();
         for ( String kw : attacker.getKeyword() ) {
             if ( kw.startsWith("CantBeBlockedByAmount") )
                 restrictions.add(TextUtil.split(kw, ' ', 2)[1]);
@@ -806,7 +849,6 @@ public class CombatUtil {
         final int[] powerLimit = { 0 };
         String cantAttackKw = null;
 
- 
         for( String kw : c.getKeyword()) {
             if (kw.startsWith("CARDNAME can't attack if defending player controls an untapped creature with power")) {
                 cantAttackKw = kw;
@@ -828,7 +870,7 @@ public class CombatUtil {
                         @Override
                         public boolean apply(final Card ct) {
                             return (ct.isUntapped()
-                                    && ((ct.getNetAttack() >= powerLimit[0] && asSeparateWords[14].contains("greater")) 
+                                    && ((ct.getNetAttack() >= powerLimit[0] && asSeparateWords[14].contains("greater"))
                                     ||  (ct.getNetAttack() <= powerLimit[0] && asSeparateWords[14].contains("less"))));
                         }
                     });
@@ -926,7 +968,7 @@ public class CombatUtil {
                     attackCost.add(additionalCost);
             }
         }
-        
+
         boolean isFree = attackCost.getTotalMana().isZero() && attackCost.isOnlyManaCost(); // true if needless to pay
         return isFree || c.getController().getController().payManaOptional(c, attackCost, null, "Pay additional cost to declare " + c + " an attacker", ManaPaymentPurpose.DeclareAttacker);
     }
@@ -936,7 +978,7 @@ public class CombatUtil {
      * This method checks triggered effects of attacking creatures, right before
      * defending player declares blockers.
      * </p>
-     * @param game 
+     * @param game
      * 
      * @param c
      *            a {@link forge.game.card.Card} object.
@@ -969,7 +1011,7 @@ public class CombatUtil {
                 game.getStack().addSimultaneousStackEntry(ability);
 
             }
-        } 
+        }
 
         c.getDamageHistory().setCreatureAttackedThisCombat(true);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
@@ -983,7 +1025,7 @@ public class CombatUtil {
             int idx = keyword.indexOf("Rampage ");
             if ( idx < 0)
                 continue;
-            
+
             final int numBlockers = blockers.size();
             if (numBlockers > 1) {
                 final int magnitude = Integer.valueOf(keyword.substring(idx + "Rampage ".length()));
@@ -996,7 +1038,7 @@ public class CombatUtil {
         for (Card blocker : blockers) {
             if (attacker.hasKeyword("Flanking") && !blocker.hasKeyword("Flanking")) {
                 int flankingMagnitude = 0;
-    
+
                 for (String kw : attacker.getKeyword()) {
                     if (kw.equals("Flanking")) {
                         flankingMagnitude++;
@@ -1007,7 +1049,7 @@ public class CombatUtil {
                 for( int i = 0; i < flankingMagnitude; i++ ) {
                     String effect = String.format("AB$ Pump | Cost$ 0 | Defined$ CardUID_%d | NumAtt$ -1 | NumDef$ -1 | ", blocker.getUniqueNumber());
                     String desc = String.format("StackDescription$ Flanking (The blocking %s gets -1/-1 until end of turn)", blocker.getName());
-                    
+
                     SpellAbility ability = AbilityFactory.getAbility(effect + desc, attacker);
                     ability.setActivatingPlayer(attacker.getController());
                     ability.setDescription(ability.getStackDescription());
@@ -1024,7 +1066,7 @@ public class CombatUtil {
 
     /**
      * executes Rampage abilities for a given card.
-     * @param game 
+     * @param game
      * 
      * @param c
      *            the card to add rampage bonus to
@@ -1038,7 +1080,7 @@ public class CombatUtil {
         // numBlockers starts with 1 since it is for every creature beyond the first
         for (int i = 1; i < numBlockers; i++) {
             String effect = "AB$ Pump | Cost$ 0 | " + c.getUniqueNumber() + " | NumAtt$ " + magnitude + " | NumDef$ " + magnitude + " | ";
-            String desc = "StackDescription$ Rampage " + magnitude + " (Whenever CARDNAME becomes blocked, it gets +" + magnitude + "/+" 
+            String desc = "StackDescription$ Rampage " + magnitude + " (Whenever CARDNAME becomes blocked, it gets +" + magnitude + "/+"
                     + magnitude + " until end of turn for each creature blocking it beyond the first.)";
 
             SpellAbility ability = AbilityFactory.getAbility(effect + desc, c);
