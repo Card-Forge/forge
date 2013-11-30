@@ -921,6 +921,29 @@ Unfortunately, the Mac OS X builder that we were using does not support Java 7. 
 Currently, the windows/unix release of Forge includes a launcher file named "forge.command". Double click on the "forge.command" launcher command file and this will in turn launch the Forge jar file via the terminal application while increasing the Java heap space. This should be a temporary inconvenience.
 
 
+- Preferences -
+If hide tabs setting on, still show tabs for panes with multiple tabs.
+
+Add setting for Compact Prompt, which hides prompt header and reduces font size to allow the prompt to be smaller in your custom layout.
+
+
+- Select abilities using context menu -
+Instead of displaying a dialog to select abilities, you'll now get a context menu when left or right clicking cards with multiple ability choices.
+Each ability will have a keyboard shortcut of 1-9 based on order.
+Unplayable activated abilities will still appear disabled so shortcuts are constant regardless of game state.
+
+
+- Mana symbols shown in Card Detail and ability menu -
+The Card Detail pane now shows mana symbols in place of WUBRG and other appropriate text characters.
+Same for ability context menu described above and Game Prompt pane.
+Also fixed WUBRG of colored mana symbols on a few dozen cards.
+Reminder text now appears in italics, with a preference that can be set to hide it.
+
+
+- Quest mode bazaar -
+Added a new Quest Item, Charm of Vigor. Let's you play best of 5 games rather than best of 3.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

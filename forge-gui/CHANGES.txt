@@ -1,38 +1,17 @@
-Forge Beta: 11-29-2013 ver 1.5.6
+Forge Beta: 12-##-2013 ver 1.5.7
 
 
-13401 cards in total.
+13### cards in total.
 
 
 -------------
 Release Notes
 -------------
 
-- Preferences -
-If hide tabs setting on, still show tabs for panes with multiple tabs.
-
-Add setting for Compact Prompt, which hides prompt header and reduces font size to allow the prompt to be smaller in your custom layout.
-
-
 - Deck Editor filtering -
 Multi-color cards containing a filtered color will no longer show up in catalogs.
 
-
-- Select abilities using context menu -
-Instead of displaying a dialog to select abilities, you'll now get a context menu when left or right clicking cards with multiple ability choices.
-Each ability will have a keyboard shortcut of 1-9 based on order.
-Unplayable activated abilities will still appear disabled so shortcuts are constant regardless of game state.
-
-
-- Mana symbols shown in Card Detail and ability menu -
-The Card Detail pane now shows mana symbols in place of WUBRG and other appropriate text characters.
-Same for ability context menu described above and Game Prompt pane.
-Also fixed WUBRG of colored mana symbols on a few dozen cards.
-Reminder text now appears in italics, with a preference that can be set to hide it.
-
-
-- Quest mode bazaar -
-Added a new Quest Item, Charm of Vigor. Let's you play best of 5 games rather than best of 3.
+I came up with a way that hybrid cards, split cards, and phyrexian cards will show up so long as the card can be cast using only selected colors. For split cards, each side of the card is checked individually, so Life // Death will appear if either {B} or {G} is selected. Note that if the multicolor button is deselected (such that multicolor cards are filtered out), hybrid and split cards with multiple colors will still be hidden. However, to improve usability, I made it so right-clicking a color filter button also selects the the multicolor button so hybrids and split cards appear by default, and so 2 color cards show up if you then left click a second color filter button.
 
 
 - Commander 2013 cards -
@@ -43,7 +22,7 @@ Forge now includes many of the new Commander 2013 cards. It may take a few days/
 New Cards
 ---------
 
-Liar's Pendulum
+
 
 
 ------------
@@ -68,19 +47,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Asepetci
-Dave
-DrDev
-Erazmus
-Gos
-Hellfish
-Marc
-Max
-ptx
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
