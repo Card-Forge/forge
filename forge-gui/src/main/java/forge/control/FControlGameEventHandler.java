@@ -83,7 +83,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             phaseUpdPlanned.set(false);
             
             final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
-            PhaseLabel lbl = matchUi.getFieldViewFor(p).getPhaseInidicator().getLabelFor(ph);
+            PhaseLabel lbl = matchUi.getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
 
             matchUi.resetAllPhaseButtons();
             if (lbl != null) lbl.setActive(true);

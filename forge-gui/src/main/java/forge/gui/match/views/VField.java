@@ -71,7 +71,7 @@ public class VField implements IVDoc<CField> {
     private final FLabel lblLife = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).build();
 
 
-    private final PhaseIndicator phaseInidicator = new PhaseIndicator();
+    private final PhaseIndicator phaseIndicator = new PhaseIndicator();
 
     private final Border borderAvatarSimple = new LineBorder(new Color(0, 0, 0, 0), 1);
     private final Border borderAvatarHighlited = new LineBorder(Color.red, 2);
@@ -92,7 +92,6 @@ public class VField implements IVDoc<CField> {
         if (playerOnwer != null) { tab.setText(playerOnwer.getName() + " Field"); }
         else { tab.setText("NO PLAYER FOR " + docID.toString()); }
 
-        
         detailsPanel = new PlayerDetailsPanel(player);
 
         // TODO player is hard-coded into tabletop...should be dynamic
@@ -131,7 +130,7 @@ public class VField implements IVDoc<CField> {
         scroller.setOpaque(false);
         scroller.getViewport().setOpaque(false);
         scroller.setBorder(null);
-        
+
         updateDetails();
     }
 
@@ -146,7 +145,7 @@ public class VField implements IVDoc<CField> {
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
 
         pnl.add(avatarArea, "w 10%!, h 30%!");
-        pnl.add(phaseInidicator, "w 5%!, h 100%!, span 1 2");
+        pnl.add(phaseIndicator, "w 5%!, h 100%!, span 1 2");
         pnl.add(scroller, "w 85%!, h 100%!, span 1 2, wrap");
         pnl.add(detailsPanel, "w 10%!, h 69%!, gapleft 1px");
     }
@@ -234,11 +233,10 @@ public class VField implements IVDoc<CField> {
     }
 
     /**
-     * TODO: Write javadoc for this method.
-     * @return
+     * @return the phase indicator
      */
-    public PhaseIndicator getPhaseInidicator() {
-        return phaseInidicator;
+    public PhaseIndicator getPhaseIndicator() {
+        return phaseIndicator;
     }
 
     /**
@@ -251,14 +249,14 @@ public class VField implements IVDoc<CField> {
     public boolean isHighlited() {
         return CMatchUI.SINGLETON_INSTANCE.isHighlited(player);
     }
-    
+
     /**
      * TODO: Write javadoc for this method.
      * @param player2
      */
     public void updateDetails() {
         detailsPanel.updateDetails();
-        
+
         this.getLblLife().setText("" + player.getLife());
         if (player.getLife() > 5) {
             FSkin.get(this.getLblLife()).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
@@ -266,8 +264,8 @@ public class VField implements IVDoc<CField> {
         else {
             FSkin.get(this.getLblLife()).setForeground(Color.red);
         }
-        
-        boolean highlited = isHighlited(); 
+
+        boolean highlited = isHighlited();
         this.avatarArea.setBorder(highlited ? borderAvatarHighlited : borderAvatarSimple );
         this.avatarArea.setOpaque(highlited);
 

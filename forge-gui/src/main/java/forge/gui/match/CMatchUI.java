@@ -204,7 +204,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
     // (not just one).
     public void resetAllPhaseButtons() {
         for (final VField v : view.getFieldViews()) {
-            v.getPhaseInidicator().resetPhaseButtons();
+            v.getPhaseIndicator().resetPhaseButtons();
         }
     }
 
@@ -273,7 +273,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
      */
     public final boolean stopAtPhase(final Player turn, final PhaseType phase) {
         VField vf = getFieldViewFor(turn);
-        PhaseLabel label = vf.getPhaseInidicator().getLabelFor(phase);
+        PhaseLabel label = vf.getPhaseIndicator().getLabelFor(phase);
         return label == null || label.getEnabled();
     }
 

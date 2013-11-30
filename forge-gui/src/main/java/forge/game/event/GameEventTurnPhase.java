@@ -9,7 +9,6 @@ import forge.util.Lang;
  *
  */
 public class GameEventTurnPhase extends GameEvent {
-
     public final Player playerTurn;
     public final PhaseType phase;
     public final String phaseDesc;
@@ -20,12 +19,11 @@ public class GameEventTurnPhase extends GameEvent {
         phaseDesc = desc;
     }
 
-    
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
-    
+
     @Override
     public String toString() {
         String playerName = Lang.getPossesive(playerTurn.getName());
