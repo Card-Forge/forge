@@ -165,7 +165,12 @@ public class CostPutCounter extends CostPartWithList {
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         if (this.counter == CounterType.LOYALTY) {
-            sb.append("+").append(this.getAmount());
+            if (this.getAmount().equals("0")) {
+                sb.append("0");
+            }
+            else {
+                sb.append("+").append(this.getAmount());
+            }
         } else {
             sb.append("Put ");
             final Integer i = this.convertAmount();
