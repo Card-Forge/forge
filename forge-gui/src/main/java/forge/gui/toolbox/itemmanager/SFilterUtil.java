@@ -89,6 +89,11 @@ public class SFilterUtil {
             preFinal = Predicates.and(CardRulesPredicates.canCastWithAvailable(colors), Predicates.not(Presets.IS_MULTICOLOR));
         }
         if (!wantColorless) {
+            if (colors != 0 && colors != MagicColor.ALL_COLORS) {
+                //if colorless filtered out ensure phyrexian cards don't appear
+                //unless at least one of their colors is selected
+                preFinal = Predicates.and(preFinal, CardRulesPredicates.isColor(colors));
+            }
             preFinal = optimizedAnd(preFinal, Predicates.not(Presets.IS_COLORLESS));
         }
 
