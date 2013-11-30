@@ -126,17 +126,21 @@ public enum CCardCatalog implements ICDoc {
                             for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
                                 if (s.group == group && s != st) {
                                     FLabel lbl = VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(s);
-                                    if (lbl.getSelected()) {
-                                        if (s == StatTypes.MULTICOLOR) {
-                                            switch (st) {
-                                            case WHITE:
-                                            case BLUE:
-                                            case BLACK:
-                                            case RED:
-                                            case GREEN:
-                                                continue; //don't filter out multicolor cards after right-clicking a color filter
+                                    if (s == StatTypes.MULTICOLOR) {
+                                        switch (st) {
+                                        case WHITE:
+                                        case BLUE:
+                                        case BLACK:
+                                        case RED:
+                                        case GREEN:
+                                            //ensure multicolor filter selected after right-clicking a color filter
+                                            if (!lbl.getSelected()) {
+                                                lbl.setSelected(true);
                                             }
+                                            continue;
                                         }
+                                    }
+                                    if (lbl.getSelected()) {
                                         foundSelected = true;
                                         lbl.setSelected(false);
                                     }
