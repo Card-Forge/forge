@@ -155,13 +155,20 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
+    private boolean canCastFace(ICardFace face, byte colorCode) {
+        if (face.getManaCost().isNoCost()) {
+            //if card face has no cost, assume castable only by mana of its defined color
+            return face.getColor().isColorless() || face.getColor().hasAnyColor(colorCode);
+        }
+        return face.getManaCost().canBePaidWithAvaliable(colorCode);
+    }
+
     public boolean canCastWithAvailable(byte colorCode) {
         switch(splitType.getAggregationMethod()) {
         case COMBINE:
-            return mainPart.getManaCost().canBePaidWithAvaliable(colorCode) ||
-                   otherPart.getManaCost().canBePaidWithAvaliable(colorCode);
+            return canCastFace(mainPart, colorCode) || canCastFace(otherPart, colorCode);
         default:
-            return mainPart.getManaCost().canBePaidWithAvaliable(colorCode);
+            return canCastFace(mainPart, colorCode);
         }
     }
 
