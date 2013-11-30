@@ -35,21 +35,18 @@ import forge.gui.input.InputSynchronized;
  * @version $Id$
  */
 public class InputQueue extends Observable {
-
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<InputSynchronized>();
     private final InputLockUI inputLock;
-
 
     public InputQueue() {
         inputLock = new InputLockUI(this);
     }
 
-    
     public final void updateObservers() {
         this.setChanged();
         this.notifyObservers();
     }
-    
+
     public final Input getInput() {
         return inputStack.isEmpty() ? null : this.inputStack.peek();
     }
@@ -81,25 +78,24 @@ public class InputQueue extends Observable {
     public String printInputStack() {
         return inputStack.toString();
     }
-    
+
     public void setInputAndWait(InputSynchronized input) {
         this.inputStack.push(input);
         syncPoint();
         this.updateObservers();
-        
+
         input.awaitLatchRelease();
     }
-    
+
     void setInput(InputSynchronized input) {
         this.inputStack.push(input);
         syncPoint();
         this.updateObservers();
     }
-    
 
-    public void syncPoint() { 
+    public void syncPoint() {
         synchronized (inputLock) {
-            // acquire and release lock, so that actions from Game thread happen before EDT reads their results  
+            // acquire and release lock, so that actions from Game thread happen before EDT reads their results
         }
     }
 
@@ -113,5 +109,4 @@ public class InputQueue extends Observable {
                 break;
         }
     }
-    
 } // InputControl

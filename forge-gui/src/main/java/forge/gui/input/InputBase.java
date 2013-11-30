@@ -42,14 +42,14 @@ public abstract class InputBase implements java.io.Serializable, Input {
     private boolean finished = false;
     protected final boolean isFinished() { return finished; }
     protected final void setFinished() { finished = true; }
-    
+
     // showMessage() is always the first method called
     @Override
     public final void showMessageInitial() {
         finished = false;
         showMessage();
     }
-    
+
     protected abstract void showMessage();
 
     @Override
@@ -58,7 +58,6 @@ public abstract class InputBase implements java.io.Serializable, Input {
     @Override
     public void selectAbility(SpellAbility ab) { }
 
-    
     @Override
     public final void selectButtonCancel() {
         if( isFinished() ) return;
@@ -82,10 +81,9 @@ public abstract class InputBase implements java.io.Serializable, Input {
     protected void onOk() {}
 
     // to remove need for CMatchUI dependence
-    protected final void showMessage(String message) { 
+    protected final void showMessage(String message) {
         CMatchUI.SINGLETON_INSTANCE.showMessage(message);
     }
-
 
     protected final void flashIncorrectAction() {
         SDisplayUtil.remind(VPrompt.SINGLETON_INSTANCE);
@@ -94,7 +92,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     protected String getTurnPhasePriorityMessage(Game game) {
         final PhaseHandler ph = game.getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
-    
+
         sb.append("Priority: ").append(ph.getPriorityPlayer()).append("\n");
         sb.append("Turn ").append(ph.getTurn()).append(" (").append(ph.getPlayerTurn()).append(")\n");
         sb.append("Phase: ").append(ph.getPhase().nameForUi).append("\n");

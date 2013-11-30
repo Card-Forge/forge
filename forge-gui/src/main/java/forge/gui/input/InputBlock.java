@@ -46,7 +46,7 @@ public class InputBlock extends InputSyncronizedBase {
     private final Combat combat;
     private final Player defender;
     private final Player declarer;
-    
+
     /**
      * TODO: Write javadoc for Constructor.
      * @param priority
@@ -62,24 +62,24 @@ public class InputBlock extends InputSyncronizedBase {
     protected final void showMessage() {
         // could add "Reset Blockers" button
         ButtonUtil.enableOnlyOk();
-        
-        String prompt = declarer == defender ? "declare blockers." : "declare blockers for " + defender.getName(); 
-        
+
+        String prompt = declarer == defender ? "declare blockers." : "declare blockers for " + defender.getName();
+
         final StringBuilder sb = new StringBuilder(declarer.getName());
         sb.append(", ").append(prompt).append("\n\n");
 
         if (this.currentAttacker == null) {
             sb.append("To Block, click on your opponent's attacker first, then your blocker(s).\n");
             sb.append("To cancel a block right-click on your blocker");
-            showMessage(sb.toString());
-        } else {
+        }
+        else {
             final String attackerName = this.currentAttacker.isFaceDown() ? "Morph" : this.currentAttacker.getName();
             sb.append("Select a creature to block ").append(attackerName).append(" (");
             sb.append(this.currentAttacker.getUniqueNumber()).append("). ");
             sb.append("To cancel a block right-click on your blocker");
-            showMessage(sb.toString());
         }
 
+        showMessage(sb.toString());
         CMatchUI.SINGLETON_INSTANCE.showCombat(combat);
     }
 
@@ -100,14 +100,13 @@ public class InputBlock extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void onCardSelected(final Card card, final MouseEvent triggerEvent) {
-
         if (triggerEvent.getButton() == 3 && card.getController() == defender) {
             combat.removeFromCombat(card);
             CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventBlockerAssigned(card, (Card)null));
-        } else { 
+        } else {
             // is attacking?
             boolean isCorrectAction = false;
-    
+
             if (combat.isAttacking(card)) {
                 setCurrentAttacker(card);
                 isCorrectAction = true;
@@ -121,7 +120,7 @@ public class InputBlock extends InputSyncronizedBase {
                     }
                 }
             }
-    
+
             if (!isCorrectAction) {
                 flashIncorrectAction();
             }

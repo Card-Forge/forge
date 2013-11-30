@@ -86,7 +86,7 @@ public class PlayerControllerHuman extends PlayerController {
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
         return !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
     }
-    
+
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
@@ -145,7 +145,7 @@ public class PlayerControllerHuman extends PlayerController {
             });
         	menu.show(triggerEvent.getComponent(), triggerEvent.getX(), triggerEvent.getY());
         }
-        
+
     	return null; //delay ability until choice made
     }
 
@@ -197,7 +197,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         CardPool newSb = new CardPool();
         List<PaperCard> newMain = null;
-        
+
         if (sbSize == 0 && mainSize == deckMinSize) {
             // Skip sideboard loop if there are no sideboarding opportunities
             newMain = main.toFlatList();
@@ -223,7 +223,7 @@ public class PlayerControllerHuman extends PlayerController {
         for(PaperCard c : newMain) {
             newSb.remove(c);
         }
-    
+
         Deck res = (Deck)deck.copyTo(deck.getName());
         res.getMain().clear();
         res.getMain().add(newMain);
@@ -239,7 +239,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender, boolean overrideOrder) {
         // Attacker is a poor name here, since the creature assigning damage
-        // could just as easily be the blocker. 
+        // could just as easily be the blocker.
         Map<Card, Integer> map;
         if (defender != null && assignDamageAsIfNotBlocked(attacker)) {
             map = new HashMap<Card, Integer>();
@@ -254,7 +254,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
         return map;
     }
-    
+
     private final boolean assignDamageAsIfNotBlocked(Card attacker) {
         return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
                 || (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
@@ -270,8 +270,7 @@ public class PlayerControllerHuman extends PlayerController {
         for(int i = canChooseZero ? 0 : 1; i < 10; i++)
             options.add(Integer.valueOf(i));
         options.add("Other amount");
-        
-        
+
         Object chosen = GuiChoose.oneOrNone("Choose " + announce + " for " + ability.getSourceCard().getName(), options);
         if (chosen instanceof Integer || chosen == null)
             return (Integer)chosen;
@@ -280,27 +279,26 @@ public class PlayerControllerHuman extends PlayerController {
         while(true){
             String str = JOptionPane.showInputDialog(JOptionPane.getRootFrame(), message, ability.getSourceCard().getName(), JOptionPane.QUESTION_MESSAGE);
             if (null == str) return null; // that is 'cancel'
-            
+
             if(StringUtils.isNumeric(str)) {
                 Integer val = Integer.valueOf(str);
-                if (val == 0 && canChooseZero || val > 0) 
+                if (val == 0 && canChooseZero || val > 0)
                     return val;
             }
             GuiDialog.message("You have to enter a valid number", "Announce value");
         }
     }
 
-
     @Override
     public List<Card> choosePermanentsToSacrifice(SpellAbility sa, int min, int max, List<Card> valid, String message) {
         String outerMessage = "Select %d " + message + "(s) to sacrifice";
-        return choosePermanentsTo(min, max, valid, outerMessage); 
+        return choosePermanentsTo(min, max, valid, outerMessage);
     }
 
     @Override
     public List<Card> choosePermanentsToDestroy(SpellAbility sa, int min, int max, List<Card> valid, String message) {
         String outerMessage = "Select %d " + message + "(s) to be destroyed";
-        return choosePermanentsTo(min, max, valid, outerMessage); 
+        return choosePermanentsTo(min, max, valid, outerMessage);
     }
 
     private List<Card> choosePermanentsTo(int min, int max, List<Card> valid, String outerMessage) {
@@ -322,17 +320,17 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int amount,
             boolean isOptional) {
-        // If only one card to choose, use a dialog box. 
-        // Otherwise, use the order dialog to be able to grab multiple cards in one shot 
+        // If only one card to choose, use a dialog box.
+        // Otherwise, use the order dialog to be able to grab multiple cards in one shot
         if (amount == 1) {
             return Lists.newArrayList(chooseSingleCardForEffect(sourceList, sa, title, isOptional));
         }
-        
+
         GuiUtils.setPanelSelection(sa.getSourceCard());
         int remaining = isOptional ? -1 : Math.max(sourceList.size() - amount, 0);
         return GuiChoose.order(title, "Chosen Cards", remaining, sourceList, null, sa.getSourceCard());
     }
-    
+
     @Override
     public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional) {
         // Human is supposed to read the message and understand from it what to choose
@@ -340,7 +338,7 @@ public class PlayerControllerHuman extends PlayerController {
             return null;
         if ( !isOptional && options.size() == 1 )
             return Iterables.getFirst(options, null);
-        
+
         boolean canUseSelectCardsInput = true;
         for(Card c : options) {
             Zone cz = c.getZone();
@@ -359,7 +357,7 @@ public class PlayerControllerHuman extends PlayerController {
             Singletons.getControl().getInputQueue().setInputAndWait(input);
             return Iterables.getFirst(input.getSelected(), null);
         }
-        
+
         return isOptional ? GuiChoose.oneOrNone(title, options) : GuiChoose.one(title, options);
     }
 
@@ -422,7 +420,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner) {
         String message = string;
-        if ( StringUtils.isBlank(message) ) 
+        if ( StringUtils.isBlank(message) )
             message = String.format("Looking at %s's %s", owner, zone);
         GuiChoose.oneOrNone(message, cards);
     }
@@ -431,13 +429,13 @@ public class PlayerControllerHuman extends PlayerController {
     public ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN) {
         List<Card> toBottom = null;
         List<Card> toTop = null;
-        
+
         if (topN.size() == 1) {
             if (willPutCardOnTop(topN.get(0)))
                 toTop = topN;
-            else 
+            else
                 toBottom = topN;
-        } else { 
+        } else {
             toBottom = GuiChoose.order("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null, null);
             topN.removeAll(toBottom);
             if ( topN.isEmpty() )
@@ -633,7 +631,7 @@ public class PlayerControllerHuman extends PlayerController {
             return;
         } else
             autoPassCancel(); // probably cancel, since something has happened
-        
+
         SpellAbility chosenSa = null;
         do {
             if (chosenSa != null) {
@@ -709,8 +707,8 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     // end of not related candidates for move.
-    
-    
+
+
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#chooseBinary(java.lang.String, boolean)
      */
@@ -760,21 +758,21 @@ public class PlayerControllerHuman extends PlayerController {
     public Pair<SpellAbilityStackInstance, GameObject> chooseTarget(SpellAbility saSpellskite, List<Pair<SpellAbilityStackInstance, GameObject>> allTargets) {
         if( allTargets.size() < 2)
             return Iterables.getFirst(allTargets, null);
-        
+
         final Function<Pair<SpellAbilityStackInstance, GameObject>, String> fnToString = new Function<Pair<SpellAbilityStackInstance, GameObject>, String>() {
             @Override
             public String apply(Pair<SpellAbilityStackInstance, GameObject> targ) {
                 return targ.getRight().toString() + " - " + targ.getLeft().getStackDescription();
             }
         };
-        
+
         List<Pair<SpellAbilityStackInstance, GameObject>> chosen = GuiChoose.getChoices(saSpellskite.getSourceCard().getName(), 1, 1, allTargets, null, fnToString);
         return Iterables.getFirst(chosen, null);
     }
 
     @Override
     public void notifyOfValue(SpellAbility sa, GameObject realtedTarget, String value) {
-        String message = formatNotificationMessage(sa, realtedTarget, value); 
+        String message = formatNotificationMessage(sa, realtedTarget, value);
         GuiDialog.message(message, sa.getSourceCard().getName());
     }
 
@@ -790,8 +788,8 @@ public class PlayerControllerHuman extends PlayerController {
                 return String.format(random ? "Randomly chosen number for %s is %s" : "%s choses number: %s", mayBeYou(target, player), value);
             case FlipACoin:
                 String flipper = StringUtils.capitalize(mayBeYou(target, player));
-                return sa.hasParam("NoCall") 
-                        ? String.format("%s flip comes up %s", Lang.getPossesive(flipper), value) 
+                return sa.hasParam("NoCall")
+                        ? String.format("%s flip comes up %s", Lang.getPossesive(flipper), value)
                         : String.format("%s %s the flip", flipper, Lang.joinVerb(flipper, value));
             case Protection:
                 String choser = StringUtils.capitalize(mayBeYou(target, player));
@@ -800,7 +798,7 @@ public class PlayerControllerHuman extends PlayerController {
                 return String.format("%s effect's value for %s is %s", sa.getSourceCard().getName(), mayBeYou(target, player), value);
         }
     }
-    
+
     private String mayBeYou(GameObject what, Player you) {
         return what == you ? "you" : what.toString();
     }

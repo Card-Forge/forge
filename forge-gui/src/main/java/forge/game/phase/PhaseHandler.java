@@ -555,13 +555,16 @@ public class PhaseHandler implements java.io.Serializable {
             if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.attackerChoosesBlockers)) {
             	whoDeclaresBlockers = combat.getAttackingPlayer();
             }
-            if ( combat.isPlayerAttacked(p) ) {
-                whoDeclaresBlockers.getController().declareBlockers(p, combat);
-            } else
-                continue;
+            if (combat.isPlayerAttacked(p)) {
+                if (CombatUtil.canBlock(p, combat)) {
+                    whoDeclaresBlockers.getController().declareBlockers(p, combat);
+                }
+            }
+            else { continue; }
 
-            if ( game.isGameOver() ) // they just like to close window at any moment
+            if (game.isGameOver()) { // they just like to close window at any moment
                 return;
+            }
 
             // Handles removing cards like Mogg Flunkies from combat if group block
             // didn't occur

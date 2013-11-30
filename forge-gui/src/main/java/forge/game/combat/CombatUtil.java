@@ -76,7 +76,6 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canBlock(final Card blocker, final Combat combat) {
-
         if (blocker == null) {
             return false;
         }
@@ -131,7 +130,6 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canBlock(final Card blocker, final boolean nextTurn) {
-
         if (blocker == null) {
             return false;
         }
@@ -176,7 +174,6 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canBeBlocked(final Card attacker, final Combat combat, Player defendingPlayer) {
-
         if (attacker == null) {
             return true;
         }
@@ -206,7 +203,6 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canBeBlocked(final Card attacker, Player defender) {
-
         if (attacker == null) {
             return true;
         }
@@ -366,7 +362,6 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static String validateBlocks(final Combat combat, final Player defending) {
-
         final List<Card> defendersArmy = defending.getCreaturesInPlay();
         final List<Card> attackers = combat.getAttackers();
         final List<Card> blockers = CardLists.filterControlledBy(combat.getAllBlockers(), defending);
@@ -494,6 +489,35 @@ public class CombatUtil {
         return false;
     }
 
+    // can a player block with one or more creatures at the moment?
+    /**
+     * <p>
+     * canAttack.
+     * </p>
+     * 
+     * @param p
+     *            a {@link forge.game.player} object.
+     * @param combat
+     *            a {@link forge.game.combat.Combat} object.
+     * @return a boolean.
+     */
+    public static boolean canBlock(Player p, Combat combat) {
+        List<Card> creatures = p.getCreaturesInPlay();
+        if (creatures.isEmpty()) { return false; }
+
+        List<Card> attackers = combat.getAttackers();
+        if (attackers.isEmpty()) { return false; }
+
+        for (Card c : creatures) {
+            for (Card a : attackers) {
+                if (CombatUtil.canBlock(a, c, combat)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // can the blocker block the attacker given the combat state?
     /**
      * <p>
@@ -509,7 +533,6 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canBlock(final Card attacker, final Card blocker, final Combat combat) {
-
         if (attacker == null || blocker == null) {
             return false;
         }
@@ -613,7 +636,6 @@ public class CombatUtil {
         if (attacker.hasKeyword("Creatures with power less than CARDNAME's power can't block it.") && attacker.getNetAttack() > blocker.getNetAttack()) {
             return false;
         }
-
 
         if (attacker.hasStartOfKeyword("CantBeBlockedBy ")) {
             final int keywordPosition = attacker.getKeywordPosition("CantBeBlockedBy ");
