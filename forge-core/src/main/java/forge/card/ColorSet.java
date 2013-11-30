@@ -54,7 +54,6 @@ public final class ColorSet implements Comparable<ColorSet> {
     private ColorSet(final byte mask) {
         this.myColor = mask;
         this.orderWeight = this.getOrderWeight();
-
     }
 
     public static ColorSet fromMask(final int mask) {

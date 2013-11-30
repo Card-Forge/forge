@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import forge.card.ColorSet;
-
 /**
  * <p>
  * CardManaCost class.
@@ -257,13 +255,12 @@ public final class ManaCost implements Comparable<ManaCost> {
 
     /**
      * Can this mana cost be paid with unlimited mana of given color set.
-     * @param color
+     * @param colorCode
      * @return
      */
-
-    public boolean canBePaidWithAvaliable(ColorSet color) {
+    public boolean canBePaidWithAvaliable(byte colorCode) {
         for (ManaCostShard shard : shards) {
-            if (!shard.isPhyrexian() && !shard.canBePaidWithManaOfColor(color.getColor())) {
+            if (!shard.isPhyrexian() && !shard.canBePaidWithManaOfColor(colorCode)) {
                 return false;
             }
         }

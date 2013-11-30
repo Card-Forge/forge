@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.util.ComparableOp;
 import forge.util.PredicateString;
 
@@ -224,7 +225,7 @@ public final class CardRulesPredicates {
      * Checks for color.
      * 
      * @param thatColor
-     *            the that color
+     *            color to check
      * @return the predicate
      */
     public static Predicate<CardRules> hasColor(final byte thatColor) {
@@ -235,11 +236,22 @@ public final class CardRulesPredicates {
      * Checks if is color.
      * 
      * @param thatColor
-     *            the that color
+     *            color to check
      * @return the predicate
      */
     public static Predicate<CardRules> isColor(final byte thatColor) {
         return new LeafColor(LeafColor.ColorOperator.HasAnyOf, thatColor);
+    }
+
+    /**
+     * Checks if card can be cast with unlimited mana of given color set.
+     * 
+     * @param thatColor
+     *            color to check
+     * @return the predicate
+     */
+    public static Predicate<CardRules> canCastWithAvailable(final byte thatColor) {
+        return new LeafColor(LeafColor.ColorOperator.CanCast, thatColor);
     }
 
     /**
@@ -310,7 +322,7 @@ public final class CardRulesPredicates {
 
     private static class LeafColor implements Predicate<CardRules> {
         public enum ColorOperator {
-            CountColors, CountColorsGreaterOrEqual, HasAnyOf, HasAllOf, Equals
+            CountColors, CountColorsGreaterOrEqual, HasAnyOf, HasAllOf, Equals, CanCast
         }
 
         private final LeafColor.ColorOperator op;
@@ -337,6 +349,8 @@ public final class CardRulesPredicates {
                 return subject.getColor().hasAllColors(this.color);
             case HasAnyOf:
                 return subject.getColor().hasAnyColor(this.color);
+            case CanCast:
+                return subject.canCastWithAvailable(this.color);
             default:
                 return false;
             }
@@ -449,14 +463,14 @@ public final class CardRulesPredicates {
         /** The Constant isCreature. */
         public static final Predicate<CardRules> IS_CREATURE = CardRulesPredicates
                 .coreType(true, CardType.CoreType.Creature);
-        
+
         public static final Predicate<CardRules> IS_LEGENDARY = CardRulesPredicates
                 .superType(true, CardType.SuperType.Legendary);
 
         /** The Constant isArtifact. */
         public static final Predicate<CardRules> IS_ARTIFACT = CardRulesPredicates
                 .coreType(true, CardType.CoreType.Artifact);
-        
+
         /** The Constant isEquipment. */
         public static final Predicate<CardRules> IS_EQUIPMENT = CardRulesPredicates
                 .subType("Equipment");
@@ -518,7 +532,8 @@ public final class CardRulesPredicates {
 
         /** The Constant isMulticolor. */
         public static final Predicate<CardRules> IS_MULTICOLOR = CardRulesPredicates.hasAtLeastCntColors((byte) 2);
-        
+
+        /** The Constant isMonocolor. */
         public static final Predicate<CardRules> IS_MONOCOLOR = CardRulesPredicates.hasCntColors((byte) 1);
 
         /** The Constant colors. */

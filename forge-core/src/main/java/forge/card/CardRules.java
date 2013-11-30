@@ -38,7 +38,7 @@ public final class CardRules implements ICardCharacteristics {
     private ICardFace mainPart;
     private ICardFace otherPart;
     private CardAiHints aiHints;
-    private ColorSet colorIdentity = null;
+    private ColorSet colorIdentity;
 
     private CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
@@ -46,20 +46,19 @@ public final class CardRules implements ICardCharacteristics {
         otherPart = faces[1];
         aiHints = cah;
 
-        //Calculate Color Identity
+        //calculate color identity
         byte colMask = calculateColorIdentity(mainPart);
 
-        if(otherPart != null)
-        {
+        if (otherPart != null) {
             colMask |= calculateColorIdentity(otherPart);
         }
         colorIdentity = ColorSet.fromMask(colMask);
     }
-    
+
     void reinitializeFromRules(CardRules newRules) {
         if(!newRules.getName().equals(this.getName()))
             throw new UnsupportedOperationException("You cannot rename the card using the same CardRules object");
-        
+
         splitType = newRules.splitType;
         mainPart = newRules.mainPart;
         otherPart = newRules.otherPart;
@@ -136,7 +135,6 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
-
     @Override
     public ManaCost getManaCost() {
         switch(splitType.getAggregationMethod()) {
@@ -154,6 +152,16 @@ public final class CardRules implements ICardCharacteristics {
             return ColorSet.fromMask(mainPart.getColor().getColor() | otherPart.getColor().getColor());
         default:
             return mainPart.getColor();
+        }
+    }
+
+    public boolean canCastWithAvailable(byte colorCode) {
+        switch(splitType.getAggregationMethod()) {
+        case COMBINE:
+            return mainPart.getManaCost().canBePaidWithAvaliable(colorCode) ||
+                   otherPart.getManaCost().canBePaidWithAvaliable(colorCode);
+        default:
+            return mainPart.getManaCost().canBePaidWithAvaliable(colorCode);
         }
     }
 

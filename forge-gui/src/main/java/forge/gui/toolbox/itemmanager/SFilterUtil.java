@@ -11,6 +11,8 @@ import com.google.common.base.Predicates;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.card.CardRulesPredicates.Presets;
+import forge.card.MagicColor;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCardCatalog.RangeTypes;
 import forge.gui.toolbox.FLabel;
@@ -32,19 +34,30 @@ public class SFilterUtil {
      * Handles "multicolor" label, which is quite tricky.
      */
     public static Predicate<PaperCard> buildColorAndTypeFilter(Map<SItemManagerUtil.StatTypes, FLabel> statLabels) {
-        final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
-        final List<Predicate<CardRules>> notColors = new ArrayList<Predicate<CardRules>>();
         final List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
 
+        byte colors = 0;
+        boolean wantColorless = false;
         boolean wantMulticolor = false;
         for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
             switch (s) {
-            case WHITE: case BLUE: case BLACK: case RED: case GREEN:
-                if (statLabels.get(s).getSelected()) { colors.add(s.predicate); }
-                else { notColors.add(Predicates.not(s.predicate)); }
+            case WHITE:
+                if (statLabels.get(s).getSelected()) { colors |= MagicColor.WHITE; }
+                break;
+            case BLUE:
+                if (statLabels.get(s).getSelected()) { colors |= MagicColor.BLUE; }
+                break;
+            case BLACK:
+                if (statLabels.get(s).getSelected()) { colors |= MagicColor.BLACK; }
+                break;
+            case RED:
+                if (statLabels.get(s).getSelected()) { colors |= MagicColor.RED; }
+                break;
+            case GREEN:
+                if (statLabels.get(s).getSelected()) { colors |= MagicColor.GREEN; }
                 break;
             case COLORLESS:
-                if (statLabels.get(s).getSelected()) { colors.add(s.predicate); }
+                wantColorless = statLabels.get(s).getSelected();
                 break;
             case MULTICOLOR:
                 wantMulticolor = statLabels.get(s).getSelected();
@@ -60,35 +73,23 @@ public class SFilterUtil {
             }
         }
 
-        Predicate<CardRules> preFinal;
-        Predicate<CardRules> preColors = colors.size() == 6 ? null : Predicates.or(colors);
-
-        //ensure multicolor cards with filtered out colors don't show up
-        //unless card is hybrid playable using colors that aren't filtered out
+        Predicate<CardRules> preFinal = null;
         if (wantMulticolor) {
-            if (colors.isEmpty()) {
-                preFinal = CardRulesPredicates.Presets.IS_MULTICOLOR;
-            }
-            else if (!notColors.isEmpty()) {
-                if (notColors.size() == 5) {
-                    //if all 5 colors filtered, show only cards that either multicolor or colorless
-                    preFinal = Predicates.or(CardRulesPredicates.Presets.IS_MULTICOLOR, preColors);
-                }
-                else {
-                    preFinal = optimizedAnd(
-                            Predicates.or(
-                                    Predicates.not(CardRulesPredicates.Presets.IS_MULTICOLOR),
-                                    Predicates.and(notColors)
-                            ),
-                            preColors);
+            if (colors == 0) { //handle showing all multi-color cards if all 5 colors are filtered
+                preFinal = Presets.IS_MULTICOLOR;
+                if (wantColorless) {
+                    preFinal = Predicates.or(preFinal, Presets.IS_COLORLESS);
                 }
             }
-            else {
-                preFinal = preColors;
+            else if (colors != MagicColor.ALL_COLORS) {
+                preFinal = CardRulesPredicates.canCastWithAvailable(colors);
             }
         }
-        else {
-            preFinal = optimizedAnd(Predicates.not(CardRulesPredicates.Presets.IS_MULTICOLOR), preColors);
+        else if (colors != MagicColor.ALL_COLORS) {
+            preFinal = Predicates.and(CardRulesPredicates.canCastWithAvailable(colors), Predicates.not(Presets.IS_MULTICOLOR));
+        }
+        if (!wantColorless) {
+            preFinal = optimizedAnd(preFinal, Predicates.not(Presets.IS_COLORLESS));
         }
 
         if (preFinal == null && types.size() == 7) {

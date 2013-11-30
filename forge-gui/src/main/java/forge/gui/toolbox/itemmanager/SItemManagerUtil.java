@@ -78,7 +78,7 @@ public final class SItemManagerUtil  {
 
     private static final Predicate<Object> totalPred = Predicates.instanceOf(PaperCard.class);
     private static final Predicate<Object> packPred  = Predicates.not(totalPred);
-    
+
     /**
      * setStats.
      * 
@@ -117,7 +117,7 @@ public final class SItemManagerUtil  {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(true);
-        
+
         VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
         VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("");
 

@@ -264,7 +264,6 @@ public enum ManaCostShard implements Comparable<ManaCostShard> {
 
     public boolean isMonoColor() {
         return BinaryUtil.bitCount(this.shard & COLORS_SUPERPOSITION) == 1;
-
     }
 
     public boolean isOr2Colorless() {
