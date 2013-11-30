@@ -116,6 +116,7 @@ public enum CCardCatalog implements ICDoc {
             final int group = st.group;
             if (group > 0) {
                 statLabel.setRightClickCommand(new Command() {
+                    @SuppressWarnings("incomplete-switch")
                     @Override
                     public void run() {
                         if (!disableFiltering) {
@@ -126,6 +127,16 @@ public enum CCardCatalog implements ICDoc {
                                 if (s.group == group && s != st) {
                                     FLabel lbl = VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(s);
                                     if (lbl.getSelected()) {
+                                        if (s == StatTypes.MULTICOLOR) {
+                                            switch (st) {
+                                            case WHITE:
+                                            case BLUE:
+                                            case BLACK:
+                                            case RED:
+                                            case GREEN:
+                                                continue; //don't filter out multicolor cards after right-clicking a color filter
+                                            }
+                                        }
                                         foundSelected = true;
                                         lbl.setSelected(false);
                                     }
