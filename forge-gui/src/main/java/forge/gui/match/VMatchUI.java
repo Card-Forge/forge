@@ -17,7 +17,7 @@ import forge.gui.match.views.VCommand;
 import forge.gui.match.views.VDev;
 import forge.gui.match.views.VField;
 import forge.gui.match.views.VHand;
-import forge.gui.match.views.VMessage;
+import forge.gui.match.views.VPrompt;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
 
@@ -75,7 +75,7 @@ public enum VMatchUI implements IVTopLevelUI {
         // Dev mode enabled? May already by added, or put in message cell by default.
         else {
             if (VDev.SINGLETON_INSTANCE.getParentCell() == null) {
-                VMessage.SINGLETON_INSTANCE.getParentCell().addDoc(VDev.SINGLETON_INSTANCE);
+                VPrompt.SINGLETON_INSTANCE.getParentCell().addDoc(VDev.SINGLETON_INSTANCE);
             }
         }
 
@@ -161,12 +161,12 @@ public enum VMatchUI implements IVTopLevelUI {
 
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnCancel() {
-        return VMessage.SINGLETON_INSTANCE.getBtnCancel();
+        return VPrompt.SINGLETON_INSTANCE.getBtnCancel();
     }
 
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnOK() {
-        return VMessage.SINGLETON_INSTANCE.getBtnOK();
+        return VPrompt.SINGLETON_INSTANCE.getBtnOK();
     }
 
     /**

@@ -55,7 +55,7 @@ import forge.gui.framework.IVDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.controllers.CCombat;
 import forge.gui.match.controllers.CDetail;
-import forge.gui.match.controllers.CMessage;
+import forge.gui.match.controllers.CPrompt;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.match.menus.CMatchUIMenus;
 import forge.gui.match.views.VCommand;
@@ -210,7 +210,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     /** @param s0 &emsp; {@link java.lang.String} */
     public void showMessage(final String s0) {
-        CMessage.SINGLETON_INSTANCE.setMessage(s0);
+        CPrompt.SINGLETON_INSTANCE.setMessage(s0);
     }
 
     public VField getFieldViewFor(Player p) {

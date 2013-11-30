@@ -51,7 +51,7 @@ import forge.gui.framework.SLayoutIO;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.ViewWinLose;
-import forge.gui.match.controllers.CMessage;
+import forge.gui.match.controllers.CPrompt;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.views.VField;
 import forge.gui.match.views.VHand;
@@ -121,7 +121,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 SDisplayUtil.showTab(nextField);
                 
                 turnUpdPlanned.set(false);
-                CMessage.SINGLETON_INSTANCE.updateText(game);
+                CPrompt.SINGLETON_INSTANCE.updateText(game);
             }
         });
         return null;

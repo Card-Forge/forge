@@ -31,7 +31,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.gui.match.controllers.CMessage;
+import forge.gui.match.controllers.CPrompt;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FHtmlViewer;
 import forge.gui.toolbox.FLabel;
@@ -45,7 +45,7 @@ import forge.properties.ForgePreferences.FPref;
  * 
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VMessage implements IVDoc<CMessage> {
+public enum VPrompt implements IVDoc<CPrompt> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -62,7 +62,7 @@ public enum VMessage implements IVDoc<CMessage> {
     private final JLabel lblGames;
 
     //========= Constructor
-    private VMessage() {
+    private VPrompt() {
         lblGames = new FLabel.Builder()
         .fontSize(12)
         .fontStyle(Font.PLAIN)
@@ -133,8 +133,8 @@ public enum VMessage implements IVDoc<CMessage> {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public CMessage getLayoutControl() {
-        return CMessage.SINGLETON_INSTANCE;
+    public CPrompt getLayoutControl() {
+        return CPrompt.SINGLETON_INSTANCE;
     }
 
     /* (non-Javadoc)

@@ -26,7 +26,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
-import forge.gui.match.views.VMessage;
+import forge.gui.match.views.VPrompt;
 
 /**
  * <p>
@@ -88,7 +88,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
 
 
     protected final void flashIncorrectAction() {
-        SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
+        SDisplayUtil.remind(VPrompt.SINGLETON_INSTANCE);
     }
 
     protected String getTurnPhasePriorityMessage(Game game) {

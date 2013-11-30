@@ -30,7 +30,7 @@ import javax.swing.JScrollPane;
 import forge.FThreads;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
-import forge.gui.match.controllers.CMessage;
+import forge.gui.match.controllers.CPrompt;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
 
@@ -501,7 +501,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     /** {@inheritDoc} */
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
+        CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
         if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
             return;
         }
@@ -511,7 +511,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     /** {@inheritDoc} */
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
+        CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
         super.mouseRightClicked(panel, evt);
     }
 

@@ -36,7 +36,7 @@ import forge.gui.match.views.VDetail;
 import forge.gui.match.views.VDev;
 import forge.gui.match.views.VDock;
 import forge.gui.match.views.VLog;
-import forge.gui.match.views.VMessage;
+import forge.gui.match.views.VPrompt;
 import forge.gui.match.views.VPicture;
 import forge.gui.match.views.VPlayers;
 import forge.gui.match.views.VStack;
@@ -88,7 +88,7 @@ public enum EDocID { /** */
     HOME_PLANECHASE (VSubmenuPlanechase.SINGLETON_INSTANCE), /** */
     HOME_RELEASE_NOTES (VSubmenuReleaseNotes.SINGLETON_INSTANCE),
 
-    REPORT_MESSAGE (VMessage.SINGLETON_INSTANCE), /** */
+    REPORT_MESSAGE (VPrompt.SINGLETON_INSTANCE), /** */
     REPORT_STACK (VStack.SINGLETON_INSTANCE), /** */
     REPORT_COMBAT (VCombat.SINGLETON_INSTANCE), /** */
     REPORT_LOG (VLog.SINGLETON_INSTANCE), /** */

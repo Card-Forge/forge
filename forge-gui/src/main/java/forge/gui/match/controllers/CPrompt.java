@@ -33,21 +33,21 @@ import forge.game.Match;
 import forge.gui.InputProxy;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.views.VMessage;
+import forge.gui.match.views.VPrompt;
 import forge.gui.toolbox.FSkin;
 
 /**
- * Controls the message panel in the match UI.
+ * Controls the prompt panel in the match UI.
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CMessage implements ICDoc {
+public enum CPrompt implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
     private InputProxy inputControl = new InputProxy();
     private Component lastFocusedButton = null;
-    private VMessage view = VMessage.SINGLETON_INSTANCE;
+    private VPrompt view = VPrompt.SINGLETON_INSTANCE;
 
     private final ActionListener actCancel = new ActionListener() {
         @Override

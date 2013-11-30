@@ -15397,9 +15397,9 @@ forge-gui/src/main/java/forge/gui/match/controllers/CDock.java -text
 forge-gui/src/main/java/forge/gui/match/controllers/CField.java -text
 forge-gui/src/main/java/forge/gui/match/controllers/CHand.java -text
 forge-gui/src/main/java/forge/gui/match/controllers/CLog.java -text
-forge-gui/src/main/java/forge/gui/match/controllers/CMessage.java -text
 forge-gui/src/main/java/forge/gui/match/controllers/CPicture.java -text
 forge-gui/src/main/java/forge/gui/match/controllers/CPlayers.java -text
+forge-gui/src/main/java/forge/gui/match/controllers/CPrompt.java -text
 forge-gui/src/main/java/forge/gui/match/controllers/CStack.java -text
 forge-gui/src/main/java/forge/gui/match/controllers/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/match/menus/CMatchUIMenus.java -text
@@ -15416,9 +15416,9 @@ forge-gui/src/main/java/forge/gui/match/views/VDock.java -text
 forge-gui/src/main/java/forge/gui/match/views/VField.java -text
 forge-gui/src/main/java/forge/gui/match/views/VHand.java -text
 forge-gui/src/main/java/forge/gui/match/views/VLog.java -text
-forge-gui/src/main/java/forge/gui/match/views/VMessage.java -text
 forge-gui/src/main/java/forge/gui/match/views/VPicture.java -text
 forge-gui/src/main/java/forge/gui/match/views/VPlayers.java -text
+forge-gui/src/main/java/forge/gui/match/views/VPrompt.java -text
 forge-gui/src/main/java/forge/gui/match/views/VStack.java -text
 forge-gui/src/main/java/forge/gui/match/views/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/menus/ForgeMenu.java -text

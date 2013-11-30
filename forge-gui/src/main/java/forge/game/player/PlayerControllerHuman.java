@@ -61,7 +61,7 @@ import forge.gui.input.InputPlayOrDraw;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.match.CMatchUI;
-import forge.gui.match.controllers.CMessage;
+import forge.gui.match.controllers.CPrompt;
 import forge.gui.toolbox.FSkin;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
@@ -127,7 +127,7 @@ public class PlayerControllerHuman extends PlayerController {
                     new Runnable() {
         				@Override
         				public void run() {
-        			        CMessage.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
+        			        CPrompt.SINGLETON_INSTANCE.getInputControl().selectAbility(ab);
         				}
         			}, enabled);
         	if (shortcut > 0) {

@@ -55,7 +55,7 @@ public class CField implements ICDoc {
 
     private final MouseListener madAvatar = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            CMessage.SINGLETON_INSTANCE.getInputControl().selectPlayer(player); } };
+            CPrompt.SINGLETON_INSTANCE.getInputControl().selectPlayer(player); } };
 
     /**
      * Controls Swing components of a player's field instance.

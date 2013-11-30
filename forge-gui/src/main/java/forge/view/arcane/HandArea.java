@@ -22,7 +22,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
 
 import forge.gui.match.CMatchUI;
-import forge.gui.match.controllers.CMessage;
+import forge.gui.match.controllers.CPrompt;
 
 
 /**
@@ -63,14 +63,14 @@ public class HandArea extends CardArea {
     /** {@inheritDoc} */
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
-        CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
+        CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
         super.mouseLeftClicked(panel, evt);
     }
     
     /** {@inheritDoc} */
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
+        CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
         super.mouseRightClicked(panel, evt);
     }
 }
