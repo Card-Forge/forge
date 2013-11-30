@@ -203,7 +203,7 @@ public class InputAttack extends InputSyncronizedBase {
                 CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card)ge, ge == def);
             }
             else if (ge instanceof Player) {
-                CMatchUI.SINGLETON_INSTANCE.setHighLited((Player) ge, ge == def);
+                CMatchUI.SINGLETON_INSTANCE.setHighlighted((Player) ge, ge == def);
             }
         }
 

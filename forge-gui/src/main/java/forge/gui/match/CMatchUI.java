@@ -319,28 +319,28 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         CCombat.SINGLETON_INSTANCE.update();
     } // showBlockers()
 
-    Set<Player> highlitedPlayers = new HashSet<Player>();
-    public void setHighLited(Player ge, boolean b) {
-        if (b) highlitedPlayers.add(ge);
-        else highlitedPlayers.remove(ge);
+    Set<Player> highlightedPlayers = new HashSet<Player>();
+    public void setHighlighted(Player ge, boolean b) {
+        if (b) highlightedPlayers.add(ge);
+        else highlightedPlayers.remove(ge);
     }
 
-    public boolean isHighlited(Player player) {
-        return highlitedPlayers.contains(player);
+    public boolean isHighlighted(Player player) {
+        return highlightedPlayers.contains(player);
     }
 
-    Set<Card> highlitedCards = new HashSet<Card>();
+    Set<Card> highlightedCards = new HashSet<Card>();
     // used to highlight cards in UI
     public void setUsedToPay(Card card, boolean value) {
         FThreads.assertExecutedByEdt(true);
 
-        boolean hasChanged = value ? highlitedCards.add(card) : highlitedCards.remove(card);
+        boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
         if ( hasChanged ) // since we are in UI thread, may redraw the card right now
             updateSingleCard(card);
     }
 
     public boolean isUsedToPay(Card card) {
-        return highlitedCards.contains(card);
+        return highlightedCards.contains(card);
     }
 
     public void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate) {

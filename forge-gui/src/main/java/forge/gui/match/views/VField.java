@@ -74,7 +74,7 @@ public class VField implements IVDoc<CField> {
     private final PhaseIndicator phaseIndicator = new PhaseIndicator();
 
     private final Border borderAvatarSimple = new LineBorder(new Color(0, 0, 0, 0), 1);
-    private final Border borderAvatarHighlited = new LineBorder(Color.red, 2);
+    private final Border borderAvatarHighlighted = new LineBorder(Color.red, 2);
 
 
     //========= Constructor
@@ -111,14 +111,14 @@ public class VField implements IVDoc<CField> {
             @Override
             public void mouseEntered(final MouseEvent e) {
                 avatarArea.setOpaque(true);
-                if (!isHighlited())
+                if (!isHighlighted())
                     FSkin.get(avatarArea).setLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             }
 
             @Override
             public void mouseExited(final MouseEvent e) {
                 avatarArea.setOpaque(false);
-                if (!isHighlited())
+                if (!isHighlighted())
                     avatarArea.setBorder(borderAvatarSimple);
             }
         });
@@ -246,8 +246,8 @@ public class VField implements IVDoc<CField> {
         return detailsPanel;
     }
 
-    public boolean isHighlited() {
-        return CMatchUI.SINGLETON_INSTANCE.isHighlited(player);
+    public boolean isHighlighted() {
+        return CMatchUI.SINGLETON_INSTANCE.isHighlighted(player);
     }
 
     /**
@@ -265,9 +265,9 @@ public class VField implements IVDoc<CField> {
             FSkin.get(this.getLblLife()).setForeground(Color.red);
         }
 
-        boolean highlited = isHighlited();
-        this.avatarArea.setBorder(highlited ? borderAvatarHighlited : borderAvatarSimple );
-        this.avatarArea.setOpaque(highlited);
+        boolean highlighted = isHighlighted();
+        this.avatarArea.setBorder(highlighted ? borderAvatarHighlighted : borderAvatarSimple );
+        this.avatarArea.setOpaque(highlighted);
 
     }
 }
