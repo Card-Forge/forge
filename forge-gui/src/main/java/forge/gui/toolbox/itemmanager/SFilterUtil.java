@@ -35,54 +35,76 @@ public class SFilterUtil {
         final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
         final List<Predicate<CardRules>> notColors = new ArrayList<Predicate<CardRules>>();
         final List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
-        
+
         boolean wantMulticolor = false;
-        Predicate<CardRules> preExceptMulti = null;
         for (SItemManagerUtil.StatTypes s : SItemManagerUtil.StatTypes.values()) {
             switch (s) {
-            case WHITE: case BLUE: case BLACK: case RED: case GREEN: case COLORLESS:
+            case WHITE: case BLUE: case BLACK: case RED: case GREEN:
                 if (statLabels.get(s).getSelected()) { colors.add(s.predicate); }
                 else { notColors.add(Predicates.not(s.predicate)); }
                 break;
+            case COLORLESS:
+                if (statLabels.get(s).getSelected()) { colors.add(s.predicate); }
+                break;
             case MULTICOLOR:
                 wantMulticolor = statLabels.get(s).getSelected();
-                preExceptMulti = wantMulticolor ? null : Predicates.not(s.predicate);
                 break;
             case LAND: case ARTIFACT: case CREATURE: case ENCHANTMENT: case PLANESWALKER: case INSTANT: case SORCERY:
                 if (statLabels.get(s).getSelected()) { types.add(s.predicate); }
                 break;
-                
             case TOTAL: case PACK:
                 // ignore
                 break;
-                
             default:
                 throw new RuntimeException("unhandled enum value: " + s);
             }
         }
-        
-        if (wantMulticolor && !colors.isEmpty() && !notColors.isEmpty()) {
-        	preExceptMulti = Predicates.and(notColors); //ensure multicolor cards with filtered colors don't show up
+
+        Predicate<CardRules> preFinal;
+        Predicate<CardRules> preColors = colors.size() == 6 ? null : Predicates.or(colors);
+
+        //ensure multicolor cards with filtered out colors don't show up
+        //unless card is hybrid playable using colors that aren't filtered out
+        if (wantMulticolor) {
+            if (colors.isEmpty()) {
+                preFinal = CardRulesPredicates.Presets.IS_MULTICOLOR;
+            }
+            else if (!notColors.isEmpty()) {
+                if (notColors.size() == 5) {
+                    //if all 5 colors filtered, show only cards that either multicolor or colorless
+                    preFinal = Predicates.or(CardRulesPredicates.Presets.IS_MULTICOLOR, preColors);
+                }
+                else {
+                    preFinal = optimizedAnd(
+                            Predicates.or(
+                                    Predicates.not(CardRulesPredicates.Presets.IS_MULTICOLOR),
+                                    Predicates.and(notColors)
+                            ),
+                            preColors);
+                }
+            }
+            else {
+                preFinal = preColors;
+            }
+        }
+        else {
+            preFinal = optimizedAnd(Predicates.not(CardRulesPredicates.Presets.IS_MULTICOLOR), preColors);
         }
 
-        Predicate<CardRules> preColors = colors.size() == 6 ? null : Predicates.or(colors);
-        Predicate<CardRules> preFinal = colors.isEmpty() && wantMulticolor ?
-                CardRulesPredicates.Presets.IS_MULTICOLOR : optimizedAnd(preExceptMulti, preColors);
-
-        if (null == preFinal && 7 == types.size()) {
+        if (preFinal == null && types.size() == 7) {
             return Predicates.alwaysTrue();
         }
 
         Predicate<PaperCard> typesFinal = Predicates.compose(Predicates.or(types), PaperCard.FN_GET_RULES);
-        if (null == preFinal) {
+        if (preFinal == null) {
             return typesFinal;
         }
-        
+
         Predicate<PaperCard> colorFinal = Predicates.compose(preFinal, PaperCard.FN_GET_RULES);
-        if (7 == types.size()) {
+        if (types.size() == 7) {
             return colorFinal;
         }
-        
+
         return Predicates.and(colorFinal, typesFinal);
     }
 
@@ -93,7 +115,7 @@ public class SFilterUtil {
         if (text.trim().isEmpty()) {
             return Predicates.alwaysTrue();
         }
-        
+
         String[] splitText = text.replaceAll(",", "").replaceAll("  ", " ").split(" ");
 
         List<Predicate<CardRules>> terms = new ArrayList<Predicate<CardRules>>();
@@ -107,7 +129,7 @@ public class SFilterUtil {
             terms.add(Predicates.or(subands));
         }
         Predicate<CardRules> textFilter = invert ? Predicates.not(Predicates.or(terms)) : Predicates.and(terms);
- 
+
         return Predicates.compose(textFilter, PaperCard.FN_GET_RULES);
     }
 
@@ -121,8 +143,7 @@ public class SFilterUtil {
         return optimizedAnd(pMin, pMax);
     }
 
-    private static <T> Predicate<T> optimizedAnd(Predicate<T> p1, Predicate<T> p2)
-    {
+    private static <T> Predicate<T> optimizedAnd(Predicate<T> p1, Predicate<T> p2) {
         return p1 == null ? p2 : (p2 == null ? p1 : Predicates.and(p1, p2));
     }
 
