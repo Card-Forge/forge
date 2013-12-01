@@ -1,0 +1,14 @@
+Name:Call to Arms
+ManaCost:1 W
+Types:Enchantment
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | AILogic$ MostProminentHumanControls | Defined$ You | SubAbility$ ChooseOpp | SpellDescription$ As CARDNAME enters the battlefield, choose a color and an opponent.
+SVar:ChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse
+SVar:X:Count$Valid Permanent.nonToken+ChosenColor+ChosenCtrl
+SVar:Y:Count$SecondMostProminentColor Permanent.nonToken+ChosenCtrl
+S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GTY | Description$ White creatures get +1/+1 as long as the chosen color is the most common color among nontoken permanents the chosen player controls but isn't tied for most common.
+T:Mode$ Always | CheckSVar$ X | SVarCompare$ LEY | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When the chosen color isn't the most common color among nontoken permanents the chosen player controls or is tied for most common, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_arms.jpg
+Oracle:As Call to Arms enters the battlefield, choose a color and an opponent.\nWhite creatures get +1/+1 as long as the chosen color is the most common color among nontoken permanents the chosen player controls but isn't tied for most common.\nWhen the chosen color isn't the most common color among nontoken permanents the chosen player controls or is tied for most common, sacrifice Call to Arms.

@@ -1117,6 +1117,13 @@ public class CardFactoryUtil {
             return doXMath(getMostProminentCreatureTypeSize(list), m, c);
         }
 
+        if (l[0].startsWith("SecondMostProminentColor")) {
+            String restriction = l[0].split(" ")[1];
+            List<Card> list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c);
+            int[] colorSize = SortColorsFromList(list);
+            return doXMath(colorSize[colorSize.length - 2], m, c);
+        }
+
         if (l[0].startsWith("RolledThisTurn")) {
             return game.getPhaseHandler().getPlanarDiceRolledthisTurn();
         }
@@ -1820,6 +1827,33 @@ public class CardFactoryUtil {
             nMax = map[i];
         }
         return mask;
+    }
+
+    /**
+     * <p>
+     * SortColorsFromList.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @return a List.
+     */
+    public static int[] SortColorsFromList(final List<Card> list) {
+        int cntColors = MagicColor.WUBRG.length;
+        final int[] map = new int[cntColors];
+        for(int i = 0; i < cntColors; i++) {
+            map[i] = 0;
+        }
+
+        for (final Card crd : list) {
+            ColorSet color = CardUtil.getColors(crd);
+            for(int i = 0; i < cntColors; i++) {
+                if( color.hasAnyColor(MagicColor.WUBRG[i]))
+                    map[i]++;
+            }
+        } // for
+        Arrays.sort(map);
+        return map;
     }
 
     /**

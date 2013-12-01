@@ -1656,6 +1656,7 @@ forge-gui/res/cardsfolder/c/call_of_the_herd.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/call_of_the_nightwing.txt -text
 forge-gui/res/cardsfolder/c/call_of_the_wild.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/call_the_skybreaker.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/call_to_arms.txt -text
 forge-gui/res/cardsfolder/c/call_to_glory.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/call_to_heel.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/call_to_mind.txt svneol=native#text/plain
