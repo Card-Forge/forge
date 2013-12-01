@@ -20,27 +20,27 @@ public class InputPayManaX extends InputPayMana {
     private final boolean xCanBe0;
     private boolean canceled = false;
 
-
-    public InputPayManaX(final SpellAbility sa0, final int amountX, final boolean xCanBe0)
-    {
+    public InputPayManaX(final SpellAbility sa0, final int amountX, final boolean xCanBe0) {
         super(sa0);
         xPaid = 0;
-        if (saPaidFor.hasParam("XColor") )
-        {
+        if (saPaidFor.hasParam("XColor")) {
             String xColor = saPaidFor.getParam("XColor");
-            if( amountX == 1 )
+            if (amountX == 1) {
                 manaCostStr = xColor;
+            }
             else {
                 List<String> list = new ArrayList<String>(amountX);
-                for(int i = 0; i < amountX; i++)
+                for (int i = 0; i < amountX; i++) {
                     list.add(xColor);
+                }
                 manaCostStr = StringUtils.join(list, ' ');
             }
-        } else {
+        }
+        else {
             manaCostStr = Integer.toString(amountX);
         }
         manaCost = new ManaCostBeingPaid(manaCostStr);
-        
+
         this.xCanBe0 = xCanBe0;
         colorsPaid = saPaidFor.getSourceCard().getColorsPaid(); // for effects like sunburst
     }
@@ -54,16 +54,16 @@ public class InputPayManaX extends InputPayMana {
         // return !( xPaid == 0 && !costMana.canXbe0()) && !(this.colorX.equals("") && !this.manaCost.toString().equals(strX));
         return !canceled && (xPaid > 0 || xCanBe0);
     }
-    
+
     @Override
     public void showMessage() {
-        if( isFinished() ) return;
-        
+        if (isFinished()) { return; }
+
         updateMessage();
     }
 
     @Override
-    protected void updateMessage() { 
+    protected void updateMessage() {
         StringBuilder msg = new StringBuilder("Pay X Mana Cost for ");
         msg.append(saPaidFor.getSourceCard().getName()).append("\n").append(this.xPaid);
         msg.append(" Paid so far.");
@@ -74,7 +74,8 @@ public class InputPayManaX extends InputPayMana {
         // or X is 0, and x can't be 0
         if (!isPaid()) {
             ButtonUtil.enableOnlyCancel();
-        } else {
+        }
+        else {
             ButtonUtil.enableAllFocusOk();
         }
 
@@ -86,7 +87,6 @@ public class InputPayManaX extends InputPayMana {
         // don't allow here the cards that produce only wrong colors
         activateManaAbility(card, this.manaCost);
     }
-    
 
     @Override
     protected void onManaAbilityPaid() {
@@ -114,7 +114,6 @@ public class InputPayManaX extends InputPayMana {
     public void selectManaPool(byte colorCode) {
         useManaFromPool(colorCode, this.manaCost);
     }
-
 
     @Override
     protected void done() {
