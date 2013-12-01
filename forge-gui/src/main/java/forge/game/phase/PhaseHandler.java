@@ -479,10 +479,14 @@ public class PhaseHandler implements java.io.Serializable {
 
     private Combat declareAttackersTurnBasedAction() {
         Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost() ? playerTurn : playerDeclaresAttackers;
-        whoDeclares.getController().declareAttackers(playerTurn, combat);
 
-        if ( game.isGameOver() ) // they just like to close window at any moment
+        if (CombatUtil.canAttack(playerTurn)) {
+            whoDeclares.getController().declareAttackers(playerTurn, combat);
+        }
+
+        if (game.isGameOver()) { // they just like to close window at any moment
             return null;
+        }
 
         combat.removeAbsentCombatants();
         CombatUtil.checkAttackOrBlockAlone(combat);
@@ -490,10 +494,12 @@ public class PhaseHandler implements java.io.Serializable {
         // TODO move propaganda to happen as the Attacker is Declared
         for (final Card c2 : combat.getAttackers()) {
             boolean canAttack = CombatUtil.checkPropagandaEffects(game, c2, combat);
-            if ( canAttack ) {
-                if (!c2.hasKeyword("Vigilance") && !c2.hasKeyword("Attacking doesn't cause CARDNAME to tap."))
+            if (canAttack) {
+                if (!c2.hasKeyword("Vigilance") && !c2.hasKeyword("Attacking doesn't cause CARDNAME to tap.")) {
                     c2.tap();
-            } else {
+                }
+            }
+            else {
                 combat.removeFromCombat(c2);
             }
         }
@@ -502,8 +508,9 @@ public class PhaseHandler implements java.io.Serializable {
 
         // Prepare and fire event 'attackers declared'
         Multimap<GameEntity, Card> attackersMap = ArrayListMultimap.create();
-        for(GameEntity ge : combat.getDefenders())
+        for(GameEntity ge : combat.getDefenders()) {
             attackersMap.putAll(ge, combat.getAttackersOf(ge));
+        }
         game.fireEvent(new GameEventAttackersDeclared(playerTurn, attackersMap));
 
         // This Exalted handler should be converted to script

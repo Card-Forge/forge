@@ -51,7 +51,6 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventMulligan;
 import forge.game.event.GameEventPlayerControl;
@@ -2962,9 +2961,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (hasKeyword("Skip all combat phases of this turn.")) {
             return true;
         }
-
-        //skip combat unless player has a creature that can attack
-        return !CombatUtil.canAttack(this);
+        return false;
     }
 
     /**
