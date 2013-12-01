@@ -29,25 +29,22 @@ import forge.view.ButtonUtil;
  *
  */
 public abstract class InputPayMana extends InputSyncronizedBase {
-
     private static final long serialVersionUID = -9133423708688480255L;
 
     protected int phyLifeToLose = 0;
-    
+
     protected final Player player;
     protected final Game game;
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
-    
+
     boolean bPaid = false;
-    
+
     protected InputPayMana(SpellAbility saToPayFor) {
         this.player = saToPayFor.getActivatingPlayer();
         this.game = player.getGame();
         this.saPaidFor = saToPayFor;
     }
-    
-    
 
     @Override
     protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
@@ -58,7 +55,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         // only tap card if the mana is needed
         activateManaAbility(card, this.manaCost);
     }
-    
+
     public void selectManaPool(byte colorCode) {
         useManaFromPool(colorCode);
     }
@@ -73,11 +70,12 @@ public abstract class InputPayMana extends InputSyncronizedBase {
      * 
      * @return ManaCost the amount of mana remaining to be paid after the mana is activated
      */
-    protected void useManaFromPool(byte colorCode) { useManaFromPool(colorCode, manaCost); } 
+    protected void useManaFromPool(byte colorCode) { useManaFromPool(colorCode, manaCost); }
     protected void useManaFromPool(byte colorCode, ManaCostBeingPaid manaCost) {
         // Convert Color to short String
-        player.getManaPool().payManaFromPool(saPaidFor, manaCost, ManaCostShard.parseNonGeneric(MagicColor.toShortString(colorCode))); 
-    
+        player.getManaPool().payManaFromPool(saPaidFor, manaCost,
+                ManaCostShard.parseNonGeneric(MagicColor.toShortString(colorCode)));
+
         onManaAbilityPlayed(null);
         showMessage();
     }
@@ -105,35 +103,37 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         byte colorNeeded = 0;
 
         for (final byte color : MagicColor.WUBRG) {
-            if (manaCost.isAnyPartPayableWith(color)) colorCanUse |= color;
-            if (manaCost.needsColor(color))           colorNeeded |= color;
+            if (manaCost.isAnyPartPayableWith(color)) { colorCanUse |= color; }
+            if (manaCost.needsColor(color))           { colorNeeded |= color; }
         }
         boolean canUseColorless = manaCost.isAnyPartPayableWith((byte)0);
 
         List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         // you can't remove unneeded abilities inside a for(am:abilities) loop :(
-    
+
         final String typeRes = manaCost.getSourceRestriction();
-        if( StringUtils.isNotBlank(typeRes) && !card.isType(typeRes))
+        if (StringUtils.isNotBlank(typeRes) && !card.isType(typeRes)) {
             return;
+        }
 
         boolean guessAbilityWithRequiredColors = true;
         for (SpellAbility ma : card.getManaAbility()) {
             ma.setActivatingPlayer(player);
 
             AbilityManaPart m = ma.getManaPartRecursive();
-            if (m == null || !ma.canPlay())                                     continue;
-            if (!canUseColorless && !abilityProducesManaColor(ma, m, colorCanUse)) continue;
-            if (ma.isAbility() && ma.getRestrictions().isInstantSpeed())        continue;
-            if (!m.meetsManaRestrictions(saPaidFor))                            continue;
+            if (m == null || !ma.canPlay())                                        { continue; }
+            if (!canUseColorless && !abilityProducesManaColor(ma, m, colorCanUse)) { continue; }
+            if (ma.isAbility() && ma.getRestrictions().isInstantSpeed())           { continue; }
+            if (!m.meetsManaRestrictions(saPaidFor))                               { continue; }
 
             abilities.add(ma);
 
             // skip express mana if the ability is not undoable or reusable
-            if (!ma.isUndoable() || !ma.getPayCosts().isRenewableResource() || ma.getSubAbility() != null)
+            if (!ma.isUndoable() || !ma.getPayCosts().isRenewableResource() || ma.getSubAbility() != null) {
                 guessAbilityWithRequiredColors = false;
+            }
         }
-        
+
         if (abilities.isEmpty()) {
             return;
         }
@@ -147,41 +147,40 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     colorCanUse |= col;
                 }
             }
-        }        
-    
+        }
 
-    
         // If the card has sunburst or any other ability that tracks mana spent,
         // skip express Mana choice
         if (saPaidFor.getSourceCard() != null && saPaidFor.getSourceCard().hasKeyword("Sunburst") && saPaidFor.isSpell()) {
             colorCanUse = MagicColor.ALL_COLORS;
             guessAbilityWithRequiredColors = false;
         }
-    
+
         boolean choice = true;
         if (guessAbilityWithRequiredColors) {
             // express Mana Choice
             final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
             for (SpellAbility sa : abilities) {
-                if (colorNeeded != 0 && abilityProducesManaColor(sa, sa.getManaPartRecursive(), colorNeeded))
+                if (colorNeeded != 0 && abilityProducesManaColor(sa, sa.getManaPartRecursive(), colorNeeded)) {
                     colorMatches.add(sa);
+                }
             }
-            
-    
+
             if (colorMatches.isEmpty()) {
                 // can only match colorless just grab the first and move on.
                 // This is wrong. Sometimes all abilities aren't created equal
                 choice = false;
-            } else if (colorMatches.size() < abilities.size()) {
+            }
+            else if (colorMatches.size() < abilities.size()) {
                 // leave behind only color matches
                 abilities = colorMatches;
             }
         }
-    
+
         final SpellAbility chosen = abilities.size() > 1 && choice ? GuiChoose.one("Choose mana ability", abilities) : abilities.get(0);
         ColorSet colors = ColorSet.fromMask(0 == colorNeeded ? colorCanUse : colorNeeded);
         chosen.getManaPartRecursive().setExpressChoice(colors);
-        
+
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getSourceCard() + " to pay mana");
         Runnable proc = new Runnable() {
             @Override
@@ -210,11 +209,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (neededColor == 0) {
             return true;
         }
-    
+
         if (m.isAnyMana()) {
             return true;
         }
-        
+
         // check for produce mana replacement effects - they mess this up, so just use the mana ability
         final Card source = am.getSourceCard();
         final Player activator = am.getActivatingPlayer();
@@ -225,7 +224,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         repParams.put("Affected", source);
         repParams.put("Player", activator);
         repParams.put("AbilityMana", am);
-        
+
         for (final Player p : g.getPlayers()) {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
@@ -238,7 +237,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 }
             }
         }
-        
+
         if (am.getApi() == ApiType.ManaReflected) {
             final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am);
             for (final String color : reflectableColors) {
@@ -246,7 +245,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     return true;
                 }
             }
-        } else {
+        }
+        else {
             String colorsProduced = m.isComboMana() ? m.getComboColors() : m.getOrigProduced();
             for (final String color : colorsProduced.split(" ")) {
                 if (0 != (neededColor & MagicColor.fromName(color))) {
@@ -257,37 +257,44 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         return false;
     }
 
-    public void onManaAbilityPlayed(final SpellAbility saPaymentSrc) { 
-        if ( saPaymentSrc != null) // null comes when they've paid from pool
+    public void onManaAbilityPlayed(final SpellAbility saPaymentSrc) {
+        if (saPaymentSrc != null) { // null comes when they've paid from pool
             player.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
+        }
 
         onManaAbilityPaid();
     }
-    
+
     protected boolean isAlreadyPaid() {
         if (manaCost.isPaid()) {
             bPaid = true;
         }
         return bPaid;
     }
-    
-    
+
     /** {@inheritDoc} */
     @Override
     public void showMessage() {
-        if ( isFinished() ) return;
+        if (isFinished()) { return; }
         ButtonUtil.enableOnlyCancel();
         onStateChanged();
     }
-    
-    protected void onStateChanged() { 
-        if( isAlreadyPaid() ) {
+
+    protected void onStateChanged() {
+        if(isAlreadyPaid()) {
             done();
             stop();
-        } else 
-            FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run(){ updateMessage(); }});
+        }
+        else {
+            FThreads.invokeInEdtNowOrLater(new Runnable() {
+                @Override
+                public void run() {
+                    updateMessage();
+                }
+            });
+        }
     }
-    
+
     protected void onManaAbilityPaid() {} // some inputs overload it
     protected abstract void done();
     protected abstract void updateMessage();
