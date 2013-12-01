@@ -43,10 +43,10 @@ public class InputPayManaSimple extends InputPayMana {
         if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
             this.manaCost = new ManaCostBeingPaid("0");
             game.getStack().add(this.saPaidFor);
-        } else {
+        }
+        else {
             this.manaCost = manaCostToPay;
         }
-        
     }
 
     protected void onManaAbilityPaid() {
@@ -58,7 +58,6 @@ public class InputPayManaSimple extends InputPayMana {
     /** {@inheritDoc} */
     @Override
     public final void selectPlayer(final Player selectedPlayer) {
-
         if (player == selectedPlayer) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
@@ -66,7 +65,6 @@ public class InputPayManaSimple extends InputPayMana {
 
             this.showMessage();
         }
-
     }
 
     /**
@@ -76,7 +74,6 @@ public class InputPayManaSimple extends InputPayMana {
      */
     @Override
     protected void done() {
-
         this.originalCard.setSunburstValue(this.manaCost.getSunburst());
 
         if (this.phyLifeToLose > 0) {
@@ -103,17 +100,17 @@ public class InputPayManaSimple extends InputPayMana {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        if( isFinished() ) return;
-        
-        ButtonUtil.enableOnlyCancel();
+        if (isFinished()) { return; }
 
+        ButtonUtil.enableOnlyCancel();
 
         if (this.manaCost.isPaid() && !new ManaCostBeingPaid(this.originalManaCost).isPaid()) {
             this.done();
             this.stop();
-        } else
+        }
+        else {
             updateMessage();
-
+        }
     }
 
     /* (non-Javadoc)
@@ -134,6 +131,5 @@ public class InputPayManaSimple extends InputPayMana {
 
         // has its own variant of checkIfPaid
         showMessage(msg.toString());
-        
     }
 }
