@@ -306,10 +306,10 @@ public final class GameActionUtil {
             if (sa.isSpell() && keyword.equals("You may cast CARDNAME any time you could cast an instant if you pay 2 more to cast it.")) {
                 final SpellAbility newSA = sa.copy();
                 newSA.setBasicSpell(false);
-                String cost = source.getManaCost().toString();
+                String cost = source.getManaCost().getCostString();
                 ManaCostBeingPaid newCost = new ManaCostBeingPaid(cost);
                 newCost.increaseColorlessMana(2);
-                cost = newCost.toString();
+                cost = newCost.getCostString();
                 final Cost actualcost = new Cost(cost, false);
                 newSA.setPayCosts(actualcost);
                 SpellAbilityRestriction sar = new SpellAbilityRestriction();

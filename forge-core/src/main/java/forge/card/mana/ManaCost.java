@@ -227,6 +227,13 @@ public final class ManaCost implements Comparable<ManaCost> {
     }
 
     /**
+     * @return unformatted cost string
+     */
+    public String getCostString() {
+        return ManaCostParser.stripFormatting(this.toString());
+    }
+
+    /**
      * TODO: Write javadoc for this method.
      * @return
      */

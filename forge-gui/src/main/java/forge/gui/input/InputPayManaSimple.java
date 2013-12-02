@@ -36,7 +36,7 @@ public class InputPayManaSimple extends InputPayMana {
 
     public InputPayManaSimple(final Game game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
         super(sa);
-        this.originalManaCost = manaCostToPay.toString(); // Change
+        this.originalManaCost = manaCostToPay.getCostString(); // Change
         this.originalCard = sa.getSourceCard();
 
         if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {

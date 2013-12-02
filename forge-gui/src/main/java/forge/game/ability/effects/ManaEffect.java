@@ -168,7 +168,7 @@ public class ManaEffect extends SpellAbilityEffect {
                         if (card.getEnchanting() != null ) {
                             Card enchanted = card.getEnchantingCard();
                             // Remove X and phyrexian mana
-                            choice = enchanted.getManaCost().toString().replaceAll("X|/P", "").trim();
+                            choice = enchanted.getManaCost().getCostString().replaceAll("X|/P", "").trim();
                         }
                     }
                     if (choice.equals("no cost") || choice.isEmpty()) {

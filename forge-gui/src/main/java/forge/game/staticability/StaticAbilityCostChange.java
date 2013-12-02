@@ -165,7 +165,7 @@ public class StaticAbilityCostChange {
 
         if (!params.containsKey("Color")) {
             manaCost.increaseColorlessMana(value);
-            if (manaCost.toString().equals("0") && params.containsKey("MinMana")) {
+            if (manaCost.toString().equals("{0}") && params.containsKey("MinMana")) {
                 manaCost.increaseColorlessMana(Integer.valueOf(params.get("MinMana")));
             }
         } else {
@@ -195,7 +195,7 @@ public class StaticAbilityCostChange {
      */
     public static void applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa, final ManaCostBeingPaid manaCost) {
         //Can't reduce zero cost
-        if (manaCost.toString().equals("0")) {
+        if (manaCost.toString().equals("{0}")) {
             return;
         }
         final HashMap<String, String> params = staticAbility.getMapParams();

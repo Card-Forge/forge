@@ -10,7 +10,7 @@ public class ManaCostParser implements IParserManaCost {
     private final String[] cost;
     private int nextToken;
     private int colorlessCost;
-    
+
     /**
      * Parse the given cost and output formatted cost string
      * 
@@ -20,6 +20,15 @@ public class ManaCostParser implements IParserManaCost {
     	final ManaCostParser parser = new ManaCostParser(cost);
     	final ManaCost manaCost = new ManaCost(parser);
     	return manaCost.toString();
+    }
+
+    /**
+     * Strip formatting from the given formatted cost string
+     * 
+     * @param formattedCost
+     */
+    public static String stripFormatting(final String formattedCost) {
+        return formattedCost.replaceAll("\\{([A-Z0-9/]+)\\}", "$1 ").trim();
     }
 
     /**

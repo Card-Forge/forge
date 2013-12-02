@@ -379,10 +379,10 @@ public class ManaPartTest {
         this.check(35, p24.isAnyPartPayableWith(MagicColor.GREEN));
 
         p24.payMana("B");
-        this.check(36, p24.toString().equals("2/B 2/B"));
+        this.check(36, p24.toString().equals("{2/B}{2/B}"));
 
         p24.payMana("B");
-        this.check(37, p24.toString().equals("2/B"));
+        this.check(37, p24.toString().equals("{2/B}"));
 
         p24.payMana("B");
         this.check(38, p24.isPaid());
@@ -390,18 +390,18 @@ public class ManaPartTest {
         final ManaCostBeingPaid p25 = new ManaCostBeingPaid("2/G");
 
         p25.payMana("1");
-        this.check(39, p25.toString().equals("1"));
+        this.check(39, p25.toString().equals("{1}"));
 
         p25.payMana("W");
         this.check(40, p25.isPaid());
 
-        final ManaCostBeingPaid p27 = new ManaCostBeingPaid("2/R 2/R");
+        final ManaCostBeingPaid p27 = new ManaCostBeingPaid("{2/R}{2/R}");
 
         p27.payMana("1");
-        this.check(41, p27.toString().equals("2/R 1"));
+        this.check(41, p27.toString().equals("{2/R}{1}"));
 
         p27.payMana("W");
-        this.check(42, p27.toString().equals("2/R"));
+        this.check(42, p27.toString().equals("{2/R}"));
 
         final ManaCostBeingPaid p26 = new ManaCostBeingPaid("2/W 2/W");
 

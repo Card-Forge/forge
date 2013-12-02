@@ -3,11 +3,11 @@ package forge.game.ability;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -82,7 +82,7 @@ public class AbilityUtils {
         final List<Card> cards = new ArrayList<Card>();
         final String defined = (def == null) ? "Self" : def; // default to Self
         final Game game = hostCard.getGame();
-        
+
         Card c = null;
 
         if (defined.equals("Self")) {
@@ -230,7 +230,7 @@ public class AbilityUtils {
             else if (defined.startsWith("Tapped")) {
                 list = sa.getRootAbility().getPaidList("Tapped");
             }
-            
+
             else if (defined.startsWith("Untapped")) {
                 list = sa.getRootAbility().getPaidList("Untapped");
             }
@@ -297,14 +297,14 @@ public class AbilityUtils {
     public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
-        final Game game = card.getController().getGame(); 
+        final Game game = card.getController().getGame();
 
         // Strip and save sign for calculations
         final boolean startsWithPlus = amount.charAt(0) == '+';
         final boolean startsWithMinus = amount.charAt(0) == '-';
         if (startsWithPlus || startsWithMinus) { amount = amount.substring(1); }
         int multiplier = startsWithMinus ? -1 : 1;
-        
+
         // return result soon for plain numbers
         if (StringUtils.isNumeric(amount)) { return Integer.parseInt(amount) * multiplier; }
 
@@ -321,8 +321,8 @@ public class AbilityUtils {
             }
             svarval = card.getSVar(amount);
         }
-        
-        if (StringUtils.isBlank(svarval)) { 
+
+        if (StringUtils.isBlank(svarval)) {
             // Some variables may be not chosen yet at this moment
             // So return 0 and don't issue an error.
             if (amount.equals("ChosenX")) {
@@ -442,7 +442,7 @@ public class AbilityUtils {
             }
 
             return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
-        } 
+        }
 
         if (calcX[0].matches("Enchanted")) {
             // Add whole Enchanted list to handlePaid
@@ -458,7 +458,7 @@ public class AbilityUtils {
 
         if (ability == null)
             return 0;
-        
+
         // Player attribute counting
         if (calcX[0].startsWith("TargetedPlayer")) {
             final ArrayList<Player> players = new ArrayList<Player>();
@@ -705,7 +705,7 @@ public class AbilityUtils {
         if (eqIndex >= 0) {
             char reference = valid.charAt(eqIndex + 2); // take whatever goes after EQ
             if( Character.isLetter(reference)) {
-                String varName = valid.substring(eqIndex + 2, eqIndex + 3); 
+                String varName = valid.substring(eqIndex + 2, eqIndex + 3);
                 valid = valid.replace("EQ" + varName, "EQ" + Integer.toString(calculateAmount(source, varName, sa)));
             }
         }
@@ -786,7 +786,7 @@ public class AbilityUtils {
                 if (!players.contains(p)) {
                     players.add(p);
                 }
-            } 
+            }
         } else if (defined.equals("Remembered")) {
             for (final Object rem : card.getRemembered()) {
                 if (rem instanceof Player) {
@@ -875,7 +875,7 @@ public class AbilityUtils {
         } else if (defined.startsWith("OppNonTriggered")) {
             players.addAll(sa.getActivatingPlayer().getOpponents());
             players.removeAll(getDefinedPlayers(card, defined.substring(6), sa));
-            
+
         } else if (defined.startsWith("Replaced")) {
             final SpellAbility root = sa.getRootAbility();
             Object o = null;
@@ -1014,7 +1014,7 @@ public class AbilityUtils {
         final ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
         final String defined = (def == null) ? "Self" : def; // default to Self
         final Game game = sa.getActivatingPlayer().getGame();
-        
+
         SpellAbility s = null;
 
         // TODO - this probably needs to be fleshed out a bit, but the basics
@@ -1130,20 +1130,20 @@ public class AbilityUtils {
         final boolean execSubsWhenPaid = "WhenPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
         final boolean execSubsWhenNotPaid = "WhenNotPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
         final boolean isSwitched = sa.hasParam("UnlessSwitched");
-        
+
         // The cost
         if (unlessCost.equals("CardManaCost")) {
-            unlessCost = source.getManaCost().toString();
+            unlessCost = source.getManaCost().getCostString();
         } else if (unlessCost.equals("RememberedCostMinus2")) {
             if (source.getRemembered().isEmpty() || !(source.getRemembered().get(0) instanceof Card)) {
                 sa.resolve();
                 resolveSubAbilities(sa, game);
             }
             Card rememberedCard = (Card) source.getRemembered().get(0);
-            unlessCost = rememberedCard.getManaCost().toString();
+            unlessCost = rememberedCard.getManaCost().getCostString();
             ManaCostBeingPaid newCost = new ManaCostBeingPaid(unlessCost.toString());
             newCost.decreaseColorlessMana(2);
-            unlessCost = newCost.toString();
+            unlessCost = newCost.getCostString();
         } else if( !StringUtils.isBlank(sa.getSVar(unlessCost)) || !StringUtils.isBlank(source.getSVar(unlessCost))) {
             // check for X costs (stored in SVars
             int xCost = calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa);
@@ -1151,11 +1151,10 @@ public class AbilityUtils {
             ManaCostBeingPaid toPay = new ManaCostBeingPaid("0");
             byte xColor = MagicColor.fromName(sa.hasParam("UnlessXColor") ? sa.getParam("UnlessXColor") : "1");
             toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
-            unlessCost = toPay.toString();
+            unlessCost = toPay.getCostString();
         }
 
         final Cost cost = new Cost(unlessCost, true);
-
 
         boolean paid = false;
         for (Player payer : payers) {
@@ -1172,7 +1171,7 @@ public class AbilityUtils {
             }
         }
 
-        if( paid == isSwitched ) { 
+        if( paid == isSwitched ) {
             sa.resolve();
         }
 
@@ -1262,7 +1261,7 @@ public class AbilityUtils {
                     return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), expr, c); // not Kicked
                 }
             }
-            
+
           //Count$SearchedLibrary.<DefinedPlayer>
             if(sq[0].contains("SearchedLibrary")) {
                 int sum = 0;
@@ -1270,7 +1269,7 @@ public class AbilityUtils {
                 {
                     sum += p.getLibrarySearched();
                 }
-                
+
                 return sum;
             }
 

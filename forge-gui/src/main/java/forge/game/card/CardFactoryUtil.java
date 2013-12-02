@@ -519,7 +519,7 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static int getNumberOfManaSymbolsByColor(final String colorAbb, final Card card) {
-        return countOccurrences(card.getManaCost().toString().trim(), colorAbb);
+        return countOccurrences(card.getManaCost().getCostString(), colorAbb);
     }
 
     /**

@@ -118,7 +118,7 @@ public class ManaCostBeingPaid {
     private final String sourceRestriction;
     private byte sunburstMap = 0;
     private int cntX = 0;
-    
+
     /**
      * Copy constructor
      * @param manaCostBeingPaid
@@ -492,6 +492,13 @@ public class ManaCostBeingPaid {
     @Override
     public final String toString() {
         return this.toString(true);
+    }
+
+    /**
+     * @return unformatted cost string
+     */
+    public String getCostString() {
+        return ManaCostParser.stripFormatting(this.toString());
     }
 
     /**
