@@ -719,7 +719,9 @@ public class CardFactory {
         card.removeIntrinsicKeyword(strMaxLevel);
 
         final String[] k = strLevelCost.split(":");
-        final String manacost = k[1];
+        StringBuilder sb = new StringBuilder();
+        sb.append('{').append(k[1].replace(" ", "}{")).append('}');
+        final String manacost = sb.toString();
 
         final String[] l = strMaxLevel.split(":");
         final int maxLevel = Integer.parseInt(l[1]);
