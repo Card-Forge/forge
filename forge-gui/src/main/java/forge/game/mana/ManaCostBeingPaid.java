@@ -50,7 +50,7 @@ import forge.util.maps.MapToAmount;
 
 /**
  * <p>
- * ManaCost class.
+ * ManaCostBeingPaid class.
  * </p>
  * 
  * @author Forge
@@ -62,45 +62,49 @@ public class ManaCostBeingPaid {
         private ManaCostShard nextShard = null;
         private int remainingShards = 0;
         private boolean hasSentX = false;
-        
-        public ManaCostBeingPaidIterator() { 
+
+        public ManaCostBeingPaidIterator() {
             mch = unpaidShards.keySet().iterator();
         }
-    
+
         @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }
-        
+
         @Override
         public ManaCostShard next() {
-            if (remainingShards == 0)
+            if (remainingShards == 0) {
                 throw new UnsupportedOperationException("All shards were depleted, call hasNext()");
+            }
             remainingShards--;
             return nextShard;
         }
-        
+
         @Override
         public boolean hasNext() {
-            if ( remainingShards > 0 ) return true;
-            if ( !hasSentX ) {
-                if ( nextShard != ManaCostShard.X && cntX > 0) {
+            if (remainingShards > 0) { return true; }
+            if (!hasSentX) {
+                if (nextShard != ManaCostShard.X && cntX > 0) {
                     nextShard = ManaCostShard.X;
                     remainingShards = cntX;
                     return true;
-                } else 
+                }
+                else {
                     hasSentX = true;
+                }
             }
-            if ( !mch.hasNext() ) return false;
-            
+            if (!mch.hasNext()) { return false; }
+
             nextShard = mch.next();
-            if ( nextShard == ManaCostShard.COLORLESS )
+            if (nextShard == ManaCostShard.COLORLESS) {
                 return this.hasNext(); // skip colorless
+            }
             remainingShards = unpaidShards.get(nextShard);
-            
+
             return true;
         }
-        
+
         @Override
         public int getTotalColorlessCost() {
             Integer c = unpaidShards.get(ManaCostShard.COLORLESS);
@@ -110,15 +114,25 @@ public class ManaCostBeingPaid {
 
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartColorless
-    private final MapToAmount<ManaCostShard> unpaidShards = new EnumMapToAmount<ManaCostShard>(ManaCostShard.class);
+    private final MapToAmount<ManaCostShard> unpaidShards;
+    private final String sourceRestriction;
     private byte sunburstMap = 0;
     private int cntX = 0;
-    private final String sourceRestriction;
     
+    /**
+     * Copy constructor
+     * @param manaCostBeingPaid
+     */
+    public ManaCostBeingPaid(ManaCostBeingPaid manaCostBeingPaid) {
+        unpaidShards = new EnumMapToAmount<ManaCostShard>(manaCostBeingPaid.unpaidShards);
+        sourceRestriction = manaCostBeingPaid.sourceRestriction;
+        sunburstMap = manaCostBeingPaid.sunburstMap;
+        cntX = manaCostBeingPaid.cntX;
+    }
+
     // manaCost can be like "0", "3", "G", "GW", "10", "3 GW", "10 GW"
     // or "split hybrid mana" like "2/G 2/G", "2/B 2/B 2/B"
     // "GW" can be paid with either G or W
-
     /**
      * <p>
      * Constructor for ManaCost.
@@ -134,9 +148,11 @@ public class ManaCostBeingPaid {
     public ManaCostBeingPaid(ManaCost manaCost) {
         this(manaCost, null);
     }
+
     public ManaCostBeingPaid(ManaCost manaCost, String srcRestriction) {
+        unpaidShards = new EnumMapToAmount<ManaCostShard>(ManaCostShard.class);
         sourceRestriction = srcRestriction;
-        if( manaCost == null ) return;
+        if (manaCost == null) { return; }
         for (ManaCostShard shard : manaCost.getShards()) {
             if (shard == ManaCostShard.X) {
                 cntX++;
@@ -163,7 +179,6 @@ public class ManaCostBeingPaid {
         return sunburstMap;
     }
 
-
     public final boolean containsPhyrexianMana() {
         for (ManaCostShard shard : unpaidShards.keySet()) {
             if (shard.isPhyrexian()) {
@@ -175,32 +190,36 @@ public class ManaCostBeingPaid {
 
     public final boolean payPhyrexian() {
         ManaCostShard phy = null;
-        for(ManaCostShard mcs : unpaidShards.keySet()) {
-            if( mcs.isPhyrexian() ) {
+        for (ManaCostShard mcs : unpaidShards.keySet()) {
+            if (mcs.isPhyrexian()) {
                 phy = mcs;
                 break;
             }
         }
 
-        if (phy == null )
+        if (phy == null) {
             return false;
+        }
 
         decreaseShard(phy, 1);
         return true;
     }
-    
 
     // takes a Short Color and returns true if it exists in the mana cost.
     // Easier for split costs
     public final boolean needsColor(final byte colorMask) {
         for (ManaCostShard shard : unpaidShards.keySet()) {
-            if (shard == ManaCostShard.COLORLESS)
+            if (shard == ManaCostShard.COLORLESS) {
                 continue;
+            }
             if (shard.isOr2Colorless()) {
-                if ((shard.getColorMask() & colorMask) != 0 )
+                if ((shard.getColorMask() & colorMask) != 0) {
                     return true;
-            } else if (shard.canBePaidWithManaOfColor(colorMask))
+                }
+            }
+            else if (shard.canBePaidWithManaOfColor(colorMask)) {
                 return true;
+            }
         }
         return false;
     }
@@ -224,10 +243,9 @@ public class ManaCostBeingPaid {
         return false;
     }
 
-
     public final boolean isPaid() {
         return unpaidShards.isEmpty();
-    } // isPaid()
+    }
 
     /**
      * <p>
@@ -242,18 +260,20 @@ public class ManaCostBeingPaid {
         List<String> unused = new ArrayList<String>(4);
         for (String manaPart : TextUtil.split(mana, ' ')) {
             if (StringUtils.isNumeric(manaPart)) {
-                for(int i = Integer.parseInt(manaPart); i > 0; i--) {
+                for (int i = Integer.parseInt(manaPart); i > 0; i--) {
                     boolean wasNeeded = this.payMana("1");
-                    if(!wasNeeded) {
+                    if (!wasNeeded) {
                         unused.add(Integer.toString(i));
                         break;
                     }
                 }
-            } else {
+            }
+            else {
                 String color = MagicColor.toShortString(manaPart);
                 boolean wasNeeded = this.payMana(color);
-                if(!wasNeeded)
+                if (!wasNeeded) {
                     unused.add(color);
+                }
             }
         }
         return unused.isEmpty() ? null : StringUtils.join(unused, ' ');
@@ -305,7 +325,8 @@ public class ManaCostBeingPaid {
         }
 
         Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
-            @Override public boolean apply(ManaCostShard ms) { 
+            @Override
+            public boolean apply(ManaCostShard ms) {
                 return ms.canBePaidWithManaOfColor(colorMask);
             }
         };
@@ -328,11 +349,12 @@ public class ManaCostBeingPaid {
         }
 
         Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
-            @Override public boolean apply(ManaCostShard ms) { 
+            @Override
+            public boolean apply(ManaCostShard ms) {
                 return canBePaidWith(ms, mana);
             }
         };
-        
+
         return tryPayMana(mana.getColorCode(), Iterables.filter(unpaidShards.keySet(), predCanBePaid));
     }
 
@@ -351,12 +373,12 @@ public class ManaCostBeingPaid {
         if (choice == null) {
             return false;
         }
-    
+
         decreaseShard(choice, 1);
-        if (choice.isOr2Colorless() && choice.getColorMask() != colorMask ) {
+        if (choice.isOr2Colorless() && choice.getColorMask() != colorMask) {
             this.increaseColorlessMana(1);
         }
-    
+
         this.sunburstMap |= colorMask;
         return true;
     }
@@ -386,7 +408,7 @@ public class ManaCostBeingPaid {
         if (shard.isSnow() && !mana.isSnow()) {
             return false;
         }
-        
+
         byte color = mana.getColorCode();
         return shard.canBePaidWithManaOfColor(color);
     }
@@ -395,7 +417,8 @@ public class ManaCostBeingPaid {
         for (ManaCostShard shard : extra.getShards()) {
             if (shard == ManaCostShard.X) {
                 cntX++;
-            } else {
+            }
+            else {
                 increaseShard(shard, 1);
             }
         }
@@ -406,9 +429,11 @@ public class ManaCostBeingPaid {
         for (ManaCostShard shard : subThisManaCost.getShards()) {
             if (shard == ManaCostShard.X) {
                 cntX--;
-            } else if (unpaidShards.containsKey(shard)) {
+            }
+            else if (unpaidShards.containsKey(shard)) {
                 decreaseShard(shard, 1);
-            } else {
+            }
+            else {
                 decreaseColorlessMana(1);
             }
         }
@@ -484,7 +509,7 @@ public class ManaCostBeingPaid {
         }
         return cmc;
     }
-    
+
     public ManaCost toManaCost() {
         return new ManaCost(new ManaCostBeingPaidIterator());
     }
@@ -493,20 +518,19 @@ public class ManaCostBeingPaid {
         return cntX;
     }
 
-    
-    public final List<ManaCostShard> getUnpaidShards() { 
+    public final List<ManaCostShard> getUnpaidShards() {
         List<ManaCostShard> result = new ArrayList<ManaCostShard>();
-        for(Entry<ManaCostShard, Integer> kv : unpaidShards.entrySet()) {
-           for(int i = kv.getValue().intValue(); i > 0; i--) {
+        for (Entry<ManaCostShard, Integer> kv : unpaidShards.entrySet()) {
+           for (int i = kv.getValue().intValue(); i > 0; i--) {
                result.add(kv.getKey());
            }
         }
-        for(int i = cntX; i > 0; i--) {
+        for (int i = cntX; i > 0; i--) {
             result.add(ManaCostShard.X);
         }
         return result;
     }
-    
+
     /**
      * <p>
      * removeColorlessMana.
@@ -523,7 +547,6 @@ public class ManaCostBeingPaid {
         // Beached
         final Card originalCard = sa.getSourceCard();
         final SpellAbility spell = sa;
-
 
         if (sa.isXCost() && !originalCard.isCopiedSpell()) {
             originalCard.setXManaCostPaid(0);
@@ -544,7 +567,8 @@ public class ManaCostBeingPaid {
                         pc.getGame().getAction().exile(c);
                     }
                 }
-            } else if (spell.getSourceCard().hasKeyword("Convoke")) {
+            }
+            else if (spell.getSourceCard().hasKeyword("Convoke")) {
                 adjustCostByConvoke(sa, spell);
             }
         } // isSpell
@@ -565,9 +589,11 @@ public class ManaCostBeingPaid {
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.getMapParams().get("Mode").equals("RaiseCost")) {
                     raiseAbilities.add(stAb);
-                } else if (stAb.getMapParams().get("Mode").equals("ReduceCost")) {
+                }
+                else if (stAb.getMapParams().get("Mode").equals("ReduceCost")) {
                     reduceAbilities.add(stAb);
-                } else if (stAb.getMapParams().get("Mode").equals("SetCost")) {
+                }
+                else if (stAb.getMapParams().get("Mode").equals("SetCost")) {
                     setAbilities.add(stAb);
                 }
             }
@@ -601,27 +627,29 @@ public class ManaCostBeingPaid {
             String chosenColor = null;
             if (sa.getActivatingPlayer().isHuman()) {
                 workingCard = GuiChoose.oneOrNone("Tap for Convoke? " + toString(), untappedCreats);
-                if( null == workingCard )
+                if (null == workingCard) {
                     break; // that means "I'm done"
+                }
 
                 List<String> usableColors = getConvokableColors(workingCard);
-                if ( !usableColors.isEmpty() ) {
+                if (!usableColors.isEmpty()) {
                     chosenColor = usableColors.size() == 1 ? usableColors.get(0) : GuiChoose.one("Convoke for which color?", usableColors);
-                } 
-            } else {
+                }
+            }
+            else {
                 // TODO: AI to choose a creature to tap would go here
                 // Probably along with deciding how many creatures to tap
                 break;
-
             }
             untappedCreats.remove(workingCard);
 
-
-            if ( null == chosenColor )
+            if (null == chosenColor) {
                 continue;
+            }
             else if (chosenColor.equals("colorless")) {
                 decreaseColorlessMana(1);
-            } else {
+            }
+            else {
                 decreaseShard(ManaCostShard.valueOf(MagicColor.fromName(chosenColor)), 1);
             }
 
@@ -640,7 +668,6 @@ public class ManaCostBeingPaid {
         for (final Card c : sa.getTappedForConvoke()) {
             c.setTapped(true);
         }
-
     }
 
     /**
@@ -654,14 +681,15 @@ public class ManaCostBeingPaid {
      */
     private List<String> getConvokableColors(final Card cardToConvoke) {
         final ArrayList<String> usableColors = new ArrayList<String>();
-    
+
         if (getColorlessManaAmount() > 0) {
             usableColors.add("colorless");
         }
         ColorSet cs = CardUtil.getColors(cardToConvoke);
-        for(byte color : MagicColor.WUBRG) {
-            if( cs.hasAnyColor(color))
+        for (byte color : MagicColor.WUBRG) {
+            if (cs.hasAnyColor(color)) {
                 usableColors.add(MagicColor.toLongString(color));
+            }
         }
         return usableColors;
     }
@@ -684,7 +712,8 @@ public class ManaCostBeingPaid {
 
         if (!toSacList.isEmpty()) {
             toSac = toSacList.get(0);
-        } else {
+        }
+        else {
             return;
         }
 

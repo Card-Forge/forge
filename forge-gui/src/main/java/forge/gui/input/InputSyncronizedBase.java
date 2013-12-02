@@ -6,14 +6,14 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.error.BugReporter;
 
-public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized { 
+public abstract class InputSyncronizedBase extends InputBase implements InputSynchronized {
     private static final long serialVersionUID = 8756177361251703052L;
     private final CountDownLatch cdlDone;
 
     public InputSyncronizedBase() {
         cdlDone = new CountDownLatch(1);
     }
-    
+
     public void awaitLatchRelease() {
         FThreads.assertExecutedByEdt(false);
         try{
@@ -22,17 +22,26 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
             BugReporter.reportException(e);
         }
     }
-    
+
     public final void relaseLatchWhenGameIsOver() {
         cdlDone.countDown();
     }
-    
-    protected final void stop() {
-        // ensure input won't accept any user actions.
-        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() { setFinished(); } });
 
-        // thread irrelevant 
+    protected final void stop() {
+        onStop();
+
+        // ensure input won't accept any user actions.
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                setFinished();
+            }
+        });
+
+        // thread irrelevant
         Singletons.getControl().getInputQueue().removeInput(InputSyncronizedBase.this);
         cdlDone.countDown();
     }
+
+    protected void onStop() { }
 }

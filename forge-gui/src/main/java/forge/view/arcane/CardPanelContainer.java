@@ -86,34 +86,33 @@ public abstract class CardPanelContainer extends JPanel {
      * @param scrollPane
      *            a {@link javax.swing.JScrollPane} object.
      */
-    public CardPanelContainer(final JScrollPane scrollPane) {                
+    public CardPanelContainer(final JScrollPane scrollPane) {
         this.scrollPane = scrollPane;
-        this.setOpaque(true);        
-        setupMouseListeners();        
+        this.setOpaque(true);
+        setupMouseListeners();
     }
-    
-    private void setupMouseListeners() {        
+
+    private void setupMouseListeners() {
         final MouseMotionListener mml = setupMotionMouseListener();
         setupMouseListener(mml);
-        setupMouseWheelListener();        
+        setupMouseWheelListener();
     }
-    
+
     private void setupMouseWheelListener() {
-        this.addMouseWheelListener(new MouseWheelListener() {            
+        this.addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
-                final CardPanel hitPanel = CardPanelContainer.this.getCardPanel(e.getX(), e.getY());                
+                final CardPanel hitPanel = CardPanelContainer.this.getCardPanel(e.getX(), e.getY());
                 if (hitPanel != null) {
-                    if (e.getWheelRotation() < 0) {                    
+                    if (e.getWheelRotation() < 0) {
                         CardZoomer.SINGLETON_INSTANCE.doMouseWheelZoom(hitPanel.getCard());
                     }
                 }
-            }            
-        });         
+            }
+        });
     }
 
     private void setupMouseListener(final MouseMotionListener mml) {
-
         this.addMouseListener(new MouseAdapter() {
             private final boolean[] buttonsDown = new boolean[4];
 
@@ -181,13 +180,10 @@ public abstract class CardPanelContainer extends JPanel {
                 CardPanelContainer.this.mouseOutPanel(evt);
             }
         });
-        
     }
-    
-    private MouseMotionListener setupMotionMouseListener() {
 
+    private MouseMotionListener setupMotionMouseListener() {
         final MouseMotionListener mml = new MouseMotionListener() {
-            
             @Override
             public void mouseDragged(final MouseEvent evt) {
                 if (CardZoomer.SINGLETON_INSTANCE.isZoomerOpen() || !SwingUtilities.isLeftMouseButton(evt)) {
@@ -229,7 +225,7 @@ public abstract class CardPanelContainer extends JPanel {
 
             @Override
             public void mouseMoved(final MouseEvent evt) {
-                final CardPanel hitPanel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());               
+                final CardPanel hitPanel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
 
                 if (CardPanelContainer.this.hoveredPanel == hitPanel) { // no big change
                     return;
@@ -246,7 +242,7 @@ public abstract class CardPanelContainer extends JPanel {
                     CardPanelContainer.this.hoveredPanel.setSelected(true);
                     CardPanelContainer.this.mouseOver(hitPanel, evt);
                 }
-               
+
                 // System.err.format("%d %d over %s%n", evt.getX(), evt.getY(), hitPanel == null ? null : hitPanel.getCard().getName());
             }
         };
@@ -348,8 +344,6 @@ public abstract class CardPanelContainer extends JPanel {
         CardPanelContainer.this.remove(fromPanel);
         CardPanelContainer.this.invalidate();
         CardPanelContainer.this.repaint();
-
-
     }
 
     /**
@@ -590,12 +584,12 @@ public abstract class CardPanelContainer extends JPanel {
         // the already-hovered card, though, since we cannot tell the difference between that and clicking
         // on the hovered card when the app already has focus.
         CardPanel p = getCardPanel(e.getX(), e.getY());
-        
+
         // if cursor has jumped, for example via the above alt-tabbing example, fix the card hover highlight
         if (null != hoveredPanel && p != hoveredPanel) {
             mouseOut(hoveredPanel, e);
         }
-        
+
         return (null == p || p != hoveredPanel) ? null : p.getGameCard();
     }
 

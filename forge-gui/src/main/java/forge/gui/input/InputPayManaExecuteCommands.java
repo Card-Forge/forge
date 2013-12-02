@@ -102,11 +102,9 @@ public class InputPayManaExecuteCommands extends InputPayMana {
         this.stop();
     }
 
-    /* (non-Javadoc)
-     * @see forge.control.input.InputPayManaBase#updateMessage()
-     */
+    /** {@inheritDoc} */
     @Override
-    protected void updateMessage() {
+    protected String getMessage() {
         final StringBuilder msg = new StringBuilder(this.message + "Pay Mana Cost: " + this.manaCost);
         if (this.phyLifeToLose > 0) {
             msg.append(" (");
@@ -117,6 +115,6 @@ public class InputPayManaExecuteCommands extends InputPayMana {
         if (this.manaCost.containsPhyrexianMana()) {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
-        showMessage(msg.toString());
+        return msg.toString();
     }
 }

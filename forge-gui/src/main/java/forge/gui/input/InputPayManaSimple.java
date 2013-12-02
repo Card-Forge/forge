@@ -22,7 +22,6 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.view.ButtonUtil;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid
@@ -102,7 +101,7 @@ public class InputPayManaSimple extends InputPayMana {
     public final void showMessage() {
         if (isFinished()) { return; }
 
-        ButtonUtil.enableOnlyCancel();
+        updateButtons();
 
         if (this.manaCost.isPaid() && !new ManaCostBeingPaid(this.originalManaCost).isPaid()) {
             this.done();
@@ -117,7 +116,7 @@ public class InputPayManaSimple extends InputPayMana {
      * @see forge.control.input.InputPayManaBase#updateMessage()
      */
     @Override
-    protected void updateMessage() {
+    protected String getMessage() {
         final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + this.manaCost.toString());
         if (this.phyLifeToLose > 0) {
             msg.append(" (");
@@ -130,6 +129,6 @@ public class InputPayManaSimple extends InputPayMana {
         }
 
         // has its own variant of checkIfPaid
-        showMessage(msg.toString());
+        return msg.toString();
     }
 }

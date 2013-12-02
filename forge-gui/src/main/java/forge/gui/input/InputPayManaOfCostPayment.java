@@ -6,7 +6,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
-
     public InputPayManaOfCostPayment(ManaCostBeingPaid cost, SpellAbility spellAbility) {
         super(spellAbility);
         manaCost = cost;
@@ -39,7 +38,8 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         stop();
     }
 
-    protected void updateMessage() { 
+    @Override
+    protected String getMessage() { 
         final String displayMana = manaCost.toString(false);
 
         final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + displayMana);
@@ -53,6 +53,6 @@ public class InputPayManaOfCostPayment extends InputPayMana {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
         
-        showMessage(msg.toString());
+        return msg.toString();
     }
 }

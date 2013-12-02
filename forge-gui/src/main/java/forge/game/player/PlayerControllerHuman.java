@@ -76,12 +76,9 @@ import forge.util.TextUtil;
  * Handles phase skips for now.
  */
 public class PlayerControllerHuman extends PlayerController {
-
-
     public PlayerControllerHuman(Game game0, Player p, LobbyPlayer lp) {
         super(game0, p, lp);
     }
-
 
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
         return !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);

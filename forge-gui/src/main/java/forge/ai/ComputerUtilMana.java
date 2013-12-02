@@ -47,8 +47,16 @@ import forge.util.maps.MapOfLists;
  *
  */
 public class ComputerUtilMana {
-
     private final static boolean DEBUG_MANA_PAYMENT = false;
+
+    public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
+        cost = new ManaCostBeingPaid(cost); //check copy of cost so it doesn't modify the exist cost being paid
+        return payManaCost(cost, sa, ai, true, 0, true);
+    }
+
+    public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
+        return payManaCost(cost, sa, ai, false, 0, true);
+    }
 
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana) {
         return payManaCost(sa, ai, true, extraMana, true);

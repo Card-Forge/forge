@@ -56,6 +56,11 @@ public class InputPayManaX extends InputPayMana {
     }
 
     @Override
+    protected boolean supportAutoPay() {
+        return false;
+    }
+
+    @Override
     public void showMessage() {
         if (isFinished()) { return; }
 
@@ -63,7 +68,7 @@ public class InputPayManaX extends InputPayMana {
     }
 
     @Override
-    protected void updateMessage() {
+    protected String getMessage() {
         StringBuilder msg = new StringBuilder("Pay X Mana Cost for ");
         msg.append(saPaidFor.getSourceCard().getName()).append("\n").append(this.xPaid);
         msg.append(" Paid so far.");
@@ -79,7 +84,7 @@ public class InputPayManaX extends InputPayMana {
             ButtonUtil.enableAllFocusOk();
         }
 
-        showMessage(msg.toString());
+        return msg.toString();
     }
 
     @Override

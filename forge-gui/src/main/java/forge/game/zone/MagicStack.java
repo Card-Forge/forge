@@ -280,7 +280,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final void add(final SpellAbility sp) {
-        FThreads.assertExecutedByEdt(false);
+        if (!sp.isManaAbility()) { //allow adding mana abilities on EDT
+            FThreads.assertExecutedByEdt(false);
+        }
         SpellAbilityStackInstance si = null;
         final Card source = sp.getSourceCard();
         Player activator = sp.getActivatingPlayer();

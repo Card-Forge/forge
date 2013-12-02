@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.FThreads;
+import forge.ai.ComputerUtilMana;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
@@ -109,7 +110,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         boolean canUseColorless = manaCost.isAnyPartPayableWith((byte)0);
 
         List<SpellAbility> abilities = new ArrayList<SpellAbility>();
-        // you can't remove unneeded abilities inside a for(am:abilities) loop :(
+        // you can't remove unneeded abilities inside a for (am:abilities) loop :(
 
         final String typeRes = manaCost.getSourceRestriction();
         if (StringUtils.isNotBlank(typeRes) && !card.isType(typeRes)) {
@@ -193,7 +194,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         game.getAction().invoke(proc);
     }
 
-
     /**
      * <p>
      * canMake.  color is like "G", returns "Green".
@@ -272,16 +272,52 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         return bPaid;
     }
 
+    protected boolean supportAutoPay() {
+        return true;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected void onOk() {
+        if (supportAutoPay()) {
+            //use AI utility to automatically pay mana cost if possible
+            ComputerUtilMana.payManaCost(manaCost, saPaidFor, player);
+            this.showMessage();
+        }
+    }
+
+    protected void updateButtons() {
+        if (supportAutoPay()) {
+            ButtonUtil.setButtonText("Auto", "Cancel");
+        }
+        ButtonUtil.enableOnlyCancel();
+    }
+
+    protected final void updateMessage() {
+        if (supportAutoPay() && ComputerUtilMana.canPayManaCost(manaCost, saPaidFor, player)) {
+            ButtonUtil.enableAllFocusOk(); //enabled Auto button if mana cost can be paid
+        }
+        showMessage(getMessage());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected final void onStop() {
+        if (supportAutoPay()) {
+            ButtonUtil.reset();
+        }
+    }
+
     /** {@inheritDoc} */
     @Override
     public void showMessage() {
         if (isFinished()) { return; }
-        ButtonUtil.enableOnlyCancel();
+        updateButtons();
         onStateChanged();
     }
 
     protected void onStateChanged() {
-        if(isAlreadyPaid()) {
+        if (isAlreadyPaid()) {
             done();
             stop();
         }
@@ -297,11 +333,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected void onManaAbilityPaid() {} // some inputs overload it
     protected abstract void done();
-    protected abstract void updateMessage();
+    protected abstract String getMessage();
 
     @Override
     public String toString() {
-        return String.format("PayManaBase %s left", manaCost.toString() );
+        return String.format("PayManaBase %s left", manaCost.toString());
     }
 
     public boolean isPaid() { return bPaid; }
