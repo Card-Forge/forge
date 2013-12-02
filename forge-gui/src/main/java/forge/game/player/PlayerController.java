@@ -112,7 +112,6 @@ public abstract class PlayerController {
 
     public abstract Deck sideboard(final Deck deck, GameType gameType);
 
-
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender, boolean overrideOrder);
 
     public abstract Integer announceRequirements(SpellAbility ability, String announce, boolean allowZero);
@@ -180,4 +179,5 @@ public abstract class PlayerController {
     
     public abstract PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name);
 
+    public abstract void runAsAi(Runnable proc);
 }

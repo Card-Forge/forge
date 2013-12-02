@@ -23,6 +23,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.gui.GuiChoose;
+import forge.util.Evaluator;
 import forge.view.ButtonUtil;
 
 /** 
@@ -281,7 +282,13 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected void onOk() {
         if (supportAutoPay()) {
             //use AI utility to automatically pay mana cost if possible
-            ComputerUtilMana.payManaCost(manaCost, saPaidFor, player);
+            Runnable proc = new Runnable() {
+                @Override
+                public void run() {
+                    ComputerUtilMana.payManaCost(manaCost, saPaidFor, player);
+                }
+            };
+            player.getController().runAsAi(proc);
             this.showMessage();
         }
     }
@@ -294,8 +301,18 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     }
 
     protected final void updateMessage() {
-        if (supportAutoPay() && ComputerUtilMana.canPayManaCost(manaCost, saPaidFor, player)) {
-            ButtonUtil.enableAllFocusOk(); //enabled Auto button if mana cost can be paid
+        if (supportAutoPay()) {
+            //use AI utility to determine if mana cost can be paid
+            Evaluator<Boolean> proc = new Evaluator<Boolean>() {
+                @Override
+                public Boolean evaluate() {
+                    return ComputerUtilMana.canPayManaCost(manaCost, saPaidFor, player);
+                }
+            };
+            player.getController().runAsAi(proc);
+            if (proc.getResult()) {
+                ButtonUtil.enableAllFocusOk(); //enabled Auto button if mana cost can be paid
+            }
         }
         showMessage(getMessage());
     }

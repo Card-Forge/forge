@@ -837,12 +837,16 @@ public class PlayerControllerHuman extends PlayerController {
         return GuiChoose.one("Choose a type", s.split("/"));
     }
 
-
     @Override
     public PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name) {
         Iterable<PaperCard> cardsFromDb = Singletons.getMagicDb().getCommonCards().getUniqueCards();
         List<PaperCard> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
         Collections.sort(cards);
         return GuiChoose.one(message, cards);
+    }
+
+    @Override
+    public void runAsAi(Runnable proc) {
+        this.player.runWithController(proc, new PlayerControllerAi(this.game, this.player, this.lobbyPlayer));
     }
 }

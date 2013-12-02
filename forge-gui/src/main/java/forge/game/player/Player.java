@@ -2810,7 +2810,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.fireEvent(new GameEventPlayerControl(this, oldController, pc.getLobbyPlayer()));
     }
 
-
     private void setOutcome(PlayerOutcome outcome) {
         stats.setOutcome(outcome);
     }
@@ -2934,11 +2933,27 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final PlayerController getController() {
         return controller;
     }
+
     public final void setFirstController(PlayerController ctrlr) {
-        if( null != controllerCreator ) throw new IllegalStateException("Controller creator already assigned");
+        if (controllerCreator != null) {
+            throw new IllegalStateException("Controller creator already assigned");
+        }
         controllerCreator = ctrlr;
         controller = ctrlr;
     }
+    
+    /**
+     * Run a procedure using a different controller
+     * @param proc
+     * @param tempController
+     */
+    public void runWithController(Runnable proc, PlayerController tempController) {
+        PlayerController oldController = controller;
+        controller = tempController;
+        proc.run();
+        controller = oldController;
+    }
+
     /**
      * <p>
      * skipCombat.
@@ -3233,7 +3248,6 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public void setExtraTurn(boolean b) {
         this.isPlayingExtraTrun  = b;
-
     }
 
     /**
