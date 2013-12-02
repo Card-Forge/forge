@@ -40,7 +40,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
 
-    boolean bPaid = false;
+    private boolean bPaid = false;
+    private Boolean canPayManaCost = null;
 
     protected InputPayMana(SpellAbility saToPayFor) {
         this.player = saToPayFor.getActivatingPlayer();
@@ -302,15 +303,18 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected final void updateMessage() {
         if (supportAutoPay()) {
-            //use AI utility to determine if mana cost can be paid
-            Evaluator<Boolean> proc = new Evaluator<Boolean>() {
-                @Override
-                public Boolean evaluate() {
-                    return ComputerUtilMana.canPayManaCost(manaCost, saPaidFor, player);
-                }
-            };
-            player.getController().runAsAi(proc);
-            if (proc.getResult()) {
+            if (canPayManaCost == null) {
+                //use AI utility to determine if mana cost can be paid if that hasn't been determined yet
+                Evaluator<Boolean> proc = new Evaluator<Boolean>() {
+                    @Override
+                    public Boolean evaluate() {
+                        return ComputerUtilMana.canPayManaCost(manaCost, saPaidFor, player);
+                    }
+                };
+                player.getController().runAsAi(proc);
+                canPayManaCost = proc.getResult();
+            }
+            if (canPayManaCost) {
                 ButtonUtil.enableAllFocusOk(); //enabled Auto button if mana cost can be paid
             }
         }
