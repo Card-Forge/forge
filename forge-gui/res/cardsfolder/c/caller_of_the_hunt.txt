@@ -1,0 +1,10 @@
+Name:Caller of the Hunt
+ManaCost:2 G
+Types:Creature Human
+PT:*/*
+Text:As an additional cost to cast CARDNAME, choose a creature type.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures of the chosen type on the battlefield.
+SVar:X:Count$Valid Creature.ChosenType
+A:SP$ PermanentCreature | Cost$ 2 G ChooseCreatureType<1> | AILogic$ MostProminentOnBattlefield
+SVar:Picture:http://www.wizards.com/global/images/magic/general/caller_of_the_hunt.jpg
+Oracle:As an additional cost to cast Caller of the Hunt, choose a creature type.\nCaller of the Hunt's power and toughness are each equal to the number of creatures of the chosen type on the battlefield.

@@ -1667,6 +1667,7 @@ forge-gui/res/cardsfolder/c/call_to_the_kindred.txt -text
 forge-gui/res/cardsfolder/c/call_to_the_netherworld.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/caller_of_gales.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/caller_of_the_claw.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/c/caller_of_the_hunt.txt -text
 forge-gui/res/cardsfolder/c/callous_deceiver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/callous_giant.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/c/callous_oppressor.txt -text
@@ -14983,6 +14984,7 @@ forge-gui/src/main/java/forge/game/combat/CombatLki.java -text
 forge-gui/src/main/java/forge/game/combat/CombatUtil.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/cost/Cost.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/cost/CostAddMana.java -text
+forge-gui/src/main/java/forge/game/cost/CostChooseCreatureType.java -text
 forge-gui/src/main/java/forge/game/cost/CostDamage.java -text
 forge-gui/src/main/java/forge/game/cost/CostDiscard.java -text
 forge-gui/src/main/java/forge/game/cost/CostDraw.java -text

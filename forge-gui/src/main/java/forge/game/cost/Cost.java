@@ -243,6 +243,11 @@ public class Cost {
             return new CostUnattach(splitStr[0], description);
         }
 
+        if (parse.startsWith("ChooseCreatureType<")) {
+        	final String[] splitStr = abCostParse(parse, 1);
+            return new CostChooseCreatureType(splitStr[0]);
+        }
+
         if (parse.startsWith("DamageYou<")) {
             // Damage<NumDmg>
             final String[] splitStr = abCostParse(parse, 1);
