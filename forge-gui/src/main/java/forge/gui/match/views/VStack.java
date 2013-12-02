@@ -244,6 +244,7 @@ public enum VStack implements IVDoc<CStack> {
         }
 
         if (!cardView) {
+            parentCell.getBody().validate();
             parentCell.getBody().repaint();
         }
     }
@@ -307,7 +308,7 @@ public enum VStack implements IVDoc<CStack> {
             jmiAccept.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if ( localPlayer == null ) return;
+                    if (localPlayer == null) { return; }
                     localPlayer.setShouldAlwaysAcceptTrigger(triggerID);
                 }
             });
@@ -315,7 +316,7 @@ public enum VStack implements IVDoc<CStack> {
             jmiDecline.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if ( localPlayer == null ) return;
+                    if (localPlayer == null) { return; }
                     localPlayer.setShouldAlwaysDeclineTrigger(triggerID);
                 }
             });
@@ -323,7 +324,7 @@ public enum VStack implements IVDoc<CStack> {
             jmiAsk.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
-                    if ( localPlayer == null ) return;
+                    if (localPlayer == null) { return; }
                     localPlayer.setShouldAlwaysAskTrigger(triggerID);
                 }
             });
@@ -333,21 +334,22 @@ public enum VStack implements IVDoc<CStack> {
             add(jmiAsk);
         }
 
-        public void setStackInstance(final SpellAbilityStackInstance SI)
-        {
+        public void setStackInstance(final SpellAbilityStackInstance SI) {
             localPlayer = SI.getSpellAbility().getActivatingPlayer().getController();
 
             triggerID = SI.getSpellAbility().getSourceTrigger();
 
-            if(localPlayer.shouldAlwaysAcceptTrigger(triggerID)) {
+            if (localPlayer.shouldAlwaysAcceptTrigger(triggerID)) {
                 jmiAccept.setSelected(true);
                 jmiDecline.setSelected(false);
                 jmiAsk.setSelected(false);
-            } else if(localPlayer.shouldAlwaysDeclineTrigger(triggerID)) {
+            }
+            else if (localPlayer.shouldAlwaysDeclineTrigger(triggerID)) {
                 jmiDecline.setSelected(true);
                 jmiAccept.setSelected(false);
                 jmiAsk.setSelected(false);
-            } else {
+            }
+            else {
                 jmiAsk.setSelected(true);
                 jmiAccept.setSelected(false);
                 jmiDecline.setSelected(false);
