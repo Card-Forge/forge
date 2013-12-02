@@ -23,6 +23,14 @@ Multi-color cards containing a filtered color will no longer show up in catalogs
 I came up with a way that hybrid cards, split cards, and phyrexian cards will show up so long as the card can be cast using only selected colors. For split cards, each side of the card is checked individually, so Life // Death will appear if either {B} or {G} is selected. Note that if the multicolor button is deselected (such that multicolor cards are filtered out), hybrid and split cards with multiple colors will still be hidden. However, to improve usability, I made it so right-clicking a color filter button also selects the the multicolor button so hybrids and split cards appear by default, and so 2 color cards show up if you then left click a second color filter button.
 
 
+- Constructed mode -
+Recently a change was made to the constructed mode and this change now allows you to have up to 8 players rather than just two. The game formats that are located in the variants mode also allow up to eight players. The current user interface for this feature is fairly basic and is not very attractive. The settings tab allows you to set the number of opponents. The player tabs includes the same options that you used to see in the constructed mode.
+
+Marc recently sketched out a couple of attractive mockups that look far more attractive than what we are now using. We just need someone with java skills and swing experience to modify the existing code.
+
+http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=12609#p138913
+
+
 - Commander 2013 cards -
 Forge now includes many of the new Commander 2013 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
@@ -32,6 +40,7 @@ New Cards
 ---------
 
 Call to Arms
+Caller of the Hunt
 
 
 ------------
