@@ -84,7 +84,6 @@ forge-core/src/main/java/forge/util/Aggregates.java -text
 forge-core/src/main/java/forge/util/BinaryUtil.java -text
 forge-core/src/main/java/forge/util/CollectionSuppliers.java -text
 forge-core/src/main/java/forge/util/ComparableOp.java -text
-forge-core/src/main/java/forge/util/Evaluator.java -text
 forge-core/src/main/java/forge/util/FileSection.java -text
 forge-core/src/main/java/forge/util/FileSectionManual.java -text
 forge-core/src/main/java/forge/util/FileUtil.java svneol=native#text/plain
@@ -15616,6 +15615,7 @@ forge-gui/src/main/java/forge/sound/SoundEffectType.java -text
 forge-gui/src/main/java/forge/sound/SoundSystem.java -text
 forge-gui/src/main/java/forge/util/AwtUtil.java -text
 forge-gui/src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
+forge-gui/src/main/java/forge/util/Evaluator.java -text
 forge-gui/src/main/java/forge/util/Expressions.java -text
 forge-gui/src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/IgnoringXStream.java -text
