@@ -147,11 +147,10 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
             FPanel typeBtnPanel = new FPanel();
             typeBtnPanel.add(tmpAI);
             typeBtnPanel.add(tmpHuman,"wrap");
-            
+            tempPanel.add(typeBtnPanel);
             
             tempBtnGroup.add(tmpAI);
             tempBtnGroup.add(tmpHuman);
-            playerIsAIRadios.add(tmpAI);
             playerIsAIRadios.add(tmpAI);
             
             tempPanel.add(new FLabel.Builder().text("Select Deck:").build(), "gap 0px 0px 10px 10px, flowy");
