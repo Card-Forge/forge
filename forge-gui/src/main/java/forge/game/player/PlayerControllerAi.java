@@ -510,4 +510,9 @@ public class PlayerControllerAi extends PlayerController {
             Predicate<PaperCard> cpp, String name) {
         throw new UnsupportedOperationException("Should not be called for AI"); // or implement it if you know how
     }
+
+    @Override
+    public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
+        return ComputerUtilCard.chooseColor(sa, min, max, options);
+    }
 }

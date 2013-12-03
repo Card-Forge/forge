@@ -742,7 +742,7 @@ public class PlayerControllerHuman extends PlayerController {
         String counterChoiceTitle = "Choose a counter type on " + cardWithCounter;
         final CounterType chosen = GuiChoose.one(counterChoiceTitle, cardWithCounter.getCounters().keySet());
 
-        String putOrRemoveTitle = "Do what with counter " + chosen.getName() + "counter ";
+        String putOrRemoveTitle = "What to do with that '" + chosen.getName() + "' counter ";
         final String putString = "Put another " + chosen.getName() + " counter on " + cardWithCounter;
         final String removeString = "Remove a " + chosen.getName() + " counter from " + cardWithCounter;
         final String addOrRemove = GuiChoose.one(putOrRemoveTitle, new String[]{putString,removeString});
@@ -827,6 +827,11 @@ public class PlayerControllerHuman extends PlayerController {
         return chosen;
     }
 
+    @Override
+    public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
+        return GuiChoose.getChoices(message, min, max, options);
+    }
+    
     @Override
     public String chooseSingleColor(ImmutableList<String> names) {
         return GuiChoose.one("Choose a color:", names);

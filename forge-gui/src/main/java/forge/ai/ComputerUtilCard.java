@@ -23,6 +23,7 @@ import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
@@ -31,6 +32,7 @@ import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 
@@ -826,5 +828,64 @@ public class ComputerUtilCard {
             return true;
         }
     };
+    public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {
+        List<String> chosen = new ArrayList<String>();
+        Player ai = sa.getActivatingPlayer();
+        final Game game = ai.getGame();
+        Player opp = ai.getOpponent();
+        if (sa.hasParam("AILogic")) {
+            final String logic = sa.getParam("AILogic");
+            if (logic.equals("MostProminentInHumanDeck")) {
+                chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), opp), colorChoices));
+            } else if (logic.equals("MostProminentInComputerDeck")) {
+                chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), ai), colorChoices));
+            } else if (logic.equals("MostProminentDualInComputerDeck")) {
+                List<String> prominence = ComputerUtilCard.getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
+                chosen.add(prominence.get(0));
+                chosen.add(prominence.get(1));
+            }
+            else if (logic.equals("MostProminentInGame")) {
+                chosen.add(ComputerUtilCard.getMostProminentColor(game.getCardsInGame(), colorChoices));
+            }
+            else if (logic.equals("MostProminentHumanCreatures")) {
+                List<Card> list = opp.getCreaturesInPlay();
+                if (list.isEmpty()) {
+                    list = CardLists.filter(CardLists.filterControlledBy(game.getCardsInGame(), opp), CardPredicates.Presets.CREATURES);
+                }
+                chosen.add(ComputerUtilCard.getMostProminentColor(list, colorChoices));
+            }
+            else if (logic.equals("MostProminentComputerControls")) {
+                chosen.add(ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield), colorChoices));
+            }
+            else if (logic.equals("MostProminentHumanControls")) {
+                chosen.add(ComputerUtilCard.getMostProminentColor(ai.getOpponent().getCardsIn(ZoneType.Battlefield), colorChoices));
+            }
+            else if (logic.equals("MostProminentPermanent")) {
+                final List<Card> list = game.getCardsIn(ZoneType.Battlefield);
+                chosen.add(ComputerUtilCard.getMostProminentColor(list, colorChoices));
+            }
+            else if (logic.equals("MostProminentAttackers") && game.getPhaseHandler().inCombat()) {
+                chosen.add(ComputerUtilCard.getMostProminentColor(game.getCombat().getAttackers(), colorChoices));
+            }
+            else if (logic.equals("MostProminentKeywordInComputerDeck")) {
+                List<Card> list = ai.getAllCards();
+                int m1 = 0;
+                String chosenColor = MagicColor.Constant.WHITE;
+
+                for (final String c : MagicColor.Constant.ONLY_COLORS) {
+                    final int cmp = CardLists.filter(list, CardPredicates.containsKeyword(c)).size();
+                    if (cmp > m1) {
+                        m1 = cmp;
+                        chosenColor = c;
+                    }
+                }
+                chosen.add(chosenColor);
+            }
+        }
+        if (chosen.size() == 0) {
+            chosen.add(MagicColor.Constant.GREEN);
+        }
+        return chosen;
+    }
 
 }

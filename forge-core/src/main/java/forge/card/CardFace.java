@@ -81,13 +81,13 @@ final class CardFace implements ICardFace {
             throw new RuntimeException("Card name is empty");
     }
     // Here come setters to allow parser supply values
-    public void setType(CardType type0)             { this.type = type0; }
-    public void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
-    public void setColor(ColorSet color0)           { this.color = color0; }
-    public void setOracleText(String text)          { this.oracleText = text; }
-    public void setInitialLoyalty(int value)        { this.initialLoyalty = value; }
+    void setType(CardType type0)             { this.type = type0; }
+    void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
+    void setColor(ColorSet color0)           { this.color = color0; }
+    void setOracleText(String text)          { this.oracleText = text; }
+    void setInitialLoyalty(int value)        { this.initialLoyalty = value; }
 
-    public void setPtText(String value) {
+    void setPtText(String value) {
         final int slashPos = value.indexOf('/');
         if (slashPos == -1) {
             throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", this.getName()));
@@ -99,16 +99,16 @@ final class CardFace implements ICardFace {
     }
 
     // Raw fields used for Card creation
-    public void setNonAbilityText(String value)     { this.nonAbilityText = value; }
-    public void addKeyword(String value)            { if (null == this.keywords) { this.keywords = new ArrayList<String>(); } this.keywords.add(value); }
-    public void addAbility(String value)            { if (null == this.abilities) { this.abilities = new ArrayList<String>(); } this.abilities.add(value);}
-    public void addTrigger(String value)            { if (null == this.triggers) { this.triggers = new ArrayList<String>(); } this.triggers.add(value);}
-    public void addStaticAbility(String value)      { if (null == this.staticAbilities) { this.staticAbilities = new ArrayList<String>(); } this.staticAbilities.add(value);}
-    public void addReplacementEffect(String value)  { if (null == this.replacements) { this.replacements = new ArrayList<String>(); } this.replacements.add(value);}
-    public void addSVar(String key, String value)   { if (null == this.variables) { this.variables = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER); } this.variables.put(key, value); }
+    void setNonAbilityText(String value)     { this.nonAbilityText = value; }
+    void addKeyword(String value)            { if (null == this.keywords) { this.keywords = new ArrayList<String>(); } this.keywords.add(value); }
+    void addAbility(String value)            { if (null == this.abilities) { this.abilities = new ArrayList<String>(); } this.abilities.add(value);}
+    void addTrigger(String value)            { if (null == this.triggers) { this.triggers = new ArrayList<String>(); } this.triggers.add(value);}
+    void addStaticAbility(String value)      { if (null == this.staticAbilities) { this.staticAbilities = new ArrayList<String>(); } this.staticAbilities.add(value);}
+    void addReplacementEffect(String value)  { if (null == this.replacements) { this.replacements = new ArrayList<String>(); } this.replacements.add(value);}
+    void addSVar(String key, String value)   { if (null == this.variables) { this.variables = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER); } this.variables.put(key, value); }
 
     
-    public void assignMissingFields() { // Most scripts do not specify color explicitly
+    void assignMissingFields() { // Most scripts do not specify color explicitly
         if ( null == oracleText ) { System.err.println(name + " has no Oracle text."); oracleText = ""; }
         if ( manaCost == null && color == null ) System.err.println(name + " has neither ManaCost nor Color");
         if ( color == null ) color = ColorSet.fromManaCost(manaCost);

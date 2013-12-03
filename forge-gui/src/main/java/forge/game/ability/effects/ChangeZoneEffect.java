@@ -8,7 +8,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
 import forge.ai.ability.ChangeZoneAi;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
@@ -31,7 +30,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Aggregates;
 import forge.util.Lang;
 
@@ -759,19 +757,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else {
                 boolean mustChoose = sa.hasParam("Mandatory");
                 // card has to be on battlefield or in own hand
-                boolean canUseInputToSelectCard = origin.size() == 1 && ( origin.get(0) == ZoneType.Battlefield || origin.get(0) == ZoneType.Hand && player == decider);
                 if (mustChoose && fetchList.size() == 1) {
                     c = fetchList.get(0);
-                } else if( canUseInputToSelectCard ) {
-                    InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, fetchList);
-                    inp.setCancelAllowed(!mustChoose);
-                    inp.setMessage(selectPrompt);
-                    Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                    c = inp.hasCancelled() ? null : inp.getSelected().get(0);
-                }
-                else {
-                    List<Card> chosen = GuiChoose.getChoices(selectPrompt, mustChoose ? 1 : 0, 1, fetchList);
-                    c = chosen.isEmpty() ? null : chosen.get(0);
+                } else {
+                    c = decider.getController().chooseSingleCardForEffect(fetchList, sa, selectPrompt, !mustChoose);
                 }
             }
 
@@ -808,7 +797,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (!list.isEmpty()) {
                             Card attachedTo = null;
                             if (list.size() > 1) {
-                                attachedTo = GuiChoose.one(c + " - Select a card to attach to.", list);
+                                attachedTo = decider.getController().chooseSingleCardForEffect(list, sa, c + " - Select a card to attach to.");
                             } else {
                                 attachedTo = list.get(0);
                             }

@@ -178,4 +178,5 @@ public abstract class PlayerController {
     public abstract String chooseHybridMana(String s);
     
     public abstract PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name);
+    public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
 }

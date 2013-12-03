@@ -449,4 +449,9 @@ public class PlayerControllerForTests extends PlayerController {
 	public PaperCard chooseSinglePaperCard( SpellAbility sa, String message, Predicate<PaperCard> cpp, String name ) {
 		throw new IllegalStateException( "Erring on the side of caution here..." );
 	}
+
+    @Override
+    public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
+        throw new UnsupportedOperationException("No idea how a test player controller would choose colors");
+    }
 }
