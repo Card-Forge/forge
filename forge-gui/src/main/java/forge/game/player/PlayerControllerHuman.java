@@ -844,9 +844,4 @@ public class PlayerControllerHuman extends PlayerController {
         Collections.sort(cards);
         return GuiChoose.one(message, cards);
     }
-
-    @Override
-    public void runAsAi(Runnable proc) {
-        this.player.runWithController(proc, new PlayerControllerAi(this.game, this.player, this.lobbyPlayer));
-    }
 }

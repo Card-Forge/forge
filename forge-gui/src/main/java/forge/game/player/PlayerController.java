@@ -178,6 +178,4 @@ public abstract class PlayerController {
     public abstract String chooseHybridMana(String s);
     
     public abstract PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name);
-
-    public abstract void runAsAi(Runnable proc);
 }

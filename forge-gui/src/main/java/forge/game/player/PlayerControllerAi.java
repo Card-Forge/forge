@@ -510,9 +510,4 @@ public class PlayerControllerAi extends PlayerController {
             Predicate<PaperCard> cpp, String name) {
         throw new UnsupportedOperationException("Should not be called for AI"); // or implement it if you know how
     }
-
-    @Override
-    public void runAsAi(Runnable proc) {
-        proc.run(); //can just run procedure since already AI
-    }
 }
