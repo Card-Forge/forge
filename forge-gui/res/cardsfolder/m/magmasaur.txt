@@ -5,8 +5,8 @@ PT:0/0
 K:etbCounter:P1P1:5
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ Choices | TriggerDescription$ At the beginning of your upkeep, you may remove a +1/+1 counter from CARDNAME. If you don't, sacrifice CARDNAME and it deals damage equal to the number of +1/+1 counters on it to each creature without flying and each player.
 SVar:Choices:AB$ GenericChoice | Cost$ 0 | Choices$ Shrink,SelfDestruct | Defined$ You
-SVar:Shrink:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | UpTo$ True | RememberRemoved$ True | SubAbility$ SelfDestruct | ChoiceDescription$ Remove a +1/+1 counter from CARDNAME.
-SVar:SelfDestruct:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ LetEmHaveIt | ChoiceDescription$ Sacrifice CARDNAME and it deals damage equal to the number of +1/+1 counters on it to each creature without flying and each player.
+SVar:Shrink:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | UpTo$ True | RememberRemoved$ True | SubAbility$ SelfDestruct | SpellDescription$ Remove a +1/+1 counter from CARDNAME.
+SVar:SelfDestruct:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ LetEmHaveIt | SpellDescription$ Sacrifice CARDNAME and it deals damage equal to the number of +1/+1 counters on it to each creature without flying and each player.
 SVar:LetEmHaveIt:DB$ DamageAll | ValidCards$ Creature.withoutFlying | ValidPlayers$ Each | NumDmg$ Y | References$ Y | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
