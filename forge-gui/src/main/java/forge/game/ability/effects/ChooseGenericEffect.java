@@ -1,12 +1,7 @@
 package forge.game.ability.effects;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -15,8 +10,7 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.gui.GuiChoose;
-import forge.util.Aggregates;
+import forge.util.MyRandom;
 
 public class ChooseGenericEffect extends SpellAbilityEffect {
 
@@ -35,38 +29,34 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        final BiMap<String, String> choices = HashBiMap.create();
-        for (String s : Arrays.asList(sa.getParam("Choices").split(","))) {
-            final Map<String, String> theseParams = AbilityFactory.getMapParams(host.getSVar(s));
-            choices.put(s, theseParams.get("ChoiceDescription").replace("CARDNAME", host.getName()));
+        final String[] choices = sa.getParam("Choices").split(",");
+        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+         
+        for (String s : choices) {
+            abilities.add(AbilityFactory.getAbility(host.getSVar(s), host));
         }
-
+        
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
-
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
             }
-            SpellAbility chosenSA = null;
-            String choice;
+
+            int idxChosen = 0;
+            String chosenName;
             if (sa.hasParam("AtRandom")) {
-                choice = Aggregates.random(choices.keySet());
+                idxChosen = MyRandom.getRandom().nextInt(choices.length);
+                chosenName = choices[idxChosen];
             } else {
-                if (p.isHuman()) {
-                    choice = choices.inverse().get(GuiChoose.one("Choose one", choices.values()));
-                } else { //Computer AI
-                    if ("Random".equals(sa.getParam("AILogic"))) {
-                        choice = Aggregates.random(choices.keySet());
-                    } else {
-                        choice = sa.getParam("Choices").split(",")[0];
-                    }
-                }
+                SpellAbility saChosen = p.getController().chooseSingleSpellForEffect(abilities, sa, "Choose one");
+                idxChosen = abilities.indexOf(saChosen);
+                chosenName = choices[idxChosen];
             }
-            chosenSA = AbilityFactory.getAbility(host.getSVar(choice), host);
+            SpellAbility chosenSA = AbilityFactory.getAbility(host.getSVar(chosenName), host);
             if (sa.hasParam("ShowChoice")) {
-                p.getGame().getAction().nofityOfValue(sa, p, choices.get(choice), null);
+                p.getGame().getAction().nofityOfValue(sa, p, abilities.get(idxChosen).getDescription(), null);
             }
             chosenSA.setActivatingPlayer(sa.getSourceCard().getController());
             ((AbilitySub) chosenSA).setParent(sa);
