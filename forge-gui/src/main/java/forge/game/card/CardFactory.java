@@ -721,7 +721,8 @@ public class CardFactory {
         final String[] k = strLevelCost.split(":");
         StringBuilder sb = new StringBuilder();
         sb.append('{').append(k[1].replace(" ", "}{")).append('}');
-        final String manacost = sb.toString();
+        final String manacost = k[1];
+        final String formattedMana = sb.toString();
 
         final String[] l = strMaxLevel.split(":");
         final int maxLevel = Integer.parseInt(l[1]);
@@ -761,7 +762,7 @@ public class CardFactory {
             @Override
             public String getDescription() {
                 final StringBuilder sbDesc = new StringBuilder();
-                sbDesc.append("Level up ").append(manacost).append(" (").append(manacost);
+                sbDesc.append("Level up ").append(formattedMana).append(" (").append(formattedMana);
                 sbDesc.append(": Put a level counter on this. Level up only as a sorcery.)");
                 return sbDesc.toString();
             }
