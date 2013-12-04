@@ -598,7 +598,6 @@ public class PlayerControllerHuman extends PlayerController {
         return GuiDialog.confirm(replacementEffect.getHostCard(), question);
     }
 
-
     @Override
     public List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer) {
         final InputConfirmMulligan inp = new InputConfirmMulligan(player, firstPlayer, isCommander);
@@ -715,7 +714,6 @@ public class PlayerControllerHuman extends PlayerController {
         return GuiDialog.confirm(sa.getSourceCard(), question, labels);
     }
 
-
     @Override
     public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call) {
         String[] labelsSrc = call ? new String[]{"heads", "tails"} : new String[]{"win the flip", "lose the flip"};
@@ -772,7 +770,6 @@ public class PlayerControllerHuman extends PlayerController {
         String message = formatNotificationMessage(sa, realtedTarget, value);
         GuiDialog.message(message, sa.getSourceCard().getName());
     }
-
 
     // These are not much related to PlayerController
     private String formatNotificationMessage(SpellAbility sa, GameObject target, String value) {
@@ -831,7 +828,7 @@ public class PlayerControllerHuman extends PlayerController {
     public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
         return GuiChoose.getChoices(message, min, max, options);
     }
-    
+
     @Override
     public String chooseSingleColor(ImmutableList<String> names) {
         return GuiChoose.one("Choose a color:", names);

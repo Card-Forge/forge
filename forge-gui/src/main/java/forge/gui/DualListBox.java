@@ -92,6 +92,9 @@ public class DualListBox<T> extends FPanel {
                 clearSourceSelected();
                 sourceList.validate();
                 _setButtonState();
+                if (okButton.isEnabled()) {
+                    okButton.requestFocusInWindow();
+                }
             }
         };
 
@@ -217,7 +220,7 @@ public class DualListBox<T> extends FPanel {
         }
     }
 
-    private void _handleListKey (KeyEvent e, Runnable onSpace, FList<T> arrowFocusTarget) {
+    private void _handleListKey(KeyEvent e, Runnable onSpace, FList<T> arrowFocusTarget) {
         switch (e.getKeyCode()) {
         case KeyEvent.VK_SPACE:
             onSpace.run();
@@ -409,6 +412,7 @@ public class DualListBox<T> extends FPanel {
         addDestinationElements(sourceListModel);
         clearSourceListModel();
         _setButtonState();
+        okButton.requestFocusInWindow();
     }
     
     private void _removeAll() {
