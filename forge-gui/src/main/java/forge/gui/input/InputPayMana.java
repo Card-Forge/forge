@@ -19,7 +19,6 @@ import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
-import forge.game.player.PlayerControllerAi;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
@@ -48,11 +47,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         this.player = saToPayFor.getActivatingPlayer();
         this.game = player.getGame();
         this.saPaidFor = saToPayFor;
-    }
-    
-    
-    public void runAsAi(Runnable proc) {
-        this.player.runWithController(proc, new PlayerControllerAi(this.game, this.player, this.player.getOriginalLobbyPlayer()));
     }
 
     @Override
@@ -295,7 +289,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     ComputerUtilMana.payManaCost(manaCost, saPaidFor, player);
                 }
             };
-            runAsAi(proc);
+            this.player.runAsAi(proc);
             this.showMessage();
         }
     }
@@ -317,7 +311,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                         return ComputerUtilMana.canPayManaCost(manaCost, saPaidFor, player);
                     }
                 };
-                runAsAi(proc);
+                this.player.runAsAi(proc);
                 canPayManaCost = proc.getResult();
             }
             if (canPayManaCost) {
