@@ -18,6 +18,7 @@
 package forge.gui.input;
 
 import forge.card.mana.ManaCost;
+import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -45,35 +46,23 @@ public class InputPayManaExecuteCommands extends InputPayMana {
     private boolean bPaid = false;
     public boolean isPaid() { return bPaid; }
 
-
     /**
      * <p>
      * Constructor for Input_PayManaCost_Ability.
      * </p>
-     * 
-     * @param m
-     *            a {@link java.lang.String} object.
-     * @param manaCost2
-     *            a {@link java.lang.String} object.
-     * @param paidCommand2
-     *            a {@link forge.Command} object.
-     * @param unpaidCommand2
-     *            a {@link forge.Command} object.
      */
-    public InputPayManaExecuteCommands(final Player p, final String prompt, final ManaCost manaCost2) {
-        super(new SpellAbility(null, Cost.Zero) {
+    public InputPayManaExecuteCommands(final Card sourceCard, final Player p, final String prompt, final ManaCost manaCost0) {
+        super(new SpellAbility(sourceCard, Cost.Zero) {
             @Override public void resolve() {}
             @Override public Player getActivatingPlayer() { return p; }
             @Override public boolean canPlay() { return false; }
         });
-        this.originalManaCost = manaCost2;
+        this.originalManaCost = manaCost0;
         this.phyLifeToLose = 0;
         this.message = prompt;
 
         this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
-
     }
-
 
     @Override
     public void selectPlayer(final Player selectedPlayer) {
@@ -105,7 +94,7 @@ public class InputPayManaExecuteCommands extends InputPayMana {
     /** {@inheritDoc} */
     @Override
     protected String getMessage() {
-        final StringBuilder msg = new StringBuilder(this.message + "Pay Mana Cost: " + this.manaCost);
+        final StringBuilder msg = new StringBuilder(this.message + "\n\nPay Mana Cost: " + this.manaCost);
         if (this.phyLifeToLose > 0) {
             msg.append(" (");
             msg.append(this.phyLifeToLose);

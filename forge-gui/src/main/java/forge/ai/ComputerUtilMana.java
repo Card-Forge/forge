@@ -96,10 +96,7 @@ public class ComputerUtilMana {
     }
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
-        final Card card = sa.getSourceCard();
-        if (card != null) {
-            adjustManaCostToAvoidNegEffects(cost, card);
-        }
+        adjustManaCostToAvoidNegEffects(cost, sa.getSourceCard());
 
         final ManaPool manapool = ai.getManaPool();
         List<ManaCostShard> unpaidShards = cost.getUnpaidShards();

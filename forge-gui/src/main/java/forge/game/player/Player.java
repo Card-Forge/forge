@@ -2947,7 +2947,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param proc
      */
     public void runAsAi(Runnable proc) {
-        if (PlayerControllerAi.class.isInstance(controller)) {
+        if (controller instanceof PlayerControllerAi) {
             proc.run(); //can just run with current controller if it's an AI controller
             return;
         }
