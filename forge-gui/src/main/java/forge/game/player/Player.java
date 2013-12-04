@@ -2941,27 +2941,20 @@ public class Player extends GameEntity implements Comparable<Player> {
         controllerCreator = ctrlr;
         controller = ctrlr;
     }
-
+    
     /**
-     * Run a procedure using an AI controller
+     * Run a procedure using a different controller
      * @param proc
+     * @param tempController
      */
-    public void runAsAi(Runnable proc) {
-        if (controller instanceof PlayerControllerAi) {
-            proc.run(); //can just run with current controller if it's an AI controller
-            return;
-        }
-
+    public void runWithController(Runnable proc, PlayerController tempController) {
+        
         PlayerController oldController = controller;
-        controller = new PlayerControllerAi(this.game, this, this.getOriginalLobbyPlayer());
+        controller = tempController;
         try {
             proc.run();
+        } finally {
             controller = oldController;
-        }
-        catch (Exception ex) {
-            //ensure controller restored before throwing exception in case user chooses to continue
-            controller = oldController;
-            throw ex;
         }
     }
 
