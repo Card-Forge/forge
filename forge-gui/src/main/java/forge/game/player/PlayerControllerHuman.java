@@ -779,22 +779,22 @@ public class PlayerControllerHuman extends PlayerController {
         switch(sa.getApi()) {
             case ChooseNumber:
                 final boolean random = sa.hasParam("Random");
-                return String.format(random ? "Randomly chosen number for %s is %s" : "%s choses number: %s", mayBeYou(target, player), value);
+                return String.format(random ? "Randomly chosen number for %s is %s" : "%s choses number: %s", mayBeYou(target), value);
             case FlipACoin:
-                String flipper = StringUtils.capitalize(mayBeYou(target, player));
+                String flipper = StringUtils.capitalize(mayBeYou(target));
                 return sa.hasParam("NoCall")
                         ? String.format("%s flip comes up %s", Lang.getPossesive(flipper), value)
                         : String.format("%s %s the flip", flipper, Lang.joinVerb(flipper, value));
             case Protection:
-                String choser = StringUtils.capitalize(mayBeYou(target, player));
+                String choser = StringUtils.capitalize(mayBeYou(target));
                 return String.format("%s %s protection from %s", choser, Lang.joinVerb(choser, "choose"), value);
             default:
-                return String.format("%s effect's value for %s is %s", sa.getSourceCard().getName(), mayBeYou(target, player), value);
+                return String.format("%s effect's value for %s is %s", sa.getSourceCard().getName(), mayBeYou(target), value);
         }
     }
 
-    private String mayBeYou(GameObject what, Player you) {
-        return what == you ? "you" : what.toString();
+    private String mayBeYou(GameObject what) {
+        return what == null ? "(null)" : what == player ? "you" : what.toString();
     }
     // end of not related candidates for move.
 
