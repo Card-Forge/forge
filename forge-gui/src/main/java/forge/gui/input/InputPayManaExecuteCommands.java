@@ -94,7 +94,7 @@ public class InputPayManaExecuteCommands extends InputPayMana {
     /** {@inheritDoc} */
     @Override
     protected String getMessage() {
-        final StringBuilder msg = new StringBuilder(this.message + "\n\nPay Mana Cost: " + this.manaCost);
+        final StringBuilder msg = new StringBuilder(this.message + "\nPay Mana Cost: " + this.manaCost);
         if (this.phyLifeToLose > 0) {
             msg.append(" (");
             msg.append(this.phyLifeToLose);
