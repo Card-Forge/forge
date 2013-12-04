@@ -4046,6 +4046,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return hasK1 == costsPaid.contains(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
     }
 
+    private int pseudoKickerMagnitude = 0;
+    public final void addPseudoMultiKickerMagnitude(final int n) { this.pseudoKickerMagnitude += n; }
+    public final void setPseudoMultiKickerMagnitude(final int n) { this.pseudoKickerMagnitude = n; }
+    public final int getPseudoKickerMagnitude() { return pseudoKickerMagnitude; }
 
     // for cards like Giant Growth, etc.
     /**

@@ -55,6 +55,9 @@ import forge.game.event.GameEventSpellResolved;
 import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.Ability;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilityTriggered;
@@ -338,7 +341,39 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                             source.addMultiKickerMagnitude(1);
                     } while( hasPaid );
                 }
-                
+                if (source.isCreature() && Iterables.any(activator.getCardsIn(ZoneType.Battlefield),
+                        CardPredicates.hasKeyword("As an additional cost to cast creature spells," +
+                        		" you may pay any amount of mana. If you do, that creature enters " +
+                        		"the battlefield with that many additional +1/+1 counters on it."))) {
+                	final Cost costPseudoKicker = new Cost(ManaCost.ONE, false);
+                	boolean hasPaid = false;
+                    do {
+                        int mkMagnitude = source.getPseudoKickerMagnitude();
+                        String prompt = String.format("Additional Cost for %s\r\nTimes Kicked: %d\r\n", source, mkMagnitude );
+                        hasPaid = activator.getController().payManaOptional(source, costPseudoKicker, sp, prompt, ManaPaymentPurpose.Multikicker);
+                        if (hasPaid) {
+                            source.addPseudoMultiKickerMagnitude(1);
+                        }
+                    } while (hasPaid);
+                    if (source.getPseudoKickerMagnitude() > 0) {
+                        String abStr = "AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield"
+                                + "| Defined$ ReplacedCard | SubAbility$ ChorusDBETBCounters";
+                        String dbStr = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + source.getPseudoKickerMagnitude();
+                        
+                        source.setSVar("ChorusETBCounters", abStr);
+                        source.setSVar("ChorusDBETBCounters", dbStr);
+
+                        String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
+                                + "| ReplaceWith$ ChorusETBCounters | Secondary$ True | Description$ CARDNAME"
+                                + " enters the battlefield with " + source.getPseudoKickerMagnitude() + " +1/+1 counters.";
+
+                        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, source, false);
+                        re.setLayer(ReplacementLayer.Other);
+
+                        source.addReplacementEffect(re);
+                    }
+                }
+
                 // The ability is added to stack HERE
                 si = this.push(sp);
                 
