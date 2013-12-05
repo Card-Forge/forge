@@ -61,7 +61,7 @@ import forge.util.maps.MapOfLists;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final FControl fc;
-    public FControlGameEventHandler(FControl fc ) {
+    public FControlGameEventHandler(FControl fc) {
         this.fc = fc;
     }
 
@@ -73,15 +73,15 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final AtomicBoolean phaseUpdPlanned = new AtomicBoolean(false);
     @Override
     public Void visit(final GameEventTurnPhase ev) {
-        if ( phaseUpdPlanned.getAndSet(true) ) return null;
-        
+        if (phaseUpdPlanned.getAndSet(true)) return null;
+
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
             PhaseHandler pH = fc.getObservedGame().getPhaseHandler();
             Player p = pH.getPlayerTurn();
             PhaseType ph = pH.getPhase();
 
             phaseUpdPlanned.set(false);
-            
+
             final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
             PhaseLabel lbl = matchUi.getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
 
@@ -90,28 +90,28 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         } });
         return null;
     }
-    
+
     /* (non-Javadoc)
      * @see forge.game.event.IGameEventVisitor.Base#visit(forge.game.event.GameEventPlayerPriority)
      */
-    
-    
     private final AtomicBoolean combatUpdPlanned = new AtomicBoolean(false);
     @Override
     public Void visit(GameEventPlayerPriority event) {
-        if ( combatUpdPlanned.getAndSet(true) ) return null;
-        FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
-            combatUpdPlanned.set(false);
-            CMatchUI.SINGLETON_INSTANCE.showCombat(fc.getObservedGame().getCombat());
-        } });
+        if (combatUpdPlanned.getAndSet(true)) { return null; }
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                combatUpdPlanned.set(false);
+                CMatchUI.SINGLETON_INSTANCE.showCombat(fc.getObservedGame().getCombat());
+            }
+        });
         return null;
     }
-    
 
     private final AtomicBoolean turnUpdPlanned = new AtomicBoolean(false);
     @Override
     public Void visit(final GameEventTurnBegan event) {
-        if ( turnUpdPlanned.getAndSet(true) ) return null;
+        if (turnUpdPlanned.getAndSet(true)) { return null; }
 
         final Game game = fc.getObservedGame(); // to make sure control gets a correct game instance
         FThreads.invokeInEdtNowOrLater(new Runnable() {
@@ -119,14 +119,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             public void run() {
                 VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(event.turnOwner);
                 SDisplayUtil.showTab(nextField);
-                
+
                 turnUpdPlanned.set(false);
                 CPrompt.SINGLETON_INSTANCE.updateText(game);
             }
         });
         return null;
     }
-    
+
     @Override
     public Void visit(GameEventAnteCardsSelected ev) {
         // Require EDT here?
@@ -138,33 +138,34 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         GuiDialog.message(msg.toString(), "Ante");
         return null;
     }
-    
+
     @Override
     public Void visit(GameEventPlayerControl ev) {
-        if ( fc.getObservedGame().isGameOver() )
+        if (fc.getObservedGame().isGameOver()) {
             return null;
+        }
 
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
             CMatchUI.SINGLETON_INSTANCE.initHandViews(FServer.instance.getLobby().getGuiPlayer());
             SLayoutIO.loadLayout(null);
             VMatchUI.SINGLETON_INSTANCE.populate();
-            for(VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
+            for (VHand h : VMatchUI.SINGLETON_INSTANCE.getHands()) {
                 h.getLayoutControl().updateHand();
             }
         } });
         return null;
     }
-    
+
     private final Runnable unlockGameThreadOnGameOver = new Runnable() { @Override public void run() {
         fc.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
     } };
-    
+
     @Override
     public Void visit(GameEventGameOutcome ev) {
         FThreads.invokeInEdtNowOrLater(unlockGameThreadOnGameOver);
         return null;
     }
-    
+
     @Override
     public Void visit(GameEventGameFinished ev) {
         FThreads.invokeInEdtNowOrLater(new Runnable() { @Override public void run() {
@@ -173,9 +174,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         } });
         return null;
     }
-    
+
     private final AtomicBoolean stackUpdPlanned = new AtomicBoolean(false);
-    private final Runnable updStack = new Runnable() { @Override public void run() { 
+    private final Runnable updStack = new Runnable() { @Override public void run() {
             stackUpdPlanned.set(false);
             CStack.SINGLETON_INSTANCE.update();
         }
@@ -183,56 +184,59 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventSpellAbilityCast event) {
-        if ( !stackUpdPlanned.getAndSet(true) )
+        if (!stackUpdPlanned.getAndSet(true)) {
             FThreads.invokeInEdtNowOrLater(updStack);
+        }
         return null;
     }
     @Override
     public Void visit(GameEventSpellResolved event) {
-        if ( !stackUpdPlanned.getAndSet(true) )
+        if (!stackUpdPlanned.getAndSet(true)) {
             FThreads.invokeInEdtNowOrLater(updStack);
+        }
         return null;
     }
     @Override
     public Void visit(GameEventSpellRemovedFromStack event) {
-        if ( !stackUpdPlanned.getAndSet(true) )
+        if (!stackUpdPlanned.getAndSet(true)) {
             FThreads.invokeInEdtNowOrLater(updStack);
+        }
         return null;
     }
-    
-
 
     private final List<Pair<Player, ZoneType>> zonesToUpdate = new Vector<Pair<Player, ZoneType>>();
-    private final Runnable updZones = new Runnable() { 
-        @Override public void run() { 
+    private final Runnable updZones = new Runnable() {
+        @Override public void run() {
             synchronized (zonesToUpdate) {
                 CMatchUI.SINGLETON_INSTANCE.updateZones(zonesToUpdate);
                 zonesToUpdate.clear();
             }
         }
     };
-    
+
     @Override
     public Void visit(GameEventZone event) {
-        if ( event.player != null ) {
+        if (event.player != null) {
             // anything except stack will get here
             updateZone(Pair.of(event.player, event.zoneType));
-        } 
+        }
         return null;
     }
-    
+
     @Override
     public Void visit(GameEventCardAttachment event) {
         // TODO Auto-generated method stub
         Game game = event.equipment.getGame();
         PlayerZone zEq = (PlayerZone)game.getZoneOf(event.equipment);
-        if( event.oldEntiy instanceof Card )
+        if (event.oldEntiy instanceof Card) {
             updateZone(game.getZoneOf((Card)event.oldEntiy));
-        if( event.newTarget instanceof Card )
+        }
+        if (event.newTarget instanceof Card) {
             updateZone(game.getZoneOf((Card)event.newTarget));
+        }
         return updateZone(zEq);
     }
-    
+
     private Void updateZone(Zone z) {
         return updateZone(Pair.of(z.getPlayer(), z.getZoneType()));
     }
@@ -241,27 +245,27 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         boolean needUpdate = false;
         synchronized (zonesToUpdate) {
             needUpdate = zonesToUpdate.isEmpty();
-            if ( !zonesToUpdate.contains(kv) ) {
+            if (!zonesToUpdate.contains(kv)) {
                 zonesToUpdate.add(kv);
             }
         }
-        if( needUpdate )
+        if (needUpdate) {
             FThreads.invokeInEdtNowOrLater(updZones);
+        }
         return null;
     }
-    
-    
+
     private final Set<Card> cardsToUpdate = new HashSet<Card>();
-    private final Runnable updCards = new Runnable() { 
-        @Override public void run() { 
+    private final Runnable updCards = new Runnable() {
+        @Override
+        public void run() {
             synchronized (cardsToUpdate) {
                 CMatchUI.SINGLETON_INSTANCE.updateCards(cardsToUpdate);
                 cardsToUpdate.clear();
             }
         }
     };
-    
-    
+
     @Override
     public Void visit(GameEventCardTapped event) {
         return updateSingleCard(event.card);
@@ -278,28 +282,29 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(GameEventBlockersDeclared event) { // This is to draw icons on blockers declared by AI 
-        for(MapOfLists<Card, Card> kv : event.blockers.values()) {
-            for(Collection<Card> blockers : kv.values()) {
+    public Void visit(GameEventBlockersDeclared event) { // This is to draw icons on blockers declared by AI
+        for (MapOfLists<Card, Card> kv : event.blockers.values()) {
+            for (Collection<Card> blockers : kv.values()) {
                 updateManyCards(blockers);
             }
         }
         return super.visit(event);
     }
-    
+
     @Override
     public Void visit(GameEventAttackersDeclared event) {
         // Skip redraw for GUI player?
-        if ( event.player.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
+        if (event.player.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer()) {
             return null;
+        }
 
-        // Update all attackers. 
+        // Update all attackers.
         // Although they might have been updated when they were apped, there could be someone with vigilance, not redrawn yet.
         updateManyCards(event.attackersMap.values());
 
         return super.visit(event);
     }
-    
+
     @Override
     public Void visit(GameEventCombatEnded event) {
         // This should remove sword/shield icons from combatants by the time game moves to M2
@@ -312,26 +317,28 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         boolean needUpdate = false;
         synchronized (cardsToUpdate) {
             needUpdate = cardsToUpdate.isEmpty();
-            if ( !cardsToUpdate.contains(c) ) {
+            if (!cardsToUpdate.contains(c)) {
                 cardsToUpdate.add(c);
             }
         }
-        if( needUpdate )
+        if (needUpdate) {
             FThreads.invokeInEdtNowOrLater(updCards);
+        }
         return null;
     }
-    
+
     private Void updateManyCards(Collection<Card> cc) {
         boolean needUpdate = false;
         synchronized (cardsToUpdate) {
             needUpdate = cardsToUpdate.isEmpty();
             cardsToUpdate.addAll(cc);
         }
-        if( needUpdate )
+        if (needUpdate) {
             FThreads.invokeInEdtNowOrLater(updCards);
+        }
         return null;
-    }    
-    
+    }
+
     /* (non-Javadoc)
      * @see forge.game.event.IGameEventVisitor.Base#visit(forge.game.event.GameEventCardStatsChanged)
      */
@@ -340,23 +347,23 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         // TODO Smart partial updates
         return updateManyCards(event.cards);
     }
-    
+
     // Update manapool
     private final List<Player> manaPoolUpdate = new Vector<Player>();
-    private final Runnable updManaPool = new Runnable() { 
-        @Override public void run() { 
+    private final Runnable updManaPool = new Runnable() {
+        @Override public void run() {
             synchronized (manaPoolUpdate) {
                 CMatchUI.SINGLETON_INSTANCE.updateManaPool(manaPoolUpdate);
                 manaPoolUpdate.clear();
             }
         }
     };
-    
+
     @Override
     public Void visit(GameEventManaPool event) {
-        boolean invokeUpdate = false; 
+        boolean invokeUpdate = false;
         synchronized (manaPoolUpdate) {
-            if( !manaPoolUpdate.contains(event.player) ) {
+            if (!manaPoolUpdate.contains(event.player)) {
                 invokeUpdate = manaPoolUpdate.isEmpty();
                 manaPoolUpdate.add(event.player);
             }
@@ -365,11 +372,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             FThreads.invokeInEdtNowOrLater(updManaPool);
         return null;
     }
-    
-    // Update lives counters 
+
+    // Update lives counters
     private final List<Player> livesUpdate = new Vector<Player>();
-    private final Runnable updLives = new Runnable() { 
-        @Override public void run() { 
+    private final Runnable updLives = new Runnable() {
+        @Override public void run() {
             synchronized (livesUpdate) {
                 CMatchUI.SINGLETON_INSTANCE.updateLives(livesUpdate);
                 livesUpdate.clear();
@@ -378,9 +385,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     };
     @Override
     public Void visit(GameEventPlayerLivesChanged event) {
-        boolean invokeUpdate = false; 
+        boolean invokeUpdate = false;
         synchronized (livesUpdate) {
-            if( !livesUpdate.contains(event.player) ) {
+            if (!livesUpdate.contains(event.player)) {
                 invokeUpdate = livesUpdate.isEmpty();
                 livesUpdate.add(event.player);
             }
@@ -392,9 +399,9 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventPlayerPoisoned event) {
-        boolean invokeUpdate = false; 
+        boolean invokeUpdate = false;
         synchronized (livesUpdate) {
-            if( !livesUpdate.contains(event.receiver) ) {
+            if (!livesUpdate.contains(event.receiver)) {
                 invokeUpdate = livesUpdate.isEmpty();
                 livesUpdate.add(event.receiver);
             }
