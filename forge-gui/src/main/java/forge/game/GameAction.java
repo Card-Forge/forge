@@ -781,7 +781,6 @@ public class GameAction {
         // do this twice, sometimes creatures/permanents will survive when they
         // shouldn't
         for (int q = 0; q < 9; q++) {
-
             boolean checkAgain = false;
 
             this.checkStaticAbilities();
@@ -809,7 +808,6 @@ public class GameAction {
             }
 
             for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-
                 if (c.isCreature() && c.isPaired()) { // Soulbond unpairing (702.93e) - should not be here
                     Card partner = c.getPairedWith();
                     if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInZone(ZoneType.Battlefield)) {
@@ -919,7 +917,8 @@ public class GameAction {
                     c.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);
                     c.setBestow(false);
                     game.fireEvent(new GameEventCardStatsChanged(c));
-                } else {
+                }
+                else {
                     this.moveToGraveyard(c);
                 }
                 checkAgain = true;
@@ -930,10 +929,9 @@ public class GameAction {
 
             if (tgt.canOnlyTgtOpponent() && !c.getController().getOpponent().equals(pl)) {
                 invalid = true;
-            } else {
-                if (pl.hasProtectionFrom(c)) {
-                    invalid = true;
-                }
+            }
+            else if (pl.hasProtectionFrom(c)) {
+                invalid = true;
             }
             if (invalid) {
                 c.unEnchantEntity(pl);
@@ -951,7 +949,8 @@ public class GameAction {
                 c.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);
                 c.setBestow(false);
                 game.fireEvent(new GameEventCardStatsChanged(c));
-            } else {
+            }
+            else {
                 this.moveToGraveyard(c);
             }
             checkAgain = true;

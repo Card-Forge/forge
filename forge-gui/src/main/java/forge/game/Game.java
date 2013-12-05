@@ -55,9 +55,9 @@ public class Game {
     private final List<Player> roIngamePlayers;
     private final List<Player> allPlayers;
     private final List<Player> ingamePlayers = new ArrayList<Player>();
-    
+
     private List<Card> activePlanes = null;
-    
+
     public final Phase cleanup;
     public final EndOfTurn endOfTurn;
     public final Phase endOfCombat;
@@ -82,8 +82,8 @@ public class Game {
     /**
      * Constructor.
      * @param players2.entrySet()
-     * @param match0 
-     * @param input 
+     * @param match0
+     * @param input
      */
     public Game(List<RegisteredPlayer> players0, GameType t, Match match0) { /* no more zones to map here */
         type = t;
@@ -112,10 +112,10 @@ public class Game {
         cleanup = new Phase(PhaseType.CLEANUP);
         endOfTurn = new EndOfTurn(this);
         endOfCombat = new Phase(PhaseType.COMBAT_END);
-        
+
         subscribeToEvents(gameLog.getEventVisitor());
     }
-    
+
 
     /**
      * Gets the players who are still fighting to win.
@@ -225,8 +225,6 @@ public class Game {
         return this.getPhaseHandler().getCombat();
     }
 
-
-
     /**
      * Gets the game log.
      * 
@@ -263,8 +261,8 @@ public class Game {
     public final long getTimestamp() {
         return this.timestamp;
     }
-    
-    public final GameOutcome getOutcome() { 
+
+    public final GameOutcome getOutcome() {
         return this.outcome;
     }
 
@@ -283,26 +281,27 @@ public class Game {
     }
 
     /**
-     * @param reason 
+     * @param reason
      * @param go the gameOver to set
      */
     public synchronized void setGameOver(GameEndReason reason) {
         this.age = GameStage.GameOver;
-        for (Player p : allPlayers ) {
-            if (p.isMindSlaved()) 
+        for (Player p : allPlayers) {
+            if (p.isMindSlaved()) {
                 p.releaseControl(); // for correct totals
+            }
         }
 
         for (Player p : roIngamePlayers) {
             p.onGameOver();
         }
-        
+
         final GameOutcome result = new GameOutcome(reason, getRegisteredPlayers());
         result.setTurnsPlayed(getPhaseHandler().getTurn());
 
         this.outcome = result;
         match.addGamePlayed(this);
-        
+
         // The log shall listen to events and generate text internally
         fireEvent(new GameEventGameOutcome(result, match.getPlayedGames()));
     }
@@ -314,7 +313,8 @@ public class Game {
     public List<Card> getCardsIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
-        } else {
+        }
+        else {
             List<Card> cards = new ArrayList<Card>();
             for (final Player p : getPlayers()) {
                 cards.addAll(p.getZone(zone).getCards());
@@ -326,7 +326,8 @@ public class Game {
     public List<Card> getCardsIncludePhasingIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
-        } else {
+        }
+        else {
             List<Card> cards = new ArrayList<Card>();
             for (final Player p : getPlayers()) {
                 cards.addAll(p.getCardsIncludePhasingIn(zone));
@@ -450,18 +451,20 @@ public class Game {
     public Player getNextPlayerAfter(final Player playerTurn) {
         int iPlayer = roIngamePlayers.indexOf(playerTurn);
 
-        if (roIngamePlayers.isEmpty()) 
+        if (roIngamePlayers.isEmpty()) {
             return null;
-        
+        }
+
         if (-1 == iPlayer) { // if playerTurn has just lost
             int iAlive;
             iPlayer = allPlayers.indexOf(playerTurn);
             do {
                 iPlayer = (iPlayer + 1) % allPlayers.size();
                 iAlive = roIngamePlayers.indexOf(allPlayers.get(iPlayer));
-            } while(iAlive < 0);
+            } while (iAlive < 0);
             iPlayer = iAlive;
-        } else { // for the case noone has died
+        }
+        else { // for the case noone has died
             if (iPlayer == roIngamePlayers.size() - 1) {
                 iPlayer = -1;
             }
@@ -470,7 +473,7 @@ public class Game {
 
         return roIngamePlayers.get(iPlayer);
     }
-    
+
     public int getPosition(Player player, Player startingPlayer) {
         int startPosition = roIngamePlayers.indexOf(startingPlayer);
         int position = (roIngamePlayers.indexOf(player) + startPosition) % roIngamePlayers.size() + 1;
@@ -491,14 +494,15 @@ public class Game {
     }
 
     private final boolean LOG_EVENTS = false;
-    
+
     /**
      * Fire only the events after they became real for gamestate and won't get replaced.<br>
-     * The events are sent to UI, log and sound system. Network listeners are under development. 
+     * The events are sent to UI, log and sound system. Network listeners are under development.
      */
     public void fireEvent(GameEvent event) {
-        if ( LOG_EVENTS )
+        if (LOG_EVENTS) {
             System.out.println("GE: " + event.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(4, true));
+        }
 
         events.post(event);
     }
@@ -512,7 +516,7 @@ public class Game {
     public GameType getType() {
         return type;
     }
-    
+
     /**
      * @return the activePlane
      */
