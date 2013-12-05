@@ -653,6 +653,7 @@ public class PlayerControllerHuman extends PlayerController {
         do {
             if (chosenSa != null) {
                 HumanPlay.playSpellAbility(player, chosenSa);
+                if (game.isGameOver()) { return; } //don't wait to pass priority if player conceded while in middle of playing a spell/ability
             }
             InputPassPriority defaultInput = new InputPassPriority(player);
             Singletons.getControl().getInputQueue().setInputAndWait(defaultInput);
