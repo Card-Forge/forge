@@ -54,8 +54,9 @@ public class InputQueue extends Observable {
     public final void removeInput(Input inp) {
         Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
 
-        if( topMostInput != inp )
+        if (topMostInput != inp) {
             throw new RuntimeException("Cannot remove input " + inp.getClass().getSimpleName() + " because it's not on top of stack. Stack = " + inputStack );
+        }
         updateObservers();
     }
 
@@ -68,9 +69,9 @@ public class InputQueue extends Observable {
      */
     public final Input getActualInput(Game game) {
         Input topMost = inputStack.peek(); // incoming input to Control
-        if (topMost != null && !game.isGameOver() )
+        if (topMost != null && !game.isGameOver()) {
             return topMost;
-
+        }
         return inputLock;
     } // getInput()
 
@@ -103,10 +104,11 @@ public class InputQueue extends Observable {
      * TODO: Write javadoc for this method.
      */
     public void onGameOver(boolean releaseAllInputs) {
-        for(InputSynchronized inp : inputStack ) {
+        for (InputSynchronized inp : inputStack ) {
             inp.relaseLatchWhenGameIsOver();
-            if( !releaseAllInputs )
+            if (!releaseAllInputs) {
                 break;
+            }
         }
     }
 } // InputControl
