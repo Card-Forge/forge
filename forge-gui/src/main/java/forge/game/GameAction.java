@@ -120,7 +120,6 @@ public class GameAction {
      * @return a {@link forge.game.card.Card} object.
      */
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position) {
-        
         if (c.isCopiedSpell()) {
             if ((zoneFrom != null)) {
                 zoneFrom.remove(c);
@@ -138,7 +137,7 @@ public class GameAction {
 
         //Rule 110.5g: A token that has left the battlefield can't move to another zone
         if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Command)) {
-            return c; 
+            return c;
         }
 
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
@@ -166,7 +165,7 @@ public class GameAction {
                         c.clearStates(CardCharacteristicName.Flipped);
                     }
                 }
-    
+
                 copied = CardFactory.copyCard(c, false);
                 copied.setUnearthed(c.isUnearthed());
                 copied.setTapped(false);
@@ -185,9 +184,10 @@ public class GameAction {
         }
 
         if (!suppress) {
-            if(zoneFrom == null)
+            if (zoneFrom == null) {
                 copied.getOwner().addInboundToken(copied);
-            
+            }
+
             HashMap<String, Object> repParams = new HashMap<String, Object>();
             repParams.put("Event", "Moved");
             repParams.put("Affected", copied);
@@ -222,10 +222,10 @@ public class GameAction {
 
         if (zoneFrom != null) {
             if (fromBattlefield && c.isCreature() && game.getCombat() != null) {
-                if ( !toBattlefield )
+                if (!toBattlefield) {
                     game.getCombat().saveLKI(lastKnownInfo);
+                }
                 game.getCombat().removeFromCombat(c);
-                
             }
             if ((zoneFrom.is(ZoneType.Library) || zoneFrom.is(ZoneType.PlanarDeck) || zoneFrom.is(ZoneType.SchemeDeck))
                     && zoneFrom == zoneTo && position.equals(zoneFrom.size()) && position != 0) {
@@ -238,12 +238,13 @@ public class GameAction {
         // but how to query for input here and continue later while the callers assume synchronous result?
         zoneTo.add(copied, position);
 
-        if (fromBattlefield)
+        if (fromBattlefield) {
             c.setZone(zoneTo);
+        }
 
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
-        
+
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
 
@@ -264,7 +265,7 @@ public class GameAction {
 
         // remove all counters from the card if destination is not the battlefield
         // UNLESS we're dealing with Skullbriar, the Walking Grave
-        if (!c.isToken() && (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) || 
+        if (!c.isToken() && (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) ||
                 (!toBattlefield && !c.getName().equals("Skullbriar, the Walking Grave")))) {
             copied.clearCounters();
         }
@@ -282,8 +283,9 @@ public class GameAction {
             // Soulbond unpairing
             if (c.isPaired()) {
                 c.getPairedWith().setPairedWith(null);
-                if (!c.isToken())
+                if (!c.isToken()) {
                     c.setPairedWith(null);
+                }
             }
             unattachCardLeavingBattlefield(copied);
         } else if (toBattlefield) {
@@ -381,7 +383,7 @@ public class GameAction {
      * @return a {@link forge.game.card.Card} object.
      */
     public final Card moveTo(final Zone zoneTo, Card c) {
-       // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT, 
+       // FThreads.assertExecutedByEdt(false); // This code must never be executed from EDT,
                                              // use FThreads.invokeInNewThread to run code in a pooled thread
 
         return moveTo(zoneTo, c, null);
@@ -389,7 +391,7 @@ public class GameAction {
 
     public final Card moveTo(final Zone zoneTo, Card c, Integer position) {
         FThreads.assertExecutedByEdt(false);
-        
+
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
         final Zone zoneFrom = game.getZoneOf(c);
@@ -456,8 +458,9 @@ public class GameAction {
         if (c.hasStartOfKeyword("Echo")) {
             c.addExtrinsicKeyword("(Echo unpaid)");
         }
-        if ( game.getPhaseHandler().inCombat() )
+        if (game.getPhaseHandler().inCombat()) {
             game.getCombat().removeFromCombat(c);
+        }
 
         c.setTurnInZone(tiz);
 
@@ -684,9 +687,10 @@ public class GameAction {
     /** */
     public final void checkStaticAbilities() {
         FThreads.assertExecutedByEdt(false);
-        
-        if (game.isGameOver())
+
+        if (game.isGameOver()) {
             return;
+        }
 
         // remove old effects
         Set<Card> affectedCards = game.getStaticEffects().clearStaticEffects();
@@ -708,7 +712,7 @@ public class GameAction {
             @Override
             public int compare(final StaticAbility a, final StaticAbility b) {
                 int layerDelta = a.getLayer() - b.getLayer();
-                if( layerDelta != 0) return layerDelta;
+                if (layerDelta != 0) return layerDelta;
 
                 long tsDelta = a.getHostCard().getTimestamp() - b.getHostCard().getTimestamp();
                 return tsDelta == 0 ? 0 : tsDelta > 0 ? 1 : -1;
@@ -717,8 +721,9 @@ public class GameAction {
         Collections.sort(staticAbilities, comp);
         for (final StaticAbility stAb : staticAbilities) {
             List<Card> affectedHere = stAb.applyAbility("Continuous");
-            if ( null != affectedHere )
+            if (null != affectedHere) {
                 affectedCards.addAll(affectedHere);
+            }
         }
 
         // card state effects like Glorious Anthem
@@ -732,14 +737,16 @@ public class GameAction {
 
         // Exclude cards in hidden zones from update
         Iterator<Card> it = affectedCards.iterator();
-        while ( it.hasNext() ) {
+        while (it.hasNext()) {
             Card c = it.next();
-            if ( c.isInZone(ZoneType.Library) )
+            if (c.isInZone(ZoneType.Library)) {
                 it.remove();
+            }
         }
-        
-        if ( !affectedCards.isEmpty() )
+
+        if (!affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
+        }
     }
 
     /**
@@ -748,8 +755,6 @@ public class GameAction {
      * </p>
      */
     public final void checkStateEffects() {
-        
-
         // sol(10/29) added for Phase updates, state effects shouldn't be
         // checked during Spell Resolution (except when persist-returning
         if (game.getStack().isResolving()) {
@@ -761,13 +766,15 @@ public class GameAction {
         // return;
         // }
 
-        if (game.isGameOver())
+        if (game.isGameOver()) {
             return;
+        }
 
         // Max: I don't know where to put this! - but since it's a state based action, it must be in check state effects
-        if(game.getType() == GameType.Archenemy) 
+        if (game.getType() == GameType.Archenemy) {
             game.archenemy904_10();
-        
+        }
+
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);
 
@@ -811,30 +818,30 @@ public class GameAction {
                     }
                 }
 
-                if (c.isCreature() ) {
+                if (c.isCreature()) {
                     // Rule 704.5f - Destroy (no regeneration) for toughness <= 0
-                    if( c.getNetDefense() <= 0 ) { 
+                    if (c.getNetDefense() <= 0) {
                         this.destroyNoRegeneration(c, null);
                         checkAgain = true;
                     } else
 
-                    // Rule 704.5g - Destroy due to lethal damage    
-                    if ( c.getNetDefense() <= c.getDamage() ) { 
+                    // Rule 704.5g - Destroy due to lethal damage
+                    if (c.getNetDefense() <= c.getDamage()) {
                         this.destroy(c, null);
                         checkAgain = true;
                     }
                 }
-                
+
                 checkAgain |= stateBasedAction704_5n(c); // Auras attached to illegal or not attached go to graveyard
                 checkAgain |= stateBasedAction704_5p(c); // Equipment and Fortifications
-                
+
                 if (c.isCreature() && c.isEnchanting()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
                     c.unEnchantEntity(c.getEnchanting());
                     checkAgain = true;
                 }
-                
+
                 checkAgain |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
-                
+
                 if (c.getCounters(CounterType.DREAM) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
                     c.subtractCounter(CounterType.DREAM,  c.getCounters(CounterType.DREAM) - 7);
                     checkAgain = true;
@@ -847,11 +854,11 @@ public class GameAction {
                 game.getStack().chooseOrderOfSimultaneousStackEntryAll();
             }
             boolean yamazaki = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Brothers Yamazaki")).size() ==  2;
-            for(Player p : game.getPlayers() ) {
+            for (Player p : game.getPlayers()) {
                 if (this.handleLegendRule(p, yamazaki)) {
                     checkAgain = true;
                 }
-    
+
                 if (this.handlePlaneswalkerRule(p)) {
                     checkAgain = true;
                 }
@@ -877,9 +884,10 @@ public class GameAction {
      */
     private boolean stateBasedAction704_5n(Card c) {
         boolean checkAgain = false;
-        if (!c.isAura()) 
+        if (!c.isAura()) {
             return false;
-    
+        }
+
         // Check if Card Aura is attached to is a legal target
         final GameEntity entity = c.getEnchanting();
         SpellAbility sa = c.getSpells().get(0);
@@ -1022,12 +1030,12 @@ public class GameAction {
         if (c.getCounters(CounterType.P1P1) > 0 && c.getCounters(CounterType.M1M1) > 0) {
             int plusOneCounters = c.getCounters(CounterType.P1P1);
             int minusOneCounters = c.getCounters(CounterType.M1M1);
-    
-            if ( plusOneCounters >= minusOneCounters ) c.getCounters().remove(CounterType.M1M1);
-            if ( plusOneCounters <= minusOneCounters)  c.getCounters().remove(CounterType.P1P1);
-            
+
+            if (plusOneCounters >= minusOneCounters) c.getCounters().remove(CounterType.M1M1);
+            if (plusOneCounters <= minusOneCounters)  c.getCounters().remove(CounterType.P1P1);
+
             int diff = plusOneCounters - minusOneCounters;
-            if ( diff != 0 ) {
+            if (diff != 0) {
                 CounterType ct = diff > 0 ? CounterType.P1P1 : CounterType.M1M1;
                 c.getCounters().put(ct, Math.abs(diff));
             }
@@ -1048,7 +1056,7 @@ public class GameAction {
         }
         return checkAgain;
     }
-    
+
     public void checkGameOverCondition() {
         // award loses as SBE
         List<Player> losers = null;
@@ -1061,21 +1069,21 @@ public class GameAction {
                 losers.add(p);
             }
         }
-        
+
         GameEndReason reason = null;
         // Has anyone won by spelleffect?
         for (Player p : this.game.getPlayers()) {
             if (!p.hasWon()) {
                 continue;
             }
-        
+
             // then the rest have lost!
             reason = GameEndReason.WinsGameSpellEffect;
             for (Player pl : this.game.getPlayers()) {
                 if (pl.equals(p)) {
                     continue;
                 }
-        
+
                 if (!pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName)) {
                     reason = null; // they cannot lose!
                 } else {
@@ -1087,23 +1095,25 @@ public class GameAction {
             }
             break;
         }
-        
+
         // need a separate loop here, otherwise ConcurrentModificationException is raised
         if (losers != null) {
             for (Player p : losers) {
                 this.game.onPlayerLost(p);
             }
         }
-        
-        if (reason == null )
-        {
+
+        if (reason == null) {
             int cntNotLost = Iterables.size(Iterables.filter(game.getPlayers(), Player.Predicates.NOT_LOST));
-            if( cntNotLost == 1 )
+            if (cntNotLost == 1) {
                 reason = GameEndReason.AllOpponentsLost;
-            else if ( cntNotLost == 0 )
+            }
+            else if (cntNotLost == 0) {
                 reason = GameEndReason.Draw;
-            else 
+            }
+            else {
                 return;
+            }
         }
 
         // Clear Simultaneous triggers at the end of the game
@@ -1137,21 +1147,21 @@ public class GameAction {
                 }
             }
         }
-        
-        for(String key : uniqueWalkers.keySet())
-        {
+
+        for (String key : uniqueWalkers.keySet()) {
             Collection<Card> duplicates = uniqueWalkers.get(key);
-            if ( duplicates.size() < 2)
+            if (duplicates.size() < 2) {
                 continue;
-            
-            recheck = true;
-            
-            Card toKeep = p.getController().chooseSingleCardForEffect(duplicates, new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple planeswalkers of type \""+key+"\"in play.\n\nChoose one to stay on battlefield (the rest will be moved to graveyard)");
-            for(Card c: duplicates) {
-                if ( c != toKeep )
-                    moveToGraveyard(c);
             }
-            
+
+            recheck = true;
+
+            Card toKeep = p.getController().chooseSingleCardForEffect(duplicates, new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple planeswalkers of type \""+key+"\"in play.\n\nChoose one to stay on battlefield (the rest will be moved to graveyard)");
+            for (Card c: duplicates) {
+                if (c != toKeep) {
+                    moveToGraveyard(c);
+                }
+            }
         }
         return recheck;
     }
@@ -1171,24 +1181,27 @@ public class GameAction {
             List<Card> yamazaki = CardLists.filter(a, CardPredicates.nameEquals("Brothers Yamazaki"));
             a.removeAll(yamazaki);
         }
-        
+
         Multimap<String, Card> uniqueLegends = ArrayListMultimap.create();
-        for(Card c : a) {
-            if ( !c.isFaceDown() )
+        for (Card c : a) {
+            if (!c.isFaceDown()) {
                 uniqueLegends.put(c.getName(), c);
+            }
         }
-        
-        for(String name : uniqueLegends.keySet()) {
+
+        for (String name : uniqueLegends.keySet()) {
             Collection<Card> cc = uniqueLegends.get(name);
-            if ( cc.size() < 2 )
+            if (cc.size() < 2) {
                 continue;
+            }
 
             recheck = true;
 
             Card toKeep = p.getController().chooseSingleCardForEffect(cc, new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)");
-            for(Card c: cc) {
-                if ( c != toKeep )
+            for (Card c: cc) {
+                if (c != toKeep) {
                     sacrificeDestroy(c);
+                }
             }
             game.fireEvent(new GameEventCardDestroyed());
         }
@@ -1198,8 +1211,9 @@ public class GameAction {
 
 
     public final boolean sacrifice(final Card c, final SpellAbility source) {
-        if (!c.canBeSacrificedBy(source))
+        if (!c.canBeSacrificedBy(source)) {
             return false;
+        }
 
         this.sacrificeDestroy(c);
 
@@ -1234,8 +1248,9 @@ public class GameAction {
             c.setDamage(0);
             c.tap();
             c.addRegeneratedThisTurn();
-            if (game.getCombat() != null)
+            if (game.getCombat() != null) {
                 game.getCombat().removeFromCombat(c);
+            }
 
             // Play the Regen sound
             game.fireEvent(new GameEventCardRegenerated());
@@ -1257,12 +1272,13 @@ public class GameAction {
      */
     public final boolean destroyNoRegeneration(final Card c, final SpellAbility sa) {
         Player activator = null;
-        if (!c.canBeDestroyed())
+        if (!c.canBeDestroyed()) {
             return false;
+        }
 
         if (c.isEnchanted()) {
-            for( Card e : c.getEnchantedBy() ) {
-                CardFactoryUtil.refreshTotemArmor(e); 
+            for (Card e : c.getEnchantedBy()) {
+                CardFactoryUtil.refreshTotemArmor(e);
             }
         }
 
@@ -1411,15 +1427,16 @@ public class GameAction {
         }
         reveal(cardOwner + " reveals card from " + zt, cards, zt, cardOwner, dontRevealToOwner);
     }
-    
+
     public void reveal(String message, List<Card> cards, Player cardOwner, boolean dontRevealToOwner) {
-        if (cards.isEmpty()) 
+        if (cards.isEmpty()) {
             return;
+        }
         reveal(message, cards, cards.get(0).getZone().getZoneType(), cardOwner, dontRevealToOwner);
     }
-    
+
     public void reveal(String message, List<Card> cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner) {
-        for(Player p : game.getPlayers()) {
+        for (Player p : game.getPlayers()) {
             if (dontRevealToOwner && cardOwner == p) continue;
             p.getController().reveal(message, cards, zt, cardOwner);
         }
@@ -1427,20 +1444,19 @@ public class GameAction {
 
     /** Delivers a message to all players. (use reveal to show Cards) */
     public void nofityOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
-        for(Player p : game.getPlayers()) {
+        for (Player p : game.getPlayers()) {
             if (playerExcept == p) continue;
             p.getController().notifyOfValue(saSource, relatedTarget, value);
         }
-        
     }
 
     public void startGame(GameOutcome lastGameOutcome) {
         Player first = determineFirstTurnPlayer(lastGameOutcome);
 
-        do { 
-            if ( game.isGameOver() ) break; // conceded during "play or draw"
-            
-            // FControl should determine now if there are any human players. 
+        do {
+            if (game.isGameOver()) break; // conceded during "play or draw"
+
+            // FControl should determine now if there are any human players.
             // Where there are none, it should bring up speed controls
             game.fireEvent(new GameEventGameStarted(game.getType(), first, game.getPlayers()));
 
@@ -1449,35 +1465,36 @@ public class GameAction {
                 p1.drawCards(p1.getMaxHandSize());
 
             performMulligans(first, game.getType() == GameType.Commander);
-            if ( game.isGameOver() ) break; // conceded during "mulligan" prompt
+            if (game.isGameOver()) break; // conceded during "mulligan" prompt
 
             game.setAge(GameStage.Play);
 
             // THIS CODE WILL WORK WITH PHASE = NULL {
-                if(game.getType() == GameType.Planechase)
+                if (game.getType() == GameType.Planechase) {
                     first.initPlane();
-    
+                }
+
                 runOpeningHandActions(first);
                 checkStateEffects(); // why?
-    
+
                 // Run Trigger beginning of the game
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
             // }
-    
+
             game.getPhaseHandler().startFirstTurn(first);
-            
+
             first = game.getPhaseHandler().getPlayerTurn();  // needed only for restart
-        } while( game.getAge() == GameStage.RestartedByKarn );
+        } while (game.getAge() == GameStage.RestartedByKarn);
 
         // will pull UI dialog, when the UI is listening
         game.fireEvent(new GameEventGameFinished());
     }
-    
+
     private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome) {
         // Only cut/coin toss if it's the first game of the match
         Player goesFirst = null;
-    
+
         // 904.6: in Archenemy games the Archenemy goes first
         if (game != null && game.getType() == GameType.Archenemy) {
             for (Player p : game.getPlayers()) {
@@ -1486,26 +1503,26 @@ public class GameAction {
                 }
             }
         }
-        
+
         boolean isFirstGame = lastGameOutcome == null;
         if (isFirstGame) {
             game.fireEvent(new GameEventFlipCoin()); // Play the Flip Coin sound
             goesFirst = Aggregates.random(game.getPlayers());
         } else {
-            for(Player p : game.getPlayers()) {
-                if(!lastGameOutcome.isWinner(p.getLobbyPlayer())) { 
+            for (Player p : game.getPlayers()) {
+                if (!lastGameOutcome.isWinner(p.getLobbyPlayer())) {
                     goesFirst = p;
                     break;
                 }
             }
         }
-        
-        if ( goesFirst == null ) { 
-            // This happens in hotseat matches when 2 equal lobbyplayers play. 
+
+        if (goesFirst == null) {
+            // This happens in hotseat matches when 2 equal lobbyplayers play.
             // Noone of them has lost, so cannot decide who goes first .
             goesFirst = game.getPlayers().get(0); // does not really matter who plays first - it's controlled from the same computer.
         }
-    
+
         boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(isFirstGame);
         goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
         return goesFirst;
@@ -1514,55 +1531,54 @@ public class GameAction {
     private void performMulligans(final Player firstPlayer, final boolean isCommander) {
         List<Player> whoCanMulligan = Lists.newArrayList(game.getPlayers());
         int offset = whoCanMulligan.indexOf(firstPlayer);
-    
-        // Have to cycle-shift the list to get the first player on index 0 
-        for( int i = 0; i < offset; i++ ) {
+
+        // Have to cycle-shift the list to get the first player on index 0
+        for (int i = 0; i < offset; i++) {
             whoCanMulligan.add(whoCanMulligan.remove(0));
         }
-        
+
         boolean[] hasKept = new boolean[whoCanMulligan.size()];
         int[] handSize = new int[whoCanMulligan.size()];
-        for( int i = 0; i < whoCanMulligan.size(); i++) {
+        for (int i = 0; i < whoCanMulligan.size(); i++) {
             hasKept[i] = false;
             handSize[i] = whoCanMulligan.get(i).getZone(ZoneType.Hand).size();
         }
-        
-    
+
         MapOfLists<Player, Card> exiledDuringMulligans = new HashMapOfLists<Player, Card>(CollectionSuppliers.<Card>arrayLists());
-        
+
         // rule 103.4b
         boolean isMultiPlayer = game.getPlayers().size() > 2;
-        int mulliganDelta = isMultiPlayer ? 0 : 1; 
-        
+        int mulliganDelta = isMultiPlayer ? 0 : 1;
+
         boolean allKept;
         do {
             allKept = true;
             for (int i = 0; i < whoCanMulligan.size(); i++) {
-                if( hasKept[i]) continue;
-                
+                if (hasKept[i]) continue;
+
                 Player p = whoCanMulligan.get(i);
                 List<Card> toMulligan = p.canMulligan() ? p.getController().getCardsToMulligan(isCommander, firstPlayer) : null;
-                
-                if ( game.isGameOver()) // conceded on mulligan prompt
-                    return; 
-                
-                if ( toMulligan != null && !toMulligan.isEmpty()) {
-                    if( !isCommander ) {
+
+                if (game.isGameOver()) // conceded on mulligan prompt
+                    return;
+
+                if (toMulligan != null && !toMulligan.isEmpty()) {
+                    if (!isCommander) {
                         toMulligan = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
                         for (final Card c : toMulligan) {
                             moveToLibrary(c);
                         }
                         p.shuffle(null);
                         p.drawCards(handSize[i] - mulliganDelta);
-                    } else { 
+                    } else {
                         List<Card> toExile = Lists.newArrayList(toMulligan);
-                        for(Card c : toExile) {
+                        for (Card c : toExile) {
                             exile(c);
                         }
                         exiledDuringMulligans.addAll(p, toExile);
                         p.drawCards(toExile.size() - 1);
-                    } 
-                    
+                    }
+
                     p.onMulliganned();
                     allKept = false;
                 } else {
@@ -1571,36 +1587,38 @@ public class GameAction {
                 }
             }
             mulliganDelta++;
-        } while( !allKept );
-        
-        if( isCommander )
-            for(Entry<Player, Collection<Card>> kv : exiledDuringMulligans.entrySet() ) {
+        } while (!allKept);
+
+        if (isCommander) {
+            for (Entry<Player, Collection<Card>> kv : exiledDuringMulligans.entrySet()) {
                 Player p = kv.getKey();
                 Collection<Card> cc = kv.getValue();
-                for(Card c : cc) {
+                for (Card c : cc) {
                     moveToLibrary(c);
                 }
                 p.shuffle(null);
             }
+        }
     }
-    
+
     private void runOpeningHandActions(final Player first) {
         Player takesAction = first;
         do {
             List<SpellAbility> usableFromOpeningHand = new ArrayList<SpellAbility>();
-    
-            // Select what can be activated from a given hand 
+
+            // Select what can be activated from a given hand
             for (final Card c : takesAction.getCardsIn(ZoneType.Hand)) {
                 for (String kw : c.getKeyword()) {
                     if (kw.startsWith("MayEffectFromOpeningHand")) {
                         String[] split = kw.split(":");
                         final String effName = split[1];
-                        if ( split.length > 2 && split[2].equalsIgnoreCase("!PlayFirst") && first == takesAction)
+                        if (split.length > 2 && split[2].equalsIgnoreCase("!PlayFirst") && first == takesAction) {
                             continue;
-    
+                        }
+
                         final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
                         effect.setActivatingPlayer(takesAction);
-    
+
                         usableFromOpeningHand.add(effect);
                     }
                 }
@@ -1611,23 +1629,25 @@ public class GameAction {
                 usableFromOpeningHand = takesAction.getController().chooseSaToActivateFromOpeningHand(usableFromOpeningHand);
             }
 
-            for(final SpellAbility sa : usableFromOpeningHand ) {
-                if (!takesAction.getZone(ZoneType.Hand).contains(sa.getSourceCard()))
+            for (final SpellAbility sa : usableFromOpeningHand) {
+                if (!takesAction.getZone(ZoneType.Hand).contains(sa.getSourceCard())) {
                     continue;
-                
+                }
+
                 takesAction.getController().playSpellAbilityNoStack(sa, true);
             }
             takesAction = game.getNextPlayerAfter(takesAction);
-        } while( takesAction != first );
+        } while (takesAction != first);
         // state effects are checked only when someone gets priority
     }
 
     // Invokes given runnable in Game thread pool - used to start game and perform actions from UI (when game-0 waits for input)
     public void invoke(final Runnable proc) {
-        if( ThreadUtil.isGameThread() ) {
+        if (ThreadUtil.isGameThread()) {
             proc.run();
-        } else
+        }
+        else {
             ThreadUtil.invokeInGameThread(proc);
+        }
     }
-
 }

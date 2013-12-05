@@ -85,5 +85,4 @@ public class PlayerStatistics {
     public void setOutcome(PlayerOutcome gameOutcome) {
         this.outcome = gameOutcome;
     }
-
 }
