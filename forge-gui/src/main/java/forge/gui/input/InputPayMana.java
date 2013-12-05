@@ -49,11 +49,6 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         this.game = player.getGame();
         this.saPaidFor = saToPayFor;
     }
-    
-    
-    public void runAsAi(Runnable proc) {
-        this.player.runWithController(proc, new PlayerControllerAi(this.game, this.player, this.player.getOriginalLobbyPlayer()));
-    }
 
     @Override
     protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
@@ -282,6 +277,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     protected boolean supportAutoPay() {
         return true;
+    }
+
+    private void runAsAi(Runnable proc) {
+        this.player.runWithController(proc, new PlayerControllerAi(this.game, this.player, this.player.getOriginalLobbyPlayer()));
     }
 
     /** {@inheritDoc} */
