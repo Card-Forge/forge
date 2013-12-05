@@ -244,8 +244,12 @@ public enum FControl implements KeyEventDispatcher {
         setGlobalKeyboardHandler();
 
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Opening main window...");
-        SwingUtilities.invokeLater(new Runnable() { @Override
-            public void run() { Singletons.getView().initialize(); } });
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                Singletons.getView().initialize();
+            }
+        });
     }
 
     private void setGlobalKeyboardHandler() {
@@ -329,8 +333,7 @@ public enum FControl implements KeyEventDispatcher {
 
     /** Remove all children from a specified layer. */
     private void clearChildren(final int layer0) {
-        final Component[] children = FView.SINGLETON_INSTANCE.getLpnDocument()
-                .getComponentsInLayer(layer0);
+        final Component[] children = FView.SINGLETON_INSTANCE.getLpnDocument().getComponentsInLayer(layer0);
 
         for (final Component c : children) {
             display.remove(c);
@@ -353,13 +356,16 @@ public enum FControl implements KeyEventDispatcher {
     public Player getCurrentPlayer() {
         // try current priority
         Player currentPriority = game.getPhaseHandler().getPriorityPlayer();
-        if( null != currentPriority && currentPriority.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
+        if (null != currentPriority && currentPriority.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer()) {
             return currentPriority;
+        }
 
         // otherwise find just any player, belonging to this lobbyplayer
-        for(Player p : game.getPlayers())
-            if(p.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
+        for (Player p : game.getPlayers()) {
+            if (p.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer()) {
                 return p;
+            }
+        }
 
         return null;
     }
@@ -385,23 +391,27 @@ public enum FControl implements KeyEventDispatcher {
 
     public final void stopGame() {
         List<Player> pp = new ArrayList<Player>();
-        for(Player p : game.getPlayers()) {
-            if ( p.getOriginalLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
+        for (Player p : game.getPlayers()) {
+            if (p.getOriginalLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer()) {
                 pp.add(p);
+            }
         }
         boolean hasHuman = !pp.isEmpty();
 
-        if ( pp.isEmpty() )
+        if (pp.isEmpty()) {
             pp.addAll(game.getPlayers()); // no human? then all players surrender!
+        }
 
-        for(Player p: pp)
+        for (Player p: pp) {
             p.concede();
+        }
 
         Player priorityPlayer = game.getPhaseHandler().getPriorityPlayer();
         boolean humanHasPriority = priorityPlayer == null || priorityPlayer.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer();
 
-        if ( hasHuman && humanHasPriority )
+        if (hasHuman && humanHasPriority) {
             game.getAction().checkGameOverCondition();
+        }
         else {
             game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
             inputQueue.onGameOver(false); // release any waiting input, effectively passing priority
@@ -437,7 +447,7 @@ public enum FControl implements KeyEventDispatcher {
     private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler(this);
     private final FControlGamePlayback playbackControl = new FControlGamePlayback(this);
     private void attachToGame(Game game0) {
-        if ( game0.getType() == GameType.Quest) {
+        if (game0.getType() == GameType.Quest) {
             QuestController qc = Singletons.getModel().getQuest();
             // Reset new list when the Match round starts, not when each game starts
             if (game0.getMatch().getPlayedGames().isEmpty()) {
@@ -458,7 +468,6 @@ public enum FControl implements KeyEventDispatcher {
         CStack.SINGLETON_INSTANCE.setModel(game.getStack(), humanLobbyPlayer);
         CLog.SINGLETON_INSTANCE.setModel(game.getGameLog());
 
-
         Singletons.getModel().getPreferences().actuateMatchPreferences();
 
         setCurrentScreen(FScreen.MATCH_SCREEN);
@@ -471,8 +480,8 @@ public enum FControl implements KeyEventDispatcher {
 
         // Add playback controls to match if needed
         gameHasHumanPlayer = false;
-        for(Player p :  game.getPlayers()) {
-            if ( p.getController().getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
+        for (Player p :  game.getPlayers()) {
+            if (p.getController().getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer())
                 gameHasHumanPlayer = true;
         }
 
@@ -542,6 +551,5 @@ public enum FControl implements KeyEventDispatcher {
             }
         }
     }
-
 }
 
