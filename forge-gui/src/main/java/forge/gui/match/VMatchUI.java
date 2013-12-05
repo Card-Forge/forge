@@ -84,6 +84,14 @@ public enum VMatchUI implements IVTopLevelUI {
             createEmptyDocs();
             wasClosed = false;
         }
+        else { //focus first enabled Prompt button if returng to match screen
+            if (getBtnOK().isEnabled()) {
+                getBtnOK().requestFocusInWindow();
+            }
+            else if (getBtnCancel().isEnabled()) {
+                getBtnCancel().requestFocusInWindow();
+            }
+        }
 
         // Add extra players alternatively to existing user/AI field panels.
         for (int i = 2; i < lstFields.size(); i++) {
