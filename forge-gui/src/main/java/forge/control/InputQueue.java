@@ -104,7 +104,7 @@ public class InputQueue extends Observable {
      * TODO: Write javadoc for this method.
      */
     public void onGameOver(boolean releaseAllInputs) {
-        for (InputSynchronized inp : inputStack ) {
+        for (InputSynchronized inp : inputStack) {
             inp.relaseLatchWhenGameIsOver();
             if (!releaseAllInputs) {
                 break;

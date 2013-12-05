@@ -1453,33 +1453,34 @@ public class GameAction {
         Player first = determineFirstTurnPlayer(lastGameOutcome);
 
         do {
-            if (game.isGameOver()) break; // conceded during "play or draw"
+            if (game.isGameOver()) { break; } // conceded during "play or draw"
 
             // FControl should determine now if there are any human players.
             // Where there are none, it should bring up speed controls
             game.fireEvent(new GameEventGameStarted(game.getType(), first, game.getPlayers()));
 
             game.setAge(GameStage.Mulligan);
-            for (final Player p1 : game.getPlayers())
+            for (final Player p1 : game.getPlayers()) {
                 p1.drawCards(p1.getMaxHandSize());
+            }
 
             performMulligans(first, game.getType() == GameType.Commander);
-            if (game.isGameOver()) break; // conceded during "mulligan" prompt
+            if (game.isGameOver()) { break; } // conceded during "mulligan" prompt
 
             game.setAge(GameStage.Play);
 
-            // THIS CODE WILL WORK WITH PHASE = NULL {
-                if (game.getType() == GameType.Planechase) {
-                    first.initPlane();
-                }
+            //<THIS CODE WILL WORK WITH PHASE = NULL>
+            if (game.getType() == GameType.Planechase) {
+                first.initPlane();
+            }
 
-                runOpeningHandActions(first);
-                checkStateEffects(); // why?
+            runOpeningHandActions(first);
+            checkStateEffects(); // why?
 
-                // Run Trigger beginning of the game
-                final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
-            // }
+            // Run Trigger beginning of the game
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
+            //</THIS CODE WILL WORK WITH PHASE = NULL>
 
             game.getPhaseHandler().startFirstTurn(first);
 

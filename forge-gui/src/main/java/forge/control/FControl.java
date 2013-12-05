@@ -414,7 +414,7 @@ public enum FControl implements KeyEventDispatcher {
         }
         else {
             game.isGameOver(); // this is synchronized method - it's used to make Game-0 thread see changes made here
-            inputQueue.onGameOver(false); // release any waiting input, effectively passing priority
+            inputQueue.onGameOver(false); //release any waiting input, effectively passing priority
         }
 
         playbackControl.onGameStopRequested();
