@@ -198,13 +198,15 @@ public class PlayerControllerHuman extends PlayerController {
         if (sbSize == 0 && mainSize == deckMinSize) {
             // Skip sideboard loop if there are no sideboarding opportunities
             newMain = main.toFlatList();
-        } else {
+        }
+        else {
             do {
                 if (newMain != null) {
                     if (newMain.size() < deckMinSize) {
                         String errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
                         JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
-                    } else {
+                    }
+                    else {
                         String errMsg = String.format("Too many cards in your sideboard (maximum %d), please make modifications to your deck again.", sbMax);
                         JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
                     }
@@ -217,7 +219,7 @@ public class PlayerControllerHuman extends PlayerController {
         newSb.clear();
         newSb.addAll(main);
         newSb.addAll(sideboard);
-        for(PaperCard c : newMain) {
+        for (PaperCard c : newMain) {
             newSb.remove(c);
         }
 
@@ -241,10 +243,12 @@ public class PlayerControllerHuman extends PlayerController {
         if (defender != null && assignDamageAsIfNotBlocked(attacker)) {
             map = new HashMap<Card, Integer>();
             map.put(null, damageDealt);
-        } else {
+        }
+        else {
             if ((attacker.hasKeyword("Trample") && defender != null) || (blockers.size() > 1)) {
                 map = CMatchUI.SINGLETON_INSTANCE.getDamageToAssign(attacker, blockers, damageDealt, defender, overrideOrder);
-            } else {
+            }
+            else {
                 map = new HashMap<Card, Integer>();
                 map.put(blockers.get(0), damageDealt);
             }
@@ -264,23 +268,26 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public Integer announceRequirements(SpellAbility ability, String announce, boolean canChooseZero) {
         List<Object> options = new ArrayList<Object>();
-        for(int i = canChooseZero ? 0 : 1; i < 10; i++)
+        for (int i = canChooseZero ? 0 : 1; i < 10; i++) {
             options.add(Integer.valueOf(i));
+        }
         options.add("Other amount");
 
         Object chosen = GuiChoose.oneOrNone("Choose " + announce + " for " + ability.getSourceCard().getName(), options);
-        if (chosen instanceof Integer || chosen == null)
+        if (chosen instanceof Integer || chosen == null) {
             return (Integer)chosen;
+        }
 
         String message = String.format("How much will you announce for %s?%s", announce, canChooseZero ? "" : " (X cannot be 0)");
-        while(true){
+        while (true){
             String str = JOptionPane.showInputDialog(JOptionPane.getRootFrame(), message, ability.getSourceCard().getName(), JOptionPane.QUESTION_MESSAGE);
             if (null == str) return null; // that is 'cancel'
 
-            if(StringUtils.isNumeric(str)) {
+            if (StringUtils.isNumeric(str)) {
                 Integer val = Integer.valueOf(str);
-                if (val == 0 && canChooseZero || val > 0)
+                if (val == 0 && canChooseZero || val > 0) {
                     return val;
+                }
             }
             GuiDialog.message("You have to enter a valid number", "Announce value");
         }
@@ -300,8 +307,9 @@ public class PlayerControllerHuman extends PlayerController {
 
     private List<Card> choosePermanentsTo(int min, int max, List<Card> valid, String outerMessage) {
         max = Math.min(max, valid.size());
-        if (max <= 0)
+        if (max <= 0) {
             return new ArrayList<Card>();
+        }
 
         InputSelectCards inp = new InputSelectCardsFromList(min == 0 ? 1 : min, max, valid);
         inp.setMessage(outerMessage);
@@ -331,23 +339,25 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional) {
         // Human is supposed to read the message and understand from it what to choose
-        if (options.isEmpty())
+        if (options.isEmpty()) {
             return null;
-        if ( !isOptional && options.size() == 1 )
+        }
+        if (!isOptional && options.size() == 1) {
             return Iterables.getFirst(options, null);
+        }
 
         boolean canUseSelectCardsInput = true;
-        for(Card c : options) {
+        for (Card c : options) {
             Zone cz = c.getZone();
             // can point at cards in own hand and anyone's battlefield
-            boolean canUiPointAtCards = cz != null && ( cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
-            if ( !canUiPointAtCards ) {
+            boolean canUiPointAtCards = cz != null && (cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
+            if (!canUiPointAtCards) {
                 canUseSelectCardsInput = false;
                 break;
             }
         }
 
-        if ( canUseSelectCardsInput ) {
+        if (canUseSelectCardsInput) {
             InputSelectCardsFromList input = new InputSelectCardsFromList(isOptional ? 0 : 1, 1, options);
             input.setCancelAllowed(isOptional);
             input.setMessage(title);
@@ -417,8 +427,9 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner) {
         String message = string;
-        if ( StringUtils.isBlank(message) )
+        if (StringUtils.isBlank(message)) {
             message = String.format("Looking at %s's %s", owner, zone);
+        }
         GuiChoose.oneOrNone(message, cards);
     }
 
@@ -428,19 +439,25 @@ public class PlayerControllerHuman extends PlayerController {
         List<Card> toTop = null;
 
         if (topN.size() == 1) {
-            if (willPutCardOnTop(topN.get(0)))
+            if (willPutCardOnTop(topN.get(0))) {
                 toTop = topN;
-            else
+            }
+            else {
                 toBottom = topN;
-        } else {
+            }
+        }
+        else {
             toBottom = GuiChoose.order("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null, null);
             topN.removeAll(toBottom);
-            if ( topN.isEmpty() )
+            if (topN.isEmpty()) {
                 toTop = null;
-            else if ( topN.size() == 1 )
+            }
+            else if (topN.size() == 1) {
                 toTop = topN;
-            else
+            }
+            else {
                 toTop = GuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", 0, topN, null, null);
+            }
         }
         return ImmutablePair.of(toTop, toBottom);
     }
@@ -448,7 +465,7 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public boolean willPutCardOnTop(Card c) {
-        return GuiDialog.confirm(c, "Where will you put " + c.getName() + " in your library", new String[]{"Top", "Bottom"} );
+        return GuiDialog.confirm(c, "Where will you put " + c.getName() + " in your library", new String[]{"Top", "Bottom"});
     }
 
     @Override
@@ -473,7 +490,7 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
-        if ( p != player ) {
+        if (p != player) {
             int cntToKeepInHand =  min == 0 ? -1 : valid.size() - min;
             return GuiChoose.order("Choose cards to Discard", "Discarded", cntToKeepInHand, valid, null, null);
         }
@@ -539,7 +556,8 @@ public class PlayerControllerHuman extends PlayerController {
         ability.resetTargets();
         if (select.chooseTargets(oldTarget.getNumTargeted())) {
             return ability.getTargets();
-        } else {
+        }
+        else {
             // Return old target, since we had to reset them above
             return oldTarget;
         }
@@ -555,9 +573,10 @@ public class PlayerControllerHuman extends PlayerController {
 
             @Override
             protected boolean hasAllTargets() {
-                for(Card c : selected) {
-                    if (c.isType(uType))
+                for (Card c : selected) {
+                    if (c.isType(uType)) {
                         return true;
+                    }
                 }
                 return super.hasAllTargets();
             }
@@ -573,9 +592,9 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public Mana chooseManaFromPool(List<Mana> manaChoices) {
         List<String> options = new ArrayList<String>();
-        for(int i = 0; i < manaChoices.size(); i++) {
+        for (int i = 0; i < manaChoices.size(); i++) {
             Mana m = manaChoices.get(i);
-            options.add(String.format("%d. %s mana from %s", 1+i, m.getColor(), m.getSourceCard() ));
+            options.add(String.format("%d. %s mana from %s", 1+i, m.getColor(), m.getSourceCard()));
         }
         String chosen = GuiChoose.one("Pay Mana from Mana Pool", options);
         String idx = TextUtil.split(chosen, '.')[0];
@@ -625,8 +644,10 @@ public class PlayerControllerHuman extends PlayerController {
         boolean maySkipPriority = mayAutoPass(phase) || isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), phase);
         if (game.getStack().isEmpty() && maySkipPriority) {
             return;
-        } else
+        }
+        else {
             autoPassCancel(); // probably cancel, since something has happened
+        }
 
         SpellAbility chosenSa = null;
         do {
@@ -636,7 +657,7 @@ public class PlayerControllerHuman extends PlayerController {
             InputPassPriority defaultInput = new InputPassPriority(player);
             Singletons.getControl().getInputQueue().setInputAndWait(defaultInput);
             chosenSa = defaultInput.getChosenSa();
-        } while( chosenSa != null );
+        } while (chosenSa != null);
     }
 
     @Override
@@ -683,7 +704,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
         List<Card> srcCards = new ArrayList<Card>();
-        for(SpellAbility sa : usableFromOpeningHand) {
+        for (SpellAbility sa : usableFromOpeningHand) {
             srcCards.add(sa.getSourceCard());
         }
         List<SpellAbility> result = new ArrayList<SpellAbility>();
@@ -691,9 +712,9 @@ public class PlayerControllerHuman extends PlayerController {
             return result;
         }
         List<Card> chosen = GuiChoose.order("Choose cards to activate from opening hand", "Activate first", -1, srcCards, null, null);
-        for(Card c : chosen) {
-            for(SpellAbility sa : usableFromOpeningHand) {
-                if ( sa.getSourceCard() == c ) {
+        for (Card c : chosen) {
+            for (SpellAbility sa : usableFromOpeningHand) {
+                if (sa.getSourceCard() == c) {
                     result.add(sa);
                     break;
                 }
@@ -718,7 +739,7 @@ public class PlayerControllerHuman extends PlayerController {
     public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call) {
         String[] labelsSrc = call ? new String[]{"heads", "tails"} : new String[]{"win the flip", "lose the flip"};
         String[] strResults = new String[results.length];
-        for(int i = 0; i < results.length; i++) {
+        for (int i = 0; i < results.length; i++) {
             strResults[i] = labelsSrc[results[i] ? 0 : 1];
         }
         return GuiChoose.one(sa.getSourceCard().getName() + " - Choose a result", strResults) == labelsSrc[0];
@@ -751,8 +772,9 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public Pair<SpellAbilityStackInstance, GameObject> chooseTarget(SpellAbility saSpellskite, List<Pair<SpellAbilityStackInstance, GameObject>> allTargets) {
-        if( allTargets.size() < 2)
+        if (allTargets.size() < 2) {
             return Iterables.getFirst(allTargets, null);
+        }
 
         final Function<Pair<SpellAbilityStackInstance, GameObject>, String> fnToString = new Function<Pair<SpellAbilityStackInstance, GameObject>, String>() {
             @Override
@@ -811,7 +833,8 @@ public class PlayerControllerHuman extends PlayerController {
             AbilitySub a;
             if (i < min) {
                 a = GuiChoose.one(modeTitle, choices);
-            } else {
+            }
+            else {
                 a = GuiChoose.oneOrNone(modeTitle, choices);
             }
             if (null == a) {
