@@ -48,6 +48,13 @@ public abstract class PlayerController {
         CumulativeUpkeep;
     }
     
+    public static enum BinaryChoiceType {
+        HeadsOrTails, // coin
+        TapOrUntap,
+        PlayOrDraw,
+        OddsOrEvens
+    }
+    
     protected final Game game;
     
     private PhaseType autoPassUntil = null;
@@ -168,7 +175,7 @@ public abstract class PlayerController {
 
     public abstract int chooseNumber(SpellAbility sa, String title, int min, int max);
 
-    public abstract boolean chooseBinary(SpellAbility sa, String question, boolean isCoin);
+    public abstract boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice);
     public abstract boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
     public abstract Card chooseProtectionShield(GameEntity entityBeingDamaged, List<String> options, Map<String, Card> choiceMap);
 

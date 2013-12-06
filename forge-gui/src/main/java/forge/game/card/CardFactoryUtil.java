@@ -65,7 +65,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Aggregates;
@@ -353,7 +352,7 @@ public class CardFactoryUtil {
                     return;
                 }
 
-                final Card c1 = GuiChoose.oneOrNone("Select a card", sameCost);
+                final Card c1 = sourceCard.getController().getController().chooseSingleCardForEffect(sameCost, this, "Select a card", true);
                 if (c1 != null) {
                     // ability.setTargetCard((Card)o);
 

@@ -9,6 +9,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -153,7 +154,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
     public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier) {
         boolean [] results = new boolean [multiplier];
         for (int i = 0; i < multiplier; i++) {
-            final boolean choice = caller.getController().chooseBinary(sa, sa.getSourceCard().getName() + " - Call coin flip", true);
+            final boolean choice = caller.getController().chooseBinary(sa, sa.getSourceCard().getName() + " - Call coin flip", PlayerController.BinaryChoiceType.HeadsOrTails);
             // Play the Flip A Coin sound
             caller.getGame().fireEvent(new GameEventFlipCoin());
             final boolean flip = MyRandom.getRandom().nextBoolean();

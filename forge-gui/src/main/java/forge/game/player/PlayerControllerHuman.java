@@ -731,8 +731,14 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#chooseBinary(java.lang.String, boolean)
      */
     @Override
-    public boolean chooseBinary(SpellAbility sa, String question, boolean isCoin) {
-        String[] labels = isCoin ? new String[]{"Heads", "Tails"} : new String[]{"Odds", "Evens"};
+    public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice) {
+        String[] labels = new String[]{"Option1", "Option2"};
+        switch(kindOfChoice) {
+            case HeadsOrTails:  labels = new String[]{"Heads", "Tails"}; break;
+            case TapOrUntap:    labels = new String[]{"Tap", "Untap"}; break;
+            case OddsOrEvens:   labels = new String[]{"Odds", "Evens"}; break;
+            case PlayOrDraw:    labels = new String[]{"Play", "Draw"}; break;
+        }
         return GuiDialog.confirm(sa.getSourceCard(), question, labels);
     }
 

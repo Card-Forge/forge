@@ -28,7 +28,6 @@ import forge.game.card.CounterType;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.TextUtil;
 
 /**
@@ -726,11 +725,7 @@ public class Cost {
             return AbilityFactory.calculateAmount(card, "ChosenX", null);
         }*/
 
-        final Integer[] choiceArray = new Integer[maxValue + 1];
-        for (int i = 0; i < choiceArray.length; i++) {
-            choiceArray[i] = i;
-        }
-        final Integer chosenX = GuiChoose.one(card.toString() + " - Choose a Value for X", choiceArray);
+        int chosenX = sa.getActivatingPlayer().getController().chooseNumber(sa, card.toString() + " - Choose a Value for X", 0, maxValue);
         sa.setSVar("ChosenX", Integer.toString(chosenX));
         card.setSVar("ChosenX", Integer.toString(chosenX));
         return chosenX;

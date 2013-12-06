@@ -10,19 +10,15 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
 public class TapOrUntapAllEffect extends SpellAbilityEffect {
-
-    private static enum TapOrUntap {
-        TAP, UNTAP
-    }
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
@@ -60,24 +56,22 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
         }
 
         // Default to tapping for AI
-        TapOrUntap toTap = TapOrUntap.TAP;
-        if (sa.getActivatingPlayer().isHuman()) {
-            StringBuilder sb = new StringBuilder("Tap or Untap ");
-            if (sa.hasParam("ValidMessage")) {
-                sb.append(sa.getParam("ValidMessage"));
-            } else {
-                sb.append("Permanents");
-            }
-            sb.append("?");
+        boolean toTap = true;
 
-            final String[] tapOrUntap = new String[] { "Tap", "Untap" };
-            final Object z = GuiChoose.one(sb.toString(), tapOrUntap);
-            toTap = (z.equals("Tap")) ? TapOrUntap.TAP : TapOrUntap.UNTAP;
+        StringBuilder sb = new StringBuilder("Tap or Untap ");
+        if (sa.hasParam("ValidMessage")) {
+            sb.append(sa.getParam("ValidMessage"));
+        } else {
+            sb.append("Permanents");
         }
+        sb.append("?");
+
+        toTap = sa.getActivatingPlayer().getController().chooseBinary(sa, sb.toString(), PlayerController.BinaryChoiceType.TapOrUntap);
+
 
         for (final Card cad : validCards) {
             if (cad.isInPlay()) {
-                if (toTap.equals(TapOrUntap.TAP)) {
+                if (toTap) {
                     cad.tap();
                 } else {
                     cad.untap();
