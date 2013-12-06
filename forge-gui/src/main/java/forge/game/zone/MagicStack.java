@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.LinkedBlockingDeque;
 
-
 import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -88,6 +87,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     // They don't provide a LIFO queue, so had to use a deque
     private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<SpellAbilityStackInstance>();
     private final Stack<SpellAbilityStackInstance> frozenStack = new Stack<SpellAbilityStackInstance>();
+    private final Stack<SpellAbility> undoStack = new Stack<SpellAbility>();
 
     private boolean frozen = false;
     private boolean bResolving = false;
@@ -142,6 +142,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         this.thisTurnCast.clear();
         this.curResolvingCard = null;
         this.frozenStack.clear();
+        this.undoStack.clear();
     }
 
     /**
@@ -276,6 +277,22 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     /**
      * <p>
+     * undo.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean undo() {
+        if (undoStack.isEmpty()) { return false; }
+
+        SpellAbility sa = undoStack.pop();
+        sa.undo();
+        sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
+        return true;
+    }
+
+    /**
+     * <p>
      * add.
      * </p>
      * 
@@ -296,6 +313,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sp.setActivatingPlayer(source.getController());
             activator = sp.getActivatingPlayer();
             System.out.println(source.getName() + " - activatingPlayer not set before adding to stack.");
+        }
+        
+        if (sp.isUndoable()) { //either push onto or clear undo stack based on where spell/ability is undoable
+        	undoStack.push(sp);
+        }
+        else {
+        	undoStack.clear();
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through

@@ -77,7 +77,8 @@ public class HumanPlaySpellAbility {
         if (isFree || this.payment.isFullyPaid()) {
             if (skipStack) {
                 AbilityUtils.resolve(this.ability);
-            } else {
+            }
+            else {
                 this.enusureAbilityHasDescription(this.ability);
                 this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
                 game.getStack().addAndUnfreeze(this.ability);

@@ -24,7 +24,6 @@ public class ManaEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-
         final Card card = sa.getSourceCard();
 
         AbilityManaPart abMana = sa.getManaPart();
@@ -102,7 +101,8 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
                 }
             }
-        } else if (abMana.isAnyMana()) {
+        }
+        else if (abMana.isAnyMana()) {
             for (Player p : tgtPlayers) {
                 if (tgt == null || p.canBeTargetedBy(sa)) {
                     Player act = sa.getActivatingPlayer();
@@ -159,7 +159,8 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
                 }
             }
-        } else if (abMana.isSpecialMana()) {
+        }
+        else if (abMana.isSpecialMana()) {
             for (Player p : tgtPlayers) {
                 if (tgt == null || p.canBeTargetedBy(sa)) {
                     String type = abMana.getOrigProduced().split("Special ")[1];

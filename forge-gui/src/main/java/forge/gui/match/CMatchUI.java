@@ -36,6 +36,7 @@ import forge.Command;
 import forge.FThreads;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
@@ -70,6 +71,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.special.PhaseLabel;
 import forge.item.InventoryItem;
+import forge.net.FServer;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.PlayArea;
@@ -108,7 +110,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         return FSkin.getAvatars().get(0 <= avatarIdx ? avatarIdx : defaultIndex);
     }
 
-
     private void setAvatar(VField view, SkinImage img) {
         view.getLblAvatar().setIcon(img);
         view.getLblAvatar().getResizeTimer().start();
@@ -129,7 +130,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
         // Instantiate all required field slots (user at 0)
         sortedPlayers = shiftPlayersPlaceLocalFirst(players, localPlayer);
-
 
         final List<VField> fields = new ArrayList<VField>();
         final List<VCommand> commands = new ArrayList<VCommand>();
@@ -172,7 +172,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
             i++;
         }
 
-        if(hands.isEmpty()) { // add empty hand for matches without human
+        if (hands.isEmpty()) { // add empty hand for matches without human
             VHand newHand = new VHand(EDocID.Hands[0], null);
             newHand.getLayoutControl().initialize();
             hands.add(newHand);
@@ -184,13 +184,13 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         // get an arranged list so that the first local player is at index 0
         List<Player> sortedPlayers = Lists.newArrayList(players);
         int ixFirstHuman = -1;
-        for(int i = 0; i < players.size(); i++) {
-            if( sortedPlayers.get(i).getLobbyPlayer() == localPlayer ) {
+        for (int i = 0; i < players.size(); i++) {
+            if (sortedPlayers.get(i).getLobbyPlayer() == localPlayer) {
                 ixFirstHuman = i;
                 break;
             }
         }
-        if( ixFirstHuman > 0 ) {
+        if (ixFirstHuman > 0) {
             sortedPlayers.add(0, sortedPlayers.remove(ixFirstHuman));
         }
         return sortedPlayers;
@@ -282,7 +282,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         setCard(c, false);
     }
 
-    public void setCard(final Card c, final boolean showFlipped ) {
+    public void setCard(final Card c, final boolean showFlipped) {
         CDetail.SINGLETON_INSTANCE.showCard(c);
         CPicture.SINGLETON_INSTANCE.showCard(c, showFlipped);
     }
@@ -335,8 +335,9 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         FThreads.assertExecutedByEdt(true);
 
         boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
-        if ( hasChanged ) // since we are in UI thread, may redraw the card right now
+        if (hasChanged) { // since we are in UI thread, may redraw the card right now
             updateSingleCard(card);
+        }
     }
 
     public boolean isUsedToPay(Card card) {
@@ -345,28 +346,30 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     public void updateZones(List<Pair<Player, ZoneType>> zonesToUpdate) {
         //System.out.println("updateZones " + zonesToUpdate);
-        for(Pair<Player, ZoneType> kv : zonesToUpdate) {
+        for (Pair<Player, ZoneType> kv : zonesToUpdate) {
             Player owner = kv.getKey();
             ZoneType zt = kv.getValue();
 
-            if ( zt == ZoneType.Command )
+            if (zt == ZoneType.Command)
                 getCommandFor(owner).getTabletop().setupPlayZone();
-            else if ( zt == ZoneType.Hand ) {
+            else if (zt == ZoneType.Hand) {
                 VHand vHand = getHandFor(owner);
                 if (null != vHand)
                     vHand.getLayoutControl().updateHand();
                 getFieldViewFor(owner).getDetailsPanel().updateZones();
-            } else if ( zt == ZoneType.Battlefield )
+            }
+            else if (zt == ZoneType.Battlefield) {
                 getFieldViewFor(owner).getTabletop().setupPlayZone();
-            else
+            }
+            else {
                 getFieldViewFor(owner).getDetailsPanel().updateZones();
+            }
         }
     }
 
-
     // Player's mana pool changes
     public void updateManaPool(List<Player> manaPoolUpdate) {
-        for(Player p : manaPoolUpdate) {
+        for (Player p : manaPoolUpdate) {
             getFieldViewFor(p).getDetailsPanel().updateManaPool();
         }
 
@@ -374,21 +377,21 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     // Player's lives and poison counters
     public void updateLives(List<Player> livesUpdate) {
-        for(Player p : livesUpdate) {
+        for (Player p : livesUpdate) {
             getFieldViewFor(p).updateDetails();
         }
 
     }
 
     public void updateCards(Set<Card> cardsToUpdate) {
-        for(Card c : cardsToUpdate) {
+        for (Card c : cardsToUpdate) {
             updateSingleCard(c);
         }
     }
 
     public void updateSingleCard(Card c) {
         Zone zone = c.getZone();
-        if ( null != zone && zone.getZoneType() == ZoneType.Battlefield ) {
+        if (null != zone && zone.getZoneType() == ZoneType.Battlefield) {
             PlayArea pa = getFieldViewFor(zone.getPlayer()).getTabletop();
             pa.updateSingleCard(c);
         }
@@ -398,8 +401,9 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
 
     // UI-related events should arrive here
     public void fireEvent(UiEvent uiEvent) {
-        if ( LOG_UIEVENTS )
+        if (LOG_UIEVENTS) {
             System.out.println("UI: " + uiEvent.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(4, true));
+        }
         uiEvents.post(uiEvent);
     }
 
@@ -471,6 +475,15 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         }
         panels.addAll(VStack.SINGLETON_INSTANCE.getStackArea().getCardPanels());
         return panels;
+    }
+    
+    /** Undo last game action if possible. */
+    public void undo() {
+    	Game game = Singletons.getControl().getObservedGame();
+        Player player = game.getPhaseHandler().getPriorityPlayer();
+        if (player != null && player.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer()) {
+            game.stack.undo();
+        }
     }
 
     /** Concede game, bring up WinLose UI. */

@@ -1273,10 +1273,11 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
     /**
      * TODO: Write javadoc for this method.
      */
-    public void undo() {
-        if (isUndoable()) {
+    public boolean undo() {
+        if (isUndoable() && this.getActivatingPlayer().getManaPool().accountFor(this.getManaPart())) {
             this.payCosts.refundPaidCost(sourceCard);
         }
+        return false;
     }
 
     /**

@@ -36,6 +36,7 @@ public final class GameMenu {
     public static JMenu getMenu(boolean showMenuIcons) {
         JMenu menu = new JMenu("Game");
         menu.setMnemonic(KeyEvent.VK_G);
+        menu.add(getMenuItem_Undo());
         menu.add(getMenuItem_Concede());
         menu.add(getMenuItem_EndTurn());
         menu.add(getMenuItem_AlphaStrike());
@@ -67,6 +68,22 @@ public final class GameMenu {
         boolean isSoundEffectsEnabled = !prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS);
         prefs.setPref(FPref.UI_ENABLE_SOUNDS, isSoundEffectsEnabled);
         prefs.save();
+    }
+
+    private static JMenuItem getMenuItem_Undo() {
+        JMenuItem menuItem = new JMenuItem("Undo");
+        menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_Z));
+        menuItem.addActionListener(getUndoAction());
+        return menuItem;
+    }
+
+    private static ActionListener getUndoAction() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CMatchUI.SINGLETON_INSTANCE.undo();
+            }
+        };
     }
 
     private static JMenuItem getMenuItem_Concede() {

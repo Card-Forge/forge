@@ -193,8 +193,7 @@ public class ManaPool {
         return owner.getController().chooseManaFromPool(manaChoices);
     }
 
-    private List<Pair<Mana, Integer>> selectManaToPayFor(final ManaCostShard shard, final SpellAbility saBeingPaidFor,
-            String restriction) {
+    private List<Pair<Mana, Integer>> selectManaToPayFor(final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
         final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana, Integer>>();
         for (final Byte manaKey : this.floatingMana.keySet()) {
             if(!shard.canBePaidWithManaOfColor(manaKey.byteValue()))
@@ -258,8 +257,10 @@ public class ManaPool {
         final Mana mana = this.getMana(manaShard, saBeingPaidFor, manaCost.getSourceRestriction());
         if (mana == null) {
             return; // no matching mana in the pool
-        } else
+        }
+        else {
             tryPayCostWithMana(saBeingPaidFor, manaCost, mana);
+        }
     }
 
     /**
@@ -343,8 +344,11 @@ public class ManaPool {
         manaPaid.clear();
     }
 
-
-    private boolean accountFor(final SpellAbility sa, final AbilityManaPart ma) {
+    //Account for mana part of ability when undoing it
+    public boolean accountFor(final AbilityManaPart ma) {
+    	if (ma == null) {
+    		return false;
+    	}
         if (this.floatingMana.isEmpty()) {
             return false;
         }
@@ -393,10 +397,7 @@ public class ManaPool {
         List<SpellAbility> payingAbilities = sa.getPayingManaAbilities();
         for (final SpellAbility am : payingAbilities) { 
             // undo paying abilities if we can
-            AbilityManaPart m = am.getManaPart();
-            if (am.isUndoable() && this.accountFor(sa, m)) {
-                am.undo();
-            }
+            am.undo();
         }
         
         for (final SpellAbility am : payingAbilities) {

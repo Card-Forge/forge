@@ -9,8 +9,6 @@ import forge.util.Lang;
  *
  */
 public class GameEventManaPool extends GameEvent {
-
-
     public final Player player;
     public final EventValueChangeType mode;
     public final Mana mana;
@@ -20,7 +18,6 @@ public class GameEventManaPool extends GameEvent {
         player = owner;
         mode = changeMode;
     }
-
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
@@ -34,5 +31,4 @@ public class GameEventManaPool extends GameEvent {
     public String toString() {
         return String.format("%s mana pool %s - %s ", Lang.getPossesive(player.getName()), mode, mana);
     }
-
 }
