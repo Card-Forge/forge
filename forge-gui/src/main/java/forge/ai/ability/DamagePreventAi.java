@@ -20,6 +20,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
@@ -93,11 +94,12 @@ public class DamagePreventAi extends SpellAbilityAi {
         // react to threats on the stack
         else if (!game.getStack().isEmpty()) {
             sa.resetTargets();
+        	final TargetChoices tcs = sa.getTargets();
             // check stack for something on the stack will kill anything i control
             final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
             if (objects.contains(ai)) {
-                sa.getTargets().add(ai);
+            	tcs.add(ai);
                 chance = true;
             }
             final List<Card> threatenedTargets = new ArrayList<Card>();
@@ -113,17 +115,18 @@ public class DamagePreventAi extends SpellAbilityAi {
 
             if (!threatenedTargets.isEmpty()) {
                 // Choose "best" of the remaining to save
-                sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threatenedTargets));
+            	tcs.add(ComputerUtilCard.getBestCreatureAI(threatenedTargets));
                 chance = true;
             }
 
         } // Protect combatants
         else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             sa.resetTargets();
+        	final TargetChoices tcs = sa.getTargets();
             if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, combat)
                     && (ComputerUtilCombat.lifeInDanger(ai, combat) || sa.isAbility() || sa.isTrigger())
                     && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
-                sa.getTargets().add(ai);
+            	tcs.add(ai);
                 chance = true;
             } else {
                 // filter AIs battlefield by what I can target
@@ -138,8 +141,8 @@ public class DamagePreventAi extends SpellAbilityAi {
                 CardLists.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
-                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
-                        sa.getTargets().add(c);
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && tcs.getNumTargeted() < tgt.getMaxTargets(hostCard, sa)) {
+                    	tcs.add(c);
                         chance = true;
                     }
                 }
