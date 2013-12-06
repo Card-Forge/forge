@@ -94,6 +94,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         for (final Card tgtC : tgtCards) {
             if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 boolean destroyed = false;
+                final Card lki = CardUtil.getLKICopy(tgtC);
                 if (sac) {
                     destroyed = game.getAction().sacrifice(tgtC, sa);
                 } else if (noRegen) {
@@ -101,11 +102,11 @@ public class DestroyEffect extends SpellAbilityEffect {
                 } else {
                     destroyed = game.getAction().destroy(tgtC, sa);
                 }
-                if (destroyed  && remDestroyed) {
+                if (destroyed && remDestroyed) {
                     card.addRemembered(tgtC);
                 }
-                if (sa.hasParam("RememberLKI")) {
-                    card.addRemembered(CardUtil.getLKICopy(tgtC));
+                if (destroyed && sa.hasParam("RememberLKI")) {
+                    card.addRemembered(lki);
                 }
             }
         }
