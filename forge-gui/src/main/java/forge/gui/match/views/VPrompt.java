@@ -19,12 +19,15 @@ package forge.gui.match.views;
 
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.framework.DragCell;
@@ -61,6 +64,17 @@ public enum VPrompt implements IVDoc<CPrompt> {
     		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final JLabel lblGames;
 
+    private KeyAdapter buttonKeyAdapter = new KeyAdapter() {
+        @Override
+        public void keyPressed(final KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                if (btnCancel.isEnabled()) {
+                    btnCancel.doClick();
+                }
+            }
+        }
+    };
+
     //========= Constructor
     private VPrompt() {
         lblGames = new FLabel.Builder()
@@ -69,6 +83,9 @@ public enum VPrompt implements IVDoc<CPrompt> {
         .fontAlign(SwingConstants.CENTER)
         .opaque()
         .build();
+
+        btnOK.addKeyListener(buttonKeyAdapter);
+        btnCancel.addKeyListener(buttonKeyAdapter);
 
         FSkin.get(tarMessage).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarMessage.setMargin(new Insets(3, 3, 3, 3));
