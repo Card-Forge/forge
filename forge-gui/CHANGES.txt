@@ -13,6 +13,9 @@ When paying mana costs, you can now press Enter/Spacebar or click the Auto butto
 	- The Auto button will be disabled if you cannot pay the mana cost at that time, in which case Enter/Spacebar will cancel the spell/ability instead.
 	- Uses the same logic the AI uses to pay mana costs. This means it will try to use mana in your pool before mana sources in play, using colorless mana to pay the colorless part of the cost if any is available.
 	- You can still manually pay the cost by clicking mana sources in play (e.g. lands) or clicking symbols in your mana pool, which might be a good idea if you want to save specific mana sources for a later play that turn.
+You can now press Ctrl+Z to undo tapping mana sources.
+You can now press Escape to Cancel the current prompt even if the OK button has focus.
+Cards will no longer disappear from your hand while paying their mana cost or choosing targets.
 You'll no longer be prompted for attackers if you have no creatures that can attack.
 You'll no longer be prompted for blockers if you have no creatures that can block any attacking creature.
 
