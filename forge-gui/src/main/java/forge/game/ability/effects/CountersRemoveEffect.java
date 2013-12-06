@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import forge.game.Game;
@@ -9,11 +7,11 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
+import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 
 public class CountersRemoveEffect extends SpellAbilityEffect {
     @Override
@@ -57,9 +55,9 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         final Card card = sa.getSourceCard();
         final Game game = card.getGame();
         final String type = sa.getParam("CounterType");
-        int counterAmount = 0;
+        int cntToRemove = 0;
         if (!sa.getParam("CounterNum").equals("All") && !sa.getParam("CounterNum").equals("Remembered")) {
-            counterAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+            cntToRemove = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         }
 
         CounterType counterType = null;
@@ -83,90 +81,44 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 final Zone zone = game.getZoneOf(tgtCard);
                 if (sa.getParam("CounterNum").equals("All")) {
-                    counterAmount = tgtCard.getCounters(counterType);
+                    cntToRemove = tgtCard.getCounters(counterType);
                 } else if (sa.getParam("CounterNum").equals("Remembered")) {
-                    counterAmount = tgtCard.getCountersAddedBy(card, counterType);
+                    cntToRemove = tgtCard.getCountersAddedBy(card, counterType);
                 }
-
+                
+                PlayerController pc = sa.getActivatingPlayer().getController();
+                
                 if (type.matches("Any")) {
-                    while (counterAmount > 0 && tgtCard.hasCounters()) {
+                    while (cntToRemove > 0 && tgtCard.hasCounters()) {
                         final Map<CounterType, Integer> tgtCounters = tgtCard.getCounters();
-                        CounterType chosenType = null;
-                        int chosenAmount;
-                        if (sa.getActivatingPlayer().isHuman()) {
-                            final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();
-                            // get types of counters
-                            for (CounterType key : tgtCounters.keySet()) {
-                                if (tgtCounters.get(key) > 0) {
-                                    typeChoices.add(key);
-                                }
-                            }
-                            if (typeChoices.size() > 1) {
-                                String prompt = "Select type counters to remove";
-                                chosenType = GuiChoose.one(prompt, typeChoices);
-                            } else {
-                                chosenType = typeChoices.get(0);
-                            }
-                            chosenAmount = tgtCounters.get(chosenType);
-                            if (chosenAmount > counterAmount) {
-                                chosenAmount = counterAmount;
-                            }
-                            // make list of amount choices
+                        
 
-                            if (chosenAmount > 1) {
-                                final List<Integer> choices = new ArrayList<Integer>();
-                                for (int i = 1; i <= chosenAmount; i++) {
-                                    choices.add(Integer.valueOf(i));
-                                }
-                                String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
-                                chosenAmount = GuiChoose.one(prompt, choices);
-                            }
-                        } else {
-                            // TODO: ArsenalNut (06 Feb 12)computer needs
-                            // better logic to pick a counter type and probably
-                            // an initial target
-                            // find first nonzero counter on target
-                            for (CounterType key : tgtCounters.keySet()) {
-                                if (tgtCounters.get(key) > 0) {
-                                    chosenType = (CounterType) key;
-                                    break;
-                                }
-                            }
-                            // subtract all of selected type
-                            chosenAmount = tgtCounters.get(chosenType);
-                            if (chosenAmount > counterAmount) {
-                                chosenAmount = counterAmount;
-                            }
-                        }
+                        CounterType chosenType = pc.chooseCounterType(tgtCounters.keySet(), sa, "Select type of counters to remove");
+                        String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
+                        int chosenAmount = pc.chooseNumber(sa, prompt, 1, Math.max(cntToRemove, tgtCounters.get(chosenType)));
+
                         tgtCard.subtractCounter(chosenType, chosenAmount);
                         if (rememberRemoved) {
                             for (int i = 0; i < chosenAmount; i++) {
                                 card.addRemembered(chosenType);
                             }
                         }
-                        counterAmount -= chosenAmount;
+                        cntToRemove -= chosenAmount;
                     }
                 } else {
                     if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Exile)) {
-                        if (sa.hasParam("UpTo") && sa.getActivatingPlayer().isHuman()) {
-                            final ArrayList<String> choices = new ArrayList<String>();
-                            for (int i = 0; i <= counterAmount; i++) {
-                                choices.add("" + i);
-                            }
-                            final String prompt = "Select the number of " + type + " counters to remove";
-                            final String o = GuiChoose.one(prompt, choices);
-                            counterAmount = Integer.parseInt(o);
-                        }
+                        if (sa.hasParam("UpTo")) 
+                            cntToRemove = pc.chooseNumber(sa, "Select the number of " + type + " counters to remove", 0, cntToRemove);
                     }
                     if (rememberRemoved) {
-                        if (counterAmount > tgtCard.getCounters(counterType)) {
-                            counterAmount = tgtCard.getCounters(counterType);
+                        if (cntToRemove > tgtCard.getCounters(counterType)) {
+                            cntToRemove = tgtCard.getCounters(counterType);
                         }
-                        for (int i = 0; i < counterAmount; i++) {
+                        for (int i = 0; i < cntToRemove; i++) {
                             card.addRemembered(counterType);
                         }
                     }
-                    tgtCard.subtractCounter(counterType, counterAmount);
+                    tgtCard.subtractCounter(counterType, cntToRemove);
                 }
             }
         }

@@ -12,7 +12,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 
 public class CountersPutEffect extends SpellAbilityEffect {
     @Override
@@ -78,22 +77,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
         if (sa.hasParam("UpTo")) {
-            final Integer[] integers = new Integer[counterAmount + 1];
-            for (int j = 0; j <= counterAmount; j++) {
-                integers[j] = Integer.valueOf(j);
-            }
-            final Integer i = GuiChoose.oneOrNone("How many counters?", integers);
-            if (null == i) {
-                return;
-            } else {
-                counterAmount = i.intValue();
-            }
+            counterAmount = sa.getActivatingPlayer().getController().chooseNumber(sa, "How many counters?", 0, counterAmount);
         }
 
         List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 
         for (final Card tgtCard : tgtCards) {
-            counterAmount = (sa.usesTargeting() && sa.hasParam("DividedAsYouChoose")) ? sa.getTargetRestrictions().getDividedValue(tgtCard) : counterAmount;
+            counterAmount = sa.usesTargeting() && sa.hasParam("DividedAsYouChoose") ? sa.getTargetRestrictions().getDividedValue(tgtCard) : counterAmount;
             if (!sa.usesTargeting() || tgtCard.canBeTargetedBy(sa)) {
                 if (max != -1) {
                     counterAmount = max - tgtCard.getCounters(counterType);
