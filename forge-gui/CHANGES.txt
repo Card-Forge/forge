@@ -23,7 +23,7 @@ You'll no longer be prompted for blockers if you have no creatures that can bloc
 - Deck Editor filtering -
 Multi-color cards containing a filtered color will no longer show up in catalogs.
 
-I came up with a way that hybrid cards, split cards, and phyrexian cards will show up so long as the card can be cast using only selected colors. For split cards, each side of the card is checked individually, so Life // Death will appear if either {B} or {G} is selected. Note that if the multicolor button is deselected (such that multicolor cards are filtered out), hybrid and split cards with multiple colors will still be hidden. However, to improve usability, I made it so right-clicking a color filter button also selects the the multicolor button so hybrids and split cards appear by default, and so 2 color cards show up if you then left click a second color filter button.
+Dan came up with a way that hybrid cards, split cards, and phyrexian cards will show up so long as the card can be cast using only selected colors. For split cards, each side of the card is checked individually, so Life // Death will appear if either {B} or {G} is selected. Note that if the multicolor button is deselected (such that multicolor cards are filtered out), hybrid and split cards with multiple colors will still be hidden. However, to improve usability, Dan made it so right-clicking a color filter button also selects the the multicolor button so hybrids and split cards appear by default, and so 2 color cards show up if you then left click a second color filter button.
 
 
 - Constructed mode -
