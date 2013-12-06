@@ -50,8 +50,7 @@ public class HumanPlaySpellAbility {
         this.payment = cp;
     }
 
-
-    public final void playAbility(boolean mayChoseTargets, boolean isFree, boolean skipStack) {
+    public final void playAbility(boolean mayChooseTargets, boolean isFree, boolean skipStack) {
         final Game game = ability.getActivatingPlayer().getGame();
 
         // used to rollback
@@ -72,8 +71,8 @@ public class HumanPlaySpellAbility {
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         boolean prerequisitesMet = this.announceValuesLikeX()
                 && this.announceType()
-                && ( !mayChoseTargets || setupTargets() ) // if you can choose targets, then do choose them.
-                && ( isFree || this.payment.payCost(game) );
+                && (!mayChooseTargets || setupTargets()) // if you can choose targets, then do choose them.
+                && (isFree || this.payment.payCost(game));
 
 
         if (!prerequisitesMet) {
@@ -88,7 +87,6 @@ public class HumanPlaySpellAbility {
             return;
         }
 
-
         if (isFree || this.payment.isFullyPaid()) {
             if (skipStack) {
                 AbilityUtils.resolve(this.ability);
@@ -100,11 +98,10 @@ public class HumanPlaySpellAbility {
     
             // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
             // Triggers haven't resolved yet ??
-            if (mayChoseTargets) {
+            if (mayChooseTargets) {
                 clearTargets(ability);
             }
         }
-
     }
     
     private final boolean setupTargets() {
@@ -114,16 +111,17 @@ public class HumanPlaySpellAbility {
         final Card source = ability.getSourceCard();
         do {
             TargetRestrictions tgt = currentAbility.getTargetRestrictions();
-            if( tgt != null && tgt.doesTarget()) {
+            if (tgt != null && tgt.doesTarget()) {
                 clearTargets(currentAbility);
                 Player targetingPlayer = ability.hasParam("TargetingPlayer") ? 
                         AbilityUtils.getDefinedPlayers(source, ability.getParam("TargetingPlayer"), currentAbility).get(0) : ability.getActivatingPlayer();
                 if (targetingPlayer.isHuman()) {
                     final TargetSelection select = new TargetSelection(currentAbility);
-                    if (!select.chooseTargets(null) ) {
+                    if (!select.chooseTargets(null)) {
                         return false;
                     }
-                } else { //AI
+                }
+                else { //AI
                     return currentAbility.doTrigger(true, targetingPlayer);
                 }
             }
@@ -161,7 +159,6 @@ public class HumanPlaySpellAbility {
         this.payment.refundPayment();
         game.getStack().clearFrozen();
     }
-    
 
     private boolean announceValuesLikeX() {
         // Announcing Requirements like Choosing X or Multikicker
@@ -176,13 +173,15 @@ public class HumanPlaySpellAbility {
                 boolean allowZero = !ability.hasParam("XCantBe0") && (!isX || manaCost == null || manaCost.canXbe0());
 
                 Integer value = ability.getActivatingPlayer().getController().announceRequirements(ability, varName, allowZero);
-                if ( null == value )
+                if (value == null) {
                     return false;
+                }
 
                 ability.setSVar(varName, value.toString());
-                if( "Multikicker".equals(varName) ) {
+                if ("Multikicker".equals(varName)) {
                     ability.getSourceCard().setKickerMagnitude(value);
-                } else {
+                }
+                else {
                     ability.getSourceCard().setSVar(varName, value.toString());
                 }
             }
