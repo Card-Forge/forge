@@ -4,25 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicate;
-
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
 import forge.game.Game;
-import forge.game.GameObject;
-import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
-import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 
 public class ChooseSourceEffect extends SpellAbilityEffect {
     @Override
@@ -144,44 +135,15 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             final List<Card> chosen = new ArrayList<Card>();
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+            if (tgt == null || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < validAmount; i++) {
-                    if (p.isHuman()) {
-                        final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a source ";
-                        Card o = null;
-                        do {
-                            o = GuiChoose.one(choiceTitle, sourcesToChooseFrom);
-                        } while (o.equals(divPermanentSources) || o.equals(divStackSources) || o.equals(divReferencedSources) || o.equals(divCommandZoneSources));
-                        chosen.add(o);
-                        sourcesToChooseFrom.remove(o);
-
-                    } else {
-                        if ("NeedsPrevention".equals(sa.getParam("AILogic"))) {
-                            final Player ai = sa.getActivatingPlayer();
-                            if (!game.getStack().isEmpty()) {
-                                Card choseCard = ChooseCardOnStack(sa, ai, game);
-                                if (choseCard != null) {
-                                    chosen.add(ChooseCardOnStack(sa, ai, game));
-                                }
-                            }
-
-                            final Combat combat = game.getCombat();
-                            if (chosen.isEmpty()) {
-                                permanentSources = CardLists.filter(permanentSources, new Predicate<Card>() {
-                                    @Override
-                                    public boolean apply(final Card c) {
-                                        if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
-                                            return false;
-                                        }
-                                        return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > 0;
-                                    }
-                                });
-                                chosen.add(ComputerUtilCard.getBestCreatureAI(permanentSources));
-                            }
-                        } else {
-                            chosen.add(ComputerUtilCard.getBestAI(sourcesToChooseFrom));
-                        }
-                    }
+                    final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a source ";
+                    Card o = null;
+                    do {
+                        o = p.getController().chooseSingleCardForEffect(sourcesToChooseFrom, sa, choiceTitle);
+                    } while (o.equals(divPermanentSources) || o.equals(divStackSources) || o.equals(divReferencedSources) || o.equals(divCommandZoneSources));
+                    chosen.add(o);
+                    sourcesToChooseFrom.remove(o);
                 }
                 host.setChosenCard(chosen);
                 if (sa.hasParam("RememberChosen")) {
@@ -193,34 +155,5 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         }
     }
 
-    private Card ChooseCardOnStack(SpellAbility sa, Player ai, Game game) {
-        for (SpellAbilityStackInstance si : game.getStack()) {
-            final Card source = si.getSourceCard();
-            final SpellAbility abilityOnStack = si.getSpellAbility();
-            
-            if (sa.hasParam("Choices") && !abilityOnStack.getSourceCard().isValid(sa.getParam("Choices"), ai, sa.getSourceCard())) {
-                continue;
-            }
-            final ApiType threatApi = abilityOnStack.getApi();
-            if (threatApi != ApiType.DealDamage && threatApi != ApiType.DamageAll) {
-                continue;
-            }
-    
-            
-            List<? extends GameObject> objects = getTargets(abilityOnStack);
-    
-            if (!abilityOnStack.usesTargeting() && !abilityOnStack.hasParam("Defined") && abilityOnStack.hasParam("ValidPlayers")) 
-                objects = AbilityUtils.getDefinedPlayers(source, abilityOnStack.getParam("ValidPlayers"), abilityOnStack);
-            
-            if (!objects.contains(ai) || abilityOnStack.hasParam("NoPrevention")) {
-                continue;
-            }
-            int dmg = AbilityUtils.calculateAmount(source, abilityOnStack.getParam("NumDmg"), abilityOnStack);
-            if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false) <= 0) {
-                continue;
-            }
-            return source;
-        }
-        return null;
-    }
+
 }

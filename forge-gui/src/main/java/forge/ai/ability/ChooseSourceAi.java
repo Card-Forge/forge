@@ -1,9 +1,11 @@
 package forge.ai.ability;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Predicate;
 
+import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -18,6 +20,7 @@ import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
@@ -119,4 +122,70 @@ public class ChooseSourceAi extends SpellAbilityAi {
 
         return true;
     }
+    
+    
+    
+    @Override
+    public Card chooseSingleCard(final Player aiChoser, SpellAbility sa, Collection<Card> options, boolean isOptional) {
+        
+        
+
+        // TODO Auto-generated method stub
+        if ("NeedsPrevention".equals(sa.getParam("AILogic"))) {
+            final Player ai = sa.getActivatingPlayer();
+            final Game game = ai.getGame();
+            if (!game.getStack().isEmpty()) {
+                Card choseCard = chooseCardOnStack(sa, ai, game);
+                if (choseCard != null) {
+                    return choseCard;
+                }
+            }
+
+            final Combat combat = game.getCombat();
+            
+            List<Card> permanentSources = CardLists.filter(options, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    if (c.getZone().getZoneType() != ZoneType.Battlefield || combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
+                        return false;
+                    }
+                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > 0;
+                }
+            });
+            return ComputerUtilCard.getBestCreatureAI(permanentSources);
+            
+        } else {
+            return ComputerUtilCard.getBestAI(options);
+        }
+    }
+    
+    private Card chooseCardOnStack(SpellAbility sa, Player ai, Game game) {
+        for (SpellAbilityStackInstance si : game.getStack()) {
+            final Card source = si.getSourceCard();
+            final SpellAbility abilityOnStack = si.getSpellAbility();
+            
+            if (sa.hasParam("Choices") && !abilityOnStack.getSourceCard().isValid(sa.getParam("Choices"), ai, sa.getSourceCard())) {
+                continue;
+            }
+            final ApiType threatApi = abilityOnStack.getApi();
+            if (threatApi != ApiType.DealDamage && threatApi != ApiType.DamageAll) {
+                continue;
+            }
+
+            List<? extends GameObject> objects = getTargets(abilityOnStack);
+
+            if (!abilityOnStack.usesTargeting() && !abilityOnStack.hasParam("Defined") && abilityOnStack.hasParam("ValidPlayers")) 
+                objects = AbilityUtils.getDefinedPlayers(source, abilityOnStack.getParam("ValidPlayers"), abilityOnStack);
+            
+            if (!objects.contains(ai) || abilityOnStack.hasParam("NoPrevention")) {
+                continue;
+            }
+            int dmg = AbilityUtils.calculateAmount(source, abilityOnStack.getParam("NumDmg"), abilityOnStack);
+            if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false) <= 0) {
+                continue;
+            }
+            return source;
+        }
+        return null;
+    }    
 }

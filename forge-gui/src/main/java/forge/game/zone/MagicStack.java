@@ -345,8 +345,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         CardPredicates.hasKeyword("As an additional cost to cast creature spells," +
                         		" you may pay any amount of mana. If you do, that creature enters " +
                         		"the battlefield with that many additional +1/+1 counters on it."))) {
-                	final Cost costPseudoKicker = new Cost(ManaCost.ONE, false);
-                	boolean hasPaid = false;
+                    final Cost costPseudoKicker = new Cost(ManaCost.ONE, false);
+                    boolean hasPaid = false;
                     do {
                         int mkMagnitude = source.getPseudoKickerMagnitude();
                         String prompt = String.format("Additional Cost for %s\r\nTimes Kicked: %d\r\n", source, mkMagnitude );
