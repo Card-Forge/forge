@@ -370,9 +370,9 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
-        final Integer[] choices = new Integer[max + 1];
-        for (int i = min; i <= max; i++) {
-            choices[i] = Integer.valueOf(i);
+        final Integer[] choices = new Integer[max + 1 - min];
+        for (int i = 0; i <= max - min; i++) {
+            choices[i] = Integer.valueOf(i + min);
         }
         return GuiChoose.one(title, choices).intValue();
     }
@@ -869,5 +869,12 @@ public class PlayerControllerHuman extends PlayerController {
         List<PaperCard> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
         Collections.sort(cards);
         return GuiChoose.one(message, cards);
+    }
+
+    @Override
+    public CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt) {
+        if( options.size() <= 1)
+            return Iterables.getFirst(options, null);
+        return GuiChoose.one(prompt, options);
     }
 }

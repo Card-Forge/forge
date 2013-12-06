@@ -179,4 +179,5 @@ public abstract class PlayerController {
     
     public abstract PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
+    public abstract CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt);
 }

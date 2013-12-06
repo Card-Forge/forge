@@ -454,4 +454,9 @@ public class PlayerControllerForTests extends PlayerController {
     public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
         throw new UnsupportedOperationException("No idea how a test player controller would choose colors");
     }
+
+    @Override
+    public CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt) {
+        return Iterables.getFirst(options, CounterType.P1P1);
+    }
 }

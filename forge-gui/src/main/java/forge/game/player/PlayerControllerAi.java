@@ -15,6 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.AiBlockController;
@@ -514,5 +515,11 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
         return ComputerUtilCard.chooseColor(sa, min, max, options);
+    }
+
+    @Override
+    public CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt) {
+        // may write a smarter AI if you need to (with calls to AI-clas for given API ability)
+        return Iterables.getFirst(options, null);
     }
 }

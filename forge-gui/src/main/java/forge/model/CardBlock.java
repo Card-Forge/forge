@@ -31,7 +31,6 @@ import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
-import forge.card.CardEdition.Collection;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.TextUtil;
