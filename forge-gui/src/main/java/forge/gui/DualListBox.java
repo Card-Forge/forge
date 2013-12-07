@@ -74,7 +74,7 @@ public class DualListBox<T> extends FPanel {
         sourceList = new FList<T>(sourceListModel);
         destListModel = new UnsortedListModel<T>();
         destList = new FList<T>(destListModel);
-        
+
         setPreferredSize(new Dimension(650, 300));
         setLayout(new GridLayout(0, 3));
         this.skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
@@ -119,7 +119,7 @@ public class DualListBox<T> extends FPanel {
                 if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { onAdd.run(); }
             }
         });
-        
+
         destList.addKeyListener(new KeyAdapter() {
             @Override public void keyPressed(final KeyEvent e) {
                 _handleListKey(e, onRemove, sourceList);
@@ -130,7 +130,7 @@ public class DualListBox<T> extends FPanel {
                 if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { onRemove.run(); }
             }
         });
-        
+
         // Dual List control buttons
         addButton = new FButton(">");
         addButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { onAdd.run(); } });
@@ -176,10 +176,10 @@ public class DualListBox<T> extends FPanel {
 
         _addListListeners(sourceList);
         _addListListeners(destList);
-        
+
         if (destElements != null && !destElements.isEmpty()) {
             addDestinationElements(destElements);
-            
+
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -187,10 +187,10 @@ public class DualListBox<T> extends FPanel {
                 }
             });
         }
-        
+
         if (sourceElements != null && !sourceElements.isEmpty()) {
             addSourceElements(sourceElements);
-            
+
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -198,14 +198,14 @@ public class DualListBox<T> extends FPanel {
                 }
             });
         }
-        
+
         _setButtonState();
     }
-    
+
     public void setSecondColumnLabelText(String label) {
         orderedLabel.setText(label);
     }
-    
+
     public void setSideboardMode( boolean isSideboardMode) {
         sideboardingMode = isSideboardMode;
         if (sideboardingMode) {
@@ -222,12 +222,12 @@ public class DualListBox<T> extends FPanel {
         case KeyEvent.VK_SPACE:
             onSpace.run();
             break;
-            
+
         case KeyEvent.VK_LEFT:
         case KeyEvent.VK_RIGHT:
             arrowFocusTarget.requestFocusInWindow();
             break;
-            
+
         case KeyEvent.VK_ENTER:
             if (okButton.isEnabled()) {
                 okButton.doClick();
@@ -236,7 +236,7 @@ public class DualListBox<T> extends FPanel {
                 autoButton.doClick();
             }
             break;
-            
+
         default:
             break;
         }
@@ -342,13 +342,13 @@ public class DualListBox<T> extends FPanel {
                             // don't run stale callbacks
                             return;
                         }
-                        
+
                         ListModel<T> model = list.getModel();
                         if (0 == model.getSize()) {
                             // nothing left to show
                             return;
                         }
-                        
+
                         int cardIdx = e.getIndex0();
                         if (model.getSize() <= cardIdx) {
                             // the last element got removed, get the one above it
@@ -364,7 +364,7 @@ public class DualListBox<T> extends FPanel {
                     }
                 });
             }
-            
+
             @Override
             public void intervalAdded(final ListDataEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
@@ -387,19 +387,19 @@ public class DualListBox<T> extends FPanel {
                     }
                 });
             }
-            
+
             @Override
             public void contentsChanged(ListDataEvent e) {
             }
         });
-        
+
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent ev) {
                 showSelectedCard(list.getSelectedValue());
             }
         });
-        
+
         list.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -413,7 +413,7 @@ public class DualListBox<T> extends FPanel {
         clearSourceListModel();
         _setButtonState();
     }
-    
+
     private void _removeAll() {
         addSourceElements(destListModel);
         clearDestinationListModel();
@@ -427,7 +427,7 @@ public class DualListBox<T> extends FPanel {
             selectOrder.setText(String.format("Sideboard (%d):", sourceListModel.getSize()));
             orderedLabel.setText(String.format("Main Deck (%d):", destListModel.getSize()));
         }
-        
+
         if (targetRemainingSources != -1) {
             okButton.setEnabled(sourceListModel.getSize() == targetRemainingSources);
         }
@@ -443,8 +443,8 @@ public class DualListBox<T> extends FPanel {
         addButton.setEnabled(sourceListModel.getSize() != 0);
         addAllButton.setEnabled(sourceListModel.getSize() != 0);
 
-        if (okButton.isEnabled()) {
-            okButton.requestFocusInWindow();
+        if (sourceListModel.getSize() == targetRemainingSources) {
+            okButton.requestFocusInWindow(); //focus OK button if reached specific number of sources needed
         }
     }
 
