@@ -92,9 +92,6 @@ public class DualListBox<T> extends FPanel {
                 clearSourceSelected();
                 sourceList.validate();
                 _setButtonState();
-                if (okButton.isEnabled()) {
-                    okButton.requestFocusInWindow();
-                }
             }
         };
 
@@ -234,7 +231,8 @@ public class DualListBox<T> extends FPanel {
         case KeyEvent.VK_ENTER:
             if (okButton.isEnabled()) {
                 okButton.doClick();
-            } else if (autoButton.isEnabled()) {
+            }
+            else if (autoButton.isEnabled()) {
                 autoButton.doClick();
             }
             break;
@@ -360,7 +358,9 @@ public class DualListBox<T> extends FPanel {
                         list.setSelectedIndex(cardIdx);
                         showCard = true;
                         showSelectedCard(model.getElementAt(cardIdx));
-                        list.requestFocusInWindow();
+                        if (!okButton.isEnabled()) {
+                            list.requestFocusInWindow();
+                        }
                     }
                 });
             }
@@ -412,7 +412,6 @@ public class DualListBox<T> extends FPanel {
         addDestinationElements(sourceListModel);
         clearSourceListModel();
         _setButtonState();
-        okButton.requestFocusInWindow();
     }
     
     private void _removeAll() {
@@ -434,7 +433,8 @@ public class DualListBox<T> extends FPanel {
         }
         if (targetRemainingSources < 1 && !sideboardingMode) {
             autoButton.setEnabled(sourceListModel.getSize() != targetRemainingSources);
-        } else {
+        }
+        else {
             autoButton.setEnabled(false);
         }
 
@@ -442,6 +442,10 @@ public class DualListBox<T> extends FPanel {
         removeAllButton.setEnabled(destListModel.getSize() != 0);
         addButton.setEnabled(sourceListModel.getSize() != 0);
         addAllButton.setEnabled(sourceListModel.getSize() != 0);
+
+        if (okButton.isEnabled()) {
+            okButton.requestFocusInWindow();
+        }
     }
 
     private void _finish() {
