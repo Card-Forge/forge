@@ -1,6 +1,6 @@
 Name:Stern Judge
 ManaCost:2 W
-Types:Creature Cleric
+Types:Creature Human Cleric
 PT:2/2
 A:AB$ RepeatEach | Cost$ T | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | SpellDescription$ Each player loses 1 life for each Swamp he or she controls.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | References$ X | SubAbility$ DBcleanup
