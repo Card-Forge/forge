@@ -1,6 +1,6 @@
 Name:Ebon Praetor
 ManaCost:4 B B
-Types:Creature Avatar
+Types:Creature Avatar Praetor
 PT:5/5
 K:First Strike
 K:Trample
