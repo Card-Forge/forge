@@ -68,7 +68,7 @@ public class DualListBox<T> extends FPanel {
     private boolean sideboardingMode = false;
     private boolean showCard = true;
 
-    public DualListBox(int remainingSources, List<T> sourceElements, List<T> destElements ) {
+    public DualListBox(int remainingSources, List<T> sourceElements, List<T> destElements) {
         targetRemainingSources = remainingSources;
         sourceListModel = new UnsortedListModel<T>();
         sourceList = new FList<T>(sourceListModel);
@@ -206,7 +206,7 @@ public class DualListBox<T> extends FPanel {
         orderedLabel.setText(label);
     }
 
-    public void setSideboardMode( boolean isSideboardMode) {
+    public void setSideboardMode(boolean isSideboardMode) {
         sideboardingMode = isSideboardMode;
         if (sideboardingMode) {
             addAllButton.setVisible(false);
@@ -439,12 +439,7 @@ public class DualListBox<T> extends FPanel {
             }
         }
 
-        if (targetRemainingSources < 1 && !sideboardingMode) {
-            autoButton.setEnabled(!targetReached);
-        }
-        else {
-            autoButton.setEnabled(false);
-        }
+        autoButton.setEnabled(targetRemainingSources == 0 && !targetReached && !sideboardingMode);
 
         addButton.setEnabled(canAdd);
         addAllButton.setEnabled(canAdd);
