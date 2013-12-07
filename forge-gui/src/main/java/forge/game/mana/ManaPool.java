@@ -110,7 +110,7 @@ public class ManaPool {
         }
 
         int numRemoved = 0;
-        boolean keepGreenMana = isEndOfPhase && this.owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end."); 
+        boolean keepGreenMana = isEndOfPhase && this.owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end.");
 
         List<Byte> keys = Lists.newArrayList(floatingMana.keySet());
         if (keepGreenMana) {
@@ -128,7 +128,8 @@ public class ManaPool {
                 numRemoved += floatingMana.get(b).size() - pMana.size();
                 floatingMana.get(b).clear();
                 floatingMana.putAll(b, pMana);
-            } else {
+            }
+            else {
                 numRemoved += floatingMana.get(b).size();
                 floatingMana.get(b).clear();
             }
@@ -160,7 +161,7 @@ public class ManaPool {
 
         // select equal weight possibilities
         List<Mana> manaChoices = new ArrayList<Mana>();
-        int bestWeight = Integer.MIN_VALUE; 
+        int bestWeight = Integer.MIN_VALUE;
         for (Pair<Mana, Integer> option : weightedOptions) {
             int thisWeight = option.getRight();
             Mana thisMana = option.getLeft();
@@ -173,14 +174,15 @@ public class ManaPool {
             if (thisWeight == bestWeight) {
                 // add only distinct Mana-s
                 boolean haveDuplicate = false;
-                for(Mana m : manaChoices) {
-                    if(m.equals(thisMana) ) {
+                for (Mana m : manaChoices) {
+                    if (m.equals(thisMana)) {
                         haveDuplicate = true;
                         break;
                     }
                 }
-                if(!haveDuplicate)
+                if (!haveDuplicate) {
                     manaChoices.add(thisMana);
+                }
             }
         }
 
@@ -196,35 +198,37 @@ public class ManaPool {
     private List<Pair<Mana, Integer>> selectManaToPayFor(final ManaCostShard shard, final SpellAbility saBeingPaidFor, String restriction) {
         final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana, Integer>>();
         for (final Byte manaKey : this.floatingMana.keySet()) {
-            if(!shard.canBePaidWithManaOfColor(manaKey.byteValue()))
+            if (!shard.canBePaidWithManaOfColor(manaKey.byteValue())) {
                 continue;
+            }
 
-            for(final Mana thisMana : this.floatingMana.get(manaKey)) {
+            for (final Mana thisMana : this.floatingMana.get(manaKey)) {
                 if (thisMana.getManaAbility() != null && !thisMana.getManaAbility().meetsManaRestrictions(saBeingPaidFor)) {
                     continue;
                 }
-    
+
                 boolean canPay = shard.canBePaidWithManaOfColor(thisMana.getColorCode());
                 if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
                     continue;
                 }
-    
-                if( StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isType(restriction) )
+
+                if (StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isType(restriction)) {
                     continue;
-    
+                }
+
                 // prefer colorless mana to spend
                 int weight = thisMana.isColorless() ? 5 : 0;
-    
+
                 // prefer restricted mana to spend
                 if (thisMana.isRestricted()) {
                     weight += 2;
                 }
-    
+
                 // Spend non-snow mana first
                 if (!thisMana.isSnow()) {
                     weight += 1;
                 }
-    
+
                 weightedOptions.add(Pair.of(thisMana, weight));
             }
         }
@@ -354,12 +358,12 @@ public class ManaPool {
         }
 
         final ArrayList<Mana> removeFloating = new ArrayList<Mana>();
-     
+
         boolean manaNotAccountedFor = false;
         // loop over mana produced by mana ability
         for (Mana mana : ma.getLastManaProduced()) {
             Collection<Mana> poolLane = this.floatingMana.get(mana.getColorCode());
-            
+
             if (poolLane != null && poolLane.contains(mana)) {
                 removeFloating.add(mana);
             }
@@ -368,7 +372,7 @@ public class ManaPool {
                 break;
             }
         }
-    
+
         // When is it legitimate for all the mana not to be accountable?
         // Does this condition really indicate an bug in Forge?
         if (manaNotAccountedFor) {
@@ -382,9 +386,9 @@ public class ManaPool {
     }
 
     public final void refundManaPaid(final SpellAbility sa) {
-        // Send all mana back to your mana pool, before accounting for it. 
+        // Send all mana back to your mana pool, before accounting for it.
         final List<Mana> manaPaid = sa.getPayingMana();
-               
+
         // move non-undoable paying mana back to floating
         if (sa.getSourceCard() != null) {
             sa.getSourceCard().setCanCounter(true);
@@ -393,20 +397,20 @@ public class ManaPool {
             this.addMana(m);
         }
         manaPaid.clear();
-        
+
         List<SpellAbility> payingAbilities = sa.getPayingManaAbilities();
-        for (final SpellAbility am : payingAbilities) { 
+        for (final SpellAbility am : payingAbilities) {
             // undo paying abilities if we can
             am.undo();
         }
-        
+
         for (final SpellAbility am : payingAbilities) {
             // Recursively refund abilities that were used.
             this.refundManaPaid(am);
         }
-            
+
         payingAbilities.clear();
-    
+
         // update battlefield of activating player - to redraw cards used to pay mana as untapped
         Player p = sa.getActivatingPlayer();
         p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
