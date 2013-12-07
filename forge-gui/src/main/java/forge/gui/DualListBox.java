@@ -428,23 +428,31 @@ public class DualListBox<T> extends FPanel {
             orderedLabel.setText(String.format("Main Deck (%d):", destListModel.getSize()));
         }
 
+        boolean canAdd = sourceListModel.getSize() != 0;
+        boolean canRemove = destListModel.getSize() != 0;
+        boolean targetReached = (sourceListModel.getSize() == targetRemainingSources);
+
         if (targetRemainingSources != -1) {
-            okButton.setEnabled(sourceListModel.getSize() == targetRemainingSources);
+            okButton.setEnabled(targetReached);
+            if (targetReached) {
+                canAdd = false; //don't allow adding any more if specific target reached
+            }
         }
+
         if (targetRemainingSources < 1 && !sideboardingMode) {
-            autoButton.setEnabled(sourceListModel.getSize() != targetRemainingSources);
+            autoButton.setEnabled(!targetReached);
         }
         else {
             autoButton.setEnabled(false);
         }
 
-        removeButton.setEnabled(destListModel.getSize() != 0);
-        removeAllButton.setEnabled(destListModel.getSize() != 0);
-        addButton.setEnabled(sourceListModel.getSize() != 0);
-        addAllButton.setEnabled(sourceListModel.getSize() != 0);
+        addButton.setEnabled(canAdd);
+        addAllButton.setEnabled(canAdd);
+        removeButton.setEnabled(canRemove);
+        removeAllButton.setEnabled(canRemove);
 
-        if (sourceListModel.getSize() == targetRemainingSources) {
-            okButton.requestFocusInWindow(); //focus OK button if reached specific number of sources needed
+        if (targetReached) {
+            okButton.requestFocusInWindow(); //focus OK button if specific target reached
         }
     }
 
