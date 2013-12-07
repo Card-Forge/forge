@@ -491,8 +491,8 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
         if (p != player) {
-            int cntToKeepInHand =  min == 0 ? -1 : valid.size() - min;
-            return GuiChoose.order("Choose cards to Discard", "Discarded", cntToKeepInHand, valid, null, null);
+            return GuiChoose.order("Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
+                    "Discarded", valid.size() - min, valid, null, null);
         }
 
         InputSelectCards inp = new InputSelectCardsFromList(min, max, valid);

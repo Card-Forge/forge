@@ -84,6 +84,8 @@ public class DualListBox<T> extends FPanel {
             @SuppressWarnings("unchecked")
             @Override
             public void run() {
+                if (!addButton.isEnabled()) { return; }
+
                 List<T> selected = new ArrayList<T>();
                 for (Object item : sourceList.getSelectedValuesList()) {
                     selected.add((T)item);
@@ -99,6 +101,8 @@ public class DualListBox<T> extends FPanel {
             @SuppressWarnings("unchecked")
             @Override
             public void run() {
+                if (!removeButton.isEnabled()) { return; }
+
                 List<T> selected = new ArrayList<T>();
                 for (Object item : destList.getSelectedValuesList()) {
                     selected.add((T)item);
