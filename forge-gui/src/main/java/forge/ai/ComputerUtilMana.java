@@ -51,11 +51,11 @@ public class ComputerUtilMana {
 
     public static boolean canPayManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
         cost = new ManaCostBeingPaid(cost); //check copy of cost so it doesn't modify the exist cost being paid
-        return payManaCost(cost, sa, ai, true, 0, true);
+        return payManaCost(cost, sa, ai, true, 0, true, true);
     }
 
     public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
-        return payManaCost(cost, sa, ai, false, 0, true);
+        return payManaCost(cost, sa, ai, false, 0, true, false);
     }
 
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana) {
@@ -92,10 +92,10 @@ public class ComputerUtilMana {
      */
     private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
-        return payManaCost(cost, sa, ai, test, extraMana, checkPlayable);
+        return payManaCost(cost, sa, ai, test, extraMana, checkPlayable, true);
     }
 
-    private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
+    private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, boolean clearManaPaid) {
         adjustManaCostToAvoidNegEffects(cost, sa.getSourceCard());
 
         final ManaPool manapool = ai.getManaPool();
@@ -109,7 +109,9 @@ public class ComputerUtilMana {
 
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
-            manapool.clearManaPaid(sa, test);
+            if (clearManaPaid) {
+                manapool.clearManaPaid(sa, test);
+            }
             handleOfferingsAI(sa, test, cost.isPaid());
             return true;
         }
@@ -117,7 +119,9 @@ public class ComputerUtilMana {
         // arrange all mana abilities by color produced.
         final Multimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
-            manapool.clearManaPaid(sa, test);
+            if (clearManaPaid) {
+                manapool.clearManaPaid(sa, test);
+            }
             handleOfferingsAI(sa, test, cost.isPaid());
             return false;
         }
@@ -223,7 +227,9 @@ public class ComputerUtilMana {
             }
         }
 
-        manapool.clearManaPaid(sa, test);
+        if (clearManaPaid) {
+            manapool.clearManaPaid(sa, test);
+        }
         handleOfferingsAI(sa, test, cost.isPaid());
 
         if (DEBUG_MANA_PAYMENT) {
