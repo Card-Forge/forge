@@ -85,25 +85,20 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     if (p.isHuman()) {
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
                         
-                        Predicate<PaperCard> cpp = null;
-                        
-                        
-                        if ( StringUtils.containsIgnoreCase(valid, "nonland") )
-                        {
+                        Predicate<PaperCard> cpp = Predicates.alwaysTrue();
+                        if ( StringUtils.containsIgnoreCase(valid, "nonland") ) {
                             cpp = Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES);
                         }
-                        if ( StringUtils.containsIgnoreCase(valid, "nonbasic") )
-                        {
+                        if ( StringUtils.containsIgnoreCase(valid, "nonbasic") ) {
                             cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES);
                         }
-                        if ( StringUtils.containsIgnoreCase(valid, "noncreature") )
-                        {
+                        
+                        if ( StringUtils.containsIgnoreCase(valid, "noncreature") ) {
                             cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_CREATURE), PaperCard.FN_GET_RULES);
-                        }
-                        else if ( StringUtils.containsIgnoreCase(valid, "creature") )
-                        {
+                        } else if ( StringUtils.containsIgnoreCase(valid, "creature") ) {
                             cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
                         }
+                        
 
                         PaperCard cp = p.getController().chooseSinglePaperCard(sa, message, cpp, sa.getSourceCard().getName());
                         Card instanceForPlayer = Card.fromPaperCard(cp, p); // the Card instance for test needs a game to be tested
