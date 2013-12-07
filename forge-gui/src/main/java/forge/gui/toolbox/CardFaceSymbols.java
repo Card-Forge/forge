@@ -149,21 +149,36 @@ public class CardFaceSymbols {
             return;
         }
 
+        int xpos = x;
+        final int offset = 14;
         final int genericManaCost = manaCost.getGenericCost();
         final boolean hasGeneric = (genericManaCost > 0) || manaCost.isPureGeneric();
         final List<ManaCostShard> shards = manaCost.getShards();
 
-        int xpos = x;
-        final int offset = 14;
         if (hasGeneric) {
+            for (final ManaCostShard s : shards) { //render X shards before generic
+                if (s == ManaCostShard.X) {
+                    CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, xpos, y);
+                    xpos += offset;
+                }
+            }
+
             final String sGeneric = Integer.toString(genericManaCost);
             CardFaceSymbols.drawSymbol(sGeneric, skin, g, xpos, y);
             xpos += offset;
+    
+            for (final ManaCostShard s : shards) { //render non-X shards after generic
+                if (s != ManaCostShard.X) {
+                    CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, xpos, y);
+                    xpos += offset;
+                }
+            }
         }
-
-        for (final ManaCostShard s : shards) {
-            CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, xpos, y);
-            xpos += offset;
+        else { //if no generic, just render shards in order
+            for (final ManaCostShard s : shards) {
+                CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, xpos, y);
+                xpos += offset;
+            }
         }
     }
 
