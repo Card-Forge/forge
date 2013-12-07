@@ -3972,6 +3972,7 @@ forge-gui/res/cardsfolder/f/fiery_hellhound.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fiery_justice.txt -text
 forge-gui/res/cardsfolder/f/fiery_mantle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fiery_temper.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/fight_or_flight.txt -text
 forge-gui/res/cardsfolder/f/fight_to_the_death.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fighting_chance.txt -text
 forge-gui/res/cardsfolder/f/fighting_drake.txt svneol=native#text/plain
