@@ -379,7 +379,7 @@ public class ComputerUtilMana {
 
         if (abMana.isComboMana()) {
             int amount = manaAb.hasParam("Amount") ? AbilityUtils.calculateAmount(source, manaAb.getParam("Amount"), saRoot) : 1;
-            final ManaCostBeingPaid testCost = new ManaCostBeingPaid(cost.getCostString().replace("X ", ""));
+            final ManaCostBeingPaid testCost = new ManaCostBeingPaid(cost);
             final String[] comboColors = abMana.getComboColors().split(" ");
             for (int nMana = 1; nMana <= amount; nMana++) {
                 String choice = "";

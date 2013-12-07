@@ -1120,8 +1120,7 @@ public class AbilityUtils {
 
     private static void handleUnlessCost(final SpellAbility sa, final Game game) {
         final Card source = sa.getSourceCard();
-        String unlessCost = sa.getParam("UnlessCost");
-        unlessCost = unlessCost.trim();
+        
 
         // The player who has the chance to cancel the ability
         final String pays = sa.hasParam("UnlessPayer") ? sa.getParam("UnlessPayer") : "TargetedController";
@@ -1132,18 +1131,19 @@ public class AbilityUtils {
         final boolean isSwitched = sa.hasParam("UnlessSwitched");
 
         // The cost
+        final Cost cost;
+        String unlessCost = sa.getParam("UnlessCost").trim();
         if (unlessCost.equals("CardManaCost")) {
-            unlessCost = source.getManaCost().getCostString();
+            cost = new Cost(source.getManaCost(), true);
         } else if (unlessCost.equals("RememberedCostMinus2")) {
             if (source.getRemembered().isEmpty() || !(source.getRemembered().get(0) instanceof Card)) {
                 sa.resolve();
                 resolveSubAbilities(sa, game);
             }
             Card rememberedCard = (Card) source.getRemembered().get(0);
-            unlessCost = rememberedCard.getManaCost().getCostString();
-            ManaCostBeingPaid newCost = new ManaCostBeingPaid(unlessCost.toString());
+            ManaCostBeingPaid newCost = new ManaCostBeingPaid(rememberedCard.getManaCost());
             newCost.decreaseColorlessMana(2);
-            unlessCost = newCost.getCostString();
+            cost = new Cost(newCost.toManaCost(), true);
         } else if( !StringUtils.isBlank(sa.getSVar(unlessCost)) || !StringUtils.isBlank(source.getSVar(unlessCost))) {
             // check for X costs (stored in SVars
             int xCost = calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa);
@@ -1151,10 +1151,11 @@ public class AbilityUtils {
             ManaCostBeingPaid toPay = new ManaCostBeingPaid("0");
             byte xColor = MagicColor.fromName(sa.hasParam("UnlessXColor") ? sa.getParam("UnlessXColor") : "1");
             toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
-            unlessCost = toPay.getCostString();
-        }
+            cost = new Cost(toPay.toManaCost(), true);
+        } else
+            cost = new Cost(unlessCost, true);
 
-        final Cost cost = new Cost(unlessCost, true);
+        
 
         boolean paid = false;
         for (Player payer : payers) {

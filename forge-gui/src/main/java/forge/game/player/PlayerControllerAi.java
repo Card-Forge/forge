@@ -14,7 +14,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -25,6 +24,8 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ability.CharmAi;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -493,17 +494,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String chooseSingleColor(ImmutableList<String> names) {
-        return ComputerUtilCard.getMostProminentColor(player.getCardsIn(ZoneType.Hand));
-    }
-
-    @Override
-    public String chooseHybridMana(String s) {
+    public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
         final String c = ComputerUtilCard.getMostProminentColor(player.getCardsIn(ZoneType.Hand));
-        if (s.contains(c)) {
-            return c;
+        byte chosenColorMask = MagicColor.fromName(c);
+        if ((colors.getColor() & chosenColorMask) != 0) {
+            return chosenColorMask;
         } else {
-            return s.substring(0, 1);
+            return Iterables.getFirst(colors, MagicColor.WHITE);
         }
     }
 

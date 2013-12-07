@@ -23,15 +23,6 @@ public class ManaCostParser implements IParserManaCost {
     }
 
     /**
-     * Strip formatting from the given formatted cost string
-     * 
-     * @param formattedCost
-     */
-    public static String stripFormatting(final String formattedCost) {
-        return formattedCost.replaceAll("\\{([A-Z0-9/]+)\\}", "$1 ").trim();
-    }
-
-    /**
      * Instantiates a new parser cardname txt mana cost.
      * 
      * @param cost

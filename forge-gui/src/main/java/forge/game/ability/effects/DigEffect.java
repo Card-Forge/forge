@@ -130,7 +130,7 @@ public class DigEffect extends SpellAbilityEffect {
                     final String revealValid = sa.getParam("RevealValid");
                     final List<Card> toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host);
                     if (!toReveal.isEmpty()) {
-                        GuiChoose.one("Revealing cards from library", toReveal);
+                        game.getAction().reveal(toReveal, host.getController());
                         if (sa.hasParam("RememberRevealed")) {
                             for (final Card one : toReveal) {
                                 host.addRemembered(one);
@@ -182,13 +182,15 @@ public class DigEffect extends SpellAbilityEffect {
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
                     } else if (allButOne) {
                         movedCards.addAll(valid);
+                        String prompt = "Choose a card to leave in ";
+                        if (destZone2.equals(ZoneType.Library) && (libraryPosition2 == 0)) {
+                            prompt = "Leave which card on top of the ";
+                        }
+                        
                         Card chosen = null;
                         if (choser.isHuman()) {
                             
-                            String prompt = "Choose a card to leave in ";
-                            if (destZone2.equals(ZoneType.Library) && (libraryPosition2 == 0)) {
-                                prompt = "Leave which card on top of the ";
-                            }
+
                             chosen = GuiChoose.one(prompt + destZone2, valid);
                         } else { // Computer
                             chosen = ComputerUtilCard.getBestAI(valid);
@@ -217,11 +219,8 @@ public class DigEffect extends SpellAbilityEffect {
                                 if (destZone1.equals(ZoneType.Library) && (libraryPosition == 0)) {
                                     prompt = "Chose a card to put on top of the ";
                                 }
-                                if (anyNumber || optional) {
-                                    chosen = GuiChoose.oneOrNone(prompt + destZone1, valid);
-                                } else {
-                                    chosen = GuiChoose.one(prompt + destZone1, valid);
-                                }
+                                
+                                chosen = choser.getController().chooseSingleCardForEffect(valid, sa, prompt, anyNumber || optional);
                                 if ((chosen == null) || chosen.getName().equals("[No valid cards]")) {
                                     break;
                                 }

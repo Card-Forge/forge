@@ -6,9 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.gui.GuiChoose;
 
 public class TapOrUntapEffect extends SpellAbilityEffect {
 
@@ -34,25 +34,16 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
         final List<Card> tgtCards = getTargetCards(sa);
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-
+        PlayerController pc = sa.getActivatingPlayer().getController();
+        
         for (final Card tgtC : tgtCards) {
             if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
-                if (sa.getActivatingPlayer().isHuman()) {
-                    final String[] tapOrUntap = new String[] { "Tap", "Untap" };
-                    final Object z = GuiChoose.oneOrNone("Tap or Untap " + tgtC + "?", tapOrUntap);
-                    if (null == z) {
-                        continue;
-                    }
-                    final boolean tap = (z.equals("Tap")) ? true : false;
+                boolean tap = pc.chooseBinary(sa, "Tap or Untap " + tgtC + "?", PlayerController.BinaryChoiceType.TapOrUntap);
 
-                    if (tap) {
-                        tgtC.tap();
-                    } else {
-                        tgtC.untap();
-                    }
-                } else {
-                    // computer
+                if (tap) {
                     tgtC.tap();
+                } else {
+                    tgtC.untap();
                 }
             }
         }

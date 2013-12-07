@@ -17,6 +17,11 @@
  */
 package forge.card;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import com.google.common.collect.UnmodifiableIterator;
+
 import forge.card.mana.ManaCost;
 import forge.util.BinaryUtil;
 
@@ -30,7 +35,7 @@ import forge.util.BinaryUtil;
  * 
  * 
  */
-public final class ColorSet implements Comparable<ColorSet> {
+public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte> {
 
     private final byte myColor;
     private final int orderWeight;
@@ -278,5 +283,38 @@ public final class ColorSet implements Comparable<ColorSet> {
 
     public ColorSet getOffColors(ColorSet ccOther) {
         return ColorSet.fromMask(~this.myColor & ccOther.myColor);
+    }
+
+    @Override
+    public Iterator<Byte> iterator() {
+        return new ColorIterator();
+    }
+    
+    private class ColorIterator extends UnmodifiableIterator<Byte> {
+        int currentBit = -1;
+        
+        private int getIndexOfNextColor(){
+            int nextBit = currentBit + 1;
+            while(nextBit < MagicColor.NUMBER_OR_COLORS) {
+                if((myColor & MagicColor.WUBRG[nextBit]) != 0)
+                    break;
+                nextBit++;
+            }
+            return nextBit;
+        }
+        
+        @Override
+        public boolean hasNext() {
+            return getIndexOfNextColor() < MagicColor.NUMBER_OR_COLORS;
+        }
+
+        @Override
+        public Byte next() {
+            currentBit = getIndexOfNextColor();
+            if (currentBit >= MagicColor.NUMBER_OR_COLORS)
+                throw new NoSuchElementException();
+            
+            return MagicColor.WUBRG[currentBit];
+        }
     }
 }

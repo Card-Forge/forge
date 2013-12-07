@@ -620,9 +620,9 @@ public class AbilityManaPart implements java.io.Serializable {
         m.appendTail(sb);
         String replaced = sb.toString();
         while (replaced.contains("Any")) {
-            String rs = MagicColor.Constant.GREEN;
+            byte rs = MagicColor.GREEN;
             if (act != null) {
-                rs = act.getController().chooseSingleColor(MagicColor.Constant.ONLY_COLORS);
+                rs = act.getController().chooseColor("Choose a color", sa, ColorSet.fromMask(MagicColor.ALL_COLORS));
             }
             replaced = replaced.replaceFirst("Any", MagicColor.toShortString(rs));
         }

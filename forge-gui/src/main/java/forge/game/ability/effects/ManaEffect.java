@@ -6,7 +6,9 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.ai.ComputerUtilCard;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCostShard;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -164,26 +166,33 @@ public class ManaEffect extends SpellAbilityEffect {
             for (Player p : tgtPlayers) {
                 if (tgt == null || p.canBeTargetedBy(sa)) {
                     String type = abMana.getOrigProduced().split("Special ")[1];
-                    String choice = "";
+
                     if (type.equals("EnchantedManaCost")) {
-                        if (card.getEnchanting() != null ) {
-                            Card enchanted = card.getEnchantingCard();
-                            // Remove X and phyrexian mana
-                            choice = enchanted.getManaCost().getCostString().replaceAll("X|/P", "").trim();
+                        Card enchanted = card.getEnchantingCard();
+                        if (enchanted != null ) {
+                            
+                            StringBuilder sb = new StringBuilder();
+                            int generic = enchanted.getManaCost().getGenericCost();
+                            if( generic > 0 )
+                                sb.append(generic);
+
+                            for (ManaCostShard s : enchanted.getManaCost()) {
+                                ColorSet cs = ColorSet.fromMask(s.getColorMask());
+                                if(cs.isColorless())
+                                    continue;
+                                sb.append(' ');
+                                if (cs.isMonoColor())
+                                    sb.append(MagicColor.toShortString(s.getColorMask()));
+                                else /* (cs.isMulticolor()) */ {
+                                    byte chosenColor = sa.getActivatingPlayer().getController().chooseColor("Choose a single color from " + s.toString(), sa, cs);
+                                    sb.append(MagicColor.toShortString(chosenColor));
+                                }
+                            }
+                            abMana.setExpressChoice(sb.toString().trim());
                         }
                     }
-                    if (choice.equals("no cost") || choice.isEmpty()) {
-                        choice = "0";
-                    }
-                    StringBuilder sb = new StringBuilder();
-                    for (String s : choice.split(" ")) {
-                        if (s.length() == 1 || StringUtils.isNumeric(s)) {
-                            sb.append(" ").append(s);
-                        } else { // Handle hybrid mana
-                            sb.append(" ").append(sa.getActivatingPlayer().getController().chooseHybridMana(s));
-                        }
-                    }
-                    abMana.setExpressChoice(sb.toString().trim());
+
+
                     if (abMana.getExpressChoice().isEmpty()) {
                         System.out.println("AbilityFactoryMana::manaResolve() - special mana effect is empty for " + sa.getSourceCard().getName());
                     }

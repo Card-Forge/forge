@@ -19,6 +19,7 @@ package forge.card.mana;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ import java.util.List;
  * @version $Id: CardManaCost.java 9708 2011-08-09 19:34:12Z jendave $
  */
 
-public final class ManaCost implements Comparable<ManaCost> {
+public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostShard> {
     private List<ManaCostShard> shards;
     private final int genericCost;
     private final boolean hasNoCost; // lands cost
@@ -138,15 +139,6 @@ public final class ManaCost implements Comparable<ManaCost> {
         return result;
     }
 
-    /**
-     * Gets the shards.
-     * 
-     * @return the shards
-     */
-    public List<ManaCostShard> getShards() {
-        return this.shards;
-    }
-
     public int getShardCount(ManaCostShard which) {
         if (which == ManaCostShard.COLORLESS) {
             return genericCost;
@@ -227,13 +219,6 @@ public final class ManaCost implements Comparable<ManaCost> {
     }
 
     /**
-     * @return unformatted cost string
-     */
-    public String getCostString() {
-        return ManaCostParser.stripFormatting(this.toString());
-    }
-
-    /**
      * TODO: Write javadoc for this method.
      * @return
      */
@@ -287,5 +272,18 @@ public final class ManaCost implements Comparable<ManaCost> {
         sh.addAll(b.shards);
         res.sealClass(sh);
         return res;
+    }
+
+    @Override
+    public Iterator<ManaCostShard> iterator() {
+        return this.shards.iterator();
+    }
+    
+    public int getGlyphCount() { // counts all colored shards or 1 for {0} costs 
+        int width = shards.size();
+        if (genericCost > 0 || (genericCost == 0 && width == 0)) {
+            width++;
+        }
+        return width;
     }
 }

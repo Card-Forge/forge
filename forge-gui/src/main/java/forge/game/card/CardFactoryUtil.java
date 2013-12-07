@@ -36,6 +36,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
@@ -484,42 +485,6 @@ public class CardFactoryUtil {
         card.setSVar(playSvar.toString(),playWithoutCost.toString());
     }
 
-
-
-    /**
-     * <p>
-     * getNumberOfManaSymbolsByColor.
-     * </p>
-     * 
-     * @param colorAbb
-     *            a {@link java.lang.String} object.
-     * @param cards
-     *            a {@link forge.List<Card>} object.
-     * @return a int.
-     */
-    public static int getNumberOfManaSymbolsByColor(final String colorAbb, final List<Card> cards) {
-        int count = 0;
-        for (Card c : cards) {
-            // Certain tokens can have mana cost, so don't skip them
-            count += getNumberOfManaSymbolsByColor(colorAbb, c);
-        }
-        return count;
-    }
-
-    /**
-     * <p>
-     * getNumberOfManaSymbolsByColor.
-     * </p>
-     * 
-     * @param colorAbb
-     *            a {@link java.lang.String} object.
-     * @param card
-     *            a {@link forge.game.card.Card} object.
-     * @return a int.
-     */
-    public static int getNumberOfManaSymbolsByColor(final String colorAbb, final Card card) {
-        return countOccurrences(card.getManaCost().getCostString(), colorAbb);
-    }
 
     /**
      * <p>
@@ -1248,7 +1213,16 @@ public class CardFactoryUtil {
             } else {
                 cards = cc.getCardsIn(sourceZone);
             }
-            return doXMath(getNumberOfManaSymbolsByColor(colorAbb, cards), m, c);
+            
+            int colorOcurrencices = 0;
+            byte colorCode = MagicColor.fromName(colorAbb);
+            for(Card c0 : cards) {
+                for(ManaCostShard sh : c0.getManaCost()){
+                    if (sh.canBePaidWithManaOfColor(colorCode)) 
+                        colorOcurrencices++;
+                }
+            }
+            return doXMath(colorOcurrencices, m, c);
         }
 
         if (sq[0].contains("Hellbent"))         return doXMath(Integer.parseInt(sq[cc.hasHellbent() ? 1 : 2]), m, c);

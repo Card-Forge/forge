@@ -23,11 +23,12 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -860,13 +861,23 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public String chooseSingleColor(ImmutableList<String> names) {
-        return GuiChoose.one("Choose a color:", names);
-    }
-
-    @Override
-    public String chooseHybridMana(String s) {
-        return GuiChoose.one("Choose a type", s.split("/"));
+    public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
+        int cntColors = colors.countColors();
+        switch (cntColors) {
+            case 0: return 0;
+            case 1: return colors.getColor();
+            default:
+                String[] colorNames = new String[cntColors];
+                int i = 0;
+                for(byte b : colors) {
+                    colorNames[i++] = MagicColor.toLongString(b);
+                }
+                if(colorNames.length > 2) {
+                    return MagicColor.fromName(GuiChoose.one(message, colorNames));
+                }
+                int idxChosen = GuiDialog.confirm(sa.getSourceCard(), message, colorNames) ? 0 : 1;
+                return MagicColor.fromName(colorNames[idxChosen]);
+        }
     }
 
     @Override

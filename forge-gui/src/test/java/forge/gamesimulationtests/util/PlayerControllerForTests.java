@@ -13,12 +13,13 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.DrawAi;
 import forge.ai.ability.GameWinAi;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -411,13 +412,8 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public String chooseSingleColor( ImmutableList<String> onlyColors ) {
-		return chooseItem( onlyColors );
-	}
-
-	@Override
-	public String chooseHybridMana( String s ) {
-		return StringUtils.split( s, "/" )[ 0 ];
+	public byte chooseColor( String message, SpellAbility sa, ColorSet colors ) {
+		return Iterables.getFirst(colors, MagicColor.WHITE);
 	}
 	
 	private <T> List<T> chooseItems( Collection<T> items, int amount ) {

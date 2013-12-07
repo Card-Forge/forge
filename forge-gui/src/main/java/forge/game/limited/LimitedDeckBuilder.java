@@ -352,7 +352,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
             final ManaCost mc = cp.getRules().getManaCost();
 
             // count each mana symbol in the mana cost
-            for (ManaCostShard shard : mc.getShards()) {
+            for (ManaCostShard shard : mc) {
                 for ( int i = 0 ; i < MagicColor.WUBRG.length; i++ ) {
                     byte c = MagicColor.WUBRG[i];
                     if ( shard.canBePaidWithManaOfColor(c) && colors.hasAnyColor(c))

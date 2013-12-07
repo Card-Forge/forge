@@ -19,8 +19,6 @@ package forge.gui.toolbox.itemmanager.table;
 
 import java.awt.Component;
 import java.awt.Graphics;
-import java.util.List;
-
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -79,10 +77,8 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
             drawCost(g, v1, padding0, cellWidth);
         else 
         {
-            int shards1 = v1.isPureGeneric() || v1.getGenericCost() > 0 ? 1 : 0;
-            int shards2 = v2.isPureGeneric() || v2.getGenericCost() > 0 ? 1 : 0;
-            shards1 += v1.getShards().size();
-            shards2 += v2.getShards().size();
+            int shards1 = v1.getGlyphCount();
+            int shards2 = v2.getGlyphCount();
 
             int perGlyph = (cellWidth - padding0 - spaceBetweenSplitCosts) / (shards1 + shards2);
             perGlyph = Math.min(perGlyph, elemtWidth + elemtGap);
@@ -102,10 +98,8 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
         final int genericManaCost = value.getGenericCost();
         final int xManaCosts = value.countX();
         final boolean hasGeneric = (genericManaCost > 0) || this.v1.isPureGeneric();
-        final List<ManaCostShard> shards = value.getShards();
 
-        
-        final int cntGlyphs = hasGeneric ? shards.size() + 1 : shards.size();
+        final int cntGlyphs = value.getGlyphCount();
         final float offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding - elemtWidth) / (cntGlyphs - 1f)
                 : elemtWidth + elemtGap;
         final float offset = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
@@ -125,7 +119,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
             xpos += offset;
         }
 
-        for (final ManaCostShard s : shards) {
+        for (final ManaCostShard s : value) {
             if (s.equals(ManaCostShard.X)) {
                 // X costs already drawn up above
                 continue;

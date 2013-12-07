@@ -153,7 +153,7 @@ public class ManaCostBeingPaid {
         unpaidShards = new EnumMapToAmount<ManaCostShard>(ManaCostShard.class);
         sourceRestriction = srcRestriction;
         if (manaCost == null) { return; }
-        for (ManaCostShard shard : manaCost.getShards()) {
+        for (ManaCostShard shard : manaCost) {
             if (shard == ManaCostShard.X) {
                 cntX++;
             } else {
@@ -414,7 +414,7 @@ public class ManaCostBeingPaid {
     }
 
     public final void combineManaCost(final ManaCost extra) {
-        for (ManaCostShard shard : extra.getShards()) {
+        for (ManaCostShard shard : extra) {
             if (shard == ManaCostShard.X) {
                 cntX++;
             }
@@ -426,7 +426,7 @@ public class ManaCostBeingPaid {
     }
 
     public final void determineManaCostDifference(final ManaCost subThisManaCost) {
-        for (ManaCostShard shard : subThisManaCost.getShards()) {
+        for (ManaCostShard shard : subThisManaCost) {
             if (shard == ManaCostShard.X) {
                 cntX--;
             }
@@ -492,13 +492,6 @@ public class ManaCostBeingPaid {
     @Override
     public final String toString() {
         return this.toString(true);
-    }
-
-    /**
-     * @return unformatted cost string
-     */
-    public String getCostString() {
-        return ManaCostParser.stripFormatting(this.toString());
     }
 
     /**

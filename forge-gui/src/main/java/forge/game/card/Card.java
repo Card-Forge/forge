@@ -3423,7 +3423,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link forge.game.card.Card} object.
      */
     public final Card getEnchantingCard() {
-        if ((this.enchanting != null) && (this.enchanting instanceof Card)) {
+        if (this.enchanting instanceof Card) {
             return (Card) this.enchanting;
         }
         return null;
@@ -3437,7 +3437,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link forge.game.player.Player} object.
      */
     public final Player getEnchantingPlayer() {
-        if ((this.enchanting != null) && (this.enchanting instanceof Player)) {
+        if (this.enchanting instanceof Player) {
             return (Player) this.enchanting;
         }
         return null;

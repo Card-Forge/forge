@@ -17,6 +17,7 @@
  */
 package forge.gui.input;
 
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
@@ -32,11 +33,11 @@ public class InputPayManaSimple extends InputPayMana {
     private static final long serialVersionUID = 3467312982164195091L;
 
     private final Card originalCard;
-    private final String originalManaCost;
+    private final ManaCost originalManaCost;
 
     public InputPayManaSimple(final Game game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
         super(sa);
-        this.originalManaCost = manaCostToPay.getCostString(); // Change
+        this.originalManaCost = manaCostToPay.toManaCost();
         this.originalCard = sa.getSourceCard();
 
         if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {

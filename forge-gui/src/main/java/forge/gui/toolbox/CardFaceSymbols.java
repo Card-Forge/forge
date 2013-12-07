@@ -19,7 +19,6 @@ package forge.gui.toolbox;
 
 import java.awt.Graphics;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -153,10 +152,9 @@ public class CardFaceSymbols {
         final int offset = 14;
         final int genericManaCost = manaCost.getGenericCost();
         final boolean hasGeneric = (genericManaCost > 0) || manaCost.isPureGeneric();
-        final List<ManaCostShard> shards = manaCost.getShards();
 
         if (hasGeneric) {
-            for (final ManaCostShard s : shards) { //render X shards before generic
+            for (final ManaCostShard s : manaCost) { //render X shards before generic
                 if (s == ManaCostShard.X) {
                     CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, xpos, y);
                     xpos += offset;
@@ -167,7 +165,7 @@ public class CardFaceSymbols {
             CardFaceSymbols.drawSymbol(sGeneric, skin, g, xpos, y);
             xpos += offset;
     
-            for (final ManaCostShard s : shards) { //render non-X shards after generic
+            for (final ManaCostShard s : manaCost) { //render non-X shards after generic
                 if (s != ManaCostShard.X) {
                     CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, xpos, y);
                     xpos += offset;
@@ -175,7 +173,7 @@ public class CardFaceSymbols {
             }
         }
         else { //if no generic, just render shards in order
-            for (final ManaCostShard s : shards) {
+            for (final ManaCostShard s : manaCost) {
                 CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, xpos, y);
                 xpos += offset;
             }
@@ -256,13 +254,7 @@ public class CardFaceSymbols {
      * @return a int.
      */
     public static int getWidth(final ManaCost manaCost) {
-        int width = manaCost.getShards().size();
-        if (manaCost.getGenericCost() > 0 || (manaCost.getGenericCost() == 0 && width == 0)) {
-            width++;
-        }
-
-        //System.out.println(String.format("%d for %s", width, manaCost.toString()));
-        return width * 14;
+        return manaCost.getGlyphCount() * 14;
     }
     
     public static int getHeight() {

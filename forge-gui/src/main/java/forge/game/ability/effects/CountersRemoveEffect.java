@@ -91,7 +91,6 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                 if (type.matches("Any")) {
                     while (cntToRemove > 0 && tgtCard.hasCounters()) {
                         final Map<CounterType, Integer> tgtCounters = tgtCard.getCounters();
-                        
 
                         CounterType chosenType = pc.chooseCounterType(tgtCounters.keySet(), sa, "Select type of counters to remove");
                         String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
