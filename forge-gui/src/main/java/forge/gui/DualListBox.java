@@ -204,6 +204,16 @@ public class DualListBox<T> extends FPanel {
         }
 
         _setButtonState();
+
+        if (remainingSources == sourceElements.size()) {
+            //ensure OK button gets initial focus if remainingSources matches source list count
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    okButton.requestFocusInWindow();
+                }
+            });
+        }
     }
 
     public void setSecondColumnLabelText(String label) {
