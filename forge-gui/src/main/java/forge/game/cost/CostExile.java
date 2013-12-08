@@ -156,54 +156,56 @@ public class CostExile extends CostPartWithList {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
         final Game game = activator.getGame();
-        String type = this.getType();
 
-        List<Card> typeList = new ArrayList<Card>();
+        String type = this.getType();
         if (type.equals("All")) {
             return true; // this will always work
         }
         else if (type.contains("FromTopGrave")) {
             type = type.replace("FromTopGrave", "");
         }
-        if (this.getFrom().equals(ZoneType.Stack)) {
+
+        List<Card> list;
+        if (this.from.equals(ZoneType.Stack)) {
+            list = new ArrayList<Card>();
             for (SpellAbilityStackInstance si : game.getStack()) {
-                typeList.add(si.getSourceCard());
+                list.add(si.getSourceCard());
             }
+        }
+        else if (this.sameZone) {
+            list = new ArrayList<Card>(game.getCardsIn(this.from));
         }
         else {
-            if (this.sameZone) {
-                typeList = new ArrayList<Card>(game.getCardsIn(this.getFrom()));
-            }
-            else {
-                typeList = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
-            }
+            list = new ArrayList<Card>(activator.getCardsIn(this.from));
         }
-        if (!this.payCostFromSource()) {
-            typeList = CardLists.getValidCards(typeList, type.split(";"), activator, source);
 
-            final Integer amount = this.convertAmount();
-            if ((amount != null) && (typeList.size() < amount)) {
-                return false;
-            }
-
-            if (this.sameZone && amount != null) {
-                boolean foundPayable = false;
-                List<Player> players = game.getPlayers();
-                for (Player p : players) {
-                    if (CardLists.filter(typeList, CardPredicates.isController(p)).size() >= amount) {
-                        foundPayable = true;
-                        break;
-                    }
-                }
-                if (!foundPayable) {
-                    return false;
-                }
-            }
+        if (this.payCostFromSource()) {
+            return list.contains(source);
         }
-        else if (!typeList.contains(source)) {
+
+        if (source.isInZone(this.from)) {
+            list.remove(source); //source can't pay for itself
+        }
+        list = CardLists.getValidCards(list, type.split(";"), activator, source);
+
+        final Integer amount = this.convertAmount();
+        if ((amount != null) && (list.size() < amount)) {
             return false;
         }
 
+        if (this.sameZone && amount != null) {
+            boolean foundPayable = false;
+            List<Player> players = game.getPlayers();
+            for (Player p : players) {
+                if (CardLists.filter(list, CardPredicates.isController(p)).size() >= amount) {
+                    foundPayable = true;
+                    break;
+                }
+            }
+            if (!foundPayable) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -218,8 +220,9 @@ public class CostExile extends CostPartWithList {
     public final boolean payHuman(final SpellAbility ability, final Game game) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
-        Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
+
+        Integer c = this.convertAmount();
         String type = this.getType();
         boolean fromTopGrave = false;
         if (type.contains("FromTopGrave")) {
@@ -228,12 +231,25 @@ public class CostExile extends CostPartWithList {
         }
 
         List<Card> list;
-
-        if (this.sameZone) {
-            list = new ArrayList<Card>(game.getCardsIn(this.getFrom()));
+        if (this.from.equals(ZoneType.Stack)) {
+            list = new ArrayList<Card>();
+            for (SpellAbilityStackInstance si : game.getStack()) {
+                list.add(si.getSourceCard());
+            }
+        }
+        else if (this.sameZone) {
+            list = new ArrayList<Card>(game.getCardsIn(this.from));
         }
         else {
-            list = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
+            list = new ArrayList<Card>(activator.getCardsIn(this.from));
+        }
+
+        if (this.payCostFromSource()) {
+            return source.getZone() == activator.getZone(from) && GuiDialog.confirm(source, source.getName() + " - Exile?") && executePayment(ability, source);
+        }
+
+        if (source.isInZone(this.from)) {
+            list.remove(source); //ensure source can't be exiled to pay its own additional cost
         }
 
         if (type.equals("All")) {
@@ -254,13 +270,8 @@ public class CostExile extends CostPartWithList {
             }
         }
 
-        if (this.payCostFromSource()) {
-            return source.getZone() == activator.getZone(from) && GuiDialog.confirm(source, source.getName() + " - Exile?") && executePayment(ability, source);
-        }
-
-        List<Card> validCards = CardLists.getValidCards(activator.getCardsIn(from), type.split(";"), activator, source);
         if (this.from == ZoneType.Battlefield || this.from == ZoneType.Hand) {
-            InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
+            InputSelectCards inp = new InputSelectCardsFromList(c, c, list);
             inp.setMessage("Exile %d card(s) from your" + from);
             inp.setCancelAllowed(true);
             Singletons.getControl().getInputQueue().setInputAndWait(inp);
@@ -269,8 +280,8 @@ public class CostExile extends CostPartWithList {
 
         if (this.from == ZoneType.Stack) { return exileFromStack(ability, c); }
         if (this.from == ZoneType.Library) { return exileFromTop(ability, c); }
-        if (fromTopGrave) { return exileFromTopGraveType(ability, c, validCards); }
-        if (!this.sameZone) { return exileFromMiscZone(ability, c, validCards); }
+        if (fromTopGrave) { return exileFromTopGraveType(ability, c, list); }
+        if (!this.sameZone) { return exileFromMiscZone(ability, c, list); }
 
         List<Player> players = game.getPlayers();
         List<Player> payableZone = new ArrayList<Player>();
