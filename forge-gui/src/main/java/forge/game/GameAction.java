@@ -128,6 +128,7 @@ public class GameAction {
         }
         if (zoneFrom == null && !c.isToken()) {
             zoneTo.add(c, position);
+            checkStaticAbilities();
             game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
             return c;
         }
