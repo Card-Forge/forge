@@ -60,19 +60,19 @@ public abstract class InputBase implements java.io.Serializable, Input {
 
     @Override
     public final void selectButtonCancel() {
-        if( isFinished() ) return;
+        if (isFinished()) { return; }
         onCancel();
     }
 
     @Override
     public final void selectButtonOK() {
-        if( isFinished() ) return;
+        if (isFinished()) { return; }
         onOk();
     }
 
     @Override
     public final void selectCard(final Card c, final MouseEvent triggerEvent) {
-        if( isFinished() ) return;
+        if (isFinished()) { return; }
         onCardSelected(c, triggerEvent);
     }
 

@@ -13,9 +13,10 @@ public abstract class InputSelectCards extends InputSelectManyBase<Card> {
 
     @Override
     protected void onCardSelected(final Card c, final MouseEvent triggerEvent) {
-        if ( !selectEntity(c) )
+        if (!selectEntity(c)) {
             return;
-        
+        }
+
         refresh();
     }
 }
