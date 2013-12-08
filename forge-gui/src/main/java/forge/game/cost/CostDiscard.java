@@ -43,7 +43,7 @@ public class CostDiscard extends CostPartWithList {
     // Discard<Num/Type{/TypeDescription}>
 
     // Inputs
-    
+
     /**
      * Instantiates a new cost discard.
      * 
@@ -72,16 +72,20 @@ public class CostDiscard extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             sb.append(this.getType());
-        } else if (this.getType().equals("Hand")) {
+        }
+        else if (this.getType().equals("Hand")) {
             sb.append("your hand");
-        } else if (this.getType().equals("LastDrawn")) {
+        }
+        else if (this.getType().equals("LastDrawn")) {
             sb.append("the last card you drew this turn");
-        } else {
+        }
+        else {
             final StringBuilder desc = new StringBuilder();
 
             if (this.getType().equals("Card") || this.getType().equals("Random")) {
                 desc.append("card");
-            } else {
+            }
+            else {
                 desc.append(this.getTypeDescription() == null ? this.getType() : this.getTypeDescription()).append(
                         " card");
             }
@@ -93,7 +97,6 @@ public class CostDiscard extends CostPartWithList {
             }
         }
         return sb.toString();
-
     }
 
     /*
@@ -116,12 +119,15 @@ public class CostDiscard extends CostPartWithList {
             if (!source.isInZone(ZoneType.Hand)) {
                 return false;
             }
-        } else if (type.equals("Hand")) {
+        }
+        else if (type.equals("Hand")) {
             // this will always work
-        } else if (type.equals("LastDrawn")) {
+        }
+        else if (type.equals("LastDrawn")) {
             final Card c = activator.getLastDrawnCard();
             return handList.contains(c);
-        } else {
+        }
+        else {
             if (ability.isSpell()) {
                 handList.remove(source); // can't pay for itself
             }
@@ -167,16 +173,16 @@ public class CostDiscard extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             return handList.contains(source) && executePayment(ability, source);
-        } 
+        }
 
         if (discardType.equals("Hand")) {
             return executePayment(ability, handList);
-        } 
+        }
 
         if (discardType.equals("LastDrawn")) {
             final Card lastDrawn = activator.getLastDrawnCard();
             return handList.contains(lastDrawn) && executePayment(ability, lastDrawn);
-        } 
+        }
 
         Integer c = this.convertAmount();
 
@@ -186,7 +192,8 @@ public class CostDiscard extends CostPartWithList {
                 // Generalize this
                 if (sVar.equals("XChoice")) {
                     c = Cost.chooseXValue(source, ability,  handList.size());
-                } else {
+                }
+                else {
                     c = AbilityUtils.calculateAmount(source, amount, ability);
                 }
             }
@@ -208,15 +215,16 @@ public class CostDiscard extends CostPartWithList {
                     return false;
                 }
             });
-            if (c == 0) return true;
+            if (c == 0) { return true; }
             List<Card> discarded = new ArrayList<Card>();
             while (c > 0) {
                 InputSelectCards inp = new InputSelectCardsFromList(1, 1, handList);
                 inp.setMessage("Select one of the cards with the same name to discard. Already chosen: " + discarded);
                 inp.setCancelAllowed(true);
                 Singletons.getControl().getInputQueue().setInputAndWait(inp);
-                if (inp.hasCancelled())
+                if (inp.hasCancelled()) {
                     return false;
+                }
                 final Card first = inp.getSelected().get(0);
                 discarded.add(first);
                 handList = CardLists.filter(handList, CardPredicates.nameEquals(first.getName()));
@@ -224,7 +232,8 @@ public class CostDiscard extends CostPartWithList {
                 c--;
             }
             return executePayment(ability, discarded);
-        } else {
+        }
+        else {
             String type = new String(discardType);
             final String[] validType = type.split(";");
             handList = CardLists.getValidCards(handList, validType, activator, ability.getSourceCard());
@@ -234,7 +243,8 @@ public class CostDiscard extends CostPartWithList {
                 // Generalize this
                 if (sVar.equals("XChoice")) {
                     c = Cost.chooseXValue(source, ability, handList.size());
-                } else {
+                }
+                else {
                     c = AbilityUtils.calculateAmount(source, amount, ability);
                 }
             }
@@ -243,9 +253,10 @@ public class CostDiscard extends CostPartWithList {
             inp.setMessage("Select %d more " + getDescriptiveType() + " to discard.");
             //InputPayment inp = new InputPayCostDiscard(ability, handList, this, c, discardType);
             Singletons.getControl().getInputQueue().setInputAndWait(inp);
-            if( inp.hasCancelled() || inp.getSelected().size() != c)
+            if (inp.hasCancelled() || inp.getSelected().size() != c) {
                 return false;
-            
+            }
+
             return executePayment(ability, inp.getSelected());
         }
     }
@@ -264,7 +275,6 @@ public class CostDiscard extends CostPartWithList {
             }
             return new PaymentDecision(ai.getLastDrawnCard());
         }
-
         else if (this.payCostFromSource()) {
             if (!hand.contains(source)) {
                 return null;
@@ -272,7 +282,6 @@ public class CostDiscard extends CostPartWithList {
 
             return new PaymentDecision(source);
         }
-
         else if (type.equals("Hand")) {
             return new PaymentDecision(hand);
         }
@@ -291,7 +300,8 @@ public class CostDiscard extends CostPartWithList {
 
         if (type.equals("Random")) {
             return new PaymentDecision(CardLists.getRandomSubList(hand, c));
-        } else {
+        }
+        else {
             final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
             return new PaymentDecision(aic.getCardsToDiscard(c, type.split(";"), ability));
         }
@@ -322,5 +332,4 @@ public class CostDiscard extends CostPartWithList {
     }
 
     // Inputs
-
 }

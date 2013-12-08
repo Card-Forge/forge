@@ -51,7 +51,6 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         if (!canOk && !canCancel) { ButtonUtil.disableAll(); }
     }
 
-
     /**
      * TODO: Write javadoc for this method.
      * @return
