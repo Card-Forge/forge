@@ -55,7 +55,7 @@ public class HumanPlaySpellAbility {
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         game.getStack().freezeStack();
 
-        // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument 
+        // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         boolean prerequisitesMet = this.announceValuesLikeX()
                 && this.announceType()
@@ -83,7 +83,7 @@ public class HumanPlaySpellAbility {
                 this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
                 game.getStack().addAndUnfreeze(this.ability);
             }
-    
+
             // no worries here. The same thread must resolve, and by this moment ability will have been resolved already
             // Triggers haven't resolved yet ??
             if (mayChooseTargets) {
@@ -91,7 +91,7 @@ public class HumanPlaySpellAbility {
             }
         }
     }
-    
+
     private final boolean setupTargets() {
         // Skip to paying if parent ability doesn't target and has no subAbilities.
         // (or trigger case where its already targeted)
@@ -101,7 +101,7 @@ public class HumanPlaySpellAbility {
             TargetRestrictions tgt = currentAbility.getTargetRestrictions();
             if (tgt != null && tgt.doesTarget()) {
                 clearTargets(currentAbility);
-                Player targetingPlayer = ability.hasParam("TargetingPlayer") ? 
+                Player targetingPlayer = ability.hasParam("TargetingPlayer") ?
                         AbilityUtils.getDefinedPlayers(source, ability.getParam("TargetingPlayer"), currentAbility).get(0) : ability.getActivatingPlayer();
                 if (targetingPlayer.isHuman()) {
                     final TargetSelection select = new TargetSelection(currentAbility);
@@ -130,8 +130,8 @@ public class HumanPlaySpellAbility {
             tg.calculateStillToDivide(ability.getParam("DividedAsYouChoose"), ability.getSourceCard(), ability);
         }
     }
-    
-    private void rollbackAbility() { 
+
+    private void rollbackAbility() {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
@@ -195,9 +195,10 @@ public class HumanPlaySpellAbility {
     }
 
     private void enusureAbilityHasDescription(SpellAbility ability) {
-        if (!StringUtils.isBlank(ability.getStackDescription())) 
+        if (!StringUtils.isBlank(ability.getStackDescription())) {
             return;
-            
+        }
+
         // For older abilities that don't setStackDescription set it here
         final StringBuilder sb = new StringBuilder();
         sb.append(ability.getSourceCard().getName());
