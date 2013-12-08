@@ -157,21 +157,24 @@ public class CostExile extends CostPartWithList {
         final Card source = ability.getSourceCard();
         final Game game = activator.getGame();
         String type = this.getType();
-        
+
         List<Card> typeList = new ArrayList<Card>();
         if (type.equals("All")) {
             return true; // this will always work
-        } else if (type.contains("FromTopGrave")) {
+        }
+        else if (type.contains("FromTopGrave")) {
             type = type.replace("FromTopGrave", "");
         }
         if (this.getFrom().equals(ZoneType.Stack)) {
             for (SpellAbilityStackInstance si : game.getStack()) {
                 typeList.add(si.getSourceCard());
             }
-        } else {
+        }
+        else {
             if (this.sameZone) {
                 typeList = new ArrayList<Card>(game.getCardsIn(this.getFrom()));
-            } else {
+            }
+            else {
                 typeList = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
             }
         }
@@ -196,7 +199,8 @@ public class CostExile extends CostPartWithList {
                     return false;
                 }
             }
-        } else if (!typeList.contains(source)) {
+        }
+        else if (!typeList.contains(source)) {
             return false;
         }
 
@@ -222,12 +226,13 @@ public class CostExile extends CostPartWithList {
             type = type.replace("FromTopGrave", "");
             fromTopGrave = true;
         }
-        
+
         List<Card> list;
 
         if (this.sameZone) {
             list = new ArrayList<Card>(game.getCardsIn(this.getFrom()));
-        } else {
+        }
+        else {
             list = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
         }
 
@@ -243,43 +248,43 @@ public class CostExile extends CostPartWithList {
             // Generalize this
             if (sVar.equals("XChoice")) {
                 c = Cost.chooseXValue(source, ability, list.size());
-            } else {
+            }
+            else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
 
-        if (this.payCostFromSource())
+        if (this.payCostFromSource()) {
             return source.getZone() == activator.getZone(from) && GuiDialog.confirm(source, source.getName() + " - Exile?") && executePayment(ability, source);
+        }
 
         List<Card> validCards = CardLists.getValidCards(activator.getCardsIn(from), type.split(";"), activator, source);
         if (this.from == ZoneType.Battlefield || this.from == ZoneType.Hand) {
             InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
-            inp.setMessage("Exile %d card(s) from your" + from );
+            inp.setMessage("Exile %d card(s) from your" + from);
             inp.setCancelAllowed(true);
             Singletons.getControl().getInputQueue().setInputAndWait(inp);
             return !inp.hasCancelled() && executePayment(ability, inp.getSelected());
         }
 
-        if (this.from == ZoneType.Stack) return exileFromStack(ability, c);
-        if (this.from == ZoneType.Library) return exileFromTop(ability, c);
-        if (fromTopGrave) return exileFromTopGraveType(ability, c, validCards);
-        if (!this.sameZone) return exileFromMiscZone(ability, c, validCards); 
-            
-            
+        if (this.from == ZoneType.Stack) { return exileFromStack(ability, c); }
+        if (this.from == ZoneType.Library) { return exileFromTop(ability, c); }
+        if (fromTopGrave) { return exileFromTopGraveType(ability, c, validCards); }
+        if (!this.sameZone) { return exileFromMiscZone(ability, c, validCards); }
+
         List<Player> players = game.getPlayers();
         List<Player> payableZone = new ArrayList<Player>();
         for (Player p : players) {
             List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
             if (enoughType.size() < c) {
                 list.removeAll(enoughType);
-            } else {
+            }
+            else {
                 payableZone.add(p);
             }
         }
         return exileFromSame(list, c, payableZone);
     }
-
-    
 
     // Inputs
 
@@ -288,45 +293,31 @@ public class CostExile extends CostPartWithList {
     // ExileFromGrave<Num/Type{/TypeDescription}>
     // ExileFromTop<Num/Type{/TypeDescription}> (of library)
     // ExileSameGrave<Num/Type{/TypeDescription}>
-    
-        /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    
-    /**
-     * TODO: Write javadoc for Constructor.
-     * @param list
-     * @param part
-     * @param payment
-     * @param sa
-     * @param nNeeded
-     * @param payableZone
-     */
+
     private boolean exileFromSame(List<Card> list, int nNeeded, List<Player> payableZone) {
         if (nNeeded == 0) {
             return true;
         }
-    
-    
+
         final Player p = GuiChoose.oneOrNone(String.format("Exile from whose %s?", getFrom()), payableZone);
         if (p == null) {
             return false;
         }
-    
+
         List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(p));
-    
+
         for (int i = 0; i < nNeeded; i++) {
             if (typeList.isEmpty()) {
                 return false;
             }
-    
+
             final Card c = GuiChoose.oneOrNone("Exile from " + getFrom(), typeList);
-    
+
             if (c != null) {
                 typeList.remove(c);
                 executePayment(null, c);
-            } else {
+            }
+            else {
                 return false;
             }
         }
@@ -345,11 +336,11 @@ public class CostExile extends CostPartWithList {
         if (nNeeded == 0) {
             return true;
         }
-    
+
         final Game game = sa.getActivatingPlayer().getGame();
         ArrayList<SpellAbility> saList = new ArrayList<SpellAbility>();
         ArrayList<String> descList = new ArrayList<String>();
-        
+
         for (SpellAbilityStackInstance si : game.getStack()) {
             final Card stC = si.getSourceCard();
             final SpellAbility stSA = si.getSpellAbility().getRootAbility();
@@ -362,36 +353,37 @@ public class CostExile extends CostPartWithList {
                 }
             }
         }
-    
+
         for (int i = 0; i < nNeeded; i++) {
             if (saList.isEmpty()) {
                 return false;
             }
-    
+
             //Have to use the stack descriptions here because some copied spells have no description otherwise
             final String o = GuiChoose.oneOrNone("Exile from " + getFrom(), descList);
-    
+
             if (o != null) {
                 final SpellAbility toExile = saList.get(descList.indexOf(o));
                 final Card c = toExile.getSourceCard();
-                
+
                 saList.remove(toExile);
                 descList.remove(o);
 
                 if (!c.isCopiedSpell()) {
                     executePayment(sa, c);
-                } else {
+                }
+                else {
                     addToList(c);
                 }
                 final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(toExile);
                 game.getStack().remove(si);
-            } else {
+            }
+            else {
                 return false;
             }
         }
         return true;
     }
-
 
     private  boolean exileFromTop(final SpellAbility sa, final int nNeeded) {
         final StringBuilder sb = new StringBuilder();
@@ -410,44 +402,43 @@ public class CostExile extends CostPartWithList {
                 executePayment(sa, itr.next());
             }
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
 
-
-    // ExileFromGrave<Num/Type{/TypeDescription}>
-    
-        private boolean exileFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList) {
-            for (int i = 0; i < nNeeded; i++) {
-                if (typeList.isEmpty()) {
-                    return false;
-                }
-    
-                final Card c = GuiChoose.oneOrNone("Exile from " + getFrom(), typeList);
-    
-                if (c != null) {
-                    typeList.remove(c);
-                    executePayment(sa, c);
-                } else {
-                    return false;
-                }
+    private boolean exileFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList) {
+        for (int i = 0; i < nNeeded; i++) {
+            if (typeList.isEmpty()) {
+                return false;
             }
-            return true;
-        }
 
-        private boolean exileFromTopGraveType(SpellAbility sa, int nNeeded, List<Card> typeList) {
-            Collections.reverse(typeList);
-            for (int i = 0; i < nNeeded; i++) {
-                if (typeList.isEmpty()) {
-                    return false;
-                }
-                final Card c = typeList.get(0);
+            final Card c = GuiChoose.oneOrNone("Exile from " + getFrom(), typeList);
+
+            if (c != null) {
                 typeList.remove(c);
                 executePayment(sa, c);
+            } else {
+                return false;
             }
-            return true;
         }
+        return true;
+    }
+
+    private boolean exileFromTopGraveType(SpellAbility sa, int nNeeded, List<Card> typeList) {
+        Collections.reverse(typeList);
+        for (int i = 0; i < nNeeded; i++) {
+            if (typeList.isEmpty()) {
+                return false;
+            }
+            final Card c = typeList.get(0);
+            typeList.remove(c);
+            executePayment(sa, c);
+        }
+        return true;
+    }
+
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
@@ -472,11 +463,12 @@ public class CostExile extends CostPartWithList {
     public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
         if (this.payCostFromSource()) {
             return new PaymentDecision(source);
-        } 
+        }
 
         if (this.getType().equals("All")) {
             return new PaymentDecision(new ArrayList<Card>(ai.getCardsIn(this.getFrom())));
-        } else if (this.getType().contains("FromTopGrave")) {
+        }
+        else if (this.getType().contains("FromTopGrave")) {
             return null;
         }
 
@@ -492,10 +484,12 @@ public class CostExile extends CostPartWithList {
 
         if (this.from.equals(ZoneType.Library)) {
             return new PaymentDecision(ai.getCardsIn(ZoneType.Library, c));
-        } else if (this.sameZone) {
+        }
+        else if (this.sameZone) {
             // TODO Determine exile from same zone for AI
             return null;
-        } else {
+        }
+        else {
             List<Card> chosen = ComputerUtil.chooseExileFrom(ai, this.getFrom(), this.getType(), source, ability.getTargetCard(), c);
             return null == chosen ? null : new PaymentDecision(chosen);
         }
