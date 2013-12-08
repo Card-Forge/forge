@@ -57,52 +57,49 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
 
-
     public Zone(final ZoneType zone, Game game) {
         this.zoneType = zone;
         this.game = game;
         this.roCardList = Collections.unmodifiableList(cardList);
-        
+
         //System.out.println(zoneName + " (ct) " + Integer.toHexString(System.identityHashCode(roCardList)));
     }
 
     public Player getPlayer() { // generic zones like stack have no player associated
         return null;
     }
-    
 
     public final void add(final Card c) {
         add(c, null);
     }
 
-
     public void add(final Card c, final Integer index) {
-        
         // Immutable cards are usually emblems and effects
         if (!c.isImmutable()) {
             final Zone oldZone = game.getZoneOf(c);
-            final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType(); 
+            final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType();
             cardsAddedThisTurn.add(zt, c);
         }
-        
+
         c.setTurnInZone(game.getPhaseHandler().getTurn());
         if (zoneType != ZoneType.Battlefield) {
             c.setTapped(false);
         }
         c.setZone(this);
-        
-        if ( index == null )
+
+        if (index == null) {
             this.cardList.add(c);
-        else
+        }
+        else {
             this.cardList.add(index.intValue(), c);
+        }
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Added, c));
     }
-
 
     public final boolean contains(final Card c) {
         return this.cardList.contains(c);
     }
-    
+
     public final boolean contains(final Predicate<Card> condition) {
         return Iterables.any(this.cardList, condition);
     }
@@ -112,7 +109,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Removed, c));
     }
 
-
     public final void setCards(final Iterable<Card> cards) {
         cardList.clear();
         for (Card c : cards) {
@@ -120,9 +116,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             cardList.add(c);
         }
         game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.ComplexUpdate, null));
-        
     }
-
 
     public final boolean is(final ZoneType zone) {
         return zone == this.zoneType;
@@ -134,7 +128,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         return zoneType == zone && player == getPlayer();
     }
 
-
     public final ZoneType getZoneType() {
         return this.zoneType;
     }
@@ -142,7 +135,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     public final int size() {
         return this.cardList.size();
     }
-
 
     public final Card get(final int index) {
         return this.cardList.get(index);
@@ -152,7 +144,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         //System.out.println(zoneName + ": " + Integer.toHexString(System.identityHashCode(roCardList)));
         return this.getCards(true);
     }
-
 
     public List<Card> getCards(final boolean filter) {
         // Non-Battlefield PlayerZones don't care about the filter
@@ -193,11 +184,12 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             Collection<Card> cards = cardsAddedThisTurn.get(origin);
             return cards == null ? Lists.<Card>newArrayList() : Lists.newArrayList(cards);
         }
-        
+
         // all cards if key == null
         final List<Card> ret = new ArrayList<Card>();
-        for(Collection<Card> kv : cardsAddedThisTurn.values()) 
+        for (Collection<Card> kv : cardsAddedThisTurn.values()) {
             ret.addAll(kv);
+        }
         return ret;
     }
 
@@ -234,6 +226,4 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     public String toString() {
         return this.zoneType.toString();
     }
-    
-    
 }
