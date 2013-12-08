@@ -120,36 +120,38 @@ public class CostDiscard extends CostPartWithList {
                 return false;
             }
         }
-        else if (type.equals("Hand")) {
-            // this will always work
-        }
-        else if (type.equals("LastDrawn")) {
-            final Card c = activator.getLastDrawnCard();
-            return handList.contains(c);
-        }
         else {
-            if (ability.isSpell()) {
-                handList.remove(source); // can't pay for itself
+            if (source.isInZone(ZoneType.Hand)) {
+                handList.remove(source); //source can't pay for itself
             }
-            boolean sameName = false;
-            if (type.contains("+WithSameName")) {
-                sameName = true;
-                type = type.replace("+WithSameName", "");
+            if (type.equals("Hand")) {
+                // this will always work
             }
-            if (!type.equals("Random")) {
-                handList = CardLists.getValidCards(handList, type.split(";"), activator, source);
+            else if (type.equals("LastDrawn")) {
+                final Card c = activator.getLastDrawnCard();
+                return handList.contains(c);
             }
-            if (sameName) {
-                for (Card c : handList) {
-                    if (CardLists.filter(handList, CardPredicates.nameEquals(c.getName())).size() > 1) {
-                        return true;
-                    }
+            else {
+                boolean sameName = false;
+                if (type.contains("+WithSameName")) {
+                    sameName = true;
+                    type = type.replace("+WithSameName", "");
                 }
-                return false;
-            }
-            if ((amount != null) && (amount > handList.size())) {
-                // not enough cards in hand to pay
-                return false;
+                if (!type.equals("Random")) {
+                    handList = CardLists.getValidCards(handList, type.split(";"), activator, source);
+                }
+                if (sameName) {
+                    for (Card c : handList) {
+                        if (CardLists.filter(handList, CardPredicates.nameEquals(c.getName())).size() > 1) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                if ((amount != null) && (amount > handList.size())) {
+                    // not enough cards in hand to pay
+                    return false;
+                }
             }
         }
 
@@ -167,12 +169,17 @@ public class CostDiscard extends CostPartWithList {
     public final boolean payHuman(final SpellAbility ability, final Game game) {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
+
         List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         String discardType = this.getType();
         final String amount = this.getAmount();
 
         if (this.payCostFromSource()) {
             return handList.contains(source) && executePayment(ability, source);
+        }
+
+        if (source.isInZone(ZoneType.Hand)) {
+            handList.remove(source); //ensure source can't be discarded to pay its own additional cost
         }
 
         if (discardType.equals("Hand")) {
@@ -202,7 +209,7 @@ public class CostDiscard extends CostPartWithList {
         }
         if (discardType.contains("+WithSameName")) {
             String type = discardType.replace("+WithSameName", "");
-            handList = CardLists.getValidCards(handList, type.split(";"), activator, ability.getSourceCard());
+            handList = CardLists.getValidCards(handList, type.split(";"), activator, source);
             final List<Card> landList2 = handList;
             handList = CardLists.filter(handList, new Predicate<Card>() {
                 @Override
@@ -236,7 +243,7 @@ public class CostDiscard extends CostPartWithList {
         else {
             String type = new String(discardType);
             final String[] validType = type.split(";");
-            handList = CardLists.getValidCards(handList, validType, activator, ability.getSourceCard());
+            handList = CardLists.getValidCards(handList, validType, activator, source);
 
             if (c == null) {
                 final String sVar = ability.getSVar(amount);
