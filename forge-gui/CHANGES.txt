@@ -52,6 +52,8 @@ Fight or Flight
 Known Issues
 ------------
 
+There is a known issue with the timing of Leaves the Battlefield triggers and multiple permanents Leaving the Battlefield. As an example, when Blood Artist died at the same time as a lot of other creatures due to a Wrath of God, the Blood Artist should trigger for every creature but does not do so.
+
 Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
 
 Some time was spent turning the static ETB triggers into the proper ETB replacement effects they should be, mainly to interact correctly with each other. This work is not yet finished. As a result there is currently some inconsistencies with "Enters the battlefield with counters" (Not incredibly noticeable).
