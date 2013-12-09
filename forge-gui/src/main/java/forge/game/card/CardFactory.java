@@ -33,7 +33,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.cost.Cost;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilityActivated;
@@ -701,77 +700,6 @@ public class CardFactory {
         // ***************************************************
         // end of card specific code
         // ***************************************************
-
-        final int iLvlUp = CardFactoryUtil.hasKeyword(card, "Level up");
-        final int iLvlMax = CardFactoryUtil.hasKeyword(card, "maxLevel");
-        
-        if (iLvlUp != -1 && iLvlMax != -1) {
-            final String parse = card.getKeyword().get(iLvlUp);
-            final String parseMax = card.getKeyword().get(iLvlMax);
-            card.addSpellAbility(makeLevellerAbility(card, parse, parseMax));
-            card.setLevelUp(true);
-        } // level up
     }
 
-
-    private static SpellAbility makeLevellerAbility(final Card card, final String strLevelCost, final String strMaxLevel) {
-        card.removeIntrinsicKeyword(strLevelCost);
-        card.removeIntrinsicKeyword(strMaxLevel);
-
-        final String[] k = strLevelCost.split(":");
-        StringBuilder sb = new StringBuilder();
-        sb.append('{').append(k[1].replace(" ", "}{")).append('}');
-        final String manacost = k[1];
-        final String formattedMana = sb.toString();
-
-        final String[] l = strMaxLevel.split(":");
-        final int maxLevel = Integer.parseInt(l[1]);
-
-        class LevelUpAbility extends AbilityActivated {
-            public LevelUpAbility(final Card ca, final String s) {
-                super(ca, new Cost(manacost, true), null);
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                AbilityActivated levelUp = new LevelUpAbility(getSourceCard(), getPayCosts().toString());
-                levelUp.getRestrictions().setSorcerySpeed(true);
-                return levelUp;
-            }
-
-            private static final long serialVersionUID = 3998280279949548652L;
-
-            @Override
-            public void resolve() {
-                card.addCounter(CounterType.LEVEL, 1, true);
-            }
-
-            @Override
-            public boolean canPlayAI(Player aiPlayer) {
-                // creatures enchanted by curse auras have low priority
-                if (card.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-                    for (Card aura : card.getEnchantedBy()) {
-                        if (aura.getController().isOpponentOf(aiPlayer)) {
-                            return false;
-                        }
-                    }
-                }
-                return card.getCounters(CounterType.LEVEL) < maxLevel;
-            }
-
-            @Override
-            public String getDescription() {
-                final StringBuilder sbDesc = new StringBuilder();
-                sbDesc.append("Level up ").append(formattedMana).append(" (").append(formattedMana);
-                sbDesc.append(": Put a level counter on this. Level up only as a sorcery.)");
-                return sbDesc.toString();
-            }
-        }
-        final SpellAbility levelUp = new LevelUpAbility(card, manacost);
-        levelUp.getRestrictions().setSorcerySpeed(true);
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(card).append(" - put a level counter on this.");
-        levelUp.setStackDescription(sbStack.toString());
-        return levelUp;
-    }    
 } // end class AbstractCardFactory

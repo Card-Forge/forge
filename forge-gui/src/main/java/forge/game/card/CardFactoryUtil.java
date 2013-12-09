@@ -2189,6 +2189,32 @@ public class CardFactoryUtil {
             card.getUnparsedAbilities().add(effect);
         }
 
+        final int iLvlUp = hasKeyword(card, "Level up");
+        final int iLvlMax = hasKeyword(card, "maxLevel");
+        
+        if (iLvlUp != -1 && iLvlMax != -1) {
+            final String strLevelCost = card.getKeyword().get(iLvlUp);
+            final String strMaxLevel = card.getKeyword().get(iLvlMax);
+            card.removeIntrinsicKeyword(strLevelCost);
+            card.removeIntrinsicKeyword(strMaxLevel);
+            final String[] k = strLevelCost.split(":");
+            final String manacost = k[1];
+
+            final String[] l = strMaxLevel.split(":");
+            final int maxLevel = Integer.parseInt(l[1]);
+
+            String effect = "AB$ PutCounter | Cost$ " + manacost + " | " +
+            		"SorcerySpeed$ True | LevelUp$ True | CounterNum$ 1" +
+            		" | CounterType$ LEVEL | PrecostDesc$ Level Up | MaxLevel$ " +
+            		maxLevel + " | SpellDescription$ (Put a level counter on" +
+            		" this permanent. Activate this ability only any time you" +
+            		" could cast a sorcery.)";
+
+            card.addSpellAbility(AbilityFactory.getAbility(effect, card));
+            // add ability to instrinic strings so copies/clones create the ability also
+            card.getUnparsedAbilities().add(effect);
+        } // level up
+
         if (hasKeyword(card, "Cycling") != -1) {
             final int n = hasKeyword(card, "Cycling");
             if (n != -1) {

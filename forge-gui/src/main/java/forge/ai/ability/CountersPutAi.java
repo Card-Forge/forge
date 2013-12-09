@@ -77,6 +77,19 @@ public class CountersPutAi extends SpellAbilityAi {
             return false;
         }
 
+        if (sa.hasParam("LevelUp")) {
+        	 // creatures enchanted by curse auras have low priority
+        	if (source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                for (Card aura : source.getEnchantedBy()) {
+                    if (aura.getController().isOpponentOf(ai)) {
+                        return false;
+                    }
+                }
+            }
+        	int maxLevel = Integer.parseInt(sa.getParam("MaxLevel"));
+            return source.getCounters(CounterType.LEVEL) < maxLevel;
+        }
+
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
 

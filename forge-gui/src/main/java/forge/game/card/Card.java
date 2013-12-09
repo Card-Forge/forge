@@ -170,8 +170,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean canCounter = true;
     private boolean evoked = false;
 
-    private boolean levelUp = false;
-
     private boolean unearthed;
 
     private boolean monstrous = false;
@@ -1294,28 +1292,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void clearCounters() {
         this.counters.clear();
-    }
-
-    /**
-     * hasLevelUp() - checks to see if a creature has the "Level up" ability
-     * introduced in Rise of the Eldrazi.
-     * 
-     * @return true if this creature can "Level up", false otherwise
-     */
-    public final boolean hasLevelUp() {
-        return this.levelUp;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>levelUp</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setLevelUp(final boolean b) {
-        this.levelUp = b;
     }
 
     /**
@@ -6143,9 +6119,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("hasLevelUp")) {
-            if (!this.hasLevelUp()) {
-                return false;
+        	for (final SpellAbility sa : this.getSpellAbilities()) {
+                if (sa.getApi() == ApiType.PutCounter && sa.hasParam("LevelUp")) {
+                    return true;
+                }
             }
+            return false;
         } else if (property.startsWith("DrawnThisTurn")) {
           if (!this.getDrawnThisTurn()) {
               return false;
