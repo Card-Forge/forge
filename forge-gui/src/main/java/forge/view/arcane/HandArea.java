@@ -20,7 +20,6 @@ package forge.view.arcane;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JScrollPane;
-
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CPrompt;
 

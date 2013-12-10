@@ -19,6 +19,7 @@ package forge.gui.match.controllers;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -39,6 +40,7 @@ import forge.gui.match.views.VHand;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.HandArea;
 import forge.view.arcane.util.Animation;
+import forge.view.arcane.util.CardPanelMouseAdapter;
 
 /**
  * Controls Swing components of a player's hand instance.
@@ -58,6 +60,14 @@ public class CHand implements ICDoc {
     public CHand(final Player p0, final VHand v0) {
         this.player = p0;
         this.view = v0;
+        v0.getHandArea().addCardPanelMouseListener(new CardPanelMouseAdapter() {
+            @Override
+            public void mouseDragEnd(CardPanel dragPanel, MouseEvent evt) {
+                //update index of dragged card in hand zone to match new index within hand area
+                int index = CHand.this.view.getHandArea().getCardPanels().indexOf(dragPanel);
+                CHand.this.player.getZone(ZoneType.Hand).reposition(dragPanel.getGameCard(), index);
+            }
+        });
     }
 
     @Override
