@@ -18,6 +18,7 @@
 package forge.game.spellability;
 
 import java.util.ArrayList;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -31,6 +32,7 @@ import forge.game.cost.CostPartMana;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
+import forge.game.zone.Zone;
 
 /**
  * <p>
@@ -52,6 +54,17 @@ public class HumanPlaySpellAbility {
     public final void playAbility(boolean mayChooseTargets, boolean isFree, boolean skipStack) {
         final Game game = ability.getActivatingPlayer().getGame();
 
+        // used to rollback
+        Zone fromZone = null;
+        int zonePosition = 0;
+
+        final Card c = this.ability.getSourceCard();
+        if (this.ability instanceof Spell && !c.isCopiedSpell()) {
+            fromZone = game.getZoneOf(c);
+            zonePosition = fromZone.getCards().indexOf(c);
+            this.ability.setSourceCard(game.getAction().moveToStack(c));
+        }
+
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         game.getStack().freezeStack();
 
@@ -64,10 +77,10 @@ public class HumanPlaySpellAbility {
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {
-                rollbackAbility();
+                rollbackAbility(fromZone, zonePosition);
                 if (ability.isMadness()) {
                     // if a player failed to play madness cost, move the card to graveyard
-                    game.getAction().moveToGraveyard(ability.getSourceCard());
+                    game.getAction().moveToGraveyard(c);
                     ability.setMadness(false);
                 }
             }
@@ -131,9 +144,14 @@ public class HumanPlaySpellAbility {
         }
     }
 
-    private void rollbackAbility() {
+    private void rollbackAbility(Zone fromZone, int zonePosition) { 
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
+
+        if (fromZone != null) { // and not a copy
+            // add back to where it came from
+            game.getAction().moveTo(fromZone, ability.getSourceCard(), zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+        }
 
         clearTargets(ability);
 
