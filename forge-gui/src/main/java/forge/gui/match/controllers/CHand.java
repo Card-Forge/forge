@@ -72,28 +72,28 @@ public class CHand implements ICDoc {
     public void update(final Observable a, final Object b) {
         FThreads.invokeInEdtNowOrLater(updateRoutine);
     }
-    
-    private final Runnable updateRoutine = new Runnable() { 
+
+    private final Runnable updateRoutine = new Runnable() {
         @Override public void run() { updateHand(); }
     };
-    
+
     public void updateHand() {
         FThreads.assertExecutedByEdt(true);
-        
+
         final HandArea p = view.getHandArea();
 
         VField vf = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(player);
-        if ( null == vf ) 
+        if (vf == null) {
             return;
+        }
         final Rectangle rctLibraryLabel = vf.getDetailsPanel().getLblLibrary().getBounds();
         final List<Card> cc = player.getZone(ZoneType.Hand).getCards();
 
         // Animation starts from the library label and runs to the hand panel.
         // This check prevents animation running if label hasn't been realized yet.
-        if (rctLibraryLabel.isEmpty() ) {
+        if (rctLibraryLabel.isEmpty()) {
             return;
         }
-/* || p.getWidth() <= 0 */
 
         List<Card> tmp, diff;
         tmp = new ArrayList<Card>();
@@ -104,7 +104,8 @@ public class CHand implements ICDoc {
         diff.removeAll(cc);
         if (diff.size() == p.getCardPanels().size()) {
             p.clear();
-        } else {
+        }
+        else {
             for (final Card card : diff) {
                 p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
             }
@@ -137,7 +138,8 @@ public class CHand implements ICDoc {
             if (Singletons.getView().getFrame().isShowing()) {
                 Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel,
                         layeredPane, 500);
-            } else {
+            }
+            else {
                 Animation.moveCard(toPanel);
             }
         }

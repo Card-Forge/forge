@@ -66,7 +66,7 @@ public class HandArea extends CardArea {
         CPrompt.SINGLETON_INSTANCE.getInputControl().selectCard(panel.getCard(), evt);
         super.mouseLeftClicked(panel, evt);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
