@@ -87,7 +87,6 @@ public class CHand implements ICDoc {
             return;
         }
         final Rectangle rctLibraryLabel = vf.getDetailsPanel().getLblLibrary().getBounds();
-        final List<Card> cc = player.getZone(ZoneType.Hand).getCards();
 
         // Animation starts from the library label and runs to the hand panel.
         // This check prevents animation running if label hasn't been realized yet.
@@ -95,24 +94,24 @@ public class CHand implements ICDoc {
             return;
         }
 
-        List<Card> tmp, diff;
-        tmp = new ArrayList<Card>();
-        for (final forge.view.arcane.CardPanel cpa : p.getCardPanels()) {
-            tmp.add(cpa.getGameCard());
-        }
-        diff = new ArrayList<Card>(tmp);
-        diff.removeAll(cc);
-        if (diff.size() == p.getCardPanels().size()) {
-            p.clear();
-        }
-        else {
-            for (final Card card : diff) {
-                p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
+        //update card panels in hand area
+        final List<Card> cards = player.getZone(ZoneType.Hand).getCards();
+        final List<CardPanel> placeholders = new ArrayList<CardPanel>();
+        final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
+        
+        for (Card card : cards) {
+            CardPanel cardPanel = p.getCardPanel(card.getUniqueNumber());
+            if (cardPanel == null) { //create placeholders for new cards
+                cardPanel = new CardPanel(card);
+                cardPanel.setDisplayEnabled(false);
+                placeholders.add(cardPanel);
             }
+            cardPanels.add(cardPanel);
         }
-        diff = new ArrayList<Card>(cc);
-        diff.removeAll(tmp);
 
+        p.setCardPanels(cardPanels);
+
+        //animate new cards into positions defined by placeholders
         JLayeredPane layeredPane = Singletons.getView().getFrame().getLayeredPane();
         int fromZoneX = 0, fromZoneY = 0;
 
@@ -127,20 +126,19 @@ public class CHand implements ICDoc {
 
         int endWidth, endX, endY;
 
-        for (final Card card : diff) {
-            CardPanel toPanel = p.addCard(card);
-            endWidth = toPanel.getCardWidth();
-            final Point toPos = SwingUtilities.convertPoint(view.getHandArea(), toPanel.getCardLocation(), layeredPane);
+        for (final CardPanel placeholder : placeholders) {
+            endWidth = placeholder.getCardWidth();
+            final Point toPos = SwingUtilities.convertPoint(view.getHandArea(), placeholder.getCardLocation(), layeredPane);
             endX = toPos.x;
             endY = toPos.y;
 
-            final forge.view.arcane.CardPanel animationPanel = new forge.view.arcane.CardPanel(card);
+            final CardPanel animationPanel = new CardPanel(placeholder.getGameCard());
             if (Singletons.getView().getFrame().isShowing()) {
-                Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, toPanel,
+                Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, placeholder,
                         layeredPane, 500);
             }
             else {
-                Animation.moveCard(toPanel);
+                Animation.moveCard(placeholder);
             }
         }
     }

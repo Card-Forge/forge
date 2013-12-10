@@ -348,6 +348,31 @@ public abstract class CardPanelContainer extends JPanel {
 
     /**
      * <p>
+     * setCardPanels.
+     * </p>
+     * 
+     * @param cardPanels
+     */
+    public final void setCardPanels(List<CardPanel> cardPanels) {
+        if (cardPanels.size() == 0) {
+            clear();
+            return;
+        }
+
+        this.getCardPanels().clear();
+        this.removeAll();
+        this.getCardPanels().addAll(cardPanels);
+        for (CardPanel cardPanel : cardPanels) {
+            this.add(cardPanel);
+        }
+        this.doLayout();
+        this.invalidate();
+        this.getParent().validate();
+        this.repaint();
+    }
+
+    /**
+     * <p>
      * clear.
      * </p>
      */
