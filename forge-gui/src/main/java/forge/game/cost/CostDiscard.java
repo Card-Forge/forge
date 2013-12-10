@@ -121,9 +121,6 @@ public class CostDiscard extends CostPartWithList {
             }
         }
         else {
-            if (source.isInZone(ZoneType.Hand)) {
-                handList.remove(source); //source can't pay for itself
-            }
             if (type.equals("Hand")) {
                 // this will always work
             }
@@ -176,10 +173,6 @@ public class CostDiscard extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             return handList.contains(source) && executePayment(ability, source);
-        }
-
-        if (source.isInZone(ZoneType.Hand)) {
-            handList.remove(source); //ensure source can't be discarded to pay its own additional cost
         }
 
         if (discardType.equals("Hand")) {

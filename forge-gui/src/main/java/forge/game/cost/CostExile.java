@@ -183,9 +183,6 @@ public class CostExile extends CostPartWithList {
             return list.contains(source);
         }
 
-        if (source.isInZone(this.from)) {
-            list.remove(source); //source can't pay for itself
-        }
         list = CardLists.getValidCards(list, type.split(";"), activator, source);
 
         final Integer amount = this.convertAmount();
@@ -246,10 +243,6 @@ public class CostExile extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             return source.getZone() == activator.getZone(from) && GuiDialog.confirm(source, source.getName() + " - Exile?") && executePayment(ability, source);
-        }
-
-        if (source.isInZone(this.from)) {
-            list.remove(source); //ensure source can't be exiled to pay its own additional cost
         }
 
         if (type.equals("All")) {
