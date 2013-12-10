@@ -415,8 +415,20 @@ public class HumanPlay {
                 } else {
                     List<Card> list = p.getGame().getCardsIn(ZoneType.Battlefield);
                     list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
-                    boolean hasPaid = payCostPart(sourceAbility, (CostPartWithList)part, amount, list, "add a counter." + orString);
-                    if (!hasPaid) return false;
+                    if (list.isEmpty()) return false;
+                    if (!GuiDialog.confirm(source, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?"))
+                        return false;
+                    while (amount > 0) {
+                        InputSelectCards inp = new InputSelectCardsFromList(1, 1, list);
+                        inp.setMessage("Select a card to add a counter");
+                        inp.setCancelAllowed(true);
+                        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                        if (inp.hasCancelled())
+                            continue;
+                        Card selected = inp.getSelected().get(0);
+                        selected.addCounter(counterType, 1, false);
+                        amount--;
+                    }
                 }
             }
             else if (part instanceof CostRemoveCounter) {

@@ -10249,6 +10249,7 @@ forge-gui/res/cardsfolder/s/shell_skulkin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/shelldock_isle.txt -text
 forge-gui/res/cardsfolder/s/shelter.txt -text
 forge-gui/res/cardsfolder/s/sheltered_valley.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/sheltering_ancient.txt -text
 forge-gui/res/cardsfolder/s/sheltering_prayers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sheltering_word.txt -text
 forge-gui/res/cardsfolder/s/sheoldred_whispering_one.txt svneol=native#text/plain

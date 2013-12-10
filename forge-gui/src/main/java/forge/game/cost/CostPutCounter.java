@@ -216,7 +216,7 @@ public class CostPutCounter extends CostPartWithList {
             }
         } else {
             // 3 Cards have Put a -1/-1 Counter on a Creature you control.
-            final List<Card> typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
+            final List<Card> typeList = CardLists.getValidCards(activator.getGame().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
 
             if (typeList.size() == 0) {
                 return false;
@@ -240,7 +240,9 @@ public class CostPutCounter extends CostPartWithList {
             executePayment(ability, source, c);
         } else {
             // Put counter on chosen card
-            executePayment(ability, decision.cards);
+        	for (int i = 0; i < c; i++) {
+        		executePayment(ability, decision.cards);
+        	}
         }
         return true;
     }
@@ -264,7 +266,7 @@ public class CostPutCounter extends CostPartWithList {
         } else {
             // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter 
             final Player actor = ability.getActivatingPlayer();
-            List<Card> typeList = CardLists.getValidCards(actor.getCardsIn(ZoneType.Battlefield), getType().split(";"), actor, ability.getSourceCard());
+            List<Card> typeList = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), getType().split(";"), actor, ability.getSourceCard());
             
             InputSelectCardToPutCounter inp = new InputSelectCardToPutCounter(c, typeList);
             inp.setMessage("Put %d " + getCounter().getName() + " counter on " + getDescriptiveType());
@@ -332,7 +334,7 @@ public class CostPutCounter extends CostPartWithList {
 
         }
 
-        final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
+        final List<Card> typeList = CardLists.getValidCards(ai.getGame().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
 
         Card card = null;
         if (this.getType().equals("Creature.YouCtrl")) {
