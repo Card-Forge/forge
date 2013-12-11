@@ -2941,14 +2941,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         controllerCreator = ctrlr;
         controller = ctrlr;
     }
-    
+
     /**
      * Run a procedure using a different controller
      * @param proc
      * @param tempController
      */
     public void runWithController(Runnable proc, PlayerController tempController) {
-        
         PlayerController oldController = controller;
         controller = tempController;
         try {

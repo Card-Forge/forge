@@ -99,7 +99,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     public void reposition(final Card c, int newIndex) {
         int oldIndex = this.cardList.indexOf(c);
         if (oldIndex == -1 || oldIndex == newIndex) { return; }
-        
+
         this.cardList.remove(oldIndex);
         this.cardList.add(newIndex, c);
     }
