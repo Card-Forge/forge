@@ -65,7 +65,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
     private boolean basicLandAbility; // granted by basic land type
 
     private Card sourceCard;
-    private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one) 
+    private Card grantorCard = null; // card which grants the ability (equipment or owner of static ability that gave this one)
 
     private List<Card> splicedCards = null;
 //    private List<Card> targetList;
@@ -111,7 +111,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
     private AbilityManaPart manaPart = null;
 
     private boolean undoable;
-    
+
     private boolean isCopied = false;
 
     public final AbilityManaPart getManaPart() {
@@ -121,20 +121,20 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
     public final AbilityManaPart getManaPartRecursive() {
         SpellAbility tail = this;
         while (tail != null) {
-            if(tail.manaPart != null) 
+            if(tail.manaPart != null)
                 return tail.manaPart;
             tail = tail.getSubAbility();
         }
         return null;
     }
-    
+
     public final boolean isManaAbility() {
         // Check whether spell or ability first
-        if (this.isSpell()) 
+        if (this.isSpell())
             return false;
         // without a target
         if (this.usesTargeting()) return false;
-        if (getRestrictions() != null && getRestrictions().getPlaneswalker()) 
+        if (getRestrictions() != null && getRestrictions().getPlaneswalker())
             return false; //Loyalty ability, not a mana ability.
 
         return getManaPartRecursive() != null;
@@ -180,7 +180,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * @return a boolean.
      */
     public abstract boolean canPlay();
-    
+
     /**
      * <p>
      * isPossible.
@@ -191,7 +191,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
     public boolean isPossible() {
     	return canPlay(); //by default, ability is only possible if it can be played
     }
-    
+
     /**
      * <p>
      * promptIfOnlyPossibleAbility.
@@ -402,7 +402,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         return this.grantorCard;
     }
 
-    public String getParamOrDefault(String key, String defaultValue) { 
+    public String getParamOrDefault(String key, String defaultValue) {
         return params == null || !params.containsKey(key) ? defaultValue : params.get(key);
     }
 
@@ -615,7 +615,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * @param cost the optionalAdditionalCost to add
      */
     public final void addOptionalCost(OptionalCost cost) {
-        // Optional costs are added to swallow copies of original SAs, 
+        // Optional costs are added to swallow copies of original SAs,
         // Thus, to protect the original's set from changes, we make a copy right here.
         this.optionalCosts = EnumSet.copyOf(optionalCosts);
         this.optionalCosts.add(cost);
@@ -633,7 +633,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         SpellAbility saRoot = this.getRootAbility();
         return saRoot.optionalCosts.contains(cost);
     }
-    
+
     /**
      * <p>
      * Getter for the field <code>triggeringObjects</code>.
@@ -859,8 +859,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         }
         tailend.setSubAbility(toAdd);
     }
-    
-    
+
     /**
      * <p>
      * Setter for the field <code>subAbility</code>.
@@ -949,7 +948,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         }
         return clone;
     }
-    
+
     public SpellAbility copyWithNoManaCost() {
         final SpellAbility newSA = this.copy();
         newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
@@ -1049,12 +1048,12 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      */
     public final boolean canTarget(final GameObject entity) {
         final TargetRestrictions tr = this.getTargetRestrictions();
-        
+
         // Restriction related to this ability
         if (tr != null) {
             if (tr.isUniqueTargets() && this.getUniqueTargets().contains(entity))
                 return false;
-            
+
             // If the cards must have a specific controller
             if (hasParam("TargetsWithDefinedController") && entity instanceof Card) {
                 final Card c = (Card) entity;
@@ -1234,7 +1233,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         final List<Card> ret = new ArrayList<Card>();
         final List<Card> list = AbilityUtils.getDefinedCards(getSourceCard(), defined, this);
         final Game game = getActivatingPlayer().getGame();
-        
+
         for (final Card c : list) {
             final Card actualCard = game.getCardState(c);
             ret.add(actualCard);
@@ -1299,7 +1298,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      * @param isCopied0 the isCopied to set
      */
     public void setCopied(boolean isCopied0) {
-        this.isCopied = isCopied0; 
+        this.isCopied = isCopied0;
     }
 
     /**
@@ -1318,7 +1317,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
 
     public boolean isXCost() {
         CostPartMana cm = payCosts != null ? getPayCosts().getCostMana() : null;
-        return cm != null && cm.getAmountOfX() > 0; 
+        return cm != null && cm.getAmountOfX() > 0;
     }
 
     public boolean isBasicLandAbility() {
@@ -1336,7 +1335,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
     public void setTemporary(boolean temporary) {
         this.temporary = temporary; // TODO: Add 0 to parameter's name.
     }
-    
+
     @Override
     public boolean canBeTargetedBy(SpellAbility sa) {
         return sa.canTargetSpellAbility(this);
@@ -1346,14 +1345,14 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
     private TargetRestrictions targetRestricions = null;
     private TargetChoices targetChosen = new TargetChoices();
 
-    public boolean usesTargeting() { 
+    public boolean usesTargeting() {
         return targetRestricions != null;
     }
-    
+
     public TargetRestrictions getTargetRestrictions() {
         return targetRestricions;
     }
-    
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // THE CODE BELOW IS RELATED TO TARGETING. It might be extracted to other class from here
@@ -1376,7 +1375,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
     public void setTargets(TargetChoices targets) {
         this.targetChosen = targets;
     }
-    
+
     public void resetTargets() {
         targetChosen = new TargetChoices();
     }
@@ -1407,19 +1406,19 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
      */
     public final ArrayList<TargetChoices> getAllTargetChoices() {
         final ArrayList<TargetChoices> res = new ArrayList<TargetChoices>();
-    
+
         SpellAbility sa = this.getRootAbility();
         if (sa.getTargetRestrictions() != null) {
             res.add(sa.getTargets());
         }
         while (sa.getSubAbility() != null) {
             sa = sa.getSubAbility();
-    
+
             if (sa.getTargetRestrictions() != null) {
                 res.add(sa.getTargets());
             }
         }
-    
+
         return res;
     }
 
@@ -1441,12 +1440,12 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
                     + " - SpellAbility.setTargetCard() called with null for target card.");
             return;
         }
-    
+
         resetTargets();
         targetChosen.add(card);
-        
+
         final String desc;
-    
+
         if (!card.isFaceDown()) {
             desc = this.getSourceCard().getName() + " - targeting " + card;
         } else {
@@ -1467,7 +1466,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         if (targetChosen.isTargetingAnyCard()) {
             return Lists.newArrayList(targetChosen.getTargetCards());
         }
-        
+
         // Next search for source cards of targeted SAs associated with current ability
         if (targetChosen.isTargetingAnySpell()) {
             List<Card> res = Lists.newArrayList();
@@ -1476,19 +1475,19 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
             }
             return res;
         }
-        
+
         // Lastly Search parent SAs that targets a card
         SpellAbility parent = this.getParentTargetingCard();
         if (null != parent) {
             return parent.findTargetedCards();
         }
-        
+
         // Lastly Search parent SAs that targets an SA
         parent = this.getParentTargetingSA();
         if (null != parent) {
             return parent.findTargetedCards();
         }
-        
+
         return ImmutableList.<Card>of();
     }
 
@@ -1563,35 +1562,35 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
 
     public boolean canTargetSpellAbility(final SpellAbility topSA) {
         final TargetRestrictions tgt = this.getTargetRestrictions();
-    
+
         if (this.hasParam("TargetType") && !topSA.isValid(this.getParam("TargetType").split(","), this.getActivatingPlayer(), this.getSourceCard())) {
             return false;
         }
-    
+
         final String splitTargetRestrictions = tgt.getSAValidTargeting();
         if (splitTargetRestrictions != null) {
             // TODO What about spells with SubAbilities with Targets?
-    
+
             final TargetChoices matchTgt = topSA.getTargets();
-    
+
             if (matchTgt == null) {
                 return false;
             }
-    
+
             boolean result = false;
-    
+
             for (final GameObject o : matchTgt.getTargets()) {
                 if (o.isValid(splitTargetRestrictions.split(","), this.getActivatingPlayer(), this.getSourceCard())) {
                     result = true;
                     break;
                 }
             }
-    
+
             if (!result) {
                 return false;
             }
         }
-    
+
         if (tgt.isSingleTarget()) {
             int totalTargets = 0;
             for(TargetChoices tc : topSA.getAllTargetChoices()) {
@@ -1606,10 +1605,10 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
                 return false;
             }
         }
-    
+
         return topSA.getSourceCard().isValid(tgt.getValidTgts(), this.getActivatingPlayer(), this.getSourceCard());
     }
-    
+
     // Takes one argument like Permanent.Blue+withFlying
     /**
      * <p>
@@ -1642,7 +1641,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         } else { //not a spell/ability type
             return false;
         }
-        
+
         if (incR.length > 1) {
             final String excR = incR[1];
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
@@ -1654,7 +1653,7 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         }
         return true;
     } // isValid(String Restriction)
-    
+
     // Takes arguments like Blue or withFlying
     /**
      * <p>
@@ -1694,5 +1693,19 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
 
     public void setMadness(boolean madness) {
         this.madness = madness;
+    }
+
+    // Return whether this spell tracks what color mana is spent to cast it for the sake of the effect
+    public boolean tracksManaSpent() {
+        if (this.sourceCard == null) { return false; }
+        if (!this.isSpell()) { return false; }
+
+        if (this.sourceCard.hasKeyword("Sunburst")) {
+            return true;
+        }
+        if (this.sourceCard.getRules().getOracleText().contains("was spent to cast")) {
+            return true;
+        }
+        return false;
     }
 }

@@ -153,9 +153,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
         }
 
-        // If the card has sunburst or any other ability that tracks mana spent,
-        // skip express Mana choice
-        if (saPaidFor.getSourceCard() != null && saPaidFor.getSourceCard().hasKeyword("Sunburst") && saPaidFor.isSpell()) {
+        // If the card has any ability that tracks mana spent, skip express Mana choice
+        if (saPaidFor.tracksManaSpent()) {
             colorCanUse = MagicColor.ALL_COLORS;
             guessAbilityWithRequiredColors = false;
         }
