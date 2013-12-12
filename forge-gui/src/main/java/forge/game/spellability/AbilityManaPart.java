@@ -59,7 +59,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private final String addsCounters;
     private final boolean persistentMana;
     private String manaReplaceType;
-    
+
     private transient ArrayList<Mana> lastManaProduced = new ArrayList<Mana>();
 
     private final transient Card sourceCard;
@@ -174,7 +174,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * cannotCounterPaidWith.
      * </p>
-     * @param saBeingPaid 
+     * @param saBeingPaid
      * 
      * @return a {@link java.lang.String} object.
      */
@@ -191,7 +191,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * addKeywords.
      * </p>
-     * @param saBeingPaid 
+     * @param saBeingPaid
      * 
      * @return a {@link java.lang.String} object.
      */
@@ -203,7 +203,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * getKeywords.
      * </p>
-     * @param saBeingPaid 
+     * @param saBeingPaid
      * 
      * @return a {@link java.lang.String} object.
      */
@@ -215,7 +215,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * addsCounters.
      * </p>
-     * @param saBeingPaid 
+     * @param saBeingPaid
      * 
      * @return a {@link java.lang.String} object.
      */
@@ -348,8 +348,8 @@ public class AbilityManaPart implements java.io.Serializable {
         if(cs.hasRed()) sb.append("R ");
         if(cs.hasGreen()) sb.append("G ");
         this.lastExpressChoice = sb.toString().trim();
-    }    
-    
+    }
+
     /**
      * <p>
      * Getter for the field <code>lastAnyChoice</code>.
@@ -437,7 +437,7 @@ public class AbilityManaPart implements java.io.Serializable {
     public final boolean canProduce(final String s) {
         return canProduce(s, null);
     }
-    
+
     /**
      * <p>
      * canProduce.
@@ -452,7 +452,7 @@ public class AbilityManaPart implements java.io.Serializable {
             return true;
         }
 
-        if (this.getOrigProduced().contains("Chosen") && sourceCard != null ) { 
+        if (this.getOrigProduced().contains("Chosen") && sourceCard != null ) {
             List<String> chosenCol = this.getSourceCard().getChosenColor();
             if ( !chosenCol.isEmpty() && MagicColor.toShortString(chosenCol.get(0)).contains(s)) {
                 return true;
@@ -610,7 +610,7 @@ public class AbilityManaPart implements java.io.Serializable {
         StringBuffer sb = new StringBuffer();
         while(m.find()) {
             if (m.group().matches("[0-9][0-9]?")) {
-                final String rep = StringUtils.repeat(repMap.get("[0-9][0-9]?") + " ", 
+                final String rep = StringUtils.repeat(repMap.get("[0-9][0-9]?") + " ",
                         Integer.parseInt(m.group())).trim();
                 m.appendReplacement(sb, rep);
             } else {

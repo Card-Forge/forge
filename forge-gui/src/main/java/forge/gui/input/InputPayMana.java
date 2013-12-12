@@ -164,21 +164,29 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         boolean choice = true;
         if (guessAbilityWithRequiredColors) {
             // express Mana Choice
-            final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
-            for (SpellAbility sa : abilities) {
-                if (colorNeeded != 0 && abilityProducesManaColor(sa, sa.getManaPartRecursive(), colorNeeded)) {
-                    colorMatches.add(sa);
-                }
-            }
-
-            if (colorMatches.isEmpty()) {
-                // can only match colorless just grab the first and move on.
-                // This is wrong. Sometimes all abilities aren't created equal
+            if (colorNeeded == 0) {
                 choice = false;
+                //avoid unnecessary prompt by pretending we need White
+                //for the sake of "Add one mana of any color" effects
+                colorNeeded = MagicColor.WHITE;
             }
-            else if (colorMatches.size() < abilities.size()) {
-                // leave behind only color matches
-                abilities = colorMatches;
+            else {
+                final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
+                for (SpellAbility sa : abilities) {
+                    if (abilityProducesManaColor(sa, sa.getManaPartRecursive(), colorNeeded)) {
+                        colorMatches.add(sa);
+                    }
+                }
+    
+                if (colorMatches.isEmpty()) {
+                    // can only match colorless just grab the first and move on.
+                    // This is wrong. Sometimes all abilities aren't created equal
+                    choice = false;
+                }
+                else if (colorMatches.size() < abilities.size()) {
+                    // leave behind only color matches
+                    abilities = colorMatches;
+                }
             }
         }
 
