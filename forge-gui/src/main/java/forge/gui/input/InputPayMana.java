@@ -25,6 +25,7 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.gui.GuiChoose;
 import forge.util.Evaluator;
+import forge.util.ThreadUtil;
 import forge.view.ButtonUtil;
 
 /** 
@@ -288,13 +289,19 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected void onOk() {
         if (supportAutoPay()) {
             //use AI utility to automatically pay mana cost if possible
-            Runnable proc = new Runnable() {
+            final Runnable proc = new Runnable() {
                 @Override
                 public void run() {
                     ComputerUtilMana.payManaCost(manaCost, saPaidFor, player);
                 }
             };
-            runAsAi(proc);
+            //must run in game thread as certain payment actions can only be automated there
+            ThreadUtil.invokeInGameThreadAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    runAsAi(proc);
+                }
+            });
             this.showMessage();
         }
     }
