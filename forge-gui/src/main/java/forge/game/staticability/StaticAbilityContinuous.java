@@ -27,6 +27,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
+import forge.card.ColorSet;
+import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.StaticEffect;
@@ -416,7 +418,18 @@ public class StaticAbilityContinuous {
             if (addAbilities != null) {
                 for (String abilty : addAbilities) {
                     if (abilty.contains("CardManaCost")) {
-                        abilty = abilty.replace("CardManaCost", affectedCard.getManaCost().toString());
+                        StringBuilder sb = new StringBuilder();
+                        int generic = affectedCard.getManaCost().getGenericCost();
+                        if (generic > 0) {
+                            sb.append(generic);
+                        }
+                        for (ManaCostShard s : affectedCard.getManaCost()) {
+                            ColorSet cs = ColorSet.fromMask(s.getColorMask());
+                            if(cs.isColorless()) continue;
+                            sb.append(' ');
+                            sb.append(s);
+                        }
+                        abilty = abilty.replace("CardManaCost", sb.toString().trim());
                     } else if (abilty.contains("ConvertedManaCost")) {
                         final String costcmc = Integer.toString(affectedCard.getCMC());
                         abilty = abilty.replace("ConvertedManaCost", costcmc);
