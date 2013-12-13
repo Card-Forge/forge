@@ -30,9 +30,10 @@ import forge.gui.match.CMatchUI;
 import forge.util.Lang;
 import forge.util.ThreadUtil;
 import forge.view.ButtonUtil;
- /**
+ 
+/**
   * <p>
-  * InputMulligan class.
+  * InputConfirmMulligan class.
   * </p>
   * 
   * @author Forge

@@ -17,15 +17,15 @@
  */
 package forge.gui.input;
 
-
 import forge.view.ButtonUtil;
+
  /**
   * <p>
-  * InputMulligan class.
+  * InputConfirm class.
   * </p>
   * 
   * @author Forge
-  * @version $Id: InputConfirmMulligan.java 21647 2013-05-24 22:31:11Z Max mtg $
+  * @version $Id: InputConfirm.java 21647 2013-05-24 22:31:11Z Max mtg $
   */
 public class InputConfirm extends InputSyncronizedBase {
     private static final long serialVersionUID = -3591794991788531626L;

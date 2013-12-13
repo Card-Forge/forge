@@ -354,7 +354,7 @@ public class HumanPlay {
                 }
                 sb.append("?" + orString);
 
-                if (!p.getController().confirmPayment(part,sb.toString())) {
+                if (!p.getController().confirmPayment(part, sb.toString())) {
                     return false;
                 }
 
