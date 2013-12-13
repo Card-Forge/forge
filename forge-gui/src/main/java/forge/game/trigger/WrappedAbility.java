@@ -18,7 +18,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
-import forge.gui.GuiDialog;
 
 // Wrapper ability that checks the requirements again just before
 // resolving, for intervening if clauses.
@@ -356,8 +355,9 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         TriggerHandler th = game.getTriggerHandler();
         Map<String, String> triggerParams = regtrig.getMapParams();
 
-        if (decider != null && !confirmTrigger(decider, triggerParams)) 
+        if (decider != null && !decider.getController().confirmTrigger(sa, regtrig, triggerParams, this.isMandatory())) {
             return;
+        }
 
         getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
 
@@ -370,71 +370,4 @@ public class WrappedAbility extends Ability implements ISpellAbility {
             th.registerDelayedTrigger(deltrig);
         }
     }
-    
-    private boolean confirmTrigger(Player decider, Map<String, String> triggerParams) {
-        if (decider.isHuman()) {
-            if(decider.getController().shouldAlwaysAcceptTrigger(regtrig.getId()))
-                return true;
-            else if(decider.getController().shouldAlwaysDeclineTrigger(regtrig.getId()))
-                return false;
-            
-            String triggerDesc = triggerParams.get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName());
-            final StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
-            buildQuestion.append(regtrig.getHostCard().toString()).append("?");
-            buildQuestion.append("\r\n(").append(triggerDesc).append(")\r\n");
-            HashMap<String, Object> tos = sa.getTriggeringObjects();
-            if (tos.containsKey("Attacker")) {
-                buildQuestion.append("[Attacker: " + tos.get("Attacker") + "]");
-            }
-            if (tos.containsKey("Card")) {
-                Card card = (Card) tos.get("Card");
-                if (card != null && (card.getController() == decider || decider.getGame().getZoneOf(card) == null 
-                        || decider.getGame().getZoneOf(card).getZoneType().isKnown())) {
-                    buildQuestion.append("[Triggering card: " + tos.get("Card") + "]");
-                }
-            }
-            if (!GuiDialog.confirm(regtrig.getHostCard(), buildQuestion.toString())) {
-                return false;
-            }
-            return true;
-        } // human end
-
-        if (triggerParams.containsKey("DelayedTrigger")) {
-            //TODO: The only card with an optional delayed trigger is Shirei, Shizo's Caretaker, 
-            //      needs to be expanded when a more difficult cards comes up
-            return true;
-        }
-        // Store/replace target choices more properly to get this SA cleared.
-        TargetChoices tc = null;
-        TargetChoices subtc = null;
-        boolean storeChoices = sa.getTargetRestrictions() != null;
-        final SpellAbility sub = sa.getSubAbility();
-        boolean storeSubChoices = sub != null && sub.getTargetRestrictions() != null;
-        boolean ret = true;
-
-        if (storeChoices) {
-            tc = sa.getTargets();
-            sa.resetTargets();
-        }
-        if (storeSubChoices) {
-            subtc = sub.getTargets();
-            sub.resetTargets();
-        }
-        // There is no way this doTrigger here will have the same target as stored above
-        // So it's possible it's making a different decision here than will actually happen
-        if (!sa.doTrigger(this.isMandatory(), decider)) {
-            ret = false;
-        }
-        if (storeChoices) {
-            sa.resetTargets();
-            sa.setTargets(tc);
-        }
-        if (storeSubChoices) {
-            sub.resetTargets();
-            sub.setTargets(subtc);
-        }
-
-        return ret;
-    }
-
 }

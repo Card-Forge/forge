@@ -47,6 +47,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
@@ -64,7 +65,7 @@ public class PlayerControllerAi extends PlayerController {
     public PlayerControllerAi(Game game, Player p, LobbyPlayer lp) {
         super(game, p, lp);
 
-        brains = new AiController(p, game); 
+        brains = new AiController(p, game);
     }
 
     /**
@@ -73,11 +74,13 @@ public class PlayerControllerAi extends PlayerController {
     public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent) {
         if (abilities.size() == 0) {
             return null;
-        } else 
+        }
+        else {
             return abilities.get(0);
-//        } else {
-//            return GuiChoose.oneOrNone("Choose ability for AI to play", abilities); // some day network interaction will be here
-//        }
+        }
+//      else {
+//          return GuiChoose.oneOrNone("Choose ability for AI to play", abilities); // some day network interaction will be here
+//      }
     }
 
     /**
@@ -140,11 +143,11 @@ public class PlayerControllerAi extends PlayerController {
         }
         return chosen;
     }
-    
+
     @Override
     public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional) {
         ApiType api = sa.getApi();
-        if ( null == api ) {
+        if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
         return api.getAi().chooseSingleCard(player, sa, options, isOptional);
@@ -153,7 +156,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title) {
         ApiType api = sa.getApi();
-        if ( null == api ) {
+        if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
         return api.getAi().chooseSinglePlayer(player, sa, options);
@@ -162,25 +165,65 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public SpellAbility chooseSingleSpellForEffect(java.util.List<SpellAbility> spells, SpellAbility sa, String title) {
         ApiType api = sa.getApi();
-        if ( null == api ) {
+        if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
         return api.getAi().chooseSingleSpellAbility(player, sa, spells);
     }
-    
-    
+
     @Override
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return getAi().confirmAction(sa, mode, message);
     }
 
     @Override
-    public boolean getWillPlayOnFirstTurn(boolean isFirstGame) {
-        return true; // AI is brave :)
-    }
-    @Override
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
         return getAi().confirmStaticApplication(hostCard, affected, logic, message);
+    }
+
+    @Override
+    public boolean confirmTrigger(SpellAbility sa, Trigger regtrig, Map<String, String> triggerParams, boolean isMandatory) {
+        if (triggerParams.containsKey("DelayedTrigger")) {
+            //TODO: The only card with an optional delayed trigger is Shirei, Shizo's Caretaker,
+            //      needs to be expanded when a more difficult cards comes up
+            return true;
+        }
+        // Store/replace target choices more properly to get this SA cleared.
+        TargetChoices tc = null;
+        TargetChoices subtc = null;
+        boolean storeChoices = sa.getTargetRestrictions() != null;
+        final SpellAbility sub = sa.getSubAbility();
+        boolean storeSubChoices = sub != null && sub.getTargetRestrictions() != null;
+        boolean ret = true;
+
+        if (storeChoices) {
+            tc = sa.getTargets();
+            sa.resetTargets();
+        }
+        if (storeSubChoices) {
+            subtc = sub.getTargets();
+            sub.resetTargets();
+        }
+        // There is no way this doTrigger here will have the same target as stored above
+        // So it's possible it's making a different decision here than will actually happen
+        if (!sa.doTrigger(isMandatory, player)) {
+            ret = false;
+        }
+        if (storeChoices) {
+            sa.resetTargets();
+            sa.setTargets(tc);
+        }
+        if (storeSubChoices) {
+            sub.resetTargets();
+            sub.setTargets(subtc);
+        }
+
+        return ret;
+    }
+
+    @Override
+    public boolean getWillPlayOnFirstTurn(boolean isFirstGame) {
+        return true; // AI is brave :)
     }
 
     @Override
@@ -207,17 +250,18 @@ public class PlayerControllerAi extends PlayerController {
         List<Card> toTop = new ArrayList<Card>();
 
         for (Card c: topN) {
-            if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(player, c))
+            if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(player, c)) {
                 toBottom.add(c);
-            else 
-                toTop.add(c); 
+            }
+            else {
+                toTop.add(c);
+            }
         }
 
         // put the rest on top in random order
         Collections.shuffle(toTop);
         return ImmutablePair.of(toTop, toBottom);
     }
-
 
     @Override
     public boolean willPutCardOnTop(Card c) {
@@ -232,11 +276,12 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min, int max) {
-        if ( p == player )
+        if (p == player) {
             return brains.getCardsToDiscard(min, max, validCards, sa);
-        
+        }
+
         boolean isTargetFriendly = !p.isOpponentOf(player);
-        
+
         return isTargetFriendly
                ? ComputerUtil.getCardsToDiscardFromFriend(player, p, sa, validCards, min, max)
                : ComputerUtil.getCardsToDiscardFromOpponent(player, p, sa, validCards, min, max);
@@ -253,13 +298,14 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void playSpellAbilityForFree(SpellAbility copySA, boolean mayChooseNewTargets) {
         // Ai is known to set targets in doTrigger, so if it cannot choose new targets, we won't call canPlays
-        if( mayChooseNewTargets ) {
+        if (mayChooseNewTargets) {
             if (copySA instanceof Spell) {
                 Spell spell = (Spell) copySA;
                 if (!spell.canPlayFromEffectAI(player, true, true)) {
                     return; // is this legal at all?
                 }
-            } else {
+            }
+            else {
                 copySA.canPlayAI(player);
             }
         }
@@ -268,7 +314,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean canSetupTargets) {
-        if ( canSetupTargets ) 
+        if (canSetupTargets)
             effectSA.doTrigger(true, player); // first parameter does not matter, since return value won't be used
         ComputerUtil.playNoStack(player, effectSA, game);
     }
@@ -320,10 +366,10 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes) {
         String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa.getParam("AILogic"), invalidTypes);
-        if( StringUtils.isBlank(chosen) && !validTypes.isEmpty() )
+        if (StringUtils.isBlank(chosen) && !validTypes.isEmpty())
         {
             chosen = validTypes.get(0);
-            Log.warn("AI has no idea how to choose " + kindOfType +", defaulting to 1st element: chosen" );
+            Log.warn("AI has no idea how to choose " + kindOfType +", defaulting to 1st element: chosen");
         }
         game.getAction().nofityOfValue(sa, null, "Computer picked: " + chosen, player);
         return chosen;
@@ -338,14 +384,17 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer)  { 
-        if( !ComputerUtil.wantMulligan(player) )
+    public List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer)  {
+        if (!ComputerUtil.wantMulligan(player)) {
             return null;
+        }
 
-        if (!isCommander) 
+        if (!isCommander) {
             return player.getCardsIn(ZoneType.Hand);
-        else
+        }
+        else {
             return ComputerUtil.getPartialParisCandidates(player);
+        }
     }
 
     @Override
@@ -353,7 +402,6 @@ public class PlayerControllerAi extends PlayerController {
         brains.declareAttackers(attacker, combat);
     }
 
-   
     @Override
     public void declareBlockers(Player defender, Combat combat) {
         brains.declareBlockersFor(defender, combat);
@@ -361,8 +409,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void takePriority() {
-        if ( !game.isGameOver() )
+        if (!game.isGameOver()) {
             brains.onPriorityRecieved();
+        }
         // use separate thread for AI?
     }
 
@@ -436,7 +485,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice) {
-        if(kindOfChoice == BinaryChoiceType.TapOrUntap) return true;
+        if (kindOfChoice == BinaryChoiceType.TapOrUntap) { return true; }
         return MyRandom.getRandom().nextBoolean();
     }
 
@@ -518,7 +567,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt) {
         // may write a smarter AI if you need to (with calls to AI-clas for given API ability)
-        
+
         // TODO: ArsenalNut (06 Feb 12)computer needs
         // better logic to pick a counter type and probably
         // an initial target

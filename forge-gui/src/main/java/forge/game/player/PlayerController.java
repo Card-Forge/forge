@@ -10,6 +10,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
+
 import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.game.Game;
@@ -27,6 +28,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 
@@ -43,19 +45,19 @@ public abstract class PlayerController {
         DeclareBlocker,
         Echo,
         Multikicker,
-        Replicate, 
+        Replicate,
         CumulativeUpkeep;
     }
-    
+
     public static enum BinaryChoiceType {
         HeadsOrTails, // coin
         TapOrUntap,
         PlayOrDraw,
         OddsOrEvens
     }
-    
+
     protected final Game game;
-    
+
     private PhaseType autoPassUntil = null;
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
@@ -95,14 +97,14 @@ public abstract class PlayerController {
     // End of Triggers preliminary choice
 
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
-    
+
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
     public SpellAbility getAbilityToPlay(List<SpellAbility> abilities) {
     	return getAbilityToPlay(abilities, null);
     }
-    
+
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
@@ -135,8 +137,9 @@ public abstract class PlayerController {
     public abstract SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title);
 
     public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message);
-    public abstract boolean getWillPlayOnFirstTurn(boolean isFirstGame);
     public abstract boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message);
+    public abstract boolean confirmTrigger(SpellAbility sa, Trigger regtrig, Map<String, String> triggerParams, boolean isMandatory);
+    public abstract boolean getWillPlayOnFirstTurn(boolean isFirstGame);
 
     public abstract List<Card> orderBlockers(Card attacker, List<Card> blockers);
     public abstract List<Card> orderAttackers(Card blocker, List<Card> attackers);
@@ -148,7 +151,7 @@ public abstract class PlayerController {
     public abstract ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN);
     public abstract boolean willPutCardOnTop(Card c);
     public abstract List<Card> orderMoveToZoneList(List<Card> cards, ZoneType destinationZone);
-    
+
     /** p = target player, validCards - possible discards, min cards to discard */
     public abstract List<Card> chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, List<Card> validCards, int min, int max);
     public abstract Card chooseCardToDredge(List<Card> dredgers);
@@ -168,7 +171,7 @@ public abstract class PlayerController {
     public abstract void declareAttackers(Player attacker, Combat combat);
     public abstract void declareBlockers(Player defender, Combat combat);
     public abstract void takePriority();
-    
+
     public abstract List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard);
     public abstract boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose);
 
@@ -181,7 +184,7 @@ public abstract class PlayerController {
     public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num);
 
     public abstract byte chooseColor(String message, SpellAbility sa, ColorSet colors);
-    
+
     public abstract PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
     public abstract CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt);

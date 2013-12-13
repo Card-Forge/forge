@@ -49,6 +49,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetSelection;
+import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -401,6 +402,36 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
         return GuiDialog.confirm(hostCard, message);
+    }
+
+    @Override
+    public boolean confirmTrigger(SpellAbility sa, Trigger regtrig, Map<String, String> triggerParams, boolean isMandatory) {
+        if (this.shouldAlwaysAcceptTrigger(regtrig.getId())) {
+            return true;
+        }
+        if (this.shouldAlwaysDeclineTrigger(regtrig.getId())) {
+            return false;
+        }
+        
+        String triggerDesc = triggerParams.get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName());
+        final StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
+        buildQuestion.append(regtrig.getHostCard().toString()).append("?");
+        buildQuestion.append("\r\n(").append(triggerDesc).append(")\r\n");
+        HashMap<String, Object> tos = sa.getTriggeringObjects();
+        if (tos.containsKey("Attacker")) {
+            buildQuestion.append("[Attacker: " + tos.get("Attacker") + "]");
+        }
+        if (tos.containsKey("Card")) {
+            Card card = (Card) tos.get("Card");
+            if (card != null && (card.getController() == player || game.getZoneOf(card) == null 
+                    || game.getZoneOf(card).getZoneType().isKnown())) {
+                buildQuestion.append("[Triggering card: " + tos.get("Card") + "]");
+            }
+        }
+        if (!GuiDialog.confirm(regtrig.getHostCard(), buildQuestion.toString())) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -869,10 +900,10 @@ public class PlayerControllerHuman extends PlayerController {
             default:
                 String[] colorNames = new String[cntColors];
                 int i = 0;
-                for(byte b : colors) {
+                for (byte b : colors) {
                     colorNames[i++] = MagicColor.toLongString(b);
                 }
-                if(colorNames.length > 2) {
+                if (colorNames.length > 2) {
                     return MagicColor.fromName(GuiChoose.one(message, colorNames));
                 }
                 int idxChosen = GuiDialog.confirm(sa.getSourceCard(), message, colorNames) ? 0 : 1;
@@ -890,8 +921,9 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt) {
-        if( options.size() <= 1)
+        if (options.size() <= 1) {
             return Iterables.getFirst(options, null);
+        }
         return GuiChoose.one(prompt, options);
     }
 }
