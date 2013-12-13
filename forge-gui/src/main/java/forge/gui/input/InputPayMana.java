@@ -306,13 +306,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                 @Override
                 public void run() {
                     runAsAi(proc);
-                    //call showMessage in GUI thread after mana cost paid
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            InputPayMana.this.showMessage();
-                        }
-                    });
+                    onStateChanged();
                 }
             });
         }
