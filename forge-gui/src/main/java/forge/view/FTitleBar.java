@@ -10,11 +10,11 @@ import forge.gui.toolbox.FSkin;
 public class FTitleBar extends FTitleBarBase {
     private final JLabel lblTitle = new JLabel();
     
-    public FTitleBar(FFrame f) {
-        super(f);
-        f.setJMenuBar(this);
-        setTitle(f.getTitle()); //set default title based on frame title
-        setIconImage(f.getIconImage()); //set default icon image based on frame icon image
+    public FTitleBar(ITitleBarOwner owner0) {
+        super(owner0);
+        owner0.setJMenuBar(this);
+        setTitle(owner0.getTitle()); //set default title based on frame title
+        setIconImage(owner0.getIconImage()); //set default icon image based on frame icon image
         FSkin.get(lblTitle).setForeground(foreColor);
         addControls();
     }

@@ -30,7 +30,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
 @SuppressWarnings("serial")
-public class FFrame extends JFrame {
+public class FFrame extends JFrame implements ITitleBarOwner {
     private static final int borderThickness = 3;
     private Point locBeforeMove;
     private Dimension sizeBeforeResize;
@@ -43,11 +43,11 @@ public class FFrame extends JFrame {
     public FFrame() {
         setUndecorated(true);
     }
-    
+
     public void initialize() {
         initialize(new FTitleBar(this));
     }
-    
+
     public void initialize(FTitleBarBase titleBar0) {
         this.isMainFrame = (FView.SINGLETON_INSTANCE.getFrame() == this);
 
@@ -79,11 +79,11 @@ public class FFrame extends JFrame {
     public FTitleBarBase getTitleBar() {
         return this.titleBar;
     }
-    
+
     public boolean getLockTitleBar() {
         return this.lockTitleBar;
     }
-    
+
     public void setLockTitleBar(boolean lockTitleBar0) {
         if (this.lockTitleBar == lockTitleBar0) { return; }
         this.lockTitleBar = lockTitleBar0;
@@ -94,11 +94,11 @@ public class FFrame extends JFrame {
         }
         updateTitleBar();
     }
-    
+
     public boolean isTitleBarHidden() {
         return this.hideTitleBar;
     }
-    
+
     private void updateTitleBar() {
         this.titleBar.updateButtons();
         if (this.hideTitleBar == (this.fullScreen && !this.lockTitleBar)) {
@@ -110,7 +110,7 @@ public class FFrame extends JFrame {
             SResizingUtil.resizeWindow(); //ensure window layout updated to account for titlebar visibility change
         }
     }
-    
+
     @Override
     public void setTitle(String title) {
         super.setTitle(title);
@@ -118,7 +118,7 @@ public class FFrame extends JFrame {
             this.titleBar.setTitle(title);
         }
     }
-    
+
     @Override
     public void setIconImage(Image image) {
         super.setIconImage(image);
@@ -126,7 +126,7 @@ public class FFrame extends JFrame {
             this.titleBar.setIconImage(image);
         }
     }
-    
+
     //ensure un-maximized if location or size changed
     @Override
     public void setLocation(Point point) {
@@ -148,7 +148,7 @@ public class FFrame extends JFrame {
         resetState();
         super.setSize(width, height);
     }
-    
+
     private void resetState() {
         if (this.minimized || this.maximized || this.fullScreen) {
             this.minimized = false;
@@ -160,25 +160,25 @@ public class FFrame extends JFrame {
             updateState();
         }
     }
-    
+
     public void setWindowLayout(int x, int y, int width, int height, boolean maximized0, boolean fullScreen0) {
         this.normalBounds = new Rectangle(x, y, width, height);
         this.maximized = maximized0;
         this.fullScreen = fullScreen0;
         updateState();
     }
-    
+
     public Rectangle getNormalBounds() {
         return this.normalBounds;
     }
-    
+
     public void updateNormalBounds() {
         if (this.minimized || this.maximized || this.fullScreen) {
             return;
         }
         this.normalBounds = this.getBounds();
     }
-    
+
     public boolean isMinimized() {
         return this.minimized;
     }
@@ -188,7 +188,7 @@ public class FFrame extends JFrame {
         this.minimized = minimized0;
         updateState();
     }
-    
+
     public boolean isMaximized() {
         return this.maximized;
     }
@@ -198,7 +198,7 @@ public class FFrame extends JFrame {
         this.maximized = maximized0;
         updateState();
     }
-    
+
     public boolean isFullScreen() {
         return this.fullScreen;
     }
@@ -211,7 +211,7 @@ public class FFrame extends JFrame {
         }
         updateState();
     }
-    
+
     private void updateState() {
         if (this.minimized) {
             super.setExtendedState(Frame.ICONIFIED);
@@ -238,7 +238,7 @@ public class FFrame extends JFrame {
             this.setBounds(this.normalBounds);
         }
     }
-    
+
     private void updateBorder() {
         if (this.minimized || this.hideBorder == (this.maximized || this.fullScreen)) {
             return; //don't update border if minimized or border visibility wouldn't change
@@ -249,11 +249,11 @@ public class FFrame extends JFrame {
         }
         else {
             FSkin.get(getRootPane()).setBorder(new CompoundSkinBorder(
-                    BorderFactory.createLineBorder(Color.BLACK, 1), 
+                    BorderFactory.createLineBorder(Color.BLACK, 1),
                     new LineSkinBorder(FSkin.getColor(Colors.CLR_BORDERS), borderThickness - 1)));
         }
     }
-    
+
     //override normal state behavior
     @Override
     public void setState(int state) {
@@ -272,7 +272,7 @@ public class FFrame extends JFrame {
             updateState();
         }
     }
-    
+
     private void addMoveSupport() {
         this.titleBar.addMouseListener(new MouseAdapter() {
             @Override
@@ -307,12 +307,12 @@ public class FFrame extends JFrame {
             }
         });
     }
-    
+
     private void setResizeCursor(int resizeCursor0) {
         this.resizeCursor = resizeCursor0;
         this.getRootPane().setCursor(Cursor.getPredefinedCursor(resizeCursor0));
     }
-    
+
     private void addResizeSupport() {
         final JRootPane resizeBorders = getRootPane();
         resizeBorders.addMouseListener(new MouseAdapter() {
@@ -386,7 +386,7 @@ public class FFrame extends JFrame {
                 final Point loc = e.getLocationOnScreen();
                 int dx = loc.x - mouseDownLoc.x;
                 int dy = loc.y - mouseDownLoc.y;
-                
+
                 //determine new size based on resize direction
                 int width = sizeBeforeResize.width;
                 int height = sizeBeforeResize.height;
@@ -420,7 +420,7 @@ public class FFrame extends JFrame {
                         height -= dy;
                         break;
                 }
-                
+
                 //ensure new size in bounds
                 Dimension minSize = getMinimumSize();
                 Dimension maxSize = getMaximumSize();
@@ -440,7 +440,7 @@ public class FFrame extends JFrame {
                     dy -= (height - maxSize.height);
                     height = maxSize.height;
                 }
-                
+
                 //determine new location based on resize direction
                 int x = locBeforeMove.x;
                 int y = locBeforeMove.y;
@@ -458,7 +458,7 @@ public class FFrame extends JFrame {
                         y += dy;
                         break;
                 }
-                
+
                 //set bounds based on new size and location
                 setBounds(x, y, width, height);
             }

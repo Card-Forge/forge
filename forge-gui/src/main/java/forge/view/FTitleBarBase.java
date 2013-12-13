@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
@@ -34,7 +35,7 @@ public abstract class FTitleBarBase extends JMenuBar {
     protected static final SkinColor buttonDownColor = backColor.stepColor(-40);
     protected static final SkinColor buttonToggleColor = backColor.stepColor(-30);
 
-    protected final FFrame frame;
+    protected final ITitleBarOwner owner;
     protected final JComponentSkin<FTitleBarBase> skin = FSkin.get(this);
     protected final SpringLayout layout = new SpringLayout();
     protected final LockTitleBarButton btnLockTitleBar = new LockTitleBarButton();
@@ -43,8 +44,8 @@ public abstract class FTitleBarBase extends JMenuBar {
     protected final MaximizeButton btnMaximize = new MaximizeButton();
     protected final CloseButton btnClose = new CloseButton();
 
-    protected FTitleBarBase(FFrame f) {
-        this.frame = f;
+    protected FTitleBarBase(ITitleBarOwner owner0) {
+        this.owner = owner0;
         setVisible(false); //start out hidden unless frame chooses to show title bar
         setLayout(this.layout);
         skin.setBackground(backColor);
@@ -56,35 +57,37 @@ public abstract class FTitleBarBase extends JMenuBar {
         layout.putConstraint(SpringLayout.EAST, btnClose, 0, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.SOUTH, btnClose, 0, SpringLayout.SOUTH, this);
 
-        add(btnMaximize);
-        layout.putConstraint(SpringLayout.EAST, btnMaximize, 0, SpringLayout.WEST, btnClose);
-        layout.putConstraint(SpringLayout.SOUTH, btnMaximize, 0, SpringLayout.SOUTH, btnClose);
-        
-        add(btnFullScreen);
-        layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnMaximize);
-        layout.putConstraint(SpringLayout.SOUTH, btnFullScreen, 0, SpringLayout.SOUTH, btnMaximize);
-        
-        add(btnMinimize);
-        layout.putConstraint(SpringLayout.EAST, btnMinimize, 0, SpringLayout.WEST, btnFullScreen);
-        layout.putConstraint(SpringLayout.SOUTH, btnMinimize, 0, SpringLayout.SOUTH, btnFullScreen);
-        
-        add(btnLockTitleBar);
-        layout.putConstraint(SpringLayout.EAST, btnLockTitleBar, 0, SpringLayout.WEST, btnMinimize);
-        layout.putConstraint(SpringLayout.SOUTH, btnLockTitleBar, 0, SpringLayout.SOUTH, btnMinimize);
+        if (owner instanceof FFrame) { //only support buttons besides Close for frames
+            add(btnMaximize);
+            layout.putConstraint(SpringLayout.EAST, btnMaximize, 0, SpringLayout.WEST, btnClose);
+            layout.putConstraint(SpringLayout.SOUTH, btnMaximize, 0, SpringLayout.SOUTH, btnClose);
+            
+            add(btnFullScreen);
+            layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnMaximize);
+            layout.putConstraint(SpringLayout.SOUTH, btnFullScreen, 0, SpringLayout.SOUTH, btnMaximize);
+            
+            add(btnMinimize);
+            layout.putConstraint(SpringLayout.EAST, btnMinimize, 0, SpringLayout.WEST, btnFullScreen);
+            layout.putConstraint(SpringLayout.SOUTH, btnMinimize, 0, SpringLayout.SOUTH, btnFullScreen);
+            
+            add(btnLockTitleBar);
+            layout.putConstraint(SpringLayout.EAST, btnLockTitleBar, 0, SpringLayout.WEST, btnMinimize);
+            layout.putConstraint(SpringLayout.SOUTH, btnLockTitleBar, 0, SpringLayout.SOUTH, btnMinimize);
+        }
     }
 
     public abstract void setTitle(String title);
     public abstract void setIconImage(Image image);
     
     public void updateButtons() {
-        boolean fullScreen = frame.isFullScreen();
+        boolean fullScreen = owner.isFullScreen();
         btnLockTitleBar.setVisible(fullScreen);
         btnMaximize.setVisible(!fullScreen);
 
         if (fullScreen) {
             layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnClose);
             btnFullScreen.setToolTipText("Exit Full Screen (F11)");
-            if (frame.getLockTitleBar()) {
+            if (owner.getLockTitleBar()) {
                 btnLockTitleBar.setToolTipText("Unlock Title Bar");
             }
             else {
@@ -95,7 +98,7 @@ public abstract class FTitleBarBase extends JMenuBar {
         else {
             layout.putConstraint(SpringLayout.EAST, btnFullScreen, 0, SpringLayout.WEST, btnMaximize);
             btnFullScreen.setToolTipText("Full Screen (F11)");
-            if (frame.isMaximized()) {
+            if (owner.isMaximized()) {
                 btnMaximize.setToolTipText("Restore Down");
             }
             else {
@@ -112,7 +115,7 @@ public abstract class FTitleBarBase extends JMenuBar {
     @Override
     public void setVisible(boolean visible) {
         //use height 0 to hide rather than setting visible to false to allow menu item accelerators to work
-        setPreferredSize(new Dimension(this.frame.getWidth(), visible ? visibleHeight : 0));
+        setPreferredSize(new Dimension(this.owner.getWidth(), visible ? visibleHeight : 0));
         revalidate();
     }
     
@@ -207,11 +210,11 @@ public abstract class FTitleBarBase extends JMenuBar {
         }
         @Override
         protected void onClick() {
-            frame.setLockTitleBar(!frame.getLockTitleBar());
+            owner.setLockTitleBar(!owner.getLockTitleBar());
         }
         @Override
         protected boolean isToggled() {
-            return frame.getLockTitleBar();
+            return owner.getLockTitleBar();
         }
         @Override
         public void paintComponent(Graphics g) {
@@ -241,7 +244,7 @@ public abstract class FTitleBarBase extends JMenuBar {
         }
         @Override
         protected void onClick() {
-            frame.setMinimized(true);
+            owner.setMinimized(true);
         }
         @Override
         public void paintComponent(Graphics g) {
@@ -267,7 +270,7 @@ public abstract class FTitleBarBase extends JMenuBar {
         }
         @Override
         protected void onClick() {
-            frame.setFullScreen(!frame.isFullScreen());
+            owner.setFullScreen(!owner.isFullScreen());
         }
         @Override
         public void paintComponent(Graphics g) {
@@ -284,7 +287,7 @@ public abstract class FTitleBarBase extends JMenuBar {
             Graphics2D g2d = (Graphics2D) g;
             skin.setGraphicsColor(g2d, foreColor);
 
-            if (frame.isFullScreen()) { //draw arrows facing inward
+            if (owner.isFullScreen()) { //draw arrows facing inward
                 g2d.drawLine(x1 + arrowLength, y1, x1 + arrowLength, y1 + arrowLength);
                 g2d.drawLine(x1, y1 + arrowLength, x1 + arrowLength, y1 + arrowLength);
                 g2d.drawLine(x2 - arrowLength, y1, x2 - arrowLength, y1 + arrowLength);
@@ -325,7 +328,7 @@ public abstract class FTitleBarBase extends JMenuBar {
         }
         @Override
         protected void onClick() {
-            frame.setMaximized(!frame.isMaximized());
+            owner.setMaximized(!owner.isMaximized());
         }
         @Override
         public void paintComponent(Graphics g) {
@@ -343,7 +346,7 @@ public abstract class FTitleBarBase extends JMenuBar {
             skin.setGraphicsColor(g2d, foreColor);
             g2d.setStroke(new BasicStroke(thickness));
             
-            if (frame.isMaximized()) { //draw 2 rectangles offset if icon to restore window
+            if (owner.isMaximized()) { //draw 2 rectangles offset if icon to restore window
                 x -= 1;
                 y += 2;
                 width -= 1;
@@ -371,7 +374,7 @@ public abstract class FTitleBarBase extends JMenuBar {
         }
         @Override
         protected void onClick() {
-            WindowEvent wev = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
+            WindowEvent wev = new WindowEvent((Window)owner, WindowEvent.WINDOW_CLOSING);
             Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
         }
         @Override

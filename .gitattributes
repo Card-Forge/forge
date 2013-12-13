@@ -15646,6 +15646,7 @@ forge-gui/src/main/java/forge/view/FNavigationBar.java -text
 forge-gui/src/main/java/forge/view/FTitleBar.java -text
 forge-gui/src/main/java/forge/view/FTitleBarBase.java -text
 forge-gui/src/main/java/forge/view/FView.java -text
+forge-gui/src/main/java/forge/view/ITitleBarOwner.java -text
 forge-gui/src/main/java/forge/view/Main.java -text
 forge-gui/src/main/java/forge/view/SplashFrame.java -text
 forge-gui/src/main/java/forge/view/arcane/CardArea.java svneol=native#text/plain

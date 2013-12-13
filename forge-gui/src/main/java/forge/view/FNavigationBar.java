@@ -57,7 +57,7 @@ public class FNavigationBar extends FTitleBarBase {
     public FNavigationBar(FFrame f) {
         super(f);
         this.setLocation(0, -visibleHeight); //hide by default
-        this.setPreferredSize(new Dimension(this.frame.getWidth(), visibleHeight));
+        this.setPreferredSize(new Dimension(this.owner.getWidth(), visibleHeight));
         btnForge.setFocusable(false);
         btnForge.setPreferredSize(new Dimension(100, 23));
         FSkin.get(btnForge).setForeground(foreColor);
@@ -190,7 +190,7 @@ public class FNavigationBar extends FTitleBarBase {
     
     //only show clock if Full Screen
     private void updateClockVisibility() {
-        clock.setVisible(this.frame.isFullScreen());
+        clock.setVisible(this.owner.isFullScreen());
     }
 
     private void addForgeButtonListeners() {

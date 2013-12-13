@@ -29,6 +29,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -82,7 +83,7 @@ public enum FSkin {
             for (ComponentSkin compSkin : ComponentSkin.skins.values()) {
                 compSkin.reapply();
             }
-            for (JFrameSkin compSkin : JFrameSkin.skins.values()) {
+            for (WindowSkin compSkin : WindowSkin.skins.values()) {
                 compSkin.reapply();
             }
             for (JComponentSkin compSkin : JComponentSkin.skins.values()) {
@@ -211,13 +212,13 @@ public enum FSkin {
             }
         }
     }
-    public static class JFrameSkin<T extends JFrame> extends ComponentSkin<T> {
+    public static class WindowSkin<T extends Window> extends ComponentSkin<T> {
         @SuppressWarnings("rawtypes")
-        private static HashMap<JFrame, JFrameSkin> skins = new HashMap<JFrame, JFrameSkin>();
+        private static HashMap<Window, WindowSkin> skins = new HashMap<Window, WindowSkin>();
 
         private SkinImage iconImage;
 
-        private JFrameSkin(T comp0) {
+        private WindowSkin(T comp0) {
             super(comp0);
         }
 
@@ -490,11 +491,11 @@ public enum FSkin {
         return compSkin;
     }
     @SuppressWarnings("unchecked")
-    public static <T extends JFrame> JFrameSkin<T> get(T comp) {
-        JFrameSkin<T> compSkin = JFrameSkin.skins.get(comp);
+    public static <T extends Window> WindowSkin<T> get(T comp) {
+        WindowSkin<T> compSkin = WindowSkin.skins.get(comp);
         if (compSkin == null) {
-            compSkin = new JFrameSkin<T>(comp);
-            JFrameSkin.skins.put(comp, compSkin);
+            compSkin = new WindowSkin<T>(comp);
+            WindowSkin.skins.put(comp, compSkin);
         }
         return compSkin;
     }
