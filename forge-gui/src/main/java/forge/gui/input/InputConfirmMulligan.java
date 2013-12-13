@@ -41,39 +41,40 @@ import forge.view.ButtonUtil;
 public class InputConfirmMulligan extends InputSyncronizedBase {
     /** Constant <code>serialVersionUID=-8112954303001155622L</code>. */
     private static final long serialVersionUID = -8112954303001155622L;
-    
-    
+
     boolean keepHand = false;
     final boolean isCommander;
-    
+
     private final List<Card> selected = new ArrayList<Card>();
     private final Player player;
     private final Player startingPlayer;
-    
+
     public InputConfirmMulligan(Player humanPlayer, Player startsGame, boolean commander) {
         player = humanPlayer;
         isCommander = commander;
-        startingPlayer = startsGame; 
+        startingPlayer = startsGame;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
         Game game = player.getGame();
 
         StringBuilder sb = new StringBuilder();
-        if( startingPlayer == player ) {
+        if (startingPlayer == player) {
             sb.append(player).append(", you are going first!\n\n");
-        } else {
+        }
+        else {
             sb.append(startingPlayer.getName()).append(" is going first.\n");
             sb.append(player).append(", you are going ").append(Lang.getOrdinal(game.getPosition(player, startingPlayer))).append(".\n\n");
         }
 
-        if ( isCommander ) {
+        if (isCommander) {
             ButtonUtil.setButtonText("Keep", "Exile");
             ButtonUtil.enableOnlyOk();
             sb.append("Will you keep your hand or choose some cards to exile those and draw one less card?");
-        } else {
+        }
+        else {
             ButtonUtil.setButtonText("Keep", "Mulligan");
             ButtonUtil.enableAllFocusOk();
             sb.append("Do you want to keep your hand?");
@@ -100,7 +101,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         ButtonUtil.reset();
         if (isCommander) {
             // Clear the "selected" icon after clicking the done button
-            for(Card c : this.selected) {
+            for (Card c : this.selected) {
                 CMatchUI.SINGLETON_INSTANCE.setUsedToPay(c, false);
             }
         }
@@ -108,21 +109,20 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
     }
 
     volatile boolean cardSelectLocked = false;
-    
+
     @Override
-    protected void onCardSelected(final Card c0, final MouseEvent triggerEvent) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities 
-        
+    protected void onCardSelected(final Card c0, final MouseEvent triggerEvent) { // the only place that would cause troubles - input is supposed only to confirm, not to fire abilities
         boolean fromHand = player.getZone(ZoneType.Hand).contains(c0);
         boolean isSerumPowder = c0.getName().equals("Serum Powder");
         boolean isLegalChoice = fromHand && (isCommander || isSerumPowder);
-        if ( !isLegalChoice || cardSelectLocked ) {
+        if (!isLegalChoice || cardSelectLocked) {
             flashIncorrectAction();
             return;
         }
-        
-        if ( isSerumPowder && GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
+
+        if (isSerumPowder && GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
             cardSelectLocked = true;
-            ThreadUtil.invokeInGameThread(new Runnable() { 
+            ThreadUtil.invokeInGameThread(new Runnable() {
                 public void run() {
                     List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
                     for (Card c : hand) {
@@ -135,18 +135,21 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
             return;
         }
 
-        if ( isCommander ) { // allow to choose cards for partial paris
-            if(selected.contains(c0)) {
+        if (isCommander) { // allow to choose cards for partial paris
+            if (selected.contains(c0)) {
                 CMatchUI.SINGLETON_INSTANCE.setUsedToPay(c0, false);
                 selected.remove(c0);
-            } else { 
+            }
+            else {
                 CMatchUI.SINGLETON_INSTANCE.setUsedToPay(c0, true);
                 selected.add(c0);
             }
-            if( selected.isEmpty())
+            if (selected.isEmpty()) {
                 ButtonUtil.enableOnlyOk();
-            else
+            }
+            else {
                 ButtonUtil.enableAllFocusOk();
+            }
         }
     }
 
