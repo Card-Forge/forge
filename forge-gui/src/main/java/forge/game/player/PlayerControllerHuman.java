@@ -420,8 +420,7 @@ public class PlayerControllerHuman extends PlayerController {
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_COMPACT_PROMPT)) {
             //append trigger description unless prompt is compact
             buildQuestion.append("\n(");
-            buildQuestion.append(triggerParams.get("TriggerDescription")
-                    .replace("CARDNAME", regtrig.getHostCard().getName()));
+            buildQuestion.append(triggerParams.get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName()));
             buildQuestion.append(")");
         }
         HashMap<String, Object> tos = sa.getTriggeringObjects();
@@ -443,9 +442,11 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public boolean getWillPlayOnFirstTurn(boolean isFirstGame) {
-        InputPlayOrDraw inp = new InputPlayOrDraw(player, isFirstGame);
+        String prompt = String.format("%s, you %s\n\nWould you like to play or draw?", 
+                player.getName(), isFirstGame ? " have won the coin toss." : " lost the last game."); 
+        InputConfirm inp = new InputConfirm(prompt, "Play", "Draw");
         inp.showAndWait();
-        return inp.isPlayingFirst();
+        return inp.getResult();
     }
 
     @Override
@@ -643,8 +644,11 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#chooseSomeType(java.lang.String, java.lang.String, java.util.List, java.util.List, java.lang.String)
      */
     @Override
-    public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes) {
-        return GuiChoose.one("Choose a " + kindOfType.toLowerCase() + " type", validTypes);
+    public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional) {
+        if(isOptional)
+            return GuiChoose.oneOrNone("Choose a " + kindOfType.toLowerCase() + " type", validTypes);
+        else
+            return GuiChoose.one("Choose a " + kindOfType.toLowerCase() + " type", validTypes);
     }
 
     /* (non-Javadoc)

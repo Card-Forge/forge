@@ -24,7 +24,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.input.InputConfirm;
 
 /**
  * The Class CostChooseCreatureType.
@@ -63,14 +62,11 @@ public class CostChooseCreatureType extends CostPart {
     @Override
     public final boolean payHuman(final SpellAbility ability, final Player payer) {
         final Card source = ability.getSourceCard();
-        InputConfirm inp = new InputConfirm("Choose a creature type for " + source.getName() + "?");
-        inp.showAndWait();
-        if (!inp.getResult()) {
-            return false;
-        }
 
-    	String choice = payer.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>());
-		source.setChosenType(choice);
+        String choice = payer.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>(), true);
+        if( null == choice )
+            return false;
+        source.setChosenType(choice);
         return true;
     }
 

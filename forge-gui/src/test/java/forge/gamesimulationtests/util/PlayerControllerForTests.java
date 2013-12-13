@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -84,12 +83,6 @@ public class PlayerControllerForTests extends PlayerController {
 
 	public Game getGame() {
 		return game;
-	}
-
-	@Override
-	public SpellAbility getAbilityToPlay(List<SpellAbility> abilities) {
-		System.out.println("getAbilityToPlay " + StringUtils.join(abilities, ", "));
-		return null;
 	}
 
 	@Override
@@ -444,7 +437,7 @@ public class PlayerControllerForTests extends PlayerController {
 
 
 	@Override
-	public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes) {
+	public String chooseSomeType(String kindOfType, SpellAbility sa, List<String> validTypes, List<String> invalidTypes, boolean isOptional) {
 		return chooseItem(validTypes);
 	}
 

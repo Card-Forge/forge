@@ -40,10 +40,6 @@ public class InputConfirm extends InputSyncronizedBase {
         this(message0, "Yes", "No", true);
     }
 
-    public InputConfirm(String message0, boolean defaultYes0) {
-        this(message0, "Yes", "No", defaultYes0);
-    }
-
     public InputConfirm(String message0, String yesButtonText0, String noButtonText0) {
         this(message0, yesButtonText0, noButtonText0, true);
     }
