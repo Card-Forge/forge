@@ -54,12 +54,12 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 import forge.gui.input.InputPayMana;
 import forge.gui.input.InputPayManaExecuteCommands;
 import forge.gui.input.InputPayManaSimple;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
+import forge.gui.input.InputYesOrNo;
 import forge.util.Lang;
 
 /** 
@@ -300,15 +300,18 @@ public class HumanPlay {
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
         }
-        final String orString = prompt != null ? "" : " (or: " + sourceAbility.getStackDescription() + ")";
+        String orString = prompt == null ? sourceAbility.getStackDescription().trim() : "";
+        if (!orString.isEmpty()) {
+            orString = " (or: " + orString + ")";
+        }
 
         if (parts.isEmpty() || (costPart.getAmount().equals("0") && parts.size() < 2)) {
-            return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
+            return InputYesOrNo.ask("Do you want to pay {0}?" + orString);
         }
         // 0 mana costs were slipping through because CostPart.getAmount returns 1
         else if (costPart instanceof CostPartMana && parts.size() < 2) {
             if (((CostPartMana) costPart).getManaToPay().isZero()) {
-                return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
+                return InputYesOrNo.ask("Do you want to pay {0}?" + orString);
             }
         }
 
@@ -318,11 +321,13 @@ public class HumanPlay {
 
             if (part instanceof CostPayLife) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!p.canPayLife(amount))
+                if (!p.canPayLife(amount)) {
                     return false;
+                }
 
-                if (false == GuiDialog.confirm(source, "Do you want to pay " + amount + " life?" + orString))
+                if (!InputYesOrNo.ask("Do you want to pay " + amount + " life?" + orString)) {
                     return false;
+                }
 
                 p.payLife(amount, null);
             }
@@ -345,9 +350,13 @@ public class HumanPlay {
                 sb.append("Do you want to ");
                 sb.append(res.contains(p) ? "" : "let that player ");
                 sb.append("draw " + amount);
-                sb.append(" card(s)?" + orString);
+                sb.append(" card");
+                if (amount != 1) {
+                    sb.append("s");
+                }
+                sb.append("?" + orString);
 
-                if (!GuiDialog.confirm(source, sb.toString())) {
+                if (!InputYesOrNo.ask(sb.toString())) {
                     return false;
                 }
 
@@ -361,7 +370,7 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostAddMana) {
-                if (!GuiDialog.confirm(source, "Do you want to add "
+                if (!InputYesOrNo.ask("Do you want to add "
                         + ((CostAddMana) part).toString()
                         + " to your mana pool?" + orString)) {
                     return false;
@@ -374,7 +383,8 @@ public class HumanPlay {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
                 final List<Card> list = p.getCardsIn(ZoneType.Library);
                 if (list.size() < amount) { return false; }
-                if (!GuiDialog.confirm(source, "Do you want to mill " + amount + " card(s)?" + orString)) {
+                if (!InputYesOrNo.ask("Do you want to mill " + amount +
+                        " card" + (amount == 1 ? "" : "s") + "?" + orString)) {
                     return false;
                 }
                 List<Card> listmill = p.getCardsIn(ZoneType.Library, amount);
@@ -382,7 +392,8 @@ public class HumanPlay {
             }
             else if (part instanceof CostFlipCoin) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!GuiDialog.confirm(source, "Do you want to flip " + amount + " coin(s)?" + orString)) {
+                if (!InputYesOrNo.ask("Do you want to flip " + amount +
+                        " coin" + (amount == 1 ? "" : "s") + "?" + orString)) {
                     return false;
                 }
                 final int n = FlipCoinEffect.getFilpMultiplier(p);
@@ -396,7 +407,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (false == GuiDialog.confirm(source, "Do you want " + source + " to deal " + amount + " damage to you?")) {
+                if (!InputYesOrNo.ask("Do you want " + source + " to deal " + amount + " damage to you?")) {
                     return false;
                 }
 
@@ -412,7 +423,7 @@ public class HumanPlay {
                         return false;
                     }
 
-                    if (!GuiDialog.confirm(source, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + source + "?")) {
+                    if (!InputYesOrNo.ask("Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + source + "?")) {
                         return false;
                     }
 
@@ -422,12 +433,12 @@ public class HumanPlay {
                     List<Card> list = p.getGame().getCardsIn(ZoneType.Battlefield);
                     list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
                     if (list.isEmpty()) { return false; }
-                    if (!GuiDialog.confirm(source, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?")) {
+                    if (!InputYesOrNo.ask("Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?")) {
                         return false;
                     }
                     while (amount > 0) {
                         InputSelectCards inp = new InputSelectCardsFromList(1, 1, list);
-                        inp.setMessage("Select a card to add a counter");
+                        inp.setMessage("Select a card to add a counter to");
                         inp.setCancelAllowed(true);
                         Singletons.getControl().getInputQueue().setInputAndWait(inp);
                         if (inp.hasCancelled()) {
@@ -447,7 +458,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (false == GuiDialog.confirm(source, "Do you want to remove " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " from " + source + "?")) {
+                if (!InputYesOrNo.ask("Do you want to remove " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " from " + source + "?")) {
                     return false;
                 }
 
@@ -463,8 +474,8 @@ public class HumanPlay {
                         allCounters += value;
                     }
                 }
-                if (allCounters < amount) return false;
-                if (!GuiDialog.confirm(source, "Do you want to remove counters from " + part.getDescriptiveType() + " ?")) {
+                if (allCounters < amount) { return false; }
+                if (!InputYesOrNo.ask("Do you want to remove counters from " + part.getDescriptiveType() + " ?")) {
                     return false;
                 }
 
@@ -506,7 +517,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostExile) {
                 if ("All".equals(part.getType())) {
-                    if (false == GuiDialog.confirm(source, "Do you want to exile all cards in your graveyard?")) {
+                    if (!InputYesOrNo.ask("Do you want to exile all cards in your graveyard?")) {
                         return false;
                     }
 
@@ -524,7 +535,8 @@ public class HumanPlay {
                         return false;
                     }
                     if (from == ZoneType.Library) {
-                        if (!GuiDialog.confirm(source, "Do you want to exile card(s) from you library?")) {
+                        if (!InputYesOrNo.ask("Do you want to exile " + nNeeded +
+                                " card" + (nNeeded == 1 ? "" : "s") + " from your library?")) {
                             return false;
                         }
                         list = list.subList(0, nNeeded);
