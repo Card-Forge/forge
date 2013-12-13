@@ -18,6 +18,7 @@ You will no longer be prompted when using a "Add one of any color" ability to pa
 	- Note: you'll still be prompted when paying Sunburst or cards that care what colors are spent to cast it (ex. Firespout)
 You can now press Escape to Cancel the current prompt even if the OK button has focus.
 Cards will now return to the same position in your hand if you cancel while paying their mana cost or choosing targets.
+Triggered abilities now use Prompt pane for Yes/No confirmation instead of a dialog
 You'll no longer be prompted for attackers if you have no creatures that can attack.
 You'll no longer be prompted for blockers if you have no creatures that can block any attacking creature.
 

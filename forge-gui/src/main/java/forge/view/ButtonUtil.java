@@ -57,6 +57,11 @@ public class ButtonUtil {
         enableAndFocus(getOk());
         getCancel().setEnabled(true);
     }
+    
+    public static void enableAllFocusCancel() {
+        getOk().setEnabled(true);
+        enableAndFocus(getCancel());
+    }
 
     private static void enableAndFocus(final JButton button) {
         button.setEnabled(true);

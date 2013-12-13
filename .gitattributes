@@ -15382,6 +15382,7 @@ forge-gui/src/main/java/forge/gui/input/InputSelectManyBase.java -text
 forge-gui/src/main/java/forge/gui/input/InputSelectTargets.java -text
 forge-gui/src/main/java/forge/gui/input/InputSynchronized.java -text
 forge-gui/src/main/java/forge/gui/input/InputSyncronizedBase.java -text
+forge-gui/src/main/java/forge/gui/input/InputYesOrNo.java -text
 forge-gui/src/main/java/forge/gui/input/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/match/CMatchUI.java -text
 forge-gui/src/main/java/forge/gui/match/ControlWinLose.java -text

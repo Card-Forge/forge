@@ -62,6 +62,7 @@ import forge.gui.input.InputPassPriority;
 import forge.gui.input.InputPlayOrDraw;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
+import forge.gui.input.InputYesOrNo;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CPrompt;
 import forge.gui.toolbox.FSkin;
@@ -412,26 +413,31 @@ public class PlayerControllerHuman extends PlayerController {
         if (this.shouldAlwaysDeclineTrigger(regtrig.getId())) {
             return false;
         }
-        
-        String triggerDesc = triggerParams.get("TriggerDescription").replace("CARDNAME", regtrig.getHostCard().getName());
+
         final StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
         buildQuestion.append(regtrig.getHostCard().toString()).append("?");
-        buildQuestion.append("\r\n(").append(triggerDesc).append(")\r\n");
+        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_COMPACT_PROMPT)) {
+            //append trigger description unless prompt is compact
+            buildQuestion.append("\n(");
+            buildQuestion.append(triggerParams.get("TriggerDescription")
+                    .replace("CARDNAME", regtrig.getHostCard().getName()));
+            buildQuestion.append(")");
+        }
         HashMap<String, Object> tos = sa.getTriggeringObjects();
         if (tos.containsKey("Attacker")) {
-            buildQuestion.append("[Attacker: " + tos.get("Attacker") + "]");
+            buildQuestion.append("\nAttacker: " + tos.get("Attacker"));
         }
         if (tos.containsKey("Card")) {
             Card card = (Card) tos.get("Card");
-            if (card != null && (card.getController() == player || game.getZoneOf(card) == null 
+            if (card != null && (card.getController() == player || game.getZoneOf(card) == null
                     || game.getZoneOf(card).getZoneType().isKnown())) {
-                buildQuestion.append("[Triggering card: " + tos.get("Card") + "]");
+                buildQuestion.append("\nTriggered by: " + tos.get("Card"));
             }
         }
-        if (!GuiDialog.confirm(regtrig.getHostCard(), buildQuestion.toString())) {
-            return false;
-        }
-        return true;
+
+        InputYesOrNo inp = new InputYesOrNo(buildQuestion.toString());
+        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        return inp.getResult();
     }
 
     @Override
