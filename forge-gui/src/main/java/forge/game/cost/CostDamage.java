@@ -17,12 +17,10 @@
  */
 package forge.game.cost;
 
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostPayLife.
@@ -76,9 +74,8 @@ public class CostDamage extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
-        final Player activator = ability.getActivatingPlayer();
         final int life = activator.getLife();
         final Card source = ability.getSourceCard();
 
@@ -94,7 +91,7 @@ public class CostDamage extends CostPart {
             }
         }
 
-        if (activator.canPayLife(c) && InputYesOrNo.ask("Pay " + c + " Life?")) {
+        if (activator.canPayLife(c) && activator.getController().confirmPayment(this, "Pay " + c + " Life?")) {
             activator.addDamage(c, source);
             return true;
         }

@@ -21,6 +21,7 @@ import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementEffect;
@@ -188,4 +189,6 @@ public abstract class PlayerController {
     public abstract PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
     public abstract CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt);
+
+    public abstract boolean confirmPayment(CostPart costPart, String string);
 }

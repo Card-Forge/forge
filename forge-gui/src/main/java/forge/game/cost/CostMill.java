@@ -19,14 +19,12 @@ package forge.game.cost;
 
 import java.util.List;
 
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputYesOrNo;
 
 /**
  * This is for the "Mill" Cost. Putting cards from the top of your library into
@@ -88,11 +86,11 @@ public class CostMill extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Card source = ability.getSourceCard();
-        final Player activator = ability.getActivatingPlayer();
+
 
         if (c == null) {
             final String sVar = ability.getSVar(amount);
@@ -104,7 +102,7 @@ public class CostMill extends CostPartWithList {
             }
         }
 
-        if (!InputYesOrNo.ask("Mill " + c + " card" + (c == 1 ? "" : "s") + " from your library?")) {
+        if (!activator.getController().confirmPayment(this, "Mill " + c + " card" + (c == 1 ? "" : "s") + " from your library?")) {
             return false;
         }
 

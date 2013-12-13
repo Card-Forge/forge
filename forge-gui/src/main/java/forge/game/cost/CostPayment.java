@@ -104,9 +104,9 @@ public class CostPayment {
      * 
      * @return a boolean.
      */
-    public boolean payCost(final Game game) {
+    public boolean payCost(final Player payer) {
         for (final CostPart part : this.cost.getCostParts()) {
-            if ( false == part.payHuman(this.ability, game) ) {
+            if ( false == part.payHuman(this.ability, payer) ) {
                 return false;
             }
             

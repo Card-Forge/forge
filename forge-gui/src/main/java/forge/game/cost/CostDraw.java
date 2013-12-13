@@ -20,12 +20,10 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostPayLife.
@@ -104,9 +102,9 @@ public class CostDraw extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player payer) {
         final String amount = this.getAmount();
-        final List<Player> players = getPotentialPlayers(ability.getActivatingPlayer(), ability.getSourceCard());
+        final List<Player> players = getPotentialPlayers(payer, ability.getSourceCard());
         final Card source = ability.getSourceCard();
 
         Integer c = this.convertAmount();
@@ -114,7 +112,7 @@ public class CostDraw extends CostPart {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        if (!InputYesOrNo.ask("Draw " + c + " Card" + (c == 1 ? "" : "s"))) {
+        if (!payer.getController().confirmPayment(this, "Draw " + c + " Card" + (c == 1 ? "" : "s"))) {
             return false;
         }
 

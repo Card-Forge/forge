@@ -22,7 +22,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -121,8 +120,7 @@ public class CostAddMana extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         if (c == null) {

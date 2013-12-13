@@ -58,7 +58,6 @@ import forge.gui.input.InputPayManaExecuteCommands;
 import forge.gui.input.InputPayManaSimple;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
-import forge.gui.input.InputYesOrNo;
 import forge.util.Lang;
 
 /** 
@@ -305,12 +304,12 @@ public class HumanPlay {
         }
 
         if (parts.isEmpty() || (costPart.getAmount().equals("0") && parts.size() < 2)) {
-            return InputYesOrNo.ask("Do you want to pay {0}?" + orString);
+            return p.getController().confirmPayment(costPart, "Do you want to pay {0}?" + orString);
         }
         // 0 mana costs were slipping through because CostPart.getAmount returns 1
         else if (costPart instanceof CostPartMana && parts.size() < 2) {
             if (((CostPartMana) costPart).getManaToPay().isZero()) {
-                return InputYesOrNo.ask("Do you want to pay {0}?" + orString);
+                return p.getController().confirmPayment(costPart, "Do you want to pay {0}?" + orString);
             }
         }
 
@@ -324,7 +323,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!InputYesOrNo.ask("Do you want to pay " + amount + " life?" + orString)) {
+                if (!p.getController().confirmPayment(part, "Do you want to pay " + amount + " life?" + orString)) {
                     return false;
                 }
 
@@ -355,7 +354,7 @@ public class HumanPlay {
                 }
                 sb.append("?" + orString);
 
-                if (!InputYesOrNo.ask(sb.toString())) {
+                if (!p.getController().confirmPayment(part,sb.toString())) {
                     return false;
                 }
 
@@ -364,17 +363,15 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostGainLife) {
-                if (!part.payHuman(sourceAbility, p.getGame())) {
+                if (!part.payHuman(sourceAbility, p)) {
                     return false;
                 }
             }
             else if (part instanceof CostAddMana) {
-                if (!InputYesOrNo.ask("Do you want to add "
-                        + ((CostAddMana) part).toString()
-                        + " to your mana pool?" + orString)) {
+                if (!p.getController().confirmPayment(part, "Do you want to add " + ((CostAddMana) part).toString() + " to your mana pool?" + orString)) {
                     return false;
                 }
-                if (!part.payHuman(sourceAbility, p.getGame())) {
+                if (!part.payHuman(sourceAbility, p)) {
                     return false;
                 }
             }
@@ -382,8 +379,7 @@ public class HumanPlay {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
                 final List<Card> list = p.getCardsIn(ZoneType.Library);
                 if (list.size() < amount) { return false; }
-                if (!InputYesOrNo.ask("Do you want to mill " + amount +
-                        " card" + (amount == 1 ? "" : "s") + "?" + orString)) {
+                if (!p.getController().confirmPayment(part, "Do you want to mill " + amount + " card" + (amount == 1 ? "" : "s") + "?" + orString)) {
                     return false;
                 }
                 List<Card> listmill = p.getCardsIn(ZoneType.Library, amount);
@@ -391,8 +387,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostFlipCoin) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!InputYesOrNo.ask("Do you want to flip " + amount +
-                        " coin" + (amount == 1 ? "" : "s") + "?" + orString)) {
+                if (!p.getController().confirmPayment(part, "Do you want to flip " + amount + " coin" + (amount == 1 ? "" : "s") + "?" + orString)) {
                     return false;
                 }
                 final int n = FlipCoinEffect.getFilpMultiplier(p);
@@ -406,7 +401,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!InputYesOrNo.ask("Do you want " + source + " to deal " + amount + " damage to you?")) {
+                if (!p.getController().confirmPayment(part, "Do you want " + source + " to deal " + amount + " damage to you?")) {
                     return false;
                 }
 
@@ -422,7 +417,7 @@ public class HumanPlay {
                         return false;
                     }
 
-                    if (!InputYesOrNo.ask("Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + source + "?")) {
+                    if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + source + "?")) {
                         return false;
                     }
 
@@ -432,7 +427,7 @@ public class HumanPlay {
                     List<Card> list = p.getGame().getCardsIn(ZoneType.Battlefield);
                     list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
                     if (list.isEmpty()) { return false; }
-                    if (!InputYesOrNo.ask("Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?")) {
+                    if (!p.getController().confirmPayment(part, "Do you want to put " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " on " + part.getTypeDescription() + "?")) {
                         return false;
                     }
                     while (amount > 0) {
@@ -457,7 +452,7 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!InputYesOrNo.ask("Do you want to remove " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " from " + source + "?")) {
+                if (!p.getController().confirmPayment(part, "Do you want to remove " + Lang.nounWithAmount(amount, counterType.getName() + " counter") + " from " + source + "?")) {
                     return false;
                 }
 
@@ -474,7 +469,7 @@ public class HumanPlay {
                     }
                 }
                 if (allCounters < amount) { return false; }
-                if (!InputYesOrNo.ask("Do you want to remove counters from " + part.getDescriptiveType() + " ?")) {
+                if (!p.getController().confirmPayment(part, "Do you want to remove counters from " + part.getDescriptiveType() + " ?")) {
                     return false;
                 }
 
@@ -516,7 +511,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostExile) {
                 if ("All".equals(part.getType())) {
-                    if (!InputYesOrNo.ask("Do you want to exile all cards in your graveyard?")) {
+                    if (!p.getController().confirmPayment(part, "Do you want to exile all cards in your graveyard?")) {
                         return false;
                     }
 
@@ -534,7 +529,7 @@ public class HumanPlay {
                         return false;
                     }
                     if (from == ZoneType.Library) {
-                        if (!InputYesOrNo.ask("Do you want to exile " + nNeeded +
+                        if (!p.getController().confirmPayment(part, "Do you want to exile " + nNeeded +
                                 " card" + (nNeeded == 1 ? "" : "s") + " from your library?")) {
                             return false;
                         }

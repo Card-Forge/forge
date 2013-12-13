@@ -52,8 +52,9 @@ public class HumanPlaySpellAbility {
     }
 
     public final void playAbility(boolean mayChooseTargets, boolean isFree, boolean skipStack) {
+        final Player human = ability.getActivatingPlayer();
         final Game game = ability.getActivatingPlayer().getGame();
-
+        
         // used to rollback
         Zone fromZone = null;
         int zonePosition = 0;
@@ -73,7 +74,7 @@ public class HumanPlaySpellAbility {
         boolean prerequisitesMet = this.announceValuesLikeX()
                 && this.announceType()
                 && (!mayChooseTargets || setupTargets()) // if you can choose targets, then do choose them.
-                && (isFree || this.payment.payCost(game));
+                && (isFree || this.payment.payCost(human));
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {

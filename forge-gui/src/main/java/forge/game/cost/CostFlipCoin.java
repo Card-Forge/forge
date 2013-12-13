@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.FlipCoinEffect;
 import forge.game.card.Card;
@@ -67,7 +66,7 @@ public class CostFlipCoin extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Card source = ability.getSourceCard();

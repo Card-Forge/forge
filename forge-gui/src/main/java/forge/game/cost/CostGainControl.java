@@ -19,7 +19,6 @@ package forge.game.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -94,20 +93,19 @@ public class CostGainControl extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player payer) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
-        Integer c = this.convertAmount();
-        final Player activator = ability.getActivatingPlayer();
-        final List<Card> list = activator.getGame().getCardsIn(ZoneType.Battlefield);
-        final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
 
+        Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
-        List<Card> validCards = CardLists.getValidCards(list, this.getType().split(";"), activator, source);
+        final List<Card> list = payer.getCardsIn(ZoneType.Battlefield);
+        List<Card> validCards = CardLists.getValidCards(list, this.getType().split(";"), payer, source);
 
         InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
+        final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
         inp.setMessage("Gain control of %d " + desc);
         inp.showAndWait();
         if (inp.hasCancelled()) {

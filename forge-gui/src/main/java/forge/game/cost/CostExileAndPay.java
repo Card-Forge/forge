@@ -5,7 +5,6 @@ import java.util.List;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
-import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -93,8 +92,8 @@ public class CostExileAndPay extends CostPartWithList {
      * @see forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility, forge.game.GameState)
      */
     @Override
-    public boolean payHuman(SpellAbility ability, Game game) {
-        List<Card> validGrave = CardLists.getValidCards(ability.getActivatingPlayer().getZone(ZoneType.Graveyard), "Creature", ability.getActivatingPlayer(), ability.getSourceCard());
+    public boolean payHuman(SpellAbility ability, Player payer) {
+        List<Card> validGrave = CardLists.getValidCards(payer.getZone(ZoneType.Graveyard), "Creature", payer, ability.getSourceCard());
         
         Card selectedCard = GuiChoose.oneOrNone("Choose a creature card to exile.", validGrave);
         if(selectedCard == null)
@@ -127,7 +126,7 @@ public class CostExileAndPay extends CostPartWithList {
         }
         
         final CostPayment pay = new CostPayment(selectedCost, ability);
-        pay.payCost(game);
+        pay.payCost(payer);
         if(!pay.isFullyPaid())
         {
             return false;

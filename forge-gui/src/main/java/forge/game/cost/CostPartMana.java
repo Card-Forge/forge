@@ -21,7 +21,6 @@ import forge.ai.ComputerUtilMana;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
@@ -106,7 +105,7 @@ public class CostPartMana extends CostPart {
     }
 
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(getManaToPay(), restriction);
 
@@ -161,7 +160,7 @@ public class CostPartMana extends CostPart {
             System.out.println("Finishing up Offering");
             final Card offering = ability.getSacrificedAsOffering();
             offering.setUsedToPay(false);
-            game.getAction().sacrifice(offering, ability);
+            activator.getGame().getAction().sacrifice(offering, ability);
             ability.resetSacrificedAsOffering();
         }
         if (ability.getTappedForConvoke() != null) {

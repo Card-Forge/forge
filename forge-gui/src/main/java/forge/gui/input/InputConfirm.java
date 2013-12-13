@@ -27,23 +27,8 @@ import forge.view.ButtonUtil;
   * @author Forge
   * @version $Id: InputConfirmMulligan.java 21647 2013-05-24 22:31:11Z Max mtg $
   */
-public class InputYesOrNo extends InputSyncronizedBase {
+public class InputConfirm extends InputSyncronizedBase {
     private static final long serialVersionUID = -3591794991788531626L;
-
-    public static boolean ask(String message0) {
-        return ask(message0, "Yes", "No", true);
-    }
-    public static boolean ask(String message0, boolean defaultYes0) {
-        return ask(message0, "Yes", "No", defaultYes0);
-    }
-    public static boolean ask(String message0, String yesButtonText0, String noButtonText0) {
-        return ask(message0, yesButtonText0, noButtonText0, true);
-    }
-    public static boolean ask(String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
-        InputYesOrNo inp = new InputYesOrNo(message0, yesButtonText0, noButtonText0, defaultYes0);
-        inp.showAndWait();
-        return inp.getResult();
-    }
 
     private final String message;
     private final String yesButtonText;
@@ -51,19 +36,19 @@ public class InputYesOrNo extends InputSyncronizedBase {
     private final boolean defaultYes;
     private boolean result;
 
-    public InputYesOrNo(String message0) {
+    public InputConfirm(String message0) {
         this(message0, "Yes", "No", true);
     }
 
-    public InputYesOrNo(String message0, boolean defaultYes0) {
+    public InputConfirm(String message0, boolean defaultYes0) {
         this(message0, "Yes", "No", defaultYes0);
     }
 
-    public InputYesOrNo(String message0, String yesButtonText0, String noButtonText0) {
+    public InputConfirm(String message0, String yesButtonText0, String noButtonText0) {
         this(message0, yesButtonText0, noButtonText0, true);
     }
 
-    public InputYesOrNo(String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
+    public InputConfirm(String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
         this.message = message0;
         this.yesButtonText = yesButtonText0;
         this.noButtonText = noButtonText0;
@@ -73,7 +58,7 @@ public class InputYesOrNo extends InputSyncronizedBase {
 
     /** {@inheritDoc} */
     @Override
-    public final void showMessage() {
+    protected final void showMessage() {
         ButtonUtil.setButtonText(this.yesButtonText, this.noButtonText);
         if (this.defaultYes) {
             ButtonUtil.enableAllFocusOk();

@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -84,7 +83,7 @@ public class CostUntap extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         // if (!canPay(ability, source, ability.getActivatingPlayer(),
         // payment.getCost()))
         // return false;

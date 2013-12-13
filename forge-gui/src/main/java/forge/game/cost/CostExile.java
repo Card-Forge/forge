@@ -35,7 +35,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
-import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostExile.
@@ -214,10 +213,10 @@ public class CostExile extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
-        final Player activator = ability.getActivatingPlayer();
+        final Game game = activator.getGame(); 
 
         Integer c = this.convertAmount();
         String type = this.getType();
@@ -242,9 +241,9 @@ public class CostExile extends CostPartWithList {
         }
 
         if (this.payCostFromSource()) {
-            return source.getZone() == activator.getZone(from) &&
-                    InputYesOrNo.ask("Exile " + source.getName() + "?") &&
-                    executePayment(ability, source);
+            return source.getZone() == activator.getZone(from) 
+                    && activator.getController().confirmPayment(this, "Exile " + source.getName() + "?") 
+                    && executePayment(ability, source);
         }
 
         if (type.equals("All")) {
@@ -274,7 +273,7 @@ public class CostExile extends CostPartWithList {
         }
 
         if (this.from == ZoneType.Stack) { return exileFromStack(ability, c); }
-        if (this.from == ZoneType.Library) { return exileFromTop(ability, c); }
+        if (this.from == ZoneType.Library) { return exileFromTop(ability, activator, c); }
         if (fromTopGrave) { return exileFromTopGraveType(ability, c, list); }
         if (!this.sameZone) { return exileFromMiscZone(ability, c, list); }
 
@@ -391,17 +390,17 @@ public class CostExile extends CostPartWithList {
         return true;
     }
 
-    private  boolean exileFromTop(final SpellAbility sa, final int nNeeded) {
+    private  boolean exileFromTop(final SpellAbility sa, final Player payer, final int nNeeded) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Exile ").append(nNeeded).append(" cards from the top of your library?");
-        final List<Card> list = sa.getActivatingPlayer().getCardsIn(ZoneType.Library, nNeeded);
+        final List<Card> list = payer.getCardsIn(ZoneType.Library, nNeeded);
 
         if (list.size() > nNeeded) {
             // I don't believe this is possible
             return false;
         }
 
-        if (!InputYesOrNo.ask("Exile " + nNeeded + " card" + (nNeeded == 1 ? "" : "s") +
+        if (!payer.getController().confirmPayment(this, "Exile " + nNeeded + " card" + (nNeeded == 1 ? "" : "s") +
                 " from the top of your library?")) {
             return false;
         }

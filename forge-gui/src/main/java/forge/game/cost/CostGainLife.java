@@ -20,7 +20,6 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -117,10 +116,10 @@ public class CostGainLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
         final String amount = this.getAmount();
-        final Player activator = ability.getActivatingPlayer();
+
         final int life = activator.getLife();
 
         Integer c = this.convertAmount();

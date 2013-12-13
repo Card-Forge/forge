@@ -19,12 +19,10 @@ package forge.game.cost;
 
 import java.util.List;
 
-import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostUnattach.
@@ -96,11 +94,11 @@ public class CostUnattach extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
-        Player activator = ability.getActivatingPlayer();
+        
         Card cardToUnattach = findCardToUnattach(source, activator, ability);
-        if (cardToUnattach != null && InputYesOrNo.ask("Unattach " + cardToUnattach.getName() + "?")) {
+        if (cardToUnattach != null && activator.getController().confirmPayment(this, "Unattach " + cardToUnattach.getName() + "?")) {
             return executePayment(ability, cardToUnattach);
         }
         return false;

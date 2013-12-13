@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.ai.ComputerUtil;
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -30,7 +29,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
-import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostReturn.
@@ -120,12 +118,12 @@ public class CostReturn extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player payer) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
-        final Player activator = ability.getActivatingPlayer();
-        final List<Card> list = activator.getCardsIn(ZoneType.Battlefield);
+
+        final List<Card> list = payer.getCardsIn(ZoneType.Battlefield);
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
@@ -137,8 +135,8 @@ public class CostReturn extends CostPartWithList {
         }
         if (this.payCostFromSource()) {
             final Card card = ability.getSourceCard();
-            if (card.getController() == ability.getActivatingPlayer() && card.isInPlay()) {
-                return InputYesOrNo.ask("Return " + card.getName() + " to hand?") && executePayment(ability, card);
+            if (card.getController() == payer && card.isInPlay()) {
+                return payer.getController().confirmPayment(this, "Return " + card.getName() + " to hand?") && executePayment(ability, card);
             }
         }
         else {

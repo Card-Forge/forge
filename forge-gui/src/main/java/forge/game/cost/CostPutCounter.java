@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.ai.ComputerUtilCard;
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -254,7 +253,7 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
         Integer c = getNumberOfCounters(ability);
 
@@ -264,8 +263,8 @@ public class CostPutCounter extends CostPartWithList {
             return true;
         } else {
             // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter 
-            final Player actor = ability.getActivatingPlayer();
-            List<Card> typeList = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), getType().split(";"), actor, ability.getSourceCard());
+
+            List<Card> typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), getType().split(";"), activator, ability.getSourceCard());
             
             InputSelectCardToPutCounter inp = new InputSelectCardToPutCounter(c, typeList);
             inp.setMessage("Put %d " + getCounter().getName() + " counter on " + getDescriptiveType());

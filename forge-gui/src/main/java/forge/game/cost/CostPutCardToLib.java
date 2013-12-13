@@ -207,16 +207,15 @@ public class CostPutCardToLib extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Card source = ability.getSourceCard();
-        final Player activator = ability.getActivatingPlayer();
         
         List<Card> list;
 
         if (this.sameZone) {
-            list = new ArrayList<Card>(game.getCardsIn(this.getFrom()));
+            list = new ArrayList<Card>(activator.getGame().getCardsIn(this.getFrom()));
         } else {
             list = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
         }
@@ -242,7 +241,7 @@ public class CostPutCardToLib extends CostPartWithList {
         }
         
         if (this.sameZone){
-            List<Player> players = game.getPlayers();
+            List<Player> players = activator.getGame().getPlayers();
             List<Player> payableZone = new ArrayList<Player>();
             for (Player p : players) {
                 List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(p));

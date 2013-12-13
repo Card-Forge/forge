@@ -38,6 +38,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.mana.Mana;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.Ability;
@@ -573,5 +574,10 @@ public class PlayerControllerAi extends PlayerController {
         // an initial target
         // find first nonzero counter on target
         return Iterables.getFirst(options, null);
+    }
+
+    @Override
+    public boolean confirmPayment(CostPart costPart, String prompt) {
+        return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method) 
     }
 }

@@ -22,7 +22,6 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.ai.AiController;
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -162,11 +161,10 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean payHuman(final SpellAbility ability, final Player payer) {
         final Card source = ability.getSourceCard();
 
-        List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
+        List<Card> handList = new ArrayList<Card>(payer.getCardsIn(ZoneType.Hand));
         String discardType = this.getType();
         final String amount = this.getAmount();
 
@@ -179,7 +177,7 @@ public class CostDiscard extends CostPartWithList {
         }
 
         if (discardType.equals("LastDrawn")) {
-            final Card lastDrawn = activator.getLastDrawnCard();
+            final Card lastDrawn = payer.getLastDrawnCard();
             return handList.contains(lastDrawn) && executePayment(ability, lastDrawn);
         }
 
@@ -201,7 +199,7 @@ public class CostDiscard extends CostPartWithList {
         }
         if (discardType.contains("+WithSameName")) {
             String type = discardType.replace("+WithSameName", "");
-            handList = CardLists.getValidCards(handList, type.split(";"), activator, source);
+            handList = CardLists.getValidCards(handList, type.split(";"), payer, source);
             final List<Card> landList2 = handList;
             handList = CardLists.filter(handList, new Predicate<Card>() {
                 @Override
@@ -235,7 +233,7 @@ public class CostDiscard extends CostPartWithList {
         else {
             String type = new String(discardType);
             final String[] validType = type.split(";");
-            handList = CardLists.getValidCards(handList, validType, activator, source);
+            handList = CardLists.getValidCards(handList, validType, payer, source);
 
             if (c == null) {
                 final String sVar = ability.getSVar(amount);

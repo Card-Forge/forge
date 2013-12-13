@@ -910,5 +910,9 @@ public class AiController {
         }
         return max;
     }
+
+    public boolean confirmPayment(CostPart costPart) {
+        throw new UnsupportedOperationException("AI is not supposed to reach this code at the moment");
+    }
 }
 

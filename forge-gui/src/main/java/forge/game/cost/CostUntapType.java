@@ -19,7 +19,6 @@ package forge.game.cost;
 
 import java.util.List;
 import forge.ai.ComputerUtil;
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -131,9 +130,9 @@ public class CostUntapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
-        List<Card> typeList = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), this.getType().split(";"),
-                ability.getActivatingPlayer(), ability.getSourceCard());
+    public final boolean payHuman(final SpellAbility ability, final Player payer) {
+        List<Card> typeList = CardLists.getValidCards(payer.getGame().getCardsIn(ZoneType.Battlefield), this.getType().split(";"),
+                payer, ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.TAPPED);
         final Card source = ability.getSourceCard();
         if (!canUntapSource) {

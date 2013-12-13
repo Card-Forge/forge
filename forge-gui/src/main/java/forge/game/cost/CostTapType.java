@@ -23,7 +23,6 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtil;
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -172,8 +171,8 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
-        List<Card> typeList = new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+        List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
         String type = this.getType();
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
@@ -193,7 +192,7 @@ public class CostTapType extends CostPartWithList {
             type = type.replace("+withTotalPowerGE" + totalP, "");
         }
 
-        typeList = CardLists.getValidCards(typeList, type.split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+        typeList = CardLists.getValidCards(typeList, type.split(";"), activator, ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
         if (c == null && !amount.equals("Any")) {
             final String sVar = ability.getSVar(amount);

@@ -20,12 +20,11 @@ package forge.game.cost;
 import java.util.ArrayList;
 
 import forge.card.CardType;
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.input.InputYesOrNo;
+import forge.gui.input.InputConfirm;
 
 /**
  * The Class CostChooseCreatureType.
@@ -62,15 +61,15 @@ public class CostChooseCreatureType extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean payHuman(final SpellAbility ability, final Player payer) {
         final Card source = ability.getSourceCard();
-
-        if (!InputYesOrNo.ask("Choose a creature type for " + source.getName() + "?")) {
+        InputConfirm inp = new InputConfirm("Choose a creature type for " + source.getName() + "?");
+        inp.showAndWait();
+        if (!inp.getResult()) {
             return false;
         }
 
-    	String choice = activator.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>());
+    	String choice = payer.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>());
 		source.setChosenType(choice);
         return true;
     }

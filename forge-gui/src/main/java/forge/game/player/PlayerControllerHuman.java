@@ -41,6 +41,7 @@ import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementEffect;
@@ -62,7 +63,7 @@ import forge.gui.input.InputPassPriority;
 import forge.gui.input.InputPlayOrDraw;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
-import forge.gui.input.InputYesOrNo;
+import forge.gui.input.InputConfirm;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CPrompt;
 import forge.gui.toolbox.FSkin;
@@ -435,7 +436,9 @@ public class PlayerControllerHuman extends PlayerController {
             }
         }
 
-        return InputYesOrNo.ask(buildQuestion.toString());
+        InputConfirm inp = new InputConfirm(buildQuestion.toString());
+        inp.showAndWait();
+        return inp.getResult();
     }
 
     @Override
@@ -923,5 +926,12 @@ public class PlayerControllerHuman extends PlayerController {
             return Iterables.getFirst(options, null);
         }
         return GuiChoose.one(prompt, options);
+    }
+
+    @Override
+    public boolean confirmPayment(CostPart costPart, String question) {
+        InputConfirm inp = new InputConfirm(question);
+        inp.showAndWait();
+        return inp.getResult();
     }
 }

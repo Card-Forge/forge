@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.ai.ComputerUtil;
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -30,7 +29,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
-import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostSacrifice.
@@ -129,11 +127,11 @@ public class CostSacrifice extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         final String type = this.getType();
-        final Player activator = ability.getActivatingPlayer();
+
         List<Card> list = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
         list = CardLists.getValidCards(list, type.split(";"), activator, source);
         if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
@@ -142,7 +140,7 @@ public class CostSacrifice extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
-                return InputYesOrNo.ask("Sacrifice " + source.getName() + "?") && executePayment(ability, source);
+                return activator.getController().confirmPayment(this, "Sacrifice " + source.getName() + "?") && executePayment(ability, source);
             }
         }
         else if (amount.equals("All")) {

@@ -24,7 +24,6 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -116,12 +115,11 @@ public class CostRemoveCounter extends CostPartWithList {
     }
 
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         final String type = this.getType();
-        final Player activator = ability.getActivatingPlayer();
 
         String sVarAmount = ability.getSVar(amount);
         cntRemoved = 1;

@@ -23,7 +23,6 @@ import java.util.Map;
 
 import com.google.common.base.Predicate;
 import forge.ai.ComputerUtil;
-import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -109,11 +108,10 @@ public class CostRemoveAnyCounter extends CostPartWithList {
     }
 
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Game game) {
+    public final boolean payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         final String type = this.getType();
-        final Player activator = ability.getActivatingPlayer();
 
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);

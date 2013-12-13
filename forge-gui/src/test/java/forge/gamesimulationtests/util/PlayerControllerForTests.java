@@ -30,6 +30,7 @@ import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
 import forge.game.mana.Mana;
 import forge.game.player.HumanPlay;
 import forge.game.player.LobbyPlayer;
@@ -460,5 +461,10 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt) {
         return Iterables.getFirst(options, CounterType.P1P1);
+    }
+
+    @Override
+    public boolean confirmPayment(CostPart costPart, String string) {
+        return true;
     }
 }
