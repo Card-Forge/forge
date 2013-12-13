@@ -498,7 +498,6 @@ public class PlayerControllerHuman extends PlayerController {
         return ImmutablePair.of(toTop, toBottom);
     }
 
-
     @Override
     public boolean willPutCardOnTop(Card c) {
         return GuiDialog.confirm(c, "Where will you put " + c.getName() + " in your library", new String[]{"Top", "Bottom"});
@@ -711,7 +710,6 @@ public class PlayerControllerHuman extends PlayerController {
         return inp.getSelected();
     }
 
-
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#chooseCardsToRevealFromHand(int, int, java.util.List)
      */
@@ -725,7 +723,6 @@ public class PlayerControllerHuman extends PlayerController {
         return inp.getSelected();
     }
 
-
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#payManaOptional(forge.Card, forge.card.cost.Cost)
      */
@@ -733,7 +730,6 @@ public class PlayerControllerHuman extends PlayerController {
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
         return HumanPlay.payCostDuringAbilityResolve(player, c, cost, sa, prompt);
     }
-
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#chooseSaToActivateFromOpeningHand(java.util.List)
@@ -761,7 +757,6 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     // end of not related candidates for move.
-
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#chooseBinary(java.lang.String, boolean)
@@ -812,7 +807,6 @@ public class PlayerControllerHuman extends PlayerController {
         return new ImmutablePair<CounterType,String>(chosen,addOrRemove);
     }
 
-
     @Override
     public Pair<SpellAbilityStackInstance, GameObject> chooseTarget(SpellAbility saSpellskite, List<Pair<SpellAbilityStackInstance, GameObject>> allTargets) {
         if (allTargets.size() < 2) {
@@ -861,8 +855,8 @@ public class PlayerControllerHuman extends PlayerController {
     private String mayBeYou(GameObject what) {
         return what == null ? "(null)" : what == player ? "you" : what.toString();
     }
-    // end of not related candidates for move.
 
+    // end of not related candidates for move.
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#chooseModeForAbility(forge.card.spellability.SpellAbility, java.util.List, int, int)
