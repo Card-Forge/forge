@@ -60,7 +60,6 @@ import forge.gui.input.InputAttack;
 import forge.gui.input.InputBlock;
 import forge.gui.input.InputConfirmMulligan;
 import forge.gui.input.InputPassPriority;
-import forge.gui.input.InputPlayOrDraw;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.input.InputConfirm;
@@ -71,7 +70,6 @@ import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.TextUtil;
-
 
 
 /** 
