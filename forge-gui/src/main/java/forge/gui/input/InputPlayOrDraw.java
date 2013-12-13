@@ -40,6 +40,8 @@ public class InputPlayOrDraw extends InputSyncronizedBase {
         firstGame = isFirstGame;
     }
     
+    
+    
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {

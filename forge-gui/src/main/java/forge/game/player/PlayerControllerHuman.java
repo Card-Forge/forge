@@ -317,7 +317,7 @@ public class PlayerControllerHuman extends PlayerController {
         InputSelectCards inp = new InputSelectCardsFromList(min == 0 ? 1 : min, max, valid);
         inp.setMessage(outerMessage);
         inp.setCancelAllowed(min == 0);
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        inp.showAndWait();
         return inp.hasCancelled() ? Lists.<Card>newArrayList() : inp.getSelected();
     }
 
@@ -364,7 +364,7 @@ public class PlayerControllerHuman extends PlayerController {
             InputSelectCardsFromList input = new InputSelectCardsFromList(isOptional ? 0 : 1, 1, options);
             input.setCancelAllowed(isOptional);
             input.setMessage(title);
-            Singletons.getControl().getInputQueue().setInputAndWait(input);
+            input.showAndWait();
             return Iterables.getFirst(input.getSelected(), null);
         }
 
@@ -441,7 +441,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public boolean getWillPlayOnFirstTurn(boolean isFirstGame) {
         InputPlayOrDraw inp = new InputPlayOrDraw(player, isFirstGame);
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        inp.showAndWait();
         return inp.isPlayingFirst();
     }
 
@@ -532,7 +532,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         InputSelectCards inp = new InputSelectCardsFromList(min, max, valid);
         inp.setMessage(sa.hasParam("AnyNumber") ? "Discard up to %d card(s)" : "Discard %d card(s)");
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        inp.showAndWait();
         return inp.getSelected();
     }
 
@@ -617,7 +617,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
         };
         target.setMessage("Select %d card(s) to discard, unless you discard a " + uType + ".");
-        Singletons.getControl().getInputQueue().setInputAndWait(target);
+        target.showAndWait();
         return target.getSelected();
     }
 
@@ -655,7 +655,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> getCardsToMulligan(boolean isCommander, Player firstPlayer) {
         final InputConfirmMulligan inp = new InputConfirmMulligan(player, firstPlayer, isCommander);
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        inp.showAndWait();
         return inp.isKeepHand() ? null : isCommander ? inp.getSelectedCards() : player.getCardsIn(ZoneType.Hand);
     }
 
@@ -663,14 +663,14 @@ public class PlayerControllerHuman extends PlayerController {
     public void declareAttackers(Player attacker, Combat combat) {
         // This input should not modify combat object itself, but should return user choice
         InputAttack inpAttack = new InputAttack(attacker, player, combat);
-        Singletons.getControl().getInputQueue().setInputAndWait(inpAttack);
+        inpAttack.showAndWait();
     }
 
     @Override
     public void declareBlockers(Player defender, Combat combat) {
         // This input should not modify combat object itself, but should return user choice
         InputBlock inpBlock = new InputBlock(player, defender, combat);
-        Singletons.getControl().getInputQueue().setInputAndWait(inpBlock);
+        inpBlock.showAndWait();
     }
 
     @Override
@@ -691,7 +691,7 @@ public class PlayerControllerHuman extends PlayerController {
                 if (game.isGameOver()) { return; } //don't wait to pass priority if player conceded while in middle of playing a spell/ability
             }
             InputPassPriority defaultInput = new InputPassPriority(player);
-            Singletons.getControl().getInputQueue().setInputAndWait(defaultInput);
+            defaultInput.showAndWait();
             chosenSa = defaultInput.getChosenSa();
         } while (chosenSa != null);
     }
@@ -706,7 +706,7 @@ public class PlayerControllerHuman extends PlayerController {
         String message = String.format(msgFmt, max, n, nDiscard);
         inp.setMessage(message);
         inp.setCancelAllowed(false);
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        inp.showAndWait();
         return inp.getSelected();
     }
 
@@ -719,7 +719,7 @@ public class PlayerControllerHuman extends PlayerController {
         min = Math.min(min, max);
         InputSelectCardsFromList inp = new InputSelectCardsFromList(min, max, valid);
         inp.setMessage("Choose Which Cards to Reveal");
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        inp.showAndWait();
         return inp.getSelected();
     }
 

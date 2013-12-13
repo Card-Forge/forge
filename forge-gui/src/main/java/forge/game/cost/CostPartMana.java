@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import forge.Singletons;
 import forge.ai.ComputerUtilMana;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -135,7 +134,7 @@ public class CostPartMana extends CostPart {
         }
         if (!toPay.isPaid()) {
             inpPayment = new InputPayManaOfCostPayment(toPay, ability);
-            Singletons.getControl().getInputQueue().setInputAndWait(inpPayment);
+            inpPayment.showAndWait();
             if (!inpPayment.isPaid()) {
                 return handleOfferingAndConvoke(ability, true, false);
             }
@@ -147,7 +146,7 @@ public class CostPartMana extends CostPart {
             if (!ability.isAnnouncing("X") && !xWasBilled) {
                 source.setXManaCostPaid(0);
                 inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
-                Singletons.getControl().getInputQueue().setInputAndWait(inpPayment);
+                inpPayment.showAndWait();
                 if (!inpPayment.isPaid()) {
                     return false;
                 }

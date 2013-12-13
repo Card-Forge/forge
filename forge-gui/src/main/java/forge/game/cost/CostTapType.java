@@ -22,7 +22,6 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.Singletons;
 import forge.ai.ComputerUtil;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -225,7 +224,7 @@ public class CostTapType extends CostPartWithList {
                 InputSelectCards inp = new InputSelectCardsFromList(1, 1, typeList);
                 inp.setMessage("Select one of the cards to tap. Already chosen: " + tapped);
                 inp.setCancelAllowed(true);
-                Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                inp.showAndWait();
                 if (inp.hasCancelled())
                     return false;
                 final Card first = inp.getSelected().get(0);
@@ -248,7 +247,7 @@ public class CostTapType extends CostPartWithList {
             inp.setMessage("Select a card to tap.");
             inp.setUnselectAllowed(true);
             inp.setCancelAllowed(true);
-            Singletons.getControl().getInputQueue().setInputAndWait(inp);
+            inp.showAndWait();
 
             if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected()) < i) {
                 return false;
@@ -259,7 +258,7 @@ public class CostTapType extends CostPartWithList {
         
         InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
         inp.setMessage("Select a " + getDescriptiveType() + " to tap (%d left)");
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        inp.showAndWait();
         if ( inp.hasCancelled() )
             return false;
 

@@ -31,7 +31,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.FThreads;
-import forge.Singletons;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.card.mana.ManaCost;
@@ -633,7 +632,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (source.getController().isHuman()) {
                 final InputSelectCards targetHaunted = new InputSelectCardsFromList(1,1, creats);
                 targetHaunted.setMessage("Choose target creature to haunt.");
-                Singletons.getControl().getInputQueue().setInputAndWait(targetHaunted);
+                targetHaunted.showAndWait();
                 targetCard = targetHaunted.getSelected().get(0);
             } else {
                 // AI choosing what to haunt

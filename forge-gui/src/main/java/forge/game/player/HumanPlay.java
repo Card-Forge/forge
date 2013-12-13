@@ -9,7 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.game.GameActionUtil;
 import forge.game.Game;
@@ -164,7 +163,7 @@ public class HumanPlay {
 
         if (!isPaid) {
             InputPayMana inputPay = new InputPayManaSimple(p.getGame(), sa, manaCost);
-            Singletons.getControl().getInputQueue().setInputAndWait(inputPay);
+            inputPay.showAndWait();
             isPaid = inputPay.isPaid();
         }
         return isPaid;
@@ -440,7 +439,7 @@ public class HumanPlay {
                         InputSelectCards inp = new InputSelectCardsFromList(1, 1, list);
                         inp.setMessage("Select a card to add a counter to");
                         inp.setCancelAllowed(true);
-                        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                        inp.showAndWait();
                         if (inp.hasCancelled()) {
                             continue;
                         }
@@ -492,7 +491,7 @@ public class HumanPlay {
                     InputSelectCards inp = new InputSelectCardsFromList(1, 1, list);
                     inp.setMessage("Select a card to remove a counter");
                     inp.setCancelAllowed(true);
-                    Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                    inp.showAndWait();
                     if (inp.hasCancelled()) {
                         continue;
                     }
@@ -680,7 +679,7 @@ public class HumanPlay {
             prompt = source + "\n" + promptCurrent;
         }
         InputPayMana toSet = new InputPayManaExecuteCommands(source, p, prompt, cost.getCostMana().getManaToPay());
-        Singletons.getControl().getInputQueue().setInputAndWait(toSet);
+        toSet.showAndWait();
         return toSet.isPaid();
     }
 
@@ -691,7 +690,7 @@ public class HumanPlay {
         inp.setMessage("Select %d " + cpl.getDescriptiveType() + " card(s) to " + actionName);
         inp.setCancelAllowed(true);
 
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        inp.showAndWait();
         if (inp.hasCancelled() || inp.getSelected().size() != amount) {
             return false;
         }

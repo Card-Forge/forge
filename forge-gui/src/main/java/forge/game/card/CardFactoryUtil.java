@@ -26,7 +26,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.Command;
-import forge.Singletons;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -2859,7 +2858,7 @@ public class CardFactoryUtil {
                 if (card.getController().isHuman()) {
                     final InputSelectCards target = new InputSelectCardsFromList(1, 1, creats);
                     target.setMessage("Choose target creature to haunt.");
-                    Singletons.getControl().getInputQueue().setInputAndWait(target);
+                    target.showAndWait();
                     toHaunt = target.getSelected().get(0);
                 } else {
                     // AI choosing what to haunt

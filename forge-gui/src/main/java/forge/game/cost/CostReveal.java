@@ -23,7 +23,6 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
 import forge.ai.AiController;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -195,7 +194,7 @@ public class CostReveal extends CostPartWithList {
                 InputSelectCards inp = new InputSelectCardsFromList(1, 1, handList);
                 inp.setMessage("Select one of cards to reveal. Already chosen:" + revealed);
                 inp.setCancelAllowed(true);
-                Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                inp.showAndWait();
                 if (inp.hasCancelled())
                     return false;
                 final Card first = inp.getSelected().get(0);
@@ -222,7 +221,7 @@ public class CostReveal extends CostPartWithList {
             if ( num == 0 ) return true;
             InputSelectCards inp = new InputSelectCardsFromList(num, num, handList);
             inp.setMessage("Select %d more " + getDescriptiveType() + " card(s) to reveal.");
-            Singletons.getControl().getInputQueue().setInputAndWait(inp);
+            inp.showAndWait();
             if ( inp.hasCancelled() )
                 return false;
 

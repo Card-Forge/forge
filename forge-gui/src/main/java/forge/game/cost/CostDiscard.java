@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.common.base.Predicate;
 
-import forge.Singletons;
 import forge.ai.AiController;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -221,7 +220,7 @@ public class CostDiscard extends CostPartWithList {
                 InputSelectCards inp = new InputSelectCardsFromList(1, 1, handList);
                 inp.setMessage("Select one of the cards with the same name to discard. Already chosen: " + discarded);
                 inp.setCancelAllowed(true);
-                Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                inp.showAndWait();
                 if (inp.hasCancelled()) {
                     return false;
                 }
@@ -252,7 +251,7 @@ public class CostDiscard extends CostPartWithList {
             InputSelectCards inp = new InputSelectCardsFromList(c, c, handList);
             inp.setMessage("Select %d more " + getDescriptiveType() + " to discard.");
             inp.setCancelAllowed(true);
-            Singletons.getControl().getInputQueue().setInputAndWait(inp);
+            inp.showAndWait();
             if (inp.hasCancelled() || inp.getSelected().size() != c) {
                 return false;
             }

@@ -23,7 +23,6 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.Singletons;
 import forge.ai.ComputerUtilCard;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -216,7 +215,7 @@ public class Untap extends Phase {
                 } else {
                     final InputSelectCards target = new InputSelectCardsFromList(1,1, landList);
                     target.setMessage("Select one tapped land to untap");
-                    Singletons.getControl().getInputQueue().setInputAndWait(target);
+                    target.showAndWait();
                     if( !target.hasCancelled() && !target.getSelected().isEmpty())
                         toUntap = target.getSelected().get(0);
                 }
@@ -233,7 +232,7 @@ public class Untap extends Phase {
                 } else {
                     final InputSelectCards target = new InputSelectCardsFromList(1,1, artList);
                     target.setMessage("Select one tapped artifact to untap");
-                    Singletons.getControl().getInputQueue().setInputAndWait(target);
+                    target.showAndWait();
                     if( !target.hasCancelled() && !target.getSelected().isEmpty())
                         target.getSelected().get(0).untap();
                 }
@@ -247,7 +246,7 @@ public class Untap extends Phase {
                 } else {
                     final InputSelectCards target = new InputSelectCardsFromList(1, 1, creatures);
                     target.setMessage("Select one creature to untap");
-                    Singletons.getControl().getInputQueue().setInputAndWait(target);
+                    target.showAndWait();
                     if( !target.hasCancelled() && !target.getSelected().isEmpty())
                         target.getSelected().get(0).untap();
                 }

@@ -23,7 +23,6 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.card.Card;
@@ -108,7 +107,7 @@ public class TargetSelection {
             List<Card> validTargets = this.getValidCardsToTarget();
             if (zone.size() == 1 && (zone.get(0) == ZoneType.Battlefield || zone.get(0) == ZoneType.Hand)) {
                 InputSelectTargets inp = new InputSelectTargets(validTargets, ability, mandatory);
-                Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                inp.showAndWait();
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
             } else {

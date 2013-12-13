@@ -20,7 +20,6 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.Singletons;
 import forge.ai.ComputerUtil;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -147,7 +146,7 @@ public class CostReturn extends CostPartWithList {
 
             InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
             inp.setMessage("Return %d " + this.getType() + " " + this.getType() + " card(s) to hand");
-            Singletons.getControl().getInputQueue().setInputAndWait(inp);
+            inp.showAndWait();
             if (inp.hasCancelled())
                 return false;
             

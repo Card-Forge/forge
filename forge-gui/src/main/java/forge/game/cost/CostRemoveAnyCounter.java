@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Predicate;
-import forge.Singletons;
 import forge.ai.ComputerUtil;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -133,7 +132,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
             InputSelectCards inp = new InputSelectCardsFromList(1, 1, list);
             inp.setMessage("Select " + this.getDescriptiveType() + " to remove a counter");
             inp.setCancelAllowed(false);
-            Singletons.getControl().getInputQueue().setInputAndWait(inp);
+            inp.showAndWait();
             Card selected = inp.getSelected().get(0);
             final Map<CounterType, Integer> tgtCounters = selected.getCounters();
             final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();

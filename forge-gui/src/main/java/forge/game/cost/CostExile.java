@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import forge.Singletons;
 import forge.ai.ComputerUtil;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -270,7 +269,7 @@ public class CostExile extends CostPartWithList {
             InputSelectCards inp = new InputSelectCardsFromList(c, c, list);
             inp.setMessage("Exile %d card(s) from your" + from);
             inp.setCancelAllowed(true);
-            Singletons.getControl().getInputQueue().setInputAndWait(inp);
+            inp.showAndWait();
             return !inp.hasCancelled() && executePayment(ability, inp.getSelected());
         }
 

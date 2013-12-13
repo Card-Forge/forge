@@ -295,7 +295,7 @@ public final class GuiDisplayUtil {
                 InputSelectCardsFromList inp = new InputSelectCardsFromList(0, Integer.MAX_VALUE, untapped);
                 inp.setCancelAllowed(true);
                 inp.setMessage("Choose permanents to tap");
-                Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                inp.showAndWait();
                 if( !inp.hasCancelled() )
                     for(Card c : inp.getSelected())
                         c.tap();
@@ -322,7 +322,7 @@ public final class GuiDisplayUtil {
                 InputSelectCardsFromList inp = new InputSelectCardsFromList(0, Integer.MAX_VALUE, tapped);
                 inp.setCancelAllowed(true);
                 inp.setMessage("Choose permanents to untap");
-                Singletons.getControl().getInputQueue().setInputAndWait(inp);
+                inp.showAndWait();
                 if( !inp.hasCancelled() )
                     for(Card c : inp.getSelected())
                         c.untap();

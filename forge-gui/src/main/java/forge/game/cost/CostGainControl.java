@@ -19,7 +19,6 @@ package forge.game.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-import forge.Singletons;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -110,7 +109,7 @@ public class CostGainControl extends CostPartWithList {
 
         InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
         inp.setMessage("Gain control of %d " + desc);
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        inp.showAndWait();
         if (inp.hasCancelled()) {
             return false;
         }

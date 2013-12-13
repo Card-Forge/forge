@@ -24,7 +24,6 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -164,7 +163,7 @@ public class CostRemoveCounter extends CostPartWithList {
             final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(cntRemoved, getCounter(), validCards);
             inp.setMessage("Remove %d " + getCounter().getName() + " counters from " + getDescriptiveType());
             inp.setCancelAllowed(true);
-            Singletons.getControl().getInputQueue().setInputAndWait(inp);
+            inp.showAndWait();
             if(inp.hasCancelled())
                 return false;
 

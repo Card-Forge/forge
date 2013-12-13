@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Singletons;
 import forge.ai.ComputerUtilCard;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -83,7 +82,7 @@ public class UntapEffect extends SpellAbilityEffect {
             
             if (p.isHuman()) {
                 InputSelectCards sc = new InputSelectCardsFromList(0, num, list);
-                Singletons.getControl().getInputQueue().setInputAndWait(sc);
+                sc.showAndWait();
                 if( !sc.hasCancelled() )
                     for( Card c : sc.getSelected() ) 
                         c.untap();

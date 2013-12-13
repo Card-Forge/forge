@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
-import forge.Singletons;
 import forge.ai.ComputerUtil;
 import forge.game.GameEntity;
 import forge.game.ability.SpellAbilityEffect;
@@ -34,7 +33,7 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
         if (controller.isHuman()) {
             InputProliferate inp = new InputProliferate();
             inp.setCancelAllowed(true);
-            Singletons.getControl().getInputQueue().setInputAndWait(inp);
+            inp.showAndWait();
             if ( inp.hasCancelled() )
                 return;
             

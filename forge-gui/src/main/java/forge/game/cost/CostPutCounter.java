@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.Singletons;
 import forge.ai.ComputerUtilCard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -271,8 +270,8 @@ public class CostPutCounter extends CostPartWithList {
             InputSelectCardToPutCounter inp = new InputSelectCardToPutCounter(c, typeList);
             inp.setMessage("Put %d " + getCounter().getName() + " counter on " + getDescriptiveType());
             inp.setCancelAllowed(true);
-            Singletons.getControl().getInputQueue().setInputAndWait(inp);
-            
+            inp.showAndWait();
+
             if(inp.hasCancelled())
                 return false;
 

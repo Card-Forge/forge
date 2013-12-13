@@ -17,7 +17,7 @@
  */
 package forge.gui.input;
 
-import forge.Singletons;
+
 import forge.view.ButtonUtil;
  /**
   * <p>
@@ -41,7 +41,7 @@ public class InputYesOrNo extends InputSyncronizedBase {
     }
     public static boolean ask(String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
         InputYesOrNo inp = new InputYesOrNo(message0, yesButtonText0, noButtonText0, defaultYes0);
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        inp.showAndWait();
         return inp.getResult();
     }
 

@@ -80,15 +80,7 @@ public class InputQueue extends Observable {
         return inputStack.toString();
     }
 
-    public void setInputAndWait(InputSynchronized input) {
-        this.inputStack.push(input);
-        syncPoint();
-        this.updateObservers();
-
-        input.awaitLatchRelease();
-    }
-
-    void setInput(InputSynchronized input) {
+    public void setInput(InputSynchronized input) {
         this.inputStack.push(input);
         syncPoint();
         this.updateObservers();
