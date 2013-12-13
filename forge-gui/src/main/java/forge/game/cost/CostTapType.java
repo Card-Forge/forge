@@ -198,7 +198,7 @@ public class CostTapType extends CostPartWithList {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = Cost.chooseXValue(source, ability, typeList.size());
+                c = chooseXValue(source, ability, typeList.size());
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }

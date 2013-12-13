@@ -211,7 +211,7 @@ public class CostReveal extends CostPartWithList {
             if (num == null) {
                 final String sVar = ability.getSVar(amount);
                 if (sVar.equals("XChoice")) {
-                    num = Cost.chooseXValue(source, ability, handList.size());
+                    num = chooseXValue(source, ability, handList.size());
                 } else {
                     num = AbilityUtils.calculateAmount(source, amount, ability);
                 }

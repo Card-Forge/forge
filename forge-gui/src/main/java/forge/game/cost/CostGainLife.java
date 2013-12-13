@@ -127,7 +127,7 @@ public class CostGainLife extends CostPart {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = Cost.chooseXValue(source, ability,  life);
+                c = chooseXValue(source, ability,  life);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }

@@ -124,7 +124,7 @@ public class CostPayLife extends CostPart {
                     limit = AbilityUtils.calculateAmount(source, sVar.split("LimitMax.")[1], ability);
                 }
                 int maxLifePayment = limit < life ? limit : life;
-                c = Cost.chooseXValue(source, ability, maxLifePayment);
+                c = chooseXValue(source, ability, maxLifePayment);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }

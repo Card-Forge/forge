@@ -75,7 +75,7 @@ public class CostFlipCoin extends CostPartWithList {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = Cost.chooseXValue(source, ability, this.getList().size());
+                c = chooseXValue(source, ability, this.getList().size());
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }

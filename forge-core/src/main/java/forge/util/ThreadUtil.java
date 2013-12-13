@@ -43,27 +43,6 @@ public class ThreadUtil {
         getGameThreadPool().execute(toRun);
     }
 
-    public static void invokeInGameThreadAndWait(final Runnable toRun) {
-        if (isGameThread()) {
-            toRun.run(); //just run in the current thread
-            return;
-        }
-        final CountDownLatch latch = new CountDownLatch(1);
-        getGameThreadPool().execute(new Runnable() {
-            @Override
-            public void run() {
-                toRun.run();
-                latch.countDown();
-            }
-        });
-        try {
-            latch.await();
-        }
-        catch (final InterruptedException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
     public static void delay(int milliseconds, Runnable inputUpdater) {
         getScheduledPool().schedule(inputUpdater, milliseconds, TimeUnit.MILLISECONDS);
     }

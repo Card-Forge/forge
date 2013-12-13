@@ -257,7 +257,7 @@ public class CostExile extends CostPartWithList {
             final String sVar = ability.getSVar(amount);
             // Generalize this
             if (sVar.equals("XChoice")) {
-                c = Cost.chooseXValue(source, ability, list.size());
+                c = chooseXValue(source, ability, list.size());
             }
             else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);

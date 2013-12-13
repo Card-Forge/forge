@@ -26,7 +26,6 @@ import forge.card.mana.ManaCostParser;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.mana.ManaCostBeingPaid;
-import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
@@ -717,18 +716,6 @@ public class Cost {
             }
         }
         return this;
-    }
-
-    public static int chooseXValue(final Card card, final SpellAbility sa, final int maxValue) {
-        /*final String chosen = sa.getSVar("ChosenX");
-        if (chosen.length() > 0) {
-            return AbilityFactory.calculateAmount(card, "ChosenX", null);
-        }*/
-
-        int chosenX = sa.getActivatingPlayer().getController().chooseNumber(sa, card.toString() + " - Choose a Value for X", 0, maxValue);
-        sa.setSVar("ChosenX", Integer.toString(chosenX));
-        card.setSVar("ChosenX", Integer.toString(chosenX));
-        return chosenX;
     }
 
     public static final Cost Zero = new Cost(0);

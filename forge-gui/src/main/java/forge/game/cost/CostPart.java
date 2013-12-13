@@ -220,4 +220,16 @@ public abstract class CostPart {
     public void setAmount(final String amountIn) {
         this.amount = amountIn;
     }
+    
+    protected int chooseXValue(final Card card, final SpellAbility sa, final int maxValue) {
+        /*final String chosen = sa.getSVar("ChosenX");
+        if (chosen.length() > 0) {
+            return AbilityFactory.calculateAmount(card, "ChosenX", null);
+        }*/
+
+        int chosenX = sa.getActivatingPlayer().getController().chooseNumber(sa, card.toString() + " - Choose a Value for X", 0, maxValue);
+        sa.setSVar("ChosenX", Integer.toString(chosenX));
+        card.setSVar("ChosenX", Integer.toString(chosenX));
+        return chosenX;
+    }
 }
