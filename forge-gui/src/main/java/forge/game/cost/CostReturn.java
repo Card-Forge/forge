@@ -19,6 +19,7 @@ package forge.game.cost;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import forge.Singletons;
 import forge.ai.ComputerUtil;
 import forge.game.Game;
@@ -28,9 +29,9 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
+import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostReturn.
@@ -138,13 +139,10 @@ public class CostReturn extends CostPartWithList {
         if (this.payCostFromSource()) {
             final Card card = ability.getSourceCard();
             if (card.getController() == ability.getActivatingPlayer() && card.isInPlay()) {
-                boolean confirm = GuiDialog.confirm(card, card.getName() + " - Return to Hand?");
-                if (confirm) {
-                    executePayment(ability, card);
-                }
-                return confirm;
+                return InputYesOrNo.ask("Return " + card.getName() + " to hand?") && executePayment(ability, card);
             }
-        } else {
+        }
+        else {
             List<Card> validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
 
             InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);

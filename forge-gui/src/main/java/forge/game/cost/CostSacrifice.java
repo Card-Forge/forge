@@ -19,6 +19,7 @@ package forge.game.cost;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import forge.Singletons;
 import forge.ai.ComputerUtil;
 import forge.game.Game;
@@ -28,9 +29,9 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
+import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostSacrifice.
@@ -87,12 +88,12 @@ public class CostSacrifice extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
-        
+
         // You can always sac all
         if (!this.payCostFromSource()) {
             // If the sacrificed type is dependant on an annoucement, can't necesarily rule out the CanPlay call
             boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
-            
+
             List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
             final Integer amount = this.convertAmount();
@@ -142,12 +143,13 @@ public class CostSacrifice extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
-                return GuiDialog.confirm(source, source.getName() + " - Sacrifice?") && executePayment(ability, source);
-
+                return InputYesOrNo.ask("Sacrifice " + source.getName() + "?") && executePayment(ability, source);
             }
-        } else if (amount.equals("All")) {
+        }
+        else if (amount.equals("All")) {
             return executePayment(ability, list);
-        } else {
+        }
+        else {
             Integer c = this.convertAmount();
             if (c == null) {
                 // Generalize this
@@ -160,7 +162,7 @@ public class CostSacrifice extends CostPartWithList {
             if (0 == c.intValue()) {
                 return true;
             }
-            
+
             InputSelectCards inp = new InputSelectCardsFromList(c, c, list);
             inp.setMessage("Select a " + this.getDescriptiveType() + " to sacrifice (%d left)");
             inp.setCancelAllowed(true);
@@ -194,7 +196,7 @@ public class CostSacrifice extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             return new PaymentDecision(source);
-        } 
+        }
         if (this.getAmount().equals("All")) {
             /*List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);

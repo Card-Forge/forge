@@ -18,13 +18,14 @@
 package forge.game.cost;
 
 import java.util.ArrayList;
+
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.GuiDialog;
+import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostChooseCreatureType.
@@ -65,15 +66,12 @@ public class CostChooseCreatureType extends CostPart {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append(source.getName()).append(" - Choose a creature type?");
-
-        if (GuiDialog.confirm(source, sb.toString())) {
-        	String choice = activator.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>());
-    		source.setChosenType(choice);
-        } else {
+        if (!InputYesOrNo.ask("Choose a creature type for " + source.getName() + "?")) {
             return false;
         }
+
+    	String choice = activator.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>());
+		source.setChosenType(choice);
         return true;
     }
 

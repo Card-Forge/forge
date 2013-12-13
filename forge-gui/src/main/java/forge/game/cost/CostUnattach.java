@@ -24,7 +24,7 @@ import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.GuiDialog;
+import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostUnattach.
@@ -67,7 +67,7 @@ public class CostUnattach extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability) {
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
-        
+
         final String type = this.getType();
         if (type.equals("CARDNAME")) {
             if (source.isEquipping()) {
@@ -97,15 +97,13 @@ public class CostUnattach extends CostPartWithList {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Game game) {
-        final Card source = ability.getSourceCard(); 
+        final Card source = ability.getSourceCard();
         Player activator = ability.getActivatingPlayer();
         Card cardToUnattach = findCardToUnattach(source, activator, ability);
-        if (cardToUnattach != null && GuiDialog.confirm(source, String.format("Unattach %s?", cardToUnattach.toString()))) {
-            executePayment(ability, cardToUnattach);
-            return true;
-        } else {
-            return false;
+        if (cardToUnattach != null && InputYesOrNo.ask("Unattach " + cardToUnattach.getName() + "?")) {
+            return executePayment(ability, cardToUnattach);
         }
+        return false;
     }
 
     private Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {

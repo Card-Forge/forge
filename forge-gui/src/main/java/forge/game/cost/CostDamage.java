@@ -22,7 +22,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.GuiDialog;
+import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostPayLife.
@@ -88,20 +88,17 @@ public class CostDamage extends CostPart {
             // Generalize this
             if (sVar.equals("XChoice")) {
                 c = Cost.chooseXValue(source, ability, life);
-            } else {
+            }
+            else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append(source.getName()).append(" - Pay ").append(c).append(" Life?");
-
-        if (GuiDialog.confirm(source, sb.toString()) && activator.canPayLife(c)) {
+        if (activator.canPayLife(c) && InputYesOrNo.ask("Pay " + c + " Life?")) {
             activator.addDamage(c, source);
-        } else {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     /*

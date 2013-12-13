@@ -26,7 +26,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
+import forge.gui.input.InputYesOrNo;
 
 /**
  * This is for the "Mill" Cost. Putting cards from the top of your library into
@@ -103,15 +103,13 @@ public class CostMill extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        final List<Card> list = activator.getCardsIn(ZoneType.Library, c);
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Mill ").append(c).append(" cards from your library?");
-
-        if ( false == GuiDialog.confirm(source, sb.toString()) )
+        if (!InputYesOrNo.ask("Mill " + c + " card" + (c == 1 ? "" : "s") + " from your library?")) {
             return false;
+        }
 
-        for(final Card card : list) { // this list is a copy, no exception expected
+        final List<Card> list = activator.getCardsIn(ZoneType.Library, c);
+        for (final Card card : list) { // this list is a copy, no exception expected
             executePayment(ability, card);
         }
         return true;
@@ -163,10 +161,10 @@ public class CostMill extends CostPartWithList {
             if (sVar.equals("XChoice")) {
                 return null;
             }
-    
+
             c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
-    
+
         List<Card> topLib = ai.getCardsIn(ZoneType.Library, c);
         return topLib.size() < c ? null : new PaymentDecision(topLib);
     }

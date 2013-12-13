@@ -22,14 +22,14 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.GuiDialog;
+import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostPayLife.
  */
 public class CostPayLife extends CostPart {
     int paidAmount = 0;
-    
+
     /**
      * Instantiates a new cost pay life.
      * 
@@ -74,14 +74,14 @@ public class CostPayLife extends CostPart {
     public final boolean canPay(final SpellAbility ability) {
         Integer amount = this.convertAmount();
         Player activator = ability.getActivatingPlayer();
-        if(amount == null) { // try to calculate when it's defined.
+        if (amount == null) { // try to calculate when it's defined.
             String sAmount = getAmount();
             String sVar = ability.getSVar(sAmount);
-            if(!sVar.startsWith("XChoice")) {
+            if (!sVar.startsWith("XChoice")) {
                 amount = AbilityUtils.calculateAmount(ability.getSourceCard(), getAmount(), ability);
             }
         }
-        
+
         if ((amount != null) && !activator.canPayLife(amount)) {
             return false;
         }
@@ -133,16 +133,12 @@ public class CostPayLife extends CostPart {
             }
         }
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append(source.getName()).append(" - Pay ").append(c).append(" Life?");
-
-        if (activator.canPayLife(c) && GuiDialog.confirm(source, sb.toString())) {
+        if (activator.canPayLife(c) && InputYesOrNo.ask("Pay " + c + " Life?")) {
             activator.payLife(c, null);
-        } else {
-            return false;
+            paidAmount = c;
+            return true;
         }
-        paidAmount = c;
-        return true;
+        return false;
     }
 
     /* (non-Javadoc)

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
 import forge.Singletons;
 import forge.ai.ComputerUtil;
 import forge.game.Game;
@@ -33,9 +34,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
+import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostExile.
@@ -242,7 +243,9 @@ public class CostExile extends CostPartWithList {
         }
 
         if (this.payCostFromSource()) {
-            return source.getZone() == activator.getZone(from) && GuiDialog.confirm(source, source.getName() + " - Exile?") && executePayment(ability, source);
+            return source.getZone() == activator.getZone(from) &&
+                    InputYesOrNo.ask("Exile " + source.getName() + "?") &&
+                    executePayment(ability, source);
         }
 
         if (type.equals("All")) {
@@ -399,17 +402,16 @@ public class CostExile extends CostPartWithList {
             return false;
         }
 
-        final boolean doExile = GuiDialog.confirm(sa.getSourceCard(), sb.toString());
-        if (doExile) {
-            final Iterator<Card> itr = list.iterator();
-            while (itr.hasNext()) {
-                executePayment(sa, itr.next());
-            }
-            return true;
-        }
-        else {
+        if (!InputYesOrNo.ask("Exile " + nNeeded + " card" + (nNeeded == 1 ? "" : "s") +
+                " from the top of your library?")) {
             return false;
         }
+
+        final Iterator<Card> itr = list.iterator();
+        while (itr.hasNext()) {
+            executePayment(sa, itr.next());
+        }
+        return true;
     }
 
     private boolean exileFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList) {

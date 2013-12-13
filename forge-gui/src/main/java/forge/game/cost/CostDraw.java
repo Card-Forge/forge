@@ -25,7 +25,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.GuiDialog;
+import forge.gui.input.InputYesOrNo;
 
 /**
  * The Class CostPayLife.
@@ -114,15 +114,12 @@ public class CostDraw extends CostPart {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        final StringBuilder sb = new StringBuilder();
-        sb.append(source.getName()).append(" - Draw ").append(c).append(" Card(s)?");
-
-        if (GuiDialog.confirm(source, sb.toString())) {
-            for (Player p : players) {
-                p.drawCards(c);
-            }
-        } else {
+        if (!InputYesOrNo.ask("Draw " + c + " Card" + (c == 1 ? "" : "s"))) {
             return false;
+        }
+
+        for (Player p : players) {
+            p.drawCards(c);
         }
         return true;
     }

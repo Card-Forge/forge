@@ -19,6 +19,7 @@ You will no longer be prompted when using a "Add one of any color" ability to pa
 You can now press Escape to Cancel the current prompt even if the OK button has focus.
 Cards will now return to the same position in your hand if you cancel while paying their mana cost or choosing targets.
 Optional triggered abilities now use Prompt pane for Yes/No confirmation instead of a dialog
+Cost-related confirmations such as "Sacrifice CARDNAME?" and "Pay X Life?" now use Prompt pane instead of a dialog
 You'll no longer be prompted for attackers if you have no creatures that can attack.
 You'll no longer be prompted for blockers if you have no creatures that can block any attacking creature.
 
