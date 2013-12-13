@@ -435,9 +435,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
         }
 
-        InputYesOrNo inp = new InputYesOrNo(buildQuestion.toString());
-        Singletons.getControl().getInputQueue().setInputAndWait(inp);
-        return inp.getResult();
+        return InputYesOrNo.ask(buildQuestion.toString());
     }
 
     @Override

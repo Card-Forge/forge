@@ -17,6 +17,7 @@
  */
 package forge.gui.input;
 
+import forge.Singletons;
 import forge.view.ButtonUtil;
  /**
   * <p>
@@ -28,6 +29,21 @@ import forge.view.ButtonUtil;
   */
 public class InputYesOrNo extends InputSyncronizedBase {
     private static final long serialVersionUID = -3591794991788531626L;
+
+    public static boolean ask(String message0) {
+        return ask(message0, "Yes", "No", true);
+    }
+    public static boolean ask(String message0, boolean defaultYes0) {
+        return ask(message0, "Yes", "No", defaultYes0);
+    }
+    public static boolean ask(String message0, String yesButtonText0, String noButtonText0) {
+        return ask(message0, yesButtonText0, noButtonText0, true);
+    }
+    public static boolean ask(String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
+        InputYesOrNo inp = new InputYesOrNo(message0, yesButtonText0, noButtonText0, defaultYes0);
+        Singletons.getControl().getInputQueue().setInputAndWait(inp);
+        return inp.getResult();
+    }
 
     private final String message;
     private final String yesButtonText;
@@ -42,11 +58,11 @@ public class InputYesOrNo extends InputSyncronizedBase {
     public InputYesOrNo(String message0, boolean defaultYes0) {
         this(message0, "Yes", "No", defaultYes0);
     }
-    
+
     public InputYesOrNo(String message0, String yesButtonText0, String noButtonText0) {
         this(message0, yesButtonText0, noButtonText0, true);
     }
-    
+
     public InputYesOrNo(String message0, String yesButtonText0, String noButtonText0, boolean defaultYes0) {
         this.message = message0;
         this.yesButtonText = yesButtonText0;
@@ -54,7 +70,7 @@ public class InputYesOrNo extends InputSyncronizedBase {
         this.defaultYes = defaultYes0;
         result = defaultYes0;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
