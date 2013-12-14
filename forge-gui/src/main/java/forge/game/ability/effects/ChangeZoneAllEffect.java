@@ -122,6 +122,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
             if (remember != null) {
                 game.getCardState(source).addRemembered(movedCard);
+                source.addRemembered(movedCard);
             }
             if (forget != null) {
                 game.getCardState(source).removeRemembered(c);
