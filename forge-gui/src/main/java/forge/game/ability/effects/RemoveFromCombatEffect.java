@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -34,8 +35,9 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         for (final Card c : getTargetCards(sa)) {
-            if ((tgt == null) || c.canBeTargetedBy(sa) && game.getPhaseHandler().inCombat()) {
-                game.getPhaseHandler().getCombat().removeFromCombat(c);
+        	final Combat combat = game.getPhaseHandler().getCombat();
+            if (combat != null && (tgt == null || c.canBeTargetedBy(sa))) {
+            	combat.removeFromCombat(c);
                 if (rem) {
                     sa.getSourceCard().addRemembered(c);
                 }
