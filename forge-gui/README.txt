@@ -944,6 +944,30 @@ Reminder text now appears in italics, with a preference that can be set to hide 
 Added a new Quest Item, Charm of Vigor. Let's you play best of 5 games rather than best of 3.
 
 
+- Game usability/speed improvements -
+When paying mana costs, you can now press Enter/Spacebar or click the Auto button in the Prompt to automatically pay the mana cost using available mana sources if possible.
+    - The Auto button will be disabled if you cannot pay the mana cost at that time, in which case Enter/Spacebar will cancel the spell/ability instead.
+    - Uses the same logic the AI uses to pay mana costs. This means it will try to use mana in your pool before mana sources in play, using colorless mana to pay the colorless part of the cost if any is available.
+    - You can still manually pay the cost by clicking mana sources in play (e.g. lands) or clicking symbols in your mana pool, which might be a good idea if you want to save specific mana sources for a later play that turn.
+You can now press Ctrl+Z to undo tapping mana sources. (currently limited to before spell cast)
+You will no longer be prompted when using a "Add one of any color" ability to pay a colorless cost.
+    - Note: you'll still be prompted when paying Sunburst or cards that care what colors are spent to cast it (ex. Firespout).
+You can now press Escape to Cancel the current prompt even if the OK button has focus.
+Cards will now return to the same position in your hand if you cancel while paying their mana cost or choosing targets.
+Optional triggered abilities now use Prompt pane for Yes/No confirmation instead of a dialog.
+Cost-related confirmations such as "Sacrifice CARDNAME?" and "Pay X Life?" now use Prompt pane instead of a dialog.
+You'll no longer be prompted for attackers if you have no creatures that can attack.
+You'll no longer be prompted for blockers if you have no creatures that can block any attacking creature.
+
+
+- Deck Editor filtering -
+Multi-color cards containing a filtered color will no longer show up in catalogs.
+Hybrid cards, split cards, and phyrexian cards will now show up so long as the card can be cast using only selected colors.
+    - For split cards, each side of the card is checked individually, so Life // Death will appear if either {B} or {G} is selected.
+    - Note that if the multicolor button is deselected (such that multicolor cards are filtered out), hybrid and split cards with multiple colors will still be hidden.
+To improve usability, right-clicking a color filter button will now also select the multicolor button so hybrids and split cards appear by default, and so 2 color cards show up if you then left click a second color filter button.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
