@@ -127,10 +127,6 @@ public class ChooseSourceAi extends SpellAbilityAi {
     
     @Override
     public Card chooseSingleCard(final Player aiChoser, SpellAbility sa, Collection<Card> options, boolean isOptional) {
-        
-        
-
-        // TODO Auto-generated method stub
         if ("NeedsPrevention".equals(sa.getParam("AILogic"))) {
             final Player ai = sa.getActivatingPlayer();
             final Game game = ai.getGame();
@@ -146,7 +142,8 @@ public class ChooseSourceAi extends SpellAbilityAi {
             List<Card> permanentSources = CardLists.filter(options, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (c.getZone().getZoneType() != ZoneType.Battlefield || combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
+                    if (c == null || c.getZone() == null || c.getZone().getZoneType() != ZoneType.Battlefield 
+                    		|| combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
                         return false;
                     }
                     return ComputerUtilCombat.damageIfUnblocked(c, ai, combat) > 0;
