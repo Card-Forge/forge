@@ -152,7 +152,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
     @Override
     public void populate() {
         final JPanel parentBody = parentCell.getBody();
-        parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
+        parentBody.setLayout(new MigLayout("insets 5, gap 0 3, wrap, hidemode 3"));
         parentBody.add(pnlHeader, "pushx, growx");
         parentBody.add(itemManagerContainer, "push, grow");
     }

@@ -98,6 +98,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         .reactOnMouseDown()
         .build();
 
+    private final FLabel lblCaption = new FLabel.Builder()
+        .fontAlign(SwingConstants.LEFT)
+        .fontSize(11)
+        .build();
+
     private final FLabel lblRatio = new FLabel.Builder()
         .tooltip("Number of cards shown / Total available cards")
         .fontAlign(SwingConstants.LEFT)
@@ -162,6 +167,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         FSkin.get(this.pnlButtons).setMatteBorder(1, 0, 1, 0, FSkin.getColor(Colors.CLR_TEXT));
         this.add(this.pnlButtons);
         this.add(this.btnFilters);
+        this.add(this.lblCaption);
         this.add(this.lblRatio);
         this.add(this.tableScroller);
 
@@ -224,8 +230,29 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         helper.newLine(-3);
         helper.fillLine(this.pnlButtons, this.pnlButtons.getComponentCount() > 0 ? 32: 1); //just show border if no bottoms
         helper.include(this.btnFilters, 61, FTextField.HEIGHT);
+        helper.include(this.lblCaption, this.lblCaption.getAutoSizeWidth(), FTextField.HEIGHT);
         helper.fillLine(this.lblRatio, FTextField.HEIGHT);
         helper.fill(this.tableScroller);
+    }
+
+    /**
+     * 
+     * getCaption.
+     * 
+     * @return caption to display before ratio
+     */
+    public String getCaption() {
+        return this.lblCaption.getText();
+    }
+
+    /**
+     * 
+     * setCaption.
+     * 
+     * @param caption - caption to display before ratio
+     */
+    public void setCaption(String caption) {
+        this.lblCaption.setText(caption);
     }
 
     /**
@@ -564,14 +591,22 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             filter.afterFiltersApplied();
         }
 
+        //update ratio of # in filtered pool / # in total pool
         int total;
-        if (this.wantUnique) {
-            total = Aggregates.uniqueCount(this.pool, this.pool.FN_GET_NAME);
+        if (!useFilter) {
+            total = this.getFilteredItems().countAll();
+        }
+        else if (this.wantUnique) {
+            total = 0;
+            Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, this.pool.FN_GET_NAME);
+            for (Entry<T, Integer> entry : items) {
+                total += entry.getValue();
+            }
         }
         else {
             total = this.pool.countAll();
         }
-        this.lblRatio.setText(this.getFilteredItems().countAll() + " / " + total);
+        this.lblRatio.setText("(" + this.getFilteredItems().countAll() + " / " + total + ")");
 
         //select first row if no row already selected
         SwingUtilities.invokeLater(new Runnable() {

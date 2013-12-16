@@ -205,6 +205,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     @SuppressWarnings("serial")
     public void setCatalogManager(final ItemManager<TItem> itemManager) {
         this.catalogManager = itemManager;
+        itemManager.setCaption("Catalog");
 
         btnAdd.setCommand(new Command() {
             @Override

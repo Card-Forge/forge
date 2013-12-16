@@ -4,6 +4,7 @@ import java.awt.AlphaComposite;
 import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -425,6 +426,18 @@ public class FLabel extends JLabel implements ILocalRepaint {
                     + "SwingConstants.LEFT, or SwingConstants.RIGHT");
         }
         this.setHorizontalAlignment(i0);
+    }
+
+    public int getAutoSizeWidth() {
+        int width = 0;
+        if (this.getText() != null && !this.getText().isEmpty()) {
+            FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
+            width = metrics.stringWidth(this.getText());
+        }
+        if (opaque) {
+            width += 6; //account for border/padding if opaque
+        }
+        return width;
     }
 
     /** Resizing in MigLayout "slides" between the original and destination sizes.

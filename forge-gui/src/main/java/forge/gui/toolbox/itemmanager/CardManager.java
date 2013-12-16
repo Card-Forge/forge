@@ -1,8 +1,10 @@
 package forge.gui.toolbox.itemmanager;
 
 import java.util.List;
+
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
+
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.gui.GuiUtils;

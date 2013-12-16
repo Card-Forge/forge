@@ -95,7 +95,6 @@ public class DeckController<T extends DeckBase> {
         this.modelName = document.getName();
         this.view.resetTables();
 
-        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText(model.getName());
         CStatistics.SINGLETON_INSTANCE.update();
         CProbabilities.SINGLETON_INSTANCE.update();
 
@@ -146,7 +145,7 @@ public class DeckController<T extends DeckBase> {
 
     private void _setSaved(boolean val) {
         saved = val;
-        VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText((saved ? "" : "*") + "Current Deck");
+        updateCaptions();
     }
     
     /*
@@ -320,5 +319,18 @@ public class DeckController<T extends DeckBase> {
 
     public String getModelName() {
         return modelName;
+    }
+    
+    private void updateCaptions() {
+        String tabCaption = "Current Deck";
+        String title = this.model.getName();
+        String itemManagerCaption = title.isEmpty() ? "[Untitled]" : title;
+        if (!saved) {
+            tabCaption = "*" + tabCaption;
+            itemManagerCaption = "*" + itemManagerCaption;
+        }
+        VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(tabCaption);
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText(title);
+        VCurrentDeck.SINGLETON_INSTANCE.getItemManager().setCaption(itemManagerCaption);
     }
 }

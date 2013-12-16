@@ -123,14 +123,6 @@ public class Aggregates {
         return uniques.values();
     }
 
-    public static final <K, U> int uniqueCount(final Iterable<U> source, final Function<U, K> fnUniqueKey) {
-        final Map<K, U> uniques = new Hashtable<K, U>();
-        for (final U c : source) {
-             uniques.put(fnUniqueKey.apply(c), c);
-        }
-        return uniques.size();
-    }
-
     public static <T> T itemWithMin(final Iterable<T> source, final Function<T, Integer> valueAccessor) {
         if (source == null) { return null; }
         int max = Integer.MAX_VALUE;

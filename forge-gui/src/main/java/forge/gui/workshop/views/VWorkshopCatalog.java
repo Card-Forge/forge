@@ -44,6 +44,7 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
     /** */
     private VWorkshopCatalog() {
         this.cardManager = new CardManager(true);
+        this.cardManager.setCaption("Catalog");
         Iterable<PaperCard> allCards = Iterables.concat(Singletons.getMagicDb().getCommonCards(), Singletons.getMagicDb().getVariantCards());
         this.cardManager.setPool(ItemPool.createFrom(allCards, PaperCard.class), true);
         this.cardManagerContainer.setItemManager(this.cardManager);

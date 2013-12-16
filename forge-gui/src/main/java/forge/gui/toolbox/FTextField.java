@@ -112,7 +112,7 @@ public class FTextField extends JTextField {
     }
     
     public int getAutoSizeWidth() {
-        FontMetrics metrics = getGraphics().getFontMetrics(this.getFont());
+        FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
         return metrics.stringWidth(this.getText()) + 12;
     }
 

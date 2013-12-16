@@ -146,7 +146,6 @@ public enum CCurrentDeck implements ICDoc {
                 @Override
                 public void run() {
                     ((DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController()).newModel();
-                    VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText("");
                     VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().requestFocusInWindow();
                 }
             });
