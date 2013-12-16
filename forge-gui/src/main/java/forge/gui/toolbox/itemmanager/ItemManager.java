@@ -18,6 +18,9 @@
 package forge.gui.toolbox.itemmanager;
 
 import java.awt.Toolkit;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,26 +28,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionListener;
 
+import net.miginfocom.swing.MigLayout;
+
 import com.google.common.base.Predicate;
-
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.gui.GuiUtils;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.ToolTipListener;
+import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
 import forge.gui.toolbox.itemmanager.table.ItemTable;
 import forge.gui.toolbox.itemmanager.table.ItemTableModel;
@@ -73,16 +80,33 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private boolean alwaysNonUnique = false;
     private boolean allowMultipleSelections = false;
     private final Class<T> genericType;
-    private final Map<SItemManagerUtil.StatTypes, FLabel> statLabels;
     private final ArrayList<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
 
-    private final FLabel btnAddFilter = new FLabel.ButtonBuilder()
-            .text("Add")
-            .tooltip("Click to add filters to the list")
-            .reactOnMouseDown().build();
-    private final FTextField txtSearch = new FTextField.Builder().ghostText("Search").build();
+    private final JCheckBox chkEnableFilters = new JCheckBox();
+
+    private final FTextField txtFilterLogic = new FTextField.Builder()
+        .tooltip("Use '&','|','!' symbols (AND,OR,NOT) in combination with filter numbers and optional grouping \"()\" to build Boolean expression evaluated when applying filters")
+        .readonly() //TODO: Support editing filter logic
+        .build();
+
+    private ItemFilter<T> mainSearchFilter;
+    private final JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
+
+    private final FLabel btnFilters = new FLabel.ButtonBuilder()
+        .text("Filters")
+        .tooltip("Click to configure filters")
+        .reactOnMouseDown()
+        .build();
+
+    private final FLabel lblRatio = new FLabel.Builder()
+        .tooltip("Number of cards shown / Total available cards")
+        .fontAlign(SwingConstants.LEFT)
+        .fontSize(11)
+        .build();
+
     private final ItemTable<T> table;
     private final JScrollPane tableScroller;
+    protected boolean lockFiltering;
 
     /**
      * ItemManager Constructor.
@@ -91,9 +115,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param statLabels0 stat labels for this item manager
      * @param wantUnique0 whether this table should display only one item with the same name
      */
-    protected ItemManager(final Class<T> genericType0, Map<SItemManagerUtil.StatTypes, FLabel> statLabels0, final boolean wantUnique0) {
+    protected ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
         this.genericType = genericType0;
-        this.statLabels = statLabels0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(this, genericType0);
 
@@ -107,12 +130,64 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.tableScroller.getViewport().setBorder(null);
         this.tableScroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
 
+        //build enable filters checkbox
+        ItemFilter.layoutCheckbox(this.chkEnableFilters);
+        this.chkEnableFilters.setText("(*)");
+        this.chkEnableFilters.setSelected(true);
+        this.chkEnableFilters.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent arg0) {
+                lockFiltering = true;
+                boolean enabled = chkEnableFilters.isSelected();
+                for (ItemFilter<T> filter : orderedFilters) {
+                    filter.setEnabled(enabled);
+                }
+                txtFilterLogic.setEnabled(enabled);
+                btnFilters.setEnabled(enabled);
+                mainSearchFilter.setEnabled(enabled);
+                mainSearchFilter.updateEnabled(); //need to call updateEnabled since no listener for filter checkbox
+                lockFiltering = false;
+                buildFilterPredicate();
+            }
+        });
+
         //build display
         this.setOpaque(false);
         this.setLayout(null);
-        this.add(this.btnAddFilter);
-        this.add(this.txtSearch);
+        this.add(this.chkEnableFilters);
+        this.add(this.txtFilterLogic);
+        this.mainSearchFilter = createSearchFilter();
+        this.add(mainSearchFilter.getWidget());
+        this.pnlButtons.setOpaque(false);
+        FSkin.get(this.pnlButtons).setMatteBorder(1, 0, 1, 0, FSkin.getColor(Colors.CLR_TEXT));
+        this.add(this.pnlButtons);
+        this.add(this.btnFilters);
+        this.add(this.lblRatio);
         this.add(this.tableScroller);
+
+        final Runnable cmdAddCurrentSearch = new Runnable() {
+            @Override
+            public void run() {
+                ItemFilter<T> searchFilter = mainSearchFilter.createCopy();
+                if (searchFilter != null) {
+                    lockFiltering = true; //prevent updating filtering from this change
+                    addFilter(searchFilter);
+                    mainSearchFilter.reset();
+                    lockFiltering = false;
+                }
+            }
+        };
+
+        this.mainSearchFilter.getMainComponent().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == 10) {
+                    if (e.isControlDown() || e.isMetaDown()) {
+                        cmdAddCurrentSearch.run();
+                    }
+                }
+            }
+        });
 
         //setup command for btnAddFilter
         final Command addFilterCommand = new Command() {
@@ -121,34 +196,35 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
                 JPopupMenu menu = new JPopupMenu("FilterMenu");
                 GuiUtils.addMenuItem(menu, "Current text search",
                         KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                        new Runnable() {
-                    @Override
-                    public void run() {
-                        ItemFilter<T> searchFilter = createSearchFilter(txtSearch.getText());
-                        if (searchFilter != null) {
-                            addFilter(searchFilter);
-                        }
-                    }
-                }, !txtSearch.isEmpty());
+                        cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
                 buildFilterMenu(menu);
-                menu.show(btnAddFilter, 0, btnAddFilter.getHeight());
+                menu.show(btnFilters, 0, btnFilters.getHeight());
             }
         };
-        this.btnAddFilter.setCommand(addFilterCommand);
-        this.btnAddFilter.setRightClickCommand(addFilterCommand); //show menu on right-click too
+        this.btnFilters.setCommand(addFilterCommand);
+        this.btnFilters.setRightClickCommand(addFilterCommand); //show menu on right-click too
     }
 
     @Override
     public void doLayout() {
-        //int number = 0;
+        int number = 0;
+        StringBuilder logicBuilder = new StringBuilder();
         LayoutHelper helper = new LayoutHelper(this);
-        /*for (ItemFilter<T> filter : this.orderedFilters) {
-            filter.updatePanelTitle(++number);
+        for (ItemFilter<T> filter : this.orderedFilters) {
+            filter.setNumber(++number);
+            logicBuilder.append(number + "&");
             helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
         }
+        this.txtFilterLogic.setText(logicBuilder.toString());
         helper.newLine();
-        helper.include(this.btnAddFilter, 30, FTextField.HEIGHT);
-        helper.include(this.txtSearch, 0.5f, FTextField.HEIGHT);*/
+        helper.include(this.chkEnableFilters, 41, FTextField.HEIGHT);
+        helper.offset(-1, 0); //ensure widgets line up
+        helper.include(this.txtFilterLogic, this.txtFilterLogic.getAutoSizeWidth(), FTextField.HEIGHT);
+        helper.fillLine(this.mainSearchFilter.getWidget(), ItemFilter.PANEL_HEIGHT);
+        helper.newLine(-3);
+        helper.fillLine(this.pnlButtons, this.pnlButtons.getComponentCount() > 0 ? 32: 1); //just show border if no bottoms
+        helper.include(this.btnFilters, 61, FTextField.HEIGHT);
+        helper.fillLine(this.lblRatio, FTextField.HEIGHT);
         helper.fill(this.tableScroller);
     }
 
@@ -356,17 +432,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         return this.model.getItems();
     }
 
-    /**
-     * 
-     * getStatLabel.
-     * 
-     * @param s
-     */
-    public FLabel getStatLabel(SItemManagerUtil.StatTypes s) {
-        return this.statLabels.get(s);
-    }
-
-    protected abstract ItemFilter<T> createSearchFilter(String text);
+    protected abstract ItemFilter<T> createSearchFilter();
     protected abstract void buildFilterMenu(JPopupMenu menu);
 
     protected <F extends ItemFilter<T>> F getFilter(Class<F> filterClass) {
@@ -374,7 +440,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    public void addFilter(ItemFilter<T> filter) {
+    public void addFilter(final ItemFilter<T> filter) {
         final Class<? extends ItemFilter<T>> filterClass = (Class<? extends ItemFilter<T>>) filter.getClass();
         List<ItemFilter<T>> classFilters = this.filters.get(filterClass);
         if (classFilters == null) {
@@ -385,10 +451,20 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             //if filter with the same class already exists, try to merge if allowed
             //NOTE: can always use first filter for these checks since if
             //merge is supported, only one will ever exist
-            ItemFilter<T> existingFilter = classFilters.get(0);
+            final ItemFilter<T> existingFilter = classFilters.get(0);
             if (existingFilter.merge(filter)) {
-                //if new filter merged with existing filter, just update layout
-                this.revalidate();
+                //if new filter merged with existing filter, just refresh the widget
+                existingFilter.refreshWidget();
+
+                if (!this.lockFiltering) { //apply filters and focus existing filter's main component if filtering not locked
+                    buildFilterPredicate();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            existingFilter.getMainComponent().requestFocusInWindow();
+                        }
+                    });
+                }
                 return;
             }
         }
@@ -396,6 +472,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         orderedFilters.add(filter);
         this.add(filter.getPanel());
         this.revalidate();
+
+        if (!this.lockFiltering) { //apply filters and focus filter's main component if filtering not locked
+            buildFilterPredicate();
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    filter.getMainComponent().requestFocusInWindow();
+                }
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -409,15 +495,28 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             orderedFilters.remove(filter);
             this.remove(filter.getPanel());
             this.revalidate();
+            buildFilterPredicate();
         }
     }
 
     public void buildFilterPredicate() {
-        /*
-        this.filterPredicate = ?;
+        if (this.lockFiltering) { return; }
+        
+        List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
+        predicates.add(Predicates.instanceOf(this.genericType));
+
+        for (ItemFilter<T> filter : this.orderedFilters) { //TODO: Support custom filter logic
+            if (filter.isEnabled() && !filter.isEmpty()) {
+                predicates.add(filter.buildPredicate());
+            }
+        }
+        if (!this.mainSearchFilter.isEmpty()) {
+            predicates.add(mainSearchFilter.buildPredicate());
+        }
+        this.filterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
         if (this.pool != null) {
             this.updateView(true);
-        }*/
+        }
     }
 
     /**
@@ -427,19 +526,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      */
     private boolean isUnfiltered() {
         return this.filterPredicate == null;
-    }
-
-    /**
-     * 
-     * setFilterPredicate.
-     * 
-     * @param filterToSet
-     */
-    public void setFilterPredicate(final Predicate<T> filterPredicate0) {
-        this.filterPredicate = filterPredicate0;
-        if (this.pool != null) {
-            this.updateView(true);
-        }
     }
 
     /**
@@ -459,17 +545,33 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filterPredicate, this.pool.FN_GET_KEY);
             Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(Iterables.filter(this.pool, filterForPool), this.pool.FN_GET_NAME);
             this.model.addItems(items);
-        } else if (useFilter) {
+        }
+        else if (useFilter) {
             Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filterPredicate, this.pool.FN_GET_KEY);
             this.model.addItems(Iterables.filter(this.pool, pred));
-        } else if (this.wantUnique) {
+        }
+        else if (this.wantUnique) {
             Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, this.pool.FN_GET_NAME);
             this.model.addItems(items);
-        } else if (!useFilter && bForceFilter) {
+        }
+        else if (!useFilter && bForceFilter) {
             this.model.addItems(this.pool);
         }
 
         this.table.getTableModel().refreshSort();
+
+        for (ItemFilter<T> filter : this.orderedFilters) {
+            filter.afterFiltersApplied();
+        }
+
+        int total;
+        if (this.wantUnique) {
+            total = Aggregates.uniqueCount(this.pool, this.pool.FN_GET_NAME);
+        }
+        else {
+            total = this.pool.countAll();
+        }
+        this.lblRatio.setText(this.getFilteredItems().countAll() + " / " + total);
 
         //select first row if no row already selected
         SwingUtilities.invokeLater(new Runnable() {
@@ -480,6 +582,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
                 }
             }
         });
+    }
+
+    /**
+     * 
+     * getPnlButtons.
+     * 
+     * @return panel to put any custom buttons on
+     */
+    public JPanel getPnlButtons() {
+        return this.pnlButtons;
     }
 
     /**
@@ -551,6 +663,15 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      */
     public void focus() {
         this.table.requestFocusInWindow();
+    }
+
+    /**
+     * 
+     * focusSearch.
+     * 
+     */
+    public void focusSearch() {
+        this.mainSearchFilter.getMainComponent().requestFocusInWindow();
     }
 
     public void addSelectionListener(ListSelectionListener listener) {

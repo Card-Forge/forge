@@ -1,8 +1,16 @@
 package forge.gui.toolbox.itemmanager.filters;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+
+import forge.card.CardRules;
 import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.item.PaperCard;
 
@@ -10,29 +18,40 @@ import forge.item.PaperCard;
  * TODO: Write javadoc for this type.
  *
  */
-public class CardTypeFilter extends ToggleButtonsFilter<PaperCard> {
+public class CardTypeFilter extends StatTypeFilter<PaperCard> {
     public CardTypeFilter(ItemManager<PaperCard> itemManager0) {
         super(itemManager0);
     }
 
     @Override
-    protected String getTitle() {
-        return "Card Type";
+    public ItemFilter<PaperCard> createCopy() {
+        return new CardTypeFilter(itemManager);
     }
 
     @Override
-    protected void buildPanel(JPanel panel) {
-        addToggleButton(panel, StatTypes.LAND);
-        addToggleButton(panel, StatTypes.ARTIFACT);
-        addToggleButton(panel, StatTypes.CREATURE);
-        addToggleButton(panel, StatTypes.ENCHANTMENT);
-        addToggleButton(panel, StatTypes.PLANESWALKER);
-        addToggleButton(panel, StatTypes.INSTANT);
-        addToggleButton(panel, StatTypes.SORCERY);
+    protected void buildWidget(JPanel widget) {
+        addToggleButton(widget, StatTypes.LAND);
+        addToggleButton(widget, StatTypes.ARTIFACT);
+        addToggleButton(widget, StatTypes.CREATURE);
+        addToggleButton(widget, StatTypes.ENCHANTMENT);
+        addToggleButton(widget, StatTypes.PLANESWALKER);
+        addToggleButton(widget, StatTypes.INSTANT);
+        addToggleButton(widget, StatTypes.SORCERY);
     }
 
     @Override
-    protected void onRemoved() {
-        
+    public final Predicate<PaperCard> buildPredicate() {
+        final List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
+
+        for (SItemManagerUtil.StatTypes s : buttonMap.keySet()) {
+            if (buttonMap.get(s).getSelected()) {
+                types.add(s.predicate);
+            }
+        }
+
+        if (types.size() == 7) {
+            return Predicates.alwaysTrue();
+        }
+        return Predicates.compose(Predicates.or(types), PaperCard.FN_GET_RULES);
     }
 }

@@ -28,8 +28,6 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VAllDecks;
-import forge.gui.deckeditor.views.VCardCatalog;
-import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -70,8 +68,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         
         this.cardPoolCondition = poolCondition;
         
-        this.setCatalogManager(new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), true));
-        this.setDeckManager(new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), true));
+        this.setCatalogManager(new CardManager(true));
+        this.setDeckManager(new CardManager(true));
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override
@@ -158,7 +156,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         this.getCatalogManager().getTable().setup(lstCatalogCols);
         this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
-        SItemManagerUtil.resetUI();
+        SItemManagerUtil.resetUI(this);
         
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);

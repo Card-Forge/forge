@@ -4,8 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.swing.JPanel;
-
+import forge.game.GameFormat;
 import forge.gui.home.quest.DialogChooseSets;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.PaperCard;
@@ -14,19 +13,27 @@ import forge.item.PaperCard;
  * TODO: Write javadoc for this type.
  *
  */
-public class CardSetFilter extends ListLabelFilter<PaperCard> {
+public class CardSetFilter extends CardFormatFilter {
     private final Set<String> sets = new HashSet<String>();
 
-    public CardSetFilter(ItemManager<PaperCard> itemManager0, Collection<String> sets) {
+    public CardSetFilter(ItemManager<PaperCard> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
-        this.sets.addAll(sets);
+        this.sets.addAll(sets0);
+        this.formats.add(new GameFormat(null, this.sets, null));
+        this.allowReprints = allowReprints0;
     }
 
     @Override
-    protected String getTitle() {
-        return "Card Set";
+    public ItemFilter<PaperCard> createCopy() {
+        return new CardSetFilter(itemManager, this.sets, this.allowReprints);
     }
-    
+
+    @Override
+    public void reset() {
+        this.sets.clear();
+        super.reset();
+    }
+
     /**
      * Merge the given filter with this filter if possible
      * @param filter
@@ -37,9 +44,12 @@ public class CardSetFilter extends ListLabelFilter<PaperCard> {
     public boolean merge(ItemFilter filter) {
         CardSetFilter cardSetFilter = (CardSetFilter)filter;
         this.sets.addAll(cardSetFilter.sets);
+        this.allowReprints = cardSetFilter.allowReprints;
+        this.formats.clear();
+        this.formats.add(new GameFormat(null, this.sets, null));
         return true;
     }
-    
+
     public void edit() {
         final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true);
         dialog.setOkCallback(new Runnable() {
@@ -47,18 +57,21 @@ public class CardSetFilter extends ListLabelFilter<PaperCard> {
             public void run() {
                 sets.clear();
                 sets.addAll(dialog.getSelectedSets());
+                allowReprints = dialog.getWantReprints();
+                formats.clear();
+                formats.add(new GameFormat(null, sets, null));
             }
         });
     }
 
     @Override
-    protected void buildPanel(JPanel panel) {
-        
+    protected String getCaption() {
+        return "Set";
     }
 
     @Override
-    protected void onRemoved() {
-        
+    protected int getCount() {
+        return this.sets.size();
     }
 
     @Override

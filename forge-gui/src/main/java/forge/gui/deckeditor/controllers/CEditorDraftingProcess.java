@@ -66,8 +66,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     public CEditorDraftingProcess() {
         super(FScreen.DRAFTING_PROCESS);
 
-        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
-        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
+        final CardManager catalogManager = new CardManager(false);
+        final CardManager deckManager = new CardManager(false);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -252,8 +252,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         this.getCatalogManager().getTable().setup(SColumnUtil.getCatalogDefaultColumns());
         this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
-        ccAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
+        ccAddLabel = this.getBtnAdd().getText();
+        this.getBtnAdd().setText("Choose Card");
 
         if (this.getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen 
             this.showChoices(this.boosterDraft.nextChoice());
@@ -264,11 +264,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         }
 
         //Remove buttons
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(false);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setVisible(false);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setVisible(false);
+        this.getBtnAdd4().setVisible(false);
+        this.getBtnRemove().setVisible(false);
+        this.getBtnRemove4().setVisible(false);
 
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(false);
+        this.getBtnCycleSection().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
@@ -293,12 +293,12 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     @Override
     public void resetUIChanges() {
         //Re-rename buttons
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(ccAddLabel);
+        this.getBtnAdd().setText(ccAddLabel);
 
         //Re-add buttons
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(true);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setVisible(true);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setVisible(true);
+        this.getBtnAdd4().setVisible(true);
+        this.getBtnRemove().setVisible(true);
+        this.getBtnRemove4().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 

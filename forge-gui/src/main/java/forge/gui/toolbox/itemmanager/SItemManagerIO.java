@@ -44,7 +44,6 @@ public class SItemManagerIO {
 
     /** Preferences (must match with PREFS file). */
     public enum EditorPreference {
-        stats_deck,
         display_unique_only,
         elastic_columns
     }

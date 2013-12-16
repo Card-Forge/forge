@@ -1,7 +1,10 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import javax.swing.JPanel;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.PaperCard;
 
@@ -10,23 +13,26 @@ import forge.item.PaperCard;
  *
  */
 public class CardCMCFilter extends ValueRangeFilter<PaperCard> {
-
     public CardCMCFilter(ItemManager<PaperCard> itemManager0) {
         super(itemManager0);
     }
 
     @Override
-    protected String getTitle() {
-        return "Card CMC";
+    public ItemFilter<PaperCard> createCopy() {
+        return new CardCMCFilter(itemManager);
     }
 
     @Override
-    protected void buildPanel(JPanel panel) {
-        
+    protected String getCaption() {
+        return "CMC";
     }
 
     @Override
-    protected void onRemoved() {
-        
+    public Predicate<PaperCard> buildPredicate() {
+        Predicate<CardRules> predicate = getCardRulesFieldPredicate(CardRulesPredicates.LeafNumber.CardField.CMC);
+        if (predicate == null) {
+            return Predicates.alwaysTrue();
+        }
+        return Predicates.compose(predicate, PaperCard.FN_GET_RULES);
     }
 }

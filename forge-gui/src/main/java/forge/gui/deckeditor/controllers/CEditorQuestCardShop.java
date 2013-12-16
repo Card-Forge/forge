@@ -129,8 +129,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         
         this.questData = qd;
 
-        final InventoryItemManager catalogManager = new InventoryItemManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
-        final InventoryItemManager deckManager = new InventoryItemManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
+        final InventoryItemManager catalogManager = new InventoryItemManager(false);
+        final InventoryItemManager deckManager = new InventoryItemManager(false);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -144,15 +144,15 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         
         if (showingFullCatalog) {
             this.getCatalogManager().setPool(fullCatalogCards, true);
-            VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(false);
-            VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(false);
-            VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setEnabled(false);
+            this.getBtnAdd().setEnabled(false);
+            this.getBtnRemove().setEnabled(false);
+            this.getBtnRemove4().setEnabled(false);
             fullCatalogToggle.setText("Return to spell shop");
         } else {
             this.getCatalogManager().setPool(cardsForSale);
-            VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(true);
-            VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(true);
-            VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setEnabled(true);
+            this.getBtnAdd().setEnabled(true);
+            this.getBtnRemove().setEnabled(true);
+            this.getBtnRemove4().setEnabled(true);
             fullCatalogToggle.setText("See full catalog");
         }
     }
@@ -461,25 +461,25 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getCatalogManager().getTable().setup(columnsCatalog);
         this.getDeckManager().getTable().setup(columnsDeck);
 
-        SItemManagerUtil.resetUI();
+        SItemManagerUtil.resetUI(this);
 
         CCTabLabel = VCardCatalog.SINGLETON_INSTANCE.getTabLabel().getText();
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Cards for sale");
 
-        CCAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Buy Card");
+        CCAddLabel = this.getBtnAdd().getText();
+        this.getBtnAdd().setText("Buy Card");
 
         CDTabLabel = VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().getText();
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Your Cards");
 
-        CDRemLabel = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().getText();
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText("Sell Card");
+        CDRemLabel = this.getBtnRemove().getText();
+        this.getBtnRemove().setText("Sell Card");
         
         VProbabilities.SINGLETON_INSTANCE.getTabLabel().setVisible(false);
 
-        prevRem4Label = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getText();
-        prevRem4Tooltip = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getToolTipText();
-        prevRem4Cmd = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getCommand();
+        prevRem4Label = this.getBtnRemove4().getText();
+        prevRem4Tooltip = this.getBtnRemove4().getToolTipText();
+        prevRem4Cmd = this.getBtnRemove4().getCommand();
         
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
@@ -493,9 +493,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getCatalogManager().setPool(cardsForSale);
         this.getDeckManager().setPool(ownedItems);
 
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setText("Sell all extras");
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setToolTipText("Sell unneeded extra copies of all cards");
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setCommand(new Command() {
+        this.getBtnRemove4().setText("Sell all extras");
+        this.getBtnRemove4().setToolTipText("Sell unneeded extra copies of all cards");
+        this.getBtnRemove4().setCommand(new Command() {
             @Override
             public void run() {
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
@@ -513,7 +513,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             }
         });
         
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(creditsLabel, "gap 5px");
+        this.getDeckManager().getPnlButtons().add(creditsLabel, "gap 5px");
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
 
         final double multiPercent = this.multiplier * 100;
@@ -524,14 +524,14 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         if (maxSellPrice < Integer.MAX_VALUE) {
             maxSellingPrice = String.format("Maximum selling price is %d credits.", maxSellPrice);
         }
-        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
-        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(fullCatalogToggle, "w 25%, h 30!", 0);
-        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(sellPercentageLabel);
+        this.getCatalogManager().getPnlButtons().remove(this.getBtnAdd4());
+        this.getCatalogManager().getPnlButtons().add(fullCatalogToggle, "w 25%, h 30!", 0);
+        this.getCatalogManager().getPnlButtons().add(sellPercentageLabel);
         this.sellPercentageLabel.setText("<html>Selling cards at " + formatter.format(multiPercent)
                 + "% of their value.<br>" + maxSellingPrice + "</html>");
-        
-        VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(SItemManagerUtil.StatTypes.PACK).setVisible(true);
-        
+
+        //TODO: Add filter for SItemManagerUtil.StatTypes.PACK
+
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
         probsParent = removeTab(VProbabilities.SINGLETON_INSTANCE);
@@ -558,22 +558,22 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
 
         // undo Card Shop Specifics
-        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(sellPercentageLabel);
-        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(fullCatalogToggle);
-        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
+        this.getCatalogManager().getPnlButtons().remove(sellPercentageLabel);
+        this.getCatalogManager().getPnlButtons().remove(fullCatalogToggle);
+        this.getCatalogManager().getPnlButtons().add(this.getBtnAdd4());
 
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(creditsLabel);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setText(prevRem4Label);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setToolTipText(prevRem4Tooltip);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setCommand(prevRem4Cmd);
+        this.getDeckManager().getPnlButtons().remove(creditsLabel);
+        this.getBtnRemove4().setText(prevRem4Label);
+        this.getBtnRemove4().setToolTipText(prevRem4Tooltip);
+        this.getBtnRemove4().setCommand(prevRem4Cmd);
 
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(CCTabLabel);
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(CDTabLabel);
 
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(CCAddLabel);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText(CDRemLabel);
-        
-        VCardCatalog.SINGLETON_INSTANCE.getItemManager().getStatLabel(SItemManagerUtil.StatTypes.PACK).setVisible(false);
+        this.getBtnAdd().setText(CCAddLabel);
+        this.getBtnRemove().setText(CDRemLabel);
+
+        //TODO: Remove filter for SItemManagerUtil.StatTypes.PACK
         
         //Re-add tabs
         if (deckGenParent != null) {

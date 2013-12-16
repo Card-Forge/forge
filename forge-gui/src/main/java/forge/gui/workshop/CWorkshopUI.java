@@ -29,7 +29,6 @@ import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
 import forge.gui.toolbox.itemmanager.table.ItemTable;
-import forge.gui.workshop.controllers.CWorkshopCatalog;
 import forge.gui.workshop.menus.CWorkshopUIMenus;
 import forge.gui.workshop.views.VWorkshopCatalog;
 import forge.item.PaperCard;
@@ -78,7 +77,6 @@ public enum CWorkshopUI implements ICDoc, IMenuProvider {
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
         cardTable.setWantElasticColumns(wantElastic);
         cardManager.setWantUnique(wantUnique);
-        CWorkshopCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
     }
 
     /* (non-Javadoc)

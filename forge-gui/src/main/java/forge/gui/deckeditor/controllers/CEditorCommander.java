@@ -37,7 +37,6 @@ import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
-import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
@@ -87,8 +86,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 
-        this.setCatalogManager(new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), wantUnique));
-        this.setDeckManager(new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), wantUnique));
+        this.setCatalogManager(new CardManager(wantUnique));
+        this.setDeckManager(new CardManager(wantUnique));
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override
@@ -180,26 +179,26 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public void update() {
-        
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
 
         this.getCatalogManager().getTable().setup(lstCatalogCols);
         this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
-        SItemManagerUtil.resetUI();
+        SItemManagerUtil.resetUI(this);
         
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setVisible(false);
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(false);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard()).setCommand(new Command() {
+        this.getBtnRemove4().setVisible(false);
+        this.getBtnAdd4().setVisible(false);
+        this.getBtnCycleSection().setVisible(true);
+        this.getBtnCycleSection().setCommand(new Command() {
             private static final long serialVersionUID = -9082606944024479599L;
 
             @Override
             public void run() {
                 cycleEditorMode();
-        } });
-        
+            }
+        });
+
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
         

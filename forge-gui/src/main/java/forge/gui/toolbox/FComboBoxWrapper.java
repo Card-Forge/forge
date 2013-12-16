@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.ComboBoxModel;
+import javax.swing.JComponent;
 import javax.swing.ListCellRenderer;
 
 import forge.gui.toolbox.FComboBox.TextAlignment;
@@ -135,6 +136,10 @@ public class FComboBoxWrapper<E> {
     public void addTo(Container container, Object constraints0) {
         container.add(this.comboBox, constraints0);
         this.constraints = constraints0;
+    }
+
+    public JComponent getComponent() { //disguise as component for sake of rare places that need to access component in wrapper
+        return this.comboBox;
     }
     
     private void refreshSkin() {

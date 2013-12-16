@@ -1,5 +1,6 @@
 package forge.gui.toolbox;
 
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
@@ -9,6 +10,8 @@ import java.awt.event.FocusEvent;
 
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -47,7 +50,7 @@ public class FTextField extends JTextField {
         public Builder showGhostTextWithFocus(boolean b0) { showGhostTextWithFocus = b0; return this; }
         public Builder showGhostTextWithFocus()           { return showGhostTextWithFocus(true); }
     }
-    
+
     public static final int HEIGHT = 25; //TODO: calculate this somehow instead of hard-coding it
 
     private final FSkin.JTextComponentSkin<FTextField> skin;
@@ -61,11 +64,11 @@ public class FTextField extends JTextField {
         skin.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setMargin(new Insets(3, 3, 2, 3));
         this.setOpaque(true);
-        
+
         if (builder.maxLength > 0) {
             this.setDocument(new _LengthLimitedDocument(builder.maxLength));
         }
-        
+
         this.setEditable(!builder.readonly);
         this.setText(builder.text);
         this.setToolTipText(builder.toolTip);
@@ -102,13 +105,17 @@ public class FTextField extends JTextField {
         this.ghostText = builder.ghostText;
         if (this.ghostText == "") { this.ghostText = null; } //don't allow empty string to make other logic easier
     }
-    
-    public boolean isEmpty()
-    {
+
+    public boolean isEmpty() {
         String text = this.getText();
         return (text == null || text.isEmpty());
     }
     
+    public int getAutoSizeWidth() {
+        FontMetrics metrics = getGraphics().getFontMetrics(this.getFont());
+        return metrics.stringWidth(this.getText()) + 12;
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -123,14 +130,12 @@ public class FTextField extends JTextField {
             g2d.dispose();
         }
     }
-    
-    public String getGhostText()
-    {
+
+    public String getGhostText() {
         return this.ghostText;
     }
-    
-    public void setGhostText(String ghostText0)
-    {
+
+    public void setGhostText(String ghostText0) {
         if (ghostText0 == "") { ghostText0 = null; } //don't allow empty string to make other logic easier
         if (this.ghostText == ghostText0) { return; }
         this.ghostText = ghostText0;
@@ -138,14 +143,12 @@ public class FTextField extends JTextField {
             this.repaint();
         }
     }
-    
-    public boolean getShowGhostTextWithFocus()
-    {
+
+    public boolean getShowGhostTextWithFocus() {
         return this.showGhostTextWithFocus;
     }
-    
-    public void setShowGhostTextWithFocus(boolean showGhostTextWithFocus0)
-    {
+
+    public void setShowGhostTextWithFocus(boolean showGhostTextWithFocus0) {
         if (this.showGhostTextWithFocus == showGhostTextWithFocus0) { return; }
         this.showGhostTextWithFocus = showGhostTextWithFocus0;
         if (this.isEmpty() && this.hasFocus()) {
@@ -155,7 +158,7 @@ public class FTextField extends JTextField {
 
     private static class _LengthLimitedDocument extends PlainDocument {
         private final int _limit;
-        
+
         _LengthLimitedDocument(int limit) { _limit = limit; }
 
         // called each time a character is typed or a string is pasted
@@ -171,5 +174,28 @@ public class FTextField extends JTextField {
             }
             super.insertString(offset, s, attributeSet);
         }
+    }
+
+    public void addChangeListener(ChangeListener listener) {
+        this.getDocument().addDocumentListener(listener);
+    }
+
+    public static abstract class ChangeListener implements DocumentListener {
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            textChanged();
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            textChanged();
+        }
+
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            textChanged();
+        }
+
+        public abstract void textChanged();
     }
 }

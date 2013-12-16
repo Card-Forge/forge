@@ -62,7 +62,6 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     private JCheckBox chbDeckPower = new FCheckBox("Power");
     private JCheckBox chbDeckToughness = new FCheckBox("Toughness");
 
-    private JCheckBox chbDeckStats = new FCheckBox("Show stats in current deck");
     private JCheckBox chbElasticColumns = new FCheckBox("Use elastic resizing when changing column widths");
 
     private JCheckBox chbCardDisplayUnique = new FCheckBox("Show unique cards only (only affects Constructed)");
@@ -98,16 +97,13 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
         FSkin.get(chbDeckPower).setFont(font);
         FSkin.get(chbDeckToughness).setFont(font);
 
-        FSkin.get(chbDeckStats).setFont(font);
         FSkin.get(chbElasticColumns).setFont(font);
-        chbDeckStats.setSelected(true);
         chbElasticColumns.setSelected(false);
 
         FSkin.get(chbCardDisplayUnique).setFont(font);
         chbCardDisplayUnique.setSelected(false);
 
         pnl.add(lblStats, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
-        pnl.add(chbDeckStats, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
         pnl.add(chbElasticColumns, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
 
         final String constraints = "w 75px, h 25px!, gap 5px 5px 5px 5px, ax center";
@@ -277,11 +273,6 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getChbDeckToughness() {
         return chbDeckToughness;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getChbDeckStats() {
-        return chbDeckStats;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

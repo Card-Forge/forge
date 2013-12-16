@@ -25,7 +25,6 @@ import forge.gui.toolbox.FSkin.SkinFont;
 
 @SuppressWarnings("serial")
 public class FComboBox<E> extends JComboBox<E> {
-
     public enum TextAlignment {
         LEFT (SwingConstants.LEFT),
         RIGHT (SwingConstants.RIGHT),
@@ -102,7 +101,6 @@ public class FComboBox<E> extends JComboBox<E> {
     }
 
     private class FComboBoxUI extends BasicComboBoxUI {
-
         @Override
         protected LayoutManager createLayoutManager() {
             return super.createLayoutManager();
@@ -134,7 +132,6 @@ public class FComboBox<E> extends JComboBox<E> {
 
         @SuppressWarnings("hiding")
         private class CustomCellRenderer<E> implements ListCellRenderer<E> {
-
             private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
             @Override

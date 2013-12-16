@@ -1644,6 +1644,10 @@ public enum FSkin {
             return this.font.getSize();
         }
 
+        public int measureTextWidth(Graphics g, String text) {
+            return g.getFontMetrics(this.font).stringWidth(text);
+        }
+
         private void updateFont() {
             this.font = baseFont.deriveFont(this.style, this.size);
         }

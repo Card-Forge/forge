@@ -1,19 +1,14 @@
 package forge.gui.toolbox.itemmanager;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
-import forge.item.PaperCard;
-import forge.item.InventoryItem;
-import forge.util.Aggregates;
-import forge.util.ItemPoolView;
 import forge.util.TextUtil;
 
 
@@ -76,40 +71,13 @@ public final class SItemManagerUtil  {
         return (int) Math.round((double) (x0 * 100) / (double) y0);
     }
 
-    private static final Predicate<Object> totalPred = Predicates.instanceOf(PaperCard.class);
-    private static final Predicate<Object> packPred  = Predicates.not(totalPred);
-
-    /**
-     * setStats.
-     * 
-     * @param <T> &emsp; the generic type
-     * @param itemManager &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager<T>}
-     */
-    public static <T extends InventoryItem> void setStats(final ItemManager<T> itemManager) {
-        final ItemPoolView<T> items = itemManager.getFilteredItems();
-        for (StatTypes s : StatTypes.values()) {
-            switch (s) {
-            case TOTAL:
-                itemManager.getStatLabel(s).setText(String.valueOf(
-                        Aggregates.sum(Iterables.filter(items, Predicates.compose(totalPred, items.FN_GET_KEY)), items.FN_GET_COUNT)));
-                break;
-            case PACK:
-                itemManager.getStatLabel(s).setText(String.valueOf(
-                        Aggregates.sum(Iterables.filter(items, Predicates.compose(packPred, items.FN_GET_KEY)), items.FN_GET_COUNT)));
-                break;
-            default:
-                itemManager.getStatLabel(s).setText(String.valueOf(items.countAll(Predicates.compose(s.predicate, PaperCard.FN_GET_RULES), PaperCard.class)));
-            }
-        }
-    }
-
     /**
      * Resets components that may have been changed
      * by various configurations of the deck editor.
      */
-    public static void resetUI() {
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(true);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setVisible(true);
+    public static void resetUI(ACEditorBase<?, ?> editor) {
+        editor.getBtnAdd4().setVisible(true);
+        editor.getBtnRemove4().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(true);
@@ -126,7 +94,7 @@ public final class SItemManagerUtil  {
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(true);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(false);
+        editor.getBtnCycleSection().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText("Title:");

@@ -14,7 +14,6 @@ import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
 import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
-import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VEditorPreferences;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
@@ -90,16 +89,10 @@ public enum CEditorPreferences implements ICDoc {
         }
 
         // Catalog/Deck Stats
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckStats().setSelected(
-                SItemManagerIO.getPref(EditorPreference.stats_deck));
         VEditorPreferences.SINGLETON_INSTANCE.getChbCardDisplayUnique().setSelected(
                 SItemManagerIO.getPref(EditorPreference.display_unique_only));
         VEditorPreferences.SINGLETON_INSTANCE.getChbElasticColumns().setSelected(
                 SItemManagerIO.getPref(EditorPreference.elastic_columns));
-
-        if (!SItemManagerIO.getPref(EditorPreference.stats_deck)) {
-            VCurrentDeck.SINGLETON_INSTANCE.setStatsVisible(false);
-        }
 
         boolean wantElastic = SItemManagerIO.getPref(EditorPreference.elastic_columns);
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
@@ -112,13 +105,6 @@ public enum CEditorPreferences implements ICDoc {
             curEditor.getDeckManager().setWantUnique(wantUnique);
             curEditor.getDeckManager().updateView(true);
         }
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbDeckStats().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                VCurrentDeck.SINGLETON_INSTANCE.setStatsVisible(
-                        ((JCheckBox) e.getSource()).isSelected());
-                SItemManagerIO.setPref(EditorPreference.stats_deck, ((JCheckBox) e.getSource()).isSelected());
-                SItemManagerIO.savePreferences(CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().getTable()); } });
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbElasticColumns().addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
@@ -13,12 +11,8 @@ import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRulesPredicates.Presets;
 import forge.card.MagicColor;
-import forge.gui.deckeditor.views.VCardCatalog;
-import forge.gui.deckeditor.views.VCardCatalog.RangeTypes;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FSpinner;
 import forge.item.PaperCard;
-import forge.util.ComparableOp;
 import forge.util.PredicateString.StringOp;
 
 /** 
@@ -139,39 +133,7 @@ public class SFilterUtil {
         return Predicates.compose(textFilter, PaperCard.FN_GET_RULES);
     }
 
-    private static Predicate<CardRules> getCardRulesFieldPredicate(int min, int max, CardRulesPredicates.LeafNumber.CardField field) {
-        boolean hasMin = 0 != min;
-        boolean hasMax = 10 != max;
-
-        Predicate<CardRules> pMin = !hasMin ? null : new CardRulesPredicates.LeafNumber(field, ComparableOp.GT_OR_EQUAL, min);
-        Predicate<CardRules> pMax = !hasMax ? null : new CardRulesPredicates.LeafNumber(field, ComparableOp.LT_OR_EQUAL, max);
-
-        return optimizedAnd(pMin, pMax);
-    }
-
-    private static <T> Predicate<T> optimizedAnd(Predicate<T> p1, Predicate<T> p2) {
+    public static <T> Predicate<T> optimizedAnd(Predicate<T> p1, Predicate<T> p2) {
         return p1 == null ? p2 : (p2 == null ? p1 : Predicates.and(p1, p2));
-    }
-
-    /**
-     * builds a filter for an interval on a card field
-     */
-    public static Predicate<PaperCard> buildIntervalFilter(
-            Map<RangeTypes, Pair<FSpinner, FSpinner>> spinners, VCardCatalog.RangeTypes field) {
-        Pair<FSpinner, FSpinner> sPair = spinners.get(field);
-        Predicate<CardRules> fieldFilter = getCardRulesFieldPredicate(
-                Integer.valueOf(sPair.getLeft().getValue().toString()),
-                Integer.valueOf(sPair.getRight().getValue().toString()), field.cardField);
-
-        if (null != fieldFilter && VCardCatalog.RangeTypes.CMC != field)
-        {
-            fieldFilter = Predicates.and(fieldFilter, CardRulesPredicates.Presets.IS_CREATURE);
-        }
-
-        if (fieldFilter == null) {
-            return Predicates.alwaysTrue();
-        } else {
-            return Predicates.compose(fieldFilter, PaperCard.FN_GET_RULES);
-        }
     }
 }

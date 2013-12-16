@@ -2,7 +2,15 @@ package forge.gui.toolbox.itemmanager.filters;
 
 import javax.swing.JPanel;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
+import forge.card.MagicColor;
+import forge.card.CardRulesPredicates.Presets;
 import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SFilterUtil;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.item.PaperCard;
 
@@ -10,29 +18,77 @@ import forge.item.PaperCard;
  * TODO: Write javadoc for this type.
  *
  */
-public class CardColorFilter extends ToggleButtonsFilter<PaperCard> {
+public class CardColorFilter extends StatTypeFilter<PaperCard> {
     public CardColorFilter(ItemManager<PaperCard> itemManager0) {
         super(itemManager0);
     }
 
     @Override
-    protected String getTitle() {
-        return "Card Color";
+    public ItemFilter<PaperCard> createCopy() {
+        return new CardColorFilter(itemManager);
     }
 
     @Override
-    protected void buildPanel(JPanel panel) {
-        addToggleButton(panel, StatTypes.WHITE);
-        addToggleButton(panel, StatTypes.BLUE);
-        addToggleButton(panel, StatTypes.BLACK);
-        addToggleButton(panel, StatTypes.RED);
-        addToggleButton(panel, StatTypes.GREEN);
-        addToggleButton(panel, StatTypes.COLORLESS);
-        addToggleButton(panel, StatTypes.MULTICOLOR);
+    protected void buildWidget(JPanel widget) {
+        addToggleButton(widget, StatTypes.WHITE);
+        addToggleButton(widget, StatTypes.BLUE);
+        addToggleButton(widget, StatTypes.BLACK);
+        addToggleButton(widget, StatTypes.RED);
+        addToggleButton(widget, StatTypes.GREEN);
+        addToggleButton(widget, StatTypes.COLORLESS);
+        addToggleButton(widget, StatTypes.MULTICOLOR);
     }
 
     @Override
-    protected void onRemoved() {
-        
+    public final Predicate<PaperCard> buildPredicate() {
+        byte colors = 0;
+
+        if (buttonMap.get(StatTypes.WHITE).getSelected()) {
+            colors |= MagicColor.WHITE;
+        }
+        if (buttonMap.get(StatTypes.BLUE).getSelected()) {
+            colors |= MagicColor.BLUE;
+        }
+        if (buttonMap.get(StatTypes.BLACK).getSelected()) {
+            colors |= MagicColor.BLACK;
+        }
+        if (buttonMap.get(StatTypes.RED).getSelected()) {
+            colors |= MagicColor.RED;
+        }
+        if (buttonMap.get(StatTypes.GREEN).getSelected()) {
+            colors |= MagicColor.GREEN;
+        }
+
+        boolean wantColorless = buttonMap.get(StatTypes.COLORLESS).getSelected();
+        boolean wantMulticolor = buttonMap.get(StatTypes.MULTICOLOR).getSelected();
+
+        Predicate<CardRules> preFinal = null;
+        if (wantMulticolor) {
+            if (colors == 0) { //handle showing all multi-color cards if all 5 colors are filtered
+                preFinal = Presets.IS_MULTICOLOR;
+                if (wantColorless) {
+                    preFinal = Predicates.or(preFinal, Presets.IS_COLORLESS);
+                }
+            }
+            else if (colors != MagicColor.ALL_COLORS) {
+                preFinal = CardRulesPredicates.canCastWithAvailable(colors);
+            }
+        }
+        else if (colors != MagicColor.ALL_COLORS) {
+            preFinal = Predicates.and(CardRulesPredicates.canCastWithAvailable(colors), Predicates.not(Presets.IS_MULTICOLOR));
+        }
+        if (!wantColorless) {
+            if (colors != 0 && colors != MagicColor.ALL_COLORS) {
+                //if colorless filtered out ensure phyrexian cards don't appear
+                //unless at least one of their colors is selected
+                preFinal = Predicates.and(preFinal, CardRulesPredicates.isColor(colors));
+            }
+            preFinal = SFilterUtil.optimizedAnd(preFinal, Predicates.not(Presets.IS_COLORLESS));
+        }
+
+        if (preFinal == null) {
+            return Predicates.alwaysTrue();
+        }
+        return Predicates.compose(preFinal, PaperCard.FN_GET_RULES);
     }
 }

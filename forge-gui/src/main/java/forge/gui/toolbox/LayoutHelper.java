@@ -9,7 +9,7 @@ import javax.swing.JComponent;
 public final class LayoutHelper {
     private final int parentWidth, parentHeight;
     private int x, y, lineBottom;
-    
+
     public LayoutHelper(JComponent parent) {
         parentWidth = parent.getWidth();
         parentHeight = parent.getHeight();
@@ -30,12 +30,22 @@ public final class LayoutHelper {
      * @param height
      */
     public void fillLine(final JComponent comp, int height) {
+        fillLine(comp, height, 0);
+    }
+
+    /**
+     * Layout component to fill remaining horizontal space of current line
+     * @param comp
+     * @param height
+     * @param rightPadding
+     */
+    public void fillLine(final JComponent comp, int height, int rightPadding) {
         if (x >= parentWidth) {
             newLine();
         }
-        include(comp, parentWidth - x, height);
+        include(comp, parentWidth - x - rightPadding, height);
     }
-    
+
     /**
      * Include component in layout with a percentage width and fixed height
      * @param comp
@@ -101,7 +111,7 @@ public final class LayoutHelper {
         x += dx;
         y += dy;
     }
-    
+
     /**
      * Start new line of layout
      */    
@@ -110,5 +120,28 @@ public final class LayoutHelper {
         x = 0;
         y = lineBottom + 3;
         lineBottom = y;
+    }
+
+    /**
+     * Start new line of layout
+     */    
+    public void newLine(int dy) {
+        x = 0;
+        y = lineBottom + 3 + dy;
+        lineBottom = y;
+    }
+    
+    /**
+     * @return width of parent
+     */
+    public int getParentWidth() {
+        return parentWidth;
+    }
+
+    /**
+     * @return width of parent
+     */
+    public int getParentHeight() {
+        return parentHeight;
     }
 }

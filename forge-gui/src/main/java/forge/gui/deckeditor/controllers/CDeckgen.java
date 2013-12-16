@@ -20,7 +20,6 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.ICDoc;
-import forge.gui.toolbox.FLabel;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
@@ -53,21 +52,30 @@ public enum CDeckgen implements ICDoc {
     @SuppressWarnings("serial")
     @Override
     public void initialize() {
-        ((FLabel) VDeckgen.SINGLETON_INSTANCE.getBtnRandCardpool()).setCommand(new Command() {
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandCardpool().setCommand(new Command() {
             @Override
             public void run() {
                 newRandomConstructed();
             }
         });
-
-        ((FLabel) VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck2()).setCommand(new Command() {
-            @Override  public void run() { newGenerateConstructed(2); } });
-
-        ((FLabel) VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck3()).setCommand(new Command() {
-            @Override  public void run() { newGenerateConstructed(3); } });
-
-        ((FLabel) VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck5()).setCommand(new Command() {
-            @Override  public void run() { newGenerateConstructed(5); } });
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck2().setCommand(new Command() {
+            @Override
+            public void run() {
+                newGenerateConstructed(2);
+            }
+        });
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck3().setCommand(new Command() {
+            @Override
+            public void run() {
+                newGenerateConstructed(3);
+            }
+        });
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck5().setCommand(new Command() {
+            @Override
+            public void run() {
+                newGenerateConstructed(5);
+            }
+        });
     }
 
     /* (non-Javadoc)

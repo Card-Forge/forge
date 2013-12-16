@@ -19,12 +19,16 @@ package forge.gui.deckeditor.controllers;
 
 import javax.swing.SwingUtilities;
 
+import forge.Command;
 import forge.deck.DeckBase;
+import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SRearrangingUtil;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
 import forge.view.FView;
@@ -63,6 +67,41 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     private final FScreen screen;
     private ItemManager<TItem> catalogManager;
     private ItemManager<TItem> deckManager;
+
+    // card transfer buttons
+    private final FLabel btnAdd = new FLabel.Builder()
+            .fontSize(14)
+            .text("Add card")
+            .tooltip("Add selected card to current deck (or double click the row or hit the spacebar)")
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PLUS))
+            .iconScaleAuto(false).hoverable().build();
+    private final FLabel btnAdd4 = new FLabel.Builder()
+            .fontSize(14)
+            .text("Add 4 of card")
+            .tooltip("Add up to 4 of selected card to current deck")
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PLUS))
+            .iconScaleAuto(false).hoverable().build();
+
+    private final FLabel btnRemove = new FLabel.Builder()
+            .fontSize(14)
+            .text("Remove card")
+            .tooltip("Remove selected card from current deck (or double click the row or hit the spacebar)")
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
+            .iconScaleAuto(false).hoverable().build();
+
+    private final FLabel btnRemove4 = new FLabel.Builder()
+            .fontSize(14)
+            .text("Remove 4 of card")
+            .tooltip("Remove up to 4 of selected card to current deck")
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
+            .iconScaleAuto(false).hoverable().build();
+
+    private final FLabel btnCycleSection = new FLabel.Builder()
+            .fontSize(14)
+            .text("Change Section")
+            .tooltip("Toggle between editing the deck and the sideboard/planar/scheme/vanguard parts of this deck")
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT))
+            .iconScaleAuto(false).hoverable().build();
     
     protected ACEditorBase(FScreen screen0) {
         this.screen = screen0;
@@ -128,8 +167,25 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
      * 
      * @param itemManager &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
+    @SuppressWarnings("serial")
     public void setDeckManager(final ItemManager<TItem> itemManager) {
         this.deckManager = itemManager;
+
+        btnRemove.setCommand(new Command() {
+            @Override
+            public void run() {
+                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
+            }
+        });
+        btnRemove4.setCommand(new Command() {
+            @Override
+            public void run() {
+                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 4);
+            }
+        });
+        itemManager.getPnlButtons().add(btnRemove, "w 30%!, h 30px!, gapx 5");
+        itemManager.getPnlButtons().add(btnRemove4, "w 30%!, h 30px!, gapx 5");
+        itemManager.getPnlButtons().add(btnCycleSection, "w 30%!, h 30px!, gapx 5");
     }
 
     /**
@@ -146,8 +202,24 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
      * 
      * @param itemManager &emsp; {@link forge.gui.toolbox.itemmanager.ItemManager}
      */
+    @SuppressWarnings("serial")
     public void setCatalogManager(final ItemManager<TItem> itemManager) {
         this.catalogManager = itemManager;
+
+        btnAdd.setCommand(new Command() {
+            @Override
+            public void run() {
+                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 1);
+            }
+        });
+        btnAdd4.setCommand(new Command() {
+            @Override
+            public void run() {
+                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 4);
+            }
+        });
+        itemManager.getPnlButtons().add(btnAdd, "w 30%!, h 30px!, h 30px!, gapx 5");
+        itemManager.getPnlButtons().add(btnAdd4, "w 30%!, h 30px!, h 30px!, gapx 5");
     }
 
     /**
@@ -179,4 +251,10 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
         return parent;
     }
+
+    public FLabel getBtnAdd()     { return btnAdd; }
+    public FLabel getBtnAdd4()    { return btnAdd4; }
+    public FLabel getBtnRemove()  { return btnRemove; }
+    public FLabel getBtnRemove4() { return btnRemove4; }
+    public FLabel getBtnCycleSection() { return btnCycleSection; }
 }

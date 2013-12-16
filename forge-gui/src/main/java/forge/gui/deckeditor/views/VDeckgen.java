@@ -1,7 +1,5 @@
 package forge.gui.deckeditor.views;
 
-import javax.swing.JLabel;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.deckeditor.controllers.CDeckgen;
 import forge.gui.framework.DragCell;
@@ -24,22 +22,22 @@ public enum VDeckgen implements IVDoc<CDeckgen> {
     private final DragTab tab = new DragTab("Deck Generation");
 
     // Deckgen buttons
-    private final JLabel btnRandCardpool = new FLabel.Builder()
+    private final FLabel btnRandCardpool = new FLabel.Builder()
         .tooltip("Generate random constructed cardpool in current deck area")
         .text("Random Cardpool").fontSize(14)
         .opaque(true).hoverable(true).build();
 
-    private final JLabel btnRandDeck2 = new FLabel.Builder()
+    private final FLabel btnRandDeck2 = new FLabel.Builder()
         .tooltip("Generate 2 color constructed deck in current deck area")
         .text("Constructed (2 color)").fontSize(14)
         .opaque(true).hoverable(true).build();
 
-    private final JLabel btnRandDeck3 = new FLabel.Builder()
+    private final FLabel btnRandDeck3 = new FLabel.Builder()
         .tooltip("Generate 3 color constructed deck in current deck area")
         .text("Constructed (3 color)").fontSize(14)
         .opaque(true).hoverable(true).build();
 
-    private final JLabel btnRandDeck5 = new FLabel.Builder()
+    private final FLabel btnRandDeck5 = new FLabel.Builder()
         .tooltip("Generate 5 color constructed deck in current deck area")
         .text("Constructed (5 color)").fontSize(14)
         .opaque(true).hoverable(true).build();
@@ -106,22 +104,22 @@ public enum VDeckgen implements IVDoc<CDeckgen> {
 
     //========== Retrieval methods
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnRandCardpool() {
+    public FLabel getBtnRandCardpool() {
         return btnRandCardpool;
     }
 
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnRandDeck2() {
+    public FLabel getBtnRandDeck2() {
         return btnRandDeck2;
     }
 
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnRandDeck3() {
+    public FLabel getBtnRandDeck3() {
         return btnRandDeck3;
     }
 
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnRandDeck5() {
+    public FLabel getBtnRandDeck5() {
         return btnRandDeck5;
     }
 }

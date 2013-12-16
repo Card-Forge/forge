@@ -1,16 +1,12 @@
 package forge.gui.toolbox.itemmanager;
 
 import java.util.List;
-import java.util.Map;
-
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.gui.GuiUtils;
 import forge.gui.home.quest.DialogChooseSets;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.gui.toolbox.itemmanager.filters.CardCMCFilter;
 import forge.gui.toolbox.itemmanager.filters.CardColorFilter;
 import forge.gui.toolbox.itemmanager.filters.CardFormatFilter;
@@ -30,17 +26,19 @@ import forge.quest.QuestWorld;
  */
 @SuppressWarnings("serial")
 public final class CardManager extends ItemManager<PaperCard> {
+    public CardManager(boolean wantUnique0) {
+        super(PaperCard.class, wantUnique0);
 
-    public CardManager(Map<StatTypes, FLabel> statLabels0, boolean wantUnique0) {
-        super(PaperCard.class, statLabels0, wantUnique0);
-        
+        this.lockFiltering = true; //temporary lock filtering for improved performance
         this.addFilter(new CardColorFilter(this));
         this.addFilter(new CardTypeFilter(this));
+        this.lockFiltering = false;
+        buildFilterPredicate();
     }
 
     @Override
-    protected ItemFilter<PaperCard> createSearchFilter(String text) {
-        return new CardSearchFilter(this, text);
+    protected ItemFilter<PaperCard> createSearchFilter() {
+        return new CardSearchFilter(this);
     }
 
     @Override
@@ -70,7 +68,7 @@ public final class CardManager extends ItemManager<PaperCard> {
                         public void run() {
                             List<String> sets = dialog.getSelectedSets();
                             if (!sets.isEmpty()) {
-                                addFilter(new CardSetFilter(CardManager.this, sets));
+                                addFilter(new CardSetFilter(CardManager.this, sets, dialog.getWantReprints()));
                             }
                         }
                     });

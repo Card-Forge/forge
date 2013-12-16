@@ -1,5 +1,6 @@
 package forge.util;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -78,13 +79,13 @@ public class TextUtil {
         int len = input.length();
         int start = 0;
         int idx = 1;
-        for (int iC = 0; iC < len; iC++ ) {
+        for (int iC = 0; iC < len; iC++) {
             char c = input.charAt(iC);
-            if( closePar > 0 && c == closePar && nPar > 0 ) { nPar--; }
-            else if( openPar > 0 && c == openPar ) nPar++;
+            if (closePar > 0 && c == closePar && nPar > 0) { nPar--; }
+            else if (openPar > 0 && c == openPar) nPar++;
 
-            if( c == delimiter && nPar == 0 && idx < maxEntries) {
-                if( iC > start || !skipEmpty ) {
+            if (c == delimiter && nPar == 0 && idx < maxEntries) {
+                if (iC > start || !skipEmpty) {
                     result.add(input.subSequence(start, iC).toString());
                     idx++;
                 }
@@ -92,7 +93,7 @@ public class TextUtil {
             }
         }
 
-        if( len > start || !skipEmpty )
+        if (len > start || !skipEmpty)
             result.add(input.subSequence(start, len).toString());
 
         String[] toReturn = result.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
@@ -122,12 +123,20 @@ public class TextUtil {
     public static String buildFourColumnList(String firstLine, Iterable<PaperCard> cAnteRemoved) {
         StringBuilder sb = new StringBuilder(firstLine);
         int i = 0;
-        for(PaperCard cp: cAnteRemoved) {
-            if ( i != 0 ) sb.append(", ");
-            if ( i % 4 == 0 ) sb.append("\n");
+        for (PaperCard cp: cAnteRemoved) {
+            if (i != 0) { sb.append(", "); }
+            if (i % 4 == 0) { sb.append("\n"); }
             sb.append(cp);
             i++;
         }
         return sb.toString();
+    }
+
+    public static boolean isPrintableChar(char c) {
+        Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
+        return (!Character.isISOControl(c)) &&
+                c != KeyEvent.CHAR_UNDEFINED &&
+                block != null &&
+                block != Character.UnicodeBlock.SPECIALS;
     }
 }

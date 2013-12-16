@@ -38,7 +38,6 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.home.quest.CSubmenuQuestDecks;
-import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
@@ -98,8 +97,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         
         this.questData = questData0;
 
-        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
-        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
+        final CardManager catalogManager = new CardManager(false);
+        final CardManager deckManager = new CardManager(false);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -281,11 +280,11 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         this.getCatalogManager().getTable().setup(columnsCatalog);
         this.getDeckManager().getTable().setup(columnsDeck);
 
-        SItemManagerUtil.resetUI();
+        SItemManagerUtil.resetUI(this);
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard()).setCommand(new Command() {
+        this.getBtnCycleSection().setVisible(true);
+        this.getBtnCycleSection().setCommand(new Command() {
             @Override
             public void run() {
                 sideboardMode = !sideboardMode;

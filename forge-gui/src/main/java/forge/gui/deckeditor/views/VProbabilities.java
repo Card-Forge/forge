@@ -37,12 +37,12 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
     private final DragTab tab = new DragTab("Draw Order");
 
     // Title labels
-    private final JLabel lblReshuffle = new FLabel.Builder()
+    private final FLabel lblReshuffle = new FLabel.Builder()
             .hoverable(true).text("CLICK HERE TO RE-SHUFFLE").tooltip("See a new sample shuffle")
             .fontSize(16).build();
-    private final JLabel lblSampleHand = new FLabel.Builder().fontStyle(Font.BOLD)
+    private final FLabel lblSampleHand = new FLabel.Builder().fontStyle(Font.BOLD)
             .fontSize(12).text("SAMPLE HAND").opaque(true).build();
-    private final JLabel lblRemainingDraws = new FLabel.Builder().fontStyle(Font.BOLD)
+    private final FLabel lblRemainingDraws = new FLabel.Builder().fontStyle(Font.BOLD)
             .fontSize(12).text("REMAINING DRAWS").opaque(true).build();
    // private final JLabel lblExplanation = new FLabel.Builder()
      //       .fontSize(11).text("XX % = frequency that card will appear at that position").build();
@@ -64,7 +64,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
         scroller.getViewport().setBorder(null);
         scroller.getVerticalScrollBar().setUnitIncrement(16);
 
-        FSkin.JLabelSkin<JLabel> labelSkin = FSkin.get(lblSampleHand);
+        FSkin.JLabelSkin<FLabel> labelSkin = FSkin.get(lblSampleHand);
         labelSkin.setMatteBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
         labelSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         
@@ -134,7 +134,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
 
     //========== Retrieval methods
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblReshuffle() {
+    public FLabel getLblReshuffle() {
         return lblReshuffle;
     }
 

@@ -19,7 +19,6 @@ import forge.gui.deckeditor.DeckImport;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.ICDoc;
-import forge.gui.toolbox.FLabel;
 import forge.item.InventoryItem;
 import forge.properties.NewConstants;
 
@@ -75,40 +74,43 @@ public enum CCurrentDeck implements ICDoc {
     @Override
     @SuppressWarnings("serial")
     public void initialize() {
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
-            .setCommand(new Command() { @Override
-                public void run() { SEditorIO.saveDeck(); } });
-
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs())
-            .setCommand(new Command() { @Override
-                public void run() { exportDeck(); } });
-
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies())
-        .setCommand(new Command() { @Override
-            public void run() { printProxies(); } });
-
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen())
-            .setCommand(new Command() { @Override
-                public void run() { openDeck(); } });
-
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnNew())
-            .setCommand(new Command() { @Override
-                public void run() { newDeck(); } });
-
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove()).setCommand(new Command() {
-            @Override  public void run() {
-                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
-            } });
-
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4()).setCommand(new Command() {
-            @Override  public void run() {
-                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 4);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setCommand(new Command() {
+            @Override
+            public void run() {
+                SEditorIO.saveDeck();
+            }
+        });
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setCommand(new Command() {
+            @Override
+            public void run() {
+                exportDeck();
+            }
+        });
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setCommand(new Command() {
+            @Override
+            public void run() {
+                printProxies();
+            }
+        });
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setCommand(new Command() {
+            @Override
+            public void run() {
+                openDeck();
             }
         });
 
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport()
-        .setCommand(new Command() { @Override
-            public void run() { importDeck(); } });
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setCommand(new Command() {
+            @Override
+            public void run() {
+                newDeck();
+            }
+        });
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setCommand(new Command() {
+            @Override
+            public void run() {
+                importDeck();
+            }
+        });
     }
     
     /**

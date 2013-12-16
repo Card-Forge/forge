@@ -12,7 +12,6 @@ import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.framework.ICDoc;
-import forge.gui.toolbox.FLabel;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.util.ItemPool;
@@ -45,8 +44,12 @@ public enum CProbabilities implements ICDoc {
     @Override
     @SuppressWarnings("serial")
     public void initialize() {
-        ((FLabel) VProbabilities.SINGLETON_INSTANCE.getLblReshuffle()).setCommand(
-            new Command() { @Override  public void run() { update(); } });
+        VProbabilities.SINGLETON_INSTANCE.getLblReshuffle().setCommand(new Command() {
+            @Override
+            public void run() {
+                update();
+            }
+        });
     }
 
     /* (non-Javadoc)

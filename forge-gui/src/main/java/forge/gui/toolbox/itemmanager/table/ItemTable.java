@@ -33,8 +33,6 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.JViewport;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
@@ -43,7 +41,6 @@ import javax.swing.table.TableColumn;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
-import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.InventoryItem;
 
 
@@ -62,7 +59,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
     public ItemManager<T> getItemManager() {
     	return this.itemManager;
     }
-    
+
     public ItemTableModel<T> getTableModel() {
         return this.tableModel;
     }
@@ -88,7 +85,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
                     skin.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
                 }
             }
-            
+
             @Override
             public void focusGained(FocusEvent e) {
                 skin.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
@@ -98,24 +95,17 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
                 }
             }
         });
-        
+
         skin.setFont(FSkin.getFont(12));
         setBorder(null);
         getTableHeader().setBorder(null);
         setRowHeight(18);
         setWantElasticColumns(false);
-        
+
         // prevent tables from intercepting tab focus traversals
         setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
         setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
     }
-    
-    private final TableModelListener tableModelListener = new TableModelListener() {
-        @Override
-        public void tableChanged(final TableModelEvent ev) {
-            SItemManagerUtil.setStats(ItemTable.this.itemManager);
-        }
-    };
 
     /**
      * Applies a EditorTableModel and a model listener to this instance's JTable.
@@ -124,7 +114,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
      */
     public void setup(final List<TableColumnInfo<InventoryItem>> cols) {
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
-        
+
         //ensure columns ordered properly
         Collections.sort(cols, new Comparator<TableColumnInfo<InventoryItem>>() {
             @Override
@@ -146,16 +136,12 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         this.tableModel.refreshSort();
 
         getTableHeader().setBackground(new Color(200, 200, 200));
-
-        // Update stats each time table changes
-        this.tableModel.removeTableModelListener(tableModelListener); //ensure listener not added multiple times
-        this.tableModel.addTableModelListener(tableModelListener);
     }
-    
+
     private String _getCellTooltip(TableCellRenderer renderer, int row, int col, Object val) {
         Component cell = renderer.getTableCellRendererComponent(
                                 this, val, false, false, row, col);
-        
+
         // if we're conditionally showing the tooltip, check to see
         // if we shouldn't show it
         if (!(cell instanceof AlwaysShowToolTip))
@@ -185,7 +171,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         // otherwise, show the full text in the tooltip
         return String.valueOf(val);
     }
-    
+
     // column headers
     @Override
     protected JTableHeader createDefaultTableHeader() {
@@ -198,36 +184,36 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
                 if (null == headerRenderer) {
                     headerRenderer = getDefaultRenderer();
                 }
-                
+
                 return _getCellTooltip(
                         headerRenderer, -1, col, tableColumn.getHeaderValue());
             }
         };
     }
-    
+
     // cell data
     @Override
     public String getToolTipText(MouseEvent e) {
         Point p = e.getPoint();
         int row = rowAtPoint(p);
         int col = columnAtPoint(p);
-        
+
         if (col >= getColumnCount() || row >= getRowCount()) {
             return null;
         }
-        
+
         Object val = getValueAt(row, col);
         if (null == val) {
             return null;
         }
-        
+
         return _getCellTooltip(getCellRenderer(row, col), row, col, val);
     }
-    
+
     private int   lastTooltipRow = -1;
     private int   lastTooltipCol = -1;
     private Point lastTooltipPt;
-    
+
     @Override
     public Point getToolTipLocation(MouseEvent e) {
         Point p = e.getPoint();
@@ -265,19 +251,19 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         if (0 > rowLastSelected) {
             return;
         }
-        
+
         // 3 cases: 0 items left, select the same row, select prev row
         int numRows = getRowCount();
         if (numRows == 0) {
             return;
         }
-        
+
         int newRow = rowLastSelected;
         if (numRows <= newRow) {
             // move selection away from the last, already missing, option
             newRow = numRows - 1;
         }
-        
+
         selectAndScrollTo(newRow);
     }
 
@@ -291,7 +277,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
         final int iRow = getSelectedRow();
         return iRow >= 0 ? this.tableModel.rowToItem(iRow).getKey() : null;
     }
-    
+
     /**
      * 
      * getSelectedItems.
@@ -322,7 +308,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
     public void setWantElasticColumns(boolean value) {
         setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_OFF);
     }
-    
+
     public void selectAndScrollTo(int rowIdx) {
         if (!(getParent() instanceof JViewport)) {
             return;
@@ -342,7 +328,7 @@ public final class ItemTable<T extends InventoryItem> extends JTable {
             // target is above is, move to position 3 rows above target
             targetRect.setLocation(targetRect.x, targetRect.y - (targetRect.height * 3));
         }
-        
+
         scrollRectToVisible(targetRect);
         setRowSelectionInterval(rowIdx, rowIdx);
     }

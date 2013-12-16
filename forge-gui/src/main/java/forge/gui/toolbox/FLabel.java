@@ -362,8 +362,19 @@ public class FLabel extends JLabel implements ILocalRepaint {
     //========== Methods
     /** @param b0 &emsp; boolean */
     // Must be public.
+    @Override
+    public void setEnabled(final boolean b0) {
+        super.setEnabled(b0);
+        if (!this.hoverable) { return; }
+        if (!b0) { this.removeMouseListener(madEvents); }
+        else { this.addMouseListener(madEvents); }
+    }
+
+    /** @param b0 &emsp; boolean */
+    // Must be public.
     public void setHoverable(final boolean b0) {
         this.hoverable = b0;
+        if (!this.isEnabled()) { return; }
         if (!b0) { this.removeMouseListener(madEvents); }
         else { this.addMouseListener(madEvents); }
     }
@@ -387,7 +398,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
         this.alphaStrong = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
     }
 
-    private void setFontSize(final int i0) {
+    public void setFontSize(final int i0) {
         switch(this.fontStyle) {
             case Font.BOLD: skin.setFont(FSkin.getBoldFont(i0)); break;
             case Font.ITALIC: skin.setFont(FSkin.getItalicFont(i0)); break;
@@ -397,7 +408,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     /** @param i0 &emsp; Font.PLAIN, .BOLD, or .ITALIC */
     // NOT public; must be set when label is built.
-    private void setFontStyle(final int i0) {
+    public void setFontStyle(final int i0) {
         if (i0 != Font.PLAIN && i0 != Font.BOLD && i0 != Font.ITALIC) {
             throw new IllegalArgumentException("FLabel$setFontStyle "
                     + "must be passed either Font.PLAIN, Font.BOLD, or Font.ITALIC.");
@@ -407,7 +418,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     /** @param i0 &emsp; SwingConstants.CENTER, .LEFT or .RIGHT */
     // NOT public; must be set when label is built.
-    private void setFontAlign(final int i0) {
+    public void setFontAlign(final int i0) {
         if (i0 != SwingConstants.CENTER && i0 != SwingConstants.LEFT && i0 != SwingConstants.RIGHT) {
             throw new IllegalArgumentException("FLabel$setFontStyle "
                     + "must be passed either SwingConstants.CENTER, "
@@ -513,10 +524,12 @@ public class FLabel extends JLabel implements ILocalRepaint {
         else if (opaque) {
             if (selected) {
                 paintDown(g2d, w, h);
-            } else {
+            }
+            else {
                 paintUp(g2d, w, h);
             }
-        } else if (selectable) {
+        }
+        else if (selectable) {
             if (selected) {
                 paintDown(g2d, w, h);
             } else {

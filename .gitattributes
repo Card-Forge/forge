@@ -15482,6 +15482,7 @@ forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardToughnessFilte
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardTypeFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/ItemFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/ListLabelFilter.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/StatTypeFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/TextSearchFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/ToggleButtonsFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/ValueRangeFilter.java -text

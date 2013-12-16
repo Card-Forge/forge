@@ -1,7 +1,10 @@
 package forge.gui.toolbox.itemmanager.filters;
 
-import javax.swing.JPanel;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.PaperCard;
 
@@ -15,17 +18,22 @@ public class CardPowerFilter extends ValueRangeFilter<PaperCard> {
     }
 
     @Override
-    protected String getTitle() {
-        return "Card Power";
+    public ItemFilter<PaperCard> createCopy() {
+        return new CardPowerFilter(itemManager);
     }
 
     @Override
-    protected void buildPanel(JPanel panel) {
-        
+    protected String getCaption() {
+        return "Power";
     }
 
     @Override
-    protected void onRemoved() {
-        
+    public Predicate<PaperCard> buildPredicate() {
+        Predicate<CardRules> predicate = getCardRulesFieldPredicate(CardRulesPredicates.LeafNumber.CardField.POWER);
+        if (predicate == null) {
+            return Predicates.alwaysTrue();
+        }
+        predicate = Predicates.and(predicate, CardRulesPredicates.Presets.IS_CREATURE);
+        return Predicates.compose(predicate, PaperCard.FN_GET_RULES);
     }
 }

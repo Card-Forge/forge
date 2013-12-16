@@ -53,7 +53,6 @@ import forge.Singletons;
 import forge.deck.DeckBase;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.controllers.ACEditorBase;
-import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
@@ -238,7 +237,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                         KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
                         new Runnable() {
                     @Override public void run() {
-                        VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().requestFocusInWindow();
+                        VCardCatalog.SINGLETON_INSTANCE.getItemManager().focusSearch();
                     }
                 });
             }
@@ -331,7 +330,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                     } else if (KeyEvent.VK_F == e.getKeyCode()) {
                         // let ctrl/cmd-F set focus to the text filter box
                         if (e.isControlDown() || e.isMetaDown()) {
-                            VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().requestFocusInWindow();
+                            VCardCatalog.SINGLETON_INSTANCE.getItemManager().focusSearch();
                         }
                     }
                 }
@@ -438,7 +437,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
         deckTable.setWantElasticColumns(wantElastic);
         catView.setWantUnique(wantUnique);
         deckView.setWantUnique(wantUnique);
-        CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
+        catView.buildFilterPredicate();
     }
     
     private class _FindAsYouType extends KeyAdapter {

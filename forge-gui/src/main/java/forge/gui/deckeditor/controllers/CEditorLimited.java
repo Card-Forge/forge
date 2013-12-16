@@ -62,8 +62,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     public CEditorLimited(final IStorage<DeckGroup> deckMap0, FScreen screen0) {
         super(screen0);
 
-        final CardManager catalogManager = new CardManager(VCardCatalog.SINGLETON_INSTANCE.getStatLabels(), false);
-        final CardManager deckManager = new CardManager(VCurrentDeck.SINGLETON_INSTANCE.getStatLabels(), false);
+        final CardManager catalogManager = new CardManager(false);
+        final CardManager deckManager = new CardManager(false);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -163,7 +163,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
         this.getCatalogManager().getTable().setup(SColumnUtil.getCatalogDefaultColumns());
         this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
-        SItemManagerUtil.resetUI();
+        SItemManagerUtil.resetUI(this);
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(false);
