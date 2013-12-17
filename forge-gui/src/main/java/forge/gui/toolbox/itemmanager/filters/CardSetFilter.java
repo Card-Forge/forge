@@ -16,7 +16,7 @@ import forge.item.PaperCard;
 public class CardSetFilter extends CardFormatFilter {
     private final Set<String> sets = new HashSet<String>();
 
-    public CardSetFilter(ItemManager<PaperCard> itemManager0, Collection<String> sets0, boolean allowReprints0) {
+    public CardSetFilter(ItemManager<? super PaperCard> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
         this.sets.addAll(sets0);
         this.formats.add(new GameFormat(null, this.sets, null));

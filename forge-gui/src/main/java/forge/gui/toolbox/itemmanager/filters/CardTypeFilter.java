@@ -19,7 +19,7 @@ import forge.item.PaperCard;
  *
  */
 public class CardTypeFilter extends StatTypeFilter<PaperCard> {
-    public CardTypeFilter(ItemManager<PaperCard> itemManager0) {
+    public CardTypeFilter(ItemManager<? super PaperCard> itemManager0) {
         super(itemManager0);
     }
 
@@ -40,7 +40,7 @@ public class CardTypeFilter extends StatTypeFilter<PaperCard> {
     }
 
     @Override
-    public final Predicate<PaperCard> buildPredicate() {
+    protected final Predicate<PaperCard> buildPredicate() {
         final List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
 
         for (SItemManagerUtil.StatTypes s : buttonMap.keySet()) {

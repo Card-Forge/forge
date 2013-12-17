@@ -18,7 +18,7 @@ import forge.util.ItemPoolView;
 public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButtonsFilter<T> {
     protected final Map<SItemManagerUtil.StatTypes, FLabel> buttonMap;
 
-    public StatTypeFilter(ItemManager<T> itemManager0) {
+    public StatTypeFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
         buttonMap = new HashMap<SItemManagerUtil.StatTypes, FLabel>();
     }
@@ -79,7 +79,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
     @Override
     public void afterFiltersApplied() {
-        final ItemPoolView<T> items = itemManager.getFilteredItems();
+        final ItemPoolView<? super T> items = itemManager.getFilteredItems();
         for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> btn : buttonMap.entrySet()) {
             int count = items.countAll(Predicates.compose(btn.getKey().predicate, PaperCard.FN_GET_RULES), PaperCard.class);
             btn.getValue().setText(String.valueOf(count));

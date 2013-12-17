@@ -19,7 +19,7 @@ import forge.item.PaperCard;
  *
  */
 public class CardColorFilter extends StatTypeFilter<PaperCard> {
-    public CardColorFilter(ItemManager<PaperCard> itemManager0) {
+    public CardColorFilter(ItemManager<? super PaperCard> itemManager0) {
         super(itemManager0);
     }
 
@@ -40,7 +40,7 @@ public class CardColorFilter extends StatTypeFilter<PaperCard> {
     }
 
     @Override
-    public final Predicate<PaperCard> buildPredicate() {
+    protected final Predicate<PaperCard> buildPredicate() {
         byte colors = 0;
 
         if (buttonMap.get(StatTypes.WHITE).getSelected()) {

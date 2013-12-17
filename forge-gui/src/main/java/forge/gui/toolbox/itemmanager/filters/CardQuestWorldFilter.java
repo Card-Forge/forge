@@ -16,10 +16,10 @@ import forge.quest.QuestWorld;
 public class CardQuestWorldFilter extends CardFormatFilter {
     private final Set<QuestWorld> questWorlds = new HashSet<QuestWorld>();
 
-    public CardQuestWorldFilter(ItemManager<PaperCard> itemManager0) {
+    public CardQuestWorldFilter(ItemManager<? super PaperCard> itemManager0) {
         super(itemManager0);
     }
-    public CardQuestWorldFilter(ItemManager<PaperCard> itemManager0, QuestWorld questWorld0) {
+    public CardQuestWorldFilter(ItemManager<? super PaperCard> itemManager0, QuestWorld questWorld0) {
         super(itemManager0);
         this.questWorlds.add(questWorld0);
         this.formats.add(getQuestWorldFormat(questWorld0));

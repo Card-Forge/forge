@@ -10,18 +10,23 @@ import forge.item.InventoryItem;
  *
  */
 @SuppressWarnings("serial")
-public final class InventoryItemManager extends ItemManager<InventoryItem> {
-    public InventoryItemManager(boolean wantUnique0) {
+public final class SpellShopManager extends ItemManager<InventoryItem> {
+    public SpellShopManager(boolean wantUnique0) {
         super(InventoryItem.class, wantUnique0);
     }
 
     @Override
-    protected ItemFilter<InventoryItem> createSearchFilter() {
-        return null;
+    protected void addDefaultFilters() {
+        CardManager.addDefaultFilters(this);
+    }
+
+    @Override
+    protected ItemFilter<? extends InventoryItem> createSearchFilter() {
+        return CardManager.createSearchFilter(this);
     }
 
     @Override
     protected void buildFilterMenu(JPopupMenu menu) {
-        
+        CardManager.buildFilterMenu(menu, this);
     }
 }

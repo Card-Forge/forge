@@ -72,10 +72,10 @@ import forge.util.ReflectionUtil;
 public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private ItemPool<T> pool;
     private final ItemManagerModel<T> model;
-    private Predicate<T> filterPredicate = null;
-    private final Map<Class<? extends ItemFilter<T>>, List<ItemFilter<T>>> filters =
-            new HashMap<Class<? extends ItemFilter<T>>, List<ItemFilter<T>>>();
-    private final List<ItemFilter<T>> orderedFilters = new ArrayList<ItemFilter<T>>();
+    private Predicate<? super T> filterPredicate = null;
+    private final Map<Class<? extends ItemFilter<? extends T>>, List<ItemFilter<? extends T>>> filters =
+            new HashMap<Class<? extends ItemFilter<? extends T>>, List<ItemFilter<? extends T>>>();
+    private final List<ItemFilter<? extends T>> orderedFilters = new ArrayList<ItemFilter<? extends T>>();
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
     private boolean allowMultipleSelections = false;
@@ -89,7 +89,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         .readonly() //TODO: Support editing filter logic
         .build();
 
-    private ItemFilter<T> mainSearchFilter;
+    private ItemFilter<? extends T> mainSearchFilter;
     private final JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
 
     private final FLabel btnFilters = new FLabel.ButtonBuilder()
@@ -111,6 +111,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     private final ItemTable<T> table;
     private final JScrollPane tableScroller;
+    private boolean initialized;
     protected boolean lockFiltering;
 
     /**
@@ -124,11 +125,18 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(this, genericType0);
+        this.table = new ItemTable<T>(this, this.model);
+        this.tableScroller = new JScrollPane(this.table);
+    }
+
+    /**
+     * Initialize item manager if needed
+     */
+    public void initialize() {
+        if (this.initialized) { return; } //avoid initializing more than once
 
         //build table view
-        this.table = new ItemTable<T>(this, this.model);
         this.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.tableScroller = new JScrollPane(this.table);
         this.tableScroller.setOpaque(false);
         this.tableScroller.getViewport().setOpaque(false);
         this.tableScroller.setBorder(null);
@@ -144,7 +152,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             public void itemStateChanged(ItemEvent arg0) {
                 lockFiltering = true;
                 boolean enabled = chkEnableFilters.isSelected();
-                for (ItemFilter<T> filter : orderedFilters) {
+                for (ItemFilter<? extends T> filter : orderedFilters) {
                     filter.setEnabled(enabled);
                 }
                 txtFilterLogic.setEnabled(enabled);
@@ -152,7 +160,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
                 mainSearchFilter.setEnabled(enabled);
                 mainSearchFilter.updateEnabled(); //need to call updateEnabled since no listener for filter checkbox
                 lockFiltering = false;
-                buildFilterPredicate();
+                applyFilters();
             }
         });
 
@@ -174,7 +182,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         final Runnable cmdAddCurrentSearch = new Runnable() {
             @Override
             public void run() {
-                ItemFilter<T> searchFilter = mainSearchFilter.createCopy();
+                ItemFilter<? extends T> searchFilter = mainSearchFilter.createCopy();
                 if (searchFilter != null) {
                     lockFiltering = true; //prevent updating filtering from this change
                     addFilter(searchFilter);
@@ -209,6 +217,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         };
         this.btnFilters.setCommand(addFilterCommand);
         this.btnFilters.setRightClickCommand(addFilterCommand); //show menu on right-click too
+
+        //setup initial filters
+        addDefaultFilters();
+
+        this.initialized = true; //must set flag just before applying filters
+        applyFilters();
     }
 
     @Override
@@ -216,7 +230,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         int number = 0;
         StringBuilder logicBuilder = new StringBuilder();
         LayoutHelper helper = new LayoutHelper(this);
-        for (ItemFilter<T> filter : this.orderedFilters) {
+        for (ItemFilter<? extends T> filter : this.orderedFilters) {
             filter.setNumber(++number);
             logicBuilder.append(number + "&");
             helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
@@ -271,7 +285,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @param items
      */
-    public void setPool(final Iterable<InventoryItem> items) {
+    public void setPool(final Iterable<T> items) {
         this.setPool(ItemPool.createFrom(items, this.genericType), false);
     }
 
@@ -346,7 +360,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * getSelectedItem.
      * 
-     * @return InventoryItem
+     * @return T
      */
     public T getSelectedItem() {
         return this.table.getSelectedItem();
@@ -356,7 +370,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * getSelectedItems.
      * 
-     * @return List<InventoryItem>
+     * @return List<T>
      */
     public List<T> getSelectedItems() {
         return this.table.getSelectedItems();
@@ -459,32 +473,33 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         return this.model.getItems();
     }
 
-    protected abstract ItemFilter<T> createSearchFilter();
+    protected abstract void addDefaultFilters();
+    protected abstract ItemFilter<? extends T> createSearchFilter();
     protected abstract void buildFilterMenu(JPopupMenu menu);
 
-    protected <F extends ItemFilter<T>> F getFilter(Class<F> filterClass) {
+    protected <F extends ItemFilter<? extends T>> F getFilter(Class<F> filterClass) {
         return ReflectionUtil.safeCast(this.filters.get(filterClass), filterClass);
     }
 
     @SuppressWarnings("unchecked")
-    public void addFilter(final ItemFilter<T> filter) {
-        final Class<? extends ItemFilter<T>> filterClass = (Class<? extends ItemFilter<T>>) filter.getClass();
-        List<ItemFilter<T>> classFilters = this.filters.get(filterClass);
+    public void addFilter(final ItemFilter<? extends T> filter) {
+        final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
+        List<ItemFilter<? extends T>> classFilters = this.filters.get(filterClass);
         if (classFilters == null) {
-            classFilters = new ArrayList<ItemFilter<T>>();
+            classFilters = new ArrayList<ItemFilter<? extends T>>();
             this.filters.put(filterClass, classFilters);
         }
         if (classFilters.size() > 0) {
             //if filter with the same class already exists, try to merge if allowed
             //NOTE: can always use first filter for these checks since if
             //merge is supported, only one will ever exist
-            final ItemFilter<T> existingFilter = classFilters.get(0);
+            final ItemFilter<? extends T> existingFilter = classFilters.get(0);
             if (existingFilter.merge(filter)) {
                 //if new filter merged with existing filter, just refresh the widget
                 existingFilter.refreshWidget();
 
                 if (!this.lockFiltering) { //apply filters and focus existing filter's main component if filtering not locked
-                    buildFilterPredicate();
+                    applyFilters();
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -501,7 +516,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.revalidate();
 
         if (!this.lockFiltering) { //apply filters and focus filter's main component if filtering not locked
-            buildFilterPredicate();
+            applyFilters();
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -512,9 +527,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    public void removeFilter(ItemFilter<T> filter) {
-        final Class<? extends ItemFilter<T>> filterClass = (Class<? extends ItemFilter<T>>) filter.getClass();
-        final List<ItemFilter<T>> classFilters = this.filters.get(filterClass);
+    public void removeFilter(ItemFilter<? extends T> filter) {
+        final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
+        final List<ItemFilter<? extends T>> classFilters = this.filters.get(filterClass);
         if (classFilters != null && classFilters.remove(filter)) {
             if (classFilters.size() == 0) {
                 this.filters.remove(filterClass);
@@ -522,23 +537,23 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             orderedFilters.remove(filter);
             this.remove(filter.getPanel());
             this.revalidate();
-            buildFilterPredicate();
+            applyFilters();
         }
     }
 
-    public void buildFilterPredicate() {
-        if (this.lockFiltering) { return; }
-        
+    public void applyFilters() {
+        if (this.lockFiltering || !this.initialized) { return; }
+
         List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
         predicates.add(Predicates.instanceOf(this.genericType));
 
-        for (ItemFilter<T> filter : this.orderedFilters) { //TODO: Support custom filter logic
+        for (ItemFilter<? extends T> filter : this.orderedFilters) { //TODO: Support custom filter logic
             if (filter.isEnabled() && !filter.isEmpty()) {
-                predicates.add(filter.buildPredicate());
+                predicates.add(filter.buildPredicate(this.genericType));
             }
         }
         if (!this.mainSearchFilter.isEmpty()) {
-            predicates.add(mainSearchFilter.buildPredicate());
+            predicates.add(mainSearchFilter.buildPredicate(this.genericType));
         }
         this.filterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
         if (this.pool != null) {
@@ -587,7 +602,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
         this.table.getTableModel().refreshSort();
 
-        for (ItemFilter<T> filter : this.orderedFilters) {
+        for (ItemFilter<? extends T> filter : this.orderedFilters) {
             filter.afterFiltersApplied();
         }
 

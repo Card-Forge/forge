@@ -24,7 +24,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     private FComboBoxWrapper<String> cbSearchMode;
     private FLabel btnName, btnType, btnText;
 
-    public CardSearchFilter(ItemManager<PaperCard> itemManager0) {
+    public CardSearchFilter(ItemManager<? super PaperCard> itemManager0) {
         super(itemManager0);
     }
 
@@ -110,7 +110,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     }
 
     @Override
-    public Predicate<PaperCard> buildPredicate() {
+    protected Predicate<PaperCard> buildPredicate() {
         return SFilterUtil.buildTextFilter(
                 txtSearch.getText(),
                 cbSearchMode.getSelectedIndex() != 0,

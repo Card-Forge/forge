@@ -44,13 +44,13 @@ public abstract class ItemFilter<T extends InventoryItem> {
         cb.setFocusable(false);
     }
 
-    protected final ItemManager<T> itemManager;
+    protected final ItemManager<? super T> itemManager;
     private FilterPanel panel;
     private Widget widget;
     private final JCheckBox chkEnable = new JCheckBox();
     private RemoveButton btnRemove;
 
-    protected ItemFilter(ItemManager<T> itemManager0) {
+    protected ItemFilter(ItemManager<? super T> itemManager0) {
         this.itemManager = itemManager0;
         this.chkEnable.setSelected(true); //enable by default
     }
@@ -119,13 +119,28 @@ public abstract class ItemFilter<T extends InventoryItem> {
     }
 
     protected void applyChange() {
-        this.itemManager.buildFilterPredicate();
+        this.itemManager.applyFilters();
+    }
+
+    public <U extends InventoryItem> Predicate<U> buildPredicate(Class<U> genericType) {
+        final Predicate<T> predicate = this.buildPredicate();
+        return new Predicate<U>() {
+            @SuppressWarnings("unchecked")
+            @Override
+            public boolean apply(U item) {
+                try {
+                    return predicate.apply((T)item);
+                }
+                catch (Exception ex) {
+                    return false; //if can't cast U to T, filter item out
+                }
+            }
+        };
     }
 
     public abstract ItemFilter<T> createCopy();
     public abstract boolean isEmpty();
     public abstract void reset();
-    public abstract Predicate<T> buildPredicate();
     public void afterFiltersApplied() {
     }
 
@@ -139,6 +154,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
 
     protected abstract void buildWidget(JPanel widget);
     protected abstract void doWidgetLayout(LayoutHelper helper);
+    protected abstract Predicate<T> buildPredicate();
 
     @SuppressWarnings("serial")
     private class FilterPanel extends JPanel {

@@ -15464,13 +15464,13 @@ forge-gui/src/main/java/forge/gui/toolbox/imaging/FImagePanel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/imaging/FImageUtil.java -text
 forge-gui/src/main/java/forge/gui/toolbox/imaging/ImageUtil.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/CardManager.java -text
-forge-gui/src/main/java/forge/gui/toolbox/itemmanager/InventoryItemManager.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/ItemManager.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/ItemManagerContainer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/ItemManagerModel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/SFilterUtil.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/SItemManagerIO.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/SItemManagerUtil.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/SpellShopManager.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardCMCFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardColorFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardFormatFilter.java -text

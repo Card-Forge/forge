@@ -19,8 +19,6 @@ package forge.gui.toolbox.itemmanager;
 
 import javax.swing.JScrollPane;
 
-import forge.item.InventoryItem;
-
 
 /**
  * Simple container pane meant to contain item managers.
@@ -32,12 +30,13 @@ public final class ItemManagerContainer extends JScrollPane {
         this(null);
     }
     
-    public ItemManagerContainer(ItemManager<? extends InventoryItem> itemManager) {
-        super(itemManager, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    public ItemManagerContainer(ItemManager<?> itemManager) {
+        super(null, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         setBorder(null);
         setOpaque(false);
         getViewport().setOpaque(false);
+        setItemManager(itemManager);
     }
 
     /**
@@ -46,7 +45,10 @@ public final class ItemManagerContainer extends JScrollPane {
      * 
      * @return ItemPoolView
      */
-    public void setItemManager(ItemManager<? extends InventoryItem> itemManager) {
+    public void setItemManager(ItemManager<?> itemManager) {
+        if (itemManager != null) {
+            itemManager.initialize(); //ensure item manager is initialized
+        }
         this.getViewport().setView(itemManager);
     }
 }

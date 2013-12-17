@@ -437,7 +437,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
         deckTable.setWantElasticColumns(wantElastic);
         catView.setWantUnique(wantUnique);
         deckView.setWantUnique(wantUnique);
-        catView.buildFilterPredicate();
+        catView.applyFilters();
     }
     
     private class _FindAsYouType extends KeyAdapter {

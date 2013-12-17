@@ -24,7 +24,7 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
     protected boolean lockFiltering;
     private final ArrayList<FLabel> buttons = new ArrayList<FLabel>();
 
-    protected ToggleButtonsFilter(ItemManager<T> itemManager0) {
+    protected ToggleButtonsFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
     }
     

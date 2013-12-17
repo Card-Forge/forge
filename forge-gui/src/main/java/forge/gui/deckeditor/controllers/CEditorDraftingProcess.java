@@ -257,7 +257,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         if (this.getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen 
             this.showChoices(this.boosterDraft.nextChoice());
-            this.getDeckManager().setPool((Iterable<InventoryItem>) null);
+            this.getDeckManager().setPool((Iterable<PaperCard>) null);
         }
         else {
             this.showChoices(this.getCatalogManager().getPool());

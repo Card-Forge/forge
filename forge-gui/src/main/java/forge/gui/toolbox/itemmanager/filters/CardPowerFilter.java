@@ -13,7 +13,7 @@ import forge.item.PaperCard;
  *
  */
 public class CardPowerFilter extends ValueRangeFilter<PaperCard> {
-    public CardPowerFilter(ItemManager<PaperCard> itemManager0) {
+    public CardPowerFilter(ItemManager<? super PaperCard> itemManager0) {
         super(itemManager0);
     }
 
@@ -28,7 +28,7 @@ public class CardPowerFilter extends ValueRangeFilter<PaperCard> {
     }
 
     @Override
-    public Predicate<PaperCard> buildPredicate() {
+    protected Predicate<PaperCard> buildPredicate() {
         Predicate<CardRules> predicate = getCardRulesFieldPredicate(CardRulesPredicates.LeafNumber.CardField.POWER);
         if (predicate == null) {
             return Predicates.alwaysTrue();

@@ -48,7 +48,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.itemmanager.InventoryItemManager;
+import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
 import forge.gui.toolbox.itemmanager.table.SColumnUtil;
@@ -129,8 +129,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         
         this.questData = qd;
 
-        final InventoryItemManager catalogManager = new InventoryItemManager(false);
-        final InventoryItemManager deckManager = new InventoryItemManager(false);
+        final SpellShopManager catalogManager = new SpellShopManager(false);
+        final SpellShopManager deckManager = new SpellShopManager(false);
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);

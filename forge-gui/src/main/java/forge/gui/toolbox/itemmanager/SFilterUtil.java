@@ -12,6 +12,7 @@ import forge.card.CardRulesPredicates;
 import forge.card.CardRulesPredicates.Presets;
 import forge.card.MagicColor;
 import forge.gui.toolbox.FLabel;
+import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.util.PredicateString.StringOp;
 
@@ -132,6 +133,33 @@ public class SFilterUtil {
 
         return Predicates.compose(textFilter, PaperCard.FN_GET_RULES);
     }
+    
+    public static <T extends InventoryItem> Predicate<T> buildItemTextFilter(String text) {
+        if (text.trim().isEmpty()) {
+            return Predicates.alwaysTrue();
+        }
+
+        return new ItemTextPredicate<T>(text);
+    }
+
+    private static class ItemTextPredicate<T extends InventoryItem> implements Predicate<T> {
+        private final String[] splitText;
+
+        private ItemTextPredicate(String text) {
+            splitText = text.toLowerCase().replaceAll(",", "").replaceAll("  ", " ").split(" ");
+        }
+        
+        @Override
+        public boolean apply(T input) {
+            String name = input.getName().toLowerCase();
+            for (String s : splitText) {
+                if (name.contains(s)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    };
 
     public static <T> Predicate<T> optimizedAnd(Predicate<T> p1, Predicate<T> p2) {
         return p1 == null ? p2 : (p2 == null ? p1 : Predicates.and(p1, p2));

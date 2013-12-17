@@ -17,7 +17,7 @@ import forge.util.TextUtil;
 public abstract class ListLabelFilter<T extends InventoryItem> extends ItemFilter<T> {
     private FLabel label;
     
-    protected ListLabelFilter(ItemManager<T> itemManager0) {
+    protected ListLabelFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
     }
 

@@ -13,7 +13,7 @@ import forge.item.PaperCard;
  *
  */
 public class CardCMCFilter extends ValueRangeFilter<PaperCard> {
-    public CardCMCFilter(ItemManager<PaperCard> itemManager0) {
+    public CardCMCFilter(ItemManager<? super PaperCard> itemManager0) {
         super(itemManager0);
     }
 
@@ -28,7 +28,7 @@ public class CardCMCFilter extends ValueRangeFilter<PaperCard> {
     }
 
     @Override
-    public Predicate<PaperCard> buildPredicate() {
+    protected Predicate<PaperCard> buildPredicate() {
         Predicate<CardRules> predicate = getCardRulesFieldPredicate(CardRulesPredicates.LeafNumber.CardField.CMC);
         if (predicate == null) {
             return Predicates.alwaysTrue();

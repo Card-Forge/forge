@@ -22,10 +22,10 @@ public class CardFormatFilter extends ListLabelFilter<PaperCard> {
     protected boolean allowReprints = true;
     protected final Set<GameFormat> formats = new HashSet<GameFormat>();
 
-    public CardFormatFilter(ItemManager<PaperCard> itemManager0) {
+    public CardFormatFilter(ItemManager<? super PaperCard> itemManager0) {
         super(itemManager0);
     }
-    public CardFormatFilter(ItemManager<PaperCard> itemManager0, GameFormat format0) {
+    public CardFormatFilter(ItemManager<? super PaperCard> itemManager0, GameFormat format0) {
         super(itemManager0);
         this.formats.add(format0);
     }
@@ -151,7 +151,7 @@ public class CardFormatFilter extends ListLabelFilter<PaperCard> {
     }
 
     @Override
-    public final Predicate<PaperCard> buildPredicate() {
+    protected final Predicate<PaperCard> buildPredicate() {
         List<Predicate<PaperCard>> predicates = new ArrayList<Predicate<PaperCard>>();
         for (GameFormat f : this.formats) {
             predicates.add(allowReprints ? f.getFilterRules() : f.getFilterPrinted());

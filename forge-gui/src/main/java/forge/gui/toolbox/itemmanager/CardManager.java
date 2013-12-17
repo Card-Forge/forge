@@ -30,36 +30,50 @@ import forge.quest.QuestWorld;
 public final class CardManager extends ItemManager<PaperCard> {
     public CardManager(boolean wantUnique0) {
         super(PaperCard.class, wantUnique0);
+    }
 
-        this.lockFiltering = true; //temporary lock filtering for improved performance
-        this.addFilter(new CardColorFilter(this));
-        this.addFilter(new CardTypeFilter(this));
-        this.lockFiltering = false;
-        buildFilterPredicate();
+    @Override
+    protected void addDefaultFilters() {
+        addDefaultFilters(this);
     }
 
     @Override
     protected ItemFilter<PaperCard> createSearchFilter() {
-        return new CardSearchFilter(this);
+        return createSearchFilter(this);
     }
 
     @Override
-    protected void buildFilterMenu(JPopupMenu menu) {        
+    protected void buildFilterMenu(JPopupMenu menu) {
+        buildFilterMenu(menu, this);
+    }
+
+    /* Static overrides shared with SpellShopManager*/
+
+    public static void addDefaultFilters(final ItemManager<? super PaperCard> itemManager) {
+        itemManager.addFilter(new CardColorFilter(itemManager));
+        itemManager.addFilter(new CardTypeFilter(itemManager));
+    }
+
+    public static ItemFilter<PaperCard> createSearchFilter(final ItemManager<? super PaperCard> itemManager) {
+        return new CardSearchFilter(itemManager);
+    }
+
+    public static void buildFilterMenu(JPopupMenu menu, final ItemManager<? super PaperCard> itemManager) {
         JMenu fmt = new JMenu("Format");
         for (final GameFormat f : Singletons.getModel().getFormats()) {
             GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                 @Override
                 public void run() {
-                    addFilter(new CardFormatFilter(CardManager.this, f));
+                    itemManager.addFilter(new CardFormatFilter(itemManager, f));
                 }
-            }, CardFormatFilter.canAddFormat(f, getFilter(CardFormatFilter.class)));
+            }, CardFormatFilter.canAddFormat(f, itemManager.getFilter(CardFormatFilter.class)));
         }
         menu.add(fmt);
-        
+
         GuiUtils.addMenuItem(menu, "Sets...", null, new Runnable() {
             @Override
             public void run() {
-                CardSetFilter existingFilter = getFilter(CardSetFilter.class);
+                CardSetFilter existingFilter = itemManager.getFilter(CardSetFilter.class);
                 if (existingFilter != null) {
                     existingFilter.edit();
                 }
@@ -70,43 +84,43 @@ public final class CardManager extends ItemManager<PaperCard> {
                         public void run() {
                             List<String> sets = dialog.getSelectedSets();
                             if (!sets.isEmpty()) {
-                                addFilter(new CardSetFilter(CardManager.this, sets, dialog.getWantReprints()));
+                                itemManager.addFilter(new CardSetFilter(itemManager, sets, dialog.getWantReprints()));
                             }
                         }
                     });
                 }
             }
         });
-        
+
         JMenu range = new JMenu("Value range");
         GuiUtils.addMenuItem(range, "CMC", null, new Runnable() {
             @Override
             public void run() {
-                addFilter(new CardCMCFilter(CardManager.this));
+                itemManager.addFilter(new CardCMCFilter(itemManager));
             }
-        }, getFilter(CardCMCFilter.class) == null);
+        }, itemManager.getFilter(CardCMCFilter.class) == null);
         GuiUtils.addMenuItem(range, "Power", null, new Runnable() {
             @Override
             public void run() {
-                addFilter(new CardPowerFilter(CardManager.this));
+                itemManager.addFilter(new CardPowerFilter(itemManager));
             }
-        }, getFilter(CardPowerFilter.class) == null);
+        }, itemManager.getFilter(CardPowerFilter.class) == null);
         GuiUtils.addMenuItem(range, "Toughness", null, new Runnable() {
             @Override
             public void run() {
-                addFilter(new CardToughnessFilter(CardManager.this));
+                itemManager.addFilter(new CardToughnessFilter(itemManager));
             }
-        }, getFilter(CardToughnessFilter.class) == null);
+        }, itemManager.getFilter(CardToughnessFilter.class) == null);
         menu.add(range);
-        
+
         JMenu world = new JMenu("Quest world");
         for (final QuestWorld w : Singletons.getModel().getWorlds()) {
             GuiUtils.addMenuItem(world, w.getName(), null, new Runnable() {
                 @Override
                 public void run() {
-                    addFilter(new CardQuestWorldFilter(CardManager.this, w));
+                    itemManager.addFilter(new CardQuestWorldFilter(itemManager, w));
                 }
-            }, CardQuestWorldFilter.canAddQuestWorld(w, getFilter(CardQuestWorldFilter.class)));
+            }, CardQuestWorldFilter.canAddQuestWorld(w, itemManager.getFilter(CardQuestWorldFilter.class)));
         }
         menu.add(world);
     }

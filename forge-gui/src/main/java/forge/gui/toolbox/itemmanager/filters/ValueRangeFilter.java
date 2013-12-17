@@ -27,7 +27,7 @@ public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilt
     private FLabel label;
     private FSpinner lowerBound, upperBound;
 
-    protected ValueRangeFilter(ItemManager<T> itemManager0) {
+    protected ValueRangeFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
     }
 

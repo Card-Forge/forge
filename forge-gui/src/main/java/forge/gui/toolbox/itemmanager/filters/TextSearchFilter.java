@@ -5,24 +5,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SFilterUtil;
 import forge.item.InventoryItem;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
+public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     protected FTextField txtSearch;
 
-    protected TextSearchFilter(ItemManager<T> itemManager0) {
+    public TextSearchFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
+    }
+
+    @Override
+    public ItemFilter<T> createCopy() {
+        TextSearchFilter<T> copy = new TextSearchFilter<T>(itemManager);
+        copy.getWidget(); //initialize widget
+        copy.txtSearch.setText(this.txtSearch.getText());
+        return copy;
     }
 
     @Override
@@ -108,4 +119,13 @@ public abstract class TextSearchFilter<T extends InventoryItem> extends ItemFilt
             applyChange();
         }
     });
+
+    @Override
+    protected Predicate<T> buildPredicate() {
+        String text = txtSearch.getText();
+        if (text.trim().isEmpty()) {
+            return Predicates.alwaysTrue();
+        }
+        return SFilterUtil.buildItemTextFilter(text);
+    }
 }
