@@ -111,27 +111,6 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     }
 
     @Override
-    public <U extends InventoryItem> Predicate<U> buildPredicate(Class<U> genericType) {
-        final Predicate<PaperCard> predicate = this.buildPredicate();
-        return new Predicate<U>() {
-            @Override
-            public boolean apply(U item) {
-                try {
-                    return predicate.apply((PaperCard)item);
-                }
-                catch (Exception ex) {
-                    //fallback to regular item text filter if item not PaperCard
-                    boolean result = btnName.getSelected() && SFilterUtil.buildItemTextFilter(txtSearch.getText()).apply(item);
-                    if (cbSearchMode.getSelectedIndex() != 0) { //invert result if needed
-                        result = !result;
-                    }
-                    return result;
-                }
-            }
-        };
-    }
-
-    @Override
     protected Predicate<PaperCard> buildPredicate() {
         return SFilterUtil.buildTextFilter(
                 txtSearch.getText(),
@@ -139,5 +118,15 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
                 btnName.getSelected(),
                 btnType.getSelected(),
                 btnText.getSelected());
+    }
+
+    @Override
+    protected <U extends InventoryItem> boolean showUnsupportedItem(U item) {
+        //fallback to regular item text filter if item not PaperCard
+        boolean result = btnName.getSelected() && SFilterUtil.buildItemTextFilter(txtSearch.getText()).apply(item);
+        if (cbSearchMode.getSelectedIndex() != 0) { //invert result if needed
+            result = !result;
+        }
+        return result;
     }
 }

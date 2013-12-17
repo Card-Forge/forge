@@ -122,7 +122,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
         this.itemManager.applyFilters();
     }
 
-    public <U extends InventoryItem> Predicate<U> buildPredicate(Class<U> genericType) {
+    public final <U extends InventoryItem> Predicate<U> buildPredicate(Class<U> genericType) {
         final Predicate<T> predicate = this.buildPredicate();
         return new Predicate<U>() {
             @SuppressWarnings("unchecked")
@@ -132,10 +132,14 @@ public abstract class ItemFilter<T extends InventoryItem> {
                     return predicate.apply((T)item);
                 }
                 catch (Exception ex) {
-                    return false; //if can't cast U to T, filter item out
+                    return showUnsupportedItem(item); //if can't cast U to T, filter item out unless derived class can handle it
                 }
             }
         };
+    }
+
+    protected <U extends InventoryItem> boolean showUnsupportedItem(U item) {
+        return false; //don't show unsupported items by default
     }
 
     public abstract ItemFilter<T> createCopy();
