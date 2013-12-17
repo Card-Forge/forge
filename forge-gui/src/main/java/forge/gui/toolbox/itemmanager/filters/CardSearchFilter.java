@@ -14,6 +14,7 @@ import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SFilterUtil;
+import forge.item.InventoryItem;
 import forge.item.PaperCard;
 
 /** 
@@ -107,6 +108,27 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
 
         widget.add(button);
         return button;
+    }
+
+    @Override
+    public <U extends InventoryItem> Predicate<U> buildPredicate(Class<U> genericType) {
+        final Predicate<PaperCard> predicate = this.buildPredicate();
+        return new Predicate<U>() {
+            @Override
+            public boolean apply(U item) {
+                try {
+                    return predicate.apply((PaperCard)item);
+                }
+                catch (Exception ex) {
+                    //fallback to regular item text filter if item not PaperCard
+                    boolean result = btnName.getSelected() && SFilterUtil.buildItemTextFilter(txtSearch.getText()).apply(item);
+                    if (cbSearchMode.getSelectedIndex() != 0) { //invert result if needed
+                        result = !result;
+                    }
+                    return result;
+                }
+            }
+        };
     }
 
     @Override
