@@ -90,11 +90,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
                 final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
                 if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
+                    tgtCard.addCounter(counterType, counterAmount, true);
                     if (remember) {
                         final int value = tgtCard.getTotalCountersToAdd();
                         tgtCard.addCountersAddedBy(card, counterType, value);
                     }
-                    tgtCard.addCounter(counterType, counterAmount, true);
                     if (sa.hasParam("Evolve")) {
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();
                         runParams.put("Card", tgtCard);

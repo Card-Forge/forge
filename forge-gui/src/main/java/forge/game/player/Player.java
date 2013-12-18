@@ -49,7 +49,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventMulligan;
@@ -185,7 +184,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private boolean triedToDrawFromEmptyLibrary = false;
 
-    private boolean isPlayingExtraTrun = false;;
+    private boolean isPlayingExtraTrun = false;
 
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
@@ -2858,13 +2857,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public int getTokenDoublersMagnitude() {
-        final int tokenDoublers = getCardsIn(ZoneType.Battlefield, "Parallel Lives").size()
-                + getCardsIn(ZoneType.Battlefield, "Doubling Season").size()
-                + CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield),
-                        CardPredicates.nameEquals("Primal Vigor")).size()
-                + CardLists.filter(getGame().getCardsIn(ZoneType.Command),
-                        CardPredicates.nameEquals("Selesnya Loft Gardens")).size();;
-                        return 1 << tokenDoublers; // pow(a,0) = 1; pow(a,1) = a
+        int tokenDoublers = 0;
+        for (String kw : this.getKeywords()) {
+            if (kw.equals("TokenDoubler")) {
+                tokenDoublers++;
+            }
+        }
+        return 1 << tokenDoublers; // pow(a,0) = 1; pow(a,1) = a
     }
 
     public void onCleanupPhase() {
