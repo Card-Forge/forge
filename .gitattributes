@@ -8725,6 +8725,7 @@ forge-gui/res/cardsfolder/p/primal_order.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/primal_plasma.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/primal_rage.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/primal_surge.txt -text
+forge-gui/res/cardsfolder/p/primal_vigor.txt -text
 forge-gui/res/cardsfolder/p/primal_visitation.txt -text
 forge-gui/res/cardsfolder/p/primal_whisperer.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/primalcrux.txt svneol=native#text/plain
@@ -15101,6 +15102,7 @@ forge-gui/src/main/java/forge/game/player/PlayerStatistics.java -text
 forge-gui/src/main/java/forge/game/player/PlayerType.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/player/RegisteredPlayer.java -text
 forge-gui/src/main/java/forge/game/player/package-info.java svneol=native#text/plain
+forge-gui/src/main/java/forge/game/replacement/ReplaceAddCounter.java -text
 forge-gui/src/main/java/forge/game/replacement/ReplaceCounter.java -text
 forge-gui/src/main/java/forge/game/replacement/ReplaceDamage.java -text
 forge-gui/src/main/java/forge/game/replacement/ReplaceDestroy.java -text

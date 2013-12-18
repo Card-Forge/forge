@@ -250,6 +250,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     // Zone-changing spells should store card's zone here
     private Zone currentZone = null;
 
+	private int countersAdded = 0;
+
     // Enumeration for CMC request types
     public enum SplitCMCMode {
         CurrentSideCMC,
@@ -1128,22 +1130,37 @@ public class Card extends GameEntity implements Comparable<Card> {
         return true;
     }
 
-    public final int getTotalCountersToAdd(final CounterType counterType, final int baseAmount, final boolean applyMultiplier) {
-        if (this.canReceiveCounters(counterType)) {
-            final int multiplier = applyMultiplier ? this.getController().getCounterDoublersMagnitude(counterType) : 1;
-            int result = multiplier * baseAmount;
-            if (counterType == CounterType.DREAM && this.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-                result = Math.min(7 - this.getCounters(CounterType.DREAM), result);
-            }
-            return result;
-        }
-        return 0;
+    public final int getTotalCountersToAdd() {
+        return countersAdded;
+    }
+    
+    public final void setTotalCountersToAdd(int value) {
+        countersAdded = value;
     }
 
     public final void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier) {
-        final int addAmount = getTotalCountersToAdd(counterType, n, applyMultiplier);
-        if (addAmount == 0)
+        int addAmount = n;
+        final HashMap<String, Object> repParams = new HashMap<String, Object>();
+        repParams.put("Event", "AddCounter");
+        repParams.put("Affected", this);
+        repParams.put("CounterType", counterType);
+        repParams.put("CounterNum", addAmount);
+        repParams.put("EffectOnly", applyMultiplier);
+        if (this.getGame().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return;
+        }
+        if (this.canReceiveCounters(counterType)) {
+            if (counterType == CounterType.DREAM && this.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
+            	addAmount = Math.min(7 - this.getCounters(CounterType.DREAM), addAmount);
+            }
+        } else {
+        	addAmount = 0;
+        }
+        
+        if (addAmount == 0) {
+            return;
+        }
+        this.setTotalCountersToAdd(addAmount);
 
         Integer oldValue = this.counters.get(counterType);
         int newValue = addAmount + (oldValue == null ? 0 : oldValue.intValue());

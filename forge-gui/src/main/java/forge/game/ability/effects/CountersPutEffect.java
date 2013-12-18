@@ -91,7 +91,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
                 if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
                     if (remember) {
-                        final int value = tgtCard.getTotalCountersToAdd(counterType, counterAmount, true);
+                        final int value = tgtCard.getTotalCountersToAdd();
                         tgtCard.addCountersAddedBy(card, counterType, value);
                     }
                     tgtCard.addCounter(counterType, counterAmount, true);

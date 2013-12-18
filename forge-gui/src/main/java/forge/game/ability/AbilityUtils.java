@@ -39,7 +39,9 @@ public class AbilityUtils {
 
     public static CounterType getCounterType(String name, SpellAbility sa) throws Exception {
         CounterType counterType;
-
+        if ("ReplacedCounterType".equals(name)) {
+        	name = (String) sa.getReplacingObject("CounterType");
+        }
         try {
             counterType = CounterType.getType(name);
         } catch (Exception e) {

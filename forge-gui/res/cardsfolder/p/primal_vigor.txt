@@ -1,0 +1,9 @@
+Name:Primal Vigor
+ManaCost:4 G
+Types:Enchantment
+Text:If one or more tokens would be put onto the battlefield, twice that many of those tokens are put onto the battlefield instead.
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature | ValidCounterType$ P1P1 | ReplaceWith$ AddDoubleP1P1Counters | Description$ If one or more +1/+1 counters would be placed on a creature, twice that many +1/+1 counters are placed on that creature instead.
+SVar:AddDoubleP1P1Counters:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ ReplacedCounterType | CounterNum$ X | References$ X
+SVar:X:ReplaceCount$CounterNum/Twice
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_vigor.jpg
+Oracle:If one or more tokens would be put onto the battlefield, twice that many of those tokens are put onto the battlefield instead.\nIf one or more +1/+1 counters would be placed on a creature, twice that many +1/+1 counters are placed on that creature instead.
