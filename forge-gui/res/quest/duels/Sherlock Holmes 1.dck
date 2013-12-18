@@ -3,7 +3,7 @@
 Name=Sherlock Holmes 1
 Title=Sherlock Holmes
 Difficulty=easy
-Description=Mono G deck with Crabapple Cohort, An-Havva Constable and lots of green creatures
+Description=Mono G deck with Crabapple Cohort, An-Havva Constable, Nylea's Disciple and lots of green creatures
 Icon=Sherlock Holmes.jpg
 Deck Type=constructed
 [main]
@@ -13,6 +13,7 @@ Deck Type=constructed
 2 An-Havva Inn
 1 Beacon of Creation
 3 Crabapple Cohort
+2 Nylea's Disciple
 1 Crushing Vines
 1 Deadfall
 1 Drove of Elves
@@ -24,10 +25,10 @@ Deck Type=constructed
 1 Kaysa
 1 Meng Huo, Barbarian King
 1 Multani's Acolyte
-2 Nettle Sentinel
+1 Nettle Sentinel
 1 Niall Silvain
 1 Norwood Priestess
-2 Nourish
+1 Nourish
 2 Nurturer Initiate
 2 People of the Woods
 1 Reach of Branches
