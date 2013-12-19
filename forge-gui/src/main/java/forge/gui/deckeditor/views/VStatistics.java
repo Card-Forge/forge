@@ -81,23 +81,31 @@ public enum VStatistics implements IVDoc<CStatistics> {
         scroller.getVerticalScrollBar().setUnitIncrement(16);
 
         // Color stats
-        lblMulti.setToolTipText("Total Card Count");
+        lblMulti.setToolTipText("Multicolor Card Count");
         lblBlack.setToolTipText("Black Card Count");
         lblBlue.setToolTipText("Blue Card Count");
         lblGreen.setToolTipText("Green Card Count");
         lblRed.setToolTipText("Red Card Count");
         lblWhite.setToolTipText("White Card Count");
-        lblColorless.setToolTipText("Total Card Count");
+        lblColorless.setToolTipText("Colorless Card Count");
 
         // Type stats
         lblArtifact.setToolTipText("Artifact Card Count");
         lblCreature.setToolTipText("Creature Card Count");
-        lblColorless.setToolTipText("Colorless Card Count");
         lblEnchantment.setToolTipText("Enchantment Card Count");
         lblInstant.setToolTipText("Instant Card Count");
         lblLand.setToolTipText("Land Card Count");
         lblPlaneswalker.setToolTipText("Planeswalker Card Count");
         lblSorcery.setToolTipText("Sorcery Card Count");
+
+        // CMC stats
+        lblCMC0.setToolTipText("CMC 0 Card Count");
+        lblCMC1.setToolTipText("CMC 1 Card Count");
+        lblCMC2.setToolTipText("CMC 2 Card Count");
+        lblCMC3.setToolTipText("CMC 3 Card Count");
+        lblCMC4.setToolTipText("CMC 4 Card Count");
+        lblCMC5.setToolTipText("CMC 5 Card Count");
+        lblCMC6.setToolTipText("CMC 6+ Card Count");
 
         // Stats container
         pnlStats.setOpaque(false);

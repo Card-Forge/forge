@@ -60,7 +60,6 @@ public enum CStatistics implements ICDoc {
     private void setLabelValue(JLabel label, ItemPoolView<PaperCard> deck, Predicate<CardRules> predicate, int total) {
         int tmp = deck.countAll(Predicates.compose(predicate, PaperCard.FN_GET_RULES));
         label.setText(tmp + " (" + SItemManagerUtil.calculatePercentage(tmp, total) + "%)");
-
     }
 
     //========== Other methods
