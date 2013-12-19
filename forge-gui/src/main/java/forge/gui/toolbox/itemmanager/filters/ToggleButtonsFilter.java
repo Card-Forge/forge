@@ -28,11 +28,11 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
         super(itemManager0);
     }
     
-    protected FLabel addToggleButton(JPanel widget, String filterName, SkinImage icon) {
+    protected FLabel addToggleButton(JPanel widget, SkinImage icon, String tooltip) {
         final FLabel button = new FLabel.Builder()
                 .icon(icon).iconScaleAuto(false)
                 .fontSize(11)
-                .tooltip(filterName + " (click to toggle the filter, right-click to show only " + filterName.toLowerCase() + ")")
+                .tooltip(tooltip)
                 .hoverable().selectable(true).selected(true)
                 .build();
 

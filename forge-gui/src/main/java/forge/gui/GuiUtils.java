@@ -26,8 +26,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 
 import forge.game.card.Card;
@@ -108,6 +110,15 @@ public final class GuiUtils {
         item.setPreferredSize(new Dimension(Math.max(item.getPreferredSize().width, minItemWidth), itemHeight));
     }
 
+    public static JMenu createMenu(String label) {
+        if (label.startsWith("<html>")) { //adjust label if HTML
+            label = "<html>" + "<div style='height: " + itemHeight + "px; margin-top: 6px;'>" + label.substring(6, label.length() - 7) + "</div></html>";
+        }
+        JMenu menu = new JMenu(label);
+        setMenuItemSize(menu);
+        return menu;
+    }
+
     public static JMenuItem createMenuItem(String label, KeyStroke accelerator, final Runnable onClick, boolean enabled, boolean bold) {
         if (label.startsWith("<html>")) { //adjust label if HTML
         	label = "<html>" + "<div style='height: " + itemHeight + "px; margin-top: 6px;'>" + label.substring(6, label.length() - 7) + "</div></html>";
@@ -152,5 +163,13 @@ public final class GuiUtils {
     
     public static void addMenuItem(JMenuItem parent, String label, KeyStroke accelerator, Runnable onClick, boolean enabled, boolean bold) {
         parent.add(createMenuItem(label, accelerator, onClick, enabled, bold));
+    }
+
+    public static void addSeparator(JPopupMenu parent) {
+        parent.add(new JSeparator());
+    }
+
+    public static void addSeparator(JMenuItem parent) {
+        parent.add(new JSeparator());
     }
 }

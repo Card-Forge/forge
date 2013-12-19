@@ -61,13 +61,13 @@ public enum VStatistics implements IVDoc<CStatistics> {
     private final JLabel lblSorcery = buildLabel(SItemManagerUtil.StatTypes.SORCERY, true);
 
     // CMC labels
-    private final JLabel lblCMC0 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_0, 16, 16), true);
-    private final JLabel lblCMC1 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_1, 16, 16), false);
-    private final JLabel lblCMC2 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_2, 16, 16), true);
-    private final JLabel lblCMC3 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_3, 16, 16), false);
-    private final JLabel lblCMC4 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_4, 16, 16), true);
-    private final JLabel lblCMC5 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_5, 16, 16), false);
-    private final JLabel lblCMC6 = buildLabel(FSkin.getImage(FSkin.ColorlessManaImages.IMG_6, 16, 16), true);
+    private final JLabel lblCMC0 = buildLabel(SItemManagerUtil.StatTypes.CMC_0, true);
+    private final JLabel lblCMC1 = buildLabel(SItemManagerUtil.StatTypes.CMC_1, false);
+    private final JLabel lblCMC2 = buildLabel(SItemManagerUtil.StatTypes.CMC_2, true);
+    private final JLabel lblCMC3 = buildLabel(SItemManagerUtil.StatTypes.CMC_3, false);
+    private final JLabel lblCMC4 = buildLabel(SItemManagerUtil.StatTypes.CMC_4, true);
+    private final JLabel lblCMC5 = buildLabel(SItemManagerUtil.StatTypes.CMC_5, false);
+    private final JLabel lblCMC6 = buildLabel(SItemManagerUtil.StatTypes.CMC_6, true);
 
     // Layout containers
     private final JScrollPane scroller = new JScrollPane(pnlStats);

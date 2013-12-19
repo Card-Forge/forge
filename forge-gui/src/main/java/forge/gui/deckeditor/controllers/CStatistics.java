@@ -78,7 +78,6 @@ public enum CStatistics implements ICDoc {
         // Hack-ish: avoid /0 cases, but still populate labels :)
         if (total == 0) { total = 1; }
 
-
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCreature(), deck, CardRulesPredicates.Presets.IS_CREATURE, total);
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblLand(), deck, CardRulesPredicates.Presets.IS_LAND, total);
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblEnchantment(), deck, CardRulesPredicates.Presets.IS_ENCHANTMENT, total);
@@ -95,40 +94,18 @@ public enum CStatistics implements ICDoc {
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblRed(), deck, CardRulesPredicates.isMonoColor(MagicColor.RED), total);
         setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblWhite(), deck, CardRulesPredicates.isMonoColor(MagicColor.WHITE), total);
 
-        int cmc0 = 0, cmc1 = 0, cmc2 = 0, cmc3 = 0, cmc4 = 0, cmc5 = 0, cmc6 = 0;
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC0(), deck, SItemManagerUtil.StatTypes.CMC_0.predicate, total);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC1(), deck, SItemManagerUtil.StatTypes.CMC_1.predicate, total);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC2(), deck, SItemManagerUtil.StatTypes.CMC_2.predicate, total);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC3(), deck, SItemManagerUtil.StatTypes.CMC_3.predicate, total);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC4(), deck, SItemManagerUtil.StatTypes.CMC_4.predicate, total);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC5(), deck, SItemManagerUtil.StatTypes.CMC_5.predicate, total);
+        setLabelValue(VStatistics.SINGLETON_INSTANCE.getLblCMC6(), deck, SItemManagerUtil.StatTypes.CMC_6.predicate, total);
+
         int tmc = 0;
-
         for (final Entry<PaperCard, Integer> e : deck) {
-            final CardRules cardRules = e.getKey().getRules();
-            final int count = e.getValue();
-            final int cmc = cardRules.getManaCost().getCMC();
-
-            if (cmc == 0)       { cmc0 += count; }
-            else if (cmc == 1)  { cmc1 += count; }
-            else if (cmc == 2)  { cmc2 += count; }
-            else if (cmc == 3)  { cmc3 += count; }
-            else if (cmc == 4)  { cmc4 += count; }
-            else if (cmc == 5)  { cmc5 += count; }
-            else if (cmc >= 6)  { cmc6 += count; }
-
-            tmc += (cmc * count);
+            tmc += e.getKey().getRules().getManaCost().getCMC() * e.getValue();
         }
-
-        VStatistics.SINGLETON_INSTANCE.getLblCMC0().setText(
-                cmc0 + " (" + SItemManagerUtil.calculatePercentage(cmc0, total) + "%)");
-        VStatistics.SINGLETON_INSTANCE.getLblCMC1().setText(
-                cmc1 + " (" + SItemManagerUtil.calculatePercentage(cmc1, total) + "%)");
-        VStatistics.SINGLETON_INSTANCE.getLblCMC2().setText(
-                cmc2 + " (" + SItemManagerUtil.calculatePercentage(cmc2, total) + "%)");
-        VStatistics.SINGLETON_INSTANCE.getLblCMC3().setText(
-                cmc3 + " (" + SItemManagerUtil.calculatePercentage(cmc3, total) + "%)");
-        VStatistics.SINGLETON_INSTANCE.getLblCMC4().setText(
-                cmc4 + " (" + SItemManagerUtil.calculatePercentage(cmc4, total) + "%)");
-        VStatistics.SINGLETON_INSTANCE.getLblCMC5().setText(
-                cmc5 + " (" + SItemManagerUtil.calculatePercentage(cmc5, total) + "%)");
-        VStatistics.SINGLETON_INSTANCE.getLblCMC6().setText(
-                cmc6 + " (" + SItemManagerUtil.calculatePercentage(cmc6, total) + "%)");
-
         double amc = Math.round((double) tmc / (double) total * 100) / 100.0d;
 
         VStatistics.SINGLETON_INSTANCE.getLblTotal().setText("TOTAL CARDS: " + deck.countAll());

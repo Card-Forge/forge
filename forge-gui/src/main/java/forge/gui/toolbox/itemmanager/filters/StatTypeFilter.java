@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import com.google.common.base.Predicates;
+
 import forge.Command;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.ItemManager;
@@ -25,7 +26,19 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
     @SuppressWarnings("serial")
     protected void addToggleButton(JPanel widget, final StatTypes st) {
-        final FLabel button = addToggleButton(widget, st.toLabelString(), st.img);
+        StringBuilder tooltip = new StringBuilder();
+        tooltip.append(st.label);
+        tooltip.append(" (click to toggle the filter, right-click to show only ");
+        if (st.label.length() > 1 && !Character.isUpperCase(st.label.charAt(1))) {
+            tooltip.append(st.label.substring(0, 1).toLowerCase());
+            tooltip.append(st.label.substring(1));
+        }
+        else {
+            tooltip.append(st.label);
+        }
+        tooltip.append(")");
+
+        final FLabel button = addToggleButton(widget, st.img, tooltip.toString());
         buttonMap.put(st, button);
 
         //hook so right-clicking a button toggles itself on and toggles off all other buttons

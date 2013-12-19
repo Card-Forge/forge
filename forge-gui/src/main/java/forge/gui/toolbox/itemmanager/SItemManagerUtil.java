@@ -9,7 +9,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
-import forge.util.TextUtil;
+import forge.util.ComparableOp;
 
 
 /** 
@@ -24,39 +24,39 @@ import forge.util.TextUtil;
 public final class SItemManagerUtil  {
     /** An enum to encapsulate metadata for the stats/filter objects. */
     public static enum StatTypes {
-        TOTAL      (FSkin.ZoneImages.ICO_HAND,      null, 0),
-        WHITE      (FSkin.ManaImages.IMG_WHITE,     CardRulesPredicates.Presets.IS_WHITE, 1),
-        BLUE       (FSkin.ManaImages.IMG_BLUE,      CardRulesPredicates.Presets.IS_BLUE, 1),
-        BLACK      (FSkin.ManaImages.IMG_BLACK,     CardRulesPredicates.Presets.IS_BLACK, 1),
-        RED        (FSkin.ManaImages.IMG_RED,       CardRulesPredicates.Presets.IS_RED, 1),
-        GREEN      (FSkin.ManaImages.IMG_GREEN,     CardRulesPredicates.Presets.IS_GREEN, 1),
-        COLORLESS  (FSkin.ManaImages.IMG_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS, 1),
-        MULTICOLOR (FSkin.EditorImages.IMG_MULTI,   CardRulesPredicates.Presets.IS_MULTICOLOR, 1),
+        WHITE      (FSkin.ManaImages.IMG_WHITE,     CardRulesPredicates.Presets.IS_WHITE, "White cards"),
+        BLUE       (FSkin.ManaImages.IMG_BLUE,      CardRulesPredicates.Presets.IS_BLUE, "Blue cards"),
+        BLACK      (FSkin.ManaImages.IMG_BLACK,     CardRulesPredicates.Presets.IS_BLACK, "Black cards"),
+        RED        (FSkin.ManaImages.IMG_RED,       CardRulesPredicates.Presets.IS_RED, "Red cards"),
+        GREEN      (FSkin.ManaImages.IMG_GREEN,     CardRulesPredicates.Presets.IS_GREEN, "Green cards"),
+        COLORLESS  (FSkin.ManaImages.IMG_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS, "Colorless cards"),
+        MULTICOLOR (FSkin.EditorImages.IMG_MULTI,   CardRulesPredicates.Presets.IS_MULTICOLOR, "Multicolor cards"),
 
-        PACK         (FSkin.EditorImages.IMG_PACK,         null, 2),
-        LAND         (FSkin.EditorImages.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND, 2),
-        ARTIFACT     (FSkin.EditorImages.IMG_ARTIFACT,     CardRulesPredicates.Presets.IS_ARTIFACT, 2),
-        CREATURE     (FSkin.EditorImages.IMG_CREATURE,     CardRulesPredicates.Presets.IS_CREATURE, 2),
-        ENCHANTMENT  (FSkin.EditorImages.IMG_ENCHANTMENT,  CardRulesPredicates.Presets.IS_ENCHANTMENT, 2),
-        PLANESWALKER (FSkin.EditorImages.IMG_PLANESWALKER, CardRulesPredicates.Presets.IS_PLANESWALKER, 2),
-        INSTANT      (FSkin.EditorImages.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT, 2),
-        SORCERY      (FSkin.EditorImages.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY, 2);
+        PACK         (FSkin.EditorImages.IMG_PACK,         null, "Card packs and prebuilt decks"),
+        LAND         (FSkin.EditorImages.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND, "Lands"),
+        ARTIFACT     (FSkin.EditorImages.IMG_ARTIFACT,     CardRulesPredicates.Presets.IS_ARTIFACT, "Artifacts"),
+        CREATURE     (FSkin.EditorImages.IMG_CREATURE,     CardRulesPredicates.Presets.IS_CREATURE, "Creatures"),
+        ENCHANTMENT  (FSkin.EditorImages.IMG_ENCHANTMENT,  CardRulesPredicates.Presets.IS_ENCHANTMENT, "Enchantments"),
+        PLANESWALKER (FSkin.EditorImages.IMG_PLANESWALKER, CardRulesPredicates.Presets.IS_PLANESWALKER, "Planeswalkers"),
+        INSTANT      (FSkin.EditorImages.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT, "Instants"),
+        SORCERY      (FSkin.EditorImages.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY, "Sorcerys"),
+
+        CMC_0 (FSkin.ColorlessManaImages.IMG_0, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 0), "Cards with CMC 0"),
+        CMC_1 (FSkin.ColorlessManaImages.IMG_1, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 1), "Cards with CMC 1"),
+        CMC_2 (FSkin.ColorlessManaImages.IMG_2, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 2), "Cards with CMC 2"),
+        CMC_3 (FSkin.ColorlessManaImages.IMG_3, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 3), "Cards with CMC 3"),
+        CMC_4 (FSkin.ColorlessManaImages.IMG_4, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 4), "Cards with CMC 4"),
+        CMC_5 (FSkin.ColorlessManaImages.IMG_5, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 5), "Cards with CMC 5"),
+        CMC_6 (FSkin.ColorlessManaImages.IMG_6, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.GT_OR_EQUAL, 6), "Cards with CMC 6+");
 
         public final SkinImage img;
         public final Predicate<CardRules> predicate;
-        public final int group;
+        public final String label;
 
-        StatTypes(FSkin.SkinProp prop, Predicate<CardRules> pred, int grp) {
+        StatTypes(FSkin.SkinProp prop, Predicate<CardRules> pred, String label0) {
             img = FSkin.getImage(prop, 18, 18);
             predicate = pred;
-            group = grp;
-        }
-
-        public String toLabelString() {
-            if (this == PACK) {
-                return "Card packs and prebuilt decks";
-            }
-            return TextUtil.enumToLabel(this) + " cards";
+            label = label0;
         }
     }
 
