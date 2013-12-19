@@ -585,4 +585,23 @@ public class PlayerControllerAi extends PlayerController {
         // happens here.
         return possibleReplacers.get(0);
     }
+
+    @Override
+    public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
+        String choice = choices.get(0);
+        final String logic = sa.getParam("AILogic");
+        if (logic == null || logic.equals("MostProminentHumanCreatures")) {
+            List<Card> list = new ArrayList<Card>();
+            for (Player opp : player.getOpponents()) {
+                list.addAll(opp.getCreaturesInPlay());
+            }
+            if (list.isEmpty()) {
+                list = CardLists.filterControlledBy(game.getCardsInGame(), player.getOpponents());
+            }
+            if (!list.isEmpty()) {
+                choice = ComputerUtilCard.getMostProminentColor(list);
+            }
+        }
+        return choice;
+    }
 }

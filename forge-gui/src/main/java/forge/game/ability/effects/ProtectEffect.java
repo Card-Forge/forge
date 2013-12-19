@@ -6,17 +6,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import forge.Command;
-import forge.ai.ComputerUtilCard;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.gui.GuiChoose;
 import forge.util.Lang;
 
 
@@ -105,27 +102,10 @@ public class ProtectEffect extends SpellAbilityEffect {
         final List<String> gains = new ArrayList<String>();
         if (isChoice && !choices.isEmpty())  {
             Player choser = sa.getActivatingPlayer();
-            
-            if (choser.isHuman()) {
-                final String choice = GuiChoose.one("Choose a protection", choices);
-                gains.add(choice);
-            } else {
-                String choice = choices.get(0);
-                final String logic = sa.getParam("AILogic");
-                if (logic == null || logic.equals("MostProminentHumanCreatures")) {
-                    List<Card> list = new ArrayList<Card>();
-                    for (Player opp : choser.getOpponents()) {
-                        list.addAll(opp.getCreaturesInPlay());
-                    }
-                    if (list.isEmpty()) {
-                        list = CardLists.filterControlledBy(game.getCardsInGame(), choser.getOpponents());
-                    }
-                    if (!list.isEmpty()) {
-                        choice = ComputerUtilCard.getMostProminentColor(list);
-                    }
-                }
-                gains.add(choice);
-            }
+            final String choice = choser.getController().chooseProtectionType("Choose a protection", sa, choices);
+            if( null == choice)
+                return;
+            gains.add(choice);
             game.getAction().nofityOfValue(sa, choser, Lang.joinHomogenous(gains), choser);
         } else {
             if (sa.getParam("Gains").equals("ChosenColor")) {

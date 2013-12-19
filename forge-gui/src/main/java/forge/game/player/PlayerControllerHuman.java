@@ -943,4 +943,9 @@ public class PlayerControllerHuman extends PlayerController {
             return possibleReplacers.get(0);
         return GuiChoose.one(prompt, possibleReplacers);
     }
+
+    @Override
+    public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
+        return GuiChoose.one(string, choices);
+    }
 }

@@ -196,4 +196,5 @@ public abstract class PlayerController {
 
     public abstract boolean confirmPayment(CostPart costPart, String string);
     public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams);
+    public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
 }

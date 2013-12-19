@@ -15,7 +15,6 @@ import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.Lang;
 
 public class ProtectAllEffect extends SpellAbilityEffect {
@@ -47,17 +46,10 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         final List<String> gains = new ArrayList<String>();
         if (isChoice) {
             Player choser = sa.getActivatingPlayer();
-            if (choser.isHuman()) {
-                final String choice = GuiChoose.one("Choose a protection", choices);
-                if (null == choice) {
-                    return;
-                }
-                gains.add(choice);
-            } else {
-                // TODO - needs improvement
-                final String choice = choices.get(0);
-                gains.add(choice);
-            }
+            final String choice = choser.getController().chooseProtectionType("Choose a protection", sa, choices);
+            if( null == choice)
+                return;
+            gains.add(choice);
             game.getAction().nofityOfValue(sa, choser, Lang.joinHomogenous(gains), choser);
         } else {
             if (sa.getParam("Gains").equals("ChosenColor")) {

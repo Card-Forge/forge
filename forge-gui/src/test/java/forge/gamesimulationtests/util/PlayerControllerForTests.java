@@ -468,4 +468,9 @@ public class PlayerControllerForTests extends PlayerController {
         // TODO Auto-generated method stub
         return Iterables.getFirst(possibleReplacers, null);
     }
+
+    @Override
+    public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
+        return choices.get(0);
+    }
 }
