@@ -36,12 +36,12 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
-import forge.game.limited.DraftRankCache;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
+import forge.limited.DraftRankCache;
 
 /**
  * A collection of methods pertaining to columns in card catalog and

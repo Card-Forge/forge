@@ -26,8 +26,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
-import forge.game.limited.BoosterDraft;
-import forge.game.limited.IBoosterDraft;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
@@ -40,6 +38,8 @@ import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
+import forge.limited.BoosterDraft;
+import forge.limited.IBoosterDraft;
 import forge.util.ItemPoolView;
 
 /**

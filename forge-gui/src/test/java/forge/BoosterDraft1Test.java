@@ -2,9 +2,9 @@ package forge;
 
 import org.testng.annotations.Test;
 
-import forge.game.limited.BoosterDraft;
-import forge.game.limited.LimitedPoolType;
 import forge.item.PaperCard;
+import forge.limited.BoosterDraft;
+import forge.limited.LimitedPoolType;
 import forge.util.ItemPoolView;
 
 /**

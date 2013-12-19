@@ -1,4 +1,4 @@
-package forge.game.limited;
+package forge.limited;
 
 import java.util.HashMap;
 import java.util.List;

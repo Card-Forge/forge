@@ -26,9 +26,9 @@ import javax.swing.SwingConstants;
 
 import forge.Singletons;
 import forge.game.Game;
-import forge.game.limited.GauntletMini;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FSkin;
+import forge.limited.GauntletMini;
 import forge.net.FServer;
 
 /**

@@ -1,4 +1,4 @@
-package forge.game.limited;
+package forge.limited;
 
 import java.util.ArrayList;
 import java.util.Arrays;

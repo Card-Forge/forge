@@ -25,10 +25,10 @@ import com.google.common.base.Predicate;
 import forge.Singletons;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
-import forge.game.limited.CustomLimited;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.SealedProduct;
+import forge.limited.CustomLimited;
 import forge.util.FileUtil;
 
 /** 

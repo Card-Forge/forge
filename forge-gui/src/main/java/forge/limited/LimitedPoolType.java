@@ -1,4 +1,4 @@
-package forge.game.limited;
+package forge.limited;
 
 public enum LimitedPoolType { 
     Full("Full Cardpool"),
