@@ -113,7 +113,7 @@ public class PlayAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(final Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(final Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
         List<Card> tgtCards = CardLists.filter(options, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

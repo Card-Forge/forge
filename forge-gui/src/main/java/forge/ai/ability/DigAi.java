@@ -1,8 +1,10 @@
 package forge.ai.ability;
 
+import java.util.Collection;
 import java.util.Random;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -77,6 +79,15 @@ public class DigAi extends SpellAbilityAi {
         }
 
         return true;
+    }
+    
+    @Override
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> valid, boolean isOptional, Player relatedPlayer) {
+        Card chosen = ComputerUtilCard.getBestAI(valid);
+        if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai)) {
+            return ComputerUtilCard.getWorstAI(valid);
+        }
+        return chosen;
     }
 
     /* (non-Javadoc)

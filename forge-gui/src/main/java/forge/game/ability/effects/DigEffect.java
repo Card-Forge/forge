@@ -18,7 +18,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.Lang;
 import forge.util.MyRandom;
 
@@ -124,7 +123,7 @@ public class DigEffect extends SpellAbilityEffect {
                     
                     hasRevealed = p.getController().confirmAction(sa, null, question);
                     if ( hasRevealed )
-                        p.getGame().getAction().reveal(top, p);
+                        game.getAction().reveal(top, p);
                     
                 } else if (sa.hasParam("RevealValid")) {
                     final String revealValid = sa.getParam("RevealValid");
@@ -187,17 +186,7 @@ public class DigEffect extends SpellAbilityEffect {
                             prompt = "Leave which card on top of the ";
                         }
                         
-                        Card chosen = null;
-                        if (choser.isHuman()) {
-                            
-
-                            chosen = GuiChoose.one(prompt + destZone2, valid);
-                        } else { // Computer
-                            chosen = ComputerUtilCard.getBestAI(valid);
-                            if (sa.getActivatingPlayer().isOpponentOf(choser) && p.isOpponentOf(choser)) {
-                                chosen = ComputerUtilCard.getWorstAI(valid);
-                            }
-                        }
+                        Card chosen = choser.getController().chooseSingleCardForEffect(valid, sa, prompt + destZone2, false, p);
                         movedCards.remove(chosen);
                         if (sa.hasParam("RandomOrder")) {
                             final Random random = MyRandom.getRandom();
@@ -205,6 +194,14 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     } else {
                         int j = 0;
+                        String prompt = "Choose a card to put into the ";
+                        if (destZone1.equals(ZoneType.Library) && libraryPosition == -1) {
+                            prompt = "Chose a card to put on the bottom of the ";
+                        }
+                        if (destZone1.equals(ZoneType.Library) && libraryPosition == 0) {
+                            prompt = "Chose a card to put on top of the ";
+                        }
+                        
                         if (choser.isHuman()) {
                             while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
                                 // let user get choice
@@ -212,13 +209,7 @@ public class DigEffect extends SpellAbilityEffect {
                                     break;
                                 }
                                 Card chosen = null;
-                                String prompt = "Choose a card to put into the ";
-                                if (destZone1.equals(ZoneType.Library) && (libraryPosition == -1)) {
-                                    prompt = "Chose a card to put on the bottom of the ";
-                                }
-                                if (destZone1.equals(ZoneType.Library) && (libraryPosition == 0)) {
-                                    prompt = "Chose a card to put on top of the ";
-                                }
+
                                 
                                 chosen = choser.getController().chooseSingleCardForEffect(valid, sa, prompt, anyNumber || optional);
                                 if ((chosen == null) || chosen.getName().equals("[No valid cards]")) {
@@ -234,8 +225,6 @@ public class DigEffect extends SpellAbilityEffect {
                                         valid.removeAll(andOrCards);
                                     }
                                 }
-                                // Singletons.getModel().getGameAction().revealToComputer()
-                                // - for when this exists
                                 j++;
                             }
                         } // human
@@ -252,9 +241,6 @@ public class DigEffect extends SpellAbilityEffect {
                                 if (chosen == null) {
                                     break;
                                 }
-                                if (changeValid.length() > 0) {
-                                    GuiChoose.show("Computer picked: ", chosen);
-                                }
                                 movedCards.add(chosen);
                                 valid.remove(chosen);
                                 if (!andOrValid.equals("")) {
@@ -266,6 +252,9 @@ public class DigEffect extends SpellAbilityEffect {
                                     }
                                 }
                             }
+                        }
+                        if (changeValid.length() > 0) {
+                            game.getAction().reveal(choser + " picked:", movedCards, choser, true);
                         }
                     }
                     if (sa.hasParam("ForgetOtherRemembered")) {

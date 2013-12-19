@@ -339,7 +339,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional) {
+    public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
         // Human is supposed to read the message and understand from it what to choose
         if (options.isEmpty()) {
             return null;

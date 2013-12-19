@@ -25,7 +25,7 @@ public class LegendaryRuleAi extends SpellAbilityAi {
     
 
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
         // Choose a single legendary/planeswalker card to keep
         Card firstOption = Iterables.getFirst(options, null);
         boolean choosingFromPlanewalkers = firstOption.isPlaneswalker();

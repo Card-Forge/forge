@@ -100,7 +100,7 @@ public class ChooseCardAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(final Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(final Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
         final Card host = sa.getSourceCard();
         final String logic = sa.getParam("AILogic");
         Card choice = null;

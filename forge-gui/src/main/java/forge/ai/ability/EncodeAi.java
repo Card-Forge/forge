@@ -72,7 +72,7 @@ public final class EncodeAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
     @Override
-    public Card chooseSingleCard(final Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(final Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
         Card choice = null;
 //        final String logic = sa.getParam("AILogic");
 //        if (logic == null) {

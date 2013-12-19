@@ -1234,7 +1234,7 @@ public class AttachAi extends SpellAbilityAi {
     }
     
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
         return attachToCardAIPreferences(ai, sa, true);
     }
     

@@ -52,7 +52,7 @@ public final class BondAi extends SpellAbilityAi {
     
 
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
         return ComputerUtilCard.getBestCreatureAI(options);
     }
 }

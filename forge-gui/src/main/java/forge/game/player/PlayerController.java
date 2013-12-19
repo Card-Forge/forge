@@ -132,8 +132,9 @@ public abstract class PlayerController {
     public abstract Pair<SpellAbilityStackInstance, GameObject> chooseTarget(SpellAbility sa, List<Pair<SpellAbilityStackInstance, GameObject>> allTargets);
 
     public abstract List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int amount, boolean isOptional);
-    public Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
-    public abstract Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title, boolean isOptional);
+    public final Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false, null); }
+    public final Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title, boolean isOptional) { return chooseSingleCardForEffect(sourceList, sa, title, isOptional, null); } 
+    public abstract Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title, boolean isOptional, Player relatedPlayer);
     public abstract Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title);
     public abstract SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title);
 

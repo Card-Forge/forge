@@ -144,12 +144,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional) {
+    public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
         ApiType api = sa.getApi();
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        return api.getAi().chooseSingleCard(player, sa, options, isOptional);
+        return api.getAi().chooseSingleCard(player, sa, options, isOptional, targetedPlayer);
     }
 
     @Override

@@ -144,7 +144,7 @@ public abstract class SpellAbilityAi extends SaTargetRoutines {
         return true;
     }
 
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleCard is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }

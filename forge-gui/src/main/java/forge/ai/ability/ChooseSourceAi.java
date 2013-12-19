@@ -126,7 +126,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
     
     
     @Override
-    public Card chooseSingleCard(final Player aiChoser, SpellAbility sa, Collection<Card> options, boolean isOptional) {
+    public Card chooseSingleCard(final Player aiChoser, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
         if ("NeedsPrevention".equals(sa.getParam("AILogic"))) {
             final Player ai = sa.getActivatingPlayer();
             final Game game = ai.getGame();

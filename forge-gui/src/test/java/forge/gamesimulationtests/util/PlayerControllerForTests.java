@@ -157,7 +157,7 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title, boolean isOptional) {
+	public Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
 		return chooseItem(sourceList);
 	}
 
