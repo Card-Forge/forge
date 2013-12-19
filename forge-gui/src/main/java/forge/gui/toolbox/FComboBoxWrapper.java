@@ -128,14 +128,9 @@ public class FComboBoxWrapper<E> {
     public void setEnabled(boolean aFlag) {
         this.comboBox.setEnabled(aFlag);
     }
-    
-    public void addTo(Container container) {
-        addTo(container, null);
-    }
-    
-    public void addTo(Container container, Object constraints0) {
-        container.add(this.comboBox, constraints0);
-        this.constraints = constraints0;
+
+    public int getAutoSizeWidth() {
+        return this.comboBox.getAutoSizeWidth();
     }
 
     public JComponent getComponent() { //disguise as component for sake of rare places that need to access component in wrapper

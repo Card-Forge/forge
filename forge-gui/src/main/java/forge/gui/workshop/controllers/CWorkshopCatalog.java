@@ -1,12 +1,13 @@
 package forge.gui.workshop.controllers;
 
 import java.util.List;
+
 import forge.Command;
 import forge.gui.workshop.views.VWorkshopCatalog;
 import forge.gui.framework.ICDoc;
-import forge.gui.toolbox.itemmanager.table.SColumnUtil;
-import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
-import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil;
+import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
 import forge.item.InventoryItem;
 
 /** 

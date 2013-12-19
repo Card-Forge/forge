@@ -324,28 +324,28 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
 
         pnlRestrictions.add(lblStartingPool, constraints + lblWidthStart);
-        cbxStartingPool.addTo(pnlRestrictions, constraints + cboWidthStart);
+        pnlRestrictions.add(cbxStartingPool.getComponent(), constraints + cboWidthStart);
 
         /* out of these 3 groups only one will be visible */
         pnlRestrictions.add(lblUnrestricted, constraints + hidemode + "spanx 2");
 
         pnlRestrictions.add(lblPreconDeck, constraints + lblWidthStart);
-        cbxPreconDeck.addTo(pnlRestrictions, constraints + cboWidthStart);
+        pnlRestrictions.add(cbxPreconDeck.getComponent(), constraints + cboWidthStart);
 
         pnlRestrictions.add(lblCustomDeck, constraints + lblWidthStart);
-        cbxCustomDeck.addTo(pnlRestrictions, constraints + cboWidthStart); // , skip 1
+        pnlRestrictions.add(cbxCustomDeck.getComponent(), constraints + cboWidthStart); // , skip 1
 
         pnlRestrictions.add(lblFormat, constraints + lblWidthStart);
-        cbxFormat.addTo(pnlRestrictions, constraints + cboWidthStart); // , skip 1
+        pnlRestrictions.add(cbxFormat.getComponent(), constraints + cboWidthStart); // , skip 1
 
         pnlRestrictions.add(btnDefineCustomFormat, constraints + hidemode + "spanx 2, w 240px");
 
         // Prized cards options
         pnlRestrictions.add(lblPrizedCards, constraints + lblWidth);
-        cbxPrizedCards.addTo(pnlRestrictions, constraints + cboWidth);
+        pnlRestrictions.add(cbxPrizedCards.getComponent(), constraints + cboWidth);
 
         pnlRestrictions.add(lblPrizeFormat, constraints + lblWidthStart);
-        cbxPrizeFormat.addTo(pnlRestrictions, constraints + cboWidthStart); // , skip 1
+        pnlRestrictions.add(cbxPrizeFormat.getComponent(), constraints + cboWidthStart); // , skip 1
         pnlRestrictions.add(btnPrizeDefineCustomFormat, constraints + hidemode + "spanx 2, w 240px");
         pnlRestrictions.add(lblPrizeSameAsStarting,  constraints + hidemode + "spanx 2");
         pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "spanx 2");
@@ -354,10 +354,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
 
         pnlRestrictions.add(lblPreferredColor,  constraints + lblWidthStart);
-        cbxPreferredColor.addTo(pnlRestrictions, constraints + cboWidthStart + ", wrap");
+        pnlRestrictions.add(cbxPreferredColor.getComponent(), constraints + cboWidthStart + ", wrap");
 
         pnlRestrictions.add(lblStartingWorld, constraints + lblWidthStart);
-        cbxStartingWorld.addTo(pnlRestrictions, constraints + cboWidthStart);
+        pnlRestrictions.add(cbxStartingWorld.getComponent(), constraints + cboWidthStart);
 
 //        cboAllowUnlocks.setOpaque(false);
         pnlRestrictions.setOpaque(false);

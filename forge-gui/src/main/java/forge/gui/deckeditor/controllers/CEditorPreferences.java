@@ -5,15 +5,15 @@ import java.awt.event.ItemListener;
 import java.util.HashMap;
 
 import javax.swing.JCheckBox;
-import javax.swing.JTable;
 
 import forge.Command;
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
-import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
-import forge.gui.toolbox.itemmanager.table.SColumnUtil;
-import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil;
+import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.views.VEditorPreferences;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
@@ -79,11 +79,11 @@ public enum CEditorPreferences implements ICDoc {
                 @Override
                 public void itemStateChanged(ItemEvent arg0) {
                     TableColumnInfo<InventoryItem> col = SColumnUtil.getColumn(name);
-                    final JTable table = (col.getEnumValue().substring(0, 4).equals("DECK"))
-                        ? CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager().getTable()
-                        : CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().getTable();
-                    SColumnUtil.toggleColumn(table, col);
-                    SItemManagerIO.savePreferences(table);
+                    final ItemManager<?> itemManager = (col.getEnumValue().substring(0, 4).equals("DECK"))
+                        ? CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager()
+                        : CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager();
+                    SColumnUtil.toggleColumn(itemManager.getTable().getTable(), col);
+                    SItemManagerIO.savePreferences(itemManager);
                 }
             });
         }
@@ -115,7 +115,7 @@ public enum CEditorPreferences implements ICDoc {
                     curEditor.getDeckManager().getTable().setWantElasticColumns(wantElastic);
                 }
                 SItemManagerIO.setPref(EditorPreference.elastic_columns, wantElastic);
-                SItemManagerIO.savePreferences(curEditor.getCatalogManager().getTable()); } });
+                SItemManagerIO.savePreferences(curEditor.getCatalogManager()); } });
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbCardDisplayUnique().addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {
@@ -128,7 +128,7 @@ public enum CEditorPreferences implements ICDoc {
                     curEditor.getDeckManager().updateView(true);
                 }
                 SItemManagerIO.setPref(EditorPreference.display_unique_only, wantUnique);
-                SItemManagerIO.savePreferences(curEditor.getCatalogManager().getTable()); } });
+                SItemManagerIO.savePreferences(curEditor.getCatalogManager()); } });
     }
 
     /* (non-Javadoc)

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-import javax.swing.JTable;
+
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
@@ -18,10 +18,10 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import forge.gui.toolbox.itemmanager.table.TableColumnInfo;
-import forge.gui.toolbox.itemmanager.table.SColumnUtil;
-import forge.gui.toolbox.itemmanager.table.SColumnUtil.ColumnName;
-import forge.gui.toolbox.itemmanager.table.SColumnUtil.SortState;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil;
+import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil.SortState;
 import forge.item.InventoryItem;
 import forge.properties.NewConstants;
 
@@ -89,8 +89,8 @@ public class SItemManagerIO {
     }
 
     /** Publicly-accessible save method, to neatly handle exception handling. */
-    public static void savePreferences(JTable table) {
-        try { save(table); }
+    public static void savePreferences(ItemManager<?> itemManager) {
+        try { save(itemManager); }
         catch (final Exception e) { e.printStackTrace(); }
     }
 
@@ -104,9 +104,9 @@ public class SItemManagerIO {
      * 
      * Save list view
      * 
-     * @param table
+     * @param itemManager
      */
-    private static void save(JTable table) throws Exception {
+    private static void save(ItemManager<?> itemManager) throws Exception {
         final XMLOutputFactory out = XMLOutputFactory.newInstance();
         final XMLEventWriter writer = out.createXMLEventWriter(new FileOutputStream(NewConstants.EDITOR_PREFERENCES_FILE.userPrefLoc));
 
@@ -130,7 +130,7 @@ public class SItemManagerIO {
         for (final ColumnName c : COLS.keySet()) {
             // If column is not in view, retain previous model index for the next time
             // that the column will be in the view.
-            int index = SColumnUtil.getColumnViewIndex(table, c);
+            int index = SColumnUtil.getColumnViewIndex(itemManager.getTable().getTable(), c);
             if (index == -1) {
                 index = COLS.get(c).getModelIndex();
             }

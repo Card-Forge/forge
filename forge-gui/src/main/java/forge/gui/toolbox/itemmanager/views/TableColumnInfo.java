@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.gui.toolbox.itemmanager.table;
+package forge.gui.toolbox.itemmanager.views;
 
 import java.util.Map.Entry;
 
@@ -23,7 +23,7 @@ import javax.swing.table.TableColumn;
 
 import com.google.common.base.Function;
 
-import forge.gui.toolbox.itemmanager.table.SColumnUtil.SortState;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil.SortState;
 
 /**
  * A column object in a EditorTableModel in the card editor.

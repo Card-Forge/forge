@@ -1,6 +1,7 @@
 package forge.gui.toolbox;
 
 import java.awt.Component;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
@@ -78,6 +79,18 @@ public class FComboBox<E> extends JComboBox<E> {
     public void setSkinFont(SkinFont skinFont0) {
         this.skinFont = skinFont0;
         FSkin.get(this).setFont(skinFont0);
+    }
+
+    public int getAutoSizeWidth() {
+        int maxWidth = 0;
+        FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
+        for (int i = 0; i < this.getItemCount(); i++) {
+            int width = metrics.stringWidth(this.getItemAt(i).toString());
+            if (width > maxWidth) {
+                maxWidth = width;
+            }
+        }
+        return maxWidth + 28; //leave room for arrow and padding
     }
 
     @Override

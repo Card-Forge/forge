@@ -33,7 +33,6 @@ import java.util.List;
 
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
-import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
@@ -69,8 +68,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
-import forge.gui.toolbox.itemmanager.table.ItemTable;
-import forge.gui.toolbox.itemmanager.table.ItemTableModel;
+import forge.gui.toolbox.itemmanager.views.ItemListView;
 import forge.item.InventoryItem;
 
 /**
@@ -194,30 +192,31 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     
     private class _ContextMenuBuilder implements ACEditorBase.ContextMenuBuilder {
         private final MouseEvent _e;
-        private final JTable     _nextTable;
+        private final ItemListView<?>     _nextTable;
         private final _MoveCard  _onMove;
         private final int        _numSelected;
         private final JPopupMenu _menu = new JPopupMenu("TableContextMenu");
         private boolean          _showTextFilterItem = false;
         
-        public _ContextMenuBuilder(MouseEvent e, JTable table, JTable nextTable, _MoveCard onMove) {
+        public _ContextMenuBuilder(MouseEvent e, ItemListView<?> table, ItemListView<?> nextTable, _MoveCard onMove) {
             _e         = e;
             _nextTable = nextTable;
             _onMove    = onMove;
             
             // ensure the table has focus
             if (!table.hasFocus()) {
-                table.requestFocusInWindow();
+                table.focus();
             }
             
             // if item under the cursor is not selected, select it
-            int row = table.rowAtPoint(e.getPoint());
-            if (!Ints.contains(table.getSelectedRows(), row)) {
-                table.setRowSelectionInterval(row, row);
+            int index = table.getIndexAtPoint(e.getPoint());
+            int[] selectedIndices = table.getSelectedIndices();
+            if (!Ints.contains(selectedIndices, index)) {
+                table.setSelectedIndex(index);
             }
             
             // record selection count
-            _numSelected = table.getSelectedRowCount();
+            _numSelected = selectedIndices.length;
         }
         
         private void show() {
@@ -225,11 +224,11 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             
             GuiUtils.addMenuItem(_menu, "Jump to previous table",
                     KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), new Runnable() {
-                @Override public void run() { _nextTable.requestFocusInWindow(); }
+                @Override public void run() { _nextTable.focus(); }
             });
             GuiUtils.addMenuItem(_menu, "Jump to next table",
                     KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), new Runnable() {
-                @Override public void run() { _nextTable.requestFocusInWindow(); }
+                @Override public void run() { _nextTable.focus(); }
             });
             
             if (_showTextFilterItem) {
@@ -313,20 +312,20 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
 
         final ItemManager<? extends InventoryItem> catView  = childController.getCatalogManager();
         final ItemManager<? extends InventoryItem> deckView = childController.getDeckManager();
-        final ItemTable<? extends InventoryItem> catTable  = catView.getTable();
-        final ItemTable<? extends InventoryItem> deckTable = deckView.getTable();
+        final ItemListView<? extends InventoryItem> catTable  = catView.getTable();
+        final ItemListView<? extends InventoryItem> deckTable = deckView.getTable();
 
         VCardCatalog.SINGLETON_INSTANCE.setItemManager(catView);
         VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckView);
         
         if (!childController.listenersHooked) { //hook listeners the first time the controller is updated
-            catTable.addKeyListener(new KeyAdapter() {
+            catTable.getComponent().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
                         addSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                     } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
-                        deckTable.requestFocusInWindow();
+                        deckTable.focus();
                     } else if (KeyEvent.VK_F == e.getKeyCode()) {
                         // let ctrl/cmd-F set focus to the text filter box
                         if (e.isControlDown() || e.isMetaDown()) {
@@ -336,13 +335,13 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                 }
             });
     
-            deckTable.addKeyListener(new KeyAdapter() {
+            deckTable.getComponent().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
                         removeSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                     } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
-                        catTable.requestFocusInWindow();
+                        catTable.focus();
                     }
                 }
             });
@@ -360,7 +359,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                 }
             };
 
-            catTable.addMouseListener(new FMouseAdapter() {
+            catTable.getComponent().addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftDoubleClick(MouseEvent e) {
                     addSelectedCards(false, 1);
@@ -374,7 +373,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                 }
             });
     
-            deckTable.addMouseListener(new FMouseAdapter() {
+            deckTable.getComponent().addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftDoubleClick(MouseEvent e) {
                     removeSelectedCards(false, 1);
@@ -391,13 +390,13 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             final _FindAsYouType catFind  = new _FindAsYouType(catView);
             final _FindAsYouType deckFind = new _FindAsYouType(deckView);
     
-            catTable.addFocusListener(new FocusAdapter() {
+            catTable.getComponent().addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(FocusEvent arg0) {
                     catFind.cancel();
                 }
             });
-            deckTable.addFocusListener(new FocusAdapter() {
+            deckTable.getComponent().addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusLost(FocusEvent arg0) {
                     deckFind.cancel();
@@ -405,8 +404,8 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             });
             
             // highlight items as the user types a portion of their names
-            catTable.addKeyListener(catFind);
-            deckTable.addKeyListener(deckFind);
+            catTable.getComponent().addKeyListener(catFind);
+            deckTable.getComponent().addKeyListener(deckFind);
             
             //set card when selection changes
             catView.addSelectionListener(new ListSelectionListener() {
@@ -462,7 +461,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
         }
         
         private void _findNextMatch(int startIdx, boolean reverse) {
-            int numItems = tableView.getTable().getRowCount();
+            int numItems = tableView.getTable().getCount();
             if (0 == numItems) {
                 cancel();
                 return;
@@ -475,9 +474,8 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             String searchStr = str.toString();
             boolean found = false;
             for (int idx = startIdx;; idx = (idx + increment) % numItems) {
-                ItemTableModel<? extends InventoryItem> tableModel = tableView.getTable().getTableModel();
-                if (StringUtils.containsIgnoreCase(tableModel.rowToItem(idx).getKey().getName(), searchStr)) {
-                    tableView.getTable().selectAndScrollTo(idx);
+                if (StringUtils.containsIgnoreCase(tableView.getTable().getItemAtIndex(idx).getName(), searchStr)) {
+                    tableView.getTable().setSelectedIndex(idx);
                     found = true;
                     break;
                 }
@@ -506,7 +504,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                 popupTimer.restart();
             } else {
                 PopupFactory factory = PopupFactory.getSharedInstance();
-                Point tableLoc = tableView.getTable().getTableHeader().getLocationOnScreen();
+                Point tableLoc = tableView.getTable().getTable().getTableHeader().getLocationOnScreen();
                 popup = factory.getPopup(null, popupLabel, tableLoc.x + 10, tableLoc.y + 10);
                 FSkin.get(SwingUtilities.getRoot(popupLabel)).setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
                 
@@ -558,7 +556,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                 if (!str.toString().isEmpty()) {
                     // no need to add (or subtract) 1 -- the table selection will already
                     // have been advanced by the (shift+) enter key
-                    _findNextMatch(tableView.getTable().getSelectedRow(), e.isShiftDown());
+                    _findNextMatch(tableView.getTable().getSelectedIndex(), e.isShiftDown());
                 }
                 return;
                 
@@ -584,7 +582,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                 str.append(e.getKeyChar());
             }
             
-            _findNextMatch(Math.max(0, tableView.getTable().getSelectedRow()), false);
+            _findNextMatch(Math.max(0, tableView.getTable().getSelectedIndex()), false);
         }
     }
 

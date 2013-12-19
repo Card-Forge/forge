@@ -18,7 +18,6 @@
 package forge.gui.deckeditor.controllers;
 
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
 
 import forge.Singletons;
 import forge.card.CardEdition;
@@ -38,7 +37,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.toolbox.itemmanager.CardManager;
-import forge.gui.toolbox.itemmanager.table.SColumnUtil;
+import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.util.ItemPoolView;
@@ -274,9 +273,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        
+
         // set catalog table to single-selection only mode
-        getCatalogManager().getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        getCatalogManager().setAllowMultipleSelections(false);
     }
 
     /* (non-Javadoc)
@@ -311,6 +310,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         }
         
         // set catalog table back to free-selection mode
-        getCatalogManager().getTable().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        getCatalogManager().setAllowMultipleSelections(true);
     }
 }

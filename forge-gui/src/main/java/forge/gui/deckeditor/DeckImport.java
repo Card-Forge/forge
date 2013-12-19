@@ -143,9 +143,9 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         fp.add(this.scrollInput, "cell 0 0, w 50%, growy, pushy");
         fp.add(this.newEditionCheck, "cell 0 1, w 50%, ax c");
         fp.add(this.dateTimeCheck, "cell 0 2, w 50%, ax c");
-        
-        monthDropdown.addTo(fp, "cell 0 3, w 20%, ax r, split 2");
-        yearDropdown.addTo(fp, "w 15%, pad 0 0 0 -10");
+
+        fp.add(monthDropdown.getComponent(), "cell 0 3, w 20%, ax r, split 2");
+        fp.add(yearDropdown.getComponent(), "w 15%, pad 0 0 0 -10");
         fillDateDropdowns();
         
         fp.add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");

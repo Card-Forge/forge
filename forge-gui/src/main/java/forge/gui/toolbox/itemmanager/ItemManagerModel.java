@@ -98,7 +98,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
         final boolean wasThere = this.data.count(item0) > 0;
         if (wasThere) {
             this.data.remove(item0, qty);
-            this.itemManager.getTableModel().fireTableDataChanged();
+            this.itemManager.getTable().getTableModel().fireTableDataChanged();
         }
     }
 
@@ -109,7 +109,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
      */
     public void addItem(final T item0, int qty) {
         this.data.add(item0, qty);
-        this.itemManager.getTableModel().fireTableDataChanged();
+        this.itemManager.getTable().getTableModel().fireTableDataChanged();
     }
 
     /**
@@ -119,8 +119,9 @@ public final class ItemManagerModel<T extends InventoryItem> {
      */
     public void addItems(final Iterable<Entry<T, Integer>> items0) {
         this.data.addAll(items0);
-        this.itemManager.getTableModel().fireTableDataChanged();
+        this.itemManager.getTable().getTableModel().fireTableDataChanged();
     }
+
     /**
      * Sets whether this table's pool of items is in infinite supply.  If false, items in the
      * table have a limited number of copies.

@@ -33,7 +33,6 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionListener;
@@ -46,6 +45,7 @@ import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.gui.GuiUtils;
+import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
@@ -53,8 +53,8 @@ import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
-import forge.gui.toolbox.itemmanager.table.ItemTable;
-import forge.gui.toolbox.itemmanager.table.ItemTableModel;
+import forge.gui.toolbox.itemmanager.views.ItemListView;
+import forge.gui.toolbox.itemmanager.views.ItemView;
 import forge.item.InventoryItem;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
@@ -100,17 +100,18 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     private final FLabel lblCaption = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT)
-        .fontSize(11)
+        .fontSize(12)
         .build();
 
     private final FLabel lblRatio = new FLabel.Builder()
         .tooltip("Number of cards shown / Total available cards")
         .fontAlign(SwingConstants.LEFT)
-        .fontSize(11)
+        .fontSize(12)
         .build();
 
-    private final ItemTable<T> table;
-    private final JScrollPane tableScroller;
+    private final FComboBoxWrapper<ItemView<T>> cbViews = new FComboBoxWrapper<ItemView<T>>();
+    private final ItemListView<T> table;
+    private final JScrollPane viewScroller;
     private boolean initialized;
     protected boolean lockFiltering;
 
@@ -125,8 +126,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(this, genericType0);
-        this.table = new ItemTable<T>(this, this.model);
-        this.tableScroller = new JScrollPane(this.table);
+        this.table = new ItemListView<T>(this, this.model);
+        this.table.setAllowMultipleSelections(false);
+        this.viewScroller = new JScrollPane(this.table.getComponent());
+        this.cbViews.addItem(this.table);
     }
 
     /**
@@ -136,12 +139,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         if (this.initialized) { return; } //avoid initializing more than once
 
         //build table view
-        this.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.tableScroller.setOpaque(false);
-        this.tableScroller.getViewport().setOpaque(false);
-        this.tableScroller.setBorder(null);
-        this.tableScroller.getViewport().setBorder(null);
-        this.tableScroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
+        this.viewScroller.setOpaque(false);
+        this.viewScroller.getViewport().setOpaque(false);
+        this.viewScroller.setBorder(null);
+        this.viewScroller.getViewport().setBorder(null);
+        this.viewScroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
 
         //build enable filters checkbox
         ItemFilter.layoutCheckbox(this.chkEnableFilters);
@@ -177,7 +179,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.add(this.btnFilters);
         this.add(this.lblCaption);
         this.add(this.lblRatio);
-        this.add(this.tableScroller);
+        this.add(this.cbViews.getComponent());
+        this.add(this.viewScroller);
 
         final Runnable cmdAddCurrentSearch = new Runnable() {
             @Override
@@ -245,8 +248,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         helper.fillLine(this.pnlButtons, this.pnlButtons.getComponentCount() > 0 ? 32: 1); //just show border if no bottoms
         helper.include(this.btnFilters, 61, FTextField.HEIGHT);
         helper.include(this.lblCaption, this.lblCaption.getAutoSizeWidth(), FTextField.HEIGHT);
-        helper.fillLine(this.lblRatio, FTextField.HEIGHT);
-        helper.fill(this.tableScroller);
+        helper.fillLine(this.lblRatio, FTextField.HEIGHT, this.cbViews.getAutoSizeWidth()); //leave room for cbViews
+        helper.fillLine(this.cbViews.getComponent(), FTextField.HEIGHT);
+        helper.fill(this.viewScroller);
     }
 
     /**
@@ -336,24 +340,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.updateView(true);
     }
 
-    /**
-     * 
-     * getTable.
-     * 
-     * @return ItemTable<T>
-     */
-    public ItemTable<T> getTable() {
+    public ItemListView<T> getTable() {
         return this.table;
-    }
-
-    /**
-     * 
-     * getTableModel.
-     * 
-     * @return ItemTableModel<T>
-     */
-    public ItemTableModel<T> getTableModel() {
-        return this.table.getTableModel();
     }
 
     /**
@@ -388,13 +376,33 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
+     * getSelectedItem.
+     * 
+     * @return T
+     */
+    public int getSelectedIndex() {
+        return this.table.getSelectedIndex();
+    }
+
+    /**
+     * 
+     * setSelectedItem.
+     * 
+     * @param item - Item to select
+     */
+    public void setSelectedIndex(int index) {
+        this.table.setSelectedIndex(index);
+    }
+
+    /**
+     * 
      * addItem.
      * 
      * @param item
      * @param qty
      */
     public void addItem(final T item, int qty) {
-        final int n = this.table.getSelectedRow();
+        final int n = this.table.getSelectedIndex();
         this.pool.add(item, qty);
         if (this.isUnfiltered()) {
             this.model.addItem(item, qty);
@@ -410,7 +418,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param itemsToAdd
      */
     public void addItems(Iterable<Map.Entry<T, Integer>> itemsToAdd) {
-        final int n = this.table.getSelectedRow();
+        final int n = this.table.getSelectedIndex();
         this.pool.addAll(itemsToAdd);
         if (this.isUnfiltered()) {
             this.model.addItems(itemsToAdd);
@@ -427,7 +435,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param qty
      */
     public void removeItem(final T item, int qty) {
-        final int n = this.table.getSelectedRow();
+        final int n = this.table.getSelectedIndex();
         this.pool.remove(item, qty);
         if (this.isUnfiltered()) {
             this.model.removeItem(item, qty);
@@ -443,7 +451,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param itemsToRemove
      */
     public void removeItems(List<Map.Entry<T, Integer>> itemsToRemove) {
-        final int n = this.table.getSelectedRow();
+        final int n = this.table.getSelectedIndex();
         for (Map.Entry<T, Integer> item : itemsToRemove) {
             this.pool.remove(item.getKey(), item.getValue());
             if (this.isUnfiltered()) {
@@ -627,8 +635,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                if (table.getRowCount() > 0 && table.getSelectedRowCount() == 0) {
-                    table.selectAndScrollTo(0);
+                if (table.getCount() > 0 && table.getSelectedIndices().length == 0) {
+                    table.setSelectedIndex(0);
                 }
             }
         });
@@ -703,7 +711,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public void setAllowMultipleSelections(boolean allowMultipleSelections0) {
     	if (this.allowMultipleSelections == allowMultipleSelections0) { return; }
     	this.allowMultipleSelections = allowMultipleSelections0;
-        this.table.setSelectionMode(allowMultipleSelections0 ? ListSelectionModel.MULTIPLE_INTERVAL_SELECTION : ListSelectionModel.SINGLE_SELECTION);
+        this.table.setAllowMultipleSelections(allowMultipleSelections0);
     }
 
     /**
@@ -712,7 +720,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      */
     public void focus() {
-        this.table.requestFocusInWindow();
+        this.table.getComponent().requestFocusInWindow();
     }
 
     /**
