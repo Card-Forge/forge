@@ -47,7 +47,6 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 
@@ -674,7 +673,7 @@ public class CardFactory {
                 final List<Card> cl = new ArrayList<Card>();
                 cl.add(lib.get(0));
 
-                GuiChoose.oneOrNone("Top card", cl);
+                player.getGame().getAction().reveal("Top card", cl, player, false);
             }
 
             @Override

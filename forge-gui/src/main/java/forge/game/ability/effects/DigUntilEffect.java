@@ -15,7 +15,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
 public class DigUntilEffect extends SpellAbilityEffect {
@@ -142,10 +141,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     }
                 }
 
-                if (revealed.size() > 0) {
-                    GuiChoose.one(p + " revealed: ", revealed);
-                }
                 final Game game = p.getGame();
+                if (revealed.size() > 0) {
+                    game.getAction().reveal(revealed, p, true);
+                }
+                
 
                 if (foundDest != null) {
                     // Allow ordering of found cards

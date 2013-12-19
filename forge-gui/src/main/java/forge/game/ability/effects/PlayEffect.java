@@ -25,9 +25,9 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.Lang;
 
 public class PlayEffect extends SpellAbilityEffect {
     @Override
@@ -114,11 +114,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("ChoiceNum")) {
                     final int choicenum = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
-                    List<Card> afterchoice = new ArrayList<Card>();
-                    for (int i = 0; i < choicenum; i++) {
-                        afterchoice.add(GuiChoose.oneOrNone(source + "- Choose a Card", choice));
-                    }
-                    tgtCards = afterchoice;
+                    tgtCards = activator.getController().chooseCardsForEffect(choice, sa, source + " - Choose up to " + Lang.nounWithNumeral(choicenum, "card"), choicenum, true);
                 } else {
                     tgtCards = choice;
                 }

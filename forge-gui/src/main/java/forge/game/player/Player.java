@@ -69,7 +69,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.gui.GuiDisplayUtil;
 import forge.properties.ForgePreferences.FPref;
@@ -1388,7 +1387,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                     }
                 }
                 if (reveal) {
-                    GuiChoose.one("Revealing the first card drawn", drawn);
+                    game.getAction().reveal("Revealing the first card drawn", drawn, this, false);
                 }
             }
 

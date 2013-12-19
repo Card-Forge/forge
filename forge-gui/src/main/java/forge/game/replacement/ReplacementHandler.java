@@ -33,7 +33,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.FileSection;
 
 /**
@@ -134,49 +133,24 @@ public class ReplacementHandler {
             return ReplacementResult.NotReplaced;
         }
 
-        ReplacementEffect chosenRE = null;
-
-        if (possibleReplacers.size() == 1) {
-            chosenRE = possibleReplacers.get(0);
-        }
-
-        if (possibleReplacers.size() > 1) {
-            if (decider.isHuman()) {
-                chosenRE = GuiChoose.one("Choose which replacement effect to apply.",
-                        possibleReplacers);
-            } else {
-                // AI logic for choosing which replacement effect to apply
-                // happens here.
-                chosenRE = possibleReplacers.get(0);
-            }
-        }
+        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect("Choose which replacement effect to apply.", possibleReplacers, runParams);
 
         possibleReplacers.remove(chosenRE);
 
-        if (chosenRE != null) {
-            chosenRE.setHasRun(true);
-            ReplacementResult res = this.executeReplacement(runParams, chosenRE, decider, game);
-            if (res != ReplacementResult.NotReplaced) {
-                chosenRE.setHasRun(false);
-                String message = chosenRE.toString();
-                if ( !StringUtils.isEmpty(message))
-                    game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, chosenRE.toString());
-                return res;
-            } else {
-                if (possibleReplacers.size() == 0) {
-                    chosenRE.setHasRun(false);
-                    return res;
-                }
-                else {
-                    ReplacementResult ret = run(runParams);
-                    chosenRE.setHasRun(false);
-                    return ret;
-                }
+        chosenRE.setHasRun(true);
+        ReplacementResult res = this.executeReplacement(runParams, chosenRE, decider, game);
+        if (res == ReplacementResult.NotReplaced) {
+            if (!possibleReplacers.isEmpty()) {
+                res = run(runParams);
             }
-        } else {
-            return ReplacementResult.NotReplaced;
+            chosenRE.setHasRun(false);
+            return res;
         }
-
+        chosenRE.setHasRun(false);
+        String message = chosenRE.toString();
+        if ( !StringUtils.isEmpty(message))
+            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, chosenRE.toString());
+        return res;
     }
 
     /**

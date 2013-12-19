@@ -460,4 +460,12 @@ public class PlayerControllerForTests extends PlayerController {
     public boolean confirmPayment(CostPart costPart, String string) {
         return true;
     }
+
+    @Override
+    public ReplacementEffect chooseSingleReplacementEffect(String prompt,
+            List<ReplacementEffect> possibleReplacers,
+            HashMap<String, Object> runParams) {
+        // TODO Auto-generated method stub
+        return Iterables.getFirst(possibleReplacers, null);
+    }
 }

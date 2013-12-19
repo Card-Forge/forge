@@ -194,4 +194,5 @@ public abstract class PlayerController {
     public abstract CounterType chooseCounterType(Collection<CounterType> options, SpellAbility sa, String prompt);
 
     public abstract boolean confirmPayment(CostPart costPart, String string);
+    public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams);
 }

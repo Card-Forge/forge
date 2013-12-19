@@ -5,6 +5,7 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,9 +80,6 @@ public class PlayerControllerAi extends PlayerController {
         else {
             return abilities.get(0);
         }
-//      else {
-//          return GuiChoose.oneOrNone("Choose ability for AI to play", abilities); // some day network interaction will be here
-//      }
     }
 
     /**
@@ -579,5 +577,12 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean confirmPayment(CostPart costPart, String prompt) {
         return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method) 
+    }
+
+    @Override
+    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams) {
+        // AI logic for choosing which replacement effect to apply
+        // happens here.
+        return possibleReplacers.get(0);
     }
 }

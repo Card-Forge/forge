@@ -936,4 +936,11 @@ public class PlayerControllerHuman extends PlayerController {
         inp.showAndWait();
         return inp.getResult();
     }
+
+    @Override
+    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams) {
+        if(possibleReplacers.size() == 1)
+            return possibleReplacers.get(0);
+        return GuiChoose.one(prompt, possibleReplacers);
+    }
 }
