@@ -118,15 +118,12 @@ public class TokenAi extends SpellAbilityAi {
                 return false;
             }
         }
-        if ((ph.isPlayerTurn(ai)
-                || ph.getPhase().isBefore(
-                        PhaseType.COMBAT_DECLARE_ATTACKERS))
+        if ((ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn")
                 && !SpellAbilityAi.isSorcerySpeed(sa) && !haste) {
             return false;
         }
-        if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || game.getPhaseHandler().isPlayerTurn(
-                opp))
+        if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || game.getPhaseHandler().isPlayerTurn(opp))
                 && oneShot) {
             return false;
         }
@@ -191,7 +188,7 @@ public class TokenAi extends SpellAbilityAi {
             return true;
         }
         if (sa.isAbility()) {
-            return (r.nextFloat() < .9);
+            return true;
         }
 
         return (r.nextFloat() < .8);
