@@ -684,7 +684,11 @@ public class ComputerUtilMana {
                                     && replacementEffect.canReplace(repParams)
                                     && replacementEffect.getMapParams().containsKey("ManaReplacement")
                                     && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
-                                mp.setManaReplaceType(crd.getSVar(replacementEffect.getMapParams().get("ManaReplacement")));
+                                String repType = crd.getSVar(replacementEffect.getMapParams().get("ManaReplacement"));
+                                if (repType.contains("Chosen")) {
+                                    repType = repType.replace("Chosen", MagicColor.toShortString(crd.getChosenColor().get(0)));
+                                }
+                                mp.setManaReplaceType(repType);
                             }
                         }
                     }
