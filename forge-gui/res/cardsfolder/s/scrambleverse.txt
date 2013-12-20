@@ -1,0 +1,9 @@
+Name:Scrambleverse
+ManaCost:6 R R
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ 6 R R | RecordChoice$ True | ChoosePlayer$ True | Random$ True | RepeatSubAbility$ DBGainControl | RepeatCards$ Permanent.nonLand | SpellDescription$ For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents.
+SVar:DBGainControl:DB$ GainControl | NewController$ Player.IsRemembered | AllValid$ Permanent.IsImprinted | Untap$ True
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scrambleverse.jpg
+Oracle:For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents.

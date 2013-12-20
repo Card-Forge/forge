@@ -1,9 +1,14 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+
+import com.google.common.collect.Lists;
 
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -17,6 +22,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.util.Aggregates;
 
 public class RepeatEachEffect extends SpellAbilityEffect {
 
@@ -36,6 +42,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         boolean useImprinted = sa.hasParam("UseImprinted");
         boolean loopOverCards = false;
+        boolean recordChoice = sa.hasParam("RecordChoice");
         List<Card> repeatCards = null;
 
         if (sa.hasParam("RepeatCards")) {
@@ -47,7 +54,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             }
             repeatCards = CardLists.getValidCards(game.getCardsIn(zone),
                     sa.getParam("RepeatCards"), source.getController(), source);
-            loopOverCards = true;
+            loopOverCards = !recordChoice;
         }
         else if (sa.hasParam("DefinedCards")) {
             repeatCards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
@@ -107,6 +114,33 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 source.setSVar("RepeatSVarCounter", type.getName().toUpperCase());
                 source.setSVar("RepeatCounterAmount", sb.toString());
                 AbilityUtils.resolve(repeat);
+            }
+        }
+        if (recordChoice) {
+            boolean random = sa.hasParam("Random");
+            if (sa.hasParam("ChoosePlayer")) {
+                Map<Player, List<Card>> recordMap = new HashMap<Player, List<Card>>();
+                for (Card card : repeatCards) {
+                    Player p;
+                    if (random) {
+                        p = Aggregates.random(game.getPlayers());
+                    } else {
+                        p = sa.getActivatingPlayer().getController().chooseSinglePlayerForEffect(game.getPlayers(), sa, "Choose a player");
+                    }
+                    if (recordMap.containsKey(p)) {
+                        recordMap.get(p).add(0, card);
+                    } else {
+                        recordMap.put(p, Lists.newArrayList(card));
+                    }
+                }
+                for (Entry<Player, List<Card>> entry : recordMap.entrySet()) {
+                    // Remember the player and imprint the cards
+                    source.addRemembered(entry.getKey());
+                    source.getImprinted().addAll(entry.getValue());
+                    AbilityUtils.resolve(repeat);
+                    source.removeRemembered(entry.getKey());
+                    source.getImprinted().removeAll(entry.getValue());
+                }
             }
         }
     }
