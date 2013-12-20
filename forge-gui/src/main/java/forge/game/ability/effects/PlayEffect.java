@@ -11,7 +11,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
-import forge.ai.ComputerUtil;
 import forge.card.CardCharacteristicName;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
@@ -19,7 +18,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -217,22 +215,9 @@ public class PlayEffect extends SpellAbilityEffect {
             if (tgtSA.usesTargeting() && !optional) {
                 tgtSA.getTargetRestrictions().setMandatory(true);
             }
-
-            if (controller.isHuman()) {
-                HumanPlay.playSpellAbility(activator, tgtSA);
-            } else {
-                if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
-                    Spell spell = (Spell) tgtSA;
-                    if (spell.canPlayFromEffectAI(controller, !optional, noManaCost) || !optional) {
-                        if (noManaCost) {
-                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(controller, tgtSA, game);
-                        } else {
-                            ComputerUtil.playStack(tgtSA, controller, game);
-                        }
-                    } else 
-                        remember = false; // didn't play spell
-                }
-            }
+            
+            
+            remember = controller.getController().playSaFromPlayEffect(tgtSA);
             if (remember) {
                 source.addRemembered(tgtSA.getSourceCard());
             }

@@ -3,8 +3,6 @@ package forge.game.ability;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCost;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 
@@ -21,10 +19,7 @@ import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
-import forge.game.spellability.Ability;
-import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -1198,7 +1193,7 @@ public class AbilityUtils {
 
         // The player who has the chance to cancel the ability
         final String pays = sa.hasParam("UnlessPayer") ? sa.getParam("UnlessPayer") : "TargetedController";
-        final List<Player> payers = getDefinedPlayers(sa.getSourceCard(), pays, sa);
+        final List<Player> allPayers = getDefinedPlayers(sa.getSourceCard(), pays, sa);
         final String  resolveSubs = sa.getParam("UnlessResolveSubs"); // no value means 'Always'
         final boolean execSubsWhenPaid = "WhenPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
         final boolean execSubsWhenNotPaid = "WhenNotPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
@@ -1233,27 +1228,16 @@ public class AbilityUtils {
             cost = new Cost(unlessCost, true);
         }
 
-        boolean paid = false;
-        for (Player payer : payers) {
-            final Ability ability = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
-            ability.setActivatingPlayer(payer);
-            if (payer.isComputer()) {
-                if (ComputerUtilCost.willPayUnlessCost(sa, payer, cost, paid, payers) && ComputerUtilCost.canPayCost(ability, payer)) {
-                    ComputerUtil.playNoStack(payer, ability, game); // Unless cost was payed - no resolve
-                    paid = true;
-                }
-            }
-            else {
-                // if it's paid by the AI already the human can pay, but it won't change anything
-                paid |= HumanPlay.payCostDuringAbilityResolve(payer, source, cost, sa, null);
-            }
+        boolean alreadyPaid = false;
+        for (Player payer : allPayers) {
+            alreadyPaid |= payer.getController().payCostToPreventEffect(cost, sa, alreadyPaid, allPayers);
         }
 
-        if (paid == isSwitched) {
+        if (alreadyPaid == isSwitched) {
             sa.resolve();
         }
 
-        if (paid && execSubsWhenPaid || !paid && execSubsWhenNotPaid) { // switched refers only to main ability!
+        if (alreadyPaid && execSubsWhenPaid || !alreadyPaid && execSubsWhenNotPaid) { // switched refers only to main ability!
             resolveSubAbilities(sa, game);
         }
     }

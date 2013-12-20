@@ -1,4 +1,4 @@
-package forge.game.player;
+package forge.gui.player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +47,7 @@ import forge.game.cost.CostReveal;
 import forge.game.cost.CostSacrifice;
 import forge.game.cost.CostTapType;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.HumanPlaySpellAbility;
 import forge.game.spellability.SpellAbility;
@@ -343,16 +344,9 @@ public class HumanPlay {
                     return false;
                 }
 
-                StringBuilder sb = new StringBuilder();
-
-                sb.append("Do you want to ");
+                StringBuilder sb = new StringBuilder("Do you want to ");
                 sb.append(res.contains(p) ? "" : "let that player ");
-                sb.append("draw " + amount);
-                sb.append(" card");
-                if (amount != 1) {
-                    sb.append("s");
-                }
-                sb.append("?" + orString);
+                sb.append("draw " + Lang.nounWithAmount(amount, " card") + "?" + orString);
 
                 if (!p.getController().confirmPayment(part, sb.toString())) {
                     return false;

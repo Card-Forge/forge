@@ -15072,16 +15072,13 @@ forge-gui/src/main/java/forge/game/phase/Untap.java -text
 forge-gui/src/main/java/forge/game/phase/Upkeep.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/phase/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/player/GameLossReason.java -text
-forge-gui/src/main/java/forge/game/player/HumanPlay.java -text
 forge-gui/src/main/java/forge/game/player/LobbyPlayer.java -text
 forge-gui/src/main/java/forge/game/player/LobbyPlayerAi.java -text
-forge-gui/src/main/java/forge/game/player/LobbyPlayerHuman.java -text
 forge-gui/src/main/java/forge/game/player/LobbyPlayerRemote.java -text
 forge-gui/src/main/java/forge/game/player/Player.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/player/PlayerActionConfirmMode.java -text
 forge-gui/src/main/java/forge/game/player/PlayerController.java -text
 forge-gui/src/main/java/forge/game/player/PlayerControllerAi.java -text
-forge-gui/src/main/java/forge/game/player/PlayerControllerHuman.java -text
 forge-gui/src/main/java/forge/game/player/PlayerOutcome.java -text
 forge-gui/src/main/java/forge/game/player/PlayerStatistics.java -text
 forge-gui/src/main/java/forge/game/player/PlayerType.java svneol=native#text/plain
@@ -15421,6 +15418,10 @@ forge-gui/src/main/java/forge/gui/menus/IMenuProvider.java -text
 forge-gui/src/main/java/forge/gui/menus/LayoutMenu.java -text
 forge-gui/src/main/java/forge/gui/menus/MenuUtil.java -text
 forge-gui/src/main/java/forge/gui/package-info.java svneol=native#text/plain
+forge-gui/src/main/java/forge/gui/player/HumanPlay.java -text
+forge-gui/src/main/java/forge/gui/player/LobbyPlayerHuman.java -text
+forge-gui/src/main/java/forge/gui/player/PlayerControllerHuman.java -text
+forge-gui/src/main/java/forge/gui/player/package-info.java -text
 forge-gui/src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/toolbox/FAbsolutePositioner.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FButton.java -text

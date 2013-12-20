@@ -46,7 +46,7 @@ import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerAi;
-import forge.game.player.LobbyPlayerHuman;
+import forge.gui.player.LobbyPlayerHuman;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;

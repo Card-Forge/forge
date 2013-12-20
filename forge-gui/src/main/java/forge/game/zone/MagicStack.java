@@ -31,7 +31,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.FThreads;
-import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -50,7 +49,6 @@ import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.replacement.ReplacementEffect;
@@ -65,10 +63,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.spellability.TargetSelection;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.gui.GuiChoose;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
@@ -865,37 +861,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (activePlayer.isComputer()) {
-            for (final SpellAbility sa : activePlayerSAs) {
-                if (sa.hasParam("TargetingPlayer")) {
-                    Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("TargetingPlayer"), sa).get(0);
-                    if (targetingPlayer.isHuman()) {
-                        final TargetSelection select = new TargetSelection(sa);
-                        select.chooseTargets(null);
-                    } else { //AI
-                        sa.doTrigger(true, targetingPlayer);
-                    }
-                } else {
-                    sa.doTrigger(true, activePlayer);
-                }
-                ComputerUtil.playStack(sa, activePlayer, game);
-            }
-        } else {
-            List<SpellAbility> orderedSAs = activePlayerSAs;
-            if (activePlayerSAs.size() > 1) { // give a dual list form to create instead of needing to do it one at a time
-                orderedSAs = GuiChoose.order("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs, null, null);
-            }
-            int size = orderedSAs.size();
-            for (int i = size - 1; i >= 0; i--) {
-                SpellAbility next = orderedSAs.get(i);
-                if (next.isTrigger()) {
-                    HumanPlay.playSpellAbility(activePlayer, next);
-                } else {
-                    this.add(next);
-                }
-            }
-        }
-
+        activePlayer.getController().orderAndPlaySimultaneousSa(activePlayerSAs);
     }
 
     /**

@@ -46,7 +46,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
-import forge.game.player.HumanPlay;
+import forge.gui.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;

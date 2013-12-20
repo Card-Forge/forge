@@ -17,7 +17,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.mana.ManaCostBeingPaid;
-import forge.game.player.HumanPlay;
+import forge.gui.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.replacement.ReplacementEffect;

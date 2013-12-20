@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.ai.ComputerUtil;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
@@ -33,12 +32,10 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
-import forge.game.player.HumanPlay;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.spellability.TargetSelection;
 import forge.game.zone.ZoneType;
 
 public class TriggerHandler {
@@ -413,23 +410,7 @@ public class TriggerHandler {
         wrapperAbility.setDescription(wrapperAbility.getStackDescription());
 
         if (regtrig.isStatic()) {
-            if (wrapperAbility.getActivatingPlayer().isHuman()) {
-                HumanPlay.playSpellAbilityNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility);
-            } else {
-                if (wrapperAbility.hasParam("TargetingPlayer")) {
-                    Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, wrapperAbility.getParam("TargetingPlayer"), wrapperAbility).get(0);
-                    if (targetingPlayer.isHuman()) {
-                        wrapperAbility.resetTargets();
-                        final TargetSelection select = new TargetSelection(wrapperAbility);
-                        select.chooseTargets(null);
-                    } else { //AI
-                        wrapperAbility.doTrigger(true, targetingPlayer);
-                    }
-                } else {
-                    wrapperAbility.doTrigger(isMandatory, wrapperAbility.getActivatingPlayer());
-                }
-                ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
-            }
+            wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
         } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }

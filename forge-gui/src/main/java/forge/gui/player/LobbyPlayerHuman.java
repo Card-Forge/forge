@@ -1,6 +1,10 @@
-package forge.game.player;
+package forge.gui.player;
 
 import forge.game.Game;
+import forge.game.player.LobbyPlayer;
+import forge.game.player.Player;
+import forge.game.player.PlayerController;
+import forge.game.player.PlayerType;
 import forge.gui.FNetOverlay;
 
 public class LobbyPlayerHuman extends LobbyPlayer {

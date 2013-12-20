@@ -14,6 +14,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.DrawAi;
 import forge.ai.ability.GameWinAi;
@@ -24,6 +25,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameType;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
@@ -31,17 +33,20 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.mana.Mana;
-import forge.game.player.HumanPlay;
+import forge.gui.player.HumanPlay;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
+import forge.game.spellability.TargetSelection;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.gamesimulationtests.util.card.CardSpecification;
 import forge.gamesimulationtests.util.card.CardSpecificationHandler;
@@ -472,5 +477,59 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
         return choices.get(0);
+    }
+
+    @Override
+    public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, List<Player> allPayers) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
+        for (final SpellAbility sa : activePlayerSAs) {
+            prepareSingleSa(sa.getSourceCard(),sa,true);
+            ComputerUtil.playStack(sa, player, game);
+        }
+    }
+    
+    private void prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory){
+        if (sa.hasParam("TargetingPlayer")) {
+            Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
+            if (targetingPlayer.isHuman()) {
+                final TargetSelection select = new TargetSelection(sa);
+                select.chooseTargets(null);
+            } else { //AI
+                sa.doTrigger(true, targetingPlayer);
+            }
+        } else {
+            sa.doTrigger(isMandatory, player);
+        }
+    }
+
+    @Override
+    public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
+        prepareSingleSa(host, wrapperAbility, isMandatory);
+        ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
+    }
+
+    @Override
+    public boolean playSaFromPlayEffect(SpellAbility tgtSA) {
+        // TODO Auto-generated method stub
+        boolean optional = tgtSA.hasParam("Optional");
+        boolean noManaCost = tgtSA.hasParam("WithoutManaCost");
+        if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
+            Spell spell = (Spell) tgtSA;
+            if (spell.canPlayFromEffectAI(player, !optional, noManaCost) || !optional) {
+                if (noManaCost) {
+                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, game);
+                } else {
+                    ComputerUtil.playStack(tgtSA, player, game);
+                }
+            } else 
+                return false; // didn't play spell
+        }
+        return true;
+
     }
 }

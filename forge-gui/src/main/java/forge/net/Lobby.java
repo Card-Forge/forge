@@ -4,10 +4,11 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.google.common.base.Supplier;
+
 import forge.control.ChatArea;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerAi;
-import forge.game.player.LobbyPlayerHuman;
 import forge.game.player.LobbyPlayerRemote;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.toolbox.FSkin;
@@ -19,7 +20,6 @@ import forge.util.MyRandom;
  *
  */
 public class Lobby {
-
 
     private final String[] opponentNames = new String[] {
             "Abigail", "Ada", "Adeline", "Adriana", "Agatha", "Agnes", "Aileen", "Alba", "Alcyon",
@@ -62,8 +62,14 @@ public class Lobby {
             "Walter", "Wilfred", "William", "Winston"
     };
 
+    private final LobbyPlayer guiPlayer;
+    public Lobby(Supplier<LobbyPlayer> humanFactory){
+        guiPlayer = humanFactory.get();
+    }
+    
+    
     private Map<String, LobbyPlayerRemote> remotePlayers = new ConcurrentHashMap<String, LobbyPlayerRemote>();
-    private final LobbyPlayerHuman guiPlayer = new LobbyPlayerHuman("Human");
+    
     private final LobbyPlayerAi system = new LobbyPlayerAi("System");
 
     public final LobbyPlayer getGuiPlayer() {

@@ -8,13 +8,17 @@ import java.util.concurrent.CountDownLatch;
 
 import org.apache.commons.lang3.time.StopWatch;
 
+import com.google.common.base.Supplier;
+
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameLogEntry;
 import forge.game.GameType;
 import forge.game.Match;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
+import forge.gui.player.LobbyPlayerHuman;
 import forge.util.Lang;
 
 
@@ -30,7 +34,14 @@ public enum FServer {
     
     public Lobby getLobby() {
         if (lobby == null) {
-            lobby = new Lobby();
+            //not a very good solution still
+            lobby = new Lobby(new Supplier<LobbyPlayer>() {
+                @Override
+                public LobbyPlayer get() {
+                    // TODO Auto-generated method stub
+                    return new LobbyPlayerHuman("Human");
+                }
+            });
         }
         return lobby;
     }

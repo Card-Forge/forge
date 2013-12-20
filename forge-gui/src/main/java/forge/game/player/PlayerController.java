@@ -30,6 +30,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 
@@ -197,4 +198,11 @@ public abstract class PlayerController {
     public abstract boolean confirmPayment(CostPart costPart, String string);
     public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams);
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
+
+    // these 4 need some refining.
+    public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, List<Player> allPayers);
+    public abstract void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs);
+    public abstract void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory);
+
+    public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);
 }

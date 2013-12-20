@@ -30,7 +30,7 @@ import forge.Singletons;
 import forge.Constant.Preferences;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.player.HumanPlay;
+import forge.gui.player.HumanPlay;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;

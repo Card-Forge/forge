@@ -1,4 +1,4 @@
-package forge.game.player;
+package forge.gui.player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -44,6 +44,10 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
+import forge.game.player.LobbyPlayer;
+import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -51,6 +55,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetSelection;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -947,5 +952,40 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
         return GuiChoose.one(string, choices);
+    }
+
+    @Override
+    public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, List<Player> allPayers) {
+        // if it's paid by the AI already the human can pay, but it won't change anything
+        final Card source = sa.getSourceCard();
+        return HumanPlay.payCostDuringAbilityResolve(player, source, cost, sa, null);
+    }
+
+    @Override
+    public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
+        List<SpellAbility> orderedSAs = activePlayerSAs;
+        if (activePlayerSAs.size() > 1) { // give a dual list form to create instead of needing to do it one at a time
+            orderedSAs = GuiChoose.order("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs, null, null);
+        }
+        int size = orderedSAs.size();
+        for (int i = size - 1; i >= 0; i--) {
+            SpellAbility next = orderedSAs.get(i);
+            if (next.isTrigger()) {
+                HumanPlay.playSpellAbility(player, next);
+            } else {
+                player.getGame().getStack().add(next);
+            }
+        }
+    }
+
+    @Override
+    public void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory) {
+        HumanPlay.playSpellAbilityNoStack(player, wrapperAbility);
+    }
+
+    @Override
+    public boolean playSaFromPlayEffect(SpellAbility tgtSA) {
+        HumanPlay.playSpellAbility(player, tgtSA);
+        return true;
     }
 }
