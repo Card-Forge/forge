@@ -8,13 +8,10 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.card.CardRules;
-import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
-import forge.item.InventoryItem;
-import forge.item.ItemPredicate;
 import forge.item.PaperCard;
 
 /** 
@@ -59,24 +56,5 @@ public class CardTypeFilter extends StatTypeFilter<PaperCard> {
             return Predicates.alwaysTrue();
         }
         return Predicates.compose(Predicates.or(types), PaperCard.FN_GET_RULES);
-    }
-
-    @Override
-    protected <U extends InventoryItem> boolean showUnsupportedItem(U item) {
-        FLabel btnPack = buttonMap.get(StatTypes.PACK_OR_DECK);
-        if (btnPack != null && btnPack.getSelected()) {
-            return ItemPredicate.Presets.IS_PACK_OR_DECK.apply(item);
-        }
-        return false;
-    }
-
-    @Override
-    public void afterFiltersApplied() {
-        FLabel btnPack = buttonMap.get(StatTypes.PACK_OR_DECK);
-        if (btnPack != null) {
-            int count = itemManager.getFilteredItems().countAll(ItemPredicate.Presets.IS_PACK_OR_DECK, InventoryItem.class);
-            btnPack.setText(String.valueOf(count));
-        }
-        super.afterFiltersApplied();
     }
 }

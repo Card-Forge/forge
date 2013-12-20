@@ -13,6 +13,7 @@ import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.item.InventoryItem;
+import forge.item.ItemPredicate;
 import forge.item.PaperCard;
 import forge.util.ItemPoolView;
 
@@ -91,8 +92,24 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
     }
 
     @Override
+    protected <U extends InventoryItem> boolean showUnsupportedItem(U item) {
+        FLabel btnPackOrDeck = buttonMap.get(StatTypes.PACK_OR_DECK); //support special pack/deck case
+        if (btnPackOrDeck != null && btnPackOrDeck.getSelected()) {
+            return ItemPredicate.Presets.IS_PACK_OR_DECK.apply(item);
+        }
+        return false;
+    }
+
+    @Override
     public void afterFiltersApplied() {
         final ItemPoolView<? super T> items = itemManager.getFilteredItems();
+
+        FLabel btnPackOrDeck = buttonMap.get(StatTypes.PACK_OR_DECK);
+        if (btnPackOrDeck != null) { //support special pack/deck case
+            int count = items.countAll(ItemPredicate.Presets.IS_PACK_OR_DECK, InventoryItem.class);
+            btnPackOrDeck.setText(String.valueOf(count));
+        }
+
         for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> btn : buttonMap.entrySet()) {
             if (btn.getKey().predicate != null) {
                 int count = items.countAll(Predicates.compose(btn.getKey().predicate, PaperCard.FN_GET_RULES), PaperCard.class);

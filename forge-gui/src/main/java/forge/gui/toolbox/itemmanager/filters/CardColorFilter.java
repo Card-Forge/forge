@@ -11,6 +11,7 @@ import forge.card.MagicColor;
 import forge.card.CardRulesPredicates.Presets;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SFilterUtil;
+import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.item.PaperCard;
 
@@ -30,6 +31,9 @@ public class CardColorFilter extends StatTypeFilter<PaperCard> {
 
     @Override
     protected void buildWidget(JPanel widget) {
+        if (itemManager instanceof SpellShopManager) {
+            addToggleButton(widget, StatTypes.PACK_OR_DECK);
+        }
         addToggleButton(widget, StatTypes.WHITE);
         addToggleButton(widget, StatTypes.BLUE);
         addToggleButton(widget, StatTypes.BLACK);
