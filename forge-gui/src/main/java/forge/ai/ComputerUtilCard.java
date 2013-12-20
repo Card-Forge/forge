@@ -867,6 +867,9 @@ public class ComputerUtilCard {
             else if (logic.equals("MostProminentAttackers") && game.getPhaseHandler().inCombat()) {
                 chosen.add(ComputerUtilCard.getMostProminentColor(game.getCombat().getAttackers(), colorChoices));
             }
+            else if (logic.equals("MostProminentInActivePlayerHand")) {
+                chosen.add(ComputerUtilCard.getMostProminentColor(game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Hand), colorChoices));
+            }
             else if (logic.equals("MostProminentKeywordInComputerDeck")) {
                 List<Card> list = ai.getAllCards();
                 int m1 = 0;

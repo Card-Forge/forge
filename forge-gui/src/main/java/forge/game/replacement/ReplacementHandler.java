@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
@@ -219,7 +220,12 @@ public class ReplacementHandler {
             final Player player1 = (Player) runParams.get("Player");
             final String rep = (String) runParams.get("Mana");
             // Replaced mana type
-            manaAb.getManaPart().setManaReplaceType(replacementEffect.getHostCard().getSVar(mapParams.get("ManaReplacement")));
+            final Card repHost = replacementEffect.getHostCard();
+            String repType = repHost.getSVar(mapParams.get("ManaReplacement"));
+            if (repType.contains("Chosen") && !repHost.getChosenColor().isEmpty()) {
+                repType = repType.replace("Chosen", MagicColor.toShortString(repHost.getChosenColor().get(0)));
+            }
+            manaAb.getManaPart().setManaReplaceType(repType);
             manaAb.getManaPart().produceMana(rep, player1, manaAb);
         } else {
             player.getController().playSpellAbilityNoStack(effectSA, true);
