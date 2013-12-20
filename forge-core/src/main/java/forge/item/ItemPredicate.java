@@ -57,9 +57,6 @@ public abstract class ItemPredicate {
     public static class Presets {
         /** The Item IsPack. */
         @SuppressWarnings("unchecked")
-        public static final Predicate<InventoryItem> IS_PACK = Predicates.or(IsBoosterPack, IsFatPack, IsTournamentPack);
-
-        /** The Item IsDeck. */
-        public static final Predicate<InventoryItem> IS_DECK = Predicates.or(IsStarterDeck, IsPrebuiltDeck);
+        public static final Predicate<InventoryItem> IS_PACK_OR_DECK = Predicates.or(IsBoosterPack, IsFatPack, IsTournamentPack, IsStarterDeck, IsPrebuiltDeck);
     }
 }

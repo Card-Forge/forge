@@ -32,7 +32,7 @@ public final class SItemManagerUtil  {
         COLORLESS  (FSkin.ManaImages.IMG_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS, "Colorless cards"),
         MULTICOLOR (FSkin.EditorImages.IMG_MULTI,   CardRulesPredicates.Presets.IS_MULTICOLOR, "Multicolor cards"),
 
-        PACK         (FSkin.EditorImages.IMG_PACK,         null, "Card packs and prebuilt decks"),
+        PACK_OR_DECK (FSkin.EditorImages.IMG_PACK,         null, "Card packs and prebuilt decks"),
         LAND         (FSkin.EditorImages.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND, "Lands"),
         ARTIFACT     (FSkin.EditorImages.IMG_ARTIFACT,     CardRulesPredicates.Presets.IS_ARTIFACT, "Artifacts"),
         CREATURE     (FSkin.EditorImages.IMG_CREATURE,     CardRulesPredicates.Presets.IS_CREATURE, "Creatures"),

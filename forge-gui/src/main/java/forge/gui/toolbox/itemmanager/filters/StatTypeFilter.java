@@ -94,8 +94,10 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
     public void afterFiltersApplied() {
         final ItemPoolView<? super T> items = itemManager.getFilteredItems();
         for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> btn : buttonMap.entrySet()) {
-            int count = items.countAll(Predicates.compose(btn.getKey().predicate, PaperCard.FN_GET_RULES), PaperCard.class);
-            btn.getValue().setText(String.valueOf(count));
+            if (btn.getKey().predicate != null) {
+                int count = items.countAll(Predicates.compose(btn.getKey().predicate, PaperCard.FN_GET_RULES), PaperCard.class);
+                btn.getValue().setText(String.valueOf(count));
+            }
         }
         getWidget().revalidate();
     }
