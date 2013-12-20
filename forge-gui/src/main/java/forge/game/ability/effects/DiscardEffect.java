@@ -97,6 +97,9 @@ public class DiscardEffect extends SpellAbilityEffect {
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
+            	if (sa.hasParam("RememberDiscarder")) {
+            		source.addRemembered(p);
+            	}
                 final int numCardsInHand = p.getCardsIn(ZoneType.Hand).size(); 
                 if (mode.equals("Defined")) {
                     final List<Card> toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);

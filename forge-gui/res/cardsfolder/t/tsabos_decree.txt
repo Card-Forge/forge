@@ -1,12 +1,9 @@
 Name:Tsabo's Decree
 ManaCost:5 B
 Types:Instant
-# You can not clear a remembered object from a card on the stack, so this card is cleaned beforehand.
-A:SP$ Pump | Cost$ 5 B | SubAbility$ DBCleanup | Static$ True | StackDescription$ None | SpellDescription$ Choose a creature type. Target player reveals his or her hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
-SVar:TsabosChoice:DB$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ TsabosDiscard
-SVar:TsabosDiscard:DB$ Discard | ValidTgts$ Player | RememberTargets$ True | Mode$ RevealDiscardAll | DiscardValid$ Creature.ChosenType | SubAbility$ TsabosDestroy
+A:SP$ ChooseType | Cost$ 5 B | Defined$ You | Type$ Creature | SubAbility$ TsabosDiscard | StackDescription$ None | SpellDescription$ Choose a creature type. Target player reveals his or her hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
+SVar:TsabosDiscard:DB$ Discard | ValidTgts$ Player | ForgetOtherTargets$ True | RememberTargets$ True | RememberDiscarder$ True | Mode$ RevealDiscardAll | DiscardValid$ Creature.ChosenType | SubAbility$ TsabosDestroy
 SVar:TsabosDestroy:DB$ DestroyAll | ValidCards$ Creature.ChosenType+RememberedPlayerCtrl | NoRegen$ True
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True | SubAbility$ TsabosChoice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tsabos_decree.jpg
 Oracle:Choose a creature type. Target player reveals his or her hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
