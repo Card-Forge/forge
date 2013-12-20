@@ -9,7 +9,7 @@ Deck Type=constructed
 [main]
 4 Counterspell|7ED
 4 Arcbound Worker|DST
-4 Misty Rainforest|ZEN
+4 Seat of the Synod
 1 Mox Opal|SOM
 4 Tezzeret's Gambit|NPH
 4 Steel Overseer|M11
@@ -20,5 +20,7 @@ Deck Type=constructed
 2 Arcbound Crusher|DST
 4 Arcbound Stinger|DST
 2 Contagion Engine|SOM
-4 Vapor Snag|NPH
+2 Contagion Clasp
+1 Inexorable Tide
+1 Viral Drake
 [sideboard]

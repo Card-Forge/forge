@@ -43,7 +43,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
             }
         });
 
-        if ((cperms.size() == 0) && (hperms.size() == 0) && (ai.getOpponent().getPoisonCounters() == 0)) {
+        if (cperms.isEmpty() && hperms.isEmpty() && ai.getOpponent().getPoisonCounters() == 0) {
             return false;
         }
         return chance;
