@@ -397,7 +397,7 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice) {
+	public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
 		return true;
 	}
 

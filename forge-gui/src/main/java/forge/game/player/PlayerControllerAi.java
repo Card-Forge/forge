@@ -486,8 +486,9 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice) {
+    public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
         if (kindOfChoice == BinaryChoiceType.TapOrUntap) { return true; }
+        if (kindOfChoice == BinaryChoiceType.UntapOrLeaveTapped) { return defaultVal != null && defaultVal.booleanValue(); }
         return MyRandom.getRandom().nextBoolean();
     }
 

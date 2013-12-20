@@ -31,8 +31,8 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
@@ -154,39 +154,21 @@ public class Untap extends Phase {
         for (final Card c : list) {
             if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.")) {
                 if (c.isTapped()) {
-                    if (c.getController().isHuman()) {
-                        String prompt = "Untap " + c.getName() + "?";
-                        boolean defaultChoice = true;
-                        if (c.getGainControlTargets().size() > 0) {
-                            final List<Card> targets = c.getGainControlTargets();
-                            prompt += "\r\n" + c + " is controlling: ";
-                            for (final Card target : targets) {
-                                prompt += target;
-                                if (target.isInPlay()) {
-                                    defaultChoice = false;
-                                }
-                            }
-                        }
-                        if (GuiDialog.confirm(c, prompt, defaultChoice)) {
-                            c.untap();
-                        }
-                    } else { // computer
-                        // if it is controlling something by staying tapped,
-                        // leave it tapped
-                        // if not, untap it
-                        if (c.getGainControlTargets().size() > 0) {
-                            final List<Card> targets = c.getGainControlTargets();
-                            boolean untap = true;
-                            for (final Card target : targets) {
-                                if (target.isInPlay()) {
-                                    untap |= true;
-                                }
-                            }
-                            if (untap) {
-                                c.untap();
+                    String prompt = "Untap " + c.getName() + "?";
+                    boolean defaultChoice = true;
+                    if (c.getGainControlTargets().size() > 0) {
+                        final List<Card> targets = c.getGainControlTargets();
+                        prompt += "\r\n" + c + " is controlling: ";
+                        for (final Card target : targets) {
+                            prompt += target;
+                            if (target.isInPlay()) {
+                                defaultChoice = false;
                             }
                         }
                     }
+                    boolean untap = c.getController().getController().chooseBinary(null, prompt, BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
+                    if (untap)
+                        c.untap();
                 }
             } else {
                 c.untap();

@@ -191,6 +191,7 @@ public class CostRemoveCounter extends CostPartWithList {
         if(suspended.isEmpty())
             return false;
 
+        
         final Card card = GuiChoose.oneOrNone("Remove counter(s) from a card in " + getZone(), suspended);
         if( null == card)
             return false;
