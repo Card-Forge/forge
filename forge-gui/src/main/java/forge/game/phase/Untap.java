@@ -32,6 +32,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
@@ -166,7 +167,7 @@ public class Untap extends Phase {
                             }
                         }
                     }
-                    boolean untap = c.getController().getController().chooseBinary(null, prompt, BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
+                    boolean untap = c.getController().getController().chooseBinary(new SpellAbility.EmptySa(c, c.getController()), prompt, BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
                     if (untap)
                         c.untap();
                 }

@@ -19,7 +19,6 @@ package forge.gui.input;
 
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
-import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -52,11 +51,7 @@ public class InputPayManaExecuteCommands extends InputPayMana {
      * </p>
      */
     public InputPayManaExecuteCommands(final Card sourceCard, final Player p, final String prompt, final ManaCost manaCost0) {
-        super(new SpellAbility(sourceCard, Cost.Zero) {
-            @Override public void resolve() {}
-            @Override public Player getActivatingPlayer() { return p; }
-            @Override public boolean canPlay() { return false; }
-        });
+        super(new SpellAbility.EmptySa(sourceCard, p));
         this.originalManaCost = manaCost0;
         this.phyLifeToLose = 0;
         this.message = prompt;

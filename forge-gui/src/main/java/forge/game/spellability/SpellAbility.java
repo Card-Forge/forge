@@ -55,6 +55,12 @@ import forge.util.TextUtil;
  */
 public abstract class SpellAbility extends GameObject implements ISpellAbility {
 
+    public static class EmptySa extends SpellAbility {
+        public EmptySa(Card sourceCard, Player activator) { super(sourceCard, Cost.Zero); setActivatingPlayer(activator);}
+        @Override public void resolve() {}
+        @Override public boolean canPlay() { return false; }
+    }
+    
     // choices for constructor isPermanent argument
     private String description = "";
     private String stackDescription = "";
