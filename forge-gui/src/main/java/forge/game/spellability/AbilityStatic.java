@@ -20,6 +20,7 @@ package forge.game.spellability;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -49,5 +50,16 @@ public abstract class AbilityStatic extends Ability {
         if ((tgt != null) && tgt.doesTarget()) {
             this.setTargetRestrictions(tgt);
         }
+    }
+    @Override
+    public boolean canPlay() {
+        Player player = getActivatingPlayer();
+        if (player == null) {
+            player = this.getSourceCard().getController();
+        }
+
+        final Card c = this.getSourceCard();
+
+        return this.getRestrictions().canPlay(c, this);
     }
 }

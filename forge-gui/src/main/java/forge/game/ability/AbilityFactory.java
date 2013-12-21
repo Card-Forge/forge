@@ -45,6 +45,7 @@ public final class AbilityFactory {
     public enum AbilityRecordType {
         Ability("AB"),
         Spell("SP"),
+        StaticAbility("ST"),
         SubAbility("DB");
         
         private final String prefix;
@@ -59,6 +60,7 @@ public final class AbilityFactory {
             switch(this) {
                 case Ability: return new AbilityApiBased(api, hostCard, abCost, abTgt, mapParams);
                 case Spell: return new SpellApiBased(api, hostCard, abCost, abTgt, mapParams);
+                case StaticAbility: return new StaticAbilityApiBased(api, hostCard, abCost, abTgt, mapParams);
                 case SubAbility: return new AbilitySub(api, hostCard, abTgt, mapParams);
             }
             return null; // exception here would be fine!
@@ -73,6 +75,8 @@ public final class AbilityFactory {
                 return AbilityRecordType.Ability;
             } else if (abParams.containsKey(AbilityRecordType.Spell.getPrefix())) {
                 return AbilityRecordType.Spell;
+            } else if (abParams.containsKey(AbilityRecordType.StaticAbility.getPrefix())) {
+                return AbilityRecordType.StaticAbility;
             } else if (abParams.containsKey(AbilityRecordType.SubAbility.getPrefix())) {
                 return AbilityRecordType.SubAbility;
             } else {

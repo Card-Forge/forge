@@ -14856,6 +14856,7 @@ forge-gui/src/main/java/forge/game/ability/ApiType.java -text
 forge-gui/src/main/java/forge/game/ability/SaTargetRoutines.java -text
 forge-gui/src/main/java/forge/game/ability/SpellAbilityEffect.java -text
 forge-gui/src/main/java/forge/game/ability/SpellApiBased.java -text
+forge-gui/src/main/java/forge/game/ability/StaticAbilityApiBased.java -text
 forge-gui/src/main/java/forge/game/ability/effects/AbandonEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/AddPhaseEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/AddTurnEffect.java -text

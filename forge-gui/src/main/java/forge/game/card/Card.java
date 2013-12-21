@@ -1959,8 +1959,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("PreventAllDamageBy")
                     || keyword.startsWith("CantBlock")
                     || keyword.startsWith("CantEquip")
-                    || keyword.startsWith("SpellCantTarget")
-                    || keyword.equals("MayDiscardFromHand")) {
+                    || keyword.startsWith("SpellCantTarget")) {
                 continue;
             }
             if (keyword.startsWith("etbCounter")) {

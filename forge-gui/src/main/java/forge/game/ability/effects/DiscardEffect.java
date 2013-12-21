@@ -102,15 +102,20 @@ public class DiscardEffect extends SpellAbilityEffect {
             	}
                 final int numCardsInHand = p.getCardsIn(ZoneType.Hand).size(); 
                 if (mode.equals("Defined")) {
-                    final List<Card> toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
-                    for (final Card c : toDiscard) {
-                        boolean hasDiscarded = p.discard(c, sa);
-                        if(hasDiscarded)
-                            discarded.add(c);
-                    }
-                    if (sa.hasParam("RememberDiscarded")) {
-                        for (final Card c : discarded) {
-                            source.addRemembered(c);
+                    boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, sa.getParam("DiscardMessage"));
+                    if (runDiscard) {
+                        final List<Card> toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
+                        for (final Card c : toDiscard) {
+                            boolean hasDiscarded = p.discard(c, sa);
+                            if (hasDiscarded) {
+                                discarded.add(c);
+                            }
+                        }
+
+                        if (sa.hasParam("RememberDiscarded")) {
+                            for (final Card c : discarded) {
+                                source.addRemembered(c);
+                            }
                         }
                     }
                     continue;

@@ -3,7 +3,7 @@ ManaCost:B
 Types:Creature Bird
 PT:3/2
 K:Flying
-K:MayDiscardFromHand
+A:ST$ Discard | Cost$ 0 | Mode$ Defined | DefinedCards$ Self | Optional$ True | DiscardMessage$ Do you want discard this card? | ActivationZone$ Hand | InstantSpeed$ True | SpellDescription$ You may discard CARDNAME any time you could cast an instant.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacUnless | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you exile the top creature card of your graveyard.
 SVar:TrigSacUnless:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ ExileFromGrave<1/Card.TopGraveyardCreature> | UnlessPayer$ You
 SVar:RemAIDeck:True
