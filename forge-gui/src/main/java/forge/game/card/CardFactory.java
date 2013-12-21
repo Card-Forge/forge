@@ -36,7 +36,6 @@ import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilityActivated;
-import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
@@ -45,8 +44,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.WrappedAbility;
-import forge.game.zone.PlayerZone;
-import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 
@@ -337,9 +334,7 @@ public class CardFactory {
         // ******************************************************************
         // ************** Link to different CardFactories *******************
 
-        if (card.isCreature()) {
-            buildCard(card, cardName);
-        } else if (card.isPlaneswalker()) {
+        if (card.isPlaneswalker()) {
             buildPlaneswalkerAbilities(card);
         } else if (card.isType("Plane")) {
             buildPlaneAbilities(card);
@@ -659,46 +654,5 @@ public class CardFactory {
         return wrapperAbility;
     }
 
-    private static void getCard_SphinxJwar(final Card card) {
-        final SpellAbility ability1 = new AbilityStatic(card, ManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                final Player player = card.getController();
-                final PlayerZone lib = player.getZone(ZoneType.Library);
-
-                if (lib.size() < 1 || !this.getActivatingPlayer().equals(card.getController())) {
-                    return;
-                }
-
-                final List<Card> cl = new ArrayList<Card>();
-                cl.add(lib.get(0));
-
-                player.getGame().getAction().reveal("Top card", cl, player, false);
-            }
-
-            @Override
-            public boolean canPlayAI(Player aiPlayer) {
-                return false;
-            }
-        }; // SpellAbility
-
-        final StringBuilder sb1 = new StringBuilder();
-        sb1.append(card.getName()).append(" - look at top card of library.");
-        ability1.setStackDescription(sb1.toString());
-
-        ability1.setDescription("You may look at the top card of your library.");
-        card.addSpellAbility(ability1);
-    }
-
-    public static void buildCard(final Card card, final String cardName) {
-
-        if (cardName.equals("Sphinx of Jwar Isle")) {
-            getCard_SphinxJwar(card);
-        }
-
-        // ***************************************************
-        // end of card specific code
-        // ***************************************************
-    }
 
 } // end class AbstractCardFactory

@@ -21,14 +21,14 @@ public class RevealEffect extends SpellAbilityEffect {
         final Card host = sa.getSourceCard();
         final boolean anyNumber = sa.hasParam("AnyNumber");
         int cnt = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa) : 1;
-
+        final ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Hand;
         
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Player p : getTargetPlayers(sa)) {
             final Game game = p.getGame();
             if (tgt == null || p.canBeTargetedBy(sa)) {
-                final List<Card> cardsInHand = p.getZone(ZoneType.Hand).getCards();
+                final List<Card> cardsInHand = p.getZone(zone).getCards();
                 if (cardsInHand.isEmpty())
                     continue; 
                 
@@ -69,9 +69,12 @@ public class RevealEffect extends SpellAbilityEffect {
                     
                     revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
                 }
-                
-                game.getAction().reveal(revealed, p);
-                
+                if (sa.hasParam("RevealToYourself")) {
+                	String revealMessage = sa.hasParam("Message") ? sa.getParam("Message") : "Revealed cards";
+                	game.getAction().reveal(revealMessage, revealed, p, false);
+                } else {
+                    game.getAction().reveal(revealed, p);
+                }
                 if (sa.hasParam("RememberRevealed")) {
                     for (final Card rem : revealed) {
                         host.addRemembered(rem);

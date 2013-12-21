@@ -4,5 +4,6 @@ Types:Creature Sphinx
 PT:5/5
 K:Flying
 K:Shroud
+A:ST$ Reveal | Cost$ 0 | RevealDefined$ TopOfLibrary | RevealToYourself$ True | Message$ Top card | Zone$ Library | SpellDescription$ You may look at the top card of your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_jwar_isle.jpg
 Oracle:Flying, shroud\nYou may look at the top card of your library. (You may do this at any time.)
