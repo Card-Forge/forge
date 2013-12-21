@@ -2,6 +2,7 @@ package forge.gui.toolbox.itemmanager.filters;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JPanel;
 
 import com.google.common.base.Predicate;
@@ -53,7 +54,12 @@ public class CardTypeFilter extends StatTypeFilter<PaperCard> {
         }
 
         if (types.size() == buttonMap.size()) {
-            return Predicates.alwaysTrue();
+            return new Predicate<PaperCard>() { //use custom return true delegate to validate the item is a card
+                @Override
+                public boolean apply(PaperCard card) {
+                    return true;
+                }
+            };
         }
         return Predicates.compose(Predicates.or(types), PaperCard.FN_GET_RULES);
     }

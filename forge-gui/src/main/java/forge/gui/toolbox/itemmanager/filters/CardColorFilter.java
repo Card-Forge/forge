@@ -78,8 +78,11 @@ public class CardColorFilter extends StatTypeFilter<PaperCard> {
                 preFinal = CardRulesPredicates.canCastWithAvailable(colors);
             }
         }
-        else if (colors != MagicColor.ALL_COLORS) {
-            preFinal = Predicates.and(CardRulesPredicates.canCastWithAvailable(colors), Predicates.not(Presets.IS_MULTICOLOR));
+        else {
+            preFinal = Predicates.not(Presets.IS_MULTICOLOR);
+            if (colors != MagicColor.ALL_COLORS) {
+                preFinal = Predicates.and(CardRulesPredicates.canCastWithAvailable(colors), preFinal);
+            }
         }
         if (!wantColorless) {
             if (colors != 0 && colors != MagicColor.ALL_COLORS) {
@@ -91,7 +94,12 @@ public class CardColorFilter extends StatTypeFilter<PaperCard> {
         }
 
         if (preFinal == null) {
-            return Predicates.alwaysTrue();
+            return new Predicate<PaperCard>() { //use custom return true delegate to validate the item is a card
+                @Override
+                public boolean apply(PaperCard card) {
+                    return true;
+                }
+            };
         }
         return Predicates.compose(preFinal, PaperCard.FN_GET_RULES);
     }

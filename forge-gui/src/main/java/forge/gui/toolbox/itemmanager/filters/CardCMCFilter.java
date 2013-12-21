@@ -54,7 +54,12 @@ public class CardCMCFilter extends StatTypeFilter<PaperCard> {
         }
 
         if (cmcs.size() == buttonMap.size()) {
-            return Predicates.alwaysTrue();
+            return new Predicate<PaperCard>() { //use custom return true delegate to validate the item is a card
+                @Override
+                public boolean apply(PaperCard card) {
+                    return true;
+                }
+            };
         }
         return Predicates.compose(Predicates.or(cmcs), PaperCard.FN_GET_RULES);
     }
