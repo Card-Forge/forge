@@ -3,6 +3,7 @@
 	<pref name="display_unique_only" value="true"></pref>
 	<pref name="elastic_columns" value="false"></pref>
 	<pref name="stats_deck" value="true"></pref>
+	<col enumval="CAT_FAVORITE" identifier="" show="true" sortpriority="1" sortstate="DESC" width="17"></col>
 	<col enumval="CAT_QUANTITY" identifier="Quantity" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="CAT_NAME" identifier="Name" show="true" sortpriority="2" sortstate="ASC" width="115"></col>
 	<col enumval="CAT_COST" identifier="Cost" show="true" sortpriority="0" sortstate="NONE" width="40"></col>

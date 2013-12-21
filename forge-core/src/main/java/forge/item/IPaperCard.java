@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-//import forge.Card;
+import forge.card.CardPreferences;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.util.PredicateString;
@@ -149,7 +149,6 @@ public interface IPaperCard extends InventoryItem {
         }
     }
 
-
     public abstract String getName();
     public abstract String getEdition();
     public abstract int getArtIndex();
@@ -157,7 +156,6 @@ public interface IPaperCard extends InventoryItem {
     public abstract boolean isToken();
     public abstract CardRules getRules();
     public abstract CardRarity getRarity();
-
+    public abstract CardPreferences getPrefs();
     public abstract String getItemType();
-
 }

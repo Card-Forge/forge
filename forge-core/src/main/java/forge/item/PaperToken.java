@@ -3,6 +3,7 @@ package forge.item;
 import java.util.Locale;
 
 import forge.card.CardEdition;
+import forge.card.CardPreferences;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 
@@ -31,34 +32,65 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     public static String makeTokenFileName(String colors, int power, int toughness, String name) {
         return makeTokenFileName(colors, String.valueOf(power), String.valueOf(toughness), name);
     }
-    
+
     public static String makeTokenFileName(String colors, String power, String toughness, String name) {
         StringBuilder fileName = new StringBuilder();
         fileName.append(colors).append('_').append(power).append('_').append(toughness).append('_').append(name);
         return makeTokenFileName(fileName.toString());
     }
-    
+
     public PaperToken(final CardRules c, CardEdition edition0, final String imageFileName) {
         this.card = c;
         this.name = c.getName();
         this.edition = edition0;
         this.imageFileName = String.format("%s%s", null == edition || CardEdition.UNKNOWN == edition ? "" : edition.getCode(), imageFileName);
     }
-    
-    @Override public String getName() { return name; }
 
-    @Override public String getEdition() { return edition.getCode(); }
+    @Override
+    public String getName() {
+        return name;
+    }
 
-    @Override public int getArtIndex() { return 0; } // This might change however
-    @Override public boolean isFoil() { return false; }
-    @Override public CardRules getRules() { return card; }
+    @Override
+    public String getEdition() {
+        return edition.getCode();
+    }
 
-    @Override public CardRarity getRarity() { return CardRarity.Common; } // They don't have rarity though!
+    @Override
+    public int getArtIndex() {
+        return 0; // This might change however
+    }
+
+    @Override
+    public boolean isFoil() {
+        return false;
+    }
+
+    @Override
+    public CardRules getRules() {
+        return card;
+    }
+
+    @Override
+    public CardRarity getRarity() {
+        return CardRarity.Common; // They don't have rarity though!
+    }
 
     // Unfortunately this is a property of token, cannot move it outside of class
     public String getImageFilename() { return imageFileName; }
 
-    @Override public String getItemType() { return "Token"; }
+    @Override
+    public String getItemType() {
+        return "Token";
+    }
 
-    @Override public boolean isToken() { return true; }
+    @Override
+    public boolean isToken() {
+        return true;
+    }
+
+    @Override
+    public CardPreferences getPrefs() {
+        return CardPreferences.getPrefs(this.imageFileName); //use generated image file name as key
+    }
 }

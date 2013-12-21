@@ -59,43 +59,44 @@ public final class SColumnUtil {
      * <br><br>
      * Note: To add a new column, put an enum here, and also add in the XML prefs file.
      */
-    public enum ColumnName { /** */
-        CAT_QUANTITY, /** */
-        CAT_NAME, /** */
-        CAT_COST, /** */
-        CAT_COLOR, /** */
-        CAT_TYPE, /** */
-        CAT_POWER, /** */
-        CAT_TOUGHNESS, /** */
-        CAT_CMC, /** */
-        CAT_RARITY, /** */
-        CAT_SET, /** */
-        CAT_AI, /** */
-        CAT_NEW, /** */
-        CAT_PURCHASE_PRICE, /** */
-        CAT_OWNED, /** */
+    public enum ColumnName {
+        CAT_FAVORITE,
+        CAT_QUANTITY,
+        CAT_NAME,
+        CAT_COST,
+        CAT_COLOR,
+        CAT_TYPE,
+        CAT_POWER,
+        CAT_TOUGHNESS,
+        CAT_CMC,
+        CAT_RARITY,
+        CAT_SET,
+        CAT_AI,
+        CAT_NEW,
+        CAT_PURCHASE_PRICE,
+        CAT_OWNED,
         CAT_RANKING,
-        DECK_QUANTITY, /** */
-        DECK_NAME, /** */
-        DECK_COST, /** */
-        DECK_COLOR, /** */
-        DECK_TYPE, /** */
-        DECK_POWER, /** */
-        DECK_TOUGHNESS, /** */
-        DECK_CMC, /** */
-        DECK_RARITY, /** */
-        DECK_SET, /** */
-        DECK_AI, /** */
-        DECK_NEW, /** */
-        DECK_SALE_PRICE, /** */
+        DECK_QUANTITY,
+        DECK_NAME,
+        DECK_COST,
+        DECK_COLOR,
+        DECK_TYPE,
+        DECK_POWER,
+        DECK_TOUGHNESS,
+        DECK_CMC,
+        DECK_RARITY,
+        DECK_SET,
+        DECK_AI,
+        DECK_NEW,
+        DECK_SALE_PRICE,
         DECK_DECKS,
         DECK_RANKING;
     }
 
     /** Possible states of data sorting in a column: none, ascending, or descending. */
-    public enum SortState { /** */
-        NONE, /** */
-        ASC, /** */
+    public enum SortState {
+        NONE,
+        ASC,
         DESC
     }
 
@@ -103,6 +104,7 @@ public final class SColumnUtil {
     public static List<TableColumnInfo<InventoryItem>> getCatalogDefaultColumns() {
         final List<TableColumnInfo<InventoryItem>> columns = new ArrayList<TableColumnInfo<InventoryItem>>();
 
+        columns.add(SColumnUtil.getColumn(ColumnName.CAT_FAVORITE));
         columns.add(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
         columns.add(SColumnUtil.getColumn(ColumnName.CAT_NAME));
         columns.add(SColumnUtil.getColumn(ColumnName.CAT_COST));
@@ -141,6 +143,8 @@ public final class SColumnUtil {
 
     /** Should be called after column preferences has run, which has created a new column list.  */
     public static void attachSortAndDisplayFunctions() {
+        SColumnUtil.getColumn(ColumnName.CAT_FAVORITE).setSortAndDisplayFunctions(
+                SColumnUtil.FN_FAV_COMPARE, SColumnUtil.FN_FAV_GET);
         SColumnUtil.getColumn(ColumnName.CAT_QUANTITY).setSortAndDisplayFunctions(
                 SColumnUtil.FN_QTY_COMPARE, SColumnUtil.FN_QTY_GET);
         SColumnUtil.getColumn(ColumnName.CAT_NAME).setSortAndDisplayFunctions(
@@ -191,6 +195,7 @@ public final class SColumnUtil {
         SColumnUtil.getColumn(ColumnName.DECK_RANKING).setSortAndDisplayFunctions(
                 SColumnUtil.FN_RANKING_COMPARE, SColumnUtil.FN_RANKING_GET);
 
+        SColumnUtil.getColumn(ColumnName.CAT_FAVORITE).setCellRenderer(new StarRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_COST).setCellRenderer(new ManaCostRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_POWER).setCellRenderer(new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS).setCellRenderer(new IntegerRenderer());
@@ -282,13 +287,16 @@ public final class SColumnUtil {
 
     private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
 
+    private static IPaperCard toCard(final InventoryItem i) {
+        return i instanceof IPaperCard ? ((IPaperCard) i) : null;
+    }
     private static ManaCost toManaCost(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getManaCost() : ManaCost.NO_COST;
     }
     private static CardRules toCardRules(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard) i).getRules() : null;
     }
-    
+
     private static ColorSet toColor(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getColor() : ColorSet.getNullColor();
     }
@@ -354,6 +362,21 @@ public final class SColumnUtil {
     //==========
 
     /** Lamda sort fnQtyCompare. */
+    private static final Function<Entry<InventoryItem, Integer>, Comparable<?>> FN_FAV_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+        @Override
+        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+            return from.getValue();
+        }
+    };
+
+    /** Lamda sort fnQtyGet. */
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_FAV_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
+        @Override
+        public Object apply(final Entry<InventoryItem, Integer> from) {
+            return SColumnUtil.toCard(from.getKey());
+        }
+    };
+
     private static final Function<Entry<InventoryItem, Integer>, Comparable<?>> FN_QTY_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {

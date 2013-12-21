@@ -36,10 +36,10 @@ import forge.gui.toolbox.FSkin.JLabelSkin;
 public class ManaCostRenderer extends DefaultTableCellRenderer {
     private static final long serialVersionUID = 1770527102334163549L;
 
-    static final int elemtWidth = 13;
-    static final int elemtGap = 0;
-    static final int padding0 = 1;
-    static final int spaceBetweenSplitCosts = 3;
+    private static final int elemtWidth = 13;
+    private static final int elemtGap = 0;
+    private static final int padding0 = 2;
+    private static final int spaceBetweenSplitCosts = 3;
     
     private final JLabelSkin<ManaCostRenderer> skin = FSkin.get(this);
     private ManaCost v1;
@@ -58,7 +58,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
         CardRules v = value instanceof CardRules ? (CardRules) value : null;
         this.v1 = v == null ? ManaCost.NO_COST : v.getMainPart().getManaCost();
         this.v2 = v == null || v.getSplitType() != CardSplitType.Split ? null : v.getOtherPart().getManaCost();
-        this.setToolTipText(v2 == null ? v1.toString() : v1.toString() + " / " + v2.toString());
+        this.setToolTipText(v2 == null ? v1.toString() : v1.toString() + " // " + v2.toString());
         return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
     }
 
@@ -73,17 +73,17 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
 
         final int cellWidth = this.getWidth();
         
-        if ( null == v2 )
+        if (v2 == null) {
             drawCost(g, v1, padding0, cellWidth);
-        else 
-        {
+        }
+        else {
             int shards1 = v1.getGlyphCount();
             int shards2 = v2.getGlyphCount();
 
             int perGlyph = (cellWidth - padding0 - spaceBetweenSplitCosts) / (shards1 + shards2);
             perGlyph = Math.min(perGlyph, elemtWidth + elemtGap);
             drawCost(g, v1, padding0, padding0 + perGlyph * shards1);
-            drawCost(g, v2, cellWidth - perGlyph * shards2, cellWidth );
+            drawCost(g, v2, cellWidth - perGlyph * shards2 - padding0, cellWidth );
         }
     }
 
@@ -94,29 +94,30 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
      * @param cellWidth
      */
     private void drawCost(final Graphics g, ManaCost value, final int padding, final int cellWidth) {
-        float xpos = padding;
+        int x = padding;
+        int y = padding0;
         final int genericManaCost = value.getGenericCost();
         final int xManaCosts = value.countX();
         final boolean hasGeneric = (genericManaCost > 0) || this.v1.isPureGeneric();
 
         final int cntGlyphs = value.getGlyphCount();
-        final float offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding - elemtWidth) / (cntGlyphs - 1f)
+        final int offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding - elemtWidth) / (cntGlyphs - 1)
                 : elemtWidth + elemtGap;
-        final float offset = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
+        final int dx = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
 
         // Display X Mana before any other type of mana
         if (xManaCosts > 0) {
             for (int i = 0; i < xManaCosts; i++) {
-                CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), skin, g, (int) xpos, 1);
-                xpos += offset;
+                CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), skin, g, x, y);
+                x += dx;
             }
         }
 
         // Display colorless mana before colored mana
         if (hasGeneric) {
             final String sGeneric = Integer.toString(genericManaCost);
-            CardFaceSymbols.drawSymbol(sGeneric, skin, g, (int) xpos, 1);
-            xpos += offset;
+            CardFaceSymbols.drawSymbol(sGeneric, skin, g, x, y);
+            x += dx;
         }
 
         for (final ManaCostShard s : value) {
@@ -124,9 +125,8 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
                 // X costs already drawn up above
                 continue;
             }
-            CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, (int) xpos, 1);
-            xpos += offset;
+            CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, x, y);
+            x += dx;
         }
     }
-
 }

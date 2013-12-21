@@ -28,6 +28,7 @@ forge-core/src/main/java/forge/card/CardCharacteristicName.java -text
 forge-core/src/main/java/forge/card/CardDb.java -text
 forge-core/src/main/java/forge/card/CardEdition.java -text
 forge-core/src/main/java/forge/card/CardFace.java -text
+forge-core/src/main/java/forge/card/CardPreferences.java -text
 forge-core/src/main/java/forge/card/CardRarity.java -text
 forge-core/src/main/java/forge/card/CardRules.java -text
 forge-core/src/main/java/forge/card/CardRulesPredicates.java -text
@@ -15487,6 +15488,7 @@ forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ItemView.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ManaCostRenderer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/SColumnUtil.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/SetCodeRenderer.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/StarRenderer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/TableColumnInfo.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/TableSorterCascade.java -text
 forge-gui/src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
