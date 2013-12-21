@@ -554,11 +554,10 @@ public enum FSkin {
         return compSkin;
     }
 
-    /** */
-    public enum Backgrounds implements SkinProp { /** */
-        BG_SPLASH (null), /** */
-        BG_TEXTURE (null), /** */
-        BG_MATCH (null);  /** */
+    public enum Backgrounds implements SkinProp {
+        BG_SPLASH (null),
+        BG_TEXTURE (null),
+        BG_MATCH (null); 
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
@@ -795,20 +794,19 @@ public enum FSkin {
         }
     }
 
-    /** */
-    public enum Colors implements SkinProp { /** */
-        CLR_THEME                   (new int[] {70, 10}), /** */
-        CLR_BORDERS                 (new int[] {70, 30}), /** */
-        CLR_ZEBRA                   (new int[] {70, 50}), /** */
-        CLR_HOVER                   (new int[] {70, 70}), /** */
-        CLR_ACTIVE                  (new int[] {70, 90}), /** */
-        CLR_INACTIVE                (new int[] {70, 110}), /** */
-        CLR_TEXT                    (new int[] {70, 130}), /** */
-        CLR_PHASE_INACTIVE_ENABLED  (new int[] {70, 150}), /** */
-        CLR_PHASE_INACTIVE_DISABLED (new int[] {70, 170}), /** */
-        CLR_PHASE_ACTIVE_ENABLED    (new int[] {70, 190}), /** */
-        CLR_PHASE_ACTIVE_DISABLED   (new int[] {70, 210}), /** */
-        CLR_THEME2                  (new int[] {70, 230}), /** */
+    public enum Colors implements SkinProp {
+        CLR_THEME                   (new int[] {70, 10}),
+        CLR_BORDERS                 (new int[] {70, 30}),
+        CLR_ZEBRA                   (new int[] {70, 50}),
+        CLR_HOVER                   (new int[] {70, 70}),
+        CLR_ACTIVE                  (new int[] {70, 90}),
+        CLR_INACTIVE                (new int[] {70, 110}),
+        CLR_TEXT                    (new int[] {70, 130}),
+        CLR_PHASE_INACTIVE_ENABLED  (new int[] {70, 150}),
+        CLR_PHASE_INACTIVE_DISABLED (new int[] {70, 170}),
+        CLR_PHASE_ACTIVE_ENABLED    (new int[] {70, 190}),
+        CLR_PHASE_ACTIVE_DISABLED   (new int[] {70, 210}),
+        CLR_THEME2                  (new int[] {70, 230}),
         CLR_OVERLAY                 (new int[] {70, 250});
 
         private Color color;
@@ -1236,12 +1234,12 @@ public enum FSkin {
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum ZoneImages implements SkinProp { /** */
-        ICO_HAND        (new int[] {280, 40, 40, 40}), /** */
-        ICO_LIBRARY     (new int[] {280, 0, 40, 40}), /** */
-        ICO_EXILE       (new int[] {320, 40, 40, 40}), /** */
-        ICO_FLASHBACK   (new int[] {280, 80, 40, 40}), /** */
-        ICO_GRAVEYARD   (new int[] {320, 0, 40, 40}), /** */
+    public enum ZoneImages implements SkinProp {
+        ICO_HAND        (new int[] {280, 40, 40, 40}),
+        ICO_LIBRARY     (new int[] {280, 0, 40, 40}),
+        ICO_EXILE       (new int[] {320, 40, 40, 40}),
+        ICO_FLASHBACK   (new int[] {280, 80, 40, 40}),
+        ICO_GRAVEYARD   (new int[] {320, 0, 40, 40}),
         ICO_POISON      (new int[] {320, 80, 40, 40});
 
         private int[] coords;
@@ -1253,32 +1251,32 @@ public enum FSkin {
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum ManaImages implements SkinProp { /** */
-        IMG_BLACK       (new int[] {360, 160, 40, 40}), /** */
-        IMG_RED         (new int[] {400, 160, 40, 40}), /** */
-        IMG_COLORLESS   (new int[] {440, 160, 40, 40}), /** */
-        IMG_BLUE        (new int[] {360, 200, 40, 40}), /** */
-        IMG_GREEN       (new int[] {400, 200, 40, 40}), /** */
-        IMG_WHITE       (new int[] {440, 200, 40, 40}), /** */
-        IMG_2B          (new int[] {360, 400, 40, 40}), /** */
-        IMG_2G          (new int[] {400, 400, 40, 40}), /** */
-        IMG_2R          (new int[] {440, 400, 40, 40}), /** */
-        IMG_2U          (new int[] {440, 360, 40, 40}), /** */
-        IMG_2W          (new int[] {400, 360, 40, 40}), /** */
-        IMG_BLACK_GREEN (new int[] {360, 240, 40, 40}), /** */
-        IMG_BLACK_RED   (new int[] {400, 240, 40, 40}), /** */
-        IMG_GREEN_BLUE  (new int[] {360, 280, 40, 40}), /** */
-        IMG_GREEN_WHITE (new int[] {440, 280, 40, 40}), /** */
-        IMG_RED_GREEN   (new int[] {360, 320, 40, 40}), /** */
-        IMG_RED_WHITE   (new int[] {400, 320, 40, 40}), /** */
-        IMG_BLUE_BLACK  (new int[] {440, 240, 40, 40}), /** */
-        IMG_BLUE_RED    (new int[] {440, 320, 40, 40}), /** */
-        IMG_WHITE_BLACK (new int[] {400, 280, 40, 40}), /** */
-        IMG_WHITE_BLUE  (new int[] {360, 360, 40, 40}), /** */
-        IMG_PHRYX_BLUE  (new int[] {320, 200, 40, 40}), /** */
-        IMG_PHRYX_WHITE (new int[] {320, 240, 40, 40}), /** */
-        IMG_PHRYX_RED   (new int[] {320, 280, 40, 40}), /** */
-        IMG_PHRYX_GREEN (new int[] {320, 320, 40, 40}), /** */
+    public enum ManaImages implements SkinProp {
+        IMG_BLACK       (new int[] {360, 160, 40, 40}),
+        IMG_RED         (new int[] {400, 160, 40, 40}),
+        IMG_COLORLESS   (new int[] {440, 160, 40, 40}),
+        IMG_BLUE        (new int[] {360, 200, 40, 40}),
+        IMG_GREEN       (new int[] {400, 200, 40, 40}),
+        IMG_WHITE       (new int[] {440, 200, 40, 40}),
+        IMG_2B          (new int[] {360, 400, 40, 40}),
+        IMG_2G          (new int[] {400, 400, 40, 40}),
+        IMG_2R          (new int[] {440, 400, 40, 40}),
+        IMG_2U          (new int[] {440, 360, 40, 40}),
+        IMG_2W          (new int[] {400, 360, 40, 40}),
+        IMG_BLACK_GREEN (new int[] {360, 240, 40, 40}),
+        IMG_BLACK_RED   (new int[] {400, 240, 40, 40}),
+        IMG_GREEN_BLUE  (new int[] {360, 280, 40, 40}),
+        IMG_GREEN_WHITE (new int[] {440, 280, 40, 40}),
+        IMG_RED_GREEN   (new int[] {360, 320, 40, 40}),
+        IMG_RED_WHITE   (new int[] {400, 320, 40, 40}),
+        IMG_BLUE_BLACK  (new int[] {440, 240, 40, 40}),
+        IMG_BLUE_RED    (new int[] {440, 320, 40, 40}),
+        IMG_WHITE_BLACK (new int[] {400, 280, 40, 40}),
+        IMG_WHITE_BLUE  (new int[] {360, 360, 40, 40}),
+        IMG_PHRYX_BLUE  (new int[] {320, 200, 40, 40}),
+        IMG_PHRYX_WHITE (new int[] {320, 240, 40, 40}),
+        IMG_PHRYX_RED   (new int[] {320, 280, 40, 40}),
+        IMG_PHRYX_GREEN (new int[] {320, 320, 40, 40}),
         IMG_PHRYX_BLACK (new int[] {320, 360, 40, 40});
 
         private int[] coords;
@@ -1290,26 +1288,31 @@ public enum FSkin {
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum ColorlessManaImages implements SkinProp { /** */
-        IMG_0   (new int[] {640, 200, 20, 20}), /** */
-        IMG_1   (new int[] {660, 200, 20, 20}), /** */
-        IMG_2   (new int[] {640, 220, 20, 20}), /** */
-        IMG_3   (new int[] {660, 220, 20, 20}), /** */
-        IMG_4   (new int[] {640, 240, 20, 20}), /** */
-        IMG_5   (new int[] {660, 240, 20, 20}), /** */
-        IMG_6   (new int[] {640, 260, 20, 20}), /** */
-        IMG_7   (new int[] {660, 260, 20, 20}), /** */
-        IMG_8   (new int[] {640, 280, 20, 20}), /** */
-        IMG_9   (new int[] {660, 280, 20, 20}), /** */
-        IMG_10  (new int[] {640, 300, 20, 20}), /** */
-        IMG_11  (new int[] {660, 300, 20, 20}), /** */
-        IMG_12  (new int[] {640, 320, 20, 20}), /** */
-        IMG_15  (new int[] {660, 340, 20, 20}), /** */
-        IMG_16  (new int[] {640, 360, 20, 20}), /** */
-        IMG_20  (new int[] {640, 400, 20, 20}), /** */
-        IMG_X   (new int[] {640, 420, 20, 20}), /** */
-        IMG_Y   (new int[] {660, 420, 20, 20}), /** */
-        IMG_Z   (new int[] {640, 440, 20, 20});
+    public enum ColorlessManaImages implements SkinProp {
+        IMG_0   (new int[] {640, 200, 20, 20}),
+        IMG_1   (new int[] {660, 200, 20, 20}),
+        IMG_2   (new int[] {640, 220, 20, 20}),
+        IMG_3   (new int[] {660, 220, 20, 20}),
+        IMG_4   (new int[] {640, 240, 20, 20}),
+        IMG_5   (new int[] {660, 240, 20, 20}),
+        IMG_6   (new int[] {640, 260, 20, 20}),
+        IMG_7   (new int[] {660, 260, 20, 20}),
+        IMG_8   (new int[] {640, 280, 20, 20}),
+        IMG_9   (new int[] {660, 280, 20, 20}),
+        IMG_10  (new int[] {640, 300, 20, 20}),
+        IMG_11  (new int[] {660, 300, 20, 20}),
+        IMG_12  (new int[] {640, 320, 20, 20}),
+        IMG_13  (new int[] {660, 320, 20, 20}),
+        IMG_14  (new int[] {640, 340, 20, 20}),
+        IMG_15  (new int[] {660, 340, 20, 20}),
+        IMG_16  (new int[] {640, 360, 20, 20}),
+        IMG_17  (new int[] {660, 360, 20, 20}),
+        IMG_18  (new int[] {640, 380, 20, 20}),
+        IMG_19  (new int[] {660, 380, 20, 20}),
+        IMG_20  (new int[] {640, 400, 20, 20}),
+        IMG_X   (new int[] {660, 400, 20, 20}),
+        IMG_Y   (new int[] {640, 420, 20, 20}),
+        IMG_Z   (new int[] {660, 420, 20, 20});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
@@ -1320,20 +1323,20 @@ public enum FSkin {
     }
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
-    public enum GameplayImages implements SkinProp { /** */
-        IMG_SNOW            (new int[] {320, 160, 40, 40}), /** */
-        IMG_TAP             (new int[] {660, 440, 20, 20}), /** */
-        IMG_UNTAP           (new int[] {640, 460, 20, 20}), /** */
-        IMG_CHAOS           (new int[] {320, 400, 40, 40}), /** */
-        IMG_SLASH           (new int[] {660, 400, 10, 13}), /** */
-        IMG_ATTACK          (new int[] {160, 320, 80, 80, 32, 32}), /** */
-        IMG_DEFEND          (new int[] {160, 400, 80, 80, 32, 32}), /** */
-        IMG_SUMMONSICK      (new int[] {240, 400, 80, 80, 32, 32}), /** */
-        IMG_PHASING         (new int[] {240, 320, 80, 80, 32, 32}), /** */
-        IMG_COSTRESERVED    (new int[] {240, 240, 80, 80, 40, 40}), /** */
-        IMG_COUNTERS1       (new int[] {0, 320, 80, 80}), /** */
-        IMG_COUNTERS2       (new int[] {0, 400, 80, 80}), /** */
-        IMG_COUNTERS3       (new int[] {80, 320, 80, 80}), /** */
+    public enum GameplayImages implements SkinProp {
+        IMG_SNOW            (new int[] {320, 160, 40, 40}),
+        IMG_TAP             (new int[] {640, 440, 20, 20}),
+        IMG_UNTAP           (new int[] {660, 440, 20, 20}),
+        IMG_CHAOS           (new int[] {320, 400, 40, 40}),
+        IMG_SLASH           (new int[] {660, 400, 10, 13}),
+        IMG_ATTACK          (new int[] {160, 320, 80, 80, 32, 32}),
+        IMG_DEFEND          (new int[] {160, 400, 80, 80, 32, 32}),
+        IMG_SUMMONSICK      (new int[] {240, 400, 80, 80, 32, 32}),
+        IMG_PHASING         (new int[] {240, 320, 80, 80, 32, 32}),
+        IMG_COSTRESERVED    (new int[] {240, 240, 80, 80, 40, 40}),
+        IMG_COUNTERS1       (new int[] {0, 320, 80, 80}),
+        IMG_COUNTERS2       (new int[] {0, 400, 80, 80}),
+        IMG_COUNTERS3       (new int[] {80, 320, 80, 80}),
         IMG_COUNTERS_MULTI  (new int[] {80, 400, 80, 80});
 
         private int[] coords;
@@ -1344,18 +1347,17 @@ public enum FSkin {
         public int[] getCoords() { return coords; }
     }
 
-    /** */
-    public enum Foils implements SkinProp { /** */
-        FOIL_01     (new int[] {0, 0, 400, 570}), /** */
-        FOIL_02     (new int[] {400, 0, 400, 570}), /** */
-        FOIL_03     (new int[] {0, 570, 400, 570}), /** */
-        FOIL_04     (new int[] {400, 570, 400, 570}), /** */
-        FOIL_05     (new int[] {0, 1140, 400, 570}), /** */
-        FOIL_06     (new int[] {400, 1140, 400, 570}), /** */
-        FOIL_07     (new int[] {0, 1710, 400, 570}), /** */
-        FOIL_08     (new int[] {400, 1710, 400, 570}), /** */
-        FOIL_09     (new int[] {0, 2280, 400, 570}), /** */
-        FOIL_10     (new int[] {400, 2280, 400, 570}); /** */
+    public enum Foils implements SkinProp {
+        FOIL_01     (new int[] {0, 0, 400, 570}),
+        FOIL_02     (new int[] {400, 0, 400, 570}),
+        FOIL_03     (new int[] {0, 570, 400, 570}),
+        FOIL_04     (new int[] {400, 570, 400, 570}),
+        FOIL_05     (new int[] {0, 1140, 400, 570}),
+        FOIL_06     (new int[] {400, 1140, 400, 570}),
+        FOIL_07     (new int[] {0, 1710, 400, 570}),
+        FOIL_08     (new int[] {400, 1710, 400, 570}),
+        FOIL_09     (new int[] {0, 2280, 400, 570}),
+        FOIL_10     (new int[] {400, 2280, 400, 570});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
@@ -1365,17 +1367,17 @@ public enum FSkin {
         public int[] getCoords() { return coords; }
     }
 
-    public enum OldFoils implements SkinProp { /** */
-        FOIL_11     (new int[] {0, 0, 400, 570}), /** */
-        FOIL_12     (new int[] {400, 0, 400, 570}), /** */
-        FOIL_13     (new int[] {0, 570, 400, 570}), /** */
-        FOIL_14     (new int[] {400, 570, 400, 570}), /** */
-        FOIL_15     (new int[] {0, 1140, 400, 570}), /** */
-        FOIL_16     (new int[] {400, 1140, 400, 570}), /** */
-        FOIL_17     (new int[] {0, 1710, 400, 570}), /** */
-        FOIL_18     (new int[] {400, 1710, 400, 570}), /** */
-        FOIL_19     (new int[] {0, 2280, 400, 570}), /** */
-        FOIL_20     (new int[] {400, 2280, 400, 570}); /** */
+    public enum OldFoils implements SkinProp {
+        FOIL_11     (new int[] {0, 0, 400, 570}),
+        FOIL_12     (new int[] {400, 0, 400, 570}),
+        FOIL_13     (new int[] {0, 570, 400, 570}),
+        FOIL_14     (new int[] {400, 570, 400, 570}),
+        FOIL_15     (new int[] {0, 1140, 400, 570}),
+        FOIL_16     (new int[] {400, 1140, 400, 570}),
+        FOIL_17     (new int[] {0, 1710, 400, 570}),
+        FOIL_18     (new int[] {400, 1710, 400, 570}),
+        FOIL_19     (new int[] {0, 2280, 400, 570}),
+        FOIL_20     (new int[] {400, 2280, 400, 570});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
@@ -1385,19 +1387,18 @@ public enum FSkin {
         public int[] getCoords() { return coords; }
     }
 
-    /** */
-    public enum DockIcons implements SkinProp { /** */
-        ICO_SHORTCUTS    (new int[] {160, 640, 80, 80}), /** */
-        ICO_SETTINGS     (new int[] {80, 640, 80, 80}), /** */
-        ICO_ENDTURN      (new int[] {320, 640, 80, 80}), /** */
-        ICO_CONCEDE      (new int[] {240, 640, 80, 80}), /** */
-        ICO_REVERTLAYOUT (new int[] {400, 720, 80, 80}), /** */
-        ICO_OPENLAYOUT   (new int[] {0, 800, 80, 80}), /** */
-        ICO_SAVELAYOUT   (new int[] {80, 800, 80, 80}), /** */
-        ICO_DECKLIST     (new int[] {400, 640, 80, 80}), /** */
-        ICO_ALPHASTRIKE  (new int[] {160, 800, 80, 80}), /** */
-        ICO_ARCSOFF      (new int[] {240, 800, 80, 80}), /** */
-        ICO_ARCSON       (new int[] {320, 800, 80, 80}), /** */
+    public enum DockIcons implements SkinProp {
+        ICO_SHORTCUTS    (new int[] {160, 640, 80, 80}),
+        ICO_SETTINGS     (new int[] {80, 640, 80, 80}),
+        ICO_ENDTURN      (new int[] {320, 640, 80, 80}),
+        ICO_CONCEDE      (new int[] {240, 640, 80, 80}),
+        ICO_REVERTLAYOUT (new int[] {400, 720, 80, 80}),
+        ICO_OPENLAYOUT   (new int[] {0, 800, 80, 80}),
+        ICO_SAVELAYOUT   (new int[] {80, 800, 80, 80}),
+        ICO_DECKLIST     (new int[] {400, 640, 80, 80}),
+        ICO_ALPHASTRIKE  (new int[] {160, 800, 80, 80}),
+        ICO_ARCSOFF      (new int[] {240, 800, 80, 80}),
+        ICO_ARCSON       (new int[] {320, 800, 80, 80}),
         ICO_ARCSHOVER    (new int[] {400, 800, 80, 80});
 
         private int[] coords;
@@ -1408,29 +1409,28 @@ public enum FSkin {
         public int[] getCoords() { return coords; }
     }
 
-    /** */
-    public enum QuestIcons implements SkinProp { /** */
-        ICO_ZEP         (new int[] {0, 480, 80, 80}), /** */
-        ICO_GEAR        (new int[] {80, 480, 80, 80}), /** */
-        ICO_GOLD        (new int[] {160, 480, 80, 80}), /** */
-        ICO_ELIXIR      (new int[] {240, 480, 80, 80}), /** */
-        ICO_BOOK        (new int[] {320, 480, 80, 80}), /** */
-        ICO_BOTTLES     (new int[] {400, 480, 80, 80}), /** */
-        ICO_BOX         (new int[] {480, 480, 80, 80}), /** */
-        ICO_COIN        (new int[] {560, 480, 80, 80}), /** */
-        ICO_CHARM		(new int[] {480, 800, 80, 80}), /** */
+    public enum QuestIcons implements SkinProp {
+        ICO_ZEP         (new int[] {0, 480, 80, 80}),
+        ICO_GEAR        (new int[] {80, 480, 80, 80}),
+        ICO_GOLD        (new int[] {160, 480, 80, 80}),
+        ICO_ELIXIR      (new int[] {240, 480, 80, 80}),
+        ICO_BOOK        (new int[] {320, 480, 80, 80}),
+        ICO_BOTTLES     (new int[] {400, 480, 80, 80}),
+        ICO_BOX         (new int[] {480, 480, 80, 80}),
+        ICO_COIN        (new int[] {560, 480, 80, 80}),
+        ICO_CHARM		(new int[] {480, 800, 80, 80}),
 
-        ICO_FOX         (new int[] {0, 560, 80, 80}), /** */
-        ICO_LEAF        (new int[] {80, 560, 80, 80}), /** */
-        ICO_LIFE        (new int[] {160, 560, 80, 80}), /** */
-        ICO_COINSTACK   (new int[] {240, 560, 80, 80}), /** */
-        ICO_MAP         (new int[] {320, 560, 80, 80}), /** */
-        ICO_NOTES       (new int[] {400, 560, 80, 80}), /** */
-        ICO_HEART       (new int[] {480, 560, 80, 80}), /** */
-        ICO_BREW        (new int[] {560, 560, 80, 80}), /** */
+        ICO_FOX         (new int[] {0, 560, 80, 80}),
+        ICO_LEAF        (new int[] {80, 560, 80, 80}),
+        ICO_LIFE        (new int[] {160, 560, 80, 80}),
+        ICO_COINSTACK   (new int[] {240, 560, 80, 80}),
+        ICO_MAP         (new int[] {320, 560, 80, 80}),
+        ICO_NOTES       (new int[] {400, 560, 80, 80}),
+        ICO_HEART       (new int[] {480, 560, 80, 80}),
+        ICO_BREW        (new int[] {560, 560, 80, 80}),
 
-        ICO_MINUS       (new int[] {560, 640, 80, 80}), /** */
-        ICO_PLUS        (new int[] {480, 640, 80, 80}), /** */
+        ICO_MINUS       (new int[] {560, 640, 80, 80}),
+        ICO_PLUS        (new int[] {480, 640, 80, 80}),
         ICO_PLUSPLUS    (new int[] {480, 720, 80, 80});
 
         private int[] coords;
@@ -1441,22 +1441,21 @@ public enum FSkin {
         public int[] getCoords() { return coords; }
     }
 
-    /** */
-    public enum InterfaceIcons implements SkinProp { /** */
-        ICO_DELETE          (new int[] {640, 480, 20, 20}), /** */
-        ICO_DELETE_OVER     (new int[] {660, 480, 20, 20}), /** */
-        ICO_EDIT            (new int[] {640, 500, 20, 20}), /** */
-        ICO_EDIT_OVER       (new int[] {660, 500, 20, 20}), /** */
-        ICO_OPEN            (new int[] {660, 520, 20, 20}), /** */
-        ICO_MINUS           (new int[] {660, 620, 20, 20}), /** */
-        ICO_NEW             (new int[] {660, 540, 20, 20}), /** */
-        ICO_PLUS            (new int[] {660, 600, 20, 20}), /** */
-        ICO_PRINT           (new int[] {660, 640, 20, 20}), /** */
-        ICO_SAVE            (new int[] {660, 560, 20, 20}), /** */
-        ICO_SAVEAS          (new int[] {660, 580, 20, 20}), /** */
-        ICO_UNKNOWN         (new int[] {0, 720, 80, 80}), /** */
-        ICO_LOGO            (new int[] {480, 0, 200, 200}), /** */
-        ICO_FLIPCARD        (new int[] {400, 0, 80, 120}), /** */
+    public enum InterfaceIcons implements SkinProp {
+        ICO_DELETE          (new int[] {640, 480, 20, 20}),
+        ICO_DELETE_OVER     (new int[] {660, 480, 20, 20}),
+        ICO_EDIT            (new int[] {640, 500, 20, 20}),
+        ICO_EDIT_OVER       (new int[] {660, 500, 20, 20}),
+        ICO_OPEN            (new int[] {660, 520, 20, 20}),
+        ICO_MINUS           (new int[] {660, 620, 20, 20}),
+        ICO_NEW             (new int[] {660, 540, 20, 20}),
+        ICO_PLUS            (new int[] {660, 600, 20, 20}),
+        ICO_PRINT           (new int[] {660, 640, 20, 20}),
+        ICO_SAVE            (new int[] {660, 560, 20, 20}),
+        ICO_SAVEAS          (new int[] {660, 580, 20, 20}),
+        ICO_UNKNOWN         (new int[] {0, 720, 80, 80}),
+        ICO_LOGO            (new int[] {480, 0, 200, 200}),
+        ICO_FLIPCARD        (new int[] {400, 0, 80, 120}),
         ICO_FAVICON         (new int[] {0, 640, 80, 80});
 
         private int[] coords;
@@ -1467,13 +1466,12 @@ public enum FSkin {
         public int[] getCoords() { return coords; }
     }
 
-    /** */
-    public enum LayoutImages implements SkinProp { /** */
-        IMG_HANDLE  (new int[] {320, 450, 80, 20}), /** */
-        IMG_CUR_L   (new int[] {564, 724, 32, 32}), /** */
-        IMG_CUR_R   (new int[] {564, 764, 32, 32}), /** */
-        IMG_CUR_T   (new int[] {604, 724, 32, 32}), /** */
-        IMG_CUR_B   (new int[] {604, 764, 32, 32}), /** */
+    public enum LayoutImages implements SkinProp {
+        IMG_HANDLE  (new int[] {320, 450, 80, 20}),
+        IMG_CUR_L   (new int[] {564, 724, 32, 32}),
+        IMG_CUR_R   (new int[] {564, 764, 32, 32}),
+        IMG_CUR_T   (new int[] {604, 724, 32, 32}),
+        IMG_CUR_B   (new int[] {604, 764, 32, 32}),
         IMG_CUR_TAB (new int[] {644, 764, 32, 32});
 
         private int[] coords;
@@ -1484,16 +1482,15 @@ public enum FSkin {
         public int[] getCoords() { return coords; }
     }
 
-    /** */
-    public enum EditorImages implements SkinProp { /** */
-        IMG_ARTIFACT        (new int[] {280, 720, 40, 40}), /** */
-        IMG_CREATURE        (new int[] {240, 720, 40, 40}), /** */
-        IMG_ENCHANTMENT     (new int[] {320, 720, 40, 40}), /** */
-        IMG_INSTANT         (new int[] {360, 720, 40, 40}), /** */
-        IMG_LAND            (new int[] {120, 720, 40, 40}), /** */
-        IMG_MULTI           (new int[] {80, 720, 40, 40}), /** */
-        IMG_PLANESWALKER    (new int[] {200, 720, 40, 40}), /** */
-        IMG_PACK            (new int[] {80, 760, 40, 40}), /** */
+    public enum EditorImages implements SkinProp {
+        IMG_ARTIFACT        (new int[] {280, 720, 40, 40}),
+        IMG_CREATURE        (new int[] {240, 720, 40, 40}),
+        IMG_ENCHANTMENT     (new int[] {320, 720, 40, 40}),
+        IMG_INSTANT         (new int[] {360, 720, 40, 40}),
+        IMG_LAND            (new int[] {120, 720, 40, 40}),
+        IMG_MULTI           (new int[] {80, 720, 40, 40}),
+        IMG_PLANESWALKER    (new int[] {200, 720, 40, 40}),
+        IMG_PACK            (new int[] {80, 760, 40, 40}),
         IMG_SORCERY         (new int[] {160, 720, 40, 40});
 
         private int[] coords;
@@ -1504,34 +1501,33 @@ public enum FSkin {
         public int[] getCoords() { return coords; }
     }
 
-    /** */
-    public enum ButtonImages implements SkinProp { /** */
-        IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}), /** */
-        IMG_BTN_START_OVER      (new int[] {480, 280, 160, 80}), /** */
-        IMG_BTN_START_DOWN      (new int[] {480, 360, 160, 80}), /** */
+    public enum ButtonImages implements SkinProp {
+        IMG_BTN_START_UP        (new int[] {480, 200, 160, 80}),
+        IMG_BTN_START_OVER      (new int[] {480, 280, 160, 80}),
+        IMG_BTN_START_DOWN      (new int[] {480, 360, 160, 80}),
 
-        IMG_BTN_UP_LEFT         (new int[] {80, 0, 40, 40}), /** */
-        IMG_BTN_UP_CENTER       (new int[] {120, 0, 1, 40}), /** */
-        IMG_BTN_UP_RIGHT        (new int[] {160, 0, 40, 40}), /** */
+        IMG_BTN_UP_LEFT         (new int[] {80, 0, 40, 40}),
+        IMG_BTN_UP_CENTER       (new int[] {120, 0, 1, 40}),
+        IMG_BTN_UP_RIGHT        (new int[] {160, 0, 40, 40}),
 
-        IMG_BTN_OVER_LEFT       (new int[] {80, 40, 40, 40}), /** */
-        IMG_BTN_OVER_CENTER     (new int[] {120, 40, 1, 40}), /** */
-        IMG_BTN_OVER_RIGHT      (new int[] {160, 40, 40, 40}), /** */
+        IMG_BTN_OVER_LEFT       (new int[] {80, 40, 40, 40}),
+        IMG_BTN_OVER_CENTER     (new int[] {120, 40, 1, 40}),
+        IMG_BTN_OVER_RIGHT      (new int[] {160, 40, 40, 40}),
 
-        IMG_BTN_DOWN_LEFT       (new int[] {80, 80, 40, 40}), /** */
-        IMG_BTN_DOWN_CENTER     (new int[] {120, 80, 1, 40}), /** */
-        IMG_BTN_DOWN_RIGHT      (new int[] {160, 80, 40, 40}), /** */
+        IMG_BTN_DOWN_LEFT       (new int[] {80, 80, 40, 40}),
+        IMG_BTN_DOWN_CENTER     (new int[] {120, 80, 1, 40}),
+        IMG_BTN_DOWN_RIGHT      (new int[] {160, 80, 40, 40}),
 
-        IMG_BTN_FOCUS_LEFT      (new int[] {80, 120, 40, 40}), /** */
-        IMG_BTN_FOCUS_CENTER    (new int[] {120, 120, 1, 40}), /** */
-        IMG_BTN_FOCUS_RIGHT     (new int[] {160, 120, 40, 40}), /** */
+        IMG_BTN_FOCUS_LEFT      (new int[] {80, 120, 40, 40}),
+        IMG_BTN_FOCUS_CENTER    (new int[] {120, 120, 1, 40}),
+        IMG_BTN_FOCUS_RIGHT     (new int[] {160, 120, 40, 40}),
 
-        IMG_BTN_TOGGLE_LEFT     (new int[] {80, 160, 40, 40}), /** */
-        IMG_BTN_TOGGLE_CENTER   (new int[] {120, 160, 1, 40}), /** */
-        IMG_BTN_TOGGLE_RIGHT    (new int[] {160, 160, 40, 40}), /** */
+        IMG_BTN_TOGGLE_LEFT     (new int[] {80, 160, 40, 40}),
+        IMG_BTN_TOGGLE_CENTER   (new int[] {120, 160, 1, 40}),
+        IMG_BTN_TOGGLE_RIGHT    (new int[] {160, 160, 40, 40}),
 
-        IMG_BTN_DISABLED_LEFT   (new int[] {80, 200, 40, 40}), /** */
-        IMG_BTN_DISABLED_CENTER (new int[] {120, 200, 1, 40}), /** */
+        IMG_BTN_DISABLED_LEFT   (new int[] {80, 200, 40, 40}),
+        IMG_BTN_DISABLED_CENTER (new int[] {120, 200, 1, 40}),
         IMG_BTN_DISABLED_RIGHT  (new int[] {160, 200, 40, 40});
 
         private int[] coords;
@@ -1926,10 +1922,7 @@ public enum FSkin {
         addEncodingSymbol("R/P", ManaImages.IMG_PHRYX_RED);
         addEncodingSymbol("G/P", ManaImages.IMG_PHRYX_GREEN);
         for (int i = 0; i <= 20; i++) {
-        	try {
-        		addEncodingSymbol(String.valueOf(i), ColorlessManaImages.valueOf("IMG_" + i));
-        	}
-        	catch (Exception e) {} //ignore exception from non-existant mana image
+            addEncodingSymbol(String.valueOf(i), ColorlessManaImages.valueOf("IMG_" + i));
         }
         addEncodingSymbol("X", ColorlessManaImages.IMG_X);
         addEncodingSymbol("Y", ColorlessManaImages.IMG_Y);

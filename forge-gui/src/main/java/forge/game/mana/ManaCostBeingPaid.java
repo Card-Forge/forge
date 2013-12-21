@@ -459,7 +459,7 @@ public class ManaCostBeingPaid {
 
         int nGeneric = getColorlessManaAmount();
         if (nGeneric > 0) {
-        	if (nGeneric <= 12 || nGeneric == 15 || nGeneric == 16 || nGeneric == 20) { //TODO: Update if new colorless mana symbols added
+        	if (nGeneric <= 20) {
                 sb.append("{" + nGeneric + "}");
         	}
         	else { //if no mana symbol exists for colorless amount, use combination of symbols for each digit
