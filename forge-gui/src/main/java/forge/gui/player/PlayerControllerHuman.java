@@ -352,6 +352,7 @@ public class PlayerControllerHuman extends PlayerController {
         
         if(cardsAreInMyHandOrBattlefield) {
             InputSelectCards sc = new InputSelectCardsFromList(isOptional ? 0 : amount, amount, sourceList);
+            sc.setMessage(title);
             sc.setCancelAllowed(isOptional);
             sc.showAndWait();
             return sc.hasCancelled() ? Lists.<Card>newArrayList() : sc.getSelected();

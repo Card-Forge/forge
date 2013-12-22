@@ -300,6 +300,6 @@ public class UntapAi extends SpellAbilityAi {
     
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> list, boolean isOptional, Player targetedPlayer) {
-        return ComputerUtilCard.getBestLandAI(list);
+        return ComputerUtilCard.getBestAI(list);
     }
 }

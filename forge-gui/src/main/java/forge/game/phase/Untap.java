@@ -23,9 +23,9 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.ai.ComputerUtilCard;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -34,8 +34,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
-import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * <p>
@@ -191,49 +189,22 @@ public class Untap extends Phase {
             final List<Card> landList = CardLists.filter(player.getLandsInPlay(), tappedCanUntap);
             
             if (!landList.isEmpty()) {
-                Card toUntap = null; 
-                if (player.isComputer()) {
-                    // search for lands the computer has and only untap 1
-                    toUntap = landList.get(0);
-                } else {
-                    final InputSelectCards target = new InputSelectCardsFromList(1,1, landList);
-                    target.setMessage("Select one tapped land to untap");
-                    target.showAndWait();
-                    if( !target.hasCancelled() && !target.getSelected().isEmpty())
-                        toUntap = target.getSelected().get(0);
-                }
+                Card toUntap = player.getController().chooseSingleCardForEffect(landList, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped land to untap");
                 if ( toUntap != null )
                     toUntap.untap();
             }
         }
         if (player.hasKeyword("You can't untap more than one artifact during your untap step.")) {
             final List<Card> artList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS, tappedCanUntap);
-            
-            if (!artList.isEmpty()) {
-                if (player.isComputer()) {
-                    ComputerUtilCard.getBestArtifactAI(artList).untap();
-                } else {
-                    final InputSelectCards target = new InputSelectCardsFromList(1,1, artList);
-                    target.setMessage("Select one tapped artifact to untap");
-                    target.showAndWait();
-                    if( !target.hasCancelled() && !target.getSelected().isEmpty())
-                        target.getSelected().get(0).untap();
-                }
-            }
+            Card toUntap = player.getController().chooseSingleCardForEffect(artList, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped artifact to untap");
+            if ( toUntap != null )
+                toUntap.untap();
         }
         if (player.hasKeyword("You can't untap more than one creature during your untap step.")) {
             final List<Card> creatures = CardLists.filter(player.getCreaturesInPlay(), tappedCanUntap);
-            if (!creatures.isEmpty()) {
-                if (player.isComputer()) {
-                    ComputerUtilCard.getBestCreatureAI(creatures).untap();
-                } else {
-                    final InputSelectCards target = new InputSelectCardsFromList(1, 1, creatures);
-                    target.setMessage("Select one creature to untap");
-                    target.showAndWait();
-                    if( !target.hasCancelled() && !target.getSelected().isEmpty())
-                        target.getSelected().get(0).untap();
-                }
-            }
+            Card toUntap = player.getController().chooseSingleCardForEffect(creatures, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped creature to untap");
+            if ( toUntap != null )
+                toUntap.untap();
         }
 
         // Remove temporary keywords
