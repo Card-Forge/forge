@@ -37,7 +37,7 @@ public final class NewConstants {
     public static final String IMAGE_LIST_QUEST_FATPACKS_FILE        = _LIST_DIR + "fatpack-images.txt";
     public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = _LIST_DIR + "precon-images.txt";
     public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = _LIST_DIR + "tournamentpack-images.txt";
-    
+
     private static final String _QUEST_DIR      = _RES_ROOT + "quest/";
     public static final String TEXT_HOWTO_FILE     = _RES_ROOT + "howto.txt";
     public static final String DRAFT_RANKINGS_FILE = _RES_ROOT + "draft/rankings.txt";
@@ -47,11 +47,11 @@ public final class NewConstants {
     public static final String DECK_CUBE_DIR       = _RES_ROOT + "cube";
     public static final String QUEST_WORLD_DIR     = _QUEST_DIR + "worlds/";
     public static final String QUEST_PRECON_DIR    = _QUEST_DIR + "precons/";
-    
+
     public static final String CARD_DATA_PETS_DIR     = _QUEST_DIR + "bazaar/";
     public static final String DEFAULT_DUELS_DIR      = _QUEST_DIR + "duels";
     public static final String DEFAULT_CHALLENGES_DIR = _QUEST_DIR + "challenges";
-   
+
     // data tree roots
     public static final String USER_DIR;
     public static final String CACHE_DIR;
@@ -80,8 +80,8 @@ public final class NewConstants {
     public static final String DECK_COMMANDER_DIR   = DECK_BASE_DIR + "commander/";
     public static final String QUEST_SAVE_DIR       = USER_QUEST_DIR + "saves/";
     public static final String MAIN_PREFS_FILE      = USER_PREFS_DIR + "forge.preferences";
+    public static final String CARD_PREFS_FILE      = USER_PREFS_DIR + "card.preferences";
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
-    
 
     // data that has defaults in the program dir but overrides/additions in the user dir
     private static final String _DEFAULTS_DIR                = _RES_ROOT + "defaults/";
@@ -91,7 +91,7 @@ public final class NewConstants {
     public static final FileLocation WORKSHOP_LAYOUT_FILE    = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "workshop.xml");
     public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.xml");
     public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,       "gauntlet/");
-    
+
     // data that is only in the cached dir
     private static final String _PICS_DIR                    = CACHE_DIR + "pics/";
     public static final String DB_DIR                        = CACHE_DIR + "db/";
@@ -104,7 +104,7 @@ public final class NewConstants {
     public static final String CACHE_TOURNAMENTPACK_PICS_DIR = _PICS_DIR + "tournamentpacks/";
     public static final String QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";
     public static final String CACHE_MORPH_IMAGE_FILE        = "morph";
-    
+
     public static final String[] PROFILE_DIRS = {
             USER_DIR,
             CACHE_DIR,
@@ -124,7 +124,7 @@ public final class NewConstants {
             CACHE_FATPACK_PICS_DIR,
             CACHE_PRECON_PICS_DIR,
             CACHE_TOURNAMENTPACK_PICS_DIR };
-    
+
     // URLs
     private static final String _URL_CARDFORGE = "http://cardforge.org";
     public static final String URL_DRAFT_UPLOAD   = _URL_CARDFORGE + "/draftAI/submitDraftData.php";

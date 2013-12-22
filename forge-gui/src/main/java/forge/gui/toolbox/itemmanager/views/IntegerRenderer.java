@@ -20,13 +20,12 @@ package forge.gui.toolbox.itemmanager.views;
 import java.awt.Component;
 
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  * A quick converter to avoid -1 being displayed for unapplicable values.
  */
 @SuppressWarnings("serial")
-public class IntegerRenderer extends DefaultTableCellRenderer {
+public class IntegerRenderer extends ItemCellRenderer {
     /*
      * (non-Javadoc)
      * 

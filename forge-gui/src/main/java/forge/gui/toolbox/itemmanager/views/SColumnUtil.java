@@ -144,69 +144,59 @@ public final class SColumnUtil {
     /** Should be called after column preferences has run, which has created a new column list.  */
     public static void attachSortAndDisplayFunctions() {
         SColumnUtil.getColumn(ColumnName.CAT_FAVORITE).setSortAndDisplayFunctions(
-                SColumnUtil.FN_FAV_COMPARE, SColumnUtil.FN_FAV_GET);
+                SColumnUtil.FN_FAV_COMPARE, SColumnUtil.FN_FAV_GET, new StarRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_QUANTITY).setSortAndDisplayFunctions(
-                SColumnUtil.FN_QTY_COMPARE, SColumnUtil.FN_QTY_GET);
+                SColumnUtil.FN_QTY_COMPARE, SColumnUtil.FN_QTY_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_NAME).setSortAndDisplayFunctions(
-                SColumnUtil.FN_NAME_COMPARE, SColumnUtil.FN_NAME_GET);
+                SColumnUtil.FN_NAME_COMPARE, SColumnUtil.FN_NAME_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_COST).setSortAndDisplayFunctions(
-                SColumnUtil.FN_COST_COMPARE, SColumnUtil.FN_COST_GET);
+                SColumnUtil.FN_COST_COMPARE, SColumnUtil.FN_COST_GET, new ManaCostRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_COLOR).setSortAndDisplayFunctions(
-                SColumnUtil.FN_COLOR_COMPARE, SColumnUtil.FN_COLOR_GET);
+                SColumnUtil.FN_COLOR_COMPARE, SColumnUtil.FN_COLOR_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_TYPE).setSortAndDisplayFunctions(
-                SColumnUtil.FN_TYPE_COMPARE, SColumnUtil.FN_TYPE_GET);
+                SColumnUtil.FN_TYPE_COMPARE, SColumnUtil.FN_TYPE_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_POWER).setSortAndDisplayFunctions(
-                SColumnUtil.FN_POWER_COMPARE, SColumnUtil.FN_POWER_GET);
+                SColumnUtil.FN_POWER_COMPARE, SColumnUtil.FN_POWER_GET, new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS).setSortAndDisplayFunctions(
-                SColumnUtil.FN_TOUGHNESS_COMPARE, SColumnUtil.FN_TOUGHNESS_GET);
+                SColumnUtil.FN_TOUGHNESS_COMPARE, SColumnUtil.FN_TOUGHNESS_GET, new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_CMC).setSortAndDisplayFunctions(
-                SColumnUtil.FN_CMC_COMPARE, SColumnUtil.FN_CMC_GET);
+                SColumnUtil.FN_CMC_COMPARE, SColumnUtil.FN_CMC_GET, new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_RARITY).setSortAndDisplayFunctions(
-                SColumnUtil.FN_RARITY_COMPARE, SColumnUtil.FN_RARITY_GET);
+                SColumnUtil.FN_RARITY_COMPARE, SColumnUtil.FN_RARITY_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_SET).setSortAndDisplayFunctions(
-                SColumnUtil.FN_SET_COMPARE, SColumnUtil.FN_SET_GET);
+                SColumnUtil.FN_SET_COMPARE, SColumnUtil.FN_SET_GET, new SetCodeRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_AI).setSortAndDisplayFunctions(
-                SColumnUtil.FN_AI_STATUS_COMPARE, SColumnUtil.FN_AI_STATUS_GET);
+                SColumnUtil.FN_AI_STATUS_COMPARE, SColumnUtil.FN_AI_STATUS_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_RANKING).setSortAndDisplayFunctions(
-                SColumnUtil.FN_RANKING_COMPARE, SColumnUtil.FN_RANKING_GET);
+                SColumnUtil.FN_RANKING_COMPARE, SColumnUtil.FN_RANKING_GET, new ItemCellRenderer());
 
         SColumnUtil.getColumn(ColumnName.DECK_QUANTITY).setSortAndDisplayFunctions(
-                SColumnUtil.FN_QTY_COMPARE, SColumnUtil.FN_QTY_GET);
+                SColumnUtil.FN_QTY_COMPARE, SColumnUtil.FN_QTY_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_NAME).setSortAndDisplayFunctions(
-                SColumnUtil.FN_NAME_COMPARE, SColumnUtil.FN_NAME_GET);
+                SColumnUtil.FN_NAME_COMPARE, SColumnUtil.FN_NAME_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_COST).setSortAndDisplayFunctions(
-                SColumnUtil.FN_COST_COMPARE, SColumnUtil.FN_COST_GET);
+                SColumnUtil.FN_COST_COMPARE, SColumnUtil.FN_COST_GET, new ManaCostRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_COLOR).setSortAndDisplayFunctions(
-                SColumnUtil.FN_COLOR_COMPARE, SColumnUtil.FN_COLOR_GET);
+                SColumnUtil.FN_COLOR_COMPARE, SColumnUtil.FN_COLOR_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_TYPE).setSortAndDisplayFunctions(
-                SColumnUtil.FN_TYPE_COMPARE, SColumnUtil.FN_TYPE_GET);
+                SColumnUtil.FN_TYPE_COMPARE, SColumnUtil.FN_TYPE_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_POWER).setSortAndDisplayFunctions(
-                SColumnUtil.FN_POWER_COMPARE, SColumnUtil.FN_POWER_GET);
+                SColumnUtil.FN_POWER_COMPARE, SColumnUtil.FN_POWER_GET, new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_TOUGHNESS).setSortAndDisplayFunctions(
-                SColumnUtil.FN_TOUGHNESS_COMPARE, SColumnUtil.FN_TOUGHNESS_GET);
+                SColumnUtil.FN_TOUGHNESS_COMPARE, SColumnUtil.FN_TOUGHNESS_GET, new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_CMC).setSortAndDisplayFunctions(
-                SColumnUtil.FN_CMC_COMPARE, SColumnUtil.FN_CMC_GET);
+                SColumnUtil.FN_CMC_COMPARE, SColumnUtil.FN_CMC_GET, new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_RARITY).setSortAndDisplayFunctions(
-                SColumnUtil.FN_RARITY_COMPARE, SColumnUtil.FN_RARITY_GET);
+                SColumnUtil.FN_RARITY_COMPARE, SColumnUtil.FN_RARITY_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_SET).setSortAndDisplayFunctions(
-                SColumnUtil.FN_SET_COMPARE, SColumnUtil.FN_SET_GET);
+                SColumnUtil.FN_SET_COMPARE, SColumnUtil.FN_SET_GET, new SetCodeRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_AI).setSortAndDisplayFunctions(
-                SColumnUtil.FN_AI_STATUS_COMPARE, SColumnUtil.FN_AI_STATUS_GET);
+                SColumnUtil.FN_AI_STATUS_COMPARE, SColumnUtil.FN_AI_STATUS_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_RANKING).setSortAndDisplayFunctions(
-                SColumnUtil.FN_RANKING_COMPARE, SColumnUtil.FN_RANKING_GET);
+                SColumnUtil.FN_RANKING_COMPARE, SColumnUtil.FN_RANKING_GET, new ItemCellRenderer());
 
-        SColumnUtil.getColumn(ColumnName.CAT_FAVORITE).setCellRenderer(new StarRenderer());
-        SColumnUtil.getColumn(ColumnName.CAT_COST).setCellRenderer(new ManaCostRenderer());
-        SColumnUtil.getColumn(ColumnName.CAT_POWER).setCellRenderer(new IntegerRenderer());
-        SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS).setCellRenderer(new IntegerRenderer());
-        SColumnUtil.getColumn(ColumnName.CAT_CMC).setCellRenderer(new IntegerRenderer());
-        SColumnUtil.getColumn(ColumnName.CAT_SET).setCellRenderer(new SetCodeRenderer());
-
-        SColumnUtil.getColumn(ColumnName.DECK_COST).setCellRenderer(new ManaCostRenderer());
-        SColumnUtil.getColumn(ColumnName.DECK_POWER).setCellRenderer(new IntegerRenderer());
-        SColumnUtil.getColumn(ColumnName.DECK_TOUGHNESS).setCellRenderer(new IntegerRenderer());
-        SColumnUtil.getColumn(ColumnName.DECK_CMC).setCellRenderer(new IntegerRenderer());
-        SColumnUtil.getColumn(ColumnName.DECK_SET).setCellRenderer(new SetCodeRenderer());
+        SColumnUtil.getColumn(ColumnName.CAT_FAVORITE).setMinWidth(18); //prevent resizing favorite column
+        SColumnUtil.getColumn(ColumnName.CAT_FAVORITE).setMaxWidth(18);
     }
 
     /**
@@ -365,7 +355,11 @@ public final class SColumnUtil {
     private static final Function<Entry<InventoryItem, Integer>, Comparable<?>> FN_FAV_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            return from.getValue();
+            IPaperCard card = SColumnUtil.toCard(from.getKey());
+            if (card == null) {
+                return -1;
+            }
+            return card.getPrefs().getStarCount();
         }
     };
 

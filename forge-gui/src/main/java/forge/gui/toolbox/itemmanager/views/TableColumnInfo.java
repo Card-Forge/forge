@@ -155,8 +155,9 @@ public class TableColumnInfo<T> extends TableColumn {
      * @param lambda0 the fnSort
      * @param lambda1 the fnDisplay
      */
-    public void setSortAndDisplayFunctions(final Function<Entry<T, Integer>, Comparable<?>> lambda0, final Function<Entry<T, Integer>, Object> lambda1) {
+    public void setSortAndDisplayFunctions(final Function<Entry<T, Integer>, Comparable<?>> lambda0, final Function<Entry<T, Integer>, Object> lambda1, ItemCellRenderer cellRenderer) {
         this.fnSort = lambda0;
         this.fnDisplay = lambda1;
+        this.setCellRenderer(cellRenderer);
     }
 }

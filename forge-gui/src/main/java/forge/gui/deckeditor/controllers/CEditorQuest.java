@@ -40,6 +40,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.views.ItemCellRenderer;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
@@ -266,16 +267,18 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_NEW));
         columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
                 this.questData.getCards().getFnNewCompare(),
-                this.questData.getCards().getFnNewGet());
+                this.questData.getCards().getFnNewGet(),
+                new ItemCellRenderer());
 
         columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_NEW));
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
                 this.questData.getCards().getFnNewCompare(),
-                this.questData.getCards().getFnNewGet());
+                this.questData.getCards().getFnNewGet(),
+                new ItemCellRenderer());
 
         columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_DECKS));
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
-                this.fnDeckCompare, this.fnDeckGet);
+                this.fnDeckCompare, this.fnDeckGet, new ItemCellRenderer());
 
         this.getCatalogManager().getTable().setup(columnsCatalog);
         this.getDeckManager().getTable().setup(columnsDeck);

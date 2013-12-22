@@ -151,40 +151,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.table.getTableHeader().setBackground(new Color(200, 200, 200));
     }
 
-    private String getCellTooltip(TableCellRenderer renderer, int row, int col, Object val) {
-        Component cell = renderer.getTableCellRendererComponent(
-                                this.table, val, false, false, row, col);
-
-        // if we're conditionally showing the tooltip, check to see
-        // if we shouldn't show it
-        if (!(cell instanceof AlwaysShowToolTip))
-        {
-            // if there's enough room (or there's no value), no tooltip
-            // we use '>' here instead of '>=' since that seems to be the
-            // threshold for where the ellipses appear for the default
-            // JTable renderer
-            int requiredWidth = cell.getPreferredSize().width;
-            TableColumn tableColumn = this.table.getColumnModel().getColumn(col);
-            if (null == val || tableColumn.getWidth() > requiredWidth) {
-                return null;
-            }
-        }
-
-        // use a pre-set tooltip if it exists
-        if (cell instanceof JComponent)
-        {
-            JComponent jcell = (JComponent)cell;
-            String tip = jcell.getToolTipText();
-            if (null != tip)
-            {
-                return tip;
-            }
-        }
-
-        // otherwise, show the full text in the tooltip
-        return String.valueOf(val);
-    }
-
     public void setAvailableColumns(final List<TableColumnInfo<InventoryItem>> cols) {
         final DefaultTableColumnModel colModel = new DefaultTableColumnModel();
 
@@ -331,14 +297,64 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     if (col < 0) { return null; }
                     TableColumn tableColumn = columnModel.getColumn(col);
                     TableCellRenderer headerRenderer = tableColumn.getHeaderRenderer();
-                    if (null == headerRenderer) {
+                    if (headerRenderer == null) {
                         headerRenderer = getDefaultRenderer();
                     }
 
-                    return getCellTooltip(
-                            headerRenderer, -1, col, tableColumn.getHeaderValue());
+                    return getCellTooltip(headerRenderer, -1, col, tableColumn.getHeaderValue());
                 }
             };
+        }
+        
+        public void processMouseEvent(MouseEvent e) {
+            Point p = e.getPoint();
+            int row = rowAtPoint(p);
+            int col = columnAtPoint(p);
+
+            if (col < 0 || col >= getColumnCount() || row < 0 || row >= getRowCount()) {
+                return;
+            }
+
+            Object val = getValueAt(row, col);
+            if (val == null) {
+                return;
+            }
+
+            ItemCellRenderer renderer = (ItemCellRenderer)getCellRenderer(row, col);
+            if (renderer != null) {
+                renderer.processMouseEvent(e, this, val, row, col); //give renderer a chance to process the mouse event
+            }
+            super.processMouseEvent(e);
+        }
+
+        private String getCellTooltip(TableCellRenderer renderer, int row, int col, Object val) {
+            Component cell = renderer.getTableCellRendererComponent(this, val, false, false, row, col);
+
+            // if we're conditionally showing the tooltip, check to see
+            // if we shouldn't show it
+            if (!(cell instanceof ItemCellRenderer)) {
+                // if there's enough room (or there's no value), no tooltip
+                // we use '>' here instead of '>=' since that seems to be the
+                // threshold for where the ellipses appear for the default
+                // JTable renderer
+                int requiredWidth = cell.getPreferredSize().width;
+                TableColumn tableColumn = this.getColumnModel().getColumn(col);
+                if (null == val || tableColumn.getWidth() > requiredWidth) {
+                    return null;
+                }
+            }
+
+            // use a pre-set tooltip if it exists
+            if (cell instanceof JComponent) {
+                JComponent jcell = (JComponent)cell;
+                String tip = jcell.getToolTipText();
+                if (tip != null) {
+                    return tip;
+                }
+            }
+
+            // otherwise, show the full text in the tooltip
+            return String.valueOf(val);
         }
 
         @Override
@@ -352,7 +368,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
 
             Object val = getValueAt(row, col);
-            if (null == val) {
+            if (val == null) {
                 return null;
             }
 
@@ -370,7 +386,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             final int col = columnAtPoint(p);
             if (row == lastTooltipRow && col == lastTooltipCol) {
                 p = lastTooltipPt;
-            } else {
+            }
+            else {
                 lastTooltipRow = row;
                 lastTooltipCol = col;
                 lastTooltipPt  = p;

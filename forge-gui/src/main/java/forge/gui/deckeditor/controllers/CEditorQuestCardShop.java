@@ -50,6 +50,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.views.ItemCellRenderer;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
@@ -435,23 +436,23 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         // Add spell shop-specific columns
         columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_PURCHASE_PRICE));
         columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
-                this.fnPriceCompare, this.fnPriceGet);
+                this.fnPriceCompare, this.fnPriceGet, new ItemCellRenderer());
 
         columnsCatalog.add(1, SColumnUtil.getColumn(ColumnName.CAT_OWNED));
         columnsCatalog.get(1).setSortAndDisplayFunctions(
-                questData.getCards().getFnOwnedCompare(), questData.getCards().getFnOwnedGet());
+                questData.getCards().getFnOwnedCompare(), questData.getCards().getFnOwnedGet(), new ItemCellRenderer());
 
         columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_SALE_PRICE));
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
-                this.fnPriceCompare, this.fnPriceSellGet);
+                this.fnPriceCompare, this.fnPriceSellGet, new ItemCellRenderer());
 
         columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_NEW));
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
-                this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
+                this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet(), new ItemCellRenderer());
 
         columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_DECKS));
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
-                this.fnDeckCompare, this.fnDeckGet);
+                this.fnDeckCompare, this.fnDeckGet, new ItemCellRenderer());
 
         // don't need AI column for either table
         columnsCatalog.remove(SColumnUtil.getColumn(ColumnName.CAT_AI));

@@ -19,21 +19,28 @@ package forge.gui.toolbox.itemmanager.views;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 
+import forge.card.CardPreferences;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.item.IPaperCard;
+import forge.properties.NewConstants;
 
 /**
  * Displays favorite icons
  */
 @SuppressWarnings("serial")
-public class StarRenderer extends DefaultTableCellRenderer {
+public class StarRenderer extends ItemCellRenderer {
     private IPaperCard card;
     private SkinImage skinImage;
+
+    @Override
+    public boolean alwaysShowTooltip() {
+        return true;
+    }
 
     /*
      * (non-Javadoc)
@@ -54,6 +61,20 @@ public class StarRenderer extends DefaultTableCellRenderer {
         update();
         return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
     }
+
+    @Override
+    public void processMouseEvent(final MouseEvent e, final JTable table, final Object value, final int row, final int column) {
+        if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1 && value instanceof IPaperCard) {
+            card = (IPaperCard) value;
+            CardPreferences prefs = card.getPrefs();
+            prefs.setStarCount((prefs.getStarCount() + 1) % 2); //TODO: consider supporting more than 1 star
+            CardPreferences.save(NewConstants.CARD_PREFS_FILE);
+            update();
+            table.setRowSelectionInterval(row, row);
+            table.repaint();
+            e.consume();
+        }
+    }
     
     private void update() {
         if (card == null) {
@@ -61,12 +82,12 @@ public class StarRenderer extends DefaultTableCellRenderer {
             skinImage = null;
         }
         else if (card.getPrefs().getStarCount() == 0) {
-            this.setToolTipText("Click to add " + card.getName() + " to favorites");
-            skinImage = null;
+            this.setToolTipText("Click to add " + card.getName() + " to your favorites");
+            skinImage = FSkin.getImage(FSkin.EditorImages.IMG_STAR_OUTINE);
         }
         else { //TODO: consider supporting more than 1 star
-            this.setToolTipText("Click to remove " + card.getName() + " from favorites");
-            skinImage = null;
+            this.setToolTipText("Click to remove " + card.getName() + " from your favorites");
+            skinImage = FSkin.getImage(FSkin.EditorImages.IMG_STAR_FILLED);
         }
     }
 
@@ -81,7 +102,7 @@ public class StarRenderer extends DefaultTableCellRenderer {
 
         if (skinImage == null) { return; }
 
-        int size = 13;
+        int size = 15;
         int width = this.getWidth();
         int height = this.getHeight();
         if (size > width) {

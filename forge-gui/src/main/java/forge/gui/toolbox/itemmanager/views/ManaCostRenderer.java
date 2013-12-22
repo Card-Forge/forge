@@ -20,8 +20,6 @@ package forge.gui.toolbox.itemmanager.views;
 import java.awt.Component;
 import java.awt.Graphics;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.mana.ManaCost;
@@ -33,7 +31,7 @@ import forge.gui.toolbox.FSkin.JLabelSkin;
 /**
  * Displays mana cost as symbols.
  */
-public class ManaCostRenderer extends DefaultTableCellRenderer {
+public class ManaCostRenderer extends ItemCellRenderer {
     private static final long serialVersionUID = 1770527102334163549L;
 
     private static final int elemtWidth = 13;

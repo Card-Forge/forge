@@ -17,8 +17,6 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
-import javax.swing.table.DefaultTableCellRenderer;
-
 import forge.Singletons;
 import forge.card.CardEdition;
 
@@ -26,7 +24,12 @@ import forge.card.CardEdition;
  * A wrapper to show explanatory tooltips for edition set abbreviations.
  */
 @SuppressWarnings("serial")
-public class SetCodeRenderer extends DefaultTableCellRenderer implements AlwaysShowToolTip {
+public class SetCodeRenderer extends ItemCellRenderer {
+    @Override
+    public boolean alwaysShowTooltip() {
+        return true;
+    }
+
     @Override
     public String getToolTipText() {
         String setAbbrev   = getText();

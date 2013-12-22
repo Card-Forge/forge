@@ -1483,6 +1483,8 @@ public enum FSkin {
     }
 
     public enum EditorImages implements SkinProp {
+        IMG_STAR_OUTINE     (new int[] {640, 460, 20, 20}),
+        IMG_STAR_FILLED     (new int[] {660, 460, 20, 20}),
         IMG_ARTIFACT        (new int[] {280, 720, 40, 40}),
         IMG_CREATURE        (new int[] {240, 720, 40, 40}),
         IMG_ENCHANTMENT     (new int[] {320, 720, 40, 40}),

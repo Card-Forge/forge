@@ -362,6 +362,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             catTable.getComponent().addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftDoubleClick(MouseEvent e) {
+                    if (e.isConsumed()) { return; } //don't add cards if inline button double clicked
                     addSelectedCards(false, 1);
                 }
 
@@ -376,6 +377,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             deckTable.getComponent().addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftDoubleClick(MouseEvent e) {
+                    if (e.isConsumed()) { return; } //don't remove cards if inline button double clicked
                     removeSelectedCards(false, 1);
                 }
 

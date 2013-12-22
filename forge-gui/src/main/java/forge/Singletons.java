@@ -17,6 +17,7 @@
  */
 package forge;
 
+import forge.card.CardPreferences;
 import forge.control.FControl;
 import forge.gui.toolbox.FProgressBar;
 import forge.gui.workshop.CardScriptInfo;
@@ -52,8 +53,9 @@ public final class Singletons {
             initialized = true;
         }
 
-        if(withUi)
+        if (withUi) {
             view = FView.SINGLETON_INSTANCE;
+        }
 
         CardStorageReader.ProgressObserver progressBarBridge = view == null 
                 ? CardStorageReader.ProgressObserver.emptyObserver : new CardStorageReader.ProgressObserver() {
@@ -79,9 +81,11 @@ public final class Singletons {
         magicDb = new StaticData(reader, "res/editions", "res/blockdata");
         model = FModel.getInstance(withUi);
         
-        if(withUi)
+        if (withUi) {
             control = FControl.instance;
-        
+            
+            CardPreferences.load(NewConstants.CARD_PREFS_FILE);
+        }
     }
     
     // disallow instantiation

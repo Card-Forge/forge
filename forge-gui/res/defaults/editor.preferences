@@ -3,9 +3,9 @@
 	<pref name="display_unique_only" value="true"></pref>
 	<pref name="elastic_columns" value="false"></pref>
 	<pref name="stats_deck" value="true"></pref>
-	<col enumval="CAT_FAVORITE" identifier="" show="true" sortpriority="1" sortstate="DESC" width="17"></col>
+	<col enumval="CAT_FAVORITE" identifier="" show="true" sortpriority="1" sortstate="DESC" width="18"></col>
 	<col enumval="CAT_QUANTITY" identifier="Quantity" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
-	<col enumval="CAT_NAME" identifier="Name" show="true" sortpriority="2" sortstate="ASC" width="115"></col>
+	<col enumval="CAT_NAME" identifier="Name" show="true" sortpriority="3" sortstate="ASC" width="115"></col>
 	<col enumval="CAT_COST" identifier="Cost" show="true" sortpriority="0" sortstate="NONE" width="40"></col>
 	<col enumval="CAT_COLOR" identifier="Color" show="true" sortpriority="0" sortstate="NONE" width="40"></col>
 	<col enumval="CAT_TYPE" identifier="Type" show="true" sortpriority="0" sortstate="NONE" width="80"></col>
@@ -18,7 +18,7 @@
 	<col enumval="CAT_RANKING" identifier="Ranking" show="false" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="CAT_NEW" identifier="New" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="CAT_PURCHASE_PRICE" identifier="Purchase Price" show="true" sortpriority="3" sortstate="DESC" width="30"></col>
-	<col enumval="CAT_OWNED" identifier="Owned" show="true" sortpriority="1" sortstate="ASC" width="40"></col>
+	<col enumval="CAT_OWNED" identifier="Owned" show="true" sortpriority="2" sortstate="ASC" width="40"></col>
 	<col enumval="DECK_QUANTITY" identifier="Quantity" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="DECK_NAME" identifier="Name" show="true" sortpriority="3" sortstate="ASC" width="115"></col>
 	<col enumval="DECK_COST" identifier="Cost" show="true" sortpriority="0" sortstate="NONE" width="40"></col>

@@ -17,9 +17,19 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
+import java.awt.event.MouseEvent;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+
 /**
- * A marker interface for indicating that tooltips should always be shown for
- * cells rendered with the marked renderer.
+ * Base cell renderer class for item tables
  */
-interface AlwaysShowToolTip {
+@SuppressWarnings("serial")
+public class ItemCellRenderer extends DefaultTableCellRenderer {
+    public boolean alwaysShowTooltip() {
+        return false;
+    }
+    public void processMouseEvent(final MouseEvent e, final JTable table, final Object value, final int row, final int column) {
+    }
 }
