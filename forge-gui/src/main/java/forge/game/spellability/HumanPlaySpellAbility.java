@@ -117,15 +117,9 @@ public class HumanPlaySpellAbility {
                 clearTargets(currentAbility);
                 Player targetingPlayer = ability.hasParam("TargetingPlayer") ?
                         AbilityUtils.getDefinedPlayers(source, ability.getParam("TargetingPlayer"), currentAbility).get(0) : ability.getActivatingPlayer();
-                if (targetingPlayer.isHuman()) {
-                    final TargetSelection select = new TargetSelection(currentAbility);
-                    if (!select.chooseTargets(null)) {
-                        return false;
-                    }
-                }
-                else { //AI
-                    return currentAbility.doTrigger(true, targetingPlayer);
-                }
+                        
+                if (!targetingPlayer.getController().chooseTargetsFor(currentAbility))
+                    return false;
             }
             final SpellAbility subAbility = currentAbility.getSubAbility();
             if (subAbility != null) {

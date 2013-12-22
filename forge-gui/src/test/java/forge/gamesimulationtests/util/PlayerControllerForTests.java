@@ -44,7 +44,6 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
-import forge.game.spellability.TargetSelection;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
@@ -496,12 +495,7 @@ public class PlayerControllerForTests extends PlayerController {
     private void prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory){
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
-            if (targetingPlayer.isHuman()) {
-                final TargetSelection select = new TargetSelection(sa);
-                select.chooseTargets(null);
-            } else { //AI
-                sa.doTrigger(true, targetingPlayer);
-            }
+            targetingPlayer.getController().chooseTargetsFor(sa);
         } else {
             sa.doTrigger(isMandatory, player);
         }
@@ -537,5 +531,10 @@ public class PlayerControllerForTests extends PlayerController {
     public Map<GameEntity, CounterType> chooseProliferation() {
         // TODO Auto-generated method stub
         return null;
+    }
+    
+    @Override
+    public boolean chooseTargetsFor(SpellAbility currentAbility) {
+        return currentAbility.doTrigger(true, player);
     }
 }

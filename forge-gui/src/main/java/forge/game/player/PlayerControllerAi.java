@@ -50,7 +50,6 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
-import forge.game.spellability.TargetSelection;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
@@ -73,9 +72,6 @@ public class PlayerControllerAi extends PlayerController {
         brains = new AiController(p, game);
     }
 
-    /**
-     * Uses GUI to learn which spell the player (human in our case) would like to play
-     */
     public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent) {
         if (abilities.size() == 0) {
             return null;
@@ -636,12 +632,7 @@ public class PlayerControllerAi extends PlayerController {
     private void prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory){
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
-            if (targetingPlayer.isHuman()) {
-                final TargetSelection select = new TargetSelection(sa);
-                select.chooseTargets(null);
-            } else { //AI
-                sa.doTrigger(true, targetingPlayer);
-            }
+            targetingPlayer.getController().chooseTargetsFor(sa);
         } else {
             sa.doTrigger(isMandatory, player);
         }
@@ -674,6 +665,11 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Map<GameEntity, CounterType> chooseProliferation() {
         return brains.chooseProliferation();
+    }
+
+    @Override
+    public boolean chooseTargetsFor(SpellAbility currentAbility) {
+        return currentAbility.doTrigger(true, player);
     }
 
 }

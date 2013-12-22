@@ -53,7 +53,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
-import forge.game.spellability.TargetSelection;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.Zone;
@@ -1018,5 +1017,12 @@ public class PlayerControllerHuman extends PlayerController {
         if ( inp.hasCancelled() )
             return null;
         return inp.getProliferationMap();
+    }
+
+    @Override
+    public boolean chooseTargetsFor(SpellAbility currentAbility) {
+        final TargetSelection select = new TargetSelection(currentAbility);
+        return select.chooseTargets(null);
+        
     }
 }

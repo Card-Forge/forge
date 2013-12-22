@@ -15126,7 +15126,6 @@ forge-gui/src/main/java/forge/game/spellability/SpellAbilityVariables.java svneo
 forge-gui/src/main/java/forge/game/spellability/SpellPermanent.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/spellability/TargetChoices.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/spellability/TargetRestrictions.java svneol=native#text/plain
-forge-gui/src/main/java/forge/game/spellability/TargetSelection.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/spellability/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/staticability/StaticAbility.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/staticability/StaticAbilityCantAttackBlock.java -text
@@ -15427,6 +15426,7 @@ forge-gui/src/main/java/forge/gui/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/player/HumanPlay.java -text
 forge-gui/src/main/java/forge/gui/player/LobbyPlayerHuman.java -text
 forge-gui/src/main/java/forge/gui/player/PlayerControllerHuman.java -text
+forge-gui/src/main/java/forge/gui/player/TargetSelection.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/player/package-info.java -text
 forge-gui/src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/toolbox/FAbsolutePositioner.java -text

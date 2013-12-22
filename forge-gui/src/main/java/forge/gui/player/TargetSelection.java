@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.spellability;
+package forge.gui.player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,9 @@ import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
