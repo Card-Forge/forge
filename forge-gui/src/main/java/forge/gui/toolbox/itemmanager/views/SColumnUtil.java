@@ -360,7 +360,7 @@ public final class SColumnUtil {
             if (card == null) {
                 return -1;
             }
-            return card.getPrefs().getStarCount();
+            return 0; // card.getPrefs().getStarCount();
         }
     };
 

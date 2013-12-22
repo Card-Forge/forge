@@ -66,9 +66,9 @@ public class StarRenderer extends ItemCellRenderer {
     public void processMouseEvent(final MouseEvent e, final JTable table, final Object value, final int row, final int column) {
         if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1 && value instanceof IPaperCard) {
             card = (IPaperCard) value;
-            CardPreferences prefs = card.getPrefs();
-            prefs.setStarCount((prefs.getStarCount() + 1) % 2); //TODO: consider supporting more than 1 star
-            CardPreferences.save(NewConstants.CARD_PREFS_FILE);
+//            CardPreferences prefs = card.getPrefs();
+//            prefs.setStarCount((prefs.getStarCount() + 1) % 2); //TODO: consider supporting more than 1 star
+//            CardPreferences.save(NewConstants.CARD_PREFS_FILE);
             update();
             table.setRowSelectionInterval(row, row);
             table.repaint();
@@ -81,7 +81,7 @@ public class StarRenderer extends ItemCellRenderer {
             this.setToolTipText("");
             skinImage = null;
         }
-        else if (card.getPrefs().getStarCount() == 0) {
+        else if ( /* card.getPrefs().getStarCount() */ 0 == 0) {
             this.setToolTipText("Click to add " + card.getName() + " to your favorites");
             skinImage = FSkin.getImage(FSkin.EditorImages.IMG_STAR_OUTINE);
         }

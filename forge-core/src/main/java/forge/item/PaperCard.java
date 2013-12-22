@@ -19,7 +19,6 @@ package forge.item;
 
 import com.google.common.base.Function;
 
-import forge.card.CardPreferences;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 
@@ -188,10 +187,5 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
         // TODO compare sets properly
         return this.edition.compareTo(o.getEdition());
-    }
-
-    @Override
-    public CardPreferences getPrefs() {
-        return CardPreferences.getPrefs(this.name);
     }
 }
