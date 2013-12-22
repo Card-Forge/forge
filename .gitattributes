@@ -28,7 +28,6 @@ forge-core/src/main/java/forge/card/CardCharacteristicName.java -text
 forge-core/src/main/java/forge/card/CardDb.java -text
 forge-core/src/main/java/forge/card/CardEdition.java -text
 forge-core/src/main/java/forge/card/CardFace.java -text
-forge-core/src/main/java/forge/card/CardPreferences.java -text
 forge-core/src/main/java/forge/card/CardRarity.java -text
 forge-core/src/main/java/forge/card/CardRules.java -text
 forge-core/src/main/java/forge/card/CardRulesPredicates.java -text
@@ -15205,6 +15204,7 @@ forge-gui/src/main/java/forge/gui/CardContainer.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/CardDetailPanel.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/CardListViewer.java -text
 forge-gui/src/main/java/forge/gui/CardPicturePanel.java svneol=native#text/plain
+forge-gui/src/main/java/forge/gui/CardPreferences.java -text
 forge-gui/src/main/java/forge/gui/DualListBox.java -text
 forge-gui/src/main/java/forge/gui/FNetOverlay.java -text
 forge-gui/src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain

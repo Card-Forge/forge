@@ -17,8 +17,8 @@
  */
 package forge;
 
-import forge.card.CardPreferences;
 import forge.control.FControl;
+import forge.gui.CardPreferences;
 import forge.gui.toolbox.FProgressBar;
 import forge.gui.workshop.CardScriptInfo;
 import forge.model.FModel;

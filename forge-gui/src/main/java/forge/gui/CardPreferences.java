@@ -1,4 +1,4 @@
-package forge.card;
+package forge.gui;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

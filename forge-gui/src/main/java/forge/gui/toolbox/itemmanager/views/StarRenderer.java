@@ -23,7 +23,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JTable;
 
-import forge.card.CardPreferences;
+import forge.gui.CardPreferences;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.item.IPaperCard;
