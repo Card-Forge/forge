@@ -136,6 +136,25 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
         void move(InventoryItem item, int qty);
     }
 
+    @SuppressWarnings("unchecked")
+    public void incrementDeckQuantity(InventoryItem item, int delta) {
+        if (item == null || delta == 0) { return; }
+
+        if (delta > 0) { //add items
+            int qty = Math.min(delta, ((ItemManager<InventoryItem>)childController.getCatalogManager()).getItemCount(item));
+            if (qty == 0) { return; }
+            childController.addCard(item, false, qty);
+        }
+        else { //remove items
+            int qty = Math.min(-delta, ((ItemManager<InventoryItem>)childController.getDeckManager()).getItemCount(item));
+            if (qty == 0) { return; }
+            childController.removeCard(item, false, qty);
+        }
+
+        CStatistics.SINGLETON_INSTANCE.update();
+        CProbabilities.SINGLETON_INSTANCE.update();
+    }
+
     private void moveSelectedCards(ItemManager<InventoryItem> itemManager, _MoveAction moveAction, int maxQty) {
         List<? extends InventoryItem> items = itemManager.getSelectedItems();
         if (items.isEmpty()) {

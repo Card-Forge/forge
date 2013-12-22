@@ -27,6 +27,7 @@ import forge.gui.CardPreferences;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.item.IPaperCard;
+import forge.item.InventoryItem;
 import forge.properties.NewConstants;
 
 /**
@@ -63,15 +64,15 @@ public class StarRenderer extends ItemCellRenderer {
     }
 
     @Override
-    public void processMouseEvent(final MouseEvent e, final JTable table, final Object value, final int row, final int column) {
+    public <T extends InventoryItem> void processMouseEvent(final MouseEvent e, final ItemListView<T> listView, final Object value, final int row, final int column) {
         if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1 && value instanceof IPaperCard) {
             card = (IPaperCard) value;
             CardPreferences prefs = CardPreferences.getPrefs(card.getName());
             prefs.setStarCount((prefs.getStarCount() + 1) % 2); //TODO: consider supporting more than 1 star
             CardPreferences.save(NewConstants.CARD_PREFS_FILE);
             update();
-            table.setRowSelectionInterval(row, row);
-            table.repaint();
+            listView.getTable().setRowSelectionInterval(row, row);
+            listView.getTable().repaint();
             e.consume();
         }
     }

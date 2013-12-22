@@ -10,6 +10,7 @@ Release Notes
 
 - Deck Editor usability improvements -
 You can now mark a card as a favorite in the Catalog by clicking the star icon in the first column. This will default the card to sort ahead of non-favorite cards if you sort on that first column (which is now the Forge default).
+You can now add or remove cards from a deck using +/- buttons that appear on either side of the quantity for each card.
 Filters are now available on Current Deck pane, replacing the need for the static stat labels
 A new filter has been added to allow filtering on specific Converted Mana Costs (0, 1, 2, 3, 4, 5, 6+), as well as displaying the card count at each CMC.
 Color and Type filter buttons no longer wrap, instead growing or shrinking as needed (along with the font the count string is too long).

@@ -175,8 +175,11 @@ public final class SColumnUtil {
         SColumnUtil.getColumn(ColumnName.CAT_RANKING).setSortAndDisplayFunctions(
                 SColumnUtil.FN_RANKING_COMPARE, SColumnUtil.FN_RANKING_GET, new ItemCellRenderer());
 
-        SColumnUtil.getColumn(ColumnName.DECK_QUANTITY).setSortAndDisplayFunctions(
-                SColumnUtil.FN_QTY_COMPARE, SColumnUtil.FN_QTY_GET, new ItemCellRenderer());
+        TableColumnInfo<InventoryItem> deckQuantityColumn = SColumnUtil.getColumn(ColumnName.DECK_QUANTITY);
+        deckQuantityColumn.setMinWidth(46); //prevent resizing deck quantity column such that there isn't room for both +/- buttons and a 2-digit quantity
+        deckQuantityColumn.setSortAndDisplayFunctions(
+                SColumnUtil.FN_QTY_COMPARE, SColumnUtil.FN_QTY_GET, new DeckQuantityRenderer());
+
         SColumnUtil.getColumn(ColumnName.DECK_NAME).setSortAndDisplayFunctions(
                 SColumnUtil.FN_NAME_COMPARE, SColumnUtil.FN_NAME_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_COST).setSortAndDisplayFunctions(

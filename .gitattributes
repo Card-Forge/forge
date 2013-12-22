@@ -15482,6 +15482,7 @@ forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/TextSearchFilter.j
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/ToggleButtonsFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/ValueRangeFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/package-info.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/DeckQuantityRenderer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/IntegerRenderer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ItemCellRenderer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ItemListView.java -text

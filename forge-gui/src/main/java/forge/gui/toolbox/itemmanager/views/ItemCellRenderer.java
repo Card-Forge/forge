@@ -19,8 +19,9 @@ package forge.gui.toolbox.itemmanager.views;
 
 import java.awt.event.MouseEvent;
 
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+
+import forge.item.InventoryItem;
 
 /**
  * Base cell renderer class for item tables
@@ -30,6 +31,6 @@ public class ItemCellRenderer extends DefaultTableCellRenderer {
     public boolean alwaysShowTooltip() {
         return false;
     }
-    public void processMouseEvent(final MouseEvent e, final JTable table, final Object value, final int row, final int column) {
+    public <T extends InventoryItem> void processMouseEvent(final MouseEvent e, final ItemListView<T> listView, final Object value, final int row, final int column) {
     }
 }

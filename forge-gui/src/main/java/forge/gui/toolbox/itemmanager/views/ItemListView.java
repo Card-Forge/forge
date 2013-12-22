@@ -322,7 +322,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             ItemCellRenderer renderer = (ItemCellRenderer)getCellRenderer(row, col);
             if (renderer != null) {
-                renderer.processMouseEvent(e, this, val, row, col); //give renderer a chance to process the mouse event
+                renderer.processMouseEvent(e, ItemListView.this, val, row, col); //give renderer a chance to process the mouse event
             }
             super.processMouseEvent(e);
         }
