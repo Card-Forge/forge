@@ -626,14 +626,14 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     }
                     // Found somewhere: move down others, this one to top.
                     else if (colsToSort.contains(col0)) {
-                        col0.setSortState(SortState.ASC);
+                        col0.setSortState(col0.getDefaultSortState());
                         this.colsToSort.remove(col0);
                         this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
                     }
                     // No column in list; add directly.
                     else {
                         col0.setSortPriority(1);
-                        col0.setSortState(SortState.ASC);
+                        col0.setSortState(col0.getDefaultSortState());
                         this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
                     }
 

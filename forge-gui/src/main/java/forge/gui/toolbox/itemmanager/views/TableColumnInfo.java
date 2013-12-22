@@ -36,6 +36,7 @@ import forge.gui.toolbox.itemmanager.views.SColumnUtil.SortState;
 public class TableColumnInfo<T> extends TableColumn {
     private static final long serialVersionUID = 3749431834643427572L;
     private SortState sortstate = SortState.NONE;
+    private SortState defaultSortState = SortState.ASC;
     private int sortPriority = 0;
     private boolean show = true;
     private String enumval;
@@ -111,6 +112,16 @@ public class TableColumnInfo<T> extends TableColumn {
      /** @param state0 &emsp; {@link forge.gui.toolbox.itemmanager.TableColumnInfo.SortState} */
     public void setSortState(final SortState state0) {
         this.sortstate = state0;
+    }
+
+    /** @return {@link forge.gui.toolbox.itemmanager.ItemTableModel.SortState} */
+    public SortState getDefaultSortState() {
+        return this.defaultSortState;
+    }
+
+     /** @param state0 &emsp; {@link forge.gui.toolbox.itemmanager.TableColumnInfo.SortState} */
+    public void setDefaultSortState(final SortState state0) {
+        this.defaultSortState = state0;
     }
 
     /** @return boolean */

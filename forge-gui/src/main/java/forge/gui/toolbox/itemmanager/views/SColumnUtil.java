@@ -143,8 +143,12 @@ public final class SColumnUtil {
 
     /** Should be called after column preferences has run, which has created a new column list.  */
     public static void attachSortAndDisplayFunctions() {
-        SColumnUtil.getColumn(ColumnName.CAT_FAVORITE).setSortAndDisplayFunctions(
-                SColumnUtil.FN_FAV_COMPARE, SColumnUtil.FN_FAV_GET, new StarRenderer());
+        TableColumnInfo<InventoryItem> favoriteColumn = SColumnUtil.getColumn(ColumnName.CAT_FAVORITE);
+        favoriteColumn.setMinWidth(18); //prevent resizing favorite column
+        favoriteColumn.setMaxWidth(18);
+        favoriteColumn.setDefaultSortState(SortState.DESC); //ensure favorites appear on top by default
+        favoriteColumn.setSortAndDisplayFunctions(SColumnUtil.FN_FAV_COMPARE, SColumnUtil.FN_FAV_GET, new StarRenderer());
+
         SColumnUtil.getColumn(ColumnName.CAT_QUANTITY).setSortAndDisplayFunctions(
                 SColumnUtil.FN_QTY_COMPARE, SColumnUtil.FN_QTY_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_NAME).setSortAndDisplayFunctions(
@@ -194,9 +198,6 @@ public final class SColumnUtil {
                 SColumnUtil.FN_AI_STATUS_COMPARE, SColumnUtil.FN_AI_STATUS_GET, new ItemCellRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_RANKING).setSortAndDisplayFunctions(
                 SColumnUtil.FN_RANKING_COMPARE, SColumnUtil.FN_RANKING_GET, new ItemCellRenderer());
-
-        SColumnUtil.getColumn(ColumnName.CAT_FAVORITE).setMinWidth(18); //prevent resizing favorite column
-        SColumnUtil.getColumn(ColumnName.CAT_FAVORITE).setMaxWidth(18);
     }
 
     /**
