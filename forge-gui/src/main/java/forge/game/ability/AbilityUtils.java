@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1204,6 +1205,13 @@ public class AbilityUtils {
         String unlessCost = sa.getParam("UnlessCost").trim();
         if (unlessCost.equals("CardManaCost")) {
             cost = new Cost(source.getManaCost(), true);
+        }
+        else if (unlessCost.equals("ChosenManaCost")) {
+        	if (source.getChosenCard().isEmpty()) {
+                cost = new Cost(ManaCost.ZERO, true);
+            } else {
+            	cost = new Cost(source.getChosenCard().get(0).getManaCost(), true);
+            }
         }
         else if (unlessCost.equals("RememberedCostMinus2")) {
             if (source.getRemembered().isEmpty() || !(source.getRemembered().get(0) instanceof Card)) {

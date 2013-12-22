@@ -6268,7 +6268,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("greatestCMC")) {
-            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            if (property.contains("ControlledBy")) {
+            	List<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], null);
+            	list = CardLists.filterControlledBy(list, p);
+        		if (!list.contains(this)) {
+        			return false;
+        		}
+        	}
             for (final Card crd : list) {
                 if (crd.isSplitCard()) {
                     if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > this.getCMC() || crd.getCMC(Card.SplitCMCMode.RightSplitCMC) > this.getCMC()) {

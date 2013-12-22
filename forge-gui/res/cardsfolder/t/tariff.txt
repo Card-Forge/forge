@@ -1,0 +1,9 @@
+Name:Tariff
+ManaCost:1 W
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ 1 W | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCard | SpellDescription$ Each player sacrifices the creature he or she controls with the highest converted mana cost unless he or she pays that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestCMCControlledByRemembered | Mandatory$ True | SubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Card.ChosenCard | SacMessage$ the creature with the highest converted mana cost | UnlessCost$ ChosenManaCost | UnlessPayer$ Player.IsRemembered
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tariff.jpg
+SVar:RemAIDeck:True
+Oracle:Each player sacrifices the creature he or she controls with the highest converted mana cost unless he or she pays that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.
