@@ -305,7 +305,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 }
             };
         }
-        
+
         public void processMouseEvent(MouseEvent e) {
             Point p = e.getPoint();
             int row = rowAtPoint(p);
@@ -618,26 +618,18 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
                 }
                 else {
-                    // Found at top level, should invert
-                    if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) {
+                    if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) { //if column already at top level, just invert
                         col0.setSortPriority(1);
-                        col0.setSortState(col0.getSortState() == SortState.ASC
-                                    ? SortState.DESC : SortState.ASC);
+                        col0.setSortState(col0.getSortState() == SortState.ASC ? SortState.DESC : SortState.ASC);
                     }
-                    // Found somewhere: move down others, this one to top.
-                    else if (colsToSort.contains(col0)) {
-                        col0.setSortState(col0.getDefaultSortState());
+                    else { //otherwise move column to top level and move others down
                         this.colsToSort.remove(col0);
-                        this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
-                    }
-                    // No column in list; add directly.
-                    else {
                         col0.setSortPriority(1);
                         col0.setSortState(col0.getDefaultSortState());
                         this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
                     }
 
-                    // Decrement sort priority on remaining columns
+                    //decrement sort priority on remaining columns
                     for (int i = 1; i < maxSortDepth; i++) {
                         if (colsToSort.size() == i) { break; }
 
@@ -647,7 +639,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     }
                 }
 
-                // Unset and remove boundary columns.
+                //unset and remove boundary columns.
                 if (this.colsToSort.size() > maxSortDepth) {
                     this.colsToSort.get(maxSortDepth).setSortState(SortState.NONE);
                     this.colsToSort.get(maxSortDepth).setSortPriority(0);
