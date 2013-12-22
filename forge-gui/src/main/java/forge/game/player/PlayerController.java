@@ -207,4 +207,6 @@ public abstract class PlayerController {
     public abstract void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory);
 
     public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);
+
+    public abstract Map<GameEntity, CounterType> chooseProliferation();
 }

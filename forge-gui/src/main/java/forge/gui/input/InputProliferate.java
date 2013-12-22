@@ -87,7 +87,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
         return false;
     }
 
-    public CounterType getCounterFor(GameEntity ge) {
-        return chosenCounters.get(ge);
+    public Map<GameEntity, CounterType> getProliferationMap() {
+        return chosenCounters;
     }
 }

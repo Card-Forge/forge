@@ -65,6 +65,7 @@ import forge.gui.input.InputAttack;
 import forge.gui.input.InputBlock;
 import forge.gui.input.InputConfirmMulligan;
 import forge.gui.input.InputPassPriority;
+import forge.gui.input.InputProliferate;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.input.InputConfirm;
@@ -988,5 +989,15 @@ public class PlayerControllerHuman extends PlayerController {
     public boolean playSaFromPlayEffect(SpellAbility tgtSA) {
         HumanPlay.playSpellAbility(player, tgtSA);
         return true;
+    }
+
+    @Override
+    public Map<GameEntity, CounterType> chooseProliferation() {
+        InputProliferate inp = new InputProliferate();
+        inp.setCancelAllowed(true);
+        inp.showAndWait();
+        if ( inp.hasCancelled() )
+            return null;
+        return inp.getProliferationMap();
     }
 }

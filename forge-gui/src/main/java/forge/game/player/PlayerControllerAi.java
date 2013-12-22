@@ -667,4 +667,9 @@ public class PlayerControllerAi extends PlayerController {
         return true;
     }
 
+    @Override
+    public Map<GameEntity, CounterType> chooseProliferation() {
+        return brains.chooseProliferation();
+    }
+
 }

@@ -21,9 +21,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -40,6 +44,7 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
@@ -914,5 +919,42 @@ public class AiController {
     public boolean confirmPayment(CostPart costPart) {
         throw new UnsupportedOperationException("AI is not supposed to reach this code at the moment");
     }
+
+    public Map<GameEntity, CounterType> chooseProliferation() {
+        final Map<GameEntity, CounterType> result = new HashMap<>();  
+        
+        final List<Player> allies = player.getAllies();
+        allies.add(player);
+        final List<Player> enemies = player.getOpponents();
+        final Function<Card, CounterType> predProliferate = new Function<Card, CounterType>() {
+            @Override
+            public CounterType apply(Card crd) {
+                for (final Entry<CounterType, Integer> c1 : crd.getCounters().entrySet()) {
+                    if (ComputerUtil.isNegativeCounter(c1.getKey(), crd) && enemies.contains(crd.getController())) {
+                        return c1.getKey();
+                    }
+                    if (!ComputerUtil.isNegativeCounter(c1.getKey(), crd) && allies.contains(crd.getController())) {
+                        return c1.getKey();
+                    }
+                }
+                return null;
+            }
+        };
+
+        for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+            CounterType ct = predProliferate.apply(c);
+            if( ct != null)
+                result.put(c, ct);
+        }
+        
+        for (Player e : enemies) {
+            if (e.getPoisonCounters() > 0) {
+                result.put(e, null); // poison counter type is hardcoded at data consumer's side (this works while players may have no other counters)
+            }
+        }
+
+        return result;
+    }
+
 }
 

@@ -532,4 +532,10 @@ public class PlayerControllerForTests extends PlayerController {
         return true;
 
     }
+
+    @Override
+    public Map<GameEntity, CounterType> chooseProliferation() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

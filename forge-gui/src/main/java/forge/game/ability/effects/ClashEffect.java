@@ -13,7 +13,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
 
 public class ClashEffect extends SpellAbilityEffect {
 
@@ -30,7 +29,7 @@ public class ClashEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final boolean victory = clashWithOpponent(sa.getSourceCard());
+        final boolean victory = clashWithOpponent(sa);
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -71,7 +70,7 @@ public class ClashEffect extends SpellAbilityEffect {
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
-    public final boolean clashWithOpponent(final Card source) {
+    private final boolean clashWithOpponent(final SpellAbility sa) {
         /*
          * Each clashing player reveals the top card of his or her library, then
          * puts that card on the top or bottom. A player wins if his or her card
@@ -79,6 +78,7 @@ public class ClashEffect extends SpellAbilityEffect {
          * 
          * Clash you win or win you don't. There is no tie.
          */
+        final Card source = sa.getSourceCard();
         final Player player = source.getController();
         final Player opponent = player.getOpponent();
         final ZoneType lib = ZoneType.Library;
@@ -116,12 +116,9 @@ public class ClashEffect extends SpellAbilityEffect {
             reveal.append("\r\n");
             reveal.append(opponent).append(" reveals: ").append(oCard.getName()).append(".  CMC = ").append(oCMC);
             reveal.append("\r\n\r\n");
-            if (pCMC > oCMC) {
-                reveal.append(player).append(" wins clash.");
-            } else {
-                reveal.append(player).append(" loses clash.");
-            }
-            GuiDialog.message(reveal.toString(), source.getName());
+            reveal.append(player).append(pCMC > oCMC ? " wins clash." : " loses clash.");
+            
+            player.getGame().getAction().nofityOfValue(sa, source, reveal.toString(), null);
             clashMoveToTopOrBottom(player, pCard);
             clashMoveToTopOrBottom(opponent, oCard);
             return pCMC > oCMC;
