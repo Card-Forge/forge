@@ -37,7 +37,7 @@ public class IntegerRenderer extends ItemCellRenderer {
     public final Component getTableCellRendererComponent(final JTable table, Object value0,
             final boolean isSelected, final boolean hasFocus, final int row, final int column) {
 
-        if ((Integer) value0 == -1) { value0 = "-"; }
+        if ((int)value0 == -1) { value0 = "-"; }
         return super.getTableCellRendererComponent(table, value0, isSelected, hasFocus, row, column);
     }
 }

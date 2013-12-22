@@ -332,7 +332,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             // if we're conditionally showing the tooltip, check to see
             // if we shouldn't show it
-            if (!(cell instanceof ItemCellRenderer)) {
+            if (!(renderer instanceof ItemCellRenderer) || !((ItemCellRenderer)renderer).alwaysShowTooltip()) {
                 // if there's enough room (or there's no value), no tooltip
                 // we use '>' here instead of '>=' since that seems to be the
                 // threshold for where the ellipses appear for the default
