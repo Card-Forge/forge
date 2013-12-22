@@ -487,9 +487,13 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
-        if (kindOfChoice == BinaryChoiceType.TapOrUntap) { return true; }
-        if (kindOfChoice == BinaryChoiceType.UntapOrLeaveTapped) { return defaultVal != null && defaultVal.booleanValue(); }
-        return MyRandom.getRandom().nextBoolean();
+        switch(kindOfChoice) {
+            case TapOrUntap: return true;
+            case UntapOrLeaveTapped: return defaultVal != null && defaultVal.booleanValue();
+            case UntapTimeVault: return false; // TODO Should AI skip his turn for time vault?
+            default:
+                return MyRandom.getRandom().nextBoolean();
+        }
     }
 
     @Override

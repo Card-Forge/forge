@@ -6,6 +6,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerType;
 import forge.gui.FNetOverlay;
+import forge.gui.GuiDisplayUtil;
 
 public class LobbyPlayerHuman extends LobbyPlayer {
     public LobbyPlayerHuman(String name) {
@@ -24,7 +25,7 @@ public class LobbyPlayerHuman extends LobbyPlayer {
     
     @Override
     public Player getPlayer(Game game) {
-        Player player = new Player(getName(), game);
+        Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game);
         player.setFirstController(new PlayerControllerHuman(game, player, this));
         return player;
     }

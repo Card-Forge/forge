@@ -69,8 +69,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
-import forge.gui.GuiDisplayUtil;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.MyRandom;
@@ -204,10 +202,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     public Player(String name, Game game0) {
         game = game0;
         for (final ZoneType z : Player.ALL_ZONES) {
-            final PlayerZone toPut = z == ZoneType.Battlefield
-                    ? new PlayerZoneBattlefield(z, this)
-            : new PlayerZone(z, this);
-                    this.zones.put(z, toPut);
+            final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneBattlefield(z, this) : new PlayerZone(z, this);
+            this.zones.put(z, toPut);
         }
 
         if (isHotSeatGame(game)) {
@@ -217,7 +213,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 this.setName("Player 2");
             }
         } else {
-            this.setName(chooseName(GuiDisplayUtil.personalizeHuman(name)));
+            this.setName(chooseName(name));
         }
     }
 
@@ -2968,33 +2964,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         if (hasKeyword("Skip all combat phases of this turn.")) {
             return true;
-        }
-        return false;
-    }
-
-    /**
-     * <p>
-     * skipTurnTimeVault.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
-    public boolean skipTurnTimeVault() {
-        // time vault:
-        List<Card> vaults = getCardsIn(ZoneType.Battlefield, "Time Vault");
-        vaults = CardLists.filter(vaults, Presets.TAPPED);
-
-        if (vaults.size() > 0) {
-            final Card crd = vaults.get(0);
-
-            if (isHuman()) {
-                if (GuiDialog.confirm(crd, "Untap " + crd + "?")) {
-                    crd.untap();
-                    return true;
-                }
-            } else {
-                // TODO Should AI skip his turn for time vault?
-            }
         }
         return false;
     }

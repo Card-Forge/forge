@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -295,5 +296,10 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         return true;
+    }
+    
+    @Override
+    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> list, boolean isOptional, Player targetedPlayer) {
+        return ComputerUtilCard.getBestLandAI(list);
     }
 }

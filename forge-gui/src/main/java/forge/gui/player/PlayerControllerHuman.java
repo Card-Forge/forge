@@ -338,8 +338,25 @@ public class PlayerControllerHuman extends PlayerController {
         if (amount == 1) {
             return Lists.newArrayList(chooseSingleCardForEffect(sourceList, sa, title, isOptional));
         }
-
         GuiUtils.setPanelSelection(sa.getSourceCard());
+        
+        // try to use InputSelectCardsFromList when possible 
+        boolean cardsAreInMyHandOrBattlefield = true;
+        for(Card c : sourceList) {
+            Zone z = c.getZone();
+            if ( z != null && ( z.is(ZoneType.Battlefield) || z.is(ZoneType.Hand, player)))
+                continue;
+            cardsAreInMyHandOrBattlefield = false;
+            break;
+        }
+        
+        if(cardsAreInMyHandOrBattlefield) {
+            InputSelectCards sc = new InputSelectCardsFromList(isOptional ? 0 : amount, amount, sourceList);
+            sc.setCancelAllowed(isOptional);
+            sc.showAndWait();
+            return sc.hasCancelled() ? Lists.<Card>newArrayList() : sc.getSelected();
+        }
+
         int remaining = isOptional ? -1 : Math.max(sourceList.size() - amount, 0);
         return GuiChoose.order(title, "Chosen Cards", remaining, sourceList, null, sa.getSourceCard());
     }
@@ -780,6 +797,7 @@ public class PlayerControllerHuman extends PlayerController {
             case TapOrUntap:    labels = new String[]{"Tap", "Untap"}; break;
             case OddsOrEvens:   labels = new String[]{"Odds", "Evens"}; break;
             case UntapOrLeaveTapped:    labels = new String[]{"Untap", "Leave tapped"}; break;
+            case UntapTimeVault: labels = new String[]{"Untap (and skip this turn)", "Leave tapped"}; break;
             case PlayOrDraw:    labels = new String[]{"Play", "Draw"}; break;
         }
         return GuiDialog.confirm(sa.getSourceCard(), question, defaultVal == null || defaultVal.booleanValue(), labels);

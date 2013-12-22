@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.ai.ComputerUtilCard;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -14,8 +13,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
-import forge.gui.input.InputSelectCardsFromList;
+
 
 public class UntapEffect extends SpellAbilityEffect {
 
@@ -80,19 +78,10 @@ public class UntapEffect extends SpellAbilityEffect {
             List<Card> list = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), valid);
             list = CardLists.filter(list, Presets.TAPPED);
             
-            if (p.isHuman()) {
-                InputSelectCards sc = new InputSelectCardsFromList(0, num, list);
-                sc.showAndWait();
-                if( !sc.hasCancelled() )
-                    for( Card c : sc.getSelected() ) 
-                        c.untap();
-            } else {
-                for (int count = 0; !list.isEmpty() && count < num; count++) {
-                    final Card c = ComputerUtilCard.getBestLandAI(list);
+            List<Card> selected = p.getController().chooseCardsForEffect(list, sa, "Select cards to untap", num, true);
+            if( selected != null )
+                for( Card c : selected ) 
                     c.untap();
-                    list.remove(c);
-                }
-            }
         }
     }
 

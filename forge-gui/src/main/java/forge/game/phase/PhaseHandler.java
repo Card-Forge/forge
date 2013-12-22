@@ -53,6 +53,7 @@ import forge.game.event.GameEventGameRestarted;
 import forge.game.event.GameEventManaBurn;
 import forge.game.event.GameEventTurnPhase;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -778,44 +779,50 @@ public class PhaseHandler implements java.io.Serializable {
      * @return a {@link forge.game.player.Player} object.
      */
     private Player getNextActivePlayer() {
-        Player nextTurn = game.getNextPlayerAfter(this.getPlayerTurn());
-        if (!this.extraTurns.isEmpty()) {
-            ExtraTurn extraTurn = this.extraTurns.pop();
-            nextTurn = extraTurn.getPlayer();
+
+        ExtraTurn extraTurn = !this.extraTurns.isEmpty() ? this.extraTurns.pop() : null;
+        Player nextPlayer = extraTurn != null ? extraTurn.getPlayer() : game.getNextPlayerAfter(this.getPlayerTurn());
+        
+        if (extraTurn != null) {
             // The bottom of the extra turn stack is the normal turn
-            nextTurn.setExtraTurn(!this.extraTurns.isEmpty());
-            if (nextTurn.hasKeyword("If you would begin an extra turn, skip that turn instead.")) {
+            nextPlayer.setExtraTurn(!this.extraTurns.isEmpty());
+            if (nextPlayer.hasKeyword("If you would begin an extra turn, skip that turn instead.")) {
                 return getNextActivePlayer();
             }
-            if (nextTurn.hasKeyword("Skip your next turn.")) {
-                nextTurn.removeKeyword("Skip your next turn.");
+        } else
+            nextPlayer.setExtraTurn(false);
+        
+        if (nextPlayer.hasKeyword("Skip your next turn.")) {
+            nextPlayer.removeKeyword("Skip your next turn.");
+            if( null == extraTurn ) 
+                this.setPlayerTurn(nextPlayer);
+            return getNextActivePlayer();
+        }
+    
+        List<Card> vaults = CardLists.filter(nextPlayer.getCardsIn(ZoneType.Battlefield, "Time Vault"), Presets.TAPPED);
+        if(!vaults.isEmpty()) {
+            final Card crd = vaults.get(0);
+            boolean untapTimeVault = nextPlayer.getController().chooseBinary(new SpellAbility.EmptySa(crd, nextPlayer), "Untap " + crd + "?", BinaryChoiceType.UntapTimeVault, false);
+            if (untapTimeVault) {
+                if( null == extraTurn ) 
+                    this.setPlayerTurn(nextPlayer);
                 return getNextActivePlayer();
             }
-            if (nextTurn.skipTurnTimeVault()) {
-                return getNextActivePlayer();
-            }
+        }
+        
+        if (extraTurn != null) {
             if (extraTurn.isLoseAtEndStep()) {
-                nextTurn.addKeyword("At the beginning of this turn's end step, you lose the game.");
+                nextPlayer.addKeyword("At the beginning of this turn's end step, you lose the game.");
             }
             if (extraTurn.isSkipUntap()) {
-                nextTurn.addKeyword("Skip the untap step of this turn.");
+                nextPlayer.addKeyword("Skip the untap step of this turn.");
             }
             if (extraTurn.isCantSetSchemesInMotion()) {
-                nextTurn.addKeyword("Schemes can't be set in motion this turn.");
+                nextPlayer.addKeyword("Schemes can't be set in motion this turn.");
             }
-            return nextTurn;
         }
-        nextTurn.setExtraTurn(false);
-        if (nextTurn.hasKeyword("Skip your next turn.")) {
-            nextTurn.removeKeyword("Skip your next turn.");
-            this.setPlayerTurn(nextTurn);
-            return getNextActivePlayer();
-        }
-        if (nextTurn.skipTurnTimeVault()) {
-            this.setPlayerTurn(nextTurn);
-            return getNextActivePlayer();
-        }
-        return nextTurn;
+ 
+        return nextPlayer;
     }
 
     /**

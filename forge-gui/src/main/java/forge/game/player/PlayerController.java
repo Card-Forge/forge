@@ -57,6 +57,7 @@ public abstract class PlayerController {
         PlayOrDraw,
         OddsOrEvens,
         UntapOrLeaveTapped,
+        UntapTimeVault,
     }
 
     protected final Game game;
@@ -101,16 +102,7 @@ public abstract class PlayerController {
 
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }
 
-    /**
-     * Uses GUI to learn which spell the player (human in our case) would like to play
-     */
-    public final SpellAbility getAbilityToPlay(List<SpellAbility> abilities) {
-    	return getAbilityToPlay(abilities, null);
-    }
-
-    /**
-     * Uses GUI to learn which spell the player (human in our case) would like to play
-     */
+    public final SpellAbility getAbilityToPlay(List<SpellAbility> abilities) { return getAbilityToPlay(abilities, null); }
     public abstract SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent);
 
     /**
