@@ -36,6 +36,7 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
+import forge.gui.CardPreferences;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
@@ -360,7 +361,7 @@ public final class SColumnUtil {
             if (card == null) {
                 return -1;
             }
-            return 0; // card.getPrefs().getStarCount();
+            return CardPreferences.getPrefs(card.getName()).getStarCount();
         }
     };
 
