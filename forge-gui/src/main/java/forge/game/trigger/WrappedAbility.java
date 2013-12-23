@@ -344,8 +344,9 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public void resolve() {
         final Game game = sa.getActivatingPlayer().getGame();
+        Map<String, String> triggerParams = regtrig.getMapParams();
 
-        if (!(regtrig instanceof TriggerAlways)) {
+        if (!(regtrig instanceof TriggerAlways) && !triggerParams.containsKey("NoResolvingCheck")) {
             // State triggers don't have "Intervening If"
             if (!regtrig.requirementsCheck(game)) {
                 return;
@@ -353,7 +354,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         }
 
         TriggerHandler th = game.getTriggerHandler();
-        Map<String, String> triggerParams = regtrig.getMapParams();
 
         if (decider != null && !decider.getController().confirmTrigger(sa, regtrig, triggerParams, this.isMandatory())) {
             return;
