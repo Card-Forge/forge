@@ -34,9 +34,9 @@ public class FDialog extends JDialog implements ITitleBarOwner {
     static {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
-        isSetShapeSupported = gd.isWindowTranslucencySupported(WindowTranslucency.PERPIXEL_TRANSLUCENT);
+        isSetShapeSupported = gd.isWindowTranslucencySupported(WindowTranslucency.PERPIXEL_TRANSPARENT);
     }
-    
+
     private FSkin.WindowSkin<FDialog> skin = FSkin.get(this);
     private Point locBeforeMove;
     private Point mouseDownLoc;
