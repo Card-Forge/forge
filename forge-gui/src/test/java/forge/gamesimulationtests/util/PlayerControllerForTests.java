@@ -57,6 +57,7 @@ import forge.gamesimulationtests.util.playeractions.DeclareAttackersAction;
 import forge.gamesimulationtests.util.playeractions.DeclareBlockersAction;
 import forge.gamesimulationtests.util.playeractions.PlayerActions;
 import forge.item.PaperCard;
+import forge.util.MyRandom;
 
 /**
  * Default harmless implementation for tests.
@@ -156,8 +157,8 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int amount, boolean isOptional) {
-		return chooseItems(sourceList, amount);
+	public List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional) {
+		return chooseItems(sourceList, max);
 	}
 
 	@Override
@@ -536,5 +537,10 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
         return currentAbility.doTrigger(true, player);
+    }
+
+    @Override
+    public boolean chooseCardsPile(SpellAbility sa, List<Card> pile1, List<Card> pile2, boolean faceUp) {
+        return MyRandom.getRandom().nextBoolean();
     }
 }

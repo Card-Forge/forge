@@ -112,7 +112,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("ChoiceNum")) {
                     final int choicenum = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
-                    tgtCards = activator.getController().chooseCardsForEffect(choice, sa, source + " - Choose up to " + Lang.nounWithNumeral(choicenum, "card"), choicenum, true);
+                    tgtCards = activator.getController().chooseCardsForEffect(choice, sa, source + " - Choose up to " + Lang.nounWithNumeral(choicenum, "card"), 0, choicenum, true);
                 } else {
                     tgtCards = choice;
                 }

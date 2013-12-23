@@ -127,19 +127,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int amount,
-            boolean isOptional) {
-        List<Card> chosen = new ArrayList<Card>();
-        for (int i = 0; i < amount; i++) {
-            Card c = this.chooseSingleCardForEffect(sourceList, sa, title, isOptional);
-            if (c != null) {
-                chosen.add(c);
-                sourceList.remove(c);
-            } else {
-                break;
-            }
-        }
-        return chosen;
+    public List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional) {
+        return brains.chooseCardsForEffect(sourceList, sa, min, max, isOptional);
     }
 
     @Override
@@ -670,6 +659,25 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
         return currentAbility.doTrigger(true, player);
+    }
+
+    @Override
+    public boolean chooseCardsPile(SpellAbility sa, List<Card> pile1, List<Card> pile2, boolean faceUp) {
+        if (!faceUp) {
+            // AI will choose the first pile if it is larger or the same
+            // TODO Improve this to be slightly more random to not be so predictable
+            return pile1.size() >= pile2.size();
+        } else {
+            boolean allCreatures = Iterables.all(Iterables.concat(pile1, pile2), CardPredicates.Presets.CREATURES);
+            int cmc1 = allCreatures ? ComputerUtilCard.evaluateCreatureList(pile1) : ComputerUtilCard.evaluatePermanentList(pile1);
+            int cmc2 = allCreatures ? ComputerUtilCard.evaluateCreatureList(pile2) : ComputerUtilCard.evaluatePermanentList(pile2);
+            System.out.println("value:" + cmc1 + " " + cmc2);
+
+            // for now, this assumes that the outcome will be bad
+            // TODO: This should really have a ChooseLogic param to
+            // figure this out
+            return "Worst".equals(sa.getParam("AILogic")) ^ (cmc1 >= cmc2);
+        }
     }
 
 }

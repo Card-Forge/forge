@@ -79,8 +79,7 @@ public class Aggregates {
         if( null == source ) 
             return null;
         Random rnd = MyRandom.getRandom(); 
-        if ( source instanceof List<?> )
-        {
+        if ( source instanceof List<?> ) {
             List<T> src = (List<T>)source;
             int len = src.size();
             switch(len) {
@@ -88,32 +87,42 @@ public class Aggregates {
                 case 1: return src.get(0);
                 default: return src.get(rnd.nextInt(len));
             }
-
         }
         
-        int n = 0;
         T candidate = null;
+        int lowest = Integer.MAX_VALUE;
         for (final T item : source) {
-            if ((rnd.nextDouble() * ++n) < 1) {
+            int next = rnd.nextInt();
+            if(next < lowest) {
+                lowest = next;
                 candidate = item;
             }
         }
         return candidate;
     }
 
-    // Get several random values
-    // should improve to make 1 pass over source and track N candidates at once
     public static final <T> List<T> random(final Iterable<T> source, final int count) {
         final List<T> result = new ArrayList<T>();
-        for (int i = 0; i < count; ++i) {
-            final T toAdd = Aggregates.random(source);
-            if (toAdd == null) {
-                break;
+        final int[] randoms = new int[count];
+        for(int i = 0; i < count; i++) {
+            randoms[i] = Integer.MAX_VALUE;
+            result.add(null);
+        }
+        
+        Random rnd = MyRandom.getRandom(); 
+        for(T item : source) {
+            int next = rnd.nextInt();
+            for(int i = 0; i < count; i++) {
+                if(next < randoms[i]) {
+                    randoms[i] = next;
+                    result.set(i, item);
+                    break;
+                }
             }
-            result.add(toAdd);
         }
         return result;
     }
+
 
     public static final <K, U> Iterable<U> uniqueByLast(final Iterable<U> source, final Function<U, K> fnUniqueKey) { // this might be exotic
         final Map<K, U> uniques = new Hashtable<K, U>();

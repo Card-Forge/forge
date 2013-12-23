@@ -126,7 +126,8 @@ public abstract class PlayerController {
     // Specify a target of a spell (Spellskite)
     public abstract Pair<SpellAbilityStackInstance, GameObject> chooseTarget(SpellAbility sa, List<Pair<SpellAbilityStackInstance, GameObject>> allTargets);
 
-    public abstract List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int amount, boolean isOptional);
+    // Q: why is there min/max and optional at once? A: This is to handle cases like 'choose 3 to 5 cards or none at all'  
+    public abstract List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional);
     public final Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false, null); }
     public final Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title, boolean isOptional) { return chooseSingleCardForEffect(sourceList, sa, title, isOptional, null); } 
     public abstract Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title, boolean isOptional, Player relatedPlayer);
@@ -200,6 +201,6 @@ public abstract class PlayerController {
     public abstract void playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory);
 
     public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);
-
     public abstract Map<GameEntity, CounterType> chooseProliferation();
+    public abstract boolean chooseCardsPile(SpellAbility sa, List<Card> pile1,List<Card> pile2, boolean faceUp);
 }

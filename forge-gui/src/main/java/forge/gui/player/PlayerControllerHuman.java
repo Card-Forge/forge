@@ -330,12 +330,12 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#chooseCardsForEffect(java.util.Collection, forge.card.spellability.SpellAbility, java.lang.String, int, boolean)
      */
     @Override
-    public List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int amount,
-            boolean isOptional) {
+    public List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional) {
         // If only one card to choose, use a dialog box.
         // Otherwise, use the order dialog to be able to grab multiple cards in one shot
-        if (amount == 1) {
-            return Lists.newArrayList(chooseSingleCardForEffect(sourceList, sa, title, isOptional));
+        if (max == 1) {
+            Card singleChosen = chooseSingleCardForEffect(sourceList, sa, title, isOptional);
+            return singleChosen == null ?  Lists.<Card>newArrayList() : Lists.newArrayList(singleChosen);
         }
         GuiUtils.setPanelSelection(sa.getSourceCard());
         
@@ -350,14 +350,14 @@ public class PlayerControllerHuman extends PlayerController {
         }
         
         if(cardsAreInMyHandOrBattlefield) {
-            InputSelectCards sc = new InputSelectCardsFromList(isOptional ? 0 : amount, amount, sourceList);
+            InputSelectCards sc = new InputSelectCardsFromList(min, max, sourceList);
             sc.setMessage(title);
             sc.setCancelAllowed(isOptional);
             sc.showAndWait();
             return sc.hasCancelled() ? Lists.<Card>newArrayList() : sc.getSelected();
         }
 
-        int remaining = isOptional ? -1 : Math.max(sourceList.size() - amount, 0);
+        int remaining = isOptional ? -1 : Math.max(sourceList.size() - max, 0);
         return GuiChoose.order(title, "Chosen Cards", remaining, sourceList, null, sa.getSourceCard());
     }
 
@@ -1024,5 +1024,40 @@ public class PlayerControllerHuman extends PlayerController {
         final TargetSelection select = new TargetSelection(currentAbility);
         return select.chooseTargets(null);
         
+    }
+
+    @Override
+    public boolean chooseCardsPile(SpellAbility sa, List<Card> pile1, List<Card> pile2, boolean faceUp) {
+        if (!faceUp) {
+            final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());
+            final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
+            final String[] possibleValues = { p1Str , p2Str };
+            return GuiDialog.confirm(sa.getSourceCard(), "Choose a Pile", possibleValues);
+        } else {
+            final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
+            disp[0] = new Card(-1);
+            disp[0].setName("Pile 1");
+            for (int i = 0; i < pile1.size(); i++) {
+                disp[1 + i] = pile1.get(i);
+            }
+            disp[pile1.size() + 1] = new Card(-2);
+            disp[pile1.size() + 1].setName("Pile 2");
+            for (int i = 0; i < pile2.size(); i++) {
+                disp[pile1.size() + i + 2] = pile2.get(i);
+            }
+
+            // make sure Pile 1 or Pile 2 is clicked on
+            while (true) {
+                final Object o = GuiChoose.one("Choose a pile", disp);
+                final Card c = (Card) o;
+                String name = c.getName();
+
+                if (!(name.equals("Pile 1") || name.equals("Pile 2"))) {
+                    continue;
+                }
+
+                return name.equals("Pile 1");
+            }
+        }
     }
 }

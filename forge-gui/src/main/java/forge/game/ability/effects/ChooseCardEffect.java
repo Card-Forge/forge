@@ -36,7 +36,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final Card host = sa.getSourceCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        final List<Card> chosen = new ArrayList<Card>();
+        List<Card> chosen = new ArrayList<Card>();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
@@ -79,23 +79,10 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 }
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AtRandom")) {
-                    for (int i = 0; i < validAmount; i++) {
-                        Card c = Aggregates.random(choices);
-                        if (c != null) {
-                            chosen.add(c);
-                            choices.remove(c);
-                        } else {
-                            break;
-                        }
-                    }
+                    chosen = Aggregates.random(choices, validAmount);
                 } else {
-                    final List<Card> choice = p.getController().chooseCardsForEffect(choices, sa, sa.hasParam("ChoiceTitle") ? 
-                            sa.getParam("ChoiceTitle") : "Choose a card ", validAmount, !sa.hasParam("Mandatory"));
-                    for (Card c : choice) {
-                        if (c != null) {
-                            chosen.add(c);
-                        }
-                    }
+                    String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
+                    chosen = p.getController().chooseCardsForEffect(choices, sa, title, validAmount, validAmount, !sa.hasParam("Mandatory"));
                 }
             }
         }

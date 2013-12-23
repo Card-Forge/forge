@@ -956,5 +956,47 @@ public class AiController {
         return result;
     }
 
+    public List<Card> chooseCardsForEffect(List<Card> pool, SpellAbility sa, int min, int max, boolean isOptional) {
+        if( sa == null || sa.getApi() == null ) {
+            throw new UnsupportedOperationException();
+        }
+        List<Card> result = new ArrayList<>();
+        switch( sa.getApi()) {
+            case TwoPiles:
+                Card biggest = null;
+                Card smallest = null;
+                biggest = pool.get(0);
+                smallest = pool.get(0);
+
+                for (Card c : pool) {
+                    if (c.getCMC() >= biggest.getCMC()) {
+                        biggest = c;
+                    } else if (c.getCMC() <= smallest.getCMC()) {
+                        smallest = c;
+                    }
+                }
+                result.add(biggest);
+
+                if (max >= 3 && !result.contains(smallest)) {
+                    result.add(smallest);
+                }
+                
+            default:
+                for (int i = 0; i < max; i++) {
+                    Card c = player.getController().chooseSingleCardForEffect(pool, sa, null, isOptional);
+                    if (c != null) {
+                        result.add(c);
+                        pool.remove(c);
+                    } else {
+                        break;
+                    }
+                }
+                
+        
+        }
+        return result;
+        
+    }
+
 }
 
