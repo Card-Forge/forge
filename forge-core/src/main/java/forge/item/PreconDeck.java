@@ -36,7 +36,6 @@ import forge.util.storage.StorageReaderFolder;
  * 
  */
 public class PreconDeck implements InventoryItemFromSet {
-
     private final Deck deck;
     private final String set;
     private final String description;
@@ -112,14 +111,11 @@ public class PreconDeck implements InventoryItemFromSet {
             return arg1.getName();
         }
     };
-    
+
     public static class Reader extends StorageReaderFolder<PreconDeck> {
-
-
         public Reader(final File deckDir0) {
             super(deckDir0, PreconDeck.FN_NAME_SELECTOR);
         }
-
 
         @Override
         protected PreconDeck read(final File file) {
@@ -142,8 +138,5 @@ public class PreconDeck implements InventoryItemFromSet {
         protected FilenameFilter getFileFilter() {
             return DeckSerializer.DCK_FILE_FILTER;
         }
-
-
     }
-
 }

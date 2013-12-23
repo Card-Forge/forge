@@ -56,7 +56,6 @@ import forge.gui.toolbox.itemmanager.filters.ItemFilter;
 import forge.gui.toolbox.itemmanager.views.ItemListView;
 import forge.gui.toolbox.itemmanager.views.ItemView;
 import forge.item.InventoryItem;
-import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.ItemPoolView;
