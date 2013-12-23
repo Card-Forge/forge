@@ -15440,6 +15440,7 @@ forge-gui/src/main/java/forge/gui/toolbox/FHtmlViewer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FLabel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FList.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FMouseAdapter.java -text
+forge-gui/src/main/java/forge/gui/toolbox/FOptionPane.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FOverlay.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FPanel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FProgressBar.java -text

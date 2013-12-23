@@ -20,6 +20,7 @@ package forge.gui.toolbox;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
@@ -205,6 +206,15 @@ public class FButton extends JButton implements ILocalRepaint {
         }
         this.toggle = b0;
         repaintSelf();
+    }
+
+    public int getAutoSizeWidth() {
+        int width = 0;
+        if (this.getText() != null && !this.getText().isEmpty()) {
+            FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
+            width = metrics.stringWidth(this.getText());
+        }
+        return width;
     }
 
     /** Prevent button from repainting the whole screen. */

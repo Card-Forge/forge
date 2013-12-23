@@ -1486,6 +1486,10 @@ public enum FSkin {
     }
 
     public enum InterfaceIcons implements SkinProp {
+        ICO_QUESTION        (new int[] {560, 800, 32, 32}),
+        ICO_INFO            (new int[] {592, 800, 32, 32}),
+        ICO_WARNING         (new int[] {560, 832, 32, 32}),
+        ICO_ERROR           (new int[] {592, 832, 32, 32}),
         ICO_DELETE          (new int[] {640, 480, 20, 20}),
         ICO_DELETE_OVER     (new int[] {660, 480, 20, 20}),
         ICO_EDIT            (new int[] {640, 500, 20, 20}),

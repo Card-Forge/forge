@@ -4,9 +4,10 @@ import java.awt.Toolkit;
 import java.io.IOException;
 
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+
 import forge.Singletons;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
 import forge.gui.toolbox.imaging.ImageUtil;
@@ -16,8 +17,8 @@ public final class MenuUtil {
 
     // Get appropriate OS standard accelerator key for menu shortcuts.
     private static final int DEFAULT_MenuShortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-    
-    public static void openUrlInBrowser(String url) { 
+
+    public static void openUrlInBrowser(String url) {
         try {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
         } catch (IOException e) {
@@ -25,28 +26,20 @@ public final class MenuUtil {
             e.printStackTrace();
         }
     }
-        
+
     public static FSkin.SkinIcon getMenuIcon(SkinProp ico) {
-        return ImageUtil.getMenuIcon(FSkin.getIcon(ico));       
+        return ImageUtil.getMenuIcon(FSkin.getIcon(ico));
     }
-    
+
     public static KeyStroke getAcceleratorKey(int key) {
         return KeyStroke.getKeyStroke(key, DEFAULT_MenuShortcutKeyMask);
     }
-            
+
     public static boolean getUserConfirmation(String prompt, String dialogTitle, boolean defaultYes) {
-        Object[] options = {"Yes", "No"};                    
-        int reply = JOptionPane.showOptionDialog(
-                JOptionPane.getRootFrame(), 
-                prompt, 
-                dialogTitle,
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[defaultYes ? 0 : 1]);
-        return (reply == JOptionPane.YES_OPTION);
-    }    
+        String[] options = {"Yes", "No"};
+        int reply = FOptionPane.showOptionDialog(prompt, dialogTitle, FSkin.getIcon(FSkin.InterfaceIcons.ICO_QUESTION), options, defaultYes ? 0 : 1);
+        return (reply == 0);
+    }
 
     public static void setMenuProvider(IMenuProvider provider) {
         Singletons.getControl().getForgeMenu().setProvider(provider);

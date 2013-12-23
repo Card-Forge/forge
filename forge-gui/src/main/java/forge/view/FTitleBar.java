@@ -17,6 +17,7 @@ public class FTitleBar extends FTitleBarBase {
         setTitle(owner0.getTitle()); //set default title based on frame title
         setIconImage(owner0.getIconImage()); //set default icon image based on frame icon image
         FSkin.get(lblTitle).setForeground(foreColor);
+        FSkin.get(lblTitle).setFont(FSkin.getFont(12));
         addControls();
     }
     
