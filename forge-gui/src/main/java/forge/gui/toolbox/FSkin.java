@@ -52,6 +52,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.text.JTextComponent;
 
 import org.apache.commons.lang3.text.WordUtils;
@@ -444,6 +445,7 @@ public enum FSkin {
         private static HashMap<FPanel, FPanelSkin> skins = new HashMap<FPanel, FPanelSkin>();
 
         private SkinImage foregroundImage, backgroundTexture;
+        private SkinColor backgroundTextureOverlay;
 
         private FPanelSkin(T comp0) {
             super(comp0);
@@ -469,6 +471,16 @@ public enum FSkin {
             this.backgroundTexture = null;
         }
 
+        public void setBackgroundTextureOverlay(SkinColor skinColor) {
+            this.comp.setBackgroundTextureOverlay(skinColor.color); //must call this first since it will call resetBackgroundTexture
+            this.backgroundTextureOverlay = skinColor;
+            this.needRepaintOnReapply = true; //background texture drawn during paint
+        }
+
+        public void resetBackgroundTextureOverlay() {
+            this.backgroundTextureOverlay = null;
+        }
+
         @Override
         protected void reapply() {
             if (this.foregroundImage != null) {
@@ -476,6 +488,9 @@ public enum FSkin {
             }
             if (this.backgroundTexture != null) {
                 this.setBackgroundTexture(this.backgroundTexture); //use skin function so backgroundTexture field retained
+            }
+            if (this.backgroundTextureOverlay != null) {  //use skin function so backgroundTextureOverlay field retained
+                this.setBackgroundTextureOverlay(this.backgroundTextureOverlay);
             }
             super.reapply();
         }
@@ -791,6 +806,35 @@ public enum FSkin {
                 inBorder = this.insideSkinBorder.createBorder();
             }
             return BorderFactory.createCompoundBorder(outBorder, inBorder);
+        }
+    }
+    public static class TitledSkinBorder extends SkinBorder {
+        private final SkinColor foreColor;
+        private final String title;
+        private Border insideBorder;
+        private SkinBorder insideSkinBorder;
+
+        public TitledSkinBorder(Border insideBorder0, String title0, SkinColor foreColor0) {
+            this.insideBorder = insideBorder0;
+            this.title = title0;
+            this.foreColor = foreColor0;
+        }
+
+        public TitledSkinBorder(SkinBorder insideSkinBorder0, String title0, SkinColor foreColor0) {
+            this.insideSkinBorder = insideSkinBorder0;
+            this.title = title0;
+            this.foreColor = foreColor0;
+        }
+
+        @Override
+        protected Border createBorder() {
+            Border inBorder = this.insideBorder;
+            if (this.insideSkinBorder != null) {
+                inBorder = this.insideSkinBorder.createBorder();
+            }
+            TitledBorder border = new TitledBorder(inBorder, this.title);
+            border.setTitleColor(foreColor.color);
+            return border;
         }
     }
 

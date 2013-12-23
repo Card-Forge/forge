@@ -335,7 +335,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                     itemsToAdd.addAllFlat(newCards);
 
                     final CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", newCards);
-                    c.show();
+                    c.setVisible(true);
+                    c.dispose();
                 }
             }
             else if (item instanceof PreconDeck) {

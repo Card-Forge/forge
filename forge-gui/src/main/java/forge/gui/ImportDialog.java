@@ -146,7 +146,7 @@ public class ImportDialog {
             @Override public void run() {
                 // bring up a file open dialog and, if the OK button is selected, apply the filename
                 // to the import source text field
-                if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(null)) {
+                if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(JOptionPane.getRootFrame())) {
                     File f = _fileChooser.getSelectedFile();
                     if (!f.canRead()) {
                         JOptionPane.showMessageDialog(txfSrc, "Cannot access selected directory (Permission denied).");

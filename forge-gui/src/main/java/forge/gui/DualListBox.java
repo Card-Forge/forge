@@ -1,8 +1,6 @@
 package forge.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +13,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListDataEvent;
@@ -31,9 +29,9 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
+import forge.view.FDialog;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -46,7 +44,7 @@ import forge.item.IPaperCard;
 // Single ok button, disabled until left box has specified number of items remaining
 
 @SuppressWarnings("serial")
-public class DualListBox<T> extends FPanel {
+public class DualListBox<T> extends FDialog {
     private final FList<T> sourceList;
     private final UnsortedListModel<T> sourceListModel;
 
@@ -74,11 +72,6 @@ public class DualListBox<T> extends FPanel {
         sourceList = new FList<T>(sourceListModel);
         destListModel = new UnsortedListModel<T>();
         destList = new FList<T>(destListModel);
-
-        setPreferredSize(new Dimension(650, 300));
-        setLayout(new GridLayout(0, 3));
-        this.skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        this.skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         final Runnable onAdd = new Runnable() {
             @SuppressWarnings("unchecked")
@@ -153,14 +146,15 @@ public class DualListBox<T> extends FPanel {
 
         FPanel leftPanel = new FPanel(new BorderLayout());
         selectOrder = new FLabel.Builder().text("Select Order:").build();
-        leftPanel.setSize(300, 300);
         leftPanel.add(selectOrder, BorderLayout.NORTH);
         leftPanel.add(new FScrollPane(sourceList), BorderLayout.CENTER);
         leftPanel.add(okButton, BorderLayout.SOUTH);
 
         FPanel centerPanel = new FPanel(new GridLayout(6, 1));
-        centerPanel.setSize(50, this.getHeight());
-        centerPanel.add(new FPanel()); // empty panel to take up the first slot
+        centerPanel.setBorderToggle(false);
+        JPanel emptyPanel = new JPanel();
+        emptyPanel.setOpaque(false);
+        centerPanel.add(emptyPanel); // empty panel to take up the first slot
         centerPanel.add(addButton);
         centerPanel.add(addAllButton);
         centerPanel.add(removeButton);
@@ -169,14 +163,13 @@ public class DualListBox<T> extends FPanel {
         orderedLabel = new FLabel.Builder().build();
 
         FPanel rightPanel = new FPanel(new BorderLayout());
-        rightPanel.setSize(300, 300);
         rightPanel.add(orderedLabel, BorderLayout.NORTH);
         rightPanel.add(new FScrollPane(destList), BorderLayout.CENTER);
         rightPanel.add(autoButton, BorderLayout.SOUTH);
 
-        add(leftPanel);
-        add(centerPanel);
-        add(rightPanel);
+        add(leftPanel, "w 250, h 300");
+        add(centerPanel, "w 100, h 300");
+        add(rightPanel, "w 250, h 300");
 
         _addListListeners(sourceList);
         _addListListeners(destList);
@@ -467,9 +460,5 @@ public class DualListBox<T> extends FPanel {
 
     private void _finish() {
         this.setVisible(false);
-
-        Container grandpa = this.getParent().getParent();
-        JDialog dialog = (JDialog) grandpa.getParent();
-        dialog.dispose();
     }
 }

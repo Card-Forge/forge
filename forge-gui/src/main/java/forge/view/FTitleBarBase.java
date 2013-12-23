@@ -1,6 +1,7 @@
 package forge.view;
 
 import java.awt.BasicStroke;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -49,15 +50,14 @@ public abstract class FTitleBarBase extends JMenuBar {
         setVisible(false); //start out hidden unless frame chooses to show title bar
         setLayout(this.layout);
         skin.setBackground(backColor);
-        skin.setMatteBorder(0, 0, 2, 0, bottomEdgeColor);
     }
     
     protected void addControls() {
-        add(btnClose);
-        layout.putConstraint(SpringLayout.EAST, btnClose, 0, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, btnClose, 0, SpringLayout.SOUTH, this);
-
         if (owner instanceof FFrame) { //only support buttons besides Close for frames
+            add(btnClose);
+            layout.putConstraint(SpringLayout.EAST, btnClose, 0, SpringLayout.EAST, this);
+            layout.putConstraint(SpringLayout.SOUTH, btnClose, 0, SpringLayout.SOUTH, this);
+
             add(btnMaximize);
             layout.putConstraint(SpringLayout.EAST, btnMaximize, 0, SpringLayout.WEST, btnClose);
             layout.putConstraint(SpringLayout.SOUTH, btnMaximize, 0, SpringLayout.SOUTH, btnClose);
@@ -73,6 +73,11 @@ public abstract class FTitleBarBase extends JMenuBar {
             add(btnLockTitleBar);
             layout.putConstraint(SpringLayout.EAST, btnLockTitleBar, 0, SpringLayout.WEST, btnMinimize);
             layout.putConstraint(SpringLayout.SOUTH, btnLockTitleBar, 0, SpringLayout.SOUTH, btnMinimize);
+        }
+        else {
+            add(btnClose);
+            layout.putConstraint(SpringLayout.EAST, btnClose, -1, SpringLayout.EAST, this);
+            layout.putConstraint(SpringLayout.SOUTH, btnClose, 0, SpringLayout.SOUTH, this);
         }
     }
 
@@ -172,8 +177,13 @@ public abstract class FTitleBarBase extends JMenuBar {
         
         @Override
         public void repaintSelf() {
-            final Dimension d = this.getSize();
-            repaint(0, 0, d.width, d.height);
+            final Container window = FTitleBarBase.this.getParent().getParent().getParent();
+            if (window instanceof FDialog) { //prevent hover effect coverring up rounded border
+                window.repaint(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+            }
+            else {
+                repaint(0, 0, this.getWidth(), this.getHeight());
+            }
         }
         
         protected boolean isToggled() { //virtual method to override in extended classes

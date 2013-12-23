@@ -26,9 +26,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
@@ -37,7 +35,6 @@ import javax.swing.text.ElementIterator;
 
 import org.apache.commons.lang3.StringUtils;
 
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -48,9 +45,10 @@ import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FComboBoxWrapper;
+import forge.gui.toolbox.FHtmlViewer;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
@@ -90,7 +88,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             + "<p>Sideboard recognition is supported. Make sure that the sideboard cards are listed after a line that contains the word 'Sideboard'</p>"
             + "</html>";
 
-    private final JEditorPane htmlOutput = new JEditorPane("text/html", DeckImport.HTML_WELCOME_TEXT);
+    private final FHtmlViewer htmlOutput = new FHtmlViewer(DeckImport.HTML_WELCOME_TEXT);
     private final FScrollPane scrollInput = new FScrollPane(this.txtInput);
     private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput);
     private final FLabel summaryMain = new FLabel.Builder().text("Imported deck summary will appear here").build();
@@ -99,7 +97,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FButton cmdCancel = new FButton("Cancel");
     private final FCheckBox newEditionCheck = new FCheckBox("Import latest version of card", true);
     private final FCheckBox dateTimeCheck = new FCheckBox("Use only sets released before:", false);
-    
+
     private final FComboBoxWrapper<String> monthDropdown = new FComboBoxWrapper<>();
     private final FComboBoxWrapper<Integer> yearDropdown = new FComboBoxWrapper<>();
 
@@ -117,44 +115,36 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     public DeckImport(final ACEditorBase<TItem, TModel> g) {
         this.host = g;
 
-        final int wWidth = 600;
+        final int wWidth = 700;
         final int wHeight = 600;
 
         this.setPreferredSize(new java.awt.Dimension(wWidth, wHeight));
         this.setSize(wWidth, wHeight);
-        this.setResizable(false);
         this.setTitle("Deck Importer");
-        
-        FPanel fp = new FPanel(new MigLayout("fill"));
-        this.add(fp);
 
         txtInput.setFocusable(true);
         txtInput.setEditable(true);
-        
-        this.htmlOutput.setEditable(false);
 
-        this.scrollInput.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(), "Paste or type a decklist"));
-        this.scrollOutput.setBorder(new TitledBorder(BorderFactory.createEtchedBorder(),
-                "Expect the recognized lines to appear"));
+        FSkin.SkinColor foreColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+        FSkin.get(this.scrollInput).setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), "Paste or type a decklist", foreColor));
+        FSkin.get(this.scrollOutput).setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), "Expect the recognized lines to appear", foreColor));
         this.scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
-        
-        fp.add(this.scrollInput, "cell 0 0, w 50%, growy, pushy");
-        fp.add(this.newEditionCheck, "cell 0 1, w 50%, ax c");
-        fp.add(this.dateTimeCheck, "cell 0 2, w 50%, ax c");
+        this.add(this.scrollInput, "cell 0 0, w 50%, growy, pushy");
+        this.add(this.newEditionCheck, "cell 0 1, w 50%, ax c");
+        this.add(this.dateTimeCheck, "cell 0 2, w 50%, ax c");
 
-        fp.add(monthDropdown.getComponent(), "cell 0 3, w 20%, ax r, split 2");
-        fp.add(yearDropdown.getComponent(), "w 15%, pad 0 0 0 -10");
+        this.add(monthDropdown.getComponent(), "cell 0 3, w 20%, ax left, split 2, pad 0 4 0 0");
+        this.add(yearDropdown.getComponent(), "w 15%");
         fillDateDropdowns();
-        
-        fp.add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
-        fp.add(this.summaryMain, "cell 1 1, label");
-        fp.add(this.summarySide, "cell 1 2, label");
 
-        fp.add(this.cmdAccept, "cell 1 3, split 2, w 140, align c, h 26, pad 0 0 0 -20");
-        fp.add(this.cmdCancel, "w 120, h 26");
+        this.add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
+        this.add(this.summaryMain, "cell 1 1, label");
+        this.add(this.summarySide, "cell 1 2, label");
 
+        this.add(this.cmdAccept, "cell 1 3, split 2, w 150, align r, h 26");
+        this.add(this.cmdCancel, "w 150, h 26");
 
         this.cmdCancel.addActionListener(new ActionListener() {
             @Override
@@ -189,7 +179,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             }
         };
         this.dateTimeCheck.addActionListener(updateDateCheck);
-        
+
         ActionListener reparse = new ActionListener() {
             @Override public void actionPerformed(ActionEvent e) { parseAndDisplay(); }
         };
@@ -221,11 +211,11 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.tokens.clear();
         final ElementIterator it = new ElementIterator(this.txtInput.getDocument().getDefaultRootElement());
         Element e;
-        
+
         DeckRecognizer recognizer = new DeckRecognizer(newEditionCheck.isSelected(), Singletons.getMagicDb().getCommonCards());
         if(dateTimeCheck.isSelected())
             recognizer.setDateConstraint(monthDropdown.getSelectedIndex(), yearDropdown.getSelectedItem());
-        
+
         while ((e = it.next()) != null) {
             if (!e.isLeaf()) {
                 continue;
@@ -235,7 +225,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             try {
                 final String line = this.txtInput.getText(rangeStart, rangeEnd - rangeStart);
                 this.tokens.add(recognizer.recognizeLine(line));
-            } catch (final BadLocationException ex) {
+            }
+            catch (final BadLocationException ex) {
             }
         }
     }
@@ -269,10 +260,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 idx = 1;
             }
         }
-        this.summaryMain.setText(String.format("Main: %d cards recognized, %d unknown cards", cardsOk[0],
-                cardsUnknown[0]));
-        this.summarySide.setText(String.format("Sideboard: %d cards recognized, %d unknown cards", cardsOk[1],
-                cardsUnknown[1]));
+        this.summaryMain.setText(String.format("Main: %d cards recognized, %d unknown cards", cardsOk[0], cardsUnknown[0]));
+        this.summarySide.setText(String.format("Sideboard: %d cards recognized, %d unknown cards", cardsOk[1], cardsUnknown[1]));
         this.cmdAccept.setEnabled(cardsOk[0] > 0);
     }
 
@@ -290,7 +279,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             final PaperCard crd = t.getCard();
             if (isMain) {
                 result.getMain().add(crd, t.getNumber());
-            } else {
+            }
+            else {
                 result.getOrCreate(DeckSection.Sideboard).add(crd, t.getNumber());
             }
         }
@@ -302,7 +292,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         displayTokens();
         updateSummaries();
     }
-    
+
     /**
      * The Class OnChangeTextUpdate.
      */

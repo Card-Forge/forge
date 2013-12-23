@@ -17,6 +17,7 @@
  */
 package forge.gui.toolbox;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -35,6 +36,7 @@ import javax.swing.SwingConstants;
 
 import forge.Command;
 import forge.gui.framework.ILocalRepaint;
+import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 
 /** 
@@ -58,7 +60,8 @@ public class FPanel extends JPanel implements ILocalRepaint {
     private boolean foregroundStretch   = false;
     private Image   foregroundImage     = null;
     private Image   backgroundTexture   = null;
-    private FSkin.SkinColor   borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
+    private Color   backgroundTextureOverlay = null;
+    private SkinColor borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private boolean borderToggle        = true;
     private int     cornerDiameter      = 20;
     private int     foregroundAlign     = SwingConstants.CENTER;
@@ -214,6 +217,17 @@ public class FPanel extends JPanel implements ILocalRepaint {
         skin.setBackgroundTexture(skinImage);
     }
 
+    /** @param clr0 &emsp; {@link java.awt.Color} */
+    public void setBackgroundTextureOverlay(final Color color) {
+        skin.resetBackgroundTexture(); //must reset if non-skin color set
+        this.backgroundTextureOverlay = color;
+    }
+
+    /** @param clr0 &emsp; {@link forge.gui.toolbox.FSkin.SkinColor} */
+    public void setBackgroundTextureOverlay(final SkinColor skinColor) {
+        skin.setBackgroundTextureOverlay(skinColor);
+    }
+
     /** @param bool0 &emsp; boolean */
     public void setBorderToggle(final boolean bool0) {
         this.borderToggle = bool0;
@@ -297,6 +311,11 @@ public class FPanel extends JPanel implements ILocalRepaint {
             this.tempY = 0;
         }
         this.tempX = 0;
+
+        if (this.backgroundTextureOverlay != null) {
+            g2d0.setColor(this.backgroundTextureOverlay);
+            g2d0.fillRect(0, 0, this.pnlW, this.pnlH);
+        }
     }
 
     private void drawForegroundScaled(final Graphics2D g2d0) {

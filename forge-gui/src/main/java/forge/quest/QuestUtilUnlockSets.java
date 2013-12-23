@@ -201,7 +201,8 @@ public class QuestUtilUnlockSets {
 
         qData.getCards().addAllCards(cardsWon);
         final CardListViewer cardView = new CardListViewer(unlockedSet.getName(), "You get the following bonus cards:", cardsWon);
-        cardView.show();
+        cardView.setVisible(true);
+        cardView.dispose();
         qData.save();
     }
 }

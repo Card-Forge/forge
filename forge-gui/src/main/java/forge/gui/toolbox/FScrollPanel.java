@@ -403,7 +403,7 @@ public class FScrollPanel extends JScrollPane {
             }
         }
     }
-    
+
     //relay certain methods to the inner panel if it has been initialized
     @Override
     public Component add(Component comp) {

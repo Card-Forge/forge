@@ -12,6 +12,7 @@ public class FTitleBar extends FTitleBarBase {
     
     public FTitleBar(ITitleBarOwner owner0) {
         super(owner0);
+        skin.setMatteBorder(0, 0, 1, 0, bottomEdgeColor);
         owner0.setJMenuBar(this);
         setTitle(owner0.getTitle()); //set default title based on frame title
         setIconImage(owner0.getIconImage()); //set default icon image based on frame icon image
@@ -22,7 +23,7 @@ public class FTitleBar extends FTitleBarBase {
     @Override
     protected void addControls() {
         add(lblTitle);
-        layout.putConstraint(SpringLayout.WEST, lblTitle, 1, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.WEST, lblTitle, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.SOUTH, lblTitle, -5, SpringLayout.SOUTH, this);
         super.addControls();
     }

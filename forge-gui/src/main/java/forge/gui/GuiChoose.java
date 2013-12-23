@@ -21,7 +21,6 @@ import forge.Singletons;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.item.InventoryItem;
-import forge.view.FDialog;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -186,21 +185,18 @@ public class GuiChoose {
         
                 dual.setSideboardMode(sideboardingMode);
         
-                final FDialog dialog = new FDialog();
-                dialog.setTitle(title);
-                dialog.setContentPane(dual);
-                dialog.setSize(dual.getPreferredSize());
-                dialog.pack();
-                dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                dual.setTitle(title);
+                dual.pack();
+                dual.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 if (referenceCard != null) {
                     CMatchUI.SINGLETON_INSTANCE.setCard(referenceCard);
                     // MARKED FOR UPDATE
                 }
-                dialog.setVisible(true);
-        
+                dual.setVisible(true);
+
                 List<T> objects = dual.getOrderedList();
-        
-                dialog.dispose();
+
+                dual.dispose();
                 GuiUtils.clearPanelSelections();
                 return objects;
             }

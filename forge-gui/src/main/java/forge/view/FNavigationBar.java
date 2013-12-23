@@ -56,6 +56,7 @@ public class FNavigationBar extends FTitleBarBase {
 
     public FNavigationBar(FFrame f) {
         super(f);
+        skin.setMatteBorder(0, 0, 2, 0, bottomEdgeColor);
         this.setLocation(0, -visibleHeight); //hide by default
         this.setPreferredSize(new Dimension(this.owner.getWidth(), visibleHeight));
         btnForge.setFocusable(false);
