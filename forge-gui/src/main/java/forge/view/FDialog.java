@@ -55,11 +55,15 @@ public class FDialog extends JDialog implements ITitleBarOwner {
 
     @Override
     public void paint(Graphics g) {
-        //set rounded rectangle shape for dialog
         int width = this.getWidth();
         int height = this.getHeight();
-        int arc = cornerDiameter - 4; //leave room for border aliasing
-        this.setShape(new RoundRectangle2D.Float(0, 0, width, height, arc, arc));
+
+        //set rounded rectangle shape for dialog
+        try {
+            int arc = cornerDiameter - 4; //leave room for border aliasing
+            this.setShape(new RoundRectangle2D.Float(0, 0, width, height, arc, arc));
+        }
+        catch (Exception ex) {} //suppress exception from setShape not being supported on Mac
 
         super.paint(g);
 
