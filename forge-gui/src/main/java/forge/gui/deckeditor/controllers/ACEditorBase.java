@@ -17,6 +17,8 @@
  */
 package forge.gui.deckeditor.controllers;
 
+import java.util.Map.Entry;
+
 import javax.swing.SwingUtilities;
 
 import forge.Command;
@@ -31,6 +33,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
+import forge.util.ItemPool;
 import forge.view.FView;
 
 /**
@@ -60,7 +63,6 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
          */
         public void addMoveItems (String verb, String nounSingular, String nounPlural, String destination);
         public void addMoveAlternateItems (String verb, String nounSingular, String nounPlural, String destination);
-        public void addTextFilterItem ();
     }
 
     public boolean listenersHooked;
@@ -110,16 +112,55 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public FScreen getScreen() {
         return this.screen;
     }
-    
+
+    public final void addItem(TItem item) {
+        onAddItems(createPoolForItem(item, 1), false);
+    }
+    public final void addItem(TItem item, int qty) {
+        onAddItems(createPoolForItem(item, qty), false);
+    }
+    public final void addItem(TItem item, int qty, boolean toAlternate) {
+        onAddItems(createPoolForItem(item, qty), toAlternate);
+    }
+
+    public final void removeItem(TItem item) {
+        onRemoveItems(createPoolForItem(item, 1), false);
+    }
+    public final void removeItem(TItem item, int qty) {
+        onRemoveItems(createPoolForItem(item, qty), false);
+    }
+    public final void removeItem(TItem item, int qty, boolean toAlternate) {
+        onRemoveItems(createPoolForItem(item, qty), toAlternate);
+    }
+
+    @SuppressWarnings("unchecked")
+    private ItemPool<TItem> createPoolForItem(final TItem item, final int qty) {
+        if (item == null || qty <= 0) { return null; }
+
+        ItemPool<TItem> pool = new ItemPool<TItem>((Class<TItem>)item.getClass());
+        pool.add(item, qty);
+        return pool;
+    }
+
+    public final void addItems(Iterable<Entry<TItem, Integer>> items, boolean toAlternate) {
+        if (items == null || !items.iterator().hasNext()) { return; } //do nothing if no items
+        onAddItems(items, toAlternate);
+    }
+
+    public final void removeItems(Iterable<Entry<TItem, Integer>> items, boolean toAlternate) {
+        if (items == null || !items.iterator().hasNext()) { return; } //do nothing if no items
+        onRemoveItems(items, toAlternate);
+    }
+
     /** 
-     * Operation to add one of selected card to current deck.
+     * Operation to add selected items to current deck.
      */
-    public abstract void addCard(InventoryItem item, boolean toAlternate, int qty);
+    protected abstract void onAddItems(Iterable<Entry<TItem, Integer>> items, boolean toAlternate);
 
     /**
-     * Operation to remove one of selected card from current deck.
+     * Operation to remove selected item from current deck.
      */
-    public abstract void removeCard(InventoryItem item, boolean toAlternate, int qty);
+    protected abstract void onRemoveItems(Iterable<Entry<TItem, Integer>> items, boolean toAlternate);
 
     public abstract void buildAddContextMenu(ContextMenuBuilder cmb);
     public abstract void buildRemoveContextMenu(ContextMenuBuilder cmb);

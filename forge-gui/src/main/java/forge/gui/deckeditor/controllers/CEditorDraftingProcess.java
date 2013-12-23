@@ -17,6 +17,8 @@
  */
 package forge.gui.deckeditor.controllers;
 
+import java.util.Map.Entry;
+
 import javax.swing.JOptionPane;
 
 import forge.Singletons;
@@ -37,7 +39,6 @@ import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
-import forge.item.InventoryItem;
 import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
 import forge.util.ItemPoolView;
@@ -86,17 +87,14 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#addCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
-    public void addCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
-            return;
-        }
-
-        final PaperCard card = (PaperCard) item;
+    protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        if (toAlternate) { return; }
 
         // can only draft one at a time, regardless of the requested quantity
+        PaperCard card = items.iterator().next().getKey();
         this.getDeckManager().addItem(card, 1);
 
         // get next booster pack
@@ -104,23 +102,23 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         if (this.boosterDraft.hasNextChoice()) {
             this.showChoices(this.boosterDraft.nextChoice());
-        } else {
+        }
+        else {
             this.boosterDraft.finishedDrafting();
             this.saveDraft();
         }
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#removeCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onRemoveItems()
      */
     @Override
-    public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
+    protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
     }
 
     @Override
     public void buildAddContextMenu(ContextMenuBuilder cmb) {
         cmb.addMoveItems("Draft", "card", "cards", null);
-        cmb.addTextFilterItem();
     }
     
     @Override
@@ -141,7 +139,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("Select a card from pack number "
                 + (((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1) + ".");
         this.getCatalogManager().setPool(list);
-        this.getCatalogManager().getTable().fixSelection(0);
+        this.getCatalogManager().getTable().setSelectedIndex(0);
     } // showChoices()
 
     /**

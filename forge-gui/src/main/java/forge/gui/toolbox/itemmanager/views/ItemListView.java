@@ -162,33 +162,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         table.setColumnModel(colModel);
     }
 
-    /**
-     * 
-     * fixSelection. Call this after deleting an item from table.
-     * 
-     * @param rowLastSelected
-     *            an int
-     */
-    public void fixSelection(final int rowLastSelected) {
-        if (0 > rowLastSelected) {
-            return;
-        }
-
-        // 3 cases: 0 items left, select the same row, select prev row
-        int numRows = getCount();
-        if (numRows == 0) {
-            return;
-        }
-
-        int newRow = rowLastSelected;
-        if (numRows <= newRow) {
-            // move selection away from the last, already missing, option
-            newRow = numRows - 1;
-        }
-
-        setSelectedIndex(newRow);
-    }
-
     public JTable getTable() {
         return this.table;
     }
@@ -214,34 +187,44 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
-    public T getSelectedItem() {
-        final int iRow = this.table.getSelectedRow();
-        return iRow >= 0 ? this.tableModel.rowToItem(iRow).getKey() : null;
-    }
-
-    @Override
-    public int[] getSelectedIndices() {
-        return this.table.getSelectedRows();
-    }
-
-    @Override
-    public List<T> getSelectedItems() {
-        List<T> items = new ArrayList<T>();
-        for (int row : this.table.getSelectedRows()) {
-            items.add(tableModel.rowToItem(row).getKey());
+    public Iterable<Integer> getSelectedIndices() {
+        List<Integer> indices = new ArrayList<Integer>();
+        int[] selectedRows = this.table.getSelectedRows();
+        for (int i = 0; i < selectedRows.length; i++) {
+            indices.add(selectedRows[i]);
         }
-        return items;
+        return indices;
     }
 
     @Override
-    public void setSelectedIndex(int index) {
-        if (!(this.table.getParent() instanceof JViewport)) {
-            return;
-        }
-        JViewport viewport = (JViewport)this.table.getParent();
+    protected void onSetSelectedIndex(int index) {
+        int count = getCount();
+        if (count == 0) { return; }
 
+        if (index >= count) {
+            index = count - 1;
+        }
+        this.table.setRowSelectionInterval(index, index);
+    }
+
+    @Override
+    protected void onSetSelectedIndices(Iterable<Integer> indices) {
+        int count = getCount();
+        if (count == 0) { return; }
+
+        this.table.clearSelection();
+        for (Integer index : indices) {
+            if (index >= count) {
+                index = count - 1;
+            }
+            this.table.addRowSelectionInterval(index, index);
+        }
+    }
+
+    @Override
+    protected void onScrollSelectionIntoView(JViewport viewport) {
         // compute where we're going and where we are
-        Rectangle targetRect  = this.table.getCellRect(index, 0, true);
+        Rectangle targetRect  = this.table.getCellRect(this.getSelectedIndex(), 0, true);
         Rectangle curViewRect = viewport.getViewRect();
 
         // if the target cell is not visible, attempt to jump to a location where it is
@@ -256,7 +239,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         }
 
         this.table.scrollRectToVisible(targetRect);
-        this.table.setRowSelectionInterval(index, index);
     }
 
     @Override
@@ -277,6 +259,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     @Override
     public int getCount() {
         return this.table.getRowCount();
+    }
+
+    @Override
+    public int getSelectionCount() {
+        return this.table.getSelectedRowCount();
     }
 
     @Override

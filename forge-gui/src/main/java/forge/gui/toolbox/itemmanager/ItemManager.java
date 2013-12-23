@@ -56,6 +56,7 @@ import forge.gui.toolbox.itemmanager.filters.ItemFilter;
 import forge.gui.toolbox.itemmanager.views.ItemListView;
 import forge.gui.toolbox.itemmanager.views.ItemView;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.ItemPoolView;
@@ -255,6 +256,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
+     * getGenericType.
+     * 
+     * @return generic type of items
+     */
+    public Class<T> getGenericType() { 
+        return this.genericType;
+    }
+
+    /**
+     * 
      * getCaption.
      * 
      * @return caption to display before ratio
@@ -346,6 +357,26 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
+     * getItemCount.
+     * 
+     * @return int
+     */
+    public int getItemCount() {
+        return this.table.getCount();
+    }
+
+    /**
+     * 
+     * getSelectionCount.
+     * 
+     * @return int
+     */
+    public int getSelectionCount() {
+        return this.table.getSelectionCount();
+    }
+
+    /**
+     * 
      * getSelectedItem.
      * 
      * @return T
@@ -358,9 +389,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * getSelectedItems.
      * 
-     * @return List<T>
+     * @return Iterable<T>
      */
-    public List<T> getSelectedItems() {
+    public Iterable<T> getSelectedItems() {
         return this.table.getSelectedItems();
     }
 
@@ -376,6 +407,30 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
+     * setSelectedItems.
+     * 
+     * @param items - Items to select
+     */
+    public void setSelectedItems(Iterable<T> items) {
+        this.table.setSelectedItems(items);
+    }
+
+    /**
+     * 
+     * selectItemEntrys.
+     * 
+     * @param itemEntrys - Item entrys to select
+     */
+    public void selectItemEntrys(Iterable<Entry<T, Integer>> itemEntrys) {
+        List<T> items = new ArrayList<T>();
+        for (Entry<T, Integer> itemEntry : itemEntrys) {
+            items.add(itemEntry.getKey());
+        }
+        this.setSelectedItems(items);
+    }
+
+    /**
+     * 
      * getSelectedItem.
      * 
      * @return T
@@ -386,12 +441,32 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
-     * setSelectedItem.
+     * getSelectedItems.
      * 
-     * @param item - Item to select
+     * @return Iterable<Integer>
+     */
+    public Iterable<Integer> getSelectedIndices() {
+        return this.table.getSelectedIndices();
+    }
+
+    /**
+     * 
+     * setSelectedIndex.
+     * 
+     * @param index - Index to select
      */
     public void setSelectedIndex(int index) {
         this.table.setSelectedIndex(index);
+    }
+
+    /**
+     * 
+     * setSelectedIndices.
+     * 
+     * @param indices - Indices to select
+     */
+    public void setSelectedIndices(Iterable<Integer> indices) {
+        this.table.setSelectedIndices(indices);
     }
 
     /**
@@ -402,13 +477,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param qty
      */
     public void addItem(final T item, int qty) {
-        final int n = this.table.getSelectedIndex();
         this.pool.add(item, qty);
         if (this.isUnfiltered()) {
             this.model.addItem(item, qty);
         }
         this.updateView(false);
-        this.table.fixSelection(n);
+        this.table.setSelectedItem(item);
     }
 
     /**
@@ -417,14 +491,18 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @param itemsToAdd
      */
-    public void addItems(Iterable<Map.Entry<T, Integer>> itemsToAdd) {
-        final int n = this.table.getSelectedIndex();
+    public void addItems(Iterable<Entry<T, Integer>> itemsToAdd) {
         this.pool.addAll(itemsToAdd);
         if (this.isUnfiltered()) {
             this.model.addItems(itemsToAdd);
         }
         this.updateView(false);
-        this.table.fixSelection(n);
+
+        List<T> items = new ArrayList<T>();
+        for (Map.Entry<T, Integer> item : itemsToAdd) {
+            items.add(item.getKey());
+        }
+        this.table.setSelectedItems(items);
     }
 
     /**
@@ -435,13 +513,15 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param qty
      */
     public void removeItem(final T item, int qty) {
-        final int n = this.table.getSelectedIndex();
+        final int selectedIndexBefore = this.getSelectedIndex();
+        final Iterable<T> selectedItemsBefore = this.getSelectedItems();
+
         this.pool.remove(item, qty);
         if (this.isUnfiltered()) {
             this.model.removeItem(item, qty);
         }
         this.updateView(false);
-        this.table.fixSelection(n);
+        this.fixSelection(selectedIndexBefore, selectedItemsBefore);
     }
 
     /**
@@ -450,8 +530,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @param itemsToRemove
      */
-    public void removeItems(List<Map.Entry<T, Integer>> itemsToRemove) {
-        final int n = this.table.getSelectedIndex();
+    public void removeItems(Iterable<Map.Entry<T, Integer>> itemsToRemove) {
+        final int selectedIndexBefore = this.getSelectedIndex();
+        final Iterable<T> selectedItemsBefore = this.getSelectedItems();
+
         for (Map.Entry<T, Integer> item : itemsToRemove) {
             this.pool.remove(item.getKey(), item.getValue());
             if (this.isUnfiltered()) {
@@ -459,7 +541,29 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             }
         }
         this.updateView(false);
-        this.table.fixSelection(n);
+        this.fixSelection(selectedIndexBefore, selectedItemsBefore);
+    }
+
+    /**
+     * 
+     * fixSelection.
+     * 
+     * @param selectedIndexBefore
+     * @param selectedItemsBefore
+     */
+    private void fixSelection(int selectedIndexBefore, final Iterable<T> selectedItemsBefore) {
+        if (!this.table.setSelectedItems(selectedItemsBefore)) {
+            this.table.setSelectedIndex(selectedIndexBefore); //restore selected index if couldn't restore selected items
+        }
+    }
+
+    /**
+     * 
+     * scrollSelectionIntoView.
+     * 
+     */
+    public void scrollSelectionIntoView() {
+        this.table.scrollSelectionIntoView();
     }
 
     /**
@@ -635,7 +739,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                if (table.getCount() > 0 && table.getSelectedIndices().length == 0) {
+                if (table.getCount() > 0 && table.getSelectionCount() == 0) {
                     table.setSelectedIndex(0);
                 }
             }

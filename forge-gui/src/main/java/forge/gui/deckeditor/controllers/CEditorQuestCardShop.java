@@ -19,6 +19,7 @@ package forge.gui.deckeditor.controllers;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -289,82 +290,102 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     //=========== Overridden from ACEditorBase
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#addCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
-    public void addCard(InventoryItem item, boolean toAlternate, int qty) {
+    protected void onAddItems(Iterable<Entry<InventoryItem, Integer>> items, boolean toAlternate) {
         // disallow "buying" cards while showing the full catalog
-        if (item == null || showingFullCatalog || toAlternate) {
+        if (showingFullCatalog || toAlternate) {
             return;
         }
 
-        final int value = this.getCardValue(item);
+        ItemPool<InventoryItem> itemsToAdd = new ItemPool<InventoryItem>(InventoryItem.class);
+        List<Entry<InventoryItem, Integer>> itemsToRemove = new ArrayList<Entry<InventoryItem, Integer>>();
 
-        if (value > this.questData.getAssets().getCredits()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Not enough credits!");
-            return;
-        }
-        
-        if (item instanceof PaperCard) {
-            final PaperCard card = (PaperCard) item;
-            this.getDeckManager().addItem(card, qty);
-            this.questData.getCards().buyCard(card, qty, value);
+        for (Entry<InventoryItem, Integer> itemEntry : items) {
+            final InventoryItem item = itemEntry.getKey();
+            final int qty = itemEntry.getValue();
+            final int value = this.getCardValue(item);
 
-        } else if (item instanceof SealedProduct) {
-            for (int i = 0; qty > i; ++i) {
-                SealedProduct booster = null;
-                if (item instanceof BoosterPack) {
-                    booster = (BoosterPack) ((BoosterPack) item).clone();
-                } else if (item instanceof TournamentPack) {
-                    booster = (TournamentPack) ((TournamentPack) item).clone();
-                } else if (item instanceof FatPack) {
-                    booster = (FatPack) ((FatPack) item).clone();
+            if (value > this.questData.getAssets().getCredits()) {
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                        "Not enough credits to purchase " + (qty == 1 ? "" : qty + " copies of ") + item.getName() + ".");
+                continue;
+            }
+
+            if (item instanceof PaperCard) {
+                this.questData.getCards().buyCard((PaperCard) item, qty, value);
+                itemsToAdd.add(item, qty);
+            }
+            else if (item instanceof SealedProduct) {
+                for (int i = 0; i < qty; i++) {
+                    SealedProduct booster = null;
+                    if (item instanceof BoosterPack) {
+                        booster = (BoosterPack) ((BoosterPack) item).clone();
+                    }
+                    else if (item instanceof TournamentPack) {
+                        booster = (TournamentPack) ((TournamentPack) item).clone();
+                    }
+                    else if (item instanceof FatPack) {
+                        booster = (FatPack) ((FatPack) item).clone();
+                    }
+                    this.questData.getCards().buyPack(booster, value);
+                    final List<PaperCard> newCards = booster.getCards();
+
+                    itemsToAdd.addAllFlat(newCards);
+
+                    final CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", newCards);
+                    c.show();
                 }
-                this.questData.getCards().buyPack(booster, value);
-                final List<PaperCard> newCards = booster.getCards();
+            }
+            else if (item instanceof PreconDeck) {
+                final PreconDeck deck = (PreconDeck) item;
+                for (int i = 0; i < qty; i++) {
+                    this.questData.getCards().buyPreconDeck(deck, value);
+    
+                    itemsToAdd.addAll(deck.getDeck().getMain());
+                }
 
-                ItemPool<InventoryItem> newInventory = new ItemPool<InventoryItem>(InventoryItem.class);
-                newInventory.addAllFlat(newCards);
-                getDeckManager().addItems(newInventory);
-                final CardListViewer c = new CardListViewer(booster.getName(), "You have found the following cards inside:", newCards);
-                c.show();
+                boolean one = (qty == 1);
+                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), String.format(
+                        "%s '%s' %s added to your decklist.%n%n%s cards were also added to your pool.",
+                        one ? "Deck" : String.format("%d copies of deck", qty),
+                        deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),
+                        "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
             }
-        } else if (item instanceof PreconDeck) {
-            final PreconDeck deck = (PreconDeck) item;
-            this.questData.getCards().buyPreconDeck(deck, value);
-            final ItemPool<InventoryItem> newInventory =
-                    ItemPool.createFrom(deck.getDeck().getMain(), InventoryItem.class);
-            for (int i = 0; qty > i; ++i) {
-                getDeckManager().addItems(newInventory);
+            else {
+                continue; //don't remove item from Catalog if any other type
             }
-            boolean one = 1 == qty;
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), String.format(
-                    "%s '%s' %s added to your decklist.%n%n%s cards were also added to your pool.",
-                    one ? "Deck" : String.format("%d copies of deck", qty),
-                    deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),
-                    "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
-        } else return;
-        this.getCatalogManager().removeItem(item, qty);
+            itemsToRemove.add(itemEntry);
+        }
+
+        if (itemsToRemove.isEmpty()) { return; }
+
+        this.getDeckManager().addItems(itemsToAdd);
+        this.getCatalogManager().removeItems(itemsToRemove);
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#removeCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onRemoveItems()
      */
     @Override
-    public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof PaperCard) || showingFullCatalog || toAlternate) {
-            return;
+    protected void onRemoveItems(Iterable<Entry<InventoryItem, Integer>> items, boolean toAlternate) {
+        if (showingFullCatalog || toAlternate) { return; }
+
+        this.getCatalogManager().addItems(items);
+        this.getDeckManager().removeItems(items);
+
+        for (Entry<InventoryItem, Integer> itemEntry : items) {
+            final InventoryItem item = itemEntry.getKey();
+            if (item instanceof PaperCard) {
+                final PaperCard card = (PaperCard) item;
+                final int qty = itemEntry.getValue();
+                final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards().getSellPriceLimit());
+                this.questData.getCards().sellCard(card, qty, price);
+            }
         }
-
-        final PaperCard card = (PaperCard) item;
-        this.getCatalogManager().addItem(card, qty);
-        this.getDeckManager().removeItem(card, qty);
-
-        final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards()
-                .getSellPriceLimit());
-        this.questData.getCards().sellCard(card, qty, price);
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
@@ -374,7 +395,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         if (!showingFullCatalog) {
             cmb.addMoveItems("Buy", "item", "items", null);
         }
-        cmb.addTextFilterItem();
     }
     
     @Override
@@ -384,7 +404,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
     }
 
-    public void removeCards(List<Map.Entry<InventoryItem, Integer>> cardsToRemove) {
+    public void removeCards(List<Entry<InventoryItem, Integer>> cardsToRemove) {
         if (showingFullCatalog) {
             return;
         }
@@ -392,7 +412,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getCatalogManager().addItems(cardsToRemove);
         this.getDeckManager().removeItems(cardsToRemove);
 
-        for (Map.Entry<InventoryItem, Integer> item : cardsToRemove) {
+        for (Entry<InventoryItem, Integer> item : cardsToRemove) {
             if (!(item.getKey() instanceof PaperCard)) {
                 continue;
             }
@@ -499,8 +519,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getBtnRemove4().setCommand(new Command() {
             @Override
             public void run() {
-                List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
-                for (Map.Entry<InventoryItem, Integer> item : getDeckManager().getPool()) {
+                List<Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
+                for (Entry<InventoryItem, Integer> item : getDeckManager().getPool()) {
                     PaperCard card = (PaperCard)item.getKey();
                     int numToKeep = card.getRules().getType().isBasic() ? 50 : 4;
                     if ("Relentless Rats".equals(card.getName())) {

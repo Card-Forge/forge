@@ -18,6 +18,7 @@
 package forge.gui.deckeditor.controllers;
 
 import java.util.List;
+import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
@@ -83,37 +84,32 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
     //=========== Overridden from ACEditorBase
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#addCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
-    public void addCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
-            return;
-        }
+    protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        if (toAlternate) { return; }
 
-        final PaperCard card = (PaperCard) item;
-        this.getDeckManager().addItem(card, qty);
+        this.getDeckManager().addItems(items);
+        this.getCatalogManager().selectItemEntrys(items); //just select all added cards in Catalog
         this.controller.notifyModelChanged();
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#removeCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onRemoveItems()
      */
     @Override
-    public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
-            return;
-        }
+    protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        if (toAlternate) { return; }
 
-        final PaperCard card = (PaperCard) item;
-        this.getDeckManager().removeItem(card, qty);
+        this.getDeckManager().removeItems(items);
+        this.getCatalogManager().selectItemEntrys(items); //just select all removed cards in Catalog
         this.controller.notifyModelChanged();
     }
 
     @Override
     public void buildAddContextMenu(ContextMenuBuilder cmb) {
         cmb.addMoveItems("Move", "card", "cards", "to deck");
-        cmb.addTextFilterItem();
     }
     
     @Override

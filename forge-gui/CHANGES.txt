@@ -19,6 +19,8 @@ The Total stat label has been removed in favor of showing a caption and (# SHOWN
 Checkboxes are now available for each filter type, allowing that filter to be disabled and re-enabled without losing the configuration of that filter (such as chosen sets)
 Adding a filter for formats, sets, and quest worlds now merges into existing filters of that type if possible to apply OR logic, rather than both appearing as separate filters with AND logic applied, likely resulting in no results
 Pressing Ctrl+Enter to add a filter for the current search now adds another editable search bar rather than just a label.
+Cards added to deck are now selected, even if multiple are added at once. The performance of adding and removing multiple cards at once has also been improved.
+When some but not all copies of a selected card are removed from the deck, that card now remains selected in the case of multiple cards being selected.
 
 
 - Constructed mode -

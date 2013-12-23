@@ -19,7 +19,7 @@ package forge.gui.deckeditor.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
@@ -104,54 +104,55 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     //=========== Overridden from ACEditorBase
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#addCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
-    public void addCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof PaperCard)) {
-            return;
-        }
-
+    protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
         if (sectionMode == DeckSection.Avatar) {
-            for(Map.Entry<PaperCard, Integer> cp : getDeckManager().getPool()) {
-                getDeckManager().removeItem(cp.getKey(), cp.getValue());
-            }
+            getDeckManager().removeItems(getDeckManager().getPool());
         }
 
-        final PaperCard card = (PaperCard) item;
         if (toAlternate) {
             if (sectionMode != DeckSection.Sideboard) {
-                controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
+                controller.getModel().getOrCreate(DeckSection.Sideboard).addAll(items);
             }
-        } else {
-            getDeckManager().addItem(card, qty);
         }
-        // if not in sideboard mode, "remove" 0 cards in order to re-show the selected card
-        this.getCatalogManager().removeItem(card, sectionMode == DeckSection.Sideboard ? qty : 0);
-        
+        else {
+            getDeckManager().addItems(items);
+        }
+        if (sectionMode == DeckSection.Sideboard) {
+            this.getCatalogManager().removeItems(items);
+        }
+        else { //if not in sideboard mode, just select all added cards in Catalog
+            List<PaperCard> cards = new ArrayList<PaperCard>();
+            for (Entry<PaperCard, Integer> itemEntry : items) {
+                cards.add(itemEntry.getKey());
+            }
+            this.getCatalogManager().setSelectedItems(cards);
+        }
         this.controller.notifyModelChanged();
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#removeCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onRemoveItems()
      */
     @Override
-    public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof PaperCard)) {
-            return;
-        }
-
-        final PaperCard card = (PaperCard) item;
+    protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
         if (toAlternate) {
             if (sectionMode != DeckSection.Sideboard) {
-                controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
-            } else {
+                controller.getModel().getOrCreate(DeckSection.Sideboard).addAll(items);
+            }
+            else {
                 // "added" to library, but library will be recalculated when it is shown again
             }
-        } else if (sectionMode == DeckSection.Sideboard) {
-            this.getCatalogManager().addItem(card, qty);
         }
-        this.getDeckManager().removeItem(card, qty);
+        else if (sectionMode == DeckSection.Sideboard) {
+            this.getCatalogManager().addItems(items);
+        }
+        else { //if not in sideboard mode, just select all removed cards in Catalog
+            this.getCatalogManager().selectItemEntrys(items);
+        }
+        this.getDeckManager().removeItems(items);
         this.controller.notifyModelChanged();
     }
 
@@ -159,7 +160,6 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     public void buildAddContextMenu(ContextMenuBuilder cmb) {
         cmb.addMoveItems(sectionMode == DeckSection.Sideboard ? "Move" : "Add", "card", "cards", sectionMode == DeckSection.Sideboard ? "to sideboard" : "to deck");
         cmb.addMoveAlternateItems(sectionMode == DeckSection.Sideboard ? "Remove" : "Add", "card", "cards", sectionMode == DeckSection.Sideboard ? "from deck" : "to sideboard");
-        cmb.addTextFilterItem();
     }
     
     @Override

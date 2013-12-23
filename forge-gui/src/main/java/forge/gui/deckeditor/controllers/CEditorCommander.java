@@ -20,7 +20,7 @@ package forge.gui.deckeditor.controllers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
@@ -101,51 +101,53 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
     //=========== Overridden from ACEditorBase
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#addCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
-    public void addCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
-            return;
-        }
+    protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        if (toAlternate) { return; }
+
         List<String> limitExceptions = Arrays.asList(new String[]{"Relentless Rats", "Shadowborn Apostle"});
         
-        if((controller.getModel().getMain().contains((PaperCard)item)
-                || controller.getModel().getOrCreate(DeckSection.Sideboard).contains((PaperCard)item)
-                || controller.getModel().getOrCreate(DeckSection.Commander).contains((PaperCard)item))
-                && !(((PaperCard)item).getRules().getType().isBasic() || limitExceptions.contains(item.getName()))) {
-            return;
+        List<Entry<PaperCard, Integer>> itemList = new ArrayList<Entry<PaperCard, Integer>>();
+        
+        for (Entry<PaperCard, Integer> item : items) {
+            PaperCard card = item.getKey();
+            if ((controller.getModel().getMain().contains(card)
+                    || controller.getModel().getOrCreate(DeckSection.Sideboard).contains(card)
+                    || controller.getModel().getOrCreate(DeckSection.Commander).contains(card))
+                    && !(card.getRules().getType().isBasic() || limitExceptions.contains(card.getName()))) {
+                continue;
+            }
+            itemList.add(item);
         }
+
+        if (itemList.isEmpty()) { return; }
 
         if (sectionMode == DeckSection.Commander) {
-            for(Map.Entry<PaperCard, Integer> cp : getDeckManager().getPool()) {
-                getDeckManager().removeItem(cp.getKey(), cp.getValue());
-            }
+            this.getDeckManager().removeItems(getDeckManager().getPool());
         }
 
-        final PaperCard card = (PaperCard) item;
-        this.getDeckManager().addItem(card, qty);
+        this.getDeckManager().addItems(itemList);
+        this.getCatalogManager().selectItemEntrys(itemList); //just select all removed cards in Catalog
         this.controller.notifyModelChanged();
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#removeCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onRemoveItems()
      */
     @Override
-    public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
-            return;
-        }
+    protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        if (toAlternate) { return; }
 
-        final PaperCard card = (PaperCard) item;
-        this.getDeckManager().removeItem(card, qty);
+        this.getDeckManager().removeItems(items);
+        this.getCatalogManager().selectItemEntrys(items); //just select all removed cards in Catalog
         this.controller.notifyModelChanged();
     }
 
     @Override
     public void buildAddContextMenu(ContextMenuBuilder cmb) {
         cmb.addMoveItems("Move", "card", "cards", "to deck");
-        cmb.addTextFilterItem();
     }
     
     @Override

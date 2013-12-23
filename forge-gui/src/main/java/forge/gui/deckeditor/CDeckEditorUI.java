@@ -30,6 +30,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
@@ -44,8 +45,6 @@ import javax.swing.event.ListSelectionListener;
 
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.primitives.Ints;
 
 import forge.Command;
 import forge.Singletons;
@@ -70,6 +69,7 @@ import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
 import forge.gui.toolbox.itemmanager.views.ItemListView;
 import forge.item.InventoryItem;
+import forge.util.ItemPool;
 
 /**
  * Constructs instance of deck editor UI controller, used as a single point of
@@ -131,75 +131,76 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             setCurrentEditorController(childController0);
         }
     }
-    
-    private interface _MoveAction {
-        void move(InventoryItem item, int qty);
-    }
 
     @SuppressWarnings("unchecked")
-    public void incrementDeckQuantity(InventoryItem item, int delta) {
+    public <T extends InventoryItem> void incrementDeckQuantity(T item, int delta) {
         if (item == null || delta == 0) { return; }
 
         if (delta > 0) { //add items
-            int qty = Math.min(delta, ((ItemManager<InventoryItem>)childController.getCatalogManager()).getItemCount(item));
+            int qty = Math.min(delta, ((ItemManager<T>)childController.getCatalogManager()).getItemCount(item));
             if (qty == 0) { return; }
-            childController.addCard(item, false, qty);
+            ((ACEditorBase<T, ?>)childController).addItem(item, qty, false);
         }
         else { //remove items
-            int qty = Math.min(-delta, ((ItemManager<InventoryItem>)childController.getDeckManager()).getItemCount(item));
+            int qty = Math.min(-delta, ((ItemManager<T>)childController.getDeckManager()).getItemCount(item));
             if (qty == 0) { return; }
-            childController.removeCard(item, false, qty);
+            ((ACEditorBase<T, ?>)childController).removeItem(item, qty, false);
         }
 
         CStatistics.SINGLETON_INSTANCE.update();
         CProbabilities.SINGLETON_INSTANCE.update();
     }
 
-    private void moveSelectedCards(ItemManager<InventoryItem> itemManager, _MoveAction moveAction, int maxQty) {
-        List<? extends InventoryItem> items = itemManager.getSelectedItems();
-        if (items.isEmpty()) {
-            return;
-        }
-        
-        for (InventoryItem item : items) {
-            int toMove = Math.min(maxQty, itemManager.getItemCount(item));
-            moveAction.move(item, toMove);
+    private interface _MoveAction {
+        public <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items);
+    }
+
+    private <T extends InventoryItem> void moveSelectedItems(ItemManager<T> itemManager, _MoveAction moveAction, int maxQty) {
+        if (maxQty == 0) { return; }
+
+        ItemPool<T> items = new ItemPool<T>(itemManager.getGenericType());
+        for (T item : itemManager.getSelectedItems()) {
+            int qty = Math.min(maxQty, itemManager.getItemCount(item));
+            if (qty > 0) {
+                items.add(item, qty);
+            }
         }
 
+        if (items.isEmpty()) { return; }
+
+        moveAction.move(items);
         CStatistics.SINGLETON_INSTANCE.update();
         CProbabilities.SINGLETON_INSTANCE.update();
     }
 
     @SuppressWarnings("unchecked")
     public void addSelectedCards(final boolean toAlternate, int number) {
-        moveSelectedCards((ItemManager<InventoryItem>)childController.getCatalogManager(),
-                new _MoveAction() {
+        moveSelectedItems(childController.getCatalogManager(), new _MoveAction() {
             @Override
-            public void move(InventoryItem item, int qty) {
-                childController.addCard(item, toAlternate, qty);
+            public <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items) {
+                ((ACEditorBase<T, ?>)childController).addItems(items, toAlternate);
             }
         }, number);
     }
 
     @SuppressWarnings("unchecked")
     public void removeSelectedCards(final boolean toAlternate, int number) {
-        moveSelectedCards((ItemManager<InventoryItem>)childController.getDeckManager(),
-                new _MoveAction() {
+        moveSelectedItems(childController.getDeckManager(), new _MoveAction() {
             @Override
-            public void move(InventoryItem item, int qty) {
-                childController.removeCard(item, toAlternate, qty);
+            public <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items) {
+                ((ACEditorBase<T, ?>)childController).removeItems(items, toAlternate);
             }
         }, number);
     }
 
     @SuppressWarnings("unchecked")
     public void removeAllCards(final boolean toAlternate) {
-        ItemManager<InventoryItem> v = (ItemManager<InventoryItem>)childController.getDeckManager();
+        ItemManager<?> v = childController.getDeckManager();
         v.getTable().selectAll();
-        moveSelectedCards(v, new _MoveAction() {
+        moveSelectedItems(v, new _MoveAction() {
             @Override
-            public void move(InventoryItem item, int qty) {
-                childController.removeCard(item, toAlternate, qty);
+            public <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items) {
+                ((ACEditorBase<T, ?>)childController).removeItems(items, toAlternate);
             }
         }, Integer.MAX_VALUE);
     }
@@ -210,32 +211,33 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     }
     
     private class _ContextMenuBuilder implements ACEditorBase.ContextMenuBuilder {
-        private final MouseEvent _e;
-        private final ItemListView<?>     _nextTable;
-        private final _MoveCard  _onMove;
-        private final int        _numSelected;
-        private final JPopupMenu _menu = new JPopupMenu("TableContextMenu");
-        private boolean          _showTextFilterItem = false;
+        private final MouseEvent  _e;
+        private final ItemManager<?> _itemManager;
+        private final ItemManager<?> _nextItemManager;
+        private final _MoveCard   _onMove;
+        private final JPopupMenu  _menu = new JPopupMenu("ItemViewContextMenu");
         
-        public _ContextMenuBuilder(MouseEvent e, ItemListView<?> table, ItemListView<?> nextTable, _MoveCard onMove) {
+        public _ContextMenuBuilder(MouseEvent e, ItemManager<?> itemManager, ItemManager<?> nextItemManager, _MoveCard onMove) {
             _e         = e;
-            _nextTable = nextTable;
+            _itemManager = itemManager;
+            _nextItemManager = nextItemManager;
             _onMove    = onMove;
-            
-            // ensure the table has focus
-            if (!table.hasFocus()) {
-                table.focus();
+
+            //ensure the item manager has focus
+            itemManager.focus();
+
+            //if item under the cursor is not selected, select it
+            int index = itemManager.getTable().getIndexAtPoint(e.getPoint());
+            boolean needSelection = true;
+            for (Integer selectedIndex : itemManager.getSelectedIndices()) {
+                if (selectedIndex == index) {
+                    needSelection = false;
+                    break;
+                }
             }
-            
-            // if item under the cursor is not selected, select it
-            int index = table.getIndexAtPoint(e.getPoint());
-            int[] selectedIndices = table.getSelectedIndices();
-            if (!Ints.contains(selectedIndices, index)) {
-                table.setSelectedIndex(index);
+            if (needSelection) {
+                itemManager.setSelectedIndex(index);
             }
-            
-            // record selection count
-            _numSelected = selectedIndices.length;
         }
         
         private void show() {
@@ -243,31 +245,29 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
             
             GuiUtils.addMenuItem(_menu, "Jump to previous table",
                     KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), new Runnable() {
-                @Override public void run() { _nextTable.focus(); }
+                @Override public void run() { _nextItemManager.focus(); }
             });
             GuiUtils.addMenuItem(_menu, "Jump to next table",
                     KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), new Runnable() {
-                @Override public void run() { _nextTable.focus(); }
+                @Override public void run() { _nextItemManager.focus(); }
             });
-            
-            if (_showTextFilterItem) {
-                GuiUtils.addMenuItem(_menu, "Jump to text filter",
-                        KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                        new Runnable() {
-                    @Override public void run() {
-                        VCardCatalog.SINGLETON_INSTANCE.getItemManager().focusSearch();
-                    }
-                });
-            }
+            GuiUtils.addMenuItem(_menu, "Jump to text filter",
+                    KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                    new Runnable() {
+                @Override public void run() {
+                    _itemManager.focusSearch();
+                }
+            });
 
             _menu.show(_e.getComponent(), _e.getX(), _e.getY());
         }
 
         private String _doNoun(String nounSingular, String nounPlural) {
-            if (1 == _numSelected) {
+            int numSelected = _itemManager.getSelectionCount();
+            if (1 == numSelected) {
                 return nounSingular;
             }
-            return String.format("%d %s", _numSelected, nounPlural);
+            return String.format("%d %s", numSelected, nounPlural);
         }
         
         private String _doDest(String destination) {
@@ -314,11 +314,6 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                         @Override public void run() { _onMove.moveCard(true, 4); }
                     });
         }
-        
-        @Override
-        public void addTextFilterItem() {
-            _showTextFilterItem = true;
-        }
     }
     
     /**
@@ -343,12 +338,15 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                 public void keyPressed(KeyEvent e) {
                     if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
                         addSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
-                    } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
+                    }
+                    else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
                         deckTable.focus();
-                    } else if (KeyEvent.VK_F == e.getKeyCode()) {
+                        e.consume(); //prevent losing selection
+                    }
+                    else if (KeyEvent.VK_F == e.getKeyCode()) {
                         // let ctrl/cmd-F set focus to the text filter box
                         if (e.isControlDown() || e.isMetaDown()) {
-                            VCardCatalog.SINGLETON_INSTANCE.getItemManager().focusSearch();
+                            catView.focusSearch();
                         }
                     }
                 }
@@ -359,8 +357,16 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
                 public void keyPressed(KeyEvent e) {
                     if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
                         removeSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
-                    } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
+                    }
+                    else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
                         catTable.focus();
+                        e.consume(); //prevent losing selection
+                    }
+                    else if (KeyEvent.VK_F == e.getKeyCode()) {
+                        // let ctrl/cmd-F set focus to the text filter box
+                        if (e.isControlDown() || e.isMetaDown()) {
+                            deckView.focusSearch();
+                        }
                     }
                 }
             });
@@ -387,7 +393,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
 
                 @Override
                 public void onRightClick(MouseEvent e) {
-                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, catTable, deckTable, onAdd);
+                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, catView, deckView, onAdd);
                     childController.buildAddContextMenu(cmb);
                     cmb.show();
                 }
@@ -402,7 +408,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
 
                 @Override
                 public void onRightClick(MouseEvent e) {
-                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, deckTable, catTable, onRemove);
+                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, deckView, catView, onRemove);
                     childController.buildRemoveContextMenu(cmb);
                     cmb.show();
                 }

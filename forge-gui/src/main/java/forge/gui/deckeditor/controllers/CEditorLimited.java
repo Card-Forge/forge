@@ -17,6 +17,8 @@
  */
 package forge.gui.deckeditor.controllers;
 
+import java.util.Map.Entry;
+
 import com.google.common.base.Supplier;
 
 import forge.deck.Deck;
@@ -35,7 +37,6 @@ import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
-import forge.item.InventoryItem;
 import forge.util.storage.IStorage;
 
 /**
@@ -91,41 +92,34 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     //========== Overridden from ACEditorBase
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#addCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
-    public void addCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
-            return;
-        }
+    protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        if (toAlternate) { return; }
 
         // update view
-        final PaperCard card = (PaperCard) item;
-        this.getDeckManager().addItem(card, qty);
-        this.getCatalogManager().removeItem(card, qty);
+        this.getDeckManager().addItems(items);
+        this.getCatalogManager().removeItems(items);
         this.getDeckController().notifyModelChanged();
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.deckeditor.ACEditorBase#removeCard()
+     * @see forge.gui.deckeditor.ACEditorBase#onRemoveItems()
      */
     @Override
-    public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
-        if ((item == null) || !(item instanceof PaperCard) || toAlternate) {
-            return;
-        }
+    protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        if (toAlternate) { return; }
 
         // update view
-        final PaperCard card = (PaperCard) item;
-        this.getCatalogManager().addItem(card, qty);
-        this.getDeckManager().removeItem(card, qty);
+        this.getCatalogManager().addItems(items);
+        this.getDeckManager().removeItems(items);
         this.getDeckController().notifyModelChanged();
     }
 
     @Override
     public void buildAddContextMenu(ContextMenuBuilder cmb) {
         cmb.addMoveItems("Move", "card", "cards", "to deck");
-        cmb.addTextFilterItem();
     }
     
     @Override
