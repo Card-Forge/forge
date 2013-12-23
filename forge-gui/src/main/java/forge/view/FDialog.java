@@ -4,14 +4,18 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.PopupMenu;
 import java.awt.RenderingHints;
+import java.awt.GraphicsDevice.WindowTranslucency;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.RoundRectangle2D;
+
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -25,6 +29,13 @@ import forge.gui.toolbox.FSkin;
 public class FDialog extends JDialog implements ITitleBarOwner {
     private static final FSkin.SkinColor borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private static final int cornerDiameter = 20;
+    private static final boolean isSetShapeSupported;
+
+    static {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        isSetShapeSupported = gd.isWindowTranslucencySupported(WindowTranslucency.PERPIXEL_TRANSLUCENT);
+    }
     
     private FSkin.WindowSkin<FDialog> skin = FSkin.get(this);
     private Point locBeforeMove;
@@ -58,12 +69,11 @@ public class FDialog extends JDialog implements ITitleBarOwner {
         int width = this.getWidth();
         int height = this.getHeight();
 
-        //set rounded rectangle shape for dialog
-        try {
+        //set rounded rectangle shape for dialog if possible
+        if (isSetShapeSupported) {
             int arc = cornerDiameter - 4; //leave room for border aliasing
             this.setShape(new RoundRectangle2D.Float(0, 0, width, height, arc, arc));
         }
-        catch (Exception ex) {} //suppress exception from setShape not being supported on Mac
 
         super.paint(g);
 
