@@ -7,15 +7,20 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.PopupMenu;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.GraphicsDevice.WindowTranslucency;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JDialog;
@@ -28,7 +33,7 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 
 @SuppressWarnings("serial")
-public class FDialog extends JDialog implements ITitleBarOwner {
+public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatcher {
     private static final FSkin.SkinColor borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private static final int cornerDiameter = 20;
     private static final boolean isSetShapeSupported;
@@ -76,6 +81,19 @@ public class FDialog extends JDialog implements ITitleBarOwner {
         }
     }
 
+    //Make Escape key close dialog if allowed
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent e) {
+        if (e.getID() == KeyEvent.KEY_PRESSED) {
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+                Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -105,12 +123,16 @@ public class FDialog extends JDialog implements ITitleBarOwner {
 
         if (visible) {
             setLocationRelativeTo(JOptionPane.getRootFrame());
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this); //support handling keyboard shortcuts in dialog
             if (isModal()) {
                 SOverlayUtils.showOverlay();
             }
         }
-        else if (isModal()) {
-            SOverlayUtils.hideOverlay();
+        else {
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(this);
+            if (isModal()) {
+                SOverlayUtils.hideOverlay();
+            }
         }
         super.setVisible(visible);
     }
