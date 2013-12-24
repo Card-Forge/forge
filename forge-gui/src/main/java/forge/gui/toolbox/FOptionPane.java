@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -56,11 +58,13 @@ public class FOptionPane extends FDialog {
         FontMetrics metrics = JOptionPane.getRootFrame().getGraphics().getFontMetrics(btnMeasure.getFont());
 
         int maxTextWidth = 0;
+        final FButton[] buttons = new FButton[optionCount];
         for (int i = 0; i < optionCount; i++) {
             int textWidth = metrics.stringWidth(options[i]);
             if (textWidth > maxTextWidth) {
                 maxTextWidth = textWidth;
             }
+            buttons[i] = new FButton(options[i]);
         }
 
         this.pack(); //resize dialog to fit component and title to help determine button layout
@@ -71,6 +75,7 @@ public class FOptionPane extends FDialog {
         int buttonWidth = Math.max(maxTextWidth + btnMeasure.getMargin().left + btnMeasure.getMargin().right, 120); //account for margins and enfore minimum width
         int dx = buttonWidth + gapBetween;
         int totalButtonWidth = dx * optionCount - gapBetween;
+        final int lastOption = optionCount - 1;
 
         //add buttons
         x = (width - totalButtonWidth) / 2;
@@ -80,12 +85,39 @@ public class FOptionPane extends FDialog {
         }
         for (int i = 0; i < optionCount; i++) {
             final int option = i;
-            final FButton btn = new FButton(options[i]);
+            final FButton btn = buttons[i];
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent arg0) {
                     FOptionPane.this.result = option;
                     FOptionPane.this.setVisible(false);
+                }
+            });
+            btn.addKeyListener(new KeyAdapter() { //hook certain keys to move focus between buttons
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    switch (e.getKeyCode()) {
+                    case KeyEvent.VK_LEFT:
+                        if (option > 0) {
+                            buttons[option - 1].requestFocusInWindow();
+                        }
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        if (option < lastOption) {
+                            buttons[option + 1].requestFocusInWindow();
+                        }
+                        break;
+                    case KeyEvent.VK_HOME:
+                        if (option > 0) {
+                            buttons[0].requestFocusInWindow();
+                        }
+                        break;
+                    case KeyEvent.VK_END:
+                        if (option < lastOption) {
+                            buttons[lastOption].requestFocusInWindow();
+                        }
+                        break;
+                    }
                 }
             });
             if (option == defaultOption) {
