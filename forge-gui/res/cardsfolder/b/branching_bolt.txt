@@ -1,10 +1,9 @@
 Name:Branching Bolt
 ManaCost:1 R G
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 3 | SpellDescription$ Choose one - CARDNAME deals 3 damage to target creature with flying;
-A:SP$ DealDamage | Cost$ 1 R G | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying. | NumDmg$ 3 | SpellDescription$ or CARDNAME deals 3 damage to target creature without flying;
-A:SP$ DealDamage | Cost$ 1 R G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 3 | SubAbility$ DBDamage | SpellDescription$ or CARDNAME deals 3 damage to target creature with flying and 3 damage to target creature without flying.
-SVar:DBDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying. | NumDmg$ 3
+A:SP$ Charm | Cost$ 1 R G | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBDmg1,DBDmg2 | SpellDescription$ Choose one or both - CARDNAME deals 3 damage to target creature with flying; and/or CARDNAME deals 3 damage to target creature without flying.
+SVar:DBDmg1:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature with flying;
+SVar:DBDmg2:DB$ DealDamage | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying. | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature without flying;
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/branching_bolt.jpg
 Oracle:Choose one or both - Branching Bolt deals 3 damage to target creature with flying; and/or Branching Bolt deals 3 damage to target creature without flying.
