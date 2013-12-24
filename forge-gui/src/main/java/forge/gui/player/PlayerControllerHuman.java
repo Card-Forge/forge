@@ -68,6 +68,7 @@ import forge.gui.input.InputProliferate;
 import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.input.InputConfirm;
+import forge.gui.input.InputSelectEntitiesFromList;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CPrompt;
 import forge.gui.toolbox.FSkin;
@@ -334,7 +335,7 @@ public class PlayerControllerHuman extends PlayerController {
         // If only one card to choose, use a dialog box.
         // Otherwise, use the order dialog to be able to grab multiple cards in one shot
         if (max == 1) {
-            Card singleChosen = chooseSingleCardForEffect(sourceList, sa, title, isOptional);
+            Card singleChosen = chooseSingleEntityForEffect(sourceList, sa, title, isOptional);
             return singleChosen == null ?  Lists.<Card>newArrayList() : Lists.newArrayList(singleChosen);
         }
         GuiUtils.setPanelSelection(sa.getSourceCard());
@@ -362,7 +363,7 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> options, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
         // Human is supposed to read the message and understand from it what to choose
         if (options.isEmpty()) {
             return null;
@@ -372,8 +373,10 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         boolean canUseSelectCardsInput = true;
-        for (Card c : options) {
-            Zone cz = c.getZone();
+        for (GameEntity c : options) {
+            if (c instanceof Player) 
+                continue;
+            Zone cz = ((Card)c).getZone(); 
             // can point at cards in own hand and anyone's battlefield
             boolean canUiPointAtCards = cz != null && (cz.is(ZoneType.Hand) && cz.getPlayer() == player || cz.is(ZoneType.Battlefield));
             if (!canUiPointAtCards) {
@@ -383,7 +386,7 @@ public class PlayerControllerHuman extends PlayerController {
         }
 
         if (canUseSelectCardsInput) {
-            InputSelectCardsFromList input = new InputSelectCardsFromList(isOptional ? 0 : 1, 1, options);
+            InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(isOptional ? 0 : 1, 1, options);
             input.setCancelAllowed(isOptional);
             input.setMessage(title);
             input.showAndWait();
@@ -400,12 +403,6 @@ public class PlayerControllerHuman extends PlayerController {
             choices[i] = Integer.valueOf(i + min);
         }
         return GuiChoose.one(title, choices).intValue();
-    }
-
-    @Override
-    public Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title) {
-        // Human is supposed to read the message and understand from it what to choose
-        return options.size() < 2 ? options.get(0) : GuiChoose.one(title, options);
     }
 
     @Override

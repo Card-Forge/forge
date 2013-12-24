@@ -132,7 +132,7 @@ public class PlayEffect extends SpellAbilityEffect {
         }
 
         for (int i = 0; i < amount; i++) {
-            Card tgtCard = controller.getController().chooseSingleCardForEffect(tgtCards, sa, "Select a card to play");
+            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, "Select a card to play");
             if (tgtCard == null) {
                 return;
             }

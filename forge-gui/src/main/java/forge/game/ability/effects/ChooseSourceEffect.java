@@ -140,7 +140,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                     final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a source ";
                     Card o = null;
                     do {
-                        o = p.getController().chooseSingleCardForEffect(sourcesToChooseFrom, sa, choiceTitle);
+                        o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle);
                     } while (o.equals(divPermanentSources) || o.equals(divStackSources) || o.equals(divReferencedSources) || o.equals(divCommandZoneSources));
                     chosen.add(o);
                     sourcesToChooseFrom.remove(o);

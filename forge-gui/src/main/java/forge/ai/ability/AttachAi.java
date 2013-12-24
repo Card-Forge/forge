@@ -1234,12 +1234,12 @@ public class AttachAi extends SpellAbilityAi {
     }
     
     @Override
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
         return attachToCardAIPreferences(ai, sa, true);
     }
     
     @Override
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, List<Player> options) {
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
         return attachToPlayerAIPreferences(ai, sa, true);
     }
 }

@@ -125,7 +125,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     if (random) {
                         p = Aggregates.random(game.getPlayers());
                     } else {
-                        p = sa.getActivatingPlayer().getController().chooseSinglePlayerForEffect(game.getPlayers(), sa, "Choose a player");
+                        p = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(game.getPlayers(), sa, "Choose a player");
                     }
                     if (recordMap.containsKey(p)) {
                         recordMap.get(p).add(0, card);

@@ -128,10 +128,10 @@ public abstract class PlayerController {
 
     // Q: why is there min/max and optional at once? A: This is to handle cases like 'choose 3 to 5 cards or none at all'  
     public abstract List<Card> chooseCardsForEffect(List<Card> sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional);
-    public final Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false, null); }
-    public final Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title, boolean isOptional) { return chooseSingleCardForEffect(sourceList, sa, title, isOptional, null); } 
-    public abstract Card chooseSingleCardForEffect(Collection<Card> sourceList, SpellAbility sa, String title, boolean isOptional, Player relatedPlayer);
-    public abstract Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title);
+    
+    public final <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> sourceList, SpellAbility sa, String title) { return chooseSingleEntityForEffect(sourceList, sa, title, false, null); }
+    public final <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> sourceList, SpellAbility sa, String title, boolean isOptional) { return chooseSingleEntityForEffect(sourceList, sa, title, isOptional, null); } 
+    public abstract <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> sourceList, SpellAbility sa, String title, boolean isOptional, Player relatedPlayer);
     public abstract SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title);
 
     public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message);

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
+import forge.game.GameEntity;
 import forge.game.ability.SaTargetRoutines;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
@@ -144,18 +145,31 @@ public abstract class SpellAbilityAi extends SaTargetRoutines {
         return true;
     }
 
-    public Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
-        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleCard is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
-        return Iterables.getFirst(options, null);
+    @SuppressWarnings("unchecked")
+    public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer) {
+        T firstOption = Iterables.getFirst(options, null);
+        
+        if( firstOption instanceof Card)
+            return (T) chooseSingleCard(ai, sa, (Collection<Card>) options, isOptional, targetedPlayer);
+        else if ( firstOption instanceof Player)
+            return (T) chooseSinglePlayer(ai, sa, (Collection<Player>) options);
+        else
+            return null;
     }
     
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, List<Player> options) {
-        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayer is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
-        return options.get(0);
-    }
-
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleSpellAbility is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return spells.get(0);
+    }
+
+    protected Card chooseSingleCard(Player ai, SpellAbility sa, Collection<Card> options, boolean isOptional, Player targetedPlayer) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleEntity is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+        return Iterables.getFirst(options, null);
+
+    }
+    
+    protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleEntity is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+        return Iterables.getFirst(options, null);
     }
 }

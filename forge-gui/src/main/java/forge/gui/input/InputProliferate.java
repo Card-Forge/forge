@@ -67,7 +67,7 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
     }
 
     @Override
-    public void selectPlayer(final Player player) {
+    protected final void onPlayerSelected(Player player, final MouseEvent triggerEvent) {
         if (!selectEntity(player)) {
             return;
         }

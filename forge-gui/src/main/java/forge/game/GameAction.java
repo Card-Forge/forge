@@ -1156,7 +1156,7 @@ public class GameAction {
 
             recheck = true;
 
-            Card toKeep = p.getController().chooseSingleCardForEffect(duplicates, new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple planeswalkers of type \""+key+"\"in play.\n\nChoose one to stay on battlefield (the rest will be moved to graveyard)");
+            Card toKeep = p.getController().chooseSingleEntityForEffect(duplicates, new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple planeswalkers of type \""+key+"\"in play.\n\nChoose one to stay on battlefield (the rest will be moved to graveyard)");
             for (Card c: duplicates) {
                 if (c != toKeep) {
                     moveToGraveyard(c);
@@ -1197,7 +1197,7 @@ public class GameAction {
 
             recheck = true;
 
-            Card toKeep = p.getController().chooseSingleCardForEffect(cc, new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)");
+            Card toKeep = p.getController().chooseSingleEntityForEffect(cc, new AbilitySub(ApiType.InternalLegendaryRule, null, null, null), "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)");
             for (Card c: cc) {
                 if (c != toKeep) {
                     sacrificeDestroy(c);

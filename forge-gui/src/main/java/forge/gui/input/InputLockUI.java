@@ -67,7 +67,7 @@ public class InputLockUI implements Input  {
 
     @Override public void selectCard(Card c, MouseEvent triggerEvent) {}
     @Override public void selectAbility(SpellAbility ab) {}
-    @Override public void selectPlayer(Player player) {}
+    @Override public void selectPlayer(Player player, MouseEvent triggerEvent) {}
     @Override public void selectButtonOK() {}
     @Override public void selectButtonCancel() {}
 

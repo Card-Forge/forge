@@ -983,7 +983,7 @@ public class AiController {
                 
             default:
                 for (int i = 0; i < max; i++) {
-                    Card c = player.getController().chooseSingleCardForEffect(pool, sa, null, isOptional);
+                    Card c = player.getController().chooseSingleEntityForEffect(pool, sa, null, isOptional);
                     if (c != null) {
                         result.add(c);
                         pool.remove(c);

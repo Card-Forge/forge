@@ -1439,10 +1439,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List)
      */
     @Override
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, List<Player> options) {
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
         // Currently only used by Curse of Misfortunes, so this branch should never get hit
         // But just in case it does, just select the first option
-        return options.get(0);
+        return Iterables.getFirst(options, null);
     }
     
 }

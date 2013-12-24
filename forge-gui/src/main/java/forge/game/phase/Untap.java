@@ -189,20 +189,20 @@ public class Untap extends Phase {
             final List<Card> landList = CardLists.filter(player.getLandsInPlay(), tappedCanUntap);
             
             if (!landList.isEmpty()) {
-                Card toUntap = player.getController().chooseSingleCardForEffect(landList, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped land to untap");
+                Card toUntap = player.getController().chooseSingleEntityForEffect(landList, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped land to untap");
                 if ( toUntap != null )
                     toUntap.untap();
             }
         }
         if (player.hasKeyword("You can't untap more than one artifact during your untap step.")) {
             final List<Card> artList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS, tappedCanUntap);
-            Card toUntap = player.getController().chooseSingleCardForEffect(artList, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped artifact to untap");
+            Card toUntap = player.getController().chooseSingleEntityForEffect(artList, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped artifact to untap");
             if ( toUntap != null )
                 toUntap.untap();
         }
         if (player.hasKeyword("You can't untap more than one creature during your untap step.")) {
             final List<Card> creatures = CardLists.filter(player.getCreaturesInPlay(), tappedCanUntap);
-            Card toUntap = player.getController().chooseSingleCardForEffect(creatures, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped creature to untap");
+            Card toUntap = player.getController().chooseSingleEntityForEffect(creatures, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped creature to untap");
             if ( toUntap != null )
                 toUntap.untap();
         }

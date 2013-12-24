@@ -8,7 +8,7 @@ import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
-public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase implements InputSelectMany<T> {
+public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase {
     private static final long serialVersionUID = -2305549394512889450L;
 
     protected final List<T> selected;
@@ -68,14 +68,12 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         afterStop();
     }
 
-    @Override
     public final boolean hasCancelled() {
         return bCancelled;
     }
 
-    @Override
     public final List<T> getSelected() {
-        return selected;
+        return (List<T>) selected;
     }
 
     @Override
@@ -89,13 +87,14 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     }
 
     // must define these
-    protected abstract boolean isValidChoice(T choice);
+    protected abstract boolean isValidChoice(GameEntity choice);
 
     // might re-define later
     protected boolean hasEnoughTargets() { return selected.size() >= min; }
     protected boolean hasAllTargets() { return selected.size() >= max; }
 
-    protected boolean selectEntity(T c) {
+    @SuppressWarnings("unchecked")
+    protected boolean selectEntity(GameEntity c) {
         if (!isValidChoice(c)) {
             return false;
         }
@@ -110,20 +109,20 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
             }
         }
         else {
-            this.selected.add(c);
+            this.selected.add((T)c);
             onSelectStateChanged(c, true);
         }
         return true;
     }
 
-    protected void onSelectStateChanged(T c, boolean newState) {
+    protected void onSelectStateChanged(GameEntity c, boolean newState) {
         if (c instanceof Card) {
             CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card)c, newState); // UI supports card highlighting though this abstraction-breaking mechanism
         }
     }
 
     protected void afterStop() {
-        for (T c : selected) {
+        for (GameEntity c : selected) {
             if (c instanceof Card) {
                 CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card)c, false);
             }

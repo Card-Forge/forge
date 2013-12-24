@@ -158,7 +158,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     } // selectCard()
 
     @Override
-    public void selectPlayer(final Player player) {
+    protected final void onPlayerSelected(Player player, final MouseEvent triggerEvent) {
         if (!tgt.isUniqueTargets() && targetDepth.containsKey(player)) {
             return;
         }

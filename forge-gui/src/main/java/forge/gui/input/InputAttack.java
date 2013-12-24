@@ -111,7 +111,7 @@ public class InputAttack extends InputSyncronizedBase {
     }
 
     @Override
-    public void selectPlayer(Player selected) {
+    protected final void onPlayerSelected(Player selected, final MouseEvent triggerEvent) {
         if(defenders.contains(selected))
             setCurrentDefender(selected);
         else

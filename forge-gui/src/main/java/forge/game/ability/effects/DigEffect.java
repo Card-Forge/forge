@@ -186,7 +186,7 @@ public class DigEffect extends SpellAbilityEffect {
                             prompt = "Leave which card on top of the ";
                         }
                         
-                        Card chosen = choser.getController().chooseSingleCardForEffect(valid, sa, prompt + destZone2, false, p);
+                        Card chosen = choser.getController().chooseSingleEntityForEffect(valid, sa, prompt + destZone2, false, p);
                         movedCards.remove(chosen);
                         if (sa.hasParam("RandomOrder")) {
                             final Random random = MyRandom.getRandom();
@@ -211,7 +211,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 Card chosen = null;
 
                                 
-                                chosen = choser.getController().chooseSingleCardForEffect(valid, sa, prompt, anyNumber || optional);
+                                chosen = choser.getController().chooseSingleEntityForEffect(valid, sa, prompt, anyNumber || optional);
                                 if ((chosen == null) || chosen.getName().equals("[No valid cards]")) {
                                     break;
                                 }

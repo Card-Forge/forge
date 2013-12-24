@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
@@ -88,7 +89,7 @@ public class CharmAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List)
      */
     @Override
-    public Player chooseSinglePlayer(Player ai, SpellAbility sa, List<Player> opponents) {
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> opponents) {
         return Aggregates.random(opponents);
     }
     

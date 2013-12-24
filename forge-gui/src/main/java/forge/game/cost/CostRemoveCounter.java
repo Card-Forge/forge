@@ -24,6 +24,7 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -64,9 +65,9 @@ public class CostRemoveCounter extends CostPartWithList {
         }
 
         @Override
-        protected boolean selectEntity(Card c) {
-            if (!isValidChoice(c)) {
-                return false;
+        protected void onCardSelected(Card c, java.awt.event.MouseEvent triggerEvent) {
+            if (!isValidChoice(c) || c.getCounters(counterType) <= getTimesSelected(c)) {
+                return;
             }
 
             int tc = getTimesSelected(c);
@@ -76,8 +77,8 @@ public class CostRemoveCounter extends CostPartWithList {
                 cardsChosen.put(c, tc+1);
 
             onSelectStateChanged(c, true);
-            return true;
-        }
+            refresh();
+        };
 
         @Override
         protected boolean hasEnoughTargets() {
@@ -105,8 +106,8 @@ public class CostRemoveCounter extends CostPartWithList {
         }
 
         @Override
-        protected final boolean isValidChoice(Card choice) {
-            return validChoices.contains(choice) && choice.getCounters(counterType) > getTimesSelected(choice);
+        protected final boolean isValidChoice(GameEntity choice) {
+            return validChoices.contains(choice);
         }
 
         public int getTimesSelected(Card c) {

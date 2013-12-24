@@ -463,7 +463,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), tgtC.getController(), tgtC);
                         }
                         if (!list.isEmpty()) {
-                            Card attachedTo = player.getController().chooseSingleCardForEffect(list, sa, tgtC + " - Select a card to attach to.");
+                            Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, tgtC + " - Select a card to attach to.");
                             if (tgtC.isAura()) {
                                 if (tgtC.isEnchanting()) {
                                     // If this Card is already Enchanting something, need
@@ -761,7 +761,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (mustChoose && fetchList.size() == 1) {
                     c = fetchList.get(0);
                 } else {
-                    c = decider.getController().chooseSingleCardForEffect(fetchList, sa, selectPrompt, !mustChoose);
+                    c = decider.getController().chooseSingleEntityForEffect(fetchList, sa, selectPrompt, !mustChoose);
                 }
             }
 
@@ -798,7 +798,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (!list.isEmpty()) {
                             Card attachedTo = null;
                             if (list.size() > 1) {
-                                attachedTo = decider.getController().chooseSingleCardForEffect(list, sa, c + " - Select a card to attach to.");
+                                attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a card to attach to.");
                             } else {
                                 attachedTo = list.get(0);
                             }
@@ -833,7 +833,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("AttachedToPlayer")) {
                         List<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
                         if (!list.isEmpty()) {
-                            Player attachedTo = player.getController().chooseSinglePlayerForEffect(list, sa, c + " - Select a player to attach to.");
+                            Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a player to attach to.");
                             if (c.isAura()) {
                                 if (c.isEnchanting()) {
                                     // If this Card is already Enchanting something, need

@@ -19,7 +19,7 @@ public interface Input {
     
     void selectAbility(SpellAbility ab);
 
-    void selectPlayer(Player player);
+    void selectPlayer(Player player, MouseEvent triggerEven);
 
     void selectButtonOK();
 

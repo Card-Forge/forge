@@ -2,6 +2,7 @@ package forge.gui.input;
 
 import java.util.Collection;
 
+import forge.game.GameEntity;
 import forge.game.card.Card;
 
 public class InputSelectCardsFromList extends InputSelectCards {
@@ -18,7 +19,7 @@ public class InputSelectCardsFromList extends InputSelectCards {
     }
     
     @Override
-    protected final boolean isValidChoice(Card choice) {
+    protected final boolean isValidChoice(GameEntity choice) {
         return validChoices.contains(choice);
     }
     

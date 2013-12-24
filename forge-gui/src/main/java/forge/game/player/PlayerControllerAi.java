@@ -132,21 +132,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Card chooseSingleCardForEffect(Collection<Card> options, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
+    public <T extends GameEntity> T chooseSingleEntityForEffect(Collection<T> options, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer) {
         ApiType api = sa.getApi();
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        return api.getAi().chooseSingleCard(player, sa, options, isOptional, targetedPlayer);
-    }
-
-    @Override
-    public Player chooseSinglePlayerForEffect(List<Player> options, SpellAbility sa, String title) {
-        ApiType api = sa.getApi();
-        if (null == api) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        return api.getAi().chooseSinglePlayer(player, sa, options);
+        return api.getAi().chooseSingleEntity(player, sa, options, isOptional, targetedPlayer);
     }
 
     @Override

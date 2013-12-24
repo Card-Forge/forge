@@ -211,7 +211,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                             list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), copy.getController(), copy);
                         }
                         if (!list.isEmpty()) {
-                            Card attachedTo = sa.getActivatingPlayer().getController().chooseSingleCardForEffect(list, sa, copy + " - Select a card to attach to.");
+                            Card attachedTo = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(list, sa, copy + " - Select a card to attach to.");
                             if (copy.isAura()) {
                                 if (attachedTo.canBeEnchantedBy(copy)) {
                                     copy.enchantEntity(attachedTo);

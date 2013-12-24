@@ -55,7 +55,7 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
         if (object1 == null || !object1.isInZone(zone1) || list.isEmpty() || !object1.isType(type)) {
             return;
         }
-        Card object2 = p.getController().chooseSingleCardForEffect(list, sa, "Choose a card");
+        Card object2 = p.getController().chooseSingleEntityForEffect(list, sa, "Choose a card");
         if (object2 == null || !object2.isInZone(zone2) || !object2.isType(type)) {
             return;
         }

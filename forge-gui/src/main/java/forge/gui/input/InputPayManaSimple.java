@@ -17,6 +17,8 @@
  */
 package forge.gui.input;
 
+import java.awt.event.MouseEvent;
+
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -57,8 +59,8 @@ public class InputPayManaSimple extends InputPayMana {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectPlayer(final Player selectedPlayer) {
-        if (player == selectedPlayer) {
+    protected final void onPlayerSelected(Player selected, final MouseEvent triggerEvent) {
+        if (player == selected) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
             }

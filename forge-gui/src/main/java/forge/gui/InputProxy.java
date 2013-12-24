@@ -102,10 +102,10 @@ public class InputProxy implements Observer {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    public final void selectPlayer(final Player player) {
+    public final void selectPlayer(final Player player, final MouseEvent triggerEvent) {
         Input inp = getInput();
         if ( null != inp )
-            inp.selectPlayer(player);
+            inp.selectPlayer(player, triggerEvent);
     }
 
     /**

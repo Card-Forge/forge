@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.ai.ComputerUtilCard;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -73,13 +74,11 @@ public class CostPutCounter extends CostPartWithList {
             return sum;
         }
 
-
         @Override
-        protected boolean selectEntity(Card c) {
-            if (!isValidChoice(c)) {
-                return false;
-            }
-
+        protected void onCardSelected(Card c, java.awt.event.MouseEvent triggerEvent) {
+            if(!isValidChoice(c))
+                return;
+            
             int tc = getTimesSelected(c);
             if( tc == 0)
                 selected.add(c);
@@ -87,8 +86,8 @@ public class CostPutCounter extends CostPartWithList {
                 cardsChosen.put(c, tc+1);
             
             onSelectStateChanged(c, true);
-            return true;
-        }
+            refresh();
+        };
 
         @Override
         protected boolean hasEnoughTargets() {
@@ -102,7 +101,7 @@ public class CostPutCounter extends CostPartWithList {
         }
 
         @Override
-        protected final boolean isValidChoice(Card choice) {
+        protected final boolean isValidChoice(GameEntity choice) {
             return validChoices.contains(choice);
         }
 

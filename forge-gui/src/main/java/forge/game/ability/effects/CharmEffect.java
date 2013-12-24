@@ -55,7 +55,7 @@ public class CharmEffect extends SpellAbilityEffect {
             
             //String choosers = sa.getParam("Chooser"); 
             List<Player> opponents = activator.getOpponents(); // all cards have Choser$ Opponent, so it's hardcoded here
-            chooser = activator.getController().chooseSinglePlayerForEffect(opponents, sa, "Choose an opponent");
+            chooser = activator.getController().chooseSingleEntityForEffect(opponents, sa, "Choose an opponent");
             source.setChosenPlayer(chooser);
         }
         

@@ -53,7 +53,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
     protected abstract void showMessage();
 
     @Override
-    public void selectPlayer(final Player player) { }
+    public final void selectPlayer(final Player player, final MouseEvent triggerEvent) {
+        if (isFinished()) { return; }
+        onPlayerSelected(player, triggerEvent);
+    }
 
     @Override
     public void selectAbility(SpellAbility ab) { }
@@ -77,6 +80,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
     }
 
     protected void onCardSelected(final Card c, final MouseEvent triggerEvent) {}
+    protected void onPlayerSelected(final Player p, final MouseEvent triggerEvent) {}
     protected void onCancel() {}
     protected void onOk() {}
 

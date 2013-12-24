@@ -15366,7 +15366,7 @@ forge-gui/src/main/java/forge/gui/input/InputPlaybackControl.java -text
 forge-gui/src/main/java/forge/gui/input/InputProliferate.java -text
 forge-gui/src/main/java/forge/gui/input/InputSelectCards.java -text
 forge-gui/src/main/java/forge/gui/input/InputSelectCardsFromList.java -text
-forge-gui/src/main/java/forge/gui/input/InputSelectMany.java -text
+forge-gui/src/main/java/forge/gui/input/InputSelectEntitiesFromList.java -text
 forge-gui/src/main/java/forge/gui/input/InputSelectManyBase.java -text
 forge-gui/src/main/java/forge/gui/input/InputSelectTargets.java -text
 forge-gui/src/main/java/forge/gui/input/InputSynchronized.java -text

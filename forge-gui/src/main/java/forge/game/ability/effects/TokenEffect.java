@@ -34,7 +34,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
-import forge.gui.GuiChoose;
 import forge.item.PaperToken;
 
 public class TokenEffect extends SpellAbilityEffect {
@@ -286,12 +285,7 @@ public class TokenEffect extends SpellAbilityEffect {
                     if (this.tokenAttacking && game.getPhaseHandler().inCombat()) {
                         Combat combat = game.getPhaseHandler().getCombat();
                         final List<GameEntity> defs = combat.getDefenders();
-                        final GameEntity defender;
-                        if (c.getController().isHuman()) {
-                            defender = defs.size() == 1 ? defs.get(0) : GuiChoose.one("Declare " + c, defs);
-                        } else {
-                            defender = defs.get(0);
-                        }
+                        final GameEntity defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
                         combat.addAttacker(c, defender);
                     }
                     if (remember) {

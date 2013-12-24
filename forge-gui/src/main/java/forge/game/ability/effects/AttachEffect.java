@@ -197,7 +197,7 @@ public class AttachEffect extends SpellAbilityEffect {
                     players.add(player);
                 }
             }
-            final Player pa = p.getController().chooseSinglePlayerForEffect(players, aura, source + " - Select a player to attach to.");
+            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura, source + " - Select a player to attach to.");
             if (pa != null) {
                 handleAura(source, pa);
                 return true;
@@ -209,7 +209,7 @@ public class AttachEffect extends SpellAbilityEffect {
                 return false;
             }
 
-            final Card o = p.getController().chooseSingleCardForEffect(list, aura, source + " - Select a card to attach to.");
+            final Card o = p.getController().chooseSingleEntityForEffect(list, aura, source + " - Select a card to attach to.");
             if (o != null) {
                 handleAura(source, (Card) o);
                 //source.enchantEntity((Card) o);

@@ -352,7 +352,7 @@ public class CardFactoryUtil {
                     return;
                 }
 
-                final Card c1 = sourceCard.getController().getController().chooseSingleCardForEffect(sameCost, this, "Select a card", true);
+                final Card c1 = sourceCard.getController().getController().chooseSingleEntityForEffect(sameCost, this, "Select a card", true);
                 if (c1 != null) {
                     // ability.setTargetCard((Card)o);
 
