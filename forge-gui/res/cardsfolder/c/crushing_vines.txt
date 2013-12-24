@@ -1,7 +1,8 @@
 Name:Crushing Vines
 ManaCost:2 G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target flying creature. | PrecostDesc$ Choose one - | SpellDescription$ Destroy target creature with flying,
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$  or destroy target artifact.
+A:SP$ Charm | Cost$ 2 G | Choices$ DBDestroy,DBDestroy2 | SpellDescription$ Choose one - Destroy target creature with flying; or destroy target artifact.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target flying creature. | SpellDescription$ Destroy target creature with flying,
+SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crushing_vines.jpg
 Oracle:Choose one - Destroy target creature with flying; or destroy target artifact.
