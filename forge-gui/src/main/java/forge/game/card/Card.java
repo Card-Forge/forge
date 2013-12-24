@@ -2434,6 +2434,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Buyback")) {
                 final Cost cost = new Cost(keyword.substring(8), false);
                 sb.append("Buyback " + cost.toSimpleString() + "\r\n");
+            } else if (keyword.startsWith("Entwine")) {
+                final Cost cost = new Cost(keyword.substring(8), false);
+                sb.append("Entwine " + cost.toSimpleString() + "\r\n");
             } else if (keyword.startsWith("Kicker")) {
                 final Cost cost = new Cost(keyword.substring(7), false);
                 sb.append("Kicker " + cost.toSimpleString() + "\r\n");

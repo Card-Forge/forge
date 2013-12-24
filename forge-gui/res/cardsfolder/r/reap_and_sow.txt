@@ -1,9 +1,9 @@
 Name:Reap and Sow
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 G | ValidTgts$ Land | TgtPrompt$ Select target land | PrecostDesc$ Choose one - | SpellDescription$ Destroy target land;
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ or search your library for a land card, put that card onto the battlefield, then shuffle your library.
-A:SP$ Destroy | Cost$ 4 G G | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBChange | PrecostDesc$ Entwine | CostDesc$ {1}{G} | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
-SVar:DBChange:DB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1
+K:Entwine 1 G
+A:SP$ Charm | Cost$ 3 G | Choices$ DBDestroyLand,DBChange | CharmNum$ 1 | SpellDescription$ Choose one - Destroy target land; or search your library for a land card, put that card onto the battlefield, then shuffle your library.
+SVar:DBDestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land;
+SVar:DBChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ Search your library for a land card, put that card onto the battlefield, then shuffle your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reap_and_sow.jpg
 Oracle:Choose one - Destroy target land; or search your library for a land card, put that card onto the battlefield, then shuffle your library.\nEntwine {1}{G} (Choose both if you pay the entwine cost.)

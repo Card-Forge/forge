@@ -1715,4 +1715,5 @@ public abstract class SpellAbility extends GameObject implements ISpellAbility {
         }
         return false;
     }
+
 }

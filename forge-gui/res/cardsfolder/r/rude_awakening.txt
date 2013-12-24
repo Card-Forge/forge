@@ -1,10 +1,10 @@
 Name:Rude Awakening
 ManaCost:4 G
 Types:Sorcery
-A:SP$ UntapAll | Cost$ 4 G | ValidCards$ Land.YouCtrl | PrecostDesc$ Choose one - | SpellDescription$ Untap all lands you control;
-A:SP$ AnimateAll | Cost$ 4 G | ValidCards$ Land.YouCtrl | Power$ 2 | Toughness$ 2 | Types$ Creature | SpellDescription$ or until end of turn, lands you control become 2/2 creatures that are still lands.
-A:SP$ UntapAll | Cost$ 6 G G | ValidCards$ Land.YouCtrl | PrecostDesc$ Entwine | CostDesc$ {2}{G} | SubAbility$ DBAnimate | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
-SVar:DBAnimate:DB$AnimateAll | ValidCards$ Land.YouCtrl | Power$ 2 | Toughness$ 2 | Types$ Creature
+K:Entwine 2 G
+A:SP$ Charm | Cost$ 4 G | Choices$ DBUntap,DBAnimate | CharmNum$ 1 | SpellDescription$ Choose one -  Untap all lands you control; or until end of turn, lands you control become 2/2 creatures that are still lands.
+SVar:DBUntap:DB$ UntapAll | ValidCards$ Land.YouCtrl | SpellDescription$ Untap all lands you control;
+SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Land.YouCtrl | Power$ 2 | Toughness$ 2 | Types$ Creature | SpellDescription$ Until end of turn, lands you control become 2/2 creatures that are still lands.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rude_awakening.jpg
 Oracle:Choose one - Untap all lands you control; or until end of turn, lands you control become 2/2 creatures that are still lands.\nEntwine {2}{G} (Choose both if you pay the entwine cost.)

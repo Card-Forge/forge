@@ -1,10 +1,10 @@
 Name:Temporal Cascade
 ManaCost:5 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 5 U U |  ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | PrecostDesc$ Choose one - | SpellDescription$ Each player shuffles his or her hand and graveyard into his or her library;
-A:SP$ Draw | Cost$ 5 U U | NumCards$ 7 | Defined$ Each | SpellDescription$ or each player draws seven cards.
-A:SP$ ChangeZoneAll | Cost$ 7 U U |  ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True  | UseAllOriginZones$ True | SubAbility$ CascadeDraw | PrecostDesc$ Entwine | CostDesc$ {2} | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
-SVar:CascadeDraw:DB$ Draw | NumCards$ 7 | Defined$ Each
+K:Entwine 2
+A:SP$ Charm | Cost$ 5 U U | Choices$ DBChangeZone,DBDraw | CharmNum$ 1 | SpellDescription$ Choose one - Each player shuffles his or her hand and graveyard into his or her library; or each player draws seven cards.
+SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | SpellDescription$ Each player shuffles his or her hand and graveyard into his or her library;
+SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Each | SpellDescription$ Each player draws seven cards.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_cascade.jpg
 Oracle:Choose one - Each player shuffles his or her hand and graveyard into his or her library; or each player draws seven cards.\nEntwine {2} (Choose both if you pay the entwine cost.)

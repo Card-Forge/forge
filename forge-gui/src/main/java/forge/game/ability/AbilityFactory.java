@@ -366,4 +366,31 @@ public final class AbilityFactory {
         return left;
     }
 
+    public static final SpellAbility buildEntwineAbility(final SpellAbility sa) {
+    	final Card source = sa.getSourceCard();
+        final String[] saChoices = sa.getParam("Choices").split(",");
+        if (sa.getApi() != ApiType.Charm || saChoices.length != 2) 
+            throw new IllegalStateException("Entwine ability may be built only on charm cards");
+        final String ab = source.getSVar(saChoices[0]);
+    	Map<String, String> firstMap = getMapParams(ab);
+        AbilityRecordType firstType = AbilityRecordType.getRecordType(firstMap);
+        ApiType firstApi = firstType.getApiTypeOf(firstMap);
+        firstMap.put("StackDecription", firstMap.get("SpellDescription"));
+        firstMap.put("SpellDescription", sa.getDescription() + " Entwine (Choose both if you pay the entwine cost.)");
+        SpellAbility entwineSA = getAbility(AbilityRecordType.Spell, firstApi, firstMap, new Cost(sa.getPayCosts().toSimpleString(), false), source);
+
+        final String ab2 = source.getSVar(saChoices[1]);
+    	Map<String, String> secondMap = getMapParams(ab2);
+        ApiType secondApi = firstType.getApiTypeOf(secondMap);
+        secondMap.put("StackDecription", secondMap.get("SpellDescription"));
+        secondMap.put("SpellDescription", "");
+        AbilitySub sub =  (AbilitySub) getAbility(AbilityRecordType.SubAbility, secondApi, secondMap, null, source);
+        entwineSA.appendSubAbility(sub);
+
+        entwineSA.setBasicSpell(false);
+        entwineSA.setActivatingPlayer(sa.getActivatingPlayer());
+        entwineSA.setRestrictions(sa.getRestrictions());
+		return entwineSA;
+    }
+
 } // end class AbilityFactory

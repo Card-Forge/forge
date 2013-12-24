@@ -34,6 +34,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
+import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -405,6 +406,17 @@ public final class GameActionUtil {
                     newSA.addOptionalCost(OptionalCost.Buyback);
                     if (newSA.canPlay()) {
                         abilities.add(i, newSA);
+                        i++;
+                    }
+                }
+            } else if (keyword.startsWith("Entwine")) {
+                for (int i = 0; i < abilities.size(); i++) {
+                	final SpellAbility newSA = abilities.get(i).copy();
+            		SpellAbility entwine = AbilityFactory.buildEntwineAbility(newSA);
+            		entwine.setPayCosts(new Cost(keyword.substring(8), false).add(newSA.getPayCosts()));
+            		entwine.addOptionalCost(OptionalCost.Entwine);
+                	if (newSA.canPlay()) {
+                        abilities.add(i, entwine);
                         i++;
                     }
                 }

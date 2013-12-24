@@ -61,7 +61,7 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
         int maxTextWidth = buttonWidth - 8; //account for padding
 
         for (FLabel btn : buttons) {
-            if (!btn.getText().isEmpty()) {
+            if (btn.getText() != null && !btn.getText().isEmpty()) {
                 int max = maxTextWidth;
                 Icon icon = btn.getIcon();
                 if (icon != null) {

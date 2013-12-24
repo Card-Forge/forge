@@ -13,6 +13,7 @@ import forge.card.mana.ManaCost;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
@@ -49,7 +50,9 @@ import forge.game.cost.CostTapType;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.HumanPlaySpellAbility;
+import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -97,15 +100,18 @@ public class HumanPlay {
 
         source.setSplitStateToPlayAbility(sa);
 
-        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            CharmEffect.makeChoices(sa);
-        }
-
         sa = chooseOptionalAdditionalCosts(p, sa);
 
         if (sa == null) {
             return;
         }
+
+        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
+        	CharmEffect.makeChoices(sa);
+        }
+
+
+
 
         // Need to check PayCosts, and Ability + All SubAbilities for Target
         boolean newAbility = sa.getPayCosts() != null;

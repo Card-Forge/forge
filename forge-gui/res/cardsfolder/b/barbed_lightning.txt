@@ -1,10 +1,10 @@
 Name:Barbed Lightning
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | PrecostDesc$ Choose one - | SpellDescription$ CARDNAME deals 3 damage to target creature;
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SpellDescription$ or CARDNAME deals 3 damage to target player.
-A:SP$ DealDamage | Cost$ 4 R | PrecostDesc$ Entwine | CostDesc$ {2} | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.) | SubAbility$ DBDamage
-SVar:DBDamage:DB$DealDamage| ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 |
+K:Entwine 2
+A:SP$ Charm | Cost$ 2 R | Choices$ DBDmgC,DBDmgP | CharmNum$ 1 | SpellDescription$ Choose one - CARDNAME deals 3 damage to target creature; or CARDNAME deals 3 damage to target player.
+SVar:DBDmgC:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature;
+SVar:DBDmgP:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_lightning.jpg
 Oracle:Choose one - Barbed Lightning deals 3 damage to target creature; or Barbed Lightning deals 3 damage to target player.\nEntwine {2} (Choose both if you pay the entwine cost.)

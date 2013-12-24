@@ -1,10 +1,10 @@
 Name:Blinding Beam
 ManaCost:2 W
 Types:Instant
-A:SP$ Tap | Cost$ 2 W |  ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target creatures | SpellDescription$  Choose one - Tap two target creatures;
-A:SP$ Effect | Cost$ 2 W | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RestoreSight | SVars$ ExileEffect | RememberObjects$ Targeted | Duration$ Permanent | SpellDescription$  or creatures don't untap during target player's next untap step.
-A:SP$ Effect | Cost$ 3 W | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RestoreSight | SVars$ ExileEffect | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | Duration$ Permanent | SubAbility$ BlindTheFoe | PrecostDesc$ Entwine | CostDesc$ {1} | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
-SVar:BlindTheFoe:DB$ Tap |  ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target creatures
+K:Entwine 1
+A:SP$ Charm | Cost$ 2 W | Choices$ DBTap,DBEffect | CharmNum$ 1 | SpellDescription$ Choose one - Tap two target creatures; or creatures don't untap during target player's next untap step.
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target creatures | SpellDescription$  Tap two target creatures;
+SVar:DBEffect:DB$ Effect | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RestoreSight | SVars$ ExileEffect | RememberObjects$ Targeted | Duration$ Permanent | SpellDescription$ Creatures don't untap during target player's next untap step.
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.RememberedPlayerCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
 SVar:RestoreSight:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

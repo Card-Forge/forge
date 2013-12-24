@@ -7,6 +7,7 @@ package forge.game.spellability;
 public enum OptionalCost {
     Conspire,
     Buyback,
+    Entwine,
     Kicker1,
     Kicker2, 
     AltCost, // used by prowl

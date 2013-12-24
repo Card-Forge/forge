@@ -2429,7 +2429,6 @@ public class CardFactoryUtil {
                 card.addSpellAbility(makeAltCostAbility(card, altCost, sa1));
             }
         }
-
         if (card.hasKeyword("Delve")) {
             card.getSpellAbilities().get(0).setDelve(true);
         }
@@ -3446,7 +3445,7 @@ public class CardFactoryUtil {
             ripplePos = hasKeyword(card, "Ripple", n + 1);
         } // Ripple
     }
-    
+
 
     public final static void refreshTotemArmor(Card c) {
         boolean hasKw = c.hasKeyword("Totem armor");
