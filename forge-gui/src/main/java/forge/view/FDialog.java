@@ -94,7 +94,7 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
         return false;
     }
 
-    @Override
+    /*@Override
     public void paint(Graphics g) {
         super.paint(g);
 
@@ -109,7 +109,7 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
             g2d.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
         }
         g2d.dispose();
-    }
+    }*/
 
     @Override
     public void dispose() {
