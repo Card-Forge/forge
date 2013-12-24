@@ -202,8 +202,7 @@ public final class LayoutMenu {
             public void actionPerformed(ActionEvent e) {
                 String[] options = {"800x600", "1024x768", "1280x720"};
                 final String choice = GuiChoose.oneOrNone("Choose new window size", options);
-                if (choice != null)
-                {
+                if (choice != null) {
                     String[] dims = choice.split("x");
                     Singletons.getView().getFrame().setSize(Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
                 }

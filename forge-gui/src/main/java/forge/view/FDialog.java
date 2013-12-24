@@ -11,6 +11,8 @@ import java.awt.Point;
 import java.awt.PopupMenu;
 import java.awt.RenderingHints;
 import java.awt.GraphicsDevice.WindowTranslucency;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -62,26 +64,32 @@ public class FDialog extends JDialog implements ITitleBarOwner {
         this.titleBar = new FTitleBar(this);
         this.titleBar.setVisible(true);
         addMoveSupport();
+
+        if (isSetShapeSupported) { //if possible, set rounded rectangle shape for dialog
+            this.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentResized(final ComponentEvent e) { //must update shape whenever dialog is resized
+                    int arc = cornerDiameter - 4; //leave room for border aliasing
+                    FDialog.this.setShape(new RoundRectangle2D.Float(0, 0, FDialog.this.getWidth(), FDialog.this.getHeight(), arc, arc));
+                }
+            });
+        }
     }
 
     @Override
     public void paint(Graphics g) {
-        int width = this.getWidth();
-        int height = this.getHeight();
-
-        //set rounded rectangle shape for dialog if possible
-        if (isSetShapeSupported) {
-            int arc = cornerDiameter - 4; //leave room for border aliasing
-            this.setShape(new RoundRectangle2D.Float(0, 0, width, height, arc, arc));
-        }
-
         super.paint(g);
 
         //draw rounded border
         final Graphics2D g2d = (Graphics2D) g.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         skin.setGraphicsColor(g2d, borderColor);
-        g2d.drawRoundRect(0, 0, width - 1, height - 1, cornerDiameter, cornerDiameter);
+        if (isSetShapeSupported) {
+            g2d.drawRoundRect(0, 0, this.getWidth() - 1, this.getHeight() - 1, cornerDiameter, cornerDiameter);
+        }
+        else { //draw non-rounded border instead if setShape isn't supported
+            g2d.drawRect(0, 0, this.getWidth() - 1, this.getHeight() - 1);
+        }
         g2d.dispose();
     }
 
