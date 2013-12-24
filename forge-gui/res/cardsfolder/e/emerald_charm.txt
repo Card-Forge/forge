@@ -1,9 +1,10 @@
 Name:Emerald Charm
 ManaCost:G
 Types:Instant
-A:SP$ Untap | Cost$ G | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | PrecostDesc$ Choose one - | SpellDescription$ Untap target permanent
-A:SP$ Destroy | Cost$ G | ValidTgts$ Enchantment.nonAura | TgtPrompt$ Select target non-Aura enchantment | PrecostDesc$ or | SpellDescription$ Destroy target non-Aura enchantment
-A:SP$ Debuff | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | PrecostDesc$ or | SpellDescription$ Target creature loses flying until end of turn
+A:SP$ Charm | Cost$ G | Choices$ DBUntap,DBDestroy,DBDebuff | Defined$ You | SpellDescription$ Choose one - Untap target permanent; or destroy target non-Aura enchantment; or target creature loses flying until end of turn.
+SVar:DBUntap:DB$ Untap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Untap target permanent
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment.nonAura | TgtPrompt$ Select target non-Aura enchantment | SpellDescription$ Destroy target non-Aura enchantment
+SVar:DBDebuff:DB$ Debuff | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_charm.jpg
 Oracle:Choose one - Untap target permanent; or destroy target non-Aura enchantment; or target creature loses flying until end of turn.
