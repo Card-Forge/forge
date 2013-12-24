@@ -1,8 +1,9 @@
 Name:Feast or Famine
 ManaCost:3 B
 Types:Instant
-A:SP$ Token | Cost$ 3 B | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | PrecostDesc$ Choose one - | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield;
-A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonblack, nonartifact creature | NoRegen$ True | SpellDescription$ or destroy target nonartifact, nonblack creature and it can't be regenerated.
+A:SP$ Charm | Cost$ 3 B | Choices$ DBToken,DBDestroy | SpellDescription$ Choose one - Put a 2/2 black Zombie creature token onto the battlefield; or destroy target nonartifact, nonblack creature and it can't be regenerated.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield;
+SVar:DBDestroy:DB$ Destroy |  ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonblack, nonartifact creature | NoRegen$ True | SpellDescription$ Destroy target nonartifact, nonblack creature and it can't be regenerated.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_or_famine.jpg
 Oracle:Choose one - Put a 2/2 black Zombie creature token onto the battlefield; or destroy target nonartifact, nonblack creature and it can't be regenerated.
