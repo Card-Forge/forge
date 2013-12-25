@@ -247,8 +247,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Deprecated
     public boolean isHuman() { return getLobbyPlayer().isHuman(); }
-    @Deprecated
-    public boolean isComputer() { return getLobbyPlayer().isComputer(); }
 
     public boolean isArchenemy() {
 
@@ -1368,7 +1366,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             c = game.getAction().moveToHand(c);
             drawn.add(c);
 
-            if ((this.numDrawnThisTurn == 0) && this.isComputer()) {
+            if (this.numDrawnThisTurn == 0) {
                 boolean reveal = false;
                 final List<Card> cards = this.getCardsIn(ZoneType.Battlefield);
                 for (final Card card : cards) {
@@ -1378,7 +1376,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                     }
                 }
                 if (reveal) {
-                    game.getAction().reveal("Revealing the first card drawn", drawn, this, false);
+                    game.getAction().reveal("Revealing the first card drawn", drawn, this, true);
                 }
             }
 

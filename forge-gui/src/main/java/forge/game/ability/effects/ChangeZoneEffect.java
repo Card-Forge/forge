@@ -587,10 +587,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (decider == null) {
                 decider = player;
             }
-            if (decider.isComputer()) {
-                ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player);
-            } else {
+            if (decider.isHuman()) {
                 changeHiddenOriginResolveHuman(decider, sa, player);
+            } else {
+                ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player);
             }
         }
     }

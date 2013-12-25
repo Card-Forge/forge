@@ -130,7 +130,8 @@ public enum ApiType {
     
     
     InternalEtbReplacement(ETBReplacementEffect.class, CanPlayAsDrawbackAi.class),
-    InternalLegendaryRule(CharmEffect.class, LegendaryRuleAi.class); // Charm has empty resolve blocks, may act as a dummy
+    InternalLegendaryRule(CharmEffect.class, LegendaryRuleAi.class), // Charm has empty resolve blocks, may act as a dummy
+    InternalHaunt(CharmEffect.class, HauntAi.class); 
 
     private final Class<? extends SpellAbilityEffect> clsEffect;
     private final Class<? extends SpellAbilityAi> clsAi;

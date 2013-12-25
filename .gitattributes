@@ -14769,6 +14769,7 @@ forge-gui/src/main/java/forge/ai/ability/FlipACoinAi.java -text
 forge-gui/src/main/java/forge/ai/ability/FogAi.java -text
 forge-gui/src/main/java/forge/ai/ability/GameLossAi.java -text
 forge-gui/src/main/java/forge/ai/ability/GameWinAi.java -text
+forge-gui/src/main/java/forge/ai/ability/HauntAi.java -text
 forge-gui/src/main/java/forge/ai/ability/LegendaryRuleAi.java -text
 forge-gui/src/main/java/forge/ai/ability/LifeExchangeAi.java -text
 forge-gui/src/main/java/forge/ai/ability/LifeGainAi.java -text

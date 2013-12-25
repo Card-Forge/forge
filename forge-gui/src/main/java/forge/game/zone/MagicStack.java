@@ -31,13 +31,13 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.FThreads;
-import forge.ai.ComputerUtilCard;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
@@ -65,7 +65,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.gui.input.InputSelectCardsFromList;
+
 
 /**
  * <p>
@@ -623,17 +623,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (!creats.isEmpty()) {
             haunterDiesWork.setDescription("");
             haunterDiesWork.setTargetRestrictions(new TargetRestrictions("", "Creature".split(" "), "1", "1"));
-            final Card targetCard;
-            if (source.getController().isHuman()) {
-                final InputSelectCardsFromList targetHaunted = new InputSelectCardsFromList(1,1, creats);
-                targetHaunted.setMessage("Choose target creature to haunt.");
-                targetHaunted.showAndWait();
-                targetCard = targetHaunted.getFirstSelected();
-            } else {
-                // AI choosing what to haunt
-                final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponents());
-                targetCard = ComputerUtilCard.getWorstCreatureAI(oppCreats.isEmpty() ? creats : oppCreats);
-            }
+            final Card targetCard = source.getController().getController().chooseSingleEntityForEffect(creats, new SpellAbility.EmptySa(ApiType.InternalHaunt, source), "Choose target creature to haunt.");
             haunterDiesWork.setTargetCard(targetCard);
             this.add(haunterDiesWork);
         }

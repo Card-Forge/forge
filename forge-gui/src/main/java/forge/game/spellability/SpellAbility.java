@@ -56,6 +56,8 @@ import forge.util.TextUtil;
 public abstract class SpellAbility extends GameObject implements ISpellAbility {
 
     public static class EmptySa extends SpellAbility {
+        public EmptySa(Card sourceCard) { super(sourceCard, Cost.Zero); setActivatingPlayer(sourceCard.getController());}
+        public EmptySa(ApiType api, Card sourceCard) { super(sourceCard, Cost.Zero); setActivatingPlayer(sourceCard.getController()); this.api = api;}
         public EmptySa(Card sourceCard, Player activator) { super(sourceCard, Cost.Zero); setActivatingPlayer(activator);}
         public EmptySa(ApiType api, Card sourceCard, Player activator) { super(sourceCard, Cost.Zero); setActivatingPlayer(activator); this.api = api;}
         @Override public void resolve() {}

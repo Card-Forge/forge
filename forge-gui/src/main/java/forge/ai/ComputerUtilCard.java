@@ -253,7 +253,7 @@ public class ComputerUtilCard {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card getWorstCreatureAI(final List<Card> list) {
+    public static Card getWorstCreatureAI(final Collection<Card> list) {
         return Aggregates.itemWithMin(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.fnEvaluateCreature);
     }
 
