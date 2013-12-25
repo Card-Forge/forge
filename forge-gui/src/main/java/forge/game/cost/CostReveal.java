@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -32,7 +33,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
 /**
@@ -189,13 +189,13 @@ public class CostReveal extends CostPartWithList {
             if (num == 0) return true;
             List<Card> revealed = new ArrayList<Card>();
             while (num > 0) {
-                InputSelectCards inp = new InputSelectCardsFromList(1, 1, handList);
+                InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, handList);
                 inp.setMessage("Select one of cards to reveal. Already chosen:" + revealed);
                 inp.setCancelAllowed(true);
                 inp.showAndWait();
                 if (inp.hasCancelled())
                     return false;
-                final Card first = inp.getSelected().get(0);
+                final Card first = inp.getFirstSelected();
                 revealed.add(first);
                 handList = CardLists.filter(handList, CardPredicates.sharesColorWith(first));
                 handList.remove(first);
@@ -217,7 +217,7 @@ public class CostReveal extends CostPartWithList {
                 }
             }
             if ( num == 0 ) return true;
-            InputSelectCards inp = new InputSelectCardsFromList(num, num, handList);
+            InputSelectCardsFromList inp = new InputSelectCardsFromList(num, num, handList);
             inp.setMessage("Select %d more " + getDescriptiveType() + " card(s) to reveal.");
             inp.showAndWait();
             if ( inp.hasCancelled() )
@@ -273,7 +273,7 @@ public class CostReveal extends CostPartWithList {
     
     @Override protected boolean canPayListAtOnce() { return true; }
     @Override
-    protected void doListPayment(SpellAbility ability, List<Card> targetCards) {
+    protected void doListPayment(SpellAbility ability, Collection<Card> targetCards) {
         ability.getActivatingPlayer().getGame().getAction().reveal(targetCards, ability.getActivatingPlayer());
     }    
     

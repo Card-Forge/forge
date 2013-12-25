@@ -1416,26 +1416,28 @@ public class GameAction {
         return true;
     } // sacrificeDestroy()
 
-    public void reveal(List<Card> cards, Player cardOwner) {
+    public void reveal(Collection<Card> cards, Player cardOwner) {
         reveal(cards, cardOwner, true);
     }
 
-    public void reveal(List<Card> cards, Player cardOwner, boolean dontRevealToOwner) {
-        ZoneType zt = ZoneType.Hand;
-        if (!cards.isEmpty() && game.getZoneOf(cards.get(0)) != null) {
-            zt = game.getZoneOf(cards.get(0)).getZoneType();
-        }
+    public void reveal(Collection<Card> cards, Player cardOwner, boolean dontRevealToOwner) {
+        Card firstCard = Iterables.getFirst(cards, null);
+        if (firstCard == null)
+            return;
+
+        ZoneType zt = game.getZoneOf(firstCard).getZoneType();
         reveal(cardOwner + " reveals card from " + zt, cards, zt, cardOwner, dontRevealToOwner);
     }
 
-    public void reveal(String message, List<Card> cards, Player cardOwner, boolean dontRevealToOwner) {
-        if (cards.isEmpty()) {
+    public void reveal(String message, Collection<Card> cards, Player cardOwner, boolean dontRevealToOwner) {
+        Card firstCard = Iterables.getFirst(cards, null);
+        if (firstCard == null)
             return;
-        }
-        reveal(message, cards, cards.get(0).getZone().getZoneType(), cardOwner, dontRevealToOwner);
+
+        reveal(message, cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner);
     }
 
-    public void reveal(String message, List<Card> cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner) {
+    public void reveal(String message, Collection<Card> cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner) {
         for (Player p : game.getPlayers()) {
             if (dontRevealToOwner && cardOwner == p) continue;
             p.getController().reveal(message, cards, zt, cardOwner);

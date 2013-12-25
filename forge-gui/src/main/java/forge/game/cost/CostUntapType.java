@@ -26,7 +26,6 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
 /**
@@ -149,7 +148,7 @@ public class CostUntapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, typeList);
         inp.setMessage("Select a " + getDescriptiveType() + " to untap (%d left)");
         inp.showAndWait();
         if( inp.hasCancelled() || inp.getSelected().size() != c )

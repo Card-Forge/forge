@@ -57,7 +57,6 @@ import forge.gui.GuiChoose;
 import forge.gui.input.InputPayMana;
 import forge.gui.input.InputPayManaExecuteCommands;
 import forge.gui.input.InputPayManaSimple;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Lang;
 
@@ -428,14 +427,14 @@ public class HumanPlay {
                         return false;
                     }
                     while (amount > 0) {
-                        InputSelectCards inp = new InputSelectCardsFromList(1, 1, list);
+                        InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, list);
                         inp.setMessage("Select a card to add a counter to");
                         inp.setCancelAllowed(true);
                         inp.showAndWait();
                         if (inp.hasCancelled()) {
                             continue;
                         }
-                        Card selected = inp.getSelected().get(0);
+                        Card selected = inp.getFirstSelected();
                         selected.addCounter(counterType, 1, false);
                         amount--;
                     }
@@ -480,14 +479,14 @@ public class HumanPlay {
                         }
                     });
                     if (list.isEmpty()) { return false; }
-                    InputSelectCards inp = new InputSelectCardsFromList(1, 1, list);
+                    InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, list);
                     inp.setMessage("Select a card to remove a counter");
                     inp.setCancelAllowed(true);
                     inp.showAndWait();
                     if (inp.hasCancelled()) {
                         continue;
                     }
-                    Card selected = inp.getSelected().get(0);
+                    Card selected = inp.getFirstSelected();
                     final Map<CounterType, Integer> tgtCounters = selected.getCounters();
                     final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();
                     for (CounterType key : tgtCounters.keySet()) {
@@ -678,7 +677,7 @@ public class HumanPlay {
     private static boolean payCostPart(SpellAbility sourceAbility, CostPartWithList cpl, int amount, List<Card> list, String actionName) {
         if (list.size() < amount) { return false; } // unable to pay (not enough cards)
 
-        InputSelectCards inp = new InputSelectCardsFromList(amount, amount, list);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(amount, amount, list);
         inp.setMessage("Select %d " + cpl.getDescriptiveType() + " card(s) to " + actionName);
         inp.setCancelAllowed(true);
 

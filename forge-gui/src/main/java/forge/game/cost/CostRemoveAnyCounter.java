@@ -31,7 +31,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
 /**
@@ -127,11 +126,11 @@ public class CostRemoveAnyCounter extends CostPartWithList {
                     return card.hasCounters();
                 }
             });
-            InputSelectCards inp = new InputSelectCardsFromList(1, 1, list);
+            InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, list);
             inp.setMessage("Select " + this.getDescriptiveType() + " to remove a counter");
             inp.setCancelAllowed(false);
             inp.showAndWait();
-            Card selected = inp.getSelected().get(0);
+            Card selected = inp.getFirstSelected();
             final Map<CounterType, Integer> tgtCounters = selected.getCounters();
             final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();
             for (CounterType key : tgtCounters.keySet()) {

@@ -27,7 +27,6 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
 /**
@@ -142,7 +141,7 @@ public class CostReturn extends CostPartWithList {
         else {
             List<Card> validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
 
-            InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
+            InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, validCards);
             inp.setMessage("Return %d " + this.getType() + " " + this.getType() + " card(s) to hand");
             inp.showAndWait();
             if (inp.hasCancelled())

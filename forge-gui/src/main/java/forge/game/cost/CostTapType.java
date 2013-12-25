@@ -30,7 +30,6 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
 /**
@@ -220,13 +219,13 @@ public class CostTapType extends CostPartWithList {
             if (c == 0) return true;
             List<Card> tapped = new ArrayList<Card>();
             while (c > 0) {
-                InputSelectCards inp = new InputSelectCardsFromList(1, 1, typeList);
+                InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, typeList);
                 inp.setMessage("Select one of the cards to tap. Already chosen: " + tapped);
                 inp.setCancelAllowed(true);
                 inp.showAndWait();
                 if (inp.hasCancelled())
                     return false;
-                final Card first = inp.getSelected().get(0);
+                final Card first = inp.getFirstSelected();
                 tapped.add(first);
                 typeList = CardLists.filter(typeList, new Predicate<Card>() {
                     @Override
@@ -242,7 +241,7 @@ public class CostTapType extends CostPartWithList {
 
         if (totalPower) {
             int i = Integer.parseInt(totalP);
-            InputSelectCards inp = new InputSelectCardsFromList(0, typeList.size(), typeList);
+            InputSelectCardsFromList inp = new InputSelectCardsFromList(0, typeList.size(), typeList);
             inp.setMessage("Select a card to tap.");
             inp.setUnselectAllowed(true);
             inp.setCancelAllowed(true);
@@ -255,7 +254,7 @@ public class CostTapType extends CostPartWithList {
             }
         }
         
-        InputSelectCards inp = new InputSelectCardsFromList(c, c, typeList);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, typeList);
         inp.setMessage("Select a " + getDescriptiveType() + " to tap (%d left)");
         inp.showAndWait();
         if ( inp.hasCancelled() )

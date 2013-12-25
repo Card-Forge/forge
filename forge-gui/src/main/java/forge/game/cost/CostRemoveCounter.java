@@ -18,9 +18,11 @@
 package forge.game.cost;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.collect.Lists;
 
@@ -33,7 +35,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.input.InputSelectCards;
+import forge.gui.input.InputSelectManyBase;
 
 /**
  * The Class CostRemoveCounter.
@@ -50,7 +52,7 @@ public class CostRemoveCounter extends CostPartWithList {
      * TODO: Write javadoc for this type.
      *
      */
-    public static final class InputSelectCardToRemoveCounter extends InputSelectCards {
+    public static final class InputSelectCardToRemoveCounter extends InputSelectManyBase<Card> {
         private static final long serialVersionUID = 2685832214519141903L;
 
         private final Map<Card,Integer> cardsChosen;
@@ -71,10 +73,7 @@ public class CostRemoveCounter extends CostPartWithList {
             }
 
             int tc = getTimesSelected(c);
-            if( tc == 0)
-                selected.add(c);
-            else
-                cardsChosen.put(c, tc+1);
+            cardsChosen.put(c, tc+1);
 
             onSelectStateChanged(c, true);
             refresh();
@@ -99,19 +98,23 @@ public class CostRemoveCounter extends CostPartWithList {
 
         private int getDistibutedCounters() {
             int sum = 0;
-            for(Card c : selected) {
-                sum += max == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue();
+            for(Entry<Card, Integer> kv : cardsChosen.entrySet()) {
+                sum += kv.getValue().intValue();
             }
             return sum;
         }
-
-        @Override
+        
         protected final boolean isValidChoice(GameEntity choice) {
             return validChoices.contains(choice);
         }
 
         public int getTimesSelected(Card c) {
-            return selected.contains(c) ? max == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue() : 0;
+            return cardsChosen.containsKey(c) ? 0 : cardsChosen.get(c).intValue();
+        }
+
+        @Override
+        public Collection<Card> getSelected() {
+            return cardsChosen.keySet();
         }
     }
 

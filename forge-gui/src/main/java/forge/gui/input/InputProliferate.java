@@ -2,9 +2,11 @@ package forge.gui.input;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
@@ -22,22 +24,23 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
 
     public InputProliferate() {
         super(1, Integer.MAX_VALUE);
+        allowUnselect = true;
     }
 
-    @Override
+    
     protected String getMessage() {
         StringBuilder sb = new StringBuilder("Choose permanents and/or players with counters on them to add one more counter of that type.");
         sb.append("\n\nYou've selected so far:\n");
-        if (selected.isEmpty()) {
+        if (chosenCounters.isEmpty()) {
             sb.append("(none)");
         }
         else {
-            for (GameEntity ge : selected) {
-                if (ge instanceof Player) {
-                    sb.append("* A poison counter to player ").append(ge).append("\n");
+            for (Entry<GameEntity, CounterType> ge : chosenCounters.entrySet()) {
+                if (ge.getKey() instanceof Player) {
+                    sb.append("* A poison counter to player ").append(ge.getKey()).append("\n");
                 }
                 else {
-                    sb.append("* ").append(ge).append(" -> ").append(chosenCounters.get(ge)).append("counter\n");
+                    sb.append("* ").append(ge.getKey()).append(" -> ").append(ge.getValue()).append("counter\n");
                 }
             }
         }
@@ -47,11 +50,15 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
 
     @Override
     protected void onCardSelected(final Card card, final MouseEvent triggerEvent) {
-        if (!selectEntity(card)) {
+        if (!card.hasCounters()) {
             return;
         }
-
-        if (selected.contains(card)) {
+        
+        boolean entityWasSelected = chosenCounters.containsKey(card);
+        if (entityWasSelected) {
+            this.chosenCounters.remove(card);
+        }
+        else {
             final List<CounterType> choices = new ArrayList<CounterType>();
             for (final CounterType ct : CounterType.values()) {
                 if (card.getCounters(ct) > 0) {
@@ -68,26 +75,34 @@ public final class InputProliferate extends InputSelectManyBase<GameEntity> {
 
     @Override
     protected final void onPlayerSelected(Player player, final MouseEvent triggerEvent) {
-        if (!selectEntity(player)) {
+        if (player.getPoisonCounters() == 0 || player.hasKeyword("You can't get poison counters")) {
             return;
         }
+        
+        boolean entityWasSelected = chosenCounters.containsKey(player);
+        if (entityWasSelected) {
+            this.chosenCounters.remove(player);
+        } else
+            this.chosenCounters.put(player, null /* POISON counter is meant */);
+        
         refresh();
-    }
-
-    @Override
-    protected boolean isValidChoice(GameEntity choice) {
-        if (choice instanceof Player) {
-            return ((Player) choice).getPoisonCounters() > 0 && !choice.hasKeyword("You can't get poison counters");
-        }
-
-        if (choice instanceof Card) {
-            return ((Card) choice).hasCounters();
-        }
-
-        return false;
     }
 
     public Map<GameEntity, CounterType> getProliferationMap() {
         return chosenCounters;
+    }
+
+
+    @Override
+    protected boolean hasEnoughTargets() { return true; }
+
+    @Override
+    protected boolean hasAllTargets() { return false; }
+
+
+    @Override
+    public Collection<GameEntity> getSelected() {
+        // TODO Auto-generated method stub
+        return chosenCounters.keySet();
     }
 }

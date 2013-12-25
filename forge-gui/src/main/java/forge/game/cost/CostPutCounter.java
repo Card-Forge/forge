@@ -17,12 +17,8 @@
  */
 package forge.game.cost;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import forge.ai.ComputerUtilCard;
-import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -30,95 +26,17 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
+import forge.gui.input.InputSelectCardsFromList;
+import forge.util.Lang;
 
 /**
  * The Class CostPutCounter.
  */
 public class CostPutCounter extends CostPartWithList {
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class InputSelectCardToPutCounter extends InputSelectCards {
-
-        private static final long serialVersionUID = 2685832214519141903L;
-        private List<Card> validChoices;
-        private final Map<Card,Integer> cardsChosen;
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param type
-         * @param costPutCounter
-         * @param nNeeded
-         * @param payment
-         * @param sa
-         */
-        public InputSelectCardToPutCounter(int cntCounters, List<Card> targets) {
-            super(cntCounters, cntCounters);
-            validChoices = targets;
-            cardsChosen = cntCounters > 1 ? new HashMap<Card, Integer>() : null;
-        }
-        
-        protected String getMessage() {
-            return max == Integer.MAX_VALUE
-                ? String.format(message, getDistibutedCounters())
-                : String.format(message, max - getDistibutedCounters());
-        }
-        
-        private int getDistibutedCounters() {
-            int sum = 0;
-            for(Card c : selected) {
-                sum += max == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue();
-            }
-            return sum;
-        }
-
-        @Override
-        protected void onCardSelected(Card c, java.awt.event.MouseEvent triggerEvent) {
-            if(!isValidChoice(c))
-                return;
-            
-            int tc = getTimesSelected(c);
-            if( tc == 0)
-                selected.add(c);
-            else
-                cardsChosen.put(c, tc+1);
-            
-            onSelectStateChanged(c, true);
-            refresh();
-        };
-
-        @Override
-        protected boolean hasEnoughTargets() {
-            return hasAllTargets();
-        }
-
-        @Override
-        protected boolean hasAllTargets() {
-            int sum = getDistibutedCounters();
-            return sum >= max;
-        }
-
-        @Override
-        protected final boolean isValidChoice(GameEntity choice) {
-            return validChoices.contains(choice);
-        }
-
-        public int getTimesSelected(Card c) {
-            return selected.contains(c) ? max == 1 || cardsChosen.get(c) == null ? 1 : cardsChosen.get(c).intValue() : 0;
-        }
-    }
-
-    // Put Counter doesn't really have a "Valid" portion of the cost
+     // Put Counter doesn't really have a "Valid" portion of the cost
     private final CounterType counter;
     private int lastPaidAmount = 0;
 
-    /**
-     * Gets the counter.
-     * 
-     * @return the counter
-     */
     public final CounterType getCounter() {
         return this.counter;
     }
@@ -262,11 +180,10 @@ public class CostPutCounter extends CostPartWithList {
             return true;
         } else {
             // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter 
-
             List<Card> typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), getType().split(";"), activator, ability.getSourceCard());
             
-            InputSelectCardToPutCounter inp = new InputSelectCardToPutCounter(c, typeList);
-            inp.setMessage("Put %d " + getCounter().getName() + " counter on " + getDescriptiveType());
+            InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, typeList);
+            inp.setMessage("Put " + Lang.nounWithAmount(c, getCounter().getName() + " counter") + " on " + getDescriptiveType());
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
@@ -275,9 +192,8 @@ public class CostPutCounter extends CostPartWithList {
 
             int sum = 0;
             for(Card crd : inp.getSelected()) {
-                int added = inp.getTimesSelected(crd);
-                sum += added;
-                executePayment(ability, crd, added);
+                sum++;
+                executePayment(ability, crd, 1);
             }
             source.setSVar("CostCountersAdded", Integer.toString(sum));
             lastPaidAmount = sum;

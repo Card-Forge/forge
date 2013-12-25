@@ -27,7 +27,6 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
 /**
@@ -160,7 +159,7 @@ public class CostSacrifice extends CostPartWithList {
                 return true;
             }
 
-            InputSelectCards inp = new InputSelectCardsFromList(c, c, list);
+            InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, list);
             inp.setMessage("Select a " + this.getDescriptiveType() + " to sacrifice (%d left)");
             inp.setCancelAllowed(true);
             inp.showAndWait();

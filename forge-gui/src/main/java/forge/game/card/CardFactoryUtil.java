@@ -65,7 +65,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Aggregates;
 import forge.util.Lang;
@@ -2858,10 +2857,10 @@ public class CardFactoryUtil {
 
                 final Card toHaunt; 
                 if (card.getController().isHuman()) {
-                    final InputSelectCards target = new InputSelectCardsFromList(1, 1, creats);
+                    final InputSelectCardsFromList target = new InputSelectCardsFromList(1, 1, creats);
                     target.setMessage("Choose target creature to haunt.");
                     target.showAndWait();
-                    toHaunt = target.getSelected().get(0);
+                    toHaunt = target.getFirstSelected();
                 } else {
                     // AI choosing what to haunt
                     final List<Card> oppCreats = CardLists.filterControlledBy(creats, card.getController().getOpponent());

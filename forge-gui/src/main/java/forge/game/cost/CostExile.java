@@ -33,7 +33,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
 /**
@@ -265,7 +264,7 @@ public class CostExile extends CostPartWithList {
         }
 
         if (this.from == ZoneType.Battlefield || this.from == ZoneType.Hand) {
-            InputSelectCards inp = new InputSelectCardsFromList(c, c, list);
+            InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, list);
             inp.setMessage("Exile %d card(s) from your" + from);
             inp.setCancelAllowed(true);
             inp.showAndWait();

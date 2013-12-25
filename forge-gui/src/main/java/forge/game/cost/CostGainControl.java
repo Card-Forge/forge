@@ -25,7 +25,6 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
 /**
@@ -104,7 +103,7 @@ public class CostGainControl extends CostPartWithList {
         final List<Card> list = payer.getCardsIn(ZoneType.Battlefield);
         List<Card> validCards = CardLists.getValidCards(list, this.getType().split(";"), payer, source);
 
-        InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, validCards);
         final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
         inp.setMessage("Gain control of %d " + desc);
         inp.showAndWait();

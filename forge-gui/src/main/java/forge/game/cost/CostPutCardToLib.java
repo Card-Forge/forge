@@ -30,7 +30,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
 /**
@@ -233,7 +232,7 @@ public class CostPutCardToLib extends CostPartWithList {
         list = CardLists.getValidCards(list, this.getType().split(";"), activator, source);
         
         if (this.from == ZoneType.Hand) {
-            InputSelectCards inp = new InputSelectCardsFromList(c, c, list);
+            InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, list);
             inp.setMessage("Put %d card(s) from your " + from );
             inp.setCancelAllowed(true);
             inp.showAndWait();

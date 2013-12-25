@@ -65,7 +65,6 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 
 /**
@@ -626,10 +625,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             haunterDiesWork.setTargetRestrictions(new TargetRestrictions("", "Creature".split(" "), "1", "1"));
             final Card targetCard;
             if (source.getController().isHuman()) {
-                final InputSelectCards targetHaunted = new InputSelectCardsFromList(1,1, creats);
+                final InputSelectCardsFromList targetHaunted = new InputSelectCardsFromList(1,1, creats);
                 targetHaunted.setMessage("Choose target creature to haunt.");
                 targetHaunted.showAndWait();
-                targetCard = targetHaunted.getSelected().get(0);
+                targetCard = targetHaunted.getFirstSelected();
             } else {
                 // AI choosing what to haunt
                 final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponents());

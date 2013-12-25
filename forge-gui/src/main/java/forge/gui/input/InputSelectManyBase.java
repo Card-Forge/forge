@@ -1,7 +1,8 @@
 package forge.gui.input;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+
+import com.google.common.collect.Iterables;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
@@ -11,17 +12,17 @@ import forge.view.ButtonUtil;
 public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyncronizedBase {
     private static final long serialVersionUID = -2305549394512889450L;
 
-    protected final List<T> selected;
+
+    
     protected boolean bCancelled = false;
     protected final int min;
     protected final int max;
-    public boolean allowUnselect = false;
-    private boolean allowCancel = false;
+    protected boolean allowUnselect = false;
+    protected boolean allowCancel = false;
 
     protected String message = "Source-Card-Name - Select %d more card(s)";
 
     protected InputSelectManyBase(int min, int max) {
-        selected = new ArrayList<T>();
         if (min > max) {
             throw new IllegalArgumentException("Min must not be greater than Max");
         }
@@ -38,6 +39,11 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         }
     }
 
+    protected abstract boolean hasEnoughTargets();
+    protected abstract boolean hasAllTargets();
+
+    protected abstract String getMessage();
+
     @Override
     public final void showMessage() {
         showMessage(getMessage());
@@ -51,19 +57,11 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         if (!canOk && !canCancel) { ButtonUtil.disableAll(); }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    protected String getMessage() {
-        return max == Integer.MAX_VALUE
-            ? String.format(message, selected.size())
-            : String.format(message, max - selected.size());
-    }
 
     @Override
     protected final void onCancel() {
         bCancelled = true;
+        this.getSelected().clear();
         this.stop();
         afterStop();
     }
@@ -72,10 +70,9 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         return bCancelled;
     }
 
-    public final List<T> getSelected() {
-        return (List<T>) selected;
-    }
-
+    public abstract Collection<T> getSelected();
+    public T getFirstSelected() { return Iterables.getFirst(getSelected(), null); }
+    
     @Override
     protected final void onOk() {
         this.stop();
@@ -86,35 +83,6 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         this.message = message0;
     }
 
-    // must define these
-    protected abstract boolean isValidChoice(GameEntity choice);
-
-    // might re-define later
-    protected boolean hasEnoughTargets() { return selected.size() >= min; }
-    protected boolean hasAllTargets() { return selected.size() >= max; }
-
-    @SuppressWarnings("unchecked")
-    protected boolean selectEntity(GameEntity c) {
-        if (!isValidChoice(c)) {
-            return false;
-        }
-
-        if (selected.contains(c)) {
-            if (allowUnselect) {
-                this.selected.remove(c);
-                onSelectStateChanged(c, false);
-            }
-            else {
-                return false;
-            }
-        }
-        else {
-            this.selected.add((T)c);
-            onSelectStateChanged(c, true);
-        }
-        return true;
-    }
-
     protected void onSelectStateChanged(GameEntity c, boolean newState) {
         if (c instanceof Card) {
             CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card)c, newState); // UI supports card highlighting though this abstraction-breaking mechanism
@@ -122,7 +90,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     }
 
     protected void afterStop() {
-        for (GameEntity c : selected) {
+        for (GameEntity c : getSelected()) {
             if (c instanceof Card) {
                 CMatchUI.SINGLETON_INSTANCE.setUsedToPay((Card)c, false);
             }

@@ -30,7 +30,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Aggregates;
 
@@ -215,14 +214,14 @@ public class CostDiscard extends CostPartWithList {
             if (c == 0) { return true; }
             List<Card> discarded = new ArrayList<Card>();
             while (c > 0) {
-                InputSelectCards inp = new InputSelectCardsFromList(1, 1, handList);
+                InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, handList);
                 inp.setMessage("Select one of the cards with the same name to discard. Already chosen: " + discarded);
                 inp.setCancelAllowed(true);
                 inp.showAndWait();
                 if (inp.hasCancelled()) {
                     return false;
                 }
-                final Card first = inp.getSelected().get(0);
+                final Card first = inp.getFirstSelected();
                 discarded.add(first);
                 handList = CardLists.filter(handList, CardPredicates.nameEquals(first.getName()));
                 handList.remove(first);
@@ -246,7 +245,7 @@ public class CostDiscard extends CostPartWithList {
                 }
             }
 
-            InputSelectCards inp = new InputSelectCardsFromList(c, c, handList);
+            InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, handList);
             inp.setMessage("Select %d more " + getDescriptiveType() + " to discard.");
             inp.setCancelAllowed(true);
             inp.showAndWait();

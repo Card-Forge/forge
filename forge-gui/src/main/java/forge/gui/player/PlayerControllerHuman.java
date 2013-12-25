@@ -65,7 +65,6 @@ import forge.gui.input.InputBlock;
 import forge.gui.input.InputConfirmMulligan;
 import forge.gui.input.InputPassPriority;
 import forge.gui.input.InputProliferate;
-import forge.gui.input.InputSelectCards;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.input.InputConfirm;
 import forge.gui.input.InputSelectEntitiesFromList;
@@ -319,11 +318,11 @@ public class PlayerControllerHuman extends PlayerController {
             return new ArrayList<Card>();
         }
 
-        InputSelectCards inp = new InputSelectCardsFromList(min == 0 ? 1 : min, max, valid);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(min == 0 ? 1 : min, max, valid);
         inp.setMessage(outerMessage);
         inp.setCancelAllowed(min == 0);
         inp.showAndWait();
-        return inp.hasCancelled() ? Lists.<Card>newArrayList() : inp.getSelected();
+        return Lists.newArrayList(inp.getSelected());
     }
 
 
@@ -351,11 +350,11 @@ public class PlayerControllerHuman extends PlayerController {
         }
         
         if(cardsAreInMyHandOrBattlefield) {
-            InputSelectCards sc = new InputSelectCardsFromList(min, max, sourceList);
+            InputSelectCardsFromList sc = new InputSelectCardsFromList(min, max, sourceList);
             sc.setMessage(title);
             sc.setCancelAllowed(isOptional);
             sc.showAndWait();
-            return sc.hasCancelled() ? Lists.<Card>newArrayList() : sc.getSelected();
+            return Lists.newArrayList(sc.getSelected());
         }
 
         int remaining = isOptional ? -1 : Math.max(sourceList.size() - max, 0);
@@ -552,10 +551,10 @@ public class PlayerControllerHuman extends PlayerController {
                     "Discarded", valid.size() - min, valid, null, null);
         }
 
-        InputSelectCards inp = new InputSelectCardsFromList(min, max, valid);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(min, max, valid);
         inp.setMessage(sa.hasParam("AnyNumber") ? "Discard up to %d card(s)" : "Discard %d card(s)");
         inp.showAndWait();
-        return inp.getSelected();
+        return Lists.newArrayList(inp.getSelected());
     }
 
     @Override
@@ -625,7 +624,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public List<Card> chooseCardsToDiscardUnlessType(int num, List<Card> hand, final String uType, SpellAbility sa) {
-        final InputSelectCards target = new InputSelectCardsFromList(num, num, hand) {
+        final InputSelectEntitiesFromList<Card> target = new InputSelectEntitiesFromList<Card>(num, num, hand) {
             private static final long serialVersionUID = -5774108410928795591L;
 
             @Override
@@ -640,7 +639,7 @@ public class PlayerControllerHuman extends PlayerController {
         };
         target.setMessage("Select %d card(s) to discard, unless you discard a " + uType + ".");
         target.showAndWait();
-        return target.getSelected();
+        return Lists.newArrayList(target.getSelected());
     }
 
     /* (non-Javadoc)
@@ -732,7 +731,7 @@ public class PlayerControllerHuman extends PlayerController {
         inp.setMessage(message);
         inp.setCancelAllowed(false);
         inp.showAndWait();
-        return inp.getSelected();
+        return Lists.newArrayList(inp.getSelected());
     }
 
     /* (non-Javadoc)
@@ -745,7 +744,7 @@ public class PlayerControllerHuman extends PlayerController {
         InputSelectCardsFromList inp = new InputSelectCardsFromList(min, max, valid);
         inp.setMessage("Choose Which Cards to Reveal");
         inp.showAndWait();
-        return inp.getSelected();
+        return Lists.newArrayList(inp.getSelected());
     }
 
     /* (non-Javadoc)
