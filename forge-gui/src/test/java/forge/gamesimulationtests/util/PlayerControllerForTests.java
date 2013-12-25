@@ -13,6 +13,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ability.ChangeZoneAi;
@@ -537,5 +538,10 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public boolean chooseCardsPile(SpellAbility sa, List<Card> pile1, List<Card> pile2, boolean faceUp) {
         return MyRandom.getRandom().nextBoolean();
+    }
+
+    @Override
+    public void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards) {
+        // test this!
     }
 }

@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
@@ -25,6 +24,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 
 import forge.Singletons;
 import forge.card.ColorSet;
@@ -1055,5 +1055,16 @@ public class PlayerControllerHuman extends PlayerController {
                 return name.equals("Pile 1");
             }
         }
+    }
+
+    @Override
+    public void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards) {
+        List<Object> anteedThings = new ArrayList<Object>();
+        for (Player p : removedAnteCards.keySet()) {
+            anteedThings.add("From " + Lang.getPossesive(mayBeYou(p)) + " deck:");
+            anteedThings.addAll(removedAnteCards.get(p));
+        }
+
+        GuiChoose.one(message, anteedThings);
     }
 }

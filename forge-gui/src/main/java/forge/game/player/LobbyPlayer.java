@@ -9,8 +9,18 @@ import forge.game.Game;
  *
  */
 public abstract class LobbyPlayer implements IHasIcon {
-
-    public abstract PlayerType getType();
+    protected enum PlayerType {
+        HUMAN,
+        COMPUTER, 
+        REMOTE
+    }
+    
+    protected abstract PlayerType getType();
+    
+    @Deprecated
+    public boolean isHuman() { return getType() == PlayerType.HUMAN; }
+    @Deprecated
+    public boolean isComputer() { return getType() == PlayerType.COMPUTER; }
 
     protected final String name;
     protected String imageKey;

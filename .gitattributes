@@ -14840,7 +14840,6 @@ forge-gui/src/main/java/forge/game/GameLog.java -text
 forge-gui/src/main/java/forge/game/GameLogEntry.java -text
 forge-gui/src/main/java/forge/game/GameLogEntryType.java -text
 forge-gui/src/main/java/forge/game/GameLogFormatter.java -text
-forge-gui/src/main/java/forge/game/GameNew.java -text
 forge-gui/src/main/java/forge/game/GameObject.java -text
 forge-gui/src/main/java/forge/game/GameOutcome.java -text
 forge-gui/src/main/java/forge/game/GameStage.java -text
@@ -15086,7 +15085,6 @@ forge-gui/src/main/java/forge/game/player/PlayerController.java -text
 forge-gui/src/main/java/forge/game/player/PlayerControllerAi.java -text
 forge-gui/src/main/java/forge/game/player/PlayerOutcome.java -text
 forge-gui/src/main/java/forge/game/player/PlayerStatistics.java -text
-forge-gui/src/main/java/forge/game/player/PlayerType.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/player/RegisteredPlayer.java -text
 forge-gui/src/main/java/forge/game/player/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/replacement/ReplaceAddCounter.java -text

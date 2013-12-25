@@ -1,12 +1,14 @@
 package forge.gui.player;
 
+import forge.Constant.Preferences;
+import forge.Singletons;
 import forge.game.Game;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
-import forge.game.player.PlayerType;
 import forge.gui.FNetOverlay;
 import forge.gui.GuiDisplayUtil;
+import forge.properties.ForgePreferences.FPref;
 
 public class LobbyPlayerHuman extends LobbyPlayer {
     public LobbyPlayerHuman(String name) {
@@ -14,7 +16,7 @@ public class LobbyPlayerHuman extends LobbyPlayer {
     }
 
     @Override
-    public PlayerType getType() {
+    protected PlayerType getType() {
         return PlayerType.HUMAN;
     }
 
@@ -27,6 +29,10 @@ public class LobbyPlayerHuman extends LobbyPlayer {
     public Player getPlayer(Game game) {
         Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game);
         player.setFirstController(new PlayerControllerHuman(game, player, this));
+        
+        if( Preferences.DEV_MODE && Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND))
+            player.canCheatPlayUnlimitedLands = true;
+
         return player;
     }
 

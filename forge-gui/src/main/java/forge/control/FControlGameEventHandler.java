@@ -1,8 +1,10 @@
 package forge.control;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -44,7 +46,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
+import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SLayoutIO;
@@ -57,6 +59,7 @@ import forge.gui.match.views.VField;
 import forge.gui.match.views.VHand;
 import forge.gui.toolbox.special.PhaseLabel;
 import forge.net.FServer;
+import forge.util.Lang;
 import forge.util.maps.MapOfLists;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
@@ -130,12 +133,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(GameEventAnteCardsSelected ev) {
         // Require EDT here?
-        final String nl = System.getProperty("line.separator");
-        final StringBuilder msg = new StringBuilder();
-        for (final Pair<Player, Card> kv : ((GameEventAnteCardsSelected) ev).cards) {
-            msg.append(kv.getKey().getName()).append(" ante: ").append(kv.getValue()).append(nl);
+        List<Object> options = new ArrayList<Object>();
+        for (final Entry<Player, Card> kv : ((GameEventAnteCardsSelected) ev).cards.entries()) {
+            options.add("  -- From " + Lang.getPossesive(kv.getKey().getName()) + " deck --");
+            options.add(kv.getValue());
         }
-        GuiDialog.message(msg.toString(), "Ante");
+        GuiChoose.one("These cards were chosen to ante", options);
         return null;
     }
 

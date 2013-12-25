@@ -101,7 +101,6 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         for(int i = 0; i < wins.length; i++) {
             Player player = players.get(i);
             String playerName = player.getName();
-            playerName += " [" + player.getOriginalLobbyPlayer().getType() + "]";
             sb.append(playerName).append(": ").append(wins[i]).append(" ");
         }
 

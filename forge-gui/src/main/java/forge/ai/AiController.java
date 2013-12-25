@@ -19,6 +19,7 @@ package forge.ai;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -31,9 +32,14 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
+import forge.Singletons;
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -56,6 +62,8 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellPermanent;
 import forge.game.zone.ZoneType;
+import forge.item.PaperCard;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
@@ -72,6 +80,7 @@ public class AiController {
 
     private final Player player;
     private final Game game;
+    public boolean canCheatShuffle;
     public Game getGame()
     {
         return game;
@@ -90,6 +99,8 @@ public class AiController {
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
+        
+        canCheatShuffle = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND);
     }
 
     /**
@@ -997,6 +1008,78 @@ public class AiController {
         return result;
         
     }
+
+    public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) {
+        List<PaperCard> result = new ArrayList<PaperCard>();
+        for ( Entry<DeckSection, CardPool> ds : myDeck ) {
+            for (Entry<PaperCard, Integer> cp : ds.getValue()) {
+                if ( cp.getKey().getRules().getAiHints().getRemAIDecks() ) 
+                    result.add(cp.getKey());
+            }
+        }
+        return result;
+    }
+
+
+    // this is where the computer cheats
+    // changes AllZone.getComputerPlayer().getZone(Zone.Library)
+    
+    /**
+     * <p>
+     * smoothComputerManaCurve.
+     * </p>
+     * 
+     * @param in
+     *            an array of {@link forge.game.card.Card} objects.
+     * @return an array of {@link forge.game.card.Card} objects.
+     */
+    public List<Card> cheatShuffle(List<Card> in) {
+        if( in.size() < 20 || !canCheatShuffle )
+            return in;
+        
+        final List<Card> library = Lists.newArrayList(in);
+        CardLists.shuffle(library);
+    
+        // remove all land, keep non-basicland in there, shuffled
+        List<Card> land = CardLists.filter(library, CardPredicates.Presets.LANDS);
+        for (Card c : land) {
+            if (c.isLand()) {
+                library.remove(c);
+            }
+        }
+    
+        try {
+            // mana weave, total of 7 land
+            // The Following have all been reduced by 1, to account for the
+            // computer starting first.
+            library.add(5, land.get(0));
+            library.add(6, land.get(1));
+            library.add(8, land.get(2));
+            library.add(9, land.get(3));
+            library.add(10, land.get(4));
+    
+            library.add(12, land.get(5));
+            library.add(15, land.get(6));
+        } catch (final IndexOutOfBoundsException e) {
+            System.err.println("Error: cannot smooth mana curve, not enough land");
+            return in;
+        }
+    
+        // add the rest of land to the end of the deck
+        for (int i = 0; i < land.size(); i++) {
+            if (!library.contains(land.get(i))) {
+                library.add(land.get(i));
+            }
+        }
+    
+        // check
+        for (int i = 0; i < library.size(); i++) {
+            System.out.println(library.get(i));
+        }
+    
+        return library;
+    } // smoothComputerManaCurve()
+
 
 }
 

@@ -61,7 +61,7 @@ public enum VDev implements IVDoc<CDev> {
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     // Dev labels
-    private final DevLabel lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
+    // private final DevLabel lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
     private final DevLabel lblUnlimitedLands = new DevLabel("Play many lands per Turn: Enabled",
             "Play many lands per Turn: Disabled");
     private final DevLabel lblGenerateMana = new DevLabel("Generate Mana");
@@ -80,7 +80,7 @@ public enum VDev implements IVDoc<CDev> {
 
     private VDev() {
         //devLBLs.add(lblRiggedRoll);
-        devLBLs.add(lblMilling);
+        // devLBLs.add(lblMilling);
         devLBLs.add(lblUnlimitedLands);
         devLBLs.add(lblGenerateMana);
         devLBLs.add(lblSetupGame);
@@ -106,7 +106,7 @@ public enum VDev implements IVDoc<CDev> {
         viewport.add(this.lblCardToBattlefield, halfConstraints);
         viewport.add(this.lblRiggedRoll, halfConstraints + ", split 2");
         viewport.add(this.lblWalkTo, halfConstraints);
-        viewport.add(this.lblMilling, constraints);
+        // viewport.add(this.lblMilling, constraints);
         viewport.add(this.lblUnlimitedLands, constraints);
         viewport.add(this.lblSetupGame, constraints);
         viewport.add(this.lblCounterPermanent, constraints);
@@ -169,9 +169,9 @@ public enum VDev implements IVDoc<CDev> {
     //========= Retrieval methods
 
     /** @return {@link forge.gui.match.views.VDev.DevLabel} */
-    public DevLabel getLblMilling() {
-        return this.lblMilling;
-    }
+//    public DevLabel getLblMilling() {
+//        return this.lblMilling;
+//    }
 
     /** @return {@link forge.gui.match.views.VDev.DevLabel} */
     public DevLabel getLblGenerateMana() {

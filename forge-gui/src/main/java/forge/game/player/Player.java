@@ -32,9 +32,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Constant.Preferences;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -60,16 +58,20 @@ import forge.game.event.GameEventShuffle;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.properties.ForgePreferences.FPref;
+import forge.item.IPaperCard;
 import forge.util.Lang;
 import forge.util.MyRandom;
 
@@ -82,7 +84,6 @@ import forge.util.MyRandom;
  * @version $Id$
  */
 public class Player extends GameEntity implements Comparable<Player> {
-
     private final Map<Card,Integer> commanderDamage = new HashMap<Card,Integer>();
 
     /** The poison counters. */
@@ -183,6 +184,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private boolean isPlayingExtraTrun = false;
 
+    public  boolean canCheatPlayUnlimitedLands = false;
+
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
     }
@@ -205,16 +208,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneBattlefield(z, this) : new PlayerZone(z, this);
             this.zones.put(z, toPut);
         }
-
-        if (isHotSeatGame(game)) {
-            if (game.getPlayers().size() == 1) {
-                Player player1 = game.getPlayers().get(0);
-                player1.setName("Player 1");
-                this.setName("Player 2");
-            }
-        } else {
-            this.setName(chooseName(name));
-        }
+        
+        this.setName(chooseName(name));
     }
 
     private String chooseName(String originalName) {
@@ -251,9 +246,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Deprecated
-    public boolean isHuman() { return getLobbyPlayer().getType() == PlayerType.HUMAN; }
+    public boolean isHuman() { return getLobbyPlayer().isHuman(); }
     @Deprecated
-    public boolean isComputer() { return getLobbyPlayer().getType() == PlayerType.COMPUTER; }
+    public boolean isComputer() { return getLobbyPlayer().isComputer(); }
 
     public boolean isArchenemy() {
 
@@ -1407,11 +1402,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             runParams.put("Player", this);
             game.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, false);
         }
-        // lose:
-        else if (!Preferences.DEV_MODE || Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MILLING_LOSS)) {
-            // if devMode is off, or canLoseByDecking is Enabled, run Lose condition
+        else // Lose by milling is always on. Give AI many cards it cannot play if you want it not to undertake actions
             this.triedToDrawFromEmptyLibrary = true;
-        }
+
         return drawn;
     }
 
@@ -1784,7 +1777,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
 
-        this.getZone(ZoneType.Library).setCards(list);
+        this.getZone(ZoneType.Library).setCards(getController().cheatShuffle(list));
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1877,11 +1870,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // **** Check for land play limit per turn ****
         // Dev Mode
-        if (this.getLobbyPlayer().getType() == PlayerType.HUMAN && Preferences.DEV_MODE &&
-                Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
-            return true;
-        }
-        if (this.isCardInPlay("Fastbond") || this.isCardInCommand("Naya")) {
+        if (this.canCheatPlayUnlimitedLands || this.isCardInPlay("Fastbond") || this.isCardInCommand("Naya")) {
             return true;
         }
 
@@ -3219,14 +3208,78 @@ public class Player extends GameEntity implements Comparable<Player> {
         return isPlayingExtraTrun;
     }
 
-    private boolean isHotSeatGame(Game game0) {
-        boolean isHotSeat = false;
-        List<RegisteredPlayer> players = game0.getMatch().getPlayers();
-        if (players.size() == 2) {
-            boolean isPlayer1Human = players.get(0).getPlayer().getType() == PlayerType.HUMAN;
-            boolean isPlayer2Human = players.get(1).getPlayer().getType() == PlayerType.HUMAN;
-            isHotSeat = (isPlayer1Human && isPlayer2Human);
+    public void initVariantsZones(RegisteredPlayer registeredPlayer) {
+    
+        PlayerZone bf = getZone(ZoneType.Battlefield);
+        Iterable<? extends IPaperCard> cards = registeredPlayer.getCardsOnBattlefield();
+        if (cards != null) {
+            for (final IPaperCard cp : cards) {
+                Card c = Card.fromPaperCard(cp, this);
+                bf.add(c);
+                c.setSickness(true);
+                c.setStartsGameInPlay(true);
+            }
         }
-        return isHotSeat;
+        
+        
+        PlayerZone com = getZone(ZoneType.Command);
+        // Mainly for avatar, but might find something else here
+        for (final IPaperCard cp : registeredPlayer.getCardsInCommand()) {
+            com.add(Card.fromPaperCard(cp, this));
+        }
+    
+        // Schemes
+        List<Card> sd = new ArrayList<Card>();
+        for(IPaperCard cp : registeredPlayer.getSchemes()) 
+            sd.add(Card.fromPaperCard(cp, this));
+        if ( !sd.isEmpty()) {
+            for(Card c : sd) {
+                getZone(ZoneType.SchemeDeck).add(c);
+            }
+            getZone(ZoneType.SchemeDeck).shuffle();
+        }
+        
+    
+        // Planes
+        List<Card> l = new ArrayList<Card>();
+        for(IPaperCard cp : registeredPlayer.getPlanes()) 
+            l.add(Card.fromPaperCard(cp, this));
+        if ( !l.isEmpty() ) {
+            for(Card c : l) {
+                getZone(ZoneType.PlanarDeck).add(c);
+            }
+            getZone(ZoneType.PlanarDeck).shuffle();
+        }
+        
+        // Commander
+        if(registeredPlayer.getCommander() != null)
+        {
+            Card cmd = Card.fromPaperCard(registeredPlayer.getCommander(), this);
+            cmd.setCommander(true);
+            com.add(cmd);
+            setCommander(cmd);
+            
+            final Card eff = new Card(getGame().nextCardId());
+            eff.setName("Commander effect");
+            eff.addType("Effect");
+            eff.setToken(true);
+            eff.setOwner(this);
+            eff.setColor(cmd.getColor());
+            eff.setImmutable(true);
+    
+            eff.setSVar("CommanderMoveReplacement", "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library | Destination$ Command | Defined$ ReplacedCard");
+            eff.setSVar("DBCommanderIncCast","DB$ StoreSVar | SVar$ CommanderCostRaise | Type$ CountSVar | Expression$ CommanderCostRaise/Plus.2");
+            eff.setSVar("CommanderCostRaise","Number$0");
+            
+            Trigger t = TriggerHandler.parseTrigger("Mode$ SpellCast | Static$ True | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | Execute$ DBCommanderIncCast", eff, true);
+            eff.addTrigger(t);
+            ReplacementEffect r = ReplacementHandler.parseReplacement("Event$ Moved | Destination$ Graveyard,Exile | ValidCard$ Card.IsCommander+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.", eff, true);
+            eff.addReplacementEffect(r);
+            eff.addStaticAbility("Mode$ Continuous | EffectZone$ Command | AddKeyword$ May be played | Affected$ Card.YouOwn+IsCommander | AffectedZone$ Command");
+            eff.addStaticAbility("Mode$ RaiseCost | EffectZone$ Command | Amount$ CommanderCostRaise | Type$ Spell | ValidCard$ Card.YouOwn+IsCommander+wasCastFromCommand | EffectZone$ All | AffectedZone$ Command,Stack");
+            
+            getZone(ZoneType.Command).add(eff);
+        }
+        
     }
 }

@@ -93,7 +93,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         ENFORCE_DECK_LEGALITY ("true"),
 
         DEV_MODE_ENABLED ("false"),
-        DEV_MILLING_LOSS ("true"),
+//        DEV_MILLING_LOSS ("true"),
         DEV_UNLIMITED_LAND ("false"),
         DEV_LOG_ENTRY_TYPE (GameLogEntryType.DAMAGE.toString()),
 
@@ -208,7 +208,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         final VDev v = VDev.SINGLETON_INSTANCE;
 
-        this.setPref(FPref.DEV_MILLING_LOSS, v.getLblMilling().getEnabled());
+        // this.setPref(FPref.DEV_MILLING_LOSS, v.getLblMilling().getEnabled());
         this.setPref(FPref.DEV_UNLIMITED_LAND, v.getLblUnlimitedLands().getEnabled());
     }
 

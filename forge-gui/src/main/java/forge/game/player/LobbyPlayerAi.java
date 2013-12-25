@@ -21,7 +21,7 @@ public class LobbyPlayerAi extends LobbyPlayer {
     }
 
     @Override
-    public PlayerType getType() {
+    protected PlayerType getType() {
         return PlayerType.COMPUTER;
     }
 

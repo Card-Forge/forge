@@ -69,6 +69,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
 import forge.util.ThreadUtil;
@@ -1437,6 +1438,12 @@ public class GameAction {
         reveal(message, cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner);
     }
 
+    public void revealAnte(String title, Multimap<Player, PaperCard> removedAnteCards) {
+        for (Player p : game.getPlayers()) {
+            p.getController().revealAnte(title, removedAnteCards);
+        }
+    }
+    
     public void reveal(String message, Collection<Card> cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner) {
         for (Player p : game.getPlayers()) {
             if (dontRevealToOwner && cardOwner == p) continue;

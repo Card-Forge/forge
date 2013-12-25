@@ -8,7 +8,6 @@ import java.util.Map;
 
 import forge.game.GameAction;
 import forge.game.GameStage;
-import forge.game.GameNew;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -75,8 +74,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             player.setStartingLife(psc.getStartingLife());
             player.setPoisonCounters(0, sa.getSourceCard());
             player.setNumLandsPlayed(0);
-            GameNew.putCardsOnBattlefield(player, psc.getCardsOnBattlefield(player));
-            GameNew.initVariantsZones(player, psc);
+            player.initVariantsZones(psc);
 
             List<Card> newLibrary = playerLibraries.get(player);
             for (Card c : newLibrary) {

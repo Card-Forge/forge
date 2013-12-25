@@ -192,6 +192,10 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         return true;
     }
 
+    public boolean removeAll(final T item) {
+        return this.getItems().remove(item) != null;
+    }
+    
     /**
      * 
      * RemoveAll.

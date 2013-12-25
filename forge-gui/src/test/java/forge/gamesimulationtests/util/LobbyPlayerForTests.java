@@ -9,7 +9,6 @@ import forge.game.Game;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
-import forge.game.player.PlayerType;
 import forge.gamesimulationtests.util.playeractions.PlayerActions;
 
 /**
@@ -27,7 +26,7 @@ public class LobbyPlayerForTests extends LobbyPlayer {
 	}
 	
 	@Override
-	public PlayerType getType() {
+	protected PlayerType getType() {
 		//Don't really want to use COMPUTER here, as that might cause to much automatic behaviour by AI code embedded in the current rules code
 		//Trying HUMAN for now, which might cause issues if it triggers GUI from the rules code.  If that happens, we'll need to refactor or use something else
 		return PlayerType.HUMAN;

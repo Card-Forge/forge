@@ -1,14 +1,14 @@
 package forge.game.event;
 
-import org.apache.commons.lang3.tuple.Pair;
+import com.google.common.collect.Multimap;
 
 import forge.game.card.Card;
 import forge.game.player.Player;
 
 public class GameEventAnteCardsSelected extends GameEvent {
-    public final Iterable<Pair<Player,Card>> cards;
-    public GameEventAnteCardsSelected(Iterable<Pair<Player,Card>> cardz) {
-        cards = cardz;
+    public final Multimap<Player, Card> cards;
+    public GameEventAnteCardsSelected(Multimap<Player, Card> list) {
+        cards = list;
     }
     
     

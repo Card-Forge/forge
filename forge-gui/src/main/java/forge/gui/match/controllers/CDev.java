@@ -6,9 +6,11 @@ import java.awt.event.MouseListener;
 
 import forge.Command;
 import forge.Singletons;
+import forge.game.player.Player;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VDev;
+import forge.net.FServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -22,16 +24,16 @@ public enum CDev implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    //========= Start mouse listener inits
-    private final MouseListener madMilling = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-        toggleLossByMilling();
-    } };
-    public void toggleLossByMilling() {
-        VDev.SINGLETON_INSTANCE.getLblMilling().toggleEnabled();
-        Singletons.getModel().getPreferences().writeMatchPreferences();
-        Singletons.getModel().getPreferences().save();
-    }
+//    //========= Start mouse listener inits
+//    private final MouseListener madMilling = new MouseAdapter() { @Override
+//        public void mousePressed(final MouseEvent e) {
+//        toggleLossByMilling();
+//    } };
+//    public void toggleLossByMilling() {
+//        VDev.SINGLETON_INSTANCE.getLblMilling().toggleEnabled();
+//        Singletons.getModel().getPreferences().writeMatchPreferences();
+//        Singletons.getModel().getPreferences().save();
+//    }
 
     private final MouseListener madUnlimited = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
@@ -39,8 +41,15 @@ public enum CDev implements ICDoc {
     } };
     public void togglePlayManyLandsPerTurn() {
         VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().toggleEnabled();
-        System.out.println(VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled());
-        Singletons.getModel().getPreferences().setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled()));
+        boolean newValue = VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().getEnabled();
+        Singletons.getModel().getPreferences().setPref(FPref.DEV_UNLIMITED_LAND, String.valueOf(newValue));
+        
+        for(Player p : Singletons.getControl().getObservedGame().getPlayers()) {
+            if( p.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer() )
+                p.canCheatPlayUnlimitedLands = newValue;
+        }
+        // probably will need to call a synchronized method to have the game thread see changed value of the variable 
+        
         Singletons.getModel().getPreferences().save();
     }
 
@@ -148,7 +157,7 @@ public enum CDev implements ICDoc {
      */
     @Override
     public void initialize() {
-        VDev.SINGLETON_INSTANCE.getLblMilling().addMouseListener(madMilling);
+       //  VDev.SINGLETON_INSTANCE.getLblMilling().addMouseListener(madMilling);
         VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().addMouseListener(madUnlimited);
         VDev.SINGLETON_INSTANCE.getLblGenerateMana().addMouseListener(madMana);
         VDev.SINGLETON_INSTANCE.getLblSetupGame().addMouseListener(madSetup);
@@ -164,7 +173,7 @@ public enum CDev implements ICDoc {
 
         ForgePreferences prefs = Singletons.getModel().getPreferences();
 
-        VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(prefs.getPrefBoolean(FPref.DEV_MILLING_LOSS));
+       //  VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(prefs.getPrefBoolean(FPref.DEV_MILLING_LOSS));
         //VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(Constant.Runtime.MILL[0]);
         VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setEnabled(prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND));
     }
@@ -174,17 +183,8 @@ public enum CDev implements ICDoc {
      */
     @Override
     public void update() {
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MILLING_LOSS)) {
-            VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(true);
-        } else {
-            VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(false);
-        }
-
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)) {
-            VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setEnabled(true);
-        } else {
-            VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setEnabled(false);
-        }
+        // VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MILLING_LOSS));
+        VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setEnabled(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND));
     }
 
 }

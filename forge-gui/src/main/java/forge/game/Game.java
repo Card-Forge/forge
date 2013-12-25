@@ -23,11 +23,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Multimap;
 import com.google.common.eventbus.EventBus;
 
 import forge.FThreads;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventGameOutcome;
@@ -46,6 +52,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 
     /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -573,10 +580,26 @@ public class Game {
         age = value;
     }
 
-
     private int cardIdCounter;
     public int nextCardId() {
         // TODO Auto-generated method stub
         return ++cardIdCounter;
     }
+
+
+    public Multimap<Player, Card> chooseCardsForAnte() {
+        Multimap<Player, Card> anteed = ArrayListMultimap.create();
+        for (final Player p : getPlayers()) {
+            final List<Card> lib = p.getCardsIn(ZoneType.Library);
+            Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
+            Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
+            if (ante == null) {
+                getGameLog().add(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them");
+                ante = Aggregates.random(lib);
+            }
+            anteed.put(p, ante);
+        }
+        return anteed;
+
+   }
 }

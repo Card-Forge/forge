@@ -47,7 +47,7 @@ public class RegisteredPlayer {
     public final int getStartingLife() {
         return startingLife;
     }
-    public final Iterable<? extends IPaperCard> getCardsOnBattlefield(Player p) {
+    public final Iterable<? extends IPaperCard> getCardsOnBattlefield() {
         return cardsOnBattlefield == null ? EmptyList : cardsOnBattlefield;
     }
 
@@ -76,7 +76,7 @@ public class RegisteredPlayer {
     /**
      * @return the cardsInCommand
      */
-    public Iterable<? extends IPaperCard> getCardsInCommand(Player p) {
+    public Iterable<? extends IPaperCard> getCardsInCommand() {
         return cardsInCommand == null ? EmptyList : cardsInCommand;
     }
 
@@ -95,7 +95,7 @@ public class RegisteredPlayer {
     /**
      * @return the schemes
      */
-    public Iterable<? extends IPaperCard> getSchemes(Player p) {
+    public Iterable<? extends IPaperCard> getSchemes() {
         return schemes == null ? EmptyList : schemes;
     }
 
@@ -109,7 +109,7 @@ public class RegisteredPlayer {
     /**
      * @return the planes
      */
-    public Iterable<PaperCard> getPlanes(final Player p) {
+    public Iterable<PaperCard> getPlanes() {
         return planes == null ? EmptyList : planes;
     }
 
@@ -169,5 +169,5 @@ public class RegisteredPlayer {
      */
     public IPaperCard getCommander() {
         return commander;
-    }
+    }    
 }

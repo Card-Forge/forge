@@ -17,6 +17,7 @@ import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 
 import forge.ai.AiBlockController;
 import forge.ai.AiController;
@@ -669,6 +670,22 @@ public class PlayerControllerAi extends PlayerController {
             // figure this out
             return "Worst".equals(sa.getParam("AILogic")) ^ (cmc1 >= cmc2);
         }
+    }
+
+    @Override
+    public void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards) {
+        // Ai won't understand that anyway
+    }
+    
+    @Override
+    public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) {
+        return brains.complainCardsCantPlayWell(myDeck);
+    }
+    
+    @Override
+    public List<Card> cheatShuffle(List<Card> list) {
+        // TODO Auto-generated method stub
+        return brains.cheatShuffle(list);
     }
 
 }

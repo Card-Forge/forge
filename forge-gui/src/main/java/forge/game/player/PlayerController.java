@@ -10,6 +10,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Multimap;
 
 import forge.card.ColorSet;
 import forge.deck.Deck;
@@ -203,4 +204,10 @@ public abstract class PlayerController {
     public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);
     public abstract Map<GameEntity, CounterType> chooseProliferation();
     public abstract boolean chooseCardsPile(SpellAbility sa, List<Card> pile1,List<Card> pile2, boolean faceUp);
+
+    public abstract void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards);
+
+    // These 2 are for AI
+    public List<Card> cheatShuffle(List<Card> list) { return list; }
+    public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) { return null; }
 }

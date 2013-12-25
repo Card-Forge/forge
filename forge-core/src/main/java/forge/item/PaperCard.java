@@ -24,13 +24,11 @@ import forge.card.CardRules;
 
 
 /**
- * A viciously lightweight version of a card, for instances
- * where a full set of meta and rules is not needed.
+ * A lightweight version of a card that matches real-world cards, to use outside of games (eg. inventory, decks, trade).
  * <br><br>
  * The full set of rules is in the CardRules class.
  * 
  * @author Forge
- * @version $Id: CardReference.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard {
     // Reference to rules
