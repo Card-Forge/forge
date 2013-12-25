@@ -2536,8 +2536,8 @@ public class CardFactoryUtil {
 
         if (card.hasStartOfKeyword("Amplify")) {
             // find position of Amplify keyword
-            final int equipPos = card.getKeywordPosition("Amplify");
-            final String[] ampString = card.getKeyword().get(equipPos).split(":");
+            final int ampPos = card.getKeywordPosition("Amplify");
+            final String[] ampString = card.getKeyword().get(ampPos).split(":");
             final String amplifyMagnitude = ampString[1];
             final String suffix = !amplifyMagnitude.equals("1") ? "s" : "";
             final String ampTypes = ampString[2];
@@ -2549,19 +2549,22 @@ public class CardFactoryUtil {
                     types.append(",");
                 }
             }
-            // Setup ETB trigger for card with Amplify keyword
-            final String actualTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
-                    + "ValidCard$ Card.Self | Execute$ AmplifyReveal | Static$ True | Secondary$ True | "
-                    + "TriggerDescription$ As this creature enters the battlefield, put "
-                    + amplifyMagnitude + " +1/+1 counter" + suffix + " on it for each "
-                    + ampTypes.replace(",", " and/or ") + " card you reveal in your hand.)";
-            final String abString = "AB$ Reveal | Cost$ 0 | AnyNumber$ True | RevealValid$ "
-                    + types.toString() + " | RememberRevealed$ True | SubAbility$ Amplify";
-            final String dbString = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | "
-                    + "CounterNum$ AmpMagnitude | References$ Revealed,AmpMagnitude | SubAbility$ DBCleanup";
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
-            card.addTrigger(parsedTrigger);
+            // Setup ETB replacement effects
+            final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
+            		+ " ReplaceWith$ AmplifyReveal | Secondary$ True | Description$ As this creature "
+            		+ "enters the battlefield, put " + amplifyMagnitude + " +1/+1 counter" + suffix 
+            		+ " on it for each " + ampTypes.replace(",", " and/or ") 
+            		+ " card you reveal in your hand.)";
+            final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
+                    + types.toString() + " | RememberRevealed$ True | SubAbility$ AmplifyMoveToPlay";
+            final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
+            		+ "Defined$ ReplacedCard | Hidden$ True | SubAbility$ Amplify";
+            final String dbString = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | "
+                    + "CounterNum$ AmpMagnitude | References$ Revealed,AmpMagnitude | SubAbility$"
+                    + " DBCleanup";
+            card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
             card.setSVar("AmplifyReveal", abString);
+            card.setSVar("AmplifyMoveToPlay", moveToPlay);
             card.setSVar("Amplify", dbString);
             card.setSVar("DBCleanup", "DB$ Cleanup | ClearRemembered$ True");
             card.setSVar("AmpMagnitude", "SVar$Revealed/Times." + amplifyMagnitude);
