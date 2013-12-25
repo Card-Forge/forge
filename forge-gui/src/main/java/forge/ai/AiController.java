@@ -916,13 +916,22 @@ public class AiController {
 
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
         //TODO: AILogic
-        if ("GainLife".equals(sa.getParam("AILogic"))) {
+    	final String logic = sa.getParam("AILogic");
+        if ("GainLife".equals(logic)) {
             if (player.getLife() < 5 || player.getCardsIn(ZoneType.Hand).size() >= player.getMaxHandSize()) {
                 return min;
             }
         }
-        if ("Min".equals(sa.getParam("AILogic"))) {
+        else if ("Min".equals(logic)) {
             return min;
+        }
+        else if ("DigACard".equals(logic)) {
+        	int random = MyRandom.getRandom().nextInt(Math.min(4, max)) + 1;
+        	if (player.getLife() < random + 5) {
+        		return min;
+        	} else {
+        		return random;
+        	}
         }
         return max;
     }

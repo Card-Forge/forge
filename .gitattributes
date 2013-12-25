@@ -8618,6 +8618,7 @@ forge-gui/res/cardsfolder/p/plumes_of_peace.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/plumeveil.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/plummet.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/plunder.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/plunge_into_darkness.txt -text
 forge-gui/res/cardsfolder/p/poison_arrow.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/poison_the_well.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/poisonbelly_ogre.txt svneol=native#text/plain
