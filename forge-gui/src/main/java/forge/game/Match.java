@@ -124,7 +124,7 @@ public class Match {
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                newGame(game, canRandomFoil, Match.this.useAnte);
+                newGame(game, canRandomFoil);
                 
                 if (useAnte) {  // Deciding which cards go to ante
                     Multimap<Player, Card> list = game.chooseCardsForAnte();
@@ -269,7 +269,7 @@ public class Match {
      * their decks and other special starting conditions.
      * @param forceAnte Forces ante on or off no matter what your preferences
      */
-    public static void newGame(final Game game, final boolean canRandomFoil, boolean useAnte) {
+    private void newGame(final Game game, final boolean canRandomFoil) {
         // need this code here, otherwise observables fail
         Trigger.resetIDs();
         game.getTriggerHandler().clearDelayedTrigger();
