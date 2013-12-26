@@ -278,6 +278,7 @@ Garruk
 Gideon
 Jace
 Karn
+Kiora
 Koth
 Liliana
 Nissa
