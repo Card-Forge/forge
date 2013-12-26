@@ -28,7 +28,8 @@ public enum AiProps { /** */
     DEFAULT_MIN_TURN_TO_ROLL_PLANAR_DIE ("3"), /** */
     DEFAULT_PLANAR_DIE_ROLL_CHANCE ("50"), /** */
     MULLIGAN_THRESHOLD ("5"), /** */
-    PLANAR_DIE_ROLL_HESITATION_CHANCE ("10"); /** */
+    PLANAR_DIE_ROLL_HESITATION_CHANCE ("10"),
+	CHEAT_WITH_MANA_ON_SHUFFLE ("FALSE"); /** */
 
     private final String strDefaultVal;
 
