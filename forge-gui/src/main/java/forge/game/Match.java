@@ -327,8 +327,9 @@ public class Match {
                 removedAnteCards.putAll(player, myRemovedAnteCards);
         }
 
-        if (!rAICards.isEmpty() && GameType.Quest != game.getType() && GameType.Sealed != game.getType() && GameType.Draft != game.getType() ) {
-            game.getAction().revealAnte("These cards from AIs' decks cannot be played or may be buggy", rAICards);
+        boolean isLimitedGame = GameType.Quest == game.getType() || GameType.Sealed == game.getType() || GameType.Draft == game.getType();
+        if (!rAICards.isEmpty() && !isLimitedGame ) {
+            game.getAction().revealAnte("AI can't play well these cards:", rAICards);
         }
 
         if (!removedAnteCards.isEmpty()) {
