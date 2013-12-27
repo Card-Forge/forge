@@ -108,6 +108,7 @@ public enum ApiType {
     Reveal (RevealEffect.class, RevealAi.class),
     RevealHand (RevealHandEffect.class, RevealHandAi.class),
     RollPlanarDice (RollPlanarDiceEffect.class, RollPlanarDiceAi.class),
+    RunSVarAbility (RunSVarAbilityEffect.class, AlwaysPlayAi.class),
     Sacrifice (SacrificeEffect.class, SacrificeAi.class),
     SacrificeAll (SacrificeAllEffect.class, SacrificeAllAi.class),
     Scry (ScryEffect.class, ScryAi.class),

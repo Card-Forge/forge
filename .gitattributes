@@ -8638,6 +8638,7 @@ forge-gui/res/cardsfolder/p/ponder.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pongify.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pontiff_of_blight.txt -text
 forge-gui/res/cardsfolder/p/pooling_venom.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/pools_of_becoming.txt -text
 forge-gui/res/cardsfolder/p/porcelain_legionnaire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/porphyry_nodes.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/port_inspector.txt svneol=native#text/plain
@@ -14956,6 +14957,7 @@ forge-gui/src/main/java/forge/game/ability/effects/RestartGameEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/RevealEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/RevealHandEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/RollPlanarDiceEffect.java -text
+forge-gui/src/main/java/forge/game/ability/effects/RunSVarAbilityEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/SacrificeAllEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/SacrificeEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/ScryEffect.java -text

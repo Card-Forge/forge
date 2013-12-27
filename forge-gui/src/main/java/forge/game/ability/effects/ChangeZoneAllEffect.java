@@ -85,7 +85,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
 
-        if (destination.equals(ZoneType.Library) && !sa.hasParam("Shuffle") && cards.size() >= 2 && !random) {
+        if ((destination == ZoneType.Library || destination == ZoneType.PlanarDeck)
+        		&& !sa.hasParam("Shuffle") && cards.size() >= 2 && !random) {
             cards = sa.getActivatingPlayer().getController().orderMoveToZoneList(cards, destination);
         }
 
@@ -94,7 +95,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
 
         for (final Card c : cards) {
-            if (destination.equals(ZoneType.Battlefield)) {
+            if (destination == ZoneType.Battlefield) {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
                     final SpellAbility saAura = AttachEffect.getAttachSpellAbility(c);
