@@ -1,31 +1,12 @@
-Forge Beta: 12-27-2013 ver 1.5.8
+Forge Beta: ##-##-2013 ver 1.5.9
 
 
-13412 cards in total.
+13### cards in total.
 
 
 -------------
 Release Notes
 -------------
-
-- Improved dialog appearance -
-Many message and confirmation dialogs now use skinned look with rounded border dialog on top of overlay.
-
-
-- Deck Editor usability improvements -
-You can now mark a card as a favorite in the Catalog by clicking the star icon in the first column. This will default the card to sort ahead of non-favorite cards if you sort on that first column (which is now the Forge default).
-You can now add or remove cards from a deck using +/- buttons that appear on either side of the quantity for each card.
-Filters are now available on Current Deck pane, replacing the need for the static stat labels.
-A new filter has been added to allow filtering on specific Converted Mana Costs (0, 1, 2, 3, 4, 5, 6+), as well as displaying the card count at each CMC.
-Color and Type filter buttons no longer wrap, instead growing or shrinking as needed (along with the font the count string is too long).
-Color and Type filter buttons can now be hidden, as well as be added from the Filters menu (formally "Add filter").
-The Total stat label has been removed in favor of showing a caption and (# SHOWN/# AVAILBLE) ratio above the table. The caption is "Catalog" for the Catalog pane, and the deck name for the "Current Deck" pane.
-Checkboxes are now available for each filter type, allowing that filter to be disabled and re-enabled without losing the configuration of that filter (such as chosen sets).
-Adding a filter for formats, sets, and quest worlds now merges into existing filters of that type if possible to apply OR logic, rather than both appearing as separate filters with AND logic applied, likely resulting in no results.
-Pressing Ctrl+Enter to add a filter for the current search now adds another editable search bar rather than just a label.
-Cards added to deck are now selected, even if multiple are added at once. The performance of adding and removing multiple cards at once has also been improved.
-When some but not all copies of a selected card are removed from the deck, that card now remains selected in the case of multiple cards being selected.
-
 
 - Constructed mode -
 Recently a change was made to the constructed mode and this change now allows you to have up to 8 players rather than just two. The game formats that are located in the variants mode also allow up to eight players. The current user interface for this feature is fairly basic and is not very attractive. The settings tab allows you to set the number of opponents. The player tabs includes the same options that you used to see in the constructed mode.
@@ -43,12 +24,7 @@ Forge now includes many of the new Commander 2013 cards. It may take a few days/
 New Cards
 ---------
 
-Hall of Gemstone
-Plunge into Darkness
-Pools of Becoming
-Primal Vigor
-Scrambleverse
-Tariff
+
 
 
 --------------------
@@ -82,15 +58,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-DrDev
-Gos
-Marc
-Max
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)

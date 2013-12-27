@@ -968,6 +968,25 @@ Hybrid cards, split cards, and phyrexian cards will now show up so long as the c
 To improve usability, right-clicking a color filter button will now also select the multicolor button so hybrids and split cards appear by default, and so 2 color cards show up if you then left click a second color filter button.
 
 
+- Improved dialog appearance -
+Many message and confirmation dialogs now use skinned look with rounded border dialog on top of overlay.
+
+
+- Deck Editor usability improvements -
+You can now mark a card as a favorite in the Catalog by clicking the star icon in the first column. This will default the card to sort ahead of non-favorite cards if you sort on that first column (which is now the Forge default).
+You can now add or remove cards from a deck using +/- buttons that appear on either side of the quantity for each card.
+Filters are now available on Current Deck pane, replacing the need for the static stat labels.
+A new filter has been added to allow filtering on specific Converted Mana Costs (0, 1, 2, 3, 4, 5, 6+), as well as displaying the card count at each CMC.
+Color and Type filter buttons no longer wrap, instead growing or shrinking as needed (along with the font the count string is too long).
+Color and Type filter buttons can now be hidden, as well as be added from the Filters menu (formally "Add filter").
+The Total stat label has been removed in favor of showing a caption and (# SHOWN/# AVAILBLE) ratio above the table. The caption is "Catalog" for the Catalog pane, and the deck name for the "Current Deck" pane.
+Checkboxes are now available for each filter type, allowing that filter to be disabled and re-enabled without losing the configuration of that filter (such as chosen sets).
+Adding a filter for formats, sets, and quest worlds now merges into existing filters of that type if possible to apply OR logic, rather than both appearing as separate filters with AND logic applied, likely resulting in no results.
+Pressing Ctrl+Enter to add a filter for the current search now adds another editable search bar rather than just a label.
+Cards added to deck are now selected, even if multiple are added at once. The performance of adding and removing multiple cards at once has also been improved.
+When some but not all copies of a selected card are removed from the deck, that card now remains selected in the case of multiple cards being selected.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
