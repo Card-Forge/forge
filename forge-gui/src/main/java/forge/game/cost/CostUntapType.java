@@ -206,6 +206,9 @@ public class CostUntapType extends CostPartWithList {
         return new PaymentDecision(list);
     }
 
-    // Inputs
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 
 }

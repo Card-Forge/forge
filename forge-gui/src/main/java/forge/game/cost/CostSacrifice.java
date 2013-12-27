@@ -216,5 +216,8 @@ public class CostSacrifice extends CostPartWithList {
     }
 
     // Inputs
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
 
 }

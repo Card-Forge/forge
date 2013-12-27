@@ -184,4 +184,9 @@ public class CostExiledMoveToGrave extends CostPartWithList {
 
         return chosen.isEmpty() ? null : new PaymentDecision(chosen);
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

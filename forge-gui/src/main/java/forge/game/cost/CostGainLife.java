@@ -194,4 +194,9 @@ public class CostGainLife extends CostPart {
 
         return new PaymentDecision(c);
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

@@ -166,4 +166,9 @@ public class CostMill extends CostPartWithList {
         List<Card> topLib = ai.getCardsIn(ZoneType.Library, c);
         return topLib.size() < c ? null : new PaymentDecision(topLib);
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

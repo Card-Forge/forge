@@ -121,4 +121,9 @@ public class CostDamage extends CostPart {
 
         return new PaymentDecision(c);
     }
+    
+    @Override
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
 }

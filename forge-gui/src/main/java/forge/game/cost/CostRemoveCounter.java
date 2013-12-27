@@ -418,4 +418,9 @@ public class CostRemoveCounter extends CostPartWithList {
         this.cntRemoved = c;
         return new PaymentDecision(source);
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

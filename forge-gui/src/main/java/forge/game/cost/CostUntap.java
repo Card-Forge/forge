@@ -108,4 +108,9 @@ public class CostUntap extends CostPart {
         source.untap();
         return true;
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

@@ -149,4 +149,9 @@ public class CostUnattach extends CostPartWithList {
         }
         return new PaymentDecision(cardToUnattach);
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

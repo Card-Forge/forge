@@ -81,9 +81,9 @@ public class CostPayment {
             return true;
         }
 
-        Player activator = ability.getActivatingPlayer();
         final Card card = ability.getSourceCard();
 
+        Player activator = ability.getActivatingPlayer();
         if (activator == null) {
             activator = card.getController();
         }

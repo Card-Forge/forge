@@ -163,5 +163,9 @@ public class CostExileAndPay extends CostPartWithList {
     public String toString() {
         return "Exile a creature card from your graveyard and pay it's mana cost";
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
 
 }

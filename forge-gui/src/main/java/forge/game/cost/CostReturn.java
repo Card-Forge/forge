@@ -202,7 +202,10 @@ public class CostReturn extends CostPartWithList {
         return true;
     }
 
-    // Inputs
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 
 
 }

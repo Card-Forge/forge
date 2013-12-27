@@ -221,4 +221,9 @@ public class CostPartMana extends CostPart {
         }
         return done;
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

@@ -517,4 +517,9 @@ public class CostExile extends CostPartWithList {
         }
         return true;
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+    
 }

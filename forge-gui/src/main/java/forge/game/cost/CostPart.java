@@ -164,20 +164,8 @@ public abstract class CostPart {
      */
     public abstract PaymentDecision decideAIPayment(final Player ai, SpellAbility ability, Card source);
 
-    /**
-     * Pay ai.
-     * 
-     * @param ai
-     *            {@link forge.player.Player}
-     * @param ability
-     *            {@link forge.game.spellability.SpellAbility}
-     * @param source
-     *            {@link forge.game.card.Card}
-     * @param payment
-     *            {@link forge.game.cost.CostPayment}
-     * @param game
-     * @return 
-     */
+    public abstract <T> T accept(final ICostVisitor<T> visitor);
+    
     public abstract boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source);
 
     /**

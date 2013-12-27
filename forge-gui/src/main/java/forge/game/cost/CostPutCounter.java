@@ -257,4 +257,9 @@ public class CostPutCounter extends CostPartWithList {
         }
         return new PaymentDecision(card);
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

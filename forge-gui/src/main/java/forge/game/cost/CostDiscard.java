@@ -327,5 +327,8 @@ public class CostDiscard extends CostPartWithList {
         return executePayment(ability, decision.cards);
     }
 
-    // Inputs
+    @Override
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
 }

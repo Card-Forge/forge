@@ -111,5 +111,10 @@ public class CostChooseCreatureType extends CostPart {
 		source.setChosenType(choice);
 		return true;
 	}
+	
+    @Override
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
 
 }

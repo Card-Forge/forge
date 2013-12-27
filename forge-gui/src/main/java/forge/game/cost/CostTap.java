@@ -108,4 +108,9 @@ public class CostTap extends CostPart {
     public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
         return new PaymentDecision(0);
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

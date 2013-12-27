@@ -224,4 +224,9 @@ public class CostRemoveAnyCounter extends CostPartWithList {
         // TODO: add ai for Chisei, Heart of Oceans
         return hperms.isEmpty() ? null : new PaymentDecision(hperms);
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

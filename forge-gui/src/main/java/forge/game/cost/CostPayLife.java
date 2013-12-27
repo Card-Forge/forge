@@ -159,4 +159,9 @@ public class CostPayLife extends CostPart {
         // activator.payLife(c, null);
         return new PaymentDecision(c);
     }
+    
+    public <T> T accept(ICostVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }
