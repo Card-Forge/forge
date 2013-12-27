@@ -24,6 +24,7 @@ import forge.deck.generation.DeckGenerator3Color;
 import forge.deck.generation.DeckGenerator5Color;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.DeckGeneratorMonoColor;
+import forge.gui.toolbox.FOptionPane;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -267,8 +268,7 @@ public class DeckgenUtil {
         msg.append("Copy Decklist to Clipboard?");
 
         // Output
-        final int rcMsg = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), msg, "Decklist", JOptionPane.OK_CANCEL_OPTION);
-        if (rcMsg == JOptionPane.OK_OPTION) {
+        if (FOptionPane.showConfirmDialog(msg.toString(), "Decklist", "OK", "Cancel")) {
             final StringSelection ss = new StringSelection(deckList.toString());
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
         }
@@ -285,16 +285,16 @@ public class DeckgenUtil {
         boolean result = true;
 
         if (colors0.size() == 4) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+            FOptionPane.showMessageDialog(
                     "Sorry, four color generated decks aren't supported yet."
                     + "\n\rPlease use 2, 3, or 5 colors for this deck.",
-                    "Generate deck: 4 colors", JOptionPane.ERROR_MESSAGE);
+                    "Generate deck: 4 colors", FOptionPane.ERROR_ICON);
             result = false;
         }
         else if (colors0.size() > 5) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+            FOptionPane.showMessageDialog(
                     "Generate deck: maximum five colors!",
-                    "Generate deck: too many colors", JOptionPane.ERROR_MESSAGE);
+                    "Generate deck: too many colors", FOptionPane.ERROR_ICON);
             result = false;
         }
         return result;

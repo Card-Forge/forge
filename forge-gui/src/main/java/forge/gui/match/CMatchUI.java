@@ -65,7 +65,7 @@ import forge.gui.match.views.VHand;
 import forge.gui.match.views.VPlayers;
 import forge.gui.match.views.VStack;
 import forge.gui.menus.IMenuProvider;
-import forge.gui.menus.MenuUtil;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
@@ -497,7 +497,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         String userPrompt =
                 "This will end the current game and you will not be able to resume.\n\n" +
                         "Concede anyway?";
-        if (MenuUtil.getUserConfirmation(userPrompt, "Concede Game?", false)) {
+        if (FOptionPane.showConfirmDialog(userPrompt, "Concede Game?", false)) {
             Singletons.getControl().stopGame();
         }
     }

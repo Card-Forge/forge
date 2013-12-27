@@ -31,8 +31,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
@@ -47,6 +45,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseType;
 import forge.gui.player.HumanPlay;
+import forge.gui.toolbox.FOptionPane;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
@@ -127,10 +126,12 @@ public final class GuiDisplayUtil {
             }
 
             in.close();
-        } catch (final FileNotFoundException fnfe) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "File not found: " + fc.getSelectedFile().getAbsolutePath());
-        } catch (final Exception e) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Error loading battle setup file!");
+        }
+        catch (final FileNotFoundException fnfe) {
+            FOptionPane.showErrorMessageDialog("File not found: " + fc.getSelectedFile().getAbsolutePath());
+        }
+        catch (final Exception e) {
+            FOptionPane.showErrorMessageDialog("Error loading battle setup file!");
             return;
         }
 

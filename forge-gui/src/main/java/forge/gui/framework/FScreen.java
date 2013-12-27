@@ -2,8 +2,6 @@ package forge.gui.framework;
 
 import java.io.File;
 
-import javax.swing.JOptionPane;
-
 import forge.Singletons;
 import forge.gui.bazaar.CBazaarUI;
 import forge.gui.bazaar.VBazaarUI;
@@ -13,6 +11,7 @@ import forge.gui.home.CHomeUI;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.workshop.CWorkshopUI;
@@ -202,7 +201,7 @@ public enum FScreen {
         }
         catch (final Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Failed to delete layout file.");
+            FOptionPane.showErrorMessageDialog("Failed to delete layout file.");
         }
         return false;
     }

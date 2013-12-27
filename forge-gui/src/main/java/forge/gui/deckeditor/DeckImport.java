@@ -26,7 +26,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
@@ -47,6 +46,7 @@ import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FHtmlViewer;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
@@ -158,9 +158,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             @Override
             public void actionPerformed(final ActionEvent e) {
                 final String warning = "This will replace contents of your currently open deck with whatever you are importing. Proceed?";
-                final int answer = JOptionPane.showConfirmDialog(DeckImport.this, warning, "Replacing old deck",
-                        JOptionPane.YES_NO_OPTION);
-                if (JOptionPane.NO_OPTION == answer) {
+                if (!FOptionPane.showConfirmDialog(warning, "Replacing old deck")) {
                     return;
                 }
                 final Deck toSet = DeckImport.this.buildDeck();

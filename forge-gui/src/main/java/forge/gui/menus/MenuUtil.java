@@ -7,7 +7,6 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import forge.Singletons;
-import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
 import forge.gui.toolbox.imaging.ImageUtil;
@@ -21,7 +20,8 @@ public final class MenuUtil {
     public static void openUrlInBrowser(String url) {
         try {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
             e.printStackTrace();
         }
@@ -35,15 +35,10 @@ public final class MenuUtil {
         return KeyStroke.getKeyStroke(key, DEFAULT_MenuShortcutKeyMask);
     }
 
-    public static boolean getUserConfirmation(String prompt, String dialogTitle, boolean defaultYes) {
-        String[] options = {"Yes", "No"};
-        int reply = FOptionPane.showOptionDialog(prompt, dialogTitle, FSkin.getIcon(FSkin.InterfaceIcons.ICO_QUESTION), options, defaultYes ? 0 : 1);
-        return (reply == 0);
-    }
-
     public static void setMenuProvider(IMenuProvider provider) {
         Singletons.getControl().getForgeMenu().setProvider(provider);
     }
+
     public static void setMenuHint(final JMenuItem menu, final String hint) {
         menu.setToolTipText(hint);
     }

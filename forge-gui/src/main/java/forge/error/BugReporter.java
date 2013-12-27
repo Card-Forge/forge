@@ -54,6 +54,7 @@ import forge.FThreads;
 import forge.gui.WrapLayout;
 import forge.gui.toolbox.FHyperlink;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOptionPane;
 import forge.model.BuildInfo;
 
 /**
@@ -272,14 +273,14 @@ public class BugReporter {
                 
                 // browse to url
                 Desktop.getDesktop().browse(new URI(url));
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                        "Sorry, a problem occurred while opening the forum in your default browser.",
-                        "A problem occured", JOptionPane.ERROR_MESSAGE);
+            }
+            catch (Exception ex) {
+                FOptionPane.showMessageDialog("Sorry, a problem occurred while opening the forum in your default browser.",
+                        "A problem occurred", FOptionPane.ERROR_ICON);
             }
         }
     }
-    
+
     @SuppressWarnings("serial")
     private static class _SaveAction extends AbstractAction {
         private static JFileChooser c;
@@ -306,7 +307,7 @@ public class BugReporter {
                     break;
                 }
             }
-            
+
             c.setSelectedFile(f);
             c.showSaveDialog(null);
             f = c.getSelectedFile();
@@ -315,10 +316,10 @@ public class BugReporter {
                 final BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(this.area.getText());
                 bw.close();
-            } catch (final IOException ex) {
-                JOptionPane.showMessageDialog(area.getTopLevelAncestor(),
-                        "There was an error during saving.  Sorry!\n" + ex,
-                        "Error saving file", JOptionPane.ERROR_MESSAGE);
+            }
+            catch (final IOException ex) {
+                FOptionPane.showMessageDialog("There was an error during saving.  Sorry!\n" + ex,
+                        "Error saving file", FOptionPane.ERROR_ICON);
             }
         }
     }

@@ -20,6 +20,7 @@ import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
+import forge.gui.toolbox.FOptionPane;
 import forge.net.FServer;
 import forge.net.Lobby;
 import forge.properties.ForgePreferences.FPref;
@@ -100,7 +101,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     private void startGame(final GameType gameType) {
         for(int i=0;i<view.getNumPlayers();i++) {
         	if (view.getDeckChooser(i).getPlayer() == null) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please specify a deck for each player first.");
+                FOptionPane.showMessageDialog("Please specify a deck for each player first.");
                 return;
             }
         }        

@@ -24,6 +24,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FComboBox;
 import forge.gui.toolbox.FComboBoxPanel;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOptionPane;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -183,7 +184,7 @@ public enum CSubmenuPreferences implements ICDoc {
         int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Deck Editor Layout", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             if (FScreen.DECK_EDITOR_CONSTRUCTED.deleteLayoutFile()) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Deck Editor layout has been reset.");
+                FOptionPane.showMessageDialog("Deck Editor layout has been reset.");
             }
         }
     }
@@ -196,7 +197,7 @@ public enum CSubmenuPreferences implements ICDoc {
         int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Workshop Layout", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             if (FScreen.WORKSHOP_SCREEN.deleteLayoutFile()) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Workshop layout has been reset.");
+                FOptionPane.showMessageDialog("Workshop layout has been reset.");
             }
         }
     }
@@ -210,7 +211,7 @@ public enum CSubmenuPreferences implements ICDoc {
         int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Match Screen Layout", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             if (FScreen.MATCH_SCREEN.deleteLayoutFile()) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Match Screen layout has been reset.");
+                FOptionPane.showMessageDialog("Match Screen layout has been reset.");
             }
         }
     }

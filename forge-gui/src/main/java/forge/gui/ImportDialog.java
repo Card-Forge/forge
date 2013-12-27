@@ -62,6 +62,7 @@ import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
@@ -149,8 +150,9 @@ public class ImportDialog {
                 if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(JOptionPane.getRootFrame())) {
                     File f = _fileChooser.getSelectedFile();
                     if (!f.canRead()) {
-                        JOptionPane.showMessageDialog(txfSrc, "Cannot access selected directory (Permission denied).");
-                    } else {
+                        FOptionPane.showErrorMessageDialog("Cannot access selected directory (Permission denied).");
+                    }
+                    else {
                         txfSrc.setText(f.getAbsolutePath());
                     }
                 }
@@ -620,17 +622,17 @@ public class ImportDialog {
                                 sb.append("will come up again the next time you start Forge in order to migrate the remaining files<br>");
                                 sb.append("unless you move or delete them manually.</html>");
                                 
-                                Object[] options = { "Whoops, let me fix that!", "Continue with the import, I know what I'm doing." };
-                                int chosen = JOptionPane.showOptionDialog(_operationLog, sb.toString(), "Migration warning",
-                                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-                                
-                                if (1 != chosen) {
+                                String[] options = { "Whoops, let me fix that!", "Continue with the import, I know what I'm doing." };
+                                int chosen = FOptionPane.showOptionDialog(sb.toString(), "Migration warning",
+                                        FOptionPane.WARNING_ICON, options, 0);
+
+                                if (chosen != 1) {
                                     // i.e. option 0 was chosen or the dialog was otherwise closed
                                     return;
                                 }
                             }
                         }
-                        
+
                         // ensure no other actions (except for cancel) can be taken while the import is in progress
                         _btnStart.setEnabled(false);
                         _btnChooseDir.setEnabled(false);

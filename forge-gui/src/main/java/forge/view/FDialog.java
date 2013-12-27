@@ -11,7 +11,6 @@ import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.PopupMenu;
-import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.GraphicsDevice.WindowTranslucency;
 import java.awt.event.ComponentAdapter;
@@ -100,7 +99,7 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
 
         //draw rounded border
         final Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //TODO: Re-enable anti-aliasing when it won't break on Linux
         skin.setGraphicsColor(g2d, borderColor);
         if (isSetShapeSupported) {
             g2d.drawRoundRect(0, 0, this.getWidth() - 1, this.getHeight() - 1, cornerDiameter, cornerDiameter);

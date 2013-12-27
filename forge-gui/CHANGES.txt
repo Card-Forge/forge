@@ -8,6 +8,10 @@ Forge Beta: 12-##-2013 ver 1.5.8
 Release Notes
 -------------
 
+- Improved dialog appearance -
+Many message and confirmation dialogs now use skinned look with rounded border dialog on top of overlay
+
+
 - Deck Editor usability improvements -
 You can now mark a card as a favorite in the Catalog by clicking the star icon in the first column. This will default the card to sort ahead of non-favorite cards if you sort on that first column (which is now the Forge default).
 You can now add or remove cards from a deck using +/- buttons that appear on either side of the quantity for each card.

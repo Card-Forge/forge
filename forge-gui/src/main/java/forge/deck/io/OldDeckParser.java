@@ -24,14 +24,13 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
-import javax.swing.JOptionPane;
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
+import forge.gui.toolbox.FOptionPane;
 import forge.properties.NewConstants;
 import forge.util.FileSection;
 import forge.util.FileUtil;
@@ -149,8 +148,7 @@ public class OldDeckParser {
                 this.draft.add(d);
             } else {
                 final String msg = String.format("Draft '%s' lacked some decks.%n%nShould it be deleted?");
-                mayDelete = JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), msg, "Draft loading error",
-                        JOptionPane.YES_NO_OPTION);
+                mayDelete = FOptionPane.showConfirmDialog(msg, "Draft loading error");
             }
 
             if (mayDelete) {
@@ -180,13 +178,13 @@ public class OldDeckParser {
                 try {
                     this.cube.add(Deck.fromSections(sections));
                     importedOk = true;
-                } catch (final NoSuchElementException ex) {
+                }
+                catch (final NoSuchElementException ex) {
                     if (!allowDeleteUnsupportedConstructed) {
                         final String msg = String
                                 .format("Can not convert deck '%s' for some unsupported cards it contains. %n%s%n%nMay Forge delete all such decks?",
                                         name, ex.getMessage());
-                        allowDeleteUnsupportedConstructed = JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(
-                                JOptionPane.getRootFrame(), msg, "Problem converting decks", JOptionPane.YES_NO_OPTION);
+                        allowDeleteUnsupportedConstructed = FOptionPane.showConfirmDialog(msg, "Problem converting decks");
                     }
                 }
                 if (importedOk || allowDeleteUnsupportedConstructed) {
@@ -205,8 +203,7 @@ public class OldDeckParser {
                         final String msg = String
                                 .format("Can not convert deck '%s' for some unsupported cards it contains. %n%s%n%nMay Forge delete all such decks?",
                                         name, ex.getMessage());
-                        allowDeleteUnsupportedConstructed = JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(
-                                null, msg, "Problem converting decks", JOptionPane.YES_NO_OPTION);
+                        allowDeleteUnsupportedConstructed = FOptionPane.showConfirmDialog(msg, "Problem converting decks");
                     }
                 }
                 if (importedOk || allowDeleteUnsupportedConstructed) {
@@ -258,9 +255,7 @@ public class OldDeckParser {
             }
             sb.append(System.getProperty("line.separator"));
             sb.append("May Forge delete these decks?");
-            final int response = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), sb.toString(),
-                    "Some of your sealed decks are orphaned", JOptionPane.YES_NO_OPTION);
-            if (response == JOptionPane.YES_OPTION) {
+            if (FOptionPane.showConfirmDialog(sb.toString(), "Some of your sealed decks are orphaned")) {
                 for (final Pair<DeckGroup, MutablePair<File, File>> s : sealedDecks.values()) {
                     if (s.getRight().getLeft() != null) {
                         s.getRight().getLeft().delete();

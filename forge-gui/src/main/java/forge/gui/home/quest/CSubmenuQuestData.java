@@ -19,6 +19,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.FOptionPane;
 import forge.item.PaperCard;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -255,7 +256,7 @@ public enum CSubmenuQuestData implements ICDoc {
         final String questName = SSubmenuQuestUtil.cleanString(o.toString());
 
         if (getAllQuests().get(questName) != null || questName.equals("")) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please pick another quest name, a quest already has that name.");
+            FOptionPane.showMessageDialog("Please pick another quest name, a quest already has that name.");
             return;
         }
 

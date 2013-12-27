@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.gui.toolbox.FOptionPane;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -34,9 +35,7 @@ public final class GamePlayerUtil {
     }
 
     private static void showThankYouPrompt(String playerName) {
-        JOptionPane.showMessageDialog(
-                JOptionPane.getRootFrame(),
-                "Thank you, " + playerName + ". " +
+        FOptionPane.showMessageDialog("Thank you, " + playerName + ". " +
                 "You will not be prompted again but you can change\nyour name at any time using the \"Player Name\" setting in Preferences.\n\n");
     }
 

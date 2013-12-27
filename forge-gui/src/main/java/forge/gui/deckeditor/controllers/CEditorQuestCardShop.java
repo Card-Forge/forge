@@ -48,6 +48,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
@@ -308,8 +309,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             final int value = this.getCardValue(item);
 
             if (value > this.questData.getAssets().getCredits()) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                        "Not enough credits to purchase " + (qty == 1 ? "" : qty + " copies of ") + item.getName() + ".");
+                FOptionPane.showMessageDialog("Not enough credits to purchase " + (qty == 1 ? "" : qty + " copies of ") + item.getName() + ".");
                 continue;
             }
 

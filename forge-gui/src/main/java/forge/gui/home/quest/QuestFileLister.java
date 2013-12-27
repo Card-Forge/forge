@@ -13,9 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
@@ -310,7 +312,7 @@ public class QuestFileLister extends JPanel {
         }
 
         if (exists || questName.equals("")) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Please pick another quest name, a quest already has that name.");
+            FOptionPane.showMessageDialog("Please pick another quest name, a quest already has that name.");
             return;
         }
         else {

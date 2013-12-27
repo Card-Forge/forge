@@ -9,6 +9,7 @@ import forge.deck.DeckBase;
 import forge.gui.deckeditor.controllers.DeckController;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.FScreen;
+import forge.gui.toolbox.FOptionPane;
 
 /** 
  * Handles editor preferences saving and loading.
@@ -43,10 +44,8 @@ public class SEditorIO {
 
         // Warn if no name
         if (name == null || name.isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                    "Please name your deck using the 'Title' box.",
-                    "Save Error!",
-                    JOptionPane.ERROR_MESSAGE);
+            FOptionPane.showMessageDialog("Please name your deck using the 'Title' box.",
+                    "Save Error!", FOptionPane.ERROR_ICON);
             return false;
         }
         // Confirm if overwrite
@@ -86,15 +85,12 @@ public class SEditorIO {
     public static boolean confirmSaveChanges(FScreen screen) {
         if (!((DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController()).isSaved()) {
             Singletons.getControl().ensureScreenActive(screen); //ensure Deck Editor is active before showing dialog
-            final int choice = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
-                    "Save changes to current deck?",
-                    "Save Changes?",
-                    JOptionPane.YES_NO_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
+            final int choice = FOptionPane.showOptionDialog("Save changes to current deck?", "Save Changes?",
+                    FOptionPane.QUESTION_ICON, new String[] {"Save", "Don't Save", "Cancel"}, 0);
 
-            if (choice == JOptionPane.CANCEL_OPTION) { return false; }
+            if (choice == 2) { return false; }
 
-            if (choice == JOptionPane.YES_OPTION && !saveDeck()) { return false; }
+            if (choice == 0 && !saveDeck()) { return false; }
         }
 
         return true;

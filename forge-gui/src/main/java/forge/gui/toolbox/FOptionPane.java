@@ -20,7 +20,40 @@ import forge.view.FDialog;
  */
 @SuppressWarnings("serial")
 public class FOptionPane extends FDialog {
-    private int result;
+    public static final SkinImage QUESTION_ICON = FSkin.getIcon(FSkin.InterfaceIcons.ICO_QUESTION);
+    public static final SkinImage INFORMATION_ICON = FSkin.getIcon(FSkin.InterfaceIcons.ICO_INFORMATION);
+    public static final SkinImage WARNING_ICON = FSkin.getIcon(FSkin.InterfaceIcons.ICO_WARNING);
+    public static final SkinImage ERROR_ICON = FSkin.getIcon(FSkin.InterfaceIcons.ICO_ERROR);
+
+    public static void showMessageDialog(String message) {
+        showMessageDialog(message, "Forge", INFORMATION_ICON);
+    }
+
+    public static void showErrorMessageDialog(String message) {
+        showMessageDialog(message, "Forge", ERROR_ICON);
+    }
+
+    public static void showMessageDialog(String message, String title, SkinImage icon) {
+        showOptionDialog(message, title, icon, new String[] {"OK"}, 0);
+    }
+
+    public static boolean showConfirmDialog(String message, String title) {
+        return showConfirmDialog(message, title, "Yes", "No", true);
+    }
+
+    public static boolean showConfirmDialog(String message, String title, boolean defaultYes) {
+        return showConfirmDialog(message, title, "Yes", "No", defaultYes);
+    }
+
+    public static boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText) {
+        return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
+    }
+
+    public static boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText, boolean defaultYes) {
+        String[] options = {yesButtonText, noButtonText};
+        int reply = FOptionPane.showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1);
+        return (reply == 0);
+    }
 
     public static int showOptionDialog(String message, String title, SkinImage icon, String[] options, int defaultOption) {
         FTextArea txtMessage = new FTextArea(message);
@@ -30,12 +63,13 @@ public class FOptionPane extends FDialog {
         txtMessage.setMaximumSize(new Dimension(parentSize.width / 2, parentSize.height - 100));
 
         FOptionPane optionPane = new FOptionPane(title, icon, txtMessage, options, defaultOption);
-        optionPane.result = options.length - 1; //default result to final option in case dialog closed
         optionPane.setVisible(true);
         int dialogResult = optionPane.result;
         optionPane.dispose();
         return dialogResult;
     }
+
+    private int result = -1; //default result to -1, indicating dialog closed without choosing option
 
     private FOptionPane(String title, SkinImage icon, JComponent comp, String[] options, int defaultOption) {
         this.setTitle(title);

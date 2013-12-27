@@ -23,12 +23,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.swing.JOptionPane;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.CardStorageReader;
 import forge.card.CardRules;
+import forge.gui.toolbox.FOptionPane;
 
 public final class CardScriptInfo {
     private String text;
@@ -61,8 +60,9 @@ public final class CardScriptInfo {
 
     	    this.text = text0;
     	    return true;
-    	} catch (final Exception ex) {
-    		JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Problem writing file - " + this.file + " : " + ex);
+    	}
+    	catch (final Exception ex) {
+    		FOptionPane.showErrorMessageDialog("Problem writing file - " + this.file + " : " + ex);
     		return false;
     	}
     }

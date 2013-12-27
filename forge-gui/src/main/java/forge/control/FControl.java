@@ -31,7 +31,6 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
@@ -69,7 +68,7 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.views.VAntes;
 import forge.gui.match.views.VField;
 import forge.gui.menus.ForgeMenu;
-import forge.gui.menus.MenuUtil;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
 import forge.properties.ForgePreferences;
@@ -122,20 +121,17 @@ public enum FControl implements KeyEventDispatcher {
             public void windowClosing(final WindowEvent e) {
                 switch (closeAction) {
                 case NONE: //prompt user for close action if not previously specified
-                    Object[] options = {"Close Screen", "Exit Forge", "Cancel"};
-                    int reply = JOptionPane.showOptionDialog(
-                            JOptionPane.getRootFrame(),
-                            "Forge now supports navigation tabs which allow closing and switching between different screens with ease.\n"
-                            + "As a result, you no longer need to use the X button in the upper right to close the current screen and go back.\n"
-                            + "\n"
-                            + "Please select what you want to happen when clicking the X button in the upper right. This choice will be used\n"
+                    String[] options = {"Close Screen", "Exit Forge", "Cancel"};
+                    int reply = FOptionPane.showOptionDialog(
+                            "Forge now supports navigation tabs which allow closing and switching between different screens with ease. "
+                            + "As a result, you no longer need to use the X button in the upper right to close the current screen and go back."
+                            + "\n\n"
+                            + "Please select what you want to happen when clicking the X button in the upper right. This choice will be used "
                             + "going forward and you will not see this message again. You can change this behavior at any time in Preferences.",
                             "Select Your Close Action",
-                            JOptionPane.YES_NO_CANCEL_OPTION,
-                            JOptionPane.INFORMATION_MESSAGE,
-                            null,
+                            FOptionPane.INFORMATION_ICON,
                             options,
-                            options[2]);
+                            2);
                     switch (reply) {
                     case 0: //Close Screen
                         setCloseAction(CloseAction.CLOSE_SCREEN);
@@ -181,7 +177,7 @@ public enum FControl implements KeyEventDispatcher {
         if (this.game != null) {
             userPrompt = "A game is currently active. " + userPrompt;
         }
-        if (!MenuUtil.getUserConfirmation(userPrompt, "Exit Forge", this.game == null)) { //default Yes if no game active
+        if (!FOptionPane.showConfirmDialog(userPrompt, "Exit Forge", this.game == null)) { //default Yes if no game active
             return false;
         }
         if (!CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true)) {
@@ -429,7 +425,7 @@ public enum FControl implements KeyEventDispatcher {
         if (this.game != null) {
             this.setCurrentScreen(FScreen.MATCH_SCREEN);
             SOverlayUtils.hideOverlay();
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Cannot start a new game while another game is already in progress.");
+            FOptionPane.showMessageDialog("Cannot start a new game while another game is already in progress.");
             return; //TODO: See if it's possible to run multiple games at once without crashing
         }
         setPlayerName(match.getPlayers());
