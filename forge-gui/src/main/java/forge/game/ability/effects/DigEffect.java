@@ -52,7 +52,7 @@ public class DigEffect extends SpellAbilityEffect {
         Player choser = player;
         int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         
-        final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone")) : ZoneType.Library;
+        final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("SourceZone")) : ZoneType.Library;
         
         final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone")) : ZoneType.Hand;
         final ZoneType destZone2 = sa.hasParam("DestinationZone2") ? ZoneType.smartValueOf(sa.getParam("DestinationZone2")) : ZoneType.Library;
