@@ -1489,7 +1489,7 @@ public class GameAction {
 
             // Run Trigger beginning of the game
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, false);
+            game.getTriggerHandler().runTrigger(TriggerType.NewGame, runParams, true);
             //</THIS CODE WILL WORK WITH PHASE = NULL>
 
             game.getPhaseHandler().startFirstTurn(first);
