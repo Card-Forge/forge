@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import forge.ai.AiCostDecision;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -178,10 +180,11 @@ public class CostPayment {
         final List<CostPart> parts = this.cost.getCostParts();
 
         Map<Class<? extends CostPart>, PaymentDecision> decisions = new HashMap<Class<? extends CostPart>, PaymentDecision>();
+        AiCostDecision aiDecisions = new AiCostDecision(ai, ability, source);
         
         // Set all of the decisions before attempting to pay anything
         for (final CostPart part : parts) {
-            PaymentDecision decision = part.decideAIPayment(ai, this.ability, source);
+            PaymentDecision decision = part.accept(aiDecisions);
             if ( null == decision ) return false;
             decisions.put(part.getClass(), decision);
         }

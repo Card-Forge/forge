@@ -147,26 +147,6 @@ public class CostMill extends CostPartWithList {
         targetCard.getGame().getAction().moveToGraveyard(targetCard);
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
-
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        List<Card> topLib = ai.getCardsIn(ZoneType.Library, c);
-        return topLib.size() < c ? null : new PaymentDecision(topLib);
-    }
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

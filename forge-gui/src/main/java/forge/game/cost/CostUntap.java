@@ -93,14 +93,6 @@ public class CostUntap extends CostPart {
     }
 
     /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        return new PaymentDecision(0);
-    }
-
-    /* (non-Javadoc)
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override

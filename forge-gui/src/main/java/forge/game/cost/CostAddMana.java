@@ -151,24 +151,6 @@ public class CostAddMana extends CostPart {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision decideAIPayment(final Player ai, final SpellAbility ability, final Card source) {
-        Integer c = this.convertAmount();
-
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        return new PaymentDecision(c);
-    }
-
     @Override
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);

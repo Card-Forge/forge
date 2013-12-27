@@ -116,39 +116,6 @@ public class CostGainControl extends CostPartWithList {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision decideAIPayment(final Player ai, final SpellAbility ability, final Card source) {
-        if (this.payCostFromSource())
-            return new PaymentDecision(source);
-        
-        Integer c = this.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        final List<Card> typeList = CardLists.getValidCards(ai.getGame().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
-
-
-        if (typeList.size() < c) {
-            return null;
-        }
-
-        CardLists.sortByPowerAsc(typeList);
-        final List<Card> res = new ArrayList<Card>();
-
-        for (int i = 0; i < c; i++) {
-            res.add(typeList.get(i));
-        }
-        return res.isEmpty() ? null : new PaymentDecision(res);
-    }
-
     /* (non-Javadoc)
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */

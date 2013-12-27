@@ -20,7 +20,6 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.ai.ComputerUtil;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -319,52 +318,7 @@ public class CostPutCardToLib extends CostPartWithList {
         targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()));
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        Integer c = this.convertAmount();
-        final Game game = ai.getGame();
-        List<Card> chosen = new ArrayList<Card>();
-        List<Card> list;
 
-        if (this.sameZone) {
-            list = new ArrayList<Card>(game.getCardsIn(this.getFrom()));
-        } else {
-            list = new ArrayList<Card>(ai.getCardsIn(this.getFrom()));
-        }
-
-        if (c == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
-    
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        list = CardLists.getValidCards(list, this.getType().split(";"), ai, source);
-
-        if (this.sameZone) {
-            // Jotun Grunt
-            // TODO: improve AI
-            final List<Player> players = game.getPlayers();
-            for (Player p : players) {
-                List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
-                if (enoughType.size() >= c) {
-                    chosen.addAll(enoughType);
-                    break;
-                }
-            }
-            chosen = chosen.subList(0, c);
-        } else {
-            chosen = ComputerUtil.choosePutToLibraryFrom(ai, this.getFrom(), this.getType(), source, ability.getTargetCard(), c);
-        }
-        return chosen.isEmpty() ? null : new PaymentDecision(chosen);
-    }
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

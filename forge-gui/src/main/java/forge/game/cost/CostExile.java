@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import forge.ai.ComputerUtil;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -51,7 +50,7 @@ public class CostExile extends CostPartWithList {
      */
 
     private ZoneType from = ZoneType.Battlefield;
-    private boolean sameZone = false;
+    public final boolean sameZone;
 
     /**
      * Gets the from.
@@ -75,14 +74,14 @@ public class CostExile extends CostPartWithList {
      *            the from
      */
     public CostExile(final String amount, final String type, final String description, final ZoneType from) {
+        this(amount, type, description, from, false);
+    }
+
+    public CostExile(final String amount, final String type, final String description, final ZoneType from, final boolean sameZone) {
         super(amount, type, description);
         if (from != null) {
             this.from = from;
         }
-    }
-
-    public CostExile(final String amount, final String type, final String description, final ZoneType from, final boolean sameZone) {
-        this(amount, type, description, from);
         this.sameZone = sameZone;
     }
 
@@ -457,45 +456,6 @@ public class CostExile extends CostPartWithList {
     public String getHashForList() {
         // TODO Auto-generated method stub
         return "Exiled";
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        if (this.payCostFromSource()) {
-            return new PaymentDecision(source);
-        }
-
-        if (this.getType().equals("All")) {
-            return new PaymentDecision(new ArrayList<Card>(ai.getCardsIn(this.getFrom())));
-        }
-        else if (this.getType().contains("FromTopGrave")) {
-            return null;
-        }
-
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        if (this.from.equals(ZoneType.Library)) {
-            return new PaymentDecision(ai.getCardsIn(ZoneType.Library, c));
-        }
-        else if (this.sameZone) {
-            // TODO Determine exile from same zone for AI
-            return null;
-        }
-        else {
-            List<Card> chosen = ComputerUtil.chooseExileFrom(ai, this.getFrom(), this.getType(), source, ability.getTargetCard(), c);
-            return null == chosen ? null : new PaymentDecision(chosen);
-        }
     }
 
     /* (non-Javadoc)

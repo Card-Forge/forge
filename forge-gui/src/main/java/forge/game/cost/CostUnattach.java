@@ -104,7 +104,7 @@ public class CostUnattach extends CostPartWithList {
         return false;
     }
 
-    private Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {
+    public Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {
         if (getType().equals("CARDNAME")) {
             if (source.isEquipping()) {
                 return source;
@@ -137,19 +137,7 @@ public class CostUnattach extends CostPartWithList {
         return "Unattached";
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        Card cardToUnattach = findCardToUnattach(source, (Player) ai, ability);
-        if (cardToUnattach == null) {
-            // We really shouldn't be able to get here if there's nothing to unattach
-            return null;
-        }
-        return new PaymentDecision(cardToUnattach);
-    }
-    
+   
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

@@ -9,8 +9,6 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import javax.swing.JList;
-import javax.swing.JOptionPane;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 

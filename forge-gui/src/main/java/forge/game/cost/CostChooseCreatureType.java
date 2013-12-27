@@ -20,7 +20,6 @@ package forge.game.cost;
 import java.util.ArrayList;
 
 import forge.card.CardType;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -85,28 +84,8 @@ public class CostChooseCreatureType extends CostPart {
     }
 
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-    	Integer c = this.convertAmount();
-
-        if (c == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                return null; // cannot pay
-            } else {
-                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-            }
-        }
-        return new PaymentDecision(c);
-    }
-
 	@Override
-	public boolean payAI(PaymentDecision decision, Player ai,
-			SpellAbility ability, Card source) {
+	public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
 		String choice = ai.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>());
 		source.setChosenType(choice);
 		return true;

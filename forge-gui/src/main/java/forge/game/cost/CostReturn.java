@@ -20,7 +20,6 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.ai.ComputerUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -152,27 +151,6 @@ public class CostReturn extends CostPartWithList {
             return true;
         }
        return false;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision decideAIPayment(final Player ai, final SpellAbility ability, final Card source) {
-        if (this.payCostFromSource())
-            return new PaymentDecision(source);
-        
-        Integer c = this.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        List<Card> res = ComputerUtil.chooseReturnType(ai, this.getType(), source, ability.getTargetCard(), c);
-        return res.isEmpty() ? null : new PaymentDecision(res);
     }
 
     /* (non-Javadoc)

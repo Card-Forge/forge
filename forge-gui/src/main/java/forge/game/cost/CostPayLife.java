@@ -138,28 +138,6 @@ public class CostPayLife extends CostPart {
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                return null;
-            } else {
-                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-            }
-        }
-        if (!ai.canPayLife(c)) {
-            return null;
-        }
-        // activator.payLife(c, null);
-        return new PaymentDecision(c);
-    }
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

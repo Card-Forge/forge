@@ -182,15 +182,6 @@ public class CostPartMana extends CostPart {
         return ComputerUtilMana.payManaCost(ai, ability);
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        return new PaymentDecision(0);
-    }
-
     /**
      * TODO: Write javadoc for this method.
      * @return

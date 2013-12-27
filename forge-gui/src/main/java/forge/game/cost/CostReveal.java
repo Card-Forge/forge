@@ -24,13 +24,11 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
-import forge.ai.AiController;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
-import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCardsFromList;
@@ -112,44 +110,6 @@ public class CostReveal extends CostPartWithList {
         }
 
         return true;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-
-        final String type = this.getType();
-        List<Card> hand = new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand));
-
-        if (this.payCostFromSource()) {
-            if (!hand.contains(source)) {
-                return null;
-            }
-            return new PaymentDecision(source);
-        }
-
-        if (this.getType().equals("Hand"))
-            return new PaymentDecision(new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand)));
-
-        if (this.getType().equals("SameColor")) {
-            return null;
-        }
-            
-        hand = CardLists.getValidCards(hand, type.split(";"), ai, source);
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            if (sVar.equals("XChoice")) {
-                c = hand.size();
-            } else {
-                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-            }
-        }
-
-        final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        return new PaymentDecision(aic.getCardsToDiscard(c, type.split(";"), ability));
     }
 
     /*

@@ -106,22 +106,6 @@ public class CostFlipCoin extends CostPartWithList {
         FlipCoinEffect.flipCoinCall(activator, ability, i);
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-        return new PaymentDecision(c);
-    }
     /*
      * (non-Javadoc)
      * 

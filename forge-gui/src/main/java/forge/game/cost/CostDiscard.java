@@ -21,13 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.common.base.Predicate;
 
-import forge.ai.AiController;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
-import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCardsFromList;
@@ -254,52 +252,6 @@ public class CostDiscard extends CostPartWithList {
             }
 
             return executePayment(ability, inp.getSelected());
-        }
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        final String type = this.getType();
-
-        final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
-        if (type.equals("LastDrawn")) {
-            if (!hand.contains(ai.getLastDrawnCard())) {
-                return null;
-            }
-            return new PaymentDecision(ai.getLastDrawnCard());
-        }
-        else if (this.payCostFromSource()) {
-            if (!hand.contains(source)) {
-                return null;
-            }
-
-            return new PaymentDecision(source);
-        }
-        else if (type.equals("Hand")) {
-            return new PaymentDecision(hand);
-        }
-
-        if (type.contains("WithSameName")) {
-            return null;
-        }
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        if (type.equals("Random")) {
-            return new PaymentDecision(CardLists.getRandomSubList(hand, c));
-        }
-        else {
-            final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-            return new PaymentDecision(aic.getCardsToDiscard(c, type.split(";"), ability));
         }
     }
 

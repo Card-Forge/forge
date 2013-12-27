@@ -101,13 +101,6 @@ public class CostTap extends CostPart {
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        return new PaymentDecision(0);
-    }
     
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);

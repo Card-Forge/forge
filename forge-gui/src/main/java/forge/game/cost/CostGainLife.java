@@ -161,39 +161,6 @@ public class CostGainLife extends CostPart {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#decideAIPayment(forge.card.spellability.SpellAbility
-     * , forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision decideAIPayment(final Player ai, final SpellAbility ability, final Card source) {
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(this.getAmount());
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                return null;
-            } else {
-                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-            }
-        }
-
-        final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
-        for (final Player opp : ai.getOpponents()) {
-            if (opp.canGainLife()) {
-                oppsThatCanGainLife.add(opp);
-            }
-        }
-
-        if (oppsThatCanGainLife.size() == 0) {
-            return null;
-        }
-
-        return new PaymentDecision(c);
-    }
     
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);

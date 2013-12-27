@@ -221,7 +221,7 @@ public class CostRemoveCounter extends CostPartWithList {
     /**
      * @return the zone
      */
-    private ZoneType getZone() {
+    public final ZoneType getZone() {
         return zone;
     }
 
@@ -375,50 +375,6 @@ public class CostRemoveCounter extends CostPartWithList {
         return "CounterRemove";
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        final String amount = this.getAmount();
-        Integer c = this.convertAmount();
-        final String type = this.getType();
-
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            if (sVar.equals("XChoice")) {
-                return null;
-            }
-            if (amount.equals("All")) {
-                c = source.getCounters(this.counter);
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-
-        if (!this.payCostFromSource()) {
-            List<Card> typeList;
-            if (type.equals("OriginalHost")) {
-                typeList = Lists.newArrayList(ability.getOriginalHost());
-            } else {
-                typeList = CardLists.getValidCards(ai.getCardsIn(this.getZone()), type.split(";"), ai, source);
-            }
-            for (Card card : typeList) {
-                if (card.getCounters(this.getCounter()) >= c) {
-                    return new PaymentDecision(card);
-                }
-            }
-            return null;
-        }
-
-        if (c > source.getCounters(this.getCounter())) {
-            System.out.println("Not enough " + this.counter + " on " + source.getName());
-            return null;
-        }
-        this.cntRemoved = c;
-        return new PaymentDecision(source);
-    }
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

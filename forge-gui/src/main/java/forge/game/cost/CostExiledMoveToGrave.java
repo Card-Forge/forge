@@ -17,8 +17,6 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import forge.game.ability.AbilityUtils;
@@ -155,36 +153,6 @@ public class CostExiledMoveToGrave extends CostPartWithList {
         targetCard.getGame().getAction().moveToGraveyard(targetCard);
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        Integer c = this.convertAmount();
-        List<Card> chosen = new ArrayList<Card>();
-
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        List<Card> typeList = ai.getGame().getCardsIn(ZoneType.Exile);
-
-        typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ai, source);
-
-        if (typeList.size() < c) {
-            return null;
-        }
-
-        CardLists.sortByPowerAsc(typeList);
-        Collections.reverse(typeList);
-
-        for (int i = 0; i < c; i++) {
-            chosen.add(typeList.get(i));
-        }
-
-        return chosen.isEmpty() ? null : new PaymentDecision(chosen);
-    }
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

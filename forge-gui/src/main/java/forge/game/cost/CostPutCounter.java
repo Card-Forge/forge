@@ -18,7 +18,6 @@
 package forge.game.cost;
 
 import java.util.List;
-import forge.ai.ComputerUtilCard;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -236,28 +235,6 @@ public class CostPutCounter extends CostPartWithList {
         return "CounterPut";
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-
-        if (this.payCostFromSource()) {
-            return new PaymentDecision(source);
-
-        }
-
-        final List<Card> typeList = CardLists.getValidCards(ai.getGame().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
-
-        Card card = null;
-        if (this.getType().equals("Creature.YouCtrl")) {
-            card = ComputerUtilCard.getWorstCreatureAI(typeList);
-        } else {
-            card = ComputerUtilCard.getWorstPermanentAI(typeList, false, false, false, false);
-        }
-        return new PaymentDecision(card);
-    }
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

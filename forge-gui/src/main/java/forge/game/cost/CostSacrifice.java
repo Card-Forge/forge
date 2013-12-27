@@ -20,7 +20,6 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.ai.ComputerUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -182,37 +181,6 @@ public class CostSacrifice extends CostPartWithList {
     @Override
     public String getHashForList() {
         return "Sacrificed";
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-
-        if (this.payCostFromSource()) {
-            return new PaymentDecision(source);
-        }
-        if (this.getAmount().equals("All")) {
-            /*List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
-            typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
-            if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
-                typeList = CardLists.getNotType(typeList, "Creature");
-            }*/
-            // Does the AI want to use Sacrifice All?
-            return null;
-        }
-
-        Integer c = this.convertAmount();
-        if (c == null) {
-            if (ability.getSVar(this.getAmount()).equals("XChoice")) {
-                return null;
-            }
-
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-        List<Card> list = ComputerUtil.chooseSacrificeType(ai, this.getType(), source, ability.getTargetCard(), c);
-        return new PaymentDecision(list);
     }
 
     // Inputs

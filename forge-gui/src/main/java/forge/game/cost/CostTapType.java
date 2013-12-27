@@ -22,7 +22,6 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.ai.ComputerUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -37,7 +36,7 @@ import forge.gui.input.InputSelectCardsFromList;
  */
 public class CostTapType extends CostPartWithList {
 
-    private final boolean canTapSource;
+    public final boolean canTapSource;
 
     /**
      * Instantiates a new cost tap type.
@@ -261,40 +260,6 @@ public class CostTapType extends CostPartWithList {
             return false;
 
         return executePayment(ability, inp.getSelected());
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        final String amount = this.getAmount();
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            if (sVar.equals("XChoice")) {
-                List<Card> typeList =
-                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
-                typeList = CardLists.filter(typeList, Presets.UNTAPPED);
-                c = typeList.size();
-                source.setSVar("ChosenX", "Number$" + Integer.toString(c));
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-        if (this.getType().contains("sharesCreatureTypeWith") || this.getType().contains("withTotalPowerGE")) {
-            return null;
-        }
-
-        List<Card> totap = ComputerUtil.chooseTapType(ai, this.getType(), source, !canTapSource, c);
-
-
-        if (totap == null) {
-            System.out.println("Couldn't find a valid card to tap for: " + source.getName());
-            return null;
-        }
-
-        return new PaymentDecision(totap);
     }
 
     /* (non-Javadoc)

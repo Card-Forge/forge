@@ -197,34 +197,6 @@ public class CostRemoveAnyCounter extends CostPartWithList {
         targetCard.subtractCounter(this.getCounter(), 1);
     }
 
-
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        final String amount = this.getAmount();
-        final int c = AbilityUtils.calculateAmount(source, amount, ability);
-        final String type = this.getType();
-
-        List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), ai, source);
-        List<Card> hperms = CardLists.filter(typeList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card crd) {
-                for (final CounterType c1 : CounterType.values()) {
-                    if (crd.getCounters(c1) >= c  && ComputerUtil.isNegativeCounter(c1, crd)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-        // Only find cards with enough negative counters
-        // TODO: add ai for Chisei, Heart of Oceans
-        return hperms.isEmpty() ? null : new PaymentDecision(hperms);
-    }
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

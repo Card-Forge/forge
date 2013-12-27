@@ -18,6 +18,7 @@
  */
 package forge.ai.ability;
 
+import forge.ai.AiCostDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
@@ -65,10 +66,10 @@ public class DrawAi extends SpellAbilityAi {
             }
 
             if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
+                AiCostDecision aiDecisions = new AiCostDecision(ai, sa, source);
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
-                        CostDiscard cd = (CostDiscard) part;
-                        PaymentDecision decision = cd.decideAIPayment(ai, sa, sa.getSourceCard());
+                        PaymentDecision decision = part.accept(aiDecisions);
                         if ( null == decision )
                             return false;
                         for (Card discard : decision.cards) {

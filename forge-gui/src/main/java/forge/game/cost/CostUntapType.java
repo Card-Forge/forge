@@ -18,7 +18,6 @@
 package forge.game.cost;
 
 import java.util.List;
-import forge.ai.ComputerUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -33,7 +32,7 @@ import forge.gui.input.InputSelectCardsFromList;
  */
 public class CostUntapType extends CostPartWithList {
 
-    private final boolean canUntapSource;
+    public final boolean canUntapSource;
     
     /**
      * Instantiates a new cost untap type.
@@ -171,39 +170,6 @@ public class CostUntapType extends CostPartWithList {
     @Override
     public String getHashForList() {
         return "Untapped";
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        final String amount = this.getAmount();
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            if (sVar.equals("XChoice")) {
-                List<Card> typeList = ai.getGame().getCardsIn(ZoneType.Battlefield);
-                typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ai, ability.getSourceCard());
-                if (!canUntapSource) {
-                    typeList.remove(source);
-                }
-                typeList = CardLists.filter(typeList, Presets.TAPPED);
-                c = typeList.size();
-                source.setSVar("ChosenX", "Number$" + Integer.toString(c));
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-    
-        List<Card> list = ComputerUtil.chooseUntapType(ai, this.getType(), source, canUntapSource, c);
-    
-        if (list == null) {
-            System.out.println("Couldn't find a valid card to untap for: " + source.getName());
-            return null;
-        }
-    
-        return new PaymentDecision(list);
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

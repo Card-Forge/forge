@@ -3,7 +3,6 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -41,51 +40,6 @@ public class CostExileAndPay extends CostPartWithList {
     @Override
     public boolean canPay(SpellAbility ability) {
         return CardLists.getValidCards(ability.getActivatingPlayer().getZone(ZoneType.Graveyard), "Creature", ability.getActivatingPlayer(), ability.getSourceCard()).size() > 0;
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#decideAIPayment(forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public PaymentDecision decideAIPayment(Player ai, SpellAbility ability, Card source) {
-        List<Card> validGrave = CardLists.getValidCards(ability.getActivatingPlayer().getZone(ZoneType.Graveyard), "Creature", ability.getActivatingPlayer(), ability.getSourceCard());
-
-        if(validGrave.size() == 0)
-        {
-            return null;
-        }
-        
-        Card bestCard = null;
-        int bestScore = 0;
-        
-        for(Card candidate : validGrave)
-        {
-            boolean selectable = false;
-            for(SpellAbility sa : candidate.getSpellAbilities())
-            {
-                if(sa instanceof SpellPermanent)
-                {
-                    if(ComputerUtilCost.canPayCost(sa, ai))
-                    {
-                        selectable = true;
-                    }
-                }
-            }
-            
-            if(!selectable)
-            {
-                continue;
-            }
-            
-            int candidateScore = ComputerUtilCard.evaluateCreature(candidate);
-            if(candidateScore > bestScore)
-            {
-                bestScore = candidateScore;
-                bestCard = candidate;
-            }
-        }
-        
-        return bestCard == null ? null : new PaymentDecision(bestCard);
     }
 
     /* (non-Javadoc)
