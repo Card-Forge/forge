@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
@@ -163,16 +162,14 @@ public enum CSubmenuQuestData implements ICDoc {
         GameFormat worldFormat = (startWorld == null ? null : startWorld.getFormat());
 
         if (worldFormat == null) {
-         switch(view.getStartingPoolType()) {
+            switch(view.getStartingPoolType()) {
             case Rotating:
                 fmtStartPool = view.getRotatingFormat();
                 break;
 
             case CustomFormat:
                 if (customFormatCodes.isEmpty()) {
-
-                    int answer = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), "You have defined custom format as containing no sets.\nThis will start a game without restriction.\n\nContinue?");
-                    if (JOptionPane.YES_OPTION != answer) {
+                    if (!FOptionPane.showConfirmDialog("You have defined a custom format that doesn't contain any sets.\nThis will start a game without restriction.\n\nContinue?")) {
                         return;
                     }
                 }
@@ -184,8 +181,7 @@ public enum CSubmenuQuestData implements ICDoc {
             case Cube:
                 dckStartPool = view.getSelectedDeck();
                 if (null == dckStartPool) {
-
-                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "You have not selected a deck to start", "Cannot start a quest", JOptionPane.ERROR_MESSAGE);
+                    FOptionPane.showMessageDialog("You have not selected a deck to start.", "Cannot start a quest", FOptionPane.ERROR_ICON);
                     return;
                 }
                 break;
@@ -198,12 +194,11 @@ public enum CSubmenuQuestData implements ICDoc {
             default:
                 // leave everything as nulls
                 break;
-         }
+            }
         }
         else {
             fmtStartPool = worldFormat;
         }
-
 
         GameFormat fmtPrizes = null;
 
@@ -217,32 +212,32 @@ public enum CSubmenuQuestData implements ICDoc {
                 for (Entry<PaperCard, Integer> c : dckStartPool.getMain()) {
                     sets.add(c.getKey().getEdition());
                 }
-                if (dckStartPool.has(DeckSection.Sideboard))
+                if (dckStartPool.has(DeckSection.Sideboard)) {
                     for (Entry<PaperCard, Integer> c : dckStartPool.get(DeckSection.Sideboard)) {
                         sets.add(c.getKey().getEdition());
                     }
+                }
                 fmtPrizes = new GameFormat("From deck", sets, null);
             }
-         } else {
+        }
+        else {
             switch(prizedPoolType) {
-                case Complete:
-                    fmtPrizes = null;
-                    break;
-                case CustomFormat:
-                    if (customPrizeFormatCodes.isEmpty()) {
-
-                        int answer = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), "You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?");
-                        if (JOptionPane.YES_OPTION != answer) {
-                            return;
-                        }
+            case Complete:
+                fmtPrizes = null;
+                break;
+            case CustomFormat:
+                if (customPrizeFormatCodes.isEmpty()) {
+                    if (!FOptionPane.showConfirmDialog("You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?")) {
+                        return;
                     }
-                    fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banend cards
-                    break;
-                case Rotating:
-                    fmtPrizes = view.getPrizedRotatingFormat();
-                    break;
-                default:
-                    throw new RuntimeException("Should not get this result");
+                }
+                fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banend cards
+                break;
+            case Rotating:
+                fmtPrizes = view.getPrizedRotatingFormat();
+                break;
+            default:
+                throw new RuntimeException("Should not get this result");
             }
         }
         // } else {
@@ -250,14 +245,22 @@ public enum CSubmenuQuestData implements ICDoc {
         // }
         final StartingPoolPreferences userPrefs = new StartingPoolPreferences(view.randomizeColorDistribution(), view.getPreferredColor());
 
-        final Object o = JOptionPane.showInputDialog(JOptionPane.getRootFrame(), "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
-        if (o == null) { return; }
+        String questName;
+        while (true) {
+            questName = FOptionPane.showInputDialog("Poets will remember your quest as:", "Quest Name");
+            if (questName == null) { return; }
 
-        final String questName = SSubmenuQuestUtil.cleanString(o.toString());
+            questName = SSubmenuQuestUtil.cleanString(questName);
 
-        if (getAllQuests().get(questName) != null || questName.equals("")) {
-            FOptionPane.showMessageDialog("Please pick another quest name, a quest already has that name.");
-            return;
+            if (questName.isEmpty()) {
+                FOptionPane.showMessageDialog("Please specify a quest name.");
+                continue;
+            }
+            if (getAllQuests().get(questName + ".dat") != null) {
+                FOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                continue;
+            }
+            break;
         }
 
         QuestController qc = Singletons.getModel().getQuest();

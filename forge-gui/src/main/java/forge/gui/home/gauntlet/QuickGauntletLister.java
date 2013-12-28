@@ -1,7 +1,5 @@
 package forge.gui.home.gauntlet;
 
-
-
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,7 +10,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -21,6 +18,7 @@ import forge.Command;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinIcon;
 
@@ -264,14 +262,9 @@ public class QuickGauntletLister extends JPanel {
     private void deleteFile(RowPanel r0) {
         final GauntletData gd = r0.getGauntletData();
 
-        final int n = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+        if (!FOptionPane.showConfirmDialog(
                 "Are you sure you want to delete \"" + gd.getName()
-                + "\" ?", "Delete Gauntlet", JOptionPane.YES_NO_OPTION);
-
-        if (n == JOptionPane.NO_OPTION) {
-            return;
-        }
-
+                + "\" ?", "Delete Gauntlet")) { return; }
 
         GauntletIO.getGauntletFile(gd).delete();
         if (cmdRowDelete != null) { cmdRowDelete.run(); }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
@@ -17,6 +16,7 @@ import forge.deck.Deck;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.FOptionPane;
 import forge.properties.NewConstants;
 
 /** 
@@ -175,35 +175,29 @@ public enum CSubmenuGauntletBuild implements ICDoc {
 
         // Warn if no name
         if (name.equals(GauntletIO.TXF_PROMPT) || name.isEmpty()) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+            FOptionPane.showMessageDialog(
                     "Please name your gauntlet using the 'Gauntlet Name' box.",
                     "Save Error!",
-                    JOptionPane.ERROR_MESSAGE);
+                    FOptionPane.ERROR_ICON);
             return false;
         }
 
         final File f = new File(NewConstants.GAUNTLET_DIR.userPrefLoc + name + ".dat");
         // Confirm if overwrite
         if (f.exists()) {
-            final int m = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+            if (!FOptionPane.showConfirmDialog(
                     "There is already a gauntlet named '" + name + "'.\n"
                     + "All progress and data will be overwritten. Continue?",
-                    "Overwrite Gauntlet?",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
+                    "Overwrite Gauntlet?")) { return false; }
 
-            if (m == JOptionPane.NO_OPTION) { return false; }
             gd = GauntletIO.loadGauntlet(f);
         }
         // Confirm if a new gauntlet will be created
         else {
-            final int m = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+            if (!FOptionPane.showConfirmDialog(
                     "This will create a new gauntlet named '" + name + "'. Continue?",
-                    "Create Gauntlet?",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
+                    "Create Gauntlet?")) { return false; }
 
-            if (m == JOptionPane.NO_OPTION) { return false; }
             gd = new GauntletData();
         }
 

@@ -37,6 +37,10 @@ public class FOptionPane extends FDialog {
         showOptionDialog(message, title, icon, new String[] {"OK"}, 0);
     }
 
+    public static boolean showConfirmDialog(String message) {
+        return showConfirmDialog(message, "Forge");
+    }
+
     public static boolean showConfirmDialog(String message, String title) {
         return showConfirmDialog(message, title, "Yes", "No", true);
     }
@@ -56,12 +60,15 @@ public class FOptionPane extends FDialog {
     }
 
     public static int showOptionDialog(String message, String title, SkinImage icon, String[] options, int defaultOption) {
-
         final FOptionPane optionPane = new FOptionPane(message, title, icon, null, options, defaultOption);
         optionPane.setVisible(true);
         int dialogResult = optionPane.result;
         optionPane.dispose();
         return dialogResult;
+    }
+
+    public static String showInputDialog(String message, String title) {
+        return showInputDialog(message, title, null, "", null);
     }
 
     public static String showInputDialog(String message, String title, SkinImage icon) {
@@ -144,7 +151,7 @@ public class FOptionPane extends FDialog {
             prompt.setAutoSize(true);
             Dimension parentSize = JOptionPane.getRootFrame().getSize();
             prompt.setMaximumSize(new Dimension(parentSize.width / 2, parentSize.height - 100));
-            this.add(prompt, "x " + x + ", ay top, wrap, gaptop 7, gapbottom " + gapBottom);
+            this.add(prompt, "x " + x + ", ay top, wrap, gaptop " + (icon == null ? 0 : 7) + ", gapbottom " + gapBottom);
             x = padding;
         }
         if (comp != null) {

@@ -26,8 +26,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -348,11 +346,11 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 }
 
                 boolean one = (qty == 1);
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), String.format(
+                FOptionPane.showMessageDialog(String.format(
                         "%s '%s' %s added to your decklist.%n%n%s cards were also added to your pool.",
                         one ? "Deck" : String.format("%d copies of deck", qty),
                         deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),
-                        "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
+                        "Thanks for purchasing!", FOptionPane.INFORMATION_ICON);
             }
             else {
                 continue; //don't remove item from Catalog if any other type
