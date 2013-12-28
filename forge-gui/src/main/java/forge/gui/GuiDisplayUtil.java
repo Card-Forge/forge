@@ -481,7 +481,12 @@ public final class GuiDisplayUtil {
         final Card forgeCard = Card.fromPaperCard(c, p);
 
         forgeCard.setOwner(p);
-        game.getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0);
+        getGame().getAction().invoke(new Runnable() { 
+            @Override
+            public void run() {
+            	getGame().getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0);
+            }
+        });
         PlanarDice.roll(p, PlanarDice.Planeswalk);
 
         game.getAction().invoke(new Runnable() {
