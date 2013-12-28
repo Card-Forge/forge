@@ -67,7 +67,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
             // TODO (ArsenalNut 22 Dec 2012) Add logic to order cards for AI
             if (sa.getActivatingPlayer().isHuman() && sa.hasParam("ChooseOrder") && repeatCards.size() >= 2) {
-                repeatCards = GuiChoose.order("Choose order of copies to cast", "Put first", 0, repeatCards, null, null);
+                repeatCards = GuiChoose.order("Choose order of copies to cast", "Put first", repeatCards, null);
             }
 
             for (Card card : repeatCards) {

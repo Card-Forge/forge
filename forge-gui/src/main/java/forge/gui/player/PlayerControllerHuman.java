@@ -357,8 +357,7 @@ public class PlayerControllerHuman extends PlayerController {
             return Lists.newArrayList(sc.getSelected());
         }
 
-        int remaining = isOptional ? -1 : Math.max(sourceList.size() - max, 0);
-        return GuiChoose.order(title, "Chosen Cards", remaining, sourceList, null, sa.getSourceCard());
+        return GuiChoose.many(title, "Chosen Cards", min, max, sourceList, sa.getSourceCard());
     }
 
     @Override
@@ -469,13 +468,13 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> orderBlockers(Card attacker, List<Card> blockers) {
         GuiUtils.setPanelSelection(attacker);
-        return GuiChoose.order("Choose Damage Order for " + attacker, "Damaged First", 0, blockers, null, attacker);
+        return GuiChoose.order("Choose Damage Order for " + attacker, "Damaged First", blockers, attacker);
     }
 
     @Override
     public List<Card> orderAttackers(Card blocker, List<Card> attackers) {
         GuiUtils.setPanelSelection(blocker);
-        return GuiChoose.order("Choose Damage Order for " + blocker, "Damaged First", 0, attackers, null, blocker);
+        return GuiChoose.order("Choose Damage Order for " + blocker, "Damaged First", attackers, blocker);
     }
 
     /* (non-Javadoc)
@@ -504,7 +503,7 @@ public class PlayerControllerHuman extends PlayerController {
             }
         }
         else {
-            toBottom = GuiChoose.order("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null, null);
+            toBottom = GuiChoose.many("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null);
             topN.removeAll(toBottom);
             if (topN.isEmpty()) {
                 toTop = null;
@@ -513,7 +512,7 @@ public class PlayerControllerHuman extends PlayerController {
                 toTop = topN;
             }
             else {
-                toTop = GuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", 0, topN, null, null);
+                toTop = GuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", topN, null);
             }
         }
         return ImmutablePair.of(toTop, toBottom);
@@ -528,15 +527,15 @@ public class PlayerControllerHuman extends PlayerController {
     public List<Card> orderMoveToZoneList(List<Card> cards, ZoneType destinationZone) {
         switch (destinationZone) {
             case Library:
-                return GuiChoose.order("Choose order of cards to put into the library", "Closest to top", 0, cards, null, null);
+                return GuiChoose.order("Choose order of cards to put into the library", "Closest to top", cards, null);
             case Battlefield:
-                return GuiChoose.order("Choose order of cards to put onto the battlefield", "Put first", 0, cards, null, null);
+                return GuiChoose.order("Choose order of cards to put onto the battlefield", "Put first", cards, null);
             case Graveyard:
-                return GuiChoose.order("Choose order of cards to put into the graveyard", "Closest to bottom", 0, cards, null, null);
+                return GuiChoose.order("Choose order of cards to put into the graveyard", "Closest to bottom", cards, null);
             case PlanarDeck:
-                return GuiChoose.order("Choose order of cards to put into the planar deck", "Closest to top", 0, cards, null, null);
+                return GuiChoose.order("Choose order of cards to put into the planar deck", "Closest to top", cards, null);
             case SchemeDeck:
-                return GuiChoose.order("Choose order of cards to put into the scheme deck", "Closest to top", 0, cards, null, null);
+                return GuiChoose.order("Choose order of cards to put into the scheme deck", "Closest to top", cards, null);
             default:
                 System.out.println("ZoneType " + destinationZone + " - Not Ordered");
                 break;
@@ -547,8 +546,8 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int min, int max) {
         if (p != player) {
-            return GuiChoose.order("Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
-                    "Discarded", valid.size() - min, valid, null, null);
+            return GuiChoose.many("Choose " + min + " card" + (min != 1 ? "s" : "") + " to discard",
+                    "Discarded", min, min, valid, null);
         }
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(min, max, valid);
@@ -768,7 +767,7 @@ public class PlayerControllerHuman extends PlayerController {
         if (srcCards.isEmpty()) {
             return result;
         }
-        List<Card> chosen = GuiChoose.order("Choose cards to activate from opening hand", "Activate first", -1, srcCards, null, null);
+        List<Card> chosen = GuiChoose.many("Choose cards to activate from opening hand and their order", "Activate first", -1, srcCards, null);
         for (Card c : chosen) {
             for (SpellAbility sa : usableFromOpeningHand) {
                 if (sa.getSourceCard() == c) {
@@ -981,7 +980,7 @@ public class PlayerControllerHuman extends PlayerController {
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         List<SpellAbility> orderedSAs = activePlayerSAs;
         if (activePlayerSAs.size() > 1) { // give a dual list form to create instead of needing to do it one at a time
-            orderedSAs = GuiChoose.order("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs, null, null);
+            orderedSAs = GuiChoose.order("Select order for Simultaneous Spell Abilities", "Resolve first", activePlayerSAs, null);
         }
         int size = orderedSAs.size();
         for (int i = size - 1; i >= 0; i--) {

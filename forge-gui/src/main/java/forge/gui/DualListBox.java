@@ -61,13 +61,19 @@ public class DualListBox<T> extends FDialog {
     private final FLabel orderedLabel;
     private final FLabel selectOrder;
 
-    private final int targetRemainingSources;
+    private final int targetRemainingSourcesMin;
+    private final int targetRemainingSourcesMax;
 
     private boolean sideboardingMode = false;
     private boolean showCard = true;
 
     public DualListBox(int remainingSources, List<T> sourceElements, List<T> destElements) {
-        targetRemainingSources = remainingSources;
+        this(remainingSources, remainingSources, sourceElements, destElements);
+    }
+    
+    public DualListBox(int remainingSourcesMin, int remainingSourcesMax, List<T> sourceElements, List<T> destElements) {
+        targetRemainingSourcesMin = remainingSourcesMin;
+        targetRemainingSourcesMax = remainingSourcesMax;
         sourceListModel = new UnsortedListModel<T>();
         sourceList = new FList<T>(sourceListModel);
         destListModel = new UnsortedListModel<T>();
@@ -198,7 +204,7 @@ public class DualListBox<T> extends FDialog {
 
         _setButtonState();
 
-        if (remainingSources == sourceElements.size()) {
+        if (remainingSourcesMin <= sourceElements.size() && remainingSourcesMax >= sourceElements.size()) {
             //ensure OK button gets initial focus if remainingSources matches source list count
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
@@ -435,24 +441,19 @@ public class DualListBox<T> extends FDialog {
             orderedLabel.setText(String.format("Main Deck (%d):", destListModel.getSize()));
         }
 
-        boolean canAdd = sourceListModel.getSize() != 0;
-        boolean canRemove = destListModel.getSize() != 0;
-        boolean targetReached = (sourceListModel.getSize() == targetRemainingSources);
+        boolean anySize = targetRemainingSourcesMax < 0;
+        boolean canAdd = sourceListModel.getSize() != 0 && (anySize || targetRemainingSourcesMin <= sourceListModel.getSize());
+        boolean canRemove = destListModel.getSize() != 0 && (anySize || targetRemainingSourcesMax >= sourceListModel.getSize());
+        boolean targetReached = anySize || targetRemainingSourcesMin <= sourceListModel.getSize() && targetRemainingSourcesMax >= sourceListModel.getSize();
 
-        if (targetRemainingSources != -1) {
-            okButton.setEnabled(targetReached);
-            if (targetReached) {
-                canAdd = false; //don't allow adding any more if specific target reached
-            }
-        }
-
-        autoButton.setEnabled(targetRemainingSources == 0 && !targetReached && !sideboardingMode);
+        autoButton.setEnabled(targetRemainingSourcesMax == 0 && !targetReached && !sideboardingMode);
 
         addButton.setEnabled(canAdd);
         addAllButton.setEnabled(canAdd);
         removeButton.setEnabled(canRemove);
         removeAllButton.setEnabled(canRemove);
 
+        okButton.setEnabled(targetReached);
         if (targetReached) {
             okButton.requestFocusInWindow(); //focus OK button if specific target reached
         }

@@ -116,7 +116,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
             topCards.add(lib.get(j));
         }
 
-        List<Card> orderedCards = GuiChoose.order("Select order to Rearrange", "Top of Library", 0, topCards, null, src);
+        List<Card> orderedCards = GuiChoose.order("Select order to Rearrange", "Top of Library", topCards, src);
         for (int i = maxCards - 1; i >= 0; i--) {
             Card next = orderedCards.get(i);
             player.getGame().getAction().moveToLibrary(next, 0);

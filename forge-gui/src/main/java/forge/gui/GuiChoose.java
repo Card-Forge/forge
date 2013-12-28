@@ -161,26 +161,36 @@ public class GuiChoose {
         return one(message, choices);
     }
 
-    public static <T> List<T> order(final String title, final String top, int remainingObjects,
-            final List<T> sourceChoices, List<T> destChoices, Card referenceCard) {
-        return order(title, top, remainingObjects, sourceChoices, destChoices, referenceCard, false);
+    public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard) {
+        return order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false);
+    }
+    
+    public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, Card referenceCard) {
+        int m2 = min >= 0 ? sourceChoices.size() - min : -1;
+        int m1 = max >= 0 ? sourceChoices.size() - max : -1;
+        return order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, false);
+    }
+
+    
+    public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices, Card referenceCard) {
+        return order(title, top, 0, 0, sourceChoices, null, referenceCard, false);
     }
 
     public static <T extends Comparable<? super T>> List<T> sideboard(List<T> sideboard, List<T> deck) {
         Collections.sort(deck);
         Collections.sort(sideboard);
-        return order("Sideboard", "Main Deck", -1, sideboard, deck, null, true);
+        return order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true);
     }
 
     
-    public static <T> List<T> order(final String title, final String top, final int remainingObjects,
+    private static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
         // An input box for handling the order of choices.
         
         Callable<List<T>> callable = new Callable<List<T>>() {
             @Override
             public List<T> call() throws Exception {
-                DualListBox<T> dual = new DualListBox<T>(remainingObjects, sourceChoices, destChoices);
+                DualListBox<T> dual = new DualListBox<T>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices);
                 dual.setSecondColumnLabelText(top);
         
                 dual.setSideboardMode(sideboardingMode);
