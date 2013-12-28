@@ -8552,6 +8552,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             System.out.println("Trying to sacrifice immutables: " + this);
             return false;
         }
+        if (isPhasedOut()) {
+        	return false;
+        }
         if (source != null && getController().isOpponentOf(source.getActivatingPlayer())
                 && getController().hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.")) {
             return false;
