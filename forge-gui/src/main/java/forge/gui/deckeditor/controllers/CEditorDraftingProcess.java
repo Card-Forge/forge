@@ -19,8 +19,6 @@ package forge.gui.deckeditor.controllers;
 
 import java.util.Map.Entry;
 
-import javax.swing.JOptionPane;
-
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.MagicColor;
@@ -36,6 +34,7 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.home.sanctioned.CSubmenuDraft;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
@@ -171,10 +170,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * </p>
      */
     private void saveDraft() {
-        String s = JOptionPane.showInputDialog(JOptionPane.getRootFrame(),
-                "Save this draft as:",
-                "Save draft",
-                JOptionPane.QUESTION_MESSAGE);
+        String s = FOptionPane.showInputDialog("Save this draft as:", "Save Draft", FOptionPane.QUESTION_ICON);
 
         // Cancel button will be null; OK will return string.
         // Must check for null value first, then string length.
@@ -187,14 +183,10 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         // Check for overwrite case
         for (DeckGroup d : Singletons.getModel().getDecks().getDraft()) {
             if (s.equalsIgnoreCase(d.getName())) {
-                final int m = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+                if (!FOptionPane.showConfirmDialog(
                         "There is already a deck named '" + s + "'. Overwrite?",
-                        "Overwrite Deck?",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE);
-
-                // If no overwrite, recurse.
-                if (m == JOptionPane.NO_OPTION) {
+                        "Overwrite Deck?", false)) {
+                    // If no overwrite, recurse.
                     saveDraft();
                     return;
                 }

@@ -1,7 +1,5 @@
 package forge.gui.deckeditor;
 
-import javax.swing.JOptionPane;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
@@ -50,27 +48,20 @@ public class SEditorIO {
         }
         // Confirm if overwrite
         else if (controller.fileExists(name)) {
-            int confirmResult = JOptionPane.YES_OPTION;
+            boolean confirmResult = true;
             if ( !StringUtils.equals(name, controller.getModelName()) ) { // prompt only if name was changed
-                confirmResult = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+                confirmResult = FOptionPane.showConfirmDialog(
                     limitedDeckMode ? "Would you like to save changes to your deck?"
                     : "There is already a deck named '" + name + "'. Overwrite?",
-                    limitedDeckMode ? "Save changes?" : "Overwrite Deck?",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
+                    limitedDeckMode ? "Save changes?" : "Overwrite Deck?");
             }
 
-            if (confirmResult == JOptionPane.YES_OPTION) { controller.save(); }
+            if (confirmResult) { controller.save(); }
         }
         // Confirm if a new deck will be created
-        else {
-            final int m = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
-                    "This will create a new deck named '" + name + "'. Continue?",
-                    "Create Deck?",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
-
-            if (m == JOptionPane.YES_OPTION) { controller.saveAs(name); }
+        else if (FOptionPane.showConfirmDialog("This will create a new deck named '" +
+                name + "'. Continue?", "Create Deck?")) {
+            controller.saveAs(name);
         }
 
         return true;
