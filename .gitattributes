@@ -2757,6 +2757,7 @@ forge-gui/res/cardsfolder/d/deaths_head_buzzard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/deaths_presence.txt -text
 forge-gui/res/cardsfolder/d/deaths_shadow.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/deathspore_thallid.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/debt_of_loyalty.txt -text
 forge-gui/res/cardsfolder/d/debt_to_the_deathless.txt -text
 forge-gui/res/cardsfolder/d/debtors_knell.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/debtors_pulpit.txt -text
@@ -7064,6 +7065,7 @@ forge-gui/res/cardsfolder/m/masters_call.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/masticore.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/masumaro_first_to_live.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/matca_rioters.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/matopi_golem.txt -text
 forge-gui/res/cardsfolder/m/matsu_tribe_birdstalker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/matsu_tribe_decoy.txt -text
 forge-gui/res/cardsfolder/m/matsu_tribe_sniper.txt svneol=native#text/plain
@@ -10505,6 +10507,7 @@ forge-gui/res/cardsfolder/s/skeletal_scrying.txt -text
 forge-gui/res/cardsfolder/s/skeletal_snake.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skeletal_vampire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skeletal_wurm.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/skeleton_scavengers.txt -text
 forge-gui/res/cardsfolder/s/skeleton_shard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skeleton_ship.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/skeletonize.txt -text
@@ -10738,6 +10741,7 @@ forge-gui/res/cardsfolder/s/soldevi_golem.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/s/soldevi_heretic.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soldevi_machinist.txt -text
 forge-gui/res/cardsfolder/s/soldevi_sage.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/soldevi_sentry.txt -text
 forge-gui/res/cardsfolder/s/soldevi_simulacrum.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soldevi_steam_beast.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/soldier_of_fortune.txt svneol=native#text/plain
@@ -14987,6 +14991,7 @@ forge-gui/src/main/java/forge/game/card/CardKeywords.java svneol=native#text/pla
 forge-gui/src/main/java/forge/game/card/CardLists.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/card/CardPowerToughness.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/card/CardPredicates.java svneol=native#text/plain
+forge-gui/src/main/java/forge/game/card/CardShields.java -text
 forge-gui/src/main/java/forge/game/card/CardType.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/card/CardUtil.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/card/CounterType.java svneol=native#text/plain

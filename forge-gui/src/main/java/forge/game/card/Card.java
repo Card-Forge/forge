@@ -198,7 +198,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int damage;
 
     // regeneration
-    private int nShield;
+    private List<CardShields> nShield = new ArrayList<CardShields>();
     private int regeneratedThisTurn = 0;
 
     private int turnInZone;
@@ -2686,7 +2686,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a int.
      */
-    public final int getShield() {
+    public final List<CardShields> getShield() {
         return this.nShield;
     }
 
@@ -2695,8 +2695,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * addShield.
      * </p>
      */
-    public final void addShield() {
-        this.nShield++;
+    public final void addShield(final CardShields shield) {
+        this.nShield.add(shield);
     }
 
     /**
@@ -2704,8 +2704,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * subtractShield.
      * </p>
      */
-    public final void subtractShield() {
-        this.nShield--;
+    public final void subtractShield(CardShields shield) {
+    	if (shield != null && shield.hasTrigger()) {
+    		this.getGame().getStack().addSimultaneousStackEntry(shield.getTriggerSA());
+    	}
+        this.nShield.remove(shield);
     }
 
     /**
@@ -2740,7 +2743,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      */
     public final void resetShield() {
-        this.nShield = 0;
+        this.nShield.clear();;
     }
 
     /**

@@ -28,6 +28,7 @@ import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardShields;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -544,4 +545,9 @@ public class PlayerControllerForTests extends PlayerController {
     public void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards) {
         // test this!
     }
+
+	@Override
+	public CardShields chooseRegenerationShield(Card c) {
+		return Iterables.getFirst(c.getShield(), null);
+	}
 }

@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
@@ -38,6 +39,7 @@ import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.card.CardShields;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -1066,4 +1068,12 @@ public class PlayerControllerHuman extends PlayerController {
 
         GuiChoose.one(message, anteedThings);
     }
+
+	@Override
+	public CardShields chooseRegenerationShield(Card c) {
+		if (c.getShield().size() < 2) {
+            return Iterables.getFirst(c.getShield(), null);
+		}
+		return GuiChoose.one("Choose a regeneration shield:", c.getShield());
+	}
 }

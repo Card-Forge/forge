@@ -1244,8 +1244,8 @@ public class GameAction {
         }
 
         if (c.canBeShielded() && (!c.isCreature() || c.getNetDefense() > 0)
-                && (c.getShield() > 0 || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
-            c.subtractShield();
+                && (!c.getShield().isEmpty() || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
+            c.subtractShield(c.getController().getController().chooseRegenerationShield(c));
             c.setDamage(0);
             c.tap();
             c.addRegeneratedThisTurn();

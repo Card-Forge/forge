@@ -38,6 +38,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardShields;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -687,5 +688,10 @@ public class PlayerControllerAi extends PlayerController {
         // TODO Auto-generated method stub
         return brains.cheatShuffle(list);
     }
+
+	@Override
+	public CardShields chooseRegenerationShield(Card c) {
+		return Iterables.getFirst(c.getShield(), null);
+	}
 
 }

@@ -1,0 +1,8 @@
+Name:Soldevi Sentry
+ManaCost:1
+Types:Artifact Creature Soldier
+PT:1/1
+A:AB$ Regenerate | Cost$ 1 | ValidTgts$ Opponent | Defined$ Self | RegenerationTrigger$ TrigDraw | ReplacePlayerName$ Targeted | SpellDescription$ Choose target opponent. Regenerate CARDNAME. When it regenerates this way, that player may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ PlayerNamed_Targeted | NumCards$ 1 | OptionalDecider$ True | SpellDescription$ When it regenerates this way, that player may draw a card.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_sentry.jpg
+Oracle:{1}: Choose target opponent. Regenerate Soldevi Sentry. When it regenerates this way, that player may draw a card.

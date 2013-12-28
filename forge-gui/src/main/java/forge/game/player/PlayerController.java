@@ -19,6 +19,7 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.card.Card;
+import forge.game.card.CardShields;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -195,7 +196,8 @@ public abstract class PlayerController {
     public abstract boolean confirmPayment(CostPart costPart, String string);
     public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers, HashMap<String, Object> runParams);
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
-
+	public abstract CardShields chooseRegenerationShield(Card c);
+	
     // these 4 need some refining.
     public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, List<Player> allPayers);
     public abstract void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs);
@@ -210,4 +212,6 @@ public abstract class PlayerController {
     // These 2 are for AI
     public List<Card> cheatShuffle(List<Card> list) { return list; }
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) { return null; }
+
+
 }

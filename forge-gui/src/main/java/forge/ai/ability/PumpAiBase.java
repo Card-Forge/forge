@@ -132,7 +132,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can't be regenerated.")) {
-            if (card.getShield() > 0) {
+            if (!card.getShield().isEmpty()) {
                 return true;
             }
             if (card.hasKeyword("If CARDNAME would be destroyed, regenerate it.") && combat != null

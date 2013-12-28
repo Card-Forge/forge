@@ -765,7 +765,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     CardLists.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && c.getOwner() == ai && !c.isToken()) {
+                        if (c.getShield().isEmpty() && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat) && c.getOwner() == ai && !c.isToken()) {
                             sa.getTargets().add(c);
                             return true;
                         }

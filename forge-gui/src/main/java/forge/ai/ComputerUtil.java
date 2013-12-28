@@ -1359,7 +1359,7 @@ public class ComputerUtil {
                     }
 
                     // already regenerated
-                    if (c.getShield() > 0) {
+                    if (!c.getShield().isEmpty()) {
                         continue;
                     }
 
@@ -1411,7 +1411,7 @@ public class ComputerUtil {
                     }
 
                     // already regenerated
-                    if (c.getShield() > 0) {
+                    if (!c.getShield().isEmpty()) {
                         continue;
                     }
 

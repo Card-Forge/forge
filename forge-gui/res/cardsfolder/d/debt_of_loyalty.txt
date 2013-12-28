@@ -1,0 +1,8 @@
+Name:Debt of Loyalty
+ManaCost:1 W W
+Types:Instant
+A:SP$ Regenerate | Cost$ 1 W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | RegenerationTrigger$ TrigGainControl | ReplaceCardUID$ Targeted | SpellDescription$ Regenerate target creature. You gain control of that creature if it regenerates this way.
+SVar:TrigGainControl:ST$ GainControl | Cost$ 0 | Defined$ CardUID_Targeted | NewController$ You | SpellDescription$ Source controller gains control of CARDNAME if it regenerates this way.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/debt_of_loyalty.jpg
+Oracle:Regenerate target creature. You gain control of that creature if it regenerates this way.

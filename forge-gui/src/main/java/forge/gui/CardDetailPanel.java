@@ -393,7 +393,7 @@ public class CardDetailPanel extends FPanel {
         }
 
         // Regeneration Shields
-        final int regenShields = card.getShield();
+        final int regenShields = card.getShield().size();
         if (regenShields > 0) {
             if (area.length() != 0) {
                 area.append("\n");
