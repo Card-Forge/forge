@@ -28,7 +28,6 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -47,6 +46,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FMouseAdapter;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.item.InventoryItem;
@@ -124,20 +124,15 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         FSkin.get(rowTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
 
-        rowTitle.add(new FLabel.Builder().text("Delete").fontAlign(SwingConstants.CENTER).build(),
-                "w 10%!, h 20px!, gaptop 5px");
-        rowTitle.add(new FLabel.Builder().text("Edit")
-                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
-                "w 10%!, h 20px!, gaptop 5px");
         rowTitle.add(new FLabel.Builder().text("Deck Name")
-                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
-                "w 58%!, h 20px!, gaptop 5px");
+                .fontSize(14).fontAlign(SwingConstants.LEFT).build(),
+                "w 100%-128px!, h 20px!, gaptop 5px, gapleft 48px");
         rowTitle.add(new FLabel.Builder().text("Main")
-                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
-                "w 10%!, h 20px!, gaptop 5px");
+                .fontSize(14).fontAlign(SwingConstants.LEFT).build(),
+                "w 36px!, h 20px!, gaptop 5px, gapleft 4px");
         rowTitle.add(new FLabel.Builder().text("Side")
-                .fontSize(14).fontAlign(SwingConstants.CENTER).build(),
-                "w 10%!, h 20px!, gaptop 5px");
+                .fontSize(14).fontAlign(SwingConstants.LEFT).build(),
+                "w 36px!, h 20px!, gaptop 5px, gapleft 4px");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
         RowPanel row;
@@ -147,11 +142,11 @@ public class DeckLister extends JPanel implements ILocalRepaint {
             }
 
             row = new RowPanel(d);
-            row.add(new DeleteButton(row), "w 10%!, h 20px!, gaptop 5px");
-            row.add(new EditButton(row), "w 10%!, h 20px!, gaptop 5px");
-            row.add(new GenericLabel(d.getName()), "w 58%!, h 20px!, gaptop 5px");
-            row.add(new MainLabel(String.valueOf(d.getMain().countAll())), "w 10%, h 20px!, gaptop 5px");
-            row.add(new GenericLabel(d.has(DeckSection.Sideboard) ? String.valueOf(d.get(DeckSection.Sideboard).countAll()) : "none"), "w 10%!, h 20px!, gaptop 5px");
+            row.add(new DeleteButton(row), "w 22px!, h 20px!, gaptop 5px");
+            row.add(new EditButton(row), "w 22px!, h 20px!, gaptop 5px");
+            row.add(new GenericLabel(d.getName()), "w 100%-128px!, h 20px!, gaptop 5px, gapleft 4px");
+            row.add(new MainLabel(String.valueOf(d.getMain().countAll())), "w 36px!, h 20px!, gaptop 5px, gapleft 4px");
+            row.add(new GenericLabel(d.has(DeckSection.Sideboard) ? String.valueOf(d.get(DeckSection.Sideboard).countAll()) : "none"), "w 36px!, h 20px!, gaptop 5px, gapleft 4px");
             this.add(row, "w 98%!, h 30px!, gapleft 1%");
             tempRows.add(row);
         }
@@ -353,7 +348,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
     private class GenericLabel extends JLabel {
         public GenericLabel(final String txt0) {
             super(txt0);
-            this.setHorizontalAlignment(SwingConstants.CENTER);
+            this.setHorizontalAlignment(SwingConstants.LEFT);
             JLabelSkin<GenericLabel> skin = FSkin.get(this);
             skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             skin.setFont(FSkin.getBoldFont(12));
@@ -435,7 +430,6 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         }
     }
     private <T extends DeckBase> void editDeck(final Deck d0) {
-        
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
         
@@ -471,10 +465,9 @@ public class DeckLister extends JPanel implements ILocalRepaint {
     private void deleteDeck(final RowPanel r0) {
         final Deck d0 = r0.getDeck();
 
-        final int n = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), "Are you sure you want to delete \"" + d0.getName() + "\" ?",
-                "Delete Deck", JOptionPane.YES_NO_OPTION);
-
-        if (n == JOptionPane.NO_OPTION) {
+        if (!FOptionPane.showConfirmDialog(
+                "Are you sure you want to delete '" + d0.getName() + "'?",
+                "Delete Deck", "Delete", "Cancel")) {
             return;
         }
 
@@ -482,12 +475,15 @@ public class DeckLister extends JPanel implements ILocalRepaint {
 
         if (this.gametype.equals(GameType.Draft)) {
             deckManager.getDraft().delete(d0.getName());
-        } else if (this.gametype.equals(GameType.Sealed)) {
+        }
+        else if (this.gametype.equals(GameType.Sealed)) {
             deckManager.getSealed().delete(d0.getName());
-        } else if (this.gametype.equals(GameType.Quest)) {
+        }
+        else if (this.gametype.equals(GameType.Quest)) {
             Singletons.getModel().getQuest().getMyDecks().delete(d0.getName());
             Singletons.getModel().getQuest().save();
-        } else {
+        }
+        else {
             deckManager.getConstructed().delete(d0.getName());
         }
 

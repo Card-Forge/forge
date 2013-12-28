@@ -17,11 +17,13 @@
  */
 package forge.quest.data;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import forge.Singletons;
 import forge.game.GameFormat;
+import forge.properties.NewConstants;
 import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
 
@@ -38,7 +40,6 @@ import forge.quest.io.QuestDataIO;
  * @version $Id$
  */
 public final class QuestData {
-
     /** Holds the latest version of the Quest Data. */
     public static final int CURRENT_VERSION_NUMBER = 8;
 
@@ -49,7 +50,7 @@ public final class QuestData {
     private int versionNumber = QuestData.CURRENT_VERSION_NUMBER;
 
     private GameFormatQuest format;
-    private final String name;
+    private String name;
 
     // Quest mode - there should be an enum :(
     /** The mode. */
@@ -63,7 +64,6 @@ public final class QuestData {
     private final QuestAchievements achievements;
     private final Map<Integer, String> petSlots = new HashMap<Integer, String>();
     private boolean isCharmActive = false;
-
 
     /**
      * Instantiates a new quest data.
@@ -80,18 +80,17 @@ public final class QuestData {
      * @param startingWorld
      *      starting world
      */
-    public QuestData(String name2, int diff, QuestMode mode2, GameFormat userFormat,
+    public QuestData(String name0, int diff, QuestMode mode0, GameFormat userFormat,
             boolean allowSetUnlocks, final String startingWorld) {
-        this.name = name2;
+        this.name = name0;
 
         if (userFormat != null) {
             this.format = new GameFormatQuest(userFormat, allowSetUnlocks);
         }
-        this.mode = mode2;
+        this.mode = mode0;
         this.achievements = new QuestAchievements(diff);
         this.assets = new QuestAssets(format);
         this.worldId = startingWorld;
-
     }
 
     /**
@@ -158,6 +157,21 @@ public final class QuestData {
         return this.name;
     }
 
+    /**
+     * Rename this quest the name.
+     *
+     * @param newName
+     *            the new name to set
+     */
+    public void rename(final String newName) {
+        File newpath = new File(NewConstants.QUEST_SAVE_DIR, newName + ".dat");
+        File oldpath = new File(NewConstants.QUEST_SAVE_DIR, this.name + ".dat");
+        oldpath.renameTo(newpath);
+
+        this.name = newName;
+        QuestDataIO.saveData(this);
+    }
+
     public QuestAssets getAssets() {
         return assets;
     }
@@ -200,5 +214,4 @@ public final class QuestData {
 	public void setCharmActive(boolean isCharmActive) {
 		this.isCharmActive = isCharmActive;
 	}
-
 }

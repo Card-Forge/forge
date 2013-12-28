@@ -51,7 +51,7 @@ public enum CSubmenuQuestData implements ICDoc {
     private final Command cmdQuestSelect = new Command() { @Override
         public void run() { changeQuest(); } };
 
-    private final Command cmdQuestDelete = new Command() { @Override
+    private final Command cmdQuestUpdate = new Command() { @Override
         public void run() { update(); } };
 
     /* (non-Javadoc)
@@ -139,7 +139,8 @@ public enum CSubmenuQuestData implements ICDoc {
         }
 
         view.getLstQuests().setSelectCommand(cmdQuestSelect);
-        view.getLstQuests().setDeleteCommand(cmdQuestDelete);
+        view.getLstQuests().setDeleteCommand(cmdQuestUpdate);
+        view.getLstQuests().setEditCommand(cmdQuestUpdate);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() { view.getBtnEmbark().requestFocusInWindow(); }

@@ -1,7 +1,6 @@
 package forge.gui.home.quest;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
@@ -10,13 +9,13 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.properties.NewConstants;
@@ -83,11 +82,9 @@ public class QuestFileLister extends JPanel {
         final JPanel rowTitle = new JPanel();
         FSkin.get(rowTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        rowTitle.add(new FLabel.Builder().text("Delete").fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Rename").fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Name").fontAlign(SwingConstants.CENTER).build(), "w 40%!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Mode").fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
-        rowTitle.add(new FLabel.Builder().text("Record").fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
+        rowTitle.add(new FLabel.Builder().text("Name").fontAlign(SwingConstants.LEFT).build(), "w 85%-112px!, h 20px!, gaptop 5px, gapleft 48px");
+        rowTitle.add(new FLabel.Builder().text("Mode").fontAlign(SwingConstants.LEFT).build(), "w 15%!, h 20px!, gaptop 5px, gapleft 4px");
+        rowTitle.add(new FLabel.Builder().text("Record").fontAlign(SwingConstants.LEFT).build(), "w 60px!, h 20px!, gaptop 5px, gapleft 4px");
         this.add(rowTitle, "w 98%!, h 30px!, gapleft 1%");
 
         RowPanel row;
@@ -95,12 +92,12 @@ public class QuestFileLister extends JPanel {
         for (QuestData qd : sorted) {
             mode = qd.getMode().toString();
             row = new RowPanel(qd);
-            row.add(new DeleteButton(row), "w 15%!, h 20px!, gap 0 0 5px 0");
-            row.add(new EditButton(row), "w 15%!, h 20px!, gaptop 5px");
-            row.add(new FLabel.Builder().text(qd.getName()).build(), "w 40%!, h 20px!, gap 0 0 5px 0");
-            row.add(new FLabel.Builder().text(mode).fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
+            row.add(new DeleteButton(row), "w 22px!, h 20px!, gaptop 5px");
+            row.add(new EditButton(row), "w 22px!, h 20px!, gaptop 5px");
+            row.add(new FLabel.Builder().text(qd.getName()).fontAlign(SwingConstants.LEFT).build(), "w 85%-112px!, h 20px!, gaptop 5px, gapleft 4px");
+            row.add(new FLabel.Builder().text(mode).fontAlign(SwingConstants.LEFT).build(), "w 15%!, h 20px!, gaptop 5px, gapleft 4px");
             row.add(new FLabel.Builder().text(qd.getAchievements().getWin() + "/" + qd.getAchievements().getLost())
-                    .fontAlign(SwingConstants.CENTER).build(), "w 15%!, h 20px!, gap 0 0 5px 0");
+                    .fontAlign(SwingConstants.LEFT).build(), "w 60px!, h 20px!, gaptop 5px, gapleft 4px");
             this.add(row, "w 98%!, h 30px!, gap 1% 0 0 0");
             tempRows.add(row);
         }
@@ -126,25 +123,25 @@ public class QuestFileLister extends JPanel {
             setContentAreaFilled(false);
             setBorder(null);
             setBorderPainted(false);
-            setToolTipText("Delete this deck");
+            setToolTipText("Delete this quest");
 
-            this.addMouseListener(new MouseAdapter() {
+            this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void onMouseEnter(MouseEvent e) {
                     if (!r0.selected) {
                         FSkin.get(r0).setBackground(clrHover);
                         r0.setOpaque(true);
                     }
                 }
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void onMouseExit(MouseEvent e) {
                     if (!r0.selected) {
                         FSkin.get(r0).setBackground(clrDefault);
                         r0.setOpaque(false);
                     }
                 }
                 @Override
-                public void mouseClicked(MouseEvent e) {
+                public void onLeftClick(MouseEvent e) {
                     deleteFile(r0);
                 }
             });
@@ -165,24 +162,24 @@ public class QuestFileLister extends JPanel {
             setBorderPainted(false);
             setToolTipText("Rename this quest");
 
-            this.addMouseListener(new MouseAdapter() {
+            this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void onMouseEnter(MouseEvent e) {
                     if (!r0.selected) {
                         FSkin.get(r0).setBackground(clrHover);
                         r0.setOpaque(true);
                     }
                 }
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void onMouseExit(MouseEvent e) {
                     if (!r0.selected) {
                         FSkin.get(r0).setBackground(clrDefault);
                         r0.setOpaque(false);
                     }
                 }
                 @Override
-                public void mouseClicked(MouseEvent e) {
-                    editFileName(r0.getQuestData().getName());
+                public void onLeftClick(MouseEvent e) {
+                    editQuest(r0.getQuestData());
                 }
             });
         }
@@ -190,6 +187,7 @@ public class QuestFileLister extends JPanel {
 
     private class RowPanel extends JPanel {
         private boolean selected = false;
+        private boolean hovered = false;
         private QuestData questData;
 
         public RowPanel(QuestData qd0) {
@@ -200,32 +198,40 @@ public class QuestFileLister extends JPanel {
             FSkin.get(this).setMatteBorder(0, 0, 1, 0, clrBorders);
             questData = qd0;
 
-            this.addMouseListener(new MouseAdapter() {
+            this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseEntered(MouseEvent e) {
-                    if (!selected) {
-                        FSkin.get(((RowPanel) e.getSource())).setBackground(clrHover);
+                public void onMouseEnter(final MouseEvent e) {
+                    RowPanel.this.hovered = true;
+                    if (!RowPanel.this.selected) {
+                        FSkin.get(((RowPanel) e.getSource())).setBackground(QuestFileLister.this.clrHover);
                         ((RowPanel) e.getSource()).setOpaque(true);
                     }
                 }
+
                 @Override
-                public void mouseExited(MouseEvent e) {
-                    if (!selected) {
-                        FSkin.get(((RowPanel) e.getSource())).setBackground(clrDefault);
+                public void onMouseExit(final MouseEvent e) {
+                    RowPanel.this.hovered = false;
+                    if (!RowPanel.this.selected) {
+                        FSkin.get(((RowPanel) e.getSource())).setBackground(QuestFileLister.this.clrDefault);
                         ((RowPanel) e.getSource()).setOpaque(false);
                     }
                 }
+
                 @Override
-                public void mousePressed(MouseEvent e) {
-                    selectHandler((RowPanel) e.getSource());
+                public void onLeftMouseDown(final MouseEvent e) {
+                    if (e.getClickCount() == 1) {
+                        QuestFileLister.this.selectHandler((RowPanel) e.getSource());
+                    }
                 }
             });
         }
 
-        public void setSelected(boolean b0) {
-            selected = b0;
-            setOpaque(b0);
-            FSkin.get(this).setBackground(b0 ? clrActive : clrHover);
+        public void setSelected(final boolean b0) {
+            this.selected = b0;
+            this.setOpaque(b0);
+            if (b0) { FSkin.get(this).setBackground(QuestFileLister.this.clrActive); }
+            else if (this.hovered) { FSkin.get(this).setBackground(QuestFileLister.this.clrHover); }
+            else { FSkin.get(this).setBackground(QuestFileLister.this.clrDefault); }
         }
 
         public boolean isSelected() {
@@ -294,33 +300,36 @@ public class QuestFileLister extends JPanel {
         if (cmdRowSelect != null) { cmdRowSelect.run(); }
     }
 
-    private void editFileName(String s0) {
-        final Object o = JOptionPane.showInputDialog(JOptionPane.getRootFrame(),
-                "Rename Quest to:", "Quest Rename", JOptionPane.OK_CANCEL_OPTION);
+    private void editQuest(QuestData quest) {
+        String questName;
+        String oldQuestName = quest.getName();
+        while (true) {
+            questName = FOptionPane.showInputDialog("Rename quest to:", "Quest Rename", null, oldQuestName);
+            if (questName == null) { return; }
 
-        if (o == null) { return; }
+            questName = SSubmenuQuestUtil.cleanString(questName);
+            if (questName.equals(oldQuestName)) { return; } //quit if chose same name
 
-        final String questName = SSubmenuQuestUtil.cleanString(o.toString());
-
-        boolean exists = false;
-
-        for (RowPanel r : rows) {
-            if (r.getQuestData().getName().equalsIgnoreCase(questName)) {
-                exists = true;
-                break;
+            if (questName.isEmpty()) {
+                FOptionPane.showMessageDialog("Please specify a quest name.");
+                continue;
             }
+
+            boolean exists = false;
+            for (RowPanel r : rows) {
+                if (r.getQuestData().getName().equalsIgnoreCase(questName)) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (exists) {
+                FOptionPane.showMessageDialog("A quest already exists with that name. Please pick another quest name.");
+                continue;
+            }
+            break;
         }
 
-        if (exists || questName.equals("")) {
-            FOptionPane.showMessageDialog("Please pick another quest name, a quest already has that name.");
-            return;
-        }
-        else {
-            File newpath = new File(NewConstants.QUEST_SAVE_DIR, questName + ".dat");
-            File oldpath = new File(NewConstants.QUEST_SAVE_DIR, s0 + ".dat");
-
-            oldpath.renameTo(newpath);
-        }
+        quest.rename(questName);
 
         if (cmdRowEdit != null) { cmdRowEdit.run(); }
     }
@@ -328,11 +337,9 @@ public class QuestFileLister extends JPanel {
     private void deleteFile(RowPanel r0) {
         final QuestData qd = r0.getQuestData();
 
-        final int n = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
-                "Are you sure you want to delete \"" + qd.getName()
-                + "\" ?", "Delete Deck", JOptionPane.YES_NO_OPTION);
-
-        if (n == JOptionPane.NO_OPTION) {
+        if (!FOptionPane.showConfirmDialog(
+                "Are you sure you want to delete '" + qd.getName() + "'?",
+                "Delete Quest", "Delete", "Cancel")) {
             return;
         }
 

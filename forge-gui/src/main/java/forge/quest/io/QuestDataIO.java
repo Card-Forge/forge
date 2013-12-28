@@ -145,7 +145,8 @@ public class QuestDataIO {
             }
 
             return data;
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             BugReporter.reportException(ex, "Error loading Quest Data");
             throw new RuntimeException(ex);
         }
@@ -175,7 +176,6 @@ public class QuestDataIO {
      * @throws IllegalAccessException
      */
     private static void updateSaveFile(final QuestData newData, final String input, String filename) throws ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException {
-
         final DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         final InputSource is = new InputSource();
         is.setCharacterStream(new StringReader(input));
@@ -205,8 +205,7 @@ public class QuestDataIO {
         if(saveVersion < 8) {
         	QuestDataIO.setFinalField(QuestData.class, "isCharmActive", newData, false);
         }
-        
-        
+
         final QuestAssets qS = newData.getAssets();
         final QuestAchievements qA = newData.getAchievements();
 
@@ -376,7 +375,8 @@ public class QuestDataIO {
             QuestDataIO.savePacked(f + ".dat", xStream, qd);
             // QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
 
-        } catch (final Exception ex) {
+        }
+        catch (final Exception ex) {
             BugReporter.reportException(ex, "Error saving Quest Data.");
             throw new RuntimeException(ex);
         }

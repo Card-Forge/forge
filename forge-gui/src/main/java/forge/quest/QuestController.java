@@ -254,9 +254,10 @@ public class QuestController {
 
         this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks, startingWorld)); // pass awards and unlocks here
 
-        if (null != startingCards) {
+        if (startingCards != null) {
             this.myCards.addDeck(startingCards);
-        } else {
+        }
+        else {
             Predicate<PaperCard> filter = Predicates.alwaysTrue();
             if (formatStartingPool != null) {
                 filter = formatStartingPool.getFilterPrinted();
@@ -265,7 +266,6 @@ public class QuestController {
         }
 
         this.getAssets().setCredits(Singletons.getModel().getQuestPreferences().getPrefInt(DifficultyPrefs.STARTING_CREDITS, difficulty));
-
     }
 
     /**
