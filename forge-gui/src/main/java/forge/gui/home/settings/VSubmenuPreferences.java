@@ -70,7 +70,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox("Remove Artifacts");
     private final JCheckBox cbAnte = new OptionsCheckBox("Play for Ante");
     private final JCheckBox cbUploadDraft = new OptionsCheckBox("Upload Draft Picks");
-    private final JCheckBox cbStackLand = new OptionsCheckBox("Stack AI Land");
+    private final JCheckBox cbEnableAICheats = new OptionsCheckBox("Allow AI Cheating");
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
@@ -140,8 +140,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbUploadDraft, regularConstraints);
         pnlPrefs.add(new NoteLabel("Sends draft picks to Forge servers for analysis, to improve draft AI."), regularConstraints);
 
-        pnlPrefs.add(cbStackLand, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Minimizes mana lock in AI hands, giving a slight advantage to computer."), regularConstraints);
+        pnlPrefs.add(cbEnableAICheats, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Allow the AI to cheat to gain advantage (for personalities that have cheat shuffling options set)."), regularConstraints);
 
         pnlPrefs.add(cbManaBurn, regularConstraints);
         pnlPrefs.add(new NoteLabel("Play with mana burn (from pre-Magic 2010 rules)."), regularConstraints);
@@ -421,8 +421,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbStackLand() {
-        return cbStackLand;
+    public JCheckBox getCbEnableAICheats() {
+        return cbEnableAICheats;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

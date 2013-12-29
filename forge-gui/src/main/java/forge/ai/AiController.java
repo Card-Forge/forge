@@ -100,7 +100,7 @@ public class AiController {
         player = computerPlayer;
         game = game0;
         
-        canCheatShuffle = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND);
+        canCheatShuffle = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_AI_CHEATS);
     }
 
     /**
