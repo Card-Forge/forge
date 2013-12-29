@@ -408,18 +408,18 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         uiEvents.post(uiEvent);
     }
 
-	public class MatchUiEventVisitor implements IUiEventVisitor<Void> {
-		@Override
-		public Void visit(UiEventBlockerAssigned event) {
-			updateSingleCard(event.blocker);
-			return null;
-		}
+    public class MatchUiEventVisitor implements IUiEventVisitor<Void> {
+        @Override
+        public Void visit(UiEventBlockerAssigned event) {
+            updateSingleCard(event.blocker);
+            return null;
+        }
 
-		@Override
-		public Void visit(UiEventAttackerDeclared event) {
-			updateSingleCard(event.attacker);
-			return null;
-		}
+        @Override
+        public Void visit(UiEventAttackerDeclared event) {
+            updateSingleCard(event.attacker);
+            return null;
+        }
 
         @Override
         public Void visit(UiEventCardPhased event) {
