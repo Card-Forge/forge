@@ -484,14 +484,8 @@ public final class GuiDisplayUtil {
         getGame().getAction().invoke(new Runnable() { 
             @Override
             public void run() {
-            	getGame().getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0);
-            }
-        });
-        PlanarDice.roll(p, PlanarDice.Planeswalk);
-
-        game.getAction().invoke(new Runnable() {
-            @Override
-            public void run() {
+                getGame().getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0);
+                PlanarDice.roll(p, PlanarDice.Planeswalk);
                 p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
             }
         });
