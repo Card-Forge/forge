@@ -86,6 +86,8 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.ZCTrigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gui.events.UiEventCardPhased;
+import forge.gui.match.CMatchUI;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Expressions;
@@ -4912,6 +4914,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 aura.phase(false);
             }
         }
+
+        CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventCardPhased(this, this.isPhasedOut()));
     }
 
     private boolean switchPhaseState() {

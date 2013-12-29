@@ -28,6 +28,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
+import forge.gui.events.UiEventCardPhased;
 import forge.net.FServer;
 import forge.util.maps.MapOfLists;
 
@@ -206,5 +207,9 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     @Override
     public SoundEffectType visit(UiEventAttackerDeclared event) {
         return null;
+    }
+    @Override
+    public SoundEffectType visit(UiEventCardPhased event) {
+        return SoundEffectType.Phasing;
     }
 }
