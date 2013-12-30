@@ -116,8 +116,8 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public Deck sideboard(Deck deck, GameType gameType) {
-		return deck;
+	public List<PaperCard> sideboard(Deck deck, GameType gameType) {
+		return null; // refused to side
 	}
 
 	@Override
@@ -550,4 +550,10 @@ public class PlayerControllerForTests extends PlayerController {
 	public CardShields chooseRegenerationShield(Card c) {
 		return Iterables.getFirst(c.getShield(), null);
 	}
+
+    @Override
+    public List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses) {
+        // TODO Auto-generated method stub
+        return losses;
+    }
 }

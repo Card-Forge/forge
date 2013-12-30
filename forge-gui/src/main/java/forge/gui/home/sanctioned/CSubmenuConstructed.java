@@ -108,7 +108,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
 
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             for(int i=0;i<view.getNumPlayers();i++) {
-            	String errMsg = gameType.getDecksFormat().getDeckConformanceProblem(view.getDeckChooser(i).getPlayer().getOriginalDeck());
+            	String errMsg = gameType.getDecksFormat().getDeckConformanceProblem(view.getDeckChooser(i).getPlayer().getDeck());
                 if (null != errMsg) {
                     JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Player " + i + "'s deck " + errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
                     return;

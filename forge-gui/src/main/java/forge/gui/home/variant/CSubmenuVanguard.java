@@ -129,7 +129,7 @@ public enum CSubmenuVanguard implements ICDoc {
                 GuiDialog.message("No deck selected for player " + (i + 1));
                 return;
             }
-            playerDecks.add(d.getOriginalDeck());
+            playerDecks.add(d.getDeck());
         }
 
         List<PaperCard> playerAvatars = new ArrayList<PaperCard>();

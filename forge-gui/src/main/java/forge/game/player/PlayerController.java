@@ -115,7 +115,8 @@ public abstract class PlayerController {
     public abstract void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets);
     public abstract void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets);
 
-    public abstract Deck sideboard(final Deck deck, GameType gameType);
+    public abstract List<PaperCard> sideboard(final Deck deck, GameType gameType);
+    public abstract List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses);
 
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender, boolean overrideOrder);
 
@@ -212,6 +213,8 @@ public abstract class PlayerController {
     // These 2 are for AI
     public List<Card> cheatShuffle(List<Card> list) { return list; }
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) { return null; }
+
+
 
 
 }

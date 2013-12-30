@@ -52,7 +52,6 @@ import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventGameFinished;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameStarted;
 import forge.game.player.GameLossReason;
@@ -1502,9 +1501,6 @@ public class GameAction {
 
             first = game.getPhaseHandler().getPlayerTurn();  // needed only for restart
         } while (game.getAge() == GameStage.RestartedByKarn);
-
-        // will pull UI dialog, when the UI is listening
-        game.fireEvent(new GameEventGameFinished());
     }
 
     private Player determineFirstTurnPlayer(final GameOutcome lastGameOutcome) {

@@ -240,7 +240,12 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTutor() {
-        final List<Card> lib = getGame().getPhaseHandler().getPriorityPlayer().getCardsIn(ZoneType.Library);
+        Player pPriority = getGame().getPhaseHandler().getPriorityPlayer();
+        if(pPriority == null) {
+            GuiDialog.message("No player has priority now, can't tutor from their deck at the moment");
+            return;
+        }
+        final List<Card> lib = pPriority.getCardsIn(ZoneType.Library);
         final Card c = GuiChoose.oneOrNone("Choose a card", lib);
         if (null == c)
             return;

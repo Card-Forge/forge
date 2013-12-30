@@ -182,7 +182,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#sideboard(forge.deck.Deck)
      */
     @Override
-    public Deck sideboard(Deck deck, GameType gameType) {
+    public List<PaperCard> sideboard(Deck deck, GameType gameType) {
         CardPool sideboard = deck.get(DeckSection.Sideboard);
         if (sideboard == null) {
             // Use an empty cardpool instead of null for 75/0 sideboarding scenario.
@@ -191,7 +191,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         CardPool main = deck.get(DeckSection.Main);
 
-        boolean conform = Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
+
         int mainSize = main.countAll();
         int sbSize = sideboard.countAll();
         int combinedDeckSize = mainSize + sbSize;
@@ -201,14 +201,15 @@ public class PlayerControllerHuman extends PlayerController {
         // Limited doesn't have a sideboard max, so let the Main min take care of things.
         int sbMax = sbRange == null ? combinedDeckSize : sbRange.getMaximum();
 
-        CardPool newSb = new CardPool();
         List<PaperCard> newMain = null;
 
         if (sbSize == 0 && mainSize == deckMinSize) {
             // Skip sideboard loop if there are no sideboarding opportunities
-            newMain = main.toFlatList();
+            return null;
         }
         else {
+            // conformance should not be checked here
+            boolean conform = Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
             do {
                 if (newMain != null) {
                     if (newMain.size() < deckMinSize) {
@@ -225,20 +226,7 @@ public class PlayerControllerHuman extends PlayerController {
                 newMain = GuiChoose.sideboard(sideboard.toFlatList(), main.toFlatList());
             } while (conform && (newMain.size() < deckMinSize || combinedDeckSize - newMain.size() > sbMax));
         }
-        newSb.clear();
-        newSb.addAll(main);
-        newSb.addAll(sideboard);
-        for (PaperCard c : newMain) {
-            newSb.remove(c);
-        }
-
-        Deck res = (Deck)deck.copyTo(deck.getName());
-        res.getMain().clear();
-        res.getMain().add(newMain);
-        CardPool resSb = res.getOrCreate(DeckSection.Sideboard);
-        resSb.clear();
-        resSb.addAll(newSb);
-        return res;
+        return newMain;
     }
 
     /* (non-Javadoc)
@@ -1076,4 +1064,9 @@ public class PlayerControllerHuman extends PlayerController {
 		}
 		return GuiChoose.one("Choose a regeneration shield:", c.getShield());
 	}
+
+    @Override
+    public List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses) {
+        return GuiChoose.many("Select cards to add to your deck", "Add these to my deck", 0, losses.size(), losses, null);
+    }
 }

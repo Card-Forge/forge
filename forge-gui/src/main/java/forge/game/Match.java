@@ -22,6 +22,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.card.Card;
 import forge.game.event.GameEventAnteCardsSelected;
+import forge.game.event.GameEventGameFinished;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
@@ -32,13 +33,7 @@ import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 
-/**
- * TODO: Write javadoc for this type.
- * 
- */
-
 public class Match {
-
     private final List<RegisteredPlayer> players;
     private final GameType gameType;
 
@@ -50,31 +45,19 @@ public class Match {
     private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
     private final List<GameOutcome> gamesPlayedRo;
 
-    /**
-     * This should become constructor once.
-     */
-    public Match(GameType type, List<RegisteredPlayer> players0, int games) {
-        gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
-        players = Collections.unmodifiableList(Lists.newArrayList(players0));
-        gameType = type;
-        
-        gamesPerMatch = games;
-        gamesToWinMatch = (int)Math.ceil((gamesPerMatch+1)/2);
-    }
-    
     public Match(GameType type, List<RegisteredPlayer> players0) {
-    	this(type,players0,3);
-    }
-    
-    public Match(GameType type, List<RegisteredPlayer> players0, Boolean overrideAnte) {
-        this(type, players0);
-        if( overrideAnte != null )
-            this.useAnte = overrideAnte.booleanValue();
+        this(type, players0, null, 3);
     }
     
     public Match(GameType type, List<RegisteredPlayer> players0, Boolean overrideAnte, int games) {
-    	this(type, players0, games);
-    	if( overrideAnte != null )
+        gameType = type;
+        gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
+        players = Collections.unmodifiableList(Lists.newArrayList(players0));
+
+        gamesPerMatch = games;
+        gamesToWinMatch = (int)Math.ceil((gamesPerMatch+1)/2);
+
+        if( overrideAnte != null )
             this.useAnte = overrideAnte.booleanValue();
     }
 
@@ -124,20 +107,28 @@ public class Match {
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                newGame(game, canRandomFoil);
+                prepareAllZones(game, canRandomFoil);
                 
                 if (useAnte) {  // Deciding which cards go to ante
                     Multimap<Player, Card> list = game.chooseCardsForAnte();
                     for(Entry<Player, Card> kv : list.entries()) {
                         Player p = kv.getKey();
-                        p.getGame().getAction().moveTo(ZoneType.Ante, kv.getValue());
-                        p.getGame().getGameLog().add(GameLogEntryType.ANTE, p + " anted " + kv.getValue());
+                        game.getAction().moveTo(ZoneType.Ante, kv.getValue());
+                        game.getGameLog().add(GameLogEntryType.ANTE, p + " anted " + kv.getValue());
                     }
                     game.fireEvent(new GameEventAnteCardsSelected(list));
                 }
                 
                 GameOutcome lastOutcome = gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
                 game.getAction().startGame(lastOutcome);
+                
+                if (useAnte) {
+                    executeAnte(game);
+                }
+
+                // will pull UI dialog, when the UI is listening
+                game.fireEvent(new GameEventGameFinished());
+                
                 
                 if( null != latch )
                     latch.countDown();
@@ -261,15 +252,7 @@ public class Match {
         library.setCards(newLibrary);
     }
 
-    /**
-     * Constructor for new game allowing card lists to be put into play
-     * immediately, and life totals to be adjusted, for computer and human.
-     * 
-     * TODO: Accept something like match state as parameter. Match should be aware of players,
-     * their decks and other special starting conditions.
-     * @param forceAnte Forces ante on or off no matter what your preferences
-     */
-    private void newGame(final Game game, final boolean canRandomFoil) {
+    private void prepareAllZones(final Game game, final boolean canRandomFoil) {
         // need this code here, otherwise observables fail
         Trigger.resetIDs();
         game.getTriggerHandler().clearDelayedTrigger();
@@ -290,13 +273,24 @@ public class Match {
             player.initVariantsZones(psc);
 
             if (canSideBoard) {
-                Deck sideboarded = player.getController().sideboard(psc.getCurrentDeck(), gameType);
-                psc.setCurrentDeck(sideboarded);
-            } else { 
-                psc.restoreOriginalDeck();
+                Deck toChange = psc.getDeck();
+                List<PaperCard> newMain = player.getController().sideboard(toChange, gameType);
+                if( null != newMain ) {
+                    CardPool allCards = new CardPool();
+                    allCards.addAll(toChange.get(DeckSection.Main));
+                    allCards.addAll(toChange.get(DeckSection.Sideboard));
+                    for(PaperCard c : newMain)
+                        allCards.remove(c);
+
+                    toChange.getMain().clear();
+                    toChange.getMain().add(newMain);
+                    toChange.get(DeckSection.Sideboard).clear();
+                    toChange.get(DeckSection.Sideboard).addAll(allCards);
+                }
             }
-            Deck myDeck = psc.getCurrentDeck();
-            boolean hasSideboard = myDeck.has(DeckSection.Sideboard);
+            
+            Deck myDeck = psc.getDeck();
+
 
             Set<PaperCard> myRemovedAnteCards = null;
             if( useAnte ) {
@@ -312,7 +306,7 @@ public class Match {
             Random generator = MyRandom.getRandom();
 
             preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), canRandomFoil, generator);
-            if(hasSideboard)
+            if(myDeck.has(DeckSection.Sideboard))
                 preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), canRandomFoil, generator);
             
             player.shuffle(null);
@@ -336,4 +330,51 @@ public class Match {
             game.getAction().revealAnte("These ante cards were removed:", removedAnteCards);
         }
     }
+
+    
+    private void executeAnte(Game lastGame) {
+        
+        GameOutcome outcome = lastGame.getOutcome();
+        if (outcome.isDraw())
+            return;
+        
+
+        // remove all the lost cards from owners' decks
+        List<PaperCard> losses = new ArrayList<PaperCard>();
+        int cntPlayers = players.size();
+        int iWinner = -1;
+        for (int i = 0; i < cntPlayers; i++ ) {
+            Player fromGame = lastGame.getRegisteredPlayers().get(i);
+            if( !fromGame.hasLost()) {
+                iWinner = i;
+                continue; // not a loser
+            }
+
+            Deck losersDeck = players.get(i).getDeck();
+            List<PaperCard> peronalLosses = new ArrayList<>();
+            for (Card c : fromGame.getCardsIn(ZoneType.Ante)) {
+                PaperCard toRemove = (PaperCard) c.getPaperCard();
+                // this could miss the cards by returning instances that are not equal to cards found in deck
+                // (but only if the card has multiple prints in a set)
+                losersDeck.getMain().remove(toRemove);
+                peronalLosses.add(toRemove);
+                losses.add(toRemove);
+            }
+            outcome.anteResult.put(fromGame, GameOutcome.AnteResult.lost(peronalLosses));
+        }
+
+        if (iWinner >= 0 ) {
+            Player fromGame = lastGame.getRegisteredPlayers().get(iWinner);
+            outcome.anteResult.put(fromGame, GameOutcome.AnteResult.won(losses));
+            List<PaperCard> chosen = fromGame.getController().chooseCardsYouWonToAddToDeck(losses); // "Select cards to add to your deck", 
+            if (null != chosen) {
+                Deck deck = players.get(iWinner).getDeck();
+                for (PaperCard c : chosen) {
+                    deck.getMain().add(c);
+                }
+            }
+        }
+
+    }
+
 }

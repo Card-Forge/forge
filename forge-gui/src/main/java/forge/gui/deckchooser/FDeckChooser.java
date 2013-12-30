@@ -257,7 +257,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         // Special branch for quest events
         if (getLstDecks().getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString())) {
             QuestEvent event = DeckgenUtil.getQuestEvent(getLstDecks().getSelectedValuesList().get(0));
-            RegisteredPlayer result = new RegisteredPlayer(event.getEventDeck());
+            RegisteredPlayer result = RegisteredPlayer.fromDeck(event.getEventDeck());
             if( event instanceof QuestEventChallenge ) {
                 result.setStartingLife(((QuestEventChallenge) event).getAiLife());
             }

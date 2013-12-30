@@ -144,7 +144,7 @@ public class GauntletMini {
         aiOpponents.clear();
         for (int i = 0; i < Math.min(gameRounds, aiDecks.size()); i++) {
 
-            aiOpponents.add(new RegisteredPlayer(aiDecks.get(i)));
+            aiOpponents.add(RegisteredPlayer.fromDeck(aiDecks.get(i)));
         }
 
         resetCurrentRound();

@@ -20,7 +20,9 @@ package forge.game;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -28,6 +30,7 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
+import forge.item.PaperCard;
 
 /**
  * <p>
@@ -43,18 +46,23 @@ import forge.game.player.PlayerStatistics;
 // GameObserver class - who should be notified of any considerable ingame event
 public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStatistics>>  {
 
+    public static class AnteResult {
+        public final List<PaperCard> cards;
+        public final boolean hasWon;
+        
+        private AnteResult(List<PaperCard> cards, boolean won) {
+            this.cards = cards;
+            hasWon = won;
+        }
+        
+        public static AnteResult won(List<PaperCard> cards) { return new AnteResult(cards, true); }
+        public static AnteResult lost(List<PaperCard> cards) { return new AnteResult(cards, true); }
+    }
 
-    /** The player got first turn. */
-    // private String playerGotFirstTurn = "Nobody";
-
-    /** The last turn number. */
     private int lastTurnNumber = 0;
-
-    /** The player rating. */
     private final List<Pair<LobbyPlayer, PlayerStatistics>> playerRating = new ArrayList<Pair<LobbyPlayer, PlayerStatistics>>(2);
-
     private final Iterable<Player> players;
-
+    public final Map<Player, AnteResult> anteResult = new TreeMap<>();
     private GameEndReason winCondition;
 
     public GameOutcome(GameEndReason reason, final Iterable<Player> list) {
@@ -64,6 +72,8 @@ public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStati
             this.playerRating.add(Pair.of(n.getLobbyPlayer(), n.getStats()));
         }
     }
+    
+    
 
     public boolean isDraw() {
         for (Pair<LobbyPlayer, PlayerStatistics> pv : playerRating) {

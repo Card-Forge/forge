@@ -102,7 +102,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
             userDeck = gd.getUserDeck();
         }
         else {
-            userDeck = view.getLstDecks().getPlayer().getOriginalDeck();
+            userDeck = view.getLstDecks().getPlayer().getDeck();
             gd.setUserDeck(userDeck);
         }
 

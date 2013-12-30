@@ -103,9 +103,9 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Deck sideboard(Deck deck, GameType gameType) {
+    public List<PaperCard> sideboard(Deck deck, GameType gameType) {
         // AI does not know how to sideboard
-        return deck;
+        return null;
     }
 
     @Override
@@ -693,5 +693,11 @@ public class PlayerControllerAi extends PlayerController {
 	public CardShields chooseRegenerationShield(Card c) {
 		return Iterables.getFirst(c.getShield(), null);
 	}
+
+    @Override
+    public List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses) {
+        // TODO AI takes all by default
+        return losses;
+    }
 
 }

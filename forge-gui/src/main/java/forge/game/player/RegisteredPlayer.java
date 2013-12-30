@@ -12,7 +12,6 @@ import forge.item.IPaperCard;
 
 public class RegisteredPlayer {
     private final Deck originalDeck;
-    private Deck currentDeck;
 
     private static final Iterable<PaperCard> EmptyList = Collections.unmodifiableList(new ArrayList<PaperCard>());
     
@@ -27,21 +26,12 @@ public class RegisteredPlayer {
     private PaperCard commander = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
     
-    public RegisteredPlayer(Deck deck0) {
+    private RegisteredPlayer(Deck deck0) {
         originalDeck = deck0;
-        currentDeck = originalDeck;
     }
 
-    public final Deck getOriginalDeck() {
+    public final Deck getDeck() {
         return originalDeck;
-    }
-    
-    public final Deck getCurrentDeck() {
-        return currentDeck;
-    }
-    
-    public void setCurrentDeck(Deck currentDeck0) {
-        this.currentDeck = currentDeck0; 
     }
     
     public final int getStartingLife() {
@@ -100,13 +90,6 @@ public class RegisteredPlayer {
     }
 
     /**
-     * TODO: Write javadoc for this method.
-     */
-    public void restoreOriginalDeck() {
-        currentDeck = originalDeck;
-    }
-
-    /**
      * @return the planes
      */
     public Iterable<PaperCard> getPlanes() {
@@ -121,11 +104,17 @@ public class RegisteredPlayer {
         this.teamNumber = teamNumber0;
     }
 
-    
+
+    // Copies the deck so that antes cannot change the original 'constructed' (or event) deck
     public static RegisteredPlayer fromDeck(final Deck deck) {
-        return new RegisteredPlayer(deck);
+        return new RegisteredPlayer((Deck)deck.copyTo(deck.getName())); 
     }
 
+    // Should be used for quests when deck changes are to persist after match is over
+    public static RegisteredPlayer fromDeckMutable(final Deck deck) { 
+        return new RegisteredPlayer(deck);
+    }
+    
     public static RegisteredPlayer forVanguard(final Deck deck, final PaperCard avatar) {
         RegisteredPlayer start = fromDeck(deck);
         start.setStartingLife(start.getStartingLife() + avatar.getRules().getLife());

@@ -433,8 +433,8 @@ public class SSubmenuQuestUtil {
             forceAnte = qc.isForceAnte();
         }
 
-        RegisteredPlayer humanStart = new RegisteredPlayer(deck);
-        RegisteredPlayer aiStart = new RegisteredPlayer(event.getEventDeck());
+        RegisteredPlayer humanStart = RegisteredPlayer.fromDeckMutable(deck);
+        RegisteredPlayer aiStart = RegisteredPlayer.fromDeck(event.getEventDeck());
         
         if (lifeHuman != null) {
             humanStart.setStartingLife(lifeHuman);

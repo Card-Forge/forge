@@ -139,7 +139,7 @@ public enum CDock implements ICDoc {
      */
     public void viewDeckList() {
 
-        showDeck(game.getMatch().getPlayers().get(0).getCurrentDeck());
+        showDeck(game.getMatch().getPlayers().get(0).getDeck());
     }
 
     /**
