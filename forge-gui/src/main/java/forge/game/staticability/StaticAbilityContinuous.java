@@ -98,6 +98,7 @@ public class StaticAbilityContinuous {
         String[] removeTypes = null;
         String addColors = null;
         String[] addTriggers = null;
+        String[] addStatics = null;
         ArrayList<SpellAbility> addFullAbs = null;
         boolean removeAllAbilities = false;
         boolean removeSuperTypes = false;
@@ -275,6 +276,14 @@ public class StaticAbilityContinuous {
                 sVars[i] = hostCard.getSVar(sVars[i]);
             }
             addTriggers = sVars;
+        }
+
+        if (params.containsKey("AddStaticAbility")) {
+            final String[] sVars = params.get("AddStaticAbility").split(" & ");
+            for (int i = 0; i < sVars.length; i++) {
+                sVars[i] = hostCard.getSVar(sVars[i]);
+            }
+            addStatics = sVars;
         }
 
         if (params.containsKey("GainsAbilitiesOf")) {
@@ -468,6 +477,17 @@ public class StaticAbilityContinuous {
                 for (final String trigger : addTriggers) {
                     final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false);
                     affectedCard.addTrigger(actualTrigger).setTemporary(true);
+                }
+            }
+
+            // add static abilities
+            if (addStatics != null) {
+                for (String s : addStatics) {
+                    if (s.contains("ConvertedManaCost")) {
+                        final String costcmc = Integer.toString(affectedCard.getCMC());
+                        s = s.replace("ConvertedManaCost", costcmc);
+                    }
+                    affectedCard.addStaticAbility(s).setTemporarily(true);
                 }
             }
 

@@ -60,7 +60,7 @@ public class StaticEffects {
             clearedCards.addAll(this.removeStaticEffect(se));
         }
         this.staticEffects.clear();
-        
+
         return clearedCards;
     }
 

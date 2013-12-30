@@ -702,11 +702,16 @@ public class GameAction {
         // search for cards with static abilities
         final List<Card> allCards = game.getCardsInGame();
         final ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
-        for (final Card card : allCards) {
-            for (StaticAbility sa : card.getStaticAbilities()) {
-                if (sa.getMapParams().get("Mode").equals("Continuous")) {
-                    staticAbilities.add(sa);
-                }
+        for (final Card c : allCards) {
+            for (int i = 0; i < c.getStaticAbilities().size(); i++) {
+               StaticAbility stAb = c.getCharacteristics().getStaticAbilities().get(i);
+               if (stAb.getMapParams().get("Mode").equals("Continuous")) {
+                   staticAbilities.add(stAb);
+               }
+               if (stAb.isTemporary()) {
+                   c.getCharacteristics().getStaticAbilities().remove(i);
+                   i--;
+               }
             }
         }
 
@@ -992,7 +997,8 @@ public class GameAction {
             final Card equippedCreature = c.getEquipping().get(0);
             if (!equippedCreature.isCreature() || !equippedCreature.isInPlay()
                     || !equippedCreature.canBeEquippedBy(c)
-                    || (equippedCreature.isPhasedOut() && !c.isPhasedOut())) {
+                    || (equippedCreature.isPhasedOut() && !c.isPhasedOut())
+                    || !c.isEquipment()) {
                 c.unEquipCard(equippedCreature);
                 checkAgain = true;
             }

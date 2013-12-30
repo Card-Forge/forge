@@ -50,6 +50,8 @@ public class StaticAbility {
     /** The suppressed. */
     private final boolean suppressed = false;
 
+    private boolean temporary = false;
+
     /**
      * <p>
      * getHostCard.
@@ -631,6 +633,13 @@ public class StaticAbility {
      */
     public void setLayer(int layer) {
         this.layer = layer;
+    }
+
+    public void setTemporarily(boolean b) {
+        this.temporary = b;
+    }
+    public boolean isTemporary() {
+        return this.temporary;
     }
 
 } // end class StaticEffectFactory

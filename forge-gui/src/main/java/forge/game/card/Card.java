@@ -4652,14 +4652,14 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s
      *            the s
      */
-    public final void addStaticAbility(final String s) {
-
+    public final StaticAbility addStaticAbility(final String s) {
         if (s.trim().length() != 0) {
             final StaticAbility stAb = new StaticAbility(s, this);
             this.getCharacteristics().getStaticAbilities().add(stAb);
+            return stAb;
         }
+        return null;
     }
-
 
     public final boolean isPermanent() {
         return !(this.isInstant() || this.isSorcery() || this.isImmutable());

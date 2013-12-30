@@ -1302,6 +1302,7 @@ forge-gui/res/cardsfolder/b/bloodthrone_vampire.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/bloom_tender.txt -text
 forge-gui/res/cardsfolder/b/blossoming_wreath.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/blowfly_infestation.txt -text
+forge-gui/res/cardsfolder/b/bludgeon_brawl.txt -text
 forge-gui/res/cardsfolder/b/blue_elemental_blast.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/blue_mana_battery.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/blue_scarab.txt svneol=native#text/plain
