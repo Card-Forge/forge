@@ -28,6 +28,8 @@ Debt of Loyalty
 Matopi Golem
 Skeleton Scavengers
 Soldevi Sentry
+Nullstone Gargoyle
+Bludgeon Brawl
 
 
 --------------------
