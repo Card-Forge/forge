@@ -6,3 +6,4 @@ SVar:BrawlEquip:AB$ Attach | Cost$ ConvertedManaCost | ValidTgts$ Creature.YouCt
 SVar:EquipPump:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ ConvertedManaCost | Description$ Equipped creature gets +X/+0, where X is CARDNAME's converted mana cost.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bludgeon_brawl.jpg
+Oracle:Each noncreature, non-Equipment artifact is an Equipment with equip {X} and "Equipped creature gets +X/+0," where X is that artifact's converted mana cost.
