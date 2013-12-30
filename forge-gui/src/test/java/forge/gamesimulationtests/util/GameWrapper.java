@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameLog;
@@ -31,6 +32,7 @@ import forge.gamesimulationtests.util.player.PlayerSpecificationBuilder;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.PlayerActions;
 import forge.item.PaperCard;
+import forge.properties.ForgePreferences.FPref;
 
 public class GameWrapper {
 	private final List<PlayerSpecification> players;
@@ -67,7 +69,8 @@ public class GameWrapper {
 			registeredPlayers.add( registeredPlayer );
 		}
 		
-		Match match = new Match( GameType.Constructed, registeredPlayers );
+		boolean an = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
+		Match match = new Match( GameType.Constructed, registeredPlayers, an);
 		game = match.createGame();
 		game.subscribeToEvents( new GameLogFormatter( gameLog ) );
 		

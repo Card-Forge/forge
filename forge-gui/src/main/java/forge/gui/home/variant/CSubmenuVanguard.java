@@ -11,12 +11,10 @@ import javax.swing.SwingUtilities;
 import com.google.common.collect.Iterables;
 
 import forge.Command;
-import forge.FThreads;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
@@ -178,14 +176,7 @@ public enum CSubmenuVanguard implements ICDoc {
             LobbyPlayer player = view.isPlayerAI(i) ? lobby.getAiPlayer() : lobby.getGuiPlayer();
             helper.add(RegisteredPlayer.forVanguard(playerDecks.get(i), playerAvatars.get(i)).setPlayer(player));
         }
-        final Match mc = new Match(GameType.Vanguard, helper);
-        FThreads.invokeInEdtLater(new Runnable(){
-            @Override
-            public void run() {
-                Singletons.getControl().startGameWithUi(mc);
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        Singletons.getControl().startMatch(GameType.Vanguard, helper);
     }
 
 

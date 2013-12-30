@@ -37,6 +37,7 @@ import javax.swing.WindowConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Constant.Preferences;
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.Game;
@@ -546,6 +547,20 @@ public enum FControl implements KeyEventDispatcher {
                 GamePlayerUtil.setPlayerName();
             }
         }
+    }
+
+    public void startMatch(GameType gameType, List<RegisteredPlayer> starter) {
+        boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
+        final Match mc = new Match(gameType, starter, useAnte);
+        SOverlayUtils.startGameOverlay();
+        SOverlayUtils.showOverlay();
+        FThreads.invokeInEdtLater(new Runnable(){
+            @Override
+            public void run() {
+                startGameWithUi(mc);
+                SOverlayUtils.hideOverlay();
+            }
+        });
     }
 }
 

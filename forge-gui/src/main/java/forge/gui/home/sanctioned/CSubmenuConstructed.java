@@ -10,12 +10,9 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
-import forge.FThreads;
 import forge.Singletons;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
-import forge.gui.SOverlayUtils;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
 import forge.gui.menus.IMenuProvider;
@@ -122,22 +119,11 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         	RegisteredPlayer rp = view.getDeckChooser(i).getPlayer();
         	players.add(rp.setPlayer(view.isPlayerAI(i) ? lobby.getAiPlayer() : lobby.getGuiPlayer()));
         }
-        final Match mc = new Match(gameType, players);
-
-        SOverlayUtils.startGameOverlay();
-        SOverlayUtils.showOverlay();
-
         for(int i=0;i<view.getNumPlayers();i++) {
         	view.getDeckChooser(i).saveState();
         }
-
-        FThreads.invokeInEdtLater(new Runnable(){
-            @Override
-            public void run() {
-                Singletons.getControl().startGameWithUi(mc);
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        
+        Singletons.getControl().startMatch(gameType, players);
     }
 
     /* (non-Javadoc)

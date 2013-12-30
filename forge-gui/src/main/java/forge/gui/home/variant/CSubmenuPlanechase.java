@@ -11,12 +11,10 @@ import javax.swing.SwingUtilities;
 import com.google.common.base.Predicate;
 
 import forge.Command;
-import forge.FThreads;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
@@ -222,14 +220,7 @@ public enum CSubmenuPlanechase implements ICDoc {
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
                 
-        final Match mc = new Match(GameType.Planechase, helper);
-        FThreads.invokeInEdtLater(new Runnable(){
-            @Override
-            public void run() {
-                Singletons.getControl().startGameWithUi(mc);
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        Singletons.getControl().startMatch(GameType.Planechase, helper);
     }
 
 

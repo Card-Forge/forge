@@ -455,7 +455,10 @@ public class SSubmenuQuestUtil {
         aiPlayer.setIconImageKey(event.getIconImageKey());
         starter.add(aiStart.setPlayer(aiPlayer));
 
-        final Match mc = new Match(GameType.Quest, starter, forceAnte, qData.getCharmState() ? 5 : 3);
+        boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
+        if(forceAnte != null)
+            useAnte = forceAnte.booleanValue();
+        final Match mc = new Match(GameType.Quest, starter, useAnte, qData.getCharmState() ? 5 : 3);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

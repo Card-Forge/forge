@@ -11,11 +11,9 @@ import java.util.Set;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
-import forge.FThreads;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
@@ -149,14 +147,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         starter.add(RegisteredPlayer.fromDeck(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
         starter.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
         
-        final Match mc = new Match(GameType.Gauntlet, starter);
-        FThreads.invokeInEdtLater(new Runnable(){
-            @Override
-            public void run() {
-                Singletons.getControl().startGameWithUi(mc);
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        Singletons.getControl().startMatch(GameType.Gauntlet, starter);
     }
 
     /* (non-Javadoc)

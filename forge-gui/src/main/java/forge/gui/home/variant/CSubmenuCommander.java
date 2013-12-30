@@ -11,11 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
-import forge.FThreads;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
@@ -155,14 +153,7 @@ public enum CSubmenuCommander implements ICDoc {
             LobbyPlayer player = view.isPlayerAI(i) ? lobby.getAiPlayer() : lobby.getGuiPlayer();
             helper.add(RegisteredPlayer.forCommander(playerDecks.get(i)).setPlayer(player));
         }
-        final Match mc = new Match(GameType.Commander, helper);
-        FThreads.invokeInEdtLater(new Runnable(){
-            @Override
-            public void run() {
-                Singletons.getControl().startGameWithUi(mc);
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        Singletons.getControl().startMatch(GameType.Commander, helper);
     }
 
 

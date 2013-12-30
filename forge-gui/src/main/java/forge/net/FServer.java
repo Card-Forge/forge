@@ -89,7 +89,7 @@ public enum FServer {
         pp.add(RegisteredPlayer.fromDeck(d1).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai-" + d1.getName())));
         pp.add(RegisteredPlayer.fromDeck(d2).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai_" + d2.getName())));
         
-        Match mc = new Match(GameType.Constructed, pp);
+        Match mc = new Match(GameType.Constructed, pp, false);
         for(int iGame = 0; iGame < nGames; iGame++)
             simulateSingleMatch(mc, iGame);
         System.out.flush();

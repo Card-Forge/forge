@@ -36,7 +36,6 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
-import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
@@ -205,13 +204,11 @@ public class GauntletWinLose extends ControlWinLose {
             Lobby lobby = FServer.instance.getLobby();
             players.add(RegisteredPlayer.fromDeck(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
             players.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
-           
-            Match mc = new Match(GameType.Gauntlet, players);
-
-            SOverlayUtils.hideOverlay();
+            
             saveOptions();
             Singletons.getControl().endCurrentGame();
-            Singletons.getControl().startGameWithUi(mc);
+            
+            Singletons.getControl().startMatch(GameType.Gauntlet, players);
         } else {
             super.actionOnContinue();
         }

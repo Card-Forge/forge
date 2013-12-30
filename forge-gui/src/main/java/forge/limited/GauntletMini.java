@@ -22,11 +22,9 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import forge.FThreads;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.SOverlayUtils;
 import forge.net.FServer;
@@ -167,14 +165,8 @@ public class GauntletMini {
         Lobby lobby = FServer.instance.getLobby();
         starter.add(RegisteredPlayer.fromDeck(humanDeck).setPlayer(lobby.getGuiPlayer()));
         starter.add(aiOpponents.get(currentRound - 1).setPlayer(lobby.getAiPlayer()));
-        final Match mc = new Match(gauntletType, starter);
-        FThreads.invokeInEdtLater(new Runnable(){
-            @Override
-            public void run() {
-                Singletons.getControl().startGameWithUi(mc);
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        
+        Singletons.getControl().startMatch(gauntletType, starter);
     }
 
 

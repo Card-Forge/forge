@@ -11,12 +11,10 @@ import javax.swing.SwingUtilities;
 import com.google.common.base.Predicate;
 
 import forge.Command;
-import forge.FThreads;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
-import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
@@ -234,15 +232,7 @@ public enum CSubmenuArchenemy implements ICDoc {
             }
         }
 
-        final Match mc = new Match(GameType.Archenemy, players);
-        FThreads.invokeInEdtLater(new Runnable(){
-            @Override
-            public void run() {
-                Singletons.getControl().startGameWithUi(mc);
-                SOverlayUtils.hideOverlay();
-            }
-        });
-
+        Singletons.getControl().startMatch(GameType.Archenemy, players);
     }
 
     /* (non-Javadoc)

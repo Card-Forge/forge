@@ -40,16 +40,16 @@ public class Match {
     private int gamesPerMatch = 3;
     private int gamesToWinMatch = 2;
     
-    private boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
+    private final boolean useAnte;
 
     private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
     private final List<GameOutcome> gamesPlayedRo;
 
-    public Match(GameType type, List<RegisteredPlayer> players0) {
-        this(type, players0, null, 3);
+    public Match(GameType type, List<RegisteredPlayer> players0, boolean useAnte) {
+        this(type, players0, useAnte, 3);
     }
     
-    public Match(GameType type, List<RegisteredPlayer> players0, Boolean overrideAnte, int games) {
+    public Match(GameType type, List<RegisteredPlayer> players0, boolean useAnte, int games) {
         gameType = type;
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
         players = Collections.unmodifiableList(Lists.newArrayList(players0));
@@ -57,8 +57,7 @@ public class Match {
         gamesPerMatch = games;
         gamesToWinMatch = (int)Math.ceil((gamesPerMatch+1)/2);
 
-        if( overrideAnte != null )
-            this.useAnte = overrideAnte.booleanValue();
+        this.useAnte = useAnte;
     }
 
     /**
