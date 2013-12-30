@@ -4924,6 +4924,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         this.phasedOut = !this.phasedOut;
+        final Combat combat = this.getGame().getPhaseHandler().getCombat();
+        if (combat != null && this.phasedOut) {
+            combat.removeFromCombat(this);
+        }
         if (this.phasedOut && this.isToken()) {
             // 702.23k Phased-out tokens cease to exist as a state-based action.
             // See rule 704.5d.
