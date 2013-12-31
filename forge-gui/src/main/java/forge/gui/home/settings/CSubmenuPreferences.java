@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
@@ -131,7 +130,6 @@ public enum CSubmenuPreferences implements ICDoc {
         initializePlayerNameButton();
     }
 
-
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
@@ -166,8 +164,7 @@ public enum CSubmenuPreferences implements ICDoc {
         String userPrompt =
                 "This will reset all preferences to their defaults and restart Forge.\n\n" +
                         "Reset and restart Forge?";
-        int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Settings", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
+        if (FOptionPane.showConfirmDialog(userPrompt, "Reset Settings")) {
             ForgePreferences prefs = Singletons.getModel().getPreferences();
             prefs.reset();
             prefs.save();
@@ -181,8 +178,7 @@ public enum CSubmenuPreferences implements ICDoc {
                 "This will reset the Deck Editor screen layout.\n" +
                         "All tabbed views will be restored to their default positions.\n\n" +
                         "Reset layout?";
-        int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Deck Editor Layout", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
+        if (FOptionPane.showConfirmDialog(userPrompt, "Reset Deck Editor Layout")) {
             if (FScreen.DECK_EDITOR_CONSTRUCTED.deleteLayoutFile()) {
                 FOptionPane.showMessageDialog("Deck Editor layout has been reset.");
             }
@@ -194,8 +190,7 @@ public enum CSubmenuPreferences implements ICDoc {
                 "This will reset the Workshop screen layout.\n" +
                         "All tabbed views will be restored to their default positions.\n\n" +
                         "Reset layout?";
-        int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Workshop Layout", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
+        if (FOptionPane.showConfirmDialog(userPrompt, "Reset Workshop Layout")) {
             if (FScreen.WORKSHOP_SCREEN.deleteLayoutFile()) {
                 FOptionPane.showMessageDialog("Workshop layout has been reset.");
             }
@@ -208,8 +203,7 @@ public enum CSubmenuPreferences implements ICDoc {
                         "If you want to save the current layout first, please use " +
                         "the Dock tab -> Save Layout option in the Match screen.\n\n" +
                         "Reset layout?";
-        int reply = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), userPrompt, "Reset Match Screen Layout", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
+        if (FOptionPane.showConfirmDialog(userPrompt, "Reset Match Screen Layout")) {
             if (FScreen.MATCH_SCREEN.deleteLayoutFile()) {
                 FOptionPane.showMessageDialog("Match Screen layout has been reset.");
             }
@@ -262,7 +256,6 @@ public enum CSubmenuPreferences implements ICDoc {
         });
     }
 
-
     private void initializePlayerNameButton() {
         FLabel btn = view.getBtnPlayerName();
         setPlayerNameButtonText();
@@ -285,5 +278,4 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         };
     }
-
 }

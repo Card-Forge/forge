@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
@@ -21,6 +20,7 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorDraftingProcess;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.FOptionPane;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
 import forge.net.FServer;
@@ -97,16 +97,14 @@ public enum CSubmenuDraft implements ICDoc {
         final int aiIndex = (int) Math.floor(Math.random() * 7);
 
         if (humanDeck == null) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                    "No deck selected for human!\r\n(You may need to build a new deck.)",
-                    "No deck", JOptionPane.ERROR_MESSAGE);
+            FOptionPane.showErrorDialog("No deck selected for human.\n(You may need to build a new deck)", "No Deck");
             return;
         } 
         
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
             if (null != errorMessage) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
                 return;
             }
         }

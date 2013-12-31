@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import javax.swing.JOptionPane;
-
 import forge.Command;
 import forge.FThreads;
 import forge.Singletons;
@@ -48,6 +46,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.views.VDock;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.SaveOpenDialog;
 import forge.gui.toolbox.SaveOpenDialog.Filetypes;
@@ -213,6 +212,7 @@ public enum CDock implements ICDoc {
         refreshArcStateDisplay();
         FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
     }
+
     public void setArcState(int state) {
         arcState = state;
     }
@@ -246,7 +246,6 @@ public enum CDock implements ICDoc {
             deckList.append(s.getValue() + " x " + s.getKey() + nl);
         }
 
-
         String ttl = "Decklist";
         if (dName != null) {
             ttl += " - " + dName;
@@ -255,15 +254,14 @@ public enum CDock implements ICDoc {
         final StringBuilder msg = new StringBuilder();
         if (deckMap.keySet().size() <= 32) {
             msg.append(deckList.toString() + nl);
-        } else {
+        }
+        else {
             msg.append("Decklist too long for dialog." + nl + nl);
         }
 
         msg.append("Copy Decklist to Clipboard?");
 
-        int rcMsg = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), msg, ttl, JOptionPane.OK_CANCEL_OPTION);
-
-        if (rcMsg == JOptionPane.OK_OPTION) {
+        if (FOptionPane.showConfirmDialog(msg.toString(), ttl, "OK", "Cancel")) {
             final StringSelection ss = new StringSelection(deckList.toString());
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
         }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -24,6 +23,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorQuestCardShop;
 import forge.gui.framework.FScreen;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.net.FServer;
 import forge.net.Lobby;
@@ -249,7 +249,7 @@ public class SSubmenuQuestUtil {
         QuestController qc = Singletons.getModel().getQuest();
         if (qc == null || qc.getAssets() == null) {
             String msg = "Please create a Quest before attempting to " + location;
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg, "No Quest", JOptionPane.ERROR_MESSAGE);
+            FOptionPane.showErrorDialog(msg, "No Quest");
             System.out.println(msg);
             return false;
         }
@@ -288,9 +288,8 @@ public class SSubmenuQuestUtil {
 
         CardEdition unlocked = toUnlock.left;
         qData.getAssets().subtractCredits(toUnlock.right);
-        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "You have successfully unlocked " + unlocked.getName() + "!",
-                unlocked.getName() + " unlocked!",
-                JOptionPane.PLAIN_MESSAGE);
+        FOptionPane.showMessageDialog("You have successfully unlocked " + unlocked.getName() + "!",
+                unlocked.getName() + " unlocked!", null);
 
         QuestUtilUnlockSets.doUnlock(qData, unlocked);
     }
@@ -310,7 +309,7 @@ public class SSubmenuQuestUtil {
         }
 
         if (worlds.size() < 1) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "There are currently no worlds you can travel to\nin this version of Forge.", "No worlds", JOptionPane.ERROR_MESSAGE);
+            FOptionPane.showErrorDialog("There are currently no worlds you can travel to\nin this version of Forge.", "No Worlds");
             return;
         }
 
@@ -326,13 +325,11 @@ public class SSubmenuQuestUtil {
             if (nextChallengeInWins() < 1 && qCtrl.getAchievements().getCurrentChallenges().size() > 0) {
                 needRemove = true;
 
-                final int confirmLoss = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+                if (!FOptionPane.showConfirmDialog(
                         "You have uncompleted challenges in your current world. If you travel now, they will be LOST!"
                         + "\nAre you sure you wish to travel anyway?\n"
                         + "(Click \"No\" to go back  and complete your current challenges first.)",
-                        "WARNING: Uncompleted challenges", JOptionPane.YES_NO_OPTION);
-
-                if (confirmLoss == JOptionPane.NO_OPTION) {
+                        "WARNING: Uncompleted challenges")) {
                     return;
                 }
             }
@@ -377,7 +374,7 @@ public class SSubmenuQuestUtil {
         }
         if (deck == null) {
             String msg = "Please select a Quest Deck.";
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg, "No Deck", JOptionPane.ERROR_MESSAGE);
+            FOptionPane.showErrorDialog(msg, "No Deck");
             System.out.println(msg);
             return;
         }
@@ -385,7 +382,7 @@ public class SSubmenuQuestUtil {
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = GameType.Quest.getDecksFormat().getDeckConformanceProblem(deck);
             if (null != errorMessage) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                FOptionPane.showErrorDialog("Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid Deck");
                 return;
             }
         }

@@ -27,11 +27,10 @@ import java.util.NoSuchElementException;
 import java.util.Stack;
 import java.util.TreeMap;
 
-import javax.swing.JOptionPane;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.base.Supplier;
+
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.CardEdition;
@@ -40,6 +39,7 @@ import forge.card.UnOpenedProduct;
 import forge.deck.Deck;
 import forge.game.card.Card;
 import forge.gui.GuiChoose;
+import forge.gui.toolbox.FOptionPane;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.item.SealedProduct;
@@ -138,8 +138,9 @@ public final class BoosterDraft implements IBoosterDraft {
             final List<CustomLimited> myDrafts = this.loadCustomDrafts("res/draft/", ".draft");
 
             if (myDrafts.isEmpty()) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "No custom draft files found.", "", JOptionPane.INFORMATION_MESSAGE);
-            } else {
+                FOptionPane.showMessageDialog("No custom draft files found.");
+            }
+            else {
                 final CustomLimited draft = GuiChoose.one("Choose Custom Draft", myDrafts);
                 this.setupCustomDraft(draft);
             }

@@ -62,7 +62,7 @@ public final class CardScriptInfo {
     	    return true;
     	}
     	catch (final Exception ex) {
-    		FOptionPane.showErrorMessageDialog("Problem writing file - " + this.file + " : " + ex);
+    		FOptionPane.showErrorDialog("Problem writing file - " + this.file + " : " + ex);
     		return false;
     	}
     }

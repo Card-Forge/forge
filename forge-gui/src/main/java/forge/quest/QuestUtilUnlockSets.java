@@ -24,8 +24,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JOptionPane;
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import com.google.common.collect.ImmutableList;
@@ -37,6 +35,7 @@ import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
 import forge.gui.CardListViewer;
 import forge.gui.GuiChoose;
+import forge.gui.toolbox.FOptionPane;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.quest.io.ReadPriceList;
@@ -94,20 +93,19 @@ public class QuestUtilUnlockSets {
         CardEdition choosenEdition = toBuy.left;
 
         if (qData.getAssets().getCredits() < price) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Unfortunately, you cannot afford that set yet.\n"
+            FOptionPane.showMessageDialog("Unfortunately, you cannot afford that set yet.\n"
                     + "To unlock " + choosenEdition.getName() + ", you need " + price + " credits.\n"
                     + "You have only " + qData.getAssets().getCredits() + " credits.",
                     "Failed to unlock " + choosenEdition.getName(),
-                    JOptionPane.PLAIN_MESSAGE);
+                    null);
             return null;
         }
 
-        final int unlockConfirm = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+        if (!FOptionPane.showConfirmDialog(
                 "Unlocking " + choosenEdition.getName() + " will cost you " + price + " credits.\n"
                 + "You have " + qData.getAssets().getCredits() + " credits.\n\n"
                 + "Are you sure you want to unlock " + choosenEdition.getName() + "?",
-                "Confirm Unlocking " + choosenEdition.getName(), JOptionPane.YES_NO_OPTION);
-        if (unlockConfirm == JOptionPane.NO_OPTION) {
+                "Confirm Unlocking " + choosenEdition.getName())) {
             return null;
         }
         return toBuy;

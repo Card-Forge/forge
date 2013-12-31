@@ -2,7 +2,6 @@ package forge.gui.workshop.controllers;
 
 import java.util.Arrays;
 
-import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -15,6 +14,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FTextEditor;
 import forge.gui.workshop.CardScriptInfo;
 import forge.gui.workshop.menus.WorkshopFileMenu;
@@ -37,6 +37,7 @@ public enum CCardScript implements ICDoc {
     private PaperCard currentCard;
     private CardScriptInfo currentScriptInfo;
     private boolean isTextDirty;
+    private boolean switchInProgress;
 
     private CCardScript() {
         VCardScript.SINGLETON_INSTANCE.getTxtScript().addDocumentListener(new DocumentListener() {
@@ -71,7 +72,8 @@ public enum CCardScript implements ICDoc {
     }
 
     public void showCard(PaperCard card) {
-        if (this.currentCard == card) { return; }
+        if (this.currentCard == card || this.switchInProgress) { return; }
+
         if (!canSwitchAway(true)) { //ensure current card saved before changing to a different card
             VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().setSelectedItem(this.currentCard); //return selection to current card //TODO: fix so clicking away again doesn't cause weird selection problems
             return;
@@ -94,18 +96,21 @@ public enum CCardScript implements ICDoc {
     }
 
     public boolean canSwitchAway(boolean isCardChanging) {
+        if (this.switchInProgress) { return false; }
         if (!hasChanges()) { return true; }
 
+        this.switchInProgress = true;
         Singletons.getControl().ensureScreenActive(FScreen.WORKSHOP_SCREEN); //ensure Workshop is active before showing dialog
-        final int choice = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),
+        final int choice = FOptionPane.showOptionDialog(
                 "Save changes to " + this.currentCard + "?",
                 "Save Changes?",
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+                FOptionPane.QUESTION_ICON,
+                new String[] {"Save", "Don't Save", "Cancel"});
+        this.switchInProgress = false;
 
-        if (choice == JOptionPane.CANCEL_OPTION) { return false; }
+        if (choice == -1 || choice == 2) { return false; }
 
-        if (choice == JOptionPane.YES_OPTION && !saveChanges()) { return false; }
+        if (choice == 0 && !saveChanges()) { return false; }
 
         if (!isCardChanging) {
             refresh(); //refresh if current card isn't changing to restore script text from file

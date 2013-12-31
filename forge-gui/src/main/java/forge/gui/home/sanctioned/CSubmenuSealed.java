@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +27,7 @@ import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.FOptionPane;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.limited.LimitedPoolType;
@@ -124,16 +124,14 @@ public enum CSubmenuSealed implements ICDoc {
         final Deck human = VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
 
         if (human == null) {
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                    "Please build and/or select a deck for yourself.",
-                    "No deck", JOptionPane.ERROR_MESSAGE);
+            FOptionPane.showErrorDialog("Please build and/or select a deck for yourself.", "No Deck");
             return;
         } 
         
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(human);
             if (null != errorMessage) {
-                JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
                 return;
             }
         }
@@ -144,8 +142,6 @@ public enum CSubmenuSealed implements ICDoc {
 
     @SuppressWarnings("unchecked")
     private <T extends DeckBase> void setupSealed() {
-
-
         final String prompt = "Choose Sealed Deck Format:";
         final LimitedPoolType o = GuiChoose.oneOrNone(prompt, LimitedPoolType.values());
         if ( o == null ) return;
@@ -164,16 +160,14 @@ public enum CSubmenuSealed implements ICDoc {
         Integer rounds = GuiChoose.oneOrNone("How many opponents are you willing to face?", integers);
         if ( null == rounds ) return;
 
-
-        final String sDeckName = JOptionPane.showInputDialog(JOptionPane.getRootFrame(),
+        final String sDeckName = FOptionPane.showInputDialog(
                 "Save this card pool as:",
                 "Save Card Pool",
-                JOptionPane.QUESTION_MESSAGE);
+                FOptionPane.QUESTION_ICON);
 
         if (StringUtils.isBlank(sDeckName)) {
             return;
         }
-
 
         final Deck deck = new Deck(sDeckName);
         deck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
@@ -185,11 +179,9 @@ public enum CSubmenuSealed implements ICDoc {
         final IStorage<DeckGroup> sealedDecks = Singletons.getModel().getDecks().getSealed();
 
         if (sealedDecks.contains(sDeckName)) {
-            final int deleteDeck = JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(), "\"" + sDeckName
-                    + "\" already exists! Do you want to replace it?",
-                    "Sealed Deck Game Exists", JOptionPane.YES_NO_OPTION);
-
-            if (deleteDeck == JOptionPane.NO_OPTION) {
+            if (!FOptionPane.showConfirmDialog(
+                    "'" + sDeckName + "' already exists. Do you want to replace it?",
+                    "Sealed Deck Game Exists")) {
                 return;
             }
             sealedDecks.delete(sDeckName);
@@ -230,8 +222,6 @@ public enum CSubmenuSealed implements ICDoc {
             double value = 0;
             double divider = 0;
 
-
-
             if (d.getMain().isEmpty()) {
                 return 0;
             }
@@ -260,7 +250,6 @@ public enum CSubmenuSealed implements ICDoc {
 
             return (20.0 / (best + (2 * value)));
         }
-
         
         @Override
         public int compare(Deck o1, Deck o2) {
@@ -269,6 +258,5 @@ public enum CSubmenuSealed implements ICDoc {
             if ( delta < 0 ) return -1;
             return 0;
         }
-        
     }
 }

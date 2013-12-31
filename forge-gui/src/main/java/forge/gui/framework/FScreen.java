@@ -201,7 +201,7 @@ public enum FScreen {
         }
         catch (final Exception e) {
             e.printStackTrace();
-            FOptionPane.showErrorMessageDialog("Failed to delete layout file.");
+            FOptionPane.showErrorDialog("Failed to delete layout file.");
         }
         return false;
     }

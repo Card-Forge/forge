@@ -1,7 +1,5 @@
 package forge.gui.home.settings;
 
-import javax.swing.JOptionPane;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
@@ -40,22 +38,19 @@ public final class GamePlayerUtil {
     }
 
     private static String getPlayerNameUsingFirstTimePrompt() {
-        return (String)JOptionPane.showInputDialog(
-                JOptionPane.getRootFrame(),
+        return FOptionPane.showInputDialog(
                 "By default, Forge will refer to you as the \"Human\" during gameplay.\n" +
-                        "If you would prefer a different name please enter it now.\n",
+                        "If you would prefer a different name please enter it now.",
                         "Personalize Forge Gameplay",
-                        JOptionPane.QUESTION_MESSAGE,
-                        null, null, null);
+                        FOptionPane.QUESTION_ICON);
     }
 
     private static String getPlayerNameUsingStandardPrompt(String playerName) {
-        return (String)JOptionPane.showInputDialog(
-                JOptionPane.getRootFrame(),
-                "Please enter a new name (alpha-numeric only)\n",
+        return FOptionPane.showInputDialog(
+                "Please enter a new name. (alpha-numeric only)",
                 "Personalize Forge Gameplay",
-                JOptionPane.PLAIN_MESSAGE,
-                null, null, playerName);
+                null,
+                playerName);
     }
 
     private static String getVerifiedPlayerName(String newName, String oldName) {
@@ -68,5 +63,4 @@ public final class GamePlayerUtil {
         }
         return newName;
     }
-
 }

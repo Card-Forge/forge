@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import javax.swing.JOptionPane;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import forge.Singletons;
@@ -32,6 +30,7 @@ import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
 import forge.deck.CardPool;
 import forge.gui.GuiChoose;
+import forge.gui.toolbox.FOptionPane;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.model.CardBlock;
@@ -152,8 +151,9 @@ public class SealedCardPoolGenerator {
     
                 // present list to user
                 if (customs.isEmpty()) {
-                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "No custom sealed files found.", "", JOptionPane.INFORMATION_MESSAGE);
-                } else {
+                    FOptionPane.showMessageDialog("No custom sealed files found.");
+                }
+                else {
                     final CustomLimited draft = GuiChoose.one("Choose Custom Sealed Pool", customs);
 
                     UnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());

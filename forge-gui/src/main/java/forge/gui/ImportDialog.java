@@ -150,7 +150,7 @@ public class ImportDialog {
                 if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(JOptionPane.getRootFrame())) {
                     File f = _fileChooser.getSelectedFile();
                     if (!f.canRead()) {
-                        FOptionPane.showErrorMessageDialog("Cannot access selected directory (Permission denied).");
+                        FOptionPane.showErrorDialog("Cannot access selected directory (Permission denied).");
                     }
                     else {
                         txfSrc.setText(f.getAbsolutePath());
@@ -623,8 +623,7 @@ public class ImportDialog {
                                 sb.append("unless you move or delete them manually.</html>");
                                 
                                 String[] options = { "Whoops, let me fix that!", "Continue with the import, I know what I'm doing." };
-                                int chosen = FOptionPane.showOptionDialog(sb.toString(), "Migration warning",
-                                        FOptionPane.WARNING_ICON, options, 0);
+                                int chosen = FOptionPane.showOptionDialog(sb.toString(), "Migration warning", FOptionPane.WARNING_ICON, options);
 
                                 if (chosen != 1) {
                                     // i.e. option 0 was chosen or the dialog was otherwise closed

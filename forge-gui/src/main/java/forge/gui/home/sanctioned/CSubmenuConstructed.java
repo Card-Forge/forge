@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JMenu;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
@@ -107,7 +106,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
             for(int i=0;i<view.getNumPlayers();i++) {
             	String errMsg = gameType.getDecksFormat().getDeckConformanceProblem(view.getDeckChooser(i).getPlayer().getDeck());
                 if (null != errMsg) {
-                    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "Player " + i + "'s deck " + errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                    FOptionPane.showErrorDialog("Player " + i + "'s deck " + errMsg, "Invalid Deck");
                     return;
                 }
             }

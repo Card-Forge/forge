@@ -7,11 +7,9 @@ import java.awt.datatransfer.StringSelection;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 import forge.Command;
-
 
 
 @SuppressWarnings("serial")
@@ -34,14 +32,16 @@ public class FHyperlink extends FLabel {
             final boolean browsingSupported = _isBrowsingSupported();
             if (browsingSupported) {
                 tooltip(bldUrl);
-            } else {
+            }
+            else {
                 tooltip(bldUrl + " (click to copy to clipboard)");
             }
             
             final URI uri;
             try {
                 uri = new URI(bldUrl);
-            } catch (URISyntaxException e) {
+            }
+            catch (URISyntaxException e) {
                 throw new RuntimeException(e);
             }
             
@@ -52,15 +52,17 @@ public class FHyperlink extends FLabel {
                     if (browsingSupported) {
                         // open link in default browser
                         new _LinkRunner(uri).execute();
-                    } else {
+                    }
+                    else {
                         // copy link to clipboard
                         StringSelection ss = new StringSelection(bldUrl);
                         try {
                             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-                        } catch (IllegalStateException ex) {
-                            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                        }
+                        catch (IllegalStateException ex) {
+                            FOptionPane.showErrorDialog(
                                     "Sorry, a problem occurred while copying this link to your system clipboard.",
-                                    "A problem occured", JOptionPane.ERROR_MESSAGE);
+                                    "A problem occurred");
                         }
                     }
                 }

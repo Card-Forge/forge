@@ -17,8 +17,8 @@ import forge.gui.toolbox.FOptionPane;
  *
  */
 public class GuiDialog {
-
     private static final String[] defaultConfirmOptions = { "Yes", "No" };
+
     public static boolean confirm(final Card c, final String question) {
         return GuiDialog.confirm(c, question, true, null);
     }
@@ -74,5 +74,4 @@ public class GuiDialog {
             }
         });
     }
-
 }

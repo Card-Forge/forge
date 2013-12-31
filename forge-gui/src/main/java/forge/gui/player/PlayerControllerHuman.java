@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.MenuElement;
@@ -72,6 +71,7 @@ import forge.gui.input.InputConfirm;
 import forge.gui.input.InputSelectEntitiesFromList;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CPrompt;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
@@ -212,14 +212,14 @@ public class PlayerControllerHuman extends PlayerController {
             boolean conform = Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY);
             do {
                 if (newMain != null) {
+                    String errMsg;
                     if (newMain.size() < deckMinSize) {
-                        String errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
-                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                        errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
                     }
                     else {
-                        String errMsg = String.format("Too many cards in your sideboard (maximum %d), please make modifications to your deck again.", sbMax);
-                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                        errMsg = String.format("Too many cards in your sideboard (maximum %d), please make modifications to your deck again.", sbMax);
                     }
+                    FOptionPane.showErrorDialog(errMsg, "Invalid Deck");
                 }
                 // Sideboard rules have changed for M14, just need to consider min maindeck and max sideboard sizes
                 // No longer need 1:1 sideboarding in non-limited formats
@@ -277,8 +277,8 @@ public class PlayerControllerHuman extends PlayerController {
 
         String message = String.format("How much will you announce for %s?%s", announce, canChooseZero ? "" : " (X cannot be 0)");
         while (true){
-            String str = JOptionPane.showInputDialog(JOptionPane.getRootFrame(), message, ability.getSourceCard().getName(), JOptionPane.QUESTION_MESSAGE);
-            if (null == str) return null; // that is 'cancel'
+            String str = FOptionPane.showInputDialog(message, ability.getSourceCard().getName(), FOptionPane.QUESTION_ICON);
+            if (null == str) { return null; } // that is 'cancel'
 
             if (StringUtils.isNumeric(str)) {
                 Integer val = Integer.valueOf(str);

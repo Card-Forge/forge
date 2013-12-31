@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
@@ -23,6 +22,7 @@ import forge.gui.deckeditor.controllers.CEditorCommander;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FList;
+import forge.gui.toolbox.FOptionPane;
 import forge.net.FServer;
 import forge.net.Lobby;
 import forge.properties.ForgePreferences.FPref;
@@ -49,7 +49,7 @@ public enum CSubmenuCommander implements ICDoc {
         for (FList<Object> deckList : view.getDeckLists()) {
             Vector<Object> listData = new Vector<Object>();            
             
-            if(Singletons.getModel().getDecks().getCommander().size() != 0) {
+            if (Singletons.getModel().getDecks().getCommander().size() != 0) {
                 listData.add("Random");
                 for (Deck commanderDeck : Singletons.getModel().getDecks().getCommander()) {
                     listData.add(commanderDeck);
@@ -65,7 +65,6 @@ public enum CSubmenuCommander implements ICDoc {
             if (-1 == deckList.getSelectedIndex() && listData.size() != 0) {
                 deckList.setSelectedIndex(0);
             }
-            
         }
         
         SwingUtilities.invokeLater(new Runnable() {
@@ -83,7 +82,6 @@ public enum CSubmenuCommander implements ICDoc {
         view.getBtnStart().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-
                 startGame();
             }
         });
@@ -107,15 +105,12 @@ public enum CSubmenuCommander implements ICDoc {
         List<Deck> problemDecks = new ArrayList<Deck>();
         
         for (int i = 0; i < view.getNumPlayers(); i++) {
-            
             Object o = view.getDeckLists().get(i).getSelectedValue();
             Deck d = null;
-            if(o instanceof String)
-            {
+            if (o instanceof String) {
                 d = view.getAllCommanderDecks().get(rnd.nextInt(view.getAllCommanderDecks().size()));
             }
-            else
-            {
+            else {
                 d = (Deck)o;
             }
 
@@ -127,18 +122,17 @@ public enum CSubmenuCommander implements ICDoc {
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
                 String errorMessage = GameType.Commander.getDecksFormat().getDeckConformanceProblem(d);
                 if (null != errorMessage) {
-                    if(!problemDecks.contains(d)) 
-                    {
-                        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "The deck "  + d.getName() + " " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                    if (!problemDecks.contains(d)) {
+                        FOptionPane.showErrorDialog("The deck "  + d.getName() + " " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
                         problemDecks.add(d);
                     }
                 }
             }
             playerDecks.add(d);
         }
-        if(problemDecks.size() != 0)
+        if (problemDecks.size() != 0) {
             return;
-        
+        }
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

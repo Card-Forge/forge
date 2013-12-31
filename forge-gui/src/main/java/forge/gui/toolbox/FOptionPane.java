@@ -33,11 +33,11 @@ public class FOptionPane extends FDialog {
         showMessageDialog(message, title, INFORMATION_ICON);
     }
 
-    public static void showErrorMessageDialog(String message) {
+    public static void showErrorDialog(String message) {
         showMessageDialog(message, "Forge", ERROR_ICON);
     }
 
-    public static void showErrorMessageDialog(String message, String title) {
+    public static void showErrorDialog(String message, String title) {
         showMessageDialog(message, title, ERROR_ICON);
     }
 
@@ -65,6 +65,10 @@ public class FOptionPane extends FDialog {
         String[] options = {yesButtonText, noButtonText};
         int reply = FOptionPane.showOptionDialog(message, title, QUESTION_ICON, options, defaultYes ? 0 : 1);
         return (reply == 0);
+    }
+
+    public static int showOptionDialog(String message, String title, SkinImage icon, String[] options) {
+        return showOptionDialog(message, title, icon, options, 0);
     }
 
     public static int showOptionDialog(String message, String title, SkinImage icon, String[] options, int defaultOption) {

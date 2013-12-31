@@ -142,8 +142,6 @@ public enum FControl implements KeyEventDispatcher {
                         setCloseAction(CloseAction.EXIT_FORGE);
                         windowClosing(e); //call again to apply chosen close action
                         return;
-                    case 2: //Cancel
-                        break;
                     }
                     break;
                 case CLOSE_SCREEN:
