@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import forge.ai.ComputerUtilCard;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -112,9 +111,6 @@ public class DigEffect extends SpellAbilityEffect {
             }
 
             if (top.size() > 0) {
-                final Card dummy = new Card(-1);
-                dummy.setName("[No valid cards]");
-
                 boolean hasRevealed = true;
                 if (sa.hasParam("Reveal")) {
                     game.getAction().reveal(top, p, false);
@@ -167,9 +163,6 @@ public class DigEffect extends SpellAbilityEffect {
                             andOrCards.removeAll(valid);
                             valid.addAll(andOrCards);
                         }
-                        if (valid.isEmpty() && choser.isHuman()) {
-                            valid.add(dummy);
-                        }
                     } else {
                         valid = top;
                     }
@@ -202,57 +195,32 @@ public class DigEffect extends SpellAbilityEffect {
                             prompt = "Chose a card to put on top of the ";
                         }
                         
-                        if (choser.isHuman()) {
-                            while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
-                                // let user get choice
-                                if (valid.isEmpty()) {
-                                    break;
-                                }
-                                Card chosen = null;
 
-                                
-                                chosen = choser.getController().chooseSingleEntityForEffect(valid, sa, prompt, anyNumber || optional);
-                                if ((chosen == null) || chosen.getName().equals("[No valid cards]")) {
-                                    break;
-                                }
-                                movedCards.add(chosen);
-                                valid.remove(chosen);
-                                if (!andOrValid.equals("")) {
-                                    andOrCards.remove(chosen);
-                                    if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
-                                        valid = new ArrayList<Card>(andOrCards);
-                                    } else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
-                                        valid.removeAll(andOrCards);
-                                    }
-                                }
-                                j++;
-                            }
-                        } // human
-                        else { // computer
-                            int changeNum = Math.min(destZone1ChangeNum, valid.size());
-                            if (anyNumber) {
-                                changeNum = valid.size(); // always take all
-                            }
-                            for (j = 0; j < changeNum; j++) {
-                                Card chosen = ComputerUtilCard.getBestAI(valid);
-                                if (sa.getActivatingPlayer().isOpponentOf(choser) && p.isOpponentOf(choser)) {
-                                    chosen = ComputerUtilCard.getWorstAI(valid);
-                                }
-                                if (chosen == null) {
-                                    break;
-                                }
-                                movedCards.add(chosen);
-                                valid.remove(chosen);
-                                if (!andOrValid.equals("")) {
-                                    andOrCards.remove(chosen);
-                                    if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
-                                        valid = andOrCards;
-                                    } else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
-                                        valid.removeAll(andOrCards);
-                                    }
+                        while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
+                            // let user get choice
+
+                            Card chosen = null;
+                            if(!valid.isEmpty())
+                                chosen = choser.getController().chooseSingleEntityForEffect(valid, sa, prompt, anyNumber || optional, p);
+                            else
+                                choser.getController().notifyOfValue(sa, null, "No valid cards");
+                            
+                            if( chosen == null )
+                                break;
+
+                            movedCards.add(chosen);
+                            valid.remove(chosen);
+                            if (!andOrValid.equals("")) {
+                                andOrCards.remove(chosen);
+                                if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
+                                    valid = new ArrayList<Card>(andOrCards);
+                                } else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
+                                    valid.removeAll(andOrCards);
                                 }
                             }
+                            j++;
                         }
+                       
                         if (changeValid.length() > 0) {
                             game.getAction().reveal(choser + " picked:", movedCards, choser, true);
                         }
@@ -262,9 +230,6 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     Collections.reverse(movedCards);
                     for (Card c : movedCards) {
-                        if (c.equals(dummy)) {
-                            continue;
-                        }
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
                         
                         if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
@@ -297,9 +262,6 @@ public class DigEffect extends SpellAbilityEffect {
                             host.addRemembered(c);
                         }
                         rest.remove(c);
-                    }
-                    if (rest.contains(dummy)) {
-                        rest.remove(dummy);
                     }
 
                     // now, move the rest to destZone2
