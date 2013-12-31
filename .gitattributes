@@ -15650,6 +15650,7 @@ forge-gui/src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/IgnoringXStream.java -text
 forge-gui/src/main/java/forge/util/LineReader.java -text
 forge-gui/src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
+forge-gui/src/main/java/forge/util/OperatingSystem.java -text
 forge-gui/src/main/java/forge/util/ReflectionUtil.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text
 forge-gui/src/main/java/forge/util/maps/EnumMapOfLists.java -text

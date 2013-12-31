@@ -11,6 +11,7 @@ import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.PopupMenu;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.GraphicsDevice.WindowTranslucency;
 import java.awt.event.ComponentAdapter;
@@ -30,17 +31,22 @@ import net.miginfocom.swing.MigLayout;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
+import forge.util.OperatingSystem;
 
 @SuppressWarnings("serial")
 public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatcher {
     private static final FSkin.SkinColor borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private static final int cornerDiameter = 20;
     private static final boolean isSetShapeSupported;
+    private static final boolean antiAliasBorder;
 
     static {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
         isSetShapeSupported = gd.isWindowTranslucencySupported(WindowTranslucency.PERPIXEL_TRANSPARENT);
+
+        //only apply anti-aliasing to border on Windows, as it creates issues on Linux
+        antiAliasBorder = OperatingSystem.isWindows();
     }
 
     private FSkin.WindowSkin<FDialog> skin = FSkin.get(this);
@@ -99,7 +105,9 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
 
         //draw rounded border
         final Graphics2D g2d = (Graphics2D) g.create();
-        //g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //TODO: Re-enable anti-aliasing when it won't break on Linux
+        if (antiAliasBorder) {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        }
         skin.setGraphicsColor(g2d, borderColor);
         if (isSetShapeSupported) {
             g2d.drawRoundRect(0, 0, this.getWidth() - 1, this.getHeight() - 1, cornerDiameter, cornerDiameter);
