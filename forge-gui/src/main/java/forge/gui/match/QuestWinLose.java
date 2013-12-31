@@ -145,13 +145,10 @@ public class QuestWinLose extends ControlWinLose {
 
                 if (isHumanWinner) {
                     qc.getCards().addAllCards(anteCards);
-                    this.anteWon(anteCards);
                 } else {
-                    for (PaperCard c : anteCards) {
-                        qc.getCards().loseCard(c, 1);
-                    }
-                    this.anteLost(anteCards);
+                    qc.getCards().loseCards(anteCards);
                 }
+                this.anteReport(anteCards, isHumanWinner);
             }
         }
 
@@ -219,38 +216,15 @@ public class QuestWinLose extends ControlWinLose {
         return true;
     }
 
-    /**
-     * <p>
-     * anteLost.
-     * </p>
-     * Displays cards lost to ante this game.
-     * 
-     */
-    private void anteLost(final List<PaperCard> antesLost) {
+    private void anteReport(final List<PaperCard> antesWon, boolean hasWon) {
         // Generate Swing components and attach.
-        this.lblTemp1 = new TitleLabel("Ante Lost: You lost the following cards in Ante:");
+        if(hasWon)
+            this.lblTemp1 = new TitleLabel("Ante Won: These cards will be available in your card pool after this match.");
+        else
+            this.lblTemp1 = new TitleLabel("Ante Lost: You lost the following cards in Ante:");
 
         this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
-        this.getView().getPnlCustom().add(
-                new QuestWinLoseCardViewer(antesLost), QuestWinLose.CONSTRAINTS_CARDS);
-    }
-
-    /**
-     * <p>
-     * anteWon.
-     * </p>
-     * Displays cards won in ante this game (which will be added to your Card Pool).
-     * 
-     */
-    private void anteWon(final List<PaperCard> antesWon) {
-        final StringBuilder str = new StringBuilder();
-        str.append("Ante Won: These cards will be available in your card pool after this match.");
-        // Generate Swing components and attach.
-        this.lblTemp1 = new TitleLabel(str.toString());
-
-        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
-        this.getView().getPnlCustom().add(
-                new QuestWinLoseCardViewer(antesWon), QuestWinLose.CONSTRAINTS_CARDS);
+        this.getView().getPnlCustom().add(new QuestWinLoseCardViewer(antesWon), QuestWinLose.CONSTRAINTS_CARDS);
     }
 
     /**

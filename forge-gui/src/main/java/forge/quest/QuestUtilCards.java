@@ -330,8 +330,9 @@ public final class QuestUtilCards {
      * @param qty
      *          quantity
      */
-    public void loseCard(final PaperCard card, int qty) {
-        this.sellCard(card, qty, 0, false);
+    public void loseCards(final List<PaperCard> cards) {
+        for(PaperCard pc: cards)
+            this.sellCard(pc, 1, 0, false);
     }
 
     /**
