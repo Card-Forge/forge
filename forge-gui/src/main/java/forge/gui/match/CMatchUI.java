@@ -504,7 +504,7 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         String userPrompt =
                 "This will end the current game and you will not be able to resume.\n\n" +
                         "Concede anyway?";
-        if (FOptionPane.showConfirmDialog(userPrompt, "Concede Game?", false)) {
+        if (FOptionPane.showConfirmDialog(userPrompt, "Concede Game?", "Concede", "Cancel", false)) {
             Singletons.getControl().stopGame();
         }
     }
