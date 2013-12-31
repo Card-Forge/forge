@@ -15259,6 +15259,8 @@ forge-gui/src/main/java/forge/gui/deckeditor/controllers/CEditorVariant.java -te
 forge-gui/src/main/java/forge/gui/deckeditor/controllers/CProbabilities.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/controllers/CStatistics.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/controllers/DeckController.java -text
+forge-gui/src/main/java/forge/gui/deckeditor/menus/CDeckEditorUIMenus.java -text
+forge-gui/src/main/java/forge/gui/deckeditor/menus/DeckFileMenu.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/package-info.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/views/VAllDecks.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/views/VCardCatalog.java -text

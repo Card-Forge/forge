@@ -54,6 +54,7 @@ import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
+import forge.gui.deckeditor.menus.CDeckEditorUIMenus;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.FScreen;
@@ -99,7 +100,11 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
         CDetail.SINGLETON_INSTANCE.showCard(item);
         CPicture.SINGLETON_INSTANCE.showImage(item);
     }
-    
+
+    public boolean hasChanges() {
+        return (this.childController != null && !this.childController.getDeckController().isSaved());
+    }
+
     public boolean canSwitchAway(boolean isClosing) {
         if (this.childController != null) {
             if (!this.childController.canSwitchAway(isClosing)) {
@@ -618,7 +623,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
      */
     @Override
     public List<JMenu> getMenus() {
-        return null; //TODO: Create Deck Editor menus
+        return new CDeckEditorUIMenus().getMenus();
     }
 
     /* (non-Javadoc)

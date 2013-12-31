@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Supplier;
 
 import forge.deck.DeckBase;
+import forge.gui.deckeditor.menus.DeckFileMenu;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.util.storage.IStorage;
 
@@ -332,5 +333,6 @@ public class DeckController<T extends DeckBase> {
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(tabCaption);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText(title);
         VCurrentDeck.SINGLETON_INSTANCE.getItemManager().setCaption(itemManagerCaption);
+        DeckFileMenu.updateSaveEnabled();
     }
 }

@@ -8,6 +8,9 @@ Forge Beta: ##-##-2013 ver 1.5.9
 Release Notes
 -------------
 
+- Deck Editor usability improvements -
+Added File menu with shortcuts for common actions in Deck Editor (such as Ctrl+S to save the current deck)
+
 - Constructed mode -
 Recently a change was made to the constructed mode and this change now allows you to have up to 8 players rather than just two. The game formats that are located in the variants mode also allow up to eight players. The current user interface for this feature is fairly basic and is not very attractive. The settings tab allows you to set the number of opponents. The player tabs includes the same options that you used to see in the constructed mode.
 

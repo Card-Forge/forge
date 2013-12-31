@@ -33,15 +33,15 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel btnSave = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Save (in default directory)")
+            .tooltip("Save Deck (Ctrl+S)")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_SAVE))
             .text(" ").hoverable(true).build();
 
-    private final FLabel btnExport = new FLabel.Builder()
+    private final FLabel btnSaveAs = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Save As")
+            .tooltip("Save Deck As (Ctrl+E)")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_SAVEAS))
@@ -49,7 +49,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel btnLoad = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Load")
+            .tooltip("Open Deck (Ctrl+O)")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_OPEN))
@@ -57,7 +57,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel btnNew = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("New Deck")
+            .tooltip("New Deck (Ctrl+N)")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_NEW))
@@ -65,7 +65,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel btnPrintProxies = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Print to HTML file")
+            .tooltip("Print to HTML file (Ctrl+P)")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PRINT))
@@ -73,10 +73,10 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel btnImport = new FLabel.Builder()
             .fontSize(14)
-            .text("Import").tooltip("Attempt to import a deck from a non-Forge format")
+            .text("Import")
+            .tooltip("Attempt to import a deck from a non-Forge format (Ctrl+I)")
             .opaque(true).hoverable(true).build();
 
-    
     private final FTextField txfTitle = new FTextField.Builder().ghostText("[New Deck]").build();
 
     private final JPanel pnlHeader = new JPanel();
@@ -99,7 +99,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         pnlHeader.add(btnNew, "w 26px!, h 26px!");
 
         pnlHeader.add(btnLoad, "w 26px!, h 26px!");
-        pnlHeader.add(btnExport, "w 26px!, h 26px!");
+        pnlHeader.add(btnSaveAs, "w 26px!, h 26px!");
         pnlHeader.add(btnPrintProxies, "w 26px!, h 26px!");
         pnlHeader.add(btnImport, "w 61px!, h 26px!");
     }
@@ -177,7 +177,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     /** @return {@link javax.swing.JLabel} */
     public FLabel getBtnSaveAs() {
-        return btnExport;
+        return btnSaveAs;
     }
 
     /** @return {@link javax.swing.JLabel} */
