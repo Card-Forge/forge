@@ -63,7 +63,7 @@ public class GameWrapper {
 	public void runGame() {
 		List<RegisteredPlayer> registeredPlayers = new ArrayList<RegisteredPlayer>();
 		for( PlayerSpecification player : players ) {
-			RegisteredPlayer registeredPlayer = RegisteredPlayer.fromDeck(new Deck(player.getName()));
+			RegisteredPlayer registeredPlayer = new RegisteredPlayer(new Deck(player.getName()));
 			LobbyPlayerForTests lobbyPlayer = new LobbyPlayerForTests( player.getName(), playerActions );
 			registeredPlayer.setPlayer( lobbyPlayer );
 			registeredPlayers.add( registeredPlayer );

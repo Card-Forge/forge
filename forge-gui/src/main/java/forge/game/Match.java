@@ -137,6 +137,9 @@ public class Match {
 
     public void clearGamesPlayed() {
         gamesPlayed.clear();
+        for(RegisteredPlayer p : players) {
+            p.restoreDeck();
+        }
     }
     
     public void clearLastGame() {

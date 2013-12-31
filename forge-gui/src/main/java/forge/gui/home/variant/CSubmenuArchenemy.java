@@ -226,7 +226,7 @@ public enum CSubmenuArchenemy implements ICDoc {
                 psc.setStartingLife(40); // 904.5: The Archenemy has 40 life.
                 players.add(psc.setPlayer(view.isPlayerAI(i) ? lobby.getAiPlayer() : lobby.getGuiPlayer()));
             } else {
-                RegisteredPlayer psc = RegisteredPlayer.fromDeck(playerDecks.get(i));
+                RegisteredPlayer psc = new RegisteredPlayer(playerDecks.get(i));
                 psc.setTeamNumber(0);
                 players.add(psc.setPlayer(view.isPlayerAI(i) ? lobby.getAiPlayer() : lobby.getGuiPlayer()));
             }

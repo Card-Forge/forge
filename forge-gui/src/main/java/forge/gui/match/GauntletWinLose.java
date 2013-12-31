@@ -202,8 +202,8 @@ public class GauntletWinLose extends ControlWinLose {
             Deck aiDeck = gd.getDecks().get(gd.getCompleted());
             List<RegisteredPlayer> players = Lists.newArrayList();
             Lobby lobby = FServer.instance.getLobby();
-            players.add(RegisteredPlayer.fromDeck(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
-            players.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
+            players.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
+            players.add(new RegisteredPlayer(aiDeck).setPlayer(lobby.getAiPlayer()));
             
             saveOptions();
             Singletons.getControl().endCurrentGame();

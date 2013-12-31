@@ -86,8 +86,8 @@ public enum FServer {
         System.out.println(String.format("Ai-%s vs Ai_%s - %s", d1.getName(), d2.getName(), Lang.nounWithNumeral(nGames, "game")));
         
         List<RegisteredPlayer> pp = new ArrayList<RegisteredPlayer>();
-        pp.add(RegisteredPlayer.fromDeck(d1).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai-" + d1.getName())));
-        pp.add(RegisteredPlayer.fromDeck(d2).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai_" + d2.getName())));
+        pp.add(new RegisteredPlayer(d1).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai-" + d1.getName())));
+        pp.add(new RegisteredPlayer(d2).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai_" + d2.getName())));
         
         Match mc = new Match(GameType.Constructed, pp, false);
         for(int iGame = 0; iGame < nGames; iGame++)

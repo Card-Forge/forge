@@ -142,7 +142,7 @@ public class GauntletMini {
         aiOpponents.clear();
         for (int i = 0; i < Math.min(gameRounds, aiDecks.size()); i++) {
 
-            aiOpponents.add(RegisteredPlayer.fromDeck(aiDecks.get(i)));
+            aiOpponents.add(new RegisteredPlayer(aiDecks.get(i)));
         }
 
         resetCurrentRound();
@@ -163,7 +163,7 @@ public class GauntletMini {
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
         Lobby lobby = FServer.instance.getLobby();
-        starter.add(RegisteredPlayer.fromDeck(humanDeck).setPlayer(lobby.getGuiPlayer()));
+        starter.add(new RegisteredPlayer(humanDeck).setPlayer(lobby.getGuiPlayer()));
         starter.add(aiOpponents.get(currentRound - 1).setPlayer(lobby.getAiPlayer()));
         
         Singletons.getControl().startMatch(gauntletType, starter);

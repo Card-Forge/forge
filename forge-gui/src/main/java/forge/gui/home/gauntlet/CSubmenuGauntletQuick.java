@@ -144,8 +144,8 @@ public enum CSubmenuGauntletQuick implements ICDoc {
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
         Lobby lobby = FServer.instance.getLobby();
-        starter.add(RegisteredPlayer.fromDeck(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
-        starter.add(RegisteredPlayer.fromDeck(aiDeck).setPlayer(lobby.getAiPlayer()));
+        starter.add(new RegisteredPlayer(gd.getUserDeck()).setPlayer(lobby.getGuiPlayer()));
+        starter.add(new RegisteredPlayer(aiDeck).setPlayer(lobby.getAiPlayer()));
         
         Singletons.getControl().startMatch(GameType.Gauntlet, starter);
     }
