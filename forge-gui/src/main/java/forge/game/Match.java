@@ -350,19 +350,19 @@ public class Match {
             }
 
             Deck losersDeck = players.get(i).getDeck();
-            List<PaperCard> peronalLosses = new ArrayList<>();
+            List<PaperCard> personalLosses = new ArrayList<>();
             for (Card c : fromGame.getCardsIn(ZoneType.Ante)) {
                 PaperCard toRemove = (PaperCard) c.getPaperCard();
                 // this could miss the cards by returning instances that are not equal to cards found in deck
                 // (but only if the card has multiple prints in a set)
                 losersDeck.getMain().remove(toRemove);
-                peronalLosses.add(toRemove);
+                personalLosses.add(toRemove);
                 losses.add(toRemove);
             }
-            outcome.anteResult.put(fromGame, GameOutcome.AnteResult.lost(peronalLosses));
+            outcome.anteResult.put(fromGame, GameOutcome.AnteResult.lost(personalLosses));
         }
 
-        if (iWinner >= 0 ) {
+        if (iWinner >= 0 && gameType.canAddWonCardsMidgame()) {
             Player fromGame = lastGame.getRegisteredPlayers().get(iWinner);
             outcome.anteResult.put(fromGame, GameOutcome.AnteResult.won(losses));
             List<PaperCard> chosen = fromGame.getController().chooseCardsYouWonToAddToDeck(losses); // "Select cards to add to your deck", 

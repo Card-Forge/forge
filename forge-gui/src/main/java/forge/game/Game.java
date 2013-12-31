@@ -88,9 +88,7 @@ public class Game {
 
     /**
      * Constructor.
-     * @param players2.entrySet()
      * @param match0
-     * @param input
      */
     public Game(List<RegisteredPlayer> players0, GameType t, Match match0) { /* no more zones to map here */
         type = t;
