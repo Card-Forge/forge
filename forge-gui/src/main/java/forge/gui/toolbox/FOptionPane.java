@@ -29,8 +29,16 @@ public class FOptionPane extends FDialog {
         showMessageDialog(message, "Forge", INFORMATION_ICON);
     }
 
+    public static void showMessageDialog(String message, String title) {
+        showMessageDialog(message, title, INFORMATION_ICON);
+    }
+
     public static void showErrorMessageDialog(String message) {
         showMessageDialog(message, "Forge", ERROR_ICON);
+    }
+
+    public static void showErrorMessageDialog(String message, String title) {
+        showMessageDialog(message, title, ERROR_ICON);
     }
 
     public static void showMessageDialog(String message, String title, SkinImage icon) {

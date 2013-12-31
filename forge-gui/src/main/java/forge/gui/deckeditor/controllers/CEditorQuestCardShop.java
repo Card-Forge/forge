@@ -149,7 +149,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             this.getBtnRemove().setEnabled(false);
             this.getBtnRemove4().setEnabled(false);
             fullCatalogToggle.setText("Return to spell shop");
-        } else {
+        }
+        else {
             this.getCatalogManager().setPool(cardsForSale);
             this.getBtnAdd().setEnabled(true);
             this.getBtnRemove().setEnabled(true);
@@ -286,6 +287,25 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
     };
 
+    private final String getItemDisplayType(InventoryItem item) {
+        if (item instanceof PaperCard) {
+            return "Card";
+        }
+        if (item instanceof BoosterPack) {
+            return "Booster Pack";
+        }
+        if (item instanceof TournamentPack) {
+            return "Tournament Pack";
+        }
+        if (item instanceof FatPack) {
+            return "Fat Pack";
+        }
+        if (item instanceof PreconDeck) {
+            return "Preconstructed Deck";
+        }
+        return null;
+    }
+
     //=========== Overridden from ACEditorBase
 
     /* (non-Javadoc)
@@ -303,11 +323,21 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         for (Entry<InventoryItem, Integer> itemEntry : items) {
             final InventoryItem item = itemEntry.getKey();
+            final String displayType = getItemDisplayType(item);
+            if (displayType == null) { continue; } //don't remove item from Catalog if unsupported type
+
             final int qty = itemEntry.getValue();
             final int value = this.getCardValue(item);
+            final int totalCost = qty * value;
+            final String title = "Buy " + displayType;
+            final String promptSuffix = " credits to purchase " + (qty == 1 ? "'" : qty + " copies of '") + item.getName() + "'";
 
-            if (value > this.questData.getAssets().getCredits()) {
-                FOptionPane.showMessageDialog("Not enough credits to purchase " + (qty == 1 ? "" : qty + " copies of ") + item.getName() + ".");
+            if (totalCost > this.questData.getAssets().getCredits()) {
+                FOptionPane.showMessageDialog("Not enough" + promptSuffix + ".", title);
+                continue;
+            }
+
+            if (!FOptionPane.showConfirmDialog("Pay " + totalCost + promptSuffix + "?", title, "Buy", "Cancel")) {
                 continue;
             }
 
@@ -373,8 +403,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     protected void onRemoveItems(Iterable<Entry<InventoryItem, Integer>> items, boolean toAlternate) {
         if (showingFullCatalog || toAlternate) { return; }
 
-        this.getCatalogManager().addItems(items);
-        this.getDeckManager().removeItems(items);
+        List<Entry<InventoryItem, Integer>> itemsToRemove = new ArrayList<Entry<InventoryItem, Integer>>();
 
         for (Entry<InventoryItem, Integer> itemEntry : items) {
             final InventoryItem item = itemEntry.getKey();
@@ -382,9 +411,23 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 final PaperCard card = (PaperCard) item;
                 final int qty = itemEntry.getValue();
                 final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards().getSellPriceLimit());
+                final int totalReceived = price * qty;
+
+                if (!FOptionPane.showConfirmDialog("Sell " + (qty == 1 ? "'" : qty + " copies of '") +
+                        item.getName() + "' for " + totalReceived + " credit" + (totalReceived != 1 ? "s" : "") + "?",
+                        "Sell Card", "Sell", "Cancel")) {
+                    continue;
+                }
+
                 this.questData.getCards().sellCard(card, qty, price);
+                itemsToRemove.add(itemEntry);
             }
         }
+
+        if (itemsToRemove.isEmpty()) { return; }
+
+        this.getCatalogManager().addItems(itemsToRemove);
+        this.getDeckManager().removeItems(itemsToRemove);
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
