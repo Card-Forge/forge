@@ -429,6 +429,10 @@ public class PlayerControllerAi extends PlayerController {
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
         return brains.chooseNumber(sa, title, min, max);
     }
+    
+    public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
+        return brains.chooseNumber(sa, title, options, relatedPlayer);
+    }
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#chooseFlipResult(forge.Card, forge.game.player.Player, java.lang.String[], boolean)

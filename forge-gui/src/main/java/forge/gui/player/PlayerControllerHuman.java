@@ -392,6 +392,11 @@ public class PlayerControllerHuman extends PlayerController {
         }
         return GuiChoose.one(title, choices).intValue();
     }
+    
+    @Override
+    public int chooseNumber(SpellAbility sa, String title, List<Integer> choices, Player relatedPlayer) {
+        return GuiChoose.one(title, choices).intValue();
+    }
 
     @Override
     public SpellAbility chooseSingleSpellForEffect(java.util.List<SpellAbility> spells, SpellAbility sa, String title) {

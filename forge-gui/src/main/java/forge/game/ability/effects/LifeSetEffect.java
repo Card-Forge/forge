@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import forge.game.ability.AbilityUtils;
@@ -9,7 +8,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.gui.GuiChoose;
 
 public class LifeSetEffect extends SpellAbilityEffect {
 
@@ -36,18 +34,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
                 if (!redistribute) {
                     p.setLife(lifeAmount, sa.getSourceCard());
                 } else {
-                    int life;
-                    if (sa.getActivatingPlayer().isHuman()) {
-                        life = GuiChoose.one("Life Total: " + p, lifetotals);
-                    } else {//AI
-                        if (p.equals(sa.getSourceCard().getController())) {
-                            life = Collections.max(lifetotals);
-                        } else if (p.isOpponentOf(sa.getSourceCard().getController())) {
-                            life = Collections.min(lifetotals);
-                        } else {
-                            life = lifetotals.get(0);
-                        }
-                    }
+                    int life = sa.getActivatingPlayer().getController().chooseNumber(sa, "Life Total: " + p, lifetotals, p);
                     p.setLife(life, sa.getSourceCard());
                     lifetotals.remove((Integer) life);
                 }

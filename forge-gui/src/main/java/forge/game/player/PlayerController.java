@@ -180,6 +180,7 @@ public abstract class PlayerController {
     public abstract boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose);
 
     public abstract int chooseNumber(SpellAbility sa, String title, int min, int max);
+    public abstract int chooseNumber(SpellAbility sa, String title, List<Integer> values, Player relatedPlayer);
 
     public final boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice) { return chooseBinary(sa, question, kindOfChoice, null); }
     public abstract boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultChioce);

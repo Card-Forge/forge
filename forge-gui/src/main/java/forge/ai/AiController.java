@@ -1089,6 +1089,23 @@ public class AiController {
         return library;
     } // smoothComputerManaCurve()
 
+    
+    public int chooseNumber(SpellAbility sa, String title,List<Integer> options, Player relatedPlayer) {
+        switch(sa.getApi())
+        {
+            case SetLife:
+                if (relatedPlayer.equals(sa.getSourceCard().getController())) {
+                    return Collections.max(options);
+                } else if (relatedPlayer.isOpponentOf(sa.getSourceCard().getController())) {
+                    return Collections.min(options);
+                } else {
+                    return options.get(0);
+                }
+            default:
+                return 0;
+        }
+    }
+
 
 }
 

@@ -556,4 +556,10 @@ public class PlayerControllerForTests extends PlayerController {
         // TODO Auto-generated method stub
         return losses;
     }
+
+    @Override
+    public int chooseNumber(SpellAbility sa, String title, List<Integer> values, Player relatedPlayer) {
+        // TODO Auto-generated method stub
+        return Iterables.getFirst(values, Integer.valueOf(0));
+    }
 }
