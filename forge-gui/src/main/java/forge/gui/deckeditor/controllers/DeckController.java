@@ -33,15 +33,8 @@ import forge.util.storage.IStorage;
  *
  * @param <T> the generic type
  */
-/** 
- * TODO: Write javadoc for this type.
- *
- * @param <T>
- */
 public class DeckController<T extends DeckBase> {
-
     private T model;
-    private String modelName;
     private boolean saved;
     private boolean modelInStore;
     private final IStorage<T> folder;
@@ -60,7 +53,6 @@ public class DeckController<T extends DeckBase> {
         this.folder = folder0;
         this.view = view0;
         this.model = null;
-        this.modelName = null;
         this.saved = true;
         this.modelInStore = false;
         this.newModelCreator = newModelCreator0;
@@ -78,22 +70,13 @@ public class DeckController<T extends DeckBase> {
     /**
      * Sets the model.
      *
-     * @param document the new model
      */
     public void setModel(final T document) {
         this.setModel(document, false);
     }
-
-    /**
-     * Sets the model.
-     *
-     * @param document the document
-     * @param isStored the is stored
-     */
     public void setModel(final T document, final boolean isStored) {
         this.modelInStore = isStored;
         this.model = document;
-        this.modelName = document.getName();
         this.view.resetTables();
 
         CStatistics.SINGLETON_INSTANCE.update();
@@ -101,7 +84,8 @@ public class DeckController<T extends DeckBase> {
 
         if (this.isModelInSyncWithFolder()) {
             _setSaved(true);
-        } else {
+        }
+        else {
             this.notifyModelChanged();
         }
     }
@@ -116,7 +100,7 @@ public class DeckController<T extends DeckBase> {
         if (modelStored == this.model) {
             return true;
         }
-        if (null == modelStored) {
+        if (modelStored == null) {
             return false;
         }
 
@@ -132,11 +116,6 @@ public class DeckController<T extends DeckBase> {
         return this.view;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#notifyModelChanged()
-     */
     /**
      * Notify model changed.
      */
@@ -148,12 +127,7 @@ public class DeckController<T extends DeckBase> {
         saved = val;
         updateCaptions();
     }
-    
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#getSavedModelNames()
-     */
+
     /**
      * Gets the saved names.
      *
@@ -163,11 +137,6 @@ public class DeckController<T extends DeckBase> {
         return new ArrayList<String>(this.folder.getItemNames());
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#load(java.lang.String)
-     */
     /**
      * Load.
      *
@@ -176,38 +145,30 @@ public class DeckController<T extends DeckBase> {
     @SuppressWarnings("unchecked")
     public void load(final String name) {
         T newModel = this.folder.get(name);
-        if (null != newModel) {
+        if (newModel != null) {
             this.setModel((T) newModel.copyTo(name), true);
         }
-        _setSaved(true);
+        else {
+            _setSaved(true);
+        }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#save()
-     */
     /**
      * Save.
      */
     @SuppressWarnings("unchecked")
     public void save() {
-        if (null == model) {
+        if (model == null) {
             return;
         }
 
         this.folder.add(this.model);
         // copy to new instance which will be edited and left if unsaved
-        this.setModel((T) this.model.copyTo(this.model.getName()), true);
+        this.model = (T)this.model.copyTo(this.model.getName());
         this.modelInStore = true;
         _setSaved(true);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#rename(java.lang.String)
-     */
     /**
      * Save as.
      *
@@ -215,15 +176,10 @@ public class DeckController<T extends DeckBase> {
      */
     @SuppressWarnings("unchecked")
     public void saveAs(final String name0) {
-        this.setModel((T) this.model.copyTo(name0), false);
+        this.model = (T)this.model.copyTo(name0);
+        this.modelInStore = false;
         this.save();
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#isSaved()
-     */
 
     /**
      * Checks if is saved.
@@ -233,12 +189,6 @@ public class DeckController<T extends DeckBase> {
     public boolean isSaved() {
         return this.saved;
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#delete()
-     */
 
     /**
      * Delete.
@@ -251,12 +201,6 @@ public class DeckController<T extends DeckBase> {
         this.newModel();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#isGoodName(java.lang.String)
-     */
-
     /**
      * File exists.
      *
@@ -267,12 +211,6 @@ public class DeckController<T extends DeckBase> {
         return this.folder.contains(deckName);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#importDeck(forge.deck.Deck)
-     */
-
     /**
      * Import deck.
      *
@@ -281,12 +219,6 @@ public class DeckController<T extends DeckBase> {
     public void importDeck(final T newDeck) {
         this.setModel(newDeck);
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.gui.deckeditor.IDeckController#isModelInStore()
-     */
 
     /**
      * Checks if is model in store.
@@ -319,17 +251,20 @@ public class DeckController<T extends DeckBase> {
     }
 
     public String getModelName() {
-        return modelName;
+        return this.model != null ? this.model.getName() : "";
     }
-    
-    private void updateCaptions() {
+
+    public void updateCaptions() {
         String tabCaption = "Current Deck";
         String title = this.model.getName();
         String itemManagerCaption = title.isEmpty() ? "[Untitled]" : title;
+
         if (!saved) {
             tabCaption = "*" + tabCaption;
             itemManagerCaption = "*" + itemManagerCaption;
         }
+        itemManagerCaption += " - " + this.view.getSectionMode().name();
+
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(tabCaption);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText(title);
         VCurrentDeck.SINGLETON_INSTANCE.getItemManager().setCaption(itemManagerCaption);

@@ -106,8 +106,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     // will return new if it was absent
     public CardPool getOrCreate(DeckSection deckSection) {
         CardPool p = get(deckSection);
-        if ( p != null )
+        if (p != null) {
             return p;
+        }
         p = new CardPool();
         this.parts.put(deckSection, p);
         return p;
@@ -120,7 +121,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     protected void cloneFieldsTo(final DeckBase clone) {
         super.cloneFieldsTo(clone);
         final Deck result = (Deck) clone;
-        for(Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+        for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
             CardPool cp = new CardPool();
             result.parts.put(kv.getKey(), cp);
             cp.addAll(kv.getValue());
@@ -165,7 +166,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
      * @return the deck
      */
     public static Deck fromSections(final Map<String, List<String>> sections, final boolean canThrowExtendedErrors) {
-        if ((sections == null) || sections.isEmpty()) {
+        if (sections == null || sections.isEmpty()) {
             return null;
         }
 
@@ -178,18 +179,21 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         d.setComment(dh.getComment());
         d.tags.addAll(dh.getTags());
 
-        for(Entry<String, List<String>> s : sections.entrySet()) {
+        for (Entry<String, List<String>> s : sections.entrySet()) {
             DeckSection sec = DeckSection.smartValueOf(s.getKey());
-            if ( null == sec )
+            if (sec == null) {
                 continue;
-            
+            }
+
             CardPool pool = CardPool.fromCardList(s.getValue());
             // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
             IPaperCard sample = pool.get(0); 
-            if ( sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon() ) )
+            if (sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon())) {
                 sec = DeckSection.Planes;
-            if ( sample != null && sample.getRules().getType().isScheme() )
+            }
+            if (sample != null && sample.getRules().getType().isScheme()) {
                 sec = DeckSection.Schemes;
+            }
 
             d.parts.put(sec, pool);
         }

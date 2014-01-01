@@ -30,8 +30,6 @@ import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.views.VCardCatalog;
-import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.FScreen;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
@@ -57,14 +55,8 @@ import forge.util.ItemPoolView;
  */
 public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     private final DeckController<Deck> controller;
-    //private boolean sideboardMode = false;
-    
-    private List<DeckSection> allSections = new ArrayList<DeckSection>();
-    private DeckSection sectionMode = DeckSection.Main;
-    
-    private final ItemPoolView<PaperCard> avatarPool;
-    private final ItemPoolView<PaperCard> planePool;
-    private final ItemPoolView<PaperCard> schemePool;
+    private final List<DeckSection> allSections = new ArrayList<DeckSection>();
+    private final ItemPoolView<PaperCard> normalPool, avatarPool, planePool, schemePool;
     
     //=========== Constructor
     /**
@@ -82,6 +74,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         allSections.add(DeckSection.Planes);
         //allSections.add(DeckSection.Commander);
 
+        normalPool = ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
         avatarPool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)),PaperCard.class);
         planePool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)),PaperCard.class);
         schemePool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)),PaperCard.class);
@@ -176,7 +169,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     @Override
     public void resetTables() {
         // Constructed mode can use all cards, no limitations.
-        this.getCatalogManager().setPool(ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
+        this.sectionMode = DeckSection.Main;
+        this.getCatalogManager().setPool(normalPool, true);
         this.getDeckManager().setPool(this.controller.getModel().getMain());
     }
 
@@ -201,26 +195,18 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
 
-        String title = "";
-        String tabtext = "";
-        Boolean showOptions = true;
         switch(sectionMode) {
         case Main:
             lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
             this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
-            this.getCatalogManager().setPool(ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class), true);
+            this.getCatalogManager().setPool(normalPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getMain());
-            showOptions = true;
-            title = "Title: ";
-            tabtext = "Main Deck";
             break;
         case Sideboard:
+            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
             this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
-            this.getCatalogManager().setPool(this.controller.getModel().getMain());
+            this.getCatalogManager().setPool(normalPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
-            showOptions = false;
-            title = "Sideboard";
-            tabtext = "Card Catalog";
             break;
         case Avatar:
             lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
@@ -232,9 +218,6 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
             this.getCatalogManager().setPool(avatarPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Avatar));
-            showOptions = false;
-            title = "Vanguard";
-            tabtext = "Card Catalog";
             break;
         case Planes:
             lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
@@ -246,9 +229,6 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
             this.getCatalogManager().setPool(planePool,true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Planes));
-            showOptions = false;
-            title = "Planar";
-            tabtext = "Card Catalog";
             break;
         case Schemes:
             lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
@@ -260,25 +240,12 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
             this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
             this.getCatalogManager().setPool(schemePool,true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
-            showOptions = false;
-            title = "Scheme";
-            tabtext = "Card Catalog";
             break;
         case Commander:
             break; //do nothing for Commander here
         }
 
-        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(tabtext);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(title);
-
-        this.controller.notifyModelChanged();
+        this.controller.updateCaptions();
     }
 
     /* (non-Javadoc)

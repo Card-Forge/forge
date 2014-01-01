@@ -32,8 +32,6 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VAllDecks;
-import forge.gui.deckeditor.views.VCardCatalog;
-import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -65,7 +63,6 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
     private DragCell deckGenParent = null;
 
     private List<DeckSection> allSections = new ArrayList<DeckSection>();
-    private DeckSection sectionMode = DeckSection.Main;
     private final ItemPoolView<PaperCard> commanderPool;
     private final ItemPoolView<PaperCard> normalPool;
 
@@ -162,6 +159,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public void resetTables() {
+        this.sectionMode = DeckSection.Main;
         this.getCatalogManager().setPool(normalPool,false);
         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Main));
     }
@@ -240,52 +238,29 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
 
-        String title = "";
-        String tabtext = "";
-        Boolean showOptions = true;
-        switch(sectionMode)
-        {
+        switch(sectionMode) {
             case Main:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
                 this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
                 this.getCatalogManager().setPool(normalPool, false);
                 this.getDeckManager().setPool(this.controller.getModel().getMain());
-                showOptions = true;
-                title = "Title: ";
-                tabtext = "Main Deck";
                 break;
             case Sideboard:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
                 this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
                 this.getCatalogManager().setPool(normalPool, false);
                 this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
-                showOptions = false;
-                title = "Sideboard";
-                tabtext = "Card Catalog";
                 break;
             case Commander:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
                 this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
                 this.getCatalogManager().setPool(commanderPool, true);
                 this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Commander));
-                showOptions = false;
-                title = "Commander";
-                tabtext = "Card Catalog";
                 break;
             default:
                 break;
         }
 
-        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(tabtext);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setVisible(showOptions);
-        VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(title);
-
-        this.controller.notifyModelChanged();
+        this.controller.updateCaptions();
     }
 }

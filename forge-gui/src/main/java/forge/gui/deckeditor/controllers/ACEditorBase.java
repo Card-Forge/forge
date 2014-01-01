@@ -23,6 +23,7 @@ import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.deck.DeckBase;
+import forge.deck.DeckSection;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -69,6 +70,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     private final FScreen screen;
     private ItemManager<TItem> catalogManager;
     private ItemManager<TItem> deckManager;
+    protected DeckSection sectionMode = DeckSection.Main;
 
     // card transfer buttons
     private final FLabel btnAdd = new FLabel.Builder()
@@ -111,6 +113,10 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     
     public FScreen getScreen() {
         return this.screen;
+    }
+
+    public DeckSection getSectionMode() {
+        return this.sectionMode;
     }
 
     public final void addItem(TItem item) {
