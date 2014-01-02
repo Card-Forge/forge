@@ -38,8 +38,6 @@ import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.gui.events.UiEventAttackerDeclared;
-import forge.gui.match.CMatchUI;
 
 /**
  * <p>
@@ -138,8 +136,6 @@ public class Combat {
         } else {
             band.addAttacker(c);
         }
-
-        CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventAttackerDeclared(c, defender));
     }
 
     public final GameEntity getDefenderByAttacker(final Card c) {

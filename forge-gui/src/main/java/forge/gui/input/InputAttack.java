@@ -81,6 +81,7 @@ public class InputAttack extends InputSyncronizedBase {
                 for(GameEntity def : defenders ) {
                     if( CombatUtil.canAttack(c, def, combat) ) {
                         combat.addAttacker(c, currentDefender);
+                        CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventAttackerDeclared(c, currentDefender));
                         break;
                     }
                 }
@@ -90,6 +91,7 @@ public class InputAttack extends InputSyncronizedBase {
                 final Player player = AbilityUtils.getDefinedPlayers(c, defined, null).get(0);
                 if (player != null && CombatUtil.canAttack(c, player, combat)) {
                     combat.addAttacker(c, player);
+                    CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventAttackerDeclared(c, player));
                 }
             }
         }
