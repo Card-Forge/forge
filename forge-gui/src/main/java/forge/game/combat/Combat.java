@@ -39,7 +39,6 @@ import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.gui.events.UiEventAttackerDeclared;
-import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.match.CMatchUI;
 
 /**
@@ -225,7 +224,6 @@ public class Combat {
     public final void addBlocker(final Card attacker, final Card blocker) {
         AttackingBand band = getBandOfAttacker(attacker);
         blockedBands.put(band, blocker);
-        CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventBlockerAssigned(blocker, attacker));
     }
 
     // remove blocked from specific attacker
