@@ -120,7 +120,7 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
             radioPane.add(tempRadio, "wrap,align 50% 50%");
         }
         settingsPanel.add(radioPane, "span 1 2");
-        settingsPanel.add(lblEditor);
+        settingsPanel.add(lblEditor, "w pref + 24, h pref + 8, ax center");
         tabPane.add("Settings", settingsPanel);
 
         //Player panels (Human + 7 AIs)
