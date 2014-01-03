@@ -43,8 +43,12 @@ public final class DeckFileMenu {
     private static JMenuItem menuItem_Save, menuItem_SaveAs;
 
     public static void updateSaveEnabled() {
-    	menuItem_Save.setEnabled(CDeckEditorUI.SINGLETON_INSTANCE.hasChanges());
-    	menuItem_SaveAs.setEnabled(CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController() != null);
+        if (menuItem_Save != null) {
+            menuItem_Save.setEnabled(CDeckEditorUI.SINGLETON_INSTANCE.hasChanges());
+        }
+        if (menuItem_SaveAs != null) {
+            menuItem_SaveAs.setEnabled(CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController() != null);
+        }
     }
 
     private static JMenuItem getMenuItem_New() {

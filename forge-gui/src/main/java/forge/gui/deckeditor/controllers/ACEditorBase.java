@@ -17,19 +17,23 @@
  */
 package forge.gui.deckeditor.controllers;
 
+import java.util.List;
 import java.util.Map.Entry;
 
+import javax.swing.JMenu;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.deck.DeckBase;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.menus.CDeckEditorUIMenus;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SRearrangingUtil;
+import forge.gui.menus.IMenuProvider;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
@@ -52,7 +56,7 @@ import forge.view.FView;
  * @param <TItem> extends {@link forge.item.InventoryItem}
  * @param <TModel> extends {@link forge.deck.DeckBase}
  */
-public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends DeckBase> {
+public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends DeckBase> implements IMenuProvider {
     public interface ContextMenuBuilder {
         /**
          * Adds move-related items to the context menu
@@ -117,6 +121,17 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
     public DeckSection getSectionMode() {
         return this.sectionMode;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.menubar.IMenuProvider#getMenus()
+     */
+    @Override
+    public List<JMenu> getMenus() {
+        if (this.getDeckController() == null) {
+            return null;
+        }
+        return new CDeckEditorUIMenus().getMenus();
     }
 
     public final void addItem(TItem item) {

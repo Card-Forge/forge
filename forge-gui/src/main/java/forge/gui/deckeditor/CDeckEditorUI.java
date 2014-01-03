@@ -29,10 +29,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 
-import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.Popup;
@@ -55,14 +53,12 @@ import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.deckeditor.controllers.DeckController;
-import forge.gui.deckeditor.menus.CDeckEditorUIMenus;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
-import forge.gui.menus.IMenuProvider;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
@@ -81,7 +77,7 @@ import forge.util.ItemPool;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CDeckEditorUI implements ICDoc, IMenuProvider {
+public enum CDeckEditorUI implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
@@ -332,6 +328,7 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
      */
     private void setCurrentEditorController(ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController0) {
         this.childController = childController0;
+        Singletons.getControl().getForgeMenu().setProvider(childController0);
 
         if (childController == null) { return; }
 
@@ -625,14 +622,6 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     }
 
     /* (non-Javadoc)
-     * @see forge.gui.menubar.IMenuProvider#getMenus()
-     */
-    @Override
-    public List<JMenu> getMenus() {
-        return new CDeckEditorUIMenus().getMenus();
-    }
-
-    /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */
     @Override
@@ -645,8 +634,6 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
      */
     @Override
     public void initialize() {
-        Singletons.getControl().getForgeMenu().setProvider(this);
-        
         //change to previously open child controller based on screen
         FScreen screen = Singletons.getControl().getCurrentScreen();
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> screenChildController = screenChildControllers.get(screen);
