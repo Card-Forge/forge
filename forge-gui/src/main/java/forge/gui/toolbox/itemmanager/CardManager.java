@@ -3,8 +3,6 @@ package forge.gui.toolbox.itemmanager;
 import java.util.List;
 
 import javax.swing.JMenu;
-import javax.swing.JPopupMenu;
-
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.gui.GuiUtils;
@@ -44,8 +42,8 @@ public final class CardManager extends ItemManager<PaperCard> {
     }
 
     @Override
-    protected void buildFilterMenu(JPopupMenu menu) {
-        buildFilterMenu(menu, this);
+    protected void buildAddFilterMenu(JMenu menu) {
+        buildAddFilterMenu(menu, this);
     }
 
     /* Static overrides shared with SpellShopManager*/
@@ -60,7 +58,7 @@ public final class CardManager extends ItemManager<PaperCard> {
         return new CardSearchFilter(itemManager);
     }
 
-    public static void buildFilterMenu(JPopupMenu menu, final ItemManager<? super PaperCard> itemManager) {
+    public static void buildAddFilterMenu(JMenu menu, final ItemManager<? super PaperCard> itemManager) {
         GuiUtils.addSeparator(menu); //separate from current search item
 
         JMenu fmt = GuiUtils.createMenu("Format");

@@ -104,6 +104,7 @@ public class CardFormatFilter extends ListLabelFilter<PaperCard> {
     @Override
     public void reset() {
         this.formats.clear();
+        this.updateLabel();
     }
 
     @Override

@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JCheckBox;
+import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -158,7 +159,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
                     filter.setEnabled(enabled);
                 }
                 txtFilterLogic.setEnabled(enabled);
-                btnFilters.setEnabled(enabled);
                 mainSearchFilter.setEnabled(enabled);
                 mainSearchFilter.updateEnabled(); //need to call updateEnabled since no listener for filter checkbox
                 lockFiltering = false;
@@ -194,6 +194,32 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
                 }
             }
         };
+        final Runnable cmdResetFilters = new Runnable() {
+            @Override
+            public void run() {
+                lockFiltering = true; //prevent updating filtering from this change until all filters reset
+                for (ItemFilter<? extends T> filter : orderedFilters) {
+                    filter.setEnabled(true);
+                    filter.reset();
+                }
+                mainSearchFilter.reset();
+                lockFiltering = false;
+
+                if (mainSearchFilter.isEnabled()) {
+                    applyFilters();
+                }
+                else {
+                    chkEnableFilters.setSelected(true); //this will apply filters in itemStateChanged handler
+                }
+
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        focus();
+                    }
+                });
+            }
+        };
 
         this.mainSearchFilter.getMainComponent().addKeyListener(new KeyAdapter() {
             @Override
@@ -206,20 +232,29 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             }
         });
 
-        //setup command for btnAddFilter
-        final Command addFilterCommand = new Command() {
+        //setup command for btnFilters
+        final Command cmdBuildFilterMenu = new Command() {
             @Override
             public void run() {
                 JPopupMenu menu = new JPopupMenu("FilterMenu");
-                GuiUtils.addMenuItem(menu, "Current text search",
-                        KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                        cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
-                buildFilterMenu(menu);
+                JMenu addMenu = GuiUtils.createMenu("Add");
+                if (mainSearchFilter.isEnabled()) {
+                    GuiUtils.addMenuItem(addMenu, "Current text search",
+                            KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                            cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
+                    buildAddFilterMenu(addMenu);
+                }
+                else {
+                    addMenu.setEnabled(false);
+                }
+                menu.add(addMenu);
+                GuiUtils.addSeparator(menu);
+                GuiUtils.addMenuItem(menu, "Reset Filters", null, cmdResetFilters);
                 menu.show(btnFilters, 0, btnFilters.getHeight());
             }
         };
-        this.btnFilters.setCommand(addFilterCommand);
-        this.btnFilters.setRightClickCommand(addFilterCommand); //show menu on right-click too
+        this.btnFilters.setCommand(cmdBuildFilterMenu);
+        this.btnFilters.setRightClickCommand(cmdBuildFilterMenu); //show menu on right-click too
 
         //setup initial filters
         addDefaultFilters();
@@ -586,7 +621,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     protected abstract void addDefaultFilters();
     protected abstract ItemFilter<? extends T> createSearchFilter();
-    protected abstract void buildFilterMenu(JPopupMenu menu);
+    protected abstract void buildAddFilterMenu(JMenu menu);
 
     protected <F extends ItemFilter<? extends T>> F getFilter(Class<F> filterClass) {
         return ReflectionUtil.safeCast(this.filters.get(filterClass), filterClass);
@@ -656,8 +691,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         if (this.lockFiltering || !this.initialized) { return; }
 
         List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
-        predicates.add(Predicates.instanceOf(this.genericType));
-
         for (ItemFilter<? extends T> filter : this.orderedFilters) { //TODO: Support custom filter logic
             if (filter.isEnabled() && !filter.isEmpty()) {
                 predicates.add(filter.buildPredicate(this.genericType));

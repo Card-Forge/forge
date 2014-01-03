@@ -1,6 +1,6 @@
 package forge.gui.toolbox.itemmanager;
 
-import javax.swing.JPopupMenu;
+import javax.swing.JMenu;
 
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
 import forge.item.InventoryItem;
@@ -26,7 +26,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
     }
 
     @Override
-    protected void buildFilterMenu(JPopupMenu menu) {
-        CardManager.buildFilterMenu(menu, this);
+    protected void buildAddFilterMenu(JMenu menu) {
+        CardManager.buildAddFilterMenu(menu, this);
     }
 }

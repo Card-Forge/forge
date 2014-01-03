@@ -33,11 +33,17 @@ public abstract class ListLabelFilter<T extends InventoryItem> extends ItemFilte
 
     @Override
     protected final void buildWidget(JPanel widget) {
+        label = new FLabel.Builder().fontAlign(SwingConstants.LEFT).fontSize(12).build();
+        updateLabel();
+        widget.add(label);
+    }
+
+    protected void updateLabel() {
         StringBuilder labelBuilder = new StringBuilder();
         labelBuilder.append(getCaption());
         switch (getCount()) {
         case 0:
-            labelBuilder.append(": All");
+            labelBuilder.append("s: All");
             break;
         case 1:
             labelBuilder.append(": " + getList().iterator().next());
@@ -46,13 +52,8 @@ public abstract class ListLabelFilter<T extends InventoryItem> extends ItemFilte
             labelBuilder.append("s: " + TextUtil.join(getList(), ", "));
             break;
         }
-        label = new FLabel.Builder()
-            .text(labelBuilder.toString())
-            .tooltip(getTooltip())
-            .fontAlign(SwingConstants.LEFT)
-            .fontSize(12)
-            .build();
-        widget.add(label);
+        label.setText(labelBuilder.toString());
+        label.setToolTipText(getTooltip());
     }
 
     @Override
