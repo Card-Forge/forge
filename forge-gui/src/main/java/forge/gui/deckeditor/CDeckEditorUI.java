@@ -54,6 +54,7 @@ import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
+import forge.gui.deckeditor.controllers.DeckController;
 import forge.gui.deckeditor.menus.CDeckEditorUIMenus;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
@@ -102,7 +103,12 @@ public enum CDeckEditorUI implements ICDoc, IMenuProvider {
     }
 
     public boolean hasChanges() {
-        return (this.childController != null && !this.childController.getDeckController().isSaved());
+        if (this.childController == null) { return false; }
+
+        final DeckController<?> deckController = this.childController.getDeckController();
+        if (deckController == null) { return false; }
+
+        return !deckController.isSaved();
     }
 
     public boolean canSwitchAway(boolean isClosing) {
