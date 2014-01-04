@@ -101,19 +101,18 @@ public class GuiChoose {
     }
 
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
-        if (null == choices || choices.isEmpty()) {
-            if (0 == min) {
+        if (choices == null || choices.isEmpty()) {
+            if (min == 0) {
                 return new ArrayList<T>();
-            } else {
-                throw new RuntimeException("choice required from empty list");
             }
+            throw new RuntimeException("choice required from empty list");
         }
         
         Callable<List<T>> showChoice = new Callable<List<T>>() {
             @Override
             public List<T> call() {
                 ListChooser<T> c = new ListChooser<T>(message, min, max, choices, display);
-                final JList<T> list = c.getJList();
+                final JList<T> list = c.getLstChoices();
                 list.addListSelectionListener(new ListSelectionListener() {
                     @Override
                     public void valueChanged(final ListSelectionEvent ev) {
@@ -121,7 +120,8 @@ public class GuiChoose {
                             Card card = (Card) list.getSelectedValue();
                             if (card.isFaceDown() && Singletons.getControl().mayShowCard(card)) {
                                 CMatchUI.SINGLETON_INSTANCE.setCard(card, true);
-                            } else {
+                            }
+                            else {
                                 CMatchUI.SINGLETON_INSTANCE.setCard(card);
                             }
         
@@ -134,10 +134,12 @@ public class GuiChoose {
                     }
                 });
                 
-                if(selected != null)
+                if (selected != null) {
                     c.show(selected);
-                else
+                }
+                else {
                     c.show();
+                }
                 
                 GuiUtils.clearPanelSelections();
                 return c.getSelectedValues();

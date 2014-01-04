@@ -117,13 +117,7 @@ public class FOptionPane extends FDialog {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    SwingUtilities.invokeLater(new Runnable() { //delay so enter can confirm input choice first
-                        @Override
-                        public void run() {
-                            optionPane.result = 0;
-                            optionPane.setVisible(false);
-                        }
-                    });
+                    optionPane.setResult(0);
                 }
             }
         });
@@ -142,8 +136,9 @@ public class FOptionPane extends FDialog {
     }
 
     private int result = -1; //default result to -1, indicating dialog closed without choosing option
+    private final FButton[] buttons;
 
-    private FOptionPane(String message, String title, SkinImage icon, Component comp, String[] options, int defaultOption) {
+    public FOptionPane(String message, String title, SkinImage icon, Component comp, String[] options, int defaultOption) {
         this.setTitle(title);
 
         int padding = 10;
@@ -176,7 +171,7 @@ public class FOptionPane extends FDialog {
         FontMetrics metrics = JOptionPane.getRootFrame().getGraphics().getFontMetrics(btnMeasure.getFont());
 
         int maxTextWidth = 0;
-        final FButton[] buttons = new FButton[optionCount];
+        buttons = new FButton[optionCount];
         for (int i = 0; i < optionCount; i++) {
             int textWidth = metrics.stringWidth(options[i]);
             if (textWidth > maxTextWidth) {
@@ -251,5 +246,37 @@ public class FOptionPane extends FDialog {
         }
 
         this.setSize(width, this.getHeight() + buttonHeight); //resize dialog again to account for buttons
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        if (this.isVisible() == visible) { return; }
+
+        if (visible) {
+            result = -1; //default result to -1 when shown, indicating dialog closed without choosing option
+        }
+        super.setVisible(visible);
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result0) {
+        this.result = result0;
+        SwingUtilities.invokeLater(new Runnable() { //delay hiding so action can finish first
+            @Override
+            public void run() {
+                setVisible(false);
+            }
+        });
+    }
+
+    public boolean isButtonEnabled(int index) {
+        return buttons[index].isEnabled();
+    }
+
+    public void setButtonEnabled(int index, boolean enabled) {
+        buttons[index].setEnabled(enabled);
     }
 }

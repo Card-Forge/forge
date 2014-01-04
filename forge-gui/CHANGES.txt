@@ -14,6 +14,10 @@ Support resetting and hiding filters
 Full catalog now available for sideboarding in Deck Editor
 Title field and buttons now available on Current Deck pane when on other sections, with the current section name displaying above the table
 
+- More skinned dialogs -
+Most remaining dialogs are now skinned, including all message, confirmation, input, and list choice dialogs
+
+
 - Constructed mode -
 Recently a change was made to the constructed mode and this change now allows you to have up to 8 players rather than just two. The game formats that are located in the variants mode also allow up to eight players. The current user interface for this feature is fairly basic and is not very attractive. The settings tab allows you to set the number of opponents. The player tabs includes the same options that you used to see in the constructed mode.
 

@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.event.AncestorEvent;
@@ -431,8 +432,15 @@ public class FLabel extends JLabel implements ILocalRepaint {
     public int getAutoSizeWidth() {
         int width = 0;
         if (this.getText() != null && !this.getText().isEmpty()) {
-            FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
+            Graphics g = this.getGraphics();
+            if (g == null) {
+                g = JOptionPane.getRootFrame().getGraphics(); //fallback to root frame's graphics if needed
+            }
+            FontMetrics metrics = g.getFontMetrics(this.getFont());
             width = metrics.stringWidth(this.getText());
+        }
+        if (this.getIcon() != null) {
+            width += this.getIcon().getIconWidth() + this.getIconTextGap();
         }
         if (opaque) {
             width += 6; //account for border/padding if opaque

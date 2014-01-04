@@ -19,22 +19,17 @@
 package forge.gui;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
-import javax.swing.Action;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
@@ -46,6 +41,9 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.FThreads;
+import forge.gui.toolbox.FList;
+import forge.gui.toolbox.FMouseAdapter;
+import forge.gui.toolbox.FOptionPane;
 
 /**
  * A simple class that shows a list of choices in a dialog. Two properties
@@ -71,61 +69,70 @@ import forge.FThreads;
  * @version $Id$
  */
 public class ListChooser<T> {
-
     // Data and number of choices for the list
     private List<T> list;
     private int minChoices, maxChoices;
 
-    // Decoration
-    private String title;
-
     // Flag: was the dialog already shown?
     private boolean called;
+
     // initialized before; listeners may be added to it
-    private JList<T> jList;
-    // Temporarily stored for event handlers during show
-    private JDialog dialog;
-    private JOptionPane optionPane;
-    private Action ok, cancel;
+    private FList<T> lstChoices;
+    private FOptionPane optionPane;
 
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list, final Function<T, String> display) {
         FThreads.assertExecutedByEdt(true);
-        this.title = title;
         this.minChoices = minChoices;
         this.maxChoices = maxChoices;
         this.list = list.getClass().isInstance(List.class) ? (List<T>)list : Lists.newArrayList(list);
-        this.jList = new JList<T>(new ChooserListModel());
-        this.ok = new CloseAction(JOptionPane.OK_OPTION, "OK");
-        this.ok.setEnabled(minChoices == 0);
-        this.cancel = new CloseAction(JOptionPane.CANCEL_OPTION, "Cancel");
+        this.lstChoices = new FList<T>(new ChooserListModel());
 
-        Object[] options;
+        String[] options;
         if (minChoices == 0) {
-            options = new Object[] { new JButton(this.ok), new JButton(this.cancel) };
-        } else {
-            options = new Object[] { new JButton(this.ok) };
+            options = new String[] {"OK","Cancel"};
         }
+        else {
+            options = new String[] {"OK"};
+        }
+
         if (maxChoices == 1) {
-            this.jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            this.lstChoices.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         }
         
-        if( null != display )
-            this.jList.setCellRenderer(new TransformedCellRenderer(display));
+        if (display != null) {
+            this.lstChoices.setCellRenderer(new TransformedCellRenderer(display));
+        }
 
-        this.optionPane = new JOptionPane(new JScrollPane(this.jList), JOptionPane.QUESTION_MESSAGE,
-                JOptionPane.DEFAULT_OPTION, null, options, options[0]);
-        this.jList.getSelectionModel().addListSelectionListener(new SelListener());
-        this.jList.addMouseListener(new DblListener());
+        this.optionPane = new FOptionPane(null, title, null, new JScrollPane(this.lstChoices), options, 0);
+        this.optionPane.setButtonEnabled(0, minChoices == 0);
+
+        this.lstChoices.getSelectionModel().addListSelectionListener(new SelListener());
+        this.lstChoices.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    ListChooser.this.commit();
+                }
+            }
+        });
+        this.lstChoices.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    ListChooser.this.commit();
+                }
+            }
+        });
     }
 
     /**
-     * Returns the JList used in the list chooser. this is useful for
+     * Returns the FList used in the list chooser. this is useful for
      * registering listeners before showing the dialog.
      * 
      * @return a {@link javax.swing.JList} object.
      */
-    public JList<T> getJList() {
-        return this.jList;
+    public FList<T> getLstChoices() {
+        return this.lstChoices;
     }
 
     /** @return boolean */
@@ -143,42 +150,45 @@ public class ListChooser<T> {
         if (this.called) {
             throw new IllegalStateException("Already shown");
         }
-        Integer value;
+        int result;
         do {
-            this.dialog = this.optionPane.createDialog(JOptionPane.getRootFrame(), this.title);
             if (this.minChoices != 0) {
-                this.dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                this.optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             }
 
             if (list.contains(item)) {
-                jList.setSelectedValue(item, true);
-            } else {
-                jList.setSelectedIndex(0);
+                lstChoices.setSelectedValue(item, true);
+            }
+            else {
+                lstChoices.setSelectedIndex(0);
             }
 
-            this.dialog.addWindowFocusListener(new WindowFocusListener() {
+            this.optionPane.addWindowFocusListener(new WindowFocusListener() {
                 @Override
                 public void windowGainedFocus(final WindowEvent e) {
-                    ListChooser.this.jList.grabFocus();
+                    ListChooser.this.lstChoices.grabFocus();
                 }
 
                 @Override
                 public void windowLostFocus(final WindowEvent e) {
                 }
             });
-            this.dialog.setVisible(true);
-            this.dialog.dispose();
-            value = (Integer) this.optionPane.getValue();
-            if ((value == null) || (value != JOptionPane.OK_OPTION)) {
-                this.jList.clearSelection();
-                // can't stop closing by ESC, so repeat if cancelled
+            this.optionPane.setVisible(true);
+            result = this.optionPane.getResult();
+            if (result != 0) {
+                this.lstChoices.clearSelection();
+                break;
             }
-        } while ((this.minChoices != 0) && (value != JOptionPane.OK_OPTION));
+            // can't stop closing by ESC, so repeat if cancelled
+        } while (this.minChoices != 0);
+
+        this.optionPane.dispose();
+
         // this assert checks if we really don't return on a cancel if input is
         // mandatory
-        assert (this.minChoices == 0) || (value == JOptionPane.OK_OPTION);
+        assert (this.minChoices == 0) || (result == 0);
         this.called = true;
-        return (value != null) && (value == JOptionPane.OK_OPTION);
+        return (result == 0);
     }
 
     /**
@@ -191,7 +201,7 @@ public class ListChooser<T> {
         if (!this.called) {
             throw new IllegalStateException("not yet shown");
         }
-        return (Integer) this.optionPane.getValue() == JOptionPane.OK_OPTION;
+        return (this.optionPane.getResult() == 0);
     }
 
     /**
@@ -203,7 +213,7 @@ public class ListChooser<T> {
         if (!this.called) {
             throw new IllegalStateException("not yet shown");
         }
-        return this.jList.getSelectedIndices();
+        return this.lstChoices.getSelectedIndices();
     }
 
     /**
@@ -216,7 +226,7 @@ public class ListChooser<T> {
         if (!this.called) {
             throw new IllegalStateException("not yet shown");
         }
-        return this.jList.getSelectedValuesList();
+        return this.lstChoices.getSelectedValuesList();
     }
 
     /**
@@ -228,7 +238,7 @@ public class ListChooser<T> {
         if (!this.called) {
             throw new IllegalStateException("not yet shown");
         }
-        return this.jList.getSelectedIndex();
+        return this.lstChoices.getSelectedIndex();
     }
 
     /**
@@ -240,7 +250,7 @@ public class ListChooser<T> {
         if (!this.called) {
             throw new IllegalStateException("not yet shown");
         }
-        return (T) this.jList.getSelectedValue();
+        return (T) this.lstChoices.getSelectedValue();
     }
 
     /**
@@ -249,13 +259,12 @@ public class ListChooser<T> {
      * </p>
      */
     private void commit() {
-        if (this.ok.isEnabled()) {
-            this.optionPane.setValue(JOptionPane.OK_OPTION);
+        if (this.optionPane.isButtonEnabled(0)) {
+            optionPane.setResult(0);
         }
     }
 
     private class ChooserListModel extends AbstractListModel<T> {
-
         private static final long serialVersionUID = 3871965346333840556L;
 
         @Override
@@ -269,38 +278,11 @@ public class ListChooser<T> {
         }
     }
 
-    private class CloseAction extends AbstractAction {
-
-        private static final long serialVersionUID = -8426767786083886936L;
-        private final int value;
-
-        public CloseAction(final int value, final String label) {
-            super(label);
-            this.value = value;
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            ListChooser.this.optionPane.setValue(this.value);
-        }
-    }
-
     private class SelListener implements ListSelectionListener {
-
         @Override
         public void valueChanged(final ListSelectionEvent e) {
-            final int num = ListChooser.this.jList.getSelectedIndices().length;
-            ListChooser.this.ok
-                    .setEnabled((num >= ListChooser.this.minChoices) && (num <= ListChooser.this.maxChoices));
-        }
-    }
-
-    private class DblListener extends MouseAdapter {
-        @Override
-        public void mouseClicked(final MouseEvent e) {
-            if (e.getClickCount() == 2) {
-                ListChooser.this.commit();
-            }
+            final int num = ListChooser.this.lstChoices.getSelectedIndices().length;
+            ListChooser.this.optionPane.setButtonEnabled(0, (num >= ListChooser.this.minChoices) && (num <= ListChooser.this.maxChoices));
         }
     }
     
@@ -320,13 +302,9 @@ public class ListChooser<T> {
          * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int, boolean, boolean)
          */
         @Override
-        public Component getListCellRendererComponent(JList<? extends T> list, T value, int index, boolean isSelected,
-                boolean cellHasFocus) {
+        public Component getListCellRendererComponent(JList<? extends T> list, T value, int index, boolean isSelected, boolean cellHasFocus) {
             // TODO Auto-generated method stub
             return defRenderer.getListCellRendererComponent(list, transformer.apply(value), index, isSelected, cellHasFocus);
         }
-        
-
-
     }
 }
