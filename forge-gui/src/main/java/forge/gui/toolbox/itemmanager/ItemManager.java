@@ -211,6 +211,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             @Override
             public void run() {
                 setHideFilters(!getHideFilters());
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        focus();
+                    }
+                });
             }
         };
 
@@ -708,8 +714,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             predicates.add(mainSearchFilter.buildPredicate(this.genericType));
         }
 
-        this.filterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
+        Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
+        if (this.filterPredicate == newFilterPredicate) { return; }
 
+        this.filterPredicate = newFilterPredicate;
         if (this.pool != null) {
             this.updateView(true);
         }

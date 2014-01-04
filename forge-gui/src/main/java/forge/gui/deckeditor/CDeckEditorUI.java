@@ -472,6 +472,13 @@ public enum CDeckEditorUI implements ICDoc {
         catView.setWantUnique(wantUnique);
         deckView.setWantUnique(wantUnique);
         catView.applyFilters();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                catView.focus();
+            }
+        });
     }
     
     private class _FindAsYouType extends KeyAdapter {
