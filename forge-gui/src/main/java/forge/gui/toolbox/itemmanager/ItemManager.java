@@ -265,7 +265,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         addDefaultFilters();
 
         this.initialized = true; //must set flag just before applying filters
-        applyFilters();
+        if (!applyFilters()) {
+            if (this.pool != null) { //ensure view updated even if filter predicate didn't change
+                this.updateView(true);
+            }
+        }
     }
 
     @Override
@@ -701,8 +705,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         }
     }
 
-    public void applyFilters() {
-        if (this.lockFiltering || !this.initialized) { return; }
+    public boolean applyFilters() {
+        if (this.lockFiltering || !this.initialized) { return false; }
 
         List<Predicate<? super T>> predicates = new ArrayList<Predicate<? super T>>();
         for (ItemFilter<? extends T> filter : this.orderedFilters) { //TODO: Support custom filter logic
@@ -715,12 +719,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         }
 
         Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
-        if (this.filterPredicate == newFilterPredicate) { return; }
+        if (this.filterPredicate == newFilterPredicate) { return false; }
 
         this.filterPredicate = newFilterPredicate;
         if (this.pool != null) {
             this.updateView(true);
         }
+        return true;
     }
 
     /**
