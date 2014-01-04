@@ -90,7 +90,7 @@ public class ManaEffect extends SpellAbilityEffect {
                             if (chosen.equals("")) {
                                 chosen = MagicColor.Constant.BLACK;
                             }
-                            GuiChoose.one("Computer picked: ", new String[]{chosen});
+                            GuiChoose.reveal("Computer picked", chosen);
                             String manaString = "";
                             for (int i = 0; i < amount; i++) {
                                 manaString = manaString + MagicColor.toShortString(chosen) + " ";
@@ -149,7 +149,7 @@ public class ManaEffect extends SpellAbilityEffect {
                             if (chosen.equals("")) {
                                 chosen = MagicColor.Constant.GREEN;
                             }
-                            GuiChoose.one("Computer picked: ", new String[]{chosen});
+                            GuiChoose.reveal("Computer picked", chosen);
                             abMana.setExpressChoice(MagicColor.toShortString(chosen));
                         }
                         if (abMana.getExpressChoice().isEmpty()) {

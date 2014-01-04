@@ -49,10 +49,11 @@ import forge.gui.toolbox.FOptionPane;
  * A simple class that shows a list of choices in a dialog. Two properties
  * influence the behavior of a list chooser: minSelection and maxSelection.
  * These two give the allowed number of selected items for the dialog to be
- * closed.
+ * closed. A negative value for minSelection suggests that the list is revealed
+ * and the choice doesn't matter.
  * <ul>
  * <li>If minSelection is 0, there will be a Cancel button.</li>
- * <li>If minSelection is 0 or 1, double-clicking a choice will also close the
+ * <li>If minSelection is -1, 0 or 1, double-clicking a choice will also close the
  * dialog.</li>
  * <li>If the number of selections is out of bounds, the "OK" button is
  * disabled.</li>
@@ -95,7 +96,7 @@ public class ListChooser<T> {
             options = new String[] {"OK"};
         }
 
-        if (maxChoices == 1) {
+        if (maxChoices == 1 || minChoices == -1) {
             this.lstChoices.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         }
         
@@ -103,25 +104,30 @@ public class ListChooser<T> {
             this.lstChoices.setCellRenderer(new TransformedCellRenderer(display));
         }
 
-        this.optionPane = new FOptionPane(null, title, null, new JScrollPane(this.lstChoices), options, -1);
-        this.optionPane.setButtonEnabled(0, minChoices == 0);
+        this.optionPane = new FOptionPane(null, title, null, new JScrollPane(this.lstChoices), options, minChoices < 0 ? 0 : -1);
+        this.optionPane.setButtonEnabled(0, minChoices <= 0);
 
-        this.optionPane.addWindowFocusListener(new WindowFocusListener() {
-            @Override
-            public void windowGainedFocus(final WindowEvent e) {
-                ListChooser.this.lstChoices.grabFocus();
-            }
+        if (minChoices != -1) {
+            this.optionPane.addWindowFocusListener(new WindowFocusListener() {
+                @Override
+                public void windowGainedFocus(final WindowEvent e) {
+                    ListChooser.this.lstChoices.grabFocus();
+                }
+    
+                @Override
+                public void windowLostFocus(final WindowEvent e) {
+                }
+            });
+        }
 
-            @Override
-            public void windowLostFocus(final WindowEvent e) {
-            }
-        });
-
-        if (this.minChoices != 0) {
+        if (minChoices > 0) {
             this.optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         }
 
-        this.lstChoices.getSelectionModel().addListSelectionListener(new SelListener());
+        if (minChoices != -1) {
+            this.lstChoices.getSelectionModel().addListSelectionListener(new SelListener());
+        }
+
         this.lstChoices.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -179,12 +185,12 @@ public class ListChooser<T> {
                 this.lstChoices.clearSelection();
             }
             // can't stop closing by ESC, so repeat if cancelled
-        } while (this.minChoices != 0 && result != 0);
+        } while (this.minChoices > 0 && result != 0);
 
         this.optionPane.dispose();
 
         // this assert checks if we really don't return on a cancel if input is mandatory
-        assert (this.minChoices == 0) || (result == 0);
+        assert (this.minChoices <= 0) || (result == 0);
         this.called = true;
         return (result == 0);
     }

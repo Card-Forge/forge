@@ -39,7 +39,7 @@ public class Match {
 
     private int gamesPerMatch = 3;
     private int gamesToWinMatch = 2;
-    
+
     private final boolean useAnte;
 
     private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
@@ -48,7 +48,7 @@ public class Match {
     public Match(GameType type, List<RegisteredPlayer> players0, boolean useAnte) {
         this(type, players0, useAnte, 3);
     }
-    
+
     public Match(GameType type, List<RegisteredPlayer> players0, boolean useAnte, int games) {
         gameType = type;
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
@@ -78,14 +78,13 @@ public class Match {
     public int getGamesToWinMatch() {
         return gamesToWinMatch;
     }
-    
+
     public void addGamePlayed(Game finished) {
         if (!finished.isGameOver()) {
             throw new IllegalStateException("Game is not over yet.");
         }
         gamesPlayed.add(finished.getOutcome());
     }
-    
 
     /**
      * TODO: Write javadoc for this method.
@@ -100,48 +99,47 @@ public class Match {
      */
     public void startGame(final Game game, final CountDownLatch latch) {
         final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
-        
 
         // This code could be run run from EDT.
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
                 prepareAllZones(game, canRandomFoil);
-                
+
                 if (useAnte) {  // Deciding which cards go to ante
                     Multimap<Player, Card> list = game.chooseCardsForAnte();
-                    for(Entry<Player, Card> kv : list.entries()) {
+                    for (Entry<Player, Card> kv : list.entries()) {
                         Player p = kv.getKey();
                         game.getAction().moveTo(ZoneType.Ante, kv.getValue());
                         game.getGameLog().add(GameLogEntryType.ANTE, p + " anted " + kv.getValue());
                     }
                     game.fireEvent(new GameEventAnteCardsSelected(list));
                 }
-                
+
                 GameOutcome lastOutcome = gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
                 game.getAction().startGame(lastOutcome);
-                
+
                 if (useAnte) {
                     executeAnte(game);
                 }
 
                 // will pull UI dialog, when the UI is listening
                 game.fireEvent(new GameEventGameFinished());
-                
-                
-                if( null != latch )
+
+                if (null != latch) {
                     latch.countDown();
+                }
             }
         });
     }
 
     public void clearGamesPlayed() {
         gamesPlayed.clear();
-        for(RegisteredPlayer p : players) {
+        for (RegisteredPlayer p : players) {
             p.restoreDeck();
         }
     }
-    
+
     public void clearLastGame() {
         gamesPlayed.remove(gamesPlayed.size() - 1);
     }
@@ -223,14 +221,15 @@ public class Match {
     public static int getPoisonCountersAmountToLose() {
         return 10;
     }
-    
+
     private static Set<PaperCard> getRemovedAnteCards(Deck toUse) {
         final String keywordToRemove = "Remove CARDNAME from your deck before playing if you're not playing for ante.";
         Set<PaperCard> myRemovedAnteCards = new HashSet<PaperCard>();
         for (Entry<DeckSection, CardPool> ds : toUse) {
             for (Entry<PaperCard, Integer> cp : ds.getValue()) {
-                if ( Iterables.contains(cp.getKey().getRules().getMainPart().getKeywords(), keywordToRemove) ) 
+                if (Iterables.contains(cp.getKey().getRules().getMainPart().getKeywords(), keywordToRemove)) {
                     myRemovedAnteCards.add(cp.getKey());
+                }
             }
         }
 
@@ -266,7 +265,7 @@ public class Match {
         GameType gameType = game.getType();
         boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
         boolean canSideBoard = !isFirstGame && gameType.isSideboardingAllowed();
-        
+
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
         for (int i = 0; i < playersConditions.size(); i++) {
             Player player = game.getPlayers().get(i);
@@ -277,77 +276,75 @@ public class Match {
             if (canSideBoard) {
                 Deck toChange = psc.getDeck();
                 List<PaperCard> newMain = player.getController().sideboard(toChange, gameType);
-                if( null != newMain ) {
+                if (null != newMain) {
                     CardPool allCards = new CardPool();
                     allCards.addAll(toChange.get(DeckSection.Main));
                     allCards.addAll(toChange.get(DeckSection.Sideboard));
-                    for(PaperCard c : newMain)
+                    for (PaperCard c : newMain) {
                         allCards.remove(c);
-
+                    }
                     toChange.getMain().clear();
                     toChange.getMain().add(newMain);
                     toChange.get(DeckSection.Sideboard).clear();
                     toChange.get(DeckSection.Sideboard).addAll(allCards);
                 }
             }
-            
+
             Deck myDeck = psc.getDeck();
 
-
             Set<PaperCard> myRemovedAnteCards = null;
-            if( useAnte ) {
+            if (useAnte) {
                 myRemovedAnteCards = getRemovedAnteCards(myDeck);
-                for(PaperCard cp: myRemovedAnteCards) {
-                    for ( Entry<DeckSection, CardPool> ds : myDeck ) {
+                for (PaperCard cp: myRemovedAnteCards) {
+                    for (Entry<DeckSection, CardPool> ds : myDeck) {
                         ds.getValue().removeAll(cp);
                     }
                 }
             }
-            
-            
+
             Random generator = MyRandom.getRandom();
 
             preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), canRandomFoil, generator);
-            if(myDeck.has(DeckSection.Sideboard))
+            if (myDeck.has(DeckSection.Sideboard)) {
                 preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), canRandomFoil, generator);
-            
+            }
             player.shuffle(null);
 
-            if(isFirstGame) {
-                Collection<? extends PaperCard> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck); 
-                if( null != cardsComplained )
+            if (isFirstGame) {
+                Collection<? extends PaperCard> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck);
+                if (null != cardsComplained) {
                     rAICards.putAll(player, cardsComplained);
+                }
             }
 
-            if( myRemovedAnteCards != null && !myRemovedAnteCards.isEmpty() )
+            if (myRemovedAnteCards != null && !myRemovedAnteCards.isEmpty()) {
                 removedAnteCards.putAll(player, myRemovedAnteCards);
+            }
         }
 
         boolean isLimitedGame = GameType.Quest == game.getType() || GameType.Sealed == game.getType() || GameType.Draft == game.getType();
-        if (!rAICards.isEmpty() && !isLimitedGame ) {
-            game.getAction().revealAnte("AI can't play well these cards:", rAICards);
+        if (!rAICards.isEmpty() && !isLimitedGame) {
+            game.getAction().revealAnte("AI can't play these cards well", rAICards);
         }
 
         if (!removedAnteCards.isEmpty()) {
-            game.getAction().revealAnte("These ante cards were removed:", removedAnteCards);
+            game.getAction().revealAnte("These ante cards were removed", removedAnteCards);
         }
     }
 
-    
     private void executeAnte(Game lastGame) {
-        
         GameOutcome outcome = lastGame.getOutcome();
-        if (outcome.isDraw())
+        if (outcome.isDraw()) {
             return;
-        
+        }
 
         // remove all the lost cards from owners' decks
         List<PaperCard> losses = new ArrayList<PaperCard>();
         int cntPlayers = players.size();
         int iWinner = -1;
-        for (int i = 0; i < cntPlayers; i++ ) {
+        for (int i = 0; i < cntPlayers; i++) {
             Player fromGame = lastGame.getRegisteredPlayers().get(i);
-            if( !fromGame.hasLost()) {
+            if (!fromGame.hasLost()) {
                 iWinner = i;
                 continue; // not a loser
             }
@@ -368,7 +365,7 @@ public class Match {
         if (iWinner >= 0 && gameType.canAddWonCardsMidgame()) {
             Player fromGame = lastGame.getRegisteredPlayers().get(iWinner);
             outcome.anteResult.put(fromGame, GameOutcome.AnteResult.won(losses));
-            List<PaperCard> chosen = fromGame.getController().chooseCardsYouWonToAddToDeck(losses); // "Select cards to add to your deck", 
+            List<PaperCard> chosen = fromGame.getController().chooseCardsYouWonToAddToDeck(losses); // "Select cards to add to your deck",
             if (null != chosen) {
                 Deck deck = players.get(iWinner).getDeck();
                 for (PaperCard c : chosen) {
@@ -376,7 +373,5 @@ public class Match {
                 }
             }
         }
-
     }
-
 }

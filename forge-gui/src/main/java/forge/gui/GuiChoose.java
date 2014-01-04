@@ -76,7 +76,7 @@ public class GuiChoose {
         final List<T> choice = GuiChoose.getChoices(message, 1, 1, choices);
         assert choice.size() == 1;
         return choice.get(0);
-    } // getChoice()
+    }
 
     public static <T> T one(final String message, final Collection<T> choices) {
         if ((choices == null) || (choices.size() == 0)) {
@@ -91,11 +91,24 @@ public class GuiChoose {
         return GuiChoose.getChoices(message, 0, choices.size(), choices, null, null);
     }
 
+    // Nothing to choose here. Code uses this to just reveal one or more items
+    public static <T> void reveal(final String message, final T item) {
+        List<T> items = new ArrayList<T>();
+        items.add(item);
+        reveal(message, items);
+    }
+    public static <T> void reveal(final String message, final T[] items) {
+        GuiChoose.getChoices(message, -1, -1, items);
+    }
+    public static <T> void reveal(final String message, final Collection<T> items) {
+        GuiChoose.getChoices(message, -1, -1, items);
+    }
+
     // returned Object will never be null
     public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
         return getChoices(message, min, max, Arrays.asList(choices), null, null);
     }
-    
+
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
         return getChoices(message, min, max, choices, null, null);
     }
@@ -107,7 +120,7 @@ public class GuiChoose {
             }
             throw new RuntimeException("choice required from empty list");
         }
-        
+
         Callable<List<T>> showChoice = new Callable<List<T>>() {
             @Override
             public List<T> call() {
@@ -124,7 +137,7 @@ public class GuiChoose {
                             else {
                                 CMatchUI.SINGLETON_INSTANCE.setCard(card);
                             }
-        
+
                             GuiUtils.clearPanelSelections();
                             GuiUtils.setPanelSelection(card);
                         }
@@ -133,14 +146,14 @@ public class GuiChoose {
                         }
                     }
                 });
-                
+
                 if (selected != null) {
                     c.show(selected);
                 }
                 else {
                     c.show();
                 }
-                
+
                 GuiUtils.clearPanelSelections();
                 return c.getSelectedValues();
             }
@@ -148,7 +161,7 @@ public class GuiChoose {
 
         FutureTask<List<T>> future = new FutureTask<List<T>>(showChoice);
         FThreads.invokeInEdtAndWait(future);
-        try { 
+        try {
             return future.get();
         } catch (Exception e) { // should be no exception here
             e.printStackTrace();
@@ -156,24 +169,16 @@ public class GuiChoose {
         return null;
     }
 
-    // Nothing to choose here. Code uses this to just show a card.
-    public static Card show(final String message, final Card singleChoice) {
-        List<Card> choices = new ArrayList<Card>();
-        choices.add(singleChoice);
-        return one(message, choices);
-    }
-
     public static <T> List<T> many(final String title, final String topCaption, int cnt, final List<T> sourceChoices, Card referenceCard) {
         return order(title, topCaption, cnt, cnt, sourceChoices, null, referenceCard, false);
     }
-    
+
     public static <T> List<T> many(final String title, final String topCaption, int min, int max, final List<T> sourceChoices, Card referenceCard) {
         int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         int m1 = max >= 0 ? sourceChoices.size() - max : -1;
         return order(title, topCaption, m1, m2, sourceChoices, null, referenceCard, false);
     }
 
-    
     public static <T> List<T> order(final String title, final String top, final List<T> sourceChoices, Card referenceCard) {
         return order(title, top, 0, 0, sourceChoices, null, referenceCard, false);
     }
@@ -184,19 +189,18 @@ public class GuiChoose {
         return order("Sideboard", "Main Deck", -1, -1, sideboard, deck, null, true);
     }
 
-    
     private static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final Card referenceCard, final boolean sideboardingMode) {
         // An input box for handling the order of choices.
-        
+
         Callable<List<T>> callable = new Callable<List<T>>() {
             @Override
             public List<T> call() throws Exception {
                 DualListBox<T> dual = new DualListBox<T>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices);
                 dual.setSecondColumnLabelText(top);
-        
+
                 dual.setSideboardMode(sideboardingMode);
-        
+
                 dual.setTitle(title);
                 dual.pack();
                 dual.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
