@@ -942,6 +942,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      */
     public void focusSearch() {
+        this.setHideFilters(false); //ensure filters shown
         this.mainSearchFilter.getMainComponent().requestFocusInWindow();
     }
 
