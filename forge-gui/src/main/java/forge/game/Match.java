@@ -279,7 +279,7 @@ public class Match {
                 if (null != newMain) {
                     CardPool allCards = new CardPool();
                     allCards.addAll(toChange.get(DeckSection.Main));
-                    allCards.addAll(toChange.get(DeckSection.Sideboard));
+                    allCards.addAll(toChange.getOrCreate(DeckSection.Sideboard));
                     for (PaperCard c : newMain) {
                         allCards.remove(c);
                     }
