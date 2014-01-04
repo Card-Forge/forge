@@ -80,6 +80,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
     private boolean allowMultipleSelections = false;
+    private boolean hideFilters = false;
     private final Class<T> genericType;
     private final ArrayList<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
 
@@ -197,27 +198,19 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         final Runnable cmdResetFilters = new Runnable() {
             @Override
             public void run() {
-                lockFiltering = true; //prevent updating filtering from this change until all filters reset
-                for (ItemFilter<? extends T> filter : orderedFilters) {
-                    filter.setEnabled(true);
-                    filter.reset();
-                }
-                mainSearchFilter.reset();
-                lockFiltering = false;
-
-                if (mainSearchFilter.isEnabled()) {
-                    applyFilters();
-                }
-                else {
-                    chkEnableFilters.setSelected(true); //this will apply filters in itemStateChanged handler
-                }
-
+                resetFilters();
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         focus();
                     }
                 });
+            }
+        };
+        final Runnable cmdHideFilters = new Runnable() {
+            @Override
+            public void run() {
+                setHideFilters(!getHideFilters());
             }
         };
 
@@ -237,19 +230,25 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             @Override
             public void run() {
                 JPopupMenu menu = new JPopupMenu("FilterMenu");
-                JMenu addMenu = GuiUtils.createMenu("Add");
-                if (mainSearchFilter.isEnabled()) {
-                    GuiUtils.addMenuItem(addMenu, "Current text search",
-                            KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                            cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
-                    buildAddFilterMenu(addMenu);
+                if (hideFilters) {
+                    GuiUtils.addMenuItem(menu, "Show Filters", null, cmdHideFilters);
                 }
                 else {
-                    addMenu.setEnabled(false);
+                    JMenu addMenu = GuiUtils.createMenu("Add");
+                    if (mainSearchFilter.isEnabled()) {
+                        GuiUtils.addMenuItem(addMenu, "Current text search",
+                                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                                cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
+                        buildAddFilterMenu(addMenu);
+                    }
+                    else {
+                        addMenu.setEnabled(false);
+                    }
+                    menu.add(addMenu);
+                    GuiUtils.addSeparator(menu);
+                    GuiUtils.addMenuItem(menu, "Reset Filters", null, cmdResetFilters);
+                    GuiUtils.addMenuItem(menu, "Hide Filters", null, cmdHideFilters);
                 }
-                menu.add(addMenu);
-                GuiUtils.addSeparator(menu);
-                GuiUtils.addMenuItem(menu, "Reset Filters", null, cmdResetFilters);
                 menu.show(btnFilters, 0, btnFilters.getHeight());
             }
         };
@@ -265,22 +264,31 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     @Override
     public void doLayout() {
-        int number = 0;
-        StringBuilder logicBuilder = new StringBuilder();
+        int buttonPanelHeight = 32;
         LayoutHelper helper = new LayoutHelper(this);
-        for (ItemFilter<? extends T> filter : this.orderedFilters) {
-            filter.setNumber(++number);
-            logicBuilder.append(number + "&");
-            helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
+        if (this.hideFilters) {
+            if (this.pnlButtons.getComponentCount() > 0) {
+                helper.offset(0, -4);
+                helper.fillLine(this.pnlButtons, buttonPanelHeight);
+            }
         }
-        this.txtFilterLogic.setText(logicBuilder.toString());
-        helper.newLine();
-        helper.include(this.chkEnableFilters, 41, FTextField.HEIGHT);
-        helper.offset(-1, 0); //ensure widgets line up
-        helper.include(this.txtFilterLogic, this.txtFilterLogic.getAutoSizeWidth(), FTextField.HEIGHT);
-        helper.fillLine(this.mainSearchFilter.getWidget(), ItemFilter.PANEL_HEIGHT);
-        helper.newLine(-3);
-        helper.fillLine(this.pnlButtons, this.pnlButtons.getComponentCount() > 0 ? 32: 1); //just show border if no bottoms
+        else {
+            int number = 0;
+            StringBuilder logicBuilder = new StringBuilder();
+            for (ItemFilter<? extends T> filter : this.orderedFilters) {
+                filter.setNumber(++number);
+                logicBuilder.append(number + "&");
+                helper.fillLine(filter.getPanel(), ItemFilter.PANEL_HEIGHT);
+            }
+            this.txtFilterLogic.setText(logicBuilder.toString());
+            helper.newLine();
+            helper.include(this.chkEnableFilters, 41, FTextField.HEIGHT);
+            helper.offset(-1, 0); //ensure widgets line up
+            helper.include(this.txtFilterLogic, this.txtFilterLogic.getAutoSizeWidth(), FTextField.HEIGHT);
+            helper.fillLine(this.mainSearchFilter.getWidget(), ItemFilter.PANEL_HEIGHT);
+            helper.newLine(-3);
+            helper.fillLine(this.pnlButtons, this.pnlButtons.getComponentCount() > 0 ? buttonPanelHeight : 1); //just show border if no buttons
+        }
         helper.include(this.btnFilters, 61, FTextField.HEIGHT);
         helper.include(this.lblCaption, this.lblCaption.getAutoSizeWidth(), FTextField.HEIGHT);
         helper.fillLine(this.lblRatio, FTextField.HEIGHT, this.cbViews.getAutoSizeWidth()); //leave room for cbViews
@@ -699,7 +707,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         if (!this.mainSearchFilter.isEmpty()) {
             predicates.add(mainSearchFilter.buildPredicate(this.genericType));
         }
+
         this.filterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
+
         if (this.pool != null) {
             this.updateView(true);
         }
@@ -712,6 +722,65 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      */
     private boolean isUnfiltered() {
         return this.filterPredicate == null;
+    }
+
+    /**
+     * 
+     * getHideFilters.
+     * 
+     * @return true if filters are hidden, false otherwise
+     */
+    public boolean getHideFilters() {
+        return this.hideFilters;
+    }
+
+    /**
+     * 
+     * setHideFilters.
+     * 
+     * @param hideFilters0 - if true, hide the filters, otherwise show them
+     */
+    public void setHideFilters(boolean hideFilters0) {
+        if (this.hideFilters == hideFilters0) { return; }
+        this.hideFilters = hideFilters0;
+
+        boolean visible = !hideFilters0;
+        for (ItemFilter<? extends T> filter : this.orderedFilters) {
+            filter.getPanel().setVisible(visible);
+        }
+        this.chkEnableFilters.setVisible(visible);
+        this.txtFilterLogic.setVisible(visible);
+        this.mainSearchFilter.getWidget().setVisible(visible);
+        this.revalidate();
+
+        if (hideFilters0) {
+            this.resetFilters(); //reset filters when they're hidden
+        }
+        else {
+            this.applyFilters();
+        }
+    }
+
+    /**
+     * 
+     * resetFilters.
+     * 
+     */
+    public void resetFilters() {
+        lockFiltering = true; //prevent updating filtering from this change until all filters reset
+        for (ItemFilter<? extends T> filter : orderedFilters) {
+            filter.setEnabled(true);
+            filter.reset();
+        }
+        mainSearchFilter.reset();
+        lockFiltering = false;
+
+        if (mainSearchFilter.isEnabled()) {
+            applyFilters();
+        }
+        else {
+            chkEnableFilters.setSelected(true); //this will apply filters in itemStateChanged handler
+        }
     }
 
     /**
