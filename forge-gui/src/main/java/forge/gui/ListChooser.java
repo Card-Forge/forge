@@ -103,8 +103,23 @@ public class ListChooser<T> {
             this.lstChoices.setCellRenderer(new TransformedCellRenderer(display));
         }
 
-        this.optionPane = new FOptionPane(null, title, null, new JScrollPane(this.lstChoices), options, 0);
+        this.optionPane = new FOptionPane(null, title, null, new JScrollPane(this.lstChoices), options, -1);
         this.optionPane.setButtonEnabled(0, minChoices == 0);
+
+        this.optionPane.addWindowFocusListener(new WindowFocusListener() {
+            @Override
+            public void windowGainedFocus(final WindowEvent e) {
+                ListChooser.this.lstChoices.grabFocus();
+            }
+
+            @Override
+            public void windowLostFocus(final WindowEvent e) {
+            }
+        });
+
+        if (this.minChoices != 0) {
+            this.optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        }
 
         this.lstChoices.getSelectionModel().addListSelectionListener(new SelListener());
         this.lstChoices.addKeyListener(new KeyAdapter() {
@@ -152,40 +167,23 @@ public class ListChooser<T> {
         }
         int result;
         do {
-            if (this.minChoices != 0) {
-                this.optionPane.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-            }
-
             if (list.contains(item)) {
                 lstChoices.setSelectedValue(item, true);
             }
             else {
                 lstChoices.setSelectedIndex(0);
             }
-
-            this.optionPane.addWindowFocusListener(new WindowFocusListener() {
-                @Override
-                public void windowGainedFocus(final WindowEvent e) {
-                    ListChooser.this.lstChoices.grabFocus();
-                }
-
-                @Override
-                public void windowLostFocus(final WindowEvent e) {
-                }
-            });
             this.optionPane.setVisible(true);
             result = this.optionPane.getResult();
             if (result != 0) {
                 this.lstChoices.clearSelection();
-                break;
             }
             // can't stop closing by ESC, so repeat if cancelled
-        } while (this.minChoices != 0);
+        } while (this.minChoices != 0 && result != 0);
 
         this.optionPane.dispose();
 
-        // this assert checks if we really don't return on a cancel if input is
-        // mandatory
+        // this assert checks if we really don't return on a cancel if input is mandatory
         assert (this.minChoices == 0) || (result == 0);
         this.called = true;
         return (result == 0);
