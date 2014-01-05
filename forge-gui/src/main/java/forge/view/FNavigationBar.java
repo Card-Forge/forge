@@ -63,11 +63,11 @@ public class FNavigationBar extends FTitleBarBase {
         btnForge.setPreferredSize(new Dimension(100, 23));
         FSkin.get(btnForge).setForeground(foreColor);
         FSkin.get(clock).setForeground(foreColor);
-        addControls();        
+        addControls();
         setupPnlReveal();
         updateBtnCloseTooltip();
     }
-    
+
     public void updateBtnCloseTooltip() {
         switch (Singletons.getControl().getCloseAction()) {
         case NONE:
@@ -81,7 +81,7 @@ public class FNavigationBar extends FTitleBarBase {
             break;
         }
     }
-    
+
     @Override
     protected void addControls() {
         add(btnForge);
@@ -103,7 +103,7 @@ public class FNavigationBar extends FTitleBarBase {
         layout.putConstraint(SpringLayout.SOUTH, clock, -5, SpringLayout.SOUTH, this);
         updateClockVisibility();
     }
-    
+
     private NavigationTab addNavigationTab(FScreen screen) {
         NavigationTab tab = new NavigationTab(screen);
         if (tabs.size() == 0) {
@@ -119,7 +119,7 @@ public class FNavigationBar extends FTitleBarBase {
         add(tab);
         return tab;
     }
-    
+
     private NavigationTab getTab(FScreen screen) {
         for (NavigationTab tab : tabs) {
             if (tab.screen == screen) {
@@ -128,11 +128,11 @@ public class FNavigationBar extends FTitleBarBase {
         }
         return null;
     }
-    
+
     public boolean canSwitch(FScreen toScreen) {
         return (selectedTab == null || selectedTab.screen.onSwitching(toScreen));
     }
-    
+
     public void updateSelectedTab() {
         FScreen screen = Singletons.getControl().getCurrentScreen();
         NavigationTab tab = getTab(screen);
@@ -152,14 +152,14 @@ public class FNavigationBar extends FTitleBarBase {
     public void closeSelectedTab() {
         closeTab(selectedTab);
     }
-    
+
     public void closeTab(FScreen screen) {
         NavigationTab tab = getTab(screen);
         if (tab != null) {
             closeTab(tab);
         }
     }
-    
+
     private void closeTab(NavigationTab tab) {
         if (tab == null) { return; }
         if (!tab.screen.onClosing()) { return; } //give screen a chance to perform special close handling and/or cancel closing tab
@@ -181,14 +181,14 @@ public class FNavigationBar extends FTitleBarBase {
             repaint(); //needed or tab visual sticks around
         }
     }
-    
+
     @Override
     public void updateButtons() {
         super.updateButtons();
         updateClockVisibility();
         LayoutMenu.updateFullScreenItemText();
     }
-    
+
     //only show clock if Full Screen
     private void updateClockVisibility() {
         clock.setVisible(this.owner.isFullScreen());
@@ -204,9 +204,9 @@ public class FNavigationBar extends FTitleBarBase {
             }
         });
     }
-    
+
     public void showForgeMenu(boolean hideIfAlreadyShown) {
-        if (!btnForge.isToggled() && btnForge.isEnabled()) {
+        if (!btnForge.isToggled() && forgeMenu.getPopupMenu().isEnabled()) {
             btnForge.setToggled(true);
             forgeMenu.getPopupMenu().show(this, 1, this.getHeight());
         }
@@ -214,12 +214,12 @@ public class FNavigationBar extends FTitleBarBase {
             forgeMenu.hide();
         }
     }
-    
+
     public void onForgeMenuHidden() {
         btnForge.setToggled(false);
         timeMenuHidden = System.currentTimeMillis();
     }
-    
+
     //setup panel used to reveal navigation bar when hidden
     private void setupPnlReveal() {
         pnlReveal.setLocation(0, 0);
@@ -244,7 +244,7 @@ public class FNavigationBar extends FTitleBarBase {
             }
         });
     }
-    
+
     private void startReveal() {
         if (this.getLocation().y == 0) { return; }
         if (revealDir == 0) {
@@ -254,7 +254,7 @@ public class FNavigationBar extends FTitleBarBase {
         }
         revealDir = 1;
     }
-    
+
     private void stopReveal() {
         if (this.getLocation().y == -visibleHeight) { return; }
         if (revealDir == 0) {
@@ -264,7 +264,7 @@ public class FNavigationBar extends FTitleBarBase {
         }
         revealDir = -1;
     }
-    
+
     private void incrementReveal() {
         int newY = this.getLocation().y + revealDir * 2;
         switch (revealDir) {
@@ -291,7 +291,7 @@ public class FNavigationBar extends FTitleBarBase {
         this.setLocation(0, newY);
         checkForRevealChange();
     }
-    
+
     private void checkForRevealChange() {
         if (hidden && this.getHeight() > 0 && !btnForge.isToggled()) { //don't change reveal while Forge menu open
             final Rectangle screenBounds = new Rectangle(this.getLocationOnScreen(), this.getSize());
@@ -335,13 +335,13 @@ public class FNavigationBar extends FTitleBarBase {
             checkForRevealChangeTimer.start();
         }
     }
-    
+
     @Override
     public void setSize(int width, int height) {
         super.setSize(width, height);
         pnlReveal.setSize(width, 1);
     }
-    
+
     public JPanel getPnlReveal() {
         return pnlReveal;
     }
@@ -349,11 +349,11 @@ public class FNavigationBar extends FTitleBarBase {
     @Override
     public void setTitle(String title) {
     }
-    
+
     @Override
     public void setIconImage(Image image) {
     }
-    
+
     private final class NavigationTab extends JLabel implements ILocalRepaint {
         private static final int fontSize = 14;
         private static final int unhoveredAlpha = 150;
@@ -372,7 +372,7 @@ public class FNavigationBar extends FTitleBarBase {
             skin.setIcon(screen0.getTabIcon());
             skin.setForeground(foreColor.alphaColor(unhoveredAlpha));
             skin.setFont(FSkin.getFont(fontSize));
-            
+
             int closeButtonOffset;
             if (screen.allowTabClose()) {
                 btnClose = new CloseButton();
@@ -389,7 +389,7 @@ public class FNavigationBar extends FTitleBarBase {
                 closeButtonOffset = 0;
             }
             setBorder(new EmptyBorder(2, 3, 2, 7 + closeButtonOffset));
-            
+
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -426,7 +426,7 @@ public class FNavigationBar extends FTitleBarBase {
             skin.setFont(selected0 ? FSkin.getBoldFont(fontSize) : FSkin.getFont(fontSize));
             repaintSelf();
         }
-        
+
         @Override
         public void setIcon(Icon icon) {
             ImageIcon imageIcon = ReflectionUtil.safeCast(icon, ImageIcon.class);
@@ -437,7 +437,7 @@ public class FNavigationBar extends FTitleBarBase {
                 super.setIcon(null);
             }
         }
-        
+
         @Override
         public void setEnabled(boolean enabled0) {
             if (!enabled0 && hovered) {
@@ -472,7 +472,7 @@ public class FNavigationBar extends FTitleBarBase {
             g.drawRoundRect(0, 0, width, height, radius, radius);
             super.paintComponent(g);
         }
-        
+
         private class CloseButton extends JLabel implements ILocalRepaint {
             protected JLabelSkin<CloseButton> skin = FSkin.get(this);
             private boolean pressed, hovered;
@@ -513,7 +513,7 @@ public class FNavigationBar extends FTitleBarBase {
                     }
                 });
             }
-            
+
             @Override
             public void setEnabled(boolean enabled0) {
                 if (!enabled0 && hovered) {
@@ -521,17 +521,17 @@ public class FNavigationBar extends FTitleBarBase {
                 }
                 super.setEnabled(enabled0);
             }
-            
+
             @Override
             public void repaintSelf() {
                 final Dimension d = this.getSize();
                 repaint(0, 0, d.width, d.height);
             }
-            
+
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                
+
                 if (hovered) {
                     if (pressed) {
                         skin.setGraphicsColor(g, backColor.stepColor(-40));
