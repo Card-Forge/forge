@@ -48,6 +48,7 @@ import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.quest.QuestController;
 import forge.util.ItemPool;
+import java.util.ArrayList;
 
 //import forge.quest.data.QuestBoosterPack;
 
@@ -64,6 +65,7 @@ import forge.util.ItemPool;
 public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     private final QuestController questData;
     private final DeckController<Deck> controller;
+    private final List<DeckSection> allSections = new ArrayList<DeckSection>();
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
     private boolean sideboardMode = false;
@@ -96,6 +98,9 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     public CEditorQuest(final QuestController questData0) {
         super(FScreen.DECK_EDITOR_QUEST);
         
+        allSections.add(DeckSection.Main);
+        allSections.add(DeckSection.Sideboard);
+
         this.questData = questData0;
 
         final CardManager catalogManager = new CardManager(false);
@@ -226,6 +231,11 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      * Switch between the main deck and the sideboard editor.
      */
     public void switchEditorMode(boolean isSideboarding) {
+        int curindex = allSections.indexOf(sectionMode);
+
+        curindex = curindex == (allSections.size()-1) ? 0 : curindex+1;
+        sectionMode = allSections.get(curindex);
+
         if (isSideboarding) {
             this.getCatalogManager().setPool(this.controller.getModel().getMain());
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
@@ -241,6 +251,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(!isSideboarding);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(!isSideboarding);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(isSideboarding ? "Sideboard" : "Title:");
+
+        this.controller.updateCaptions();
     }
 
     /* (non-Javadoc)
@@ -277,6 +289,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         SItemManagerUtil.resetUI(this);
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setVisible(false);
+
         this.getBtnCycleSection().setVisible(true);
         this.getBtnCycleSection().setCommand(new Command() {
             @Override

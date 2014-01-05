@@ -83,6 +83,7 @@ public final class SItemManagerUtil  {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(true);
 
