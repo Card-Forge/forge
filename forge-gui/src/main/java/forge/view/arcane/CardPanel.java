@@ -681,6 +681,11 @@ public class CardPanel extends JPanel implements CardContainer {
         this.setImage(image);
     }
 
+    public void dispose() {
+        this.setImage((BufferedImage)null);
+        FSkin.remove(this);
+    }
+
     /**
      * Gets the game card.
      * 

@@ -569,6 +569,46 @@ public enum FSkin {
         return compSkin;
     }
 
+    @SuppressWarnings("unchecked")
+    public static <T extends Component> void remove(T comp) {
+        remove(ComponentSkin.skins, comp);
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends Window> void remove(T comp) {
+        remove(WindowSkin.skins, comp);
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JComponent> void remove(T comp) {
+        remove(JComponentSkin.skins, comp);
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JLabel> void remove(T comp) {
+        remove(JLabelSkin.skins, comp);
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends AbstractButton> void remove(T comp) {
+        remove(AbstractButtonSkin.skins, comp);
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JTextComponent> void remove(T comp) {
+        remove(JTextComponentSkin.skins, comp);
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends JTable> void remove(T comp) {
+        remove(JTableSkin.skins, comp);
+    }
+    @SuppressWarnings("unchecked")
+    public static <T extends FPanel> void remove(T comp) {
+        remove(FPanelSkin.skins, comp);
+    }
+    private static <T extends Component, U extends ComponentSkin<T>> void remove(HashMap<T, U> skins, T comp) {
+        U compSkin = skins.get(comp);
+        if (compSkin != null) {
+            compSkin.comp = null;
+            skins.remove(comp);
+        }
+    }
+
     public enum Backgrounds implements SkinProp {
         BG_SPLASH (null),
         BG_TEXTURE (null),

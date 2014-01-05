@@ -38,6 +38,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Constant.Preferences;
 import forge.FThreads;
+import forge.ImageCache;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.Game;
@@ -81,6 +82,7 @@ import forge.quest.io.QuestDataIO;
 import forge.sound.SoundSystem;
 import forge.view.FFrame;
 import forge.view.FView;
+import forge.view.arcane.CardPanel;
 
 /**
  * <p>
@@ -286,6 +288,7 @@ public enum FControl implements KeyEventDispatcher {
 
         clearChildren(JLayeredPane.DEFAULT_LAYER);
         SOverlayUtils.hideOverlay();
+        ImageCache.clear(); //reduce memory usage by clearing image cache when switching screens
 
         this.currentScreen = screen;
 
@@ -436,6 +439,14 @@ public enum FControl implements KeyEventDispatcher {
 
     public final void endCurrentGame() {
         if (this.game == null) { return; }
+
+        //dispose of all card panels on match screen to free up memory
+        List<VField> view = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
+        for (VField v : view) {
+            for (CardPanel p : v.getTabletop().getCardPanels()) {
+                p.dispose();
+            }
+        }
         Singletons.getView().getNavigationBar().closeTab(FScreen.MATCH_SCREEN);
         this.game = null;
     }

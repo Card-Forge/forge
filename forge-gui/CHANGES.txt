@@ -8,11 +8,17 @@ Forge Beta: ##-##-2013 ver 1.5.9
 Release Notes
 -------------
 
+- Memory fixes -
+Card images are now cleared from memory cache when switching screens and between games
+Card display panels are now disposed of at the end of each game
+
+
 - Deck Editor usability improvements -
 Added File menu with shortcuts for common actions in Deck Editor (such as Ctrl+S to save the current deck)
 Support resetting and hiding filters
 Full catalog now available for sideboarding in Deck Editor
 Title field and buttons now available on Current Deck pane when on other sections, with the current section name displaying above the table
+
 
 - More skinned dialogs -
 Most remaining dialogs are now skinned, including all message, confirmation, input, and list choice dialogs
