@@ -94,7 +94,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.table.addFocusListener(new FocusListener() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (!e.isTemporary()) {
+                if (!e.isTemporary() && !skin.isDisposed()) {
                     skin.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
                 }
             }

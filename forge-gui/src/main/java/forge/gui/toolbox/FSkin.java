@@ -96,6 +96,10 @@ public enum FSkin {
             this.comp = comp0;
         }
 
+        public boolean isDisposed() {
+            return this.comp == null;
+        }
+
         public SkinColor getForeground() {
             return this.foreground;
         }
