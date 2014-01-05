@@ -27,6 +27,7 @@ import java.util.TimerTask;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
+import forge.gui.toolbox.FSkin;
 import forge.view.arcane.CardPanel;
 
 
@@ -392,6 +393,9 @@ public abstract class Animation {
                                 animationPanel.setVisible(false);
                                 animationPanel.repaint();
                                 layeredPane.remove(animationPanel);
+                                if (animationPanel != CardPanel.getDragAnimationPanel()) {
+                                    FSkin.dispose(animationPanel);
+                                }
                             }
                         });
                     }

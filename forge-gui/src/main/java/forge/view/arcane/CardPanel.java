@@ -225,7 +225,6 @@ public class CardPanel extends JPanel implements CardContainer, IDisposable {
         }
     }
 
-
     /**
      * <p>
      * Setter for the field <code>displayEnabled</code>.

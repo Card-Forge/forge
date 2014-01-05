@@ -142,8 +142,8 @@ public class CHand implements ICDoc {
             endX = toPos.x;
             endY = toPos.y;
 
-            final CardPanel animationPanel = new CardPanel(placeholder.getGameCard());
             if (Singletons.getView().getFrame().isShowing()) {
+                final CardPanel animationPanel = new CardPanel(placeholder.getGameCard());
                 Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, placeholder,
                         layeredPane, 500);
             }
