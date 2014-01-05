@@ -27,17 +27,19 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
-import forge.gui.SOverlayUtils;
+import forge.Singletons;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
 import forge.util.OperatingSystem;
 
 @SuppressWarnings("serial")
 public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatcher {
-    private static final FSkin.SkinColor borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
+    private static final SkinColor borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private static final int cornerDiameter = 20;
     private static final boolean isSetShapeSupported;
     private static final boolean antiAliasBorder;
@@ -150,13 +152,15 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
             setLocationRelativeTo(JOptionPane.getRootFrame());
             KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this); //support handling keyboard shortcuts in dialog
             if (isModal()) {
-                SOverlayUtils.showOverlay();
+                backdropPanel.setVisible(true);
+                Singletons.getView().getNavigationBar().setMenuShortcutsEnabled(false);
             }
         }
         else {
             KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(this);
             if (isModal()) {
-                SOverlayUtils.hideOverlay();
+                backdropPanel.setVisible(false);
+                Singletons.getView().getNavigationBar().setMenuShortcutsEnabled(true);
             }
         }
         super.setVisible(visible);
@@ -313,5 +317,30 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
     @Override
     public Image getIconImage() {
         return getIconImages().isEmpty() ? null : getIconImages().get(0);
+    }
+
+    private static final BackdropPanel backdropPanel = new BackdropPanel();
+
+    public static JPanel getBackdropPanel() {
+        return backdropPanel;
+    }
+
+    private static class BackdropPanel extends JPanel {
+        private static final SkinColor backColor = FSkin.getColor(FSkin.Colors.CLR_OVERLAY).alphaColor(120);
+
+        private FSkin.JComponentSkin<BackdropPanel> skin = FSkin.get(this);
+
+        private BackdropPanel() {
+            setOpaque(false);
+            setVisible(false);
+            setFocusable(false);
+        }
+
+        @Override
+        public void paintComponent(final Graphics g) {
+            super.paintComponent(g);
+            skin.setGraphicsColor(g, backColor);
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        }
     }
 }

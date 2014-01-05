@@ -303,11 +303,15 @@ public class FNavigationBar extends FTitleBarBase {
             }
         }
     }
-    
+
+    public void setMenuShortcutsEnabled(boolean enabled0) {
+        forgeMenu.getPopupMenu().setEnabled(enabled0);
+    }
+
     @Override
     public void setEnabled(boolean enabled0) {
         btnForge.setEnabled(enabled0);
-        forgeMenu.getPopupMenu().setEnabled(enabled0);
+        setMenuShortcutsEnabled(enabled0);
         for (NavigationTab tab : tabs) {
             tab.setEnabled(enabled0);
         }

@@ -120,6 +120,7 @@ public enum FView {
         lpnDocument.add(navigationBar, NAVIGATION_BAR_LAYER);
         lpnDocument.add(navigationBar.getPnlReveal(), NAVIGATION_BAR_REVEAL_LAYER);
         lpnDocument.add(FOverlay.SINGLETON_INSTANCE.getPanel(), OVERLAY_LAYER);
+        lpnDocument.add(FDialog.getBackdropPanel(), OVERLAY_LAYER);
         // Note: when adding new panels here, keep in mind that the layered pane
         // has a null layout, so new components will be W0 x H0 pixels - gotcha!
         // FControl has a method called "sizeComponents" which will fix this.

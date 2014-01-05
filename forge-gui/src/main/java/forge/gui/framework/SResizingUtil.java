@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import forge.gui.FNetOverlay;
 import forge.gui.toolbox.FAbsolutePositioner;
 import forge.gui.toolbox.FOverlay;
+import forge.view.FDialog;
 import forge.view.FFrame;
 import forge.view.FNavigationBar;
 import forge.view.FView;
@@ -135,6 +136,7 @@ public final class SResizingUtil {
         FAbsolutePositioner.SINGLETON_INSTANCE.containerResized(mainBounds);
         FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
         FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
+        FDialog.getBackdropPanel().setBounds(mainBounds);
 
         pnlInsets.setBounds(mainBounds);
         pnlInsets.validate();
