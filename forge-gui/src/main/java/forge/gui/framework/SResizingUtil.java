@@ -124,6 +124,8 @@ public final class SResizingUtil {
 
         Rectangle mainBounds = frame.getContentPane().getBounds();
 
+        FDialog.getBackdropPanel().setBounds(mainBounds);
+
         int navigationBarHeight = navigationBar.getPreferredSize().height;
         navigationBar.setSize(mainBounds.width, navigationBarHeight);
         navigationBar.validate();
@@ -136,7 +138,6 @@ public final class SResizingUtil {
         FAbsolutePositioner.SINGLETON_INSTANCE.containerResized(mainBounds);
         FOverlay.SINGLETON_INSTANCE.getPanel().setBounds(mainBounds);
         FNetOverlay.SINGLETON_INSTANCE.containerResized(mainBounds);
-        FDialog.getBackdropPanel().setBounds(mainBounds);
 
         pnlInsets.setBounds(mainBounds);
         pnlInsets.validate();

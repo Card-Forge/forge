@@ -60,13 +60,11 @@ import forge.gui.toolbox.FSkin.SkinCursor;
 import forge.model.BuildInfo;
 import forge.properties.NewConstants;
 
-/** */
 public enum FView {
-    /** */
     SINGLETON_INSTANCE;
 
-    /** */
-    public static final Integer NAVIGATION_BAR_LAYER = JLayeredPane.MODAL_LAYER - 1;
+    public static final Integer DIALOG_BACKDROP_LAYER = JLayeredPane.MODAL_LAYER - 1;
+    public static final Integer NAVIGATION_BAR_LAYER = DIALOG_BACKDROP_LAYER - 1;
     public static final Integer NAVIGATION_BAR_REVEAL_LAYER = NAVIGATION_BAR_LAYER - 1;
     public static final Integer OVERLAY_LAYER = NAVIGATION_BAR_REVEAL_LAYER - 1;
     public static final Integer TARGETING_LAYER = OVERLAY_LAYER - 1;
@@ -120,7 +118,7 @@ public enum FView {
         lpnDocument.add(navigationBar, NAVIGATION_BAR_LAYER);
         lpnDocument.add(navigationBar.getPnlReveal(), NAVIGATION_BAR_REVEAL_LAYER);
         lpnDocument.add(FOverlay.SINGLETON_INSTANCE.getPanel(), OVERLAY_LAYER);
-        lpnDocument.add(FDialog.getBackdropPanel(), OVERLAY_LAYER);
+        lpnDocument.add(FDialog.getBackdropPanel(), DIALOG_BACKDROP_LAYER);
         // Note: when adding new panels here, keep in mind that the layered pane
         // has a null layout, so new components will be W0 x H0 pixels - gotcha!
         // FControl has a method called "sizeComponents" which will fix this.

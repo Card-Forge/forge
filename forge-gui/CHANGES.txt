@@ -24,7 +24,7 @@ Title field and buttons now available on Current Deck pane when on other section
 - More skinned dialogs -
 Most remaining dialogs are now skinned, including all message, confirmation, input, and list choice dialogs
 Reveal-style list dialogs now focus OK button by default and support Escape and Close button without showing a Cancel button
-Increased transparency of backdrop behind dialogs
+Increased transparency of backdrop behind dialogs and make it appear over navigation bar instead of disabling navigation bar
 
 
 - Constructed mode -
