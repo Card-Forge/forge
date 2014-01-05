@@ -35,6 +35,7 @@ import forge.Constant;
 import forge.FThreads;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
+import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.view.arcane.util.CardPanelMouseListener;
 
@@ -340,6 +341,7 @@ public abstract class CardPanelContainer extends JPanel {
             CardPanelContainer.this.setMouseDragPanel(null);
         }
         CardPanelContainer.this.hoveredPanel = null;
+        FSkin.dispose(fromPanel);
         CardPanelContainer.this.getCardPanels().remove(fromPanel);
         CardPanelContainer.this.remove(fromPanel);
         CardPanelContainer.this.invalidate();
@@ -359,6 +361,11 @@ public abstract class CardPanelContainer extends JPanel {
             return;
         }
 
+        for (CardPanel p : this.getCardPanels()) {
+            if (!cardPanels.contains(p)) { //dispose of any card panels that have been removed
+                FSkin.dispose(p);
+            }
+        }
         this.getCardPanels().clear();
         this.removeAll();
         this.getCardPanels().addAll(cardPanels);
@@ -378,6 +385,9 @@ public abstract class CardPanelContainer extends JPanel {
      */
     public final void clear() {
         FThreads.assertExecutedByEdt(true);
+        for (CardPanel p : CardPanelContainer.this.getCardPanels()) {
+            FSkin.dispose(p);
+        }
         CardPanelContainer.this.getCardPanels().clear();
         CardPanelContainer.this.removeAll();
         CardPanelContainer.this.setPreferredSize(new Dimension(0, 0));
