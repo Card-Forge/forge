@@ -50,17 +50,6 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
         this.btnText.setSelected(true);
     }
 
-    /**
-     * Merge the given filter with this filter if possible
-     * @param filter
-     * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
-     */
-    @Override
-    @SuppressWarnings("rawtypes")
-    public boolean merge(ItemFilter filter) {
-        return false;
-    }
-
     @Override
     protected final void buildWidget(JPanel widget) {
         super.buildWidget(widget);

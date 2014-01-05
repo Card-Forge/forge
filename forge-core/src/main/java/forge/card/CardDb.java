@@ -105,7 +105,7 @@ public final class CardDb implements ICardDatabase {
     }
 
     private void addCard(PaperCard paperCard) {
-        allCardsByName.put(paperCard.name, paperCard);
+        allCardsByName.put(paperCard.getName(), paperCard);
     }
 
     private void reIndex() {

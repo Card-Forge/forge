@@ -153,8 +153,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
      * @param filter
      * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
      */
-    @SuppressWarnings("rawtypes")
-    public abstract boolean merge(ItemFilter filter);
+    public abstract boolean merge(ItemFilter<?> filter);
 
     protected abstract void buildWidget(JPanel widget);
     protected abstract void doWidgetLayout(LayoutHelper helper);

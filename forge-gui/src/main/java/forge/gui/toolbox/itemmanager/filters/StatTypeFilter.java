@@ -25,6 +25,16 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         buttonMap = new HashMap<SItemManagerUtil.StatTypes, FLabel>();
     }
 
+    protected void addColorButtons(JPanel widget) {
+        addToggleButton(widget, StatTypes.WHITE);
+        addToggleButton(widget, StatTypes.BLUE);
+        addToggleButton(widget, StatTypes.BLACK);
+        addToggleButton(widget, StatTypes.RED);
+        addToggleButton(widget, StatTypes.GREEN);
+        addToggleButton(widget, StatTypes.COLORLESS);
+        addToggleButton(widget, StatTypes.MULTICOLOR);
+    }
+
     @SuppressWarnings("serial")
     protected void addToggleButton(JPanel widget, final StatTypes st) {
         StringBuilder tooltip = new StringBuilder();

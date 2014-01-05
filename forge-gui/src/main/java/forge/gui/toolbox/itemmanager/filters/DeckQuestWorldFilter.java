@@ -6,28 +6,28 @@ import java.util.Set;
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.gui.toolbox.itemmanager.ItemManager;
-import forge.item.PaperCard;
+import forge.item.DeckBox;
 import forge.quest.QuestWorld;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public class CardQuestWorldFilter extends CardFormatFilter {
+public class DeckQuestWorldFilter extends DeckFormatFilter {
     private final Set<QuestWorld> questWorlds = new HashSet<QuestWorld>();
 
-    public CardQuestWorldFilter(ItemManager<? super PaperCard> itemManager0) {
+    public DeckQuestWorldFilter(ItemManager<? super DeckBox> itemManager0) {
         super(itemManager0);
     }
-    public CardQuestWorldFilter(ItemManager<? super PaperCard> itemManager0, QuestWorld questWorld0) {
+    public DeckQuestWorldFilter(ItemManager<? super DeckBox> itemManager0, QuestWorld questWorld0) {
         super(itemManager0);
         this.questWorlds.add(questWorld0);
         this.formats.add(getQuestWorldFormat(questWorld0));
     }
 
     @Override
-    public ItemFilter<PaperCard> createCopy() {
-        CardQuestWorldFilter copy = new CardQuestWorldFilter(itemManager);
+    public ItemFilter<DeckBox> createCopy() {
+        DeckQuestWorldFilter copy = new DeckQuestWorldFilter(itemManager);
         copy.questWorlds.addAll(this.questWorlds);
         for (QuestWorld w : this.questWorlds) {
             copy.formats.add(getQuestWorldFormat(w));
@@ -41,11 +41,11 @@ public class CardQuestWorldFilter extends CardFormatFilter {
         super.reset();
     }
 
-    public static boolean canAddQuestWorld(QuestWorld questWorld, ItemFilter<PaperCard> existingFilter) {
+    public static boolean canAddQuestWorld(QuestWorld questWorld, ItemFilter<DeckBox> existingFilter) {
         if (questWorld.getFormat() == null && Singletons.getModel().getQuest().getMainFormat() == null) {
             return false; //must have format
         }
-        return existingFilter == null || !((CardQuestWorldFilter)existingFilter).questWorlds.contains(questWorld);
+        return existingFilter == null || !((DeckQuestWorldFilter)existingFilter).questWorlds.contains(questWorld);
     }
 
     /**
@@ -55,7 +55,7 @@ public class CardQuestWorldFilter extends CardFormatFilter {
      */
     @Override
     public boolean merge(ItemFilter<?> filter) {
-        CardQuestWorldFilter cardQuestWorldFilter = (CardQuestWorldFilter)filter;
+        DeckQuestWorldFilter cardQuestWorldFilter = (DeckQuestWorldFilter)filter;
         this.questWorlds.addAll(cardQuestWorldFilter.questWorlds);
         for (QuestWorld w : cardQuestWorldFilter.questWorlds) {
             this.formats.add(getQuestWorldFormat(w));

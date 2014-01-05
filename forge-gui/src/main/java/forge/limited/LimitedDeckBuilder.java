@@ -276,7 +276,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
     private void findBasicLandSets() {
         Set<String> sets = new HashSet<String>();
         for (PaperCard cp : aiPlayables) {
-            CardEdition ee = Singletons.getMagicDb().getEditions().get(cp.edition);
+            CardEdition ee = Singletons.getMagicDb().getEditions().get(cp.getEdition());
             if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.apply(ee))
                 sets.add(cp.getEdition());
         }

@@ -68,6 +68,7 @@ forge-core/src/main/java/forge/deck/io/OldDeckFileFormatException.java -text
 forge-core/src/main/java/forge/deck/io/package-info.java -text
 forge-core/src/main/java/forge/deck/package-info.java -text
 forge-core/src/main/java/forge/item/BoosterPack.java -text
+forge-core/src/main/java/forge/item/DeckBox.java -text
 forge-core/src/main/java/forge/item/FatPack.java -text
 forge-core/src/main/java/forge/item/IPaperCard.java -text
 forge-core/src/main/java/forge/item/InventoryItem.java -text
@@ -15473,6 +15474,7 @@ forge-gui/src/main/java/forge/gui/toolbox/imaging/FImagePanel.java -text
 forge-gui/src/main/java/forge/gui/toolbox/imaging/FImageUtil.java -text
 forge-gui/src/main/java/forge/gui/toolbox/imaging/ImageUtil.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/CardManager.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/DeckManager.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/ItemManager.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/ItemManagerContainer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/ItemManagerModel.java -text
@@ -15490,6 +15492,13 @@ forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardSearchFilter.j
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardSetFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardToughnessFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardTypeFilter.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckColorFilter.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckFormatFilter.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckQuestWorldFilter.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckSearchFilter.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckSetFilter.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckStatTypeFilter.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/FormatFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/ItemFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/ListLabelFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/StatTypeFilter.java -text

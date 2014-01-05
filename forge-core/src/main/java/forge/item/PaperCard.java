@@ -35,10 +35,10 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     private final transient CardRules rules;
 
     // These fields are kinda PK for PrintedCard
-    public final String name;
-    public final String edition;
-    public final int artIndex;
-    public final boolean foil;
+    private final String name;
+    private final String edition;
+    private final int artIndex;
+    private final boolean foil;
 
     // Calculated fields are below:
     private final transient CardRarity rarity; // rarity is given in ctor when set is assigned

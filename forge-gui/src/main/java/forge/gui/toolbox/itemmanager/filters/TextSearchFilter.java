@@ -57,8 +57,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
      * @return true if filter merged in or to suppress adding a new filter, false to allow adding new filter
      */
     @Override
-    @SuppressWarnings("rawtypes")
-    public boolean merge(ItemFilter filter) {
+    public boolean merge(ItemFilter<?> filter) {
         return false;
     }
 

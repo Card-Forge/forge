@@ -7,16 +7,16 @@ import java.util.Set;
 import forge.game.GameFormat;
 import forge.gui.home.quest.DialogChooseSets;
 import forge.gui.toolbox.itemmanager.ItemManager;
-import forge.item.PaperCard;
+import forge.item.DeckBox;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public class CardSetFilter extends CardFormatFilter {
+public class DeckSetFilter extends DeckFormatFilter {
     private final Set<String> sets = new HashSet<String>();
 
-    public CardSetFilter(ItemManager<? super PaperCard> itemManager0, Collection<String> sets0, boolean allowReprints0) {
+    public DeckSetFilter(ItemManager<? super DeckBox> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
         this.sets.addAll(sets0);
         this.formats.add(new GameFormat(null, this.sets, null));
@@ -24,8 +24,8 @@ public class CardSetFilter extends CardFormatFilter {
     }
 
     @Override
-    public ItemFilter<PaperCard> createCopy() {
-        return new CardSetFilter(itemManager, this.sets, this.allowReprints);
+    public ItemFilter<DeckBox> createCopy() {
+        return new DeckSetFilter(itemManager, this.sets, this.allowReprints);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class CardSetFilter extends CardFormatFilter {
      */
     @Override
     public boolean merge(ItemFilter<?> filter) {
-        CardSetFilter cardSetFilter = (CardSetFilter)filter;
+        DeckSetFilter cardSetFilter = (DeckSetFilter)filter;
         this.sets.addAll(cardSetFilter.sets);
         this.allowReprints = cardSetFilter.allowReprints;
         this.formats.clear();

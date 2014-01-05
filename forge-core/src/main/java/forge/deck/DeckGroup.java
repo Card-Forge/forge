@@ -134,5 +134,4 @@ public class DeckGroup extends DeckBase {
             return arg1.getName();
         }
     };
-
 }
