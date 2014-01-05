@@ -7871,10 +7871,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
     }
 
-    public final void setRandomArt() {
-        
-    }
-    
     /**
      *
      * TODO Write javadoc for this method.
