@@ -99,12 +99,13 @@ public class Match {
      */
     public void startGame(final Game game, final CountDownLatch latch) {
         final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
+        final boolean useRandomArt = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_CARD_ART);
 
         // This code could be run run from EDT.
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                prepareAllZones(game, canRandomFoil);
+                prepareAllZones(game, canRandomFoil, useRandomArt);
 
                 if (useAnte) {  // Deciding which cards go to ante
                     Multimap<Player, Card> list = game.chooseCardsForAnte();
@@ -236,24 +237,37 @@ public class Match {
         return myRemovedAnteCards;
     }
 
-    private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil, Random generator) {
+    private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool section, boolean canRandomFoil, boolean useRandomArt, Random generator) {
         PlayerZone library = player.getZone(zoneType);
         List<Card> newLibrary = new ArrayList<Card>();
         for (final Entry<PaperCard, Integer> stackOfCards : section) {
             final PaperCard cp = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
-                final Card card = Card.fromPaperCard(cp, player);
+
+                // apply random pictures for cards
+                // TODO: potentially suboptimal implementation. Do NOT randomly remove this code! If you know how to implement
+                // it better, feel free to do so. Until then, unfortunately, this is the best implementation thus far.
+                PaperCard cpi = null;
+                if (useRandomArt) {
+                    cpi = Singletons.getMagicDb().getCommonCards().getCard(cp.getName(), cp.getEdition(), -1);
+                    if ( cp.isFoil() )
+                        cpi = Singletons.getMagicDb().getCommonCards().getFoiled(cpi);
+                }
+                
+                final Card card = cpi == null ? Card.fromPaperCard(cp, player) : Card.fromPaperCard(cpi, player);
+
                 // Assign card-specific foiling or random foiling on approximately 1:20 cards if enabled
                 if (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
                     card.setRandomFoil();
                 }
+
                 newLibrary.add(card);
             }
         }
         library.setCards(newLibrary);
     }
 
-    private void prepareAllZones(final Game game, final boolean canRandomFoil) {
+    private void prepareAllZones(final Game game, final boolean canRandomFoil, final boolean useRandomArt) {
         // need this code here, otherwise observables fail
         Trigger.resetIDs();
         game.getTriggerHandler().clearDelayedTrigger();
@@ -304,9 +318,9 @@ public class Match {
 
             Random generator = MyRandom.getRandom();
 
-            preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), canRandomFoil, generator);
+            preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), canRandomFoil, useRandomArt, generator);
             if (myDeck.has(DeckSection.Sideboard)) {
-                preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), canRandomFoil, generator);
+                preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), canRandomFoil, useRandomArt, generator);
             }
             player.shuffle(null);
 
