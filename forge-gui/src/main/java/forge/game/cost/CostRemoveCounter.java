@@ -63,7 +63,7 @@ public class CostRemoveCounter extends CostPartWithList {
             super(cntCounters, cntCounters);
             this.validChoices = validCards;
             counterType = cType;
-            cardsChosen = cntCounters > 1 ? new HashMap<Card, Integer>() : null; 
+            cardsChosen = cntCounters > 0 ? new HashMap<Card, Integer>() : null; 
         }
 
         @Override
@@ -109,7 +109,7 @@ public class CostRemoveCounter extends CostPartWithList {
         }
 
         public int getTimesSelected(Card c) {
-            return cardsChosen.containsKey(c) ? 0 : cardsChosen.get(c).intValue();
+            return cardsChosen.containsKey(c) ? cardsChosen.get(c).intValue() : 0;
         }
 
         @Override
