@@ -17,15 +17,20 @@
  */
 package forge.gui.deckeditor.controllers;
 
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map.Entry;
 
 import javax.swing.JMenu;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.deck.DeckBase;
 import forge.deck.DeckSection;
+import forge.gui.GuiUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.menus.CDeckEditorUIMenus;
 import forge.gui.framework.DragCell;
@@ -34,6 +39,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SRearrangingUtil;
 import forge.gui.menus.IMenuProvider;
+import forge.gui.toolbox.ContextMenuBuilder;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
@@ -57,19 +63,6 @@ import forge.view.FView;
  * @param <TModel> extends {@link forge.deck.DeckBase}
  */
 public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends DeckBase> implements IMenuProvider {
-    public interface ContextMenuBuilder {
-        /**
-         * Adds move-related items to the context menu
-         * 
-         * @param verb Examples: "Sell", "Add"
-         * @param nounSingular Examples: "item", "card"
-         * @param nounPlural Examples: "items", "cards"
-         * @param destination Examples: null, "to deck", "to sideboard"
-         */
-        public void addMoveItems (String verb, String nounSingular, String nounPlural, String destination);
-        public void addMoveAlternateItems (String verb, String nounSingular, String nounPlural, String destination);
-    }
-
     public boolean listenersHooked;
     private final FScreen screen;
     private ItemManager<TItem> catalogManager;
@@ -183,8 +176,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
      */
     protected abstract void onRemoveItems(Iterable<Entry<TItem, Integer>> items, boolean toAlternate);
 
-    public abstract void buildAddContextMenu(ContextMenuBuilder cmb);
-    public abstract void buildRemoveContextMenu(ContextMenuBuilder cmb);
+    protected abstract void buildAddContextMenu(EditorContextMenuBuilder cmb);
+    protected abstract void buildRemoveContextMenu(EditorContextMenuBuilder cmb);
     
     /**
      * Resets the cards in the catalog table and current deck table.
@@ -320,4 +313,136 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public FLabel getBtnRemove()  { return btnRemove; }
     public FLabel getBtnRemove4() { return btnRemove4; }
     public FLabel getBtnCycleSection() { return btnCycleSection; }
+
+    public ContextMenuBuilder createContextMenuBuilder(boolean isAddContextMenu0) {
+        return new EditorContextMenuBuilder(isAddContextMenu0);
+    }
+
+    protected class EditorContextMenuBuilder implements ContextMenuBuilder {
+        private final boolean isAddContextMenu;
+        private JPopupMenu menu;
+
+        private EditorContextMenuBuilder(boolean isAddContextMenu0) {
+            isAddContextMenu = isAddContextMenu0;
+        }
+
+        private ItemManager<?> getItemManager() {
+            return isAddContextMenu ? catalogManager : deckManager;
+        }
+
+        private ItemManager<?> getNextItemManager() {
+            return isAddContextMenu ? deckManager : catalogManager;
+        }
+
+        private void moveCard(boolean toAlternate, int qty) {
+            if (isAddContextMenu) {
+                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, qty);
+            }
+            else {
+                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, qty);
+            }
+        }
+
+        @Override
+        public void buildContextMenu(JPopupMenu menu) {
+            this.menu = menu; //cache menu while controller populates menu
+            if (isAddContextMenu) {
+                buildAddContextMenu(this);
+            }
+            else {
+                buildRemoveContextMenu(this);
+            }
+            this.menu = null;
+
+            menu.addSeparator();
+
+            GuiUtils.addMenuItem(menu, "Jump to previous table",
+                    KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0),
+                    new Runnable() {
+                @Override
+                public void run() {
+                    getNextItemManager().focus();
+                }
+            });
+            GuiUtils.addMenuItem(menu, "Jump to next table",
+                    KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0),
+                    new Runnable() {
+                @Override
+                public void run() {
+                    getNextItemManager().focus();
+                }
+            });
+            GuiUtils.addMenuItem(menu, "Jump to text filter",
+                    KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                    new Runnable() {
+                @Override
+                public void run() {
+                    getItemManager().focusSearch();
+                }
+            });
+        }
+
+        private String doNoun(String nounSingular, String nounPlural) {
+            int numSelected = getItemManager().getSelectionCount();
+            if (1 == numSelected) {
+                return nounSingular;
+            }
+            return String.format("%d %s", numSelected, nounPlural);
+        }
+
+        private String doDest(String destination) {
+            if (null == destination) {
+                return "";
+            }
+            return " " + destination;
+        }
+
+        public void addMoveItems(String verb, String nounSingular, String nounPlural, String destination) {
+            String noun = doNoun(nounSingular, nounPlural);
+            String dest = doDest(destination);
+
+            GuiUtils.addMenuItem(menu,
+                    String.format("%s %s%s", verb, noun, dest),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), new Runnable() {
+                        @Override
+                        public void run() {
+                            moveCard(false, 1);
+                        }
+                    }, true, true);
+            GuiUtils.addMenuItem(menu,
+                    String.format("%s 4 copies of %s%s", verb, noun, dest),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.SHIFT_DOWN_MASK), new Runnable() {
+                        @Override
+                        public void run() {
+                            moveCard(false, 4);
+                        }
+                    });
+        }
+
+        public void addMoveAlternateItems(String verb, String nounSingular, String nounPlural, String destination) {
+            String noun = doNoun(nounSingular, nounPlural);
+            String dest = doDest(destination);
+
+            // yes, CTRL_DOWN_MASK and not getMenuShortcutKeyMask().  On OSX, cmd-space is hard-coded to bring up Spotlight
+            GuiUtils.addMenuItem(menu,
+                    String.format("%s %s%s", verb, noun, dest),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.CTRL_DOWN_MASK), new Runnable() {
+                        @Override
+                        public void run() {
+                            moveCard(true, 1);
+                        }
+                    });
+
+            // getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
+            GuiUtils.addMenuItem(menu,
+                    String.format("%s 4 copies of %s%s", verb, noun, dest),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            moveCard(true, 4);
+                        }
+                    });
+        }
+    }
 }

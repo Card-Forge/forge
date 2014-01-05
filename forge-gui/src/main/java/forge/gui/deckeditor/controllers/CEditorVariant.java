@@ -108,12 +108,12 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
     }
 
     @Override
-    public void buildAddContextMenu(ContextMenuBuilder cmb) {
+    protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems("Move", "card", "cards", "to deck");
     }
     
     @Override
-    public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
+    protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems("Move", "card", "cards", "to sideboard");
     }
 

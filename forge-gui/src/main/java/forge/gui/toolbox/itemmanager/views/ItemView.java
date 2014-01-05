@@ -38,15 +38,17 @@ public abstract class ItemView<T extends InventoryItem> {
     }
 
     public void initialize() {
+        final JComponent comp = this.getComponent();
+        
         //hook incremental search functionality
         final IncrementalSearch incrementalSearch  = new IncrementalSearch();
-        this.getComponent().addFocusListener(new FocusAdapter() {
+        comp.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent arg0) {
                 incrementalSearch.cancel();
             }
         });
-        this.getComponent().addKeyListener(incrementalSearch);
+        comp.addKeyListener(incrementalSearch);
     }
 
     public ItemManager<T> getItemManager() {

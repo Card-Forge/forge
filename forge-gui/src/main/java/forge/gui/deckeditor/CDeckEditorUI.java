@@ -17,15 +17,11 @@
  */
 package forge.gui.deckeditor;
 
-import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -33,7 +29,6 @@ import javax.swing.event.ListSelectionListener;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.DeckBase;
-import forge.gui.GuiUtils;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.deckeditor.controllers.CProbabilities;
@@ -45,7 +40,6 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
-import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
@@ -195,120 +189,10 @@ public enum CDeckEditorUI implements ICDoc {
         }, Integer.MAX_VALUE);
     }
 
-    //========== Other methods
-    private interface _MoveCard {
-        void moveCard(boolean toAlternate, int qty);
-    }
-
-    private class _ContextMenuBuilder implements ACEditorBase.ContextMenuBuilder {
-        private final MouseEvent  _e;
-        private final ItemManager<?> _itemManager;
-        private final ItemManager<?> _nextItemManager;
-        private final _MoveCard   _onMove;
-        private final JPopupMenu  _menu = new JPopupMenu("ItemViewContextMenu");
-
-        public _ContextMenuBuilder(MouseEvent e, ItemManager<?> itemManager, ItemManager<?> nextItemManager, _MoveCard onMove) {
-            _e         = e;
-            _itemManager = itemManager;
-            _nextItemManager = nextItemManager;
-            _onMove    = onMove;
-
-            //ensure the item manager has focus
-            itemManager.focus();
-
-            //if item under the cursor is not selected, select it
-            int index = itemManager.getTable().getIndexAtPoint(e.getPoint());
-            boolean needSelection = true;
-            for (Integer selectedIndex : itemManager.getSelectedIndices()) {
-                if (selectedIndex == index) {
-                    needSelection = false;
-                    break;
-                }
-            }
-            if (needSelection) {
-                itemManager.setSelectedIndex(index);
-            }
-        }
-
-        private void show() {
-            _menu.addSeparator();
-
-            GuiUtils.addMenuItem(_menu, "Jump to previous table",
-                    KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), new Runnable() {
-                @Override public void run() { _nextItemManager.focus(); }
-            });
-            GuiUtils.addMenuItem(_menu, "Jump to next table",
-                    KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), new Runnable() {
-                @Override public void run() { _nextItemManager.focus(); }
-            });
-            GuiUtils.addMenuItem(_menu, "Jump to text filter",
-                    KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                    new Runnable() {
-                @Override public void run() {
-                    _itemManager.focusSearch();
-                }
-            });
-
-            _menu.show(_e.getComponent(), _e.getX(), _e.getY());
-        }
-
-        private String _doNoun(String nounSingular, String nounPlural) {
-            int numSelected = _itemManager.getSelectionCount();
-            if (1 == numSelected) {
-                return nounSingular;
-            }
-            return String.format("%d %s", numSelected, nounPlural);
-        }
-
-        private String _doDest(String destination) {
-            if (null == destination) {
-                return "";
-            }
-            return " " + destination;
-        }
-
-        @Override
-        public void addMoveItems(String verb, String nounSingular, String nounPlural, String destination) {
-            String noun = _doNoun(nounSingular, nounPlural);
-            String dest = _doDest(destination);
-
-            GuiUtils.addMenuItem(_menu,
-                    String.format("%s %s%s", verb, noun, dest),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), new Runnable() {
-                        @Override public void run() { _onMove.moveCard(false, 1); }
-                    }, true, true);
-            GuiUtils.addMenuItem(_menu,
-                    String.format("%s 4 copies of %s%s", verb, noun, dest),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.SHIFT_DOWN_MASK), new Runnable() {
-                        @Override public void run() { _onMove.moveCard(false, 4); }
-                    });
-        }
-
-        @Override
-        public void addMoveAlternateItems(String verb, String nounSingular, String nounPlural, String destination) {
-            String noun = _doNoun(nounSingular, nounPlural);
-            String dest = _doDest(destination);
-
-            // yes, CTRL_DOWN_MASK and not getMenuShortcutKeyMask().  On OSX, cmd-space is hard-coded to bring up Spotlight
-            GuiUtils.addMenuItem(_menu,
-                    String.format("%s %s%s", verb, noun, dest),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.CTRL_DOWN_MASK), new Runnable() {
-                        @Override public void run() { _onMove.moveCard(true, 1); }
-                    });
-
-            // getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
-            GuiUtils.addMenuItem(_menu,
-                    String.format("%s 4 copies of %s%s", verb, noun, dest),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                    new Runnable() {
-                        @Override public void run() { _onMove.moveCard(true, 4); }
-                    });
-        }
-    }
-
     /**
      * Set current editor controller
      */
+    @SuppressWarnings("serial")
     private void setCurrentEditorController(ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController0) {
         this.childController = childController0;
         Singletons.getControl().getForgeMenu().setProvider(childController0);
@@ -362,48 +246,21 @@ public enum CDeckEditorUI implements ICDoc {
                 }
             });
 
-            final _MoveCard onAdd = new _MoveCard() {
+            catView.setItemActivateCommand(new Command() {
                 @Override
-                public void moveCard(boolean toAlternate, int qty) {
-                    addSelectedCards(toAlternate, qty);
-                }
-            };
-            final _MoveCard onRemove = new _MoveCard() {
-                @Override
-                public void moveCard(boolean toAlternate, int qty) {
-                    removeSelectedCards(toAlternate, qty);
-                }
-            };
-
-            catTable.getComponent().addMouseListener(new FMouseAdapter() {
-                @Override
-                public void onLeftDoubleClick(MouseEvent e) {
-                    if (e.isConsumed()) { return; } //don't add cards if inline button double clicked
+                public void run() {
                     addSelectedCards(false, 1);
                 }
-
-                @Override
-                public void onRightClick(MouseEvent e) {
-                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, catView, deckView, onAdd);
-                    childController.buildAddContextMenu(cmb);
-                    cmb.show();
-                }
             });
-
-            deckTable.getComponent().addMouseListener(new FMouseAdapter() {
+            deckView.setItemActivateCommand(new Command() {
                 @Override
-                public void onLeftDoubleClick(MouseEvent e) {
-                    if (e.isConsumed()) { return; } //don't remove cards if inline button double clicked
+                public void run() {
                     removeSelectedCards(false, 1);
                 }
-
-                @Override
-                public void onRightClick(MouseEvent e) {
-                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, deckView, catView, onRemove);
-                    childController.buildRemoveContextMenu(cmb);
-                    cmb.show();
-                }
             });
+
+            catView.setContextMenuBuilder(childController.createContextMenuBuilder(true));
+            deckView.setContextMenuBuilder(childController.createContextMenuBuilder(false));
 
             //set card when selection changes
             catView.addSelectionListener(new ListSelectionListener() {

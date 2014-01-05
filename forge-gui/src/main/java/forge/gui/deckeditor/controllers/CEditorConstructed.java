@@ -150,13 +150,13 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     }
 
     @Override
-    public void buildAddContextMenu(ContextMenuBuilder cmb) {
+    protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems(sectionMode == DeckSection.Sideboard ? "Move" : "Add", "card", "cards", sectionMode == DeckSection.Sideboard ? "to sideboard" : "to deck");
         cmb.addMoveAlternateItems(sectionMode == DeckSection.Sideboard ? "Remove" : "Add", "card", "cards", sectionMode == DeckSection.Sideboard ? "from deck" : "to sideboard");
     }
     
     @Override
-    public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
+    protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems(sectionMode == DeckSection.Sideboard ? "Move" : "Remove", "card", "cards", sectionMode == DeckSection.Sideboard ? "to deck" : "from deck");
         cmb.addMoveAlternateItems(sectionMode == DeckSection.Sideboard ? "Remove" : "Move", "card", "cards", sectionMode == DeckSection.Sideboard ? "from sideboard" : "to sideboard");
     }

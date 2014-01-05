@@ -433,14 +433,14 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     }
     
     @Override
-    public void buildAddContextMenu(ContextMenuBuilder cmb) {
+    protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         if (!showingFullCatalog) {
             cmb.addMoveItems("Buy", "item", "items", null);
         }
     }
     
     @Override
-    public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
+    protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
         if (!showingFullCatalog) {
             cmb.addMoveItems("Sell", "card", "cards", null);
         }

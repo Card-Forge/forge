@@ -22,6 +22,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +47,7 @@ import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.gui.GuiUtils;
+import forge.gui.toolbox.ContextMenuBuilder;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -81,6 +83,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private boolean alwaysNonUnique = false;
     private boolean allowMultipleSelections = false;
     private boolean hideFilters = false;
+    private Command itemActivateCommand;
+    private ContextMenuBuilder contextMenuBuilder;
     private final Class<T> genericType;
     private final ArrayList<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
 
@@ -973,5 +977,44 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     public Iterable<ListSelectionListener> getSelectionListeners() {
     	return selectionListeners;
+    }
+    
+    public void setItemActivateCommand(Command itemActivateCommand0) {
+        this.itemActivateCommand = itemActivateCommand0;
+    }
+
+    public void activateSelectedItems() {
+        if (this.itemActivateCommand != null) {
+            this.itemActivateCommand.run();
+        }
+    }
+
+    public void setContextMenuBuilder(ContextMenuBuilder contextMenuBuilder0) {
+        this.contextMenuBuilder = contextMenuBuilder0;
+    }
+
+    public void showContextMenu(MouseEvent e) {
+        if (this.contextMenuBuilder == null) { return; }
+
+        //ensure the item manager has focus
+        this.focus();
+
+        //if item under the cursor is not selected, select it
+        int index = this.getTable().getIndexAtPoint(e.getPoint());
+        boolean needSelection = true;
+        for (Integer selectedIndex : this.getSelectedIndices()) {
+            if (selectedIndex == index) {
+                needSelection = false;
+                break;
+            }
+        }
+        if (needSelection) {
+            this.setSelectedIndex(index);
+        }
+
+        JPopupMenu menu = new JPopupMenu("ItemManagerContextMenu");
+        this.contextMenuBuilder.buildContextMenu(menu);
+
+        menu.show(e.getComponent(), e.getX(), e.getY());
     }
 }

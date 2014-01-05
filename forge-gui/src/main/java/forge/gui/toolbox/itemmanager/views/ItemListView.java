@@ -108,6 +108,18 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 }
             }
         });
+        this.table.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftDoubleClick(MouseEvent e) {
+                if (e.isConsumed()) { return; } //don't activate if inline button double clicked
+                getItemManager().activateSelectedItems();
+            }
+
+            @Override
+            public void onRightClick(MouseEvent e) {
+                getItemManager().showContextMenu(e);
+            }
+        });
 
         this.skin.setFont(FSkin.getFont(12));
         this.table.setBorder(null);

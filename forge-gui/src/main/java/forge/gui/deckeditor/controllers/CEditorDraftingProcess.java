@@ -116,12 +116,12 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     }
 
     @Override
-    public void buildAddContextMenu(ContextMenuBuilder cmb) {
+    protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         cmb.addMoveItems("Draft", "card", "cards", null);
     }
     
     @Override
-    public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
+    protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
         // no valid remove options
     }
 

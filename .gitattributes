@@ -15443,6 +15443,7 @@ forge-gui/src/main/java/forge/gui/player/PlayerControllerHuman.java -text
 forge-gui/src/main/java/forge/gui/player/TargetSelection.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/player/package-info.java -text
 forge-gui/src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
+forge-gui/src/main/java/forge/gui/toolbox/ContextMenuBuilder.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FAbsolutePositioner.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FButton.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FCheckBox.java -text
