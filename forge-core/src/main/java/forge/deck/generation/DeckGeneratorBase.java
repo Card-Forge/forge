@@ -118,7 +118,8 @@ public abstract class DeckGeneratorBase {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Cr12");
             }
 
-            tDeck.add(cp);
+            tDeck.add(cardDb.getCard(cp.getName(), false));
+
             final int n = this.cardCounts.get(cp.getName());
             this.cardCounts.put(cp.getName(), n + 1);
             if( n + 1 == this.maxDuplicates )
