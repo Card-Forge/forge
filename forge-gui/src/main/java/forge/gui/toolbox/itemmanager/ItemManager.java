@@ -141,6 +141,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         if (this.initialized) { return; } //avoid initializing more than once
 
         //build table view
+        this.table.initialize();
         this.viewScroller.setOpaque(false);
         this.viewScroller.getViewport().setOpaque(false);
         this.viewScroller.setBorder(null);
@@ -868,6 +869,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      */
     public JPanel getPnlButtons() {
         return this.pnlButtons;
+    }
+
+    /**
+     * 
+     * isIncrementalSearchActive.
+     * 
+     * @return true if an incremental search is currently active
+     */
+    public boolean isIncrementalSearchActive() {
+        return this.table.isIncrementalSearchActive();
     }
 
     /**

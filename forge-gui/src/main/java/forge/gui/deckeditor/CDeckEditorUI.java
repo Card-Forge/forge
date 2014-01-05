@@ -17,14 +17,7 @@
  */
 package forge.gui.deckeditor;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -33,16 +26,9 @@ import java.util.Map.Entry;
 
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import org.apache.commons.lang3.CharUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import forge.Command;
 import forge.Singletons;
@@ -59,9 +45,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
-import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FMouseAdapter;
-import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
@@ -83,7 +67,6 @@ public enum CDeckEditorUI implements ICDoc {
 
     private final HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>> screenChildControllers;
 	private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
-    private boolean isFindingAsYouType = false;
 
     private CDeckEditorUI() {
         screenChildControllers = new HashMap<FScreen, ACEditorBase<? extends InventoryItem, ? extends DeckBase>>();
@@ -211,19 +194,19 @@ public enum CDeckEditorUI implements ICDoc {
             }
         }, Integer.MAX_VALUE);
     }
-    
+
     //========== Other methods
     private interface _MoveCard {
         void moveCard(boolean toAlternate, int qty);
     }
-    
+
     private class _ContextMenuBuilder implements ACEditorBase.ContextMenuBuilder {
         private final MouseEvent  _e;
         private final ItemManager<?> _itemManager;
         private final ItemManager<?> _nextItemManager;
         private final _MoveCard   _onMove;
         private final JPopupMenu  _menu = new JPopupMenu("ItemViewContextMenu");
-        
+
         public _ContextMenuBuilder(MouseEvent e, ItemManager<?> itemManager, ItemManager<?> nextItemManager, _MoveCard onMove) {
             _e         = e;
             _itemManager = itemManager;
@@ -246,10 +229,10 @@ public enum CDeckEditorUI implements ICDoc {
                 itemManager.setSelectedIndex(index);
             }
         }
-        
+
         private void show() {
             _menu.addSeparator();
-            
+
             GuiUtils.addMenuItem(_menu, "Jump to previous table",
                     KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), new Runnable() {
                 @Override public void run() { _nextItemManager.focus(); }
@@ -276,14 +259,14 @@ public enum CDeckEditorUI implements ICDoc {
             }
             return String.format("%d %s", numSelected, nounPlural);
         }
-        
+
         private String _doDest(String destination) {
             if (null == destination) {
                 return "";
             }
             return " " + destination;
         }
-        
+
         @Override
         public void addMoveItems(String verb, String nounSingular, String nounPlural, String destination) {
             String noun = _doNoun(nounSingular, nounPlural);
@@ -300,19 +283,19 @@ public enum CDeckEditorUI implements ICDoc {
                         @Override public void run() { _onMove.moveCard(false, 4); }
                     });
         }
-        
+
         @Override
         public void addMoveAlternateItems(String verb, String nounSingular, String nounPlural, String destination) {
             String noun = _doNoun(nounSingular, nounPlural);
             String dest = _doDest(destination);
-            
+
             // yes, CTRL_DOWN_MASK and not getMenuShortcutKeyMask().  On OSX, cmd-space is hard-coded to bring up Spotlight
             GuiUtils.addMenuItem(_menu,
                     String.format("%s %s%s", verb, noun, dest),
                     KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.CTRL_DOWN_MASK), new Runnable() {
                         @Override public void run() { _onMove.moveCard(true, 1); }
                     });
-            
+
             // getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
             GuiUtils.addMenuItem(_menu,
                     String.format("%s 4 copies of %s%s", verb, noun, dest),
@@ -322,7 +305,7 @@ public enum CDeckEditorUI implements ICDoc {
                     });
         }
     }
-    
+
     /**
      * Set current editor controller
      */
@@ -339,12 +322,12 @@ public enum CDeckEditorUI implements ICDoc {
 
         VCardCatalog.SINGLETON_INSTANCE.setItemManager(catView);
         VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckView);
-        
+
         if (!childController.listenersHooked) { //hook listeners the first time the controller is updated
             catTable.getComponent().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
-                    if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
+                    if (!catView.isIncrementalSearchActive() && KeyEvent.VK_SPACE == e.getKeyCode()) {
                         addSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                     }
                     else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
@@ -359,11 +342,11 @@ public enum CDeckEditorUI implements ICDoc {
                     }
                 }
             });
-    
+
             deckTable.getComponent().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
-                    if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
+                    if (!catView.isIncrementalSearchActive() && KeyEvent.VK_SPACE == e.getKeyCode()) {
                         removeSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                     }
                     else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
@@ -378,7 +361,7 @@ public enum CDeckEditorUI implements ICDoc {
                     }
                 }
             });
-    
+
             final _MoveCard onAdd = new _MoveCard() {
                 @Override
                 public void moveCard(boolean toAlternate, int qty) {
@@ -406,7 +389,7 @@ public enum CDeckEditorUI implements ICDoc {
                     cmb.show();
                 }
             });
-    
+
             deckTable.getComponent().addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftDoubleClick(MouseEvent e) {
@@ -422,26 +405,6 @@ public enum CDeckEditorUI implements ICDoc {
                 }
             });
 
-            final _FindAsYouType catFind  = new _FindAsYouType(catView);
-            final _FindAsYouType deckFind = new _FindAsYouType(deckView);
-    
-            catTable.getComponent().addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusLost(FocusEvent arg0) {
-                    catFind.cancel();
-                }
-            });
-            deckTable.getComponent().addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusLost(FocusEvent arg0) {
-                    deckFind.cancel();
-                }
-            });
-            
-            // highlight items as the user types a portion of their names
-            catTable.getComponent().addKeyListener(catFind);
-            deckTable.getComponent().addKeyListener(deckFind);
-            
             //set card when selection changes
             catView.addSelectionListener(new ListSelectionListener() {
 				@Override
@@ -449,17 +412,17 @@ public enum CDeckEditorUI implements ICDoc {
 					setCard(catView.getSelectedItem());
 				}
 			});
-            
+
             deckView.addSelectionListener(new ListSelectionListener() {
 				@Override
 				public void valueChanged(ListSelectionEvent e) {
 					setCard(deckView.getSelectedItem());
 				}
 			});
-            
-            catView.setAllowMultipleSelections(true);            
+
+            catView.setAllowMultipleSelections(true);
             deckView.setAllowMultipleSelections(true);
-            
+
             childController.listenersHooked = true;
         }
 
@@ -479,153 +442,6 @@ public enum CDeckEditorUI implements ICDoc {
                 catView.focus();
             }
         });
-    }
-    
-    private class _FindAsYouType extends KeyAdapter {
-        private StringBuilder str = new StringBuilder();
-        private final FLabel popupLabel = new FLabel.Builder().fontAlign(SwingConstants.LEFT).opaque().build();
-        private boolean popupShowing = false;
-        private Popup popup;
-        private Timer popupTimer;
-        private final ItemManager<? extends InventoryItem> tableView;
-        static final int okModifiers = KeyEvent.SHIFT_MASK | KeyEvent.ALT_GRAPH_MASK;
-        
-        public _FindAsYouType(ItemManager<? extends InventoryItem> tableView) {
-            this.tableView = tableView;
-        }
-
-        private void _setPopupSize() {
-            // resize popup to size of label (ensure there's room for the next character so the label
-            // doesn't show '...' in the time between when we set the text and when we increase the size
-            Dimension labelDimension = popupLabel.getPreferredSize();
-            Dimension popupDimension = new Dimension(labelDimension.width + 12, labelDimension.height + 4);
-            SwingUtilities.getRoot(popupLabel).setSize(popupDimension);
-        }
-        
-        private void _findNextMatch(int startIdx, boolean reverse) {
-            int numItems = tableView.getTable().getCount();
-            if (0 == numItems) {
-                cancel();
-                return;
-            }
-            
-            // find the next item that matches the string
-            startIdx %= numItems;
-            final int increment = reverse ? numItems - 1 : 1;
-            int stopIdx = (startIdx + numItems - increment) % numItems;
-            String searchStr = str.toString();
-            boolean found = false;
-            for (int idx = startIdx;; idx = (idx + increment) % numItems) {
-                if (StringUtils.containsIgnoreCase(tableView.getTable().getItemAtIndex(idx).getName(), searchStr)) {
-                    tableView.getTable().setSelectedIndex(idx);
-                    found = true;
-                    break;
-                }
-                
-                if (idx == stopIdx) {
-                    break;
-                }
-            }
-            
-            if (searchStr.isEmpty()) {
-                cancel();
-                return;
-            }
-            
-            // show a popup with the current search string, highlighted in red if not found
-            popupLabel.setText(searchStr + " (hit Enter for next match, Esc to cancel)");
-            if (found) {
-                FSkin.get(popupLabel).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            }
-            else {
-                FSkin.get(popupLabel).setForeground(new Color(255, 0, 0));
-            }
-            
-            if (popupShowing) {
-                _setPopupSize();
-                popupTimer.restart();
-            } else {
-                PopupFactory factory = PopupFactory.getSharedInstance();
-                Point tableLoc = tableView.getTable().getTable().getTableHeader().getLocationOnScreen();
-                popup = factory.getPopup(null, popupLabel, tableLoc.x + 10, tableLoc.y + 10);
-                FSkin.get(SwingUtilities.getRoot(popupLabel)).setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
-                
-                popupTimer = new Timer(5000, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        cancel();
-                    }
-                });
-                popupTimer.setRepeats(false);
-                
-                popup.show();
-                _setPopupSize();
-                popupTimer.start();
-                isFindingAsYouType = true;
-                popupShowing = true;
-            }
-        }
-        
-        public void cancel() {
-            str = new StringBuilder();
-            popupShowing = false;
-            if (null != popup) {
-                popup.hide();
-                popup = null;
-            }
-            if (null != popupTimer) {
-                popupTimer.stop();
-                popupTimer = null;
-            }
-            isFindingAsYouType = false;
-        }
-        
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if (KeyEvent.VK_ESCAPE == e.getKeyCode()) {
-                cancel();
-            }
-        }
-        
-        @Override
-        public void keyTyped(KeyEvent e) {
-            switch (e.getKeyChar()) {
-            case KeyEvent.CHAR_UNDEFINED:
-                return;
-                
-            case KeyEvent.VK_ENTER:
-            case 13: // no KeyEvent constant for this, but this comes up on OSX for shift-enter
-                if (!str.toString().isEmpty()) {
-                    // no need to add (or subtract) 1 -- the table selection will already
-                    // have been advanced by the (shift+) enter key
-                    _findNextMatch(tableView.getTable().getSelectedIndex(), e.isShiftDown());
-                }
-                return;
-                
-            case KeyEvent.VK_BACK_SPACE:
-                if (!str.toString().isEmpty()) {
-                    str.deleteCharAt(str.toString().length() - 1);
-                }
-                break;
-                
-            case KeyEvent.VK_SPACE:
-                // don't trigger if the first character is a space
-                if (str.toString().isEmpty()) {
-                    return;
-                }
-                // fall through
-                
-            default:
-                // shift and/or alt-graph down is ok.  anything else is a hotkey (e.g. ctrl-f)
-                if (okModifiers != (e.getModifiers() | okModifiers)
-                 || !CharUtils.isAsciiPrintable(e.getKeyChar())) { // escape sneaks in here on Windows
-                    return;
-                }
-                str.append(e.getKeyChar());
-            }
-            
-            _findNextMatch(Math.max(0, tableView.getTable().getSelectedIndex()), false);
-        }
     }
 
     /* (non-Javadoc)

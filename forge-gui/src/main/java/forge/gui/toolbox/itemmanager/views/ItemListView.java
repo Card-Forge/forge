@@ -172,6 +172,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
+    public Point getLocationOnScreen() {
+        return this.table.getTableHeader().getLocationOnScreen(); //use table header's location since that stays in place
+    }
+
+    @Override
     protected String getCaption() {
         return "List View";
     }
