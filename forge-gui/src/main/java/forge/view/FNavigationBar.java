@@ -168,7 +168,7 @@ public class FNavigationBar extends FTitleBarBase {
             //return to Home screen if selected tab closed
             //TODO: support navigation history and go to previous tab instead
             this.selectedTab = null; //prevent raising onSwitching for tab being closed
-            Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
+            Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN, true);
         }
         int index = tabs.indexOf(tab);
         if (index != -1) {

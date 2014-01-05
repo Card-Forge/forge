@@ -82,7 +82,6 @@ import forge.quest.io.QuestDataIO;
 import forge.sound.SoundSystem;
 import forge.view.FFrame;
 import forge.view.FView;
-import forge.view.arcane.CardPanel;
 
 /**
  * <p>
@@ -270,6 +269,9 @@ public enum FControl implements KeyEventDispatcher {
      * Switches between display screens in top level JFrame.
      */
     public void setCurrentScreen(FScreen screen) {
+        setCurrentScreen(screen, false);
+    }
+    public void setCurrentScreen(FScreen screen, boolean previousScreenClosed) {
         //TODO: Uncomment the line below if this function stops being used to refresh
         //the current screen in some places (such as Continue and Restart in the match screen)
         //if (this.currentScreen == screen) { return; }
@@ -288,6 +290,12 @@ public enum FControl implements KeyEventDispatcher {
 
         clearChildren(JLayeredPane.DEFAULT_LAYER);
         SOverlayUtils.hideOverlay();
+
+        if (previousScreenClosed) { //dispose of all components on closed screen
+            for (final Component c : FView.SINGLETON_INSTANCE.getPnlInsets().getComponents()) {
+                FSkin.dispose(c);
+            }
+        }
         ImageCache.clear(); //reduce memory usage by clearing image cache when switching screens
 
         this.currentScreen = screen;
@@ -350,7 +358,6 @@ public enum FControl implements KeyEventDispatcher {
         children = display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
         if (children.length != 0) { children[0].setSize(display.getSize()); }
     }
-
 
     public Player getCurrentPlayer() {
         // try current priority
@@ -440,13 +447,6 @@ public enum FControl implements KeyEventDispatcher {
     public final void endCurrentGame() {
         if (this.game == null) { return; }
 
-        //dispose of all card panels on match screen to free up memory
-        List<VField> view = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-        for (VField v : view) {
-            for (CardPanel p : v.getTabletop().getCardPanels()) {
-                p.dispose();
-            }
-        }
         Singletons.getView().getNavigationBar().closeTab(FScreen.MATCH_SCREEN);
         this.game = null;
     }

@@ -138,6 +138,7 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
     @Override
     public void dispose() {
         setVisible(false); //ensure overlay hidden when disposing
+        FSkin.dispose(this); //ensure skins disposed for dialog and all its components
         super.dispose();
     }
 

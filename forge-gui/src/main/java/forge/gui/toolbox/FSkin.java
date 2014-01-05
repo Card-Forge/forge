@@ -19,6 +19,7 @@ package forge.gui.toolbox;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -75,34 +76,12 @@ public enum FSkin {
     /** Singleton instance of skin. */
     SINGLETON_INSTANCE;
 
-    public static class ComponentSkin<T extends Component> {
-        @SuppressWarnings("rawtypes")
-        private static HashMap<Component, ComponentSkin> skins = new HashMap<Component, ComponentSkin>();
 
-        @SuppressWarnings("rawtypes")
+    public static class ComponentSkin<T extends Component> {
+        private static final HashMap<Component, ComponentSkin<?>> skins = new HashMap<Component, ComponentSkin<?>>();
+
         private static void reapplyAll() {
-            for (ComponentSkin compSkin : ComponentSkin.skins.values()) {
-                compSkin.reapply();
-            }
-            for (WindowSkin compSkin : WindowSkin.skins.values()) {
-                compSkin.reapply();
-            }
-            for (JComponentSkin compSkin : JComponentSkin.skins.values()) {
-                compSkin.reapply();
-            }
-            for (JLabelSkin compSkin : JLabelSkin.skins.values()) {
-                compSkin.reapply();
-            }
-            for (AbstractButtonSkin compSkin : AbstractButtonSkin.skins.values()) {
-                compSkin.reapply();
-            }
-            for (JTextComponentSkin compSkin : JTextComponentSkin.skins.values()) {
-                compSkin.reapply();
-            }
-            for (JTableSkin compSkin : JTableSkin.skins.values()) {
-                compSkin.reapply();
-            }
-            for (FPanelSkin compSkin : FPanelSkin.skins.values()) {
+            for (ComponentSkin<?> compSkin : skins.values()) {
                 compSkin.reapply();
             }
         }
@@ -214,9 +193,6 @@ public enum FSkin {
         }
     }
     public static class WindowSkin<T extends Window> extends ComponentSkin<T> {
-        @SuppressWarnings("rawtypes")
-        private static HashMap<Window, WindowSkin> skins = new HashMap<Window, WindowSkin>();
-
         private SkinImage iconImage;
 
         private WindowSkin(T comp0) {
@@ -241,9 +217,6 @@ public enum FSkin {
         }
     }
     public static class JComponentSkin<T extends JComponent> extends ComponentSkin<T> {
-        @SuppressWarnings("rawtypes")
-        private static HashMap<JComponent, JComponentSkin> skins = new HashMap<JComponent, JComponentSkin>();
-
         private SkinBorder border;
 
         private JComponentSkin(T comp0) {
@@ -285,9 +258,6 @@ public enum FSkin {
         }
     }
     public static class JLabelSkin<T extends JLabel> extends JComponentSkin<T> {
-        @SuppressWarnings("rawtypes")
-        private static HashMap<JLabel, JLabelSkin> skins = new HashMap<JLabel, JLabelSkin>();
-
         private SkinImage icon;
 
         private JLabelSkin(T comp0) {
@@ -312,9 +282,6 @@ public enum FSkin {
         }
     }
     public static class AbstractButtonSkin<T extends AbstractButton> extends JComponentSkin<T> {
-        @SuppressWarnings("rawtypes")
-        private static HashMap<AbstractButton, AbstractButtonSkin> skins = new HashMap<AbstractButton, AbstractButtonSkin>();
-
         private SkinImage icon, pressedIcon, rolloverIcon;
 
         private AbstractButtonSkin(T comp0) {
@@ -363,9 +330,6 @@ public enum FSkin {
         }
     }
     public static class JTextComponentSkin<T extends JTextComponent> extends JComponentSkin<T> {
-        @SuppressWarnings("rawtypes")
-        private static HashMap<JTextComponent, JTextComponentSkin> skins = new HashMap<JTextComponent, JTextComponentSkin>();
-
         private SkinColor caretColor;
 
         private JTextComponentSkin(T comp0) {
@@ -394,9 +358,6 @@ public enum FSkin {
         }
     }
     public static class JTableSkin<T extends JTable> extends JComponentSkin<T> {
-        @SuppressWarnings("rawtypes")
-        private static HashMap<JTable, JTableSkin> skins = new HashMap<JTable, JTableSkin>();
-
         private SkinColor selectionForeground, selectionBackground;
 
         private JTableSkin(T comp0) {
@@ -441,9 +402,6 @@ public enum FSkin {
         }
     }
     public static class FPanelSkin<T extends FPanel> extends JComponentSkin<T> {
-        @SuppressWarnings("rawtypes")
-        private static HashMap<FPanel, FPanelSkin> skins = new HashMap<FPanel, FPanelSkin>();
-
         private SkinImage foregroundImage, backgroundTexture;
         private SkinColor backgroundTextureOverlay;
 
@@ -498,7 +456,7 @@ public enum FSkin {
 
     @SuppressWarnings("unchecked")
     public static <T extends Component> ComponentSkin<T> get(T comp) {
-        ComponentSkin<T> compSkin = ComponentSkin.skins.get(comp);
+        ComponentSkin<T> compSkin = (ComponentSkin<T>) ComponentSkin.skins.get(comp);
         if (compSkin == null) {
             compSkin = new ComponentSkin<T>(comp);
             ComponentSkin.skins.put(comp, compSkin);
@@ -507,105 +465,82 @@ public enum FSkin {
     }
     @SuppressWarnings("unchecked")
     public static <T extends Window> WindowSkin<T> get(T comp) {
-        WindowSkin<T> compSkin = WindowSkin.skins.get(comp);
+        WindowSkin<T> compSkin = (WindowSkin<T>) ComponentSkin.skins.get(comp);
         if (compSkin == null) {
             compSkin = new WindowSkin<T>(comp);
-            WindowSkin.skins.put(comp, compSkin);
+            ComponentSkin.skins.put(comp, compSkin);
         }
         return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JComponent> JComponentSkin<T> get(T comp) {
-        JComponentSkin<T> compSkin = JComponentSkin.skins.get(comp);
+        JComponentSkin<T> compSkin = (JComponentSkin<T>) ComponentSkin.skins.get(comp);
         if (compSkin == null) {
             compSkin = new JComponentSkin<T>(comp);
-            JComponentSkin.skins.put(comp, compSkin);
+            ComponentSkin.skins.put(comp, compSkin);
         }
         return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JLabel> JLabelSkin<T> get(T comp) {
-        JLabelSkin<T> compSkin = JLabelSkin.skins.get(comp);
+        JLabelSkin<T> compSkin = (JLabelSkin<T>) ComponentSkin.skins.get(comp);
         if (compSkin == null) {
             compSkin = new JLabelSkin<T>(comp);
-            JLabelSkin.skins.put(comp, compSkin);
+            ComponentSkin.skins.put(comp, compSkin);
         }
         return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends AbstractButton> AbstractButtonSkin<T> get(T comp) {
-        AbstractButtonSkin<T> compSkin = AbstractButtonSkin.skins.get(comp);
+        AbstractButtonSkin<T> compSkin = (AbstractButtonSkin<T>) ComponentSkin.skins.get(comp);
         if (compSkin == null) {
             compSkin = new AbstractButtonSkin<T>(comp);
-            AbstractButtonSkin.skins.put(comp, compSkin);
+            ComponentSkin.skins.put(comp, compSkin);
         }
         return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JTextComponent> JTextComponentSkin<T> get(T comp) {
-        JTextComponentSkin<T> compSkin = JTextComponentSkin.skins.get(comp);
+        JTextComponentSkin<T> compSkin = (JTextComponentSkin<T>) ComponentSkin.skins.get(comp);
         if (compSkin == null) {
             compSkin = new JTextComponentSkin<T>(comp);
-            JTextComponentSkin.skins.put(comp, compSkin);
+            ComponentSkin.skins.put(comp, compSkin);
         }
         return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends JTable> JTableSkin<T> get(T comp) {
-        JTableSkin<T> compSkin = JTableSkin.skins.get(comp);
+        JTableSkin<T> compSkin = (JTableSkin<T>) ComponentSkin.skins.get(comp);
         if (compSkin == null) {
             compSkin = new JTableSkin<T>(comp);
-            JTableSkin.skins.put(comp, compSkin);
+            ComponentSkin.skins.put(comp, compSkin);
         }
         return compSkin;
     }
     @SuppressWarnings("unchecked")
     public static <T extends FPanel> FPanelSkin<T> get(T comp) {
-        FPanelSkin<T> compSkin = FPanelSkin.skins.get(comp);
+        FPanelSkin<T> compSkin = (FPanelSkin<T>) ComponentSkin.skins.get(comp);
         if (compSkin == null) {
             compSkin = new FPanelSkin<T>(comp);
-            FPanelSkin.skins.put(comp, compSkin);
+            ComponentSkin.skins.put(comp, compSkin);
         }
         return compSkin;
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T extends Component> void remove(T comp) {
-        remove(ComponentSkin.skins, comp);
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends Window> void remove(T comp) {
-        remove(WindowSkin.skins, comp);
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends JComponent> void remove(T comp) {
-        remove(JComponentSkin.skins, comp);
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends JLabel> void remove(T comp) {
-        remove(JLabelSkin.skins, comp);
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends AbstractButton> void remove(T comp) {
-        remove(AbstractButtonSkin.skins, comp);
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends JTextComponent> void remove(T comp) {
-        remove(JTextComponentSkin.skins, comp);
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends JTable> void remove(T comp) {
-        remove(JTableSkin.skins, comp);
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends FPanel> void remove(T comp) {
-        remove(FPanelSkin.skins, comp);
-    }
-    private static <T extends Component, U extends ComponentSkin<T>> void remove(HashMap<T, U> skins, T comp) {
-        U compSkin = skins.get(comp);
+    public static void dispose(Component comp) {
+        if (comp instanceof IDisposable) { //dispose component itself if possible 
+            ((IDisposable)comp).dispose();
+        }
+        ComponentSkin<?> compSkin = ComponentSkin.skins.get(comp);
         if (compSkin != null) {
             compSkin.comp = null;
-            skins.remove(comp);
+            ComponentSkin.skins.remove(comp);
+        }
+        if (comp instanceof Container) {
+            //dispose skins for child components
+            for (Component c : ((Container)comp).getComponents()) {
+                dispose(c);
+            }
         }
     }
 

@@ -15466,6 +15466,7 @@ forge-gui/src/main/java/forge/gui/toolbox/FTextArea.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FTextEditor.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FTextField.java -text
 forge-gui/src/main/java/forge/gui/toolbox/FUndoManager.java -text
+forge-gui/src/main/java/forge/gui/toolbox/IDisposable.java -text
 forge-gui/src/main/java/forge/gui/toolbox/LayoutHelper.java -text
 forge-gui/src/main/java/forge/gui/toolbox/SaveOpenDialog.java -text
 forge-gui/src/main/java/forge/gui/toolbox/imaging/FImagePanel.java -text

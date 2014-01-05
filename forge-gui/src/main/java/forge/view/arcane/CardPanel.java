@@ -47,6 +47,7 @@ import forge.gui.CardContainer;
 import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.IDisposable;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.arcane.util.OutlinedLabel;
 
@@ -58,7 +59,7 @@ import forge.view.arcane.util.OutlinedLabel;
  * @author Forge
  * @version $Id$
  */
-public class CardPanel extends JPanel implements CardContainer {
+public class CardPanel extends JPanel implements CardContainer, IDisposable {
     /** Constant <code>serialVersionUID=2361907095724263295L</code>. */
     private static final long serialVersionUID = 2361907095724263295L;
     /**
@@ -682,8 +683,11 @@ public class CardPanel extends JPanel implements CardContainer {
     }
 
     public void dispose() {
-        this.setImage((BufferedImage)null);
-        FSkin.remove(this);
+        this.attachedToPanel = null;
+        this.attachedPanels = null;
+        this.imagePanel.setImage(null);
+        this.imagePanel = null;
+        this.gameCard = null;
     }
 
     /**
