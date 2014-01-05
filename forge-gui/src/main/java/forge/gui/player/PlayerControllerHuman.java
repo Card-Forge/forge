@@ -481,7 +481,7 @@ public class PlayerControllerHuman extends PlayerController {
         if (StringUtils.isBlank(message)) {
             message = String.format("Looking at %s's %s", owner, zone);
         }
-        GuiChoose.oneOrNone(message, cards);
+        GuiChoose.reveal(message, cards);
     }
 
     @Override
