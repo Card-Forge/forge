@@ -21,8 +21,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.awt.geom.RoundRectangle2D;
 
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -54,6 +56,7 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
     private Point mouseDownLoc;
     private final FTitleBar titleBar;
     private final FPanel innerPanel;
+    private JComponent defaultFocus;
 
     public FDialog() {
         this(true);
@@ -74,6 +77,20 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
         this.titleBar = new FTitleBar(this);
         this.titleBar.setVisible(true);
         addMoveSupport();
+
+        this.addWindowFocusListener(new WindowFocusListener() {
+            @Override
+            public void windowGainedFocus(final WindowEvent e) {
+                if (FDialog.this.defaultFocus != null) {
+                    FDialog.this.defaultFocus.grabFocus();
+                    FDialog.this.defaultFocus = null; //reset default focused component so it doesn't receive focus if the dialog later loses then regains focus
+                }
+            }
+
+            @Override
+            public void windowLostFocus(final WindowEvent e) {
+            }
+        });
 
         if (isSetShapeSupported) { //if possible, set rounded rectangle shape for dialog
             this.addComponentListener(new ComponentAdapter() {
@@ -142,6 +159,10 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
             }
         }
         super.setVisible(visible);
+    }
+
+    public void setDefaultFocus(JComponent comp) {
+        this.defaultFocus = comp;
     }
 
     @Override

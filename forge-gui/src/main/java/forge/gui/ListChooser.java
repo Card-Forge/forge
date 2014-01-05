@@ -22,8 +22,6 @@ import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 import java.util.Collection;
 import java.util.List;
 
@@ -108,16 +106,7 @@ public class ListChooser<T> {
         this.optionPane.setButtonEnabled(0, minChoices <= 0);
 
         if (minChoices != -1) {
-            this.optionPane.addWindowFocusListener(new WindowFocusListener() {
-                @Override
-                public void windowGainedFocus(final WindowEvent e) {
-                    ListChooser.this.lstChoices.grabFocus();
-                }
-    
-                @Override
-                public void windowLostFocus(final WindowEvent e) {
-                }
-            });
+            this.optionPane.setDefaultFocus(this.lstChoices);
         }
 
         if (minChoices > 0) {

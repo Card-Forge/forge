@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -93,7 +94,7 @@ public class FOptionPane extends FDialog {
 
     @SuppressWarnings("unchecked")
     public static <T> T showInputDialog(String message, String title, SkinImage icon, T initialInput, T[] inputOptions) {
-        final Component inputField;
+        final JComponent inputField;
         FTextField txtInput = null;
         FComboBox<T> cbInput = null;
         if (inputOptions == null) {
@@ -107,12 +108,7 @@ public class FOptionPane extends FDialog {
         }
 
         final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, new String[] {"OK", "Cancel"}, -1);
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                inputField.requestFocusInWindow();
-            }
-        });
+        optionPane.setDefaultFocus(inputField);
         inputField.addKeyListener(new KeyAdapter() { //hook so pressing Enter on field accepts dialog
             @Override
             public void keyPressed(KeyEvent e) {
@@ -234,12 +230,7 @@ public class FOptionPane extends FDialog {
                 }
             });
             if (option == defaultOption) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        btn.requestFocusInWindow();
-                    }
-                });
+                this.setDefaultFocus(btn);
             }
             this.add(btn, "x " + x + ", w " + buttonWidth + ", h " + buttonHeight);
             x += dx;
