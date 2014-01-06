@@ -9,25 +9,25 @@ Release Notes
 -------------
 
 - Memory usage optimizations -
-Card images are now cleared from memory cache when switching screens and between games
-Card display panels and other components are now disposed when the screen/dialog they're on is closed
-Card display panels are now disposed during game play when its card leaves a zone
+Card images are now cleared from memory cache when switching screens and between games.
+Card display panels and other components are now disposed when the screen/dialog they're on is closed.
+Card display panels are now disposed during game play when its card leaves a zone.
 
 
 - Deck Editor usability improvements -
-Added File menu with shortcuts for common actions in Deck Editor (such as Ctrl+S to save the current deck)
-Support resetting and hiding filters
-Add/Remove context menu items now properly update based on the number of cards that can be added or removed from the deck
-Support adding X copies of card at a time, where X is chosen using dialog
-You'll now be prevented adding more than 4 copies of non-basic land cards in Constructed decks by default, with that number being configurable
-Full catalog now available for sideboarding in Deck Editor
-Title field and buttons now available on Current Deck pane when on other sections, with the current section name displaying above the table
+Added File menu with shortcuts for common actions in Deck Editor (such as Ctrl+S to save the current deck).
+Support resetting and hiding filters.
+Add/Remove context menu items now properly update based on the number of cards that can be added or removed from the deck.
+Support adding X copies of card at a time, where X is chosen using dialog.
+You'll now be prevented adding more than 4 copies of non-basic land cards in Constructed decks by default, with that number being configurable.
+Full catalog now available for sideboarding in Deck Editor.
+Title field and buttons now available on Current Deck pane when on other sections, with the current section name displaying above the table.
 
 
 - More skinned dialogs -
-Most remaining dialogs are now skinned, including all message, confirmation, input, and list choice dialogs
-Reveal-style list dialogs now focus OK button by default and support Escape and Close button without showing a Cancel button
-Increased transparency of backdrop behind dialogs and make it appear over navigation bar instead of disabling navigation bar
+Most remaining dialogs are now skinned, including all message, confirmation, input, and list choice dialogs.
+Reveal-style list dialogs now focus OK button by default and support Escape and Close button without showing a Cancel button.
+Increased transparency of backdrop behind dialogs and make it appear over navigation bar instead of disabling navigation bar.
 
 
 - Constructed mode -
@@ -52,6 +52,7 @@ Skeleton Scavengers
 Soldevi Sentry
 Nullstone Gargoyle
 Bludgeon Brawl
+Static Orb
 
 
 --------------------
