@@ -18,7 +18,10 @@
 package forge.game.phase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -130,20 +133,24 @@ public class Untap extends Phase {
             game.getAction().moveToHand(c);
         }
 
+        final Map<String, Integer> restrictUntap = new HashMap<String, Integer>();
+        for (String kw : player.getKeywords()) {
+            if (kw.startsWith("UntapAdjust")) {
+                String[] parse = kw.split(":");
+                if (!restrictUntap.containsKey(parse[1])
+                        || Integer.parseInt(parse[2]) < restrictUntap.get(parse[1])) {
+                    restrictUntap.put(parse[1], Integer.parseInt(parse[2]));
+                }
+            }
+        }
+        final String[] restrict = restrictUntap.keySet().toArray(new String[restrictUntap.keySet().size()]);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (!Untap.canUntap(c)) {
                     return false;
                 }
-                if (c.isLand() && player.hasKeyword("You can't untap more than one land during your untap step.")) {
-                    return false;
-                }
-                if (c.isArtifact() && player.hasKeyword("You can't untap more than one artifact during your untap step.")) {
-                    return false;
-                }
-                if (c.isCreature() && (player.hasKeyword("You can't untap more than one creature during your untap step.")
-                        || player.hasKeyword("You can't untap creatures during your untap step."))) {
+                if (c.isValid(restrict, player, null)) {
                     return false;
                 }
                 return true;
@@ -185,26 +192,33 @@ public class Untap extends Phase {
         }
         // end other players untapping during your untap phase
 
-        if (player.hasKeyword("You can't untap more than one land during your untap step.")) {
-            final List<Card> landList = CardLists.filter(player.getLandsInPlay(), tappedCanUntap);
-            
-            if (!landList.isEmpty()) {
-                Card toUntap = player.getController().chooseSingleEntityForEffect(landList, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped land to untap");
-                if ( toUntap != null )
-                    toUntap.untap();
+        List<Card> restrictUntapped = new ArrayList<Card>();
+        // TODO : update for Storage Matrix
+        List<Card> cardList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), tappedCanUntap);
+        cardList = CardLists.getValidCards(cardList, restrict, player, null);
+
+        while (!cardList.isEmpty()) {
+            Map<String, Integer> remaining = new HashMap<String, Integer>(restrictUntap);
+            for (Entry<String, Integer> entry : remaining.entrySet()) {
+                if (entry.getValue() == 0) {
+                    cardList.removeAll(CardLists.getValidCards(cardList, entry.getKey(), player, null));
+                    restrictUntap.remove(entry.getKey());
+                }
+            }
+            Card chosen = player.getController().chooseSingleEntityForEffect(cardList, new SpellAbility.EmptySa(ApiType.Untap, null, player), 
+                    "Select a card to untap\r\n(Selected:" + restrictUntapped + ")\r\n" + "Remaining cards that can untap: " + remaining);
+            if (chosen != null) {
+                for (Entry<String, Integer> rest : restrictUntap.entrySet()) {
+                    if (chosen.isValid(rest.getKey(), player, null)) {
+                        restrictUntap.put(rest.getKey(), rest.getValue().intValue() - 1);
+                    }
+                }
+                restrictUntapped.add(chosen);
+                cardList.remove(chosen);
             }
         }
-        if (player.hasKeyword("You can't untap more than one artifact during your untap step.")) {
-            final List<Card> artList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS, tappedCanUntap);
-            Card toUntap = player.getController().chooseSingleEntityForEffect(artList, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped artifact to untap");
-            if ( toUntap != null )
-                toUntap.untap();
-        }
-        if (player.hasKeyword("You can't untap more than one creature during your untap step.")) {
-            final List<Card> creatures = CardLists.filter(player.getCreaturesInPlay(), tappedCanUntap);
-            Card toUntap = player.getController().chooseSingleEntityForEffect(creatures, new SpellAbility.EmptySa(ApiType.Untap, null, player), "Select one tapped creature to untap");
-            if ( toUntap != null )
-                toUntap.untap();
+        for (Card c : restrictUntapped) {
+            c.untap();
         }
 
         // Remove temporary keywords

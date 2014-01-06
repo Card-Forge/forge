@@ -1,7 +1,7 @@
 Name:Damping Field
 ManaCost:2 W
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't untap more than one artifact during your untap step. | Description$ Players can't untap more than one artifact during their untap steps.
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Artifact:1 | Description$ Players can't untap more than one artifact during their untap steps.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/damping_field.jpg

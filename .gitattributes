@@ -11163,6 +11163,7 @@ forge-gui/res/cardsfolder/s/stasis.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stasis_cell.txt -text
 forge-gui/res/cardsfolder/s/stasis_cocoon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/statecraft.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/static_orb.txt -text
 forge-gui/res/cardsfolder/s/staunch_defenders.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/staunch_hearted_warrior.txt -text
 forge-gui/res/cardsfolder/s/stave_off.txt svneol=native#text/plain
