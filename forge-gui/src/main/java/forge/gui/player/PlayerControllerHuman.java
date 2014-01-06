@@ -264,30 +264,9 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public Integer announceRequirements(SpellAbility ability, String announce, boolean canChooseZero) {
-        List<Object> options = new ArrayList<Object>();
-        for (int i = canChooseZero ? 0 : 1; i < 10; i++) {
-            options.add(Integer.valueOf(i));
-        }
-        options.add("Other amount");
-
-        Object chosen = GuiChoose.oneOrNone("Choose " + announce + " for " + ability.getSourceCard().getName(), options);
-        if (chosen instanceof Integer || chosen == null) {
-            return (Integer)chosen;
-        }
-
-        String message = String.format("How much will you announce for %s?%s", announce, canChooseZero ? "" : " (X cannot be 0)");
-        while (true){
-            String str = FOptionPane.showInputDialog(message, ability.getSourceCard().getName(), FOptionPane.QUESTION_ICON);
-            if (null == str) { return null; } // that is 'cancel'
-
-            if (StringUtils.isNumeric(str)) {
-                Integer val = Integer.valueOf(str);
-                if (val == 0 && canChooseZero || val > 0) {
-                    return val;
-                }
-            }
-            GuiDialog.message("You have to enter a valid number", "Announce value");
-        }
+        int min = canChooseZero ? 0 : 1;
+        return GuiChoose.getInteger("Choose " + announce + " for " + ability.getSourceCard().getName(),
+                min, Integer.MAX_VALUE, min + 9);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package forge.gui.toolbox.itemmanager;
 
+import java.util.ArrayList;
 import com.google.common.base.Predicate;
 
 import forge.card.CardRules;
@@ -9,6 +10,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
+import forge.item.InventoryItem;
 import forge.util.ComparableOp;
 
 
@@ -99,5 +101,55 @@ public final class SItemManagerUtil  {
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText("Title:");
+    }
+
+    public static String getItemDisplayString(InventoryItem item, int qty, boolean forTitle) {
+        ArrayList<InventoryItem> items = new ArrayList<InventoryItem>();
+        items.add(item);
+        return getItemDisplayString(items, qty, forTitle);
+    }
+    public static String getItemDisplayString(Iterable<? extends InventoryItem> items, int qty, boolean forTitle) {
+        //determine shared type among items
+        int itemCount = 0;
+        String sharedType = null;
+        boolean checkForSharedType = true;
+
+        for (InventoryItem item : items) {
+            if (checkForSharedType) {
+                if (sharedType == null) {
+                    sharedType = item.getItemType();
+                }
+                else if (!item.getItemType().equals(sharedType)) {
+                    sharedType = null;
+                    checkForSharedType = false;
+                }
+            }
+            itemCount++;
+        }
+        if (sharedType == null) {
+            sharedType = "Item"; //if no shared type, use generic "item"
+        }
+
+        //build display string based on shared type, item count, and quantity of each item
+        String result;
+        if (forTitle) { //convert to lowercase if not for title
+            result = sharedType;
+            if (itemCount != 1 || qty != 1) {
+                result += "s";
+            }
+        }
+        else {
+            result = sharedType.toLowerCase();
+            if (itemCount != 1) {
+                result = itemCount + " " + result + "s";
+            }
+            if (qty < 0) { //treat negative numbers as unknown quantity
+                result = "X copies of " + result;
+            }
+            else if (qty != 1) {
+                result = qty + " copies of " + result;
+            }
+        }
+        return result;
     }
 }

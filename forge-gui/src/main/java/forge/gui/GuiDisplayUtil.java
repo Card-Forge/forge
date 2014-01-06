@@ -241,17 +241,20 @@ public final class GuiDisplayUtil {
      */
     public static void devModeTutor() {
         Player pPriority = getGame().getPhaseHandler().getPriorityPlayer();
-        if(pPriority == null) {
+        if (pPriority == null) {
             GuiDialog.message("No player has priority now, can't tutor from their deck at the moment");
             return;
         }
         final List<Card> lib = pPriority.getCardsIn(ZoneType.Library);
-        final Card c = GuiChoose.oneOrNone("Choose a card", lib);
-        if (null == c)
-            return;
+        final Card card = GuiChoose.oneOrNone("Choose a card", lib);
+        if (card == null) { return; }
 
-        getGame().getAction().invoke(new Runnable() { @Override public void run() { getGame().getAction().moveToHand(c); }});
-
+        getGame().getAction().invoke(new Runnable() {
+            @Override
+            public void run() {
+                getGame().getAction().moveToHand(card);
+            }
+        });
     }
 
     /**
@@ -262,27 +265,16 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeAddCounter() {
-        final Card o = GuiChoose.oneOrNone("Add counters to which card?", getGame().getCardsIn(ZoneType.Battlefield));
-        if (null == o) {
-            return;
-        } else {
-            final Card c = o;
-            final CounterType counter = GuiChoose.oneOrNone("Which type of counter?", CounterType.values());
-            if (null == counter) {
-                return;
-            } else {
-                final Integer[] integers = new Integer[99];
-                for (int j = 0; j < 99; j++) {
-                    integers[j] = Integer.valueOf(j);
-                }
-                final Integer i = GuiChoose.oneOrNone("How many counters?", integers);
-                if (null == i) {
-                    return;
-                } else {
-                    c.addCounter(counter, i, false);
-                }
-            }
-        }
+        final Card card = GuiChoose.oneOrNone("Add counters to which card?", getGame().getCardsIn(ZoneType.Battlefield));
+        if (card == null) { return; }
+
+        final CounterType counter = GuiChoose.oneOrNone("Which type of counter?", CounterType.values());
+        if (counter == null) { return; }
+
+        final Integer count = GuiChoose.getInteger("How many counters?", 1, Integer.MAX_VALUE, 10);
+        if (count == null) { return; }
+        
+        card.addCounter(counter, count, false);
     }
 
     /**
@@ -346,22 +338,13 @@ public final class GuiDisplayUtil {
      */
     public static void devModeSetLife() {
         final List<Player> players = getGame().getPlayers();
-        final Player o = GuiChoose.oneOrNone("Set life for which player?", players);
-        if (null == o) {
-            return;
-        } else {
-            final Player p = o;
-            final Integer[] integers = new Integer[99];
-            for (int j = 0; j < 99; j++) {
-                integers[j] = Integer.valueOf(j);
-            }
-            final Integer i = GuiChoose.oneOrNone("Set life to what?", integers);
-            if (null == i) {
-                return;
-            } else {
-                p.setLife(i, null);
-            }
-        }
+        final Player player = GuiChoose.oneOrNone("Set life for which player?", players);
+        if (player == null) { return; }
+
+        final Integer life = GuiChoose.getInteger("Set life to what?", 0);
+        if (life == null) { return; }
+
+        player.setLife(life, null);
     }
 
     /**
@@ -434,21 +417,15 @@ public final class GuiDisplayUtil {
                 }
             }
         });
-
-
     }
 
-    public static void devModeRiggedPlanarRoll()
-    {
+    public static void devModeRiggedPlanarRoll() {
         final List<Player> players = getGame().getPlayers();
-        final Player p = GuiChoose.oneOrNone("Which player should roll?", players);
-        if (null == p) {
-            return;
-        }
+        final Player player = GuiChoose.oneOrNone("Which player should roll?", players);
+        if (player == null) { return; }
 
         PlanarDice res = GuiChoose.oneOrNone("Choose result", PlanarDice.values());
-        if(res == null)
-            return;
+        if (res == null) { return; }
 
         System.out.println("Rigging planar dice roll: " + res.toString());
 
@@ -456,15 +433,14 @@ public final class GuiDisplayUtil {
         //System.out.println("ActivePlanes: " + getGame().getActivePlanes());
         //System.out.println("CommandPlanes: " + getGame().getCardsIn(ZoneType.Command));
 
-        PlanarDice.roll(p, res);
+        PlanarDice.roll(player, res);
 
         getGame().getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
+                player.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
             }
         });
-
     }
 
     public static void devModePlaneswalkTo() {

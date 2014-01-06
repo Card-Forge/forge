@@ -17,6 +17,9 @@ Card display panels are now disposed during game play when its card leaves a zon
 - Deck Editor usability improvements -
 Added File menu with shortcuts for common actions in Deck Editor (such as Ctrl+S to save the current deck)
 Support resetting and hiding filters
+Add/Remove context menu items now properly update based on the number of cards that can be added or removed from the deck
+Support adding X copies of card at a time, where X is chosen using dialog
+You'll now be prevented adding more than 4 copies of non-basic land cards in Constructed decks by default, with that number being configurable
 Full catalog now available for sideboarding in Deck Editor
 Title field and buttons now available on Current Deck pane when on other sections, with the current section name displaying above the table
 

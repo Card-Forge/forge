@@ -145,7 +145,7 @@ public enum CSubmenuDraft implements ICDoc {
         // Determine what kind of booster draft to run
         final String prompt = "Choose Draft Format:";
         final LimitedPoolType o = GuiChoose.oneOrNone(prompt, LimitedPoolType.values());
-        if ( o == null ) return;
+        if (o == null) return;
         
         final CEditorDraftingProcess draft = new CEditorDraftingProcess();
         draft.showGui(new BoosterDraft(o));

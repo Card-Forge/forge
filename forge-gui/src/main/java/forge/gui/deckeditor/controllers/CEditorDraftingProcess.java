@@ -117,9 +117,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Draft", "card", "cards", null);
+        cmb.addMoveItems("Draft", null);
     }
-    
+
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
         // no valid remove options
@@ -212,6 +212,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
     //========== Overridden from ACEditorBase
 
+    @Override
+    protected CardLimit getCardLimit() {
+        return CardLimit.None;
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -244,7 +249,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         ccAddLabel = this.getBtnAdd().getText();
         this.getBtnAdd().setText("Choose Card");
 
-        if (this.getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen 
+        if (this.getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen
             this.showChoices(this.boosterDraft.nextChoice());
             this.getDeckManager().setPool((Iterable<PaperCard>) null);
         }
@@ -298,7 +303,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         if (allDecksParent != null) {
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
         }
-        
+
         // set catalog table back to free-selection mode
         getCatalogManager().setAllowMultipleSelections(true);
     }

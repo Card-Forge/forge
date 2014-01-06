@@ -57,7 +57,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     private final DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
     private final ItemPoolView<PaperCard> normalPool, avatarPool, planePool, schemePool;
-    
+
     //=========== Constructor
     /**
      * Child controller for constructed deck editor UI.
@@ -66,7 +66,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
      */
     public CEditorConstructed() {
         super(FScreen.DECK_EDITOR_CONSTRUCTED);
-        
+
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Avatar);
@@ -78,7 +78,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         avatarPool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)),PaperCard.class);
         planePool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)),PaperCard.class);
         schemePool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)),PaperCard.class);
-        
+
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 
         this.setCatalogManager(new CardManager(wantUnique));
@@ -90,40 +90,80 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
                 return new Deck();
             }
         };
-        
+
         this.controller = new DeckController<Deck>(Singletons.getModel().getDecks().getConstructed(), this, newCreator);
     }
 
     //=========== Overridden from ACEditorBase
+
+    @Override
+    protected CardLimit getCardLimit() {
+        if (sectionMode == DeckSection.Avatar) {
+            return CardLimit.Singleton;
+        }
+        return CardLimit.Default;
+    }
+
+    public static void onAddItems(ACEditorBase<PaperCard, Deck> editor, Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        DeckSection sectionMode = editor.sectionMode;
+        DeckController<Deck> controller = editor.getDeckController();
+
+        if (sectionMode == DeckSection.Commander || sectionMode == DeckSection.Avatar) {
+            editor.getDeckManager().removeAllItems();
+        }
+
+        ItemPool<PaperCard> itemsToAdd = editor.getAllowedAdditions(items);
+        if (itemsToAdd.isEmpty()) { return; }
+
+        if (toAlternate) {
+            switch (sectionMode) {
+            case Main:
+                controller.getModel().getOrCreate(DeckSection.Sideboard).addAll(itemsToAdd);
+                break;
+            default:
+                break; //no other sections should support toAlternate
+            }
+        }
+        else {
+            editor.getDeckManager().addItems(itemsToAdd);
+
+            //also select all added cards in Catalog
+            editor.getCatalogManager().selectItemEntrys(itemsToAdd);
+        }
+
+        controller.notifyModelChanged();
+    }
+
+    public static void onRemoveItems(ACEditorBase<PaperCard, Deck> editor, Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
+        DeckSection sectionMode = editor.sectionMode;
+        DeckController<Deck> controller = editor.getDeckController();
+
+        if (toAlternate) {
+            switch (sectionMode) {
+            case Main:
+                controller.getModel().getOrCreate(DeckSection.Sideboard).addAll(items);
+                break;
+            case Sideboard:
+                controller.getModel().get(DeckSection.Main).addAll(items);
+                break;
+            default:
+                break; //no other sections should support toAlternate
+            }
+        }
+        else {
+            editor.getCatalogManager().addItems(items);
+        }
+        editor.getDeckManager().removeItems(items);
+
+        controller.notifyModelChanged();
+    }
 
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
     protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (sectionMode == DeckSection.Avatar) {
-            getDeckManager().removeItems(getDeckManager().getPool());
-        }
-
-        if (toAlternate) {
-            if (sectionMode != DeckSection.Sideboard) {
-                controller.getModel().getOrCreate(DeckSection.Sideboard).addAll(items);
-            }
-        }
-        else {
-            getDeckManager().addItems(items);
-        }
-        if (sectionMode == DeckSection.Sideboard) {
-            this.getCatalogManager().removeItems(items);
-        }
-        else { //if not in sideboard mode, just select all added cards in Catalog
-            List<PaperCard> cards = new ArrayList<PaperCard>();
-            for (Entry<PaperCard, Integer> itemEntry : items) {
-                cards.add(itemEntry.getKey());
-            }
-            this.getCatalogManager().setSelectedItems(cards);
-        }
-        this.controller.notifyModelChanged();
+        onAddItems(this, items, toAlternate);
     }
 
     /* (non-Javadoc)
@@ -131,34 +171,72 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (toAlternate) {
-            if (sectionMode != DeckSection.Sideboard) {
-                controller.getModel().getOrCreate(DeckSection.Sideboard).addAll(items);
-            }
-            else {
-                // "added" to library, but library will be recalculated when it is shown again
-            }
-        }
-        else if (sectionMode == DeckSection.Sideboard) {
-            this.getCatalogManager().addItems(items);
-        }
-        else { //if not in sideboard mode, just select all removed cards in Catalog
-            this.getCatalogManager().selectItemEntrys(items);
-        }
-        this.getDeckManager().removeItems(items);
-        this.controller.notifyModelChanged();
+        onRemoveItems(this, items, toAlternate);
     }
 
+    public static void buildAddContextMenu(EditorContextMenuBuilder cmb, DeckSection sectionMode) {
+        switch (sectionMode) {
+        case Main:
+            cmb.addMoveItems("Add", "to deck");
+            cmb.addMoveAlternateItems("Add", "to sideboard");
+            break;
+        case Sideboard:
+            cmb.addMoveItems("Add", "to sideboard");
+            break;
+        case Commander:
+            cmb.addMoveItems("Set", "as commander");
+            break;
+        case Avatar:
+            cmb.addMoveItems("Set", "as avatar");
+            break;
+        case Schemes:
+            cmb.addMoveItems("Add", "to scheme deck");
+            break;
+        case Planes:
+            cmb.addMoveItems("Add", "to planar deck");
+            break;
+        }
+    }
+
+    public static void buildRemoveContextMenu(EditorContextMenuBuilder cmb, DeckSection sectionMode) {
+        switch (sectionMode) {
+        case Main:
+            cmb.addMoveItems("Remove", "from deck");
+            cmb.addMoveAlternateItems("Move", "to sideboard");
+            break;
+        case Sideboard:
+            cmb.addMoveItems("Remove", "from sideboard");
+            cmb.addMoveAlternateItems("Move", "to deck");
+            break;
+        case Commander:
+            cmb.addMoveItems("Remove", "as commander");
+            break;
+        case Avatar:
+            cmb.addMoveItems("Remove", "as avatar");
+            break;
+        case Schemes:
+            cmb.addMoveItems("Remove", "from scheme deck");
+            break;
+        case Planes:
+            cmb.addMoveItems("Remove", "from planar deck");
+            break;
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.ACEditorBase#buildAddContextMenu()
+     */
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems(sectionMode == DeckSection.Sideboard ? "Move" : "Add", "card", "cards", sectionMode == DeckSection.Sideboard ? "to sideboard" : "to deck");
-        cmb.addMoveAlternateItems(sectionMode == DeckSection.Sideboard ? "Remove" : "Add", "card", "cards", sectionMode == DeckSection.Sideboard ? "from deck" : "to sideboard");
+        buildAddContextMenu(cmb, sectionMode);
     }
-    
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.ACEditorBase#buildRemoveContextMenu()
+     */
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems(sectionMode == DeckSection.Sideboard ? "Move" : "Remove", "card", "cards", sectionMode == DeckSection.Sideboard ? "to deck" : "from deck");
-        cmb.addMoveAlternateItems(sectionMode == DeckSection.Sideboard ? "Remove" : "Move", "card", "cards", sectionMode == DeckSection.Sideboard ? "from sideboard" : "to sideboard");
+        buildRemoveContextMenu(cmb, sectionMode);
     }
 
     /*
@@ -192,7 +270,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
 
         curindex = curindex == (allSections.size()-1) ? 0 : curindex+1;
         sectionMode = allSections.get(curindex);
-        
+
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
 
         switch(sectionMode) {

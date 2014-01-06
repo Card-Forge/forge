@@ -96,6 +96,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         DEV_UNLIMITED_LAND ("false"),
         DEV_LOG_ENTRY_TYPE (GameLogEntryType.DAMAGE.toString()),
 
+        DECK_DEFAULT_CARD_LIMIT ("4"),
         DECKGEN_SINGLETONS ("false"),
         DECKGEN_ARTIFACTS ("false"),
         DECKGEN_NOSMALL ("false"),

@@ -46,7 +46,7 @@ public class ZoneAction extends ForgeAction {
     public void actionPerformed(final ActionEvent e) {
         final List<Card> choices = this.getCardsAsIterable();
         if (choices.isEmpty()) {
-            GuiChoose.oneOrNone(this.title, new String[] { "no cards" });
+            GuiChoose.reveal(this.title, "no cards");
             return;
         } 
 

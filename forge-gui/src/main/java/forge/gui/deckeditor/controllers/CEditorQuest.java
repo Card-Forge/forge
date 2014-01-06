@@ -48,6 +48,7 @@ import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.quest.QuestController;
 import forge.util.ItemPool;
+
 import java.util.ArrayList;
 
 //import forge.quest.data.QuestBoosterPack;
@@ -147,22 +148,17 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
 
     //=========== Overridden from ACEditorBase
 
+    @Override
+    protected CardLimit getCardLimit() {
+        return CardLimit.Default;
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
     protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (toAlternate) {
-            // if we're in sideboard mode, the library will get adjusted properly when we call resetTables()
-            if (!sideboardMode) {
-                controller.getModel().getOrCreate(DeckSection.Sideboard).addAll(items);
-            }
-        }
-        else {
-            getDeckManager().addItems(items);
-        }
-        this.getCatalogManager().removeItems(items);
-        this.controller.notifyModelChanged();
+        CEditorConstructed.onAddItems(this, items, toAlternate);
     }
 
     /* (non-Javadoc)
@@ -170,29 +166,23 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (toAlternate) {
-            // if we're in sideboard mode, the library will get adjusted properly when we call resetTables()
-            if (!sideboardMode) {
-                controller.getModel().getOrCreate(DeckSection.Sideboard).addAll(items);
-            }
-        }
-        else {
-            this.getCatalogManager().addItems(items);
-        }
-        this.getDeckManager().removeItems(items);
-        this.controller.notifyModelChanged();
+        CEditorConstructed.onRemoveItems(this, items, toAlternate);
     }
 
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.ACEditorBase#buildAddContextMenu()
+     */
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems(sideboardMode ? "Move" : "Add", "card", "cards", sideboardMode ? "to sideboard" : "to deck");
-        cmb.addMoveAlternateItems(sideboardMode ? "Remove" : "Add", "card", "cards", sideboardMode ? "from deck" : "to sideboard");
+        CEditorConstructed.buildAddContextMenu(cmb, sectionMode);
     }
-    
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.ACEditorBase#buildRemoveContextMenu()
+     */
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems(sideboardMode ? "Move" : "Remove", "card", "cards", sideboardMode ? "to deck" : "from deck");
-        cmb.addMoveAlternateItems(sideboardMode ? "Remove" : "Move", "card", "cards", sideboardMode ? "from sideboard" : "to sideboard");
+        CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode);
     }
 
     /*

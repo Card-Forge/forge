@@ -52,7 +52,7 @@ public class CardPool extends ItemPool<PaperCard> {
         this.addAll(cards);
     }
 
-    
+
     /**
      * Adds the.
      * 
@@ -117,31 +117,32 @@ public class CardPool extends ItemPool<PaperCard> {
      * @return
      */
     public PaperCard get(int n) {
-        for(Entry<PaperCard, Integer> e : this)
-        {
+        for (Entry<PaperCard, Integer> e : this) {
             n -= e.getValue();
             if ( n <= 0 ) return e.getKey();
         }
         return null;
     }
-    
+
     @Override
     public String toString() {
-        if (this.isEmpty()) return "[]";
+        if (this.isEmpty()) { return "[]"; }
 
         boolean isFirst = true;
         StringBuilder sb = new StringBuilder();
         sb.append('[');
         for (Entry<PaperCard, Integer> e : this) {
-            if ( isFirst ) isFirst = false; 
-            else sb.append(", ");
-
+            if (isFirst) {
+                isFirst = false;
+            }
+            else {
+                sb.append(", ");
+            }
             sb.append(e.getValue()).append(" x ").append(e.getKey().getName());
         }
         return sb.append(']').toString();
     }
-    
-    
+
     public static CardPool fromCardList(final Iterable<String> lines) {
         CardPool pool = new CardPool();
         final Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");

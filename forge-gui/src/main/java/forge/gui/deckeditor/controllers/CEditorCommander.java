@@ -18,7 +18,6 @@
 package forge.gui.deckeditor.controllers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -77,10 +76,10 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);
-        
-        commanderPool = ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE,CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
+
+        commanderPool = ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE, CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
         normalPool = ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
-        
+
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 
         this.setCatalogManager(new CardManager(wantUnique));
@@ -97,37 +96,17 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
 
     //=========== Overridden from ACEditorBase
 
+    @Override
+    protected CardLimit getCardLimit() {
+        return CardLimit.Singleton;
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
     @Override
     protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (toAlternate) { return; }
-
-        List<String> limitExceptions = Arrays.asList(new String[]{"Relentless Rats", "Shadowborn Apostle"});
-        
-        List<Entry<PaperCard, Integer>> itemList = new ArrayList<Entry<PaperCard, Integer>>();
-        
-        for (Entry<PaperCard, Integer> item : items) {
-            PaperCard card = item.getKey();
-            if ((controller.getModel().getMain().contains(card)
-                    || controller.getModel().getOrCreate(DeckSection.Sideboard).contains(card)
-                    || controller.getModel().getOrCreate(DeckSection.Commander).contains(card))
-                    && !(card.getRules().getType().isBasic() || limitExceptions.contains(card.getName()))) {
-                continue;
-            }
-            itemList.add(item);
-        }
-
-        if (itemList.isEmpty()) { return; }
-
-        if (sectionMode == DeckSection.Commander) {
-            this.getDeckManager().removeItems(getDeckManager().getPool());
-        }
-
-        this.getDeckManager().addItems(itemList);
-        this.getCatalogManager().selectItemEntrys(itemList); //just select all removed cards in Catalog
-        this.controller.notifyModelChanged();
+        CEditorConstructed.onAddItems(this, items, toAlternate);
     }
 
     /* (non-Javadoc)
@@ -135,21 +114,23 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     protected void onRemoveItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
-        if (toAlternate) { return; }
-
-        this.getDeckManager().removeItems(items);
-        this.getCatalogManager().selectItemEntrys(items); //just select all removed cards in Catalog
-        this.controller.notifyModelChanged();
+        CEditorConstructed.onRemoveItems(this, items, toAlternate);
     }
 
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.ACEditorBase#buildAddContextMenu()
+     */
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Move", "card", "cards", "to deck");
+        CEditorConstructed.buildAddContextMenu(cmb, sectionMode);
     }
-    
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.ACEditorBase#buildRemoveContextMenu()
+     */
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Move", "card", "cards", "to sideboard");
+        CEditorConstructed.buildRemoveContextMenu(cmb, sectionMode);
     }
 
     /*
@@ -160,7 +141,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
     @Override
     public void resetTables() {
         this.sectionMode = DeckSection.Main;
-        this.getCatalogManager().setPool(normalPool,false);
+        this.getCatalogManager().setPool(normalPool, true);
         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Main));
     }
 
@@ -186,7 +167,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
         SItemManagerUtil.resetUI(this);
-        
+
         this.getBtnRemove4().setVisible(false);
         this.getBtnAdd4().setVisible(false);
         this.getBtnCycleSection().setVisible(true);
@@ -201,7 +182,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        
+
         this.controller.refreshModel();
     }
 
@@ -226,7 +207,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
         }
     }
-    
+
     /**
      * Switch between the main deck and the sideboard editor.
      */
@@ -235,20 +216,20 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
 
         curindex = curindex == (allSections.size()-1) ? 0 : curindex+1;
         sectionMode = allSections.get(curindex);
-        
+
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
 
         switch(sectionMode) {
             case Main:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
                 this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
-                this.getCatalogManager().setPool(normalPool, false);
+                this.getCatalogManager().setPool(normalPool, true);
                 this.getDeckManager().setPool(this.controller.getModel().getMain());
                 break;
             case Sideboard:
                 lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
                 this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
-                this.getCatalogManager().setPool(normalPool, false);
+                this.getCatalogManager().setPool(normalPool, true);
                 this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
                 break;
             case Commander:

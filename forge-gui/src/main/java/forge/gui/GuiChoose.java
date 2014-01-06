@@ -14,12 +14,15 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 
 import forge.FThreads;
 import forge.Singletons;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
+import forge.gui.toolbox.FOptionPane;
 import forge.item.InventoryItem;
 
 /** 
@@ -102,6 +105,77 @@ public class GuiChoose {
     }
     public static <T> void reveal(final String message, final Collection<T> items) {
         GuiChoose.getChoices(message, -1, -1, items);
+    }
+
+    // Get Integer in range
+    public static Integer getInteger(final String message) {
+        return getInteger(message, 0, Integer.MAX_VALUE);
+    }
+    public static Integer getInteger(final String message, int min) {
+        return getInteger(message, min, Integer.MAX_VALUE);
+    }
+    public static Integer getInteger(final String message, int min, int max) {
+        if (max <= min) { return min; } //just return min if max <= min
+
+        //force cutting off after 100 numbers at most
+        if (max == Integer.MAX_VALUE) {
+            return getInteger(message, min, max, min + 99);
+        }
+        int count = max - min + 1;
+        if (count > 100) { 
+            return getInteger(message, min, max, min + 99);
+        }
+
+        final Integer[] choices = new Integer[count];
+        for (int i = 0; i < count; i++) {
+            choices[i] = Integer.valueOf(i + min);
+        }
+        return GuiChoose.oneOrNone(message, choices);
+    }
+    public static Integer getInteger(final String message, int min, int max, int cutoff) {
+        if (max <= min || cutoff < min) { return min; } //just return min if max <= min or cutoff < min
+
+        if (cutoff >= max) { //fallback to regular integer prompt if cutoff at or after max
+            return getInteger(message, min, max);
+        }
+
+        List<Object> choices = new ArrayList<Object>();
+        for (int i = min; i <= cutoff; i++) {
+            choices.add(Integer.valueOf(i));
+        }
+        choices.add("Other...");
+
+        Object choice = GuiChoose.oneOrNone(message, choices);
+        if (choice instanceof Integer || choice == null) {
+            return (Integer)choice;
+        }
+
+        //if Other option picked, prompt for number input
+        String prompt = "Enter a number";
+        if (min != Integer.MIN_VALUE) {
+            if (max != Integer.MAX_VALUE) {
+                prompt += " between " + min + " and " + max;
+            }
+            else {
+                prompt += " greater than or equal to " + min;
+            }
+        }
+        else if (max != Integer.MAX_VALUE) {
+            prompt += " less than or equal to " + max;
+        }
+        prompt += ":";
+
+        while (true) {
+            String str = FOptionPane.showInputDialog(prompt, message);
+            if (str == null) { return null; } // that is 'cancel'
+
+            if (StringUtils.isNumeric(str)) {
+                Integer val = Integer.valueOf(str);
+                if (val >= min && val <= max) {
+                    return val;
+                }
+            }
+        }
     }
 
     // returned Object will never be null

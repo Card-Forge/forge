@@ -66,7 +66,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     public final List<Entry<T, Integer>> getOrderedList() {
         return this.data.getOrderedList();
     }
-    
+
     /**
      * 
      * countDistinct.
@@ -92,8 +92,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
      * @param item0 &emsp; {@link forge.Item} object
      */
     public void removeItem(final T item0, int qty) {
-        if (isInfinite()) 
-            return;
+        if (isInfinite()) { return; }
 
         final boolean wasThere = this.data.count(item0) > 0;
         if (wasThere) {

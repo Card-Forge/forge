@@ -454,6 +454,20 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
+     * getSelectedItems.
+     * 
+     * @return ItemPool<T>
+     */
+    public ItemPool<T> getSelectedItemPool() {
+        ItemPool<T> selectedItemPool = new ItemPool<T>(this.genericType);
+        for (T item : getSelectedItems()) {
+            selectedItemPool.put(item, getItemCount(item));
+        }
+        return selectedItemPool;
+    }
+
+    /**
+     * 
      * setSelectedItem.
      * 
      * @param item - Item to select
@@ -559,7 +573,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         for (Map.Entry<T, Integer> item : itemsToAdd) {
             items.add(item.getKey());
         }
-        this.table.setSelectedItems(items);
+        this.setSelectedItems(items);
     }
 
     /**
@@ -599,6 +613,17 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         }
         this.updateView(false);
         this.fixSelection(selectedIndexBefore, selectedItemsBefore);
+    }
+
+    /**
+     * 
+     * removeAllItems.
+     * 
+     */
+    public void removeAllItems() {
+        this.pool.clear();
+        this.model.clear();
+        this.updateView(false);
     }
 
     /**

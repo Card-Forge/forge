@@ -144,7 +144,7 @@ public enum CSubmenuSealed implements ICDoc {
     private <T extends DeckBase> void setupSealed() {
         final String prompt = "Choose Sealed Deck Format:";
         final LimitedPoolType o = GuiChoose.oneOrNone(prompt, LimitedPoolType.values());
-        if ( o == null ) return;
+        if (o == null) return;
         
         SealedCardPoolGenerator sd = new SealedCardPoolGenerator(o);
         if (sd.isEmpty()) return;
@@ -156,9 +156,8 @@ public enum CSubmenuSealed implements ICDoc {
         // This seems to be limited by the MAX_DRAFT_PLAYERS constant
         // in DeckGroupSerializer.java. You could create more AI decks
         // but only the first seven would load. --BBU
-        final Integer[] integers = {1,2,3,4,5,6,7};
-        Integer rounds = GuiChoose.oneOrNone("How many opponents are you willing to face?", integers);
-        if ( null == rounds ) return;
+        Integer rounds = GuiChoose.getInteger("How many opponents are you willing to face?", 1, 7);
+        if (rounds == null) { return; }
 
         final String sDeckName = FOptionPane.showInputDialog(
                 "Save this card pool as:",

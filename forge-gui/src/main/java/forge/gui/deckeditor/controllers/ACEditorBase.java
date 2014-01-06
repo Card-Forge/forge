@@ -19,6 +19,7 @@ package forge.gui.deckeditor.controllers;
 
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -28,8 +29,11 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
+import forge.Singletons;
+import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckSection;
+import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.menus.CDeckEditorUIMenus;
@@ -43,7 +47,10 @@ import forge.gui.toolbox.ContextMenuBuilder;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
 import forge.view.FView;
 
@@ -103,11 +110,11 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             .tooltip("Toggle between editing the deck and the sideboard/planar/scheme/vanguard parts of this deck")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT))
             .iconScaleAuto(false).hoverable().build();
-    
+
     protected ACEditorBase(FScreen screen0) {
         this.screen = screen0;
     }
-    
+
     public FScreen getScreen() {
         return this.screen;
     }
@@ -166,6 +173,57 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         onRemoveItems(items, toAlternate);
     }
 
+    public enum CardLimit {
+        Singleton,
+        Default,
+        None
+    }
+
+    private static final List<String> limitExceptions = Arrays.asList(
+            new String[]{"Relentless Rats", "Shadowborn Apostle"});
+
+    /**
+     * @return pool of additions allowed to deck
+     */
+    protected ItemPool<TItem> getAllowedAdditions(Iterable<Entry<TItem, Integer>> itemsToAdd) {
+        ItemPool<TItem> additions = new ItemPool<TItem>(getCatalogManager().getGenericType());
+        CardLimit limit = getCardLimit();
+        DeckController<TModel> controller = getDeckController();
+        Deck deck = controller != null && controller.getModel() instanceof Deck ? (Deck)controller.getModel() : null;
+
+        for (Entry<TItem, Integer> itemEntry : itemsToAdd) {
+            TItem item = itemEntry.getKey();
+            PaperCard card = item instanceof PaperCard ? (PaperCard)item : null;
+            int qty = itemEntry.getValue();
+
+            int max;
+            if (deck == null || card == null || card.getRules().getType().isBasic() ||
+                    limit == CardLimit.None || limitExceptions.contains(card.getName())) {
+                max = Integer.MAX_VALUE;
+            }
+            else {
+                max = (limit == CardLimit.Singleton ? 1 : Singletons.getModel().getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT));
+                max -= deck.getMain().count(card);
+                if (deck.has(DeckSection.Sideboard)) {
+                    max -= deck.get(DeckSection.Sideboard).count(card);
+                }
+                if (deck.has(DeckSection.Commander)) {
+                    max -= deck.get(DeckSection.Commander).count(card);
+                }
+            }
+            if (qty > max) {
+                qty = max;
+            }
+            if (qty > 0) {
+                additions.put(item, qty);
+            }
+        }
+
+        return additions;
+    }
+
+    protected abstract CardLimit getCardLimit();
+
     /** 
      * Operation to add selected items to current deck.
      */
@@ -178,7 +236,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
     protected abstract void buildAddContextMenu(EditorContextMenuBuilder cmb);
     protected abstract void buildRemoveContextMenu(EditorContextMenuBuilder cmb);
-    
+
     /**
      * Resets the cards in the catalog table and current deck table.
      */
@@ -326,21 +384,12 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             isAddContextMenu = isAddContextMenu0;
         }
 
-        private ItemManager<?> getItemManager() {
+        private ItemManager<TItem> getItemManager() {
             return isAddContextMenu ? catalogManager : deckManager;
         }
 
-        private ItemManager<?> getNextItemManager() {
+        private ItemManager<TItem> getNextItemManager() {
             return isAddContextMenu ? deckManager : catalogManager;
-        }
-
-        private void moveCard(boolean toAlternate, int qty) {
-            if (isAddContextMenu) {
-                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, qty);
-            }
-            else {
-                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, qty);
-            }
         }
 
         @Override
@@ -354,7 +403,9 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             }
             this.menu = null;
 
-            menu.addSeparator();
+            if (menu.getComponentCount() > 0) {
+                menu.addSeparator();
+            }
 
             GuiUtils.addMenuItem(menu, "Jump to previous table",
                     KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0),
@@ -382,67 +433,78 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             });
         }
 
-        private String doNoun(String nounSingular, String nounPlural) {
-            int numSelected = getItemManager().getSelectionCount();
-            if (1 == numSelected) {
-                return nounSingular;
+        private void addItem(String verb, String dest, final boolean toAlternate, final int qty, int shortcutModifiers) {
+            String label = verb + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
+            if (dest != null && !dest.isEmpty()) {
+                label += " " + dest;
             }
-            return String.format("%d %s", numSelected, nounPlural);
+            GuiUtils.addMenuItem(menu, label,
+                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, shortcutModifiers), new Runnable() {
+                        @Override
+                        public void run() {
+                            Integer quantity = qty;
+                            if (quantity < 0) {
+                                quantity = GuiChoose.getInteger("Choose a value for X", 1, -quantity, 20);
+                                if (quantity == null) { return; }
+                            }
+                            if (isAddContextMenu) {
+                                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
+                            }
+                            else {
+                                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
+                            }
+                        }
+                    }, true, shortcutModifiers == 0);
         }
 
-        private String doDest(String destination) {
-            if (null == destination) {
-                return "";
+        private int getMaxMoveQuantity() {
+            ItemPool<TItem> selectedItemPool = getItemManager().getSelectedItemPool();
+            if (isAddContextMenu) {
+                selectedItemPool = getAllowedAdditions(selectedItemPool);
             }
-            return " " + destination;
+            if (selectedItemPool.isEmpty()) {
+                return 0;
+            }
+            int max = Integer.MAX_VALUE;
+            for (Entry<TItem, Integer> itemEntry : selectedItemPool) {
+                if (itemEntry.getValue() < max) {
+                    max = itemEntry.getValue();
+                }
+            }
+            return max;
         }
 
-        public void addMoveItems(String verb, String nounSingular, String nounPlural, String destination) {
-            String noun = doNoun(nounSingular, nounPlural);
-            String dest = doDest(destination);
+        private void addItems(String verb, String dest, boolean toAlternate, int shortcutModifiers1, int shortcutModifiers2, int shortcutModifiers3) {
+            int max = getMaxMoveQuantity();
+            if (max == 0) { return; }
 
-            GuiUtils.addMenuItem(menu,
-                    String.format("%s %s%s", verb, noun, dest),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), new Runnable() {
-                        @Override
-                        public void run() {
-                            moveCard(false, 1);
-                        }
-                    }, true, true);
-            GuiUtils.addMenuItem(menu,
-                    String.format("%s 4 copies of %s%s", verb, noun, dest),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.SHIFT_DOWN_MASK), new Runnable() {
-                        @Override
-                        public void run() {
-                            moveCard(false, 4);
-                        }
-                    });
+            addItem(verb, dest, toAlternate, 1, shortcutModifiers1);
+            if (max == 1) { return; }
+
+            int qty = Singletons.getModel().getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
+            if (qty > max) {
+                qty = max;
+            }
+
+            addItem(verb, dest, toAlternate, qty, shortcutModifiers2);
+            if (max == 2) { return; }
+
+            addItem(verb, dest, toAlternate, -max, shortcutModifiers3); //pass -max as quantity to indicate to prompt for specific quantity
         }
 
-        public void addMoveAlternateItems(String verb, String nounSingular, String nounPlural, String destination) {
-            String noun = doNoun(nounSingular, nounPlural);
-            String dest = doDest(destination);
+        public void addMoveItems(String verb, String dest) {
+            addItems(verb, dest, false, 0, KeyEvent.SHIFT_DOWN_MASK, KeyEvent.ALT_MASK);
+        }
 
-            // yes, CTRL_DOWN_MASK and not getMenuShortcutKeyMask().  On OSX, cmd-space is hard-coded to bring up Spotlight
-            GuiUtils.addMenuItem(menu,
-                    String.format("%s %s%s", verb, noun, dest),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.CTRL_DOWN_MASK), new Runnable() {
-                        @Override
-                        public void run() {
-                            moveCard(true, 1);
-                        }
-                    });
-
-            // getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
-            GuiUtils.addMenuItem(menu,
-                    String.format("%s 4 copies of %s%s", verb, noun, dest),
-                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            moveCard(true, 4);
-                        }
-                    });
+        public void addMoveAlternateItems(String verb, String dest) {
+            if (this.menu.getComponentCount() > 0) {
+                this.menu.addSeparator();
+            }
+            //yes, CTRL_DOWN_MASK and not getMenuShortcutKeyMask().  On OSX, cmd-space is hard-coded to bring up Spotlight
+            addItems(verb, dest, true, KeyEvent.CTRL_DOWN_MASK,
+                    //getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
+                    KeyEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
+                    KeyEvent.ALT_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
         }
     }
 }

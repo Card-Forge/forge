@@ -66,9 +66,9 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
      */
     public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final FScreen screen0) {
         super(screen0);
-        
+
         this.cardPoolCondition = poolCondition;
-        
+
         this.setCatalogManager(new CardManager(true));
         this.setDeckManager(new CardManager(true));
 
@@ -83,6 +83,11 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
 
     //=========== Overridden from ACEditorBase
 
+    @Override
+    protected CardLimit getCardLimit() {
+        return CardLimit.Default;
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
@@ -90,8 +95,11 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
     protected void onAddItems(Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
         if (toAlternate) { return; }
 
-        this.getDeckManager().addItems(items);
-        this.getCatalogManager().selectItemEntrys(items); //just select all added cards in Catalog
+        ItemPool<PaperCard> itemsToAdd = getAllowedAdditions(items);
+        if (itemsToAdd.isEmpty()) { return; }
+
+        this.getDeckManager().addItems(itemsToAdd);
+        this.getCatalogManager().selectItemEntrys(itemsToAdd); //just select all added cards in Catalog
         this.controller.notifyModelChanged();
     }
 
@@ -109,12 +117,12 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Move", "card", "cards", "to deck");
+        cmb.addMoveItems("Add", "to deck");
     }
-    
+
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Move", "card", "cards", "to sideboard");
+        cmb.addMoveItems("Remove", "from deck");
     }
 
     /*
@@ -126,7 +134,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
     public void resetTables() {
         Iterable<PaperCard> allNT = Singletons.getMagicDb().getVariantCards().getAllCards();
         allNT = Iterables.filter(allNT, cardPoolCondition);
-        
+
         this.getCatalogManager().setPool(ItemPool.createFrom(allNT, PaperCard.class), true);
         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
     }
@@ -153,10 +161,10 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
 
         SItemManagerUtil.resetUI(this);
-        
+
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        
+
         this.controller.refreshModel();
     }
 

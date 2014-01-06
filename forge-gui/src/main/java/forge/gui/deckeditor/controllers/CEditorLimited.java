@@ -91,6 +91,11 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
     //========== Overridden from ACEditorBase
 
+    @Override
+    protected CardLimit getCardLimit() {
+        return CardLimit.None;
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
      */
@@ -119,12 +124,12 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Move", "card", "cards", "to deck");
+        cmb.addMoveItems("Move", "to deck");
     }
-    
+
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
-        cmb.addMoveItems("Move", "card", "cards", "to sideboard");
+        cmb.addMoveItems("Move", "to sideboard");
     }
 
     /*
@@ -167,9 +172,9 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
         VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
         VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("Deck Editor: Limited Mode");
-        
+
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        
+        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
     }
 
     /* (non-Javadoc)
@@ -187,7 +192,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     public void resetUIChanges() {
         CSubmenuDraft.SINGLETON_INSTANCE.update();
         CSubmenuSealed.SINGLETON_INSTANCE.update();
-        
+
         //Re-add tabs
         if (deckGenParent != null) {
             deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);

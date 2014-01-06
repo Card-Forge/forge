@@ -35,28 +35,28 @@ public enum CCurrentDeck implements ICDoc {
     private static File previousDirectory = null;
 
     private JFileChooser fileChooser = new JFileChooser(NewConstants.DECK_BASE_DIR);
-    
+
     //========== Overridden methods
-    
+
     private CCurrentDeck() {
         FileFilter[] defaultFilters = fileChooser.getChoosableFileFilters();
         for(FileFilter defFilter : defaultFilters)
         {
             fileChooser.removeChoosableFileFilter(defFilter);
         }
-        
+
         FileFilter DCK_FILTER = new FileFilter() {
             @Override
             public boolean accept(final File f) {
                 return f.getName().endsWith(DeckSerializer.FILE_EXTENSION) || f.isDirectory();
             }
-    
+
             @Override
             public String getDescription() {
                 return "Simple Deck File .dck";
             }
         };
-        
+
         fileChooser.addChoosableFileFilter(DCK_FILTER);
     }
 
@@ -112,7 +112,7 @@ public enum CCurrentDeck implements ICDoc {
             }
         });
     }
-    
+
     /**
      * Opens dialog for importing a deck from a different MTG software.
      */
@@ -126,7 +126,6 @@ public enum CCurrentDeck implements ICDoc {
         dImport.setVisible(true);
     }
 
-
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#update()
      */
@@ -134,9 +133,6 @@ public enum CCurrentDeck implements ICDoc {
     public void update() {
     }
 
-    //
-
-    /** */
     @SuppressWarnings("unchecked")
     private void newDeck() {
         if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen())) { return; }
@@ -178,7 +174,7 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     private File getImportFilename() {
         fileChooser.setDialogTitle("Import Deck");
-        
+
         final int returnVal = fileChooser.showOpenDialog(null);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -229,7 +225,7 @@ public enum CCurrentDeck implements ICDoc {
         fileChooser.setDialogTitle("Export Deck");
         fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
         fileChooser.setCurrentDirectory(previousDirectory);
-        
+
         if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             final File file = fileChooser.getSelectedFile();
             final String check = file.getAbsolutePath();
@@ -264,10 +260,10 @@ public enum CCurrentDeck implements ICDoc {
             public boolean accept(final File f) {
                 return f.getName().endsWith(".html") || f.isDirectory();
             }
-    
+
             @Override
             public String getDescription() {
                 return "Proxy File .html";
             }
-        };    
+        };
 }

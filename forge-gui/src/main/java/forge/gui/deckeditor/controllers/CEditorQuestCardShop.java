@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JLabel;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -79,7 +80,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private final JLabel creditsLabel = new FLabel.Builder()
             .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COINSTACK))
             .fontSize(15).build();
-    
+
     // TODO: move these to the view where they belong
     private final JLabel sellPercentageLabel = new FLabel.Builder().text("0")
             .fontSize(11)
@@ -96,7 +97,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
     private double multiplier;
     private final QuestController questData;
-    
+
     private ItemPoolView<InventoryItem> cardsForSale;
     private final ItemPool<InventoryItem> fullCatalogCards =
             ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), InventoryItem.class);
@@ -127,11 +128,12 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     public CEditorQuestCardShop(final QuestController qd) {
         super(FScreen.QUEST_CARD_SHOP);
-        
+
         this.questData = qd;
 
         final SpellShopManager catalogManager = new SpellShopManager(false);
         final SpellShopManager deckManager = new SpellShopManager(false);
+        deckManager.setCaption("Inventory");
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -142,7 +144,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
     private void toggleFullCatalog() {
         showingFullCatalog = !showingFullCatalog;
-        
+
         if (showingFullCatalog) {
             this.getCatalogManager().setPool(fullCatalogCards, true);
             this.getBtnAdd().setEnabled(false);
@@ -249,7 +251,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             }
             value *= foilMultiplier;
         }
-        
+
         return Integer.valueOf(value);
     }
 
@@ -287,26 +289,12 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
     };
 
-    private final String getItemDisplayType(InventoryItem item) {
-        if (item instanceof PaperCard) {
-            return "Card";
-        }
-        if (item instanceof BoosterPack) {
-            return "Booster Pack";
-        }
-        if (item instanceof TournamentPack) {
-            return "Tournament Pack";
-        }
-        if (item instanceof FatPack) {
-            return "Fat Pack";
-        }
-        if (item instanceof PreconDeck) {
-            return "Preconstructed Deck";
-        }
-        return null;
-    }
-
     //=========== Overridden from ACEditorBase
+
+    @Override
+    protected CardLimit getCardLimit() {
+        return CardLimit.None;
+    }
 
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#onAddItems()
@@ -323,13 +311,11 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         for (Entry<InventoryItem, Integer> itemEntry : items) {
             final InventoryItem item = itemEntry.getKey();
-            final String displayType = getItemDisplayType(item);
-            if (displayType == null) { continue; } //don't remove item from Catalog if unsupported type
 
             final int qty = itemEntry.getValue();
             final int value = this.getCardValue(item);
             final int totalCost = qty * value;
-            final String title = "Buy " + displayType;
+            final String title = "Buy " + SItemManagerUtil.getItemDisplayString(item, 1, true);
             final String promptSuffix = " credits to purchase " + (qty == 1 ? "'" : qty + " copies of '") + item.getName() + "'";
 
             if (totalCost > this.questData.getAssets().getCredits()) {
@@ -371,7 +357,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 final PreconDeck deck = (PreconDeck) item;
                 for (int i = 0; i < qty; i++) {
                     this.questData.getCards().buyPreconDeck(deck, value);
-    
+
                     itemsToAdd.addAll(deck.getDeck().getMain());
                 }
 
@@ -431,18 +417,18 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
-    
+
     @Override
     protected void buildAddContextMenu(EditorContextMenuBuilder cmb) {
         if (!showingFullCatalog) {
-            cmb.addMoveItems("Buy", "item", "items", null);
+            cmb.addMoveItems("Buy", null);
         }
     }
-    
+
     @Override
     protected void buildRemoveContextMenu(EditorContextMenuBuilder cmb) {
         if (!showingFullCatalog) {
-            cmb.addMoveItems("Sell", "card", "cards", null);
+            cmb.addMoveItems("Sell", null);
         }
     }
 
@@ -450,7 +436,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         if (showingFullCatalog) {
             return;
         }
-        
+
         this.getCatalogManager().addItems(cardsToRemove);
         this.getDeckManager().removeItems(cardsToRemove);
 
@@ -537,13 +523,13 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         CDRemLabel = this.getBtnRemove().getText();
         this.getBtnRemove().setText("Sell Card");
-        
+
         VProbabilities.SINGLETON_INSTANCE.getTabLabel().setVisible(false);
 
         prevRem4Label = this.getBtnRemove4().getText();
         prevRem4Tooltip = this.getBtnRemove4().getToolTipText();
         prevRem4Cmd = this.getBtnRemove4().getCommand();
-        
+
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
         this.decksUsingMyCards = this.countDecksForEachCard();
@@ -575,7 +561,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 removeCards(cardsToRemove);
             }
         });
-        
+
         this.getDeckManager().getPnlButtons().add(creditsLabel, "gap 5px");
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
 
@@ -617,7 +603,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         if (showingFullCatalog) {
             toggleFullCatalog();
         }
-        
+
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
 
         // undo Card Shop Specifics
@@ -637,7 +623,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getBtnRemove().setText(CDRemLabel);
 
         //TODO: Remove filter for SItemManagerUtil.StatTypes.PACK
-        
+
         //Re-add tabs
         if (deckGenParent != null) {
             deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);

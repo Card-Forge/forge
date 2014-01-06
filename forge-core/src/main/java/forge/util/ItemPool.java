@@ -116,7 +116,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         this.isListInSync = false;
     }
 
-    private void put(final T item, final int amount) {
+    public void put(final T item, final int amount) {
         this.getItems().put(item, amount);
         this.isListInSync = false;
     }

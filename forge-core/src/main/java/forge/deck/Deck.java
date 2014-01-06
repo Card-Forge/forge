@@ -200,8 +200,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return d;
     }
 
-
-
     private static List<String> writeCardPool(final ItemPoolView<PaperCard> pool) {
         final List<Entry<PaperCard, Integer>> main2sort = pool.getOrderedList();
         Collections.sort(main2sort, ItemPoolSorter.BY_NAME_THEN_SET);
