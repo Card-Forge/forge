@@ -77,7 +77,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones use original card art");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
-    private final JCheckBox cbRandomizeArt = new OptionsCheckBox("Randomize Card Art");
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
     private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for touchscreens");
@@ -187,9 +186,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbRandomFoil, regularConstraints);
         pnlPrefs.add(new NoteLabel("Adds foiled effects to random cards."), regularConstraints);
-
-        pnlPrefs.add(cbRandomizeArt, regularConstraints);
-        pnlPrefs.add(new NoteLabel("Randomize the card art for cards in the human's deck."), regularConstraints);
 
         pnlPrefs.add(cbScaleLarger, regularConstraints);
         pnlPrefs.add(new NoteLabel("Allows card pictures to be expanded larger than their original size."), regularConstraints);
@@ -428,11 +424,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbRandomFoil() {
         return cbRandomFoil;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbRandomizeArt() {
-        return cbRandomizeArt;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
