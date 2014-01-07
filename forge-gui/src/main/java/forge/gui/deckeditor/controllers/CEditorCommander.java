@@ -213,8 +213,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      */
     public void cycleEditorMode() {
         int curindex = allSections.indexOf(sectionMode);
-
-        curindex = curindex == (allSections.size()-1) ? 0 : curindex+1;
+        curindex = (curindex + 1) % allSections.size();
         sectionMode = allSections.get(curindex);
 
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();

@@ -974,6 +974,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
+     * isInfinite.
+     * 
+     * @return whether item manager's pool of items is in infinite supply
+     */
+    public boolean isInfinite() {
+        return this.model.isInfinite();
+    }
+
+    /**
+     * 
      * focus.
      * 
      */

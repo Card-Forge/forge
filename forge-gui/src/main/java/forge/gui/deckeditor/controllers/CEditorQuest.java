@@ -32,7 +32,6 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VAllDecks;
-import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
@@ -69,7 +68,6 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
-    private boolean sideboardMode = false;
 
     private Map<PaperCard, Integer> decksUsingMyCards;
 
@@ -192,6 +190,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public void resetTables() {
+        this.sectionMode = DeckSection.Main;
+
         final Deck deck = this.controller.getModel();
 
         final ItemPool<PaperCard> cardpool = new ItemPool<PaperCard>(PaperCard.class);
@@ -220,27 +220,17 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
     /**
      * Switch between the main deck and the sideboard editor.
      */
-    public void switchEditorMode(boolean isSideboarding) {
+    public void cycleEditorMode() {
         int curindex = allSections.indexOf(sectionMode);
-
-        curindex = curindex == (allSections.size()-1) ? 0 : curindex+1;
+        curindex = (curindex + 1) % allSections.size();
         sectionMode = allSections.get(curindex);
 
-        if (isSideboarding) {
-            this.getCatalogManager().setPool(this.controller.getModel().getMain());
+        if (sectionMode == DeckSection.Sideboard) {
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
-        } else {
-            resetTables();
         }
-
-        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(isSideboarding ? "Main Deck" : "Card Catalog");
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(isSideboarding ? "Sideboard" : "Title:");
+        else {
+            this.getDeckManager().setPool(this.controller.getModel().getMain());
+        }
 
         this.controller.updateCaptions();
     }
@@ -285,8 +275,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         this.getBtnCycleSection().setCommand(new Command() {
             @Override
             public void run() {
-                sideboardMode = !sideboardMode;
-                switchEditorMode(sideboardMode);
+                cycleEditorMode();
         } });
         
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);

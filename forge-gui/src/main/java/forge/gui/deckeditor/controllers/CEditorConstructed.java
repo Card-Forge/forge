@@ -72,7 +72,6 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         allSections.add(DeckSection.Avatar);
         allSections.add(DeckSection.Schemes);
         allSections.add(DeckSection.Planes);
-        //allSections.add(DeckSection.Commander);
 
         normalPool = ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
         avatarPool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)),PaperCard.class);
@@ -127,8 +126,14 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         else {
             editor.getDeckManager().addItems(itemsToAdd);
 
-            //also select all added cards in Catalog
-            editor.getCatalogManager().selectItemEntrys(itemsToAdd);
+            if (editor.getCatalogManager().isInfinite()) {
+                //select all added cards in Catalog if infinite
+                editor.getCatalogManager().selectItemEntrys(itemsToAdd);
+            }
+            else {
+                //remove all added cards from Catalog if not infinite
+                editor.getCatalogManager().removeItems(items);
+            }
         }
 
         controller.notifyModelChanged();
@@ -267,8 +272,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
      */
     public void cycleEditorMode() {
         int curindex = allSections.indexOf(sectionMode);
-
-        curindex = curindex == (allSections.size()-1) ? 0 : curindex+1;
+        curindex = (curindex + 1) % allSections.size();
         sectionMode = allSections.get(curindex);
 
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
