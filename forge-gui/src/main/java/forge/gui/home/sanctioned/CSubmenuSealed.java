@@ -1,7 +1,7 @@
 package forge.gui.home.sanctioned;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,29 +63,28 @@ public enum CSubmenuSealed implements ICDoc {
      */
     @Override
     public void initialize() {
-        VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().setSelectCommand(cmdDeckSelect);
+        final VSubmenuSealed view = VSubmenuSealed.SINGLETON_INSTANCE;
 
-        VSubmenuSealed.SINGLETON_INSTANCE.getBtnBuildDeck().addMouseListener(
-                new MouseAdapter() { @Override
-                    public void mousePressed(final MouseEvent e) { setupSealed(); } });
+        view.getLstDecks().setSelectCommand(cmdDeckSelect);
 
-        VSubmenuSealed.SINGLETON_INSTANCE.getBtnStart().addMouseListener(
-            new MouseAdapter() {
-                @Override
-                public void mouseReleased(final MouseEvent e) {
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            startGame(GameType.Sealed);
-                        }
-                    });
-                }
-            });
-
-        VSubmenuSealed.SINGLETON_INSTANCE.getBtnDirections().addMouseListener(new MouseAdapter() {
+        view.getBtnBuildDeck().setCommand(new Command() {
             @Override
-            public void mouseClicked(final MouseEvent e) {
-                VSubmenuSealed.SINGLETON_INSTANCE.showDirections();
+            public void run() {
+                setupSealed();
+            }
+        });
+
+        view.getBtnStart().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                startGame(GameType.Sealed);
+            }
+        });
+
+        view.getBtnDirections().setCommand(new Command() {
+            @Override
+            public void run() {
+                view.showDirections();
             }
         });
     }
@@ -142,12 +141,12 @@ public enum CSubmenuSealed implements ICDoc {
 
     @SuppressWarnings("unchecked")
     private <T extends DeckBase> void setupSealed() {
-        final String prompt = "Choose Sealed Deck Format:";
-        final LimitedPoolType o = GuiChoose.oneOrNone(prompt, LimitedPoolType.values());
-        if (o == null) return;
+        final String prompt = "Choose Sealed Deck Format";
+        final LimitedPoolType poolType = GuiChoose.oneOrNone(prompt, LimitedPoolType.values());
+        if (poolType == null) { return; }
         
-        SealedCardPoolGenerator sd = new SealedCardPoolGenerator(o);
-        if (sd.isEmpty()) return;
+        SealedCardPoolGenerator sd = new SealedCardPoolGenerator(poolType);
+        if (sd.isEmpty()) { return; }
 
         final ItemPool<PaperCard> humanPool = sd.getCardpool(true);
         

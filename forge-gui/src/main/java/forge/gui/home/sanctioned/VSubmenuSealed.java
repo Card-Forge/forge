@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
@@ -52,7 +51,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     private final StartButton btnStart  = new StartButton();
     private final DeckLister lstDecks   = new DeckLister(GameType.Sealed);
 
-    private final JLabel lblInfo = new FLabel.Builder()
+    private final FLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
         .text("Select a game, or build a new one").build();
 
@@ -70,7 +69,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
 
     private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("Build New Sealed Deck").fontSize(16).build();
 
-    private final JLabel btnDirections = new FLabel.Builder()
+    private final FLabel btnDirections = new FLabel.Builder()
         .fontSize(16).opaque(true).hoverable(true)
         .text("How To Play").fontAlign(SwingConstants.CENTER).build();
 
@@ -129,13 +128,13 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         return EDocID.HOME_SEALED;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnDirections() {
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getBtnDirections() {
         return this.btnDirections;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnBuildDeck() {
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getBtnBuildDeck() {
         return this.btnBuildDeck;
     }
 

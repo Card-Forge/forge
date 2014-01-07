@@ -51,8 +51,6 @@ import forge.util.TextUtil;
 public class SealedCardPoolGenerator {
     private final ArrayList<IUnOpenedProduct> product = new ArrayList<IUnOpenedProduct>();
 
-    private static final Integer[] ints3to12 = {3,4,5,6,7,8,9,10,11,12};
-
     /** The Land set code. */
     private String landSetCode = null;
 
@@ -68,21 +66,22 @@ public class SealedCardPoolGenerator {
         switch(poolType) {
             case Full:
                 // Choose number of boosters
-
-                chooseNumberOfBoosters(new UnOpenedProduct(SealedProduct.Template.genericBooster));
+                if (!chooseNumberOfBoosters(new UnOpenedProduct(SealedProduct.Template.genericBooster))) {
+                    return;
+                }
                 landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions()).getCode();
                 break;
-                
-            case Block: 
+
+            case Block:
             case FantasyBlock:
                 List<CardBlock> blocks = new ArrayList<CardBlock>();
                 Iterable<CardBlock> src = poolType == LimitedPoolType.Block ? Singletons.getModel().getBlocks() : Singletons.getModel().getFantasyBlocks();
                 for (CardBlock b : src) {
                     blocks.add(b);
                 }
-    
+
                 final CardBlock block = GuiChoose.oneOrNone("Choose Block", blocks);
-                if( null == block) return;
+                if (block == null) { return; }
 
                 final int nPacks = block.getCntBoostersSealed();
                 final Stack<String> sets = new Stack<String>();
@@ -91,7 +90,7 @@ public class SealedCardPoolGenerator {
                     sets.add(edition.getCode());
                 }
 
-                for(String ms : block.getMetaSetNames()) {
+                for (String ms : block.getMetaSetNames()) {
                     sets.push(ms);
                 }
 
@@ -102,43 +101,44 @@ public class SealedCardPoolGenerator {
                     }
 
                     final String p = setCombos.size() > 1 ? GuiChoose.oneOrNone("Choose packs to play with", setCombos) : setCombos.get(0);
-                    if( p == null )
-                        return;
+                    if (p == null) { return; }
 
                     for (String pz : TextUtil.split(p, ',')) {
                         String[] pps = TextUtil.splitWithParenthesis(pz.trim(), ' ');
                         String setCode = pps[pps.length - 1];
-                        int nBoosters = pps.length > 1 ? Integer.parseInt(pps[0]) : 1; 
-                        while(nBoosters-- > 0)
+                        int nBoosters = pps.length > 1 ? Integer.parseInt(pps[0]) : 1;
+                        while (nBoosters-- > 0) {
                             this.product.add(block.getBooster(setCode));
+                        }
                     }
-                } else {
+                }
+                else {
                     IUnOpenedProduct prod = block.getBooster(sets.get(0));
                     for (int i = 0; i < nPacks; i++) {
                         this.product.add(prod);
                     }
                 }
-    
+
                 landSetCode = block.getLandSet().getCode();
                 break;
-                
+
             case Custom:
                 String[] dList;
                 final ArrayList<CustomLimited> customs = new ArrayList<CustomLimited>();
-    
+
                 // get list of custom draft files
                 final File dFolder = new File("res/sealed/");
                 if (!dFolder.exists()) {
                     throw new RuntimeException("GenerateSealed : folder not found -- folder is "
                             + dFolder.getAbsolutePath());
                 }
-    
+
                 if (!dFolder.isDirectory()) {
                     throw new RuntimeException("GenerateSealed : not a folder -- " + dFolder.getAbsolutePath());
                 }
-    
+
                 dList = dFolder.list();
-    
+
                 for (final String element : dList) {
                     if (element.endsWith(".sealed")) {
                         final List<String> dfData = FileUtil.readFile("res/sealed/" + element);
@@ -148,33 +148,35 @@ public class SealedCardPoolGenerator {
                         }
                     }
                 }
-    
+
                 // present list to user
                 if (customs.isEmpty()) {
                     FOptionPane.showMessageDialog("No custom sealed files found.");
+                    return;
                 }
-                else {
-                    final CustomLimited draft = GuiChoose.one("Choose Custom Sealed Pool", customs);
 
-                    UnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());
-                    toAdd.setLimitedPool(draft.isSingleton());
-                    chooseNumberOfBoosters(toAdd);
-                    landSetCode = draft.getLandSetCode();
+                final CustomLimited draft = GuiChoose.one("Choose Custom Sealed Pool", customs);
+
+                UnOpenedProduct toAdd = new UnOpenedProduct(draft.getSealedProductTemplate(), draft.getCardPool());
+                toAdd.setLimitedPool(draft.isSingleton());
+                if (!chooseNumberOfBoosters(toAdd)) {
+                    return;
                 }
+
+                landSetCode = draft.getLandSetCode();
                 break;
         }
     }
 
+    private boolean chooseNumberOfBoosters(final IUnOpenedProduct product1) {
+        Integer boosterCount = GuiChoose.getInteger("How many booster packs?", 3, 12);
+        if (boosterCount == null) { return false; }
 
-    private void chooseNumberOfBoosters(final IUnOpenedProduct product1) {
-        
-        Integer cntBoosters = GuiChoose.one("How many booster packs?", ints3to12);
-   
-        for (int i = 0; i < cntBoosters; i++) {
+        for (int i = 0; i < boosterCount; i++) {
             this.product.add(product1);
         }
+        return true;
     }
-
 
     /**
      * <p>
@@ -199,7 +201,7 @@ public class SealedCardPoolGenerator {
                 setCombos.add(String.format("%s, %s, %s", sets[0], sets[2], sets[0]));
                 setCombos.add(String.format("%s, %s, %s", sets[2], sets[2], sets[2]));
                 setCombos.add(String.format("%s, %s, %s", sets[2], sets[1], sets[0]));
-                }
+            }
         }
         else if (nPacks == 4) {
             if (sets.length >= 2) {
@@ -270,7 +272,6 @@ public class SealedCardPoolGenerator {
             setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[2], sets[2], sets[2], sets[2], sets[0], sets[0], sets[0], sets[0]));
             setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[1], sets[1], sets[1], sets[1], sets[0], sets[0], sets[0], sets[0]));
             setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s", sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0], sets[0]));
-
         }
         else if (nPacks == 9 && sets.length >= 9) {
             setCombos.add(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s", sets[8], sets[7], sets[6], sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
@@ -307,9 +308,10 @@ public class SealedCardPoolGenerator {
                 setCombos.add(String.format("2 %s, 2 %s, 2 %s", sets[0], sets[1], sets[2]));
             }
             if (sets.length >= 4) {
-                if( sets[1].equals(sets[2]) && sets[1].equals(sets[0])) {
+                if ( sets[1].equals(sets[2]) && sets[1].equals(sets[0])) {
                     setCombos.add(String.format("%s, 5 %s", sets[3], sets[0])); // for guild sealed
-                } else {
+                }
+                else {
                     setCombos.add(String.format("%s, %s, %s, 3 %s", sets[3], sets[2], sets[1], sets[0]));
                     setCombos.add(String.format("%s, %s, 2 %s, 2 %s", sets[3], sets[2], sets[1], sets[0]));
                 }
@@ -320,11 +322,9 @@ public class SealedCardPoolGenerator {
             if (sets.length >= 6) {
                 setCombos.add(String.format("%s, %s, %s, %s, %s, %s", sets[5], sets[4], sets[3], sets[2], sets[1], sets[0]));
             }
-
         }
         return setCombos;
     }
-
 
     /**
      * <p>
@@ -339,14 +339,15 @@ public class SealedCardPoolGenerator {
         final CardPool pool = new CardPool();
 
         for (IUnOpenedProduct prod : product) {
-            if( prod instanceof UnOpenedMeta )
+            if (prod instanceof UnOpenedMeta) {
                 pool.addAllFlat(((UnOpenedMeta) prod).open(isHuman));
-            else
+            }
+            else {
                 pool.addAllFlat(prod.get());
+            }
         }
         return pool;
     }
-
 
     /**
      * Gets the land set code.
@@ -356,9 +357,8 @@ public class SealedCardPoolGenerator {
     public String getLandSetCode() {
         return this.landSetCode;
     }
-    
-    public boolean isEmpty() { 
+
+    public boolean isEmpty() {
         return product.isEmpty();
     }
-
 }

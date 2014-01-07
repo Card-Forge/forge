@@ -54,11 +54,19 @@ public enum CSubmenuDraft implements ICDoc {
 
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
 
-        view.getBtnBuildDeck().setCommand(new Command() { @Override
-                    public void run() { setupDraft(); } });
+        view.getBtnBuildDeck().setCommand(new Command() {
+            @Override
+            public void run() {
+                setupDraft();
+            }
+        });
 
         view.getBtnStart().addActionListener(new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) { startGame(GameType.Draft); } });
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                startGame(GameType.Draft);
+            }
+        });
     }
 
     /* (non-Javadoc)
@@ -143,12 +151,11 @@ public enum CSubmenuDraft implements ICDoc {
     /** */
     private void setupDraft() {
         // Determine what kind of booster draft to run
-        final String prompt = "Choose Draft Format:";
-        final LimitedPoolType o = GuiChoose.oneOrNone(prompt, LimitedPoolType.values());
-        if (o == null) return;
+        final LimitedPoolType poolType = GuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
+        if (poolType == null) { return; }
         
         final CEditorDraftingProcess draft = new CEditorDraftingProcess();
-        draft.showGui(new BoosterDraft(o));
+        draft.showGui(new BoosterDraft(poolType));
 
         Singletons.getControl().setCurrentScreen(FScreen.DRAFTING_PROCESS);
         CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(draft);
