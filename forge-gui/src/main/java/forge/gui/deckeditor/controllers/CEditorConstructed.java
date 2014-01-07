@@ -80,8 +80,13 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
 
         boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
 
-        this.setCatalogManager(new CardManager(wantUnique));
-        this.setDeckManager(new CardManager(wantUnique));
+        CardManager catalogManager = new CardManager(wantUnique);
+        CardManager deckManager = new CardManager(wantUnique);
+
+        catalogManager.setCaption("Catalog");
+
+        this.setCatalogManager(catalogManager);
+        this.setDeckManager(deckManager);
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override

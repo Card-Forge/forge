@@ -133,7 +133,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         final SpellShopManager catalogManager = new SpellShopManager(false);
         final SpellShopManager deckManager = new SpellShopManager(false);
-        deckManager.setCaption("Inventory");
+
+        catalogManager.setCaption("Spell Shop");
+        deckManager.setCaption("Quest Inventory");
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);

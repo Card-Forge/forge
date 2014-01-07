@@ -69,8 +69,13 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
 
         this.cardPoolCondition = poolCondition;
 
-        this.setCatalogManager(new CardManager(true));
-        this.setDeckManager(new CardManager(true));
+        CardManager catalogManager = new CardManager(true);
+        CardManager deckManager = new CardManager(true);
+
+        catalogManager.setCaption("Catalog");
+
+        this.setCatalogManager(catalogManager);
+        this.setDeckManager(deckManager);
 
         final Supplier<Deck> newCreator = new Supplier<Deck>() {
             @Override

@@ -28,7 +28,6 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.views.VAllDecks;
-import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
@@ -67,6 +66,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         final CardManager catalogManager = new CardManager(false);
         final CardManager deckManager = new CardManager(false);
+
+        deckManager.setCaption("Draft Picks");
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -134,9 +135,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      *            a {@link forge.CardList} object.
      */
     private void showChoices(final ItemPoolView<PaperCard> list) {
-        VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
-        VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("Select a card from pack number "
-                + (((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1) + ".");
+        int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
+
+        this.getCatalogManager().setCaption("Pack " + packNumber + " - Cards");
         this.getCatalogManager().setPool(list);
         this.getCatalogManager().getTable().setSelectedIndex(0);
     } // showChoices()

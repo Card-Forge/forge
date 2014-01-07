@@ -8,7 +8,6 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 import forge.item.InventoryItem;
@@ -29,18 +28,12 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Card Catalog");
 
-    // panel where special instructions appear
-    private final JPanel pnlHeader = new JPanel(new MigLayout("insets 0, gap 0, center"));
-    private final FLabel lblTitle = new FLabel.Builder().fontSize(14).build();
-
     private final ItemManagerContainer itemManagerContainer = new ItemManagerContainer();
     private ItemManager<? extends InventoryItem> itemManager;
 
     //========== Constructor
     /** */
     private VCardCatalog() {
-        pnlHeader.setOpaque(false);
-        pnlHeader.add(lblTitle, "center, gap 0 0 10 5");
     }
 
     //========== Overridden from IVDoc
@@ -74,7 +67,6 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
     public void populate() {
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
-        parentBody.add(pnlHeader, "pushx, growx");
         parentBody.add(itemManagerContainer, "push, grow");
     }
 
@@ -87,8 +79,4 @@ public enum VCardCatalog implements IVDoc<CCardCatalog> {
         this.itemManager = itemManager0;
         itemManagerContainer.setItemManager(itemManager0);
     }
-
-    //========== Accessor/mutator methods
-    public JPanel getPnlHeader()     { return pnlHeader;     }
-    public FLabel getLblTitle()      { return lblTitle;      }
 }

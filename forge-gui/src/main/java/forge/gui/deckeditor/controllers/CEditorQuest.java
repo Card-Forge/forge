@@ -96,7 +96,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      */
     public CEditorQuest(final QuestController questData0) {
         super(FScreen.DECK_EDITOR_QUEST);
-        
+
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
 
@@ -104,6 +104,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
 
         final CardManager catalogManager = new CardManager(false);
         final CardManager deckManager = new CardManager(false);
+
+        catalogManager.setCaption("Quest Inventory");
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -277,9 +279,9 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
             public void run() {
                 cycleEditorMode();
         } });
-        
+
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
-        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        
+        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
 
         if (this.controller.getModel() == null) {
             this.getDeckController().setModel(new Deck());

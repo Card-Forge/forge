@@ -26,7 +26,6 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.views.VAllDecks;
-import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
@@ -65,6 +64,8 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
 
         final CardManager catalogManager = new CardManager(false);
         final CardManager deckManager = new CardManager(false);
+
+        catalogManager.setCaption("Sideboard");
 
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
@@ -169,9 +170,6 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
-
-        VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
-        VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("Deck Editor: Limited Mode");
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);

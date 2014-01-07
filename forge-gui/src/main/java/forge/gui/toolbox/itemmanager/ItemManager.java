@@ -17,6 +17,7 @@
  */
 package forge.gui.toolbox.itemmanager;
 
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -281,8 +282,19 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public void doLayout() {
         int buttonPanelHeight = 32;
         LayoutHelper helper = new LayoutHelper(this);
+
+        boolean showButtonPanel = false;
+        if (this.pnlButtons.isVisible()) {
+            for (Component comp : this.pnlButtons.getComponents()) {
+                if (comp.isVisible()) {
+                    showButtonPanel = true;
+                    break;
+                }
+            }
+        }
+
         if (this.hideFilters) {
-            if (this.pnlButtons.getComponentCount() > 0) {
+            if (showButtonPanel) {
                 helper.offset(0, -4);
                 helper.fillLine(this.pnlButtons, buttonPanelHeight);
             }
@@ -302,7 +314,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             helper.include(this.txtFilterLogic, this.txtFilterLogic.getAutoSizeWidth(), FTextField.HEIGHT);
             helper.fillLine(this.mainSearchFilter.getWidget(), ItemFilter.PANEL_HEIGHT);
             helper.newLine(-3);
-            helper.fillLine(this.pnlButtons, this.pnlButtons.getComponentCount() > 0 ? buttonPanelHeight : 1); //just show border if no buttons
+            helper.fillLine(this.pnlButtons, showButtonPanel ? buttonPanelHeight : 1); //just show border if no buttons
         }
         helper.include(this.btnFilters, 61, FTextField.HEIGHT);
         helper.include(this.lblCaption, this.lblCaption.getAutoSizeWidth(), FTextField.HEIGHT);
