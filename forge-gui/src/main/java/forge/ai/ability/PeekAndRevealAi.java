@@ -3,6 +3,7 @@ package forge.ai.ability;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 
@@ -17,6 +18,9 @@ public class PeekAndRevealAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+        if (sa instanceof AbilityStatic) {
+            return false;
+        }
         // So far this only appears on Triggers, but will expand
         // once things get converted from Dig + NoMove
         return true;
