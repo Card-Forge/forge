@@ -279,6 +279,12 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public boolean canSwitchAway(boolean isClosing) {
+        if (isClosing) {
+            String userPrompt =
+                    "This will end the current draft and you will not be able to resume.\n\n" +
+                            "Leave anyway?";
+            return FOptionPane.showConfirmDialog(userPrompt, "Leave Draft?", "Leave", "Cancel", false);
+        }
         return true;
     }
 
