@@ -1158,12 +1158,6 @@ public class CardFactoryUtil {
         if (sq[0].contains("YourLandsPlayed"))              return doXMath(cc.getNumLandsPlayed(), m, c);
         if (sq[0].contains("OppLandsPlayed"))               return doXMath(ccOpp.getNumLandsPlayed(), m, c);
 
-
-        // Count$HighestLifeTotal
-        if (sq[0].contains("HighestLifeTotal")) {
-            return doXMath(Aggregates.max(cc.getGame().getPlayers(), Player.Accessors.FN_GET_LIFE), m, c);
-        }
-
         // Count$LowestLifeTotal
         if (sq[0].contains("LowestLifeTotal")) {
             final String[] playerType = sq[0].split(" ");
@@ -1674,6 +1668,8 @@ public class CardFactoryUtil {
             }
         } else if (s[0].contains("Mod")) {
             return num % secondaryNum;
+        } else if (s[0].contains("Abs")) {
+            return Math.abs(num);
         } else if (s[0].contains("LimitMax")) {
             if (num < secondaryNum) {
                 return num;
