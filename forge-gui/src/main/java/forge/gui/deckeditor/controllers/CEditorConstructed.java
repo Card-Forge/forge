@@ -365,10 +365,7 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public boolean canSwitchAway(boolean isClosing) {
-        if (isClosing) {
-            return SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_CONSTRUCTED);
-        }
-        return true;
+        return SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_CONSTRUCTED);
     }
 
     /* (non-Javadoc)
