@@ -987,21 +987,12 @@ public class CardFactoryUtil {
         if (l[0].startsWith("ImprintedCardToughness") && !c.getImprinted().isEmpty())   return c.getImprinted().get(0).getNetDefense();
         if (l[0].startsWith("ImprintedCardManaCost") && !c.getImprinted().isEmpty())    return c.getImprinted().get(0).getCMC();
 
-        if (l[0].startsWith("GreatestPowerYouControl")) {
+        if (l[0].startsWith("GreatestPower_")) {
+            final String restriction = l[0].substring(14);
+            final String[] rest = restriction.split(",");
+            List<Card> list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c);
             int highest = 0;
-            for (final Card crd : c.getController().getCreaturesInPlay()) {
-                if (crd.getNetAttack() > highest) {
-                    highest = crd.getNetAttack();
-                }
-            }
-            return highest;
-        }
-
-        if (l[0].startsWith("GreatestPowerYouDontControl")) {
-            int highest = 0;
-            for (final Card crd : c.getController().getGame().getCardsIn(ZoneType.Battlefield)) {
-                if (!crd.isCreature() || crd.getController() == c.getController())
-                    continue;
+            for (final Card crd : list) {
                 if (crd.getNetAttack() > highest) {
                     highest = crd.getNetAttack();
                 }
