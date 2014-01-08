@@ -106,7 +106,7 @@ public enum CSubmenuSealed implements ICDoc {
 
         final VSubmenuSealed view = VSubmenuSealed.SINGLETON_INSTANCE;
         view.getLstDecks().setDecks(humanDecks);
-        
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
                 JButton btnStart = view.getBtnStart();
@@ -125,8 +125,8 @@ public enum CSubmenuSealed implements ICDoc {
         if (human == null) {
             FOptionPane.showErrorDialog("Please build and/or select a deck for yourself.", "No Deck");
             return;
-        } 
-        
+        }
+
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(human);
             if (null != errorMessage) {
@@ -144,12 +144,12 @@ public enum CSubmenuSealed implements ICDoc {
         final String prompt = "Choose Sealed Deck Format";
         final LimitedPoolType poolType = GuiChoose.oneOrNone(prompt, LimitedPoolType.values());
         if (poolType == null) { return; }
-        
+
         SealedCardPoolGenerator sd = new SealedCardPoolGenerator(poolType);
         if (sd.isEmpty()) { return; }
 
         final ItemPool<PaperCard> humanPool = sd.getCardpool(true);
-        
+
         // System.out.println(humanPool);
 
         // This seems to be limited by the MAX_DRAFT_PLAYERS constant
@@ -212,7 +212,7 @@ public enum CSubmenuSealed implements ICDoc {
     public Command getCommandOnSelect() {
         return null;
     }
-    
+
     static class DeckComparer implements java.util.Comparator<Deck> {
         ReadDraftRankings ranker = new ReadDraftRankings();
 
@@ -248,7 +248,7 @@ public enum CSubmenuSealed implements ICDoc {
 
             return (20.0 / (best + (2 * value)));
         }
-        
+
         @Override
         public int compare(Deck o1, Deck o2) {
             double delta = getDraftValue(o1) - getDraftValue(o2);

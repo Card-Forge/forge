@@ -19,8 +19,6 @@ package forge.gui.match.controllers;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
 import java.util.Map.Entry;
@@ -81,8 +79,9 @@ public enum CDock implements ICDoc {
     public void endTurn() {
         Player p = findAffectedPlayer();
 
-        if( p != null )
+        if (p != null) {
             p.getController().autoPassTo(PhaseType.CLEANUP);
+        }
     }
 
     public void revertLayout() {
@@ -95,7 +94,6 @@ public enum CDock implements ICDoc {
                 SOverlayUtils.hideOverlay();
             }
         });
-
     }
 
     public void saveLayout() {
@@ -137,7 +135,6 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     public void viewDeckList() {
-
         showDeck(game.getMatch().getPlayers().get(0).getDeck());
     }
 
@@ -171,8 +168,7 @@ public enum CDock implements ICDoc {
             break;
         }
 
-        Singletons.getModel().getPreferences()
-        .setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState));
+        Singletons.getModel().getPreferences().setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState));
         //FModel.SINGLETON_INSTANCE.getPreferences().save();
     }
 
@@ -279,6 +275,7 @@ public enum CDock implements ICDoc {
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#initialize()
      */
+    @SuppressWarnings("serial")
     @Override
     public void initialize() {
         final String temp = Singletons.getModel().getPreferences()
@@ -296,32 +293,60 @@ public enum CDock implements ICDoc {
 
         refreshArcStateDisplay();
 
-        VDock.SINGLETON_INSTANCE.getBtnConcede()
-        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { CMatchUI.SINGLETON_INSTANCE.concede(); } });
-
-        VDock.SINGLETON_INSTANCE.getBtnSettings()
-        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { SOverlayUtils.showOverlay(); } });
-
-        VDock.SINGLETON_INSTANCE.getBtnEndTurn()
-        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { endTurn(); } });
-
-        VDock.SINGLETON_INSTANCE.getBtnViewDeckList()
-        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { viewDeckList(); } });
-
-        VDock.SINGLETON_INSTANCE.getBtnRevertLayout()
-        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { revertLayout(); } });
-
-        VDock.SINGLETON_INSTANCE.getBtnOpenLayout()
-        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { openLayout(); } });
-
-        VDock.SINGLETON_INSTANCE.getBtnSaveLayout()
-        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { saveLayout(); } });
-
-        VDock.SINGLETON_INSTANCE.getBtnAlphaStrike()
-        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { alphaStrike(); } });
-
-        VDock.SINGLETON_INSTANCE.getBtnTargeting()
-        .addMouseListener(new MouseAdapter() { @Override public void mousePressed(final MouseEvent e) { toggleTargeting(); } });
+        VDock.SINGLETON_INSTANCE.getBtnConcede().setCommand(new Command() {
+            @Override
+            public void run() {
+                CMatchUI.SINGLETON_INSTANCE.concede();
+            }
+        });
+        VDock.SINGLETON_INSTANCE.getBtnSettings().setCommand(new Command() {
+            @Override
+            public void run() {
+                SOverlayUtils.showOverlay();
+            }
+        });
+        VDock.SINGLETON_INSTANCE.getBtnEndTurn().setCommand(new Command() {
+            @Override
+            public void run() {
+                endTurn();
+            }
+        });
+        VDock.SINGLETON_INSTANCE.getBtnViewDeckList().setCommand(new Command() {
+            @Override
+            public void run() {
+                viewDeckList();
+            }
+        });
+        VDock.SINGLETON_INSTANCE.getBtnRevertLayout().setCommand(new Command() {
+            @Override
+            public void run() {
+                revertLayout();
+            }
+        });
+        VDock.SINGLETON_INSTANCE.getBtnOpenLayout().setCommand(new Command() {
+            @Override
+            public void run() {
+                openLayout();
+            }
+        });
+        VDock.SINGLETON_INSTANCE.getBtnSaveLayout().setCommand(new Command() {
+            @Override
+            public void run() {
+                saveLayout();
+            }
+        });
+        VDock.SINGLETON_INSTANCE.getBtnAlphaStrike().setCommand(new Command() {
+            @Override
+            public void run() {
+                alphaStrike();
+            }
+        });
+        VDock.SINGLETON_INSTANCE.getBtnTargeting().setCommand(new Command() {
+            @Override
+            public void run() {
+                toggleTargeting();
+            }
+        });
     }
 
     /* (non-Javadoc)

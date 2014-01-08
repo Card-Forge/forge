@@ -81,13 +81,13 @@ public enum CSubmenuDraft implements ICDoc {
 
         final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
         final JButton btnStart = view.getBtnStart();
-        
+
         view.getLstDecks().setDecks(human);
 
         if (human.size() > 1) {
             btnStart.setEnabled(true);
         }
-        
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
                 if (btnStart.isEnabled()) {
@@ -107,8 +107,8 @@ public enum CSubmenuDraft implements ICDoc {
         if (humanDeck == null) {
             FOptionPane.showErrorDialog("No deck selected for human.\n(You may need to build a new deck)", "No Deck");
             return;
-        } 
-        
+        }
+
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
             if (null != errorMessage) {
@@ -133,7 +133,6 @@ public enum CSubmenuDraft implements ICDoc {
             }
         });
 
- 
         DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName());
         Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
         if (aiDeck == null) {
@@ -153,7 +152,7 @@ public enum CSubmenuDraft implements ICDoc {
         // Determine what kind of booster draft to run
         final LimitedPoolType poolType = GuiChoose.oneOrNone("Choose Draft Format", LimitedPoolType.values());
         if (poolType == null) { return; }
-        
+
         final CEditorDraftingProcess draft = new CEditorDraftingProcess();
         draft.showGui(new BoosterDraft(poolType));
 

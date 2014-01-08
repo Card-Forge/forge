@@ -21,20 +21,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import forge.Command;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.ILocalRepaint;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 
@@ -52,24 +53,15 @@ public enum VDock implements IVDoc<CDock> {
     private final DragTab tab = new DragTab("Dock");
 
     // Dock button instances
-    private final JLabel btnConcede =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_CONCEDE), "Concede Game");
-    private final JLabel btnSettings =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_SETTINGS), "Game Settings");
-    private final JLabel btnEndTurn =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_ENDTURN), "End Turn");
-    private final JLabel btnViewDeckList =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_DECKLIST), "View Deck List");
-    private final JLabel btnRevertLayout =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_REVERTLAYOUT), "Revert Layout");
-    private final JLabel btnOpenLayout =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_OPENLAYOUT), "Open Layout");
-    private final JLabel btnSaveLayout =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_SAVELAYOUT), "Save Layout");
-    private final JLabel btnAlphaStrike =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_ALPHASTRIKE), "Alpha Strike");
-    private final FLabel btnTargeting =
-            new FLabel.Builder().icon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSOFF))
+    private final DockButton btnConcede = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_CONCEDE), "Concede Game");
+    private final DockButton btnSettings = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_SETTINGS), "Game Settings");
+    private final DockButton btnEndTurn = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_ENDTURN), "End Turn");
+    private final DockButton btnViewDeckList = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_DECKLIST), "View Deck List");
+    private final DockButton btnRevertLayout = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_REVERTLAYOUT), "Revert Layout");
+    private final DockButton btnOpenLayout = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_OPENLAYOUT), "Open Layout");
+    private final DockButton btnSaveLayout = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_SAVELAYOUT), "Save Layout");
+    private final DockButton btnAlphaStrike = new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_ALPHASTRIKE), "Alpha Strike");
+    private final FLabel btnTargeting = new FLabel.Builder().icon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSOFF))
                 .hoverable(true).iconInBackground(true).iconScaleFactor(1.0).build();
 
     private VDock() {
@@ -143,43 +135,35 @@ public enum VDock implements IVDoc<CDock> {
 
     //========= Retrieval methods
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnConcede() {
+    public DockButton getBtnConcede() {
         return btnConcede;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnSettings() {
+    public DockButton getBtnSettings() {
         return btnSettings;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnEndTurn() {
+    public DockButton getBtnEndTurn() {
         return btnEndTurn;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnViewDeckList() {
+    public DockButton getBtnViewDeckList() {
         return btnViewDeckList;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnRevertLayout() {
+    public DockButton getBtnRevertLayout() {
         return btnRevertLayout;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnOpenLayout() {
+    public DockButton getBtnOpenLayout() {
         return btnOpenLayout;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnSaveLayout() {
+    public DockButton getBtnSaveLayout() {
         return btnSaveLayout;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnAlphaStrike() {
+    public DockButton getBtnAlphaStrike() {
         return btnAlphaStrike;
     }
 
@@ -193,12 +177,12 @@ public enum VDock implements IVDoc<CDock> {
      * Buttons in Dock. JLabels are used to allow hover effects.
      */
     @SuppressWarnings("serial")
-    private class DockButton extends JLabel {
+    public class DockButton extends JLabel implements ILocalRepaint {
         private final SkinImage img;
-        private final JLabelSkin<DockButton> skin;
         private final SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         private final Color defaultBG = new Color(0, 0, 0, 0);
         private final Color defaultBorderColor = new Color(0, 0, 0, 0);
+        private Command command;
         private int w, h;
 
         /**
@@ -211,7 +195,6 @@ public enum VDock implements IVDoc<CDock> {
          */
         public DockButton(final SkinImage i0, final String s0) {
             super();
-            this.skin = FSkin.get(this);
             this.setToolTipText(s0);
             this.setOpaque(false);
             this.setBackground(this.defaultBG);
@@ -222,17 +205,34 @@ public enum VDock implements IVDoc<CDock> {
             this.setMaximumSize(size);
             this.setPreferredSize(size);
 
-            this.addMouseListener(new MouseAdapter() {
+            this.addMouseListener(new FMouseAdapter() {
                 @Override
-                public void mouseEntered(final MouseEvent e) {
-                    DockButton.this.skin.setBackground(DockButton.this.hoverBG);
+                public void onLeftClick(final MouseEvent e) {
+                    if (DockButton.this.command != null) {
+                        DockButton.this.command.run();
+                    }
                 }
 
                 @Override
-                public void mouseExited(final MouseEvent e) {
-                    DockButton.this.setBackground(DockButton.this.defaultBG);
+                public void onMouseEnter(final MouseEvent e) {
+                    FSkin.get(DockButton.this).setBackground(DockButton.this.hoverBG);
+                }
+
+                @Override
+                public void onMouseExit(final MouseEvent e) {
+                    FSkin.get(DockButton.this).setBackground(DockButton.this.defaultBG);
                 }
             });
+        }
+
+        public void setCommand(Command command0) {
+            this.command = command0;
+        }
+
+        @Override
+        public void repaintSelf() {
+            final Dimension d = getSize();
+            repaint(0, 0, d.width, d.height);
         }
 
         /*
@@ -246,6 +246,8 @@ public enum VDock implements IVDoc<CDock> {
             this.h = this.getHeight();
             g.setColor(this.getBackground());
             g.fillRect(0, 0, this.w, this.h);
+
+            FSkin.JLabelSkin<DockButton> skin = FSkin.get(this);
             if (skin.getBackground() == this.hoverBG) {
                 skin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             }
