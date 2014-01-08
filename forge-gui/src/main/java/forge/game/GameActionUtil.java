@@ -134,41 +134,6 @@ public final class GameActionUtil {
         }
     }; // Old Man of the Sea
 
-    /** Constant <code>liuBei</code>. */
-    private static Function<Game, ?> liuBei = new Function<Game, Object>() {
-
-        @Override
-        public Object apply(Game game) {
-            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Liu Bei, Lord of Shu"));
-
-            if (list.size() > 0) {
-                for (int i = 0; i < list.size(); i++) {
-
-                    final Card c = list.get(i);
-                    if (this.getsBonus(c)) {
-                        c.setBaseAttack(4);
-                        c.setBaseDefense(6);
-                    } else {
-                        c.setBaseAttack(2);
-                        c.setBaseDefense(4);
-                    }
-
-                }
-            }
-            return null;
-        } // execute()
-
-        private boolean getsBonus(final Card c) {
-            for (Card card : c.getController().getCardsIn(ZoneType.Battlefield)) {
-                if (card.getName().equals("Guan Yu, Sainted Warrior")
-                        || card.getName().equals("Zhang Fei, Fierce Warrior")) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-    }; // Liu_Bei
 
     /** Constant <code>commands</code>. */
     private final static HashMap<String, Function<Game, ?>> commands = new HashMap<String, Function<Game, ?>>();
@@ -176,7 +141,6 @@ public final class GameActionUtil {
     static {
         // Please add cards in alphabetical order so they are easier to find
 
-        GameActionUtil.getCommands().put("Liu_Bei", GameActionUtil.liuBei);
         GameActionUtil.getCommands().put("Old_Man_of_the_Sea", GameActionUtil.oldManOfTheSea);
 
         // The commands above are in alphabetical order by cardname.
