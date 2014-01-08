@@ -92,5 +92,4 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
     public DeckLister getLstDecks() {
         return lstDecks;
     }
-
 }

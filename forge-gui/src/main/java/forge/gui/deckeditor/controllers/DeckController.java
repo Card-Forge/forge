@@ -138,6 +138,19 @@ public class DeckController<T extends DeckBase> {
     }
 
     /**
+     * Reload current model
+     */
+    public void reload() {
+        String name = this.getModelName();
+        if (name.isEmpty()) {
+            newModel();
+        }
+        else {
+            load(name);
+        }
+    }
+
+    /**
      * Load.
      *
      * @param name the name

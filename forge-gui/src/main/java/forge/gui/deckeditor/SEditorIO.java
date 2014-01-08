@@ -65,8 +65,10 @@ public class SEditorIO {
             if (choice == -1 || choice == 2) { return false; }
 
             if (choice == 0 && !saveDeck()) { return false; }
-        }
 
+            //reload deck if user chose not to save changes
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().reload();
+        }
         return true;
     }
 }
