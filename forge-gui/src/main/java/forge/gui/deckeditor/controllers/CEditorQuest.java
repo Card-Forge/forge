@@ -296,11 +296,14 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public boolean canSwitchAway(boolean isClosing) {
-        if (SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_QUEST)) {
-            Singletons.getModel().getQuest().save();
-            return true;
+        if (isClosing) {
+            if (SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_QUEST)) {
+                Singletons.getModel().getQuest().save();
+                return true;
+            }
+            return false;
         }
-        return false;
+        return true;
     }
 
     /* (non-Javadoc)
