@@ -53,6 +53,7 @@ Soldevi Sentry
 Nullstone Gargoyle
 Bludgeon Brawl
 Static Orb
+Storage Matrix
 
 
 --------------------
