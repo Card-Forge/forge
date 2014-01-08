@@ -826,12 +826,12 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void notifyOfValue(SpellAbility sa, GameObject realtedTarget, String value) {
         String message = formatNotificationMessage(sa, realtedTarget, value);
-        GuiDialog.message(message, sa.getSourceCard().getName());
+        GuiDialog.message(message, sa.getSourceCard() == null ? "" : sa.getSourceCard().getName());
     }
 
     // These are not much related to PlayerController
     private String formatNotificationMessage(SpellAbility sa, GameObject target, String value) {
-        if (sa.getApi() == null) {
+        if (sa.getApi() == null || sa.getSourceCard() == null) {
             return ("Result: " + value);
         }
         switch(sa.getApi()) {

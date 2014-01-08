@@ -31,6 +31,7 @@ import com.google.common.collect.Iterables;
 
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.CardType.Constant;
 import forge.error.BugReporter;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -1628,6 +1629,22 @@ public class ComputerUtil {
             // based on whether it needs a creature or land,
             // otherwise, lib search for most common type left
             // then, reveal chosenType to Human
+            if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
+                double amount = 0;
+                for (String type : Constant.CARD_TYPES) {
+                    if (!invalidTypes.contains(type)) {
+                        List<Card> list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), Presets.TAPPED);
+                        double i = type.equals("Creature") ? list.size() * 1.5 : list.size();
+                        if (i > amount) {
+                            amount = i;
+                            chosen = type;
+                        }
+                    }
+                }
+            }
+            if (StringUtils.isEmpty(chosen)) {
+                chosen = "Creature";
+            }
         } else if (kindOfType.equals("Creature")) {
             Player opp = ai.getOpponent();
             if (logic != null ) {

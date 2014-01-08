@@ -11269,6 +11269,7 @@ forge-gui/res/cardsfolder/s/stony_silence.txt -text
 forge-gui/res/cardsfolder/s/stonybrook_angler.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stonybrook_banneret.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stonybrook_schoolmaster.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/storage_matrix.txt -text
 forge-gui/res/cardsfolder/s/storm_cauldron.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/storm_crow.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/storm_elemental.txt svneol=native#text/plain
