@@ -9,6 +9,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.SpellAbility;
@@ -82,11 +83,15 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
         final Game game = newController.getGame();
 
-        final List<Card> tgtCards;
+        List<Card> tgtCards;
         if (sa.hasParam("AllValid")) {
             tgtCards = AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AllValid"), sa);
-        } else 
+        } else
             tgtCards = getTargetCards(sa);
+
+        if (sa.hasParam("ControlledByTarget")) {
+        	tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
+        } 
 
         // check for lose control criteria right away
         if (lose != null && lose.contains("LeavesPlay") && !source.isInZone(ZoneType.Battlefield)) {
