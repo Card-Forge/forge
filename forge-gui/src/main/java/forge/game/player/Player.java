@@ -2737,12 +2737,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public static class Accessors {
-        public static Function<Player, Integer> FN_GET_LIFE = new Function<Player, Integer>() {
-            @Override
-            public Integer apply(Player input) {
-                return input.getLife();
-            }
-        };
 
         public static Function<Player, String> FN_GET_NAME = new Function<Player, String>() {
             @Override

@@ -1158,14 +1158,6 @@ public class CardFactoryUtil {
         if (sq[0].contains("YourLandsPlayed"))              return doXMath(cc.getNumLandsPlayed(), m, c);
         if (sq[0].contains("OppLandsPlayed"))               return doXMath(ccOpp.getNumLandsPlayed(), m, c);
 
-        // Count$LowestLifeTotal
-        if (sq[0].contains("LowestLifeTotal")) {
-            final String[] playerType = sq[0].split(" ");
-            final boolean onlyOpponents = playerType.length > 1 && playerType[1].equals("Opponent");
-            List<Player> checked = onlyOpponents ? cc.getOpponents() : cc.getGame().getPlayers();
-            return doXMath(Aggregates.min(checked, Player.Accessors.FN_GET_LIFE), m, c);
-        }
-
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {
             final List<Card> library = cc.getCardsIn(ZoneType.Library);
