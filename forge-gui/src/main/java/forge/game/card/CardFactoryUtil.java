@@ -1314,12 +1314,6 @@ public class CardFactoryUtil {
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), m, c);
         }
 
-        // Count$M12Empires.<numIf>.<numIfNot>
-        if (sq[0].contains("AllM12Empires")) {
-            boolean has = cc.isCardInPlay("Crown of Empires") && cc.isCardInPlay("Scepter of Empires") && cc.isCardInPlay("Throne of Empires");
-            return doXMath(Integer.parseInt(sq[has ? 1 : 2]), m, c);
-        }
-
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
         if (sq[0].contains("ThisTurnEntered")) {
             final String[] workingCopy = l[0].split("_");
