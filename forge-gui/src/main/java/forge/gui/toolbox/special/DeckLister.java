@@ -39,6 +39,7 @@ import forge.deck.DeckBase;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.deckeditor.controllers.CEditorQuest;
@@ -454,11 +455,15 @@ public class DeckLister extends JPanel implements ILocalRepaint {
             default:
                 return;
         }
-        
-        Singletons.getControl().setCurrentScreen(screen);
+
+        if (!Singletons.getControl().ensureScreenActive(screen)) { return; }
+
         if (editorCtrl != null) {
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editorCtrl);
         }
+
+        if (!SEditorIO.confirmSaveChanges(screen, true)) { return; } //ensure previous deck on screen is saved if needed
+
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(d0.getName());
     }
 

@@ -268,17 +268,17 @@ public enum FControl implements KeyEventDispatcher {
     /**
      * Switches between display screens in top level JFrame.
      */
-    public void setCurrentScreen(FScreen screen) {
-        setCurrentScreen(screen, false);
+    public boolean setCurrentScreen(FScreen screen) {
+        return setCurrentScreen(screen, false);
     }
-    public void setCurrentScreen(FScreen screen, boolean previousScreenClosed) {
+    public boolean setCurrentScreen(FScreen screen, boolean previousScreenClosed) {
         //TODO: Uncomment the line below if this function stops being used to refresh
         //the current screen in some places (such as Continue and Restart in the match screen)
         //if (this.currentScreen == screen) { return; }
 
         //give previous screen a chance to perform special switch handling and/or cancel switching away from screen
         if (this.currentScreen != screen && !Singletons.getView().getNavigationBar().canSwitch(screen)) {
-            return;
+            return false;
         }
 
         if (this.currentScreen == FScreen.MATCH_SCREEN) { //hide targeting overlay and reset image if was on match screen
@@ -321,16 +321,17 @@ public enum FControl implements KeyEventDispatcher {
         }
 
         Singletons.getView().getNavigationBar().updateSelectedTab();
+        return true;
     }
 
     private boolean isMatchBackgroundImageVisible() {
         return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE);
     }
 
-    public void ensureScreenActive(FScreen screen) {
-        if (this.currentScreen == screen) { return; }
+    public boolean ensureScreenActive(FScreen screen) {
+        if (this.currentScreen == screen) { return true; }
 
-        setCurrentScreen(screen);
+        return setCurrentScreen(screen);
     }
 
     /** @return List<Shortcut> A list of attached keyboard shortcut descriptions and properties. */

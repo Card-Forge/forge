@@ -58,7 +58,11 @@ public class SEditorIO {
      */
     public static boolean confirmSaveChanges(FScreen screen, boolean isClosing) {
         if (CDeckEditorUI.SINGLETON_INSTANCE.hasChanges()) {
-            Singletons.getControl().ensureScreenActive(screen); //ensure Deck Editor is active before showing dialog
+            //ensure Deck Editor is active before showing dialog
+            if (!Singletons.getControl().ensureScreenActive(screen)) {
+                return false;
+            }
+
             final int choice = FOptionPane.showOptionDialog("Save changes to current deck?", "Save Changes?",
                     FOptionPane.QUESTION_ICON, new String[] {"Save", "Don't Save", "Cancel"});
 
