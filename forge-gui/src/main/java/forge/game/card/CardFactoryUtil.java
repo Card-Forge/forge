@@ -1238,11 +1238,6 @@ public class CardFactoryUtil {
             return doXMath(Integer.parseInt(sq[zonesMatch ? 1 : 2]), m, c);
         }
 
-        if (sq[0].contains("GraveyardWithGE20Cards")) {
-            final boolean hasBigGrave = Aggregates.max(cc.getGame().getPlayers(), Player.Accessors.countCardsInZone(ZoneType.Graveyard)) >= 20;
-            return doXMath(Integer.parseInt(sq[ hasBigGrave ? 1 : 2]), m, c);
-        }
-
         if (sq[0].startsWith("Devoured")) {
             final String validDevoured = l[0].split(" ")[1];
             List<Card> cl = CardLists.getValidCards(c.getDevoured(), validDevoured.split(","), cc, c);
