@@ -1560,13 +1560,9 @@ public class CardFactoryUtil {
         // Refined qualities
 
         // "Untapped Lands" - Count$UntappedTypeYouCtrl.Land
-        if (sq[0].contains("Untapped")) {
-            someCards = CardLists.filter(someCards, Presets.UNTAPPED);
-        }
+        // if (sq[0].contains("Untapped")) { someCards = CardLists.filter(someCards, Presets.UNTAPPED); }
 
-        if (sq[0].contains("Tapped")) {
-            someCards = CardLists.filter(someCards, Presets.TAPPED);
-        }
+        // if (sq[0].contains("Tapped")) { someCards = CardLists.filter(someCards, Presets.TAPPED); }
 
 //        String sq0 = sq[0].toLowerCase();
 //        for(String color : MagicColor.Constant.ONLY_COLORS) {
@@ -1574,11 +1570,11 @@ public class CardFactoryUtil {
 //                someCards = someCards.filter(CardListFilter.WHITE);
 //        }
         // "White Creatures" - Count$WhiteTypeYouCtrl.Creature
-        if (sq[0].contains("White")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.WHITE));
-        if (sq[0].contains("Blue"))  someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.BLUE));
-        if (sq[0].contains("Black")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.BLACK));
-        if (sq[0].contains("Red"))   someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.RED));
-        if (sq[0].contains("Green")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.GREEN));
+        // if (sq[0].contains("White")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.WHITE));
+        // if (sq[0].contains("Blue"))  someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.BLUE));
+        // if (sq[0].contains("Black")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.BLACK));
+        // if (sq[0].contains("Red"))   someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.RED));
+        // if (sq[0].contains("Green")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.GREEN));
 
         if (sq[0].contains("Multicolor")) {
             someCards = CardLists.filter(someCards, new Predicate<Card>() {
