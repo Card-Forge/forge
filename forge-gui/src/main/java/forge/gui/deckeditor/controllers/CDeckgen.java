@@ -88,7 +88,7 @@ public enum CDeckgen implements ICDoc {
     //========== Other methods
     @SuppressWarnings("unchecked")
     private <TItem extends InventoryItem, TModel extends DeckBase> void newRandomConstructed() {
-        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen())) { return; }
+        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen(), true)) { return; }
 
         final Deck randomDeck = new Deck();
 
@@ -109,7 +109,7 @@ public enum CDeckgen implements ICDoc {
 
     @SuppressWarnings("unchecked")
     private <TItem extends InventoryItem, TModel extends DeckBase> void newGenerateConstructed(final int colorCount0) {
-        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen())) { return; }
+        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen(), true)) { return; }
 
         final Deck genConstructed = new Deck();
         CardDb cardDb = Singletons.getMagicDb().getCommonCards();

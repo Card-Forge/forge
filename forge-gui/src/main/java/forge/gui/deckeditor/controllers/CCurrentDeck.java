@@ -135,7 +135,7 @@ public enum CCurrentDeck implements ICDoc {
 
     @SuppressWarnings("unchecked")
     private void newDeck() {
-        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen())) { return; }
+        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen(), true)) { return; }
 
         try {
             SwingUtilities.invokeLater(new Runnable() {
@@ -154,7 +154,7 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     @SuppressWarnings("unchecked")
     private void openDeck() {
-        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen())) { return; }
+        if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen(), true)) { return; }
 
         final File file = this.getImportFilename();
 

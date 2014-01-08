@@ -180,7 +180,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public boolean canSwitchAway(boolean isClosing) {
-        return SEditorIO.confirmSaveChanges(getScreen());
+        return SEditorIO.confirmSaveChanges(getScreen(), isClosing);
     }
 
     /* (non-Javadoc)
