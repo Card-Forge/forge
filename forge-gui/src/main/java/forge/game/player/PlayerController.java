@@ -64,7 +64,7 @@ public abstract class PlayerController {
 
     protected final Game game;
 
-    private PhaseType autoPassUntil = null;
+    private PhaseType autoPassUntilPhase = null;
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
 
@@ -75,20 +75,20 @@ public abstract class PlayerController {
     }
 
     /**
-     * TODO: Write javadoc for this method.
-     * @param cleanup
+     * Automatically pass priority until reaching the given phase of the current turn
+     * @param phase
      */
-    public void autoPassTo(PhaseType cleanup) {
-        autoPassUntil = cleanup;
+    public void autoPassUntil(PhaseType phase) {
+        autoPassUntilPhase = phase;
     }
+
     public void autoPassCancel() {
-        autoPassUntil = null;
+        autoPassUntilPhase = null;
     }
 
     public boolean mayAutoPass(PhaseType phase) {
-        return phase.isBefore(autoPassUntil);
+        return phase.isBefore(autoPassUntilPhase);
     }
-
 
     // Triggers preliminary choice: ask, decline or play
     private Map<Integer, Boolean> triggersAlwaysAccept = new HashMap<Integer, Boolean>();
@@ -214,8 +214,4 @@ public abstract class PlayerController {
     // These 2 are for AI
     public List<Card> cheatShuffle(List<Card> list) { return list; }
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) { return null; }
-
-
-
-
 }

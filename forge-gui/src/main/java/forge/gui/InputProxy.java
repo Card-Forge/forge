@@ -29,6 +29,8 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.gui.input.Input;
+import forge.gui.input.InputPassPriority;
+import forge.gui.toolbox.FOptionPane;
 
 /**
  * <p>
@@ -50,7 +52,23 @@ public class InputProxy implements Observer {
         game = game0;
         Singletons.getControl().getInputQueue().addObserver(this);
     }
-    
+
+    public boolean passPriority() {
+        Input inp = getInput();
+        if (inp != null && inp instanceof InputPassPriority) {
+            inp.selectButtonOK();
+            return true;
+        }
+
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                FOptionPane.showMessageDialog("Cannot pass priority at this time.");
+            }
+        });
+        return false;
+    }
+
     @Override
     public final void update(final Observable observable, final Object obj) {
         final Input nextInput = Singletons.getControl().getInputQueue().getActualInput(game);
@@ -79,8 +97,9 @@ public class InputProxy implements Observer {
      */
     public final void selectButtonOK() {
         Input inp = getInput();
-        if ( null != inp )
+        if (inp != null) {
             inp.selectButtonOK();
+        }
     }
 
     /**
@@ -90,8 +109,9 @@ public class InputProxy implements Observer {
      */
     public final void selectButtonCancel() {
         Input inp = getInput();
-        if ( null != inp )
+        if (inp != null) {
             inp.selectButtonCancel();
+        }
     }
 
     /**
@@ -104,8 +124,9 @@ public class InputProxy implements Observer {
      */
     public final void selectPlayer(final Player player, final MouseEvent triggerEvent) {
         Input inp = getInput();
-        if ( null != inp )
+        if (inp != null) {
             inp.selectPlayer(player, triggerEvent);
+        }
     }
 
     /**
@@ -119,14 +140,16 @@ public class InputProxy implements Observer {
      */
     public final void selectCard(final Card card, final MouseEvent triggerEvent) {
         Input inp = getInput();
-        if ( null != inp )
+        if (inp != null) {
             inp.selectCard(card, triggerEvent);
+        }
     }
 
     public final void selectAbility(SpellAbility ab) {
     	Input inp = getInput();
-        if ( null != inp )
+        if (inp != null) {
             inp.selectAbility(ab);
+        }
     }
 
     /** {@inheritDoc} */

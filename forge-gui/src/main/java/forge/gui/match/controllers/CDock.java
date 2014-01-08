@@ -80,7 +80,10 @@ public enum CDock implements ICDoc {
         Player p = findAffectedPlayer();
 
         if (p != null) {
-            p.getController().autoPassTo(PhaseType.CLEANUP);
+            p.getController().autoPassUntil(PhaseType.CLEANUP);
+            if (!CPrompt.SINGLETON_INSTANCE.getInputControl().passPriority()) {
+                p.getController().autoPassCancel();
+            }
         }
     }
 
