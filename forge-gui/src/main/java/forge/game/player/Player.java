@@ -2745,14 +2745,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         };
 
-        public static Function<Player, Integer> countCardsInZone(final ZoneType zone) {
-            return new Function<Player, Integer>() {
-                @Override
-                public Integer apply(Player input) {
-                    return input.getZone(zone).size();
-                }
-            };
-        }
     }
 
     /**

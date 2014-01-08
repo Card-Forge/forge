@@ -1173,11 +1173,6 @@ public class CardFactoryUtil {
             }
             return enchantedControllerInPlay.size();
         }
-
-        // Count$LowestLibrary
-        if (sq[0].contains("LowestLibrary")) {
-            return Aggregates.min(cc.getGame().getPlayers(), Player.Accessors.countCardsInZone(ZoneType.Library));
-        }
         
         // Count$MonstrosityMagnitude
         if (sq[0].contains("MonstrosityMagnitude")) {

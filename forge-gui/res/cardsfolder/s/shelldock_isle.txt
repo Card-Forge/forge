@@ -5,9 +5,8 @@ K:Hideaway
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.
 SVar:TrigDig:AB$ Dig | Cost$ 0  | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U} to your mana pool.
-A:AB$ Play | Cost$ U T | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LEY | ForgetRemembered$ True | References$ X,Y | SpellDescription$ You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
-SVar:Y:Number$20
-SVar:X:Count$LowestLibrary
+A:AB$ Play | Cost$ U T | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LE20 | ForgetRemembered$ True | References$ X | SpellDescription$ You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
+SVar:X:PlayerCountPlayers$LowestValidLibrary Card.YouOwn
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shelldock_isle.jpg
 Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {U} to your mana pool.\n{U}, {T}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
