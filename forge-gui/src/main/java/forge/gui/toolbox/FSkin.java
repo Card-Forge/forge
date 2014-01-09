@@ -139,37 +139,6 @@ public enum FSkin {
             this.cursor = null;
         }
 
-        public void setGraphicsColor(Graphics g, SkinColor skinColor) {
-            this.needRepaintOnReapply = true;
-            g.setColor(skinColor.color);
-        }
-
-        public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, SkinColor skinColor2) {
-            this.needRepaintOnReapply = true;
-            g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, skinColor2.color));
-        }
-        public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, Color color1, float x2, float y2, SkinColor skinColor2) {
-            this.needRepaintOnReapply = true;
-            g2d.setPaint(new GradientPaint(x1, y1, color1, x2, y2, skinColor2.color));
-        }
-        public void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, Color color2) {
-            this.needRepaintOnReapply = true;
-            g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, color2));
-        }
-
-        public void drawImage(Graphics g, SkinImage skinImage, int x, int y) {
-            this.needRepaintOnReapply = true;
-            g.drawImage(skinImage.image, x, y, null);
-        }
-        public void drawImage(Graphics g, SkinImage skinImage, int x, int y, int w, int h) {
-            this.needRepaintOnReapply = true;
-            g.drawImage(skinImage.image, x, y, w, h, null);
-        }
-        public void drawImage(Graphics g, SkinImage skinImage, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
-            this.needRepaintOnReapply = true;
-            g.drawImage(skinImage.image, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, null);
-        }
-
         protected void reapply() {
             if (this.foreground != null) {
                 comp.setForeground(this.foreground.color);
@@ -619,6 +588,20 @@ public enum FSkin {
         return isColorBright(c) ? Color.BLACK : Color.WHITE;
     }
 
+    public static void setGraphicsColor(Graphics g, SkinColor skinColor) {
+        g.setColor(skinColor.color);
+    }
+
+    public static void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, SkinColor skinColor2) {
+        g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, skinColor2.color));
+    }
+    public static void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, Color color1, float x2, float y2, SkinColor skinColor2) {
+        g2d.setPaint(new GradientPaint(x1, y1, color1, x2, y2, skinColor2.color));
+    }
+    public static void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, Color color2) {
+        g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, color2));
+    }
+
     public static class SkinColor {
         private static final HashMap<Colors, SkinColor> baseColors = new HashMap<Colors, SkinColor>();
         private static final HashMap<String, SkinColor> derivedColors = new HashMap<String, SkinColor>();
@@ -862,6 +845,16 @@ public enum FSkin {
 
             color = FSkin.getColorFromPixel(bimPreferredSprite.getRGB(x0, y0));
         }
+    }
+
+    public static void drawImage(Graphics g, SkinImage skinImage, int x, int y) {
+        g.drawImage(skinImage.image, x, y, null);
+    }
+    public static void drawImage(Graphics g, SkinImage skinImage, int x, int y, int w, int h) {
+        g.drawImage(skinImage.image, x, y, w, h, null);
+    }
+    public static void drawImage(Graphics g, SkinImage skinImage, int dx1, int dy1, int dx2, int dy2, int sx1, int sy1, int sx2, int sy2) {
+        g.drawImage(skinImage.image, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, null);
     }
 
     /**

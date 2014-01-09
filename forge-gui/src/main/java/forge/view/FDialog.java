@@ -127,7 +127,7 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
         if (antiAliasBorder) {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         }
-        skin.setGraphicsColor(g2d, borderColor);
+        FSkin.setGraphicsColor(g2d, borderColor);
         if (isSetShapeSupported) {
             g2d.drawRoundRect(0, 0, this.getWidth() - 1, this.getHeight() - 1, cornerDiameter, cornerDiameter);
         }
@@ -328,8 +328,6 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
     private static class BackdropPanel extends JPanel {
         private static final SkinColor backColor = FSkin.getColor(FSkin.Colors.CLR_OVERLAY).alphaColor(120);
 
-        private FSkin.JComponentSkin<BackdropPanel> skin = FSkin.get(this);
-
         private BackdropPanel() {
             setOpaque(false);
             setVisible(false);
@@ -339,7 +337,7 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
         @Override
         public void paintComponent(final Graphics g) {
             super.paintComponent(g);
-            skin.setGraphicsColor(g, backColor);
+            FSkin.setGraphicsColor(g, backColor);
             g.fillRect(0, 0, this.getWidth(), this.getHeight());
         }
     }

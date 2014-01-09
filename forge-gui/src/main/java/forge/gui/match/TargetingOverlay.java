@@ -323,7 +323,7 @@ public enum TargetingOverlay {
             g2d.translate(startX, startY);
             g2d.rotate(Math.atan2(ey, ex));
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f));
-            FSkin.get(this).setGraphicsColor(g2d, skinColor);
+            FSkin.setGraphicsColor(g2d, skinColor);
             g2d.fill(arrow);
             g2d.setColor(Color.BLACK);
             g2d.draw(arrow);

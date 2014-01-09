@@ -24,7 +24,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.item.InventoryItem;
 
@@ -36,8 +35,6 @@ public class DeckQuantityRenderer extends ItemCellRenderer {
     private static final SkinImage imgAdd = FSkin.getIcon(FSkin.InterfaceIcons.ICO_PLUS);
     private static final SkinImage imgRemove = FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS);
     private static final int imgSize = 13;
-
-    private final JLabelSkin<DeckQuantityRenderer> skin = FSkin.get(this);
 
     public DeckQuantityRenderer() {
         this.setHorizontalAlignment(JLabel.CENTER);
@@ -75,7 +72,7 @@ public class DeckQuantityRenderer extends ItemCellRenderer {
         super.paint(g);
 
         int y = (this.getHeight() - imgSize) / 2;
-        skin.drawImage(g, imgAdd, 0, y, imgSize, imgSize);
-        skin.drawImage(g, imgRemove, this.getWidth() - imgSize, y, imgSize, imgSize);
+        FSkin.drawImage(g, imgAdd, 0, y, imgSize, imgSize);
+        FSkin.drawImage(g, imgRemove, this.getWidth() - imgSize, y, imgSize, imgSize);
     }
 }

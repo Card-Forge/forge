@@ -592,46 +592,46 @@ public class FLabel extends JLabel implements ILocalRepaint {
     }
 
     private void paintFocus(final Graphics2D g, int w, int h) {
-        skin.setGraphicsColor(g, clrHover);
+        FSkin.setGraphicsColor(g, clrHover);
         g.drawRect(0, 0, w - 2, h - 2);
-        skin.setGraphicsColor(g, l30);
+        FSkin.setGraphicsColor(g, l30);
         g.drawRect(1, 1, w - 4, h - 4);
     }
     
     private void paintPressed(final Graphics2D g, int w, int h) {
-        skin.setGraphicsGradientPaint(g, 0, h, d50, 0, 0, d10);
+        FSkin.setGraphicsGradientPaint(g, 0, h, d50, 0, 0, d10);
         g.fillRect(0, 0, w - 1, h - 1);
 
-        skin.setGraphicsColor(g, d50);
+        FSkin.setGraphicsColor(g, d50);
         g.drawRect(0, 0, w - 2, h - 2);
-        skin.setGraphicsColor(g, d10);
+        FSkin.setGraphicsColor(g, d10);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
     private void paintUp(final Graphics2D g, int w, int h) {
-        skin.setGraphicsGradientPaint(g, 0, h, d10, 0, 0, l20);
+        FSkin.setGraphicsGradientPaint(g, 0, h, d10, 0, 0, l20);
         g.fillRect(0, 0, w, h);
 
-        skin.setGraphicsColor(g, d50);
+        FSkin.setGraphicsColor(g, d50);
         g.drawRect(0, 0, w - 2, h - 2);
-        skin.setGraphicsColor(g, l10);
+        FSkin.setGraphicsColor(g, l10);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
     private void paintBorder(final Graphics2D g, int w, int h) {
-        skin.setGraphicsColor(g, l10);
+        FSkin.setGraphicsColor(g, l10);
         g.drawRect(0, 0, w - 2, h - 2);
-        skin.setGraphicsColor(g, l30);
+        FSkin.setGraphicsColor(g, l30);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 
     private void paintDown(final Graphics2D g, int w, int h) {
-        skin.setGraphicsGradientPaint(g, 0, h, d30, 0, 0, l10);
+        FSkin.setGraphicsGradientPaint(g, 0, h, d30, 0, 0, l10);
         g.fillRect(0, 0, w - 1, h - 1);
 
-        skin.setGraphicsColor(g, d30);
+        FSkin.setGraphicsColor(g, d30);
         g.drawRect(0, 0, w - 2, h - 2);
-        skin.setGraphicsColor(g, l10);
+        FSkin.setGraphicsColor(g, l10);
         g.drawRect(1, 1, w - 4, h - 4);
     }
 

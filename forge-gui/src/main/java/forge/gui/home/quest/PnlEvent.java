@@ -17,7 +17,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.ImageCache;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JComponentSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.FTextArea;
@@ -38,7 +37,6 @@ class PnlEvent extends JPanel {
     private final int hImg = 100;
     private final int hRfl = 20;
 
-    private final JComponentSkin<PnlEvent> skin;
     private final Color clr1 = new Color(255, 0, 255, 100);
     private final Color clr2 = new Color(255, 255, 0, 0);
     private final SkinColor clr3 = FSkin.getColor(FSkin.Colors.CLR_THEME2).alphaColor(200);
@@ -52,7 +50,6 @@ class PnlEvent extends JPanel {
      */
     public PnlEvent(final QuestEvent e0) {
         super();
-        this.skin = FSkin.get(this);
         this.event = e0;
         img = ImageCache.getIcon(e0);
 
@@ -94,7 +91,7 @@ class PnlEvent extends JPanel {
     @Override
     public void paintComponent(final Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
-        skin.setGraphicsGradientPaint(g2d, 0, 0, clr3, getWidth(), 0, clr2);
+        FSkin.setGraphicsGradientPaint(g2d, 0, 0, clr3, getWidth(), 0, clr2);
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
         // Padding here
@@ -104,7 +101,7 @@ class PnlEvent extends JPanel {
         int wSrc = srcSize.width;
         int hSrc = srcSize.height;
 
-        skin.drawImage(g2d, img,
+        FSkin.drawImage(g2d, img,
                 0, 0, wImg, hImg, // Destination
                 0, 0, wSrc, hSrc); // Source
 
@@ -115,7 +112,7 @@ class PnlEvent extends JPanel {
         BufferedImage refl = new BufferedImage(wImg, hImg, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gRefl = refl.createGraphics();
 
-        skin.drawImage(gRefl, img,
+        FSkin.drawImage(gRefl, img,
                 0, hRfl, wImg, 0, // Destination
                 0, hSrc - hRfl * hSrc / hImg, wSrc, hSrc); // Source
 

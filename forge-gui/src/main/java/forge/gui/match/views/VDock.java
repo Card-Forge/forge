@@ -247,15 +247,14 @@ public enum VDock implements IVDoc<CDock> {
             g.setColor(this.getBackground());
             g.fillRect(0, 0, this.w, this.h);
 
-            FSkin.JLabelSkin<DockButton> skin = FSkin.get(this);
-            if (skin.getBackground() == this.hoverBG) {
-                skin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+            if (FSkin.get(this).getBackground() == this.hoverBG) {
+                FSkin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             }
             else {
                 g.setColor(this.defaultBorderColor);
             }
             g.drawRect(0, 0, this.w - 1, this.h - 1);
-            skin.drawImage(g, this.img, 0, 0, this.w, this.h);
+            FSkin.drawImage(g, this.img, 0, 0, this.w, this.h);
             super.paintComponent(g);
         }
     }

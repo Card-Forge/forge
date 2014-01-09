@@ -124,7 +124,7 @@ public class FTextField extends JTextField {
             final Insets margin = this.getMargin();
             final Graphics2D g2d = (Graphics2D)g.create();
             g2d.setFont(this.getFont());
-            skin.setGraphicsColor(g2d, skin.getForeground().stepColor(20));
+            FSkin.setGraphicsColor(g2d, skin.getForeground().stepColor(20));
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.drawString(this.ghostText, margin.left + 2, margin.top + 15); //account for borders (TODO: why +15?)
             g2d.dispose();

@@ -39,7 +39,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
 
 import forge.gui.framework.ILocalRepaint;
-import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 
 /** 
@@ -218,7 +217,6 @@ public class FScrollPanel extends JScrollPane {
     }
     
     private abstract class ArrowButton extends JLabel implements ILocalRepaint {
-        private final JLabelSkin<ArrowButton> skin;
         private final SkinColor clrFore = FSkin.getColor(FSkin.Colors.CLR_TEXT);
         private final SkinColor clrBack = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
         private final SkinColor d50 = clrBack.stepColor(-50);
@@ -234,7 +232,6 @@ public class FScrollPanel extends JScrollPane {
 
         protected ArrowButton(final JScrollBar scrollBar0, final int incrementDirection0) {
             super("");
-            skin = FSkin.get(this);
             scrollBar = scrollBar0;
             incrementDirection = incrementDirection0;
             timer.setInitialDelay(500); //wait half a second after mouse down before starting timer
@@ -260,15 +257,15 @@ public class FScrollPanel extends JScrollPane {
             Composite oldComp = g2d.getComposite();
             g2d.setComposite(hovered ? alphaHovered : alphaDefault);
 
-            skin.setGraphicsGradientPaint(g2d, 0, h, d10, 0, 0, l20);
+            FSkin.setGraphicsGradientPaint(g2d, 0, h, d10, 0, 0, l20);
             g.fillRect(0, 0, w, h);
 
-            skin.setGraphicsColor(g, d50);
+            FSkin.setGraphicsColor(g, d50);
             g.drawRect(0, 0, w - 1, h - 1);
-            skin.setGraphicsColor(g, l10);
+            FSkin.setGraphicsColor(g, l10);
             g.drawRect(1, 1, w - 3, h - 3);
 
-            skin.setGraphicsColor(g, clrFore);
+            FSkin.setGraphicsColor(g, clrFore);
             drawArrow(g);
 
             super.paintComponent(g);

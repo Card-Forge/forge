@@ -290,10 +290,10 @@ public class FPanel extends JPanel implements ILocalRepaint {
     //========== Special draw methods
     private void drawBackgroundColor(final Graphics2D g2d0) {
         // Color background as appropriate
-        if (selected)           { skin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
-        else if (hovered)       { skin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_HOVER)); }
-        else if (selectable)    { skin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
-        else                    { skin.setGraphicsColor(g2d0, skin.getBackground()); }
+        if (selected)           { FSkin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
+        else if (hovered)       { FSkin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_HOVER)); }
+        else if (selectable)    { FSkin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
+        else                    { FSkin.setGraphicsColor(g2d0, skin.getBackground()); }
 
         g2d0.fillRoundRect(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter);
     }
@@ -362,7 +362,7 @@ public class FPanel extends JPanel implements ILocalRepaint {
     }
 
     private void drawBorder(final Graphics2D g2d0) {
-        skin.setGraphicsColor(g2d0, borderColor);
+        FSkin.setGraphicsColor(g2d0, borderColor);
         g2d0.drawRoundRect(0, 0, pnlW - 1, pnlH - 1, cornerDiameter, cornerDiameter);
     }
 

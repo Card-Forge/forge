@@ -22,7 +22,6 @@ import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.FSkin.JComponentSkin;
-import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.LayoutHelper;
@@ -195,7 +194,6 @@ public abstract class ItemFilter<T extends InventoryItem> {
 
     @SuppressWarnings("serial")
     private class RemoveButton extends JLabel implements ILocalRepaint {
-        protected JLabelSkin<RemoveButton> skin = FSkin.get(this);
         private final SkinColor iconColor = FSkin.getColor(Colors.CLR_TEXT);
         private boolean pressed, hovered;
 
@@ -267,10 +265,10 @@ public abstract class ItemFilter<T extends InventoryItem> {
                 if (pressed) {
                     g.translate(1, 1); //translate icon to give pressed button look
                 }
-                skin.setGraphicsColor(g2d, iconColor);
+                FSkin.setGraphicsColor(g2d, iconColor);
             }
             else {
-                skin.setGraphicsColor(g2d, iconColor.alphaColor(150));
+                FSkin.setGraphicsColor(g2d, iconColor.alphaColor(150));
             }
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setStroke(new BasicStroke(thickness));

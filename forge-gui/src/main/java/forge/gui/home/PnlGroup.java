@@ -46,14 +46,14 @@ public class PnlGroup extends JPanel {
         final int w = getWidth();
         final int h = getHeight();
 
-        skin.setGraphicsColor(g2d, d20);
+        FSkin.setGraphicsColor(g2d, d20);
 
         // Selected in this group, don't draw background under selected label.
         if (getY() < yTop && yTop < getY() + h) {
             g2d.fillRect(0, 0, w, lbl.getY());
             g2d.fillRect(0, lbl.getY() + lbl.getHeight(), w, h);
 
-            skin.setGraphicsGradientPaint(g2d, w - 8, 0, l00, w, 0, d80);
+            FSkin.setGraphicsGradientPaint(g2d, w - 8, 0, l00, w, 0, d80);
             g2d.fillRect(w - 6, 0, w, lbl.getY());
             g2d.fillRect(w - 6, lbl.getY() + lbl.getHeight(), w, h);
         }
@@ -61,14 +61,14 @@ public class PnlGroup extends JPanel {
         else {
             g2d.fillRect(0, 0, w, h);
 
-            skin.setGraphicsGradientPaint(g2d, w - 8, 0, l00, w, 0, d80);
+            FSkin.setGraphicsGradientPaint(g2d, w - 8, 0, l00, w, 0, d80);
             g2d.fillRect(w - 6, 0, w, h);
         }
 
-        skin.setGraphicsColor(g2d, l10);
+        FSkin.setGraphicsColor(g2d, l10);
         g2d.drawLine(0, h - 1, w - 1, h - 1);
 
-        skin.setGraphicsColor(g2d, d60);
+        FSkin.setGraphicsColor(g2d, d60);
         g2d.drawLine(0, 0, w - 1, 0);
 
         g2d.dispose();

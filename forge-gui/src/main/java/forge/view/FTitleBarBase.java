@@ -194,21 +194,21 @@ public abstract class FTitleBarBase extends JMenuBar {
         public void paintComponent(Graphics g) {
             if (hovered) {
                 if (pressed) {
-                    skin.setGraphicsColor(g, buttonDownColor);
+                    FSkin.setGraphicsColor(g, buttonDownColor);
                     g.fillRect(0, 0, getWidth(), getHeight());
                     g.translate(1, 1); //translate icon to give pressed button look
                 }
                 else {
-                    skin.setGraphicsColor(g, buttonHoverColor);
+                    FSkin.setGraphicsColor(g, buttonHoverColor);
                     g.fillRect(0, 0, getWidth(), getHeight());
                 }
             }
             else if (isToggled()) {
                 int width = getWidth() - 2;
                 int height = getHeight() - 2;
-                skin.setGraphicsColor(g, buttonToggleColor);
+                FSkin.setGraphicsColor(g, buttonToggleColor);
                 g.fillRect(1, 1, width, height);
-                skin.setGraphicsColor(g, buttonBorderColor);
+                FSkin.setGraphicsColor(g, buttonBorderColor);
                 g.drawRect(1, 1, width - 1, height - 1);
             }
         }
@@ -239,7 +239,7 @@ public abstract class FTitleBarBase extends JMenuBar {
             int y1 = (getHeight() - knobHeight) / 2 - 1;
             int y2 = y1 + knobHeight - 1;
 
-            skin.setGraphicsColor(g, foreColor);
+            FSkin.setGraphicsColor(g, foreColor);
             
             g.drawRect(x1, y1, knobWidth - 1, knobHeight - 1);
             g.drawLine(x2 - 1, y1 + 1, x2 - 1, y2 - 1);
@@ -268,7 +268,7 @@ public abstract class FTitleBarBase extends JMenuBar {
             int y = getHeight() - offsetY - thickness;
             
             Graphics2D g2d = (Graphics2D) g;
-            skin.setGraphicsColor(g2d, foreColor);
+            FSkin.setGraphicsColor(g2d, foreColor);
             g2d.setStroke(new BasicStroke(thickness));
             g2d.drawLine(x1, y, x2, y);
         }
@@ -295,7 +295,7 @@ public abstract class FTitleBarBase extends JMenuBar {
             int y2 = getHeight() - offset - 1;
             
             Graphics2D g2d = (Graphics2D) g;
-            skin.setGraphicsColor(g2d, foreColor);
+            FSkin.setGraphicsColor(g2d, foreColor);
 
             if (owner.isFullScreen()) { //draw arrows facing inward
                 g2d.drawLine(x1 + arrowLength, y1, x1 + arrowLength, y1 + arrowLength);
@@ -353,7 +353,7 @@ public abstract class FTitleBarBase extends JMenuBar {
             int height = getHeight() - 2 * offsetY;
             
             Graphics2D g2d = (Graphics2D) g;
-            skin.setGraphicsColor(g2d, foreColor);
+            FSkin.setGraphicsColor(g2d, foreColor);
             g2d.setStroke(new BasicStroke(thickness));
             
             if (owner.isMaximized()) { //draw 2 rectangles offset if icon to restore window
@@ -403,7 +403,7 @@ public abstract class FTitleBarBase extends JMenuBar {
                 iconColor = iconColor.alphaColor(100);
             }
             Graphics2D g2d = (Graphics2D) g;
-            skin.setGraphicsColor(g2d, iconColor);
+            FSkin.setGraphicsColor(g2d, iconColor);
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setStroke(new BasicStroke(thickness));
             g2d.drawLine(x1, y1, x2, y2);

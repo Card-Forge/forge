@@ -261,7 +261,7 @@ public enum VHomeUI implements IVTopLevelUI {
             super.paintComponent(g);
             final Graphics2D g2d = (Graphics2D) g.create();
 
-            skin.setGraphicsColor(g2d, skin.getBackground());
+            FSkin.setGraphicsColor(g2d, skin.getBackground());
             g2d.fillRect(0, 0, getWidth(), getHeight());
 
             g2d.dispose();
@@ -269,11 +269,9 @@ public enum VHomeUI implements IVTopLevelUI {
     }
 
     private class PnlMenu extends JPanel {
-        private final JComponentSkin<PnlMenu> skin;
         private final SkinColor d80 = clrTheme.stepColor(-80);
 
         public PnlMenu() {
-            this.skin = FSkin.get(this);
             this.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
             this.setOpaque(false);
         }
@@ -305,14 +303,14 @@ public enum VHomeUI implements IVTopLevelUI {
                 }
             }
 
-            skin.setGraphicsColor(g2d, l00);
+            FSkin.setGraphicsColor(g2d, l00);
             g2d.fillRect(0, y1, w, h1);
             if (h2 > 0) {
                 g2d.fillRect(0, y2, w, h2);
             }
             
             int x = w - 8;
-            skin.setGraphicsGradientPaint(g2d, x, 0, l00, w, 0, d80);
+            FSkin.setGraphicsGradientPaint(g2d, x, 0, l00, w, 0, d80);
             g2d.fillRect(x, y1, w, h1);
             if (h2 > 0) {
                 g2d.fillRect(x, y2, w, h2);

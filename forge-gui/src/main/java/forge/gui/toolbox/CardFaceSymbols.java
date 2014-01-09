@@ -192,9 +192,8 @@ public class CardFaceSymbols {
                 Log.info("Symbol not recognized \"" + symbol + "\" in string: " + s);
                 continue;
             }
-            skin.drawImage(g, image, x, y, w, h);
-            x += symbol.length() > 2 ? 10 : 14; // slash.png is only 10 pixels
-                                                // wide.
+            FSkin.drawImage(g, image, x, y, w, h);
+            x += symbol.length() > 2 ? 10 : 14; // slash.png is only 10 pixels wide.
         }
     }
 
@@ -211,7 +210,7 @@ public class CardFaceSymbols {
      *            a int.
      */
     public static void drawAttack(final ComponentSkin<?> skin, final Graphics g, final int x, final int y) {
-        skin.drawImage(g, MANA_IMAGES.get("attack"), x, y);
+        FSkin.drawImage(g, MANA_IMAGES.get("attack"), x, y);
     }
 
     /**
@@ -229,7 +228,7 @@ public class CardFaceSymbols {
      *            a int.
      */
     public static void drawSymbol(final String imageName, final ComponentSkin<?> skin, final Graphics g, final int x, final int y) {
-        skin.drawImage(g, MANA_IMAGES.get(imageName), x, y);
+        FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y);
     }
 
     

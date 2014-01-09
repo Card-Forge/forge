@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 
 /** 
@@ -20,11 +19,9 @@ import forge.gui.toolbox.FSkin.SkinColor;
  */
 @SuppressWarnings("serial")
 public class LblMenuItem extends JLabel implements ILocalRepaint {
-
     private boolean selected = false;
     private boolean hovered = false;
 
-    private final JLabelSkin<LblMenuItem> skin;
     private final SkinColor clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
     private final SkinColor l00 = clrTheme.stepColor(0);
     private final SkinColor l20 = clrTheme.stepColor(20);
@@ -42,8 +39,7 @@ public class LblMenuItem extends JLabel implements ILocalRepaint {
     public LblMenuItem(final IVSubmenu<? extends ICDoc> doc0) {
         super("      " + doc0.getMenuTitle());
 
-        skin = FSkin.get(this);
-        skin.setFont(FSkin.getFont(14));
+        FSkin.get(this).setFont(FSkin.getFont(14));
         FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {
@@ -84,23 +80,23 @@ public class LblMenuItem extends JLabel implements ILocalRepaint {
         int h = getHeight();
 
         if (this.selected) {
-            skin.setGraphicsColor(g2d, alpha100);
+            FSkin.setGraphicsColor(g2d, alpha100);
             g2d.fillRect(0, 0, w, h);
-            skin.setGraphicsColor(g2d, d20);
+            FSkin.setGraphicsColor(g2d, d20);
             g2d.drawLine(0, 0, w - 3, 0);
-            skin.setGraphicsColor(g2d, l20);
+            FSkin.setGraphicsColor(g2d, l20);
             g2d.drawLine(0, h - 1, w - 3, h - 1);
         }
         else if (this.hovered) {
-            skin.setGraphicsColor(g2d, d60);
+            FSkin.setGraphicsColor(g2d, d60);
             g2d.fillRect(0, 0, getWidth(), h);
 
-            skin.setGraphicsGradientPaint(g2d, 200 - 8, 0, l00, 200, 0, d80);
+            FSkin.setGraphicsGradientPaint(g2d, 200 - 8, 0, l00, 200, 0, d80);
             g2d.fillRect(w - 2, 0, w, h);
 
-            skin.setGraphicsColor(g2d, d20);
+            FSkin.setGraphicsColor(g2d, d20);
             g2d.drawLine(0, 0, w - 3, 0);
-            skin.setGraphicsColor(g2d, l20);
+            FSkin.setGraphicsColor(g2d, l20);
             g2d.drawLine(0, h - 1, w - 3, h - 1);
         }
 

@@ -109,6 +109,6 @@ public class StarRenderer extends ItemCellRenderer {
         if (size > width) {
             size = width;
         }
-        FSkin.get(this).drawImage(g, skinImage, (width - size) / 2, (height - size) / 2, size, size);
+        FSkin.drawImage(g, skinImage, (width - size) / 2, (height - size) / 2, size, size);
     }
 }

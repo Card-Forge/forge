@@ -20,7 +20,6 @@ import com.google.common.collect.Lists;
 import forge.Singletons;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -446,12 +445,10 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
     /** Paints dragging handle image the length of the label. */
     private class DragHandle extends JLabel {
-        private final JLabelSkin<DragHandle> skin;
         private final SkinImage img = FSkin.getImage(FSkin.LayoutImages.IMG_HANDLE);
         private boolean hovered = false;
 
         public DragHandle() {
-            this.skin = FSkin.get(this);
             this.addMouseListener(SRearrangingUtil.getRearrangeClickEvent());
             this.addMouseMotionListener(SRearrangingUtil.getRearrangeDragEvent());
 
@@ -479,7 +476,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
             final int imgH = imgSize.height;
 
             for (int x = 0; x < getWidth(); x += imgW) {
-                skin.drawImage(g, img, x, ((getHeight() - imgH) / 2));
+                FSkin.drawImage(g, img, x, ((getHeight() - imgH) / 2));
             }
         }
     }

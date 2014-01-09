@@ -119,18 +119,22 @@ public class PhaseLabel extends JLabel {
         // Set color according to skip or active or hover state of label
         if (this.hover) {
             c = FSkin.getColor(FSkin.Colors.CLR_HOVER);
-        } else if (this.active && this.enabled) {
+        }
+        else if (this.active && this.enabled) {
             c = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_ENABLED);
-        } else if (!this.active && this.enabled) {
+        }
+        else if (!this.active && this.enabled) {
             c = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_ENABLED);
-        } else if (this.active && !this.enabled) {
+        }
+        else if (this.active && !this.enabled) {
             c = FSkin.getColor(FSkin.Colors.CLR_PHASE_ACTIVE_DISABLED);
-        } else {
+        }
+        else {
             c = FSkin.getColor(FSkin.Colors.CLR_PHASE_INACTIVE_DISABLED);
         }
 
         // Center vertically and horizontally. Show border if active.
-        FSkin.get(this).setGraphicsColor(g, c);
+        FSkin.setGraphicsColor(g, c);
         g.fillRoundRect(1, 1, w - 2, h - 2, 5, 5);
         super.paintComponent(g);
     }

@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import forge.Singletons;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.properties.ForgePreferences.FPref;
 
@@ -28,7 +27,6 @@ public class LblGroup extends JLabel implements ILocalRepaint {
         
     private boolean hovered = false;
 
-    private final JLabelSkin<LblGroup> skin;
     private final SkinColor clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
     private final SkinColor l20 = clrTheme.stepColor(20);
     private final SkinColor l25 = clrTheme.stepColor(25);
@@ -46,9 +44,8 @@ public class LblGroup extends JLabel implements ILocalRepaint {
         
         super("  " + e0.getTitle());
 
-        skin = FSkin.get(this);
-        skin.setFont(FSkin.getBoldFont(14));
-        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        FSkin.get(this).setFont(FSkin.getBoldFont(14));
+        FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -130,15 +127,15 @@ public class LblGroup extends JLabel implements ILocalRepaint {
             int w = getWidth();
             int h = getHeight();
 
-            skin.setGraphicsColor(g, l20);
+            FSkin.setGraphicsColor(g, l20);
             g.fillRect(0, 0, getWidth(), getHeight());
 
-            skin.setGraphicsGradientPaint(g2d, w - 10, 0, l25, w, 0, d80);
+            FSkin.setGraphicsGradientPaint(g2d, w - 10, 0, l25, w, 0, d80);
             g2d.fillRect(w - 10, 0, w, h);
 
-            skin.setGraphicsColor(g, l40);
+            FSkin.setGraphicsColor(g, l40);
             g2d.drawLine(0, 0, w - 6, 0);
-            skin.setGraphicsColor(g, d20);
+            FSkin.setGraphicsColor(g, d20);
             g2d.drawLine(0, h - 1, w - 6, h - 1);
         }
 

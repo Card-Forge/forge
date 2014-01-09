@@ -31,7 +31,6 @@ import forge.gui.menus.LayoutMenu;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FDigitalClock;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ReflectionUtil;
@@ -466,15 +465,14 @@ public class FNavigationBar extends FTitleBarBase {
             int height = visibleHeight - 1;
             int radius = 6;
             backColor = this.selected ? bottomEdgeColor : (this.hovered ? buttonHoverColor : buttonHoverColor.alphaColor(unhoveredAlpha));
-            skin.setGraphicsGradientPaint(g2d, 0, 0, backColor.stepColor(30), 0, height, backColor);
+            FSkin.setGraphicsGradientPaint(g2d, 0, 0, backColor.stepColor(30), 0, height, backColor);
             g.fillRoundRect(0, 0, width, height, radius, radius);
-            skin.setGraphicsColor(g, buttonBorderColor);
+            FSkin.setGraphicsColor(g, buttonBorderColor);
             g.drawRoundRect(0, 0, width, height, radius, radius);
             super.paintComponent(g);
         }
 
         private class CloseButton extends JLabel implements ILocalRepaint {
-            protected JLabelSkin<CloseButton> skin = FSkin.get(this);
             private boolean pressed, hovered;
 
             private CloseButton() {
@@ -534,12 +532,12 @@ public class FNavigationBar extends FTitleBarBase {
 
                 if (hovered) {
                     if (pressed) {
-                        skin.setGraphicsColor(g, backColor.stepColor(-40));
+                        FSkin.setGraphicsColor(g, backColor.stepColor(-40));
                         g.fillRect(0, 0, getWidth(), getHeight());
                         g.translate(1, 1); //translate icon to give pressed button look
                     }
                     else {
-                        skin.setGraphicsColor(g,  backColor.getContrastColor(20));
+                        FSkin.setGraphicsColor(g,  backColor.getContrastColor(20));
                         g.fillRect(0, 0, getWidth(), getHeight());
                     }
                 }
@@ -556,7 +554,7 @@ public class FNavigationBar extends FTitleBarBase {
                 if (!NavigationTab.this.isEnabled()) {
                     iconColor = iconColor.alphaColor(100);
                 }
-                skin.setGraphicsColor(g2d, iconColor);
+                FSkin.setGraphicsColor(g2d, iconColor);
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2d.setStroke(new BasicStroke(thickness));
                 g2d.drawLine(x1, y1, x2, y2);

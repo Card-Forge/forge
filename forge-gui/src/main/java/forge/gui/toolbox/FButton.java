@@ -243,9 +243,9 @@ public class FButton extends JButton implements ILocalRepaint {
         w = getWidth();
         h = getHeight();
 
-        skin.drawImage(g2d, imgL, 0, 0, this.h, this.h);
-        skin.drawImage(g2d, imgM, this.h, 0, this.w - (2 * this.h), this.h);
-        skin.drawImage(g2d, imgR, this.w - this.h, 0, this.h, this.h);
+        FSkin.drawImage(g2d, imgL, 0, 0, this.h, this.h);
+        FSkin.drawImage(g2d, imgM, this.h, 0, this.w - (2 * this.h), this.h);
+        FSkin.drawImage(g2d, imgR, this.w - this.h, 0, this.h, this.h);
 
         super.paintComponent(g);
     }
