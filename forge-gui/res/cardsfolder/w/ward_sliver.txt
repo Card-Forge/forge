@@ -3,9 +3,7 @@ ManaCost:4 W
 Types:Creature Sliver
 PT:2/2
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 S:Mode$ Continuous | Affected$ Sliver | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ All Slivers have protection from the chosen color.
-SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_sliver.jpg
 Oracle:As Ward Sliver enters the battlefield, choose a color.\nAll Slivers have protection from the chosen color.
