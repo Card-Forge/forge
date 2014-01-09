@@ -25,14 +25,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.esotericsoftware.minlog.Log;
-
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
-import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -48,8 +45,6 @@ public class StaticEffects {
     private final ArrayList<StaticEffect> staticEffects = new ArrayList<StaticEffect>();
     //Global rule changes
     private final EnumSet<GlobalRuleChange> ruleChanges = EnumSet.noneOf(GlobalRuleChange.class);
-
-    private final Game game; 
     
     public final Set<Card> clearStaticEffects() {
         ruleChanges.clear();
@@ -256,123 +251,5 @@ public class StaticEffects {
 
     // **************** End StaticAbility system **************************
 
-    // this is used to keep track of all state-based effects in play:
-    private final HashMap<String, Integer> stateBasedMap = new HashMap<String, Integer>();
-
-    // this is used to define all cards that are state-based effects, and map
-    // the
-    // corresponding commands to their cardnames
-    /** Constant <code>cardToEffectsList</code>. */
-    private static HashMap<String, String[]> cardToEffectsList = new HashMap<String, String[]>();
-
-    /**
-     * <p>
-     * Constructor for StaticEffects.
-     * </p>
-     */
-    public StaticEffects(Game game) {
-        this.game = game;
-        this.initStateBasedEffectsList();
-    }
-
-    /**
-     * <p>
-     * initStateBasedEffectsList.
-     * </p>
-     */
-    public final void initStateBasedEffectsList() {
-        // value has to be an array, since certain cards have multiple commands
-        // associated with them
-        StaticEffects.cardToEffectsList.put("Old Man of the Sea", new String[] { "Old_Man_of_the_Sea" });
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>cardToEffectsList</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.HashMap} object.
-     */
-    public final HashMap<String, String[]> getCardToEffectsList() {
-        return StaticEffects.cardToEffectsList;
-    }
-
-    /**
-     * <p>
-     * addStateBasedEffect.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void addStateBasedEffect(final String s) {
-        if (this.stateBasedMap.containsKey(s)) {
-            this.stateBasedMap.put(s, this.stateBasedMap.get(s) + 1);
-        } else {
-            this.stateBasedMap.put(s, 1);
-        }
-    }
-
-    /**
-     * <p>
-     * removeStateBasedEffect.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void removeStateBasedEffect(final String s) {
-        if (this.stateBasedMap.containsKey(s)) {
-            this.stateBasedMap.put(s, this.stateBasedMap.get(s) - 1);
-            if (this.stateBasedMap.get(s) == 0) {
-                this.stateBasedMap.remove(s);
-            }
-        }
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>stateBasedMap</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.HashMap} object.
-     */
-    public final HashMap<String, Integer> getStateBasedMap() {
-        return this.stateBasedMap;
-    }
-
-    /**
-     * <p>
-     * reset.
-     * </p>
-     */
-    public final void reset() {
-        this.stateBasedMap.clear();
-    }
-
-    /**
-     * <p>
-     * rePopulateStateBasedList.
-     * </p>
-     * @param game 
-     */
-    public final void rePopulateStateBasedList() {
-        this.reset();
-
-        final List<Card> cards = game.getCardsIn(ZoneType.Battlefield);
-
-        Log.debug("== Start add state effects ==");
-        for (Card c : cards) {
-            if (StaticEffects.cardToEffectsList.containsKey(c.getName())) {
-                final String[] effects = this.getCardToEffectsList().get(c.getName());
-                for (final String effect : effects) {
-                    this.addStateBasedEffect(effect);
-                    Log.debug("Added " + effect);
-                }
-            }
-        }
-        Log.debug("== End add state effects ==");
-
-    }
 
 } // end class StaticEffects

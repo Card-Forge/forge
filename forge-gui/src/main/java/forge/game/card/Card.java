@@ -234,11 +234,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     private Card cloneOrigin = null;
     private final List<Card> clones = new ArrayList<Card>();
     private final List<Card> gainControlTargets = new ArrayList<Card>();
-    private final List<Command> gainControlReleaseCommands = new ArrayList<Command>();
 
     private final List<AbilityTriggered> zcTriggers = new ArrayList<AbilityTriggered>();
     private final List<Command> untapCommandList = new ArrayList<Command>();
     private final List<Command> changeControllerCommandList = new ArrayList<Command>();
+    private final List<Object[]> staticCommandList = new ArrayList<Object[]>();
 
     private final static ImmutableList<String> storableSVars = ImmutableList.of("ChosenX");
 
@@ -1762,44 +1762,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * <p/>
      * used primarily with AbilityFactory_GainControl
      */
-    public final void clearGainControlTargets() {
-        this.gainControlTargets.clear();
-    }
-
-    /**
-     * get the commands to be executed to lose control of Cards this card has
-     * gained control of.
-     * <p/>
-     * used primarily with AbilityFactory_GainControl (Old Man of the Sea
-     * specifically)
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final List<Command> getGainControlReleaseCommands() {
-        return this.gainControlReleaseCommands;
-    }
-
-    /**
-     * set a command to be executed to lose control of Cards this card has
-     * gained control of.
-     * <p/>
-     * used primarily with AbilityFactory_GainControl (Old Man of the Sea
-     * specifically)
-     * 
-     * @param c
-     *            the Command to be executed
-     */
-    public final void addGainControlReleaseCommand(final Command c) {
-        this.gainControlReleaseCommands.add(c);
-    }
-
-    /**
-     * <p>
-     * clearGainControlReleaseCommands.
-     * </p>
-     */
-    public final void clearGainControlReleaseCommands() {
-        this.gainControlReleaseCommands.clear();
+    public final void removeGainControlTargets(final Card c) {
+        this.gainControlTargets.remove(c);
     }
 
     /**
@@ -8703,9 +8667,19 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param pc
      */
     public static void updateCard(PaperCard pc) {
-    	Card res = cp2card.get(pc);
+        Card res = cp2card.get(pc);
         if (res != null) {
-        	cp2card.put(pc, fromPaperCard(pc, null));
+            cp2card.put(pc, fromPaperCard(pc, null));
         }
+    }
+    
+    /** return staticCommanderList */
+    public List<Object[]> getStaticCommandList() {
+        return staticCommandList;
+    }
+
+    /** return staticCommanderList */
+    public void addStaticCommandList(Object[] objects) {
+        this.staticCommandList.add(objects);
     }
 } // end Card class

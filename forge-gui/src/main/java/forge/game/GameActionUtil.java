@@ -18,17 +18,14 @@
 package forge.game;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Command;
 import forge.card.MagicColor;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -113,47 +110,6 @@ public final class GameActionUtil {
 
         c.getDamageHistory().registerCombatDamage(player);
     } // executeCombatDamageToPlayerEffects
-
-    /** Constant <code>oldManOfTheSea</code>. */
-    private static Function<Game, ?> oldManOfTheSea = new Function<Game, Object>() {
-
-        @Override
-        public Object apply(Game game) {
-            final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Old Man of the Sea"));
-            for (final Card oldman : list) {
-                if (!oldman.getGainControlTargets().isEmpty()) {
-                    if (oldman.getNetAttack() < oldman.getGainControlTargets().get(0).getNetAttack()) {
-                        final List<Command> coms = oldman.getGainControlReleaseCommands();
-                        for (int i = 0; i < coms.size(); i++) {
-                            coms.get(i).run();
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-    }; // Old Man of the Sea
-
-
-    /** Constant <code>commands</code>. */
-    private final static HashMap<String, Function<Game, ?>> commands = new HashMap<String, Function<Game, ?>>();
-
-    static {
-        // Please add cards in alphabetical order so they are easier to find
-
-        GameActionUtil.getCommands().put("Old_Man_of_the_Sea", GameActionUtil.oldManOfTheSea);
-
-        // The commands above are in alphabetical order by cardname.
-    }
-
-    /**
-     * Gets the commands.
-     * 
-     * @return the commands
-     */
-    public static Map<String, Function<Game, ?>> getCommands() {
-        return GameActionUtil.commands;
-    }
 
     /**
      * Gets the st land mana abilities.

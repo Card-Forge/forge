@@ -19,13 +19,10 @@ package forge.game.zone;
 
 import java.util.List;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.game.GameActionUtil;
-import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
@@ -82,28 +79,8 @@ public class PlayerZoneBattlefield extends PlayerZone {
             c.setSickness(true); // summoning sickness
             c.executeTrigger(ZCTrigger.ENTERFIELD);
             
-            /*if (c.isLand()) {
-
-
-                for( Player opp : c.getOwner().getOpponents())
-                    for( Card le : opp.getCardsIn(ZoneType.Battlefield, "Land Equilibrium") ) {
-                        final List<Card> pLands = c.getOwner().getLandsInPlay();
-                        final List<Card> oLands = opp.getLandsInPlay();
-                        
-                        if (oLands.size() <= (pLands.size() - 1)) {
-                            SpellAbility abSac = AbilityFactory.getAbility(le.getSVar("SacLand"), le);
-                            game.getStack().addSimultaneousStackEntry(abSac);
-                        }
-                    }
-            } // isLand()*/
         }
 
-        if (game.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
-            final String[] effects = game.getStaticEffects().getCardToEffectsList().get(c.getName());
-            for (final String effect : effects) {
-                game.getStaticEffects().addStateBasedEffect(effect);
-            }
-        }
     } // end add()
 
     /** {@inheritDoc} */
@@ -115,17 +92,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
             c.executeTrigger(ZCTrigger.LEAVEFIELD);
         }
 
-        if (game.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
-            final String[] effects = game.getStaticEffects().getCardToEffectsList().get(c.getName());
-            String tempEffect = "";
-            for (final String effect : effects) {
-                tempEffect = effect;
-                game.getStaticEffects().removeStateBasedEffect(effect);
-                // this is to make sure cards reset correctly
-                final Function<Game, ?> comm = GameActionUtil.getCommands().get(tempEffect);
-                comm.apply(game);
-            }
-        }
     }
 
 

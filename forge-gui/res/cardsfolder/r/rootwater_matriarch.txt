@@ -1,0 +1,11 @@
+Name:Rootwater Matriarch
+ManaCost:2 U U
+Types:Creature Merfolk
+PT:2/3
+A:AB$ GainControl | Cost$ T | ValidTgts$ Creature | References$ X,Y | AITgts$ Creature.enchanted | LoseControl$ StaticCommandCheck | StaticCommandCheckSVar$ X | StaticCommandSVarCompare$ EQ0 | ConditionCheckSVar$ Y | ContionSVarCompare$ GE1 | SpellDescription$ Gain control of target creature for as long as that creature is enchanted.
+# the hostcard of SVar X is the controlled card
+SVar:X:Count$Valid Card.Self+enchanted
+SVar:Y:Targeted$Valid Card.enchanted
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_matriarch.jpg
+Oracle:{T}: Gain control of target creature for as long as that creature is enchanted.

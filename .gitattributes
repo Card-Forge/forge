@@ -9593,6 +9593,7 @@ forge-gui/res/cardsfolder/r/rootwater_commando.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rootwater_depths.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rootwater_diver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rootwater_hunter.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/rootwater_matriarch.txt -text
 forge-gui/res/cardsfolder/r/rootwater_mystic.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/rootwater_shaman.txt -text
 forge-gui/res/cardsfolder/r/rootwater_thief.txt svneol=native#text/plain

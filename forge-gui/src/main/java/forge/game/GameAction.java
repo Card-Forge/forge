@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -38,6 +37,7 @@ import forge.FThreads;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AttachEffect;
 import forge.game.card.Card;
@@ -71,6 +71,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
+import forge.util.Expressions;
 import forge.util.ThreadUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -473,6 +474,7 @@ public class GameAction {
         for (Player p : game.getPlayers()) {
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
+        c.runChangeControllerCommands();
     }
 
     /**
@@ -701,6 +703,7 @@ public class GameAction {
         // search for cards with static abilities
         final List<Card> allCards = game.getCardsInGame();
         final ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
+        final List<Card> staticList = new ArrayList<Card>();
         for (final Card c : allCards) {
             for (int i = 0; i < c.getStaticAbilities().size(); i++) {
                StaticAbility stAb = c.getCharacteristics().getStaticAbilities().get(i);
@@ -711,6 +714,9 @@ public class GameAction {
                    c.getCharacteristics().getStaticAbilities().remove(i);
                    i--;
                }
+            }
+            if (!c.getStaticCommandList().isEmpty()) {
+                staticList.add(c);
             }
         }
 
@@ -733,14 +739,33 @@ public class GameAction {
         }
 
         // card state effects like Glorious Anthem
-        for (final String effect : game.getStaticEffects().getStateBasedMap().keySet()) {
-            final Function<Game, ?> com = GameActionUtil.getCommands().get(effect);
-            com.apply(game);
-        }
+//        for (final String effect : game.getStaticEffects().getStateBasedMap().keySet()) {
+//            final Function<Game, ?> com = GameActionUtil.getCommands().get(effect);
+//            com.apply(game);
+//        }
 
         List<Card> lands = game.getCardsIn(ZoneType.Battlefield);
         GameActionUtil.grantBasicLandsManaAbilities(CardLists.filter(lands, CardPredicates.Presets.LANDS));
 
+        for (final Card c : staticList) {
+            for (int i = 0; i < c.getStaticCommandList().size(); i++) {
+                final Object[] staticCheck = c.getStaticCommandList().get(i);
+                final String leftVar = (String) staticCheck[0];
+                final String rightVar = (String) staticCheck[1];
+                final Card affected = (Card) staticCheck[2];
+                // calculate the affected card
+                final int sVar = AbilityUtils.calculateAmount(affected, leftVar, null);
+                final String svarOperator = rightVar.substring(0, 2);
+                final String svarOperand = rightVar.substring(2);
+                final int operandValue = AbilityUtils.calculateAmount(c, svarOperand, null);
+                if (Expressions.compare(sVar, svarOperator, operandValue)) {
+                    ((Command) staticCheck[3]).run();
+                    c.getStaticCommandList().remove(i);
+                    i--;
+                    affectedCards.add(c);
+                }
+            }
+        }
         // Exclude cards in hidden zones from update
         Iterator<Card> it = affectedCards.iterator();
         while (it.hasNext()) {
@@ -753,6 +778,7 @@ public class GameAction {
         if (!affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
+
     }
 
     /**
@@ -796,9 +822,8 @@ public class GameAction {
 
             for (Player p : game.getPlayers()) {
                 for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
-                    if (!c.getController().equals(p)) {
+                    if (!c.getController().equals(p)) { // should not be here
                         controllerChangeZoneCorrection(c);
-                        c.runChangeControllerCommands();
                         checkAgain = true;
                     }
                 }

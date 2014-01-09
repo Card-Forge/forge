@@ -61,8 +61,8 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 }
             }
         } // if
-        host.clearGainControlTargets();
-        host.clearGainControlReleaseCommands();
+        host.removeGainControlTargets(c);
+        
     }
 
     @Override
@@ -103,12 +103,12 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         for (Card tgtC : tgtCards) {
 
-            if (!tgtC.equals(sa.getSourceCard()) && !sa.getSourceCard().getGainControlTargets().contains(tgtC)) {
-                sa.getSourceCard().addGainControlTarget(tgtC);
+            if (!tgtC.isInPlay()) {
+                continue;
             }
 
-            if (!tgtC.isInPlay()) {
-                return;
+            if (!tgtC.equals(sa.getSourceCard()) && !sa.getSourceCard().getGainControlTargets().contains(tgtC)) {
+                sa.getSourceCard().addGainControlTarget(tgtC);
             }
 
             long tStamp = game.getNextTimestamp();
@@ -150,6 +150,12 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     game.getEndOfTurn().addUntil(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                     tgtC.setSVar("SacMe", "6");
                 }
+                if (lose.contains("StaticCommandCheck")) {
+                    String leftVar = sa.getSVar(sa.getParam("StaticCommandCheckSVar"));
+                    String rightVar = sa.getParam("StaticCommandSVarCompare");
+                    sa.getSourceCard().addStaticCommandList(new Object[]{leftVar, rightVar, tgtC,
+                            this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws)});
+                }
             }
 
             if (destroyOn != null) {
@@ -164,10 +170,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 }
             }
 
-            sa.getSourceCard().clearGainControlReleaseCommands();
-            sa.getSourceCard().addGainControlReleaseCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
             game.getAction().controllerChangeZoneCorrection(tgtC);
-            tgtC.runChangeControllerCommands();
 
         } // end foreach target
     }
