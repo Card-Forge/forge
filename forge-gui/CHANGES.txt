@@ -9,8 +9,8 @@ Release Notes
 -------------
 
 - Memory usage optimizations -
+Components are no longer cached in memory for skinning purposes, which used to prevent some components from ever being cleared from memory
 Card images are now cleared from memory cache when switching screens and between games.
-Card display panels and other components are now disposed when the screen/dialog they're on is closed.
 Card display panels are now disposed during game play when its card leaves a zone.
 
 
