@@ -25,7 +25,6 @@ import java.awt.event.WindowFocusListener;
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -35,10 +34,11 @@ import forge.Singletons;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinnedDialog;
 import forge.util.OperatingSystem;
 
 @SuppressWarnings("serial")
-public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatcher {
+public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDispatcher {
     private static final SkinColor borderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private static final int cornerDiameter = 20;
     private static final boolean isSetShapeSupported;
@@ -53,7 +53,6 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
         antiAliasBorder = OperatingSystem.isWindows();
     }
 
-    private FSkin.WindowSkin<FDialog> skin = FSkin.get(this);
     private Point locBeforeMove;
     private Point mouseDownLoc;
     private final FTitleBar titleBar;
@@ -67,7 +66,7 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
     public FDialog(boolean modal0) {
         super(JOptionPane.getRootFrame(), modal0);
         this.setUndecorated(true);
-        skin.setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON)); //use Forge icon by default
+        this.setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON)); //use Forge icon by default
 
         this.innerPanel = new FPanel(new MigLayout("insets dialog, gap 0, center, fill"));
         this.innerPanel.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
@@ -140,7 +139,6 @@ public class FDialog extends JDialog implements ITitleBarOwner, KeyEventDispatch
     @Override
     public void dispose() {
         setVisible(false); //ensure overlay hidden when disposing
-        FSkin.dispose(this); //ensure skins disposed for dialog and all its components
         super.dispose();
     }
 

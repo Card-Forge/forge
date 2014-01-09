@@ -2,7 +2,6 @@ package forge.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -55,8 +54,7 @@ import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FProgressBar;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JComponentSkin;
-import forge.gui.toolbox.FSkin.SkinCursor;
+import forge.gui.toolbox.FSkin.SkinnedLayeredPane;
 import forge.model.BuildInfo;
 import forge.properties.NewConstants;
 
@@ -75,7 +73,7 @@ public enum FView {
     // Top-level UI components; all have getters.
     private final FFrame frmDocument = new FFrame();
     // A layered pane is the frame's viewport, allowing overlay effects.
-    private final DocumentPane lpnDocument = new DocumentPane();
+    private final SkinnedLayeredPane lpnDocument = new SkinnedLayeredPane();
     // The status bar to display at the bottom of the frame
     private FNavigationBar navigationBar;
     // The content panel is placed in the layered pane.
@@ -107,7 +105,7 @@ public enum FView {
         frmDocument.setMinimumSize(new Dimension(800, 600));
         frmDocument.setLocationRelativeTo(null);
         frmDocument.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        FSkin.get(frmDocument).setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON));
+        frmDocument.setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON));
 
         // Frame components
         frmDocument.setContentPane(lpnDocument);
@@ -134,7 +132,7 @@ public enum FView {
         pnlContent.setOpaque(false);
         pnlContent.setLayout(null);
 
-        FSkin.get(FOverlay.SINGLETON_INSTANCE.getPanel()).setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
+        FOverlay.SINGLETON_INSTANCE.getPanel().setBackground(FSkin.getColor(FSkin.Colors.CLR_OVERLAY));
 
         // Populate all drag tab components.
         this.cacheUIStates();
@@ -308,7 +306,7 @@ public enum FView {
     }
 
     /** @return {@link javax.swing.JLayeredPane} */
-    public DocumentPane getLpnDocument() {
+    public SkinnedLayeredPane getLpnDocument() {
         return lpnDocument;
     }
     
@@ -382,26 +380,6 @@ public enum FView {
             super.paintComponent(g);
             g.setColor(new Color(0, 0, 0, 50));
             g.fillRect(0, 0, getWidth(), getHeight());
-        }
-    }
-    
-    @SuppressWarnings("serial")
-    public class DocumentPane extends JLayeredPane {
-        private final JComponentSkin<DocumentPane> skin;
-        
-        public DocumentPane() {
-            super();
-            this.skin = FSkin.get(this);
-        }
-
-        public void setCursor(SkinCursor skinCursor) {
-            this.skin.setCursor(skinCursor);
-        }
-
-        @Override
-        public void setCursor(Cursor cursor) {
-            this.skin.resetCursor(); //ensure skin cursor reset if needed
-            super.setCursor(cursor);
         }
     }
 

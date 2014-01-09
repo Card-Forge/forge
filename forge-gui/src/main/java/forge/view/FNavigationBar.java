@@ -32,6 +32,7 @@ import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FDigitalClock;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ReflectionUtil;
 
@@ -55,13 +56,13 @@ public class FNavigationBar extends FTitleBarBase {
 
     public FNavigationBar(FFrame f) {
         super(f);
-        skin.setMatteBorder(0, 0, 2, 0, bottomEdgeColor);
+        this.setBorder(new FSkin.MatteSkinBorder(0, 0, 2, 0, bottomEdgeColor));
         this.setLocation(0, -visibleHeight); //hide by default
         this.setPreferredSize(new Dimension(this.owner.getWidth(), visibleHeight));
         btnForge.setFocusable(false);
         btnForge.setPreferredSize(new Dimension(100, 23));
-        FSkin.get(btnForge).setForeground(foreColor);
-        FSkin.get(clock).setForeground(foreColor);
+        btnForge.setForeground(foreColor);
+        clock.setForeground(foreColor);
         addControls();
         setupPnlReveal();
         updateBtnCloseTooltip();
@@ -353,10 +354,10 @@ public class FNavigationBar extends FTitleBarBase {
     public void setIconImage(Image image) {
     }
 
-    private final class NavigationTab extends JLabel implements ILocalRepaint {
+    private final class NavigationTab extends SkinnedLabel implements ILocalRepaint {
         private static final int fontSize = 14;
         private static final int unhoveredAlpha = 150;
-        private final FSkin.JLabelSkin<NavigationTab> skin;
+
         private final FScreen screen;
         private final CloseButton btnClose;
         private SkinColor backColor;
@@ -367,10 +368,9 @@ public class FNavigationBar extends FTitleBarBase {
             super(screen0.getTabCaption());
             this.screen = screen0;
             setOpaque(false);
-            skin = FSkin.get(this);
-            skin.setIcon(screen0.getTabIcon());
-            skin.setForeground(foreColor.alphaColor(unhoveredAlpha));
-            skin.setFont(FSkin.getFont(fontSize));
+            this.setIcon(screen0.getTabIcon());
+            this.setForeground(foreColor.alphaColor(unhoveredAlpha));
+            this.setFont(FSkin.getFont(fontSize));
 
             int closeButtonOffset;
             if (screen.allowTabClose()) {
@@ -422,7 +422,7 @@ public class FNavigationBar extends FTitleBarBase {
         private void setSelected(final boolean selected0) {
             if (this.selected == selected0) { return; }
             this.selected = selected0;
-            skin.setFont(selected0 ? FSkin.getBoldFont(fontSize) : FSkin.getFont(fontSize));
+            this.setFont(selected0 ? FSkin.getBoldFont(fontSize) : FSkin.getFont(fontSize));
             repaintSelf();
         }
 
@@ -433,7 +433,7 @@ public class FNavigationBar extends FTitleBarBase {
                 super.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING)));
             }
             else {
-                super.setIcon(null);
+                super.setIcon((Icon)null);
             }
         }
 
@@ -451,7 +451,7 @@ public class FNavigationBar extends FTitleBarBase {
         @Override
         public void repaintSelf() {
             final Dimension d = this.getSize();
-            skin.setForeground(this.selected ? bottomEdgeColor.getHighContrastColor() : (this.hovered ? foreColor : foreColor.alphaColor(unhoveredAlpha)));
+            this.setForeground(this.selected ? bottomEdgeColor.getHighContrastColor() : (this.hovered ? foreColor : foreColor.alphaColor(unhoveredAlpha)));
             repaint(0, 0, d.width, d.height);
             if (btnClose != null) {
                 btnClose.repaintSelf();
@@ -550,7 +550,7 @@ public class FNavigationBar extends FTitleBarBase {
                 int y2 = getHeight() - offset - 1;
 
                 Graphics2D g2d = (Graphics2D) g;
-                SkinColor iconColor = NavigationTab.this.skin.getForeground();
+                SkinColor iconColor = NavigationTab.this.getSkin().getForeground();
                 if (!NavigationTab.this.isEnabled()) {
                     iconColor = iconColor.alphaColor(100);
                 }

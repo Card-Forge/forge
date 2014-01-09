@@ -1,7 +1,6 @@
 package forge.gui.deckeditor.views;
 
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
@@ -27,82 +26,82 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Preferences");
 
-    private JLabel lblStats = new FLabel.Builder()
+    private FLabel lblStats = new FLabel.Builder()
         .text("General").tooltip("Configure high-level UI components")
         .fontSize(12).build();
 
-    private JLabel lblCatalog = new FLabel.Builder()
+    private FLabel lblCatalog = new FLabel.Builder()
         .text("Card Catalog Columns").tooltip("Toggle columns in card catalog panel")
         .fontSize(12).build();
 
-    private JLabel lblDeck = new FLabel.Builder()
+    private FLabel lblDeck = new FLabel.Builder()
         .text("Current Deck Columns").tooltip("Toggle columns in current deck panel")
         .fontSize(12).build();
 
-    private JLabel lblDisplay = new FLabel.Builder()
+    private FLabel lblDisplay = new FLabel.Builder()
         .text("Card Catalog Options").tooltip("Toggle card catalog display options")
         .fontSize(12).build();
 
-    private JCheckBox chbCatalogColor = new FCheckBox("Color");
-    private JCheckBox chbCatalogRarity = new FCheckBox("Rarity");
-    private JCheckBox chbCatalogCMC = new FCheckBox("CMC");
-    private JCheckBox chbCatalogSet = new FCheckBox("Set");
-    private JCheckBox chbCatalogAI = new FCheckBox("AI");
-    private JCheckBox chbCatalogRanking = new FCheckBox("Ranking");
-    private JCheckBox chbCatalogPower = new FCheckBox("Power");
-    private JCheckBox chbCatalogToughness = new FCheckBox("Toughness");
-    private JCheckBox chbCatalogFavorite = new FCheckBox("Favorite");
-    private JCheckBox chbCatalogOwned = new FCheckBox("Owned (Spell shop)");
+    private FCheckBox chbCatalogColor = new FCheckBox("Color");
+    private FCheckBox chbCatalogRarity = new FCheckBox("Rarity");
+    private FCheckBox chbCatalogCMC = new FCheckBox("CMC");
+    private FCheckBox chbCatalogSet = new FCheckBox("Set");
+    private FCheckBox chbCatalogAI = new FCheckBox("AI");
+    private FCheckBox chbCatalogRanking = new FCheckBox("Ranking");
+    private FCheckBox chbCatalogPower = new FCheckBox("Power");
+    private FCheckBox chbCatalogToughness = new FCheckBox("Toughness");
+    private FCheckBox chbCatalogFavorite = new FCheckBox("Favorite");
+    private FCheckBox chbCatalogOwned = new FCheckBox("Owned (Spell shop)");
 
-    private JCheckBox chbDeckColor = new FCheckBox("Color");
-    private JCheckBox chbDeckRarity = new FCheckBox("Rarity");
-    private JCheckBox chbDeckCMC = new FCheckBox("CMC");
-    private JCheckBox chbDeckSet = new FCheckBox("Set");
-    private JCheckBox chbDeckAI = new FCheckBox("AI");
-    private JCheckBox chbDeckRanking = new FCheckBox("Ranking");
-    private JCheckBox chbDeckPower = new FCheckBox("Power");
-    private JCheckBox chbDeckToughness = new FCheckBox("Toughness");
+    private FCheckBox chbDeckColor = new FCheckBox("Color");
+    private FCheckBox chbDeckRarity = new FCheckBox("Rarity");
+    private FCheckBox chbDeckCMC = new FCheckBox("CMC");
+    private FCheckBox chbDeckSet = new FCheckBox("Set");
+    private FCheckBox chbDeckAI = new FCheckBox("AI");
+    private FCheckBox chbDeckRanking = new FCheckBox("Ranking");
+    private FCheckBox chbDeckPower = new FCheckBox("Power");
+    private FCheckBox chbDeckToughness = new FCheckBox("Toughness");
 
-    private JCheckBox chbElasticColumns = new FCheckBox("Use elastic resizing when changing column widths");
+    private FCheckBox chbElasticColumns = new FCheckBox("Use elastic resizing when changing column widths");
 
-    private JCheckBox chbCardDisplayUnique = new FCheckBox("Show unique cards only (only affects Constructed)");
+    private FCheckBox chbCardDisplayUnique = new FCheckBox("Show unique cards only (only affects Constructed)");
 
     private JPanel pnl = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, ax left"));
     private JScrollPane scroller = new JScrollPane(pnl);
 
     //========== Constructor
     private VEditorPreferences() {
-        FSkin.get(lblStats).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
-        FSkin.get(lblCatalog).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
-        FSkin.get(lblDeck).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
-        FSkin.get(lblDisplay).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        lblStats.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        lblCatalog.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        lblDeck.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        lblDisplay.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
 
         FSkin.SkinFont font = FSkin.getFont(12);
 
-        FSkin.get(chbCatalogColor).setFont(font);
-        FSkin.get(chbCatalogRarity).setFont(font);
-        FSkin.get(chbCatalogCMC).setFont(font);
-        FSkin.get(chbCatalogSet).setFont(font);
-        FSkin.get(chbCatalogAI).setFont(font);
-        FSkin.get(chbCatalogRanking).setFont(font);
-        FSkin.get(chbCatalogPower).setFont(font);
-        FSkin.get(chbCatalogToughness).setFont(font);
-        FSkin.get(chbCatalogFavorite).setFont(font);
-        FSkin.get(chbCatalogOwned).setFont(font);
+        chbCatalogColor.setFont(font);
+        chbCatalogRarity.setFont(font);
+        chbCatalogCMC.setFont(font);
+        chbCatalogSet.setFont(font);
+        chbCatalogAI.setFont(font);
+        chbCatalogRanking.setFont(font);
+        chbCatalogPower.setFont(font);
+        chbCatalogToughness.setFont(font);
+        chbCatalogFavorite.setFont(font);
+        chbCatalogOwned.setFont(font);
 
-        FSkin.get(chbDeckColor).setFont(font);
-        FSkin.get(chbDeckRarity).setFont(font);
-        FSkin.get(chbDeckCMC).setFont(font);
-        FSkin.get(chbDeckSet).setFont(font);
-        FSkin.get(chbDeckAI).setFont(font);
-        FSkin.get(chbDeckRanking).setFont(font);
-        FSkin.get(chbDeckPower).setFont(font);
-        FSkin.get(chbDeckToughness).setFont(font);
+        chbDeckColor.setFont(font);
+        chbDeckRarity.setFont(font);
+        chbDeckCMC.setFont(font);
+        chbDeckSet.setFont(font);
+        chbDeckAI.setFont(font);
+        chbDeckRanking.setFont(font);
+        chbDeckPower.setFont(font);
+        chbDeckToughness.setFont(font);
 
-        FSkin.get(chbElasticColumns).setFont(font);
+        chbElasticColumns.setFont(font);
         chbElasticColumns.setSelected(false);
 
-        FSkin.get(chbCardDisplayUnique).setFont(font);
+        chbCardDisplayUnique.setFont(font);
         chbCardDisplayUnique.setSelected(false);
 
         pnl.add(lblStats, "h 25px!, gap 5px 5px 5px 5px, ax left, span 2 1");

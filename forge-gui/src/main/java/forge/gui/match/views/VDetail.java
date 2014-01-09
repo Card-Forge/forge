@@ -27,6 +27,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /** 
  * Assembles Swing components of card detail area.
@@ -43,11 +44,11 @@ public enum VDetail implements IVDoc<CDetail> {
 
     // Top-level containers
     private final CardDetailPanel pnlDetail = new CardDetailPanel(null);
-    private final JLabel lblFlipcard = new JLabel();
+    private final SkinnedLabel lblFlipcard = new SkinnedLabel();
 
     //========= Constructor
     private VDetail() {
-        FSkin.get(lblFlipcard).setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
+        lblFlipcard.setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
         lblFlipcard.setVisible(false);
     }
 

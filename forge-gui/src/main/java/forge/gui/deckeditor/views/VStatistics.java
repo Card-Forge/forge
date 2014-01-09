@@ -2,7 +2,7 @@ package forge.gui.deckeditor.views;
 
 import java.awt.Font;
 
-import javax.swing.JLabel;
+import forge.gui.toolbox.FLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -12,7 +12,6 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
@@ -31,43 +30,43 @@ public enum VStatistics implements IVDoc<CStatistics> {
     private final DragTab tab = new DragTab("Statistics");
 
     // Global stats
-    private JLabel lblTotal = new FLabel.Builder()
+    private FLabel lblTotal = new FLabel.Builder()
             .text("Total cards: 0").tooltip("TOTAL CARDS")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
-    private JLabel lblTMC = new FLabel.Builder()
+    private FLabel lblTMC = new FLabel.Builder()
             .text("Total mana cost: 0").tooltip("TOTAL MANA COST")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
-    private JLabel lblAMC = new FLabel.Builder()
+    private FLabel lblAMC = new FLabel.Builder()
             .text("Average mana cost: 0.00").tooltip("AVERAGE MANA COST")
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
 
     // Total and color count labels
     private final JPanel pnlStats = new JPanel();
-    private final JLabel lblMulti = buildLabel(SItemManagerUtil.StatTypes.MULTICOLOR, true);
-    private final JLabel lblBlack = buildLabel(SItemManagerUtil.StatTypes.BLACK, false);
-    private final JLabel lblBlue = buildLabel(SItemManagerUtil.StatTypes.BLUE, true);
-    private final JLabel lblGreen = buildLabel(SItemManagerUtil.StatTypes.GREEN, false);
-    private final JLabel lblRed = buildLabel(SItemManagerUtil.StatTypes.RED, true);
-    private final JLabel lblWhite = buildLabel(SItemManagerUtil.StatTypes.WHITE, false);
-    private final JLabel lblColorless = buildLabel(SItemManagerUtil.StatTypes.COLORLESS, true);
+    private final FLabel lblMulti = buildLabel(SItemManagerUtil.StatTypes.MULTICOLOR, true);
+    private final FLabel lblBlack = buildLabel(SItemManagerUtil.StatTypes.BLACK, false);
+    private final FLabel lblBlue = buildLabel(SItemManagerUtil.StatTypes.BLUE, true);
+    private final FLabel lblGreen = buildLabel(SItemManagerUtil.StatTypes.GREEN, false);
+    private final FLabel lblRed = buildLabel(SItemManagerUtil.StatTypes.RED, true);
+    private final FLabel lblWhite = buildLabel(SItemManagerUtil.StatTypes.WHITE, false);
+    private final FLabel lblColorless = buildLabel(SItemManagerUtil.StatTypes.COLORLESS, true);
 
     // Card type labels
-    private final JLabel lblArtifact = buildLabel(SItemManagerUtil.StatTypes.ARTIFACT, true);
-    private final JLabel lblCreature = buildLabel(SItemManagerUtil.StatTypes.CREATURE, false);
-    private final JLabel lblEnchantment = buildLabel(SItemManagerUtil.StatTypes.ENCHANTMENT, true);
-    private final JLabel lblInstant = buildLabel(SItemManagerUtil.StatTypes.INSTANT, false);
-    private final JLabel lblLand = buildLabel(SItemManagerUtil.StatTypes.LAND, true);
-    private final JLabel lblPlaneswalker = buildLabel(SItemManagerUtil.StatTypes.PLANESWALKER, false);
-    private final JLabel lblSorcery = buildLabel(SItemManagerUtil.StatTypes.SORCERY, true);
+    private final FLabel lblArtifact = buildLabel(SItemManagerUtil.StatTypes.ARTIFACT, true);
+    private final FLabel lblCreature = buildLabel(SItemManagerUtil.StatTypes.CREATURE, false);
+    private final FLabel lblEnchantment = buildLabel(SItemManagerUtil.StatTypes.ENCHANTMENT, true);
+    private final FLabel lblInstant = buildLabel(SItemManagerUtil.StatTypes.INSTANT, false);
+    private final FLabel lblLand = buildLabel(SItemManagerUtil.StatTypes.LAND, true);
+    private final FLabel lblPlaneswalker = buildLabel(SItemManagerUtil.StatTypes.PLANESWALKER, false);
+    private final FLabel lblSorcery = buildLabel(SItemManagerUtil.StatTypes.SORCERY, true);
 
     // CMC labels
-    private final JLabel lblCMC0 = buildLabel(SItemManagerUtil.StatTypes.CMC_0, true);
-    private final JLabel lblCMC1 = buildLabel(SItemManagerUtil.StatTypes.CMC_1, false);
-    private final JLabel lblCMC2 = buildLabel(SItemManagerUtil.StatTypes.CMC_2, true);
-    private final JLabel lblCMC3 = buildLabel(SItemManagerUtil.StatTypes.CMC_3, false);
-    private final JLabel lblCMC4 = buildLabel(SItemManagerUtil.StatTypes.CMC_4, true);
-    private final JLabel lblCMC5 = buildLabel(SItemManagerUtil.StatTypes.CMC_5, false);
-    private final JLabel lblCMC6 = buildLabel(SItemManagerUtil.StatTypes.CMC_6, true);
+    private final FLabel lblCMC0 = buildLabel(SItemManagerUtil.StatTypes.CMC_0, true);
+    private final FLabel lblCMC1 = buildLabel(SItemManagerUtil.StatTypes.CMC_1, false);
+    private final FLabel lblCMC2 = buildLabel(SItemManagerUtil.StatTypes.CMC_2, true);
+    private final FLabel lblCMC3 = buildLabel(SItemManagerUtil.StatTypes.CMC_3, false);
+    private final FLabel lblCMC4 = buildLabel(SItemManagerUtil.StatTypes.CMC_4, true);
+    private final FLabel lblCMC5 = buildLabel(SItemManagerUtil.StatTypes.CMC_5, false);
+    private final FLabel lblCMC6 = buildLabel(SItemManagerUtil.StatTypes.CMC_6, true);
 
     // Layout containers
     private final JScrollPane scroller = new JScrollPane(pnlStats);
@@ -199,73 +198,73 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
     //========== Retrieval methods
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblMulti() { return lblMulti; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblBlack() { return lblBlack; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblBlue() { return lblBlue; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblGreen() { return lblGreen; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblRed() { return lblRed; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblWhite() { return lblWhite; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblColorless() { return lblColorless; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblMulti() { return lblMulti; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblBlack() { return lblBlack; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblBlue() { return lblBlue; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblGreen() { return lblGreen; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblRed() { return lblRed; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblWhite() { return lblWhite; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblColorless() { return lblColorless; }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblArtifact() { return lblArtifact; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblEnchantment() { return lblEnchantment; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblCreature() { return lblCreature; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblSorcery() { return lblSorcery; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblInstant() { return lblInstant; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblPlaneswalker() { return lblPlaneswalker; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblLand() { return lblLand; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblArtifact() { return lblArtifact; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblEnchantment() { return lblEnchantment; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblCreature() { return lblCreature; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblSorcery() { return lblSorcery; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblInstant() { return lblInstant; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblPlaneswalker() { return lblPlaneswalker; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblLand() { return lblLand; }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblCMC0() { return lblCMC0; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblCMC1() { return lblCMC1; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblCMC2() { return lblCMC2; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblCMC3() { return lblCMC3; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblCMC4() { return lblCMC4; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblCMC5() { return lblCMC5; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblCMC6() { return lblCMC6; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblTotal() { return lblTotal; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblTMC() { return lblTMC; }
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblAMC() { return lblAMC; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblCMC0() { return lblCMC0; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblCMC1() { return lblCMC1; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblCMC2() { return lblCMC2; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblCMC3() { return lblCMC3; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblCMC4() { return lblCMC4; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblCMC5() { return lblCMC5; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblCMC6() { return lblCMC6; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblTotal() { return lblTotal; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblTMC() { return lblTMC; }
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getLblAMC() { return lblAMC; }
 
     //========== Other methods
 
-    private JLabel buildLabel(SkinImage icon, boolean zebra) {
-        final JLabel lbl = new FLabel.Builder().text("0")
+    private FLabel buildLabel(SkinImage icon, boolean zebra) {
+        final FLabel lbl = new FLabel.Builder().text("0")
                 .icon(icon).iconScaleAuto(false)
                 .fontSize(11).build();
 
         if (zebra) {
             lbl.setOpaque(true);
-            FSkin.get(lbl).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+            lbl.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         }
 
         return lbl;
     }
     
-    private JLabel buildLabel(SItemManagerUtil.StatTypes statType, boolean zebra) {
+    private FLabel buildLabel(SItemManagerUtil.StatTypes statType, boolean zebra) {
         return buildLabel(statType.img, zebra);
     }
 }

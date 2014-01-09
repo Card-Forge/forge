@@ -5,21 +5,21 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.event.DocumentListener;
+
+import forge.gui.toolbox.FSkin.SkinnedTextArea;
 
 @SuppressWarnings("serial")
 public class FTextEditor extends JScrollPane {
-	private final JTextArea tarEditor;
+	private final SkinnedTextArea tarEditor;
 	private final FUndoManager undoManager;
 	
 	public FTextEditor() {
-		tarEditor = new JTextArea();
-        FSkin.JTextComponentSkin<JTextArea> skin = FSkin.get(tarEditor);
-        skin.setFont(FSkin.getFixedFont(16));
-        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        skin.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+		tarEditor = new SkinnedTextArea();
+		tarEditor.setFont(FSkin.getFixedFont(16));
+		tarEditor.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+		tarEditor.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+		tarEditor.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         undoManager = new FUndoManager(tarEditor);
  

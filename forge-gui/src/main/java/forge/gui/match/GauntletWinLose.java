@@ -38,6 +38,7 @@ import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.net.FServer;
 import forge.net.Lobby;
 
@@ -178,10 +179,10 @@ public class GauntletWinLose extends ControlWinLose {
             pnlResults.add(lblTemp, "w 50%!, h 25px!, gap 0 0 5px 0");
         }
 
-        final JPanel pnl = this.getView().getPnlCustom();
+        final SkinnedPanel pnl = this.getView().getPnlCustom();
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center"));
         pnl.setOpaque(true);
-        FSkin.get(pnl).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnl.add(lblTitle, "gap 0 0 20px 10px, ax center");
         pnl.add(pnlResults, "w 96%!, growy, pushy, gap 2% 0 0 0");
 

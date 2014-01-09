@@ -17,7 +17,6 @@
  */
 package forge.gui.match.views;
 
-import javax.swing.JTextArea;
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -25,6 +24,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CCombat;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedTextArea;
 
 /** 
  * Assembles Swing components of combat report.
@@ -39,13 +39,12 @@ public enum VCombat implements IVDoc<CCombat> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Combat");
     
-    final JTextArea tar = new JTextArea();
+    final SkinnedTextArea tar = new SkinnedTextArea();
 
     private VCombat() {
-        FSkin.JTextComponentSkin<JTextArea> tarSkin = FSkin.get(tar);
         tar.setOpaque(false);
-        tarSkin.setMatteBorder(0, 0, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
-        tarSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tar.setBorder(new FSkin.MatteSkinBorder(0, 0, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tar.setFocusable(false);
         tar.setLineWrap(true);
     }

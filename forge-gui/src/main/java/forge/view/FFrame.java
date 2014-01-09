@@ -15,9 +15,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
 import forge.Singletons;
 import forge.gui.framework.SDisplayUtil;
@@ -26,11 +26,12 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.FSkin.CompoundSkinBorder;
 import forge.gui.toolbox.FSkin.LineSkinBorder;
+import forge.gui.toolbox.FSkin.SkinnedFrame;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
 @SuppressWarnings("serial")
-public class FFrame extends JFrame implements ITitleBarOwner {
+public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private static final int borderThickness = 3;
     private Point locBeforeMove;
     private Dimension sizeBeforeResize;
@@ -245,10 +246,10 @@ public class FFrame extends JFrame implements ITitleBarOwner {
         }
         this.hideBorder = !this.hideBorder;
         if (this.hideBorder) {
-            FSkin.get(getRootPane()).removeBorder();
+            this.setBorder((Border)null);
         }
         else {
-            FSkin.get(getRootPane()).setBorder(new CompoundSkinBorder(
+            this.setBorder(new CompoundSkinBorder(
                     BorderFactory.createLineBorder(Color.BLACK, 1),
                     new LineSkinBorder(FSkin.getColor(Colors.CLR_BORDERS), borderThickness - 1)));
         }

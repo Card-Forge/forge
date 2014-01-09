@@ -6,19 +6,18 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JLabel;
-
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /** 
  * Custom JLabel for an item in the menu. Handles listening
  * and repainting for hover and select events.
  */
 @SuppressWarnings("serial")
-public class LblMenuItem extends JLabel implements ILocalRepaint {
+public class LblMenuItem extends SkinnedLabel implements ILocalRepaint {
     private boolean selected = false;
     private boolean hovered = false;
 
@@ -39,8 +38,8 @@ public class LblMenuItem extends JLabel implements ILocalRepaint {
     public LblMenuItem(final IVSubmenu<? extends ICDoc> doc0) {
         super("      " + doc0.getMenuTitle());
 
-        FSkin.get(this).setFont(FSkin.getFont(14));
-        FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setFont(FSkin.getFont(14));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {
             @Override

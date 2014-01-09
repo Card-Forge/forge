@@ -290,12 +290,6 @@ public enum FControl implements KeyEventDispatcher {
 
         clearChildren(JLayeredPane.DEFAULT_LAYER);
         SOverlayUtils.hideOverlay();
-
-        if (previousScreenClosed) { //dispose of all components on closed screen
-            for (final Component c : FView.SINGLETON_INSTANCE.getPnlInsets().getComponents()) {
-                FSkin.dispose(c);
-            }
-        }
         ImageCache.clear(); //reduce memory usage by clearing image cache when switching screens
 
         this.currentScreen = screen;

@@ -19,6 +19,7 @@ import forge.gui.MouseUtil.MouseCursor;
 import forge.gui.framework.FScreen;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedMenuItem;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FFrame;
@@ -77,8 +78,7 @@ public final class LayoutMenu {
         JRadioButtonMenuItem menuItem;
         ButtonGroup group = new ButtonGroup();
         String currentSkin = prefs.getPref(FPref.UI_SKIN);
-        String[] skins = FSkin.getSkinNamesArray(true);
-        for (String skin : skins) {
+        for (String skin : FSkin.getAllSkins()) {
             menuItem = new JRadioButtonMenuItem(skin);
             group.add(menuItem);
             if (skin.equals(currentSkin)) {
@@ -143,8 +143,8 @@ public final class LayoutMenu {
     }
 
     private static JMenuItem getMenuItem_SaveLayout() {
-        JMenuItem menuItem = new JMenuItem("Save Current Layout");
-        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_SAVELAYOUT) : null));
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Save Current Layout");
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_SAVELAYOUT) : null));
         menuItem.addActionListener(getSaveLayoutAction());
         return menuItem;
     }
@@ -159,8 +159,8 @@ public final class LayoutMenu {
     }
 
     private static JMenuItem getMenuItem_OpenLayout() {
-        JMenuItem menuItem = new JMenuItem("Open...");
-        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_OPENLAYOUT) : null));
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Open...");
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_OPENLAYOUT) : null));
         menuItem.addActionListener(getOpenLayoutAction());
         return menuItem;
     }
@@ -175,8 +175,8 @@ public final class LayoutMenu {
     }
 
     private static JMenuItem getMenuItem_RevertLayout() {
-        JMenuItem menuItem = new JMenuItem("Refresh");
-        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_REVERTLAYOUT) : null));
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Refresh");
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_REVERTLAYOUT) : null));
         menuItem.addActionListener(getRevertLayoutAction());
         return menuItem;
     }

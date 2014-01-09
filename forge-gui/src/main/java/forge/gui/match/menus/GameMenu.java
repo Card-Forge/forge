@@ -5,11 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JRadioButtonMenuItem;
 
 import forge.Singletons;
 import forge.gui.match.CMatchUI;
@@ -18,6 +15,10 @@ import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinIcon;
 import forge.gui.toolbox.FSkin.SkinProp;
+import forge.gui.toolbox.FSkin.SkinnedCheckBoxMenuItem;
+import forge.gui.toolbox.FSkin.SkinnedMenu;
+import forge.gui.toolbox.FSkin.SkinnedMenuItem;
+import forge.gui.toolbox.FSkin.SkinnedRadioButtonMenuItem;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -50,8 +51,8 @@ public final class GameMenu {
         return menu;
     }
 
-    private static JMenuItem getMenuItem_GameSoundEffects() {
-        JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem("Sound Effects");
+    private static SkinnedCheckBoxMenuItem getMenuItem_GameSoundEffects() {
+        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem("Sound Effects");
         menuItem.setState(prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS));
         menuItem.addActionListener(getSoundEffectsAction());
         return menuItem;
@@ -70,8 +71,8 @@ public final class GameMenu {
         prefs.save();
     }
 
-    private static JMenuItem getMenuItem_Undo() {
-        JMenuItem menuItem = new JMenuItem("Undo");
+    private static SkinnedMenuItem getMenuItem_Undo() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Undo");
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_Z));
         menuItem.addActionListener(getUndoAction());
         return menuItem;
@@ -86,9 +87,9 @@ public final class GameMenu {
         };
     }
 
-    private static JMenuItem getMenuItem_Concede() {
-        JMenuItem menuItem = new JMenuItem("Concede");
-        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_CONCEDE) : null));
+    private static SkinnedMenuItem getMenuItem_Concede() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Concede");
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_CONCEDE) : null));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_Q));
         menuItem.addActionListener(getConcedeAction());
         return menuItem;
@@ -103,9 +104,9 @@ public final class GameMenu {
         };
     }
 
-    private static JMenuItem getMenuItem_AlphaStrike() {
-        JMenuItem menuItem = new JMenuItem("Alpha Strike");
-        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ALPHASTRIKE) : null));
+    private static SkinnedMenuItem getMenuItem_AlphaStrike() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Alpha Strike");
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ALPHASTRIKE) : null));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_A));
         menuItem.addActionListener(getAlphaStrikeAction());
         return menuItem;
@@ -120,9 +121,9 @@ public final class GameMenu {
         };
     }
 
-    private static JMenuItem getMenuItem_EndTurn() {
-        JMenuItem menuItem = new JMenuItem("End Turn");
-        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ENDTURN) : null));
+    private static SkinnedMenuItem getMenuItem_EndTurn() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("End Turn");
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ENDTURN) : null));
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_E));
         menuItem.addActionListener(getEndTurnAction());
         return menuItem;
@@ -137,14 +138,13 @@ public final class GameMenu {
         };
     }
 
-    private static JMenu getMenuItem_TargetingArcs() {
-
-        JMenu menu = new JMenu("Targeting Arcs");
+    private static SkinnedMenu getMenuItem_TargetingArcs() {
+        SkinnedMenu menu = new SkinnedMenu("Targeting Arcs");
         ButtonGroup group = new ButtonGroup();
 
         SkinIcon menuIcon = MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSOFF);
 
-        JRadioButtonMenuItem menuItem;
+        SkinnedRadioButtonMenuItem menuItem;
         menuItem = getTargetingArcRadioButton("Off", FSkin.DockIcons.ICO_ARCSOFF, 0);
         if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSOFF); }
         group.add(menuItem);
@@ -157,15 +157,15 @@ public final class GameMenu {
         if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_ARCSON); }
         group.add(menuItem);
 
-        FSkin.get(menu).setIcon((showIcons ? menuIcon : null));
+        menu.setIcon((showIcons ? menuIcon : null));
         menu.add(menuItem);
 
         return menu;
     }
 
-    private static JRadioButtonMenuItem getTargetingArcRadioButton(String caption, SkinProp icon, final int arcState) {
-        final JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem(caption);
-        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(icon) : null));
+    private static SkinnedRadioButtonMenuItem getTargetingArcRadioButton(String caption, SkinProp icon, final int arcState) {
+        final SkinnedRadioButtonMenuItem menuItem = new SkinnedRadioButtonMenuItem(caption);
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(icon) : null));
         menuItem.setSelected(arcState == controller.getArcState());
         menuItem.addActionListener(getTargetingRadioButtonAction(arcState));
         return menuItem;
@@ -178,20 +178,20 @@ public final class GameMenu {
                 prefs.setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState));
                 prefs.save();
                 controller.setArcState(arcState);
-                setTargetingArcMenuIcon((JMenuItem)e.getSource());
+                setTargetingArcMenuIcon((SkinnedMenuItem)e.getSource());
             }
         };
     }
 
-    private static void setTargetingArcMenuIcon(JMenuItem item) {
+    private static void setTargetingArcMenuIcon(SkinnedMenuItem item) {
         JPopupMenu pop = (JPopupMenu)item.getParent();
         JMenu menu = (JMenu)pop.getInvoker();
         menu.setIcon(item.getIcon());
     }
 
-    private static JMenuItem getMenuItem_ViewDeckList() {
-        JMenuItem menuItem = new JMenuItem("Deck List");
-        FSkin.get(menuItem).setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_DECKLIST) : null));
+    private static SkinnedMenuItem getMenuItem_ViewDeckList() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Deck List");
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkin.DockIcons.ICO_DECKLIST) : null));
         menuItem.addActionListener(getViewDeckListAction());
         return menuItem;
     }

@@ -150,7 +150,7 @@ public class FOptionPane extends FDialog {
         }
         if (message != null) {
             FTextArea prompt = new FTextArea(message);
-            FSkin.get(prompt).setFont(FSkin.getFont(14));
+            prompt.setFont(FSkin.getFont(14));
             prompt.setAutoSize(true);
             Dimension parentSize = JOptionPane.getRootFrame().getSize();
             prompt.setMaximumSize(new Dimension(parentSize.width / 2, parentSize.height - 100));

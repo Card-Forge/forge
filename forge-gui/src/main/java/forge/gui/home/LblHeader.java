@@ -3,17 +3,17 @@ package forge.gui.home;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /** 
  * Standardized header label for top of menu display panel.
  */
 @SuppressWarnings("serial")
-public class LblHeader extends JLabel {
+public class LblHeader extends SkinnedLabel {
     private final SkinColor clr = FSkin.getColor(FSkin.Colors.CLR_THEME).stepColor(0);
     private final SkinColor a100 = clr.alphaColor(100);
     private final SkinColor d40 = clr.stepColor(-40);
@@ -25,8 +25,8 @@ public class LblHeader extends JLabel {
      */
     public LblHeader(final String txt0) {
         super(txt0);
-        FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        FSkin.get(this).setFont(FSkin.getFont(18));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setFont(FSkin.getFont(18));
         this.setBorder(new EmptyBorder(5, 30, 0, 0));
     }
 

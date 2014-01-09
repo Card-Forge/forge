@@ -21,13 +21,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import forge.Singletons;
 import forge.game.Game;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.limited.GauntletMini;
 import forge.net.FServer;
 
@@ -46,8 +46,8 @@ public class LimitedWinLose extends ControlWinLose {
     private static final String CONSTRAINTS_TITLE = "w 95%!, gap 0 0 20px 10px";
     private static final String CONSTRAINTS_TEXT = "w 95%!,, h 180px!, gap 0 0 0 20px";
 
-    private JLabel lblTemp1;
-    private JLabel lblTemp2;
+    private SkinnedLabel lblTemp1;
+    private SkinnedLabel lblTemp2;
 
     /**
      * Instantiates a new limited mode win/lose handler.
@@ -125,11 +125,11 @@ public class LimitedWinLose extends ControlWinLose {
     private void showTournamentInfo(final String newTitle) {
 
         this.lblTemp1 = new TitleLabel(newTitle);
-        this.lblTemp2 = new JLabel("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds());
+        this.lblTemp2 = new SkinnedLabel("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds());
                 // + "      Total Wins: " + gauntlet.getWins()
                 // + "      Total Losses: " + gauntlet.getLosses());
         this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        FSkin.get(this.lblTemp2).setFont(FSkin.getFont(17));
+        this.lblTemp2.setFont(FSkin.getFont(17));
         this.lblTemp2.setForeground(Color.white);
         this.lblTemp2.setIconTextGap(50);
         this.getView().getPnlCustom().add(this.lblTemp1, LimitedWinLose.CONSTRAINTS_TITLE);
@@ -204,10 +204,10 @@ public class LimitedWinLose extends ControlWinLose {
      * 
      */
     @SuppressWarnings("serial")
-    private class TitleLabel extends JLabel {
+    private class TitleLabel extends SkinnedLabel {
         TitleLabel(final String msg) {
             super(msg);
-            FSkin.get(this).setFont(FSkin.getFont(18));
+            this.setFont(FSkin.getFont(18));
             this.setPreferredSize(new Dimension(200, 40));
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setForeground(Color.white);

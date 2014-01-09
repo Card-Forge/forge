@@ -10,7 +10,6 @@ import java.util.Vector;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -23,9 +22,10 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.ComboPopup;
 
 import forge.gui.toolbox.FSkin.SkinFont;
+import forge.gui.toolbox.FSkin.SkinnedComboBox;
 
 @SuppressWarnings("serial")
-public class FComboBox<E> extends JComboBox<E> {
+public class FComboBox<E> extends SkinnedComboBox<E> {
     public enum TextAlignment {
         LEFT (SwingConstants.LEFT),
         RIGHT (SwingConstants.RIGHT),
@@ -78,7 +78,7 @@ public class FComboBox<E> extends JComboBox<E> {
     
     public void setSkinFont(SkinFont skinFont0) {
         this.skinFont = skinFont0;
-        FSkin.get(this).setFont(skinFont0);
+        this.setFont(skinFont0);
     }
 
     public int getAutoSizeWidth() {
@@ -161,5 +161,4 @@ public class FComboBox<E> extends JComboBox<E> {
             }
         }
     }
-
 }

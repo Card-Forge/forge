@@ -38,6 +38,7 @@ import javax.swing.UIManager;
 import forge.gui.toolbox.FProgressBar;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinIcon;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 
@@ -138,8 +139,8 @@ public class SplashFrame extends JFrame {
         barProgress.setBounds(20, 373, 410, 57);
         pnlContent.add(barProgress);
 
-        final JLabel bgLabel = new JLabel();
-        FSkin.get(bgLabel).setIcon(bgIcon);
+        final SkinnedLabel bgLabel = new SkinnedLabel();
+        bgLabel.setIcon(bgIcon);
         bgLabel.setBounds(0, 0, 450, 450);
         pnlContent.add(bgLabel);
 

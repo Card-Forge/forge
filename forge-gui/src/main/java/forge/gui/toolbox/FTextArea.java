@@ -2,22 +2,21 @@ package forge.gui.toolbox;
 
 import java.awt.FontMetrics;
 
-import javax.swing.JTextArea;
+import forge.gui.toolbox.FSkin.SkinnedTextArea;
 
 /** 
  * A custom instance of JTextArea using Forge skin properties.
  *
  */
 @SuppressWarnings("serial")
-public class FTextArea extends JTextArea {
+public class FTextArea extends SkinnedTextArea {
     private boolean autoSize;
 
     /** */
     public FTextArea() {
         super();
-        FSkin.JTextComponentSkin<FTextArea> skin = FSkin.get(this);
-        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        skin.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setOpaque(false);
         this.setWrapStyleWord(true);
         this.setLineWrap(true);

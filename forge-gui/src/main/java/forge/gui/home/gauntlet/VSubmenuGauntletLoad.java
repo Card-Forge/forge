@@ -47,7 +47,7 @@ public enum VSubmenuGauntletLoad implements IVSubmenu<CSubmenuGauntletLoad> {
     private final StartButton btnStart  = new StartButton();
 
     private VSubmenuGauntletLoad() {
-        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         scrLoad.setBorder(null);
     }

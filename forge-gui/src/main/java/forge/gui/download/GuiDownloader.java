@@ -130,8 +130,8 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         radProxySocks.addChangeListener(new ProxyHandler(2));
         radProxyNone.setSelected(true);
 
-        FSkin.get(btnClose).setLineBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        FSkin.get(btnStart).setFont(FSkin.getFont(18));
+        btnClose.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT)));
+        btnStart.setFont(FSkin.getFont(18));
         btnStart.setVisible(false);
 
         barProgress.reset();

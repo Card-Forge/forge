@@ -7,12 +7,11 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JLabel;
-
 import forge.Singletons;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -20,8 +19,7 @@ import forge.properties.ForgePreferences.FPref;
  * Handles repainting and listening for hover and click events.
  */
 @SuppressWarnings("serial")
-public class LblGroup extends JLabel implements ILocalRepaint {
-    
+public class LblGroup extends SkinnedLabel implements ILocalRepaint {
     private static final boolean isCompactMenu = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_COMPACT_MAIN_MENU);
     private static EMenuGroup activeMenuGroup = null;
         
@@ -41,11 +39,10 @@ public class LblGroup extends JLabel implements ILocalRepaint {
      * @param e0 {@link forge.gui.home.EMenuGroup}
      */
     public LblGroup(final EMenuGroup e0) {
-        
         super("  " + e0.getTitle());
 
-        FSkin.get(this).setFont(FSkin.getBoldFont(14));
-        FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setFont(FSkin.getBoldFont(14));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {
             @Override

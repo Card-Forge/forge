@@ -21,11 +21,9 @@ package forge.gui.home.settings;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
-
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -33,6 +31,7 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedTextArea;
 
 /** 
  * Displays contents of CHANGES.txt file.
@@ -49,7 +48,7 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
     private final DragTab tab = new DragTab("Release Notes");
 
     private final JPanel pnlMain = new JPanel();    
-    private JTextArea tar;
+    private SkinnedTextArea tar;
     private final JScrollPane scroller;
     
     /**
@@ -60,17 +59,16 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
         pnlMain.setOpaque(false);
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
                 
-        tar = new JTextArea();
+        tar = new SkinnedTextArea();
         tar.setOpaque(true);
         tar.setLineWrap(true);
         tar.setWrapStyleWord(true);
         tar.setEditable(false);
         tar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        FSkin.JTextComponentSkin<JTextArea> tarSkin = FSkin.get(tar);
         tar.setFont(FSkin.getFixedFont(16));
-        tarSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tarSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tar.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         
         scroller = new JScrollPane(tar);
         pnlMain.add(scroller, "w 100%!, h 100%!");

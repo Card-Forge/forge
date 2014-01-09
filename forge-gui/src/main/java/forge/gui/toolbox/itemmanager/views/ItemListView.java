@@ -38,6 +38,7 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -52,6 +53,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedTable;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
@@ -70,7 +72,6 @@ import forge.util.ItemPoolSorter;
 @SuppressWarnings("serial")
 public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     private final ItemTable table = new ItemTable();
-    private final FSkin.JTableSkin<ItemTable> skin;
     private final ItemTableModel tableModel;
 
     public ItemTableModel getTableModel() {
@@ -88,20 +89,19 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.tableModel = new ItemTableModel(model0);
 
         // use different selection highlight colors for focused vs. unfocused tables
-        this.skin = FSkin.get(this.table);
-        this.skin.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
-        this.skin.setSelectionForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+        this.table.setSelectionForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.table.addFocusListener(new FocusListener() {
             @Override
             public void focusLost(FocusEvent e) {
-                if (!e.isTemporary() && !skin.isDisposed()) {
-                    skin.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+                if (!e.isTemporary()) {
+                    table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
                 }
             }
 
             @Override
             public void focusGained(FocusEvent e) {
-                skin.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+                table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
                 // if nothing selected when we gain focus, select the first row (if exists)
                 if (-1 == getSelectedIndex() && getCount() > 0) {
                     table.setRowSelectionInterval(0, 0);
@@ -121,8 +121,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
         });
 
-        this.skin.setFont(FSkin.getFont(12));
-        this.table.setBorder(null);
+        this.table.setFont(FSkin.getFont(12));
+        this.table.setBorder((Border)null);
         this.table.getTableHeader().setBorder(null);
         this.table.setRowHeight(18);
         setWantElasticColumns(false);
@@ -292,7 +292,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.table.setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_OFF);
     }
 
-    public final class ItemTable extends JTable {
+    public final class ItemTable extends SkinnedTable {
         @Override
         protected JTableHeader createDefaultTableHeader() {
             return new JTableHeader(columnModel) {

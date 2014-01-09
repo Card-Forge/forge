@@ -31,7 +31,7 @@ public class ViewItem extends FPanel {
         this.tarDesc = new FTextArea();
         this.btnPurchase = new FLabel.Builder().text("Buy").opaque(true).fontSize(20).hoverable(true).build();
 
-        FSkin.get(this).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Layout
         this.setLayout(new MigLayout("insets 0, gap 0"));

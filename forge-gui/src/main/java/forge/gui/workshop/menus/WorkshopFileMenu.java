@@ -6,8 +6,10 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
 import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedMenuItem;
 import forge.gui.workshop.controllers.CCardScript;
 
 /**
@@ -36,8 +38,8 @@ public final class WorkshopFileMenu {
     }
 
     private static JMenuItem getMenuItem_SaveCard() {
-        JMenuItem menuItem = new JMenuItem("Save and Apply Card Changes");
-        FSkin.get(menuItem).setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_SAVE) : null);
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Save and Apply Card Changes");
+        menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_SAVE) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_S));
         menuItem.addActionListener(getSaveCardAction());
         menuItem_SaveCard = menuItem;

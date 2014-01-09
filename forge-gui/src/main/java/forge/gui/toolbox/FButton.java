@@ -32,11 +32,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
-
 import forge.gui.framework.ILocalRepaint;
-import forge.gui.toolbox.FSkin.JComponentSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
+import forge.gui.toolbox.FSkin.SkinnedButton;
 
 /**
  * The core JButton used throughout the Forge project. Follows skin font and
@@ -44,10 +42,9 @@ import forge.gui.toolbox.FSkin.SkinImage;
  *
  */
 @SuppressWarnings("serial")
-public class FButton extends JButton implements ILocalRepaint {
+public class FButton extends SkinnedButton implements ILocalRepaint {
 
     /** The img r. */
-    private final JComponentSkin<FButton> skin;
     private SkinImage imgL;
     private SkinImage imgM;
     private SkinImage imgR;
@@ -68,14 +65,13 @@ public class FButton extends JButton implements ILocalRepaint {
     public FButton(final String label) {
         super(label);
         this.setOpaque(false);
-        skin = FSkin.get(this);
-        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        skin.setBackground(Color.red);
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setBackground(Color.red);
         this.setFocusPainted(false);
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setContentAreaFilled(false);
         this.setMargin(new Insets(0, 25, 0, 25));
-        skin.setFont(FSkin.getBoldFont(14));
+        this.setFont(FSkin.getBoldFont(14));
         this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT);
         this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER);
         this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT);

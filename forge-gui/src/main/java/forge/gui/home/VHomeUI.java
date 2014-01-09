@@ -62,8 +62,8 @@ import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JComponentSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.properties.NewConstants;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
@@ -185,7 +185,7 @@ public enum VHomeUI implements IVTopLevelUI {
         }
 
         pnlMenu.add(pnlSubmenus, "w 100%!, h 100% - " + pnlMainMenuHeight + "px!");
-        FSkin.get(pnlDisplay).setBackground(l00.alphaColor(100));
+        pnlDisplay.setBackground(l00.alphaColor(100));
     }
 
     public final FLabel getLblStartServer() {
@@ -241,12 +241,9 @@ public enum VHomeUI implements IVTopLevelUI {
     }
 
     /** */
-    public class PnlDisplay extends JPanel implements ILocalRepaint {
-        private final JComponentSkin<PnlDisplay> skin;
-
+    public class PnlDisplay extends SkinnedPanel implements ILocalRepaint {
         /** Constructor. */
         public PnlDisplay() {
-            this.skin = FSkin.get(this);
             this.setOpaque(false);
         }
 
@@ -261,7 +258,7 @@ public enum VHomeUI implements IVTopLevelUI {
             super.paintComponent(g);
             final Graphics2D g2d = (Graphics2D) g.create();
 
-            FSkin.setGraphicsColor(g2d, skin.getBackground());
+            g2d.setColor(this.getBackground());
             g2d.fillRect(0, 0, getWidth(), getHeight());
 
             g2d.dispose();

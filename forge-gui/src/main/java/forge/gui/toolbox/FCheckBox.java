@@ -1,23 +1,20 @@
 package forge.gui.toolbox;
 
-import javax.swing.JCheckBox;
-
-import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinnedCheckBox;
 
 /** 
  * A custom instance of JCheckBox using Forge skin properties.
  */
 @SuppressWarnings("serial")
-public class FCheckBox extends JCheckBox {
+public class FCheckBox extends SkinnedCheckBox {
     public FCheckBox() {
         this("");
     }
 
     public FCheckBox(final String s0) {
         super(s0);
-        JComponentSkin<FCheckBox> skin = FSkin.get(this);
-        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        skin.setFont(FSkin.getFont(14));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setFont(FSkin.getFont(14));
         this.setOpaque(false);
     }
     

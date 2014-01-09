@@ -40,6 +40,7 @@ import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CField;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.special.PhaseIndicator;
 import forge.gui.toolbox.special.PlayerDetailsPanel;
 import forge.view.arcane.PlayArea;
@@ -62,7 +63,7 @@ public class VField implements IVDoc<CField> {
     // Top-level containers
     private final JScrollPane scroller = new JScrollPane();
     private final PlayArea tabletop;
-    private final JPanel avatarArea = new JPanel();
+    private final SkinnedPanel avatarArea = new SkinnedPanel();
 
     private final PlayerDetailsPanel detailsPanel;
 
@@ -100,7 +101,7 @@ public class VField implements IVDoc<CField> {
         control = new CField(player, this, playerViewer);
 
         avatarArea.setOpaque(false);
-        FSkin.get(avatarArea).setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
+        avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
         avatarArea.add(lblAvatar, "w 100%!, h 70%!, wrap, gaptop 4%");
         avatarArea.add(lblLife, "w 100%!, h 30%!, gaptop 4%");
@@ -111,7 +112,7 @@ public class VField implements IVDoc<CField> {
             public void mouseEntered(final MouseEvent e) {
                 avatarArea.setOpaque(true);
                 if (!isHighlighted())
-                    FSkin.get(avatarArea).setLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+                    avatarArea.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             }
 
             @Override
@@ -122,7 +123,7 @@ public class VField implements IVDoc<CField> {
             }
         });
 
-        FSkin.get(tabletop).setMatteBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        tabletop.setBorder(new FSkin.MatteSkinBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
@@ -258,10 +259,10 @@ public class VField implements IVDoc<CField> {
 
         this.getLblLife().setText("" + player.getLife());
         if (player.getLife() > 5) {
-            FSkin.get(this.getLblLife()).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            this.getLblLife().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
         else {
-            FSkin.get(this.getLblLife()).setForeground(Color.red);
+            this.getLblLife().setForeground(Color.red);
         }
 
         boolean highlighted = isHighlighted();

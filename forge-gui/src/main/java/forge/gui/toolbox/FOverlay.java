@@ -26,9 +26,8 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JPanel;
-
 import forge.gui.SOverlayUtils;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 
 /**
  * Semi-transparent overlay panel. Should be used with layered panes.
@@ -43,7 +42,7 @@ public enum FOverlay {
     SINGLETON_INSTANCE;
 
     private final JButton btnClose = new JButton("X");
-    private final JPanel pnl = new OverlayPanel();
+    private final OverlayPanel pnl = new OverlayPanel();
 
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
@@ -83,12 +82,11 @@ public enum FOverlay {
         return this.btnClose;
     }
 
-    /** @return {@link javax.swing.JPanel} */
-    public JPanel getPanel() {
+    public SkinnedPanel getPanel() {
         return this.pnl;
     }
 
-    private class OverlayPanel extends JPanel {
+    private class OverlayPanel extends SkinnedPanel {
         /**
          * For some reason, the alpha channel background doesn't work properly on
          * Windows 7, so the paintComponent override is required for a

@@ -8,14 +8,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JTextComponentSkin;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
+import forge.gui.toolbox.FSkin.SkinnedTextField;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 
@@ -24,7 +25,7 @@ import forge.quest.data.QuestPreferences.QPref;
  *
  */
 @SuppressWarnings("serial")
-public class QuestPreferencesHandler extends JPanel {
+public class QuestPreferencesHandler extends SkinnedPanel {
     private final QuestPreferences prefs;
     private final JPanel pnlDifficulty, pnlBooster, pnlRewards, pnlShop;
     private final FLabel lblErrRewards, lblErrBooster, lblErrDifficulty, lblErrShop;
@@ -240,10 +241,9 @@ public class QuestPreferencesHandler extends JPanel {
         resetErrors();
     }
 
-    private class PrefInput extends JTextField {
+    private class PrefInput extends SkinnedTextField {
         private final QPref qpref;
         private final ErrType err;
-        private final JTextComponentSkin<PrefInput> skin;
         private final FSkin.SkinColor clrHover, clrActive, clrText;
         private boolean isFocus = false;
         private String previousText = "";
@@ -259,17 +259,16 @@ public class QuestPreferencesHandler extends JPanel {
 
             this.qpref = qp0;
             this.err = e0;
-            this.skin = FSkin.get(this);
             this.clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
             this.clrActive = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
             this.clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
 
             this.setOpaque(false);
-            this.setBorder(null);
-            this.skin.setFont(FSkin.getFont(13));
-            this.skin.setForeground(clrText);
-            this.skin.setCaretColor(clrText);
-            this.skin.setBackground(clrHover);
+            this.setBorder((Border)null);
+            this.setFont(FSkin.getFont(13));
+            this.setForeground(clrText);
+            this.setCaretColor(clrText);
+            this.setBackground(clrHover);
             this.setHorizontalAlignment(SwingConstants.CENTER);
             this.setText(prefs.getPref(qpref));
             this.setPreviousText(prefs.getPref(qpref));
@@ -295,14 +294,14 @@ public class QuestPreferencesHandler extends JPanel {
                 public void focusGained(FocusEvent e) {
                     isFocus = true;
                     setOpaque(true);
-                    skin.setBackground(clrActive);
+                    setBackground(clrActive);
                 }
 
                 @Override
                 public void focusLost(FocusEvent e) {
                     isFocus = false;
                     setOpaque(false);
-                    skin.setBackground(clrHover);
+                    setBackground(clrHover);
 
                     // TODO for slight performance improvement
                     // check if value has changed before validating

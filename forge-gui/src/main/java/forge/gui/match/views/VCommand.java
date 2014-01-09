@@ -71,7 +71,7 @@ public class VCommand implements IVDoc<CCommand> {
 
         control = new CCommand(player, this);
 
-        FSkin.get(tabletop).setMatteBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        tabletop.setBorder(new FSkin.MatteSkinBorder(0, 1, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);

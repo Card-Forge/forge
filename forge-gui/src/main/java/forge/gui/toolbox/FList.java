@@ -1,6 +1,7 @@
 package forge.gui.toolbox;
 
 import java.awt.Component;
+
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -8,13 +9,15 @@ import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 import javax.swing.border.EmptyBorder;
 
+import forge.gui.toolbox.FSkin.SkinnedLabel;
+import forge.gui.toolbox.FSkin.SkinnedList;
+
 /** 
  * A JList object using Forge skin properties.
  *
  */
 @SuppressWarnings("serial")
-public class FList<E> extends JList<E> {
-
+public class FList<E> extends SkinnedList<E> {
     public FList() {
         super();
         applySkin();
@@ -45,7 +48,7 @@ public class FList<E> extends JList<E> {
      * TODO: Write javadoc for this method.
      */
     private void applySkin() {
-        FSkin.get(this).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         ListCellRenderer<E> renderer = new ComplexCellRenderer<E>();
         setCellRenderer(renderer);
@@ -58,14 +61,14 @@ public class FList<E> extends JList<E> {
         public Component getListCellRendererComponent(JList<? extends E1> lst0, E1 val0, int i0,
             boolean isSelected, boolean cellHasFocus) {
 
-            JLabel lblItem = (JLabel) defaultRenderer.getListCellRendererComponent(
+            JLabel defaultItem = (JLabel) defaultRenderer.getListCellRendererComponent(
                     lst0, val0, i0, isSelected, cellHasFocus);
+            SkinnedLabel lblItem = new SkinnedLabel(defaultItem.getText());
 
-            FSkin.JLabelSkin<JLabel> lblItemSkin = FSkin.get(lblItem);
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
-            lblItemSkin.setBackground(FSkin.getColor(hasFocus() ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE));
-            lblItemSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            lblItemSkin.setFont(FSkin.getFont(12));
+            lblItem.setBackground(FSkin.getColor(hasFocus() ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE));
+            lblItem.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            lblItem.setFont(FSkin.getFont(12));
             lblItem.setOpaque(isSelected);
             return lblItem;
         }

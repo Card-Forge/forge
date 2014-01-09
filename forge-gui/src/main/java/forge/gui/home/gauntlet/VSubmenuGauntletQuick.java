@@ -23,7 +23,7 @@ import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JComponentSkin;
+import forge.gui.toolbox.FSkin.SkinnedSlider;
 
 /** 
  * Assembles Swing components of "quick gauntlet" submenu singleton.
@@ -49,8 +49,8 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         .text("Double click a non-random deck for its decklist.")
         .fontSize(12).build();
 
-    private final JSlider sliOpponents = new JSlider(SwingConstants.HORIZONTAL, 5, 50, 20);
-    //private JSlider sliGamesPerMatch = new JSlider(JSlider.HORIZONTAL, 1, 7, 3);
+    private final SkinnedSlider sliOpponents = new SkinnedSlider(SwingConstants.HORIZONTAL, 5, 50, 20);
+    //private SkinnedSlider sliGamesPerMatch = new SkinnedSlider(JSlider.HORIZONTAL, 1, 7, 3);
 
     private final JCheckBox boxUserDecks = new FCheckBox("Custom User Decks");
     private final JCheckBox boxQuestDecks = new FCheckBox("Quest Decks");
@@ -82,28 +82,27 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final StartButton btnStart  = new StartButton();
 
     private VSubmenuGauntletQuick() {
-        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         boxUserDecks.setSelected(true);
         boxQuestDecks.setSelected(true);
         boxThemeDecks.setSelected(true);
         boxColorDecks.setSelected(true);
 
-        JComponentSkin<JSlider> sliOpponentsSkin = FSkin.get(sliOpponents);
         sliOpponents.setMajorTickSpacing(5);
         sliOpponents.setMinorTickSpacing(0);
         sliOpponents.setPaintTicks(false);
         sliOpponents.setPaintLabels(true);
         sliOpponents.setSnapToTicks(true);
         sliOpponents.setOpaque(false);
-        sliOpponentsSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        sliOpponentsSkin.setFont(FSkin.getFont(12));
+        sliOpponents.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        sliOpponents.setFont(FSkin.getFont(12));
 
         scrLoad.setOpaque(false);
         scrLoad.getViewport().setOpaque(false);
         scrLoad.setBorder(null);
 
-        FSkin.get(pnlOptions).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        pnlOptions.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlOptions.add(lblOptions, "h 30px!, w 96%!, gap 2% 0 0 5px");
         pnlOptions.add(sliOpponents, "h 40px!, w 96%!, gap 2% 0 0 5px, ax center");
         pnlOptions.add(lblDesc1, "w 96%!, gap 2% 0 0 20px");

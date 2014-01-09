@@ -5,33 +5,33 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.JButton;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedButton;
 
 @SuppressWarnings("serial")
-public class StartButton extends JButton {
+public class StartButton extends SkinnedButton {
     public StartButton() {
-        final FSkin.AbstractButtonSkin<StartButton> skin = FSkin.get(this);
         setOpaque(false);
         setContentAreaFilled(false);
-        setBorder(null);
+        setBorder((Border)null);
         setBorderPainted(false);
         setRolloverEnabled(true);
-        skin.setRolloverIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_OVER));
-        skin.setIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_UP));
-        skin.setPressedIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_DOWN));
+        setRolloverIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_OVER));
+        setIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_UP));
+        setPressedIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_DOWN));
         
         addFocusListener(new FocusListener() {
             @Override
             public void focusLost(FocusEvent arg0) {
-                skin.setIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_UP));
+                setIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_UP));
             }
             
             @Override
             public void focusGained(FocusEvent arg0) {
-                skin.setIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_OVER));
+                setIcon(FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_START_OVER));
             }
         });
         

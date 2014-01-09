@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.JCheckBox;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -52,6 +51,8 @@ import forge.gui.toolbox.ContextMenuBuilder;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedCheckBox;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.ToolTipListener;
@@ -89,7 +90,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private final Class<T> genericType;
     private final ArrayList<ListSelectionListener> selectionListeners = new ArrayList<ListSelectionListener>();
 
-    private final JCheckBox chkEnableFilters = new JCheckBox();
+    private final SkinnedCheckBox chkEnableFilters = new SkinnedCheckBox();
 
     private final FTextField txtFilterLogic = new FTextField.Builder()
         .tooltip("Use '&','|','!' symbols (AND,OR,NOT) in combination with filter numbers and optional grouping \"()\" to build Boolean expression evaluated when applying filters")
@@ -97,7 +98,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         .build();
 
     private ItemFilter<? extends T> mainSearchFilter;
-    private final JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
+    private final SkinnedPanel pnlButtons = new SkinnedPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
 
     private final FLabel btnFilters = new FLabel.ButtonBuilder()
         .text("Filters")
@@ -181,7 +182,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.mainSearchFilter = createSearchFilter();
         this.add(mainSearchFilter.getWidget());
         this.pnlButtons.setOpaque(false);
-        FSkin.get(this.pnlButtons).setMatteBorder(1, 0, 1, 0, FSkin.getColor(Colors.CLR_TEXT));
+        this.pnlButtons.setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FSkin.getColor(Colors.CLR_TEXT)));
         this.add(this.pnlButtons);
         this.add(this.btnFilters);
         this.add(this.lblCaption);

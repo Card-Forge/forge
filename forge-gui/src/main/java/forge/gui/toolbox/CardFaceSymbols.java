@@ -26,7 +26,6 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.gui.toolbox.FSkin.ComponentSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 
 /**
@@ -132,7 +131,7 @@ public class CardFaceSymbols {
      * @param y
      *            a int.
      */
-    public static void draw(final ComponentSkin<?> skin, Graphics g, ManaCost manaCost, int x, int y) {
+    public static void draw(Graphics g, ManaCost manaCost, int x, int y) {
         if (manaCost.isNoCost()) {
             return;
         }
@@ -145,25 +144,25 @@ public class CardFaceSymbols {
         if (hasGeneric) {
             for (final ManaCostShard s : manaCost) { //render X shards before generic
                 if (s == ManaCostShard.X) {
-                    CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, xpos, y);
+                    CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y);
                     xpos += offset;
                 }
             }
 
             final String sGeneric = Integer.toString(genericManaCost);
-            CardFaceSymbols.drawSymbol(sGeneric, skin, g, xpos, y);
+            CardFaceSymbols.drawSymbol(sGeneric, g, xpos, y);
             xpos += offset;
     
             for (final ManaCostShard s : manaCost) { //render non-X shards after generic
                 if (s != ManaCostShard.X) {
-                    CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, xpos, y);
+                    CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y);
                     xpos += offset;
                 }
             }
         }
         else { //if no generic, just render shards in order
             for (final ManaCostShard s : manaCost) {
-                CardFaceSymbols.drawSymbol(s.getImageKey(), skin, g, xpos, y);
+                CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y);
                 xpos += offset;
             }
         }
@@ -179,7 +178,7 @@ public class CardFaceSymbols {
      * @param w an int
      * @param h and int
      */
-    public static void drawOther(final ComponentSkin<?> skin, final Graphics g, String s, int x, final int y, final int w, final int h) {
+    public static void drawOther(final Graphics g, String s, int x, final int y, final int w, final int h) {
         if (s.length() == 0) {
             return;
         }
@@ -209,7 +208,7 @@ public class CardFaceSymbols {
      * @param y
      *            a int.
      */
-    public static void drawAttack(final ComponentSkin<?> skin, final Graphics g, final int x, final int y) {
+    public static void drawAttack(final Graphics g, final int x, final int y) {
         FSkin.drawImage(g, MANA_IMAGES.get("attack"), x, y);
     }
 
@@ -227,7 +226,7 @@ public class CardFaceSymbols {
      * @param y
      *            a int.
      */
-    public static void drawSymbol(final String imageName, final ComponentSkin<?> skin, final Graphics g, final int x, final int y) {
+    public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y) {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y);
     }
 

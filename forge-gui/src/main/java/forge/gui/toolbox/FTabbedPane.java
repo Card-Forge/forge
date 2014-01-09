@@ -1,18 +1,16 @@
 package forge.gui.toolbox;
 
-import javax.swing.JTabbedPane;
+import forge.gui.toolbox.FSkin.SkinnedTabbedPane;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public class FTabbedPane extends JTabbedPane {
-
+public class FTabbedPane extends SkinnedTabbedPane {
     private static final long serialVersionUID = 2207172560817790885L;
 
     public FTabbedPane() {
-        FSkin.JComponentSkin<FTabbedPane> skin = FSkin.get(this);
-        skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
     }
 }

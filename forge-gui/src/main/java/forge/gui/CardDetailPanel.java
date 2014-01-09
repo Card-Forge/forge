@@ -27,7 +27,6 @@ import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
@@ -52,6 +51,7 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FHtmlViewer;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.item.IPaperCard;
 import forge.item.InventoryItemFromSet;
 import forge.item.SealedProduct;
@@ -90,10 +90,9 @@ public class CardDetailPanel extends FPanel {
         labelConstrains.gridy = 0;
         labelConstrains.weightx = 1.0;
 
-        final JPanel cdLabels = new JPanel(new GridLayout(0, 1, 0, 5));
-        final FSkin.JComponentSkin<JPanel> cdLabelsSkin = FSkin.get(cdLabels);
-        cdLabelsSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        cdLabelsSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        final SkinnedPanel cdLabels = new SkinnedPanel(new GridLayout(0, 1, 0, 5));
+        cdLabels.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        cdLabels.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.nameCostLabel = new FLabel.Builder().build();
         this.typeLabel = new FLabel.Builder().build();
         this.powerToughnessLabel = new FLabel.Builder().build();
@@ -101,10 +100,9 @@ public class CardDetailPanel extends FPanel {
         cdLabels.add(this.typeLabel);
         cdLabels.add(this.powerToughnessLabel);
 
-        final JPanel idr = new JPanel(new GridBagLayout());
-        FSkin.JComponentSkin<JPanel> idrSkin = FSkin.get(idr);
-        idrSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        idrSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        final SkinnedPanel idr = new SkinnedPanel(new GridBagLayout());
+        idr.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        idr.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         final GridBagConstraints c1 = new GridBagConstraints();
         final GridBagConstraints c2 = new GridBagConstraints();
 

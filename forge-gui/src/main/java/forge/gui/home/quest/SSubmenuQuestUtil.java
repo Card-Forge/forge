@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -25,6 +24,7 @@ import forge.gui.deckeditor.controllers.CEditorQuestCardShop;
 import forge.gui.framework.FScreen;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.net.FServer;
 import forge.net.Lobby;
 import forge.properties.ForgePreferences.FPref;
@@ -134,11 +134,11 @@ public class SSubmenuQuestUtil {
             view.getLblZep().setVisible(qCtrl.getAssets().hasItem(QuestItemType.ZEPPELIN));
             if (qCtrl.getAssets().getItemLevel(QuestItemType.ZEPPELIN) == 2) {
                 view.getLblZep().setEnabled(false);
-                FSkin.get(view.getLblZep()).setForeground(Color.gray);
+                view.getLblZep().setForeground(Color.gray);
             }
             else {
                 view.getLblZep().setEnabled(true);
-                FSkin.get(view.getLblZep()).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+                view.getLblZep().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             }
         }
         else {
@@ -199,13 +199,13 @@ public class SSubmenuQuestUtil {
                 + "<br>&nbsp; (Best: " + qA.getWinStreakBest() + ")</html>");
 
         // Current deck message
-        final JLabel lblCurrentDeck = view0.getLblCurrentDeck();
+        final SkinnedLabel lblCurrentDeck = view0.getLblCurrentDeck();
         if (SSubmenuQuestUtil.getCurrentDeck() == null) {
             lblCurrentDeck.setForeground(Color.red.darker());
             lblCurrentDeck.setText("Build, then select a deck in the \"Decks\" submenu.  ");
         }
         else {
-            FSkin.get(lblCurrentDeck).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            lblCurrentDeck.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             lblCurrentDeck.setText("Your current deck is \""
                     + SSubmenuQuestUtil.getCurrentDeck().getName() + "\".");
         }

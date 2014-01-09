@@ -6,11 +6,11 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
@@ -26,6 +26,8 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.FTextArea;
 
 /**
@@ -34,10 +36,10 @@ import forge.gui.toolbox.FTextArea;
  */
 public class ViewWinLose {
     private final FButton btnContinue, btnRestart, btnQuit;
-    private final JPanel pnlCustom;
+    private final SkinnedPanel pnlCustom;
 
-    private final JLabel lblTitle = new JLabel("WinLoseFrame > lblTitle needs updating.");
-    private final JLabel lblStats = new JLabel("WinLoseFrame > lblStats needs updating.");
+    private final SkinnedLabel lblTitle = new SkinnedLabel("WinLoseFrame > lblTitle needs updating.");
+    private final SkinnedLabel lblStats = new SkinnedLabel("WinLoseFrame > lblStats needs updating.");
     private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
 
     private final Game game;
@@ -52,7 +54,7 @@ public class ViewWinLose {
         final JPanel pnlLeft = new JPanel();
         final JPanel pnlRight = new JPanel();
         final JScrollPane scrCustom = new JScrollPane();
-        pnlCustom = new JPanel();
+        pnlCustom = new SkinnedPanel();
 
         btnContinue = new FButton();
         btnRestart = new FButton();
@@ -93,24 +95,24 @@ public class ViewWinLose {
 
         lblTitle.setForeground(Color.white);
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        FSkin.get(lblTitle).setFont(FSkin.getBoldFont(30));
+        lblTitle.setFont(FSkin.getBoldFont(30));
 
         lblStats.setForeground(Color.white);
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
-        FSkin.get(lblStats).setFont(FSkin.getFont(26));
+        lblStats.setFont(FSkin.getFont(26));
 
         btnContinue.setText("Next Game");
-        FSkin.get(btnContinue).setFont(FSkin.getFont(22));
+        btnContinue.setFont(FSkin.getFont(22));
         btnRestart.setText("Start New Match");
-        FSkin.get(btnRestart).setFont(FSkin.getFont(22));
+        btnRestart.setFont(FSkin.getFont(22));
         btnQuit.setText("Quit Match");
-        FSkin.get(btnQuit).setFont(FSkin.getFont(22));
+        btnQuit.setFont(FSkin.getFont(22));
         btnContinue.setEnabled(!game0.getMatch().isMatchOver());
 
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
         txtLog.setText(game.getGameLog().getLogText(null).replace("[COMPUTER]", "[AI]"));
-        FSkin.get(txtLog).setFont(FSkin.getFont(14));
+        txtLog.setFont(FSkin.getFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
 
         FLabel btnCopyLog = new FLabel.ButtonBuilder().text("Copy to clipboard").build();
@@ -158,7 +160,7 @@ public class ViewWinLose {
 
         final JPanel pnlLog = new JPanel(new MigLayout("insets 0, wrap, ax center"));
         final FScrollPane scrLog = new FScrollPane(txtLog);
-        scrLog.setBorder(null);
+        scrLog.setBorder((Border)null);
         pnlLog.setOpaque(false);
 
         pnlLog.add(
@@ -215,7 +217,7 @@ public class ViewWinLose {
     }
 
     /** @return {@link javax.swing.JPanel} */
-    public JPanel getPnlCustom() {
+    public SkinnedPanel getPnlCustom() {
         return this.pnlCustom;
     }
 

@@ -21,7 +21,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -30,9 +29,9 @@ import javax.swing.event.AncestorListener;
 
 import forge.Command;
 import forge.gui.framework.ILocalRepaint;
-import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /** 
  * Uses the Builder pattern to facilitate/encourage inline styling.
@@ -50,7 +49,7 @@ import forge.gui.toolbox.FSkin.SkinImage;
  * - Can execute command when clicked
  */
 @SuppressWarnings("serial")
-public class FLabel extends JLabel implements ILocalRepaint {
+public class FLabel extends SkinnedLabel implements ILocalRepaint {
     /** 
      * Uses the Builder pattern to facilitate/encourage inline styling.
      * Credit to Effective Java 2 (Joshua Bloch).
@@ -188,8 +187,6 @@ public class FLabel extends JLabel implements ILocalRepaint {
     // Call this using FLabel.Builder()...
     protected FLabel(final Builder b0) {
         super(b0.bldText);
-        
-        this.skin = FSkin.get(this);
 
         // Init fields from builder
         this.iconScaleFactor = b0.bldIconScaleFactor;
@@ -234,8 +231,8 @@ public class FLabel extends JLabel implements ILocalRepaint {
         
         if (b0.bldUseSkinColors) {
             // Non-custom display properties
-            this.skin.setForeground(clrText);
-            this.skin.setBackground(clrMain);
+            this.setForeground(clrText);
+            this.setBackground(clrMain);
         }
 
         // Resize adapter
@@ -249,7 +246,6 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     //========== Variable initialization
     // Final inits
-    private final JLabelSkin<FLabel> skin;
     private final SkinColor clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
     private final SkinColor clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private final SkinColor clrMain = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
@@ -402,9 +398,9 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     public void setFontSize(final int i0) {
         switch(this.fontStyle) {
-            case Font.BOLD: skin.setFont(FSkin.getBoldFont(i0)); break;
-            case Font.ITALIC: skin.setFont(FSkin.getItalicFont(i0)); break;
-            default: skin.setFont(FSkin.getFont(i0));
+            case Font.BOLD: this.setFont(FSkin.getBoldFont(i0)); break;
+            case Font.ITALIC: this.setFont(FSkin.getItalicFont(i0)); break;
+            default: this.setFont(FSkin.getFont(i0));
         }
     }
 
@@ -467,10 +463,6 @@ public class FLabel extends JLabel implements ILocalRepaint {
 	/** @return {@link forge.Command} */
     public Runnable getRightClickCommand() {
         return this.cmdRightClick;
-    }
-
-    public void setIcon(FSkin.SkinImage icon) {
-        this.skin.setIcon(icon);
     }
 
     @Override

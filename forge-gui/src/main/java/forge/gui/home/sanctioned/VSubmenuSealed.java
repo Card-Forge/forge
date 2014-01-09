@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -29,7 +29,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JTextComponentSkin;
+import forge.gui.toolbox.FSkin.SkinnedTextPane;
 import forge.gui.toolbox.special.DeckLister;
 
 /** 
@@ -79,7 +79,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     private VSubmenuSealed() {
         btnStart.setEnabled(false);
 
-        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
     }
 
     /* (non-Javadoc)
@@ -164,15 +164,14 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
                 + "Credit: Wikipedia";
 
         // Init directions text pane
-        final JTextPane tpnDirections = new JTextPane();
-        JTextComponentSkin<JTextPane> tpnDirectionsSkin = FSkin.get(tpnDirections);
+        final SkinnedTextPane tpnDirections = new SkinnedTextPane();
         tpnDirections.setOpaque(false);
-        tpnDirectionsSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tpnDirectionsSkin.setFont(FSkin.getFont(15));
+        tpnDirections.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tpnDirections.setFont(FSkin.getFont(15));
         tpnDirections.setAlignmentX(SwingConstants.CENTER);
         tpnDirections.setFocusable(false);
         tpnDirections.setEditable(false);
-        tpnDirections.setBorder(null);
+        tpnDirections.setBorder((Border)null);
         tpnDirections.setText(instructions);
 
         final StyledDocument doc = tpnDirections.getStyledDocument();

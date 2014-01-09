@@ -126,8 +126,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         txtInput.setEditable(true);
 
         FSkin.SkinColor foreColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
-        FSkin.get(this.scrollInput).setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), "Paste or type a decklist", foreColor));
-        FSkin.get(this.scrollOutput).setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), "Expect the recognized lines to appear", foreColor));
+        this.scrollInput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), "Paste or type a decklist", foreColor));
+        this.scrollOutput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(), "Expect the recognized lines to appear", foreColor));
         this.scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 

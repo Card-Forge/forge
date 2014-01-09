@@ -89,7 +89,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
 
     private VSubmenuVanguard() {
 
-        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         Vector<Object> humanListData = new Vector<Object>();
         Vector<Object> aiListData = new Vector<Object>();

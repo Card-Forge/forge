@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinCursor;
+import forge.gui.toolbox.FSkin.SkinnedLayeredPane;
 import forge.view.FView;
 
 /**
@@ -42,7 +43,7 @@ public final class SRearrangingUtil {
     private static int tempH;
 
     private static JPanel pnlPreview                       = FView.SINGLETON_INSTANCE.getPnlPreview();
-    private static FView.DocumentPane pnlDocument          = FView.SINGLETON_INSTANCE.getLpnDocument();
+    private static SkinnedLayeredPane pnlDocument          = FView.SINGLETON_INSTANCE.getLpnDocument();
     private static DragCell cellTarget                     = null;
     private static DragCell cellSrc                        = null;
     private static DragCell cellNew                        = null;

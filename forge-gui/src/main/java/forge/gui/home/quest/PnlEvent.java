@@ -30,7 +30,7 @@ import forge.quest.QuestEvent;
 @SuppressWarnings("serial")
 class PnlEvent extends JPanel {
     private final QuestEvent event;
-    private final JRadioButton rad;
+    private final FRadioButton rad;
     private final SkinImage img;
 
     private final int wImg = 100;
@@ -55,11 +55,11 @@ class PnlEvent extends JPanel {
 
         // Title and description
         this.rad = new FRadioButton(event.getTitle() + " (" + event.getDifficulty().getTitle() + ")");
-        FSkin.get(this.rad).setFont(FSkin.getBoldFont(16));
+        this.rad.setFont(FSkin.getBoldFont(16));
 
         final FTextArea tarDesc = new FTextArea();
         tarDesc.setText(event.getDescription());
-        FSkin.get(tarDesc).setFont(FSkin.getItalicFont(12));
+        tarDesc.setFont(FSkin.getItalicFont(12));
 
         // Change listener for radio button
         this.rad.addChangeListener(new ChangeListener() {

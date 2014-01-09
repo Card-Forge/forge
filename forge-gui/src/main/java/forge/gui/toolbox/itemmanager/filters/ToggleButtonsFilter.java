@@ -70,7 +70,7 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
                 for (int fs = 11; fs > 5; fs--) {
                     SkinFont skinFont = FSkin.getFont(fs);
                     if (skinFont.measureTextWidth(g, btn.getText()) <= max) {
-                        FSkin.get(btn).setFont(skinFont);
+                        btn.setFont(skinFont);
                         break;
                     }
                 }

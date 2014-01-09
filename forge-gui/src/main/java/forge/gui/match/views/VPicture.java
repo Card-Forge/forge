@@ -27,6 +27,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /** 
  * Assembles Swing components of card picture area.
@@ -43,11 +44,11 @@ public enum VPicture implements IVDoc<CPicture> {
 
     // Top-level containers
     private final CardPicturePanel pnlPicture = new CardPicturePanel();
-    private final JLabel lblFlipcard = new JLabel();
+    private final SkinnedLabel lblFlipcard = new SkinnedLabel();
 
     //========= Constructor
     private VPicture() {
-        FSkin.get(lblFlipcard).setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
+        lblFlipcard.setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
         pnlPicture.setOpaque(false);
         lblFlipcard.setVisible(false);
     }

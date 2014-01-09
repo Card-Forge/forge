@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JList;
+import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -68,9 +69,9 @@ public class QuestWinLoseCardViewer extends FPanel {
 
         this.setCornerDiameter(20);
         this.setBorderToggle(false);
-        FSkin.get(this).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         picture.setOpaque(false);
-        scroller.setBorder(null);
+        scroller.setBorder((Border)null);
 
         this.setLayout(new MigLayout("insets 0, gap 0"));
         this.add(scroller, "w 32%!, h 98%!, gap 1% 1% 1% 1%");

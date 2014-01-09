@@ -4,26 +4,26 @@ import java.awt.Dimension;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SpringLayout;
 
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 @SuppressWarnings("serial")
 public class FTitleBar extends FTitleBarBase {
     private static final FSkin.SkinFont skinFont = FSkin.getFont(12);
 
-    private final JLabel lblTitle = new JLabel();
+    private final SkinnedLabel lblTitle = new SkinnedLabel();
 
     public FTitleBar(ITitleBarOwner owner0) {
         super(owner0);
-        skin.setMatteBorder(0, 0, 1, 0, bottomEdgeColor);
+        this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, bottomEdgeColor));
         owner0.setJMenuBar(this);
         setTitle(owner0.getTitle()); //set default title based on frame title
         setIconImage(owner0.getIconImage()); //set default icon image based on frame icon image
-        FSkin.get(lblTitle).setForeground(foreColor);
-        FSkin.get(lblTitle).setFont(skinFont);
+        lblTitle.setForeground(foreColor);
+        lblTitle.setFont(skinFont);
         addControls();
     }
 
@@ -47,7 +47,7 @@ public class FTitleBar extends FTitleBarBase {
             this.lblTitle.setIcon(new ImageIcon(image.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
         }
         else {
-            this.lblTitle.setIcon(null);
+            this.lblTitle.setIcon((ImageIcon)null);
         }
         updatePreferredSize();
     }

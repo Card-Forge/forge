@@ -40,6 +40,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.match.controllers.CDock;
 import forge.gui.match.views.VField;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 
@@ -53,7 +54,7 @@ public enum TargetingOverlay {
     /** */
     SINGLETON_INSTANCE;
 
-    private final JPanel pnl = new OverlayPanel();
+    private final OverlayPanel pnl = new OverlayPanel();
     private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
     private final List<Point[]> arcs = new ArrayList<Point[]>();
 
@@ -66,7 +67,7 @@ public enum TargetingOverlay {
         pnl.setOpaque(false);
         pnl.setVisible(false);
         pnl.setFocusTraversalKeysEnabled(false);
-        FSkin.get(pnl).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
     }
 
     /** @return {@link javax.swing.JPanel} */
@@ -255,7 +256,7 @@ public enum TargetingOverlay {
         endpoints.clear();
     }
 
-    private class OverlayPanel extends JPanel {
+    private class OverlayPanel extends SkinnedPanel {
         /**
          * For some reason, the alpha channel background doesn't work properly on
          * Windows 7, so the paintComponent override is required for a

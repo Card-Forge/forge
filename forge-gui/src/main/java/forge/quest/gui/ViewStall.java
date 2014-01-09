@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -35,7 +36,7 @@ import forge.gui.bazaar.VBazaarUI;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JTextComponentSkin;
+import forge.gui.toolbox.FSkin.SkinnedTextPane;
 import forge.quest.QuestController;
 import forge.quest.bazaar.IQuestBazaarItem;
 import forge.quest.bazaar.QuestStallDefinition;
@@ -52,7 +53,7 @@ import forge.quest.data.QuestAssets;
 @SuppressWarnings("serial")
 public class ViewStall extends JPanel {
     private final FLabel lblStallName, lblEmpty, lblStats;
-    private final JTextPane tpnFluff;
+    private final SkinnedTextPane tpnFluff;
     private final JPanel pnlInventory;
     private final FScrollPane scrInventory;
     private final VBazaarUI parentView;
@@ -70,7 +71,7 @@ public class ViewStall extends JPanel {
                 .fontAlign(SwingConstants.CENTER).build();
         this.lblStats = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontSize(12).build();
 
-        this.tpnFluff = new JTextPane();
+        this.tpnFluff = new SkinnedTextPane();
         this.pnlInventory = new JPanel();
         this.scrInventory = new FScrollPane(this.pnlInventory);
         this.parentView = v0;
@@ -79,13 +80,12 @@ public class ViewStall extends JPanel {
         // Component styling
         this.setOpaque(false);
 
-        JTextComponentSkin<JTextPane> tpnFluffSkin = FSkin.get(this.tpnFluff);
         this.tpnFluff.setOpaque(false);
-        tpnFluffSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tpnFluffSkin.setFont(FSkin.getItalicFont(15));
+        this.tpnFluff.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.tpnFluff.setFont(FSkin.getItalicFont(15));
         this.tpnFluff.setFocusable(false);
         this.tpnFluff.setEditable(false);
-        this.tpnFluff.setBorder(null);
+        this.tpnFluff.setBorder((Border)null);
 
         final StyledDocument doc = this.tpnFluff.getStyledDocument();
         final SimpleAttributeSet center = new SimpleAttributeSet();
@@ -94,7 +94,7 @@ public class ViewStall extends JPanel {
 
         this.pnlInventory.setOpaque(false);
 
-        this.scrInventory.setBorder(null);
+        this.scrInventory.setBorder((Border)null);
         this.scrInventory.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.scrInventory.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 

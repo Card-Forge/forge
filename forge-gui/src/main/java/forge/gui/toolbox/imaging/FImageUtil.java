@@ -25,7 +25,6 @@ import forge.ImageCache;
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
 import forge.gui.toolbox.CardFaceSymbols;
-import forge.gui.toolbox.FSkin.ComponentSkin;
 
 /**
  * Common image-related routines specific to Forge images. 
@@ -36,11 +35,11 @@ import forge.gui.toolbox.FSkin.ComponentSkin;
 public final class FImageUtil {  
     private FImageUtil() {}
     
-    public static BufferedImage getImage(Card card, CardCharacteristicName state, ComponentSkin<?> skin) {       
+    public static BufferedImage getImage(Card card, CardCharacteristicName state) {       
         BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(state), true);
         int foilIndex = card.getFoil();
         if (image != null && foilIndex > 0) { 
-            image = getImageWithFoilEffect(image, foilIndex, skin);
+            image = getImageWithFoilEffect(image, foilIndex);
         }
         return image;
     }
@@ -53,11 +52,11 @@ public final class FImageUtil {
      * For double-sided cards, returns the front-side image.<br>
      * For flip cards, returns the un-flipped image. 
      */
-    public static BufferedImage getImage(Card card, ComponentSkin<?> skin) {
+    public static BufferedImage getImage(Card card) {
         BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), true);
         int foilIndex = card.getFoil();
         if (image != null && foilIndex > 0) { 
-            image = getImageWithFoilEffect(image, foilIndex, skin);
+            image = getImageWithFoilEffect(image, foilIndex);
         }
         return image;
     }
@@ -65,11 +64,11 @@ public final class FImageUtil {
     /**
      * Applies a foil effect to a card image.
      */
-    private static BufferedImage getImageWithFoilEffect(BufferedImage plainImage, int foilIndex, ComponentSkin<?> skin) {
+    private static BufferedImage getImageWithFoilEffect(BufferedImage plainImage, int foilIndex) {
         ColorModel cm = plainImage.getColorModel();
         BufferedImage foilImage = new BufferedImage(cm, plainImage.copyData(null), cm.isAlphaPremultiplied(), null);
         final String fl = String.format("foil%02d", foilIndex);
-        CardFaceSymbols.drawOther(skin, foilImage.getGraphics(), fl, 0, 0, foilImage.getWidth(), foilImage.getHeight());
+        CardFaceSymbols.drawOther(foilImage.getGraphics(), fl, 0, 0, foilImage.getWidth(), foilImage.getHeight());
         return foilImage;                
     }
 }

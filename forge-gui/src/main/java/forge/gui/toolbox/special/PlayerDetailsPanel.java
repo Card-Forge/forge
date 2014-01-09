@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -27,6 +26,7 @@ import forge.gui.match.controllers.CPlayers;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinProp;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -77,18 +77,18 @@ public class PlayerDetailsPanel extends JPanel {
 
     /** Adds various labels to pool area JPanel container. */
     private void populateDetails() {
-        final JPanel row1 = new JPanel(new MigLayout("insets 0, gap 0"));
-        final JPanel row2 = new JPanel(new MigLayout("insets 0, gap 0"));
-        final JPanel row3 = new JPanel(new MigLayout("insets 0, gap 0"));
-        final JPanel row4 = new JPanel(new MigLayout("insets 0, gap 0"));
-        final JPanel row5 = new JPanel(new MigLayout("insets 0, gap 0"));
-        final JPanel row6 = new JPanel(new MigLayout("insets 0, gap 0"));
+        final SkinnedPanel row1 = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
+        final SkinnedPanel row2 = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
+        final SkinnedPanel row3 = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
+        final SkinnedPanel row4 = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
+        final SkinnedPanel row5 = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
+        final SkinnedPanel row6 = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
 
-        FSkin.get(row1).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        row1.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row2.setOpaque(false);
-        FSkin.get(row3).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        row3.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row4.setOpaque(false);
-        FSkin.get(row5).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        row5.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row6.setOpaque(false);
 
         // Hand, library, graveyard, exile, flashback, poison labels
@@ -151,10 +151,10 @@ public class PlayerDetailsPanel extends JPanel {
         // Poison/life
         this.getLblPoison().setText("" + player.getPoisonCounters());
         if (player.getPoisonCounters() < 8) {
-            FSkin.get(this.getLblPoison()).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            this.getLblPoison().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
         else {
-            FSkin.get(this.getLblPoison()).setForeground(Color.red);
+            this.getLblPoison().setForeground(Color.red);
         }
     }
 
@@ -169,14 +169,10 @@ public class PlayerDetailsPanel extends JPanel {
             label.getKey().setText(Integer.toString(m.getAmountOfColor(label.getRight())));
     }
 
-    
-
-    /** @return {@link javax.swing.JLabel} */
     public FLabel getLblHand() {
         return this.lblHand;
     }
 
-    /** @return {@link javax.swing.JLabel} */
     public FLabel getLblLibrary() {
         return this.lblLibrary;
     }
@@ -185,27 +181,21 @@ public class PlayerDetailsPanel extends JPanel {
         return manaLabels;
     }
 
-    /** @return  {@link javax.swing.JLabel} */
-    public JLabel getLblGraveyard() {
+    public FLabel getLblGraveyard() {
         return this.lblGraveyard;
     }
 
-    /** @return  {@link javax.swing.JLabel} */
-    public JLabel getLblExile() {
+    public FLabel getLblExile() {
         return this.lblExile;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblFlashback() {
+    public FLabel getLblFlashback() {
         return this.lblFlashback;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblPoison() {
+    public FLabel getLblPoison() {
         return this.lblPoison;
     }
-
-
 
     /**
      * TODO: Write javadoc for this method.

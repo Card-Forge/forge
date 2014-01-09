@@ -30,14 +30,12 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import forge.Command;
 import forge.gui.framework.ILocalRepaint;
+import forge.gui.toolbox.FSkin.FPanelBase;
 import forge.gui.toolbox.FSkin.SkinColor;
-import forge.gui.toolbox.FSkin.SkinImage;
 
 /** 
  * Core panel used in UI.
@@ -51,9 +49,7 @@ import forge.gui.toolbox.FSkin.SkinImage;
  * - Border toggle<br>
  */
 @SuppressWarnings("serial")
-public class FPanel extends JPanel implements ILocalRepaint {
-    //========== Variable initialization
-    protected final FSkin.FPanelSkin<FPanel> skin;
+public class FPanel extends FPanelBase implements ILocalRepaint {
     // Defaults for adjustable values
     private boolean selectable          = false;
     private boolean hoverable           = false;
@@ -89,8 +85,7 @@ public class FPanel extends JPanel implements ILocalRepaint {
         this.setOpaque(false);
 
         // Background will follow skin theme.
-        skin = FSkin.get(this);
-        skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
     }
 
     // Mouse event handler
@@ -143,15 +138,13 @@ public class FPanel extends JPanel implements ILocalRepaint {
     /** @param bool0 &emsp; boolean */
     public void setSelected(final boolean bool0) {
         selected = bool0;
-        if (bool0) { skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
-        else       { skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
+        if (bool0) { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
+        else       { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
         repaintSelf();
     }
 
     /** @param img0 &emsp; {@link java.awt.Image} */
-    public void setForegroundImage(final Image img0) {
-        skin.resetForegroundImage(); //must reset if non-skin image set
-
+    protected void onSetForegroundImage(final Image img0) {
         if (img0 == null) {
             this.foregroundImage = null;
             return;
@@ -161,16 +154,6 @@ public class FPanel extends JPanel implements ILocalRepaint {
         this.imgW = img0.getWidth(null);
         this.imgH = img0.getHeight(null);
         this.iar = (double) imgW / (double) imgH;
-    }
-
-    /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
-    public void setForegroundImage(final ImageIcon ii0) {
-        setForegroundImage(ii0.getImage());
-    }
-
-    /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
-    public void setForegroundImage(final SkinImage skinImage) {
-        skin.setForegroundImage(skinImage);
     }
 
     /** Aligns NON-STRETCHED foreground image.
@@ -197,9 +180,7 @@ public class FPanel extends JPanel implements ILocalRepaint {
     }
 
     /** @param img0 &emsp; {@link java.awt.Image} */
-    public void setBackgroundTexture(final Image img0) {
-        skin.resetBackgroundTexture(); //must reset if non-skin image set
-
+    protected void onSetBackgroundTexture(final Image img0) {
         if (img0 == null) { return; }
 
         this.backgroundTexture = img0;
@@ -207,25 +188,9 @@ public class FPanel extends JPanel implements ILocalRepaint {
         this.textureH = img0.getHeight(null);
     }
 
-    /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
-    public void setBackgroundTexture(final ImageIcon ii0) {
-        setBackgroundTexture(ii0.getImage());
-    }
-    
-    /** @param ii0 &emsp; {@link javax.swing.ImageIcon} */
-    public void setBackgroundTexture(final SkinImage skinImage) {
-        skin.setBackgroundTexture(skinImage);
-    }
-
     /** @param clr0 &emsp; {@link java.awt.Color} */
-    public void setBackgroundTextureOverlay(final Color color) {
-        skin.resetBackgroundTexture(); //must reset if non-skin color set
+    public void onSetBackgroundTextureOverlay(final Color color) {
         this.backgroundTextureOverlay = color;
-    }
-
-    /** @param clr0 &emsp; {@link forge.gui.toolbox.FSkin.SkinColor} */
-    public void setBackgroundTextureOverlay(final SkinColor skinColor) {
-        skin.setBackgroundTextureOverlay(skinColor);
     }
 
     /** @param bool0 &emsp; boolean */
@@ -293,7 +258,7 @@ public class FPanel extends JPanel implements ILocalRepaint {
         if (selected)           { FSkin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
         else if (hovered)       { FSkin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_HOVER)); }
         else if (selectable)    { FSkin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
-        else                    { FSkin.setGraphicsColor(g2d0, skin.getBackground()); }
+        else                    { FSkin.setGraphicsColor(g2d0, getSkin().getBackground()); }
 
         g2d0.fillRoundRect(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter);
     }

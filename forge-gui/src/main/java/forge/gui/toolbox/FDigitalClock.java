@@ -6,15 +6,16 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import javax.swing.JLabel;
 import javax.swing.Timer;
+
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /**
  * Digital clock label that displays current time
  *
  */
 @SuppressWarnings("serial")
-public class FDigitalClock extends JLabel {
+public class FDigitalClock extends SkinnedLabel {
     private static final Calendar now = Calendar.getInstance();
     private static final DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT);
     private static final ArrayList<FDigitalClock> clocks = new ArrayList<FDigitalClock>();

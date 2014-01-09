@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.game.Game;
@@ -38,6 +39,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CPlayers;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.properties.ForgePreferences.FPref;
 
 /** 
@@ -94,7 +96,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
             this.infoLBLs.put(p, new JLabel[] { name, life, hand, draw, prevention, keywords, antes, cmd });
 
             // Set border on bottom label, and larger font on player name
-            FSkin.get(cmd).setMatteBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+            cmd.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             name.setText(p.getName());
         }
     }
@@ -190,10 +192,10 @@ public enum VPlayers implements IVDoc<CPlayers> {
 
     /** A quick JLabel for info in "players" panel, to consolidate styling. */
     @SuppressWarnings("serial")
-    private class InfoLabel extends JLabel {
+    private class InfoLabel extends SkinnedLabel {
         public InfoLabel() {
             super();
-            FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
     }
 }

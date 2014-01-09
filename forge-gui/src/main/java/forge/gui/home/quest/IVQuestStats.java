@@ -1,59 +1,57 @@
 package forge.gui.home.quest;
 
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-
+import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 
 /** Dictates methods required for a panel with stats/pet display. */
 
 public interface IVQuestStats {
-    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     FLabel getBtnBazaar();
 
-    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     FLabel getBtnSpellShop();
 
-    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     FLabel getBtnUnlock();
 
-    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
+    /** @return {@link forge.gui.toolbox.FLabel} */
     FLabel getBtnTravel();
 
-    /** @return {@link javax.swing.JLabel} */
-    JLabel getLblCredits();
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    FLabel getLblCredits();
 
-    /** @return {@link javax.swing.JLabel} */
-    JLabel getLblLife();
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    FLabel getLblLife();
 
-    /** @return {@link javax.swing.JLabel} */
-    JLabel getLblWorld();
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    FLabel getLblWorld();
 
-    /** @return {@link javax.swing.JLabel} */
-    JLabel getLblWins();
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    FLabel getLblWins();
 
-    /** @return {@link javax.swing.JLabel} */
-    JLabel getLblLosses();
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    FLabel getLblLosses();
 
-    /** @return {@link javax.swing.JLabel} */
-    JLabel getLblNextChallengeInWins();
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    FLabel getLblNextChallengeInWins();
 
-    /** @return {@link javax.swing.JLabel} */
-    JLabel getLblCurrentDeck();
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    FLabel getLblCurrentDeck();
 
-    /** @return {@link javax.swing.JLabel} */
-    JLabel getLblWinStreak();
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    FLabel getLblWinStreak();
 
     /** @return {@link javax.swing.FComboBoxWrapper} */
     FComboBoxWrapper<String> getCbxPet();
 
-    /** @return {@link javax.swing.JCheckBox} */
-    JCheckBox getCbPlant();
+    /** @return {@link forge.gui.toolbox.FCheckBox} */
+    FCheckBox getCbPlant();
 
-    /** @return {@link javax.swing.JCheckBox} */    
-    JCheckBox getCbCharm();
+    /** @return {@link forge.gui.toolbox.FCheckBox} */ 
+    FCheckBox getCbCharm();
 
-    /** @return {@link javax.swing.JLabel} */
-    JLabel getLblZep();
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    FLabel getLblZep();
 }

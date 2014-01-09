@@ -23,7 +23,6 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import forge.Command;
@@ -38,6 +37,7 @@ import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /**
  * Assembles Swing components of button dock area.
@@ -177,7 +177,7 @@ public enum VDock implements IVDoc<CDock> {
      * Buttons in Dock. JLabels are used to allow hover effects.
      */
     @SuppressWarnings("serial")
-    public class DockButton extends JLabel implements ILocalRepaint {
+    public class DockButton extends SkinnedLabel implements ILocalRepaint {
         private final SkinImage img;
         private final SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         private final Color defaultBG = new Color(0, 0, 0, 0);
@@ -215,12 +215,12 @@ public enum VDock implements IVDoc<CDock> {
 
                 @Override
                 public void onMouseEnter(final MouseEvent e) {
-                    FSkin.get(DockButton.this).setBackground(DockButton.this.hoverBG);
+                    DockButton.this.setBackground(DockButton.this.hoverBG);
                 }
 
                 @Override
                 public void onMouseExit(final MouseEvent e) {
-                    FSkin.get(DockButton.this).setBackground(DockButton.this.defaultBG);
+                    DockButton.this.setBackground(DockButton.this.defaultBG);
                 }
             });
         }
@@ -247,7 +247,7 @@ public enum VDock implements IVDoc<CDock> {
             g.setColor(this.getBackground());
             g.fillRect(0, 0, this.w, this.h);
 
-            if (FSkin.get(this).getBackground() == this.hoverBG) {
+            if (this.getSkin().getBackground() == this.hoverBG) {
                 FSkin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             }
             else {

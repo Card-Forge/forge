@@ -6,12 +6,10 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import net.miginfocom.swing.MigLayout;
@@ -61,10 +59,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         .text("Load Quest Data").fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
 
-    private final JLabel lblTitleNew = new FLabel.Builder().text("Start a new Quest")
+    private final FLabel lblTitleNew = new FLabel.Builder().text("Start a new Quest")
             .opaque(true).fontSize(16).build();
 
-    private final JLabel lblOldQuests = new FLabel.Builder().text("Old quest data? Put into "
+    private final FLabel lblOldQuests = new FLabel.Builder().text("Old quest data? Put into "
             + "res/quest/data, and restart Forge.")
             .fontAlign(SwingConstants.CENTER).fontSize(12).build();
 
@@ -73,16 +71,16 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final JPanel pnlOptions = new JPanel();
 
     /* Fist column */
-    private final JRadioButton radEasy = new FRadioButton("Easy");
-    private final JRadioButton radMedium = new FRadioButton("Medium");
-    private final JRadioButton radHard = new FRadioButton("Hard");
-    private final JRadioButton radExpert = new FRadioButton("Expert");
-    private final JCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
+    private final FRadioButton radEasy = new FRadioButton("Easy");
+    private final FRadioButton radMedium = new FRadioButton("Medium");
+    private final FRadioButton radHard = new FRadioButton("Hard");
+    private final FRadioButton radExpert = new FRadioButton("Expert");
+    private final FCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
 
-    private final JLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
+    private final FLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
     private final FComboBoxWrapper<QuestWorld> cbxStartingWorld = new FComboBoxWrapper<QuestWorld>();
 
-    private final JLabel lblPreferredColor = new FLabel.Builder().text("Starting pool colors:").build();
+    private final FLabel lblPreferredColor = new FLabel.Builder().text("Starting pool colors:").build();
     private final FComboBoxWrapper<String> cbxPreferredColor = new FComboBoxWrapper<String>();
     private final String stringBalancedDistribution = new String("balanced distribution");
     private final String stringRandomizedDistribution = new String("randomized distribution");
@@ -90,33 +88,33 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     /* Second column */
 
-    private final JLabel lblStartingPool = new FLabel.Builder().text("Starting pool:").build();
+    private final FLabel lblStartingPool = new FLabel.Builder().text("Starting pool:").build();
     private final FComboBoxWrapper<StartingPoolType> cbxStartingPool = new FComboBoxWrapper<StartingPoolType>();
 
-    private final JLabel lblUnrestricted = new FLabel.Builder().text("All cards will be available to play.").build();
+    private final FLabel lblUnrestricted = new FLabel.Builder().text("All cards will be available to play.").build();
 
-    private final JLabel lblPreconDeck = new FLabel.Builder().text("Starter/Event deck:").build();
+    private final FLabel lblPreconDeck = new FLabel.Builder().text("Starter/Event deck:").build();
     private final FComboBoxWrapper<String> cbxPreconDeck = new FComboBoxWrapper<String>();
 
-    private final JLabel lblFormat = new FLabel.Builder().text("Sanctioned format:").build();
+    private final FLabel lblFormat = new FLabel.Builder().text("Sanctioned format:").build();
     private final FComboBoxWrapper<GameFormat> cbxFormat = new FComboBoxWrapper<GameFormat>();
 
-    private final JLabel lblCustomDeck = new FLabel.Builder().text("Custom deck:").build();
+    private final FLabel lblCustomDeck = new FLabel.Builder().text("Custom deck:").build();
     private final FComboBoxWrapper<Deck> cbxCustomDeck = new FComboBoxWrapper<Deck>();
 
     private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
     private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
 
-    private final JLabel lblPrizedCards = new FLabel.Builder().text("Prized cards:").build();
+    private final FLabel lblPrizedCards = new FLabel.Builder().text("Prized cards:").build();
     private final FComboBoxWrapper<Object> cbxPrizedCards = new FComboBoxWrapper<Object>();
 
-    private final JLabel lblPrizeFormat = new FLabel.Builder().text("Sanctioned format:").build();
+    private final FLabel lblPrizeFormat = new FLabel.Builder().text("Sanctioned format:").build();
     private final FComboBoxWrapper<GameFormat> cbxPrizeFormat = new FComboBoxWrapper<GameFormat>();
 
-    private final JLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be available to win.").build();
-    private final JLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets found in starting pool will be available.").build();
+    private final FLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be available to win.").build();
+    private final FLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets found in starting pool will be available.").build();
 
-    private final JCheckBox cboAllowUnlocks = new FCheckBox("Allow unlock of additional editions");
+    private final FCheckBox cboAllowUnlocks = new FCheckBox("Allow unlock of additional editions");
 
     private final FLabel btnEmbark = new FLabel.Builder().opaque(true)
             .fontSize(16).hoverable(true).text("Embark!").build();
@@ -206,10 +204,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
      */
     @SuppressWarnings("unchecked")
     private VSubmenuQuestData() {
-        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        FSkin.get(lblTitleNew).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblTitleNew.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        scrQuests.setBorder(null);
+        scrQuests.setBorder((Border)null);
 
         final JXButtonPanel difficultyPanel = new JXButtonPanel();
         final String difficulty_constraints = "h 27px!, gapbottom 5";

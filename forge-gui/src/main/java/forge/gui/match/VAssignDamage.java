@@ -32,6 +32,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameEntity;
@@ -44,6 +45,7 @@ import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.view.FDialog;
 import forge.view.arcane.CardPanel;
 
@@ -112,12 +114,12 @@ public class VAssignDamage {
             if (!damage.containsKey(source)) source = null; // to get player instead of fake card
             
             FSkin.Colors brdrColor = VAssignDamage.this.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
-            FSkin.get((CardPanel) evt.getSource()).setLineBorder(FSkin.getColor(brdrColor), 2);
+            ((CardPanel) evt.getSource()).setBorder(new FSkin.LineSkinBorder(FSkin.getColor(brdrColor), 2));
         }
 
         @Override
         public void mouseExited(final MouseEvent evt) {
-            ((CardPanel) evt.getSource()).setBorder(null);
+            ((CardPanel) evt.getSource()).setBorder((Border)null);
         }
 
         @Override
@@ -153,8 +155,8 @@ public class VAssignDamage {
 
         // Top-level UI stuff
         final JPanel overlay = SOverlayUtils.genericOverlay();
-        final JPanel pnlMain = new JPanel();
-        FSkin.get(pnlMain).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        final SkinnedPanel pnlMain = new SkinnedPanel();
+        pnlMain.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Attacker area
         final CardPanel pnlAttacker = new CardPanel(attacker0);
@@ -175,7 +177,7 @@ public class VAssignDamage {
         pnlDefenders.setLayout(new MigLayout("insets 0, gap 0, ax center, " + wrap));
 
         final FScrollPane scrDefenders = new FScrollPane(pnlDefenders);
-        scrDefenders.setBorder(null);
+        scrDefenders.setBorder((Border)null);
 
         // Top row of cards...
         for (final Card c : defenderCards) {

@@ -3,11 +3,11 @@ package forge.gui.home.quest;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
@@ -44,11 +44,11 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     private final FScrollPane scrDuels = new FScrollPane(pnlDuels,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private final JButton btnStart  = new StartButton();
+    private final StartButton btnStart  = new StartButton();
     private final FComboBoxWrapper<String> cbxPet  = new FComboBoxWrapper<String>();
-    private final JCheckBox cbCharm = new FCheckBox("Use Charm of Vigor");
-    private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
-    private final JLabel lblZep     = new FLabel.Builder().text("Launch Zeppelin").fontSize(14).build();
+    private final FCheckBox cbCharm = new FCheckBox("Use Charm of Vigor");
+    private final FCheckBox cbPlant = new FCheckBox("Summon Plant");
+    private final FLabel lblZep     = new FLabel.Builder().text("Launch Zeppelin").fontSize(14).build();
 
     private final FLabel lblWorld   = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_MAP))
@@ -91,7 +91,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
      * Constructor.
      */
     private VSubmenuDuels() {
-        scrDuels.setBorder(null);
+        scrDuels.setBorder((Border)null);
         pnlDuels.setOpaque(false);
         pnlDuels.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center"));
 
@@ -198,7 +198,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     }
 
     @Override
-    public JLabel getLblNextChallengeInWins() {
+    public FLabel getLblNextChallengeInWins() {
         return lblNextChallengeInWins;
     }
 
@@ -208,7 +208,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     }
 
     @Override
-    public JLabel getLblCurrentDeck() {
+    public FLabel getLblCurrentDeck() {
         return lblCurrentDeck;
     }
 
@@ -233,12 +233,12 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     }
 
     @Override
-    public JCheckBox getCbPlant() {
+    public FCheckBox getCbPlant() {
         return cbPlant;
     }
 
     @Override
-    public JLabel getLblZep() {
+    public FLabel getLblZep() {
         return lblZep;
     }
 
@@ -297,7 +297,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
 	/**
 	 * @return the cbCharm
 	 */
-	public JCheckBox getCbCharm() {
+	public FCheckBox getCbCharm() {
 		return cbCharm;
 	}
 }

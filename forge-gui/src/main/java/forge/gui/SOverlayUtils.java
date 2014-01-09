@@ -8,10 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.FocusManager;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.match.TargetingOverlay;
@@ -19,6 +18,8 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedButton;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /** 
  * All overlay interaction is handled here.
@@ -42,7 +43,7 @@ public final class SOverlayUtils {
         // (which is preset with null layout and close button)
         final FPanel pnl = new FPanel();
         pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap"));
-        FSkin.get(pnl).setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
         pnl.setBounds(new Rectangle(((w - pnlW) / 2), ((h - pnlH) / 2), pnlW, pnlH));
 
         pnl.add(new FLabel.Builder().icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_LOGO)).build(),
@@ -66,9 +67,9 @@ public final class SOverlayUtils {
         final int w = overlay.getWidth();
         final int h = overlay.getHeight();
 
-        final JLabel lblLoading = new JLabel("");
+        final SkinnedLabel lblLoading = new SkinnedLabel("");
         lblLoading.setOpaque(true);
-        FSkin.get(lblLoading).setBackground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        lblLoading.setBackground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         lblLoading.setMinimumSize(new Dimension(0, 20));
 
         pnlLoading.setBounds(((w - 170) / 2), ((h - 80) / 2), 170, 80);
@@ -101,11 +102,10 @@ public final class SOverlayUtils {
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
         final int w = overlay.getWidth();
 
-        final JButton btnCloseTopRight = new JButton("X");
-        final FSkin.JComponentSkin<JButton> btnCloseTopRightSkin = FSkin.get(btnCloseTopRight);
+        final SkinnedButton btnCloseTopRight = new SkinnedButton("X");
         btnCloseTopRight.setBounds(w - 25, 10, 15, 15);
-        btnCloseTopRightSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        btnCloseTopRightSkin.setLineBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        btnCloseTopRight.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        btnCloseTopRight.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT)));
         btnCloseTopRight.setOpaque(false);
         btnCloseTopRight.setBackground(new Color(0, 0, 0));
         btnCloseTopRight.setFocusPainted(false);

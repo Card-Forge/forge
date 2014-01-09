@@ -3,18 +3,19 @@ package forge.gui.toolbox;
 import javax.swing.JEditorPane;
 import javax.swing.SwingUtilities;
 
+import forge.gui.toolbox.FSkin.SkinnedEditorPane;
+
 /** 
  * Viewer for HTML
  *
  */
 @SuppressWarnings("serial")
-public class FHtmlViewer extends JEditorPane {
+public class FHtmlViewer extends SkinnedEditorPane {
     /** */
     public FHtmlViewer() {
         super();
-        FSkin.JTextComponentSkin<FHtmlViewer> skin = FSkin.get(this);
-        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        skin.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setOpaque(false);
         this.setFocusable(false);
         this.setEditable(false);

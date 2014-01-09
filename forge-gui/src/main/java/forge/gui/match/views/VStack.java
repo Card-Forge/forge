@@ -54,6 +54,7 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedTextArea;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.arcane.CardArea;
 import forge.view.arcane.CardPanel;
@@ -186,7 +187,7 @@ public enum VStack implements IVDoc<CStack> {
                 Animation.moveCard(stackArea.addCard(spell.getSourceCard()));
             }
             else {
-                JTextArea tar = new JTextArea(txt);
+                SkinnedTextArea tar = new SkinnedTextArea(txt);
                 tar.setToolTipText(txt);
                 tar.setOpaque(true);
                 tar.setBorder(border);
@@ -249,10 +250,10 @@ public enum VStack implements IVDoc<CStack> {
         }
     }
 
-    private void setSpellColor(JTextArea tar, SpellAbilityStackInstance s0) {
+    private void setSpellColor(SkinnedTextArea tar, SpellAbilityStackInstance s0) {
         if (s0.getStackDescription().startsWith("Morph ")) {
             tar.setBackground(new Color(0, 0, 0, 0));
-            FSkin.get(tar).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
         else if (CardUtil.getColors(s0.getSourceCard()).isMulticolor()) {
             tar.setBackground(new Color(253, 175, 63));
@@ -284,7 +285,7 @@ public enum VStack implements IVDoc<CStack> {
         }
         else {
             tar.setBackground(new Color(0, 0, 0, 0));
-            FSkin.get(tar).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
     }
 

@@ -37,6 +37,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CDev;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /** 
  * Assembles Swing components of players report.
@@ -235,7 +236,7 @@ public enum VDev implements IVDoc<CDev> {
      * Labels that act as buttons which control dev mode functions. Labels are
      * used to support multiline text.
      */
-    public class DevLabel extends JLabel {
+    public class DevLabel extends SkinnedLabel {
         private static final long serialVersionUID = 7917311680519060700L;
 
         private FSkin.SkinColor defaultBG = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
@@ -284,27 +285,27 @@ public enum VDev implements IVDoc<CDev> {
             this.r = 6; // Radius (for paintComponent)
             this.i = 2; // Insets (for paintComponent)
             this.setEnabled(true);
-            FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(final MouseEvent e) {
-                    FSkin.get(DevLabel.this).setBackground(DevLabel.this.pressedBG);
+                    DevLabel.this.setBackground(DevLabel.this.pressedBG);
                 }
 
                 @Override
                 public void mouseReleased(final MouseEvent e) {
-                    FSkin.get(DevLabel.this).setBackground(DevLabel.this.defaultBG);
+                    DevLabel.this.setBackground(DevLabel.this.defaultBG);
                 }
 
                 @Override
                 public void mouseEntered(final MouseEvent e) {
-                    FSkin.get(DevLabel.this).setBackground(DevLabel.this.hoverBG);
+                    DevLabel.this.setBackground(DevLabel.this.hoverBG);
                 }
 
                 @Override
                 public void mouseExited(final MouseEvent e) {
-                    FSkin.get(DevLabel.this).setBackground(DevLabel.this.defaultBG);
+                    DevLabel.this.setBackground(DevLabel.this.defaultBG);
                 }
             });
         }
@@ -329,7 +330,7 @@ public enum VDev implements IVDoc<CDev> {
             this.enabled = b;
             this.setText(s);
             this.setToolTipText(s);
-            FSkin.get(this).setBackground(this.defaultBG);
+            this.setBackground(this.defaultBG);
         }
 
         /**

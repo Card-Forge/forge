@@ -7,13 +7,15 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.text.NumberFormatter;
 
+import forge.gui.toolbox.FSkin.SkinnedSpinner;
+
 /** 
  * A custom instance of JSpinner using Forge skin properties.  Only numeric
  * integer spinners are implemented, since that's all we've needed so far.
  *
  */
 @SuppressWarnings("serial")
-public class FSpinner extends JSpinner {
+public class FSpinner extends SkinnedSpinner {
     public static class Builder {
         //========== Default values for FTextField are set here.
         private int    initialValue = 0;
@@ -35,12 +37,11 @@ public class FSpinner extends JSpinner {
         
         this.setModel(new SpinnerNumberModel(builder.initialValue, builder.minValue, builder.maxValue, 1));
         this.setEditor(new JSpinner.NumberEditor(this, "##"));
-        JFormattedTextField txt = ((JSpinner.NumberEditor)this.getEditor()).getTextField();
+        JFormattedTextField txt = this.getTextField();
         ((NumberFormatter)txt.getFormatter()).setAllowsInvalid(false);
-        FSkin.JTextComponentSkin<JFormattedTextField> txtSkin = FSkin.get(txt);
-        txtSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        txtSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        txtSkin.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        this.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         txt.setMargin(new Insets(5, 5, 5, 5));
         txt.setOpaque(true);
         

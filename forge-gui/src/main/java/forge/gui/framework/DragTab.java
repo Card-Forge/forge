@@ -3,10 +3,10 @@ package forge.gui.framework;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 
 /**
  * The tab label object in drag layout.
@@ -14,7 +14,7 @@ import forge.gui.toolbox.FSkin;
  * Simply call the constructor with a title string argument.
  */
 @SuppressWarnings("serial")
-public final class DragTab extends JLabel implements ILocalRepaint {
+public final class DragTab extends SkinnedLabel implements ILocalRepaint {
     private boolean selected = false;
     private int priority = 10;
 
@@ -31,7 +31,7 @@ public final class DragTab extends JLabel implements ILocalRepaint {
         setOpaque(false);
         setSelected(false);
         setBorder(new EmptyBorder(2, 5, 2, 5));
-        FSkin.get(this).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(SRearrangingUtil.getRearrangeClickEvent());
         this.addMouseMotionListener(SRearrangingUtil.getRearrangeDragEvent());

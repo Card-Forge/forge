@@ -4,20 +4,17 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JComponentSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 
 /** 
  * Custom JPanel for containing LblMenuItem components.
  * Mostly just handles repainting.
  */
 @SuppressWarnings("serial")
-public class PnlGroup extends JPanel {
-    private final JComponentSkin<PnlGroup> skin;
+public class PnlGroup extends SkinnedPanel {
     private final SkinColor clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
     private final SkinColor l00 = clrTheme.stepColor(0);
     private final SkinColor l10 = clrTheme.stepColor(10);
@@ -30,9 +27,8 @@ public class PnlGroup extends JPanel {
      * Mostly just handles repainting.
      */
     public PnlGroup() {
-        this.skin = FSkin.get(this);
         this.setLayout(new MigLayout("insets 10px 0 10px 0, gap 0, wrap"));
-        this.skin.setBackground(d20);
+        this.setBackground(d20);
         this.setOpaque(false);
     }
 

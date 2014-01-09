@@ -87,7 +87,7 @@ public enum VPrompt implements IVDoc<CPrompt> {
         btnOK.addKeyListener(buttonKeyAdapter);
         btnCancel.addKeyListener(buttonKeyAdapter);
 
-        FSkin.get(tarMessage).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tarMessage.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tarMessage.setMargin(new Insets(3, 3, 3, 3));
     }
 
@@ -104,11 +104,11 @@ public enum VPrompt implements IVDoc<CPrompt> {
         // wrap   : 2 columns required for btnOk and btnCancel.
         container.setLayout(new MigLayout("wrap 2, gap 0px!, insets 1px 1px 3px 1px"));
         if (prefs.getPrefBoolean(FPref.UI_COMPACT_PROMPT)) { //hide header and use smaller font if compact prompt
-        	FSkin.get(tarMessage).setFont(FSkin.getFont(12));
+        	tarMessage.setFont(FSkin.getFont(12));
         }
         else {
         	container.add(lblGames, "span 2, w 10:100%, h 22px!");
-        	FSkin.get(tarMessage).setFont(FSkin.getFont(14));
+        	tarMessage.setFont(FSkin.getFont(14));
         }
         lblGames.setText("Game Setup");
 

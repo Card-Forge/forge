@@ -64,13 +64,11 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
         scroller.getViewport().setBorder(null);
         scroller.getVerticalScrollBar().setUnitIncrement(16);
 
-        FSkin.JLabelSkin<FLabel> labelSkin = FSkin.get(lblSampleHand);
-        labelSkin.setMatteBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
-        labelSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblSampleHand.setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        lblSampleHand.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         
-        labelSkin = FSkin.get(lblRemainingDraws);
-        labelSkin.setMatteBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
-        labelSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblRemainingDraws.setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        lblRemainingDraws.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // Core layout
         pnlContent.add(lblReshuffle, "w 96%!, h 29px!, gap 2% 0 5px 5px");
@@ -160,7 +158,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
     }
 
     private <T extends InventoryItem, TModel extends DeckBase> JLabel buildLabel(final boolean zebra) {
-        final JLabel lbl = new FLabel.Builder().text("--")
+        final FLabel lbl = new FLabel.Builder().text("--")
                 .fontAlign(SwingConstants.CENTER).fontSize(13)
                 .build();
 
@@ -189,7 +187,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
 
         if (zebra) {
             lbl.setOpaque(true);
-            FSkin.get(lbl).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+            lbl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         }
 
         return lbl;

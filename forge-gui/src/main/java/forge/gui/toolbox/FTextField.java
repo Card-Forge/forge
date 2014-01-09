@@ -8,7 +8,6 @@ import java.awt.RenderingHints;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -16,12 +15,14 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import forge.gui.toolbox.FSkin.SkinnedTextField;
+
 /** 
  * A custom instance of JTextArea using Forge skin properties.
  *
  */
 @SuppressWarnings("serial")
-public class FTextField extends JTextField {
+public class FTextField extends SkinnedTextField {
     /** 
      * Uses the Builder pattern to facilitate/encourage inline styling.
      * Credit to Effective Java 2 (Joshua Bloch).
@@ -52,16 +53,17 @@ public class FTextField extends JTextField {
     }
 
     public static final int HEIGHT = 25; //TODO: calculate this somehow instead of hard-coding it
+    private static final FSkin.SkinColor textColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+    private static final FSkin.SkinColor ghostTextColor = textColor.stepColor(20);
+    private static final FSkin.SkinColor backColor = FSkin.getColor(FSkin.Colors.CLR_THEME2);
 
-    private final FSkin.JTextComponentSkin<FTextField> skin;
     private String ghostText;
     private boolean showGhostTextWithFocus;
 
     private FTextField(Builder builder) {
-        skin = FSkin.get(this);
-        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        skin.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        skin.setCaretColor(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setForeground(textColor);
+        this.setBackground(backColor);
+        this.setCaretColor(textColor);
         this.setMargin(new Insets(3, 3, 2, 3));
         this.setOpaque(true);
 
@@ -124,7 +126,7 @@ public class FTextField extends JTextField {
             final Insets margin = this.getMargin();
             final Graphics2D g2d = (Graphics2D)g.create();
             g2d.setFont(this.getFont());
-            FSkin.setGraphicsColor(g2d, skin.getForeground().stepColor(20));
+            FSkin.setGraphicsColor(g2d, ghostTextColor);
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.drawString(this.ghostText, margin.left + 2, margin.top + 15); //account for borders (TODO: why +15?)
             g2d.dispose();

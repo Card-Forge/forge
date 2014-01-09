@@ -3,6 +3,7 @@ package forge.gui.bazaar;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
@@ -107,9 +108,9 @@ public enum VBazaarUI implements IVTopLevelUI {
     @Override
     public void populate() {
         FPanel pnl = FView.SINGLETON_INSTANCE.getPnlInsets();
-        pnl.setBorder(null);
+        pnl.setBorder((Border)null);
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
-        FSkin.get(pnl).setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        pnl.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
         
         pnl.add(pnlAllStalls, "w 25%!, h 100%!");
         pnl.add(pnlSingleStall, "w 75%!, h 100%!");

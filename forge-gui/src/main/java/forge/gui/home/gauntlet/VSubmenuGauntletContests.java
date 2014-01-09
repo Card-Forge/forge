@@ -4,7 +4,6 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
@@ -21,6 +20,7 @@ import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 
 /** 
  * Assembles Swing components of "build gauntlet" submenu singleton.
@@ -43,8 +43,7 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
 
     private final StartButton btnStart  = new StartButton();
 
-
-    private final JPanel pnlLoad = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
+    private final SkinnedPanel pnlLoad = new SkinnedPanel(new MigLayout("insets 0, gap 0, wrap"));
 
     private final ContestGauntletLister gauntletList = new ContestGauntletLister();
     private final FDeckChooser lstDecks = new FDeckChooser("Deck", false);
@@ -59,11 +58,10 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
         .text("A gauntlet that has been started will keep the same deck until it is finished.").build();
 
     private VSubmenuGauntletContests() {
-        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         pnlLoad.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        FSkin.get(pnlLoad).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        pnlLoad.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlLoad.add(lblLoad, "h 30px!, w 94%!, gap 1% 0 0 5px, ax center");
        // pnlLoad.add(new FLabel.Builder().text("If a gauntlet has been started, its deck is frozen.").build(),
          //       "gap 0 0 0 5px, ax center");

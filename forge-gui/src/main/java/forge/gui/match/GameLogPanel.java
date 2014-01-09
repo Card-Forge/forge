@@ -23,8 +23,8 @@ import net.miginfocom.swing.MigLayout;
 import forge.gui.MouseUtil;
 import forge.gui.MouseUtil.MouseCursor;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FSkin.JTextComponentSkin;
 import forge.gui.toolbox.FSkin.SkinFont;
+import forge.gui.toolbox.FSkin.SkinnedTextArea;
 
 @SuppressWarnings("serial")
 public class GameLogPanel extends JPanel {
@@ -150,20 +150,19 @@ public class GameLogPanel extends JPanel {
     }
 
     private JTextArea createNewLogEntryJTextArea(String text, boolean useAlternateBackColor) {
-        final JTextArea tar = new JTextArea(text);
-        final JTextComponentSkin<JTextArea> tarSkin = FSkin.get(tar);
-        tarSkin.setFont(textFont);
+        final SkinnedTextArea tar = new SkinnedTextArea(text);
+        tar.setFont(textFont);
         tar.setBorder(new EmptyBorder(3, 4, 3, 4));
         tar.setFocusable(false);
         tar.setEditable(false);
         tar.setLineWrap(true);
         tar.setWrapStyleWord(true);
-        tarSkin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         FSkin.SkinColor skinColor = FSkin.getColor(FSkin.Colors.CLR_THEME2);
         if (useAlternateBackColor) { skinColor = skinColor.darker(); }
         tar.setOpaque(true);
-        tarSkin.setBackground(skinColor);
+        tar.setBackground(skinColor);
 
         return tar;
     }

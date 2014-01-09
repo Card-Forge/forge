@@ -5,13 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedMenuItem;
 
 /**
  * Returns a JMenu containing options associated with current game.
@@ -40,7 +40,7 @@ public final class DeckFileMenu {
         return menu;
     }
 
-    private static JMenuItem menuItem_Save, menuItem_SaveAs;
+    private static SkinnedMenuItem menuItem_Save, menuItem_SaveAs;
 
     public static void updateSaveEnabled() {
         if (menuItem_Save != null) {
@@ -51,9 +51,9 @@ public final class DeckFileMenu {
         }
     }
 
-    private static JMenuItem getMenuItem_New() {
-        JMenuItem menuItem = new JMenuItem("New Deck");
-        FSkin.get(menuItem).setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_NEW) : null);
+    private static SkinnedMenuItem getMenuItem_New() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("New Deck");
+        menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_NEW) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_N));
         menuItem.addActionListener(getNewAction());
         return menuItem;
@@ -68,9 +68,9 @@ public final class DeckFileMenu {
         };
     }
 
-    private static JMenuItem getMenuItem_Open() {
-        JMenuItem menuItem = new JMenuItem("Open Deck");
-        FSkin.get(menuItem).setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_OPEN) : null);
+    private static SkinnedMenuItem getMenuItem_Open() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Open Deck");
+        menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_OPEN) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_O));
         menuItem.addActionListener(getOpenAction());
         return menuItem;
@@ -85,8 +85,8 @@ public final class DeckFileMenu {
         };
     }
 
-    private static JMenuItem getMenuItem_Import() {
-        JMenuItem menuItem = new JMenuItem("Import Deck");
+    private static SkinnedMenuItem getMenuItem_Import() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Import Deck");
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_I));
         menuItem.addActionListener(getImportAction());
         return menuItem;
@@ -101,9 +101,9 @@ public final class DeckFileMenu {
         };
     }
 
-    private static JMenuItem getMenuItem_Save() {
-        JMenuItem menuItem = new JMenuItem("Save Deck");
-        FSkin.get(menuItem).setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_SAVE) : null);
+    private static SkinnedMenuItem getMenuItem_Save() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Save Deck");
+        menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_SAVE) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_S));
         menuItem.addActionListener(getSaveAction());
         menuItem_Save = menuItem;
@@ -119,9 +119,9 @@ public final class DeckFileMenu {
         };
     }
 
-    private static JMenuItem getMenuItem_SaveAs() {
-        JMenuItem menuItem = new JMenuItem("Save Deck As");
-        FSkin.get(menuItem).setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_SAVEAS) : null);
+    private static SkinnedMenuItem getMenuItem_SaveAs() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Save Deck As");
+        menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_SAVEAS) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_E));
         menuItem.addActionListener(getSaveAsAction());
         menuItem_SaveAs = menuItem;
@@ -137,9 +137,9 @@ public final class DeckFileMenu {
         };
     }
 
-    private static JMenuItem getMenuItem_Print() {
-        JMenuItem menuItem = new JMenuItem("Print to HTML file");
-        FSkin.get(menuItem).setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_PRINT) : null);
+    private static SkinnedMenuItem getMenuItem_Print() {
+        SkinnedMenuItem menuItem = new SkinnedMenuItem("Print to HTML file");
+        menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkin.InterfaceIcons.ICO_PRINT) : null);
         menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_P));
         menuItem.addActionListener(getPrintAction());
         return menuItem;

@@ -215,10 +215,10 @@ public abstract class ItemView<T extends InventoryItem> {
             // show a popup with the current search string, highlighted in red if not found
             popupLabel.setText(searchStr + " (hit Enter for next match, Esc to cancel)");
             if (found) {
-                FSkin.get(popupLabel).setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+                popupLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             }
             else {
-                FSkin.get(popupLabel).setForeground(new Color(255, 0, 0));
+                popupLabel.setForeground(new Color(255, 0, 0));
             }
 
             if (popupShowing) {
@@ -229,7 +229,7 @@ public abstract class ItemView<T extends InventoryItem> {
                 PopupFactory factory = PopupFactory.getSharedInstance();
                 Point tableLoc = ItemView.this.getLocationOnScreen();
                 popup = factory.getPopup(null, popupLabel, tableLoc.x + 10, tableLoc.y + 10);
-                FSkin.get(SwingUtilities.getRoot(popupLabel)).setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+                FSkin.setTempBackground(SwingUtilities.getRoot(popupLabel), FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
 
                 popupTimer = new Timer(5000, new ActionListener() {
                     @Override

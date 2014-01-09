@@ -1,6 +1,7 @@
 package forge.gui.home.quest;
 
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
@@ -44,9 +45,9 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
      * Constructor.
      */
     private VSubmenuQuestDecks() {
-        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        scr.setBorder(null);
+        scr.setBorder((Border)null);
         scr.getViewport().setBorder(null);
     }
 

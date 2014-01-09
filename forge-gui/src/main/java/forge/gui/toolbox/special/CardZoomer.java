@@ -26,7 +26,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import javax.swing.JLabel;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -37,6 +37,7 @@ import forge.game.card.CardUtil;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.gui.toolbox.imaging.FImagePanel;
 import forge.gui.toolbox.imaging.FImageUtil;
 import forge.gui.toolbox.imaging.FImagePanel.AutoSizeImageMode;
@@ -57,7 +58,7 @@ public enum CardZoomer {
     private final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
     private JPanel pnlMain;
     private FImagePanel imagePanel;
-    private JLabel lblFlipcard = new JLabel();    
+    private SkinnedLabel lblFlipcard = new SkinnedLabel();    
         
     // Details about the current card being displayed.
     private Card thisCard;
@@ -77,7 +78,7 @@ public enum CardZoomer {
     
     // ctr
     private CardZoomer() {
-        FSkin.get(lblFlipcard).setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
+        lblFlipcard.setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
         setMouseButtonListener();
         setMouseWheelListener();
         setKeyListeners();
@@ -235,7 +236,7 @@ public enum CardZoomer {
      */
     private void setImage() {
         imagePanel = new FImagePanel();
-        imagePanel.setImage(FImageUtil.getImage(thisCard, cardState, FSkin.get(imagePanel)), getInitialRotation(), AutoSizeImageMode.SOURCE);
+        imagePanel.setImage(FImageUtil.getImage(thisCard, cardState), getInitialRotation(), AutoSizeImageMode.SOURCE);
         pnlMain.removeAll();
         pnlMain.add(imagePanel, "w 80%!, h 80%!");
         pnlMain.validate();

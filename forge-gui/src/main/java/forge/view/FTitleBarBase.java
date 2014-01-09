@@ -13,20 +13,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
 
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
-import forge.gui.toolbox.FSkin.JComponentSkin;
-import forge.gui.toolbox.FSkin.JLabelSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinnedLabel;
+import forge.gui.toolbox.FSkin.SkinnedMenuBar;
 
 @SuppressWarnings("serial")
-public abstract class FTitleBarBase extends JMenuBar {
+public abstract class FTitleBarBase extends SkinnedMenuBar {
     protected static final int visibleHeight = 27;
     protected static final SkinColor foreColor = FSkin.getColor(Colors.CLR_TEXT);
     protected static final SkinColor backColor = FSkin.getColor(Colors.CLR_THEME2);
@@ -37,7 +35,6 @@ public abstract class FTitleBarBase extends JMenuBar {
     protected static final SkinColor buttonToggleColor = backColor.stepColor(-30);
 
     protected final ITitleBarOwner owner;
-    protected final JComponentSkin<FTitleBarBase> skin = FSkin.get(this);
     protected final SpringLayout layout = new SpringLayout();
     protected final LockTitleBarButton btnLockTitleBar = new LockTitleBarButton();
     protected final MinimizeButton btnMinimize = new MinimizeButton();
@@ -49,7 +46,7 @@ public abstract class FTitleBarBase extends JMenuBar {
         this.owner = owner0;
         setVisible(false); //start out hidden unless frame chooses to show title bar
         setLayout(this.layout);
-        skin.setBackground(backColor);
+        this.setBackground(backColor);
     }
     
     protected void addControls() {
@@ -124,8 +121,7 @@ public abstract class FTitleBarBase extends JMenuBar {
         revalidate();
     }
     
-    public abstract class TitleBarButton extends JLabel implements ILocalRepaint {
-        protected JLabelSkin<TitleBarButton> skin = FSkin.get(this);
+    public abstract class TitleBarButton extends SkinnedLabel implements ILocalRepaint {
         private boolean pressed, hovered;
 
         private TitleBarButton() {

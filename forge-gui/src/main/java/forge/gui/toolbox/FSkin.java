@@ -19,14 +19,15 @@ package forge.gui.toolbox;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
@@ -36,18 +37,46 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JEditorPane;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -76,445 +105,10 @@ public enum FSkin {
     /** Singleton instance of skin. */
     SINGLETON_INSTANCE;
 
-
-    public static class ComponentSkin<T extends Component> {
-        protected T comp;
-        private SkinColor foreground, background;
-        private SkinFont font;
-        private SkinCursor cursor;
-        protected boolean needRepaintOnReapply;
-
-        private ComponentSkin(T comp0) {
-            this.comp = comp0;
-        }
-
-        public boolean isDisposed() {
-            return this.comp == null;
-        }
-
-        public SkinColor getForeground() {
-            return this.foreground;
-        }
-
-        public void setForeground(SkinColor skinColor) {
-            this.foreground = skinColor;
-            this.comp.setForeground(skinColor.color);
-        }
-        public void setForeground(Color color) {
-            this.foreground = null; //ensure this field is reset when static color set
-            this.comp.setForeground(color);
-        }
-
-        public SkinColor getBackground() {
-            return this.background;
-        }
-
-        public void setBackground(SkinColor skinColor) {
-            this.background = skinColor;
-            this.comp.setBackground(skinColor.color);
-        }
-        public void setBackground(Color color) {
-            this.background = null;  //ensure this field is reset when static color set
-            this.comp.setBackground(color);
-        }
-
-        public void setFont(SkinFont skinFont) {
-            this.font = skinFont;
-            this.comp.setFont(skinFont.font);
-        }
-        public void setFont(Font font) {
-            this.font = null;  //ensure this field is reset when static font set
-            this.comp.setFont(font);
-        }
-
-        public void setCursor(SkinCursor skinCursor) {
-            this.cursor = skinCursor;
-            this.comp.setCursor(skinCursor != null ? skinCursor.cursor : null);
-        }
-        public void setCursor(Cursor cursor0) {
-            this.cursor = null;  //ensure this field is reset when static cursor set
-            this.comp.setCursor(cursor0);
-        }
-        public void resetCursor() {
-            this.cursor = null;
-        }
-
-        protected void reapply() {
-            if (this.foreground != null) {
-                comp.setForeground(this.foreground.color);
-            }
-            if (this.background != null) {
-                comp.setBackground(this.background.color);
-            }
-            if (this.font != null) {
-                comp.setFont(this.font.font);
-            }
-            if (this.cursor != null) {
-                comp.setCursor(this.cursor.cursor);
-            }
-            if (this.needRepaintOnReapply) {
-                comp.repaint();
-            }
-        }
-    }
-    public static class WindowSkin<T extends Window> extends ComponentSkin<T> {
-        private SkinImage iconImage;
-
-        private WindowSkin(T comp0) {
-            super(comp0);
-        }
-
-        public void setIconImage(SkinImage skinImage) {
-            this.iconImage = skinImage;
-            this.comp.setIconImage(skinImage.image);
-        }
-        public void setIconImage(Image image) {
-            this.iconImage = null; //ensure this field is reset when static image set
-            this.comp.setIconImage(image);
-        }
-
-        @Override
-        protected void reapply() {
-            if (this.iconImage != null) {
-                this.comp.setIconImage(this.iconImage.image);
-            }
-            super.reapply();
-        }
-    }
-    public static class JComponentSkin<T extends JComponent> extends ComponentSkin<T> {
-        private SkinBorder border;
-
-        private JComponentSkin(T comp0) {
-            super(comp0);
-        }
-
-        public void setBorder(SkinBorder border0) {
-            this.border = border0;
-            this.comp.setBorder(this.border.createBorder());
-        }
-
-        public void setBorder(Border border0) {
-            this.border = null; //ensure this field is reset when static border set
-            this.comp.setBorder(border0);
-        }
-
-        public void removeBorder() {
-            this.border = null;
-            this.comp.setBorder(null);
-        }
-
-        public void setLineBorder(SkinColor skinColor) {
-            setBorder(new LineSkinBorder(skinColor));
-        }
-        public void setLineBorder(SkinColor skinColor, int thickness) {
-            setBorder(new LineSkinBorder(skinColor, thickness));
-        }
-
-        public void setMatteBorder(int top, int left, int bottom, int right, SkinColor skinColor) {
-            setBorder(new MatteSkinBorder(top, left, bottom, right, skinColor));
-        }
-
-        @Override
-        protected void reapply() {
-            if (this.border != null) {
-                this.comp.setBorder(this.border.createBorder());
-            }
-            super.reapply();
-        }
-    }
-    public static class JLabelSkin<T extends JLabel> extends JComponentSkin<T> {
-        private SkinImage icon;
-
-        private JLabelSkin(T comp0) {
-            super(comp0);
-        }
-
-        public void setIcon(SkinImage skinImage) {
-            this.icon = skinImage;
-            this.comp.setIcon(skinImage != null ? skinImage.getIcon() : null);
-        }
-        public void setIcon(ImageIcon imageIcon) {
-            this.icon = null; //ensure this field is reset when static icon set
-            this.comp.setIcon(imageIcon);
-        }
-
-        @Override
-        protected void reapply() {
-            if (this.icon != null) {
-                this.comp.setIcon(this.icon.getIcon());
-            }
-            super.reapply();
-        }
-    }
-    public static class AbstractButtonSkin<T extends AbstractButton> extends JComponentSkin<T> {
-        private SkinImage icon, pressedIcon, rolloverIcon;
-
-        private AbstractButtonSkin(T comp0) {
-            super(comp0);
-        }
-
-        public void setIcon(SkinImage skinImage) {
-            this.icon = skinImage;
-            this.comp.setIcon(skinImage != null ? skinImage.getIcon() : null);
-        }
-        public void setIcon(ImageIcon imageIcon) {
-            this.icon = null; //ensure this field is reset when static icon set
-            this.comp.setIcon(imageIcon);
-        }
-
-        public void setPressedIcon(SkinImage skinImage) {
-            this.pressedIcon = skinImage;
-            this.comp.setPressedIcon(skinImage != null ? skinImage.getIcon() : null);
-        }
-        public void setPressedIcon(ImageIcon imageIcon) {
-            this.pressedIcon = null; //ensure this field is reset when static icon set
-            this.comp.setPressedIcon(imageIcon);
-        }
-
-        public void setRolloverIcon(SkinImage skinImage) {
-            this.rolloverIcon = skinImage;
-            this.comp.setRolloverIcon(skinImage != null ? skinImage.getIcon() : null);
-        }
-        public void setRolloverIcon(ImageIcon imageIcon) {
-            this.rolloverIcon = null; //ensure this field is reset when static icon set
-            this.comp.setRolloverIcon(imageIcon);
-        }
-
-        @Override
-        protected void reapply() {
-            if (this.icon != null) {
-                this.comp.setIcon(this.icon.getIcon());
-            }
-            if (this.pressedIcon != null) {
-                this.comp.setPressedIcon(this.pressedIcon.getIcon());
-            }
-            if (this.rolloverIcon != null) {
-                this.comp.setRolloverIcon(this.rolloverIcon.getIcon());
-            }
-            super.reapply();
-        }
-    }
-    public static class JTextComponentSkin<T extends JTextComponent> extends JComponentSkin<T> {
-        private SkinColor caretColor;
-
-        private JTextComponentSkin(T comp0) {
-            super(comp0);
-        }
-
-        public SkinColor getCaretColor() {
-            return this.caretColor;
-        }
-
-        public void setCaretColor(SkinColor skinColor) {
-            this.caretColor = skinColor;
-            this.comp.setCaretColor(skinColor.color);
-        }
-        public void setCaretColor(Color color) {
-            this.caretColor = null;  //ensure this field is reset when static color set
-            this.comp.setCaretColor(color);
-        }
-
-        @Override
-        protected void reapply() {
-            if (this.caretColor != null) {
-                this.comp.setCaretColor(this.caretColor.color);
-            }
-            super.reapply();
-        }
-    }
-    public static class JTableSkin<T extends JTable> extends JComponentSkin<T> {
-        private SkinColor selectionForeground, selectionBackground;
-
-        private JTableSkin(T comp0) {
-            super(comp0);
-        }
-
-        public SkinColor getSelectionForeground() {
-            return this.selectionForeground;
-        }
-
-        public void setSelectionForeground(SkinColor skinColor) {
-            this.selectionForeground = skinColor;
-            this.comp.setSelectionForeground(skinColor.color);
-        }
-        public void setSelectionForeground(Color color) {
-            this.selectionForeground = null; //ensure this field is reset when static color set
-            this.comp.setSelectionForeground(color);
-        }
-
-        public SkinColor getSelectionBackground() {
-            return this.selectionBackground;
-        }
-
-        public void setSelectionBackground(SkinColor skinColor) {
-            this.selectionBackground = skinColor;
-            this.comp.setSelectionBackground(skinColor.color);
-        }
-        public void setSelectionBackground(Color color) {
-            this.selectionBackground = null;  //ensure this field is reset when static color set
-            this.comp.setSelectionBackground(color);
-        }
-
-        @Override
-        protected void reapply() {
-            if (this.selectionForeground != null) {
-                this.comp.setSelectionForeground(this.selectionForeground.color);
-            }
-            if (this.selectionBackground != null) {
-                this.comp.setSelectionBackground(this.selectionBackground.color);
-            }
-            super.reapply();
-        }
-    }
-    public static class FPanelSkin<T extends FPanel> extends JComponentSkin<T> {
-        private SkinImage foregroundImage, backgroundTexture;
-        private SkinColor backgroundTextureOverlay;
-
-        private FPanelSkin(T comp0) {
-            super(comp0);
-        }
-
-        public void setForegroundImage(SkinImage skinIcon) {
-            this.comp.setForegroundImage(skinIcon.image); //must call this first since it will call resetForegroundImage
-            this.foregroundImage = skinIcon;
-            this.needRepaintOnReapply = true; //foreground image draw during paint
-        }
-
-        public void resetForegroundImage() {
-            this.foregroundImage = null;
-        }
-
-        public void setBackgroundTexture(SkinImage skinIcon) {
-            this.comp.setBackgroundTexture(skinIcon.image); //must call this first since it will call resetBackgroundTexture
-            this.backgroundTexture = skinIcon;
-            this.needRepaintOnReapply = true; //background texture drawn during paint
-        }
-
-        public void resetBackgroundTexture() {
-            this.backgroundTexture = null;
-        }
-
-        public void setBackgroundTextureOverlay(SkinColor skinColor) {
-            this.comp.setBackgroundTextureOverlay(skinColor.color); //must call this first since it will call resetBackgroundTexture
-            this.backgroundTextureOverlay = skinColor;
-            this.needRepaintOnReapply = true; //background texture drawn during paint
-        }
-
-        public void resetBackgroundTextureOverlay() {
-            this.backgroundTextureOverlay = null;
-        }
-
-        @Override
-        protected void reapply() {
-            if (this.foregroundImage != null) {
-                this.setForegroundImage(this.foregroundImage); //use skin function so foregroundImage field retained
-            }
-            if (this.backgroundTexture != null) {
-                this.setBackgroundTexture(this.backgroundTexture); //use skin function so backgroundTexture field retained
-            }
-            if (this.backgroundTextureOverlay != null) {  //use skin function so backgroundTextureOverlay field retained
-                this.setBackgroundTextureOverlay(this.backgroundTextureOverlay);
-            }
-            super.reapply();
-        }
-    }
-
-    private static final HashMap<Component, ComponentSkin<?>> compSkins = new HashMap<Component, ComponentSkin<?>>();
-
-    @SuppressWarnings("unchecked")
-    public static <T extends Component> ComponentSkin<T> get(T comp) {
-        ComponentSkin<T> compSkin = (ComponentSkin<T>) compSkins.get(comp);
-        if (compSkin == null) {
-            compSkin = new ComponentSkin<T>(comp);
-            compSkins.put(comp, compSkin);
-        }
-        return compSkin;
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends Window> WindowSkin<T> get(T comp) {
-        WindowSkin<T> compSkin = (WindowSkin<T>) compSkins.get(comp);
-        if (compSkin == null) {
-            compSkin = new WindowSkin<T>(comp);
-            compSkins.put(comp, compSkin);
-        }
-        return compSkin;
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends JComponent> JComponentSkin<T> get(T comp) {
-        JComponentSkin<T> compSkin = (JComponentSkin<T>) compSkins.get(comp);
-        if (compSkin == null) {
-            compSkin = new JComponentSkin<T>(comp);
-            compSkins.put(comp, compSkin);
-        }
-        return compSkin;
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends JLabel> JLabelSkin<T> get(T comp) {
-        JLabelSkin<T> compSkin = (JLabelSkin<T>) compSkins.get(comp);
-        if (compSkin == null) {
-            compSkin = new JLabelSkin<T>(comp);
-            compSkins.put(comp, compSkin);
-        }
-        return compSkin;
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends AbstractButton> AbstractButtonSkin<T> get(T comp) {
-        AbstractButtonSkin<T> compSkin = (AbstractButtonSkin<T>) compSkins.get(comp);
-        if (compSkin == null) {
-            compSkin = new AbstractButtonSkin<T>(comp);
-            compSkins.put(comp, compSkin);
-        }
-        return compSkin;
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends JTextComponent> JTextComponentSkin<T> get(T comp) {
-        JTextComponentSkin<T> compSkin = (JTextComponentSkin<T>) compSkins.get(comp);
-        if (compSkin == null) {
-            compSkin = new JTextComponentSkin<T>(comp);
-            compSkins.put(comp, compSkin);
-        }
-        return compSkin;
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends JTable> JTableSkin<T> get(T comp) {
-        JTableSkin<T> compSkin = (JTableSkin<T>) compSkins.get(comp);
-        if (compSkin == null) {
-            compSkin = new JTableSkin<T>(comp);
-            compSkins.put(comp, compSkin);
-        }
-        return compSkin;
-    }
-    @SuppressWarnings("unchecked")
-    public static <T extends FPanel> FPanelSkin<T> get(T comp) {
-        FPanelSkin<T> compSkin = (FPanelSkin<T>) compSkins.get(comp);
-        if (compSkin == null) {
-            compSkin = new FPanelSkin<T>(comp);
-            compSkins.put(comp, compSkin);
-        }
-        return compSkin;
-    }
-
-    public static void dispose(Component comp) {
-        if (comp instanceof IDisposable) { //dispose component itself if possible 
-            ((IDisposable)comp).dispose();
-        }
-        ComponentSkin<?> compSkin = compSkins.get(comp);
-        if (compSkin != null) {
-            compSkin.comp = null;
-            compSkins.remove(comp);
-        }
-        if (comp instanceof Container) {
-            //dispose skins for child components
-            for (Component c : ((Container)comp).getComponents()) {
-                dispose(c);
-            }
-        }
-    }
-
     public enum Backgrounds implements SkinProp {
         BG_SPLASH (null),
         BG_TEXTURE (null),
-        BG_MATCH (null); 
+        BG_MATCH (null);
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
@@ -600,6 +194,12 @@ public enum FSkin {
     }
     public static void setGraphicsGradientPaint(Graphics2D g2d, float x1, float y1, SkinColor skinColor1, float x2, float y2, Color color2) {
         g2d.setPaint(new GradientPaint(x1, y1, skinColor1.color, x2, y2, color2));
+    }
+
+    //set background color for component that's temporary
+    //only use if can't use ISkinnedComponent class
+    public static void setTempBackground(Component comp, SkinColor skinColor) {
+        comp.setBackground(skinColor.color);
     }
 
     public static class SkinColor {
@@ -1694,17 +1294,19 @@ public enum FSkin {
     }
 
     private static final String
-    FILE_SKINS_DIR = "res/skins/",
-    FILE_ICON_SPRITE = "sprite_icons.png",
-    FILE_FOIL_SPRITE = "sprite_foils.png",
-    FILE_OLD_FOIL_SPRITE = "sprite_old_foils.png",
-    FILE_AVATAR_SPRITE = "sprite_avatars.png",
-    FILE_FONT = "font1.ttf",
-    FILE_SPLASH = "bg_splash.png",
-    FILE_MATCH_BG = "bg_match.jpg",
-    FILE_TEXTURE_BG = "bg_texture.jpg",
-    DEFAULT_DIR = FILE_SKINS_DIR + "default/";
+        FILE_SKINS_DIR = "res/skins/",
+        FILE_ICON_SPRITE = "sprite_icons.png",
+        FILE_FOIL_SPRITE = "sprite_foils.png",
+        FILE_OLD_FOIL_SPRITE = "sprite_old_foils.png",
+        FILE_AVATAR_SPRITE = "sprite_avatars.png",
+        FILE_FONT = "font1.ttf",
+        FILE_SPLASH = "bg_splash.png",
+        FILE_MATCH_BG = "bg_match.jpg",
+        FILE_TEXTURE_BG = "bg_texture.jpg",
+        DEFAULT_DIR = FILE_SKINS_DIR + "default/";
 
+    private static ArrayList<String> allSkins;
+    private static int currentSkinIndex;
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimPreferredSprite, bimFoils,
@@ -1727,11 +1329,6 @@ public enum FSkin {
         loadLight(skinName, false);
         loadFull(false);
 
-        //reapply skin to all skinned components
-        for (ComponentSkin<?> compSkin : compSkins.values()) {
-            compSkin.reapply();
-        }
-
         //refresh certain components skinned via look and feel
         Singletons.getControl().getForgeMenu().refresh();
         FComboBoxWrapper.refreshAllSkins();
@@ -1750,7 +1347,18 @@ public enum FSkin {
         if (onInit) {
             // No need for this method to be loaded while on the EDT.
             FThreads.assertExecutedByEdt(false);
+
+            if (allSkins == null) { //initialize
+                allSkins = new ArrayList<String>();
+                ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
+                for (int i = 0; i < skinDirectoryNames.size(); i++) {
+                    allSkins.add(WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' ')));
+                }
+                Collections.sort(allSkins);
+            }
         }
+
+        currentSkinIndex = allSkins.indexOf(skinName);
 
         // Non-default (preferred) skin name and dir.
         FSkin.preferredName = skinName.toLowerCase().replace(' ', '_');
@@ -1988,16 +1596,8 @@ public enum FSkin {
         return mySkins;
     }
 
-    public static String[] getSkinNamesArray(boolean sorted) {
-        ArrayList<String> skinDirectoryNames = getSkinDirectoryNames();
-        String[] prettySkinNames = new String[skinDirectoryNames.size()];
-        for (int i = 0; i < skinDirectoryNames.size(); i++) {
-            prettySkinNames[i] = WordUtils.capitalize(skinDirectoryNames.get(i).replace('_', ' '));
-        }
-        if (sorted) {
-            java.util.Arrays.sort(prettySkinNames);
-        }
-        return prettySkinNames;
+    public static Iterable<String> getAllSkins() {
+        return allSkins;
     }
 
     /** @return Map<Integer, Image> */
@@ -2273,6 +1873,964 @@ public enum FSkin {
             gradients.add(bottom);
             gradients.add(bottom);
             return gradients;
+        }
+    }
+
+    public static class ComponentSkin<T extends Component> {
+        private SkinColor foreground, background;
+        private SkinFont font;
+        private SkinCursor cursor;
+        private int appliedSkinIndex = FSkin.currentSkinIndex;
+
+        protected ComponentSkin() {
+        }
+
+        protected boolean update(T comp) {
+            if (appliedSkinIndex == FSkin.currentSkinIndex) { return false; }
+            appliedSkinIndex = FSkin.currentSkinIndex;
+            reapply(comp);
+            return true;
+        }
+
+        public SkinColor getForeground() { return this.foreground; }
+        protected void setForeground(T comp, SkinColor skinColor) { comp.setForeground(skinColor != null ? skinColor.color : null); this.foreground = skinColor; }
+        protected void resetForeground() { this.foreground = null; }
+
+        public SkinColor getBackground() { return this.background; }
+        protected void setBackground(T comp, SkinColor skinColor) { comp.setBackground(skinColor != null ? skinColor.color : null); this.background = skinColor; }
+        protected void resetBackground() { this.background = null; }
+
+        protected void setFont(T comp, SkinFont skinFont) { comp.setFont(skinFont != null ? skinFont.font : null); this.font = skinFont; }
+        protected void resetFont() { this.font = null; }
+
+        protected void setCursor(T comp, SkinCursor skinCursor) { comp.setCursor(skinCursor != null ? skinCursor.cursor : null); this.cursor = skinCursor; }
+        protected void resetCursor() { this.cursor = null; }
+
+        protected void reapply(T comp) {
+            if (this.foreground != null) { setForeground(comp, this.foreground); }
+            if (this.background != null) { setBackground(comp, this.background); }
+            if (this.font != null) { setFont(comp, this.font); }
+            if (this.cursor != null) { setCursor(comp, this.cursor); }
+        }
+    }
+    public static class WindowSkin<T extends Window> extends ComponentSkin<T> {
+        private SkinImage iconImage;
+
+        protected WindowSkin() {
+        }
+
+        protected void setIconImage(T comp, SkinImage skinImage) { comp.setIconImage(skinImage != null ? skinImage.image : null); this.iconImage = skinImage; }
+        protected void resetIconImage() { this.iconImage = null; }
+
+        @Override
+        protected void reapply(T comp) {
+            if (this.iconImage != null) { setIconImage(comp, this.iconImage); }
+            super.reapply(comp);
+        }
+    }
+    public static class JComponentSkin<T extends JComponent> extends ComponentSkin<T> {
+        private SkinBorder border;
+
+        protected JComponentSkin() {
+        }
+
+        protected void setBorder(T comp, SkinBorder skinBorder) { comp.setBorder(skinBorder != null ? skinBorder.createBorder() : null); this.border = skinBorder; }
+        protected void resetBorder() { this.border = null; }
+
+        @Override
+        protected void reapply(T comp) {
+            if (this.border != null) { setBorder(comp, this.border); }
+            super.reapply(comp);
+        }
+    }
+    public static class JLabelSkin<T extends JLabel> extends JComponentSkin<T> {
+        private SkinImage icon;
+
+        protected JLabelSkin() {
+        }
+
+        protected void setIcon(T comp, SkinImage skinImage) { comp.setIcon(skinImage != null ? skinImage.getIcon() : null); this.icon = skinImage; }
+        protected void resetIcon() { this.icon = null; }
+
+        @Override
+        protected void reapply(T comp) {
+            if (this.icon != null) { setIcon(comp, this.icon); }
+            super.reapply(comp);
+        }
+    }
+    public static class AbstractButtonSkin<T extends AbstractButton> extends JComponentSkin<T> {
+        private SkinImage icon, pressedIcon, rolloverIcon;
+
+        protected AbstractButtonSkin() {
+        }
+
+        protected void setIcon(T comp, SkinImage skinImage) { comp.setIcon(skinImage != null ? skinImage.getIcon() : null); this.icon = skinImage; }
+        protected void resetIcon() { this.icon = null; }
+
+        protected void setPressedIcon(T comp, SkinImage skinImage) { comp.setPressedIcon(skinImage != null ? skinImage.getIcon() : null); this.pressedIcon = skinImage; }
+        protected void resetPressedIcon() { this.pressedIcon = null; }
+
+        protected void setRolloverIcon(T comp, SkinImage skinImage) { comp.setRolloverIcon(skinImage != null ? skinImage.getIcon() : null); this.rolloverIcon = skinImage; }
+        protected void resetRolloverIcon() { this.rolloverIcon = null; }
+
+        @Override
+        protected void reapply(T comp) {
+            if (this.icon != null) { setIcon(comp, this.icon); }
+            if (this.pressedIcon != null) { setPressedIcon(comp, this.pressedIcon); }
+            if (this.rolloverIcon != null) { setRolloverIcon(comp, this.rolloverIcon); }
+            super.reapply(comp);
+        }
+    }
+    public static class JTextComponentSkin<T extends JTextComponent> extends JComponentSkin<T> {
+        private SkinColor caretColor;
+
+        protected JTextComponentSkin() {
+        }
+
+        protected void setCaretColor(T comp, SkinColor skinColor) { comp.setCaretColor(skinColor != null ? skinColor.color : null); this.caretColor = skinColor; }
+        protected void resetCaretColor() { this.caretColor = null; }
+
+        @Override
+        protected void reapply(T comp) {
+            if (this.caretColor != null) { setCaretColor(comp, this.caretColor); }
+            super.reapply(comp);
+        }
+    }
+    public static class JTableSkin<T extends JTable> extends JComponentSkin<T> {
+        private SkinColor selectionForeground, selectionBackground;
+
+        protected JTableSkin() {
+        }
+
+        protected void setSelectionForeground(T comp, SkinColor skinColor) { comp.setSelectionForeground(skinColor != null ? skinColor.color : null); this.selectionForeground = skinColor; }
+        protected void resetSelectionForeground() { this.selectionForeground = null; }
+
+        protected void setSelectionBackground(T comp, SkinColor skinColor) { comp.setSelectionBackground(skinColor != null ? skinColor.color : null); this.selectionBackground = skinColor; }
+        protected void resetSelectionBackground() { this.selectionBackground = null; }
+
+        @Override
+        protected void reapply(T comp) {
+            if (this.selectionForeground != null) { setSelectionForeground(comp, this.selectionForeground); }
+            if (this.selectionBackground != null) { setSelectionBackground(comp, this.selectionBackground); }
+            super.reapply(comp);
+        }
+    }
+
+    public static interface ISkinnedComponent<T extends Component> {
+        public ComponentSkin<T> getSkin();
+    }
+
+    public static class SkinnedFrame extends JFrame implements ISkinnedComponent<JFrame> {
+        private static final long serialVersionUID = -7737786252990479019L;
+
+        private SkinBorder border;
+
+        private WindowSkin<JFrame> skin;
+        public WindowSkin<JFrame> getSkin() {
+            if (skin == null) { skin = new WindowSkin<JFrame>(); }
+            return skin;
+        }
+
+        public SkinnedFrame() { super(); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setIconImage(SkinImage skinImage) { getSkin().setIconImage(this, skinImage); }
+        @Override public void setIconImage(Image image) { getSkin().resetIconImage(); super.setIconImage(image); }
+
+        //relay border to root pane
+        public void setBorder(SkinBorder skinBorder) { getRootPane().setBorder(skinBorder != null ? skinBorder.createBorder() : null); this.border = skinBorder; }
+        public void setBorder(Border border) { getRootPane().setBorder(border); this.border = null; }
+
+        @Override
+        public void paint(Graphics g) {
+            if (getSkin().update(this)) {
+                if (this.border != null) { setBorder(this.border); }
+            }
+            super.paint(g);
+        }
+    }
+    public static class SkinnedDialog extends JDialog implements ISkinnedComponent<JDialog> {
+        private static final long serialVersionUID = -1086360770925335844L;
+
+        private WindowSkin<JDialog> skin;
+        public WindowSkin<JDialog> getSkin() {
+            if (skin == null) { skin = new WindowSkin<JDialog>(); }
+            return skin;
+        }
+
+        public SkinnedDialog() { super(); }
+        public SkinnedDialog(Frame owner, boolean modal) { super(owner, modal); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setIconImage(SkinImage skinImage) { getSkin().setIconImage(this, skinImage); }
+        @Override public void setIconImage(Image image) { getSkin().resetIconImage(); super.setIconImage(image); }
+
+        @Override
+        public void paint(Graphics g) {
+            getSkin().update(this);
+            super.paint(g);
+        }
+    }
+    public static class SkinnedLayeredPane extends JLayeredPane implements ISkinnedComponent<JLayeredPane> {
+        private static final long serialVersionUID = -8325505112790327931L;
+
+        private JComponentSkin<JLayeredPane> skin;
+        public JComponentSkin<JLayeredPane> getSkin() {
+            if (skin == null) { skin = new JComponentSkin<JLayeredPane>(); }
+            return skin;
+        }
+
+        public SkinnedLayeredPane() { super(); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedMenuBar extends JMenuBar implements ISkinnedComponent<JMenuBar> {
+        private static final long serialVersionUID = -183434586261989294L;
+
+        private JComponentSkin<JMenuBar> skin;
+        public JComponentSkin<JMenuBar> getSkin() {
+            if (skin == null) {skin = new JComponentSkin<JMenuBar>(); }
+            return skin;
+        }
+
+        public SkinnedMenuBar() { super(); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedLabel extends JLabel implements ISkinnedComponent<JLabel> {
+        private static final long serialVersionUID = 7046941724535782054L;
+
+        private JLabelSkin<JLabel> skin;
+        public JLabelSkin<JLabel> getSkin() {
+            if (skin == null) { skin = new JLabelSkin<JLabel>(); }
+            return skin;
+        }
+
+        public SkinnedLabel() { super(); }
+        public SkinnedLabel(String text) { super(text); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedComboBox<E> extends JComboBox<E> implements ISkinnedComponent<JComboBox<E>> {
+        private static final long serialVersionUID = 9032839876990765149L;
+
+        private JComponentSkin<JComboBox<E>> skin;
+        public JComponentSkin<JComboBox<E>> getSkin() {
+            if (skin == null) { skin = new JComponentSkin<JComboBox<E>>(); }
+            return skin;
+        }
+
+        public SkinnedComboBox() { super(); }
+        public SkinnedComboBox(ComboBoxModel<E> model0) { super(model0); }
+        public SkinnedComboBox(E[] items) { super(items); }
+        public SkinnedComboBox(Vector<E> items) { super(items); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedList<E> extends JList<E> implements ISkinnedComponent<JList<E>> {
+        private static final long serialVersionUID = -2449981390420167627L;
+
+        private JComponentSkin<JList<E>> skin;
+        public JComponentSkin<JList<E>> getSkin() {
+            if (skin == null) { skin = new JComponentSkin<JList<E>>(); }
+            return skin;
+        }
+
+        public SkinnedList() { super(); }
+        public SkinnedList(ListModel<E> model0) { super(model0); }
+        public SkinnedList(E[] items) { super(items); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedPanel extends JPanel implements ISkinnedComponent<JPanel> {
+        private static final long serialVersionUID = -1842620489613307379L;
+
+        private JComponentSkin<JPanel> skin;
+        public JComponentSkin<JPanel> getSkin() {
+            if (skin == null) { skin = new JComponentSkin<JPanel>(); }
+            return skin;
+        }
+
+        public SkinnedPanel() { super(); }
+        public SkinnedPanel(final LayoutManager layoutManager) { super(layoutManager); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static abstract class FPanelBase extends SkinnedPanel {
+        private static final long serialVersionUID = -7223626737375474132L;
+
+        private SkinImage foregroundImage, backgroundTexture;
+        private SkinColor backgroundTextureOverlay;
+
+        protected FPanelBase() { super(); }
+        public FPanelBase(final LayoutManager layoutManager) { super(layoutManager); }
+
+        protected abstract void onSetForegroundImage(final Image image);
+        public final void setForegroundImage(final SkinImage skinImage) { onSetForegroundImage(skinImage.image); this.foregroundImage = skinImage; }
+        public final void setForegroundImage(final Image image) { onSetForegroundImage(image); this.foregroundImage = null; }
+        public final void setForegroundImage(final ImageIcon imageIcon) { onSetForegroundImage(imageIcon.getImage()); this.foregroundImage = null; }
+
+        protected abstract void onSetBackgroundTexture(final Image image);
+        public final void setBackgroundTexture(final SkinImage skinImage) { onSetBackgroundTexture(skinImage.image); this.backgroundTexture = skinImage; }
+        public final void setBackgroundTexture(final Image image) { onSetBackgroundTexture(image); this.backgroundTexture = null; }
+        public final void setBackgroundTexture(final ImageIcon imageIcon) { onSetBackgroundTexture(imageIcon.getImage()); this.backgroundTexture = null; }
+
+        protected abstract void onSetBackgroundTextureOverlay(final Color color);
+        public final void setBackgroundTextureOverlay(final SkinColor skinColor) { onSetBackgroundTextureOverlay(skinColor.color); this.backgroundTextureOverlay = skinColor; }
+        public final void setBackgroundTextureOverlay(final Color color) { onSetBackgroundTextureOverlay(color); this.backgroundTextureOverlay = null; }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            if (getSkin().update(this)) {
+                if (this.foregroundImage != null) { this.setForegroundImage(this.foregroundImage); }
+                if (this.backgroundTexture != null) { this.setBackgroundTexture(this.backgroundTexture); }
+                if (this.backgroundTextureOverlay != null) { this.setBackgroundTextureOverlay(this.backgroundTextureOverlay); }
+            }
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedScrollPane extends JScrollPane implements ISkinnedComponent<JScrollPane> {
+        private static final long serialVersionUID = 8958616297664604107L;
+
+        private JComponentSkin<JScrollPane> skin;
+        public JComponentSkin<JScrollPane> getSkin() {
+            if (skin == null) { skin = new JComponentSkin<JScrollPane>(); }
+            return skin;
+        }
+
+        public SkinnedScrollPane() { super(); }
+        public SkinnedScrollPane(Component comp) { super(comp); }
+        public SkinnedScrollPane(int vsbPolicy, int hsbPolicy) { super(vsbPolicy, hsbPolicy); }
+        public SkinnedScrollPane(Component comp, int vsbPolicy, int hsbPolicy) { super(comp, vsbPolicy, hsbPolicy); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedTabbedPane extends JTabbedPane implements ISkinnedComponent<JTabbedPane> {
+        private static final long serialVersionUID = 6069807433509074270L;
+
+        private JComponentSkin<JTabbedPane> skin;
+        public JComponentSkin<JTabbedPane> getSkin() {
+            if (skin == null) { skin = new JComponentSkin<JTabbedPane>(); }
+            return skin;
+        }
+
+        public SkinnedTabbedPane() { super(); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedButton extends JButton implements ISkinnedComponent<JButton> {
+        private static final long serialVersionUID = -1868724405885582324L;
+
+        private AbstractButtonSkin<JButton> skin;
+        public AbstractButtonSkin<JButton> getSkin() {
+            if (skin == null) { skin = new AbstractButtonSkin<JButton>(); }
+            return skin;
+        }
+
+        public SkinnedButton() { super(); }
+        public SkinnedButton(String text) { super(text); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+
+        public void setPressedIcon(SkinImage skinImage) { getSkin().setPressedIcon(this, skinImage); }
+        @Override public void setPressedIcon(Icon icon) { getSkin().resetPressedIcon(); super.setPressedIcon(icon); }
+
+        public void setRolloverIcon(SkinImage skinImage) { getSkin().setRolloverIcon(this, skinImage); }
+        @Override public void setRolloverIcon(Icon icon) { getSkin().resetRolloverIcon(); super.setRolloverIcon(icon); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedCheckBox extends JCheckBox implements ISkinnedComponent<JCheckBox> {
+        private static final long serialVersionUID = 6283239481504889377L;
+
+        private AbstractButtonSkin<JCheckBox> skin;
+        public AbstractButtonSkin<JCheckBox> getSkin() {
+            if (skin == null) { skin = new AbstractButtonSkin<JCheckBox>(); }
+            return skin;
+        }
+
+        public SkinnedCheckBox() { super(); }
+        public SkinnedCheckBox(String text) { super(text); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedRadioButton extends JRadioButton implements ISkinnedComponent<JRadioButton> {
+        private static final long serialVersionUID = 2724598726704588129L;
+
+        private AbstractButtonSkin<JRadioButton> skin;
+        public AbstractButtonSkin<JRadioButton> getSkin() {
+            if (skin == null) { skin = new AbstractButtonSkin<JRadioButton>(); }
+            return skin;
+        }
+
+        public SkinnedRadioButton() { super(); }
+        public SkinnedRadioButton(String text) { super(text); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedMenu extends JMenu implements ISkinnedComponent<JMenu> {
+        private static final long serialVersionUID = -1067731457894672601L;
+
+        private AbstractButtonSkin<JMenu> skin;
+        public AbstractButtonSkin<JMenu> getSkin() {
+            if (skin == null) { skin = new AbstractButtonSkin<JMenu>(); }
+            return skin;
+        }
+
+        public SkinnedMenu() { super(); }
+        public SkinnedMenu(String text) { super(text); }
+        public SkinnedMenu(Action a) { super(a); }
+
+        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedMenuItem extends JMenuItem implements ISkinnedComponent<JMenuItem> {
+        private static final long serialVersionUID = 3738616219203986847L;
+
+        private AbstractButtonSkin<JMenuItem> skin;
+        public AbstractButtonSkin<JMenuItem> getSkin() {
+            if (skin == null) { skin = new AbstractButtonSkin<JMenuItem>(); }
+            return skin;
+        }
+
+        public SkinnedMenuItem() { super(); }
+        public SkinnedMenuItem(String text) { super(text); }
+        public SkinnedMenuItem(Action a) { super(a); }
+
+        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedCheckBoxMenuItem extends JCheckBoxMenuItem implements ISkinnedComponent<JCheckBoxMenuItem> {
+        private static final long serialVersionUID = 7972531296466954594L;
+
+        private AbstractButtonSkin<JCheckBoxMenuItem> skin;
+        public AbstractButtonSkin<JCheckBoxMenuItem> getSkin() {
+            if (skin == null) { skin = new AbstractButtonSkin<JCheckBoxMenuItem>(); }
+            return skin;
+        }
+
+        public SkinnedCheckBoxMenuItem() { super(); }
+        public SkinnedCheckBoxMenuItem(String text) { super(text); }
+        public SkinnedCheckBoxMenuItem(Action a) { super(a); }
+
+        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedRadioButtonMenuItem extends JRadioButtonMenuItem implements ISkinnedComponent<JRadioButtonMenuItem> {
+        private static final long serialVersionUID = -3609854793671399210L;
+
+        private AbstractButtonSkin<JRadioButtonMenuItem> skin;
+        public AbstractButtonSkin<JRadioButtonMenuItem> getSkin() {
+            if (skin == null) { skin = new AbstractButtonSkin<JRadioButtonMenuItem>(); }
+            return skin;
+        }
+
+        public SkinnedRadioButtonMenuItem() { super(); }
+        public SkinnedRadioButtonMenuItem(String text) { super(text); }
+        public SkinnedRadioButtonMenuItem(Action a) { super(a); }
+
+        public void setIcon(SkinImage skinImage) { getSkin().setIcon(this, skinImage); }
+        @Override public void setIcon(Icon icon) { getSkin().resetIcon(); super.setIcon(icon); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedTextField extends JTextField implements ISkinnedComponent<JTextField> {
+        private static final long serialVersionUID = 5133370343400427635L;
+
+        private JTextComponentSkin<JTextField> skin;
+        public JTextComponentSkin<JTextField> getSkin() {
+            if (skin == null) { skin = new JTextComponentSkin<JTextField>(); }
+            return skin;
+        }
+
+        public SkinnedTextField() { super(); }
+        public SkinnedTextField(String text) { super(text); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
+        @Override public void setCaretColor(Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedTextArea extends JTextArea implements ISkinnedComponent<JTextArea> {
+        private static final long serialVersionUID = 4191648156716570907L;
+
+        private JTextComponentSkin<JTextArea> skin;
+        public JTextComponentSkin<JTextArea> getSkin() {
+            if (skin == null) { skin = new JTextComponentSkin<JTextArea>(); }
+            return skin;
+        }
+
+        public SkinnedTextArea() { super(); }
+        public SkinnedTextArea(String text) { super(text); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
+        @Override public void setCaretColor(Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedTextPane extends JTextPane implements ISkinnedComponent<JTextPane> {
+        private static final long serialVersionUID = -209191600467610844L;
+
+        private JTextComponentSkin<JTextPane> skin;
+        public JTextComponentSkin<JTextPane> getSkin() {
+            if (skin == null) { skin = new JTextComponentSkin<JTextPane>(); }
+            return skin;
+        }
+
+        public SkinnedTextPane() { super(); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
+        @Override public void setCaretColor(Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedEditorPane extends JEditorPane implements ISkinnedComponent<JEditorPane> {
+        private static final long serialVersionUID = 88434642461539322L;
+
+        private JTextComponentSkin<JEditorPane> skin;
+        public JTextComponentSkin<JEditorPane> getSkin() {
+            if (skin == null) { skin = new JTextComponentSkin<JEditorPane>(); }
+            return skin;
+        }
+
+        public SkinnedEditorPane() { super(); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(this, skinColor); }
+        @Override public void setCaretColor(Color color) { getSkin().resetCaretColor(); super.setCaretColor(color); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedSpinner extends JSpinner implements ISkinnedComponent<JFormattedTextField> {
+        private static final long serialVersionUID = -7379547491760852368L;
+
+        //special case to treat as text component
+        private JTextComponentSkin<JFormattedTextField> skin;
+        public JTextComponentSkin<JFormattedTextField> getSkin() {
+            if (skin == null) { skin = new JTextComponentSkin<JFormattedTextField>(); }
+            return skin;
+        }
+
+        private final JFormattedTextField textField;
+        public JFormattedTextField getTextField() { return textField; }
+
+        public SkinnedSpinner() {
+            textField = ((JSpinner.NumberEditor)this.getEditor()).getTextField();
+        }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(textField, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); textField.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(textField, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); textField.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(textField, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); textField.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(textField, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); textField.setCursor(cursor); }
+
+        public void setCaretColor(SkinColor skinColor) { getSkin().setCaretColor(textField, skinColor); }
+        public void setCaretColor(Color color) { getSkin().resetCaretColor(); textField.setCaretColor(color); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(textField);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedSlider extends JSlider implements ISkinnedComponent<JSlider> {
+        private static final long serialVersionUID = -7846549500200072420L;
+
+        private JComponentSkin<JSlider> skin;
+        public JComponentSkin<JSlider> getSkin() {
+            if (skin == null) { skin = new JComponentSkin<JSlider>(); }
+            return skin;
+        }
+
+        public SkinnedSlider() { super(); }
+        public SkinnedSlider(int orientation) { super(orientation); }
+        public SkinnedSlider(int min, int max) { super(min, max); }
+        public SkinnedSlider(int min, int max, int value) { super(min, max, value); }
+        public SkinnedSlider(int orientation, int min, int max, int value) { super(orientation, min, max, value); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedTable extends JTable implements ISkinnedComponent<JTable> {
+        private static final long serialVersionUID = -4194423897092773473L;
+
+        private JTableSkin<JTable> skin;
+        public JTableSkin<JTable> getSkin() {
+            if (skin == null) { skin = new JTableSkin<JTable>(); }
+            return skin;
+        }
+
+        public SkinnedTable() { super(); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        public void setSelectionForeground(SkinColor skinColor) { getSkin().setSelectionForeground(this, skinColor); }
+        public void setSelectionForeground(Color color) { getSkin().resetSelectionForeground(); super.setSelectionForeground(color); }
+
+        public void setSelectionBackground(SkinColor skinColor) { getSkin().setSelectionBackground(this, skinColor); }
+        public void setSelectionBackground(Color color) { getSkin().resetSelectionBackground(); super.setSelectionBackground(color); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
         }
     }
 }

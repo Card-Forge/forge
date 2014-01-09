@@ -61,7 +61,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     // CTR
     private VSubmenuConstructed() {
-        FSkin.get(lblTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         
         //This listener will look for any of the radio buttons being selected
         //and call the method that shows/hides tabs appropriately.

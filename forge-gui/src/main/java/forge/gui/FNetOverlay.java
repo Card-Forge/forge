@@ -7,10 +7,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,6 +16,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.control.ChatArea;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.FTextArea;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.SmartScroller;
@@ -32,14 +30,14 @@ import forge.net.Lobby;
 public enum FNetOverlay {
     SINGLETON_INSTANCE;
 
-    private final JPanel pnl = new OverlayPanel();
+    private final OverlayPanel pnl = new OverlayPanel();
     /** @return {@link javax.swing.JPanel} */
-    public JPanel getPanel() {
+    public SkinnedPanel getPanel() {
         return this.pnl;
     }
     
-    private final JTextArea txtLog = new FTextArea();
-    private final JTextField txtInput = new FTextField.Builder().maxLength(60).build();
+    private final FTextArea txtLog = new FTextArea();
+    private final FTextField txtInput = new FTextField.Builder().maxLength(60).build();
     private final FLabel cmdSend = new FLabel.ButtonBuilder().text("Send").build(); 
 
     
@@ -67,11 +65,10 @@ public enum FNetOverlay {
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
     private FNetOverlay() {
-        FSkin.JComponentSkin<JPanel> pnlSkin = FSkin.get(pnl);
         pnl.setOpaque(false);
         pnl.setVisible(false);
-        pnlSkin.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
-        pnlSkin.setLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        pnl.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
 
         pnl.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 2"));
 //        pnl.add(new FLabel.Builder().text("Loading new game...").fontSize(22).build(), "h 40px!, align center");
@@ -80,7 +77,7 @@ public enum FNetOverlay {
 
         txtLog.setOpaque(true);
         txtLog.setFocusable(true);
-        FSkin.get(txtLog).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        txtLog.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
 
         JScrollPane _operationLogScroller = new JScrollPane(txtLog);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -88,7 +85,7 @@ public enum FNetOverlay {
         new SmartScroller(_operationLogScroller);
         pnl.add(_operationLogScroller, "pushx, hmin 24, pushy, growy, growx, gap 2px 2px 2px 0, sx 2");
 
-        FSkin.get(txtInput).setLineBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
+        txtInput.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         pnl.add(txtInput, "pushx, growx, h 26px!, gap 2px 2px 2px 0");
         pnl.add(cmdSend, "w 60px!, h 28px!, gap 0 0 2px 0");
         
@@ -101,7 +98,7 @@ public enum FNetOverlay {
         pnl.setVisible(true);
     }
 
-    private class OverlayPanel extends JPanel {
+    private class OverlayPanel extends SkinnedPanel {
         private static final long serialVersionUID = -5056220798272120558L;
 
         /**

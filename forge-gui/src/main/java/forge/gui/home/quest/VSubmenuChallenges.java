@@ -3,11 +3,11 @@ package forge.gui.home.quest;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
@@ -45,11 +45,11 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     private final FScrollPane scrChallenges = new FScrollPane(pnlChallenges,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private final JButton btnStart  = new StartButton();
+    private final StartButton btnStart  = new StartButton();
     private final FComboBoxWrapper<String> cbxPet  = new FComboBoxWrapper<String>();
-    private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
-    private final JCheckBox cbCharm = new FCheckBox("Use Charm of Vigor");
-    private final JLabel lblZep   = new FLabel.Builder().text("<html>Launch<br>Zeppelin</html>")
+    private final FCheckBox cbPlant = new FCheckBox("Summon Plant");
+    private final FCheckBox cbCharm = new FCheckBox("Use Charm of Vigor");
+    private final FLabel lblZep   = new FLabel.Builder().text("<html>Launch<br>Zeppelin</html>")
             .hoverable(true).icon(FSkin.getIcon(FSkin.QuestIcons.ICO_ZEP))
             .fontSize(16).build();
     private final FLabel lblWorld   = new FLabel.Builder()
@@ -72,7 +72,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         .fontSize(15).build();
     private final LblHeader lblTitle = new LblHeader("Quest Mode: Challenges");
 
-    private final JLabel lblInfo = new FLabel.Builder().text("Which challenge will you attempt?")
+    private final FLabel lblInfo = new FLabel.Builder().text("Which challenge will you attempt?")
             .fontStyle(Font.BOLD).fontSize(16)
             .fontAlign(SwingConstants.LEFT).build();
 
@@ -93,7 +93,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
      * Constructor.
      */
     private VSubmenuChallenges() {
-        scrChallenges.setBorder(null);
+        scrChallenges.setBorder((Border)null);
         pnlChallenges.setOpaque(false);
         pnlChallenges.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
@@ -206,7 +206,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     }
 
     @Override
-    public JLabel getLblCurrentDeck() {
+    public FLabel getLblCurrentDeck() {
         return lblCurrentDeck;
     }
 
@@ -240,12 +240,12 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     }
 
     @Override
-    public JCheckBox getCbPlant() {
+    public FCheckBox getCbPlant() {
         return cbPlant;
     }
 
     @Override
-    public JLabel getLblZep() {
+    public FLabel getLblZep() {
         return lblZep;
     }
 
@@ -304,7 +304,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
 	/**
 	 * @return the cbCharm
 	 */
-	public JCheckBox getCbCharm() {
+	public FCheckBox getCbCharm() {
 		return cbCharm;
 	}
 }

@@ -31,7 +31,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
@@ -46,7 +45,7 @@ import forge.game.combat.Combat;
 import forge.gui.CardContainer;
 import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.CardFaceSymbols;
-import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.IDisposable;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.arcane.util.OutlinedLabel;
@@ -59,7 +58,7 @@ import forge.view.arcane.util.OutlinedLabel;
  * @author Forge
  * @version $Id$
  */
-public class CardPanel extends JPanel implements CardContainer, IDisposable {
+public class CardPanel extends SkinnedPanel implements CardContainer, IDisposable {
     /** Constant <code>serialVersionUID=2361907095724263295L</code>. */
     private static final long serialVersionUID = 2361907095724263295L;
     /**
@@ -101,7 +100,6 @@ public class CardPanel extends JPanel implements CardContainer, IDisposable {
     private double tappedAngle = 0;
     private ScaledImagePanel imagePanel;
 
-    private final FSkin.JComponentSkin<CardPanel> skin;
     private OutlinedLabel titleText;
     private OutlinedLabel ptText;
     private OutlinedLabel damageText;
@@ -123,7 +121,6 @@ public class CardPanel extends JPanel implements CardContainer, IDisposable {
     public CardPanel(final Card newGameCard) {
         this.gameCard = newGameCard;
 
-        this.skin = FSkin.get(this);
         this.setBackground(Color.black);
         this.setOpaque(false);
 
@@ -350,7 +347,7 @@ public class CardPanel extends JPanel implements CardContainer, IDisposable {
     private void drawManaCost(final Graphics g, ManaCost cost, int deltaY ) {
         int width = CardFaceSymbols.getWidth(cost);
         int height = CardFaceSymbols.getHeight();
-        CardFaceSymbols.draw(skin, g, cost, (this.cardXOffset + (this.cardWidth / 2)) - (width / 2), deltaY + this.cardYOffset + (this.cardHeight / 2) - height/2);
+        CardFaceSymbols.draw(g, cost, (this.cardXOffset + (this.cardWidth / 2)) - (width / 2), deltaY + this.cardYOffset + (this.cardHeight / 2) - height/2);
     }
 
     /** {@inheritDoc} */
@@ -387,13 +384,13 @@ public class CardPanel extends JPanel implements CardContainer, IDisposable {
         final int yCounters = (this.cardYOffset + this.cardHeight) - (this.cardHeight / 3) - 40;
 
         if (counters == 1) {
-            CardFaceSymbols.drawSymbol("counters1", skin, g, this.cardXOffset - 15, yCounters);
+            CardFaceSymbols.drawSymbol("counters1", g, this.cardXOffset - 15, yCounters);
         } else if (counters == 2) {
-            CardFaceSymbols.drawSymbol("counters2", skin, g, this.cardXOffset - 15, yCounters);
+            CardFaceSymbols.drawSymbol("counters2", g, this.cardXOffset - 15, yCounters);
         } else if (counters == 3) {
-            CardFaceSymbols.drawSymbol("counters3", skin, g, this.cardXOffset - 15, yCounters);
+            CardFaceSymbols.drawSymbol("counters3", g, this.cardXOffset - 15, yCounters);
         } else if (counters > 3) {
-            CardFaceSymbols.drawSymbol("countersMulti", skin, g, this.cardXOffset - 15, yCounters);
+            CardFaceSymbols.drawSymbol("countersMulti", g, this.cardXOffset - 15, yCounters);
         }
 
         final int combatXSymbols = (this.cardXOffset + (this.cardWidth / 4)) - 16;
@@ -403,28 +400,28 @@ public class CardPanel extends JPanel implements CardContainer, IDisposable {
         Combat combat = card.getGame().getCombat();
         if( combat != null ) {
             if ( combat.isAttacking(card))
-                CardFaceSymbols.drawSymbol("attack", skin, g, combatXSymbols, ySymbols);
+                CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols);
             if ( combat.isBlocking(card))
-                CardFaceSymbols.drawSymbol("defend", skin, g, combatXSymbols, ySymbols);
+                CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols);
         }
 
         if (card.isSick() && card.isInPlay()) {
-            CardFaceSymbols.drawSymbol("summonsick", skin, g, stateXSymbols, ySymbols);
+            CardFaceSymbols.drawSymbol("summonsick", g, stateXSymbols, ySymbols);
         }
 
         if (card.isPhasedOut()) {
-            CardFaceSymbols.drawSymbol("phasing", skin, g, stateXSymbols, ySymbols);
+            CardFaceSymbols.drawSymbol("phasing", g, stateXSymbols, ySymbols);
         }
 
         if (CMatchUI.SINGLETON_INSTANCE.isUsedToPay(card)) {
-            CardFaceSymbols.drawSymbol("sacrifice", skin, g, (this.cardXOffset + (this.cardWidth / 2)) - 20,
+            CardFaceSymbols.drawSymbol("sacrifice", g, (this.cardXOffset + (this.cardWidth / 2)) - 20,
                     (this.cardYOffset + (this.cardHeight / 2)) - 20);
         }
 
         if (card.getFoil() > 0) {
             final String fl = String.format("foil%02d", card.getFoil());
             final int z = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
-            CardFaceSymbols.drawOther(skin, g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
+            CardFaceSymbols.drawOther(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
                     this.cardHeight - (2 * z));
         }
     }

@@ -11,7 +11,6 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -21,8 +20,9 @@ import com.google.common.base.Predicate;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.Colors;
-import forge.gui.toolbox.FSkin.JComponentSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinnedCheckBox;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.itemmanager.ItemManager;
@@ -35,10 +35,9 @@ import forge.item.InventoryItem;
 public abstract class ItemFilter<T extends InventoryItem> {
     public final static int PANEL_HEIGHT = 28;
 
-    public static void layoutCheckbox(JCheckBox cb) {
-        JComponentSkin<JCheckBox> skin = FSkin.get(cb);
-        skin.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        skin.setFont(FSkin.getFont(12));
+    public static void layoutCheckbox(SkinnedCheckBox cb) {
+        cb.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        cb.setFont(FSkin.getFont(12));
         cb.setOpaque(false);
         cb.setFocusable(false);
     }
@@ -46,7 +45,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
     protected final ItemManager<? super T> itemManager;
     private FilterPanel panel;
     private Widget widget;
-    private final JCheckBox chkEnable = new JCheckBox();
+    private final SkinnedCheckBox chkEnable = new SkinnedCheckBox();
     private RemoveButton btnRemove;
 
     protected ItemFilter(ItemManager<? super T> itemManager0) {
@@ -159,11 +158,11 @@ public abstract class ItemFilter<T extends InventoryItem> {
     protected abstract Predicate<T> buildPredicate();
 
     @SuppressWarnings("serial")
-    private class FilterPanel extends JPanel {
+    private class FilterPanel extends SkinnedPanel {
         private FilterPanel() {
             setLayout(null);
             setOpaque(false);
-            FSkin.get(this).setMatteBorder(0, 0, 1, 0, FSkin.getColor(Colors.CLR_TEXT));
+            this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(Colors.CLR_TEXT)));
         }
 
         @Override

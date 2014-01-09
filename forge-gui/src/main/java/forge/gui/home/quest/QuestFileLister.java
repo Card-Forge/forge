@@ -8,9 +8,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
@@ -18,6 +18,8 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinnedButton;
+import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
 
@@ -79,8 +81,8 @@ public class QuestFileLister extends JPanel {
         // Title row
         // Note: careful with the widths of the rows here;
         // scroll panes will have difficulty dynamically resizing if 100% width is set.
-        final JPanel rowTitle = new JPanel();
-        FSkin.get(rowTitle).setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
+        final SkinnedPanel rowTitle = new SkinnedPanel();
+        rowTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         rowTitle.setLayout(new MigLayout("insets 0, gap 0"));
         rowTitle.add(new FLabel.Builder().text("Name").fontAlign(SwingConstants.LEFT).build(), "w 85%-112px!, h 20px!, gaptop 5px, gapleft 48px");
         rowTitle.add(new FLabel.Builder().text("Mode").fontAlign(SwingConstants.LEFT).build(), "w 15%!, h 20px!, gaptop 5px, gapleft 4px");
@@ -111,17 +113,16 @@ public class QuestFileLister extends JPanel {
         return previousSelect.getQuestData();
     }
 
-    private class DeleteButton extends JButton {
+    private class DeleteButton extends SkinnedButton {
         public DeleteButton(final RowPanel r0) {
             super();
-            FSkin.AbstractButtonSkin<DeleteButton> skin = FSkin.get(this);
             setRolloverEnabled(true);
-            skin.setPressedIcon(icoDeleteOver);
-            skin.setRolloverIcon(icoDeleteOver);
-            skin.setIcon(icoDelete);
+            setPressedIcon(icoDeleteOver);
+            setRolloverIcon(icoDeleteOver);
+            setIcon(icoDelete);
             setOpaque(false);
             setContentAreaFilled(false);
-            setBorder(null);
+            setBorder((Border)null);
             setBorderPainted(false);
             setToolTipText("Delete this quest");
 
@@ -129,14 +130,14 @@ public class QuestFileLister extends JPanel {
                 @Override
                 public void onMouseEnter(MouseEvent e) {
                     if (!r0.selected) {
-                        FSkin.get(r0).setBackground(clrHover);
+                        r0.setBackground(clrHover);
                         r0.setOpaque(true);
                     }
                 }
                 @Override
                 public void onMouseExit(MouseEvent e) {
                     if (!r0.selected) {
-                        FSkin.get(r0).setBackground(clrDefault);
+                        r0.setBackground(clrDefault);
                         r0.setOpaque(false);
                     }
                 }
@@ -148,17 +149,16 @@ public class QuestFileLister extends JPanel {
         }
     }
 
-    private class EditButton extends JButton {
+    private class EditButton extends SkinnedButton {
         public EditButton(final RowPanel r0) {
             super();
-            FSkin.AbstractButtonSkin<EditButton> skin = FSkin.get(this);
             setRolloverEnabled(true);
-            skin.setPressedIcon(icoEditOver);
-            skin.setRolloverIcon(icoEditOver);
-            skin.setIcon(icoEdit);
+            setPressedIcon(icoEditOver);
+            setRolloverIcon(icoEditOver);
+            setIcon(icoEdit);
             setOpaque(false);
             setContentAreaFilled(false);
-            setBorder(null);
+            setBorder((Border)null);
             setBorderPainted(false);
             setToolTipText("Rename this quest");
 
@@ -166,14 +166,14 @@ public class QuestFileLister extends JPanel {
                 @Override
                 public void onMouseEnter(MouseEvent e) {
                     if (!r0.selected) {
-                        FSkin.get(r0).setBackground(clrHover);
+                        r0.setBackground(clrHover);
                         r0.setOpaque(true);
                     }
                 }
                 @Override
                 public void onMouseExit(MouseEvent e) {
                     if (!r0.selected) {
-                        FSkin.get(r0).setBackground(clrDefault);
+                        r0.setBackground(clrDefault);
                         r0.setOpaque(false);
                     }
                 }
@@ -185,7 +185,7 @@ public class QuestFileLister extends JPanel {
         }
     }
 
-    private class RowPanel extends JPanel {
+    private class RowPanel extends SkinnedPanel {
         private boolean selected = false;
         private boolean hovered = false;
         private QuestData questData;
@@ -195,7 +195,7 @@ public class QuestFileLister extends JPanel {
             setOpaque(false);
             setBackground(new Color(0, 0, 0, 0));
             setLayout(new MigLayout("insets 0, gap 0"));
-            FSkin.get(this).setMatteBorder(0, 0, 1, 0, clrBorders);
+            this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, clrBorders));
             questData = qd0;
 
             this.addMouseListener(new FMouseAdapter() {
@@ -203,8 +203,8 @@ public class QuestFileLister extends JPanel {
                 public void onMouseEnter(final MouseEvent e) {
                     RowPanel.this.hovered = true;
                     if (!RowPanel.this.selected) {
-                        FSkin.get(((RowPanel) e.getSource())).setBackground(QuestFileLister.this.clrHover);
-                        ((RowPanel) e.getSource()).setOpaque(true);
+                        RowPanel.this.setBackground(QuestFileLister.this.clrHover);
+                        RowPanel.this.setOpaque(true);
                     }
                 }
 
@@ -212,15 +212,15 @@ public class QuestFileLister extends JPanel {
                 public void onMouseExit(final MouseEvent e) {
                     RowPanel.this.hovered = false;
                     if (!RowPanel.this.selected) {
-                        FSkin.get(((RowPanel) e.getSource())).setBackground(QuestFileLister.this.clrDefault);
-                        ((RowPanel) e.getSource()).setOpaque(false);
+                        RowPanel.this.setBackground(QuestFileLister.this.clrDefault);
+                        RowPanel.this.setOpaque(false);
                     }
                 }
 
                 @Override
                 public void onLeftMouseDown(final MouseEvent e) {
                     if (e.getClickCount() == 1) {
-                        QuestFileLister.this.selectHandler((RowPanel) e.getSource());
+                        QuestFileLister.this.selectHandler(RowPanel.this);
                     }
                 }
             });
@@ -229,9 +229,9 @@ public class QuestFileLister extends JPanel {
         public void setSelected(final boolean b0) {
             this.selected = b0;
             this.setOpaque(b0);
-            if (b0) { FSkin.get(this).setBackground(QuestFileLister.this.clrActive); }
-            else if (this.hovered) { FSkin.get(this).setBackground(QuestFileLister.this.clrHover); }
-            else { FSkin.get(this).setBackground(QuestFileLister.this.clrDefault); }
+            if (b0) { this.setBackground(QuestFileLister.this.clrActive); }
+            else if (this.hovered) { this.setBackground(QuestFileLister.this.clrHover); }
+            else { this.setBackground(QuestFileLister.this.clrDefault); }
         }
 
         public boolean isSelected() {
