@@ -1,6 +1,7 @@
 package forge.gui.toolbox;
 
 import java.awt.Component;
+import java.awt.FontMetrics;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -11,6 +12,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 import javax.swing.border.EmptyBorder;
 
+import forge.Singletons;
 import forge.gui.toolbox.FSkin.SkinnedList;
 
 /** 
@@ -19,6 +21,8 @@ import forge.gui.toolbox.FSkin.SkinnedList;
  */
 @SuppressWarnings("serial")
 public class FList<E> extends SkinnedList<E> {
+    private static final EmptyBorder itemBorder = new EmptyBorder(4, 3, 4, 3);
+
     public FList() {
         super();
         initialize();
@@ -70,6 +74,30 @@ public class FList<E> extends SkinnedList<E> {
         this.setSelectionBackground(FSkin.getColor(hasFocus() ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE));
     }
 
+    public int getAutoSizeWidth() {
+        FontMetrics metrics = this.getSkin().getFont().getFontMetrics();
+        int width = 0;
+        for (int i = 0; i < this.getModel().getSize(); i++) {
+            int itemWidth = metrics.stringWidth(this.getModel().getElementAt(i).toString());
+            if (itemWidth > width) {
+                width = itemWidth;
+            }
+        }
+        width += itemBorder.getBorderInsets().left + itemBorder.getBorderInsets().right; //account for item border insets
+
+        int minWidth = 150;
+        if (width < minWidth) {
+            width = minWidth;
+        }
+        else {
+            int maxWidth = Singletons.getView().getFrame().getWidth() / 2;
+            if (width > maxWidth) {
+                width = maxWidth;
+            }
+        }
+        return width;
+    }
+
     private class ComplexCellRenderer<E1> implements ListCellRenderer<E1> {
         private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
@@ -79,7 +107,7 @@ public class FList<E> extends SkinnedList<E> {
 
             JLabel lblItem = (JLabel) defaultRenderer.getListCellRendererComponent(
                     lst0, val0, i0, isSelected, cellHasFocus);
-            lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
+            lblItem.setBorder(itemBorder);
             return lblItem;
         }
     }

@@ -22,6 +22,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Frame;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -1260,6 +1261,10 @@ public enum FSkin {
             return g.getFontMetrics(this.font).stringWidth(text);
         }
 
+        public FontMetrics getFontMetrics() {
+            return Singletons.getView().getFrame().getGraphics().getFontMetrics(this.font);
+        }
+
         private void updateFont() {
             this.font = baseFont.deriveFont(this.style, this.size);
         }
@@ -1903,6 +1908,7 @@ public enum FSkin {
         protected void setBackground(T comp, SkinColor skinColor) { comp.setBackground(skinColor != null ? skinColor.color : null); this.background = skinColor; }
         protected void resetBackground() { this.background = null; }
 
+        public SkinFont getFont() { return this.font; }
         protected void setFont(T comp, SkinFont skinFont) { comp.setFont(skinFont != null ? skinFont.font : null); this.font = skinFont; }
         protected void resetFont() { this.font = null; }
 

@@ -19,6 +19,7 @@
 package forge.gui;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -97,12 +98,19 @@ public class ListChooser<T> {
         if (maxChoices == 1 || minChoices == -1) {
             this.lstChoices.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         }
-        
+
         if (display != null) {
             this.lstChoices.setCellRenderer(new TransformedCellRenderer(display));
         }
 
-        this.optionPane = new FOptionPane(null, title, null, new FScrollPane(this.lstChoices), options, minChoices < 0 ? 0 : -1);
+        FScrollPane listScroller = new FScrollPane(this.lstChoices);
+        int minWidth = this.lstChoices.getAutoSizeWidth();
+        if (this.lstChoices.getModel().getSize() > this.lstChoices.getVisibleRowCount()) {
+            minWidth += listScroller.getVerticalScrollBar().getPreferredSize().width;
+        }
+        listScroller.setMinimumSize(new Dimension(minWidth, listScroller.getMinimumSize().height));
+
+        this.optionPane = new FOptionPane(null, title, null, listScroller, options, minChoices < 0 ? 0 : -1);
         this.optionPane.setButtonEnabled(0, minChoices <= 0);
 
         if (minChoices != -1) {
@@ -278,11 +286,11 @@ public class ListChooser<T> {
             ListChooser.this.optionPane.setButtonEnabled(0, (num >= ListChooser.this.minChoices) && (num <= ListChooser.this.maxChoices));
         }
     }
-    
+
     private class TransformedCellRenderer implements ListCellRenderer<T> {
         public final Function<T, String> transformer;
         public final DefaultListCellRenderer defRenderer;
-        
+
         /**
          * TODO: Write javadoc for Constructor.
          */
