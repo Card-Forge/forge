@@ -90,7 +90,7 @@ public class FList<E> extends SkinnedList<E> {
             width = minWidth;
         }
         else {
-            int maxWidth = Singletons.getView().getFrame().getWidth() / 2;
+            int maxWidth = Singletons.getView().getFrame().getWidth() - 50;
             if (width > maxWidth) {
                 width = maxWidth;
             }
