@@ -2018,6 +2018,25 @@ public enum FSkin {
             super.reapply(comp);
         }
     }
+    public static class JSkinSkin<T extends JList<?>> extends JComponentSkin<T> {
+        private SkinColor selectionForeground, selectionBackground;
+
+        protected JSkinSkin() {
+        }
+
+        protected void setSelectionForeground(T comp, SkinColor skinColor) { comp.setSelectionForeground(skinColor != null ? skinColor.color : null); this.selectionForeground = skinColor; }
+        protected void resetSelectionForeground() { this.selectionForeground = null; }
+
+        protected void setSelectionBackground(T comp, SkinColor skinColor) { comp.setSelectionBackground(skinColor != null ? skinColor.color : null); this.selectionBackground = skinColor; }
+        protected void resetSelectionBackground() { this.selectionBackground = null; }
+
+        @Override
+        protected void reapply(T comp) {
+            if (this.selectionForeground != null) { setSelectionForeground(comp, this.selectionForeground); }
+            if (this.selectionBackground != null) { setSelectionBackground(comp, this.selectionBackground); }
+            super.reapply(comp);
+        }
+    }
 
     public static interface ISkinnedComponent<T extends Component> {
         public ComponentSkin<T> getSkin();
@@ -2222,9 +2241,9 @@ public enum FSkin {
     public static class SkinnedList<E> extends JList<E> implements ISkinnedComponent<JList<E>> {
         private static final long serialVersionUID = -2449981390420167627L;
 
-        private JComponentSkin<JList<E>> skin;
-        public JComponentSkin<JList<E>> getSkin() {
-            if (skin == null) { skin = new JComponentSkin<JList<E>>(); }
+        private JSkinSkin<JList<E>> skin;
+        public JSkinSkin<JList<E>> getSkin() {
+            if (skin == null) { skin = new JSkinSkin<JList<E>>(); }
             return skin;
         }
 
@@ -2246,6 +2265,12 @@ public enum FSkin {
 
         public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
         @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
+
+        public void setSelectionForeground(SkinColor skinColor) { getSkin().setSelectionForeground(this, skinColor); }
+        @Override public void setSelectionForeground(Color color) { getSkin().resetSelectionForeground(); super.setSelectionForeground(color); }
+
+        public void setSelectionBackground(SkinColor skinColor) { getSkin().setSelectionBackground(this, skinColor); }
+        @Override public void setSelectionBackground(Color color) { getSkin().resetSelectionBackground(); super.setSelectionBackground(color); }
 
         @Override
         protected void paintComponent(Graphics g) {
@@ -2825,10 +2850,10 @@ public enum FSkin {
         @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         public void setSelectionForeground(SkinColor skinColor) { getSkin().setSelectionForeground(this, skinColor); }
-        public void setSelectionForeground(Color color) { getSkin().resetSelectionForeground(); super.setSelectionForeground(color); }
+        @Override public void setSelectionForeground(Color color) { getSkin().resetSelectionForeground(); super.setSelectionForeground(color); }
 
         public void setSelectionBackground(SkinColor skinColor) { getSkin().setSelectionBackground(this, skinColor); }
-        public void setSelectionBackground(Color color) { getSkin().resetSelectionBackground(); super.setSelectionBackground(color); }
+        @Override public void setSelectionBackground(Color color) { getSkin().resetSelectionBackground(); super.setSelectionBackground(color); }
 
         @Override
         protected void paintComponent(Graphics g) {

@@ -28,7 +28,6 @@ import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
-import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
@@ -42,6 +41,7 @@ import forge.FThreads;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FOptionPane;
+import forge.gui.toolbox.FScrollPane;
 
 /**
  * A simple class that shows a list of choices in a dialog. Two properties
@@ -102,7 +102,7 @@ public class ListChooser<T> {
             this.lstChoices.setCellRenderer(new TransformedCellRenderer(display));
         }
 
-        this.optionPane = new FOptionPane(null, title, null, new JScrollPane(this.lstChoices), options, minChoices < 0 ? 0 : -1);
+        this.optionPane = new FOptionPane(null, title, null, new FScrollPane(this.lstChoices), options, minChoices < 0 ? 0 : -1);
         this.optionPane.setButtonEnabled(0, minChoices <= 0);
 
         if (minChoices != -1) {

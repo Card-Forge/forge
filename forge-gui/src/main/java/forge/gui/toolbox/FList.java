@@ -1,6 +1,8 @@
 package forge.gui.toolbox;
 
 import java.awt.Component;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -9,7 +11,6 @@ import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 import javax.swing.border.EmptyBorder;
 
-import forge.gui.toolbox.FSkin.SkinnedLabel;
 import forge.gui.toolbox.FSkin.SkinnedList;
 
 /** 
@@ -20,7 +21,7 @@ import forge.gui.toolbox.FSkin.SkinnedList;
 public class FList<E> extends SkinnedList<E> {
     public FList() {
         super();
-        applySkin();
+        initialize();
     }
     /** 
      * A JList object using Forge skin properties.
@@ -30,7 +31,7 @@ public class FList<E> extends SkinnedList<E> {
      */
     public FList(final ListModel<E> model0) {
         super(model0);
-        applySkin();
+        initialize();
     }
 
     /**
@@ -41,17 +42,32 @@ public class FList<E> extends SkinnedList<E> {
      */
     public FList(E[] o0) {
         super(o0);
-        applySkin();
+        initialize();
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    private void applySkin() {
+    private void initialize() {
         this.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.setSelectionForeground(this.getSkin().getForeground());
+        this.setFont(FSkin.getFont(12));
+        this.setCellRenderer(new ComplexCellRenderer<E>());
 
-        ListCellRenderer<E> renderer = new ComplexCellRenderer<E>();
-        setCellRenderer(renderer);
+        this.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent arg0) {
+                updateSelectionBackground();
+            }
+
+            @Override
+            public void focusLost(FocusEvent arg0) {
+                updateSelectionBackground();
+            }
+        });
+        updateSelectionBackground();
+    }
+
+    private void updateSelectionBackground() {
+        this.setSelectionBackground(FSkin.getColor(hasFocus() ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE));
     }
 
     private class ComplexCellRenderer<E1> implements ListCellRenderer<E1> {
@@ -61,15 +77,9 @@ public class FList<E> extends SkinnedList<E> {
         public Component getListCellRendererComponent(JList<? extends E1> lst0, E1 val0, int i0,
             boolean isSelected, boolean cellHasFocus) {
 
-            JLabel defaultItem = (JLabel) defaultRenderer.getListCellRendererComponent(
+            JLabel lblItem = (JLabel) defaultRenderer.getListCellRendererComponent(
                     lst0, val0, i0, isSelected, cellHasFocus);
-            SkinnedLabel lblItem = new SkinnedLabel(defaultItem.getText());
-
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
-            lblItem.setBackground(FSkin.getColor(hasFocus() ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE));
-            lblItem.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            lblItem.setFont(FSkin.getFont(12));
-            lblItem.setOpaque(isSelected);
             return lblItem;
         }
     }
