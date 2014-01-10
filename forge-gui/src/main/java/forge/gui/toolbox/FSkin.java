@@ -1333,6 +1333,9 @@ public enum FSkin {
         Singletons.getControl().getForgeMenu().refresh();
         FComboBoxWrapper.refreshAllSkins();
         FComboBoxPanel.refreshAllSkins();
+
+        //repaint main frame to ensure all visible components apply the new skin
+        Singletons.getView().getFrame().repaint();
     }
 
     /**
