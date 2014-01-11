@@ -1,4 +1,4 @@
-Forge Beta: 01-10-2013 ver 1.5.9
+Forge Beta: 01-11-2013 ver 1.5.10
 
 
 13421 cards in total.
@@ -7,6 +7,11 @@ Forge Beta: 01-10-2013 ver 1.5.9
 -------------
 Release Notes
 -------------
+
+- Two quick bug fixes -
+Fixed an easily reproducible crash that would cause the game to become unplayable if you accidentally tried to cast a card or play a land that you couldn't play at that time.
+Fixed a crash that would occur at times when moving your mouse over the tables in deck editors.
+
 
 - Memory usage optimizations -
 Components are no longer cached in memory for skinning purposes, which used to prevent some components from ever being cleared from memory.
