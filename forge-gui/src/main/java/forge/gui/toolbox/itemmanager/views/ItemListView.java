@@ -328,14 +328,32 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             if (renderer != null) {
                 renderer.processMouseEvent(e, ItemListView.this, val, row, col); //give renderer a chance to process the mouse event
             }
-            super.processMouseEvent(e);
+            try {
+                super.processMouseEvent(e);
+            }
+            catch (Exception ex) { //trap error thrown by weird tooltip issue
+                ex.printStackTrace();
+            }
         }
 
         private String getCellTooltip(TableCellRenderer renderer, int row, int col, Object val) {
             Component cell = renderer.getTableCellRendererComponent(this, val, false, false, row, col);
 
+            // use a pre-set tooltip if it exists
+            if (cell instanceof JComponent) {
+                JComponent jcell = (JComponent)cell;
+                String tip = jcell.getToolTipText();
+                if (tip != null && !tip.isEmpty()) {
+                    return tip;
+                }
+            }
+
             // if we're conditionally showing the tooltip, check to see
             // if we shouldn't show it
+            if (val == null) { return null; }
+            String text = val.toString();
+            if (text.isEmpty()) { return null; }
+
             if (!(renderer instanceof ItemCellRenderer) || !((ItemCellRenderer)renderer).alwaysShowTooltip()) {
                 // if there's enough room (or there's no value), no tooltip
                 // we use '>' here instead of '>=' since that seems to be the
@@ -343,22 +361,13 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 // JTable renderer
                 int requiredWidth = cell.getPreferredSize().width;
                 TableColumn tableColumn = this.getColumnModel().getColumn(col);
-                if (null == val || tableColumn.getWidth() > requiredWidth) {
+                if (tableColumn.getWidth() > requiredWidth) {
                     return null;
                 }
             }
 
-            // use a pre-set tooltip if it exists
-            if (cell instanceof JComponent) {
-                JComponent jcell = (JComponent)cell;
-                String tip = jcell.getToolTipText();
-                if (tip != null) {
-                    return tip;
-                }
-            }
-
-            // otherwise, show the full text in the tooltip
-            return String.valueOf(val);
+            // if above checks passed, show the full text in the tooltip
+            return text;
         }
 
         @Override
