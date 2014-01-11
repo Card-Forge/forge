@@ -50,6 +50,10 @@ import forge.gui.toolbox.FSkin.SkinColor;
  */
 @SuppressWarnings("serial")
 public class FPanel extends FPanelBase implements ILocalRepaint {
+    private static final SkinColor selectedColor = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+    private static final SkinColor hoveredColor = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+    private static final SkinColor unselectedColor = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+
     // Defaults for adjustable values
     private boolean selectable          = false;
     private boolean hoverable           = false;
@@ -138,8 +142,8 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
     /** @param bool0 &emsp; boolean */
     public void setSelected(final boolean bool0) {
         selected = bool0;
-        if (bool0) { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
-        else       { this.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
+        if (bool0) { this.setBackground(selectedColor); }
+        else       { this.setBackground(unselectedColor); }
         repaintSelf();
     }
 
@@ -255,10 +259,11 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
     //========== Special draw methods
     private void drawBackgroundColor(final Graphics2D g2d0) {
         // Color background as appropriate
-        if (selected)           { FSkin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_ACTIVE)); }
-        else if (hovered)       { FSkin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_HOVER)); }
-        else if (selectable)    { FSkin.setGraphicsColor(g2d0, FSkin.getColor(FSkin.Colors.CLR_INACTIVE)); }
-        else                    { FSkin.setGraphicsColor(g2d0, getSkin().getBackground()); }
+        if (selected)                               { FSkin.setGraphicsColor(g2d0, selectedColor); }
+        else if (hovered)                           { FSkin.setGraphicsColor(g2d0, hoveredColor); }
+        else if (selectable)                        { FSkin.setGraphicsColor(g2d0, unselectedColor); }
+        else if (getSkin().getBackground() != null) { FSkin.setGraphicsColor(g2d0, getSkin().getBackground()); }
+        else                                        { g2d0.setColor(this.getBackground()); }
 
         g2d0.fillRoundRect(0, 0, pnlW, pnlH, cornerDiameter, cornerDiameter);
     }
