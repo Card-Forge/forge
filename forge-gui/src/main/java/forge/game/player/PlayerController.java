@@ -146,7 +146,10 @@ public abstract class PlayerController {
     public abstract List<Card> orderAttackers(Card blocker, List<Card> attackers);
 
     /** Shows the card to this player*/
-    public abstract void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner);
+    public final void reveal(Collection<Card> cards, ZoneType zone, Player owner) {
+        reveal(cards, zone, owner, null);
+    }
+    public abstract void reveal(Collection<Card> cards, ZoneType zone, Player owner, String messagePrefix);
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
     public abstract void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value);
     public abstract ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN);

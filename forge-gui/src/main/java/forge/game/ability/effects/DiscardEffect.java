@@ -180,7 +180,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     // Reveal
                     final List<Card> dPHand = p.getCardsIn(ZoneType.Hand);
 
-                    p.getOpponent().getController().reveal("Reveal " + p + " hand" , dPHand, ZoneType.Hand, p);
+                    p.getOpponent().getController().reveal(dPHand, ZoneType.Hand, p, "Reveal ");
 
                     String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
 
@@ -226,7 +226,8 @@ public class DiscardEffect extends SpellAbilityEffect {
                     List<Card> toBeDiscarded = validCards.isEmpty() ? CardLists.emptyList : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
 
                     if (mode.startsWith("Reveal") ) {
-                        p.getController().reveal(chooser + " has chosen", toBeDiscarded, ZoneType.Hand, p);
+                        p.getController().reveal(toBeDiscarded, ZoneType.Hand, p,
+                                chooser + " has chosen " + (toBeDiscarded.size() == 1 ? "this card" : "these cards")  + " from ");
                     }
 
                     if (toBeDiscarded != null) {

@@ -221,7 +221,7 @@ public class PlayerControllerAi extends PlayerController {
      * @see forge.game.player.PlayerController#reveal(java.lang.String, java.util.List)
      */
     @Override
-    public void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner) {
+    public void reveal(Collection<Card> cards, ZoneType zone, Player owner, String messagePrefix) {
         // We don't know how to reveal cards to AI
     }
 

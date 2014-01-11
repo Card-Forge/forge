@@ -455,12 +455,11 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#reveal(java.lang.String, java.util.List, forge.game.zone.ZoneType, forge.game.player.Player)
      */
     @Override
-    public void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner) {
-        String message = string;
-        if (StringUtils.isBlank(message)) {
-            message = String.format("Looking at %s's %s", owner, zone);
+    public void reveal(Collection<Card> cards, ZoneType zone, Player owner, String messagePrefix) {
+        if (StringUtils.isBlank(messagePrefix)) {
+            messagePrefix = "Looking at cards in ";
         }
-        GuiChoose.reveal(message, cards);
+        GuiChoose.reveal(zone.createMessage(owner, messagePrefix), cards);
     }
 
     @Override

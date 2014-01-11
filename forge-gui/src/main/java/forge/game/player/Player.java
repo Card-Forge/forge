@@ -1376,7 +1376,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                     }
                 }
                 if (reveal) {
-                    game.getAction().reveal("Revealing the first card drawn", drawn, this, true);
+                    game.getAction().reveal(drawn, this, true, "Revealing the first card drawn from ");
                 }
             }
 

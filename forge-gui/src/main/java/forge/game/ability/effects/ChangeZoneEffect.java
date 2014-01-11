@@ -713,12 +713,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                 List<Card> shown = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
                 // Look at whole library before moving onto choosing a card
-                decider.getController().reveal(source.getName() + " - Looking at library", shown, ZoneType.Library, player);
+                decider.getController().reveal(shown, ZoneType.Library, player, source.getName() + " - Looking at cards in ");
             }
 
             // Look at opponents hand before moving onto choosing a card
             if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
-                decider.getController().reveal(source.getName() + " - Looking at Opponent's Hand", player.getCardsIn(ZoneType.Hand), ZoneType.Hand, player);
+                decider.getController().reveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, player, source.getName() + " - Looking at cards in ");
             }
             fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
         }
@@ -918,7 +918,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (!origin.isEmpty()) {
                 zt = origin.get(0);
             }
-            decider.getController().reveal(source + " - Revealed card: ", movedCards, zt, player);
+            decider.getController().reveal(movedCards, zt, player, source + " - Revealed card" + (movedCards.size() > 1 ? "s" : "") + " from ");
         }
 
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)

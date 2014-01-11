@@ -115,7 +115,7 @@ public class ComputerUtil {
             if (pay.payComputerCosts(ai, game)) {
                 game.getStack().addAndUnfreeze(sa);
                 if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
-                    game.getAction().reveal("Computer reveals spliced cards:", sa.getSplicedCards(), ai, true);
+                    game.getAction().reveal(sa.getSplicedCards(), ai, true, "Computer reveals spliced cards from ");
                 }
                 return true;
                 // TODO: solve problems with TapsForMana triggers by adding

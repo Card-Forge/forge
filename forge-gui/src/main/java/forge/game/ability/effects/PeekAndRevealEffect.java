@@ -51,7 +51,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             List<Card> revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getSourceCard());
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!sa.hasParam("NoPeek")) {
-                peekingPlayer.getController().reveal(source + "Revealing cards from library", peekCards, ZoneType.Library, peekingPlayer);
+                peekingPlayer.getController().reveal(peekCards, ZoneType.Library, peekingPlayer, source + " - Revealing cards from ");
             }
             
             if( doReveal && sa.hasParam("RevealOptional") )

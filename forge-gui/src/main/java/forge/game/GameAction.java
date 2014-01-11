@@ -1452,32 +1452,29 @@ public class GameAction {
     }
 
     public void reveal(Collection<Card> cards, Player cardOwner, boolean dontRevealToOwner) {
-        Card firstCard = Iterables.getFirst(cards, null);
-        if (firstCard == null)
-            return;
-
-        ZoneType zt = game.getZoneOf(firstCard).getZoneType();
-        reveal(cardOwner + " reveals card from " + zt, cards, zt, cardOwner, dontRevealToOwner);
+        reveal(cards, cardOwner, dontRevealToOwner, null);
     }
 
-    public void reveal(String message, Collection<Card> cards, Player cardOwner, boolean dontRevealToOwner) {
+    public void reveal(Collection<Card> cards, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
         Card firstCard = Iterables.getFirst(cards, null);
-        if (firstCard == null)
+        if (firstCard == null) {
             return;
+        }
+        reveal(cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner, messagePrefix);
+    }
 
-        reveal(message, cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner);
+    public void reveal(Collection<Card> cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
+        for (Player p : game.getPlayers()) {
+            if (dontRevealToOwner && cardOwner == p) {
+                continue;
+            }
+            p.getController().reveal(cards, zt, cardOwner, messagePrefix);
+        }
     }
 
     public void revealAnte(String title, Multimap<Player, PaperCard> removedAnteCards) {
         for (Player p : game.getPlayers()) {
             p.getController().revealAnte(title, removedAnteCards);
-        }
-    }
-    
-    public void reveal(String message, Collection<Card> cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner) {
-        for (Player p : game.getPlayers()) {
-            if (dontRevealToOwner && cardOwner == p) continue;
-            p.getController().reveal(message, cards, zt, cardOwner);
         }
     }
 

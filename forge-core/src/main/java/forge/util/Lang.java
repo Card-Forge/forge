@@ -138,4 +138,42 @@ public class Lang {
         }
         return Integer.toString(n);
     }
+
+    public enum PhraseCase {
+        Title,
+        Sentence,
+        Lower
+    }
+
+    public static String splitCompoundWord(String word, PhraseCase phraseCase) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            if (Character.isUpperCase(ch)) {
+                if (i > 0) {
+                    builder.append(" ");
+                }
+                switch (phraseCase) {
+                case Title:
+                    builder.append(ch);
+                    break;
+                case Sentence:
+                    if (i > 0) {
+                        builder.append(ch);
+                    }
+                    else {
+                        builder.append(Character.toLowerCase(ch));
+                    }
+                    break;
+                case Lower:
+                    builder.append(Character.toLowerCase(ch));
+                    continue;
+                }
+            }
+            else {
+                builder.append(ch);
+            }
+        }
+        return builder.toString();
+    }
 }

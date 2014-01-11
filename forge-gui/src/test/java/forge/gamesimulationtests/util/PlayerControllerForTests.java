@@ -204,7 +204,7 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public void reveal(String string, Collection<Card> cards, ZoneType zone, Player owner) {
+	public void reveal(Collection<Card> cards, ZoneType zone, Player owner, String messagePrefix) {
 		//nothing needs to be done here
 	}
 

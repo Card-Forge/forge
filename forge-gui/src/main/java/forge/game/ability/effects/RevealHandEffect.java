@@ -44,7 +44,7 @@ public class RevealHandEffect extends SpellAbilityEffect {
                     continue;
                 }
                 final List<Card> hand = p.getCardsIn(ZoneType.Hand);
-                sa.getActivatingPlayer().getController().reveal(p.getName() + "'s hand", hand, ZoneType.Hand, p);
+                sa.getActivatingPlayer().getController().reveal(hand, ZoneType.Hand, p);
                 if (sa.hasParam("RememberRevealed")) {
                     for (final Card c : hand) {
                         host.addRemembered(c);

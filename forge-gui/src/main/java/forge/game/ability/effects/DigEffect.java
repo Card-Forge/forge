@@ -31,12 +31,13 @@ public class DigEffect extends SpellAbilityEffect {
 
         sb.append(host.getController()).append(" looks at the top ");
         sb.append(Lang.nounWithAmount(numToDig, "card")).append(" of ");
-        
+
         if (tgtPlayers.contains(host.getController())) {
             sb.append("his or her ");
-        } else {
+        }
+        else {
             for (final Player p : tgtPlayers) {
-                sb.append(p).append("'s ");
+                sb.append(Lang.getPossesive(p.getName())).append(" ");
             }
         }
         sb.append("library.");
@@ -48,11 +49,11 @@ public class DigEffect extends SpellAbilityEffect {
         final Card host = sa.getSourceCard();
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
-        Player choser = player;
+        Player chooser = player;
         int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
-        
+
         final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("SourceZone")) : ZoneType.Library;
-        
+
         final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone")) : ZoneType.Hand;
         final ZoneType destZone2 = sa.hasParam("DestinationZone2") ? ZoneType.smartValueOf(sa.getParam("DestinationZone2")) : ZoneType.Library;
 
@@ -68,7 +69,7 @@ public class DigEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         final boolean noMove = sa.hasParam("NoMove");
         final boolean skipReorder = sa.hasParam("SkipReorder");
-        
+
         boolean changeAll = false;
         boolean allButOne = false;
         final ArrayList<String> keywords = new ArrayList<String>();
@@ -79,9 +80,11 @@ public class DigEffect extends SpellAbilityEffect {
         if (sa.hasParam("ChangeNum")) {
             if (sa.getParam("ChangeNum").equalsIgnoreCase("All")) {
                 changeAll = true;
-            } else if (sa.getParam("ChangeNum").equalsIgnoreCase("AllButOne")) {
+            }
+            else if (sa.getParam("ChangeNum").equalsIgnoreCase("AllButOne")) {
                 allButOne = true;
-            } else {
+            }
+            else {
                 destZone1ChangeNum = AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
             }
         }
@@ -90,9 +93,9 @@ public class DigEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (sa.hasParam("Choser")) {
-            final List<Player> chosers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Choser"), sa);
-            if (!chosers.isEmpty()) {
-                choser = chosers.get(0);
+            final List<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Choser"), sa);
+            if (!choosers.isEmpty()) {
+                chooser = choosers.get(0);
             }
         }
 
@@ -103,25 +106,27 @@ public class DigEffect extends SpellAbilityEffect {
             final List<Card> top = new ArrayList<Card>();
             List<Card> valid = new ArrayList<Card>();
             final List<Card> rest = new ArrayList<Card>();
-            final PlayerZone library = p.getZone(srcZone);
+            final PlayerZone sourceZone = p.getZone(srcZone);
 
-            numToDig = Math.min(numToDig, library.size());
+            numToDig = Math.min(numToDig, sourceZone.size());
             for (int i = 0; i < numToDig; i++) {
-                top.add(library.get(i));
+                top.add(sourceZone.get(i));
             }
 
             if (top.size() > 0) {
                 boolean hasRevealed = true;
                 if (sa.hasParam("Reveal")) {
                     game.getAction().reveal(top, p, false);
-                } else if (sa.hasParam("RevealOptional")) {
+                }
+                else if (sa.hasParam("RevealOptional")) {
                     String question = "Reveal: " + Lang.joinHomogenous(top) +"?";
-                    
+
                     hasRevealed = p.getController().confirmAction(sa, null, question);
-                    if ( hasRevealed )
+                    if (hasRevealed) {
                         game.getAction().reveal(top, p);
-                    
-                } else if (sa.hasParam("RevealValid")) {
+                    }
+                }
+                else if (sa.hasParam("RevealValid")) {
                     final String revealValid = sa.getParam("RevealValid");
                     final List<Card> toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host);
                     if (!toReveal.isEmpty()) {
@@ -134,9 +139,10 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                     // - for when it exists
-                } else if (!sa.hasParam("NoLooking")) {
+                }
+                else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
-                    choser.getController().reveal("Looking at cards from library", top, library.getZoneType(), library.getPlayer());
+                    chooser.getController().reveal(top, srcZone, p);
                 }
 
                 if ((sa.hasParam("RememberRevealed")) && !sa.hasParam("RevealValid") && hasRevealed) {
@@ -153,7 +159,8 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     if (mitosis) {
                         valid = sharesNameWithCardOnBattlefield(game, top);
-                    } else if (!changeValid.equals("")) {
+                    }
+                    else if (!changeValid.isEmpty()) {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
@@ -163,50 +170,62 @@ public class DigEffect extends SpellAbilityEffect {
                             andOrCards.removeAll(valid);
                             valid.addAll(andOrCards);
                         }
-                    } else {
+                    }
+                    else {
                         valid = top;
                     }
 
                     if (changeAll) {
                         movedCards.addAll(valid);
-                    } else if (sa.hasParam("RandomChange")) {
+                    }
+                    else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
-                    } else if (allButOne) {
+                    }
+                    else if (allButOne) {
                         movedCards.addAll(valid);
-                        String prompt = "Choose a card to leave in ";
+                        String prefix;
                         if (destZone2.equals(ZoneType.Library) && (libraryPosition2 == 0)) {
-                            prompt = "Leave which card on top of the ";
+                            prefix = "Choose a card to leave on top of ";
                         }
-                        
-                        Card chosen = choser.getController().chooseSingleEntityForEffect(valid, sa, prompt + destZone2, false, p);
+                        else {
+                            prefix = "Choose a card to leave in ";
+                        }
+                        String prompt = destZone2.createMessage(p, prefix);
+
+                        Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, sa, prompt, false, p);
                         movedCards.remove(chosen);
                         if (sa.hasParam("RandomOrder")) {
                             final Random random = MyRandom.getRandom();
                             Collections.shuffle(movedCards, random);
                         }
-                    } else {
+                    }
+                    else {
                         int j = 0;
-                        String prompt = "Choose a card to put into the ";
-                        if (destZone1.equals(ZoneType.Library) && libraryPosition == -1) {
-                            prompt = "Chose a card to put on the bottom of the ";
+                        String prefix = "Choose a card to put into ";
+                        if (destZone1.equals(ZoneType.Library)) {
+                            if (libraryPosition == -1) {
+                                prefix = "Choose a card to put on the bottom of ";
+                            }
+                            else if (libraryPosition == 0) {
+                                prefix = "Choose a card to put on top of ";
+                            }
                         }
-                        if (destZone1.equals(ZoneType.Library) && libraryPosition == 0) {
-                            prompt = "Chose a card to put on top of the ";
-                        }
-                        
+                        String prompt = destZone1.createMessage(p, prefix);
 
                         while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
                             // let user get choice
-
                             Card chosen = null;
-                            if(!valid.isEmpty())
-                                chosen = choser.getController().chooseSingleEntityForEffect(valid, sa, prompt, anyNumber || optional, p);
-                            else
-                                choser.getController().notifyOfValue(sa, null, "No valid cards");
-                            
-                            if( chosen == null )
+                            if (!valid.isEmpty()) {
+                                chosen = chooser.getController().chooseSingleEntityForEffect(valid, sa, prompt, anyNumber || optional, p);
+                            }
+                            else {
+                                chooser.getController().notifyOfValue(sa, null, destZone1.createMessage(p, "No valid cards in "));
+                            }
+
+                            if (chosen == null) {
                                 break;
+                            }
 
                             movedCards.add(chosen);
                             valid.remove(chosen);
@@ -214,15 +233,17 @@ public class DigEffect extends SpellAbilityEffect {
                                 andOrCards.remove(chosen);
                                 if (!chosen.isValid(andOrValid.split(","), host.getController(), host)) {
                                     valid = new ArrayList<Card>(andOrCards);
-                                } else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
+                                }
+                                else if (!chosen.isValid(changeValid.split(","), host.getController(), host)) {
                                     valid.removeAll(andOrCards);
                                 }
                             }
                             j++;
                         }
-                       
+
                         if (changeValid.length() > 0) {
-                            game.getAction().reveal(choser + " picked:", movedCards, choser, true);
+                            game.getAction().reveal(movedCards, chooser, true,
+                                    chooser + " picked " + (movedCards.size() == 1 ? "this card" : "these cards") + " from ");
                         }
                     }
                     if (sa.hasParam("ForgetOtherRemembered")) {
@@ -231,13 +252,14 @@ public class DigEffect extends SpellAbilityEffect {
                     Collections.reverse(movedCards);
                     for (Card c : movedCards) {
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
-                        
+
                         if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
                             if (libraryPosition == -1 || libraryPosition > zone.size()) {
                                 libraryPosition = zone.size();
                             }
                             c = game.getAction().moveTo(zone, c, libraryPosition);
-                        } else {
+                        }
+                        else {
                             c = game.getAction().moveTo(zone, c);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 for (final String kw : keywords) {
@@ -268,7 +290,7 @@ public class DigEffect extends SpellAbilityEffect {
                     if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck || destZone2 == ZoneType.SchemeDeck) {
                         List<Card> afterOrder = rest;
                         if (!skipReorder && rest.size() > 1) {
-                            afterOrder = choser.getController().orderMoveToZoneList(rest, destZone2);
+                            afterOrder = chooser.getController().orderMoveToZoneList(rest, destZone2);
                         }
                         if (libraryPosition2 != -1) {
                             // Closest to top
@@ -277,11 +299,13 @@ public class DigEffect extends SpellAbilityEffect {
                         for (final Card c : afterOrder) {
                             if (destZone2 == ZoneType.Library) {
                                 game.getAction().moveToLibrary(c, libraryPosition2);
-                            } else {
+                            }
+                            else {
                                 game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2);
                             }
                         }
-                    } else {
+                    }
+                    else {
                         // just move them randomly
                         for (int i = 0; i < rest.size(); i++) {
                             Card c = rest.get(i);
