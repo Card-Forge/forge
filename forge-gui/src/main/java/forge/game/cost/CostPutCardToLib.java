@@ -205,7 +205,7 @@ public class CostPutCardToLib extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Card source = ability.getSourceCard();
@@ -235,7 +235,7 @@ public class CostPutCardToLib extends CostPartWithList {
             inp.setMessage("Put %d card(s) from your " + from );
             inp.setCancelAllowed(true);
             inp.showAndWait();
-            return !inp.hasCancelled() && executePayment(ability, inp.getSelected());
+            return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
         }
         
         if (this.sameZone){
@@ -262,52 +262,46 @@ public class CostPutCardToLib extends CostPartWithList {
      * @param typeList
      * @return a boolean
      */
-    private boolean putFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList) {
-        for (int i = 0; i < nNeeded; i++) {
-            if (typeList.isEmpty()) {
-                return false;
-            }
+    private PaymentDecision putFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList) {
+        if(typeList.size() < nNeeded)
+            return null;
 
+        List<Card> chosen = new ArrayList<>();
+        for (int i = 0; i < nNeeded; i++) {
             final Card c = GuiChoose.oneOrNone("Put from " + getFrom() + " to library", typeList);
 
-            if (c != null) {
-                typeList.remove(c);
-                executePayment(sa, c);
-            } else {
-                return false;
-            }
+            if (c == null)
+                return null;
+                
+            typeList.remove(c);
+            chosen.add(c);
         }
-        return true;
+        return PaymentDecision.card(chosen);
     }
 
-    private boolean putFromSame(List<Card> list, int nNeeded, List<Player> payableZone) {
+    private PaymentDecision putFromSame(List<Card> list, int nNeeded, List<Player> payableZone) {
         if (nNeeded == 0) {
-            return true;
+            return PaymentDecision.number(0);
         }
-    
     
         final Player p = GuiChoose.oneOrNone(String.format("Put cards from whose %s?", getFrom()), payableZone);
         if (p == null) {
-            return false;
+            return null;
         }
     
         List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(p));
-    
+        if(typeList.size() < nNeeded)
+            return null;
+        
+        List<Card> chosen = new ArrayList<>();
         for (int i = 0; i < nNeeded; i++) {
-            if (typeList.isEmpty()) {
-                return false;
-            }
-    
             final Card c = GuiChoose.oneOrNone("Put cards from " + getFrom() + " to Library", typeList);
-    
-            if (c != null) {
-                typeList.remove(c);
-                executePayment(null, c);
-            } else {
-                return false;
-            }
+            if (c == null)
+                return null;
+            typeList.remove(c);
+            chosen.add(c);
         }
-        return true;
+        return PaymentDecision.card(chosen);
     }
 
     /* (non-Javadoc)

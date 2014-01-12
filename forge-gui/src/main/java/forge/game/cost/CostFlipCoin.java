@@ -66,7 +66,7 @@ public class CostFlipCoin extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Card source = ability.getSourceCard();
@@ -80,10 +80,7 @@ public class CostFlipCoin extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        for (int i = 0; i < c; i++) {
-            executePayment(ability, source);
-        }
-        return true;
+        return PaymentDecision.number(c);
     }
 
     /*
@@ -106,21 +103,6 @@ public class CostFlipCoin extends CostPartWithList {
         FlipCoinEffect.flipCoinCall(activator, ability, i);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
-        int n = FlipCoinEffect.getFilpMultiplier(ai);
-        for (int i = 0; i < decision.c; i++) {
-            FlipCoinEffect.flipCoinCall(ai, ability, n);
-        }
-        return true;
-    }
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

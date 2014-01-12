@@ -128,7 +128,7 @@ public class CostUntapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player payer) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
         List<Card> typeList = CardLists.getValidCards(payer.getGame().getCardsIn(ZoneType.Battlefield), this.getType().split(";"),
                 payer, ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.TAPPED);
@@ -151,9 +151,8 @@ public class CostUntapType extends CostPartWithList {
         inp.setMessage("Select a " + getDescriptiveType() + " to untap (%d left)");
         inp.showAndWait();
         if( inp.hasCancelled() || inp.getSelected().size() != c )
-            return false;
-            
-        return executePayment(ability, inp.getSelected());
+            return null;
+        return PaymentDecision.card(inp.getSelected());
     }
 
     /* (non-Javadoc)

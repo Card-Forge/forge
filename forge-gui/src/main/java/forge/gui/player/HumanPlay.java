@@ -9,7 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Predicate;
 
 import forge.FThreads;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
@@ -46,6 +48,7 @@ import forge.game.cost.CostReturn;
 import forge.game.cost.CostReveal;
 import forge.game.cost.CostSacrifice;
 import forge.game.cost.CostTapType;
+import forge.game.cost.PaymentDecision;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
@@ -56,7 +59,9 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.input.InputPayMana;
 import forge.gui.input.InputPayManaExecuteCommands;
+import forge.gui.input.InputPayManaOfCostPayment;
 import forge.gui.input.InputPayManaSimple;
+import forge.gui.input.InputPayManaX;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Lang;
 
@@ -359,17 +364,23 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostGainLife) {
-                if (!part.payHuman(sourceAbility, p)) {
+                PaymentDecision pd = part.payHuman(sourceAbility, p);
+                
+                if (pd == null)
                     return false;
-                }
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostAddMana) {
                 if (!p.getController().confirmPayment(part, "Do you want to add " + ((CostAddMana) part).toString() + " to your mana pool?" + orString)) {
                     return false;
                 }
-                if (!part.payHuman(sourceAbility, p)) {
+                PaymentDecision pd = part.payHuman(sourceAbility, p);
+                
+                if (pd == null)
                     return false;
-                }
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostMill) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
@@ -693,5 +704,96 @@ public class HumanPlay {
             cpl.reportPaidCardsTo(sourceAbility);
         }
         return true;
+    }
+    
+
+    private static boolean handleOfferingAndConvoke(final SpellAbility ability, boolean manaInputCancelled, boolean isPaid) {
+        boolean done = !manaInputCancelled && isPaid;
+        if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
+            final Card offering = ability.getSacrificedAsOffering();
+            offering.setUsedToPay(false);
+            if (done) {
+                ability.getSourceCard().getGame().getAction().sacrifice(offering, ability);
+            }
+            ability.resetSacrificedAsOffering();
+        }
+        if (ability.getTappedForConvoke() != null) {
+            for (final Card c : ability.getTappedForConvoke()) {
+                c.setTapped(false);
+                if (done) {
+                    c.tap();
+                }
+            }
+            ability.clearTappedForConvoke();
+        }
+        return done;
+    }
+    
+    public static boolean payManaCost(final CostPartMana mc, final SpellAbility ability, final Player activator) {
+        final Card source = ability.getSourceCard();
+        ManaCostBeingPaid toPay = new ManaCostBeingPaid(mc.getManaToPay(), mc.getRestiction());
+
+        boolean xWasBilled = false;
+        String xInCard = source.getSVar("X");
+        if (mc.getAmountOfX() > 0 && !"Count$xPaid".equals(xInCard)) { // announce X will overwrite whatever was in card script
+            // this currently only works for things about Targeted object
+            int xCost = AbilityUtils.calculateAmount(source, "X", ability) * mc.getAmountOfX();
+            byte xColor = MagicColor.fromName(ability.hasParam("XColor") ? ability.getParam("XColor") : "1"); 
+            toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
+            xWasBilled = true;
+        }
+        int timesMultikicked = ability.getSourceCard().getKickerMagnitude();
+        if ( timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
+            ManaCost mkCost = ability.getMultiKickerManaCost();
+            for(int i = 0; i < timesMultikicked; i++)
+                toPay.combineManaCost(mkCost);
+        }
+
+        InputPayMana inpPayment;
+        toPay.applySpellCostChange(ability, false);
+        if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
+            System.out.println("Sacrifice input for Offering cancelled");
+            return false;
+        }
+        if (!toPay.isPaid()) {
+            inpPayment = new InputPayManaOfCostPayment(toPay, ability);
+            inpPayment.showAndWait();
+            if (!inpPayment.isPaid()) {
+                return handleOfferingAndConvoke(ability, true, false);
+            }
+
+            source.setColorsPaid(toPay.getColorsPaid());
+            source.setSunburstValue(toPay.getSunburst());
+        }
+        if (mc.getAmountOfX() > 0) {
+            if (!ability.isAnnouncing("X") && !xWasBilled) {
+                source.setXManaCostPaid(0);
+                inpPayment = new InputPayManaX(ability, mc.getAmountOfX(), mc.canXbe0());
+                inpPayment.showAndWait();
+                if (!inpPayment.isPaid()) {
+                    return false;
+                }
+            } else {
+                int x = AbilityUtils.calculateAmount(source, "X", ability);
+                source.setXManaCostPaid(x);
+            }
+        }
+
+        // Handle convoke and offerings
+        if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
+            System.out.println("Finishing up Offering");
+            final Card offering = ability.getSacrificedAsOffering();
+            offering.setUsedToPay(false);
+            activator.getGame().getAction().sacrifice(offering, ability);
+            ability.resetSacrificedAsOffering();
+        }
+        if (ability.getTappedForConvoke() != null) {
+            for (final Card c : ability.getTappedForConvoke()) {
+                c.setTapped(false);
+                c.tap();
+            }
+            ability.clearTappedForConvoke();
+        }
+        return handleOfferingAndConvoke(ability, false, true);
     }
 }

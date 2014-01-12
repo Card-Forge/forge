@@ -108,9 +108,12 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final void refund(final Card source) {
-        for (final Card c : this.getList()) {
-            c.subtractCounter(this.counter, this.lastPaidAmount);
-        }
+        if(this.payCostFromSource())
+            source.subtractCounter(this.counter, this.lastPaidAmount);
+        else
+            for (final Card c : this.getList()) {
+                c.subtractCounter(this.counter, 1);
+            }
     }
 
     /*
@@ -147,16 +150,16 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         Integer c = getNumberOfCounters(ability);
 
         if (this.payCostFromSource()) {
-            executePayment(ability, source, c);
+            executePayment(ability, ability.getSourceCard(), c);
         } else {
             // Put counter on chosen card
-        	for (int i = 0; i < c; i++) {
-        		executePayment(ability, decision.cards);
-        	}
+            for (int i = 0; i < c; i++)
+                executePayment(ability, decision.cards);
+            ability.getSourceCard().setSVar("CostCountersAdded", Integer.toString(Math.min(decision.cards.size(), c)));
         }
         return true;
     }
@@ -169,35 +172,26 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
-        final Card source = ability.getSourceCard();
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         Integer c = getNumberOfCounters(ability);
 
         if (this.payCostFromSource()) {
-            executePayment(ability, source, c);
-            lastPaidAmount = c; 
-            return true;
-        } else {
-            // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter 
-            List<Card> typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), getType().split(";"), activator, ability.getSourceCard());
-            
-            InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, typeList);
-            inp.setMessage("Put " + Lang.nounWithAmount(c, getCounter().getName() + " counter") + " on " + getDescriptiveType());
-            inp.setCancelAllowed(true);
-            inp.showAndWait();
+            lastPaidAmount = c;
+            return PaymentDecision.number(c);
+        } 
 
-            if(inp.hasCancelled())
-                return false;
+        // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter 
+        List<Card> typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), getType().split(";"), activator, ability.getSourceCard());
+        
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, typeList);
+        inp.setMessage("Put " + Lang.nounWithAmount(c, getCounter().getName() + " counter") + " on " + getDescriptiveType());
+        inp.setCancelAllowed(true);
+        inp.showAndWait();
 
-            int sum = 0;
-            for(Card crd : inp.getSelected()) {
-                sum++;
-                executePayment(ability, crd, 1);
-            }
-            source.setSVar("CostCountersAdded", Integer.toString(sum));
-            lastPaidAmount = sum;
-            return true;
-        }
+        if(inp.hasCancelled())
+            return null;
+
+        return PaymentDecision.card(inp.getSelected());
     }
 
     private Integer getNumberOfCounters(final SpellAbility ability) {

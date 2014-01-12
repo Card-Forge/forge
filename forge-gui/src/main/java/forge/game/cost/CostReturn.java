@@ -116,7 +116,7 @@ public class CostReturn extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player payer) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
@@ -134,7 +134,7 @@ public class CostReturn extends CostPartWithList {
         if (this.payCostFromSource()) {
             final Card card = ability.getSourceCard();
             if (card.getController() == payer && card.isInPlay()) {
-                return payer.getController().confirmPayment(this, "Return " + card.getName() + " to hand?") && executePayment(ability, card);
+                return payer.getController().confirmPayment(this, "Return " + card.getName() + " to hand?") ? PaymentDecision.card(card) : null;
             }
         }
         else {
@@ -144,13 +144,11 @@ public class CostReturn extends CostPartWithList {
             inp.setMessage("Return %d " + this.getType() + " " + this.getType() + " card(s) to hand");
             inp.showAndWait();
             if (inp.hasCancelled())
-                return false;
+                return null;
             
-            for(Card crd : inp.getSelected()) 
-                executePayment(ability, crd);
-            return true;
-        }
-       return false;
+            return PaymentDecision.card(inp.getSelected());
+       }
+       return null;
     }
 
     /* (non-Javadoc)
@@ -169,16 +167,6 @@ public class CostReturn extends CostPartWithList {
         return "Returned";
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
-        for (final Card c : decision.cards) {
-            executePayment(ability, c);
-        }
-        return true;
-    }
 
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);

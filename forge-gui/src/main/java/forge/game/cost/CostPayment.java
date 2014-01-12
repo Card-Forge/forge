@@ -108,9 +108,12 @@ public class CostPayment {
      */
     public boolean payCost(final Player payer) {
         for (final CostPart part : this.cost.getCostParts()) {
-            if ( false == part.payHuman(this.ability, payer) ) {
+            PaymentDecision pd = part.payHuman(this.ability, payer);
+            
+            if ( null == pd ) {
                 return false;
-            }
+            } else
+                part.payAsDecided(payer, pd, ability);
             
             // abilities care what was used to pay for them
             if( part instanceof CostPartWithList )
@@ -190,7 +193,7 @@ public class CostPayment {
         }
 
         for (final CostPart part : parts) {
-            if (!part.payAI(decisions.get(part.getClass()), ai, this.ability, this.ability.getSourceCard())) {
+            if (!part.payAsDecided(ai, decisions.get(part.getClass()), this.ability)) {
                 return false;
             }
             // abilities care what was used to pay for them

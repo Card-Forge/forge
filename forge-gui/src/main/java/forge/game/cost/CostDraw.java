@@ -87,7 +87,7 @@ public class CostDraw extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
+    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
         for (final Player p : getPotentialPlayers(ai, ability.getSourceCard())) {
             p.drawCards(decision.c);
         }
@@ -102,9 +102,8 @@ public class CostDraw extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player payer) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
         final String amount = this.getAmount();
-        final List<Player> players = getPotentialPlayers(payer, ability.getSourceCard());
         final Card source = ability.getSourceCard();
 
         Integer c = this.convertAmount();
@@ -113,13 +112,10 @@ public class CostDraw extends CostPart {
         }
 
         if (!payer.getController().confirmPayment(this, "Draw " + c + " Card" + (c == 1 ? "" : "s"))) {
-            return false;
+            return null;
         }
 
-        for (Player p : players) {
-            p.drawCards(c);
-        }
-        return true;
+        return PaymentDecision.number(c);
     }
 
     @Override

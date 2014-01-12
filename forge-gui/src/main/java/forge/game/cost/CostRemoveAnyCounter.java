@@ -107,7 +107,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
     }
 
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         final String type = this.getType();
@@ -118,37 +118,31 @@ public class CostRemoveAnyCounter extends CostPartWithList {
 
         List<Card> list = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
         list = CardLists.getValidCards(list, type.split(";"), activator, source);
-        int nNeed = c.intValue();
-        while (nNeed > 0) {
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card card) {
-                    return card.hasCounters();
-                }
-            });
-            InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, list);
-            inp.setMessage("Select " + this.getDescriptiveType() + " to remove a counter");
-            inp.setCancelAllowed(false);
-            inp.showAndWait();
-            Card selected = inp.getFirstSelected();
-            final Map<CounterType, Integer> tgtCounters = selected.getCounters();
-            final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();
-            for (CounterType key : tgtCounters.keySet()) {
-                if (tgtCounters.get(key) > 0) {
-                    typeChoices.add(key);
-                }
+
+
+        list = CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card card) {
+                return card.hasCounters();
             }
-            if (typeChoices.size() > 1) {
-                String prompt = "Select type counters to remove";
-                counterType = GuiChoose.one(prompt, typeChoices);
-            } else {
-                counterType = typeChoices.get(0);
+        });
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, list);
+        inp.setMessage("Select " + this.getDescriptiveType() + " to remove a counter");
+        inp.setCancelAllowed(false);
+        inp.showAndWait();
+        Card selected = inp.getFirstSelected();
+        final Map<CounterType, Integer> tgtCounters = selected.getCounters();
+        final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();
+        for (CounterType key : tgtCounters.keySet()) {
+            if (tgtCounters.get(key) > 0) {
+                typeChoices.add(key);
             }
-            executePayment(ability, selected);
-            nNeed--;
         }
-        source.setSVar("CostCountersRemoved", Integer.toString(c));
-        return true;
+
+        String prompt = "Select type counters to remove";
+        counterType = GuiChoose.one(prompt, typeChoices);
+        
+        return PaymentDecision.card(selected, counterType);
     }
 
     /*
@@ -172,8 +166,9 @@ public class CostRemoveAnyCounter extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         final String amount = this.getAmount();
+        final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, amount, ability);

@@ -15013,7 +15013,6 @@ forge-gui/src/main/java/forge/game/cost/CostDamage.java -text
 forge-gui/src/main/java/forge/game/cost/CostDiscard.java -text
 forge-gui/src/main/java/forge/game/cost/CostDraw.java -text
 forge-gui/src/main/java/forge/game/cost/CostExile.java -text
-forge-gui/src/main/java/forge/game/cost/CostExileAndPay.java -text
 forge-gui/src/main/java/forge/game/cost/CostExiledMoveToGrave.java -text
 forge-gui/src/main/java/forge/game/cost/CostFlipCoin.java -text
 forge-gui/src/main/java/forge/game/cost/CostGainControl.java -text

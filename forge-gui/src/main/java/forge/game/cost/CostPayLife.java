@@ -95,7 +95,7 @@ public class CostPayLife extends CostPart {
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         // TODO Auto-generated method stub
         paidAmount = decision.c;
         return ai.payLife(paidAmount, null);
@@ -109,7 +109,7 @@ public class CostPayLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
         final String amount = this.getAmount();
         final int life = activator.getLife();
@@ -131,11 +131,9 @@ public class CostPayLife extends CostPart {
         }
 
         if (activator.canPayLife(c) && activator.getController().confirmPayment(this, "Pay " + c + " Life?")) {
-            activator.payLife(c, null);
-            paidAmount = c;
-            return true;
+            return PaymentDecision.number(c);
         }
-        return false;
+        return null;
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

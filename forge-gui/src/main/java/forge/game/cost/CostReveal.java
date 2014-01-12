@@ -17,11 +17,13 @@
  */
 package forge.game.cost;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.game.ability.AbilityUtils;
@@ -32,6 +34,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.input.InputSelectCardsFromList;
+import forge.util.Lang;
 
 /**
  * The Class CostReveal.
@@ -120,18 +123,18 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
         final String amount = this.getAmount();
 
-        if (this.payCostFromSource()) {
-            executePayment(ability, source);
-            return true;
-        } else if (this.getType().equals("Hand")) {
-            for(Card c : activator.getCardsIn(ZoneType.Hand))
-                executePayment(ability, c);
-            return true;
-        } else if (this.getType().equals("SameColor")) {
+        if (this.payCostFromSource())
+            return PaymentDecision.card(source);
+
+        if (this.getType().equals("Hand"))
+            return PaymentDecision.card(activator.getCardsIn(ZoneType.Hand));
+
+        InputSelectCardsFromList inp = null;
+        if (this.getType().equals("SameColor")) {
             Integer num = this.convertAmount();
             List<Card> handList = activator.getCardsIn(ZoneType.Hand);
             final List<Card> handList2 = handList;
@@ -146,22 +149,22 @@ public class CostReveal extends CostPartWithList {
                     return false;
                 }
             });
-            if (num == 0) return true;
-            List<Card> revealed = new ArrayList<Card>();
-            while (num > 0) {
-                InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, handList);
-                inp.setMessage("Select one of cards to reveal. Already chosen:" + revealed);
-                inp.setCancelAllowed(true);
-                inp.showAndWait();
-                if (inp.hasCancelled())
-                    return false;
-                final Card first = inp.getFirstSelected();
-                revealed.add(first);
-                handList = CardLists.filter(handList, CardPredicates.sharesColorWith(first));
-                handList.remove(first);
-                num--;
-            }
-            return executePayment(ability, revealed);
+            if (num == 0) 
+                return PaymentDecision.number(0);
+
+            inp = new InputSelectCardsFromList(num, handList) {
+                private static final long serialVersionUID = 8338626212893374798L;
+
+                @Override
+                protected void onCardSelected(Card c, MouseEvent triggerEvent) {
+                    Card firstCard = Iterables.getFirst(this.selected, null);
+                    if(firstCard != null && !CardPredicates.sharesColorWith(firstCard).apply(c))
+                        return;
+                    super.onCardSelected(c, triggerEvent);
+                }
+            };
+            inp.setMessage("Select " + Lang.nounWithAmount(num, "card" ) + " of same color to reveal.");
+
         } else {
             Integer num = this.convertAmount();
 
@@ -176,15 +179,20 @@ public class CostReveal extends CostPartWithList {
                     num = AbilityUtils.calculateAmount(source, amount, ability);
                 }
             }
-            if ( num == 0 ) return true;
-            InputSelectCardsFromList inp = new InputSelectCardsFromList(num, num, handList);
+            if ( num == 0 )
+                return PaymentDecision.number(0);;
+                
+            inp = new InputSelectCardsFromList(num, num, handList);
             inp.setMessage("Select %d more " + getDescriptiveType() + " card(s) to reveal.");
-            inp.showAndWait();
-            if ( inp.hasCancelled() )
-                return false;
-
-            return executePayment(ability, inp.getSelected());
         }
+        inp.setCancelAllowed(true);
+        inp.showAndWait();
+        if (inp.hasCancelled())
+            return null;
+        
+        return PaymentDecision.card(inp.getSelected());
+
+
     }
 
     /*

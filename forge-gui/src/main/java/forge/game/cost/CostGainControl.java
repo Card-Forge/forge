@@ -92,7 +92,7 @@ public class CostGainControl extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player payer) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
 
@@ -103,17 +103,14 @@ public class CostGainControl extends CostPartWithList {
         final List<Card> list = payer.getCardsIn(ZoneType.Battlefield);
         List<Card> validCards = CardLists.getValidCards(list, this.getType().split(";"), payer, source);
 
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, validCards);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(c, validCards);
         final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
         inp.setMessage("Gain control of %d " + desc);
         inp.showAndWait();
         if (inp.hasCancelled()) {
-            return false;
+            return null;
         }
-        for(Card crd : inp.getSelected()) {
-             executePayment(ability, crd);
-        }
-        return true;
+        return PaymentDecision.card(inp.getSelected());
     }
 
     /* (non-Javadoc)
@@ -129,18 +126,7 @@ public class CostGainControl extends CostPartWithList {
      */
     @Override
     public String getHashForList() {
-        return "ControllGained";
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
-        for (final Card c : decision.cards) {
-            executePayment(ability, c);
-        }
-        return true;
+        return "ControllGained"; // why the hell double "L"?
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

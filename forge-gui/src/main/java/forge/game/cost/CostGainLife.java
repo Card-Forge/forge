@@ -20,6 +20,8 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -55,7 +57,7 @@ public class CostGainLife extends CostPart {
         return sb.toString();
     }
     
-    private List<Player> getPotentialTargets(final Player payer, final Card source)
+    public List<Player> getPotentialTargets(final Player payer, final Card source)
     {
         List<Player> res = new ArrayList<Player>();
         for(Player p : payer.getGame().getPlayers())
@@ -97,13 +99,19 @@ public class CostGainLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
+    public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability) {
+        Integer c = this.convertAmount();
+        
         int playersLeft = cntPlayers;
-        for (final Player opp : getPotentialTargets(ai, source)) {
-            if (opp.canGainLife() && playersLeft > 0) {
-                playersLeft--;
-                opp.gainLife(decision.c, null);
-            }
+        for (final Player opp : decision.players) {
+            if (playersLeft == 0)
+                break;
+
+            if (!opp.canGainLife()) // you should not have added him to decision.
+                return false;
+
+            playersLeft--;
+            opp.gainLife(c, null);
         }
         return true;
     }
@@ -116,7 +124,7 @@ public class CostGainLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
         final String amount = this.getAmount();
 
@@ -140,25 +148,17 @@ public class CostGainLife extends CostPart {
             }
         }
 
-        if (cntPlayers == Integer.MAX_VALUE) { // applied to all players who can gain
-            for(Player opp: oppsThatCanGainLife)
-                opp.gainLife(c, null);
-        } else {
-            final StringBuilder sb = new StringBuilder();
-            sb.append(source.getName()).append(" - Choose an opponent to gain ").append(c).append(" life:");
+        if (cntPlayers == Integer.MAX_VALUE) // applied to all players who can gain
+            return PaymentDecision.players(oppsThatCanGainLife);
 
+        final StringBuilder sb = new StringBuilder();
+        sb.append(source.getName()).append(" - Choose an opponent to gain ").append(c).append(" life:");
 
-            for(int playersLeft = cntPlayers; playersLeft > 0; playersLeft--) {
-                final Player chosenToGain = GuiChoose.oneOrNone(sb.toString(), oppsThatCanGainLife);
-                if (null == chosenToGain) {
-                    return false;
-                } else {
-                    final Player chosen = chosenToGain;
-                    chosen.gainLife(c, null);
-                }
-            }
-        }
-        return true;
+        final Player chosenToGain = GuiChoose.oneOrNone(sb.toString(), oppsThatCanGainLife);
+        if (null == chosenToGain)
+            return null;
+        else
+            return PaymentDecision.players(Lists.newArrayList(chosenToGain));
     }
 
     

@@ -169,7 +169,7 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
         String type = this.getType();
         final String amount = this.getAmount();
@@ -215,7 +215,7 @@ public class CostTapType extends CostPartWithList {
                     return false;
                 }
             });
-            if (c == 0) return true;
+            if (c == 0) return PaymentDecision.number(0);
             List<Card> tapped = new ArrayList<Card>();
             while (c > 0) {
                 InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, typeList);
@@ -223,7 +223,7 @@ public class CostTapType extends CostPartWithList {
                 inp.setCancelAllowed(true);
                 inp.showAndWait();
                 if (inp.hasCancelled())
-                    return false;
+                    return null;
                 final Card first = inp.getFirstSelected();
                 tapped.add(first);
                 typeList = CardLists.filter(typeList, new Predicate<Card>() {
@@ -235,7 +235,7 @@ public class CostTapType extends CostPartWithList {
                 typeList.remove(first);
                 c--;
             }
-            return executePayment(ability, tapped);
+            return PaymentDecision.card(tapped);
         }       
 
         if (totalPower) {
@@ -247,9 +247,9 @@ public class CostTapType extends CostPartWithList {
             inp.showAndWait();
 
             if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected()) < i) {
-                return false;
+                return null;
             } else {
-                return executePayment(ability, inp.getSelected());
+                return PaymentDecision.card(inp.getSelected());
             }
         }
         
@@ -257,9 +257,9 @@ public class CostTapType extends CostPartWithList {
         inp.setMessage("Select a " + getDescriptiveType() + " to tap (%d left)");
         inp.showAndWait();
         if ( inp.hasCancelled() )
-            return false;
+            return null;
 
-        return executePayment(ability, inp.getSelected());
+        return PaymentDecision.card(inp.getSelected());
     }
 
     /* (non-Javadoc)

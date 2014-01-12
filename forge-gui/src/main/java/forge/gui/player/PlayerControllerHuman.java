@@ -43,6 +43,8 @@ import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.PaymentDecision;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
@@ -1047,5 +1049,11 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses) {
         return GuiChoose.many("Select cards to add to your deck", "Add these to my deck", 0, losses.size(), losses, null);
+    }
+
+    @Override
+    public boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa) {
+        // TODO Auto-generated method stub
+        return HumanPlay.payManaCost(costPartMana, sa, player);
     }
 }

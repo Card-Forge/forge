@@ -94,14 +94,14 @@ public class CostUnattach extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
         
         Card cardToUnattach = findCardToUnattach(source, activator, ability);
         if (cardToUnattach != null && activator.getController().confirmPayment(this, "Unattach " + cardToUnattach.getName() + "?")) {
-            return executePayment(ability, cardToUnattach);
+            return PaymentDecision.card(cardToUnattach);
         }
-        return false;
+        return null;
     }
 
     public Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {

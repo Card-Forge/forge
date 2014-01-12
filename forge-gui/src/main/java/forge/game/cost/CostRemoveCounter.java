@@ -119,7 +119,7 @@ public class CostRemoveCounter extends CostPartWithList {
     }
 
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
@@ -142,22 +142,21 @@ public class CostRemoveCounter extends CostPartWithList {
             }
 
             if (maxCounters < cntRemoved) 
-                return false;
-            cntRemoved = cntRemoved >= 0 ? cntRemoved : maxCounters;
-            source.setSVar("CostCountersRemoved", Integer.toString(cntRemoved));
-            executePayment(ability, source);
-            return true;
+                return null;
+            PaymentDecision res = PaymentDecision.card(source);
+            res.c = cntRemoved >= 0 ? cntRemoved : maxCounters;
+            return res;
         } else if (type.equals("OriginalHost")) {
             int maxCounters = ability.getOriginalHost().getCounters(this.counter);
             if (amount.equals("All")) {
                 cntRemoved = maxCounters;
             }
             if (maxCounters < cntRemoved) 
-                return false;
-            cntRemoved = cntRemoved >= 0 ? cntRemoved : maxCounters;
-            source.setSVar("CostCountersRemoved", Integer.toString(cntRemoved));
-            executePayment(ability, ability.getOriginalHost());
-            return true;
+                return null;
+
+            PaymentDecision res = PaymentDecision.card(ability.getOriginalHost());
+            res.c = cntRemoved >= 0 ? cntRemoved : maxCounters;
+            return res;
         }
 
         List<Card> validCards = CardLists.getValidCards(activator.getCardsIn(getZone()), type.split(";"), activator, source);
@@ -167,23 +166,21 @@ public class CostRemoveCounter extends CostPartWithList {
             inp.setCancelAllowed(true);
             inp.showAndWait();
             if(inp.hasCancelled())
-                return false;
+                return null;
 
             // Have to hack here: remove all counters minus one, without firing any triggers,
             // triggers will fire when last is removed by executePayment.
             // They don't care how many were removed anyway
-            int sum = 0;
+            // int sum = 0;
             for(Card crd : inp.getSelected()) {
                 int removed = inp.getTimesSelected(crd);
-                sum += removed;
+               // sum += removed;
                 if(removed < 2) continue;
                 int oldVal = crd.getCounters().get(getCounter()).intValue();
                 crd.getCounters().put(getCounter(), Integer.valueOf(oldVal - removed + 1));
             }
-            source.setSVar("CostCountersRemoved", Integer.toString(sum));
             cntRemoved = 1;
-            return executePayment(ability, inp.getSelected());
-
+            return PaymentDecision.card(inp.getSelected());
         } 
 
         // Rift Elemental only - always removes 1 counter, so there will be no code for N counters.
@@ -192,16 +189,8 @@ public class CostRemoveCounter extends CostPartWithList {
             if(crd.getCounters( getCounter()) > 0 )
                 suspended.add(crd);
 
-        if(suspended.isEmpty())
-            return false;
-
-        
         final Card card = GuiChoose.oneOrNone("Remove counter(s) from a card in " + getZone(), suspended);
-        if( null == card)
-            return false;
-        
-        source.setSVar("CostCountersRemoved", "1");
-        return executePayment(ability, card);
+        return null == card ? null : PaymentDecision.card(card);
     }
 
     private final CounterType counter;
@@ -339,7 +328,8 @@ public class CostRemoveCounter extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
+        Card source = ability.getSourceCard();
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {

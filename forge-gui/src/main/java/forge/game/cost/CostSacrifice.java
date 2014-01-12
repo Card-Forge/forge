@@ -125,7 +125,7 @@ public class CostSacrifice extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         final String type = this.getType();
@@ -138,36 +138,36 @@ public class CostSacrifice extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
-                return activator.getController().confirmPayment(this, "Sacrifice " + source.getName() + "?") && executePayment(ability, source);
+                return activator.getController().confirmPayment(this, "Sacrifice " + source.getName() + "?") ? PaymentDecision.card(source) : null;
+            } else 
+                return null;
+        }
+        
+        if (amount.equals("All"))
+            return PaymentDecision.card(list);
+        
+    
+        Integer c = this.convertAmount();
+        if (c == null) {
+            // Generalize this
+            if (ability.getSVar(amount).equals("XChoice")) {
+                c = chooseXValue(source, ability, list.size());
+            } else {
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        else if (amount.equals("All")) {
-            return executePayment(ability, list);
+        if (0 == c.intValue()) {
+            return PaymentDecision.number(0);
         }
-        else {
-            Integer c = this.convertAmount();
-            if (c == null) {
-                // Generalize this
-                if (ability.getSVar(amount).equals("XChoice")) {
-                    c = chooseXValue(source, ability, list.size());
-                } else {
-                    c = AbilityUtils.calculateAmount(source, amount, ability);
-                }
-            }
-            if (0 == c.intValue()) {
-                return true;
-            }
 
-            InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, list);
-            inp.setMessage("Select a " + this.getDescriptiveType() + " to sacrifice (%d left)");
-            inp.setCancelAllowed(true);
-            inp.showAndWait();
-            if ( inp.hasCancelled() )
-                return false;
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, list);
+        inp.setMessage("Select a " + this.getDescriptiveType() + " to sacrifice (%d left)");
+        inp.setCancelAllowed(true);
+        inp.showAndWait();
+        if ( inp.hasCancelled() )
+            return null;
 
-            return executePayment(ability, inp.getSelected());
-        }
-        return false;
+        return PaymentDecision.card(inp.getSelected());
     }
 
     @Override

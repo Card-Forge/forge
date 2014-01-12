@@ -20,6 +20,7 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -158,7 +159,7 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player payer) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
         final Card source = ability.getSourceCard();
 
         List<Card> handList = new ArrayList<Card>(payer.getCardsIn(ZoneType.Hand));
@@ -166,16 +167,16 @@ public class CostDiscard extends CostPartWithList {
         final String amount = this.getAmount();
 
         if (this.payCostFromSource()) {
-            return handList.contains(source) && executePayment(ability, source);
+            return handList.contains(source) ? PaymentDecision.card(source) : null;
         }
 
         if (discardType.equals("Hand")) {
-            return executePayment(ability, handList);
+            return PaymentDecision.card(handList);
         }
 
         if (discardType.equals("LastDrawn")) {
             final Card lastDrawn = payer.getLastDrawnCard();
-            return handList.contains(lastDrawn) && executePayment(ability, lastDrawn);
+            return handList.contains(lastDrawn) ? PaymentDecision.card(lastDrawn) : null;
         }
 
         Integer c = this.convertAmount();
@@ -192,7 +193,7 @@ public class CostDiscard extends CostPartWithList {
                 }
             }
 
-            return executePayment(ability, Aggregates.random(handList, c));
+            return PaymentDecision.card(Aggregates.random(handList, c));
         }
         if (discardType.contains("+WithSameName")) {
             String type = discardType.replace("+WithSameName", "");
@@ -209,7 +210,7 @@ public class CostDiscard extends CostPartWithList {
                     return false;
                 }
             });
-            if (c == 0) { return true; }
+            if (c == 0) { return PaymentDecision.card(Lists.<Card>newArrayList()); }
             List<Card> discarded = new ArrayList<Card>();
             while (c > 0) {
                 InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, handList);
@@ -217,7 +218,7 @@ public class CostDiscard extends CostPartWithList {
                 inp.setCancelAllowed(true);
                 inp.showAndWait();
                 if (inp.hasCancelled()) {
-                    return false;
+                    return null;
                 }
                 final Card first = inp.getFirstSelected();
                 discarded.add(first);
@@ -225,7 +226,7 @@ public class CostDiscard extends CostPartWithList {
                 handList.remove(first);
                 c--;
             }
-            return executePayment(ability, discarded);
+            return PaymentDecision.card(discarded);
         }
         else {
             String type = new String(discardType);
@@ -248,10 +249,10 @@ public class CostDiscard extends CostPartWithList {
             inp.setCancelAllowed(true);
             inp.showAndWait();
             if (inp.hasCancelled() || inp.getSelected().size() != c) {
-                return false;
+                return null;
             }
 
-            return executePayment(ability, inp.getSelected());
+            return PaymentDecision.card(inp.getSelected());
         }
     }
 
@@ -269,14 +270,6 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public String getHashForList() {
         return "Discarded";
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
-        return executePayment(ability, decision.cards);
     }
 
     @Override

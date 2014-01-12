@@ -17,8 +17,6 @@
  */
 package forge.game.cost;
 
-import java.util.List;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -86,7 +84,7 @@ public class CostMill extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Card source = ability.getSourceCard();
@@ -103,14 +101,9 @@ public class CostMill extends CostPartWithList {
         }
 
         if (!activator.getController().confirmPayment(this, "Mill " + c + " card" + (c == 1 ? "" : "s") + " from your library?")) {
-            return false;
+            return null;
         }
-
-        final List<Card> list = activator.getCardsIn(ZoneType.Library, c);
-        for (final Card card : list) { // this list is a copy, no exception expected
-            executePayment(ability, card);
-        }
-        return true;
+        return PaymentDecision.card(activator.getCardsIn(ZoneType.Library, c));
     }
 
     /*

@@ -17,18 +17,10 @@
  */
 package forge.game.cost;
 
-import forge.ai.ComputerUtilMana;
-import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.input.InputPayMana;
-import forge.gui.input.InputPayManaOfCostPayment;
-import forge.gui.input.InputPayManaX;
 
 /**
  * The mana component of any spell or ability cost
@@ -104,117 +96,25 @@ public class CostPartMana extends CostPart {
         return true;
     }
 
-    @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
-        final Card source = ability.getSourceCard();
-        ManaCostBeingPaid toPay = new ManaCostBeingPaid(getManaToPay(), restriction);
-
-        boolean xWasBilled = false;
-        String xInCard = source.getSVar("X");
-        if (this.getAmountOfX() > 0 && !"Count$xPaid".equals(xInCard)) { // announce X will overwrite whatever was in card script
-            // this currently only works for things about Targeted object
-            int xCost = AbilityUtils.calculateAmount(source, "X", ability) * this.getAmountOfX();
-            byte xColor = MagicColor.fromName(ability.hasParam("XColor") ? ability.getParam("XColor") : "1"); 
-            toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
-            xWasBilled = true;
-        }
-        int timesMultikicked = ability.getSourceCard().getKickerMagnitude();
-        if ( timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
-            ManaCost mkCost = ability.getMultiKickerManaCost();
-            for(int i = 0; i < timesMultikicked; i++)
-                toPay.combineManaCost(mkCost);
-        }
-
-        InputPayMana inpPayment;
-        toPay.applySpellCostChange(ability, false);
-        if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
-            System.out.println("Sacrifice input for Offering cancelled");
-            return false;
-        }
-        if (!toPay.isPaid()) {
-            inpPayment = new InputPayManaOfCostPayment(toPay, ability);
-            inpPayment.showAndWait();
-            if (!inpPayment.isPaid()) {
-                return handleOfferingAndConvoke(ability, true, false);
-            }
-
-            source.setColorsPaid(toPay.getColorsPaid());
-            source.setSunburstValue(toPay.getSunburst());
-        }
-        if (this.getAmountOfX() > 0) {
-            if (!ability.isAnnouncing("X") && !xWasBilled) {
-                source.setXManaCostPaid(0);
-                inpPayment = new InputPayManaX(ability, this.getAmountOfX(), this.canXbe0());
-                inpPayment.showAndWait();
-                if (!inpPayment.isPaid()) {
-                    return false;
-                }
-            } else {
-                int x = AbilityUtils.calculateAmount(source, "X", ability);
-                source.setXManaCostPaid(x);
-            }
-        }
-
-        // Handle convoke and offerings
-        if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
-            System.out.println("Finishing up Offering");
-            final Card offering = ability.getSacrificedAsOffering();
-            offering.setUsedToPay(false);
-            activator.getGame().getAction().sacrifice(offering, ability);
-            ability.resetSacrificedAsOffering();
-        }
-        if (ability.getTappedForConvoke() != null) {
-            for (final Card c : ability.getTappedForConvoke()) {
-                c.setTapped(false);
-                c.tap();
-            }
-            ability.clearTappedForConvoke();
-        }
-        return handleOfferingAndConvoke(ability, false, true);
-
-    }
-
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
-        return ComputerUtilMana.payManaCost(ai, ability);
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public String getRestiction() {
-        // TODO Auto-generated method stub
         return restriction;
     }
 
-    private boolean handleOfferingAndConvoke(final SpellAbility ability, boolean manaInputCancelled, boolean isPaid) {
-        boolean done = !manaInputCancelled && isPaid;
-        if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
-            final Card offering = ability.getSacrificedAsOffering();
-            offering.setUsedToPay(false);
-            if (done) {
-                ability.getSourceCard().getGame().getAction().sacrifice(offering, ability);
-            }
-            ability.resetSacrificedAsOffering();
-        }
-        if (ability.getTappedForConvoke() != null) {
-            for (final Card c : ability.getTappedForConvoke()) {
-                c.setTapped(false);
-                if (done) {
-                    c.tap();
-                }
-            }
-            ability.clearTappedForConvoke();
-        }
-        return done;
-    }
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+
+    @Override
+    public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
+        // TODO Auto-generated method stub
+        return payer.getController().payManaCost(this, pd, sa);
+    }
+
+    @Override
+    public PaymentDecision payHuman(SpellAbility ability, Player humanPayer) {
+        // TODO Auto-generated method stub
+        return new PaymentDecision(0);
     }
 
 }

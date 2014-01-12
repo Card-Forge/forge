@@ -25,6 +25,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
+import forge.ai.ComputerUtilMana;
 import forge.ai.ability.CharmAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -44,6 +45,8 @@ import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.PaymentDecision;
 import forge.game.mana.Mana;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.Ability;
@@ -702,6 +705,12 @@ public class PlayerControllerAi extends PlayerController {
     public List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses) {
         // TODO AI takes all by default
         return losses;
+    }
+
+    @Override
+    public boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa) {
+        // TODO Auto-generated method stub
+        return ComputerUtilMana.payManaCost(player, sa);
     }
 
 }

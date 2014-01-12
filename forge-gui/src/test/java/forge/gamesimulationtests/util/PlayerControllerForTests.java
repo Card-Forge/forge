@@ -16,6 +16,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
 import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilMana;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.DrawAi;
 import forge.ai.ability.GameWinAi;
@@ -34,6 +35,8 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.PaymentDecision;
 import forge.game.mana.Mana;
 import forge.gui.player.HumanPlay;
 import forge.game.player.LobbyPlayer;
@@ -561,5 +564,11 @@ public class PlayerControllerForTests extends PlayerController {
     public int chooseNumber(SpellAbility sa, String title, List<Integer> values, Player relatedPlayer) {
         // TODO Auto-generated method stub
         return Iterables.getFirst(values, Integer.valueOf(0));
+    }
+
+    @Override
+    public boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa) {
+        // TODO Auto-generated method stub
+        return ComputerUtilMana.payManaCost(player, sa);
     }
 }

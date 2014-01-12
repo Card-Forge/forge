@@ -7,6 +7,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -20,7 +21,6 @@ import forge.game.cost.CostDamage;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostDraw;
 import forge.game.cost.CostExile;
-import forge.game.cost.CostExileAndPay;
 import forge.game.cost.CostExiledMoveToGrave;
 import forge.game.cost.CostFlipCoin;
 import forge.game.cost.CostGainControl;
@@ -45,7 +45,6 @@ import forge.game.cost.ICostVisitor;
 import forge.game.player.Player;
 import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellPermanent;
 import forge.game.zone.ZoneType;
 
 public class AiCostDecision implements ICostVisitor<PaymentDecision> {
@@ -69,24 +68,14 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
     
-        return new PaymentDecision(c);
+        return PaymentDecision.number(c);
     }
 
 
     @Override
     public PaymentDecision visit(CostChooseCreatureType cost) {
-        Integer c = cost.convertAmount();
-
-        if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            // Generalize cost
-            if (sVar.equals("XChoice")) {
-                return null; // cannot pay
-            } else {
-                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-            }
-        }
-        return new PaymentDecision(c);
+        String choice = ai.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>());
+        return PaymentDecision.type(choice);
     }
 
     @Override
@@ -98,17 +87,17 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             if (!hand.contains(ai.getLastDrawnCard())) {
                 return null;
             }
-            return new PaymentDecision(ai.getLastDrawnCard());
+            return PaymentDecision.card(ai.getLastDrawnCard());
         }
         else if (cost.payCostFromSource()) {
             if (!hand.contains(source)) {
                 return null;
             }
 
-            return new PaymentDecision(source);
+            return PaymentDecision.card(source);
         }
         else if (type.equals("Hand")) {
-            return new PaymentDecision(hand);
+            return PaymentDecision.card(hand);
         }
 
         if (type.contains("WithSameName")) {
@@ -124,11 +113,11 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         if (type.equals("Random")) {
-            return new PaymentDecision(CardLists.getRandomSubList(hand, c));
+            return PaymentDecision.card(CardLists.getRandomSubList(hand, c));
         }
         else {
             final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-            return new PaymentDecision(aic.getCardsToDiscard(c, type.split(";"), ability));
+            return PaymentDecision.card(aic.getCardsToDiscard(c, type.split(";"), ability));
         }
     }
 
@@ -146,7 +135,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             }
         }
 
-        return new PaymentDecision(c);
+        return PaymentDecision.number(c);
     }
 
     @Override
@@ -157,17 +146,17 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        return new PaymentDecision(c);
+        return PaymentDecision.number(c);
     }
 
     @Override
     public PaymentDecision visit(CostExile cost) {
         if (cost.payCostFromSource()) {
-            return new PaymentDecision(source);
+            return PaymentDecision.card(source);
         }
 
         if (cost.getType().equals("All")) {
-            return new PaymentDecision(new ArrayList<Card>(ai.getCardsIn(cost.getFrom())));
+            return PaymentDecision.card(ai.getCardsIn(cost.getFrom()));
         }
         else if (cost.getType().contains("FromTopGrave")) {
             return null;
@@ -184,7 +173,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         if (cost.getFrom().equals(ZoneType.Library)) {
-            return new PaymentDecision(ai.getCardsIn(ZoneType.Library, c));
+            return PaymentDecision.card(ai.getCardsIn(ZoneType.Library, c));
         }
         else if (cost.sameZone) {
             // TODO Determine exile from same zone for AI
@@ -192,51 +181,10 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         }
         else {
             List<Card> chosen = ComputerUtil.chooseExileFrom(ai, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c);
-            return null == chosen ? null : new PaymentDecision(chosen);
+            return null == chosen ? null : PaymentDecision.card(chosen);
         }
     }
 
-    @Override
-    public PaymentDecision visit(CostExileAndPay cost) {
-        List<Card> validGrave = CardLists.getValidCards(ability.getActivatingPlayer().getZone(ZoneType.Graveyard), "Creature", ability.getActivatingPlayer(), ability.getSourceCard());
-
-        if(validGrave.size() == 0)
-        {
-            return null;
-        }
-        
-        Card bestCard = null;
-        int bestScore = 0;
-        
-        for(Card candidate : validGrave)
-        {
-            boolean selectable = false;
-            for(SpellAbility sa : candidate.getSpellAbilities())
-            {
-                if(sa instanceof SpellPermanent)
-                {
-                    if(ComputerUtilCost.canPayCost(sa, ai))
-                    {
-                        selectable = true;
-                    }
-                }
-            }
-            
-            if(!selectable)
-            {
-                continue;
-            }
-            
-            int candidateScore = ComputerUtilCard.evaluateCreature(candidate);
-            if(candidateScore > bestScore)
-            {
-                bestScore = candidateScore;
-                bestCard = candidate;
-            }
-        }
-        
-        return bestCard == null ? null : new PaymentDecision(bestCard);
-    }
 
     @Override
     public PaymentDecision visit(CostExiledMoveToGrave cost) {
@@ -262,7 +210,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             chosen.add(typeList.get(i));
         }
 
-        return chosen.isEmpty() ? null : new PaymentDecision(chosen);
+        return chosen.isEmpty() ? null : PaymentDecision.card(chosen);
     }
 
     @Override
@@ -276,13 +224,13 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             }
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
-        return new PaymentDecision(c);
+        return PaymentDecision.number(c);
     }
 
     @Override
     public PaymentDecision visit(CostGainControl cost) {
         if (cost.payCostFromSource())
-            return new PaymentDecision(source);
+            return PaymentDecision.card(source);
         
         Integer c = cost.convertAmount();
         if (c == null) {
@@ -302,25 +250,15 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         for (int i = 0; i < c; i++) {
             res.add(typeList.get(i));
         }
-        return res.isEmpty() ? null : new PaymentDecision(res);
+        return res.isEmpty() ? null : PaymentDecision.card(res);
     }
 
 
     @Override
     public PaymentDecision visit(CostGainLife cost) {
-        Integer c = cost.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(cost.getAmount());
-            // Generalize cost
-            if (sVar.equals("XChoice")) {
-                return null;
-            } else {
-                c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
-            }
-        }
-    
         final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
-        for (final Player opp : ai.getOpponents()) {
+        
+        for (final Player opp : cost.getPotentialTargets(ai, source)) {
             if (opp.canGainLife()) {
                 oppsThatCanGainLife.add(opp);
             }
@@ -330,7 +268,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             return null;
         }
     
-        return new PaymentDecision(c);
+        return PaymentDecision.players(oppsThatCanGainLife);
     }
 
 
@@ -348,12 +286,12 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         List<Card> topLib = ai.getCardsIn(ZoneType.Library, c);
-        return topLib.size() < c ? null : new PaymentDecision(topLib);
+        return topLib.size() < c ? null : PaymentDecision.card(topLib);
     }
 
     @Override
     public PaymentDecision visit(CostPartMana cost) {
-        return new PaymentDecision(0);
+        return PaymentDecision.number(0);
     }
 
     @Override
@@ -372,7 +310,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             return null;
         }
         // activator.payLife(c, null);
-        return new PaymentDecision(c);
+        return PaymentDecision.number(c);
     }
 
 
@@ -416,14 +354,14 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         } else {
             chosen = ComputerUtil.choosePutToLibraryFrom(ai, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c);
         }
-        return chosen.isEmpty() ? null : new PaymentDecision(chosen);
+        return chosen.isEmpty() ? null : PaymentDecision.card(chosen);
     }
 
     @Override
     public PaymentDecision visit(CostPutCounter cost) {
 
         if (cost.payCostFromSource()) {
-            return new PaymentDecision(source);
+            return PaymentDecision.card(source);
 
         }
 
@@ -435,13 +373,13 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         } else {
             card = ComputerUtilCard.getWorstPermanentAI(typeList, false, false, false, false);
         }
-        return new PaymentDecision(card);
+        return PaymentDecision.card(card);
     }
 
 
     @Override
     public PaymentDecision visit(CostTap cost) {
-        return new PaymentDecision(0);
+        return PaymentDecision.number(0);
     }
 
     @Override
@@ -472,14 +410,14 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             return null;
         }
 
-        return new PaymentDecision(totap);
+        return PaymentDecision.card(totap);
     }
 
 
     @Override
     public PaymentDecision visit(CostSacrifice cost) {
         if (cost.payCostFromSource()) {
-            return new PaymentDecision(source);
+            return PaymentDecision.card(source);
         }
         if (cost.getAmount().equals("All")) {
             /*List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
@@ -500,13 +438,13 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
         List<Card> list = ComputerUtil.chooseSacrificeType(ai, cost.getType(), source, ability.getTargetCard(), c);
-        return new PaymentDecision(list);
+        return PaymentDecision.card(list);
     }
 
     @Override
     public PaymentDecision visit(CostReturn cost) {
         if (cost.payCostFromSource())
-            return new PaymentDecision(source);
+            return PaymentDecision.card(source);
         
         Integer c = cost.convertAmount();
         if (c == null) {
@@ -514,7 +452,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         List<Card> res = ComputerUtil.chooseReturnType(ai, cost.getType(), source, ability.getTargetCard(), c);
-        return res.isEmpty() ? null : new PaymentDecision(res);
+        return res.isEmpty() ? null : PaymentDecision.card(res);
     }
 
     @Override
@@ -527,11 +465,11 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             if (!hand.contains(source)) {
                 return null;
             }
-            return new PaymentDecision(source);
+            return PaymentDecision.card(source);
         }
 
         if (cost.getType().equals("Hand"))
-            return new PaymentDecision(new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand)));
+            return PaymentDecision.card(ai.getCardsIn(ZoneType.Hand));
 
         if (cost.getType().equals("SameColor")) {
             return null;
@@ -549,7 +487,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        return new PaymentDecision(aic.getCardsToDiscard(c, type.split(";"), ability));
+        return PaymentDecision.card(aic.getCardsToDiscard(c, type.split(";"), ability));
     }
 
     @Override
@@ -572,7 +510,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         });
         // Only find cards with enough negative counters
         // TODO: add ai for Chisei, Heart of Oceans
-        return hperms.isEmpty() ? null : new PaymentDecision(hperms);
+        return hperms.isEmpty() ? null : PaymentDecision.card(hperms);
     }
 
     @Override
@@ -602,7 +540,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             }
             for (Card card : typeList) {
                 if (card.getCounters(cost.getCounter()) >= c) {
-                    return new PaymentDecision(card);
+                    return PaymentDecision.card(card);
                 }
             }
             return null;
@@ -613,7 +551,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             return null;
         }
 
-        PaymentDecision result = new PaymentDecision(source);
+        PaymentDecision result = PaymentDecision.card(source);
         result.c = c; // cost.cntRemoved = c;
         return result;
     }
@@ -645,12 +583,12 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             return null;
         }
     
-        return new PaymentDecision(list);
+        return PaymentDecision.card(list);
     }
 
     @Override
     public PaymentDecision visit(CostUntap cost) {
-        return new PaymentDecision(0);
+        return PaymentDecision.number(0);
     }
 
     @Override
@@ -660,7 +598,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             // We really shouldn't be able to get here if there's nothing to unattach
             return null;
         }
-        return new PaymentDecision(cardToUnattach);
+        return PaymentDecision.card(cardToUnattach);
     }
 }
 

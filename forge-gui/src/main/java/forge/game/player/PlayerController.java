@@ -24,6 +24,8 @@ import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
+import forge.game.cost.PaymentDecision;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementEffect;
@@ -217,4 +219,6 @@ public abstract class PlayerController {
     // These 2 are for AI
     public List<Card> cheatShuffle(List<Card> list) { return list; }
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) { return null; }
+
+    public abstract boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa);
 }

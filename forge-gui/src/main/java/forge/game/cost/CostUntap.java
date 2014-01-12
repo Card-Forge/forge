@@ -83,21 +83,16 @@ public class CostUntap extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
-        // if (!canPay(ability, source, ability.getActivatingPlayer(),
-        // payment.getCost()))
-        // return false;
-
-        ability.getSourceCard().untap();
-        return true;
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
+        return PaymentDecision.number(1);
     }
 
     /* (non-Javadoc)
      * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
-        source.untap();
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
+        ability.getSourceCard().untap();
         return true;
     }
     

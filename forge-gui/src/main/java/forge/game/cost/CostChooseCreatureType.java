@@ -20,7 +20,6 @@ package forge.game.cost;
 import java.util.ArrayList;
 
 import forge.card.CardType;
-import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -59,15 +58,19 @@ public class CostChooseCreatureType extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player payer) {
-        final Card source = ability.getSourceCard();
-
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
         String choice = payer.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>(), true);
         if( null == choice )
-            return false;
-        source.setChosenType(choice);
+            return null;
+        return PaymentDecision.type(choice);
+    }
+    
+    @Override
+    public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
+        sa.getSourceCard().setChosenType(pd.type);
         return true;
     }
+    
 
     /*
      * (non-Javadoc)
@@ -83,14 +86,6 @@ public class CostChooseCreatureType extends CostPart {
         return sb.toString();
     }
 
-
-	@Override
-	public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
-		String choice = ai.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>());
-		source.setChosenType(choice);
-		return true;
-	}
-	
     @Override
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);

@@ -8,7 +8,6 @@ public interface ICostVisitor<T> {
     public T visit(CostDamage cost);
     public T visit(CostDraw cost);
     public T visit(CostExile cost);
-    public T visit(CostExileAndPay cost);
     public T visit(CostExiledMoveToGrave cost);
     public T visit(CostFlipCoin cost);
     public T visit(CostMill cost);
@@ -58,11 +57,6 @@ public interface ICostVisitor<T> {
 
         @Override
         public T visit(CostExile cost) {
-            return null;
-        }
-
-        @Override
-        public T visit(CostExileAndPay cost) {
             return null;
         }
 

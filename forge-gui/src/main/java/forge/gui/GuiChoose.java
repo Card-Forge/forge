@@ -17,6 +17,7 @@ import javax.swing.event.ListSelectionListener;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 import forge.FThreads;
 import forge.Singletons;
@@ -82,9 +83,11 @@ public class GuiChoose {
     }
 
     public static <T> T one(final String message, final Collection<T> choices) {
-        if ((choices == null) || (choices.size() == 0)) {
+        if (choices == null || choices.isEmpty())
             return null;
-        }
+        if( choices.size() == 1)
+            return Iterables.getFirst(choices, null);
+
         final List<T> choice = GuiChoose.getChoices(message, 1, 1, choices);
         assert choice.size() == 1;
         return choice.get(0);

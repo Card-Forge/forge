@@ -19,8 +19,10 @@ package forge.game.cost;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -33,6 +35,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.input.InputSelectCardsFromList;
+import forge.util.Lang;
 
 /**
  * The Class CostExile.
@@ -211,7 +214,7 @@ public class CostExile extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         final Card source = ability.getSourceCard();
         final Game game = activator.getGame(); 
@@ -239,16 +242,12 @@ public class CostExile extends CostPartWithList {
         }
 
         if (this.payCostFromSource()) {
-            return source.getZone() == activator.getZone(from) 
-                    && activator.getController().confirmPayment(this, "Exile " + source.getName() + "?") 
-                    && executePayment(ability, source);
+            return source.getZone() == activator.getZone(from) && activator.getController().confirmPayment(this, "Exile " + source.getName() + "?") ? PaymentDecision.card(source) : null;
+
         }
 
         if (type.equals("All")) {
-            for (final Card card : list) {
-                executePayment(ability, card);
-            }
-            return true;
+            return PaymentDecision.card(list);
         }
         list = CardLists.getValidCards(list, type.split(";"), activator, source);
         if (c == null) {
@@ -267,7 +266,7 @@ public class CostExile extends CostPartWithList {
             inp.setMessage("Exile %d card(s) from your" + from);
             inp.setCancelAllowed(true);
             inp.showAndWait();
-            return !inp.hasCancelled() && executePayment(ability, inp.getSelected());
+            return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
         }
 
         if (this.from == ZoneType.Stack) { return exileFromStack(ability, c); }
@@ -297,34 +296,22 @@ public class CostExile extends CostPartWithList {
     // ExileFromTop<Num/Type{/TypeDescription}> (of library)
     // ExileSameGrave<Num/Type{/TypeDescription}>
 
-    private boolean exileFromSame(List<Card> list, int nNeeded, List<Player> payableZone) {
+    private PaymentDecision exileFromSame(List<Card> list, int nNeeded, List<Player> payableZone) {
         if (nNeeded == 0) {
-            return true;
+            return PaymentDecision.number(0);
         }
 
         final Player p = GuiChoose.oneOrNone(String.format("Exile from whose %s?", getFrom()), payableZone);
         if (p == null) {
-            return false;
+            return null;
         }
 
         List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(p));
-
-        for (int i = 0; i < nNeeded; i++) {
-            if (typeList.isEmpty()) {
-                return false;
-            }
-
-            final Card c = GuiChoose.oneOrNone("Exile from " + getFrom(), typeList);
-
-            if (c != null) {
-                typeList.remove(c);
-                executePayment(null, c);
-            }
-            else {
-                return false;
-            }
-        }
-        return true;
+        if(typeList.size() < nNeeded)
+            return null;
+        
+        List<Card> toExile = GuiChoose.many("Exile from " + getFrom(), "To be exiled", nNeeded, typeList, null);
+        return PaymentDecision.card(toExile);
     }
 
     /**
@@ -335,9 +322,9 @@ public class CostExile extends CostPartWithList {
      * @param nNeeded
      * @param part
      */
-    private boolean exileFromStack(SpellAbility sa, int nNeeded) {
+    private PaymentDecision exileFromStack(SpellAbility sa, int nNeeded) {
         if (nNeeded == 0) {
-            return true;
+            return PaymentDecision.number(0);
         }
 
         final Game game = sa.getActivatingPlayer().getGame();
@@ -357,11 +344,12 @@ public class CostExile extends CostPartWithList {
             }
         }
 
+        if (saList.size() < nNeeded) {
+            return null;
+        }
+        
+        List<Card> exiled = new ArrayList<Card>();
         for (int i = 0; i < nNeeded; i++) {
-            if (saList.isEmpty()) {
-                return false;
-            }
-
             //Have to use the stack descriptions here because some copied spells have no description otherwise
             final String o = GuiChoose.oneOrNone("Exile from " + getFrom(), descList);
 
@@ -371,74 +359,52 @@ public class CostExile extends CostPartWithList {
 
                 saList.remove(toExile);
                 descList.remove(o);
-
-                if (!c.isCopiedSpell()) {
-                    executePayment(sa, c);
-                }
-                else {
-                    addToList(c);
-                }
-                final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(toExile);
-                game.getStack().remove(si);
+                
+                exiled.add(c);
             }
             else {
-                return false;
+                return null;
             }
         }
-        return true;
+        return PaymentDecision.card(exiled);
     }
 
-    private  boolean exileFromTop(final SpellAbility sa, final Player payer, final int nNeeded) {
+    private PaymentDecision exileFromTop(final SpellAbility sa, final Player payer, final int nNeeded) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Exile ").append(nNeeded).append(" cards from the top of your library?");
         final List<Card> list = payer.getCardsIn(ZoneType.Library, nNeeded);
 
-        if (list.size() > nNeeded) {
-            // I don't believe this is possible
-            return false;
+        if (list.size() > nNeeded || !payer.getController().confirmPayment(this, "Exile " + Lang.nounWithAmount(nNeeded, "card") + " from the top of your library?")) {
+            return null;
         }
 
-        if (!payer.getController().confirmPayment(this, "Exile " + nNeeded + " card" + (nNeeded == 1 ? "" : "s") +
-                " from the top of your library?")) {
-            return false;
-        }
-
-        final Iterator<Card> itr = list.iterator();
-        while (itr.hasNext()) {
-            executePayment(sa, itr.next());
-        }
-        return true;
+        return PaymentDecision.card(list);
     }
 
-    private boolean exileFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList) {
+    private PaymentDecision exileFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList) {
+        if (typeList.size() < nNeeded)
+            return null;
+        
+        List<Card> exiled = new ArrayList<Card>();
         for (int i = 0; i < nNeeded; i++) {
-            if (typeList.isEmpty()) {
-                return false;
-            }
-
             final Card c = GuiChoose.oneOrNone("Exile from " + getFrom(), typeList);
 
             if (c != null) {
                 typeList.remove(c);
-                executePayment(sa, c);
+                exiled.add(c);
             } else {
-                return false;
+                return null;
             }
         }
-        return true;
+        return PaymentDecision.card(exiled);
     }
 
-    private boolean exileFromTopGraveType(SpellAbility sa, int nNeeded, List<Card> typeList) {
+    private PaymentDecision exileFromTopGraveType(SpellAbility sa, int nNeeded, List<Card> typeList) {
+        if (typeList.size() < nNeeded)
+            return null;
+        
         Collections.reverse(typeList);
-        for (int i = 0; i < nNeeded; i++) {
-            if (typeList.isEmpty()) {
-                return false;
-            }
-            final Card c = typeList.get(0);
-            typeList.remove(c);
-            executePayment(sa, c);
-        }
-        return true;
+        return PaymentDecision.card(Lists.newArrayList(Iterables.limit(typeList, nNeeded)));
     }
 
     /* (non-Javadoc)
@@ -446,7 +412,18 @@ public class CostExile extends CostPartWithList {
      */
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard) {
-        targetCard.getGame().getAction().exile(targetCard);
+        Game game = targetCard.getGame();
+        game.getAction().exile(targetCard);
+        
+        if (this.from.equals(ZoneType.Stack)) {
+            ArrayList<SpellAbility> spells = targetCard.getSpellAbilities();
+            for (SpellAbility spell : spells) {
+                if (targetCard.isInZone(ZoneType.Exile)) {
+                    final SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
+                    game.getStack().remove(si);
+                }
+            }
+        }
     }
 
     /* (non-Javadoc)
@@ -458,26 +435,6 @@ public class CostExile extends CostPartWithList {
         return "Exiled";
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.cost.CostPart#payAI(forge.card.cost.PaymentDecision, forge.game.player.AIPlayer, forge.card.spellability.SpellAbility, forge.Card)
-     */
-    @Override
-    public boolean payAI(PaymentDecision decision, Player ai, SpellAbility ability, Card source) {
-        for (final Card c : decision.cards) {
-            executePayment(ability, c);
-            if (this.from.equals(ZoneType.Stack)) {
-                ArrayList<SpellAbility> spells = c.getSpellAbilities();
-                for (SpellAbility spell : spells) {
-                    if (c.isInZone(ZoneType.Exile)) {
-                        final SpellAbilityStackInstance si = ai.getGame().getStack().getInstanceFromSpellAbility(spell);
-                        ai.getGame().getStack().remove(si);
-                    }
-                }
-            }
-        }
-        return true;
-    }
-    
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

@@ -81,11 +81,24 @@ public class CostAddMana extends CostPart {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
+     * @see
+     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
+        final Card source = ability.getSourceCard();
+        Integer c = this.convertAmount();
+        if (c == null) {
+            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
+        }
+        return PaymentDecision.number(c);
+    }
+    
+    @Override
+    public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility sa) {
+        Card source = sa.getSourceCard();
+        
         ColorSet cid = null;
         if (ai.getGame().getType() == GameType.Commander) {
             cid = ai.getCommander().getRules().getColorIdentity();
@@ -108,46 +121,6 @@ public class CostAddMana extends CostPart {
             }
         }
         ai.getManaPool().add(manaProduced);
-        
-        return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
-        final Card source = ability.getSourceCard();
-        Integer c = this.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-        ColorSet cid = null;
-        if (activator.getGame().getType() == GameType.Commander) {
-            cid = activator.getCommander().getRules().getColorIdentity();
-        }
-        ArrayList<Mana> manaProduced = new ArrayList<Mana>();
-        final String type = this.getType();
-        for (int n = 0; n < c; n++) {
-            if (StringUtils.isNumeric(type)) {
-                for (int i = Integer.parseInt(type); i > 0; i--) {
-                    manaProduced.add(new Mana(MagicColor.COLORLESS, source, null));
-                }
-            } else {
-                byte attemptedMana = MagicColor.fromName(type);
-                if (cid != null) {
-                    if (!cid.hasAnyColor(attemptedMana)) {
-                        attemptedMana = MagicColor.COLORLESS;
-                    }
-                }
-                manaProduced.add(new Mana(attemptedMana, source, null));
-            }
-        }
-        activator.getManaPool().add(manaProduced);
         return true;
     }
 

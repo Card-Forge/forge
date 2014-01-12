@@ -54,16 +54,10 @@ public class CostDamage extends CostPart {
     public final boolean canPay(final SpellAbility ability) {
         return true;
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#payAI(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
+    
     @Override
-    public final boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source) {
-        return ai.addDamage(decision.c, source);
+    public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility sa) {
+        return payer.addDamage(decision.c, sa.getSourceCard());
     }
 
     /*
@@ -74,7 +68,7 @@ public class CostDamage extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Player activator) {
+    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
         final String amount = this.getAmount();
         final int life = activator.getLife();
         final Card source = ability.getSourceCard();
@@ -92,10 +86,9 @@ public class CostDamage extends CostPart {
         }
 
         if (activator.canPayLife(c) && activator.getController().confirmPayment(this, "Pay " + c + " Life?")) {
-            activator.addDamage(c, source);
-            return true;
+            return PaymentDecision.number(c);
         }
-        return false;
+        return null;
     }
 
     @Override

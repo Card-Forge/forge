@@ -150,8 +150,6 @@ public abstract class CostPart {
     public abstract boolean canPay(SpellAbility ability);
 
     public abstract <T> T accept(final ICostVisitor<T> visitor);
-    
-    public abstract boolean payAI(final PaymentDecision decision, final Player ai, SpellAbility ability, Card source);
 
     /**
      * Pay human.
@@ -165,7 +163,7 @@ public abstract class CostPart {
      * @param game
      * @return true, if successful
      */
-    public abstract boolean payHuman(SpellAbility ability, Player humanPayer);
+    public abstract PaymentDecision payHuman(SpellAbility ability, Player humanPayer);
     
     /*
      * (non-Javadoc)
@@ -205,4 +203,6 @@ public abstract class CostPart {
         card.setSVar("ChosenX", Integer.toString(chosenX));
         return chosenX;
     }
+
+    public abstract boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa);
 }
