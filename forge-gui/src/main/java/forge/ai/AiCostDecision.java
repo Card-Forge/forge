@@ -525,7 +525,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
                 return null;
             }
             if (amount.equals("All")) {
-                c = source.getCounters(cost.getCounter());
+                c = source.getCounters(cost.counter);
             } else {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
@@ -536,18 +536,18 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             if (type.equals("OriginalHost")) {
                 typeList = Lists.newArrayList(ability.getOriginalHost());
             } else {
-                typeList = CardLists.getValidCards(ai.getCardsIn(cost.getZone()), type.split(";"), ai, source);
+                typeList = CardLists.getValidCards(ai.getCardsIn(cost.zone), type.split(";"), ai, source);
             }
             for (Card card : typeList) {
-                if (card.getCounters(cost.getCounter()) >= c) {
+                if (card.getCounters(cost.counter) >= c) {
                     return PaymentDecision.card(card);
                 }
             }
             return null;
         }
 
-        if (c > source.getCounters(cost.getCounter())) {
-            System.out.println("Not enough " + cost.getCounter() + " on " + source.getName());
+        if (c > source.getCounters(cost.counter)) {
+            System.out.println("Not enough " + cost.counter + " on " + source.getName());
             return null;
         }
 

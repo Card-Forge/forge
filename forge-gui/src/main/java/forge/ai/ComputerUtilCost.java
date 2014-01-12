@@ -73,7 +73,7 @@ public class ComputerUtilCost {
             if (part instanceof CostRemoveCounter) {
                 final CostRemoveCounter remCounter = (CostRemoveCounter) part;
     
-                final CounterType type = remCounter.getCounter();
+                final CounterType type = remCounter.counter;
                 if (!part.payCostFromSource()) {
                     if (type.name().equals("P1P1")) {
                         return false;

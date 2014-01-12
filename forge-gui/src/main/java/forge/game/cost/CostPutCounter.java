@@ -25,8 +25,6 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCardsFromList;
-import forge.util.Lang;
 
 /**
  * The Class CostPutCounter.
@@ -164,37 +162,7 @@ public class CostPutCounter extends CostPartWithList {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        Integer c = getNumberOfCounters(ability);
-
-        if (this.payCostFromSource()) {
-            lastPaidAmount = c;
-            return PaymentDecision.number(c);
-        } 
-
-        // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter 
-        List<Card> typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), getType().split(";"), activator, ability.getSourceCard());
-        
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, typeList);
-        inp.setMessage("Put " + Lang.nounWithAmount(c, getCounter().getName() + " counter") + " on " + getDescriptiveType());
-        inp.setCancelAllowed(true);
-        inp.showAndWait();
-
-        if(inp.hasCancelled())
-            return null;
-
-        return PaymentDecision.card(inp.getSelected());
-    }
-
-    private Integer getNumberOfCounters(final SpellAbility ability) {
+    public Integer getNumberOfCounters(final SpellAbility ability) {
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(ability.getSourceCard(), this.getAmount(), ability);

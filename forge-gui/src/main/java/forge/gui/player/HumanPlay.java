@@ -321,6 +321,8 @@ public class HumanPlay {
             }
         }
 
+        HumanCostDecision hcd = new HumanCostDecision(p, sourceAbility, source);
+        
         //the following costs do not need inputs
         for (CostPart part : parts) {
             boolean mayRemovePart = true;
@@ -364,7 +366,7 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostGainLife) {
-                PaymentDecision pd = part.payHuman(sourceAbility, p);
+                PaymentDecision pd = part.accept(hcd);
                 
                 if (pd == null)
                     return false;
@@ -375,7 +377,7 @@ public class HumanPlay {
                 if (!p.getController().confirmPayment(part, "Do you want to add " + ((CostAddMana) part).toString() + " to your mana pool?" + orString)) {
                     return false;
                 }
-                PaymentDecision pd = part.payHuman(sourceAbility, p);
+                PaymentDecision pd = part.accept(hcd);
                 
                 if (pd == null)
                     return false;
@@ -452,7 +454,7 @@ public class HumanPlay {
                 }
             }
             else if (part instanceof CostRemoveCounter) {
-                CounterType counterType = ((CostRemoveCounter) part).getCounter();
+                CounterType counterType = ((CostRemoveCounter) part).counter;
                 int amount = getAmountFromPartX(part, source, sourceAbility);
 
                 if (!part.canPay(sourceAbility)) {

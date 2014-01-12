@@ -25,7 +25,6 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 
 /**
  * This is for the "ExiledMoveToGrave" Cost.
@@ -102,32 +101,6 @@ public class CostExiledMoveToGrave extends CostPartWithList {
 
         return true;
 
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
-        
-        final Card source = ability.getSourceCard();
-        Integer c = this.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        final Player activator = ability.getActivatingPlayer();
-        List<Card> list = activator.getGame().getCardsIn(ZoneType.Exile);
-        list = CardLists.getValidCards(list, this.getType().split(";"), activator, source);
-
-        if (list.size() < c)
-            return null;
-
-        return PaymentDecision.card(GuiChoose.many("Choose an exiled card to put into graveyard", "To graveyard", c, list, source));
     }
 
     /* (non-Javadoc)

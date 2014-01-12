@@ -20,7 +20,6 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -92,30 +91,6 @@ public class CostDraw extends CostPart {
             p.drawCards(decision.c);
         }
         return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
-        final String amount = this.getAmount();
-        final Card source = ability.getSourceCard();
-
-        Integer c = this.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, amount, ability);
-        }
-
-        if (!payer.getController().confirmPayment(this, "Draw " + c + " Card" + (c == 1 ? "" : "s"))) {
-            return null;
-        }
-
-        return PaymentDecision.number(c);
     }
 
     @Override

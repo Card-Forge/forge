@@ -17,8 +17,6 @@
  */
 package forge.game.cost;
 
-import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -58,37 +56,6 @@ public class CostDamage extends CostPart {
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility sa) {
         return payer.addDamage(decision.c, sa.getSourceCard());
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        final String amount = this.getAmount();
-        final int life = activator.getLife();
-        final Card source = ability.getSourceCard();
-
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(source, ability, life);
-            }
-            else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-
-        if (activator.canPayLife(c) && activator.getController().confirmPayment(this, "Pay " + c + " Life?")) {
-            return PaymentDecision.number(c);
-        }
-        return null;
     }
 
     @Override

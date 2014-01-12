@@ -18,14 +18,12 @@
 package forge.game.cost;
 
 import java.util.List;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * The Class CostUntapType.
@@ -118,41 +116,6 @@ public class CostUntapType extends CostPartWithList {
         }
 
         return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
-        List<Card> typeList = CardLists.getValidCards(payer.getGame().getCardsIn(ZoneType.Battlefield), this.getType().split(";"),
-                payer, ability.getSourceCard());
-        typeList = CardLists.filter(typeList, Presets.TAPPED);
-        final Card source = ability.getSourceCard();
-        if (!canUntapSource) {
-            typeList.remove(source);
-        }
-        final String amount = this.getAmount();
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(source, ability, typeList.size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, typeList);
-        inp.setMessage("Select a " + getDescriptiveType() + " to untap (%d left)");
-        inp.showAndWait();
-        if( inp.hasCancelled() || inp.getSelected().size() != c )
-            return null;
-        return PaymentDecision.card(inp.getSelected());
     }
 
     /* (non-Javadoc)

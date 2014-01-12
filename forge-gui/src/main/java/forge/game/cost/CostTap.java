@@ -83,23 +83,6 @@ public class CostTap extends CostPart {
         ability.getSourceCard().tap();
         return true;
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        // if (!canPay(ability, source, ability.getActivatingPlayer(),
-        // payment.getCost()))
-        // return false;
-
-        return PaymentDecision.number(1);
-    }
-
     
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);

@@ -101,41 +101,6 @@ public class CostPayLife extends CostPart {
         return ai.payLife(paidAmount, null);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        final Card source = ability.getSourceCard();
-        final String amount = this.getAmount();
-        final int life = activator.getLife();
-
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.startsWith("XChoice")) {
-                int limit = life;
-                if (sVar.contains("LimitMax")) {
-                    limit = AbilityUtils.calculateAmount(source, sVar.split("LimitMax.")[1], ability);
-                }
-                int maxLifePayment = limit < life ? limit : life;
-                c = chooseXValue(source, ability, maxLifePayment);
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-
-        if (activator.canPayLife(c) && activator.getController().confirmPayment(this, "Pay " + c + " Life?")) {
-            return PaymentDecision.number(c);
-        }
-        return null;
-    }
-
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

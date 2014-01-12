@@ -17,16 +17,9 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.collect.Lists;
 
-import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -34,8 +27,6 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.input.InputSelectManyBase;
 
 /**
  * The Class CostRemoveCounter.
@@ -48,170 +39,17 @@ public class CostRemoveCounter extends CostPartWithList {
     // Counter is tough),
     // Quillspike, Rift Elemental, Sage of Fables, Spike Rogue
 
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class InputSelectCardToRemoveCounter extends InputSelectManyBase<Card> {
-        private static final long serialVersionUID = 2685832214519141903L;
 
-        private final Map<Card,Integer> cardsChosen;
-        private final CounterType counterType;
-        private final List<Card> validChoices;
-
-        public InputSelectCardToRemoveCounter(int cntCounters, CounterType cType, List<Card> validCards) {
-            super(cntCounters, cntCounters);
-            this.validChoices = validCards;
-            counterType = cType;
-            cardsChosen = cntCounters > 0 ? new HashMap<Card, Integer>() : null; 
-        }
-
-        @Override
-        protected void onCardSelected(Card c, java.awt.event.MouseEvent triggerEvent) {
-            if (!isValidChoice(c) || c.getCounters(counterType) <= getTimesSelected(c)) {
-                return;
-            }
-
-            int tc = getTimesSelected(c);
-            cardsChosen.put(c, tc+1);
-
-            onSelectStateChanged(c, true);
-            refresh();
-        };
-
-        @Override
-        protected boolean hasEnoughTargets() {
-            return hasAllTargets();
-        }
-
-        @Override
-        protected boolean hasAllTargets() {
-            int sum = getDistibutedCounters();
-            return sum >= max;
-        }
-
-        protected String getMessage() {
-            return max == Integer.MAX_VALUE
-                ? String.format(message, getDistibutedCounters())
-                : String.format(message, max - getDistibutedCounters());
-        }
-
-        private int getDistibutedCounters() {
-            int sum = 0;
-            for(Entry<Card, Integer> kv : cardsChosen.entrySet()) {
-                sum += kv.getValue().intValue();
-            }
-            return sum;
-        }
-        
-        protected final boolean isValidChoice(GameEntity choice) {
-            return validChoices.contains(choice);
-        }
-
-        public int getTimesSelected(Card c) {
-            return cardsChosen.containsKey(c) ? cardsChosen.get(c).intValue() : 0;
-        }
-
-        @Override
-        public Collection<Card> getSelected() {
-            return cardsChosen.keySet();
-        }
-    }
-
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        final String amount = this.getAmount();
-        final Card source = ability.getSourceCard();
-        Integer c = this.convertAmount();
-        final String type = this.getType();
-
-        String sVarAmount = ability.getSVar(amount);
-        cntRemoved = 1;
-        if (c != null)  
-            cntRemoved = c.intValue();
-        else if (!"XChoice".equals(sVarAmount)) {
-            cntRemoved = AbilityUtils.calculateAmount(source, amount, ability);
-        }
-
-        if (this.payCostFromSource()) {
-            int maxCounters = source.getCounters(this.counter);
-            if (amount.equals("All"))
-                cntRemoved = maxCounters;
-            else if ( c == null && "XChoice".equals(sVarAmount)) { 
-                cntRemoved = chooseXValue(source, ability, maxCounters);
-            }
-
-            if (maxCounters < cntRemoved) 
-                return null;
-            PaymentDecision res = PaymentDecision.card(source);
-            res.c = cntRemoved >= 0 ? cntRemoved : maxCounters;
-            return res;
-        } else if (type.equals("OriginalHost")) {
-            int maxCounters = ability.getOriginalHost().getCounters(this.counter);
-            if (amount.equals("All")) {
-                cntRemoved = maxCounters;
-            }
-            if (maxCounters < cntRemoved) 
-                return null;
-
-            PaymentDecision res = PaymentDecision.card(ability.getOriginalHost());
-            res.c = cntRemoved >= 0 ? cntRemoved : maxCounters;
-            return res;
-        }
-
-        List<Card> validCards = CardLists.getValidCards(activator.getCardsIn(getZone()), type.split(";"), activator, source);
-        if (this.getZone().equals(ZoneType.Battlefield)) {
-            final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(cntRemoved, getCounter(), validCards);
-            inp.setMessage("Remove %d " + getCounter().getName() + " counters from " + getDescriptiveType());
-            inp.setCancelAllowed(true);
-            inp.showAndWait();
-            if(inp.hasCancelled())
-                return null;
-
-            // Have to hack here: remove all counters minus one, without firing any triggers,
-            // triggers will fire when last is removed by executePayment.
-            // They don't care how many were removed anyway
-            // int sum = 0;
-            for(Card crd : inp.getSelected()) {
-                int removed = inp.getTimesSelected(crd);
-               // sum += removed;
-                if(removed < 2) continue;
-                int oldVal = crd.getCounters().get(getCounter()).intValue();
-                crd.getCounters().put(getCounter(), Integer.valueOf(oldVal - removed + 1));
-            }
-            cntRemoved = 1;
-            return PaymentDecision.card(inp.getSelected());
-        } 
-
-        // Rift Elemental only - always removes 1 counter, so there will be no code for N counters.
-        List<Card> suspended = new ArrayList<Card>();
-        for(Card crd : validCards)
-            if(crd.getCounters( getCounter()) > 0 )
-                suspended.add(crd);
-
-        final Card card = GuiChoose.oneOrNone("Remove counter(s) from a card in " + getZone(), suspended);
-        return null == card ? null : PaymentDecision.card(card);
-    }
-
-    private final CounterType counter;
-    private final ZoneType zone;
+    public final CounterType counter;
+    public final ZoneType zone;
     private int cntRemoved;
     
 
     /**
-     * Gets the counter.
-     * 
-     * @return the counter
+     * @param cntRemoved the cntRemoved to set
      */
-    public final CounterType getCounter() {
-        return this.counter;
-    }
-
-    /**
-     * @return the zone
-     */
-    public final ZoneType getZone() {
-        return zone;
+    public void setCntRemoved(int cntRemoved) {
+        this.cntRemoved = cntRemoved;
     }
 
     /**
@@ -293,7 +131,7 @@ public class CostRemoveCounter extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability) {
-        final CounterType cntrs = this.getCounter();
+        final CounterType cntrs = this.counter;
         final Player activator = ability.getActivatingPlayer();
         final Card source = ability.getSourceCard();
         final String type = this.getType();
@@ -309,7 +147,7 @@ public class CostRemoveCounter extends CostPartWithList {
             if (type.equals("OriginalHost")) {
                 typeList = Lists.newArrayList(ability.getOriginalHost());
             } else {
-                typeList = CardLists.getValidCards(activator.getCardsIn(this.getZone()), type.split(";"), activator, source);
+                typeList = CardLists.getValidCards(activator.getCardsIn(this.zone), type.split(";"), activator, source);
             }
             if (amount != null) {
                 for (Card c : typeList) {
@@ -354,7 +192,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
     @Override
     protected void doPayment(SpellAbility ability, Card targetCard){
-        targetCard.subtractCounter(this.getCounter(), cntRemoved);
+        targetCard.subtractCounter(this.counter, cntRemoved);
     }
 
     /* (non-Javadoc)

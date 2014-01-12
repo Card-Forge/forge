@@ -22,14 +22,12 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * The Class CostTapType.
@@ -159,107 +157,6 @@ public class CostTapType extends CostPartWithList {
         }
 
         return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
-        String type = this.getType();
-        final String amount = this.getAmount();
-        final Card source = ability.getSourceCard();
-        Integer c = this.convertAmount();
-
-        boolean sameType = false;
-        if (type.contains("sharesCreatureTypeWith")) {
-            sameType = true;
-            type = type.replace("sharesCreatureTypeWith", "");
-        }
-
-        boolean totalPower = false;
-        String totalP = "";
-        if (type.contains("+withTotalPowerGE")) {
-            totalPower = true;
-            totalP = type.split("withTotalPowerGE")[1];
-            type = type.replace("+withTotalPowerGE" + totalP, "");
-        }
-
-        typeList = CardLists.getValidCards(typeList, type.split(";"), activator, ability.getSourceCard());
-        typeList = CardLists.filter(typeList, Presets.UNTAPPED);
-        if (c == null && !amount.equals("Any")) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(source, ability, typeList.size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-
-        if (sameType) {
-            final List<Card> List2 = typeList;
-            typeList = CardLists.filter(typeList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    for (Card card : List2) {
-                        if (!card.equals(c) && card.sharesCreatureTypeWith(c)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-            });
-            if (c == 0) return PaymentDecision.number(0);
-            List<Card> tapped = new ArrayList<Card>();
-            while (c > 0) {
-                InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, typeList);
-                inp.setMessage("Select one of the cards to tap. Already chosen: " + tapped);
-                inp.setCancelAllowed(true);
-                inp.showAndWait();
-                if (inp.hasCancelled())
-                    return null;
-                final Card first = inp.getFirstSelected();
-                tapped.add(first);
-                typeList = CardLists.filter(typeList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.sharesCreatureTypeWith(first);
-                    }
-                });
-                typeList.remove(first);
-                c--;
-            }
-            return PaymentDecision.card(tapped);
-        }       
-
-        if (totalPower) {
-            int i = Integer.parseInt(totalP);
-            InputSelectCardsFromList inp = new InputSelectCardsFromList(0, typeList.size(), typeList);
-            inp.setMessage("Select a card to tap.");
-            inp.setUnselectAllowed(true);
-            inp.setCancelAllowed(true);
-            inp.showAndWait();
-
-            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected()) < i) {
-                return null;
-            } else {
-                return PaymentDecision.card(inp.getSelected());
-            }
-        }
-        
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, typeList);
-        inp.setMessage("Select a " + getDescriptiveType() + " to tap (%d left)");
-        inp.showAndWait();
-        if ( inp.hasCancelled() )
-            return null;
-
-        return PaymentDecision.card(inp.getSelected());
     }
 
     /* (non-Javadoc)

@@ -27,6 +27,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.gui.player.HumanCostDecision;
 
 /**
  * <p>
@@ -107,14 +108,14 @@ public class CostPayment {
      * @return a boolean.
      */
     public boolean payCost(final Player payer) {
+        HumanCostDecision hcd = new HumanCostDecision(payer, ability, ability.getSourceCard());
+        
         for (final CostPart part : this.cost.getCostParts()) {
-            PaymentDecision pd = part.payHuman(this.ability, payer);
+            PaymentDecision pd = part.accept(hcd);
             
-            if ( null == pd ) {
+            if ( null == pd || !part.payAsDecided(payer, pd, ability))
                 return false;
-            } else
-                part.payAsDecided(payer, pd, ability);
-            
+
             // abilities care what was used to pay for them
             if( part instanceof CostPartWithList )
                 ((CostPartWithList) part).reportPaidCardsTo(ability);

@@ -30,8 +30,6 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * The Class CostRemoveAnyCounter.
@@ -41,6 +39,13 @@ public class CostRemoveAnyCounter extends CostPartWithList {
     // Power Conduit and Chisei, Heart of Oceans
     // Both cards have "Remove a counter from a permanent you control"
     private CounterType counterType;
+    /**
+     * @param counterType the counterType to set
+     */
+    public void setCounterType(CounterType counterType) {
+        this.counterType = counterType;
+    }
+
     /**
      * Instantiates a new cost CostRemoveAnyCounter.
      *
@@ -64,7 +69,7 @@ public class CostRemoveAnyCounter extends CostPartWithList {
      *
      * @return the counter
      */
-    private CounterType getCounter() {
+    public CounterType getCounter() {
         return this.counterType;
     }
 
@@ -104,45 +109,6 @@ public class CostRemoveAnyCounter extends CostPartWithList {
         }
 
         return i <= allCounters;
-    }
-
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        final Card source = ability.getSourceCard();
-        Integer c = this.convertAmount();
-        final String type = this.getType();
-
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-
-        List<Card> list = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
-        list = CardLists.getValidCards(list, type.split(";"), activator, source);
-
-
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card card) {
-                return card.hasCounters();
-            }
-        });
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, list);
-        inp.setMessage("Select " + this.getDescriptiveType() + " to remove a counter");
-        inp.setCancelAllowed(false);
-        inp.showAndWait();
-        Card selected = inp.getFirstSelected();
-        final Map<CounterType, Integer> tgtCounters = selected.getCounters();
-        final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();
-        for (CounterType key : tgtCounters.keySet()) {
-            if (tgtCounters.get(key) > 0) {
-                typeChoices.add(key);
-            }
-        }
-
-        String prompt = "Select type counters to remove";
-        counterType = GuiChoose.one(prompt, typeChoices);
-        
-        return PaymentDecision.card(selected, counterType);
     }
 
     /*

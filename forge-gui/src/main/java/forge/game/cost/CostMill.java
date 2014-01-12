@@ -79,36 +79,6 @@ public class CostMill extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        final String amount = this.getAmount();
-        Integer c = this.convertAmount();
-        final Card source = ability.getSourceCard();
-
-
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(source, ability, this.getList().size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-
-        if (!activator.getController().confirmPayment(this, "Mill " + c + " card" + (c == 1 ? "" : "s") + " from your library?")) {
-            return null;
-        }
-        return PaymentDecision.card(activator.getCardsIn(ZoneType.Library, c));
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see forge.card.cost.CostPart#toString()
      */
     @Override

@@ -17,7 +17,6 @@
  */
 package forge.game.cost;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.FlipCoinEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -58,36 +57,6 @@ public class CostFlipCoin extends CostPartWithList {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        final String amount = this.getAmount();
-        Integer c = this.convertAmount();
-        final Card source = ability.getSourceCard();
-
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(source, ability, this.getList().size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-        return PaymentDecision.number(c);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#toString()
-     */
     @Override
     public final String toString() {
         return Cost.convertAmountTypeToWords(this.convertAmount(), this.getAmount(), "Coin");

@@ -19,18 +19,12 @@ package forge.game.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
-
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCardsFromList;
-import forge.util.Aggregates;
 
 /**
  * The Class CostDiscard.
@@ -82,8 +76,7 @@ public class CostDiscard extends CostPartWithList {
                 desc.append("card");
             }
             else {
-                desc.append(this.getTypeDescription() == null ? this.getType() : this.getTypeDescription()).append(
-                        " card");
+                desc.append(this.getTypeDescription() == null ? this.getType() : this.getTypeDescription()).append(" card");
             }
 
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc.toString()));
@@ -149,111 +142,6 @@ public class CostDiscard extends CostPartWithList {
         }
 
         return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
-        final Card source = ability.getSourceCard();
-
-        List<Card> handList = new ArrayList<Card>(payer.getCardsIn(ZoneType.Hand));
-        String discardType = this.getType();
-        final String amount = this.getAmount();
-
-        if (this.payCostFromSource()) {
-            return handList.contains(source) ? PaymentDecision.card(source) : null;
-        }
-
-        if (discardType.equals("Hand")) {
-            return PaymentDecision.card(handList);
-        }
-
-        if (discardType.equals("LastDrawn")) {
-            final Card lastDrawn = payer.getLastDrawnCard();
-            return handList.contains(lastDrawn) ? PaymentDecision.card(lastDrawn) : null;
-        }
-
-        Integer c = this.convertAmount();
-
-        if (discardType.equals("Random")) {
-            if (c == null) {
-                final String sVar = ability.getSVar(amount);
-                // Generalize this
-                if (sVar.equals("XChoice")) {
-                    c = chooseXValue(source, ability,  handList.size());
-                }
-                else {
-                    c = AbilityUtils.calculateAmount(source, amount, ability);
-                }
-            }
-
-            return PaymentDecision.card(Aggregates.random(handList, c));
-        }
-        if (discardType.contains("+WithSameName")) {
-            String type = discardType.replace("+WithSameName", "");
-            handList = CardLists.getValidCards(handList, type.split(";"), payer, source);
-            final List<Card> landList2 = handList;
-            handList = CardLists.filter(handList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    for (Card card : landList2) {
-                        if (!card.equals(c) && card.getName().equals(c.getName())) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-            });
-            if (c == 0) { return PaymentDecision.card(Lists.<Card>newArrayList()); }
-            List<Card> discarded = new ArrayList<Card>();
-            while (c > 0) {
-                InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, handList);
-                inp.setMessage("Select one of the cards with the same name to discard. Already chosen: " + discarded);
-                inp.setCancelAllowed(true);
-                inp.showAndWait();
-                if (inp.hasCancelled()) {
-                    return null;
-                }
-                final Card first = inp.getFirstSelected();
-                discarded.add(first);
-                handList = CardLists.filter(handList, CardPredicates.nameEquals(first.getName()));
-                handList.remove(first);
-                c--;
-            }
-            return PaymentDecision.card(discarded);
-        }
-        else {
-            String type = new String(discardType);
-            final String[] validType = type.split(";");
-            handList = CardLists.getValidCards(handList, validType, payer, source);
-
-            if (c == null) {
-                final String sVar = ability.getSVar(amount);
-                // Generalize this
-                if (sVar.equals("XChoice")) {
-                    c = chooseXValue(source, ability, handList.size());
-                }
-                else {
-                    c = AbilityUtils.calculateAmount(source, amount, ability);
-                }
-            }
-
-            InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, handList);
-            inp.setMessage("Select %d more " + getDescriptiveType() + " to discard.");
-            inp.setCancelAllowed(true);
-            inp.showAndWait();
-            if (inp.hasCancelled() || inp.getSelected().size() != c) {
-                return null;
-            }
-
-            return PaymentDecision.card(inp.getSelected());
-        }
     }
 
     /* (non-Javadoc)

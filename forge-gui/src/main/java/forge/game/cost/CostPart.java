@@ -151,20 +151,6 @@ public abstract class CostPart {
 
     public abstract <T> T accept(final ICostVisitor<T> visitor);
 
-    /**
-     * Pay human.
-     * 
-     * @param ability
-     *            {@link forge.game.spellability.SpellAbility}
-     * @param source
-     *            {@link forge.game.card.Card}
-     * @param payment
-     *            {@link forge.game.cost.CostPayment}
-     * @param game
-     * @return true, if successful
-     */
-    public abstract PaymentDecision payHuman(SpellAbility ability, Player humanPayer);
-    
     /*
      * (non-Javadoc)
      * 
@@ -191,18 +177,7 @@ public abstract class CostPart {
     public void setAmount(final String amountIn) {
         this.amount = amountIn;
     }
-    
-    protected int chooseXValue(final Card card, final SpellAbility sa, final int maxValue) {
-        /*final String chosen = sa.getSVar("ChosenX");
-        if (chosen.length() > 0) {
-            return AbilityFactory.calculateAmount(card, "ChosenX", null);
-        }*/
 
-        int chosenX = sa.getActivatingPlayer().getController().chooseNumber(sa, card.toString() + " - Choose a Value for X", 0, maxValue);
-        sa.setSVar("ChosenX", Integer.toString(chosenX));
-        card.setSVar("ChosenX", Integer.toString(chosenX));
-        return chosenX;
-    }
 
     public abstract boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa);
 }

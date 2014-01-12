@@ -23,7 +23,6 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.GameType;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
@@ -51,19 +50,8 @@ public class CostAddMana extends CostPart {
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         final Integer i = this.convertAmount();
-        sb.append("Add ").append(convertManaAmountType(i, this.getType()));
-        sb.append(" to your mana pool");
+        sb.append("Add ").append(StringUtils.repeat("{" + this.getType() + "}", i)).append(" to your mana pool");
         return sb.toString();
-    }
-
-    /**
-     * convertManaAmountType.
-     * @param i
-     * @param type
-     * @return a String
-     */
-    private String convertManaAmountType(Integer i, String type) {
-        return StringUtils.repeat("{" + type + "}", i);
     }
 
     /*
@@ -78,23 +66,6 @@ public class CostAddMana extends CostPart {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        final Card source = ability.getSourceCard();
-        Integer c = this.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
-        return PaymentDecision.number(c);
-    }
-    
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility sa) {
         Card source = sa.getSourceCard();

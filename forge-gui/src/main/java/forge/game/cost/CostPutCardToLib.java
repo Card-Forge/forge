@@ -28,8 +28,6 @@ import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * This is for the "PutCardToLib" Cost. 
@@ -39,8 +37,8 @@ public class CostPutCardToLib extends CostPartWithList {
     // PutCardToLibFromSameGrave<Num/LibPos/Type{/TypeDescription}>
     // PutCardToLibFromGrave<Num/LibPos/Type{/TypeDescription}>
 
-    private ZoneType from = ZoneType.Hand;
-    private boolean sameZone = false;
+    public final ZoneType from;
+    public final boolean sameZone;
     private String libPosition = "0";
     
     /**
@@ -82,18 +80,14 @@ public class CostPutCardToLib extends CostPartWithList {
      * @param from
      *            the from
      */
-    public CostPutCardToLib(final String amount, final String libpos, 
-            final String type, final String description, final ZoneType from) {
-        super(amount, type, description);
-        if (from != null) {
-            this.from = from;
-        }
-        this.libPosition = libpos;
+    public CostPutCardToLib(final String amount, final String libpos, final String type, final String description, final ZoneType from) {
+        this(amount, libpos, type, description, from, false);
     }
     
-    public CostPutCardToLib(final String amount, final String libpos, final String type, 
-            final String description, final ZoneType from, final boolean sameZone) {
-        this(amount, libpos, type, description, from);
+    public CostPutCardToLib(final String amount, final String libpos, final String type, final String description, final ZoneType from, final boolean sameZone) {
+        super(amount, type, description);
+        this.from = from == null ? ZoneType.Hand : from;
+        this.libPosition = libpos;
         this.sameZone = sameZone;
     }
     
@@ -195,113 +189,6 @@ public class CostPutCardToLib extends CostPartWithList {
 
         return true;
 
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        final String amount = this.getAmount();
-        Integer c = this.convertAmount();
-        final Card source = ability.getSourceCard();
-        
-        List<Card> list;
-
-        if (this.sameZone) {
-            list = new ArrayList<Card>(activator.getGame().getCardsIn(this.getFrom()));
-        } else {
-            list = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
-        }
-
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(source, ability, this.getList().size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-        
-        list = CardLists.getValidCards(list, this.getType().split(";"), activator, source);
-        
-        if (this.from == ZoneType.Hand) {
-            InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, list);
-            inp.setMessage("Put %d card(s) from your " + from );
-            inp.setCancelAllowed(true);
-            inp.showAndWait();
-            return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
-        }
-        
-        if (this.sameZone){
-            List<Player> players = activator.getGame().getPlayers();
-            List<Player> payableZone = new ArrayList<Player>();
-            for (Player p : players) {
-                List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
-                if (enoughType.size() < c) {
-                    list.removeAll(enoughType);
-                } else {
-                    payableZone.add(p);
-                }
-            }
-            return putFromSame(list, c, payableZone);
-        } else {//Graveyard
-            return putFromMiscZone(ability, c, list);
-        }
-    }
-    
-    /**
-     * PutFromMiscZone
-     * @param sa
-     * @param nNeeded
-     * @param typeList
-     * @return a boolean
-     */
-    private PaymentDecision putFromMiscZone(SpellAbility sa, int nNeeded, List<Card> typeList) {
-        if(typeList.size() < nNeeded)
-            return null;
-
-        List<Card> chosen = new ArrayList<>();
-        for (int i = 0; i < nNeeded; i++) {
-            final Card c = GuiChoose.oneOrNone("Put from " + getFrom() + " to library", typeList);
-
-            if (c == null)
-                return null;
-                
-            typeList.remove(c);
-            chosen.add(c);
-        }
-        return PaymentDecision.card(chosen);
-    }
-
-    private PaymentDecision putFromSame(List<Card> list, int nNeeded, List<Player> payableZone) {
-        if (nNeeded == 0) {
-            return PaymentDecision.number(0);
-        }
-    
-        final Player p = GuiChoose.oneOrNone(String.format("Put cards from whose %s?", getFrom()), payableZone);
-        if (p == null) {
-            return null;
-        }
-    
-        List<Card> typeList = CardLists.filter(list, CardPredicates.isOwner(p));
-        if(typeList.size() < nNeeded)
-            return null;
-        
-        List<Card> chosen = new ArrayList<>();
-        for (int i = 0; i < nNeeded; i++) {
-            final Card c = GuiChoose.oneOrNone("Put cards from " + getFrom() + " to Library", typeList);
-            if (c == null)
-                return null;
-            typeList.remove(c);
-            chosen.add(c);
-        }
-        return PaymentDecision.card(chosen);
     }
 
     /* (non-Javadoc)

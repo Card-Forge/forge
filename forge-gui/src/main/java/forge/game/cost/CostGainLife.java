@@ -20,13 +20,9 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.GuiChoose;
 
 /**
  * The Class CostGainLife.
@@ -43,6 +39,13 @@ public class CostGainLife extends CostPart {
     public CostGainLife(final String amount, String playerSelector, int qty) {
         super(amount, playerSelector, null);
         cntPlayers = qty;
+    }
+
+    /**
+     * @return the cntPlayers
+     */
+    public int getCntPlayers() {
+        return cntPlayers;
     }
 
     /*
@@ -114,51 +117,6 @@ public class CostGainLife extends CostPart {
             opp.gainLife(c, null);
         }
         return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        final Card source = ability.getSourceCard();
-        final String amount = this.getAmount();
-
-        final int life = activator.getLife();
-
-        Integer c = this.convertAmount();
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(source, ability,  life);
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-
-        final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
-        for (final Player opp : getPotentialTargets(activator, source)) {
-            if (opp.canGainLife()) {
-                oppsThatCanGainLife.add(opp);
-            }
-        }
-
-        if (cntPlayers == Integer.MAX_VALUE) // applied to all players who can gain
-            return PaymentDecision.players(oppsThatCanGainLife);
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(source.getName()).append(" - Choose an opponent to gain ").append(c).append(" life:");
-
-        final Player chosenToGain = GuiChoose.oneOrNone(sb.toString(), oppsThatCanGainLife);
-        if (null == chosenToGain)
-            return null;
-        else
-            return PaymentDecision.players(Lists.newArrayList(chosenToGain));
     }
 
     

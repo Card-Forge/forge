@@ -20,13 +20,11 @@ package forge.game.cost;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * The Class CostReturn.
@@ -106,49 +104,6 @@ public class CostReturn extends CostPartWithList {
         }
 
         return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
-        final String amount = this.getAmount();
-        final Card source = ability.getSourceCard();
-        Integer c = this.convertAmount();
-
-        final List<Card> list = payer.getCardsIn(ZoneType.Battlefield);
-        if (c == null) {
-            final String sVar = ability.getSVar(amount);
-            // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = chooseXValue(source, ability, list.size());
-            } else {
-                c = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        }
-        if (this.payCostFromSource()) {
-            final Card card = ability.getSourceCard();
-            if (card.getController() == payer && card.isInPlay()) {
-                return payer.getController().confirmPayment(this, "Return " + card.getName() + " to hand?") ? PaymentDecision.card(card) : null;
-            }
-        }
-        else {
-            List<Card> validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
-
-            InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, validCards);
-            inp.setMessage("Return %d " + this.getType() + " " + this.getType() + " card(s) to hand");
-            inp.showAndWait();
-            if (inp.hasCancelled())
-                return null;
-            
-            return PaymentDecision.card(inp.getSelected());
-       }
-       return null;
     }
 
     /* (non-Javadoc)

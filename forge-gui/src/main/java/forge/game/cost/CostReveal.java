@@ -17,24 +17,18 @@
  */
 package forge.game.cost;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCardsFromList;
-import forge.util.Lang;
 
 /**
  * The Class CostReveal.
@@ -113,86 +107,6 @@ public class CostReveal extends CostPartWithList {
         }
 
         return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player activator) {
-        final Card source = ability.getSourceCard();
-        final String amount = this.getAmount();
-
-        if (this.payCostFromSource())
-            return PaymentDecision.card(source);
-
-        if (this.getType().equals("Hand"))
-            return PaymentDecision.card(activator.getCardsIn(ZoneType.Hand));
-
-        InputSelectCardsFromList inp = null;
-        if (this.getType().equals("SameColor")) {
-            Integer num = this.convertAmount();
-            List<Card> handList = activator.getCardsIn(ZoneType.Hand);
-            final List<Card> handList2 = handList;
-            handList = CardLists.filter(handList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    for (Card card : handList2) {
-                        if (!card.equals(c) && card.sharesColorWith(c)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-            });
-            if (num == 0) 
-                return PaymentDecision.number(0);
-
-            inp = new InputSelectCardsFromList(num, handList) {
-                private static final long serialVersionUID = 8338626212893374798L;
-
-                @Override
-                protected void onCardSelected(Card c, MouseEvent triggerEvent) {
-                    Card firstCard = Iterables.getFirst(this.selected, null);
-                    if(firstCard != null && !CardPredicates.sharesColorWith(firstCard).apply(c))
-                        return;
-                    super.onCardSelected(c, triggerEvent);
-                }
-            };
-            inp.setMessage("Select " + Lang.nounWithAmount(num, "card" ) + " of same color to reveal.");
-
-        } else {
-            Integer num = this.convertAmount();
-
-            List<Card> handList = activator.getCardsIn(ZoneType.Hand);
-            handList = CardLists.getValidCards(handList, this.getType().split(";"), activator, ability.getSourceCard());
-
-            if (num == null) {
-                final String sVar = ability.getSVar(amount);
-                if (sVar.equals("XChoice")) {
-                    num = chooseXValue(source, ability, handList.size());
-                } else {
-                    num = AbilityUtils.calculateAmount(source, amount, ability);
-                }
-            }
-            if ( num == 0 )
-                return PaymentDecision.number(0);;
-                
-            inp = new InputSelectCardsFromList(num, num, handList);
-            inp.setMessage("Select %d more " + getDescriptiveType() + " card(s) to reveal.");
-        }
-        inp.setCancelAllowed(true);
-        inp.showAndWait();
-        if (inp.hasCancelled())
-            return null;
-        
-        return PaymentDecision.card(inp.getSelected());
-
-
     }
 
     /*

@@ -17,9 +17,6 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-
-import forge.card.CardType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -50,20 +47,6 @@ public class CostChooseCreatureType extends CostPart {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
-        String choice = payer.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>(), true);
-        if( null == choice )
-            return null;
-        return PaymentDecision.type(choice);
-    }
     
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {

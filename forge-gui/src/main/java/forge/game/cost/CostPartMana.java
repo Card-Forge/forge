@@ -111,10 +111,4 @@ public class CostPartMana extends CostPart {
         return payer.getController().payManaCost(this, pd, sa);
     }
 
-    @Override
-    public PaymentDecision payHuman(SpellAbility ability, Player humanPayer) {
-        // TODO Auto-generated method stub
-        return new PaymentDecision(0);
-    }
-
 }

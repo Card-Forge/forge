@@ -15438,6 +15438,7 @@ forge-gui/src/main/java/forge/gui/menus/IMenuProvider.java -text
 forge-gui/src/main/java/forge/gui/menus/LayoutMenu.java -text
 forge-gui/src/main/java/forge/gui/menus/MenuUtil.java -text
 forge-gui/src/main/java/forge/gui/package-info.java svneol=native#text/plain
+forge-gui/src/main/java/forge/gui/player/HumanCostDecision.java -text
 forge-gui/src/main/java/forge/gui/player/HumanPlay.java -text
 forge-gui/src/main/java/forge/gui/player/LobbyPlayerHuman.java -text
 forge-gui/src/main/java/forge/gui/player/PlayerControllerHuman.java -text

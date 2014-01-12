@@ -25,7 +25,6 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCardsFromList;
 
 /**
  * The Class CostReturn.
@@ -82,35 +81,6 @@ public class CostGainControl extends CostPartWithList {
             return false;
         }
         return true;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * forge.card.cost.CostPart#payHuman(forge.card.spellability.SpellAbility,
-     * forge.Card, forge.card.cost.Cost_Payment)
-     */
-    @Override
-    public final PaymentDecision payHuman(final SpellAbility ability, final Player payer) {
-        final String amount = this.getAmount();
-        final Card source = ability.getSourceCard();
-
-        Integer c = this.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, amount, ability);
-        }
-        final List<Card> list = payer.getCardsIn(ZoneType.Battlefield);
-        List<Card> validCards = CardLists.getValidCards(list, this.getType().split(";"), payer, source);
-
-        InputSelectCardsFromList inp = new InputSelectCardsFromList(c, validCards);
-        final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
-        inp.setMessage("Gain control of %d " + desc);
-        inp.showAndWait();
-        if (inp.hasCancelled()) {
-            return null;
-        }
-        return PaymentDecision.card(inp.getSelected());
     }
 
     /* (non-Javadoc)
