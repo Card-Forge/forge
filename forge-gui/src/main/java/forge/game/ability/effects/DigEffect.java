@@ -184,14 +184,13 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     else if (allButOne) {
                         movedCards.addAll(valid);
-                        String prefix;
+                        String prompt;
                         if (destZone2.equals(ZoneType.Library) && (libraryPosition2 == 0)) {
-                            prefix = "Choose a card to leave on top of ";
+                            prompt = "Choose a card to leave on top of {player's} library";
                         }
                         else {
-                            prefix = "Choose a card to leave in ";
+                            prompt = "Choose a card to leave in {player's} " + destZone2.name();
                         }
-                        String prompt = destZone2.createMessage(p, prefix);
 
                         Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, sa, prompt, false, p);
                         movedCards.remove(chosen);
@@ -202,16 +201,15 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     else {
                         int j = 0;
-                        String prefix = "Choose a card to put into ";
+                        String prompt = "Choose a card to put into ";
                         if (destZone1.equals(ZoneType.Library)) {
                             if (libraryPosition == -1) {
-                                prefix = "Choose a card to put on the bottom of ";
+                                prompt = "Choose a card to put on the bottom of {player's} library";
                             }
                             else if (libraryPosition == 0) {
-                                prefix = "Choose a card to put on top of ";
+                                prompt = "Choose a card to put on top of {player's} library";
                             }
                         }
-                        String prompt = destZone1.createMessage(p, prefix);
 
                         while ((j < destZone1ChangeNum) || (anyNumber && (j < numToDig))) {
                             // let user get choice
@@ -220,7 +218,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 chosen = chooser.getController().chooseSingleEntityForEffect(valid, sa, prompt, anyNumber || optional, p);
                             }
                             else {
-                                chooser.getController().notifyOfValue(sa, null, destZone1.createMessage(p, "No valid cards in "));
+                                chooser.getController().notifyOfValue(sa, null, "No valid cards");
                             }
 
                             if (chosen == null) {

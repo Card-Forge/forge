@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.game.player.Player;
-import forge.net.FServer;
-import forge.util.Lang;
-
 /**
  * The Enum Zone.
  */
@@ -83,39 +79,5 @@ public enum ZoneType {
 
     public static boolean isKnown(final String origin) {
         return !isHidden(origin);
-    }
-
-    public String createMessage(Player player, String prefix) {
-        return createMessage(player, prefix, null);
-    }
-    public String createMessage(Player player, String prefix, String suffix) {
-        StringBuilder message = new StringBuilder();
-
-        String owner;
-        if (player.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer()) {
-            owner = "your";
-        }
-        else {
-            owner = Lang.getPossesive(player.getName());
-        }
-
-        if (prefix != null && !prefix.isEmpty()) {
-            message.append(prefix);
-            if (!prefix.endsWith(" ")) {
-                message.append(" ");
-            }
-            message.append(owner);
-        }
-        else {
-            message.append(owner.substring(0, 1).toUpperCase() + owner.substring(1));
-        }
-
-        message.append(" " + Lang.splitCompoundWord(this.toString(), Lang.PhraseCase.Lower));
-
-        if (suffix != null && !suffix.isEmpty()) {
-            message.append(" " + suffix);
-        }
-
-        return message.toString();
     }
 }

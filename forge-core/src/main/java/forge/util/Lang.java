@@ -108,6 +108,10 @@ public class Lang {
         return name.endsWith("s") ? name + "'" : name + "'s";
     }
 
+    public static String getPossessedObject(String owner, String object) {
+        return getPossesive(owner) + " " + object;
+    }
+    
     public static boolean startsWithVowel(String word) {
         return isVowel(word.trim().charAt(0));
     }
@@ -137,43 +141,5 @@ public class Lang {
             return prefix + numbers20[(n / 10) - 2] + " " + ones;
         }
         return Integer.toString(n);
-    }
-
-    public enum PhraseCase {
-        Title,
-        Sentence,
-        Lower
-    }
-
-    public static String splitCompoundWord(String word, PhraseCase phraseCase) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < word.length(); i++) {
-            char ch = word.charAt(i);
-            if (Character.isUpperCase(ch)) {
-                if (i > 0) {
-                    builder.append(" ");
-                }
-                switch (phraseCase) {
-                case Title:
-                    builder.append(ch);
-                    break;
-                case Sentence:
-                    if (i > 0) {
-                        builder.append(ch);
-                    }
-                    else {
-                        builder.append(Character.toLowerCase(ch));
-                    }
-                    break;
-                case Lower:
-                    builder.append(Character.toLowerCase(ch));
-                    continue;
-                }
-            }
-            else {
-                builder.append(ch);
-            }
-        }
-        return builder.toString();
     }
 }

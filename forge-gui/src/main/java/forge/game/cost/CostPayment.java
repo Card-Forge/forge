@@ -102,38 +102,6 @@ public class CostPayment {
 
     /**
      * <p>
-     * payCost.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean payCost(final Player payer) {
-        HumanCostDecision hcd = new HumanCostDecision(payer, ability, ability.getSourceCard());
-        
-        for (final CostPart part : this.cost.getCostParts()) {
-            PaymentDecision pd = part.accept(hcd);
-            
-            if ( null == pd || !part.payAsDecided(payer, pd, ability))
-                return false;
-
-            // abilities care what was used to pay for them
-            if( part instanceof CostPartWithList )
-                ((CostPartWithList) part).reportPaidCardsTo(ability);
-            
-            this.paidCostParts.add(part);
-        }
-
-        // this clears lists used for undo. 
-        for (final CostPart part1 : this.paidCostParts) {
-            if (part1 instanceof CostPartWithList) {
-                ((CostPartWithList) part1).resetList();
-            }
-        }
-        return true;
-    }
-
-    /**
-     * <p>
      * isAllPaid.
      * </p>
      * 
@@ -164,6 +132,38 @@ public class CostPayment {
 
         // Move this to CostMana
         this.ability.getActivatingPlayer().getManaPool().refundManaPaid(this.ability);
+    }
+
+    /**
+     * <p>
+     * payCost.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean payCost(final Player payer) {
+        HumanCostDecision hcd = new HumanCostDecision(payer, ability, ability.getSourceCard());
+        
+        for (final CostPart part : this.cost.getCostParts()) {
+            PaymentDecision pd = part.accept(hcd);
+            
+            if ( null == pd || !part.payAsDecided(payer, pd, ability))
+                return false;
+    
+            // abilities care what was used to pay for them
+            if( part instanceof CostPartWithList )
+                ((CostPartWithList) part).reportPaidCardsTo(ability);
+            
+            this.paidCostParts.add(part);
+        }
+    
+        // this clears lists used for undo. 
+        for (final CostPart part1 : this.paidCostParts) {
+            if (part1 instanceof CostPartWithList) {
+                ((CostPartWithList) part1).resetList();
+            }
+        }
+        return true;
     }
 
     /**
