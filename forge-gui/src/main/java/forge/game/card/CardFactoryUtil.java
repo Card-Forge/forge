@@ -27,7 +27,6 @@ import com.google.common.collect.Lists;
 
 import forge.Command;
 import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
@@ -65,7 +64,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.input.InputSelectCardsFromList;
 import forge.util.Aggregates;
 import forge.util.Lang;
 
@@ -2814,18 +2812,7 @@ public class CardFactoryUtil {
                     return;
                 }
 
-                final Card toHaunt; 
-                if (card.getController().isHuman()) {
-                    final InputSelectCardsFromList target = new InputSelectCardsFromList(1, 1, creats);
-                    target.setMessage("Choose target creature to haunt.");
-                    target.showAndWait();
-                    toHaunt = target.getFirstSelected();
-                } else {
-                    // AI choosing what to haunt
-                    final List<Card> oppCreats = CardLists.filterControlledBy(creats, card.getController().getOpponent());
-                    List<Card> chooseFrom = oppCreats.isEmpty() ? creats : oppCreats;
-                    toHaunt = ComputerUtilCard.getWorstCreatureAI(chooseFrom);
-                }
+                final Card toHaunt = card.getController().getController().chooseSingleEntityForEffect(creats, new SpellAbility.EmptySa(ApiType.InternalHaunt, card), "Choose target creature to haunt.");
                 haunterDiesWork.setTargetCard(toHaunt);
                 haunterDiesWork.setActivatingPlayer(card.getController());
                 game.getStack().add(haunterDiesWork);
