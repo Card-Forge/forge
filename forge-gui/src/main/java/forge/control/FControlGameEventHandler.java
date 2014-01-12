@@ -23,6 +23,7 @@ import forge.game.event.GameEventBlockersDeclared;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardCounters;
 import forge.game.event.GameEventCardDamaged;
+import forge.game.event.GameEventCardPhased;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventCardTapped;
 import forge.game.event.GameEventCombatEnded;
@@ -271,6 +272,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(GameEventCardTapped event) {
+        return updateSingleCard(event.card);
+    }
+    
+    @Override
+    public Void visit(GameEventCardPhased event) {
         return updateSingleCard(event.card);
     }
 

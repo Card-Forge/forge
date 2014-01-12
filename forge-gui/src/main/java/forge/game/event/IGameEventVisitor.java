@@ -14,6 +14,7 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventCardChangeZone event);
     T visit(GameEventCardRegenerated event);
     T visit(GameEventCardSacrificed event);
+    T visit(GameEventCardPhased event);
     T visit(GameEventCardTapped event);
     T visit(GameEventCardStatsChanged event);
     T visit(GameEventCardCounters event);
@@ -57,6 +58,7 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventCardTapped event) { return null; }
         public T visit(GameEventCardStatsChanged event) { return null; }
         public T visit(GameEventCardCounters event) { return null; }
+        public T visit(GameEventCardPhased event) { return null; }
         public T visit(GameEventGameFinished event) { return null; }
         public T visit(GameEventGameOutcome event) { return null; }
         public T visit(GameEventFlipCoin event) { return null; }
@@ -82,10 +84,5 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventZone event) { return null; }
         public T visit(GameEventCombatEnded event) { return null; }
     }
-
-
-
-
-
 }
 

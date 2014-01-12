@@ -15047,6 +15047,7 @@ forge-gui/src/main/java/forge/game/event/GameEventCardChangeZone.java -text
 forge-gui/src/main/java/forge/game/event/GameEventCardCounters.java -text
 forge-gui/src/main/java/forge/game/event/GameEventCardDamaged.java -text
 forge-gui/src/main/java/forge/game/event/GameEventCardDestroyed.java -text
+forge-gui/src/main/java/forge/game/event/GameEventCardPhased.java -text
 forge-gui/src/main/java/forge/game/event/GameEventCardRegenerated.java -text
 forge-gui/src/main/java/forge/game/event/GameEventCardSacrificed.java -text
 forge-gui/src/main/java/forge/game/event/GameEventCardStatsChanged.java -text
@@ -15281,7 +15282,6 @@ forge-gui/src/main/java/forge/gui/events/IUiEventVisitor.java -text
 forge-gui/src/main/java/forge/gui/events/UiEvent.java -text
 forge-gui/src/main/java/forge/gui/events/UiEventAttackerDeclared.java -text
 forge-gui/src/main/java/forge/gui/events/UiEventBlockerAssigned.java -text
-forge-gui/src/main/java/forge/gui/events/UiEventCardPhased.java -text
 forge-gui/src/main/java/forge/gui/framework/CEmptyDoc.java -text
 forge-gui/src/main/java/forge/gui/framework/DragCell.java -text
 forge-gui/src/main/java/forge/gui/framework/DragTab.java -text

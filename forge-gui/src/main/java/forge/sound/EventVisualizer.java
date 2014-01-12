@@ -8,6 +8,7 @@ import forge.game.event.GameEventCardChangeZone;
 import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDestroyed;
 import forge.game.event.GameEventCardAttachment;
+import forge.game.event.GameEventCardPhased;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventCardCounters;
@@ -28,7 +29,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
-import forge.gui.events.UiEventCardPhased;
 import forge.net.FServer;
 import forge.util.maps.MapOfLists;
 
@@ -209,7 +209,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         return null;
     }
     @Override
-    public SoundEffectType visit(UiEventCardPhased event) {
+    public SoundEffectType visit(GameEventCardPhased event) {
         return SoundEffectType.Phasing;
     }
 }

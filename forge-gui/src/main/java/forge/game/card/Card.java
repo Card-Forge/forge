@@ -68,6 +68,7 @@ import forge.game.event.GameEventCardAttachment.AttachMethod;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.event.GameEventCardCounters;
+import forge.game.event.GameEventCardPhased;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventCardTapped;
 import forge.game.player.Player;
@@ -86,8 +87,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.ZCTrigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.events.UiEventCardPhased;
-import forge.gui.match.CMatchUI;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Expressions;
@@ -4879,7 +4878,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        CMatchUI.SINGLETON_INSTANCE.fireEvent(new UiEventCardPhased(this, this.isPhasedOut()));
+        this.getGame().fireEvent(new GameEventCardPhased(this, this.isPhasedOut()));
     }
 
     private boolean switchPhaseState() {

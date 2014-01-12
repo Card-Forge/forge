@@ -49,7 +49,6 @@ import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEvent;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
-import forge.gui.events.UiEventCardPhased;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
@@ -418,12 +417,6 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
         @Override
         public Void visit(UiEventAttackerDeclared event) {
             updateSingleCard(event.attacker);
-            return null;
-        }
-
-        @Override
-        public Void visit(UiEventCardPhased event) {
-            updateSingleCard(event.phasingCard);
             return null;
         }
 
