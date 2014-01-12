@@ -55,7 +55,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
             for (final Entry<Tin, Integer> e : from) {
                 final Tin srcKey = e.getKey();
                 if (clsHint.isInstance(srcKey)) {
-                    result.put((Tout) srcKey, e.getValue());
+                    result.add((Tout) srcKey, e.getValue());
                 }
             }
         }
@@ -69,7 +69,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         if (from != null) {
             for (final Tin srcKey : from) {
                 if (clsHint.isInstance(srcKey)) {
-                    result.put((Tout) srcKey, Integer.valueOf(1));
+                    result.add((Tout) srcKey, Integer.valueOf(1));
                 }
             }
         }
@@ -84,7 +84,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      * @return a ItemPoolView
      */
     public ItemPoolView<T> getView() {
-        return new ItemPoolView<T>(Collections.unmodifiableMap(this.getItems()), this.getMyClass());
+        return new ItemPoolView<T>(Collections.unmodifiableMap(this.items), this.getMyClass());
     }
 
     // Items manipulation
@@ -112,12 +112,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         if (amount <= 0) {
             return;
         }
-        this.getItems().put(item, Integer.valueOf(this.count(item) + amount));
-        this.isListInSync = false;
-    }
-
-    public void put(final T item, final int amount) {
-        this.getItems().put(item, amount);
+        this.items.put(item, Integer.valueOf(this.count(item) + amount));
         this.isListInSync = false;
     }
 
@@ -184,16 +179,16 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
             return false;
         }
         if (count <= amount) {
-            this.getItems().remove(item);
+            this.items.remove(item);
         } else {
-            this.getItems().put(item, count - amount);
+            this.items.put(item, count - amount);
         }
         this.isListInSync = false;
         return true;
     }
 
     public boolean removeAll(final T item) {
-        return this.getItems().remove(item) != null;
+        return this.items.remove(item) != null;
     }
     
     /**
@@ -227,7 +222,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      * Clear.
      */
     public void clear() {
-        this.getItems().clear();
+        this.items.clear();
         this.isListInSync = false;
     }
 }

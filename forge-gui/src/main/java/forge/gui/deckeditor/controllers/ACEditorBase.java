@@ -215,7 +215,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 qty = max;
             }
             if (qty > 0) {
-                additions.put(item, qty);
+                additions.add(item, qty);
             }
         }
 

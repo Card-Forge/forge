@@ -78,7 +78,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
 
     // Data members
     /** The items. */
-    private final Map<T, Integer> items;
+    protected final Map<T, Integer> items;
 
     /** The my class. */
     private final Class<T> myClass; // class does not keep this in runtime by
@@ -220,15 +220,6 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
             }
         }
         return result;
-    }
-
-    /**
-     * Gets the items.
-     * 
-     * @return the items
-     */
-    protected Map<T, Integer> getItems() {
-        return this.items;
     }
 
     /**

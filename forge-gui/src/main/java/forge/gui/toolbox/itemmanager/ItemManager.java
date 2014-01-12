@@ -474,7 +474,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public ItemPool<T> getSelectedItemPool() {
         ItemPool<T> selectedItemPool = new ItemPool<T>(this.genericType);
         for (T item : getSelectedItems()) {
-            selectedItemPool.put(item, getItemCount(item));
+            selectedItemPool.add(item, getItemCount(item));
         }
         return selectedItemPool;
     }
