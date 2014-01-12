@@ -11,8 +11,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 
 public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
 
@@ -73,19 +71,18 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
         Card host = sa.getSourceCard();
         boolean shuffle = false;
 
-        if (sa.getActivatingPlayer().isHuman()) {
-            final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
 
-            numCards = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
-            shuffle = sa.hasParam("MayShuffle");
+        numCards = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
+        shuffle = sa.hasParam("MayShuffle");
 
-            for (final Player p : getTargetPlayers(sa)) {
-                if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                    rearrangeTopOfLibrary(host, p, numCards, shuffle, sa);
-                }
+        for (final Player p : getTargetPlayers(sa)) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                rearrangeTopOfLibrary(host, p, numCards, shuffle, sa);
             }
         }
+    
     }
 
     /**
@@ -101,8 +98,7 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
      * @param mayshuffle
      *            a boolean.
      */
-    private void rearrangeTopOfLibrary(final Card src, final Player player, final int numCards,
-            final boolean mayshuffle, final SpellAbility sa) {
+    private void rearrangeTopOfLibrary(final Card src, final Player player, final int numCards, final boolean mayshuffle, final SpellAbility sa) {
         final PlayerZone lib = player.getZone(ZoneType.Library);
         int maxCards = lib.size();
         // If library is smaller than N, only show that many cards
@@ -116,15 +112,13 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
             topCards.add(lib.get(j));
         }
 
-        List<Card> orderedCards = GuiChoose.order("Select order to Rearrange", "Top of Library", topCards, src);
+        List<Card> orderedCards = player.getController().orderMoveToZoneList(topCards, ZoneType.Library);
         for (int i = maxCards - 1; i >= 0; i--) {
             Card next = orderedCards.get(i);
             player.getGame().getAction().moveToLibrary(next, 0);
         }
-        if (mayshuffle) {
-            if (GuiDialog.confirm(src, "Do you want to shuffle the library?")) {
-                player.shuffle(sa);
-            }
+        if (mayshuffle && player.getController().confirmAction(sa, null, "Do you want to shuffle the library?")) {
+            player.shuffle(sa);
         }
     }
 
