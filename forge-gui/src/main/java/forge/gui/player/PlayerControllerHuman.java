@@ -511,6 +511,8 @@ public class PlayerControllerHuman extends PlayerController {
                 return GuiChoose.order("Choose order of cards to put into the planar deck", "Closest to top", cards, null);
             case SchemeDeck:
                 return GuiChoose.order("Choose order of cards to put into the scheme deck", "Closest to top", cards, null);
+            case Stack:
+                return GuiChoose.order("Choose order of copies to cast", "Put first", cards, null);
             default:
                 System.out.println("ZoneType " + destinationZone + " - Not Ordered");
                 break;

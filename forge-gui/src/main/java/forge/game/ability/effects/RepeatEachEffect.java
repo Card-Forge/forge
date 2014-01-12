@@ -21,7 +21,6 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 
 public class RepeatEachEffect extends SpellAbilityEffect {
@@ -38,7 +37,8 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
 
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Player player = sa.getActivatingPlayer();
+        final Game game = player.getGame();
 
         boolean useImprinted = sa.hasParam("UseImprinted");
         boolean loopOverCards = false;
@@ -66,8 +66,8 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         if (loopOverCards) {
 
             // TODO (ArsenalNut 22 Dec 2012) Add logic to order cards for AI
-            if (sa.getActivatingPlayer().isHuman() && sa.hasParam("ChooseOrder") && repeatCards.size() >= 2) {
-                repeatCards = GuiChoose.order("Choose order of copies to cast", "Put first", repeatCards, null);
+            if (sa.hasParam("ChooseOrder") && repeatCards.size() >= 2) {
+                repeatCards = player.getController().orderMoveToZoneList(repeatCards, ZoneType.Stack);
             }
 
             for (Card card : repeatCards) {
@@ -92,13 +92,13 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             if (sa.hasParam("RepeatOptionalForEachPlayer")) {
                 optional = true;
             }
-            for (Player player : repeatPlayers) {
-                if (optional && !player.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"))) {
+            for (Player p : repeatPlayers) {
+                if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"))) {
                     continue;
                 }
-                source.addRemembered(player);
+                source.addRemembered(p);
                 AbilityUtils.resolve(repeat);
-                source.removeRemembered(player);
+                source.removeRemembered(p);
             }
         }
 
