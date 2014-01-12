@@ -987,6 +987,33 @@ Cards added to deck are now selected, even if multiple are added at once. The pe
 When some but not all copies of a selected card are removed from the deck, that card now remains selected in the case of multiple cards being selected.
 
 
+- Two quick bug fixes -
+Fixed an easily reproducible crash that would cause the game to become unplayable if you accidentally tried to cast a card or play a land that you couldn't play at that time.
+Fixed a crash that would occur at times when moving your mouse over the tables in deck editors.
+
+
+- Memory usage optimizations -
+Components are no longer cached in memory for skinning purposes, which used to prevent some components from ever being cleared from memory.
+Card images are now cleared from memory cache when switching screens and between games.
+Card display panels are now disposed during game play when its card leaves a zone.
+
+
+- Deck Editor usability improvements -
+Added File menu with shortcuts for common actions in Deck Editor (such as Ctrl+S to save the current deck).
+Support resetting and hiding filters.
+Add/Remove context menu items now properly update based on the number of cards that can be added or removed from the deck.
+Support adding X copies of card at a time, where X is chosen using dialog.
+You'll now be prevented adding more than 4 copies of non-basic land cards in Constructed decks by default, with that number being configurable.
+Full catalog now available for sideboarding in Deck Editor.
+Title field and buttons now available on Current Deck pane when on other sections, with the current section name displaying above the table.
+
+
+- More skinned dialogs -
+Most remaining dialogs are now skinned, including all message, confirmation, input, and list choice dialogs.
+Reveal-style list dialogs now focus OK button by default and support Escape and Close button without showing a Cancel button.
+Increased transparency of backdrop behind dialogs and make it appear over navigation bar instead of disabling navigation bar.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

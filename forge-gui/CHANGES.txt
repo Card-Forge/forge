@@ -1,39 +1,12 @@
-Forge Beta: 01-11-2014 ver 1.5.10
+Forge Beta: 0##-##-2014 ver 1.5.11
 
 
-13421 cards in total.
+13### cards in total.
 
 
 -------------
 Release Notes
 -------------
-
-- Two quick bug fixes -
-Fixed an easily reproducible crash that would cause the game to become unplayable if you accidentally tried to cast a card or play a land that you couldn't play at that time.
-Fixed a crash that would occur at times when moving your mouse over the tables in deck editors.
-
-
-- Memory usage optimizations -
-Components are no longer cached in memory for skinning purposes, which used to prevent some components from ever being cleared from memory.
-Card images are now cleared from memory cache when switching screens and between games.
-Card display panels are now disposed during game play when its card leaves a zone.
-
-
-- Deck Editor usability improvements -
-Added File menu with shortcuts for common actions in Deck Editor (such as Ctrl+S to save the current deck).
-Support resetting and hiding filters.
-Add/Remove context menu items now properly update based on the number of cards that can be added or removed from the deck.
-Support adding X copies of card at a time, where X is chosen using dialog.
-You'll now be prevented adding more than 4 copies of non-basic land cards in Constructed decks by default, with that number being configurable.
-Full catalog now available for sideboarding in Deck Editor.
-Title field and buttons now available on Current Deck pane when on other sections, with the current section name displaying above the table.
-
-
-- More skinned dialogs -
-Most remaining dialogs are now skinned, including all message, confirmation, input, and list choice dialogs.
-Reveal-style list dialogs now focus OK button by default and support Escape and Close button without showing a Cancel button.
-Increased transparency of backdrop behind dialogs and make it appear over navigation bar instead of disabling navigation bar.
-
 
 - Constructed mode -
 Recently a change was made to the constructed mode and this change now allows you to have up to 8 players rather than just two. The game formats that are located in the variants mode also allow up to eight players. The current user interface for this feature is fairly basic and is not very attractive. The settings tab allows you to set the number of opponents. The player tabs includes the same options that you used to see in the constructed mode.
@@ -51,15 +24,7 @@ Forge now includes many of the new Commander 2013 cards. It may take a few days/
 New Cards
 ---------
 
-Bludgeon Brawl
-Debt of Loyalty
-Matopi Golem
-Nullstone Gargoyle
-Rootwater Matriarch
-Skeleton Scavengers
-Soldevi Sentry
-Static Orb
-Storage Matrix
+
 
 
 --------------------
@@ -93,14 +58,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-DrDev
-Gos
-Max
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
