@@ -9,7 +9,8 @@ public enum PlayerActionConfirmMode {
     // BraidOfFire,
     FromOpeningHand,
     ChangeZoneToAltDestination,
-    ChangeZoneFromAltSource;
+    ChangeZoneFromAltSource,
+    ChangeZoneGeneral;
     // Ripple;
     
     

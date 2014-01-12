@@ -1041,7 +1041,7 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards) {
         for (Player p : removedAnteCards.keySet()) {
-            GuiChoose.reveal(message + " from " + Lang.getPossesive(mayBeYou(p)) + " deck", removedAnteCards.get(p));
+            GuiChoose.reveal(message + " from " + Lang.getPossessedObject(mayBeYou(p), "deck"), removedAnteCards.get(p));
         }
     }
 

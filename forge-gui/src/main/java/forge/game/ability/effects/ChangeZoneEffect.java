@@ -29,8 +29,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 import forge.util.Aggregates;
 import forge.util.Lang;
 
@@ -663,9 +661,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(source, sa.getParam("ChangeNum"),
                 sa) : 1;
 
-        if (optional && !GuiDialog.confirm(source, defined ? "Put that card from " + origin + "to " + destination : "Search " + origin + "?")) {
+        if( optional && !decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, defined ? "Put that card from " + origin + "to " + destination : "Search " + origin + "?"))
             return;
-        }
+
 
         List<Card> fetchList;
         boolean shuffleMandatory = true;
@@ -735,7 +733,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             source.clearImprinted();
         }
 
-        for (int i = 0; i < changeNum; i++) {
+        for (int i = 0; i < changeNum && destination != null; i++) {
             if (sa.hasParam("DifferentNames")) {
                 for (Card c : movedCards) {
                     fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
@@ -746,171 +744,163 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), source.getController(), source);
                 }
             }
-            if ((fetchList.size() == 0) || (destination == null)) {
-                break;
-            }
 
-            Card c;
+            Card c = null;
             if (sa.hasParam("AtRandom")) {
                 c = Aggregates.random(fetchList);
             } else if (sa.hasParam("Defined")) {
-                c = fetchList.get(0);
+                c = Iterables.getFirst(fetchList, null);
             } else {
-                boolean mustChoose = sa.hasParam("Mandatory");
-                // card has to be on battlefield or in own hand
-                if (mustChoose && fetchList.size() == 1) {
-                    c = fetchList.get(0);
-                } else {
-                    c = decider.getController().chooseSingleEntityForEffect(fetchList, sa, selectPrompt, !mustChoose);
-                }
+                c = decider.getController().chooseSingleEntityForEffect(fetchList, sa, selectPrompt, !sa.hasParam("Mandatory"));
             }
 
-            if (c != null) {
-                fetchList.remove(c);
-                Card movedCard = null;
-
-                if (destination.equals(ZoneType.Library)) {
-                    // do not shuffle the library once we have placed a fetched
-                    // card on top.
-                    if (origin.contains(ZoneType.Library) && (i < 1) && !"False".equals(sa.getParam("Shuffle"))) {
-                        player.shuffle(sa);
-                    }
-                    movedCard = game.getAction().moveToLibrary(c, libraryPos);
-                } else if (destination.equals(ZoneType.Battlefield)) {
-                    if (sa.hasParam("Tapped")) {
-                        c.setTapped(true);
-                    }
-                    if (sa.hasParam("GainControl")) {
-                        if (sa.hasParam("NewController")) {
-                            final Player p = AbilityUtils.getDefinedPlayers(source, sa.getParam("NewController"), sa).get(0);
-                            c.setController(p, game.getNextTimestamp());
-                        } else {
-                            c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                        }
-                    }
-
-                    if (sa.hasParam("AttachedTo")) {
-                        List<Card> list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachedTo"), sa);
-                        if (list.isEmpty()) {
-                            list = game.getCardsIn(ZoneType.Battlefield);
-                            list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), c.getController(), c);
-                        }
-                        if (!list.isEmpty()) {
-                            Card attachedTo = null;
-                            if (list.size() > 1) {
-                                attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a card to attach to.");
-                            } else {
-                                attachedTo = list.get(0);
-                            }
-                            if (c.isAura()) {
-                                if (c.isEnchanting()) {
-                                    // If this Card is already Enchanting something, need
-                                    // to unenchant it, then clear out the commands
-                                    final GameEntity oldEnchanted = c.getEnchanting();
-                                    c.removeEnchanting(oldEnchanted);
-                                }
-                                c.enchantEntity(attachedTo);
-                            } else if (c.isEquipment()) { //Equipment
-                                if (c.isEquipping()) {
-                                    final Card oldEquiped = c.getEquippingCard();
-                                    if ( null != oldEquiped )
-                                        c.unEquipCard(oldEquiped);
-                                }
-                                c.equipCard(attachedTo);
-                            } else {
-                                if (c.isFortifying()) {
-                                    final Card oldFortified = c.getFortifyingCard();
-                                    if ( null != oldFortified )
-                                        c.unFortifyCard(oldFortified);
-                                }
-                                c.fortifyCard(attachedTo);
-                            }
-                        } else { // When it should enter the battlefield attached to an illegal permanent it fails
-                            continue;
-                        }
-                    }
-
-                    if (sa.hasParam("AttachedToPlayer")) {
-                        List<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
-                        if (!list.isEmpty()) {
-                            Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a player to attach to.");
-                            if (c.isAura()) {
-                                if (c.isEnchanting()) {
-                                    // If this Card is already Enchanting something, need
-                                    // to unenchant it, then clear out the commands
-                                    final GameEntity oldEnchanted = c.getEnchanting();
-                                    c.removeEnchanting(oldEnchanted);
-                                }
-                                c.enchantEntity(attachedTo);
-                            }
-                        } else { // When it should enter the battlefield attached to an illegal permanent it fails
-                            continue;
-                        }
-                    }
-
-                    if (sa.hasParam("Attacking")) {
-                        final Combat combat = game.getCombat();
-                        if ( null != combat ) {
-                            final List<GameEntity> e = combat.getDefenders();
-                            final GameEntity defender = e.size() == 1 ? e.get(0) : GuiChoose.one("Declare " + c, e);
-                            combat.addAttacker(c, defender);
-                        }
-                    }
-                    if (sa.hasParam("Blocking")) {
-                        final Combat combat = game.getCombat();
-                        if ( null != combat ) {
-                            List<Card> attackers = AbilityUtils.getDefinedCards(source, sa.getParam("Blocking"), sa);
-                            if (!attackers.isEmpty()) {
-                                Card attacker = attackers.get(0);
-                                if (combat.isAttacking(attacker)) {
-                                    combat.addBlocker(attacker, c);
-                                    combat.orderAttackersForDamageAssignment(c);
-                                }
-                            }
-                        }
-                    }
-                    movedCard = game.getAction().moveTo(c.getController().getZone(destination), c);
-                    if (sa.hasParam("Tapped")) {
-                        movedCard.setTapped(true);
-                    }
-                } else if (destination.equals(ZoneType.Exile)) {
-                    movedCard = game.getAction().exile(c);
-                    if (sa.hasParam("ExileFaceDown")) {
-                        movedCard.setState(CardCharacteristicName.FaceDown);
-                    }
-                } else {
-                    movedCard = game.getAction().moveTo(destination, c);
-                }
-                movedCards.add(movedCard);
-
-                if (champion) {
-                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                    runParams.put("Card", source);
-                    runParams.put("Championed", c);
-                    game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
-                }
-                
-                if (remember) {
-                    source.addRemembered(movedCard);
-                }
-                if (forget) {
-                    source.removeRemembered(movedCard);
-                }
-                // for imprinted since this doesn't use Target
-                if (imprint) {
-                    source.addImprinted(movedCard);
-                }
-                if (totalcmc != null) {
-                    totcmc -= movedCard.getCMC();
-                }
-            } else {
-                final StringBuilder sb = new StringBuilder();
+            if (c == null) {
                 final int num = Math.min(fetchList.size(), changeNum - i);
-                sb.append("Cancel Search? Up to ").append(num).append(" more cards can change zones.");
+                String message = String.format("Cancel Search? Up to %d more cards can change zones.", num);
 
-                if (((i + 1) == changeNum) || GuiDialog.confirm(source, sb.toString())) {
+                if (fetchList.isEmpty() || decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
                     break;
                 }
+                i--;
+                continue;
+            }
+        
+            fetchList.remove(c);
+            Card movedCard = null;
+
+            if (destination.equals(ZoneType.Library)) {
+                // do not shuffle the library once we have placed a fetched
+                // card on top.
+                if (origin.contains(ZoneType.Library) && (i < 1) && !"False".equals(sa.getParam("Shuffle"))) {
+                    player.shuffle(sa);
+                }
+                movedCard = game.getAction().moveToLibrary(c, libraryPos);
+            } else if (destination.equals(ZoneType.Battlefield)) {
+                if (sa.hasParam("Tapped")) {
+                    c.setTapped(true);
+                }
+                if (sa.hasParam("GainControl")) {
+                    if (sa.hasParam("NewController")) {
+                        final Player p = AbilityUtils.getDefinedPlayers(source, sa.getParam("NewController"), sa).get(0);
+                        c.setController(p, game.getNextTimestamp());
+                    } else {
+                        c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
+                    }
+                }
+
+                if (sa.hasParam("AttachedTo")) {
+                    List<Card> list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachedTo"), sa);
+                    if (list.isEmpty()) {
+                        list = game.getCardsIn(ZoneType.Battlefield);
+                        list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), c.getController(), c);
+                    }
+                    if (!list.isEmpty()) {
+                        Card attachedTo = null;
+                        if (list.size() > 1) {
+                            attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a card to attach to.");
+                        } else {
+                            attachedTo = list.get(0);
+                        }
+                        if (c.isAura()) {
+                            if (c.isEnchanting()) {
+                                // If this Card is already Enchanting something, need
+                                // to unenchant it, then clear out the commands
+                                final GameEntity oldEnchanted = c.getEnchanting();
+                                c.removeEnchanting(oldEnchanted);
+                            }
+                            c.enchantEntity(attachedTo);
+                        } else if (c.isEquipment()) { //Equipment
+                            if (c.isEquipping()) {
+                                final Card oldEquiped = c.getEquippingCard();
+                                if ( null != oldEquiped )
+                                    c.unEquipCard(oldEquiped);
+                            }
+                            c.equipCard(attachedTo);
+                        } else {
+                            if (c.isFortifying()) {
+                                final Card oldFortified = c.getFortifyingCard();
+                                if ( null != oldFortified )
+                                    c.unFortifyCard(oldFortified);
+                            }
+                            c.fortifyCard(attachedTo);
+                        }
+                    } else { // When it should enter the battlefield attached to an illegal permanent it fails
+                        continue;
+                    }
+                }
+
+                if (sa.hasParam("AttachedToPlayer")) {
+                    List<Player> list = AbilityUtils.getDefinedPlayers(source, sa.getParam("AttachedToPlayer"), sa);
+                    if (!list.isEmpty()) {
+                        Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, c + " - Select a player to attach to.");
+                        if (c.isAura()) {
+                            if (c.isEnchanting()) {
+                                // If this Card is already Enchanting something, need
+                                // to unenchant it, then clear out the commands
+                                final GameEntity oldEnchanted = c.getEnchanting();
+                                c.removeEnchanting(oldEnchanted);
+                            }
+                            c.enchantEntity(attachedTo);
+                        }
+                    } else { // When it should enter the battlefield attached to an illegal permanent it fails
+                        continue;
+                    }
+                }
+
+                if (sa.hasParam("Attacking")) {
+                    final Combat combat = game.getCombat();
+                    if ( null != combat ) {
+                        final List<GameEntity> e = combat.getDefenders();
+                        final GameEntity defender = player.getController().chooseSingleEntityForEffect(e, sa, "Declare " + c);
+                        combat.addAttacker(c, defender);
+                    }
+                }
+                if (sa.hasParam("Blocking")) {
+                    final Combat combat = game.getCombat();
+                    if ( null != combat ) {
+                        List<Card> attackers = AbilityUtils.getDefinedCards(source, sa.getParam("Blocking"), sa);
+                        if (!attackers.isEmpty()) {
+                            Card attacker = attackers.get(0);
+                            if (combat.isAttacking(attacker)) {
+                                combat.addBlocker(attacker, c);
+                                combat.orderAttackersForDamageAssignment(c);
+                            }
+                        }
+                    }
+                }
+                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c);
+                if (sa.hasParam("Tapped")) {
+                    movedCard.setTapped(true);
+                }
+            } else if (destination.equals(ZoneType.Exile)) {
+                movedCard = game.getAction().exile(c);
+                if (sa.hasParam("ExileFaceDown")) {
+                    movedCard.setState(CardCharacteristicName.FaceDown);
+                }
+            } else {
+                movedCard = game.getAction().moveTo(destination, c);
+            }
+            movedCards.add(movedCard);
+
+            if (champion) {
+                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                runParams.put("Card", source);
+                runParams.put("Championed", c);
+                game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
+            }
+            
+            if (remember) {
+                source.addRemembered(movedCard);
+            }
+            if (forget) {
+                source.removeRemembered(movedCard);
+            }
+            // for imprinted since this doesn't use Target
+            if (imprint) {
+                source.addImprinted(movedCard);
+            }
+            if (totalcmc != null) {
+                totcmc -= movedCard.getCMC();
             }
         }
         if (sa.hasParam("Reveal") && !movedCards.isEmpty()) {
