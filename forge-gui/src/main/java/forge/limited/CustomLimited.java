@@ -80,6 +80,11 @@ public class CustomLimited extends DeckBase {
     public String toString() {
         return this.getName();
     }
+    
+    @Override
+    public String getItemType() {
+        return "Limited deck";
+    }        
 
     /**
      * Parses the.

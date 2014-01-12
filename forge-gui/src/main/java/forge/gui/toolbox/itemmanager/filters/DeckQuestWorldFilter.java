@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import forge.Singletons;
+import forge.deck.Deck;
 import forge.game.GameFormat;
 import forge.gui.toolbox.itemmanager.ItemManager;
-import forge.item.DeckBox;
 import forge.quest.QuestWorld;
 
 /** 
@@ -16,17 +16,17 @@ import forge.quest.QuestWorld;
 public class DeckQuestWorldFilter extends DeckFormatFilter {
     private final Set<QuestWorld> questWorlds = new HashSet<QuestWorld>();
 
-    public DeckQuestWorldFilter(ItemManager<? super DeckBox> itemManager0) {
+    public DeckQuestWorldFilter(ItemManager<? super Deck> itemManager0) {
         super(itemManager0);
     }
-    public DeckQuestWorldFilter(ItemManager<? super DeckBox> itemManager0, QuestWorld questWorld0) {
+    public DeckQuestWorldFilter(ItemManager<? super Deck> itemManager0, QuestWorld questWorld0) {
         super(itemManager0);
         this.questWorlds.add(questWorld0);
         this.formats.add(getQuestWorldFormat(questWorld0));
     }
 
     @Override
-    public ItemFilter<DeckBox> createCopy() {
+    public ItemFilter<Deck> createCopy() {
         DeckQuestWorldFilter copy = new DeckQuestWorldFilter(itemManager);
         copy.questWorlds.addAll(this.questWorlds);
         for (QuestWorld w : this.questWorlds) {
@@ -41,7 +41,7 @@ public class DeckQuestWorldFilter extends DeckFormatFilter {
         super.reset();
     }
 
-    public static boolean canAddQuestWorld(QuestWorld questWorld, ItemFilter<DeckBox> existingFilter) {
+    public static boolean canAddQuestWorld(QuestWorld questWorld, ItemFilter<Deck> existingFilter) {
         if (questWorld.getFormat() == null && Singletons.getModel().getQuest().getMainFormat() == null) {
             return false; //must have format
         }

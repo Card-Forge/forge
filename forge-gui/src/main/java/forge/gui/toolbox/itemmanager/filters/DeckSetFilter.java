@@ -4,10 +4,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import forge.deck.Deck;
 import forge.game.GameFormat;
 import forge.gui.home.quest.DialogChooseSets;
 import forge.gui.toolbox.itemmanager.ItemManager;
-import forge.item.DeckBox;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -16,7 +16,7 @@ import forge.item.DeckBox;
 public class DeckSetFilter extends DeckFormatFilter {
     private final Set<String> sets = new HashSet<String>();
 
-    public DeckSetFilter(ItemManager<? super DeckBox> itemManager0, Collection<String> sets0, boolean allowReprints0) {
+    public DeckSetFilter(ItemManager<? super Deck> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
         this.sets.addAll(sets0);
         this.formats.add(new GameFormat(null, this.sets, null));
@@ -24,7 +24,7 @@ public class DeckSetFilter extends DeckFormatFilter {
     }
 
     @Override
-    public ItemFilter<DeckBox> createCopy() {
+    public ItemFilter<Deck> createCopy() {
         return new DeckSetFilter(itemManager, this.sets, this.allowReprints);
     }
 

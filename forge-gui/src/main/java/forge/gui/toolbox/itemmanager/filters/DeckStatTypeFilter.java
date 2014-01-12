@@ -4,16 +4,16 @@ import java.util.Map;
 
 import com.google.common.base.Predicates;
 
+import forge.deck.Deck;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.item.DeckBox;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.util.ItemPoolView;
 
-public abstract class DeckStatTypeFilter extends StatTypeFilter<DeckBox> {
-    public DeckStatTypeFilter(ItemManager<? super DeckBox> itemManager0) {
+public abstract class DeckStatTypeFilter extends StatTypeFilter<Deck> {
+    public DeckStatTypeFilter(ItemManager<? super Deck> itemManager0) {
         super(itemManager0);
     }
 
@@ -24,11 +24,11 @@ public abstract class DeckStatTypeFilter extends StatTypeFilter<DeckBox> {
 
     @Override
     public void afterFiltersApplied() {
-        final ItemPoolView<? super DeckBox> items = itemManager.getFilteredItems();
+        final ItemPoolView<? super Deck> items = itemManager.getFilteredItems();
 
         for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> btn : buttonMap.entrySet()) {
             if (btn.getKey().predicate != null) {
-                int count = items.countAll(DeckBox.createPredicate(Predicates.compose(btn.getKey().predicate, PaperCard.FN_GET_RULES)), DeckBox.class);
+                int count = items.countAll(Deck.createPredicate(Predicates.compose(btn.getKey().predicate, PaperCard.FN_GET_RULES)), Deck.class);
                 btn.getValue().setText(String.valueOf(count));
             }
         }

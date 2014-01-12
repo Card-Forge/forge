@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JMenu;
 
 import forge.Singletons;
+import forge.deck.Deck;
 import forge.game.GameFormat;
 import forge.gui.GuiUtils;
 import forge.gui.home.quest.DialogChooseSets;
@@ -14,7 +15,6 @@ import forge.gui.toolbox.itemmanager.filters.DeckQuestWorldFilter;
 import forge.gui.toolbox.itemmanager.filters.DeckSearchFilter;
 import forge.gui.toolbox.itemmanager.filters.DeckSetFilter;
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
-import forge.item.DeckBox;
 import forge.quest.QuestWorld;
 
 /** 
@@ -22,9 +22,9 @@ import forge.quest.QuestWorld;
  *
  */
 @SuppressWarnings("serial")
-public final class DeckManager extends ItemManager<DeckBox> {
+public final class DeckManager extends ItemManager<Deck> {
     public DeckManager(boolean wantUnique0) {
-        super(DeckBox.class, wantUnique0);
+        super(Deck.class, wantUnique0);
     }
 
     @Override
@@ -33,7 +33,7 @@ public final class DeckManager extends ItemManager<DeckBox> {
     }
 
     @Override
-    protected ItemFilter<DeckBox> createSearchFilter() {
+    protected ItemFilter<Deck> createSearchFilter() {
         return createSearchFilter(this);
     }
 
@@ -44,15 +44,15 @@ public final class DeckManager extends ItemManager<DeckBox> {
 
     /* Static overrides shared with SpellShopManager*/
 
-    public static void addDefaultFilters(final ItemManager<? super DeckBox> itemManager) {
+    public static void addDefaultFilters(final ItemManager<? super Deck> itemManager) {
         itemManager.addFilter(new DeckColorFilter(itemManager));
     }
 
-    public static ItemFilter<DeckBox> createSearchFilter(final ItemManager<? super DeckBox> itemManager) {
+    public static ItemFilter<Deck> createSearchFilter(final ItemManager<? super Deck> itemManager) {
         return new DeckSearchFilter(itemManager);
     }
 
-    public static void buildAddFilterMenu(JMenu menu, final ItemManager<? super DeckBox> itemManager) {
+    public static void buildAddFilterMenu(JMenu menu, final ItemManager<? super Deck> itemManager) {
         GuiUtils.addSeparator(menu); //separate from current search item
 
         JMenu fmt = GuiUtils.createMenu("Format");

@@ -19,13 +19,13 @@ package forge.deck;
 
 import java.io.Serializable;
 
-import forge.util.IHasName;
+import forge.item.InventoryItem;
 
 /**
  * TODO: Write javadoc for this type.
  * 
  */
-public abstract class DeckBase implements Serializable, Comparable<DeckBase>, IHasName {
+public abstract class DeckBase implements Serializable, Comparable<DeckBase>, InventoryItem {
     private static final long serialVersionUID = -7538150536939660052L;
     // gameType is from Constant.GameType, like GameType.Regular
 

@@ -7,11 +7,11 @@ import javax.swing.JPanel;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import forge.deck.Deck;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SFilterUtil;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.item.DeckBox;
 import forge.item.PaperCard;
 import forge.util.ItemPoolView;
 
@@ -19,13 +19,13 @@ import forge.util.ItemPoolView;
  * TODO: Write javadoc for this type.
  *
  */
-public class DeckColorFilter extends StatTypeFilter<DeckBox> {
-    public DeckColorFilter(ItemManager<? super DeckBox> itemManager0) {
+public class DeckColorFilter extends StatTypeFilter<Deck> {
+    public DeckColorFilter(ItemManager<? super Deck> itemManager0) {
         super(itemManager0);
     }
 
     @Override
-    public ItemFilter<DeckBox> createCopy() {
+    public ItemFilter<Deck> createCopy() {
         return new DeckColorFilter(itemManager);
     }
 
@@ -35,18 +35,18 @@ public class DeckColorFilter extends StatTypeFilter<DeckBox> {
     }
 
     @Override
-    protected final Predicate<DeckBox> buildPredicate() {
-        return DeckBox.createPredicate(SFilterUtil.buildColorFilter(buttonMap));
+    protected final Predicate<Deck> buildPredicate() {
+        return Deck.createPredicate(SFilterUtil.buildColorFilter(buttonMap));
     }
 
     @Override
     public void afterFiltersApplied() {
-        final ItemPoolView<? super DeckBox> items = itemManager.getFilteredItems();
+        final ItemPoolView<? super Deck> items = itemManager.getFilteredItems();
 
         for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> btn : buttonMap.entrySet()) {
             if (btn.getKey().predicate != null) {
-                int count = items.countAll(DeckBox.createPredicate(Predicates.compose(btn.getKey().predicate,
-                        PaperCard.FN_GET_RULES)), DeckBox.class);
+                int count = items.countAll(Deck.createPredicate(Predicates.compose(btn.getKey().predicate,
+                        PaperCard.FN_GET_RULES)), Deck.class);
                 btn.getValue().setText(String.valueOf(count));
             }
         }

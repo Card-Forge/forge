@@ -68,7 +68,6 @@ forge-core/src/main/java/forge/deck/io/OldDeckFileFormatException.java -text
 forge-core/src/main/java/forge/deck/io/package-info.java -text
 forge-core/src/main/java/forge/deck/package-info.java -text
 forge-core/src/main/java/forge/item/BoosterPack.java -text
-forge-core/src/main/java/forge/item/DeckBox.java -text
 forge-core/src/main/java/forge/item/FatPack.java -text
 forge-core/src/main/java/forge/item/IPaperCard.java -text
 forge-core/src/main/java/forge/item/InventoryItem.java -text

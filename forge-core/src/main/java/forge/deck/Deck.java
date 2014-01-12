@@ -31,6 +31,7 @@ import java.util.TreeSet;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
 import forge.card.CardDb;
 import forge.deck.io.DeckFileHeader;
@@ -77,7 +78,11 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         getOrCreate(DeckSection.Main);
     }
 
-        
+    @Override
+    public String getItemType() {
+        return "Deck";
+    }
+    
     @Override
     public int hashCode() {
         return this.getName().hashCode();
@@ -275,4 +280,29 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public Set<String> getTags() {
         return tags;
     }
+    
+    //create predicate that applys a card predicate to all cards in deck
+    public static final Predicate<Deck> createPredicate(final Predicate<PaperCard> cardPredicate) {
+        return new Predicate<Deck>() {
+            @Override
+            public boolean apply(Deck input) {
+                for (Entry<DeckSection, CardPool> deckEntry : input) {
+                    switch (deckEntry.getKey()) {
+                    case Main:
+                    case Sideboard:
+                    case Commander:
+                        for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                            if (!cardPredicate.apply(poolEntry.getKey())) {
+                                return false; //all cards in deck must pass card predicate to pass deck predicate
+                            }
+                        }
+                        break;
+                    default:
+                        break; //ignore other sections
+                    }
+                }
+                return true;
+            }
+        };
+    }    
 }

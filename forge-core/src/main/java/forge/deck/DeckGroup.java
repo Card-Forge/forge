@@ -81,6 +81,11 @@ public class DeckGroup extends DeckBase {
         }
         Collections.sort(aiDecks, comparator);
     }
+    
+    @Override
+    public String getItemType() {
+        return "Group of decks";
+    }        
 
     @Override
     protected void cloneFieldsTo(final DeckBase clone) {
