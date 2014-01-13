@@ -22,7 +22,7 @@ public class LobbyPlayerRemote extends LobbyPlayer {
      * @see forge.game.player.LobbyPlayer#getPlayer(forge.game.GameState)
      */
     @Override
-    public Player getPlayer(Game gameState) {
+    public Player createIngamePlayer(Game gameState) {
         // Cannot create remote players yet 
         throw new UnsupportedOperationException("method is not implemented");
     }

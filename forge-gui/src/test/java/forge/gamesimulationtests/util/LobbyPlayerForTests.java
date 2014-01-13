@@ -33,7 +33,7 @@ public class LobbyPlayerForTests extends LobbyPlayer {
 	}
 
 	@Override
-	public Player getPlayer( Game gameState ) {
+	public Player createIngamePlayer( Game gameState ) {
 		Player dummyPlayer = new Player( getName(), gameState );
 		dummyPlayer.setFirstController( createControllerFor( dummyPlayer ) );
 		return dummyPlayer;

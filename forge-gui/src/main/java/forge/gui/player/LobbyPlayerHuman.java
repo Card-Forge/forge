@@ -26,7 +26,7 @@ public class LobbyPlayerHuman extends LobbyPlayer {
     }
     
     @Override
-    public Player getPlayer(Game game) {
+    public Player createIngamePlayer(Game game) {
         Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game);
         player.setFirstController(new PlayerControllerHuman(game, player, this));
         

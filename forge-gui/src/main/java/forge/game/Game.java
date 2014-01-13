@@ -98,7 +98,7 @@ public class Game {
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
 
         for (RegisteredPlayer psc : players0) {
-            Player pl = psc.getPlayer().getPlayer(this);
+            Player pl = psc.getPlayer().createIngamePlayer(this);
             players.add(pl);
             ingamePlayers.add(pl);
 

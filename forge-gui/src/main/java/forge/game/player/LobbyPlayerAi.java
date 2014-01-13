@@ -31,7 +31,7 @@ public class LobbyPlayerAi extends LobbyPlayer {
     }
     
     @Override
-    public Player getPlayer(Game game) {
+    public Player createIngamePlayer(Game game) {
         Player ai = new Player(getName(), game);
         ai.setFirstController(createControllerFor(ai));
 

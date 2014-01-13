@@ -84,7 +84,7 @@ public abstract class LobbyPlayer implements IHasIcon {
         this.avatarIndex = avatarIndex;
     }
 
-    public abstract Player getPlayer(Game gameState); // factory method to create player
+    public abstract Player createIngamePlayer(Game gameState); // factory method to create player
     public abstract PlayerController createControllerFor(Player p);
 
     public abstract void hear(LobbyPlayer player, String message);
