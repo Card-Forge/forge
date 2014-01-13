@@ -384,7 +384,7 @@ public class ItemColumn extends TableColumn {
                         return toDeck(from.getKey());
                     }
                 }),
-        DECK_COLOR("Color", "Color", 70, 70, 70, SortState.ASC, new ManaCostRenderer(),
+        DECK_COLOR("Color", "Color", 70, 70, 70, SortState.ASC, new ColorSetRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -416,7 +416,7 @@ public class ItemColumn extends TableColumn {
                         if (deck == null) {
                             return null;
                         }
-                        return Singletons.getModel().getFormats().getFormatOfDeck(deck);
+                        return Singletons.getModel().getFormats().getFormatOfDeck(deck).getName();
                     }
                 }),
         DECK_MAIN("Main", "Main Deck", 35, 35, 35, SortState.ASC, new IntegerRenderer(),
