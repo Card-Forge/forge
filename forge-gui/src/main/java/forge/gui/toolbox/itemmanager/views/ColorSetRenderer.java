@@ -56,8 +56,8 @@ public class ColorSetRenderer extends ItemCellRenderer {
         final int cntGlyphs = cs.countColors();
         final int offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding0 - elemtWidth) / (cntGlyphs - 1) : elemtWidth + elemtGap;
         final int dx = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
-        
-        int takenUpWidth = cntGlyphs * ( elemtWidth + elemtGap ) - elemtGap;
+
+        int takenUpWidth = Math.max(1, cntGlyphs) * ( elemtWidth + elemtGap ) - elemtGap;
         if( takenUpWidth < cellWidth - padding0)
             x += (cellWidth - padding0 - takenUpWidth) / 2;
 

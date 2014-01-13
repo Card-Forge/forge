@@ -38,7 +38,7 @@ import forge.util.BinaryUtil;
 public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte> {
 
     private final byte myColor;
-    private final int orderWeight;
+    private final float orderWeight;
 
     private static ColorSet[] allColors = new ColorSet[32];
     private static final ColorSet noColor = new ColorSet();
@@ -137,8 +137,14 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte> {
      * 
      * @return the order weight
      */
-    public int getOrderWeight() {
-        return this.myColor == 0 ? 0x400 : (this.countColors() == 1 ? this.myColor : 0x200);
+    public float getOrderWeight() {
+        float res = this.countColors();
+        if(hasWhite()) res += 0.0005f;
+        if(hasBlue()) res += 0.0020f;
+        if(hasBlack()) res += 0.0080f;
+        if(hasRed()) res += 0.0320f;
+        if(hasGreen()) res += 0.1280f;
+        return res;
     }
 
     /**
@@ -186,7 +192,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte> {
      */
     @Override
     public int compareTo(final ColorSet other) {
-        return this.orderWeight - other.orderWeight;
+        return Float.compare(this.orderWeight, other.orderWeight);
     }
 
     // Presets
