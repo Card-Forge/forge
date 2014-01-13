@@ -30,7 +30,7 @@ public enum CAllDecks implements ICDoc {
      */
     @Override
     public void initialize() {
-        VAllDecks.SINGLETON_INSTANCE.getLstDecks().setDecks(
+        VAllDecks.SINGLETON_INSTANCE.getLstDecks().setPool(
                 Singletons.getModel().getDecks().getConstructed());
     }
 
@@ -39,6 +39,6 @@ public enum CAllDecks implements ICDoc {
      */
     @Override
     public void update() {
+        VAllDecks.SINGLETON_INSTANCE.getLstDecks().update();
     }
-
 }

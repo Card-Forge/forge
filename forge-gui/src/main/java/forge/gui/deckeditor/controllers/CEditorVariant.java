@@ -17,7 +17,7 @@
  */
 package forge.gui.deckeditor.controllers;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
@@ -34,11 +34,10 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
-import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.PaperCard;
-import forge.item.InventoryItem;
 import forge.util.ItemPool;
 import forge.util.storage.IStorage;
 
@@ -159,8 +158,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public void update() {
-        final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
-        lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+        final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
+        lstCatalogCols.remove(ColumnDef.QUANTITY);
 
         this.getCatalogManager().getTable().setup(lstCatalogCols);
         this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());

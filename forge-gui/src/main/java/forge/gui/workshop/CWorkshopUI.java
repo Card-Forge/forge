@@ -25,13 +25,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.ICDoc;
 import forge.gui.menus.IMenuProvider;
-import forge.gui.toolbox.itemmanager.CardManager;
-import forge.gui.toolbox.itemmanager.SItemManagerIO;
-import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
-import forge.gui.toolbox.itemmanager.views.ItemListView;
 import forge.gui.workshop.menus.CWorkshopUIMenus;
-import forge.gui.workshop.views.VWorkshopCatalog;
-import forge.item.PaperCard;
 
 /**
  * Constructs instance of workshop UI controller, used as a single point of
@@ -70,13 +64,6 @@ public enum CWorkshopUI implements ICDoc, IMenuProvider {
     @Override
     public void initialize() {
         Singletons.getControl().getForgeMenu().setProvider(this);
-    	final CardManager cardManager = VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager();
-        final ItemListView<PaperCard> cardTable = cardManager.getTable();
-
-        boolean wantElastic = SItemManagerIO.getPref(EditorPreference.elastic_columns);
-        boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
-        cardTable.setWantElasticColumns(wantElastic);
-        cardManager.setWantUnique(wantUnique);
     }
 
     /* (non-Javadoc)

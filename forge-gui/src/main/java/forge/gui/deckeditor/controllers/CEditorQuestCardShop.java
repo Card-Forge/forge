@@ -51,10 +51,9 @@ import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.gui.toolbox.itemmanager.views.ItemCellRenderer;
+import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
-import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.FatPack;
@@ -263,15 +262,15 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             return CEditorQuestCardShop.this.getCardValue(from.getKey());
         }
     };
-    private final Function<Entry<InventoryItem, Integer>, Object> fnPriceGet = new Function<Entry<InventoryItem, Integer>, Object>() {
+    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnPriceGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
-        public Object apply(final Entry<InventoryItem, Integer> from) {
+        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
             return CEditorQuestCardShop.this.getCardValue(from.getKey());
         }
     };
-    private final Function<Entry<InventoryItem, Integer>, Object> fnPriceSellGet = new Function<Entry<InventoryItem, Integer>, Object>() {
+    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnPriceSellGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
-        public Object apply(final Entry<InventoryItem, Integer> from) {
+        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
             return (int) (CEditorQuestCardShop.this.multiplier * CEditorQuestCardShop.this.getCardValue(from.getKey()));
         }
     };
@@ -283,9 +282,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             return iValue == null ? Integer.valueOf(0) : iValue;
         }
     };
-    private final Function<Entry<InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<InventoryItem, Integer>, Object>() {
+    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
-        public Object apply(final Entry<InventoryItem, Integer> from) {
+        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
             final Integer iValue = CEditorQuestCardShop.this.decksUsingMyCards.count(from.getKey());
             return iValue == null ? "" : iValue.toString();
         }
@@ -480,33 +479,23 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     @SuppressWarnings("serial")
     @Override
     public void update() {
-        final List<TableColumnInfo<InventoryItem>> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
-        final List<TableColumnInfo<InventoryItem>> columnsDeck = SColumnUtil.getDeckDefaultColumns();
+        final Map<ColumnDef, ItemColumn> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
+        final Map<ColumnDef, ItemColumn> columnsDeck = SColumnUtil.getDeckDefaultColumns();
 
         // Add spell shop-specific columns
-        columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_PURCHASE_PRICE));
-        columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
-                this.fnPriceCompare, this.fnPriceGet, new ItemCellRenderer());
+        columnsCatalog.put(ColumnDef.PRICE, new ItemColumn(ColumnDef.PRICE, this.fnPriceCompare, this.fnPriceGet));
 
-        columnsCatalog.add(1, SColumnUtil.getColumn(ColumnName.CAT_OWNED));
-        columnsCatalog.get(1).setSortAndDisplayFunctions(
-                questData.getCards().getFnOwnedCompare(), questData.getCards().getFnOwnedGet(), new ItemCellRenderer());
+        columnsCatalog.put(ColumnDef.OWNED, new ItemColumn(ColumnDef.OWNED, questData.getCards().getFnOwnedCompare(), questData.getCards().getFnOwnedGet()));
 
-        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_SALE_PRICE));
-        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
-                this.fnPriceCompare, this.fnPriceSellGet, new ItemCellRenderer());
+        columnsDeck.put(ColumnDef.PRICE, new ItemColumn(ColumnDef.PRICE, this.fnPriceCompare, this.fnPriceSellGet));
 
-        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_NEW));
-        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
-                this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet(), new ItemCellRenderer());
+        columnsDeck.put(ColumnDef.NEW, new ItemColumn(ColumnDef.NEW, this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet()));
 
-        columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_DECKS));
-        columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
-                this.fnDeckCompare, this.fnDeckGet, new ItemCellRenderer());
+        columnsDeck.put(ColumnDef.DECKS, new ItemColumn(ColumnDef.DECKS, this.fnDeckCompare, this.fnDeckGet));
 
         // don't need AI column for either table
-        columnsCatalog.remove(SColumnUtil.getColumn(ColumnName.CAT_AI));
-        columnsDeck.remove(SColumnUtil.getColumn(ColumnName.DECK_AI));
+        columnsCatalog.remove(new ItemColumn(ColumnDef.AI));
+        columnsDeck.remove(new ItemColumn(ColumnDef.AI));
 
         // Setup with current column set
         this.getCatalogManager().getTable().setup(columnsCatalog);

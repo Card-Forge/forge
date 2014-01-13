@@ -25,16 +25,6 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         buttonMap = new HashMap<SItemManagerUtil.StatTypes, FLabel>();
     }
 
-    protected void addColorButtons(JPanel widget) {
-        addToggleButton(widget, StatTypes.WHITE);
-        addToggleButton(widget, StatTypes.BLUE);
-        addToggleButton(widget, StatTypes.BLACK);
-        addToggleButton(widget, StatTypes.RED);
-        addToggleButton(widget, StatTypes.GREEN);
-        addToggleButton(widget, StatTypes.COLORLESS);
-        addToggleButton(widget, StatTypes.MULTICOLOR);
-    }
-
     @SuppressWarnings("serial")
     protected void addToggleButton(JPanel widget, final StatTypes st) {
         StringBuilder tooltip = new StringBuilder();
@@ -67,6 +57,22 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
                             case BLACK:
                             case RED:
                             case GREEN:
+                                //ensure multicolor filter selected after right-clicking a color filter
+                                if (!btn.getValue().getSelected()) {
+                                    btn.getValue().setSelected(true);
+                                }
+                                continue;
+                            default:
+                                break;
+                            }
+                        }
+                        else if (btn.getKey() == StatTypes.DECK_MULTICOLOR) {
+                            switch (st) {
+                            case DECK_WHITE:
+                            case DECK_BLUE:
+                            case DECK_BLACK:
+                            case DECK_RED:
+                            case DECK_GREEN:
                                 //ensure multicolor filter selected after right-clicking a color filter
                                 if (!btn.getValue().getSelected()) {
                                     btn.getValue().setSelected(true);

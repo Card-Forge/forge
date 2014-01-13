@@ -31,7 +31,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
     private final Command cmdDeckSelect = new Command() {
         @Override
         public void run() {
-            currentDeck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
+            currentDeck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
             Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_DECK, currentDeck.toString());
             Singletons.getModel().getQuestPreferences().save();
         }
@@ -66,7 +66,8 @@ public enum CSubmenuQuestDecks implements ICDoc {
         final QuestController qData = Singletons.getModel().getQuest();
         boolean hasQuest = qData.getAssets() != null;
         // Retrieve and set all decks
-        view.getLstDecks().setDecks(hasQuest ? qData.getMyDecks() : new ArrayList<Deck>());
+        view.getLstDecks().setPool(hasQuest ? qData.getMyDecks() : new ArrayList<Deck>());
+        view.getLstDecks().update();
 
         // Look through list for preferred deck from prefs
         currentDeck = null;
@@ -77,7 +78,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
             for (Deck d : qData.getMyDecks()) {
                 if (d.getName() != null && d.getName().equals(cd)) {
                     currentDeck = d;
-                    view.getLstDecks().setSelectedDeck(d);
+                    view.getLstDecks().setSelectedItem(d);
                     break;
                 }
             }
@@ -89,8 +90,8 @@ public enum CSubmenuQuestDecks implements ICDoc {
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
         view.getLstDecks().setDeleteCommand(cmdDeckDelete);
 
-        if (view.getLstDecks().getSelectedDeck() != null) {
-            Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_DECK, view.getLstDecks().getSelectedDeck().getName());
+        if (view.getLstDecks().getSelectedItem() != null) {
+            Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_DECK, view.getLstDecks().getSelectedItem().getName());
         }
         else {
             Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_DECK, QPref.CURRENT_DECK.getDefault());

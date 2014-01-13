@@ -72,6 +72,7 @@ import forge.gui.match.views.VField;
 import forge.gui.menus.ForgeMenu;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.net.FServer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -201,6 +202,8 @@ public enum FControl implements KeyEventDispatcher {
     public void initialize() {
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
+
+        SItemManagerIO.loadPreferences();
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();

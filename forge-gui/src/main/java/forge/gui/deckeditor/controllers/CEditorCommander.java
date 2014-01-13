@@ -19,6 +19,7 @@ package forge.gui.deckeditor.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicates;
@@ -35,14 +36,11 @@ import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.toolbox.itemmanager.CardManager;
-import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
+import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
-import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.PaperCard;
-import forge.item.InventoryItem;
 import forge.util.ItemPool;
 import forge.util.ItemPoolView;
 
@@ -80,10 +78,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         commanderPool = ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(Predicates.compose(Predicates.and(CardRulesPredicates.Presets.IS_CREATURE, CardRulesPredicates.Presets.IS_LEGENDARY), PaperCard.FN_GET_RULES)),PaperCard.class);
         normalPool = ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), PaperCard.class);
 
-        boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
-
-        CardManager catalogManager = new CardManager(wantUnique);
-        CardManager deckManager = new CardManager(wantUnique);
+        CardManager catalogManager = new CardManager(true);
+        CardManager deckManager = new CardManager(true);
 
         catalogManager.setCaption("Catalog");
 
@@ -165,8 +161,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
      */
     @Override
     public void update() {
-        final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
-        lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+        final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
+        lstCatalogCols.remove(ColumnDef.QUANTITY);
 
         this.getCatalogManager().getTable().setup(lstCatalogCols);
         this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
@@ -221,24 +217,24 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         curindex = (curindex + 1) % allSections.size();
         sectionMode = allSections.get(curindex);
 
-        final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
+        final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
 
         switch(sectionMode) {
             case Main:
-                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-                this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
+                lstCatalogCols.remove(ColumnDef.QUANTITY);
+                this.getCatalogManager().getTable().setup(lstCatalogCols);
                 this.getCatalogManager().setPool(normalPool, true);
                 this.getDeckManager().setPool(this.controller.getModel().getMain());
                 break;
             case Sideboard:
-                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-                this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
+                lstCatalogCols.remove(ColumnDef.QUANTITY);
+                this.getCatalogManager().getTable().setup(lstCatalogCols);
                 this.getCatalogManager().setPool(normalPool, true);
                 this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
                 break;
             case Commander:
-                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-                this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
+                lstCatalogCols.remove(ColumnDef.QUANTITY);
+                this.getCatalogManager().getTable().setup(lstCatalogCols);
                 this.getCatalogManager().setPool(commanderPool, true);
                 this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Commander));
                 break;

@@ -202,7 +202,7 @@ public class SSubmenuQuestUtil {
         final SkinnedLabel lblCurrentDeck = view0.getLblCurrentDeck();
         if (SSubmenuQuestUtil.getCurrentDeck() == null) {
             lblCurrentDeck.setForeground(Color.red.darker());
-            lblCurrentDeck.setText("Build, then select a deck in the \"Decks\" submenu.  ");
+            lblCurrentDeck.setText("Build, then select a deck in the \"Quest Decks\" submenu.");
         }
         else {
             lblCurrentDeck.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));

@@ -19,6 +19,7 @@ package forge.gui.deckeditor.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicates;
@@ -32,14 +33,11 @@ import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.framework.FScreen;
 import forge.gui.toolbox.itemmanager.CardManager;
-import forge.gui.toolbox.itemmanager.SItemManagerIO;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
+import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
-import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.PaperCard;
-import forge.item.InventoryItem;
 import forge.util.ItemPool;
 import forge.util.ItemPoolView;
 
@@ -78,10 +76,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         planePool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)),PaperCard.class);
         schemePool = ItemPool.createFrom(Singletons.getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)),PaperCard.class);
 
-        boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
-
-        CardManager catalogManager = new CardManager(wantUnique);
-        CardManager deckManager = new CardManager(wantUnique);
+        CardManager catalogManager = new CardManager(true);
+        CardManager deckManager = new CardManager(true);
 
         catalogManager.setCaption("Catalog");
 
@@ -280,51 +276,51 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
         curindex = (curindex + 1) % allSections.size();
         sectionMode = allSections.get(curindex);
 
-        final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
+        final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
 
         switch(sectionMode) {
         case Main:
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-            this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
+            lstCatalogCols.remove(ColumnDef.QUANTITY);
+            this.getCatalogManager().getTable().setup(lstCatalogCols);
             this.getCatalogManager().setPool(normalPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getMain());
             break;
         case Sideboard:
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-            this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
+            lstCatalogCols.remove(ColumnDef.QUANTITY);
+            this.getCatalogManager().getTable().setup(lstCatalogCols);
             this.getCatalogManager().setPool(normalPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
             break;
         case Avatar:
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COST));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COLOR));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_CMC));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_POWER));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS));
-            this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
+            lstCatalogCols.remove(ColumnDef.QUANTITY);
+            lstCatalogCols.remove(ColumnDef.COST);
+            lstCatalogCols.remove(ColumnDef.COLOR);
+            lstCatalogCols.remove(ColumnDef.CMC);
+            lstCatalogCols.remove(ColumnDef.POWER);
+            lstCatalogCols.remove(ColumnDef.TOUGHNESS);
+            this.getCatalogManager().getTable().setup(lstCatalogCols);
             this.getCatalogManager().setPool(avatarPool, true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Avatar));
             break;
         case Planes:
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COST));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_CMC));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COLOR));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_POWER));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS));
-            this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
+            lstCatalogCols.remove(ColumnDef.QUANTITY);
+            lstCatalogCols.remove(ColumnDef.COST);
+            lstCatalogCols.remove(ColumnDef.CMC);
+            lstCatalogCols.remove(ColumnDef.COLOR);
+            lstCatalogCols.remove(ColumnDef.POWER);
+            lstCatalogCols.remove(ColumnDef.TOUGHNESS);
+            this.getCatalogManager().getTable().setup(lstCatalogCols);
             this.getCatalogManager().setPool(planePool,true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Planes));
             break;
         case Schemes:
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_CMC));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COST));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COLOR));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_POWER));
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS));
-            this.getCatalogManager().getTable().setAvailableColumns(lstCatalogCols);
+            lstCatalogCols.remove(ColumnDef.QUANTITY);
+            lstCatalogCols.remove(ColumnDef.CMC);
+            lstCatalogCols.remove(ColumnDef.COST);
+            lstCatalogCols.remove(ColumnDef.COLOR);
+            lstCatalogCols.remove(ColumnDef.POWER);
+            lstCatalogCols.remove(ColumnDef.TOUGHNESS);
+            this.getCatalogManager().getTable().setup(lstCatalogCols);
             this.getCatalogManager().setPool(schemePool,true);
             this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
             break;
@@ -341,8 +337,8 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     @SuppressWarnings("serial")
     @Override
     public void update() {
-        final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
-        lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+        final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
+        lstCatalogCols.remove(ColumnDef.QUANTITY);
 
         this.getCatalogManager().getTable().setup(lstCatalogCols);
         this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());

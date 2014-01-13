@@ -613,7 +613,7 @@ public final class QuestUtilCards {
         return this.fnNewCompare;
     }
 
-    public Function<Entry<InventoryItem, Integer>, Object> getFnNewGet() {
+    public Function<Entry<? extends InventoryItem, Integer>, Object> getFnNewGet() {
         return this.fnNewGet;
     }
 
@@ -633,10 +633,10 @@ public final class QuestUtilCards {
     };
 
     /** The fn new get. */
-    private final Function<Entry<InventoryItem, Integer>, Object> fnNewGet =
-            new Function<Entry<InventoryItem, Integer>, Object>() {
+    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet =
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
-        public Object apply(final Entry<InventoryItem, Integer> from) {
+        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
             return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? "NEW" : "";
         }
     };
@@ -645,7 +645,7 @@ public final class QuestUtilCards {
         return this.fnOwnedCompare;
     }
 
-    public Function<Entry<InventoryItem, Integer>, Object> getFnOwnedGet() {
+    public Function<Entry<? extends InventoryItem, Integer>, Object> getFnOwnedGet() {
         return this.fnOwnedGet;
     }
 
@@ -687,10 +687,10 @@ public final class QuestUtilCards {
         }
     };
 
-    private final Function<Entry<InventoryItem, Integer>, Object> fnOwnedGet =
-            new Function<Entry<InventoryItem, Integer>, Object>() {
+    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnOwnedGet =
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
-        public Object apply(final Entry<InventoryItem, Integer> from) {
+        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
             if (i instanceof PaperCard) {
                 return QuestUtilCards.this.qa.getCardPool().count((PaperCard) i);

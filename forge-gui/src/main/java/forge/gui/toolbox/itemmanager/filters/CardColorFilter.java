@@ -28,7 +28,13 @@ public class CardColorFilter extends StatTypeFilter<PaperCard> {
         if (itemManager instanceof SpellShopManager) {
             addToggleButton(widget, StatTypes.PACK_OR_DECK);
         }
-        addColorButtons(widget);
+        addToggleButton(widget, StatTypes.WHITE);
+        addToggleButton(widget, StatTypes.BLUE);
+        addToggleButton(widget, StatTypes.BLACK);
+        addToggleButton(widget, StatTypes.RED);
+        addToggleButton(widget, StatTypes.GREEN);
+        addToggleButton(widget, StatTypes.COLORLESS);
+        addToggleButton(widget, StatTypes.MULTICOLOR);
     }
 
     @Override

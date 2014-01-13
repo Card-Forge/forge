@@ -21,7 +21,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.event.AncestorEvent;
@@ -428,11 +427,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint {
     public int getAutoSizeWidth() {
         int width = 0;
         if (this.getText() != null && !this.getText().isEmpty()) {
-            Graphics g = this.getGraphics();
-            if (g == null) {
-                g = JOptionPane.getRootFrame().getGraphics(); //fallback to root frame's graphics if needed
-            }
-            FontMetrics metrics = g.getFontMetrics(this.getFont());
+            FontMetrics metrics = this.getFontMetrics(this.getFont());
             width = metrics.stringWidth(this.getText());
         }
         if (this.getIcon() != null) {

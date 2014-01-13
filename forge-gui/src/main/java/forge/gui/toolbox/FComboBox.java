@@ -83,7 +83,7 @@ public class FComboBox<E> extends SkinnedComboBox<E> {
 
     public int getAutoSizeWidth() {
         int maxWidth = 0;
-        FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
+        FontMetrics metrics = this.getFontMetrics(this.getFont());
         for (int i = 0; i < this.getItemCount(); i++) {
             int width = metrics.stringWidth(this.getItemAt(i).toString());
             if (width > maxWidth) {

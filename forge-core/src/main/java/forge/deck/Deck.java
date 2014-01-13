@@ -34,6 +34,8 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.card.CardDb;
+import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.item.PaperCard;
@@ -57,6 +59,9 @@ import forge.util.ItemPoolView;
 public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPool>> {
     private final Map<DeckSection, CardPool> parts = new EnumMap<DeckSection, CardPool>(DeckSection.class);
     private final Set<String>                tags  = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+    private ManaCost color;
+    private String format;
+    private int formatCompare;
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -82,7 +87,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public String getItemType() {
         return "Deck";
     }
-    
+
     @Override
     public int hashCode() {
         return this.getName().hashCode();
@@ -102,12 +107,12 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public CardPool get(DeckSection deckSection) {
         return this.parts.get(deckSection);
     }
-    
+
     public boolean has(DeckSection deckSection) {
         final CardPool cp = get(deckSection);
         return cp != null && !cp.isEmpty();
     }
-    
+
     // will return new if it was absent
     public CardPool getOrCreate(DeckSection deckSection) {
         CardPool p = get(deckSection);
@@ -192,7 +197,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
             CardPool pool = CardPool.fromCardList(s.getValue());
             // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
-            IPaperCard sample = pool.get(0); 
+            IPaperCard sample = pool.get(0);
             if (sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon())) {
                 sec = DeckSection.Planes;
             }
@@ -220,7 +225,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
         StringBuilder sb = new StringBuilder();
         sb.append(n).append(" ").append(card.getName());
-        
+
         if (!hasBadSetInfo) {
             sb.append("|").append(card.getEdition());
         }
@@ -238,6 +243,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
      * @return the list
      */
     public List<String> save() {
+        this.color = null; //ensure color and format are recalculated
+        this.format = null;
 
         final List<String> out = new ArrayList<String>();
         out.add(String.format("[metadata]"));
@@ -265,7 +272,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             return arg1.getName();
         }
     };
-    
+
     /* (non-Javadoc)
      * @see java.lang.Iterable#iterator()
      */
@@ -280,7 +287,78 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public Set<String> getTags() {
         return tags;
     }
-    
+
+    public ManaCost getColor() {
+        if (color == null) {
+            byte colorProfile = MagicColor.COLORLESS;
+
+            for (Entry<DeckSection, CardPool> deckEntry : this) {
+                switch (deckEntry.getKey()) {
+                case Main:
+                case Sideboard:
+                case Commander:
+                    for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                        colorProfile |= poolEntry.getKey().getRules().getColor().getColor();
+                    }
+                    break;
+                default:
+                    break; //ignore other sections
+                }
+            }
+            color = ManaCost.fromColorProfile(colorProfile);
+        }
+        return color;
+    }
+
+    public String getFormat(Map<String, Predicate<PaperCard>> formatPredicates) {
+        if (format == null) {
+            formatCompare = 0; //build format compare value, with higher values for being valid in a more recent format
+            int value = (int)Math.pow(2, formatPredicates.size() - 1);
+            StringBuilder builder = new StringBuilder();
+
+            formatLoop:
+            for (Entry<String, Predicate<PaperCard>> format : formatPredicates.entrySet()) {
+                for (Entry<DeckSection, CardPool> deckEntry : this) {
+                    switch (deckEntry.getKey()) {
+                    case Main:
+                    case Sideboard:
+                    case Commander:
+                        for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                            if (!format.getValue().apply(poolEntry.getKey())) {
+                                value /= 2;
+                                continue formatLoop; //if found card that's not legal in this format, move to next format
+                            }
+                        }
+                        break;
+                    default:
+                        break; //ignore other sections
+                    }
+                }
+                //add format if reached this point
+                if (builder.length() > 0) {
+                    builder.append(", ");
+                }
+                builder.append(format.getKey());
+
+                formatCompare += value; //increment format compare value
+                value /= 2;
+            }
+
+            if (builder.length() > 0) {
+                format = builder.toString();
+            }
+            else {
+                format = "(none)";
+            }
+        }
+        return format;
+    }
+
+    public int getFormatCompare(Map<String, Predicate<PaperCard>> formatPredicates) {
+        getFormat(formatPredicates); //ensure formatCompare defined
+        return formatCompare;
+    }
+
     //create predicate that applys a card predicate to all cards in deck
     public static final Predicate<Deck> createPredicate(final Predicate<PaperCard> cardPredicate) {
         return new Predicate<Deck>() {
@@ -304,5 +382,5 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 return true;
             }
         };
-    }    
+    }
 }

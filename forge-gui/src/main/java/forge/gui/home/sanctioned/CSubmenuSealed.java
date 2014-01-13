@@ -105,7 +105,8 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         final VSubmenuSealed view = VSubmenuSealed.SINGLETON_INSTANCE;
-        view.getLstDecks().setDecks(humanDecks);
+        view.getLstDecks().setPool(humanDecks);
+        view.getLstDecks().update();
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
@@ -120,7 +121,7 @@ public enum CSubmenuSealed implements ICDoc {
     }
 
     private void startGame(final GameType gameType) {
-        final Deck human = VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
+        final Deck human = VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
 
         if (human == null) {
             FOptionPane.showErrorDialog("Please build and/or select a deck for yourself.", "No Deck");

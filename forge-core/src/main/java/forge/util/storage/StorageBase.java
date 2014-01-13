@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -63,6 +64,10 @@ public class StorageBase<T> implements IStorage<T> {
     @Override
     public final Collection<String> getItemNames() {
         return new ArrayList<String>(this.map.keySet());
+    }
+
+    public Iterable<Entry<String, T>> entrySet() {
+        return this.map.entrySet();
     }
 
     @Override

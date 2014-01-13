@@ -1,14 +1,13 @@
 package forge.gui.workshop.controllers;
 
-import java.util.List;
+import java.util.Map;
 
 import forge.Command;
 import forge.gui.workshop.views.VWorkshopCatalog;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
-import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
-import forge.item.InventoryItem;
+import forge.gui.toolbox.itemmanager.views.ItemColumn;
 
 /** 
  * Controls the "card catalog" panel in the workshop UI.
@@ -45,8 +44,8 @@ public enum CWorkshopCatalog implements ICDoc {
      */
     @Override
     public void update() {
-        final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
-        lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+        final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
+        lstCatalogCols.remove(ColumnDef.QUANTITY);
         VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().getTable().setup(lstCatalogCols);
         //TODO: Restore previously selected card
     }

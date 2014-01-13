@@ -207,7 +207,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint {
     public int getAutoSizeWidth() {
         int width = 0;
         if (this.getText() != null && !this.getText().isEmpty()) {
-            FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
+            FontMetrics metrics = this.getFontMetrics(this.getFont());
             width = metrics.stringWidth(this.getText());
         }
         return width;

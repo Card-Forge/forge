@@ -22,6 +22,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import forge.card.ColorSet;
+import forge.card.MagicColor;
+
 /**
  * <p>
  * CardManaCost class.
@@ -46,14 +49,20 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
     public static final ManaCost TWO = new ManaCost(2);
     public static final ManaCost THREE = new ManaCost(3);
     public static final ManaCost FOUR = new ManaCost(4);
+    public static final ManaCost WHITE = new ManaCost(MagicColor.WHITE);
+    public static final ManaCost BLUE = new ManaCost(MagicColor.BLUE);
+    public static final ManaCost BLACK = new ManaCost(MagicColor.BLACK);
+    public static final ManaCost RED = new ManaCost(MagicColor.RED);
+    public static final ManaCost GREEN = new ManaCost(MagicColor.GREEN);
+    public static final ManaCost COLORLESS = new ManaCost(MagicColor.COLORLESS);
 
     public static ManaCost get(int cntColorless) {
         switch (cntColorless) {
-            case 0: return ZERO;
-            case 1: return ONE;
-            case 2: return TWO;
-            case 3: return THREE;
-            case 4: return FOUR;
+        case 0: { return ZERO; }
+        case 1: { return ONE; }
+        case 2: { return TWO; }
+        case 3: { return THREE; }
+        case 4: { return FOUR; }
         }
         return cntColorless > 0 ? new ManaCost(cntColorless) : NO_COST;
     }
@@ -86,8 +95,47 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
                 shardsTemp.add(shard);
             } // null is OK - that was generic mana
         }
-        this.genericCost = parser.getTotalColorlessCost(); // collect generic mana
-        // here
+        this.genericCost = parser.getTotalColorlessCost();
+        sealClass(shardsTemp);
+    }
+
+    //constructor for mana cost from color profile
+    public static ManaCost fromColorProfile(final byte colorProfile) {
+        switch (colorProfile) {
+        case MagicColor.WHITE:     { return WHITE; }
+        case MagicColor.BLUE:      { return BLUE; }
+        case MagicColor.BLACK:     { return BLACK; }
+        case MagicColor.RED:       { return RED; }
+        case MagicColor.GREEN:     { return GREEN; }
+        case MagicColor.COLORLESS: { return COLORLESS; }
+        }
+        return new ManaCost(colorProfile);
+    }
+    private ManaCost(final byte colorProfile) {
+        final List<ManaCostShard> shardsTemp = new ArrayList<ManaCostShard>();
+        this.hasNoCost = false;
+        if (colorProfile == MagicColor.COLORLESS) {
+            shardsTemp.add(ManaCostShard.X);
+        }
+        else {
+            ColorSet colorSet = ColorSet.fromMask(colorProfile);
+            if (colorSet.hasWhite()) {
+                shardsTemp.add(ManaCostShard.WHITE);
+            }
+            if (colorSet.hasBlue()) {
+                shardsTemp.add(ManaCostShard.BLUE);
+            }
+            if (colorSet.hasBlack()) {
+                shardsTemp.add(ManaCostShard.BLACK);
+            }
+            if (colorSet.hasRed()) {
+                shardsTemp.add(ManaCostShard.RED);
+            }
+            if (colorSet.hasGreen()) {
+                shardsTemp.add(ManaCostShard.GREEN);
+            }
+        }
+        this.genericCost = 0;
         sealClass(shardsTemp);
     }
 
@@ -243,6 +291,10 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
             }
         }
         return iX;
+    }
+
+    public boolean hasColor(byte colorCode) {
+        return (colorCode & getColorProfile()) == colorCode;
     }
 
     /**

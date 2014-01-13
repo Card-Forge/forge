@@ -79,7 +79,7 @@ public class StarRenderer extends ItemCellRenderer {
     
     private void update() {
         if (card == null) {
-            this.setToolTipText("");
+            this.setToolTipText(null);
             skinImage = null;
         }
         else if (CardPreferences.getPrefs(card.getName()).getStarCount() == 0) {

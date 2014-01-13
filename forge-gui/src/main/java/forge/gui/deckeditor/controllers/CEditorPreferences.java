@@ -1,22 +1,13 @@
 package forge.gui.deckeditor.controllers;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.HashMap;
 
 import javax.swing.JCheckBox;
 
 import forge.Command;
-import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.toolbox.itemmanager.ItemManager;
-import forge.gui.toolbox.itemmanager.SItemManagerIO;
-import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil;
-import forge.gui.toolbox.itemmanager.views.TableColumnInfo;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
+import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
 import forge.gui.deckeditor.views.VEditorPreferences;
 import forge.gui.framework.ICDoc;
-import forge.item.InventoryItem;
 
 /** 
  * Controls the "analysis" panel in the deck editor UI.
@@ -43,43 +34,41 @@ public enum CEditorPreferences implements ICDoc {
      */
     @Override
     public void initialize() {
-        SItemManagerIO.loadPreferences();
-
-        HashMap<JCheckBox, ColumnName> prefsDict = new HashMap<JCheckBox, SColumnUtil.ColumnName>();
+        HashMap<JCheckBox, ColumnDef> prefsDict = new HashMap<JCheckBox, ColumnDef>();
 
         // Simplified Column Preferences
         VEditorPreferences prefsInstance = VEditorPreferences.SINGLETON_INSTANCE;
 
         // Catalog
-        prefsDict.put(prefsInstance.getChbCatalogColor(), ColumnName.CAT_COLOR);
-        prefsDict.put(prefsInstance.getChbCatalogRarity(), ColumnName.CAT_RARITY);
-        prefsDict.put(prefsInstance.getChbCatalogCMC(), ColumnName.CAT_CMC);
-        prefsDict.put(prefsInstance.getChbCatalogSet(), ColumnName.CAT_SET);
-        prefsDict.put(prefsInstance.getChbCatalogAI(), ColumnName.CAT_AI);
-        prefsDict.put(prefsInstance.getChbCatalogRanking(), ColumnName.CAT_RANKING);
-        prefsDict.put(prefsInstance.getChbCatalogPower(), ColumnName.CAT_POWER);
-        prefsDict.put(prefsInstance.getChbCatalogToughness(), ColumnName.CAT_TOUGHNESS);
-        prefsDict.put(prefsInstance.getChbCatalogFavorite(), ColumnName.CAT_FAVORITE);
-        prefsDict.put(prefsInstance.getChbCatalogOwned(), ColumnName.CAT_OWNED);
+        prefsDict.put(prefsInstance.getChbCatalogColor(), ColumnDef.COLOR);
+        prefsDict.put(prefsInstance.getChbCatalogRarity(), ColumnDef.RARITY);
+        prefsDict.put(prefsInstance.getChbCatalogCMC(), ColumnDef.CMC);
+        prefsDict.put(prefsInstance.getChbCatalogSet(), ColumnDef.SET);
+        prefsDict.put(prefsInstance.getChbCatalogAI(), ColumnDef.AI);
+        prefsDict.put(prefsInstance.getChbCatalogRanking(), ColumnDef.RANKING);
+        prefsDict.put(prefsInstance.getChbCatalogPower(), ColumnDef.POWER);
+        prefsDict.put(prefsInstance.getChbCatalogToughness(), ColumnDef.TOUGHNESS);
+        prefsDict.put(prefsInstance.getChbCatalogFavorite(), ColumnDef.FAVORITE);
+        prefsDict.put(prefsInstance.getChbCatalogOwned(), ColumnDef.OWNED);
 
         // Deck
-        prefsDict.put(prefsInstance.getChbDeckColor(), ColumnName.DECK_COLOR);
-        prefsDict.put(prefsInstance.getChbDeckRarity(), ColumnName.DECK_RARITY);
-        prefsDict.put(prefsInstance.getChbDeckCMC(), ColumnName.DECK_CMC);
-        prefsDict.put(prefsInstance.getChbDeckSet(), ColumnName.DECK_SET);
-        prefsDict.put(prefsInstance.getChbDeckAI(), ColumnName.DECK_AI);
-        prefsDict.put(prefsInstance.getChbDeckRanking(), ColumnName.DECK_RANKING);
-        prefsDict.put(prefsInstance.getChbDeckPower(), ColumnName.DECK_POWER);
-        prefsDict.put(prefsInstance.getChbDeckToughness(), ColumnName.DECK_TOUGHNESS);
+        prefsDict.put(prefsInstance.getChbDeckColor(), ColumnDef.COLOR);
+        prefsDict.put(prefsInstance.getChbDeckRarity(), ColumnDef.RARITY);
+        prefsDict.put(prefsInstance.getChbDeckCMC(), ColumnDef.CMC);
+        prefsDict.put(prefsInstance.getChbDeckSet(), ColumnDef.SET);
+        prefsDict.put(prefsInstance.getChbDeckAI(), ColumnDef.AI);
+        prefsDict.put(prefsInstance.getChbDeckRanking(), ColumnDef.RANKING);
+        prefsDict.put(prefsInstance.getChbDeckPower(), ColumnDef.POWER);
+        prefsDict.put(prefsInstance.getChbDeckToughness(), ColumnDef.TOUGHNESS);
 
         // Simplified assignments to be less verbose
-        for (JCheckBox key : prefsDict.keySet()) {
-            final ColumnName name = prefsDict.get(key);
+        /*for (JCheckBox key : prefsDict.keySet()) {
+            final ColumnDef name = prefsDict.get(key);
             key.setSelected(SColumnUtil.getColumn(name).isShowing());
             key.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent arg0) {
-                    TableColumnInfo<InventoryItem> col = SColumnUtil.getColumn(name);
+                    ItemColumn col = SColumnUtil.getColumn(name);
                     final ItemManager<?> itemManager = (col.getEnumValue().substring(0, 4).equals("DECK"))
                         ? CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager()
                         : CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager();
@@ -129,7 +118,7 @@ public enum CEditorPreferences implements ICDoc {
                     curEditor.getDeckManager().updateView(true);
                 }
                 SItemManagerIO.setPref(EditorPreference.display_unique_only, wantUnique);
-                SItemManagerIO.savePreferences(curEditor.getCatalogManager()); } });
+                SItemManagerIO.savePreferences(curEditor.getCatalogManager()); } });*/
     }
 
     /* (non-Javadoc)

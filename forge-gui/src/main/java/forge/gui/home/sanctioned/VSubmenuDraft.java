@@ -20,13 +20,14 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
+import forge.gui.home.VHomeUI.PnlDisplay;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FRadioButton;
-import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.JXButtonPanel;
-import forge.gui.toolbox.special.DeckLister;
+import forge.gui.toolbox.itemmanager.DeckManager;
+import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 
 /** 
  * Assembles Swing components of draft submenu singleton.
@@ -47,7 +48,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
 
-    private final DeckLister lstDecks = new DeckLister(GameType.Draft);
+    private final DeckManager lstDecks = new DeckManager(GameType.Draft);
     private final JList<String> lstAI = new FList<String>();
 
     private final JRadioButton radSingle = new FRadioButton("Play one opponent");
@@ -71,7 +72,6 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
 
     private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("New Booster Draft Game").fontSize(16).build();
 
-
     /**
      * Constructor.
      */
@@ -80,6 +80,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         btnStart.setEnabled(false);
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lstDecks.setCaption("Draft Decks");
 
         JXButtonPanel grpPanel = new JXButtonPanel();
         grpPanel.add(radSingle, "w 200px!, h 30px!");
@@ -131,8 +132,8 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         return radSingle.isSelected();
     }
 
-    /** @return {@link forge.gui.toolbox.special.DeckLister} */
-    public DeckLister getLstDecks() {
+    /** @return {@link forge.gui.toolbox.itemmanager.DeckManager} */
+    public DeckManager getLstDecks() {
         return lstDecks;
     }
 
@@ -143,22 +144,23 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
      */
     @Override
     public void populate() {
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap, ax right"));
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, ax right");
+        PnlDisplay pnlDisplay = VHomeUI.SINGLETON_INSTANCE.getPnlDisplay();
+        pnlDisplay.removeAll();
+        pnlDisplay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax right"));
+        pnlDisplay.add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, ax right");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "w 80%!, h 30px!, gap 0 10% 20px 5px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir1, "gap 0 0 0 5px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir2, "gap 0 0 0 5px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir3, "gap 0 0 0 20px");
+        pnlDisplay.add(lblInfo, "w 80%!, h 30px!, gap 0 10% 20px 5px");
+        pnlDisplay.add(lblDir1, "gap 0 0 0 5px");
+        pnlDisplay.add(lblDir2, "gap 0 0 0 5px");
+        pnlDisplay.add(lblDir3, "gap 0 0 0 20px");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBuildDeck, "w 250px!, h 30px!, ax center, gap 0 10% 0 20px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstDecks), "w 80%!, gap 0 10% 0 0, pushy, growy");
+        pnlDisplay.add(btnBuildDeck, "w 250px!, h 30px!, ax center, gap 0 10% 0 20px");
+        pnlDisplay.add(new ItemManagerContainer(lstDecks), "w 80%!, gap 0 10% 0 0, pushy, growy");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 10% 50px 50px, ax center");
+        pnlDisplay.add(pnlStart, "gap 0 10% 50px 50px, ax center");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaint();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
+        pnlDisplay.repaint();
+        pnlDisplay.revalidate();
     }
 
     /* (non-Javadoc)

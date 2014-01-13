@@ -41,8 +41,6 @@ import forge.gui.framework.ICDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.itemmanager.ItemManager;
-import forge.gui.toolbox.itemmanager.SItemManagerIO;
-import forge.gui.toolbox.itemmanager.SItemManagerIO.EditorPreference;
 import forge.gui.toolbox.itemmanager.views.ItemListView;
 import forge.item.InventoryItem;
 import forge.util.ItemPool;
@@ -285,12 +283,6 @@ public enum CDeckEditorUI implements ICDoc {
 
         childController.update();
 
-        boolean wantElastic = SItemManagerIO.getPref(EditorPreference.elastic_columns);
-        boolean wantUnique = SItemManagerIO.getPref(EditorPreference.display_unique_only);
-        catTable.setWantElasticColumns(wantElastic);
-        deckTable.setWantElasticColumns(wantElastic);
-        catView.setWantUnique(wantUnique);
-        deckView.setWantUnique(wantUnique);
         catView.applyFilters();
 
         SwingUtilities.invokeLater(new Runnable() {

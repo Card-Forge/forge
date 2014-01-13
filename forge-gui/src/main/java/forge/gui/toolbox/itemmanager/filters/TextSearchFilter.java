@@ -102,7 +102,6 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
 
     @Override
     protected void doWidgetLayout(LayoutHelper helper) {
-        helper.offset(0, 3); //add padding above text field
         helper.fillLine(txtSearch, FTextField.HEIGHT);
     }
 

@@ -34,4 +34,10 @@
 	<col enumval="DECK_NEW" identifier="New" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="DECK_SALE_PRICE" identifier="Sale Price" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="DECK_DECKS" identifier="Decks" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
+	<col enumval="DECKLIST_BUTTONS" identifier="" show="true" sortpriority="1" sortstate="DESC" width="50"></col>
+	<col enumval="DECKLIST_NAME" identifier="Name" show="true" sortpriority="2" sortstate="ASC" width="200"></col>
+	<col enumval="DECKLIST_COLOR" identifier="Color" show="true" sortpriority="0" sortstate="NONE" width="60"></col>
+	<col enumval="DECKLIST_FORMAT" identifier="Format" show="true" sortpriority="0" sortstate="NONE" width="120"></col>
+	<col enumval="DECKLIST_MAIN" identifier="Main" show="true" sortpriority="0" sortstate="NONE" width="40"></col>
+	<col enumval="DECKLIST_SIDE" identifier="Side" show="true" sortpriority="0" sortstate="NONE" width="40"></col>
 </preferences>

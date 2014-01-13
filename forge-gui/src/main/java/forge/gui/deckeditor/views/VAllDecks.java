@@ -1,6 +1,6 @@
 package forge.gui.deckeditor.views;
 
-import javax.swing.JScrollPane;
+import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
@@ -9,7 +9,8 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.gui.toolbox.special.DeckLister;
+import forge.gui.toolbox.itemmanager.DeckManager;
+import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 
 /** 
  * Assembles Swing components of all deck viewer in deck editor.
@@ -24,15 +25,11 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("All Decks");
 
-    private final DeckLister lstDecks = new DeckLister(GameType.Constructed);
-    private JScrollPane scroller = new JScrollPane(lstDecks);
+    private final DeckManager lstDecks = new DeckManager(GameType.Constructed);
 
     //========== Constructor
     private VAllDecks() {
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
-        scroller.getViewport().setBorder(null);
+        lstDecks.setCaption("Decks");
     }
 
     //========== Overridden methods
@@ -82,14 +79,14 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap, ax center"));
-
-        parentCell.getBody().add(scroller, "w 96%!, growy, pushy, gap 2% 0 2% 0");
+        JPanel parentBody = parentCell.getBody();
+        parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
+        parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
     }
 
     //========== Retrieval methods
     /** @return {@link javax.swing.JPanel} */
-    public DeckLister getLstDecks() {
+    public DeckManager getLstDecks() {
         return lstDecks;
     }
 }

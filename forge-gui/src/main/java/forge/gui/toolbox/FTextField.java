@@ -114,7 +114,7 @@ public class FTextField extends SkinnedTextField {
     }
     
     public int getAutoSizeWidth() {
-        FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
+        FontMetrics metrics = this.getFontMetrics(this.getFont());
         return metrics.stringWidth(this.getText()) + 12;
     }
 

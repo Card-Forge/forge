@@ -24,13 +24,14 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
+import forge.gui.home.VHomeUI.PnlDisplay;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedTextPane;
-import forge.gui.toolbox.special.DeckLister;
+import forge.gui.toolbox.itemmanager.DeckManager;
+import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 
 /** 
  * Assembles Swing components of sealed submenu singleton.
@@ -48,8 +49,8 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     /** */
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Sealed Deck");
 
-    private final StartButton btnStart  = new StartButton();
-    private final DeckLister lstDecks   = new DeckLister(GameType.Sealed);
+    private final StartButton btnStart = new StartButton();
+    private final DeckManager lstDecks = new DeckManager(GameType.Sealed);
 
     private final FLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
@@ -80,6 +81,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         btnStart.setEnabled(false);
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lstDecks.setCaption("Sealed Decks");
     }
 
     /* (non-Javadoc)
@@ -87,21 +89,22 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
      */
     @Override
     public void populate() {
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap, ax right"));
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, ax right");
+        PnlDisplay pnlDisplay = VHomeUI.SINGLETON_INSTANCE.getPnlDisplay();
+        pnlDisplay.removeAll();
+        pnlDisplay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax right"));
+        pnlDisplay.add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, ax right");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "w 80%!, h 30px!, gap 0 10% 20px 5px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir1, "gap 0 0 0 5px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir2, "gap 0 0 0 5px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir3, "gap 0 0 0 20px");
+        pnlDisplay.add(lblInfo, "w 80%!, h 30px!, gap 0 10% 20px 5px");
+        pnlDisplay.add(lblDir1, "gap 0 0 0 5px");
+        pnlDisplay.add(lblDir2, "gap 0 0 0 5px");
+        pnlDisplay.add(lblDir3, "gap 0 0 0 20px");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBuildDeck, "w 250px!, h 30px!, ax center, gap 0 10% 0 20px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstDecks), "w 80%!, gap 0 10% 0 0, pushy, growy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 10% 50px 50px, ax center");
+        pnlDisplay.add(btnBuildDeck, "w 250px!, h 30px!, ax center, gap 0 10% 0 20px");
+        pnlDisplay.add(new ItemManagerContainer(lstDecks), "w 80%!, gap 0 10% 0 0, pushy, growy");
+        pnlDisplay.add(btnStart, "gap 0 10% 50px 50px, ax center");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
+        pnlDisplay.repaintSelf();
+        pnlDisplay.revalidate();
     }
 
     /* (non-Javadoc)
@@ -143,8 +146,8 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         return this.btnStart;
     }
 
-    /** @return {@link forge.gui.toolbox.special.DeckLister} */
-    public DeckLister getLstDecks() {
+    /** @return {@link forge.gui.toolbox.itemmanager.DeckManager} */
+    public DeckManager getLstDecks() {
         return lstDecks;
     }
 

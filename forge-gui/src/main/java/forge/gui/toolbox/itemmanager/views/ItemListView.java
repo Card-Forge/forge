@@ -31,7 +31,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JComponent;
@@ -57,8 +59,8 @@ import forge.gui.toolbox.FSkin.SkinnedTable;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil.ColumnName;
-import forge.gui.toolbox.itemmanager.views.SColumnUtil.SortState;
+import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.ItemColumn.SortState;
 import forge.item.InventoryItem;
 import forge.util.ItemPoolSorter;
 
@@ -125,7 +127,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.table.setBorder((Border)null);
         this.table.getTableHeader().setBorder(null);
         this.table.setRowHeight(18);
-        setWantElasticColumns(false);
+        this.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         // prevent tables from intercepting tab focus traversals
         this.table.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
@@ -137,20 +139,22 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
      * 
      * @param cols &emsp; List<TableColumnInfo<InventoryItem>> of additional columns for this
      */
-    public void setup(final List<TableColumnInfo<InventoryItem>> cols) {
+    public void setup(final Map<ColumnDef, ItemColumn> cols) {
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
         //ensure columns ordered properly
-        Collections.sort(cols, new Comparator<TableColumnInfo<InventoryItem>>() {
+        List<Entry<ColumnDef, ItemColumn>> list = new LinkedList<Entry<ColumnDef, ItemColumn>>(cols.entrySet());
+        Collections.sort(list, new Comparator<Entry<ColumnDef, ItemColumn>>() {
             @Override
-            public int compare(TableColumnInfo<InventoryItem> arg0, TableColumnInfo<InventoryItem> arg1) {
-                return Integer.compare(arg0.getIndex(), arg1.getIndex());
+            public int compare(Entry<ColumnDef, ItemColumn> arg0, Entry<ColumnDef, ItemColumn> arg1) {
+                return Integer.compare(arg0.getValue().getIndex(), arg1.getValue().getIndex());
             }
         });
 
-        for (TableColumnInfo<InventoryItem> item : cols) {
-            item.setModelIndex(colmodel.getColumnCount());
-            if (item.isShowing()) { colmodel.addColumn(item); }
+        for (Entry<ColumnDef, ItemColumn> entry : list) {
+            ItemColumn col = entry.getValue();
+            col.setModelIndex(colmodel.getColumnCount());
+            if (!col.isHidden()) { colmodel.addColumn(col); }
         }
 
         this.tableModel.addListeners();
@@ -161,17 +165,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.tableModel.refreshSort();
 
         this.table.getTableHeader().setBackground(new Color(200, 200, 200));
-    }
-
-    public void setAvailableColumns(final List<TableColumnInfo<InventoryItem>> cols) {
-        final DefaultTableColumnModel colModel = new DefaultTableColumnModel();
-
-        for (TableColumnInfo<InventoryItem> item : cols) {
-            item.setModelIndex(colModel.getColumnCount());
-            if (item.isShowing()) { colModel.addColumn(item); }
-        }
-
-        table.setColumnModel(colModel);
     }
 
     public JTable getTable() {
@@ -288,24 +281,19 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         return this.table.rowAtPoint(p);
     }
 
-    public void setWantElasticColumns(boolean value) {
-        this.table.setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_OFF);
-    }
-
     public final class ItemTable extends SkinnedTable {
         @Override
         protected JTableHeader createDefaultTableHeader() {
             return new JTableHeader(columnModel) {
+                @Override
                 public String getToolTipText(MouseEvent e) {
                     int col = columnModel.getColumnIndexAtX(e.getPoint().x);
                     if (col < 0) { return null; }
-                    TableColumn tableColumn = columnModel.getColumn(col);
-                    TableCellRenderer headerRenderer = tableColumn.getHeaderRenderer();
-                    if (headerRenderer == null) {
-                        headerRenderer = getDefaultRenderer();
+                    ItemColumn tableColumn = (ItemColumn) columnModel.getColumn(col);
+                    if (tableColumn.getLongName().isEmpty()) {
+                        return null;
                     }
-
-                    return getCellTooltip(headerRenderer, -1, col, tableColumn.getHeaderValue());
+                    return tableColumn.getLongName();
                 }
             };
         }
@@ -425,39 +413,24 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         }
 
         /** */
-        @SuppressWarnings("unchecked")
         public void setup() {
             final Enumeration<TableColumn> e = table.getColumnModel().getColumns();
             final TableColumn[] sortcols = new TableColumn[table.getColumnCount()];
 
             // Assemble priority sort.
             while (e.hasMoreElements()) {
-                final TableColumnInfo<InventoryItem> col = (TableColumnInfo<InventoryItem>) e.nextElement();
+                final ItemColumn col = (ItemColumn) e.nextElement();
                 if (col.getSortPriority() > 0) {
                     sortcols[col.getSortPriority()] = col;
                 }
             }
 
-            final boolean isDeckTable = ((TableColumnInfo<InventoryItem>) table.getColumnModel()
-                    .getColumn(0)).getEnumValue().substring(0, 4).equals("DECK")
-                        ? true : false;
-
             cascadeManager.reset();
 
-            if (sortcols[1] == null) {
-                if (isDeckTable) {
-                    cascadeManager.add((TableColumnInfo<T>) SColumnUtil.getColumn(ColumnName.DECK_NAME), true);
-                }
-                else {
-                    cascadeManager.add((TableColumnInfo<T>) SColumnUtil.getColumn(ColumnName.CAT_NAME), true);
-                }
-            }
-            else {
-                ArrayUtils.reverse(sortcols);
-                for (int i = 1; i < sortcols.length; i++) {
-                    if (sortcols[i] != null) {
-                        cascadeManager.add((TableColumnInfo<T>) sortcols[i], true);
-                    }
+            ArrayUtils.reverse(sortcols);
+            for (int i = 1; i < sortcols.length; i++) {
+                if (sortcols[i] != null) {
+                    cascadeManager.add((ItemColumn) sortcols[i], true);
                 }
             }
         }
@@ -514,7 +487,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         };
 
         private final FMouseAdapter headerMouseAdapter = new FMouseAdapter(true) {
-            @SuppressWarnings("unchecked")
             @Override
             public void onLeftClick(MouseEvent e) {
                 if (Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR) == table.getTableHeader().getCursor()) {
@@ -533,7 +505,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 // This will invert if needed
                 // 2012/07/21 - Changed from modelIndex to ColumnModelIndex due to a crash
                 // Crash was: Hide 2 columns, then search by last column.
-                ItemTableModel.this.cascadeManager.add((TableColumnInfo<T>) table.getColumnModel().getColumn(columnModelIndex), false);
+                ItemTableModel.this.cascadeManager.add((ItemColumn) table.getColumnModel().getColumn(columnModelIndex), false);
                 ItemTableModel.this.refreshSort();
                 table.tableChanged(new TableModelEvent(ItemTableModel.this));
                 table.repaint();
@@ -602,13 +574,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
          * @see javax.swing.table.TableModel#getValueAt(int, int)
          */
         @Override
-        @SuppressWarnings("unchecked")
         public Object getValueAt(int iRow, int iCol) {
             Entry<T, Integer> card = this.rowToItem(iRow);
             if (null == card) {
                 return null;
             }
-            return ((TableColumnInfo<T>) table.getColumnModel().getColumn(table.convertColumnIndexToView(iCol))).getFnDisplay().apply(card);
+            return ((ItemColumn) table.getColumnModel().getColumn(table.convertColumnIndexToView(iCol))).getFnDisplay().apply(card);
         }
 
         //========= Custom class handling
@@ -617,18 +588,17 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
          * Manages sorting orders for multiple depths of sorting.
          */
         private final class CascadeManager {
-            private final List<TableColumnInfo<InventoryItem>> colsToSort = new ArrayList<TableColumnInfo<InventoryItem>>(3);
+            private final List<ItemColumn> colsToSort = new ArrayList<ItemColumn>(3);
             private TableSorterCascade<InventoryItem> sorter = null;
 
             // Adds a column to sort cascade list.
             // If column is first in the cascade, inverts direction of sort.
             // Otherwise, sorts in ascending direction.
-            @SuppressWarnings("unchecked")
-            public void add(final TableColumnInfo<T> col0, boolean forSetup) {
+            public void add(final ItemColumn col0, boolean forSetup) {
                 this.sorter = null;
 
                 if (forSetup) { //just add column unmodified if setting up sort columns
-                    this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
+                    this.colsToSort.add(0, (ItemColumn) col0);
                 }
                 else {
                     if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) { //if column already at top level, just invert
@@ -639,7 +609,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         this.colsToSort.remove(col0);
                         col0.setSortPriority(1);
                         col0.setSortState(col0.getDefaultSortState());
-                        this.colsToSort.add(0, (TableColumnInfo<InventoryItem>) col0);
+                        this.colsToSort.add(0, (ItemColumn) col0);
                     }
 
                     //decrement sort priority on remaining columns
@@ -676,7 +646,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 final List<ItemPoolSorter<InventoryItem>> oneColSorters
                     = new ArrayList<ItemPoolSorter<InventoryItem>>(maxSortDepth);
 
-                for (final TableColumnInfo<InventoryItem> col : this.colsToSort) {
+                for (final ItemColumn col : this.colsToSort) {
                     oneColSorters.add(new ItemPoolSorter<InventoryItem>(
                             col.getFnSort(),
                             col.getSortState().equals(SortState.ASC) ? true : false));

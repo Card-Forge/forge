@@ -49,7 +49,15 @@ public final class SItemManagerUtil  {
         CMC_3 (FSkin.ColorlessManaImages.IMG_3, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 3), "Cards with CMC 3"),
         CMC_4 (FSkin.ColorlessManaImages.IMG_4, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 4), "Cards with CMC 4"),
         CMC_5 (FSkin.ColorlessManaImages.IMG_5, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 5), "Cards with CMC 5"),
-        CMC_6 (FSkin.ColorlessManaImages.IMG_6, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.GT_OR_EQUAL, 6), "Cards with CMC 6+");
+        CMC_6 (FSkin.ColorlessManaImages.IMG_6, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.GT_OR_EQUAL, 6), "Cards with CMC 6+"),
+
+        DECK_WHITE      (FSkin.ManaImages.IMG_WHITE,     null, "White decks"),
+        DECK_BLUE       (FSkin.ManaImages.IMG_BLUE,      null, "Blue decks"),
+        DECK_BLACK      (FSkin.ManaImages.IMG_BLACK,     null, "Black decks"),
+        DECK_RED        (FSkin.ManaImages.IMG_RED,       null, "Red decks"),
+        DECK_GREEN      (FSkin.ManaImages.IMG_GREEN,     null, "Green decks"),
+        DECK_COLORLESS  (FSkin.ManaImages.IMG_COLORLESS, null, "Colorless decks"),
+        DECK_MULTICOLOR (FSkin.EditorImages.IMG_MULTI,   null, "Multicolor decks");
 
         public final SkinImage img;
         public final Predicate<CardRules> predicate;

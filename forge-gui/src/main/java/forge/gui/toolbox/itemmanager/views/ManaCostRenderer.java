@@ -19,7 +19,9 @@ package forge.gui.toolbox.itemmanager.views;
 
 import java.awt.Component;
 import java.awt.Graphics;
+
 import javax.swing.JTable;
+
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.mana.ManaCost;
@@ -50,9 +52,19 @@ public class ManaCostRenderer extends ItemCellRenderer {
     @Override
     public final Component getTableCellRendererComponent(final JTable table, final Object value,
             final boolean isSelected, final boolean hasFocus, final int row, final int column) {
-        CardRules v = value instanceof CardRules ? (CardRules) value : null;
-        this.v1 = v == null ? ManaCost.NO_COST : v.getMainPart().getManaCost();
-        this.v2 = v == null || v.getSplitType() != CardSplitType.Split ? null : v.getOtherPart().getManaCost();
+        if (value instanceof CardRules) {
+            CardRules v = (CardRules) value;
+            this.v1 = v.getMainPart().getManaCost();
+            this.v2 = v.getSplitType() == CardSplitType.Split ? v.getOtherPart().getManaCost() : null;
+        }
+        else if (value instanceof ManaCost) {
+            this.v1 = (ManaCost) value;
+            this.v2 = null;
+        }
+        else {
+            this.v1 = ManaCost.NO_COST;
+            this.v2 = null;
+        }
         this.setToolTipText(v2 == null ? v1.toString() : v1.toString() + " // " + v2.toString());
         return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
     }

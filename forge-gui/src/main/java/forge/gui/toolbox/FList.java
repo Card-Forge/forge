@@ -75,7 +75,7 @@ public class FList<E> extends SkinnedList<E> {
     }
 
     public int getAutoSizeWidth() {
-        FontMetrics metrics = this.getSkin().getFont().getFontMetrics();
+        FontMetrics metrics = this.getFontMetrics(this.getFont());
         int width = 0;
         for (int i = 0; i < this.getModel().getSize(); i++) {
             int itemWidth = metrics.stringWidth(this.getModel().getElementAt(i).toString());

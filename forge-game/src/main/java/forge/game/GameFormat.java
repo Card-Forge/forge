@@ -21,7 +21,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -43,7 +46,6 @@ import forge.util.storage.StorageReaderFileSections;
  * 
  */
 public class GameFormat implements Comparable<GameFormat> {
-
     private final String name;
     // contains allowed sets, when empty allows all sets
     protected final List<String> allowedSetCodes;
@@ -215,10 +217,17 @@ public class GameFormat implements Comparable<GameFormat> {
             return new GameFormat(title, sets, bannedCards, 1 + idx);
         }
     }
-    
+
     public static class Collection extends StorageBase<GameFormat> {
+        private final Map<String, Predicate<PaperCard>> formatPredicates;
+
         public Collection(StorageReaderBase<GameFormat> reader) {
             super("Format collections", reader);
+
+            formatPredicates = new HashMap<String, Predicate<PaperCard>>();
+            for (Entry<String, GameFormat> format : this.entrySet()) {
+                formatPredicates.put(format.getKey(), format.getValue().getFilterRules()); //allow reprints
+            }
         }
 
         public GameFormat getStandard() {
@@ -237,6 +246,9 @@ public class GameFormat implements Comparable<GameFormat> {
             return this.map.get(format);
         }
 
+        public Map<String, Predicate<PaperCard>> getFormatPredicates() {
+            return this.formatPredicates;
+        }
     }
     
     // declared here because

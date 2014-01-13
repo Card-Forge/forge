@@ -1,7 +1,9 @@
 package forge.gui.home.quest;
 
+import java.awt.Font;
+
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
@@ -10,11 +12,13 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
+import forge.gui.home.LblHeader;
 import forge.gui.home.VHomeUI;
+import forge.gui.home.VHomeUI.PnlDisplay;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.special.DeckLister;
+import forge.gui.toolbox.itemmanager.DeckManager;
+import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 
 /** 
  * Assembles Swing components of quest decks submenu singleton.
@@ -28,27 +32,37 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Constructed Mode");
+    private final DragTab tab = new DragTab("Quest Decks");
 
     /** */
-    private final FLabel lblTitle = new FLabel.Builder()
-        .text("Quest Decks").fontAlign(SwingConstants.CENTER)
-        .opaque(true).fontSize(16).build();
+    private final LblHeader lblTitle = new LblHeader("Quest Decks");
 
-    private final DeckLister lstDecks = new DeckLister(GameType.Quest);
-    private final FLabel btnNewDeck = new FLabel.Builder().opaque(true)
-            .hoverable(true).text("Build a New Deck").fontSize(16).build();
+    private final DeckManager lstDecks = new DeckManager(GameType.Quest);
 
-    private final FScrollPane scr = new FScrollPane(lstDecks);
+    private final JLabel lblInfo = new FLabel.Builder()
+        .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
+        .text("Build or select a deck").build();
+
+    private final FLabel lblDir1 = new FLabel.Builder()
+        .text("In Quest mode, you build a deck from a limited inventory.")
+        .fontSize(12).build();
+
+    private final FLabel lblDir2 = new FLabel.Builder()
+        .text("Build and enhance decks from the cards in your quest inventory as it grows.")
+        .fontSize(12).build();
+
+    private final FLabel lblDir3 = new FLabel.Builder()
+        .text("Then, switch to the Duels or Challenges submenu to play against AI opponents and unlock more cards.")
+        .fontSize(12).build();
+
+    private final FLabel btnNewDeck = new FLabel.ButtonBuilder().text("Build a New Deck").fontSize(16).build();
 
     /**
      * Constructor.
      */
     private VSubmenuQuestDecks() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
-        scr.setBorder((Border)null);
-        scr.getViewport().setBorder(null);
+        lstDecks.setCaption("Quest Decks");
     }
 
     /* (non-Javadoc)
@@ -56,15 +70,21 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
      */
     @Override
     public void populate() {
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        PnlDisplay pnlDisplay = VHomeUI.SINGLETON_INSTANCE.getPnlDisplay();
+        pnlDisplay.removeAll();
+        pnlDisplay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax right"));
+        pnlDisplay.add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, ax right");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scr, "w 98%!, growy, pushy, gap 1% 0 0 0");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnNewDeck, "w 300px!, h 30px!, gap 0 0 50px 50px, ax center");
+        pnlDisplay.add(lblInfo, "w 80%!, h 30px!, gap 0 10% 20px 5px");
+        pnlDisplay.add(lblDir1, "gap 0 0 0 5px");
+        pnlDisplay.add(lblDir2, "gap 0 0 0 5px");
+        pnlDisplay.add(lblDir3, "gap 0 0 0 20px");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
+        pnlDisplay.add(btnNewDeck, "w 250px!, h 30px!, ax center, gap 0 10% 0 20px");
+        pnlDisplay.add(new ItemManagerContainer(lstDecks), "w 80%!, gap 0 10% 0 0, pushy, growy, gapbottom 20px");
+
+        pnlDisplay.repaintSelf();
+        pnlDisplay.revalidate();
     }
 
     /* (non-Javadoc)
@@ -91,8 +111,8 @@ public enum VSubmenuQuestDecks implements IVSubmenu<CSubmenuQuestDecks> {
         return EDocID.HOME_QUESTDECKS;
     }
 
-    /** @return {@link forge.gui.toolbox.special.DeckLister} */
-    public DeckLister getLstDecks() {
+    /** @return {@link forge.gui.toolbox.itemmanager.DeckManager} */
+    public DeckManager getLstDecks() {
         return this.lstDecks;
     }
 

@@ -22,6 +22,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
+
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
