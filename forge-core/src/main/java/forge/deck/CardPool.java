@@ -54,7 +54,7 @@ public class CardPool extends ItemPool<PaperCard> {
 
 
     /**
-     * Adds the.
+     * Adds the card.
      * 
      * @param cardName
      *            the card name
@@ -62,20 +62,35 @@ public class CardPool extends ItemPool<PaperCard> {
      *            the set code
      */
     public void add(final String cardName, final String setCode) {
-        this.add(cardName, setCode, 1);
+        this.add(cardName, setCode, -1, 1);
     }
 
     /**
-     * Adds the.
+     * Adds the card.
+     * 
+     * @param cardName
+     *            the card name
+     * @param setCode
+     *            the set code
+     * @param amount
+     *            the amount of cards to add
+     */
+    public void add(final String cardName, final String setCode, final int amount) {
+        this.add(cardName, setCode, -1, amount);
+    }
+
+    /**
+     * Adds the card.
      *
      * @param cardName the card name
      * @param setCode the set code
+     * @param artIndex the card art index, -1 for random
      * @param amount the amount
      */
-    public void add(final String cardName, final String setCode, final int amount) {
-        PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(cardName, setCode);
+    public void add(final String cardName, final String setCode, final int artIndex, final int amount) {
+        PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(cardName, setCode, artIndex);
         if ( cp == null )
-            cp = StaticData.instance().getVariantCards().tryGetCard(cardName, setCode);
+            cp = StaticData.instance().getVariantCards().tryGetCard(cardName, setCode, artIndex);
 
         if ( cp != null)
             this.add(cp, amount);

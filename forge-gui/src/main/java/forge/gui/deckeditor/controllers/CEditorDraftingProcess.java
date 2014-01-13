@@ -153,13 +153,14 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         final Deck deck = new Deck();
 
         // add sideboard to deck
-        CardPool side = deck.getOrCreate(DeckSection.Sideboard);
-        side.addAll(this.getDeckManager().getPool());
+        deck.getOrCreate(DeckSection.Sideboard).addAll(this.getDeckManager().getPool());
 
         final CardEdition landSet = IBoosterDraft.LAND_SET_CODE[0];
         final int landsCount = 20;
         for(String landName : MagicColor.Constant.BASIC_LANDS) {
-            side.add(Singletons.getMagicDb().getCommonCards().getCard(landName, landSet.getCode()), landsCount);
+            for (int i = 0; i < landsCount; i++) {
+                deck.get(DeckSection.Sideboard).add(landName, landSet.getCode(), -1, 1);
+            }
         }
 
         return deck;
