@@ -21,10 +21,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -33,6 +30,7 @@ import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.FileSection;
@@ -72,6 +70,8 @@ public class GameFormat implements Comparable<GameFormat> {
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
         this(fName, sets, bannedCards, 0);
     }
+    
+    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, Integer.MAX_VALUE);
     
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards, int compareIdx) {
         this.index = compareIdx;
@@ -219,15 +219,8 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     public static class Collection extends StorageBase<GameFormat> {
-        private final Map<String, Predicate<PaperCard>> formatPredicates;
-
         public Collection(StorageReaderBase<GameFormat> reader) {
             super("Format collections", reader);
-
-            formatPredicates = new HashMap<String, Predicate<PaperCard>>();
-            for (Entry<String, GameFormat> format : this.entrySet()) {
-                formatPredicates.put(format.getKey(), format.getValue().getFilterRules()); //allow reprints
-            }
         }
 
         public GameFormat getStandard() {
@@ -246,8 +239,13 @@ public class GameFormat implements Comparable<GameFormat> {
             return this.map.get(format);
         }
 
-        public Map<String, Predicate<PaperCard>> getFormatPredicates() {
-            return this.formatPredicates;
+        public GameFormat getFormatOfDeck(Deck deck) {
+            for(GameFormat gf : this) {
+                if ( Deck.createPredicate(gf.getFilterRules()).apply(deck) )
+                    return gf;
+            }
+            
+            return NoFormat;
         }
     }
     

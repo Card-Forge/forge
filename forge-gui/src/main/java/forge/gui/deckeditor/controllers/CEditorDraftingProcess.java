@@ -22,7 +22,6 @@ import java.util.Map.Entry;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.MagicColor;
-import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;

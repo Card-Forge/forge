@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 import javax.swing.table.TableColumn;
 
 import com.google.common.base.Function;
-
 import forge.Singletons;
 import forge.card.CardAiHints;
 import forge.card.CardEdition;
@@ -406,7 +405,8 @@ public class ItemColumn extends TableColumn {
                         if (deck == null) {
                             return -1;
                         }
-                        return deck.getFormatCompare(Singletons.getModel().getFormats().getFormatPredicates());
+                        return Singletons.getModel().getFormats().getFormatOfDeck(deck).getIndex();
+
                     }
                 },
                 new Function<Entry<? extends InventoryItem, Integer>, Object>() {
@@ -416,7 +416,7 @@ public class ItemColumn extends TableColumn {
                         if (deck == null) {
                             return null;
                         }
-                        return deck.getFormat(Singletons.getModel().getFormats().getFormatPredicates());
+                        return Singletons.getModel().getFormats().getFormatOfDeck(deck);
                     }
                 }),
         DECK_MAIN("Main", "Main Deck", 35, 35, 35, SortState.ASC, new IntegerRenderer(),
@@ -525,7 +525,7 @@ public class ItemColumn extends TableColumn {
         private static Deck toDeck(final InventoryItem i) {
             return i instanceof Deck ? ((Deck) i) : null;
         }
-        private static ManaCost toDeckColor(final InventoryItem i) {
+        private static ColorSet toDeckColor(final InventoryItem i) {
             return i instanceof Deck ? ((Deck) i).getColor() : null;
         }
         private static int toDeckCount(final InventoryItem i, DeckSection section) {

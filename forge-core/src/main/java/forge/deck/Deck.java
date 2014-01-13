@@ -34,8 +34,8 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.card.CardDb;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.card.mana.ManaCost;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.item.PaperCard;
@@ -59,9 +59,6 @@ import forge.util.ItemPoolView;
 public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPool>> {
     private final Map<DeckSection, CardPool> parts = new EnumMap<DeckSection, CardPool>(DeckSection.class);
     private final Set<String>                tags  = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
-    private ManaCost color;
-    private String format;
-    private int formatCompare;
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -244,9 +241,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
      * @return the list
      */
     public List<String> save() {
-        this.color = null; //ensure color and format are recalculated
-        this.format = null;
-
         final List<String> out = new ArrayList<String>();
         out.add(String.format("[metadata]"));
 
@@ -289,75 +283,23 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return tags;
     }
 
-    public ManaCost getColor() {
-        if (color == null) {
-            byte colorProfile = MagicColor.COLORLESS;
+    public ColorSet getColor() {
+         byte colorProfile = MagicColor.COLORLESS;
 
-            for (Entry<DeckSection, CardPool> deckEntry : this) {
-                switch (deckEntry.getKey()) {
-                case Main:
-                case Sideboard:
-                case Commander:
-                    for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                        colorProfile |= poolEntry.getKey().getRules().getColor().getColor();
-                    }
-                    break;
-                default:
-                    break; //ignore other sections
+        for (Entry<DeckSection, CardPool> deckEntry : this) {
+            switch (deckEntry.getKey()) {
+            case Main:
+            case Sideboard:
+            case Commander:
+                for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                    colorProfile |= poolEntry.getKey().getRules().getColor().getColor();
                 }
-            }
-            color = ManaCost.fromColorProfile(colorProfile);
-        }
-        return color;
-    }
-
-    public String getFormat(Map<String, Predicate<PaperCard>> formatPredicates) {
-        if (format == null) {
-            formatCompare = 0; //build format compare value, with higher values for being valid in a more recent format
-            int value = (int)Math.pow(2, formatPredicates.size() - 1);
-            StringBuilder builder = new StringBuilder();
-
-            formatLoop:
-            for (Entry<String, Predicate<PaperCard>> format : formatPredicates.entrySet()) {
-                for (Entry<DeckSection, CardPool> deckEntry : this) {
-                    switch (deckEntry.getKey()) {
-                    case Main:
-                    case Sideboard:
-                    case Commander:
-                        for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                            if (!format.getValue().apply(poolEntry.getKey())) {
-                                value /= 2;
-                                continue formatLoop; //if found card that's not legal in this format, move to next format
-                            }
-                        }
-                        break;
-                    default:
-                        break; //ignore other sections
-                    }
-                }
-                //add format if reached this point
-                if (builder.length() > 0) {
-                    builder.append(", ");
-                }
-                builder.append(format.getKey());
-
-                formatCompare += value; //increment format compare value
-                value /= 2;
-            }
-
-            if (builder.length() > 0) {
-                format = builder.toString();
-            }
-            else {
-                format = "(none)";
+                break;
+            default:
+                break; //ignore other sections
             }
         }
-        return format;
-    }
-
-    public int getFormatCompare(Map<String, Predicate<PaperCard>> formatPredicates) {
-        getFormat(formatPredicates); //ensure formatCompare defined
-        return formatCompare;
+        return ColorSet.fromMask(colorProfile);
     }
 
     //create predicate that applys a card predicate to all cards in deck

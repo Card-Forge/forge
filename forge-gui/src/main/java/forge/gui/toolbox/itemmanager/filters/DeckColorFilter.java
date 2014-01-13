@@ -40,7 +40,7 @@ public class DeckColorFilter extends StatTypeFilter<Deck> {
         return new Predicate<Deck>() {
             @Override
             public boolean apply(Deck input) {
-                byte colorProfile = input.getColor().getColorProfile();
+                byte colorProfile = input.getColor().getColor();
                 if (colorProfile == 0) {
                     return buttonMap.get(StatTypes.DECK_COLORLESS).getSelected();
                 }
@@ -73,43 +73,43 @@ public class DeckColorFilter extends StatTypeFilter<Deck> {
     private static final Predicate<Deck> IS_WHITE = new Predicate<Deck>() {
         @Override
         public boolean apply(final Deck deck) {
-            return deck.getColor().hasColor(MagicColor.WHITE);
+            return deck.getColor().hasAnyColor(MagicColor.WHITE);
         }
     };
     private static final Predicate<Deck> IS_BLUE = new Predicate<Deck>() {
         @Override
         public boolean apply(final Deck deck) {
-            return deck.getColor().hasColor(MagicColor.BLUE);
+            return deck.getColor().hasAnyColor(MagicColor.BLUE);
         }
     };
     public static final Predicate<Deck> IS_BLACK = new Predicate<Deck>() {
         @Override
         public boolean apply(final Deck deck) {
-            return deck.getColor().hasColor(MagicColor.BLACK);
+            return deck.getColor().hasAnyColor(MagicColor.BLACK);
         }
     };
     public static final Predicate<Deck> IS_RED = new Predicate<Deck>() {
         @Override
         public boolean apply(final Deck deck) {
-            return deck.getColor().hasColor(MagicColor.RED);
+            return deck.getColor().hasAnyColor(MagicColor.RED);
         }
     };
     public static final Predicate<Deck> IS_GREEN = new Predicate<Deck>() {
         @Override
         public boolean apply(final Deck deck) {
-            return deck.getColor().hasColor(MagicColor.GREEN);
+            return deck.getColor().hasAnyColor(MagicColor.GREEN);
         }
     };
     private static final Predicate<Deck> IS_COLORLESS = new Predicate<Deck>() {
         @Override
         public boolean apply(final Deck deck) {
-            return deck.getColor().getColorProfile() == 0;
+            return deck.getColor().getColor() == 0;
         }
     };
     private static final Predicate<Deck> IS_MULTICOLOR = new Predicate<Deck>() {
         @Override
         public boolean apply(final Deck deck) {
-            return BinaryUtil.bitCount(deck.getColor().getColorProfile()) > 1;
+            return BinaryUtil.bitCount(deck.getColor().getColor()) > 1;
         }
     };
 

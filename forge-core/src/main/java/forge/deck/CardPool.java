@@ -35,58 +35,23 @@ import forge.util.ItemPool;
  */
 public class CardPool extends ItemPool<PaperCard> {
 
-    /**
-     * Instantiates a new deck section.
-     */
     public CardPool() {
         super(PaperCard.class);
     }
 
-    /**
-     * Instantiates a new deck section.
-     *
-     * @param cards the cards
-     */
     public CardPool(final Iterable<Entry<PaperCard, Integer>> cards) {
         this();
         this.addAll(cards);
     }
 
-
-    /**
-     * Adds the card.
-     * 
-     * @param cardName
-     *            the card name
-     * @param setCode
-     *            the set code
-     */
     public void add(final String cardName, final String setCode) {
         this.add(cardName, setCode, -1, 1);
     }
 
-    /**
-     * Adds the card.
-     * 
-     * @param cardName
-     *            the card name
-     * @param setCode
-     *            the set code
-     * @param amount
-     *            the amount of cards to add
-     */
     public void add(final String cardName, final String setCode, final int amount) {
         this.add(cardName, setCode, -1, amount);
     }
 
-    /**
-     * Adds the card.
-     *
-     * @param cardName the card name
-     * @param setCode the set code
-     * @param artIndex the card art index, -1 for random
-     * @param amount the amount
-     */
     public void add(final String cardName, final String setCode, final int artIndex, final int amount) {
         PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(cardName, setCode, artIndex);
         if ( cp == null )
