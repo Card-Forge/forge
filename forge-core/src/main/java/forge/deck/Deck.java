@@ -228,6 +228,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
         if (!hasBadSetInfo) {
             sb.append("|").append(card.getEdition());
+            sb.append("|").append(card.getArtIndex());
         }
         if(card.isFoil()) {
             sb.append(CardDb.foilSuffix);

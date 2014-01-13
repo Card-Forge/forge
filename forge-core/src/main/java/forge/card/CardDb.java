@@ -44,6 +44,7 @@ import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
 import forge.util.Lang;
 import forge.util.MyRandom;
+import java.util.Arrays;
 
 public final class CardDb implements ICardDatabase {
     public final static String foilSuffix = "+";
@@ -118,21 +119,25 @@ public final class CardDb implements ICardDatabase {
     }
 
     /**
-     * Splits cardname into Name and set whenever deck line reads as name|set.
+     * Splits cardname into name, set and art index whenever deck line reads as name|set|artindex.
      */
-    private static ImmutablePair<String, String> splitCardName(final String name) {
+    private static List<String> splitCardName(final String name) {
         String cardName = name; // .trim() ?
-        final int pipePos = cardName.indexOf('|');
+        String[] cardNameElems = cardName.split("\\|");
 
-        if (pipePos >= 0) {
-            final String setName = cardName.substring(pipePos + 1).trim();
-            cardName = cardName.substring(0, pipePos);
-            // only if set is not blank try to load it
-            if (StringUtils.isNotBlank(setName) && !"???".equals(setName)) {
-                return new ImmutablePair<String, String>(cardName, setName);
+        final String actualCardName = cardNameElems[0];
+        String setName = null;
+        String artIndex = "-1";
+        if (cardNameElems.length > 1) {
+            if (StringUtils.isNotBlank(cardNameElems[1]) && !"???".equals(cardNameElems[1])) {
+                setName = cardNameElems[1];
+            }
+            if (cardNameElems.length > 2) {
+                artIndex = cardNameElems[2];
             }
         }
-        return new ImmutablePair<String, String>(cardName, null);
+
+        return Arrays.asList(actualCardName, setName, artIndex);
     }
 
     private boolean isFoil(final String cardName) {
@@ -163,11 +168,12 @@ public final class CardDb implements ICardDatabase {
         final boolean isFoil = this.isFoil(cardName0);
         final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
 
-        final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(cardName);
+        final List<String> splitName = CardDb.splitCardName(cardName);
 
-        final PaperCard res = nameWithSet.right == null
-                ? ( fromLastSet ? this.uniqueCardsByName.get(nameWithSet.left) : Aggregates.random(this.allCardsByName.get(nameWithSet.left)) )
-                : tryGetCard(nameWithSet.left, nameWithSet.right);
+        final PaperCard res = splitName.get(1) == null
+                ? ( fromLastSet ? this.uniqueCardsByName.get(splitName.get(0)) : tryGetCard(splitName.get(0), Aggregates.random(this.allCardsByName.get(splitName.get(0))).getEdition(), -1))
+                : tryGetCard(splitName.get(0), splitName.get(1), Integer.parseInt(splitName.get(2)));
+
         return null != res && isFoil ? getFoiled(res) : res;
     }
 
@@ -175,13 +181,13 @@ public final class CardDb implements ICardDatabase {
     public PaperCard tryGetCardPrintedByDate(final String name0, final boolean fromLatestSet, final Date printedBefore) {
         final boolean isFoil = this.isFoil(name0);
         final String cardName = isFoil ? this.removeFoilSuffix(name0) : name0;
-        final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(cardName);
+        final List<String> splitName = CardDb.splitCardName(cardName);
 
         PaperCard res = null;
-        if (null != nameWithSet.right) // set explicitly requested, should return card from it and disregard the date
-            res = tryGetCard(nameWithSet.left, nameWithSet.right);
+        if (null != splitName.get(1)) // set explicitly requested, should return card from it and disregard the date
+            res = tryGetCard(splitName.get(0), splitName.get(1), Integer.parseInt(splitName.get(2)));
         else {
-            Collection<PaperCard> cards = this.allCardsByName.get(nameWithSet.left); // cards are sorted by datetime desc
+            Collection<PaperCard> cards = this.allCardsByName.get(splitName.get(0)); // cards are sorted by datetime desc
             int idxRightSet = 0;
             for (PaperCard card : cards) {
                 if (editions.get(card.getEdition()).getDate().after(printedBefore))

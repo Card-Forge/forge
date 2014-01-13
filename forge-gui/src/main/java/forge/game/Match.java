@@ -242,14 +242,7 @@ public class Match {
         for (final Entry<PaperCard, Integer> stackOfCards : section) {
             final PaperCard cp = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
-
-                // apply random art for cards with multiple pictures (basic lands, etc.) - currently always enabled
-                // TODO: implement true distinction between cards with different art (in deck editor, match, etc.)
-                PaperCard cpi = Singletons.getMagicDb().getCommonCards().getCard(cp.getName(), cp.getEdition(), -1);
-                if ( cp.isFoil() )
-                    cpi = Singletons.getMagicDb().getCommonCards().getFoiled(cpi);
-                
-                final Card card = cpi == null ? Card.fromPaperCard(cp, player) : Card.fromPaperCard(cpi, player);
+                final Card card = Card.fromPaperCard(cp, player); 
 
                 // Assign card-specific foiling or random foiling on approximately 1:20 cards if enabled
                 if (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {

@@ -178,7 +178,9 @@ public abstract class DeckGeneratorBase {
             PaperCard cp = cardDb.getCard(basicLandName);
             String basicLandSet = cp.getEdition();
 
-            tDeck.add(cardDb.getCard(cp.getName(), basicLandSet), nLand);
+            for (int i=0; i < nLand; i++)
+                tDeck.add(cardDb.getCard(cp.getName(), basicLandSet, -1), 1);
+
             landsLeft -= nLand;
         }
     }
