@@ -195,6 +195,8 @@ public class GameFormat implements Comparable<GameFormat> {
      * Instantiates a new format utils.
      */
     public static class Reader extends StorageReaderFileSections<GameFormat> {
+        List<GameFormat> naturallyOrdered = new ArrayList<GameFormat>();
+        
         public Reader(File file0) {
             super(file0, GameFormat.FN_GET_NAME);
         }
@@ -214,13 +216,18 @@ public class GameFormat implements Comparable<GameFormat> {
                 bannedCards = Arrays.asList(strCars.split("; "));
             }
 
-            return new GameFormat(title, sets, bannedCards, 1 + idx);
+            GameFormat result = new GameFormat(title, sets, bannedCards, 1 + idx); 
+            naturallyOrdered.add(result);
+            return result;
         }
     }
 
     public static class Collection extends StorageBase<GameFormat> {
-        public Collection(StorageReaderBase<GameFormat> reader) {
+        private List<GameFormat> naturallyOrdered;
+        
+        public Collection(GameFormat.Reader reader) {
             super("Format collections", reader);
+            naturallyOrdered = reader.naturallyOrdered;
         }
 
         public GameFormat getStandard() {
@@ -240,7 +247,7 @@ public class GameFormat implements Comparable<GameFormat> {
         }
 
         public GameFormat getFormatOfDeck(Deck deck) {
-            for(GameFormat gf : this) {
+            for(GameFormat gf : naturallyOrdered) {
                 if ( Deck.createPredicate(gf.getFilterRules()).apply(deck) )
                     return gf;
             }

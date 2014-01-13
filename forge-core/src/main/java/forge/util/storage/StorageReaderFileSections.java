@@ -49,12 +49,16 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
         
     }
 
+    protected Map<String, T> createMap() {
+        return new TreeMap<String, T>();
+    }
+
     /* (non-Javadoc)
      * @see forge.util.IItemReader#readAll()
      */
     @Override
     public Map<String, T> readAll() {
-        final Map<String, T> result = new TreeMap<String, T>();
+        final Map<String, T> result = createMap();
 
         int idx = 0;
         Iterable<String> file = FileUtil.readFile(this.file);
