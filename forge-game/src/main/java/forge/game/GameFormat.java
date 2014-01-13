@@ -35,7 +35,6 @@ import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.FileSection;
 import forge.util.storage.StorageBase;
-import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFileSections;
 
 
@@ -253,6 +252,15 @@ public class GameFormat implements Comparable<GameFormat> {
             }
             
             return NoFormat;
+        }
+        
+        public Iterable<GameFormat> getAllFormatsOfDeck(Deck deck) {
+            List<GameFormat> result = new ArrayList<GameFormat>();
+            for(GameFormat gf : naturallyOrdered) {
+                if ( Deck.createPredicate(gf.getFilterRules()).apply(deck) )
+                    result.add(gf);
+            }
+            return result;
         }
     }
     
