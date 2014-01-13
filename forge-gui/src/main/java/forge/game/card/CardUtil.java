@@ -88,6 +88,31 @@ public final class CardUtil {
         return res;
     }
 
+    /**
+     * getLastTurnEntered.
+     * 
+     * @param to    zone going to
+     * @param from  zone coming from
+     * @param valid a isValid expression
+     * @param src   a Card object
+     * @return a List<Card> that matches the given criteria
+     */
+    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
+        List<Card> res = new ArrayList<Card>();
+        final Game game = src.getGame();
+        if (to != ZoneType.Stack) {
+            for (Player p : game.getPlayers()) {
+                res.addAll(p.getZone(to).getCardsAddedLastTurn(from));
+            }
+        } else {
+            res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
+        }
+
+        res = CardLists.getValidCards(res, valid, src.getController(), src);
+
+        return res;
+    }
+
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
         final Game game = src.getGame();

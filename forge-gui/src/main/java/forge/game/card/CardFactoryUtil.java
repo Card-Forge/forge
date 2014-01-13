@@ -1169,7 +1169,7 @@ public class CardFactoryUtil {
         }
 
         // Count$Chroma.<mana letter>
-        if (sq[0].contains("Chroma") || sq[0].contains("Devotion")) {
+        if (sq[0].contains("Chroma") || sq[0].equals("Devotion")) {
             ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
             String colorAbb = sq[1];
             if (colorAbb.contains("Chosen")) {
@@ -1188,6 +1188,19 @@ public class CardFactoryUtil {
                 for(ManaCostShard sh : c0.getManaCost()){
                     if (sh.canBePaidWithManaOfColor(colorCode)) 
                         colorOcurrencices++;
+                }
+            }
+            return doXMath(colorOcurrencices, m, c);
+        }
+        if (sq[0].contains("DevotionDual")) {
+            int colorOcurrencices = 0;
+            byte color1 = MagicColor.fromName(sq[1]);
+            byte color2 = MagicColor.fromName(sq[2]);
+            for(Card c0 : cc.getCardsIn(ZoneType.Battlefield)) {
+                for (ManaCostShard sh : c0.getManaCost()) {
+                    if (sh.canBePaidWithManaOfColor(color1) || sh.canBePaidWithManaOfColor(color2)) {
+                        colorOcurrencices++;
+                    }
                 }
             }
             return doXMath(colorOcurrencices, m, c);
@@ -1294,6 +1307,19 @@ public class CardFactoryUtil {
             String validFilter = workingCopy[hasFrom ? 4 : 2] ;
 
             final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c);
+            return doXMath(res.size(), m, c);
+        }
+
+        // Count$LastTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
+        if (sq[0].contains("LastTurnEntered")) {
+            final String[] workingCopy = l[0].split("_");
+            
+            ZoneType destination = ZoneType.smartValueOf(workingCopy[1]);
+            final boolean hasFrom = workingCopy[2].equals("from");
+            ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
+            String validFilter = workingCopy[hasFrom ? 4 : 2] ;
+
+            final List<Card> res = CardUtil.getLastTurnEntered(destination, origin, validFilter, c);
             return doXMath(res.size(), m, c);
         }
 

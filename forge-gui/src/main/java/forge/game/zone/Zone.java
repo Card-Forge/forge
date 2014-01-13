@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.base.Predicate;
@@ -56,6 +57,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     protected final Game game;
 
     protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
+    protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.<Card>arrayLists());
 
     public Zone(final ZoneType zone, Game game) {
         this.zoneType = zone;
@@ -179,6 +181,15 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     /**
      * <p>
+     * Getter for the field <code>cardsAddedLastTurn</code>.
+     * </p>
+     */
+    public final MapOfLists<ZoneType, Card> getCardsAddedLastTurn() {
+        return cardsAddedLastTurn;
+    }
+
+    /**
+     * <p>
      * Getter for the field <code>cardsAddedThisTurn</code>.
      * </p>
      * 
@@ -188,14 +199,37 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
      */
     public final List<Card> getCardsAddedThisTurn(final ZoneType origin) {
         //System.out.print("Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
+        return getCardsAdded(cardsAddedThisTurn, origin);
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>getcardsAddedLastTurn</code>.
+     * </p>
+     * 
+     * @param origin
+     *            a {@link java.lang.String} object.
+     * @return a {@link forge.CardList} object.
+     */
+    public final List<Card> getCardsAddedLastTurn(final ZoneType origin) {
+        //System.out.print("Last turn - Request cards put into " + this.getZoneType() + " from " + origin + ".Amount: ");
+        return getCardsAdded(cardsAddedLastTurn, origin);
+    }
+    
+    /**
+     * <p>
+     * getCardsAdded.
+     * </p>
+     */
+    private final List<Card> getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {
         if (origin != null) {
-            Collection<Card> cards = cardsAddedThisTurn.get(origin);
+            Collection<Card> cards = cardsAdded.get(origin);
             return cards == null ? Lists.<Card>newArrayList() : Lists.newArrayList(cards);
         }
 
         // all cards if key == null
         final List<Card> ret = new ArrayList<Card>();
-        for (Collection<Card> kv : cardsAddedThisTurn.values()) {
+        for (Collection<Card> kv : cardsAdded.values()) {
             ret.addAll(kv);
         }
         return ret;
@@ -207,6 +241,10 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
      * </p>
      */
     public final void resetCardsAddedThisTurn() {
+        this.cardsAddedLastTurn.clear();
+        for (Entry<ZoneType, Collection<Card>> entry : this.cardsAddedThisTurn.entrySet()) {
+            this.cardsAddedLastTurn.addAll(entry.getKey(), entry.getValue());
+        }
         this.cardsAddedThisTurn.clear();
     }
 
