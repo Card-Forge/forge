@@ -40,10 +40,10 @@ public class CostPartMana extends CostPart {
      *            the amount
      * @param xCantBe0 TODO
      */
-    public CostPartMana(final ManaCost cost, String restriction, boolean xCantBe0) {
+    public CostPartMana(final ManaCost cost, String restriction) {
         this.cost = cost;
-        this.xCantBe0 = xCantBe0;
-        this.restriction = restriction;
+        this.xCantBe0 = "XCantBe0".equals(restriction);
+        this.restriction = xCantBe0 ? null : restriction;
     }
 
     /**

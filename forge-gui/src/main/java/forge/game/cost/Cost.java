@@ -96,13 +96,13 @@ public class Cost {
     }
 
     private Cost(int colorlessmana) {
-        costParts.add(new CostPartMana(ManaCost.get(colorlessmana), null, false));
+        costParts.add(new CostPartMana(ManaCost.get(colorlessmana), null));
     }
 
     // Parsing Strings
 
     public Cost(ManaCost cost, final boolean bAbility) {
-        costParts.add(new CostPartMana(cost, null, false));
+        costParts.add(new CostPartMana(cost, null));
     }
 
     /**
@@ -151,7 +151,7 @@ public class Cost {
         }
 
         if (parsedMana == null && manaParts.length() > 0) {
-            parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), null, xCantBe0);
+            parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xCantBe0 ? "XCantBe0" : null);
         }
         if (parsedMana != null) {
             this.costParts.add(0, parsedMana);
@@ -179,8 +179,7 @@ public class Cost {
         if (parse.startsWith("Mana<")) {
             final String[] splitStr = TextUtil.split(abCostParse(parse, 1)[0], '\\');
             final String restriction = splitStr.length > 1 ? splitStr[1] : null;
-            final boolean xCantBe0 = splitStr.length > 1 && splitStr[1].equals("XCantBe0");
-            return new CostPartMana(new ManaCost(new ManaCostParser(splitStr[0])), xCantBe0 ? null : restriction, xCantBe0);
+            return new CostPartMana(new ManaCost(new ManaCostParser(splitStr[0])), restriction);
         }
 
         if (parse.startsWith("tapXType<")) {
@@ -700,13 +699,12 @@ public class Cost {
         for (final CostPart part : cost1.getCostParts()) {
             if (part instanceof CostPartMana && costPart2 != null) {
                 ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(((CostPartMana) part).getMana());
-                boolean xCanBe0 = ((CostPartMana) part).canXbe0() && costPart2.canXbe0();
                 oldManaCost.combineManaCost(costPart2.getMana());
                 String r2 = costPart2.getRestiction();
                 String r1 = ((CostPartMana) part).getRestiction();
                 String r = r1 == null ? r2 : ( r2 == null ? r1 : r1 + "." + r2);
                 getCostParts().remove(costPart2);
-                getCostParts().add(0, new CostPartMana(oldManaCost.toManaCost(), r, !xCanBe0));
+                getCostParts().add(0, new CostPartMana(oldManaCost.toManaCost(), r));
             } else {
                 getCostParts().add(part);
             }

@@ -448,6 +448,7 @@ public class SSubmenuQuestUtil {
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
         Lobby lobby = FServer.instance.getLobby();
         starter.add(humanStart.setPlayer(lobby.getQuestPlayer()));
+
         LobbyPlayer aiPlayer = FServer.instance.getLobby().getAiPlayer(event.getOpponent() == null ? event.getTitle() : event.getOpponent());
         aiPlayer.setIconImageKey(event.getIconImageKey());
         starter.add(aiStart.setPlayer(aiPlayer));
