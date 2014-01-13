@@ -134,7 +134,7 @@ public final class QuestUtilCards {
         if (!snowLandCodes.isEmpty()) {
             String snowLandCode = Aggregates.random(snowLandCodes);
             for (String landName : MagicColor.Constant.SNOW_LANDS) {
-                pool.add(db.getCard(landName, snowLandCode, -1), nSnow);
+                pool.add(db.getCard(landName, snowLandCode), nSnow);
             }
         }
 
