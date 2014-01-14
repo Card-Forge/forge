@@ -628,7 +628,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
                 //unset and remove boundary columns.
                 if (this.colsToSort.size() > maxSortDepth) {
-                    this.colsToSort.get(maxSortDepth).setSortState(SortState.NONE);
                     this.colsToSort.get(maxSortDepth).setSortPriority(0);
                     this.colsToSort.remove(maxSortDepth);
                 }

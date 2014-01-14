@@ -118,11 +118,12 @@ public class ItemColumn extends TableColumn {
     }
 
     public void setSortPriority(final int sortPriority0) {
+        int oldSortPriority = this.sortPriority;
         this.sortPriority = sortPriority0;
         if (sortPriority0 == 0) {
             this.sortState = SortState.NONE;
         }
-        else {
+        else if (oldSortPriority == 0) {
             this.sortState = def.sortState;
         }
     }
