@@ -165,7 +165,7 @@ public class ItemColumn extends TableColumn {
     }
 
     public enum ColumnDef {
-        NAME("Name", "Name", 150, -1, -1, SortState.ASC, new ItemCellRenderer(),
+        NAME("Name", "Name", 180, -1, -1, SortState.ASC, new ItemCellRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -192,7 +192,7 @@ public class ItemColumn extends TableColumn {
                         return toType(from.getKey());
                     }
                 }),
-        COST("Cost", "Cost", 50, -1, 80, SortState.ASC, new ManaCostRenderer(),
+        COST("Cost", "Cost", 56, -1, 80, SortState.ASC, new ManaCostRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -398,7 +398,7 @@ public class ItemColumn extends TableColumn {
                         return toDeckColor(from.getKey());
                     }
                 }),
-        DECK_FORMAT("Format", "Formats deck is legal in", 100, -1, -1, SortState.ASC, new ItemCellRenderer(),
+        DECK_FORMAT("Format", "Formats deck is legal in", 60, -1, -1, SortState.ASC, new ItemCellRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -420,7 +420,7 @@ public class ItemColumn extends TableColumn {
                         return Singletons.getModel().getFormats().getFormatOfDeck(deck).getName();
                     }
                 }),
-        DECK_MAIN("Main", "Main Deck", 35, 35, 35, SortState.ASC, new IntegerRenderer(),
+        DECK_MAIN("Main", "Main Deck", 30, 30, 30, SortState.ASC, new IntegerRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -433,7 +433,7 @@ public class ItemColumn extends TableColumn {
                         return toDeckCount(from.getKey(), DeckSection.Main);
                     }
                 }),
-        DECK_SIDE("Side", "Sideboard", 35, 35, 35, SortState.ASC, new IntegerRenderer(),
+        DECK_SIDE("Side", "Sideboard", 30, 30, 30, SortState.ASC, new IntegerRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
