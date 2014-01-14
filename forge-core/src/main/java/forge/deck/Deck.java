@@ -218,7 +218,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     private static String serializeSingleCard(PaperCard card, Integer n) {
-
         final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
         StringBuilder sb = new StringBuilder();
         sb.append(n).append(" ").append(card.getName());
@@ -260,7 +259,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return out;
     }
 
-
     public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {
         @Override
         public String apply(Deck arg1) {
@@ -289,7 +287,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         for (Entry<DeckSection, CardPool> deckEntry : this) {
             switch (deckEntry.getKey()) {
             case Main:
-            case Sideboard:
             case Commander:
                 for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
                     colorProfile |= poolEntry.getKey().getRules().getColor().getColor();
