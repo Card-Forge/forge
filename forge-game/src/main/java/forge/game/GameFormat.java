@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -30,7 +31,9 @@ import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.FileSection;
@@ -45,11 +48,12 @@ import forge.util.storage.StorageReaderFileSections;
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
     // contains allowed sets, when empty allows all sets
-    protected final List<String> allowedSetCodes;
-    protected final List<String> bannedCardNames;
+
+    protected final List<String> allowedSetCodes; // this is mutable to support quest mode set unlocks 
 
     protected final transient List<String> allowedSetCodes_ro;
     protected final transient List<String> bannedCardNames_ro;
+    protected final transient List<String> restrictedCardNames_ro;
 
     protected final transient Predicate<PaperCard> filterRules;
     protected final transient Predicate<PaperCard> filterPrinted;
@@ -67,38 +71,40 @@ public class GameFormat implements Comparable<GameFormat> {
      *            the banned cards
      */
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
-        this(fName, sets, bannedCards, 0);
+        this(fName, sets, bannedCards, null, 0);
     }
     
-    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, Integer.MAX_VALUE);
+    public static final GameFormat NoFormat = new GameFormat("(none)", null, null, null, Integer.MAX_VALUE);
     
-    public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards, int compareIdx) {
+    public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards, final List<String> restrictedCards, int compareIdx) {
         this.index = compareIdx;
         this.name = fName;
-        this.allowedSetCodes = sets == null ? new ArrayList<String>() : Lists.newArrayList(sets);
-        this.bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
-
+        allowedSetCodes = sets == null ? new ArrayList<String>() : Lists.newArrayList(sets);
+        final List<String> bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
+        final List<String> restrictedCardNames = restrictedCards == null ? new ArrayList<String>() : Lists.newArrayList(restrictedCards);
+        
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
+        this.restrictedCardNames_ro = Collections.unmodifiableList(restrictedCardNames);
 
         this.filterRules = this.buildFilterRules();
         this.filterPrinted = this.buildFilterPrinted();
     }
 
     private Predicate<PaperCard> buildFilterPrinted() {
-        final Predicate<PaperCard> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames));
-        if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
+        final Predicate<PaperCard> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames_ro));
+        if (this.allowedSetCodes_ro.isEmpty()) {
             return banNames;
         }
-        return Predicates.and(banNames, IPaperCard.Predicates.printedInSets(this.allowedSetCodes, true));
+        return Predicates.and(banNames, IPaperCard.Predicates.printedInSets(this.allowedSetCodes_ro, true));
     }
 
     private Predicate<PaperCard> buildFilterRules() {
-        final Predicate<PaperCard> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames));
-        if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
+        final Predicate<PaperCard> banNames = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames_ro));
+        if (this.allowedSetCodes_ro.isEmpty()) {
             return banNames;
         }
-        return Predicates.and(banNames, StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes));
+        return Predicates.and(banNames, StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes_ro));
     }
 
     /**
@@ -128,6 +134,11 @@ public class GameFormat implements Comparable<GameFormat> {
         return this.bannedCardNames_ro;
     }
 
+    public List<String> getRestrictedCards() {
+        // TODO Auto-generated method stub
+        return restrictedCardNames_ro;
+    }
+
     /**
      * Gets the filter rules.
      * 
@@ -154,7 +165,30 @@ public class GameFormat implements Comparable<GameFormat> {
      * @return true, if is sets the legal
      */
     public boolean isSetLegal(final String setCode) {
-        return this.allowedSetCodes.isEmpty() || this.allowedSetCodes.contains(setCode);
+        return this.allowedSetCodes_ro.isEmpty() || this.allowedSetCodes_ro.contains(setCode);
+    }
+    
+    public boolean isDeckLegal(final Deck deck) {
+        CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
+        allCards.addAll(deck.getMain());
+        if (deck.has(DeckSection.Sideboard))
+            allCards.addAll(deck.get(DeckSection.Sideboard));
+        if (deck.has(DeckSection.Commander))
+            allCards.addAll(deck.get(DeckSection.Commander));
+        
+        for (Entry<PaperCard, Integer> poolEntry : allCards) {
+            if (!filterRules.apply(poolEntry.getKey())) {
+                return false; //all cards in deck must pass card predicate to pass deck predicate
+            }
+        }
+        
+        if(!restrictedCardNames_ro.isEmpty() ) {
+            for (Entry<PaperCard, Integer> poolEntry : allCards) {
+                if( poolEntry.getValue().intValue() > 1 && restrictedCardNames_ro.contains(poolEntry.getKey().getName()))
+                    return false;
+            }
+        }
+        return true;
     }
 
     /*
@@ -204,6 +238,7 @@ public class GameFormat implements Comparable<GameFormat> {
         protected GameFormat read(String title, Iterable<String> body, int idx) {
             List<String> sets = null; // default: all sets allowed
             List<String> bannedCards = null; // default: nothing banned
+            List<String> restrictedCards = null; // default: nothing restricted
 
             FileSection section = FileSection.parse(body, ":");
             String strSets = section.get("sets");
@@ -214,8 +249,13 @@ public class GameFormat implements Comparable<GameFormat> {
             if ( strCars != null ) {
                 bannedCards = Arrays.asList(strCars.split("; "));
             }
+            
+            strCars = section.get("restricted");
+            if ( strCars != null ) {
+                restrictedCards = Arrays.asList(strCars.split("; "));
+            }
 
-            GameFormat result = new GameFormat(title, sets, bannedCards, 1 + idx); 
+            GameFormat result = new GameFormat(title, sets, bannedCards, restrictedCards, 1 + idx); 
             naturallyOrdered.add(result);
             return result;
         }
@@ -247,7 +287,7 @@ public class GameFormat implements Comparable<GameFormat> {
 
         public GameFormat getFormatOfDeck(Deck deck) {
             for(GameFormat gf : naturallyOrdered) {
-                if ( Deck.createPredicate(gf.getFilterRules()).apply(deck) )
+                if ( gf.isDeckLegal(deck) )
                     return gf;
             }
             
@@ -257,7 +297,7 @@ public class GameFormat implements Comparable<GameFormat> {
         public Iterable<GameFormat> getAllFormatsOfDeck(Deck deck) {
             List<GameFormat> result = new ArrayList<GameFormat>();
             for(GameFormat gf : naturallyOrdered) {
-                if ( Deck.createPredicate(gf.getFilterRules()).apply(deck) )
+                if (gf.isDeckLegal(deck))
                     result.add(gf);
             }
             return result;
