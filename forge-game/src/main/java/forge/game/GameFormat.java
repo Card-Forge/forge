@@ -290,7 +290,6 @@ public class GameFormat implements Comparable<GameFormat> {
                 if ( gf.isDeckLegal(deck) )
                     return gf;
             }
-            
             return NoFormat;
         }
         
@@ -300,6 +299,8 @@ public class GameFormat implements Comparable<GameFormat> {
                 if (gf.isDeckLegal(deck))
                     result.add(gf);
             }
+            if( result.isEmpty())
+                result.add(NoFormat);
             return result;
         }
     }

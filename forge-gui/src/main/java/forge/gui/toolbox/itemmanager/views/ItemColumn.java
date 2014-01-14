@@ -22,7 +22,10 @@ import java.util.regex.Pattern;
 
 import javax.swing.table.TableColumn;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 import forge.Singletons;
 import forge.card.CardAiHints;
@@ -34,6 +37,7 @@ import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.GameFormat;
 import forge.gui.CardPreferences;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -407,8 +411,14 @@ public class ItemColumn extends TableColumn {
                         if (deck == null) {
                             return -1;
                         }
-                        return Singletons.getModel().getFormats().getFormatOfDeck(deck).getIndex();
-
+                        Iterable<GameFormat> all = Singletons.getModel().getFormats().getAllFormatsOfDeck(deck);
+                        int acc = 0;
+                        for(GameFormat gf : all) {
+                            int ix = gf.getIndex();
+                            if( ix < 30 )
+                                acc |= 0x40000000 >> (ix - 1);
+                        }
+                        return acc;
                     }
                 },
                 new Function<Entry<? extends InventoryItem, Integer>, Object>() {
@@ -418,7 +428,8 @@ public class ItemColumn extends TableColumn {
                         if (deck == null) {
                             return null;
                         }
-                        return Singletons.getModel().getFormats().getFormatOfDeck(deck).getName();
+                        Iterable<GameFormat> all = Singletons.getModel().getFormats().getAllFormatsOfDeck(deck);
+                        return StringUtils.join(Iterables.transform(all, GameFormat.FN_GET_NAME) , ", ");
                     }
                 }),
         DECK_MAIN("Main", "Main Deck", 30, 30, 30, SortState.ASC, new IntegerRenderer(),
