@@ -50,7 +50,9 @@ public class GameFormat implements Comparable<GameFormat> {
     // contains allowed sets, when empty allows all sets
 
     protected final List<String> allowedSetCodes; // this is mutable to support quest mode set unlocks 
-
+    protected final List<String> bannedCardNames;
+    protected final List<String> restrictedCardNames;
+    
     protected final transient List<String> allowedSetCodes_ro;
     protected final transient List<String> bannedCardNames_ro;
     protected final transient List<String> restrictedCardNames_ro;
@@ -80,8 +82,8 @@ public class GameFormat implements Comparable<GameFormat> {
         this.index = compareIdx;
         this.name = fName;
         allowedSetCodes = sets == null ? new ArrayList<String>() : Lists.newArrayList(sets);
-        final List<String> bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
-        final List<String> restrictedCardNames = restrictedCards == null ? new ArrayList<String>() : Lists.newArrayList(restrictedCards);
+        bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
+        restrictedCardNames = restrictedCards == null ? new ArrayList<String>() : Lists.newArrayList(restrictedCards);
         
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
