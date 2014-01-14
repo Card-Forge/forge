@@ -1,10 +1,12 @@
 package forge.ai.ability;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
@@ -13,15 +15,18 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Expressions;
 import forge.util.MyRandom;
 
 public class CountersPutAi extends SpellAbilityAi {
@@ -342,6 +347,37 @@ public class CountersPutAi extends SpellAbilityAi {
         }
 
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
+     */
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        final Card source = sa.getSourceCard();
+        if (mode == PlayerActionConfirmMode.Tribute && source.hasSVar("TributeAILogic")) {
+            final String logic = source.getSVar("TributeAILogic");
+            for (final String tributeAI : logic.split(" & ")) {
+                String sVar = tributeAI.split(" ")[0];
+                String comparator = tributeAI.split(" ")[1];
+                String compareTo = comparator.substring(2);
+                int x = CardFactoryUtil.xCount(source, sVar);
+                int y = CardFactoryUtil.xCount(source, compareTo);
+                if (!Expressions.compare(x, comparator, y)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(Player, SpellAbility, Collection<Player>)
+     */
+    @Override
+    public Player chooseSinglePlayer(Player ai, SpellAbility sa, Collection<Player> options) {
+        // logic?
+        return Iterables.getFirst(options, null);
     }
 
 }

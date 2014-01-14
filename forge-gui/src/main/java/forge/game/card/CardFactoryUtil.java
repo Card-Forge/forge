@@ -2516,6 +2516,23 @@ public class CardFactoryUtil {
             card.setSVar("EvolveAddCounter", abString);
         }
 
+        if (card.hasStartOfKeyword("Tribute")) {
+            final int tributeAmount = card.getKeywordMagnitude("Tribute");
+
+            final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
+                    + " ReplaceWith$ TributeAddCounter | Secondary$ True | Description$ Tribute "
+                    + tributeAmount + " (As this creature enters the battlefield, an opponent of your"
+                    + " choice may put " + tributeAmount + " +1/+1 counter on it.)";
+            final String abString = "DB$ PutCounter | Defined$ ReplacedCard | Tribute$ True | "
+                    + "CounterType$ P1P1 | CounterNum$ " + tributeAmount
+                    + " | SubAbility$ TributeMoveToPlay";
+            final String moveToPlay = "DB$ ChangeZone | Origin$ All | Destination$ Battlefield | "
+                    + "Defined$ ReplacedCard | Hidden$ True";
+            card.setSVar("TributeAddCounter", abString);
+            card.setSVar("TributeMoveToPlay", moveToPlay);
+            card.addReplacementEffect(ReplacementHandler.parseReplacement(actualRep, card, true));
+        }
+
         if (card.hasStartOfKeyword("Amplify")) {
             // find position of Amplify keyword
             final int ampPos = card.getKeywordPosition("Amplify");

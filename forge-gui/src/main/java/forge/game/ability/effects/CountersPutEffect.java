@@ -8,6 +8,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
+import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -62,6 +64,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
+        final Player activator = sa.getActivatingPlayer();
 
         CounterType counterType;
 
@@ -77,7 +80,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
         if (sa.hasParam("UpTo")) {
-            counterAmount = sa.getActivatingPlayer().getController().chooseNumber(sa, "How many counters?", 0, counterAmount);
+            counterAmount = activator.getController().chooseNumber(sa, "How many counters?", 0, counterAmount);
         }
 
         List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
@@ -90,6 +93,15 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
                 final Zone zone = tgtCard.getGame().getZoneOf(tgtCard);
                 if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
+                    if (sa.hasParam("Tribute")) {
+                        String message = "Do you want to put " + tgtCard.getKeywordMagnitude("Tribute") + " +1/+1 counters on " + tgtCard + " ?";
+                        Player chooser = activator.getController().chooseSingleEntityForEffect(activator.getOpponents(), sa, "Choose an opponent");
+                        if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
+                            tgtCard.setTributed(true);
+                        } else {
+                            continue;
+                        }
+                    }
                     tgtCard.addCounter(counterType, counterAmount, true);
                     if (remember) {
                         final int value = tgtCard.getTotalCountersToAdd();

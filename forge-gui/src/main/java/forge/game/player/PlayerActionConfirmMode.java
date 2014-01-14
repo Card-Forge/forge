@@ -10,7 +10,8 @@ public enum PlayerActionConfirmMode {
     FromOpeningHand,
     ChangeZoneToAltDestination,
     ChangeZoneFromAltSource,
-    ChangeZoneGeneral;
+    ChangeZoneGeneral,
+    Tribute;
     // Ripple;
     
     
