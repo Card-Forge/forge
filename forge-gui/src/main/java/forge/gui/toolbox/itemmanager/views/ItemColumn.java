@@ -193,7 +193,7 @@ public class ItemColumn extends TableColumn {
                         return toType(from.getKey());
                     }
                 }),
-        COST("Cost", "Cost", 56, -1, 80, SortState.ASC, new ManaCostRenderer(),
+        COST("Cost", "Cost", 70, -1, 140, SortState.ASC, new ManaCostRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
