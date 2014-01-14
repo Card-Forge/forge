@@ -103,6 +103,10 @@ public class ComputerUtil {
             CharmEffect.makeChoices(sa);
         }
 
+        if (sa.hasParam("Bestow")) {
+            sa.getSourceCard().animateBestow();
+        }
+
         final Cost cost = sa.getPayCosts();
 
         if (cost == null) {

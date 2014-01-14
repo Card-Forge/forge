@@ -176,7 +176,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean monstrous = false;
     private int monstrosityNum = 0;
 
-    private boolean bestow = false;
+    private long bestowTimestamp = -1;
     private boolean suspendCast = false;
     private boolean suspend = false;
     private boolean tributed = false;
@@ -7758,14 +7758,25 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * Setter for the field <code>bestow</code>.
+     * animateBestow.
      * </p>
-     * 
-     * @param b
-     *            a boolean.
      */
-    public final void setBestow(final boolean b) {
-        this.bestow = b;
+    public final void animateBestow() {
+        this.bestowTimestamp = this.getGame().getNextTimestamp();
+        this.addChangedCardTypes(new ArrayList<String>(Arrays.asList("Aura")),
+                new ArrayList<String>(Arrays.asList("Creature")), false, false, false, true, bestowTimestamp);
+        this.addChangedCardKeywords(Arrays.asList("Enchant creature"), new ArrayList<String>(), false, bestowTimestamp);
+    }
+
+    /**
+     * <p>
+     * unanimateBestow.
+     * </p>
+     */
+    public final void unanimateBestow() {
+        this.removeChangedCardKeywords(bestowTimestamp);
+        this.removeChangedCardTypes(bestowTimestamp);
+        bestowTimestamp = -1;
     }
 
     /**
@@ -7776,8 +7787,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isBestowed() {
-        return this.bestow;
+        return this.bestowTimestamp != -1;
     }
+
     /**
      * <p>
      * Setter for the field <code>monstrosityNum</code>.

@@ -83,6 +83,8 @@ public class HumanPlaySpellAbility {
                     // if a player failed to play madness cost, move the card to graveyard
                     game.getAction().moveToGraveyard(c);
                     ability.setMadness(false);
+                } else if (ability.getSourceCard().isBestowed()) {
+                    ability.getSourceCard().unanimateBestow();
                 }
             }
             return;

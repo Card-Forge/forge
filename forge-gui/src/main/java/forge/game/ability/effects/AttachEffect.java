@@ -50,10 +50,6 @@ public class AttachEffect extends SpellAbilityEffect {
         if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
             return;
 
-        if (sa.hasParam("Bestow")) {
-            source.setBestow(true);
-        }
-
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {
             handleAttachment(card, o, sa);

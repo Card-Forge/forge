@@ -108,11 +108,12 @@ public class HumanPlay {
         }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-        	CharmEffect.makeChoices(sa);
+            CharmEffect.makeChoices(sa);
         }
 
-
-
+        if (sa.hasParam("Bestow")) {
+            source.animateBestow();
+        }
 
         // Need to check PayCosts, and Ability + All SubAbilities for Target
         boolean newAbility = sa.getPayCosts() != null;

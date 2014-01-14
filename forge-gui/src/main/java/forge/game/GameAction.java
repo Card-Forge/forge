@@ -941,13 +941,9 @@ public class GameAction {
             if (!perm.isInZone(tgtZone) || !perm.canBeEnchantedBy(c) || (perm.isPhasedOut() && !c.isPhasedOut())) {
                 c.unEnchantEntity(perm);
                 if (c.isBestowed()) {
-                    // TODO : support for tokens
-                    ArrayList<String> type = CardFactory.getCard(c.getPaperCard(), c.getController()).getType();
-                    final long timestamp = game.getNextTimestamp();
-                    c.addChangedCardTypes(type, Lists.newArrayList("Aura"), false, false, false, false, timestamp);
-                    c.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);
-                    c.setBestow(false);
+                    c.unanimateBestow();
                     game.fireEvent(new GameEventCardStatsChanged(c));
+                    return true;
                 }
                 else {
                     this.moveToGraveyard(c);
@@ -973,17 +969,11 @@ public class GameAction {
 
         if (c.isInPlay() && !c.isEnchanting()) {
             if (c.isBestowed()) {
-                // TODO : support for tokens
-                ArrayList<String> type = CardFactory.getCard(c.getPaperCard(), c.getController()).getType();
-                final long timestamp = game.getNextTimestamp();
-                c.addChangedCardTypes(type, Lists.newArrayList("Aura"), false, false, false, false, timestamp);
-                c.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);
-                c.setBestow(false);
+                c.unanimateBestow();
                 game.fireEvent(new GameEventCardStatsChanged(c));
+                return true;
             }
-            else {
-                this.moveToGraveyard(c);
-            }
+            this.moveToGraveyard(c);
             checkAgain = true;
         }
         return checkAgain;

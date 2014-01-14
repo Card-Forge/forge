@@ -576,11 +576,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // 702.102d: if its target is illegal, 
                 // the effect making it an Aura spell ends. 
                 // It continues resolving as a creature spell.
-                ArrayList<String> type = CardFactory.getCard(source.getPaperCard(), source.getController()).getType();
-                final long timestamp = game.getNextTimestamp();
-                source.addChangedCardTypes(type, Lists.newArrayList("Aura"), false, false, false, false, timestamp);
-                source.addChangedCardKeywords(new ArrayList<String>(), Lists.newArrayList("Enchant creature"), false, timestamp);
-                source.setBestow(false);
+                source.unanimateBestow();
                 game.fireEvent(new GameEventCardStatsChanged(source));
                 AbilityUtils.resolve(sa.getSourceCard().getFirstSpellAbility());
             } else {
