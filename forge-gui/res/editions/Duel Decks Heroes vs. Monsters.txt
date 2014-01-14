@@ -7,84 +7,84 @@ Type=Duel_Decks
 FoilAlwaysInCommonSlot=True
 
 [cards]
-M Sun Titan
-C Somberwald Vigilante
-R Figure of Destiny
-C Cavalry Pegasus
-U Fencing Ace
-C Thraben Valiant
-U Stun Sniper
-U Truefire Paladin
-C Auramancer
-C Freewind Equenaut
 R Anax and Cymede
 C Armory Guard
-U Gustcloak Sentinel
-C Dawnstrike Paladin
-R Nobilis of War
-R Kamahl, Pit Fighter
-U Condemn
-U Daily Regimen
-C Pay No Heed
-U Righteousness
-C Stand Firm
-U Magma Jet
-U Ordeal of Purphoros
-C Bonds of Faith
-C Moment of Heroism
-U Undying Rage
+C Auramancer
 U Battle Mastery
-U Griffin Guide
-C Smite the Monstrous
-U Miraculous Recovery
-R Winds of Rath
-U Pyrokinesis
+U Beast Within
+C Blood Ogre
+C Bonds of Faith
 C Boros Guildgate
+C Cavalry Pegasus
+U Condemn
+R Conquering Manticore
+R Crater Hellion
+U Crowned Ceratok
+U Daily Regimen
+C Dawnstrike Paladin
+C Deadly Recluse
+U Destructive Revelry
+R Deus of Calamity
+U Dragon Blood
+U Fencing Ace
+R Figure of Destiny
+U Fires of Yavimaya
+L Forest
+L Forest
+L Forest
+L Forest
+C Freewind Equenaut
+C Ghor-Clan Savage
+C Gorehorn Minotaurs
+U Griffin Guide
+U Gustcloak Sentinel
+R Kamahl, Pit Fighter
+U Kavu Predator
+U Kazandu Refuge
+C Krosan Tusker
+U Llanowar Reborn
+U Magma Jet
+U Miraculous Recovery
+C Moment of Heroism
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
+L Mountain
 U New Benalia
-L Mountain
-L Mountain
-L Mountain
-L Mountain
+R Nobilis of War
+C Orcish Lumberjack
+U Ordeal of Purphoros
+C Pay No Heed
 L Plains
 L Plains
 L Plains
 L Plains
 M Polukranos, World Eater
-C Orcish Lumberjack
-C Deadly Recluse
-U Kavu Predator
-C Satyr Hedonist
-C Zhur-Taa Druid
-C Blood Ogre
-R Troll Ascetic
-U Crowned Ceratok
-C Gorehorn Minotaurs
-C Ghor-Clan Savage
-R Deus of Calamity
-R Conquering Manticore
-R Crater Hellion
-R Skarrgan Firebird
-C Valley Rannet
-C Krosan Tusker
-U Skarrgan Skybreaker
-C Shower of Sparks
 C Prey Upon
 U Pyroclasm
+U Pyrokinesis
 U Regrowth
-C Terrifying Presence
-U Destructive Revelry
-U Dragon Blood
-C Volt Charge
-U Beast Within
-U Fires of Yavimaya
-U Kazandu Refuge
-U Llanowar Reborn
+U Righteousness
+C Satyr Hedonist
+C Shower of Sparks
 U Skarrg, the Rage Pits
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-L Forest
-L Forest
-L Forest
-L Forest
+R Skarrgan Firebird
+U Skarrgan Skybreaker
+C Smite the Monstrous
+C Somberwald Vigilante
+C Stand Firm
+U Stun Sniper
+M Sun Titan
+C Terrifying Presence
+C Thraben Valiant
+R Troll Ascetic
+U Truefire Paladin
+U Undying Rage
+C Valley Rannet
+C Volt Charge
+R Winds of Rath
+C Zhur-Taa Druid
