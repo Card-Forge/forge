@@ -1,9 +1,20 @@
 package forge.gui.home.sanctioned;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -11,7 +22,11 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.miginfocom.swing.MigLayout;
+import forge.Singletons;
+import forge.game.GameType;
 import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -22,11 +37,15 @@ import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
+import forge.gui.toolbox.FComboBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
-import forge.gui.toolbox.FTabbedPane;
+import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FTextField;
+import forge.properties.ForgePreferences;
+import forge.properties.ForgePreferences.FPref;
 
 /**
  * Assembles Swing components of constructed submenu singleton.
@@ -37,107 +56,119 @@ import forge.gui.toolbox.FSkin;
 public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /** */
     SINGLETON_INSTANCE;
+    private final static ForgePreferences prefs = Singletons.getModel().getPreferences();
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Constructed Mode");
 
     /** */
+    // General variables 
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Constructed");
+    private int activePlayersNum = 2;
+    private int playerWithFocus = 0; // index of the player that currently has focus
+
     private final JCheckBox cbSingletons = new FCheckBox("Singleton Mode");
     private final JCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
     private final JCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-    
-    
-    private final FTabbedPane tabPane = new FTabbedPane();
-    private final List<FPanel> playerPanels = new ArrayList<FPanel>();
-    private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>();
-    private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
-    private final List<JRadioButton> playerIsAIRadios = new ArrayList<JRadioButton>();
-    private final ButtonGroup grpFields = new ButtonGroup();
-    private int currentNumTabsShown = 8;
+    private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 5, wrap 2, fill")); // Main content frame
+
+    // Variants frame and variables
+    private final Set<GameType> appliedVariants = new TreeSet<GameType>();
+    private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 20, fillx, hmax 100, nogrid"));
+    private final FCheckBox vntVanguard = new FCheckBox("Vanguard");
+    private final FCheckBox vntCommander = new FCheckBox("Commander");
+    private final FCheckBox vntPlanechase = new FCheckBox("Planechase");
+    private final FCheckBox vntArchenemy = new FCheckBox("Archenemy");
+    private String archenemyType = "Classic";
+    private final FComboBox<String> comboArchenemy = new FComboBox<>(new String[]{
+    		"Classic Archenemy (player 1 is Archenemy)", "Archenemy Rumble (All players are Archenemies)"});
+
+    // Player and deck frame elements
+    private final FPanel playersFrame = new FPanel(new MigLayout("insets 0, gapx 20, fill, w 50%"));
+    private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 8, gapx 20, fill"));
+    private final List<FPanel> playerPanelList = new ArrayList<FPanel>(8);
+    private final List<FPanel> activePlayerPanelList = new ArrayList<FPanel>(8);
+    private final List<FPanel> inactivePlayerPanelList = new ArrayList<FPanel>(6);
+    private final List<FTextField> playerNameBtnList = new ArrayList<FTextField>(8);
+    private final List<JRadioButton> playerTypeRadios = new ArrayList<JRadioButton>(8);
+    private final String[] avatarPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
+    private final List<FLabel> avatarList = new ArrayList<FLabel>(8);
+
+    private final List<FLabel> closePlayerBtnList = new ArrayList<FLabel>(6);
+    private final FLabel addPlayerBtn = new FLabel.Builder().opaque(true).hoverable(true).text("Add a Player").build();
+
+    private final FPanel decksFrame = new FPanel(new MigLayout("insets 8, gapx 20, w 50%"));
+    private final List<FPanel> deckPanelListMain = new ArrayList<FPanel>(8);
+    private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>(8);
+    private final List<FLabel> deckSelectorBtns = new ArrayList<FLabel>(8);
 
     // CTR
     private VSubmenuConstructed() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+
+        ////////////////////////////////////////////////////////
+        //////////////////// Variants Panel ////////////////////
+
+        // Populate and add variants panel
+        vntVanguard.addItemListener(iListenerVariants);
+        vntCommander.addItemListener(iListenerVariants);
+        vntPlanechase.addItemListener(iListenerVariants);
+        vntArchenemy.addItemListener(iListenerVariants);
+        comboArchenemy.setSelectedIndex(0);
+        comboArchenemy.setEnabled(vntArchenemy.isSelected());
+        comboArchenemy.addActionListener(aeComboListener);
+
+        constructedFrame.add(newLabel("Variants:"), "wrap");
+        variantsPanel.setOpaque(false);
+        variantsPanel.add(vntVanguard, "growx");
+        variantsPanel.add(vntCommander, "growx");
+        variantsPanel.add(vntPlanechase, "growx, wrap");
+        variantsPanel.add(vntArchenemy);
+        variantsPanel.add(comboArchenemy, "pushx");
         
-        //This listener will look for any of the radio buttons being selected
-        //and call the method that shows/hides tabs appropriately.
-        ItemListener iListener = new ItemListener() {
+        constructedFrame.add(variantsPanel, "growx, spanx 2");
 
-            @Override
-            public void itemStateChanged(ItemEvent arg0) {
-                FRadioButton aButton = (FRadioButton) arg0.getSource();
+        ////////////////////////////////////////////////////////
+        ///////////////////// Player Panel /////////////////////
 
-                if (arg0.getStateChange() == ItemEvent.SELECTED) {
-                    changeTabs(Integer.parseInt(aButton.getText()));
-                }
-            }
-
-        };
-
-        //Create all 8 player settings panel
-        FRadioButton tempRadio = null;
-        FPanel tempPanel;
-        FDeckChooser tempChooser;
-
-        //Settings panel
-        FPanel settingsPanel = new FPanel();
-        settingsPanel.setLayout(new MigLayout("wrap 2, ax center"));
-        FPanel radioPane = new FPanel();
-        radioPane.setLayout(new MigLayout("wrap 1"));
-        radioPane.setOpaque(false);
-        radioPane.add(new FLabel.Builder().text("Set number of opponents").build(), "wrap");
-        for (int i = 1; i < 8; i++) {
-            tempRadio = new FRadioButton();
-            tempRadio.setText(String.valueOf(i));
-            fieldRadios.add(tempRadio);
-            grpFields.add(tempRadio);
-            tempRadio.setSelected(true);
-            tempRadio.addItemListener(iListener);
-            radioPane.add(tempRadio, "wrap,align 50% 50%");
-        }
-        settingsPanel.add(radioPane, "span 1 2");
-        tabPane.add("Settings", settingsPanel);
-
-        //Player panels (Human + 7 AIs)
+        // Construct individual player panels
         for (int i = 0; i < 8; i++) {
-            tempPanel = new FPanel();
-            tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy, ax center"));
+        	buildPlayerPanel(i);
+        	FPanel player = playerPanelList.get(i);
 
-            tempChooser = new FDeckChooser("Select deck:", i != 0);
-            tempChooser.initialize();
-
-            deckChoosers.add(tempChooser);
-            
-            ButtonGroup tempBtnGroup = new ButtonGroup();            
-            FRadioButton tmpAI = new FRadioButton();
-            tmpAI.setText("AI");
-            tmpAI.setSelected(i != 0);
-            FRadioButton tmpHuman = new FRadioButton();
-            tmpHuman.setText("Human");
-            tmpHuman.setSelected(i == 0);
-            
-            FPanel typeBtnPanel = new FPanel();
-            typeBtnPanel.add(tmpAI);
-            typeBtnPanel.add(tmpHuman,"wrap");
-            tempPanel.add(typeBtnPanel);
-            
-            tempBtnGroup.add(tmpAI);
-            tempBtnGroup.add(tmpHuman);
-            playerIsAIRadios.add(tmpAI);
-
-            tempPanel.add(tempChooser, "span 1 2, w 55%!, gap 10px 10px 0px 10px, growy, pushy, wrap");
-
-            playerPanels.add(tempPanel);
-            
-            tabPane.add("Player " + (i+1), tempPanel);
+        	// Populate players panel
+        	if (i < activePlayersNum) {
+        		playersScroll.add(player, "pushx, growx, wrap, hidemode 3");
+        		activePlayerPanelList.add(player);
+        	} else {
+        		player.setVisible(false);
+        		playersScroll.add(player, "pushx, growx, wrap, hidemode 3");
+        		inactivePlayerPanelList.add(player);
+        	}
         }
-        
-        fieldRadios.get(0).setSelected(true);
 
+        addPlayerBtn.setFocusable(true);
+        addPlayerBtn.addMouseListener(addOrRemoveMouseListener);
+        addPlayerBtn.addKeyListener(addOrRemoveKeyListener);
+    	playersScroll.add(addPlayerBtn, "height 40px, growx, pushx");
+        playersFrame.add(playersScroll, "grow, pushx, NORTH");
+        constructedFrame.add(playersFrame, "grow, push");
+
+        ////////////////////////////////////////////////////////
+        ////////////////////// Deck Panel //////////////////////
+
+        for (int i = 0; i < 8; i++) {
+        	buildDeckPanel(i);
+        }
+        populateDeckPanel(playerWithFocus, true);
+        updateDeckSelectorLabels();
+        constructedFrame.add(decksFrame, "grow, push");
+        constructedFrame.setOpaque(false);
+
+        // Start Button
         final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
         pnlStart.setOpaque(false);
         pnlStart.add(cbSingletons, strCheckboxConstraints);
@@ -145,20 +176,162 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         pnlStart.add(cbArtifacts, strCheckboxConstraints);
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
     }
-    
-    private void changeTabs(int toShow) {
-        if (toShow < currentNumTabsShown) {
-            for (int i = currentNumTabsShown; i > toShow + 1; i--) {
-                tabPane.remove(i);
-            }
-            currentNumTabsShown = tabPane.getComponentCount() - 1;
+
+    private FPanel buildPlayerPanel(final int playerIndex) {
+        FPanel playerPanel = new FPanel();
+        playerPanel.setLayout(new MigLayout("insets 10, gap 5px"));
+    	
+        // Avatar
+        final FLabel avatar = new FLabel.Builder().opaque(true).hoverable(true)
+        		.iconScaleFactor(0.99f).iconInBackground(true).build();
+        if (playerIndex < avatarPrefs.length) {
+            int avatarIndex = Integer.parseInt(avatarPrefs[playerIndex]);
+        	avatar.setIcon(FSkin.getAvatars().get(avatarIndex));
+        } else {
+        	avatar.setIcon(FSkin.getAvatars().get(playerIndex));
         }
-        else {
-            for (int i = currentNumTabsShown; i <= toShow; i++) {
-                tabPane.add("Player " + (i + 1), playerPanels.get(i));
-            }
-            currentNumTabsShown = tabPane.getComponentCount() - 1;
+        changeAvatarFocus();
+        avatar.setToolTipText("Change this avatar");
+        avatar.addFocusListener(avatarFocusListener);
+        avatar.addMouseListener(avatarMouseListener);
+        avatarList.add(avatar);
+        
+        playerPanel.add(avatar, "spany 2, width 80px, height 80px");
+
+        // Name
+        String name;
+        if (playerIndex == 0) {
+        	name = Singletons.getModel().getPreferences().getPref(FPref.PLAYER_NAME);
+        } else {
+        	name = "Player " + (playerIndex + 1);
         }
+        final FTextField playerNameField = new FTextField.Builder().ghostText(name).text(name).build();
+        playerNameField.setFocusable(true);
+        playerNameField.addActionListener(nameListener);
+        playerNameField.addFocusListener(nameFocusListener);
+        playerPanel.add(newLabel("Player Name:"),"height 35px, gapx rel");
+        playerPanel.add(playerNameField, "height 35px, gapy 5px, gapx unrel, pushx, growx, wrap 5");
+        playerNameBtnList.add(playerNameField);
+
+        // PlayerType
+        ButtonGroup tempBtnGroup = new ButtonGroup();
+        FRadioButton tmpHuman = new FRadioButton();
+        tmpHuman.setText("Human");
+        tmpHuman.setSelected(playerIndex == 0);
+        tmpHuman.addFocusListener(radioFocusListener);
+        FRadioButton tmpAI = new FRadioButton();
+        tmpAI.setText("AI");
+        tmpAI.setSelected(playerIndex != 0);
+        tmpAI.addFocusListener(radioFocusListener);
+
+        FPanel typeBtnPanel = new FPanel();
+        typeBtnPanel.add(tmpHuman);
+        typeBtnPanel.add(tmpAI);
+        playerPanel.add(newLabel("Player Type:"), "height 35px, gapx rel");
+        playerPanel.add(typeBtnPanel, "height 35px, gapy 5px, gapx unrel, pushx, growx, wrap");
+
+        tempBtnGroup.add(tmpHuman);
+        tempBtnGroup.add(tmpAI);
+        playerTypeRadios.add(tmpHuman);
+        playerTypeRadios.add(tmpAI);
+
+        // Deck selector button
+        FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck" + playerIndex).build();
+        deckBtn.addFocusListener(deckLblFocusListener);
+        deckBtn.addMouseListener(deckLblMouseListener);
+        playerPanel.add(deckBtn, "height 30px, gapy 5px, growx, wrap, span 3 1");
+        deckSelectorBtns.add(deckBtn);
+
+        // Add a button to players 3+ to remove them from the setup
+        if (playerIndex >= 2) {
+        	FLabel closeBtn = new FLabel.Builder().opaque(true).hoverable(true).text("X").fontSize(10).build();
+        	closeBtn.addMouseListener(addOrRemoveMouseListener);
+        	closeBtn.addKeyListener(addOrRemoveKeyListener);
+        	playerPanel.add(closeBtn, "w 15, h 15, pos (container.w-15) 0");
+        	closePlayerBtnList.add(closeBtn);
+        }
+
+        playerPanelList.add(playerPanel);
+
+        return playerPanel;
+    }
+
+    private void addPlayer() {
+    	if (activePlayersNum < 8) {
+    		FPanel player = inactivePlayerPanelList.get(0);
+    		player.setVisible(true);
+    		inactivePlayerPanelList.remove(player);
+    		activePlayerPanelList.add(player);
+    		addPlayerBtn.setEnabled(activePlayersNum < 7);
+        	activePlayersNum++;
+
+        	avatarList.get(playerPanelList.indexOf(player)).grabFocus();
+    		refreshPanels(true, false);
+    	}
+    }
+
+    private void removePlayer(int playerIndex) {
+    	activePlayersNum--;
+		FPanel player = playerPanelList.get(playerIndex);
+    	player.setVisible(false);
+		inactivePlayerPanelList.add(player);
+		activePlayerPanelList.remove(player);
+
+		refreshPanels(true, false);
+    }
+
+    private void updateDeckSelectorLabels() {
+    	String title = "Current deck: ";
+    	for (int index = 0; index < deckSelectorBtns.size(); index++) {
+
+    		ForgePreferences p = Singletons.getModel().getPreferences();
+    		switch (index) {
+    		case 0: { title = p.getPref(FPref.CONSTRUCTED_P1_DECK_STATE); break; }
+    		case 1: { title = p.getPref(FPref.CONSTRUCTED_P2_DECK_STATE); break; }
+    		case 2: { title = p.getPref(FPref.CONSTRUCTED_P3_DECK_STATE); break; }
+    		case 3: { title = p.getPref(FPref.CONSTRUCTED_P4_DECK_STATE); break; }
+    		case 4: { title = p.getPref(FPref.CONSTRUCTED_P5_DECK_STATE); break; }
+    		case 5: { title = p.getPref(FPref.CONSTRUCTED_P6_DECK_STATE); break; }
+    		case 6: { title = p.getPref(FPref.CONSTRUCTED_P7_DECK_STATE); break; }
+    		case 7: { title = p.getPref(FPref.CONSTRUCTED_P8_DECK_STATE); break; }
+    		}
+
+            title = title.replace(";", " -> ");
+    		final FLabel lbl = deckSelectorBtns.get(index);
+    		if (!StringUtils.isBlank(title) && !lbl.getText().matches(title)) {
+    			lbl.setText(title);
+    		}
+    	}
+    }
+
+    private void updateDeckSelectorLabel(int playerIndex, String deckTypeAndName) {
+    	final FLabel lbl = deckSelectorBtns.get(playerIndex);
+    	lbl.setText(deckTypeAndName);
+    }
+
+    private void buildDeckPanel(final int playerIndex) {
+    	String sectionConstraints = "insets 8";
+    	
+        // Main deck
+        FPanel mainDeckPanel = new FPanel();
+        mainDeckPanel.setLayout(new MigLayout(sectionConstraints));
+
+        FDeckChooser mainChooser = new FDeckChooser("Main deck:", isPlayerAI(playerIndex));
+        mainChooser.initialize();
+        deckChoosers.add(mainChooser);
+        mainDeckPanel.add(mainChooser, "grow, push, wrap");
+
+        deckPanelListMain.add(mainDeckPanel);
+    }
+
+    private void populateDeckPanel(final int playerIndex, final boolean firstBuild) {
+    	if (!firstBuild) { decksFrame.removeAll(); }
+
+        String name = playerNameBtnList.get(playerIndex).getText();
+        FLabel deckChooserHeader = new FLabel.Builder().opaque(true).fontStyle(1).text("Select a deck for " + name).build();
+
+    	decksFrame.add(deckChooserHeader, "gap 0, pushx, growx, w 100%, h 35, wrap");
+    	decksFrame.add(deckPanelListMain.get(playerIndex), "gap 0, grow, push, wrap");
     }
 
     /* (non-Javadoc)
@@ -206,8 +379,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	fdc.populate();
         }
         
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(tabPane, "gap 20px 20px 20px 0px, pushx, pushy, growx, growy");
-
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(constructedFrame, "gap 20px 20px 20px 0px, push, grow");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 0 3.5%! 3.5%!, ax center");
 
 
@@ -223,14 +395,361 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     public boolean isPlayerAI(int playernum) {
-    	return playerIsAIRadios.get(playernum).isSelected();
+    	// playerTypeRadios list contains human radio, AI radio, human, AI, etc
+    	// so playernum * 2 + 1 points to the appropriate AI radio.
+    	return playerTypeRadios.get(playernum * 2 + 1).isSelected();
     }
     
     public int getNumPlayers() {
-        return currentNumTabsShown;
+        return activePlayersNum;
+    }
+    
+    public final List<Integer> getParticipants() {
+    	final List<Integer> participants = new ArrayList<Integer>(activePlayersNum);
+    	for (final FPanel panel : activePlayerPanelList) {
+    		participants.add(playerPanelList.indexOf(panel));
+    	}
+        return participants;
+    }
+    
+    public final String getPlayerName(int playerIndex) {
+    	return playerNameBtnList.get(playerIndex).getText();
     }
 
+    private void refreshPanels(boolean refreshPlayerFrame, boolean refreshDeckFrame) {
+    	if (refreshPlayerFrame) {
+    	    playersFrame.validate();
+    	    playersFrame.repaint();
+    	}
+    	if (refreshDeckFrame) {
+    	    decksFrame.validate();
+    	    decksFrame.repaint();
+    	}
+    }
 
+    private void changePlayerFocus(int newFocusOwner) {
+		if (newFocusOwner != playerWithFocus) {
+			playerWithFocus = newFocusOwner;
+			FPanel playerPanel = playerPanelList.get(playerWithFocus);
+
+			//TODO (Marc) Style the actual panel for more visible indication of player with focus:
+			/*for (FPanel itrPanel : playerPanelList) {
+	    		if (itrPanel == playerPanel) {
+	    			// Make panel less opaque
+	    		} else {
+	    			// restore default panel opacity
+	    		}
+	    	}*/
+
+			changeAvatarFocus();
+        	playersScroll.getViewport().scrollRectToVisible(playerPanel.getBounds());
+			populateDeckPanel(playerWithFocus, false);
+
+			refreshPanels(true, true);
+			System.out.println("Focus changed to player " + (playerWithFocus + 1));
+		}
+    }
+
+    /** Changes avatar appearance dependant on focus player. */
+    private void changeAvatarFocus() {
+    	int index = 0;
+    	for (FLabel avatar : avatarList) {
+    		if (index == playerWithFocus) {
+    	        avatar.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS).alphaColor(255), 3));
+    	        avatar.setHoverable(false);
+    		} else {
+    	        avatar.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_THEME).alphaColor(200), 2));
+    	        avatar.setHoverable(true);
+    		}
+    		index++;
+    	}
+    }
+
+    /** Adds a pre-styled FLabel component with the specified title. */
+    private FLabel newLabel(String title) {
+    	FLabel label = new FLabel.Builder().text(title).fontSize(11).fontStyle(Font.ITALIC).build();
+
+    	return label;
+    }
+
+    /////////////////////////////////////////////
+    //========== Various listeners in build order
+
+    /** This listener unlocks the relevant buttons for players
+     * and enables/disables archenemy combobox as appropriate. */
+    ItemListener iListenerVariants = new ItemListener() {
+
+        @Override
+        public void itemStateChanged(ItemEvent arg0) {
+            FCheckBox cb = (FCheckBox) arg0.getSource();
+
+            if (cb == vntVanguard) {
+            	if (arg0.getStateChange() == ItemEvent.SELECTED) {
+            		appliedVariants.add(GameType.Vanguard);
+                } else {
+            		appliedVariants.remove(GameType.Vanguard);
+                }
+            }
+            else if (cb == vntCommander) {
+            	if (arg0.getStateChange() == ItemEvent.SELECTED) {
+            		appliedVariants.add(GameType.Commander);
+                } else {
+            		appliedVariants.remove(GameType.Commander);
+                }
+            }
+            else if (cb == vntPlanechase) {
+            	if (arg0.getStateChange() == ItemEvent.SELECTED) {
+            		appliedVariants.add(GameType.Planechase);
+                } else {
+            		appliedVariants.remove(GameType.Planechase);
+                }
+            }
+            else if (cb == vntArchenemy) {
+                comboArchenemy.setEnabled(vntArchenemy.isSelected());
+            	if (arg0.getStateChange() == ItemEvent.SELECTED) {
+            		appliedVariants.add(archenemyType.contains("Classic")
+            				? GameType.Archenemy : GameType.ArchenemyRumble);
+                } else {
+            		appliedVariants.remove(GameType.Archenemy);
+            		appliedVariants.remove(GameType.ArchenemyRumble);
+                }
+            }
+            System.out.println("The following variants are applied: " + appliedVariants);
+        }
+    };
+
+    // Listens to the archenemy combo box
+    ActionListener aeComboListener = new ActionListener() {
+
+    	@SuppressWarnings("unchecked")
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			FComboBox<String> cb = (FComboBox<String>)e.getSource();
+			archenemyType = (String)cb.getSelectedItem();
+			appliedVariants.remove(GameType.Archenemy);
+    		appliedVariants.remove(GameType.ArchenemyRumble);
+    		appliedVariants.add(archenemyType.contains("Classic")
+    				? GameType.Archenemy : GameType.ArchenemyRumble);
+		}
+    };
+
+    /** Listens to avatar buttons and gives the appropriate player focus. */
+    private FocusListener avatarFocusListener = new FocusListener() {
+
+		@Override
+    	public void focusGained(FocusEvent e) {
+    		int avatarOwnerID = avatarList.indexOf((FLabel)e.getSource());
+			changePlayerFocus(avatarOwnerID);
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			
+		}
+    };
+
+    private MouseListener avatarMouseListener = new MouseListener() {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			FLabel avatar = (FLabel)e.getSource();
+			changePlayerFocus(avatarList.indexOf(avatar));
+			avatar.grabFocus(); // TODO: Replace this with avatar selection which will actually gain focus instead
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			
+		}
+    };
+
+    /** Listens to the name text field and resets the adjusts player 1's name preference. */
+    private ActionListener nameListener = new ActionListener() {
+
+    	@Override
+		public void actionPerformed(ActionEvent e) {
+			FTextField nField = (FTextField)e.getSource();
+			String newName = nField.getText().trim();
+			String oldName = nField.getGhostText().trim();
+
+			if (!StringUtils.isEmpty(newName) && !StringUtils.isBlank(newName)
+					&& StringUtils.isAlphanumericSpace(newName) && !newName.equals(oldName)) {
+				nField.setGhostText(newName);
+				refreshPanels(false, true);
+
+				if (playerNameBtnList.indexOf(nField) == 0) {
+				    prefs.setPref(FPref.PLAYER_NAME, newName);
+		            prefs.save();
+				}
+			}
+
+			nField.transferFocus();
+		}
+    };
+
+    /** Listens to name text fields and gives the appropriate player focus.
+     *  Also saves the name preference when leaving player one's text field. */
+    private FocusListener nameFocusListener = new FocusListener() {
+
+		@Override
+		public void focusGained(FocusEvent e) {
+			FTextField nField = (FTextField)e.getSource();
+			int panelOwnerID = playerNameBtnList.indexOf(nField);
+			changePlayerFocus(panelOwnerID);
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			FTextField nField = (FTextField)e.getSource();
+			String newName = nField.getText().trim();
+			String oldName = nField.getGhostText().trim();
+
+			if (!StringUtils.isEmpty(newName) && !StringUtils.isBlank(newName)
+					&& StringUtils.isAlphanumericSpace(newName) && !newName.equals(oldName)) {
+				nField.setGhostText(newName);
+				refreshPanels(false, true);
+
+				if (playerNameBtnList.indexOf(nField) == 0) {
+				    prefs.setPref(FPref.PLAYER_NAME, newName);
+		            prefs.save();
+				}
+			}				
+		}
+    };
+
+    /** Listens to name player type radio buttons and gives the appropriate player focus. */
+    private FocusListener radioFocusListener = new FocusListener() {
+
+		@Override
+    	public void focusGained(FocusEvent e) {
+    		int radioID = playerTypeRadios.indexOf((FRadioButton)e.getSource());
+			int radioOwnerID = (int) Math.floor(radioID/2);
+			changePlayerFocus(radioOwnerID);
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			
+		}
+    };
+
+    /** Listens to deck select buttons and gives the appropriate player focus. */
+    private FocusListener deckLblFocusListener = new FocusListener() {
+
+		@Override
+    	public void focusGained(FocusEvent e) {
+    		int deckLblID = deckSelectorBtns.indexOf((FLabel)e.getSource());
+			changePlayerFocus(deckLblID);
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			
+		}
+    };
+
+    private MouseListener deckLblMouseListener = new MouseListener() {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			FLabel deckLbl = (FLabel)e.getSource();
+			changePlayerFocus(deckSelectorBtns.indexOf(deckLbl));
+			// TODO: Give focus to deck chooser
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			
+		}
+    };
+
+    private MouseListener addOrRemoveMouseListener = new MouseListener() {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			FLabel btn = (FLabel)e.getSource();
+			if (btn == addPlayerBtn) {
+				addPlayer();
+			} else {
+				removePlayer(closePlayerBtnList.indexOf(btn) + 2);
+			}
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			
+		}
+    };
+
+    private KeyListener addOrRemoveKeyListener = new KeyListener() {
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			FLabel btn = (FLabel)e.getSource();
+			if (btn == addPlayerBtn) {
+				addPlayer();
+			} else {
+				removePlayer(closePlayerBtnList.indexOf(btn) + 2);
+			}
+		}
+    };
+
+    /////////////////////////////////////
     //========== Overridden from IVDoc
 
     /* (non-Javadoc)

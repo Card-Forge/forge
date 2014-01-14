@@ -77,8 +77,6 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     	view.getDeckChooser(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
     	view.getDeckChooser(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
     	view.getDeckChooser(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);
-        //view.getDcLeft().initialize(FPref.CONSTRUCTED_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
-        //view.getDcRight().initialize(FPref.CONSTRUCTED_P2_DECK_STATE, DeckType.COLOR_DECK);
 
         // Checkbox event handling
         view.getBtnStart().addActionListener(new ActionListener() {
@@ -95,7 +93,7 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
      * @param gameType
      */
     private void startGame(final GameType gameType) {
-        for(int i=0;i<view.getNumPlayers();i++) {
+        for (final int i : view.getParticipants()) {
         	if (view.getDeckChooser(i).getPlayer() == null) {
                 FOptionPane.showMessageDialog("Please specify a deck for each player first.");
                 return;
@@ -103,10 +101,11 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         }        
 
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            for(int i=0;i<view.getNumPlayers();i++) {
+            for (final int i : view.getParticipants()) {
+            	String name = view.getPlayerName(i);
             	String errMsg = gameType.getDecksFormat().getDeckConformanceProblem(view.getDeckChooser(i).getPlayer().getDeck());
                 if (null != errMsg) {
-                    FOptionPane.showErrorDialog("Player " + i + "'s deck " + errMsg, "Invalid Deck");
+                    FOptionPane.showErrorDialog(name + "'s deck " + errMsg, "Invalid Deck");
                     return;
                 }
             }
@@ -114,11 +113,9 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
 
         Lobby lobby = FServer.instance.getLobby();
         List<RegisteredPlayer> players = new ArrayList<RegisteredPlayer>();
-        for(int i=0;i<view.getNumPlayers();i++) {
+        for (final int i : view.getParticipants()) {
         	RegisteredPlayer rp = view.getDeckChooser(i).getPlayer();
         	players.add(rp.setPlayer(view.isPlayerAI(i) ? lobby.getAiPlayer() : lobby.getGuiPlayer()));
-        }
-        for(int i=0;i<view.getNumPlayers();i++) {
         	view.getDeckChooser(i).saveState();
         }
         

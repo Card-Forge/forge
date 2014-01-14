@@ -9,15 +9,16 @@ import forge.deck.DeckFormat;
 public enum GameType {
 
     //            deck composition rules, isPoolRestricted, can sideboard between matches
-    Sealed      ( DeckFormat.Limited, true, true, true ),
-    Draft       ( DeckFormat.Limited, true, true, true ),
-    Gauntlet    ( DeckFormat.Limited, true, true, true ),
-    Quest       ( DeckFormat.QuestDeck, true, true, false ),
-    Constructed ( DeckFormat.Constructed, false, true, true ),
-    Archenemy   ( DeckFormat.Archenemy, false, false, true ),
-    Planechase  ( DeckFormat.Planechase, false, false, true ),
-    Vanguard    ( DeckFormat.Vanguard, true, true, true ),
-    Commander   ( DeckFormat.Commander, false, false, false);
+    Sealed          ( DeckFormat.Limited, true, true, true ),
+    Draft           ( DeckFormat.Limited, true, true, true ),
+    Gauntlet        ( DeckFormat.Limited, true, true, true ),
+    Quest           ( DeckFormat.QuestDeck, true, true, false ),
+    Constructed     ( DeckFormat.Constructed, false, true, true ),
+    Archenemy       ( DeckFormat.Archenemy, false, false, true ),
+    ArchenemyRumble ( DeckFormat.Archenemy, false, false, true ),
+    Planechase      ( DeckFormat.Planechase, false, false, true ),
+    Vanguard        ( DeckFormat.Vanguard, true, true, true ),
+    Commander       ( DeckFormat.Commander, false, false, false);
 
     private final DeckFormat decksFormat;
     private final boolean bCardpoolLimited;
