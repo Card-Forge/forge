@@ -173,6 +173,11 @@ public final class CardDb implements ICardDatabase {
                 ? ( fromLastSet ? this.uniqueCardsByName.get(splitName.get(0)) : tryGetCard(splitName.get(0), Aggregates.random(this.allCardsByName.get(splitName.get(0))).getEdition(), -1))
                 : tryGetCard(splitName.get(0), splitName.get(1), Integer.parseInt(splitName.get(2)));
 
+        if (fromLastSet && null != res) {
+            final PaperCard res_randart = tryGetCard(res.getName(), res.getEdition(), Integer.parseInt(splitName.get(2)));
+            return null != res_randart && isFoil ? getFoiled(res_randart) : res_randart;
+        }
+        
         return null != res && isFoil ? getFoiled(res) : res;
     }
 

@@ -157,9 +157,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         final CardEdition landSet = IBoosterDraft.LAND_SET_CODE[0];
         final int landsCount = 20;
         for(String landName : MagicColor.Constant.BASIC_LANDS) {
-            for (int i = 0; i < landsCount; i++) {
-                deck.get(DeckSection.Sideboard).add(landName, landSet.getCode(), -1, 1);
-            }
+            deck.get(DeckSection.Sideboard).add(landName, landSet.getCode(), -1, landsCount);
         }
 
         return deck;

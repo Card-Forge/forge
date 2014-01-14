@@ -57,8 +57,21 @@ public class CardPool extends ItemPool<PaperCard> {
         if ( cp == null )
             cp = StaticData.instance().getVariantCards().tryGetCard(cardName, setCode, artIndex);
 
-        if ( cp != null)
-            this.add(cp, amount);
+        if ( cp != null) {
+            if (artIndex >= 0) {
+                this.add(cp, amount);
+            } else {
+                // random art index specified, we have to add cards one by one to randomize art for each of them
+                // TODO: somehow optimize this algorithm?...
+                for (int i = 0; i < amount; i++) {
+                    PaperCard cp_random = StaticData.instance().getCommonCards().tryGetCard(cardName, setCode, -1);
+                    if (cp_random == null) {
+                        cp_random = StaticData.instance().getVariantCards().tryGetCard(cardName, setCode, -1);
+                    }
+                    this.add(cp_random);
+                }
+            }
+        }
         else
             throw new RuntimeException(String.format("Card %s from %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName, setCode ));
     }
@@ -81,14 +94,18 @@ public class CardPool extends ItemPool<PaperCard> {
      * @param cardName the card name
      */
     public void add(final String cardName, int cnt) {
-        PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(cardName);
-        if ( cp == null )
-            cp = StaticData.instance().getVariantCards().tryGetCard(cardName);
-
-        if ( cp != null)
-            this.add(cp, cnt);
-        else
-            throw new NoSuchElementException(String.format("Card %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName));
+        // in order to account for art index randomization we have to add cards one by one instead of in a batch
+        // TODO: somehow optimize this algorithm?...
+        for (int i = 0; i < cnt; i++) {
+            PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(cardName);
+            if ( cp == null )
+                cp = StaticData.instance().getVariantCards().tryGetCard(cardName);
+    
+            if ( cp != null)
+                this.add(cp);
+            else
+                throw new NoSuchElementException(String.format("Card %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName));
+        }
     }
 
     /**

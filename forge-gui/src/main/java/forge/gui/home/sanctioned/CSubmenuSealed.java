@@ -172,9 +172,7 @@ public enum CSubmenuSealed implements ICDoc {
         deck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
 
         for (final String element : MagicColor.Constant.BASIC_LANDS) {
-            for (int i = 0; i < 18; i++) {
-                deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), -1, 1);
-            }
+            deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), -1, 18);
         }
 
         final IStorage<DeckGroup> sealedDecks = Singletons.getModel().getDecks().getSealed();
