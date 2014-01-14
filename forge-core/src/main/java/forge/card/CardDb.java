@@ -277,7 +277,7 @@ public final class CardDb implements ICardDatabase {
 
         Collection<PaperCard> cards = allCardsByName.get(cardName);
         if ( null == cards ) {
-            throw new NoSuchElementException(String.format("Card '%s' not found in our database.", cardName));
+            return 0;
         } 
 
         for ( PaperCard pc : cards ) {

@@ -32,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import forge.StaticData;
 
 import forge.card.CardDb;
 import forge.card.ColorSet;
@@ -223,8 +224,16 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         sb.append(n).append(" ").append(card.getName());
 
         if (!hasBadSetInfo) {
+            int artCount = StaticData.instance().getCommonCards().getArtCount(card.getName(), card.getEdition());
+            if (artCount < 1) {
+                artCount = StaticData.instance().getVariantCards().getArtCount(card.getName(), card.getEdition());
+            }
+
             sb.append("|").append(card.getEdition());
-            sb.append("|").append(card.getArtIndex());
+
+            if (artCount > 1) {
+                sb.append("|").append(card.getArtIndex());
+            }
         }
         if(card.isFoil()) {
             sb.append(CardDb.foilSuffix);
