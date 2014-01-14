@@ -322,7 +322,7 @@ public class ItemColumn extends TableColumn {
                         return String.valueOf(toRanking(from.getKey()));
                     }
                 }),
-        QUANTITY("Qty", "Quantity", 30, 30, 30, SortState.ASC, new ItemCellRenderer(),
+        QUANTITY("Qty", "Quantity", 25, 25, 25, SortState.ASC, new ItemCellRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -335,7 +335,7 @@ public class ItemColumn extends TableColumn {
                         return from.getValue();
                     }
                 }),
-        DECK_QUANTITY("Qty", "Quantity", 46, 46, 46, SortState.ASC, new DeckQuantityRenderer(),
+        DECK_QUANTITY("Quantity", "Quantity", 50, 50, 50, SortState.ASC, new DeckQuantityRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -350,11 +350,11 @@ public class ItemColumn extends TableColumn {
                 }),
         NEW("New", "New", 30, 30, 30, SortState.ASC, new ItemCellRenderer(),
                 null, null), //functions will be set later
-        PRICE("Price", "Price", 30, 30, 30, SortState.ASC, new ItemCellRenderer(),
+        PRICE("Price", "Price", 35, 35, 35, SortState.ASC, new ItemCellRenderer(),
                 null, null),
-        OWNED("Owned", "Owned", 40, 30, 40, SortState.ASC, new ItemCellRenderer(),
+        OWNED("Owned", "Owned", 20, 20, 45, SortState.ASC, new ItemCellRenderer(),
                 null, null),
-        DECKS("Decks", "Decks Containing Card", 30, 30, 30, SortState.ASC, new ItemCellRenderer(),
+        DECKS("Decks", "Decks Containing Card", 20, 20, 45, SortState.ASC, new ItemCellRenderer(),
                 null, null),
         FAVORITE("", "Favorite", 18, 18, 18, SortState.DESC, new StarRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
@@ -399,7 +399,7 @@ public class ItemColumn extends TableColumn {
                         return toDeckColor(from.getKey());
                     }
                 }),
-        DECK_FORMAT("Format", "Formats deck is legal in", 60, -1, -1, SortState.ASC, new ItemCellRenderer(),
+        DECK_FORMAT("Format", "Format", 60, -1, -1, SortState.ASC, new ItemCellRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
