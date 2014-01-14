@@ -40,11 +40,13 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
@@ -284,7 +286,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     public final class ItemTable extends SkinnedTable {
         @Override
         protected JTableHeader createDefaultTableHeader() {
-            return new JTableHeader(columnModel) {
+            JTableHeader header = new JTableHeader(columnModel) {
                 @Override
                 public String getToolTipText(MouseEvent e) {
                     int col = columnModel.getColumnIndexAtX(e.getPoint().x);
@@ -296,6 +298,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     return tableColumn.getLongName();
                 }
             };
+            ((DefaultTableCellRenderer)header.getDefaultRenderer()).setHorizontalAlignment(SwingConstants.LEFT);
+            return header;
         }
 
         public void processMouseEvent(MouseEvent e) {

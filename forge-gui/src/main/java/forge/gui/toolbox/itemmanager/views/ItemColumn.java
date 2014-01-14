@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 import javax.swing.table.TableColumn;
 
 import com.google.common.base.Function;
+
 import forge.Singletons;
 import forge.card.CardAiHints;
 import forge.card.CardEdition;
@@ -217,7 +218,7 @@ public class ItemColumn extends TableColumn {
                         return toColor(from.getKey());
                     }
                 }),
-        POWER("P", "Power", 20, 20, 20, SortState.ASC, new IntegerRenderer(),
+        POWER("Power", "Power", 20, 20, 20, SortState.ASC, new IntegerRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -230,7 +231,7 @@ public class ItemColumn extends TableColumn {
                         return toPower(from.getKey());
                     }
                 }),
-        TOUGHNESS("T", "Toughness", 20, 20, 20, SortState.ASC, new IntegerRenderer(),
+        TOUGHNESS("Toughness", "Toughness", 20, 20, 20, SortState.ASC, new IntegerRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -243,7 +244,7 @@ public class ItemColumn extends TableColumn {
                         return toToughness(from.getKey());
                     }
                 }),
-        CMC("C", "Converted Mana Cost", 20, 20, 20, SortState.ASC, new IntegerRenderer(),
+        CMC("CMC", "CMC", 20, 20, 20, SortState.ASC, new IntegerRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -256,7 +257,7 @@ public class ItemColumn extends TableColumn {
                         return toCMC(from.getKey());
                     }
                 }),
-        RARITY("R", "Rarity", 20, 20, 20, SortState.ASC, new ItemCellRenderer(),
+        RARITY("Rarity", "Rarity", 20, 20, 20, SortState.ASC, new ItemCellRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
@@ -397,7 +398,7 @@ public class ItemColumn extends TableColumn {
                         return toDeckColor(from.getKey());
                     }
                 }),
-        DECK_FORMAT("Format", "Formats deck is legal in", 100, -1, -1, SortState.DESC, new ItemCellRenderer(),
+        DECK_FORMAT("Format", "Formats deck is legal in", 100, -1, -1, SortState.ASC, new ItemCellRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
