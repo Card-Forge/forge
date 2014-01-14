@@ -415,7 +415,7 @@ public class ItemColumn extends TableColumn {
                         int acc = 0;
                         for(GameFormat gf : all) {
                             int ix = gf.getIndex();
-                            if( ix < 30 )
+                            if( ix < 30 && ix > 0)
                                 acc |= 0x40000000 >> (ix - 1);
                         }
                         return acc;
