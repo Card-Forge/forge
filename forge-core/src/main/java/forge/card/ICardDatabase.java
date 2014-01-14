@@ -26,6 +26,8 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     int getPrintCount(String cardName, String edition);
     int getMaxPrintCount(String cardName);
 
+    int getArtCount(String cardName, String edition);
+
     Collection<PaperCard> getUniqueCards();
     List<PaperCard> getAllCards();
     List<PaperCard> getAllCards(Predicate<PaperCard> predicate);

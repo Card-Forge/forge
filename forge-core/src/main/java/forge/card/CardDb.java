@@ -271,6 +271,24 @@ public final class CardDb implements ICardDatabase {
         return max + 1;
     }
 
+    @Override
+    public int getArtCount(String cardName, String setName) {
+        int cnt = 0;
+
+        Collection<PaperCard> cards = allCardsByName.get(cardName);
+        if ( null == cards ) {
+            throw new NoSuchElementException(String.format("Card '%s' not found in our database.", cardName));
+        } 
+
+        for ( PaperCard pc : cards ) {
+            if ( pc.getEdition().equalsIgnoreCase(setName) ) {
+                cnt++;
+            }
+        }
+
+        return cnt;
+    }
+
     // Single fetch
     @Override
     public PaperCard getCard(final String name) {
