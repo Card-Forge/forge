@@ -27,12 +27,15 @@ New Cards
 
 
 
---------------------
-New BNG branch Cards
---------------------
+---------------------------------
+New Born of the Gods branch Cards
+---------------------------------
 
 Kiora, the Crashing Wave
 Ephara, God of the Polis
+Nessian Wilds Ravager
+Pharagax Giant
+Hero of Iroas
 
 
 ------------
