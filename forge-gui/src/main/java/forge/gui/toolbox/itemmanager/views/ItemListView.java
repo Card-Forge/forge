@@ -128,7 +128,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.table.setFont(FSkin.getFont(12));
         this.table.setBorder((Border)null);
         this.table.getTableHeader().setBorder(null);
-        this.table.setRowHeight(18);
+        this.table.setRowHeight(20);
         this.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         // prevent tables from intercepting tab focus traversals

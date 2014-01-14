@@ -28,7 +28,7 @@ public class ColorSetRenderer extends ItemCellRenderer {
     @Override
     public final Component getTableCellRendererComponent(final JTable table, final Object value,
             final boolean isSelected, final boolean hasFocus, final int row, final int column) {
-        
+
         if (value instanceof ColorSet) {
             this.cs = (ColorSet) value;
         }
@@ -51,7 +51,7 @@ public class ColorSetRenderer extends ItemCellRenderer {
         final int cellWidth = this.getWidth();
 
         int x = padding0;
-        int y = padding0;
+        int y = padding0 + 1;
 
         final int cntGlyphs = cs.countColors();
         final int offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding0 - elemtWidth) / (cntGlyphs - 1) : elemtWidth + elemtGap;

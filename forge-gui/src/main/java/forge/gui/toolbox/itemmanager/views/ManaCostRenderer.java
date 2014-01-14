@@ -76,7 +76,7 @@ public class ManaCostRenderer extends ItemCellRenderer {
         super.paint(g);
 
         final int cellWidth = this.getWidth();
-        
+
         if (v2 == null) {
             drawCost(g, v1, padding0, cellWidth);
         }
@@ -99,7 +99,7 @@ public class ManaCostRenderer extends ItemCellRenderer {
      */
     private void drawCost(final Graphics g, ManaCost value, final int padding, final int cellWidth) {
         int x = padding;
-        int y = padding0;
+        int y = padding0 + 1;
         final int genericManaCost = value.getGenericCost();
         final int xManaCosts = value.countX();
         final boolean hasGeneric = (genericManaCost > 0) || this.v1.isPureGeneric();
