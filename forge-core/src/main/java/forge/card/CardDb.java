@@ -43,6 +43,7 @@ import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
 import forge.util.Lang;
 import forge.util.MyRandom;
+import forge.util.TextUtil;
 import java.util.Arrays;
 
 public final class CardDb implements ICardDatabase {
@@ -122,7 +123,7 @@ public final class CardDb implements ICardDatabase {
      */
     private static List<String> splitCardName(final String name) {
         String cardName = name; // .trim() ?
-        String[] cardNameElems = cardName.split("\\|");
+        String[] cardNameElems = TextUtil.split(cardName, '|');
 
         final String actualCardName = cardNameElems[0];
         String setName = null;
