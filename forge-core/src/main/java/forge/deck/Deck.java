@@ -225,13 +225,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
         if (!hasBadSetInfo) {
             int artCount = StaticData.instance().getCommonCards().getArtCount(card.getName(), card.getEdition());
-            if (artCount < 1) {
-                artCount = StaticData.instance().getVariantCards().getArtCount(card.getName(), card.getEdition());
-            }
 
             sb.append("|").append(card.getEdition());
 
-            if (artCount > 1) {
+            if (artCount > 0) {
                 sb.append("|").append(card.getArtIndex());
             }
         }
