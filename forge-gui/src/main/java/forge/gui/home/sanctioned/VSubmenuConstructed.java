@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import javax.swing.ButtonGroup;
@@ -88,7 +89,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final FComboBox<String> comboArchenemy = new FComboBox<>(new String[]{
     		"Classic Archenemy (player 1 is Archenemy)", "Archenemy Rumble (All players are Archenemies)"});
 
-    // Player and deck frame elements
+    // Player frame elements
     private final FPanel playersFrame = new FPanel(new MigLayout("insets 0, gapx 20, fill, w 50%"));
     private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 8, gapx 20, fill"));
     private final List<FPanel> playerPanelList = new ArrayList<FPanel>(8);
@@ -98,13 +99,16 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final List<JRadioButton> playerTypeRadios = new ArrayList<JRadioButton>(8);
     private final String[] avatarPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
     private final List<FLabel> avatarList = new ArrayList<FLabel>(8);
+    private final TreeMap<Integer, Integer> usedAvatars = new TreeMap<Integer, Integer>();
 
     private final List<FLabel> closePlayerBtnList = new ArrayList<FLabel>(6);
     private final FLabel addPlayerBtn = new FLabel.Builder().opaque(true).hoverable(true).text("Add a Player").build();
 
+    // Deck frame elements
     private final FPanel decksFrame = new FPanel(new MigLayout("insets 8, gapx 20, w 50%"));
     private final List<FPanel> deckPanelListMain = new ArrayList<FPanel>(8);
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>(8);
+    private final FLabel deckChooserHeader = new FLabel.Builder().opaque(true).fontStyle(1).build();
     private final List<FLabel> deckSelectorBtns = new ArrayList<FLabel>(8);
 
     // CTR
@@ -165,7 +169,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         for (int i = 0; i < 8; i++) {
         	buildDeckPanel(i);
         }
-        populateDeckPanel(playerWithFocus, true);
+        populateDeckPanel(true);
         constructedFrame.add(decksFrame, "grow, push");
         constructedFrame.setOpaque(false);
 
@@ -188,8 +192,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         if (playerIndex < avatarPrefs.length) {
             int avatarIndex = Integer.parseInt(avatarPrefs[playerIndex]);
         	avatar.setIcon(FSkin.getAvatars().get(avatarIndex));
+        	usedAvatars.put(playerIndex, avatarIndex);
         } else {
-        	setRandomAvatar(avatar);
+        	setRandomAvatar(avatar, playerIndex);
         }
         changeAvatarFocus();
         avatar.setToolTipText("L-click: Select avatar. R-click: Randomize avatar.");
@@ -290,28 +295,21 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		playerNameBtnList.get(0).setText(name);
     }
 
-    private void setRandomAvatar(FLabel avatar) {
-        int random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
+    /** Applies a random avatar, avoiding avatars already used. 
+     * @param playerIndex */
+    private void setRandomAvatar(FLabel avatar, int playerIndex) {
+        int random = 0;
+        do {
+            random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size()); 
+        } while (usedAvatars.values().contains(random));
+
         avatar.setIcon(FSkin.getAvatars().get(random));
         avatar.repaintSelf();
+    	usedAvatars.put(playerIndex, random);
     }
 
-    public void updateDeckSelectorLabels() {
-    	for (int i = 0; i < deckChoosers.size(); i++) {
-    		updateDeckSelectorLabel(i);
-    	}
-    }
-
-    private void updateDeckSelectorLabel(int playerIndex) {
-    	final FLabel lbl = deckSelectorBtns.get(playerIndex);
-    	String title = deckChoosers.get(playerIndex).getStateForLabel();
-        title = title.replace(";", " -> ");
-
-		if (!StringUtils.isBlank(title) && !lbl.getText().matches(title)) {
-			lbl.setText(title);
-		}
-    }
-
+    /** Builds the actual deck panel layouts for each player.
+     * These are added to a list which can be referenced to populate the deck panel appropriately. */
     private void buildDeckPanel(final int playerIndex) {
     	String sectionConstraints = "insets 8";
     	
@@ -323,18 +321,35 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         mainChooser.initialize();
         deckChoosers.add(mainChooser);
         mainDeckPanel.add(mainChooser, "grow, push, wrap");
-
         deckPanelListMain.add(mainDeckPanel);
     }
 
-    private void populateDeckPanel(final int playerIndex, final boolean firstBuild) {
+    /** Populates the deck panel with the focused player's deck choices. */
+    private void populateDeckPanel(final boolean firstBuild) {
     	if (!firstBuild) { decksFrame.removeAll(); }
 
-        String name = playerNameBtnList.get(playerIndex).getText();
-        FLabel deckChooserHeader = new FLabel.Builder().opaque(true).fontStyle(1).text("Select a deck for " + name).build();
+        String name = getPlayerName(playerWithFocus);
+        deckChooserHeader.setText("Select a deck for " + name);
 
     	decksFrame.add(deckChooserHeader, "gap 0, pushx, growx, w 100%, h 35, wrap");
-    	decksFrame.add(deckPanelListMain.get(playerIndex), "gap 0, grow, push, wrap");
+    	decksFrame.add(deckPanelListMain.get(playerWithFocus), "gap 0, grow, push, wrap");
+    }
+
+    /** Updates the deck selector button in all player panels. */
+    public void updateDeckSelectorLabels() {
+    	for (int i = 0; i < deckChoosers.size(); i++) {
+    		updateDeckSelectorLabel(i);
+    	}
+    }
+
+    /** Updates the deck selector button in the indexed player's panel. */
+    private void updateDeckSelectorLabel(int playerIndex) {
+    	final FLabel lbl = deckSelectorBtns.get(playerIndex);
+    	String title = deckChoosers.get(playerIndex).getStateForLabel();
+
+		if (!StringUtils.isBlank(title) && !lbl.getText().matches(title)) {
+			lbl.setText(title);
+		}
     }
 
     /* (non-Javadoc)
@@ -419,6 +434,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	return playerNameBtnList.get(playerIndex).getText();
     }
 
+    /** Gets the index of the appropriate player's avatar. */
+    public final int getPlayerAvatar(int playerIndex) {
+    	return usedAvatars.get(playerIndex);
+    }
+
+    /** Revalidates the player and deck sections. Necessary after adding or hiding any panels. */
     private void refreshPanels(boolean refreshPlayerFrame, boolean refreshDeckFrame) {
     	if (refreshPlayerFrame) {
     	    playersFrame.validate();
@@ -446,7 +467,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
 			changeAvatarFocus();
         	playersScroll.getViewport().scrollRectToVisible(playerPanel.getBounds());
-			populateDeckPanel(playerWithFocus, false);
+			populateDeckPanel(false);
 
 			refreshPanels(true, true);
 			System.out.println("Focus changed to player " + (playerWithFocus + 1));
@@ -466,6 +487,15 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     		}
     		index++;
     	}
+    }
+
+    /** Saves avatar prefs for players one and two. */
+    private void updateAvatarPrefs() {
+    	int pOneIndex = usedAvatars.get(0);
+    	int pTwoIndex = usedAvatars.get(1);
+
+        prefs.setPref(FPref.UI_AVATARS, pOneIndex + "," + pTwoIndex);
+        prefs.save();
     }
 
     /** Adds a pre-styled FLabel component with the specified title. */
@@ -568,12 +598,19 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 			FLabel avatar = (FLabel)e.getSource();
 			int playerIndex = avatarList.indexOf(avatar);
 
-			if (e.getButton() == 3) {
-				setRandomAvatar(avatar);
+			changePlayerFocus(playerIndex);
+
+			if (e.getButton() == 1) {
+				avatar.grabFocus();
+				// TODO: Do avatar selection, giving current avatar focus for keyboard control
 			}
 
-			changePlayerFocus(playerIndex);
-			avatar.grabFocus(); // TODO: Replace this with avatar selection which will actually gain focus instead
+			if (e.getButton() == 3) {
+				setRandomAvatar(avatar, playerIndex);
+				avatar.grabFocus();
+			}
+
+			if (playerIndex < 2) { updateAvatarPrefs(); }
 		}
 
 		@Override
@@ -599,7 +636,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 			if (!StringUtils.isEmpty(newName) && !StringUtils.isBlank(newName)
 					&& StringUtils.isAlphanumericSpace(newName) && !newName.equals(oldName)) {
 				nField.setGhostText(newName);
-				refreshPanels(false, true);
+
+		        deckChooserHeader.setText("Select a deck for " + newName); 
 
 				if (playerNameBtnList.indexOf(nField) == 0) {
 				    prefs.setPref(FPref.PLAYER_NAME, newName);
@@ -631,7 +669,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 			if (!StringUtils.isEmpty(newName) && !StringUtils.isBlank(newName)
 					&& StringUtils.isAlphanumericSpace(newName) && !newName.equals(oldName)) {
 				nField.setGhostText(newName);
-				refreshPanels(false, true);
+
+		        deckChooserHeader.setText("Select a deck for " + newName); 
 
 				if (playerNameBtnList.indexOf(nField) == 0) {
 				    prefs.setPref(FPref.PLAYER_NAME, newName);

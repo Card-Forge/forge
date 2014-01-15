@@ -83,13 +83,14 @@ public class Lobby {
             player.setAvatarIndex(MyRandom.getRandom().nextInt(FSkin.getAvatars().size()));
         return player;
     }
+    public final LobbyPlayer getAiPlayer(String name, int avatarIndex) {
+        LobbyPlayer player = new LobbyPlayerAi(name);
+        player.setAvatarIndex(avatarIndex);
+        return player;
+    }
 
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param nextInt
-     * @return
-     */
+    /** Returns a random name from the supplied list. */
     private String getRandomName() {
         Random my = MyRandom.getRandom();
         String playerName = GuiDisplayUtil.getPlayerName();
