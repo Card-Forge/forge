@@ -28,8 +28,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 import forge.FThreads;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -39,7 +37,6 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;

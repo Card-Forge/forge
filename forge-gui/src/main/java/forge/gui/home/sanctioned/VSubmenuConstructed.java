@@ -304,11 +304,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	}
     }
 
-    private void updateDeckSelectorLabel(int playerIndex, String deckTypeAndName) {
-    	final FLabel lbl = deckSelectorBtns.get(playerIndex);
-    	lbl.setText(deckTypeAndName);
-    }
-
     private void buildDeckPanel(final int playerIndex) {
     	String sectionConstraints = "insets 8";
     	
