@@ -69,7 +69,7 @@ public class CardPool extends ItemPool<PaperCard> {
                 this.add(cp, amount);
             } else {
                 // random art index specified, make sure we get different groups of cards with different art
-                int[] artGroups = MyRandom.splitIntoGroups(amount, artCount);
+                int[] artGroups = MyRandom.splitIntoRandomGroups(amount, artCount);
                 for (int i = 0; i < artGroups.length; i++) {
                     PaperCard cp_random = isCommonCard ? StaticData.instance().getCommonCards().tryGetCard(cardName, setCode, i) : StaticData.instance().getVariantCards().tryGetCard(cardName, setCode, i);
                     this.add(cp_random, artGroups[i]);

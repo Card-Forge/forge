@@ -56,7 +56,7 @@ public class MyRandom {
         return MyRandom.random;
     }
 
-    public static int[] splitIntoGroups(final int value, final int numGroups) {
+    public static int[] splitIntoRandomGroups(final int value, final int numGroups) {
         int[] groups = new int[numGroups];
         
         for (int i = 0; i < value; i++) {

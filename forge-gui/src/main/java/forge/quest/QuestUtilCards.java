@@ -125,10 +125,11 @@ public final class QuestUtilCards {
         }
 
         for (String landName : MagicColor.Constant.BASIC_LANDS) {
-            for (int i=0; i<nBasic; i++) {
-                // we have to add lands one at a time here because ItemPool<PaperCard> can't handle art index
-                // randomization internally when adding cards in a batch (all cards end up with the same art)
-                pool.add(db.getCard(landName, landCode, -1), 1);
+            int artCount = db.getArtCount(landName, landCode);
+            int artGroups[] = MyRandom.splitIntoRandomGroups(nBasic, artCount);
+
+            for (int i=0; i<artGroups.length; i++) {
+                pool.add(db.getCard(landName, landCode, i), artGroups[i]);
             }
         }
 
