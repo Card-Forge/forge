@@ -41,7 +41,6 @@ import forge.util.storage.IStorage;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
-
     private final Color BORDER_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor().darker();
 
     private boolean isUISetup = false;
@@ -116,7 +115,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             lst.setSelectedIndices(getSelectedDeckIndices(Arrays.asList(listData), new int[]{0, 1}));
             lst.ensureIndexIsVisible(lst.getSelectedIndices()[0]);
         }
-
     }
 
     private void updateThemes() {
@@ -141,7 +139,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             lst.setSelectedIndices(getSelectedDeckIndices(listData, new int[]{0}));
             lst.ensureIndexIsVisible(lst.getSelectedIndices()[0]);
         }
-
     }
 
     private void updateCustom() {
@@ -226,7 +223,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             lst.setSelectedIndices(getSelectedDeckIndices(listData, new int[]{0}));
             lst.ensureIndexIsVisible(lst.getSelectedIndices()[0]);
         }
-
     }
 
     public Deck getDeck() {
@@ -236,17 +232,21 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         if (selection.isEmpty()) { return null; }
 
         // Special branch for quest events
-        if (lst0.getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString()))
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString())) {
             return DeckgenUtil.getQuestEvent(selection.get(0)).getEventDeck();
-        if (lst0.getName().equals(DeckgenUtil.DeckTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection))
+        }
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection)) {
             return DeckgenUtil.buildColorDeck(selection, isAi);
-        if (lst0.getName().equals(DeckgenUtil.DeckTypes.THEMES.toString()))
+        }
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.THEMES.toString())) {
             return DeckgenUtil.buildThemeDeck(selection.get(0));
-        if (lst0.getName().equals(DeckgenUtil.DeckTypes.CUSTOM.toString()))
+        }
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.CUSTOM.toString())) {
             return DeckgenUtil.getConstructedDeck(selection.get(0));
-        if (lst0.getName().equals(DeckgenUtil.DeckTypes.PRECON.toString()))
+        }
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.PRECON.toString())) {
             return DeckgenUtil.getPreconDeck(selection.get(0));
-
+        }
         return null;
     }
 
@@ -267,7 +267,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         return new RegisteredPlayer(getDeck());
     }
-
 
     public final boolean isAi() {
         return isAi;
@@ -424,5 +423,4 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return defaultSelection;
         }
     }
-
 }

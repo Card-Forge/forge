@@ -34,9 +34,7 @@ import forge.util.FileUtil;
  *            the generic type
  */
 public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
-
     private final File file;
-
 
     /**
      * Instantiates a new storage reader file.

@@ -23,10 +23,9 @@ import com.google.common.base.Function;
 
 import forge.util.IItemSerializer;
 
-//reads and writeDeck Deck objects
 /**
  * <p>
- * DeckManager class.
+ * StorageImmediatelySerialized class.
  * </p>
  *
  * @param <T> the generic type
@@ -34,7 +33,6 @@ import forge.util.IItemSerializer;
  * @version $Id$
  */
 public class StorageImmediatelySerialized<T> extends StorageBase<T> {
-
     private final IItemSerializer<T> serializer;
     private final IStorage<IStorage<T>> subfolders;
 
@@ -44,10 +42,10 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
             return new StorageImmediatelySerialized<T>(file.getName(), (IItemSerializer<T>) serializer.getReaderForFolder(file), true);
         }
     };
-    
+
     /**
      * <p>
-     * Constructor for DeckManager.
+     * Constructor for StorageImmediatelySerialized.
      * </p>
      *
      * @param io the io
@@ -55,8 +53,7 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
     public StorageImmediatelySerialized(String name, final IItemSerializer<T> io) {
         this(name, io, false);
     }
-    
-    
+
     public StorageImmediatelySerialized(String name, final IItemSerializer<T> io, boolean withSubFolders) {
         super(name, io);
         this.serializer = io;
@@ -66,7 +63,7 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.deck.IFolderMap#add(T)
+     * @see forge.util.storage.StorageBase#add(T)
      */
     @Override
     public final void add(final T deck) {
@@ -78,13 +75,13 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.deck.IFolderMap#delete(java.lang.String)
+     * @see forge.util.storage.StorageBase#delete(java.lang.String)
      */
     @Override
     public final void delete(final String deckName) {
         this.serializer.erase(this.map.remove(deckName));
     }
-    
+
     /* (non-Javadoc)
      * @see forge.util.storage.StorageBase#getFolders()
      */

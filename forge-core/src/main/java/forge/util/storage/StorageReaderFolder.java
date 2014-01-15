@@ -38,7 +38,6 @@ import com.google.common.base.Function;
  * @param <T> the generic type
  */
 public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
-
     /**
      * @return the directory
      */
@@ -46,18 +45,17 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
         return directory;
     }
 
-
     protected final File directory;
 
     /**
      * Instantiates a new storage reader folder.
      *
-     * @param deckDir0 the deck dir0
+     * @param itemDir0 the item dir0
      */
-    public StorageReaderFolder(final File deckDir0, Function<? super T, String> keySelector0) {
+    public StorageReaderFolder(final File itemDir0, Function<? super T, String> keySelector0) {
         super(keySelector0);
         
-        this.directory = deckDir0;
+        this.directory = itemDir0;
 
         if (this.directory == null) {
             throw new IllegalArgumentException("No directory specified");
@@ -125,7 +123,6 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
     public String getItemKey(T item) {
         return keySelector.apply(item);
     }
-    
 
     // methods handling nested folders are provided. It's up to consumer whether to use these or not.
     @Override

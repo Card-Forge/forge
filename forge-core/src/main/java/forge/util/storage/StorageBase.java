@@ -28,22 +28,21 @@ import com.google.common.collect.Iterables;
 
 import forge.util.IItemReader;
 
-//reads and writeDeck Deck objects
 /**
  * <p>
- * DeckManager class.
+ * StorageBase class.
  * </p>
  *
  * @param <T> the generic type
  * @author Forge
- * @version $Id: DeckManager.java 13590 2012-01-27 20:46:27Z Max mtg $
+ * @version $Id: StorageBase.java 13590 2012-01-27 20:46:27Z Max mtg $
  */
 public class StorageBase<T> implements IStorage<T> {
     protected final Map<String, T> map;
 
     public final static StorageBase<?> emptyMap = new StorageBase<Object>("Empty", new HashMap<String, Object>());
     public final String name;
-    
+
     public StorageBase(final String name, final IItemReader<T> io) {
         this.name = name;
         this.map = io.readAll();
@@ -52,13 +51,12 @@ public class StorageBase<T> implements IStorage<T> {
     public StorageBase(final String name, final Map<String, T> inMap) {
         this.name = name;
         this.map = inMap;
-    }    
+    }
 
     @Override
     public T get(final String name) {
         return this.map.get(name);
     }
-    
 
     @Override
     public final Collection<String> getItemNames() {
@@ -84,16 +82,14 @@ public class StorageBase<T> implements IStorage<T> {
     public T find(Predicate<T> condition) {
         return Iterables.tryFind(map.values(), condition).orNull();
     }
-    
 
     @Override
-    public void add(T deck) {
+    public void add(T item) {
         throw new UnsupportedOperationException("This is a read-only storage");
-        
     }
 
     @Override
-    public void delete(String deckName) {
+    public void delete(String itemName) {
         throw new UnsupportedOperationException("This is a read-only storage");
     }
 

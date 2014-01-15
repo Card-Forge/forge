@@ -1,4 +1,4 @@
-package     forge.gui.deckchooser;
+package forge.gui.deckchooser;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
@@ -58,29 +58,32 @@ public class DeckgenUtil {
      * @return {@link forge.deck.Deck}
      */
     public static Deck buildColorDeck(List<String> selection, boolean forAi) {
-        
         final Deck deck;
-        String deckName = null;  
-        
+        String deckName = null;
+
         DeckGeneratorBase gen = null;
         CardDb cardDb = Singletons.getMagicDb().getCommonCards();
         if (selection.size() == 1) {
             gen = new DeckGeneratorMonoColor(cardDb, selection.get(0));
-        } else if (selection.size() == 2) {
+        }
+        else if (selection.size() == 2) {
             gen = new DeckGenerator2Color(cardDb, selection.get(0), selection.get(1));
-        } else if (selection.size() == 3) {
+        }
+        else if (selection.size() == 3) {
             gen = new DeckGenerator3Color(cardDb, selection.get(0), selection.get(1), selection.get(2));
-        } else {
+        }
+        else {
             gen = new DeckGenerator5Color(cardDb);
             deckName = "5 colors";
         }
         gen.setSingleton(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
         gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
         ItemPoolView<PaperCard> cards = gen == null ? null : gen.getDeck(60, forAi);
-        
-        if(null == deckName)
+
+        if (null == deckName) {
             deckName = Lang.joinHomogenous(Arrays.asList(selection));
-        
+        }
+
         // After generating card lists, build deck.
         deck = new Deck("Random deck : " + deckName);
         deck.getMain().addAll(cards);
@@ -112,30 +115,32 @@ public class DeckgenUtil {
         IStorage<Deck> path = Singletons.getModel().getDecks().getConstructed();
         String name = selection;
         int idxSlash = name.indexOf('/');
-        while( idxSlash > 0 && path != null) {
+        while (idxSlash > 0 && path != null) {
             String sf = name.substring(0, idxSlash).trim();
             path = path.getFolders().get(sf);
             name = name.substring(idxSlash+1).trim();
             idxSlash = name.indexOf('/');
         };
-        if ( path == null )
+        if (path == null) {
             throw new IllegalArgumentException("Path not found - " + selection);
+        }
         return path.get(name);
     }
-    
+
     public static Deck getPreconDeck(String selection) {
         return QuestController.getPrecons().get(selection).getDeck();
     }
 
     public static QuestEvent getQuestEvent(final String name) {
         QuestController qCtrl = Singletons.getModel().getQuest();
-        for(QuestEventChallenge challenge : qCtrl.getChallenges()) {
-            if( challenge.getTitle().equals(name) )
+        for (QuestEventChallenge challenge : qCtrl.getChallenges()) {
+            if (challenge.getTitle().equals(name)) {
                 return challenge;
+            }
         }
 
         QuestEventDuel duel = Iterables.find(qCtrl.getDuelsManager().getAllDuels(), new Predicate<QuestEventDuel>() {
-            @Override public boolean apply(QuestEventDuel in) { return in.getName().equals(name); } 
+            @Override public boolean apply(QuestEventDuel in) { return in.getName().equals(name); }
         });
         return duel;
     }
@@ -167,12 +172,11 @@ public class DeckgenUtil {
         final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name);
     }
-    
+
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomQuestDeck() {
         final List<Deck> allQuestDecks = new ArrayList<Deck>();
         QuestController qCtrl = Singletons.getModel().getQuest();
-
 
         for (final QuestEvent e : qCtrl.getDuelsManager().getAllDuels()) {
             allQuestDecks.add(e.getEventDeck());
@@ -189,20 +193,22 @@ public class DeckgenUtil {
     public static int[] randomSelectColors(int maxColors) {
         int nColors = MyRandom.getRandom().nextInt(3) + 1;
         int[] result = new int[nColors];
-        for(int i = 0; i < nColors; i++) {
+        for (int i = 0; i < nColors; i++) {
             int next = MyRandom.getRandom().nextInt(maxColors);
 
             boolean isUnique = true;
-            for(int j = 0; j < i; j++) {
-                if(result[j] == next) {
+            for (int j = 0; j < i; j++) {
+                if (result[j] == next) {
                     isUnique = false;
                     break;
                 }
             }
-            if(isUnique)
+            if (isUnique) {
                 result[i] = next;
-            else
-                i--; // try over with this number 
+            }
+            else {
+                i--; // try over with this number
+            }
         }
         return result;
     }
@@ -224,9 +230,8 @@ public class DeckgenUtil {
      * @param lst0 {@link javax.swing.JList}
      */
     public static void showDecklist(final Deck deck) {
-        
         if (deck == null) { return; }
-        
+
         // Dump into map and display.
         final String nl = System.getProperty("line.separator");
         final StringBuilder deckList = new StringBuilder();
@@ -234,16 +239,17 @@ public class DeckgenUtil {
         deckList.append(dName == null ? "" : dName + nl + nl);
 
         int nLines = 0;
-        for(DeckSection s : DeckSection.values()){
+        for (DeckSection s : DeckSection.values()){
             CardPool cp = deck.get(s);
-            if ( cp == null || cp.isEmpty() )
+            if (cp == null || cp.isEmpty()) {
                 continue;
-            
+            }
             deckList.append(s.toString()).append(": ");
-            if ( s.isSingleCard() ) {
+            if (s.isSingleCard()) {
                 deckList.append(cp.get(0).getName()).append(nl);
                 nLines++;
-            } else {
+            }
+            else {
                 deckList.append(nl);
                 nLines++;
                 for (final Entry<PaperCard, Integer> ev : cp) {
@@ -255,11 +261,11 @@ public class DeckgenUtil {
             nLines++;
         }
 
-
         final StringBuilder msg = new StringBuilder();
         if (nLines <= 32) {
             msg.append(deckList.toString());
-        } else {
+        }
+        else {
             msg.append("Decklist too long for dialog." + nl + nl);
         }
 
@@ -315,14 +321,15 @@ public class DeckgenUtil {
             if (appearances < 2) {
                 schemes.add(cp);
                 schemesToAdd--;
-            } else {
+            }
+            else {
                 attemptsLeft--;
             }
         }
 
         return schemes;
     }
-    
+
     public static CardPool generatePlanarDeck() {
         CardPool res = new CardPool();
         List<PaperCard> allPlanars = new ArrayList<PaperCard>();
@@ -334,23 +341,19 @@ public class DeckgenUtil {
 
         int phenoms = 0;
         int targetsize = MyRandom.getRandom().nextInt(allPlanars.size()-10)+10;
-        while(true)
-        {
+        while (true) {
             PaperCard rndPlane = Aggregates.random(allPlanars);
             allPlanars.remove(rndPlane);
-            
-            if(rndPlane.getRules().getType().isPhenomenon() && phenoms < 2)
-            {
+
+            if (rndPlane.getRules().getType().isPhenomenon() && phenoms < 2) {
                 res.add(rndPlane);
                 phenoms++;
             }
-            else if (rndPlane.getRules().getType().isPlane())
-            {
+            else if (rndPlane.getRules().getType().isPlane()) {
                 res.add(rndPlane);
             }
-            
-            if(allPlanars.isEmpty() || res.countAll() == targetsize)
-            {
+
+            if (allPlanars.isEmpty() || res.countAll() == targetsize) {
                 break;
             }
         }

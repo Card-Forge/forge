@@ -36,7 +36,6 @@ import forge.util.FileUtil;
  *            the generic type
  */
 public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> {
-
     private final File file;
 
     public StorageReaderFileSections(final String pathname, final Function<? super T, String> keySelector0) {
@@ -46,7 +45,6 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
     public StorageReaderFileSections(final File file0, final Function<? super T, String> keySelector0) {
         super(keySelector0);
         this.file = file0;
-        
     }
 
     protected Map<String, T> createMap() {
@@ -136,5 +134,4 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
     public String getItemKey(final T item) {
         return this.keySelector.apply(item);
     }
-
 }
