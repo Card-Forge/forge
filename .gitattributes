@@ -101,6 +101,8 @@ forge-core/src/main/java/forge/util/ThreadUtil.java -text
 forge-core/src/main/java/forge/util/package-info.java -text
 forge-core/src/main/java/forge/util/storage/IStorage.java -text
 forge-core/src/main/java/forge/util/storage/StorageBase.java -text
+forge-core/src/main/java/forge/util/storage/StorageImmediatelySerialized.java -text
+forge-core/src/main/java/forge/util/storage/StorageNestedFolders.java -text
 forge-core/src/main/java/forge/util/storage/StorageReaderBase.java -text
 forge-core/src/main/java/forge/util/storage/StorageReaderFile.java -text
 forge-core/src/main/java/forge/util/storage/StorageReaderFileSections.java -text
@@ -15677,9 +15679,6 @@ forge-gui/src/main/java/forge/util/maps/MapOfLists.java -text
 forge-gui/src/main/java/forge/util/maps/MapToAmount.java -text
 forge-gui/src/main/java/forge/util/maps/package-info.java -text
 forge-gui/src/main/java/forge/util/package-info.java -text
-forge-gui/src/main/java/forge/util/storage/StorageImmediatelySerialized.java svneol=native#text/plain
-forge-gui/src/main/java/forge/util/storage/StorageNestedFolders.java -text
-forge-gui/src/main/java/forge/util/storage/package-info.java -text
 forge-gui/src/main/java/forge/view/ButtonUtil.java svneol=native#text/plain
 forge-gui/src/main/java/forge/view/CardReaderExperiments.java -text
 forge-gui/src/main/java/forge/view/FDialog.java -text
