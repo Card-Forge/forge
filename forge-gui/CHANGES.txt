@@ -24,7 +24,7 @@ Forge now includes many of the new Commander 2013 cards. It may take a few days/
 New Cards
 ---------
 
-
+Darkpact
 
 
 ---------------------------------
@@ -36,6 +36,9 @@ Ephara, God of the Polis
 Nessian Wilds Ravager
 Pharagax Giant
 Hero of Iroas
+Mogis, God of Slaughter
+Ashiok's Adept
+Drown in Sorrow
 
 
 ------------
