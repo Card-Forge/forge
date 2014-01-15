@@ -403,7 +403,7 @@ public class ItemColumn extends TableColumn {
                         return toDeckColor(from.getKey());
                     }
                 }),
-        DECK_FORMAT("Format", "Format", 60, -1, -1, SortState.ASC, new ItemCellRenderer(),
+        DECK_FORMAT("Format", "Format", 60, -1, -1, SortState.DESC, new ItemCellRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
