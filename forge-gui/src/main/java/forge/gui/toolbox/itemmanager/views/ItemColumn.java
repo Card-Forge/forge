@@ -377,7 +377,7 @@ public class ItemColumn extends TableColumn {
                         return toCard(from.getKey());
                     }
                 }),
-        DECK_ACTIONS("", "", 50, 50, 50, SortState.DESC, new ItemCellRenderer(),
+        DECK_ACTIONS("", "", 40, 40, 40, SortState.DESC, new ItemCellRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {

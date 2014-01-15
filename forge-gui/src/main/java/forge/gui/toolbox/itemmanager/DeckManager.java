@@ -263,7 +263,6 @@ public final class DeckManager extends ItemManager<Deck> {
     public class DeckActionsRenderer extends ItemCellRenderer {
         private int overActionIndex = -1;
         private static final int imgSize = 20;
-        private static final int padding = 0;
 
         @Override
         public boolean alwaysShowTooltip() {
@@ -292,13 +291,13 @@ public final class DeckManager extends ItemManager<Deck> {
             if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1) {
                 Deck deck = (Deck) value;
 
-                if (x >= 0 && x <= imgSize) { //delete button
+                if (x >= 0 && x < imgSize) { //delete button
                     if (DeckManager.this.deleteDeck(deck)) {
                         e.consume();
                         return;
                     }
                 }
-                else if (x >= imgSize + padding && x <= imgSize * 2 + padding) { //edit button
+                else if (x >= imgSize && x < imgSize * 2) { //edit button
                     DeckManager.this.editDeck(deck);
                 }
 
@@ -334,9 +333,8 @@ public final class DeckManager extends ItemManager<Deck> {
         public final void paint(final Graphics g) {
             super.paint(g);
 
-            int y = (this.getHeight() - imgSize) / 2;
-            FSkin.drawImage(g, overActionIndex == 0 ? icoDeleteOver : icoDelete, 0, y, imgSize, imgSize);
-            FSkin.drawImage(g, overActionIndex == 1 ? icoEditOver : icoEdit, imgSize + 3, y, imgSize, imgSize);
+            FSkin.drawImage(g, overActionIndex == 0 ? icoDeleteOver : icoDelete, 0, 0, imgSize, imgSize);
+            FSkin.drawImage(g, overActionIndex == 1 ? icoEditOver : icoEdit, imgSize - 1, -1, imgSize, imgSize);
         }
     }
 }
