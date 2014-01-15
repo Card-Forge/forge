@@ -336,9 +336,7 @@ public class Match {
 
     private void executeAnte(Game lastGame) {
         GameOutcome outcome = lastGame.getOutcome();
-        if (outcome.isDraw()) {
-            return;
-        }
+
 
         // remove all the lost cards from owners' decks
         List<PaperCard> losses = new ArrayList<PaperCard>();
@@ -346,6 +344,38 @@ public class Match {
         int iWinner = -1;
         for (int i = 0; i < cntPlayers; i++) {
             Player fromGame = lastGame.getRegisteredPlayers().get(i);
+            // Add/Remove Cards lost via ChangeOwnership cards like Darkpact
+            List<Card> lostOwnership = fromGame.getLostOwnership();
+            List<Card> gainedOwnership = fromGame.getGainedOwnership();
+
+            if (!lostOwnership.isEmpty()) {
+                List<PaperCard> lostPaperOwnership = new ArrayList<>();
+                for(Card c : lostOwnership) {
+                    lostPaperOwnership.add(c.getPaperCard());
+                }
+                if (outcome.anteResult.containsKey(fromGame)) {
+                    outcome.anteResult.get(fromGame).addLost(lostPaperOwnership);
+                } else {
+                    outcome.anteResult.put(fromGame, GameOutcome.AnteResult.lost(lostPaperOwnership));
+                }
+            }
+
+            if (!gainedOwnership.isEmpty()) {
+                List<PaperCard> gainedPaperOwnership = new ArrayList<>();
+                for(Card c : gainedOwnership) {
+                    gainedPaperOwnership.add(c.getPaperCard());
+                }
+                if (outcome.anteResult.containsKey(fromGame)) {
+                    outcome.anteResult.get(fromGame).addWon(gainedPaperOwnership);
+                } else {
+                    outcome.anteResult.put(fromGame, GameOutcome.AnteResult.won(gainedPaperOwnership));
+                }
+            }
+
+            if (outcome.isDraw()) {
+                continue;
+            }
+
             if (!fromGame.hasLost()) {
                 iWinner = i;
                 continue; // not a loser
@@ -361,19 +391,35 @@ public class Match {
                 personalLosses.add(toRemove);
                 losses.add(toRemove);
             }
-            outcome.anteResult.put(fromGame, GameOutcome.AnteResult.lost(personalLosses));
+
+            if (outcome.anteResult.containsKey(fromGame)) {
+                outcome.anteResult.get(fromGame).addLost(personalLosses);
+            } else {
+                outcome.anteResult.put(fromGame, GameOutcome.AnteResult.lost(personalLosses));
+            }
         }
 
-        if (iWinner >= 0 && gameType.canAddWonCardsMidgame()) {
+        if (iWinner >= 0) {
+            // Winner gains these cards always
             Player fromGame = lastGame.getRegisteredPlayers().get(iWinner);
-            outcome.anteResult.put(fromGame, GameOutcome.AnteResult.won(losses));
-            List<PaperCard> chosen = fromGame.getController().chooseCardsYouWonToAddToDeck(losses); // "Select cards to add to your deck",
-            if (null != chosen) {
-                Deck deck = players.get(iWinner).getDeck();
-                for (PaperCard c : chosen) {
-                    deck.getMain().add(c);
+            if (outcome.anteResult.containsKey(fromGame)) {
+                outcome.anteResult.get(fromGame).addWon(losses);
+            } else {
+                outcome.anteResult.put(fromGame, GameOutcome.AnteResult.won(losses));
+            }
+
+            if (gameType.canAddWonCardsMidgame()) {
+                // But only certain game types lets you swap midgame
+                List<PaperCard> chosen = fromGame.getController().chooseCardsYouWonToAddToDeck(losses);
+                if (null != chosen) {
+                    Deck deck = players.get(iWinner).getDeck();
+                    for (PaperCard c : chosen) {
+                        deck.getMain().add(c);
+                    }
                 }
             }
+
+            // Other game types (like Quest) need to do something in their own calls to actually update data
         }
     }
 }

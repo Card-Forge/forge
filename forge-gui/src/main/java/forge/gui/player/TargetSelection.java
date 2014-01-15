@@ -266,6 +266,7 @@ public class TargetSelection {
         final List<Card> crdsGrave = new ArrayList<Card>();
         final List<Card> crdsLibrary = new ArrayList<Card>();
         final List<Card> crdsStack = new ArrayList<Card>();
+        final List<Card> crdsAnte = new ArrayList<Card>();
         for (final Card inZone : choices) {
             Zone zz = game.getZoneOf(inZone);
             if (zz.is(ZoneType.Battlefield))    crdsBattle.add(inZone);
@@ -273,6 +274,7 @@ public class TargetSelection {
             else if (zz.is(ZoneType.Graveyard)) crdsGrave.add(inZone);
             else if (zz.is(ZoneType.Library))   crdsLibrary.add(inZone);
             else if (zz.is(ZoneType.Stack))     crdsStack.add(inZone);
+            else if (zz.is(ZoneType.Ante))      crdsAnte.add(inZone);
         }
         List<Object> choicesFiltered = new ArrayList<Object>();
         if (!crdsBattle.isEmpty()) {
@@ -294,6 +296,10 @@ public class TargetSelection {
         if (!crdsStack.isEmpty()) {
             choicesFiltered.add("--CARDS IN STACK:--");
             choicesFiltered.addAll(crdsStack);
+        }
+        if (!crdsAnte.isEmpty()) {
+            choicesFiltered.add("--CARDS IN ANTE:--");
+            choicesFiltered.addAll(crdsAnte);
         }
 
         final String msgDone = "[FINISH TARGETING]";

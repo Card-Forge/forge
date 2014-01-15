@@ -186,6 +186,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public  boolean canCheatPlayUnlimitedLands = false;
 
+    private List<Card> lostOwnership = new ArrayList<Card>();
+    private List<Card> gainedOwnership = new ArrayList<Card>();
+
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
     }
@@ -3265,5 +3268,36 @@ public class Player extends GameEntity implements Comparable<Player> {
             getZone(ZoneType.Command).add(eff);
         }
         
+    }
+
+    public void changeOwnership(Card card) {
+        // If lost then gained, just clear out of lost.
+        // If gained then lost, just clear out of gained.
+        Player oldOwner = card.getOwner();
+
+        if (this.equals(oldOwner)) {
+            return;
+        }
+        card.setOwner(this);
+
+        if (this.lostOwnership.contains(card)) {
+            this.lostOwnership.remove(card);
+        } else {
+            this.gainedOwnership.add(card);
+        }
+
+        if (oldOwner.gainedOwnership.contains(card)) {
+            oldOwner.gainedOwnership.remove(card);
+        } else {
+            oldOwner.lostOwnership.add(card);
+        }
+    }
+
+    public List<Card> getLostOwnership() {
+        return lostOwnership;
+    }
+
+    public List<Card> getGainedOwnership() {
+        return gainedOwnership;
     }
 }

@@ -38,6 +38,7 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
         final Player p = sa.getActivatingPlayer();
         final Game game = p.getGame();
         final String type = sa.getParam("Type");
+        final String valid = sa.getParam("ValidExchange");
         final ZoneType zone1 = sa.hasParam("Zone1") ? ZoneType.smartValueOf(sa.getParam("Zone1")) : ZoneType.Battlefield;
         final ZoneType zone2 = sa.hasParam("Zone2") ? ZoneType.smartValueOf(sa.getParam("Zone2")) : ZoneType.Hand;
         Card object1 = null;
@@ -46,22 +47,41 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
         } else {
             object1 = source;
         }
-        List<Card> list = new ArrayList<Card>(p.getCardsIn(zone2));
-        if (type != null) {
-            list = CardLists.getValidCards(list, type, p, source);
-        }
-        // if object is not in the original zone, or there is no card in zone 2
-        // then return
-        if (object1 == null || !object1.isInZone(zone1) || list.isEmpty() || !object1.isType(type)) {
+
+        if (object1 == null || !object1.isInZone(zone1)) {
+            // No original object, can't exchange.
             return;
         }
-        Card object2 = p.getController().chooseSingleEntityForEffect(list, sa, "Choose a card");
-        if (object2 == null || !object2.isInZone(zone2) || !object2.isType(type)) {
+
+        List<Card> list = new ArrayList<Card>(p.getCardsIn(zone2));
+
+        String filter;
+
+        if (type != null) {
+            // If Type was declared, both objects need to match the type
+            if (!object1.isType(type)) {
+                return;
+            }
+            filter = type;
+        } else if (valid != null) {
+            filter = valid;
+        } else {
+            filter = "Card";
+        }
+
+        list = CardLists.getValidCards(list, filter, p, source);
+        if (list.isEmpty())  {
+            // Nothing to exchange the object?
+            return;
+        }
+
+        Card object2 = p.getController().chooseSingleEntityForEffect(list, sa, "Choose a card", !sa.hasParam("Mandatory"));
+        if (object2 == null || !object2.isInZone(zone2) || (type != null && !object2.isType(type))) {
             return;
         }
         // if the aura can't enchant, nothing happened.
         Card c = null;
-        if (type.equals("Aura") && object1.getEnchantingCard() != null) {
+        if (type != null && type.equals("Aura") && object1.getEnchantingCard() != null) {
             c = object1.getEnchantingCard();
             if (!c.canBeEnchantedBy(object2)) {
                 return;

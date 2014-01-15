@@ -36,13 +36,11 @@ import forge.game.Game;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameOutcome;
-import forge.game.card.Card;
 import forge.game.player.GameLossReason;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
-import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
@@ -124,30 +122,28 @@ public class QuestWinLose extends ControlWinLose {
         this.getView().getBtnRestart().setVisible(false);
         QuestController qc = Singletons.getModel().getQuest();
 
-        LobbyPlayer questPlayer = FServer.instance.getLobby().getQuestPlayer();
+        final LobbyPlayer questLobbyPlayer = FServer.instance.getLobby().getQuestPlayer();
+        Player questPlayer = null;
+        for (Player p : lastGame.getRegisteredPlayers()) {
+            if (p.getLobbyPlayer().equals(questLobbyPlayer)) {
+                questPlayer = p;
+            }
+        }
         if (isAnte) {
             //do per-game actions
             GameOutcome outcome = lastGame.getOutcome();
 
             // Ante returns to owners in a draw
             if (!outcome.isDraw()) {
-                boolean isHumanWinner = outcome.getWinningLobbyPlayer().equals(questPlayer);
-                final List<PaperCard> anteCards = new ArrayList<PaperCard>();
-                for (Player p : lastGame.getRegisteredPlayers()) {
-                    if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) {
-                        continue;
-                    }
-                    for (Card c : p.getCardsIn(ZoneType.Ante)) {
-                        anteCards.add(c.getPaperCard());
-                    }
+                // Won/lost cards should already be calculated.
+                GameOutcome.AnteResult anteResult = outcome.anteResult.get(questPlayer);
+                if (anteResult != null) {
+                    if (anteResult.wonCards != null)
+                        qc.getCards().addAllCards(anteResult.wonCards);
+                    if (anteResult.lostCards != null)
+                        qc.getCards().loseCards(anteResult.lostCards);
+                    this.anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.equals(outcome.getWinningPlayer()));
                 }
-
-                if (isHumanWinner) {
-                    qc.getCards().addAllCards(anteCards);
-                } else {
-                    qc.getCards().loseCards(anteCards);
-                }
-                this.anteReport(anteCards, isHumanWinner);
             }
         }
 
@@ -215,15 +211,19 @@ public class QuestWinLose extends ControlWinLose {
         return true;
     }
 
-    private void anteReport(final List<PaperCard> antesWon, boolean hasWon) {
+    private void anteReport(final List<PaperCard> cardsWon, List<PaperCard> cardsLost, boolean hasWon) {
         // Generate Swing components and attach.
-        if(hasWon)
-            this.lblTemp1 = new TitleLabel("Ante Won: These cards will be available in your card pool after this match.");
-        else
-            this.lblTemp1 = new TitleLabel("Ante Lost: You lost the following cards in Ante:");
+        if (cardsWon != null && !cardsWon.isEmpty()) {
+            this.getView().getPnlCustom().add(new TitleLabel("Spoils! These cards will be available in your card pool after this ante match:"),
+                    QuestWinLose.CONSTRAINTS_TITLE);
+            this.getView().getPnlCustom().add(new QuestWinLoseCardViewer(cardsWon), QuestWinLose.CONSTRAINTS_CARDS);
+        }
+        if (cardsLost != null && !cardsLost.isEmpty()) {
+            this.getView().getPnlCustom().add(new TitleLabel("Looted! You lost the following cards in an ante match:"),
+                    QuestWinLose.CONSTRAINTS_TITLE);
+            this.getView().getPnlCustom().add(new QuestWinLoseCardViewer(cardsLost), QuestWinLose.CONSTRAINTS_CARDS);
+        }
 
-        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
-        this.getView().getPnlCustom().add(new QuestWinLoseCardViewer(antesWon), QuestWinLose.CONSTRAINTS_CARDS);
     }
 
     /**

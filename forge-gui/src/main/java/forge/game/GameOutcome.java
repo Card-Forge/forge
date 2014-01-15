@@ -47,16 +47,30 @@ import forge.item.PaperCard;
 public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStatistics>>  {
 
     public static class AnteResult {
-        public final List<PaperCard> cards;
-        public final boolean hasWon;
+        public final List<PaperCard> lostCards;
+        public final List<PaperCard> wonCards;
         
         private AnteResult(List<PaperCard> cards, boolean won) {
-            this.cards = cards;
-            hasWon = won;
+            // Need empty lists for other results for addition of change ownership cards
+            if (won) {
+                this.wonCards = cards;
+                this.lostCards = new ArrayList<>();
+            } else {
+                this.lostCards = cards;
+                this.wonCards = new ArrayList<>();
+            }
         }
-        
+
+        public void addWon(List<PaperCard> cards) {
+            this.wonCards.addAll(cards);
+        }
+
+        public void addLost(List<PaperCard> cards) {
+            this.lostCards.addAll(cards);
+        }
+
         public static AnteResult won(List<PaperCard> cards) { return new AnteResult(cards, true); }
-        public static AnteResult lost(List<PaperCard> cards) { return new AnteResult(cards, true); }
+        public static AnteResult lost(List<PaperCard> cards) { return new AnteResult(cards, false); }
     }
 
     private int lastTurnNumber = 0;
@@ -72,8 +86,6 @@ public final class GameOutcome implements Iterable<Pair<LobbyPlayer, PlayerStati
             this.playerRating.add(Pair.of(n.getLobbyPlayer(), n.getStats()));
         }
     }
-    
-    
 
     public boolean isDraw() {
         for (Pair<LobbyPlayer, PlayerStatistics> pv : playerRating) {

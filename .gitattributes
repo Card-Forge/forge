@@ -2617,6 +2617,7 @@ forge-gui/res/cardsfolder/d/darkheart_sliver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/darkling_stalker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/darklit_gargoyle.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/darkness.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/d/darkpact.txt -text
 forge-gui/res/cardsfolder/d/darkslick_drake.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/darkslick_shores.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/d/darksteel_axe.txt svneol=native#text/plain
@@ -14943,6 +14944,7 @@ forge-gui/src/main/java/forge/game/ability/effects/ManaReflectedEffect.java -tex
 forge-gui/src/main/java/forge/game/ability/effects/MillEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/MustAttackEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/MustBlockEffect.java -text
+forge-gui/src/main/java/forge/game/ability/effects/OwnershipGainEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/PeekAndRevealEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/PermanentCreatureEffect.java -text
 forge-gui/src/main/java/forge/game/ability/effects/PermanentNoncreatureEffect.java -text

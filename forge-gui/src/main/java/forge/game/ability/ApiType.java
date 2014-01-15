@@ -69,6 +69,7 @@ public enum ApiType {
     Fog (FogEffect.class, FogAi.class),
     GainControl (ControlGainEffect.class, ControlGainAi.class),
     GainLife (LifeGainEffect.class, LifeGainAi.class),
+    GainOwnership(OwnershipGainEffect.class, CannotPlayAi.class),
     GenericChoice (ChooseGenericEffect.class, ChooseGenericEffectAi.class),
     LoseLife (LifeLoseEffect.class, LifeLoseAi.class),
     LosesGame (GameLossEffect.class, GameLossAi.class),
