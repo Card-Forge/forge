@@ -126,7 +126,7 @@ public final class QuestUtilCards {
 
         for (String landName : MagicColor.Constant.BASIC_LANDS) {
             int artCount = db.getArtCount(landName, landCode);
-            int artGroups[] = MyRandom.splitIntoRandomGroups(nBasic, artCount);
+            int[] artGroups = MyRandom.splitIntoRandomGroups(nBasic, artCount);
 
             for (int i=0; i<artGroups.length; i++) {
                 pool.add(db.getCard(landName, landCode, i), artGroups[i]);
