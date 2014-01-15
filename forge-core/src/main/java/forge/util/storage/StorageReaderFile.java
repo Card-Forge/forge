@@ -78,9 +78,9 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
 
             idx++;
             String newKey = keySelector.apply(item);
-            if( result.containsKey(newKey))
+            if (result.containsKey(newKey)) {
                 System.err.println("StorageReader: Overwriting an object with key " + newKey);
-            
+            }
             result.put(newKey, item);
         }
 
@@ -93,7 +93,7 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
      * @param line
      *            the line
      * @return the t
-     */ 
+     */
     protected abstract T read(String line, int idx);
 
     /**

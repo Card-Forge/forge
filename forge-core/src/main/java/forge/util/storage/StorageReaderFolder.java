@@ -54,7 +54,7 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
      */
     public StorageReaderFolder(final File itemDir0, Function<? super T, String> keySelector0) {
         super(keySelector0);
-        
+
         this.directory = itemDir0;
 
         if (this.directory == null) {
@@ -75,7 +75,7 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
     }
 
     public final List<String> objectsThatFailedToLoad = new ArrayList<String>();
-    
+
     /* (non-Javadoc)
      * @see forge.util.IItemReader#readAll()
      */
@@ -92,9 +92,9 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
                     throw new RuntimeException(msg);
                 }
                 String newKey = keySelector.apply(newDeck);
-                if( result.containsKey(newKey))
+                if (result.containsKey(newKey)) {
                     System.err.println("StorageReader: Overwriting an object with key " + newKey);
-                
+                }
                 result.put(newKey, newDeck);
             } catch (final NoSuchElementException ex) {
                 final String message = String.format("%s failed to load because ---- %s", file.getName(), ex.getMessage());
@@ -128,7 +128,6 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
     @Override
     public Iterable<File> getSubFolders() {
         File[] list = this.directory.listFiles(new FileFilter() {
-            
             @Override
             public boolean accept(File file) {
                 return file.isDirectory() && !file.isHidden();

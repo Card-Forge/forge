@@ -60,10 +60,10 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
 
         int idx = 0;
         Iterable<String> file = FileUtil.readFile(this.file);
-        
+
         List<String> accumulator = new ArrayList<String>();
         String header = null;
-        
+
         for (final String s : file) {
             if (!this.lineContainsObject(s)) {
                 continue;
@@ -92,7 +92,7 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
                 String newKey = keySelector.apply(item);
                 if( result.containsKey(newKey))
                     System.err.println("StorageReader: Overwriting an object with key " + newKey);
-                
+
                 result.put(newKey, item);
             }
         }
@@ -102,18 +102,18 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
     private final T readItem(String header, Iterable<String> accumulator, int idx) {
         final T item = this.read(header, accumulator, idx);
         if (null != item) return item;
-            
+
         final String msg = "An object stored in " + this.file.getPath() + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
         throw new RuntimeException(msg);
     }
-    
+
     /**
      * TODO: Write javadoc for this method.
      * 
      * @param line
      *            the line
      * @return the t
-     */ 
+     */
     protected abstract T read(String title, Iterable<String> body, int idx);
 
     /**

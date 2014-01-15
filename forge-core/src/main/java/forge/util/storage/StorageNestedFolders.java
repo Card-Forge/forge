@@ -18,21 +18,21 @@ public class StorageNestedFolders<T> extends StorageBase<IStorage<T>> {
     }
 
     // need code implementations for folder create/delete operations
-    
+
     @Override
     public void add(IStorage<T> item) {
         File subdir = new File(thisFolder, item.getName());
         subdir.mkdir();
-        
-        // TODO: save recursivelly the passed IStorage 
+
+        // TODO: save recursivelly the passed IStorage
         throw new UnsupportedOperationException("method is not implemented");
     }
-    
+
     @Override
     public void delete(String itemName) {
         File subdir = new File(thisFolder, itemName);
         IStorage<T> f = map.remove(itemName);
-        
+
         // TODO: Clear all that files from disk
         if (f != null) {
             subdir.delete(); // won't work if not empty;

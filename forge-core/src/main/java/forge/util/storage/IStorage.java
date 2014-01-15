@@ -31,7 +31,7 @@ import forge.util.IHasName;
 public interface IStorage<T> extends Iterable<T>, IHasName {
 
     T get(final String name);
-    
+
     T find(final Predicate<T> condition);
     // todo: find(final Predicate<T> condition, boolean recursive).
 
@@ -40,10 +40,10 @@ public interface IStorage<T> extends Iterable<T>, IHasName {
     boolean contains(final String name);
 
     int size();
-    
+
     void add(final T deck);
 
     void delete(final String deckName);
-    
+
     IStorage<IStorage<T>> getFolders();
 }
