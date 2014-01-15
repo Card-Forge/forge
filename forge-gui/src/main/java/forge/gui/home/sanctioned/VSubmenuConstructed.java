@@ -22,9 +22,10 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import net.miginfocom.swing.MigLayout;
+
 import org.apache.commons.lang3.StringUtils;
 
-import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.game.GameType;
 import forge.gui.deckchooser.FDeckChooser;
@@ -46,6 +47,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.MyRandom;
 
 /**
  * Assembles Swing components of constructed submenu singleton.
@@ -164,7 +166,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	buildDeckPanel(i);
         }
         populateDeckPanel(playerWithFocus, true);
-        updateDeckSelectorLabels();
         constructedFrame.add(decksFrame, "grow, push");
         constructedFrame.setOpaque(false);
 
@@ -188,10 +189,10 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             int avatarIndex = Integer.parseInt(avatarPrefs[playerIndex]);
         	avatar.setIcon(FSkin.getAvatars().get(avatarIndex));
         } else {
-        	avatar.setIcon(FSkin.getAvatars().get(playerIndex));
+        	setRandomAvatar(avatar);
         }
         changeAvatarFocus();
-        avatar.setToolTipText("Change this avatar");
+        avatar.setToolTipText("L-click: Select avatar. R-click: Randomize avatar.");
         avatar.addFocusListener(avatarFocusListener);
         avatar.addMouseListener(avatarMouseListener);
         avatarList.add(avatar);
@@ -202,6 +203,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         String name;
         if (playerIndex == 0) {
         	name = Singletons.getModel().getPreferences().getPref(FPref.PLAYER_NAME);
+        	if (name.isEmpty()) {
+        		name = "Human";
+        	}
         } else {
         	name = "Player " + (playerIndex + 1);
         }
@@ -236,7 +240,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         playerTypeRadios.add(tmpAI);
 
         // Deck selector button
-        FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck" + playerIndex).build();
+        FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
         deckBtn.addFocusListener(deckLblFocusListener);
         deckBtn.addMouseListener(deckLblMouseListener);
         playerPanel.add(deckBtn, "height 30px, gapy 5px, growx, wrap, span 3 1");
@@ -280,28 +284,32 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		refreshPanels(true, false);
     }
 
-    private void updateDeckSelectorLabels() {
-    	String title = "Current deck: ";
-    	for (int index = 0; index < deckSelectorBtns.size(); index++) {
+    public void updatePlayerName(int playerIndex) {
+		String name = prefs.getPref(FPref.PLAYER_NAME);
+		playerNameBtnList.get(0).setGhostText(name);
+		playerNameBtnList.get(0).setText(name);
+    }
 
-    		ForgePreferences p = Singletons.getModel().getPreferences();
-    		switch (index) {
-    		case 0: { title = p.getPref(FPref.CONSTRUCTED_P1_DECK_STATE); break; }
-    		case 1: { title = p.getPref(FPref.CONSTRUCTED_P2_DECK_STATE); break; }
-    		case 2: { title = p.getPref(FPref.CONSTRUCTED_P3_DECK_STATE); break; }
-    		case 3: { title = p.getPref(FPref.CONSTRUCTED_P4_DECK_STATE); break; }
-    		case 4: { title = p.getPref(FPref.CONSTRUCTED_P5_DECK_STATE); break; }
-    		case 5: { title = p.getPref(FPref.CONSTRUCTED_P6_DECK_STATE); break; }
-    		case 6: { title = p.getPref(FPref.CONSTRUCTED_P7_DECK_STATE); break; }
-    		case 7: { title = p.getPref(FPref.CONSTRUCTED_P8_DECK_STATE); break; }
-    		}
+    private void setRandomAvatar(FLabel avatar) {
+        int random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
+        avatar.setIcon(FSkin.getAvatars().get(random));
+        avatar.repaintSelf();
+    }
 
-            title = title.replace(";", " -> ");
-    		final FLabel lbl = deckSelectorBtns.get(index);
-    		if (!StringUtils.isBlank(title) && !lbl.getText().matches(title)) {
-    			lbl.setText(title);
-    		}
+    public void updateDeckSelectorLabels() {
+    	for (int i = 0; i < deckChoosers.size(); i++) {
+    		updateDeckSelectorLabel(i);
     	}
+    }
+
+    private void updateDeckSelectorLabel(int playerIndex) {
+    	final FLabel lbl = deckSelectorBtns.get(playerIndex);
+    	String title = deckChoosers.get(playerIndex).getStateForLabel();
+        title = title.replace(";", " -> ");
+
+		if (!StringUtils.isBlank(title) && !lbl.getText().matches(title)) {
+			lbl.setText(title);
+		}
     }
 
     private void buildDeckPanel(final int playerIndex) {
@@ -373,10 +381,10 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         for(FDeckChooser fdc : deckChoosers) {
         	fdc.populate();
         }
+    	updateDeckSelectorLabels();
         
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(constructedFrame, "gap 20px 20px 20px 0px, push, grow");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 0 3.5%! 3.5%!, ax center");
-
 
         if (container.isShowing()) {
             container.validate();
@@ -558,7 +566,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			FLabel avatar = (FLabel)e.getSource();
-			changePlayerFocus(avatarList.indexOf(avatar));
+			int playerIndex = avatarList.indexOf(avatar);
+
+			if (e.getButton() == 3) {
+				setRandomAvatar(avatar);
+			}
+
+			changePlayerFocus(playerIndex);
 			avatar.grabFocus(); // TODO: Replace this with avatar selection which will actually gain focus instead
 		}
 
@@ -650,6 +664,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	public void focusGained(FocusEvent e) {
     		int deckLblID = deckSelectorBtns.indexOf((FLabel)e.getSource());
 			changePlayerFocus(deckLblID);
+			updateDeckSelectorLabel(deckLblID);
 		}
 
 		@Override

@@ -33,8 +33,10 @@ public final class GamePlayerUtil {
     }
 
     private static void showThankYouPrompt(String playerName) {
-        FOptionPane.showMessageDialog("Thank you, " + playerName + ". " +
-                "You will not be prompted again but you can change\nyour name at any time using the \"Player Name\" setting in Preferences.\n\n");
+        FOptionPane.showMessageDialog("Thank you, " + playerName + ". "
+                + "You will not be prompted again but you can change\n"
+                + "your name at any time using the \"Player Name\" setting in Preferences\n"
+                + "or via the constructed match setup screen\n");
     }
 
     private static String getPlayerNameUsingFirstTimePrompt() {

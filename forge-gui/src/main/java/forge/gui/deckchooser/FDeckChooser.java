@@ -371,6 +371,19 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         return state;
     }
 
+    /** Returns a clean name from the state that can be used for labels. */
+    public final String getStateForLabel() {
+        String deckType = decksComboBox.getDeckType().toString();
+        String state = deckType;
+        final JList<String> lst = getLstDecks();
+        state += ": ";
+        for (String value : lst.getSelectedValuesList()) {
+            state += value + ", ";
+        }
+        state = state.substring(0, state.length() - 2);
+        return state;
+    }
+
     private void restoreSavedState() {
         if (stateSetting != null) {
             String savedState = prefs.getPref(stateSetting);

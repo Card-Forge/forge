@@ -14,6 +14,7 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
+import forge.gui.home.settings.GamePlayerUtil;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FOptionPane;
@@ -30,24 +31,6 @@ import forge.properties.ForgePreferences.FPref;
 public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     /** */
     SINGLETON_INSTANCE;
-
-    protected enum GamePlayers {
-        HUMAN_VS_AI ("Human v Computer"),
-        AI_VS_AI ("Computer v Computer"),
-        HUMAN_VS_HUMAN ("Human v Human");
-        private String value;
-        private GamePlayers(String value) { this.value = value; }
-        @Override
-        public String toString() { return value; }
-        public static GamePlayers fromString(String value){
-            for (final GamePlayers t : GamePlayers.values()) {
-                if (t.toString().equalsIgnoreCase(value)) {
-                    return t;
-                }
-            }
-            throw new IllegalArgumentException("No Enum specified for this string");
-        }
-    };
 
     private final VSubmenuConstructed view = VSubmenuConstructed.SINGLETON_INSTANCE;
 
@@ -95,10 +78,10 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     private void startGame(final GameType gameType) {
         for (final int i : view.getParticipants()) {
         	if (view.getDeckChooser(i).getPlayer() == null) {
-                FOptionPane.showMessageDialog("Please specify a deck for each player first.");
+                FOptionPane.showMessageDialog("Please specify a deck for " + view.getPlayerName(i));
                 return;
             }
-        }        
+        } // Is it even possible anymore? I think current implementation assigns decks automatically.
 
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             for (final int i : view.getParticipants()) {
