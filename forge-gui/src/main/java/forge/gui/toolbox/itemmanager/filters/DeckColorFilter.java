@@ -44,7 +44,9 @@ public class DeckColorFilter extends StatTypeFilter<Deck> {
                 if (colorProfile == 0) {
                     return buttonMap.get(StatTypes.DECK_COLORLESS).getSelected();
                 }
-                if (!buttonMap.get(StatTypes.DECK_MULTICOLOR).getSelected() && BinaryUtil.bitCount(colorProfile) > 1) {
+
+                boolean wantMulticolor = buttonMap.get(StatTypes.DECK_MULTICOLOR).getSelected();
+                if (!wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1) {
                     return false;
                 }
 
@@ -63,6 +65,10 @@ public class DeckColorFilter extends StatTypeFilter<Deck> {
                 }
                 if (buttonMap.get(StatTypes.DECK_GREEN).getSelected()) {
                     colors |= MagicColor.GREEN;
+                }
+
+                if (colors == 0 && wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1) {
+                    return true;
                 }
 
                 return (colorProfile & colors) == colorProfile;
