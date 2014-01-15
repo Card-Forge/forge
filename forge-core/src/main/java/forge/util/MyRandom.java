@@ -55,4 +55,14 @@ public class MyRandom {
     public static Random getRandom() {
         return MyRandom.random;
     }
+
+    public static int[] splitIntoGroups(final int value, final int numGroups) {
+        int[] groups = new int[numGroups];
+        
+        for (int i = 0; i < value; i++) {
+            groups[MyRandom.getRandom().nextInt(numGroups)]++;
+        }
+
+        return groups;
+    }
 }

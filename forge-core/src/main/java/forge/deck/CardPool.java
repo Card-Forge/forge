@@ -28,6 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.StaticData;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
+import forge.util.MyRandom;
 
 /**
  * Deck section.
@@ -53,27 +54,31 @@ public class CardPool extends ItemPool<PaperCard> {
     }
 
     public void add(final String cardName, final String setCode, final int artIndex, final int amount) {
+        boolean isCommonCard = true;
         PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(cardName, setCode, artIndex);
-        if ( cp == null )
+        if ( cp == null ) {
             cp = StaticData.instance().getVariantCards().tryGetCard(cardName, setCode, artIndex);
+            isCommonCard = false;
+        }
+
+        int artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : StaticData.instance().getVariantCards().getArtCount(cardName, setCode);
 
         if ( cp != null) {
-            if (artIndex >= 0) {
+            if (artIndex >= 0 || artCount <= 1) {
+                // either a specific art index is specified, or there is only one art, so just add the card
                 this.add(cp, amount);
             } else {
-                // random art index specified, we have to add cards one by one to randomize art for each of them
-                // TODO: somehow optimize this algorithm?...
-                for (int i = 0; i < amount; i++) {
-                    PaperCard cp_random = StaticData.instance().getCommonCards().tryGetCard(cardName, setCode, -1);
-                    if (cp_random == null) {
-                        cp_random = StaticData.instance().getVariantCards().tryGetCard(cardName, setCode, -1);
-                    }
-                    this.add(cp_random);
+                // random art index specified, make sure we get different groups of cards with different art
+                int[] artGroups = MyRandom.splitIntoGroups(amount, artCount);
+                for (int i = 0; i < artGroups.length; i++) {
+                    PaperCard cp_random = isCommonCard ? StaticData.instance().getCommonCards().tryGetCard(cardName, setCode, i) : StaticData.instance().getVariantCards().tryGetCard(cardName, setCode, i);
+                    this.add(cp_random, artGroups[i]);
                 }
             }
         }
-        else
+        else {
             throw new RuntimeException(String.format("Card %s from %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName, setCode ));
+        }
     }
 
     /**
