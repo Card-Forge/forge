@@ -1042,8 +1042,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     }
 
     public void showContextMenu(MouseEvent e) {
-        if (this.contextMenuBuilder == null) { return; }
-
         //ensure the item manager has focus
         this.focus();
 
@@ -1059,6 +1057,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         if (needSelection) {
             this.setSelectedIndex(index);
         }
+
+        if (this.contextMenuBuilder == null) { return; }
 
         JPopupMenu menu = new JPopupMenu("ItemManagerContextMenu");
         this.contextMenuBuilder.buildContextMenu(menu);
