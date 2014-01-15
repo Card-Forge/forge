@@ -66,10 +66,10 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
      * @see forge.util.storage.StorageBase#add(T)
      */
     @Override
-    public final void add(final T deck) {
-        String name = serializer.getItemKey(deck);
-        this.map.put(name, deck);
-        this.serializer.save(deck);
+    public final void add(final T item) {
+        String name = serializer.getItemKey(item);
+        this.map.put(name, item);
+        this.serializer.save(item);
     }
 
     /*
@@ -78,8 +78,8 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
      * @see forge.util.storage.StorageBase#delete(java.lang.String)
      */
     @Override
-    public final void delete(final String deckName) {
-        this.serializer.erase(this.map.remove(deckName));
+    public final void delete(final String itemName) {
+        this.serializer.erase(this.map.remove(itemName));
     }
 
     /* (non-Javadoc)

@@ -11,7 +11,7 @@ public class StorageNestedFolders<T> extends StorageBase<IStorage<T>> {
     public StorageNestedFolders(File thisFolder, Iterable<File> subfolders, Function<File, IStorage<T>> factory) {
         super("<Subfolders>", new HashMap<String, IStorage<T>>());
         this.thisFolder = thisFolder;
-        for (File sf : subfolders ) {
+        for (File sf : subfolders) {
             IStorage<T> newUnit = factory.apply(sf);
             map.put(sf.getName(), newUnit);
         }
@@ -20,8 +20,8 @@ public class StorageNestedFolders<T> extends StorageBase<IStorage<T>> {
     // need code implementations for folder create/delete operations
     
     @Override
-    public void add(IStorage<T> deck) {
-        File subdir = new File(thisFolder, deck.getName());
+    public void add(IStorage<T> item) {
+        File subdir = new File(thisFolder, item.getName());
         subdir.mkdir();
         
         // TODO: save recursivelly the passed IStorage 
@@ -29,9 +29,9 @@ public class StorageNestedFolders<T> extends StorageBase<IStorage<T>> {
     }
     
     @Override
-    public void delete(String deckName) {
-        File subdir = new File(thisFolder, deckName);
-        IStorage<T> f = map.remove(deckName);
+    public void delete(String itemName) {
+        File subdir = new File(thisFolder, itemName);
+        IStorage<T> f = map.remove(itemName);
         
         // TODO: Clear all that files from disk
         if (f != null) {
