@@ -189,6 +189,16 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private FPanel buildPlayerPanel(final int playerIndex) {
         FPanel playerPanel = new FPanel();
         playerPanel.setLayout(new MigLayout("insets 10, gap 5px"));
+
+        // Add a button to players 3+ to remove them from the setup
+        if (playerIndex >= 2) {
+            final FLabel closeBtn = new FLabel.Builder().tooltip("Close").iconInBackground(false)
+        			.icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_CLOSE)).hoverable(true).build();
+        	closeBtn.addMouseListener(addOrRemoveMouseListener);
+        	closeBtn.addKeyListener(addOrRemoveKeyListener);
+        	playerPanel.add(closeBtn, "w 20, h 20, pos (container.w-20) 0");
+        	closePlayerBtnList.add(closeBtn);
+        }
     	
         // Avatar
         final FLabel avatar = new FLabel.Builder().opaque(true).hoverable(true)
@@ -256,15 +266,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         deckBtn.addMouseListener(deckLblMouseListener);
         playerPanel.add(deckBtn, "height 30px, gapy 5px, growx, wrap, span 3 1");
         deckSelectorBtns.add(deckBtn);
-
-        // Add a button to players 3+ to remove them from the setup
-        if (playerIndex >= 2) {
-        	FLabel closeBtn = new FLabel.Builder().opaque(true).hoverable(true).text("X").fontSize(10).build();
-        	closeBtn.addMouseListener(addOrRemoveMouseListener);
-        	closeBtn.addKeyListener(addOrRemoveKeyListener);
-        	playerPanel.add(closeBtn, "w 15, h 15, pos (container.w-15) 0");
-        	closePlayerBtnList.add(closeBtn);
-        }
 
         playerPanelList.add(playerPanel);
 
