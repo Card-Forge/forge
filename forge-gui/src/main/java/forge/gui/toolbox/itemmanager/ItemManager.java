@@ -25,6 +25,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -501,6 +502,25 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
+     * setSelectedStrings.
+     * 
+     * @param strings - Strings to select
+     */
+    public void setSelectedStrings(Iterable<String> strings) {
+        List<T> items = new ArrayList<T>();
+        for (String itemName : strings) {
+            for (Entry<T, Integer> itemEntry : this.pool) {
+                if (itemEntry.getKey().toString().equals(itemName)) {
+                    items.add(itemEntry.getKey());
+                    break;
+                }
+            }
+        }
+        this.table.setSelectedItems(items);
+    }
+
+    /**
+     * 
      * selectItemEntrys.
      * 
      * @param itemEntrys - Item entrys to select
@@ -549,6 +569,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @param indices - Indices to select
      */
+    public void setSelectedIndices(Integer[] indices) {
+        this.table.setSelectedIndices(Arrays.asList(indices));
+    }
     public void setSelectedIndices(Iterable<Integer> indices) {
         this.table.setSelectedIndices(indices);
     }
@@ -733,6 +756,19 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         }
     }
 
+    public void restoreDefaultFilters() {
+        lockFiltering = true;
+        for (ItemFilter<? extends T> filter : this.orderedFilters) {
+            this.remove(filter.getPanel());
+        }
+        this.filters.clear();
+        this.orderedFilters.clear();
+        addDefaultFilters();
+        lockFiltering = false;
+        this.revalidate();
+        this.applyFilters();
+    }
+
     @SuppressWarnings("unchecked")
     public void removeFilter(ItemFilter<? extends T> filter) {
         final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
@@ -741,7 +777,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             if (classFilters.size() == 0) {
                 this.filters.remove(filterClass);
             }
-            orderedFilters.remove(filter);
+            this.orderedFilters.remove(filter);
             this.remove(filter.getPanel());
             this.revalidate();
             applyFilters();

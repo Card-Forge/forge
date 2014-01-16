@@ -26,11 +26,9 @@ import javax.swing.JRadioButton;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import com.google.common.base.Function;
-
+import forge.Command;
 import forge.Singletons;
+import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.deckchooser.FDeckChooser;
@@ -347,6 +345,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** Builds the actual deck panel layouts for each player.
      * These are added to a list which can be referenced to populate the deck panel appropriately. */
+    @SuppressWarnings("serial")
     private void buildDeckPanel(final int playerIndex) {
     	String sectionConstraints = "insets 8";
     	
@@ -354,12 +353,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         FPanel mainDeckPanel = new FPanel();
         mainDeckPanel.setLayout(new MigLayout(sectionConstraints));
 
-        FDeckChooser mainChooser = new FDeckChooser("Main deck:", isPlayerAI(playerIndex));
+        final FDeckChooser mainChooser = new FDeckChooser("Main deck:", isPlayerAI(playerIndex));
         mainChooser.initialize();
-        mainChooser.setChangeListener(new Function<ImmutablePair<DeckType, List<String>>, Void>(){
-            @Override public Void apply(ImmutablePair<DeckType, List<String>> selection) {
-                VSubmenuConstructed.this.onDeckClicked(playerIndex, selection.left, selection.right);
-                return null;
+        mainChooser.getLstDecks().setSelectCommand(new Command() {
+            @Override
+            public void run() {
+                VSubmenuConstructed.this.onDeckClicked(playerIndex, mainChooser.getSelectedDeckType(), mainChooser.getLstDecks().getSelectedItems());
             }
         });
         deckChoosers.add(mainChooser);
@@ -367,8 +366,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         deckPanelListMain.add(mainDeckPanel);
     }
 
-    protected void onDeckClicked(int iPlayer, DeckType type, List<String> selectedLines) {
-        String text = type.toString() + ": " + Lang.joinHomogenous(selectedLines);
+    protected void onDeckClicked(int iPlayer, DeckType type, Iterable<Deck> selectedDecks) {
+        String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks);
         deckSelectorBtns.get(iPlayer).setText(text);
     }
 

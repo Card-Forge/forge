@@ -63,8 +63,8 @@ public final class SColumnUtil {
                 ColumnDef.RANKING);
         columns.get(ColumnDef.FAVORITE).setSortPriority(1);
         columns.get(ColumnDef.NAME).setSortPriority(2);
-        columns.get(ColumnDef.AI).hide();
-        columns.get(ColumnDef.RANKING).hide();
+        columns.get(ColumnDef.AI).setVisible(false);
+        columns.get(ColumnDef.RANKING).setVisible(false);
         return columns;
     }
 
@@ -85,8 +85,8 @@ public final class SColumnUtil {
         columns.get(ColumnDef.CMC).setSortPriority(1);
         columns.get(ColumnDef.TYPE).setSortPriority(2);
         columns.get(ColumnDef.NAME).setSortPriority(3);
-        columns.get(ColumnDef.AI).hide();
-        columns.get(ColumnDef.RANKING).hide();
+        columns.get(ColumnDef.AI).setVisible(false);
+        columns.get(ColumnDef.RANKING).setVisible(false);
         return columns;
     }
 
@@ -99,12 +99,12 @@ public final class SColumnUtil {
     public static void toggleColumn(final JTable table, final ItemColumn col0) {
         final TableColumnModel colmodel = table.getColumnModel();
 
-        if (!col0.isHidden()) {
-            col0.hide();
+        if (col0.isVisible()) {
+            col0.setVisible(false);
             colmodel.removeColumn(col0);
         }
         else {
-            col0.show();
+            col0.setVisible(true);
             colmodel.addColumn(col0);
 
             if (col0.getModelIndex() < colmodel.getColumnCount()) {

@@ -65,7 +65,7 @@ public class ItemColumn extends TableColumn {
     private final ColumnDef def;
     private SortState sortState = SortState.NONE;
     private int sortPriority = 0;
-    private boolean hide = false;
+    private boolean visible = true;
     private int index = 0;
     private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort;
     private final Function<Entry<? extends InventoryItem, Integer>, Object> fnDisplay;
@@ -144,16 +144,12 @@ public class ItemColumn extends TableColumn {
         return this.def.sortState;
     }
 
-    public boolean isHidden() {
-        return this.hide;
+    public boolean isVisible() {
+        return this.visible;
     }
 
-    public void hide() {
-        this.hide = true;
-    }
-
-    public void show() {
-        this.hide = false;
+    public void setVisible(boolean visible0) {
+        this.visible = visible0;
     }
 
     public Function<Entry<InventoryItem, Integer>, Comparable<?>> getFnSort() {

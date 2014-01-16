@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
@@ -55,6 +56,7 @@ public final class DeckManager extends ItemManager<Deck> {
     private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT_OVER);
 
     private final GameType gametype;
+    private boolean nameOnly, preventEdit;
     private Command cmdDelete, cmdSelect;
     private final Map<ColumnDef, ItemColumn> columns = SColumnUtil.getColumns(
             ColumnDef.DECK_ACTIONS,
@@ -75,8 +77,7 @@ public final class DeckManager extends ItemManager<Deck> {
         this.gametype = gt;
 
         columns.get(ColumnDef.DECK_ACTIONS).setCellRenderer(new DeckActionsRenderer());
-        columns.get(ColumnDef.DECK_ACTIONS).setSortPriority(1);
-        columns.get(ColumnDef.NAME).setSortPriority(2);
+        columns.get(ColumnDef.NAME).setSortPriority(1);
 
         this.addSelectionListener(new ListSelectionListener() {
             @Override
@@ -99,6 +100,29 @@ public final class DeckManager extends ItemManager<Deck> {
      * Update table columns
      */
     public void update() {
+        update(false, false);
+    }
+    public void update(boolean nameOnly0) {
+        update(nameOnly0, nameOnly0);
+    }
+    public void update(boolean nameOnly0, boolean preventEdit0) {
+        if (this.nameOnly != nameOnly0) {
+            this.nameOnly = nameOnly0;
+            boolean visible = !nameOnly0;
+            for (Entry<ColumnDef, ItemColumn> column : columns.entrySet()) {
+                if (column.getKey() != ColumnDef.NAME) {
+                    column.getValue().setVisible(visible);
+                }
+            }
+            this.restoreDefaultFilters();
+        }
+        if (nameOnly0) {
+            preventEdit0 = true; //if name only, always prevent edit
+        }
+        if (this.preventEdit != preventEdit0) {
+            this.preventEdit = preventEdit0;
+            columns.get(ColumnDef.DECK_ACTIONS).setVisible(!preventEdit0);
+        }
         this.getTable().setup(columns);
     }
 
@@ -122,7 +146,9 @@ public final class DeckManager extends ItemManager<Deck> {
 
     @Override
     protected void addDefaultFilters() {
-        addFilter(new DeckColorFilter(this));
+        if (!this.nameOnly) {
+            addFilter(new DeckColorFilter(this));
+        }
     }
 
     @Override
@@ -132,6 +158,8 @@ public final class DeckManager extends ItemManager<Deck> {
 
     @Override
     protected void buildAddFilterMenu(JMenu menu) {
+        if (this.nameOnly) { return; }
+
         GuiUtils.addSeparator(menu); //separate from current search item
 
         JMenu fmt = GuiUtils.createMenu("Format");
@@ -189,7 +217,7 @@ public final class DeckManager extends ItemManager<Deck> {
     }
 
     private <T extends DeckBase> void editDeck(final Deck deck) {
-        if (deck == null) { return; }
+        if (deck == null || this.preventEdit) { return; }
 
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
@@ -228,7 +256,7 @@ public final class DeckManager extends ItemManager<Deck> {
     }
 
     public boolean deleteDeck(Deck deck) {
-        if (deck == null) { return false; }
+        if (deck == null || this.preventEdit) { return false; }
 
         if (!FOptionPane.showConfirmDialog(
                 "Are you sure you want to delete '" + deck.getName() + "'?",

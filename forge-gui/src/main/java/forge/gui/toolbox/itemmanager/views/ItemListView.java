@@ -156,7 +156,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         for (Entry<ColumnDef, ItemColumn> entry : list) {
             ItemColumn col = entry.getValue();
             col.setModelIndex(colmodel.getColumnCount());
-            if (!col.isHidden()) { colmodel.addColumn(col); }
+            if (col.isVisible()) { colmodel.addColumn(col); }
         }
 
         this.tableModel.addListeners();
@@ -424,7 +424,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             // Assemble priority sort.
             while (e.hasMoreElements()) {
                 final ItemColumn col = (ItemColumn) e.nextElement();
-                if (col.getSortPriority() > 0) {
+                if (col.getSortPriority() > 0 && col.getSortPriority() < sortcols.length) {
                     sortcols[col.getSortPriority()] = col;
                 }
             }

@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Random;
-
-import javax.swing.JList;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -23,6 +20,7 @@ import forge.deck.generation.DeckGenerator5Color;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.DeckGeneratorMonoColor;
 import forge.gui.toolbox.FOptionPane;
+import forge.gui.toolbox.itemmanager.DeckManager;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -105,32 +103,6 @@ public class DeckgenUtil {
         return deck;
     }
 
-    /**
-     * Gets a user deck.
-     *
-     * @param selection {java.lang.String}
-     * @return {@link forge.deck.Deck}
-     */
-    public static Deck getConstructedDeck(final String selection) {
-        IStorage<Deck> path = Singletons.getModel().getDecks().getConstructed();
-        String name = selection;
-        int idxSlash = name.indexOf('/');
-        while (idxSlash > 0 && path != null) {
-            String sf = name.substring(0, idxSlash).trim();
-            path = path.getFolders().get(sf);
-            name = name.substring(idxSlash+1).trim();
-            idxSlash = name.indexOf('/');
-        };
-        if (path == null) {
-            throw new IllegalArgumentException("Path not found - " + selection);
-        }
-        return path.get(name);
-    }
-
-    public static Deck getPreconDeck(String selection) {
-        return QuestController.getPrecons().get(selection).getDeck();
-    }
-
     public static QuestEvent getQuestEvent(final String name) {
         QuestController qCtrl = Singletons.getModel().getQuest();
         for (QuestEventChallenge challenge : qCtrl.getChallenges()) {
@@ -190,40 +162,37 @@ public class DeckgenUtil {
         return allQuestDecks.get(rand);
     }
 
-    public static int[] randomSelectColors(int maxColors) {
+    public static void randomSelectColors(final DeckManager deckManager) {
+        final int size = deckManager.getItemCount();
+        if (size == 0) { return; }
+
         int nColors = MyRandom.getRandom().nextInt(3) + 1;
-        int[] result = new int[nColors];
+        Integer[] indices = new Integer[nColors];
         for (int i = 0; i < nColors; i++) {
-            int next = MyRandom.getRandom().nextInt(maxColors);
+            int next = MyRandom.getRandom().nextInt(size);
 
             boolean isUnique = true;
             for (int j = 0; j < i; j++) {
-                if (result[j] == next) {
+                if (indices[j] == next) {
                     isUnique = false;
                     break;
                 }
             }
             if (isUnique) {
-                result[i] = next;
+                indices[i] = next;
             }
             else {
                 i--; // try over with this number
             }
         }
-        return result;
+        deckManager.setSelectedIndices(indices);
     }
 
-    /** @param lst0 {@link javax.swing.JList} */
-    public static void randomSelect(final JList<String> lst0) {
-        final int size = lst0.getModel().getSize();
+    public static void randomSelect(final DeckManager deckManager) {
+        final int size = deckManager.getItemCount();
+        if (size == 0) { return; }
 
-        if (size > 0) {
-            final Random r = new Random();
-            final int i = r.nextInt(size);
-
-            lst0.setSelectedIndex(i);
-            lst0.ensureIndexIsVisible(lst0.getSelectedIndex());
-        }
+        deckManager.setSelectedIndex(MyRandom.getRandom().nextInt(size));
     }
 
     /** Shows decklist dialog for a given deck.
