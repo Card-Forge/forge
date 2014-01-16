@@ -228,7 +228,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
             sb.append("|").append(card.getEdition());
 
-            if (artCount > 0) {
+            if (artCount > 1) {
                 sb.append("|").append(card.getArtIndex());
             }
         }
