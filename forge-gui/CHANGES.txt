@@ -43,6 +43,11 @@ Hero of Iroas
 Mogis, God of Slaughter
 Ashiok's Adept
 Drown in Sorrow
+Ephara's Enlightenment
+Kiora's Follower
+Ragemonger
+Nyxborn Shieldmate
+Silent Sentinel
 
 
 ------------
