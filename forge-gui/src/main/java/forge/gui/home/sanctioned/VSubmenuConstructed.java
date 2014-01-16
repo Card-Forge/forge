@@ -54,6 +54,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
 import forge.util.MyRandom;
+import forge.util.NameGenerator;
 
 /**
  * Assembles Swing components of constructed submenu singleton.
@@ -101,6 +102,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final List<FPanel> activePlayerPanelList = new ArrayList<FPanel>(8);
     private final List<FPanel> inactivePlayerPanelList = new ArrayList<FPanel>(6);
     private final List<FTextField> playerNameBtnList = new ArrayList<FTextField>(8);
+    private final List<String> playerNames = new ArrayList<String>(8);
     private final List<JRadioButton> playerTypeRadios = new ArrayList<JRadioButton>(8);
     private final String[] avatarPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
     private final List<FLabel> avatarList = new ArrayList<FLabel>(8);
@@ -217,8 +219,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         		name = "Human";
         	}
         } else {
-        	name = "Player " + (playerIndex + 1);
+        	name = NameGenerator.getRandomName("Any", "Any", playerNames);
         }
+    	playerNames.add(name);
         final FTextField playerNameField = new FTextField.Builder().ghostText(name).text(name).build();
         playerNameField.setFocusable(true);
         playerNameField.addActionListener(nameListener);
