@@ -11,9 +11,11 @@ Release Notes
 - Constructed mode -
 Recently a change was made to the constructed mode and this change now allows you to have up to 8 players rather than just two. The game formats that are located in the variants mode also allow up to eight players. The current user interface for this feature is fairly basic and is not very attractive. The settings tab allows you to set the number of opponents. The player tabs includes the same options that you used to see in the constructed mode.
 
-Marc recently sketched out a couple of attractive mockups that look far more attractive than what we are now using. We just need someone with java skills and swing experience to modify the existing code.
+Marc recently sketched out a couple of attractive mockups that look far more attractive than what we were using till recently and are currently redesigning. The initial implementation of a new, more advanced, intuitive and better looking Constructed mode lobby screen is now available. It is a work in progress, so you should expect some rough edges and missing functionality, but the lobby screen is functional enough so it's possible to choose decks and player types and start the match normally.
 
-http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=12609#p138913
+
+- Support for multiple card art -
+Forge now fully supports the distinction between cards with different art, which is most apparent with basic lands. It is now possible to specifically add cards with particular art in the deck editor, and cards with different art are now generated for random constructed decks, sealed deck pools, booster draft extra basic land pools, starting quest card pools, and quest card shop pools. The deck file (.dck) format has been adapted to account for this change so that the card art index can now be specified after the set, with the index starting at 0 for the first possible card art.
 
 
 - Commander 2013 cards -
