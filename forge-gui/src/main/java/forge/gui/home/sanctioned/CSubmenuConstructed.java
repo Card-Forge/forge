@@ -42,7 +42,11 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         MenuUtil.setMenuProvider(this);
 
         SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { view.getBtnStart().requestFocusInWindow(); }
+            @Override public void run() {
+            	view.refreshAvatarFromPrefs(0);
+            	view.refreshAvatarFromPrefs(1);
+            	view.getBtnStart().requestFocusInWindow();
+            }
         });
     }
 

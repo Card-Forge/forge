@@ -163,6 +163,14 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         return lbl;
     }
 
+	public void refreshAvatarFromPrefs(int playerIndex) {
+		FLabel avatar = playerIndex == 0 ? lblAvatarHuman : lblAvatarAI;
+		String[] currentPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
+		int avatarIndex = Integer.parseInt(currentPrefs[playerIndex]);
+		avatar.setIcon(FSkin.getAvatars().get(avatarIndex));
+		avatar.repaintSelf();
+	}
+
     //========== Overridden from IVDoc
 
     /* (non-Javadoc)

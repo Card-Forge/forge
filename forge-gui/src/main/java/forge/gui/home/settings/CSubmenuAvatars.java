@@ -4,12 +4,15 @@ import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.gui.framework.ICDoc;
+import forge.gui.home.sanctioned.VSubmenuConstructed;
 
 /** 
  * Controls the avatars submenu in the home UI.
  */
 public enum CSubmenuAvatars implements ICDoc {
     SINGLETON_INSTANCE;
+
+    private final VSubmenuAvatars view = VSubmenuAvatars.SINGLETON_INSTANCE;
 
     @Override
     public void initialize() {
@@ -18,7 +21,10 @@ public enum CSubmenuAvatars implements ICDoc {
     @Override
     public void update() {
         SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { VSubmenuAvatars.SINGLETON_INSTANCE.focusHuman(); }
+            @Override public void run() {
+            	view.refreshAvatarFromPrefs(0);
+            	view.refreshAvatarFromPrefs(1);
+            	view.focusHuman(); }
         });
     }
 

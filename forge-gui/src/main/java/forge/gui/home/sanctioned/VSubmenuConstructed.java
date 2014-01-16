@@ -32,8 +32,8 @@ import com.google.common.base.Function;
 
 import forge.Singletons;
 import forge.game.GameType;
-import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
+import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -104,7 +104,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final List<FTextField> playerNameBtnList = new ArrayList<FTextField>(8);
     private final List<String> playerNames = new ArrayList<String>(8);
     private final List<JRadioButton> playerTypeRadios = new ArrayList<JRadioButton>(8);
-    private final String[] avatarPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
     private final List<FLabel> avatarList = new ArrayList<FLabel>(8);
     private final TreeMap<Integer, Integer> usedAvatars = new TreeMap<Integer, Integer>();
 
@@ -196,8 +195,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         // Avatar
         final FLabel avatar = new FLabel.Builder().opaque(true).hoverable(true)
         		.iconScaleFactor(0.99f).iconInBackground(true).build();
-        if (playerIndex < avatarPrefs.length) {
-            int avatarIndex = Integer.parseInt(avatarPrefs[playerIndex]);
+        String[] currentPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
+        if (playerIndex < currentPrefs.length) {
+            int avatarIndex = Integer.parseInt(currentPrefs[playerIndex]);
         	avatar.setIcon(FSkin.getAvatars().get(avatarIndex));
         	usedAvatars.put(playerIndex, avatarIndex);
         } else {
@@ -317,6 +317,19 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		String name = prefs.getPref(FPref.PLAYER_NAME);
 		playerNameBtnList.get(0).setGhostText(name);
 		playerNameBtnList.get(0).setText(name);
+    }
+
+    public void refreshAvatarFromPrefs(int playerIndex) {
+    	FLabel avatar = avatarList.get(playerIndex);
+        String[] currentPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
+    	if (playerIndex < currentPrefs.length) {
+            int avatarIndex = Integer.parseInt(currentPrefs[playerIndex]);
+            avatar.setIcon(FSkin.getAvatars().get(avatarIndex));
+            avatar.repaintSelf();
+        	usedAvatars.put(playerIndex, avatarIndex);
+        } else {
+        	setRandomAvatar(avatar, playerIndex);
+        }
     }
 
     /** Applies a random avatar, avoiding avatars already used. 
