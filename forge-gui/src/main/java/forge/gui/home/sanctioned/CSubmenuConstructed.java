@@ -14,7 +14,6 @@ import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.settings.GamePlayerUtil;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FOptionPane;

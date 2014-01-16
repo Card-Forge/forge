@@ -26,10 +26,14 @@ import javax.swing.JRadioButton;
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import com.google.common.base.Function;
 
 import forge.Singletons;
 import forge.game.GameType;
 import forge.gui.deckchooser.FDeckChooser;
+import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -48,6 +52,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Lang;
 import forge.util.MyRandom;
 
 /**
@@ -319,9 +324,21 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         FDeckChooser mainChooser = new FDeckChooser("Main deck:", isPlayerAI(playerIndex));
         mainChooser.initialize();
+        mainChooser.setChangeListener(new Function<ImmutablePair<DeckType, List<String>>, Void>(){
+            @Override public Void apply(ImmutablePair<DeckType, List<String>> selection) {
+                VSubmenuConstructed.this.onDeckClicked(playerIndex, selection.left, selection.right);
+                return null;
+            }
+        });
         deckChoosers.add(mainChooser);
         mainDeckPanel.add(mainChooser, "grow, push, wrap");
         deckPanelListMain.add(mainDeckPanel);
+    }
+
+    protected void onDeckClicked(int iPlayer, DeckType type, List<String> selectedLines) {
+        // TODO Auto-generated method stub
+        String text = type.toString() + ": " + Lang.joinHomogenous(selectedLines);
+        deckSelectorBtns.get(iPlayer).setText(text);
     }
 
     /** Populates the deck panel with the focused player's deck choices. */

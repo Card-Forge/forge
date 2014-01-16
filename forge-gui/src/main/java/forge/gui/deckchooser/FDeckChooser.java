@@ -13,11 +13,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import com.google.common.base.Function;
 
 import forge.Command;
 import forge.Singletons;
@@ -61,6 +66,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private final ForgePreferences prefs = Singletons.getModel().getPreferences();
     private FPref stateSetting = null;
+    
+    private Function<ImmutablePair<DeckType, List<String>>, Void> onDeckSelected;
+    public void setChangeListener(Function<ImmutablePair<DeckType, List<String>>, Void> fn) {
+        onDeckSelected = fn;
+    }
 
     private final MouseAdapter madDecklist = new MouseAdapter() {
         @Override
@@ -70,6 +80,14 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                     DeckgenUtil.showDecklist(getDeck());
                 }
             }
+        }
+    };
+    
+    private final ListSelectionListener selChangeListener = new  ListSelectionListener(){
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if( null != onDeckSelected )
+                onDeckSelected.apply(ImmutablePair.of(selectedDeckType, getLstDecks().getSelectedValuesList()));
         }
     };
 
@@ -103,6 +121,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         final String[] listData = new String[] {"Random 1", "Random 2", "Random 3", "Black", "Blue", "Green", "Red", "White"};
         lst.setListData(listData);
         lst.setName(DeckgenUtil.DeckTypes.COLORS.toString());
+
+        lst.removeListSelectionListener(selChangeListener);
+        lst.addListSelectionListener(selChangeListener);
+
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
@@ -121,6 +143,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         final JList<String> lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+        lst.removeListSelectionListener(selChangeListener);
+        lst.addListSelectionListener(selChangeListener);
+       
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
@@ -150,6 +175,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         lst.setListData(listData.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         lst.setName(DeckgenUtil.DeckTypes.CUSTOM.toString());
+
+        lst.removeListSelectionListener(selChangeListener);
+        lst.addListSelectionListener(selChangeListener);
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
@@ -182,6 +210,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         lst.setListData(listData.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         lst.setName(DeckgenUtil.DeckTypes.PRECON.toString());
+
+        lst.removeListSelectionListener(selChangeListener);
+        lst.addListSelectionListener(selChangeListener);
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
@@ -212,6 +243,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         lst.setListData(listData.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
         lst.setName(DeckgenUtil.DeckTypes.QUESTEVENTS.toString());
+
+        lst.removeListSelectionListener(selChangeListener);
+        lst.addListSelectionListener(selChangeListener);
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
