@@ -12,6 +12,8 @@ Release Notes
 Recently a change was made to the constructed mode and this change now allows you to have up to 8 players rather than just two. The game formats that are located in the variants mode also allow up to eight players. The current user interface for this feature is fairly basic and is not very attractive. The settings tab allows you to set the number of opponents. The player tabs includes the same options that you used to see in the constructed mode.
 
 Marc recently sketched out a couple of attractive mockups that look far more attractive than what we were using till recently and are currently redesigning. The initial implementation of a new, more advanced, intuitive and better looking Constructed mode lobby screen is now available. It is a work in progress, so you should expect some rough edges and missing functionality, but the lobby screen is functional enough so it's possible to choose decks and player types and start the match normally.
+The ongoing discussion of this feature can be found in the following thread:
+http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=12609#p138913
 
 
 - Support for multiple card art -
