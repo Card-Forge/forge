@@ -282,7 +282,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     		addPlayerBtn.setEnabled(activePlayersNum < 7);
         	activePlayersNum++;
 
-        	avatarList.get(playerPanelList.indexOf(player)).grabFocus();
+        	avatarList.get(playerPanelList.indexOf(player)).requestFocusInWindow();
     		refreshPanels(true, false);
     	}
     }
@@ -293,7 +293,23 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	player.setVisible(false);
 		inactivePlayerPanelList.add(player);
 		activePlayerPanelList.remove(player);
+		addPlayerBtn.setEnabled(true);
 
+		//find closest player still in game and give focus
+		int min = 8;
+	    int closest = 2;
+
+	    for (int participantIndex : getParticipants()) {
+	        final int diff = Math.abs(playerIndex - participantIndex);
+
+	        if (diff < min) {
+	            min = diff;
+	            closest = participantIndex;
+	        }
+	    }
+
+	    changePlayerFocus(closest);
+	    avatarList.get(closest).requestFocusInWindow();
 		refreshPanels(true, false);
     }
 
@@ -339,7 +355,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     protected void onDeckClicked(int iPlayer, DeckType type, List<String> selectedLines) {
-        // TODO Auto-generated method stub
         String text = type.toString() + ": " + Lang.joinHomogenous(selectedLines);
         deckSelectorBtns.get(iPlayer).setText(text);
     }
