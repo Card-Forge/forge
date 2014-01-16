@@ -4,7 +4,6 @@ import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.sanctioned.VSubmenuConstructed;
 
 /** 
  * Controls the avatars submenu in the home UI.
