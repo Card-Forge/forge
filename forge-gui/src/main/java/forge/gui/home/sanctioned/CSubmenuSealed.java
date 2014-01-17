@@ -36,7 +36,6 @@ import forge.limited.SealedCardPoolGenerator;
 import forge.limited.SealedDeckBuilder;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
-import forge.util.MyRandom;
 import forge.util.storage.IStorage;
 
 /** 
