@@ -49,7 +49,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     private final JPanel pnlStrut = new JPanel();
     private final JPanel pnlDirections = new JPanel();
 
-    private final FDeckChooser lstLeft = new FDeckChooser("Deck", false);
+    private final FDeckChooser lstLeft = new FDeckChooser(false);
     private final JList<String> lstRight = new FList<String>();
 
     private final JScrollPane scrRight  = new FScrollPane(lstRight,

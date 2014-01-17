@@ -7,10 +7,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,13 +16,13 @@ import java.util.TreeSet;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
+
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -43,6 +40,7 @@ import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FComboBox;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPanel;
@@ -61,7 +59,6 @@ import forge.util.NameGenerator;
  *
  */
 public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
-    /** */
     SINGLETON_INSTANCE;
     private final static ForgePreferences prefs = Singletons.getModel().getPreferences();
 
@@ -69,22 +66,21 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Constructed Mode");
 
-    /** */
-    // General variables 
+    // General variables
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Constructed");
     private int activePlayersNum = 2;
     private int playerWithFocus = 0; // index of the player that currently has focus
 
-    private final JCheckBox cbSingletons = new FCheckBox("Singleton Mode");
-    private final JCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
-    private final JCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
+    private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
+    private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
+    private final FCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-    private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 5, wrap 2, fill")); // Main content frame
+    private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, fill")); // Main content frame
 
     // Variants frame and variables
     private final Set<GameType> appliedVariants = new TreeSet<GameType>();
-    private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 20, fillx, hmax 100, nogrid"));
+    private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
     private final FCheckBox vntVanguard = new FCheckBox("Vanguard");
     private final FCheckBox vntCommander = new FCheckBox("Commander");
     private final FCheckBox vntPlanechase = new FCheckBox("Planechase");
@@ -94,25 +90,24 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     		"Classic Archenemy (player 1 is Archenemy)", "Archenemy Rumble (All players are Archenemies)"});
 
     // Player frame elements
-    private final FPanel playersFrame = new FPanel(new MigLayout("insets 0, gapx 20, fill, w 50%"));
-    private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 8, gapx 20, fill"));
+    private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
+    private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"),
+            true, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     private final List<FPanel> playerPanelList = new ArrayList<FPanel>(8);
     private final List<FPanel> activePlayerPanelList = new ArrayList<FPanel>(8);
     private final List<FPanel> inactivePlayerPanelList = new ArrayList<FPanel>(6);
     private final List<FTextField> playerNameBtnList = new ArrayList<FTextField>(8);
     private final List<String> playerNames = new ArrayList<String>(8);
-    private final List<JRadioButton> playerTypeRadios = new ArrayList<JRadioButton>(8);
+    private final List<FRadioButton> playerTypeRadios = new ArrayList<FRadioButton>(8);
     private final List<FLabel> avatarList = new ArrayList<FLabel>(8);
     private final TreeMap<Integer, Integer> usedAvatars = new TreeMap<Integer, Integer>();
 
     private final List<FLabel> closePlayerBtnList = new ArrayList<FLabel>(6);
-    private final FLabel addPlayerBtn = new FLabel.Builder().opaque(true).hoverable(true).text("Add a Player").build();
+    private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text("Add a Player").build();
 
     // Deck frame elements
-    private final FPanel decksFrame = new FPanel(new MigLayout("insets 8, gapx 20, w 50%"));
-    private final List<FPanel> deckPanelListMain = new ArrayList<FPanel>(8);
+    private final JPanel decksFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>(8);
-    private final FLabel deckChooserHeader = new FLabel.Builder().opaque(true).fontStyle(1).build();
     private final List<FLabel> deckSelectorBtns = new ArrayList<FLabel>(8);
 
     // CTR
@@ -131,41 +126,53 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         comboArchenemy.setEnabled(vntArchenemy.isSelected());
         comboArchenemy.addActionListener(aeComboListener);
 
-        constructedFrame.add(newLabel("Variants:"), "wrap");
         variantsPanel.setOpaque(false);
-        variantsPanel.add(vntVanguard, "growx");
-        variantsPanel.add(vntCommander, "growx");
-        variantsPanel.add(vntPlanechase, "growx, wrap");
+        variantsPanel.add(newLabel("Variants:"));
+        variantsPanel.add(vntVanguard);
+        variantsPanel.add(vntCommander);
+        variantsPanel.add(vntPlanechase);
         variantsPanel.add(vntArchenemy);
-        variantsPanel.add(comboArchenemy, "pushx");
-        
-        constructedFrame.add(variantsPanel, "growx, spanx 2");
+        variantsPanel.add(comboArchenemy);
+
+        constructedFrame.add(variantsPanel, "w 100%, gapbottom 5px, spanx 2, wrap");
 
         ////////////////////////////////////////////////////////
         ///////////////////// Player Panel /////////////////////
 
         // Construct individual player panels
+        String constraints = "pushx, growx, wrap, hidemode 3";
         for (int i = 0; i < 8; i++) {
         	buildPlayerPanel(i);
         	FPanel player = playerPanelList.get(i);
 
         	// Populate players panel
         	if (i < activePlayersNum) {
-        		playersScroll.add(player, "pushx, growx, wrap, hidemode 3");
+        	    playersScroll.add(player, constraints);
         		activePlayerPanelList.add(player);
-        	} else {
+        	}
+        	else {
         		player.setVisible(false);
-        		playersScroll.add(player, "pushx, growx, wrap, hidemode 3");
+        		playersScroll.add(player, constraints);
         		inactivePlayerPanelList.add(player);
+        	}
+        	if (i == 0) {
+        	    constraints += ", gaptop 5px";
         	}
         }
 
+        playersFrame.setOpaque(false);
+        playersFrame.add(playersScroll, "grow, push");
+
         addPlayerBtn.setFocusable(true);
-        addPlayerBtn.addMouseListener(addOrRemoveMouseListener);
-        addPlayerBtn.addKeyListener(addOrRemoveKeyListener);
-    	playersScroll.add(addPlayerBtn, "height 40px, growx, pushx");
-        playersFrame.add(playersScroll, "grow, pushx, NORTH");
-        constructedFrame.add(playersFrame, "grow, push");
+        addPlayerBtn.setCommand(new Runnable() {
+            @Override
+            public void run() {
+                addPlayer();
+            }
+        });
+        playersFrame.add(addPlayerBtn, "height 30px!, growx, pushx");
+
+        constructedFrame.add(playersFrame, "gapright 6px, w 50%-3px, growy, pushy");
 
         ////////////////////////////////////////////////////////
         ////////////////////// Deck Panel //////////////////////
@@ -176,6 +183,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         populateDeckPanel(true);
         constructedFrame.add(decksFrame, "grow, push");
         constructedFrame.setOpaque(false);
+        decksFrame.setOpaque(false);
 
         // Start Button
         final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
@@ -188,18 +196,22 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     private FPanel buildPlayerPanel(final int playerIndex) {
         FPanel playerPanel = new FPanel();
-        playerPanel.setLayout(new MigLayout("insets 10, gap 5px"));
+        playerPanel.setLayout(new MigLayout("insets 10px, gap 5px"));
 
         // Add a button to players 3+ to remove them from the setup
         if (playerIndex >= 2) {
             final FLabel closeBtn = new FLabel.Builder().tooltip("Close").iconInBackground(false)
         			.icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_CLOSE)).hoverable(true).build();
-        	closeBtn.addMouseListener(addOrRemoveMouseListener);
-        	closeBtn.addKeyListener(addOrRemoveKeyListener);
+            closeBtn.setCommand(new Runnable() {
+                @Override
+                public void run() {
+                    removePlayer(closePlayerBtnList.indexOf(closeBtn) + 2);
+                }
+            });
         	playerPanel.add(closeBtn, "w 20, h 20, pos (container.w-20) 0");
         	closePlayerBtnList.add(closeBtn);
         }
-    	
+
         // Avatar
         final FLabel avatar = new FLabel.Builder().opaque(true).hoverable(true)
         		.iconScaleFactor(0.99f).iconInBackground(true).build();
@@ -216,7 +228,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         avatar.addFocusListener(avatarFocusListener);
         avatar.addMouseListener(avatarMouseListener);
         avatarList.add(avatar);
-        
+
         playerPanel.add(avatar, "spany 2, width 80px, height 80px");
 
         // Name
@@ -230,12 +242,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	name = NameGenerator.getRandomName("Any", "Any", playerNames);
         }
     	playerNames.add(name);
-        final FTextField playerNameField = new FTextField.Builder().ghostText(name).text(name).build();
+        final FTextField playerNameField = new FTextField.Builder().text(name).build();
         playerNameField.setFocusable(true);
+        playerNameField.setFont(FSkin.getFont(14));
         playerNameField.addActionListener(nameListener);
         playerNameField.addFocusListener(nameFocusListener);
-        playerPanel.add(newLabel("Player Name:"),"height 35px, gapx rel");
-        playerPanel.add(playerNameField, "height 35px, gapy 5px, gapx unrel, pushx, growx, wrap 5");
+        playerPanel.add(newLabel("Name:"), "height 30px, gaptop 5px, gapx rel");
+        playerPanel.add(playerNameField, "height 30px, pushx, growx");
         playerNameBtnList.add(playerNameField);
 
         // PlayerType
@@ -248,23 +261,25 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         tmpAI.setText("AI");
         tmpAI.setSelected(playerIndex != 0);
         tmpAI.addFocusListener(radioFocusListener);
-
-        FPanel typeBtnPanel = new FPanel();
-        typeBtnPanel.add(tmpHuman);
-        typeBtnPanel.add(tmpAI);
-        playerPanel.add(newLabel("Player Type:"), "height 35px, gapx rel");
-        playerPanel.add(typeBtnPanel, "height 35px, gapy 5px, gapx unrel, pushx, growx, wrap");
-
         tempBtnGroup.add(tmpHuman);
         tempBtnGroup.add(tmpAI);
         playerTypeRadios.add(tmpHuman);
         playerTypeRadios.add(tmpAI);
 
+        playerPanel.add(tmpHuman, "gapright 5px");
+        playerPanel.add(tmpAI, "wrap");
+
         // Deck selector button
-        FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
+        final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
         deckBtn.addFocusListener(deckLblFocusListener);
-        deckBtn.addMouseListener(deckLblMouseListener);
-        playerPanel.add(deckBtn, "height 30px, gapy 5px, growx, wrap, span 3 1");
+        deckBtn.setCommand(new Runnable() {
+            @Override
+            public void run() {
+                changePlayerFocus(deckSelectorBtns.indexOf(deckBtn));
+            }
+        });
+        playerPanel.add(newLabel("Deck:"), "height 30px, gapx rel");
+        playerPanel.add(deckBtn, "height 30px, growx, pushx, spanx 3");
         deckSelectorBtns.add(deckBtn);
 
         playerPanelList.add(playerPanel);
@@ -314,7 +329,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     public void updatePlayerName(int playerIndex) {
 		String name = prefs.getPref(FPref.PLAYER_NAME);
-		playerNameBtnList.get(0).setGhostText(name);
 		playerNameBtnList.get(0).setText(name);
     }
 
@@ -331,12 +345,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         }
     }
 
-    /** Applies a random avatar, avoiding avatars already used. 
+    /** Applies a random avatar, avoiding avatars already used.
      * @param playerIndex */
     private void setRandomAvatar(FLabel avatar, int playerIndex) {
         int random = 0;
         do {
-            random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size()); 
+            random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
         } while (usedAvatars.values().contains(random));
 
         avatar.setIcon(FSkin.getAvatars().get(random));
@@ -349,12 +363,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     @SuppressWarnings("serial")
     private void buildDeckPanel(final int playerIndex) {
     	String sectionConstraints = "insets 8";
-    	
+
         // Main deck
         FPanel mainDeckPanel = new FPanel();
         mainDeckPanel.setLayout(new MigLayout(sectionConstraints));
 
-        final FDeckChooser mainChooser = new FDeckChooser("Main deck:", isPlayerAI(playerIndex));
+        final FDeckChooser mainChooser = new FDeckChooser(isPlayerAI(playerIndex));
         mainChooser.initialize();
         mainChooser.getLstDecks().setSelectCommand(new Command() {
             @Override
@@ -364,7 +378,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         });
         deckChoosers.add(mainChooser);
         mainDeckPanel.add(mainChooser, "grow, push, wrap");
-        deckPanelListMain.add(mainDeckPanel);
     }
 
     protected void onDeckClicked(int iPlayer, DeckType type, Iterable<Deck> selectedDecks) {
@@ -376,11 +389,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private void populateDeckPanel(final boolean firstBuild) {
     	if (!firstBuild) { decksFrame.removeAll(); }
 
-        String name = getPlayerName(playerWithFocus);
-        deckChooserHeader.setText("Select a deck for " + name);
-
-    	decksFrame.add(deckChooserHeader, "gap 0, pushx, growx, w 100%, h 35, wrap");
-    	decksFrame.add(deckPanelListMain.get(playerWithFocus), "gap 0, grow, push, wrap");
+    	decksFrame.add(deckChoosers.get(playerWithFocus), "grow, push");
     }
 
     /** Updates the deck selector button in all player panels. */
@@ -407,7 +416,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     public EMenuGroup getGroupEnum() {
         return EMenuGroup.SANCTIONED;
     }
-    
+
     public final FDeckChooser getDeckChooser(int playernum) {
     	return deckChoosers.get(playernum);
     }
@@ -445,7 +454,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	fdc.populate();
         }
     	updateDeckSelectorLabels();
-        
+
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(constructedFrame, "gap 20px 20px 20px 0px, push, grow");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 0 3.5%! 3.5%!, ax center");
 
@@ -465,11 +474,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	// so playernum * 2 + 1 points to the appropriate AI radio.
     	return playerTypeRadios.get(playernum * 2 + 1).isSelected();
     }
-    
+
     public int getNumPlayers() {
         return activePlayersNum;
     }
-    
+
     public final List<Integer> getParticipants() {
     	final List<Integer> participants = new ArrayList<Integer>(activePlayersNum);
     	for (final FPanel panel : activePlayerPanelList) {
@@ -477,7 +486,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	}
         return participants;
     }
-    
+
     public final String getPlayerName(int playerIndex) {
     	return playerNameBtnList.get(playerIndex).getText();
     }
@@ -490,11 +499,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /** Revalidates the player and deck sections. Necessary after adding or hiding any panels. */
     private void refreshPanels(boolean refreshPlayerFrame, boolean refreshDeckFrame) {
     	if (refreshPlayerFrame) {
-    	    playersFrame.validate();
-    	    playersFrame.repaint();
+    	    playersScroll.validate();
+    	    playersScroll.repaint();
     	}
     	if (refreshDeckFrame) {
-    	    decksFrame.validate();
+            decksFrame.validate();
     	    decksFrame.repaint();
     	}
     }
@@ -514,7 +523,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 	    	}*/
 
 			changeAvatarFocus();
-        	playersScroll.getViewport().scrollRectToVisible(playerPanel.getBounds());
+			playersScroll.getViewport().scrollRectToVisible(playerPanel.getBounds());
 			populateDeckPanel(false);
 
 			refreshPanels(true, true);
@@ -548,9 +557,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** Adds a pre-styled FLabel component with the specified title. */
     private FLabel newLabel(String title) {
-    	FLabel label = new FLabel.Builder().text(title).fontSize(11).fontStyle(Font.ITALIC).build();
-
-    	return label;
+    	return new FLabel.Builder().text(title).fontSize(14).fontStyle(Font.ITALIC).build();
     }
 
     /////////////////////////////////////////////
@@ -558,8 +565,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** This listener unlocks the relevant buttons for players
      * and enables/disables archenemy combobox as appropriate. */
-    ItemListener iListenerVariants = new ItemListener() {
-
+    private ItemListener iListenerVariants = new ItemListener() {
         @Override
         public void itemStateChanged(ItemEvent arg0) {
             FCheckBox cb = (FCheckBox) arg0.getSource();
@@ -600,8 +606,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     };
 
     // Listens to the archenemy combo box
-    ActionListener aeComboListener = new ActionListener() {
-
+    private ActionListener aeComboListener = new ActionListener() {
     	@SuppressWarnings("unchecked")
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -616,7 +621,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** Listens to avatar buttons and gives the appropriate player focus. */
     private FocusListener avatarFocusListener = new FocusListener() {
-
 		@Override
     	public void focusGained(FocusEvent e) {
     		int avatarOwnerID = avatarList.indexOf((FLabel)e.getSource());
@@ -625,74 +629,41 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
 		@Override
 		public void focusLost(FocusEvent e) {
-			
+
 		}
     };
 
-    private MouseListener avatarMouseListener = new MouseListener() {
-
+    private FMouseAdapter avatarMouseListener = new FMouseAdapter() {
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
+		public void onLeftClick(MouseEvent e) {
 			FLabel avatar = (FLabel)e.getSource();
 			int playerIndex = avatarList.indexOf(avatar);
 
 			changePlayerFocus(playerIndex);
 
-			if (e.getButton() == 1) {
-				avatar.grabFocus();
-				// TODO: Do avatar selection, giving current avatar focus for keyboard control
-			}
-
-			if (e.getButton() == 3) {
-				setRandomAvatar(avatar, playerIndex);
-				avatar.grabFocus();
-			}
+			avatar.grabFocus();
+			// TODO: Do avatar selection, giving current avatar focus for keyboard control
 
 			if (playerIndex < 2) { updateAvatarPrefs(); }
 		}
-
 		@Override
-		public void mouseEntered(MouseEvent e) {
-			
-		}
+        public void onRightClick(MouseEvent e) {
+            FLabel avatar = (FLabel)e.getSource();
+            int playerIndex = avatarList.indexOf(avatar);
 
-		@Override
-		public void mouseExited(MouseEvent e) {
-			
-		}
+            changePlayerFocus(playerIndex);
+
+            setRandomAvatar(avatar, playerIndex);
+            avatar.grabFocus();
+
+            if (playerIndex < 2) { updateAvatarPrefs(); }
+        }
     };
 
-    /** Listens to the name text field and resets the adjusts player 1's name preference. */
     private ActionListener nameListener = new ActionListener() {
-
     	@Override
 		public void actionPerformed(ActionEvent e) {
 			FTextField nField = (FTextField)e.getSource();
-			String newName = nField.getText().trim();
-			String oldName = nField.getGhostText().trim();
-
-			if (!StringUtils.isEmpty(newName) && !StringUtils.isBlank(newName)
-					&& StringUtils.isAlphanumericSpace(newName) && !newName.equals(oldName)) {
-				nField.setGhostText(newName);
-
-		        deckChooserHeader.setText("Select a deck for " + newName); 
-
-				if (playerNameBtnList.indexOf(nField) == 0) {
-				    prefs.setPref(FPref.PLAYER_NAME, newName);
-		            prefs.save();
-				}
-			}
-
 			nField.transferFocus();
 		}
     };
@@ -700,7 +671,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /** Listens to name text fields and gives the appropriate player focus.
      *  Also saves the name preference when leaving player one's text field. */
     private FocusListener nameFocusListener = new FocusListener() {
-
 		@Override
 		public void focusGained(FocusEvent e) {
 			FTextField nField = (FTextField)e.getSource();
@@ -711,26 +681,19 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		@Override
 		public void focusLost(FocusEvent e) {
 			FTextField nField = (FTextField)e.getSource();
-			String newName = nField.getText().trim();
-			String oldName = nField.getGhostText().trim();
-
-			if (!StringUtils.isEmpty(newName) && !StringUtils.isBlank(newName)
-					&& StringUtils.isAlphanumericSpace(newName) && !newName.equals(oldName)) {
-				nField.setGhostText(newName);
-
-		        deckChooserHeader.setText("Select a deck for " + newName); 
-
-				if (playerNameBtnList.indexOf(nField) == 0) {
-				    prefs.setPref(FPref.PLAYER_NAME, newName);
-		            prefs.save();
-				}
-			}				
+			if (playerNameBtnList.indexOf(nField) == 0) {
+			    String newName = nField.getText().trim();
+			    if (!StringUtils.isBlank(newName) && StringUtils.isAlphanumericSpace(newName) &&
+			            prefs.getPref(FPref.PLAYER_NAME) != newName) {
+                    prefs.setPref(FPref.PLAYER_NAME, newName);
+                    prefs.save();
+                }
+			}
 		}
     };
 
     /** Listens to name player type radio buttons and gives the appropriate player focus. */
     private FocusListener radioFocusListener = new FocusListener() {
-
 		@Override
     	public void focusGained(FocusEvent e) {
     		int radioID = playerTypeRadios.indexOf((FRadioButton)e.getSource());
@@ -740,13 +703,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
 		@Override
 		public void focusLost(FocusEvent e) {
-			
+
 		}
     };
 
     /** Listens to deck select buttons and gives the appropriate player focus. */
     private FocusListener deckLblFocusListener = new FocusListener() {
-
 		@Override
     	public void focusGained(FocusEvent e) {
     		int deckLblID = deckSelectorBtns.indexOf((FLabel)e.getSource());
@@ -756,93 +718,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
 		@Override
 		public void focusLost(FocusEvent e) {
-			
-		}
-    };
 
-    private MouseListener deckLblMouseListener = new MouseListener() {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			FLabel deckLbl = (FLabel)e.getSource();
-			changePlayerFocus(deckSelectorBtns.indexOf(deckLbl));
-			// TODO: Give focus to deck chooser
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			
-		}
-    };
-
-    private MouseListener addOrRemoveMouseListener = new MouseListener() {
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			FLabel btn = (FLabel)e.getSource();
-			if (btn == addPlayerBtn) {
-				addPlayer();
-			} else {
-				removePlayer(closePlayerBtnList.indexOf(btn) + 2);
-			}
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			
-		}
-    };
-
-    private KeyListener addOrRemoveKeyListener = new KeyListener() {
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-			
-		}
-
-		@Override
-		public void keyPressed(KeyEvent e) {
-			
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			FLabel btn = (FLabel)e.getSource();
-			if (btn == addPlayerBtn) {
-				addPlayer();
-			} else {
-				removePlayer(closePlayerBtnList.indexOf(btn) + 2);
-			}
 		}
     };
 
@@ -888,5 +764,4 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     public DragCell getParentCell() {
         return parentCell;
     }
-
 }

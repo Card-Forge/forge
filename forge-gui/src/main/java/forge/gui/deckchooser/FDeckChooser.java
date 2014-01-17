@@ -36,14 +36,14 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private DeckType selectedDeckType = DeckType.COLOR_DECK;
 
     private final DeckManager lstDecks = new DeckManager(GameType.Constructed);
-    private final FLabel btnRandom = new FLabel.ButtonBuilder().text("Random").fontSize(16).build();
+    private final FLabel btnRandom = new FLabel.ButtonBuilder().text("Random").fontSize(14).build();
 
     private boolean isAi;
 
     private final ForgePreferences prefs = Singletons.getModel().getPreferences();
     private FPref stateSetting = null;
 
-    public FDeckChooser(final String titleText, boolean forAi, boolean canSwitchType) {
+    public FDeckChooser(boolean forAi) {
         setOpaque(false);
         isAi = forAi;
         lstDecks.setItemActivateCommand(new Command() {
@@ -54,10 +54,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 }
             }
         });
-    }
-
-    public FDeckChooser(String titleText, boolean forAi) {
-        this(titleText, forAi, false);
     }
 
     public void initialize() {
@@ -291,9 +287,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         setupUI();
         removeAll();
         this.setLayout(new MigLayout("insets 0, gap 0, flowy"));
-        this.add(decksComboBox.getComponent(), "w 10:100%, h 30px!, gapbottom 3px");
+        this.add(decksComboBox.getComponent(), "w 10:100%, h 30px!, gapbottom 5px");
         this.add(new ItemManagerContainer(lstDecks), "w 10:100%, growy, pushy");
-        this.add(btnRandom, "w 10:100%, h 26px!, gaptop 3px");
+        this.add(btnRandom, "w 10:100%, h 30px!, gaptop 5px");
         if (isShowing()) {
             validate();
             repaint();

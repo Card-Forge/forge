@@ -122,7 +122,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
             FPanel tempPanel = new FPanel();
             tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy, ax center"));
 
-            FDeckChooser tempChooser = new FDeckChooser("Select deck:", i != 0);
+            FDeckChooser tempChooser = new FDeckChooser(i != 0);
             tempChooser.initialize();
 
             deckChoosers.add(tempChooser);

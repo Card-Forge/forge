@@ -125,7 +125,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
             tempPanel = new FPanel();
             tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy, ax center"));
 
-            tempChooser = new FDeckChooser("Select deck:", i != 0);
+            tempChooser = new FDeckChooser(i != 0);
             tempChooser.initialize();
 
             deckChoosers.add(tempChooser);

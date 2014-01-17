@@ -16,6 +16,7 @@ public class FCheckBox extends SkinnedCheckBox {
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setFont(FSkin.getFont(14));
         this.setOpaque(false);
+        this.setFocusable(false);
     }
     
     public FCheckBox(final String s0, boolean checked) {
