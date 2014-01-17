@@ -10,26 +10,30 @@ Deck Type=constructed
 Set=ARB
 Image=dead_ahead.jpg
 [main]
-2 Igneous Pouncer|ARB
-2 Terminate|ARB
-1 Leonin Scimitar|10E
 1 Bituminous Blast|ARB
-1 Dreg Reaver|ALA
-2 Sanity Gnawers|ARB
-1 Cruel Edict|10E
-1 Breath of Malfegor|ARB
-1 Viashino Skeleton|ALA
-1 Lightning Reaver|ARB
 1 Blightning|ALA
-1 Monstrous Carabid|ARB
-1 Deathbringer Thoctar|ARB
-1 Singe-Mind Ogre|ARB
-1 Bog Wraith|10E
 1 Blister Beetle|ALA
 1 Blood Cultist|ALA
+1 Bog Wraith|10E
+1 Breath of Malfegor|ARB
+1 Cruel Edict|10E
+1 Deathbringer Thoctar|ARB
+1 Dreg Reaver|ALA
 2 Dregscape Zombie|ALA
-1 Viscera Dragger|ALA
-8 Mountain|ALA
-8 Swamp|ALA
+2 Igneous Pouncer|ARB
+1 Leonin Scimitar|10E
+1 Lightning Reaver|ARB
+1 Monstrous Carabid|ARB
+2 Mountain|ALA|1
+3 Mountain|ALA|2
+3 Mountain|ALA|3
+2 Sanity Gnawers|ARB
+1 Singe-Mind Ogre|ARB
+3 Swamp|ALA|2
+3 Swamp|ALA|3
+2 Swamp|ALA|4
+2 Terminate|ARB
 2 Terramorphic Expanse|10E
+1 Viashino Skeleton|ALA
+1 Viscera Dragger|ALA
 [sideboard]

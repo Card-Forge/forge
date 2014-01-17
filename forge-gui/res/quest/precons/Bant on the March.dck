@@ -10,27 +10,28 @@ Deck Type=constructed
 Set=CFX
 Image=bant_on_the_march.jpg
 [main]
-3 Forest|ALA
-3 Island|ALA
-7 Plains|ALA
 1 Aerie Mystics|CFX
+1 Asha's Favor|CFX
 2 Aven Squire|CFX
 1 Deft Duelist|ALA
+3 Forest|ALA|4
 1 Frontline Sage|CFX
 1 Giltspire Avenger|CFX
+2 Gleam of Resistance|CFX
+1 Gwafa Hazid, Profiteer|CFX
+3 Island|ALA|1
 1 Jhessian Balmgiver|CFX
 1 Outrider of Jhess|ALA
+2 Pacifism|10E
+4 Plains|ALA|2
+3 Plains|ALA|3
 2 Rhox Bodyguard|CFX
 1 Rhox Meditant|CFX
 1 Rhox War Monk|ALA
+2 Seaside Citadel|ALA
 2 Skyward Eye Prophets|CFX
 1 Suntail Hawk|10E
-2 Valeron Outlander|CFX
-1 Asha's Favor|CFX
-2 Pacifism|10E
-2 Gleam of Resistance|CFX
-1 Unsummon|CFX
-2 Seaside Citadel|ALA
 2 Terramorphic Expanse|10E
-1 Gwafa Hazid, Profiteer|CFX
+1 Unsummon|CFX
+2 Valeron Outlander|CFX
 [sideboard]

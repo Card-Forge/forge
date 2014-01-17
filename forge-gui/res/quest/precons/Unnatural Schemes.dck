@@ -10,23 +10,27 @@ Deck Type=constructed
 Set=ARB
 Image=unnatural_schemes.jpg
 [main]
-1 Vedalken Ghoul|ARB
-1 Soul Manipulation|ARB
-2 Tidehollow Strix|ALA
-1 Phantom Warrior|10E
-1 Deny Reality|ARB
-2 Architects of Will|ARB
-2 Nantuko Husk|10E
-1 Brainbite|ARB
-2 Jhessian Zombies|ARB
 2 Agony Warp|ALA
-2 Grixis Slavedriver|CFX
-2 Essence Drain|10E
-1 Lich Lord of Unx|ARB
-1 Nemesis of Reason|ARB
+2 Architects of Will|ARB
+1 Brainbite|ARB
 1 Countersquall|CFX
+1 Deny Reality|ARB
+2 Essence Drain|10E
 1 Fatestitcher|ALA
-8 Swamp|ALA
-8 Island|ALA
+2 Grixis Slavedriver|CFX
+3 Island|ALA|2
+3 Island|ALA|3
+2 Island|ALA|4
+2 Jhessian Zombies|ARB
+1 Lich Lord of Unx|ARB
+2 Nantuko Husk|10E
+1 Nemesis of Reason|ARB
+1 Phantom Warrior|10E
+1 Soul Manipulation|ARB
+2 Swamp|ALA|1
+3 Swamp|ALA|2
+3 Swamp|ALA|3
 2 Terramorphic Expanse|10E
+2 Tidehollow Strix|ALA
+1 Vedalken Ghoul|ARB
 [sideboard]

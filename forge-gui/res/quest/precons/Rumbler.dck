@@ -16,12 +16,16 @@ Image=rumbler.jpg
 1 Colossal Might|ARB
 2 Dragon Fodder|ALA
 1 Elvish Visionary|ALA
-8 Forest|ALA
+2 Forest|ALA|1
+3 Forest|ALA|2
+3 Forest|ALA|3
 1 Gluttonous Slime|CFX
 1 Godtracker of Jund|ARB
 1 Gorger Wurm|ARB
 2 Incinerate|10E
-8 Mountain|ALA
+3 Mountain|ALA|1
+2 Mountain|ALA|2
+2 Mountain|ALA|3
 1 Rhox Brute|ARB
 1 Rockslide Elemental|ALA
 1 Sangrite Surge|ALA

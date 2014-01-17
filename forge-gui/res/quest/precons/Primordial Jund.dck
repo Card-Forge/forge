@@ -13,13 +13,14 @@ Image=primordial_jund.jpg
 2 Carrion Thrash|ALA
 2 Dragon Fodder|ALA
 1 Flameblast Dragon|ALA
-3 Forest|ALA
+3 Forest|ALA|1
 2 Goblin Deathraiders|ALA
 2 Goblin Piker|10E
 2 Hissing Iguanar|ALA
 2 Jund Battlemage|ALA
 2 Jund Panorama|ALA
-7 Mountain|ALA
+4 Mountain|ALA|2
+3 Mountain|ALA|3
 1 Mycoloth|ALA
 1 Obelisk of Jund|ALA
 1 Resounding Thunder|ALA
@@ -27,7 +28,7 @@ Image=primordial_jund.jpg
 2 Savage Lands|ALA
 2 Shock|10E
 2 Sprouting Thrinax|ALA
-3 Swamp|ALA
+3 Swamp|ALA|4
 2 Thorn-Thrash Viashino|ALA
 1 Thunder-Thrash Elder|ALA
 [sideboard]

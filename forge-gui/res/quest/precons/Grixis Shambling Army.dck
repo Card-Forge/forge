@@ -10,27 +10,28 @@ Deck Type=constructed
 Set=CFX
 Image=grixis_shambling_army.jpg
 [main]
-1 Bone Saw|CFX
-3 Island|ALA
-3 Mountain|ALA
-7 Swamp|ALA
+2 Absorb Vis|CFX
+1 Agony Warp|ALA
 1 Blood Tyrant|CFX
+1 Bone Saw|CFX
 1 Brackwater Elemental|CFX
+2 Crumbling Necropolis|ALA
 1 Dregscape Zombie|ALA
+1 Elder Mastery|CFX
 1 Extractor Demon|CFX
 1 Fire-Field Ogre|ALA
 2 Grixis Slavedriver|CFX
+1 Infest|ALA
+3 Island|ALA|4
 2 Kathari Screecher|ALA
 1 Kederekt Creeper|ALA
+3 Mountain|ALA|1
 1 Pestilent Kathari|CFX
 2 Sedraxis Alchemist|CFX
-2 Zombie Outlander|CFX
-1 Elder Mastery|CFX
-1 Agony Warp|ALA
 2 Shock|10E
-1 Terror|10E
-2 Crumbling Necropolis|ALA
+4 Swamp|ALA|2
+3 Swamp|ALA|3
 2 Terramorphic Expanse|10E
-2 Absorb Vis|CFX
-1 Infest|ALA
+1 Terror|10E
+2 Zombie Outlander|CFX
 [sideboard]

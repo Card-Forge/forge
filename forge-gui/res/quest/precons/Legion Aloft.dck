@@ -17,8 +17,12 @@ Image=legion_aloft.jpg
 2 Sanctum Plowbeast|ARB
 1 Protomatter Powder|ALA
 1 Kiss of the Amesha|ALA
-8 Island|ALA
-8 Plains|ALA
+2 Island|ALA|1
+3 Island|ALA|2
+3 Island|ALA|3
+3 Plains|ALA|2
+3 Plains|ALA|3
+2 Plains|ALA|4
 1 Metallurgeon|ALA
 1 Etherium Sculptor|ALA
 1 Path to Exile|CFX
