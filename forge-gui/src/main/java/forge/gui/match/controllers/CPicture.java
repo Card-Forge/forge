@@ -62,6 +62,10 @@ public enum CPicture implements ICDoc {
      * 
      */
     public void showCard(final Card c, boolean showFlipped) {       
+        if (null == c) {
+            return;
+        }
+
         currentCard = c; 
         displayedState = c.getCurState();
         flipIndicator.setVisible(isCurrentCardFlippable());
