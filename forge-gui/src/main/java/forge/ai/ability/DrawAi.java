@@ -66,7 +66,7 @@ public class DrawAi extends SpellAbilityAi {
             }
 
             if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
-                AiCostDecision aiDecisions = new AiCostDecision(ai, sa, source);
+                AiCostDecision aiDecisions = new AiCostDecision(ai, sa);
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         PaymentDecision decision = part.accept(aiDecisions);

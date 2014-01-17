@@ -29,8 +29,12 @@ public class CostPartMana extends CostPart {
     // "Leftover"
     private final ManaCost cost;
     private boolean xCantBe0 = false;
+    private boolean isRememberedCreatureCost = false;
     private final String restriction;
 
+    public boolean shouldPayLast() {
+        return isRememberedCreatureCost;
+    }
     /**
      * Instantiates a new cost mana.
      * 
@@ -43,7 +47,8 @@ public class CostPartMana extends CostPart {
     public CostPartMana(final ManaCost cost, String restriction) {
         this.cost = cost;
         this.xCantBe0 = "XCantBe0".equals(restriction);
-        this.restriction = xCantBe0 ? null : restriction;
+        this.isRememberedCreatureCost = "Remembered".equalsIgnoreCase(restriction);
+        this.restriction = xCantBe0 || isRememberedCreatureCost ? null : restriction;
     }
 
     /**

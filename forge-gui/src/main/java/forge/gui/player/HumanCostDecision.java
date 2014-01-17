@@ -25,6 +25,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.CostAddMana;
 import forge.game.cost.CostChooseCreatureType;
 import forge.game.cost.CostDamage;
+import forge.game.cost.CostDecisionMakerBase;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostDraw;
 import forge.game.cost.CostExile;
@@ -47,7 +48,6 @@ import forge.game.cost.CostTapType;
 import forge.game.cost.CostUnattach;
 import forge.game.cost.CostUntap;
 import forge.game.cost.CostUntapType;
-import forge.game.cost.ICostVisitor;
 import forge.game.cost.PaymentDecision;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -59,14 +59,13 @@ import forge.gui.input.InputSelectManyBase;
 import forge.util.Aggregates;
 import forge.util.Lang;
 
-public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
+public class HumanCostDecision extends CostDecisionMakerBase {
 
-    private final Player payer;
     private final SpellAbility ability;
     private final Card source;
     
     public HumanCostDecision(Player p, SpellAbility sa, Card source) {
-        payer = p;
+        super(p);
         ability = sa;
         this.source = source;
     }
@@ -77,7 +76,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             return AbilityFactory.calculateAmount(card, "ChosenX", null);
         }*/
 
-        int chosenX = payer.getController().chooseNumber(ability, source.toString() + " - Choose a Value for X", 0, maxValue);
+        int chosenX = player.getController().chooseNumber(ability, source.toString() + " - Choose a Value for X", 0, maxValue);
         ability.setSVar("ChosenX", Integer.toString(chosenX));
         source.setSVar("ChosenX", Integer.toString(chosenX));
         return chosenX;
@@ -94,7 +93,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
 
     @Override
     public PaymentDecision visit(CostChooseCreatureType cost) {
-        String choice = payer.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>(), true);
+        String choice = player.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>(), true);
         if( null == choice )
             return null;
         return PaymentDecision.type(choice);
@@ -102,7 +101,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
 
     @Override
     public PaymentDecision visit(CostDiscard cost) {
-        List<Card> handList = new ArrayList<Card>(payer.getCardsIn(ZoneType.Hand));
+        List<Card> handList = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
         String discardType = cost.getType();
         final String amount = cost.getAmount();
 
@@ -115,7 +114,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         if (discardType.equals("LastDrawn")) {
-            final Card lastDrawn = payer.getLastDrawnCard();
+            final Card lastDrawn = player.getLastDrawnCard();
             return handList.contains(lastDrawn) ? PaymentDecision.card(lastDrawn) : null;
         }
 
@@ -137,7 +136,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         }
         if (discardType.contains("+WithSameName")) {
             String type = discardType.replace("+WithSameName", "");
-            handList = CardLists.getValidCards(handList, type.split(";"), payer, source);
+            handList = CardLists.getValidCards(handList, type.split(";"), player, source);
             final List<Card> landList2 = handList;
             handList = CardLists.filter(handList, new Predicate<Card>() {
                 @Override
@@ -171,7 +170,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         
         String type = new String(discardType);
         final String[] validType = type.split(";");
-        handList = CardLists.getValidCards(handList, validType, payer, source);
+        handList = CardLists.getValidCards(handList, validType, player, source);
 
         if (c == null) {
             final String sVar = ability.getSVar(amount);
@@ -198,7 +197,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
     @Override
     public PaymentDecision visit(CostDamage cost) {
         final String amount = cost.getAmount();
-        final int life = payer.getLife();
+        final int life = player.getLife();
 
         Integer c = cost.convertAmount();
         if (c == null) {
@@ -212,7 +211,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             }
         }
 
-        if (payer.canPayLife(c) && payer.getController().confirmPayment(cost, "Pay " + c + " Life?")) {
+        if (player.canPayLife(c) && player.getController().confirmPayment(cost, "Pay " + c + " Life?")) {
             return PaymentDecision.number(c);
         }
         return null;
@@ -227,7 +226,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        if (!payer.getController().confirmPayment(cost, "Draw " + c + " Card" + (c == 1 ? "" : "s"))) {
+        if (!player.getController().confirmPayment(cost, "Draw " + c + " Card" + (c == 1 ? "" : "s"))) {
             return null;
         }
 
@@ -237,7 +236,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
     @Override
     public PaymentDecision visit(CostExile cost) {
         final String amount = cost.getAmount();
-        final Game game = payer.getGame(); 
+        final Game game = player.getGame(); 
 
         Integer c = cost.convertAmount();
         String type = cost.getType();
@@ -258,18 +257,18 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             list = new ArrayList<Card>(game.getCardsIn(cost.from));
         }
         else {
-            list = new ArrayList<Card>(payer.getCardsIn(cost.from));
+            list = new ArrayList<Card>(player.getCardsIn(cost.from));
         }
 
         if (cost.payCostFromSource()) {
-            return source.getZone() == payer.getZone(cost.from) && payer.getController().confirmPayment(cost, "Exile " + source.getName() + "?") ? PaymentDecision.card(source) : null;
+            return source.getZone() == player.getZone(cost.from) && player.getController().confirmPayment(cost, "Exile " + source.getName() + "?") ? PaymentDecision.card(source) : null;
 
         }
 
         if (type.equals("All")) {
             return PaymentDecision.card(list);
         }
-        list = CardLists.getValidCards(list, type.split(";"), payer, source);
+        list = CardLists.getValidCards(list, type.split(";"), player, source);
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
@@ -290,7 +289,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         if (cost.from == ZoneType.Stack) { return exileFromStack(cost, ability, c); }
-        if (cost.from == ZoneType.Library) { return exileFromTop(cost, ability, payer, c); }
+        if (cost.from == ZoneType.Library) { return exileFromTop(cost, ability, player, c); }
         if (fromTopGrave) { return exileFromTopGraveType(ability, c, list); }
         if (!cost.sameZone) { return exileFromMiscZone(cost, ability, c, list); }
 
@@ -383,12 +382,12 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         return PaymentDecision.card(exiled);
     }
 
-    private PaymentDecision exileFromTop(final CostExile cost, final SpellAbility sa, final Player payer, final int nNeeded) {
+    private PaymentDecision exileFromTop(final CostExile cost, final SpellAbility sa, final Player player, final int nNeeded) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Exile ").append(nNeeded).append(" cards from the top of your library?");
-        final List<Card> list = payer.getCardsIn(ZoneType.Library, nNeeded);
+        final List<Card> list = player.getCardsIn(ZoneType.Library, nNeeded);
 
-        if (list.size() > nNeeded || !payer.getController().confirmPayment(cost, "Exile " + Lang.nounWithAmount(nNeeded, "card") + " from the top of your library?")) {
+        if (list.size() > nNeeded || !player.getController().confirmPayment(cost, "Exile " + Lang.nounWithAmount(nNeeded, "card") + " from the top of your library?")) {
             return null;
         }
 
@@ -463,8 +462,8 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
-        final List<Card> list = payer.getCardsIn(ZoneType.Battlefield);
-        List<Card> validCards = CardLists.getValidCards(list, cost.getType().split(";"), payer, source);
+        final List<Card> list = player.getCardsIn(ZoneType.Battlefield);
+        List<Card> validCards = CardLists.getValidCards(list, cost.getType().split(";"), player, source);
 
         InputSelectCardsFromList inp = new InputSelectCardsFromList(c, validCards);
         final String desc = cost.getTypeDescription() == null ? cost.getType() : cost.getTypeDescription();
@@ -480,7 +479,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
     public PaymentDecision visit(CostGainLife cost) {
         final String amount = cost.getAmount();
 
-        final int life = payer.getLife();
+        final int life = player.getLife();
 
         Integer c = cost.convertAmount();
         if (c == null) {
@@ -494,7 +493,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
-        for (final Player opp : cost.getPotentialTargets(payer, source)) {
+        for (final Player opp : cost.getPotentialTargets(player, source)) {
             if (opp.canGainLife()) {
                 oppsThatCanGainLife.add(opp);
             }
@@ -528,16 +527,16 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             }
         }
 
-        if (!payer.getController().confirmPayment(cost, "Mill " + c + " card" + (c == 1 ? "" : "s") + " from your library?")) {
+        if (!player.getController().confirmPayment(cost, "Mill " + c + " card" + (c == 1 ? "" : "s") + " from your library?")) {
             return null;
         }
-        return PaymentDecision.card(payer.getCardsIn(ZoneType.Library, c));
+        return PaymentDecision.card(player.getCardsIn(ZoneType.Library, c));
     }
 
     @Override
     public PaymentDecision visit(CostPayLife cost) {
         final String amount = cost.getAmount();
-        final int life = payer.getLife();
+        final int life = player.getLife();
 
         Integer c = cost.convertAmount();
         if (c == null) {
@@ -555,7 +554,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             }
         }
 
-        if (payer.canPayLife(c) && payer.getController().confirmPayment(cost, "Pay " + c + " Life?")) {
+        if (player.canPayLife(c) && player.getController().confirmPayment(cost, "Pay " + c + " Life?")) {
             return PaymentDecision.number(c);
         }
         return null;
@@ -572,7 +571,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
 
-        List<Card> list = cost.sameZone ? payer.getGame().getCardsIn(cost.getFrom()) : payer.getCardsIn(cost.getFrom());
+        List<Card> list = cost.sameZone ? player.getGame().getCardsIn(cost.getFrom()) : player.getCardsIn(cost.getFrom());
 
         if (c == null) {
             final String sVar = ability.getSVar(amount);
@@ -584,7 +583,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             }
         }
         
-        list = CardLists.getValidCards(list, cost.getType().split(";"), payer, source);
+        list = CardLists.getValidCards(list, cost.getType().split(";"), player, source);
         
         if (cost.from == ZoneType.Hand) {
             InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, list);
@@ -595,7 +594,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         }
         
         if (cost.sameZone){
-            List<Player> players = payer.getGame().getPlayers();
+            List<Player> players = player.getGame().getPlayers();
             List<Player> payableZone = new ArrayList<Player>();
             for (Player p : players) {
                 List<Card> enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
@@ -664,7 +663,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         } 
 
         // Cards to use this branch: Scarscale Ritual, Wandering Mage - each adds only one counter 
-        List<Card> typeList = CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), payer, ability.getSourceCard());
+        List<Card> typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, ability.getSourceCard());
         
         InputSelectCardsFromList inp = new InputSelectCardsFromList(1, 1, typeList);
         inp.setMessage("Put " + Lang.nounWithAmount(c, cost.getCounter().getName() + " counter") + " on " +cost.getDescriptiveType());
@@ -682,7 +681,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
 
-        final List<Card> list = payer.getCardsIn(ZoneType.Battlefield);
+        final List<Card> list = player.getCardsIn(ZoneType.Battlefield);
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
@@ -694,8 +693,8 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         }
         if (cost.payCostFromSource()) {
             final Card card = ability.getSourceCard();
-            if (card.getController() == payer && card.isInPlay()) {
-                return payer.getController().confirmPayment(cost, "Return " + card.getName() + " to hand?") ? PaymentDecision.card(card) : null;
+            if (card.getController() == player && card.isInPlay()) {
+                return player.getController().confirmPayment(cost, "Return " + card.getName() + " to hand?") ? PaymentDecision.card(card) : null;
             }
         }
         else {
@@ -721,12 +720,12 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             return PaymentDecision.card(source);
 
         if (cost.getType().equals("Hand"))
-            return PaymentDecision.card(payer.getCardsIn(ZoneType.Hand));
+            return PaymentDecision.card(player.getCardsIn(ZoneType.Hand));
 
         InputSelectCardsFromList inp = null;
         if (cost.getType().equals("SameColor")) {
             Integer num = cost.convertAmount();
-            List<Card> handList = payer.getCardsIn(ZoneType.Hand);
+            List<Card> handList = player.getCardsIn(ZoneType.Hand);
             final List<Card> handList2 = handList;
             handList = CardLists.filter(handList, new Predicate<Card>() {
                 @Override
@@ -758,8 +757,8 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         } else {
             Integer num = cost.convertAmount();
 
-            List<Card> handList = payer.getCardsIn(ZoneType.Hand);
-            handList = CardLists.getValidCards(handList, cost.getType().split(";"), payer, ability.getSourceCard());
+            List<Card> handList = player.getCardsIn(ZoneType.Hand);
+            handList = CardLists.getValidCards(handList, cost.getType().split(";"), player, ability.getSourceCard());
 
             if (num == null) {
                 final String sVar = ability.getSVar(amount);
@@ -792,8 +791,8 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        List<Card> list = new ArrayList<Card>(payer.getCardsIn(ZoneType.Battlefield));
-        list = CardLists.getValidCards(list, type.split(";"), payer, source);
+        List<Card> list = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
+        list = CardLists.getValidCards(list, type.split(";"), player, source);
 
 
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -930,7 +929,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             return res;
         }
 
-        List<Card> validCards = CardLists.getValidCards(payer.getCardsIn(cost.zone), type.split(";"), payer, source);
+        List<Card> validCards = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source);
         if (cost.zone.equals(ZoneType.Battlefield)) {
             final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(cntRemoved, cost.counter, validCards);
             inp.setMessage("Remove %d " + cost.counter.getName() + " counters from " + cost.getDescriptiveType());
@@ -969,15 +968,15 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
         final String amount = cost.getAmount();
         final String type = cost.getType();
 
-        List<Card> list = new ArrayList<Card>(payer.getCardsIn(ZoneType.Battlefield));
-        list = CardLists.getValidCards(list, type.split(";"), payer, source);
-        if (payer.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
+        List<Card> list = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
+        list = CardLists.getValidCards(list, type.split(";"), player, source);
+        if (player.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             list = CardLists.getNotType(list, "Creature");
         }
 
         if (cost.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
-                return payer.getController().confirmPayment(cost, "Sacrifice " + source.getName() + "?") ? PaymentDecision.card(source) : null;
+                return player.getController().confirmPayment(cost, "Sacrifice " + source.getName() + "?") ? PaymentDecision.card(source) : null;
             } else 
                 return null;
         }
@@ -1020,7 +1019,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
 
     @Override
     public PaymentDecision visit(CostTapType cost) {
-        List<Card> typeList = new ArrayList<Card>(payer.getCardsIn(ZoneType.Battlefield));
+        List<Card> typeList = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
         String type = cost.getType();
         final String amount = cost.getAmount();
         Integer c = cost.convertAmount();
@@ -1039,7 +1038,7 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
             type = type.replace("+withTotalPowerGE" + totalP, "");
         }
 
-        typeList = CardLists.getValidCards(typeList, type.split(";"), payer, ability.getSourceCard());
+        typeList = CardLists.getValidCards(typeList, type.split(";"), player, ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
         if (c == null && !amount.equals("Any")) {
             final String sVar = ability.getSVar(amount);
@@ -1113,8 +1112,8 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
 
     @Override
     public PaymentDecision visit(CostUntapType cost) {
-        List<Card> typeList = CardLists.getValidCards(payer.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
-                payer, ability.getSourceCard());
+        List<Card> typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
+                player, ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.TAPPED);
         if (!cost.canUntapSource) {
             typeList.remove(source);
@@ -1147,10 +1146,15 @@ public class HumanCostDecision implements ICostVisitor<PaymentDecision> {
     public PaymentDecision visit(CostUnattach cost) {
         final Card source = ability.getSourceCard();
         
-        Card cardToUnattach = cost.findCardToUnattach(source, payer, ability);
-        if (cardToUnattach != null && payer.getController().confirmPayment(cost, "Unattach " + cardToUnattach.getName() + "?")) {
+        Card cardToUnattach = cost.findCardToUnattach(source, player, ability);
+        if (cardToUnattach != null && player.getController().confirmPayment(cost, "Unattach " + cardToUnattach.getName() + "?")) {
             return PaymentDecision.card(cardToUnattach);
         }
         return null;
+    }
+
+    @Override
+    public boolean paysRightAfterDecision() {
+        return true;
     }
 }

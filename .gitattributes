@@ -15013,6 +15013,7 @@ forge-gui/src/main/java/forge/game/cost/Cost.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/cost/CostAddMana.java -text
 forge-gui/src/main/java/forge/game/cost/CostChooseCreatureType.java -text
 forge-gui/src/main/java/forge/game/cost/CostDamage.java -text
+forge-gui/src/main/java/forge/game/cost/CostDecisionMakerBase.java -text
 forge-gui/src/main/java/forge/game/cost/CostDiscard.java -text
 forge-gui/src/main/java/forge/game/cost/CostDraw.java -text
 forge-gui/src/main/java/forge/game/cost/CostExile.java -text

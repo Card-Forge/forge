@@ -18,6 +18,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.CostAddMana;
 import forge.game.cost.CostChooseCreatureType;
 import forge.game.cost.CostDamage;
+import forge.game.cost.CostDecisionMakerBase;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostDraw;
 import forge.game.cost.CostExile;
@@ -47,18 +48,17 @@ import forge.game.player.PlayerControllerAi;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-public class AiCostDecision implements ICostVisitor<PaymentDecision> {
+public class AiCostDecision extends CostDecisionMakerBase implements ICostVisitor<PaymentDecision> {
 
-    private final Player ai;
+
     private final SpellAbility ability;
     private final Card source;
     
-    public AiCostDecision(Player ai0, SpellAbility sa, Card source0) {
-        ai = ai0;
+    public AiCostDecision(Player ai0, SpellAbility sa) {
+        super(ai0);
         ability = sa;
-        source = source0;
+        source = ability.getSourceCard();
     }
-
 
     @Override
     public PaymentDecision visit(CostAddMana cost) {
@@ -74,7 +74,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
 
     @Override
     public PaymentDecision visit(CostChooseCreatureType cost) {
-        String choice = ai.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>());
+        String choice = player.getController().chooseSomeType("Creature", ability, new ArrayList<String>(CardType.getCreatureTypes()), new ArrayList<String>());
         return PaymentDecision.type(choice);
     }
 
@@ -82,12 +82,12 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
     public PaymentDecision visit(CostDiscard cost) {
         final String type = cost.getType();
 
-        final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
+        final List<Card> hand = player.getCardsIn(ZoneType.Hand);
         if (type.equals("LastDrawn")) {
-            if (!hand.contains(ai.getLastDrawnCard())) {
+            if (!hand.contains(player.getLastDrawnCard())) {
                 return null;
             }
-            return PaymentDecision.card(ai.getLastDrawnCard());
+            return PaymentDecision.card(player.getLastDrawnCard());
         }
         else if (cost.payCostFromSource()) {
             if (!hand.contains(source)) {
@@ -116,7 +116,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             return PaymentDecision.card(CardLists.getRandomSubList(hand, c));
         }
         else {
-            final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+            final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
             return PaymentDecision.card(aic.getCardsToDiscard(c, type.split(";"), ability));
         }
     }
@@ -156,7 +156,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         if (cost.getType().equals("All")) {
-            return PaymentDecision.card(ai.getCardsIn(cost.getFrom()));
+            return PaymentDecision.card(player.getCardsIn(cost.getFrom()));
         }
         else if (cost.getType().contains("FromTopGrave")) {
             return null;
@@ -173,14 +173,14 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         if (cost.getFrom().equals(ZoneType.Library)) {
-            return PaymentDecision.card(ai.getCardsIn(ZoneType.Library, c));
+            return PaymentDecision.card(player.getCardsIn(ZoneType.Library, c));
         }
         else if (cost.sameZone) {
             // TODO Determine exile from same zone for AI
             return null;
         }
         else {
-            List<Card> chosen = ComputerUtil.chooseExileFrom(ai, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c);
+            List<Card> chosen = ComputerUtil.chooseExileFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c);
             return null == chosen ? null : PaymentDecision.card(chosen);
         }
     }
@@ -195,9 +195,9 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        List<Card> typeList = ai.getGame().getCardsIn(ZoneType.Exile);
+        List<Card> typeList = player.getGame().getCardsIn(ZoneType.Exile);
 
-        typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), ai, source);
+        typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), player, source);
 
         if (typeList.size() < c) {
             return null;
@@ -237,7 +237,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
     
-        final List<Card> typeList = CardLists.getValidCards(ai.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), ai, source);
+        final List<Card> typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source);
     
     
         if (typeList.size() < c) {
@@ -258,7 +258,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
     public PaymentDecision visit(CostGainLife cost) {
         final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
         
-        for (final Player opp : cost.getPotentialTargets(ai, source)) {
+        for (final Player opp : cost.getPotentialTargets(player, source)) {
             if (opp.canGainLife()) {
                 oppsThatCanGainLife.add(opp);
             }
@@ -285,7 +285,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        List<Card> topLib = ai.getCardsIn(ZoneType.Library, c);
+        List<Card> topLib = player.getCardsIn(ZoneType.Library, c);
         return topLib.size() < c ? null : PaymentDecision.card(topLib);
     }
 
@@ -306,7 +306,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
                 c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
             }
         }
-        if (!ai.canPayLife(c)) {
+        if (!player.canPayLife(c)) {
             return null;
         }
         // activator.payLife(c, null);
@@ -317,14 +317,14 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
     @Override
     public PaymentDecision visit(CostPutCardToLib cost) {
         Integer c = cost.convertAmount();
-        final Game game = ai.getGame();
+        final Game game = player.getGame();
         List<Card> chosen = new ArrayList<Card>();
         List<Card> list;
 
         if (cost.isSameZone()) {
             list = new ArrayList<Card>(game.getCardsIn(cost.getFrom()));
         } else {
-            list = new ArrayList<Card>(ai.getCardsIn(cost.getFrom()));
+            list = new ArrayList<Card>(player.getCardsIn(cost.getFrom()));
         }
 
         if (c == null) {
@@ -337,7 +337,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        list = CardLists.getValidCards(list, cost.getType().split(";"), ai, source);
+        list = CardLists.getValidCards(list, cost.getType().split(";"), player, source);
 
         if (cost.isSameZone()) {
             // Jotun Grunt
@@ -352,7 +352,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             }
             chosen = chosen.subList(0, c);
         } else {
-            chosen = ComputerUtil.choosePutToLibraryFrom(ai, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c);
+            chosen = ComputerUtil.choosePutToLibraryFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c);
         }
         return chosen.isEmpty() ? null : PaymentDecision.card(chosen);
     }
@@ -365,7 +365,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
 
         }
 
-        final List<Card> typeList = CardLists.getValidCards(ai.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), ai, source);
+        final List<Card> typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source);
 
         Card card = null;
         if (cost.getType().equals("Creature.YouCtrl")) {
@@ -390,7 +390,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 List<Card> typeList =
-                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+                        CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
                 typeList = CardLists.filter(typeList, Presets.UNTAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));
@@ -402,7 +402,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             return null;
         }
 
-        List<Card> totap = ComputerUtil.chooseTapType(ai, cost.getType(), source, !cost.canTapSource, c);
+        List<Card> totap = ComputerUtil.chooseTapType(player, cost.getType(), source, !cost.canTapSource, c);
 
 
         if (totap == null) {
@@ -437,7 +437,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
 
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
-        List<Card> list = ComputerUtil.chooseSacrificeType(ai, cost.getType(), source, ability.getTargetCard(), c);
+        List<Card> list = ComputerUtil.chooseSacrificeType(player, cost.getType(), source, ability.getTargetCard(), c);
         return PaymentDecision.card(list);
     }
 
@@ -451,7 +451,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         }
 
-        List<Card> res = ComputerUtil.chooseReturnType(ai, cost.getType(), source, ability.getTargetCard(), c);
+        List<Card> res = ComputerUtil.chooseReturnType(player, cost.getType(), source, ability.getTargetCard(), c);
         return res.isEmpty() ? null : PaymentDecision.card(res);
     }
 
@@ -459,7 +459,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
     public PaymentDecision visit(CostReveal cost) {
 
         final String type = cost.getType();
-        List<Card> hand = new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand));
+        List<Card> hand = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
 
         if (cost.payCostFromSource()) {
             if (!hand.contains(source)) {
@@ -469,13 +469,13 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         }
 
         if (cost.getType().equals("Hand"))
-            return PaymentDecision.card(ai.getCardsIn(ZoneType.Hand));
+            return PaymentDecision.card(player.getCardsIn(ZoneType.Hand));
 
         if (cost.getType().equals("SameColor")) {
             return null;
         }
             
-        hand = CardLists.getValidCards(hand, type.split(";"), ai, source);
+        hand = CardLists.getValidCards(hand, type.split(";"), player, source);
         Integer c = cost.convertAmount();
         if (c == null) {
             final String sVar = ability.getSVar(cost.getAmount());
@@ -486,7 +486,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             }
         }
 
-        final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+        final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
         return PaymentDecision.card(aic.getCardsToDiscard(c, type.split(";"), ability));
     }
 
@@ -496,7 +496,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         final int c = AbilityUtils.calculateAmount(source, amount, ability);
         final String type = cost.getType();
 
-        List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), ai, source);
+        List<Card> typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source);
         List<Card> hperms = CardLists.filter(typeList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
@@ -536,7 +536,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             if (type.equals("OriginalHost")) {
                 typeList = Lists.newArrayList(ability.getOriginalHost());
             } else {
-                typeList = CardLists.getValidCards(ai.getCardsIn(cost.zone), type.split(";"), ai, source);
+                typeList = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source);
             }
             for (Card card : typeList) {
                 if (card.getCounters(cost.counter) >= c) {
@@ -563,8 +563,8 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
-                List<Card> typeList = ai.getGame().getCardsIn(ZoneType.Battlefield);
-                typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), ai, ability.getSourceCard());
+                List<Card> typeList = player.getGame().getCardsIn(ZoneType.Battlefield);
+                typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), player, ability.getSourceCard());
                 if (!cost.canUntapSource) {
                     typeList.remove(source);
                 }
@@ -576,7 +576,7 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
             }
         }
     
-        List<Card> list = ComputerUtil.chooseUntapType(ai, cost.getType(), source, cost.canUntapSource, c);
+        List<Card> list = ComputerUtil.chooseUntapType(player, cost.getType(), source, cost.canUntapSource, c);
     
         if (list == null) {
             System.out.println("Couldn't find a valid card to untap for: " + source.getName());
@@ -593,12 +593,17 @@ public class AiCostDecision implements ICostVisitor<PaymentDecision> {
 
     @Override
     public PaymentDecision visit(CostUnattach cost) {
-        Card cardToUnattach = cost.findCardToUnattach(source, (Player) ai, ability);
+        Card cardToUnattach = cost.findCardToUnattach(source, (Player) player, ability);
         if (cardToUnattach == null) {
             // We really shouldn't be able to get here if there's nothing to unattach
             return null;
         }
         return PaymentDecision.card(cardToUnattach);
+    }
+
+    @Override
+    public boolean paysRightAfterDecision() {
+        return false;
     }
 }
 

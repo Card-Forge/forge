@@ -33,6 +33,7 @@ import forge.game.cost.CostPayment;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.zone.Zone;
+import forge.gui.player.HumanCostDecision;
 
 /**
  * <p>
@@ -74,7 +75,7 @@ public class HumanPlaySpellAbility {
         boolean prerequisitesMet = this.announceValuesLikeX()
                 && this.announceType()
                 && (!mayChooseTargets || setupTargets()) // if you can choose targets, then do choose them.
-                && (isFree || this.payment.payCost(human));
+                && (isFree || this.payment.payCost(new HumanCostDecision(human, ability, ability.getSourceCard())));
 
         if (!prerequisitesMet) {
             if (!ability.isTrigger()) {

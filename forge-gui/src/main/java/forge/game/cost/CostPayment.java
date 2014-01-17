@@ -19,15 +19,12 @@ package forge.game.cost;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import forge.ai.AiCostDecision;
-import forge.game.Game;
+
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.gui.player.HumanCostDecision;
 
 /**
  * <p>
@@ -134,20 +131,12 @@ public class CostPayment {
         this.ability.getActivatingPlayer().getManaPool().refundManaPaid(this.ability);
     }
 
-    /**
-     * <p>
-     * payCost.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean payCost(final Player payer) {
-        HumanCostDecision hcd = new HumanCostDecision(payer, ability, ability.getSourceCard());
+    public boolean payCost(final CostDecisionMakerBase decisionMaker) {
         
         for (final CostPart part : this.cost.getCostParts()) {
-            PaymentDecision pd = part.accept(hcd);
+            PaymentDecision pd = part.accept(decisionMaker);
             
-            if ( null == pd || !part.payAsDecided(payer, pd, ability))
+            if ( null == pd || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability))
                 return false;
     
             // abilities care what was used to pay for them
@@ -166,35 +155,26 @@ public class CostPayment {
         return true;
     }
 
-    /**
-     * <p>
-     * payComputerCosts.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean payComputerCosts(final Player ai, final Game game) {
-        // canPayAdditionalCosts now Player Agnostic
-
+    public final boolean payComputerCosts(final CostDecisionMakerBase decisionMaker) {
         // Just in case it wasn't set, but honestly it shouldn't have gotten
         // here without being set
-        this.ability.setActivatingPlayer(ai);
-
-        final Card source = this.ability.getSourceCard();
-        final List<CostPart> parts = this.cost.getCostParts();
+        this.ability.setActivatingPlayer(decisionMaker.getPlayer());
 
         Map<Class<? extends CostPart>, PaymentDecision> decisions = new HashMap<Class<? extends CostPart>, PaymentDecision>();
-        AiCostDecision aiDecisions = new AiCostDecision(ai, ability, source);
-        
+
         // Set all of the decisions before attempting to pay anything
-        for (final CostPart part : parts) {
-            PaymentDecision decision = part.accept(aiDecisions);
-            if ( null == decision ) return false;
+        for (final CostPart part : this.cost.getCostParts()) {
+            PaymentDecision decision = part.accept(decisionMaker);
+            if (null == decision) return false;
+            
+            if (decisionMaker.paysRightAfterDecision() && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability))
+                return false;
+            
             decisions.put(part.getClass(), decision);
         }
 
-        for (final CostPart part : parts) {
-            if (!part.payAsDecided(ai, decisions.get(part.getClass()), this.ability)) {
+        for (final CostPart part : this.cost.getCostParts()) {
+            if (!part.payAsDecided(decisionMaker.getPlayer(), decisions.get(part.getClass()), this.ability)) {
                 return false;
             }
             // abilities care what was used to pay for them

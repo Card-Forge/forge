@@ -154,7 +154,10 @@ public class Cost {
             parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xCantBe0 ? "XCantBe0" : null);
         }
         if (parsedMana != null) {
-            this.costParts.add(0, parsedMana);
+            if(parsedMana.shouldPayLast()) // back from the brink pays mana after 'exile' part is paid
+                this.costParts.add(parsedMana);
+            else
+                this.costParts.add(0, parsedMana);
         }
 
         // inspect parts to set Sac, {T} and {Q} flags

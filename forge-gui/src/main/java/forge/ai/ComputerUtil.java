@@ -116,7 +116,7 @@ public class ComputerUtil {
             }
         } else {
             final CostPayment pay = new CostPayment(cost, sa);
-            if (pay.payComputerCosts(ai, game)) {
+            if (pay.payComputerCosts(new AiCostDecision(ai, sa))) {
                 game.getStack().addAndUnfreeze(sa);
                 if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
                     game.getAction().reveal(sa.getSplicedCards(), ai, true, "Computer reveals spliced cards from ");
@@ -240,7 +240,7 @@ public class ComputerUtil {
             game.getStack().add(sa);
         } else {
             final CostPayment pay = new CostPayment(cost, sa);
-            if (pay.payComputerCosts(ai, game)) {
+            if (pay.payComputerCosts(new AiCostDecision(ai, sa))) {
                 game.getStack().add(sa);
             }
         }
@@ -287,7 +287,7 @@ public class ComputerUtil {
         }
 
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
-        pay.payComputerCosts(ai, game);
+        pay.payComputerCosts(new AiCostDecision(ai, sa));
 
         game.getStack().add(newSA);
     }
@@ -314,7 +314,7 @@ public class ComputerUtil {
                 ComputerUtilMana.payManaCost(ai, sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa);
-                pay.payComputerCosts(ai, game);
+                pay.payComputerCosts(new AiCostDecision(ai, sa));
             }
 
             AbilityUtils.resolve(sa);
