@@ -12,6 +12,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.home.sanctioned.VSubmenuConstructed;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
+import forge.gui.toolbox.FAbsolutePositioner;
 import forge.net.FServer;
 import forge.net.NetServer;
 import forge.properties.ForgePreferences;
@@ -48,6 +49,7 @@ public enum CHomeUI implements ICDoc, IMenuProvider {
             }
         }
 
+        FAbsolutePositioner.SINGLETON_INSTANCE.hideAll();
         id0.getDoc().populate();
         id0.getDoc().getLayoutControl().update();
         lblSelected = VHomeUI.SINGLETON_INSTANCE.getAllSubmenuLabels().get(id0);
