@@ -178,7 +178,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         });
         playersFrame.add(addPlayerBtn, "height 30px!, growx, pushx");
 
-        constructedFrame.add(playersFrame, "gapright 6px, w 50%-3px, growy, pushy");
+        constructedFrame.add(playersFrame, "gapright 10px, w 50%-5px, growy, pushy");
 
         ////////////////////////////////////////////////////////
         ////////////////////// Deck Panel //////////////////////
