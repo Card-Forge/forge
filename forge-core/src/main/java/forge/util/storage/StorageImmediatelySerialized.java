@@ -87,6 +87,6 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
      */
     @Override
     public IStorage<IStorage<T>> getFolders() {
-        return subfolders;
+        return subfolders == null ? super.getFolders() : subfolders;
     }
 }
