@@ -42,11 +42,13 @@ import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FComboBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FMouseAdapter;
+import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.FTextField;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -102,6 +104,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final List<FPanel> inactivePlayerPanelList = new ArrayList<FPanel>(6);
     private final List<FTextField> playerNameBtnList = new ArrayList<FTextField>(8);
     private final List<String> playerNames = new ArrayList<String>(8);
+    private final List<FLabel> nameRandomisers = new ArrayList<FLabel>(8);
     private final List<FRadioButton> playerTypeRadios = new ArrayList<FRadioButton>(8);
     private final List<FLabel> avatarList = new ArrayList<FLabel>(8);
     private final TreeMap<Integer, Integer> usedAvatars = new TreeMap<Integer, Integer>();
@@ -200,7 +203,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
     }
 
-    private FPanel buildPlayerPanel(final int playerIndex) {
+    @SuppressWarnings("serial")
+	private FPanel buildPlayerPanel(final int playerIndex) {
         PlayerPanel playerPanel = new PlayerPanel();
         playerPanel.addMouseListener(new FMouseAdapter() {
             @Override
@@ -262,6 +266,34 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         playerPanel.add(newLabel("Name:"), "height 30px, gaptop 5px, gapx rel");
         playerPanel.add(playerNameField, "height 30px, pushx, growx");
         playerNameBtnList.add(playerNameField);
+
+        // Name randomiser
+        final FLabel newNameBtn = new FLabel.Builder().tooltip("Get a new random name").iconInBackground(false)
+        		.icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT)).hoverable(true).opaque(false)
+        		.unhoveredAlpha(0.9f).build();
+        newNameBtn.setCommand(new Command() {
+
+			@Override
+			public void run() {
+				newNameBtn.requestFocus();
+    			String newName = getNewName();
+    			int index = nameRandomisers.indexOf(newNameBtn);
+    			FTextField nField = playerNameBtnList.get(index);
+
+    			nField.setGhostText(newName);
+    			nField.setText(newName);
+
+				if (index == 0) {
+					prefs.setPref(FPref.PLAYER_NAME, newName);
+					prefs.save();
+				}
+				changePlayerFocus(index);
+			}
+        	
+        });
+        newNameBtn.addFocusListener(nameFocusListener);
+        playerPanel.add(newNameBtn, "h 30px, w 30px, gaptop 5px, gapx unrel, align 50% 50%");
+        nameRandomisers.add(newNameBtn);
 
         // PlayerType
         ButtonGroup tempBtnGroup = new ButtonGroup();
@@ -541,7 +573,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 			populateDeckPanel(false);
 
 			refreshPanels(true, true);
-			System.out.println("Focus changed to player " + (playerWithFocus + 1));
 		}
     }
 
@@ -572,6 +603,29 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /** Adds a pre-styled FLabel component with the specified title. */
     private FLabel newLabel(String title) {
     	return new FLabel.Builder().text(title).fontSize(14).fontStyle(Font.ITALIC).build();
+    }
+
+    private final String getNewName() {
+    	final String title = "Get new random name";
+    	final String message = "What type of name do you want to generate?";
+    	final SkinImage icon = FOptionPane.QUESTION_ICON;
+    	final String[] genderOptions = new String[]{ "Male", "Female", "Any" };
+    	final String[] typeOptions = new String[]{ "Fantasy", "Generic", "Any" };
+
+    	final int genderIndex = FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2);
+    	final int typeIndex = FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2);
+    	final String gender = genderOptions[genderIndex];
+    	final String type = typeOptions[typeIndex];
+
+    	String confirmMsg;
+    	String newName;
+
+    	do {
+    		newName = NameGenerator.getRandomName(gender, type, playerNames);
+    		confirmMsg = "Would you like to use the name \"" + newName + "\", or try again?";
+    	} while (!FOptionPane.showConfirmDialog(confirmMsg, title, "Use this name", "Try again", true));
+
+        return newName;
     }
 
     /////////////////////////////////////////////
@@ -682,16 +736,26 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private FocusAdapter nameFocusListener = new FocusAdapter() {
 		@Override
 		public void focusGained(FocusEvent e) {
-			FTextField nField = (FTextField)e.getSource();
-			int panelOwnerID = playerNameBtnList.indexOf(nField);
+			int panelOwnerID = 0;
+			final Object source = e.getSource();
+
+			if (source instanceof FTextField) { // the text box
+				FTextField nField = (FTextField)source;
+				panelOwnerID = playerNameBtnList.indexOf(nField);
+			} else if (source instanceof FLabel) { // the name randomiser button
+				FLabel randBtn = (FLabel)source;
+				panelOwnerID = nameRandomisers.indexOf(randBtn);
+			}
+
 			changePlayerFocus(panelOwnerID);
 		}
 
 		@Override
 		public void focusLost(FocusEvent e) {
-			FTextField nField = (FTextField)e.getSource();
-			if (playerNameBtnList.indexOf(nField) == 0) {
-			    String newName = nField.getText().trim();
+			final Object source = e.getSource();
+			if (source instanceof FTextField) { // the text box
+				FTextField nField = (FTextField)source;
+				String newName = nField.getText().trim();
 			    if (!StringUtils.isBlank(newName) && StringUtils.isAlphanumericSpace(newName) &&
 			            prefs.getPref(FPref.PLAYER_NAME) != newName) {
                     prefs.setPref(FPref.PLAYER_NAME, newName);
