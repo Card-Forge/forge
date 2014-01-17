@@ -416,7 +416,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             this.model = model0;
         }
 
-        /** */
         public void setup() {
             final Enumeration<TableColumn> e = table.getColumnModel().getColumns();
             final TableColumn[] sortcols = new TableColumn[table.getColumnCount()];

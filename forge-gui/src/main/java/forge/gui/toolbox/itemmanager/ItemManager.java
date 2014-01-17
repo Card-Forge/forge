@@ -1011,7 +1011,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
-     * getAllowMultipleSelections.
+     * setAllowMultipleSelections.
      * 
      * @return allowMultipleSelections0 - if true, multiple items can be selected at once
      */

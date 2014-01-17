@@ -38,8 +38,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private final DeckManager lstDecks = new DeckManager(GameType.Constructed);
     private final FLabel btnRandom = new FLabel.ButtonBuilder().text("Random").fontSize(16).build();
 
-    private final FLabel lblDecklist = new FLabel.Builder().text("Double click deck for its decklist.").fontSize(12).build();
-
     private boolean isAi;
 
     private final ForgePreferences prefs = Singletons.getModel().getPreferences();
@@ -85,7 +83,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private FLabel getBtnRandom() { return btnRandom; }
 
     private void updateCustom() {
-        lblDecklist.setVisible(true);
         lstDecks.setAllowMultipleSelections(false);
 
         lstDecks.setPool(Singletons.getModel().getDecks().getConstructed());
@@ -141,7 +138,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateColors() {
-        lblDecklist.setVisible(false);
         lstDecks.setAllowMultipleSelections(true);
 
         ArrayList<Deck> decks = new ArrayList<Deck>();
@@ -181,7 +177,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateThemes() {
-        lblDecklist.setVisible(false);
         lstDecks.setAllowMultipleSelections(false);
 
         ArrayList<Deck> decks = new ArrayList<Deck>();
@@ -204,7 +199,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updatePrecons() {
-        lblDecklist.setVisible(true);
         lstDecks.setAllowMultipleSelections(false);
 
         ArrayList<Deck> decks = new ArrayList<Deck>();
@@ -238,7 +232,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private void updateQuestEvents() {
-        lblDecklist.setVisible(true);
         lstDecks.setAllowMultipleSelections(false);
 
         ArrayList<Deck> decks = new ArrayList<Deck>();
@@ -301,7 +294,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         this.add(decksComboBox.getComponent(), "w 10:100%, h 30px!, gapbottom 3px");
         this.add(new ItemManagerContainer(lstDecks), "w 10:100%, growy, pushy");
         this.add(btnRandom, "w 10:100%, h 26px!, gaptop 3px");
-        this.add(lblDecklist, "w 10:100%, h 20px!, gaptop 5px");
         if (isShowing()) {
             validate();
             repaint();
