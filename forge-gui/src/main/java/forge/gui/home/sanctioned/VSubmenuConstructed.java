@@ -1,10 +1,11 @@
 package forge.gui.home.sanctioned;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
@@ -45,6 +46,7 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FTextField;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -60,7 +62,8 @@ import forge.util.NameGenerator;
  */
 public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     SINGLETON_INSTANCE;
-    private final static ForgePreferences prefs = Singletons.getModel().getPreferences();
+    private static final ForgePreferences prefs = Singletons.getModel().getPreferences();
+    private static final SkinColor unfocusedPlayerOverlay = FSkin.getColor(FSkin.Colors.CLR_OVERLAY).alphaColor(120);
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -70,6 +73,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Constructed");
     private int activePlayersNum = 2;
     private int playerWithFocus = 0; // index of the player that currently has focus
+    private PlayerPanel playerPanelWithFocus;
 
     private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
     private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
@@ -93,7 +97,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
     private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"),
             true, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-    private final List<FPanel> playerPanelList = new ArrayList<FPanel>(8);
+    private final List<PlayerPanel> playerPanelList = new ArrayList<PlayerPanel>(8);
     private final List<FPanel> activePlayerPanelList = new ArrayList<FPanel>(8);
     private final List<FPanel> inactivePlayerPanelList = new ArrayList<FPanel>(6);
     private final List<FTextField> playerNameBtnList = new ArrayList<FTextField>(8);
@@ -160,6 +164,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	}
         }
 
+        playerPanelWithFocus = playerPanelList.get(0);
+
         playersFrame.setOpaque(false);
         playersFrame.add(playersScroll, "grow, push");
 
@@ -195,7 +201,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     private FPanel buildPlayerPanel(final int playerIndex) {
-        FPanel playerPanel = new FPanel();
+        PlayerPanel playerPanel = new PlayerPanel();
+        playerPanel.addMouseListener(new FMouseAdapter() {
+            @Override
+            public void onLeftClick(MouseEvent e) {
+                avatarList.get(playerPanelList.indexOf((FPanel)e.getSource())).requestFocusInWindow();
+            }
+        });
         playerPanel.setLayout(new MigLayout("insets 10px, gap 5px"));
 
         // Add a button to players 3+ to remove them from the setup
@@ -256,11 +268,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         FRadioButton tmpHuman = new FRadioButton();
         tmpHuman.setText("Human");
         tmpHuman.setSelected(playerIndex == 0);
-        tmpHuman.addFocusListener(radioFocusListener);
+        tmpHuman.addMouseListener(radioMouseAdapter);
         FRadioButton tmpAI = new FRadioButton();
         tmpAI.setText("AI");
         tmpAI.setSelected(playerIndex != 0);
-        tmpAI.addFocusListener(radioFocusListener);
+        tmpAI.addMouseListener(radioMouseAdapter);
         tempBtnGroup.add(tmpHuman);
         tempBtnGroup.add(tmpAI);
         playerTypeRadios.add(tmpHuman);
@@ -271,11 +283,10 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         // Deck selector button
         final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
-        deckBtn.addFocusListener(deckLblFocusListener);
         deckBtn.setCommand(new Runnable() {
             @Override
             public void run() {
-                changePlayerFocus(deckSelectorBtns.indexOf(deckBtn));
+                avatarList.get(deckSelectorBtns.indexOf(deckBtn)).requestFocusInWindow();
             }
         });
         playerPanel.add(newLabel("Deck:"), "height 30px, gapx rel");
@@ -508,22 +519,25 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	}
     }
 
+    @SuppressWarnings("serial")
+    private class PlayerPanel extends FPanel {
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (playerPanelWithFocus != this) {
+                FSkin.setGraphicsColor(g, unfocusedPlayerOverlay);
+                g.fillRect(0, 0, this.getWidth(), this.getHeight());
+            }
+        }
+    }
+
     private void changePlayerFocus(int newFocusOwner) {
 		if (newFocusOwner != playerWithFocus) {
 			playerWithFocus = newFocusOwner;
-			FPanel playerPanel = playerPanelList.get(playerWithFocus);
-
-			//TODO (Marc) Style the actual panel for more visible indication of player with focus:
-			/*for (FPanel itrPanel : playerPanelList) {
-	    		if (itrPanel == playerPanel) {
-	    			// Make panel less opaque
-	    		} else {
-	    			// restore default panel opacity
-	    		}
-	    	}*/
+			playerPanelWithFocus = playerPanelList.get(playerWithFocus);
 
 			changeAvatarFocus();
-			playersScroll.getViewport().scrollRectToVisible(playerPanel.getBounds());
+			playersScroll.getViewport().scrollRectToVisible(playerPanelWithFocus.getBounds());
 			populateDeckPanel(false);
 
 			refreshPanels(true, true);
@@ -620,16 +634,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     };
 
     /** Listens to avatar buttons and gives the appropriate player focus. */
-    private FocusListener avatarFocusListener = new FocusListener() {
+    private FocusAdapter avatarFocusListener = new FocusAdapter() {
 		@Override
     	public void focusGained(FocusEvent e) {
     		int avatarOwnerID = avatarList.indexOf((FLabel)e.getSource());
 			changePlayerFocus(avatarOwnerID);
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-
 		}
     };
 
@@ -670,7 +679,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** Listens to name text fields and gives the appropriate player focus.
      *  Also saves the name preference when leaving player one's text field. */
-    private FocusListener nameFocusListener = new FocusListener() {
+    private FocusAdapter nameFocusListener = new FocusAdapter() {
 		@Override
 		public void focusGained(FocusEvent e) {
 			FTextField nField = (FTextField)e.getSource();
@@ -692,34 +701,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		}
     };
 
-    /** Listens to name player type radio buttons and gives the appropriate player focus. */
-    private FocusListener radioFocusListener = new FocusListener() {
-		@Override
-    	public void focusGained(FocusEvent e) {
-    		int radioID = playerTypeRadios.indexOf((FRadioButton)e.getSource());
-			int radioOwnerID = (int) Math.floor(radioID/2);
-			changePlayerFocus(radioOwnerID);
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-
-		}
-    };
-
-    /** Listens to deck select buttons and gives the appropriate player focus. */
-    private FocusListener deckLblFocusListener = new FocusListener() {
-		@Override
-    	public void focusGained(FocusEvent e) {
-    		int deckLblID = deckSelectorBtns.indexOf((FLabel)e.getSource());
-			changePlayerFocus(deckLblID);
-			updateDeckSelectorLabel(deckLblID);
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-
-		}
+    private FMouseAdapter radioMouseAdapter = new FMouseAdapter() {
+        @Override
+        public void onLeftClick(MouseEvent e) {
+            int radioID = playerTypeRadios.indexOf((FRadioButton)e.getSource());
+            int radioOwnerID = (int) Math.floor(radioID / 2);
+            avatarList.get(radioOwnerID).requestFocusInWindow();
+        }
     };
 
     /////////////////////////////////////
