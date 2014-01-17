@@ -74,9 +74,9 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
                         break;
                     }
                 }
-                helper.include(btn, buttonWidth, 25);
-                helper.offset(-1, 0); //keep buttons tighter together
             }
+            helper.include(btn, buttonWidth, 25);
+            helper.offset(-1, 0); //keep buttons tighter together
         }
     }
 

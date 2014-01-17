@@ -727,16 +727,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             if (existingFilter.merge(filter)) {
                 //if new filter merged with existing filter, just refresh the widget
                 existingFilter.refreshWidget();
-
-                if (!this.lockFiltering) { //apply filters and focus existing filter's main component if filtering not locked
-                    applyFilters();
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            existingFilter.getMainComponent().requestFocusInWindow();
-                        }
-                    });
-                }
+                this.applyNewOrModifiedFilter(existingFilter);
                 return;
             }
         }
@@ -744,16 +735,25 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         orderedFilters.add(filter);
         this.add(filter.getPanel());
         this.revalidate();
+        this.applyNewOrModifiedFilter(filter);
+    }
 
-        if (!this.lockFiltering) { //apply filters and focus filter's main component if filtering not locked
-            applyFilters();
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    filter.getMainComponent().requestFocusInWindow();
-                }
-            });
+    //apply filters and focus existing filter's main component if filtering not locked
+    private void applyNewOrModifiedFilter(final ItemFilter<? extends T> filter) {
+        if (this.lockFiltering) {
+            filter.afterFiltersApplied(); //ensure this called even if filters currently locked
+            return;
         }
+
+        if (!applyFilters()) {
+            filter.afterFiltersApplied(); //ensure this called even if filters didn't need to be updated
+        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                filter.getMainComponent().requestFocusInWindow();
+            }
+        });
     }
 
     public void restoreDefaultFilters() {
