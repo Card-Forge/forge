@@ -134,7 +134,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         variantsPanel.add(vntArchenemy);
         variantsPanel.add(comboArchenemy);
 
-        constructedFrame.add(variantsPanel, "w 100%, gapbottom 5px, spanx 2, wrap");
+        constructedFrame.add(variantsPanel, "w 100%, gapbottom 10px, spanx 2, wrap");
 
         ////////////////////////////////////////////////////////
         ///////////////////// Player Panel /////////////////////
