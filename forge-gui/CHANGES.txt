@@ -17,7 +17,7 @@ http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=12609#p138913
 
 
 - Support for multiple card art -
-Forge now fully supports the distinction between cards with different art, which is most apparent with basic lands. It is now possible to specifically add cards with particular art in the deck editor, and cards with different art are now generated for random constructed decks, sealed deck pools, booster draft extra basic land pools, starting quest card pools, and quest card shop pools. The deck file (.dck) format has been adapted to account for this change so that the card art index can now be specified after the set, with the index starting at 0 for the first possible card art.
+Forge now fully supports the distinction between cards with different art, which is most apparent with basic lands. It is now possible to specifically add cards with particular art in the deck editor, and cards with different art are now generated for random constructed decks, sealed deck pools, booster draft extra basic land pools, starting quest card pools, and quest card shop pools. The deck file (.dck) format has been adapted to account for this change so that the card art index can now be specified after the set, with the index starting at 1 for the first possible card art.
 
 
 - Commander 2013 cards -

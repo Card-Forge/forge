@@ -169,13 +169,15 @@ public final class CardDb implements ICardDatabase {
         final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
 
         final List<String> splitName = CardDb.splitCardName(cardName);
+        final int artIndex = Integer.parseInt(splitName.get(2));
+        final int effectiveArtIndex = artIndex == 0 ? 1 : artIndex - 1;
 
         final PaperCard res = splitName.get(1) == null
                 ? ( fromLastSet ? this.uniqueCardsByName.get(splitName.get(0)) : tryGetCard(splitName.get(0), Aggregates.random(this.allCardsByName.get(splitName.get(0))).getEdition(), -1))
-                : tryGetCard(splitName.get(0), splitName.get(1), Integer.parseInt(splitName.get(2)));
+                : tryGetCard(splitName.get(0), splitName.get(1), effectiveArtIndex);
 
         if (fromLastSet && null != res && CardEdition.UNKNOWN.getCode() != res.getEdition()) {
-            final PaperCard res_randart = tryGetCard(res.getName(), res.getEdition(), Integer.parseInt(splitName.get(2)));
+            final PaperCard res_randart = tryGetCard(res.getName(), res.getEdition(), effectiveArtIndex);
             return null != res_randart && isFoil ? getFoiled(res_randart) : res_randart;
         }
         
@@ -186,11 +188,14 @@ public final class CardDb implements ICardDatabase {
     public PaperCard tryGetCardPrintedByDate(final String name0, final boolean fromLatestSet, final Date printedBefore) {
         final boolean isFoil = this.isFoil(name0);
         final String cardName = isFoil ? this.removeFoilSuffix(name0) : name0;
+
         final List<String> splitName = CardDb.splitCardName(cardName);
+        final int artIndex = Integer.parseInt(splitName.get(2));
+        final int effectiveArtIndex = artIndex == 0 ? 1 : artIndex - 1;
 
         PaperCard res = null;
         if (null != splitName.get(1)) // set explicitly requested, should return card from it and disregard the date
-            res = tryGetCard(splitName.get(0), splitName.get(1), Integer.parseInt(splitName.get(2)));
+            res = tryGetCard(splitName.get(0), splitName.get(1), effectiveArtIndex);
         else {
             Collection<PaperCard> cards = this.allCardsByName.get(splitName.get(0)); // cards are sorted by datetime desc
             int idxRightSet = 0;
