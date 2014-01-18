@@ -353,7 +353,7 @@ public class ImportDialog {
             });
             _unknownDeckLabel = new FLabel.Builder().text("Treat unknown decks as:").build();
             unknownDeckPanel.add(_unknownDeckLabel);
-            unknownDeckPanel.add(_unknownDeckCombo.getComponent());
+            _unknownDeckCombo.addTo(unknownDeckPanel);
             knownDeckPanel.add(unknownDeckPanel, "span");
             cbPanel.add(knownDeckPanel, "aligny top");
             

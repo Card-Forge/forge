@@ -57,7 +57,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
         cbSearchMode = new FComboBoxWrapper<String>();
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
-        widget.add(cbSearchMode.getComponent());
+        cbSearchMode.addTo(widget);
         cbSearchMode.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent arg0) {

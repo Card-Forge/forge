@@ -138,7 +138,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         variantsPanel.add(vntCommander);
         variantsPanel.add(vntPlanechase);
         variantsPanel.add(vntArchenemy);
-        variantsPanel.add(comboArchenemy.getComponent());
+        comboArchenemy.addTo(variantsPanel);
 
         constructedFrame.add(new FScrollPanel(variantsPanel, true), "w 100%, gapbottom 10px, spanx 2, wrap");
 

@@ -268,15 +268,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         return new RegisteredPlayer(getDeck());
     }
 
-    public final boolean isAi() {
-        return isAi;
-    }
-
     public void populate() {
         setupUI();
         removeAll();
         this.setLayout(new MigLayout("insets 0, gap 0, flowy"));
-        this.add(decksComboBox.getComponent(), "w 10:100%, h 30px!, gapbottom 5px");
+        decksComboBox.addTo(this, "w 10:100%, h 30px!, gapbottom 5px");
         this.add(new ItemManagerContainer(lstDecks), "w 10:100%, growy, pushy");
         this.add(btnRandom, "w 10:100%, h 30px!, gaptop 5px");
         if (isShowing()) {
@@ -285,7 +281,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
     }
 
-    public void setIsAiDeck(boolean isAiDeck) {
+    public final boolean isAi() {
+        return isAi;
+    }
+
+    public void setIsAi(boolean isAiDeck) {
         this.isAi = isAiDeck;
     }
 

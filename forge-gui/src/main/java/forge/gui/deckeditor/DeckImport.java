@@ -43,7 +43,7 @@ import forge.deck.DeckSection;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FCheckBox;
-import forge.gui.toolbox.FComboBoxWrapper;
+import forge.gui.toolbox.FComboBox;
 import forge.gui.toolbox.FHtmlViewer;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOptionPane;
@@ -98,8 +98,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FCheckBox newEditionCheck = new FCheckBox("Import latest version of card", true);
     private final FCheckBox dateTimeCheck = new FCheckBox("Use only sets released before:", false);
 
-    private final FComboBoxWrapper<String> monthDropdown = new FComboBoxWrapper<>();
-    private final FComboBoxWrapper<Integer> yearDropdown = new FComboBoxWrapper<>();
+    private final FComboBox<String> monthDropdown = new FComboBox<String>(); //don't need wrappers since skin can't change while this dialog is open
+    private final FComboBox<Integer> yearDropdown = new FComboBox<Integer>();
 
     /** The tokens. */
     private final List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
@@ -135,8 +135,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.add(this.newEditionCheck, "cell 0 1, w 50%, ax c");
         this.add(this.dateTimeCheck, "cell 0 2, w 50%, ax c");
 
-        this.add(monthDropdown.getComponent(), "cell 0 3, w 20%, ax left, split 2, pad 0 4 0 0");
-        this.add(yearDropdown.getComponent(), "w 15%");
+        this.add(monthDropdown, "cell 0 3, w 20%, ax left, split 2, pad 0 4 0 0");
+        this.add(yearDropdown, "w 15%");
         fillDateDropdowns();
 
         this.add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
@@ -211,9 +211,9 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         Element e;
 
         DeckRecognizer recognizer = new DeckRecognizer(newEditionCheck.isSelected(), Singletons.getMagicDb().getCommonCards());
-        if(dateTimeCheck.isSelected())
-            recognizer.setDateConstraint(monthDropdown.getSelectedIndex(), yearDropdown.getSelectedItem());
-
+        if (dateTimeCheck.isSelected()) {
+            recognizer.setDateConstraint(monthDropdown.getSelectedIndex(), (Integer)yearDropdown.getSelectedItem());
+        }
         while ((e = it.next()) != null) {
             if (!e.isLeaf()) {
                 continue;

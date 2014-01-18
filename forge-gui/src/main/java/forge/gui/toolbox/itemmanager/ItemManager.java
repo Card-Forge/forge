@@ -188,7 +188,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.add(this.btnFilters);
         this.add(this.lblCaption);
         this.add(this.lblRatio);
-        this.add(this.cbViews.getComponent());
+        this.cbViews.addTo(this);
         this.add(this.viewScroller);
 
         final Runnable cmdAddCurrentSearch = new Runnable() {

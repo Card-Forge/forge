@@ -20,7 +20,6 @@ package forge.gui.deckeditor.controllers;
 import java.util.Map.Entry;
 
 import forge.Singletons;
-import forge.card.CardEdition;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;

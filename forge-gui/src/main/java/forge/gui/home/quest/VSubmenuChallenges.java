@@ -111,7 +111,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         pnlStats.add(lblWorld, constraints);
         pnlStats.add(cbPlant, constraints);
         pnlStats.add(cbCharm, constraints);
-        pnlStats.add(cbxPet.getComponent(), constraints);
+        cbxPet.addTo(pnlStats, constraints);
         pnlStats.add(lblZep, "w 130px!, h 60px!, gap 0 0 0 5px");
         pnlStats.setOpaque(false);
     }

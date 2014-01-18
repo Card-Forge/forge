@@ -109,7 +109,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         pnlStats.add(lblWorld, constraints);
         pnlStats.add(cbPlant, constraints);
         pnlStats.add(cbCharm, constraints);
-        pnlStats.add(cbxPet.getComponent(), constraints);
+        cbxPet.addTo(pnlStats, constraints);
         pnlStats.setOpaque(false);
     }
 

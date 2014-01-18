@@ -133,7 +133,17 @@ public class FComboBoxWrapper<E> {
         return this.comboBox.getAutoSizeWidth();
     }
 
-    public JComponent getComponent() { //disguise as component for sake of rare places that need to access component in wrapper
+    public void addTo(Container container) {
+        this.addTo(container, null);
+    }
+    public void addTo(Container container, Object constraints0) {
+        container.add(this.comboBox, constraints0);
+        this.constraints = constraints0;
+    }
+
+    //disguise as component for sake of rare places that need to access component in wrapper
+    //use addTo instead if you want constraints remembered after refreshing skin
+    public JComponent getComponent() {
         return this.comboBox;
     }
     
