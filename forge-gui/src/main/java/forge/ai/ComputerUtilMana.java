@@ -209,7 +209,7 @@ public class ComputerUtilMana {
             else {
                 if (saPayment.getPayCosts() != null) {
                     final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
-                    if (!pay.payComputerCosts(new AiCostDecision(ai, sa))) {
+                    if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment))) {
                         continue;
                     }
                 }
