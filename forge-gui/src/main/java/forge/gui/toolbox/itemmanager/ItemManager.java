@@ -324,7 +324,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         int cbViewsWidth = this.cbViews.getAutoSizeWidth();
         int availableCaptionWidth = helper.getParentWidth() - cbViewsWidth - ratioWidth - helper.getX() - 9;
         if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
+            this.lblCaption.setToolTipText(this.lblCaption.getText());
             captionWidth = availableCaptionWidth;
+        }
+        else {
+            this.lblCaption.setToolTipText(null);
         }
         helper.include(this.lblCaption, captionWidth, FTextField.HEIGHT);
         helper.fillLine(this.lblRatio, FTextField.HEIGHT, cbViewsWidth); //leave room for cbViews
