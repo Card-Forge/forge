@@ -10,11 +10,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import net.miginfocom.swing.MigLayout;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.card.Card;
+import forge.gui.CardDetailPanel;
+import forge.gui.CardPicturePanel;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.CardManager;
@@ -33,6 +39,8 @@ public class FDeckViewer extends FDialog {
     private final CardManager cardManager;
     private DeckSection currentSection;
 
+    private final CardDetailPanel cardDetail = new CardDetailPanel(null);
+    private final CardPicturePanel cardPicture = new CardPicturePanel();
     private final FButton btnCopyToClipboard = new FButton("Copy to Clipboard");
     private final FButton btnChangeSection = new FButton("Change Section");
     private final FButton btnClose = new FButton("Close");
@@ -50,6 +58,19 @@ public class FDeckViewer extends FDialog {
         this.setTitle(deck.getName());
         this.cardManager = new CardManager(false);
         this.cardManager.setPool(deck.getMain());
+        this.cardManager.addSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                PaperCard paperCard = cardManager.getSelectedItem();
+                if (paperCard == null) { return; }
+
+                Card card = Card.getCardForUi(paperCard);
+                if (card == null) { return; }
+
+                cardDetail.setCard(card);
+                cardPicture.setCard(card);
+            }
+        });
         this.setDefaultFocus(this.cardManager.getTable().getComponent());
 
         for (Entry<DeckSection, CardPool> entry : deck) {
@@ -85,16 +106,27 @@ public class FDeckViewer extends FDialog {
             }
         });
 
-        final int width = 700;
+        final int width = 800;
         final int height = 600;
         this.setPreferredSize(new Dimension(width, height));
         this.setSize(width, height);
 
-        this.add(new ItemManagerContainer(this.cardManager), "w 100%, pushy, growy, spanx 4, gapbottom 10px, wrap");
-        this.add(this.btnCopyToClipboard, "w 200px!, h 26px!, gapright 5px");
-        this.add(this.btnChangeSection, "w 200px!, h 26px!");
-        this.add(new JLabel(), "pushx, growx");
-        this.add(this.btnClose, "w 120px!, h 26px!");
+        this.cardPicture.setOpaque(false);
+
+        JPanel cardPanel = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
+        cardPanel.setOpaque(false);
+        cardPanel.add(this.cardDetail, "w 225px, h 240px, gapbottom 10px");
+        cardPanel.add(this.cardPicture, "w 225px, h 350px, gapbottom 10px");
+
+        JPanel buttonPanel = new JPanel(new MigLayout("insets 0, gap 0"));
+        buttonPanel.setOpaque(false);
+        buttonPanel.add(this.btnCopyToClipboard, "w 200px!, h 26px!, gapright 5px");
+        buttonPanel.add(this.btnChangeSection, "w 200px!, h 26px!");
+
+        this.add(new ItemManagerContainer(this.cardManager), "push, grow, gapright 10px, gapbottom 10px");
+        this.add(cardPanel, "wrap");
+        this.add(buttonPanel);
+        this.add(this.btnClose, "w 120px!, h 26px!, ax right");
 
         Map<ColumnDef, ItemColumn> columns = SColumnUtil.getDeckDefaultColumns();
         columns.get(ColumnDef.DECK_QUANTITY).setCellRenderer(new ItemCellRenderer()); //prevent displaying +/- buttons
