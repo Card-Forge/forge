@@ -483,14 +483,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
      */
     @Override
     public void populate() {
-
         JPanel container = VHomeUI.SINGLETON_INSTANCE.getPnlDisplay();
 
         container.removeAll();
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
         container.add(lblTitle, "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
 
-        for(FDeckChooser fdc : deckChoosers) {
+        for (FDeckChooser fdc : deckChoosers) {
         	fdc.populate();
         }
     	updateDeckSelectorLabels();

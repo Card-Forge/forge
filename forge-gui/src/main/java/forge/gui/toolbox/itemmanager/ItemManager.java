@@ -19,6 +19,8 @@ package forge.gui.toolbox.itemmanager;
 
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
@@ -86,6 +88,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private boolean alwaysNonUnique = false;
     private boolean allowMultipleSelections = false;
     private boolean hideFilters = false;
+    private int viewHeightBackup;
     private Command itemActivateCommand;
     private ContextMenuBuilder contextMenuBuilder;
     private final Class<T> genericType;
@@ -154,6 +157,17 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.viewScroller.setBorder(null);
         this.viewScroller.getViewport().setBorder(null);
         this.viewScroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
+        this.viewScroller.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                //scroll selection into view whenever view height changes
+                int height = e.getComponent().getHeight();
+                if (height != viewHeightBackup) {
+                    viewHeightBackup = height;
+                    scrollSelectionIntoView();
+                }
+            }
+        });
 
         //build enable filters checkbox
         ItemFilter.layoutCheckbox(this.chkEnableFilters);
