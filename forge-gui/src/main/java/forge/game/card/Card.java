@@ -4262,7 +4262,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
             final boolean removeAllKeywords, final long timestamp) {
-
+        keywords.removeAll(this.getCantHaveOrGainKeyword());
         // if the key already exists - merge entries
         if (changedCardKeywords.containsKey(timestamp)) {
             List<String> kws = keywords;
@@ -4554,6 +4554,23 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void removeHiddenExtrinsicKeyword(final String s) {
         this.hiddenExtrinsicKeyword.remove(s);
+    }
+
+    /**
+     * <p>
+     * getCantHaveOrGainKeyword.
+     * </p>
+     * 
+     * @return a {@link java.util.ArrayList} object.
+     */
+    public final List<String> getCantHaveOrGainKeyword() {
+        final List<String> cantGain = new ArrayList<String>();
+        for (String s : this.hiddenExtrinsicKeyword) {
+            if (s.contains("can't have or gain")) {
+                cantGain.add(s.split("can't have or gain ")[1]);
+            }
+        }
+        return cantGain;
     }
 
     /**

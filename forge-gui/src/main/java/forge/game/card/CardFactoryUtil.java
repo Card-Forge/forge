@@ -2522,7 +2522,7 @@ public class CardFactoryUtil {
             final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
                     + " ReplaceWith$ TributeAddCounter | Secondary$ True | Description$ Tribute "
                     + tributeAmount + " (As this creature enters the battlefield, an opponent of your"
-                    + " choice may put " + tributeAmount + " +1/+1 counter on it.)";
+                    + " choice may place " + tributeAmount + " +1/+1 counter on it.)";
             final String abString = "DB$ PutCounter | Defined$ ReplacedCard | Tribute$ True | "
                     + "CounterType$ P1P1 | CounterNum$ " + tributeAmount
                     + " | SubAbility$ TributeMoveToPlay";

@@ -143,8 +143,8 @@ public class StaticAbility {
         }
 
         if (this.params.containsKey("AddType") || this.params.containsKey("RemoveType")
-                || this.params.containsKey("RemoveCardType") || this.params.containsKey("RemoveSubType")
-                || this.params.containsKey("RemoveSuperType")) {
+                || this.params.containsKey("RemoveCardTypes") || this.params.containsKey("RemoveSubTypes")
+                || this.params.containsKey("RemoveSuperTypes") || this.params.containsKey("RemoveCreatureTypes")) {
             return 4;
         }
 
