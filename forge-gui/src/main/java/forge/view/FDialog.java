@@ -23,6 +23,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.awt.geom.RoundRectangle2D;
+import java.util.Stack;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -147,18 +148,29 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         if (this.isVisible() == visible) { return; }
 
         if (visible) {
-            setLocationRelativeTo(JOptionPane.getRootFrame());
+            if (openModals.isEmpty()) {
+                setLocationRelativeTo(JOptionPane.getRootFrame());
+            }
+            else {
+                setLocationRelativeTo(openModals.peek());
+            }
             KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this); //support handling keyboard shortcuts in dialog
             if (isModal()) {
-                backdropPanel.setVisible(true);
-                Singletons.getView().getNavigationBar().setMenuShortcutsEnabled(false);
+                if (openModals.isEmpty()) {
+                    backdropPanel.setVisible(true);
+                    Singletons.getView().getNavigationBar().setMenuShortcutsEnabled(false);
+                }
+                openModals.push(this);
             }
         }
         else {
             KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(this);
             if (isModal()) {
-                backdropPanel.setVisible(false);
-                Singletons.getView().getNavigationBar().setMenuShortcutsEnabled(true);
+                openModals.pop();
+                if (openModals.isEmpty()) {
+                    backdropPanel.setVisible(false);
+                    Singletons.getView().getNavigationBar().setMenuShortcutsEnabled(true);
+                }
             }
         }
         super.setVisible(visible);
@@ -317,6 +329,7 @@ public class FDialog extends SkinnedDialog implements ITitleBarOwner, KeyEventDi
         return getIconImages().isEmpty() ? null : getIconImages().get(0);
     }
 
+    private static final Stack<FDialog> openModals = new Stack<FDialog>();
     private static final BackdropPanel backdropPanel = new BackdropPanel();
 
     public static JPanel getBackdropPanel() {

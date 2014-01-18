@@ -2,13 +2,10 @@ package forge.gui.home.gauntlet;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JList;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
@@ -19,7 +16,6 @@ import forge.game.player.RegisteredPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
-import forge.gui.deckchooser.DeckgenUtil;
 import forge.gui.framework.ICDoc;
 import forge.net.FServer;
 import forge.net.Lobby;
@@ -37,16 +33,6 @@ public enum CSubmenuGauntletContests implements ICDoc {
     SINGLETON_INSTANCE;
 
     private final VSubmenuGauntletContests view = VSubmenuGauntletContests.SINGLETON_INSTANCE;
-
-    private final MouseAdapter madDecklist = new MouseAdapter() {
-        @SuppressWarnings("unchecked")
-        @Override
-        public void mouseClicked(final MouseEvent e) {
-            final GauntletData gd = view.getGauntletLister().getSelectedGauntlet();
-            if (e.getClickCount() == 2)
-                DeckgenUtil.showDecklist( gd.getDecks().get(((JList<String>)e.getSource()).getSelectedIndex()) );
-        }
-    };
 
     private final ActionListener actStartGame = new ActionListener() {
         @Override
@@ -71,7 +57,6 @@ public enum CSubmenuGauntletContests implements ICDoc {
     @Override
     public void initialize() {
         view.getBtnStart().addActionListener(actStartGame);
-        view.getLstDecks().addMouseListener(madDecklist);
 
         view.getLstDecks().initialize();
         updateData();

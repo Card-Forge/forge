@@ -1,11 +1,8 @@
 package forge.gui.deckchooser;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -13,7 +10,6 @@ import forge.Singletons;
 import forge.card.CardDb;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.deck.generation.DeckGenerator2Color;
 import forge.deck.generation.DeckGenerator3Color;
 import forge.deck.generation.DeckGenerator5Color;
@@ -194,58 +190,6 @@ public class DeckgenUtil {
 
         deckManager.setSelectedIndex(MyRandom.getRandom().nextInt(size));
     }
-
-    /** Shows decklist dialog for a given deck.
-     * @param lst0 {@link javax.swing.JList}
-     */
-    public static void showDecklist(final Deck deck) {
-        if (deck == null) { return; }
-
-        // Dump into map and display.
-        final String nl = System.getProperty("line.separator");
-        final StringBuilder deckList = new StringBuilder();
-        final String dName = deck.getName();
-        deckList.append(dName == null ? "" : dName + nl + nl);
-
-        int nLines = 0;
-        for (DeckSection s : DeckSection.values()){
-            CardPool cp = deck.get(s);
-            if (cp == null || cp.isEmpty()) {
-                continue;
-            }
-            deckList.append(s.toString()).append(": ");
-            if (s.isSingleCard()) {
-                deckList.append(cp.get(0).getName()).append(nl);
-                nLines++;
-            }
-            else {
-                deckList.append(nl);
-                nLines++;
-                for (final Entry<PaperCard, Integer> ev : cp) {
-                    deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
-                    nLines++;
-                }
-            }
-            deckList.append(nl);
-            nLines++;
-        }
-
-        final StringBuilder msg = new StringBuilder();
-        if (nLines <= 32) {
-            msg.append(deckList.toString());
-        }
-        else {
-            msg.append("Decklist too long for dialog." + nl + nl);
-        }
-
-        msg.append("Copy Decklist to Clipboard?");
-
-        // Output
-        if (FOptionPane.showConfirmDialog(msg.toString(), "Decklist", "OK", "Cancel")) {
-            final StringSelection ss = new StringSelection(deckList.toString());
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-        }
-    } // End showDecklist
 
     /** 
      * Checks lengths of selected values for color lists

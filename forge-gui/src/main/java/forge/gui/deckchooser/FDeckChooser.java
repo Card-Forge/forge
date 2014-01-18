@@ -50,7 +50,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             @Override
             public void run() {
                 if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
-                    DeckgenUtil.showDecklist(getDeck());
+                    FDeckViewer.show(getDeck());
                 }
             }
         });

@@ -15245,6 +15245,7 @@ forge-gui/src/main/java/forge/gui/deckchooser/DeckgenUtil.java -text
 forge-gui/src/main/java/forge/gui/deckchooser/DecksComboBox.java -text
 forge-gui/src/main/java/forge/gui/deckchooser/DecksComboBoxEvent.java -text
 forge-gui/src/main/java/forge/gui/deckchooser/FDeckChooser.java -text
+forge-gui/src/main/java/forge/gui/deckchooser/FDeckViewer.java -text
 forge-gui/src/main/java/forge/gui/deckchooser/GenerateThemeDeck.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/deckchooser/IDecksComboBoxListener.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/CDeckEditorUI.java -text
