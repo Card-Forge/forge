@@ -20,6 +20,8 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -47,6 +49,7 @@ public class TokenEffect extends SpellAbilityEffect {
     private String[] tokenStaticAbilities;
     private boolean tokenTapped;
     private boolean tokenAttacking;
+    private String tokenBlocking;
     private String tokenAmount;
     private String tokenToughness;
     private String tokenPower;
@@ -99,7 +102,7 @@ public class TokenEffect extends SpellAbilityEffect {
         } else {
             this.tokenStaticAbilities = null;
         }
-
+        this.tokenBlocking = mapParams.getParam("TokenBlocking");
         this.tokenAmount = mapParams.getParam("TokenAmount");
         this.tokenPower = mapParams.getParam("TokenPower");
         this.tokenToughness = mapParams.getParam("TokenToughness");
@@ -287,6 +290,18 @@ public class TokenEffect extends SpellAbilityEffect {
                         final List<GameEntity> defs = combat.getDefenders();
                         final GameEntity defender = c.getController().getController().chooseSingleEntityForEffect(defs, sa, "Choose which defender to attack with " + c, false);
                         combat.addAttacker(c, defender);
+                    }
+                    if (this.tokenBlocking != null && game.getPhaseHandler().inCombat()) {
+                        Combat combat = game.getPhaseHandler().getCombat();
+                        final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, this.tokenBlocking, sa), null);
+                        if (attacker != null) {
+                            if (combat.isBlocked(attacker)) {
+                                // TODO Flash Foliage: set blocked; attackerBlocked trigger; damage 
+                            } else {
+                                combat.addBlocker(attacker, c);
+                                combat.orderAttackersForDamageAssignment(c);
+                            }
+                        }
                     }
                     if (remember) {
                         game.getCardState(sa.getSourceCard()).addRemembered(c);
