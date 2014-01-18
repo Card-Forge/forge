@@ -94,5 +94,4 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
         selectedDeckType = valueOf;
         setSelectedItem(selectedDeckType);
     }
-
 }

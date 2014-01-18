@@ -275,7 +275,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.initialized = true; //must set flag just before applying filters
         if (!applyFilters()) {
             if (this.pool != null) { //ensure view updated even if filter predicate didn't change
-                this.updateView(true);
+                this.updateView(true, null, 0);
             }
         }
     }
@@ -430,7 +430,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.pool = pool0;
         this.model.addItems(this.pool);
         this.model.setInfinite(infinite);
-        this.updateView(true);
+        this.updateView(true, null, 0);
     }
 
     public ItemListView<T> getTable() {
@@ -497,8 +497,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @param item - Item to select
      */
-    public void setSelectedItem(T item) {
-    	this.table.setSelectedItem(item);
+    public boolean setSelectedItem(T item) {
+    	return this.table.setSelectedItem(item);
     }
 
     /**
@@ -507,8 +507,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @param items - Items to select
      */
-    public void setSelectedItems(Iterable<T> items) {
-        this.table.setSelectedItems(items);
+    public boolean setSelectedItems(Iterable<T> items) {
+        return this.table.setSelectedItems(items);
     }
 
     /**
@@ -517,7 +517,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @param strings - Strings to select
      */
-    public void setSelectedStrings(Iterable<String> strings) {
+    public boolean setSelectedStrings(Iterable<String> strings) {
         List<T> items = new ArrayList<T>();
         for (String itemName : strings) {
             for (Entry<T, Integer> itemEntry : this.pool) {
@@ -527,7 +527,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
                 }
             }
         }
-        this.table.setSelectedItems(items);
+        return this.setSelectedItems(items);
     }
 
     /**
@@ -536,12 +536,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @param itemEntrys - Item entrys to select
      */
-    public void selectItemEntrys(Iterable<Entry<T, Integer>> itemEntrys) {
+    public boolean selectItemEntrys(Iterable<Entry<T, Integer>> itemEntrys) {
         List<T> items = new ArrayList<T>();
         for (Entry<T, Integer> itemEntry : itemEntrys) {
             items.add(itemEntry.getKey());
         }
-        this.setSelectedItems(items);
+        return this.setSelectedItems(items);
     }
 
     /**
@@ -595,12 +595,14 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param qty
      */
     public void addItem(final T item, int qty) {
+        int selectedIndexBefore = this.getSelectedIndex();
         this.pool.add(item, qty);
         if (this.isUnfiltered()) {
             this.model.addItem(item, qty);
         }
-        this.updateView(false);
-        this.table.setSelectedItem(item);
+        List<T> items = new ArrayList<T>();
+        items.add(item);
+        this.updateView(false, items, selectedIndexBefore);
     }
 
     /**
@@ -610,17 +612,17 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param itemsToAdd
      */
     public void addItems(Iterable<Entry<T, Integer>> itemsToAdd) {
+        int selectedIndexBefore = this.getSelectedIndex();
         this.pool.addAll(itemsToAdd);
         if (this.isUnfiltered()) {
             this.model.addItems(itemsToAdd);
         }
-        this.updateView(false);
 
         List<T> items = new ArrayList<T>();
         for (Map.Entry<T, Integer> item : itemsToAdd) {
             items.add(item.getKey());
         }
-        this.setSelectedItems(items);
+        this.updateView(false, items, selectedIndexBefore);
     }
 
     /**
@@ -638,8 +640,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         if (this.isUnfiltered()) {
             this.model.removeItem(item, qty);
         }
-        this.updateView(false);
-        this.fixSelection(selectedIndexBefore, selectedItemsBefore);
+        this.updateView(false, selectedItemsBefore, selectedIndexBefore);
     }
 
     /**
@@ -658,8 +659,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
                 this.model.removeItem(item.getKey(), item.getValue());
             }
         }
-        this.updateView(false);
-        this.fixSelection(selectedIndexBefore, selectedItemsBefore);
+        this.updateView(false, selectedItemsBefore, selectedIndexBefore);
     }
 
     /**
@@ -670,20 +670,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public void removeAllItems() {
         this.pool.clear();
         this.model.clear();
-        this.updateView(false);
-    }
-
-    /**
-     * 
-     * fixSelection.
-     * 
-     * @param selectedIndexBefore
-     * @param selectedItemsBefore
-     */
-    private void fixSelection(int selectedIndexBefore, final Iterable<T> selectedItemsBefore) {
-        if (!this.table.setSelectedItems(selectedItemsBefore)) {
-            this.table.setSelectedIndex(selectedIndexBefore); //restore selected index if couldn't restore selected items
-        }
+        this.updateView(false, null, 0);
     }
 
     /**
@@ -813,7 +800,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
         this.filterPredicate = newFilterPredicate;
         if (this.pool != null) {
-            this.updateView(true);
+            this.updateView(true, this.getSelectedItems(), 0);
         }
         return true;
     }
@@ -892,10 +879,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @param bForceFilter
      */
-    public void updateView(final boolean bForceFilter) {
-        final boolean useFilter = (bForceFilter && (this.filterPredicate != null)) || !isUnfiltered();
+    public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
+        final boolean useFilter = (forceFilter && (this.filterPredicate != null)) || !isUnfiltered();
 
-        if (useFilter || this.wantUnique || bForceFilter) {
+        if (useFilter || this.wantUnique || forceFilter) {
             this.model.clear();
         }
 
@@ -912,11 +899,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, this.pool.FN_GET_NAME);
             this.model.addItems(items);
         }
-        else if (!useFilter && bForceFilter) {
+        else if (!useFilter && forceFilter) {
             this.model.addItems(this.pool);
         }
 
-        this.table.getTableModel().refreshSort();
+        this.table.refresh(itemsToSelect, backupIndexToSelect, false);
 
         for (ItemFilter<? extends T> filter : this.orderedFilters) {
             filter.afterFiltersApplied();
@@ -938,16 +925,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             total = this.pool.countAll();
         }
         this.lblRatio.setText("(" + this.getFilteredItems().countAll() + " / " + total + ")");
-
-        //select first row if no row already selected
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                if (table.getCount() > 0 && table.getSelectionCount() == 0) {
-                    table.setSelectedIndex(0);
-                }
-            }
-        });
     }
 
     /**

@@ -59,6 +59,33 @@ public abstract class ItemView<T extends InventoryItem> {
         return this.isIncrementalSearchActive;
     }
 
+    public void refresh(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final boolean delaySelection) {
+        onRefresh();
+
+        if (delaySelection) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    fixSelection(itemsToSelect, backupIndexToSelect);
+                }
+            });
+        }
+        else {
+            fixSelection(itemsToSelect, backupIndexToSelect);
+        }
+    }
+    protected abstract void onRefresh();
+    private void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
+        if (itemsToSelect == null) {
+            setSelectedIndex(0); //select first item if no items to select
+        }
+        else {
+            if (!setSelectedItems(itemsToSelect)) {
+                setSelectedIndex(backupIndexToSelect);
+            }
+        }
+    }
+
     public final T getSelectedItem() {
         int index = getSelectedIndex();
         return index >= 0 ? getItemAtIndex(index) : null;
@@ -98,7 +125,10 @@ public abstract class ItemView<T extends InventoryItem> {
             }
         }
         if (indices.size() > 0) {
-            setSelectedIndices(indices, scrollIntoView);
+            onSetSelectedIndices(indices);
+            if (scrollIntoView) {
+                scrollSelectionIntoView();
+            }
             return true;
         }
         return false;
@@ -108,6 +138,16 @@ public abstract class ItemView<T extends InventoryItem> {
         setSelectedIndex(index, true);
     }
     public void setSelectedIndex(int index, boolean scrollIntoView) {
+        int count = getCount();
+        if (count == 0) { return; }
+
+        if (index < 0) {
+            index = 0;
+        }
+        else if (index >= count) {
+            index = count - 1;
+        }
+
         onSetSelectedIndex(index);
         if (scrollIntoView) {
             scrollSelectionIntoView();
@@ -118,7 +158,25 @@ public abstract class ItemView<T extends InventoryItem> {
         setSelectedIndices(indices, true);
     }
     public void setSelectedIndices(Iterable<Integer> indices, boolean scrollIntoView) {
-        onSetSelectedIndices(indices);
+        int count = getCount();
+        if (count == 0) { return; }
+
+        List<Integer> indexList = new ArrayList<Integer>();
+        for (Integer index : indices) {
+            if (index >= 0 && index < count) {
+                indexList.add(index);
+            }
+        }
+
+        if (indexList.isEmpty()) { //if no index in range, set selected index based on first index
+            for (Integer index : indices) {
+                setSelectedIndex(index);
+                return;
+            }
+            return;
+        }
+
+        onSetSelectedIndices(indexList);
         if (scrollIntoView) {
             scrollSelectionIntoView();
         }

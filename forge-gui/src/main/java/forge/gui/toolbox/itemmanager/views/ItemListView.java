@@ -142,6 +142,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
      * @param cols &emsp; List<TableColumnInfo<InventoryItem>> of additional columns for this
      */
     public void setup(final Map<ColumnDef, ItemColumn> cols) {
+        final Iterable<T> selectedItemsBefore = getSelectedItems();
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
         //ensure columns ordered properly
@@ -164,7 +165,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.table.setColumnModel(colmodel);
 
         this.tableModel.setup();
-        this.tableModel.refreshSort();
+        this.refresh(selectedItemsBefore, 0, false);
 
         this.table.getTableHeader().setBackground(new Color(200, 200, 200));
     }
@@ -210,25 +211,13 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected void onSetSelectedIndex(int index) {
-        int count = getCount();
-        if (count == 0) { return; }
-
-        if (index >= count) {
-            index = count - 1;
-        }
         this.table.setRowSelectionInterval(index, index);
     }
 
     @Override
     protected void onSetSelectedIndices(Iterable<Integer> indices) {
-        int count = getCount();
-        if (count == 0) { return; }
-
         this.table.clearSelection();
         for (Integer index : indices) {
-            if (index >= count) {
-                index = count - 1;
-            }
             this.table.addRowSelectionInterval(index, index);
         }
     }
@@ -281,6 +270,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     @Override
     public int getIndexAtPoint(Point p) {
         return this.table.rowAtPoint(p);
+    }
+
+    @Override
+    protected void onRefresh() {
+        this.tableModel.refreshSort();
     }
 
     public final class ItemTable extends SkinnedTable {
@@ -505,16 +499,14 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     return;
                 }
 
+                //backup selected items to restore
+                final Iterable<T> selectedItemsBefore = getSelectedItems();
+
                 // This will invert if needed
-                // 2012/07/21 - Changed from modelIndex to ColumnModelIndex due to a crash
-                // Crash was: Hide 2 columns, then search by last column.
                 ItemTableModel.this.cascadeManager.add((ItemColumn) table.getColumnModel().getColumn(columnModelIndex), false);
-                ItemTableModel.this.refreshSort();
+                refresh(selectedItemsBefore, 0, true);
                 table.tableChanged(new TableModelEvent(ItemTableModel.this));
                 table.repaint();
-                if (getCount() > 0) {
-                    table.setRowSelectionInterval(0, 0);
-                }
                 SItemManagerIO.savePreferences(getItemManager());
             }
 
@@ -544,7 +536,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         /**
          * Resort.
          */
-        public void refreshSort() {
+        private void refreshSort() {
             if (this.model.getOrderedList().size() == 0) { return; }
 
             Collections.sort(this.model.getOrderedList(), new MyComparator());
