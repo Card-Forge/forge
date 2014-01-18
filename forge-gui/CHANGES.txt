@@ -59,6 +59,16 @@ Fated Infatuation
 Forgestoker Dragon
 Reap What Is Sown
 Thassa's Rebuff
+Temple of Enlightenment
+Temple of Malice
+Temple of Plenty
+Brimaz, King of Oreskos
+Oreskos Sun Guide
+Archetype of Courage
+Archetype of Endurance
+Archetype of Imagination
+Bile Blight
+Herald of Torment
 
 
 ------------
