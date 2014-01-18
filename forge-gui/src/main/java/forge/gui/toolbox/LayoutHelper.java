@@ -14,7 +14,7 @@ public final class LayoutHelper {
         parentWidth = parent.getWidth();
         parentHeight = parent.getHeight();
     }
-    
+
     /**
      * Layout component to fill remaining vertical space of parent
      * @param comp
@@ -23,7 +23,7 @@ public final class LayoutHelper {
         newLine(); //start new line if needed
         include(comp, parentWidth, parentHeight - y);
     }
-    
+
     /**
      * Layout component to fill remaining horizontal space of current line
      * @param comp
@@ -55,7 +55,7 @@ public final class LayoutHelper {
     public void include(final JComponent comp, float widthPercent, int height) {
         include(comp, Math.round(parentWidth * widthPercent), height);
     }
-    
+
     /**
      * Include component in layout with a fixed width and percentage height
      * @param comp
@@ -65,7 +65,7 @@ public final class LayoutHelper {
     public void include(final JComponent comp, int width, float heightPercent) {
         include(comp, width, Math.round(parentHeight * heightPercent));
     }
-    
+
     /**
      * Include component in layout with a percentage width and height
      * @param comp
@@ -75,7 +75,7 @@ public final class LayoutHelper {
     public void include(final JComponent comp, float widthPercent, float heightPercent) {
         include(comp, Math.round(parentWidth * widthPercent), Math.round(parentHeight * heightPercent));
     }
-    
+
     /**
      * Include component in layout with a fixed width and height
      * @param comp
@@ -84,7 +84,7 @@ public final class LayoutHelper {
      */
     public void include(final JComponent comp, int width, int height) {
         if (width <= 0 || height <= 0) { return; }
-        
+
         if (x + width > parentWidth) {
             newLine();
             if (width > parentWidth) {
@@ -101,7 +101,7 @@ public final class LayoutHelper {
             lineBottom = y + height;
         }
     }
-    
+
     /**
      * Offset current layout helper position
      * @param dx
@@ -114,7 +114,7 @@ public final class LayoutHelper {
 
     /**
      * Start new line of layout
-     */    
+     */
     public void newLine() {
         if (lineBottom == y) { return; }
         x = 0;
@@ -124,13 +124,13 @@ public final class LayoutHelper {
 
     /**
      * Start new line of layout
-     */    
+     */
     public void newLine(int dy) {
         x = 0;
         y = lineBottom + 3 + dy;
         lineBottom = y;
     }
-    
+
     /**
      * @return width of parent
      */
@@ -143,5 +143,19 @@ public final class LayoutHelper {
      */
     public int getParentHeight() {
         return parentHeight;
+    }
+
+    /**
+     * @return current X
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * @return current Y
+     */
+    public int getY() {
+        return y;
     }
 }

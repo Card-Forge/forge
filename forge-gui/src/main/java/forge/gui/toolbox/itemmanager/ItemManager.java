@@ -319,8 +319,15 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             helper.fillLine(this.pnlButtons, showButtonPanel ? buttonPanelHeight : 1); //just show border if no buttons
         }
         helper.include(this.btnFilters, 61, FTextField.HEIGHT);
-        helper.include(this.lblCaption, this.lblCaption.getAutoSizeWidth(), FTextField.HEIGHT);
-        helper.fillLine(this.lblRatio, FTextField.HEIGHT, this.cbViews.getAutoSizeWidth()); //leave room for cbViews
+        int captionWidth = this.lblCaption.getAutoSizeWidth();
+        int ratioWidth = this.lblRatio.getAutoSizeWidth();
+        int cbViewsWidth = this.cbViews.getAutoSizeWidth();
+        int availableCaptionWidth = helper.getParentWidth() - cbViewsWidth - ratioWidth - helper.getX() - 9;
+        if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
+            captionWidth = availableCaptionWidth;
+        }
+        helper.include(this.lblCaption, captionWidth, FTextField.HEIGHT);
+        helper.fillLine(this.lblRatio, FTextField.HEIGHT, cbViewsWidth); //leave room for cbViews
         helper.fillLine(this.cbViews.getComponent(), FTextField.HEIGHT);
         helper.fill(this.viewScroller);
     }
