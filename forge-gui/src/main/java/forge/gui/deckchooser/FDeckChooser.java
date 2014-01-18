@@ -216,31 +216,20 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setSelectedIndex(0);
     }
 
-    private class QuestEventDeckGenerator extends DeckGenerator {
-        public QuestEventDeckGenerator(String name0) {
-            super(name0);
-        }
-
-        @Override
-        public Deck generateDeck() {
-            return DeckgenUtil.getQuestEvent(this.getName()).getEventDeck();
-        }
-    }
-
     private void updateQuestEvents() {
         lstDecks.setAllowMultipleSelections(false);
 
         ArrayList<Deck> decks = new ArrayList<Deck>();
         QuestController quest = Singletons.getModel().getQuest();
         for (QuestEvent e : quest.getDuelsManager().getAllDuels()) {
-            decks.add(new QuestEventDeckGenerator(e.getName()));
+            decks.add(e.getEventDeck());
         }
         for (QuestEvent e : quest.getChallenges()) {
-            decks.add(new QuestEventDeckGenerator(e.getTitle()));
+            decks.add(e.getEventDeck());
         }
 
         lstDecks.setPool(decks);
-        lstDecks.update(true);
+        lstDecks.update(false, true);
 
         getBtnRandom().setText("Random Deck");
         getBtnRandom().setCommand(new Command() {
