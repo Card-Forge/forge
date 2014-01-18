@@ -25,7 +25,6 @@ import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
-import forge.gui.toolbox.itemmanager.views.ItemCellRenderer;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
@@ -129,7 +128,10 @@ public class FDeckViewer extends FDialog {
         this.add(this.btnClose, "w 120px!, h 26px!, ax right");
 
         Map<ColumnDef, ItemColumn> columns = SColumnUtil.getDeckDefaultColumns();
-        columns.get(ColumnDef.DECK_QUANTITY).setCellRenderer(new ItemCellRenderer()); //prevent displaying +/- buttons
+        columns.remove(ColumnDef.DECK_QUANTITY); //prevent displaying +/- buttons
+        ItemColumn qtyColumn = new ItemColumn(ColumnDef.QUANTITY);
+        qtyColumn.setIndex(0);
+        columns.put(ColumnDef.QUANTITY, qtyColumn);
         this.cardManager.getTable().setup(columns);
     }
 
