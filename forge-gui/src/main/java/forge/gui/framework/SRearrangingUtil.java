@@ -107,7 +107,6 @@ public final class SRearrangingUtil {
         }
 
         // Reset and show preview panel
-        pnlDocument.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
         pnlPreview.setVisible(true);
         pnlPreview.setBounds(0, 0, 0, 0);
     }
@@ -195,7 +194,7 @@ public final class SRearrangingUtil {
         }
         else if (cellTarget.equals(cellSrc)) {
             dropzone = Dropzone.NONE;
-            pnlDocument.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+            pnlDocument.setCursor(Cursor.getDefaultCursor());
             pnlPreview.setBounds(0, 0, 0, 0);
         }
         else {
