@@ -36,7 +36,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private DeckType selectedDeckType = DeckType.COLOR_DECK;
 
     private final DeckManager lstDecks = new DeckManager(GameType.Constructed);
-    private final FLabel btnRandom = new FLabel.ButtonBuilder().text("Random").fontSize(14).build();
+    private final FLabel btnViewDeck = new FLabel.ButtonBuilder().text("View Deck").fontSize(14).build();
+    private final FLabel btnRandom = new FLabel.ButtonBuilder().fontSize(14).build();
 
     private boolean isAi;
 
@@ -46,14 +47,16 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     public FDeckChooser(boolean forAi) {
         setOpaque(false);
         isAi = forAi;
-        lstDecks.setItemActivateCommand(new Command() {
+        Command cmdViewDeck = new Command() {
             @Override
             public void run() {
                 if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
                     FDeckViewer.show(getDeck());
                 }
             }
-        });
+        };
+        lstDecks.setItemActivateCommand(cmdViewDeck);
+        btnViewDeck.setCommand(cmdViewDeck);
     }
 
     public void initialize() {
@@ -76,7 +79,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     public DeckManager getLstDecks() { return lstDecks; }
-    private FLabel getBtnRandom() { return btnRandom; }
 
     private void updateCustom() {
         lstDecks.setAllowMultipleSelections(false);
@@ -84,8 +86,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(Singletons.getModel().getDecks().getConstructed());
         lstDecks.update();
 
-        getBtnRandom().setText("Random Deck");
-        getBtnRandom().setCommand(new Command() {
+        btnRandom.setText("Random Deck");
+        btnRandom.setCommand(new Command() {
             @Override
             public void run() {
                 DeckgenUtil.randomSelect(lstDecks);
@@ -149,8 +151,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(decks);
         lstDecks.update(true);
 
-        getBtnRandom().setText("Random Colors");
-        getBtnRandom().setCommand(new Command() {
+        btnRandom.setText("Random Colors");
+        btnRandom.setCommand(new Command() {
             @Override
             public void run() {
                 DeckgenUtil.randomSelectColors(lstDecks);
@@ -183,8 +185,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(decks);
         lstDecks.update(true);
 
-        getBtnRandom().setText("Random Deck");
-        getBtnRandom().setCommand(new Command() {
+        btnRandom.setText("Random Deck");
+        btnRandom.setCommand(new Command() {
             @Override
             public void run() {
                 DeckgenUtil.randomSelect(lstDecks);
@@ -205,8 +207,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(decks);
         lstDecks.update(false, true);
 
-        getBtnRandom().setText("Random Deck");
-        getBtnRandom().setCommand(new Command() {
+        btnRandom.setText("Random Deck");
+        btnRandom.setCommand(new Command() {
             @Override
             public void run() {
                 DeckgenUtil.randomSelect(lstDecks);
@@ -231,8 +233,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(decks);
         lstDecks.update(false, true);
 
-        getBtnRandom().setText("Random Deck");
-        getBtnRandom().setCommand(new Command() {
+        btnRandom.setText("Random Deck");
+        btnRandom.setCommand(new Command() {
             @Override
             public void run() {
                 DeckgenUtil.randomSelect(lstDecks);
@@ -271,10 +273,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     public void populate() {
         setupUI();
         removeAll();
-        this.setLayout(new MigLayout("insets 0, gap 0, flowy"));
-        decksComboBox.addTo(this, "w 10:100%, h 30px!, gapbottom 5px");
-        this.add(new ItemManagerContainer(lstDecks), "w 10:100%, growy, pushy");
-        this.add(btnRandom, "w 10:100%, h 30px!, gaptop 5px");
+        this.setLayout(new MigLayout("insets 0, gap 0"));
+        decksComboBox.addTo(this, "w 100%, h 30px!, gapbottom 5px, spanx 2, wrap");
+        this.add(new ItemManagerContainer(lstDecks), "w 100%, growy, pushy, spanx 2, wrap");
+        this.add(btnViewDeck, "w 50%-3px, h 30px!, gaptop 5px, gapright 6px");
+        this.add(btnRandom, "w 50%-3px, h 30px!, gaptop 5px");
         if (isShowing()) {
             validate();
             repaint();
