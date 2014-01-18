@@ -296,10 +296,10 @@ public class TokenEffect extends SpellAbilityEffect {
                         final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, this.tokenBlocking, sa), null);
                         if (attacker != null) {
                             if (combat.isBlocked(attacker)) {
-                                // TODO Flash Foliage: set blocked; attackerBlocked trigger; damage 
-                            } else {
                                 combat.addBlocker(attacker, c);
                                 combat.orderAttackersForDamageAssignment(c);
+                            } else {
+                                // TODO Flash Foliage: set blocked; attackerBlocked trigger; damage 
                             }
                         }
                     }
