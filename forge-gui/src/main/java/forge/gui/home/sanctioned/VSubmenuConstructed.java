@@ -18,7 +18,6 @@ import java.util.TreeSet;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -40,6 +39,7 @@ import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FComboBox;
+import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FOptionPane;
@@ -82,7 +82,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final FCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-    private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, fill")); // Main content frame
+    private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
 
     // Variants frame and variables
     private final Set<GameType> appliedVariants = new TreeSet<GameType>();
@@ -92,13 +92,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final FCheckBox vntPlanechase = new FCheckBox("Planechase");
     private final FCheckBox vntArchenemy = new FCheckBox("Archenemy");
     private String archenemyType = "Classic";
-    private final FComboBox<String> comboArchenemy = new FComboBox<>(new String[]{
+    private final FComboBoxWrapper<String> comboArchenemy = new FComboBoxWrapper<String>(new String[]{
     		"Classic Archenemy (player 1 is Archenemy)", "Archenemy Rumble (All players are Archenemies)"});
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
-    private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"),
-            true, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"), true);
     private final List<PlayerPanel> playerPanelList = new ArrayList<PlayerPanel>(8);
     private final List<FPanel> activePlayerPanelList = new ArrayList<FPanel>(8);
     private final List<FPanel> inactivePlayerPanelList = new ArrayList<FPanel>(6);
@@ -139,9 +138,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         variantsPanel.add(vntCommander);
         variantsPanel.add(vntPlanechase);
         variantsPanel.add(vntArchenemy);
-        variantsPanel.add(comboArchenemy);
+        variantsPanel.add(comboArchenemy.getComponent());
 
-        constructedFrame.add(variantsPanel, "w 100%, gapbottom 10px, spanx 2, wrap");
+        constructedFrame.add(new FScrollPanel(variantsPanel, true), "w 100%, gapbottom 10px, spanx 2, wrap");
 
         ////////////////////////////////////////////////////////
         ///////////////////// Player Panel /////////////////////
@@ -190,7 +189,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	buildDeckPanel(i);
         }
         populateDeckPanel(true);
-        constructedFrame.add(decksFrame, "grow, push");
+        constructedFrame.add(decksFrame, "w 50%-5px, growy, pushy");
         constructedFrame.setOpaque(false);
         decksFrame.setOpaque(false);
 
@@ -272,7 +271,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         		.icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT)).hoverable(true).opaque(false)
         		.unhoveredAlpha(0.9f).build();
         newNameBtn.setCommand(new Command() {
-
 			@Override
 			public void run() {
 				newNameBtn.requestFocus();
@@ -289,7 +287,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 				}
 				changePlayerFocus(index);
 			}
-        	
         });
         newNameBtn.addFocusListener(nameFocusListener);
         playerPanel.add(newNameBtn, "h 30px, w 30px, gaptop 5px");
