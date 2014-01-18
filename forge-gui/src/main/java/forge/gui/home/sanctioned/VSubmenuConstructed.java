@@ -292,7 +292,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	
         });
         newNameBtn.addFocusListener(nameFocusListener);
-        playerPanel.add(newNameBtn, "h 30px, w 30px, gaptop 5px, gapx unrel, align 50% 50%");
+        playerPanel.add(newNameBtn, "h 30px, w 30px, gaptop 5px");
         nameRandomisers.add(newNameBtn);
 
         // PlayerType
@@ -322,7 +322,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             }
         });
         playerPanel.add(newLabel("Deck:"), "height 30px, gapx rel");
-        playerPanel.add(deckBtn, "height 30px, growx, pushx, spanx 3");
+        playerPanel.add(deckBtn, "height 30px, growx, pushx, spanx 4");
         deckSelectorBtns.add(deckBtn);
 
         playerPanelList.add(playerPanel);
