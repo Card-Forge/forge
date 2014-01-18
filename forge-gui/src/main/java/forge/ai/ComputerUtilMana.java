@@ -169,6 +169,8 @@ public class ComputerUtilMana {
                         break;
                     }
                 }
+            } else {
+            	break;
             }
 
             if (DEBUG_MANA_PAYMENT) {
@@ -210,6 +212,7 @@ public class ComputerUtilMana {
                 if (saPayment.getPayCosts() != null) {
                     final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
                     if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment))) {
+                    	saList.remove(saPayment);
                         continue;
                     }
                 }
