@@ -84,7 +84,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(Singletons.getModel().getDecks().getConstructed());
         lstDecks.update();
 
-        getBtnRandom().setText("Random deck");
+        getBtnRandom().setText("Random Deck");
         getBtnRandom().setCommand(new Command() {
             @Override
             public void run() {
@@ -149,7 +149,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(decks);
         lstDecks.update(true);
 
-        getBtnRandom().setText("Random colors");
+        getBtnRandom().setText("Random Colors");
         getBtnRandom().setCommand(new Command() {
             @Override
             public void run() {
@@ -183,7 +183,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(decks);
         lstDecks.update(true);
 
-        getBtnRandom().setText("Random deck");
+        getBtnRandom().setText("Random Deck");
         getBtnRandom().setCommand(new Command() {
             @Override
             public void run() {
@@ -205,7 +205,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(decks);
         lstDecks.update(false, true);
 
-        getBtnRandom().setText("Random deck");
+        getBtnRandom().setText("Random Deck");
         getBtnRandom().setCommand(new Command() {
             @Override
             public void run() {
@@ -242,7 +242,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setPool(decks);
         lstDecks.update(true);
 
-        getBtnRandom().setText("Random event");
+        getBtnRandom().setText("Random Deck");
         getBtnRandom().setCommand(new Command() {
             @Override
             public void run() {
