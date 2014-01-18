@@ -122,6 +122,12 @@ public class QuestWinLose extends ControlWinLose {
         this.getView().getBtnRestart().setVisible(false);
         QuestController qc = Singletons.getModel().getQuest();
 
+        // After the first game, reset the card shop pool to be able to buy back anted cards
+        if (lastGame.getMatch().getPlayedGames().size() == 1) {
+            qc.getCards().clearShopList();
+            qc.getCards().getShopList();
+        }
+
         final LobbyPlayer questLobbyPlayer = FServer.instance.getLobby().getQuestPlayer();
         Player questPlayer = null;
         for (Player p : lastGame.getRegisteredPlayers()) {
@@ -133,17 +139,14 @@ public class QuestWinLose extends ControlWinLose {
             //do per-game actions
             GameOutcome outcome = lastGame.getOutcome();
 
-            // Ante returns to owners in a draw
-            if (!outcome.isDraw()) {
-                // Won/lost cards should already be calculated.
-                GameOutcome.AnteResult anteResult = outcome.anteResult.get(questPlayer);
-                if (anteResult != null) {
-                    if (anteResult.wonCards != null)
-                        qc.getCards().addAllCards(anteResult.wonCards);
-                    if (anteResult.lostCards != null)
-                        qc.getCards().loseCards(anteResult.lostCards);
-                    this.anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.equals(outcome.getWinningPlayer()));
-                }
+            // Won/lost cards should already be calculated (even in a draw)
+            GameOutcome.AnteResult anteResult = outcome.anteResult.get(questPlayer);
+            if (anteResult != null) {
+                if (anteResult.wonCards != null)
+                    qc.getCards().addAllCards(anteResult.wonCards);
+                if (anteResult.lostCards != null)
+                    qc.getCards().loseCards(anteResult.lostCards);
+                this.anteReport(anteResult.wonCards, anteResult.lostCards, questPlayer.equals(outcome.getWinningPlayer()));
             }
         }
 
@@ -247,7 +250,6 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         // Reset cards and zeppelin use
-        qData.getCards().clearShopList();
         if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
             qData.getAssets().setItemLevel(QuestItemType.ZEPPELIN, 1);
         }

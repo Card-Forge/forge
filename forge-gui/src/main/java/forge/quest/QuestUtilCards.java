@@ -337,7 +337,7 @@ public final class QuestUtilCards {
      */
     public void loseCards(final List<PaperCard> cards) {
         for(PaperCard pc: cards)
-            this.sellCard(pc, 1, 0, false);
+            this.sellCard(pc, 1, 0, true);
     }
 
     /**
