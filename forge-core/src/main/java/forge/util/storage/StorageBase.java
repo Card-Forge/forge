@@ -19,6 +19,7 @@ package forge.util.storage;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -38,7 +39,9 @@ import forge.util.IItemReader;
  */
 public class StorageBase<T> implements IStorage<T> {
     protected final Map<String, T> map;
-    private final String name;
+
+    public final static StorageBase<?> emptyMap = new StorageBase<Object>("Empty", new HashMap<String, Object>());
+    public final String name;
 
     public StorageBase(final String name, final IItemReader<T> io) {
         this.name = name;
@@ -61,20 +64,8 @@ public class StorageBase<T> implements IStorage<T> {
     }
 
     @Override
-    public final Iterator<T> iterator() {
-        final IStorage<IStorage<T>> folders = getFolders();
-        if (folders == null) { //if no folders, just return map iterator
-            return this.map.values().iterator();
-        }
-        //otherwise return iterator for list containing folder items followed by map's items
-        ArrayList<T> items = new ArrayList<T>();
-        for (IStorage<T> folder : folders) {
-            for (T item : folder) {
-                items.add(item);
-            }
-        }
-        items.addAll(this.map.values());
-        return items.iterator();
+    public Iterator<T> iterator() {
+        return this.map.values().iterator();
     }
 
     @Override
@@ -84,16 +75,12 @@ public class StorageBase<T> implements IStorage<T> {
 
     @Override
     public int size() {
-        int size = this.map.size();
-        if (this.getFolders() != null) {
-            size += this.getFolders().size();
-        }
-        return size;
+        return this.map.size();
     }
 
     @Override
     public T find(Predicate<T> condition) {
-        return Iterables.tryFind(this, condition).orNull();
+        return Iterables.tryFind(map.values(), condition).orNull();
     }
 
     @Override
@@ -106,9 +93,11 @@ public class StorageBase<T> implements IStorage<T> {
         throw new UnsupportedOperationException("This is a read-only storage");
     }
 
+    // we don't have nested folders unless that's overridden in a derived class
+    @SuppressWarnings("unchecked")
     @Override
     public IStorage<IStorage<T>> getFolders() {
-        return null; //no nested folders unless getFolders() overridden in a derived class
+        return (IStorage<IStorage<T>>) emptyMap;
     }
 
     /* (non-Javadoc)
@@ -116,6 +105,7 @@ public class StorageBase<T> implements IStorage<T> {
      */
     @Override
     public String getName() {
+        // TODO Auto-generated method stub
         return name;
     }
 }
