@@ -666,7 +666,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             		appliedVariants.remove(GameType.ArchenemyRumble);
                 }
             }
-            System.out.println("The following variants are applied: " + appliedVariants);
         }
     };
 
