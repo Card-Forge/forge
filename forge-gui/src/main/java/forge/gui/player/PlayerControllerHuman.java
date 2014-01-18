@@ -36,6 +36,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameType;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardShields;
@@ -357,14 +358,14 @@ public class PlayerControllerHuman extends PlayerController {
         if (canUseSelectCardsInput) {
             InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<T>(isOptional ? 0 : 1, 1, options);
             input.setCancelAllowed(isOptional);
-            input.setMessage(formatMessage(title, targetedPlayer));
+            input.setMessage(title);
             input.showAndWait();
             return Iterables.getFirst(input.getSelected(), null);
         }
 
         return isOptional ? GuiChoose.oneOrNone(title, options) : GuiChoose.one(title, options);
     }
-    
+
     @Override
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
         final Integer[] choices = new Integer[max + 1 - min];
@@ -457,11 +458,11 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#reveal(java.lang.String, java.util.List, forge.game.zone.ZoneType, forge.game.player.Player)
      */
     @Override
-    public void reveal(Collection<Card> cards, ZoneType zone, Player owner, String message) {
-        if (StringUtils.isBlank(message)) {
-            message = "Looking at cards in {player's} " + zone.name();
+    public void reveal(Collection<Card> cards, ZoneType zoneType, Player owner, String messagePrefix) {
+        if (StringUtils.isBlank(messagePrefix)) {
+            messagePrefix = "Looking at cards in ";
         }
-        GuiChoose.reveal(formatMessage(message, owner), cards);
+        GuiChoose.reveal(AbilityUtils.createPlayerZoneMessage(owner, zoneType, messagePrefix), cards);
     }
 
     @Override
@@ -830,13 +831,6 @@ public class PlayerControllerHuman extends PlayerController {
     public void notifyOfValue(SpellAbility sa, GameObject realtedTarget, String value) {
         String message = formatNotificationMessage(sa, realtedTarget, value);
         GuiDialog.message(message, sa.getSourceCard() == null ? "" : sa.getSourceCard().getName());
-    }
-
-    private String formatMessage(String message, Object related) {
-        if(related instanceof Player && message.indexOf("{player") >= 0)
-            message = message.replace("{player}", mayBeYou(related)).replace("{player's}", Lang.getPossesive(mayBeYou(related)));
-        
-        return message;
     }
 
     // These are not much related to PlayerController
