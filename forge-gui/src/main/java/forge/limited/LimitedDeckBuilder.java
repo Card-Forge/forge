@@ -292,6 +292,9 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
      * @param clrCnts
      */
     private void addLands(final int[] clrCnts) {
+        // basic lands that are available in the deck
+        Iterable<PaperCard> basicLands = Iterables.filter(aiPlayables, Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
+        Set<PaperCard> snowLands = new HashSet<PaperCard>();
 
         // total of all ClrCnts
         int totalColor = 0;
@@ -308,16 +311,27 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
             if (clrCnts[i] > 0) {
                 // calculate number of lands for each color
                 final float p = (float) clrCnts[i] / (float) totalColor;
-                final int nLand = Math.round(landsNeeded * p); // desired truncation to int
+                int nLand = Math.round(landsNeeded * p); // desired truncation to int
                 if (logToConsole) {
                     System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", MagicColor.Constant.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
                 }
 
+                // if appropriate snow-covered lands are available, add them
+                for (PaperCard cp : basicLands) {
+                    if (cp.getName().equals(MagicColor.Constant.SNOW_LANDS.get(i))) {
+                        snowLands.add(cp);
+                        nLand--;
+                    }
+                }
+                
                 for (int j = 0; j < nLand; j++) {
                     deckList.add(getBasicLand(i));
                 }
             }
         }
+
+        deckList.addAll(snowLands);
+        aiPlayables.removeAll(snowLands);
     }
 
     /**
