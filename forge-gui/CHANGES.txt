@@ -69,6 +69,14 @@ Archetype of Endurance
 Archetype of Imagination
 Bile Blight
 Herald of Torment
+Tromokratis
+Arbiter of the Ideal
+Everflame Eidolon
+Mindreaver
+Fated Intervention
+Raised by Wolves
+Skyreaping
+Champion of Stray Souls
 
 
 ------------
