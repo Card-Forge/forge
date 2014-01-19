@@ -59,20 +59,9 @@ public abstract class ItemView<T extends InventoryItem> {
         return this.isIncrementalSearchActive;
     }
 
-    public void refresh(final Iterable<T> itemsToSelect, final int backupIndexToSelect, final boolean delaySelection) {
+    public void refresh(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
         onRefresh();
-
-        if (delaySelection) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    fixSelection(itemsToSelect, backupIndexToSelect);
-                }
-            });
-        }
-        else {
-            fixSelection(itemsToSelect, backupIndexToSelect);
-        }
+        fixSelection(itemsToSelect, backupIndexToSelect);
     }
     protected abstract void onRefresh();
     private void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {

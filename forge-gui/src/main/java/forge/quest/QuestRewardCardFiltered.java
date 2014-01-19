@@ -15,7 +15,6 @@ import forge.item.PaperCard;
  *
  */
 public class QuestRewardCardFiltered extends QuestRewardCard implements IQuestRewardCard {
-
     private final String description;
     private final Predicate<PaperCard> predicates;
 
@@ -39,6 +38,15 @@ public class QuestRewardCardFiltered extends QuestRewardCard implements IQuestRe
         return description;
     }
 
+    @Override
+    public String toString() {
+        return description;
+    }
+
+    @Override
+    public Comparable<?> getCompareValue() {
+        return description;
+    }
 
     /**
      * The item type.

@@ -14,7 +14,6 @@ import forge.util.ItemPool;
  *
  */
 public class QuestRewardCardDuplicate implements IQuestRewardCard {
-
     private final String description;
 
     /**
@@ -43,6 +42,16 @@ public class QuestRewardCardDuplicate implements IQuestRewardCard {
     @Override
     public String getItemType() {
         return "duplicate card";
+    }
+
+    @Override
+    public String toString() {
+        return description;
+    }
+
+    @Override
+    public Comparable<?> getCompareValue() {
+        return description;
     }
 
     /**

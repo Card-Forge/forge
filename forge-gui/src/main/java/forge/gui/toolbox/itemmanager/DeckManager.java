@@ -6,8 +6,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import javax.swing.JMenu;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -56,7 +54,7 @@ public final class DeckManager extends ItemManager<Deck> {
     private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT_OVER);
 
     private final GameType gametype;
-    private boolean nameOnly, preventEdit;
+    private boolean stringOnly, preventEdit;
     private Command cmdDelete, cmdSelect;
     private final Map<ColumnDef, ItemColumn> columns = SColumnUtil.getColumns(
             ColumnDef.DECK_ACTIONS,
@@ -102,28 +100,27 @@ public final class DeckManager extends ItemManager<Deck> {
     public void update() {
         update(false, false);
     }
-    public void update(boolean nameOnly0) {
-        update(nameOnly0, nameOnly0);
+    public void update(boolean stringOnly0) {
+        update(stringOnly0, stringOnly0);
     }
-    public void update(boolean nameOnly0, boolean preventEdit0) {
-        if (this.nameOnly != nameOnly0) {
-            this.nameOnly = nameOnly0;
-            boolean visible = !nameOnly0;
-            for (Entry<ColumnDef, ItemColumn> column : columns.entrySet()) {
-                if (column.getKey() != ColumnDef.NAME) {
-                    column.getValue().setVisible(visible);
-                }
-            }
+    public void update(boolean stringOnly0, boolean preventEdit0) {
+        if (this.stringOnly != stringOnly0) {
+            this.stringOnly = stringOnly0;
             this.restoreDefaultFilters();
         }
-        if (nameOnly0) {
+        if (stringOnly0) {
             preventEdit0 = true; //if name only, always prevent edit
         }
         if (this.preventEdit != preventEdit0) {
             this.preventEdit = preventEdit0;
             columns.get(ColumnDef.DECK_ACTIONS).setVisible(!preventEdit0);
         }
-        this.getTable().setup(columns);
+        if (stringOnly0) {
+            this.getTable().setup(SColumnUtil.getStringColumn());
+        }
+        else {
+            this.getTable().setup(columns);
+        }
     }
 
     /**
@@ -146,7 +143,7 @@ public final class DeckManager extends ItemManager<Deck> {
 
     @Override
     protected void addDefaultFilters() {
-        if (!this.nameOnly) {
+        if (!this.stringOnly) {
             addFilter(new DeckColorFilter(this));
         }
     }
@@ -158,7 +155,7 @@ public final class DeckManager extends ItemManager<Deck> {
 
     @Override
     protected void buildAddFilterMenu(JMenu menu) {
-        if (this.nameOnly) { return; }
+        if (this.stringOnly) { return; }
 
         GuiUtils.addSeparator(menu); //separate from current search item
 

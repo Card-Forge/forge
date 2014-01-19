@@ -46,6 +46,12 @@ public final class SColumnUtil {
         return columns;
     }
 
+    public static Map<ColumnDef, ItemColumn> getStringColumn() {
+        Map<ColumnDef, ItemColumn> columns = getColumns(ColumnDef.STRING);
+        columns.get(ColumnDef.STRING).setSortPriority(1);
+        return columns;
+    }
+
     public static Map<ColumnDef, ItemColumn> getCatalogDefaultColumns() {
         Map<ColumnDef, ItemColumn> columns = getColumns(
                 ColumnDef.FAVORITE,

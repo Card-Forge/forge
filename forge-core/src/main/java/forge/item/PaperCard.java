@@ -172,6 +172,11 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         // return String.format("%s|%s", name, cardSet);
     }
 
+    @Override
+    public Comparable<?> getCompareValue() {
+        return this.name;
+    }
+
     /*
      * (non-Javadoc)
      * 

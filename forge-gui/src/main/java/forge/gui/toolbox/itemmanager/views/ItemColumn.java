@@ -52,7 +52,6 @@ import forge.limited.DraftRankCache;
  * 
  * @param <T> a generic type
  */
-
 public class ItemColumn extends TableColumn {
     private static final long serialVersionUID = 3749431834643427572L;
 
@@ -166,6 +165,19 @@ public class ItemColumn extends TableColumn {
     }
 
     public enum ColumnDef {
+        STRING("", "", 0, -1, -1, SortState.ASC, new ItemCellRenderer(),
+                new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                    @Override
+                    public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                        return from.getKey().getCompareValue();
+                    }
+                },
+                new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                    @Override
+                    public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                        return from.getKey().toString();
+                    }
+                }),
         NAME("Name", "Name", 180, -1, -1, SortState.ASC, new ItemCellRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override

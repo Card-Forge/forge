@@ -76,6 +76,16 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
         return this.name;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
+    @Override
+    public Comparable<?> getCompareValue() {
+        return this.name;
+    }
+
     /**
      * Sets the comment.
      *
@@ -133,5 +143,4 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     public final String getBestFileName() {
         return this.getName().replaceAll("[^-_$#@.,{[()]} a-zA-Z0-9]", "");
     }
-
 }

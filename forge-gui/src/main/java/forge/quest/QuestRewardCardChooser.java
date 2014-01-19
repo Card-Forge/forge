@@ -19,7 +19,6 @@ import forge.util.ItemPool;
  *
  */
 public class QuestRewardCardChooser extends QuestRewardCard implements InventoryItem  {
-
     /**
      * Possible types for this object.
      */
@@ -58,6 +57,16 @@ public class QuestRewardCardChooser extends QuestRewardCard implements Inventory
      */
     @Override
     public String getName() {
+        return description;
+    }
+
+    @Override
+    public String toString() {
+        return description;
+    }
+
+    @Override
+    public Comparable<?> getCompareValue() {
         return description;
     }
 

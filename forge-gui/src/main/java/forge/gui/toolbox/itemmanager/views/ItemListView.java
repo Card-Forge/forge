@@ -20,6 +20,7 @@ package forge.gui.toolbox.itemmanager.views;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -53,8 +54,6 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedTable;
@@ -75,6 +74,8 @@ import forge.util.ItemPoolSorter;
  */
 @SuppressWarnings("serial")
 public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
+    private static final int ROW_HEIGHT = 20;
+
     private final ItemTable table = new ItemTable();
     private final ItemTableModel tableModel;
 
@@ -127,8 +128,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         this.table.setFont(FSkin.getFont(12));
         this.table.setBorder((Border)null);
-        this.table.getTableHeader().setBorder(null);
-        this.table.setRowHeight(20);
+        this.table.setRowHeight(ROW_HEIGHT);
         this.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         // prevent tables from intercepting tab focus traversals
@@ -160,14 +160,20 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             if (col.isVisible()) { colmodel.addColumn(col); }
         }
 
+        //hide table header if only showing single string column
+        if (cols.size() == 1 && cols.containsKey(ColumnDef.STRING)) {
+            this.table.getTableHeader().setPreferredSize(new Dimension(0, 0));
+        }
+        else {
+            this.table.getTableHeader().setPreferredSize(new Dimension(0, ROW_HEIGHT));
+        }
+
         this.tableModel.addListeners();
         this.table.setModel(this.tableModel);
         this.table.setColumnModel(colmodel);
 
         this.tableModel.setup();
-        this.refresh(selectedItemsBefore, 0, false);
-
-        this.table.getTableHeader().setBackground(new Color(200, 200, 200));
+        this.refresh(selectedItemsBefore, 0);
     }
 
     public JTable getTable() {
@@ -292,6 +298,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     return tableColumn.getLongName();
                 }
             };
+            header.setBorder(null);
+            header.setBackground(new Color(200, 200, 200));
             ((DefaultTableCellRenderer)header.getDefaultRenderer()).setHorizontalAlignment(SwingConstants.LEFT);
             return header;
         }
@@ -412,22 +420,22 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         public void setup() {
             final Enumeration<TableColumn> e = table.getColumnModel().getColumns();
-            final TableColumn[] sortcols = new TableColumn[table.getColumnCount()];
+            final ItemColumn[] sortcols = new ItemColumn[table.getColumnCount()];
 
             // Assemble priority sort.
             while (e.hasMoreElements()) {
                 final ItemColumn col = (ItemColumn) e.nextElement();
-                if (col.getSortPriority() > 0 && col.getSortPriority() < sortcols.length) {
-                    sortcols[col.getSortPriority()] = col;
+                if (col.getSortPriority() > 0 && col.getSortPriority() <= sortcols.length) {
+                    sortcols[col.getSortPriority() - 1] = col;
                 }
             }
 
             cascadeManager.reset();
 
-            ArrayUtils.reverse(sortcols);
-            for (int i = 1; i < sortcols.length; i++) {
-                if (sortcols[i] != null) {
-                    cascadeManager.add((ItemColumn) sortcols[i], true);
+            for (int i = sortcols.length - 1; i >= 0; i--) {
+                ItemColumn col = sortcols[i];
+                if (col != null) {
+                    cascadeManager.add(col, true);
                 }
             }
         }
@@ -499,14 +507,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     return;
                 }
 
-                //backup selected items to restore
-                final Iterable<T> selectedItemsBefore = getSelectedItems();
-
                 // This will invert if needed
                 ItemTableModel.this.cascadeManager.add((ItemColumn) table.getColumnModel().getColumn(columnModelIndex), false);
-                refresh(selectedItemsBefore, 0, true);
+                ItemTableModel.this.refreshSort();
                 table.tableChanged(new TableModelEvent(ItemTableModel.this));
                 table.repaint();
+                ItemListView.this.setSelectedIndex(0);
                 SItemManagerIO.savePreferences(getItemManager());
             }
 

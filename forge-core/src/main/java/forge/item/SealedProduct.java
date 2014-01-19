@@ -99,6 +99,16 @@ public abstract class SealedProduct implements InventoryItemFromSet {
         return hash;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
+
+    @Override
+    public Comparable<?> getCompareValue() {
+        return getName();
+    }
+
     protected List<PaperCard> generate() {
         return BoosterGenerator.getBoosterPack(contents);
     }

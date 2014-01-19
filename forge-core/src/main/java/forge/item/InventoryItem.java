@@ -31,4 +31,11 @@ public interface InventoryItem extends IHasName
      * @return the type
      */
     String getItemType();
+
+    /**
+     * Return object used to compare this item with other items
+     * 
+     * @return the compare object
+     */
+    Comparable<?> getCompareValue();
 }

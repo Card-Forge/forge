@@ -917,7 +917,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             this.model.addItems(this.pool);
         }
 
-        this.table.refresh(itemsToSelect, backupIndexToSelect, false);
+        this.table.refresh(itemsToSelect, backupIndexToSelect);
 
         for (ItemFilter<? extends T> filter : this.orderedFilters) {
             filter.afterFiltersApplied();

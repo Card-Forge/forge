@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JPanel;
+
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -113,8 +114,16 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     private class ColorDeckGenerator extends DeckGenerator {
-        public ColorDeckGenerator(String name0) {
+        private int index;
+
+        public ColorDeckGenerator(String name0, int index0) {
             super(name0);
+            this.index = index0;
+        }
+
+        @Override
+        public Comparable<?> getCompareValue() {
+            return this.index; //ensure color items appear in proper order
         }
 
         @Override
@@ -133,15 +142,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateColors() {
         lstDecks.setAllowMultipleSelections(true);
 
+        String[] colors = new String[] { "Random 1", "Random 2", "Random 3",
+                "White", "Blue", "Black", "Red", "Green" };
         ArrayList<Deck> decks = new ArrayList<Deck>();
-        decks.add(new ColorDeckGenerator("Random 1"));
-        decks.add(new ColorDeckGenerator("Random 2"));
-        decks.add(new ColorDeckGenerator("Random 3"));
-        decks.add(new ColorDeckGenerator("White"));
-        decks.add(new ColorDeckGenerator("Blue"));
-        decks.add(new ColorDeckGenerator("Black"));
-        decks.add(new ColorDeckGenerator("Red"));
-        decks.add(new ColorDeckGenerator("Green"));
+        for (int i = 0; i < colors.length; i++) {
+            decks.add(new ColorDeckGenerator(colors[i], i));
+        }
 
         lstDecks.setPool(decks);
         lstDecks.update(true);
