@@ -997,7 +997,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (0 == c.intValue()) {
             return PaymentDecision.number(0);
         }
-
+        if (list.size() < c) {
+            return null;
+        }
         InputSelectCardsFromList inp = new InputSelectCardsFromList(c, c, list);
         inp.setMessage("Select a " + cost.getDescriptiveType() + " to sacrifice (%d left)");
         inp.setCancelAllowed(true);
