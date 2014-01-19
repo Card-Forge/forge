@@ -147,7 +147,9 @@ public enum CounterType {
     MAGNET(),
 
     MANA(),
-
+    
+    MANIFESTATION(),
+    
     MANNEQUIN(),
 
     MATRIX(),
