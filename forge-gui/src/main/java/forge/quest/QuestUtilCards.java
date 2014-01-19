@@ -337,7 +337,7 @@ public final class QuestUtilCards {
      */
     public void loseCards(final List<PaperCard> cards) {
         for(PaperCard pc: cards)
-            this.sellCard(pc, 1, 0, true);
+            this.sellCard(pc, 1, 0, this.qc.getAssets().getItemLevel(QuestItemType.CASH_STAKES) > 0);
     }
 
     /**

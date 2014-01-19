@@ -43,7 +43,9 @@ public enum QuestItemType {
     /** The POUND_FLESH. */
     POUND_FLESH("Pound of Flesh", QuestItemPoundFlesh.class, QuestItemCondition.class),
     /** The AMULET. */
-    CHARM("Charm of Vigor", QuestItemCharmOfVigor.class, QuestItemCondition.class);
+    CHARM("Charm of Vigor", QuestItemCharmOfVigor.class, QuestItemCondition.class),
+
+    CASH_STAKES("Cash Stakes", QuestItemBasic.class, QuestItemCondition.class);
 
     private final String saveFileKey;
     private final Class<? extends QuestItemBasic> bazaarControllerClass;

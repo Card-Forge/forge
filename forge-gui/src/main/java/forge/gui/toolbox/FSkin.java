@@ -1039,6 +1039,7 @@ public enum FSkin {
         ICO_NOTES       (new int[] {400, 560, 80, 80}),
         ICO_HEART       (new int[] {480, 560, 80, 80}),
         ICO_BREW        (new int[] {560, 560, 80, 80}),
+        ICO_STAKES      (new int[] {400, 560, 80, 80}),
 
         ICO_MINUS       (new int[] {560, 640, 80, 80}),
         ICO_PLUS        (new int[] {480, 640, 80, 80}),
