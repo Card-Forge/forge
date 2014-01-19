@@ -134,9 +134,10 @@ public class Upkeep extends Phase {
 
                     final StringBuilder sb = new StringBuilder("Sacrifice upkeep for " + c);
                     final String[] k = ability.split(" pay ");
+                    final String cost = k[1].replaceAll("[{]", "").replaceAll("[}]", " ");
 
                     String effect = "AB$ Sacrifice | Cost$ 0 | SacValid$ Self"
-                            + "| UnlessPayer$ You | UnlessCost$ " + k[1];
+                            + "| UnlessPayer$ You | UnlessCost$ " + cost;
 
                     SpellAbility upkeepAbility = AbilityFactory.getAbility(effect, c);
                     upkeepAbility.setActivatingPlayer(controller);
