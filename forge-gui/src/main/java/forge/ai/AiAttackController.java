@@ -389,7 +389,7 @@ public class AiAttackController {
 
 
         for (Card attacker : attackers) {
-            if (!CombatUtil.canBeBlocked(attacker, this.blockers)
+            if (!CombatUtil.canBeBlocked(attacker, this.blockers, null)
                     || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
                 unblockedAttackers.add(attacker);
             }
@@ -808,9 +808,9 @@ public class AiAttackController {
                     List<Card> attacking = combat.getAttackersOf(defender);
                     CardLists.sortByPowerAsc(attacking);
                     for (Card atta : attacking) {
-                        if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers)) {
+                        if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers, combat)) {
                             damage += ComputerUtilCombat.damageIfUnblocked(atta, opp, null);
-                        } else if (CombatUtil.canBeBlocked(attacker, this.blockers)) {
+                        } else if (CombatUtil.canBeBlocked(attacker, this.blockers, combat)) {
                             attackNum++;
                         }
                     }
@@ -961,7 +961,7 @@ public class AiAttackController {
             return true;
         }
 
-        if (numberOfPossibleBlockers > 1 || (numberOfPossibleBlockers == 1 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 1))) {
+        if (numberOfPossibleBlockers > 1 || (numberOfPossibleBlockers == 1 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 1, combat))) {
             canBeBlocked = true;
         }
         /*System.out.println(attacker + " canBeKilledByOne: " + canBeKilledByOne + " canKillAll: "

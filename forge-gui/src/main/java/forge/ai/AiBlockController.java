@@ -186,7 +186,9 @@ public class AiBlockController {
 
         for (final Card attacker : attackersLeft) {
 
-            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
+            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
+                    || attacker.hasKeyword("CARDNAME can't be blocked unless " +
+                            "all creatures defending player controls block it.")) {
                 continue;
             }
 
@@ -402,7 +404,9 @@ public class AiBlockController {
 
         for (final Card attacker : attackersLeft) {
 
-            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
+            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
+                    || attacker.hasKeyword("CARDNAME can't be blocked unless " +
+                            "all creatures defending player controls block it.")) {
                 continue;
             }
 
@@ -437,7 +441,8 @@ public class AiBlockController {
         
         Card attacker = attackers.get(0);
         
-        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+                || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
             attackers.remove(0);
             makeChumpBlocks(combat, attackers);
             return;
@@ -481,14 +486,15 @@ public class AiBlockController {
     private void makeMultiChumpBlocks(final Combat combat) {
 
         List<Card> currentAttackers = new ArrayList<Card>(attackersLeft);
-        
+
         for (final Card attacker : currentAttackers) {
 
-            if (!attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
+            if (!attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
+                    && !attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
             }
             List<Card> possibleBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
-            if (!CombatUtil.canAttackerBeBlockedWithAmount(attacker, possibleBlockers.size())) {
+            if (!CombatUtil.canAttackerBeBlockedWithAmount(attacker, possibleBlockers.size(), combat)) {
                 continue;
             }
             List<Card> usedBlockers = new ArrayList<Card>();
@@ -496,12 +502,12 @@ public class AiBlockController {
                 if (CombatUtil.canBlock(attacker, blocker, combat)) {
                     combat.addBlocker(attacker, blocker);
                     usedBlockers.add(blocker);
-                    if (CombatUtil.canAttackerBeBlockedWithAmount(attacker, usedBlockers.size())) {
+                    if (CombatUtil.canAttackerBeBlockedWithAmount(attacker, usedBlockers.size(), combat)) {
                         break;
                     }
                 }
             }
-            if (CombatUtil.canAttackerBeBlockedWithAmount(attacker, usedBlockers.size())) {
+            if (CombatUtil.canAttackerBeBlockedWithAmount(attacker, usedBlockers.size(), combat)) {
                 attackersLeft.remove(attacker);
             } else {
                 for (Card blocker : usedBlockers) {
@@ -526,7 +532,8 @@ public class AiBlockController {
         for (final Card attacker : tramplingAttackers) {
 
             if ((attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") && !combat.isBlocked(attacker))
-                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+                    || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
             }
 

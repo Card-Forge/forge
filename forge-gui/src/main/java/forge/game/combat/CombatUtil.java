@@ -87,18 +87,13 @@ public class CombatUtil {
             return false;
         }
         final Game game = blocker.getGame();
+        final int blockers = combat.getAllBlockers().size();
 
-        for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            for (final String keyword : c.getKeyword()) {
-                if (keyword.equals("No more than two creatures can block each combat.")
-                        && (combat.getAllBlockers().size() > 1)) {
-                    return false;
-                }
-            }
+        if (blockers > 1 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyTwoBlockers)) {
+            return false;
         }
 
-        if (combat.getAllBlockers().size() > 0
-                && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneBlocker)) {
+        if (blockers > 0 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneBlocker)) {
             return false;
         }
 
@@ -317,7 +312,7 @@ public class CombatUtil {
      *            the blockers
      * @return true, if successful
      */
-    public static boolean canBeBlocked(final Card attacker, final List<Card> blockers) {
+    public static boolean canBeBlocked(final Card attacker, final List<Card> blockers, final Combat combat) {
         int blocks = 0;
         for (final Card blocker : blockers) {
             if (CombatUtil.canBeBlocked(attacker, blocker.getController()) && CombatUtil.canBlock(attacker, blocker)) {
@@ -325,7 +320,7 @@ public class CombatUtil {
             }
         }
 
-        return canAttackerBeBlockedWithAmount(attacker, blocks);
+        return canAttackerBeBlockedWithAmount(attacker, blocks, combat);
     }
 
     /**
@@ -395,7 +390,7 @@ public class CombatUtil {
                         if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
                             final List<Card> possibleBlockers = Lists.newArrayList(defendersArmy);
                             possibleBlockers.remove(blocker);
-                            if (!CombatUtil.canBeBlocked(attacker, possibleBlockers)) {
+                            if (!CombatUtil.canBeBlocked(attacker, possibleBlockers, combat)) {
                                 must = false;
                             }
                         }
@@ -410,7 +405,7 @@ public class CombatUtil {
         for (final Card attacker : attackers) {
             int cntBlockers = combat.getBlockers(attacker).size();
             // don't accept blocker amount for attackers with keyword defining valid blockers amount
-            if (cntBlockers > 0 && !canAttackerBeBlockedWithAmount(attacker, cntBlockers))
+            if (cntBlockers > 0 && !canAttackerBeBlockedWithAmount(attacker, cntBlockers, combat))
                 return String.format("%s cannot be blocked with %d creatures you've assigned", attacker, cntBlockers);
         }
 
@@ -457,7 +452,7 @@ public class CombatUtil {
                 if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
                     final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
                     blockers.remove(blocker);
-                    if (!CombatUtil.canBeBlocked(attacker, blockers)) {
+                    if (!CombatUtil.canBeBlocked(attacker, blockers, combat)) {
                         canBe = false;
                     }
                 }
@@ -475,7 +470,7 @@ public class CombatUtil {
                     if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")) {
                         final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
                         blockers.remove(blocker);
-                        if (!CombatUtil.canBeBlocked(attacker, blockers)) {
+                        if (!CombatUtil.canBeBlocked(attacker, blockers, combat)) {
                             canBe = false;
                         }
                     }
@@ -605,18 +600,18 @@ public class CombatUtil {
             return false;
         }
 
-        if (blocker.hasStartOfKeyword("CARDNAME can't block ")) {
-            for (final String kw : blocker.getKeyword()) {
-                if (kw.startsWith("CARDNAME can't block ")) {
-                    final String unblockableCard = kw.substring(21);
-                    final int id = Integer.parseInt(unblockableCard.substring(unblockableCard.lastIndexOf("(") + 1,
-                            unblockableCard.length() - 1));
-                    if (attacker.getUniqueNumber() == id) {
-                        return false;
-                    }
-                }
-            }
-        }
+//        if (blocker.hasStartOfKeyword("CARDNAME can't block ")) {
+//            for (final String kw : blocker.getKeyword()) {
+//                if (kw.startsWith("CARDNAME can't block ")) {
+//                    final String unblockableCard = kw.substring(21);
+//                    final int id = Integer.parseInt(unblockableCard.substring(unblockableCard.lastIndexOf("(") + 1,
+//                            unblockableCard.length() - 1));
+//                    if (attacker.getUniqueNumber() == id) {
+//                        return false;
+//                    }
+//                }
+//            }
+//        }
 
         // rare case:
         if (blocker.hasKeyword("Shadow")
@@ -811,7 +806,7 @@ public class CombatUtil {
         return true;
     }
 
-    public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount) {
+    public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount, Combat combat) {
         if( amount == 0 )
             return false; // no block
 
@@ -825,6 +820,13 @@ public class CombatUtil {
             String operator = res.substring(0,2);
             if (Expressions.compare(amount, operator, operand) )
                 return false;
+        }
+        if (combat != null && attacker.hasKeyword("CARDNAME can't be blocked " +
+                "unless all creatures defending player controls block it.")) {
+            Player defender = combat.getDefenderPlayerByAttacker(attacker);
+            if (amount < defender.getCreaturesInPlay().size()) {
+                return false;
+            }
         }
 
         return true;

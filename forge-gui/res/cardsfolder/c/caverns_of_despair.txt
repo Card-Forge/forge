@@ -2,7 +2,7 @@ Name:Caverns of Despair
 ManaCost:2 R R
 Types:World Enchantment
 K:No more than two creatures can attack each combat.
-K:No more than two creatures can block each combat.
+S:Mode$ Continuous | GlobalRule$ No more than two creatures can block each combat. | Description$ No more than two creatures can block each combat.
 SVar:NonStackingEffect:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caverns_of_despair.jpg
