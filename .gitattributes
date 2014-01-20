@@ -15249,6 +15249,7 @@ forge-gui/src/main/java/forge/gui/deckchooser/GenerateThemeDeck.java svneol=nati
 forge-gui/src/main/java/forge/gui/deckchooser/IDecksComboBoxListener.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/CDeckEditorUI.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/DeckImport.java -text
+forge-gui/src/main/java/forge/gui/deckeditor/DeckProxy.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/SEditorIO.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/VDeckEditorUI.java -text
 forge-gui/src/main/java/forge/gui/deckeditor/controllers/ACEditorBase.java -text
