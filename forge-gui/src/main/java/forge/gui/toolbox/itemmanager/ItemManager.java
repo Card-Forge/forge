@@ -36,7 +36,6 @@ import java.util.Map.Entry;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -53,6 +52,7 @@ import forge.gui.GuiUtils;
 import forge.gui.toolbox.ContextMenuBuilder;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedCheckBox;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
@@ -123,7 +123,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     private final FComboBoxWrapper<ItemView<T>> cbViews = new FComboBoxWrapper<ItemView<T>>();
     private final ItemListView<T> table;
-    private final JScrollPane viewScroller;
+    private final FScrollPane viewScroller;
     private boolean initialized;
     protected boolean lockFiltering;
 
@@ -140,7 +140,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.model = new ItemManagerModel<T>(this, genericType0);
         this.table = new ItemListView<T>(this, this.model);
         this.table.setAllowMultipleSelections(false);
-        this.viewScroller = new JScrollPane(this.table.getComponent());
+        this.viewScroller = new FScrollPane(this.table.getComponent());
         this.cbViews.addItem(this.table);
     }
 
@@ -152,10 +152,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
         //build table view
         this.table.initialize();
-        this.viewScroller.setOpaque(false);
-        this.viewScroller.getViewport().setOpaque(false);
-        this.viewScroller.setBorder(null);
-        this.viewScroller.getViewport().setBorder(null);
         this.viewScroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
         this.viewScroller.addComponentListener(new ComponentAdapter() {
             @Override

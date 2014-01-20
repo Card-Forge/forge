@@ -17,10 +17,16 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
+import java.awt.Component;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 
 /**
@@ -28,9 +34,30 @@ import forge.item.InventoryItem;
  */
 @SuppressWarnings("serial")
 public class ItemCellRenderer extends DefaultTableCellRenderer {
+    private static final Border DEFAULT_BORDER = new EmptyBorder(1, 1, 1, 1);
+
     public boolean alwaysShowTooltip() {
         return false;
     }
+
     public <T extends InventoryItem> void processMouseEvent(final MouseEvent e, final ItemListView<T> listView, final Object value, final int row, final int column) {
     }
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        JLabel lbl = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        lbl.setBorder(DEFAULT_BORDER); //prevent selected cell having inner border
+        if (isSelected) {
+            lbl.setBackground(table.getSelectionBackground());
+        }
+        else {
+            if (row % 2 == 0) {
+                lbl.setBackground(table.getBackground());
+            }
+            else {
+                FSkin.setTempBackground(lbl, ItemListView.ALT_ROW_COLOR);
+            }
+        }
+        return lbl;
+    } 
 }

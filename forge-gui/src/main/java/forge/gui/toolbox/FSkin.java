@@ -84,6 +84,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import javax.swing.text.JTextComponent;
 
 import org.apache.commons.lang3.text.WordUtils;
@@ -296,6 +298,12 @@ public enum FSkin {
                 this.color = FSkin.alphaColor(this.color, this.alpha);
             }
         }
+    }
+
+    //set border for component that's temporary
+    //only use if can't use ISkinnedComponent class
+    public static void setTempBorder(JComponent comp, SkinBorder skinBorder) {
+        comp.setBorder(skinBorder.createBorder());
     }
 
     public static abstract class SkinBorder {
@@ -2008,7 +2016,7 @@ public enum FSkin {
         }
     }
     public static class JTableSkin<T extends JTable> extends JComponentSkin<T> {
-        private SkinColor selectionForeground, selectionBackground;
+        private SkinColor selectionForeground, selectionBackground, gridColor;
 
         protected JTableSkin() {
         }
@@ -2019,10 +2027,14 @@ public enum FSkin {
         protected void setSelectionBackground(T comp, SkinColor skinColor) { comp.setSelectionBackground(skinColor != null ? skinColor.color : null); this.selectionBackground = skinColor; }
         protected void resetSelectionBackground() { this.selectionBackground = null; }
 
+        protected void setGridColor(T comp, SkinColor skinColor) { comp.setGridColor(skinColor != null ? skinColor.color : null); this.gridColor = skinColor; }
+        protected void resetGridColor() { this.gridColor = null; }
+
         @Override
         protected void reapply(T comp) {
             if (this.selectionForeground != null) { setSelectionForeground(comp, this.selectionForeground); }
             if (this.selectionBackground != null) { setSelectionBackground(comp, this.selectionBackground); }
+            if (this.gridColor != null) { setGridColor(comp, this.gridColor); }
             super.reapply(comp);
         }
     }
@@ -2862,6 +2874,42 @@ public enum FSkin {
 
         public void setSelectionBackground(SkinColor skinColor) { getSkin().setSelectionBackground(this, skinColor); }
         @Override public void setSelectionBackground(Color color) { getSkin().resetSelectionBackground(); super.setSelectionBackground(color); }
+
+        public void setGridColor(SkinColor skinColor) { getSkin().setGridColor(this, skinColor); }
+        @Override public void setGridColor(Color color) { getSkin().resetGridColor(); super.setGridColor(color); }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            getSkin().update(this);
+            super.paintComponent(g);
+        }
+    }
+    public static class SkinnedTableHeader extends JTableHeader implements ISkinnedComponent<JTableHeader> {
+        private static final long serialVersionUID = -1842620489613307379L;
+
+        private JComponentSkin<JTableHeader> skin;
+        public JComponentSkin<JTableHeader> getSkin() {
+            if (skin == null) { skin = new JComponentSkin<JTableHeader>(); }
+            return skin;
+        }
+
+        public SkinnedTableHeader() { super(); }
+        public SkinnedTableHeader(TableColumnModel columnModel0) { super(columnModel0); }
+
+        public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
+        @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }
+
+        public void setBackground(SkinColor skinColor) { getSkin().setBackground(this, skinColor); }
+        @Override public void setBackground(Color color) { getSkin().resetBackground(); super.setBackground(color); }
+
+        public void setFont(SkinFont skinFont) { getSkin().setFont(this, skinFont); }
+        @Override public void setFont(Font font) { getSkin().resetFont(); super.setFont(font); }
+
+        public void setCursor(SkinCursor skinCursor) { getSkin().setCursor(this, skinCursor); }
+        @Override public void setCursor(Cursor cursor) { getSkin().resetCursor(); super.setCursor(cursor); }
+
+        public void setBorder(SkinBorder skinBorder) { getSkin().setBorder(this, skinBorder); }
+        @Override public void setBorder(Border border) { getSkin().resetBorder(); super.setBorder(border); }
 
         @Override
         protected void paintComponent(Graphics g) {

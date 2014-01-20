@@ -17,7 +17,6 @@
  */
 package forge.gui.toolbox.itemmanager.views;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -38,11 +37,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -56,7 +57,11 @@ import javax.swing.table.TableColumnModel;
 
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinBorder;
+import forge.gui.toolbox.FSkin.SkinColor;
+import forge.gui.toolbox.FSkin.SkinFont;
 import forge.gui.toolbox.FSkin.SkinnedTable;
+import forge.gui.toolbox.FSkin.SkinnedTableHeader;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
@@ -74,6 +79,15 @@ import forge.util.ItemPoolSorter;
  */
 @SuppressWarnings("serial")
 public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
+    static final SkinColor BACK_COLOR = FSkin.getColor(FSkin.Colors.CLR_THEME2);
+    private static final SkinColor FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+    private static final SkinColor SEL_ACTIVE_COLOR = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
+    private static final SkinColor SEL_INACTIVE_COLOR = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+    private static final SkinColor HEADER_BACK_COLOR = BACK_COLOR.getContrastColor(-20);
+    static final SkinColor ALT_ROW_COLOR = BACK_COLOR.getContrastColor(-10);
+    private static final SkinColor GRID_COLOR = BACK_COLOR.getContrastColor(20);
+    private static final SkinBorder HEADER_BORDER = new FSkin.CompoundSkinBorder(new FSkin.MatteSkinBorder(0, 0, 1, 1, GRID_COLOR), new EmptyBorder(0, 1, 0, 0));
+    private static final SkinFont ROW_FONT = FSkin.getFont(12);
     private static final int ROW_HEIGHT = 20;
 
     private final ItemTable table = new ItemTable();
@@ -94,25 +108,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.tableModel = new ItemTableModel(model0);
 
         // use different selection highlight colors for focused vs. unfocused tables
-        this.table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
-        this.table.setSelectionForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.table.addFocusListener(new FocusListener() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (!e.isTemporary()) {
-                    table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
-                }
-            }
-
-            @Override
-            public void focusGained(FocusEvent e) {
-                table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
-                // if nothing selected when we gain focus, select the first row (if exists)
-                if (-1 == getSelectedIndex() && getCount() > 0) {
-                    table.setRowSelectionInterval(0, 0);
-                }
-            }
-        });
         this.table.addMouseListener(new FMouseAdapter() {
             @Override
             public void onLeftDoubleClick(MouseEvent e) {
@@ -125,11 +120,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 getItemManager().showContextMenu(e);
             }
         });
-
-        this.table.setFont(FSkin.getFont(12));
-        this.table.setBorder((Border)null);
-        this.table.setRowHeight(ROW_HEIGHT);
-        this.table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         // prevent tables from intercepting tab focus traversals
         this.table.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
@@ -284,9 +274,39 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     public final class ItemTable extends SkinnedTable {
+        private ItemTable() {
+            this.setBackground(BACK_COLOR);
+            this.setForeground(FORE_COLOR);
+            this.setSelectionForeground(FORE_COLOR);
+            this.setSelectionBackground(SEL_INACTIVE_COLOR);
+            this.setGridColor(GRID_COLOR);
+            this.setFont(ROW_FONT);
+
+            this.addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    setSelectionBackground(SEL_ACTIVE_COLOR);
+                    // if nothing selected when we gain focus, select the first row (if exists)
+                    if (getSelectedIndex() == -1 && getCount() > 0) {
+                        setRowSelectionInterval(0, 0);
+                    }
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    if (!e.isTemporary()) {
+                        setSelectionBackground(SEL_INACTIVE_COLOR);
+                    }
+                }
+            });
+
+            this.setBorder((Border)null);
+            this.setRowHeight(ROW_HEIGHT);
+            this.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        }
         @Override
         protected JTableHeader createDefaultTableHeader() {
-            JTableHeader header = new JTableHeader(columnModel) {
+            SkinnedTableHeader header = new SkinnedTableHeader(columnModel) {
                 @Override
                 public String getToolTipText(MouseEvent e) {
                     int col = columnModel.getColumnIndexAtX(e.getPoint().x);
@@ -298,9 +318,21 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                     return tableColumn.getLongName();
                 }
             };
-            header.setBorder(null);
-            header.setBackground(new Color(200, 200, 200));
-            ((DefaultTableCellRenderer)header.getDefaultRenderer()).setHorizontalAlignment(SwingConstants.LEFT);
+            header.setBorder((Border)null);
+            header.setBackground(HEADER_BACK_COLOR);
+            header.setForeground(FORE_COLOR);
+
+            final DefaultTableCellRenderer renderer = ((DefaultTableCellRenderer)header.getDefaultRenderer());
+            header.setDefaultRenderer(new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table,
+                        Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                    JLabel lbl = (JLabel) renderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    lbl.setHorizontalAlignment(SwingConstants.LEFT);
+                    FSkin.setTempBorder(lbl, HEADER_BORDER);
+                    return lbl;
+                }
+            });
             return header;
         }
 
