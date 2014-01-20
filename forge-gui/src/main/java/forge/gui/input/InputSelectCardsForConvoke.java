@@ -64,7 +64,6 @@ public final class InputSelectCardsForConvoke extends InputSelectManyBase<Card> 
                 showMessage("The colors provided by " + card.toString() + " you've chosen cannot be used to decrease the manacost of " + remainingCost.toString());
                 flashIncorrectAction();
             }
-            
         }
 
         refresh();

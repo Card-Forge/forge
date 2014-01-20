@@ -49,11 +49,6 @@ public class QuestRewardCardDuplicate implements IQuestRewardCard {
         return description;
     }
 
-    @Override
-    public Comparable<?> getCompareValue() {
-        return description;
-    }
-
     /**
      * Produces a list of options to choose from, in this case,
      * the player's current cards.

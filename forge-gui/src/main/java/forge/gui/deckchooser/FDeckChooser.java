@@ -122,8 +122,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
 
         @Override
-        public Comparable<?> getCompareValue() {
-            return this.index; //ensure color items appear in proper order
+        public int compareTo(final DeckBase d) {
+            return d instanceof ColorDeckGenerator ? Integer.compare(this.index, ((ColorDeckGenerator)d).index) : super.compareTo(d);
         }
 
         @Override

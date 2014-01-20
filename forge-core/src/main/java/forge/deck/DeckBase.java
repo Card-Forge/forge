@@ -81,11 +81,6 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
         return this.name;
     }
 
-    @Override
-    public Comparable<?> getCompareValue() {
-        return this.name;
-    }
-
     /**
      * Sets the comment.
      *

@@ -169,7 +169,7 @@ public class ItemColumn extends TableColumn {
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                        return from.getKey().getCompareValue();
+                        return from.getKey() instanceof Comparable<?> ? (Comparable<?>)from.getKey() : from.getKey().getName();
                     }
                 },
                 new Function<Entry<? extends InventoryItem, Integer>, Object>() {

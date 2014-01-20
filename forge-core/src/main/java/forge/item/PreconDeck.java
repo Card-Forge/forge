@@ -68,11 +68,6 @@ public class PreconDeck implements InventoryItemFromSet {
         return this.deck.toString();
     }
 
-    @Override
-    public Comparable<?> getCompareValue() {
-        return this.deck.getCompareValue();
-    }
-
     public PreconDeck(final Deck d, String set, String description) {
         deck = d;
         this.set = set;

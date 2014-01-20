@@ -65,11 +65,6 @@ public class QuestRewardCardChooser extends QuestRewardCard implements Inventory
         return description;
     }
 
-    @Override
-    public Comparable<?> getCompareValue() {
-        return description;
-    }
-
     /**
      * The item type.
      * 

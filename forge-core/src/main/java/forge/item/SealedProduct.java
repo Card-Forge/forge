@@ -104,11 +104,6 @@ public abstract class SealedProduct implements InventoryItemFromSet {
         return getName();
     }
 
-    @Override
-    public Comparable<?> getCompareValue() {
-        return getName();
-    }
-
     protected List<PaperCard> generate() {
         return BoosterGenerator.getBoosterPack(contents);
     }

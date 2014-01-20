@@ -48,11 +48,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     @Override public String getName() { return name; }
 
     @Override public String toString() { return name; }
-
-    @Override public Comparable<?> getCompareValue() { return name; }
-
     @Override public String getEdition() { return edition.getCode(); }
-
     @Override public int getArtIndex() { return 0; } // This might change however
     @Override public boolean isFoil() { return false; }
     @Override public CardRules getRules() { return card; }

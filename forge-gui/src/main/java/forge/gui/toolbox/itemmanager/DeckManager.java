@@ -263,19 +263,21 @@ public final class DeckManager extends ItemManager<Deck> {
 
         final CardCollections deckManager = Singletons.getModel().getDecks();
 
-        if (this.gametype.equals(GameType.Draft)) {
-            deckManager.getDraft().delete(deck.getName());
+        switch(this.gametype) {
+            case Constructed:
+                deckManager.getConstructed().delete(deck.getName()); break;
+            case Draft:
+                deckManager.getDraft().delete(deck.getName()); break;
+            case Sealed:
+                deckManager.getSealed().delete(deck.getName()); break;
+            case Quest:
+                Singletons.getModel().getQuest().getMyDecks().delete(deck.getName());
+                Singletons.getModel().getQuest().save();
+                break;
+            default:
+                throw new UnsupportedOperationException("Delete not implemneted for game type = " + gametype.toString());
         }
-        else if (this.gametype.equals(GameType.Sealed)) {
-            deckManager.getSealed().delete(deck.getName());
-        }
-        else if (this.gametype.equals(GameType.Quest)) {
-            Singletons.getModel().getQuest().getMyDecks().delete(deck.getName());
-            Singletons.getModel().getQuest().save();
-        }
-        else {
-            deckManager.getConstructed().delete(deck.getName());
-        }
+
 
         this.removeItem(deck, 1);
 

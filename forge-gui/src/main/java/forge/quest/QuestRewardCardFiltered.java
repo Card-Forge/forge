@@ -43,11 +43,6 @@ public class QuestRewardCardFiltered extends QuestRewardCard implements IQuestRe
         return description;
     }
 
-    @Override
-    public Comparable<?> getCompareValue() {
-        return description;
-    }
-
     /**
      * The item type.
      * 
