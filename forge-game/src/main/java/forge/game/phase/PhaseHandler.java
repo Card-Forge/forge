@@ -22,11 +22,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+
 import org.apache.commons.lang3.time.StopWatch;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
+import forge.PreferencesBridge;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntity;
 import forge.game.GameStage;
@@ -432,7 +434,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         for (Player p : game.getPlayers()) {
             int burn = p.getManaPool().clearPool(true);
-            boolean dealDamage = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN);
+            boolean dealDamage = PreferencesBridge.Instance.isManaBurnEnabled();
 
             if (dealDamage) {
                 p.loseLife(burn);
@@ -708,8 +710,7 @@ public class PhaseHandler implements java.io.Serializable {
             }
         }
 
-        boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost() && (!hasBlockCost
-                || Singletons.getModel().getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS)); // true if needless to pay
+        boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost() && (!hasBlockCost || PreferencesBridge.Instance.areBlocksFree()); // true if needless to pay
 
         if (!hasPaid) {
             hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, null, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);

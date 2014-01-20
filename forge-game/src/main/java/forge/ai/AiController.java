@@ -34,6 +34,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.PreferencesBridge;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
@@ -98,7 +99,7 @@ public class AiController {
         player = computerPlayer;
         game = game0;
         
-        canCheatShuffle = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_AI_CHEATS);
+        canCheatShuffle = PreferencesBridge.Instance.getEnableAiCheats();
     }
 
     /**

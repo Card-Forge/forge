@@ -1,10 +1,25 @@
 package forge;
 
-public enum PreferencesBridge {
+
+public class PreferencesBridge {
+    public static PreferencesSet Instance;
     
-    Instance;
-    
-    public static enum GamePref {
-        
+    public interface PreferencesSet {
+
+        public abstract boolean getEnableAiCheats();
+
+        public abstract boolean getCloneModeSource();
+
+        public abstract String getLogEntryType();
+
+        public abstract String getCurrentAiProfile();
+
+        public abstract boolean canRandomFoil();
+
+        public abstract boolean isManaBurnEnabled();
+
+        public abstract boolean areBlocksFree();
+
     }
+    
 }

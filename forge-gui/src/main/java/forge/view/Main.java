@@ -18,6 +18,7 @@
 package forge.view;
 
 
+import forge.PreferencesProvider;
 import forge.Singletons;
 import forge.net.FServer;
 
@@ -44,6 +45,7 @@ public final class Main {
             return;
         }
         
+        forge.PreferencesBridge.Instance = new PreferencesProvider();
         
         // command line startup here
         String mode = args[0].toLowerCase();
