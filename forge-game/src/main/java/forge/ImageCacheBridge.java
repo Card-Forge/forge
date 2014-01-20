@@ -9,5 +9,6 @@ public class ImageCacheBridge {
     public interface Methods {
         String getImageKey(InventoryItem cp, boolean altState);
         String getTokenKey(String imageName);
+        String getMorphImage();
     }
 }

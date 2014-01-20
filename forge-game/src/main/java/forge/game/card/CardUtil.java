@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 import forge.Constant;
+import forge.ImageCacheBridge;
 import forge.card.CardCharacteristicName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -216,7 +217,7 @@ public final class CardUtil {
         ret.setName("");
         ret.setType(types);
 
-        ret.setImageKey(NewConstants.CACHE_MORPH_IMAGE_FILE);
+        ret.setImageKey(ImageCacheBridge.instance.getMorphImage());
 
         return ret;
     }

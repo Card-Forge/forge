@@ -497,8 +497,6 @@ public class Game {
 
     }
 
-    private final boolean LOG_EVENTS = false;
-
     /**
      * Fire only the events after they became real for gamestate and won't get replaced.<br>
      * The events are sent to UI, log and sound system. Network listeners are under development.
