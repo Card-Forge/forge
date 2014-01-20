@@ -141,6 +141,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.table = new ItemListView<T>(this, this.model);
         this.table.setAllowMultipleSelections(false);
         this.viewScroller = new FScrollPane(this.table.getComponent());
+        this.viewScroller.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT)));
         this.cbViews.addItem(this.table);
     }
 
