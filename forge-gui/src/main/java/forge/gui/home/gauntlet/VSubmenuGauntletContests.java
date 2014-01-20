@@ -3,8 +3,6 @@ package forge.gui.home.gauntlet;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
@@ -48,13 +46,13 @@ public enum VSubmenuGauntletContests implements IVSubmenu<CSubmenuGauntletContes
     private final ContestGauntletLister gauntletList = new ContestGauntletLister();
     private final FDeckChooser lstDecks = new FDeckChooser(false);
 
-    private final JScrollPane scrLeft  = new FScrollPane(gauntletList,
+    private final FScrollPane scrLeft  = new FScrollPane(gauntletList,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private final JLabel lblLoad = new FLabel.Builder().fontSize(16)
+    private final FLabel lblLoad = new FLabel.Builder().fontSize(16)
             .fontStyle(Font.BOLD).text("PICK A CONTEST").fontAlign(SwingConstants.CENTER).build();
 
-    private final JLabel lblDesc1 = new FLabel.Builder()
+    private final FLabel lblDesc1 = new FLabel.Builder()
         .text("A gauntlet that has been started will keep the same deck until it is finished.").build();
 
     private VSubmenuGauntletContests() {

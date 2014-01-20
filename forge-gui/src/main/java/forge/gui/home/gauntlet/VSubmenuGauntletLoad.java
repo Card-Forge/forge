@@ -1,9 +1,8 @@
 package forge.gui.home.gauntlet;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
@@ -38,9 +37,9 @@ public enum VSubmenuGauntletLoad implements IVSubmenu<CSubmenuGauntletLoad> {
 
     private final QuickGauntletLister gauntletList = new QuickGauntletLister();
 
-    private final JScrollPane scrLoad = new FScrollPane(gauntletList);
+    private final FScrollPane scrLoad = new FScrollPane(gauntletList);
 
-    private final JLabel lblDesc = new FLabel.Builder().text(
+    private final FLabel lblDesc = new FLabel.Builder().text(
             "Load a previous gauntlet (uses the deck with which it was started).")
             .build();
 
@@ -49,7 +48,7 @@ public enum VSubmenuGauntletLoad implements IVSubmenu<CSubmenuGauntletLoad> {
     private VSubmenuGauntletLoad() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        scrLoad.setBorder(null);
+        scrLoad.setBorder((Border)null);
     }
 
     /* (non-Javadoc)

@@ -23,13 +23,13 @@ import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.game.card.Card;
 import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
+import forge.gui.toolbox.FScrollPane;
 import forge.item.PaperCard;
 
 /**
@@ -61,7 +61,7 @@ public class CardViewer extends JPanel {
         this.detail = new CardDetailPanel(null);
         this.picture = new CardPicturePanel();
 
-        this.add(new JScrollPane(this.jList));
+        this.add(new FScrollPane(this.jList));
         this.add(this.picture);
         this.add(this.detail);
         this.setLayout(new java.awt.GridLayout(1, 3, 6, 0));

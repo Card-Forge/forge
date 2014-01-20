@@ -34,9 +34,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
+import javax.swing.border.Border;
 
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin.SkinColor;
@@ -46,7 +46,7 @@ import forge.gui.toolbox.FSkin.SkinColor;
  *
  */
 @SuppressWarnings("serial")
-public class FScrollPanel extends JScrollPane {
+public class FScrollPanel extends FScrollPane {
     private final boolean useArrowButtons;
     private final ArrowButton[] arrowButtons = new ArrowButton[4];
     private JPanel innerPanel;
@@ -117,11 +117,7 @@ public class FScrollPanel extends JScrollPane {
         super(view, vertical0, horizontal0);
 
         useArrowButtons = useArrowButtons0;
-        getViewport().setOpaque(false);
-        setOpaque(false);
-        setBorder(null);
-        getHorizontalScrollBar().setUnitIncrement(16);
-        getVerticalScrollBar().setUnitIncrement(16);
+        setBorder((Border)null);
         if (useArrowButtons) {
             //ensure scrollbar aren't shown
             getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));

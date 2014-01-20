@@ -30,6 +30,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -84,6 +85,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.JTextComponent;
@@ -1738,7 +1740,6 @@ public enum FSkin {
      * @see <a href="http://tips4java.wordpress.com/2008/10/09/uimanager-defaults/">UIManager Defaults</a>
      */
     private static class ForgeLookAndFeel { //needs to live in FSkin for access to skin colors
-
         private static boolean onInit = true;
         private static boolean isMetalLafSet = false;
 
@@ -2373,10 +2374,131 @@ public enum FSkin {
             return skin;
         }
 
-        public SkinnedScrollPane() { super(); }
-        public SkinnedScrollPane(Component comp) { super(comp); }
-        public SkinnedScrollPane(int vsbPolicy, int hsbPolicy) { super(vsbPolicy, hsbPolicy); }
-        public SkinnedScrollPane(Component comp, int vsbPolicy, int hsbPolicy) { super(comp, vsbPolicy, hsbPolicy); }
+        public SkinnedScrollPane() { super(); init(); }
+        public SkinnedScrollPane(Component comp) { super(comp); init(); }
+        public SkinnedScrollPane(int vsbPolicy, int hsbPolicy) { super(vsbPolicy, hsbPolicy); init(); }
+        public SkinnedScrollPane(Component comp, int vsbPolicy, int hsbPolicy) { super(comp, vsbPolicy, hsbPolicy); init(); }
+
+        private void init() {
+            getVerticalScrollBar().setOpaque(false);
+            getVerticalScrollBar().setUI(new SkinScrollBarUI(true));
+            getHorizontalScrollBar().setOpaque(false);
+            getHorizontalScrollBar().setUI(new SkinScrollBarUI(false));
+        }
+        private static class SkinScrollBarUI extends BasicScrollBarUI {
+            @SuppressWarnings("serial")
+            private static JButton hiddenButton = new JButton() {
+                @Override
+                public Dimension getPreferredSize() {
+                    return new Dimension(0, 0);
+                }
+            };
+
+            private static final SkinColor backColor = FSkin.getColor(Colors.CLR_THEME2);
+            private static final SkinColor borderColor = FSkin.getColor(Colors.CLR_TEXT);
+            private static final SkinColor grooveColor = borderColor.alphaColor(200);
+            private static final int grooveSpace = 3;
+
+            private final boolean vertical;
+
+            private SkinScrollBarUI(boolean vertical0) {
+                vertical = vertical0;
+            }
+
+            @Override
+            protected JButton createIncreaseButton(int orientation) {
+                return hiddenButton; //hide increase button
+            }
+
+            @Override
+            protected JButton createDecreaseButton(int orientation) {
+                return hiddenButton; //hide decrease button
+            }
+
+            @Override
+            protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+                //make track transparent
+            }
+
+            @Override
+            protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+                int x = thumbBounds.x;
+                int y = thumbBounds.y;
+                int width = thumbBounds.width - 1;
+                int height = thumbBounds.height - 1;
+
+                //build polygon for thumb
+                int[] xPoints = null, yPoints = null;
+                if (vertical) {
+                    x += 2;
+                    width -= 4;
+                    int x2 = x + width / 2;
+                    int x3 = x + width;
+
+                    int arrowThickness = width / 2;
+                    if (arrowThickness > height / 2) {
+                        arrowThickness = height / 2;
+                    }
+                    int y2 = y + arrowThickness;
+                    int y3 = y + height - arrowThickness;
+                    int y4 = y + height;
+
+                    xPoints = new int[] { x, x2, x3, x3, x2, x };
+                    yPoints = new int[] { y2, y, y2, y3, y4, y3 };
+                }
+                else {
+                    y += 2;
+                    height -= 4;
+                    int y2 = y + height / 2;
+                    int y3 = y + height;
+
+                    int arrowThickness = height / 2;
+                    if (arrowThickness > width / 2) {
+                        arrowThickness = width / 2;
+                    }
+                    int x2 = x + arrowThickness;
+                    int x3 = x + width - arrowThickness;
+                    int x4 = x + width;
+
+                    yPoints = new int[] { y, y2, y3, y3, y2, y };
+                    xPoints = new int[] { x2, x, x2, x3, x4, x3 };
+                }
+
+                //draw thumb
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                setGraphicsColor(g2d, backColor);
+                g2d.fillPolygon(xPoints, yPoints, xPoints.length);
+                setGraphicsColor(g2d, borderColor);
+                g2d.drawPolygon(xPoints, yPoints, xPoints.length);
+
+                //draw grooves if needed
+                if (vertical) {
+                    if (height > width + grooveSpace * 2) {
+                        setGraphicsColor(g2d, grooveColor);
+                        int x2 = x + grooveSpace;
+                        int x3 = x + width - grooveSpace;
+                        int y3 = y + height / 2;
+                        int y2 = y3 - grooveSpace;
+                        int y4 = y3 + grooveSpace;
+                        g2d.drawLine(x2, y2, x3, y2);
+                        g2d.drawLine(x2, y3, x3, y3);
+                        g2d.drawLine(x2, y4, x3, y4);
+                    }
+                }
+                else if (width > height + grooveSpace * 2) {
+                    setGraphicsColor(g2d, grooveColor);
+                    int y2 = y + grooveSpace;
+                    int y3 = y + height - grooveSpace;
+                    int x3 = x + width / 2;
+                    int x2 = x3 - grooveSpace;
+                    int x4 = x3 + grooveSpace;
+                    g2d.drawLine(x2, y2, x2, y3);
+                    g2d.drawLine(x3, y2, x3, y3);
+                    g2d.drawLine(x4, y2, x4, y3);
+                }
+            }
+        }
 
         public void setForeground(SkinColor skinColor) { getSkin().setForeground(this, skinColor); }
         @Override public void setForeground(Color color) { getSkin().resetForeground(); super.setForeground(color); }

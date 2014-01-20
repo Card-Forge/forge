@@ -4,11 +4,9 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JSlider;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.deckchooser.FDeckChooser;
@@ -22,6 +20,7 @@ import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedSlider;
 
@@ -60,22 +59,18 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final FDeckChooser lstDecks = new FDeckChooser(false);
     private final QuickGauntletLister gauntletList = new QuickGauntletLister();
 
-    private final JLabel lblOptions = new FLabel.Builder().fontSize(16)
+    private final FLabel lblOptions = new FLabel.Builder().fontSize(16)
             .fontStyle(Font.BOLD).text("OPTIONS").fontAlign(SwingConstants.CENTER).build();
 
+    private final FScrollPane scrLoad = new FScrollPane(gauntletList);
 
-
-    private final JScrollPane scrLoad = new JScrollPane(gauntletList,
-            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-    private final JLabel lblDesc1 = new FLabel.Builder()
+    private final FLabel lblDesc1 = new FLabel.Builder()
             .text("Matches per gauntlet").fontStyle(Font.ITALIC).build();
 
-    private final JLabel lblDesc3 = new FLabel.Builder()
+    private final FLabel lblDesc3 = new FLabel.Builder()
             .text("Allowed deck types").fontStyle(Font.ITALIC).build();
 
-    private final JLabel lblDesc = new FLabel.Builder().text(
+    private final FLabel lblDesc = new FLabel.Builder().text(
             "A new quick gauntlet is auto-saved. They can be loaded in the \"Load Gauntlet\" screen.")
             .fontSize(12).build();
 
@@ -98,9 +93,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         sliOpponents.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         sliOpponents.setFont(FSkin.getFont(12));
 
-        scrLoad.setOpaque(false);
-        scrLoad.getViewport().setOpaque(false);
-        scrLoad.setBorder(null);
+        scrLoad.setBorder((Border)null);
 
         pnlOptions.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlOptions.add(lblOptions, "h 30px!, w 96%!, gap 2% 0 0 5px");

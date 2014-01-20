@@ -10,7 +10,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
@@ -157,7 +156,7 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
 
             tempPanel.add(typeBtnPanel);
             
-            JScrollPane scrDecks = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            FScrollPane scrDecks = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             tempPanel.add(scrDecks, "w 55%!, h 90%, gap 0px 10px 0px 10px, growy, pushy, wrap");
 
             playerPanels.add(tempPanel);

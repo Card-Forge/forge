@@ -20,7 +20,6 @@ package forge.gui.home.settings;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
@@ -30,6 +29,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedTextArea;
 
@@ -47,18 +47,17 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Release Notes");
 
-    private final JPanel pnlMain = new JPanel();    
+    private final JPanel pnlMain = new JPanel();
     private SkinnedTextArea tar;
-    private final JScrollPane scroller;
-    
+    private final FScrollPane scroller;
+
     /**
      * Constructor.
      */
     private VSubmenuReleaseNotes() {
-        
         pnlMain.setOpaque(false);
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
-                
+
         tar = new SkinnedTextArea();
         tar.setOpaque(true);
         tar.setLineWrap(true);
@@ -69,11 +68,11 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
         tar.setFont(FSkin.getFixedFont(16));
         tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tar.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        
-        scroller = new JScrollPane(tar);
+
+        scroller = new FScrollPane(tar);
         pnlMain.add(scroller, "w 100%!, h 100%!");
     }
-    
+
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#populate()
      */
@@ -149,7 +148,7 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
     public DragCell getParentCell() {
         return parentCell;
     }
-        
+
     /**
      * TODO: Write javadoc for this method.
      * @param content
@@ -158,15 +157,14 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
         tar.setText(content);
         setScrollbarToTop();
     }
-    
+
     private void setScrollbarToTop() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 // Needs to run in here otherwise does not work.
-                scroller.getVerticalScrollBar().setValue(0);        
+                scroller.getVerticalScrollBar().setValue(0);
             }
-        });                
+        });
     }
-    
 }

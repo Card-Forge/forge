@@ -7,8 +7,9 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
 import net.miginfocom.swing.MigLayout;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -19,6 +20,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
@@ -49,7 +51,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
 
     // Layout containers
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
-    private final JScrollPane scroller = new JScrollPane(pnlContent);
+    private final FScrollPane scroller = new FScrollPane(pnlContent);
     private final JPanel pnlHand = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JPanel pnlLibrary = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
 
@@ -58,11 +60,8 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
         pnlContent.setOpaque(false);
         pnlHand.setOpaque(false);
         pnlLibrary.setOpaque(false);
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
+        scroller.setBorder((Border)null);
         scroller.getViewport().setBorder(null);
-        scroller.getVerticalScrollBar().setUnitIncrement(16);
 
         lblSampleHand.setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         lblSampleHand.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));

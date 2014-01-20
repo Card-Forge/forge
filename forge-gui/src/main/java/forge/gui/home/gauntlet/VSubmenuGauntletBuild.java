@@ -5,7 +5,6 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
@@ -52,10 +51,10 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     private final FDeckChooser lstLeft = new FDeckChooser(false);
     private final JList<String> lstRight = new FList<String>();
 
-    private final JScrollPane scrRight  = new FScrollPane(lstRight,
+    private final FScrollPane scrRight  = new FScrollPane(lstRight,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private final JTextField txfFilename = new FTextField.Builder().text(GauntletIO.TXF_PROMPT).build();
+    private final FTextField txfFilename = new FTextField.Builder().text(GauntletIO.TXF_PROMPT).build();
 
     private final FLabel lblDesc1 = new FLabel.Builder().text("Left/right arrows add or remove decks.").fontSize(12).build();
 

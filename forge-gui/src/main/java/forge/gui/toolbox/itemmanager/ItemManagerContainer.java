@@ -17,7 +17,10 @@
  */
 package forge.gui.toolbox.itemmanager;
 
-import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
+
+import forge.gui.toolbox.FSkin.SkinnedScrollPane;
 
 
 /**
@@ -25,15 +28,15 @@ import javax.swing.JScrollPane;
  * 
  */
 @SuppressWarnings("serial")
-public final class ItemManagerContainer extends JScrollPane {
+public final class ItemManagerContainer extends SkinnedScrollPane {
     public ItemManagerContainer() {
         this(null);
     }
-    
-    public ItemManagerContainer(ItemManager<?> itemManager) {
-        super(null, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        setBorder(null);
+    public ItemManagerContainer(ItemManager<?> itemManager) {
+        super(null, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        setBorder((Border)null);
         setOpaque(false);
         getViewport().setOpaque(false);
         setItemManager(itemManager);

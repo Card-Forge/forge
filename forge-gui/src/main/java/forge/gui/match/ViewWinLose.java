@@ -7,7 +7,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
@@ -53,7 +52,7 @@ public class ViewWinLose {
 
         final JPanel pnlLeft = new JPanel();
         final JPanel pnlRight = new JPanel();
-        final JScrollPane scrCustom = new JScrollPane();
+        final FScrollPane scrCustom = new FScrollPane();
         pnlCustom = new SkinnedPanel();
 
         btnContinue = new FButton();
@@ -87,10 +86,7 @@ public class ViewWinLose {
         pnlLeft.setOpaque(false);
         pnlRight.setOpaque(false);
         pnlCustom.setOpaque(false);
-        scrCustom.setOpaque(false);
-        scrCustom.setBorder(null);
-        scrCustom.getVerticalScrollBar().setUnitIncrement(16);
-        scrCustom.getViewport().setOpaque(false);
+        scrCustom.setBorder((Border)null);
         scrCustom.getViewport().add(pnlCustom);
 
         lblTitle.setForeground(Color.white);

@@ -19,9 +19,9 @@ package forge.view.arcane;
 
 import java.awt.event.MouseEvent;
 
-import javax.swing.JScrollPane;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CPrompt;
+import forge.gui.toolbox.FScrollPane;
 
 
 /**
@@ -43,9 +43,8 @@ public class HandArea extends CardArea {
      * TODO Make compatible with WindowBuilder
      * 
      * @param scrollPane
-     *            a {@link javax.swing.JScrollPane} object.
      */
-    public HandArea(final JScrollPane scrollPane) {
+    public HandArea(final FScrollPane scrollPane) {
         super(scrollPane);
 
         this.setDragEnabled(true);

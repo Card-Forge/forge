@@ -2,7 +2,8 @@ package forge.gui.deckeditor.views;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.border.Border;
+
 import net.miginfocom.swing.MigLayout;
 import forge.gui.deckeditor.controllers.CEditorPreferences;
 import forge.gui.framework.DragCell;
@@ -11,6 +12,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 
 /** 
@@ -67,7 +69,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     private FCheckBox chbCardDisplayUnique = new FCheckBox("Show unique cards only (only affects Constructed)");
 
     private JPanel pnl = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, ax left"));
-    private JScrollPane scroller = new JScrollPane(pnl);
+    private FScrollPane scroller = new FScrollPane(pnl);
 
     //========== Constructor
     private VEditorPreferences() {
@@ -134,9 +136,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
         pnl.add(chbCardDisplayUnique, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
 
         pnl.setOpaque(false);
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
+        scroller.setBorder((Border)null);
         scroller.getViewport().setBorder(null);
     }
 

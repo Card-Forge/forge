@@ -18,7 +18,6 @@ import java.util.Set;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
@@ -53,6 +52,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FProgressBar;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedLayeredPane;
 import forge.model.BuildInfo;
@@ -208,7 +208,7 @@ public enum FView {
                             files.setWrapStyleWord(true);
                             files.setLineWrap(true);
                             files.setEditable(false);
-                            JScrollPane scroller = new JScrollPane(files);
+                            FScrollPane scroller = new FScrollPane(files);
                             p.add(scroller, "w 600:100%:100%, h 100:100%:100%, gaptop 10");
                             
                             SwingUtilities.invokeLater(new Runnable() {

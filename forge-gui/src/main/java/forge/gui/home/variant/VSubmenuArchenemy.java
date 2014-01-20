@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import net.miginfocom.swing.MigLayout;
@@ -151,7 +150,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
 
                 archenemySchemes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-                JScrollPane scrSchemes = new FScrollPane(archenemySchemes, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                FScrollPane scrSchemes = new FScrollPane(archenemySchemes, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
                 tempPanel.add(scrSchemes, "h 90%, w 33%, gap 0px 10px 0px 10px, growy, pushy, wrap");
             }
 

@@ -32,7 +32,6 @@ import java.util.List;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
@@ -364,7 +363,7 @@ public enum VStack implements IVDoc<CStack> {
 
         private Dimension size;
 
-        public StackArea(final JScrollPane scrollPane) {
+        public StackArea(final FScrollPanel scrollPane) {
             super(scrollPane);
         }
 

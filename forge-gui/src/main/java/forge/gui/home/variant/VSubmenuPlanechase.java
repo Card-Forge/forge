@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import net.miginfocom.swing.MigLayout;
@@ -155,7 +154,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
 
             tempPlanarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-            JScrollPane scrPlanes = new FScrollPane(tempPlanarDeckList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            FScrollPane scrPlanes = new FScrollPane(tempPlanarDeckList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             tempPanel.add(scrPlanes, "h 90%, w 20%!, gap 0px 10px 0px 10px, growy, pushy, wrap");
             planarDeckLists.add(tempPlanarDeckList);
 

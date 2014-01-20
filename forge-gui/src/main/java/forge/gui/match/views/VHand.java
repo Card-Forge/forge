@@ -18,7 +18,7 @@
 package forge.gui.match.views;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.player.Player;
@@ -27,6 +27,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CHand;
+import forge.gui.toolbox.FScrollPane;
 import forge.view.arcane.HandArea;
 
 /**
@@ -43,7 +44,7 @@ public class VHand implements IVDoc<CHand> {
 
 
     // Top-level containers
-    private final JScrollPane scroller = new JScrollPane();
+    private final FScrollPane scroller = new FScrollPane();
     private final HandArea hand = new HandArea(scroller);
 
     //========= Constructor
@@ -63,10 +64,8 @@ public class VHand implements IVDoc<CHand> {
             tab.setText(owner.getName() + " Hand");
         }
 
-        scroller.setBorder(null);
+        scroller.setBorder((Border)null);
         scroller.setViewportView(VHand.this.hand);
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
 
         hand.setOpaque(false);
 

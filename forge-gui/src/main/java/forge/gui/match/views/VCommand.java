@@ -18,7 +18,7 @@
 package forge.gui.match.views;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.player.Player;
@@ -28,6 +28,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CCommand;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.view.arcane.PlayArea;
 
@@ -47,7 +48,7 @@ public class VCommand implements IVDoc<CCommand> {
     private Player player = null;
 
     // Top-level containers
-    private final JScrollPane scroller = new JScrollPane();
+    private final FScrollPane scroller = new FScrollPane();
     private final PlayArea tabletop;
 
     //========= Constructor
@@ -75,9 +76,7 @@ public class VCommand implements IVDoc<CCommand> {
         tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
+        scroller.setBorder((Border)null);
 
     }
 

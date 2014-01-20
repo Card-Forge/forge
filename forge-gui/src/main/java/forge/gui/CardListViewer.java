@@ -28,13 +28,13 @@ import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.Icon;
 import javax.swing.JList;
-import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.game.card.Card;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
 import forge.item.PaperCard;
 import forge.view.FDialog;
 
@@ -114,7 +114,7 @@ public class CardListViewer extends FDialog {
         });
 
         this.add(new FLabel.Builder().text(message).build(), "cell 0 0, spanx 3, gapbottom 4");
-        this.add(new JScrollPane(this.jList), "cell 0 1, w 225, growy, pushy, ax c");
+        this.add(new FScrollPane(this.jList), "cell 0 1, w 225, growy, pushy, ax c");
         this.add(this.picture, "cell 1 1, w 225, growy, pushy, ax c");
         this.add(this.detail, "cell 2 1, w 225, growy, pushy, ax c");
         this.add(btnOK, "cell 1 2, w 150, h 26, ax c, gaptop 6");

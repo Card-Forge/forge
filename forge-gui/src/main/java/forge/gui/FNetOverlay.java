@@ -7,14 +7,15 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
 
 import org.apache.commons.lang3.StringUtils;
 
 import net.miginfocom.swing.MigLayout;
 import forge.control.ChatArea;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.FTextArea;
@@ -79,9 +80,9 @@ public enum FNetOverlay {
         txtLog.setFocusable(true);
         txtLog.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
 
-        JScrollPane _operationLogScroller = new JScrollPane(txtLog);
+        FScrollPane _operationLogScroller = new FScrollPane(txtLog);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        _operationLogScroller.setBorder(null);
+        _operationLogScroller.setBorder((Border)null);
         new SmartScroller(_operationLogScroller);
         pnl.add(_operationLogScroller, "pushx, hmin 24, pushy, growy, growx, gap 2px 2px 2px 0, sx 2");
 

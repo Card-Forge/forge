@@ -27,13 +27,13 @@ import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import forge.Constant;
 import forge.FThreads;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.special.CardZoomer;
 import forge.view.arcane.util.CardPanelMouseListener;
@@ -59,7 +59,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     /**
      * 
      */
-    private JScrollPane scrollPane;
+    private FScrollPane scrollPane;
     /**
      * 
      */
@@ -84,9 +84,8 @@ public abstract class CardPanelContainer extends SkinnedPanel {
      * </p>
      * 
      * @param scrollPane
-     *            a {@link javax.swing.JScrollPane} object.
      */
-    public CardPanelContainer(final JScrollPane scrollPane) {
+    public CardPanelContainer(final FScrollPane scrollPane) {
         this.scrollPane = scrollPane;
         this.setOpaque(true);
         setupMouseListeners();
@@ -400,9 +399,9 @@ public abstract class CardPanelContainer extends SkinnedPanel {
      * Getter for the field <code>scrollPane</code>.
      * </p>
      * 
-     * @return a {@link javax.swing.JScrollPane} object.
+     * @return a {@link forge.gui.toolbox.FScrollPane} object.
      */
-    public final JScrollPane getScrollPane() {
+    public final FScrollPane getScrollPane() {
         return this.scrollPane;
     }
 

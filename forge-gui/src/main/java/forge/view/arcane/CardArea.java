@@ -27,9 +27,9 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
+import forge.gui.toolbox.FScrollPane;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
 
@@ -89,9 +89,8 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
      * </p>
      * 
      * @param scrollPane
-     *            a {@link javax.swing.JScrollPane} object.
      */
-    public CardArea(final JScrollPane scrollPane) {
+    public CardArea(final FScrollPane scrollPane) {
         super(scrollPane);
         this.setBackground(Color.white);
     }

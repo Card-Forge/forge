@@ -25,12 +25,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.JScrollPane;
-
 import forge.FThreads;
 import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CPrompt;
+import forge.gui.toolbox.FScrollPane;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
 
@@ -78,12 +77,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      * </p>
      * 
      * @param scrollPane
-     *            a {@link javax.swing.JScrollPane} object.
      * @param mirror
-     *            a boolean.
      * @param modelRef 
      */
-    public PlayArea(final JScrollPane scrollPane, final boolean mirror, List<Card> modelRef) {
+    public PlayArea(final FScrollPane scrollPane, final boolean mirror, List<Card> modelRef) {
         super(scrollPane);
         this.setBackground(Color.white);
         this.mirror = mirror;

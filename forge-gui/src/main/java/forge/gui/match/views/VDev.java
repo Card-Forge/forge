@@ -25,7 +25,6 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -36,6 +35,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CDev;
+import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
 
@@ -57,7 +57,7 @@ public enum VDev implements IVDoc<CDev> {
 
     // Top-level containers
     private final JPanel viewport = new JPanel(new MigLayout("wrap, insets 0, ax center"));
-    private final JScrollPane scroller = new JScrollPane(viewport,
+    private final FScrollPanel scroller = new FScrollPanel(viewport, true,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -94,13 +94,9 @@ public enum VDev implements IVDoc<CDev> {
         devLBLs.add(lblSetLife);
         devLBLs.add(lblWalkTo);
 
-        scroller.setBorder(null);
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        viewport.setOpaque(false);
-
         final String constraints = "w 95%!, gap 0 0 4px 0";
         final String halfConstraints = "w 47%!, gap 0 0 4px 0";
+        viewport.setOpaque(false);
         viewport.add(this.lblGenerateMana, constraints);
         viewport.add(this.lblTutor, constraints);
         viewport.add(this.lblCardToHand, halfConstraints + ", split 2");

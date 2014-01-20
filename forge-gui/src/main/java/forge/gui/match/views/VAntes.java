@@ -22,8 +22,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.card.Card;
@@ -37,6 +37,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CAntes;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
 
 /** 
  * Assembles Swing components of card ante area.
@@ -52,7 +53,7 @@ public enum VAntes implements IVDoc<CAntes> {
     private final DragTab tab = new DragTab("Ante");
 
     private final JPanel pnl = new JPanel();
-    private final JScrollPane scroller = new JScrollPane(pnl);
+    private final FScrollPane scroller = new FScrollPane(pnl);
     private final SortedSet<AntePanel> allAntes = new TreeSet<AntePanel>();
 
     private Iterable<Player> players;
@@ -60,9 +61,7 @@ public enum VAntes implements IVDoc<CAntes> {
     private VAntes() {
         pnl.setLayout(new WrapLayout());
         pnl.setOpaque(false);
-        scroller.setBorder(null);
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
+        scroller.setBorder((Border)null);
     }
 
     //========== Overridden methods

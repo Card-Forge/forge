@@ -11,30 +11,30 @@ import javax.swing.JComponent;
 import javax.swing.JLayer;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.LayerUI;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.MouseUtil;
 import forge.gui.MouseUtil.MouseCursor;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinFont;
 import forge.gui.toolbox.FSkin.SkinnedTextArea;
 
 @SuppressWarnings("serial")
 public class GameLogPanel extends JPanel {
-
-    private JScrollPane scrollPane;
+    private FScrollPane scrollPane;
     private MyScrollablePanel scrollablePanel;
     private SkinFont textFont = FSkin.getFont();
 
-    private LayerUI<JScrollPane> layerUI = new GameLogPanelLayerUI();
-    private JLayer<JScrollPane> layer;
+    private LayerUI<FScrollPane> layerUI = new GameLogPanelLayerUI();
+    private JLayer<FScrollPane> layer;
     private boolean isScrollBarVisible = false;
 
     public GameLogPanel() {
@@ -77,20 +77,18 @@ public class GameLogPanel extends JPanel {
      * characteristics for the list of {@code JTextArea} log entries.
      */
     private void addNewScrollPane() {
-        scrollPane = new JScrollPane();
+        scrollPane = new FScrollPane();
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setOpaque(false);
-        scrollPane.setBorder(null);
+        scrollPane.setBorder((Border)null);
         scrollPane.getViewport().add(scrollablePanel);
-        scrollPane.getViewport().setOpaque(false);
-        layer = new JLayer<JScrollPane>(scrollPane, layerUI);
+        layer = new JLayer<FScrollPane>(scrollPane, layerUI);
         this.add(layer, "w 10:100%, h 100%");
     }
 
     /**
      * Creates a {@code Scrollable JPanel} that works better with
-     * {@code JScrollPane} than the standard {@code JPanel}.
+     * {@code FScrollPane} than the standard {@code JPanel}.
      * <p>
      * This manages the layout and display of the list of {@code JTextArea} log entries.
      * <p>
@@ -191,13 +189,13 @@ public class GameLogPanel extends JPanel {
         }
     }
 
-    protected final class GameLogPanelLayerUI extends LayerUI<JScrollPane> {
+    protected final class GameLogPanelLayerUI extends LayerUI<FScrollPane> {
 
         @SuppressWarnings("unchecked")
         @Override
         public void installUI(JComponent c) {
             super.installUI(c);
-            JLayer<JScrollPane> l = (JLayer<JScrollPane>)c;
+            JLayer<FScrollPane> l = (JLayer<FScrollPane>)c;
             l.setLayerEventMask(AWTEvent.MOUSE_EVENT_MASK);
         }
 
@@ -205,12 +203,12 @@ public class GameLogPanel extends JPanel {
         @Override
         public void uninstallUI(JComponent c) {
             super.uninstallUI(c);
-            JLayer<JScrollPane> l = (JLayer<JScrollPane>)c;
+            JLayer<FScrollPane> l = (JLayer<FScrollPane>)c;
             l.setLayerEventMask(0);
         }
 
         @Override
-        protected void processMouseEvent(MouseEvent e, JLayer<? extends JScrollPane> l) {
+        protected void processMouseEvent(MouseEvent e, JLayer<? extends FScrollPane> l) {
 
             boolean isScrollBarRequired = scrollPane.getVerticalScrollBar().getMaximum() > getHeight();
             boolean isHoveringOverLogEntry = e.getSource() instanceof JTextArea;

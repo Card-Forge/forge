@@ -4,13 +4,14 @@ import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 import javax.swing.event.DocumentListener;
 
+import forge.gui.toolbox.FSkin.SkinnedScrollPane;
 import forge.gui.toolbox.FSkin.SkinnedTextArea;
 
 @SuppressWarnings("serial")
-public class FTextEditor extends JScrollPane {
+public class FTextEditor extends SkinnedScrollPane {
 	private final SkinnedTextArea tarEditor;
 	private final FUndoManager undoManager;
 	
@@ -48,7 +49,7 @@ public class FTextEditor extends JScrollPane {
         });
 
         this.setViewportView(tarEditor);
-        this.setBorder(null);
+        this.setBorder((Border)null);
         this.setOpaque(false);
 	}
 	

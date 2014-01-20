@@ -18,6 +18,7 @@ import java.util.TreeSet;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.ScrollPaneConstants;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -140,7 +141,10 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         variantsPanel.add(vntArchenemy);
         comboArchenemy.addTo(variantsPanel);
 
-        constructedFrame.add(new FScrollPanel(variantsPanel, true), "w 100%, gapbottom 10px, spanx 2, wrap");
+        constructedFrame.add(new FScrollPanel(variantsPanel, true,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
+                "w 100%, gapbottom 10px, spanx 2, wrap");
 
         ////////////////////////////////////////////////////////
         ///////////////////// Player Panel /////////////////////

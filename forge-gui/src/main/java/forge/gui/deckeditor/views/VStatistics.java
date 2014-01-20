@@ -3,8 +3,9 @@ package forge.gui.deckeditor.views;
 import java.awt.Font;
 
 import forge.gui.toolbox.FLabel;
+
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.deckeditor.controllers.CStatistics;
@@ -12,6 +13,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
@@ -69,15 +71,12 @@ public enum VStatistics implements IVDoc<CStatistics> {
     private final FLabel lblCMC6 = buildLabel(SItemManagerUtil.StatTypes.CMC_6, true);
 
     // Layout containers
-    private final JScrollPane scroller = new JScrollPane(pnlStats);
+    private final FScrollPane scroller = new FScrollPane(pnlStats);
 
     //========== Constructor
     private VStatistics() {
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
+        scroller.setBorder((Border)null);
         scroller.getViewport().setBorder(null);
-        scroller.getVerticalScrollBar().setUnitIncrement(16);
 
         // Color stats
         lblMulti.setToolTipText("Multicolor Card Count");

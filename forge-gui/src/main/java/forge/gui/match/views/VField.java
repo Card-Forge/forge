@@ -23,7 +23,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -39,6 +38,7 @@ import forge.gui.framework.IVDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CField;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.special.PhaseIndicator;
@@ -61,7 +61,7 @@ public class VField implements IVDoc<CField> {
     private Player player = null;
 
     // Top-level containers
-    private final JScrollPane scroller = new JScrollPane();
+    private final FScrollPane scroller = new FScrollPane();
     private final PlayArea tabletop;
     private final SkinnedPanel avatarArea = new SkinnedPanel();
 
@@ -127,9 +127,7 @@ public class VField implements IVDoc<CField> {
         tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
-        scroller.setOpaque(false);
-        scroller.getViewport().setOpaque(false);
-        scroller.setBorder(null);
+        scroller.setBorder((Border)null);
 
         updateDetails();
     }

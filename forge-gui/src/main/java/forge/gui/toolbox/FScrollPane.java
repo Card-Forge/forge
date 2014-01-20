@@ -12,6 +12,10 @@ import forge.gui.toolbox.FSkin.SkinnedScrollPane;
  */
 @SuppressWarnings("serial")
 public class FScrollPane extends SkinnedScrollPane {
+    public FScrollPane() {
+        this(null);
+    }
+
     /**
      * A very basic extension of JScrollPane to centralize common styling changes.
      * This constructor assumes "as needed" for horizontal and vertical scroll policies.
@@ -32,6 +36,7 @@ public class FScrollPane extends SkinnedScrollPane {
     public FScrollPane(final Component c0, final int vertical0, final int horizontal0) {
         super(c0, vertical0, horizontal0);
         getVerticalScrollBar().setUnitIncrement(16);
+        getHorizontalScrollBar().setUnitIncrement(16);
         getViewport().setOpaque(false);
         this.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
         setOpaque(false);

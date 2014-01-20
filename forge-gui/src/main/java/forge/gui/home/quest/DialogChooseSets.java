@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
@@ -21,6 +20,7 @@ import forge.gui.toolbox.FCheckBoxList;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 
 public class DialogChooseSets {
@@ -139,7 +139,7 @@ public class DialogChooseSets {
         JPanel pnl = new JPanel(new MigLayout("center, wrap"));
         pnl.setOpaque(false);
         pnl.add(new FLabel.Builder().text(title).build());
-        pnl.add(new JScrollPane(cbl));
+        pnl.add(new FScrollPane(cbl));
         return pnl;
     }
     
