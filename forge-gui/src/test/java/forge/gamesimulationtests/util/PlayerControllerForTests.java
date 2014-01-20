@@ -22,6 +22,8 @@ import forge.ai.ability.DrawAi;
 import forge.ai.ability.GameWinAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -420,6 +422,12 @@ public class PlayerControllerForTests extends PlayerController {
 	public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
 		return Iterables.getFirst(colors, MagicColor.WHITE);
 	}
+	
+    @Override
+    public byte chooseColorAllowColorless(String message, Card card, ColorSet colors) {
+        return Iterables.getFirst(colors, (byte)0);
+    }
+    
 
 	private <T> List<T> chooseItems(Collection<T> items, int amount) {
 		if (items == null || items.isEmpty()) {
@@ -570,5 +578,13 @@ public class PlayerControllerForTests extends PlayerController {
     public boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa) {
         // TODO Auto-generated method stub
         return ComputerUtilMana.payManaCost(player, sa);
+    }
+
+    @Override
+    public Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost,
+            List<Card> untappedCreats) {
+        // TODO: AI to choose a creature to tap would go here
+        // Probably along with deciding how many creatures to tap
+        return new HashMap<Card, ManaCostShard>();
     }
 }

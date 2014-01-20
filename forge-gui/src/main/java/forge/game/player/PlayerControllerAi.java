@@ -29,6 +29,8 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.ability.CharmAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -535,6 +537,18 @@ public class PlayerControllerAi extends PlayerController {
         return new ImmutablePair<CounterType,String>(countersOnCard.get(random),"Remove");
     }
 
+    
+    @Override
+    public byte chooseColorAllowColorless(String message, Card card, ColorSet colors) {
+        final String c = ComputerUtilCard.getMostProminentColor(player.getCardsIn(ZoneType.Hand));
+        byte chosenColorMask = MagicColor.fromName(c);
+        if ((colors.getColor() & chosenColorMask) != 0) {
+            return chosenColorMask;
+        } else {
+            return Iterables.getFirst(colors, (byte)0);
+        }
+    }
+    
     @Override
     public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
         final String c = ComputerUtilCard.getMostProminentColor(player.getCardsIn(ZoneType.Hand));
@@ -711,6 +725,14 @@ public class PlayerControllerAi extends PlayerController {
     public boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa) {
         // TODO Auto-generated method stub
         return ComputerUtilMana.payManaCost(player, sa);
+    }
+
+    @Override
+    public Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost,
+            List<Card> untappedCreats) {
+        // TODO: AI to choose a creature to tap would go here
+        // Probably along with deciding how many creatures to tap
+        return new HashMap<Card, ManaCostShard>();
     }
 
 }

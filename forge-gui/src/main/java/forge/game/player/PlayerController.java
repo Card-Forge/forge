@@ -13,6 +13,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Multimap;
 
 import forge.card.ColorSet;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -195,6 +197,7 @@ public abstract class PlayerController {
     public abstract List<AbilitySub> chooseModeForAbility(SpellAbility sa, int min, int num);
 
     public abstract byte chooseColor(String message, SpellAbility sa, ColorSet colors);
+    public abstract byte chooseColorAllowColorless(String message, Card c, ColorSet colors);
 
     public abstract PaperCard chooseSinglePaperCard(SpellAbility sa, String message, Predicate<PaperCard> cpp, String name);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
@@ -221,4 +224,9 @@ public abstract class PlayerController {
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) { return null; }
 
     public abstract boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa);
+
+    public abstract Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost, List<Card> untappedCreats);
+
+    
+    
 }

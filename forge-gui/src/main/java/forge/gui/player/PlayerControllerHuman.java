@@ -29,6 +29,8 @@ import com.google.common.collect.Multimap;
 import forge.Singletons;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -69,6 +71,7 @@ import forge.gui.input.InputBlock;
 import forge.gui.input.InputConfirmMulligan;
 import forge.gui.input.InputPassPriority;
 import forge.gui.input.InputProliferate;
+import forge.gui.input.InputSelectCardsForConvoke;
 import forge.gui.input.InputSelectCardsFromList;
 import forge.gui.input.InputConfirm;
 import forge.gui.input.InputSelectEntitiesFromList;
@@ -898,18 +901,34 @@ public class PlayerControllerHuman extends PlayerController {
         switch (cntColors) {
             case 0: return 0;
             case 1: return colors.getColor();
-            default:
-                String[] colorNames = new String[cntColors];
-                int i = 0;
-                for (byte b : colors) {
-                    colorNames[i++] = MagicColor.toLongString(b);
-                }
-                if (colorNames.length > 2) {
-                    return MagicColor.fromName(GuiChoose.one(message, colorNames));
-                }
-                int idxChosen = GuiDialog.confirm(sa.getSourceCard(), message, colorNames) ? 0 : 1;
-                return MagicColor.fromName(colorNames[idxChosen]);
+            default: return chooseColorCommon(message, sa == null ? null : sa.getSourceCard(), colors, false);
         }
+    }
+    
+    @Override
+    public byte chooseColorAllowColorless(String message, Card c, ColorSet colors) {
+        int cntColors = 1 + colors.countColors();
+        switch (cntColors) {
+            case 1: return 0;
+            default: return chooseColorCommon(message, c, colors, true);
+        }
+    }
+    
+    private byte chooseColorCommon(String message, Card c, ColorSet colors, boolean withColorless) {
+        int cntColors = colors.countColors();
+        if( withColorless ) cntColors++;
+        String[] colorNames = new String[cntColors];
+        int i = 0;
+        if(withColorless)
+            colorNames[i++] = MagicColor.toLongString((byte)0);
+        for (byte b : colors) {
+            colorNames[i++] = MagicColor.toLongString(b);
+        }
+        if (colorNames.length > 2) {
+            return MagicColor.fromName(GuiChoose.one(message, colorNames));
+        }
+        int idxChosen = GuiDialog.confirm(c, message, colorNames) ? 0 : 1;
+        return MagicColor.fromName(colorNames[idxChosen]);
     }
 
     @Override
@@ -1058,5 +1077,12 @@ public class PlayerControllerHuman extends PlayerController {
     public boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa) {
         // TODO Auto-generated method stub
         return HumanPlay.payManaCost(costPartMana, sa, player);
+    }
+
+    @Override
+    public Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost, List<Card> untappedCreats) {
+        InputSelectCardsForConvoke inp = new InputSelectCardsForConvoke(player, manaCost, untappedCreats);
+        inp.showAndWait();
+        return inp.getConvokeMap();
     }
 }

@@ -20,10 +20,10 @@ package forge.game.mana;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -38,12 +38,10 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.TextUtil;
 import forge.util.maps.EnumMapToAmount;
 import forge.util.maps.MapToAmount;
@@ -569,7 +567,7 @@ public class ManaCostBeingPaid {
                 }
             }
             else if (spell.getSourceCard().hasKeyword("Convoke")) {
-                adjustCostByConvoke(sa, spell);
+                adjustCostByConvoke(sa);
             }
         } // isSpell
 
@@ -617,81 +615,22 @@ public class ManaCostBeingPaid {
         }
     } // GetSpellCostChange
 
-    private void adjustCostByConvoke(final SpellAbility sa, final SpellAbility spell) {
+    private void adjustCostByConvoke(final SpellAbility sa) {
 
-        List<Card> untappedCreats = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        List<Card> untappedCreats = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
         untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
 
-        while (!untappedCreats.isEmpty() && getConvertedManaCost() > 0) {
-            Card workingCard = null;
-            String chosenColor = null;
-            if (sa.getActivatingPlayer().isHuman()) {
-                workingCard = GuiChoose.oneOrNone("Tap for Convoke? " + toString(), untappedCreats);
-                if (null == workingCard) {
-                    break; // that means "I'm done"
-                }
-
-                List<String> usableColors = getConvokableColors(workingCard);
-                if (!usableColors.isEmpty()) {
-                    chosenColor = usableColors.size() == 1 ? usableColors.get(0) : GuiChoose.one("Convoke for which color?", usableColors);
-                }
-            }
-            else {
-                // TODO: AI to choose a creature to tap would go here
-                // Probably along with deciding how many creatures to tap
-                break;
-            }
-            untappedCreats.remove(workingCard);
-
-            if (null == chosenColor) {
-                continue;
-            }
-            else if (chosenColor.equals("colorless")) {
-                decreaseColorlessMana(1);
-            }
-            else {
-                decreaseShard(ManaCostShard.valueOf(MagicColor.fromName(chosenColor)), 1);
-            }
-
-            sa.addTappedForConvoke(workingCard);
+        Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvoke(sa, this.toManaCost(), untappedCreats);
+        
+        // Convoked creats are tapped here with triggers suppressed,
+        // Then again when payment is done(In InputPayManaCost.done()) with suppression cleared.
+        // This is to make sure that triggers go off at the right time
+        // AND that you can't use mana tapabilities of convoked creatures to pay the convoked cost.
+        for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
+            sa.addTappedForConvoke(conv.getKey());
+            this.decreaseShard(conv.getValue(), 1);
+            conv.getKey().setTapped(true);
         }
-
-        // Convoked creats are tapped here with triggers
-        // suppressed,
-        // Then again when payment is done(In
-        // InputPayManaCost.done()) with suppression cleared.
-        // This is to make sure that triggers go off at the
-        // right time
-        // AND that you can't use mana tapabilities of convoked
-        // creatures
-        // to pay the convoked cost.
-        for (final Card c : sa.getTappedForConvoke()) {
-            c.setTapped(true);
-        }
-    }
-
-    /**
-     * Gets the convokable colors.
-     * 
-     * @param cardToConvoke
-     *            the card to convoke
-     * @param cost
-     *            the cost
-     * @return the convokable colors
-     */
-    private List<String> getConvokableColors(final Card cardToConvoke) {
-        final ArrayList<String> usableColors = new ArrayList<String>();
-
-        if (getColorlessManaAmount() > 0) {
-            usableColors.add("colorless");
-        }
-        ColorSet cs = CardUtil.getColors(cardToConvoke);
-        for (byte color : MagicColor.WUBRG) {
-            if (cs.hasAnyColor(color)) {
-                usableColors.add(MagicColor.toLongString(color));
-            }
-        }
-        return usableColors;
     }
 
     private void adjustCostByOffering(final SpellAbility sa, final SpellAbility spell) {
