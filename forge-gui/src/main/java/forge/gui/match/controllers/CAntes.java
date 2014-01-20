@@ -2,6 +2,7 @@ package forge.gui.match.controllers;
 
 import forge.Command;
 import forge.gui.framework.ICDoc;
+import forge.gui.match.views.VAntes;
 
 /** 
  * Controls the ante panel in the match UI.
@@ -33,5 +34,6 @@ public enum CAntes implements ICDoc {
      */
     @Override
     public void update() {
+        VAntes.SINGLETON_INSTANCE.update();
     }
 }

@@ -54,6 +54,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.framework.SDisplayUtil;
+import forge.gui.match.controllers.CAntes;
 import forge.gui.match.controllers.CCombat;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPrompt;
@@ -360,6 +361,8 @@ public enum CMatchUI implements ICDoc, IMenuProvider {
             }
             else if (zt == ZoneType.Battlefield) {
                 getFieldViewFor(owner).getTabletop().setupPlayZone();
+            } else if (zt == ZoneType.Ante) {
+                CAntes.SINGLETON_INSTANCE.update();
             }
             else {
                 getFieldViewFor(owner).getDetailsPanel().updateZones();
