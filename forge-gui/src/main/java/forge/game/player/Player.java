@@ -1247,6 +1247,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (this.hasKeyword("You can't draw cards.")) {
             return false;
         }
+        if (this.hasKeyword("You can't draw more than one card each turn.")) {
+            return this.numDrawnThisTurn < 1;
+        }
         return true;
     }
 
@@ -1278,10 +1281,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final List<Card> drawCards(final int n) {
         final List<Card> drawn = new ArrayList<Card>();
 
-        if (!this.canDraw()) {
-            return drawn;
-        }
-
         for (int i = 0; i < n; i++) {
 
 //            // TODO: multiple replacements need to be selected by the controller
@@ -1300,6 +1299,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 //                }
 //            }
 
+            if (!this.canDraw()) {
+                return drawn;
+            }
             drawn.addAll(this.doDraw());
         }
         return drawn;
