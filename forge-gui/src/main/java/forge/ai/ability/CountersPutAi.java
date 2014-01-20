@@ -15,9 +15,9 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -26,7 +26,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.Expressions;
 import forge.util.MyRandom;
 
 public class CountersPutAi extends SpellAbilityAi {
@@ -355,22 +354,43 @@ public class CountersPutAi extends SpellAbilityAi {
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         final Card source = sa.getSourceCard();
-        if (mode == PlayerActionConfirmMode.Tribute && source.hasSVar("TributeAILogic")) {
-            final String logic = source.getSVar("TributeAILogic");
-            for (final String tributeAI : logic.split(" & ")) {
-                String sVar = tributeAI.split(" ")[0];
-                String comparator = tributeAI.split(" ")[1];
-                String compareTo = comparator.substring(2);
-                int x = CardFactoryUtil.xCount(source, sVar);
-                int y = CardFactoryUtil.xCount(source, compareTo);
-                if (!Expressions.compare(x, comparator, y)) {
+        if (mode == PlayerActionConfirmMode.Tribute) {
+            // add counter if that opponent has a giant creature
+            final List<Card> creats = player.getCreaturesInPlay();
+            final int tributeAmount = source.getKeywordMagnitude("Tribute");
+            List<Card> threatening = CardLists.filter(creats, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card c) {
+                    return CombatUtil.canBlock(source, c, true) 
+                            && (c.getNetDefense() > source.getNetAttack() + tributeAmount || c.hasKeyword("DeathTouch"));
+                }
+            });
+            if (!threatening.isEmpty()) {
+                return true;
+            }
+            if (source.hasSVar("TributeAILogic")) {
+                final String logic = source.getSVar("TributeAILogic");
+                if (logic.equals("Always")) {
+                    return true;
+                } else if (logic.equals("Never")) {
                     return false;
+                } else if (logic.equals("CanBlockThisTurn")) {
+                    // pump haste
+                    List<Card> canBlock = CardLists.filter(creats, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card c) {
+                            return CombatUtil.canBlock(source, c) && (c.getNetDefense() > source.getNetAttack() || c.hasKeyword("DeathTouch"));
+                        }
+                    });
+                    if (!canBlock.isEmpty()) {
+                        return false;
+                    }
                 }
             }
         }
-        return true;
+        return MyRandom.getRandom().nextBoolean();
     }
-
+    
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#chooseSinglePlayer(Player, SpellAbility, Collection<Player>)
      */
