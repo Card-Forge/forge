@@ -1,3 +1,3 @@
 /** Forge Card Game. */
-package forge.game;
+package forge.game.mana;
 

@@ -8,7 +8,6 @@ import com.google.common.base.Supplier;
 import forge.control.ChatArea;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerAi;
-import forge.game.player.LobbyPlayerRemote;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.toolbox.FSkin;
 import forge.net.client.INetClient;
