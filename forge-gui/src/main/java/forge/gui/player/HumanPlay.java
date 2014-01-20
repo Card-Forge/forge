@@ -52,7 +52,6 @@ import forge.game.cost.PaymentDecision;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
-import forge.game.spellability.HumanPlaySpellAbility;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;

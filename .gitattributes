@@ -15132,7 +15132,6 @@ forge-gui/src/main/java/forge/game/spellability/AbilityManaPart.java svneol=nati
 forge-gui/src/main/java/forge/game/spellability/AbilityStatic.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/spellability/AbilitySub.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/spellability/AbilityTriggered.java svneol=native#text/plain
-forge-gui/src/main/java/forge/game/spellability/HumanPlaySpellAbility.java svneol=native#text/plain
 forge-gui/src/main/java/forge/game/spellability/ISpellAbility.java -text
 forge-gui/src/main/java/forge/game/spellability/OptionalCost.java -text
 forge-gui/src/main/java/forge/game/spellability/Spell.java svneol=native#text/plain
@@ -15448,6 +15447,7 @@ forge-gui/src/main/java/forge/gui/menus/MenuUtil.java -text
 forge-gui/src/main/java/forge/gui/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/player/HumanCostDecision.java -text
 forge-gui/src/main/java/forge/gui/player/HumanPlay.java -text
+forge-gui/src/main/java/forge/gui/player/HumanPlaySpellAbility.java -text
 forge-gui/src/main/java/forge/gui/player/LobbyPlayerHuman.java -text
 forge-gui/src/main/java/forge/gui/player/PlayerControllerHuman.java -text
 forge-gui/src/main/java/forge/gui/player/TargetSelection.java svneol=native#text/plain

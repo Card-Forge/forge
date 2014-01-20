@@ -20,7 +20,6 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 
 public class ManaEffect extends SpellAbilityEffect {
 
@@ -50,33 +49,31 @@ public class ManaEffect extends SpellAbilityEffect {
                     if (activator.isHuman()) {
                         //String colorsNeeded = abMana.getExpressChoice();
                         String[] colorsProduced = abMana.getComboColors().split(" ");
+                        
+                        
                         final StringBuilder choiceString = new StringBuilder();
-                        List<String> colorMenu = null;
+                        ColorSet colorOptions = null;
                         if (!abMana.isAnyMana()) {
-                            colorMenu = new ArrayList<String>();
-                            //loop through colors to make menu
-                            for (int nColor = 0; nColor < colorsProduced.length; nColor++) {
-                                colorMenu.add(forge.card.MagicColor.toLongString(colorsProduced[nColor]));
-                            }
+                            colorOptions = ColorSet.fromNames(colorsProduced);
                         }
                         else {
-                            colorMenu = MagicColor.Constant.ONLY_COLORS;
+                            colorOptions = ColorSet.fromNames(MagicColor.Constant.ONLY_COLORS);
                         }
                         for (int nMana = 1; nMana <= amount; nMana++) {
                             String choice = "";
-                                Object o = GuiChoose.one("Select Mana to Produce", colorMenu);
-                                if (o == null) {
-                                    final StringBuilder sb = new StringBuilder();
-                                    sb.append("AbilityFactoryMana::manaResolve() - Human color mana choice is empty for ");
-                                    sb.append(card.getName());
-                                    throw new RuntimeException(sb.toString());
-                                } else {
-                                    choice = MagicColor.toShortString((String) o);
-                                    if (nMana != 1) {
-                                        choiceString.append(" ");
-                                    }
-                                    choiceString.append(choice);
+                            byte chosenColor = activator.getController().chooseColor("Select Mana to Produce", sa, colorOptions);
+                            if (chosenColor == 0) {
+                                final StringBuilder sb = new StringBuilder();
+                                sb.append("AbilityFactoryMana::manaResolve() - Human color mana choice is empty for ");
+                                sb.append(card.getName());
+                                throw new RuntimeException(sb.toString());
+                            } else {
+                                choice = MagicColor.toShortString(chosenColor);
+                                if (nMana != 1) {
+                                    choiceString.append(" ");
                                 }
+                                choiceString.append(choice);
+                            }
                         }
                         abMana.setExpressChoice(choiceString.toString());
                     }
@@ -116,26 +113,26 @@ public class ManaEffect extends SpellAbilityEffect {
                             choice = colorsNeeded;
                         }
                         else {
-                            List<String> colorMenu = null;
+                            ColorSet colorMenu = null;
                             if (colorsNeeded.length() > 1 && colorsNeeded.length() < 5) {
-                                colorMenu = new ArrayList<String>();
+                                byte mask = 0;
                                 //loop through colors to make menu
                                 for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
-                                    colorMenu.add(forge.card.MagicColor.toLongString(colorsNeeded.substring(nChar, nChar + 1)));
+                                    mask |= forge.card.MagicColor.fromName(colorsNeeded.substring(nChar, nChar + 1));
                                 }
+                                colorMenu = ColorSet.fromMask(mask);
                             }
                             else {
-                                colorMenu = MagicColor.Constant.ONLY_COLORS;
+                                colorMenu = ColorSet.fromNames(MagicColor.Constant.ONLY_COLORS);
                             }
-                            String s = GuiChoose.one("Select Mana to Produce", colorMenu);
-                            if (s == null) {
+                            byte val = act.getController().chooseColor("Select Mana to Produce", sa, colorMenu);
+                            if (0 == val) {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append("AbilityFactoryMana::manaResolve() - Human color mana choice is empty for ");
                                 sb.append(card.getName());
                                 throw new RuntimeException(sb.toString());
-                            } else {
-                                choice = MagicColor.toShortString(s);
                             }
+                            choice = MagicColor.toShortString(val);
                         }
                         abMana.setExpressChoice(choice);
                     }

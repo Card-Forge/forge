@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.Collection;
 import java.util.List;
 
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -10,7 +11,6 @@ import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
-import forge.gui.GuiChoose;
 
 public class ManaReflectedEffect extends SpellAbilityEffect {
 
@@ -65,7 +65,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
             baseMana = MagicColor.toShortString(colors.iterator().next());
         } else {
             if (player.isHuman()) {
-                baseMana = GuiChoose.one("Select Mana to Produce", colors);
+                baseMana = MagicColor.toShortString(player.getController().chooseColor("Select Mana to Produce", sa, ColorSet.fromNames(colors)));
             } else {
                 // AI doesn't really have anything here yet
                 baseMana = sa.getManaPart().getExpressChoice();
