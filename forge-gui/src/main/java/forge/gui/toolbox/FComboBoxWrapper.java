@@ -202,12 +202,13 @@ public class FComboBoxWrapper<E> {
             newComboBox.addKeyListener(l);
         }
 
+        newComboBox.setEnabled(comboBox.isEnabled());
         newComboBox.setRenderer(comboBox.getRenderer());
         newComboBox.setTextAlignment(comboBox.getTextAlignment());
         if (comboBox.getSkinFont() != null) {
             newComboBox.setSkinFont(comboBox.getSkinFont());
         }
-        
+
         //replace combo box with its copy so skin updated
         parent.remove(index);
         parent.add(newComboBox, constraints, index);
