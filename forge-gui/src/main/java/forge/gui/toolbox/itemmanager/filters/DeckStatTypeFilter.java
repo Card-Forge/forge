@@ -10,7 +10,7 @@ import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
-import forge.util.ItemPoolView;
+import forge.util.ItemPool;
 
 public abstract class DeckStatTypeFilter extends StatTypeFilter<Deck> {
     public DeckStatTypeFilter(ItemManager<? super Deck> itemManager0) {
@@ -24,7 +24,7 @@ public abstract class DeckStatTypeFilter extends StatTypeFilter<Deck> {
 
     @Override
     public void afterFiltersApplied() {
-        final ItemPoolView<? super Deck> items = itemManager.getFilteredItems();
+        final ItemPool<? super Deck> items = itemManager.getFilteredItems();
 
         for (Map.Entry<SItemManagerUtil.StatTypes, FLabel> btn : buttonMap.entrySet()) {
             if (btn.getKey().predicate != null) {

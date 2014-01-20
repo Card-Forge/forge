@@ -92,7 +92,6 @@ forge-core/src/main/java/forge/util/IItemReader.java -text
 forge-core/src/main/java/forge/util/IItemSerializer.java -text
 forge-core/src/main/java/forge/util/ItemPool.java -text
 forge-core/src/main/java/forge/util/ItemPoolSorter.java -text
-forge-core/src/main/java/forge/util/ItemPoolView.java -text
 forge-core/src/main/java/forge/util/Lang.java -text
 forge-core/src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 forge-core/src/main/java/forge/util/PredicateString.java -text

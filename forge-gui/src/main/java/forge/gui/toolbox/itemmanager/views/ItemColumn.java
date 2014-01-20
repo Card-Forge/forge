@@ -34,7 +34,6 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
-import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
@@ -491,7 +490,7 @@ public class ItemColumn extends TableColumn {
         private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
 
         private static String toType(final InventoryItem i) {
-            return i instanceof PaperCard ? ((IPaperCard)i).getRules().getType().toString() : i.getItemType();
+            return i instanceof IPaperCard ? ((IPaperCard)i).getRules().getType().toString() : i.getItemType();
         }
 
         private static IPaperCard toCard(final InventoryItem i) {
@@ -551,12 +550,7 @@ public class ItemColumn extends TableColumn {
         }
         private static int toDeckCount(final InventoryItem i, DeckSection section) {
             Deck deck = toDeck(i);
-            if (deck == null) { return -1; }
-            CardPool cards = deck.get(section);
-            if (cards == null) { return -1; }
-            int count = cards.countAll();
-            if (count == 0) { return -1; }
-            return count;
+            return deck != null && deck.has(section) ? deck.get(section).countAll() : -1;
         }
     }
 }

@@ -36,6 +36,7 @@ import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.IUnOpenedProduct;
 import forge.card.UnOpenedProduct;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.card.Card;
 import forge.gui.GuiChoose;
@@ -48,7 +49,6 @@ import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 import forge.util.storage.IStorage;
 
 /**
@@ -153,7 +153,7 @@ public final class BoosterDraft implements IBoosterDraft {
     }
 
     private void setupCustomDraft(final CustomLimited draft) {
-        final ItemPoolView<PaperCard> dPool = draft.getCardPool();
+        final ItemPool<PaperCard> dPool = draft.getCardPool();
         if (dPool == null) {
             throw new RuntimeException("BoosterGenerator : deck not found");
         }
@@ -203,13 +203,15 @@ public final class BoosterDraft implements IBoosterDraft {
      * @return a {@link forge.CardList} object.
      */
     @Override
-    public ItemPoolView<PaperCard> nextChoice() {
+    public CardPool nextChoice() {
         if (this.pack.get(this.getCurrentBoosterIndex()).size() == 0) {
             this.pack = this.get8BoosterPack();
         }
 
         this.computerChoose();
-        return ItemPool.createFrom(this.pack.get(this.getCurrentBoosterIndex()), PaperCard.class);
+        CardPool result = new CardPool();
+        result.addAllFlat(this.pack.get(this.getCurrentBoosterIndex()));
+        return result;
     }
 
     /**

@@ -65,7 +65,6 @@ import forge.item.TournamentPack;
 import forge.quest.QuestController;
 import forge.quest.io.ReadPriceList;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 
 /**
  * Child controller for quest card shop UI.
@@ -97,7 +96,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private double multiplier;
     private final QuestController questData;
 
-    private ItemPoolView<InventoryItem> cardsForSale;
+    private ItemPool<InventoryItem> cardsForSale;
     private final ItemPool<InventoryItem> fullCatalogCards =
             ItemPool.createFrom(Singletons.getMagicDb().getCommonCards().getAllCards(), InventoryItem.class);
     private boolean showingFullCatalog = false;

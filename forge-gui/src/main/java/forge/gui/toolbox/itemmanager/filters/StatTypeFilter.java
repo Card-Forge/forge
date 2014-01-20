@@ -15,7 +15,7 @@ import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
 import forge.item.PaperCard;
-import forge.util.ItemPoolView;
+import forge.util.ItemPool;
 
 public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButtonsFilter<T> {
     protected final Map<SItemManagerUtil.StatTypes, FLabel> buttonMap;
@@ -118,7 +118,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
     @Override
     public void afterFiltersApplied() {
-        final ItemPoolView<? super T> items = itemManager.getFilteredItems();
+        final ItemPool<? super T> items = itemManager.getFilteredItems();
 
         FLabel btnPackOrDeck = buttonMap.get(StatTypes.PACK_OR_DECK);
         if (btnPackOrDeck != null) { //support special pack/deck case

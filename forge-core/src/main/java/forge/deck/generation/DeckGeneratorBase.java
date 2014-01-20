@@ -38,10 +38,10 @@ import forge.card.ColorSet;
 import forge.card.ICardDatabase;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
+import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 import forge.util.MyRandom;
 
 /**
@@ -59,7 +59,7 @@ public abstract class DeckGeneratorBase {
     protected boolean useArtifacts = true;
 
     protected ColorSet colors;
-    protected final ItemPool<PaperCard> tDeck = new ItemPool<PaperCard>(PaperCard.class);
+    protected final CardPool tDeck = new CardPool();
     protected final ICardDatabase cardDb;
 
     // 2-colored deck generator has its own constants. The rest works fine with these ones
@@ -100,7 +100,7 @@ public abstract class DeckGeneratorBase {
         tmpDeck.append(String.format("Current deck size: %d... should be %f%n", tDeck.countAll(), size * (getCreatPercentage() + getSpellPercentage())));
     }
 
-    public ItemPoolView<PaperCard> getDeck(final int size, final boolean forAi) {
+    public CardPool getDeck(final int size, final boolean forAi) {
         return null; // all but theme deck do override this method
     }
 

@@ -66,7 +66,6 @@ import forge.gui.toolbox.itemmanager.views.ItemView;
 import forge.item.InventoryItem;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 import forge.util.ReflectionUtil;
 
 
@@ -383,7 +382,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @return ItemPoolView
      */
-    public ItemPoolView<T> getPool() {
+    public ItemPool<T> getPool() {
         return this.pool;
     }
 
@@ -397,15 +396,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.setPool(ItemPool.createFrom(items, this.genericType), false);
     }
 
-    /**
-     * 
-     * Sets the item pool.
-     * 
-     * @param poolView
-     */
-    public void setPool(final ItemPoolView<T> poolView) {
-        this.setPool(poolView, false);
-    }
 
     /**
      * 
@@ -414,17 +404,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param poolView
      * @param infinite
      */
-    public void setPool(final ItemPoolView<T> poolView, boolean infinite) {
+    public void setPool(final ItemPool<T> poolView, boolean infinite) {
         this.setPoolImpl(ItemPool.createFrom(poolView, this.genericType), infinite);
 
     }
 
-    /**
-     * 
-     * Sets the item pool.
-     * 
-     * @param pool0
-     */
     public void setPool(final ItemPool<T> pool0) {
         this.setPoolImpl(pool0, false);
     }
@@ -708,7 +692,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @return ItemPoolView<T>
      */
-    public ItemPoolView<T> getFilteredItems() {
+    public ItemPool<T> getFilteredItems() {
         return this.model.getItems();
     }
 

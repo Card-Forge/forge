@@ -2,10 +2,9 @@ package forge;
 
 import org.testng.annotations.Test;
 
-import forge.item.PaperCard;
+import forge.deck.CardPool;
 import forge.limited.BoosterDraft;
 import forge.limited.LimitedPoolType;
-import forge.util.ItemPoolView;
 
 /**
  * Unit test for simple App.
@@ -23,7 +22,7 @@ public class BoosterDraft1Test {
     public void boosterDraft1Test1() throws Exception {
         final BoosterDraft draft = new BoosterDraft(LimitedPoolType.Full);
         while (draft.hasNextChoice()) {
-            final ItemPoolView<PaperCard> list = draft.nextChoice();
+            final CardPool list = draft.nextChoice();
             System.out.println(list.countAll());
             draft.setChoice(list.toFlatList().get(0));
         }

@@ -55,7 +55,6 @@ import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 import forge.util.MyRandom;
 
 /**
@@ -87,7 +86,7 @@ public final class QuestUtilCards {
      * @param usedFormat currently enforced game format, if any
      * @return the item pool view
      */
-    public static ItemPoolView<PaperCard> generateBasicLands(final int nBasic, final int nSnow, final GameFormatQuest usedFormat) {
+    public static ItemPool<PaperCard> generateBasicLands(final int nBasic, final int nSnow, final GameFormatQuest usedFormat) {
         final ICardDatabase db = Singletons.getMagicDb().getCommonCards();
         final ItemPool<PaperCard> pool = new ItemPool<PaperCard>(PaperCard.class);
 
@@ -591,7 +590,7 @@ public final class QuestUtilCards {
      * 
      * @return the shop list
      */
-    public ItemPoolView<InventoryItem> getShopList() {
+    public ItemPool<InventoryItem> getShopList() {
         if (this.qa.getShopList().isEmpty()) {
             this.generateCardsInShop();
         }
@@ -603,7 +602,7 @@ public final class QuestUtilCards {
      * 
      * @return the new cards
      */
-    public ItemPoolView<InventoryItem> getNewCards() {
+    public ItemPool<InventoryItem> getNewCards() {
         return this.qa.getNewCardList();
     }
 

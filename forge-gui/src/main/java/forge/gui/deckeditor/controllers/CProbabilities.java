@@ -15,7 +15,6 @@ import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 import forge.util.MyRandom;
 
 /** 
@@ -68,7 +67,7 @@ public enum CProbabilities implements ICDoc {
 
         if (ed == null) { return new ArrayList<String>(); }
         
-        final ItemPoolView<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getPool(), PaperCard.class);
+        final ItemPool<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getPool(), PaperCard.class);
 
         final List<String> cardProbabilities = new ArrayList<String>();
 

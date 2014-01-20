@@ -23,11 +23,10 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Singletons;
+import forge.deck.CardPool;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.error.BugReporter;
-import forge.item.PaperCard;
 import forge.util.FileUtil;
-import forge.util.ItemPoolView;
 import forge.util.MyRandom;
 
 /**
@@ -95,7 +94,7 @@ public class GenerateThemeDeck extends DeckGeneratorBase {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public final ItemPoolView<PaperCard> getThemeDeck(final String themeName, final int size) {
+    public final CardPool getThemeDeck(final String themeName, final int size) {
         String s = "";
 
         // read theme file

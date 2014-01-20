@@ -18,9 +18,9 @@
 package forge.limited;
 
 import forge.card.CardEdition;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
-import forge.util.ItemPoolView;
 
 /**
  * <p>
@@ -38,7 +38,7 @@ public interface IBoosterDraft {
      * 
      * @return a {@link forge.CardList} object.
      */
-    ItemPoolView<PaperCard> nextChoice();
+    CardPool nextChoice();
 
     /**
      * <p>

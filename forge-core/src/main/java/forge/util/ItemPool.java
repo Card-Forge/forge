@@ -17,8 +17,16 @@
  */
 package forge.util;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
 import forge.item.InventoryItem;
 
@@ -31,8 +39,32 @@ import forge.item.InventoryItem;
  * @param <T>
  *            an Object
  */
-public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
+public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Integer>> {
 
+    /** The fn to printed. */
+    public final transient Function<Entry<T, Integer>, T> FN_GET_KEY = new Function<Entry<T, Integer>, T>() {
+        @Override
+        public T apply(final Entry<T, Integer> from) {
+            return from.getKey();
+        }
+    };
+
+    /** The fn to item name. */
+    public final transient Function<Entry<T, Integer>, String> FN_GET_NAME = new Function<Entry<T, Integer>, String>() {
+        @Override
+        public String apply(final Entry<T, Integer> from) {
+            return from.getKey().getName();
+        }
+    };
+
+    /** The fn to count. */
+    public final transient Function<Entry<T, Integer>, Integer> FN_GET_COUNT = new Function<Entry<T, Integer>, Integer>() {
+        @Override
+        public Integer apply(final Entry<T, Integer> from) {
+            return from.getValue();
+        }
+    };
+    
     // Constructors here
     /**
      * 
@@ -42,11 +74,11 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      *            a T
      */
     public ItemPool(final Class<T> cls) {
-        super(cls);
+        this(new Hashtable<T, Integer>(), cls);
     }
 
     @SuppressWarnings("unchecked")
-    public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> createFrom(final ItemPoolView<Tin> from, final Class<Tout> clsHint) {
+    public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> createFrom(final ItemPool<Tin> from, final Class<Tout> clsHint) {
         final ItemPool<Tout> result = new ItemPool<Tout>(clsHint);
         if (from != null) {
             for (final Entry<Tin, Integer> e : from) {
@@ -73,6 +105,135 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         return result;
     }
 
+    protected ItemPool(final Map<T, Integer> inMap, final Class<T> cls) {
+        this.items = inMap;
+        this.myClass = cls;
+    }
+
+    // Data members
+    /** The items. */
+    protected final Map<T, Integer> items;
+
+    /** The my class. */
+    private final Class<T> myClass; // class does not keep this in runtime by
+                                    // itself
+
+    /**
+     * iterator.
+     * 
+     * @return Iterator<Entry<T, Integer>>
+     */
+    @Override
+    public final Iterator<Entry<T, Integer>> iterator() {
+        return this.items.entrySet().iterator();
+    }
+
+    // Items read only operations
+    /**
+     * 
+     * contains.
+     * 
+     * @param item
+     *            a T
+     * @return boolean
+     */
+    public final boolean contains(final T item) {
+        if (this.items == null) {
+            return false;
+        }
+        return this.items.containsKey(item);
+    }
+
+    /**
+     * 
+     * count.
+     * 
+     * @param item
+     *            a T
+     * @return int
+     */
+    public final int count(final T item) {
+        if (this.items == null) {
+            return 0;
+        }
+        final Integer boxed = this.items.get(item);
+        return boxed == null ? 0 : boxed.intValue();
+    }
+
+    /**
+     * 
+     * countAll.
+     * 
+     * @return int
+     */
+    public final int countAll() {
+        return countAll(null, myClass); 
+    }
+
+    public final int countAll(Predicate<T> condition) {
+        return countAll(condition, myClass); 
+    }
+    
+    public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
+        int result = 0;
+        if (this.items != null) {
+            final boolean isSameClass = cls == myClass;
+            for (final Entry<T, Integer> kv : this) {
+                final T key = kv.getKey();
+                @SuppressWarnings("unchecked")
+                final U castKey = isSameClass || cls.isInstance(key) ? (U)key : null;
+                if (null == condition || castKey != null && condition.apply(castKey))
+                    result += kv.getValue();
+            }
+        }
+        return result;
+    }
+    
+    /**
+     * 
+     * countDistinct.
+     * 
+     * @return int
+     */
+    public final int countDistinct() {
+        return this.items.size();
+    }
+
+    /**
+     * 
+     * isEmpty.
+     * 
+     * @return boolean
+     */
+    public final boolean isEmpty() {
+        return (this.items == null) || this.items.isEmpty();
+    }
+
+    /**
+     * 
+     * toFlatList.
+     * 
+     * @return List<T>
+     */
+    public final List<T> toFlatList() {
+        final List<T> result = new ArrayList<T>();
+        for (final Entry<T, Integer> e : this) {
+            for (int i = 0; i < e.getValue(); i++) {
+                result.add(e.getKey());
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Gets the my class.
+     * 
+     * @return the myClass
+     */
+    public Class<T> getMyClass() {
+        return this.myClass;
+    }    
+    
     // get
     /**
      * 
@@ -80,8 +241,8 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      * 
      * @return a ItemPoolView
      */
-    public ItemPoolView<T> getView() {
-        return new ItemPoolView<T>(Collections.unmodifiableMap(this.items), this.getMyClass());
+    public ItemPool<T> getView() {
+        return new ItemPool<T>(Collections.unmodifiableMap(this.items), this.getMyClass());
     }
 
     // Items manipulation

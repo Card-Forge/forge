@@ -39,7 +39,6 @@ import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -54,7 +53,7 @@ import forge.util.ItemPoolView;
 public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
     private final DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<DeckSection>();
-    private final ItemPoolView<PaperCard> normalPool, avatarPool, planePool, schemePool;
+    private final ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool;
 
     //=========== Constructor
     /**

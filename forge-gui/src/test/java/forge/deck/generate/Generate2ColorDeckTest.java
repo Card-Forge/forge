@@ -7,7 +7,7 @@ import forge.Singletons;
 import forge.card.CardDb;
 import forge.deck.generation.DeckGenerator2Color;
 import forge.item.PaperCard;
-import forge.util.ItemPoolView;
+import forge.util.ItemPool;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson
@@ -22,7 +22,7 @@ public class Generate2ColorDeckTest {
     public void generate2ColorDeckTest1() {
         CardDb cardDb = Singletons.getMagicDb().getCommonCards();
         final DeckGenerator2Color gen = new DeckGenerator2Color(cardDb, "white", "blue");
-        final ItemPoolView<PaperCard> cardList = gen.getDeck(60, false);
+        final ItemPool<PaperCard> cardList = gen.getDeck(60, false);
         Assert.assertNotNull(cardList);
     }
 }

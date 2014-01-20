@@ -31,7 +31,6 @@ import forge.quest.QuestUtilCards;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 
 /** */
 public class QuestAssets {
@@ -171,7 +170,7 @@ public class QuestAssets {
         if (useFormat != null && !useFormat.hasSnowLands()) {
             snowLands = 0;
         }
-        final ItemPoolView<PaperCard> lands = QuestUtilCards.generateBasicLands(
+        final ItemPool<PaperCard> lands = QuestUtilCards.generateBasicLands(
                 prefs.getPrefInt(QPref.STARTING_BASIC_LANDS), snowLands, useFormat);
         this.getCardPool().addAll(lands);
     }

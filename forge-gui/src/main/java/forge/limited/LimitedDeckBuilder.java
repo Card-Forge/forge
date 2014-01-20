@@ -33,7 +33,6 @@ import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
-import forge.util.ItemPoolView;
 import forge.util.MyRandom;
 
 /**
@@ -97,7 +96,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase{
     }
 
     @Override
-    public ItemPoolView<PaperCard> getDeck(int size, boolean forAi) {
+    public CardPool getDeck(int size, boolean forAi) {
         return buildDeck().getMain();
     }
     

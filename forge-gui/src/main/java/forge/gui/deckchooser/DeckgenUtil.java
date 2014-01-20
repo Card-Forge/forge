@@ -24,7 +24,6 @@ import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestEventDuel;
 import forge.util.Aggregates;
-import forge.util.ItemPoolView;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
@@ -72,7 +71,7 @@ public class DeckgenUtil {
         }
         gen.setSingleton(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
         gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-        ItemPoolView<PaperCard> cards = gen == null ? null : gen.getDeck(60, forAi);
+        CardPool cards = gen == null ? null : gen.getDeck(60, forAi);
 
         if (null == deckName) {
             deckName = Lang.joinHomogenous(Arrays.asList(selection));

@@ -24,7 +24,6 @@ import java.util.Map.Entry;
 
 import forge.item.InventoryItem;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 
 /**
  * <p>
@@ -107,7 +106,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
      * 
      * @return ItemPoolView<T>
      */
-    public ItemPoolView<T> getItems() {
+    public ItemPool<T> getItems() {
         return this.data.getView();
     }
 

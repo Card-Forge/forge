@@ -5,13 +5,12 @@ import java.util.List;
 import org.testng.annotations.Test;
 
 import forge.card.BoosterGenerator;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.card.Card;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.limited.IBoosterDraft;
-import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 
 /**
  * <p>
@@ -48,10 +47,12 @@ public class BoosterDraftTest implements IBoosterDraft {
      * @return a {@link forge.CardList} object.
      */
     @Override
-    public ItemPoolView<PaperCard> nextChoice() {
+    public CardPool nextChoice() {
         this.n--;
         SealedProduct.Template booster = Singletons.getMagicDb().getBoosters().get("M11");
-        return ItemPool.createFrom(BoosterGenerator.getBoosterPack(booster), PaperCard.class);
+        CardPool result = new CardPool();
+        result.addAllFlat(BoosterGenerator.getBoosterPack(booster));
+        return result;
     }
 
     /** {@inheritDoc} */

@@ -37,7 +37,7 @@ import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
-import forge.util.ItemPoolView;
+import forge.util.ItemPool;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.
@@ -132,7 +132,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      * @param list
      *            a {@link forge.CardList} object.
      */
-    private void showChoices(final ItemPoolView<PaperCard> list) {
+    private void showChoices(final ItemPool<PaperCard> list) {
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
         this.getCatalogManager().setCaption("Pack " + packNumber + " - Cards");

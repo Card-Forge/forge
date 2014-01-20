@@ -26,8 +26,7 @@ import com.google.common.collect.Lists;
 import forge.card.ColorSet;
 import forge.card.ICardDatabase;
 import forge.card.MagicColor;
-import forge.item.PaperCard;
-import forge.util.ItemPoolView;
+import forge.deck.CardPool;
 
 /**
  * <p>
@@ -79,7 +78,7 @@ public class DeckGeneratorMonoColor extends DeckGeneratorBase {
 
 
     @Override
-    public final ItemPoolView<PaperCard> getDeck(final int size, final boolean forAi) {
+    public final CardPool getDeck(final int size, final boolean forAi) {
         addCreaturesAndSpells(size, cmcLevels, forAi);
 
         // Add lands

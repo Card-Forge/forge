@@ -13,7 +13,7 @@ import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
-import forge.util.ItemPoolView;
+import forge.util.ItemPool;
 
 
 public class UnOpenedProduct implements IUnOpenedProduct {
@@ -38,7 +38,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
     }
 
     // Invoke this constructor only if you are sure that the pool is not equal to deafult carddb
-    public UnOpenedProduct(SealedProduct.Template template, ItemPoolView<PaperCard> pool) {
+    public UnOpenedProduct(SealedProduct.Template template, ItemPool<PaperCard> pool) {
         this(template, pool.toFlatList());
     }
 

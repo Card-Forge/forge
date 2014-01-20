@@ -8,7 +8,7 @@ import forge.deck.Deck;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.util.BinaryUtil;
-import forge.util.ItemPoolView;
+import forge.util.ItemPool;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -121,7 +121,7 @@ public class DeckColorFilter extends StatTypeFilter<Deck> {
 
     @Override
     public void afterFiltersApplied() {
-        final ItemPoolView<? super Deck> items = itemManager.getFilteredItems();
+        final ItemPool<? super Deck> items = itemManager.getFilteredItems();
 
         buttonMap.get(StatTypes.DECK_WHITE).setText(String.valueOf(items.countAll(IS_WHITE, Deck.class)));
         buttonMap.get(StatTypes.DECK_BLUE).setText(String.valueOf(items.countAll(IS_BLUE, Deck.class)));

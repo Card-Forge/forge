@@ -42,7 +42,6 @@ import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -60,8 +59,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
     private DragCell deckGenParent = null;
 
     private List<DeckSection> allSections = new ArrayList<DeckSection>();
-    private final ItemPoolView<PaperCard> commanderPool;
-    private final ItemPoolView<PaperCard> normalPool;
+    private final ItemPool<PaperCard> commanderPool;
+    private final ItemPool<PaperCard> normalPool;
 
     //=========== Constructor
     /**

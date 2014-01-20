@@ -19,7 +19,6 @@ import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.item.PaperCard;
 import forge.item.InventoryItem;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 
 
 /** 
@@ -57,7 +56,7 @@ public enum CStatistics implements ICDoc {
         analyze();
     }
 
-    private void setLabelValue(JLabel label, ItemPoolView<PaperCard> deck, Predicate<CardRules> predicate, int total) {
+    private void setLabelValue(JLabel label, ItemPool<PaperCard> deck, Predicate<CardRules> predicate, int total) {
         int tmp = deck.countAll(Predicates.compose(predicate, PaperCard.FN_GET_RULES));
         label.setText(tmp + " (" + SItemManagerUtil.calculatePercentage(tmp, total) + "%)");
     }
@@ -70,7 +69,7 @@ public enum CStatistics implements ICDoc {
 
         if (ed == null) { return; }
 
-        final ItemPoolView<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getPool(), PaperCard.class);
+        final ItemPool<PaperCard> deck = ItemPool.createFrom(ed.getDeckManager().getPool(), PaperCard.class);
 
         int total = deck.countAll();
 

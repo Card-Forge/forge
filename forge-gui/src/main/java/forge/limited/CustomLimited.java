@@ -32,7 +32,6 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.util.FileSection;
 import forge.util.ItemPool;
-import forge.util.ItemPoolView;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
 
@@ -63,7 +62,7 @@ public class CustomLimited extends DeckBase {
     /** The Num packs. */
     private int numPacks = 3;
 
-    private transient ItemPoolView<PaperCard> cardPool;
+    private transient ItemPool<PaperCard> cardPool;
 
     /** The Land set code. */
     private String landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(Singletons.getMagicDb().getEditions()).getCode();
@@ -153,7 +152,7 @@ public class CustomLimited extends DeckBase {
      * 
      * @see forge.item.CardCollectionBase#getCardPool()
      */
-    public ItemPoolView<PaperCard> getCardPool() {
+    public ItemPool<PaperCard> getCardPool() {
         return this.cardPool;
     }
 

@@ -45,8 +45,9 @@ import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.ItemPool;
 import forge.util.ItemPoolSorter;
-import forge.util.ItemPoolView;
+
 
 
 /**
@@ -210,7 +211,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return d;
     }
 
-    private static List<String> writeCardPool(final ItemPoolView<PaperCard> pool) {
+    private static List<String> writeCardPool(final ItemPool<PaperCard> pool) {
         List<Entry<PaperCard, Integer>> main2sort = Lists.newArrayList(pool);
         Collections.sort(main2sort, ItemPoolSorter.BY_NAME_THEN_SET);
         final List<String> out = new ArrayList<String>();
