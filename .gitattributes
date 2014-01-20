@@ -15345,6 +15345,7 @@ forge-gui/src/main/java/forge/gui/home/quest/VSubmenuQuestData.java -text
 forge-gui/src/main/java/forge/gui/home/quest/VSubmenuQuestDecks.java -text
 forge-gui/src/main/java/forge/gui/home/quest/VSubmenuQuestPrefs.java -text
 forge-gui/src/main/java/forge/gui/home/quest/package-info.java svneol=native#text/plain
+forge-gui/src/main/java/forge/gui/home/sanctioned/AvatarSelector.java -text
 forge-gui/src/main/java/forge/gui/home/sanctioned/CSubmenuConstructed.java -text
 forge-gui/src/main/java/forge/gui/home/sanctioned/CSubmenuDraft.java -text
 forge-gui/src/main/java/forge/gui/home/sanctioned/CSubmenuSealed.java -text

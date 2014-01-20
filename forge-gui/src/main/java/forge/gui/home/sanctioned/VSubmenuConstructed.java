@@ -397,9 +397,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
         } while (usedAvatars.values().contains(random));
 
-        avatar.setIcon(FSkin.getAvatars().get(random));
+        setAvatar(avatar, playerIndex, random);
+    }
+
+    private void setAvatar(FLabel avatar, int playerIndex, int newAvatarIndex) {
+    	avatar.setIcon(FSkin.getAvatars().get(newAvatarIndex));
         avatar.repaintSelf();
-    	usedAvatars.put(playerIndex, random);
+    	usedAvatars.put(playerIndex, newAvatarIndex);
     }
 
     /** Builds the actual deck panel layouts for each player.
@@ -696,15 +700,26 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     };
 
     private FMouseAdapter avatarMouseListener = new FMouseAdapter() {
+		@SuppressWarnings("serial")
 		@Override
 		public void onLeftClick(MouseEvent e) {
-			FLabel avatar = (FLabel)e.getSource();
-			int playerIndex = avatarList.indexOf(avatar);
+			final FLabel avatar = (FLabel)e.getSource();
+			final int playerIndex = avatarList.indexOf(avatar);
 
 			changePlayerFocus(playerIndex);
 
-			avatar.grabFocus();
-			// TODO: Do avatar selection, giving current avatar focus for keyboard control
+			final AvatarSelector aSel = new AvatarSelector(usedAvatars.get(playerIndex), usedAvatars.values());
+			for (final FLabel lbl : aSel.getSelectables()) {
+				lbl.setCommand(new Command() {
+					@Override
+		            public void run() {
+		                VSubmenuConstructed.this.setAvatar(avatar, playerIndex, Integer.valueOf(lbl.getName().substring(11)));
+		                aSel.setVisible(false);
+		                avatar.requestFocusInWindow();
+		            }
+				});
+			}
+			aSel.show(aSel);
 
 			if (playerIndex < 2) { updateAvatarPrefs(); }
 		}
@@ -716,7 +731,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             changePlayerFocus(playerIndex);
 
             setRandomAvatar(avatar, playerIndex);
-            avatar.grabFocus();
+            avatar.requestFocusInWindow();
 
             if (playerIndex < 2) { updateAvatarPrefs(); }
         }
