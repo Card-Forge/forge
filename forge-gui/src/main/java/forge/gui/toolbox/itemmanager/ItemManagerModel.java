@@ -17,7 +17,9 @@
  */
 package forge.gui.toolbox.itemmanager;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import forge.item.InventoryItem;
@@ -63,10 +65,33 @@ public final class ItemManagerModel<T extends InventoryItem> {
      * 
      * @return List<Entry<T, Integer>>
      */
+    
+    
+    // same thing as above, it was copied to provide sorting (needed by table
+    // views in deck editors)
+    /** The items ordered. */
+    private final transient List<Entry<T, Integer>> itemsOrdered = new ArrayList<Map.Entry<T, Integer>>();
+
+    /** Whether list is in sync. */
+    protected transient boolean isListInSync = false;
+
     public final List<Entry<T, Integer>> getOrderedList() {
-        return this.data.getOrderedList();
+        if (!this.isListInSync) {
+            this.rebuildOrderedList();
+        }
+        return this.itemsOrdered;
     }
 
+    private void rebuildOrderedList() {
+        this.itemsOrdered.clear();
+        if (this.data != null) {
+            for (final Entry<T, Integer> e : this.data) {
+                this.itemsOrdered.add(e);
+            }
+        }
+        this.isListInSync = true;
+    }    
+    
     /**
      * 
      * countDistinct.
@@ -97,6 +122,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
         final boolean wasThere = this.data.count(item0) > 0;
         if (wasThere) {
             this.data.remove(item0, qty);
+            isListInSync = false;
             this.itemManager.getTable().getTableModel().fireTableDataChanged();
         }
     }
@@ -108,6 +134,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
      */
     public void addItem(final T item0, int qty) {
         this.data.add(item0, qty);
+        isListInSync = false;
         this.itemManager.getTable().getTableModel().fireTableDataChanged();
     }
 
@@ -118,6 +145,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
      */
     public void addItems(final Iterable<Entry<T, Integer>> items0) {
         this.data.addAll(items0);
+        isListInSync = false;
         this.itemManager.getTable().getTableModel().fireTableDataChanged();
     }
 

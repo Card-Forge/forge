@@ -32,6 +32,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
+
 import forge.StaticData;
 
 import forge.card.CardDb;
@@ -209,7 +211,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     private static List<String> writeCardPool(final ItemPoolView<PaperCard> pool) {
-        final List<Entry<PaperCard, Integer>> main2sort = pool.getOrderedList();
+        List<Entry<PaperCard, Integer>> main2sort = Lists.newArrayList(pool);
         Collections.sort(main2sort, ItemPoolSorter.BY_NAME_THEN_SET);
         final List<String> out = new ArrayList<String>();
         for (final Entry<PaperCard, Integer> e : main2sort) {

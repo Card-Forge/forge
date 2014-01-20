@@ -84,14 +84,6 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     private final Class<T> myClass; // class does not keep this in runtime by
                                     // itself
 
-    // same thing as above, it was copied to provide sorting (needed by table
-    // views in deck editors)
-    /** The items ordered. */
-    private final transient List<Entry<T, Integer>> itemsOrdered = new ArrayList<Map.Entry<T, Integer>>();
-
-    /** Whether list is in sync. */
-    protected transient boolean isListInSync = false;
-
     /**
      * iterator.
      * 
@@ -181,29 +173,6 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      */
     public final boolean isEmpty() {
         return (this.items == null) || this.items.isEmpty();
-    }
-
-    /**
-     * 
-     * getOrderedList.
-     * 
-     * @return List<Entry<T, Integer>>
-     */
-    public final List<Entry<T, Integer>> getOrderedList() {
-        if (!this.isListInSync) {
-            this.rebuildOrderedList();
-        }
-        return this.itemsOrdered;
-    }
-
-    private void rebuildOrderedList() {
-        this.itemsOrdered.clear();
-        if (this.items != null) {
-            for (final Entry<T, Integer> e : this.items.entrySet()) {
-                this.itemsOrdered.add(e);
-            }
-        }
-        this.isListInSync = true;
     }
 
     /**

@@ -33,8 +33,6 @@ import forge.item.InventoryItem;
  */
 public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
 
-    
-    
     // Constructors here
     /**
      * 
@@ -47,7 +45,6 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         super(cls);
     }
 
-   
     @SuppressWarnings("unchecked")
     public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> createFrom(final ItemPoolView<Tin> from, final Class<Tout> clsHint) {
         final ItemPool<Tout> result = new ItemPool<Tout>(clsHint);
@@ -113,7 +110,6 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
             return;
         }
         this.items.put(item, Integer.valueOf(this.count(item) + amount));
-        this.isListInSync = false;
     }
 
     /**
@@ -131,7 +127,6 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
                 this.add((T) cr);
             }
         }
-        this.isListInSync = false;
     }
 
     /**
@@ -150,7 +145,6 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
                 this.add((T) e.getKey(), e.getValue());
             }
         }
-        this.isListInSync = false;
     }
 
     /**
@@ -183,7 +177,6 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         } else {
             this.items.put(item, count - amount);
         }
-        this.isListInSync = false;
         return true;
     }
 
@@ -223,6 +216,5 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      */
     public void clear() {
         this.items.clear();
-        this.isListInSync = false;
     }
 }
