@@ -117,6 +117,7 @@ forge-game/.settings/org.eclipse.m2e.core.prefs -text
 forge-game/pom.xml -text
 forge-game/src/main/java/forge/Command.java -text
 forge-game/src/main/java/forge/Constant.java -text
+forge-game/src/main/java/forge/ImageCacheBridge.java -text
 forge-game/src/main/java/forge/PreferencesBridge.java -text
 forge-game/src/main/java/forge/ai/AiAttackController.java -text
 forge-game/src/main/java/forge/ai/AiBlockController.java -text
@@ -15205,6 +15206,7 @@ forge-gui/src/main/html/js/observable.js -text
 forge-gui/src/main/html/js/socket.js -text
 forge-gui/src/main/java/forge/FThreads.java -text
 forge-gui/src/main/java/forge/ImageCache.java svneol=native#text/plain
+forge-gui/src/main/java/forge/ImageCacheProvider.java -text
 forge-gui/src/main/java/forge/ImageLoader.java -text
 forge-gui/src/main/java/forge/PreferencesProvider.java -text
 forge-gui/src/main/java/forge/Singletons.java svneol=native#text/plain

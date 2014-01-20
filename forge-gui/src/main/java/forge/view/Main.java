@@ -18,6 +18,7 @@
 package forge.view;
 
 
+import forge.ImageCacheProvider;
 import forge.PreferencesProvider;
 import forge.Singletons;
 import forge.net.FServer;
@@ -46,6 +47,7 @@ public final class Main {
         }
         
         forge.PreferencesBridge.Instance = new PreferencesProvider();
+        forge.ImageCacheBridge.instance = new ImageCacheProvider();
         
         // command line startup here
         String mode = args[0].toLowerCase();
