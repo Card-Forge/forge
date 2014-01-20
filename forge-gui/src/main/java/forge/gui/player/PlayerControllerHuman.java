@@ -537,13 +537,13 @@ public class PlayerControllerHuman extends PlayerController {
         return Lists.newArrayList(inp.getSelected());
     }
 
-    @Override
-    public Card chooseCardToDredge(List<Card> dredgers) {
-        if (GuiDialog.confirm(null, "Do you want to dredge?", false)) {
-            return GuiChoose.oneOrNone("Select card to dredge", dredgers);
-        }
-        return null;
-    }
+//    @Override
+//    public Card chooseCardToDredge(List<Card> dredgers) {
+//        if (GuiDialog.confirm(null, "Do you want to dredge?", false)) {
+//            return GuiChoose.oneOrNone("Select card to dredge", dredgers);
+//        }
+//        return null;
+//    }
 
     @Override
     public void playMiracle(SpellAbility miracle, Card card) {

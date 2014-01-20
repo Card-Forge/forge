@@ -28,6 +28,7 @@ import forge.game.card.CardFactoryUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
 /**
@@ -119,6 +120,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             if (Expressions.compare(left, comparator, compareTo)) {
                 return true;
             }
+        } else if (effect.getMapParams().containsKey("AICheckDredge")) {
+            return ai.getCardsIn(ZoneType.Library).size() > 8 || ai.isCardInPlay("Laboratory Maniac");
         } else if (sa != null && sa.doTrigger(false, ai)) {
             return true;
         }

@@ -273,10 +273,10 @@ public class PlayerControllerAi extends PlayerController {
                : ComputerUtil.getCardsToDiscardFromOpponent(player, p, sa, validCards, min, max);
     }
 
-    @Override
-    public Card chooseCardToDredge(List<Card> dredgers) {
-        return getAi().chooseCardToDredge(dredgers);
-    }
+//    @Override
+//    public Card chooseCardToDredge(List<Card> dredgers) {
+//        return getAi().chooseCardToDredge(dredgers);
+//    }
 
     /* (non-Javadoc)
      * @see forge.game.player.PlayerController#mayPlaySpellAbilityForFree(forge.card.spellability.SpellAbility)
