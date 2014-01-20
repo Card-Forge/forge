@@ -25,16 +25,14 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
-import forge.net.FServer;
 import forge.util.Expressions;
-import forge.util.Lang;
-import forge.util.TextUtil;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
 public class AbilityUtils {
+
     public static CounterType getCounterType(String name, SpellAbility sa) throws Exception {
         CounterType counterType;
         if ("ReplacedCounterType".equals(name)) {
@@ -1362,39 +1360,5 @@ public class AbilityUtils {
             }
         }
         return CardFactoryUtil.xCount(c, s);
-    }
-
-    public static String createPlayerZoneMessage(Player player, ZoneType zoneType, String prefix) {
-        return createPlayerZoneMessage(player, zoneType, prefix, null);
-    }
-    public static String createPlayerZoneMessage(Player player, ZoneType zoneType, String prefix, String suffix) {
-        StringBuilder message = new StringBuilder();
-
-        String owner;
-        if (player.getLobbyPlayer() == FServer.instance.getLobby().getGuiPlayer()) {
-            owner = "your";
-        }
-        else {
-            owner = Lang.getPossesive(player.getName());
-        }
-
-        if (prefix != null && !prefix.isEmpty()) {
-            message.append(prefix);
-            if (!prefix.endsWith(" ")) {
-                message.append(" ");
-            }
-            message.append(owner);
-        }
-        else {
-            message.append(owner.substring(0, 1).toUpperCase() + owner.substring(1));
-        }
-
-        message.append(" " + TextUtil.splitCompoundWord(zoneType.toString(), TextUtil.PhraseCase.Lower));
-
-        if (suffix != null && !suffix.isEmpty()) {
-            message.append(" " + suffix);
-        }
-
-        return message.toString();
     }
 }
