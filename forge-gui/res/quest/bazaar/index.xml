@@ -16,6 +16,7 @@
       <items>
         <string>Estates</string>
         <string>Lucky Coin</string>
+        <string>Cash Stakes</string>
       </items> 	
     </stall>
     <stall name="Bookstore" displayName="Beleren&apos;s Books" icon="ICO_BOOK">
@@ -97,6 +98,12 @@ Fine Print: Loses effectiveness after 15 uses.</description>
     	<description>A charm to ward off the fatigue of battle.
     	
 Effect: You may have each match be best of 5 instead of 3.</description>
+    </item>
+    <item name="Cash Stakes" maxLevel="1" basePrice="1500" itemType="CASH_STAKES" icon="ICO_STAKES">
+      <description>A written agreement with the Spell Shop to acquire cards you lose in an ante match from quest opponents.
+      
+
+Effect: Cards lost in an ante match will be available immediately following the match in the Card Shop.</description>
     </item>
   </questItems>
   <pets>
