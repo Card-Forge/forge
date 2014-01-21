@@ -95,6 +95,7 @@ forge-core/src/main/java/forge/util/ItemPoolSorter.java -text
 forge-core/src/main/java/forge/util/Lang.java -text
 forge-core/src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 forge-core/src/main/java/forge/util/PredicateString.java -text
+forge-core/src/main/java/forge/util/ReflectionUtil.java -text
 forge-core/src/main/java/forge/util/TextUtil.java -text
 forge-core/src/main/java/forge/util/ThreadUtil.java -text
 forge-core/src/main/java/forge/util/package-info.java -text
@@ -117,6 +118,8 @@ forge-game/src/main/java/forge/game/GameFormat.java -text
 forge-game/src/main/java/forge/game/card/package-info.java -text
 forge-game/src/main/java/forge/game/package-info.java -text
 forge-game/src/main/java/forge/package-info.java -text
+forge-game/src/main/java/forge/util/Expressions.java -text
+forge-game/src/main/java/forge/util/package-info.java -text
 forge-gui/.classpath -text
 forge-gui/.project -text
 forge-gui/.settings/org.eclipse.core.resources.prefs -text
@@ -15668,14 +15671,12 @@ forge-gui/src/main/java/forge/sound/SoundSystem.java -text
 forge-gui/src/main/java/forge/util/AwtUtil.java -text
 forge-gui/src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/Evaluator.java -text
-forge-gui/src/main/java/forge/util/Expressions.java -text
 forge-gui/src/main/java/forge/util/HttpUtil.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/IgnoringXStream.java -text
 forge-gui/src/main/java/forge/util/LineReader.java -text
 forge-gui/src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
 forge-gui/src/main/java/forge/util/NameGenerator.java -text
 forge-gui/src/main/java/forge/util/OperatingSystem.java -text
-forge-gui/src/main/java/forge/util/ReflectionUtil.java -text
 forge-gui/src/main/java/forge/util/XmlUtil.java -text
 forge-gui/src/main/java/forge/util/maps/EnumMapOfLists.java -text
 forge-gui/src/main/java/forge/util/maps/EnumMapToAmount.java -text
