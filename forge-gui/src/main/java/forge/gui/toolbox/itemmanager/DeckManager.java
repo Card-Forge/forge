@@ -13,12 +13,12 @@ import javax.swing.event.ListSelectionListener;
 
 import forge.Command;
 import forge.Singletons;
-import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.DeckProxy;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
@@ -47,7 +47,7 @@ import forge.quest.QuestWorld;
  *
  */
 @SuppressWarnings("serial")
-public final class DeckManager extends ItemManager<Deck> {
+public final class DeckManager extends ItemManager<DeckProxy> {
     private static final FSkin.SkinIcon icoDelete = FSkin.getIcon(FSkin.InterfaceIcons.ICO_DELETE);
     private static final FSkin.SkinIcon icoDeleteOver = FSkin.getIcon(FSkin.InterfaceIcons.ICO_DELETE_OVER);
     private static final FSkin.SkinIcon icoEdit = FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT);
@@ -71,7 +71,7 @@ public final class DeckManager extends ItemManager<Deck> {
      * @param gt
      */
     public DeckManager(final GameType gt) {
-        super(Deck.class, true);
+        super(DeckProxy.class, true);
         this.gametype = gt;
 
         columns.get(ColumnDef.DECK_ACTIONS).setCellRenderer(new DeckActionsRenderer());
@@ -149,7 +149,7 @@ public final class DeckManager extends ItemManager<Deck> {
     }
 
     @Override
-    protected ItemFilter<Deck> createSearchFilter() {
+    protected ItemFilter<DeckProxy> createSearchFilter() {
         return new DeckSearchFilter(this);
     }
 
@@ -213,7 +213,7 @@ public final class DeckManager extends ItemManager<Deck> {
         }, getFilter(DeckColorFilter.class) == null);
     }
 
-    private <T extends DeckBase> void editDeck(final Deck deck) {
+    private <T extends DeckBase> void editDeck(final DeckProxy deck) {
         if (deck == null || this.preventEdit) { return; }
 
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
@@ -252,7 +252,7 @@ public final class DeckManager extends ItemManager<Deck> {
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getName());
     }
 
-    public boolean deleteDeck(Deck deck) {
+    public boolean deleteDeck(DeckProxy deck) {
         if (deck == null || this.preventEdit) { return false; }
 
         if (!FOptionPane.showConfirmDialog(
@@ -316,7 +316,7 @@ public final class DeckManager extends ItemManager<Deck> {
             int x = e.getX() - cellBounds.x;
 
             if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1) {
-                Deck deck = (Deck) value;
+                DeckProxy deck = (DeckProxy) value;
 
                 if (x >= 0 && x < imgSize) { //delete button
                     if (DeckManager.this.deleteDeck(deck)) {

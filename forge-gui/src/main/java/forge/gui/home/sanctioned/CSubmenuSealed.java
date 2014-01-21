@@ -23,6 +23,7 @@ import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.GuiChoose;
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.DeckProxy;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.framework.FScreen;
@@ -105,7 +106,7 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         final VSubmenuSealed view = VSubmenuSealed.SINGLETON_INSTANCE;
-        view.getLstDecks().setPool(humanDecks);
+        view.getLstDecks().setPool(DeckProxy.getAllSealedDecks(Singletons.getModel().getDecks().getSealed()));
         view.getLstDecks().update();
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -121,7 +122,7 @@ public enum CSubmenuSealed implements ICDoc {
     }
 
     private void startGame(final GameType gameType) {
-        final Deck human = VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
+        final DeckProxy human = VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
 
         if (human == null) {
             FOptionPane.showErrorDialog("Please build and/or select a deck for yourself.", "No Deck");
@@ -129,7 +130,7 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(human);
+            String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(human.getDeck());
             if (null != errorMessage) {
                 FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
                 return;
@@ -137,7 +138,7 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         int matches = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().size();
-        Singletons.getModel().getGauntletMini().launch(matches, human, gameType);
+        Singletons.getModel().getGauntletMini().launch(matches, human.getDeck(), gameType);
     }
 
     @SuppressWarnings("unchecked")

@@ -26,10 +26,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Command;
 import forge.Singletons;
-import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.deckchooser.FDeckChooser;
+import forge.gui.deckeditor.DeckProxy;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -428,7 +428,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         mainDeckPanel.add(mainChooser, "grow, push, wrap");
     }
 
-    protected void onDeckClicked(int iPlayer, DeckType type, Iterable<Deck> selectedDecks) {
+    protected void onDeckClicked(int iPlayer, DeckType type, Iterable<DeckProxy> selectedDecks) {
         String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks);
         deckSelectorBtns.get(iPlayer).setText(text);
     }

@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import com.google.common.base.Predicate;
 import forge.card.MagicColor;
 import forge.deck.Deck;
+import forge.gui.deckeditor.DeckProxy;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
 import forge.util.BinaryUtil;
@@ -14,13 +15,13 @@ import forge.util.ItemPool;
  * TODO: Write javadoc for this type.
  *
  */
-public class DeckColorFilter extends StatTypeFilter<Deck> {
-    public DeckColorFilter(ItemManager<? super Deck> itemManager0) {
+public class DeckColorFilter extends StatTypeFilter<DeckProxy> {
+    public DeckColorFilter(ItemManager<? super DeckProxy> itemManager0) {
         super(itemManager0);
     }
 
     @Override
-    public ItemFilter<Deck> createCopy() {
+    public ItemFilter<DeckProxy> createCopy() {
         return new DeckColorFilter(itemManager);
     }
 
@@ -36,10 +37,10 @@ public class DeckColorFilter extends StatTypeFilter<Deck> {
     }
 
     @Override
-    protected final Predicate<Deck> buildPredicate() {
-        return new Predicate<Deck>() {
+    protected final Predicate<DeckProxy> buildPredicate() {
+        return new Predicate<DeckProxy>() {
             @Override
-            public boolean apply(Deck input) {
+            public boolean apply(DeckProxy input) {
                 byte colorProfile = input.getColor().getColor();
                 if (colorProfile == 0) {
                     return buttonMap.get(StatTypes.DECK_COLORLESS).getSelected();
@@ -121,7 +122,7 @@ public class DeckColorFilter extends StatTypeFilter<Deck> {
 
     @Override
     public void afterFiltersApplied() {
-        final ItemPool<? super Deck> items = itemManager.getFilteredItems();
+        final ItemPool<? super DeckProxy> items = itemManager.getFilteredItems();
 
         buttonMap.get(StatTypes.DECK_WHITE).setText(String.valueOf(items.countAll(IS_WHITE, Deck.class)));
         buttonMap.get(StatTypes.DECK_BLUE).setText(String.valueOf(items.countAll(IS_BLUE, Deck.class)));

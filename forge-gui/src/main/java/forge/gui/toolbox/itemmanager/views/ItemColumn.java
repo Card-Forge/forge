@@ -38,6 +38,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.gui.CardPreferences;
+import forge.gui.deckeditor.DeckProxy;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
@@ -546,7 +547,7 @@ public class ItemColumn extends TableColumn {
             return i instanceof Deck ? ((Deck) i) : null;
         }
         private static ColorSet toDeckColor(final InventoryItem i) {
-            return i instanceof Deck ? ((Deck) i).getColor() : null;
+            return i instanceof DeckProxy ? ((DeckProxy) i).getColor() : null;
         }
         private static int toDeckCount(final InventoryItem i, DeckSection section) {
             Deck deck = toDeck(i);

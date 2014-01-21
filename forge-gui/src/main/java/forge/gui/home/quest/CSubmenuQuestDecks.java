@@ -1,6 +1,6 @@
 package forge.gui.home.quest;
 
-import java.util.ArrayList;
+import java.util.Map.Entry;
 
 import javax.swing.SwingUtilities;
 
@@ -8,6 +8,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.DeckProxy;
 import forge.gui.deckeditor.controllers.CEditorQuest;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -31,7 +32,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
     private final Command cmdDeckSelect = new Command() {
         @Override
         public void run() {
-            currentDeck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
+            currentDeck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedItem().getDeck();
             Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_DECK, currentDeck.toString());
             Singletons.getModel().getQuestPreferences().save();
         }
@@ -66,7 +67,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         final QuestController qData = Singletons.getModel().getQuest();
         boolean hasQuest = qData.getAssets() != null;
         // Retrieve and set all decks
-        view.getLstDecks().setPool(hasQuest ? qData.getMyDecks() : new ArrayList<Deck>());
+        view.getLstDecks().setPool(DeckProxy.getAllQuestDecks(hasQuest ? qData.getMyDecks() : null));
         view.getLstDecks().update();
 
         // Look through list for preferred deck from prefs
@@ -75,13 +76,11 @@ public enum CSubmenuQuestDecks implements ICDoc {
         if (hasQuest) {
             final String cd = Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_DECK);
 
-            for (Deck d : qData.getMyDecks()) {
-                if (d.getName() != null && d.getName().equals(cd)) {
-                    currentDeck = d;
-                    view.getLstDecks().setSelectedItem(d);
+            for (Entry<DeckProxy, Integer> d : view.getLstDecks().getPool() )
+                if( d.getKey().getName().equals(cd) ) {
+                    view.getLstDecks().setSelectedItem(d.getKey());
                     break;
                 }
-            }
         }
 
         // Not found? Set first one. Still not found? OK, throw to setCurrentDeckStatus().

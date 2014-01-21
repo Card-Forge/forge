@@ -17,6 +17,7 @@ import forge.game.player.RegisteredPlayer;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.DeckProxy;
 import forge.gui.deckeditor.controllers.CEditorDraftingProcess;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
@@ -74,18 +75,13 @@ public enum CSubmenuDraft implements ICDoc {
      */
     @Override
     public void update() {
-        List<Deck> human = new ArrayList<Deck>();
-        for (DeckGroup d : Singletons.getModel().getDecks().getDraft()) {
-            human.add(d.getHumanDeck());
-        }
-
-        final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
+         final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
         final JButton btnStart = view.getBtnStart();
 
-        view.getLstDecks().setPool(human);
+        view.getLstDecks().setPool(DeckProxy.getDraftDecks(Singletons.getModel().getDecks().getDraft()));
         view.getLstDecks().update();
 
-        if (human.size() > 1) {
+        if (!view.getLstDecks().getPool().isEmpty()) {
             btnStart.setEnabled(true);
         }
 
@@ -102,7 +98,7 @@ public enum CSubmenuDraft implements ICDoc {
 
     private void startGame(final GameType gameType) {
         final boolean gauntlet = !VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected();
-        final Deck humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
+        final DeckProxy humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
         final int aiIndex = (int) Math.floor(Math.random() * 7);
 
         if (humanDeck == null) {
@@ -111,7 +107,7 @@ public enum CSubmenuDraft implements ICDoc {
         }
 
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
+            String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck.getDeck());
             if (null != errorMessage) {
                 FOptionPane.showErrorDialog("Your deck " + errorMessage + " Please edit or choose a different deck.", "Invalid Deck");
                 return;
@@ -122,7 +118,7 @@ public enum CSubmenuDraft implements ICDoc {
 
         if (gauntlet) {
             int rounds = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
-            Singletons.getModel().getGauntletMini().launch(rounds, humanDeck, gameType);
+            Singletons.getModel().getGauntletMini().launch(rounds, humanDeck.getDeck(), gameType);
             return;
         }
 
@@ -142,7 +138,7 @@ public enum CSubmenuDraft implements ICDoc {
 
         List<RegisteredPlayer> starter = new ArrayList<RegisteredPlayer>();
         Lobby lobby = FServer.instance.getLobby();
-        starter.add(new RegisteredPlayer(humanDeck).setPlayer(lobby.getGuiPlayer()));
+        starter.add(new RegisteredPlayer(humanDeck.getDeck()).setPlayer(lobby.getGuiPlayer()));
         starter.add(new RegisteredPlayer(aiDeck).setPlayer(lobby.getAiPlayer()));
 
         Singletons.getControl().startMatch(GameType.Draft, starter);

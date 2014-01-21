@@ -13,17 +13,15 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.deck.DeckBase;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
+import forge.gui.deckeditor.DeckProxy;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.itemmanager.DeckManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
-import forge.item.PreconDeck;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
@@ -79,7 +77,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateCustom() {
         lstDecks.setAllowMultipleSelections(false);
 
-        lstDecks.setPool(Singletons.getModel().getDecks().getConstructed());
+        lstDecks.setPool(DeckProxy.getAllConstructedDecks());
         lstDecks.update();
 
         btnRandom.setText("Random Deck");
@@ -93,43 +91,36 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setSelectedIndex(0);
     }
 
-    //Deck that generates its card pool via some algorithm
-    private abstract class DeckGenerator extends Deck {
-        public DeckGenerator(final String name0) {
-            super(name0);
-        }
-
-        @Override
-        protected DeckBase newInstance(final String name0) {
-            final DeckGenerator deckGen = this;
-            return new DeckGenerator(name0) {
-                @Override
-                public Deck generateDeck() {
-                    return deckGen.generateDeck();
-                }
-            };
-        }
-
-        public abstract Deck generateDeck();
-    }
-
-    private class ColorDeckGenerator extends DeckGenerator {
+    private class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDeckGenerator> {
+        private String name;
         private int index;
 
         public ColorDeckGenerator(String name0, int index0) {
-            super(name0);
+            super(null, null, null);
+            name = name0;
             this.index = index0;
         }
 
         @Override
-        public int compareTo(final DeckBase d) {
-            return d instanceof ColorDeckGenerator ? Integer.compare(this.index, ((ColorDeckGenerator)d).index) : super.compareTo(d);
+        public String getName() {
+            return name;
+        }        
+        
+        @Override
+        public String toString() {
+            return name;
+        }        
+        
+        
+        @Override
+        public int compareTo(final ColorDeckGenerator d) {
+            return d instanceof ColorDeckGenerator ? Integer.compare(this.index, ((ColorDeckGenerator)d).index) : 1;
         }
 
         @Override
-        public Deck generateDeck() {
+        public Deck getDeck() {
             List<String> selection = new ArrayList<String>();
-            for (Deck deck : lstDecks.getSelectedItems()) {
+            for (DeckProxy deck : lstDecks.getSelectedItems()) {
                 selection.add(deck.getName());
             }
             if (DeckgenUtil.colorCheck(selection)) {
@@ -144,7 +135,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         String[] colors = new String[] { "Random 1", "Random 2", "Random 3",
                 "White", "Blue", "Black", "Red", "Green" };
-        ArrayList<Deck> decks = new ArrayList<Deck>();
+        ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (int i = 0; i < colors.length; i++) {
             decks.add(new ColorDeckGenerator(colors[i], i));
         }
@@ -164,26 +155,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         lstDecks.setSelectedIndices(new Integer[]{0, 1});
     }
 
-    private class ThemeDeckGenerator extends DeckGenerator {
-        public ThemeDeckGenerator(String name0) {
-            super(name0);
-        }
-
-        @Override
-        public Deck generateDeck() {
-            return DeckgenUtil.buildThemeDeck(this.getName());
-        }
-    }
-
     private void updateThemes() {
         lstDecks.setAllowMultipleSelections(false);
 
-        ArrayList<Deck> decks = new ArrayList<Deck>();
-        for (final String s : GenerateThemeDeck.getThemeNames()) {
-            decks.add(new ThemeDeckGenerator(s));
-        }
-
-        lstDecks.setPool(decks);
+        lstDecks.setPool(DeckProxy.getAllThemeDecks());
         lstDecks.update(true);
 
         btnRandom.setText("Random Deck");
@@ -200,12 +175,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updatePrecons() {
         lstDecks.setAllowMultipleSelections(false);
 
-        ArrayList<Deck> decks = new ArrayList<Deck>();
-        for (final PreconDeck preconDeck : QuestController.getPrecons()) {
-            decks.add(preconDeck.getDeck());
-        }
-
-        lstDecks.setPool(decks);
+        lstDecks.setPool(DeckProxy.getAllPreconstructedDecks());
         lstDecks.update(false, true);
 
         btnRandom.setText("Random Deck");
@@ -222,16 +192,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateQuestEvents() {
         lstDecks.setAllowMultipleSelections(false);
 
-        ArrayList<Deck> decks = new ArrayList<Deck>();
-        QuestController quest = Singletons.getModel().getQuest();
-        for (QuestEvent e : quest.getDuelsManager().getAllDuels()) {
-            decks.add(e.getEventDeck());
-        }
-        for (QuestEvent e : quest.getChallenges()) {
-            decks.add(e.getEventDeck());
-        }
-
-        lstDecks.setPool(decks);
+        lstDecks.setPool(DeckProxy.getAllQuestEventAndChallenges());
         lstDecks.update(false, true);
 
         btnRandom.setText("Random Deck");
@@ -246,11 +207,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     }
 
     public Deck getDeck() {
-        Deck deck = lstDecks.getSelectedItem();
-        if (deck instanceof DeckGenerator) {
-            return ((DeckGenerator)deck).generateDeck();
-        }
-        return deck;
+        DeckProxy proxy = lstDecks.getSelectedItem();
+        return proxy.getDeck();
     }
 
     /** Generates deck from current list selection(s). */
@@ -348,31 +306,33 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private String getState() {
         String deckType = decksComboBox.getDeckType().name();
-        String state = deckType;
-        state += ";";
-        Iterable<Deck> selectedDecks = lstDecks.getSelectedItems();
+        StringBuilder state = new StringBuilder(deckType);
+        state.append(";");
+        joinSelectedDecks(state, SELECTED_DECK_DELIMITER);
+        return state.toString();
+    }
+    
+    private void joinSelectedDecks(StringBuilder state, String delimiter) {
+        Iterable<DeckProxy> selectedDecks = lstDecks.getSelectedItems();
+        boolean isFirst = true;
         if (selectedDecks != null) {
-            for (Deck deck : selectedDecks) {
-                state += deck + SELECTED_DECK_DELIMITER;
+            for (DeckProxy deck : selectedDecks) {
+                if(isFirst)
+                    isFirst = false;
+                else
+                    state.append(delimiter);
+                state.append(deck.getName());
             }
-            state = state.substring(0, state.length() - SELECTED_DECK_DELIMITER.length());
         }
-        return state;
     }
 
     /** Returns a clean name from the state that can be used for labels. */
     public final String getStateForLabel() {
         String deckType = decksComboBox.getDeckType().toString();
-        String state = deckType;
-        state += ": ";
-        Iterable<Deck> selectedDecks = lstDecks.getSelectedItems();
-        if (selectedDecks != null) {
-            for (Deck deck : selectedDecks) {
-                state += deck + ", ";
-            }
-            state = state.substring(0, state.length() - 2);
-        }
-        return state;
+        StringBuilder state = new StringBuilder(deckType);
+        state.append(": ");
+        joinSelectedDecks(state, ", ");
+        return state.toString();
     }
 
     private void restoreSavedState() {
