@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -18,7 +16,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
-import forge.util.MyRandom;
 
 public class DigEffect extends SpellAbilityEffect {
 
@@ -195,8 +192,7 @@ public class DigEffect extends SpellAbilityEffect {
                         Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, sa, prompt, false, p);
                         movedCards.remove(chosen);
                         if (sa.hasParam("RandomOrder")) {
-                            final Random random = MyRandom.getRandom();
-                            Collections.shuffle(movedCards, random);
+                            CardLists.shuffle(movedCards);
                         }
                     }
                     else {
@@ -287,7 +283,9 @@ public class DigEffect extends SpellAbilityEffect {
                     // now, move the rest to destZone2
                     if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck || destZone2 == ZoneType.SchemeDeck) {
                         List<Card> afterOrder = rest;
-                        if (!skipReorder && rest.size() > 1) {
+                        if (sa.hasParam("RestRandomOrder")) {
+                            CardLists.shuffle(afterOrder);
+                        } else if (!skipReorder && rest.size() > 1) {
                             afterOrder = chooser.getController().orderMoveToZoneList(rest, destZone2);
                         }
                         if (libraryPosition2 != -1) {
