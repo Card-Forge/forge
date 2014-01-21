@@ -79,6 +79,10 @@ Skyreaping
 Champion of Stray Souls
 Fanatic of Xenagos
 Flame-Wreathed Phoenix
+Spirit of the Labyrinth
+Hero of Leina Tower
+Phenax, God of Deception
+Heroes' Podium
 
 
 ------------
