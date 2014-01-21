@@ -29,22 +29,21 @@ import forge.util.storage.IStorage;
 public class DeckProxy implements InventoryItem {
     protected final Deck deck;
     protected final IStorage<?> storage;
-    
+
     public static final Function<DeckProxy, String> FN_GET_NAME = new Function<DeckProxy, String>() {
         @Override
         public String apply(DeckProxy arg0) {
             return arg0.getName();
         }
-        
     };
-    
+
     // cached values
     protected ColorSet color;
     protected Iterable<GameFormat> formats;
     private int mainSize = Integer.MIN_VALUE;
     private int sbSize = Integer.MIN_VALUE;
     private String path;
-    
+
     public DeckProxy(Deck deck, GameType type, IStorage<?> storage) {
         this(deck, type, null, storage);
     }
@@ -53,9 +52,9 @@ public class DeckProxy implements InventoryItem {
         this.deck = deck;
         this.storage = storage;
         this.path = path;
-        // gametype could give us a hint whether the storage is updateable and enable choice of right editor for this deck  
+        // gametype could give us a hint whether the storage is updateable and enable choice of right editor for this deck
     }
-    
+
     @Override
     public String getName() {
         return deck.getName();
@@ -66,59 +65,64 @@ public class DeckProxy implements InventoryItem {
         // Could distinguish decks depending on gametype
         return "Deck";
     }
-    
+
     public Deck getDeck() {
         return deck;
     }
-    
-    public String getPath() { 
+
+    public String getPath() {
         return path;
     }
-    
+
     public void invalidateCache() {
         color = null;
         formats = null;
         mainSize = Integer.MIN_VALUE;
         sbSize = Integer.MIN_VALUE;
     }
-    
-    
+
     public ColorSet getColor() {
-        if ( color == null )
+        if (color == null) {
             color = deck.getColor();
+        }
         return color;
     }
-    
+
     public Iterable<GameFormat> getFormats() {
-        if ( formats == null )
+        if (formats == null) {
             formats = Singletons.getModel().getFormats().getAllFormatsOfDeck(deck);
+        }
         return formats;
     }
-    
+
     public int getMainSize() {
-        if ( mainSize == Integer.MIN_VALUE ) {
-            if( deck == null )
+        if (mainSize == Integer.MIN_VALUE) {
+            if (deck == null) {
                 mainSize = -1;
-            else
+            }
+            else {
                 mainSize = deck.getMain().countAll();
+            }
         }
         return mainSize;
     }
-    
-    public int getSideSize() { 
-        if ( sbSize == Integer.MIN_VALUE ) {
-            if ( deck != null &&  deck.has(DeckSection.Sideboard) )
+
+    public int getSideSize() {
+        if (sbSize == Integer.MIN_VALUE) {
+            if (deck != null &&  deck.has(DeckSection.Sideboard)) {
                 sbSize = deck.get(DeckSection.Sideboard).countAll();
-            else
+            }
+            else {
                 sbSize = -1;
+            }
         }
         return sbSize;
     }
-    
-    public boolean isGeneratedDeck() { 
+
+    public boolean isGeneratedDeck() {
         return false;
     }
-    
+
     public void updateInStorage() {
         // if storage is not readonly, save the deck there.
     }
@@ -128,18 +132,16 @@ public class DeckProxy implements InventoryItem {
     }
 
     // TODO: The methods below should not take the decks collections from singletons, instead they are supposed to use data passed in parameters
-    
+
     public static Iterable<DeckProxy> getAllConstructedDecks(IStorage<Deck> storageRoot) {
-        
         List<DeckProxy> result = new ArrayList<DeckProxy>();
         addDecksRecursivelly(result, "", storageRoot);
         return result;
     }
-    
+
     private static void addDecksRecursivelly(List<DeckProxy> list, String path, IStorage<Deck> folder) {
-        for(IStorage<Deck> f : folder.getFolders())
-        {
-           String subPath = (StringUtils.isBlank(path) ? "" : path ) + "/" + f.getName();
+        for (IStorage<Deck> f : folder.getFolders()) {
+           String subPath = (StringUtils.isBlank(path) ? "" : path) + "/" + f.getName();
            addDecksRecursivelly(list, subPath, f);
         }
 
@@ -147,7 +149,6 @@ public class DeckProxy implements InventoryItem {
             list.add(new DeckProxy(d, GameType.Constructed, path, folder));
         }
     }
-    
 
     // Consider using a direct predicate to manage DeckProxies (not this tunnel to collection of paper cards)
     public static final Predicate<DeckProxy> createPredicate(final Predicate<PaperCard> cardPredicate) {
@@ -175,7 +176,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     private static class ThemeDeckGenerator extends DeckProxy {
-        private final String name; 
+        private final String name;
         public ThemeDeckGenerator(String name0) {
             super(null, null, null);
             name = name0;
@@ -190,17 +191,22 @@ public class DeckProxy implements InventoryItem {
             deck.getMain().addAll(gen.getThemeDeck(this.getName(), 60));
             return deck;
         }
-        
-        @Override 
-        public String getName() { return name; }
-        @Override 
-        public String toString() { return name; } 
-        
-        public boolean isGeneratedDeck() { 
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+
+        public boolean isGeneratedDeck() {
             return true;
         }
     }
-    
+
     public static Iterable<DeckProxy> getAllThemeDecks() {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (final String s : GenerateThemeDeck.getThemeNames()) {
@@ -242,10 +248,11 @@ public class DeckProxy implements InventoryItem {
 
     public static Iterable<DeckProxy> getAllQuestDecks(IStorage<Deck> storage) {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
-        if( storage != null )
+        if (storage != null) {
             for (final Deck preconDeck : storage) {
                 decks.add(new DeckProxy(preconDeck, GameType.Quest, storage));
             }
+        }
         return decks;
     }
 
@@ -256,5 +263,4 @@ public class DeckProxy implements InventoryItem {
         }
         return decks;
     }
-
 }
