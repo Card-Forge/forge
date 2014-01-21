@@ -28,6 +28,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -468,7 +469,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @return Iterable<T>
      */
-    public Iterable<T> getSelectedItems() {
+    public Collection<T> getSelectedItems() {
         return this.table.getSelectedItems();
     }
 

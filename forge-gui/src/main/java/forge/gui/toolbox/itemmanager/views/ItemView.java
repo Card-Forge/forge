@@ -11,6 +11,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -80,7 +81,7 @@ public abstract class ItemView<T extends InventoryItem> {
         return index >= 0 ? getItemAtIndex(index) : null;
     }
 
-    public final Iterable<T> getSelectedItems() {
+    public final Collection<T> getSelectedItems() {
         List<T> items = new ArrayList<T>();
         for (Integer i : getSelectedIndices()) {
             items.add(getItemAtIndex(i));

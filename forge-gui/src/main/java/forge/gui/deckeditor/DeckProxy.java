@@ -6,7 +6,9 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+
 import forge.Singletons;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
@@ -27,6 +29,14 @@ import forge.util.storage.IStorage;
 public class DeckProxy implements InventoryItem {
     protected final Deck deck;
     protected final IStorage<?> storage;
+    
+    public static final Function<DeckProxy, String> FN_GET_NAME = new Function<DeckProxy, String>() {
+        @Override
+        public String apply(DeckProxy arg0) {
+            return arg0.getName();
+        }
+        
+    };
     
     // cached values
     protected ColorSet color;

@@ -10,6 +10,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
@@ -428,8 +429,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         mainDeckPanel.add(mainChooser, "grow, push, wrap");
     }
 
-    protected void onDeckClicked(int iPlayer, DeckType type, Iterable<DeckProxy> selectedDecks) {
-        String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks);
+    protected void onDeckClicked(int iPlayer, DeckType type, Collection<DeckProxy> selectedDecks) {
+        
+        String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
         deckSelectorBtns.get(iPlayer).setText(text);
     }
 
