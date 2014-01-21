@@ -34,8 +34,6 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
-import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.game.GameFormat;
 import forge.gui.CardPreferences;
 import forge.gui.deckeditor.DeckProxy;
@@ -415,11 +413,11 @@ public class ItemColumn extends TableColumn {
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                        Deck deck = toDeck(from.getKey());
+                        DeckProxy deck = toDeck(from.getKey());
                         if (deck == null) {
                             return -1;
                         }
-                        Iterable<GameFormat> all = Singletons.getModel().getFormats().getAllFormatsOfDeck(deck);
+                        Iterable<GameFormat> all = deck.getFormats();
                         int acc = 0;
                         for(GameFormat gf : all) {
                             int ix = gf.getIndex();
@@ -432,38 +430,37 @@ public class ItemColumn extends TableColumn {
                 new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                     @Override
                     public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                        Deck deck = toDeck(from.getKey());
+                        DeckProxy deck = toDeck(from.getKey());
                         if (deck == null) {
                             return null;
                         }
-                        Iterable<GameFormat> all = Singletons.getModel().getFormats().getAllFormatsOfDeck(deck);
-                        return StringUtils.join(Iterables.transform(all, GameFormat.FN_GET_NAME) , ", ");
+                        return StringUtils.join(Iterables.transform(deck.getFormats(), GameFormat.FN_GET_NAME) , ", ");
                     }
                 }),
         DECK_MAIN("Main", "Main Deck", 30, 30, 30, SortState.ASC, new IntegerRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                        return toDeckCount(from.getKey(), DeckSection.Main);
+                        return toDeck(from.getKey()).getMainSize();
                     }
                 },
                 new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                     @Override
                     public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                        return toDeckCount(from.getKey(), DeckSection.Main);
+                        return toDeck(from.getKey()).getMainSize();
                     }
                 }),
         DECK_SIDE("Side", "Sideboard", 30, 30, 30, SortState.ASC, new IntegerRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
                     public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                        return toDeckCount(from.getKey(), DeckSection.Sideboard);
+                        return toDeck(from.getKey()).getSideSize();
                     }
                 },
                 new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                     @Override
                     public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                        return toDeckCount(from.getKey(), DeckSection.Sideboard);
+                        return toDeck(from.getKey()).getSideSize();
                     }
                 });
 
@@ -543,15 +540,11 @@ public class ItemColumn extends TableColumn {
             return ranking;
         }
 
-        private static Deck toDeck(final InventoryItem i) {
-            return i instanceof Deck ? ((Deck) i) : null;
+        private static DeckProxy toDeck(final InventoryItem i) {
+            return i instanceof DeckProxy ? ((DeckProxy) i) : null;
         }
         private static ColorSet toDeckColor(final InventoryItem i) {
             return i instanceof DeckProxy ? ((DeckProxy) i).getColor() : null;
-        }
-        private static int toDeckCount(final InventoryItem i, DeckSection section) {
-            Deck deck = toDeck(i);
-            return deck != null && deck.has(section) ? deck.get(section).countAll() : -1;
         }
     }
 }

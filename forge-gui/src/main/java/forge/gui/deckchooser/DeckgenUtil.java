@@ -84,19 +84,6 @@ public class DeckgenUtil {
         return deck;
     }
 
-    /**
-     * @param selection {@link java.lang.String}
-     * @return {@link forge.deck.Deck}
-     */
-    public static Deck buildThemeDeck(final String selection) {
-        final GenerateThemeDeck gen = new GenerateThemeDeck();
-        final Deck deck = new Deck();
-        gen.setSingleton(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
-        gen.setUseArtifacts(Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-        deck.getMain().addAll(gen.getThemeDeck(selection, 60));
-
-        return deck;
-    }
 
     public static QuestEvent getQuestEvent(final String name) {
         QuestController qCtrl = Singletons.getModel().getQuest();
@@ -122,14 +109,6 @@ public class DeckgenUtil {
         for (int i = 0; i < count; i++) { selection.add("Random"); }
 
         return DeckgenUtil.buildColorDeck(selection, forAi);
-    }
-
-    /** @return {@link forge.deck.Deck} */
-    public static Deck getRandomThemeDeck() {
-        final List<String> themeNames = new ArrayList<String>();
-        for (final String s : GenerateThemeDeck.getThemeNames()) { themeNames.add(s); }
-        final int rand = (int) (Math.floor(Math.random() * themeNames.size()));
-        return DeckgenUtil.buildThemeDeck(themeNames.get(rand));
     }
 
     /** @return {@link forge.deck.Deck} */

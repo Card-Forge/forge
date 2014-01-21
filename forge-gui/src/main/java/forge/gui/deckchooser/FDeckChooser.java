@@ -22,6 +22,7 @@ import forge.gui.toolbox.itemmanager.DeckManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestUtil;
@@ -77,7 +78,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updateCustom() {
         lstDecks.setAllowMultipleSelections(false);
 
-        lstDecks.setPool(DeckProxy.getAllConstructedDecks());
+        lstDecks.setPool(DeckProxy.getAllConstructedDecks(Singletons.getModel().getDecks().getConstructed()));
         lstDecks.update();
 
         btnRandom.setText("Random Deck");
@@ -175,7 +176,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private void updatePrecons() {
         lstDecks.setAllowMultipleSelections(false);
 
-        lstDecks.setPool(DeckProxy.getAllPreconstructedDecks());
+        lstDecks.setPool(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
         lstDecks.update(false, true);
 
         btnRandom.setText("Random Deck");

@@ -1,6 +1,7 @@
 package forge.gui.deckeditor.controllers;
 
 import forge.Command;
+import forge.Singletons;
 import forge.gui.deckeditor.DeckProxy;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.framework.ICDoc;
@@ -30,7 +31,7 @@ public enum CAllDecks implements ICDoc {
      */
     @Override
     public void initialize() {
-        VAllDecks.SINGLETON_INSTANCE.getLstDecks().setPool(DeckProxy.getAllConstructedDecks());
+        VAllDecks.SINGLETON_INSTANCE.getLstDecks().setPool(DeckProxy.getAllConstructedDecks(Singletons.getModel().getDecks().getConstructed()));
     }
 
     /* (non-Javadoc)

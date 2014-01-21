@@ -116,10 +116,6 @@ public enum CSubmenuGauntletQuick implements ICDoc {
                 tempDeck = DeckgenUtil.getRandomColorDeck(true);
                 lstEventNames.add("Random colors deck");
             }
-            else if (lstDecktypes.get(randType).equals(DeckTypes.THEMES)) {
-                tempDeck = DeckgenUtil.getRandomThemeDeck();
-                lstEventNames.add("Random theme deck");
-            }
             else if (lstDecktypes.get(randType).equals(DeckTypes.CUSTOM)) {
                 tempDeck =  DeckgenUtil.getRandomCustomDeck();
                 lstEventNames.add(tempDeck.getName());
