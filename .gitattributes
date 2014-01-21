@@ -114,6 +114,10 @@ forge-game/.settings/org.eclipse.core.resources.prefs -text
 forge-game/.settings/org.eclipse.jdt.core.prefs -text
 forge-game/.settings/org.eclipse.m2e.core.prefs -text
 forge-game/pom.xml -text
+forge-game/src/main/java/forge/Command.java svneol=native#text/plain
+forge-game/src/main/java/forge/Constant.java svneol=native#text/plain
+forge-game/src/main/java/forge/ImageCacheBridge.java -text
+forge-game/src/main/java/forge/PreferencesBridge.java -text
 forge-game/src/main/java/forge/game/GameFormat.java -text
 forge-game/src/main/java/forge/game/card/package-info.java -text
 forge-game/src/main/java/forge/game/package-info.java -text
@@ -14709,11 +14713,11 @@ forge-gui/src/main/html/js/jquery/jquery-1.9.1.js -text
 forge-gui/src/main/html/js/jquery/jquery-1.9.1.min.js -text
 forge-gui/src/main/html/js/observable.js -text
 forge-gui/src/main/html/js/socket.js -text
-forge-gui/src/main/java/forge/Command.java svneol=native#text/plain
-forge-gui/src/main/java/forge/Constant.java svneol=native#text/plain
 forge-gui/src/main/java/forge/FThreads.java -text
 forge-gui/src/main/java/forge/ImageCache.java svneol=native#text/plain
+forge-gui/src/main/java/forge/ImageCacheProvider.java -text
 forge-gui/src/main/java/forge/ImageLoader.java -text
+forge-gui/src/main/java/forge/PreferencesProvider.java -text
 forge-gui/src/main/java/forge/Singletons.java svneol=native#text/plain
 forge-gui/src/main/java/forge/ai/AiAttackController.java svneol=native#text/plain
 forge-gui/src/main/java/forge/ai/AiBlockController.java svneol=native#text/plain
