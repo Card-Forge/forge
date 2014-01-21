@@ -37,7 +37,9 @@ import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
+import forge.util.MyRandom;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.
@@ -159,8 +161,12 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         for(String landName : MagicColor.Constant.BASIC_LANDS) {
             final int numArt = Singletons.getMagicDb().getCommonCards().getArtCount(landName, landSet);
 
-            for (int i = 0; i < numArt; i++) {
-                deck.get(DeckSection.Sideboard).add(landName, landSet, i, numArt > 1 ? landsCount : 30);
+            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_POOLS)) {
+                for (int i = 0; i < numArt; i++) {
+                    deck.get(DeckSection.Sideboard).add(landName, landSet, i, numArt > 1 ? landsCount : 30);
+                }
+            } else {
+                deck.get(DeckSection.Sideboard).add(landName, landSet, numArt > 1 ? MyRandom.getRandom().nextInt(numArt) : 0, 30);
             }
         }
 

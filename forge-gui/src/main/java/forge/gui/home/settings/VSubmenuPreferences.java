@@ -76,12 +76,13 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
-    private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones use original card art");
+    private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones Use Original Card Art");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
+    private final JCheckBox cbRandomArtPools = new OptionsCheckBox("Randomize Card Art in Generated Card Pools");
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
     private final JCheckBox cbAltSoundSystem = new OptionsCheckBox("Use Alternate Sound System");
-    private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for touchscreens");
+    private final JCheckBox cbUiForTouchScreen = new OptionsCheckBox("Enchance UI for Touchscreens");
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox("Use Compact Main Sidebar Menu");
     private final JCheckBox cbUseThemes = new OptionsCheckBox("Enable Themes");
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox("Free Block Handling");
@@ -191,6 +192,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbScaleLarger, regularConstraints);
         pnlPrefs.add(new NoteLabel("Allows card pictures to be expanded larger than their original size."), regularConstraints);
+
+        pnlPrefs.add(cbRandomArtPools, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Generates cards with random art in generated limited mode card pools."), regularConstraints);
 
         pnlPrefs.add(cbUiForTouchScreen, regularConstraints);
         pnlPrefs.add(new NoteLabel("Increases some UI elements to provide a better experience on touchscreen devices. (Needs restart)"), regularConstraints);
@@ -438,6 +442,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbScaleLarger() {
+        return cbScaleLarger;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbRandomArtPools() {
         return cbScaleLarger;
     }
 

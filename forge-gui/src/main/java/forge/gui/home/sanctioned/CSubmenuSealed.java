@@ -37,6 +37,7 @@ import forge.limited.SealedCardPoolGenerator;
 import forge.limited.SealedDeckBuilder;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
+import forge.util.MyRandom;
 import forge.util.storage.IStorage;
 
 /** 
@@ -176,8 +177,12 @@ public enum CSubmenuSealed implements ICDoc {
         for (final String element : MagicColor.Constant.BASIC_LANDS) {
             final int numArt = Singletons.getMagicDb().getCommonCards().getArtCount(element, sd.getLandSetCode());
 
-            for (int i = 0; i < numArt; i++) {
-                deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), i, numArt > 1 ? landsCount : 30);
+            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_POOLS)) {
+                for (int i = 0; i < numArt; i++) {
+                    deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), i, numArt > 1 ? landsCount : 30);
+                }
+            } else {
+                deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), numArt > 1 ? MyRandom.getRandom().nextInt(numArt) : 0, 30);
             }
         }
 

@@ -47,6 +47,7 @@ import forge.item.InventoryItem;
 import forge.item.SealedProduct;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
+import forge.properties.ForgePreferences.FPref;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestAssets;
@@ -125,10 +126,15 @@ public final class QuestUtilCards {
 
         for (String landName : MagicColor.Constant.BASIC_LANDS) {
             int artCount = db.getArtCount(landName, landCode);
-            int[] artGroups = MyRandom.splitIntoRandomGroups(nBasic, artCount);
 
-            for (int i=0; i<artGroups.length; i++) {
-                pool.add(db.getCard(landName, landCode, i), artGroups[i]);
+            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_POOLS)) {
+                int[] artGroups = MyRandom.splitIntoRandomGroups(nBasic, artCount);
+
+                for (int i=0; i<artGroups.length; i++) {
+                    pool.add(db.getCard(landName, landCode, i), artGroups[i]);
+                }
+            } else {
+                pool.add(db.getCard(landName, landCode, artCount > 1 ? MyRandom.getRandom().nextInt(artCount) : 0), nBasic);
             }
         }
 
