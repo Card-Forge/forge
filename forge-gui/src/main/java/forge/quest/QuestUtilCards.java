@@ -127,7 +127,7 @@ public final class QuestUtilCards {
         for (String landName : MagicColor.Constant.BASIC_LANDS) {
             int artCount = db.getArtCount(landName, landCode);
 
-            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_POOLS)) {
+            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
                 int[] artGroups = MyRandom.splitIntoRandomGroups(nBasic, artCount);
 
                 for (int i=0; i<artGroups.length; i++) {
