@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 import forge.Constant;
-import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -354,51 +353,4 @@ public final class CardUtil {
 
         return colors;
     }
-    
-    /**
-     * Card characteristic state machine.
-     * <p>
-     * Given a card and a state in terms of {@code CardCharacteristicName} this
-     * will determine whether there is a valid alternate {@code CardCharacteristicName} 
-     * state for that card.
-     * 
-     * @param card the {@code Card}
-     * @param currentState not necessarily {@code card.getCurState()}
-     * @return the alternate {@code CardCharacteristicName} state or default if not applicable
-     */
-    public static CardCharacteristicName getAlternateState(final Card card, CardCharacteristicName currentState) {
-        
-        // Default. Most cards will only ever have an "Original" state represented by a single image.
-        CardCharacteristicName alternateState = CardCharacteristicName.Original;
-        
-        if (card.isDoubleFaced()) {
-            if (currentState == CardCharacteristicName.Original) {
-                alternateState = CardCharacteristicName.Transformed;
-            }
-
-        } else if (card.isFlipCard()) {
-            if (currentState == CardCharacteristicName.Original) {
-                alternateState = CardCharacteristicName.Flipped;
-            }
-
-        } else if (card.isFaceDown()) {
-            if (currentState == CardCharacteristicName.Original) {
-                alternateState = CardCharacteristicName.FaceDown;
-            } else if (isAuthorizedToViewFaceDownCard(card)) {
-                alternateState = CardCharacteristicName.Original;
-            } else {
-                alternateState = currentState;
-            }
-        }
-
-        return alternateState;
-    }
-    
-    /**
-     * Prevents player from identifying opponent's face-down card.
-     */
-    public static boolean isAuthorizedToViewFaceDownCard(Card card) {
-        return Singletons.getControl().mayShowCard(card);
-    } 
-    
 }
