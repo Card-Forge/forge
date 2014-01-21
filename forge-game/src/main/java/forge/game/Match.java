@@ -294,7 +294,7 @@ public class Match {
             Deck myDeck = psc.getDeck();
 
             Set<PaperCard> myRemovedAnteCards = null;
-            if (useAnte) {
+            if (!useAnte) {
                 myRemovedAnteCards = getRemovedAnteCards(myDeck);
                 for (PaperCard cp: myRemovedAnteCards) {
                     for (Entry<DeckSection, CardPool> ds : myDeck) {
