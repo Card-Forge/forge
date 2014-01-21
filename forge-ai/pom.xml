@@ -18,6 +18,11 @@
             <artifactId>forge-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-game</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 </project>

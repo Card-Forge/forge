@@ -111,7 +111,7 @@ public class ImageCache {
         }
         return scaleImage(key, width, height, true);
     }
-    
+
     /**
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
@@ -250,12 +250,6 @@ public class ImageCache {
         return null;
     }
 
-    public static String getTokenImageKey(String tokenName) {
-        return TOKEN_PREFIX + tokenName;
-    }
-
-
-    
     private static String getImageLocator(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
         final String nameToUse = getNameToUse(cp, backFace);
         if ( null == nameToUse )

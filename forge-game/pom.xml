@@ -18,15 +18,5 @@
             <artifactId>forge-core</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.googlecode</groupId>
-            <artifactId>minlog</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>forge</groupId>
-            <artifactId>forge-ai</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 </project>

@@ -24,9 +24,9 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.JLabel;
 
 import forge.Command;
-import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.gui.CardPicturePanel;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
@@ -192,7 +192,7 @@ public enum CPicture implements ICDoc {
  
     public void flipCard() {
         if (isCurrentCardFlippable()) {
-            displayedState = getAlternateState(currentCard, displayedState);
+            displayedState = CardUtil.getAlternateState(currentCard, displayedState);
             picturePanel.setCardImage(displayedState);            
             setCardDetailPanel();
         }
@@ -220,56 +220,9 @@ public enum CPicture implements ICDoc {
     
     private boolean isCurrentCardFlippable() {
         boolean isFlippableMorph = 
-                currentCard.isFaceDown() && isAuthorizedToViewFaceDownCard(currentCard);
+                currentCard.isFaceDown() && CardUtil.isAuthorizedToViewFaceDownCard(currentCard);
         return (currentCard != null) & 
                (currentCard.isDoubleFaced() || currentCard.isFlipCard() || isFlippableMorph);
     }
-
-
-    
-    /**
-     * Card characteristic state machine.
-     * <p>
-     * Given a card and a state in terms of {@code CardCharacteristicName} this
-     * will determine whether there is a valid alternate {@code CardCharacteristicName} 
-     * state for that card.
-     * 
-     * @param card the {@code Card}
-     * @param currentState not necessarily {@code card.getCurState()}
-     * @return the alternate {@code CardCharacteristicName} state or default if not applicable
-     */
-    public static CardCharacteristicName getAlternateState(final Card card, CardCharacteristicName currentState) {
         
-        // Default. Most cards will only ever have an "Original" state represented by a single image.
-        CardCharacteristicName alternateState = CardCharacteristicName.Original;
-        
-        if (card.isDoubleFaced()) {
-            if (currentState == CardCharacteristicName.Original) {
-                alternateState = CardCharacteristicName.Transformed;
-            }
-
-        } else if (card.isFlipCard()) {
-            if (currentState == CardCharacteristicName.Original) {
-                alternateState = CardCharacteristicName.Flipped;
-            }
-
-        } else if (card.isFaceDown()) {
-            if (currentState == CardCharacteristicName.Original) {
-                alternateState = CardCharacteristicName.FaceDown;
-            } else if (isAuthorizedToViewFaceDownCard(card)) {
-                alternateState = CardCharacteristicName.Original;
-            } else {
-                alternateState = currentState;
-            }
-        }
-
-        return alternateState;
-    }
-    
-    /**
-     * Prevents player from identifying opponent's face-down card.
-     */
-    public static boolean isAuthorizedToViewFaceDownCard(Card card) {
-        return Singletons.getControl().mayShowCard(card);
-    } 
 }
