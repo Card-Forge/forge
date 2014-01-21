@@ -12,7 +12,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Command;
-import forge.Singletons;
+import forge.StaticData;
 import forge.card.CardCharacteristicName;
 import forge.card.CardRulesPredicates;
 import forge.card.mana.ManaCost;
@@ -71,7 +71,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         if (sa.hasParam("ValidSupportedCopy")) {
-            List<PaperCard> cards = Lists.newArrayList(Singletons.getMagicDb().getCommonCards().getUniqueCards());
+            List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
             String valid = sa.getParam("ValidSupportedCopy");
             if (valid.contains("X")) {
                 valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(hostCard, "X", sa)));

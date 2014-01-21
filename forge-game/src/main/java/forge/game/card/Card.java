@@ -42,7 +42,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.Command;
-import forge.Singletons;
+import forge.StaticData;
 import forge.card.CardCharacteristicName;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
@@ -7699,7 +7699,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getMostRecentSet() {
-        return Singletons.getMagicDb().getCommonCards().getCard(this.getName()).getEdition();
+        return StaticData.instance().getCommonCards().getCard(this.getName()).getEdition();
     }
 
     public final void setImageKey(final String iFN) {
@@ -7872,8 +7872,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setRandomFoil() {
         CardEdition.FoilType foilType = CardEdition.FoilType.NOT_SUPPORTED;
-        if (this.getCurSetCode() != null && Singletons.getMagicDb().getEditions().get(this.getCurSetCode()) != null) {
-            foilType = Singletons.getMagicDb().getEditions().get(this.getCurSetCode()).getFoilType();
+        if (this.getCurSetCode() != null && StaticData.instance().getEditions().get(this.getCurSetCode()) != null) {
+            foilType = StaticData.instance().getEditions().get(this.getCurSetCode()).getFoilType();
         }
         if (foilType != CardEdition.FoilType.NOT_SUPPORTED) {
             this.setFoil(foilType == CardEdition.FoilType.MODERN ? MyRandom.getRandom().nextInt(9) + 1 : MyRandom.getRandom().nextInt(9) + 11);
@@ -8700,11 +8700,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         final String set = getCurSetCode();
 
         if (StringUtils.isNotBlank(set)) {
-            PaperCard cp = Singletons.getMagicDb().getVariantCards().tryGetCard(name, set);
-            return cp == null ? Singletons.getMagicDb().getCommonCards().getCard(name, set) : cp;
+            PaperCard cp = StaticData.instance().getVariantCards().tryGetCard(name, set);
+            return cp == null ? StaticData.instance().getCommonCards().getCard(name, set) : cp;
         }
-        PaperCard cp = Singletons.getMagicDb().getVariantCards().tryGetCard(name, true);
-        return cp == null ? Singletons.getMagicDb().getCommonCards().getCard(name) : cp;
+        PaperCard cp = StaticData.instance().getVariantCards().tryGetCard(name, true);
+        return cp == null ? StaticData.instance().getCommonCards().getCard(name) : cp;
     }
 
     /**

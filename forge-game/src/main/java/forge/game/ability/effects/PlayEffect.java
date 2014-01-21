@@ -10,7 +10,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
+import forge.StaticData;
 import forge.card.CardCharacteristicName;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
@@ -83,7 +83,7 @@ public class PlayEffect extends SpellAbilityEffect {
             useEncoded = true;
         }
         else if (sa.hasParam("AnySupportedCard")) {
-            List<PaperCard> cards = Lists.newArrayList(Singletons.getMagicDb().getCommonCards().getUniqueCards());
+            List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
             String valid = sa.getParam("AnySupportedCard");
             if (StringUtils.containsIgnoreCase(valid, "sorcery")) {
                 Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_SORCERY, PaperCard.FN_GET_RULES);

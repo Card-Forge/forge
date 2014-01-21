@@ -20,7 +20,7 @@ package forge.game.spellability;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.error.BugReporter;
+
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
@@ -171,7 +171,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         try {
             return super.clone();
         } catch (final Exception ex) {
-            BugReporter.reportException(ex);
             throw new RuntimeException("Spell : clone() error, " + ex);
         }
     }

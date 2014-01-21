@@ -30,7 +30,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.EventBus;
 
-import forge.FThreads;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -498,16 +497,14 @@ public class Game {
 
     }
 
-    private final boolean LOG_EVENTS = false;
-
     /**
      * Fire only the events after they became real for gamestate and won't get replaced.<br>
      * The events are sent to UI, log and sound system. Network listeners are under development.
      */
     public void fireEvent(GameEvent event) {
-        if (LOG_EVENTS) {
-            System.out.println("GE: " + event.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(4, true));
-        }
+//        if (LOG_EVENTS) {
+//            System.out.println("GE: " + event.toString()  + " \t\t " + FThreads.debugGetStackTraceItem(4, true));
+//        }
 
         events.post(event);
     }

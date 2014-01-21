@@ -28,7 +28,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Iterables;
-import forge.FThreads;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
@@ -291,9 +290,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     public final void add(final SpellAbility sp) {
-        if (!sp.isManaAbility()) { //allow adding mana abilities on EDT
-            FThreads.assertExecutedByEdt(false);
-        }
         SpellAbilityStackInstance si = null;
         final Card source = sp.getSourceCard();
         Player activator = sp.getActivatingPlayer();

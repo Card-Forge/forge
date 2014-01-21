@@ -32,14 +32,12 @@ import com.google.common.collect.Iterables;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.CardType.Constant;
-import forge.error.BugReporter;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.ai.AiProps;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -820,9 +818,9 @@ public class ComputerUtil {
                         return true;
                     }
 
-                } catch (final Exception ex) {
-                    BugReporter.reportException(ex, "There is an error in the card code for %s:%n", c.getName(), ex.getMessage());
-                }
+                }  catch (final Exception ex) {
+                    throw new RuntimeException(String.format("There is an error in the card code for %s:%n", c.getName(), ex.getMessage()), ex);
+                } 
             }
         }
         return false;
@@ -868,8 +866,7 @@ public class ComputerUtil {
                         }
                     }
                 } catch (final Exception ex) {
-                    BugReporter.reportException(ex, "There is an error in the card code for %s:%n", c.getName(),
-                            ex.getMessage());
+                    throw new RuntimeException(String.format("There is an error in the card code for %s:%n", c.getName(), ex.getMessage()), ex);
                 }
             }
         }

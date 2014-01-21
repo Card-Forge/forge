@@ -497,7 +497,6 @@ forge-game/src/main/java/forge/game/phase/package-info.java svneol=native#text/p
 forge-game/src/main/java/forge/game/player/GameLossReason.java -text
 forge-game/src/main/java/forge/game/player/LobbyPlayer.java -text
 forge-game/src/main/java/forge/game/player/LobbyPlayerAi.java -text
-forge-game/src/main/java/forge/game/player/LobbyPlayerRemote.java -text
 forge-game/src/main/java/forge/game/player/Player.java svneol=native#text/plain
 forge-game/src/main/java/forge/game/player/PlayerActionConfirmMode.java -text
 forge-game/src/main/java/forge/game/player/PlayerController.java -text
@@ -15585,6 +15584,7 @@ forge-gui/src/main/java/forge/net/FServer.java -text
 forge-gui/src/main/java/forge/net/IClientSocket.java -text
 forge-gui/src/main/java/forge/net/IConnectionObserver.java -text
 forge-gui/src/main/java/forge/net/Lobby.java -text
+forge-gui/src/main/java/forge/net/LobbyPlayerRemote.java -text
 forge-gui/src/main/java/forge/net/NetServer.java -text
 forge-gui/src/main/java/forge/net/client/INetClient.java -text
 forge-gui/src/main/java/forge/net/client/InvalidFieldInPacketException.java -text

@@ -22,13 +22,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+
 import org.apache.commons.lang3.time.StopWatch;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
-import forge.FThreads;
-import forge.Singletons;
+import forge.PreferencesBridge;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntity;
 import forge.game.GameStage;
@@ -59,7 +59,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.CollectionSuppliers;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -435,7 +434,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         for (Player p : game.getPlayers()) {
             int burn = p.getManaPool().clearPool(true);
-            boolean dealDamage = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN);
+            boolean dealDamage = PreferencesBridge.Instance.isManaBurnEnabled();
 
             if (dealDamage) {
                 p.loseLife(burn);
@@ -711,8 +710,7 @@ public class PhaseHandler implements java.io.Serializable {
             }
         }
 
-        boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost() && (!hasBlockCost
-                || Singletons.getModel().getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS)); // true if needless to pay
+        boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost() && (!hasBlockCost || PreferencesBridge.Instance.areBlocksFree()); // true if needless to pay
 
         if (!hasPaid) {
             hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, null, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
@@ -961,7 +959,6 @@ public class PhaseHandler implements java.io.Serializable {
     private final static boolean DEBUG_PHASES = false;
 
     public void startFirstTurn(Player goesFirst) {
-        FThreads.assertExecutedByEdt(false);
         StopWatch sw = new StopWatch();
 
         if (phase != null) {
@@ -976,10 +973,10 @@ public class PhaseHandler implements java.io.Serializable {
         givePriorityToPlayer = false;
 
         while (!game.isGameOver()) { // loop only while is playing
-            if (DEBUG_PHASES) {
-                System.out.println("\t\tStack: " + game.getStack());
-                System.out.print(FThreads.prependThreadId(debugPrintState(givePriorityToPlayer)));
-            }
+//            if (DEBUG_PHASES) {
+//                System.out.println("\t\tStack: " + game.getStack());
+//                System.out.print(FThreads.prependThreadId(debugPrintState(givePriorityToPlayer)));
+//            }
 
             if (givePriorityToPlayer) {
                 if (DEBUG_PHASES) {

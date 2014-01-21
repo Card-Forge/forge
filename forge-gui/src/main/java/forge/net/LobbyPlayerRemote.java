@@ -1,6 +1,9 @@
-package forge.game.player;
+package forge.net;
 
 import forge.game.Game;
+import forge.game.player.LobbyPlayer;
+import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.net.client.INetClient;
 import forge.net.protocol.toclient.ChatPacketClt;
 

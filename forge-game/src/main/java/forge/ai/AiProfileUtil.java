@@ -17,7 +17,6 @@
  */
 package forge.ai;
 
-import forge.game.ai.AiProps;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerAi;
 import forge.util.Aggregates;

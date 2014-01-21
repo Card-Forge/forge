@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 import forge.Constant;
+import forge.ImageCacheBridge;
 import forge.card.CardCharacteristicName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -34,7 +35,6 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.properties.NewConstants;
 
 public final class CardUtil {
     // disable instantiation
@@ -217,7 +217,7 @@ public final class CardUtil {
         ret.setName("");
         ret.setType(types);
 
-        ret.setImageKey(NewConstants.CACHE_MORPH_IMAGE_FILE);
+        ret.setImageKey(ImageCacheBridge.instance.getMorphImage());
 
         return ret;
     }

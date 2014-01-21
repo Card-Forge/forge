@@ -9,7 +9,7 @@ import forge.game.Game;
  *
  */
 public abstract class LobbyPlayer implements IHasIcon {
-    protected enum PlayerType {
+    public enum PlayerType {
         HUMAN,
         COMPUTER, 
         REMOTE

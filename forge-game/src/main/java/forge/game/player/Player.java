@@ -32,7 +32,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -1633,7 +1632,6 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @return a {@link forge.CardList} object.
      */
     public final boolean discard(final Card c, final SpellAbility sa) {
-        FThreads.assertExecutedByEdt(false);
         // TODO: This line should be moved inside CostPayment somehow
         /*if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
@@ -1807,7 +1805,6 @@ public class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.game.card.Card} object.
      */
     public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming) {
-        FThreads.assertExecutedByEdt(false);
         if (this.canPlayLand(land, ignoreZoneAndTiming)) {
             land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);

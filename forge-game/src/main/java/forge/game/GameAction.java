@@ -33,7 +33,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.Command;
-import forge.FThreads;
 import forge.card.CardCharacteristicName;
 import forge.card.CardType;
 import forge.game.ability.AbilityFactory;
@@ -392,8 +391,6 @@ public class GameAction {
     }
 
     public final Card moveTo(final Zone zoneTo, Card c, Integer position) {
-        FThreads.assertExecutedByEdt(false);
-
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
         final Zone zoneFrom = game.getZoneOf(c);
@@ -689,8 +686,6 @@ public class GameAction {
 
     /** */
     public final void checkStaticAbilities() {
-        FThreads.assertExecutedByEdt(false);
-
         if (game.isGameOver()) {
             return;
         }

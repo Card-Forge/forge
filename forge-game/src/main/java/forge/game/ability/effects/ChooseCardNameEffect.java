@@ -9,7 +9,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
+import forge.StaticData;
 import forge.ai.ComputerUtilCard;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -70,7 +70,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
                         Predicate<CardRules>  additionalRule = CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount);
 
-                        List<PaperCard> cards = Lists.newArrayList(Singletons.getMagicDb().getCommonCards().getUniqueCards());
+                        List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
                         Predicate<PaperCard> cpp = Predicates.and(Predicates.compose(baseRule, PaperCard.FN_GET_RULES), 
                                 Predicates.compose(additionalRule, PaperCard.FN_GET_RULES));
                         cards = Lists.newArrayList(Iterables.filter(cards, cpp));

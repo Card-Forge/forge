@@ -34,7 +34,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
+import forge.PreferencesBridge;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
@@ -44,7 +44,6 @@ import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
-import forge.game.ai.AiProps;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
@@ -63,7 +62,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellPermanent;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 import forge.util.Expressions;
 import forge.util.MyRandom;
@@ -100,7 +98,7 @@ public class AiController {
         player = computerPlayer;
         game = game0;
         
-        canCheatShuffle = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_AI_CHEATS);
+        canCheatShuffle = PreferencesBridge.Instance.getEnableAiCheats();
     }
 
     /**

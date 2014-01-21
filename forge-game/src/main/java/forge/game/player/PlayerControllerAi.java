@@ -38,7 +38,7 @@ import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ai.AiProps;
+import forge.ai.AiProps;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;

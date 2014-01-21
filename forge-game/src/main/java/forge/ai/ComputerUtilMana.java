@@ -16,7 +16,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
-import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -133,15 +132,15 @@ public class ComputerUtilMana {
         // select which abilities may be used for each shard
         MapOfLists<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
-        if (DEBUG_MANA_PAYMENT) {
-            System.out.println((test ? "test -- " : "PROD -- ") + FThreads.debugGetStackTraceItem(5, true));
-            for (Entry<ManaCostShard, Collection<SpellAbility>> src : sourcesForShards.entrySet()) {
-                System.out.println("\t" +src.getKey() + " : " + src.getValue().size() + " source(s)");
-                for (SpellAbility sss : src.getValue()) {
-                    System.out.printf("\t\t%s - %s%n", sss.getSourceCard(), sss);
-                }
-            }
-        }
+//        if (DEBUG_MANA_PAYMENT) {
+//            System.out.println((test ? "test -- " : "PROD -- ") + FThreads.debugGetStackTraceItem(5, true));
+//            for (Entry<ManaCostShard, Collection<SpellAbility>> src : sourcesForShards.entrySet()) {
+//                System.out.println("\t" +src.getKey() + " : " + src.getValue().size() + " source(s)");
+//                for (SpellAbility sss : src.getValue()) {
+//                    System.out.printf("\t\t%s - %s%n", sss.getSourceCard(), sss);
+//                }
+//            }
+//        }
 
         List<String> paymentPlan = new ArrayList<String>();
 
@@ -235,11 +234,11 @@ public class ComputerUtilMana {
         }
         handleOfferingsAI(sa, test, cost.isPaid());
 
-        if (DEBUG_MANA_PAYMENT) {
-            System.err.printf("%s > [%s] payment has %s (%s +%d) for (%s) %s:%n\t%s%n%n",
-                    FThreads.debugGetCurrThreadId(), test ? "test" : "PROD", cost.isPaid() ? "*PAID*" : "failed", originalCost,
-                    extraMana, sa.getSourceCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t"));
-        }
+//        if (DEBUG_MANA_PAYMENT) {
+//            System.err.printf("%s > [%s] payment has %s (%s +%d) for (%s) %s:%n\t%s%n%n",
+//                    FThreads.debugGetCurrThreadId(), test ? "test" : "PROD", cost.isPaid() ? "*PAID*" : "failed", originalCost,
+//                    extraMana, sa.getSourceCard(), sa.toUnsuppressedString(), StringUtils.join(paymentPlan, "\n\t"));
+//        }
 
         if (!cost.isPaid()) {
             if (test) {
