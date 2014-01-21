@@ -1,14 +1,12 @@
 package forge;
 
-import forge.PreferencesBridge.PreferencesSet;
 import forge.properties.ForgePreferences.FPref;
 
-public class PreferencesProvider implements PreferencesSet {
+public class PreferencesProvider implements Dependencies.PreferencesMethods {
     @Override
     public boolean getEnableAiCheats() {
         return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_AI_CHEATS);
     }
-
 
     @Override
     public boolean getCloneModeSource() {
@@ -20,7 +18,6 @@ public class PreferencesProvider implements PreferencesSet {
         return Singletons.getModel().getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE);
     }
 
-
     @Override
     public String getCurrentAiProfile() {
         return Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
@@ -30,7 +27,6 @@ public class PreferencesProvider implements PreferencesSet {
     public boolean canRandomFoil() {
         return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
     }
-
 
     @Override
     public boolean isManaBurnEnabled() {

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Command;
-import forge.PreferencesBridge;
+import forge.Dependencies;
 import forge.card.CardCharacteristicName;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -84,7 +84,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         // determine the image to be used for the clone
-        String imageFileName = PreferencesBridge.Instance.getCloneModeSource() ? tgtCard.getImageKey() : cardToCopy.getImageKey();
+        String imageFileName = Dependencies.preferences.getCloneModeSource() ? tgtCard.getImageKey() : cardToCopy.getImageKey();
         if (sa.hasParam("ImageSource")) { // Allow the image to be stipulated by using a defined card source
             List<Card> cloneImgSources = AbilityUtils.getDefinedCards(host, sa.getParam("ImageSource"), sa);
             if (!cloneImgSources.isEmpty()) {

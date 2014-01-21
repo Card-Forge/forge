@@ -1,6 +1,6 @@
 package forge.game.player;
 
-import forge.PreferencesBridge;
+import forge.Dependencies;
 import forge.ai.AiProfileUtil;
 import forge.game.Game;
 
@@ -34,7 +34,7 @@ public class LobbyPlayerAi extends LobbyPlayer {
         Player ai = new Player(getName(), game);
         ai.setFirstController(createControllerFor(ai));
 
-        String currentAiProfile = PreferencesBridge.Instance.getCurrentAiProfile();
+        String currentAiProfile = Dependencies.preferences.getCurrentAiProfile();
         String lastProfileChosen = game.getMatch().getPlayedGames().isEmpty() ? currentAiProfile : getAiProfile();
 
         // TODO: implement specific AI profiles for quest mode.

@@ -1,9 +1,10 @@
 package forge;
 
+import forge.Dependencies.ImageCacheMethods;
 import forge.item.InventoryItem;
 import forge.properties.NewConstants;
 
-public class ImageCacheProvider implements ImageCacheBridge.Methods {
+public class ImageCacheProvider implements ImageCacheMethods {
 
     @Override
     public String getImageKey(InventoryItem cp, boolean altState) {

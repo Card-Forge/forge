@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
-import forge.ImageCacheBridge;
+import forge.Dependencies;
 import forge.card.CardCharacteristicName;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
@@ -266,7 +266,7 @@ public class CardFactory {
         c.setRarity(cp.getRarity());
 
         // Would like to move this away from in-game entities
-        String originalPicture = ImageCacheBridge.instance.getImageKey(cp, false);
+        String originalPicture = Dependencies.imagecache.getImageKey(cp, false);
         //System.out.println(c.getName() + " -> " + originalPicture);
         c.setImageKey(originalPicture);
         c.setToken(cp.isToken());
@@ -274,11 +274,11 @@ public class CardFactory {
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
                 c.setState(CardCharacteristicName.Flipped);
-                c.setImageKey(ImageCacheBridge.instance.getImageKey(cp, true));
+                c.setImageKey(Dependencies.imagecache.getImageKey(cp, true));
             }
             else if (c.isDoubleFaced() && cp instanceof PaperCard) {
                 c.setState(CardCharacteristicName.Transformed);
-                c.setImageKey(ImageCacheBridge.instance.getImageKey(cp, true));
+                c.setImageKey(Dependencies.imagecache.getImageKey(cp, true));
             }
             else if (c.isSplitCard()) {
                 c.setState(CardCharacteristicName.LeftSplit);
@@ -576,7 +576,7 @@ public class CardFactory {
         final List<Card> list = new ArrayList<Card>();
         final Card c = new Card(controller.getGame().nextCardId());
         c.setName(name);
-        c.setImageKey(ImageCacheBridge.instance.getTokenKey(imageName));
+        c.setImageKey(Dependencies.imagecache.getTokenKey(imageName));
     
         // TODO - most tokens mana cost is 0, this needs to be fixed
         // c.setManaCost(manaCost);

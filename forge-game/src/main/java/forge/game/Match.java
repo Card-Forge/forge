@@ -16,7 +16,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
-import forge.PreferencesBridge;
+import forge.Dependencies;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -97,7 +97,7 @@ public class Match {
      * TODO: Write javadoc for this method.
      */
     public void startGame(final Game game, final CountDownLatch latch) {
-        final boolean canRandomFoil = PreferencesBridge.Instance.canRandomFoil() && gameType == GameType.Constructed;
+        final boolean canRandomFoil = Dependencies.preferences.canRandomFoil() && gameType == GameType.Constructed;
 
         // This code could be run run from EDT.
         game.getAction().invoke(new Runnable() {

@@ -37,8 +37,8 @@ public final class Main {
         //Turn off the Java 2D system's use of Direct3D to improve rendering speed (particularly when Full Screen)
         System.setProperty("sun.java2d.d3d", "false");
 
-        forge.PreferencesBridge.Instance = new PreferencesProvider();
-        forge.ImageCacheBridge.instance = new ImageCacheProvider();
+        forge.Dependencies.preferences = new PreferencesProvider();
+        forge.Dependencies.imagecache = new ImageCacheProvider();
         
         // Start splash screen first, then data models, then controller.
         if (args.length == 0) {
