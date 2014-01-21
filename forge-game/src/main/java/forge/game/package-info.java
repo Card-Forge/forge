@@ -1,8 +1,3 @@
-/**
- * 
- */
-/**
- * @author Max
- *
- */
+/** Forge Card Game. */
 package forge.game;
+

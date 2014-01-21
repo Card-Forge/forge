@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.ai;
+package forge.ai;
 
 /** 
  * AI personality profile settings identifiers, and their default values.
