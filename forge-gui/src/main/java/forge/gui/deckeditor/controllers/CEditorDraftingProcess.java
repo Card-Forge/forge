@@ -155,12 +155,12 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
         
-        final int landsCount = 50;
+        final int landsCount = 10;
         for(String landName : MagicColor.Constant.BASIC_LANDS) {
             final int numArt = Singletons.getMagicDb().getCommonCards().getArtCount(landName, landSet);
 
             for (int i = 0; i < numArt; i++) {
-                deck.get(DeckSection.Sideboard).add(landName, landSet, i, landsCount);
+                deck.get(DeckSection.Sideboard).add(landName, landSet, i, numArt > 1 ? landsCount : 30);
             }
         }
 

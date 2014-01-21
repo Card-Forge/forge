@@ -171,12 +171,12 @@ public enum CSubmenuSealed implements ICDoc {
         final Deck deck = new Deck(sDeckName);
         deck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
 
-        final int landsCount = 50;
+        final int landsCount = 10;
         for (final String element : MagicColor.Constant.BASIC_LANDS) {
             final int numArt = Singletons.getMagicDb().getCommonCards().getArtCount(element, sd.getLandSetCode());
 
             for (int i = 0; i < numArt; i++) {
-                deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), i, landsCount);
+                deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), i, numArt > 1 ? landsCount : 30);
             }
         }
 
