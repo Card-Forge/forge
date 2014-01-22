@@ -35,7 +35,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CDev;
-import forge.gui.toolbox.FScrollPanel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedLabel;
 
@@ -57,7 +57,7 @@ public enum VDev implements IVDoc<CDev> {
 
     // Top-level containers
     private final JPanel viewport = new JPanel(new MigLayout("wrap, insets 0, ax center"));
-    private final FScrollPanel scroller = new FScrollPanel(viewport, true,
+    private final FScrollPane scroller = new FScrollPane(viewport, true,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 

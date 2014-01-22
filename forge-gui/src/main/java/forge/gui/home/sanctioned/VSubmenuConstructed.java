@@ -47,6 +47,7 @@ import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
@@ -142,7 +143,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         variantsPanel.add(vntArchenemy);
         comboArchenemy.addTo(variantsPanel);
 
-        constructedFrame.add(new FScrollPanel(variantsPanel, true,
+        constructedFrame.add(new FScrollPane(variantsPanel, true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
                 "w 100%, gapbottom 10px, spanx 2, wrap");

@@ -38,7 +38,7 @@ import forge.gui.match.controllers.CPrompt;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FHtmlViewer;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FScrollPanel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -60,7 +60,7 @@ public enum VPrompt implements IVDoc<CPrompt> {
     private final JButton btnOK = new FButton("OK");
     private final JButton btnCancel = new FButton("Cancel");
     private final FHtmlViewer tarMessage = new FHtmlViewer();
-    private final FScrollPanel messageScroller = new FScrollPanel(tarMessage, false,
+    private final FScrollPane messageScroller = new FScrollPane(tarMessage,
     		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final JLabel lblGames;
 

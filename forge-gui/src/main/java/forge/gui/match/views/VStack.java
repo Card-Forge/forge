@@ -51,7 +51,7 @@ import forge.gui.framework.IVDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CStack;
 import forge.gui.toolbox.FMouseAdapter;
-import forge.gui.toolbox.FScrollPanel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedTextArea;
 import forge.properties.ForgePreferences.FPref;
@@ -75,7 +75,7 @@ public enum VStack implements IVDoc<CStack> {
     private final DragTab tab = new DragTab("Stack");
 
     // Top-level containers
-    private final FScrollPanel scroller = new FScrollPanel(new JPanel(), true,
+    private final FScrollPane scroller = new FScrollPane(null, true,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final StackArea stackArea = new StackArea(scroller);
 
@@ -363,7 +363,7 @@ public enum VStack implements IVDoc<CStack> {
 
         private Dimension size;
 
-        public StackArea(final FScrollPanel scrollPane) {
+        public StackArea(final FScrollPane scrollPane) {
             super(scrollPane);
         }
 
