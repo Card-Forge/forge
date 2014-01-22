@@ -22,12 +22,9 @@ public class AvatarSelector extends FDialog {
     private List<FLabel> selectables = new ArrayList<FLabel>();
 	private final Map<Integer, SkinImage> avatarMap = FSkin.getAvatars();
 
-    public final void show(final AvatarSelector aSelector) {
-    	aSelector.setVisible(true);
-    	aSelector.dispose();
-    }
+    public AvatarSelector(final String playerName, final int currentIndex, final Collection<Integer> usedIndices) {
+        this.setTitle("Select avatar for " + playerName);
 
-    public AvatarSelector(final int currentIndex, final Collection<Integer> usedIndices) {
         final JPanel pnlAvatarPics = new JPanel(new WrapLayout());
 
         pnlAvatarPics.setOpaque(false);

@@ -691,19 +691,21 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 			final int playerIndex = avatarList.indexOf(avatar);
 
 			changePlayerFocus(playerIndex);
+            avatar.requestFocusInWindow();
 
-			final AvatarSelector aSel = new AvatarSelector(usedAvatars.get(playerIndex), usedAvatars.values());
+			final AvatarSelector aSel = new AvatarSelector(getPlayerName(playerIndex), usedAvatars.get(playerIndex), usedAvatars.values());
 			for (final FLabel lbl : aSel.getSelectables()) {
 				lbl.setCommand(new Command() {
 					@Override
 		            public void run() {
 		                VSubmenuConstructed.this.setAvatar(avatar, playerIndex, Integer.valueOf(lbl.getName().substring(11)));
 		                aSel.setVisible(false);
-		                avatar.requestFocusInWindow();
 		            }
 				});
 			}
-			aSel.show(aSel);
+
+			aSel.setVisible(true);
+	        aSel.dispose();
 
 			if (playerIndex < 2) { updateAvatarPrefs(); }
 		}
@@ -713,9 +715,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             int playerIndex = avatarList.indexOf(avatar);
 
             changePlayerFocus(playerIndex);
+            avatar.requestFocusInWindow();
 
             setRandomAvatar(avatar, playerIndex);
-            avatar.requestFocusInWindow();
 
             if (playerIndex < 2) { updateAvatarPrefs(); }
         }
