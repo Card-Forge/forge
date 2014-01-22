@@ -120,20 +120,20 @@ public final class CEditorConstructed extends ACEditorBase<PaperCard, Deck> {
                 controller.getModel().getOrCreate(DeckSection.Sideboard).addAll(itemsToAdd);
                 break;
             default:
-                break; //no other sections should support toAlternate
+                return; //no other sections should support toAlternate
             }
         }
         else {
             editor.getDeckManager().addItems(itemsToAdd);
+        }
 
-            if (editor.getCatalogManager().isInfinite()) {
-                //select all added cards in Catalog if infinite
-                editor.getCatalogManager().selectItemEntrys(itemsToAdd);
-            }
-            else {
-                //remove all added cards from Catalog if not infinite
-                editor.getCatalogManager().removeItems(items);
-            }
+        if (editor.getCatalogManager().isInfinite()) {
+            //select all added cards in Catalog if infinite
+            editor.getCatalogManager().selectItemEntrys(itemsToAdd);
+        }
+        else {
+            //remove all added cards from Catalog if not infinite
+            editor.getCatalogManager().removeItems(items);
         }
 
         controller.notifyModelChanged();
