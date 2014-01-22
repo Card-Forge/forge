@@ -267,8 +267,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         playerNameField.setFont(FSkin.getFont(14));
         playerNameField.addActionListener(nameListener);
         playerNameField.addFocusListener(nameFocusListener);
-        playerPanel.add(newLabel("Name:"), "height 30px, gaptop 5px, gapx rel");
-        playerPanel.add(playerNameField, "height 30px, pushx, growx");
+        playerPanel.add(newLabel("Name:"), "w 40px, h 30px, gaptop 5px");
+        playerPanel.add(playerNameField, "h 30px, pushx, growx");
         playerNameBtnList.add(playerNameField);
 
         // Name randomiser
@@ -323,8 +323,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                 avatarList.get(deckSelectorBtns.indexOf(deckBtn)).requestFocusInWindow();
             }
         });
-        playerPanel.add(newLabel("Deck:"), "height 30px, gapx rel");
-        playerPanel.add(deckBtn, "height 30px, growx, pushx, spanx 4");
+        playerPanel.add(newLabel("Deck:"), "w 40px, h 30px");
+        playerPanel.add(deckBtn, "pushx, growx, wmax 100%-157px, h 30px, spanx 4");
         deckSelectorBtns.add(deckBtn);
 
         playerPanelList.add(playerPanel);
