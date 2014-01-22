@@ -36,7 +36,7 @@ import forge.util.storage.IStorage;
 public class DeckController<T extends DeckBase> {
     private T model;
     private boolean saved;
-    private boolean modelInStore;
+    private boolean modelInStorage;
     private final IStorage<T> folder;
     private final ACEditorBase<?, T> view;
     private final Supplier<T> newModelCreator;
@@ -54,7 +54,7 @@ public class DeckController<T extends DeckBase> {
         this.view = view0;
         this.model = null;
         this.saved = true;
-        this.modelInStore = false;
+        this.modelInStorage = false;
         this.newModelCreator = newModelCreator0;
     }
 
@@ -75,7 +75,7 @@ public class DeckController<T extends DeckBase> {
         this.setModel(document, false);
     }
     public void setModel(final T document, final boolean isStored) {
-        this.modelInStore = isStored;
+        this.modelInStorage = isStored;
         this.model = document;
         this.view.resetTables();
 
@@ -156,7 +156,7 @@ public class DeckController<T extends DeckBase> {
      * @param name the name
      */
     @SuppressWarnings("unchecked")
-    public void load(final String name) {
+    private void load(final String name) {
         T newModel = this.folder.get(name);
         if (newModel != null) {
             this.setModel((T) newModel.copyTo(name), true);
@@ -178,7 +178,7 @@ public class DeckController<T extends DeckBase> {
         this.folder.add(this.model);
         // copy to new instance which will be edited and left if unsaved
         this.model = (T)this.model.copyTo(this.model.getName());
-        this.modelInStore = true;
+        this.modelInStorage = true;
         _setSaved(true);
     }
 
@@ -190,7 +190,7 @@ public class DeckController<T extends DeckBase> {
     @SuppressWarnings("unchecked")
     public void saveAs(final String name0) {
         this.model = (T)this.model.copyTo(name0);
-        this.modelInStore = false;
+        this.modelInStorage = false;
         this.save();
     }
 
@@ -210,7 +210,7 @@ public class DeckController<T extends DeckBase> {
         if (StringUtils.isNotBlank(this.model.getName())) {
             this.folder.delete(this.model.getName());
         }
-        this.modelInStore = false;
+        this.modelInStorage = false;
         this.newModel();
     }
 
@@ -239,7 +239,7 @@ public class DeckController<T extends DeckBase> {
      * @return true, if is model in store
      */
     public boolean isModelInStore() {
-        return this.modelInStore;
+        return this.modelInStorage;
     }
     
     /**
@@ -250,7 +250,7 @@ public class DeckController<T extends DeckBase> {
             newModel();
         }
         else {
-            setModel(this.model, this.modelInStore);
+            setModel(this.model, this.modelInStorage);
         }
     }
 
