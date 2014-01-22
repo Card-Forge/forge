@@ -79,7 +79,7 @@ import forge.util.ItemPoolSorter;
  */
 @SuppressWarnings("serial")
 public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
-    static final SkinColor BACK_COLOR = FSkin.getColor(FSkin.Colors.CLR_THEME2);
+    static final SkinColor BACK_COLOR = FSkin.getColor(FSkin.Colors.CLR_ZEBRA).darker();
     private static final SkinColor FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private static final SkinColor SEL_ACTIVE_COLOR = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
     private static final SkinColor SEL_INACTIVE_COLOR = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
