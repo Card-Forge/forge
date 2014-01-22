@@ -138,11 +138,7 @@ public class CostPayment {
             
             if ( null == pd || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability))
                 return false;
-    
-            // abilities care what was used to pay for them
-            if( part instanceof CostPartWithList )
-                ((CostPartWithList) part).reportPaidCardsTo(ability);
-            
+
             this.paidCostParts.add(part);
         }
     
@@ -179,7 +175,6 @@ public class CostPayment {
             }
             // abilities care what was used to pay for them
             if( part instanceof CostPartWithList ) {
-                ((CostPartWithList) part).reportPaidCardsTo(ability);
                 ((CostPartWithList) part).resetList();
             }
         }
