@@ -22,6 +22,7 @@ import java.io.File;
 import com.google.common.base.Function;
 
 import forge.util.IItemSerializer;
+import forge.util.TextUtil;
 
 /**
  * <p>
@@ -88,5 +89,41 @@ public class StorageImmediatelySerialized<T> extends StorageBase<T> {
     @Override
     public IStorage<IStorage<T>> getFolders() {
         return subfolders == null ? super.getFolders() : subfolders;
+    }
+    
+    @Override
+    public IStorage<T> tryGetFolder(String path) {
+        String[] parts = TextUtil.split(path, '/', 2);
+        switch( parts.length ) {
+            case 0: return this;
+            case 1: return parts[0].equals(".") ? this : getFolders().get(parts[0]);
+            case 2:
+                IStorage<T> subFolder = getFolders().get(parts[0]);
+                return subFolder == null ? null : subFolder.tryGetFolder(parts[1]);
+        }
+     // should not reach this unless split is broken
+        throw new IllegalArgumentException(path); 
+    }
+
+    @Override
+    public IStorage<T> getFolderOrCreate(String path) {
+        String[] parts = TextUtil.split(path, '/', 2);
+        switch( parts.length ) {
+            case 0: return this;
+            case 1: return parts[0].equals(".") ? this : getOrCreateSubfolder(parts[0]);
+            case 2: return getOrCreateSubfolder(parts[0]).getFolderOrCreate(parts[1]);
+        }
+     // should not reach this unless split is broken
+        throw new IllegalArgumentException(path); 
+    }
+    
+    private IStorage<T> getOrCreateSubfolder(String name) {
+        // Have to filter name for incorrect symbols 
+        IStorage<T> storage = getFolders().get(name);
+        if( null == storage ) {
+            storage = new StorageImmediatelySerialized<>(name, serializer);
+            subfolders.add(storage);
+        }
+        return storage;
     }
 }

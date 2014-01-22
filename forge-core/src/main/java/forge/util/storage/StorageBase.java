@@ -108,4 +108,14 @@ public class StorageBase<T> implements IStorage<T> {
         // TODO Auto-generated method stub
         return name;
     }
+
+    @Override
+    public IStorage<T> tryGetFolder(String path) {
+        throw new UnsupportedOperationException("This storage does not support subfolders");
+    }
+
+    @Override
+    public IStorage<T> getFolderOrCreate(String path) {
+        throw new UnsupportedOperationException("This storage does not support subfolders");
+    }
 }

@@ -29,21 +29,14 @@ import forge.util.IHasName;
  * @param <T> the generic type
  */
 public interface IStorage<T> extends Iterable<T>, IHasName {
-
     T get(final String name);
-
     T find(final Predicate<T> condition);
-    // todo: find(final Predicate<T> condition, boolean recursive).
-
     Collection<String> getItemNames();
-
     boolean contains(final String name);
-
     int size();
-
     void add(final T deck);
-
     void delete(final String deckName);
-
     IStorage<IStorage<T>> getFolders();
+    IStorage<T> tryGetFolder(String path);
+    IStorage<T> getFolderOrCreate(String path);
 }
