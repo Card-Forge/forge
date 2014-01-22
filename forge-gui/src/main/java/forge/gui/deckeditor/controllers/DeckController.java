@@ -155,8 +155,7 @@ public class DeckController<T extends DeckBase> {
      *
      * @param name the name
      */
-    @SuppressWarnings("unchecked")
-    private void load(final String name) {
+    @SuppressWarnings("unchecked") public void load(final String name) {
         T newModel = this.folder.get(name);
         if (newModel != null) {
             this.setModel((T) newModel.copyTo(name), true);
