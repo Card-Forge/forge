@@ -153,6 +153,7 @@ public class FScrollPane extends SkinnedScrollPane {
             scrollBar = scrollBar0;
             incrementDirection = incrementDirection0;
             timer.setInitialDelay(500); //wait half a second after mouse down before starting timer
+            this.setFocusable(false);
         }
 
         @Override

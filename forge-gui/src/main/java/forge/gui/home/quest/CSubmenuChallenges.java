@@ -98,7 +98,7 @@ public enum CSubmenuChallenges implements ICDoc {
                 quest.save();
             }
         });
-        
+
         view.getCbCharm().addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent arg0) {
@@ -124,7 +124,7 @@ public enum CSubmenuChallenges implements ICDoc {
             }
         }
     };
-    
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
@@ -136,7 +136,7 @@ public enum CSubmenuChallenges implements ICDoc {
         final QuestController qCtrl = Singletons.getModel().getQuest();
 
         if (qCtrl.getAchievements() == null) return;
-        
+
         view.getLblTitle().setText("Challenges: " + qCtrl.getRank());
 
         view.getPnlChallenges().removeAll();
@@ -161,9 +161,9 @@ public enum CSubmenuChallenges implements ICDoc {
             }
             rad.addKeyListener(_startOnEnter);
             rad.addMouseListener(_startOnDblClick);
-            grpPanel.add(temp, rad, "w 100%!, h 135px!, gap 2% 0 15px 15px");
+            grpPanel.add(temp, rad, "w 100%!, h 135px!, gapy 15px");
         }
-        view.getPnlChallenges().add(grpPanel, "w 96%!");
+        view.getPnlChallenges().add(grpPanel, "w 100%!");
 
         if (!haveAnyChallenges) {
             final FLabel lbl = new FLabel.Builder()
@@ -180,7 +180,7 @@ public enum CSubmenuChallenges implements ICDoc {
         }
 
         Singletons.getView().getFrame().validate();
-        
+
     }
 
     /* (non-Javadoc)

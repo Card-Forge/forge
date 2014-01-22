@@ -67,7 +67,7 @@ public enum CSubmenuDuels implements ICDoc {
                 quest.save();
             }
         });
-        
+
         view.getCbCharm().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -105,7 +105,7 @@ public enum CSubmenuDuels implements ICDoc {
             }
         }
     };
-    
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
@@ -134,9 +134,9 @@ public enum CSubmenuDuels implements ICDoc {
                 }
                 rad.addKeyListener(_startOnEnter);
                 rad.addMouseListener(_startOnDblClick);
-                grpPanel.add(temp, rad, "w 100%!, h 135px!, gap 2% 0 15px 15px");
+                grpPanel.add(temp, rad, "w 100%!, h 135px!, gapy 15px");
             }
-            view.getPnlDuels().add(grpPanel, "w 96%!");
+            view.getPnlDuels().add(grpPanel, "w 100%!");
         }
     }
 

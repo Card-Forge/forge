@@ -7,8 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -21,7 +19,7 @@ import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
 
 /**
@@ -38,10 +36,9 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     private final DragTab tab = new DragTab("Quest Duels");
 
     // Other fields
-    private final JPanel pnlDuels = new JPanel();
     private final JPanel pnlStats = new JPanel();
 
-    private final FScrollPane scrDuels = new FScrollPane(pnlDuels,
+    private final FScrollPanel pnlDuels = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, ax center"), true,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final StartButton btnStart  = new StartButton();
@@ -91,10 +88,6 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
      * Constructor.
      */
     private VSubmenuDuels() {
-        scrDuels.setBorder((Border)null);
-        pnlDuels.setOpaque(false);
-        pnlDuels.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center"));
-
         final String constraints = "h 30px!, gap 0 0 0 5px";
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 0"));
         pnlStats.add(btnUnlock, "w 150px!, h 30px!, gap 0 0 0 10px");
@@ -148,7 +141,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "h 30px!, span 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblCurrentDeck, "span 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblNextChallengeInWins, "span 2, gap 0 0 0 20px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrDuels, "w 88% - 175px!, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDuels, "w 88% - 175px!, pushy, growy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 185px!, pushy, growy, gap 4% 4% 0 0, span 1 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 0 30px 30px, ax center");
 
@@ -156,22 +149,18 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
-    /** @return {@link javax.swing.JPanel} */
-    public JPanel getPnlDuels() {
+    public FScrollPanel getPnlDuels() {
         return pnlDuels;
     }
 
-    /** @return {@link forge.gui.toolbox.FPanel} */
     public JPanel getPnlStats() {
         return pnlStats;
     }
 
-    /** @return {@link javax.swing.JLabel} */
     public JLabel getLblTitle() {
         return lblTitle;
     }
 
-    /** @return {@link javax.swing.JLabel} */
     @Override
     public FLabel getLblWorld() {
         return lblWorld;

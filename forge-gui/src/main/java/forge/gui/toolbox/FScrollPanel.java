@@ -19,7 +19,9 @@ package forge.gui.toolbox;
 
 import java.awt.Component;
 import java.awt.LayoutManager;
+import java.awt.MenuComponent;
 import java.awt.PopupMenu;
+
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 
@@ -96,5 +98,41 @@ public class FScrollPanel extends FScrollPane {
             return innerPanel.add(name, comp);
         }
         return super.add(name, comp);
+    }
+
+    @Override
+    public void remove(Component comp) {
+        if (innerPanel != null) {
+            innerPanel.remove(comp);
+            return;
+        }
+        super.remove(comp);
+    }
+
+    @Override
+    public void remove(int index) {
+        if (innerPanel != null) {
+            innerPanel.remove(index);
+            return;
+        }
+        super.remove(index);
+    }
+
+    @Override
+    public void remove(MenuComponent popup) {
+        if (innerPanel != null) {
+            innerPanel.remove(popup);
+            return;
+        }
+        super.remove(popup);
+    }
+
+    @Override
+    public void removeAll() {
+        if (innerPanel != null) {
+            innerPanel.removeAll();
+            return;
+        }
+        super.removeAll();
     }
 }
