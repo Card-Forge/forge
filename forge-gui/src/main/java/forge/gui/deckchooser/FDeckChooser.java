@@ -105,14 +105,14 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         @Override
         public String getName() {
             return name;
-        }        
-        
+        }
+
         @Override
         public String toString() {
             return name;
-        }        
-        
-        
+        }
+
+
         @Override
         public int compareTo(final ColorDeckGenerator d) {
             return d instanceof ColorDeckGenerator ? Integer.compare(this.index, ((ColorDeckGenerator)d).index) : 1;
@@ -312,17 +312,19 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         joinSelectedDecks(state, SELECTED_DECK_DELIMITER);
         return state.toString();
     }
-    
+
     private void joinSelectedDecks(StringBuilder state, String delimiter) {
         Iterable<DeckProxy> selectedDecks = lstDecks.getSelectedItems();
         boolean isFirst = true;
         if (selectedDecks != null) {
             for (DeckProxy deck : selectedDecks) {
-                if(isFirst)
+                if (isFirst) {
                     isFirst = false;
-                else
+                }
+                else {
                     state.append(delimiter);
-                state.append(deck.getName());
+                }
+                state.append(deck.toString());
             }
         }
     }

@@ -74,6 +74,11 @@ public class DeckProxy implements InventoryItem {
         return path;
     }
 
+    @Override
+    public String toString() {
+        return path + "/" + deck.getName();
+    }
+
     public void invalidateCache() {
         color = null;
         formats = null;

@@ -430,7 +430,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     protected void onDeckClicked(int iPlayer, DeckType type, Collection<DeckProxy> selectedDecks) {
-        
         String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
         deckSelectorBtns.get(iPlayer).setText(text);
     }
@@ -440,23 +439,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	if (!firstBuild) { decksFrame.removeAll(); }
 
     	decksFrame.add(deckChoosers.get(playerWithFocus), "grow, push");
-    }
-
-    /** Updates the deck selector button in all player panels. */
-    public void updateDeckSelectorLabels() {
-    	for (int i = 0; i < deckChoosers.size(); i++) {
-    		updateDeckSelectorLabel(i);
-    	}
-    }
-
-    /** Updates the deck selector button in the indexed player's panel. */
-    private void updateDeckSelectorLabel(int playerIndex) {
-    	final FLabel lbl = deckSelectorBtns.get(playerIndex);
-    	String title = deckChoosers.get(playerIndex).getStateForLabel();
-
-		if (!StringUtils.isBlank(title) && !lbl.getText().matches(title)) {
-			lbl.setText(title);
-		}
     }
 
     /* (non-Javadoc)
@@ -502,7 +484,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         for (FDeckChooser fdc : deckChoosers) {
         	fdc.populate();
         }
-    	updateDeckSelectorLabels();
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(constructedFrame, "gap 20px 20px 20px 0px, push, grow");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 0 3.5%! 3.5%!, ax center");
