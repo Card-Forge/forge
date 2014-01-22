@@ -17,6 +17,7 @@
  */
 package forge.gui.toolbox;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -34,6 +35,8 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -70,6 +73,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
@@ -95,6 +99,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import forge.FThreads;
 import forge.Singletons;
 import forge.gui.GuiUtils;
+import forge.gui.framework.ILocalRepaint;
 import forge.properties.ForgePreferences;
 import forge.properties.NewConstants;
 import forge.properties.ForgePreferences.FPref;
@@ -2380,12 +2385,10 @@ public enum FSkin {
         public SkinnedScrollPane(Component comp, int vsbPolicy, int hsbPolicy) { super(comp, vsbPolicy, hsbPolicy); init(); }
 
         private void init() {
-            getVerticalScrollBar().setOpaque(false);
-            getVerticalScrollBar().setUI(new SkinScrollBarUI(true));
-            getHorizontalScrollBar().setOpaque(false);
-            getHorizontalScrollBar().setUI(new SkinScrollBarUI(false));
+            new SkinScrollBarUI(getVerticalScrollBar(), true);
+            new SkinScrollBarUI(getHorizontalScrollBar(), false);
         }
-        private static class SkinScrollBarUI extends BasicScrollBarUI {
+        private static class SkinScrollBarUI extends BasicScrollBarUI implements ILocalRepaint {
             @SuppressWarnings("serial")
             private static JButton hiddenButton = new JButton() {
                 @Override
@@ -2397,12 +2400,35 @@ public enum FSkin {
             private static final SkinColor backColor = FSkin.getColor(Colors.CLR_THEME2);
             private static final SkinColor borderColor = FSkin.getColor(Colors.CLR_TEXT);
             private static final SkinColor grooveColor = borderColor.alphaColor(200);
+            private static final AlphaComposite alphaDim = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f);
             private static final int grooveSpace = 3;
 
             private final boolean vertical;
+            private boolean hovered;
 
-            private SkinScrollBarUI(boolean vertical0) {
+            private SkinScrollBarUI(JScrollBar scrollbar, boolean vertical0) {
                 vertical = vertical0;
+                scrollbar.setOpaque(false);
+                scrollbar.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        hovered = true;
+                        repaintSelf();
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        hovered = false;
+                        repaintSelf();
+                    }
+                });
+                scrollbar.setUI(this);
+            }
+
+            @Override
+            public void repaintSelf() {
+                final Dimension d = scrollbar.getSize();
+                scrollbar.repaint(0, 0, d.width, d.height);
             }
 
             @Override
@@ -2466,6 +2492,9 @@ public enum FSkin {
 
                 //draw thumb
                 Graphics2D g2d = (Graphics2D) g;
+                if (!hovered) {
+                    g2d.setComposite(alphaDim);
+                }
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 setGraphicsColor(g2d, backColor);
                 g2d.fillPolygon(xPoints, yPoints, xPoints.length);
