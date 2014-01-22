@@ -24,10 +24,11 @@ import forge.item.PreconDeck;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
+import forge.util.IHasName;
 import forge.util.storage.IStorage;
 
 public class DeckProxy implements InventoryItem {
-    protected final Deck deck;
+    protected final IHasName deck;
     protected final IStorage<?> storage;
 
     public static final Function<DeckProxy, String> FN_GET_NAME = new Function<DeckProxy, String>() {
@@ -42,16 +43,22 @@ public class DeckProxy implements InventoryItem {
     protected Iterable<GameFormat> formats;
     private int mainSize = Integer.MIN_VALUE;
     private int sbSize = Integer.MIN_VALUE;
-    private String path;
+    private final String path;
+    private final Function<IHasName, Deck> fnGetDeck;
 
     public DeckProxy(Deck deck, GameType type, IStorage<?> storage) {
-        this(deck, type, null, storage);
+        this(deck, type, null, storage, null);
     }
 
-    public DeckProxy(Deck deck, GameType type, String path, IStorage<?> storage) {
+    public DeckProxy(IHasName deck, Function<IHasName, Deck> fnGetDeck, GameType type, IStorage<?> storage) {
+        this(deck, type, null, storage, fnGetDeck);
+    }
+    
+    private DeckProxy(IHasName deck, GameType type, String path, IStorage<?> storage, Function<IHasName, Deck> fnGetDeck) {
         this.deck = deck;
         this.storage = storage;
         this.path = path;
+        this.fnGetDeck = fnGetDeck;
         // gametype could give us a hint whether the storage is updateable and enable choice of right editor for this deck
     }
 
@@ -67,7 +74,7 @@ public class DeckProxy implements InventoryItem {
     }
 
     public Deck getDeck() {
-        return deck;
+        return deck instanceof Deck && fnGetDeck == null ? (Deck) deck : fnGetDeck.apply(deck);
     }
 
     public String getPath() {
@@ -88,14 +95,14 @@ public class DeckProxy implements InventoryItem {
 
     public ColorSet getColor() {
         if (color == null) {
-            color = deck.getColor();
+            color = getDeck().getColor();
         }
         return color;
     }
 
     public Iterable<GameFormat> getFormats() {
         if (formats == null) {
-            formats = Singletons.getModel().getFormats().getAllFormatsOfDeck(deck);
+            formats = Singletons.getModel().getFormats().getAllFormatsOfDeck(getDeck());
         }
         return formats;
     }
@@ -106,7 +113,7 @@ public class DeckProxy implements InventoryItem {
                 mainSize = -1;
             }
             else {
-                mainSize = deck.getMain().countAll();
+                mainSize = getDeck().getMain().countAll();
             }
         }
         return mainSize;
@@ -114,12 +121,10 @@ public class DeckProxy implements InventoryItem {
 
     public int getSideSize() {
         if (sbSize == Integer.MIN_VALUE) {
-            if (deck != null &&  deck.has(DeckSection.Sideboard)) {
-                sbSize = deck.get(DeckSection.Sideboard).countAll();
-            }
-            else {
+            CardPool sb = getDeck().get(DeckSection.Sideboard);
+            sbSize = sb == null ? -1 : sb.countAll();
+            if( sbSize == 0 )
                 sbSize = -1;
-            }
         }
         return sbSize;
     }
@@ -151,7 +156,7 @@ public class DeckProxy implements InventoryItem {
         }
 
         for (Deck d : folder) {
-            list.add(new DeckProxy(d, GameType.Constructed, path, folder));
+            list.add(new DeckProxy(d, GameType.Constructed, path, folder, null));
         }
     }
 
