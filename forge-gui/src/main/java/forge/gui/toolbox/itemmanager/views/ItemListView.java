@@ -83,12 +83,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     private static final SkinColor FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private static final SkinColor SEL_ACTIVE_COLOR = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
     private static final SkinColor SEL_INACTIVE_COLOR = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-    private static final SkinColor HEADER_BACK_COLOR = BACK_COLOR.getContrastColor(-20);
-    static final SkinColor ALT_ROW_COLOR = BACK_COLOR.getContrastColor(10);
+    private static final SkinColor HEADER_BACK_COLOR = BACK_COLOR.getContrastColor(-10);
+    static final SkinColor ALT_ROW_COLOR = BACK_COLOR.getContrastColor(-20);
     private static final SkinColor GRID_COLOR = BACK_COLOR.getContrastColor(20);
     private static final SkinBorder HEADER_BORDER = new FSkin.CompoundSkinBorder(new FSkin.MatteSkinBorder(0, 0, 1, 1, GRID_COLOR), new EmptyBorder(0, 1, 0, 0));
     private static final SkinFont ROW_FONT = FSkin.getFont(12);
-    private static final int ROW_HEIGHT = 20;
+    private static final int ROW_HEIGHT = 19;
 
     private final ItemTable table = new ItemTable();
     private final ItemTableModel tableModel;
@@ -302,6 +302,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             this.setBorder((Border)null);
             this.setRowHeight(ROW_HEIGHT);
+            this.setRowMargin(0);
+            this.setShowHorizontalLines(false);
             this.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         }
         @Override
