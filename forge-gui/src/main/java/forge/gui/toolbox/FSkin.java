@@ -2462,8 +2462,12 @@ public enum FSkin {
                     int x3 = x + width;
 
                     int arrowThickness = width / 2;
-                    if (arrowThickness > height / 2) {
-                        arrowThickness = height / 2;
+                    int maxArrowThickness = height / 2 - grooveSpace * 2;
+                    if (maxArrowThickness < 0) {
+                        maxArrowThickness = 0;
+                    }
+                    if (arrowThickness > maxArrowThickness) {
+                        arrowThickness = maxArrowThickness;
                     }
                     int y2 = y + arrowThickness;
                     int y3 = y + height - arrowThickness;
@@ -2479,8 +2483,12 @@ public enum FSkin {
                     int y3 = y + height;
 
                     int arrowThickness = height / 2;
-                    if (arrowThickness > width / 2) {
-                        arrowThickness = width / 2;
+                    int maxArrowThickness = width / 2 - grooveSpace * 2;
+                    if (maxArrowThickness < 0) {
+                        maxArrowThickness = 0;
+                    }
+                    if (arrowThickness > maxArrowThickness) {
+                        arrowThickness = maxArrowThickness;
                     }
                     int x2 = x + arrowThickness;
                     int x3 = x + width - arrowThickness;
@@ -2503,7 +2511,7 @@ public enum FSkin {
 
                 //draw grooves if needed
                 if (vertical) {
-                    if (height > width + grooveSpace * 2) {
+                    if (height > grooveSpace * 4) {
                         setGraphicsColor(g2d, grooveColor);
                         int x2 = x + grooveSpace;
                         int x3 = x + width - grooveSpace;
@@ -2515,7 +2523,7 @@ public enum FSkin {
                         g2d.drawLine(x2, y4, x3, y4);
                     }
                 }
-                else if (width > height + grooveSpace * 2) {
+                else if (width > grooveSpace * 4) {
                     setGraphicsColor(g2d, grooveColor);
                     int y2 = y + grooveSpace;
                     int y3 = y + height - grooveSpace;
