@@ -29,11 +29,11 @@ public class CostPartMana extends CostPart {
     // "Leftover"
     private final ManaCost cost;
     private boolean xCantBe0 = false;
-    private boolean isRememberedCreatureCost = false;
+    private boolean isExiledCreatureCost = false;
     private final String restriction;
 
     public boolean shouldPayLast() {
-        return isRememberedCreatureCost;
+        return isExiledCreatureCost;
     }
     /**
      * Instantiates a new cost mana.
@@ -47,8 +47,8 @@ public class CostPartMana extends CostPart {
     public CostPartMana(final ManaCost cost, String restriction) {
         this.cost = cost;
         this.xCantBe0 = "XCantBe0".equals(restriction);
-        this.isRememberedCreatureCost = "Remembered".equalsIgnoreCase(restriction);
-        this.restriction = xCantBe0 || isRememberedCreatureCost ? null : restriction;
+        this.isExiledCreatureCost = "Exiled".equalsIgnoreCase(restriction);
+        this.restriction = xCantBe0 || isExiledCreatureCost ? null : restriction;
     }
 
     /**
@@ -81,6 +81,12 @@ public class CostPartMana extends CostPart {
         return cost;
     }
     
+    /**
+     * @return the isExiledCreatureCost
+     */
+    public boolean isExiledCreatureCost() {
+        return isExiledCreatureCost;
+    }
     @Override
     public boolean isReusable() { return true; }
 

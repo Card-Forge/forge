@@ -1082,7 +1082,14 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public boolean payManaCost(CostPartMana costPartMana, PaymentDecision pd, SpellAbility sa) {
         // TODO Auto-generated method stub
-        return HumanPlay.payManaCost(costPartMana, sa, player);
+        ManaCost toPay;
+        if ( costPartMana.isExiledCreatureCost() )
+            toPay = sa.getPaidList("Exiled").get(0).getManaCost();
+        else
+            toPay = costPartMana.getManaToPay();
+
+        
+        return HumanPlay.payManaCost(toPay, costPartMana, sa, player);
     }
 
     @Override

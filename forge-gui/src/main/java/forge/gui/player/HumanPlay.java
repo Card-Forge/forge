@@ -731,9 +731,9 @@ public class HumanPlay {
         return done;
     }
     
-    public static boolean payManaCost(final CostPartMana mc, final SpellAbility ability, final Player activator) {
+    public static boolean payManaCost(final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator) {
         final Card source = ability.getSourceCard();
-        ManaCostBeingPaid toPay = new ManaCostBeingPaid(mc.getManaToPay(), mc.getRestiction());
+        ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
 
         boolean xWasBilled = false;
         String xInCard = source.getSVar("X");

@@ -86,13 +86,8 @@ public class Cost {
      * @return a {@link java.lang.String} object.
      */
     public final ManaCost getTotalMana() {
-        for (final CostPart part : this.costParts) {
-            if (part instanceof CostPartMana) {
-                return ((CostPartMana) part).getManaToPay();
-            }
-        }
-
-        return ManaCost.ZERO;
+        CostPartMana manapart = getCostMana();
+        return manapart == null ? ManaCost.ZERO : manapart.getManaToPay();
     }
 
     private Cost(int colorlessmana) {
