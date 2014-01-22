@@ -245,15 +245,15 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint {
 
     //========== Variable initialization
     // Final inits
-    private final SkinColor clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
-    private final SkinColor clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
-    private final SkinColor clrMain = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-    private final SkinColor d50 = clrMain.stepColor(-50);
-    private final SkinColor d30 = clrMain.stepColor(-30);
-    private final SkinColor d10 = clrMain.stepColor(-10);
-    private final SkinColor l10 = clrMain.stepColor(10);
-    private final SkinColor l20 = clrMain.stepColor(20);
-    private final SkinColor l30 = clrMain.stepColor(30);
+    private static final SkinColor clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+    private static final SkinColor clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+    private static final SkinColor clrMain = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+    private static final SkinColor d50 = clrMain.stepColor(-50);
+    private static final SkinColor d30 = clrMain.stepColor(-30);
+    private static final SkinColor d10 = clrMain.stepColor(-10);
+    private static final SkinColor l10 = clrMain.stepColor(10);
+    private static final SkinColor l20 = clrMain.stepColor(20);
+    private static final SkinColor l30 = clrMain.stepColor(30);
 
     // Custom properties, assigned either at realization (using builder)
     // or dynamically (using methods below).
