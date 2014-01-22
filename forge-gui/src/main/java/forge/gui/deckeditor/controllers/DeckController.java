@@ -233,15 +233,6 @@ public class DeckController<T extends DeckBase> {
     }
 
     /**
-     * Checks if is model in store.
-     *
-     * @return true, if is model in store
-     */
-    public boolean isModelInStore() {
-        return this.modelInStorage;
-    }
-    
-    /**
      * Refresh current model or create new one if none
      */
     public void refreshModel() {

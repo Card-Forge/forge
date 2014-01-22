@@ -30,8 +30,8 @@ import forge.util.storage.StorageImmediatelySerialized;
 
 // Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {
-    protected final IHasName deck;
-    protected final IStorage<?> storage;
+    protected IHasName deck;
+    protected final IStorage<? extends IHasName> storage;
 
     public static final Function<DeckProxy, String> FN_GET_NAME = new Function<DeckProxy, String>() {
         @Override
@@ -48,15 +48,15 @@ public class DeckProxy implements InventoryItem {
     private final String path;
     private final Function<IHasName, Deck> fnGetDeck;
 
-    public DeckProxy(Deck deck, GameType type, IStorage<?> storage) {
+    public DeckProxy(Deck deck, GameType type, IStorage<? extends IHasName> storage) {
         this(deck, type, null, storage, null);
     }
 
-    public DeckProxy(IHasName deck, Function<IHasName, Deck> fnGetDeck, GameType type, IStorage<?> storage) {
+    public DeckProxy(IHasName deck, Function<IHasName, Deck> fnGetDeck, GameType type, IStorage<? extends IHasName> storage) {
         this(deck, type, null, storage, fnGetDeck);
     }
     
-    private DeckProxy(IHasName deck, GameType type, String path, IStorage<?> storage, Function<IHasName, Deck> fnGetDeck) {
+    private DeckProxy(IHasName deck, GameType type, String path, IStorage<? extends IHasName> storage, Function<IHasName, Deck> fnGetDeck) {
         this.deck = deck;
         this.storage = storage;
         this.path = path;
@@ -176,6 +176,12 @@ public class DeckProxy implements InventoryItem {
                 return true;
             }
         };
+    }
+    
+    public void reloadFromStorage() {
+        if( null != storage )
+            deck = storage.get(getName());
+        invalidateCache();
     }
     
     @SuppressWarnings("unchecked")
