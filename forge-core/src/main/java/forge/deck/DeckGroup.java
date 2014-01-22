@@ -139,4 +139,12 @@ public class DeckGroup extends DeckBase {
             return arg1.getName();
         }
     };
+    
+
+    public static final Function<DeckGroup, Deck> FN_HUMAN_DECK = new Function<DeckGroup, Deck>() {
+        @Override
+        public Deck apply(DeckGroup arg1) {
+            return arg1.getHumanDeck();
+        }
+    };    
 }

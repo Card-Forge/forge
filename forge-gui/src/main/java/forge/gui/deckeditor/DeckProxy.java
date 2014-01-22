@@ -26,7 +26,9 @@ import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
+import forge.util.storage.StorageImmediatelySerialized;
 
+// Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {
     protected final IHasName deck;
     protected final IStorage<?> storage;
@@ -133,16 +135,7 @@ public class DeckProxy implements InventoryItem {
         return false;
     }
 
-    public void updateInStorage() {
-        // if storage is not readonly, save the deck there.
-    }
-
-    public void deleteFromStorage() {
-        // if storage is not readonly, delete the deck from there.
-    }
-
     // TODO: The methods below should not take the decks collections from singletons, instead they are supposed to use data passed in parameters
-
     public static Iterable<DeckProxy> getAllConstructedDecks(IStorage<Deck> storageRoot) {
         List<DeckProxy> result = new ArrayList<DeckProxy>();
         addDecksRecursivelly(result, "", storageRoot);
@@ -184,6 +177,17 @@ public class DeckProxy implements InventoryItem {
             }
         };
     }
+    
+    @SuppressWarnings("unchecked")
+    public void updateInStorage() {
+        if ( storage instanceof StorageImmediatelySerialized<?> )
+            ((StorageImmediatelySerialized<IHasName>)storage).add(deck);
+    }
+    
+    public void deleteFromStorage() { 
+        if ( storage instanceof StorageImmediatelySerialized<?> )
+            storage.delete(getName());
+    }    
 
     private static class ThemeDeckGenerator extends DeckProxy {
         private final String name;
@@ -245,13 +249,14 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
+    @SuppressWarnings("unchecked")
     public static Iterable<DeckProxy> getAllSealedDecks(IStorage<DeckGroup> sealed) {
         final List<DeckProxy> humanDecks = new ArrayList<DeckProxy>();
 
         // Since AI decks are tied directly to the human choice,
         // they're just mapped in a parallel map and grabbed when the game starts.
         for (final DeckGroup d : sealed) {
-            humanDecks.add(new DeckProxy(d.getHumanDeck(), GameType.Sealed, sealed));
+            humanDecks.add(new DeckProxy(d, (Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK, GameType.Sealed, sealed));
         }
         return humanDecks;
     }
@@ -266,10 +271,11 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
+    @SuppressWarnings("unchecked")
     public static Iterable<DeckProxy> getDraftDecks(IStorage<DeckGroup> draft) {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (DeckGroup d : draft) {
-            decks.add(new DeckProxy(d.getHumanDeck(), GameType.Draft, draft));
+            decks.add(new DeckProxy(d, ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Draft, draft));
         }
         return decks;
     }
