@@ -175,7 +175,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         playerPanelWithFocus = playerPanelList.get(0);
 
         playersFrame.setOpaque(false);
-        playersFrame.add(playersScroll, "grow, push");
+        playersFrame.add(playersScroll, "w 100%, h 100%-35px");
 
         addPlayerBtn.setFocusable(true);
         addPlayerBtn.setCommand(new Runnable() {
