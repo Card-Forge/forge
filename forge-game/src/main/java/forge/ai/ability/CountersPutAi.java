@@ -358,10 +358,11 @@ public class CountersPutAi extends SpellAbilityAi {
             // add counter if that opponent has a giant creature
             final List<Card> creats = player.getCreaturesInPlay();
             final int tributeAmount = source.getKeywordMagnitude("Tribute");
+            final boolean isHaste = source.hasKeyword("Haste");
             List<Card> threatening = CardLists.filter(creats, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card c) {
-                    return CombatUtil.canBlock(source, c, true) 
+                    return CombatUtil.canBlock(source, c, !isHaste) 
                             && (c.getNetDefense() > source.getNetAttack() + tributeAmount || c.hasKeyword("DeathTouch"));
                 }
             });
