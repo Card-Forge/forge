@@ -17,10 +17,7 @@
  */
 package forge.gui.toolbox;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -28,17 +25,13 @@ import java.awt.LayoutManager;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Timer;
 import javax.swing.border.Border;
 
-import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin.SkinColor;
 
 /** 
@@ -47,10 +40,11 @@ import forge.gui.toolbox.FSkin.SkinColor;
  */
 @SuppressWarnings("serial")
 public class FScrollPanel extends FScrollPane {
+    private static final SkinColor arrowColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private final boolean useArrowButtons;
     private final ArrowButton[] arrowButtons = new ArrowButton[4];
     private JPanel innerPanel;
-    
+
     /**
      * An extension of JScrollPane that can be used as a panel and supports using arrow buttons to scroll instead of scrollbars
      * This constructor assumes no layout, assumes using scrollbars to scroll, and "as needed" for horizontal and vertical scroll policies.
@@ -59,7 +53,7 @@ public class FScrollPanel extends FScrollPane {
     public FScrollPanel() {
         this(null);
     }
-    
+
     /**
      * An extension of JScrollPane that can be used as a panel and supports using arrow buttons to scroll instead of scrollbars
      * This constructor assumes using scrollbars to scroll and "as needed" for horizontal and vertical scroll policies.
@@ -69,7 +63,7 @@ public class FScrollPanel extends FScrollPane {
     public FScrollPanel(final LayoutManager layout) {
         this(layout, false);
     }
-    
+
     /**
      * An extension of JScrollPane that can be used as a panel and supports using arrow buttons to scroll instead of scrollbars
      * This constructor assumes "as needed" for horizontal and vertical scroll policies.
@@ -94,7 +88,7 @@ public class FScrollPanel extends FScrollPane {
         innerPanel = (JPanel)getViewport().getView();
         innerPanel.setOpaque(false);
     }
-    
+
     /**
      * An extension of JScrollPane that can be used as a panel and supports using arrow buttons to scroll instead of scrollbars
      * 
@@ -104,7 +98,7 @@ public class FScrollPanel extends FScrollPane {
     public FScrollPanel(final Component view, boolean useArrowButtons0) {
         this(view, useArrowButtons0, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
-    
+
     /**
      * An extension of JScrollPane that can be used as a panel and supports using arrow buttons to scroll instead of scrollbars
      * 
@@ -124,7 +118,7 @@ public class FScrollPanel extends FScrollPane {
             getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         }
     }
-    
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -146,7 +140,7 @@ public class FScrollPanel extends FScrollPane {
             }
         }
     }
-    
+
     private void updateArrowButton(int dir, boolean[] visible) {
         ArrowButton arrowButton = arrowButtons[dir];
         if (!visible[dir]) {
@@ -155,14 +149,14 @@ public class FScrollPanel extends FScrollPane {
             }
             return;
         }
-        
+
         //determine bounds of button
         int x, y, w, h;
         final int panelWidth = getWidth();
         final int panelHeight = getHeight();
         final int arrowButtonSize = 18;
         final int cornerSize = arrowButtonSize - 1; //make borders line up
-        
+
         if (dir < 2) { //if button for horizontal scrolling
             y = 0;
             h = panelHeight;
@@ -189,7 +183,7 @@ public class FScrollPanel extends FScrollPane {
             y = (dir == 2 ? 0 : panelHeight - arrowButtonSize);
             h = arrowButtonSize;
         }
-        
+
         if (arrowButton == null) {
             switch (dir) {
                 case 0:
@@ -211,66 +205,39 @@ public class FScrollPanel extends FScrollPane {
         arrowButton.setSize(w, h);
         FAbsolutePositioner.SINGLETON_INSTANCE.show(arrowButton, this, x, y);
     }
-    
-    private abstract class ArrowButton extends JLabel implements ILocalRepaint {
-        private final SkinColor clrFore = FSkin.getColor(FSkin.Colors.CLR_TEXT);
-        private final SkinColor clrBack = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-        private final SkinColor d50 = clrBack.stepColor(-50);
-        private final SkinColor d10 = clrBack.stepColor(-10);
-        private final SkinColor l10 = clrBack.stepColor(10);
-        private final SkinColor l20 = clrBack.stepColor(20);
-        private final AlphaComposite alphaDefault = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f);
-        private final AlphaComposite alphaHovered = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.9f);
+
+    private abstract class ArrowButton extends FLabel {
         protected final int arrowSize = 6;
         private final JScrollBar scrollBar;
         private final int incrementDirection;
-        private boolean hovered;
 
         protected ArrowButton(final JScrollBar scrollBar0, final int incrementDirection0) {
-            super("");
+            super(new FLabel.ButtonBuilder());
             scrollBar = scrollBar0;
             incrementDirection = incrementDirection0;
             timer.setInitialDelay(500); //wait half a second after mouse down before starting timer
-            addMouseListener(madEvents);
         }
-        
+
         @Override
-        public void repaintSelf() {
-            final Dimension d = getSize();
-            repaint(0, 0, d.width, d.height);
+        protected void setPressed(boolean pressed0) {
+            super.setPressed(pressed0);
+            if (pressed0) {
+                scrollBar.setValue(scrollBar.getValue() + scrollBar.getUnitIncrement() * incrementDirection);
+                timer.start();
+            }
+            else {
+                timer.stop();
+            }
         }
-        
+
         @Override
-        public void paintComponent(final Graphics g) {
-            Graphics2D g2d = (Graphics2D)g;
-
-            int w = getWidth();
-            int h = getHeight();
-
-            g.setColor(Color.white); //draw white background before composite so not semi-transparent
-            g.fillRect(0, 0, w, h);
-
-            Composite oldComp = g2d.getComposite();
-            g2d.setComposite(hovered ? alphaHovered : alphaDefault);
-
-            FSkin.setGraphicsGradientPaint(g2d, 0, h, d10, 0, 0, l20);
-            g.fillRect(0, 0, w, h);
-
-            FSkin.setGraphicsColor(g, d50);
-            g.drawRect(0, 0, w - 1, h - 1);
-            FSkin.setGraphicsColor(g, l10);
-            g.drawRect(1, 1, w - 3, h - 3);
-
-            FSkin.setGraphicsColor(g, clrFore);
+        protected void paintContent(final Graphics2D g, int w, int h, final boolean paintPressedState) {
+            FSkin.setGraphicsColor(g, arrowColor);
             drawArrow(g);
-
-            super.paintComponent(g);
-
-            g2d.setComposite(oldComp);
         }
 
         protected abstract void drawArrow(final Graphics g);
-        
+
         //timer to continue scrollling while mouse remains down
         final Timer timer = new Timer(50, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -282,53 +249,19 @@ public class FScrollPanel extends FScrollPane {
                 scrollBar.setValue(scrollBar.getValue() + scrollBar.getUnitIncrement() * incrementDirection);
             }
         });
-
-        private final MouseAdapter madEvents = new MouseAdapter() {
-            @Override
-            public void mousePressed(final MouseEvent e) {
-                scrollBar.setValue(scrollBar.getValue() + scrollBar.getUnitIncrement() * incrementDirection);
-                timer.start();
-            }
-            
-            @Override
-            public void mouseReleased(final MouseEvent e) {
-                timer.stop();
-            }
-            
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                hovered = true;
-                repaintSelf();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                hovered = false;
-                repaintSelf();
-            }
-            
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                if (!hovered) {
-                    hovered = true;
-                    repaintSelf();
-                }
-            }
-        };
     }
-    
+
     private class LeftArrowButton extends ArrowButton {
         public LeftArrowButton(final JScrollBar horzScrollbar) {
             super(horzScrollbar, -1);
         }
-        
+
         @Override
         protected void drawArrow(final Graphics g) {
             int x = (getWidth() - arrowSize) / 2;
             int y2 = getHeight() / 2;
             int y1 = y2 - 1;
-            for (int i = 0; i < arrowSize; i++)
-            {
+            for (int i = 0; i < arrowSize; i++) {
                 g.drawLine(x, y1, x, y2);
                 x++;
                 y1--;
@@ -336,19 +269,18 @@ public class FScrollPanel extends FScrollPane {
             }
         }
     }
-    
+
     private class RightArrowButton extends ArrowButton {
         public RightArrowButton(final JScrollBar horzScrollbar) {
             super(horzScrollbar, 1);
         }
-        
+
         @Override
         protected void drawArrow(final Graphics g) {
             int x = (getWidth() + arrowSize) / 2;
             int y2 = getHeight() / 2;
             int y1 = y2 - 1;
-            for (int i = 0; i < arrowSize; i++)
-            {
+            for (int i = 0; i < arrowSize; i++) {
                 g.drawLine(x, y1, x, y2);
                 x--;
                 y1--;
@@ -356,19 +288,18 @@ public class FScrollPanel extends FScrollPane {
             }
         }
     }
-    
+
     private class TopArrowButton extends ArrowButton {
         public TopArrowButton(final JScrollBar vertScrollbar) {
             super(vertScrollbar, -1);
         }
-        
+
         @Override
         protected void drawArrow(final Graphics g) {
             int x2 = getWidth() / 2;
             int x1 = x2 - 1;
             int y = (getHeight() - arrowSize) / 2;
-            for (int i = 0; i < arrowSize; i++)
-            {
+            for (int i = 0; i < arrowSize; i++) {
                 g.drawLine(x1, y, x2, y);
                 x1--;
                 x2++;
@@ -376,19 +307,18 @@ public class FScrollPanel extends FScrollPane {
             }
         }
     }
-    
+
     private class BottomArrowButton extends ArrowButton {
         public BottomArrowButton(final JScrollBar vertScrollbar) {
             super(vertScrollbar, 1);
         }
-        
+
         @Override
         protected void drawArrow(final Graphics g) {
             int x2 = getWidth() / 2;
             int x1 = x2 - 1;
             int y = (getHeight() + arrowSize) / 2;
-            for (int i = 0; i < arrowSize; i++)
-            {
+            for (int i = 0; i < arrowSize; i++) {
                 g.drawLine(x1, y, x2, y);
                 x1--;
                 x2++;
@@ -405,7 +335,7 @@ public class FScrollPanel extends FScrollPane {
         }
         return super.add(comp);
     }
-    
+
     @Override
     public void add(PopupMenu popup) {
         if (innerPanel != null) {
@@ -414,7 +344,7 @@ public class FScrollPanel extends FScrollPane {
         }
         super.add(popup);
     }
-    
+
     @Override
     public void add(Component comp, Object constraints) {
         if (innerPanel != null) {
@@ -423,7 +353,7 @@ public class FScrollPanel extends FScrollPane {
         }
         super.add(comp, constraints);
     }
-    
+
     @Override
     public Component add(Component comp, int index) {
         if (innerPanel != null) {
@@ -431,7 +361,7 @@ public class FScrollPanel extends FScrollPane {
         }
         return super.add(comp, index);
     }
-    
+
     @Override
     public void add(Component comp, Object constraints, int index) {
         if (innerPanel != null) {
@@ -440,7 +370,7 @@ public class FScrollPanel extends FScrollPane {
         }
         super.add(comp, constraints, index);
     }
-    
+
     @Override
     public Component add(String name, Component comp) {
         if (innerPanel != null) {
