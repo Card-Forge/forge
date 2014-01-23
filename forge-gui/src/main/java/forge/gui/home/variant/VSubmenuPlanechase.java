@@ -154,7 +154,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
 
             tempPlanarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-            FScrollPane scrPlanes = new FScrollPane(tempPlanarDeckList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            FScrollPane scrPlanes = new FScrollPane(tempPlanarDeckList, true, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             tempPanel.add(scrPlanes, "h 90%, w 20%!, gap 0px 10px 0px 10px, growy, pushy, wrap");
             planarDeckLists.add(tempPlanarDeckList);
 

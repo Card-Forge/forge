@@ -139,7 +139,7 @@ public class DialogChooseSets {
         JPanel pnl = new JPanel(new MigLayout("center, wrap"));
         pnl.setOpaque(false);
         pnl.add(new FLabel.Builder().text(title).build());
-        pnl.add(new FScrollPane(cbl));
+        pnl.add(new FScrollPane(cbl, true));
         return pnl;
     }
     

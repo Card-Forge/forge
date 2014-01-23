@@ -89,8 +89,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             + "</html>";
 
     private final FHtmlViewer htmlOutput = new FHtmlViewer(DeckImport.HTML_WELCOME_TEXT);
-    private final FScrollPane scrollInput = new FScrollPane(this.txtInput);
-    private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput);
+    private final FScrollPane scrollInput = new FScrollPane(this.txtInput, false);
+    private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput, false);
     private final FLabel summaryMain = new FLabel.Builder().text("Imported deck summary will appear here").build();
     private final FLabel summarySide = new FLabel.Builder().text("Line for sideboard summary").build();
     private final FButton cmdAccept = new FButton("Import Deck");

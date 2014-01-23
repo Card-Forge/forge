@@ -134,7 +134,7 @@ public class CardDetailPanel extends FPanel {
         this.cdArea.setFont(new java.awt.Font("Dialog", 0, 14));
         this.cdArea.setBorder(new EmptyBorder(4, 4, 4, 4));
         this.cdArea.setOpaque(false);
-        this.scrArea = new FScrollPane(this.cdArea);
+        this.scrArea = new FScrollPane(this.cdArea, true);
 
         GridBagConstraints areaConstraints = new GridBagConstraints();
         areaConstraints.fill = GridBagConstraints.BOTH;

@@ -150,7 +150,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
 
                 archenemySchemes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-                FScrollPane scrSchemes = new FScrollPane(archenemySchemes, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                FScrollPane scrSchemes = new FScrollPane(archenemySchemes, true, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
                 tempPanel.add(scrSchemes, "h 90%, w 33%, gap 0px 10px 0px 10px, growy, pushy, wrap");
             }
 

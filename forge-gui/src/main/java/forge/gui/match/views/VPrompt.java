@@ -60,7 +60,7 @@ public enum VPrompt implements IVDoc<CPrompt> {
     private final JButton btnOK = new FButton("OK");
     private final JButton btnCancel = new FButton("Cancel");
     private final FHtmlViewer tarMessage = new FHtmlViewer();
-    private final FScrollPane messageScroller = new FScrollPane(tarMessage,
+    private final FScrollPane messageScroller = new FScrollPane(tarMessage, false,
     		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final JLabel lblGames;
 

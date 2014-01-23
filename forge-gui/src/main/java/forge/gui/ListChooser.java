@@ -103,7 +103,7 @@ public class ListChooser<T> {
             this.lstChoices.setCellRenderer(new TransformedCellRenderer(display));
         }
 
-        FScrollPane listScroller = new FScrollPane(this.lstChoices);
+        FScrollPane listScroller = new FScrollPane(this.lstChoices, true);
         int minWidth = this.lstChoices.getAutoSizeWidth();
         if (this.lstChoices.getModel().getSize() > this.lstChoices.getVisibleRowCount()) {
             minWidth += listScroller.getVerticalScrollBar().getPreferredSize().width;

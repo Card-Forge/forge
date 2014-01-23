@@ -78,7 +78,7 @@ public enum FNetOverlay {
         txtLog.setFocusable(true);
         txtLog.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
 
-        FScrollPane _operationLogScroller = new FScrollPane(txtLog);
+        FScrollPane _operationLogScroller = new FScrollPane(txtLog, false);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         new SmartScroller(_operationLogScroller);
         pnl.add(_operationLogScroller, "pushx, hmin 24, pushy, growy, growx, gap 2px 2px 2px 0, sx 2");

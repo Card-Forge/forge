@@ -39,15 +39,15 @@ public class AvatarSelector extends FDialog {
         	}
         }
 
-    	final int width = (int) (this.getOwner().getWidth() * .8);
-        final int height = (int) (this.getOwner().getHeight() * .8);
+    	final int width = this.getOwner().getWidth() * 3 / 4;
+        final int height = this.getOwner().getHeight() * 3 / 4;
         this.setPreferredSize(new Dimension(width, height));
         this.setSize(width, height);
 
-        FScrollPane scroller = new FScrollPane(pnlAvatarPics);
+        FScrollPane scroller = new FScrollPane(pnlAvatarPics, false);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        this.add(scroller, "w 90%!, pushy, growy, gap 5% 0 0 0");
-        initialSelection.requestFocusInWindow();
+        this.add(scroller, "w 100%-24px!, pushy, growy, gap 12px 0 0 0");
+        this.setDefaultFocus(initialSelection);
     }
 
     private FLabel makeAvatarLabel(final SkinImage img0, final int index0, final int oldIndex) {
@@ -62,7 +62,7 @@ public class AvatarSelector extends FDialog {
         lbl.setName("AvatarLabel" + index0);
 
         if (oldIndex == index0) {
-        	lbl.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS).alphaColor(255), 3));;
+        	lbl.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS).alphaColor(255), 3));
         }
 
         selectables.add(lbl);

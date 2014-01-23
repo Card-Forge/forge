@@ -51,7 +51,7 @@ public enum VAntes implements IVDoc<CAntes> {
     private final DragTab tab = new DragTab("Ante");
 
     private final JPanel pnl = new JPanel();
-    private final FScrollPane scroller = new FScrollPane(pnl);
+    private final FScrollPane scroller = new FScrollPane(pnl, false);
     private final SortedSet<AntePanel> allAntes = new TreeSet<AntePanel>();
 
     private Iterable<Player> players;

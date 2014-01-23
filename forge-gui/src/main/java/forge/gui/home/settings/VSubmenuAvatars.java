@@ -98,7 +98,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         pnlAvatars.removeAll();
         pnlAvatars.setLayout(new MigLayout("insets 0, gap 0"));
         pnlAvatars.add(pnlAvatarUsers, "w 90%!, h 150px!, wrap");
-        FScrollPane scroller = new FScrollPane(pnlAvatarPics);
+        FScrollPane scroller = new FScrollPane(pnlAvatarPics, true);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         pnlAvatars.add(scroller, "w 90%!, pushy, growy, gap 5% 0 0 0");
 

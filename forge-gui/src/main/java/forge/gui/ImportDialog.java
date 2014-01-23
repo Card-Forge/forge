@@ -127,7 +127,7 @@ public class ImportDialog {
             blurbPanelInterior.add(new FLabel.Builder().text(
                     "<html><b>Remember, your data won't be available until you complete this step!</b></html>").build(), "growx, w 50:50:");
             
-            FScrollPane blurbScroller = new FScrollPane(blurbPanelInterior,
+            FScrollPane blurbScroller = new FScrollPane(blurbPanelInterior, true,
                     ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             blurbPanel.add(blurbScroller, "hmin 150, growy, growx, center, gap 0 0 5 5");
             _topPanel.add(blurbPanel, "gap 10 10 20 0, growy, growx, w 50:50:");

@@ -73,7 +73,7 @@ public class ViewStall extends JPanel {
 
         this.tpnFluff = new SkinnedTextPane();
         this.pnlInventory = new JPanel();
-        this.scrInventory = new FScrollPane(this.pnlInventory);
+        this.scrInventory = new FScrollPane(this.pnlInventory, false);
         this.parentView = v0;
         this.lstItemPanels = new ArrayList<ViewItem>();
 

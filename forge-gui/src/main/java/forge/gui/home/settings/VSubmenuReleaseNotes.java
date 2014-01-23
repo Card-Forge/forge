@@ -69,7 +69,7 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
         tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         tar.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        scroller = new FScrollPane(tar);
+        scroller = new FScrollPane(tar, true);
         pnlMain.add(scroller, "w 100%!, h 100%!");
     }
 

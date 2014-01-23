@@ -50,7 +50,7 @@ public class ViewWinLose {
 
         final JPanel pnlLeft = new JPanel();
         final JPanel pnlRight = new JPanel();
-        final FScrollPane scrCustom = new FScrollPane();
+        final FScrollPane scrCustom = new FScrollPane(false);
         pnlCustom = new SkinnedPanel();
 
         btnContinue = new FButton();
@@ -152,7 +152,7 @@ public class ViewWinLose {
         pnlLeft.add(pnlButtons, "w 100%!");
 
         final JPanel pnlLog = new JPanel(new MigLayout("insets 0, wrap, ax center"));
-        final FScrollPane scrLog = new FScrollPane(txtLog);
+        final FScrollPane scrLog = new FScrollPane(txtLog, false);
         pnlLog.setOpaque(false);
 
         pnlLog.add(

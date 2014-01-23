@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
@@ -50,8 +49,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         .opaque(true).fontSize(16).build();
 
     private final JPanel pnlContent = new JPanel();
-    private final FScrollPane scrContent = new FScrollPane(pnlContent, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    private final FScrollPane scrContent = new FScrollPane(pnlContent, false);
 
     private final JPanel pnlRewards = new JPanel();
     private final JPanel pnlDifficulty = new JPanel();

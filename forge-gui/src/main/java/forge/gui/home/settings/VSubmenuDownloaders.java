@@ -45,7 +45,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
     /** */
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap, ay center"));
-    private final FScrollPane scrContent = new FScrollPane(pnlContent);
+    private final FScrollPane scrContent = new FScrollPane(pnlContent, false);
 
     private final FLabel btnDownloadSetPics     = _makeButton("Download LQ Set Pictures");
     private final FLabel btnDownloadPics        = _makeButton("Download LQ Card Pictures");
@@ -173,7 +173,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
     public void showHowToPlay() {
         FTextArea directions = new FTextArea(FileUtil.readFileToString(NewConstants.TEXT_HOWTO_FILE));
-        final FScrollPane scr = new FScrollPane(directions, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+        final FScrollPane scr = new FScrollPane(directions, false, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         _showDialog(scr, new Runnable() {

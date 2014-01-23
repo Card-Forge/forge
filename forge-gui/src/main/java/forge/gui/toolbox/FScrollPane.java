@@ -25,26 +25,31 @@ public class FScrollPane extends SkinnedScrollPane {
     private static final SkinColor arrowColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private final ArrowButton[] arrowButtons;
 
-    public FScrollPane() {
-        this(null);
+    public FScrollPane(boolean showBorder0) {
+        this(null, showBorder0);
     }
-    public FScrollPane(final Component c0) {
-        this(c0, false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    public FScrollPane(final Component c0, boolean showBorder0) {
+        this(c0, showBorder0, false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
-    public FScrollPane(final Component c0, boolean useArrowButtons0) {
-        this(c0, useArrowButtons0, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    public FScrollPane(final Component c0, boolean showBorder0, boolean useArrowButtons0) {
+        this(c0, showBorder0, useArrowButtons0, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
-    public FScrollPane(final Component c0, final int vertical0, final int horizontal0) {
-        this(c0, false, vertical0, horizontal0);
+    public FScrollPane(final Component c0, boolean showBorder0, final int vertical0, final int horizontal0) {
+        this(c0, showBorder0, false, vertical0, horizontal0);
     }
-    public FScrollPane(final Component c0, boolean useArrowButtons0, final int vertical0, final int horizontal0) {
+    public FScrollPane(final Component c0, boolean showBorder0, boolean useArrowButtons0, final int vertical0, final int horizontal0) {
         super(c0, vertical0, horizontal0);
 
         getVerticalScrollBar().setUnitIncrement(16);
         getHorizontalScrollBar().setUnitIncrement(16);
         getViewport().setOpaque(false);
         setOpaque(false);
-        setBorder((Border)null);
+        if (showBorder0) {
+            setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
+        }
+        else {
+            setBorder((Border)null);
+        }
         if (useArrowButtons0) {
             //ensure scrollbar aren't shown
             getHorizontalScrollBar().setPreferredSize(new Dimension(0, 0));

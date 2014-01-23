@@ -56,7 +56,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     /** */
     private final JPanel pnlPrefs = new JPanel();
-    private final FScrollPane scrContent = new FScrollPane(pnlPrefs,
+    private final FScrollPane scrContent = new FScrollPane(pnlPrefs, false,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text("Reset to Default Settings").build();

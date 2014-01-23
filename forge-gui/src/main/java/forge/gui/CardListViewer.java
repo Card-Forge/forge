@@ -114,7 +114,7 @@ public class CardListViewer extends FDialog {
         });
 
         this.add(new FLabel.Builder().text(message).build(), "cell 0 0, spanx 3, gapbottom 4");
-        this.add(new FScrollPane(this.jList), "cell 0 1, w 225, growy, pushy, ax c");
+        this.add(new FScrollPane(this.jList, true), "cell 0 1, w 225, growy, pushy, ax c");
         this.add(this.picture, "cell 1 1, w 225, growy, pushy, ax c");
         this.add(this.detail, "cell 2 1, w 225, growy, pushy, ax c");
         this.add(btnOK, "cell 1 2, w 150, h 26, ax c, gaptop 6");

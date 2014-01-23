@@ -76,7 +76,7 @@ public class GameLogPanel extends JPanel {
      * characteristics for the list of {@code JTextArea} log entries.
      */
     private void addNewScrollPane() {
-        scrollPane = new FScrollPane();
+        scrollPane = new FScrollPane(false);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getViewport().add(scrollablePanel);

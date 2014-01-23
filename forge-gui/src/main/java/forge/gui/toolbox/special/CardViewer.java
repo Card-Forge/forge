@@ -61,7 +61,7 @@ public class CardViewer extends JPanel {
         this.detail = new CardDetailPanel(null);
         this.picture = new CardPicturePanel();
 
-        this.add(new FScrollPane(this.jList));
+        this.add(new FScrollPane(this.jList, true));
         this.add(this.picture);
         this.add(this.detail);
         this.setLayout(new java.awt.GridLayout(1, 3, 6, 0));

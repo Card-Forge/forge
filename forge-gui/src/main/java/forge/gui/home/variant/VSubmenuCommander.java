@@ -156,7 +156,7 @@ public enum VSubmenuCommander implements IVSubmenu<CSubmenuCommander> {
 
             tempPanel.add(typeBtnPanel);
             
-            FScrollPane scrDecks = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            FScrollPane scrDecks = new FScrollPane(tempList, true, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             tempPanel.add(scrDecks, "w 55%!, h 90%, gap 0px 10px 0px 10px, growy, pushy, wrap");
 
             playerPanels.add(tempPanel);

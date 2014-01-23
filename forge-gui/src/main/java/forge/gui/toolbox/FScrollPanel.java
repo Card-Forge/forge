@@ -43,7 +43,7 @@ public class FScrollPanel extends FScrollPane {
         this(layout, useArrowButtons0, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
     public FScrollPanel(final LayoutManager layout, boolean useArrowButtons0, final int vertical0, final int horizontal0) {
-        super(new JPanel(layout), useArrowButtons0, vertical0, horizontal0);
+        super(new JPanel(layout), false, useArrowButtons0, vertical0, horizontal0);
         innerPanel = (JPanel)getViewport().getView();
         innerPanel.setOpaque(false);
     }

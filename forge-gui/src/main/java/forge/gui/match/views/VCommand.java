@@ -46,7 +46,7 @@ public class VCommand implements IVDoc<CCommand> {
     private Player player = null;
 
     // Top-level containers
-    private final FScrollPane scroller = new FScrollPane();
+    private final FScrollPane scroller = new FScrollPane(false);
     private final PlayArea tabletop;
 
     //========= Constructor

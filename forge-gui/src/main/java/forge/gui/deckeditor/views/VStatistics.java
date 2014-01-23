@@ -69,7 +69,7 @@ public enum VStatistics implements IVDoc<CStatistics> {
     private final FLabel lblCMC6 = buildLabel(SItemManagerUtil.StatTypes.CMC_6, true);
 
     // Layout containers
-    private final FScrollPane scroller = new FScrollPane(pnlStats);
+    private final FScrollPane scroller = new FScrollPane(pnlStats, false);
 
     //========== Constructor
     private VStatistics() {

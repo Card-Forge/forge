@@ -35,7 +35,7 @@ public enum VSubmenuGauntletLoad implements IVSubmenu<CSubmenuGauntletLoad> {
 
     private final QuickGauntletLister gauntletList = new QuickGauntletLister();
 
-    private final FScrollPane scrLoad = new FScrollPane(gauntletList);
+    private final FScrollPane scrLoad = new FScrollPane(gauntletList, false);
 
     private final FLabel lblDesc = new FLabel.Builder().text(
             "Load a previous gauntlet (uses the deck with which it was started).")

@@ -61,7 +61,7 @@ public class VField implements IVDoc<CField> {
     private Player player = null;
 
     // Top-level containers
-    private final FScrollPane scroller = new FScrollPane();
+    private final FScrollPane scroller = new FScrollPane(false);
     private final PlayArea tabletop;
     private final SkinnedPanel avatarArea = new SkinnedPanel();
 

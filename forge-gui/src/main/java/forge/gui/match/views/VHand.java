@@ -42,7 +42,7 @@ public class VHand implements IVDoc<CHand> {
 
 
     // Top-level containers
-    private final FScrollPane scroller = new FScrollPane();
+    private final FScrollPane scroller = new FScrollPane(false);
     private final HandArea hand = new HandArea(scroller);
 
     //========= Constructor

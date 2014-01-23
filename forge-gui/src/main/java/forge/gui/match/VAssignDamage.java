@@ -176,7 +176,7 @@ public class VAssignDamage {
         final String wrap = "wrap " +  Integer.toString(cols);
         pnlDefenders.setLayout(new MigLayout("insets 0, gap 0, ax center, " + wrap));
 
-        final FScrollPane scrDefenders = new FScrollPane(pnlDefenders);
+        final FScrollPane scrDefenders = new FScrollPane(pnlDefenders, false);
 
         // Top row of cards...
         for (final Card c : defenderCards) {

@@ -153,7 +153,7 @@ public class DualListBox<T> extends FDialog {
         FPanel leftPanel = new FPanel(new BorderLayout());
         selectOrder = new FLabel.Builder().text("Select Order:").build();
         leftPanel.add(selectOrder, BorderLayout.NORTH);
-        leftPanel.add(new FScrollPane(sourceList), BorderLayout.CENTER);
+        leftPanel.add(new FScrollPane(sourceList, true), BorderLayout.CENTER);
         leftPanel.add(okButton, BorderLayout.SOUTH);
 
         FPanel centerPanel = new FPanel(new GridLayout(6, 1));
@@ -170,7 +170,7 @@ public class DualListBox<T> extends FDialog {
 
         FPanel rightPanel = new FPanel(new BorderLayout());
         rightPanel.add(orderedLabel, BorderLayout.NORTH);
-        rightPanel.add(new FScrollPane(destList), BorderLayout.CENTER);
+        rightPanel.add(new FScrollPane(destList, true), BorderLayout.CENTER);
         rightPanel.add(autoButton, BorderLayout.SOUTH);
 
         add(leftPanel, "w 250, h 300");

@@ -67,7 +67,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     private FCheckBox chbCardDisplayUnique = new FCheckBox("Show unique cards only (only affects Constructed)");
 
     private JPanel pnl = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, ax left"));
-    private FScrollPane scroller = new FScrollPane(pnl);
+    private FScrollPane scroller = new FScrollPane(pnl, false);
 
     //========== Constructor
     private VEditorPreferences() {

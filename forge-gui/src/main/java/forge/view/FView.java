@@ -208,7 +208,7 @@ public enum FView {
                             files.setWrapStyleWord(true);
                             files.setLineWrap(true);
                             files.setEditable(false);
-                            FScrollPane scroller = new FScrollPane(files);
+                            FScrollPane scroller = new FScrollPane(files, true);
                             p.add(scroller, "w 600:100%:100%, h 100:100%:100%, gaptop 10");
                             
                             SwingUtilities.invokeLater(new Runnable() {

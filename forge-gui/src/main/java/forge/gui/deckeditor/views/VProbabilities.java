@@ -49,7 +49,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
 
     // Layout containers
     private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
-    private final FScrollPane scroller = new FScrollPane(pnlContent);
+    private final FScrollPane scroller = new FScrollPane(pnlContent, false);
     private final JPanel pnlHand = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JPanel pnlLibrary = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
 

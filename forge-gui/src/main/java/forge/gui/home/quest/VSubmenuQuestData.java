@@ -66,7 +66,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             .fontAlign(SwingConstants.CENTER).fontSize(12).build();
 
     private final QuestFileLister lstQuests = new QuestFileLister();
-    private final FScrollPane scrQuests = new FScrollPane(lstQuests);
+    private final FScrollPane scrQuests = new FScrollPane(lstQuests, false);
     private final JPanel pnlOptions = new JPanel();
 
     /* Fist column */
