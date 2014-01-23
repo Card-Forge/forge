@@ -157,7 +157,7 @@ public class GameLogPanel extends JPanel {
         tar.setWrapStyleWord(true);
         tar.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
-        FSkin.SkinColor skinColor = FSkin.getColor(FSkin.Colors.CLR_THEME2);
+        FSkin.SkinColor skinColor = FSkin.getColor(FSkin.Colors.CLR_ZEBRA);
         if (useAlternateBackColor) { skinColor = skinColor.darker(); }
         tar.setOpaque(true);
         tar.setBackground(skinColor);
