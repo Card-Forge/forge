@@ -386,6 +386,8 @@ public class CountersPutAi extends SpellAbilityAi {
                     if (!canBlock.isEmpty()) {
                         return false;
                     }
+                } else if (logic.equals("DontControlCreatures")) {
+                    return !creats.isEmpty();
                 }
             }
         }
