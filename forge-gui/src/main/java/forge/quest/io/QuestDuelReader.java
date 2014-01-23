@@ -5,7 +5,7 @@ import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Map;
 
-import forge.ImageCache;
+import forge.ImageKeys;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.quest.QuestEvent;
@@ -33,7 +33,7 @@ public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
         qc.setDifficulty(QuestEventDifficulty.fromString(sectionMeta.get("Difficulty")));
         qc.setDescription(sectionMeta.get("Description"));
         qc.setCardReward(sectionMeta.get("Card Reward"));
-        qc.setIconImageKey(ImageCache.ICON_PREFIX + sectionMeta.get("Icon"));
+        qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon"));
 
         // Deck
         qc.setEventDeck(Deck.fromSections(contents));

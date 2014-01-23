@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import forge.ImageCache;
+import forge.ImageKeys;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.properties.NewConstants;
@@ -59,7 +59,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         qc.setName(qc.getTitle()); // Challenges have unique titles
         qc.setDifficulty(QuestEventDifficulty.fromString(sectionMeta.get("Difficulty")));
         qc.setDescription(sectionMeta.get("Description"));
-        qc.setIconImageKey(ImageCache.ICON_PREFIX + sectionMeta.get("Icon"));
+        qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon"));
 
         // Deck
         qc.setEventDeck(Deck.fromSections(contents));

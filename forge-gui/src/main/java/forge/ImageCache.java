@@ -32,22 +32,19 @@ import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
+import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.game.card.Card;
 import forge.game.player.IHasIcon;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinIcon;
-import forge.item.BoosterPack;
 import forge.item.PaperCard;
-import forge.item.PaperToken;
-import forge.item.FatPack;
 import forge.item.InventoryItem;
-import forge.item.PreconDeck;
-import forge.item.TournamentPack;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.util.Base64Coder;
+import forge.util.TextUtil;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -65,13 +62,7 @@ import forge.util.Base64Coder;
  */
 public class ImageCache {
     // short prefixes to save memory
-    public static final String TOKEN_PREFIX          = "t:";
-    public static final String ICON_PREFIX           = "i:";
-    public static final String BOOSTER_PREFIX        = "b:";
-    public static final String FATPACK_PREFIX        = "f:";
-    public static final String PRECON_PREFIX         = "p:";
-    public static final String TOURNAMENTPACK_PREFIX = "o:";
-    
+
     private static final Set<String> _missingIconKeys = new HashSet<String>();
     private static final LoadingCache<String, BufferedImage> _CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
     private static final BufferedImage _defaultImage;
@@ -105,7 +96,7 @@ public class ImageCache {
     public static BufferedImage getImage(Card card, int width, int height) {
         final String key;
         if (!Singletons.getControl().mayShowCard(card) || card.isFaceDown()) {
-            key = TOKEN_PREFIX + NewConstants.CACHE_MORPH_IMAGE_FILE;
+            key = ImageKeys.TOKEN_PREFIX + ImageKeys.MORPH_IMAGE;
         } else {
             key = card.getImageKey();
         }
@@ -117,7 +108,7 @@ public class ImageCache {
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(InventoryItem ii, int width, int height) {
-        return scaleImage(getImageKey(ii, false), width, height, true);
+        return scaleImage(ImageKeys.getImageKey(ii, false), width, height, true);
     }
     
     /**
@@ -145,6 +136,13 @@ public class ImageCache {
      */
     public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound) {
 
+        boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
+        if(altState)
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
+        if (imageKey.startsWith(ImageKeys.CARD_PREFIX))
+            imageKey = getImageKey(getPaperCardFromImageKey(imageKey.substring(2)), altState, true);
+
+        
         // Load from file and add to cache if not found in cache initially. 
         BufferedImage original = getImage(imageKey);
         
@@ -160,6 +158,34 @@ public class ImageCache {
         }
                 
         return original;
+    }
+    
+    private static PaperCard getPaperCardFromImageKey(String key) {
+        if( key == null )
+            return null;
+
+        PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(key);
+        if ( cp == null )
+            cp = StaticData.instance().getVariantCards().tryGetCard(key);
+        if( cp != null ) 
+            return cp;
+        
+        // try to remove art index
+        if( key.charAt(key.length() - 2) == '|') {
+            key = key.substring(0, key.length() - 2);
+            cp = StaticData.instance().getCommonCards().tryGetCard(key);
+            if ( cp == null )
+                cp = StaticData.instance().getVariantCards().tryGetCard(key);
+            if( cp != null ) 
+                return cp;
+        }
+
+        // try only name
+        key = TextUtil.split(key, '|')[0];
+        cp = StaticData.instance().getCommonCards().tryGetCard(key);
+        if ( cp == null )
+            cp = StaticData.instance().getVariantCards().tryGetCard(key);
+        return cp;
     }
 
     private static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage) {
@@ -228,35 +254,11 @@ public class ImageCache {
         }
     }
     
-    // Inventory items don't have to know how a certain client should draw them. 
-    // That's why this method is not encapsulated and overloaded in the InventoryItem descendants
-    public static String getImageKey(InventoryItem ii, boolean altState) {
-        if ( ii instanceof PaperCard )
-            return getImageKey((PaperCard)ii, altState, true);
-        if ( ii instanceof TournamentPack )
-            return ImageCache.TOURNAMENTPACK_PREFIX + ((TournamentPack)ii).getEdition();
-        if ( ii instanceof BoosterPack ) {
-            BoosterPack bp = (BoosterPack)ii;
-            int cntPics = Singletons.getMagicDb().getEditions().get(bp.getEdition()).getCntBoosterPictures();
-            String suffix = (1 >= cntPics) ? "" : ("_" + bp.getArtIndex());
-            return ImageCache.BOOSTER_PREFIX + bp.getEdition() + suffix;
-        }
-        if ( ii instanceof FatPack )
-            return ImageCache.FATPACK_PREFIX + ((FatPack)ii).getEdition();
-        if ( ii instanceof PreconDeck )
-            return ImageCache.PRECON_PREFIX + ((PreconDeck)ii).getImageFilename();
-        if ( ii instanceof PaperToken ) 
-            return ImageCache.TOKEN_PREFIX + ((PaperToken)ii).getImageFilename();
-        return null;
-    }
 
-    public static String getTokenImageKey(String tokenName) {
-        return TOKEN_PREFIX + tokenName;
-    }
 
 
     
-    private static String getImageLocator(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
+    private static String getImageRelativePath(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
         final String nameToUse = getNameToUse(cp, backFace);
         if ( null == nameToUse )
             return null;
@@ -269,8 +271,9 @@ public class ImageCache {
         
         final int cntPictures;
         final boolean hasManyPictures;
+        final CardDb db =  !card.isVariant() ? Singletons.getMagicDb().getCommonCards() : Singletons.getMagicDb().getVariantCards();
         if (includeSet) {
-            cntPictures = !card.isVariant() ? Singletons.getMagicDb().getCommonCards().getPrintCount(card.getName(), edition) : Singletons.getMagicDb().getVariantCards().getPrintCount(card.getName(), edition); 
+            cntPictures = db.getPrintCount(card.getName(), edition); 
             hasManyPictures = cntPictures > 1;
         } else {
             // without set number of pictures equals number of urls provided in Svar:Picture
@@ -278,7 +281,7 @@ public class ImageCache {
             cntPictures = StringUtils.countMatches(urls, "\\") + 1;
 
             // raise the art index limit to the maximum of the sets this card was printed in
-            int maxCntPictures = !card.isVariant() ? Singletons.getMagicDb().getCommonCards().getMaxPrintCount(card.getName()) : Singletons.getMagicDb().getVariantCards().getMaxPrintCount(card.getName());
+            int maxCntPictures = db.getMaxPrintCount(card.getName());
             hasManyPictures = maxCntPictures > 1;
         }
         
@@ -336,11 +339,11 @@ public class ImageCache {
     }
     
     public static String getImageKey(PaperCard cp, boolean backFace, boolean includeSet) {
-        return getImageLocator(cp, backFace, includeSet, false);
+        return getImageRelativePath(cp, backFace, includeSet, false);
     }
 
     public static String getDownloadUrl(PaperCard cp, boolean backFace) {
-        return getImageLocator(cp, backFace, true, true);
+        return getImageRelativePath(cp, backFace, true, true);
     }    
     
     public static String toMWSFilename(String in) {

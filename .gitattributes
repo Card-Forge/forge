@@ -122,6 +122,7 @@ forge-game/pom.xml -text
 forge-game/src/main/java/forge/Command.java svneol=native#text/plain
 forge-game/src/main/java/forge/Constant.java svneol=native#text/plain
 forge-game/src/main/java/forge/Dependencies.java -text
+forge-game/src/main/java/forge/ImageKeys.java -text
 forge-game/src/main/java/forge/ai/AiAttackController.java svneol=native#text/plain
 forge-game/src/main/java/forge/ai/AiBlockController.java svneol=native#text/plain
 forge-game/src/main/java/forge/ai/AiController.java svneol=native#text/plain
@@ -15205,7 +15206,6 @@ forge-gui/src/main/html/js/observable.js -text
 forge-gui/src/main/html/js/socket.js -text
 forge-gui/src/main/java/forge/FThreads.java -text
 forge-gui/src/main/java/forge/ImageCache.java svneol=native#text/plain
-forge-gui/src/main/java/forge/ImageCacheProvider.java -text
 forge-gui/src/main/java/forge/ImageLoader.java -text
 forge-gui/src/main/java/forge/PreferencesProvider.java -text
 forge-gui/src/main/java/forge/Singletons.java svneol=native#text/plain

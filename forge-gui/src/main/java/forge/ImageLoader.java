@@ -26,23 +26,23 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
         
         final String path;
         final String filename;
-        if (key.startsWith(ImageCache.TOKEN_PREFIX)) {
-            filename = key.substring(ImageCache.TOKEN_PREFIX.length());
+        if (key.startsWith(ImageKeys.TOKEN_PREFIX)) {
+            filename = key.substring(ImageKeys.TOKEN_PREFIX.length());
             path = NewConstants.CACHE_TOKEN_PICS_DIR;
-        } else if (key.startsWith(ImageCache.ICON_PREFIX)) {
-            filename = key.substring(ImageCache.ICON_PREFIX.length());
+        } else if (key.startsWith(ImageKeys.ICON_PREFIX)) {
+            filename = key.substring(ImageKeys.ICON_PREFIX.length());
             path = NewConstants.CACHE_ICON_PICS_DIR;
-        } else if (key.startsWith(ImageCache.BOOSTER_PREFIX)) {
-            filename = key.substring(ImageCache.BOOSTER_PREFIX.length());
+        } else if (key.startsWith(ImageKeys.BOOSTER_PREFIX)) {
+            filename = key.substring(ImageKeys.BOOSTER_PREFIX.length());
             path = NewConstants.CACHE_BOOSTER_PICS_DIR;
-        } else if (key.startsWith(ImageCache.FATPACK_PREFIX)) {
-            filename = key.substring(ImageCache.FATPACK_PREFIX.length());
+        } else if (key.startsWith(ImageKeys.FATPACK_PREFIX)) {
+            filename = key.substring(ImageKeys.FATPACK_PREFIX.length());
             path = NewConstants.CACHE_FATPACK_PICS_DIR;
-        } else if (key.startsWith(ImageCache.PRECON_PREFIX)) {
-            filename = key.substring(ImageCache.PRECON_PREFIX.length());
+        } else if (key.startsWith(ImageKeys.PRECON_PREFIX)) {
+            filename = key.substring(ImageKeys.PRECON_PREFIX.length());
             path = NewConstants.CACHE_PRECON_PICS_DIR;
-        } else if (key.startsWith(ImageCache.TOURNAMENTPACK_PREFIX)) {
-            filename = key.substring(ImageCache.TOURNAMENTPACK_PREFIX.length());
+        } else if (key.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX)) {
+            filename = key.substring(ImageKeys.TOURNAMENTPACK_PREFIX.length());
             path = NewConstants.CACHE_TOURNAMENTPACK_PICS_DIR;
         } else {
             filename = key;

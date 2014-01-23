@@ -17,8 +17,6 @@
  */
 package forge.view;
 
-
-import forge.ImageCacheProvider;
 import forge.PreferencesProvider;
 import forge.Singletons;
 import forge.net.FServer;
@@ -38,7 +36,6 @@ public final class Main {
         System.setProperty("sun.java2d.d3d", "false");
 
         forge.Dependencies.preferences = new PreferencesProvider();
-        forge.Dependencies.imagecache = new ImageCacheProvider();
         
         // Start splash screen first, then data models, then controller.
         if (args.length == 0) {

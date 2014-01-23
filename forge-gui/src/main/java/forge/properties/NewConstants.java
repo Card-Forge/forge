@@ -103,7 +103,6 @@ public final class NewConstants {
     public static final String CACHE_PRECON_PICS_DIR         = _PICS_DIR + "precons/";
     public static final String CACHE_TOURNAMENTPACK_PICS_DIR = _PICS_DIR + "tournamentpacks/";
     public static final String QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";
-    public static final String CACHE_MORPH_IMAGE_FILE        = "morph";
 
     public static final String[] PROFILE_DIRS = {
             USER_DIR,

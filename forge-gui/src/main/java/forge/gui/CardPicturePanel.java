@@ -24,6 +24,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import forge.ImageCache;
+import forge.ImageKeys;
 import forge.Singletons;
 import forge.card.CardCharacteristicName;
 import forge.game.card.Card;
@@ -88,7 +89,7 @@ public final class CardPicturePanel extends JPanel {
 
         if (displayed instanceof InventoryItem) {
             InventoryItem item = (InventoryItem) displayed;
-            image = ImageCache.getOriginalImage(ImageCache.getImageKey(item, false), true);
+            image = ImageCache.getOriginalImage(ImageKeys.getImageKey(item, false), true);
 
         } else if (displayed instanceof Card) {
             image = FImageUtil.getImage((Card)displayed);
