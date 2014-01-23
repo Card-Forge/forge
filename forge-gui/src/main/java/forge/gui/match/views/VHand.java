@@ -18,8 +18,6 @@
 package forge.gui.match.views;
 
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.game.player.Player;
 import forge.gui.framework.DragCell;
@@ -64,7 +62,6 @@ public class VHand implements IVDoc<CHand> {
             tab.setText(owner.getName() + " Hand");
         }
 
-        scroller.setBorder((Border)null);
         scroller.setViewportView(VHand.this.hand);
 
         hand.setOpaque(false);

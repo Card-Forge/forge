@@ -23,8 +23,6 @@ import java.util.TreeSet;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -61,7 +59,6 @@ public enum VAntes implements IVDoc<CAntes> {
     private VAntes() {
         pnl.setLayout(new WrapLayout());
         pnl.setOpaque(false);
-        scroller.setBorder((Border)null);
     }
 
     //========== Overridden methods

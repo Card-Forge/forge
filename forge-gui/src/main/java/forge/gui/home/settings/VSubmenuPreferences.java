@@ -17,8 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
@@ -231,8 +229,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             pnlPrefs.add(field, "w 25%!");
             shortcutFields.put(s.getPrefKey(), field);
         }
-
-        scrContent.setBorder((Border)null);
     }
 
     public void reloadShortcuts() {

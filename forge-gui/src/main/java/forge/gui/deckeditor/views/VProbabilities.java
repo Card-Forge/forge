@@ -8,8 +8,6 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -60,7 +58,6 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
         pnlContent.setOpaque(false);
         pnlHand.setOpaque(false);
         pnlLibrary.setOpaque(false);
-        scroller.setBorder((Border)null);
         scroller.getViewport().setBorder(null);
 
         lblSampleHand.setBorder(new FSkin.MatteSkinBorder(1, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));

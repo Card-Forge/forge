@@ -15,7 +15,6 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.Scrollable;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.LayerUI;
 
@@ -80,7 +79,6 @@ public class GameLogPanel extends JPanel {
         scrollPane = new FScrollPane();
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBorder((Border)null);
         scrollPane.getViewport().add(scrollablePanel);
         layer = new JLayer<FScrollPane>(scrollPane, layerUI);
         this.add(layer, "w 10:100%, h 100%");

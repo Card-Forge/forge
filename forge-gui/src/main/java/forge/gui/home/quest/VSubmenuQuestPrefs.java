@@ -132,9 +132,6 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         pnlContent.add(pnlTitleShop, "w 96%!, h 36px!, gap 2% 0 10px 10px");
         pnlContent.add(pnlShop, "w 96%!, gap 2% 0 10px 20px");
         populateShop();
-
-        scrContent.setBorder((Border)null);
-
     }
 
     /* (non-Javadoc)

@@ -2,8 +2,6 @@ package forge.gui.deckeditor.views;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.deckeditor.controllers.CEditorPreferences;
 import forge.gui.framework.DragCell;
@@ -136,7 +134,6 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
         pnl.add(chbCardDisplayUnique, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
 
         pnl.setOpaque(false);
-        scroller.setBorder((Border)null);
         scroller.getViewport().setBorder(null);
     }
 

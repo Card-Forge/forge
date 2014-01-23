@@ -9,8 +9,6 @@ import java.awt.datatransfer.StringSelection;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
@@ -86,7 +84,6 @@ public class ViewWinLose {
         pnlLeft.setOpaque(false);
         pnlRight.setOpaque(false);
         pnlCustom.setOpaque(false);
-        scrCustom.setBorder((Border)null);
         scrCustom.getViewport().add(pnlCustom);
 
         lblTitle.setForeground(Color.white);
@@ -156,7 +153,6 @@ public class ViewWinLose {
 
         final JPanel pnlLog = new JPanel(new MigLayout("insets 0, wrap, ax center"));
         final FScrollPane scrLog = new FScrollPane(txtLog);
-        scrLog.setBorder((Border)null);
         pnlLog.setOpaque(false);
 
         pnlLog.add(

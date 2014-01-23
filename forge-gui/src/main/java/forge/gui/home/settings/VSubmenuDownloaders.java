@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.gui.SOverlayUtils;
@@ -90,8 +88,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         pnlContent.add(btnLicensing, constraintsBTN);
         pnlContent.add(_makeLabel("Forge legal."), constraintsLBL);
-
-        scrContent.setBorder((Border)null);
     }
 
     /* (non-Javadoc)
@@ -179,7 +175,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         FTextArea directions = new FTextArea(FileUtil.readFileToString(NewConstants.TEXT_HOWTO_FILE));
         final FScrollPane scr = new FScrollPane(directions, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scr.setBorder((Border)null);
 
         _showDialog(scr, new Runnable() {
             @Override public void run() { scr.getViewport().setViewPosition(new Point(0, 0)); }

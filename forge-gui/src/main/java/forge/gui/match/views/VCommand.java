@@ -18,8 +18,6 @@
 package forge.gui.match.views;
 
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -76,8 +74,6 @@ public class VCommand implements IVDoc<CCommand> {
         tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
-        scroller.setBorder((Border)null);
-
     }
 
     //========= Overridden methods

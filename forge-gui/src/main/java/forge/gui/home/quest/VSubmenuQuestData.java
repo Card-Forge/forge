@@ -9,7 +9,6 @@ import java.util.Map;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import net.miginfocom.swing.MigLayout;
@@ -179,25 +178,23 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         public void actionPerformed(ActionEvent e) {
             updateEnableFormats();
         }
-     };
-
+    };
 
     /**
      * Aux function for enabling or disabling the format selection according to world selection.
      */
-     private void updateEnableFormats() {
-         final QuestWorld qw = Singletons.getModel().getWorlds().get(getStartingWorldName());
-         if (qw != null) {
-             cbxStartingPool.setEnabled(qw.getFormat() == null);
-             cbxFormat.setEnabled(qw.getFormat() == null);
-             cbxCustomDeck.setEnabled(qw.getFormat() == null);
-             // Do NOT disable the following...
-             // cbxPrizeFormat.setEnabled(qw.getFormat() == null);
-             // cboAllowUnlocks.setEnabled(qw.getFormat() == null);
-             // cbxPrizedCards.setEnabled(qw.getFormat() == null);
-
-         }
-     }
+    private void updateEnableFormats() {
+        final QuestWorld qw = Singletons.getModel().getWorlds().get(getStartingWorldName());
+        if (qw != null) {
+            cbxStartingPool.setEnabled(qw.getFormat() == null);
+            cbxFormat.setEnabled(qw.getFormat() == null);
+            cbxCustomDeck.setEnabled(qw.getFormat() == null);
+            // Do NOT disable the following...
+            // cbxPrizeFormat.setEnabled(qw.getFormat() == null);
+            // cboAllowUnlocks.setEnabled(qw.getFormat() == null);
+            // cbxPrizedCards.setEnabled(qw.getFormat() == null);
+        }
+    }
 
     /**
      * Constructor.
@@ -206,8 +203,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private VSubmenuQuestData() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         lblTitleNew.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
-        scrQuests.setBorder((Border)null);
 
         final JXButtonPanel difficultyPanel = new JXButtonPanel();
         final String difficulty_constraints = "h 27px!, gapbottom 5";

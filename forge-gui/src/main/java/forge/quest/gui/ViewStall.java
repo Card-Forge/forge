@@ -94,7 +94,6 @@ public class ViewStall extends JPanel {
 
         this.pnlInventory.setOpaque(false);
 
-        this.scrInventory.setBorder((Border)null);
         this.scrInventory.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.scrInventory.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 

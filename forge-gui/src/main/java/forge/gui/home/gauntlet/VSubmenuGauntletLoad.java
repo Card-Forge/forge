@@ -2,8 +2,6 @@ package forge.gui.home.gauntlet;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -47,8 +45,6 @@ public enum VSubmenuGauntletLoad implements IVSubmenu<CSubmenuGauntletLoad> {
 
     private VSubmenuGauntletLoad() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
-        scrLoad.setBorder((Border)null);
     }
 
     /* (non-Javadoc)

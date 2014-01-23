@@ -127,7 +127,6 @@ public class VField implements IVDoc<CField> {
         tabletop.setOpaque(false);
 
         scroller.setViewportView(this.tabletop);
-        scroller.setBorder((Border)null);
 
         updateDetails();
     }

@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
-
 import org.apache.commons.lang3.StringUtils;
 
 import net.miginfocom.swing.MigLayout;
@@ -82,7 +80,6 @@ public enum FNetOverlay {
 
         FScrollPane _operationLogScroller = new FScrollPane(txtLog);
         _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        _operationLogScroller.setBorder((Border)null);
         new SmartScroller(_operationLogScroller);
         pnl.add(_operationLogScroller, "pushx, hmin 24, pushy, growy, growx, gap 2px 2px 2px 0, sx 2");
 

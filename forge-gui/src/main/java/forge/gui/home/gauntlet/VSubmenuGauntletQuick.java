@@ -6,8 +6,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
@@ -20,7 +18,6 @@ import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
-import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedSlider;
 
@@ -62,8 +59,6 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
     private final FLabel lblOptions = new FLabel.Builder().fontSize(16)
             .fontStyle(Font.BOLD).text("OPTIONS").fontAlign(SwingConstants.CENTER).build();
 
-    private final FScrollPane scrLoad = new FScrollPane(gauntletList);
-
     private final FLabel lblDesc1 = new FLabel.Builder()
             .text("Matches per gauntlet").fontStyle(Font.ITALIC).build();
 
@@ -92,8 +87,6 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         sliOpponents.setOpaque(false);
         sliOpponents.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         sliOpponents.setFont(FSkin.getFont(12));
-
-        scrLoad.setBorder((Border)null);
 
         pnlOptions.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlOptions.add(lblOptions, "h 30px!, w 96%!, gap 2% 0 0 5px");

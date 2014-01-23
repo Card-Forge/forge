@@ -5,8 +5,6 @@ import java.awt.Font;
 import forge.gui.toolbox.FLabel;
 
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-
 import net.miginfocom.swing.MigLayout;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.framework.DragCell;
@@ -75,7 +73,6 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
     //========== Constructor
     private VStatistics() {
-        scroller.setBorder((Border)null);
         scroller.getViewport().setBorder(null);
 
         // Color stats
