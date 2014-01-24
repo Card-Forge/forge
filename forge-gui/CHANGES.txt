@@ -1,7 +1,7 @@
-Forge Beta: 0##-##-2014 ver 1.5.11
+Forge Beta: 01-24-2014 ver 1.5.11
 
 
-13### cards in total.
+13422 cards in total.
 
 
 -------------
@@ -35,94 +35,94 @@ Darkpact
 New Born of the Gods branch Cards
 ---------------------------------
 
-Kiora, the Crashing Wave
-Ephara, God of the Polis
-Nessian Wilds Ravager
-Pharagax Giant
-Hero of Iroas
-Mogis, God of Slaughter
+Arbiter of the Ideal
+Archetype of Aggression
+Archetype of Courage
+Archetype of Endurance
+Archetype of Finality
+Archetype of Imagination
 Ashiok's Adept
+Aspect of Hydra
+Astral Cornucopia
+Bile Blight
+Brimaz, King of Oreskos
+Champion of Stray Souls
+Charging Badger
+Chromanticore
+Courser of Kruphix
+Crypsis
+Culling Mark
+Cyclops of One-Eyed Pass
+Dawn to Dusk
 Drown in Sorrow
-Ephara's Enlightenment
-Kiora's Follower
-Ragemonger
-Nyxborn Shieldmate
-Silent Sentinel
 Eater of Hope
+Ephara's Enlightenment
+Ephara, God of the Polis
 Epiphany Storm
-Unravel the AEther
-Karametra, God of Harvests
-Xenagos, God of Revels
+Everflame Eidolon
+Fall of the Hammer
+Fanatic of Xenagos
 Fate Unraveler
 Fated Conflagration
 Fated Infatuation
+Fated Intervention
+Fated Return
+Flame-Wreathed Phoenix
+Floodtide Serpent
 Forgestoker Dragon
+Gorgon's Head
+Herald of Torment
+Hero of Iroas
+Hero of Leina Tower
+Heroes' Podium
+Impetuous Sunchaser
+Karametra, God of Harvests
+Kiora's Follower
+Kiora, the Crashing Wave
+Marshmist Titan
+Mindreaver
+Mogis, God of Slaughter
+Nessian Demolok
+Nessian Wilds Ravager
+Noble Quarry
+Nullify
+Nyxborn Eidolon
+Nyxborn Rollicker
+Nyxborn Shieldmate
+Nyxborn Triton
+Nyxborn Wolf
+Oracle of Bones
+Oreskos Sun Guide
+Ornitharch
+Pharagax Giant
+Phenax, God of Deception
+Pillar of War
+Plea for Guidance
+Ragemonger
+Raised by Wolves
 Reap What Is Sown
-Thassa's Rebuff
+Rise to the Challenge
+Scourge of Skola Vale
+Shrike Harpy
+Silent Sentinel
+Siren of the Fanged Coast
+Siren of the Silent Song
+Siren Song Lyre
+Skyreaping
+Snake of the Golden Grove
+Spirit of the Labyrinth
+Spiteful Returned
+Sudden Storm
 Temple of Enlightenment
 Temple of Malice
 Temple of Plenty
-Brimaz, King of Oreskos
-Oreskos Sun Guide
-Archetype of Courage
-Archetype of Endurance
-Archetype of Imagination
-Bile Blight
-Herald of Torment
-Tromokratis
-Arbiter of the Ideal
-Everflame Eidolon
-Mindreaver
-Fated Intervention
-Raised by Wolves
-Skyreaping
-Champion of Stray Souls
-Fanatic of Xenagos
-Flame-Wreathed Phoenix
-Spirit of the Labyrinth
-Hero of Leina Tower
-Phenax, God of Deception
-Heroes' Podium
-Nessian Demolok
-Oracle of Bones
-Crypsis
-Floodtide Serpent
-Chromanticore
-Nyxborn Eidolon
-Nyxborn Rollicker
-Nyxborn Triton
-Nyxborn Wolf
-Shrike Harpy
-Scourge of Skola Vale
-Dawn to Dusk
-Nullify
-Plea for Guidance
-Sudden Storm
-Astral Cornucopia
-Fated Return
-Pillar of War
-Gorgon's Head
-Siren Song Lyre
-Thunderous Might
-Ornitharch
-Siren of the Fanged Coast
-Snake of the Golden Grove
+Thassa's Rebuff
 Thunder Brute
-Noble Quarry
-Rise to the Challenge
-Siren of the Silent Song
-Archetype of Aggression
-Archetype of Finality
-Cyclops of One-Eyed Pass
-Fall of the Hammer
-Impetuous Sunchaser
-Marshmist Titan
-Spiteful Returned
+Thunderous Might
+Tromokratis
+Unravel the AEther
 Weight of the Underworld
-Aspect of Hydra
-Charging Badger
-Courser of Kruphix
-Culling Mark
+Xenagos, God of Revels
 
 
 ------------
@@ -149,7 +149,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+Diogenes
+DrDev
+Gos
+Marc
+Max
+Sloth
+Sol
+Swordshine
+torridus
+ZzzzSleep
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
