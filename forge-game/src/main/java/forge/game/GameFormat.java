@@ -170,14 +170,7 @@ public class GameFormat implements Comparable<GameFormat> {
         return this.allowedSetCodes_ro.isEmpty() || this.allowedSetCodes_ro.contains(setCode);
     }
     
-    public boolean isDeckLegal(final Deck deck) {
-        CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
-        allCards.addAll(deck.getMain());
-        if (deck.has(DeckSection.Sideboard))
-            allCards.addAll(deck.get(DeckSection.Sideboard));
-        if (deck.has(DeckSection.Commander))
-            allCards.addAll(deck.get(DeckSection.Commander));
-        
+    private boolean isPoolLegal(final CardPool allCards) {
         for (Entry<PaperCard, Integer> poolEntry : allCards) {
             if (!filterRules.apply(poolEntry.getKey())) {
                 return false; //all cards in deck must pass card predicate to pass deck predicate
@@ -191,6 +184,20 @@ public class GameFormat implements Comparable<GameFormat> {
             }
         }
         return true;
+    }
+    
+    private static CardPool getAllDecksCards(final Deck deck) {
+        CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
+        allCards.addAll(deck.getMain());
+        if (deck.has(DeckSection.Sideboard))
+            allCards.addAll(deck.get(DeckSection.Sideboard));
+        if (deck.has(DeckSection.Commander))
+            allCards.addAll(deck.get(DeckSection.Commander));
+        return allCards;
+    }
+    
+    public boolean isDeckLegal(final Deck deck) {
+        return isPoolLegal(getAllDecksCards(deck));
     }
 
     /*
@@ -297,8 +304,9 @@ public class GameFormat implements Comparable<GameFormat> {
         
         public Iterable<GameFormat> getAllFormatsOfDeck(Deck deck) {
             List<GameFormat> result = new ArrayList<GameFormat>();
+            CardPool allCards = GameFormat.getAllDecksCards(deck);
             for(GameFormat gf : naturallyOrdered) {
-                if (gf.isDeckLegal(deck))
+                if (gf.isPoolLegal(allCards))
                     result.add(gf);
             }
             if( result.isEmpty())

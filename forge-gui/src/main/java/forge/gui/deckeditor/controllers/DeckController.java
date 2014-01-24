@@ -17,8 +17,6 @@
  */
 package forge.gui.deckeditor.controllers;
 
-import java.util.ArrayList;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Supplier;
@@ -38,7 +36,7 @@ public class DeckController<T extends DeckBase> {
     private boolean saved;
     private boolean modelInStorage;
     private final IStorage<T> rootFolder;
-    private IStorage<T> folder;
+    private IStorage<T> currentFolder;
     private final ACEditorBase<?, T> view;
     private final Supplier<T> newModelCreator;
 
@@ -52,7 +50,7 @@ public class DeckController<T extends DeckBase> {
     public DeckController(final IStorage<T> folder0, final ACEditorBase<?, T> view0,
             final Supplier<T> newModelCreator0) {
         this.rootFolder = folder0;
-        this.folder = rootFolder;
+        this.currentFolder = rootFolder;
         this.view = view0;
         this.model = null;
         this.saved = true;
@@ -97,7 +95,7 @@ public class DeckController<T extends DeckBase> {
             return true;
         }
         
-        final T modelStored = this.folder.get(this.model.getName());
+        final T modelStored = this.currentFolder.get(this.model.getName());
         // checks presence in dictionary only.
         if (modelStored == this.model) {
             return true;
@@ -131,15 +129,6 @@ public class DeckController<T extends DeckBase> {
     }
 
     /**
-     * Gets the saved names.
-     *
-     * @return the saved names
-     */
-    public ArrayList<String> getSavedNames() {
-        return new ArrayList<String>(this.folder.getItemNames());
-    }
-
-    /**
      * Reload current model
      */
     public void reload() {
@@ -154,9 +143,9 @@ public class DeckController<T extends DeckBase> {
 
     public void load(final String path, final String name) {
         if ( StringUtils.isBlank(path))
-            folder = rootFolder;
+            currentFolder = rootFolder;
         else
-            folder = rootFolder.tryGetFolder(path);
+            currentFolder = rootFolder.tryGetFolder(path);
         load(name);
     }
     
@@ -166,7 +155,7 @@ public class DeckController<T extends DeckBase> {
      * @param name the name
      */
     @SuppressWarnings("unchecked") private void load(final String name) {
-        T newModel = this.folder.get(name);
+        T newModel = this.currentFolder.get(name);
         if (newModel != null) {
             this.setModel((T) newModel.copyTo(name), true);
         }
@@ -184,7 +173,7 @@ public class DeckController<T extends DeckBase> {
             return;
         }
 
-        this.folder.add(this.model);
+        this.currentFolder.add(this.model);
         // copy to new instance which will be edited and left if unsaved
         this.model = (T)this.model.copyTo(this.model.getName());
         this.modelInStorage = true;
@@ -217,7 +206,7 @@ public class DeckController<T extends DeckBase> {
      */
     public void delete() {
         if (StringUtils.isNotBlank(this.model.getName())) {
-            this.folder.delete(this.model.getName());
+            this.currentFolder.delete(this.model.getName());
         }
         this.modelInStorage = false;
         this.newModel();
@@ -230,7 +219,7 @@ public class DeckController<T extends DeckBase> {
      * @return true, if successful
      */
     public boolean fileExists(final String deckName) {
-        return this.folder.contains(deckName);
+        return this.currentFolder.contains(deckName);
     }
 
     /**

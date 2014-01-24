@@ -213,7 +213,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         }, getFilter(DeckColorFilter.class) == null);
     }
 
-    private <T extends DeckBase> void editDeck(final DeckProxy deck) {
+    private void editDeck(final DeckProxy deck) {
         if (deck == null || this.preventEdit) { return; }
 
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
@@ -261,8 +261,9 @@ public final class DeckManager extends ItemManager<DeckProxy> {
             return false;
         }
 
+        
+        // consider using deck proxy's method to delete deck
         final CardCollections deckManager = Singletons.getModel().getDecks();
-
         switch(this.gametype) {
             case Constructed:
                 deckManager.getConstructed().delete(deck.getName()); break;
