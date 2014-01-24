@@ -1,0 +1,175 @@
+[metadata]
+Code=BNG
+Date=2013-02-07
+Name=Born of the Gods
+Type=Expansion
+BoosterCovers=3
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+FoilAlwaysInCommonSlot=True
+
+[cards]
+U Acolyte's Reward
+U Akroan Phalanx
+C Akroan Skyguard
+U Archetype of Courage
+M Brimaz, King of Oreskos
+U Dawn to Dusk
+R Eidolon of Countless Battles
+C Elite Skirmisher
+C Ephara's Radiance
+C Excoriate
+R Fated Retribution
+U Ghostblade Eidolon
+U Glimpse the Sun God
+U God-Favored General
+C Great Hart
+C Griffin Dreamfinder
+R Hero of Iroas
+C Hold at Bay
+C Loyal Pegasus
+C Mortal's Ardor
+C Nyxborn Shieldmate
+C Oreskos Sun Guide
+U Ornitharch
+R Plea for Guidance
+C Revoke Existence
+R Silent Sentinel
+R Spirit of the Labyrinth
+U Sunbond
+U Vanguard of Brimaz
+U Aerie Worshippers
+R Arbiter of the Ideal
+U Archetype of Imagination
+C Chorus of the Tides
+C Crypsis
+C Deepwater Hypnotist
+C Divination
+U Eternity Snare
+C Evanescent Intellect
+R Fated Infatuation
+U Flitterstep Eidolon
+C Floodtide Serpent
+U Kraken of the Straits
+U Meletis Astronomer
+R Mindreaver
+C Nullify
+C Nyxborn Triton
+U Oracle's Insight
+R Perplexing Chimera
+C Retraction Helix
+U Siren of the Fanged Coast
+C Sphinx's Disciple
+C Stratus Walk
+C Sudden Storm
+U Thassa's Rebuff
+R Tromokratis
+U Vortex Elemental
+R Whelming Wave
+U Archetype of Finality
+U Ashiok's Adept
+C Asphyxiate
+U Bile Blight
+U Black Oak of Odunos
+M Champion of Stray Souls
+C Claim of Erebos
+U Drown in Sorrow
+R Eater of Hope
+C Eye Gouge
+R Fate Unraveler
+R Fated Return
+C Felhide Brawler
+U Forlorn Pseudamma
+C Forsaken Drifters
+R Gild
+C Grisly Transformation
+R Herald of Torment
+C Marshmist Titan
+C Necrobite
+C Nyxborn Eidolon
+U Odunos River Trawler
+R Pain Seer
+U Sanguimancy
+C Servant of Tymaret
+U Shrike Harpy
+U Spiteful Returned
+C Warchanter of Mogis
+C Weight of the Underworld
+U Akroan Conscriptor
+U Archetype of Aggression
+C Bolt of Keranos
+C Cyclops of One-Eyed Pass
+C Epiphany Storm
+U Everflame Eidolon
+C Fall of the Hammer
+R Fated Conflagration
+C Fearsome Temper
+R Felhide Spiritbinder
+M Flame-Wreathed Phoenix
+R Forgestoker Dragon
+C Impetuous Sunchaser
+C Kragma Butcher
+U Lightning Volley
+C Nyxborn Rollicker
+R Oracle of Bones
+C Pharagax Giant
+U Pinnacle of Rage
+C Reckless Reveler
+C Rise to the Challenge
+R Satyr Firedancer
+U Satyr Nyx-Smith
+C Scouring Sands
+U Searing Blood
+U Stormcaller of Keranos
+U Thunder Brute
+U Thunderous Might
+R Whims of the Fates
+U Archetype of Endurance
+C Aspect of Hydra
+C Charging Badger
+R Courser of Kruphix
+C Culling Mark
+R Fated Intervention
+U Graverobber Spider
+R Hero of Leina Tower
+R Hunter's Prowess
+C Karametra's Favor
+U Mischief and Mayhem
+C Mortal's Resolve
+U Nessian Demolok
+R Nessian Wilds Ravager
+U Noble Quarry
+C Nyxborn Wolf
+U Peregrination
+U Pheres-Band Raiders
+C Pheres-Band Tromper
+U Raised by Wolves
+C Satyr Wayfinder
+R Scourge of Skola Vale
+C Setessan Oathsworn
+C Setessan Starbreaker
+U Skyreaping
+C Snake of the Golden Grove
+C Swordwise Centaur
+U Unravel the AEther
+M Chromanticore
+M Ephara, God of the Polis
+U Ephara's Enlightenment
+U Fanatic of Xenagos
+M Karametra, God of Harvests
+M Kiora, the Crashing Wave
+U Kiora's Follower
+M Mogis, God of Slaughter
+M Phenax, God of Deception
+U Ragemonger
+U Reap What Is Sown
+U Siren of the Silent Song
+M Xenagos, God of Revels
+R Astral Cornucopia
+U Gorgon's Head
+R Heroes' Podium
+U Pillar of War
+U Siren Song Lyre
+U Springleaf Drum
+R Temple of Enlightenment
+R Temple of Malice
+R Temple of Plenty
