@@ -94,6 +94,35 @@ Nyxborn Triton
 Nyxborn Wolf
 Shrike Harpy
 Scourge of Skola Vale
+Dawn to Dusk
+Nullify
+Plea for Guidance
+Sudden Storm
+Astral Cornucopia
+Fated Return
+Pillar of War
+Gorgon's Head
+Siren Song Lyre
+Thunderous Might
+Ornitharch
+Siren of the Fanged Coast
+Snake of the Golden Grove
+Thunder Brute
+Noble Quarry
+Rise to the Challenge
+Siren of the Silent Song
+Archetype of Aggression
+Archetype of Finality
+Cyclops of One-Eyed Pass
+Fall of the Hammer
+Impetuous Sunchaser
+Marshmist Titan
+Spiteful Returned
+Weight of the Underworld
+Aspect of Hydra
+Charging Badger
+Courser of Kruphix
+Culling Mark
 
 
 ------------
