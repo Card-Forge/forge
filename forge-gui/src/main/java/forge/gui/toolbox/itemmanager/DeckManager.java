@@ -249,7 +249,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
 
         if (!SEditorIO.confirmSaveChanges(screen, true)) { return; } //ensure previous deck on screen is saved if needed
 
-        CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getName());
+        CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(deck.getPath(), deck.getName());
     }
 
     public boolean deleteDeck(DeckProxy deck) {

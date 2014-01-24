@@ -37,7 +37,8 @@ public class DeckController<T extends DeckBase> {
     private T model;
     private boolean saved;
     private boolean modelInStorage;
-    private final IStorage<T> folder;
+    private final IStorage<T> rootFolder;
+    private IStorage<T> folder;
     private final ACEditorBase<?, T> view;
     private final Supplier<T> newModelCreator;
 
@@ -50,7 +51,8 @@ public class DeckController<T extends DeckBase> {
      */
     public DeckController(final IStorage<T> folder0, final ACEditorBase<?, T> view0,
             final Supplier<T> newModelCreator0) {
-        this.folder = folder0;
+        this.rootFolder = folder0;
+        this.folder = rootFolder;
         this.view = view0;
         this.model = null;
         this.saved = true;
@@ -150,12 +152,20 @@ public class DeckController<T extends DeckBase> {
         }
     }
 
+    public void load(final String path, final String name) {
+        if ( StringUtils.isBlank(path))
+            folder = rootFolder;
+        else
+            folder = rootFolder.tryGetFolder(path);
+        load(name);
+    }
+    
     /**
      * Load.
      *
      * @param name the name
      */
-    @SuppressWarnings("unchecked") public void load(final String name) {
+    @SuppressWarnings("unchecked") private void load(final String name) {
         T newModel = this.folder.get(name);
         if (newModel != null) {
             this.setModel((T) newModel.copyTo(name), true);
