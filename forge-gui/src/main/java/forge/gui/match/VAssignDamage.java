@@ -36,7 +36,6 @@ import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameEntity;
-import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
@@ -443,7 +442,7 @@ public class VAssignDamage {
         if ( source == null ) {
             if ( defender instanceof Player ) {
                 Player p = (Player)defender;
-                lethalDamage = attackerHasInfect ? Match.getPoisonCountersAmountToLose() - p.getPoisonCounters() : p.getLife();
+                lethalDamage = attackerHasInfect ? p.getGame().getRules().getPoisonCountersToLose() - p.getPoisonCounters() : p.getLife();
             } else if ( defender instanceof Card ) { // planeswalker
                 Card pw = (Card)defender;
                 lethalDamage = pw.getCounters(CounterType.LOYALTY);

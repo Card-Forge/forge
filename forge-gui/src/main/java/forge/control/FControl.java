@@ -430,7 +430,7 @@ public enum FControl implements KeyEventDispatcher {
         return inputQueue;
     }
 
-    public final void startGameWithUi(Match match) {
+    public final void startGameWithUi(final Match match) {
         if (this.game != null) {
             this.setCurrentScreen(FScreen.MATCH_SCREEN);
             SOverlayUtils.hideOverlay();
@@ -438,9 +438,17 @@ public enum FControl implements KeyEventDispatcher {
             return; //TODO: See if it's possible to run multiple games at once without crashing
         }
         setPlayerName(match.getPlayers());
-        Game newGame = match.createGame();
+        final Game newGame = match.createGame();
         attachToGame(newGame);
-        match.startGame(newGame, null);
+        
+        // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
+        // Game is set on pause while gui player takes decisions
+        game.getAction().invoke(new Runnable() {
+            @Override
+            public void run() {
+                match.startGame(newGame);
+            }
+        });
     }
 
     public final void endCurrentGame() {

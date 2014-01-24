@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.Map.Entry;
-import java.util.concurrent.CountDownLatch;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
@@ -76,39 +74,27 @@ public class Match {
     /**
      * TODO: Write javadoc for this method.
      */
-    public void startGame(final Game game, final CountDownLatch latch) {
-
-
-        // This code could be run run from EDT.
-        game.getAction().invoke(new Runnable() {
-            @Override
-            public void run() {
-                prepareAllZones(game);
-                if (rules.useAnte()) {  // Deciding which cards go to ante
-                    Multimap<Player, Card> list = game.chooseCardsForAnte();
-                    for (Entry<Player, Card> kv : list.entries()) {
-                        Player p = kv.getKey();
-                        game.getAction().moveTo(ZoneType.Ante, kv.getValue());
-                        game.getGameLog().add(GameLogEntryType.ANTE, p + " anted " + kv.getValue());
-                    }
-                    game.fireEvent(new GameEventAnteCardsSelected(list));
-                }
-
-                GameOutcome lastOutcome = gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
-                game.getAction().startGame(lastOutcome);
-
-                if (rules.useAnte()) {
-                    executeAnte(game);
-                }
-
-                // will pull UI dialog, when the UI is listening
-                game.fireEvent(new GameEventGameFinished());
-
-                if (null != latch) {
-                    latch.countDown();
-                }
+    public void startGame(final Game game) {
+        prepareAllZones(game);
+        if (rules.useAnte()) {  // Deciding which cards go to ante
+            Multimap<Player, Card> list = game.chooseCardsForAnte();
+            for (Entry<Player, Card> kv : list.entries()) {
+                Player p = kv.getKey();
+                game.getAction().moveTo(ZoneType.Ante, kv.getValue());
+                game.getGameLog().add(GameLogEntryType.ANTE, p + " anted " + kv.getValue());
             }
-        });
+            game.fireEvent(new GameEventAnteCardsSelected(list));
+        }
+
+        GameOutcome lastOutcome = gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
+        game.getAction().startGame(lastOutcome);
+
+        if (rules.useAnte()) {
+            executeAnte(game);
+        }
+
+        // will pull UI dialog, when the UI is listening
+        game.fireEvent(new GameEventGameFinished());
     }
 
     public void clearGamesPlayed() {
@@ -181,14 +167,6 @@ public class Match {
 
     public List<RegisteredPlayer> getPlayers() {
         return players;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public static int getPoisonCountersAmountToLose() {
-        return 10;
     }
 
     private static Set<PaperCard> getRemovedAnteCards(Deck toUse) {

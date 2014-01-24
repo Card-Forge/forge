@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import org.apache.commons.lang3.time.StopWatch;
 
 import com.google.common.base.Supplier;
@@ -104,16 +102,9 @@ public enum FServer {
         StopWatch sw = new StopWatch();
         sw.start();
 
-        CountDownLatch cdl = new CountDownLatch(1);
-        
         Game g1 = mc.createGame();
-        mc.startGame(g1, cdl);
-        try {
-            cdl.await(); // wait until game ends (in other thread)
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-            e.printStackTrace();
-        }
+        // will run match in the same thread
+        mc.startGame(g1);
         sw.stop();
         
         List<GameLogEntry> log = g1.getGameLog().getLogEntries(null);
