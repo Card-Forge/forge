@@ -34,7 +34,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Dependencies;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
@@ -78,7 +77,16 @@ public class AiController {
 
     private final Player player;
     private final Game game;
-    public boolean canCheatShuffle;
+    public boolean bCheatShuffle;
+
+    public boolean canCheatShuffle() {
+        return bCheatShuffle;
+    }
+
+    public void allowCheatShuffle(boolean canCheatShuffle) {
+        this.bCheatShuffle = canCheatShuffle;
+    }
+
     public Game getGame()
     {
         return game;
@@ -97,8 +105,6 @@ public class AiController {
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
-        
-        canCheatShuffle = Dependencies.preferences.getEnableAiCheats();
     }
 
     /**
@@ -1023,7 +1029,7 @@ public class AiController {
      * @return an array of {@link forge.game.card.Card} objects.
      */
     public List<Card> cheatShuffle(List<Card> in) {
-        if( in.size() < 20 || !canCheatShuffle )
+        if( in.size() < 20 || !canCheatShuffle() )
             return in;
         
         final List<Card> library = Lists.newArrayList(in);

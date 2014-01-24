@@ -5,12 +5,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.common.base.Supplier;
 
+import forge.Singletons;
+import forge.ai.AiProfileUtil;
 import forge.control.ChatArea;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.LobbyPlayerAi;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.toolbox.FSkin;
 import forge.net.client.INetClient;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
 
@@ -36,14 +39,22 @@ public class Lobby {
 
     public final LobbyPlayer getAiPlayer() { return getAiPlayer(getRandomName()); }
     public final LobbyPlayer getAiPlayer(String name) {
-        LobbyPlayer player = new LobbyPlayerAi(name);
-        if(FSkin.isLoaded())
-            player.setAvatarIndex(MyRandom.getRandom().nextInt(FSkin.getAvatars().size()));
-        return player;
+        return getAiPlayer(name, FSkin.isLoaded() ? MyRandom.getRandom().nextInt(FSkin.getAvatars().size()) : 0);
     }
     public final LobbyPlayer getAiPlayer(String name, int avatarIndex) {
-        LobbyPlayer player = new LobbyPlayerAi(name);
-        player.setAvatarIndex(avatarIndex);
+        LobbyPlayerAi player = new LobbyPlayerAi(name);
+
+        // TODO: implement specific AI profiles for quest mode.
+        String lastProfileChosen = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
+        player.setRotateProfileEachGame(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL));
+        if(lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
+            lastProfileChosen = AiProfileUtil.getRandomProfile();
+            System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", lastProfileChosen, player.getName()));
+        }
+        player.setAiProfile(lastProfileChosen);
+        
+        if(FSkin.isLoaded())
+            player.setAvatarIndex(avatarIndex);
         return player;
     }
 

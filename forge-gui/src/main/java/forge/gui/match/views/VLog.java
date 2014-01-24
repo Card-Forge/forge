@@ -26,6 +26,7 @@ import net.miginfocom.swing.MigLayout;
 
 import com.google.common.collect.Lists;
 
+import forge.Singletons;
 import forge.game.GameLog;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
@@ -37,6 +38,7 @@ import forge.gui.match.GameLogPanel;
 import forge.gui.match.controllers.CLog;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinFont;
+import forge.properties.ForgePreferences.FPref;
 
 /**
  * Assembles Swing components of game log report.
@@ -171,7 +173,8 @@ public enum VLog implements IVDoc<CLog> {
     }
 
     private List<GameLogEntry> getNewGameLogEntries(GameLog activeGameLogModel) {
-        GameLogEntryType logVerbosityFilter = activeGameLogModel.getGameLogEntryTypeSetting();
+        String logEntryType = Singletons.getModel().getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE);
+        GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(logEntryType);
         List<GameLogEntry> logEntries = activeGameLogModel.getLogEntries(logVerbosityFilter);
         // Set subtraction - remove all log entries from new list which are already displayed.
         logEntries.removeAll(this.displayedLogEntries);

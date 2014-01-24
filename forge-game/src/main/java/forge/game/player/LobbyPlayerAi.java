@@ -1,6 +1,5 @@
 package forge.game.player;
 
-import forge.Dependencies;
 import forge.ai.AiProfileUtil;
 import forge.game.Game;
 
@@ -10,7 +9,18 @@ public class LobbyPlayerAi extends LobbyPlayer {
     }
 
     private String aiProfile = "";
+    private boolean rotateProfileEachGame;
+    private boolean allowCheatShuffle;
     
+    public boolean isAllowCheatShuffle() {
+        return allowCheatShuffle;
+    }
+
+
+    public void setAllowCheatShuffle(boolean allowCheatShuffle) {
+        this.allowCheatShuffle = allowCheatShuffle;
+    }
+
     public void setAiProfile(String profileName) {
         aiProfile = profileName;
     }
@@ -19,14 +29,20 @@ public class LobbyPlayerAi extends LobbyPlayer {
         return aiProfile;
     }
 
+    public void setRotateProfileEachGame(boolean rotateProfileEachGame) {
+        this.rotateProfileEachGame = rotateProfileEachGame;
+    }
+
     @Override
     protected PlayerType getType() {
         return PlayerType.COMPUTER;
     }
 
     @Override
-    public PlayerController createControllerFor(Player ai) {
-        return new PlayerControllerAi(ai.getGame(), ai, this);
+    public PlayerControllerAi createControllerFor(Player ai) {
+        PlayerControllerAi result = new PlayerControllerAi(ai.getGame(), ai, this);
+        result.allowCheatShuffle(allowCheatShuffle);
+        return result;
     }
     
     @Override
@@ -34,15 +50,10 @@ public class LobbyPlayerAi extends LobbyPlayer {
         Player ai = new Player(getName(), game);
         ai.setFirstController(createControllerFor(ai));
 
-        String currentAiProfile = Dependencies.preferences.getCurrentAiProfile();
-        String lastProfileChosen = game.getMatch().getPlayedGames().isEmpty() ? currentAiProfile : getAiProfile();
-
-        // TODO: implement specific AI profiles for quest mode.
-        boolean wantRandomProfile = currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL) 
-             || game.getMatch().getPlayedGames().isEmpty() && currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH); 
-
-        setAiProfile(wantRandomProfile ? AiProfileUtil.getRandomProfile() : lastProfileChosen);
-        System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", getAiProfile(), getName()));
+        if( rotateProfileEachGame ) {
+            setAiProfile(AiProfileUtil.getRandomProfile());
+            System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", getAiProfile(), getName()));
+        }
         return ai;
     }
 

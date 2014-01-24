@@ -79,6 +79,11 @@ public class PlayerControllerAi extends PlayerController {
 
         brains = new AiController(p, game);
     }
+    
+    public void allowCheatShuffle(boolean value){
+        brains.allowCheatShuffle(value);
+    }
+    
 
     public SpellAbility getAbilityToPlay(List<SpellAbility> abilities, MouseEvent triggerEvent) {
         if (abilities.size() == 0) {

@@ -24,7 +24,6 @@ import java.util.Observable;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Dependencies;
 import forge.game.event.IGameEventVisitor;
 
 
@@ -106,11 +105,6 @@ public class GameLog extends Observable {
         return result;
     }
     
-    public GameLogEntryType getGameLogEntryTypeSetting() {
-        String logEntryType = Dependencies.preferences.getLogEntryType();
-        return GameLogEntryType.valueOf(logEntryType);
-    }
-
     public IGameEventVisitor<?> getEventVisitor() {
         return formatter;
     }
