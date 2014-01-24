@@ -238,11 +238,6 @@ public class PlayerControllerForTests extends PlayerController {
 		return chooseItems(validCards, min);
 	}
 
-//	@Override
-//	public Card chooseCardToDredge(List<Card> dredgers) {
-//		return null;
-//	}
-
 	@Override
 	public void playMiracle(SpellAbility miracle, Card card) {
 		throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");

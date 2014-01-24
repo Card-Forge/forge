@@ -1281,23 +1281,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         final List<Card> drawn = new ArrayList<Card>();
 
         for (int i = 0; i < n; i++) {
-
-//            // TODO: multiple replacements need to be selected by the controller
-//            List<Card> dredgers = this.getDredge();
-//            if (!dredgers.isEmpty()) {
-//                Card toDredge = getController().chooseCardToDredge(dredgers);
-//                int dredgeNumber = toDredge == null ? Integer.MAX_VALUE : getDredgeNumber(toDredge);
-//                if ( dredgeNumber <= getZone(ZoneType.Library).size()) {
-//                    game.getAction().moveToHand(toDredge);
-//
-//                    for (int iD = 0; iD < dredgeNumber; iD++) {
-//                        final Card c2 = getZone(ZoneType.Library).get(0);
-//                        game.getAction().moveToGraveyard(c2);
-//                    }
-//                    continue;
-//                }
-//            }
-
             if (!this.canDraw()) {
                 return drawn;
             }

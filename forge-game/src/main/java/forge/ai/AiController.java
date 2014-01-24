@@ -687,24 +687,6 @@ public class AiController {
         return true;
     }
 
-//    /**
-//     * AI decides if he wants to use dredge ability and which one if many available
-//     * @param dredgers - contains at least single element
-//     * @return
-//     */
-//    public Card chooseCardToDredge(List<Card> dredgers) {
-//        Player ai = getPlayer();
-//        //don't dredge when the library is nearly empty
-//        if (ai.getCardsIn(ZoneType.Library).size() < 8 && !ai.isCardInPlay("Laboratory Maniac")) {
-//            return null;
-//        }
-//        // use dredge if there are more than one of them in your graveyard
-//        if (dredgers.size() > 1 || MyRandom.getRandom().nextBoolean()) {
-//            return Aggregates.random(dredgers);
-//        }
-//        return null;
-//    }
-
     public String getProperty(AiProps propName) {
         return AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName);
     }
