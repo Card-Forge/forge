@@ -170,27 +170,6 @@ public enum DeckFormat {
                 
                 break;
 
-            case Planechase: //Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
-                final CardPool planes = deck.get(DeckSection.Planes);
-                if (planes == null || planes.countAll() < 10) {
-                    return "should have at least 10 planes";
-                }
-                int phenoms = 0;
-                for (Entry<PaperCard, Integer> cp : planes) {
-
-                    if (cp.getKey().getRules().getType().typeContains(CardType.CoreType.Phenomenon)) {
-                        phenoms++;
-                    }
-                    if (cp.getValue() > 1) {
-                        return "must not contain multiple copies of any Plane or Phenomena";
-                    }
-
-                }
-                if (phenoms > 2) {
-                    return "must not contain more than 2 Phenomena";
-                }
-                break;
-
             case Archenemy:  //Must contain at least 20 schemes, max 2 of each.
                 final CardPool schemes = deck.get(DeckSection.Schemes);
                 if (schemes == null || schemes.countAll() < 20) {
@@ -240,6 +219,27 @@ public enum DeckFormat {
             : String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimum(), sbRange.getMaximum());
         }
 
+        return null;
+    }
+
+    public String getPlaneSectionConformanceProblem(CardPool planes) {
+    	//Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
+    	if (planes == null || planes.countAll() < 10) {
+    		return "should have at least 10 planes";
+    	}
+    	int phenoms = 0;
+    	for (Entry<PaperCard, Integer> cp : planes) {
+    		if (cp.getKey().getRules().getType().typeContains(CardType.CoreType.Phenomenon)) {
+    			phenoms++;
+    		}
+    		if (cp.getValue() > 1) {
+    			return "must not contain multiple copies of any Plane or Phenomena";
+    		}
+
+    	}
+    	if (phenoms > 2) {
+    		return "must not contain more than 2 Phenomena";
+    	}
         return null;
     }
 }

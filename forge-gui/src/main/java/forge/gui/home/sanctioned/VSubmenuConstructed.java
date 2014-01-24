@@ -25,15 +25,22 @@ import net.miginfocom.swing.MigLayout;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Predicate;
+
 import forge.Command;
 import forge.Singletons;
 import forge.game.GameType;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
+import forge.gui.deckchooser.DecksComboBoxEvent;
 import forge.gui.deckchooser.FDeckChooser;
 import forge.gui.deckeditor.DeckProxy;
+import forge.gui.deckchooser.IDecksComboBoxListener;
+import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.controllers.CEditorVariant;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.FScreen;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.LblHeader;
@@ -43,6 +50,7 @@ import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FComboBox;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FPanel;
@@ -53,6 +61,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.FTextField;
+import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Lang;
@@ -79,17 +88,16 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private int activePlayersNum = 2;
     private int playerWithFocus = 0; // index of the player that currently has focus
     private PlayerPanel playerPanelWithFocus;
+    private GameType currentGameMode = GameType.Constructed;
+    private List<Integer> teams = new ArrayList<Integer>(8);
 
-    private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
-    private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
-    private final FCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
 
     // Variants frame and variables
     private final Set<GameType> appliedVariants = new TreeSet<GameType>();
-    private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
+	private final FPanel variantsPanel = new FPanel(new MigLayout("insets 10, gapx 10"));
     private final FCheckBox vntVanguard = new FCheckBox("Vanguard");
     private final FCheckBox vntCommander = new FCheckBox("Commander");
     private final FCheckBox vntPlanechase = new FCheckBox("Planechase");
@@ -118,6 +126,14 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final JPanel decksFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>(8);
     private final List<FLabel> deckSelectorBtns = new ArrayList<FLabel>(8);
+    private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
+    private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
+
+    // Variants
+    private final List<FList<Object>> planarDeckLists = new ArrayList<FList<Object>>();
+    private final List<FPanel> planarDeckPanels = new ArrayList<FPanel>(8);
+    private final List<FLabel> plnDeckSelectorBtns = new ArrayList<FLabel>(8);
+    private final List<FLabel> plnEditors = new ArrayList<FLabel>(8);
 
     // CTR
     private VSubmenuConstructed() {
@@ -146,7 +162,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         constructedFrame.add(new FScrollPane(variantsPanel, false,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
-                "w 100%, gapbottom 10px, spanx 2, wrap");
+                "w 100%, h 45px!, gapbottom 10px, spanx 2, wrap");
 
         ////////////////////////////////////////////////////////
         ///////////////////// Player Panel /////////////////////
@@ -154,6 +170,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         // Construct individual player panels
         String constraints = "pushx, growx, wrap, hidemode 3";
         for (int i = 0; i < 8; i++) {
+        	teams.add(i+1);
         	buildPlayerPanel(i);
         	FPanel player = playerPanelList.get(i);
 
@@ -190,22 +207,17 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         ////////////////////////////////////////////////////////
         ////////////////////// Deck Panel //////////////////////
-
+        
         for (int i = 0; i < 8; i++) {
         	buildDeckPanel(i);
         }
-        populateDeckPanel(true);
         constructedFrame.add(decksFrame, "w 50%-5px, growy, pushy");
         constructedFrame.setOpaque(false);
         decksFrame.setOpaque(false);
 
         // Start Button
-        final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
         pnlStart.setOpaque(false);
-        pnlStart.add(cbSingletons, strCheckboxConstraints);
-        pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");
-        pnlStart.add(cbArtifacts, strCheckboxConstraints);
-        pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
+        pnlStart.add(btnStart, "align center");
     }
 
     @SuppressWarnings("serial")
@@ -279,18 +291,17 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         newNameBtn.setCommand(new Command() {
 			@Override
 			public void run() {
-				newNameBtn.requestFocus();
     			String newName = getNewName();
-    			int index = nameRandomisers.indexOf(newNameBtn);
+                int index = nameRandomisers.indexOf(newNameBtn);
     			FTextField nField = playerNameBtnList.get(index);
 
-    			nField.setGhostText(newName);
     			nField.setText(newName);
 
 				if (index == 0) {
 					prefs.setPref(FPref.PLAYER_NAME, newName);
 					prefs.save();
 				}
+				playerNameBtnList.get(index).requestFocus();
 				changePlayerFocus(index);
 			}
         });
@@ -321,12 +332,51 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         deckBtn.setCommand(new Runnable() {
             @Override
             public void run() {
-                avatarList.get(deckSelectorBtns.indexOf(deckBtn)).requestFocusInWindow();
+            	currentGameMode = GameType.Constructed;
+                deckBtn.requestFocusInWindow();
+            	changePlayerFocus(deckSelectorBtns.indexOf(deckBtn), GameType.Constructed);
             }
         });
         playerPanel.add(newLabel("Deck:"), "w 40px, h 30px");
-        playerPanel.add(deckBtn, "pushx, growx, wmax 100%-157px, h 30px, spanx 4");
+        playerPanel.add(deckBtn, "pushx, growx, wmax 100%-157px, h 30px, spanx 4, wrap");
         deckSelectorBtns.add(deckBtn);
+
+        // Variants
+        String variantBtnConstraints = "height 30px, hidemode 3";
+        
+        // Planechase buttons
+        final FLabel plnDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a planar deck").build();
+        plnDeckSelectorBtn.setVisible(appliedVariants.contains(GameType.Planechase));
+        plnDeckSelectorBtn.setCommand(new Runnable() {
+            @Override
+            public void run() {
+            	currentGameMode = GameType.Planechase;
+            	plnDeckSelectorBtn.requestFocusInWindow();
+            	changePlayerFocus(plnDeckSelectorBtns.indexOf(plnDeckSelectorBtn), GameType.Planechase);
+            }
+        });
+        final FLabel plnDeckEditor = new FLabel.ButtonBuilder().text("Planar Deck Editor").build();
+        plnDeckEditor.setVisible(appliedVariants.contains(GameType.Planechase));
+        plnDeckEditor.setCommand(new Command() {
+            @Override
+            public void run() {
+            	currentGameMode = GameType.Planechase;
+                Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
+                    @Override
+                    public boolean apply(PaperCard arg0) {
+                        return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
+                    }
+                };
+                
+                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
+                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
+                        new CEditorVariant(Singletons.getModel().getDecks().getPlane(), predPlanes, FScreen.DECK_EDITOR_PLANECHASE));
+            }
+        });
+        playerPanel.add(plnDeckSelectorBtn, variantBtnConstraints + ", spanx, split 2, growx, pushx, gapright rel");
+        playerPanel.add(plnDeckEditor, variantBtnConstraints + ", width 150px, wrap");
+        plnDeckSelectorBtns.add(plnDeckSelectorBtn);
+        plnEditors.add(plnDeckEditor);
 
         playerPanelList.add(playerPanel);
 
@@ -343,7 +393,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	activePlayersNum++;
 
         	avatarList.get(playerPanelList.indexOf(player)).requestFocusInWindow();
-    		refreshPanels(true, false);
     	}
     }
 
@@ -370,25 +419,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
 	    changePlayerFocus(closest);
 	    avatarList.get(closest).requestFocusInWindow();
-		refreshPanels(true, false);
-    }
-
-    public void updatePlayerName(int playerIndex) {
-		String name = prefs.getPref(FPref.PLAYER_NAME);
-		playerNameBtnList.get(0).setText(name);
-    }
-
-    public void refreshAvatarFromPrefs(int playerIndex) {
-    	FLabel avatar = avatarList.get(playerIndex);
-        String[] currentPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
-    	if (playerIndex < currentPrefs.length) {
-            int avatarIndex = Integer.parseInt(currentPrefs[playerIndex]);
-            avatar.setIcon(FSkin.getAvatars().get(avatarIndex));
-            avatar.repaintSelf();
-        	usedAvatars.put(playerIndex, avatarIndex);
-        } else {
-        	setRandomAvatar(avatar, playerIndex);
-        }
     }
 
     /** Applies a random avatar, avoiding avatars already used.
@@ -415,9 +445,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	String sectionConstraints = "insets 8";
 
         // Main deck
-        FPanel mainDeckPanel = new FPanel();
-        mainDeckPanel.setLayout(new MigLayout(sectionConstraints));
-
         final FDeckChooser mainChooser = new FDeckChooser(isPlayerAI(playerIndex));
         mainChooser.initialize();
         mainChooser.getLstDecks().setSelectCommand(new Command() {
@@ -427,7 +454,19 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             }
         });
         deckChoosers.add(mainChooser);
-        mainDeckPanel.add(mainChooser, "grow, push, wrap");
+
+        // Planar deck list
+        FPanel planarDeckPanel = new FPanel();
+        planarDeckPanel.setLayout(new MigLayout(sectionConstraints));
+        planarDeckPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), "gap 0px 0px 10px 10px, wrap");
+        FList<Object> planarDeckList = new FList<Object>();
+        planarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        FScrollPane scrPlanes = new FScrollPane(planarDeckList, false,
+        		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        planarDeckPanel.add(scrPlanes, "h 95%, gap 0px 10px 0px 10px, grow, push, wrap");
+        planarDeckLists.add(planarDeckList);
+        planarDeckPanels.add(planarDeckPanel);
     }
 
     protected void onDeckClicked(int iPlayer, DeckType type, Collection<DeckProxy> selectedDecks) {
@@ -436,10 +475,20 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     /** Populates the deck panel with the focused player's deck choices. */
-    private void populateDeckPanel(final boolean firstBuild) {
-    	if (!firstBuild) { decksFrame.removeAll(); }
+    private void populateDeckPanel(final GameType forGameType) {
+    	decksFrame.removeAll();
 
-    	decksFrame.add(deckChoosers.get(playerWithFocus), "grow, push");
+    	if (GameType.Constructed == forGameType) {
+    		decksFrame.add(deckChoosers.get(playerWithFocus), "grow, push");
+    		if (deckChoosers.get(playerWithFocus).getSelectedDeckType().toString().contains("Random")) {
+    			final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
+    			decksFrame.add(cbSingletons, strCheckboxConstraints);
+    			decksFrame.add(cbArtifacts, strCheckboxConstraints);
+    		}
+    	} else if (GameType.Planechase == forGameType) {
+    		decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
+    		refreshPanels(false, true);
+    	}
     }
 
     /* (non-Javadoc)
@@ -482,9 +531,16 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         container.setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
         container.add(lblTitle, "w 80%, h 40px!, gap 0 0 15px 15px, span 2, al right, pushx");
 
-        for (FDeckChooser fdc : deckChoosers) {
+        for (final FDeckChooser fdc : deckChoosers) {
         	fdc.populate();
+        	fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
+				@Override
+				public void deckTypeSelected(DecksComboBoxEvent ev) {
+					avatarList.get(playerWithFocus).requestFocusInWindow();
+				}
+			});
         }
+    	populateDeckPanel(GameType.Constructed);
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(constructedFrame, "gap 20px 20px 20px 0px, push, grow");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 0 3.5%! 3.5%!, ax center");
@@ -499,6 +555,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     public JButton getBtnStart() {
         return this.btnStart;
     }
+
+    /** Gets the random deck checkbox for Singletons. */
+    public FCheckBox getCbSingletons() { return cbSingletons; }
+
+    /** Gets the random deck checkbox for Artifacts. */
+    public FCheckBox getCbArtifacts() { return cbArtifacts; }
 
     public boolean isPlayerAI(int playernum) {
     	// playerTypeRadios list contains human radio, AI radio, human, AI, etc
@@ -552,16 +614,18 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     private void changePlayerFocus(int newFocusOwner) {
-		if (newFocusOwner != playerWithFocus) {
-			playerWithFocus = newFocusOwner;
-			playerPanelWithFocus = playerPanelList.get(playerWithFocus);
+    	changePlayerFocus(newFocusOwner, appliedVariants.contains(currentGameMode) ? currentGameMode : GameType.Constructed);
+    }
 
-			changeAvatarFocus();
-			playersScroll.getViewport().scrollRectToVisible(playerPanelWithFocus.getBounds());
-			populateDeckPanel(false);
+    private void changePlayerFocus(int newFocusOwner, GameType gType) {
+    	playerWithFocus = newFocusOwner;
+    	playerPanelWithFocus = playerPanelList.get(playerWithFocus);
 
-			refreshPanels(true, true);
-		}
+    	changeAvatarFocus();
+    	playersScroll.getViewport().scrollRectToVisible(playerPanelWithFocus.getBounds());
+    	populateDeckPanel(gType);
+
+    	refreshPanels(true, true);
     }
 
     /** Changes avatar appearance dependant on focus player. */
@@ -586,6 +650,26 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         prefs.setPref(FPref.UI_AVATARS, pOneIndex + "," + pTwoIndex);
         prefs.save();
+    }
+
+    /** Updates the avatars from preferences on update. */
+    public void updatePlayersFromPrefs() {
+    	ForgePreferences prefs = Singletons.getModel().getPreferences();
+    	
+    	// Avatar
+        String[] avatarPrefs = prefs.getPref(FPref.UI_AVATARS).split(",");
+    	for (int i = 0; i < avatarPrefs.length; i++) {
+        	FLabel avatar = avatarList.get(i);
+            int avatarIndex = Integer.parseInt(avatarPrefs[i]);
+            avatar.setIcon(FSkin.getAvatars().get(avatarIndex));
+            avatar.repaintSelf();
+        	usedAvatars.put(i, avatarIndex);
+        }
+
+    	// Name
+    	FTextField nameField = playerNameBtnList.get(0);
+    	String prefName = prefs.getPref(FPref.PLAYER_NAME);
+    	nameField.setText(StringUtils.isBlank(prefName) ? "Human" : prefName);
     }
 
     /** Adds a pre-styled FLabel component with the specified title. */
@@ -625,33 +709,47 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         @Override
         public void itemStateChanged(ItemEvent arg0) {
             FCheckBox cb = (FCheckBox) arg0.getSource();
+            GameType variantType = GameType.Constructed;
 
             if (cb == vntVanguard) {
+            	variantType = GameType.Vanguard;
             	if (arg0.getStateChange() == ItemEvent.SELECTED) {
-            		appliedVariants.add(GameType.Vanguard);
+            		appliedVariants.add(variantType);
                 } else {
-            		appliedVariants.remove(GameType.Vanguard);
+            		appliedVariants.remove(variantType);
                 }
             }
             else if (cb == vntCommander) {
+            	variantType = GameType.Commander;
             	if (arg0.getStateChange() == ItemEvent.SELECTED) {
-            		appliedVariants.add(GameType.Commander);
+            		appliedVariants.add(variantType);
                 } else {
-            		appliedVariants.remove(GameType.Commander);
+            		appliedVariants.remove(variantType);
                 }
             }
             else if (cb == vntPlanechase) {
+            	variantType = GameType.Planechase;
             	if (arg0.getStateChange() == ItemEvent.SELECTED) {
-            		appliedVariants.add(GameType.Planechase);
+            		appliedVariants.add(variantType);
+            		for (int i = 0; i < 8; i++) {
+            			plnDeckSelectorBtns.get(i).setVisible(true);
+            			plnEditors.get(i).setVisible(true);
+            			changePlayerFocus(playerWithFocus, variantType);
+            		}
                 } else {
-            		appliedVariants.remove(GameType.Planechase);
+            		appliedVariants.remove(variantType);
+            		for (int i = 0; i < 8; i++) {
+            			plnDeckSelectorBtns.get(i).setVisible(false);
+            			plnEditors.get(i).setVisible(false);
+            			changePlayerFocus(playerWithFocus, GameType.Constructed);
+            		}
                 }
             }
             else if (cb == vntArchenemy) {
+            	variantType = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
                 comboArchenemy.setEnabled(vntArchenemy.isSelected());
             	if (arg0.getStateChange() == ItemEvent.SELECTED) {
-            		appliedVariants.add(archenemyType.contains("Classic")
-            				? GameType.Archenemy : GameType.ArchenemyRumble);
+            		appliedVariants.add(variantType);
                 } else {
             		appliedVariants.remove(GameType.Archenemy);
             		appliedVariants.remove(GameType.ArchenemyRumble);
@@ -756,8 +854,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 			if (source instanceof FTextField) { // the text box
 				FTextField nField = (FTextField)source;
 				String newName = nField.getText().trim();
-			    if (!StringUtils.isBlank(newName) && StringUtils.isAlphanumericSpace(newName) &&
-			            prefs.getPref(FPref.PLAYER_NAME) != newName) {
+			    if (playerNameBtnList.indexOf(nField) == 0 && !StringUtils.isBlank(newName)
+			    		&& StringUtils.isAlphanumericSpace(newName) && prefs.getPref(FPref.PLAYER_NAME) != newName) {
                     prefs.setPref(FPref.PLAYER_NAME, newName);
                     prefs.save();
                 }
@@ -815,5 +913,21 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     @Override
     public DragCell getParentCell() {
         return parentCell;
+    }
+
+    /////////////////////////////////////
+    //========== STUFF FOR VARIANTS
+
+    public Set<GameType> getAppliedVariants() {
+    	return appliedVariants;
+    }
+
+    public int getTeam(final int playerIndex) {
+    	return teams.get(playerIndex);
+    }
+
+    /** Gets the list of planar deck lists. */
+    public List<FList<Object>> getPlanarDeckLists() {
+    	return planarDeckLists;
     }
 }

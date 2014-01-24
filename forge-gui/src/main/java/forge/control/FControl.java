@@ -567,12 +567,17 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public void startMatch(GameType gameType, List<RegisteredPlayer> players) {
+        startMatch(gameType, new ArrayList<GameType>(0), players);
+    }
+
+    public void startMatch(GameType gameType, List<GameType> appliedVariants, List<RegisteredPlayer> players) {
         boolean useRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
         for(RegisteredPlayer rp : players) {
             rp.setRandomFoil(useRandomFoil);
         }
 
         GameRules rules = new GameRules(gameType);
+        rules.setAppliedVariants(appliedVariants);
         rules.setPlayForAnte(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE));
         rules.setManaBurn(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.canCloneUseTargetsImage = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);

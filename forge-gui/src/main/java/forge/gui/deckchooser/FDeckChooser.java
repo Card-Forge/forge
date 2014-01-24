@@ -379,4 +379,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return new ArrayList<String>();
         }
     }
+
+    public DecksComboBox getDecksComboBox() {
+        return decksComboBox;
+    }
 }

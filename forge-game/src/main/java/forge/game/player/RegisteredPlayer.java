@@ -6,6 +6,7 @@ import java.util.List;
 
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.GameType;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 
@@ -122,17 +123,47 @@ public class RegisteredPlayer {
         return start;
     }
     
-    public static RegisteredPlayer forPlanechase(final Deck deck, final Iterable<PaperCard> planes) {
+    /*public static RegisteredPlayer forPlanechase(final Deck deck, final Iterable<PaperCard> planes) {
         RegisteredPlayer start = new RegisteredPlayer(deck);
         start.planes = planes;
         return start;
-    }
+    }*/
     
     public static RegisteredPlayer forCommander(final Deck deck) {
         RegisteredPlayer start = new RegisteredPlayer(deck);
         start.commander = deck.get(DeckSection.Commander).get(0);
         start.setStartingLife(40);
         return start;
+    }
+
+    public static RegisteredPlayer forVariants(
+    		final List<GameType> appliedVariants, final Deck deck, final int team,	//General vars
+    		final Iterable<PaperCard> schemes, final boolean isPlayerArchenemy, 	//Archenemy specific vars
+    		final Iterable<PaperCard> planes, final PaperCard vanguardAvatar) {		//Planechase and Vanguard
+    	RegisteredPlayer start = new RegisteredPlayer(deck);
+    	if (appliedVariants.contains(GameType.Archenemy)) {
+    		if (isPlayerArchenemy) {
+    			start.setStartingLife(40); // 904.5: The Archenemy has 40 life.
+    		}
+    		start.schemes = schemes;
+    	}
+    	if (appliedVariants.contains(GameType.ArchenemyRumble)) {
+    		start.setStartingLife(start.getStartingLife() + 20); // Allow
+    		start.schemes = schemes;
+    	}
+    	if (appliedVariants.contains(GameType.Commander)) {
+            start.commander = deck.get(DeckSection.Commander).get(0);
+    		start.setStartingLife(40); // 903.7: ...each player sets his or her life total to 40
+    	}
+    	if (appliedVariants.contains(GameType.Planechase)) {
+            start.planes = planes;
+    	}
+    	if (appliedVariants.contains(GameType.Vanguard)) {
+            start.setStartingLife(start.getStartingLife() + vanguardAvatar.getRules().getLife());
+            start.setStartingHand(start.getStartingHand() + vanguardAvatar.getRules().getHand());
+            start.addCardsInCommand(vanguardAvatar);
+    	}
+    	return start;
     }
 
     public LobbyPlayer getPlayer() {
