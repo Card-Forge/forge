@@ -24,11 +24,6 @@ public class PreferencesProvider implements Dependencies.PreferencesMethods {
     }
 
     @Override
-    public boolean canRandomFoil() {
-        return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
-    }
-
-    @Override
     public boolean isManaBurnEnabled() {
         // TODO Auto-generated method stub
         return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN);

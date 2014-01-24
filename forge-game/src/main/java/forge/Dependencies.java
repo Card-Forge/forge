@@ -8,7 +8,6 @@ public class Dependencies {
         @Deprecated public abstract boolean getCloneModeSource();
         @Deprecated public abstract String getLogEntryType();
         @Deprecated public abstract String getCurrentAiProfile();
-        @Deprecated public abstract boolean canRandomFoil();
         @Deprecated public abstract boolean isManaBurnEnabled();
         @Deprecated public abstract boolean areBlocksFree();
     }

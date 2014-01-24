@@ -16,7 +16,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
-import forge.Dependencies;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -97,14 +96,13 @@ public class Match {
      * TODO: Write javadoc for this method.
      */
     public void startGame(final Game game, final CountDownLatch latch) {
-        final boolean canRandomFoil = Dependencies.preferences.canRandomFoil() && gameType == GameType.Constructed;
+
 
         // This code could be run run from EDT.
         game.getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                prepareAllZones(game, canRandomFoil);
-
+                prepareAllZones(game);
                 if (useAnte) {  // Deciding which cards go to ante
                     Multimap<Player, Card> list = game.chooseCardsForAnte();
                     for (Entry<Player, Card> kv : list.entries()) {
@@ -254,7 +252,7 @@ public class Match {
         library.setCards(newLibrary);
     }
 
-    private void prepareAllZones(final Game game, final boolean canRandomFoil) {
+    private void prepareAllZones(final Game game) {
         // need this code here, otherwise observables fail
         Trigger.resetIDs();
         game.getTriggerHandler().clearDelayedTrigger();
@@ -305,9 +303,9 @@ public class Match {
 
             Random generator = MyRandom.getRandom();
 
-            preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), canRandomFoil, generator);
+            preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), psc.useRandomFoil(), generator);
             if (myDeck.has(DeckSection.Sideboard)) {
-                preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), canRandomFoil, generator);
+                preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), psc.useRandomFoil(), generator);
             }
             player.shuffle(null);
 

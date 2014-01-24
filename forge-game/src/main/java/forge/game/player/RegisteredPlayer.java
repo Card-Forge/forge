@@ -155,4 +155,13 @@ public class RegisteredPlayer {
     public void restoreDeck() {
         currentDeck = (Deck) originalDeck.copyTo(originalDeck.getName());
     }
+
+    private boolean randomFoil = false;
+    public void setRandomFoil(boolean useRandomFoil) {
+        this.randomFoil = useRandomFoil;
+    }
+
+    public boolean useRandomFoil() {
+        return randomFoil;
+    }
 }

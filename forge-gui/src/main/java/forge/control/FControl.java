@@ -558,6 +558,12 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public void startMatch(GameType gameType, List<RegisteredPlayer> starter) {
+        
+        boolean useRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
+        for(RegisteredPlayer rp : starter) {
+            rp.setRandomFoil(useRandomFoil);
+        }
+        
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
         final Match mc = new Match(gameType, starter, useAnte);
         SOverlayUtils.startGameOverlay();
