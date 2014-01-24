@@ -696,8 +696,8 @@ public class PhaseHandler implements java.io.Serializable {
 
     private static boolean payRequiredBlockCosts(Game game, Card blocker, Card attacker) {
         Cost blockCost = new Cost(ManaCost.ZERO, true);
-        boolean hasBlockCost = false;
         // Sort abilities to apply them in proper order
+        boolean noCost = true;
         List<ZoneType> checkZones = ZoneType.listValueOf("Battlefield,Command");
         for (Card card : game.getCardsIn(checkZones)) {
             final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
@@ -705,17 +705,12 @@ public class PhaseHandler implements java.io.Serializable {
                 Cost c1 = stAb.getBlockCost(blocker, attacker);
                 if (c1 != null) {
                     blockCost.add(c1);
-                    hasBlockCost = true;
+                    noCost = false;
                 }
             }
         }
 
-        boolean hasPaid = blockCost.getTotalMana().isZero() && blockCost.isOnlyManaCost() && (!hasBlockCost || Dependencies.preferences.areBlocksFree()); // true if needless to pay
-
-        if (!hasPaid) {
-            hasPaid = blocker.getController().getController().payManaOptional(blocker, blockCost, null, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
-        }
-        return hasPaid;
+        return !noCost || blocker.getController().getController().payManaOptional(blocker, blockCost, null, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
     }
 
     /**

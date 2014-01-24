@@ -723,6 +723,10 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
+        if ( sa == null && cost.isOnlyManaCost() && cost.getTotalMana().isZero() 
+                && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS))
+            return true;
+        
         return HumanPlay.payCostDuringAbilityResolve(player, c, cost, sa, prompt);
     }
 

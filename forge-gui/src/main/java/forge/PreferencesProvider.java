@@ -13,9 +13,4 @@ public class PreferencesProvider implements Dependencies.PreferencesMethods {
         // TODO Auto-generated method stub
         return Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN);
     }
-
-    @Override
-    public boolean areBlocksFree() {
-        return Singletons.getModel().getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS);
-    }
 }
