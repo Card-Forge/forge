@@ -454,6 +454,10 @@ public class SSubmenuQuestUtil {
         aiPlayer.setIconImageKey(event.getIconImageKey());
         starter.add(aiStart.setPlayer(aiPlayer));
 
+        boolean useRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
+        for(RegisteredPlayer rp : starter) {
+            rp.setRandomFoil(useRandomFoil);
+        }
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
         if(forceAnte != null)
             useAnte = forceAnte.booleanValue();

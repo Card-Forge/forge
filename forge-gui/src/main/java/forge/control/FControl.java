@@ -576,6 +576,7 @@ public enum FControl implements KeyEventDispatcher {
         rules.setPlayForAnte(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE));
         rules.setManaBurn(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         rules.canCloneUseTargetsImage = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
+        
         final Match mc = new Match(rules, players);
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
