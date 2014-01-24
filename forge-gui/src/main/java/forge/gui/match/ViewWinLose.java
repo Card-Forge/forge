@@ -60,7 +60,7 @@ public class ViewWinLose {
         // Control of the win/lose is handled differently for various game
         // modes.
         ControlWinLose control = null;
-        switch (game0.getType()) {
+        switch (game0.getRules().getGameType()) {
         case Quest:
             control = new QuestWinLose(this, game0);
             break;

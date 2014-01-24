@@ -2170,7 +2170,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return this.loseConditionMet(GameLossReason.Poisoned, null);
         }
 
-        if(game.getType() == GameType.Commander)
+        if(game.getRules().getGameType() == GameType.Commander)
         {
             Map<Card,Integer> cmdDmg = getCommanderDamage();
             for(Card c : cmdDmg.keySet())

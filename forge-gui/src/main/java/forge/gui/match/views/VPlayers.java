@@ -173,7 +173,7 @@ public enum VPlayers implements IVDoc<CPlayers> {
                 }
                 temp[6].setText(sb.toString());
             }
-            if(p0.getGame().getType() == GameType.Commander) {
+            if(p0.getGame().getRules().getGameType() == GameType.Commander) {
                 temp[7].setText(CardFactoryUtil.getCommanderInfo(p0));
             }
         }

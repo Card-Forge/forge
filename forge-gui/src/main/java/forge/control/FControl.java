@@ -42,6 +42,7 @@ import forge.ImageCache;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.Game;
+import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
@@ -452,7 +453,7 @@ public enum FControl implements KeyEventDispatcher {
     private final FControlGameEventHandler fcVisitor = new FControlGameEventHandler(this);
     private final FControlGamePlayback playbackControl = new FControlGamePlayback(this);
     private void attachToGame(Game game0) {
-        if (game0.getType() == GameType.Quest) {
+        if (game0.getRules().getGameType() == GameType.Quest) {
             QuestController qc = Singletons.getModel().getQuest();
             // Reset new list when the Match round starts, not when each game starts
             if (game0.getMatch().getPlayedGames().isEmpty()) {
@@ -557,14 +558,17 @@ public enum FControl implements KeyEventDispatcher {
         }
     }
 
-    public void startMatch(GameType gameType, List<RegisteredPlayer> starter) {
+    public void startMatch(GameType gameType, List<RegisteredPlayer> players) {
         boolean useRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL);
-        for(RegisteredPlayer rp : starter) {
+        for(RegisteredPlayer rp : players) {
             rp.setRandomFoil(useRandomFoil);
         }
-        
-        boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
-        final Match mc = new Match(gameType, starter, useAnte);
+
+        GameRules rules = new GameRules(gameType);
+        rules.setPlayForAnte(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE));
+        rules.setManaBurn(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        rules.canCloneUseTargetsImage = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
+        final Match mc = new Match(rules, players);
         SOverlayUtils.startGameOverlay();
         SOverlayUtils.showOverlay();
         FThreads.invokeInEdtLater(new Runnable(){

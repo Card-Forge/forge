@@ -131,7 +131,7 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         ColorSet CID = null;
 
-        if (player.getGame().getType() == GameType.Commander) {
+        if (player.getGame().getRules().getGameType() == GameType.Commander) {
             CID = player.getCommander().getRules().getColorIdentity();
         }
         //clear lastProduced

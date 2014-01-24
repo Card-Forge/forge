@@ -14,6 +14,7 @@ import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameLogEntry;
+import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.LobbyPlayer;
@@ -88,8 +89,8 @@ public enum FServer {
         List<RegisteredPlayer> pp = new ArrayList<RegisteredPlayer>();
         pp.add(new RegisteredPlayer(d1).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai-" + d1.getName())));
         pp.add(new RegisteredPlayer(d2).setPlayer(FServer.instance.getLobby().getAiPlayer("Ai_" + d2.getName())));
-        
-        Match mc = new Match(GameType.Constructed, pp, false);
+        GameRules rules = new GameRules(GameType.Constructed);
+        Match mc = new Match(rules, pp);
         for(int iGame = 0; iGame < nGames; iGame++)
             simulateSingleMatch(mc, iGame);
         System.out.flush();

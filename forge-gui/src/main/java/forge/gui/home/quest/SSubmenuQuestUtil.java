@@ -13,6 +13,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.deck.Deck;
+import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.LobbyPlayer;
@@ -456,7 +457,12 @@ public class SSubmenuQuestUtil {
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
         if(forceAnte != null)
             useAnte = forceAnte.booleanValue();
-        final Match mc = new Match(GameType.Quest, starter, useAnte, qData.getCharmState() ? 5 : 3);
+        GameRules rules = new GameRules(GameType.Quest);
+        rules.setPlayForAnte(useAnte);
+        rules.setGamesPerMatch(qData.getCharmState() ? 5 : 3);
+        rules.setManaBurn(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        rules.canCloneUseTargetsImage = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE);
+        final Match mc = new Match(rules, starter);
         FThreads.invokeInEdtLater(new Runnable(){
             @Override
             public void run() {

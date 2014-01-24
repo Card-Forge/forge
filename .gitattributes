@@ -121,7 +121,6 @@ forge-game/.settings/org.eclipse.m2e.core.prefs -text
 forge-game/pom.xml -text
 forge-game/src/main/java/forge/Command.java svneol=native#text/plain
 forge-game/src/main/java/forge/Constant.java svneol=native#text/plain
-forge-game/src/main/java/forge/Dependencies.java -text
 forge-game/src/main/java/forge/ImageKeys.java -text
 forge-game/src/main/java/forge/ai/AiAttackController.java svneol=native#text/plain
 forge-game/src/main/java/forge/ai/AiBlockController.java svneol=native#text/plain
@@ -256,6 +255,7 @@ forge-game/src/main/java/forge/game/GameLogEntryType.java -text
 forge-game/src/main/java/forge/game/GameLogFormatter.java -text
 forge-game/src/main/java/forge/game/GameObject.java -text
 forge-game/src/main/java/forge/game/GameOutcome.java -text
+forge-game/src/main/java/forge/game/GameRules.java -text
 forge-game/src/main/java/forge/game/GameStage.java -text
 forge-game/src/main/java/forge/game/GameType.java -text
 forge-game/src/main/java/forge/game/GlobalRuleChange.java -text
@@ -15207,7 +15207,6 @@ forge-gui/src/main/html/js/socket.js -text
 forge-gui/src/main/java/forge/FThreads.java -text
 forge-gui/src/main/java/forge/ImageCache.java svneol=native#text/plain
 forge-gui/src/main/java/forge/ImageLoader.java -text
-forge-gui/src/main/java/forge/PreferencesProvider.java -text
 forge-gui/src/main/java/forge/Singletons.java svneol=native#text/plain
 forge-gui/src/main/java/forge/control/ChatArea.java -text
 forge-gui/src/main/java/forge/control/FControl.java -text

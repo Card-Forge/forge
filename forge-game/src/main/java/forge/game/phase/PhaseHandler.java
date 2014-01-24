@@ -28,7 +28,6 @@ import org.apache.commons.lang3.time.StopWatch;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
-import forge.Dependencies;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntity;
 import forge.game.GameStage;
@@ -434,14 +433,14 @@ public class PhaseHandler implements java.io.Serializable {
 
         for (Player p : game.getPlayers()) {
             int burn = p.getManaPool().clearPool(true);
-            boolean dealDamage = Dependencies.preferences.isManaBurnEnabled();
-
-            if (dealDamage) {
+            
+            boolean manaBurns = game.getRules().hasManaBurn();
+            if (manaBurns) {
                 p.loseLife(burn);
             }
             // Play the Mana Burn sound
             if (burn > 0) {
-                game.fireEvent(new GameEventManaBurn(burn, dealDamage));
+                game.fireEvent(new GameEventManaBurn(burn, manaBurns));
             }
         }
 
@@ -752,7 +751,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         Player next = getNextActivePlayer();
 
-        if (game.getType() == GameType.Planechase) {
+        if (game.getRules().getGameType() == GameType.Planechase) {
             for (Card p :game.getActivePlanes()) {
                 if (p != null) {
                     p.setController(next, 0);

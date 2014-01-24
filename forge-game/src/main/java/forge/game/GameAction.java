@@ -798,7 +798,7 @@ public class GameAction {
         }
 
         // Max: I don't know where to put this! - but since it's a state based action, it must be in check state effects
-        if (game.getType() == GameType.Archenemy) {
+        if (game.getRules().getGameType() == GameType.Archenemy) {
             game.archenemy904_10();
         }
 
@@ -1474,25 +1474,26 @@ public class GameAction {
     public void startGame(GameOutcome lastGameOutcome) {
         Player first = determineFirstTurnPlayer(lastGameOutcome);
 
+        GameType gameType = game.getRules().getGameType();
         do {
             if (game.isGameOver()) { break; } // conceded during "play or draw"
 
             // FControl should determine now if there are any human players.
             // Where there are none, it should bring up speed controls
-            game.fireEvent(new GameEventGameStarted(game.getType(), first, game.getPlayers()));
+            game.fireEvent(new GameEventGameStarted(gameType, first, game.getPlayers()));
 
             game.setAge(GameStage.Mulligan);
             for (final Player p1 : game.getPlayers()) {
                 p1.drawCards(p1.getMaxHandSize());
             }
 
-            performMulligans(first, game.getType() == GameType.Commander);
+            performMulligans(first, gameType == GameType.Commander);
             if (game.isGameOver()) { break; } // conceded during "mulligan" prompt
 
             game.setAge(GameStage.Play);
 
             //<THIS CODE WILL WORK WITH PHASE = NULL>
-            if (game.getType() == GameType.Planechase) {
+            if (gameType == GameType.Planechase) {
                 first.initPlane();
             }
 
@@ -1515,7 +1516,7 @@ public class GameAction {
         Player goesFirst = null;
 
         // 904.6: in Archenemy games the Archenemy goes first
-        if (game != null && game.getType() == GameType.Archenemy) {
+        if (game != null && game.getRules().getGameType() == GameType.Archenemy) {
             for (Player p : game.getPlayers()) {
                 if (p.isArchenemy()) {
                     return p;

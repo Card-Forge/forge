@@ -33,29 +33,19 @@ import forge.util.MyRandom;
 
 public class Match {
     private final List<RegisteredPlayer> players;
-    private final GameType gameType;
-
-    private int gamesPerMatch = 3;
-    private int gamesToWinMatch = 2;
-
-    private final boolean useAnte;
+    private final GameRules rules;
 
     private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
     private final List<GameOutcome> gamesPlayedRo;
 
-    public Match(GameType type, List<RegisteredPlayer> players0, boolean useAnte) {
-        this(type, players0, useAnte, 3);
-    }
-
-    public Match(GameType type, List<RegisteredPlayer> players0, boolean useAnte, int games) {
-        gameType = type;
+    public Match(GameRules rules, List<RegisteredPlayer> players0) {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
         players = Collections.unmodifiableList(Lists.newArrayList(players0));
+        this.rules = rules;
+    }
 
-        gamesPerMatch = games;
-        gamesToWinMatch = (int)Math.ceil((gamesPerMatch+1)/2);
-
-        this.useAnte = useAnte;
+    public GameRules getRules() {
+        return rules;
     }
 
     /**
@@ -67,15 +57,6 @@ public class Match {
         return this.gamesPlayedRo;
     }
 
-    /** @return int */
-    public int getGamesPerMatch() {
-        return gamesPerMatch;
-    }
-
-    /** @return int */
-    public int getGamesToWinMatch() {
-        return gamesToWinMatch;
-    }
 
     public void addGamePlayed(Game finished) {
         if (!finished.isGameOver()) {
@@ -88,7 +69,7 @@ public class Match {
      * TODO: Write javadoc for this method.
      */
     public Game createGame() {
-        Game game = new Game(players, gameType, this);
+        Game game = new Game(players, rules, this);
         return game;
     }
 
@@ -103,7 +84,7 @@ public class Match {
             @Override
             public void run() {
                 prepareAllZones(game);
-                if (useAnte) {  // Deciding which cards go to ante
+                if (rules.useAnte()) {  // Deciding which cards go to ante
                     Multimap<Player, Card> list = game.chooseCardsForAnte();
                     for (Entry<Player, Card> kv : list.entries()) {
                         Player p = kv.getKey();
@@ -116,7 +97,7 @@ public class Match {
                 GameOutcome lastOutcome = gamesPlayed.isEmpty() ? null : gamesPlayed.get(gamesPlayed.size() - 1);
                 game.getAction().startGame(lastOutcome);
 
-                if (useAnte) {
+                if (rules.useAnte()) {
                     executeAnte(game);
                 }
 
@@ -139,15 +120,6 @@ public class Match {
 
     public void clearLastGame() {
         gamesPlayed.remove(gamesPlayed.size() - 1);
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * 
-     * @return
-     */
-    public GameType getGameType() {
-        return gameType;
     }
 
     public Iterable<GameOutcome> getOutcomes() {
@@ -174,11 +146,11 @@ public class Match {
         }
 
         for (int score : victories) {
-            if (score >= gamesToWinMatch) {
+            if (score >= rules.getGamesToWinMatch()) {
                 return true;
             }
         }
-        return gamesPlayed.size() >= gamesPerMatch;
+        return gamesPlayed.size() >= rules.getGamesPerMatch();
     }
 
     /**
@@ -204,7 +176,7 @@ public class Match {
      * @return
      */
     public boolean isWonBy(LobbyPlayer questPlayer) {
-        return getGamesWonBy(questPlayer) >= gamesToWinMatch;
+        return getGamesWonBy(questPlayer) >= rules.getGamesToWinMatch();
     }
 
     public List<RegisteredPlayer> getPlayers() {
@@ -261,9 +233,8 @@ public class Match {
         Multimap<Player, PaperCard> rAICards = HashMultimap.create();
         Multimap<Player, PaperCard> removedAnteCards = ArrayListMultimap.create();
 
-        GameType gameType = game.getType();
         boolean isFirstGame = game.getMatch().getPlayedGames().isEmpty();
-        boolean canSideBoard = !isFirstGame && gameType.isSideboardingAllowed();
+        boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed();
 
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
         for (int i = 0; i < playersConditions.size(); i++) {
@@ -274,7 +245,7 @@ public class Match {
 
             if (canSideBoard) {
                 Deck toChange = psc.getDeck();
-                List<PaperCard> newMain = player.getController().sideboard(toChange, gameType);
+                List<PaperCard> newMain = player.getController().sideboard(toChange, rules.getGameType());
                 if (null != newMain) {
                     CardPool allCards = new CardPool();
                     allCards.addAll(toChange.get(DeckSection.Main));
@@ -292,7 +263,7 @@ public class Match {
             Deck myDeck = psc.getDeck();
 
             Set<PaperCard> myRemovedAnteCards = null;
-            if (!useAnte) {
+            if (!rules.useAnte()) {
                 myRemovedAnteCards = getRemovedAnteCards(myDeck);
                 for (PaperCard cp: myRemovedAnteCards) {
                     for (Entry<DeckSection, CardPool> ds : myDeck) {
@@ -321,8 +292,7 @@ public class Match {
             }
         }
 
-        boolean isLimitedGame = GameType.Quest == game.getType() || GameType.Sealed == game.getType() || GameType.Draft == game.getType();
-        if (!rAICards.isEmpty() && !isLimitedGame) {
+        if (!rAICards.isEmpty() && !rules.getGameType().isCardpoolLimited()) {
             game.getAction().revealAnte("AI can't play these cards well", rAICards);
         }
 
@@ -405,7 +375,7 @@ public class Match {
                 outcome.anteResult.put(fromGame, GameOutcome.AnteResult.won(losses));
             }
 
-            if (gameType.canAddWonCardsMidgame()) {
+            if (rules.getGameType().canAddWonCardsMidgame()) {
                 // But only certain game types lets you swap midgame
                 List<PaperCard> chosen = fromGame.getController().chooseCardsYouWonToAddToDeck(losses);
                 if (null != chosen) {

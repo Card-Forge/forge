@@ -445,7 +445,7 @@ public final class GuiDisplayUtil {
 
     public static void devModePlaneswalkTo() {
         final Game game = getGame();
-        if (game.getMatch().getGameType() != GameType.Planechase) { return; }
+        if (game.getRules().getGameType() != GameType.Planechase) { return; }
         final Player p = game.getPhaseHandler().getPlayerTurn();
 
         final List<PaperCard> allPlanars = new ArrayList<PaperCard>();

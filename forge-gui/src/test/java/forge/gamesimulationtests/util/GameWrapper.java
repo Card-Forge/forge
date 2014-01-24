@@ -13,6 +13,7 @@ import forge.game.GameLog;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameLogFormatter;
+import forge.game.GameRules;
 import forge.game.GameStage;
 import forge.game.GameType;
 import forge.game.Match;
@@ -69,8 +70,10 @@ public class GameWrapper {
 			registeredPlayers.add( registeredPlayer );
 		}
 		
-		boolean an = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
-		Match match = new Match( GameType.Constructed, registeredPlayers, an);
+		GameRules rules = new GameRules(GameType.Constructed);
+		rules.setPlayForAnte(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE));
+		rules.setManaBurn(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+		Match match = new Match(rules, registeredPlayers);
 		game = match.createGame();
 		game.subscribeToEvents( new GameLogFormatter( gameLog ) );
 		

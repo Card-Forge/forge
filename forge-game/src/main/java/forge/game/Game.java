@@ -57,7 +57,7 @@ import forge.util.Aggregates;
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
 public class Game {
-    private final GameType type;
+    private final GameRules rules;
     private final List<Player> roIngamePlayers;
     private final List<Player> allPlayers;
     private final List<Player> ingamePlayers = new ArrayList<Player>();
@@ -89,8 +89,8 @@ public class Game {
      * Constructor.
      * @param match0
      */
-    public Game(List<RegisteredPlayer> players0, GameType t, Match match0) { /* no more zones to map here */
-        type = t;
+    public Game(List<RegisteredPlayer> players0, GameRules rules, Match match0) { /* no more zones to map here */
+        this.rules = rules;
         match = match0;
         List<Player> players = new ArrayList<Player>();
         allPlayers = Collections.unmodifiableList(players);
@@ -515,8 +515,8 @@ public class Game {
     /**
      * @return the type of game (Constructed/Limited/Planechase/etc...)
      */
-    public GameType getType() {
-        return type;
+    public GameRules getRules() {
+        return rules;
     }
 
     /**

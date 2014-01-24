@@ -29,6 +29,7 @@ import javax.swing.JButton;
 import forge.Command;
 import forge.FThreads;
 import forge.game.Game;
+import forge.game.GameRules;
 import forge.game.Match;
 import forge.gui.InputProxy;
 import forge.gui.framework.ICDoc;
@@ -120,9 +121,10 @@ public enum CPrompt implements ICDoc {
     public void updateText(Game game) {
         FThreads.assertExecutedByEdt(true);
         final Match match = game.getMatch();
-        final String text = String.format("T:%d G:%d/%d [%s]", game.getPhaseHandler().getTurn(), match.getPlayedGames().size() + 1, match.getGamesPerMatch(), match.getGameType());
+        final GameRules rules = game.getRules();
+        final String text = String.format("T:%d G:%d/%d [%s]", game.getPhaseHandler().getTurn(), match.getPlayedGames().size() + 1, rules.getGamesPerMatch(), rules.getGameType());
         view.getLblGames().setText(text);
-        view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", match.getGameType(), match.getPlayedGames().size() + 1, match.getGamesPerMatch(), game.getPhaseHandler().getTurn()));
+        view.getLblGames().setToolTipText(String.format("%s: Game #%d of %d, turn %d", rules.getGameType(), match.getPlayedGames().size() + 1, rules.getGamesPerMatch(), game.getPhaseHandler().getTurn()));
     }
 
     @Override

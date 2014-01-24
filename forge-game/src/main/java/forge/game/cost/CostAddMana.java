@@ -71,7 +71,7 @@ public class CostAddMana extends CostPart {
         Card source = sa.getSourceCard();
         
         ColorSet cid = null;
-        if (ai.getGame().getType() == GameType.Commander) {
+        if (ai.getGame().getRules().getGameType() == GameType.Commander) {
             cid = ai.getCommander().getRules().getColorIdentity();
         }
         ArrayList<Mana> manaProduced = new ArrayList<Mana>();
