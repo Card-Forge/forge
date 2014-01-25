@@ -67,7 +67,7 @@ public class GameRules {
     }
 
     public void setAppliedVariants(List<GameType> appliedVariants) {
-        this.appliedVariants = EnumSet.copyOf(appliedVariants);
+        this.appliedVariants.addAll(appliedVariants);
     }
 
     public boolean hasAppliedVariant(GameType variant) {
