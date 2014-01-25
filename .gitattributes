@@ -14674,6 +14674,7 @@ forge-gui/res/quest/precons/Battle[!!-~]Blitz.dck -text
 forge-gui/res/quest/precons/Battle[!!-~]Cries.dck -text
 forge-gui/res/quest/precons/Battle[!!-~]Surge.dck -text
 forge-gui/res/quest/precons/Bestial[!!-~]Strength.dck -text
+forge-gui/res/quest/precons/Blades[!!-~]of[!!-~]Victory.dck -text
 forge-gui/res/quest/precons/Blazing[!!-~]Beasts[!!-~]of[!!-~]Myth.dck -text
 forge-gui/res/quest/precons/Blood[!!-~]And[!!-~]Fire.dck -text
 forge-gui/res/quest/precons/Boggart[!!-~]Feast.dck -text
@@ -14778,6 +14779,7 @@ forge-gui/res/quest/precons/Overkill.dck -text
 forge-gui/res/quest/precons/Path[!!-~]of[!!-~]Blight.dck -text
 forge-gui/res/quest/precons/Phyrexian[!!-~]Assault.dck -text
 forge-gui/res/quest/precons/Phyrexian[!!-~]Poison.dck -text
+forge-gui/res/quest/precons/Power[!!-~]of[!!-~]Prophecy.dck -text
 forge-gui/res/quest/precons/Presence[!!-~]of[!!-~]Mind.dck -text
 forge-gui/res/quest/precons/Primordial[!!-~]Jund.dck -text
 forge-gui/res/quest/precons/Psychic[!!-~]Labyrinth.dck -text
@@ -14819,6 +14821,7 @@ forge-gui/res/quest/precons/Speed[!!-~]Scorch.dck -text
 forge-gui/res/quest/precons/Spiraling[!!-~]Doom.dck -text
 forge-gui/res/quest/precons/Spirit[!!-~]Flames.dck -text
 forge-gui/res/quest/precons/Spiritcraft.dck -text
+forge-gui/res/quest/precons/Stampede[!!-~]of[!!-~]Beasts.dck -text
 forge-gui/res/quest/precons/Stampede.dck -text
 forge-gui/res/quest/precons/Sunburst.dck -text
 forge-gui/res/quest/precons/Superabundance.dck -text
