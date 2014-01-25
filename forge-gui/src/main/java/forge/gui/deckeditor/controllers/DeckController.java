@@ -202,17 +202,6 @@ public class DeckController<T extends DeckBase> {
     }
 
     /**
-     * Delete.
-     */
-    public void delete() {
-        if (StringUtils.isNotBlank(this.model.getName())) {
-            this.currentFolder.delete(this.model.getName());
-        }
-        this.modelInStorage = false;
-        this.newModel();
-    }
-
-    /**
      * File exists.
      *
      * @param deckName the deck name

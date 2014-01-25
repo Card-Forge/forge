@@ -39,7 +39,6 @@ import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.ItemListView;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.InventoryItem;
-import forge.model.CardCollections;
 import forge.quest.QuestWorld;
 
 /** 
@@ -261,24 +260,20 @@ public final class DeckManager extends ItemManager<DeckProxy> {
             return false;
         }
 
-        
         // consider using deck proxy's method to delete deck
-        final CardCollections deckManager = Singletons.getModel().getDecks();
         switch(this.gametype) {
             case Constructed:
-                deckManager.getConstructed().delete(deck.getName()); break;
             case Draft:
-                deckManager.getDraft().delete(deck.getName()); break;
             case Sealed:
-                deckManager.getSealed().delete(deck.getName()); break;
+                deck.deleteFromStorage();
+                break;
             case Quest:
-                Singletons.getModel().getQuest().getMyDecks().delete(deck.getName());
+                deck.deleteFromStorage();
                 Singletons.getModel().getQuest().save();
                 break;
             default:
                 throw new UnsupportedOperationException("Delete not implemneted for game type = " + gametype.toString());
         }
-
 
         this.removeItem(deck, 1);
 
