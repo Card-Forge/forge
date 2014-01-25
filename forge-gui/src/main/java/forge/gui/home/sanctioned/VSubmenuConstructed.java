@@ -29,6 +29,7 @@ import com.google.common.base.Predicate;
 
 import forge.Command;
 import forge.Singletons;
+import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.deckchooser.DecksComboBoxEvent;
@@ -370,7 +371,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                 
                 Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
                 CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                        new CEditorVariant(Singletons.getModel().getDecks().getPlane(), predPlanes, FScreen.DECK_EDITOR_PLANECHASE));
+                        new CEditorVariant(Singletons.getModel().getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE));
             }
         });
         playerPanel.add(plnDeckSelectorBtn, variantBtnConstraints + ", spanx, split 2, growx, pushx, gapright rel");

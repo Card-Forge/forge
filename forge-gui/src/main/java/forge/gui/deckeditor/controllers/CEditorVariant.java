@@ -63,10 +63,11 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
      * This is the least restrictive mode;
      * all cards are available.
      */
-    public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final FScreen screen0) {
+    public CEditorVariant(final IStorage<Deck> folder, final Predicate<PaperCard> poolCondition, final DeckSection deckSection0, final FScreen screen0) {
         super(screen0);
 
         this.cardPoolCondition = poolCondition;
+        this.sectionMode = deckSection0;
 
         CardManager catalogManager = new CardManager(true);
         CardManager deckManager = new CardManager(true);
@@ -140,7 +141,7 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         allNT = Iterables.filter(allNT, cardPoolCondition);
 
         this.getCatalogManager().setPool(ItemPool.createFrom(allNT, PaperCard.class), true);
-        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(this.sectionMode));
     }
 
     /*
