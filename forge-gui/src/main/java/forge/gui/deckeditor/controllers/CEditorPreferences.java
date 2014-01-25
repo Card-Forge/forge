@@ -5,9 +5,9 @@ import java.util.HashMap;
 import javax.swing.JCheckBox;
 
 import forge.Command;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
 import forge.gui.deckeditor.views.VEditorPreferences;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.itemmanager.views.ColumnDef;
 
 /** 
  * Controls the "analysis" panel in the deck editor UI.

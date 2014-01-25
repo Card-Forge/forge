@@ -5,7 +5,7 @@ import java.util.Map;
 import forge.Command;
 import forge.gui.workshop.views.VWorkshopCatalog;
 import forge.gui.framework.ICDoc;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 

@@ -40,7 +40,7 @@ import forge.gui.toolbox.itemmanager.filters.DeckQuestWorldFilter;
 import forge.gui.toolbox.itemmanager.filters.DeckSearchFilter;
 import forge.gui.toolbox.itemmanager.filters.DeckSetFilter;
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.ItemCellRenderer;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.ItemListView;

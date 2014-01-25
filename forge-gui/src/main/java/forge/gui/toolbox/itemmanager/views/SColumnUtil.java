@@ -25,8 +25,6 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
-
 /**
  * A collection of methods pertaining to columns in card catalog and
  * current deck tables, for use in the deck editor.

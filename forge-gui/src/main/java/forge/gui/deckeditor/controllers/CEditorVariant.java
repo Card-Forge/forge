@@ -34,7 +34,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.PaperCard;

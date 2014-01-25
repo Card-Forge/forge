@@ -65,7 +65,6 @@ import forge.gui.toolbox.FSkin.SkinnedTableHeader;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.ItemColumn.SortState;
 import forge.item.InventoryItem;
 import forge.util.ItemPoolSorter;

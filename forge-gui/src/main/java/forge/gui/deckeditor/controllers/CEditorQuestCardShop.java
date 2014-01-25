@@ -51,7 +51,7 @@ import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.SpellShopManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.BoosterPack;

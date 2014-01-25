@@ -27,7 +27,7 @@ import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.ColumnDef;
 import forge.item.PaperCard;
 import forge.view.FDialog;
 
