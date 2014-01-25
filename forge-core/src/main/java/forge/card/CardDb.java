@@ -183,8 +183,8 @@ public final class CardDb implements ICardDatabase {
         CardRequest request = CardRequest.fromString(cardName);
         if(setName != null)
             request.edition = setName;
-        if(artIndex >= 0)
-            request.artIndex = artIndex;
+        if(artIndex > 0)
+            request.artIndex = artIndex - 1;
         return tryGetCard(request);
     }
     

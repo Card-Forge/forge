@@ -245,7 +245,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 
                 PaperCard c = StaticData.instance().getCommonCards().getCardFromEdition(cardName, dayAfterNewestSetRelease, SetPreference.LatestCoreExp, artIndex);
                 if( null == c ) {
-                    c = StaticData.instance().getCommonCards().getCardFromEdition(cardName, dayAfterNewestSetRelease, SetPreference.Latest, -1);
+                    c = StaticData.instance().getCommonCards().getCardFromEdition(cardName, dayAfterNewestSetRelease, SetPreference.LatestCoreExp, -1);
+                    if( c == null)
+                        c = StaticData.instance().getCommonCards().getCardFromEdition(cardName, dayAfterNewestSetRelease, SetPreference.Latest, -1);
                     // this is to randomize art of all those cards
                     newPool.add(cardName, c.getEdition(), cp.getValue());
                 } else
