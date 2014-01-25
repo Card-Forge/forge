@@ -293,6 +293,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 			@Override
 			public void run() {
     			String newName = getNewName();
+    			if ( null == newName )
+    			    return;
                 int index = nameRandomisers.indexOf(newNameBtn);
     			FTextField nField = playerNameBtnList.get(index);
 
@@ -686,7 +688,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	final String[] typeOptions = new String[]{ "Fantasy", "Generic", "Any" };
 
     	final int genderIndex = FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2);
+    	if ( genderIndex < 0 )
+    	    return null;
     	final int typeIndex = FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2);
+        if ( typeIndex < 0 )
+            return null;
     	final String gender = genderOptions[genderIndex];
     	final String type = typeOptions[typeIndex];
 
