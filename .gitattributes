@@ -14657,6 +14657,7 @@ forge-gui/res/quest/duels/Zapp[!!-~]Brannigan[!!-~]2.dck -text
 forge-gui/res/quest/duels/Zatanna[!!-~]2.dck -text
 forge-gui/res/quest/precons/Air[!!-~]Razers.dck -text
 forge-gui/res/quest/precons/Angelic[!!-~]Might.dck -text
+forge-gui/res/quest/precons/Anthousas[!!-~]Army.dck -text
 forge-gui/res/quest/precons/Arcanis's[!!-~]Guile.dck -text
 forge-gui/res/quest/precons/Armada.dck -text
 forge-gui/res/quest/precons/Army[!!-~]of[!!-~]Entropy.dck -text
@@ -14673,6 +14674,7 @@ forge-gui/res/quest/precons/Battle[!!-~]Blitz.dck -text
 forge-gui/res/quest/precons/Battle[!!-~]Cries.dck -text
 forge-gui/res/quest/precons/Battle[!!-~]Surge.dck -text
 forge-gui/res/quest/precons/Bestial[!!-~]Strength.dck -text
+forge-gui/res/quest/precons/Blazing[!!-~]Beasts[!!-~]of[!!-~]Myth.dck -text
 forge-gui/res/quest/precons/Blood[!!-~]And[!!-~]Fire.dck -text
 forge-gui/res/quest/precons/Boggart[!!-~]Feast.dck -text
 forge-gui/res/quest/precons/Bomber.dck -text
@@ -14698,6 +14700,7 @@ forge-gui/res/quest/precons/Deaths[!!-~]Encroach.dck -text
 forge-gui/res/quest/precons/Decay.dck -text
 forge-gui/res/quest/precons/Deep[!!-~]Freeze.dck -text
 forge-gui/res/quest/precons/Depths[!!-~]of[!!-~]Power.dck -text
+forge-gui/res/quest/precons/Devotion[!!-~]to[!!-~]Darkness.dck -text
 forge-gui/res/quest/precons/Devouring[!!-~]Skies.dck -text
 forge-gui/res/quest/precons/Dimir[!!-~]Dementia.dck -text
 forge-gui/res/quest/precons/Disrupter.dck -text
@@ -14716,6 +14719,7 @@ forge-gui/res/quest/precons/Evincar's[!!-~]Tyranny.dck -text
 forge-gui/res/quest/precons/Expulsion.dck -text
 forge-gui/res/quest/precons/Fangs[!!-~]of[!!-~]the[!!-~]Bloodchief.dck -text
 forge-gui/res/quest/precons/Fate[!!-~]Blaster.dck -text
+forge-gui/res/quest/precons/Favors[!!-~]From[!!-~]Nyx.dck -text
 forge-gui/res/quest/precons/Feast[!!-~]of[!!-~]Flesh.dck -text
 forge-gui/res/quest/precons/Fiendish[!!-~]Nature.dck -text
 forge-gui/res/quest/precons/Fiery[!!-~]Dawn.dck -text
@@ -14753,6 +14757,7 @@ forge-gui/res/quest/precons/Life[!!-~]Drain.dck -text
 forge-gui/res/quest/precons/Lightforce.dck -text
 forge-gui/res/quest/precons/Little[!!-~]Bashers.dck -text
 forge-gui/res/quest/precons/Lofty[!!-~]Heights.dck -text
+forge-gui/res/quest/precons/Manipulative[!!-~]Monstrosities.dck -text
 forge-gui/res/quest/precons/Master[!!-~]Blaster.dck -text
 forge-gui/res/quest/precons/Mercenaries.dck -text
 forge-gui/res/quest/precons/Merrow[!!-~]Riverways.dck -text
