@@ -80,6 +80,8 @@ public class DeckProxy implements InventoryItem {
     }
 
     public String getPath() {
+        if ( deck instanceof PreconDeck )
+            return ((PreconDeck) deck).getEdition();
         return path;
     }
 
@@ -239,10 +241,11 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
+    @SuppressWarnings("unchecked")
     public static Iterable<DeckProxy> getAllPreconstructedDecks(IStorage<PreconDeck> iStorage) {
         ArrayList<DeckProxy> decks = new ArrayList<DeckProxy>();
         for (final PreconDeck preconDeck : iStorage) {
-            decks.add(new DeckProxy(preconDeck.getDeck(), null, iStorage));
+            decks.add(new DeckProxy(preconDeck, (Function<IHasName, Deck>)(Object)PreconDeck.FN_GET_DECK, null, iStorage));
         }
         return decks;
     }
@@ -289,4 +292,5 @@ public class DeckProxy implements InventoryItem {
         }
         return decks;
     }
+    
 }

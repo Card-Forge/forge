@@ -144,4 +144,12 @@ public class PreconDeck implements InventoryItemFromSet {
             return DeckSerializer.DCK_FILE_FILTER;
         }
     }
+    
+    public static final Function<PreconDeck, Deck> FN_GET_DECK = new Function<PreconDeck, Deck>() {
+        @Override
+        public Deck apply(PreconDeck arg1) {
+            return arg1.getDeck();
+        }
+    };      
+    
 }
