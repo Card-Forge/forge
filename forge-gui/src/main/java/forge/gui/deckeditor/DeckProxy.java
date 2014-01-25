@@ -48,6 +48,7 @@ public class DeckProxy implements InventoryItem {
     private int sbSize = Integer.MIN_VALUE;
     private final String path;
     private final Function<IHasName, Deck> fnGetDeck;
+    private String edition;
 
     public DeckProxy(Deck deck, GameType type, IStorage<? extends IHasName> storage) {
         this(deck, type, "", storage, null);
@@ -85,12 +86,13 @@ public class DeckProxy implements InventoryItem {
     }
     
     public String getEdition() {
-        if ( deck instanceof PreconDeck )
-            return ((PreconDeck) deck).getEdition();
-        Deck d = getDeck();
-        if ( d != null )
-            return StaticData.instance().getEditions().getEarliestEditionWithAllCards(d.getAllCardsInASinglePool()).getCode();
-        return null;
+        if ( null == edition ) {
+            if ( deck instanceof PreconDeck )
+                edition = ((PreconDeck) deck).getEdition();
+            if ( !isGeneratedDeck() )
+                edition = StaticData.instance().getEditions().getEarliestEditionWithAllCards(getDeck().getAllCardsInASinglePool()).getCode();
+        }
+        return edition;
     }
 
     @Override
@@ -101,6 +103,7 @@ public class DeckProxy implements InventoryItem {
     public void invalidateCache() {
         color = null;
         formats = null;
+        edition = null;
         mainSize = Integer.MIN_VALUE;
         sbSize = Integer.MIN_VALUE;
     }
