@@ -225,7 +225,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return d;
     }
 
-    private void convertByXitaxMethod() {
+    public void convertByXitaxMethod() {
         CardEdition earliestSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(getAllCardsInASinglePool());
 
         Calendar cal = Calendar.getInstance();
@@ -234,6 +234,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         Date dayAfterNewestSetRelease = cal.getTime();
         
         for(Entry<DeckSection, CardPool> p : parts.entrySet()) {
+            if( p.getKey() == DeckSection.Planes || p.getKey() == DeckSection.Schemes || p.getKey() == DeckSection.Avatar)
+                continue;
+            
             CardPool newPool = new CardPool();
             
             for(Entry<PaperCard, Integer> cp : p.getValue()){
@@ -358,6 +361,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             allCards.addAll(this.get(DeckSection.Sideboard));
         if (this.has(DeckSection.Commander))
             allCards.addAll(this.get(DeckSection.Commander));
+        // do not include schemes / avatars and any non-regular cards
         return allCards;
     }    
 }
