@@ -1,6 +1,6 @@
 package forge.game;
 
-import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 public class GameRules {
@@ -10,7 +10,7 @@ public class GameRules {
     private int gamesPerMatch = 3;
     private int gamesToWinMatch = 2;
     private boolean playForAnte = false;
-    private List<GameType> appliedVariants = new ArrayList<GameType>(4);
+    private EnumSet<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
     
     public GameRules(GameType type) {
         this.gameType = type;
@@ -67,11 +67,11 @@ public class GameRules {
     }
 
     public void setAppliedVariants(List<GameType> appliedVariants) {
-        this.appliedVariants = appliedVariants;
+        this.appliedVariants = EnumSet.copyOf(appliedVariants);
     }
 
-    public List<GameType> getAppliedVariants() {
-        return appliedVariants;
+    public boolean hasAppliedVariant(GameType variant) {
+        return appliedVariants.contains(variant);
     }
 
     // it's a preference, not rule... but I could hardly find a better place for it

@@ -1474,7 +1474,6 @@ public class GameAction {
     public void startGame(GameOutcome lastGameOutcome) {
         Player first = determineFirstTurnPlayer(lastGameOutcome);
 
-        List<GameType> variants = game.getRules().getAppliedVariants();
         GameType gameType = game.getRules().getGameType();
         do {
             if (game.isGameOver()) { break; } // conceded during "play or draw"
@@ -1494,7 +1493,7 @@ public class GameAction {
             game.setAge(GameStage.Play);
 
             //<THIS CODE WILL WORK WITH PHASE = NULL>
-            if (variants.contains(GameType.Planechase)) {
+            if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
                 first.initPlane();
             }
 

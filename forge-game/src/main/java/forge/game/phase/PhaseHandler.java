@@ -751,7 +751,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         Player next = getNextActivePlayer();
 
-        if (game.getRules().getAppliedVariants().contains(GameType.Planechase)) {
+        if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
             for (Card p :game.getActivePlanes()) {
                 if (p != null) {
                     p.setController(next, 0);
