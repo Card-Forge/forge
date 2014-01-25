@@ -60,7 +60,7 @@ public class MyRandom {
         int[] groups = new int[numGroups];
         
         for (int i = 0; i < value; i++) {
-            groups[MyRandom.getRandom().nextInt(numGroups)]++;
+            groups[random.nextInt(numGroups)]++;
         }
 
         return groups;

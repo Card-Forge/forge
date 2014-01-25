@@ -39,7 +39,6 @@ import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
-import forge.util.MyRandom;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.

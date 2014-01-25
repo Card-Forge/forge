@@ -56,36 +56,34 @@ public class CardPool extends ItemPool<PaperCard> {
     }
 
     // NOTE: ART indices are "1" -based
-    public void add(final String cardName, final String setCode, final int artIndex, final int amount) {
+    public void add(final String cardName, String setCode, final int artIndex, final int amount) {
         PaperCard cp = StaticData.instance().getCommonCards().getCard(cardName, setCode, artIndex);
         boolean isCommonCard = cp != null;
         if ( !isCommonCard ) {
             cp = StaticData.instance().getVariantCards().getCard(cardName, setCode);
         }
 
-        int artCount = isCommonCard 
-                ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
-
-        if ( cp != null) {
-            if (artIndex >= 0 || artCount <= 1) {
-                // either a specific art index is specified, or there is only one art, so just add the card
-                this.add(cp, amount);
-            } else {
-                // random art index specified, make sure we get different groups of cards with different art
-                int[] artGroups = MyRandom.splitIntoRandomGroups(amount, artCount);
-                for (int i = 1; i <= artGroups.length; i++) {
-                    int cnt = artGroups[i-1];
-                    if (cnt <= 0)
-                        continue;
-                    PaperCard cp_random = isCommonCard 
-                            ? StaticData.instance().getCommonCards().getCard(cardName, setCode, i) 
-                            : StaticData.instance().getVariantCards().getCard(cardName, setCode, i);
-                    this.add(cp_random, cnt);
-                }
-            }
-        }
-        else {
+        if (cp == null )
             throw new RuntimeException(String.format("Card %s from %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName, setCode ));
+
+        setCode = cp.getEdition();
+        int artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
+
+        if (artIndex >= 0 || artCount <= 1) {
+            // either a specific art index is specified, or there is only one art, so just add the card
+            this.add(cp, amount);
+        } else {
+            // random art index specified, make sure we get different groups of cards with different art
+            int[] artGroups = MyRandom.splitIntoRandomGroups(amount, artCount);
+            for (int i = 1; i <= artGroups.length; i++) {
+                int cnt = artGroups[i-1];
+                if (cnt <= 0)
+                    continue;
+                PaperCard cp_random = isCommonCard 
+                        ? StaticData.instance().getCommonCards().getCard(cardName, setCode, i) 
+                        : StaticData.instance().getVariantCards().getCard(cardName, setCode, i);
+                this.add(cp_random, cnt);
+            }
         }
     }
 
