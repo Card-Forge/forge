@@ -577,7 +577,7 @@ public enum FControl implements KeyEventDispatcher {
         }
 
         GameRules rules = new GameRules(gameType);
-        if( null != appliedVariants )
+        if (null != appliedVariants && !appliedVariants.isEmpty())
             rules.setAppliedVariants(appliedVariants);
         rules.setPlayForAnte(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE));
         rules.setManaBurn(Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN));
