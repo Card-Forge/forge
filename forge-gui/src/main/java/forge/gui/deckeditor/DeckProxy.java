@@ -125,8 +125,9 @@ public class DeckProxy implements InventoryItem {
         if (sbSize == Integer.MIN_VALUE) {
             CardPool sb = getDeck().get(DeckSection.Sideboard);
             sbSize = sb == null ? -1 : sb.countAll();
-            if( sbSize == 0 )
+            if (sbSize == 0) {
                 sbSize = -1;
+            }
         }
         return sbSize;
     }
@@ -144,8 +145,8 @@ public class DeckProxy implements InventoryItem {
 
     private static void addDecksRecursivelly(List<DeckProxy> list, String path, IStorage<Deck> folder) {
         for (IStorage<Deck> f : folder.getFolders()) {
-           String subPath = (StringUtils.isBlank(path) ? "" : path) + "/" + f.getName();
-           addDecksRecursivelly(list, subPath, f);
+            String subPath = (StringUtils.isBlank(path) ? "" : path) + "/" + f.getName();
+            addDecksRecursivelly(list, subPath, f);
         }
 
         for (Deck d : folder) {
@@ -179,20 +180,23 @@ public class DeckProxy implements InventoryItem {
     }
     
     public void reloadFromStorage() {
-        if( null != storage )
+        if (storage != null) {
             deck = storage.get(getName());
+        }
         invalidateCache();
     }
     
     @SuppressWarnings("unchecked")
     public void updateInStorage() {
-        if ( storage instanceof StorageImmediatelySerialized<?> )
+        if (storage instanceof StorageImmediatelySerialized<?>) {
             ((StorageImmediatelySerialized<IHasName>)storage).add(deck);
+        }
     }
     
     public void deleteFromStorage() { 
-        if ( storage instanceof StorageImmediatelySerialized<?> )
+        if (storage instanceof StorageImmediatelySerialized<?>) {
             storage.delete(getName());
+        }
     }    
 
     private static class ThemeDeckGenerator extends DeckProxy {

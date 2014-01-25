@@ -47,8 +47,7 @@ public class DeckController<T extends DeckBase> {
      * @param view0 the view0
      * @param newModelCreator0 the new model creator0
      */
-    public DeckController(final IStorage<T> folder0, final ACEditorBase<?, T> view0,
-            final Supplier<T> newModelCreator0) {
+    public DeckController(final IStorage<T> folder0, final ACEditorBase<?, T> view0, final Supplier<T> newModelCreator0) {
         this.rootFolder = folder0;
         this.currentFolder = rootFolder;
         this.view = view0;
@@ -94,7 +93,7 @@ public class DeckController<T extends DeckBase> {
         if (model.getName().isEmpty()) {
             return true;
         }
-        
+
         final T modelStored = this.currentFolder.get(this.model.getName());
         // checks presence in dictionary only.
         if (modelStored == this.model) {
@@ -142,13 +141,15 @@ public class DeckController<T extends DeckBase> {
     }
 
     public void load(final String path, final String name) {
-        if ( StringUtils.isBlank(path))
+        if (StringUtils.isBlank(path)) {
             currentFolder = rootFolder;
-        else
+        }
+        else {
             currentFolder = rootFolder.tryGetFolder(path);
+        }
         load(name);
     }
-    
+
     /**
      * Load.
      *

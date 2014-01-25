@@ -353,7 +353,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      * @return generic type of items
      */
-    public Class<T> getGenericType() { 
+    public Class<T> getGenericType() {
         return this.genericType;
     }
 
@@ -407,7 +407,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      */
     public void setPool(final ItemPool<T> poolView, boolean infinite) {
         this.setPoolImpl(ItemPool.createFrom(poolView, this.genericType), infinite);
-
     }
 
     public void setPool(final ItemPool<T> pool0) {
@@ -1046,7 +1045,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public Iterable<ListSelectionListener> getSelectionListeners() {
     	return selectionListeners;
     }
-    
+
     public void setItemActivateCommand(Command itemActivateCommand0) {
         this.itemActivateCommand = itemActivateCommand0;
     }

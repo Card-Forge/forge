@@ -254,16 +254,16 @@ public enum CCurrentDeck implements ICDoc {
         return null;
     }
 
-        /** The Constant HTML_FILTER. */
-        public static final FileFilter HTML_FILTER = new FileFilter() {
-            @Override
-            public boolean accept(final File f) {
-                return f.getName().endsWith(".html") || f.isDirectory();
-            }
+    /** The Constant HTML_FILTER. */
+    public static final FileFilter HTML_FILTER = new FileFilter() {
+        @Override
+        public boolean accept(final File f) {
+            return f.getName().endsWith(".html") || f.isDirectory();
+        }
 
-            @Override
-            public String getDescription() {
-                return "Proxy File .html";
-            }
-        };
+        @Override
+        public String getDescription() {
+            return "Proxy File .html";
+        }
+    };
 }
