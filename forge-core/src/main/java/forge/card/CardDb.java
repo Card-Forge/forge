@@ -97,7 +97,7 @@ public final class CardDb implements ICardDatabase {
                 isFoil = true;
             }
             
-            int artIndex = artPos > 0 ? Integer.parseInt(nameParts[artPos]) : -1;
+            int artIndex = artPos > 0 ? Integer.parseInt(nameParts[artPos])-1 : -1;
             String setName = setPos > 0 ? nameParts[setPos] : null;
             if( "???".equals(setName) )
                 setName = null;
@@ -173,15 +173,18 @@ public final class CardDb implements ICardDatabase {
     @Override
     public PaperCard getCard(final String cardName, String setName) {
         CardRequest request = CardRequest.fromString(cardName);
-        request.edition = setName;
+        if(setName != null)
+            request.edition = setName;
         return tryGetCard(request);
     }
 
     @Override
     public PaperCard getCard(final String cardName, String setName, int artIndex) {
         CardRequest request = CardRequest.fromString(cardName);
-        request.edition = setName;
-        request.artIndex = artIndex;
+        if(setName != null)
+            request.edition = setName;
+        if(artIndex >= 0)
+            request.artIndex = artIndex;
         return tryGetCard(request);
     }
     
@@ -191,10 +194,17 @@ public final class CardDb implements ICardDatabase {
 
         PaperCard result = null;
         
+        String reqEdition = request.edition;
+        if(reqEdition != null && !editions.contains(reqEdition)) {
+            CardEdition edition = editions.get(reqEdition);
+            if( edition != null )
+                reqEdition =  edition.getCode();
+        }
+        
         if ( request.artIndex < 0 ) { // this stands for 'random art'
             List<PaperCard> candidates = new ArrayList<PaperCard>(9); // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
             for( PaperCard pc : cards ) {
-                if( pc.getEdition().equalsIgnoreCase(request.edition) || request.edition == null )
+                if( pc.getEdition().equalsIgnoreCase(reqEdition) || reqEdition == null )
                     candidates.add(pc);
             }
 
@@ -203,7 +213,7 @@ public final class CardDb implements ICardDatabase {
             result = Aggregates.random(candidates);
         } else {
             for( PaperCard pc : cards ) {
-                if( pc.getEdition().equalsIgnoreCase(request.edition) && request.artIndex == pc.getArtIndex() ) {
+                if( pc.getEdition().equalsIgnoreCase(reqEdition) && request.artIndex == pc.getArtIndex() ) {
                     result = pc;
                     break;
                 }

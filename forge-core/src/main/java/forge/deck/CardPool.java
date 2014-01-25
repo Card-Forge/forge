@@ -55,12 +55,12 @@ public class CardPool extends ItemPool<PaperCard> {
         this.add(cardName, setCode, -1, amount);
     }
 
+    // NOTE: ART indices are "1" -based
     public void add(final String cardName, final String setCode, final int artIndex, final int amount) {
-        boolean isCommonCard = true;
         PaperCard cp = StaticData.instance().getCommonCards().getCard(cardName, setCode, artIndex);
-        if ( cp == null ) {
-            cp = StaticData.instance().getVariantCards().getCard(cardName, setCode, artIndex);
-            isCommonCard = false;
+        boolean isCommonCard = cp != null;
+        if ( !isCommonCard ) {
+            cp = StaticData.instance().getVariantCards().getCard(cardName, setCode);
         }
 
         int artCount = isCommonCard 
@@ -73,7 +73,7 @@ public class CardPool extends ItemPool<PaperCard> {
             } else {
                 // random art index specified, make sure we get different groups of cards with different art
                 int[] artGroups = MyRandom.splitIntoRandomGroups(amount, artCount);
-                for (int i = 0; i < artGroups.length; i++) {
+                for (int i = 1; i <= artGroups.length; i++) {
                     PaperCard cp_random = isCommonCard ? StaticData.instance().getCommonCards().getCard(cardName, setCode, i) : StaticData.instance().getVariantCards().getCard(cardName, setCode, i);
                     this.add(cp_random, artGroups[i]);
                 }

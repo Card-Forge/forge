@@ -162,11 +162,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
             final int numArt = Singletons.getMagicDb().getCommonCards().getArtCount(landName, landSet);
 
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
-                for (int i = 0; i < numArt; i++) {
+                for (int i = 1; i <= numArt; i++) {
                     deck.get(DeckSection.Sideboard).add(landName, landSet, i, numArt > 1 ? landsCount : 30);
                 }
             } else {
-                deck.get(DeckSection.Sideboard).add(landName, landSet, numArt > 1 ? MyRandom.getRandom().nextInt(numArt) : 0, 30);
+                deck.get(DeckSection.Sideboard).add(landName, landSet, 30);
             }
         }
 

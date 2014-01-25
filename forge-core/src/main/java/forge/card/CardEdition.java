@@ -347,6 +347,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         }
         
         
+        
         public Iterable<CardEdition> getOrderedEditions() {
             List<CardEdition> res = Lists.newArrayList(this);
             Collections.sort(res);
