@@ -19,8 +19,6 @@ package forge.gui.toolbox.itemmanager;
 
 import java.awt.Component;
 import java.awt.Toolkit;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
@@ -53,15 +51,15 @@ import forge.gui.GuiUtils;
 import forge.gui.toolbox.ContextMenuBuilder;
 import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedCheckBox;
 import forge.gui.toolbox.FSkin.SkinnedPanel;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.LayoutHelper;
-import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
+import forge.gui.toolbox.itemmanager.views.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.ItemListView;
 import forge.gui.toolbox.itemmanager.views.ItemView;
 import forge.item.InventoryItem;
@@ -88,7 +86,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     private boolean alwaysNonUnique = false;
     private boolean allowMultipleSelections = false;
     private boolean hideFilters = false;
-    private int viewHeightBackup;
     private Command itemActivateCommand;
     private ContextMenuBuilder contextMenuBuilder;
     private final Class<T> genericType;
@@ -122,8 +119,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         .build();
 
     private final FComboBoxWrapper<ItemView<T>> cbViews = new FComboBoxWrapper<ItemView<T>>();
+    private ItemView<T> currentView;
     private final ItemListView<T> table;
-    private final FScrollPane viewScroller;
     private boolean initialized;
     protected boolean lockFiltering;
 
@@ -137,12 +134,24 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     protected ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
-        this.model = new ItemManagerModel<T>(this, genericType0);
+        this.model = new ItemManagerModel<T>(genericType0);
         this.table = new ItemListView<T>(this, this.model);
         this.table.setAllowMultipleSelections(false);
-        this.viewScroller = new FScrollPane(this.table.getComponent(), false);
-        this.viewScroller.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT)));
+        this.currentView = this.table;
+
         this.cbViews.addItem(this.table);
+        this.cbViews.addItemListener(new ItemListener() {
+            @SuppressWarnings("unchecked")
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                ItemView<T> view = (ItemView<T>) e.getItem();
+                if (currentView == view) { return; }
+                ItemManager.this.remove(currentView.getScroller());
+                currentView = view;
+                ItemManager.this.add(currentView.getScroller());
+                ItemManager.this.revalidate();
+            }
+        });
     }
 
     /**
@@ -153,18 +162,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
         //build table view
         this.table.initialize();
-        this.viewScroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
-        this.viewScroller.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                //scroll selection into view whenever view height changes
-                int height = e.getComponent().getHeight();
-                if (height != viewHeightBackup) {
-                    viewHeightBackup = height;
-                    scrollSelectionIntoView();
-                }
-            }
-        });
 
         //build enable filters checkbox
         ItemFilter.layoutCheckbox(this.chkEnableFilters);
@@ -200,7 +197,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.add(this.lblCaption);
         this.add(this.lblRatio);
         this.cbViews.addTo(this);
-        this.add(this.viewScroller);
+        this.add(this.currentView.getScroller());
 
         final Runnable cmdAddCurrentSearch = new Runnable() {
             @Override
@@ -291,6 +288,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         }
     }
 
+    public void setup(final Map<ColumnDef, ItemColumn> cols) {
+        this.table.setup(cols);
+    }
+
     @Override
     public void doLayout() {
         int buttonPanelHeight = 32;
@@ -344,7 +345,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         helper.include(this.lblCaption, captionWidth, FTextField.HEIGHT);
         helper.fillLine(this.lblRatio, FTextField.HEIGHT, cbViewsWidth); //leave room for cbViews
         helper.fillLine(this.cbViews.getComponent(), FTextField.HEIGHT);
-        helper.fill(this.viewScroller);
+        helper.fill(this.currentView.getScroller());
     }
 
     /**
@@ -427,8 +428,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.updateView(true, null, 0);
     }
 
-    public ItemListView<T> getTable() {
-        return this.table;
+    public ItemView<T> getCurrentView() {
+        return this.currentView;
     }
 
     /**
@@ -438,7 +439,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @return int
      */
     public int getItemCount() {
-        return this.table.getCount();
+        return this.currentView.getCount();
     }
 
     /**
@@ -448,7 +449,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @return int
      */
     public int getSelectionCount() {
-        return this.table.getSelectionCount();
+        return this.currentView.getSelectionCount();
     }
 
     /**
@@ -458,7 +459,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @return T
      */
     public T getSelectedItem() {
-        return this.table.getSelectedItem();
+        return this.currentView.getSelectedItem();
     }
 
     /**
@@ -468,7 +469,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @return Iterable<T>
      */
     public Collection<T> getSelectedItems() {
-        return this.table.getSelectedItems();
+        return this.currentView.getSelectedItems();
     }
 
     /**
@@ -492,7 +493,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param item - Item to select
      */
     public boolean setSelectedItem(T item) {
-    	return this.table.setSelectedItem(item);
+    	return this.currentView.setSelectedItem(item);
     }
 
     /**
@@ -502,7 +503,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param items - Items to select
      */
     public boolean setSelectedItems(Iterable<T> items) {
-        return this.table.setSelectedItems(items);
+        return this.currentView.setSelectedItems(items);
     }
 
     /**
@@ -567,12 +568,21 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
+     * selectAll.
+     * 
+     */
+    public void selectAll() {
+        this.currentView.selectAll();
+    }
+
+    /**
+     * 
      * getSelectedItem.
      * 
      * @return T
      */
     public int getSelectedIndex() {
-        return this.table.getSelectedIndex();
+        return this.currentView.getSelectedIndex();
     }
 
     /**
@@ -582,7 +592,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @return Iterable<Integer>
      */
     public Iterable<Integer> getSelectedIndices() {
-        return this.table.getSelectedIndices();
+        return this.currentView.getSelectedIndices();
     }
 
     /**
@@ -592,7 +602,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param index - Index to select
      */
     public void setSelectedIndex(int index) {
-        this.table.setSelectedIndex(index);
+        this.currentView.setSelectedIndex(index);
     }
 
     /**
@@ -602,10 +612,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param indices - Indices to select
      */
     public void setSelectedIndices(Integer[] indices) {
-        this.table.setSelectedIndices(Arrays.asList(indices));
+        this.currentView.setSelectedIndices(Arrays.asList(indices));
     }
     public void setSelectedIndices(Iterable<Integer> indices) {
-        this.table.setSelectedIndices(indices);
+        this.currentView.setSelectedIndices(indices);
     }
 
     /**
@@ -700,7 +710,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      */
     public void scrollSelectionIntoView() {
-        this.table.scrollSelectionIntoView();
+        this.currentView.scrollSelectionIntoView();
     }
 
     /**
@@ -924,7 +934,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             this.model.addItems(this.pool);
         }
 
-        this.table.refresh(itemsToSelect, backupIndexToSelect);
+        this.currentView.refresh(itemsToSelect, backupIndexToSelect);
 
         for (ItemFilter<? extends T> filter : this.orderedFilters) {
             filter.afterFiltersApplied();
@@ -965,7 +975,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @return true if an incremental search is currently active
      */
     public boolean isIncrementalSearchActive() {
-        return this.table.isIncrementalSearchActive();
+        return this.currentView.isIncrementalSearchActive();
     }
 
     /**
@@ -1027,7 +1037,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public void setAllowMultipleSelections(boolean allowMultipleSelections0) {
     	if (this.allowMultipleSelections == allowMultipleSelections0) { return; }
     	this.allowMultipleSelections = allowMultipleSelections0;
-        this.table.setAllowMultipleSelections(allowMultipleSelections0);
+        this.currentView.setAllowMultipleSelections(allowMultipleSelections0);
     }
 
     /**
@@ -1046,7 +1056,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * 
      */
     public void focus() {
-        this.table.getComponent().requestFocusInWindow();
+        this.currentView.focus();
     }
 
     /**
@@ -1091,7 +1101,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.focus();
 
         //if item under the cursor is not selected, select it
-        int index = this.getTable().getIndexAtPoint(e.getPoint());
+        int index = this.currentView.getIndexAtPoint(e.getPoint());
         boolean needSelection = true;
         for (Integer selectedIndex : this.getSelectedIndices()) {
             if (selectedIndex == index) {

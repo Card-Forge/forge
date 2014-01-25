@@ -46,7 +46,7 @@ public enum CWorkshopCatalog implements ICDoc {
     public void update() {
         final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(ColumnDef.QUANTITY);
-        VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().getTable().setup(lstCatalogCols);
+        VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().setup(lstCatalogCols);
         //TODO: Restore previously selected card
     }
 }

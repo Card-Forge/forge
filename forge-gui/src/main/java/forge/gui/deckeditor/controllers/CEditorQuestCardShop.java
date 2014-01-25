@@ -497,8 +497,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsDeck.remove(new ItemColumn(ColumnDef.AI));
 
         // Setup with current column set
-        this.getCatalogManager().getTable().setup(columnsCatalog);
-        this.getDeckManager().getTable().setup(columnsDeck);
+        this.getCatalogManager().setup(columnsCatalog);
+        this.getDeckManager().setup(columnsDeck);
 
         SItemManagerUtil.resetUI(this);
 

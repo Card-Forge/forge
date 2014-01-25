@@ -138,7 +138,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         this.getCatalogManager().setCaption("Pack " + packNumber + " - Cards");
         this.getCatalogManager().setPool(list);
-        this.getCatalogManager().getTable().setSelectedIndex(0);
     } // showChoices()
 
     /**
@@ -251,8 +250,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      */
     @Override
     public void update() {
-        this.getCatalogManager().getTable().setup(SColumnUtil.getCatalogDefaultColumns());
-        this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogManager().setup(SColumnUtil.getCatalogDefaultColumns());
+        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns());
 
         ccAddLabel = this.getBtnAdd().getText();
         this.getBtnAdd().setText("Choose Card");

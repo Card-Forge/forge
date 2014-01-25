@@ -163,8 +163,8 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(ColumnDef.QUANTITY);
 
-        this.getCatalogManager().getTable().setup(lstCatalogCols);
-        this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogManager().setup(lstCatalogCols);
+        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns());
 
         SItemManagerUtil.resetUI(this);
 
@@ -221,19 +221,19 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         switch(sectionMode) {
             case Main:
                 lstCatalogCols.remove(ColumnDef.QUANTITY);
-                this.getCatalogManager().getTable().setup(lstCatalogCols);
+                this.getCatalogManager().setup(lstCatalogCols);
                 this.getCatalogManager().setPool(normalPool, true);
                 this.getDeckManager().setPool(this.controller.getModel().getMain());
                 break;
             case Sideboard:
                 lstCatalogCols.remove(ColumnDef.QUANTITY);
-                this.getCatalogManager().getTable().setup(lstCatalogCols);
+                this.getCatalogManager().setup(lstCatalogCols);
                 this.getCatalogManager().setPool(normalPool, true);
                 this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
                 break;
             case Commander:
                 lstCatalogCols.remove(ColumnDef.QUANTITY);
-                this.getCatalogManager().getTable().setup(lstCatalogCols);
+                this.getCatalogManager().setup(lstCatalogCols);
                 this.getCatalogManager().setPool(commanderPool, true);
                 this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Commander));
                 break;

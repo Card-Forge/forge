@@ -36,7 +36,6 @@ import forge.util.ItemPool;
  * @version $Id: ItemManagerModel.java 19857 2013-02-24 08:49:52Z Max mtg $
  */
 public final class ItemManagerModel<T extends InventoryItem> {
-    private final ItemManager<T> itemManager;
     private final ItemPool<T> data;
     private boolean infiniteSupply;
 
@@ -46,8 +45,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
      * @param ItemManager0
      * @param genericType0
      */
-    public ItemManagerModel(final ItemManager<T> itemManager0, final Class<T> genericType0) {
-        this.itemManager = itemManager0;
+    public ItemManagerModel(final Class<T> genericType0) {
         this.data = new ItemPool<T>(genericType0);
     }
 
@@ -57,15 +55,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     public void clear() {
         this.data.clear();
     }
-    
-    /**
-     * 
-     * getOrderedList.
-     * 
-     * @return List<Entry<T, Integer>>
-     */
-    
-    
+
     // same thing as above, it was copied to provide sorting (needed by table
     // views in deck editors)
     /** The items ordered. */
@@ -74,6 +64,12 @@ public final class ItemManagerModel<T extends InventoryItem> {
     /** Whether list is in sync. */
     protected transient boolean isListInSync = false;
 
+    /**
+     * 
+     * getOrderedList.
+     * 
+     * @return List<Entry<T, Integer>>
+     */
     public final List<Entry<T, Integer>> getOrderedList() {
         if (!this.isListInSync) {
             this.rebuildOrderedList();
@@ -89,8 +85,8 @@ public final class ItemManagerModel<T extends InventoryItem> {
             }
         }
         this.isListInSync = true;
-    }    
-    
+    }
+
     /**
      * 
      * countDistinct.
@@ -122,7 +118,6 @@ public final class ItemManagerModel<T extends InventoryItem> {
         if (wasThere) {
             this.data.remove(item0, qty);
             isListInSync = false;
-            this.itemManager.getTable().getTableModel().fireTableDataChanged();
         }
     }
 
@@ -134,7 +129,6 @@ public final class ItemManagerModel<T extends InventoryItem> {
     public void addItem(final T item0, int qty) {
         this.data.add(item0, qty);
         isListInSync = false;
-        this.itemManager.getTable().getTableModel().fireTableDataChanged();
     }
 
     /**
@@ -145,7 +139,6 @@ public final class ItemManagerModel<T extends InventoryItem> {
     public void addItems(final Iterable<Entry<T, Integer>> items0) {
         this.data.addAll(items0);
         isListInSync = false;
-        this.itemManager.getTable().getTableModel().fireTableDataChanged();
     }
 
     /**

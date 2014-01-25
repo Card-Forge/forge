@@ -125,10 +125,10 @@ public final class DeckManager extends ItemManager<DeckProxy> {
             columns.get(ColumnDef.DECK_ACTIONS).setVisible(!preventEdit0);
         }
         if (stringOnly0) {
-            this.getTable().setup(SColumnUtil.getStringColumn());
+            this.setup(SColumnUtil.getStringColumn());
         }
         else {
-            this.getTable().setup(columns);
+            this.setup(columns);
         }
     }
 

@@ -6,10 +6,13 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,16 +29,22 @@ import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
 
 public abstract class ItemView<T extends InventoryItem> {
     private final ItemManager<T> itemManager;
+    private final FScrollPane scroller;
+    private int heightBackup;
     private boolean isIncrementalSearchActive = false;
 
     protected ItemView(ItemManager<T> itemManager0) {
         this.itemManager = itemManager0;
+        this.scroller = new FScrollPane(false);
+        this.scroller.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT)));
     }
 
     public void initialize() {
@@ -50,10 +59,28 @@ public abstract class ItemView<T extends InventoryItem> {
             }
         });
         comp.addKeyListener(incrementalSearch);
+
+        this.scroller.setViewportView(comp);
+        this.scroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
+        this.scroller.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                //scroll selection into view whenever view height changes
+                int height = e.getComponent().getHeight();
+                if (height != heightBackup) {
+                    heightBackup = height;
+                    scrollSelectionIntoView();
+                }
+            }
+        });
     }
 
     public ItemManager<T> getItemManager() {
         return this.itemManager;
+    }
+
+    public FScrollPane getScroller() {
+        return this.scroller;
     }
 
     public boolean isIncrementalSearchActive() {
@@ -311,13 +338,34 @@ public abstract class ItemView<T extends InventoryItem> {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            if (KeyEvent.VK_ESCAPE == e.getKeyCode()) {
-                cancel();
+            if (popupShowing) {
+                if (KeyEvent.VK_ESCAPE == e.getKeyCode()) {
+                    cancel();
+                }
+            }
+            else {
+                for (KeyListener keyListener : itemManager.getKeyListeners()) {
+                    keyListener.keyPressed(e);
+                    if (e.isConsumed()) { return; }
+                }
+                if (KeyEvent.VK_F == e.getKeyCode()) {
+                    // let ctrl/cmd-F set focus to the text filter box
+                    if (e.isControlDown() || e.isMetaDown()) {
+                        itemManager.focusSearch();
+                    }
+                }
             }
         }
 
         @Override
         public void keyTyped(KeyEvent e) {
+            if (!popupShowing) {
+                for (KeyListener keyListener : itemManager.getKeyListeners()) {
+                    keyListener.keyTyped(e);
+                    if (e.isConsumed()) { return; }
+                }
+            }
+
             switch (e.getKeyChar()) {
             case KeyEvent.CHAR_UNDEFINED:
                 return;
@@ -354,6 +402,16 @@ public abstract class ItemView<T extends InventoryItem> {
             }
 
             findNextMatch(Math.max(0, ItemView.this.getSelectedIndex()), false);
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if (!popupShowing) {
+                for (KeyListener keyListener : itemManager.getKeyListeners()) {
+                    keyListener.keyReleased(e);
+                    if (e.isConsumed()) { return; }
+                }
+            }
         }
     }
 }

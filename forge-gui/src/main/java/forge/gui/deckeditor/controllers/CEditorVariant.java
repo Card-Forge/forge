@@ -162,8 +162,8 @@ public final class CEditorVariant extends ACEditorBase<PaperCard, Deck> {
         final Map<ColumnDef, ItemColumn> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
         lstCatalogCols.remove(ColumnDef.QUANTITY);
 
-        this.getCatalogManager().getTable().setup(lstCatalogCols);
-        this.getDeckManager().getTable().setup(SColumnUtil.getDeckDefaultColumns());
+        this.getCatalogManager().setup(lstCatalogCols);
+        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns());
 
         SItemManagerUtil.resetUI(this);
 

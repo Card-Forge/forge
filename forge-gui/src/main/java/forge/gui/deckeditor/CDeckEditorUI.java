@@ -41,7 +41,6 @@ import forge.gui.framework.ICDoc;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.itemmanager.ItemManager;
-import forge.gui.toolbox.itemmanager.views.ItemListView;
 import forge.item.InventoryItem;
 import forge.util.ItemPool;
 
@@ -178,7 +177,7 @@ public enum CDeckEditorUI implements ICDoc {
     @SuppressWarnings("unchecked")
     public void removeAllCards(final boolean toAlternate) {
         ItemManager<?> v = childController.getDeckManager();
-        v.getTable().selectAll();
+        v.selectAll();
         moveSelectedItems(v, new _MoveAction() {
             @Override
             public <T extends InventoryItem> void move(Iterable<Entry<T, Integer>> items) {
@@ -199,40 +198,32 @@ public enum CDeckEditorUI implements ICDoc {
 
         final ItemManager<? extends InventoryItem> catView  = childController.getCatalogManager();
         final ItemManager<? extends InventoryItem> deckView = childController.getDeckManager();
-        final ItemListView<? extends InventoryItem> catTable  = catView.getTable();
-        final ItemListView<? extends InventoryItem> deckTable = deckView.getTable();
 
         VCardCatalog.SINGLETON_INSTANCE.setItemManager(catView);
         VCurrentDeck.SINGLETON_INSTANCE.setItemManager(deckView);
 
         if (!childController.listenersHooked) { //hook listeners the first time the controller is updated
-            catTable.getComponent().addKeyListener(new KeyAdapter() {
+            catView.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (!catView.isIncrementalSearchActive() && KeyEvent.VK_SPACE == e.getKeyCode()) {
                         addSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                     }
                     else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
-                        deckTable.focus();
+                        deckView.focus();
                         e.consume(); //prevent losing selection
-                    }
-                    else if (KeyEvent.VK_F == e.getKeyCode()) {
-                        // let ctrl/cmd-F set focus to the text filter box
-                        if (e.isControlDown() || e.isMetaDown()) {
-                            catView.focusSearch();
-                        }
                     }
                 }
             });
 
-            deckTable.getComponent().addKeyListener(new KeyAdapter() {
+            deckView.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (!catView.isIncrementalSearchActive() && KeyEvent.VK_SPACE == e.getKeyCode()) {
                         removeSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                     }
                     else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
-                        catTable.focus();
+                        catView.focus();
                         e.consume(); //prevent losing selection
                     }
                     else if (KeyEvent.VK_F == e.getKeyCode()) {

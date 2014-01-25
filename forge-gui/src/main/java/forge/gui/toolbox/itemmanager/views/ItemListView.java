@@ -125,11 +125,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         this.table.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
     }
 
-    /**
-     * Applies a EditorTableModel and a model listener to this instance's JTable.
-     * 
-     * @param cols &emsp; List<TableColumnInfo<InventoryItem>> of additional columns for this
-     */
     public void setup(final Map<ColumnDef, ItemColumn> cols) {
         final Iterable<T> selectedItemsBefore = getSelectedItems();
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
@@ -270,6 +265,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     @Override
     protected void onRefresh() {
         this.tableModel.refreshSort();
+        this.tableModel.fireTableDataChanged();
     }
 
     public final class ItemTable extends SkinnedTable {

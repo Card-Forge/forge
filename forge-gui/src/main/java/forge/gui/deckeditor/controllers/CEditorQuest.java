@@ -254,8 +254,8 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
 
         columnsDeck.put(ColumnDef.DECKS, new ItemColumn(ColumnDef.DECKS, this.fnDeckCompare, this.fnDeckGet));
 
-        this.getCatalogManager().getTable().setup(columnsCatalog);
-        this.getDeckManager().getTable().setup(columnsDeck);
+        this.getCatalogManager().setup(columnsCatalog);
+        this.getDeckManager().setup(columnsDeck);
 
         SItemManagerUtil.resetUI(this);
 
