@@ -20,6 +20,10 @@ http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=12609#p138913
 Forge now fully supports the distinction between cards with different art, which is most apparent with basic lands. It is now possible to specifically add cards with particular art in the deck editor, and cards with different art are now generated for random constructed decks, sealed deck pools, booster draft extra basic land pools, starting quest card pools, and quest card shop pools. The deck file (.dck) format has been adapted to account for this change so that the card art index can now be specified after the set, with the index starting at 1 for the first possible card art. In case you would like to avoid generating cards with random art in limited modes (sealed deck, booster draft, quest mode) in order to make your deck management easier when it comes to basic lands, you can uncheck the "Randomize Card Art in Generated Card Pools" option in the game preferences. When disabled, the generated limited mode card pools will feature one kind of each basic land with the same picture on all cards.
 
 
+- Automatic card edition adjustmenet -
+A deck may explicitly define the edition and art variant of each card it includes. If a deck specifies those for no card, Forge uses a special algorithm to determine which card printings were the latest by the moment all of deck's had been printed. These very editions of cards are used when loading deck into memory to reflect the flavour of the season when the deck was built.
+
+
 - Commander 2013 cards -
 Forge now includes many of the new Commander 2013 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
