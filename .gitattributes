@@ -14672,6 +14672,7 @@ forge-gui/res/quest/precons/Battalion.dck -text
 forge-gui/res/quest/precons/Battle[!!-~]Blitz.dck -text
 forge-gui/res/quest/precons/Battle[!!-~]Cries.dck -text
 forge-gui/res/quest/precons/Battle[!!-~]Surge.dck -text
+forge-gui/res/quest/precons/Bestial[!!-~]Strength.dck -text
 forge-gui/res/quest/precons/Blood[!!-~]And[!!-~]Fire.dck -text
 forge-gui/res/quest/precons/Boggart[!!-~]Feast.dck -text
 forge-gui/res/quest/precons/Bomber.dck -text
@@ -14689,6 +14690,7 @@ forge-gui/res/quest/precons/Dark[!!-~]Sacrifice.dck -text
 forge-gui/res/quest/precons/Dead[!!-~]Ahead.dck -text
 forge-gui/res/quest/precons/Deadspread.dck -text
 forge-gui/res/quest/precons/Death[!!-~]March.dck -text
+forge-gui/res/quest/precons/Death[!!-~]Reaper.dck -text
 forge-gui/res/quest/precons/Death's[!!-~]Minions.dck -text
 forge-gui/res/quest/precons/Deathfed.dck -text
 forge-gui/res/quest/precons/Deathly[!!-~]Dominion.dck -text
@@ -14717,6 +14719,7 @@ forge-gui/res/quest/precons/Fate[!!-~]Blaster.dck -text
 forge-gui/res/quest/precons/Feast[!!-~]of[!!-~]Flesh.dck -text
 forge-gui/res/quest/precons/Fiendish[!!-~]Nature.dck -text
 forge-gui/res/quest/precons/Fiery[!!-~]Dawn.dck -text
+forge-gui/res/quest/precons/Fire[!!-~]Surge.dck -text
 forge-gui/res/quest/precons/Firebomber.dck -text
 forge-gui/res/quest/precons/Flyover.dck -text
 forge-gui/res/quest/precons/Gleeful[!!-~]Flames.dck -text
@@ -14747,6 +14750,7 @@ forge-gui/res/quest/precons/Levelers'[!!-~]Glory.dck -text
 forge-gui/res/quest/precons/Levelers'[!!-~]Scorn.dck -text
 forge-gui/res/quest/precons/Life[!!-~]Boost.dck -text
 forge-gui/res/quest/precons/Life[!!-~]Drain.dck -text
+forge-gui/res/quest/precons/Lightforce.dck -text
 forge-gui/res/quest/precons/Little[!!-~]Bashers.dck -text
 forge-gui/res/quest/precons/Lofty[!!-~]Heights.dck -text
 forge-gui/res/quest/precons/Master[!!-~]Blaster.dck -text
@@ -14771,6 +14775,7 @@ forge-gui/res/quest/precons/Phyrexian[!!-~]Assault.dck -text
 forge-gui/res/quest/precons/Phyrexian[!!-~]Poison.dck -text
 forge-gui/res/quest/precons/Presence[!!-~]of[!!-~]Mind.dck -text
 forge-gui/res/quest/precons/Primordial[!!-~]Jund.dck -text
+forge-gui/res/quest/precons/Psychic[!!-~]Labyrinth.dck -text
 forge-gui/res/quest/precons/Pummel.dck -text
 forge-gui/res/quest/precons/Pumped[!!-~]Up.dck -text
 forge-gui/res/quest/precons/Radiant's[!!-~]Revenge.dck -text
