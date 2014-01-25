@@ -160,7 +160,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         variantsPanel.add(vntArchenemy);
         comboArchenemy.addTo(variantsPanel);
 
-        constructedFrame.add(new FScrollPane(variantsPanel, false,
+        constructedFrame.add(new FScrollPane(variantsPanel, false, true,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
                 "w 100%, h 45px!, gapbottom 10px, spanx 2, wrap");
