@@ -54,6 +54,9 @@ http://www.cardforge.org/fpics/products/boosters/AVR_5.jpg
 http://www.cardforge.org/fpics/products/boosters/BOK_1.jpg
 http://www.cardforge.org/fpics/products/boosters/BOK_2.jpg
 http://www.cardforge.org/fpics/products/boosters/BOK_3.jpg
+http://www.cardforge.org/fpics/products/boosters/BNG_1.jpg
+http://www.cardforge.org/fpics/products/boosters/BNG_2.jpg
+http://www.cardforge.org/fpics/products/boosters/BNG_3.jpg
 http://www.cardforge.org/fpics/products/boosters/CFX_1.jpg
 http://www.cardforge.org/fpics/products/boosters/CFX_2.jpg
 http://www.cardforge.org/fpics/products/boosters/CFX_3.jpg
