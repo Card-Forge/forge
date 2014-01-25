@@ -3,7 +3,9 @@ package forge.gui.deckeditor;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.gui.deckeditor.controllers.CAllDecks;
 import forge.gui.deckeditor.controllers.DeckController;
+import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.FScreen;
 import forge.gui.toolbox.FOptionPane;
@@ -14,7 +16,6 @@ import forge.gui.toolbox.FOptionPane;
  * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
  */
 public class SEditorIO {
-
     /**
      * Saves the current deck, with various prompts depending on the
      * current save environment.
@@ -34,18 +35,28 @@ public class SEditorIO {
         // Confirm if overwrite
         else if (controller.fileExists(name)) {
             boolean confirmResult = true;
-            if ( !StringUtils.equals(name, controller.getModelName()) ) { // prompt only if name was changed
+            if (!StringUtils.equals(name, controller.getModelName())) { // prompt only if name was changed
                 confirmResult = FOptionPane.showConfirmDialog(
                     "There is already a deck named '" + name + "'. Overwrite?",
                     "Overwrite Deck?");
             }
 
-            if (confirmResult) { controller.save(); }
+            if (confirmResult) {
+                controller.save();
+                DeckProxy deck = VAllDecks.SINGLETON_INSTANCE.getLstDecks().stringToItem(controller.getModelPath() + "/" + name);
+                if (deck != null) { //reload DeckProxy to pull changes into deck list
+                    deck.reloadFromStorage();
+                    VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedItem(deck);
+                    VAllDecks.SINGLETON_INSTANCE.getLstDecks().repaint();
+                }
+            }
         }
         // Confirm if a new deck will be created
         else if (FOptionPane.showConfirmDialog("This will create a new deck named '" +
                 name + "'. Continue?", "Create Deck?")) {
             controller.saveAs(name);
+            CAllDecks.SINGLETON_INSTANCE.refresh(); //pull new deck into deck list and select it
+            VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(controller.getModelPath() + "/" + name);
         }
 
         return true;

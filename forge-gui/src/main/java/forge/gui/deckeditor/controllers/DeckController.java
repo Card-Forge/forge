@@ -37,6 +37,7 @@ public class DeckController<T extends DeckBase> {
     private boolean modelInStorage;
     private final IStorage<T> rootFolder;
     private IStorage<T> currentFolder;
+    private String modelPath;
     private final ACEditorBase<?, T> view;
     private final Supplier<T> newModelCreator;
 
@@ -54,6 +55,7 @@ public class DeckController<T extends DeckBase> {
         this.model = null;
         this.saved = true;
         this.modelInStorage = false;
+        this.modelPath = "";
         this.newModelCreator = newModelCreator0;
     }
 
@@ -64,6 +66,10 @@ public class DeckController<T extends DeckBase> {
      */
     public T getModel() {
         return this.model;
+    }
+
+    public String getModelPath() {
+        return this.modelPath;
     }
 
     /**
@@ -82,7 +88,7 @@ public class DeckController<T extends DeckBase> {
         CProbabilities.SINGLETON_INSTANCE.update();
 
         if (this.isModelInSyncWithFolder()) {
-            _setSaved(true);
+            this.setSaved(true);
         }
         else {
             this.notifyModelChanged();
@@ -119,10 +125,12 @@ public class DeckController<T extends DeckBase> {
      * Notify model changed.
      */
     public void notifyModelChanged() {
-        _setSaved(false);
+        if (saved) {
+            this.setSaved(false);
+        }
     }
 
-    private void _setSaved(boolean val) {
+    private void setSaved(boolean val) {
         saved = val;
         updateCaptions();
     }
@@ -147,6 +155,7 @@ public class DeckController<T extends DeckBase> {
         else {
             currentFolder = rootFolder.tryGetFolder(path);
         }
+        modelPath = path;
         load(name);
     }
 
@@ -155,13 +164,14 @@ public class DeckController<T extends DeckBase> {
      *
      * @param name the name
      */
-    @SuppressWarnings("unchecked") private void load(final String name) {
+    @SuppressWarnings("unchecked")
+    private void load(final String name) {
         T newModel = this.currentFolder.get(name);
         if (newModel != null) {
             this.setModel((T) newModel.copyTo(name), true);
         }
         else {
-            _setSaved(true);
+            this.setSaved(true);
         }
     }
 
@@ -174,11 +184,10 @@ public class DeckController<T extends DeckBase> {
             return;
         }
 
-        this.currentFolder.add(this.model);
-        // copy to new instance which will be edited and left if unsaved
-        this.model = (T)this.model.copyTo(this.model.getName());
+        // copy to new instance before adding to current folder so further changes are auto-saved
+        this.currentFolder.add((T) this.model.copyTo(this.model.getName()));
         this.modelInStorage = true;
-        _setSaved(true);
+        this.setSaved(true);
     }
 
     /**
@@ -191,6 +200,7 @@ public class DeckController<T extends DeckBase> {
         this.model = (T)this.model.copyTo(name0);
         this.modelInStorage = false;
         this.save();
+        this.view.resetTables(); //ensure pool updated in CCurrentDeck
     }
 
     /**
@@ -238,7 +248,7 @@ public class DeckController<T extends DeckBase> {
      */
     public void newModel() {
         this.model = this.newModelCreator.get();
-        _setSaved(true);
+        this.setSaved(true);
         this.view.resetTables();
     }
 

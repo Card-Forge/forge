@@ -31,6 +31,10 @@ public enum CAllDecks implements ICDoc {
      */
     @Override
     public void initialize() {
+        refresh();
+    }
+
+    public void refresh() {
         VAllDecks.SINGLETON_INSTANCE.getLstDecks().setPool(DeckProxy.getAllConstructedDecks(Singletons.getModel().getDecks().getConstructed()));
     }
 

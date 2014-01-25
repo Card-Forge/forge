@@ -239,6 +239,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
         else {
             removeAll();
+            restoreSavedState(); //ensure decks refreshed and state restored in case any deleted or added since last loaded
         }
         this.setLayout(new MigLayout("insets 0, gap 0"));
         decksComboBox.addTo(this, "w 100%, h 30px!, gapbottom 5px, spanx 2, wrap");

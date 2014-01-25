@@ -1,6 +1,8 @@
 package forge.gui.deckeditor.controllers;
 
 import java.awt.Dialog.ModalityType;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 import javax.swing.JFileChooser;
@@ -109,6 +111,14 @@ public enum CCurrentDeck implements ICDoc {
             @Override
             public void run() {
                 importDeck();
+            }
+        });
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (Character.isLetterOrDigit(e.getKeyChar())) {
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().notifyModelChanged();
+                }
             }
         });
     }

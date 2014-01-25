@@ -397,7 +397,6 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.setPool(ItemPool.createFrom(items, this.genericType), false);
     }
 
-
     /**
      * 
      * Sets the item pool.
@@ -420,7 +419,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
      * @param pool0
      * @param infinite
      */
-    protected void setPoolImpl(final ItemPool<T> pool0, boolean infinite) {
+    private void setPoolImpl(final ItemPool<T> pool0, boolean infinite) {
         this.model.clear();
         this.pool = pool0;
         this.model.addItems(this.pool);
@@ -508,18 +507,45 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     /**
      * 
+     * stringToItem.
+     * 
+     * @param str - String to get item corresponding to
+     */
+    public T stringToItem(String str) {
+        for (Entry<T, Integer> itemEntry : this.pool) {
+            if (itemEntry.getKey().toString().equals(str)) {
+                return itemEntry.getKey();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * setSelectedString.
+     * 
+     * @param str - String to select
+     */
+    public boolean setSelectedString(String str) {
+        T item = stringToItem(str);
+        if (item != null) {
+            return this.setSelectedItem(item);
+        }
+        return false;
+    }
+
+    /**
+     * 
      * setSelectedStrings.
      * 
      * @param strings - Strings to select
      */
     public boolean setSelectedStrings(Iterable<String> strings) {
         List<T> items = new ArrayList<T>();
-        for (String itemName : strings) {
-            for (Entry<T, Integer> itemEntry : this.pool) {
-                if (itemEntry.getKey().toString().equals(itemName)) {
-                    items.add(itemEntry.getKey());
-                    break;
-                }
+        for (String str : strings) {
+            T item = stringToItem(str);
+            if (item != null) {
+                items.add(item);
             }
         }
         return this.setSelectedItems(items);
