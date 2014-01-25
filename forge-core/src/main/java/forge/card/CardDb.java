@@ -37,6 +37,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 
 import forge.card.CardEdition.CardInSet;
+import forge.card.CardEdition.Type;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
@@ -46,6 +47,8 @@ import forge.util.TextUtil;
 
 public final class CardDb implements ICardDatabase {
     public final static String foilSuffix = "+";
+    public final static char NameSetSeparator = '|';
+    
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = new TreeMap<String, PaperCard>(String.CASE_INSENSITIVE_ORDER);
@@ -58,7 +61,9 @@ public final class CardDb implements ICardDatabase {
 
     public enum SetPreference {
         Latest,
+        LatestCoreExp,
         Earliest,
+        EarliestCoreExp,
         Random
     }
     
@@ -81,17 +86,23 @@ public final class CardDb implements ICardDatabase {
             if( isFoil )
                 name = name.substring(0, name.length() - foilSuffix.length());
 
-            String[] nameParts = TextUtil.split(name, '|');
+            String[] nameParts = TextUtil.split(name, NameSetSeparator);
 
             int setPos = nameParts.length >= 2 && !StringUtils.isNumeric(nameParts[1]) ? 1 : -1;
             int artPos = nameParts.length >= 2 && StringUtils.isNumeric(nameParts[1]) ? 1 : nameParts.length >= 3 && StringUtils.isNumeric(nameParts[2]) ? 2 : -1;
 
+            String cardName = nameParts[0];
+            if( cardName.endsWith(foilSuffix)) {
+                cardName = cardName.substring(0, cardName.length() - foilSuffix.length());
+                isFoil = true;
+            }
+            
             int artIndex = artPos > 0 ? Integer.parseInt(nameParts[artPos]) : -1;
             String setName = setPos > 0 ? nameParts[setPos] : null;
             if( "???".equals(setName) )
                 setName = null;
 
-            return new CardRequest(nameParts[0], setName, artIndex, isFoil);
+            return new CardRequest(cardName, setName, artIndex, isFoil);
         }
     }
     
@@ -172,8 +183,7 @@ public final class CardDb implements ICardDatabase {
         request.edition = setName;
         request.artIndex = artIndex;
         return tryGetCard(request);
-    }    
-    
+    }
     
     private PaperCard tryGetCard(CardRequest request) {
         Collection<PaperCard> cards = allCardsByName.get(request.cardName);
@@ -211,21 +221,38 @@ public final class CardDb implements ICardDatabase {
     
     @Override
     public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet) {
+        return getCardFromEdition(cardName, null, fromSet, -1);
+    }
+    
+    @Override
+    public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet, int artIndex) {
         List<PaperCard> cards = this.allCardsByName.get(cardName);
 
         int sz = cards.size();
-        if( fromSet == SetPreference.Latest ) {
-            for(int i = 0 ; i < sz ; i++)
-                if( printedBefore == null || editions.get(cards.get(i).getEdition()).getDate().after(printedBefore) )
-                    return cards.get(i);
+        if( fromSet == SetPreference.Earliest || fromSet == SetPreference.EarliestCoreExp) {
+            for(int i = sz - 1 ; i >= 0 ; i--) {
+                PaperCard pc = cards.get(i);
+                CardEdition ed = editions.get(pc.getEdition());
+                if(fromSet == SetPreference.EarliestCoreExp && ed.getType() != Type.CORE && ed.getType() != Type.EXPANSION)
+                    continue;
+
+                if((artIndex < 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore)))
+                    return pc;
+            }
             return null;
-        } else if( fromSet == SetPreference.Earliest || fromSet == null || fromSet == SetPreference.Random  ) {
-            for(int i = sz - 1 ; i >= 0 ; i--)
-                if( printedBefore == null || editions.get(cards.get(i).getEdition()).getDate().after(printedBefore) ) {
-                    if( fromSet == SetPreference.Earliest )
-                        return cards.get(i);
-                    return cards.get(MyRandom.getRandom().nextInt(i+1));
+        } else if( fromSet == SetPreference.LatestCoreExp || fromSet == SetPreference.Latest || fromSet == null || fromSet == SetPreference.Random  ) {
+            for(int i = 0 ; i < sz ; i++) {
+                PaperCard pc = cards.get(i);
+                CardEdition ed = editions.get(pc.getEdition());
+                if(fromSet == SetPreference.LatestCoreExp && ed.getType() != Type.CORE && ed.getType() != Type.EXPANSION)
+                    continue;
+                
+                if((artIndex < 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore))) {
+                    if( fromSet == SetPreference.LatestCoreExp || fromSet == SetPreference.Latest  )
+                        return pc;
+                    return cards.get(i + MyRandom.getRandom().nextInt(sz-i));
                 }
+            }
             return null;
         }
         return null;

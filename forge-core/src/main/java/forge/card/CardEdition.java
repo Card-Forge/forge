@@ -415,15 +415,21 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         
         public CardEdition getEarliestEditionWithAllCards(CardPool cards) {
             Set<String> minEditions = new HashSet<String>();
+            
+            SetPreference strictness = SetPreference.EarliestCoreExp;
+            
             for(Entry<PaperCard, Integer> k : cards) {
-                PaperCard cp =  StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), SetPreference.Earliest);
+                PaperCard cp = StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), strictness);
+                if( cp == null && strictness == SetPreference.EarliestCoreExp) {
+                    strictness = SetPreference.Earliest; // card is not found in core and expansions only (probably something CMD or C13)
+                    cp = StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), strictness);
+                }
+                if ( cp == null )
+                    cp = k.getKey(); // it's unlikely, this code will ever run
+                
                 minEditions.add(cp.getEdition());
             }
 
-            for(CardEdition ed : getOrderedEditions()) {
-                if( minEditions.contains(ed.getCode()) && ( ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION ) )
-                    return ed;
-            }
             for(CardEdition ed : getOrderedEditions()) {
                 if(minEditions.contains(ed.getCode()))
                     return ed;

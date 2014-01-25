@@ -21,8 +21,6 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.NoSuchElementException;
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.StaticData;
@@ -44,6 +42,10 @@ public class CardPool extends ItemPool<PaperCard> {
         this();
         this.addAll(cards);
     }
+    
+    public void add(final String cardName, final int amount) {
+        this.add(cardName, null, -1, amount);
+    }    
 
     public void add(final String cardName, final String setCode) {
         this.add(cardName, setCode, -1, 1);
@@ -61,7 +63,8 @@ public class CardPool extends ItemPool<PaperCard> {
             isCommonCard = false;
         }
 
-        int artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : StaticData.instance().getVariantCards().getArtCount(cardName, setCode);
+        int artCount = isCommonCard 
+                ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
 
         if ( cp != null) {
             if (artIndex >= 0 || artCount <= 1) {
@@ -90,26 +93,6 @@ public class CardPool extends ItemPool<PaperCard> {
     public void add(final Iterable<PaperCard> list) {
         for (PaperCard cp : list) {
             this.add(cp);
-        }
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     *
-     * @param cardName the card name
-     */
-    public void add(final String cardName, int cnt) {
-        // in order to account for art index randomization we have to add cards one by one instead of in a batch
-        // TODO: somehow optimize this algorithm?...
-        for (int i = 0; i < cnt; i++) {
-            PaperCard cp = StaticData.instance().getCommonCards().getCard(cardName);
-            if ( cp == null )
-                cp = StaticData.instance().getVariantCards().getCard(cardName);
-    
-            if ( cp != null)
-                this.add(cp);
-            else
-                throw new NoSuchElementException(String.format("Card %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName));
         }
     }
 

@@ -13,8 +13,9 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     PaperCard getCard(String cardName);
     PaperCard getCard(String cardName, String edition);
     PaperCard getCard(String cardName, String edition, int artIndex);
-    PaperCard getCardFromEdition(final String cardName, final SetPreference fromSet);
-    PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet);
+    PaperCard getCardFromEdition(String cardName, SetPreference fromSet);
+    PaperCard getCardFromEdition(String cardName, Date printedBefore, SetPreference fromSet);
+    PaperCard getCardFromEdition(String cardName, Date printedBefore, SetPreference fromSet, int artIndex);
     
     PaperCard getFoiled(PaperCard cpi);
 
@@ -28,4 +29,5 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     List<PaperCard> getAllCards(Predicate<PaperCard> predicate);
 
     Predicate<? super PaperCard> wasPrintedInSets(List<String> allowedSetCodes);
+    
 }
