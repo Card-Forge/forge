@@ -1,7 +1,7 @@
-Forge Beta: 01-24-2014 ver 1.5.11
+Forge Beta: 0#-##-2014 ver 1.5.11
 
 
-13422 cards in total.
+13### cards in total.
 
 
 -------------
@@ -22,6 +22,10 @@ Forge now fully supports the distinction between cards with different art, which
 
 - Commander 2013 cards -
 Forge now includes many of the new Commander 2013 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
+
+
+- New Born of the Gods cards -
+We have added a branch to our SVN for the new cards that are currently being scripted. These cards are not yet available in this build of forge. Please be patient and they will soon become available.
 
 
 ---------
@@ -123,6 +127,48 @@ Tromokratis
 Unravel the AEther
 Weight of the Underworld
 Xenagos, God of Revels
+
+Bolt of Keranos
+Reckless Reveler
+Scouring Sands
+Stormcaller of Keranos
+Chorus of the Tides
+Deepwater Hypnotist
+Evanescent Intellect
+Flitterstep Eidolon
+Asphyxiate
+Grisly Transformation
+Akroan Phalanx
+Akroan Skyguard
+Great Hart
+Griffin Dreamfinder
+Hold at Bay
+Odunos River Trawler
+Eye Gouge
+Sanguimancy
+Whelming Wave
+Satyr Wayfinder
+Setessan Oathsworn
+Setessan Starbreaker
+Swordwise Centaur
+Excoriate
+Fated Retribution
+Ghostblade Eidolon
+Glimpse the Sun God
+Eidolon of Countless Battles
+Elite Skirmisher
+Ephara's Radiance
+Claim of Erebos
+Felhide Brawler
+Oracle's Insight
+Loyal Pegasus
+Mortal's Ardor
+Sunbond
+Vanguard of Brimaz
+Graverobber Spider
+Karametra's Favor
+Mischief and Mayhem
+Mortal's Resolve
 
 
 ------------
