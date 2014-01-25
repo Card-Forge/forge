@@ -244,7 +244,7 @@ public enum CardZoomer {
     }
         
     private int getInitialRotation() {
-        return (thisCard.isSplitCard() ? 90 : 0);
+        return (thisCard.isSplitCard() || thisCard.isPlane() || thisCard.isPhenomenon() ? 90 : 0);
     }   
     
     private void setLayout() {

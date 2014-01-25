@@ -4664,12 +4664,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isArtifact()   { return this.typeContains("Artifact"); }
     public final boolean isEquipment()  { return this.typeContains("Equipment"); }
     public final boolean isFortification()  { return this.typeContains("Fortification"); }
-    public final boolean isScheme()     { return this.typeContains("Scheme"); }
-
     public final boolean isPlaneswalker()   { return this.typeContains("Planeswalker"); }
-
     public final boolean isEnchantment()    { return this.typeContains("Enchantment"); }
     public final boolean isAura()           { return this.typeContains("Aura"); }
+
+    public final boolean isScheme()     { return this.typeContains("Scheme"); }
+    public final boolean isPhenomenon() { return this.typeContains("Phenomenon"); }
+    public final boolean isPlane()      { return this.typeContains("Plane"); }
 
     private boolean typeContains(final String s) {
         final Iterator<String> it = this.getType().iterator();
