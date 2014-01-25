@@ -67,7 +67,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FTextArea txtInput = new FTextArea();
     private static final String STYLESHEET = "<style>"
             + "body, h1, h2, h3, h4, h5, h6, table, tr, td, p {margin: 3px 1px; padding: 0; font-weight: "
-            + "normal; font-style: normal; text-decoration: none; font-family: Arial; font-size: 10px;} "
+            + "normal; font-style: normal; text-decoration: none; font-family: Arial; font-size: 10px; background-color: white;} "
             +
             // "h1 {border-bottom: solid 1px black; color: blue; font-size: 12px; margin: 3px 0 9px 0; } "
             // +
@@ -97,6 +97,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FButton cmdCancel = new FButton("Cancel");
     private final FCheckBox newEditionCheck = new FCheckBox("Import latest version of card", true);
     private final FCheckBox dateTimeCheck = new FCheckBox("Use only sets released before:", false);
+    private final FCheckBox onlyCoreExpCheck = new FCheckBox("Use only core and expansion sets", true);
 
     private final FComboBox<String> monthDropdown = new FComboBox<String>(); //don't need wrappers since skin can't change while this dialog is open
     private final FComboBox<Integer> yearDropdown = new FComboBox<Integer>();
@@ -139,11 +140,13 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.add(yearDropdown, "w 15%");
         fillDateDropdowns();
 
+        this.add(this.onlyCoreExpCheck, "cell 0 4, w 50%, ax c");
+        
         this.add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
         this.add(this.summaryMain, "cell 1 1, label");
         this.add(this.summarySide, "cell 1 2, label");
 
-        this.add(this.cmdAccept, "cell 1 3, split 2, w 150, align r, h 26");
+        this.add(this.cmdAccept, "cell 1 4, split 2, w 150, align r, h 26");
         this.add(this.cmdCancel, "w 150, h 26");
 
         this.cmdCancel.addActionListener(new ActionListener() {
@@ -182,6 +185,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             @Override public void actionPerformed(ActionEvent e) { parseAndDisplay(); }
         };
         this.newEditionCheck.addActionListener(reparse);
+        this.onlyCoreExpCheck.addActionListener(reparse);
         this.yearDropdown.addActionListener(reparse);
         this.monthDropdown.addActionListener(reparse);
         updateDateCheck.actionPerformed(null); // update actual state
@@ -210,7 +214,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         final ElementIterator it = new ElementIterator(this.txtInput.getDocument().getDefaultRootElement());
         Element e;
 
-        DeckRecognizer recognizer = new DeckRecognizer(newEditionCheck.isSelected(), Singletons.getMagicDb().getCommonCards());
+        DeckRecognizer recognizer = new DeckRecognizer(newEditionCheck.isSelected(),  onlyCoreExpCheck.isSelected(), Singletons.getMagicDb().getCommonCards());
         if (dateTimeCheck.isSelected()) {
             recognizer.setDateConstraint(monthDropdown.getSelectedIndex(), (Integer)yearDropdown.getSelectedItem());
         }

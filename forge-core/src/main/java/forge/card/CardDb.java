@@ -221,7 +221,7 @@ public final class CardDb implements ICardDatabase {
     
     @Override
     public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet) {
-        return getCardFromEdition(cardName, null, fromSet, -1);
+        return getCardFromEdition(cardName, printedBefore, fromSet, -1);
     }
     
     @Override

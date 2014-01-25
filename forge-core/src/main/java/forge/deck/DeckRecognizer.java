@@ -164,12 +164,18 @@ public class DeckRecognizer {
     //private static final Pattern READ_SEPARATED_EDITION = Pattern.compile("[[\\(\\{]([a-zA-Z0-9]){1,3})[]*\\s+(.*)");
 
 
-    private final boolean useLastSet;
+    private final SetPreference useLastSet;
     private final ICardDatabase db;
     private Date recognizeCardsPrintedBefore = null;
     
-    public DeckRecognizer(boolean fromLatestSet, CardDb db) {
-        useLastSet = fromLatestSet;
+    public DeckRecognizer(boolean fromLatestSet, boolean onlyCoreAndExp, CardDb db) {
+        if(!fromLatestSet)
+            useLastSet = null;
+        else if (onlyCoreAndExp)
+            useLastSet = SetPreference.LatestCoreExp;
+        else
+            useLastSet = SetPreference.Latest;
+
         this.db = db;
     }
     
@@ -203,7 +209,7 @@ public class DeckRecognizer {
     }
 
     private PaperCard tryGetCard(String text) {
-        return db.getCardFromEdition(text, recognizeCardsPrintedBefore, useLastSet ? SetPreference.Latest : null);
+        return db.getCardFromEdition(text, recognizeCardsPrintedBefore, useLastSet);
     }
     
     private Token recognizePossibleNameAndNumber(final String name, final int n) {
