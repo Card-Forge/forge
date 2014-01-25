@@ -214,15 +214,15 @@ public final class CardDb implements ICardDatabase {
         List<PaperCard> cards = this.allCardsByName.get(cardName);
 
         int sz = cards.size();
-        if( fromSet == SetPreference.Earliest ) {
+        if( fromSet == SetPreference.Latest ) {
             for(int i = 0 ; i < sz ; i++)
                 if( printedBefore == null || editions.get(cards.get(i).getEdition()).getDate().after(printedBefore) )
                     return cards.get(i);
             return null;
-        } else if( fromSet == SetPreference.Latest || fromSet == null || fromSet == SetPreference.Random  ) {
+        } else if( fromSet == SetPreference.Earliest || fromSet == null || fromSet == SetPreference.Random  ) {
             for(int i = sz - 1 ; i >= 0 ; i--)
                 if( printedBefore == null || editions.get(cards.get(i).getEdition()).getDate().after(printedBefore) ) {
-                    if( fromSet == SetPreference.Latest )
+                    if( fromSet == SetPreference.Earliest )
                         return cards.get(i);
                     return cards.get(MyRandom.getRandom().nextInt(i+1));
                 }

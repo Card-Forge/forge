@@ -11,6 +11,7 @@ import com.google.common.base.Predicate;
 
 import forge.Singletons;
 import forge.StaticData;
+import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -48,7 +49,7 @@ public class DeckProxy implements InventoryItem {
     private int sbSize = Integer.MIN_VALUE;
     private final String path;
     private final Function<IHasName, Deck> fnGetDeck;
-    private String edition;
+    private CardEdition edition;
 
     public DeckProxy(Deck deck, GameType type, IStorage<? extends IHasName> storage) {
         this(deck, type, "", storage, null);
@@ -85,12 +86,12 @@ public class DeckProxy implements InventoryItem {
         return path;
     }
     
-    public String getEdition() {
+    public CardEdition getEdition() {
         if ( null == edition ) {
             if ( deck instanceof PreconDeck )
-                edition = ((PreconDeck) deck).getEdition();
+                edition = StaticData.instance().getEditions().get(((PreconDeck) deck).getEdition());
             if ( !isGeneratedDeck() )
-                edition = StaticData.instance().getEditions().getEarliestEditionWithAllCards(getDeck().getAllCardsInASinglePool()).getCode();
+                edition = StaticData.instance().getEditions().getEarliestEditionWithAllCards(getDeck().getAllCardsInASinglePool());
         }
         return edition;
     }

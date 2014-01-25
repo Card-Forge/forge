@@ -337,6 +337,19 @@ public enum ColumnDef {
                     return StringUtils.join(Iterables.transform(deck.getFormats(), GameFormat.FN_GET_NAME) , ", ");
                 }
             }),
+    DECK_EDITION("Min.Set", "Min.Set", 30, 30, 30, SortState.ASC, new ItemCellRenderer(),
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    return toDeck(from.getKey()).getEdition();
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    return toDeck(from.getKey()).getEdition().getCode();
+                }
+            }),            
     DECK_MAIN("Main", "Main Deck", 30, 30, 30, SortState.ASC, new IntegerRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override

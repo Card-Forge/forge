@@ -68,6 +68,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
             ColumnDef.NAME,
             ColumnDef.DECK_COLOR,
             ColumnDef.DECK_FORMAT,
+            ColumnDef.DECK_EDITION,
             ColumnDef.DECK_MAIN,
             ColumnDef.DECK_SIDE);
 

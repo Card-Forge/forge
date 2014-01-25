@@ -420,12 +420,15 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 minEditions.add(cp.getEdition());
             }
 
-            CardEdition earliestOne = null;
             for(CardEdition ed : getOrderedEditions()) {
-                if( minEditions.contains(ed.getCode()) )
-                    earliestOne = ed;
+                if( minEditions.contains(ed.getCode()) && ( ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION ) )
+                    return ed;
             }
-            return earliestOne;
+            for(CardEdition ed : getOrderedEditions()) {
+                if(minEditions.contains(ed.getCode()))
+                    return ed;
+            }            
+            return UNKNOWN;
         }
     }
     public static class Predicates {
