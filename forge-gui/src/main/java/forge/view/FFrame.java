@@ -36,6 +36,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
     private Point locBeforeMove;
     private Dimension sizeBeforeResize;
     private Point mouseDownLoc;
+    private boolean moveInProgress;
     private int resizeCursor;
     private FTitleBarBase titleBar;
     private boolean minimized, maximized, fullScreen, hideBorder, lockTitleBar, hideTitleBar, isMainFrame;
@@ -293,6 +294,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     locBeforeMove = null;
                     mouseDownLoc = null;
+                    moveInProgress = false;
                 }
             }
         });
@@ -303,6 +305,13 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
                     final Point loc = e.getLocationOnScreen();
                     final int dx = loc.x - mouseDownLoc.x;
                     final int dy = loc.y - mouseDownLoc.y;
+                    if (!moveInProgress) {
+                        if (isMaximized() && dx * dx + dy * dy < 25) {
+                            //don't start frame move if maximized until you've moved the mouse at least than 5 pixels
+                            return;
+                        }
+                        moveInProgress = true;
+                    }
                     setLocation(locBeforeMove.x + dx, locBeforeMove.y + dy);
                 }
             }
