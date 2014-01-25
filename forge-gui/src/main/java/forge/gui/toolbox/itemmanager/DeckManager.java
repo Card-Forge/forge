@@ -4,12 +4,18 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import javax.swing.JMenu;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.Command;
 import forge.Singletons;
@@ -28,6 +34,7 @@ import forge.gui.home.quest.DialogChooseSets;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.itemmanager.filters.DeckColorFilter;
+import forge.gui.toolbox.itemmanager.filters.DeckFolderFilter;
 import forge.gui.toolbox.itemmanager.filters.DeckFormatFilter;
 import forge.gui.toolbox.itemmanager.filters.DeckQuestWorldFilter;
 import forge.gui.toolbox.itemmanager.filters.DeckSearchFilter;
@@ -159,6 +166,29 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         if (this.stringOnly) { return; }
 
         GuiUtils.addSeparator(menu); //separate from current search item
+
+        Set<String> folders = new HashSet<String>();
+        for (final Entry<DeckProxy, Integer> deckEntry : getPool()) {
+            String path = deckEntry.getKey().getPath();
+            if (StringUtils.isNotEmpty(path)) { //don't include root folder as option
+                folders.add(path);
+            }
+        }
+        JMenu folder = GuiUtils.createMenu("Folder");
+        if (folders.size() > 0) {
+            for (final String f : folders) {
+                GuiUtils.addMenuItem(folder, f, null, new Runnable() {
+                    @Override
+                    public void run() {
+                        addFilter(new DeckFolderFilter(DeckManager.this, f));
+                    }
+                }, true);
+            }
+        }
+        else {
+            folder.setEnabled(false);
+        }
+        menu.add(folder);
 
         JMenu fmt = GuiUtils.createMenu("Format");
         for (final GameFormat f : Singletons.getModel().getFormats()) {

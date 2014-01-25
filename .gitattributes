@@ -15511,6 +15511,7 @@ forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardSetFilter.java
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardToughnessFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/CardTypeFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckColorFilter.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckFolderFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckFormatFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckQuestWorldFilter.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/filters/DeckSearchFilter.java -text
