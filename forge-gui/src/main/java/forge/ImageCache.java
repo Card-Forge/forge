@@ -44,7 +44,6 @@ import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
 import forge.util.Base64Coder;
-import forge.util.TextUtil;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -164,27 +163,9 @@ public class ImageCache {
         if( key == null )
             return null;
 
-        PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(key);
+        PaperCard cp = StaticData.instance().getCommonCards().getCard(key);
         if ( cp == null )
-            cp = StaticData.instance().getVariantCards().tryGetCard(key);
-        if( cp != null ) 
-            return cp;
-        
-        // try to remove art index
-        if( key.charAt(key.length() - 2) == '|') {
-            key = key.substring(0, key.length() - 2);
-            cp = StaticData.instance().getCommonCards().tryGetCard(key);
-            if ( cp == null )
-                cp = StaticData.instance().getVariantCards().tryGetCard(key);
-            if( cp != null ) 
-                return cp;
-        }
-
-        // try only name
-        key = TextUtil.split(key, '|')[0];
-        cp = StaticData.instance().getCommonCards().tryGetCard(key);
-        if ( cp == null )
-            cp = StaticData.instance().getVariantCards().tryGetCard(key);
+            cp = StaticData.instance().getVariantCards().getCard(key);
         return cp;
     }
 

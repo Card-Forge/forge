@@ -23,6 +23,7 @@ import java.util.List;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.CardRules;
+import forge.card.CardDb.SetPreference;
 import forge.game.card.Card;
 import forge.item.PaperToken;
 import forge.item.IPaperCard;
@@ -167,7 +168,7 @@ public class QuestUtil {
             return tempcard;
         }
         // Standard card creation
-        return Singletons.getMagicDb().getCommonCards().getCard(name, true);
+        return Singletons.getMagicDb().getCommonCards().getCardFromEdition(name, SetPreference.Latest);
     }
 
 } // QuestUtil

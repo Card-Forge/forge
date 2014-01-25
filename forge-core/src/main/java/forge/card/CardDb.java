@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
@@ -33,8 +32,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 
 import forge.card.CardEdition.CardInSet;
@@ -44,14 +43,11 @@ import forge.util.CollectionSuppliers;
 import forge.util.Lang;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import java.util.Arrays;
 
 public final class CardDb implements ICardDatabase {
     public final static String foilSuffix = "+";
-    private final static int foilSuffixLength = foilSuffix.length();
-
     // need this to obtain cardReference by name+set+artindex
-    private final Multimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
+    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<String,Collection<PaperCard>>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.<PaperCard>arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = new TreeMap<String, PaperCard>(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
 
@@ -60,6 +56,45 @@ public final class CardDb implements ICardDatabase {
     private final Collection<PaperCard> roUniqueCards = Collections.unmodifiableCollection(uniqueCardsByName.values());
     private final CardEdition.Collection editions;
 
+    public enum SetPreference {
+        Latest,
+        Earliest,
+        Random
+    }
+    
+    // NO GETTERS/SETTERS HERE!
+    private static class CardRequest {
+        public String cardName;
+        public String edition;
+        public int artIndex;
+        public boolean isFoil;
+        
+        public CardRequest(String name, String edition, int artIndex, boolean isFoil) {
+            cardName = name;
+            this.edition = edition;
+            this.artIndex = artIndex;
+            this.isFoil = isFoil;
+        }
+        
+        public static CardRequest fromString(String name) { 
+            boolean isFoil = name.endsWith(foilSuffix);
+            if( isFoil )
+                name = name.substring(0, name.length() - foilSuffix.length());
+
+            String[] nameParts = TextUtil.split(name, '|');
+
+            int setPos = nameParts.length >= 2 && !StringUtils.isNumeric(nameParts[1]) ? 1 : -1;
+            int artPos = nameParts.length >= 2 && StringUtils.isNumeric(nameParts[1]) ? 1 : nameParts.length >= 3 && StringUtils.isNumeric(nameParts[2]) ? 2 : -1;
+
+            int artIndex = artPos > 0 ? Integer.parseInt(nameParts[artPos]) : -1;
+            String setName = setPos > 0 ? nameParts[setPos] : null;
+            if( "???".equals(setName) )
+                setName = null;
+
+            return new CardRequest(nameParts[0], setName, artIndex, isFoil);
+        }
+    }
+    
     public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, boolean logMissingCards) {
         this.rulesByName = rules;
         this.editions = editions0;
@@ -118,135 +153,82 @@ public final class CardDb implements ICardDatabase {
         }
     }
 
-    /**
-     * Splits cardname into name, set and art index whenever deck line reads as name|set|artindex.
-     */
-    private static List<String> splitCardName(final String name) {
-        String cardName = name; // .trim() ?
-        String[] cardNameElems = TextUtil.split(cardName, '|');
-
-        final String actualCardName = cardNameElems[0];
-        String setName = null;
-        String artIndex = "-1";
-        if (cardNameElems.length > 1) {
-            if (StringUtils.isNotBlank(cardNameElems[1]) && !"???".equals(cardNameElems[1])) {
-                setName = cardNameElems[1];
-            }
-            if (cardNameElems.length > 2) {
-                artIndex = cardNameElems[2];
-            }
-        }
-
-        return Arrays.asList(actualCardName, setName, artIndex);
-    }
-
-    private boolean isFoil(final String cardName) {
-        return cardName.toLowerCase().endsWith(CardDb.foilSuffix);
-    }
-
-    /**
-     * Removes the foil suffix.
-     *
-     * @param cardName the card name
-     * @return the string
-     */
-    public String removeFoilSuffix(final String cardName) {
-        return cardName.toLowerCase().endsWith(CardDb.foilSuffix) ? cardName.substring(0, cardName.length() - CardDb.foilSuffixLength) : cardName;
+    @Override
+    public PaperCard getCard(final String cardName) {
+        CardRequest request = CardRequest.fromString(cardName);
+        return tryGetCard(request);
     }
 
     @Override
-    public PaperCard tryGetCard(final String cardName0) {
-        return tryGetCard(cardName0, true);
+    public PaperCard getCard(final String cardName, String setName) {
+        CardRequest request = CardRequest.fromString(cardName);
+        request.edition = setName;
+        return tryGetCard(request);
     }
 
     @Override
-    public PaperCard tryGetCard(final String cardName0, boolean fromLastSet) {
-        if (null == cardName0) {
-            return null;  // obviously
-        }
-
-        final boolean isFoil = this.isFoil(cardName0);
-        final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
-
-        final List<String> splitName = CardDb.splitCardName(cardName);
-        final int artIndex = Integer.parseInt(splitName.get(2)) - 1;
-
-        final PaperCard res = splitName.get(1) == null
-                ? ( fromLastSet ? this.uniqueCardsByName.get(splitName.get(0)) : tryGetCard(splitName.get(0), Aggregates.random(this.allCardsByName.get(splitName.get(0))).getEdition(), -1))
-                : tryGetCard(splitName.get(0), splitName.get(1), artIndex);
-
-        if (fromLastSet && null != res && CardEdition.UNKNOWN.getCode() != res.getEdition()) {
-            final PaperCard res_randart = tryGetCard(res.getName(), res.getEdition(), artIndex);
-            return null != res_randart && isFoil ? getFoiled(res_randart) : res_randart;
-        }
-        
-        return null != res && isFoil ? getFoiled(res) : res;
-    }
-
-    @Override
-    public PaperCard tryGetCardPrintedByDate(final String name0, final boolean fromLatestSet, final Date printedBefore) {
-        final boolean isFoil = this.isFoil(name0);
-        final String cardName = isFoil ? this.removeFoilSuffix(name0) : name0;
-
-        final List<String> splitName = CardDb.splitCardName(cardName);
-        final int artIndex = Integer.parseInt(splitName.get(2)) - 1;
-
-        PaperCard res = null;
-        if (null != splitName.get(1)) // set explicitly requested, should return card from it and disregard the date
-            res = tryGetCard(splitName.get(0), splitName.get(1), artIndex);
-        else {
-            Collection<PaperCard> cards = this.allCardsByName.get(splitName.get(0)); // cards are sorted by datetime desc
-            int idxRightSet = 0;
-            for (PaperCard card : cards) {
-                if (editions.get(card.getEdition()).getDate().after(printedBefore))
-                    idxRightSet++;
-                else
-                    break;
-            }
-            res = fromLatestSet ? Iterables.get(cards, idxRightSet, null) : Aggregates.random(Iterables.skip(cards, idxRightSet));
-        }
-
-        return null != res && isFoil ? getFoiled(res) : res;
-    }
-
-    @Override
-    public PaperCard tryGetCard(final String cardName, String setName) {
-        return tryGetCard(cardName, setName, -1);
-    }
-
-    @Override
-    public PaperCard tryGetCard(final String cardName0, String setName, int index) {
-        final boolean isFoil = this.isFoil(cardName0);
-        final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
-
-        Collection<PaperCard> cards = allCardsByName.get(cardName);
+    public PaperCard getCard(final String cardName, String setName, int artIndex) {
+        CardRequest request = CardRequest.fromString(cardName);
+        request.edition = setName;
+        request.artIndex = artIndex;
+        return tryGetCard(request);
+    }    
+    
+    
+    private PaperCard tryGetCard(CardRequest request) {
+        Collection<PaperCard> cards = allCardsByName.get(request.cardName);
         if ( null == cards ) return null;
 
-        CardEdition edition = editions.get(setName);
-        if ( null == edition )
-            return tryGetCard(cardName, true); // set not found, try to get the same card from just any set.
-        String effectiveSet = edition.getCode();
-
         PaperCard result = null;
-        if ( index < 0 ) { // this stands for 'random art'
-            PaperCard[] candidates = new PaperCard[9]; // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
-            int cnt = 0;
+        
+        if ( request.artIndex < 0 ) { // this stands for 'random art'
+            List<PaperCard> candidates = new ArrayList<PaperCard>(9); // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
             for( PaperCard pc : cards ) {
-                if( pc.getEdition().equalsIgnoreCase(effectiveSet) )
-                    candidates[cnt++] = pc;
+                if( pc.getEdition().equalsIgnoreCase(request.edition) || request.edition == null )
+                    candidates.add(pc);
             }
 
-            if (cnt == 0 ) return null;
-            result = cnt == 1  ? candidates[0] : candidates[MyRandom.getRandom().nextInt(cnt)];
-        } else
+            if (candidates.isEmpty())
+                return null;
+            result = Aggregates.random(candidates);
+        } else {
             for( PaperCard pc : cards ) {
-                if( pc.getEdition().equalsIgnoreCase(effectiveSet) && index == pc.getArtIndex() ) {
+                if( pc.getEdition().equalsIgnoreCase(request.edition) && request.artIndex == pc.getArtIndex() ) {
                     result = pc;
                     break;
                 }
             }
+        }
         if ( result == null ) return null;
-        return isFoil ? getFoiled(result) : result;
+        
+        return request.isFoil ? getFoiled(result) : result;
+    }
+    
+    @Override
+    public PaperCard getCardFromEdition(final String cardName, SetPreference fromSet) {
+        return getCardFromEdition(cardName, null, fromSet);
+    }
+    
+    @Override
+    public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet) {
+        List<PaperCard> cards = this.allCardsByName.get(cardName);
+
+        int sz = cards.size();
+        if( fromSet == SetPreference.Earliest ) {
+            for(int i = 0 ; i < sz ; i++)
+                if( printedBefore == null || editions.get(cards.get(i).getEdition()).getDate().after(printedBefore) )
+                    return cards.get(i);
+            return null;
+        } else if( fromSet == SetPreference.Latest || fromSet == null || fromSet == SetPreference.Random  ) {
+            for(int i = sz - 1 ; i >= 0 ; i--)
+                if( printedBefore == null || editions.get(cards.get(i).getEdition()).getDate().after(printedBefore) ) {
+                    if( fromSet == SetPreference.Latest )
+                        return cards.get(i);
+                    return cards.get(MyRandom.getRandom().nextInt(i+1));
+                }
+            return null;
+        }
+        return null;
     }
 
     public PaperCard getFoiled(PaperCard card0) {
@@ -290,50 +272,6 @@ public final class CardDb implements ICardDatabase {
         }
 
         return cnt;
-    }
-
-    // Single fetch
-    @Override
-    public PaperCard getCard(final String name) {
-        return this.getCard(name, false);
-    }
-
-    @Override
-    public PaperCard getCard(final String name0, final boolean fromLatestSet) {
-        // Sometimes they read from decks things like "CardName|Set" - but we
-        // can handle it
-        final PaperCard result = tryGetCard(name0, fromLatestSet);
-        if (null == result) {
-            throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name0));
-        }
-        return result;
-    }
-
-    @Override
-    public PaperCard getCardPrintedByDate(final String name0, final boolean fromLatestSet, Date printedBefore ) {
-        // Sometimes they read from decks things like "CardName|Set" - but we
-        // can handle it
-        final PaperCard result = tryGetCard(name0, fromLatestSet);
-        if (null == result) {
-            throw new NoSuchElementException(String.format("Card '%s' released before %s not found in our database.", name0, printedBefore.toString()));
-        }
-        return result;
-    }
-
-    // Advanced fetch by name+set
-    @Override
-    public PaperCard getCard(final String name, final String set) {
-        return this.getCard(name, set, -1);
-    }
-
-    @Override
-    public PaperCard getCard(final String name, final String set, final int artIndex) {
-        final PaperCard result = tryGetCard(name, set, artIndex);
-        if (null == result) {
-            final String message = String.format("Asked for '%s' from '%s' #%d: db didn't find that copy.", name, set, artIndex);
-            throw new NoSuchElementException(message);
-        }
-        return result;
     }
 
     // returns a list of all cards from their respective latest editions

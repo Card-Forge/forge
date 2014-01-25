@@ -10,6 +10,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.Singletons;
+import forge.StaticData;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -80,9 +81,16 @@ public class DeckProxy implements InventoryItem {
     }
 
     public String getPath() {
+        return path;
+    }
+    
+    public String getEdition() {
         if ( deck instanceof PreconDeck )
             return ((PreconDeck) deck).getEdition();
-        return path;
+        Deck d = getDeck();
+        if ( d != null )
+            return StaticData.instance().getEditions().getEarliestEditionWithAllCards(d.getAllCardsInASinglePool()).getCode();
+        return null;
     }
 
     @Override

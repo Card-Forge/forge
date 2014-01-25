@@ -33,7 +33,6 @@ import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.item.IPaperCard;
 import forge.util.FileSection;
@@ -186,18 +185,8 @@ public class GameFormat implements Comparable<GameFormat> {
         return true;
     }
     
-    private static CardPool getAllDecksCards(final Deck deck) {
-        CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
-        allCards.addAll(deck.getMain());
-        if (deck.has(DeckSection.Sideboard))
-            allCards.addAll(deck.get(DeckSection.Sideboard));
-        if (deck.has(DeckSection.Commander))
-            allCards.addAll(deck.get(DeckSection.Commander));
-        return allCards;
-    }
-    
     public boolean isDeckLegal(final Deck deck) {
-        return isPoolLegal(getAllDecksCards(deck));
+        return isPoolLegal(deck.getAllCardsInASinglePool());
     }
 
     /*
@@ -304,7 +293,7 @@ public class GameFormat implements Comparable<GameFormat> {
         
         public Iterable<GameFormat> getAllFormatsOfDeck(Deck deck) {
             List<GameFormat> result = new ArrayList<GameFormat>();
-            CardPool allCards = GameFormat.getAllDecksCards(deck);
+            CardPool allCards = deck.getAllCardsInASinglePool();
             for(GameFormat gf : naturallyOrdered) {
                 if (gf.isPoolLegal(allCards))
                     result.add(gf);

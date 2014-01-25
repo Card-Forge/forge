@@ -686,7 +686,7 @@ public class QuestDataIO {
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            PaperCard c = Singletons.getMagicDb().getCommonCards().tryGetCard(name, set, index);
+            PaperCard c = Singletons.getMagicDb().getCommonCards().getCard(name, set, index);
             if ( null == c ) c = Singletons.getMagicDb().getCommonCards().getCard(name);
             return foil ? Singletons.getMagicDb().getCommonCards().getFoiled(c) : c;
         }

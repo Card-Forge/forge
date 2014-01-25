@@ -6,20 +6,15 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
+import forge.card.CardDb.SetPreference;
 import forge.item.PaperCard;
 
 public interface ICardDatabase extends Iterable<PaperCard> {
-    PaperCard tryGetCard(String cardName);
-    PaperCard tryGetCard(String cardName, boolean fromLastSet);
-    PaperCard tryGetCard(String cardName, String edition);
-    PaperCard tryGetCard(String cardName, String edition, int artIndex);
-    PaperCard tryGetCardPrintedByDate(String name0, boolean fromLatestSet, Date printedBefore);
-    
     PaperCard getCard(String cardName);
-    PaperCard getCard(String cardName, boolean fromLastSet);
     PaperCard getCard(String cardName, String edition);
     PaperCard getCard(String cardName, String edition, int artIndex);
-    PaperCard getCardPrintedByDate(String name0, boolean fromLatestSet, Date printedBefore);
+    PaperCard getCardFromEdition(final String cardName, final SetPreference fromSet);
+    PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet);
     
     PaperCard getFoiled(PaperCard cpi);
 

@@ -24,9 +24,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
@@ -38,6 +41,9 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
+import forge.card.CardDb.SetPreference;
+import forge.deck.CardPool;
+import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.util.Aggregates;
 import forge.util.FileSection;
@@ -406,6 +412,21 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 }
             };
         }
+        
+        public CardEdition getEarliestEditionWithAllCards(CardPool cards) {
+            Set<String> minEditions = new HashSet<String>();
+            for(Entry<PaperCard, Integer> k : cards) {
+                PaperCard cp =  StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), SetPreference.Earliest);
+                minEditions.add(cp.getEdition());
+            }
+
+            CardEdition earliestOne = null;
+            for(CardEdition ed : getOrderedEditions()) {
+                if( minEditions.contains(ed.getCode()) )
+                    earliestOne = ed;
+            }
+            return earliestOne;
+        }
     }
     public static class Predicates {
 
@@ -445,7 +466,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             @Override
             public boolean apply(CardEdition ed) {
                 for(String landName : MagicColor.Constant.BASIC_LANDS) {
-                    if (null == StaticData.instance().getCommonCards().tryGetCard(landName, ed.getCode(), 0))
+                    if (null == StaticData.instance().getCommonCards().getCard(landName, ed.getCode(), 0))
                         return false;
                 }
                 return true;

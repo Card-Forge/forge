@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardDb;
+import forge.card.CardDb.SetPreference;
 import forge.card.ICardDatabase;
 import forge.item.PaperCard;
 
@@ -202,9 +203,7 @@ public class DeckRecognizer {
     }
 
     private PaperCard tryGetCard(String text) {
-        if(recognizeCardsPrintedBefore != null )
-            return db.tryGetCardPrintedByDate(text, useLastSet, recognizeCardsPrintedBefore);
-        return db.tryGetCard(text, useLastSet);
+        return db.getCardFromEdition(text, recognizeCardsPrintedBefore, useLastSet ? SetPreference.Latest : null);
     }
     
     private Token recognizePossibleNameAndNumber(final String name, final int n) {

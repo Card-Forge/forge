@@ -55,9 +55,9 @@ public class CardPool extends ItemPool<PaperCard> {
 
     public void add(final String cardName, final String setCode, final int artIndex, final int amount) {
         boolean isCommonCard = true;
-        PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(cardName, setCode, artIndex);
+        PaperCard cp = StaticData.instance().getCommonCards().getCard(cardName, setCode, artIndex);
         if ( cp == null ) {
-            cp = StaticData.instance().getVariantCards().tryGetCard(cardName, setCode, artIndex);
+            cp = StaticData.instance().getVariantCards().getCard(cardName, setCode, artIndex);
             isCommonCard = false;
         }
 
@@ -71,7 +71,7 @@ public class CardPool extends ItemPool<PaperCard> {
                 // random art index specified, make sure we get different groups of cards with different art
                 int[] artGroups = MyRandom.splitIntoRandomGroups(amount, artCount);
                 for (int i = 0; i < artGroups.length; i++) {
-                    PaperCard cp_random = isCommonCard ? StaticData.instance().getCommonCards().tryGetCard(cardName, setCode, i) : StaticData.instance().getVariantCards().tryGetCard(cardName, setCode, i);
+                    PaperCard cp_random = isCommonCard ? StaticData.instance().getCommonCards().getCard(cardName, setCode, i) : StaticData.instance().getVariantCards().getCard(cardName, setCode, i);
                     this.add(cp_random, artGroups[i]);
                 }
             }
@@ -102,9 +102,9 @@ public class CardPool extends ItemPool<PaperCard> {
         // in order to account for art index randomization we have to add cards one by one instead of in a batch
         // TODO: somehow optimize this algorithm?...
         for (int i = 0; i < cnt; i++) {
-            PaperCard cp = StaticData.instance().getCommonCards().tryGetCard(cardName);
+            PaperCard cp = StaticData.instance().getCommonCards().getCard(cardName);
             if ( cp == null )
-                cp = StaticData.instance().getVariantCards().tryGetCard(cardName);
+                cp = StaticData.instance().getVariantCards().getCard(cardName);
     
             if ( cp != null)
                 this.add(cp);

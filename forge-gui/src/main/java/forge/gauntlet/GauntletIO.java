@@ -183,7 +183,11 @@ public class GauntletIO {
             final String sIndex = reader.getAttribute("i");
             final short index = StringUtils.isNumeric(sIndex) ? Short.parseShort(sIndex) : 0;
             final boolean foil = "1".equals(reader.getAttribute("foil"));
-            final PaperCard card = Singletons.getMagicDb().getCommonCards().getCard(name, set, index);
+            PaperCard card = Singletons.getMagicDb().getCommonCards().getCard(name, set, index);
+            if ( null == card )
+                card = Singletons.getMagicDb().getCommonCards().getCard(name, set, -1);
+            if ( null == card ) 
+                throw new RuntimeException("Unsupported card found in quest save: " + name + " from edition " + set);
             return foil ? Singletons.getMagicDb().getCommonCards().getFoiled(card) : card;
         }
     }

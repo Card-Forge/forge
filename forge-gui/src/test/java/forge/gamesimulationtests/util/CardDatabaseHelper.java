@@ -11,7 +11,7 @@ public class CardDatabaseHelper {
 	public static PaperCard getCard( String name ) {
 		initializeIfNeeded();
 		
-		PaperCard result = staticData.getCommonCards().tryGetCard( name );
+		PaperCard result = staticData.getCommonCards().getCard( name );
 		if( result == null ) {
 			throw new IllegalArgumentException( "Failed to get card with name " + name );
 		}

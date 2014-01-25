@@ -306,4 +306,14 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         }
         return ColorSet.fromMask(colorProfile);
     }
+    
+    public CardPool getAllCardsInASinglePool() {
+        CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
+        allCards.addAll(this.getMain());
+        if (this.has(DeckSection.Sideboard))
+            allCards.addAll(this.get(DeckSection.Sideboard));
+        if (this.has(DeckSection.Commander))
+            allCards.addAll(this.get(DeckSection.Commander));
+        return allCards;
+    }    
 }

@@ -49,6 +49,7 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.CardDb.SetPreference;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
@@ -8694,18 +8695,16 @@ public class Card extends GameEntity implements Comparable<Card> {
         return fromPaperCard(pc, null);
     }
 
-    // Fetch from Forge's Card instance. Well, there should be no errors, but
-    // we'll still check
     public PaperCard getPaperCard() {
         final String name = getName();
         final String set = getCurSetCode();
 
         if (StringUtils.isNotBlank(set)) {
-            PaperCard cp = StaticData.instance().getVariantCards().tryGetCard(name, set);
+            PaperCard cp = StaticData.instance().getVariantCards().getCard(name, set);
             return cp == null ? StaticData.instance().getCommonCards().getCard(name, set) : cp;
         }
-        PaperCard cp = StaticData.instance().getVariantCards().tryGetCard(name, true);
-        return cp == null ? StaticData.instance().getCommonCards().getCard(name) : cp;
+        PaperCard cp = StaticData.instance().getVariantCards().getCard(name);
+        return cp == null ? StaticData.instance().getCommonCards().getCardFromEdition(name, SetPreference.Latest) : cp;
     }
 
     /**
