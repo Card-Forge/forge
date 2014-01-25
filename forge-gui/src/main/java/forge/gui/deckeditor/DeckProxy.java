@@ -49,11 +49,11 @@ public class DeckProxy implements InventoryItem {
     private final Function<IHasName, Deck> fnGetDeck;
 
     public DeckProxy(Deck deck, GameType type, IStorage<? extends IHasName> storage) {
-        this(deck, type, null, storage, null);
+        this(deck, type, "", storage, null);
     }
 
     public DeckProxy(IHasName deck, Function<IHasName, Deck> fnGetDeck, GameType type, IStorage<? extends IHasName> storage) {
-        this(deck, type, null, storage, fnGetDeck);
+        this(deck, type, "", storage, fnGetDeck);
     }
     
     private DeckProxy(IHasName deck, GameType type, String path, IStorage<? extends IHasName> storage, Function<IHasName, Deck> fnGetDeck) {

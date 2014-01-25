@@ -57,6 +57,7 @@ public final class DeckManager extends ItemManager<DeckProxy> {
     private Command cmdDelete, cmdSelect;
     private final Map<ColumnDef, ItemColumn> columns = SColumnUtil.getColumns(
             ColumnDef.DECK_ACTIONS,
+            ColumnDef.DECK_FOLDER,
             ColumnDef.NAME,
             ColumnDef.DECK_COLOR,
             ColumnDef.DECK_FORMAT,
@@ -74,7 +75,8 @@ public final class DeckManager extends ItemManager<DeckProxy> {
         this.gametype = gt;
 
         columns.get(ColumnDef.DECK_ACTIONS).setCellRenderer(new DeckActionsRenderer());
-        columns.get(ColumnDef.NAME).setSortPriority(1);
+        columns.get(ColumnDef.DECK_FOLDER).setSortPriority(1);
+        columns.get(ColumnDef.NAME).setSortPriority(2);
 
         this.addSelectionListener(new ListSelectionListener() {
             @Override

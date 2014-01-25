@@ -396,6 +396,19 @@ public class ItemColumn extends TableColumn {
                         return toDeck(from.getKey());
                     }
                 }),
+        DECK_FOLDER("Folder", "Folder", 80, -1, -1, SortState.ASC, new ItemCellRenderer(),
+                new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                    @Override
+                    public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                        return toDeckFolder(from.getKey());
+                    }
+                },
+                new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                    @Override
+                    public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                        return toDeckFolder(from.getKey());
+                    }
+                }),
         DECK_COLOR("Color", "Color", 70, 70, 70, SortState.ASC, new ColorSetRenderer(),
                 new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                     @Override
@@ -545,6 +558,9 @@ public class ItemColumn extends TableColumn {
         }
         private static ColorSet toDeckColor(final InventoryItem i) {
             return i instanceof DeckProxy ? ((DeckProxy) i).getColor() : null;
+        }
+        private static String toDeckFolder(final InventoryItem i) {
+            return i instanceof DeckProxy ? ((DeckProxy) i).getPath() + "/" : null;
         }
     }
 }
