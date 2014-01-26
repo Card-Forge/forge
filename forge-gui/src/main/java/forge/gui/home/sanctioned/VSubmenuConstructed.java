@@ -141,6 +141,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final List<FPanel> planarDeckPanels = new ArrayList<FPanel>(8);
     private final List<FLabel> plnDeckSelectorBtns = new ArrayList<FLabel>(8);
     private final List<FLabel> plnEditors = new ArrayList<FLabel>(8);
+    private final List<FLabel> lblPlanarDecks = new ArrayList<>(8);
 
     private final List<FList<Object>> vgdAvatarLists = new ArrayList<FList<Object>>();
     private final List<FPanel> vgdPanels = new ArrayList<FPanel>(8);
@@ -358,7 +359,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             }
         });
         playerPanel.add(newLabel("Deck:"), "w 40px, h 30px");
-        playerPanel.add(deckBtn, "pushx, growx, wmax 100%-157px, h 30px, spanx 4, wrap");
+        playerPanel.add(deckBtn, "pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
         deckSelectorBtns.add(deckBtn);
 
         // Variants
@@ -393,8 +394,15 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                         new CEditorVariant(Singletons.getModel().getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE));
             }
         });
-        playerPanel.add(plnDeckSelectorBtn, variantBtnConstraints + ", spanx, split 2, growx, pushx, gapright rel");
-        playerPanel.add(plnDeckEditor, variantBtnConstraints + ", width 150px, wrap");
+
+        FLabel lblPlanarDeck = newLabel("Planar deck:");
+        lblPlanarDeck.setVisible(appliedVariants.contains(GameType.Planechase));
+        
+        playerPanel.add(lblPlanarDeck, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
+        playerPanel.add(plnDeckSelectorBtn, variantBtnConstraints + ", cell 2 2, growx, pushx");
+        playerPanel.add(plnDeckEditor, variantBtnConstraints + ", cell 3 2, sx 3, growx, wrap");
+        
+        lblPlanarDecks.add(lblPlanarDeck);
         plnDeckSelectorBtns.add(plnDeckSelectorBtn);
         plnEditors.add(plnDeckEditor);
         
@@ -409,7 +417,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             	changePlayerFocus(vgdSelectorBtns.indexOf(vgdSelectorBtn), GameType.Vanguard);
             }
         });
-        playerPanel.add(vgdSelectorBtn, variantBtnConstraints + ", spanx, growx, pushx, wrap");
+        playerPanel.add(vgdSelectorBtn, variantBtnConstraints + ", cell 2 3, sx 4, growx, wrap");
         vgdSelectorBtns.add(vgdSelectorBtn);
 
         playerPanelList.add(playerPanel);
@@ -806,6 +814,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             		for (int i = 0; i < 8; i++) {
             			plnDeckSelectorBtns.get(i).setVisible(true);
             			plnEditors.get(i).setVisible(true);
+            			lblPlanarDecks.get(i).setVisible(true);
             			changePlayerFocus(playerWithFocus, variantType);
             		}
                 } else {
@@ -813,6 +822,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             		for (int i = 0; i < 8; i++) {
             			plnDeckSelectorBtns.get(i).setVisible(false);
             			plnEditors.get(i).setVisible(false);
+            			lblPlanarDecks.get(i).setVisible(false);
             			changePlayerFocus(playerWithFocus, GameType.Constructed);
             		}
                 }
