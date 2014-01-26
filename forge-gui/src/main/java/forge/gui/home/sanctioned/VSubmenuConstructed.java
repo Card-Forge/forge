@@ -10,10 +10,10 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
 
@@ -35,6 +35,7 @@ import forge.Singletons;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.game.card.Card;
+import forge.game.player.LobbyPlayer.PlayerType;
 import forge.gui.CardDetailPanel;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.deckchooser.DecksComboBoxEvent;
@@ -86,6 +87,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private static final ForgePreferences prefs = Singletons.getModel().getPreferences();
     private static final SkinColor unfocusedPlayerOverlay = FSkin.getColor(FSkin.Colors.CLR_OVERLAY).alphaColor(120);
 
+    private final static int MAX_PLAYERS = 8;
+    
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Constructed Mode");
@@ -96,7 +99,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private int playerWithFocus = 0; // index of the player that currently has focus
     private PlayerPanel playerPanelWithFocus;
     private GameType currentGameMode = GameType.Constructed;
-    private List<Integer> teams = new ArrayList<Integer>(8);
+    private List<Integer> teams = new ArrayList<Integer>(MAX_PLAYERS);
 
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
@@ -116,15 +119,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
     private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"), true);
-    private final List<PlayerPanel> playerPanelList = new ArrayList<PlayerPanel>(8);
-    private final List<FPanel> activePlayerPanelList = new ArrayList<FPanel>(8);
-    private final List<FPanel> inactivePlayerPanelList = new ArrayList<FPanel>(6);
-    private final List<FTextField> playerNameBtnList = new ArrayList<FTextField>(8);
-    private final List<String> playerNames = new ArrayList<String>(8);
-    private final List<FLabel> nameRandomisers = new ArrayList<FLabel>(8);
-    private final List<FRadioButton> playerTypeRadios = new ArrayList<FRadioButton>(8);
-    private final List<FLabel> avatarList = new ArrayList<FLabel>(8);
-    private final TreeMap<Integer, Integer> usedAvatars = new TreeMap<Integer, Integer>();
+    private final List<PlayerPanel> playerPanels = new ArrayList<PlayerPanel>(MAX_PLAYERS);
 
     private final List<FLabel> closePlayerBtnList = new ArrayList<FLabel>(6);
     private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text("Add a Player").build();
@@ -132,20 +127,15 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     // Deck frame elements
     private final JPanel decksFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>(8);
-    private final List<FLabel> deckSelectorBtns = new ArrayList<FLabel>(8);
     private final FCheckBox cbSingletons = new FCheckBox("Singleton Mode");
     private final FCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
 
     // Variants
     private final List<FList<Object>> planarDeckLists = new ArrayList<FList<Object>>();
-    private final List<FPanel> planarDeckPanels = new ArrayList<FPanel>(8);
-    private final List<FLabel> plnDeckSelectorBtns = new ArrayList<FLabel>(8);
-    private final List<FLabel> plnEditors = new ArrayList<FLabel>(8);
-    private final List<FLabel> lblPlanarDecks = new ArrayList<>(8);
+    private final List<FPanel> planarDeckPanels = new ArrayList<FPanel>(MAX_PLAYERS);
 
     private final List<FList<Object>> vgdAvatarLists = new ArrayList<FList<Object>>();
-    private final List<FPanel> vgdPanels = new ArrayList<FPanel>(8);
-    private final List<FLabel> vgdSelectorBtns = new ArrayList<FLabel>(8);
+    private final List<FPanel> vgdPanels = new ArrayList<FPanel>(MAX_PLAYERS);
     private final List<CardDetailPanel> vgdAvatarDetails = new ArrayList<CardDetailPanel>();
     private final List<PaperCard> vgdAllAvatars = new ArrayList<PaperCard>();
     private final List<PaperCard> vgdAllAiAvatars = new ArrayList<PaperCard>();
@@ -188,27 +178,23 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         // Construct individual player panels
         String constraints = "pushx, growx, wrap, hidemode 3";
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < MAX_PLAYERS; i++) {
         	teams.add(i+1);
-        	buildPlayerPanel(i);
-        	FPanel player = playerPanelList.get(i);
+        	
+            PlayerPanel player = new PlayerPanel(i);
+            playerPanels.add(player);
 
         	// Populate players panel
-        	if (i < activePlayersNum) {
-        	    playersScroll.add(player, constraints);
-        		activePlayerPanelList.add(player);
-        	}
-        	else {
-        		player.setVisible(false);
-        		playersScroll.add(player, constraints);
-        		inactivePlayerPanelList.add(player);
-        	}
+        	player.setVisible(i < activePlayersNum);
+        	
+    	    playersScroll.add(player, constraints);
+
         	if (i == 0) {
         	    constraints += ", gaptop 5px";
         	}
         }
 
-        playerPanelWithFocus = playerPanelList.get(0);
+        playerPanelWithFocus = playerPanels.get(0);
 
         playersFrame.setOpaque(false);
         playersFrame.add(playersScroll, "w 100%, h 100%-35px");
@@ -227,7 +213,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         ////////////////////////////////////////////////////////
         ////////////////////// Deck Panel //////////////////////
         
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < MAX_PLAYERS; i++) {
         	buildDeckPanel(i);
         }
         constructedFrame.add(decksFrame, "w 50%-5px, growy, pushy");
@@ -239,215 +225,36 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         pnlStart.add(btnStart, "align center");
     }
 
-    @SuppressWarnings("serial")
-	private FPanel buildPlayerPanel(final int playerIndex) {
-        PlayerPanel playerPanel = new PlayerPanel();
-        playerPanel.addMouseListener(new FMouseAdapter() {
-            @Override
-            public void onLeftClick(MouseEvent e) {
-                avatarList.get(playerPanelList.indexOf((FPanel)e.getSource())).requestFocusInWindow();
-            }
-        });
-        playerPanel.setLayout(new MigLayout("insets 10px, gap 5px"));
-
-        // Add a button to players 3+ to remove them from the setup
-        if (playerIndex >= 2) {
-            final FLabel closeBtn = new FLabel.Builder().tooltip("Close").iconInBackground(false)
-        			.icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_CLOSE)).hoverable(true).build();
-            closeBtn.setCommand(new Runnable() {
-                @Override
-                public void run() {
-                    removePlayer(closePlayerBtnList.indexOf(closeBtn) + 2);
-                }
-            });
-        	playerPanel.add(closeBtn, "w 20, h 20, pos (container.w-20) 0");
-        	closePlayerBtnList.add(closeBtn);
-        }
-
-        // Avatar
-        final FLabel avatar = new FLabel.Builder().opaque(true).hoverable(true)
-        		.iconScaleFactor(0.99f).iconInBackground(true).build();
-        String[] currentPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
-        if (playerIndex < currentPrefs.length) {
-            int avatarIndex = Integer.parseInt(currentPrefs[playerIndex]);
-        	avatar.setIcon(FSkin.getAvatars().get(avatarIndex));
-        	usedAvatars.put(playerIndex, avatarIndex);
-        } else {
-        	setRandomAvatar(avatar, playerIndex);
-        }
-        changeAvatarFocus();
-        avatar.setToolTipText("L-click: Select avatar. R-click: Randomize avatar.");
-        avatar.addFocusListener(avatarFocusListener);
-        avatar.addMouseListener(avatarMouseListener);
-        avatarList.add(avatar);
-
-        playerPanel.add(avatar, "spany 2, width 80px, height 80px");
-
-        // Name
-        String name;
-        if (playerIndex == 0) {
-        	name = Singletons.getModel().getPreferences().getPref(FPref.PLAYER_NAME);
-        	if (name.isEmpty()) {
-        		name = "Human";
-        	}
-        } else {
-        	name = NameGenerator.getRandomName("Any", "Any", playerNames);
-        }
-    	playerNames.add(name);
-        final FTextField playerNameField = new FTextField.Builder().text(name).build();
-        playerNameField.setFocusable(true);
-        playerNameField.setFont(FSkin.getFont(14));
-        playerNameField.addActionListener(nameListener);
-        playerNameField.addFocusListener(nameFocusListener);
-        playerPanel.add(newLabel("Name:"), "w 40px, h 30px, gaptop 5px");
-        playerPanel.add(playerNameField, "h 30px, pushx, growx");
-        playerNameBtnList.add(playerNameField);
-
-        // Name randomiser
-        final FLabel newNameBtn = new FLabel.Builder().tooltip("Get a new random name").iconInBackground(false)
-        		.icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT)).hoverable(true).opaque(false)
-        		.unhoveredAlpha(0.9f).build();
-        newNameBtn.setCommand(new Command() {
-			@Override
-			public void run() {
-    			String newName = getNewName();
-    			if ( null == newName )
-    			    return;
-                int index = nameRandomisers.indexOf(newNameBtn);
-    			FTextField nField = playerNameBtnList.get(index);
-
-    			nField.setText(newName);
-
-				if (index == 0) {
-					prefs.setPref(FPref.PLAYER_NAME, newName);
-					prefs.save();
-				}
-				playerNameBtnList.get(index).requestFocus();
-				changePlayerFocus(index);
-			}
-        });
-        newNameBtn.addFocusListener(nameFocusListener);
-        playerPanel.add(newNameBtn, "h 30px, w 30px, gaptop 5px");
-        nameRandomisers.add(newNameBtn);
-
-        // PlayerType
-        ButtonGroup tempBtnGroup = new ButtonGroup();
-        FRadioButton tmpHuman = new FRadioButton();
-        tmpHuman.setText("Human");
-        tmpHuman.setSelected(playerIndex == 0);
-        tmpHuman.addMouseListener(radioMouseAdapter);
-        FRadioButton tmpAI = new FRadioButton();
-        tmpAI.setText("AI");
-        tmpAI.setSelected(playerIndex != 0);
-        tmpAI.addMouseListener(radioMouseAdapter);
-        tempBtnGroup.add(tmpHuman);
-        tempBtnGroup.add(tmpAI);
-        playerTypeRadios.add(tmpHuman);
-        playerTypeRadios.add(tmpAI);
-
-        playerPanel.add(tmpHuman, "gapright 5px");
-        playerPanel.add(tmpAI, "wrap");
-
-        // Deck selector button
-        final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
-        deckBtn.setCommand(new Runnable() {
-            @Override
-            public void run() {
-            	currentGameMode = GameType.Constructed;
-                deckBtn.requestFocusInWindow();
-            	changePlayerFocus(deckSelectorBtns.indexOf(deckBtn), GameType.Constructed);
-            }
-        });
-        playerPanel.add(newLabel("Deck:"), "w 40px, h 30px");
-        playerPanel.add(deckBtn, "pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
-        deckSelectorBtns.add(deckBtn);
-
-        // Variants
-        String variantBtnConstraints = "height 30px, hidemode 3";
-        
-        // Planechase buttons
-        final FLabel plnDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a planar deck").build();
-        plnDeckSelectorBtn.setVisible(appliedVariants.contains(GameType.Planechase));
-        plnDeckSelectorBtn.setCommand(new Runnable() {
-            @Override
-            public void run() {
-            	currentGameMode = GameType.Planechase;
-            	plnDeckSelectorBtn.requestFocusInWindow();
-            	changePlayerFocus(plnDeckSelectorBtns.indexOf(plnDeckSelectorBtn), GameType.Planechase);
-            }
-        });
-        final FLabel plnDeckEditor = new FLabel.ButtonBuilder().text("Planar Deck Editor").build();
-        plnDeckEditor.setVisible(appliedVariants.contains(GameType.Planechase));
-        plnDeckEditor.setCommand(new Command() {
-            @Override
-            public void run() {
-            	currentGameMode = GameType.Planechase;
-                Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
-                    @Override
-                    public boolean apply(PaperCard arg0) {
-                        return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
-                    }
-                };
-                
-                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
-                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                        new CEditorVariant(Singletons.getModel().getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE));
-            }
-        });
-
-        FLabel lblPlanarDeck = newLabel("Planar deck:");
-        lblPlanarDeck.setVisible(appliedVariants.contains(GameType.Planechase));
-        
-        playerPanel.add(lblPlanarDeck, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
-        playerPanel.add(plnDeckSelectorBtn, variantBtnConstraints + ", cell 2 2, growx, pushx");
-        playerPanel.add(plnDeckEditor, variantBtnConstraints + ", cell 3 2, sx 3, growx, wrap");
-        
-        lblPlanarDecks.add(lblPlanarDeck);
-        plnDeckSelectorBtns.add(plnDeckSelectorBtn);
-        plnEditors.add(plnDeckEditor);
-        
-        // Vanguard buttons
-        final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text("Select a Vanguard avatar").build();
-        vgdSelectorBtn.setVisible(appliedVariants.contains(GameType.Vanguard));
-        vgdSelectorBtn.setCommand(new Runnable() {
-            @Override
-            public void run() {
-            	currentGameMode = GameType.Vanguard;
-            	vgdSelectorBtn.requestFocusInWindow();
-            	changePlayerFocus(vgdSelectorBtns.indexOf(vgdSelectorBtn), GameType.Vanguard);
-            }
-        });
-        playerPanel.add(vgdSelectorBtn, variantBtnConstraints + ", cell 2 3, sx 4, growx, wrap");
-        vgdSelectorBtns.add(vgdSelectorBtn);
-
-        playerPanelList.add(playerPanel);
-
-        return playerPanel;
-    }
-
     private void addPlayer() {
-    	if (activePlayersNum < 8) {
-    		FPanel player = inactivePlayerPanelList.get(0);
-    		player.setVisible(true);
-    		inactivePlayerPanelList.remove(player);
-    		activePlayerPanelList.add(player);
-    		addPlayerBtn.setEnabled(activePlayersNum < 7);
-        	activePlayersNum++;
+        if (activePlayersNum >= MAX_PLAYERS)
+            return;
 
-        	avatarList.get(playerPanelList.indexOf(player)).requestFocusInWindow();
-    	}
+        int freeIndex = -1;
+        for(int i = 0; i < MAX_PLAYERS; i++)
+            if ( !playerPanels.get(i).isVisible() ) {
+                freeIndex = i;
+                break;
+            }
+        
+
+        playerPanels.get(freeIndex).setVisible(true);
+
+        activePlayersNum++;
+        addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
+        
+        
+        playerPanels.get(freeIndex).setVisible(true);
+        playerPanels.get(freeIndex).focusOnAvatar();
     }
 
     private void removePlayer(int playerIndex) {
     	activePlayersNum--;
-		FPanel player = playerPanelList.get(playerIndex);
+		FPanel player = playerPanels.get(playerIndex);
     	player.setVisible(false);
-		inactivePlayerPanelList.add(player);
-		activePlayerPanelList.remove(player);
 		addPlayerBtn.setEnabled(true);
 
 		//find closest player still in game and give focus
-		int min = 8;
+		int min = MAX_PLAYERS;
 	    int closest = 2;
 
 	    for (int participantIndex : getParticipants()) {
@@ -460,24 +267,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 	    }
 
 	    changePlayerFocus(closest);
-	    avatarList.get(closest).requestFocusInWindow();
-    }
-
-    /** Applies a random avatar, avoiding avatars already used.
-     * @param playerIndex */
-    private void setRandomAvatar(FLabel avatar, int playerIndex) {
-        int random = 0;
-        do {
-            random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
-        } while (usedAvatars.values().contains(random));
-
-        setAvatar(avatar, playerIndex, random);
-    }
-
-    private void setAvatar(FLabel avatar, int playerIndex, int newAvatarIndex) {
-    	avatar.setIcon(FSkin.getAvatars().get(newAvatarIndex));
-        avatar.repaintSelf();
-    	usedAvatars.put(playerIndex, newAvatarIndex);
+	    playerPanels.get(closest).focusOnAvatar();
     }
 
     /** Builds the actual deck panel layouts for each player.
@@ -535,7 +325,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     protected void onDeckClicked(int iPlayer, DeckType type, Collection<DeckProxy> selectedDecks) {
         String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
-        deckSelectorBtns.get(iPlayer).setText(text);
+        playerPanels.get(iPlayer).setDeckSelectorButtonText(text);
     }
 
     /** Populates the deck panel with the focused player's deck choices. */
@@ -603,7 +393,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
 				@Override
 				public void deckTypeSelected(DecksComboBoxEvent ev) {
-					avatarList.get(playerWithFocus).requestFocusInWindow();
+				    playerPanels.get(playerWithFocus).focusOnAvatar();
 				}
 			});
         }
@@ -631,9 +421,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     public FCheckBox getCbArtifacts() { return cbArtifacts; }
 
     public boolean isPlayerAI(int playernum) {
-    	// playerTypeRadios list contains human radio, AI radio, human, AI, etc
-    	// so playernum * 2 + 1 points to the appropriate AI radio.
-    	return playerTypeRadios.get(playernum * 2 + 1).isSelected();
+        return playerPanels.get(playernum).getPlayerType() == PlayerType.COMPUTER;
     }
 
     public int getNumPlayers() {
@@ -642,19 +430,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     public final List<Integer> getParticipants() {
     	final List<Integer> participants = new ArrayList<Integer>(activePlayersNum);
-    	for (final FPanel panel : activePlayerPanelList) {
-    		participants.add(playerPanelList.indexOf(panel));
+    	for (final PlayerPanel panel : playerPanels) {
+    	    if(panel.isVisible())
+	            participants.add(playerPanels.indexOf(panel));
     	}
         return participants;
-    }
-
-    public final String getPlayerName(int playerIndex) {
-    	return playerNameBtnList.get(playerIndex).getText();
-    }
-
-    /** Gets the index of the appropriate player's avatar. */
-    public final int getPlayerAvatar(int playerIndex) {
-    	return usedAvatars.get(playerIndex);
     }
 
     /** Revalidates the player and deck sections. Necessary after adding or hiding any panels. */
@@ -671,6 +451,161 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     @SuppressWarnings("serial")
     private class PlayerPanel extends FPanel {
+        private final int index;
+        
+        private final FLabel nameRandomiser;
+        private final FLabel avatarLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
+        private int avatarIndex;
+        
+        private final FTextField txtPlayerName = new FTextField.Builder().text("Player name").build();
+        private FRadioButton radioHuman;
+        private FRadioButton radioAi;
+        
+        
+        private final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
+        
+        private final String variantBtnConstraints = "height 30px, hidemode 3";
+        
+        private final FLabel pchDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a planar deck").build();
+        private final FLabel pchDeckEditor = new FLabel.ButtonBuilder().text("Planar Deck Editor").build();
+        private final FLabel pchLabel = newLabel("Planar deck:");
+        
+        private final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text("Select a Vanguard avatar").build();
+        private final FLabel vgdLabel = newLabel("Vanguard:");
+        
+        
+
+        public PlayerPanel(final int index) {
+            super();
+            this.index = index;
+            
+            setLayout(new MigLayout("insets 10px, gap 5px"));
+
+            // Add a button to players 3+ to remove them from the setup
+            if (index >= 2) {
+                FLabel closeBtn = createCloseButton();
+                this.add(closeBtn, "w 20, h 20, pos (container.w-20) 0");
+            }
+
+            createAvatar();
+            this.add(avatarLabel, "spany 2, width 80px, height 80px");
+
+            createNameEditor();
+            this.add(newLabel("Name:"), "w 40px, h 30px, gaptop 5px");
+            this.add(txtPlayerName, "h 30px, pushx, growx");
+
+            nameRandomiser = createNameRandomizer();
+            this.add(nameRandomiser, "h 30px, w 30px, gaptop 5px");
+
+            createPlayerTypeOptions();
+            this.add(radioHuman, "gapright 5px");
+            this.add(radioAi, "wrap");
+
+            this.add(newLabel("Deck:"), "w 40px, h 30px");
+            this.add(deckBtn, "pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
+
+            addHandlersDeckSelector();
+            
+            this.add(pchLabel, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
+            this.add(pchDeckSelectorBtn, variantBtnConstraints + ", cell 2 2, growx, pushx");
+            this.add(pchDeckEditor, variantBtnConstraints + ", cell 3 2, sx 3, growx, wrap");
+
+            this.add(vgdSelectorBtn, variantBtnConstraints + ", cell 2 3, sx 4, growx, wrap");
+            this.add(vgdLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
+            
+            addHandlersToVariantsControls();
+            updateVariantControlsVisibility();
+
+
+        }
+        
+        private final FMouseAdapter radioMouseAdapter = new FMouseAdapter() {
+            @Override
+            public void onLeftClick(MouseEvent e) {
+                avatarLabel.requestFocusInWindow();
+            }
+        };
+        
+        
+        /** Listens to name text fields and gives the appropriate player focus.
+         *  Also saves the name preference when leaving player one's text field. */
+        private FocusAdapter nameFocusListener = new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                changePlayerFocus(index);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                final Object source = e.getSource();
+                if (source instanceof FTextField) { // the text box
+                    FTextField nField = (FTextField)source;
+                    String newName = nField.getText().trim();
+                    if (index == 0 && !StringUtils.isBlank(newName)
+                            && StringUtils.isAlphanumericSpace(newName) && prefs.getPref(FPref.PLAYER_NAME) != newName) {
+                        prefs.setPref(FPref.PLAYER_NAME, newName);
+                        prefs.save();
+                    }
+                }
+            }
+        };
+
+        /** Listens to avatar buttons and gives the appropriate player focus. */
+        private FocusAdapter avatarFocusListener = new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                changePlayerFocus(index);
+            }
+        };        
+        
+
+        private FMouseAdapter avatarMouseListener = new FMouseAdapter() {
+            @Override
+            public void onLeftClick(MouseEvent e) {
+                final FLabel avatar = (FLabel)e.getSource();
+
+                changePlayerFocus(index);
+                avatar.requestFocusInWindow();
+
+                final AvatarSelector aSel = new AvatarSelector(getPlayerName(), avatarIndex, getUsedAvatars());
+                for (final FLabel lbl : aSel.getSelectables()) {
+                    lbl.setCommand(new Command() {
+                        @Override
+                        public void run() {
+                            setAvatar(Integer.valueOf(lbl.getName().substring(11)));
+                            aSel.setVisible(false);
+                        }
+                    });
+                }
+
+                aSel.setVisible(true);
+                aSel.dispose();
+
+                if (index < 2)
+                    updateAvatarPrefs();
+            }
+            @Override
+            public void onRightClick(MouseEvent e) {
+                changePlayerFocus(index);
+                avatarLabel.requestFocusInWindow();
+
+                setRandomAvatar();
+
+                if (index < 2) 
+                    updateAvatarPrefs();
+            }
+        };
+        
+        
+        public void updateVariantControlsVisibility() {
+            pchDeckSelectorBtn.setVisible(appliedVariants.contains(GameType.Planechase));
+            pchDeckEditor.setVisible(appliedVariants.contains(GameType.Planechase));
+            pchLabel.setVisible(appliedVariants.contains(GameType.Planechase));
+            
+            vgdSelectorBtn.setVisible(appliedVariants.contains(GameType.Vanguard));
+            vgdLabel.setVisible(appliedVariants.contains(GameType.Vanguard));
+        }
+
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -679,6 +614,220 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                 g.fillRect(0, 0, this.getWidth(), this.getHeight());
             }
         }
+
+        public PlayerType getPlayerType() {
+            return radioAi.isSelected() ? PlayerType.COMPUTER : PlayerType.HUMAN;
+        }
+
+//        public void setVanguardButtonText(String text) {
+//            vgdSelectorBtn.setText(text);
+//        }
+        
+        public void setDeckSelectorButtonText(String text) {
+            deckBtn.setText(text);
+        }
+
+
+        public void focusOnAvatar() {
+            avatarLabel.requestFocusInWindow();
+            
+        }
+
+        /**
+         * @param index
+         */
+        private void addHandlersToVariantsControls() {
+            // Planechase buttons
+            pchDeckSelectorBtn.setCommand(new Runnable() {
+                @Override
+                public void run() {
+                    currentGameMode = GameType.Planechase;
+                    pchDeckSelectorBtn.requestFocusInWindow();
+                    changePlayerFocus(index, GameType.Planechase);
+                }
+            });
+            
+            pchDeckEditor.setCommand(new Command() {
+                @Override
+                public void run() {
+                    currentGameMode = GameType.Planechase;
+                    Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
+                        @Override
+                        public boolean apply(PaperCard arg0) {
+                            return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
+                        }
+                    };
+                    
+                    Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
+                    CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
+                            new CEditorVariant(Singletons.getModel().getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE));
+                }
+            });
+            
+            // Vanguard buttons
+            vgdSelectorBtn.setCommand(new Runnable() {
+                @Override
+                public void run() {
+                    currentGameMode = GameType.Vanguard;
+                    vgdSelectorBtn.requestFocusInWindow();
+                    changePlayerFocus(index, GameType.Vanguard);
+                }
+            });
+        }
+
+        /**
+         * @param index
+         */
+        private void createPlayerTypeOptions() {
+            radioHuman = new FRadioButton("Human", index == 0);
+            radioAi = new FRadioButton("AI", index != 0);
+
+            radioHuman.addMouseListener(radioMouseAdapter);
+            radioAi.addMouseListener(radioMouseAdapter);
+            
+            ButtonGroup tempBtnGroup = new ButtonGroup();
+            tempBtnGroup.add(radioHuman);
+            tempBtnGroup.add(radioAi);
+        }
+
+        /**
+         * @param index
+         */
+        private void addHandlersDeckSelector() {
+            deckBtn.setCommand(new Runnable() {
+                @Override
+                public void run() {
+                    currentGameMode = GameType.Constructed;
+                    deckBtn.requestFocusInWindow();
+                    changePlayerFocus(index, GameType.Constructed);
+                }
+            });
+        }
+
+        /**
+         * @param index
+         * @return
+         */
+        private FLabel createNameRandomizer() {
+            final FLabel newNameBtn = new FLabel.Builder().tooltip("Get a new random name").iconInBackground(false)
+                    .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT)).hoverable(true).opaque(false)
+                    .unhoveredAlpha(0.9f).build();
+            newNameBtn.setCommand(new Command() {
+                @Override
+                public void run() {
+                    String newName = getNewName();
+                    if ( null == newName )
+                        return;
+
+                    txtPlayerName.setText(newName);
+
+                    if (index == 0) {
+                        prefs.setPref(FPref.PLAYER_NAME, newName);
+                        prefs.save();
+                    }
+                    txtPlayerName.requestFocus();
+                    changePlayerFocus(index);
+                }
+            });
+            newNameBtn.addFocusListener(nameFocusListener);
+            return newNameBtn;
+        }
+
+        /**
+         * @param index
+         * @return 
+         */
+        private void createNameEditor() {
+            String name;
+            if (index == 0) {
+                name = Singletons.getModel().getPreferences().getPref(FPref.PLAYER_NAME);
+                if (name.isEmpty()) {
+                    name = "Human";
+                }
+            } else {
+                name = NameGenerator.getRandomName("Any", "Any", getPlayerNames());
+            }
+
+            txtPlayerName.setText(name);
+            txtPlayerName.setFocusable(true);
+            txtPlayerName.setFont(FSkin.getFont(14));
+            txtPlayerName.addActionListener(nameListener);
+            txtPlayerName.addFocusListener(nameFocusListener);
+        }
+
+        private FLabel createCloseButton() {
+            final FLabel closeBtn = new FLabel.Builder().tooltip("Close").iconInBackground(false)
+                    .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_CLOSE)).hoverable(true).build();
+            closeBtn.setCommand(new Runnable() {
+                @Override
+                public void run() {
+                    removePlayer(closePlayerBtnList.indexOf(closeBtn) + 2);
+                }
+            });
+            closePlayerBtnList.add(closeBtn);
+            return closeBtn;
+        }
+
+
+        private void createAvatar() {
+            String[] currentPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
+            if (index < currentPrefs.length) {
+                avatarIndex = Integer.parseInt(currentPrefs[index]);
+                avatarLabel.setIcon(FSkin.getAvatars().get(avatarIndex));
+            } else {
+                setRandomAvatar();
+            }
+            this.addMouseListener(new FMouseAdapter() {
+                @Override
+                public void onLeftClick(MouseEvent e) {
+                    avatarLabel.requestFocusInWindow();
+                }
+            });
+            
+            avatarLabel.setToolTipText("L-click: Select avatar. R-click: Randomize avatar.");
+            avatarLabel.addFocusListener(avatarFocusListener);
+            avatarLabel.addMouseListener(avatarMouseListener);
+        }
+        
+        /** Applies a random avatar, avoiding avatars already used.
+         * @param playerIndex */
+        public void setRandomAvatar() {
+            int random = 0;
+
+            List<Integer> usedAvatars = getUsedAvatars();
+            do {
+                random = MyRandom.getRandom().nextInt(FSkin.getAvatars().size());
+            } while (usedAvatars.contains(random));
+            setAvatar(random);
+        }
+
+        public void setAvatar(int newAvatarIndex) {
+            avatarIndex = newAvatarIndex;
+            SkinImage icon = FSkin.getAvatars().get(newAvatarIndex);
+            avatarLabel.setIcon(icon);
+            avatarLabel.repaintSelf();
+        }
+
+        private final FSkin.LineSkinBorder focusedBorder = new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS).alphaColor(255), 3);
+        private final FSkin.LineSkinBorder defaultBorder = new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_THEME).alphaColor(200), 2);
+
+        public void setFocused(boolean focused) {
+            avatarLabel.setBorder(focused ? focusedBorder : defaultBorder);
+            avatarLabel.setHoverable(focused);
+        }
+
+        public int getAvatarIndex() {
+            return avatarIndex;
+        }
+
+        public void setPlayerName(String string) {
+            txtPlayerName.setText(string);
+        }
+        
+        public String getPlayerName() {
+            return txtPlayerName.getText();
+        }
+        
     }
 
     private void changePlayerFocus(int newFocusOwner) {
@@ -687,7 +836,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     private void changePlayerFocus(int newFocusOwner, GameType gType) {
     	playerWithFocus = newFocusOwner;
-    	playerPanelWithFocus = playerPanelList.get(playerWithFocus);
+    	playerPanelWithFocus = playerPanels.get(playerWithFocus);
 
     	changeAvatarFocus();
     	playersScroll.getViewport().scrollRectToVisible(playerPanelWithFocus.getBounds());
@@ -698,23 +847,16 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** Changes avatar appearance dependant on focus player. */
     private void changeAvatarFocus() {
-    	int index = 0;
-    	for (FLabel avatar : avatarList) {
-    		if (index == playerWithFocus) {
-    	        avatar.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS).alphaColor(255), 3));
-    	        avatar.setHoverable(false);
-    		} else {
-    	        avatar.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_THEME).alphaColor(200), 2));
-    	        avatar.setHoverable(true);
-    		}
-    		index++;
+    	for (int i = 0; i < playerPanels.size(); i++) {
+    	    PlayerPanel pp = playerPanels.get(i);
+    	    pp.setFocused(i == playerWithFocus);
     	}
     }
 
     /** Saves avatar prefs for players one and two. */
     private void updateAvatarPrefs() {
-    	int pOneIndex = usedAvatars.get(0);
-    	int pTwoIndex = usedAvatars.get(1);
+    	int pOneIndex = playerPanels.get(0).getAvatarIndex();
+    	int pTwoIndex = playerPanels.get(1).getAvatarIndex();
 
         prefs.setPref(FPref.UI_AVATARS, pOneIndex + "," + pTwoIndex);
         prefs.save();
@@ -722,22 +864,18 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** Updates the avatars from preferences on update. */
     public void updatePlayersFromPrefs() {
-    	ForgePreferences prefs = Singletons.getModel().getPreferences();
-    	
-    	// Avatar
+        ForgePreferences prefs = Singletons.getModel().getPreferences();
+        
+        // Avatar
         String[] avatarPrefs = prefs.getPref(FPref.UI_AVATARS).split(",");
-    	for (int i = 0; i < avatarPrefs.length; i++) {
-        	FLabel avatar = avatarList.get(i);
+        for (int i = 0; i < avatarPrefs.length; i++) {
             int avatarIndex = Integer.parseInt(avatarPrefs[i]);
-            avatar.setIcon(FSkin.getAvatars().get(avatarIndex));
-            avatar.repaintSelf();
-        	usedAvatars.put(i, avatarIndex);
+            playerPanels.get(i).setAvatar(avatarIndex);
         }
 
     	// Name
-    	FTextField nameField = playerNameBtnList.get(0);
     	String prefName = prefs.getPref(FPref.PLAYER_NAME);
-    	nameField.setText(StringUtils.isBlank(prefName) ? "Human" : prefName);
+    	playerPanels.get(0).setPlayerName(StringUtils.isBlank(prefName) ? "Human" : prefName);
     }
 
     /** Adds a pre-styled FLabel component with the specified title. */
@@ -745,6 +883,15 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	return new FLabel.Builder().text(title).fontSize(14).fontStyle(Font.ITALIC).build();
     }
 
+    private List<Integer> getUsedAvatars() {
+        List<Integer> usedAvatars = Arrays.asList(-1,-1,-1,-1,-1,-1,-1,-1);
+        int i = 0;
+        for (PlayerPanel pp : playerPanels) {
+            usedAvatars.set(i++, pp.avatarIndex);
+        }
+        return usedAvatars;
+    }
+    
     private final String getNewName() {
     	final String title = "Get new random name";
     	final String message = "What type of name do you want to generate?";
@@ -764,8 +911,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	String confirmMsg;
     	String newName;
 
+    	List<String> usedNames = getPlayerNames();
     	do {
-    		newName = NameGenerator.getRandomName(gender, type, playerNames);
+    		newName = NameGenerator.getRandomName(gender, type, usedNames);
     		confirmMsg = "Would you like to use the name \"" + newName + "\", or try again?";
     	} while (!FOptionPane.showConfirmDialog(confirmMsg, title, "Use this name", "Try again", true));
 
@@ -775,68 +923,48 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /////////////////////////////////////////////
     //========== Various listeners in build order
 
+    private List<String> getPlayerNames() {
+        List<String> names = new ArrayList<String>();
+        for(PlayerPanel pp : playerPanels) {
+            names.add(pp.getPlayerName());
+        }
+        return names;
+    }
+
     /** This listener unlocks the relevant buttons for players
      * and enables/disables archenemy combobox as appropriate. */
     private ItemListener iListenerVariants = new ItemListener() {
         @Override
         public void itemStateChanged(ItemEvent arg0) {
             FCheckBox cb = (FCheckBox) arg0.getSource();
-            GameType variantType = GameType.Constructed;
+            GameType variantType = null;
 
-            if (cb == vntVanguard) {
-            	variantType = GameType.Vanguard;
-            	if (arg0.getStateChange() == ItemEvent.SELECTED) {
-            		appliedVariants.add(variantType);
-            		for (int i = 0; i < 8; i++) {
-            			vgdSelectorBtns.get(i).setVisible(true);
-            			changePlayerFocus(playerWithFocus, variantType);
-            		}
-                } else {
-            		appliedVariants.remove(variantType);
-            		for (int i = 0; i < 8; i++) {
-            			vgdSelectorBtns.get(i).setVisible(false);
-            			changePlayerFocus(playerWithFocus, GameType.Constructed);
-            		}
-                }
-            }
-            else if (cb == vntCommander) {
-            	variantType = GameType.Commander;
-            	if (arg0.getStateChange() == ItemEvent.SELECTED) {
-            		appliedVariants.add(variantType);
-                } else {
-            		appliedVariants.remove(variantType);
-                }
-            }
-            else if (cb == vntPlanechase) {
-            	variantType = GameType.Planechase;
-            	if (arg0.getStateChange() == ItemEvent.SELECTED) {
-            		appliedVariants.add(variantType);
-            		for (int i = 0; i < 8; i++) {
-            			plnDeckSelectorBtns.get(i).setVisible(true);
-            			plnEditors.get(i).setVisible(true);
-            			lblPlanarDecks.get(i).setVisible(true);
-            			changePlayerFocus(playerWithFocus, variantType);
-            		}
-                } else {
-            		appliedVariants.remove(variantType);
-            		for (int i = 0; i < 8; i++) {
-            			plnDeckSelectorBtns.get(i).setVisible(false);
-            			plnEditors.get(i).setVisible(false);
-            			lblPlanarDecks.get(i).setVisible(false);
-            			changePlayerFocus(playerWithFocus, GameType.Constructed);
-            		}
-                }
-            }
+            if (cb == vntVanguard)
+                variantType = GameType.Vanguard;
+            else if (cb == vntCommander)
+                variantType = GameType.Commander;
+            else if (cb == vntPlanechase)
+                variantType = GameType.Planechase;
             else if (cb == vntArchenemy) {
-            	variantType = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
+                variantType = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
                 comboArchenemy.setEnabled(vntArchenemy.isSelected());
-            	if (arg0.getStateChange() == ItemEvent.SELECTED) {
-            		appliedVariants.add(variantType);
-                } else {
-            		appliedVariants.remove(GameType.Archenemy);
-            		appliedVariants.remove(GameType.ArchenemyRumble);
+                if (arg0.getStateChange() != ItemEvent.SELECTED) {
+                    appliedVariants.remove(GameType.Archenemy);
+                    appliedVariants.remove(GameType.ArchenemyRumble);
                 }
             }
+            
+            if ( null != variantType ) {
+                if (arg0.getStateChange() == ItemEvent.SELECTED)
+                    appliedVariants.add(variantType);
+                else
+                    appliedVariants.remove(variantType);
+            }
+
+            for (PlayerPanel pp : playerPanels) {
+                pp.updateVariantControlsVisibility();
+            }
+            changePlayerFocus(playerWithFocus, variantType);
         }
     };
 
@@ -854,54 +982,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		}
     };
 
-    /** Listens to avatar buttons and gives the appropriate player focus. */
-    private FocusAdapter avatarFocusListener = new FocusAdapter() {
-		@Override
-    	public void focusGained(FocusEvent e) {
-    		int avatarOwnerID = avatarList.indexOf((FLabel)e.getSource());
-			changePlayerFocus(avatarOwnerID);
-		}
-    };
-
-    private FMouseAdapter avatarMouseListener = new FMouseAdapter() {
-		@SuppressWarnings("serial")
-		@Override
-		public void onLeftClick(MouseEvent e) {
-			final FLabel avatar = (FLabel)e.getSource();
-			final int playerIndex = avatarList.indexOf(avatar);
-
-			changePlayerFocus(playerIndex);
-            avatar.requestFocusInWindow();
-
-			final AvatarSelector aSel = new AvatarSelector(getPlayerName(playerIndex), usedAvatars.get(playerIndex), usedAvatars.values());
-			for (final FLabel lbl : aSel.getSelectables()) {
-				lbl.setCommand(new Command() {
-					@Override
-		            public void run() {
-		                VSubmenuConstructed.this.setAvatar(avatar, playerIndex, Integer.valueOf(lbl.getName().substring(11)));
-		                aSel.setVisible(false);
-		            }
-				});
-			}
-
-			aSel.setVisible(true);
-	        aSel.dispose();
-
-			if (playerIndex < 2) { updateAvatarPrefs(); }
-		}
-		@Override
-        public void onRightClick(MouseEvent e) {
-            FLabel avatar = (FLabel)e.getSource();
-            int playerIndex = avatarList.indexOf(avatar);
-
-            changePlayerFocus(playerIndex);
-            avatar.requestFocusInWindow();
-
-            setRandomAvatar(avatar, playerIndex);
-
-            if (playerIndex < 2) { updateAvatarPrefs(); }
-        }
-    };
 
     private ActionListener nameListener = new ActionListener() {
     	@Override
@@ -909,50 +989,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 			FTextField nField = (FTextField)e.getSource();
 			nField.transferFocus();
 		}
-    };
-
-    /** Listens to name text fields and gives the appropriate player focus.
-     *  Also saves the name preference when leaving player one's text field. */
-    private FocusAdapter nameFocusListener = new FocusAdapter() {
-		@Override
-		public void focusGained(FocusEvent e) {
-			int panelOwnerID = 0;
-			final Object source = e.getSource();
-
-			if (source instanceof FTextField) { // the text box
-				FTextField nField = (FTextField)source;
-				panelOwnerID = playerNameBtnList.indexOf(nField);
-			} else if (source instanceof FLabel) { // the name randomiser button
-				FLabel randBtn = (FLabel)source;
-				panelOwnerID = nameRandomisers.indexOf(randBtn);
-			}
-
-			changePlayerFocus(panelOwnerID);
-		}
-
-		@Override
-		public void focusLost(FocusEvent e) {
-			final Object source = e.getSource();
-			if (source instanceof FTextField) { // the text box
-				FTextField nField = (FTextField)source;
-				String newName = nField.getText().trim();
-			    if (playerNameBtnList.indexOf(nField) == 0 && !StringUtils.isBlank(newName)
-			    		&& StringUtils.isAlphanumericSpace(newName) && prefs.getPref(FPref.PLAYER_NAME) != newName) {
-                    prefs.setPref(FPref.PLAYER_NAME, newName);
-                    prefs.save();
-                }
-			}
-		}
-    };
-
-    private FMouseAdapter radioMouseAdapter = new FMouseAdapter() {
-        @Override
-        public void onLeftClick(MouseEvent e) {
-            int radioID = playerTypeRadios.indexOf((FRadioButton)e.getSource());
-            int radioOwnerID = (int) Math.floor(radioID / 2);
-            avatarList.get(radioOwnerID).requestFocusInWindow();
-            updateVanguardList(radioOwnerID);
-        }
     };
 
     /** This listener will look for a vanguard avatar being selected in the lists
@@ -1097,5 +1133,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		if (-1 == vgdList.getSelectedIndex()) {
 			vgdList.setSelectedIndex(0);
 		}
+    }
+
+    public String getPlayerName(int i) {
+        return playerPanels.get(i).getPlayerName();
+    }
+
+    public int getPlayerAvatar(int i) {
+        return playerPanels.get(i).getAvatarIndex();
     }
 }
