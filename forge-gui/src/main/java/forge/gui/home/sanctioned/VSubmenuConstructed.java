@@ -523,6 +523,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             @Override
             public void onLeftClick(MouseEvent e) {
                 avatarLabel.requestFocusInWindow();
+                updateVanguardList(index);
             }
         };
         
