@@ -77,6 +77,7 @@ public enum ApiType {
     ManaReflected (ManaReflectedEffect.class, CannotPlayAi.class),
     Mill (MillEffect.class, MillAi.class),
     MoveCounter (CountersMoveEffect.class, CountersMoveAi.class),
+    MultiplePiles (MultiplePilesEffect.class, CannotPlayAi.class),
     MustAttack (MustAttackEffect.class, MustAttackAi.class),
     MustBlock (MustBlockEffect.class, MustBlockAi.class),
     NameCard (ChooseCardNameEffect.class, ChooseCardNameAi.class),

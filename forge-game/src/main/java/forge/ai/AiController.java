@@ -986,7 +986,11 @@ public class AiController {
                 if (max >= 3 && !result.contains(smallest)) {
                     result.add(smallest);
                 }
-                
+
+            case MultiplePiles:
+                // Whims of the Fates {all, 0, 0}
+                result.addAll(pool);
+                break;
             default:
                 for (int i = 0; i < max; i++) {
                     Card c = player.getController().chooseSingleEntityForEffect(pool, sa, null, isOptional);
