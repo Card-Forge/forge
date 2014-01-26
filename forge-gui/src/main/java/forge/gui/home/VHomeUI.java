@@ -58,7 +58,7 @@ import forge.gui.home.settings.VSubmenuReleaseNotes;
 import forge.gui.home.variant.VSubmenuArchenemy;
 import forge.gui.home.variant.VSubmenuCommander;
 //import forge.gui.home.variant.VSubmenuPlanechase;
-import forge.gui.home.variant.VSubmenuVanguard;
+//import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPanel;
 import forge.gui.toolbox.FSkin;
@@ -152,7 +152,7 @@ public enum VHomeUI implements IVTopLevelUI {
         allSubmenus.add(VSubmenuReleaseNotes.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuArchenemy.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuVanguard.SINGLETON_INSTANCE);        
+      //allSubmenus.add(VSubmenuVanguard.SINGLETON_INSTANCE);        
       //allSubmenus.add(VSubmenuPlanechase.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuCommander.SINGLETON_INSTANCE);
 

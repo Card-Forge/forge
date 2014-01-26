@@ -15,11 +15,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -31,6 +34,8 @@ import forge.Command;
 import forge.Singletons;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.game.card.Card;
+import forge.gui.CardDetailPanel;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.deckchooser.DecksComboBoxEvent;
 import forge.gui.deckchooser.FDeckChooser;
@@ -62,6 +67,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.FTextField;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -135,6 +141,17 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private final List<FPanel> planarDeckPanels = new ArrayList<FPanel>(8);
     private final List<FLabel> plnDeckSelectorBtns = new ArrayList<FLabel>(8);
     private final List<FLabel> plnEditors = new ArrayList<FLabel>(8);
+
+    private final List<FList<Object>> vgdAvatarLists = new ArrayList<FList<Object>>();
+    private final List<FPanel> vgdPanels = new ArrayList<FPanel>(8);
+    private final List<FLabel> vgdSelectorBtns = new ArrayList<FLabel>(8);
+    private final List<CardDetailPanel> vgdAvatarDetails = new ArrayList<CardDetailPanel>();
+    private final List<PaperCard> vgdAllAvatars = new ArrayList<PaperCard>();
+    private final List<PaperCard> vgdAllAiAvatars = new ArrayList<PaperCard>();
+    private final List<PaperCard> nonRandomHumanAvatars = new ArrayList<PaperCard>();
+    private final List<PaperCard> nonRandomAiAvatars = new ArrayList<PaperCard>();
+    private Vector<Object> humanListData = new Vector<Object>();
+    private Vector<Object> aiListData = new Vector<Object>();
 
     // CTR
     private VSubmenuConstructed() {
@@ -380,6 +397,20 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         playerPanel.add(plnDeckEditor, variantBtnConstraints + ", width 150px, wrap");
         plnDeckSelectorBtns.add(plnDeckSelectorBtn);
         plnEditors.add(plnDeckEditor);
+        
+        // Vanguard buttons
+        final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text("Select a Vanguard avatar").build();
+        vgdSelectorBtn.setVisible(appliedVariants.contains(GameType.Vanguard));
+        vgdSelectorBtn.setCommand(new Runnable() {
+            @Override
+            public void run() {
+            	currentGameMode = GameType.Vanguard;
+            	vgdSelectorBtn.requestFocusInWindow();
+            	changePlayerFocus(vgdSelectorBtns.indexOf(vgdSelectorBtn), GameType.Vanguard);
+            }
+        });
+        playerPanel.add(vgdSelectorBtn, variantBtnConstraints + ", spanx, growx, pushx, wrap");
+        vgdSelectorBtns.add(vgdSelectorBtn);
 
         playerPanelList.add(playerPanel);
 
@@ -446,6 +477,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     @SuppressWarnings("serial")
     private void buildDeckPanel(final int playerIndex) {
     	String sectionConstraints = "insets 8";
+    	String componentConstraints = "gap 0px 0px 10px 10px, wrap";
 
         // Main deck
         final FDeckChooser mainChooser = new FDeckChooser(isPlayerAI(playerIndex));
@@ -461,15 +493,36 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         // Planar deck list
         FPanel planarDeckPanel = new FPanel();
         planarDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        planarDeckPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), "gap 0px 0px 10px 10px, wrap");
+        planarDeckPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), componentConstraints);
         FList<Object> planarDeckList = new FList<Object>();
         planarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         FScrollPane scrPlanes = new FScrollPane(planarDeckList, false,
         		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        planarDeckPanel.add(scrPlanes, "h 95%, gap 0px 10px 0px 10px, grow, push, wrap");
+        planarDeckPanel.add(scrPlanes, componentConstraints + ", h 95%, grow, push");
         planarDeckLists.add(planarDeckList);
         planarDeckPanels.add(planarDeckPanel);
+
+        // Vanguard avatar list
+        FPanel vgdDeckPanel = new FPanel();
+
+        FList<Object> vgdAvatarList = new FList<Object>();
+        vgdAvatarList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
+        vgdAvatarList.setSelectedIndex(0);
+        vgdAvatarList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        vgdAvatarList.addListSelectionListener(vgdLSListener);
+        FScrollPane scrAvatars = new FScrollPane(vgdAvatarList, false,
+        		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        CardDetailPanel vgdDetail = new CardDetailPanel(null);
+        vgdAvatarDetails.add(vgdDetail);
+
+        vgdDeckPanel.setLayout(new MigLayout(sectionConstraints));
+        vgdDeckPanel.add(new FLabel.Builder().text("Select a Vanguard avatar:").build(), componentConstraints);
+        vgdDeckPanel.add(scrAvatars, componentConstraints + ", grow, push");
+        vgdDeckPanel.add(vgdDetail, componentConstraints + ", growx, pushx");
+        vgdAvatarLists.add(vgdAvatarList);
+        vgdPanels.add(vgdDeckPanel);
     }
 
     protected void onDeckClicked(int iPlayer, DeckType type, Collection<DeckProxy> selectedDecks) {
@@ -490,8 +543,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     		}
     	} else if (GameType.Planechase == forGameType) {
     		decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
-    		refreshPanels(false, true);
+    	} else if (GameType.Vanguard == forGameType) {
+    		updateVanguardList(playerWithFocus);
+    		decksFrame.add(vgdPanels.get(playerWithFocus), "grow, push");
     	}
+		refreshPanels(false, true);
     }
 
     /* (non-Javadoc)
@@ -544,6 +600,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 			});
         }
     	populateDeckPanel(GameType.Constructed);
+    	populateVanguardLists();
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(constructedFrame, "gap 20px 20px 20px 0px, push, grow");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 0 3.5%! 3.5%!, ax center");
@@ -722,8 +779,16 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             	variantType = GameType.Vanguard;
             	if (arg0.getStateChange() == ItemEvent.SELECTED) {
             		appliedVariants.add(variantType);
+            		for (int i = 0; i < 8; i++) {
+            			vgdSelectorBtns.get(i).setVisible(true);
+            			changePlayerFocus(playerWithFocus, variantType);
+            		}
                 } else {
             		appliedVariants.remove(variantType);
+            		for (int i = 0; i < 8; i++) {
+            			vgdSelectorBtns.get(i).setVisible(false);
+            			changePlayerFocus(playerWithFocus, GameType.Constructed);
+            		}
                 }
             }
             else if (cb == vntCommander) {
@@ -876,6 +941,22 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             int radioID = playerTypeRadios.indexOf((FRadioButton)e.getSource());
             int radioOwnerID = (int) Math.floor(radioID / 2);
             avatarList.get(radioOwnerID).requestFocusInWindow();
+            updateVanguardList(radioOwnerID);
+        }
+    };
+
+    /** This listener will look for a vanguard avatar being selected in the lists
+    / and update the corresponding detail panel. */
+    private ListSelectionListener vgdLSListener = new ListSelectionListener() {
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            int index = vgdAvatarLists.indexOf(e.getSource());
+            Object obj = vgdAvatarLists.get(index).getSelectedValue();
+
+            if (obj instanceof PaperCard) {
+                vgdAvatarDetails.get(index).setCard(Card.getCardForUi((IPaperCard) obj));
+            }
         }
     };
 
@@ -923,7 +1004,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     /////////////////////////////////////
-    //========== STUFF FOR VARIANTS
+    //========== METHODS FOR VARIANTS
 
     public Set<GameType> getAppliedVariants() {
     	return appliedVariants;
@@ -936,5 +1017,75 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /** Gets the list of planar deck lists. */
     public List<FList<Object>> getPlanarDeckLists() {
     	return planarDeckLists;
+    }
+
+    /** Gets the list of Vanguard avatar lists. */
+    public List<FList<Object>> getVanguardLists() {
+    	return vgdAvatarLists;
+    }
+
+    /** Return all the Vanguard avatars. */
+    public Iterable<PaperCard> getAllAvatars() {
+        if (vgdAllAvatars.isEmpty()) {
+            for (PaperCard c : Singletons.getMagicDb().getVariantCards().getAllCards()) {
+                if (c.getRules().getType().isVanguard()) {
+                	vgdAllAvatars.add(c);
+                }
+            }
+        }
+        return vgdAllAvatars;
+    }
+
+    /** Return the Vanguard avatars not flagged RemAIDeck. */
+    public List<PaperCard> getAllAiAvatars() {
+        return vgdAllAiAvatars;
+    }
+
+    /** Return the Vanguard avatars not flagged RemRandomDeck. */
+    public List<PaperCard> getNonRandomHumanAvatars() {
+        return nonRandomHumanAvatars;
+    }
+
+    /** Return the Vanguard avatars not flagged RemAIDeck or RemRandomDeck. */
+    public List<PaperCard> getNonRandomAiAvatars() {
+        return nonRandomAiAvatars;
+    }
+
+    /** Populate vanguard lists. */
+    private void populateVanguardLists() {
+        humanListData.add("Random");
+        aiListData.add("Random");
+        for (PaperCard cp : getAllAvatars()) {
+            humanListData.add(cp);
+            if (!cp.getRules().getAiHints().getRemRandomDecks()) {
+                nonRandomHumanAvatars.add(cp);
+            }
+            if (!cp.getRules().getAiHints().getRemAIDecks()) {
+                aiListData.add(cp);
+                vgdAllAiAvatars.add(cp);
+                if (!cp.getRules().getAiHints().getRemRandomDecks()) {
+                    nonRandomAiAvatars.add(cp);
+                }
+            }
+        }
+    }
+
+    /** update vanguard list. */
+    public void updateVanguardList(int playerIndex) {
+    	FList<Object> vgdList = getVanguardLists().get(playerIndex);
+		Vector<Object> listData = new Vector<Object>();
+
+		listData.add("Use deck's default avatar (random if unavailable)");
+		listData.add("Random");
+
+		Object lastSelection = vgdList.getSelectedValue();
+		vgdList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
+		if (null != lastSelection) {
+			vgdList.setSelectedValue(lastSelection, true);
+		}
+
+		if (-1 == vgdList.getSelectedIndex()) {
+			vgdList.setSelectedIndex(0);
+		}
     }
 }

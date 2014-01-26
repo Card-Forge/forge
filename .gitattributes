@@ -15390,10 +15390,8 @@ forge-gui/src/main/java/forge/gui/home/settings/VSubmenuReleaseNotes.java -text
 forge-gui/src/main/java/forge/gui/home/settings/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/home/variant/CSubmenuArchenemy.java -text
 forge-gui/src/main/java/forge/gui/home/variant/CSubmenuCommander.java -text
-forge-gui/src/main/java/forge/gui/home/variant/CSubmenuVanguard.java -text
 forge-gui/src/main/java/forge/gui/home/variant/VSubmenuArchenemy.java -text
 forge-gui/src/main/java/forge/gui/home/variant/VSubmenuCommander.java -text
-forge-gui/src/main/java/forge/gui/home/variant/VSubmenuVanguard.java -text
 forge-gui/src/main/java/forge/gui/input/Input.java -text
 forge-gui/src/main/java/forge/gui/input/InputAttack.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/input/InputBase.java svneol=native#text/plain

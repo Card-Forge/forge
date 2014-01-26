@@ -4,10 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 
 import javax.swing.JMenu;
 import javax.swing.SwingUtilities;
+
+import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.Singletons;
@@ -17,9 +20,11 @@ import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.RegisteredPlayer;
+import forge.gui.GuiDialog;
 import forge.gui.deckchooser.DeckgenUtil;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
+import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FList;
@@ -78,6 +83,10 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         			}
         		} // End Planechase
 
+        		for (int i = 0; i < 8; i++) {
+        			view.updateVanguardList(i);
+        		}
+
         		// General updates when switching back to this view
         		view.updatePlayersFromPrefs();
         		view.getBtnStart().requestFocusInWindow();
@@ -135,9 +144,9 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
     /** Starts a match with the applied variants. */
     private void startGame(final List<GameType> variantTypes) {
     	if (variantTypes.contains(GameType.Archenemy) || variantTypes.contains(GameType.ArchenemyRumble)
-    			|| variantTypes.contains(GameType.Commander)|| variantTypes.contains(GameType.Vanguard)) {
-            FOptionPane.showMessageDialog("Archenemy, Commander and Vanguard matches cannot currently be started via "
-            		+ "the Constructed match setup screen. Please disable any of those variants then restart the match");
+    			|| variantTypes.contains(GameType.Commander)) {
+            FOptionPane.showMessageDialog("Archenemy and Commander matches cannot currently be started via the "
+            		+ "Constructed match setup screen. Please disable any of those variants then restart the match");
             return;
         }
 
@@ -177,11 +186,12 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
         		boolean isPlayerArchenemy = false;
         		Iterable<PaperCard> planes = null;
         		PaperCard vanguardAvatar = null;
+                Random randomSeed = new Random();
 
         		//Planechase
         		if (variantTypes.contains(GameType.Planechase)) {
                     Object selected = view.getPlanarDeckLists().get(i).getSelectedValue();
-                    CardPool planePool;
+                    CardPool planePool = null;
                     if (selected instanceof String) {
                         String sel = (String) selected;
                         if (sel.contains("Use deck's planes section")) {
@@ -194,11 +204,16 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                         IStorage<Deck> pDecks = Singletons.getModel().getDecks().getPlane();
                         if (sel.equals("Random") && pDecks.size() != 0) {
                         	planePool = Aggregates.random(pDecks).get(DeckSection.Planes);                            
-                        } else { //Generate
+                        } else if (planePool == null) {
                         	planePool = DeckgenUtil.generatePlanarDeck();
                         }
                     } else {
                     	planePool = ((Deck) selected).get(DeckSection.Planes);
+                    }
+                    if (planePool == null) { //ERROR! Can be null if player deselects the list selection
+                        GuiDialog.message("No Planar deck selected for " + name
+                        		+ ". Please choose one or disable the Planechase variant");
+                        return;
                     }
                     if (checkLegality) {
                     	String errMsg = GameType.Planechase.getDecksFormat().getPlaneSectionConformanceProblem(planePool);
@@ -208,6 +223,30 @@ public enum CSubmenuConstructed implements ICDoc, IMenuProvider {
                         }
                     }
                     planes = planePool.toFlatList();
+        		}
+
+        		//Vanguard
+        		if (variantTypes.contains(GameType.Vanguard)) {
+                    Object selected = view.getVanguardLists().get(i).getSelectedValue();
+                    if (selected instanceof String) {
+                        String sel = (String) selected;
+                        if (sel.contains("Use deck's default Vanguard") && deck.has(DeckSection.Avatar)) {
+                        	vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
+                        } else { //Only other string is "Random"
+                        	if (!view.isPlayerAI(i)) { //Human
+                        		vanguardAvatar = Iterables.get(view.getAllAvatars(), randomSeed.nextInt(Iterables.size(view.getNonRandomHumanAvatars())));
+                        	} else { //AI
+                        		vanguardAvatar = Iterables.get(view.getAllAiAvatars(), randomSeed.nextInt(Iterables.size(view.getNonRandomAiAvatars())));
+                        	}
+                        }
+                    } else {
+                    	vanguardAvatar = (PaperCard)selected;
+                    }
+                    if (vanguardAvatar == null) { //ERROR!
+                        GuiDialog.message("No Vanguard avatar selected for " + name
+                        		+ ". Please choose one or disable the Vanguard variant");
+                        return;
+                    }
         		}
 
         		players.add(RegisteredPlayer.forVariants(variantTypes, rp.getDeck(), view.getTeam(i),
