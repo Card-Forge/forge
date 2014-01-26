@@ -29,7 +29,7 @@ import forge.gui.home.settings.VSubmenuReleaseNotes;
 import forge.gui.home.variant.VSubmenuArchenemy;
 import forge.gui.home.variant.VSubmenuCommander;
 //import forge.gui.home.variant.VSubmenuPlanechase;
-import forge.gui.home.variant.VSubmenuVanguard;
+//import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.match.views.VAntes;
 import forge.gui.match.views.VCombat;
 import forge.gui.match.views.VDetail;
@@ -84,7 +84,7 @@ public enum EDocID { /** */
     HOME_CONSTRUCTED (VSubmenuConstructed.SINGLETON_INSTANCE), /** */
     HOME_DRAFT (VSubmenuDraft.SINGLETON_INSTANCE), /** */
     HOME_SEALED (VSubmenuSealed.SINGLETON_INSTANCE), /** */
-    HOME_VANGUARD (VSubmenuVanguard.SINGLETON_INSTANCE), /** */
+  //HOME_VANGUARD (VSubmenuVanguard.SINGLETON_INSTANCE), /** */
   //HOME_PLANECHASE (VSubmenuPlanechase.SINGLETON_INSTANCE), /** */
     HOME_RELEASE_NOTES (VSubmenuReleaseNotes.SINGLETON_INSTANCE),
 

@@ -24,7 +24,7 @@ import forge.gui.GuiDialog;
 import forge.gui.deckchooser.DeckgenUtil;
 import forge.gui.deckchooser.DecksComboBox.DeckType;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.variant.VSubmenuVanguard;
+//import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.menus.IMenuProvider;
 import forge.gui.menus.MenuUtil;
 import forge.gui.toolbox.FList;
