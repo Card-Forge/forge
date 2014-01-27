@@ -218,9 +218,6 @@ public class GuiChoose {
                             GuiUtils.clearPanelSelections();
                             GuiUtils.setPanelSelection(card);
                         }
-                        if (list.getSelectedValue() instanceof InventoryItem) {
-                            CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
-                        }
                     }
                 });
 
