@@ -25,7 +25,6 @@ import forge.game.card.Card;
 import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.FOptionPane;
 import forge.item.InventoryItem;
-import forge.limited.CustomLimited;
 
 /** 
  * TODO: Write javadoc for this type.
