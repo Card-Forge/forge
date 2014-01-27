@@ -1100,7 +1100,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     /** Populate vanguard lists. */
     private void populateVanguardLists() {
+        humanListData.add("Use deck's default avatar (random if unavailable)");
         humanListData.add("Random");
+        aiListData.add("Use deck's default avatar (random if unavailable)");
         aiListData.add("Random");
         for (PaperCard cp : getAllAvatars()) {
             humanListData.add(cp);
