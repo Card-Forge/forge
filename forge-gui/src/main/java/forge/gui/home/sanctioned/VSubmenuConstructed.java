@@ -1122,11 +1122,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /** update vanguard list. */
     public void updateVanguardList(int playerIndex) {
     	FList<Object> vgdList = getVanguardLists().get(playerIndex);
-		Vector<Object> listData = new Vector<Object>();
-
-		listData.add("Use deck's default avatar (random if unavailable)");
-		listData.add("Random");
-
 		Object lastSelection = vgdList.getSelectedValue();
 		vgdList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
 		if (null != lastSelection) {
