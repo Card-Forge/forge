@@ -644,19 +644,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if( optional && !decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, defined ? "Put that card from " + origin + "to " + destination : "Search " + origin + "?"))
             return;
 
-        if (decider.isHuman()) {
-            changeHiddenOriginResolveHuman(decider, sa, player, changeNum, origin, destination, libraryPos);
-        } else {
-            ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player, changeNum, origin, destination, libraryPos);
-        }
-    }
-
-    private static void changeHiddenOriginResolveHuman(final Player decider, final SpellAbility sa, Player player, int changeNum, List<ZoneType> origin, ZoneType destination, int libraryPos) {
-        final Card source = sa.getSourceCard();
-        final boolean defined = sa.hasParam("Defined");
-        final Game game = player.getGame();
-
-        final List<Card> movedCards = new ArrayList<Card>();
+        String changeType = sa.getParam("ChangeType"); 
 
         List<Card> fetchList;
         boolean shuffleMandatory = true;
@@ -668,7 +656,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
                 && !sa.hasParam("DefinedPlayer")) {
-            fetchList = game.getCardsIn(origin);
+            fetchList = player.getGame().getCardsIn(origin);
         } else {
             fetchList = player.getCardsIn(origin);
             if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
@@ -676,10 +664,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
                     fetchList.removeAll(player.getCardsIn(ZoneType.Library));
                     final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
-                    if (fetchNum == 0) {
+                    if (fetchNum == 0)
                         searchedLibrary = false;
-                    }
-                    fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
+                    else
+                        fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
                 }
                 if (decider.hasKeyword("CantSearchLibrary")) {
                     fetchList.removeAll(player.getCardsIn(ZoneType.Library));
@@ -690,13 +678,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
         }
+        
+        if (!defined && changeType != null)
+            fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
 
         if (searchedLibrary && decider.equals(player)) { // should only count the number of searching player's own library
             decider.incLibrarySearched();
-        }
-
-        if (sa.hasParam("NoShuffle")) {
-            shuffleMandatory = false;
         }
 
         if (!defined) {
@@ -711,8 +698,39 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
                 decider.getController().reveal(player.getCardsIn(ZoneType.Hand), ZoneType.Hand, player, source.getName() + " - Looking at cards in ");
             }
-            fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
+            
         }
+
+        if (sa.hasParam("NoShuffle")) {
+            shuffleMandatory = false;
+        }
+        
+        final Game game = player.getGame();
+        if (sa.hasParam("Unimprint")) {
+            source.clearImprinted();
+        }
+        
+        List<Card> movedCards;
+        if (decider.isHuman()) {
+            movedCards = changeHiddenOriginResolveHuman(decider, sa, player, changeNum, origin, destination, fetchList, libraryPos);
+        } else {
+            movedCards = ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player, changeNum, origin, destination, fetchList, libraryPos);
+        }
+        
+        if (((!ZoneType.Battlefield.equals(destination) && changeType != null && !defined)
+                || (sa.hasParam("Reveal") && !movedCards.isEmpty())) && !sa.hasParam("NoReveal")) {
+            game.getAction().reveal(movedCards, player);
+        }
+        
+        if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)
+                || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
+            player.shuffle(sa);
+        }
+    }
+
+    private static List<Card> changeHiddenOriginResolveHuman(final Player decider, final SpellAbility sa, Player player, int changeNum, List<ZoneType> origin, ZoneType destination, List<Card> fetchList, int libraryPos) {
+        final Card source = sa.getSourceCard();
+        final Game game = player.getGame();
 
         final boolean remember = sa.hasParam("RememberChanged");
         final boolean champion = sa.hasParam("Champion");
@@ -722,9 +740,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
 
-        if (sa.hasParam("Unimprint")) {
-            source.clearImprinted();
-        }
+        final List<Card> movedCards = new ArrayList<Card>();
 
         for (int i = 0; i < changeNum && destination != null; i++) {
             if (sa.hasParam("DifferentNames")) {
@@ -773,12 +789,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     c.setTapped(true);
                 }
                 if (sa.hasParam("GainControl")) {
+                    Player newController = sa.getActivatingPlayer();
                     if (sa.hasParam("NewController")) {
-                        final Player p = AbilityUtils.getDefinedPlayers(source, sa.getParam("NewController"), sa).get(0);
-                        c.setController(p, game.getNextTimestamp());
-                    } else {
-                        c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                    }
+                        newController = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa).get(0);
+                    } 
+                    c.setController(newController, game.getNextTimestamp());
                 }
 
                 if (sa.hasParam("AttachedTo")) {
@@ -896,18 +911,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 totcmc -= movedCard.getCMC();
             }
         }
-        if (sa.hasParam("Reveal") && !movedCards.isEmpty()) {
-            ZoneType zt = null;
-            if (!origin.isEmpty()) {
-                zt = origin.get(0);
-            }
-            decider.getController().reveal(movedCards, zt, player, source + " - Revealed card" + (movedCards.size() > 1 ? "s" : "") + " from ");
-        }
-
-        if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined && shuffleMandatory)
-                || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
-            player.shuffle(sa);
-        }
+        
+        return movedCards;
     }
 
     /**

@@ -1101,65 +1101,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a {@link forge.game.player.Player} object.
      * @param changeNum2 
      * @param destination 
+     * @param fetchList 
      * @param libraryPos2 
      * @param origin2 
+     * @return 
      */
-    public static void hiddenOriginResolveAI(final Player ai, final SpellAbility sa, Player player, int changeNum, List<ZoneType> origin, ZoneType destination, int libraryPos2) {
+    public static List<Card> hiddenOriginResolveAI(final Player decider, final SpellAbility sa, Player player, int changeNum, List<ZoneType> origin, ZoneType destination, List<Card> fetchList, int libraryPos) {
         
         final Card source = sa.getSourceCard();
         final boolean defined = sa.hasParam("Defined");
-        final Game game = ai.getGame();
+        final Game game = decider.getGame();
 
-
-        String type = sa.getParam("ChangeType");
-        if (type == null) {
-            type = "Card";
-        }
-
-
-        List<Card> fetchList;
-        boolean shuffleMandatory = true;
-        boolean searchedLibrary = false;
-        if (defined) {
-            fetchList = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
-            if (!sa.hasParam("ChangeNum")) {
-                changeNum = fetchList.size();
-            }
-        } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
-                && !sa.hasParam("DefinedPlayer")) {
-            fetchList = game.getCardsIn(origin);
-            fetchList = AbilityUtils.filterListByType(fetchList, type, sa);
-        } else {
-            fetchList = player.getCardsIn(origin);
-            if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
-                searchedLibrary = true;
-                if (ai.hasKeyword("LimitSearchLibrary")) {
-                // Aven Mindcensor
-                    fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                    final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
-                    fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
-                    if (fetchNum == 0) {
-                        searchedLibrary = false;
-                    }
-                }
-                if (ai.hasKeyword("CantSearchLibrary")) {
-                    fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                    // "if you do/sb does, shuffle" is not mandatory, should has this param.
-                    // "then shuffle" is mandatory
-                    shuffleMandatory = !sa.hasParam("ShuffleNonMandatory");
-                    searchedLibrary = false;
-                }
-            }
-            fetchList = AbilityUtils.filterListByType(fetchList, type, sa);
-        }
-        if (searchedLibrary && ai.equals(player)) {
-            ai.incLibrarySearched();
-        }
-        if (sa.hasParam("NoShuffle")) {
-            shuffleMandatory = false;
-        }
-
-        final List<Card> fetched = new ArrayList<Card>();
+        final List<Card> movedCards = new ArrayList<Card>();
         final boolean remember = sa.hasParam("RememberChanged");
         final boolean forget = sa.hasParam("ForgetChanged");
         final boolean champion = sa.hasParam("Champion");
@@ -1167,19 +1120,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
 
-        if (sa.hasParam("Unimprint")) {
-            source.clearImprinted();
-        }
-
         for (int i = 0; i < changeNum; i++) {
             if (sa.hasParam("DifferentNames")) {
-                for (Card c : fetched) {
+                for (Card c : movedCards) {
                     fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
                 }
             }
             if (totalcmc != null) {
                 if (totcmc >= 0) {
-                    fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), ai, source);
+                    fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), decider, source);
                 }
             }
             if ((fetchList.size() == 0) || (destination == null)) {
@@ -1193,129 +1142,30 @@ public class ChangeZoneAi extends SpellAbilityAi {
             } else if (defined) {
                 c = fetchList.get(0);
             } else {
-                final Player activator = sa.getActivatingPlayer();
-                
-                CardLists.shuffle(fetchList);
-                // Save a card as a default, in case we can't find anything suitable.
-                Card first = fetchList.get(0);
-                if (ZoneType.Battlefield.equals(destination)) {
-                    fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            if (c.isType("Legendary")) {
-                                if (!ai.getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
-                                    return false;
-                                }
-                            }
-                            return true;
-                        }
-                    });
-                    if (player.isOpponentOf(ai) && sa.hasParam("GainControl") && activator.equals(ai)) {
-                        fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
-                            @Override
-                            public boolean apply(final Card c) {
-                                if (c.hasSVar("RemAIDeck") || c.hasSVar("RemRandomDeck")) {
-                                    return false;
-                                }
-                                return true;
-                            }
-                        });
-                    }
-                }
-                if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield)
-                        || (ZoneType.Library.equals(destination) && origin.contains(ZoneType.Hand))) {
-                    // Exiling or bouncing stuff
-                    if (player.isOpponentOf(ai)) {
-                        c = ComputerUtilCard.getBestAI(fetchList);
-                    } else {
-                        c = ComputerUtilCard.getWorstAI(fetchList);
-                    }
-                } else if (origin.contains(ZoneType.Library)
-                        && (type.contains("Basic") || areAllBasics(type))) {
-                    c = basicManaFixing(ai, fetchList);
-                } else if (ZoneType.Hand.equals(destination) && CardLists.getNotType(fetchList, "Creature").isEmpty()) {
-                    c = chooseCreature(ai, fetchList);
-                } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
-                    if (!activator.equals(ai) && sa.hasParam("GainControl")) {
-                        c = ComputerUtilCard.getWorstAI(fetchList);
-                    } else {
-                        c = ComputerUtilCard.getBestAI(fetchList);
-                    }
-                } else {
-                    // Don't fetch another tutor with the same name
-                    List<Card> sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(source.getName())));
-                    if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
-                        fetchList = sameNamed;
-                    }
-
-                    // Does AI need a land?
-                    List<Card> hand = ai.getCardsIn(ZoneType.Hand);
-                    if (CardLists.filter(hand, Presets.LANDS).isEmpty() && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
-                        boolean canCastSomething = false;
-                        for (Card cardInHand : hand) {
-                            canCastSomething |= ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), ai);
-                        }
-                        if (!canCastSomething) {
-                            System.out.println("Pulling a land as there are none in hand, less than 4 on the board, and nothing in hand is castable.");
-                            c = basicManaFixing(ai, fetchList);
-                        }
-                    }
-                    if (c == null) {
-                        System.out.println("Don't need a land or none available; trying for a creature.");
-                        fetchList = CardLists.getNotType(fetchList, "Land");
-                        // Prefer to pull a creature, generally more useful for AI.
-                        c = chooseCreature(ai, CardLists.filter(fetchList, CardPredicates.Presets.CREATURES));
-                    }
-                    if (c == null) { // Could not find a creature.
-                        if (ai.getLife() <= 5) { // Desperate?
-                            // Get something AI can cast soon.
-                            System.out.println("5 Life or less, trying to find something castable.");
-                            CardLists.sortByCmcDesc(fetchList);
-                            for (Card potentialCard : fetchList) {
-                               if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), ai)) {
-                                   c = potentialCard;
-                                   break;
-                               }
-                            }
-                        } else {
-                            // Get the best card in there.
-                            System.out.println("No creature and lots of life, finding something good.");
-                            c = ComputerUtilCard.getBestAI(fetchList);
-                        }
-                    }
-                }
-                if (c == null) {
-                    c = first;
-                }
+                c = chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
             }
 
-            fetched.add(c);
+            movedCards.add(c);
             fetchList.remove(c);
             if (totalcmc != null) {
                 totcmc -= c.getCMC();
             }
         }
 
-        if (origin.contains(ZoneType.Library) && !defined && !"False".equals(sa.getParam("Shuffle")) && shuffleMandatory) {
-            player.shuffle(sa);
-        }
-
-        for (final Card c : fetched) {
+        for (final Card c : movedCards) {
             Card movedCard = null;
             if (ZoneType.Library.equals(destination)) {
-                final int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
                 movedCard = game.getAction().moveToLibrary(c, libraryPos);
             } else if (ZoneType.Battlefield.equals(destination)) {
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
                 }
                 if (sa.hasParam("GainControl")) {
+                    Player newController = sa.getActivatingPlayer();
                     if (sa.hasParam("NewController")) {
-                        final Player p = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa).get(0);
-                        c.setController(p, game.getNextTimestamp());
-                    } else {
-                        c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                    }
+                        newController = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa).get(0);
+                    } 
+                    c.setController(newController, game.getNextTimestamp());
                 }
 
                 if (sa.hasParam("AttachedTo")) {
@@ -1399,18 +1249,113 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 source.addImprinted(movedCard);
             }
         }
-
-        if ("True".equals(sa.getParam("Shuffle"))) {
-            player.shuffle(sa);
-        }
-
-        if (((!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined)
-                || (sa.hasParam("Reveal") && !fetched.isEmpty()))
-                && !sa.hasParam("NoReveal")) {
-
-            game.getAction().reveal(fetched, player);
-        }
+        
+        return movedCards;
     } // end changeHiddenOriginResolveAI
+
+    private static Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, Player player, final Player decider) {
+
+        String type = sa.getParam("ChangeType");
+        if (type == null) {
+            type = "Card";
+        }
+        
+        Card c = null;
+        final Player activator = sa.getActivatingPlayer();
+        
+        CardLists.shuffle(fetchList);
+        // Save a card as a default, in case we can't find anything suitable.
+        Card first = fetchList.get(0);
+        if (ZoneType.Battlefield.equals(destination)) {
+            fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    if (c.isType("Legendary")) {
+                        if (!decider.getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            });
+            if (player.isOpponentOf(decider) && sa.hasParam("GainControl") && activator.equals(decider)) {
+                fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        if (c.hasSVar("RemAIDeck") || c.hasSVar("RemRandomDeck")) {
+                            return false;
+                        }
+                        return true;
+                    }
+                });
+            }
+        }
+        if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield)
+                || (ZoneType.Library.equals(destination) && origin.contains(ZoneType.Hand))) {
+            // Exiling or bouncing stuff
+            if (player.isOpponentOf(decider)) {
+                c = ComputerUtilCard.getBestAI(fetchList);
+            } else {
+                c = ComputerUtilCard.getWorstAI(fetchList);
+            }
+        } else if (origin.contains(ZoneType.Library) && (type.contains("Basic") || areAllBasics(type))) {
+            c = basicManaFixing(decider, fetchList);
+        } else if (ZoneType.Hand.equals(destination) && CardLists.getNotType(fetchList, "Creature").isEmpty()) {
+            c = chooseCreature(decider, fetchList);
+        } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
+            if (!activator.equals(decider) && sa.hasParam("GainControl")) {
+                c = ComputerUtilCard.getWorstAI(fetchList);
+            } else {
+                c = ComputerUtilCard.getBestAI(fetchList);
+            }
+        } else {
+            // Don't fetch another tutor with the same name
+            List<Card> sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(sa.getSourceCard().getName())));
+            if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
+                fetchList = sameNamed;
+            }
+
+            // Does AI need a land?
+            List<Card> hand = decider.getCardsIn(ZoneType.Hand);
+            if (CardLists.filter(hand, Presets.LANDS).isEmpty() && CardLists.filter(decider.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
+                boolean canCastSomething = false;
+                for (Card cardInHand : hand) {
+                    canCastSomething |= ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), decider);
+                }
+                if (!canCastSomething) {
+                    System.out.println("Pulling a land as there are none in hand, less than 4 on the board, and nothing in hand is castable.");
+                    c = basicManaFixing(decider, fetchList);
+                }
+            }
+            if (c == null) {
+                System.out.println("Don't need a land or none available; trying for a creature.");
+                fetchList = CardLists.getNotType(fetchList, "Land");
+                // Prefer to pull a creature, generally more useful for AI.
+                c = chooseCreature(decider, CardLists.filter(fetchList, CardPredicates.Presets.CREATURES));
+            }
+            if (c == null) { // Could not find a creature.
+                if (decider.getLife() <= 5) { // Desperate?
+                    // Get something AI can cast soon.
+                    System.out.println("5 Life or less, trying to find something castable.");
+                    CardLists.sortByCmcDesc(fetchList);
+                    for (Card potentialCard : fetchList) {
+                       if (ComputerUtilMana.hasEnoughManaSourcesToCast(potentialCard.getFirstSpellAbility(), decider)) {
+                           c = potentialCard;
+                           break;
+                       }
+                    }
+                } else {
+                    // Get the best card in there.
+                    System.out.println("No creature and lots of life, finding something good.");
+                    c = ComputerUtilCard.getBestAI(fetchList);
+                }
+            }
+        }
+        if (c == null) {
+            c = first;
+        }
+        return c;
+    }
 
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
