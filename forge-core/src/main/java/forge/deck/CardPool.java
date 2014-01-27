@@ -66,11 +66,13 @@ public class CardPool extends ItemPool<PaperCard> {
         if (cp == null )
             throw new RuntimeException(String.format("Card %s from %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName, setCode ));
 
+        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length()-1));
         setCode = cp.getEdition();
         cardName = cp.getName();
+         
         int artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
 
-        if (artIndex >= 0 || artCount <= 1) {
+        if (artIndexExplicitlySet || artCount <= 1) {
             // either a specific art index is specified, or there is only one art, so just add the card
             this.add(cp, amount);
         } else {
