@@ -318,7 +318,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         vgdDeckPanel.setLayout(new MigLayout(sectionConstraints));
         vgdDeckPanel.add(new FLabel.Builder().text("Select a Vanguard avatar:").build(), componentConstraints);
         vgdDeckPanel.add(scrAvatars, componentConstraints + ", grow, push");
-        vgdDeckPanel.add(vgdDetail, componentConstraints + ", growx, pushx");
+        vgdDeckPanel.add(vgdDetail, componentConstraints + ", growx, pushx, hidemode 3");
         vgdAvatarLists.add(vgdAvatarList);
         vgdPanels.add(vgdDeckPanel);
     }
@@ -620,9 +620,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             return radioAi.isSelected() ? PlayerType.COMPUTER : PlayerType.HUMAN;
         }
 
-//        public void setVanguardButtonText(String text) {
-//            vgdSelectorBtn.setText(text);
-//        }
+        public void setVanguardButtonText(String text) {
+            vgdSelectorBtn.setText(text);
+        }
         
         public void setDeckSelectorButtonText(String text) {
             deckBtn.setText(text);
@@ -1000,9 +1000,17 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         public void valueChanged(ListSelectionEvent e) {
             int index = vgdAvatarLists.indexOf(e.getSource());
             Object obj = vgdAvatarLists.get(index).getSelectedValue();
+            PlayerPanel pp = playerPanels.get(index);
+            CardDetailPanel cdp = vgdAvatarDetails.get(index);
 
             if (obj instanceof PaperCard) {
-                vgdAvatarDetails.get(index).setCard(Card.getCardForUi((IPaperCard) obj));
+                pp.setVanguardButtonText(((IPaperCard) obj).getName());
+                cdp.setCard(Card.getCardForUi((IPaperCard) obj));
+                cdp.setVisible(true);
+                refreshPanels(false, true);
+            } else {
+                pp.setVanguardButtonText((String) obj);
+                cdp.setVisible(false);
             }
         }
     };
