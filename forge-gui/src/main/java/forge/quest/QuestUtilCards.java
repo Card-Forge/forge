@@ -134,7 +134,7 @@ public final class QuestUtilCards {
                     pool.add(db.getCard(landName, landCode, i), artGroups[i - 1]);
                 }
             } else {
-                pool.add(db.getCard(landName, landCode, artCount > 1 ? MyRandom.getRandom().nextInt(artCount + 1) : 1), nBasic);
+                pool.add(db.getCard(landName, landCode, artCount > 1 ? MyRandom.getRandom().nextInt(artCount) + 1 : 1), nBasic);
             }
         }
 
