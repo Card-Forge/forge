@@ -8,6 +8,7 @@ Deck Type=constructed
 Set=GPT
 Image=gruul_wilding.jpg
 Name=Gruul Wilding
+Description=The "Gruul Wilding" deck pounds your opponent with furious monsters. The creatures in your deck are probably already bigger than the creatures your opponent has—but factor in the bloodthirst ability and your power-pumping enchantments and there's no contest! When your opponent starts crying for mercy, don't bother showing any. It's not the Gruul way.
 [Main]
 1 Battering Wurm|GPT
 3 Beastmaster's Magemark|GPT
