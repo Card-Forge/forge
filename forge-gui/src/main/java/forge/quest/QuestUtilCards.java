@@ -130,11 +130,11 @@ public final class QuestUtilCards {
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
                 int[] artGroups = MyRandom.splitIntoRandomGroups(nBasic, artCount);
 
-                for (int i=0; i<artGroups.length; i++) {
-                    pool.add(db.getCard(landName, landCode, i), artGroups[i]);
+                for (int i = 1; i <= artGroups.length; i++) {
+                    pool.add(db.getCard(landName, landCode, i), artGroups[i - 1]);
                 }
             } else {
-                pool.add(db.getCard(landName, landCode, artCount > 1 ? MyRandom.getRandom().nextInt(artCount) : 0), nBasic);
+                pool.add(db.getCard(landName, landCode, artCount > 1 ? MyRandom.getRandom().nextInt(artCount + 1) : 1), nBasic);
             }
         }
 
