@@ -5,6 +5,8 @@ import javax.swing.SwingUtilities;
 
 import forge.gui.toolbox.FSkin.SkinnedEditorPane;
 
+import org.apache.commons.lang3.StringUtils;
+
 /** 
  * Viewer for HTML
  *
@@ -33,7 +35,12 @@ public class FHtmlViewer extends SkinnedEditorPane {
     public void setText(final String text) {
     	SwingUtilities.invokeLater( new Runnable() { //need to invokeLater to avoid flicker
             public void run() {
-            	setSuperText(null == text ? "" : text.replaceAll("(\r\n)|(\n)", "<br>")); //replace line breaks with <br> elements
+                if ( StringUtils.isBlank(text) ) {
+                   setSuperText("");
+                   return;
+                }
+
+            	setSuperText(text.replaceAll("(\r\n)|(\n)", "<br>")); //replace line breaks with <br> elements
             	setCaretPosition(0); //keep scrolled to top
             }
         });
