@@ -134,7 +134,10 @@ public class ImageCache {
      * </p>
      */
     public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound) {
-
+        if (null == imageKey) { 
+            return null;
+        }
+        
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
         if(altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
