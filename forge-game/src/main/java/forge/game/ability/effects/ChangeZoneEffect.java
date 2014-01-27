@@ -556,7 +556,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    private static void changeHiddenOriginResolve(final SpellAbility sa) {
+    private void changeHiddenOriginResolve(final SpellAbility sa) {
         List<Player> fetchers;
 
         if (sa.hasParam("DefinedPlayer")) {
@@ -585,33 +585,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (decider == null) {
                 decider = player;
             }
-            if (decider.isHuman()) {
-                changeHiddenOriginResolveHuman(decider, sa, player);
-            } else {
-                ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player);
-            }
+            changeZonePlayerInvariant(decider, sa, player);
         }
     }
-
-    /**
-     * <p>
-     * changeHiddenOriginResolveHuman.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     */
-    private static void changeHiddenOriginResolveHuman(final Player decider, final SpellAbility sa, Player player) {
-        final Card source = sa.getSourceCard();
-        final List<Card> movedCards = new ArrayList<Card>();
-        final boolean defined = sa.hasParam("Defined");
-        final boolean optional = sa.hasParam("Optional");
-        final Game game = player.getGame();
-
+    
+    private void changeZonePlayerInvariant(Player decider, SpellAbility sa, Player player) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             final List<Player> players = Lists.newArrayList(sa.getTargets().getTargetPlayers());
@@ -620,14 +598,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 return;
             }
         }
+        
 
         List<ZoneType> origin = new ArrayList<ZoneType>();
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
-        
-        
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
+        final Card source = sa.getSourceCard();
+
         // this needs to be zero indexed. Top = 0, Third = 2
         int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
 
@@ -658,12 +637,26 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(source, sa.getParam("ChangeNum"),
-                sa) : 1;
+        final boolean defined = sa.hasParam("Defined");
+        int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(source, sa.getParam("ChangeNum"), sa) : 1;
 
+        final boolean optional = sa.hasParam("Optional");
         if( optional && !decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, defined ? "Put that card from " + origin + "to " + destination : "Search " + origin + "?"))
             return;
 
+        if (decider.isHuman()) {
+            changeHiddenOriginResolveHuman(decider, sa, player, changeNum, origin, destination, libraryPos);
+        } else {
+            ChangeZoneAi.hiddenOriginResolveAI(decider, sa, player, changeNum, origin, destination, libraryPos);
+        }
+    }
+
+    private static void changeHiddenOriginResolveHuman(final Player decider, final SpellAbility sa, Player player, int changeNum, List<ZoneType> origin, ZoneType destination, int libraryPos) {
+        final Card source = sa.getSourceCard();
+        final boolean defined = sa.hasParam("Defined");
+        final Game game = player.getGame();
+
+        final List<Card> movedCards = new ArrayList<Card>();
 
         List<Card> fetchList;
         boolean shuffleMandatory = true;

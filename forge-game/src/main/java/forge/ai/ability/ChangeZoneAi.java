@@ -1099,35 +1099,23 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param player
      *            a {@link forge.game.player.Player} object.
+     * @param changeNum2 
+     * @param destination 
+     * @param libraryPos2 
+     * @param origin2 
      */
-    public static void hiddenOriginResolveAI(final Player ai, final SpellAbility sa, Player player) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
+    public static void hiddenOriginResolveAI(final Player ai, final SpellAbility sa, Player player, int changeNum, List<ZoneType> origin, ZoneType destination, int libraryPos2) {
+        
         final Card source = sa.getSourceCard();
         final boolean defined = sa.hasParam("Defined");
-        final Player activator = sa.getActivatingPlayer();
         final Game game = ai.getGame();
 
-        if (tgt != null) {
-            if (sa.getTargets().isTargetingAnyPlayer()) {
-                player = sa.hasParam("DefinedPlayer") ? player : sa.getTargets().getFirstTargetedPlayer();
-                if (!player.canBeTargetedBy(sa)) {
-                    return;
-                }
-            }
-        }
-
-        List<ZoneType> origin = new ArrayList<ZoneType>();
-        if (sa.hasParam("Origin")) {
-            origin = ZoneType.listValueOf(sa.getParam("Origin"));
-        }
 
         String type = sa.getParam("ChangeType");
         if (type == null) {
             type = "Card";
         }
 
-        int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(source, sa.getParam("ChangeNum"),
-                sa) : 1;
 
         List<Card> fetchList;
         boolean shuffleMandatory = true;
@@ -1170,7 +1158,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.hasParam("NoShuffle")) {
             shuffleMandatory = false;
         }
-        final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
+
         final List<Card> fetched = new ArrayList<Card>();
         final boolean remember = sa.hasParam("RememberChanged");
         final boolean forget = sa.hasParam("ForgetChanged");
@@ -1205,6 +1193,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             } else if (defined) {
                 c = fetchList.get(0);
             } else {
+                final Player activator = sa.getActivatingPlayer();
+                
                 CardLists.shuffle(fetchList);
                 // Save a card as a default, in case we can't find anything suitable.
                 Card first = fetchList.get(0);
@@ -1350,9 +1340,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
 
                 if (sa.hasParam("Attacking")) {
-                    List<GameEntity> defenders = game.getCombat().getDefenders();
-                    if ( !defenders.isEmpty() )
-                        game.getCombat().addAttacker(c, defenders.get(0));
+                    final Combat combat = game.getCombat();
+                    if ( null != combat ) {
+                        final List<GameEntity> e = combat.getDefenders();
+                        final GameEntity defender = player.getController().chooseSingleEntityForEffect(e, sa, "Declare " + c);
+                        combat.addAttacker(c, defender);
+                    }
                 }
                 if (sa.hasParam("Blocking")) {
                     final Combat combat = game.getCombat();
