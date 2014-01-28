@@ -88,11 +88,8 @@ public final class CardDb implements ICardDatabase {
 
             String[] nameParts = TextUtil.split(name, NameSetSeparator);
 
-            boolean hasSet = nameParts.length > 1 && nameParts[1].length() >= 2; 
-            int setPos = hasSet ? 1 : -1;
-            int artPos = hasSet ? 2 : 1;
-            if( nameParts.length <= artPos || StringUtils.isNumeric(nameParts[artPos]))
-                artPos = -1;
+            int setPos = nameParts.length >= 2 && !StringUtils.isNumeric(nameParts[1]) ? 1 : -1;
+            int artPos = nameParts.length >= 2 && StringUtils.isNumeric(nameParts[1]) ? 1 : nameParts.length >= 3 && StringUtils.isNumeric(nameParts[2]) ? 2 : -1;
 
             String cardName = nameParts[0];
             if( cardName.endsWith(foilSuffix)) {
