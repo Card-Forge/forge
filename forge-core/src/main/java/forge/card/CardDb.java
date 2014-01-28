@@ -120,7 +120,7 @@ public final class CardDb implements ICardDatabase {
                 if ( cis.name.equals(lastCardName) )
                     artIdx++;
                 else {
-                    artIdx = 0;
+                    artIdx = 1;
                     lastCardName = cis.name;
                 }
                 CardRules cr = rulesByName.get(lastCardName);
