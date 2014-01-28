@@ -45,13 +45,11 @@ public enum CDetail implements ICDoc {
      * @param c &emsp; Card object
      */
     public void showCard(final Card c) {
-        if (null == c) {
-            return;
-        }
 
         view.getLblFlipcard().setVisible(c != null && (c.isDoubleFaced() || c.isFlipCard() || c.isFaceDown() && Singletons.getControl().mayShowCard(c)));
         view.getPnlDetail().setCard(c);
-        view.getParentCell().repaintSelf();
+        if( view.getParentCell() != null)
+            view.getParentCell().repaintSelf();
     }
 
     public void showCard(InventoryItem item) {

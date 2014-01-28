@@ -68,7 +68,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.FTextField;
-import forge.item.IPaperCard;
+
 import forge.item.PaperCard;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -515,8 +515,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             
             addHandlersToVariantsControls();
             updateVariantControlsVisibility();
-
-
         }
         
         private final FMouseAdapter radioMouseAdapter = new FMouseAdapter() {
@@ -1004,8 +1002,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             CardDetailPanel cdp = vgdAvatarDetails.get(index);
 
             if (obj instanceof PaperCard) {
-                pp.setVanguardButtonText(((IPaperCard) obj).getName());
-                cdp.setCard(Card.getCardForUi((IPaperCard) obj));
+                pp.setVanguardButtonText(((PaperCard) obj).getName());
+                cdp.setCard(Card.getCardForUi((PaperCard) obj));
                 cdp.setVisible(true);
                 refreshPanels(false, true);
             } else {
