@@ -269,10 +269,10 @@ public class ImageCache {
             hasManyPictures = maxCntPictures > 1;
         }
         
-        int artIdx = cp.getArtIndex();
+        int artIdx = cp.getArtIndex() - 1;
         if (hasManyPictures) {
             if ( cntPictures <= artIdx ) // prevent overflow
-                artIdx = cntPictures == 0 ? 0 : (artIdx - 1 ) % cntPictures;
+                artIdx = cntPictures == 0 ? 0 : artIdx % cntPictures;
             s.append(artIdx + 1);
         }
         
