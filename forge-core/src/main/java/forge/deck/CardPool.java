@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.StaticData;
+import forge.card.CardDb;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
@@ -66,7 +67,7 @@ public class CardPool extends ItemPool<PaperCard> {
         if (cp == null )
             throw new RuntimeException(String.format("Card %s from %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName, setCode ));
 
-        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length()-1));
+        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length()-1)) && cardName.charAt(cardName.length()-2) == CardDb.NameSetSeparator; 
         setCode = cp.getEdition();
         cardName = cp.getName();
          
