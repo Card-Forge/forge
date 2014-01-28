@@ -297,7 +297,7 @@ public class ImportSourceAnalyzer {
         if (StringUtils.isEmpty(urls)) { return; }
 
         int numPics = 1 + StringUtils.countMatches(urls, "\\");
-        if ( c.getArtIndex() >= numPics )
+        if ( c.getArtIndex() > numPics )
             return;
 
         String filenameBase = ImageCache.getImageKey(c, backFace, false);

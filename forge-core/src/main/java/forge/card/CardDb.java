@@ -97,7 +97,7 @@ public final class CardDb implements ICardDatabase {
                 isFoil = true;
             }
             
-            int artIndex = artPos > 0 ? Integer.parseInt(nameParts[artPos])-1 : -1;
+            int artIndex = artPos > 0 ? Integer.parseInt(nameParts[artPos]) : 0;
             String setName = setPos > 0 ? nameParts[setPos] : null;
             if( "???".equals(setName) )
                 setName = null;
@@ -115,7 +115,7 @@ public final class CardDb implements ICardDatabase {
             if(worthLogging)
                 System.out.print(e.getName() + " (" + e.getCards().length + " cards)");
             String lastCardName = null;
-            int artIdx = 0;
+            int artIdx = 1;
             for(CardEdition.CardInSet cis : e.getCards()) {
                 if ( cis.name.equals(lastCardName) )
                     artIdx++;
@@ -144,7 +144,7 @@ public final class CardDb implements ICardDatabase {
             if( !allCardsByName.containsKey(cr.getName()) )
             {
                 System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/cardeditions/ folder. ");
-                addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 0));
+                addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
             }
         }
 
@@ -184,7 +184,7 @@ public final class CardDb implements ICardDatabase {
         if(setName != null)
             request.edition = setName;
         if(artIndex > 0)
-            request.artIndex = artIndex - 1;
+            request.artIndex = artIndex;
         return tryGetCard(request);
     }
     
@@ -201,7 +201,7 @@ public final class CardDb implements ICardDatabase {
                 reqEdition =  edition.getCode();
         }
         
-        if ( request.artIndex < 0 ) { // this stands for 'random art'
+        if ( request.artIndex <= 0 ) { // this stands for 'random art'
             List<PaperCard> candidates = new ArrayList<PaperCard>(9); // 9 cards with same name per set is a maximum of what has been printed (Arnchenemy)
             for( PaperCard pc : cards ) {
                 if( pc.getEdition().equalsIgnoreCase(reqEdition) || reqEdition == null )
@@ -246,7 +246,7 @@ public final class CardDb implements ICardDatabase {
                 if(fromSet == SetPreference.EarliestCoreExp && ed.getType() != Type.CORE && ed.getType() != Type.EXPANSION)
                     continue;
 
-                if((artIndex < 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore)))
+                if((artIndex <= 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore)))
                     return pc;
             }
             return null;
@@ -290,7 +290,7 @@ public final class CardDb implements ICardDatabase {
             if ( max < pc.getArtIndex() )
                 max = pc.getArtIndex();
         }
-        return max + 1;
+        return max;
     }
 
     @Override
@@ -374,7 +374,7 @@ public final class CardDb implements ICardDatabase {
             List<PaperCard> paperCards = new ArrayList<PaperCard>();
             if (null == whenItWasPrinted || whenItWasPrinted.isEmpty()) {
                 for(CardEdition e : editions.getOrderedEditions()) {
-                    int artIdx = 0;
+                    int artIdx = 1;
                     for(CardInSet cis : e.getCards()) {
                         if( !cis.name.equals(cardName) )
                             continue;
@@ -386,7 +386,7 @@ public final class CardDb implements ICardDatabase {
                 int artIdx = 0;
                 for(Pair<String, CardRarity> tuple : whenItWasPrinted){
                     if(!tuple.getKey().equals(lastEdition)) {
-                        artIdx = 0;
+                        artIdx = 1;
                         lastEdition = tuple.getKey();
                     }
                     CardEdition ed = editions.get(lastEdition);
@@ -396,7 +396,7 @@ public final class CardDb implements ICardDatabase {
                 }
             }
             if(paperCards.isEmpty())
-                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 0));
+                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
 
             // 2. add them to db
             for (PaperCard paperCard : paperCards)

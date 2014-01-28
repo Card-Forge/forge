@@ -280,7 +280,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             sb.append("|").append(card.getEdition());
 
             if (artCount > 1) {
-                sb.append("|").append(card.getArtIndex() + 1); // indexes start at 1 to match image file name conventions
+                sb.append("|").append(card.getArtIndex()); // indexes start at 1 to match image file name conventions
             }
         }
         if(card.isFoil()) {

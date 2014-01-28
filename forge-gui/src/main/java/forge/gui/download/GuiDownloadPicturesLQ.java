@@ -81,7 +81,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         else {
             String[] allUrls = urls.split("\\\\");
             allUrlsLen = allUrls.length;
-            urlIndex = c.getArtIndex() % allUrlsLen;
+            urlIndex = (c.getArtIndex()-1) % allUrlsLen;
             urlToDownload = allUrls[urlIndex];
         }
 

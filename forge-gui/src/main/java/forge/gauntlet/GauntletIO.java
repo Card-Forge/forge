@@ -170,9 +170,7 @@ public class GauntletIO {
             if (cref.isFoil()) {
                 writer.addAttribute("foil", "1");
             }
-            if (cref.getArtIndex() > 0) {
-                writer.addAttribute("i", Integer.toString(cref.getArtIndex()));
-            }
+            writer.addAttribute("i", Integer.toString(cref.getArtIndex()));
             writer.addAttribute("n", count.toString());
             writer.endNode();
         }

@@ -1,5 +1,6 @@
 package forge;
 
+import forge.card.CardDb;
 import forge.item.BoosterPack;
 import forge.item.FatPack;
 import forge.item.InventoryItem;
@@ -26,7 +27,7 @@ public class ImageKeys {
     public static String getImageKey(InventoryItem ii, boolean altState) {
         if ( ii instanceof PaperCard ) {
             PaperCard cp =  (PaperCard)ii;
-            return ImageKeys.CARD_PREFIX + cp.getName() + "|" + cp.getEdition() + "|" + cp.getArtIndex() + (altState ? BACKFACE_POSTFIX : "");
+            return ImageKeys.CARD_PREFIX + cp.getName() + CardDb.NameSetSeparator + cp.getEdition() + CardDb.NameSetSeparator + cp.getArtIndex() + (altState ? BACKFACE_POSTFIX : "");
         }
         if ( ii instanceof TournamentPack )
             return ImageKeys.TOURNAMENTPACK_PREFIX + ((TournamentPack)ii).getEdition();
