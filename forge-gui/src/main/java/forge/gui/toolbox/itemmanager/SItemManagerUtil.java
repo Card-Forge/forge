@@ -1,6 +1,10 @@
 package forge.gui.toolbox.itemmanager;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map.Entry;
+
 import com.google.common.base.Predicate;
 
 import forge.card.CardRules;
@@ -156,5 +160,23 @@ public final class SItemManagerUtil  {
             }
         }
         return result;
+    }
+
+    public static String buildDisplayList(Iterable<Entry<InventoryItem, Integer>> items) {
+        ArrayList<Entry<InventoryItem, Integer>> sorted = new ArrayList<Entry<InventoryItem, Integer>>();
+        for (Entry<InventoryItem, Integer> itemEntry : items) {
+            sorted.add(itemEntry);
+        }
+        Collections.sort(sorted, new Comparator<Entry<InventoryItem, Integer>>() {
+            @Override
+            public int compare(final Entry<InventoryItem, Integer> x, final Entry<InventoryItem, Integer> y) {
+                return x.getKey().toString().compareTo(y.getKey().toString());
+            }
+        });
+        StringBuilder builder = new StringBuilder();
+        for (Entry<InventoryItem, Integer> itemEntry : sorted) {
+            builder.append("\n" + itemEntry.getValue() + " * " + itemEntry.getKey().toString());
+        }
+        return builder.toString();
     }
 }

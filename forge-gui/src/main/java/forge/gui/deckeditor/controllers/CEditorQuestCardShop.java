@@ -19,7 +19,6 @@ package forge.gui.deckeditor.controllers;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -306,26 +305,41 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             return;
         }
 
-        ItemPool<InventoryItem> itemsToAdd = new ItemPool<InventoryItem>(InventoryItem.class);
-        List<Entry<InventoryItem, Integer>> itemsToRemove = new ArrayList<Entry<InventoryItem, Integer>>();
-
+        long totalCost = 0;
+        ItemPool<InventoryItem> itemsToBuy = new ItemPool<InventoryItem>(InventoryItem.class);
         for (Entry<InventoryItem, Integer> itemEntry : items) {
+            final InventoryItem item = itemEntry.getKey();
+            if (item instanceof PaperCard || item instanceof SealedProduct || item instanceof PreconDeck) {
+                final int qty = itemEntry.getValue();
+                itemsToBuy.add(item, qty);
+                totalCost += qty * this.getCardValue(item);
+            }
+        }
+        if (itemsToBuy.isEmpty()) { return; }
+
+        List<InventoryItem> itemFlatList = itemsToBuy.toFlatList();
+        String suffix = SItemManagerUtil.getItemDisplayString(itemFlatList, 1, true);
+        String displayList = SItemManagerUtil.buildDisplayList(itemsToBuy);
+        String title = "Buy " + suffix;
+
+        long creditsShort = totalCost - this.questData.getAssets().getCredits();
+        if (creditsShort > 0) {
+            FOptionPane.showMessageDialog("You need " + creditsShort + " more credits to purchase the following " + suffix.toLowerCase() + ".\n" + displayList, title);
+            return;
+        }
+
+        if (!FOptionPane.showConfirmDialog("Pay " + totalCost + " credits to purchase the following " +
+                suffix.toLowerCase() + "?\n" + displayList, title, "Buy", "Cancel")) {
+            return;
+        }
+
+        ItemPool<InventoryItem> itemsToAdd = new ItemPool<InventoryItem>(InventoryItem.class);
+
+        for (Entry<InventoryItem, Integer> itemEntry : itemsToBuy) {
             final InventoryItem item = itemEntry.getKey();
 
             final int qty = itemEntry.getValue();
             final int value = this.getCardValue(item);
-            final int totalCost = qty * value;
-            final String title = "Buy " + SItemManagerUtil.getItemDisplayString(item, 1, true);
-            final String promptSuffix = " credits to purchase " + (qty == 1 ? "'" : qty + " copies of '") + item.getName() + "'";
-
-            if (totalCost > this.questData.getAssets().getCredits()) {
-                FOptionPane.showMessageDialog("Not enough" + promptSuffix + ".", title);
-                continue;
-            }
-
-            if (!FOptionPane.showConfirmDialog("Pay " + totalCost + promptSuffix + "?", title, "Buy", "Cancel")) {
-                continue;
-            }
 
             if (item instanceof PaperCard) {
                 this.questData.getCards().buyCard((PaperCard) item, qty, value);
@@ -368,16 +382,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                         deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),
                         "Thanks for purchasing!", FOptionPane.INFORMATION_ICON);
             }
-            else {
-                continue; //don't remove item from Catalog if any other type
-            }
-            itemsToRemove.add(itemEntry);
         }
 
-        if (itemsToRemove.isEmpty()) { return; }
-
         this.getDeckManager().addItems(itemsToAdd);
-        this.getCatalogManager().removeItems(itemsToRemove);
+        this.getCatalogManager().removeItems(itemsToBuy);
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
@@ -389,31 +397,38 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     protected void onRemoveItems(Iterable<Entry<InventoryItem, Integer>> items, boolean toAlternate) {
         if (showingFullCatalog || toAlternate) { return; }
 
-        List<Entry<InventoryItem, Integer>> itemsToRemove = new ArrayList<Entry<InventoryItem, Integer>>();
-
+        long totalReceived = 0;
+        ItemPool<InventoryItem> itemsToSell = new ItemPool<InventoryItem>(InventoryItem.class);
         for (Entry<InventoryItem, Integer> itemEntry : items) {
             final InventoryItem item = itemEntry.getKey();
             if (item instanceof PaperCard) {
-                final PaperCard card = (PaperCard) item;
                 final int qty = itemEntry.getValue();
-                final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards().getSellPriceLimit());
-                final int totalReceived = price * qty;
-
-                if (!FOptionPane.showConfirmDialog("Sell " + (qty == 1 ? "'" : qty + " copies of '") +
-                        item.getName() + "' for " + totalReceived + " credit" + (totalReceived != 1 ? "s" : "") + "?",
-                        "Sell Card", "Sell", "Cancel")) {
-                    continue;
-                }
-
-                this.questData.getCards().sellCard(card, qty, price);
-                itemsToRemove.add(itemEntry);
+                itemsToSell.add(item, qty);
+                totalReceived += qty * Math.min((int) (this.multiplier * this.getCardValue(item)), this.questData.getCards().getSellPriceLimit());
             }
         }
+        if (itemsToSell.isEmpty()) { return; }
 
-        if (itemsToRemove.isEmpty()) { return; }
+        List<InventoryItem> itemFlatList = itemsToSell.toFlatList();
+        String suffix = SItemManagerUtil.getItemDisplayString(itemFlatList, 1, true);
+        String displayList = SItemManagerUtil.buildDisplayList(itemsToSell);
+        String title = "Sell " + suffix;
 
-        this.getCatalogManager().addItems(itemsToRemove);
-        this.getDeckManager().removeItems(itemsToRemove);
+        if (!FOptionPane.showConfirmDialog("Sell the following " + suffix.toLowerCase() + " for " + totalReceived +
+                " credit" + (totalReceived != 1 ? "s" : "") + "?\n" + displayList, title, "Sell", "Cancel")) {
+            return;
+        }
+
+        for (Entry<InventoryItem, Integer> itemEntry : itemsToSell) {
+            final PaperCard card = (PaperCard) itemEntry.getKey();
+            final int qty = itemEntry.getValue();
+            final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards().getSellPriceLimit());
+
+            this.questData.getCards().sellCard(card, qty, price);
+        }
+
+        this.getCatalogManager().addItems(itemsToSell);
+        this.getDeckManager().removeItems(itemsToSell);
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
