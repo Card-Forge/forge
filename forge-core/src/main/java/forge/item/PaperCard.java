@@ -184,6 +184,10 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
             return nameCmp;
         }
         // TODO compare sets properly
-        return this.edition.compareTo(o.getEdition());
+        int setDiff = this.edition.compareTo(o.getEdition());
+        if ( 0 != setDiff )
+            return setDiff;
+        
+        return Integer.compare(artIndex, o.getArtIndex());
     }
 }
