@@ -6793,7 +6793,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         for (final String type : this.getType()) {
-            if (forge.card.CardType.isAPermanentType(type) && c1.isType(type)) {
+            if (forge.card.CardType.CoreType.isAPermanentType(type) && c1.isType(type)) {
                 return true;
             }
         }

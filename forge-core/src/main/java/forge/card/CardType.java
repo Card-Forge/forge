@@ -37,30 +37,42 @@ public final class CardType implements Comparable<CardType> {
     
     public enum CoreType {
 
-        /** The Artifact. */
-        Artifact,
-        /** The Creature. */
-        Creature,
-        /** The Enchantment. */
-        Enchantment,
-        /** The Instant. */
-        Instant,
-        /** The Land. */
-        Land,
-        /** The Plane. */
-        Plane,
-        /** The Planeswalker. */
-        Planeswalker,
-        /** The Scheme. */
-        Scheme,
-        /** The Sorcery. */
-        Sorcery,
-        /** The Tribal. */
-        Tribal,
-        /** The Vanguard. */
-        Vanguard,
-        /** The Phenomenon. */
-        Phenomenon
+        Artifact(true),
+        Creature(true),
+        Enchantment(true),
+        Instant(false),
+        Land(true),
+        Plane(false),
+        Planeswalker(true),
+        Scheme(false),
+        Sorcery(false),
+        Tribal(false),
+        Vanguard(false),
+        Phenomenon(false);
+        
+        public final boolean isPermanent;
+        
+        private CoreType(final boolean permanent) {
+            isPermanent = permanent;
+        }
+
+        public static CoreType smartValueOf(final String value) {
+            if (value == null) {
+                return null;
+            }
+            final String valToCompate = value.trim();
+            for (final CoreType v : CoreType.values()) {
+                if (v.name().compareToIgnoreCase(valToCompate) == 0) {
+                    return v;
+                }
+            }
+            throw new IllegalArgumentException("No element named " + value + " in enum CoreType");
+        }
+
+        public static boolean isAPermanentType(final String cardType) {
+            CoreType ct = smartValueOf(cardType);
+            return ct != null && ct.isPermanent;
+        }
     }
 
     public enum SuperType {
@@ -369,14 +381,6 @@ public final class CardType implements Comparable<CardType> {
 
     public static boolean isASubType(final String cardType) {
         return (!CardType.isASuperType(cardType) && !CardType.isACardType(cardType));
-    }
-
-    public static boolean isAPermanentType(final String cardType) {
-        return cardType.equals(CardType.CoreType.Artifact.toString())
-        		|| cardType.equals(CardType.CoreType.Creature.toString())
-        		|| cardType.equals(CardType.CoreType.Enchantment.toString())
-        		|| cardType.equals(CardType.CoreType.Land.toString())
-        		|| cardType.equals(CardType.CoreType.Planeswalker.toString());
     }
 
     public static boolean isACreatureType(final String cardType) {
