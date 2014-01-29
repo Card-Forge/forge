@@ -7,7 +7,7 @@ http://www.cardforge.org/fpics/products/precons/assassin.jpg
 http://www.cardforge.org/fpics/products/precons/azorius_advance.jpg
 http://www.cardforge.org/fpics/products/precons/azorius_ascendant.jpg
 http://www.cardforge.org/fpics/products/precons/azorius_authority.jpg
-http://www.cardforge.org/fpics/products/precons/Bait_Bludgeon.jpg
+http://www.cardforge.org/fpics/products/precons/Bait_and_Bludgeon.jpg
 http://www.cardforge.org/fpics/products/precons/bant_exalted.jpg
 http://www.cardforge.org/fpics/products/precons/bant_on_the_march.jpg
 http://www.cardforge.org/fpics/products/precons/battle_blitz.jpg
@@ -16,11 +16,11 @@ http://www.cardforge.org/fpics/products/precons/Battle_Surge.jpg
 http://www.cardforge.org/fpics/products/precons/blood_and_fire.jpg
 http://www.cardforge.org/fpics/products/precons/Boggart_Feast.jpg
 http://www.cardforge.org/fpics/products/precons/Bomber.jpg
-http://www.cardforge.org/fpics/products/precons/boros_batallion.jpg
+http://www.cardforge.org/fpics/products/precons/boros_battalion.jpg
 http://www.cardforge.org/fpics/products/precons/bound_by_strength.jpg
 http://www.cardforge.org/fpics/products/precons/breath_of_fire.jpg
 http://www.cardforge.org/fpics/products/precons/carnival_of_blood.jpg
-http://www.cardforge.org/fpics/products/precons/Cho_Mannos_Resolve.jpg
+http://www.cardforge.org/fpics/products/precons/Cho-Mannos_Resolve.jpg
 http://www.cardforge.org/fpics/products/precons/Code_of_the_Orzhov.jpg
 http://www.cardforge.org/fpics/products/precons/Critical_Mass.jpg
 http://www.cardforge.org/fpics/products/precons/Crusher.jpg

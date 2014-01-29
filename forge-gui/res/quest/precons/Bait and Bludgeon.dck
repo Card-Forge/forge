@@ -8,7 +8,7 @@ Name=Bait & Bludgeon
 Description=The "Bait & Bludgeon" deck shows your opponents the value of affinity, one of the new Mirrodin mechanics. Cards with affinity for artifacts cost {1} less to play for each artifact you control. Affinity doesn't affect the colored mana required, but with enough artifacts in play, you'll pay close to nothing for your affinity spells.
 Deck Type=constructed
 Set=MRD
-Image=bait_bludgeon.jpg
+Image=bait_and_bludgeon.jpg
 [main]
 2 AEther Spellbomb|MRD
 2 Assert Authority|MRD

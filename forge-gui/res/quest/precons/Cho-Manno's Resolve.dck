@@ -4,11 +4,11 @@ Credits=1200
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-Name=Cho Manno's Resolve
+Name=Cho-Manno's Resolve
 Description=Let your enemies' aggression be their own undoing. You'll parry every strike, neutralize every creature, and roadblock every assault in your foe's arsenal, then win by a well-aimed stroke. Remember Cho-Manno's motto: "The first principle of war is to be the last to die."
 Deck Type=constructed
 Set=10E
-Image=cho_mannos_resolve.jpg
+Image=cho-mannos_resolve.jpg
 [main]
 1 Ancestor's Chosen|10E
 2 Angel of Mercy|10E
