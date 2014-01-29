@@ -371,6 +371,14 @@ public final class CardType implements Comparable<CardType> {
         return (!CardType.isASuperType(cardType) && !CardType.isACardType(cardType));
     }
 
+    public static boolean isAPermanentType(final String cardType) {
+        return cardType.equals(CardType.CoreType.Artifact.toString())
+        		|| cardType.equals(CardType.CoreType.Creature.toString())
+        		|| cardType.equals(CardType.CoreType.Enchantment.toString())
+        		|| cardType.equals(CardType.CoreType.Land.toString())
+        		|| cardType.equals(CardType.CoreType.Planeswalker.toString());
+    }
+
     public static boolean isACreatureType(final String cardType) {
         return (Constant.CREATURE_TYPES.contains(cardType));
     }

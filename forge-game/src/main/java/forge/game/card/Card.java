@@ -5919,7 +5919,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
-        } else if (property.startsWith("sharesNameWith")) {
+        } else if (property.equals("sharesPermanentTypeWith")) {
+            if (!this.sharesPermanentTypeWith(source)) {
+                return false;
+            }
+        }else if (property.startsWith("sharesNameWith")) {
             if (property.equals("sharesNameWith")) {
                 if (!this.getName().equals(source.getName())) {
                     return false;
@@ -6767,6 +6771,29 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return true;
             }
             if (forge.card.CardType.isACreatureType(type) && c1.isType(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * <p>
+     * sharesPermanentTypeWith.
+     * </p>
+     * 
+     * @param c1
+     *            a {@link forge.game.card.Card} object.
+     * @return a boolean.
+     */
+    public final boolean sharesPermanentTypeWith(final Card c1) {
+
+        if (c1 == null) {
+            return false;
+        }
+
+        for (final String type : this.getType()) {
+            if (forge.card.CardType.isAPermanentType(type) && c1.isType(type)) {
                 return true;
             }
         }
