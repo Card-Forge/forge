@@ -1,0 +1,7 @@
+Name:Kraken of the Straits
+ManaCost:5 U U
+Types:Creature Kraken
+PT:6/6
+K:CantBeBlockedBy Creature.powerLEX
+SVar:X:Count$TypeYouCtrl.Island
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kraken_of_the_straits.jpg

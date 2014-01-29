@@ -6905,6 +6905,7 @@ forge-gui/res/cardsfolder/k/kozileks_predator.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kragma_butcher.txt -text
 forge-gui/res/cardsfolder/k/kragma_warcaller.txt -text
 forge-gui/res/cardsfolder/k/kraken_hatchling.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/k/kraken_of_the_straits.txt -text
 forge-gui/res/cardsfolder/k/krakens_eye.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/krakilin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/k/kranioceros.txt svneol=native#text/plain
@@ -7679,6 +7680,7 @@ forge-gui/res/cardsfolder/m/melancholy.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/m/melee.txt -text
 forge-gui/res/cardsfolder/m/melek_izzet_paragon.txt -text
 forge-gui/res/cardsfolder/m/melesse_spirit.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/m/meletis_astronomer.txt -text
 forge-gui/res/cardsfolder/m/meletis_charlatan.txt -text
 forge-gui/res/cardsfolder/m/melira_sylvok_outcast.txt -text
 forge-gui/res/cardsfolder/m/meliras_keepers.txt svneol=native#text/plain

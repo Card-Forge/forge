@@ -2148,6 +2148,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (part.startsWith("with")) {
                     positive = !part.startsWith("without");
                     postponedAdjectives.add(Pair.of(positive, part.substring(positive ? 4 : 7)));
+                } else if (part.startsWith("powerLEX")) {// Kraken of the Straits
+                	postponedAdjectives.add(Pair.of(true, "power less than the number of islands you control"));
                 } else if (part.startsWith("power")) {
                     int kwLength = 5;
                     String opName = Expressions.operatorName(part.substring(kwLength, kwLength + 2));
@@ -2199,7 +2201,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             orClauses.add(sbShort.toString());
         }
-        return byClause + StringUtils.join(orClauses, " or ");
+        return byClause + StringUtils.join(orClauses, " or ") + ".";
     }
 
     // get the text of the abilities of a card
