@@ -1,7 +1,7 @@
 Name:Blind Fury
 ManaCost:2 R R
 Types:Instant
-A:SP$ DebuffAll | Cost$ 2 R R | ValidCards$ Creature | Keywords$ Trample | ActivationPhases$ Upkeep->Declare Blockers | SubAbility$ BlindFuryEffect | SpellDescription$ Cast CARDNAME only before the combat damage step. All creatures lose trample until end of turn. If a creature would deal combat damage to a creature this turn, it deals double that damage to that creature instead.
+A:SP$ DebuffAll | Cost$ 2 R R | ValidCards$ Creature | Keywords$ Trample | SubAbility$ BlindFuryEffect | SpellDescription$ All creatures lose trample until end of turn. If a creature would deal combat damage to a creature this turn, it deals double that damage to that creature instead.
 SVar:BlindFuryEffect:DB$ Effect | Name$ Blind Fury Effect | ReplacementEffects$ FuryCombatEvent | SVars$ DmgTwiceCombat,X
 SVar:FuryCombatEvent:Event$ DamageDone | ValidSource$ Creature | ValidTarget$ Creature | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Description$ If a creature would deal combat damage to a creature this turn, it deals double that damage to that creature instead.
 SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X
@@ -9,4 +9,4 @@ SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_fury.jpg
-Oracle:Cast Blind Fury only before the combat damage step.\nAll creatures lose trample until end of turn. If a creature would deal combat damage to a creature this turn, it deals double that damage to that creature instead.
+Oracle:All creatures lose trample until end of turn. If a creature would deal combat damage to a creature this turn, it deals double that damage to that creature instead.
