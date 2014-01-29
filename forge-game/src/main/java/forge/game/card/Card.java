@@ -4676,7 +4676,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean typeContains(final String s) {
         final Iterator<String> it = this.getType().iterator();
         while (it.hasNext()) {
-            if (it.next().startsWith(s)) {
+            if (it.next().equals(s)) {
                 return true;
             }
         }
