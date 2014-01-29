@@ -1,0 +1,12 @@
+Name:Karametra's Favor
+ManaCost:1 G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ AnyMana | Description$ Enchanted creature has "{T}: Add one mana of any color to your mana pool."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
+SVar:NonStackingAttachEffect:True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/karametras_favor.jpg

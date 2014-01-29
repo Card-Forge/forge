@@ -1,0 +1,9 @@
+Name:Ornitharch
+ManaCost:3 W W
+Types:Creature Archon
+PT:3/3
+K:Flying
+K:Tribute 2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed | Execute$ TrigNotTribute | TriggerDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, put two 1/1 white Bird creature tokens with flying onto the battlefield.
+SVar:TrigNotTribute:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ornitharch.jpg

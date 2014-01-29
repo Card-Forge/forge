@@ -1,0 +1,9 @@
+Name:Pharagax Giant
+ManaCost:4 R
+Types:Creature Giant
+PT:3/3
+K:Tribute 2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed | Execute$ TrigDmg | TriggerDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, CARDNAME deals 5 damage to each opponent.
+SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | Defined$ Player.Opponent | NumDmg$ 5
+SVar:TributeAILogic:Always
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pharagax_giant.jpg

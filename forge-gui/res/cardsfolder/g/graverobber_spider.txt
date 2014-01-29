@@ -1,0 +1,10 @@
+Name:Graverobber Spider
+ManaCost:3 G
+Types:Creature Spider
+PT:2/4
+K:Reach
+A:AB$ Pump | Cost$ 3 B | NumAtt$ X | NumDef$ X | References$ X | SubAbility$ DBPump | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is the number of creature cards in your graveyard. Activate this ability only once each turn.
+SVar:X:Count$TypeInYourYard.Creature
+SVar:RemAIDeck:True
+DeckNeeds:Color$Black
+SVar:Picture:http://www.wizards.com/global/images/magic/general/graverobber_spider.jpg

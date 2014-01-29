@@ -1,0 +1,9 @@
+Name:Snake of the Golden Grove
+ManaCost:4 G
+Types:Creature Snake
+PT:4/4
+K:Tribute 3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed | Execute$ TrigNotTribute | TriggerDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you gain 4 life.
+SVar:TrigNotTribute:AB$ GainLife | Cost$ 0 | LifeAmount$ 4
+SVar:TributeAILogic:Never
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_of_the_golden_grove.jpg

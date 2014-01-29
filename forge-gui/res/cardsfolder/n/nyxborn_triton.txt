@@ -1,0 +1,7 @@
+Name:Nyxborn Triton
+ManaCost:2 U
+Types:Enchantment Creature Merfolk
+PT:2/3
+K:Bestow:4 U
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 3 | Description$ Enchanted creature gets +2/+3.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxborn_triton.jpg

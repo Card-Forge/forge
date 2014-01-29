@@ -1,0 +1,12 @@
+Name:Xenagos, God of Revels
+ManaCost:3 R G
+Types:Legendary Enchantment Creature God
+PT:6/5
+K:Indestructible
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | RemoveCreatureTypes$ True | CheckSVar$ X | SVarCompare$ LT7 | References$ X | Description$ As long as your devotion to red and green is less than seven, CARDNAME isn't a creature.
+SVar:X:Count$DevotionDual.R.G
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, another target creature you control gains haste and gets +X/+X until end of turn, where X is that creature's power.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | NumAtt$ +Y | NumDef$ +Y | KW$ Haste | References$ Y
+SVar:Y:Targeted$CardPower
+SVar:BuffedBy:Permanent.Red,Permanent.Green
+SVar:Picture:http://www.wizards.com/global/images/magic/general/xenagos_god_of_revels.jpg

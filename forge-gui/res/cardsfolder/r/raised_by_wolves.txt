@@ -1,0 +1,10 @@
+Name:Raised by Wolves
+ManaCost:3 G G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 G G | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 2/2 green Wolf creature tokens onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 2
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each Wolf you control.
+SVar:X:Count$Valid Card.Wolf+YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/raised_by_wolves.jpg

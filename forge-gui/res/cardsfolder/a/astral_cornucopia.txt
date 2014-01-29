@@ -1,0 +1,10 @@
+Name:Astral Cornucopia
+ManaCost:X X X
+Types:Artifact
+K:etbCounter:CHARGE:X
+SVar:X:Count$xPaid
+A:AB$ ChooseColor | Cost$ T | AILogic$ MostProminentInComputerDeck | SubAbility$ DBMana | SpellDescription$ Choose a color. Add one mana of that color to your mana pool for each charge counter on Astral Cornucopia.
+SVar:DBMana:DB$ Mana | Cost$ 0 | Produced$ Chosen | Amount$ Y | References$ Y
+SVar:Y:Count$CardCounters.CHARGE
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_cornucopia.jpg

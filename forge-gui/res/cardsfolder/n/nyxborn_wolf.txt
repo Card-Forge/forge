@@ -1,0 +1,7 @@
+Name:Nyxborn Wolf
+ManaCost:2 G
+Types:Enchantment Creature Wolf
+PT:3/1
+K:Bestow:4 G
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 3 | AddToughness$ 1 | Description$ Enchanted creature gets +3/+1.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxborn_wolf.jpg

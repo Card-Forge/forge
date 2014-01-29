@@ -1,0 +1,9 @@
+Name:Nessian Wilds Ravager
+ManaCost:4 G G
+Types:Creature Hydra
+PT:6/6
+K:Tribute 6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed | OptionalDecider$ You | Execute$ TrigNotTribute | TriggerDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you may have CARDNAME fight another target creature.
+SVar:TrigNotTribute:AB$ Fight | Cost$ 0 | Defined$ Self | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature
+SVar:TributeAILogic:Never
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nessian_wilds_ravager.jpg

@@ -1,0 +1,6 @@
+Name:Fated Intervention
+ManaCost:2 G G G
+Types:Instant
+A:SP$ Token | Cost$ 2 G G G | TokenAmount$ 2 | TokenName$ Centaur | TokenTypes$ Enchantment,Creature,Centaur | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SubAbility$ DBScry | SpellDescription$ Put two 3/3 green Centaur enchantment creature tokens onto the battlefield. If it's your turn, scry 2.
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | ConditionPlayerTurn$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fated_intervention.jpg

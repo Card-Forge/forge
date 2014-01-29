@@ -1,0 +1,9 @@
+Name:Everflame Eidolon
+ManaCost:1 R
+Types:Enchantment Creature Spirit
+PT:1/1
+K:Bestow:2 R
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | ConditionPresent$ Card.Self+nonAura | SubAbility$ DBPump | SpellDescription$ CARDNAME gets +1/+0 until end of turn. If it's an Aura, enchanted creature gets +1/+0 until end of turn instead.
+SVar:DBPump:DB$ Pump | Defined$ Enchanted | NumAtt$ +1 | ConditionPresent$ Card.Self+Aura
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/everflame_eidolon.jpg

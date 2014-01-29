@@ -1,0 +1,11 @@
+Name:Thunder Brute
+ManaCost:4 R R
+Types:Creature Cyclops
+PT:5/5
+K:Trample
+K:Tribute 3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed | Execute$ TrigNotTribute | TriggerDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, it gains haste until end of turn.
+SVar:TrigNotTribute:AB$ Pump | Cost$ 0 | KW$ Haste
+SVar:PlayMain1:TRUE
+SVar:TributeAILogic:CanBlockThisTurn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_brute.jpg
