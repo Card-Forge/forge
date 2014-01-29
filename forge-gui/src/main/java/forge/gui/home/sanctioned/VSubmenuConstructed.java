@@ -154,8 +154,10 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         // Populate and add variants panel
         vntVanguard.addItemListener(iListenerVariants);
         vntCommander.addItemListener(iListenerVariants);
+        vntCommander.setEnabled(false);
         vntPlanechase.addItemListener(iListenerVariants);
         vntArchenemy.addItemListener(iListenerVariants);
+        vntArchenemy.setEnabled(false);
         comboArchenemy.setSelectedIndex(0);
         comboArchenemy.setEnabled(vntArchenemy.isSelected());
         comboArchenemy.addActionListener(aeComboListener);
@@ -954,16 +956,21 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             }
             
             if ( null != variantType ) {
-                if (arg0.getStateChange() == ItemEvent.SELECTED)
+                if (arg0.getStateChange() == ItemEvent.SELECTED) {
                     appliedVariants.add(variantType);
-                else
+                    currentGameMode = variantType;
+                } else {
                     appliedVariants.remove(variantType);
+                    if (currentGameMode == variantType) {
+                    	currentGameMode = GameType.Constructed;
+                    }
+                }
             }
 
             for (PlayerPanel pp : playerPanels) {
                 pp.updateVariantControlsVisibility();
             }
-            changePlayerFocus(playerWithFocus, variantType);
+            changePlayerFocus(playerWithFocus, currentGameMode);
         }
     };
 
