@@ -26,7 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>
- * Immutable Card type. Can be build only from parsing a string.
+ * Immutable Card type. Can be built only from parsing a string.
  * </p>
  * 
  * @author Forge
@@ -56,21 +56,25 @@ public final class CardType implements Comparable<CardType> {
             isPermanent = permanent;
         }
 
-        public static CoreType smartValueOf(final String value) {
+        public static CoreType smartValueOf(final String value) { return smartValueOf(value, true); }
+        public static CoreType smartValueOf(final String value, boolean throwIfNotFound) {
             if (value == null) {
                 return null;
             }
             final String valToCompate = value.trim();
             for (final CoreType v : CoreType.values()) {
-                if (v.name().compareToIgnoreCase(valToCompate) == 0) {
+                if (v.name().equalsIgnoreCase(valToCompate)) {
                     return v;
                 }
             }
-            throw new IllegalArgumentException("No element named " + value + " in enum CoreType");
+            if (throwIfNotFound)
+                throw new IllegalArgumentException("No element named " + value + " in enum CoreType");
+
+            return null;
         }
 
         public static boolean isAPermanentType(final String cardType) {
-            CoreType ct = smartValueOf(cardType);
+            CoreType ct = smartValueOf(cardType, false);
             return ct != null && ct.isPermanent;
         }
     }
