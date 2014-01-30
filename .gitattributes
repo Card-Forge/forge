@@ -4801,6 +4801,7 @@ forge-gui/res/cardsfolder/f/forked_lightning.txt -text
 forge-gui/res/cardsfolder/f/form_of_the_dragon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/formation.txt -text
 forge-gui/res/cardsfolder/f/forsaken_city.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/f/forsaken_drifters.txt -text
 forge-gui/res/cardsfolder/f/forsaken_wastes.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/f/fortified_area.txt -text
 forge-gui/res/cardsfolder/f/fortify.txt svneol=native#text/plain
@@ -10789,6 +10790,7 @@ forge-gui/res/cardsfolder/s/serum_raker.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/serum_tank.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/serum_visions.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/servant_of_nefarox.txt -text
+forge-gui/res/cardsfolder/s/servant_of_tymaret.txt -text
 forge-gui/res/cardsfolder/s/servant_of_volrath.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/seshiro_the_anointed.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/seshiro_the_anointed_avatar.txt -text
@@ -13653,6 +13655,7 @@ forge-gui/res/cardsfolder/w/war_spike_changeling.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/war_tax.txt -text
 forge-gui/res/cardsfolder/w/war_torch_goblin.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/w/warbreak_trumpeter.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/w/warchanter_of_mogis.txt -text
 forge-gui/res/cardsfolder/w/warclamp_mastiff.txt -text
 forge-gui/res/cardsfolder/w/ward_of_bones.txt -text
 forge-gui/res/cardsfolder/w/ward_of_lights.txt -text
