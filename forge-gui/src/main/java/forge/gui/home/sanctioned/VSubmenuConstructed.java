@@ -197,6 +197,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         }
 
         playerPanelWithFocus = playerPanels.get(0);
+        playerPanelWithFocus.setFocused(true);
 
         playersFrame.setOpaque(false);
         playersFrame.add(playersScroll, "w 100%, h 100%-35px");
@@ -396,7 +397,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         	fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
 				@Override
 				public void deckTypeSelected(DecksComboBoxEvent ev) {
-				    playerPanels.get(playerWithFocus).focusOnAvatar();
+				    playerPanelWithFocus.focusOnAvatar();
 				}
 			});
         }
@@ -832,22 +833,15 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     private void changePlayerFocus(int newFocusOwner, GameType gType) {
+        playerPanelWithFocus.setFocused(false);
     	playerWithFocus = newFocusOwner;
     	playerPanelWithFocus = playerPanels.get(playerWithFocus);
+        playerPanelWithFocus.setFocused(true);
 
-    	changeAvatarFocus();
     	playersScroll.getViewport().scrollRectToVisible(playerPanelWithFocus.getBounds());
     	populateDeckPanel(gType);
 
     	refreshPanels(true, true);
-    }
-
-    /** Changes avatar appearance dependant on focus player. */
-    private void changeAvatarFocus() {
-    	for (int i = 0; i < playerPanels.size(); i++) {
-    	    PlayerPanel pp = playerPanels.get(i);
-    	    pp.setFocused(i == playerWithFocus);
-    	}
     }
 
     /** Saves avatar prefs for players one and two. */
