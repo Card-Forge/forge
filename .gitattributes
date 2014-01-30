@@ -11573,6 +11573,7 @@ forge-gui/res/cardsfolder/s/sphinx_of_the_steel_wind.txt svneol=native#text/plai
 forge-gui/res/cardsfolder/s/sphinx_of_uthuun.txt -text
 forge-gui/res/cardsfolder/s/sphinx_sovereign.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/sphinx_summoner.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/sphinxs_disciple.txt -text
 forge-gui/res/cardsfolder/s/sphinxs_herald.txt -text
 forge-gui/res/cardsfolder/s/sphinxs_revelation.txt -text
 forge-gui/res/cardsfolder/s/spider_climb.txt -text
@@ -11931,6 +11932,7 @@ forge-gui/res/cardsfolder/s/strata_scythe.txt -text
 forge-gui/res/cardsfolder/s/stratadon.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/strategic_planning.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stratozeppelid.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/s/stratus_walk.txt -text
 forge-gui/res/cardsfolder/s/straw_golem.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/straw_soldiers.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/s/stream_hopper.txt svneol=native#text/plain
