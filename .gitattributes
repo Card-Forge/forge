@@ -1649,6 +1649,7 @@ forge-gui/res/cardsfolder/b/black_knight.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/black_lotus.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/black_mana_battery.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/black_market.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/b/black_oak_of_odunos.txt -text
 forge-gui/res/cardsfolder/b/black_poplar_shaman.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/black_scarab.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/b/black_suns_zenith.txt svneol=native#text/plain
