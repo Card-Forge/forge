@@ -908,13 +908,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             else if ( c == null && "XChoice".equals(sVarAmount)) { 
                 cntRemoved = chooseXValue(maxCounters);
             }
-            cost.setCntRemoved(cntRemoved);
 
             if (maxCounters < cntRemoved) 
                 return null;
-            PaymentDecision res = PaymentDecision.card(source);
-            res.c = cntRemoved >= 0 ? cntRemoved : maxCounters;
-            return res;
+            return PaymentDecision.card(source, cntRemoved >= 0 ? cntRemoved : maxCounters);
+            
         } else if (type.equals("OriginalHost")) {
             int maxCounters = ability.getOriginalHost().getCounters(cost.counter);
             if (amount.equals("All")) {
@@ -923,10 +921,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (maxCounters < cntRemoved) 
                 return null;
 
-            PaymentDecision res = PaymentDecision.card(ability.getOriginalHost());
-            res.c = cntRemoved >= 0 ? cntRemoved : maxCounters;
-            cost.setCntRemoved(cntRemoved);
-            return res;
+            return PaymentDecision.card(ability.getOriginalHost(), cntRemoved >= 0 ? cntRemoved : maxCounters);
         }
 
         List<Card> validCards = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source);
@@ -949,8 +944,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 int oldVal = crd.getCounters().get(cost.counter).intValue();
                 crd.getCounters().put(cost.counter, Integer.valueOf(oldVal - removed + 1));
             }
-            cost.setCntRemoved(1);
-            return PaymentDecision.card(inp.getSelected());
+            return PaymentDecision.card(inp.getSelected(), 1);
         } 
 
         // Rift Elemental only - always removes 1 counter, so there will be no code for N counters.
@@ -960,7 +954,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 suspended.add(crd);
 
         final Card card = GuiChoose.oneOrNone("Remove counter(s) from a card in " + cost.zone, suspended);
-        return null == card ? null : PaymentDecision.card(card);
+        return null == card ? null : PaymentDecision.card(card, c);
     }
 
     @Override

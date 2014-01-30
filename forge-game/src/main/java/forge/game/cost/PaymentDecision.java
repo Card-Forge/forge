@@ -48,12 +48,25 @@ public class PaymentDecision {
         return new PaymentDecision(chosen);
     }
     
+    public static PaymentDecision card(Card chosen, int n) {
+        PaymentDecision res = new PaymentDecision(chosen);
+        res.c = n;
+        return res;
+    }
+        
+    
     public static PaymentDecision number(int c) {
         return new PaymentDecision(c);
     }
 
     public static PaymentDecision card(Collection<Card> chosen) {
         return new PaymentDecision(chosen, null, null);
+    }
+    
+    public static PaymentDecision card(Collection<Card> chosen, int n) {
+        PaymentDecision res = new PaymentDecision(chosen, null, null);
+        res.c = n;
+        return res;
     }
     
     public static PaymentDecision mana(List<Mana> manas) {

@@ -540,7 +540,7 @@ public class AiCostDecision extends CostDecisionMakerBase implements ICostVisito
             }
             for (Card card : typeList) {
                 if (card.getCounters(cost.counter) >= c) {
-                    return PaymentDecision.card(card);
+                    return PaymentDecision.card(card, c);
                 }
             }
             return null;
@@ -551,9 +551,7 @@ public class AiCostDecision extends CostDecisionMakerBase implements ICostVisito
             return null;
         }
 
-        PaymentDecision result = PaymentDecision.card(source);
-        result.c = c; // cost.cntRemoved = c;
-        return result;
+        return PaymentDecision.card(source, c);
     }
 
     @Override

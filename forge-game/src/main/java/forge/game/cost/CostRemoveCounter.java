@@ -20,7 +20,6 @@ package forge.game.cost;
 import java.util.List;
 import com.google.common.collect.Lists;
 
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterType;
@@ -43,14 +42,6 @@ public class CostRemoveCounter extends CostPartWithList {
     public final CounterType counter;
     public final ZoneType zone;
     private int cntRemoved;
-    
-
-    /**
-     * @param cntRemoved the cntRemoved to set
-     */
-    public void setCntRemoved(int cntRemoved) {
-        this.cntRemoved = cntRemoved;
-    }
 
     /**
      * Instantiates a new cost remove counter.
@@ -168,23 +159,9 @@ public class CostRemoveCounter extends CostPartWithList {
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
         Card source = ability.getSourceCard();
-        final String amount = this.getAmount();
-        Integer c = this.convertAmount();
-        if (c == null) {
-            if (amount.equals("All")) {
-                cntRemoved = source.getCounters(this.counter);
-            } else {
-                cntRemoved = AbilityUtils.calculateAmount(source, amount, ability);
-            }
-        } else 
-            cntRemoved = c.intValue();
-
-        if (this.payCostFromSource()) {
-            executePayment(ability, source);
-        } else {
-            for (final Card card : decision.cards) {
-                executePayment(ability, card);
-            }
+        cntRemoved = decision.c;
+        for (final Card card : decision.cards) {
+            executePayment(ability, card);
         }
         source.setSVar("CostCountersRemoved", Integer.toString(cntRemoved));
         return true;
