@@ -9954,6 +9954,7 @@ forge-gui/res/cardsfolder/r/retether.txt -text
 forge-gui/res/cardsfolder/r/rethink.txt -text
 forge-gui/res/cardsfolder/r/retraced_image.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/r/retract.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/r/retraction_helix.txt -text
 forge-gui/res/cardsfolder/r/retribution.txt -text
 forge-gui/res/cardsfolder/r/retribution_of_the_meek.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/r/retromancer.txt svneol=native#text/plain
