@@ -690,6 +690,7 @@ forge-gui/res/cardsfolder/a/acidic_slime.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/acidic_sliver.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/acidic_soil.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/acolyte_of_xathrid.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/a/acolytes_reward.txt -text
 forge-gui/res/cardsfolder/a/acorn_catapult.txt -text
 forge-gui/res/cardsfolder/a/acorn_harvest.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/a/acquire.txt svneol=native#text/plain
