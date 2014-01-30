@@ -314,7 +314,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
      */
     public final CardPanel getCardPanel(final int gameCardID) {
         for (final CardPanel panel : this.getCardPanels()) {
-            if (panel.getGameCard().getUniqueNumber() == gameCardID) {
+            if (panel.getCard().getUniqueNumber() == gameCardID) {
                 return panel;
             }
         }
@@ -623,7 +623,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
             mouseOut(hoveredPanel, e);
         }
 
-        return (null == p || p != hoveredPanel) ? null : p.getGameCard();
+        return (null == p || p != hoveredPanel) ? null : p.getCard();
     }
 
 

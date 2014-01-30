@@ -387,7 +387,7 @@ public abstract class Animation {
                                 if (placeholder != null) {
                                     placeholder.setDisplayEnabled(true);
                                     // placeholder.setImage(animationPanel);
-                                    placeholder.setCard(placeholder.getGameCard());
+                                    placeholder.setCard(placeholder.getCard());
                                 }
                                 animationPanel.setVisible(false);
                                 animationPanel.repaint();
@@ -418,7 +418,7 @@ public abstract class Animation {
                 if (placeholder != null) {
                     placeholder.setDisplayEnabled(true);
                     // placeholder.setImage(imagePanel);
-                    placeholder.setCard(placeholder.getGameCard());
+                    placeholder.setCard(placeholder.getCard());
                 }
             }
         });
@@ -539,7 +539,7 @@ public abstract class Animation {
         }
         final long thisDelayedTime = delayedTime;
 
-        final CardPanel animationPanel = new CardPanel(overPanel.getGameCard());
+        final CardPanel animationPanel = new CardPanel(overPanel.getCard());
         animationPanel.setImage(overPanel);
 
         new Animation(200, delay) {

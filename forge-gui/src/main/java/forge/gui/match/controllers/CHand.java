@@ -65,7 +65,7 @@ public class CHand implements ICDoc {
             public void mouseDragEnd(CardPanel dragPanel, MouseEvent evt) {
                 //update index of dragged card in hand zone to match new index within hand area
                 int index = CHand.this.view.getHandArea().getCardPanels().indexOf(dragPanel);
-                CHand.this.player.getZone(ZoneType.Hand).reposition(dragPanel.getGameCard(), index);
+                CHand.this.player.getZone(ZoneType.Hand).reposition(dragPanel.getCard(), index);
             }
         });
     }
@@ -143,7 +143,7 @@ public class CHand implements ICDoc {
             endY = toPos.y;
 
             if (Singletons.getView().getFrame().isShowing()) {
-                final CardPanel animationPanel = new CardPanel(placeholder.getGameCard());
+                final CardPanel animationPanel = new CardPanel(placeholder.getCard());
                 Animation.moveCard(startX, startY, startWidth, endX, endY, endWidth, animationPanel, placeholder,
                         layeredPane, 500);
             }

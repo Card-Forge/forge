@@ -93,7 +93,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      */
     private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
 
-    private Card gameCard;
+    private Card card;
     private CardPanel attachedToPanel;
     private List<CardPanel> attachedPanels = new ArrayList<CardPanel>();
     private boolean tapped;
@@ -115,11 +115,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * Constructor for CardPanel.
      * </p>
      * 
-     * @param newGameCard
+     * @param newCard
      *            a {@link forge.game.card.Card} object.
      */
-    public CardPanel(final Card newGameCard) {
-        this.gameCard = newGameCard;
+    public CardPanel(final Card newCard) {
+        this.card = newCard;
 
         this.setBackground(Color.black);
         this.setOpaque(false);
@@ -129,7 +129,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         createCardIdOverlay();
         createScaleImagePanel();
 
-        this.setCard(newGameCard);
+        this.setCard(newCard);
     }
 
     private void createScaleImagePanel() {
@@ -138,11 +138,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(final ComponentEvent e) {
-                CardPanel.this.setCard(CardPanel.this.getGameCard());
+                CardPanel.this.setCard(CardPanel.this.getCard());
             }
             @Override
             public void componentResized(final ComponentEvent e) {
-                CardPanel.this.setCard(CardPanel.this.getGameCard());
+                CardPanel.this.setCard(CardPanel.this.getCard());
             }
         });
     }
@@ -317,7 +317,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         // Green outline for hover
-        if( this.isSelected ) {
+        if (this.isSelected) {
             g2d.setColor(Color.green);
             final int n = Math.max(1, Math.round(this.cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
@@ -329,9 +329,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         g2d.fillRoundRect(this.cardXOffset - n, (this.cardYOffset - n) + offset, this.cardWidth + (n * 2), this.cardHeight + (n * 2), cornerSize + n , cornerSize + n);
 
         // White border if card is known to have it.
-        if (this.getGameCard() != null && !this.getGameCard().isFaceDown()) {
-            CardEdition ed = Singletons.getMagicDb().getEditions().get(this.getGameCard().getCurSetCode());
-            if (ed != null && ed.isWhiteBorder() && this.getGameCard().getFoil() == 0) {
+        if (this.getCard() != null && !this.getCard().isFaceDown()) {
+            CardEdition ed = Singletons.getMagicDb().getEditions().get(this.getCard().getCurSetCode());
+            if (ed != null && ed.isWhiteBorder() && this.getCard().getFoil() == 0) {
                 g2d.setColor(Color.white);
                 int ins = 1;
                 g2d.fillRoundRect(this.cardXOffset + ins, this.cardYOffset + ins, this.cardWidth - ins*2, this.cardHeight - ins*2, cornerSize-ins, cornerSize-ins);
@@ -344,7 +344,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * @param g
      * @param manaCost
      */
-    private void drawManaCost(final Graphics g, ManaCost cost, int deltaY ) {
+    private void drawManaCost(final Graphics g, ManaCost cost, int deltaY) {
         int width = CardFaceSymbols.getWidth(cost);
         int height = CardFaceSymbols.getHeight();
         CardFaceSymbols.draw(g, cost, (this.cardXOffset + (this.cardWidth / 2)) - (width / 2), deltaY + this.cardYOffset + (this.cardHeight / 2) - height/2);
@@ -360,13 +360,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         if (showCardManaCostOverlay() && this.cardWidth < 200) {
-            Card gameCard = this.getGameCard();
-            boolean showSplitMana = gameCard.isSplitCard() && gameCard.getCurState() == CardCharacteristicName.Original;
-            if ( !showSplitMana ) {
-                drawManaCost(g, gameCard.getManaCost(), 0);
+            Card card = this.getCard();
+            boolean showSplitMana = card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original;
+            if (!showSplitMana) {
+                drawManaCost(g, card.getManaCost(), 0);
             } else {
-                drawManaCost(g, gameCard.getRules().getMainPart().getManaCost(), +12);
-                drawManaCost(g, gameCard.getRules().getOtherPart().getManaCost(), -12);
+                drawManaCost(g, card.getRules().getMainPart().getManaCost(), +12);
+                drawManaCost(g, card.getRules().getOtherPart().getManaCost(), -12);
             }
         }
 
@@ -398,11 +398,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int ySymbols = (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16;
         // int yOff = (cardHeight/4) + 2;
         Combat combat = card.getGame().getCombat();
-        if( combat != null ) {
-            if ( combat.isAttacking(card))
+        if (combat != null) {
+            if (combat.isAttacking(card)) {
                 CardFaceSymbols.drawSymbol("attack", g, combatXSymbols, ySymbols);
-            if ( combat.isBlocking(card))
+            }
+            if (combat.isBlocking(card)) {
                 CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols);
+            }
         }
 
         if (card.isSick() && card.isInPlay()) {
@@ -486,7 +488,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     public final String toString() {
-        return this.getGameCard().getName();
+        return this.getCard().getName();
     }
 
     /**
@@ -592,7 +594,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         p.y += this.cardYOffset;
         return p;
     }
-    
+
     /**
      * <p>
      * getCardLocationOnScreen.
@@ -616,7 +618,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      *            a {@link forge.game.card.Card} object.
      */
     public final void setText(final Card card) {
-
         if ((card == null)) {
             return;
         }
@@ -645,35 +646,33 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         // Card Id overlay
         this.cardIdText.setText(Integer.toString(card.getUniqueNumber()));
-
     }
 
     /**
-     * <p>
-     * getCard.
-     * </p>
+     * Gets the card.
      * 
-     * @return a {@link forge.game.card.Card} object.
+     * @return the card
      */
+    @Override
     public final Card getCard() {
-        return this.getGameCard();
+        return this.card;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void setCard(final Card card) {
-        if ((this.getGameCard() != null) && this.getGameCard().equals(card) && this.isAnimationPanel
+        if ((this.getCard() != null) && this.getCard().equals(card) && this.isAnimationPanel
                 && this.imagePanel.hasImage()) {
             return;
         }
 
-        this.gameCard = card;
+        this.card = card;
         if (!this.isShowing()) {
             return;
         }
 
         final BufferedImage image = card == null ? null : ImageCache.getImage(card, imagePanel.getWidth(), imagePanel.getHeight());
-        this.setText(this.getGameCard());
+        this.setText(this.getCard());
 
         this.setImage(image);
     }
@@ -683,16 +682,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         this.attachedPanels = null;
         this.imagePanel.setImage(null);
         this.imagePanel = null;
-        this.gameCard = null;
-    }
-
-    /**
-     * Gets the game card.
-     * 
-     * @return the gameCard
-     */
-    public final Card getGameCard() {
-        return this.gameCard;
+        this.card = null;
     }
 
     /**
@@ -829,5 +819,4 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         repaint();
         doLayout();
     }
-
 }

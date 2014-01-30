@@ -93,7 +93,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         outerLoop:
         //
         for (final CardPanel panel : this.getCardPanels()) {
-            if (!panel.getGameCard().isLand() || panel.getGameCard().isCreature()) {
+            if (!panel.getCard().isLand() || panel.getCard().isCreature()) {
                 continue;
             }
 
@@ -103,16 +103,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int i = 0, n = allLands.size(); i < n; i++) {
                 final CardStack stack = allLands.get(i);
                 final CardPanel firstPanel = stack.get(0);
-                if (firstPanel.getGameCard().getName().equals(panel.getGameCard().getName())) {
-                    if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getGameCard().isEnchanted()) {
+                if (firstPanel.getCard().getName().equals(panel.getCard().getName())) {
+                    if (!firstPanel.getAttachedPanels().isEmpty() || firstPanel.getCard().isEnchanted()) {
                         // Put this land to the left of lands with the same name
                         // and attachments.
                         insertIndex = i;
                         break;
                     }
                     if (!panel.getAttachedPanels().isEmpty()
-                            || !panel.getGameCard().getCounters().equals(firstPanel.getGameCard().getCounters())
-                            || firstPanel.getGameCard().isEnchanted() || (stack.size() == this.landStackMax)) {
+                            || !panel.getCard().getCounters().equals(firstPanel.getCard().getCounters())
+                            || firstPanel.getCard().isEnchanted() || (stack.size() == this.landStackMax)) {
                         // If this land has attachments or the stack is full,
                         // put it to the right.
                         insertIndex = i + 1;
@@ -140,7 +140,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         outerLoop:
         //
         for (final CardPanel panel : this.getCardPanels()) {
-            if (!panel.getGameCard().isToken()) {
+            if (!panel.getCard().isToken()) {
                 continue;
             }
 
@@ -150,7 +150,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int i = 0, n = allTokens.size(); i < n; i++) {
                 final CardStack stack = allTokens.get(i);
                 final CardPanel firstPanel = stack.get(0);
-                if (firstPanel.getGameCard().getName().equals(panel.getGameCard().getName())) {
+                if (firstPanel.getCard().getName().equals(panel.getCard().getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty()) {
                         // Put this token to the left of tokens with the same
                         // name and attachments.
@@ -158,10 +158,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         break;
                     }
                     if (!panel.getAttachedPanels().isEmpty()
-                            || !panel.getGameCard().getCounters().equals(firstPanel.getGameCard().getCounters())
-                            || (panel.getGameCard().isSick() != firstPanel.getGameCard().isSick())
-                            || (panel.getGameCard().getNetAttack() != firstPanel.getGameCard().getNetAttack())
-                            || (panel.getGameCard().getNetDefense() != firstPanel.getGameCard().getNetDefense())
+                            || !panel.getCard().getCounters().equals(firstPanel.getCard().getCounters())
+                            || (panel.getCard().isSick() != firstPanel.getCard().isSick())
+                            || (panel.getCard().getNetAttack() != firstPanel.getCard().getNetAttack())
+                            || (panel.getCard().getNetDefense() != firstPanel.getCard().getNetDefense())
                             || (stack.size() == tokenStackMax)) {
                         // If this token has attachments or the stack is full,
                         // put it to the right.
@@ -267,7 +267,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
                 final CardStack stack = row.get(stackIndex);
                 // Align others to the right.
-                if (RowType.Other.isGoodFor(stack.get(0).getGameCard())) {
+                if (RowType.Other.isGoodFor(stack.get(0).getCard())) {
                     x = (this.playAreaWidth - PlayArea.GUTTER_X) + this.extraCardSpacingX;
                     for (int i = stackIndex, n = row.size(); i < n; i++) {
                         CardStack r = row.get(i);
@@ -530,7 +530,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         List<Card> oldCards, toDelete;
         oldCards = new ArrayList<Card>();
         for (final CardPanel cpa : getCardPanels()) {
-            oldCards.add(cpa.getGameCard());
+            oldCards.add(cpa.getCard());
         }
         toDelete = new ArrayList<Card>(oldCards);
         List<Card> toReplace = new ArrayList<Card>();
@@ -635,7 +635,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             toPanel.setAttachedToPanel(null);
         }
    
-        toPanel.setCard(toPanel.getGameCard());
+        toPanel.setCard(toPanel.getCard());
     }
 
     private static enum RowType {
@@ -669,7 +669,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         private void addAll(final List<CardPanel> cardPanels, final RowType type) {
             for (final CardPanel panel : cardPanels) {
-                if (!type.isGoodFor(panel.getGameCard()) || (panel.getAttachedToPanel() != null)) {
+                if (!type.isGoodFor(panel.getCard()) || (panel.getAttachedToPanel() != null)) {
                     continue;
                 }
                 final CardStack stack = new CardStack();
