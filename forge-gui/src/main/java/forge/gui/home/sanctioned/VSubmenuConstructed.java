@@ -277,8 +277,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
      * These are added to a list which can be referenced to populate the deck panel appropriately. */
     @SuppressWarnings("serial")
     private void buildDeckPanel(final int playerIndex) {
-    	String sectionConstraints = "insets 8";
-    	String componentConstraints = "gap 0px 0px 10px 10px, wrap";
+    	String sectionConstraints = "insets 0, gap 0, wrap";
+        String labelConstraints = "gaptop 10px, gapbottom 5px";
 
         // Main deck
         final FDeckChooser mainChooser = new FDeckChooser(isPlayerAI(playerIndex));
@@ -293,35 +293,37 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         // Planar deck list
         FPanel planarDeckPanel = new FPanel();
+        planarDeckPanel.setBorderToggle(false);
         planarDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        planarDeckPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), componentConstraints);
+        planarDeckPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), labelConstraints);
         FList<Object> planarDeckList = new FList<Object>();
         planarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        FScrollPane scrPlanes = new FScrollPane(planarDeckList, false,
+        FScrollPane scrPlanes = new FScrollPane(planarDeckList, true,
         		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        planarDeckPanel.add(scrPlanes, componentConstraints + ", h 95%, grow, push");
+        planarDeckPanel.add(scrPlanes, "grow, push");
         planarDeckLists.add(planarDeckList);
         planarDeckPanels.add(planarDeckPanel);
 
         // Vanguard avatar list
         FPanel vgdDeckPanel = new FPanel();
+        vgdDeckPanel.setBorderToggle(false);
 
         FList<Object> vgdAvatarList = new FList<Object>();
         vgdAvatarList.setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
         vgdAvatarList.setSelectedIndex(0);
         vgdAvatarList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         vgdAvatarList.addListSelectionListener(vgdLSListener);
-        FScrollPane scrAvatars = new FScrollPane(vgdAvatarList, false,
+        FScrollPane scrAvatars = new FScrollPane(vgdAvatarList, true,
         		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         CardDetailPanel vgdDetail = new CardDetailPanel(null);
         vgdAvatarDetails.add(vgdDetail);
 
         vgdDeckPanel.setLayout(new MigLayout(sectionConstraints));
-        vgdDeckPanel.add(new FLabel.Builder().text("Select a Vanguard avatar:").build(), componentConstraints);
-        vgdDeckPanel.add(scrAvatars, componentConstraints + ", grow, push");
-        vgdDeckPanel.add(vgdDetail, componentConstraints + ", growx, pushx, hidemode 3");
+        vgdDeckPanel.add(new FLabel.Builder().text("Select a Vanguard avatar:").build(), labelConstraints);
+        vgdDeckPanel.add(scrAvatars, "grow, push");
+        vgdDeckPanel.add(vgdDetail, "growx, pushx, hidemode 3");
         vgdAvatarLists.add(vgdAvatarList);
         vgdPanels.add(vgdDeckPanel);
     }
