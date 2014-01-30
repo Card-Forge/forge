@@ -4,3 +4,4 @@ Types:Enchantment Creature Spirit
 PT:3/1
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't draw more than one card each turn. | Description$ Each player can't draw more than one card each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_of_the_labyrinth.jpg
+Oracle:Each player can't draw more than one card each turn.

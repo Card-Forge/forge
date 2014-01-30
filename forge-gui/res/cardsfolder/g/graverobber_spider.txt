@@ -8,3 +8,4 @@ SVar:X:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
 DeckNeeds:Color$Black
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graverobber_spider.jpg
+Oracle:Reach\n{3}{B}: Graverobber Spider gets +X/+X until end of turn, where X is the number of creature cards in your graveyard. Activate this ability only once each turn.

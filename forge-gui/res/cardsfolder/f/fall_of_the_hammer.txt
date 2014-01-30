@@ -7,3 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fall_of_the_hammer.jpg
+Oracle:Target creature you control deals damage equal to its power to another target creature.

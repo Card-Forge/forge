@@ -8,3 +8,4 @@ SVar:Y:Count$ValidGraveyard Creature.YouOwn
 A:AB$ ChangeZone | Cost$ 5 B B | Origin$ Graveyard | Destination$ Library | ActivationZone$ Graveyard | Defined$ Self | SpellDescription$ Put CARDNAME on top of your library from your graveyard.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champion_of_stray_souls.jpg
+Oracle:{3}{B}{B}, {T}, Sacrifice X other creatures: Return X target creature cards from your graveyard to the battlefield.\n{5}{B}{B}: Put Champion of Stray Souls on top of your library from your graveyard.

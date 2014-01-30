@@ -6,3 +6,4 @@ T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | Trigg
 SVar:TrigTap:AB$ Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_skirmisher.jpg
+Oracle:Heroic - Whenever you cast a spell that targets Elite Skirmisher, you may tap target creature.

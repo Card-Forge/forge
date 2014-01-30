@@ -5,3 +5,4 @@ A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target 
 SVar:DBUntap:DB$ Untap | Defined$ ParentTarget
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypsis.jpg
+Oracle:Target creature you control gains protection from creatures your opponents control until end of turn. Untap it.

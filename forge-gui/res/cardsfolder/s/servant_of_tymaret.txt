@@ -9,3 +9,4 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife
 SVar:Picture:http://www.wizards.com/global/images/magic/general/servant_of_tymaret.jpg
+Oracle:Inspired - Whenever Servant of Tymaret becomes untapped, each opponent loses 1 life. You gain life equal to the life lost this way.\n{2}{B}: Regenerate Servant of Tymaret.

@@ -8,3 +8,4 @@ SVar:TrigCounters:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 |
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hero_of_iroas.jpg
+Oracle:Aura spells you cast cost {1} less to cast.\nHeroic - Whenever you cast a spell that targets Hero of Iroas, put a +1/+1 counter on Hero of Iroas.

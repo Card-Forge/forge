@@ -4,6 +4,7 @@ Types:Creature Beast
 PT:3/3
 K:Tribute 3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notTributed | Execute$ TrigNotTribute | TriggerDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, destroy target noncreature permanent.
-SVar:TrigNotTribute:AB$ Destroy | Cost$ 0 | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent 
+SVar:TrigNotTribute:AB$ Destroy | Cost$ 0 | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent
 SVar:TributeAILogic:Always
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nessian_demolok.jpg
+Oracle:Tribute 3 (As this creature enters the battlefield, an opponent of your choice may place three +1/+1 counters on it.)\nWhen Nessian Demolok enters the battlefield, if tribute wasn't paid, destroy target noncreature permanent.

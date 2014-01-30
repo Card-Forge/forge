@@ -7,3 +7,4 @@ T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tri
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBMill
 SVar:DBMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/siren_of_the_silent_song .jpg
+Oracle:Flying\nInspired - Whenever Siren of the Silent Song becomes untapped, each opponent discards a card, then puts the top card of his or her library into his or her graveyard.

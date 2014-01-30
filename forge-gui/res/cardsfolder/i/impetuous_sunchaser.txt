@@ -6,3 +6,4 @@ K:Flying
 K:Haste
 K:CARDNAME attacks each turn if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impetuous_sunchaser.jpg
+Oracle:Flying, haste\nImpetuous Sunchaser attacks each turn if able.

@@ -6,3 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ First Strike | Des
 S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ First Strike | AddHiddenKeyword$ CARDNAME can't have or gain First Strike | Description$ Creatures your opponents control lose first strike and can't have or gain first strike.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archetype_of_courage.jpg
+Oracle:Creatures you control have first strike.\nCreatures your opponents control lose first strike and can't have or gain first strike.

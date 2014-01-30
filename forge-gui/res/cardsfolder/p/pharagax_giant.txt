@@ -7,3 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | Defined$ Player.Opponent | NumDmg$ 5
 SVar:TributeAILogic:Always
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pharagax_giant.jpg
+Oracle:Tribute 2 (As this creature enters the battlefield, an opponent of your choice may place two +1/+1 counters on it.)\nWhen Pharagax Giant enters the battlefield, if tribute wasn't paid, Pharagax Giant deals 5 damage to each opponent.

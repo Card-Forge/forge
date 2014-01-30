@@ -6,3 +6,4 @@ SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Remembered.sameName+Other | NumAtt$ -3 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bile_blight.jpg
+Oracle:Target creature and all other creatures with the same name as that creature get -3/-3 until end of turn.

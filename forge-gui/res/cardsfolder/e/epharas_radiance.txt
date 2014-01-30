@@ -7,3 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ABGainLife | D
 SVar:ABGainLife:AB$ GainLife | Cost$ 1 W T | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/epharas_radiance.jpg
+Oracle:Enchant creature\nEnchanted creature has "{1}{W}, {T}: You gain 3 life."

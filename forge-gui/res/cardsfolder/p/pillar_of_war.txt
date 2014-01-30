@@ -7,3 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can attack
 SVar:X:Count$Valid Card.Self+enchanted
 SVar:EnchantMe:Once
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillar_of_war.jpg
+Oracle:Defender\nAs long as Pillar of War is enchanted, it can attack as though it didn't have defender.

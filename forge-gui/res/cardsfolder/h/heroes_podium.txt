@@ -7,3 +7,4 @@ A:AB$ Dig | Cost$ X T | DigNum$ X | ChangeNum$ 1 | ChangeValid$ Creature.Legenda
 SVar:X:Count$xPaid
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heroes_podium.jpg
+Oracle:Each legendary creature you control gets +1/+1 for each other legendary creature you control.\n{X}, {T}: Look at the top X cards of your library. You may reveal a legendary creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

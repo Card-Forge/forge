@@ -9,3 +9,4 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ 
 SVar:TrigSearch:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest,Plains | ChangeNum$ 1 | Tapped$ True
 SVar:BuffedBy:Permanent.White,Permanent.Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karametra_god_of_harvests.jpg
+Oracle:Indestructible\nAs long as your devotion to green and white is less than seven, Karametra isn't a creature.\nWhenever you cast a creature spell, you may search your library for a Forest or Plains card, put it onto the battlefield tapped, then shuffle your library.

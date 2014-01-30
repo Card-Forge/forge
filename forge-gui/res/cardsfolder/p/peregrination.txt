@@ -5,3 +5,4 @@ A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | Tapp
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peregrination.jpg
+Oracle:Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle your library, then scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

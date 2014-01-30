@@ -6,3 +6,4 @@ SVar:DBSacrifice:DB$ SacrificeAll | ValidCards$ Card.IsRemembered
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whims_of_the_fates.jpg
+Oracle:Starting with you, each player separates all permanents he or she controls into three piles. Then each player chooses one of his or her piles at random and sacrifices those permanents. (Piles can be empty.)

@@ -7,3 +7,4 @@ SVar:AcolytesRetribution:AB$ DealDamage | Cost$ 0 | Defined$ ShieldEffectTarget 
 SVar:X:Count$Devotion.W
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acolytes_reward.jpg
+Oracle:Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, Acolyte's Reward deals that much damage to target creature or player. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)
