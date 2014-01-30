@@ -88,7 +88,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     private static final SkinColor unfocusedPlayerOverlay = FSkin.getColor(FSkin.Colors.CLR_OVERLAY).alphaColor(120);
 
     private final static int MAX_PLAYERS = 8;
-    
+
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Constructed Mode");
@@ -182,13 +182,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         String constraints = "pushx, growx, wrap, hidemode 3";
         for (int i = 0; i < MAX_PLAYERS; i++) {
         	teams.add(i+1);
-        	
+
             PlayerPanel player = new PlayerPanel(i);
             playerPanels.add(player);
 
         	// Populate players panel
         	player.setVisible(i < activePlayersNum);
-        	
+
     	    playersScroll.add(player, constraints);
 
         	if (i == 0) {
@@ -214,7 +214,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         ////////////////////////////////////////////////////////
         ////////////////////// Deck Panel //////////////////////
-        
+
         for (int i = 0; i < MAX_PLAYERS; i++) {
         	buildDeckPanel(i);
         }
@@ -228,23 +228,23 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     }
 
     private void addPlayer() {
-        if (activePlayersNum >= MAX_PLAYERS)
+        if (activePlayersNum >= MAX_PLAYERS) {
             return;
+        }
 
         int freeIndex = -1;
-        for(int i = 0; i < MAX_PLAYERS; i++)
-            if ( !playerPanels.get(i).isVisible() ) {
+        for (int i = 0; i < MAX_PLAYERS; i++) {
+            if (!playerPanels.get(i).isVisible()) {
                 freeIndex = i;
                 break;
             }
-        
+        }
 
         playerPanels.get(freeIndex).setVisible(true);
 
         activePlayersNum++;
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
-        
-        
+
         playerPanels.get(freeIndex).setVisible(true);
         playerPanels.get(freeIndex).focusOnAvatar();
     }
@@ -341,9 +341,11 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     			decksFrame.add(cbSingletons, strCheckboxConstraints);
     			decksFrame.add(cbArtifacts, strCheckboxConstraints);
     		}
-    	} else if (GameType.Planechase == forGameType) {
+    	}
+    	else if (GameType.Planechase == forGameType) {
     		decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
-    	} else if (GameType.Vanguard == forGameType) {
+    	}
+    	else if (GameType.Vanguard == forGameType) {
     		updateVanguardList(playerWithFocus);
     		decksFrame.add(vgdPanels.get(playerWithFocus), "grow, push");
     	}
@@ -361,7 +363,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     public final FDeckChooser getDeckChooser(int playernum) {
     	return deckChoosers.get(playernum);
     }
-
 
     /* (non-Javadoc)
      * @see forge.gui.home.IVSubmenu#getMenuTitle()
@@ -433,8 +434,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     public final List<Integer> getParticipants() {
     	final List<Integer> participants = new ArrayList<Integer>(activePlayersNum);
     	for (final PlayerPanel panel : playerPanels) {
-    	    if(panel.isVisible())
+    	    if (panel.isVisible()) {
 	            participants.add(playerPanels.indexOf(panel));
+    	    }
     	}
         return participants;
     }
@@ -454,33 +456,30 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     @SuppressWarnings("serial")
     private class PlayerPanel extends FPanel {
         private final int index;
-        
+
         private final FLabel nameRandomiser;
         private final FLabel avatarLabel = new FLabel.Builder().opaque(true).hoverable(true).iconScaleFactor(0.99f).iconInBackground(true).build();
         private int avatarIndex;
-        
+
         private final FTextField txtPlayerName = new FTextField.Builder().text("Player name").build();
         private FRadioButton radioHuman;
         private FRadioButton radioAi;
-        
-        
+
         private final FLabel deckBtn = new FLabel.ButtonBuilder().text("Select a deck").build();
-        
+
         private final String variantBtnConstraints = "height 30px, hidemode 3";
-        
+
         private final FLabel pchDeckSelectorBtn = new FLabel.ButtonBuilder().text("Select a planar deck").build();
         private final FLabel pchDeckEditor = new FLabel.ButtonBuilder().text("Planar Deck Editor").build();
         private final FLabel pchLabel = newLabel("Planar deck:");
-        
+
         private final FLabel vgdSelectorBtn = new FLabel.ButtonBuilder().text("Select a Vanguard avatar").build();
         private final FLabel vgdLabel = newLabel("Vanguard:");
-        
-        
 
         public PlayerPanel(final int index) {
             super();
             this.index = index;
-            
+
             setLayout(new MigLayout("insets 10px, gap 5px"));
 
             // Add a button to players 3+ to remove them from the setup
@@ -507,18 +506,18 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             this.add(deckBtn, "pushx, growx, wmax 100%-153px, h 30px, spanx 4, wrap");
 
             addHandlersDeckSelector();
-            
+
             this.add(pchLabel, variantBtnConstraints + ", cell 0 2, sx 2, ax right");
             this.add(pchDeckSelectorBtn, variantBtnConstraints + ", cell 2 2, growx, pushx");
             this.add(pchDeckEditor, variantBtnConstraints + ", cell 3 2, sx 3, growx, wrap");
 
             this.add(vgdSelectorBtn, variantBtnConstraints + ", cell 2 3, sx 4, growx, wrap");
             this.add(vgdLabel, variantBtnConstraints + ", cell 0 3, sx 2, ax right");
-            
+
             addHandlersToVariantsControls();
             updateVariantControlsVisibility();
         }
-        
+
         private final FMouseAdapter radioMouseAdapter = new FMouseAdapter() {
             @Override
             public void onLeftClick(MouseEvent e) {
@@ -526,8 +525,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                 updateVanguardList(index);
             }
         };
-        
-        
+
         /** Listens to name text fields and gives the appropriate player focus.
          *  Also saves the name preference when leaving player one's text field. */
         private FocusAdapter nameFocusListener = new FocusAdapter() {
@@ -557,8 +555,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             public void focusGained(FocusEvent e) {
                 changePlayerFocus(index);
             }
-        };        
-        
+        };
 
         private FMouseAdapter avatarMouseListener = new FMouseAdapter() {
             @Override
@@ -582,8 +579,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                 aSel.setVisible(true);
                 aSel.dispose();
 
-                if (index < 2)
+                if (index < 2) {
                     updateAvatarPrefs();
+                }
             }
             @Override
             public void onRightClick(MouseEvent e) {
@@ -592,17 +590,17 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
                 setRandomAvatar();
 
-                if (index < 2) 
+                if (index < 2) {
                     updateAvatarPrefs();
+                }
             }
         };
-        
-        
+
         public void updateVariantControlsVisibility() {
             pchDeckSelectorBtn.setVisible(appliedVariants.contains(GameType.Planechase));
             pchDeckEditor.setVisible(appliedVariants.contains(GameType.Planechase));
             pchLabel.setVisible(appliedVariants.contains(GameType.Planechase));
-            
+
             vgdSelectorBtn.setVisible(appliedVariants.contains(GameType.Vanguard));
             vgdLabel.setVisible(appliedVariants.contains(GameType.Vanguard));
         }
@@ -623,15 +621,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         public void setVanguardButtonText(String text) {
             vgdSelectorBtn.setText(text);
         }
-        
+
         public void setDeckSelectorButtonText(String text) {
             deckBtn.setText(text);
         }
 
-
         public void focusOnAvatar() {
             avatarLabel.requestFocusInWindow();
-            
         }
 
         /**
@@ -647,7 +643,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                     changePlayerFocus(index, GameType.Planechase);
                 }
             });
-            
+
             pchDeckEditor.setCommand(new Command() {
                 @Override
                 public void run() {
@@ -658,13 +654,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                             return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
                         }
                     };
-                    
+
                     Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
                     CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
                             new CEditorVariant(Singletons.getModel().getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE));
                 }
             });
-            
+
             // Vanguard buttons
             vgdSelectorBtn.setCommand(new Runnable() {
                 @Override
@@ -685,7 +681,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
             radioHuman.addMouseListener(radioMouseAdapter);
             radioAi.addMouseListener(radioMouseAdapter);
-            
+
             ButtonGroup tempBtnGroup = new ButtonGroup();
             tempBtnGroup.add(radioHuman);
             tempBtnGroup.add(radioAi);
@@ -717,9 +713,9 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                 @Override
                 public void run() {
                     String newName = getNewName();
-                    if ( null == newName )
+                    if (null == newName) {
                         return;
-
+                    }
                     txtPlayerName.setText(newName);
 
                     if (index == 0) {
@@ -736,7 +732,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
         /**
          * @param index
-         * @return 
+         * @return
          */
         private void createNameEditor() {
             String name;
@@ -745,7 +741,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                 if (name.isEmpty()) {
                     name = "Human";
                 }
-            } else {
+            }
+            else {
                 name = NameGenerator.getRandomName("Any", "Any", getPlayerNames());
             }
 
@@ -769,13 +766,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             return closeBtn;
         }
 
-
         private void createAvatar() {
             String[] currentPrefs = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
             if (index < currentPrefs.length) {
                 avatarIndex = Integer.parseInt(currentPrefs[index]);
                 avatarLabel.setIcon(FSkin.getAvatars().get(avatarIndex));
-            } else {
+            }
+            else {
                 setRandomAvatar();
             }
             this.addMouseListener(new FMouseAdapter() {
@@ -784,12 +781,12 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                     avatarLabel.requestFocusInWindow();
                 }
             });
-            
+
             avatarLabel.setToolTipText("L-click: Select avatar. R-click: Randomize avatar.");
             avatarLabel.addFocusListener(avatarFocusListener);
             avatarLabel.addMouseListener(avatarMouseListener);
         }
-        
+
         /** Applies a random avatar, avoiding avatars already used.
          * @param playerIndex */
         public void setRandomAvatar() {
@@ -824,11 +821,10 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         public void setPlayerName(String string) {
             txtPlayerName.setText(string);
         }
-        
+
         public String getPlayerName() {
             return txtPlayerName.getText();
         }
-        
     }
 
     private void changePlayerFocus(int newFocusOwner) {
@@ -866,7 +862,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     /** Updates the avatars from preferences on update. */
     public void updatePlayersFromPrefs() {
         ForgePreferences prefs = Singletons.getModel().getPreferences();
-        
+
         // Avatar
         String[] avatarPrefs = prefs.getPref(FPref.UI_AVATARS).split(",");
         for (int i = 0; i < avatarPrefs.length; i++) {
@@ -892,7 +888,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         }
         return usedAvatars;
     }
-    
+
     private final String getNewName() {
     	final String title = "Get new random name";
     	final String message = "What type of name do you want to generate?";
@@ -901,17 +897,18 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     	final String[] typeOptions = new String[]{ "Fantasy", "Generic", "Any" };
 
     	final int genderIndex = FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2);
-    	if ( genderIndex < 0 )
+    	if (genderIndex < 0) {
     	    return null;
+    	}
     	final int typeIndex = FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2);
-        if ( typeIndex < 0 )
+        if (typeIndex < 0) {
             return null;
+        }
+
     	final String gender = genderOptions[genderIndex];
     	final String type = typeOptions[typeIndex];
 
-    	String confirmMsg;
-    	String newName;
-
+    	String confirmMsg, newName;
     	List<String> usedNames = getPlayerNames();
     	do {
     		newName = NameGenerator.getRandomName(gender, type, usedNames);
@@ -926,7 +923,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 
     private List<String> getPlayerNames() {
         List<String> names = new ArrayList<String>();
-        for(PlayerPanel pp : playerPanels) {
+        for (PlayerPanel pp : playerPanels) {
             names.add(pp.getPlayerName());
         }
         return names;
@@ -940,12 +937,15 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
             FCheckBox cb = (FCheckBox) arg0.getSource();
             GameType variantType = null;
 
-            if (cb == vntVanguard)
+            if (cb == vntVanguard) {
                 variantType = GameType.Vanguard;
-            else if (cb == vntCommander)
+            }
+            else if (cb == vntCommander) {
                 variantType = GameType.Commander;
-            else if (cb == vntPlanechase)
+            }
+            else if (cb == vntPlanechase) {
                 variantType = GameType.Planechase;
+            }
             else if (cb == vntArchenemy) {
                 variantType = archenemyType.contains("Classic") ? GameType.Archenemy : GameType.ArchenemyRumble;
                 comboArchenemy.setEnabled(vntArchenemy.isSelected());
@@ -954,12 +954,13 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                     appliedVariants.remove(GameType.ArchenemyRumble);
                 }
             }
-            
-            if ( null != variantType ) {
+
+            if (null != variantType) {
                 if (arg0.getStateChange() == ItemEvent.SELECTED) {
                     appliedVariants.add(variantType);
                     currentGameMode = variantType;
-                } else {
+                }
+                else {
                     appliedVariants.remove(variantType);
                     if (currentGameMode == variantType) {
                     	currentGameMode = GameType.Constructed;
@@ -988,7 +989,6 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
 		}
     };
 
-
     private ActionListener nameListener = new ActionListener() {
     	@Override
 		public void actionPerformed(ActionEvent e) {
@@ -1013,7 +1013,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
                 cdp.setCard(Card.getCardForUi((PaperCard) obj));
                 cdp.setVisible(true);
                 refreshPanels(false, true);
-            } else {
+            }
+            else {
                 pp.setVanguardButtonText((String) obj);
                 cdp.setVisible(false);
             }
