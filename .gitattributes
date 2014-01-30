@@ -8848,6 +8848,7 @@ forge-gui/res/cardsfolder/p/pact_of_negation.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pact_of_the_titan.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pain_kami.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/p/pain_magnification.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/p/pain_seer.txt -text
 forge-gui/res/cardsfolder/p/pain_suffering.txt -text
 forge-gui/res/cardsfolder/p/painbringer.txt -text svneol=unset#text/plain
 forge-gui/res/cardsfolder/p/painful_memories.txt svneol=native#text/plain
