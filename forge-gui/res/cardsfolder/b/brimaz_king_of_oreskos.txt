@@ -7,4 +7,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTokenAttacking | TriggerZo
 SVar:TrigTokenAttacking:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Cat Soldier | TokenTypes$ Creature,Cat,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Vigilance | TokenAttacking$ True
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigTokenBlocking | TriggerDescription$ Whenever CARDNAME blocks a creature, put a 1/1 white Cat Soldier creature token with vigilance onto the battlefield blocking that creature.
 SVar:TrigTokenBlocking:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Cat Soldier | TokenTypes$ Creature,Cat,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Vigilance | TokenBlocking$ TriggeredAttacker
+SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brimaz_king_of_oreskos.jpg

@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | CheckSVar$ Othe
 SVar:X:Count$Valid Treefolk.YouCtrl/Plus.FOREST
 SVar:FOREST:Count$Valid Forest.YouCtrl
 SVar:OtherTREEFOLK:Count$Valid Treefolk.YouCtrl+Other
-SVar:BuffedBy:Forest
-SVar:BuffedBy:Treefolk
+SVar:BuffedBy:Forest,Treefolk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_dourbark.jpg
 Oracle:Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control.\nDauntless Dourbark has trample as long as you control another Treefolk.
