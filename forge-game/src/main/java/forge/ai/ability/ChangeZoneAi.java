@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -18,15 +17,12 @@ import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
-import forge.card.CardCharacteristicName;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.AttachEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -41,9 +37,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 public class ChangeZoneAi extends SpellAbilityAi {
@@ -1088,172 +1082,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return true;
     }
 
-    /**
-     * <p>
-     * changeHiddenOriginResolveAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.game.ability.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @param changeNum2 
-     * @param destination 
-     * @param fetchList 
-     * @param libraryPos2 
-     * @param origin2 
-     * @return 
-     */
-    public static List<Card> hiddenOriginResolveAI(final Player decider, final SpellAbility sa, Player player, int changeNum, List<ZoneType> origin, ZoneType destination, List<Card> fetchList, int libraryPos) {
-        
-        final Card source = sa.getSourceCard();
-        final boolean defined = sa.hasParam("Defined");
-        final Game game = decider.getGame();
-
-        final List<Card> movedCards = new ArrayList<Card>();
-        final boolean remember = sa.hasParam("RememberChanged");
-        final boolean forget = sa.hasParam("ForgetChanged");
-        final boolean champion = sa.hasParam("Champion");
-        final boolean imprint = sa.hasParam("Imprint");
-        final String totalcmc = sa.getParam("WithTotalCMC");
-        int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
-
-        for (int i = 0; i < changeNum; i++) {
-            if (sa.hasParam("DifferentNames")) {
-                for (Card c : movedCards) {
-                    fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
-                }
-            }
-            if (totalcmc != null) {
-                if (totcmc >= 0) {
-                    fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), decider, source);
-                }
-            }
-            if ((fetchList.size() == 0) || (destination == null)) {
-                break;
-            }
-
-            // Improve the AI for fetching.
-            Card c = null;
-            if (sa.hasParam("AtRandom")) {
-                c = Aggregates.random(fetchList);
-            } else if (defined) {
-                c = fetchList.get(0);
-            } else {
-                c = chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
-            }
-
-            movedCards.add(c);
-            fetchList.remove(c);
-            if (totalcmc != null) {
-                totcmc -= c.getCMC();
-            }
-        }
-
-        for (final Card c : movedCards) {
-            Card movedCard = null;
-            if (ZoneType.Library.equals(destination)) {
-                movedCard = game.getAction().moveToLibrary(c, libraryPos);
-            } else if (ZoneType.Battlefield.equals(destination)) {
-                if (sa.hasParam("Tapped")) {
-                    c.setTapped(true);
-                }
-                if (sa.hasParam("GainControl")) {
-                    Player newController = sa.getActivatingPlayer();
-                    if (sa.hasParam("NewController")) {
-                        newController = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa).get(0);
-                    } 
-                    c.setController(newController, game.getNextTimestamp());
-                }
-
-                if (sa.hasParam("AttachedTo")) {
-                    List<Card> list = AbilityUtils.getDefinedCards(sa.getSourceCard(),
-                            sa.getParam("AttachedTo"), sa);
-                    if (list.isEmpty()) {
-                        list = game.getCardsIn(ZoneType.Battlefield);
-                        list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), c.getController(), c);
-                    }
-                    if (!list.isEmpty()) {
-                        final Card attachedTo = ComputerUtilCard.getBestAI(list);
-                        if (c.isEnchanting()) {
-                            // If this Card is already Enchanting something, need
-                            // to unenchant it, then clear out the commands
-                            final GameEntity oldEnchanted = c.getEnchanting();
-                            c.removeEnchanting(oldEnchanted);
-                        }
-                        c.enchantEntity(attachedTo);
-                    } else { // When it should enter the battlefield attached to an illegal permanent it fails
-                        continue;
-                    }
-                }
-
-                if (sa.hasParam("Attacking")) {
-                    final Combat combat = game.getCombat();
-                    if ( null != combat ) {
-                        final List<GameEntity> e = combat.getDefenders();
-                        final GameEntity defender = player.getController().chooseSingleEntityForEffect(e, sa, "Declare " + c);
-                        combat.addAttacker(c, defender);
-                    }
-                }
-                if (sa.hasParam("Blocking")) {
-                    final Combat combat = game.getCombat();
-                    if ( null != combat ) {
-                        List<Card> attackers = AbilityUtils.getDefinedCards(source, sa.getParam("Blocking"), sa);
-                        if (!attackers.isEmpty()) {
-                            Card attacker = attackers.get(0);
-                            if (combat.isAttacking(attacker)) {
-                                combat.addBlocker(attacker, c);
-                                combat.orderAttackersForDamageAssignment(c);
-                            }
-                        }
-                    }
-                }
-                // Auras without Candidates stay in their current location
-                if (c.isAura()) {
-                    final SpellAbility saAura = AttachEffect.getAttachSpellAbility(c);
-                    if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
-                        continue;
-                    }
-                }
-
-                movedCard = game.getAction().moveTo(c.getController().getZone(destination), c);
-                if (sa.hasParam("Tapped")) {
-                    movedCard.setTapped(true);
-                }
-            } else if (destination.equals(ZoneType.Exile)) {
-                movedCard = game.getAction().exile(c);
-                if (sa.hasParam("ExileFaceDown")) {
-                    movedCard.setState(CardCharacteristicName.FaceDown);
-                }
-            } else {
-                movedCard = game.getAction().moveTo(destination, c);
-            }
-
-            if (champion) {
-                final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                runParams.put("Card", source);
-                runParams.put("Championed", c);
-                game.getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
-            }
-            
-            if (remember) {
-                source.addRemembered(movedCard);
-            }
-            if (forget) {
-                source.removeRemembered(movedCard);
-            }
-            // for imprinted since this doesn't use Target
-            if (imprint) {
-                source.addImprinted(movedCard);
-            }
-        }
-        
-        return movedCards;
-    } // end changeHiddenOriginResolveAI
-
-    private static Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, Player player, final Player decider) {
+    public static Card chooseCardToHiddenOriginChangeZone(ZoneType destination, List<ZoneType> origin, SpellAbility sa, List<Card> fetchList, Player player, final Player decider) {
 
         String type = sa.getParam("ChangeType");
         if (type == null) {
