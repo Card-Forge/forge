@@ -205,11 +205,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         // Add all waiting triggers onto the stack
         game.getTriggerHandler().runWaitingTriggers();
-
-        if (!simultaneousStackEntryList.isEmpty()) {
-            this.chooseOrderOfSimultaneousStackEntryAll();
-            //game.getAction().checkStaticAbilities();
-        }
     }
 
     /**
@@ -234,9 +229,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
      */
     public final void setResolving(final boolean b) {
         this.bResolving = b;
-        if (!this.bResolving) {
-            this.chooseOrderOfSimultaneousStackEntryAll();
-        }
     }
 
     /**
@@ -465,10 +457,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put("Target", sp.getTargetCard());
 
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
-        }
-        
-        if (!this.simultaneousStackEntryList.isEmpty()) {
-            chooseOrderOfSimultaneousStackEntryAll();
         }
     }
 
@@ -780,22 +768,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         this.simultaneousStackEntryList.add(sa);
     }
 
-
-    public final void chooseOrderOfSimultaneousStackEntryAll() {
-        final Player playerTurn = game.getPhaseHandler().getPlayerTurn();
-
-        this.chooseOrderOfSimultaneousStackEntry(playerTurn);
-
-        if (playerTurn != null) {
-            for(final Player other : playerTurn.getGame().getPlayers()) {
-                if ( other == playerTurn ) continue;
-                this.chooseOrderOfSimultaneousStackEntry(other);
-            }
-        }
-    }
-
-
-    private final void chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
+    public final void chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
         if (this.simultaneousStackEntryList.isEmpty()) {
             return;
         }

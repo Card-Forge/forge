@@ -874,9 +874,8 @@ public class GameAction {
 
             if (game.getTriggerHandler().runWaitingTriggers()) {
                 checkAgain = true;
-                // Place triggers on stack
-                game.getStack().chooseOrderOfSimultaneousStackEntryAll();
             }
+            
             boolean yamazaki = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Brothers Yamazaki")).size() ==  2;
             for (Player p : game.getPlayers()) {
                 if (this.handleLegendRule(p, yamazaki)) {

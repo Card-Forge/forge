@@ -166,8 +166,6 @@ public class PhaseHandler implements java.io.Serializable {
      *            a {@link forge.game.player.Player} object.
      */
     public final void setPriority(final Player p) {
-        game.getStack().chooseOrderOfSimultaneousStackEntryAll();
-
         this.pFirstPriority = p;
         this.pPlayerPriority = p;
     }
@@ -984,6 +982,7 @@ public class PhaseHandler implements java.io.Serializable {
                 // SBA could lead to game over
                 if (game.isGameOver()) { return; }
 
+                game.getStack().chooseOrderOfSimultaneousStackEntry(pPlayerPriority);
                 pPlayerPriority.getController().takePriority();
 
                 if (DEBUG_PHASES) {
@@ -1004,7 +1003,8 @@ public class PhaseHandler implements java.io.Serializable {
 
             if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
 
-            // System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, actingPlayer, nextPlayer));
+            if( DEBUG_PHASES )
+                System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, pPlayerPriority, nextPlayer));
             if (getFirstPriority() == nextPlayer) {
                 if (game.getStack().isEmpty()) {
                     this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
@@ -1017,7 +1017,6 @@ public class PhaseHandler implements java.io.Serializable {
                 }
                 else if (!game.getStack().hasSimultaneousStackEntries()) {
                     game.getStack().resolveStack();
-                    game.getStack().chooseOrderOfSimultaneousStackEntryAll();
                 }
             }
             else {

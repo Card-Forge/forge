@@ -424,7 +424,7 @@ public final class GuiDisplayUtil {
         final Player player = GuiChoose.oneOrNone("Which player should roll?", players);
         if (player == null) { return; }
 
-        PlanarDice res = GuiChoose.oneOrNone("Choose result", PlanarDice.values());
+        final PlanarDice res = GuiChoose.oneOrNone("Choose result", PlanarDice.values());
         if (res == null) { return; }
 
         System.out.println("Rigging planar dice roll: " + res.toString());
@@ -433,12 +433,12 @@ public final class GuiDisplayUtil {
         //System.out.println("ActivePlanes: " + getGame().getActivePlanes());
         //System.out.println("CommandPlanes: " + getGame().getCardsIn(ZoneType.Command));
 
-        PlanarDice.roll(player, res);
+        
 
         getGame().getAction().invoke(new Runnable() {
             @Override
             public void run() {
-                player.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
+                PlanarDice.roll(player, res);
             }
         });
     }
@@ -467,7 +467,6 @@ public final class GuiDisplayUtil {
             public void run() {
                 getGame().getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0);
                 PlanarDice.roll(p, PlanarDice.Planeswalk);
-                p.getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
             }
         });
     }

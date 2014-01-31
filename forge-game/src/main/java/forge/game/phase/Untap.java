@@ -223,7 +223,6 @@ public class Untap extends Phase {
                 c.addHiddenExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
             }
         }
-        game.getStack().chooseOrderOfSimultaneousStackEntryAll();
     } // end doUntap
 
     private static void optionalUntap(final Card c) {
