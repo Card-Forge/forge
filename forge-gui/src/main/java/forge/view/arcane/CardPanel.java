@@ -118,8 +118,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * @param newCard
      *            a {@link forge.game.card.Card} object.
      */
-    public CardPanel(final Card newCard) {
-        this.card = newCard;
+    public CardPanel(final Card card0) {
+        this.card = card0;
 
         this.setBackground(Color.black);
         this.setOpaque(false);
@@ -128,8 +128,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         createPTOverlay();
         createCardIdOverlay();
         createScaleImagePanel();
-
-        this.setCard(newCard);
     }
 
     private void createScaleImagePanel() {
@@ -355,12 +353,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     protected final void paintChildren(final Graphics g) {
         super.paintChildren(g);
 
-        if (this.isAnimationPanel) {
+        if (this.isAnimationPanel || this.card == null) {
             return;
         }
 
         if (showCardManaCostOverlay() && this.cardWidth < 200) {
-            Card card = this.getCard();
             boolean showSplitMana = card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original;
             if (!showSplitMana) {
                 drawManaCost(g, card.getManaCost(), 0);
@@ -368,11 +365,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 drawManaCost(g, card.getRules().getMainPart().getManaCost(), +12);
                 drawManaCost(g, card.getRules().getOtherPart().getManaCost(), -12);
             }
-        }
-
-        Card card = this.getCard();
-        if (card == null) {
-            return;
         }
 
         int number = 0;
@@ -396,7 +388,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int combatXSymbols = (this.cardXOffset + (this.cardWidth / 4)) - 16;
         final int stateXSymbols = (this.cardXOffset + (this.cardWidth / 2)) - 16;
         final int ySymbols = (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16;
-        // int yOff = (cardHeight/4) + 2;
+
         Combat combat = card.getGame().getCombat();
         if (combat != null) {
             if (combat.isAttacking(card)) {
