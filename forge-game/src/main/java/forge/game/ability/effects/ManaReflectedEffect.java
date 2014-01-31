@@ -53,7 +53,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String generatedReflectedMana(final SpellAbility sa, final Collection<String> colors, final Player player) {
+    private String generatedReflectedMana(final SpellAbility sa, final Collection<String> colors, final Player player) {
         // Calculate generated mana here for stack description and resolving
         final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
 
@@ -64,12 +64,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
         } else if (colors.size() == 1) {
             baseMana = MagicColor.toShortString(colors.iterator().next());
         } else {
-            if (player.isHuman()) {
-                baseMana = MagicColor.toShortString(player.getController().chooseColor("Select Mana to Produce", sa, ColorSet.fromNames(colors)));
-            } else {
-                // AI doesn't really have anything here yet
-                baseMana = sa.getManaPart().getExpressChoice();
-            }
+            baseMana = MagicColor.toShortString(player.getController().chooseColor("Select Mana to Produce", sa, ColorSet.fromNames(colors)));
         }
 
         final StringBuilder sb = new StringBuilder();

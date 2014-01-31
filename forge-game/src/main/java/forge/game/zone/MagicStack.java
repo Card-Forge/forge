@@ -226,21 +226,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     /**
      * <p>
-     * removeFromFrozenStack.
-     * </p>
-     * @param sa
-     *            a SpellAbility.
-     */
-    public final void removeFromFrozenStack(SpellAbility sa) {
-        SpellAbilityStackInstance si = this.getInstanceFromSpellAbility(sa);
-        this.frozenStack.remove(si);
-        if (this.frozenStack.isEmpty()) {
-            clearFrozen();
-        }
-    }
-
-    /**
-     * <p>
      * setResolving.
      * </p>
      * 
@@ -484,8 +469,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         
         if (!this.simultaneousStackEntryList.isEmpty()) {
             chooseOrderOfSimultaneousStackEntryAll();
-            // Why should we pass priority after adding something to a stack?
-            // game.getPhaseHandler().passPriority();
         }
     }
 

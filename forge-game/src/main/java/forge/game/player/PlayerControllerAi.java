@@ -551,8 +551,14 @@ public class PlayerControllerAi extends PlayerController {
     
     @Override
     public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
-        final String c = ComputerUtilCard.getMostProminentColor(player.getCardsIn(ZoneType.Hand));
+        // You may switch on sa.getApi() here and use sa.getParam("AILogic")
+        List<Card> hand = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
+        if( sa.getApi() == ApiType.Mana )
+            hand.addAll(player.getCardsIn(ZoneType.Stack));
+        final String c = ComputerUtilCard.getMostProminentColor(hand);
         byte chosenColorMask = MagicColor.fromName(c);
+        
+        
         if ((colors.getColor() & chosenColorMask) != 0) {
             return chosenColorMask;
         } else {
