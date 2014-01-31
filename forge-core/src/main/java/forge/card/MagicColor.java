@@ -41,6 +41,17 @@ public class MagicColor {
         }
         return 0; // colorless
     }
+    
+    public static byte fromName(char c) {
+        switch(Character.toLowerCase(c)) {
+            case 'w': return MagicColor.WHITE;
+            case 'u': return MagicColor.BLUE;
+            case 'b': return MagicColor.BLACK;
+            case 'r': return MagicColor.RED;
+            case 'g': return MagicColor.GREEN;
+        }
+        return 0; // unknown means 'colorless'
+    }
 
     public static String toShortString(String color) {
         if (color.equalsIgnoreCase(Constant.SNOW)) return "S"; // compatibility
