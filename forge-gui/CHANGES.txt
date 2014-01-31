@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2014 ver 1.5.11
+Forge Beta: 01-31-2014 ver 1.5.11
 
 
-13### cards in total.
+13568 cards in total.
 
 
 -------------
@@ -46,6 +46,10 @@ Darkpact
 New Born of the Gods branch Cards
 ---------------------------------
 
+Acolyte's Reward
+Akroan Conscriptor
+Akroan Phalanx
+Akroan Skyguard
 Arbiter of the Ideal
 Archetype of Aggression
 Archetype of Courage
@@ -54,45 +58,76 @@ Archetype of Finality
 Archetype of Imagination
 Ashiok's Adept
 Aspect of Hydra
+Asphyxiate
 Astral Cornucopia
 Bile Blight
+Black Oak of Odunos
+Bolt of Keranos
 Brimaz, King of Oreskos
 Champion of Stray Souls
 Charging Badger
+Chorus of the Tides
 Chromanticore
+Claim of Erebos
 Courser of Kruphix
 Crypsis
 Culling Mark
 Cyclops of One-Eyed Pass
 Dawn to Dusk
+Deepwater Hypnotist
 Drown in Sorrow
 Eater of Hope
+Eidolon of Countless Battles
+Elite Skirmisher
 Ephara's Enlightenment
+Ephara's Radiance
 Ephara, God of the Polis
 Epiphany Storm
+Evanescent Intellect
 Everflame Eidolon
+Excoriate
+Eye Gouge
 Fall of the Hammer
 Fanatic of Xenagos
 Fate Unraveler
 Fated Conflagration
 Fated Infatuation
 Fated Intervention
+Fated Retribution
 Fated Return
+Felhide Brawler
 Flame-Wreathed Phoenix
+Flitterstep Eidolon
 Floodtide Serpent
 Forgestoker Dragon
+Forsaken Drifters
+Ghostblade Eidolon
+Glimpse the Sun God
 Gorgon's Head
+Graverobber Spider
+Great Hart
+Griffin Dreamfinder
+Grisly Transformation
 Herald of Torment
 Hero of Iroas
 Hero of Leina Tower
 Heroes' Podium
+Hold at Bay
 Impetuous Sunchaser
+Karametra's Favor
 Karametra, God of Harvests
 Kiora's Follower
 Kiora, the Crashing Wave
+Kragma Butcher
+Kraken of the Straits
+Loyal Pegasus
 Marshmist Titan
+Meletis Astronomer
 Mindreaver
+Mischief and Mayhem
 Mogis, God of Slaughter
+Mortal's Ardor
+Mortal's Resolve
 Nessian Demolok
 Nessian Wilds Ravager
 Noble Quarry
@@ -102,18 +137,33 @@ Nyxborn Rollicker
 Nyxborn Shieldmate
 Nyxborn Triton
 Nyxborn Wolf
+Odunos River Trawler
 Oracle of Bones
+Oracle's Insight
 Oreskos Sun Guide
 Ornitharch
+Pain Seer
+Peregrination
 Pharagax Giant
 Phenax, God of Deception
+Pheres-Band Tromper
 Pillar of War
+Pinnacle of Rage
 Plea for Guidance
 Ragemonger
 Raised by Wolves
 Reap What Is Sown
+Reckless Reveler
+Retraction Helix
 Rise to the Challenge
+Sanguimancy
+Satyr Wayfinder
 Scourge of Skola Vale
+Scouring Sands
+Searing Blood
+Servant of Tymaret
+Setessan Oathsworn
+Setessan Starbreaker
 Shrike Harpy
 Silent Sentinel
 Siren of the Fanged Coast
@@ -121,9 +171,14 @@ Siren of the Silent Song
 Siren Song Lyre
 Skyreaping
 Snake of the Golden Grove
+Sphinx's Disciple
 Spirit of the Labyrinth
 Spiteful Returned
+Stormcaller of Keranos
+Stratus Walk
 Sudden Storm
+Sunbond
+Swordwise Centaur
 Temple of Enlightenment
 Temple of Malice
 Temple of Plenty
@@ -132,68 +187,12 @@ Thunder Brute
 Thunderous Might
 Tromokratis
 Unravel the AEther
-Weight of the Underworld
-Xenagos, God of Revels
-
-Bolt of Keranos
-Reckless Reveler
-Scouring Sands
-Stormcaller of Keranos
-Chorus of the Tides
-Deepwater Hypnotist
-Evanescent Intellect
-Flitterstep Eidolon
-Asphyxiate
-Grisly Transformation
-Akroan Phalanx
-Akroan Skyguard
-Great Hart
-Griffin Dreamfinder
-Hold at Bay
-Odunos River Trawler
-Eye Gouge
-Sanguimancy
-Whelming Wave
-Satyr Wayfinder
-Setessan Oathsworn
-Setessan Starbreaker
-Swordwise Centaur
-Excoriate
-Fated Retribution
-Ghostblade Eidolon
-Glimpse the Sun God
-Eidolon of Countless Battles
-Elite Skirmisher
-Ephara's Radiance
-Claim of Erebos
-Felhide Brawler
-Oracle's Insight
-Loyal Pegasus
-Mortal's Ardor
-Sunbond
 Vanguard of Brimaz
-Graverobber Spider
-Karametra's Favor
-Mischief and Mayhem
-Mortal's Resolve
-Whims of the Fates
-Peregrination
-Pheres-Band Tromper
-Pinnacle of Rage
-Akroan Conscriptor
-Kragma Butcher
-Kraken of the Straits
-Meletis Astronomer
-Acolyte's Reward
-Sphinx's Disciple
-Stratus Walk
-Retraction Helix
-Black Oak of Odunos
-Pain Seer
-Forsaken Drifters
-Servant of Tymaret
 Warchanter of Mogis
-Searing Blood
+Weight of the Underworld
+Whelming Wave
+Whims of the Fates
+Xenagos, God of Revels
 
 
 ------------
