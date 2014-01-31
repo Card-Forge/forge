@@ -185,6 +185,15 @@ Kragma Butcher
 Kraken of the Straits
 Meletis Astronomer
 Acolyte's Reward
+Sphinx's Disciple
+Stratus Walk
+Retraction Helix
+Black Oak of Odunos
+Pain Seer
+Forsaken Drifters
+Servant of Tymaret
+Warchanter of Mogis
+Searing Blood
 
 
 ------------
