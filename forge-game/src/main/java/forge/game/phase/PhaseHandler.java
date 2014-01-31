@@ -1006,7 +1006,18 @@ public class PhaseHandler implements java.io.Serializable {
             if( DEBUG_PHASES )
                 System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, pPlayerPriority, nextPlayer));
             if (getFirstPriority() == nextPlayer) {
-                if (game.getStack().isEmpty()) {
+                
+                if (game.getStack().hasSimultaneousStackEntries() && givePriorityToPlayer)
+                {
+                    Player ap = nextPlayer;
+                    Player nap = game.getNextPlayerAfter(ap);
+                    game.getStack().chooseOrderOfSimultaneousStackEntry(ap);
+                    do {
+                        game.getStack().chooseOrderOfSimultaneousStackEntry(nap);
+                        nap = game.getNextPlayerAfter(nap);
+                    } while( nap != ap);
+                    // All have passed, but there's something waiting to be added to stack. After that and give them priority again
+                } else if (game.getStack().isEmpty()) {
                     this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
 
                     // end phase
@@ -1014,10 +1025,8 @@ public class PhaseHandler implements java.io.Serializable {
                     onPhaseEnd();
                     advanceToNextPhase();
                     onPhaseBegin();
-                }
-                else if (!game.getStack().hasSimultaneousStackEntries()) {
+                } else if (!game.getStack().hasSimultaneousStackEntries())
                     game.getStack().resolveStack();
-                }
             }
             else {
                 // pass the priority to other player
