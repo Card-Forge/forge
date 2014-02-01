@@ -36,17 +36,20 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
+import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.item.InventoryItem;
 
 public abstract class ItemView<T extends InventoryItem> {
-    private final ItemManager<T> itemManager;
+    protected final ItemManager<T> itemManager;
+    protected final ItemManagerModel<T> model;
     private final FScrollPane scroller;
     private final FLabel button;
     private int heightBackup;
     private boolean isIncrementalSearchActive = false;
 
-    protected ItemView(ItemManager<T> itemManager0) {
+    protected ItemView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         this.itemManager = itemManager0;
+        this.model = model0;
         this.scroller = new FScrollPane(false);
         this.scroller.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT)));
         this.button = new FLabel.Builder().hoverable().selectable(true)
@@ -90,10 +93,6 @@ public abstract class ItemView<T extends InventoryItem> {
         });
     }
 
-    public ItemManager<T> getItemManager() {
-        return this.itemManager;
-    }
-
     public FLabel getButton() {
         return this.button;
     }
@@ -107,6 +106,7 @@ public abstract class ItemView<T extends InventoryItem> {
     }
 
     public void refresh(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
+        this.model.refreshSort();
         onRefresh();
         fixSelection(itemsToSelect, backupIndexToSelect);
     }
@@ -222,7 +222,7 @@ public abstract class ItemView<T extends InventoryItem> {
     protected void onSelectionChange() {
         final int index = getSelectedIndex();
         if (index != -1) {
-            ListSelectionEvent event = new ListSelectionEvent(getItemManager(), index, index, false);
+            ListSelectionEvent event = new ListSelectionEvent(itemManager, index, index, false);
             for (ListSelectionListener listener : itemManager.getSelectionListeners()) {
                 listener.valueChanged(event);
             }

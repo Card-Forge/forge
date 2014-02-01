@@ -18,12 +18,17 @@
 package forge.gui.toolbox.itemmanager;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.gui.toolbox.itemmanager.views.ItemColumn;
+import forge.gui.toolbox.itemmanager.views.ItemColumn.SortState;
 import forge.item.InventoryItem;
 import forge.util.ItemPool;
+import forge.util.ItemPoolSorter;
 
 /**
  * <p>
@@ -36,8 +41,11 @@ import forge.util.ItemPool;
  * @version $Id: ItemManagerModel.java 19857 2013-02-24 08:49:52Z Max mtg $
  */
 public final class ItemManagerModel<T extends InventoryItem> {
+    private static final int maxSortDepth = 3;
+
     private final ItemPool<T> data;
     private boolean infiniteSupply;
+    private final CascadeManager cascadeManager = new CascadeManager();
 
     /**
      * Instantiates a new list view model
@@ -151,5 +159,137 @@ public final class ItemManagerModel<T extends InventoryItem> {
 
     public boolean isInfinite() {
         return infiniteSupply;
+    }
+    
+    public CascadeManager getCascadeManager() {
+        return cascadeManager;
+    }
+
+    /**
+     * Resort.
+     */
+    public void refreshSort() {
+        if (this.getOrderedList().isEmpty()) { return; }
+
+        Collections.sort(this.getOrderedList(), new MyComparator());
+    }
+
+    /**
+     * Manages sorting orders for multiple depths of sorting.
+     */
+    public final class CascadeManager {
+        private final List<ItemColumn> colsToSort = new ArrayList<ItemColumn>(3);
+        private Sorter sorter = null;
+
+        // Adds a column to sort cascade list.
+        // If column is first in the cascade, inverts direction of sort.
+        // Otherwise, sorts in ascending direction.
+        public void add(final ItemColumn col0, boolean forSetup) {
+            this.sorter = null;
+
+            if (forSetup) { //just add column unmodified if setting up sort columns
+                this.colsToSort.add(0, (ItemColumn) col0);
+            }
+            else {
+                if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) { //if column already at top level, just invert
+                    col0.setSortPriority(1);
+                    col0.setSortState(col0.getSortState() == SortState.ASC ? SortState.DESC : SortState.ASC);
+                }
+                else { //otherwise move column to top level and move others down
+                    this.colsToSort.remove(col0);
+                    col0.setSortPriority(1);
+                    col0.setSortState(col0.getDefaultSortState());
+                    this.colsToSort.add(0, (ItemColumn) col0);
+                }
+
+                //decrement sort priority on remaining columns
+                for (int i = 1; i < maxSortDepth; i++) {
+                    if (colsToSort.size() == i) { break; }
+
+                    if (colsToSort.get(i).getSortPriority() != 0) {
+                        colsToSort.get(i).setSortPriority(i + 1);
+                    }
+                }
+            }
+
+            //unset and remove boundary columns.
+            if (this.colsToSort.size() > maxSortDepth) {
+                this.colsToSort.get(maxSortDepth).setSortPriority(0);
+                this.colsToSort.remove(maxSortDepth);
+            }
+        }
+
+        public Sorter getSorter() {
+            if (this.sorter == null) {
+                this.sorter = createSorter();
+            }
+            return this.sorter;
+        }
+
+        public void reset() {
+            this.colsToSort.clear();
+            this.sorter = null;
+        }
+
+        private Sorter createSorter() {
+            final List<ItemPoolSorter<InventoryItem>> oneColSorters
+                = new ArrayList<ItemPoolSorter<InventoryItem>>(maxSortDepth);
+
+            for (final ItemColumn col : this.colsToSort) {
+                oneColSorters.add(new ItemPoolSorter<InventoryItem>(
+                        col.getFnSort(),
+                        col.getSortState().equals(SortState.ASC) ? true : false));
+            }
+
+            return new Sorter(oneColSorters);
+        }
+
+        public class Sorter implements Comparator<Entry<InventoryItem, Integer>> {
+            private final List<ItemPoolSorter<InventoryItem>> sorters;
+            private final int cntFields;
+
+            /**
+             * 
+             * Sorter Constructor.
+             * 
+             * @param sorters0
+             *            a List<TableSorter<InventoryItem>>
+             */
+            public Sorter(final List<ItemPoolSorter<InventoryItem>> sorters0) {
+                this.sorters = sorters0;
+                this.cntFields = sorters0.size();
+            }
+
+            /*
+             * (non-Javadoc)
+             * 
+             * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+             */
+            @Override
+            public final int compare(final Entry<InventoryItem, Integer> arg0, final Entry<InventoryItem, Integer> arg1) {
+                int lastCompare = 0;
+                int iField = -1;
+                while ((++iField < this.cntFields) && (lastCompare == 0)) { // reverse
+                                                                            // iteration
+                    final ItemPoolSorter<InventoryItem> sorter = this.sorters.get(iField);
+                    if (sorter == null) {
+                        break;
+                    }
+                    lastCompare = sorter.compare(arg0, arg1);
+                }
+                return lastCompare;
+            }
+        }
+    }
+
+    private class MyComparator implements Comparator<Entry<T, Integer>> {
+        /* (non-Javadoc)
+         * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+         */
+        @SuppressWarnings("unchecked")
+        @Override
+        public int compare(Entry<T, Integer> o1, Entry<T, Integer> o2) {
+            return cascadeManager.getSorter().compare((Entry<InventoryItem, Integer>)o1, (Entry<InventoryItem, Integer>)o2);
+        }
     }
 } // ItemManagerModel

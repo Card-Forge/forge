@@ -15698,7 +15698,6 @@ forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ManaCostRenderer.jav
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/SColumnUtil.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/SetCodeRenderer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/StarRenderer.java -text
-forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/TableSorterCascade.java -text
 forge-gui/src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 forge-gui/src/main/java/forge/gui/toolbox/special/CardViewer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/special/CardZoomer.java -text

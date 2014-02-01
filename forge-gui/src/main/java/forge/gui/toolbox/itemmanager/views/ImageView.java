@@ -13,8 +13,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -46,16 +44,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private final CardViewDisplay display;
-    private final ItemManagerModel<T> model;
     private List<Integer> selectedIndices = new ArrayList<Integer>();
     private int imageScaleFactor = 3;
     private boolean allowMultipleSelections;
     private LayoutType layoutType = LayoutType.Spreadsheet;
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
-        super(itemManager0);
+        super(itemManager0, model0);
         this.display = new CardViewDisplay();
-        this.model = model0;
         this.display.addMouseListener(new FMouseAdapter() {
             @Override
             public void onLeftMouseDown(MouseEvent e) {
@@ -64,13 +60,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             @Override
             public void onLeftDoubleClick(MouseEvent e) {
-                getItemManager().activateSelectedItems();
+                itemManager.activateSelectedItems();
             }
 
             @Override
             public void onRightClick(MouseEvent e) {
                 selectItem(e);
-                getItemManager().showContextMenu(e);
+                itemManager.showContextMenu(e);
             }
 
             private void selectItem(MouseEvent e) {
@@ -192,7 +188,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected SkinImage getIcon() {
-        if (getItemManager().getGenericType().equals(DeckProxy.class)) {
+        if (itemManager.getGenericType().equals(DeckProxy.class)) {
             return FSkin.getImage(FSkin.EditorImages.IMG_PACK).resize(18, 18);
         }
         return FSkin.getIcon(FSkin.InterfaceIcons.ICO_CARD_IMAGE);
@@ -291,8 +287,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private Integer index;
         private boolean selected;
 
-        private ItemInfo(T item0) {
+        private ItemInfo(T item0, int index0) {
             this.item = item0;
+            this.index = index0;
         }
 
         @Override
@@ -315,20 +312,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         private void refresh() {
+            int index = 0;
             this.items.clear();
-            for (Entry<T, Integer> itemEntry : model.getItems()) {
+            for (Entry<T, Integer> itemEntry : model.getOrderedList()) {
                 for (int i = 0; i < itemEntry.getValue(); i++) {
-                    this.items.add(new ItemInfo(itemEntry.getKey()));
+                    this.items.add(new ItemInfo(itemEntry.getKey(), index++));
                 }
-            }
-            Collections.sort(this.items, new Comparator<ItemInfo>() {
-                @Override
-                public int compare(ItemInfo arg0, ItemInfo arg1) {
-                    return arg0.item.getName().compareTo(arg1.item.getName());
-                }
-            });
-            for (int i = 0; i < this.items.size(); i++) {
-                this.items.get(i).index = i;
             }
             this.refreshSections();
         }

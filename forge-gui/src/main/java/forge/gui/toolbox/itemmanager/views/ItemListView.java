@@ -66,9 +66,7 @@ import forge.gui.toolbox.FSkin.SkinnedTableHeader;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.gui.toolbox.itemmanager.SItemManagerIO;
-import forge.gui.toolbox.itemmanager.views.ItemColumn.SortState;
 import forge.item.InventoryItem;
-import forge.util.ItemPoolSorter;
 
 
 /**
@@ -104,7 +102,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
      * @param model0
      */
     public ItemListView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
-        super(itemManager0);
+        super(itemManager0, model0);
         this.tableModel = new ItemTableModel(model0);
 
         // use different selection highlight colors for focused vs. unfocused tables
@@ -112,12 +110,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             @Override
             public void onLeftDoubleClick(MouseEvent e) {
                 if (e.isConsumed()) { return; } //don't activate if inline button double clicked
-                getItemManager().activateSelectedItems();
+                itemManager.activateSelectedItems();
             }
 
             @Override
             public void onRightClick(MouseEvent e) {
-                getItemManager().showContextMenu(e);
+                itemManager.showContextMenu(e);
             }
         });
 
@@ -274,7 +272,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected void onRefresh() {
-        this.tableModel.refreshSort();
         this.tableModel.fireTableDataChanged();
     }
 
@@ -444,8 +441,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     public final class ItemTableModel extends AbstractTableModel {
         private final ItemManagerModel<T> model;
-        private final CascadeManager cascadeManager = new CascadeManager();
-        private final int maxSortDepth = 3;
 
         /**
          * Instantiates a new table model.
@@ -469,12 +464,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 }
             }
 
-            cascadeManager.reset();
+            model.getCascadeManager().reset();
 
             for (int i = sortcols.length - 1; i >= 0; i--) {
                 ItemColumn col = sortcols[i];
                 if (col != null) {
-                    cascadeManager.add(col, true);
+                    model.getCascadeManager().add(col, true);
                 }
             }
         }
@@ -537,17 +532,17 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 }
 
                 // This will invert if needed
-                ItemTableModel.this.cascadeManager.add((ItemColumn) table.getColumnModel().getColumn(columnModelIndex), false);
-                ItemTableModel.this.refreshSort();
+                model.getCascadeManager().add((ItemColumn) table.getColumnModel().getColumn(columnModelIndex), false);
+                model.refreshSort();
                 table.tableChanged(new TableModelEvent(ItemTableModel.this));
                 table.repaint();
                 ItemListView.this.setSelectedIndex(0);
-                SItemManagerIO.savePreferences(getItemManager());
+                SItemManagerIO.savePreferences(itemManager);
             }
 
             @Override
             public void onLeftMouseDragDrop(MouseEvent e) { //save preferences after column moved/resized
-                SItemManagerIO.savePreferences(getItemManager());
+                SItemManagerIO.savePreferences(itemManager);
             }
         };
 
@@ -566,15 +561,6 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             table.getTableHeader().removeMouseListener(headerMouseAdapter); //ensure listener not added multiple times
             table.getTableHeader().addMouseListener(headerMouseAdapter);
-        }
-
-        /**
-         * Resort.
-         */
-        private void refreshSort() {
-            if (this.model.getOrderedList().size() == 0) { return; }
-
-            Collections.sort(this.model.getOrderedList(), new MyComparator());
         }
 
         //========== Overridden from AbstractTableModel
@@ -614,87 +600,5 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
         //========= Custom class handling
 
-        /**
-         * Manages sorting orders for multiple depths of sorting.
-         */
-        private final class CascadeManager {
-            private final List<ItemColumn> colsToSort = new ArrayList<ItemColumn>(3);
-            private TableSorterCascade<InventoryItem> sorter = null;
-
-            // Adds a column to sort cascade list.
-            // If column is first in the cascade, inverts direction of sort.
-            // Otherwise, sorts in ascending direction.
-            public void add(final ItemColumn col0, boolean forSetup) {
-                this.sorter = null;
-
-                if (forSetup) { //just add column unmodified if setting up sort columns
-                    this.colsToSort.add(0, (ItemColumn) col0);
-                }
-                else {
-                    if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) { //if column already at top level, just invert
-                        col0.setSortPriority(1);
-                        col0.setSortState(col0.getSortState() == SortState.ASC ? SortState.DESC : SortState.ASC);
-                    }
-                    else { //otherwise move column to top level and move others down
-                        this.colsToSort.remove(col0);
-                        col0.setSortPriority(1);
-                        col0.setSortState(col0.getDefaultSortState());
-                        this.colsToSort.add(0, (ItemColumn) col0);
-                    }
-
-                    //decrement sort priority on remaining columns
-                    for (int i = 1; i < maxSortDepth; i++) {
-                        if (colsToSort.size() == i) { break; }
-
-                        if (colsToSort.get(i).getSortPriority() != 0) {
-                            colsToSort.get(i).setSortPriority(i + 1);
-                        }
-                    }
-                }
-
-                //unset and remove boundary columns.
-                if (this.colsToSort.size() > maxSortDepth) {
-                    this.colsToSort.get(maxSortDepth).setSortPriority(0);
-                    this.colsToSort.remove(maxSortDepth);
-                }
-            }
-
-            public TableSorterCascade<InventoryItem> getSorter() {
-                if (this.sorter == null) {
-                    this.sorter = createSorter();
-                }
-                return this.sorter;
-            }
-
-            public void reset() {
-                this.colsToSort.clear();
-                this.sorter = null;
-            }
-
-            private TableSorterCascade<InventoryItem> createSorter() {
-                final List<ItemPoolSorter<InventoryItem>> oneColSorters
-                    = new ArrayList<ItemPoolSorter<InventoryItem>>(maxSortDepth);
-
-                for (final ItemColumn col : this.colsToSort) {
-                    oneColSorters.add(new ItemPoolSorter<InventoryItem>(
-                            col.getFnSort(),
-                            col.getSortState().equals(SortState.ASC) ? true : false));
-                }
-
-                return new TableSorterCascade<InventoryItem>(oneColSorters);
-            }
-        }
-
-        private class MyComparator implements Comparator<Entry<T, Integer>> {
-            /* (non-Javadoc)
-             * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-             */
-            @SuppressWarnings("unchecked")
-            @Override
-            public int compare(Entry<T, Integer> o1, Entry<T, Integer> o2) {
-                return ItemTableModel.this.cascadeManager.getSorter().compare(
-                        (Entry<InventoryItem, Integer>) o1, (Entry<InventoryItem, Integer>) o2);
-            }
-        }
     }
 }
