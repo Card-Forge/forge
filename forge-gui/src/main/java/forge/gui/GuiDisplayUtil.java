@@ -398,7 +398,6 @@ public final class GuiDisplayUtil {
 
                 if (c.getRules().getType().isLand()) {
                     game.getAction().moveToPlay(forgeCard);
-
                 } else {
                     final List<SpellAbility> choices = forgeCard.getBasicSpells();
                     if (choices.isEmpty()) {
@@ -415,6 +414,7 @@ public final class GuiDisplayUtil {
                     sa.setActivatingPlayer(p);
                     HumanPlay.playSaWithoutPayingManaCost(game, sa, true);
                 }
+                game.getStack().chooseOrderOfSimultaneousStackEntry(p); // playSa could fire some triggers
             }
         });
     }

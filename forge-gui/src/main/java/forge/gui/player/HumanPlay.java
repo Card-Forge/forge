@@ -89,19 +89,14 @@ public class HumanPlay {
 
         if (sa == Ability.PLAY_LAND_SURROGATE) {
             p.playLand(sa.getSourceCard(), false);
-            p.getGame().getPhaseHandler().setPriority(p);
-            p.getGame().getAction().checkStateEffects();
             return;
         }
 
         sa.setActivatingPlayer(p);
-
         final Card source = sa.getSourceCard();
-
         source.setSplitStateToPlayAbility(sa);
 
         sa = chooseOptionalAdditionalCosts(p, sa);
-
         if (sa == null) {
             return;
         }
@@ -174,23 +169,6 @@ public class HumanPlay {
             isPaid = inputPay.isPaid();
         }
         return isPaid;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param humanPlayer
-     * @param c
-     */
-    public static final void playCardWithoutPayingManaCost(Player player, Card c) {
-        final List<SpellAbility> choices = c.getBasicSpells();
-        // TODO add Buyback, Kicker, ... , spells here
-
-        SpellAbility sa = player.getController().getAbilityToPlay(choices);
-
-        if (sa != null) {
-            sa.setActivatingPlayer(player);
-            playSaWithoutPayingManaCost(player.getGame(), sa, true);
-        }
     }
 
     /**

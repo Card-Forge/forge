@@ -148,17 +148,6 @@ public class PhaseHandler implements java.io.Serializable {
 
     /**
      * <p>
-     * getFirstPriority.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
-    private final Player getFirstPriority() {
-        return this.pFirstPriority;
-    }
-
-    /**
-     * <p>
      * setPriority.
      * </p>
      * 
@@ -964,12 +953,8 @@ public class PhaseHandler implements java.io.Serializable {
         // don't even offer priority, because it's untap of 1st turn now
         givePriorityToPlayer = false;
 
-        while (!game.isGameOver()) { // loop only while is playing
-//            if (DEBUG_PHASES) {
-//                System.out.println("\t\tStack: " + game.getStack());
-//                System.out.print(FThreads.prependThreadId(debugPrintState(givePriorityToPlayer)));
-//            }
-
+        while (!game.isGameOver()) {
+            
             if (givePriorityToPlayer) {
                 if (DEBUG_PHASES) {
                     sw.start();
@@ -990,6 +975,10 @@ public class PhaseHandler implements java.io.Serializable {
                     if( null == chosenSa )
                         break; // that means 'I pass'
 
+                    if (DEBUG_PHASES)
+                        System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
+
+                    pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
                     pPlayerPriority.getController().playChosenSpellAbility(chosenSa);
                 } while (chosenSa != null);
 
@@ -1001,7 +990,7 @@ public class PhaseHandler implements java.io.Serializable {
                 }
             }
             else if (DEBUG_PHASES){
-                System.out.print(" >>\n");
+                System.out.print(" >> (no priority given to " + this.getPriorityPlayer() + ")\n");
             }
 
             // actingPlayer is the player who may act
@@ -1012,8 +1001,8 @@ public class PhaseHandler implements java.io.Serializable {
             if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
 
             if( DEBUG_PHASES )
-                System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, pPlayerPriority, nextPlayer));
-            if (getFirstPriority() == nextPlayer) {
+                System.out.println(String.format("%s %s: %s is active, previous was %s", playerTurn, phase, pPlayerPriority, nextPlayer));
+            if (pFirstPriority == nextPlayer) {
                 if (game.getStack().isEmpty()) {
                     this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
 
