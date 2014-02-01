@@ -55,6 +55,7 @@ import forge.game.cost.CostPart;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.spellability.Ability;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -735,20 +736,24 @@ public class AiController {
         return null;
     }
     
-    public void onPriorityRecieved() {
+    public SpellAbility choooseSpellAbilityToPlay() {
         final PhaseType phase = game.getPhaseHandler().getPhase();
-        switch(phase) {
-            case MAIN1:
-            case MAIN2:
-                Log.debug("Computer " + phase.nameForUi);
-                
-                if (game.getStack().isEmpty())
-                    playLands();
-                // fall through is intended
-            default:
-                playSpellAbilities(game);
-                break;
+
+        if (game.getStack().isEmpty() && phase.isMain()) {
+            Log.debug("Computer " + phase.nameForUi);
+            List<Card> landsWannaPlay = getLandsToPlay();
+            if(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
+                Card land = chooseBestLandToPlay(landsWannaPlay);
+                if (ComputerUtil.damageFromETB(player, land) < player.getLife() || !player.canLoseLife()) {
+                    Ability.PLAY_LAND_SURROGATE.setSourceCard(land);
+                    return Ability.PLAY_LAND_SURROGATE;
+                }
+            }
         }
+
+        SpellAbility sa = getSpellAbilityToPlay();
+        // System.out.println("Chosen to play: " + sa);
+        return sa;
     }
 
     // declares blockers for given defender in a given combat
@@ -776,37 +781,6 @@ public class AiController {
             p.getController().autoPassCancel();
         }
         return combat;
-    }
-
-    private void playLands() {
-        final Player player = getPlayer();
-        List<Card> landsWannaPlay = getLandsToPlay();
-        
-        while(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
-            Card land = chooseBestLandToPlay(landsWannaPlay);
-            if (ComputerUtil.damageFromETB(player, land) >= player.getLife() && player.canLoseLife()) {
-                break;
-            }
-            landsWannaPlay.remove(land);
-            player.playLand(land, false);
-            game.getPhaseHandler().setPriority(player);
-            game.getAction().checkStateEffects();
-        }
-    }
-
-    private void playSpellAbilities(final Game game)
-    {
-        SpellAbility sa;
-        do { 
-            if ( game.isGameOver() )
-                return;
-            sa = getSpellAbilityToPlay();
-            if ( sa == null ) break;
-            //System.out.println("Playing sa: " + sa);
-            if (!ComputerUtil.handlePlayingSpellAbility(player, sa, game)) {
-                break;
-            }
-        } while ( sa != null );
     }
 
     private final SpellAbility getSpellAbilityToPlay() {

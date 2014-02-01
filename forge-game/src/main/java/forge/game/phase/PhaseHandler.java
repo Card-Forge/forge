@@ -975,15 +975,23 @@ public class PhaseHandler implements java.io.Serializable {
                     sw.start();
                 }
 
-                // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
-                game.getAction().checkStateEffects();
                 game.fireEvent(new GameEventPlayerPriority(getPlayerTurn(), getPhase(), getPriorityPlayer()));
+                SpellAbility chosenSa = null;
 
-                // SBA could lead to game over
-                if (game.isGameOver()) { return; }
+                do {
+                    // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
+                    game.getAction().checkStateEffects();
+                    if (game.isGameOver())
+                        return; // state-based effects check could lead to game over
 
-                game.getStack().chooseOrderOfSimultaneousStackEntry(pPlayerPriority);
-                pPlayerPriority.getController().takePriority();
+                    game.getStack().chooseOrderOfSimultaneousStackEntry(pPlayerPriority);
+
+                    chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
+                    if( null == chosenSa )
+                        break; // that means 'I pass'
+
+                    pPlayerPriority.getController().playChosenSpellAbility(chosenSa);
+                } while (chosenSa != null);
 
                 if (DEBUG_PHASES) {
                     sw.stop();
@@ -1006,18 +1014,7 @@ public class PhaseHandler implements java.io.Serializable {
             if( DEBUG_PHASES )
                 System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, pPlayerPriority, nextPlayer));
             if (getFirstPriority() == nextPlayer) {
-                
-                if (game.getStack().hasSimultaneousStackEntries() && givePriorityToPlayer)
-                {
-                    Player ap = nextPlayer;
-                    Player nap = game.getNextPlayerAfter(ap);
-                    game.getStack().chooseOrderOfSimultaneousStackEntry(ap);
-                    do {
-                        game.getStack().chooseOrderOfSimultaneousStackEntry(nap);
-                        nap = game.getNextPlayerAfter(nap);
-                    } while( nap != ap);
-                    // All have passed, but there's something waiting to be added to stack. After that and give them priority again
-                } else if (game.getStack().isEmpty()) {
+                if (game.getStack().isEmpty()) {
                     this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
 
                     // end phase

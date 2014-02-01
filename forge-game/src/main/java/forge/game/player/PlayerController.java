@@ -180,7 +180,8 @@ public abstract class PlayerController {
 
     public abstract void declareAttackers(Player attacker, Combat combat);
     public abstract void declareBlockers(Player defender, Combat combat);
-    public abstract void takePriority();
+    public abstract SpellAbility chooseSpellAbilityToPlay();
+    public abstract void playChosenSpellAbility(SpellAbility sa);
 
     public abstract List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard);
     public abstract boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose);

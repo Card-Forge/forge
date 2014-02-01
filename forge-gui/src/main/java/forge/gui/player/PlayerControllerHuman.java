@@ -669,26 +669,26 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     @Override
-    public void takePriority() {
+    public SpellAbility chooseSpellAbilityToPlay() {
         PhaseType phase = game.getPhaseHandler().getPhase();
+        
         boolean maySkipPriority = mayAutoPass(phase) || isUiSetToSkipPhase(game.getPhaseHandler().getPlayerTurn(), phase);
         if (game.getStack().isEmpty() && maySkipPriority) {
-            return;
+            return null;
         }
         else {
             autoPassCancel(); // probably cancel, since something has happened
         }
-
-        SpellAbility chosenSa = null;
-        do {
-            if (chosenSa != null) {
-                HumanPlay.playSpellAbility(player, chosenSa);
-                if (game.isGameOver()) { return; } //don't wait to pass priority if player conceded while in middle of playing a spell/ability
-            }
-            InputPassPriority defaultInput = new InputPassPriority(player);
-            defaultInput.showAndWait();
-            chosenSa = defaultInput.getChosenSa();
-        } while (chosenSa != null);
+        
+        InputPassPriority defaultInput = new InputPassPriority(player);
+        defaultInput.showAndWait();
+        return defaultInput.getChosenSa();
+    }
+    
+    @Override
+    public void playChosenSpellAbility(SpellAbility chosenSa)
+    {
+        HumanPlay.playSpellAbility(player, chosenSa);
     }
 
     @Override

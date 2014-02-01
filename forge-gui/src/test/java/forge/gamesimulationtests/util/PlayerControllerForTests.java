@@ -363,8 +363,9 @@ public class PlayerControllerForTests extends PlayerController {
 	}
 
 	@Override
-	public void takePriority() {
-		//TODO: just about everything...
+	public SpellAbility chooseSpellAbilityToPlay() {
+		//TODO: This method has to return the spellability chosen by player
+	    // It should not play the sa right from here. The code has been left as it is to quickly adapt to changed playercontroller interface 
 		if (playerActions != null) {
 			CastSpellFromHandAction castSpellFromHand = playerActions.getNextActionIfApplicable(player, game, CastSpellFromHandAction.class);
 			if (castSpellFromHand != null) {
@@ -376,6 +377,7 @@ public class PlayerControllerForTests extends PlayerController {
 				activateAbilityAction.activateAbility(player, game);
 			}
 		}
+		return null;
 	}
 
 	@Override
@@ -581,5 +583,11 @@ public class PlayerControllerForTests extends PlayerController {
         // TODO: AI to choose a creature to tap would go here
         // Probably along with deciding how many creatures to tap
         return new HashMap<Card, ManaCostShard>();
+    }
+
+    @Override
+    public void playChosenSpellAbility(SpellAbility sa) {
+        // TODO Play abilities from here
+        
     }
 }

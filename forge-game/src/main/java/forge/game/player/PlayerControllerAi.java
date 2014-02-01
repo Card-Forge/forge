@@ -394,12 +394,19 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void takePriority() {
-        if (!game.isGameOver()) {
-            brains.onPriorityRecieved();
-        }
-        // use separate thread for AI?
+    public SpellAbility chooseSpellAbilityToPlay() {
+        return brains.choooseSpellAbilityToPlay();
     }
+    
+    @Override
+    public void playChosenSpellAbility(SpellAbility sa)
+    {
+        // System.out.println("Playing sa: " + sa);
+        if ( sa == Ability.PLAY_LAND_SURROGATE )
+            player.playLand(sa.getSourceCard(), false);
+        else
+            ComputerUtil.handlePlayingSpellAbility(player, sa, game);
+    }    
 
     @Override
     public List<Card> chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
