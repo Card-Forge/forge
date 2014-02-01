@@ -33,6 +33,18 @@ public class RepeatAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    	
+    	 if (sa.usesTargeting()) {
+         	final Player opp = ai.getOpponent();
+             if (sa.canTarget(opp)) {
+                 sa.resetTargets();
+                 sa.getTargets().add(opp);
+             } else if (!mandatory) {
+            	 return false;
+             }
+
+         }
+
     	// setup subability to repeat
         final SpellAbility repeat = AbilityFactory.getAbility(sa.getSourceCard().getSVar(sa.getParam("RepeatSubAbility")), sa.getSourceCard());
 
