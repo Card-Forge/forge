@@ -38,12 +38,12 @@ public class PlayerDetailsPanel extends JPanel {
     private Player player;
     
     // Info labels
-    private FLabel lblHand = getBuiltFLabel(FSkin.ZoneImages.ICO_HAND, "99", "Cards in hand");
-    private FLabel lblGraveyard = getBuiltFLabel(FSkin.ZoneImages.ICO_GRAVEYARD, "99", "Cards in graveyard");
-    private FLabel lblLibrary = getBuiltFLabel(FSkin.ZoneImages.ICO_LIBRARY, "99", "Cards in library");
-    private FLabel lblExile = getBuiltFLabel(FSkin.ZoneImages.ICO_EXILE, "99", "Exiled cards");
-    private FLabel lblFlashback = getBuiltFLabel(FSkin.ZoneImages.ICO_FLASHBACK, "99", "Flashback cards");
-    private FLabel lblPoison = getBuiltFLabel(FSkin.ZoneImages.ICO_POISON, "99", "Poison counters");
+    private FLabel lblHand = getBuiltFLabel(FSkin.ZoneImages.IMG_HAND, "99", "Cards in hand");
+    private FLabel lblGraveyard = getBuiltFLabel(FSkin.ZoneImages.IMG_GRAVEYARD, "99", "Cards in graveyard");
+    private FLabel lblLibrary = getBuiltFLabel(FSkin.ZoneImages.IMG_LIBRARY, "99", "Cards in library");
+    private FLabel lblExile = getBuiltFLabel(FSkin.ZoneImages.IMG_EXILE, "99", "Exiled cards");
+    private FLabel lblFlashback = getBuiltFLabel(FSkin.ZoneImages.IMG_FLASHBACK, "99", "Flashback cards");
+    private FLabel lblPoison = getBuiltFLabel(FSkin.ZoneImages.IMG_POISON, "99", "Poison counters");
     private final List<Pair<FLabel, Byte>> manaLabels = new ArrayList<Pair<FLabel,Byte>>();
 
     private FLabel getBuiltFLabel(SkinProp p0, String s0, String s1) {

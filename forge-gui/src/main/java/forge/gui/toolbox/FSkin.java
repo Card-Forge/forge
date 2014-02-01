@@ -861,12 +861,12 @@ public enum FSkin {
 
     /** int[] can hold [xcoord, ycoord, width, height, newwidth, newheight]. */
     public enum ZoneImages implements SkinProp {
-        ICO_HAND        (new int[] {280, 40, 40, 40}),
-        ICO_LIBRARY     (new int[] {280, 0, 40, 40}),
-        ICO_EXILE       (new int[] {320, 40, 40, 40}),
-        ICO_FLASHBACK   (new int[] {280, 80, 40, 40}),
-        ICO_GRAVEYARD   (new int[] {320, 0, 40, 40}),
-        ICO_POISON      (new int[] {320, 80, 40, 40});
+        IMG_HAND        (new int[] {280, 40, 40, 40}),
+        IMG_LIBRARY     (new int[] {280, 0, 40, 40}),
+        IMG_EXILE       (new int[] {320, 40, 40, 40}),
+        IMG_FLASHBACK   (new int[] {280, 80, 40, 40}),
+        IMG_GRAVEYARD   (new int[] {320, 0, 40, 40}),
+        IMG_POISON      (new int[] {320, 80, 40, 40});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */
@@ -1085,6 +1085,8 @@ public enum FSkin {
         ICO_SAVE            (new int[] {660, 560, 20, 20}),
         ICO_SAVEAS          (new int[] {660, 580, 20, 20}),
         ICO_CLOSE           (new int[] {640, 640, 20, 20}),
+        ICO_LIST            (new int[] {640, 660, 20, 20}),
+        ICO_CARD_IMAGE           (new int[] {660, 660, 20, 20}),
         ICO_UNKNOWN         (new int[] {0, 720, 80, 80}),
         ICO_LOGO            (new int[] {480, 0, 200, 200}),
         ICO_FLIPCARD        (new int[] {400, 0, 80, 120}),

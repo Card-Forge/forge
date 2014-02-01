@@ -71,6 +71,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         catalogManager.setAlwaysNonUnique(true);
         deckManager.setAlwaysNonUnique(true);
 
+        catalogManager.setViewIndex(1);
+        deckManager.setViewIndex(1);
+
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
     }
@@ -154,7 +157,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         deck.getOrCreate(DeckSection.Sideboard).addAll(this.getDeckManager().getPool());
 
         final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
-        
+
         final int landsCount = 10;
         for(String landName : MagicColor.Constant.BASIC_LANDS) {
             final int numArt = Singletons.getMagicDb().getCommonCards().getArtCount(landName, landSet);

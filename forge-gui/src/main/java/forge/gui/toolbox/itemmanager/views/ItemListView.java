@@ -60,6 +60,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinBorder;
 import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinFont;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.FSkin.SkinnedTable;
 import forge.gui.toolbox.FSkin.SkinnedTableHeader;
 import forge.gui.toolbox.itemmanager.ItemManager;
@@ -175,6 +176,11 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
+    protected SkinImage getIcon() {
+        return FSkin.getIcon(FSkin.InterfaceIcons.ICO_LIST);
+    }
+
+    @Override
     protected String getCaption() {
         return "List View";
     }
@@ -260,6 +266,10 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     @Override
     public int getIndexAtPoint(Point p) {
         return this.table.rowAtPoint(p);
+    }
+
+    @Override
+    protected void onResize() {
     }
 
     @Override
@@ -496,27 +506,17 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             return -1;
         }
 
-        public void onSelectionChange() {
-            final int row = getSelectedIndex();
-            if (row != -1) {
-                ListSelectionEvent event = new ListSelectionEvent(getItemManager(), row, row, false);
-                for (ListSelectionListener listener : getItemManager().getSelectionListeners()) {
-                    listener.valueChanged(event);
-                }
-            }
-        }
-
         private final ListSelectionListener listSelectionListener = new ListSelectionListener() {
             @Override
             public void valueChanged(final ListSelectionEvent arg0) {
-                ItemTableModel.this.onSelectionChange();
+                ItemListView.this.onSelectionChange();
             }
         };
 
         private final FocusAdapter focusAdapter = new FocusAdapter() {
             @Override
             public void focusGained(final FocusEvent e) {
-                ItemTableModel.this.onSelectionChange();
+                ItemListView.this.onSelectionChange();
             }
         };
 

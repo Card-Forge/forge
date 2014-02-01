@@ -439,7 +439,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint {
         if (this.getIcon() != null) {
             width += this.getIcon().getIconWidth() + this.getIconTextGap();
         }
-        if (opaque) {
+        if (opaque || selectable) {
             width += 6; //account for border/padding if opaque
         }
         return width;

@@ -124,7 +124,7 @@ public enum FScreen {
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
             "Draft",
-            FSkin.getImage(FSkin.ZoneImages.ICO_HAND),
+            FSkin.getImage(FSkin.ZoneImages.IMG_HAND),
             true,
             "Leave Draft",
             NewConstants.EDITOR_LAYOUT_FILE),

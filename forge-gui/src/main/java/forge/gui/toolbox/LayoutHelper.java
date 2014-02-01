@@ -8,11 +8,16 @@ import javax.swing.JComponent;
  */
 public final class LayoutHelper {
     private final int parentWidth, parentHeight;
-    private int x, y, lineBottom;
+    private int x, y, lineBottom, gapX, gapY;
 
     public LayoutHelper(JComponent parent) {
+        this(parent, 3, 3);
+    }
+    public LayoutHelper(JComponent parent, int gapX0, int gapY0) {
         parentWidth = parent.getWidth();
         parentHeight = parent.getHeight();
+        gapX = gapX0;
+        gapY = gapY0;
     }
 
     /**
@@ -96,7 +101,7 @@ public final class LayoutHelper {
             if (y >= parentHeight) { return; }
         }
         comp.setBounds(x, y, width, height);
-        x += width + 3;
+        x += width + gapX;
         if (y + height > lineBottom) {
             lineBottom = y + height;
         }
@@ -118,7 +123,7 @@ public final class LayoutHelper {
     public void newLine() {
         if (lineBottom == y) { return; }
         x = 0;
-        y = lineBottom + 3;
+        y = lineBottom + gapY;
         lineBottom = y;
     }
 
@@ -127,7 +132,7 @@ public final class LayoutHelper {
      */
     public void newLine(int dy) {
         x = 0;
-        y = lineBottom + 3 + dy;
+        y = lineBottom + gapY + dy;
         lineBottom = y;
     }
 
@@ -157,5 +162,19 @@ public final class LayoutHelper {
      */
     public int getY() {
         return y;
+    }
+
+    /**
+     * @return gap X
+     */
+    public int getGapX() {
+        return gapX;
+    }
+
+    /**
+     * @return gap Y
+     */
+    public int getGapY() {
+        return gapY;
     }
 }

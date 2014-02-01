@@ -49,7 +49,6 @@ import com.google.common.collect.Iterables;
 import forge.Command;
 import forge.gui.GuiUtils;
 import forge.gui.toolbox.ContextMenuBuilder;
-import forge.gui.toolbox.FComboBoxWrapper;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedCheckBox;
@@ -59,6 +58,7 @@ import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.ImageView;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.ItemListView;
 import forge.gui.toolbox.itemmanager.views.ItemView;
@@ -118,9 +118,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         .fontSize(12)
         .build();
 
-    private final FComboBoxWrapper<ItemView<T>> cbViews = new FComboBoxWrapper<ItemView<T>>();
+    private final List<ItemView<T>> views = new ArrayList<ItemView<T>>();
+    private final ItemListView<T> listView;
     private ItemView<T> currentView;
-    private final ItemListView<T> table;
     private boolean initialized;
     protected boolean lockFiltering;
 
@@ -135,23 +135,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(genericType0);
-        this.table = new ItemListView<T>(this, this.model);
-        this.table.setAllowMultipleSelections(false);
-        this.currentView = this.table;
+        this.listView = new ItemListView<T>(this, this.model);
+        this.listView.setAllowMultipleSelections(false);
+        this.currentView = this.listView;
 
-        this.cbViews.addItem(this.table);
-        this.cbViews.addItemListener(new ItemListener() {
-            @SuppressWarnings("unchecked")
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                ItemView<T> view = (ItemView<T>) e.getItem();
-                if (currentView == view) { return; }
-                ItemManager.this.remove(currentView.getScroller());
-                currentView = view;
-                ItemManager.this.add(currentView.getScroller());
-                ItemManager.this.revalidate();
-            }
-        });
+        this.views.add(this.listView);
+        this.views.add(new ImageView<T>(this, this.model));
     }
 
     /**
@@ -160,8 +149,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public void initialize() {
         if (this.initialized) { return; } //avoid initializing more than once
 
-        //build table view
-        this.table.initialize();
+        //initialize views
+        for (int i = 0; i < this.views.size(); i++) {
+            this.views.get(i).initialize(i);
+        }
 
         //build enable filters checkbox
         ItemFilter.layoutCheckbox(this.chkEnableFilters);
@@ -196,7 +187,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.add(this.btnFilters);
         this.add(this.lblCaption);
         this.add(this.lblRatio);
-        this.cbViews.addTo(this);
+        for (ItemView<T> view : this.views) {
+            this.add(view.getButton());
+            view.getButton().setSelected(view == this.currentView);
+        }
         this.add(this.currentView.getScroller());
 
         final Runnable cmdAddCurrentSearch = new Runnable() {
@@ -289,7 +283,28 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     }
 
     public void setup(final Map<ColumnDef, ItemColumn> cols) {
-        this.table.setup(cols);
+        this.listView.setup(cols);
+    }
+
+    public void setViewIndex(int index) {
+        if (index < 0 || index >= this.views.size()) { return; }
+        ItemView<T> view = this.views.get(index);
+        if (this.currentView == view) { return; }
+
+        final int selectedIndexBefore = this.currentView.getSelectedIndex();
+        final Iterable<T> selectedItemsBefore = this.currentView.getSelectedItems();
+
+        this.currentView.getButton().setSelected(false);
+        this.remove(this.currentView.getScroller());
+
+        this.currentView = view;
+        this.currentView.getButton().setSelected(true);
+        this.currentView.refresh(selectedItemsBefore, selectedIndexBefore);
+
+        this.add(currentView.getScroller());
+        this.revalidate();
+        this.repaint();
+        this.focus();
     }
 
     @Override
@@ -333,8 +348,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         helper.include(this.btnFilters, 61, FTextField.HEIGHT);
         int captionWidth = this.lblCaption.getAutoSizeWidth();
         int ratioWidth = this.lblRatio.getAutoSizeWidth();
-        int cbViewsWidth = this.cbViews.getAutoSizeWidth();
-        int availableCaptionWidth = helper.getParentWidth() - cbViewsWidth - ratioWidth - helper.getX() - 9;
+        int viewButtonWidth = FTextField.HEIGHT;
+        int availableCaptionWidth = helper.getParentWidth() - viewButtonWidth * this.views.size() - ratioWidth - helper.getX() - (this.views.size() + 2) * helper.getGapX();
         if (captionWidth > availableCaptionWidth) { //truncate caption if not enough room for it
             this.lblCaption.setToolTipText(this.lblCaption.getText());
             captionWidth = availableCaptionWidth;
@@ -343,8 +358,11 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
             this.lblCaption.setToolTipText(null);
         }
         helper.include(this.lblCaption, captionWidth, FTextField.HEIGHT);
-        helper.fillLine(this.lblRatio, FTextField.HEIGHT, cbViewsWidth); //leave room for cbViews
-        helper.fillLine(this.cbViews.getComponent(), FTextField.HEIGHT);
+        helper.fillLine(this.lblRatio, FTextField.HEIGHT, (viewButtonWidth + helper.getGapX()) * this.views.size() - 1); //leave room for view buttons
+        for (ItemView<T> view : this.views) {
+            helper.include(view.getButton(), viewButtonWidth, FTextField.HEIGHT);
+            helper.offset(-1, 0);
+        }
         helper.fill(this.currentView.getScroller());
     }
 

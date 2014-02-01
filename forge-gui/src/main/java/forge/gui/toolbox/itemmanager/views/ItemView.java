@@ -24,6 +24,8 @@ import javax.swing.PopupFactory;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -31,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.item.InventoryItem;
@@ -38,6 +41,7 @@ import forge.item.InventoryItem;
 public abstract class ItemView<T extends InventoryItem> {
     private final ItemManager<T> itemManager;
     private final FScrollPane scroller;
+    private final FLabel button;
     private int heightBackup;
     private boolean isIncrementalSearchActive = false;
 
@@ -45,11 +49,14 @@ public abstract class ItemView<T extends InventoryItem> {
         this.itemManager = itemManager0;
         this.scroller = new FScrollPane(false);
         this.scroller.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT)));
+        this.button = new FLabel.Builder().hoverable().selectable(true)
+            .icon(getIcon()).iconScaleAuto(false)
+            .tooltip(getCaption()).build();
     }
 
-    public void initialize() {
+    public void initialize(final int index) {
         final JComponent comp = this.getComponent();
-        
+
         //hook incremental search functionality
         final IncrementalSearch incrementalSearch  = new IncrementalSearch();
         comp.addFocusListener(new FocusAdapter() {
@@ -60,11 +67,19 @@ public abstract class ItemView<T extends InventoryItem> {
         });
         comp.addKeyListener(incrementalSearch);
 
+        this.button.setCommand(new Runnable() {
+            @Override
+            public void run() {
+                itemManager.setViewIndex(index);
+            }
+        });
+
         this.scroller.setViewportView(comp);
         this.scroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
         this.scroller.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
+                onResize();
                 //scroll selection into view whenever view height changes
                 int height = e.getComponent().getHeight();
                 if (height != heightBackup) {
@@ -79,6 +94,10 @@ public abstract class ItemView<T extends InventoryItem> {
         return this.itemManager;
     }
 
+    public FLabel getButton() {
+        return this.button;
+    }
+
     public FScrollPane getScroller() {
         return this.scroller;
     }
@@ -91,6 +110,7 @@ public abstract class ItemView<T extends InventoryItem> {
         onRefresh();
         fixSelection(itemsToSelect, backupIndexToSelect);
     }
+    protected abstract void onResize();
     protected abstract void onRefresh();
     private void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
         if (itemsToSelect == null) {
@@ -115,7 +135,7 @@ public abstract class ItemView<T extends InventoryItem> {
         }
         return items;
     }
-    
+
     public final boolean setSelectedItem(T item) {
         return setSelectedItem(item, true);
     }
@@ -199,6 +219,16 @@ public abstract class ItemView<T extends InventoryItem> {
         }
     }
 
+    protected void onSelectionChange() {
+        final int index = getSelectedIndex();
+        if (index != -1) {
+            ListSelectionEvent event = new ListSelectionEvent(getItemManager(), index, index, false);
+            for (ListSelectionListener listener : itemManager.getSelectionListeners()) {
+                listener.valueChanged(event);
+            }
+        }
+    }
+
     public void scrollSelectionIntoView() {
         Container parent = getComponent().getParent();
         if (parent instanceof JViewport) {
@@ -233,6 +263,7 @@ public abstract class ItemView<T extends InventoryItem> {
     public abstract int getCount();
     public abstract int getSelectionCount();
     public abstract int getIndexAtPoint(Point p);
+    protected abstract SkinImage getIcon();
     protected abstract String getCaption();
     protected abstract void onSetSelectedIndex(int index);
     protected abstract void onSetSelectedIndices(Iterable<Integer> indices);

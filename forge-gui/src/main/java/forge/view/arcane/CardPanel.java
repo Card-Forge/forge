@@ -76,11 +76,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private static CardPanel dragAnimationPanel;
 
     /** Constant <code>ROUNDED_CORNER_SIZE=0.1f</code>. */
-    private static final float ROUNDED_CORNER_SIZE = 0.1f;
+    public static final float ROUNDED_CORNER_SIZE = 0.1f;
     /** Constant <code>SELECTED_BORDER_SIZE=0.01f</code>. */
-    private static final float SELECTED_BORDER_SIZE = 0.01f;
+    public static final float SELECTED_BORDER_SIZE = 0.01f;
     /** Constant <code>BLACK_BORDER_SIZE=0.03f</code>. */
-    private static final float BLACK_BORDER_SIZE = 0.03f;
+    public static final float BLACK_BORDER_SIZE = 0.03f;
 
     /**
      * Constant
