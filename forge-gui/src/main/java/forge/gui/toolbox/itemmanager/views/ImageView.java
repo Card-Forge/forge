@@ -25,6 +25,8 @@ import javax.swing.ScrollPaneConstants;
 
 import forge.ImageCache;
 import forge.gui.deckeditor.DeckProxy;
+import forge.gui.match.controllers.CDetail;
+import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.FMouseAdapter;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -448,6 +450,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             if (this.hoveredItem == item) { return false; }
             this.hoveredItem = item;
+            if (item != null) {
+                CDetail.SINGLETON_INSTANCE.showCard(item.item);
+                CPicture.SINGLETON_INSTANCE.showImage(item.item);
+            }
             return true;
         }
 
