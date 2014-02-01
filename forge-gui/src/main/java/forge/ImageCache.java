@@ -144,6 +144,9 @@ public class ImageCache {
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX))
             imageKey = getImageKey(getPaperCardFromImageKey(imageKey.substring(2)), altState, true);
 
+        if (StringUtils.isBlank(imageKey)) { 
+            return null;
+        }
         
         // Load from file and add to cache if not found in cache initially. 
         BufferedImage original = getImage(imageKey);
@@ -153,7 +156,7 @@ public class ImageCache {
         if (original == null) {
             if (useDefaultIfNotFound) { 
                 original = _defaultImage;
-                _CACHE.put(imageKey, _defaultImage);                
+                _CACHE.put(imageKey, _defaultImage);
             } else {
                 original = null;
             }            
@@ -243,7 +246,7 @@ public class ImageCache {
 
     
     private static String getImageRelativePath(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
-        final String nameToUse = getNameToUse(cp, backFace);
+        final String nameToUse = cp == null ? null : getNameToUse(cp, backFace);
         if ( null == nameToUse )
             return null;
         

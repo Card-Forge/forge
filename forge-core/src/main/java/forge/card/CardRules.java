@@ -490,4 +490,17 @@ public final class CardRules implements ICardCharacteristics {
             } // unsuported
         }
     }
+
+    public static CardRules getUnsupportedCardNamed(String name) {
+        CardAiHints cah = new CardAiHints(true, true, null, null);
+        CardFace[] faces = { new CardFace(name), null};
+        faces[0].setColor(ColorSet.fromMask(0));
+        faces[0].setType(CardType.parse(""));
+        faces[0].setOracleText("This card is not supported by Forge. Whenever you start a game with this card, it will be bugged.");
+        faces[0].setNonAbilityText("This card is not supported by Forge.\nWhenever you start a game with this card, it will be bugged.");
+        faces[0].assignMissingFields();
+        final CardRules result = new CardRules(faces, CardSplitType.None, cah);
+
+        return result;
+    }
 }

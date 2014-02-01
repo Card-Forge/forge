@@ -19,6 +19,7 @@ package forge.item;
 
 import com.google.common.base.Function;
 
+import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 
@@ -189,5 +190,9 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
             return setDiff;
         
         return Integer.compare(artIndex, o.getArtIndex());
+    }
+
+    public static PaperCard createUnsuportedCard(String cardName) {
+        return new PaperCard(CardRules.getUnsupportedCardNamed(cardName), CardEdition.UNKNOWN.getCode(), CardRarity.Unknown, 1);
     }
 }
