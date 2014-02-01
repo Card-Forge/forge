@@ -10,6 +10,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,6 +97,23 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 item.selected = true;
                 onSelectionChange();
                 item.scrollIntoView();
+            }
+
+            @Override
+            public void onMouseExit(MouseEvent e) {
+                if (display.updateHoveredItem(null, null)) {
+                    display.repaint();
+                }
+            }
+        });
+        display.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                FScrollPane scroller = ImageView.this.getScroller();
+                Point hoverScrollPos = new Point(scroller.getHorizontalScrollBar().getValue(), scroller.getVerticalScrollBar().getValue());
+                if (display.updateHoveredItem(e.getPoint(), hoverScrollPos)) {
+                    display.repaint();
+                }
             }
         });
     }
@@ -283,6 +301,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @SuppressWarnings("serial")
     private class CardViewDisplay extends JPanel {
+        private Point hoverPoint;
+        private Point hoverScrollPos;
+        private ItemInfo hoveredItem;
         private List<ItemInfo> items = new ArrayList<ItemInfo>();
         private List<Section> sections = new ArrayList<Section>();
 
@@ -411,17 +432,33 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         }
 
+        private boolean updateHoveredItem(Point hoverPoint0, Point hoverScrollPos0) {
+            this.hoverPoint = hoverPoint0;
+            this.hoverScrollPos = hoverScrollPos0;
+
+            ItemInfo item = null;
+            FScrollPane scroller = ImageView.this.getScroller();
+            if (hoverPoint0 != null) {
+                Point displayPoint = new Point(hoverPoint0);
+                //account for change in scroll positions since mouse last moved
+                displayPoint.x += scroller.getHorizontalScrollBar().getValue() - hoverScrollPos0.x;
+                displayPoint.y += scroller.getVerticalScrollBar().getValue() - hoverScrollPos0.y;
+                item = this.getItemAtPoint(displayPoint);
+            }
+
+            if (this.hoveredItem == item) { return false; }
+            this.hoveredItem = item;
+            return true;
+        }
+
         @Override
         public final void paintComponent(final Graphics g) {
             if (this.items.isEmpty()) { return; }
 
+            updateHoveredItem(this.hoverPoint, this.hoverScrollPos); //ensure hovered item up to date
+
             final Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-            final int itemWidth = this.items.get(0).getBounds().width;
-            final int selBorderSize = Math.max(1, Math.round(itemWidth * GAP_SCALE_FACTOR / 2) - 1);
-            final int borderSize = Math.round(itemWidth * CardPanel.BLACK_BORDER_SIZE);
-            final int cornerSize = Math.max(4, Math.round(itemWidth * CardPanel.ROUNDED_CORNER_SIZE));
 
             int sectionIdx = 0, pileIdx = 0;
             final int scrollTop = ImageView.this.getScroller().getVerticalScrollBar().getValue();
@@ -450,31 +487,51 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         break;
                     }
                     for (ItemInfo itemInfo : pile.items) {
-                        Rectangle bounds = itemInfo.getBounds();
-
-                        if (itemInfo.selected) {
-                            g2d.setColor(Color.green);
-                            g2d.fillRoundRect(bounds.x - selBorderSize, bounds.y - selBorderSize,
-                                    bounds.width + 2 * selBorderSize, bounds.height + 2 * selBorderSize,
-                                    cornerSize + selBorderSize, cornerSize + selBorderSize);
-                        }
-
-                        g2d.setColor(Color.black);
-                        g2d.fillRoundRect(bounds.x, bounds.y, bounds.width, bounds.height, cornerSize, cornerSize);
-
-                        BufferedImage img = ImageCache.getImage(itemInfo.item, bounds.width - 2 * borderSize, bounds.height - 2 * borderSize);
-                        if (img != null) {
-                            g2d.drawImage(img, null, bounds.x + borderSize, bounds.y + borderSize);
-                        }
-                        else {
-                            g2d.setColor(Color.white);
-                            Shape clip = g2d.getClip();
-                            g2d.setClip(bounds.x, bounds.y, bounds.width, bounds.height);
-                            g2d.drawString(itemInfo.item.getName(), bounds.x + 10, bounds.y + 20);
-                            g2d.setClip(clip);
+                        if (itemInfo != this.hoveredItem) { //save hovered item for last
+                            drawItemImage(g2d, itemInfo);
                         }
                     }
                 }
+            }
+            if (this.hoveredItem != null) { //draw hovered item on top
+                drawItemImage(g2d, this.hoveredItem);
+            }
+        }
+
+        private void drawItemImage(Graphics2D g, ItemInfo itemInfo) {
+            Rectangle bounds = itemInfo.getBounds();
+            final int itemWidth = bounds.width;
+            final int selBorderSize = Math.max(1, Math.round(itemWidth * GAP_SCALE_FACTOR / 2) - 1);
+            final int borderSize = Math.round(itemWidth * CardPanel.BLACK_BORDER_SIZE);
+            final int cornerSize = Math.max(4, Math.round(itemWidth * CardPanel.ROUNDED_CORNER_SIZE));
+
+            if (itemInfo.selected) {
+                g.setColor(Color.green);
+                g.fillRoundRect(bounds.x - selBorderSize, bounds.y - selBorderSize,
+                        bounds.width + 2 * selBorderSize, bounds.height + 2 * selBorderSize,
+                        cornerSize + selBorderSize, cornerSize + selBorderSize);
+            }
+            else if (itemInfo == this.hoveredItem) {
+                int hoverBorderSize = Math.max(1, selBorderSize / 2);
+                g.setColor(Color.green);
+                g.fillRoundRect(bounds.x - hoverBorderSize, bounds.y - hoverBorderSize,
+                        bounds.width + 2 * hoverBorderSize, bounds.height + 2 * hoverBorderSize,
+                        cornerSize + hoverBorderSize, cornerSize + hoverBorderSize);
+            }
+
+            g.setColor(Color.black);
+            g.fillRoundRect(bounds.x, bounds.y, bounds.width, bounds.height, cornerSize, cornerSize);
+
+            BufferedImage img = ImageCache.getImage(itemInfo.item, bounds.width - 2 * borderSize, bounds.height - 2 * borderSize);
+            if (img != null) {
+                g.drawImage(img, null, bounds.x + borderSize, bounds.y + borderSize);
+            }
+            else {
+                g.setColor(Color.white);
+                Shape clip = g.getClip();
+                g.setClip(bounds.x, bounds.y, bounds.width, bounds.height);
+                g.drawString(itemInfo.item.getName(), bounds.x + 10, bounds.y + 20);
+                g.setClip(clip);
             }
         }
     }
