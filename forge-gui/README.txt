@@ -1014,6 +1014,25 @@ Reveal-style list dialogs now focus OK button by default and support Escape and 
 Increased transparency of backdrop behind dialogs and make it appear over navigation bar instead of disabling navigation bar.
 
 
+- Constructed mode -
+The initial implementation of the new Constructed mode lobby screen is now available. It is a work in progress, so you should expect some rough edges and missing functionality, but the lobby screen is functional enough so it's possible to choose decks and player types and start the match normally.
+
+
+- Multiple variants -
+Multiple variants can be applied to the same match now! Planechase and Vanguard matches should now be started from the constructed match lobby by ticking the appropriate variant's checkbox in the variants panel at the top. It is not necessary to select only one variant anymore. Archenemy and Commander will hopefully also be implemented this way in the next beta release, but for now must be launched as before from the main variants menu.
+Team selection is also planned for future releases, but at this time multiplayer matches will default to free-for-all.
+The ongoing discussion of this feature can be found in the following thread:
+http://www.slightlymagic.net/forum/viewtopic.php?f=52&t=12609#p138913
+
+
+- Support for multiple card art -
+Forge now fully supports the distinction between cards with different art, which is most apparent with basic lands. It is now possible to specifically add cards with particular art in the deck editor, and cards with different art are now generated for random constructed decks, sealed deck pools, booster draft extra basic land pools, starting quest card pools, and quest card shop pools. The deck file (.dck) format has been adapted to account for this change so that the card art index can now be specified after the set, with the index starting at 1 for the first possible card art. In case you would like to avoid generating cards with random art in limited modes (sealed deck, booster draft, quest mode) in order to make your deck management easier when it comes to basic lands, you can uncheck the "Randomize Card Art in Generated Card Pools" option in the game preferences. When disabled, the generated limited mode card pools will feature one kind of each basic land with the same picture on all cards.
+
+
+- Automatic card edition adjustment -
+A deck may explicitly define the edition and art variant of each card it includes. If a deck specifies those for no card, Forge uses a special algorithm to determine which card printings were the latest by the moment all of deck's had been printed. These very editions of cards are used when loading deck into memory to reflect the flavour of the season when the deck was built.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 
