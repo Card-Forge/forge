@@ -8,6 +8,10 @@ Forge Beta: 02-##-2014 ver 1.5.12
 Release Notes
 -------------
 
+- Loading decks with unsupported cards was causing Forge to crash -
+Forge will no longer crash when there are decks with unsupported cards. These cards will appear in decks and games player starts as a dummy without cost, types, abilities, but with explanation in card's text.
+
+
 - Commander 2013 cards -
 Forge now includes many of the new Commander 2013 cards. It may take a few days/weeks before these new card pictures become available for downloading via the "Download LQ Card Pictures" button. The LQ set pictures tend to take a few more weeks/months to process before they become available for downloading via the "Download LQ Set Pictures" button. Please be patient. The Forge devs are not involved in maintaining the servers that house these pictures.
 
