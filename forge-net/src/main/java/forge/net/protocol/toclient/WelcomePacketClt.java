@@ -1,6 +1,6 @@
 package forge.net.protocol.toclient;
 
-import forge.model.BuildInfo;
+import forge.util.BuildInfo;
 
 /** 
  * TODO: Write javadoc for this type.

@@ -12,7 +12,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import forge.gui.toolbox.FOptionPane;
-import forge.model.BuildInfo;
+import forge.util.BuildInfo;
 import forge.util.FileUtil;
 
 public final class HelpMenu {

@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
+
 import forge.net.protocol.toclient.AuthResultPacketClt;
 import forge.net.protocol.toclient.ChatPacketClt;
 import forge.net.protocol.toclient.EchoPacketClt;

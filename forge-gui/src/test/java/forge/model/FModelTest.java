@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import forge.properties.ForgePreferences;
+import forge.util.BuildInfo;
 
 /**
  * Tests FModel.

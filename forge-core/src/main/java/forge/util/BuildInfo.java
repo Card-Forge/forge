@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package forge.model;
+package forge.util;
 
 import org.apache.commons.lang3.StringUtils;
 

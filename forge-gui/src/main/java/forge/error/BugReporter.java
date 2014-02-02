@@ -55,7 +55,7 @@ import forge.gui.WrapLayout;
 import forge.gui.toolbox.FHyperlink;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOptionPane;
-import forge.model.BuildInfo;
+import forge.util.BuildInfo;
 
 /**
  * The class ErrorViewer. Enables showing and saving error messages that

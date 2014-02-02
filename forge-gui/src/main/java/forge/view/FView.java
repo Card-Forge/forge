@@ -55,8 +55,8 @@ import forge.gui.toolbox.FProgressBar;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSkin.SkinnedLayeredPane;
-import forge.model.BuildInfo;
 import forge.properties.NewConstants;
+import forge.util.BuildInfo;
 
 public enum FView {
     SINGLETON_INSTANCE;
