@@ -104,12 +104,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
 
         @Override
-        public ColorSet getColor() {
-            // TODO Auto-generated method stub
-            return ColorSet.getNullColor();
-        }
-        
-        @Override
         public String getName() {
             return name;
         }

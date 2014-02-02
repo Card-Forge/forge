@@ -3,8 +3,9 @@ package forge.gui.toolbox.itemmanager.filters;
 import javax.swing.JPanel;
 
 import com.google.common.base.Predicate;
+
+import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.deck.Deck;
 import forge.gui.deckeditor.DeckProxy;
 import forge.gui.toolbox.itemmanager.ItemManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil.StatTypes;
@@ -80,43 +81,50 @@ public class DeckColorFilter extends StatTypeFilter<DeckProxy> {
     private static final Predicate<DeckProxy> IS_WHITE = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            return deck.getColor().hasAnyColor(MagicColor.WHITE);
+            ColorSet cs = deck.getColor();
+            return cs != null && cs.hasAnyColor(MagicColor.WHITE);
         }
     };
     private static final Predicate<DeckProxy> IS_BLUE = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            return deck.getColor().hasAnyColor(MagicColor.BLUE);
+            ColorSet cs = deck.getColor();
+            return cs != null && cs.hasAnyColor(MagicColor.BLUE);
         }
     };
     public static final Predicate<DeckProxy> IS_BLACK = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            return deck.getColor().hasAnyColor(MagicColor.BLACK);
+            ColorSet cs = deck.getColor();
+            return cs != null && cs.hasAnyColor(MagicColor.BLACK);
         }
     };
     public static final Predicate<DeckProxy> IS_RED = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            return deck.getColor().hasAnyColor(MagicColor.RED);
+            ColorSet cs = deck.getColor();
+            return cs != null && cs.hasAnyColor(MagicColor.RED);
         }
     };
     public static final Predicate<DeckProxy> IS_GREEN = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            return deck.getColor().hasAnyColor(MagicColor.GREEN);
+            ColorSet cs = deck.getColor();
+            return cs != null && cs.hasAnyColor(MagicColor.GREEN);
         }
     };
     private static final Predicate<DeckProxy> IS_COLORLESS = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            return deck.getColor().getColor() == 0;
+            ColorSet cs = deck.getColor();
+            return cs != null && cs.getColor() == 0;
         }
     };
     private static final Predicate<DeckProxy> IS_MULTICOLOR = new Predicate<DeckProxy>() {
         @Override
         public boolean apply(final DeckProxy deck) {
-            return BinaryUtil.bitCount(deck.getColor().getColor()) > 1;
+            ColorSet cs = deck.getColor();
+            return cs != null && BinaryUtil.bitCount(cs.getColor()) > 1;
         }
     };
 
