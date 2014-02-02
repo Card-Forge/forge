@@ -39,8 +39,6 @@ import forge.StaticData;
 
 import forge.card.CardDb;
 import forge.card.CardEdition;
-import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.card.CardDb.SetPreference;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
@@ -340,24 +338,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return tags;
     }
 
-    public ColorSet getColor() {
-         byte colorProfile = MagicColor.COLORLESS;
-
-        for (Entry<DeckSection, CardPool> deckEntry : this) {
-            switch (deckEntry.getKey()) {
-            case Main:
-            case Commander:
-                for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                    colorProfile |= poolEntry.getKey().getRules().getColor().getColor();
-                }
-                break;
-            default:
-                break; //ignore other sections
-            }
-        }
-        return ColorSet.fromMask(colorProfile);
-    }
-    
     public CardPool getAllCardsInASinglePool() {
         CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
         allCards.addAll(this.getMain());
