@@ -60,11 +60,20 @@ public final class CardDb implements ICardDatabase {
     private final CardEdition.Collection editions;
 
     public enum SetPreference {
-        Latest,
-        LatestCoreExp,
-        Earliest,
-        EarliestCoreExp,
-        Random
+        Latest(false),
+        LatestCoreExp(true),
+        Earliest(false),
+        EarliestCoreExp(true),
+        Random(false);
+        
+        final boolean filterSets;
+        private SetPreference(boolean filterIrregularSets) {
+            filterSets = filterIrregularSets;
+        }
+        
+        public boolean accept(CardEdition ed) {
+            return !filterSets || ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION || ed.getType() == Type.REPRINT; 
+        }
     }
     
     // NO GETTERS/SETTERS HERE!
@@ -243,7 +252,7 @@ public final class CardDb implements ICardDatabase {
             for(int i = sz - 1 ; i >= 0 ; i--) {
                 PaperCard pc = cards.get(i);
                 CardEdition ed = editions.get(pc.getEdition());
-                if(fromSet == SetPreference.EarliestCoreExp && ed.getType() != Type.CORE && ed.getType() != Type.EXPANSION)
+                if(!fromSet.accept(ed))
                     continue;
 
                 if((artIndex <= 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore)))
@@ -254,9 +263,9 @@ public final class CardDb implements ICardDatabase {
             for(int i = 0 ; i < sz ; i++) {
                 PaperCard pc = cards.get(i);
                 CardEdition ed = editions.get(pc.getEdition());
-                if(fromSet == SetPreference.LatestCoreExp && ed.getType() != Type.CORE && ed.getType() != Type.EXPANSION)
+                if(!fromSet.accept(ed))
                     continue;
-                
+
                 if((artIndex < 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore))) {
                     if( fromSet == SetPreference.LatestCoreExp || fromSet == SetPreference.Latest  )
                         return pc;
