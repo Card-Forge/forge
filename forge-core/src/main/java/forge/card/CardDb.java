@@ -385,27 +385,44 @@ public final class CardDb implements ICardDatabase {
     }
 
     public PaperCard createUnsuportedCard(String cardName) {
+        CardRequest request = CardRequest.fromString(cardName);
         CardEdition cE = CardEdition.UNKNOWN;
         CardRarity cR = CardRarity.Unknown;
 
         // May iterate over editions and find out if there is any card named 'cardName' but not implemented with Forge script.
-        for(CardEdition e : editions) {
-            for(CardInSet cs : e.getCards() ) {
-                if( cs.name.equals(cardName)) {
-                    cE = e;
-                    cR = cs.rarity;
-                    break;
+        if( StringUtils.isBlank(request.edition) ) {
+            for(CardEdition e : editions) {
+                for(CardInSet cs : e.getCards() ) {
+                    if( cs.name.equals(request.cardName)) {
+                        cE = e;
+                        cR = cs.rarity;
+                        break;
+                    }
                 }
+                if (cE != CardEdition.UNKNOWN)
+                    break;
             }
+        } else {
+            cE = editions.get(request.edition);
+            if ( cE != null )
+                for(CardInSet cs : cE.getCards() ) {
+                    if( cs.name.equals(request.cardName)) {
+                        cR = cs.rarity;
+                        break;
+                    }
+                }
+            else
+                cE = CardEdition.UNKNOWN;
         }
+            
 
         // Write to log that attempt,
         if (cR == CardRarity.Unknown )
             System.err.println(String.format("An unknown card found when loading Forge decks: \"%s\" Forge does not know of such a card's existence. Have you mistyped the card name?", cardName));
         else
-            System.err.println(String.format("An unsupported card was requested: \"%s\" from \"%s\" set. We're sorry, but you cannot use this card yet.", cardName, cE.getName()));
+            System.err.println(String.format("An unsupported card was requested: \"%s\" from \"%s\" set. We're sorry, but you cannot use this card yet.", request.cardName, cE.getName()));
         
-        return new PaperCard(CardRules.getUnsupportedCardNamed(cardName), cE.getCode(), cR, 1);
+        return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cE.getCode(), cR, 1);
 
     }
 
