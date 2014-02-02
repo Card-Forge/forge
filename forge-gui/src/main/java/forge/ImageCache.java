@@ -141,11 +141,11 @@ public class ImageCache {
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
         if(altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
-        if (imageKey.startsWith(ImageKeys.CARD_PREFIX))
+        if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
             imageKey = getImageKey(getPaperCardFromImageKey(imageKey.substring(2)), altState, true);
-
-        if (StringUtils.isBlank(imageKey)) { 
-            return null;
+            if (StringUtils.isBlank(imageKey)) { 
+                return _defaultImage;
+            }
         }
         
         // Load from file and add to cache if not found in cache initially. 
