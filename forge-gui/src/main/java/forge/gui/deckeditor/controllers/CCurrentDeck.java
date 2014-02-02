@@ -15,6 +15,7 @@ import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.io.DeckHtmlSerializer;
 import forge.deck.io.DeckSerializer;
+import forge.deck.io.DeckStorage;
 import forge.error.BugReporter;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.DeckImport;
@@ -50,7 +51,7 @@ public enum CCurrentDeck implements ICDoc {
         FileFilter DCK_FILTER = new FileFilter() {
             @Override
             public boolean accept(final File f) {
-                return f.getName().endsWith(DeckSerializer.FILE_EXTENSION) || f.isDirectory();
+                return f.getName().endsWith(DeckStorage.FILE_EXTENSION) || f.isDirectory();
             }
 
             @Override

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import forge.ImageKeys;
 import forge.deck.io.DeckSerializer;
+import forge.deck.io.DeckStorage;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventDifficulty;
 import forge.quest.QuestEventDuel;
@@ -41,6 +42,6 @@ public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
 
     @Override
     protected FilenameFilter getFileFilter() { 
-        return DeckSerializer.DCK_FILE_FILTER;
+        return DeckStorage.DCK_FILE_FILTER;
     }
 }

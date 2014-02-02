@@ -27,6 +27,7 @@ import com.google.common.base.Function;
 import forge.StaticData;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
+import forge.deck.io.DeckStorage;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.StorageReaderFolder;
@@ -141,7 +142,7 @@ public class PreconDeck implements InventoryItemFromSet {
 
         @Override
         protected FilenameFilter getFileFilter() {
-            return DeckSerializer.DCK_FILE_FILTER;
+            return DeckStorage.DCK_FILE_FILTER;
         }
     }
     

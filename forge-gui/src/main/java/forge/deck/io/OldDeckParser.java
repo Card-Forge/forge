@@ -166,7 +166,7 @@ public class OldDeckParser {
         final Map<String, Pair<DeckGroup, MutablePair<File, File>>> sealedDecks = new TreeMap<String, Pair<DeckGroup, MutablePair<File, File>>>(
                 String.CASE_INSENSITIVE_ORDER);
 
-        for (final File f : this.deckDir.listFiles(DeckSerializer.DCK_FILE_FILTER)) {
+        for (final File f : this.deckDir.listFiles(DeckStorage.DCK_FILE_FILTER)) {
             boolean importedOk = false;
 
             final List<String> fileLines = FileUtil.readFile(f);

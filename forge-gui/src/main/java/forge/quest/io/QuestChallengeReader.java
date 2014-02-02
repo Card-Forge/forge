@@ -8,6 +8,7 @@ import java.util.Map;
 
 import forge.ImageKeys;
 import forge.deck.io.DeckSerializer;
+import forge.deck.io.DeckStorage;
 import forge.properties.NewConstants;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestEventDifficulty;
@@ -67,6 +68,6 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
 
     @Override
     protected FilenameFilter getFileFilter() { 
-        return DeckSerializer.DCK_FILE_FILTER;
+        return DeckStorage.DCK_FILE_FILTER;
     }
 }
