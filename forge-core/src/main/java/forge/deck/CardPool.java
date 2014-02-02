@@ -71,15 +71,14 @@ public class CardPool extends ItemPool<PaperCard> {
 
         boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length()-1)) && cardName.charAt(cardName.length()-2) == CardDb.NameSetSeparator;
         int artCount = 1;
-        
+
         if (cp != null ) {
             setCode = cp.getEdition();
             cardName = cp.getName();
             artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
         }
         else {
-            System.err.println(String.format("An unsupported card was found when loading Forge decks: %s", cardName));
-            cp = PaperCard.createUnsuportedCard(cardName); 
+            cp = StaticData.instance().getCommonCards().createUnsuportedCard(cardName); 
         }
 
         if (artIndexExplicitlySet || artCount <= 1) {
@@ -146,9 +145,10 @@ public class CardPool extends ItemPool<PaperCard> {
         return sb.append(']').toString();
     }
 
+    private final static Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
     public static CardPool fromCardList(final Iterable<String> lines) {
         CardPool pool = new CardPool();
-        final Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
+
 
         if (lines == null) {
             return pool;

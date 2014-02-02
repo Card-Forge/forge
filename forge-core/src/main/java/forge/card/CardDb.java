@@ -384,6 +384,14 @@ public final class CardDb implements ICardDatabase {
         return appendCardToStringBuilder(pc, new StringBuilder()).toString();
     }
 
+    public PaperCard createUnsuportedCard(String cardName) {
+        // Write to log that attempt,
+        System.err.println(String.format("An unsupported card was found when loading Forge decks: %s", cardName));
+        
+        return new PaperCard(CardRules.getUnsupportedCardNamed(cardName), CardEdition.UNKNOWN.getCode(), CardRarity.Unknown, 1);
+        // May iterate over editions and find out if there is any card named 'cardName' but not implemented with Forge script.
+    }
+
     private final Editor editor = new Editor();
     public Editor getEditor() { return editor; }
     public class Editor {
