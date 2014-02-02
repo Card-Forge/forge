@@ -464,7 +464,11 @@ public class PlayerControllerHuman extends PlayerController {
         if (StringUtils.isBlank(message)) {
             message = "Looking at cards in {player's} " + zone.name();
         }
-        GuiChoose.reveal(formatMessage(message, owner), cards);
+        String fm = formatMessage(message, owner);
+        if ( !cards.isEmpty() )
+            GuiChoose.reveal(fm, cards);
+        else
+            GuiDialog.message("There are no cards in the named location", fm);
     }
 
     @Override
