@@ -401,9 +401,9 @@ public final class CardDb implements ICardDatabase {
 
         // Write to log that attempt,
         if (cR == CardRarity.Unknown )
-            System.err.println(String.format("An unknown card found when loading Forge decks: \"%s\" Forge does not know of such card's existance. Have you mistyped the card name?", cardName));
+            System.err.println(String.format("An unknown card found when loading Forge decks: \"%s\" Forge does not know of such a card's existence. Have you mistyped the card name?", cardName));
         else
-            System.err.println(String.format("An unsupported card was requested: \"%s\" from \"%s\" set. We're sorry, but you cannot use this card now.", cardName, cE.getName()));
+            System.err.println(String.format("An unsupported card was requested: \"%s\" from \"%s\" set. We're sorry, but you cannot use this card yet.", cardName, cE.getName()));
         
         return new PaperCard(CardRules.getUnsupportedCardNamed(cardName), cE.getCode(), cR, 1);
 
