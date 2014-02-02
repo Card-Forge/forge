@@ -77,45 +77,45 @@ public class DeckColorFilter extends StatTypeFilter<DeckProxy> {
         };
     }
 
-    private static final Predicate<Deck> IS_WHITE = new Predicate<Deck>() {
+    private static final Predicate<DeckProxy> IS_WHITE = new Predicate<DeckProxy>() {
         @Override
-        public boolean apply(final Deck deck) {
+        public boolean apply(final DeckProxy deck) {
             return deck.getColor().hasAnyColor(MagicColor.WHITE);
         }
     };
-    private static final Predicate<Deck> IS_BLUE = new Predicate<Deck>() {
+    private static final Predicate<DeckProxy> IS_BLUE = new Predicate<DeckProxy>() {
         @Override
-        public boolean apply(final Deck deck) {
+        public boolean apply(final DeckProxy deck) {
             return deck.getColor().hasAnyColor(MagicColor.BLUE);
         }
     };
-    public static final Predicate<Deck> IS_BLACK = new Predicate<Deck>() {
+    public static final Predicate<DeckProxy> IS_BLACK = new Predicate<DeckProxy>() {
         @Override
-        public boolean apply(final Deck deck) {
+        public boolean apply(final DeckProxy deck) {
             return deck.getColor().hasAnyColor(MagicColor.BLACK);
         }
     };
-    public static final Predicate<Deck> IS_RED = new Predicate<Deck>() {
+    public static final Predicate<DeckProxy> IS_RED = new Predicate<DeckProxy>() {
         @Override
-        public boolean apply(final Deck deck) {
+        public boolean apply(final DeckProxy deck) {
             return deck.getColor().hasAnyColor(MagicColor.RED);
         }
     };
-    public static final Predicate<Deck> IS_GREEN = new Predicate<Deck>() {
+    public static final Predicate<DeckProxy> IS_GREEN = new Predicate<DeckProxy>() {
         @Override
-        public boolean apply(final Deck deck) {
+        public boolean apply(final DeckProxy deck) {
             return deck.getColor().hasAnyColor(MagicColor.GREEN);
         }
     };
-    private static final Predicate<Deck> IS_COLORLESS = new Predicate<Deck>() {
+    private static final Predicate<DeckProxy> IS_COLORLESS = new Predicate<DeckProxy>() {
         @Override
-        public boolean apply(final Deck deck) {
+        public boolean apply(final DeckProxy deck) {
             return deck.getColor().getColor() == 0;
         }
     };
-    private static final Predicate<Deck> IS_MULTICOLOR = new Predicate<Deck>() {
+    private static final Predicate<DeckProxy> IS_MULTICOLOR = new Predicate<DeckProxy>() {
         @Override
-        public boolean apply(final Deck deck) {
+        public boolean apply(final DeckProxy deck) {
             return BinaryUtil.bitCount(deck.getColor().getColor()) > 1;
         }
     };
@@ -124,13 +124,13 @@ public class DeckColorFilter extends StatTypeFilter<DeckProxy> {
     public void afterFiltersApplied() {
         final ItemPool<? super DeckProxy> items = itemManager.getFilteredItems();
 
-        buttonMap.get(StatTypes.DECK_WHITE).setText(String.valueOf(items.countAll(IS_WHITE, Deck.class)));
-        buttonMap.get(StatTypes.DECK_BLUE).setText(String.valueOf(items.countAll(IS_BLUE, Deck.class)));
-        buttonMap.get(StatTypes.DECK_BLACK).setText(String.valueOf(items.countAll(IS_BLACK, Deck.class)));
-        buttonMap.get(StatTypes.DECK_RED).setText(String.valueOf(items.countAll(IS_RED, Deck.class)));
-        buttonMap.get(StatTypes.DECK_GREEN).setText(String.valueOf(items.countAll(IS_GREEN, Deck.class)));
-        buttonMap.get(StatTypes.DECK_COLORLESS).setText(String.valueOf(items.countAll(IS_COLORLESS, Deck.class)));
-        buttonMap.get(StatTypes.DECK_MULTICOLOR).setText(String.valueOf(items.countAll(IS_MULTICOLOR, Deck.class)));
+        buttonMap.get(StatTypes.DECK_WHITE).setText(String.valueOf(items.countAll(IS_WHITE, DeckProxy.class)));
+        buttonMap.get(StatTypes.DECK_BLUE).setText(String.valueOf(items.countAll(IS_BLUE, DeckProxy.class)));
+        buttonMap.get(StatTypes.DECK_BLACK).setText(String.valueOf(items.countAll(IS_BLACK, DeckProxy.class)));
+        buttonMap.get(StatTypes.DECK_RED).setText(String.valueOf(items.countAll(IS_RED, DeckProxy.class)));
+        buttonMap.get(StatTypes.DECK_GREEN).setText(String.valueOf(items.countAll(IS_GREEN, DeckProxy.class)));
+        buttonMap.get(StatTypes.DECK_COLORLESS).setText(String.valueOf(items.countAll(IS_COLORLESS, DeckProxy.class)));
+        buttonMap.get(StatTypes.DECK_MULTICOLOR).setText(String.valueOf(items.countAll(IS_MULTICOLOR, DeckProxy.class)));
 
         getWidget().revalidate();
     }
