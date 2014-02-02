@@ -730,6 +730,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     }
 
     private List<Card> changeHiddenOriginResolveHuman(final Player decider, final SpellAbility sa, Player player, int changeNum, List<ZoneType> origin, ZoneType destination, List<Card> fetchList, int libraryPos) {
+        final List<Card> movedCards = new ArrayList<Card>();
+        
         final Card source = sa.getSourceCard();
         final Game game = player.getGame();
 
@@ -741,7 +743,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
 
-        final List<Card> movedCards = new ArrayList<Card>();
+
 
         for (int i = 0; i < changeNum && destination != null; i++) {
             if (sa.hasParam("DifferentNames")) {
@@ -918,12 +920,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
 
     private List<Card> hiddenOriginResolveAI(final Player decider, final SpellAbility sa, Player player, int changeNum, List<ZoneType> origin, ZoneType destination, List<Card> fetchList, int libraryPos) {
-        
+        final List<Card> movedCards = new ArrayList<Card>();
+
         final Card source = sa.getSourceCard();
-        final boolean defined = sa.hasParam("Defined");
         final Game game = decider.getGame();
 
-        final List<Card> movedCards = new ArrayList<Card>();
+
         final boolean remember = sa.hasParam("RememberChanged");
         final boolean forget = sa.hasParam("ForgetChanged");
         final boolean champion = sa.hasParam("Champion");
@@ -942,7 +944,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), decider, source);
                 }
             }
-            if ((fetchList.size() == 0) || (destination == null)) {
+            if (fetchList.isEmpty()) {
                 break;
             }
 
@@ -950,7 +952,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             Card c = null;
             if (sa.hasParam("AtRandom")) {
                 c = Aggregates.random(fetchList);
-            } else if (defined) {
+            } else if (sa.hasParam("Defined")) {
                 c = fetchList.get(0);
             } else {
                 c = ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
