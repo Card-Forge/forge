@@ -4,22 +4,22 @@ import forge.card.MagicColor;
 
 /** A bitmask to represent any mana symbol as an integer. */
 public abstract class ManaAtom {
-    public static final int COLORLESS = 1 << 0;
+    public static final int COLORLESS = 1 << 7;
 
     /** The Constant WHITE. */
-    public static final int WHITE = MagicColor.WHITE; // 1 << 1;
+    public static final int WHITE = MagicColor.WHITE; 
 
     /** The Constant BLUE. */
-    public static final int BLUE = MagicColor.BLUE; // 1 << 2;
+    public static final int BLUE = MagicColor.BLUE; 
 
     /** The Constant BLACK. */
-    public static final int BLACK = MagicColor.BLACK; // 1 << 3;
+    public static final int BLACK = MagicColor.BLACK; 
 
     /** The Constant RED. */
-    public static final int RED = MagicColor.RED; // 1 << 4;
+    public static final int RED = MagicColor.RED;
 
     /** The Constant GREEN. */
-    public static final int GREEN = MagicColor.GREEN; // 1 << 5;
+    public static final int GREEN = MagicColor.GREEN;
 
     /** The Constant IS_X. */
     public static final int IS_X = 1 << 8;
