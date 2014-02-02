@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Command;
 import forge.Singletons;
+import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -103,6 +104,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
 
         @Override
+        public ColorSet getColor() {
+            // TODO Auto-generated method stub
+            return ColorSet.getNullColor();
+        }
+        
+        @Override
         public String getName() {
             return name;
         }
@@ -129,6 +136,12 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             }
             return null;
         }
+        
+        @Override
+        public boolean isGeneratedDeck() {
+            return true;
+        }
+        
     }
 
     private void updateColors() {
