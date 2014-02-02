@@ -9,7 +9,7 @@ Release Notes
 -------------
 
 - Loading decks with unsupported cards was causing Forge to crash -
-Forge will no longer crash when there are decks with unsupported cards. These cards will appear in decks and games player starts as a dummy without cost, types, abilities, but with explanation in card's text.
+Forge will no longer crash when there are decks with unsupported cards. These cards will appear in decks and games player starts as a dummy without cost, types, abilities, but with explanation in card's text. The unsupported cards will be listed in the console window as Forge is loading. Unfortunately, it is currently impossible to pinpoint which decks exactly include these unsupported cards in order to list them. However, depending on your operating system, you should be able to either use your operating system utilities or third party software to make a search inside deck files for the offending card name, locate the problematic decks and either update or remove them.
 
 
 - Commander 2013 cards -
