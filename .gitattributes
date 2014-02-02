@@ -15935,4 +15935,10 @@ forge-gui/tools/mtgdata-sets-to-forge.txt svneol=native#text/plain
 forge-gui/tools/oracleScraper.py -text
 forge-gui/tools/oracleScript.py svneol=native#text/x-python
 forge-gui/tools/packdata.xlsx -text
+forge-net/.classpath -text
+forge-net/.project -text
+forge-net/.settings/org.eclipse.core.resources.prefs -text
+forge-net/.settings/org.eclipse.jdt.core.prefs -text
+forge-net/.settings/org.eclipse.m2e.core.prefs -text
+forge-net/pom.xml -text
 /pom.xml svneol=native#text/xml
