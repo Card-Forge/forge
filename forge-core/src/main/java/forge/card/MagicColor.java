@@ -11,11 +11,11 @@ import com.google.common.collect.ImmutableList;
 public class MagicColor {
 
     public static final byte COLORLESS = 0;
-    public static final byte WHITE = 1 << 1;
-    public static final byte BLUE = 1 << 2;
-    public static final byte BLACK = 1 << 3;
-    public static final byte RED = 1 << 4;
-    public static final byte GREEN = 1 << 5;
+    public static final byte WHITE = 1 << 0;
+    public static final byte BLUE = 1 << 1;
+    public static final byte BLACK = 1 << 2;
+    public static final byte RED = 1 << 3;
+    public static final byte GREEN = 1 << 4;
 
     public static final byte ALL_COLORS = BLACK | BLUE | WHITE | RED | GREEN;
     public static final int NUMBER_OR_COLORS = 5;

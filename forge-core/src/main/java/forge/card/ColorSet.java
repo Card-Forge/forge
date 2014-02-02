@@ -62,7 +62,7 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte> {
     }
 
     public static ColorSet fromMask(final int mask) {
-        int mask32 = (mask & MagicColor.ALL_COLORS) >> 1;
+        int mask32 = mask & MagicColor.ALL_COLORS;
         if (allColors[mask32] == null) {
             allColors[mask32] = new ColorSet((byte) mask);
         }
