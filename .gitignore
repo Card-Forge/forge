@@ -19,6 +19,7 @@ forge-gui/res/pics_product
 forge-gui/target
 forge-gui/tools/PerSetTrackingResults
 forge-gui/tools/oracleScript.log
+forge-net/target
 /forge.profile.properties
 /nbactions.xml
 /pom.xml.next
