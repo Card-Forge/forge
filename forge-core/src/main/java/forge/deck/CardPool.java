@@ -187,7 +187,7 @@ public class CardPool extends ItemPool<PaperCard> {
             else
                 isFirst = false;
             
-            CardDb db = e.getKey().getRules().isVariant() ? commonDb : StaticData.instance().getVariantCards();
+            CardDb db = !e.getKey().getRules().isVariant() ? commonDb : StaticData.instance().getVariantCards();
             sb.append(e.getValue()).append(" ");
             db.appendCardToStringBuilder(e.getKey(), sb);
             

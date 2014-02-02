@@ -385,11 +385,28 @@ public final class CardDb implements ICardDatabase {
     }
 
     public PaperCard createUnsuportedCard(String cardName) {
-        // Write to log that attempt,
-        System.err.println(String.format("An unsupported card was found when loading Forge decks: %s", cardName));
-        
-        return new PaperCard(CardRules.getUnsupportedCardNamed(cardName), CardEdition.UNKNOWN.getCode(), CardRarity.Unknown, 1);
+        CardEdition cE = CardEdition.UNKNOWN;
+        CardRarity cR = CardRarity.Unknown;
+
         // May iterate over editions and find out if there is any card named 'cardName' but not implemented with Forge script.
+        for(CardEdition e : editions) {
+            for(CardInSet cs : e.getCards() ) {
+                if( cs.name.equals(cardName)) {
+                    cE = e;
+                    cR = cs.rarity;
+                    break;
+                }
+            }
+        }
+
+        // Write to log that attempt,
+        if (cR == CardRarity.Unknown )
+            System.err.println(String.format("An unknown card found when loading Forge decks: \"%s\" Forge does not know of such card's existance. Have you mistype the card name?", cardName));
+        else
+            System.err.println(String.format("An unsupported card was requested: \"%s\" from \"%s\" set. We're sorry, but you cannot use this card now.", cardName, cE.getName()));
+        
+        return new PaperCard(CardRules.getUnsupportedCardNamed(cardName), cE.getCode(), cR, 1);
+
     }
 
     private final Editor editor = new Editor();
