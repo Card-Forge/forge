@@ -590,4 +590,11 @@ public class PlayerControllerForTests extends PlayerController {
         // TODO Play abilities from here
         
     }
+
+    @Override
+    public String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp,
+            String valid, String message) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -10,18 +10,14 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
-import forge.ai.ComputerUtilCard;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.ComparableOp;
@@ -59,79 +55,46 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 String chosen = "";
 
-                while (true) {
-                    if (randomChoice) {
-                        // Currently only used for Momir Avatar, if something else gets added here, make it more generic
-                        Predicate<CardRules> baseRule = CardRulesPredicates.Presets.IS_CREATURE;
+                if (randomChoice) {
+                    // Currently only used for Momir Avatar, if something else gets added here, make it more generic
+                    Predicate<CardRules> baseRule = CardRulesPredicates.Presets.IS_CREATURE;
 
-                        String numericAmount = "X";
-                        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) :
-                            AbilityUtils.calculateAmount(host, numericAmount, sa);
+                    String numericAmount = "X";
+                    final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) :
+                        AbilityUtils.calculateAmount(host, numericAmount, sa);
 
-                        Predicate<CardRules>  additionalRule = CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount);
+                    Predicate<CardRules>  additionalRule = CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount);
 
-                        List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
-                        Predicate<PaperCard> cpp = Predicates.and(Predicates.compose(baseRule, PaperCard.FN_GET_RULES), 
-                                Predicates.compose(additionalRule, PaperCard.FN_GET_RULES));
-                        cards = Lists.newArrayList(Iterables.filter(cards, cpp));
-                        if (!cards.isEmpty()) {
-                            chosen = Aggregates.random(cards).getName();
-                        } else {
-                            chosen = "";
-                        }
-                        break;
-                    } 
-
-                    if (p.isHuman()) {
-                        final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
-                        
-                        Predicate<PaperCard> cpp = Predicates.alwaysTrue();
-                        if ( StringUtils.containsIgnoreCase(valid, "nonland") ) {
-                            cpp = Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES);
-                        }
-                        if ( StringUtils.containsIgnoreCase(valid, "nonbasic") ) {
-                            cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES);
-                        }
-                        
-                        if ( StringUtils.containsIgnoreCase(valid, "noncreature") ) {
-                            cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_CREATURE), PaperCard.FN_GET_RULES);
-                        } else if ( StringUtils.containsIgnoreCase(valid, "creature") ) {
-                            cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
-                        }
-                        
-
-                        PaperCard cp = p.getController().chooseSinglePaperCard(sa, message, cpp, sa.getSourceCard().getName());
-                        Card instanceForPlayer = Card.fromPaperCard(cp, p); // the Card instance for test needs a game to be tested
-                        if (!instanceForPlayer.isValid(valid, host.getController(), host)) 
-                            continue;
-
-                        chosen = cp.getName();
+                    List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
+                    Predicate<PaperCard> cpp = Predicates.and(Predicates.compose(baseRule, PaperCard.FN_GET_RULES), 
+                            Predicates.compose(additionalRule, PaperCard.FN_GET_RULES));
+                    cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                    if (!cards.isEmpty()) {
+                        chosen = Aggregates.random(cards).getName();
                     } else {
-                        
-                        if (sa.hasParam("AILogic")) {
-                            final String logic = sa.getParam("AILogic");
-                            if (logic.equals("MostProminentInComputerDeck")) {
-                                chosen = ComputerUtilCard.getMostProminentCardName(p.getCardsIn(ZoneType.Library));
-                            } else if (logic.equals("MostProminentInHumanDeck")) {
-                                chosen = ComputerUtilCard.getMostProminentCardName(p.getOpponent().getCardsIn(ZoneType.Library));
-                            } else if (logic.equals("BestCreatureInComputerDeck")) {
-                                chosen = ComputerUtilCard.getBestCreatureAI(p.getCardsIn(ZoneType.Library)).getName();
-                            } else if (logic.equals("RandomInComputerDeck")) {
-                                chosen = Aggregates.random(p.getCardsIn(ZoneType.Library)).getName();
-                            }
-                        } else {
-                            List<Card> list = CardLists.filterControlledBy(p.getGame().getCardsInGame(), p.getOpponent());
-                            list = CardLists.filter(list, Predicates.not(Presets.LANDS));
-                            if (!list.isEmpty()) {
-                                chosen = list.get(0).getName();
-                            }
-                        }
-                        if (chosen.equals("")) {
-                            chosen = "Morphling";
-                        }
+                        chosen = "";
                     }
-                    break;
+                    
+                } else {
+                    final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
+                    
+                    Predicate<PaperCard> cpp = Predicates.alwaysTrue();
+                    if ( StringUtils.containsIgnoreCase(valid, "nonland") ) {
+                        cpp = Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard.FN_GET_RULES);
+                    }
+                    if ( StringUtils.containsIgnoreCase(valid, "nonbasic") ) {
+                        cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES);
+                    }
+                    
+                    if ( StringUtils.containsIgnoreCase(valid, "noncreature") ) {
+                        cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_CREATURE), PaperCard.FN_GET_RULES);
+                    } else if ( StringUtils.containsIgnoreCase(valid, "creature") ) {
+                        cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
+                    }
+                    
+                    chosen = p.getController().chooseCardName(sa, cpp, valid, message);
                 }
+
                 host.setNamedCard(chosen);
                 if(!randomChoice) {
                     p.getGame().getAction().nofityOfValue(sa, host, p.getName() + " picked " + chosen, p);

@@ -15,6 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -44,6 +45,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardShields;
 import forge.game.card.CounterType;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -746,6 +748,29 @@ public class PlayerControllerAi extends PlayerController {
         // TODO: AI to choose a creature to tap would go here
         // Probably along with deciding how many creatures to tap
         return new HashMap<Card, ManaCostShard>();
+    }
+
+    @Override
+    public String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp, String valid, String message) {
+        if (sa.hasParam("AILogic")) {
+            final String logic = sa.getParam("AILogic");
+            if (logic.equals("MostProminentInComputerDeck")) {
+                return ComputerUtilCard.getMostProminentCardName(player.getCardsIn(ZoneType.Library));
+            } else if (logic.equals("MostProminentInHumanDeck")) {
+                return ComputerUtilCard.getMostProminentCardName(player.getOpponent().getCardsIn(ZoneType.Library));
+            } else if (logic.equals("BestCreatureInComputerDeck")) {
+                return ComputerUtilCard.getBestCreatureAI(player.getCardsIn(ZoneType.Library)).getName();
+            } else if (logic.equals("RandomInComputerDeck")) {
+                return Aggregates.random(player.getCardsIn(ZoneType.Library)).getName();
+            }
+        } else {
+            List<Card> list = CardLists.filterControlledBy(game.getCardsInGame(), player.getOpponent());
+            list = CardLists.filter(list, Predicates.not(Presets.LANDS));
+            if (!list.isEmpty()) {
+                return list.get(0).getName();
+            }
+        }
+        return "Morphling";
     }
 
 }

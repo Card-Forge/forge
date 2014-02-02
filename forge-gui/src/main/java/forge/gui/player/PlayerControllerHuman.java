@@ -1098,4 +1098,15 @@ public class PlayerControllerHuman extends PlayerController {
         inp.showAndWait();
         return inp.getConvokeMap();
     }
+
+    @Override
+    public String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp, String valid, String message) {
+        PaperCard cp = null;
+        while(true) {
+            cp = chooseSinglePaperCard(sa, message, cpp, sa.getSourceCard().getName());
+            Card instanceForPlayer = Card.fromPaperCard(cp, player); // the Card instance for test needs a game to be tested
+            if (instanceForPlayer.isValid(valid, sa.getSourceCard().getController(), sa.getSourceCard()))
+                return cp.getName();
+        }
+    }
 }

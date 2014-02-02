@@ -227,6 +227,8 @@ public abstract class PlayerController {
 
     public abstract Map<Card, ManaCostShard> chooseCardsForConvoke(SpellAbility sa, ManaCost manaCost, List<Card> untappedCreats);
 
+    public abstract String chooseCardName(SpellAbility sa, Predicate<PaperCard> cpp, String valid, String message);
+
     
     
 }
