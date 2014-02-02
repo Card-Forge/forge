@@ -37,6 +37,7 @@ import forge.limited.SealedCardPoolGenerator;
 import forge.limited.SealedDeckBuilder;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
+import forge.util.MyRandom;
 import forge.util.storage.IStorage;
 
 /** 
@@ -173,11 +174,18 @@ public enum CSubmenuSealed implements ICDoc {
         deck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
 
         final int landsCount = 10;
-        for (final String element : MagicColor.Constant.BASIC_LANDS) {
-            final int numArt = Singletons.getMagicDb().getCommonCards().getArtCount(element, sd.getLandSetCode());
 
+        final boolean isZendikarSet = sd.getLandSetCode().equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
+        final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
+
+        for (final String element : MagicColor.Constant.BASIC_LANDS) {
+            int numArt = Singletons.getMagicDb().getCommonCards().getArtCount(element, sd.getLandSetCode());
+            int minArtIndex = isZendikarSet ? (zendikarSetMode ? 1 : 5) : 1;
+            int maxArtIndex = isZendikarSet ? minArtIndex + 3 : numArt;
+            
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
-                for (int i = 1; i <= numArt; i++) {
+
+                for (int i = minArtIndex; i <= maxArtIndex; i++) {
                     deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode(), i, numArt > 1 ? landsCount : 30);
                 }
             } else {

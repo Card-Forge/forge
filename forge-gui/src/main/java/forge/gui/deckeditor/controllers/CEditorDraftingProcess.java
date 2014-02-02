@@ -39,6 +39,7 @@ import forge.limited.BoosterDraft;
 import forge.limited.IBoosterDraft;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.ItemPool;
+import forge.util.MyRandom;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.
@@ -157,13 +158,19 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         deck.getOrCreate(DeckSection.Sideboard).addAll(this.getDeckManager().getPool());
 
         final String landSet = IBoosterDraft.LAND_SET_CODE[0].getCode();
+        final boolean isZendikarSet = landSet.equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
+        final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
 
         final int landsCount = 10;
+
         for(String landName : MagicColor.Constant.BASIC_LANDS) {
-            final int numArt = Singletons.getMagicDb().getCommonCards().getArtCount(landName, landSet);
+            int numArt = Singletons.getMagicDb().getCommonCards().getArtCount(landName, landSet);
+            int minArtIndex = isZendikarSet ? (zendikarSetMode ? 1 : 5) : 1;
+            int maxArtIndex = isZendikarSet ? minArtIndex + 3 : numArt;
 
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
-                for (int i = 1; i <= numArt; i++) {
+
+                for (int i = minArtIndex; i <= maxArtIndex; i++) {
                     deck.get(DeckSection.Sideboard).add(landName, landSet, i, numArt > 1 ? landsCount : 30);
                 }
             } else {

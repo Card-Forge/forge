@@ -625,6 +625,7 @@ forge-gui/CHANGES.txt -text
 forge-gui/LICENSE.txt -text
 forge-gui/README.txt -text
 forge-gui/forge.profile.properties.example -text
+forge-gui/nbactions.xml -text
 forge-gui/pom.xml -text
 forge-gui/res/ai/Default.ai -text
 forge-gui/res/ai/Reckless.ai -text

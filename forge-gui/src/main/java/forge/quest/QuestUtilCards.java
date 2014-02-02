@@ -124,14 +124,17 @@ public final class QuestUtilCards {
             landCode = "M10";
         }
 
+        final boolean isZendikarSet = landCode.equals("ZEN"); // we want to generate one kind of Zendikar lands at a time only
+        final boolean zendikarSetMode = MyRandom.getRandom().nextBoolean();
+
         for (String landName : MagicColor.Constant.BASIC_LANDS) {
             int artCount = db.getArtCount(landName, landCode);
 
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_ART_IN_POOLS)) {
-                int[] artGroups = MyRandom.splitIntoRandomGroups(nBasic, artCount);
+                int[] artGroups = MyRandom.splitIntoRandomGroups(nBasic, isZendikarSet ? 4 : artCount);
 
                 for (int i = 1; i <= artGroups.length; i++) {
-                    pool.add(db.getCard(landName, landCode, i), artGroups[i - 1]);
+                    pool.add(db.getCard(landName, landCode, isZendikarSet ? (zendikarSetMode ? i : i + 4) : i), artGroups[i - 1]);
                 }
             } else {
                 pool.add(db.getCard(landName, landCode, artCount > 1 ? MyRandom.getRandom().nextInt(artCount) + 1 : 1), nBasic);
