@@ -17,16 +17,21 @@
  */
 package forge.deck;
 
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
+
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
+import forge.util.ItemPoolSorter;
 import forge.util.MyRandom;
 
 /**
@@ -92,6 +97,8 @@ public class CardPool extends ItemPool<PaperCard> {
             }
         }
     }
+    
+    
 
     /**
      * Add all from a List of CardPrinted.
@@ -163,4 +170,28 @@ public class CardPool extends ItemPool<PaperCard> {
         }
         return pool;
     }
+    
+    public String toCardList(String separator) {
+        List<Entry<PaperCard, Integer>> main2sort = Lists.newArrayList(this);
+        Collections.sort(main2sort, ItemPoolSorter.BY_NAME_THEN_SET);
+        final CardDb commonDb = StaticData.instance().getCommonCards();
+        StringBuilder sb = new StringBuilder();
+        
+        boolean isFirst = true;
+        
+        for (final Entry<PaperCard, Integer> e : main2sort) {
+            if(!isFirst)
+                sb.append(separator);
+            else
+                isFirst = false;
+            
+            CardDb db = e.getKey().getRules().isVariant() ? commonDb : StaticData.instance().getVariantCards();
+            sb.append(e.getValue()).append(" ");
+            db.appendCardToStringBuilder(e.getKey(), sb);
+            
+        }
+        return sb.toString();
+    }
+
+ 
 }

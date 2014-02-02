@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.ImageKeys;
-import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.properties.NewConstants;
 import forge.quest.QuestEventChallenge;
@@ -50,7 +49,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         String humanDeck = sectionQuest.get("HumanDeck", null);
         if (humanDeck != null) {
             File humanFile = new File(NewConstants.DEFAULT_CHALLENGES_DIR, humanDeck); // Won't work in other worlds!
-            qc.setHumanDeck(Deck.fromFile(humanFile));
+            qc.setHumanDeck(DeckSerializer.fromFile(humanFile));
         }
 
         // Common properties
@@ -62,7 +61,7 @@ public class QuestChallengeReader extends StorageReaderFolder<QuestEventChalleng
         qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon"));
 
         // Deck
-        qc.setEventDeck(Deck.fromSections(contents));
+        qc.setEventDeck(DeckSerializer.fromSections(contents));
         return qc;
     }
 

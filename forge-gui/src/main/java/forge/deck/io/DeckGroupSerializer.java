@@ -27,7 +27,6 @@ import com.google.common.collect.ImmutableList;
 
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
-import forge.util.FileUtil;
 import forge.util.IItemSerializer;
 import forge.util.storage.StorageReaderFolder;
 
@@ -59,10 +58,10 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
     public void save(final DeckGroup unit) {
         final File f = this.makeFileFor(unit);
         f.mkdir();
-        FileUtil.writeFile(new File(f, this.humanDeckFile), unit.getHumanDeck().save());
+        DeckSerializer.writeDeck(unit.getHumanDeck(), new File(f, this.humanDeckFile));
         final List<Deck> aiDecks = unit.getAiDecks();
         for (int i = 1; i <= aiDecks.size(); i++) {
-            FileUtil.writeFile(new File(f, "ai-" + i + ".dck"), aiDecks.get(i - 1).save());
+            DeckSerializer.writeDeck(aiDecks.get(i - 1), new File(f, "ai-" + i + ".dck"));
         }
     }
 
@@ -72,7 +71,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
     @Override
     protected final DeckGroup read(final File file) {
 
-        final Deck human = Deck.fromFile(new File(file, this.humanDeckFile));
+        final Deck human = DeckSerializer.fromFile(new File(file, this.humanDeckFile));
         if (null == human) {
             return null;
         }
@@ -85,7 +84,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
                 break;
             }
 
-            d.addAiDeck(Deck.fromFile(theFile));
+            d.addAiDeck(DeckSerializer.fromFile(theFile));
         }
         return d;
     }

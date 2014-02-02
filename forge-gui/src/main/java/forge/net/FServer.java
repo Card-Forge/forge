@@ -10,6 +10,7 @@ import com.google.common.base.Supplier;
 
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.deck.io.DeckSerializer;
 import forge.game.Game;
 import forge.game.GameLogEntry;
 import forge.game.GameRules;
@@ -120,7 +121,7 @@ public enum FServer {
     private Deck deckFromCommandLineParameter(String deckname) {
         int dotpos = deckname.lastIndexOf('.');
         if(dotpos > 0 && dotpos == deckname.length()-4)
-            return Deck.fromFile(new File(deckname));
+            return DeckSerializer.fromFile(new File(deckname));
         return Singletons.getModel().getDecks().getConstructed().get(deckname);
     }
     /**

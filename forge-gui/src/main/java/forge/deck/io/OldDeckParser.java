@@ -130,12 +130,12 @@ public class OldDeckParser {
     private void convertDrafts() {
         for (final File f : this.deckDir.listFiles(OldDeckParser.BDK_FILE_FILTER)) {
             boolean gotError = false;
-            final Deck human = Deck.fromFile(new File(f, "0.dck"));
+            final Deck human = DeckSerializer.fromFile(new File(f, "0.dck"));
             final DeckGroup d = new DeckGroup(human.getName());
             d.setHumanDeck(human);
 
             for (int i = 1; i < DeckGroupSerializer.MAX_DRAFT_PLAYERS; i++) {
-                final Deck nextAi = Deck.fromFile(new File(f, i + ".dck"));
+                final Deck nextAi = DeckSerializer.fromFile(new File(f, i + ".dck"));
                 if (nextAi == null) {
                     gotError = true;
                     break;
@@ -176,7 +176,7 @@ public class OldDeckParser {
 
             if (dh.isCustomPool()) {
                 try {
-                    this.cube.add(Deck.fromSections(sections));
+                    this.cube.add(DeckSerializer.fromSections(sections));
                     importedOk = true;
                 }
                 catch (final NoSuchElementException ex) {
@@ -196,7 +196,7 @@ public class OldDeckParser {
             switch (dh.getDeckType()) {
             case Constructed:
                 try {
-                    this.constructed.add(Deck.fromSections(sections));
+                    this.constructed.add(DeckSerializer.fromSections(sections));
                     importedOk = true;
                 } catch (final NoSuchElementException ex) {
                     if (!allowDeleteUnsupportedConstructed) {
@@ -219,7 +219,7 @@ public class OldDeckParser {
                     stored = ImmutablePair.of(new DeckGroup(name), MutablePair.of((File) null, (File) null));
                 }
 
-                final Deck deck = Deck.fromSections(sections);
+                final Deck deck = DeckSerializer.fromSections(sections);
                 if (dh.isIntendedForAi()) {
                     stored.getLeft().addAiDeck(deck);
                     stored.getRight().setRight(f);

@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Command;
 import forge.Singletons;
-import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;

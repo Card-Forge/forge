@@ -17,37 +17,21 @@
  */
 package forge.deck;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-
 import forge.StaticData;
 
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardDb.SetPreference;
-import forge.deck.io.DeckFileHeader;
-import forge.deck.io.DeckSerializer;
 import forge.item.PaperCard;
-import forge.item.IPaperCard;
-import forge.util.FileSection;
-import forge.util.FileUtil;
-import forge.util.ItemPool;
-import forge.util.ItemPoolSorter;
 
 
 
@@ -125,6 +109,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         this.parts.put(deckSection, p);
         return p;
     }
+    
+    public void putSection(DeckSection section, CardPool pool) {
+        this.parts.put(section, pool);
+    }
 
     /* (non-Javadoc)
      * @see forge.deck.DeckBase#cloneFieldsTo(forge.deck.DeckBase)
@@ -150,78 +138,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return new Deck(name0);
     }
 
-    /**
-     * From file.
-     *
-     * @param deckFile the deck file
-     * @return the deck
-     */
-    public static Deck fromFile(final File deckFile) {
-        return Deck.fromSections(FileSection.parseSections(FileUtil.readFile(deckFile)));
-    }
 
-    /**
-     * From sections.
-     *
-     * @param sections the sections
-     * @return the deck
-     */
-    public static Deck fromSections(final Map<String, List<String>> sections) {
-        return Deck.fromSections(sections, false);
-    }
-
-    /**
-     * From sections.
-     *
-     * @param sections the sections
-     * @param canThrowExtendedErrors the can throw extended errors
-     * @return the deck
-     */
-    public static Deck fromSections(final Map<String, List<String>> sections, final boolean canThrowExtendedErrors) {
-        if (sections == null || sections.isEmpty()) {
-            return null;
-        }
-
-        final DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections, canThrowExtendedErrors);
-        if (dh == null) {
-            return null;
-        }
-
-        final Deck d = new Deck(dh.getName());
-        d.setComment(dh.getComment());
-        d.tags.addAll(dh.getTags());
-
-        boolean hasExplicitlySpecifiedSet = false;
-        
-        for (Entry<String, List<String>> s : sections.entrySet()) {
-            DeckSection sec = DeckSection.smartValueOf(s.getKey());
-            if (sec == null) {
-                continue;
-            }
-            
-            for(String k : s.getValue()) 
-                if ( k.indexOf(CardDb.NameSetSeparator) > 0 )
-                    hasExplicitlySpecifiedSet = true;
-
-            CardPool pool = CardPool.fromCardList(s.getValue());
-            // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
-            IPaperCard sample = pool.get(0);
-            if (sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon())) {
-                sec = DeckSection.Planes;
-            }
-            if (sample != null && sample.getRules().getType().isScheme()) {
-                sec = DeckSection.Schemes;
-            }
-
-            d.parts.put(sec, pool);
-        }
-        
-        if (!hasExplicitlySpecifiedSet) {
-            d.convertByXitaxMethod();
-        }
-            
-        return d;
-    }
 
     public void convertByXitaxMethod() {
         CardEdition earliestSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(getAllCardsInASinglePool());
@@ -257,63 +174,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         }
         
 
-    }
-
-    private static List<String> writeCardPool(final ItemPool<PaperCard> pool) {
-        List<Entry<PaperCard, Integer>> main2sort = Lists.newArrayList(pool);
-        Collections.sort(main2sort, ItemPoolSorter.BY_NAME_THEN_SET);
-        final List<String> out = new ArrayList<String>();
-        for (final Entry<PaperCard, Integer> e : main2sort) {
-            out.add(serializeSingleCard(e.getKey(), e.getValue()));
-        }
-        return out;
-    }
-
-    private static String serializeSingleCard(PaperCard card, Integer n) {
-        final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
-        StringBuilder sb = new StringBuilder();
-        sb.append(n).append(" ").append(card.getName());
-
-        if (!hasBadSetInfo) {
-            int artCount = StaticData.instance().getCommonCards().getArtCount(card.getName(), card.getEdition());
-
-            sb.append("|").append(card.getEdition());
-
-            if (artCount > 1) {
-                sb.append("|").append(card.getArtIndex()); // indexes start at 1 to match image file name conventions
-            }
-        }
-        if(card.isFoil()) {
-            sb.append(CardDb.foilSuffix);
-        }
-        return sb.toString();
-    }
-
-    /**
-     * <p>
-     * writeDeck.
-     * </p>
-     *
-     * @return the list
-     */
-    public List<String> save() {
-        final List<String> out = new ArrayList<String>();
-        out.add(String.format("[metadata]"));
-
-        out.add(String.format("%s=%s", DeckFileHeader.NAME, this.getName().replaceAll("\n", "")));
-        // these are optional
-        if (this.getComment() != null) {
-            out.add(String.format("%s=%s", DeckFileHeader.COMMENT, this.getComment().replaceAll("\n", "")));
-        }
-        if (!this.getTags().isEmpty()) {
-            out.add(String.format("%s=%s", DeckFileHeader.TAGS, StringUtils.join(getTags(), DeckFileHeader.TAGS_SEPARATOR)));
-        }
-
-        for(Entry<DeckSection, CardPool> s : parts.entrySet()) {
-            out.add(String.format("[%s]", s.getKey().toString()));
-            out.addAll(Deck.writeCardPool(s.getValue()));
-        }
-        return out;
     }
 
     public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {

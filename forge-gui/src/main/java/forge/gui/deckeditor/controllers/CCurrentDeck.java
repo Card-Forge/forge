@@ -172,7 +172,7 @@ public enum CCurrentDeck implements ICDoc {
             try {
                 ((DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE
                         .getCurrentEditorController().getDeckController())
-                        .setModel(Deck.fromFile(file));
+                        .setModel(DeckSerializer.fromFile(file));
 
             } catch (final Exception ex) {
                 BugReporter.reportException(ex);

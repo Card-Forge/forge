@@ -134,7 +134,7 @@ public class PreconDeck implements InventoryItemFromSet {
             String description = kv.get("Description");
             String deckEdition = kv.get("set");
             String set = deckEdition == null || StaticData.instance().getEditions().get(deckEdition.toUpperCase()) == null ? "n/a" : deckEdition;
-            PreconDeck result = new PreconDeck(Deck.fromSections(sections), set, description);
+            PreconDeck result = new PreconDeck(DeckSerializer.fromSections(sections), set, description);
             result.imageFilename = imageFilename;
             return result;
         }

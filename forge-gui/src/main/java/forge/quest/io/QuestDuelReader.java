@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.ImageKeys;
-import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventDifficulty;
@@ -36,7 +35,7 @@ public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
         qc.setIconImageKey(ImageKeys.ICON_PREFIX + sectionMeta.get("Icon"));
 
         // Deck
-        qc.setEventDeck(Deck.fromSections(contents));
+        qc.setEventDeck(DeckSerializer.fromSections(contents));
         return qc;
     }
 
