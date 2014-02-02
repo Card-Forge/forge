@@ -77,8 +77,10 @@ public class CardPool extends ItemPool<PaperCard> {
             cardName = cp.getName();
             artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
         }
-        else
+        else {
+            System.err.println(String.format("An unsupported card was found when loading Forge decks: %s", cardName));
             cp = PaperCard.createUnsuportedCard(cardName); 
+        }
 
         if (artIndexExplicitlySet || artCount <= 1) {
             // either a specific art index is specified, or there is only one art, so just add the card
