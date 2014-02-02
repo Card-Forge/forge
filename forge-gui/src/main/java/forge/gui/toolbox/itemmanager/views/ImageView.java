@@ -38,16 +38,12 @@ import forge.view.arcane.CardPanel;
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float GAP_SCALE_FACTOR = 0.04f;
 
-    public enum LayoutType {
-        Spreadsheet,
-        Piles
-    }
-
     private final CardViewDisplay display;
     private List<Integer> selectedIndices = new ArrayList<Integer>();
     private int imageScaleFactor = 3;
     private boolean allowMultipleSelections;
-    private LayoutType layoutType = LayoutType.Spreadsheet;
+    private ColumnDef pileBy = null;
+    private GroupDef groupBy = null;
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
@@ -118,7 +114,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected void onResize() {
-        if (this.layoutType == LayoutType.Spreadsheet) {
+        if (this.pileBy == null) {
             display.refresh(); //need to refresh to adjust wrapping of items
         }
     }
@@ -275,7 +271,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             display.scrollRectToVisible(new Rectangle(x, y, width, height));
         }
     }
-    private class Section extends DisplayArea {
+    private class Group extends DisplayArea {
         private final List<Pile> piles = new ArrayList<Pile>();
         private boolean isCollapsed;
     }
@@ -304,7 +300,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private Point hoverScrollPos;
         private ItemInfo hoveredItem;
         private List<ItemInfo> items = new ArrayList<ItemInfo>();
-        private List<Section> sections = new ArrayList<Section>();
+        private List<Group> sections = new ArrayList<Group>();
 
         private CardViewDisplay() {
             this.setOpaque(false);
@@ -326,13 +322,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             this.sections.clear();
 
             if (!this.items.isEmpty()) {
-                switch (ImageView.this.layoutType) {
-                case Spreadsheet:
+                if (ImageView.this.pileBy == null) {
                     buildSpreadsheet();
-                    break;
-                case Piles:
+                }
+                else {
                     buildPiles();
-                    break;
                 }
             }
 
@@ -342,10 +336,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         private ItemInfo getItemAtPoint(Point p) {
             for (int i = this.sections.size() - 1; i >= 0; i--) {
-                Section section = this.sections.get(i);
-                if (!section.isCollapsed && section.getBounds().contains(p)) {
-                    for (int j = section.piles.size() - 1; j >= 0; j--) {
-                        Pile pile = section.piles.get(j);
+                Group group = this.sections.get(i);
+                if (!group.isCollapsed && group.getBounds().contains(p)) {
+                    for (int j = group.piles.size() - 1; j >= 0; j--) {
+                        Pile pile = group.piles.get(j);
                         if (pile.getBounds().contains(p)) {
                             for (int k = pile.items.size() - 1; k >= 0; k--) {
                                 ItemInfo item = pile.items.get(k);
@@ -378,7 +372,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private void buildSpreadsheet() {
             ImageView.this.getScroller().setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-            Section section = new Section();
+            Group group = new Group();
 
             final int itemAreaWidth = getVisibleSize().width;
             int itemWidth = 50 * imageScaleFactor;
@@ -407,16 +401,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
                 if (pile.items.size() == 0) {
                     pile.setBounds(0, y, itemAreaWidth, dy);
-                    section.piles.add(pile);
+                    group.piles.add(pile);
                 }
                 pile.items.add(itemInfo);
                 x += dx;
             }
 
-            section.setBounds(0, 0, itemAreaWidth, y + itemHeight + CardArea.GUTTER_Y);
-            this.setPreferredSize(section.getBounds().getSize());
+            group.setBounds(0, 0, itemAreaWidth, y + itemHeight + CardArea.GUTTER_Y);
+            this.setPreferredSize(group.getBounds().getSize());
 
-            this.sections.add(section);
+            this.sections.add(group);
         }
 
         private void buildPiles() {
@@ -458,26 +452,25 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             int sectionIdx = 0, pileIdx = 0;
             final int scrollTop = ImageView.this.getScroller().getVerticalScrollBar().getValue();
             final int scrollBottom = scrollTop + getVisibleSize().height;
-            switch (ImageView.this.layoutType) {
-            case Spreadsheet:
+            if (ImageView.this.pileBy == null) {
                 pileIdx = scrollTop / this.sections.get(0).piles.get(0).getBounds().height;
-                break;
-            case Piles:
-                break;
+            }
+            else {
+                
             }
             for (; sectionIdx < this.sections.size(); sectionIdx++, pileIdx = 0) {
-                Section section = this.sections.get(sectionIdx);
-                if (section.getBounds().y >= scrollBottom) {
+                Group group = this.sections.get(sectionIdx);
+                if (group.getBounds().y >= scrollBottom) {
                     break;
                 }
                 if (this.sections.size() > 1) {
-                    //TODO: Draw section name/border
-                    if (section.isCollapsed) {
+                    //TODO: Draw group name/border
+                    if (group.isCollapsed) {
                         continue;
                     }
                 }
-                for (; pileIdx < section.piles.size(); pileIdx++) {
-                    Pile pile = section.piles.get(pileIdx);
+                for (; pileIdx < group.piles.size(); pileIdx++) {
+                    Pile pile = group.piles.get(pileIdx);
                     if (pile.getBounds().y >= scrollBottom) {
                         break;
                     }

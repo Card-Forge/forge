@@ -13,6 +13,7 @@ import forge.Singletons;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -44,6 +45,7 @@ public class DeckProxy implements InventoryItem {
 
     // cached values
     protected ColorSet color;
+    protected ColorSet colorIdentity;
     protected Iterable<GameFormat> formats;
     private int mainSize = Integer.MIN_VALUE;
     private int sbSize = Integer.MIN_VALUE;
@@ -103,6 +105,7 @@ public class DeckProxy implements InventoryItem {
 
     public void invalidateCache() {
         color = null;
+        colorIdentity = null;
         formats = null;
         edition = null;
         mainSize = Integer.MIN_VALUE;
@@ -114,6 +117,28 @@ public class DeckProxy implements InventoryItem {
             color = getDeck().getColor();
         }
         return color;
+    }
+
+    public ColorSet getColorIdentity() {
+        if (colorIdentity == null) {
+            byte colorProfile = MagicColor.COLORLESS;
+
+            for (Entry<DeckSection, CardPool> deckEntry : getDeck()) {
+                switch (deckEntry.getKey()) {
+                case Main:
+                case Sideboard:
+                case Commander:
+                    for (Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                        colorProfile |= poolEntry.getKey().getRules().getColorIdentity().getColor();
+                    }
+                    break;
+                default:
+                    break; //ignore other sections
+                }
+            }
+            colorIdentity = ColorSet.fromMask(colorProfile);
+        }
+        return colorIdentity;
     }
 
     public Iterable<GameFormat> getFormats() {

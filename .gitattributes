@@ -15688,6 +15688,7 @@ forge-gui/src/main/java/forge/gui/toolbox/itemmanager/package-info.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ColorSetRenderer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ColumnDef.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/DeckQuantityRenderer.java -text
+forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/GroupDef.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ImageView.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/IntegerRenderer.java -text
 forge-gui/src/main/java/forge/gui/toolbox/itemmanager/views/ItemCellRenderer.java -text

@@ -42,13 +42,6 @@ import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
 import forge.limited.DraftRankCache;
 
-/**
- * A column object in a EditorTableModel in the card editor.
- * Requires a sorting function and a display function
- * (to extract information as appropriate for table row data).
- * 
- * @param <T> a generic type
- */
 public enum ColumnDef {
     STRING("", "", 0, -1, -1, SortState.ASC, new ItemCellRenderer(),
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
