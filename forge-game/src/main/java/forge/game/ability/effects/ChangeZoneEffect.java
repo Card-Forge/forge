@@ -712,7 +712,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         
         List<Card> movedCards;
-        if (decider.isHuman()) {
+        if (decider.getLobbyPlayer().isHuman()) {
             movedCards = changeHiddenOriginResolveHuman(decider, sa, player, changeNum, origin, destination, fetchList, libraryPos);
         } else {
             movedCards = hiddenOriginResolveAI(decider, sa, player, changeNum, origin, destination, fetchList, libraryPos);

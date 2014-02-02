@@ -247,9 +247,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return teamNumber;
     }
 
-    @Deprecated
-    public boolean isHuman() { return getLobbyPlayer().isHuman(); }
-
     public boolean isArchenemy() {
 
         //Only the archenemy has schemes.
