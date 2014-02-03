@@ -22,6 +22,7 @@ import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
@@ -154,10 +155,14 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             Card original = tgtCard;
             if (sa.hasParam("CopyCard")) {
+            	Zone zone = tgtCard.getZone();
                 tgtCard = Card.fromPaperCard(tgtCard.getPaperCard(), sa.getActivatingPlayer());
 
                 tgtCard.setToken(true);
-                tgtCard.setCopiedSpell(true);
+                tgtCard.setZone(zone);
+                if (zone != null) {
+                	zone.add(tgtCard);
+                }
 
                 if (useEncoded) {
                     tgtCard.setSVar("IsEncoded", "Number$1");
@@ -200,9 +205,9 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("CopyOnce")) {
                 tgtCards.remove(original);
             }
-            SpellAbility tgtSA = null;
+
             // only one mode can be used
-            tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(sas);
+            SpellAbility tgtSA = sa.getActivatingPlayer().getController().getAbilityToPlay(sas);
             boolean noManaCost = sa.hasParam("WithoutManaCost");
             if (noManaCost) {
                 tgtSA = tgtSA.copyWithNoManaCost();
