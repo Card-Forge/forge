@@ -428,6 +428,7 @@ public class CardFactoryUtil {
         };
         final StringBuilder sbDesc = new StringBuilder();
         sbDesc.append("Suspend ").append(timeCounters).append(" - ").append(cost.toSimpleString());
+        sbDesc.append(" (Rather than cast CARDNAME from your hand, you may pay cost and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)");
         suspend.setDescription(sbDesc.toString());
 
         String svar = "X"; // emulate "References X" here
@@ -453,7 +454,8 @@ public class CardFactoryUtil {
         upkeepTrig.append(triggerSvar);
         upkeepTrig.append(" | Execute$ ");
         upkeepTrig.append(removeCounterSvar);
-        upkeepTrig.append(" | TriggerDescription$ At the beginning of your upkeep, if this card is suspended, remove a time counter from it");
+        // Mark this trigger as Secondary, so it's not displayed twice
+        upkeepTrig.append(" | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, if this card is suspended, remove a time counter from it");
 
         card.setSVar(removeCounterSvar.toString(), "DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1");
         card.setSVar(triggerSvar.toString(),"Count$ValidExile Card.Self+suspended");
