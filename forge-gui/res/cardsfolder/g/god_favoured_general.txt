@@ -1,0 +1,8 @@
+Name:God-Favored General
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/1
+T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ GFGToken | TriggerDescription$ Inspired - Whenever CARDNAME becomes untapped, you may pay {2}{W}. If you do, put two 1/1 white Soldier enchantment creature tokens onto the battlefield.
+SVar:GFGToken:AB$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Enchantment,Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/god-favored_general.txt
+Oracle:Inspired - Whenever God-Favored General becomes untapped, you may pay {2}{W}. If you do, put two 1/1 white Soldier enchantment creature tokens onto the battlefield.

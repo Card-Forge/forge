@@ -5351,6 +5351,7 @@ forge-gui/res/cardsfolder/g/goblin_warrens.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/goblin_welder.txt -text
 forge-gui/res/cardsfolder/g/goblin_wizard.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/goblins_of_the_flarg.txt svneol=native#text/plain
+forge-gui/res/cardsfolder/g/god_favoured_general.txt -text
 forge-gui/res/cardsfolder/g/godhead_of_awe.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/godless_shrine.txt svneol=native#text/plain
 forge-gui/res/cardsfolder/g/godo_bandit_warlord.txt -text
