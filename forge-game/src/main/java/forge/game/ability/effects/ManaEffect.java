@@ -79,15 +79,21 @@ public class ManaEffect extends SpellAbilityEffect {
     
                     String colorsNeeded = abMana.getExpressChoice();
                     String choice = "";
-
+                    
                     ColorSet colorMenu = null;
-                    byte mask = 0;
-                    //loop through colors to make menu
-                    for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
-                        mask |= MagicColor.fromName(colorsNeeded.charAt(nChar));
+                    if (colorsNeeded.length() > 1 && colorsNeeded.length() < 5) {
+                        byte mask = 0;
+                        //loop through colors to make menu
+                        for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
+                            mask |= forge.card.MagicColor.fromName(colorsNeeded.substring(nChar, nChar + 1));
+                        }
+                        colorMenu = ColorSet.fromMask(mask);
                     }
-                    colorMenu = ColorSet.fromMask(mask);
+                    else {
+                        colorMenu = ColorSet.fromNames(MagicColor.Constant.ONLY_COLORS);
+                    }
                     byte val = act.getController().chooseColor("Select Mana to Produce", sa, colorMenu);
+
                     if (0 == val) {
                         throw new RuntimeException("AbilityFactoryMana::manaResolve() - " + act + " color mana choice is empty for " + card.getName());
                     }
