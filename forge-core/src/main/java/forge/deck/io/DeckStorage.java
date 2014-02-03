@@ -82,7 +82,7 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
     @Override
     protected Deck read(final File file) {
         final Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(file));
-        Deck result = DeckSerializer.fromSections(sections, true);
+        Deck result = DeckSerializer.fromSections(sections);
 
         if (moveWronglyNamedDecks) {
             adjustFileLocation(file, result);

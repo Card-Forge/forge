@@ -23,7 +23,7 @@ public class DeckSerializer {
         FileUtil.writeFile(f, serializeDeck(d));
     }
 
-    static DeckFileHeader readDeckMetadata(final Map<String, List<String>> map, final boolean canThrow) {
+    static DeckFileHeader readDeckMetadata(final Map<String, List<String>> map) {
         if (map == null) {
             return null;
         }
@@ -33,9 +33,6 @@ public class DeckSerializer {
         }
         final List<String> general = map.get("general");
         if (general != null) {
-            if (canThrow) {
-                throw new OldDeckFileFormatException();
-            }
             final FileSectionManual fs = new FileSectionManual();
             fs.put(DeckFileHeader.NAME, StringUtils.join(map.get(""), " "));
             fs.put(DeckFileHeader.DECK_TYPE, StringUtils.join(general, " "));
@@ -66,19 +63,15 @@ public class DeckSerializer {
     }
 
     public static Deck fromFile(final File deckFile) {
-        return fromSections(FileSection.parseSections(FileUtil.readFile(deckFile)), false);
+        return fromSections(FileSection.parseSections(FileUtil.readFile(deckFile)));
     }
 
     public static Deck fromSections(final Map<String, List<String>> sections) {
-        return fromSections(sections, false);
-    }
-
-    static Deck fromSections(final Map<String, List<String>> sections, final boolean canThrowExtendedErrors) {
         if (sections == null || sections.isEmpty()) {
             return null;
         }
     
-        final DeckFileHeader dh = readDeckMetadata(sections, canThrowExtendedErrors);
+        final DeckFileHeader dh = readDeckMetadata(sections);
         if (dh == null) {
             return null;
         }

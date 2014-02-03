@@ -171,7 +171,7 @@ public class OldDeckParser {
 
             final List<String> fileLines = FileUtil.readFile(f);
             final Map<String, List<String>> sections = FileSection.parseSections(fileLines);
-            final DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections, false);
+            final DeckFileHeader dh = DeckSerializer.readDeckMetadata(sections);
             String name = dh.getName();
 
             if (dh.isCustomPool()) {
