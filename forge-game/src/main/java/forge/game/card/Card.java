@@ -1988,6 +1988,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append("Echo ");
                 final String[] upkeepCostParams = keyword.split(":");
                 sbLong.append(upkeepCostParams.length > 2 ? "- " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
+                sbLong.append(" (At the beginning of your upkeep, if CARDNAME came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)");
                 sbLong.append("\r\n");
             } else if (keyword.startsWith("Cumulative upkeep")) {
                 sbLong.append("Cumulative upkeep ");
@@ -1999,7 +2000,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final String[] ampParams = keyword.split(":");
                 final String magnitude = ampParams[1];
                 sbLong.append(magnitude);
-                sbLong.append("(As this creature enters the battlefield, put a +1/+1 counter on it for each ");
+                sbLong.append(" (As this creature enters the battlefield, put a +1/+1 counter on it for each ");
                 sbLong.append(ampParams[2].replace(",", " and/or ")).append(" card you reveal in your hand.)");
                 sbLong.append("\r\n");
             }  else if (keyword.startsWith("Alternative Cost")) {
