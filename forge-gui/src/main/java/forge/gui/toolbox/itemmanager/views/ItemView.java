@@ -156,8 +156,6 @@ public abstract class ItemView<T extends InventoryItem> {
         return setSelectedItems(items, true);
     }
     public final boolean setSelectedItems(Iterable<T> items, boolean scrollIntoView) {
-        if (getCount() == 0) { return false; }
-
         List<Integer> indices = new ArrayList<Integer>();
         for (T item : items) {
             int index = getIndexOfItem(item);

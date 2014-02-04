@@ -387,9 +387,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public int getIndexOfItem(T item) {
-        for (int i = getCount() - 1; i >= 0; i--) {
-            if (orderedItems.get(i).item == item) {
-                return i;
+        for (Group group : groups) {
+            for (ItemInfo itemInfo : group.items) {
+                if (itemInfo.item == item) {
+                    //if group containing item is collapsed, expand it so the item can be selected and has a valid index
+                    if (group.isCollapsed) {
+                        group.isCollapsed = false;
+                        clearSelection(); //must clear selection since indices and visible items will be changing
+                        updateLayout();
+                    }
+                    return itemInfo.index;
+                }
             }
         }
         return -1;
