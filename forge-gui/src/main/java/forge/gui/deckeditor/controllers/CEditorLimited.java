@@ -34,6 +34,8 @@ import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
+import forge.gui.toolbox.itemmanager.views.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.GroupDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.util.storage.IStorage;
@@ -161,7 +163,7 @@ public final class CEditorLimited extends ACEditorBase<PaperCard, DeckGroup> {
     @Override
     public void update() {
         this.getCatalogManager().setup(SColumnUtil.getCatalogDefaultColumns());
-        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns());
+        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC);
 
         SItemManagerUtil.resetUI(this);
 

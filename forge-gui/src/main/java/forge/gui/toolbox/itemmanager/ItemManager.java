@@ -58,6 +58,7 @@ import forge.gui.toolbox.LayoutHelper;
 import forge.gui.toolbox.FSkin.Colors;
 import forge.gui.toolbox.itemmanager.filters.ItemFilter;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.GroupDef;
 import forge.gui.toolbox.itemmanager.views.ImageView;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.ItemListView;
@@ -120,6 +121,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
 
     private final List<ItemView<T>> views = new ArrayList<ItemView<T>>();
     private final ItemListView<T> listView;
+    private final ImageView<T> imageView;
     private ItemView<T> currentView;
     private boolean initialized;
     protected boolean lockFiltering;
@@ -135,12 +137,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         this.genericType = genericType0;
         this.wantUnique = wantUnique0;
         this.model = new ItemManagerModel<T>(genericType0);
+
         this.listView = new ItemListView<T>(this, this.model);
-        this.listView.setAllowMultipleSelections(false);
-        this.currentView = this.listView;
+        this.imageView = new ImageView<T>(this, this.model);
 
         this.views.add(this.listView);
-        this.views.add(new ImageView<T>(this, this.model));
+        this.views.add(this.imageView);
+        this.currentView = this.listView;
     }
 
     /**
@@ -283,7 +286,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     }
 
     public void setup(final Map<ColumnDef, ItemColumn> cols) {
+        this.setup(cols, null, null);
+    }
+    public void setup(final Map<ColumnDef, ItemColumn> cols, GroupDef groupBy, ColumnDef pileBy) {
         this.listView.setup(cols);
+        this.imageView.setGroupBy(groupBy);
+        this.imageView.setPileBy(pileBy);
     }
 
     public void setViewIndex(int index) {
@@ -291,15 +299,21 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
         ItemView<T> view = this.views.get(index);
         if (this.currentView == view) { return; }
 
-        final int selectedIndexBefore = this.currentView.getSelectedIndex();
-        final Iterable<T> selectedItemsBefore = this.currentView.getSelectedItems();
+        final int backupIndexToSelect = this.currentView.getSelectedIndex();
+        final Iterable<T> itemsToSelect; //only retain selected items if not single selection of first item
+        if (backupIndexToSelect > 0 || this.getSelectionCount() > 1) {
+            itemsToSelect = this.currentView.getSelectedItems();
+        }
+        else {
+            itemsToSelect = null;
+        }
 
         this.currentView.getButton().setSelected(false);
         this.remove(this.currentView.getScroller());
 
         this.currentView = view;
         this.currentView.getButton().setSelected(true);
-        this.currentView.refresh(selectedItemsBefore, selectedIndexBefore);
+        this.currentView.refresh(itemsToSelect, backupIndexToSelect);
 
         this.add(currentView.getScroller());
         this.revalidate();

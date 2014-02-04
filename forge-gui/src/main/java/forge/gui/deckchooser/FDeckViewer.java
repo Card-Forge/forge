@@ -25,6 +25,7 @@ import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.ItemManagerContainer;
+import forge.gui.toolbox.itemmanager.views.GroupDef;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
@@ -132,7 +133,7 @@ public class FDeckViewer extends FDialog {
         ItemColumn qtyColumn = new ItemColumn(ColumnDef.QUANTITY);
         qtyColumn.setIndex(0);
         columns.put(ColumnDef.QUANTITY, qtyColumn);
-        this.cardManager.setup(columns);
+        this.cardManager.setup(columns, GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC);
     }
 
     private void changeSection() {

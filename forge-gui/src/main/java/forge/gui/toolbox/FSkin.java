@@ -1240,6 +1240,10 @@ public enum FSkin {
         return SkinFont.get(Font.ITALIC, size);
     }
 
+    public static void setGraphicsFont(Graphics g, SkinFont skinFont) {
+        g.setFont(skinFont.font);
+    }
+
     public static class SkinFont {
         private static Font baseFont;
         private static Map<String, SkinFont> fonts = new HashMap<String, SkinFont>();

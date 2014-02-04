@@ -33,6 +33,8 @@ import forge.gui.framework.FScreen;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.toolbox.FOptionPane;
 import forge.gui.toolbox.itemmanager.CardManager;
+import forge.gui.toolbox.itemmanager.views.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.GroupDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.item.PaperCard;
 import forge.limited.BoosterDraft;
@@ -261,7 +263,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     @Override
     public void update() {
         this.getCatalogManager().setup(SColumnUtil.getCatalogDefaultColumns());
-        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns());
+        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC);
 
         ccAddLabel = this.getBtnAdd().getText();
         this.getBtnAdd().setText("Choose Card");

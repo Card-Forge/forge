@@ -78,14 +78,14 @@ import forge.item.InventoryItem;
 @SuppressWarnings("serial")
 public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     static final SkinColor BACK_COLOR = FSkin.getColor(FSkin.Colors.CLR_ZEBRA);
-    private static final SkinColor FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+    static final SkinColor FORE_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
     private static final SkinColor SEL_ACTIVE_COLOR = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
     private static final SkinColor SEL_INACTIVE_COLOR = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-    private static final SkinColor HEADER_BACK_COLOR = BACK_COLOR.getContrastColor(-10);
+    static final SkinColor HEADER_BACK_COLOR = BACK_COLOR.getContrastColor(-10);
     static final SkinColor ALT_ROW_COLOR = BACK_COLOR.getContrastColor(-20);
-    private static final SkinColor GRID_COLOR = BACK_COLOR.getContrastColor(20);
+    static final SkinColor GRID_COLOR = BACK_COLOR.getContrastColor(20);
     private static final SkinBorder HEADER_BORDER = new FSkin.CompoundSkinBorder(new FSkin.MatteSkinBorder(0, 0, 1, 1, GRID_COLOR), new EmptyBorder(0, 1, 0, 0));
-    private static final SkinFont ROW_FONT = FSkin.getFont(12);
+    static final SkinFont ROW_FONT = FSkin.getFont(12);
     private static final int ROW_HEIGHT = 19;
 
     private final ItemTable table = new ItemTable();
@@ -104,6 +104,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     public ItemListView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
         this.tableModel = new ItemTableModel(model0);
+        this.setAllowMultipleSelections(false);
 
         // use different selection highlight colors for focused vs. unfocused tables
         this.table.addMouseListener(new FMouseAdapter() {

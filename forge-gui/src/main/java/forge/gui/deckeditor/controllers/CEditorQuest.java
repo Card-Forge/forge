@@ -40,6 +40,7 @@ import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.GroupDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.PaperCard;
@@ -255,7 +256,7 @@ public final class CEditorQuest extends ACEditorBase<PaperCard, Deck> {
         columnsDeck.put(ColumnDef.DECKS, new ItemColumn(ColumnDef.DECKS, this.fnDeckCompare, this.fnDeckGet));
 
         this.getCatalogManager().setup(columnsCatalog);
-        this.getDeckManager().setup(columnsDeck);
+        this.getDeckManager().setup(columnsDeck, GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC);
 
         SItemManagerUtil.resetUI(this);
 

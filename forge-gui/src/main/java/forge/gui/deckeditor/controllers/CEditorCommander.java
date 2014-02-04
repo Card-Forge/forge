@@ -38,6 +38,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.toolbox.itemmanager.CardManager;
 import forge.gui.toolbox.itemmanager.SItemManagerUtil;
 import forge.gui.toolbox.itemmanager.views.ColumnDef;
+import forge.gui.toolbox.itemmanager.views.GroupDef;
 import forge.gui.toolbox.itemmanager.views.SColumnUtil;
 import forge.gui.toolbox.itemmanager.views.ItemColumn;
 import forge.item.PaperCard;
@@ -164,7 +165,7 @@ public final class CEditorCommander extends ACEditorBase<PaperCard, Deck> {
         lstCatalogCols.remove(ColumnDef.QUANTITY);
 
         this.getCatalogManager().setup(lstCatalogCols);
-        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns());
+        this.getDeckManager().setup(SColumnUtil.getDeckDefaultColumns(), GroupDef.CREATURE_SPELL_LAND, ColumnDef.CMC);
 
         SItemManagerUtil.resetUI(this);
 

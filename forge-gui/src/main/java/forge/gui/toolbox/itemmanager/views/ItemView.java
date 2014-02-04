@@ -33,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSkin.SkinColor;
 import forge.gui.toolbox.FSkin.SkinImage;
 import forge.gui.toolbox.ToolTipListener;
 import forge.gui.toolbox.itemmanager.ItemManager;
@@ -40,6 +41,8 @@ import forge.gui.toolbox.itemmanager.ItemManagerModel;
 import forge.item.InventoryItem;
 
 public abstract class ItemView<T extends InventoryItem> {
+    private static final SkinColor BORDER_COLOR = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+
     protected final ItemManager<T> itemManager;
     protected final ItemManagerModel<T> model;
     private final FScrollPane scroller;
@@ -51,7 +54,7 @@ public abstract class ItemView<T extends InventoryItem> {
         this.itemManager = itemManager0;
         this.model = model0;
         this.scroller = new FScrollPane(false);
-        this.scroller.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_TEXT)));
+        this.scroller.setBorder(new FSkin.LineSkinBorder(BORDER_COLOR));
         this.button = new FLabel.Builder().hoverable().selectable(true)
             .icon(getIcon()).iconScaleAuto(false)
             .tooltip(getCaption()).build();
@@ -114,7 +117,8 @@ public abstract class ItemView<T extends InventoryItem> {
     protected abstract void onRefresh();
     private void fixSelection(final Iterable<T> itemsToSelect, final int backupIndexToSelect) {
         if (itemsToSelect == null) {
-            setSelectedIndex(0); //select first item if no items to select
+            setSelectedIndex(0, false); //select first item if no items to select
+            getScroller().getVerticalScrollBar().setValue(0); //ensure scrolled to top
         }
         else {
             if (!setSelectedItems(itemsToSelect)) {
