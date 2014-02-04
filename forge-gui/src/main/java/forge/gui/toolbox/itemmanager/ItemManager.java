@@ -1073,7 +1073,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel {
     public void setAllowMultipleSelections(boolean allowMultipleSelections0) {
     	if (this.allowMultipleSelections == allowMultipleSelections0) { return; }
     	this.allowMultipleSelections = allowMultipleSelections0;
-        this.currentView.setAllowMultipleSelections(allowMultipleSelections0);
+    	for (ItemView<T> view : views) {
+    	    view.setAllowMultipleSelections(allowMultipleSelections0);
+    	}
     }
 
     /**
