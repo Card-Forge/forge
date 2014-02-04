@@ -66,7 +66,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         boolean collapsedChanged = false;
                         for (Group group : groups) {
                             if (!collapsedChanged && group.getBounds().contains(point)) {
-                                if (point.y < group.getTop() + GROUP_HEADER_HEIGHT) {
+                                if (!group.items.isEmpty() && point.y < group.getTop() + GROUP_HEADER_HEIGHT) {
                                     group.isCollapsed = !group.isCollapsed;
                                     clearSelection(); //must clear selection since indices and visible items will be changing
                                     updateLayout();
