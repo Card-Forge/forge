@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package forge.gui.match.controllers;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -37,7 +38,7 @@ import forge.item.InventoryItem;
 /**
  * Singleton controller for VPicture.
  * <p>
- * Can be used to display images associated with a {@code Card} or 
+ * Can be used to display images associated with a {@code Card} or
  * {@code InventoryItem} in {@code CardPicturePanel}.<br>
  * <br>
  * Can also be used to display details associated with a {@code Card}.
@@ -47,7 +48,7 @@ import forge.item.InventoryItem;
  */
 public enum CPicture implements ICDoc {
     SINGLETON_INSTANCE;
-    
+
     // For brevity, local shortcuts to singletons & child controls...
     private final VPicture view = VPicture.SINGLETON_INSTANCE;
     private final CardPicturePanel picturePanel = this.view.getPnlPicture();
@@ -61,25 +62,25 @@ public enum CPicture implements ICDoc {
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
      */
-    public void showCard(final Card c, boolean showFlipped) {       
+    public void showCard(final Card c, boolean showFlipped) {
         if (null == c) {
             return;
         }
 
-        currentCard = c; 
+        currentCard = c;
         displayedState = c.getCurState();
         flipIndicator.setVisible(isCurrentCardFlippable());
-        picturePanel.setCard(c);                
-        if (showFlipped && isCurrentCardFlippable()) { 
-            flipCard(); 
+        picturePanel.setCard(c);
+        if (showFlipped && isCurrentCardFlippable()) {
+            flipCard();
         }
     }
-    
+
     /**
-     * Displays image associated with either a {@code Card} 
+     * Displays image associated with either a {@code Card}
      * or {@code InventoryItem} instance.
      */
-    public void showImage(final InventoryItem item) {       
+    public void showImage(final InventoryItem item) {
         if (item instanceof IPaperCard) {
             IPaperCard paperCard = ((IPaperCard)item);
             Card c = Card.getCardForUi(paperCard);
@@ -108,7 +109,7 @@ public enum CPicture implements ICDoc {
         setMouseWheelListener();
         setMouseButtonListener();
     }
-    
+
     /**
      * Adds a mouse button listener to CardPicturePanel.
      * <p><ul>
@@ -117,12 +118,11 @@ public enum CPicture implements ICDoc {
      * <li>Displays the alternate image for applicable cards on mouse click.
      */
     private void setMouseButtonListener() {
-        
         this.picturePanel.addMouseListener(new MouseAdapter() {
             private final boolean[] buttonsDown = new boolean[4];
 
             @Override
-            public void mousePressed(final MouseEvent e) {                
+            public void mousePressed(final MouseEvent e) {
                 if (isCardDisplayed()) {
                     final int button = e.getButton();
                     if (button < 1 || button > 3) {
@@ -130,13 +130,13 @@ public enum CPicture implements ICDoc {
                     }
                     this.buttonsDown[button] = true;
                     if (this.buttonsDown[2] || (this.buttonsDown[1] && this.buttonsDown[3])) {
-                        zoomer.doMouseButtonZoom(currentCard, displayedState);                        
-                    }                    
-                }                
+                        zoomer.doMouseButtonZoom(currentCard, displayedState);
+                    }
+                }
             }
 
             @Override
-            public void mouseReleased(final MouseEvent e) {                
+            public void mouseReleased(final MouseEvent e) {
                 if (isCardDisplayed()) {
                     final int button = e.getButton();
                     if (button < 1 || button > 3) {
@@ -157,8 +157,8 @@ public enum CPicture implements ICDoc {
 
                     if (button == 1) {
                         flipCard();
-                    }                    
-                }                
+                    }
+                }
             }
         });
     }
@@ -170,11 +170,11 @@ public enum CPicture implements ICDoc {
      * while the mouse pointer is hovering over the image.
      */
     private void setMouseWheelListener() {
-        picturePanel.addMouseWheelListener(new MouseWheelListener() {            
+        picturePanel.addMouseWheelListener(new MouseWheelListener() {
             @Override
-            public void mouseWheelMoved(MouseWheelEvent arg0) {                
+            public void mouseWheelMoved(MouseWheelEvent arg0) {
                 if (isCardDisplayed()) {
-                    if (arg0.getWheelRotation() < 0) {                        
+                    if (arg0.getWheelRotation() < 0) {
                         zoomer.doMouseWheelZoom(currentCard, displayedState);
                     }
                 }
@@ -189,15 +189,15 @@ public enum CPicture implements ICDoc {
     @Override
     public void update() {
     }
- 
+
     public void flipCard() {
         if (isCurrentCardFlippable()) {
             displayedState = getAlternateState(currentCard, displayedState);
-            picturePanel.setCardImage(displayedState);            
+            picturePanel.setCardImage(displayedState);
             setCardDetailPanel();
         }
     }
-    
+
     /**
      * Displays details about the current card state in appropriate GUI panel.
      * <p>
@@ -209,7 +209,7 @@ public enum CPicture implements ICDoc {
      * trigger any significant functionality but potentially this could cause
      * unforeseen consequences. Recommend that a read-only mechanism is implemented
      * to get card details for a given {@code CardCharacteristicName} state that does
-     * not require temporarily setting state of {@code Card} instance. 
+     * not require temporarily setting state of {@code Card} instance.
      */
     private void setCardDetailPanel() {
         CardCharacteristicName temp = currentCard.getCurState();
@@ -217,21 +217,19 @@ public enum CPicture implements ICDoc {
         CDetail.SINGLETON_INSTANCE.showCard(currentCard);
         currentCard.setState(temp);
     }
-    
+
     private boolean isCurrentCardFlippable() {
-        boolean isFlippableMorph = 
+        boolean isFlippableMorph =
                 currentCard.isFaceDown() && isAuthorizedToViewFaceDownCard(currentCard);
-        return (currentCard != null) & 
+        return (currentCard != null) &
                (currentCard.isDoubleFaced() || currentCard.isFlipCard() || isFlippableMorph);
     }
 
-
-    
     /**
      * Card characteristic state machine.
      * <p>
      * Given a card and a state in terms of {@code CardCharacteristicName} this
-     * will determine whether there is a valid alternate {@code CardCharacteristicName} 
+     * will determine whether there is a valid alternate {@code CardCharacteristicName}
      * state for that card.
      * 
      * @param card the {@code Card}
@@ -239,10 +237,9 @@ public enum CPicture implements ICDoc {
      * @return the alternate {@code CardCharacteristicName} state or default if not applicable
      */
     public static CardCharacteristicName getAlternateState(final Card card, CardCharacteristicName currentState) {
-        
         // Default. Most cards will only ever have an "Original" state represented by a single image.
         CardCharacteristicName alternateState = CardCharacteristicName.Original;
-        
+
         if (card.isDoubleFaced()) {
             if (currentState == CardCharacteristicName.Original) {
                 alternateState = CardCharacteristicName.Transformed;
@@ -265,11 +262,11 @@ public enum CPicture implements ICDoc {
 
         return alternateState;
     }
-    
+
     /**
      * Prevents player from identifying opponent's face-down card.
      */
     public static boolean isAuthorizedToViewFaceDownCard(Card card) {
         return Singletons.getControl().mayShowCard(card);
-    } 
+    }
 }
